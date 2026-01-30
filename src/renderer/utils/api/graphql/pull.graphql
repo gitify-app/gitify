@@ -8,6 +8,7 @@ query FetchPullRequestByNumber(
   $lastComments: Int
   $lastReviews: Int
   $firstClosingIssues: Int
+  $includeMetrics: Boolean!
 ) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
@@ -25,12 +26,11 @@ fragment PullRequestDetails on PullRequest {
   merged
   isDraft
   isInMergeQueue
-  milestone {
-    ...MilestoneFields
-  }
+
   author {
     ...AuthorFields
   }
+
   comments(last: $lastComments) {
     totalCount
     nodes {
@@ -38,41 +38,62 @@ fragment PullRequestDetails on PullRequest {
       author {
         ...AuthorFields
       }
-      reactions {
-        totalCount
+
+      # Reactions
+      ... @include(if: $includeMetrics) {
+        reactions {
+          totalCount
+        }
+        reactionGroups {
+          ...ReactionGroupFields
+        }
       }
-      reactionGroups {
-        ...ReactionGroupFields
-      }
     }
   }
-  reviews(last: $lastReviews) {
-    totalCount
-    nodes {
-      ...PullRequestReviewFields
-    }
-  }
-  labels(first: $firstLabels) {
-    nodes {
-      name
-    }
-  }
-  closingIssuesReferences(first: $firstClosingIssues) {
-    nodes {
-      number
-    }
-  }
-  reactions {
-    totalCount
-  }
-  reactionGroups {
-    ...ReactionGroupFields
-  }
+
+  ...PullRequestMetrics @include(if: $includeMetrics)
 }
 
 fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
     login
+  }
+}
+
+fragment PullRequestMetrics on PullRequest {
+  # Linked Issues
+  closingIssuesReferences(first: $firstClosingIssues) {
+    nodes {
+      number
+    }
+  }
+
+  # Reactions
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
+
+  # Reviews
+  reviews(last: $lastReviews) {
+    totalCount
+    nodes {
+      ...PullRequestReviewFields
+    }
+  }
+
+  # Labels
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+
+  # Milestone
+  milestone {
+    ...MilestoneFields
   }
 }

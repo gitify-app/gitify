@@ -35,12 +35,13 @@ class DiscussionHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
+    settings: SettingsState,
     fetchedData?: DiscussionDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const discussion =
       fetchedData ??
-      (await fetchDiscussionByNumber(notification)).repository?.discussion;
+      (await fetchDiscussionByNumber(notification, settings)).repository
+        ?.discussion;
 
     let discussionState: GitifyDiscussionState = 'OPEN';
 
@@ -58,10 +59,10 @@ class DiscussionHandler extends DefaultHandler {
     );
 
     const discussionReactionCount =
-      latestDiscussionComment?.reactions.totalCount ??
-      discussion.reactions.totalCount;
+      latestDiscussionComment?.reactions?.totalCount ??
+      discussion?.reactions?.totalCount;
     const discussionReactionGroup =
-      latestDiscussionComment?.reactionGroups ?? discussion.reactionGroups;
+      latestDiscussionComment?.reactionGroups ?? discussion?.reactionGroups;
 
     return {
       number: discussion.number,
@@ -71,7 +72,7 @@ class DiscussionHandler extends DefaultHandler {
         discussion.author,
       ]),
       commentCount: discussion.comments.totalCount,
-      labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
+      labels: discussion?.labels?.nodes.map((label) => label.name) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
       reactionsCount: discussionReactionCount,
       reactionGroups: discussionReactionGroup,

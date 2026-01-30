@@ -8,6 +8,7 @@ query FetchDiscussionByNumber(
   $lastReplies: Int
   $firstLabels: Int
   $includeIsAnswered: Boolean!
+  $includeMetrics: Boolean!
 ) {
   repository(owner: $owner, name: $name) {
     discussion(number: $number) {
@@ -23,26 +24,19 @@ fragment DiscussionDetails on Discussion {
   stateReason
   isAnswered @include(if: $includeIsAnswered)
   url
+
   author {
     ...AuthorFields
   }
+
   comments(last: $lastThreadedComments) {
     totalCount
     nodes {
       ...DiscussionCommentFields
     }
   }
-  labels(first: $firstLabels) {
-    nodes {
-      name
-    }
-  }
-  reactions {
-    totalCount
-  }
-  reactionGroups {
-    ...ReactionGroupFields
-  }
+
+  ...DiscussionMetrics @include(if: $includeMetrics)
 }
 
 fragment CommentFields on DiscussionComment {
@@ -52,11 +46,15 @@ fragment CommentFields on DiscussionComment {
     ...AuthorFields
   }
   url
-  reactions {
-    totalCount
-  }
-  reactionGroups {
-    ...ReactionGroupFields
+
+  # Reactions
+  ... @include(if: $includeMetrics) {
+    reactions {
+      totalCount
+    }
+    reactionGroups {
+      ...ReactionGroupFields
+    }
   }
 }
 
@@ -66,6 +64,23 @@ fragment DiscussionCommentFields on DiscussionComment {
     totalCount
     nodes {
       ...CommentFields
+    }
+  }
+}
+
+fragment DiscussionMetrics on Discussion {
+  # Reactions
+  reactions {
+    totalCount
+  }
+  reactionGroups {
+    ...ReactionGroupFields
+  }
+
+  # Labels
+  labels(first: $firstLabels) {
+    nodes {
+      name
     }
   }
 }

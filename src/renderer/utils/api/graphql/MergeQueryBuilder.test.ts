@@ -13,6 +13,7 @@ describe('renderer/utils/api/graphql/MergeQueryBuilder.ts', () => {
     firstLabels: 10,
     firstClosingIssues: 8,
     includeIsAnswered: true,
+    includeMetrics: true,
   };
 
   const nodeVarsA: FetchBatchMergedTemplateIndexedBaseVariables = {

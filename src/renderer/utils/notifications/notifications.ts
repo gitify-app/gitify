@@ -157,7 +157,10 @@ export async function enrichNotifications(
     return notifications;
   }
 
-  const mergedResults = await fetchNotificationDetailsInBatches(notifications);
+  const mergedResults = await fetchNotificationDetailsInBatches(
+    notifications,
+    settings,
+  );
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: GitifyNotification) => {
@@ -177,6 +180,7 @@ export async function enrichNotifications(
  */
 async function fetchNotificationDetailsInBatches(
   notifications: GitifyNotification[],
+  settings: SettingsState,
 ): Promise<
   Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
 > {
@@ -199,8 +203,10 @@ async function fetchNotificationDetailsInBatches(
     );
 
     try {
-      const batchResults =
-        await fetchNotificationDetailsForList(batchNotifications);
+      const batchResults = await fetchNotificationDetailsForList(
+        batchNotifications,
+        settings,
+      );
 
       for (const [notification, repository] of batchResults) {
         mergedResults.set(notification, repository);

@@ -29,11 +29,12 @@ class IssueHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
+    settings: SettingsState,
     fetchedData?: IssueDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const issue =
-      fetchedData ?? (await fetchIssueByNumber(notification)).repository?.issue;
+      fetchedData ??
+      (await fetchIssueByNumber(notification, settings)).repository?.issue;
 
     const issueState = issue.stateReason ?? issue.state;
 
@@ -45,16 +46,16 @@ class IssueHandler extends DefaultHandler {
     ]);
 
     const issueReactionCount =
-      issueComment?.reactions.totalCount ?? issue.reactions.totalCount;
+      issueComment?.reactions?.totalCount ?? issue?.reactions?.totalCount;
     const issueReactionGroup =
-      issueComment?.reactionGroups ?? issue.reactionGroups;
+      issueComment?.reactionGroups ?? issue?.reactionGroups;
 
     return {
       number: issue.number,
       state: issueState,
       user: issueUser,
       commentCount: issue.comments.totalCount,
-      labels: issue.labels?.nodes.map((label) => label.name) ?? [],
+      labels: issue?.labels?.nodes.map((label) => label.name) ?? [],
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
       reactionsCount: issueReactionCount,

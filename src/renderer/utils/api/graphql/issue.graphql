@@ -6,6 +6,7 @@ query FetchIssueByNumber(
   $number: Int!
   $lastComments: Int
   $firstLabels: Int
+  $includeMetrics: Boolean!
 ) {
   repository(owner: $owner, name: $name) {
     issue(number: $number) {
@@ -21,12 +22,11 @@ fragment IssueDetails on Issue {
   url
   state
   stateReason
-  milestone {
-    ...MilestoneFields
-  }
+
   author {
     ...AuthorFields
   }
+
   comments(last: $lastComments) {
     totalCount
     nodes {
@@ -34,23 +34,40 @@ fragment IssueDetails on Issue {
       author {
         ...AuthorFields
       }
-      reactions {
-        totalCount
-      }
-      reactionGroups {
-        ...ReactionGroupFields
+
+      # Reactions
+      ... @include(if: $includeMetrics) {
+        reactions {
+          totalCount
+        }
+        reactionGroups {
+          ...ReactionGroupFields
+        }
       }
     }
   }
-  labels(first: $firstLabels) {
-    nodes {
-      name
-    }
-  }
+
+  ...IssueMetrics @include(if: $includeMetrics)
+}
+
+fragment IssueMetrics on Issue {
+  # Reactions
   reactions {
     totalCount
   }
   reactionGroups {
     ...ReactionGroupFields
+  }
+
+  # Labels
+  labels(first: $firstLabels) {
+    nodes {
+      name
+    }
+  }
+
+  # Milestone
+  milestone {
+    ...MilestoneFields
   }
 }

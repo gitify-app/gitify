@@ -211,6 +211,7 @@ async function followUrl<TResult>(
  */
 export async function fetchDiscussionByNumber(
   notification: GitifyNotification,
+  settings: SettingsState,
 ): Promise<FetchDiscussionByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
@@ -227,6 +228,7 @@ export async function fetchDiscussionByNumber(
       includeIsAnswered: isAnsweredDiscussionFeatureSupported(
         notification.account,
       ),
+      includeMetrics: settings.showPills,
     },
   );
 }
@@ -236,6 +238,7 @@ export async function fetchDiscussionByNumber(
  */
 export async function fetchIssueByNumber(
   notification: GitifyNotification,
+  settings: SettingsState,
 ): Promise<FetchIssueByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
@@ -248,6 +251,7 @@ export async function fetchIssueByNumber(
       number: number,
       firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
       lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+      includeMetrics: settings.showPills,
     },
   );
 }
@@ -257,6 +261,7 @@ export async function fetchIssueByNumber(
  */
 export async function fetchPullByNumber(
   notification: GitifyNotification,
+  settings: SettingsState,
 ): Promise<FetchPullRequestByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url);
 
@@ -271,6 +276,7 @@ export async function fetchPullByNumber(
       firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
       lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
       lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+      includeMetrics: settings.showPills,
     },
   );
 } /**
@@ -281,6 +287,7 @@ export async function fetchPullByNumber(
  */
 export async function fetchNotificationDetailsForList(
   notifications: GitifyNotification[],
+  settings: SettingsState,
 ): Promise<
   Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
 > {
@@ -332,6 +339,7 @@ export async function fetchNotificationDetailsForList(
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+    includeMetrics: settings.showPills,
   });
 
   const query = builder.getGraphQLQuery();

@@ -64,7 +64,7 @@ describe('renderer/utils/api/request.ts', () => {
     await performGraphQLRequest(
       mockGitHubCloudAccount,
       FetchIssueByNumberDocument,
-      { owner: 'test', name: 'repo', number: 1 },
+      { owner: 'test', name: 'repo', number: 1, includeMetrics: true },
     );
 
     expect(createOctokitClientSpy).toHaveBeenCalledWith(

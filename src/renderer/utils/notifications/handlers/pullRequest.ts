@@ -35,12 +35,12 @@ class PullRequestHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
+    settings: SettingsState,
     fetchedData?: PullRequestDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const pr =
       fetchedData ??
-      (await fetchPullByNumber(notification)).repository?.pullRequest;
+      (await fetchPullByNumber(notification, settings)).repository?.pullRequest;
 
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
@@ -53,11 +53,11 @@ class PullRequestHandler extends DefaultHandler {
 
     const prUser = getNotificationAuthor([prComment?.author, pr.author]);
 
-    const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
+    const reviews = getLatestReviewForReviewers(pr?.reviews.nodes);
 
     const prReactionCount =
-      prComment?.reactions.totalCount ?? pr.reactions.totalCount;
-    const prReactionGroup = prComment?.reactionGroups ?? pr.reactionGroups;
+      prComment?.reactions?.totalCount ?? pr?.reactions?.totalCount;
+    const prReactionGroup = prComment?.reactionGroups ?? pr?.reactionGroups;
 
     return {
       number: pr.number,
@@ -65,7 +65,7 @@ class PullRequestHandler extends DefaultHandler {
       user: prUser,
       reviews: reviews,
       commentCount: pr.comments.totalCount,
-      labels: pr.labels?.nodes.map((label) => label.name) ?? [],
+      labels: pr?.labels?.nodes.map((label) => label.name) ?? [],
       linkedIssues: pr.closingIssuesReferences?.nodes.map((issue) =>
         formatGitHubNumber(issue.number),
       ),

@@ -5,6 +5,7 @@ import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { Constants } from '../../constants';
 
@@ -359,7 +360,7 @@ describe('renderer/utils/api/client.ts', () => {
       {} as ExecutionResult<FetchDiscussionByNumberQuery>,
     );
 
-    await fetchDiscussionByNumber(mockNotification);
+    await fetchDiscussionByNumber(mockNotification, mockSettings);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
       mockNotification.account,
@@ -392,7 +393,7 @@ describe('renderer/utils/api/client.ts', () => {
       {} as ExecutionResult<FetchIssueByNumberQuery>,
     );
 
-    await fetchIssueByNumber(mockNotification);
+    await fetchIssueByNumber(mockNotification, mockSettings);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
       mockNotification.account,
@@ -423,7 +424,7 @@ describe('renderer/utils/api/client.ts', () => {
       {} as ExecutionResult<FetchPullRequestByNumberQuery>,
     );
 
-    await fetchPullByNumber(mockNotification);
+    await fetchPullByNumber(mockNotification, mockSettings);
 
     expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
       mockNotification.account,
@@ -457,7 +458,7 @@ describe('renderer/utils/api/client.ts', () => {
         {} as ExecutionResult<unknown>,
       );
 
-      await fetchNotificationDetailsForList([mockNotification]);
+      await fetchNotificationDetailsForList([mockNotification], mockSettings);
 
       expect(performGraphQLRequestStringSpy).not.toHaveBeenCalled();
     });
@@ -472,7 +473,7 @@ describe('renderer/utils/api/client.ts', () => {
         {} as ExecutionResult<unknown>,
       );
 
-      await fetchNotificationDetailsForList([]);
+      await fetchNotificationDetailsForList([], mockSettings);
 
       expect(performGraphQLRequestStringSpy).not.toHaveBeenCalled();
     });
@@ -488,7 +489,10 @@ describe('renderer/utils/api/client.ts', () => {
         headers: {},
       } as ExecutionResult<unknown>);
 
-      await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
+      await fetchNotificationDetailsForList(
+        mockGitHubCloudGitifyNotifications,
+        mockSettings,
+      );
 
       expect(performGraphQLRequestStringSpy).toHaveBeenCalledWith(
         mockGitHubCloudGitifyNotifications[0].account,
