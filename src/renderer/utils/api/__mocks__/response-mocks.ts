@@ -81,6 +81,10 @@ export function mockDiscussionResponseNode(mocks: {
       totalCount: 0,
     },
     labels: null,
+    reactions: {
+      totalCount: 0,
+    },
+    reactionGroups: noReactionGroups,
   } satisfies DiscussionDetailsFragment;
 }
 

@@ -5,6 +5,7 @@ import {
   mockCommenter,
   mockDiscussionResponseNode,
   mockReplier,
+  noReactionGroups,
 } from '../../api/__mocks__/response-mocks';
 
 import type { GitifyNotification } from '../../../types';
@@ -187,6 +188,10 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
               totalCount: 0,
               nodes: [],
             },
+            reactions: {
+              totalCount: 0,
+            },
+            reactionGroups: noReactionGroups,
           },
         ],
       };
@@ -234,9 +239,17 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
                   author: mockReplier,
                   createdAt: '2024-01-01T00:00:00Z',
                   url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',
+                  reactions: {
+                    totalCount: 0,
+                  },
+                  reactionGroups: noReactionGroups,
                 },
               ],
             },
+            reactions: {
+              totalCount: 0,
+            },
+            reactionGroups: noReactionGroups,
           },
         ],
       };
