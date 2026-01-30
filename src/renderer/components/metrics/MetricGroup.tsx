@@ -30,7 +30,9 @@ export const MetricGroup: FC<MetricGroupProps> = ({
   const linkedIssuesPillDescription = formatMetricDescription(
     linkedIssues.length,
     'issue',
-    (count, noun) => `Linked to ${count} ${noun}: ${linkedIssues.join(', ')}`,
+    (count, noun) => {
+      return `Linked to ${count} ${noun}: ${linkedIssues.join(', ')}`;
+    },
   );
 
   const reactionCount = notification.subject.reactionsCount ?? 0;
@@ -64,6 +66,7 @@ export const MetricGroup: FC<MetricGroupProps> = ({
         })
         .filter(Boolean)
         .join(' ');
+
       return `${count} ${noun}: ${formatted}`;
     },
   );
@@ -81,8 +84,15 @@ export const MetricGroup: FC<MetricGroupProps> = ({
   const labelsPillDescription = formatMetricDescription(
     labelsCount,
     'label',
-    (count, noun) =>
-      `${count} ${noun}: ${labels.map((label) => `🏷️ ${label}`).join(', ')}`,
+    (count, noun) => {
+      const formatted = labels
+        .map((label) => {
+          return `🏷️ ${label}`.trim();
+        })
+        .join(' ');
+
+      return `${count} ${noun}: ${formatted}`;
+    },
   );
 
   const milestone = notification.subject.milestone;
