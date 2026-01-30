@@ -78,3 +78,41 @@ Object.defineProperty(navigator, 'clipboard', {
   },
   configurable: true,
 });
+
+// Simple IntersectionObserver mock for test environments (jsdom)
+class MockIntersectionObserver {
+  readonly root: Element | Document | null;
+  readonly rootMargin: string;
+  readonly thresholds: number | number[];
+
+  constructor(
+    // callback unused in this mock
+    _callback: IntersectionObserverCallback,
+    options?: IntersectionObserverInit,
+  ) {
+    this.root = (options?.root as Element | Document) ?? null;
+    this.rootMargin = options?.rootMargin ?? '';
+    this.thresholds = options?.threshold ?? 0;
+  }
+
+  observe() {
+    return null;
+  }
+
+  unobserve() {
+    return null;
+  }
+
+  disconnect() {
+    return null;
+  }
+
+  takeRecords(): IntersectionObserverEntry[] {
+    return [];
+  }
+}
+
+// Attach to global if not present
+if (typeof (globalThis as any).IntersectionObserver === 'undefined') {
+  (globalThis as any).IntersectionObserver = MockIntersectionObserver;
+}
