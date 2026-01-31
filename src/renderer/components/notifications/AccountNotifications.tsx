@@ -22,11 +22,14 @@ import {
   openAccountProfile,
   openGitHubIssues,
   openGitHubPulls,
+  openNotification,
+  openRepository,
 } from '../../utils/links';
 import {
   groupNotificationsByRepository,
   isGroupByRepository,
 } from '../../utils/notifications/group';
+import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { Oops } from '../Oops';
@@ -45,15 +48,96 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 ) => {
   const { account, showAccountHeader, notifications } = props;
 
-  const { auth, settings } = useAppContext();
+  const {
+    auth,
+    settings,
+    markNotificationsAsRead,
+    markNotificationsAsDone,
+    unsubscribeNotification,
+  } = useAppContext();
 
   const [isAccountNotificationsVisible, setIsAccountNotificationsVisible] =
     useState(true);
+
+  const [pendingNotificationRemovals, setPendingNotificationRemovals] =
+    useState<Set<string>>(new Set());
+
+  const ANIMATION_MS = 500;
+
+  const scheduleNotificationRemoval = (
+    notificationsToRemove: GitifyNotification[],
+    action: 'read' | 'done' | 'unsubscribe' = 'read',
+  ) => {
+    const ids = notificationsToRemove.map((n) => n.id);
+    const shouldAnimate = shouldRemoveNotificationsFromState(settings);
+
+    if (shouldAnimate) {
+      setPendingNotificationRemovals((prev) => {
+        const s = new Set(prev);
+        ids.forEach((id) => s.add(id));
+        return s;
+      });
+
+      setTimeout(() => {
+        if (action === 'done') {
+          markNotificationsAsDone(notificationsToRemove);
+        } else if (action === 'read') {
+          markNotificationsAsRead(notificationsToRemove);
+        } else if (action === 'unsubscribe') {
+          notificationsToRemove.forEach((n) => unsubscribeNotification(n));
+        }
+
+        setPendingNotificationRemovals((prev) => {
+          const s = new Set(prev);
+          ids.forEach((id) => s.delete(id));
+          return s;
+        });
+      }, ANIMATION_MS);
+    } else {
+      if (action === 'done') markNotificationsAsDone(notificationsToRemove);
+      else if (action === 'read')
+        markNotificationsAsRead(notificationsToRemove);
+      else if (action === 'unsubscribe')
+        notificationsToRemove.forEach((n) => unsubscribeNotification(n));
+    }
+  };
 
   const sortedNotifications = useMemo(
     () => [...notifications].sort((a, b) => a.order - b.order),
     [notifications],
   );
+
+  // single id-array based handler for actions
+  const handleNotificationActionIds = (
+    ids: string[],
+    action:
+      | 'read'
+      | 'done'
+      | 'unsubscribe'
+      | 'openNotification'
+      | 'openRepository' = 'read',
+  ) => {
+    const notifs = sortedNotifications.filter((n) => ids.includes(n.id));
+
+    let scheduleAction = action;
+
+    if (action === 'openNotification') {
+      scheduleAction = settings.markAsDoneOnOpen ? 'done' : 'read';
+    }
+
+    scheduleNotificationRemoval(
+      notifs,
+      scheduleAction as 'read' | 'done' | 'unsubscribe',
+    );
+
+    if (action === 'openNotification') {
+      openNotification(notifs[0]);
+    }
+
+    if (action === 'openRepository') {
+      openRepository(notifs[0].repository);
+    }
+  };
 
   const groupedNotifications = useMemo(() => {
     const map = groupNotificationsByRepository(sortedNotifications);
@@ -144,15 +228,20 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
             ? groupedNotifications.map(([repoSlug, repoNotifications]) => (
                 <RepositoryNotifications
                   key={repoSlug}
+                  onNotificationActionIds={handleNotificationActionIds}
+                  pendingRemovalIds={Array.from(pendingNotificationRemovals)}
                   repoName={repoSlug}
                   repoNotifications={repoNotifications}
                 />
               ))
             : sortedNotifications.map((notification) => (
                 <NotificationRow
-                  isRepositoryAnimatingExit={false}
+                  isPendingRemoval={pendingNotificationRemovals.has(
+                    notification.id,
+                  )}
                   key={notification.id}
                   notification={notification}
+                  onNotificationActionIds={handleNotificationActionIds}
                 />
               ))}
         </>

@@ -3,8 +3,6 @@ import { type FC, type MouseEvent, useState } from 'react';
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
-
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 
@@ -13,45 +11,60 @@ import { type GitifyNotification, Opacity, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
 import { getChevronDetails } from '../../utils/helpers';
-import { openRepository } from '../../utils/links';
-import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { NotificationRow } from './NotificationRow';
 
 export interface RepositoryNotificationsProps {
   repoNotifications: GitifyNotification[];
   repoName: string;
+  pendingRemovalIds?: string[];
+  onNotificationActionIds?: (
+    ids: string[],
+    action:
+      | 'read'
+      | 'done'
+      | 'unsubscribe'
+      | 'openRepository'
+      | 'openNotification',
+  ) => void;
 }
 
 export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
+  pendingRemovalIds = [],
+  onNotificationActionIds,
 }) => {
-  const { settings, markNotificationsAsRead, markNotificationsAsDone } =
-    useAppContext();
-
-  const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] =
-    useState(false);
   const [
     isRepositoryNotificationsVisible,
     setIsRepositoryNotificationsVisible,
   ] = useState(true);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
-  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
-  const actionRepositoryInteraction = () => {
-    openRepository(repoNotifications[0].repository);
+  const repoAnimating = repoNotifications.every((n) =>
+    pendingRemovalIds.includes(n.id),
+  );
+
+  const actionOpenRepository = () => {
+    onNotificationActionIds(
+      repoNotifications.map((n) => n.id),
+      'openRepository',
+    );
   };
 
   const actionMarkAsDone = () => {
-    setShouldAnimateRepositoryExit(shouldAnimateExit);
-    markNotificationsAsDone(repoNotifications);
+    onNotificationActionIds(
+      repoNotifications.map((n) => n.id),
+      'done',
+    );
   };
 
   const actionMarkAsRead = () => {
-    setShouldAnimateRepositoryExit(shouldAnimateExit);
-    markNotificationsAsRead(repoNotifications);
+    onNotificationActionIds(
+      repoNotifications.map((n) => n.id),
+      'read',
+    );
   };
 
   const actionToggleRepositoryNotifications = () => {
@@ -74,8 +87,8 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
         className={cn(
           'group relative pr-1 py-0.5',
           'bg-gitify-repository',
-          shouldAnimateRepositoryExit &&
-            'translate-x-full opacity-0 transition duration-350 ease-in-out',
+          repoAnimating &&
+            'translate-x-full opacity-0 transition duration-500 ease-in-out',
           areAllRepoNotificationsRead && Opacity.READ,
         )}
         direction="horizontal"
@@ -88,7 +101,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
-            actionRepositoryInteraction();
+            actionOpenRepository();
           }}
           title="Open repository ↗"
           variant="invisible"
@@ -102,7 +115,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
           />
         </Button>
 
-        {!shouldAnimateRepositoryExit && (
+        {!repoAnimating && (
           <HoverGroup bgColor="group-hover:bg-gitify-repository">
             <HoverButton
               action={actionMarkAsRead}
@@ -134,13 +147,22 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
       </Stack>
 
       {isRepositoryNotificationsVisible &&
-        repoNotifications.map((notification) => (
-          <NotificationRow
-            isRepositoryAnimatingExit={shouldAnimateRepositoryExit}
-            key={notification.id}
-            notification={notification}
-          />
-        ))}
+        (() => {
+          const repoAnimating = repoNotifications.every((n) =>
+            pendingRemovalIds.includes(n.id),
+          );
+
+          return repoNotifications.map((notification) => (
+            <NotificationRow
+              isPendingRemoval={
+                repoAnimating || pendingRemovalIds.includes(notification.id)
+              }
+              key={notification.id}
+              notification={notification}
+              onNotificationActionIds={onNotificationActionIds}
+            />
+          ));
+        })()}
     </>
   );
 };

@@ -25,7 +25,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   it('should render itself & its children - group by date', async () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
-      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />, {
@@ -38,7 +37,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   it('should render itself & its children - group by repositories', async () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
-      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />, {
@@ -51,7 +49,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   it('should render itself & its children - hide numbers', async () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
-      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />, {
@@ -64,7 +61,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   it('should render itself & its children - notification is read', async () => {
     const props: NotificationRowProps = {
       notification: { ...mockGitifyNotification, unread: false },
-      isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithAppContext(<NotificationRow {...props} />);
@@ -74,108 +70,139 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', async () => {
-      const markNotificationsAsReadMock = jest.fn();
+      const onNotificationActionMock = jest.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: false },
-        markNotificationsAsRead: markNotificationsAsReadMock,
-      });
+      renderWithAppContext(
+        <NotificationRow
+          {...props}
+          onNotificationActionIds={onNotificationActionMock}
+        />,
+        { settings: { ...mockSettings, markAsDoneOnOpen: false } },
+      );
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
       expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledWith(
+        mockGitifyNotification,
+        'read',
+      );
     });
 
     it('should open a notification in the browser - delay notification setting enabled', async () => {
-      const markNotificationsAsReadMock = jest.fn();
+      const onNotificationActionMock = jest.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: {
-          ...mockSettings,
-          markAsDoneOnOpen: false,
-          delayNotificationState: true,
+      renderWithAppContext(
+        <NotificationRow
+          {...props}
+          onNotificationActionIds={onNotificationActionMock}
+        />,
+        {
+          settings: {
+            ...mockSettings,
+            markAsDoneOnOpen: false,
+            delayNotificationState: true,
+          },
         },
-        markNotificationsAsRead: markNotificationsAsReadMock,
-      });
+      );
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
       expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledWith(
+        mockGitifyNotification,
+        'read',
+      );
     });
 
     it('should open a notification in browser & mark it as done', async () => {
-      const markNotificationsAsDoneMock = jest.fn();
+      const onNotificationActionMock = jest.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: true },
-        markNotificationsAsDone: markNotificationsAsDoneMock,
-      });
+      renderWithAppContext(
+        <NotificationRow
+          {...props}
+          onNotificationActionIds={onNotificationActionMock}
+        />,
+        { settings: { ...mockSettings, markAsDoneOnOpen: true } },
+      );
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
       expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledWith(
+        mockGitifyNotification,
+        'done',
+      );
     });
 
     it('should mark as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
-      const markNotificationsAsReadMock = jest.fn();
-      const markNotificationsAsDoneMock = jest.fn();
+      const onNotificationActionMock = jest.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: {
-          ...mockSettings,
-          markAsDoneOnOpen: true,
-          fetchReadNotifications: true,
+      renderWithAppContext(
+        <NotificationRow
+          {...props}
+          onNotificationActionIds={onNotificationActionMock}
+        />,
+        {
+          settings: {
+            ...mockSettings,
+            markAsDoneOnOpen: true,
+            fetchReadNotifications: true,
+          },
         },
-        markNotificationsAsRead: markNotificationsAsReadMock,
-        markNotificationsAsDone: markNotificationsAsDoneMock,
-      });
+      );
 
       await userEvent.click(screen.getByTestId('notification-row'));
 
       expect(links.openNotification).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsReadMock).not.toHaveBeenCalled();
+      expect(onNotificationActionMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledWith(
+        mockGitifyNotification,
+        'done',
+      );
     });
 
     it('should mark notifications as read', async () => {
-      const markNotificationsAsReadMock = jest.fn();
+      const onNotificationActionMock = jest.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: false },
-        markNotificationsAsRead: markNotificationsAsReadMock,
-      });
+      renderWithAppContext(
+        <NotificationRow
+          {...props}
+          onNotificationActionIds={onNotificationActionMock}
+        />,
+        { settings: { ...mockSettings, markAsDoneOnOpen: false } },
+      );
 
       await userEvent.click(screen.getByTestId('notification-mark-as-read'));
 
-      expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledWith(
+        mockGitifyNotification,
+        'read',
+      );
     });
 
     it('should hide mark as read button when notification is already read', async () => {
@@ -184,7 +211,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
           ...mockGitifyNotification,
           unread: false,
         },
-        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />);
@@ -195,21 +221,27 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as done', async () => {
-      const markNotificationsAsDoneMock = jest.fn();
+      const onNotificationActionMock = jest.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: mockSettings,
-        markNotificationsAsDone: markNotificationsAsDoneMock,
-      });
+      renderWithAppContext(
+        <NotificationRow
+          {...props}
+          onNotificationActionIds={onNotificationActionMock}
+        />,
+        { settings: mockSettings },
+      );
 
       await userEvent.click(screen.getByTestId('notification-mark-as-done'));
 
-      expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionMock).toHaveBeenCalledWith(
+        mockGitifyNotification,
+        'done',
+      );
     });
 
     it('should hide mark as done button when notification is already read', async () => {
@@ -218,7 +250,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
           ...mockGitifyNotification,
           unread: false,
         },
-        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />);
@@ -231,7 +262,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
@@ -247,22 +277,28 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should unsubscribe from a notification thread', async () => {
-      const unsubscribeNotificationMock = jest.fn();
+      const onNotificationActionIdsMock = jest.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
-        isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        unsubscribeNotification: unsubscribeNotificationMock,
-      });
+      renderWithAppContext(
+        <NotificationRow
+          {...props}
+          onNotificationActionIds={onNotificationActionIdsMock}
+        />,
+      );
 
       await userEvent.click(
         screen.getByTestId('notification-unsubscribe-from-thread'),
       );
 
-      expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionIdsMock).toHaveBeenCalledTimes(1);
+      expect(onNotificationActionIdsMock).toHaveBeenCalledWith(
+        mockGitifyNotification,
+        'unsubscribe',
+      );
     });
   });
 });

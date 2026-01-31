@@ -76,15 +76,24 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    renderWithAppContext(<RepositoryNotifications {...props} />, {
-      settings: { ...mockSettings },
-      markNotificationsAsRead: markNotificationsAsReadMock,
-    });
+    renderWithAppContext(
+      <RepositoryNotifications
+        {...props}
+        onNotificationActionIds={
+          markNotificationsAsReadMock as unknown as (
+            ids: string[],
+            action: 'read' | 'done' | 'unsubscribe' | 'openRepository',
+          ) => void
+        }
+      />,
+      { settings: { ...mockSettings } },
+    );
 
     await userEvent.click(screen.getByTestId('repository-mark-as-read'));
 
     expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
-      mockGitHubCloudGitifyNotifications,
+      mockGitHubCloudGitifyNotifications.map((n) => n.id),
+      'read',
     );
   });
 
@@ -94,15 +103,24 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    renderWithAppContext(<RepositoryNotifications {...props} />, {
-      settings: { ...mockSettings },
-      markNotificationsAsDone: markNotificationsAsDoneMock,
-    });
+    renderWithAppContext(
+      <RepositoryNotifications
+        {...props}
+        onNotificationActionIds={
+          markNotificationsAsDoneMock as unknown as (
+            ids: string[],
+            action: 'read' | 'done' | 'unsubscribe' | 'openRepository',
+          ) => void
+        }
+      />,
+      { settings: { ...mockSettings } },
+    );
 
     await userEvent.click(screen.getByTestId('repository-mark-as-done'));
 
     expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
-      mockGitHubCloudGitifyNotifications,
+      mockGitHubCloudGitifyNotifications.map((n) => n.id),
+      'done',
     );
   });
 

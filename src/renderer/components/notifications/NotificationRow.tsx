@@ -1,4 +1,4 @@
-import { type FC, useState } from 'react';
+import type { FC } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
@@ -12,57 +12,46 @@ import { type GitifyNotification, Opacity, Size } from '../../types';
 
 import { cn } from '../../utils/cn';
 import { isMarkAsDoneFeatureSupported } from '../../utils/features';
-import { openNotification } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';
-import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
 import { NotificationTitle } from './NotificationTitle';
 
 export interface NotificationRowProps {
   notification: GitifyNotification;
-  isRepositoryAnimatingExit: boolean;
+  isPendingRemoval?: boolean;
+  onNotificationActionIds?: (
+    ids: string[],
+    action:
+      | 'read'
+      | 'done'
+      | 'unsubscribe'
+      | 'openRepository'
+      | 'openNotification',
+  ) => void;
 }
 
 export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
-  isRepositoryAnimatingExit,
+  isPendingRemoval = false,
+  onNotificationActionIds,
 }: NotificationRowProps) => {
-  const {
-    settings,
-    markNotificationsAsRead,
-    markNotificationsAsDone,
-    unsubscribeNotification,
-  } = useAppContext();
+  const { settings } = useAppContext();
 
-  const [shouldAnimateNotificationExit, setShouldAnimateNotificationExit] =
-    useState(false);
-
-  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
-
-  const actionNotificationInteraction = () => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-    openNotification(notification);
-
-    if (settings.markAsDoneOnOpen) {
-      markNotificationsAsDone([notification]);
-    } else {
-      markNotificationsAsRead([notification]);
-    }
+  const actionOpenNotification = () => {
+    onNotificationActionIds([notification.id], 'openNotification');
   };
 
   const actionMarkAsDone = () => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-    markNotificationsAsDone([notification]);
+    onNotificationActionIds([notification.id], 'done');
   };
 
   const actionMarkAsRead = () => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-    markNotificationsAsRead([notification]);
+    onNotificationActionIds([notification.id], 'read');
   };
 
   const actionUnsubscribeFromThread = () => {
-    unsubscribeNotification(notification);
+    onNotificationActionIds([notification.id], 'unsubscribe');
   };
 
   const NotificationIcon = notification.display.icon.type;
@@ -74,8 +63,8 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         'group relative border-b',
         'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
-        (isRepositoryAnimatingExit || shouldAnimateNotificationExit) &&
-          'translate-x-full opacity-0 transition duration-350 ease-in-out',
+        isPendingRemoval &&
+          'translate-x-full opacity-0 transition duration-500 ease-in-out',
         isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
@@ -98,7 +87,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
           )}
           direction="vertical"
           gap="none"
-          onClick={actionNotificationInteraction}
+          onClick={actionOpenNotification}
         >
           <NotificationHeader notification={notification} />
 
@@ -130,7 +119,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Stack>
       </Stack>
 
-      {!shouldAnimateNotificationExit && (
+      {!isPendingRemoval && (
         <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
           <HoverButton
             action={actionMarkAsRead}
