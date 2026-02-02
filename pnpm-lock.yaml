@@ -16,7 +16,7 @@ importers:
         version: 6.8.1
       menubar:
         specifier: 9.5.2
-        version: 9.5.2(electron@40.0.0)
+        version: 9.5.2(electron@40.1.0)
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -139,8 +139,8 @@ importers:
         specifier: 17.2.3
         version: 17.2.3
       electron:
-        specifier: 40.0.0
-        version: 40.0.0
+        specifier: 40.1.0
+        version: 40.1.0
       electron-builder:
         specifier: 26.6.0
         version: 26.6.0(electron-builder-squirrel-windows@24.13.3)
@@ -3251,8 +3251,8 @@ packages:
   electron-updater@6.8.1:
     resolution: {integrity: sha512-6DvJ5xkIickdXI8llEiwsN47ea11/9ycwZmpSpNKBovAKfQPGblHRyI6JexifmHWxer/DY34Aa/OgTRqXQ3iMg==}
 
-  electron@40.0.0:
-    resolution: {integrity: sha512-UyBy5yJ0/wm4gNugCtNPjvddjAknMTuXR2aCHioXicH7aKRKGDBPp4xqTEi/doVcB3R+MN3wfU9o8d/9pwgK2A==}
+  electron@40.1.0:
+    resolution: {integrity: sha512-2j/kvw7uF0H1PnzYBzw2k2Q6q16J8ToKrtQzZfsAoXbbMY0l5gQi2DLOauIZLzwp4O01n8Wt/74JhSRwG0yj9A==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -3475,10 +3475,6 @@ packages:
   foreground-child@3.1.1:
     resolution: {integrity: sha512-TMKDUnIte6bfb5nWv7V/caI169OHgvwjb7V4WkeUvbQQdjr5rWKqHFiKWb/fcOwB+CzBT+qbWjvj+DVwRskpIg==}
     engines: {node: '>=14'}
-
-  form-data@4.0.4:
-    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
-    engines: {node: '>= 6'}
 
   form-data@4.0.5:
     resolution: {integrity: sha512-8RipRLol37bNs2bhoV67fiTEvdTrbMUYcFTiy3+wuuOnUog2QBHCZWXDRijWQfAkhBj2Uf5UnVaiWwA5vdd82w==}
@@ -8807,7 +8803,7 @@ snapshots:
       ejs: 3.1.10
       electron-builder-squirrel-windows: 24.13.3(dmg-builder@26.6.0)
       electron-publish: 24.13.1
-      form-data: 4.0.4
+      form-data: 4.0.5
       fs-extra: 10.1.0
       hosted-git-info: 4.1.0
       is-ci: 3.0.1
@@ -9796,7 +9792,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@40.0.0:
+  electron@40.1.0:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 24.10.9
@@ -10017,14 +10013,6 @@ snapshots:
     dependencies:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
-
-  form-data@4.0.4:
-    dependencies:
-      asynckit: 0.4.0
-      combined-stream: 1.0.8
-      es-set-tostringtag: 2.1.0
-      hasown: 2.0.2
-      mime-types: 2.1.35
 
   form-data@4.0.5:
     dependencies:
@@ -11186,9 +11174,9 @@ snapshots:
 
   mdn-data@2.0.30: {}
 
-  menubar@9.5.2(electron@40.0.0):
+  menubar@9.5.2(electron@40.1.0):
     dependencies:
-      electron: 40.0.0
+      electron: 40.1.0
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
