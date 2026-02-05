@@ -73,7 +73,7 @@
   "homepage": "https://gitify.io/",
   "dependencies": {
     "electron-log": "5.4.3",
-    "electron-updater": "6.8.1",
+    "electron-updater": "6.8.2",
     "menubar": "9.5.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
