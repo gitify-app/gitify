@@ -12,6 +12,8 @@ import { logError, logInfo } from '../shared/logger';
 
 import { sendRendererEvent } from './events';
 
+export const isDevMode = !!process.defaultApp;
+
 export function takeScreenshot(mb: Menubar) {
   const date = new Date();
   const dateStr = date.toISOString().replaceAll(':', '-');

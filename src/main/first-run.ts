@@ -7,6 +7,8 @@ import { APPLICATION } from '../shared/constants';
 import { logError } from '../shared/logger';
 import { isMacOS } from '../shared/platform';
 
+import { isDevMode } from './utils';
+
 export async function onFirstRunMaybe() {
   if (isFirstRun()) {
     await promptMoveToApplicationsFolder();
@@ -21,7 +23,6 @@ async function promptMoveToApplicationsFolder() {
     return;
   }
 
-  const isDevMode = !!process.defaultApp;
   if (isDevMode || app.isInApplicationsFolder()) {
     return;
   }

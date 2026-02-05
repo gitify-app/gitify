@@ -5,10 +5,12 @@ import installExtension, {
 
 import { logInfo, logWarn } from '../shared/logger';
 
+import { isDevMode } from './utils';
+
 let installTask: Promise<void> | null = null;
 
 export async function installReactDevtools() {
-  if (process.env.NODE_ENV === 'production') {
+  if (!isDevMode) {
     return;
   }
 
