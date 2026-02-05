@@ -82,8 +82,8 @@ importers:
         specifier: 19.21.2
         version: 19.21.2(react@19.2.4)
       '@primer/react':
-        specifier: 38.8.0
-        version: 38.8.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
+        specifier: 38.9.0
+        version: 38.9.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
       '@tailwindcss/postcss':
         specifier: 4.1.18
         version: 4.1.18
@@ -1870,8 +1870,8 @@ packages:
   '@primer/primitives@11.3.2':
     resolution: {integrity: sha512-/8EDh3MmF9cbmrLETFmIuNFIdvpSCkvBlx6zzD8AZ4dZ5UYExQzFj8QAtIrRtCFJ2ZmW5QrtrPR3+JVb8KEDpg==}
 
-  '@primer/react@38.8.0':
-    resolution: {integrity: sha512-GMRYaVzXwrBaq9US4Ne9wRQ2PZDINye/vrbBO9tB1TMHlDg4QJIdeOtO5AOay7m0Akda3MnEllk8XtSLUh4YbA==}
+  '@primer/react@38.9.0':
+    resolution: {integrity: sha512-ST0kGTWLtgPaLJ0aF7HwhvcuZMMW2FKf5z2kBE9hAvajy5Jp2H604zq1+UU547NEnjtOpPUhvh0eK5a0aPIN5g==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -3567,6 +3567,7 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@13.0.0:
@@ -3575,7 +3576,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-agent@3.0.0:
     resolution: {integrity: sha512-PT6XReJ+D07JvGoxQMkT6qji/jVNfX/h364XHZOWeRzy64sSFr+xJ5OX7LI3b4MPQzdL4H8Y8M0xzPpsVMwA8Q==}
@@ -5533,7 +5534,7 @@ packages:
   tar@6.2.1:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
     engines: {node: '>=10'}
-    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   tar@7.5.7:
     resolution: {integrity: sha512-fov56fJiRuThVFXD6o6/Q354S7pnWMJIVlDBYijsTNx6jKSE4pvrDTs6lUnmGvNyfJwFQQwWy3owKz1ucIhveQ==}
@@ -8208,7 +8209,7 @@ snapshots:
 
   '@primer/primitives@11.3.2': {}
 
-  '@primer/react@38.8.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)':
+  '@primer/react@38.9.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.5.0
