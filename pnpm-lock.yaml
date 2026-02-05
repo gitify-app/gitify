@@ -82,8 +82,8 @@ importers:
         specifier: 19.21.2
         version: 19.21.2(react@19.2.4)
       '@primer/react':
-        specifier: 38.8.0
-        version: 38.8.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
+        specifier: 38.9.0
+        version: 38.9.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
       '@tailwindcss/postcss':
         specifier: 4.1.18
         version: 4.1.18
@@ -1850,8 +1850,8 @@ packages:
   '@primer/primitives@11.3.2':
     resolution: {integrity: sha512-/8EDh3MmF9cbmrLETFmIuNFIdvpSCkvBlx6zzD8AZ4dZ5UYExQzFj8QAtIrRtCFJ2ZmW5QrtrPR3+JVb8KEDpg==}
 
-  '@primer/react@38.8.0':
-    resolution: {integrity: sha512-GMRYaVzXwrBaq9US4Ne9wRQ2PZDINye/vrbBO9tB1TMHlDg4QJIdeOtO5AOay7m0Akda3MnEllk8XtSLUh4YbA==}
+  '@primer/react@38.9.0':
+    resolution: {integrity: sha512-ST0kGTWLtgPaLJ0aF7HwhvcuZMMW2FKf5z2kBE9hAvajy5Jp2H604zq1+UU547NEnjtOpPUhvh0eK5a0aPIN5g==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -8167,7 +8167,7 @@ snapshots:
 
   '@primer/primitives@11.3.2': {}
 
-  '@primer/react@38.8.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)':
+  '@primer/react@38.9.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.5.0
