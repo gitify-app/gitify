@@ -62,6 +62,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   };
 
   const actionUnsubscribeFromThread = () => {
+    setShouldAnimateNotificationExit(shouldAnimateExit);
     unsubscribeNotification(notification);
   };
 

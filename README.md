@@ -24,12 +24,6 @@ Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
 
 Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
-### Development
-
-Running `pnpm start` installs the React Developer Tools extension automatically so
-you can inspect the renderer process. You can reinstall it at any time from the
-tray context menu under **Developer → Reinstall React DevTools**.
-
 ### License
 
 Gitify is licensed under the MIT Open Source license. 

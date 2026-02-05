@@ -31,6 +31,10 @@ pnpm watch
 
 To run the **electron app**:
 
+> [!NOTE]
+> This will also install React Developer Tools extension automatically so you can inspect the renderer process.
+> Make sure you force a reload when first opening the `Developer Tools`.
+
 ```shell
 pnpm start
 ```
