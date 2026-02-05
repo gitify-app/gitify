@@ -5,6 +5,7 @@ import type { Menubar } from 'menubar';
 import { APPLICATION } from '../shared/constants';
 import { isMacOS } from '../shared/platform';
 
+import { installReactDevtools } from './devtools';
 import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
@@ -65,6 +66,13 @@ export default class MenuBuilder {
           {
             role: 'toggleDevTools',
             accelerator: isMacOS() ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
+          },
+          {
+            label: 'Reinstall React DevTools',
+            enabled: process.env.NODE_ENV !== 'production',
+            click: () => {
+              void installReactDevtools();
+            },
           },
           {
             label: 'Take Screenshot',
