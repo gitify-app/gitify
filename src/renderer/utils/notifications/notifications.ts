@@ -14,7 +14,7 @@ import {
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
-import { transformNotification } from '../api/transform';
+import { transformNotifications } from '../api/transform';
 import { rendererLogError, rendererLogWarn } from '../logger';
 import {
   filterBaseNotifications,
@@ -92,9 +92,10 @@ export async function getAllNotifications(
         try {
           const rawNotifications = await accountNotifications.notifications;
 
-          let notifications = rawNotifications.map((raw) => {
-            return transformNotification(raw, accountNotifications.account);
-          });
+          let notifications = transformNotifications(
+            rawNotifications,
+            accountNotifications.account,
+          );
 
           notifications = filterBaseNotifications(
             notifications,
