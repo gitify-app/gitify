@@ -15,16 +15,35 @@ import type { RawGitHubNotification } from './types';
 import { getReasonDetails } from '../reason';
 
 /**
+ * Transform all raw notifications from Atlassian types to Atlassify types.
+ *
+ * @param rawNotifications - The Atlassian notifications.
+ * @param account - The account.
+ * @returns Transformed Atlassify notifications.
+ */
+export function transformNotifications(
+  rawNotifications: RawGitHubNotification[],
+  account: Account,
+): GitifyNotification[] {
+  return rawNotifications.map((raw) => {
+    return transformNotification(raw, account);
+  });
+}
+
+/**
  * Transform a raw GitHub notification to GitifyNotification.
  * Called immediately after REST API response is received.
  *
  * This is the ONLY place where raw GitHub types should be converted
  * to Gitify's internal notification type.
+ *
+ * @param raw - The GitHub notification.
+ * @param account - The account.
+ * @returns A transformed Gitify notification.
  */
-export function transformNotification(
+function transformNotification(
   raw: RawGitHubNotification,
   account: Account,
-  order = 0,
 ): GitifyNotification {
   return {
     id: raw.id,
@@ -33,10 +52,9 @@ export function transformNotification(
     reason: transformReason(raw.reason),
     subject: transformSubject(raw.subject),
     repository: transformRepository(raw.repository),
-    account,
-    order,
-    // Display fields start as undefined, populated by formatNotification post-enrichment
-    display: undefined,
+    account: account,
+    order: 0, // Will be set later in stabilizeNotificationsOrder
+    display: undefined, // Display fields start as undefined, populated by formatNotification post-enrichment
   };
 }
 
