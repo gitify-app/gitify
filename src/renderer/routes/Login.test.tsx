@@ -20,7 +20,7 @@ describe('renderer/routes/Login.tsx', () => {
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
 
     expect(navigateMock).toHaveBeenCalledTimes(0);
   });

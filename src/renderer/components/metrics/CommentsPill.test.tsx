@@ -8,7 +8,7 @@ describe('renderer/components/metrics/CommentsPill.tsx', () => {
 
     const tree = renderWithAppContext(<CommentsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders with 1 comment', () => {
@@ -18,7 +18,7 @@ describe('renderer/components/metrics/CommentsPill.tsx', () => {
 
     const tree = renderWithAppContext(<CommentsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders with multiple comments', () => {
@@ -28,6 +28,6 @@ describe('renderer/components/metrics/CommentsPill.tsx', () => {
 
     const tree = renderWithAppContext(<CommentsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

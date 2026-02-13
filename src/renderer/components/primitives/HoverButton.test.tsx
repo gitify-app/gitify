@@ -16,7 +16,7 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
         testid="hover-button"
       />,
     );
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render - disabled', () => {
@@ -31,6 +31,6 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
         testid="hover-button"
       />,
     );
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

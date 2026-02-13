@@ -36,7 +36,7 @@ describe('renderer/components/Sidebar.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children (logged out)', () => {
@@ -49,7 +49,7 @@ describe('renderer/components/Sidebar.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should navigate home when clicking logo', async () => {

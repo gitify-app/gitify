@@ -9,7 +9,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
       <SearchFilterSuggestions inputValue={''} open={false} />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - open without detailed notifications enabled', () => {
@@ -23,7 +23,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - open with detailed notifications enabled', () => {
@@ -37,7 +37,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - input token invalid', () => {
@@ -51,7 +51,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - input token valid', () => {
@@ -65,6 +65,6 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

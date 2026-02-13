@@ -9,7 +9,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
       <NotificationTitle title="Simple notification title" />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render text with single inline code block', () => {
@@ -17,7 +17,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
       <NotificationTitle title="refactor: migrate deprecated atlaskit `xcss`" />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render text with multiple inline code blocks', () => {
@@ -25,7 +25,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
       <NotificationTitle title="Replace `foo` with `bar` in config" />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render text with code block at the start', () => {
@@ -33,7 +33,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
       <NotificationTitle title="`useState` hook implementation" />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render text with code block at the end', () => {
@@ -41,7 +41,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
       <NotificationTitle title="Fix issue with `render`" />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should apply truncate className when wrapNotificationTitle is false', () => {
@@ -55,7 +55,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should not apply truncate className when wrapNotificationTitle is true', () => {
@@ -69,6 +69,6 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
       },
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

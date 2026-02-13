@@ -9,6 +9,6 @@ describe('renderer/components/filters/UserTypeFilter.tsx', () => {
       notifications: mockMultipleAccountNotifications,
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

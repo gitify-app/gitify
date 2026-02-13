@@ -8,12 +8,12 @@ describe('renderer/components/primitives/Footer.tsx', () => {
       <Footer justify="space-between">Test</Footer>,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - end', () => {
     const tree = renderWithAppContext(<Footer justify="end">Test</Footer>);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

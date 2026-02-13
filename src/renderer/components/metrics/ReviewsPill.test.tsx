@@ -11,7 +11,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
 
     const tree = renderWithAppContext(<ReviewsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders nothing when no reviews', () => {
@@ -21,6 +21,6 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
 
     const tree = renderWithAppContext(<ReviewsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

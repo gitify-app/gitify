@@ -1,48 +1,76 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
       <div
-        data-color-mode="light"
-        data-dark-theme="dark"
-        data-light-theme="light"
+        class="flex flex-col h-screen"
+        data-testid="Login With OAuth App"
       >
         <div
-          class="prc-src-BaseStyles-aopSS"
-          data-portal-root="true"
+          class="pl-4 pr-5 pt-3 pb-1"
         >
           <div
-            class="flex flex-col h-screen"
-            data-testid="Login With OAuth App"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-justify="space-between"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <div
-              class="pl-4 pr-5 pt-3 pb-1"
+            <button
+              aria-labelledby="Go Back"
+              class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+              data-component="IconButton"
+              data-loading="false"
+              data-no-visuals="true"
+              data-size="medium"
+              data-testid="header-nav-back"
+              data-variant="invisible"
+              type="button"
             >
-              <div
-                class="prc-Stack-Stack-UQ9k6"
-                data-align="stretch"
-                data-direction="horizontal"
-                data-justify="space-between"
-                data-padding="none"
-                data-wrap="nowrap"
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-arrow-left"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
               >
-                <button
-                  aria-labelledby="Go Back"
-                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                  data-component="IconButton"
-                  data-loading="false"
-                  data-no-visuals="true"
-                  data-size="medium"
-                  data-testid="header-nav-back"
-                  data-variant="invisible"
-                  type="button"
+                <path
+                  d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+                />
+              </svg>
+            </button>
+            <legend>
+              <div
+                class="mb-2"
+              >
+                <div
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-wrap="nowrap"
+                  id="title-login-with-oauth-app"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-arrow-left"
+                    class="octicon octicon-person"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -53,476 +81,105 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     width="16"
                   >
                     <path
-                      d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+                      d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
                     />
                   </svg>
-                </button>
-                <legend>
-                  <div
-                    class="mb-2"
+                  <h4
+                    class="prc-Heading-Heading-MtWFE"
                   >
-                    <div
-                      class="prc-Stack-Stack-UQ9k6"
-                      data-align="center"
-                      data-direction="horizontal"
-                      data-gap="condensed"
-                      data-justify="start"
-                      data-padding="none"
-                      data-wrap="nowrap"
-                      id="title-login-with-oauth-app"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="octicon octicon-person"
-                        display="inline-block"
-                        fill="currentColor"
-                        focusable="false"
-                        height="16"
-                        overflow="visible"
-                        style="vertical-align: text-bottom;"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
-                        <path
-                          d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
-                        />
-                      </svg>
-                      <h4
-                        class="prc-Heading-Heading-MtWFE"
-                      >
-                        Login with OAuth App
-                      </h4>
-                    </div>
-                  </div>
-                </legend>
-              </div>
-            </div>
-            <div
-              class="grow overflow-x-hidden overflow-y-auto px-5"
-            >
-              <div
-                class="prc-Stack-Stack-UQ9k6"
-                data-align="stretch"
-                data-direction="vertical"
-                data-gap="normal"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <div
-                  class="prc-FormControl-ControlVerticalLayout-8YotI"
-                  data-has-label=""
-                >
-                  <label
-                    class="prc-components-Label-2mrqP"
-                    for="_r_ID_"
-                  >
-                    <span
-                      class="prc-components-RequiredText-7UsHS"
-                    >
-                      <span>
-                        Hostname
-                      </span>
-                      <span>
-                        *
-                      </span>
-                    </span>
-                  </label>
-                  <span
-                    aria-busy="false"
-                    class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
-                    data-block="true"
-                  >
-                    <input
-                      aria-describedby="_r_ID_-caption"
-                      aria-invalid="false"
-                      aria-required="true"
-                      class="prc-components-Input-IwWrt"
-                      data-component="input"
-                      data-testid="login-hostname"
-                      id="_r_ID_"
-                      name="hostname"
-                      placeholder="github.com"
-                      type="text"
-                      value="github.com"
-                    />
-                  </span>
-                  <span
-                    class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
-                    id="_r_ID_-caption"
-                  >
-                    <i
-                      class="prc-Text-Text-9mHv3"
-                    >
-                      Change only if you are using GitHub Enterprise Server
-                    </i>
-                  </span>
-                </div>
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-direction="horizontal"
-                  data-gap="condensed"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <button
-                    class="prc-Button-ButtonBase-9n-Xk"
-                    data-loading="false"
-                    data-size="small"
-                    data-testid="login-create-oauth-app"
-                    data-variant="default"
-                    type="button"
-                  >
-                    <span
-                      class="prc-Button-ButtonContent-Iohp5"
-                      data-align="center"
-                      data-component="buttonContent"
-                    >
-                      <span
-                        class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-                        data-component="leadingVisual"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="octicon octicon-person"
-                          display="inline-block"
-                          fill="currentColor"
-                          focusable="false"
-                          height="16"
-                          overflow="visible"
-                          style="vertical-align: text-bottom;"
-                          viewBox="0 0 16 16"
-                          width="16"
-                        >
-                          <path
-                            d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        class="prc-Button-Label-FWkx3"
-                        data-component="text"
-                      >
-                        Create new OAuth App
-                      </span>
-                    </span>
-                  </button>
-                  <span
-                    class="text-xs prc-Text-Text-9mHv3"
-                  >
-                    and use your 
-                    <i
-                      class="prc-Text-Text-9mHv3"
-                    >
-                      client id & secret
-                    </i>
-                     below.
-                  </span>
-                </div>
-                <div
-                  class="prc-FormControl-ControlVerticalLayout-8YotI"
-                  data-has-label=""
-                >
-                  <label
-                    class="prc-components-Label-2mrqP"
-                    for="_r_ID_"
-                  >
-                    <span
-                      class="prc-components-RequiredText-7UsHS"
-                    >
-                      <span>
-                        Client ID
-                      </span>
-                      <span>
-                        *
-                      </span>
-                    </span>
-                  </label>
-                  <span
-                    aria-busy="false"
-                    class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
-                    data-block="true"
-                  >
-                    <input
-                      aria-invalid="false"
-                      aria-required="true"
-                      class="prc-components-Input-IwWrt"
-                      data-component="input"
-                      data-testid="login-clientId"
-                      id="_r_ID_"
-                      name="clientId"
-                      placeholder="Your generated client id (20 characters)"
-                      type="text"
-                      value=""
-                    />
-                  </span>
-                </div>
-                <div
-                  class="prc-FormControl-ControlVerticalLayout-8YotI"
-                  data-has-label=""
-                >
-                  <label
-                    class="prc-components-Label-2mrqP"
-                    for="_r_ID_"
-                  >
-                    <span
-                      class="prc-components-RequiredText-7UsHS"
-                    >
-                      <span>
-                        Client Secret
-                      </span>
-                      <span>
-                        *
-                      </span>
-                    </span>
-                  </label>
-                  <span
-                    aria-busy="false"
-                    class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
-                    data-block="true"
-                    data-trailing-action="true"
-                  >
-                    <input
-                      aria-invalid="false"
-                      aria-required="true"
-                      class="prc-components-Input-IwWrt"
-                      data-component="input"
-                      data-testid="login-clientSecret"
-                      id="_r_ID_"
-                      name="clientSecret"
-                      placeholder="Your generated client secret (40 characters)"
-                      type="password"
-                      value=""
-                    />
-                    <span
-                      class="TextInput-action prc-components-TextInputAction-CjGDX"
-                    >
-                      <button
-                        aria-labelledby="_r_ID_"
-                        class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
-                        data-component="IconButton"
-                        data-loading="false"
-                        data-no-visuals="true"
-                        data-size="small"
-                        data-variant="invisible"
-                        type="button"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="octicon octicon-eye"
-                          display="inline-block"
-                          fill="currentColor"
-                          focusable="false"
-                          height="16"
-                          overflow="visible"
-                          style="vertical-align: text-bottom;"
-                          viewBox="0 0 16 16"
-                          width="16"
-                        >
-                          <path
-                            d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"
-                          />
-                        </svg>
-                      </button>
-                      <span
-                        aria-hidden="true"
-                        class="prc-TooltipV2-Tooltip-tLeuB"
-                        data-direction="s"
-                        id="_r_ID_"
-                        popover="auto"
-                      >
-                        Show token
-                      </span>
-                    </span>
-                  </span>
+                    Login with OAuth App
+                  </h4>
                 </div>
               </div>
-            </div>
-            <div
-              class="left-sidebar bg-gitify-footer"
-            >
-              <div
-                class="prc-Stack-Stack-UQ9k6"
-                data-align="stretch"
-                data-direction="horizontal"
-                data-justify="space-between"
-                data-padding="condensed"
-                data-wrap="nowrap"
-              >
-                <button
-                  aria-describedby="_r_ID_"
-                  class="prc-Button-ButtonBase-9n-Xk"
-                  data-loading="false"
-                  data-size="small"
-                  data-testid="login-docs"
-                  data-variant="default"
-                  type="button"
-                >
-                  <span
-                    class="prc-Button-ButtonContent-Iohp5"
-                    data-align="center"
-                    data-component="buttonContent"
-                  >
-                    <span
-                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-                      data-component="leadingVisual"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="octicon octicon-book"
-                        display="inline-block"
-                        fill="currentColor"
-                        focusable="false"
-                        height="16"
-                        overflow="visible"
-                        style="vertical-align: text-bottom;"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
-                        <path
-                          d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
-                        />
-                      </svg>
-                    </span>
-                    <span
-                      class="prc-Button-Label-FWkx3"
-                      data-component="text"
-                    >
-                      Docs
-                    </span>
-                  </span>
-                </button>
-                <span
-                  aria-hidden="true"
-                  class="prc-TooltipV2-Tooltip-tLeuB"
-                  data-direction="s"
-                  id="_r_ID_"
-                  popover="auto"
-                  role="tooltip"
-                >
-                  GitHub documentation
-                </span>
-                <div
-                  data-loading-wrapper="true"
-                >
-                  <button
-                    class="prc-Button-ButtonBase-9n-Xk"
-                    data-loading="false"
-                    data-size="medium"
-                    data-testid="login-submit"
-                    data-variant="primary"
-                    type="button"
-                  >
-                    <span
-                      class="prc-Button-ButtonContent-Iohp5"
-                      data-align="center"
-                      data-component="buttonContent"
-                    >
-                      <span
-                        class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-                        data-component="leadingVisual"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="octicon octicon-sign-in"
-                          display="inline-block"
-                          fill="currentColor"
-                          focusable="false"
-                          height="16"
-                          overflow="visible"
-                          style="vertical-align: text-bottom;"
-                          viewBox="0 0 16 16"
-                          width="16"
-                        >
-                          <path
-                            d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        class="prc-Button-Label-FWkx3"
-                        data-component="text"
-                      >
-                        Login
-                      </span>
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </div>
+            </legend>
           </div>
         </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      data-color-mode="light"
-      data-dark-theme="dark"
-      data-light-theme="light"
-    >
-      <div
-        class="prc-src-BaseStyles-aopSS"
-        data-portal-root="true"
-      >
         <div
-          class="flex flex-col h-screen"
-          data-testid="Login With OAuth App"
+          class="grow overflow-x-hidden overflow-y-auto px-5"
         >
           <div
-            class="pl-4 pr-5 pt-3 pb-1"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-direction="vertical"
+            data-gap="normal"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
             <div
+              class="prc-FormControl-ControlVerticalLayout-8YotI"
+              data-has-label=""
+            >
+              <label
+                class="prc-components-Label-2mrqP"
+                for="_r_ID_"
+              >
+                <span
+                  class="prc-components-RequiredText-7UsHS"
+                >
+                  <span>
+                    Hostname
+                  </span>
+                  <span>
+                    *
+                  </span>
+                </span>
+              </label>
+              <span
+                aria-busy="false"
+                class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+                data-block="true"
+              >
+                <input
+                  aria-describedby="_r_ID_-caption"
+                  aria-invalid="false"
+                  aria-required="true"
+                  class="prc-components-Input-IwWrt"
+                  data-component="input"
+                  data-testid="login-hostname"
+                  id="_r_ID_"
+                  name="hostname"
+                  placeholder="github.com"
+                  type="text"
+                  value="github.com"
+                />
+              </span>
+              <span
+                class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
+                id="_r_ID_-caption"
+              >
+                <i
+                  class="prc-Text-Text-9mHv3"
+                >
+                  Change only if you are using GitHub Enterprise Server
+                </i>
+              </span>
+            </div>
+            <div
               class="prc-Stack-Stack-UQ9k6"
-              data-align="stretch"
+              data-align="center"
               data-direction="horizontal"
-              data-justify="space-between"
+              data-gap="condensed"
+              data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
             >
               <button
-                aria-labelledby="Go Back"
-                class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-                data-component="IconButton"
+                class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
-                data-no-visuals="true"
-                data-size="medium"
-                data-testid="header-nav-back"
-                data-variant="invisible"
+                data-size="small"
+                data-testid="login-create-oauth-app"
+                data-variant="default"
                 type="button"
               >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-arrow-left"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
+                <span
+                  class="prc-Button-ButtonContent-Iohp5"
+                  data-align="center"
+                  data-component="buttonContent"
                 >
-                  <path
-                    d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-                  />
-                </svg>
-              </button>
-              <legend>
-                <div
-                  class="mb-2"
-                >
-                  <div
-                    class="prc-Stack-Stack-UQ9k6"
-                    data-align="center"
-                    data-direction="horizontal"
-                    data-gap="condensed"
-                    data-justify="start"
-                    data-padding="none"
-                    data-wrap="nowrap"
-                    id="title-login-with-oauth-app"
+                  <span
+                    class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+                    data-component="leadingVisual"
                   >
                     <svg
                       aria-hidden="true"
@@ -540,277 +197,219 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                         d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
                       />
                     </svg>
-                    <h4
-                      class="prc-Heading-Heading-MtWFE"
-                    >
-                      Login with OAuth App
-                    </h4>
-                  </div>
-                </div>
-              </legend>
+                  </span>
+                  <span
+                    class="prc-Button-Label-FWkx3"
+                    data-component="text"
+                  >
+                    Create new OAuth App
+                  </span>
+                </span>
+              </button>
+              <span
+                class="text-xs prc-Text-Text-9mHv3"
+              >
+                and use your 
+                <i
+                  class="prc-Text-Text-9mHv3"
+                >
+                  client id & secret
+                </i>
+                 below.
+              </span>
             </div>
-          </div>
-          <div
-            class="grow overflow-x-hidden overflow-y-auto px-5"
-          >
             <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="stretch"
-              data-direction="vertical"
-              data-gap="normal"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
+              class="prc-FormControl-ControlVerticalLayout-8YotI"
+              data-has-label=""
             >
-              <div
-                class="prc-FormControl-ControlVerticalLayout-8YotI"
-                data-has-label=""
+              <label
+                class="prc-components-Label-2mrqP"
+                for="_r_ID_"
               >
-                <label
-                  class="prc-components-Label-2mrqP"
-                  for="_r_ID_"
+                <span
+                  class="prc-components-RequiredText-7UsHS"
                 >
-                  <span
-                    class="prc-components-RequiredText-7UsHS"
-                  >
-                    <span>
-                      Hostname
-                    </span>
-                    <span>
-                      *
-                    </span>
+                  <span>
+                    Client ID
                   </span>
-                </label>
-                <span
-                  aria-busy="false"
-                  class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
-                  data-block="true"
-                >
-                  <input
-                    aria-describedby="_r_ID_-caption"
-                    aria-invalid="false"
-                    aria-required="true"
-                    class="prc-components-Input-IwWrt"
-                    data-component="input"
-                    data-testid="login-hostname"
-                    id="_r_ID_"
-                    name="hostname"
-                    placeholder="github.com"
-                    type="text"
-                    value="github.com"
-                  />
+                  <span>
+                    *
+                  </span>
                 </span>
-                <span
-                  class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
-                  id="_r_ID_-caption"
-                >
-                  <i
-                    class="prc-Text-Text-9mHv3"
-                  >
-                    Change only if you are using GitHub Enterprise Server
-                  </i>
-                </span>
-              </div>
-              <div
-                class="prc-Stack-Stack-UQ9k6"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
+              </label>
+              <span
+                aria-busy="false"
+                class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+                data-block="true"
               >
-                <button
-                  class="prc-Button-ButtonBase-9n-Xk"
-                  data-loading="false"
-                  data-size="small"
-                  data-testid="login-create-oauth-app"
-                  data-variant="default"
-                  type="button"
-                >
-                  <span
-                    class="prc-Button-ButtonContent-Iohp5"
-                    data-align="center"
-                    data-component="buttonContent"
-                  >
-                    <span
-                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-                      data-component="leadingVisual"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="octicon octicon-person"
-                        display="inline-block"
-                        fill="currentColor"
-                        focusable="false"
-                        height="16"
-                        overflow="visible"
-                        style="vertical-align: text-bottom;"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
-                        <path
-                          d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
-                        />
-                      </svg>
-                    </span>
-                    <span
-                      class="prc-Button-Label-FWkx3"
-                      data-component="text"
-                    >
-                      Create new OAuth App
-                    </span>
-                  </span>
-                </button>
-                <span
-                  class="text-xs prc-Text-Text-9mHv3"
-                >
-                  and use your 
-                  <i
-                    class="prc-Text-Text-9mHv3"
-                  >
-                    client id & secret
-                  </i>
-                   below.
-                </span>
-              </div>
-              <div
-                class="prc-FormControl-ControlVerticalLayout-8YotI"
-                data-has-label=""
+                <input
+                  aria-invalid="false"
+                  aria-required="true"
+                  class="prc-components-Input-IwWrt"
+                  data-component="input"
+                  data-testid="login-clientId"
+                  id="_r_ID_"
+                  name="clientId"
+                  placeholder="Your generated client id (20 characters)"
+                  type="text"
+                  value=""
+                />
+              </span>
+            </div>
+            <div
+              class="prc-FormControl-ControlVerticalLayout-8YotI"
+              data-has-label=""
+            >
+              <label
+                class="prc-components-Label-2mrqP"
+                for="_r_ID_"
               >
-                <label
-                  class="prc-components-Label-2mrqP"
-                  for="_r_ID_"
-                >
-                  <span
-                    class="prc-components-RequiredText-7UsHS"
-                  >
-                    <span>
-                      Client ID
-                    </span>
-                    <span>
-                      *
-                    </span>
-                  </span>
-                </label>
                 <span
-                  aria-busy="false"
-                  class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
-                  data-block="true"
+                  class="prc-components-RequiredText-7UsHS"
                 >
-                  <input
-                    aria-invalid="false"
-                    aria-required="true"
-                    class="prc-components-Input-IwWrt"
-                    data-component="input"
-                    data-testid="login-clientId"
-                    id="_r_ID_"
-                    name="clientId"
-                    placeholder="Your generated client id (20 characters)"
-                    type="text"
-                    value=""
-                  />
+                  <span>
+                    Client Secret
+                  </span>
+                  <span>
+                    *
+                  </span>
                 </span>
-              </div>
-              <div
-                class="prc-FormControl-ControlVerticalLayout-8YotI"
-                data-has-label=""
+              </label>
+              <span
+                aria-busy="false"
+                class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+                data-block="true"
+                data-trailing-action="true"
               >
-                <label
-                  class="prc-components-Label-2mrqP"
-                  for="_r_ID_"
-                >
-                  <span
-                    class="prc-components-RequiredText-7UsHS"
-                  >
-                    <span>
-                      Client Secret
-                    </span>
-                    <span>
-                      *
-                    </span>
-                  </span>
-                </label>
+                <input
+                  aria-invalid="false"
+                  aria-required="true"
+                  class="prc-components-Input-IwWrt"
+                  data-component="input"
+                  data-testid="login-clientSecret"
+                  id="_r_ID_"
+                  name="clientSecret"
+                  placeholder="Your generated client secret (40 characters)"
+                  type="password"
+                  value=""
+                />
                 <span
-                  aria-busy="false"
-                  class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
-                  data-block="true"
-                  data-trailing-action="true"
+                  class="TextInput-action prc-components-TextInputAction-CjGDX"
                 >
-                  <input
-                    aria-invalid="false"
-                    aria-required="true"
-                    class="prc-components-Input-IwWrt"
-                    data-component="input"
-                    data-testid="login-clientSecret"
-                    id="_r_ID_"
-                    name="clientSecret"
-                    placeholder="Your generated client secret (40 characters)"
-                    type="password"
-                    value=""
-                  />
-                  <span
-                    class="TextInput-action prc-components-TextInputAction-CjGDX"
+                  <button
+                    aria-labelledby="_r_ID_"
+                    class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
+                    data-variant="invisible"
+                    type="button"
                   >
-                    <button
-                      aria-labelledby="_r_ID_"
-                      class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
-                      data-component="IconButton"
-                      data-loading="false"
-                      data-no-visuals="true"
-                      data-size="small"
-                      data-variant="invisible"
-                      type="button"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="octicon octicon-eye"
-                        display="inline-block"
-                        fill="currentColor"
-                        focusable="false"
-                        height="16"
-                        overflow="visible"
-                        style="vertical-align: text-bottom;"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
-                        <path
-                          d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"
-                        />
-                      </svg>
-                    </button>
-                    <span
+                    <svg
                       aria-hidden="true"
-                      class="prc-TooltipV2-Tooltip-tLeuB"
-                      data-direction="s"
-                      id="_r_ID_"
-                      popover="auto"
+                      class="octicon octicon-eye"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="16"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="16"
                     >
-                      Show token
-                    </span>
+                      <path
+                        d="M8 2c1.981 0 3.671.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.671-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2ZM1.679 7.932a.12.12 0 0 0 0 .136c.411.622 1.241 1.75 2.366 2.717C5.176 11.758 6.527 12.5 8 12.5c1.473 0 2.825-.742 3.955-1.715 1.124-.967 1.954-2.096 2.366-2.717a.12.12 0 0 0 0-.136c-.412-.621-1.242-1.75-2.366-2.717C10.824 4.242 9.473 3.5 8 3.5c-1.473 0-2.825.742-3.955 1.715-1.124.967-1.954 2.096-2.366 2.717ZM8 10a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 10Z"
+                      />
+                    </svg>
+                  </button>
+                  <span
+                    aria-hidden="true"
+                    class="prc-TooltipV2-Tooltip-tLeuB"
+                    data-direction="s"
+                    id="_r_ID_"
+                    popover="auto"
+                  >
+                    Show token
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
+        </div>
+        <div
+          class="left-sidebar bg-gitify-footer"
+        >
           <div
-            class="left-sidebar bg-gitify-footer"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-direction="horizontal"
+            data-justify="space-between"
+            data-padding="condensed"
+            data-wrap="nowrap"
           >
+            <button
+              aria-describedby="_r_ID_"
+              class="prc-Button-ButtonBase-9n-Xk"
+              data-loading="false"
+              data-size="small"
+              data-testid="login-docs"
+              data-variant="default"
+              type="button"
+            >
+              <span
+                class="prc-Button-ButtonContent-Iohp5"
+                data-align="center"
+                data-component="buttonContent"
+              >
+                <span
+                  class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+                  data-component="leadingVisual"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-book"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="prc-Button-Label-FWkx3"
+                  data-component="text"
+                >
+                  Docs
+                </span>
+              </span>
+            </button>
+            <span
+              aria-hidden="true"
+              class="prc-TooltipV2-Tooltip-tLeuB"
+              data-direction="s"
+              id="_r_ID_"
+              popover="auto"
+              role="tooltip"
+            >
+              GitHub documentation
+            </span>
             <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="stretch"
-              data-direction="horizontal"
-              data-justify="space-between"
-              data-padding="condensed"
-              data-wrap="nowrap"
+              data-loading-wrapper="true"
             >
               <button
-                aria-describedby="_r_ID_"
                 class="prc-Button-ButtonBase-9n-Xk"
                 data-loading="false"
-                data-size="small"
-                data-testid="login-docs"
-                data-variant="default"
+                data-size="medium"
+                data-testid="login-submit"
+                data-variant="primary"
                 type="button"
               >
                 <span
@@ -824,7 +423,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-book"
+                      class="octicon octicon-sign-in"
                       display="inline-block"
                       fill="currentColor"
                       focusable="false"
@@ -835,7 +434,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                       width="16"
                     >
                       <path
-                        d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+                        d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
                       />
                     </svg>
                   </span>
@@ -843,122 +442,15 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     class="prc-Button-Label-FWkx3"
                     data-component="text"
                   >
-                    Docs
+                    Login
                   </span>
                 </span>
               </button>
-              <span
-                aria-hidden="true"
-                class="prc-TooltipV2-Tooltip-tLeuB"
-                data-direction="s"
-                id="_r_ID_"
-                popover="auto"
-                role="tooltip"
-              >
-                GitHub documentation
-              </span>
-              <div
-                data-loading-wrapper="true"
-              >
-                <button
-                  class="prc-Button-ButtonBase-9n-Xk"
-                  data-loading="false"
-                  data-size="medium"
-                  data-testid="login-submit"
-                  data-variant="primary"
-                  type="button"
-                >
-                  <span
-                    class="prc-Button-ButtonContent-Iohp5"
-                    data-align="center"
-                    data-component="buttonContent"
-                  >
-                    <span
-                      class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-                      data-component="leadingVisual"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="octicon octicon-sign-in"
-                        display="inline-block"
-                        fill="currentColor"
-                        focusable="false"
-                        height="16"
-                        overflow="visible"
-                        style="vertical-align: text-bottom;"
-                        viewBox="0 0 16 16"
-                        width="16"
-                      >
-                        <path
-                          d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
-                        />
-                      </svg>
-                    </span>
-                    <span
-                      class="prc-Button-Label-FWkx3"
-                      data-component="text"
-                    >
-                      Login
-                    </span>
-                  </span>
-                </button>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+  </div>
+</div>
 `;

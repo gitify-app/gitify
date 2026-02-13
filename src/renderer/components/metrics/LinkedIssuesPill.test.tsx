@@ -11,7 +11,7 @@ describe('renderer/components/metrics/LinkedIssuesPill.tsx', () => {
 
     const tree = renderWithAppContext(<LinkedIssuesPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders when linked to one issue/pr', () => {
@@ -19,7 +19,7 @@ describe('renderer/components/metrics/LinkedIssuesPill.tsx', () => {
 
     const tree = renderWithAppContext(<LinkedIssuesPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders when linked to multiple issues/prs', () => {
@@ -27,6 +27,6 @@ describe('renderer/components/metrics/LinkedIssuesPill.tsx', () => {
 
     const tree = renderWithAppContext(<LinkedIssuesPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

@@ -27,7 +27,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   describe('should render itself & its children - group by date', () => {
@@ -40,7 +40,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         settings: { ...mockSettings, groupBy: GroupBy.DATE },
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('with showNumber setting disabled', async () => {
@@ -56,7 +56,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         },
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('without notification number', async () => {
@@ -71,7 +71,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         settings: { ...mockSettings, groupBy: GroupBy.DATE },
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
   });
 

@@ -1,446 +1,144 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer/components/metrics/MilestonePill.tsx renders closed milestone pill 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        data-color-mode="light"
-        data-dark-theme="dark"
-        data-light-theme="light"
-      >
-        <div
-          class="prc-src-BaseStyles-aopSS"
-          data-portal-root="true"
-        >
-          <button
-            aria-describedby="_r_ID_"
-            type="button"
-          >
-            <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-              data-size="small"
-              data-variant="secondary"
-              tabindex="0"
-            >
-              <div
-                class="prc-Stack-Stack-UQ9k6"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="none"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-milestone text-gitify-icon-done"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="12"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="12"
-                >
-                  <path
-                    d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
-                  />
-                </svg>
-              </div>
-            </span>
-          </button>
-          <span
-            aria-hidden="true"
-            class="prc-TooltipV2-Tooltip-tLeuB"
-            data-direction="s"
-            id="_r_ID_"
-            popover="auto"
-            role="tooltip"
-          >
-            Milestone 1
-          </span>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
     <div
-      data-color-mode="light"
-      data-dark-theme="dark"
-      data-light-theme="light"
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
     >
-      <div
-        class="prc-src-BaseStyles-aopSS"
-        data-portal-root="true"
+      <button
+        aria-describedby="_r_ID_"
+        type="button"
       >
-        <button
-          aria-describedby="_r_ID_"
-          type="button"
-        >
-          <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-            data-size="small"
-            data-variant="secondary"
-            tabindex="0"
-          >
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-milestone text-gitify-icon-done"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
-                />
-              </svg>
-            </div>
-          </span>
-        </button>
         <span
-          aria-hidden="true"
-          class="prc-TooltipV2-Tooltip-tLeuB"
-          data-direction="s"
-          id="_r_ID_"
-          popover="auto"
-          role="tooltip"
+          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+          data-size="small"
+          data-variant="secondary"
+          tabindex="0"
         >
-          Milestone 1
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-milestone text-gitify-icon-done"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="12"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="12"
+            >
+              <path
+                d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
+              />
+            </svg>
+          </div>
         </span>
-      </div>
+      </button>
+      <span
+        aria-hidden="true"
+        class="prc-TooltipV2-Tooltip-tLeuB"
+        data-direction="s"
+        id="_r_ID_"
+        popover="auto"
+        role="tooltip"
+      >
+        Milestone 1
+      </span>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+  </div>
+</div>
 `;
 
 exports[`renderer/components/metrics/MilestonePill.tsx renders open milestone pill 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        data-color-mode="light"
-        data-dark-theme="dark"
-        data-light-theme="light"
-      >
-        <div
-          class="prc-src-BaseStyles-aopSS"
-          data-portal-root="true"
-        >
-          <button
-            aria-describedby="_r_ID_"
-            type="button"
-          >
-            <span
-              class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-              data-size="small"
-              data-variant="secondary"
-              tabindex="0"
-            >
-              <div
-                class="prc-Stack-Stack-UQ9k6"
-                data-align="center"
-                data-direction="horizontal"
-                data-gap="none"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-milestone text-gitify-icon-open"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="12"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="12"
-                >
-                  <path
-                    d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
-                  />
-                </svg>
-              </div>
-            </span>
-          </button>
-          <span
-            aria-hidden="true"
-            class="prc-TooltipV2-Tooltip-tLeuB"
-            data-direction="s"
-            id="_r_ID_"
-            popover="auto"
-            role="tooltip"
-          >
-            Milestone 1
-          </span>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
     <div
-      data-color-mode="light"
-      data-dark-theme="dark"
-      data-light-theme="light"
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
     >
-      <div
-        class="prc-src-BaseStyles-aopSS"
-        data-portal-root="true"
+      <button
+        aria-describedby="_r_ID_"
+        type="button"
       >
-        <button
-          aria-describedby="_r_ID_"
-          type="button"
-        >
-          <span
-            class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-            data-size="small"
-            data-variant="secondary"
-            tabindex="0"
-          >
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-direction="horizontal"
-              data-gap="none"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-milestone text-gitify-icon-open"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="12"
-              >
-                <path
-                  d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
-                />
-              </svg>
-            </div>
-          </span>
-        </button>
         <span
-          aria-hidden="true"
-          class="prc-TooltipV2-Tooltip-tLeuB"
-          data-direction="s"
-          id="_r_ID_"
-          popover="auto"
-          role="tooltip"
+          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+          data-size="small"
+          data-variant="secondary"
+          tabindex="0"
         >
-          Milestone 1
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-milestone text-gitify-icon-open"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="12"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="12"
+            >
+              <path
+                d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
+              />
+            </svg>
+          </div>
         </span>
-      </div>
+      </button>
+      <span
+        aria-hidden="true"
+        class="prc-TooltipV2-Tooltip-tLeuB"
+        data-direction="s"
+        id="_r_ID_"
+        popover="auto"
+        role="tooltip"
+      >
+        Milestone 1
+      </span>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+  </div>
+</div>
 `;
 
 exports[`renderer/components/metrics/MilestonePill.tsx renders with no milestone 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        data-color-mode="light"
-        data-dark-theme="dark"
-        data-light-theme="light"
-      >
-        <div
-          class="prc-src-BaseStyles-aopSS"
-          data-portal-root="true"
-        />
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
     <div
-      data-color-mode="light"
-      data-dark-theme="dark"
-      data-light-theme="light"
-    >
-      <div
-        class="prc-src-BaseStyles-aopSS"
-        data-portal-root="true"
-      />
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    />
+  </div>
+</div>
 `;

@@ -20,14 +20,14 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
 
   it('should render avatar - human user', () => {
     const tree = renderWithAppContext(<AvatarWithFallback {...props} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render avatar - non-human user', () => {
     const tree = renderWithAppContext(
       <AvatarWithFallback {...props} userType={'Organization'} />,
     );
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders the fallback icon when no src url - human user', () => {
@@ -35,7 +35,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
       <AvatarWithFallback {...props} src={null} />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders the fallback icon when no src url - non human user', () => {
@@ -43,7 +43,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
       <AvatarWithFallback {...props} src={null} userType="Bot" />,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders the fallback icon when the image fails to load (isBroken = true) - human user', () => {

@@ -6,6 +6,6 @@ describe('renderer/components/layout/Contents.tsx', () => {
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<Contents>Test</Contents>);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

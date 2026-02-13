@@ -16,13 +16,13 @@ describe('renderer/components/fields/RadioGroup.tsx', () => {
 
   it('should render', () => {
     const tree = renderWithAppContext(<RadioGroup {...props} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render as disabled', () => {
     const mockProps = { ...props, disabled: true };
 
     const tree = renderWithAppContext(<RadioGroup {...mockProps} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

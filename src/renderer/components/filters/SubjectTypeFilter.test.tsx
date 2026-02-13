@@ -9,6 +9,6 @@ describe('renderer/components/filters/SubjectTypeFilter.tsx', () => {
       notifications: mockMultipleAccountNotifications,
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

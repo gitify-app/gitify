@@ -9,6 +9,6 @@ describe('renderer/components/filters/StateFilter.tsx', () => {
       notifications: mockMultipleAccountNotifications,
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

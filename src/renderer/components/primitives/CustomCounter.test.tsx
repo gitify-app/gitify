@@ -6,6 +6,6 @@ describe('renderer/components/primitives/CustomCounter.tsx', () => {
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<CustomCounter value={100} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

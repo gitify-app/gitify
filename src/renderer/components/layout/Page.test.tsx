@@ -6,6 +6,6 @@ describe('renderer/components/layout/Page.tsx', () => {
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<Page testId="test">Test</Page>);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

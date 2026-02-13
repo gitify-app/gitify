@@ -6,6 +6,6 @@ describe('renderer/components/filters/RequiresDetailedNotificationsWarning.tsx',
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<RequiresDetailedNotificationWarning />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });
