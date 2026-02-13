@@ -25,7 +25,7 @@ describe('renderer/components/Oops.tsx', () => {
       tree = renderWithAppContext(<Oops error={mockError} />);
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - fallback to unknown error', async () => {
@@ -35,6 +35,6 @@ describe('renderer/components/Oops.tsx', () => {
       tree = renderWithAppContext(<Oops error={null} />);
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

@@ -32,7 +32,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   it('renders correctly', () => {
     const tree = renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('let us go back', async () => {

@@ -16,7 +16,7 @@ describe('renderer/components/layout/EmojiSplash.tsx', () => {
       });
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - heading and sub-heading', async () => {
@@ -34,6 +34,6 @@ describe('renderer/components/layout/EmojiSplash.tsx', () => {
       });
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

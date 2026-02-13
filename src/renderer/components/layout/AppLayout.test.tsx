@@ -12,6 +12,6 @@ describe('renderer/components/layout/AppLayout.tsx', () => {
       </MemoryRouter>,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

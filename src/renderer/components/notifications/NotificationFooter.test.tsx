@@ -28,7 +28,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   describe('security alerts should use github icon for avatar', () => {
@@ -42,7 +42,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
       const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('Repository Vulnerability Alert', async () => {
@@ -55,7 +55,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
       const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
   });
 
@@ -69,7 +69,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should open notification user profile', async () => {

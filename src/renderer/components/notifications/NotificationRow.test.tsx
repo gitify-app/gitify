@@ -32,7 +32,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       settings: { ...mockSettings, groupBy: GroupBy.DATE },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - group by repositories', async () => {
@@ -45,7 +45,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - hide numbers', async () => {
@@ -58,7 +58,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       settings: { ...mockSettings, showNumber: false },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - notification is read', async () => {
@@ -69,7 +69,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
     const tree = renderWithAppContext(<NotificationRow {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   describe('notification interactions', () => {

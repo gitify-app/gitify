@@ -8,7 +8,7 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
 
     const tree = renderWithAppContext(<MilestonePill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders open milestone pill', () => {
@@ -21,7 +21,7 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
 
     const tree = renderWithAppContext(<MilestonePill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders closed milestone pill', () => {
@@ -34,6 +34,6 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
 
     const tree = renderWithAppContext(<MilestonePill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

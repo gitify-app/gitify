@@ -23,12 +23,12 @@ describe('renderer/routes/Notifications.tsx', () => {
       notifications: mockMultipleAccountNotifications,
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children (all read notifications)', () => {
     const tree = renderWithAppContext(<NotificationsRoute />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children (show account header)', () => {
@@ -36,7 +36,7 @@ describe('renderer/routes/Notifications.tsx', () => {
       notifications: [mockMultipleAccountNotifications[0]],
       settings: { ...mockSettings, showAccountHeader: true },
     });
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   describe('should render itself & its children (error conditions - oops)', () => {
@@ -46,7 +46,7 @@ describe('renderer/routes/Notifications.tsx', () => {
         globalError: Errors.BAD_CREDENTIALS,
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('missing scopes', () => {
@@ -55,7 +55,7 @@ describe('renderer/routes/Notifications.tsx', () => {
         globalError: Errors.MISSING_SCOPES,
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('rate limited', () => {
@@ -64,7 +64,7 @@ describe('renderer/routes/Notifications.tsx', () => {
         globalError: Errors.RATE_LIMITED,
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('unknown error', () => {
@@ -73,7 +73,7 @@ describe('renderer/routes/Notifications.tsx', () => {
         globalError: Errors.UNKNOWN,
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('default error', () => {
@@ -82,7 +82,7 @@ describe('renderer/routes/Notifications.tsx', () => {
         globalError: null,
       });
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
   });
 });

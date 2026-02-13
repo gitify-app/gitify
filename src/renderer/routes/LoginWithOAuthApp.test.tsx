@@ -33,7 +33,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   it('renders correctly', () => {
     const tree = renderWithAppContext(<LoginWithOAuthAppRoute />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('let us go back', async () => {

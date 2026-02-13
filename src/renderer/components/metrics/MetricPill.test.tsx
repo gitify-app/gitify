@@ -17,7 +17,7 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
 
     const tree = renderWithAppContext(<MetricPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render without metric', () => {
@@ -29,6 +29,6 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
 
     const tree = renderWithAppContext(<MetricPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

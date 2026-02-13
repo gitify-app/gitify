@@ -8,7 +8,7 @@ describe('renderer/components/layout/Centered.tsx', () => {
       <Centered fullHeight={true}>Test</Centered>,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - full height false', () => {
@@ -16,6 +16,6 @@ describe('renderer/components/layout/Centered.tsx', () => {
       <Centered fullHeight={false}>Test</Centered>,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

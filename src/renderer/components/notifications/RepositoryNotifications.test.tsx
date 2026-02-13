@@ -33,7 +33,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - all notifications are read', () => {
@@ -47,7 +47,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should open the browser when clicking on the repo name', async () => {
@@ -116,7 +116,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should toggle repository notifications visibility', async () => {
@@ -132,6 +132,6 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     await userEvent.click(screen.getByTestId('repository-toggle'));
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

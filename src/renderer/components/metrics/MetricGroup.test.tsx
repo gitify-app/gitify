@@ -15,7 +15,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       settings: { ...mockSettings, showPills: false },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render pills when showPills is enabled', async () => {
@@ -28,6 +28,6 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       settings: { ...mockSettings, showPills: true },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

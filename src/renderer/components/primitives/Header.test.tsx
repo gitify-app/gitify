@@ -25,7 +25,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
       <Header icon={MarkGithubIcon}>Test Header</Header>,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should navigate back', async () => {

@@ -9,6 +9,6 @@ describe('renderer/components/primitives/HoverGroup.tsx', () => {
         Hover Group
       </HoverGroup>,
     );
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });
