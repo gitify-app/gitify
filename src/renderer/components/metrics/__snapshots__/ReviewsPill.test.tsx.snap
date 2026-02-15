@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/ReviewsPill.tsx renders nothing when no reviews 1`] = `
+exports[`renderer/components/metrics/ReviewsPill.tsx > renders nothing when no reviews 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -15,7 +15,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx renders nothing when no rev
 </div>
 `;
 
-exports[`renderer/components/metrics/ReviewsPill.tsx renders review pills when reviews exist 1`] = `
+exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when reviews exist 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -27,7 +27,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx renders review pills when r
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_1_"
         type="button"
       >
         <span
@@ -73,14 +73,14 @@ exports[`renderer/components/metrics/ReviewsPill.tsx renders review pills when r
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_1_"
         popover="auto"
         role="tooltip"
       >
         octocat approved these changes
       </span>
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_2_"
         type="button"
       >
         <span
@@ -126,7 +126,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx renders review pills when r
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_2_"
         popover="auto"
         role="tooltip"
       >

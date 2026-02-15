@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`] = `
+exports[`renderer/components/metrics/MetricPill.tsx > should render with metric 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -12,7 +12,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_1_"
         type="button"
       >
         <span
@@ -58,7 +58,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_1_"
         popover="auto"
         role="tooltip"
       >
@@ -69,7 +69,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render with metric 1`
 </div>
 `;
 
-exports[`renderer/components/metrics/MetricPill.tsx should render without metric 1`] = `
+exports[`renderer/components/metrics/MetricPill.tsx > should render without metric 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -81,7 +81,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_3_"
         type="button"
       >
         <span
@@ -122,7 +122,7 @@ exports[`renderer/components/metrics/MetricPill.tsx should render without metric
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_3_"
         popover="auto"
         role="tooltip"
       >

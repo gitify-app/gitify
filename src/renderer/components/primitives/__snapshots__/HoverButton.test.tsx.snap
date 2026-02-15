@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/primitives/HoverButton.tsx should render - disabled 1`] = `
+exports[`renderer/components/primitives/HoverButton.tsx > should render - disabled 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -15,7 +15,7 @@ exports[`renderer/components/primitives/HoverButton.tsx should render - disabled
 </div>
 `;
 
-exports[`renderer/components/primitives/HoverButton.tsx should render 1`] = `
+exports[`renderer/components/primitives/HoverButton.tsx > should render 1`] = `
 <div>
   <div
     data-color-mode="light"

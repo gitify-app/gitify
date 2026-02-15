@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/Oops.tsx should render itself & its children - fallback to unknown error 1`] = `
+exports[`renderer/components/Oops.tsx > should render itself & its children - fallback to unknown error 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -65,7 +65,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children - fall
 </div>
 `;
 
-exports[`renderer/components/Oops.tsx should render itself & its children - specified error 1`] = `
+exports[`renderer/components/Oops.tsx > should render itself & its children - specified error 1`] = `
 <div>
   <div
     data-color-mode="light"

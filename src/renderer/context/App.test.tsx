@@ -59,13 +59,20 @@ describe('renderer/context/App.tsx', () => {
 
   beforeEach(() => {
     vi.useFakeTimers();
-    (useNotifications as vi.Mock).mockReturnValue({
+    vi.mocked(useNotifications).mockReturnValue({
+      status: 'success',
+      globalError: null,
+      notifications: [],
+      notificationCount: 0,
+      hasNotifications: false,
+      unreadNotificationCount: 0,
+      hasUnreadNotifications: false,
       fetchNotifications: fetchNotificationsMock,
       markNotificationsAsRead: markNotificationsAsReadMock,
       markNotificationsAsDone: markNotificationsAsDoneMock,
       unsubscribeNotification: unsubscribeNotificationMock,
       removeAccountNotifications: removeAccountNotificationsMock,
-    });
+    } as ReturnType<typeof useNotifications>);
   });
 
   afterEach(() => {

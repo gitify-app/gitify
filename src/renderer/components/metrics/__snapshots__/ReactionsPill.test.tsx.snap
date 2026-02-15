@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/ReactionsPill.tsx renders when multiple reactions 1`] = `
+exports[`renderer/components/metrics/ReactionsPill.tsx > renders when multiple reactions 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -12,7 +12,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when multiple rea
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_4_"
         type="button"
       >
         <span
@@ -58,7 +58,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when multiple rea
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_4_"
         popover="auto"
         role="tooltip"
       >
@@ -202,7 +202,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when multiple rea
 </div>
 `;
 
-exports[`renderer/components/metrics/ReactionsPill.tsx renders when one reaction 1`] = `
+exports[`renderer/components/metrics/ReactionsPill.tsx > renders when one reaction 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -214,7 +214,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when one reaction
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_2_"
         type="button"
       >
         <span
@@ -260,7 +260,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when one reaction
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_2_"
         popover="auto"
         role="tooltip"
       >
@@ -292,7 +292,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx renders when one reaction
 </div>
 `;
 
-exports[`renderer/components/metrics/ReactionsPill.tsx renders with no reactions 1`] = `
+exports[`renderer/components/metrics/ReactionsPill.tsx > renders with no reactions 1`] = `
 <div>
   <div
     data-color-mode="light"

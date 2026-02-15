@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/CommentsPill.tsx renders with 1 comment 1`] = `
+exports[`renderer/components/metrics/CommentsPill.tsx > renders with 1 comment 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -12,7 +12,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx renders with 1 comment 1`]
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_2_"
         type="button"
       >
         <span
@@ -58,7 +58,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx renders with 1 comment 1`]
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_2_"
         popover="auto"
         role="tooltip"
       >
@@ -69,7 +69,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx renders with 1 comment 1`]
 </div>
 `;
 
-exports[`renderer/components/metrics/CommentsPill.tsx renders with multiple comments 1`] = `
+exports[`renderer/components/metrics/CommentsPill.tsx > renders with multiple comments 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -81,7 +81,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx renders with multiple comm
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_4_"
         type="button"
       >
         <span
@@ -127,7 +127,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx renders with multiple comm
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_4_"
         popover="auto"
         role="tooltip"
       >
@@ -138,7 +138,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx renders with multiple comm
 </div>
 `;
 
-exports[`renderer/components/metrics/CommentsPill.tsx renders with no comments (null) 1`] = `
+exports[`renderer/components/metrics/CommentsPill.tsx > renders with no comments (null) 1`] = `
 <div>
   <div
     data-color-mode="light"

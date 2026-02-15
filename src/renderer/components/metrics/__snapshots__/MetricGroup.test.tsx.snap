@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/MetricGroup.tsx should not render any pills when showPills is disabled 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > should not render any pills when showPills is disabled 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -15,7 +15,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx should not render any pills
 </div>
 `;
 
-exports[`renderer/components/metrics/MetricGroup.tsx should render pills when showPills is enabled 1`] = `
+exports[`renderer/components/metrics/MetricGroup.tsx > should render pills when showPills is enabled 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -30,7 +30,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx should render pills when sh
         class="flex gap-1"
       >
         <button
-          aria-describedby="_r_ID_"
+          aria-describedby="_r_2_"
           type="button"
         >
           <span
@@ -76,14 +76,14 @@ exports[`renderer/components/metrics/MetricGroup.tsx should render pills when sh
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="s"
-          id="_r_ID_"
+          id="_r_2_"
           popover="auto"
           role="tooltip"
         >
           octocat approved these changes
         </span>
         <button
-          aria-describedby="_r_ID_"
+          aria-describedby="_r_3_"
           type="button"
         >
           <span
@@ -129,7 +129,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx should render pills when sh
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="s"
-          id="_r_ID_"
+          id="_r_3_"
           popover="auto"
           role="tooltip"
         >

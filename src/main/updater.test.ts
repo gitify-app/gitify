@@ -35,7 +35,11 @@ vi.mock('electron-updater', () => ({
 
 // Mock electron (dialog + basic Menu API used by MenuBuilder constructor)
 vi.mock('electron', () => {
-  const MenuItem = vi.fn().mockImplementation((opts: unknown) => opts);
+  class MenuItem {
+    constructor(opts: unknown) {
+      Object.assign(this, opts);
+    }
+  }
   return {
     dialog: { showMessageBox: vi.fn() },
     MenuItem,
@@ -46,9 +50,9 @@ vi.mock('electron', () => {
 
 // Utility to emit mocked autoUpdater events
 const emit = (event: string, arg?: ListenerArgs) => {
-  for (const cb of listeners[event] || []) {
+  (listeners[event] || []).forEach((cb) => {
     cb(arg);
-  }
+  });
 };
 
 // Re-import autoUpdater after mocking
@@ -87,7 +91,10 @@ describe('main/updater.ts', () => {
 
   describe('update available dialog', () => {
     it('shows dialog with expected message and does NOT install when user chooses Later', async () => {
-      (dialog.showMessageBox as vi.Mock).mockResolvedValue({ response: 1 }); // "Later"
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 1, // "Later" button index
+        checkboxChecked: false,
+      });
 
       await updater.start();
 
@@ -114,7 +121,10 @@ describe('main/updater.ts', () => {
     });
 
     it('invokes quitAndInstall when user clicks Restart', async () => {
-      (dialog.showMessageBox as vi.Mock).mockResolvedValue({ response: 0 }); // "Restart"
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 0, // "Restart" button index
+        checkboxChecked: false,
+      });
 
       await updater.start();
       emit('update-downloaded', { releaseName: 'v9.9.9' });
@@ -281,7 +291,7 @@ describe('main/updater.ts', () => {
         await updater.start();
         // initial + first deferred scheduled invocation
         expect(
-          (autoUpdater.checkForUpdatesAndNotify as vi.Mock).mock.calls.length,
+          vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length,
         ).toBe(2);
         expect(setTimeoutSpy).toHaveBeenCalledWith(
           expect.any(Function),

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
+exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (dark) 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -60,7 +60,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (dark) 1`] = `
 </div>
 `;
 
-exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = `
+exports[`renderer/components/icons/LogoIcon.tsx > renders correctly (light) 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -120,7 +120,7 @@ exports[`renderer/components/icons/LogoIcon.tsx renders correctly (light) 1`] = 
 </div>
 `;
 
-exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
+exports[`renderer/components/icons/LogoIcon.tsx > should render large size 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -180,7 +180,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render large size 1`] = `
 </div>
 `;
 
-exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = `
+exports[`renderer/components/icons/LogoIcon.tsx > should render medium size 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -240,7 +240,7 @@ exports[`renderer/components/icons/LogoIcon.tsx should render medium size 1`] = 
 </div>
 `;
 
-exports[`renderer/components/icons/LogoIcon.tsx should render small size 1`] = `
+exports[`renderer/components/icons/LogoIcon.tsx > should render small size 1`] = `
 <div>
   <div
     data-color-mode="light"

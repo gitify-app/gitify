@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/settings/SettingsFooter.tsx should show app version 1`] = `
+exports[`renderer/components/settings/SettingsFooter.tsx > should show app version 1`] = `
 <button
-  aria-describedby="_r_ID_"
+  aria-describedby="_r_1_"
   class="prc-Button-ButtonBase-9n-Xk"
   data-loading="false"
   data-no-visuals="true"

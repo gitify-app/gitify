@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/RepositoryNotifications.tsx should render itself & its children - all notifications are read 1`] = `
+exports[`renderer/components/notifications/RepositoryNotifications.tsx > should render itself & its children - all notifications are read 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -141,7 +141,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
 </div>
 `;
 
-exports[`renderer/components/notifications/RepositoryNotifications.tsx should render itself & its children 1`] = `
+exports[`renderer/components/notifications/RepositoryNotifications.tsx > should render itself & its children 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -340,7 +340,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
 </div>
 `;
 
-exports[`renderer/components/notifications/RepositoryNotifications.tsx should toggle repository notifications visibility 1`] = `
+exports[`renderer/components/notifications/RepositoryNotifications.tsx > should toggle repository notifications visibility 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -546,7 +546,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
 </div>
 `;
 
-exports[`renderer/components/notifications/RepositoryNotifications.tsx should use default repository icon when avatar is not available 1`] = `
+exports[`renderer/components/notifications/RepositoryNotifications.tsx > should use default repository icon when avatar is not available 1`] = `
 <div>
   <div
     data-color-mode="light"

@@ -1,3 +1,5 @@
+import * as actualOAuthMethods from '@octokit/oauth-methods';
+
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockRawUser } from '../api/__mocks__/response-mocks';
@@ -27,7 +29,7 @@ import {
 } from './utils';
 
 vi.mock('@octokit/oauth-methods', () => ({
-  ...vi.requireActual('@octokit/oauth-methods'),
+  ...actualOAuthMethods,
   createDeviceCode: vi.fn(),
   exchangeDeviceCode: vi.fn(),
   exchangeWebFlowCode: vi.fn(),

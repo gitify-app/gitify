@@ -3,10 +3,23 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
+  css: {
+    // Disable CSS processing for tests
+    modules: {
+      localsConvention: 'camelCase',
+    },
+  },
   test: {
     globals: true,
     pool: 'threads',
     setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
+    css: false, // Disable CSS processing for tests
+    // Server configuration to handle external dependencies
+    server: {
+      deps: {
+        inline: ['@primer/react', '@primer/css'],
+      },
+    },
     coverage: {
       enabled: false,
       provider: 'v8',
@@ -34,6 +47,7 @@ export default defineConfig({
         test: {
           name: 'happy-dom [preload, renderer]',
           environment: 'happy-dom',
+          css: true,
           include: [
             'src/preload/**/*.test.{ts,tsx}',
             'src/renderer/**/*.test.{ts,tsx}',

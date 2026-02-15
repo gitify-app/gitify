@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/NotificationFooter.tsx security alerts should use github icon for avatar Repository Dependabot Alerts Thread 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > security alerts should use github icon for avatar > Repository Dependabot Alerts Thread 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -64,6 +64,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           <relative-time
             datetime="2017-05-20T17:51:57.000Z"
           >
+            #shadow-root
             May 20, 2017
           </relative-time>
         </div>
@@ -71,7 +72,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_4_"
             type="button"
           >
             <span
@@ -117,14 +118,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_4_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_5_"
             type="button"
           >
             <span
@@ -170,7 +171,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_5_"
             popover="auto"
             role="tooltip"
           >
@@ -183,7 +184,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationFooter.tsx security alerts should use github icon for avatar Repository Vulnerability Alert 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > security alerts should use github icon for avatar > Repository Vulnerability Alert 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -247,6 +248,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           <relative-time
             datetime="2017-05-20T17:51:57.000Z"
           >
+            #shadow-root
             May 20, 2017
           </relative-time>
         </div>
@@ -254,7 +256,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_7_"
             type="button"
           >
             <span
@@ -300,14 +302,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_7_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_8_"
             type="button"
           >
             <span
@@ -353,7 +355,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_8_"
             popover="auto"
             role="tooltip"
           >
@@ -366,7 +368,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationFooter.tsx should default to known avatar if no user found 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > should default to known avatar if no user found 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -431,6 +433,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           <relative-time
             datetime="2017-05-20T17:51:57.000Z"
           >
+            #shadow-root
             May 20, 2017
           </relative-time>
         </div>
@@ -438,7 +441,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_a_"
             type="button"
           >
             <span
@@ -484,14 +487,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_a_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_b_"
             type="button"
           >
             <span
@@ -537,7 +540,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_b_"
             popover="auto"
             role="tooltip"
           >
@@ -550,7 +553,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should default
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationFooter.tsx should render itself & its children 1`] = `
+exports[`renderer/components/notifications/NotificationFooter.tsx > should render itself & its children 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -614,6 +617,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           <relative-time
             datetime="2017-05-20T17:51:57.000Z"
           >
+            #shadow-root
             May 20, 2017
           </relative-time>
         </div>
@@ -621,7 +625,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           class="flex gap-1"
         >
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_1_"
             type="button"
           >
             <span
@@ -667,14 +671,14 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_1_"
             popover="auto"
             role="tooltip"
           >
             octocat approved these changes
           </span>
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_2_"
             type="button"
           >
             <span
@@ -720,7 +724,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="s"
-            id="_r_ID_"
+            id="_r_2_"
             popover="auto"
             role="tooltip"
           >

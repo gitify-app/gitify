@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/filters/FilterSection.tsx should be able to toggle filter value - none already set 1`] = `
+exports[`renderer/components/filters/FilterSection.tsx > should be able to toggle filter value - none already set 1`] = `
 <div
   class="prc-Stack-Stack-UQ9k6"
   data-align="stretch"
@@ -226,7 +226,7 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
 </div>
 `;
 
-exports[`renderer/components/filters/FilterSection.tsx should be able to toggle filter value - some filters already set 1`] = `
+exports[`renderer/components/filters/FilterSection.tsx > should be able to toggle filter value - some filters already set 1`] = `
 <div
   class="prc-Stack-Stack-UQ9k6"
   data-align="stretch"
@@ -453,7 +453,7 @@ exports[`renderer/components/filters/FilterSection.tsx should be able to toggle 
 </div>
 `;
 
-exports[`renderer/components/filters/FilterSection.tsx should render itself & its children with detailed notifications disabled 1`] = `
+exports[`renderer/components/filters/FilterSection.tsx > should render itself & its children > with detailed notifications disabled 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -734,7 +734,7 @@ exports[`renderer/components/filters/FilterSection.tsx should render itself & it
 </div>
 `;
 
-exports[`renderer/components/filters/FilterSection.tsx should render itself & its children with detailed notifications enabled 1`] = `
+exports[`renderer/components/filters/FilterSection.tsx > should render itself & its children > with detailed notifications enabled 1`] = `
 <div>
   <div
     data-color-mode="light"

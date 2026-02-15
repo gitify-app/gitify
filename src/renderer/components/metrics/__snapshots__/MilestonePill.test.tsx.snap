@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/MilestonePill.tsx renders closed milestone pill 1`] = `
+exports[`renderer/components/metrics/MilestonePill.tsx > renders closed milestone pill 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -12,7 +12,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx renders closed milestone 
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_4_"
         type="button"
       >
         <span
@@ -53,7 +53,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx renders closed milestone 
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_4_"
         popover="auto"
         role="tooltip"
       >
@@ -64,7 +64,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx renders closed milestone 
 </div>
 `;
 
-exports[`renderer/components/metrics/MilestonePill.tsx renders open milestone pill 1`] = `
+exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone pill 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -76,7 +76,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx renders open milestone pi
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_2_"
         type="button"
       >
         <span
@@ -117,7 +117,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx renders open milestone pi
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_2_"
         popover="auto"
         role="tooltip"
       >
@@ -128,7 +128,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx renders open milestone pi
 </div>
 `;
 
-exports[`renderer/components/metrics/MilestonePill.tsx renders with no milestone 1`] = `
+exports[`renderer/components/metrics/MilestonePill.tsx > renders with no milestone 1`] = `
 <div>
   <div
     data-color-mode="light"

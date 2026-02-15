@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - closed 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - closed 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -15,7 +15,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 </div>
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - input token invalid 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - input token invalid 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -62,7 +62,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 </div>
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - input token valid 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - input token valid 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -122,7 +122,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 </div>
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open with detailed notifications enabled 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - open with detailed notifications enabled 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -226,7 +226,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render i
 </div>
 `;
 
-exports[`renderer/components/filters/SearchFilterSuggestions.tsx should render itself & its children - open without detailed notifications enabled 1`] = `
+exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render itself & its children - open without detailed notifications enabled 1`] = `
 <div>
   <div
     data-color-mode="light"

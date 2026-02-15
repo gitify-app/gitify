@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/layout/Centered.tsx should render itself & its children - full height false 1`] = `
+exports[`renderer/components/layout/Centered.tsx > should render itself & its children - full height false 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -26,7 +26,7 @@ exports[`renderer/components/layout/Centered.tsx should render itself & its chil
 </div>
 `;
 
-exports[`renderer/components/layout/Centered.tsx should render itself & its children - full height true 1`] = `
+exports[`renderer/components/layout/Centered.tsx > should render itself & its children - full height true 1`] = `
 <div>
   <div
     data-color-mode="light"

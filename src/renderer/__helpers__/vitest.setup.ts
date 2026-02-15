@@ -1,15 +1,14 @@
 import '@testing-library/jest-dom/vitest';
 
+// Sets timezone to UTC for consistent date/time in tests and snapshots
+process.env.TZ = 'UTC';
+
 /**
- * Primer React testing helpers (per docs)
+ * Primer React testing helpers
+ * Note: @primer/react/test-helpers uses Jest internally, so we provide our own mocks
  * - https://primer.style/product/getting-started/react/#testing
  * - https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
  */
-// import '@primer/react/test-helpers';
-
-import { TextEncoder } from 'node:util';
-
-vi.mock('*.css', () => ({}));
 
 /**
  * Gitify context bridge API
@@ -68,3 +67,45 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 });
+
+// Mock IntersectionObserver for Primer React components
+class MockIntersectionObserver {
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
+}
+(globalThis as Record<string, unknown>).IntersectionObserver =
+  MockIntersectionObserver;
+
+// Mock HTMLMediaElement.play - must return a Promise
+globalThis.HTMLMediaElement.prototype.play = vi
+  .fn()
+  .mockResolvedValue(undefined);
+
+// Mock ResizeObserver as a class (must be a constructor)
+class MockResizeObserver {
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
+}
+globalThis.ResizeObserver = MockResizeObserver;
+
+// Mock adoptedStyleSheets for Primer React components
+// jsdom doesn't support adoptedStyleSheets, so we need to mock it
+Object.defineProperty(document, 'adoptedStyleSheets', {
+  value: [],
+  writable: true,
+  configurable: true,
+});
+
+// Mock ShadowRoot adoptedStyleSheets for web components
+const originalAttachShadow = Element.prototype.attachShadow;
+Element.prototype.attachShadow = function (init: ShadowRootInit): ShadowRoot {
+  const shadowRoot = originalAttachShadow.call(this, init);
+  Object.defineProperty(shadowRoot, 'adoptedStyleSheets', {
+    value: [],
+    writable: true,
+    configurable: true,
+  });
+  return shadowRoot;
+};

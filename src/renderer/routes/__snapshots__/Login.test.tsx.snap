@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
+exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
 <div>
   <div
     data-color-mode="light"
