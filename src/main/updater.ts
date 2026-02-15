@@ -132,7 +132,10 @@ export default class AppUpdater {
     // This avoids an immediate duplicate check on startup.
     setTimeout(async () => {
       await runScheduledCheck();
-      this.periodicInterval = setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+      this.periodicInterval = setInterval(
+        runScheduledCheck,
+        APPLICATION.UPDATE_CHECK_INTERVAL_MS,
+      );
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
   }
 
