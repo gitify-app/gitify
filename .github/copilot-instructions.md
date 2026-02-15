@@ -96,7 +96,7 @@ Warnings are acceptable - the important part is that it completes successfully.
 ### Configuration Files
 - **package.json**: Main project configuration and scripts
 - **biome.json**: Linting and formatting rules
-- **jest.config.ts**: Test configuration
+- **vitest.config.ts**: Test configuration
 - **tsconfig.json**: TypeScript configuration
 - **tailwind.config.ts**: CSS framework configuration
 

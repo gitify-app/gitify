@@ -1,8 +1,8 @@
 const MockOctokit = vi.fn().mockImplementation(() => ({
-  request: jest.fn(),
-  graphql: jest.fn(),
+  request: vi.fn(),
+  graphql: vi.fn(),
   paginate: {
-    iterator: jest.fn(),
+    iterator: vi.fn(),
   },
 }));
 
