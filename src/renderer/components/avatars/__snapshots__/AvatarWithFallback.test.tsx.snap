@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
 
 exports[`renderer/components/avatars/AvatarWithFallback.tsx renders the fallback icon when no src url - human user 1`] = `
 <div>

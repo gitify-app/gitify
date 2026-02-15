@@ -1,27 +1,27 @@
 import { EVENTS } from '../shared/events';
 
 // Mocks shared modules used inside preload
-const sendMainEventMock = jest.fn();
-const invokeMainEventMock = jest.fn();
-const onRendererEventMock = jest.fn();
-const logErrorMock = jest.fn();
+const sendMainEventMock = vi.fn();
+const invokeMainEventMock = vi.fn();
+const onRendererEventMock = vi.fn();
+const logErrorMock = vi.fn();
 
-jest.mock('./utils', () => ({
+vi.mock('./utils', () => ({
   sendMainEvent: (...args: unknown[]) => sendMainEventMock(...args),
   invokeMainEvent: (...args: unknown[]) => invokeMainEventMock(...args),
   onRendererEvent: (...args: unknown[]) => onRendererEventMock(...args),
 }));
 
-jest.mock('../shared/logger', () => ({
+vi.mock('../shared/logger', () => ({
   logError: (...args: unknown[]) => logErrorMock(...args),
 }));
 
 // We'll reconfigure the electron mock per context isolation scenario.
-const exposeInMainWorldMock = jest.fn();
-const getZoomLevelMock = jest.fn(() => 1);
-const setZoomLevelMock = jest.fn((_level: number) => undefined);
+const exposeInMainWorldMock = vi.fn();
+const getZoomLevelMock = vi.fn(() => 1);
+const setZoomLevelMock = vi.fn((_level: number) => undefined);
 
-jest.mock('electron', () => ({
+vi.mock('electron', () => ({
   contextBridge: {
     exposeInMainWorld: (key: string, value: unknown) =>
       exposeInMainWorldMock(key, value),
@@ -61,7 +61,7 @@ interface TestApi {
 
 describe('preload/index', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // default to non-isolated environment for most tests
     (process as unknown as { contextIsolated?: boolean }).contextIsolated =
       false;
@@ -69,7 +69,7 @@ describe('preload/index', () => {
 
   const importPreload = async () => {
     // Ensure a fresh module instance each time
-    jest.resetModules();
+    vi.resetModules();
     return await import('./index');
   };
 
@@ -149,7 +149,7 @@ describe('preload/index', () => {
     await importPreload();
 
     const api = (window as unknown as { gitify: TestApi }).gitify;
-    const callbackMock = jest.fn();
+    const callbackMock = vi.fn();
     api.onSystemThemeUpdate(callbackMock);
 
     expect(onRendererEventMock).toHaveBeenCalledWith(
@@ -168,7 +168,7 @@ describe('preload/index', () => {
     await importPreload();
 
     const api = (window as unknown as { gitify: TestApi }).gitify;
-    api.app.show = jest.fn();
+    api.app.show = vi.fn();
 
     const notification = api.raiseNativeNotification(
       'Title',
@@ -184,8 +184,8 @@ describe('preload/index', () => {
     await importPreload();
 
     const api = (window as unknown as { gitify: TestApi }).gitify;
-    api.app.hide = jest.fn();
-    api.openExternalLink = jest.fn();
+    api.app.hide = vi.fn();
+    api.openExternalLink = vi.fn();
 
     const notification = api.raiseNativeNotification(
       'Title',

@@ -21,14 +21,16 @@ import * as storage from './storage';
 
 describe('renderer/utils/comms.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('openExternalLink', () => {
     it('should open an external link', () => {
-      jest.spyOn(storage, 'loadState').mockReturnValue({
-        settings: { ...mockSettings, openLinks: OpenPreference.BACKGROUND },
-      });
+      vi.spyOn(storage, 'loadState';
+      ).mockReturnValue(
+      ...mockSettings, openLinks: OpenPreference.BACKGROUND
+      ,
+      )
 
       openExternalLink('https://gitify.io/' as Link);
 
@@ -40,9 +42,11 @@ describe('renderer/utils/comms.ts', () => {
     });
 
     it('should open in foreground when preference set to FOREGROUND', () => {
-      jest.spyOn(storage, 'loadState').mockReturnValue({
-        settings: { ...mockSettings, openLinks: OpenPreference.FOREGROUND },
-      });
+      vi.spyOn(storage, 'loadState';
+      ).mockReturnValue(
+      ...mockSettings, openLinks: OpenPreference.FOREGROUND
+      ,
+      )
 
       openExternalLink('https://gitify.io/' as Link);
 
@@ -53,7 +57,10 @@ describe('renderer/utils/comms.ts', () => {
     });
 
     it('should use default open preference if user settings not found', () => {
-      jest.spyOn(storage, 'loadState').mockReturnValue({ settings: null });
+      vi.spyOn(storage, 'loadState';
+      ).mockReturnValue(
+      settings: null;
+      )
 
       openExternalLink('https://gitify.io/' as Link);
 

@@ -11,10 +11,10 @@ import {
 } from './zoom';
 
 describe('renderer/utils/zoom.ts', () => {
-  window.gitify.zoom.setLevel = jest.fn();
+  window.gitify.zoom.setLevel = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should convert percentage to zoom level', () => {

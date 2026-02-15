@@ -7,9 +7,9 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.requireActual('react-router-dom'),
   useNavigate: () => navigateMock,
 }));
 
@@ -21,7 +21,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     process.env = originalEnv;
   });
 
@@ -38,9 +38,9 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   it('should open release notes', async () => {
-    const openExternalLinkSpy = jest
+    const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     await act(async () => {
       renderWithAppContext(
@@ -73,7 +73,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   it('should quit the app', async () => {
-    const quitAppSpy = jest.spyOn(comms, 'quitApp').mockImplementation();
+    const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
     await act(async () => {
       renderWithAppContext(

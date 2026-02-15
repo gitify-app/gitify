@@ -18,7 +18,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   describe('enrich', () => {
-    const getReleaseSpy = jest.spyOn(apiClient, 'getRelease');
+    const getReleaseSpy = vi.spyOn(apiClient, 'getRelease');
 
     const mockAuthor = mockRawUser('some-author');
 

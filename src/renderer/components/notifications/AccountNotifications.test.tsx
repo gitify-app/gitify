@@ -17,7 +17,7 @@ import {
   type AccountNotificationsProps,
 } from './AccountNotifications';
 
-jest.mock('./RepositoryNotifications', () => ({
+vi.mock('./RepositoryNotifications', () => ({
   RepositoryNotifications: () => <div>RepositoryNotifications</div>,
 }));
 
@@ -118,9 +118,9 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open profile when clicked', async () => {
-    const openAccountProfileSpy = jest
+    const openAccountProfileSpy = vi
       .spyOn(links, 'openAccountProfile')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
@@ -138,9 +138,9 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open my issues when clicked', async () => {
-    const openGitHubIssuesSpy = jest
+    const openGitHubIssuesSpy = vi
       .spyOn(links, 'openGitHubIssues')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
@@ -160,9 +160,9 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open my pull requests when clicked', async () => {
-    const openGitHubPullsSpy = jest
+    const openGitHubPullsSpy = vi
       .spyOn(links, 'openGitHubPulls')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,

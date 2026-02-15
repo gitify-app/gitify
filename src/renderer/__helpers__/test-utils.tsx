@@ -93,5 +93,5 @@ export function renderWithAppContext(
  * Ensure stable snapshots for our randomized emoji use-cases
  */
 export function ensureStableEmojis() {
-  globalThis.Math.random = jest.fn(() => 0.1);
+  globalThis.Math.random = vi.fn(() => 0.1);
 }

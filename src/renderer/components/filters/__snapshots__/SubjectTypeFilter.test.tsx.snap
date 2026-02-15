@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
 
 exports[`renderer/components/filters/SubjectTypeFilter.tsx should render itself & its children 1`] = `
 <div>

@@ -26,11 +26,11 @@ import {
   getNewTokenURL,
 } from './utils';
 
-jest.mock('@octokit/oauth-methods', () => ({
-  ...jest.requireActual('@octokit/oauth-methods'),
-  createDeviceCode: jest.fn(),
-  exchangeDeviceCode: jest.fn(),
-  exchangeWebFlowCode: jest.fn(),
+vi.mock('@octokit/oauth-methods', () => ({
+  ...vi.requireActual('@octokit/oauth-methods'),
+  createDeviceCode: vi.fn(),
+  exchangeDeviceCode: vi.fn(),
+  exchangeWebFlowCode: vi.fn(),
 }));
 
 import {
@@ -41,24 +41,24 @@ import {
 
 import type { GetAuthenticatedUserResponse } from '../api/types';
 
-const createDeviceCodeMock = createDeviceCode as jest.MockedFunction<
+const createDeviceCodeMock = createDeviceCode as vi.MockedFunction<
   typeof createDeviceCode
 >;
-const exchangeDeviceCodeMock = exchangeDeviceCode as jest.MockedFunction<
+const exchangeDeviceCodeMock = exchangeDeviceCode as vi.MockedFunction<
   typeof exchangeDeviceCode
 >;
-const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
+const exchangeWebFlowCodeMock = exchangeWebFlowCode as vi.MockedFunction<
   typeof exchangeWebFlowCode
 >;
 
 describe('renderer/utils/auth/utils.ts', () => {
-  jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
-  const openExternalLinkSpy = jest
+  vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('performGitHubDeviceOAuth', () => {
@@ -107,11 +107,9 @@ describe('renderer/utils/auth/utils.ts', () => {
     };
 
     it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
-      window.gitify.onAuthCallback = jest
-        .fn()
-        .mockImplementation((callback) => {
-          callback('gitify://oauth?code=123-456');
-        });
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        callback('gitify://oauth?code=123-456');
+      });
 
       const res = await authUtils.performGitHubWebOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
@@ -136,13 +134,11 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should call performGitHubWebOAuth - failure', async () => {
-      window.gitify.onAuthCallback = jest
-        .fn()
-        .mockImplementation((callback) => {
-          callback(
-            'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
-          );
-        });
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        callback(
+          'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
+        );
+      });
 
       await expect(
         async () => await authUtils.performGitHubWebOAuth(webAuthOptions),
@@ -206,7 +202,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     const mockAuthenticatedResponse = mockRawUser('authenticated-user');
 
-    const fetchAuthenticatedUserDetailsSpy = jest.spyOn(
+    const fetchAuthenticatedUserDetailsSpy = vi.spyOn(
       apiClient,
       'fetchAuthenticatedUserDetails',
     );

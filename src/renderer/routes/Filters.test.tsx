@@ -5,18 +5,18 @@ import { renderWithAppContext } from '../__helpers__/test-utils';
 
 import { FiltersRoute } from './Filters';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.requireActual('react-router-dom'),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/Filters.tsx', () => {
-  const clearFiltersMock = jest.fn();
-  const fetchNotificationsMock = jest.fn();
+  const clearFiltersMock = vi.fn();
+  const fetchNotificationsMock = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('General', () => {

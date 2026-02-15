@@ -138,9 +138,9 @@ describe('renderer/utils/api/errors.ts', () => {
 
   describe('handleGraphQLResponseError', () => {
     it('throws and logs when GraphQL errors are present', () => {
-      const rendererLogErrorSpy = jest
+      const rendererLogErrorSpy = vi
         .spyOn(rendererLogger, 'rendererLogError')
-        .mockImplementation();
+        .mockImplementation(vi.fn());
 
       const payload = createGraphQLResponseError('Something went wrong');
 

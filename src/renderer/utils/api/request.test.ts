@@ -6,56 +6,53 @@ import * as octokitModule from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
 
 // Manually mock Octokit for these tests
-jest.mock('@octokit/core', () => {
+vi.mock('@octokit/core', () => {
   const mockOctokit = {
-    request: jest.fn(),
-    graphql: jest.fn(),
-    paginate: { iterator: jest.fn() },
+    request: vi.fn(),
+    graphql: vi.fn(),
+    paginate: { iterator: vi.fn() },
   };
 
-  const MockOctokitClass = jest.fn(() => mockOctokit);
+  const MockOctokitClass = vi.fn(() => mockOctokit);
   // biome-ignore lint/suspicious/noExplicitAny: Mock type
-  (MockOctokitClass as any).plugin = jest.fn(() => MockOctokitClass);
+  (MockOctokitClass as any).plugin = vi.fn(() => MockOctokitClass);
 
   return { Octokit: MockOctokitClass };
 });
 
-jest.mock('@octokit/plugin-paginate-rest', () => ({
+vi.mock('@octokit/plugin-paginate-rest', () => ({
   // biome-ignore lint/suspicious/noExplicitAny: Mock type
-  paginateRest: jest.fn((octokit: any) => octokit),
+  paginateRest: vi.fn((octokit: any) => octokit),
 }));
 
-jest.mock('@octokit/plugin-rest-endpoint-methods', () => ({
+vi.mock('@octokit/plugin-rest-endpoint-methods', () => ({
   // biome-ignore lint/suspicious/noExplicitAny: Mock type
-  restEndpointMethods: jest.fn((octokit: any) => octokit),
+  restEndpointMethods: vi.fn((octokit: any) => octokit),
 }));
 
 describe('renderer/utils/api/request.ts', () => {
   let mockOctokitInstance: {
-    request: jest.Mock;
-    graphql: jest.Mock;
-    paginate: { iterator: jest.Mock };
+    request: vi.Mock;
+    graphql: vi.Mock;
+    paginate: { iterator: vi.Mock };
   };
 
-  const createOctokitClientSpy = jest.spyOn(
-    octokitModule,
-    'createOctokitClient',
-  );
+  const createOctokitClientSpy = vi.spyOn(octokitModule, 'createOctokitClient');
 
   beforeEach(() => {
     mockOctokitInstance = {
-      request: jest.fn(),
-      graphql: jest.fn(),
-      paginate: { iterator: jest.fn() },
+      request: vi.fn(),
+      graphql: vi.fn(),
+      paginate: { iterator: vi.fn() },
     };
 
-    jest
-      .spyOn(octokitModule, 'createOctokitClient')
-      .mockResolvedValue(mockOctokitInstance as unknown as OctokitClient);
+    vi.spyOn(octokitModule, 'createOctokitClient').mockResolvedValue(
+      mockOctokitInstance as unknown as OctokitClient,
+    );
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('performGraphQLRequest - perform call with correct params', async () => {

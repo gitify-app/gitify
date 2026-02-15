@@ -9,21 +9,21 @@ import { mockSettings } from '../__mocks__/state-mocks';
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', () => ({
+  ...vi.requireActual('react-router-dom'),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/components/Sidebar.tsx', () => {
-  const fetchNotificationsMock = jest.fn();
-  const updateSettingMock = jest.fn();
-  const openExternalLinkSpy = jest
+  const fetchNotificationsMock = vi.fn();
+  const updateSettingMock = vi.fn();
+  const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children (logged in)', () => {
@@ -308,7 +308,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   });
 
   it('should quit the app', async () => {
-    const quitAppSpy = jest.spyOn(comms, 'quitApp').mockImplementation();
+    const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
     renderWithAppContext(
       <MemoryRouter>

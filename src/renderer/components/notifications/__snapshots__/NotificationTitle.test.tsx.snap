@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
 
 exports[`renderer/components/notifications/NotificationTitle.tsx should apply truncate className when wrapNotificationTitle is false 1`] = `
 <div>

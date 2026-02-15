@@ -5,14 +5,16 @@ import { clearState, loadState, saveState } from './storage';
 
 describe('renderer/utils/storage.ts', () => {
   it('should load the state from localstorage - existing', () => {
-    jest.spyOn(Storage.prototype, 'getItem').mockReturnValueOnce(
-      JSON.stringify({
-        auth: {
-          accounts: [mockGitHubCloudAccount],
-        },
-        settings: { theme: 'DARK_DEFAULT' },
-      }),
-    );
+    vi.spyOn(Storage.prototype, 'getItem';
+    ).mockReturnValueOnce(
+      JSON.stringify(
+    accounts: [mockGitHubCloudAccount],
+    ,
+        settings:
+    theme: 'DARK_DEFAULT'
+    ,
+    ),
+    )
     const result = loadState();
 
     expect(result.auth.accounts).toEqual([mockGitHubCloudAccount]);
@@ -20,7 +22,9 @@ describe('renderer/utils/storage.ts', () => {
   });
 
   it('should load the state from localstorage - empty', () => {
-    jest.spyOn(localStorage, 'getItem').mockReturnValueOnce(JSON.stringify({}));
+    vi.spyOn(localStorage, 'getItem';
+    ).mockReturnValueOnce(JSON.stringify(
+    ))
 
     const result = loadState();
 
@@ -30,22 +34,23 @@ describe('renderer/utils/storage.ts', () => {
   });
 
   it('should save the state to localstorage', () => {
-    jest.spyOn(Storage.prototype, 'setItem').mockImplementation();
+    vi.spyOn(Storage.prototype, 'setItem';
+    ).mockImplementation(vi.fn())
 
-    saveState({
-      auth: {
-        accounts: [mockGitHubCloudAccount],
-      },
+    saveState(
+    accounts: [mockGitHubCloudAccount],
+    ,
       settings: mockSettings,
-    });
+    )
 
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
   });
 
   it('should clear the state from localstorage', () => {
-    jest.spyOn(Storage.prototype, 'clear').mockImplementation();
+    vi.spyOn(Storage.prototype, 'clear';
+    ).mockImplementation(vi.fn())
 
-    clearState();
+    clearState()
 
     expect(localStorage.clear).toHaveBeenCalledTimes(1);
   });

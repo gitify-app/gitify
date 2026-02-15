@@ -27,7 +27,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
   });
 
   describe('enrich', () => {
-    const fetchIssueByNumberSpy = jest.spyOn(apiClient, 'fetchIssueByNumber');
+    const fetchIssueByNumberSpy = vi.spyOn(apiClient, 'fetchIssueByNumber');
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock issue',

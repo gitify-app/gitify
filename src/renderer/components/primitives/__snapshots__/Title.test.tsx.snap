@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://vijs.io/docs/snapshot-testing
 
 exports[`renderer/routes/components/primitives/Title.tsx should render the title - default size 1`] = `
 <div>

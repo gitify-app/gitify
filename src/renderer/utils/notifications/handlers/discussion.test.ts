@@ -28,7 +28,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   });
 
   describe('enrich', () => {
-    const fetchDiscussionByNumberSpy = jest.spyOn(
+    const fetchDiscussionByNumberSpy = vi.spyOn(
       apiClient,
       'fetchDiscussionByNumber',
     );
@@ -42,7 +42,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('answered discussion state - no stateReason', async () => {

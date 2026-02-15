@@ -1,10 +1,10 @@
 import path from 'node:path';
 
-const existsSyncMock = jest.fn();
-const mkdirSyncMock = jest.fn();
-const writeFileSyncMock = jest.fn();
+const existsSyncMock = vi.fn();
+const mkdirSyncMock = vi.fn();
+const writeFileSyncMock = vi.fn();
 
-jest.mock('node:fs', () => ({
+vi.mock('node:fs', () => ({
   __esModule: true,
   default: {
     existsSync: (...a: unknown[]) => existsSyncMock(...a),
@@ -16,13 +16,13 @@ jest.mock('node:fs', () => ({
   writeFileSync: (...a: unknown[]) => writeFileSyncMock(...a),
 }));
 
-const moveToApplicationsFolderMock = jest.fn();
-const isInApplicationsFolderMock = jest.fn(() => false);
-const getPathMock = jest.fn(() => '/User/Data');
+const moveToApplicationsFolderMock = vi.fn();
+const isInApplicationsFolderMock = vi.fn(() => false);
+const getPathMock = vi.fn(() => '/User/Data');
 
-const showMessageBoxMock = jest.fn(async () => ({ response: 0 }));
+const showMessageBoxMock = vi.fn(async () => ({ response: 0 }));
 
-jest.mock('electron', () => ({
+vi.mock('electron', () => ({
   app: {
     getPath: () => getPathMock(),
     isInApplicationsFolder: () => isInApplicationsFolderMock(),
@@ -31,13 +31,13 @@ jest.mock('electron', () => ({
   dialog: { showMessageBox: () => showMessageBoxMock() },
 }));
 
-const logErrorMock = jest.fn();
-jest.mock('../shared/logger', () => ({
+const logErrorMock = vi.fn();
+vi.mock('../shared/logger', () => ({
   logError: (...a: unknown[]) => logErrorMock(...a),
 }));
 
 let mac = true;
-jest.mock('../shared/platform', () => ({ isMacOS: () => mac }));
+vi.mock('../shared/platform', () => ({ isMacOS: () => mac }));
 
 import { APPLICATION } from '../shared/constants';
 
@@ -49,7 +49,7 @@ function configPath() {
 
 describe('main/first-run', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mac = true;
   });
 

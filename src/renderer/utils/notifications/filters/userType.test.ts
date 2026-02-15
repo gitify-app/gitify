@@ -6,7 +6,7 @@ import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('isNonHumanUser', () => {

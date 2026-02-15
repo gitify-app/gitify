@@ -1,2 +1,2 @@
 // biome-ignore lint/suspicious/noExplicitAny: Mock file
-export const paginateRest = jest.fn((octokit: any) => octokit);
+export const paginateRest = vi.fn((octokit: any) => octokit);

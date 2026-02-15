@@ -58,7 +58,7 @@ window.gitify = {
   raiseNativeNotification: jest.fn(),
 };
 
-globalThis.HTMLMediaElement.prototype.play = jest.fn();
+globalThis.HTMLMediaElement.prototype.play = vi.fn();
 
 globalThis.matchMedia = (query: string): MediaQueryList => ({
   matches: false,

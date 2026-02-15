@@ -21,7 +21,7 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   });
 
   it('should click on the logo', async () => {
-    const onClickMock = jest.fn();
+    const onClickMock = vi.fn();
     renderWithAppContext(<LogoIcon onClick={onClickMock} size={Size.SMALL} />);
 
     await userEvent.click(screen.getByLabelText('Gitify Logo'));
