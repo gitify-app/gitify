@@ -124,7 +124,6 @@
     "html-webpack-plugin": "5.6.6",
     "happy-dom": "20.6.1",
     "husky": "9.1.7",
-    "identity-obj-proxy": "3.0.0",
     "mini-css-extract-plugin": "2.10.0",
     "postcss": "8.5.6",
     "postcss-loader": "8.2.0",
