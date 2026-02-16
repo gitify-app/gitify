@@ -1,5 +1,6 @@
 import type { ExecutionResult } from 'graphql';
 
+import type { DeepPartial } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
@@ -33,6 +34,7 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
+import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
 import * as apiRequests from './request';
 
@@ -63,8 +65,12 @@ describe('renderer/utils/api/client.ts', () => {
 
   beforeEach(() => {
     // Mock createOctokitClient to return our mock
-    createOctokitClientSpy.mockResolvedValue(mockOctokit as any);
-    createOctokitClientUncachedSpy.mockResolvedValue(mockOctokit as any);
+    createOctokitClientSpy.mockResolvedValue(
+      mockOctokit as unknown as OctokitClient,
+    );
+    createOctokitClientUncachedSpy.mockResolvedValue(
+      mockOctokit as unknown as OctokitClient,
+    );
 
     // Mock Octokit REST method
     mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue(
