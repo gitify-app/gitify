@@ -17,6 +17,8 @@ import {
   exchangeWebFlowCode,
 } from '@octokit/oauth-methods';
 
+import type { MockedFunction } from 'vitest';
+
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockRawUser } from '../api/__mocks__/response-mocks';
@@ -46,15 +48,16 @@ import {
   getNewTokenURL,
 } from './utils';
 
-const createDeviceCodeMock = createDeviceCode as vi.MockedFunction<
+const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<
   typeof createDeviceCode
 >;
-const exchangeDeviceCodeMock = exchangeDeviceCode as vi.MockedFunction<
+
+const exchangeDeviceCodeMock = exchangeDeviceCode as unknown as MockedFunction<
   typeof exchangeDeviceCode
 >;
-const exchangeWebFlowCodeMock = exchangeWebFlowCode as vi.MockedFunction<
-  typeof exchangeWebFlowCode
->;
+
+const exchangeWebFlowCodeMock =
+  exchangeWebFlowCode as unknown as MockedFunction<typeof exchangeWebFlowCode>;
 
 describe('renderer/utils/auth/utils.ts', () => {
   vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());

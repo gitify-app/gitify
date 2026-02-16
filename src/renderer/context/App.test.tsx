@@ -1,4 +1,4 @@
-import { act, waitFor } from '@testing-library/react';
+import { act } from '@testing-library/react';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';

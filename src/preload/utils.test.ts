@@ -30,9 +30,9 @@ import { ipcRenderer } from 'electron';
 
 describe('preload/utils', () => {
   afterEach(() => {
-    (ipcRenderer.send as vi.Mock).mockClear();
-    (ipcRenderer.invoke as vi.Mock).mockClear();
-    (ipcRenderer.on as vi.Mock).mockClear();
+    vi.mocked(ipcRenderer.send).mockClear();
+    vi.mocked(ipcRenderer.invoke).mockClear();
+    vi.mocked(ipcRenderer.on).mockClear();
   });
 
   it('sendMainEvent forwards to ipcRenderer.send', () => {

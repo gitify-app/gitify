@@ -14,7 +14,9 @@ import type { Menubar } from 'menubar';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 
-type MockMenubar = { window: { webContents: { send: vi.Mock } } };
+type MockMenubar = {
+  window: { webContents: { send: ReturnType<typeof vi.fn> } };
+};
 
 describe('main/events', () => {
   beforeEach(() => {

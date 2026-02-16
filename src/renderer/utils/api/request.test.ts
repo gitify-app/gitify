@@ -32,9 +32,9 @@ vi.mock('@octokit/plugin-rest-endpoint-methods', () => ({
 
 describe('renderer/utils/api/request.ts', () => {
   let mockOctokitInstance: {
-    request: vi.Mock;
-    graphql: vi.Mock;
-    paginate: { iterator: vi.Mock };
+    request: ReturnType<typeof vi.fn>;
+    graphql: ReturnType<typeof vi.fn>;
+    paginate: { iterator: ReturnType<typeof vi.fn> };
   };
 
   const createOctokitClientSpy = vi.spyOn(octokitModule, 'createOctokitClient');
