@@ -82,8 +82,8 @@ importers:
         specifier: 19.21.2
         version: 19.21.2(react@19.2.4)
       '@primer/react':
-        specifier: 38.9.0
-        version: 38.9.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
+        specifier: 38.11.0
+        version: 38.11.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
       '@tailwindcss/postcss':
         specifier: 4.1.18
         version: 4.1.18
@@ -1829,8 +1829,8 @@ packages:
     resolution: {integrity: sha512-YLT9Zo3oNPJoBjBc4q8G2mjU4tqIbf5CEOORbUUr48dCD9q3umJ3IPlVqOqDakPfd2HuwccBaqlGhN4Gmr5OWg==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@primer/behaviors@1.10.0':
-    resolution: {integrity: sha512-+GaAqCJuoYVf0Sy67mJfhw7k17nrCnfanI4H6NFEyToDC1ghrOC9Yl7627WTWpqGg+1lPhjF7OHF7VClLz52oA==}
+  '@primer/behaviors@1.10.2':
+    resolution: {integrity: sha512-93juWZbWg2DRhC11+7RT7hMpY1VD3lBosLmccqEZ65yrCHqkBCjI8Uj8wxs3y0U+wWE07LAoLHAPylyWbifg5A==}
 
   '@primer/css@22.1.0':
     resolution: {integrity: sha512-Nwg9QaRiBeu0BU6h+Su0X07daihX1obiuqGRG8y+SexOnvWhN2J5n4OFAvGfQsit07Y7Q6gGoK+yVU5tb8CtDA==}
@@ -1850,8 +1850,8 @@ packages:
   '@primer/primitives@11.3.2':
     resolution: {integrity: sha512-/8EDh3MmF9cbmrLETFmIuNFIdvpSCkvBlx6zzD8AZ4dZ5UYExQzFj8QAtIrRtCFJ2ZmW5QrtrPR3+JVb8KEDpg==}
 
-  '@primer/react@38.9.0':
-    resolution: {integrity: sha512-ST0kGTWLtgPaLJ0aF7HwhvcuZMMW2FKf5z2kBE9hAvajy5Jp2H604zq1+UU547NEnjtOpPUhvh0eK5a0aPIN5g==}
+  '@primer/react@38.11.0':
+    resolution: {integrity: sha512-00sHDkSjGcB/AAfWC7PK20Upx6AVSo6gYX8Mdiu8L+cgGEVjzznlqBpa8tSqJJdabQZo6kkwd53eAff5yj09vw==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -5519,6 +5519,7 @@ packages:
   tar@7.5.7:
     resolution: {integrity: sha512-fov56fJiRuThVFXD6o6/Q354S7pnWMJIVlDBYijsTNx6jKSE4pvrDTs6lUnmGvNyfJwFQQwWy3owKz1ucIhveQ==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   temp-file@3.4.0:
     resolution: {integrity: sha512-C5tjlC/HCtVUOi3KWVokd4vHVViOmGjtLwIh4MuzPo/nMYTV/p1urt3RnMz2IWXDdKEGJH3k5+KPxtqRsUYGtg==}
@@ -8151,7 +8152,7 @@ snapshots:
 
   '@pkgr/core@0.2.7': {}
 
-  '@primer/behaviors@1.10.0': {}
+  '@primer/behaviors@1.10.2': {}
 
   '@primer/css@22.1.0(@primer/primitives@11.3.2)':
     dependencies:
@@ -8167,14 +8168,14 @@ snapshots:
 
   '@primer/primitives@11.3.2': {}
 
-  '@primer/react@38.9.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)':
+  '@primer/react@38.11.0(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react-is@18.3.0)(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 4.5.0
       '@github/tab-container-element': 4.8.2
       '@lit-labs/react': 1.2.1
       '@oddbird/popover-polyfill': 0.5.2
-      '@primer/behaviors': 1.10.0
+      '@primer/behaviors': 1.10.2
       '@primer/live-region-element': 0.7.1
       '@primer/octicons-react': 19.21.2(react@19.2.4)
       '@primer/primitives': 11.3.2
@@ -8285,7 +8286,7 @@ snapshots:
 
   '@testing-library/dom@10.0.0':
     dependencies:
-      '@babel/code-frame': 7.28.6
+      '@babel/code-frame': 7.29.0
       '@babel/runtime': 7.28.4
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
