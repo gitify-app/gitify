@@ -4,22 +4,19 @@
   "compilerOptions": {
     "incremental": true,
     "target": "ES2024",
-    "module": "ESNext",
+    "module": "commonjs",
     "lib": ["ES2024", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
     "outDir": "./build/",
     "types": ["vitest/globals"],
 
     "esModuleInterop": true,
-    "moduleResolution": "Node",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
 
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    "resolveJsonModule": true
+    "noFallthroughCasesInSwitch": true
   }
 }
