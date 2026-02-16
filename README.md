@@ -44,7 +44,7 @@ pnpm dev
 See [CONTRIBUTING.md](CONTRIBUTING.md) for full development and contribution instructions.
 
 
-### FAQ
+## FAQ
 
 See our [Gitify FAQs][faqs] for answers to common questions.
 
@@ -55,7 +55,7 @@ See our [Gitify FAQs][faqs] for answers to common questions.
 - See [CONTRIBUTING.md](CONTRIBUTING.md) for more ways to get involved
 
 
-### License
+## License
 
 Gitify is licensed under the MIT Open Source license. 
 For more information, see [LICENSE](LICENSE).
