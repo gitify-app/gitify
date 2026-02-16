@@ -22,7 +22,7 @@
 1. **Download** Gitify for free from [gitify.io][website].
 2. **Install** and launch the app for your platform.
 3. **Authenticate** with your GitHub account, Personal Access Token or OAuth client/secret and start receiving notifications.
-4. 
+
 
 #### Homebrew
 macOS users can also install via [Homebrew][brew]
