@@ -21,7 +21,7 @@ jobs:
         run: pnpm tsc --noEmit
 
       - name: Run tests with coverage
-        run: pnpm test:coverage --verbose
+        run: pnpm test
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0

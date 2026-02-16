@@ -5,7 +5,7 @@
 @import "@primer/css/dist/primer.css";
 
 /** Tailwind CSS Configuration */
-@config "../../tailwind.config.ts";
+@config "../../tailwind.config.mts";
 
 html,
 body,

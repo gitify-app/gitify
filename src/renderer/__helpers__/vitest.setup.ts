@@ -7,13 +7,6 @@ process.env.TZ = 'UTC';
 process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
 
 /**
- * Primer React testing helpers
- * Note: @primer/react/test-helpers uses Jest internally, so we provide our own mocks
- * - https://primer.style/product/getting-started/react/#testing
- * - https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
- */
-
-/**
  * Gitify context bridge API
  */
 window.gitify = {
@@ -51,68 +44,7 @@ window.gitify = {
   raiseNativeNotification: vi.fn(),
 };
 
-// prevent ReferenceError: TextEncoder is not defined
-// window.TextEncoder = TextEncoder;
-
-window.HTMLMediaElement.prototype.play = vi.fn();
-
-// Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: vi.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: vi.fn(),
-    removeListener: vi.fn(),
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
-});
-
-// Mock IntersectionObserver for Primer React components
-// class MockIntersectionObserver {
-//   observe = vi.fn();
-//   unobserve = vi.fn();
-//   disconnect = vi.fn();
-// }
-// (globalThis as Record<string, unknown>).IntersectionObserver =
-//   MockIntersectionObserver;
-
-// Mock HTMLMediaElement.play - must return a Promise
-globalThis.HTMLMediaElement.prototype.play = vi
-  .fn()
-  .mockResolvedValue(undefined);
-
-// Mock ResizeObserver as a class (must be a constructor)
-class MockResizeObserver {
-  observe = vi.fn();
-  unobserve = vi.fn();
-  disconnect = vi.fn();
-}
-globalThis.ResizeObserver = MockResizeObserver;
-
-// Mock adoptedStyleSheets for Primer React components
-// // jsdom doesn't support adoptedStyleSheets, so we need to mock it
-// Object.defineProperty(document, 'adoptedStyleSheets', {
-//   value: [],
-//   writable: true,
-//   configurable: true,
-// });
-
-// Mock ShadowRoot adoptedStyleSheets for web components
-// const originalAttachShadow = Element.prototype.attachShadow;
-// Element.prototype.attachShadow = function (init: ShadowRootInit): ShadowRoot {
-//   const shadowRoot = originalAttachShadow.call(this, init);
-//   Object.defineProperty(shadowRoot, 'adoptedStyleSheets', {
-//     value: [],
-//     writable: true,
-//     configurable: true,
-//   });
-//   return shadowRoot;
-// };
-
+// Mock clipboard API
 Object.defineProperty(navigator, 'clipboard', {
   value: {
     writeText: vi.fn().mockResolvedValue(undefined),
@@ -120,3 +52,20 @@ Object.defineProperty(navigator, 'clipboard', {
   },
   configurable: true,
 });
+
+/**
+ * Primer React testing helpers
+ * Note: @primer/react/test-helpers uses Jest internally, so we provide our own mocks
+ * - https://primer.style/product/getting-started/react/#testing
+ * - https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
+ */
+
+// Mock `showPopover` used by Primer React TooltipV2
+if (!('showPopover' in HTMLElement.prototype)) {
+  (HTMLElement.prototype as any).showPopover = vi.fn();
+}
+
+// Mock `hidePopover` used by Primer React TooltipV2
+if (!('hidePopover' in HTMLElement.prototype)) {
+  (HTMLElement.prototype as any).hidePopover = vi.fn();
+}

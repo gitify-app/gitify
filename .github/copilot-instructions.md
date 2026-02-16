@@ -38,11 +38,9 @@ Gitify is a Node.js/Electron desktop application that displays GitHub notificati
   - `pnpm tsc --noEmit` -- takes 5 seconds. NEVER CANCEL. Set timeout to 10+ minutes.
 - **Run unit tests**:
   - `pnpm test` -- takes 67 seconds. NEVER CANCEL. Set timeout to 30+ minutes.
-  - Uses Jest with jsdom environment
+  - Uses Vitest with happy-dom environment
   - NOTE: Some existing snapshot tests may fail but still return success - this is normal
   - Update snapshots after legitimate UI changes with `pnpm test -u`
-- **Run tests with coverage** (CI format):
-  - `pnpm test --verbose`
 
 ## Validation Scenarios
 

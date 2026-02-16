@@ -99,26 +99,29 @@ describe('renderer/context/App.tsx', () => {
     it('fetch notifications each interval', async () => {
       renderWithAppContext(<AppProvider>{null}</AppProvider>);
 
-      await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
-      );
+      // Initial fetch happens on mount - advance timers to ensure it runs
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(0);
+      });
 
-      act(() => {
-        vi.advanceTimersByTime(
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
-      act(() => {
-        vi.advanceTimersByTime(
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
-      act(() => {
-        vi.advanceTimersByTime(
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
@@ -285,7 +288,10 @@ describe('renderer/context/App.tsx', () => {
   describe('authentication functions', () => {
     const addAccountSpy = vi
       .spyOn(authUtils, 'addAccount')
-      .mockImplementation(vi.fn());
+      .mockImplementation(vi.fn())
+      .mockResolvedValueOnce({
+        accounts: [mockGitHubCloudAccount],
+      } as unknown as AuthState);
     const removeAccountSpy = vi.spyOn(authUtils, 'removeAccount');
 
     beforeEach(() => {
@@ -325,8 +331,8 @@ describe('renderer/context/App.tsx', () => {
     it('loginWithDeviceFlowComplete calls addAccount', async () => {
       const getContext = renderWithContext();
 
-      act(() => {
-        getContext().loginWithDeviceFlowComplete(
+      await act(async () => {
+        await getContext().loginWithDeviceFlowComplete(
           'token' as Token,
           Constants.GITHUB_HOSTNAME,
         );
@@ -362,7 +368,9 @@ describe('renderer/context/App.tsx', () => {
     it('logoutFromAccount calls removeAccountNotifications, removeAccount', async () => {
       const getContext = renderWithContext();
 
-      getContext().logoutFromAccount(mockGitHubCloudAccount);
+      act(() => {
+        getContext().logoutFromAccount(mockGitHubCloudAccount);
+      });
 
       expect(removeAccountNotificationsMock).toHaveBeenCalledWith(
         mockGitHubCloudAccount,

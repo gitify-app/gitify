@@ -3,16 +3,9 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [react()],
-  css: {
-    // Disable CSS processing for tests
-    modules: {
-      localsConvention: 'camelCase',
-    },
-  },
   test: {
     globals: true,
     pool: 'threads',
-    css: false, // Disable CSS processing for tests
     // Server configuration to handle external dependencies
     server: {
       deps: {

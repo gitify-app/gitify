@@ -110,7 +110,7 @@ describe('renderer/utils/icons.ts', () => {
     });
   });
 
-  describe('getAuthMethodIcon', () => {
+  it('getAuthMethodIcon', () => {
     expect(getAuthMethodIcon('GitHub App')).toMatchSnapshot();
 
     expect(getAuthMethodIcon('OAuth App')).toMatchSnapshot();
@@ -118,7 +118,7 @@ describe('renderer/utils/icons.ts', () => {
     expect(getAuthMethodIcon('Personal Access Token')).toMatchSnapshot();
   });
 
-  describe('getPlatformIcon', () => {
+  it('getPlatformIcon', () => {
     expect(getPlatformIcon('GitHub Cloud')).toMatchSnapshot();
 
     expect(getPlatformIcon('GitHub Enterprise Server')).toMatchSnapshot();
@@ -128,7 +128,7 @@ describe('renderer/utils/icons.ts', () => {
     ).toMatchSnapshot();
   });
 
-  describe('getDefaultUserIcon', () => {
+  it('getDefaultUserIcon', () => {
     expect(getDefaultUserIcon('Bot')).toBe(MarkGithubIcon);
     expect(getDefaultUserIcon('EnterpriseUserAccount')).toBe(FeedPersonIcon);
     expect(getDefaultUserIcon('Mannequin')).toBe(MarkGithubIcon);

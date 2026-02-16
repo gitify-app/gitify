@@ -80,7 +80,7 @@ describe('main/menu.ts', () => {
     menuBuilder.buildMenu();
     return (Menu.buildFromTemplate as Mock).mock.calls.slice(
       -1,
-    )[0] as TemplateItem[];
+    )[0][0] as TemplateItem[];
   };
 
   beforeEach(() => {
