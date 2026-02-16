@@ -115,7 +115,6 @@
     "husky": "9.1.7",
     "rimraf": "6.1.2",
     "semver": "7.7.4",
-    "styled-components": "6.3.9",
     "tailwind-merge": "3.4.0",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3",
