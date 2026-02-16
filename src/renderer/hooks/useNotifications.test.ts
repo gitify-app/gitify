@@ -147,7 +147,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -176,7 +178,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       vi.spyOn(apiClient, 'fetchNotificationDetailsForList').mockResolvedValue(
         new Map(),
@@ -310,7 +314,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithSound = {
         auth: {
@@ -342,7 +348,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithNotifications = {
         auth: {
@@ -374,7 +382,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithBoth = {
         auth: {
@@ -532,7 +542,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -643,8 +655,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
         ];
 
       vi.spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValueOnce(mockCloudNotifications as any)
-        .mockResolvedValueOnce(mockEnterpriseNotifications as any);
+        .mockResolvedValueOnce(
+          mockCloudNotifications as ListNotificationsForAuthenticatedUserResponse,
+        )
+        .mockResolvedValueOnce(
+          mockEnterpriseNotifications as ListNotificationsForAuthenticatedUserResponse,
+        );
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -730,7 +746,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -1032,7 +1050,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(mockNotifications as any);
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithSingleAccount = {
         auth: {
