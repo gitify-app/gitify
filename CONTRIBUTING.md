@@ -1,47 +1,45 @@
 # Gitify Contributing Guide
 
-Hi! We're really excited that you're interested in contributing to Gitify! Before submitting your contribution, please read through the following guide. We also suggest you read the [Project Philosophy](#project-philosophy) in our documentation.
+Hi! We're really excited that you're interested in contributing to Gitify! 
 
-### Installation
+Before submitting your contribution, please read through the following guide. 
 
-To get started, you'll need to clone the repository and install the dependencies.
+We also suggest you read the [Project Philosophy](#project-philosophy) in our documentation.
 
-```shell
-pnpm install
-```
-
-### Development
-
+### Getting Started
 > [!TIP]
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
 > ```shell
 > OAUTH_CLIENT_ID="123" pnpm build
 > ```
 
+To get started:
+
+Clone the repository and install dependencies:
+  ```shell
+  pnpm install
+  ```
+
 Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token.  This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
 ```shell
 GITHUB_TOKEN=<some personal access token>
-```  
-
-To watch for changes (`webpack`) in the `src` directory:
-
-```shell
-pnpm watch
 ```
 
-To run the **electron app**:
+Build static resources (tray icons, twemojis, etc). You only need to rebuild if you change static assets:
+  ```shell
+  pnpm build
+  ```
 
-```shell
-pnpm start
-```
-
-To reload the app with the changes that `pnpm watch` has detected, you can use the `CmdOrCtrl+R` shortcut.
+Start development mode (includes GraphQL codegen and hot module reload):
+  ```shell
+  pnpm dev
+  ```
 
 ### Tests
 
-There are 2 checks:
-1. linter & formatter with [biome][biome-website]
-2. unit tests with [jvitestt][vitest-website]
+There are two main checks:
+1. Linter & formatter with [Biome][biome-website]
+2. Unit tests with [Vitest][vitest-website]
 
 ```shell
 # Run biome to check linting and formatting
@@ -53,6 +51,17 @@ pnpm test
 # Update vitest snapshots
 pnpm test -u
 ```
+
+### Code Style & Conventions
+
+- We use [Biome][biome-website] for linting and formatting. Please run `pnpm lint:check` before submitting a PR.
+- Follow existing file and folder naming conventions.
+- Keep commit messages clear and descriptive.
+
+### How to Report Bugs or Request Features
+
+If you encounter a bug or have a feature request, please [open an issue][github-issues] with clear steps to reproduce or a detailed description of your idea. Check for existing issues before creating a new one.
+
 
 ### Releases
 
@@ -95,6 +104,7 @@ This project is a tool for monitoring new notifications from GitHub. It's not me
 <!-- LINK LABELS -->
 [biome-website]: https://biomejs.dev/
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
+[github-issues]: https://github.com/setchy/gitify/issues
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
 [github-new-milestone]: https://github.com/gitify-app/gitify/milestones/new
 [github-new-release]: https://github.com/gitify-app/gitify/releases/new
