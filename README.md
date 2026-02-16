@@ -6,23 +6,54 @@
 
 ![Gitify][gitify-social]
 
-### Download
+---
 
-You can download Gitify for **free** from [gitify.io][website] or install it via [Homebrew Cask][brew].
+## Features
 
+- 🔔 Unified notifications from GitHub Cloud & GitHub Enterprise Server
+- 💻 Cross-platform: macOS, Windows, and Linux
+- 🎨 Customizable settings, filters and themes
+- 🖥️ Tray/menu bar integration
+- ⚡ Fast, native experience
+
+
+## Quick Start
+
+1. **Download** Gitify for free from [gitify.io][website].
+2. **Install** and launch the app for your platform.
+3. **Authenticate** with your GitHub account, Personal Access Token or OAuth client/secret and start receiving notifications.
+4. 
+
+#### Homebrew
+macOS users can also install via [Homebrew][brew]
 ```shell
 brew install gitify
 ```
 
-Gitify supports macOS, Windows and Linux.
+
+## Build & Development
+
+To build and run Gitify locally:
+
+```shell
+pnpm install
+pnpm build
+pnpm dev
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full development and contribution instructions.
+
 
 ### FAQ
 
-Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
+See our [Gitify FAQs][faqs] for answers to common questions.
 
-### Contributing
 
-Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
+## Community & Support
+
+- Open an [issue][github-issues] for bugs or feature requests
+- See [CONTRIBUTING.md](CONTRIBUTING.md) for more ways to get involved
+
 
 ### License
 
@@ -37,6 +68,7 @@ For more information, see [LICENSE](LICENSE).
 
 [github]: https://github.com/gitify-app/gitify
 [github-actions]: https://github.com/gitify-app/gitify/actions
+[github-issues]: https://github.com/gitify-app/gitify/issues
 [github-releases]: https://github.com/gitify-app/gitify/releases/latest
 [github-website]: https://github.com/gitify-app/website
 [github-website-pulls]: https://github.com/gitify-app/website/pulls
