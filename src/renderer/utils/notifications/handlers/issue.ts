@@ -57,7 +57,7 @@ class IssueHandler extends DefaultHandler {
       labels:
         issue.labels?.nodes.map((label) => ({
           name: label.name,
-          color: (label as any).color,
+          color: label.color,
         })) ?? [],
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,

@@ -408,7 +408,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         apiClient,
         'listNotificationsForAuthenticatedUser',
       ).mockResolvedValue(
-        [] satisfies Partial<ListNotificationsForAuthenticatedUserResponse> as any,
+        [] satisfies Partial<ListNotificationsForAuthenticatedUserResponse>,
       );
 
       const stateWithBoth = {
@@ -441,7 +441,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
   describe('markNotificationsAsRead', () => {
     it('should mark notifications as read with success', async () => {
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const { result } = renderHook(() => useNotifications());
@@ -535,7 +535,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       ).mockResolvedValue(mockNotifications as any);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const stateWithFetchRead = {
@@ -647,7 +647,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         .mockResolvedValueOnce(mockEnterpriseNotifications as any);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const stateWithMultipleAccounts = {
@@ -733,7 +733,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       ).mockResolvedValue(mockNotifications as any);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const stateWithFetchRead = {
@@ -787,7 +787,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
   describe('markNotificationsAsDone', () => {
     it('should mark notifications as done with success', async () => {
       vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const { result } = renderHook(() => useNotifications());
@@ -853,10 +853,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue({} as any);
+      ).mockResolvedValue(undefined);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const { result } = renderHook(() => useNotifications());
@@ -879,10 +879,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue({} as any);
+      ).mockResolvedValue(undefined);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const { result } = renderHook(() => useNotifications());
@@ -938,10 +938,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue({} as any);
+      ).mockResolvedValue(undefined);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const { result } = renderHook(() => useNotifications());
@@ -971,10 +971,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue({} as any);
+      ).mockResolvedValue(undefined);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        {} as any,
+        undefined,
       );
 
       const { result } = renderHook(() => useNotifications());
