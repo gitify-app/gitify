@@ -20,20 +20,20 @@ import * as sound from '../utils/notifications/sound';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {
-  const rendererLogErrorSpy = jest
+  const rendererLogErrorSpy = vi
     .spyOn(logger, 'rendererLogError')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
-  const raiseSoundNotificationSpy = jest
+  const raiseSoundNotificationSpy = vi
     .spyOn(sound, 'raiseSoundNotification')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
-  const raiseNativeNotificationSpy = jest
+  const raiseNativeNotificationSpy = vi
     .spyOn(native, 'raiseNativeNotification')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Reset mock notification state between tests since it's mutated
     // FIXME - isolate test data between tests
     mockGitifyNotification.unread = true;
@@ -144,9 +144,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
         },
       };
 
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -172,13 +175,16 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should fetch detailed notifications with success', async () => {
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
-      jest
-        .spyOn(apiClient, 'fetchNotificationDetailsForList')
-        .mockResolvedValue(new Map());
+      vi.spyOn(apiClient, 'fetchNotificationDetailsForList').mockResolvedValue(
+        new Map(),
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -211,7 +217,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const message = 'Bad credentials';
 
       // Mock listNotificationsForAuthenticatedUser to throw RequestError for both accounts
-      const listNotificationsSpy = jest
+      const listNotificationsSpy = vi
         .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
         .mockRejectedValue(
           new RequestError(message, status, {
@@ -249,7 +255,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('should fetch notifications with different failures', async () => {
       // Mock to throw different errors for each account
-      const listNotificationsSpy = jest.spyOn(
+      const listNotificationsSpy = vi.spyOn(
         apiClient,
         'listNotificationsForAuthenticatedUser',
       );
@@ -305,9 +311,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should play sound when new notifications arrive and playSound is enabled', async () => {
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithSound = {
         auth: {
@@ -336,9 +345,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should show native notification when new notifications arrive and showNotifications is enabled', async () => {
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithNotifications = {
         auth: {
@@ -367,9 +379,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should play sound and show notification when both are enabled', async () => {
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithBoth = {
         auth: {
@@ -399,11 +414,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('should not play sound or show notification when no new notifications', async () => {
       // Return empty notifications - no new notifications to trigger sound/native
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(
-          [] satisfies Partial<ListNotificationsForAuthenticatedUserResponse> as any,
-        );
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        [] satisfies Partial<ListNotificationsForAuthenticatedUserResponse>,
+      );
 
       const stateWithBoth = {
         auth: {
@@ -434,9 +450,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('markNotificationsAsRead', () => {
     it('should mark notifications as read with success', async () => {
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
+        undefined,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -454,9 +470,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as read with failure', async () => {
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockRejectedValue(new Error('Bad request'));
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockRejectedValue(
+        new Error('Bad request'),
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -523,13 +539,16 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
+        undefined,
+      );
 
       const stateWithFetchRead = {
         auth: {
@@ -635,14 +654,17 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValueOnce(mockCloudNotifications as any)
-        .mockResolvedValueOnce(mockEnterpriseNotifications as any);
+      vi.spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
+        .mockResolvedValueOnce(
+          mockCloudNotifications as ListNotificationsForAuthenticatedUserResponse,
+        )
+        .mockResolvedValueOnce(
+          mockEnterpriseNotifications as ListNotificationsForAuthenticatedUserResponse,
+        );
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
+        undefined,
+      );
 
       const stateWithMultipleAccounts = {
         auth: mockAuth,
@@ -721,13 +743,16 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
+        undefined,
+      );
 
       const stateWithFetchRead = {
         auth: {
@@ -779,9 +804,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('markNotificationsAsDone', () => {
     it('should mark notifications as done with success', async () => {
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsDone')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
+        undefined,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -820,9 +845,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark notifications as done with failure', async () => {
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsDone')
-        .mockRejectedValue(new Error('Bad request'));
+      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockRejectedValue(
+        new Error('Bad request'),
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -843,13 +868,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('unsubscribeNotification', () => {
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
-      jest
-        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
-        .mockResolvedValue({} as any);
+      vi.spyOn(
+        apiClient,
+        'ignoreNotificationThreadSubscription',
+      ).mockResolvedValue(undefined);
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
+        undefined,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -868,13 +894,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = true', async () => {
-      jest
-        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
-        .mockResolvedValue({} as any);
+      vi.spyOn(
+        apiClient,
+        'ignoreNotificationThreadSubscription',
+      ).mockResolvedValue(undefined);
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsDone')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
+        undefined,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -899,13 +926,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with failure', async () => {
-      jest
-        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
-        .mockRejectedValue(new Error('Bad request'));
+      vi.spyOn(
+        apiClient,
+        'ignoreNotificationThreadSubscription',
+      ).mockRejectedValue(new Error('Bad request'));
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockRejectedValue(new Error('Bad request'));
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockRejectedValue(
+        new Error('Bad request'),
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -925,13 +953,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark as done when markAsDoneOnUnsubscribe is true even with fetchReadNotifications enabled', async () => {
-      jest
-        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
-        .mockResolvedValue({} as any);
+      vi.spyOn(
+        apiClient,
+        'ignoreNotificationThreadSubscription',
+      ).mockResolvedValue(undefined);
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsDone')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
+        undefined,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -957,13 +986,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark as read when markAsDoneOnUnsubscribe is false and fetchReadNotifications is enabled', async () => {
-      jest
-        .spyOn(apiClient, 'ignoreNotificationThreadSubscription')
-        .mockResolvedValue({} as any);
+      vi.spyOn(
+        apiClient,
+        'ignoreNotificationThreadSubscription',
+      ).mockResolvedValue(undefined);
 
-      jest
-        .spyOn(apiClient, 'markNotificationThreadAsRead')
-        .mockResolvedValue({} as any);
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
+        undefined,
+      );
 
       const { result } = renderHook(() => useNotifications());
 
@@ -1017,9 +1047,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
           },
         ];
 
-      jest
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValue(mockNotifications as any);
+      vi.spyOn(
+        apiClient,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue(
+        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
+      );
 
       const stateWithSingleAccount = {
         auth: {

@@ -10,7 +10,7 @@ import { stateFilter } from './state';
 
 describe('renderer/utils/notifications/filters/state.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('can filter by notification states', () => {

@@ -1,3 +1,24 @@
+// Use a hoist-safe mock factory for '@octokit/oauth-methods'
+vi.mock('@octokit/oauth-methods', async () => {
+  const actual = await vi.importActual<typeof import('@octokit/oauth-methods')>(
+    '@octokit/oauth-methods',
+  );
+  return {
+    ...actual,
+    createDeviceCode: vi.fn(),
+    exchangeDeviceCode: vi.fn(),
+    exchangeWebFlowCode: vi.fn(),
+  };
+});
+
+import {
+  createDeviceCode,
+  exchangeDeviceCode,
+  exchangeWebFlowCode,
+} from '@octokit/oauth-methods';
+
+import type { MockedFunction } from 'vitest';
+
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockRawUser } from '../api/__mocks__/response-mocks';
@@ -14,6 +35,7 @@ import type {
   Link,
   Token,
 } from '../../types';
+import type { GetAuthenticatedUserResponse } from '../api/types';
 import type { AuthMethod, LoginOAuthWebOptions } from './types';
 
 import * as comms from '../../utils/comms';
@@ -26,39 +48,25 @@ import {
   getNewTokenURL,
 } from './utils';
 
-jest.mock('@octokit/oauth-methods', () => ({
-  ...jest.requireActual('@octokit/oauth-methods'),
-  createDeviceCode: jest.fn(),
-  exchangeDeviceCode: jest.fn(),
-  exchangeWebFlowCode: jest.fn(),
-}));
-
-import {
-  createDeviceCode,
-  exchangeDeviceCode,
-  exchangeWebFlowCode,
-} from '@octokit/oauth-methods';
-
-import type { GetAuthenticatedUserResponse } from '../api/types';
-
-const createDeviceCodeMock = createDeviceCode as jest.MockedFunction<
+const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<
   typeof createDeviceCode
 >;
-const exchangeDeviceCodeMock = exchangeDeviceCode as jest.MockedFunction<
+
+const exchangeDeviceCodeMock = exchangeDeviceCode as unknown as MockedFunction<
   typeof exchangeDeviceCode
 >;
-const exchangeWebFlowCodeMock = exchangeWebFlowCode as jest.MockedFunction<
-  typeof exchangeWebFlowCode
->;
+
+const exchangeWebFlowCodeMock =
+  exchangeWebFlowCode as unknown as MockedFunction<typeof exchangeWebFlowCode>;
 
 describe('renderer/utils/auth/utils.ts', () => {
-  jest.spyOn(logger, 'rendererLogInfo').mockImplementation();
-  const openExternalLinkSpy = jest
+  vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('performGitHubDeviceOAuth', () => {
@@ -107,11 +115,9 @@ describe('renderer/utils/auth/utils.ts', () => {
     };
 
     it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
-      window.gitify.onAuthCallback = jest
-        .fn()
-        .mockImplementation((callback) => {
-          callback('gitify://oauth?code=123-456');
-        });
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        callback('gitify://oauth?code=123-456');
+      });
 
       const res = await authUtils.performGitHubWebOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
@@ -136,13 +142,11 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should call performGitHubWebOAuth - failure', async () => {
-      window.gitify.onAuthCallback = jest
-        .fn()
-        .mockImplementation((callback) => {
-          callback(
-            'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
-          );
-        });
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        callback(
+          'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
+        );
+      });
 
       await expect(
         async () => await authUtils.performGitHubWebOAuth(webAuthOptions),
@@ -206,7 +210,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     const mockAuthenticatedResponse = mockRawUser('authenticated-user');
 
-    const fetchAuthenticatedUserDetailsSpy = jest.spyOn(
+    const fetchAuthenticatedUserDetailsSpy = vi.spyOn(
       apiClient,
       'fetchAuthenticatedUserDetails',
     );

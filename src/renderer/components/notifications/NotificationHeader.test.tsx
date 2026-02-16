@@ -15,7 +15,7 @@ import {
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children - group by repositories', async () => {
@@ -76,9 +76,9 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should open notification user profile - group by date', async () => {
-    const openExternalLinkSpy = jest
+    const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const props: NotificationHeaderProps = {
       notification: mockGitifyNotification,

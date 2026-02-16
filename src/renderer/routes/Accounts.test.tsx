@@ -14,15 +14,15 @@ import * as links from '../utils/links';
 import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/Accounts.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('General', () => {
@@ -56,14 +56,14 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Account interactions', () => {
-    const openExternalLinkSpy = jest
+    const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     it('open profile in external browser', async () => {
-      const openAccountProfileSpy = jest
+      const openAccountProfileSpy = vi
         .spyOn(links, 'openAccountProfile')
-        .mockImplementation();
+        .mockImplementation(vi.fn());
 
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
@@ -133,9 +133,9 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should set account as primary account', async () => {
-      const saveStateSpy = jest
+      const saveStateSpy = vi
         .spyOn(storage, 'saveState')
-        .mockImplementation();
+        .mockImplementation(vi.fn());
 
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
@@ -159,9 +159,9 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should refresh account', async () => {
-      const refreshAccountSpy = jest
+      const refreshAccountSpy = vi
         .spyOn(authUtils, 'refreshAccount')
-        .mockImplementation();
+        .mockImplementation(vi.fn());
 
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {
@@ -179,7 +179,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should logout', async () => {
-      const logoutFromAccountMock = jest.fn();
+      const logoutFromAccountMock = vi.fn();
 
       await act(async () => {
         renderWithAppContext(<AccountsRoute />, {

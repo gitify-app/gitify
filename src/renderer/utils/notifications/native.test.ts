@@ -12,12 +12,12 @@ describe('renderer/utils/notifications/native.ts', () => {
   const mockHtmlUrl =
     mockSingleAccountNotifications[0].notifications[0].repository.htmlUrl;
 
-  jest
-    .spyOn(helpers, 'generateGitHubWebUrl')
-    .mockImplementation(async () => mockHtmlUrl);
+  vi.spyOn(helpers, 'generateGitHubWebUrl').mockImplementation(
+    async () => mockHtmlUrl,
+  );
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should raise a native notification for a single new notification', async () => {

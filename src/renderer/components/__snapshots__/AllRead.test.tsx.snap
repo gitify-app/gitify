@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/AllRead.tsx should render itself & its children - no filters 1`] = `
+exports[`renderer/components/AllRead.tsx > should render itself & its children - no filters 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -60,7 +60,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children - n
 </div>
 `;
 
-exports[`renderer/components/AllRead.tsx should render itself & its children - with filters 1`] = `
+exports[`renderer/components/AllRead.tsx > should render itself & its children - with filters 1`] = `
 <div>
   <div
     data-color-mode="light"

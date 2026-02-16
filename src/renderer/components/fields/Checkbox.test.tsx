@@ -7,7 +7,7 @@ describe('renderer/components/fields/Checkbox.tsx', () => {
     name: 'appearance',
     label: 'Appearance',
     checked: true,
-    onChange: jest.fn(),
+    onChange: vi.fn(),
   };
 
   it('should render - visible', () => {

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should apply truncate className when wrapNotificationTitle is false 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > should apply truncate className when wrapNotificationTitle is false 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -30,7 +30,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx should apply tr
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should not apply truncate className when wrapNotificationTitle is true 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > should not apply truncate className when wrapNotificationTitle is true 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -60,7 +60,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx should not appl
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should render plain text without code blocks 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > should render plain text without code blocks 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -85,7 +85,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx should render p
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should render text with code block at the end 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with code block at the end 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -115,7 +115,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx should render t
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should render text with code block at the start 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with code block at the start 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -145,7 +145,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx should render t
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should render text with multiple inline code blocks 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with multiple inline code blocks 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -190,7 +190,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx should render t
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx should render text with single inline code block 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with single inline code block 1`] = `
 <div>
   <div
     data-color-mode="light"

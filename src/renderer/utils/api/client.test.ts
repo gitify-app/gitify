@@ -33,6 +33,7 @@ import {
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
+import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
 import * as apiRequests from './request';
 
@@ -42,32 +43,33 @@ describe('renderer/utils/api/client.ts', () => {
   const mockOctokit = {
     rest: {
       activity: {
-        listNotificationsForAuthenticatedUser: jest.fn(),
-        markThreadAsRead: jest.fn(),
-        markThreadAsDone: jest.fn(),
-        setThreadSubscription: jest.fn(),
+        listNotificationsForAuthenticatedUser: vi.fn(),
+        markThreadAsRead: vi.fn(),
+        markThreadAsDone: vi.fn(),
+        setThreadSubscription: vi.fn(),
       },
       users: {
-        getAuthenticated: jest.fn(),
+        getAuthenticated: vi.fn(),
       },
     },
-    paginate: jest.fn(),
-    request: jest.fn(),
+    paginate: vi.fn(),
+    request: vi.fn(),
   };
 
-  const createOctokitClientSpy = jest.spyOn(
-    octokitModule,
-    'createOctokitClient',
-  );
-  const createOctokitClientUncachedSpy = jest.spyOn(
+  const createOctokitClientSpy = vi.spyOn(octokitModule, 'createOctokitClient');
+  const createOctokitClientUncachedSpy = vi.spyOn(
     octokitModule,
     'createOctokitClientUncached',
   );
 
   beforeEach(() => {
     // Mock createOctokitClient to return our mock
-    createOctokitClientSpy.mockResolvedValue(mockOctokit as any);
-    createOctokitClientUncachedSpy.mockResolvedValue(mockOctokit as any);
+    createOctokitClientSpy.mockResolvedValue(
+      mockOctokit as unknown as OctokitClient,
+    );
+    createOctokitClientUncachedSpy.mockResolvedValue(
+      mockOctokit as unknown as OctokitClient,
+    );
 
     // Mock Octokit REST method
     mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue(
@@ -113,7 +115,7 @@ describe('renderer/utils/api/client.ts', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('fetchAuthenticatedUserDetails - should fetch authenticated user', async () => {
@@ -344,7 +346,7 @@ describe('renderer/utils/api/client.ts', () => {
   });
 
   it('fetchDiscussionByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = jest.spyOn(
+    const performGraphQLRequestSpy = vi.spyOn(
       apiRequests,
       'performGraphQLRequest',
     );
@@ -377,7 +379,7 @@ describe('renderer/utils/api/client.ts', () => {
   });
 
   it('fetchIssueByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = jest.spyOn(
+    const performGraphQLRequestSpy = vi.spyOn(
       apiRequests,
       'performGraphQLRequest',
     );
@@ -408,7 +410,7 @@ describe('renderer/utils/api/client.ts', () => {
   });
 
   it('fetchPullByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = jest.spyOn(
+    const performGraphQLRequestSpy = vi.spyOn(
       apiRequests,
       'performGraphQLRequest',
     );
@@ -442,7 +444,7 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('fetchNotificationDetailsForList', () => {
     it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
-      const performGraphQLRequestStringSpy = jest.spyOn(
+      const performGraphQLRequestStringSpy = vi.spyOn(
         apiRequests,
         'performGraphQLRequestString',
       );
@@ -463,7 +465,7 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList returns empty map if no supported notifications', async () => {
-      const performGraphQLRequestStringSpy = jest.spyOn(
+      const performGraphQLRequestStringSpy = vi.spyOn(
         apiRequests,
         'performGraphQLRequestString',
       );
@@ -478,7 +480,7 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
-      const performGraphQLRequestStringSpy = jest.spyOn(
+      const performGraphQLRequestStringSpy = vi.spyOn(
         apiRequests,
         'performGraphQLRequestString',
       );

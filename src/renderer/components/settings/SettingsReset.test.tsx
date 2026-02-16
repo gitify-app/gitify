@@ -7,18 +7,18 @@ import * as logger from '../../utils/logger';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
-  const resetSettingsMock = jest.fn();
+  const resetSettingsMock = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should reset default settings when `OK`', async () => {
-    const rendererLogInfoSpy = jest
+    const rendererLogInfoSpy = vi
       .spyOn(logger, 'rendererLogInfo')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
-    globalThis.confirm = jest.fn(() => true); // always click 'OK'
+    globalThis.confirm = vi.fn(() => true); // always click 'OK'
 
     await act(async () => {
       renderWithAppContext(<SettingsReset />, {
@@ -34,7 +34,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
   });
 
   it('should skip reset default settings when `cancelled`', async () => {
-    globalThis.confirm = jest.fn(() => false); // always click 'cancel'
+    globalThis.confirm = vi.fn(() => false); // always click 'cancel'
 
     await act(async () => {
       renderWithAppContext(<SettingsReset />, {

@@ -13,14 +13,14 @@ import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {
   describe('enrich', () => {
-    const getCommitSpy = jest.spyOn(apiClient, 'getCommit');
-    const getCommitCommentSpy = jest.spyOn(apiClient, 'getCommitComment');
+    const getCommitSpy = vi.spyOn(apiClient, 'getCommit');
+    const getCommitCommentSpy = vi.spyOn(apiClient, 'getCommitComment');
 
     const mockAuthor = mockRawUser('some-author');
     const mockCommenter = mockRawUser('some-commenter');
 
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('get commit commenter', async () => {

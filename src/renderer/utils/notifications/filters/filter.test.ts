@@ -18,7 +18,7 @@ import {
 
 describe('renderer/utils/notifications/filters/filter.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('filterNotifications', () => {

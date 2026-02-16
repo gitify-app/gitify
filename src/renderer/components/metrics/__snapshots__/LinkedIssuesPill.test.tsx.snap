@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to multiple issues/prs 1`] = `
+exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked to multiple issues/prs 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -12,7 +12,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_4_"
         type="button"
       >
         <span
@@ -61,7 +61,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_4_"
         popover="auto"
         role="tooltip"
       >
@@ -72,7 +72,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
 </div>
 `;
 
-exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to one issue/pr 1`] = `
+exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked to one issue/pr 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -84,7 +84,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
       data-portal-root="true"
     >
       <button
-        aria-describedby="_r_ID_"
+        aria-describedby="_r_2_"
         type="button"
       >
         <span
@@ -133,7 +133,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="s"
-        id="_r_ID_"
+        id="_r_2_"
         popover="auto"
         role="tooltip"
       >
@@ -144,7 +144,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when linked to
 </div>
 `;
 
-exports[`renderer/components/metrics/LinkedIssuesPill.tsx renders when no linked issues/prs 1`] = `
+exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when no linked issues/prs 1`] = `
 <div>
   <div
     data-color-mode="light"

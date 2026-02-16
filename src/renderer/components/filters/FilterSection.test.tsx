@@ -11,7 +11,7 @@ import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 describe('renderer/components/filters/FilterSection.tsx', () => {
-  const updateFilterMock = jest.fn();
+  const updateFilterMock = vi.fn();
 
   const mockFilter = stateFilter;
   const mockFilterSetting = 'filterStates';

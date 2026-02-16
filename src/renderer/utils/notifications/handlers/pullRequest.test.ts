@@ -32,7 +32,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   });
 
   describe('enrich', () => {
-    const fetchPullByNumberSpy = jest.spyOn(apiClient, 'fetchPullByNumber');
+    const fetchPullByNumberSpy = vi.spyOn(apiClient, 'fetchPullByNumber');
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock pull request',

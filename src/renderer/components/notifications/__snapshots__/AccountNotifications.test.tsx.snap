@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - account error for multiple accounts 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - account error for multiple accounts 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -245,7 +245,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - account error for single account 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - account error for single account 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -490,7 +490,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - group notifications by date 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - group notifications by date 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -695,7 +695,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_a_"
             type="button"
           >
             <svg
@@ -723,7 +723,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="e"
-            id="_r_ID_"
+            id="_r_a_"
             popover="auto"
             role="tooltip"
           >
@@ -871,6 +871,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 <relative-time
                   datetime="2017-05-20T17:51:57.000Z"
                 >
+                  #shadow-root
                   May 20, 2017
                 </relative-time>
               </div>
@@ -878,7 +879,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 class="flex gap-1"
               >
                 <button
-                  aria-describedby="_r_ID_"
+                  aria-describedby="_r_b_"
                   type="button"
                 >
                   <span
@@ -924,14 +925,14 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="s"
-                  id="_r_ID_"
+                  id="_r_b_"
                   popover="auto"
                   role="tooltip"
                 >
                   octocat approved these changes
                 </span>
                 <button
-                  aria-describedby="_r_ID_"
+                  aria-describedby="_r_c_"
                   type="button"
                 >
                   <span
@@ -977,7 +978,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                   aria-hidden="true"
                   class="prc-TooltipV2-Tooltip-tLeuB"
                   data-direction="s"
-                  id="_r_ID_"
+                  id="_r_c_"
                   popover="auto"
                   role="tooltip"
                 >
@@ -1099,7 +1100,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           data-wrap="nowrap"
         >
           <button
-            aria-describedby="_r_ID_"
+            aria-describedby="_r_g_"
             type="button"
           >
             <svg
@@ -1127,7 +1128,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             aria-hidden="true"
             class="prc-TooltipV2-Tooltip-tLeuB"
             data-direction="e"
-            id="_r_ID_"
+            id="_r_g_"
             popover="auto"
             role="tooltip"
           >
@@ -1276,6 +1277,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
                 <relative-time
                   datetime="2017-05-20T17:06:34.000Z"
                 >
+                  #shadow-root
                   May 20, 2017
                 </relative-time>
               </div>
@@ -1388,7 +1390,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - group notifications by repositories 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - group notifications by repositories 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -1587,7 +1589,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - no notifications 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should render itself - no notifications 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -1827,7 +1829,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/AccountNotifications.tsx should toggle account notifications visibility 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx > should toggle account notifications visibility 1`] = `
 <div>
   <div
     data-color-mode="light"

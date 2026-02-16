@@ -38,24 +38,24 @@ function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
       globalError: null,
 
       // Default mock implementations for all required methods
-      loginWithDeviceFlowStart: jest.fn(),
-      loginWithDeviceFlowPoll: jest.fn(),
-      loginWithDeviceFlowComplete: jest.fn(),
-      loginWithOAuthApp: jest.fn(),
-      loginWithPersonalAccessToken: jest.fn(),
-      logoutFromAccount: jest.fn(),
+      loginWithDeviceFlowStart: vi.fn(),
+      loginWithDeviceFlowPoll: vi.fn(),
+      loginWithDeviceFlowComplete: vi.fn(),
+      loginWithOAuthApp: vi.fn(),
+      loginWithPersonalAccessToken: vi.fn(),
+      logoutFromAccount: vi.fn(),
 
-      fetchNotifications: jest.fn(),
-      removeAccountNotifications: jest.fn(),
+      fetchNotifications: vi.fn(),
+      removeAccountNotifications: vi.fn(),
 
-      markNotificationsAsRead: jest.fn(),
-      markNotificationsAsDone: jest.fn(),
-      unsubscribeNotification: jest.fn(),
+      markNotificationsAsRead: vi.fn(),
+      markNotificationsAsDone: vi.fn(),
+      unsubscribeNotification: vi.fn(),
 
-      clearFilters: jest.fn(),
-      resetSettings: jest.fn(),
-      updateSetting: jest.fn(),
-      updateFilter: jest.fn(),
+      clearFilters: vi.fn(),
+      resetSettings: vi.fn(),
+      updateSetting: vi.fn(),
+      updateFilter: vi.fn(),
 
       ...value,
     } as AppContextState;
@@ -93,5 +93,5 @@ export function renderWithAppContext(
  * Ensure stable snapshots for our randomized emoji use-cases
  */
 export function ensureStableEmojis() {
-  globalThis.Math.random = jest.fn(() => 0.1);
+  globalThis.Math.random = vi.fn(() => 0.1);
 }

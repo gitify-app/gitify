@@ -13,22 +13,22 @@ import {
 import * as utils from './utils';
 
 describe('renderer/utils/api/octokit.ts', () => {
-  const mockDecryptValue = jest.spyOn(comms, 'decryptValue');
+  const mockDecryptValue = vi.spyOn(comms, 'decryptValue');
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mockDecryptValue.mockResolvedValue('decrypted-token');
     clearOctokitClientCache();
   });
 
   afterEach(() => {
     clearOctokitClientCache();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('createOctokitClient', () => {
     it('should create octokit rest client for GitHub Cloud', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
@@ -43,7 +43,7 @@ describe('renderer/utils/api/octokit.ts', () => {
     });
 
     it('should create octokit graphql client for GitHub Cloud', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
@@ -64,7 +64,7 @@ describe('renderer/utils/api/octokit.ts', () => {
     });
 
     it('should create octokit rest client for GitHub Enterprise Server', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://github.gitify.io/api/v3/'),
       );
@@ -85,7 +85,7 @@ describe('renderer/utils/api/octokit.ts', () => {
     });
 
     it('should create octokit graphql client for GitHub Enterprise Server', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://github.gitify.io/api/graphql/'),
       );
@@ -106,7 +106,7 @@ describe('renderer/utils/api/octokit.ts', () => {
     });
 
     it('should cache and reuse octokit clients for the same account and api type', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
@@ -132,7 +132,7 @@ describe('renderer/utils/api/octokit.ts', () => {
     });
 
     it('should create separate uncached clients each time', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
@@ -158,7 +158,7 @@ describe('renderer/utils/api/octokit.ts', () => {
     });
 
     it('should create different clients for different accounts with same api type', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );
@@ -178,7 +178,7 @@ describe('renderer/utils/api/octokit.ts', () => {
     });
 
     it('should create different clients for same accounts with different api type', async () => {
-      const getGitHubAPIBaseUrlSpy = jest.spyOn(utils, 'getGitHubAPIBaseUrl');
+      const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(
         new URL('https://api.github.com/'),
       );

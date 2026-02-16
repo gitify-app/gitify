@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading and sub-heading 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading and sub-heading 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -65,7 +65,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its c
 </div>
 `;
 
-exports[`renderer/components/layout/EmojiSplash.tsx should render itself & its children - heading only 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading only 1`] = `
 <div>
   <div
     data-color-mode="light"

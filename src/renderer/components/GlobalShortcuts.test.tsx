@@ -7,19 +7,19 @@ import * as comms from '../utils/comms';
 import * as links from '../utils/links';
 import { GlobalShortcuts } from './GlobalShortcuts';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
 describe('components/GlobalShortcuts.tsx', () => {
-  const fetchNotificationsMock = jest.fn();
-  const updateSettingMock = jest.fn();
-  const quitAppSpy = jest.spyOn(comms, 'quitApp').mockImplementation();
+  const fetchNotificationsMock = vi.fn();
+  const updateSettingMock = vi.fn();
+  const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('key bindings', () => {
@@ -52,9 +52,9 @@ describe('components/GlobalShortcuts.tsx', () => {
     });
 
     describe('openGitHubNotifications', () => {
-      const openGitHubNotificationsSpy = jest
+      const openGitHubNotificationsSpy = vi
         .spyOn(links, 'openGitHubNotifications')
-        .mockImplementation();
+        .mockImplementation(vi.fn());
 
       it('opens primary account GitHub notifications webpage when pressing N while logged in', async () => {
         renderWithAppContext(
@@ -171,9 +171,9 @@ describe('components/GlobalShortcuts.tsx', () => {
     });
 
     describe('openGitHubIssues', () => {
-      const openGitHubIssuesSpy = jest
+      const openGitHubIssuesSpy = vi
         .spyOn(links, 'openGitHubIssues')
-        .mockImplementation();
+        .mockImplementation(vi.fn());
 
       it('opens primary account GitHub issues webpage when pressing I while logged in', async () => {
         renderWithAppContext(
@@ -207,9 +207,9 @@ describe('components/GlobalShortcuts.tsx', () => {
     });
 
     describe('openGitHubPulls', () => {
-      const openGitHubPullsSpy = jest
+      const openGitHubPullsSpy = vi
         .spyOn(links, 'openGitHubPulls')
-        .mockImplementation();
+        .mockImplementation(vi.fn());
 
       it('opens primary account GitHub pull requests webpage when pressing N while logged in', async () => {
         renderWithAppContext(

@@ -107,10 +107,10 @@ describe('renderer/utils/helpers.ts', () => {
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
-    const getHtmlUrlSpy = jest.spyOn(apiClient, 'getHtmlUrl');
+    const getHtmlUrlSpy = vi.spyOn(apiClient, 'getHtmlUrl');
 
     afterEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('Subject HTML URL: prefer if available from enrichment stage', async () => {

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by date with notification number 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > with notification number 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -70,7 +70,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by date with showNumber setting disabled 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > with showNumber setting disabled 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -140,7 +140,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by date without notification number 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > without notification number 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -210,7 +210,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationHeader.tsx should render itself & its children - group by repositories 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by repositories 1`] = `
 <div>
   <div
     data-color-mode="light"

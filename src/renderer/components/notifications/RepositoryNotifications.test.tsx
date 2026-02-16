@@ -13,16 +13,16 @@ import {
   type RepositoryNotificationsProps,
 } from './RepositoryNotifications';
 
-jest.mock('./NotificationRow', () => ({
+vi.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
 }));
 
 describe('renderer/components/notifications/RepositoryNotifications.tsx', () => {
-  const markNotificationsAsReadMock = jest.fn();
-  const markNotificationsAsDoneMock = jest.fn();
+  const markNotificationsAsReadMock = vi.fn();
+  const markNotificationsAsDoneMock = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
@@ -56,9 +56,9 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    const openExternalLinkSpy = jest
+    const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     renderWithAppContext(<RepositoryNotifications {...props} />);
 

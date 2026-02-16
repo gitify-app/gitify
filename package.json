@@ -6,10 +6,12 @@
   "main": "build/main.js",
   "scripts": {
     "clean": "rimraf build coverage dist node_modules",
+    "prepare": "husky",
     "build": "concurrently --names \"main,preload,renderer\" --prefix-colors \"blue,magenta,green\" \"pnpm build:main\" \"pnpm build:preload\" \"pnpm build:renderer\"",
     "build:main": "webpack --config ./config/webpack.config.main.prod.ts",
     "build:preload": "webpack --config ./config/webpack.config.preload.prod.ts",
     "build:renderer": "webpack --config ./config/webpack.config.renderer.prod.ts",
+    "codegen": "graphql-codegen --config codegen.ts",
     "watch": "concurrently --names \"main,preload,renderer,codegen\" --prefix-colors \"blue,magenta,green,cyan\" \"pnpm watch:main\" \"pnpm watch:preload\" \"pnpm watch:renderer\" \"pnpm watch:codegen\"",
     "watch:codegen": "pnpm codegen --watch",
     "watch:main": "webpack --watch --config ./config/webpack.config.main.base.ts",
@@ -20,13 +22,10 @@
     "package:win": "electron-builder --win --config ./config/electron-builder.js",
     "lint:check": "biome check",
     "lint": "biome check --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:changed": "jest --onlyChanged",
-    "test:coverage": "jest --coverage",
-    "start": "electron . --enable-logging",
-    "prepare": "husky",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "test": "vitest --coverage --run",
+    "test:watch": "vitest --watch --coverage",
+    "test:ui": "vitest --ui",
+    "start": "electron . --enable-logging"
   },
   "engines": {
     "node": ">=24"
@@ -103,13 +102,14 @@
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
-    "@types/jest": "30.0.0",
     "@types/node": "24.10.13",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
-    "babel-jest": "30.2.0",
+    "@vitejs/plugin-react-swc": "4.2.3",
+    "@vitest/coverage-v8": "4.0.18",
+    "@vitest/ui": "4.0.18",
     "clsx": "2.1.1",
     "concurrently": "9.2.1",
     "copy-webpack-plugin": "13.0.1",
@@ -122,10 +122,8 @@
     "final-form": "5.0.0",
     "graphql": "16.12.0",
     "html-webpack-plugin": "5.6.6",
+    "happy-dom": "20.6.1",
     "husky": "9.1.7",
-    "identity-obj-proxy": "3.0.0",
-    "jest": "30.2.0",
-    "jest-environment-jsdom": "30.2.0",
     "mini-css-extract-plugin": "2.10.0",
     "postcss": "8.5.6",
     "postcss-loader": "8.2.0",
@@ -135,10 +133,10 @@
     "tailwind-merge": "3.4.0",
     "tailwindcss": "4.1.18",
     "terser-webpack-plugin": "5.3.16",
-    "ts-jest": "29.4.6",
     "ts-loader": "9.5.4",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
+    "vitest": "4.0.18",
     "webpack": "5.104.1",
     "webpack-cli": "6.0.1",
     "webpack-merge": "6.0.1"
@@ -148,13 +146,15 @@
     "onlyBuiltDependencies": [
       "@biomejs/biome",
       "@parcel/watcher",
+      "@swc/core",
       "@tailwindcss/oxide",
       "electron",
+      "esbuild",
       "unrs-resolver"
     ]
   },
   "lint-staged": {
     "*": "biome check --no-errors-on-unmatched",
-    "*.{js,ts,tsx}": "pnpm test:changed --passWithNoTests --updateSnapshot"
+    "*.{js,ts,tsx}": "pnpm test --changed --passWithNoTests --update"
   }
 }

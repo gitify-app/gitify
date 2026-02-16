@@ -6,15 +6,15 @@ import { renderWithAppContext } from '../__helpers__/test-utils';
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/Login.tsx', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
@@ -26,7 +26,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should redirect to notifications once logged in', () => {
-    const showWindowSpy = jest.spyOn(comms, 'showWindow');
+    const showWindowSpy = vi.spyOn(comms, 'showWindow');
 
     renderWithAppContext(<LoginRoute />, {
       isLoggedIn: true,

@@ -1,5 +1,4 @@
 import { dialog, type MessageBoxOptions } from 'electron';
-import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
 
@@ -23,11 +22,14 @@ export default class AppUpdater {
   private readonly menuBuilder: MenuBuilder;
   private started = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
+  private periodicInterval?: NodeJS.Timeout;
 
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
     this.menuBuilder = menuBuilder;
-    autoUpdater.logger = log;
+    // Disable electron-updater's own logging to avoid duplicate log messages
+    // We'll handle all logging through our event listeners
+    autoUpdater.logger = null;
   }
 
   async start(): Promise<void> {
@@ -117,13 +119,23 @@ export default class AppUpdater {
   }
 
   private schedulePeriodicChecks() {
-    setInterval(async () => {
+    const runScheduledCheck = async () => {
       try {
         logInfo('app updater', 'Checking for updates on a periodic schedule');
         await autoUpdater.checkForUpdatesAndNotify();
       } catch (e) {
         logError('auto updater', 'Scheduled check failed', e as Error);
       }
+    };
+
+    // Defer the first periodic check until after the interval elapses.
+    // This avoids an immediate duplicate check on startup.
+    setTimeout(async () => {
+      await runScheduledCheck();
+      this.periodicInterval = setInterval(
+        runScheduledCheck,
+        APPLICATION.UPDATE_CHECK_INTERVAL_MS,
+      );
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
   }
 
@@ -147,6 +159,12 @@ export default class AppUpdater {
 
     // Clear any pending timeout
     this.clearNoUpdateTimeout();
+
+    // Clear periodic interval if present
+    if (this.periodicInterval) {
+      clearInterval(this.periodicInterval);
+      this.periodicInterval = undefined;
+    }
   }
 
   private showUpdateReadyDialog(releaseName: string) {

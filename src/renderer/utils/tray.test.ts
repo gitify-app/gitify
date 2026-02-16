@@ -6,11 +6,11 @@ import * as comms from './comms';
 import { setTrayIconColorAndTitle } from './tray';
 
 describe('renderer/utils/tray.ts', () => {
-  const updateTrayColorSpy = jest.spyOn(comms, 'updateTrayColor');
-  const updateTrayTitleSpy = jest.spyOn(comms, 'updateTrayTitle');
+  const updateTrayColorSpy = vi.spyOn(comms, 'updateTrayColor');
+  const updateTrayTitleSpy = vi.spyOn(comms, 'updateTrayTitle');
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('setTrayIconColorAndTitle', () => {

@@ -125,11 +125,4 @@ export default class MenuBuilder {
   setUpdateReadyForInstallMenuVisibility(isVisible: boolean) {
     this.updateReadyForInstallMenuItem.visible = isVisible;
   }
-
-  isUpdateAvailable() {
-    return (
-      this.updateAvailableMenuItem.visible ||
-      this.updateReadyForInstallMenuItem.visible
-    );
-  }
 }

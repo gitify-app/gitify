@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - disabled 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -40,7 +40,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - disabled 1`] = 
 </div>
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - not visible 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - not visible 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -55,7 +55,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - not visible 1`]
 </div>
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - positive counter selected 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - positive counter selected 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -99,7 +99,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
 </div>
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - positive counter unselected 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - positive counter unselected 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -142,7 +142,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - positive counte
 </div>
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - tooltip 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -207,7 +207,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - tooltip 1`] = `
 </div>
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - visible 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -246,7 +246,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render - visible 1`] = `
 </div>
 `;
 
-exports[`renderer/components/fields/Checkbox.tsx should render - zero counter 1`] = `
+exports[`renderer/components/fields/Checkbox.tsx > should render - zero counter 1`] = `
 <div>
   <div
     data-color-mode="light"

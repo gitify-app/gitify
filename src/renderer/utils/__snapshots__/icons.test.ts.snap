@@ -1,41 +1,41 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[` 1`] = `
+exports[`renderer/utils/icons.ts > getAuthMethodIcon 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 2`] = `
+exports[`renderer/utils/icons.ts > getAuthMethodIcon 2`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 3`] = `
+exports[`renderer/utils/icons.ts > getAuthMethodIcon 3`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 4`] = `
+exports[`renderer/utils/icons.ts > getPlatformIcon 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 5`] = `
+exports[`renderer/utils/icons.ts > getPlatformIcon 2`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
 }
 `;
 
-exports[` 6`] = `
+exports[`renderer/utils/icons.ts > getPlatformIcon 3`] = `
 {
   "$$typeof": Symbol(react.forward_ref),
   "render": [Function],
