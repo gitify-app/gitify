@@ -136,6 +136,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
     isOnSettingsRoute,
     fetchNotifications,
     updateSetting,
+    primaryAccountHostname,
   ]);
 
   return { shortcuts };
