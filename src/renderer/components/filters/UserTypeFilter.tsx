@@ -29,15 +29,15 @@ export const UserTypeFilter: FC = () => {
             <Stack direction="vertical" gap="condensed">
               <Stack direction="horizontal" gap="condensed">
                 <PersonIcon size={Size.SMALL} />
-                {userTypeFilter.FILTER_TYPES['User'].title}
+                {userTypeFilter.FILTER_TYPES.User.title}
               </Stack>
               <Stack direction="horizontal" gap="condensed">
                 <DependabotIcon size={Size.SMALL} />
-                {userTypeFilter.FILTER_TYPES['Bot'].description}
+                {userTypeFilter.FILTER_TYPES.Bot.description}
               </Stack>
               <Stack direction="horizontal" gap="condensed">
                 <OrganizationIcon size={Size.SMALL} />
-                {userTypeFilter.FILTER_TYPES['Organization'].title}
+                {userTypeFilter.FILTER_TYPES.Organization.title}
               </Stack>
             </Stack>
           </div>
