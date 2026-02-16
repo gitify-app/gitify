@@ -15,21 +15,15 @@ const config: CodegenConfig = {
   },
   documents: ['src/renderer/utils/api/**/*.graphql'],
   generates: {
-    'src/renderer/utils/api/graphql/generated/': {
-      preset: 'client',
-      presetConfig: {
-        fragmentMasking: false, // Disables masking
-      },
+    'src/renderer/utils/api/graphql/generated/graphql.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
       config: {
+        onlyOperationTypes: true,
         documentMode: 'string',
-        enumsAsTypes: true,
         useTypeImports: true,
-      },
-    },
-    'src/renderer/utils/api/graphql/generated/schema.graphql': {
-      plugins: ['schema-ast'],
-      config: {
-        includeDirectives: true,
+        enumsAsTypes: true,
+        skipTypename: true,
+        fragmentMasking: false, // Disables masking
       },
     },
   },

@@ -57,7 +57,6 @@ export function mockAuthorResponseNode(login: string): AuthorFieldsFragment {
     htmlUrl: `https://github.com/${login}` as Link,
     avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
     type: 'User',
-    __typename: 'User',
   } satisfies AuthorFieldsFragment;
 }
 

@@ -8,6 +8,33 @@ permissions:
   contents: write
 
 jobs:
+  prepare:
+    name: Prepare draft release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+
+      - name: Parse release branch
+        if: startsWith(github.ref, 'refs/heads/release/')
+        run: |
+          # Extract the branch name (e.g. release/v1.2.3[-meta])
+          ref=${GITHUB_REF#refs/heads/}
+          echo "RELEASE_BRANCH=$ref" >> $GITHUB_ENV
+          # Also export a RELEASE_TAG by removing the `release/` prefix (keeps leading 'v')
+          tag=${ref#release/}
+          echo "RELEASE_TAG=$tag" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Create draft release
+        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2.5.0
+        with:
+          name: "${{ env.RELEASE_TAG }}"
+          tag_name: "${{ env.RELEASE_TAG }}"
+          draft: true
+          body: '# <img src="https://github.com/gitify-app/gitify/blob/3554605d32a6c08a3d4ec17b02b90e2dd276a152/assets/images/tray-active%402x.png" /> Gitify ${{ env.RELEASE_TAG }}'
+          generate_release_notes: true
+
   release:
     name: Publish ${{ matrix.platform }} (electron-builder)
     strategy:
