@@ -3,6 +3,9 @@ import '@testing-library/jest-dom/vitest';
 // Sets timezone to UTC for consistent date/time in tests and snapshots
 process.env.TZ = 'UTC';
 
+// Mock OAuth client ID and secret
+process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
+
 /**
  * Primer React testing helpers
  * Note: @primer/react/test-helpers uses Jest internally, so we provide our own mocks
@@ -49,7 +52,7 @@ window.gitify = {
 };
 
 // prevent ReferenceError: TextEncoder is not defined
-window.TextEncoder = TextEncoder;
+// window.TextEncoder = TextEncoder;
 
 window.HTMLMediaElement.prototype.play = vi.fn();
 
@@ -69,13 +72,13 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 // Mock IntersectionObserver for Primer React components
-class MockIntersectionObserver {
-  observe = vi.fn();
-  unobserve = vi.fn();
-  disconnect = vi.fn();
-}
-(globalThis as Record<string, unknown>).IntersectionObserver =
-  MockIntersectionObserver;
+// class MockIntersectionObserver {
+//   observe = vi.fn();
+//   unobserve = vi.fn();
+//   disconnect = vi.fn();
+// }
+// (globalThis as Record<string, unknown>).IntersectionObserver =
+//   MockIntersectionObserver;
 
 // Mock HTMLMediaElement.play - must return a Promise
 globalThis.HTMLMediaElement.prototype.play = vi
@@ -91,21 +94,29 @@ class MockResizeObserver {
 globalThis.ResizeObserver = MockResizeObserver;
 
 // Mock adoptedStyleSheets for Primer React components
-// jsdom doesn't support adoptedStyleSheets, so we need to mock it
-Object.defineProperty(document, 'adoptedStyleSheets', {
-  value: [],
-  writable: true,
-  configurable: true,
-});
+// // jsdom doesn't support adoptedStyleSheets, so we need to mock it
+// Object.defineProperty(document, 'adoptedStyleSheets', {
+//   value: [],
+//   writable: true,
+//   configurable: true,
+// });
 
 // Mock ShadowRoot adoptedStyleSheets for web components
-const originalAttachShadow = Element.prototype.attachShadow;
-Element.prototype.attachShadow = function (init: ShadowRootInit): ShadowRoot {
-  const shadowRoot = originalAttachShadow.call(this, init);
-  Object.defineProperty(shadowRoot, 'adoptedStyleSheets', {
-    value: [],
-    writable: true,
-    configurable: true,
-  });
-  return shadowRoot;
-};
+// const originalAttachShadow = Element.prototype.attachShadow;
+// Element.prototype.attachShadow = function (init: ShadowRootInit): ShadowRoot {
+//   const shadowRoot = originalAttachShadow.call(this, init);
+//   Object.defineProperty(shadowRoot, 'adoptedStyleSheets', {
+//     value: [],
+//     writable: true,
+//     configurable: true,
+//   });
+//   return shadowRoot;
+// };
+
+Object.defineProperty(navigator, 'clipboard', {
+  value: {
+    writeText: vi.fn().mockResolvedValue(undefined),
+    readText: vi.fn().mockResolvedValue(''),
+  },
+  configurable: true,
+});

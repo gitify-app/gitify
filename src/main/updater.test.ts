@@ -267,44 +267,26 @@ describe('main/updater.ts', () => {
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
     });
 
-    it('performs initial check and schedules periodic checks (first deferred, then interval)', async () => {
-      const originalSetTimeout = globalThis.setTimeout;
+    it('performs initial check and schedules periodic checks', async () => {
       const originalSetInterval = globalThis.setInterval;
-
-      const setTimeoutSpy = vi
-        .spyOn(globalThis, 'setTimeout')
-        .mockImplementation(((fn: () => void) => {
-          // Immediately run the deferred callback to simulate first scheduled run
-          fn();
-          return 0 as unknown as NodeJS.Timeout;
-        }) as unknown as typeof setTimeout);
-
       const setIntervalSpy = vi
         .spyOn(globalThis, 'setInterval')
         .mockImplementation(((fn: () => void) => {
-          // Do not run immediately; just simulate registration
-          void fn;
+          fn();
           return 0 as unknown as NodeJS.Timeout;
         }) as unknown as typeof setInterval);
-
       try {
         await updater.start();
-        // initial + first deferred scheduled invocation
+        // initial + immediate scheduled invocation
         expect(
           vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length,
         ).toBe(2);
-        expect(setTimeoutSpy).toHaveBeenCalledWith(
-          expect.any(Function),
-          APPLICATION.UPDATE_CHECK_INTERVAL_MS,
-        );
         expect(setIntervalSpy).toHaveBeenCalledWith(
           expect.any(Function),
           APPLICATION.UPDATE_CHECK_INTERVAL_MS,
         );
       } finally {
-        setTimeoutSpy.mockRestore();
         setIntervalSpy.mockRestore();
-        globalThis.setTimeout = originalSetTimeout;
         globalThis.setInterval = originalSetInterval;
       }
     });

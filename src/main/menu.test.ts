@@ -197,7 +197,9 @@ describe('main/menu.ts', () => {
 
     it('developer submenu click actions execute expected functions', () => {
       const template = buildAndGetTemplate();
-      const devEntry = template.find((item) => item?.label === 'Developer');
+      const devEntry = template.find(
+        (item) => item?.label === 'Developer',
+      ) as TemplateItem;
       expect(devEntry).toBeDefined();
       const submenu = devEntry.submenu;
       const clickByLabel = (label: string) =>

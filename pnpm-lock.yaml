@@ -16,7 +16,7 @@ importers:
         version: 6.8.2
       menubar:
         specifier: 9.5.2
-        version: 9.5.2(electron@40.1.0)
+        version: 9.5.2(electron@40.4.1)
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -142,8 +142,8 @@ importers:
         specifier: 17.2.3
         version: 17.2.3
       electron:
-        specifier: 40.1.0
-        version: 40.1.0
+        specifier: 40.4.1
+        version: 40.4.1
       electron-builder:
         specifier: 26.7.0
         version: 26.7.0(electron-builder-squirrel-windows@24.13.3)
@@ -162,9 +162,6 @@ importers:
       husky:
         specifier: 9.1.7
         version: 9.1.7
-      identity-obj-proxy:
-        specifier: 3.0.0
-        version: 3.0.0
       mini-css-extract-plugin:
         specifier: 2.10.0
         version: 2.10.0(webpack@5.104.1)
@@ -3265,8 +3262,8 @@ packages:
   electron-updater@6.8.2:
     resolution: {integrity: sha512-czF0Fu8PHHUYtDneJpdtoMWqA2xJFVDi7994+pnZJQ5nZquTTClXB6g/Sj/RCoPpDXoTc0ZbP/8NuJXyJi9qBw==}
 
-  electron@40.1.0:
-    resolution: {integrity: sha512-2j/kvw7uF0H1PnzYBzw2k2Q6q16J8ToKrtQzZfsAoXbbMY0l5gQi2DLOauIZLzwp4O01n8Wt/74JhSRwG0yj9A==}
+  electron@40.4.1:
+    resolution: {integrity: sha512-N1ZXybQZL8kYemO8vAeh9nrk4mSvqlAO8xs0QCHkXIvRnuB/7VGwEehjvQbsU5/f4bmTKpG+2GQERe/zmKpudQ==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -3651,9 +3648,6 @@ packages:
     resolution: {integrity: sha512-+0vhESXXhFwkdjZnJ5DlmJIfUYGgIEEjzIjB+aKJbFuqlvvKyOi+XkI1fYbgYR9QCxG5T08koxsQ6HrQfa5gCQ==}
     engines: {node: '>=20.0.0'}
 
-  harmony-reflect@1.6.2:
-    resolution: {integrity: sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g==}
-
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
@@ -3763,10 +3757,6 @@ packages:
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
-
-  identity-obj-proxy@3.0.0:
-    resolution: {integrity: sha512-00n6YnVHKrinT9t0d9+5yZC6UBNJANpYEQvL2LlX6Ab9lnmxzIRcEmTPuyGScvl1+jKuCICX1Z0Ab1pPKKdikA==}
-    engines: {node: '>=4'}
 
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -9400,7 +9390,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@40.1.0:
+  electron@40.4.1:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 24.10.9
@@ -9836,8 +9826,6 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  harmony-reflect@1.6.2: {}
-
   has-flag@4.0.0: {}
 
   has-property-descriptors@1.0.2:
@@ -9961,10 +9949,6 @@ snapshots:
   icss-utils@5.1.0(postcss@8.5.6):
     dependencies:
       postcss: 8.5.6
-
-  identity-obj-proxy@3.0.0:
-    dependencies:
-      harmony-reflect: 1.6.2
 
   ieee754@1.2.1: {}
 
@@ -10411,9 +10395,9 @@ snapshots:
 
   mdn-data@2.0.30: {}
 
-  menubar@9.5.2(electron@40.1.0):
+  menubar@9.5.2(electron@40.4.1):
     dependencies:
-      electron: 40.1.0
+      electron: 40.4.1
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}

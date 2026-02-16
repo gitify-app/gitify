@@ -1,4 +1,21 @@
-import * as actualOAuthMethods from '@octokit/oauth-methods';
+// Use a hoist-safe mock factory for '@octokit/oauth-methods'
+vi.mock('@octokit/oauth-methods', async () => {
+  const actual = await vi.importActual<typeof import('@octokit/oauth-methods')>(
+    '@octokit/oauth-methods',
+  );
+  return {
+    ...actual,
+    createDeviceCode: vi.fn(),
+    exchangeDeviceCode: vi.fn(),
+    exchangeWebFlowCode: vi.fn(),
+  };
+});
+
+import {
+  createDeviceCode,
+  exchangeDeviceCode,
+  exchangeWebFlowCode,
+} from '@octokit/oauth-methods';
 
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
@@ -16,6 +33,7 @@ import type {
   Link,
   Token,
 } from '../../types';
+import type { GetAuthenticatedUserResponse } from '../api/types';
 import type { AuthMethod, LoginOAuthWebOptions } from './types';
 
 import * as comms from '../../utils/comms';
@@ -27,21 +45,6 @@ import {
   getNewOAuthAppURL,
   getNewTokenURL,
 } from './utils';
-
-vi.mock('@octokit/oauth-methods', () => ({
-  ...actualOAuthMethods,
-  createDeviceCode: vi.fn(),
-  exchangeDeviceCode: vi.fn(),
-  exchangeWebFlowCode: vi.fn(),
-}));
-
-import {
-  createDeviceCode,
-  exchangeDeviceCode,
-  exchangeWebFlowCode,
-} from '@octokit/oauth-methods';
-
-import type { GetAuthenticatedUserResponse } from '../api/types';
 
 const createDeviceCodeMock = createDeviceCode as vi.MockedFunction<
   typeof createDeviceCode

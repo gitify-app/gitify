@@ -12,7 +12,6 @@ export default defineConfig({
   test: {
     globals: true,
     pool: 'threads',
-    setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
     css: false, // Disable CSS processing for tests
     // Server configuration to handle external dependencies
     server: {
@@ -52,10 +51,12 @@ export default defineConfig({
             'src/preload/**/*.test.{ts,tsx}',
             'src/renderer/**/*.test.{ts,tsx}',
           ],
+          setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
         },
       },
       {
         // TODO - Opportunity in future to move some of the renderer util tests to node environment
+        extends: true,
         test: {
           name: 'node [main, shared]',
           environment: 'node',
@@ -63,9 +64,6 @@ export default defineConfig({
             'src/shared/**/*.test.{ts,tsx}',
             'src/main/**/*.test.{ts,tsx}',
           ],
-          // setupFiles: ['./src/shared/__helpers__/vitest.setup.node.ts'],
-          setupFiles: [],
-          globals: true,
         },
       },
     ],
