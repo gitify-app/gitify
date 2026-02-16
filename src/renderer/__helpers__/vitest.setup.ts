@@ -60,12 +60,6 @@ Object.defineProperty(navigator, 'clipboard', {
  * - https://github.com/primer/react/blob/main/packages/react/src/utils/test-helpers.tsx
  */
 
-// Mock `showPopover` used by Primer React TooltipV2
-if (!('showPopover' in HTMLElement.prototype)) {
-  (HTMLElement.prototype as any).showPopover = vi.fn();
-}
-
-// Mock `hidePopover` used by Primer React TooltipV2
-if (!('hidePopover' in HTMLElement.prototype)) {
-  (HTMLElement.prototype as any).hidePopover = vi.fn();
-}
+// Mock `showPopover` and `hidePopover` used by Primer React TooltipV2
+global.HTMLElement.prototype.showPopover = vi.fn();
+global.HTMLElement.prototype.hidePopover = vi.fn();
