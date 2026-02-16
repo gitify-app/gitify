@@ -1,6 +1,5 @@
 import type { ExecutionResult } from 'graphql';
 
-import type { DeepPartial } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
