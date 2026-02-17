@@ -8,7 +8,7 @@ import { AppContext, type AppContextState } from '../context/App';
  */
 export function useAppContext(): AppContextState {
   const context = useContext(AppContext);
-  if (!context || Object.keys(context).length === 0) {
+  if (!context) {
     throw new Error('useAppContext must be used within an AppProvider');
   }
   return context as AppContextState;

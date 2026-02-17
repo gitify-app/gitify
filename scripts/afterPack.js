@@ -1,7 +1,7 @@
 const path = require('node:path');
 const fs = require('node:fs');
 
-const builderConfig = require('../config/electron-builder');
+const builderConfig = require('../electron-builder');
 const electronLanguages = builderConfig.electronLanguages;
 
 function logAfterPackProgress(msg) {
