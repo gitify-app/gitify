@@ -73,7 +73,7 @@
     "react-router-dom": "7.13.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.15",
+    "@biomejs/biome": "2.4.2",
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.1",
     "@graphql-codegen/cli": "6.1.1",
