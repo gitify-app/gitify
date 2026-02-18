@@ -126,7 +126,7 @@
     "vite-plugin-static-copy": "3.2.0",
     "vitest": "4.0.18"
   },
-  "packageManager": "pnpm@10.29.3",
+  "packageManager": "pnpm@10.30.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
