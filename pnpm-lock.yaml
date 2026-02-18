@@ -82,8 +82,8 @@ importers:
         specifier: 38.11.0
         version: 38.11.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react-is@18.3.0)(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)
       '@swc-contrib/plugin-graphql-codegen-client-preset':
-        specifier: 0.17.0
-        version: 0.17.0
+        specifier: 0.18.0
+        version: 0.18.0
       '@tailwindcss/vite':
         specifier: 4.1.18
         version: 4.1.18(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.37.0)(yaml@2.8.2))
@@ -1477,8 +1477,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@swc-contrib/plugin-graphql-codegen-client-preset@0.17.0':
-    resolution: {integrity: sha512-HKvWjKT/9ND5zz/L6JtIh5YjjczE44CzZogKz/Tg1rP/WULEqose9YGxog8uvHaqBaqRBgdHneVFIRSJk+UoVQ==}
+  '@swc-contrib/plugin-graphql-codegen-client-preset@0.18.0':
+    resolution: {integrity: sha512-g5cwxN2B6pXQ2zTls448SrbwVu5yNRBNQcrDwWJGCMuRxwXcTh8fb654TT3mmCMxpHeQTB5NJoYNsOBevlkGhw==}
     engines: {node: '>=16'}
 
   '@swc/core-darwin-arm64@1.15.11':
@@ -5945,7 +5945,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@swc-contrib/plugin-graphql-codegen-client-preset@0.17.0': {}
+  '@swc-contrib/plugin-graphql-codegen-client-preset@0.18.0': {}
 
   '@swc/core-darwin-arm64@1.15.11':
     optional: true
