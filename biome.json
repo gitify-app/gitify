@@ -1,7 +1,10 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.4.2/schema.json",
   "files": {
-    "includes": ["**", "!**/generated/**/*"]
+    "includes": [
+      "**",
+      "!**/generated/**/*"
+    ]
   },
   "assist": {
     "actions": {
@@ -12,9 +15,15 @@
             "groups": [
               ":NODE:",
               ":BLANK_LINE:",
-              ["react*", "@testing-library/**"],
+              [
+                "react*",
+                "@testing-library/**"
+              ],
               ":BLANK_LINE:",
-              ["*electron*", "menubar"],
+              [
+                "*electron*",
+                "menubar"
+              ],
               ":BLANK_LINE:",
               "@primer/**",
               ":BLANK_LINE:",
@@ -22,13 +31,23 @@
               ":BLANK_LINE:",
               ":PACKAGE:",
               ":BLANK_LINE:",
-              ["**/__mocks__/**", "**/__helpers__/**"],
+              [
+                "**/__mocks__/**",
+                "**/__helpers__/**"
+              ],
               ":BLANK_LINE:",
               "**/shared/**",
               ":BLANK_LINE:",
-              ["**/constants", "**/constants/**"],
+              [
+                "**/constants",
+                "**/constants/**"
+              ],
               ":BLANK_LINE:",
-              ["**/context/**", "**/hooks/**", "**/routes/**"],
+              [
+                "**/context/**",
+                "**/hooks/**",
+                "**/routes/**"
+              ],
               ":BLANK_LINE:",
               [
                 "**/layout/**",
@@ -56,8 +75,7 @@
     "rules": {
       "recommended": true,
       "a11y": {
-        "useKeyWithClickEvents": "off",
-        "useSemanticElements": "off"
+        "useKeyWithClickEvents": "off"
       },
       "correctness": {
         "noUnusedFunctionParameters": "error",
@@ -72,21 +90,29 @@
             ]
           }
         },
-        "useUniqueElementIds": "off"
+        "useHookAtTopLevel": {
+          "level": "error",
+          "options": {
+            "ignore": [
+              "useAlternateIdleIcon",
+              "useUnreadActiveIcon"
+            ]
+          }
+        }
       },
       "style": {
-        "useDefaultSwitchClause": "error",
+        "noInferrableTypes": "error",
         "noParameterAssign": "error",
+        "noUnusedTemplateLiteral": "error",
+        "noUselessElse": "error",
         "useAsConstAssertion": "error",
         "useBlockStatements": "error",
         "useDefaultParameterLast": "error",
+        "useDefaultSwitchClause": "error",
         "useEnumInitializers": "error",
-        "useSelfClosingElements": "error",
-        "useSingleVarDeclarator": "error",
-        "noUnusedTemplateLiteral": "error",
         "useNumberNamespace": "error",
-        "noInferrableTypes": "error",
-        "noUselessElse": "error"
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error"
       },
       "suspicious": {
         "noConsole": "error",
