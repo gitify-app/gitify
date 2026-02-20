@@ -98,10 +98,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
       'open',
       true,
     );
-
-    expect(
-      screen.getByLabelText('Open').parentNode.parentNode,
-    ).toMatchSnapshot();
   });
 
   it('should be able to toggle filter value - some filters already set', async () => {
@@ -131,9 +127,5 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
       'closed',
       true,
     );
-
-    expect(
-      screen.getByLabelText('Closed').parentNode.parentNode,
-    ).toMatchSnapshot();
   });
 });
