@@ -7,17 +7,17 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 
 import { Header } from './Header';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/components/primitives/Header.tsx', () => {
-  const fetchNotificationsMock = jest.fn();
+  const fetchNotificationsMock = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
@@ -25,7 +25,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
       <Header icon={MarkGithubIcon}>Test Header</Header>,
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should navigate back', async () => {

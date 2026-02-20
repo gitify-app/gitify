@@ -13,12 +13,12 @@ import {
 } from './NotificationFooter';
 
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
-  jest
-    .spyOn(globalThis.Date, 'now')
-    .mockImplementation(() => new Date('2024').valueOf());
+  vi.spyOn(globalThis.Date, 'now').mockImplementation(() =>
+    new Date('2024').valueOf(),
+  );
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {
@@ -28,7 +28,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   describe('security alerts should use github icon for avatar', () => {
@@ -42,7 +42,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
       const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
 
     it('Repository Vulnerability Alert', async () => {
@@ -55,7 +55,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
       const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-      expect(tree).toMatchSnapshot();
+      expect(tree.container).toMatchSnapshot();
     });
   });
 
@@ -69,13 +69,13 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     const tree = renderWithAppContext(<NotificationFooter {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should open notification user profile', async () => {
-    const openExternalLinkSpy = jest
+    const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const props: NotificationFooterProps = {
       notification: {

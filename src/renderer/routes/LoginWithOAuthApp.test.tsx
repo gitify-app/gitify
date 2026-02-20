@@ -13,27 +13,27 @@ import {
   validateForm,
 } from './LoginWithOAuthApp';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
-  const loginWithOAuthAppMock = jest.fn();
+  const loginWithOAuthAppMock = vi.fn();
 
-  const openExternalLinkSpy = jest
+  const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders correctly', () => {
     const tree = renderWithAppContext(<LoginWithOAuthAppRoute />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
@@ -128,9 +128,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should login using a token - failure', async () => {
-    const rendererLogErrorSpy = jest
+    const rendererLogErrorSpy = vi
       .spyOn(logger, 'rendererLogError')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
     renderWithAppContext(<LoginWithOAuthAppRoute />, {

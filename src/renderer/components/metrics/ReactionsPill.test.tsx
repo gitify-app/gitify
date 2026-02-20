@@ -8,7 +8,7 @@ describe('renderer/components/metrics/ReactionsPill.tsx', () => {
 
     const tree = renderWithAppContext(<ReactionsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders when one reaction', () => {
@@ -24,7 +24,7 @@ describe('renderer/components/metrics/ReactionsPill.tsx', () => {
 
     const tree = renderWithAppContext(<ReactionsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders when multiple reactions', () => {
@@ -44,6 +44,6 @@ describe('renderer/components/metrics/ReactionsPill.tsx', () => {
 
     const tree = renderWithAppContext(<ReactionsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

@@ -6,26 +6,26 @@ import { renderWithAppContext } from '../__helpers__/test-utils';
 import * as comms from '../utils/comms';
 import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
-  const copyToClipboardSpy = jest
+  const copyToClipboardSpy = vi
     .spyOn(comms, 'copyToClipboard')
     .mockResolvedValue();
-  const openExternalLinkSpy = jest
+  const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render and initialize device flow', async () => {
-    const loginWithDeviceFlowStartMock = jest.fn().mockResolvedValueOnce({
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
       deviceCode: 'device-code',
@@ -52,7 +52,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should copy user code to clipboard when clicking copy button', async () => {
-    const loginWithDeviceFlowStartMock = jest.fn().mockResolvedValueOnce({
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
       deviceCode: 'device-code',
@@ -77,7 +77,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should handle device flow errors during initialization', async () => {
-    const loginWithDeviceFlowStartMock = jest
+    const loginWithDeviceFlowStartMock = vi
       .fn()
       .mockRejectedValueOnce(new Error('Network error'));
 
@@ -89,7 +89,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should navigate back on cancel', async () => {
-    const loginWithDeviceFlowStartMock = jest.fn().mockResolvedValueOnce({
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
       deviceCode: 'device-code',

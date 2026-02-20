@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.13/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.2/schema.json",
   "files": {
     "includes": ["**", "!**/generated/**/*"]
   },
@@ -56,8 +56,7 @@
     "rules": {
       "recommended": true,
       "a11y": {
-        "useKeyWithClickEvents": "off",
-        "useSemanticElements": "off"
+        "useKeyWithClickEvents": "off"
       },
       "correctness": {
         "noUnusedFunctionParameters": "error",
@@ -72,21 +71,26 @@
             ]
           }
         },
-        "useUniqueElementIds": "off"
+        "useHookAtTopLevel": {
+          "level": "error",
+          "options": {
+            "ignore": ["useAlternateIdleIcon", "useUnreadActiveIcon"]
+          }
+        }
       },
       "style": {
-        "useDefaultSwitchClause": "error",
+        "noInferrableTypes": "error",
         "noParameterAssign": "error",
+        "noUnusedTemplateLiteral": "error",
+        "noUselessElse": "error",
         "useAsConstAssertion": "error",
         "useBlockStatements": "error",
         "useDefaultParameterLast": "error",
+        "useDefaultSwitchClause": "error",
         "useEnumInitializers": "error",
-        "useSelfClosingElements": "error",
-        "useSingleVarDeclarator": "error",
-        "noUnusedTemplateLiteral": "error",
         "useNumberNamespace": "error",
-        "noInferrableTypes": "error",
-        "noUselessElse": "error"
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error"
       },
       "suspicious": {
         "noConsole": "error",

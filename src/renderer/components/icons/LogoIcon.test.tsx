@@ -11,17 +11,17 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   it('renders correctly (light)', () => {
     const tree = renderWithAppContext(<LogoIcon size={Size.SMALL} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders correctly (dark)', () => {
     const tree = renderWithAppContext(<LogoIcon isDark size={Size.SMALL} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should click on the logo', async () => {
-    const onClickMock = jest.fn();
+    const onClickMock = vi.fn();
     renderWithAppContext(<LogoIcon onClick={onClickMock} size={Size.SMALL} />);
 
     await userEvent.click(screen.getByLabelText('Gitify Logo'));
@@ -32,18 +32,18 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   it('should render small size', () => {
     const tree = renderWithAppContext(<LogoIcon size={Size.SMALL} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render medium size', () => {
     const tree = renderWithAppContext(<LogoIcon size={Size.MEDIUM} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render large size', () => {
     const tree = renderWithAppContext(<LogoIcon size={Size.LARGE} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

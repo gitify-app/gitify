@@ -8,7 +8,7 @@ describe('renderer/components/metrics/LabelsPill.tsx', () => {
 
     const tree = renderWithAppContext(<LabelsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('renders with labels', () => {
@@ -21,6 +21,6 @@ describe('renderer/components/metrics/LabelsPill.tsx', () => {
 
     const tree = renderWithAppContext(<LabelsPill {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

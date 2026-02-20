@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import {
   app,
@@ -26,23 +27,30 @@ import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
 import AppUpdater from './updater';
+import { isDevMode } from './utils';
 
 log.initialize();
 
 /**
- * File paths
+ * File and directory paths / URLs
  */
-const preloadFilePath = path.join(__dirname, 'preload.js');
-const indexHtmlFilePath = `file://${__dirname}/index.html`;
-const notificationSoundFilePath = path.join(
-  __dirname,
-  '..',
-  'assets',
-  'sounds',
-  APPLICATION.NOTIFICATION_SOUND,
-);
-const twemojiDirPath = path.join(__dirname, 'images', 'twemoji');
+const preloadFilePath = path.resolve(__dirname, 'preload.js');
 
+const indexHtmlFileURL = isDevMode()
+  ? process.env.VITE_DEV_SERVER_URL
+  : pathToFileURL(path.resolve(__dirname, 'index.html')).href;
+
+const notificationSoundFileURL = pathToFileURL(
+  path.resolve(__dirname, 'assets', 'sounds', APPLICATION.NOTIFICATION_SOUND),
+).href;
+
+const twemojiFolderURL = pathToFileURL(
+  path.resolve(__dirname, 'assets', 'images', 'twemoji'),
+).href;
+
+/**
+ * Menubar app setup
+ */
 const browserWindowOpts: BrowserWindowConstructorOptions = {
   width: 500,
   height: 400,
@@ -54,12 +62,14 @@ const browserWindowOpts: BrowserWindowConstructorOptions = {
     preload: preloadFilePath,
     contextIsolation: true,
     nodeIntegration: false,
+    // Disable web security in development to allow CORS requests
+    webSecurity: !process.env.VITE_DEV_SERVER_URL,
   },
 };
 
 const mb = menubar({
   icon: TrayIcons.idle,
-  index: indexHtmlFilePath,
+  index: indexHtmlFileURL,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
   showDockIcon: false, // Hide the app from the macOS dock
@@ -69,8 +79,7 @@ const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
 // Register your app as the handler for a custom protocol
-const protocol =
-  process.env.NODE_ENV === 'development' ? 'gitify-dev' : 'gitify';
+const protocol = isDevMode() ? 'gitify-dev' : 'gitify';
 app.setAsDefaultProtocolClient(protocol);
 
 const appUpdater = new AppUpdater(mb, menuBuilder);
@@ -203,11 +212,11 @@ app.whenReady().then(async () => {
   handleMainEvent(EVENTS.VERSION, () => app.getVersion());
 
   handleMainEvent(EVENTS.NOTIFICATION_SOUND_PATH, () => {
-    return notificationSoundFilePath;
+    return notificationSoundFileURL;
   });
 
   handleMainEvent(EVENTS.TWEMOJI_DIRECTORY, () => {
-    return twemojiDirPath;
+    return twemojiFolderURL;
   });
 
   handleMainEvent(EVENTS.SAFE_STORAGE_ENCRYPT, (_, value: string) => {

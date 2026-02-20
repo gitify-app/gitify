@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { dialog, shell } from 'electron';
+import { app, dialog, shell } from 'electron';
 import log from 'electron-log';
 import type { Menubar } from 'menubar';
 
@@ -12,7 +12,9 @@ import { logError, logInfo } from '../shared/logger';
 
 import { sendRendererEvent } from './events';
 
-export const isDevMode = !!process.defaultApp;
+export function isDevMode() {
+  return !app.isPackaged;
+}
 
 export function takeScreenshot(mb: Menubar) {
   const date = new Date();

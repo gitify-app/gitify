@@ -4,6 +4,7 @@
     "bradlc.vscode-tailwindcss",
     "GraphQL.vscode-graphql",
     "GraphQL.vscode-graphql-syntax",
-    "SonarSource.sonarlint-vscode"
+    "SonarSource.sonarlint-vscode",
+    "vitest.explorer"
   ]
 }

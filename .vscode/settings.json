@@ -13,5 +13,6 @@
     "connectionId": "gitify-app",
     "projectKey": "gitify-app_gitify"
   },
-  "jest.runMode": "on-save"
+  // Disable Jest extension - this project uses Vitest
+  "jest.enable": false
 }

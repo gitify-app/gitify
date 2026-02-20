@@ -32,7 +32,7 @@ import {
 
 describe('renderer/utils/notifications/notifications.ts', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('getNotificationCount', () => {
@@ -48,12 +48,12 @@ describe('renderer/utils/notifications/notifications.ts', () => {
   });
 
   it('enrichNotification - catches error and logs message', async () => {
-    const rendererLogErrorSpy = jest
+    const rendererLogErrorSpy = vi
       .spyOn(logger, 'rendererLogError')
-      .mockImplementation();
-    const rendererLogWarnSpy = jest
+      .mockImplementation(vi.fn());
+    const rendererLogWarnSpy = vi
       .spyOn(logger, 'rendererLogWarn')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     const mockError = new Error('Test error');
     const mockNotification = mockPartialGitifyNotification({
@@ -74,7 +74,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     };
     mockNotification.repository = mockRepository;
 
-    jest.spyOn(apiClient, 'fetchIssueByNumber').mockRejectedValue(mockError);
+    vi.spyOn(apiClient, 'fetchIssueByNumber').mockRejectedValue(mockError);
 
     await enrichNotification(mockNotification, mockSettings);
 
@@ -188,7 +188,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     });
 
     it('should batch notifications by GITHUB_API_MERGE_BATCH_SIZE', async () => {
-      const fetchNotificationDetailsForListSpy = jest
+      const fetchNotificationDetailsForListSpy = vi
         .spyOn(apiClient, 'fetchNotificationDetailsForList')
         .mockResolvedValue(new Map());
 
@@ -224,7 +224,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     });
 
     it('should handle single batch of notifications', async () => {
-      const fetchNotificationDetailsForListSpy = jest
+      const fetchNotificationDetailsForListSpy = vi
         .spyOn(apiClient, 'fetchNotificationDetailsForList')
         .mockResolvedValue(new Map());
 

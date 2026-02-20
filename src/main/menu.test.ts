@@ -1,47 +1,63 @@
-import { Menu, MenuItem, shell } from 'electron';
+import { Menu, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
 
+import type { Mock } from 'vitest';
+
 import { APPLICATION } from '../shared/constants';
+import { isMacOS } from '../shared/platform';
 
 import MenuBuilder from './menu';
 import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
-jest.mock('electron', () => {
-  const MenuItem = jest
-    .fn()
-    .mockImplementation((opts: Record<string, unknown>) => opts);
+// Track MenuItem instantiations for test assertions
+const menuItemInstances: Array<{
+  label?: string;
+  enabled?: boolean;
+  visible?: boolean;
+  click?: () => void;
+}> = [];
+
+vi.mock('electron', () => {
+  class MockMenuItem {
+    constructor(opts: Record<string, unknown>) {
+      Object.assign(this, opts);
+      menuItemInstances.push(opts as (typeof menuItemInstances)[number]);
+    }
+  }
   return {
     Menu: {
-      buildFromTemplate: jest.fn(),
+      buildFromTemplate: vi.fn(),
     },
-    MenuItem,
-    shell: { openExternal: jest.fn() },
+    MenuItem: MockMenuItem,
+    shell: { openExternal: vi.fn() },
   };
 });
 
-jest.mock('electron-updater', () => ({
+vi.mock('electron-updater', () => ({
   autoUpdater: {
-    checkForUpdatesAndNotify: jest.fn(),
-    quitAndInstall: jest.fn(),
+    checkForUpdatesAndNotify: vi.fn(),
+    quitAndInstall: vi.fn(),
   },
 }));
 
-jest.mock('./utils', () => ({
-  takeScreenshot: jest.fn(),
-  openLogsDirectory: jest.fn(),
-  resetApp: jest.fn(),
+vi.mock('./utils', () => ({
+  takeScreenshot: vi.fn(),
+  openLogsDirectory: vi.fn(),
+  resetApp: vi.fn(),
+}));
+
+vi.mock('../shared/platform', () => ({
+  isMacOS: vi.fn(),
 }));
 
 describe('main/menu.ts', () => {
   let menubar: Menubar;
   let menuBuilder: MenuBuilder;
 
-  /** Helper: find MenuItem config captured via MenuItem mock by label */
+  /** Helper: find MenuItem config captured via our tracking array by label */
   const getMenuItemConfigByLabel = (label: string) =>
-    (MenuItem as unknown as jest.Mock).mock.calls.find(
-      ([arg]) => (arg as { label?: string }).label === label,
-    )?.[0] as
+    menuItemInstances.find((item) => item.label === label) as
       | {
           label?: string;
           enabled?: boolean;
@@ -62,24 +78,26 @@ describe('main/menu.ts', () => {
   /** Helper: build menu & return template (first arg passed to buildFromTemplate) */
   const buildAndGetTemplate = () => {
     menuBuilder.buildMenu();
-    return (Menu.buildFromTemplate as jest.Mock).mock.calls.at(
+    return (Menu.buildFromTemplate as Mock).mock.calls.slice(
       -1,
-    )[0] as TemplateItem[];
+    )[0][0] as TemplateItem[];
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    menubar = { app: { quit: jest.fn() } } as unknown as Menubar;
+    vi.clearAllMocks();
+    vi.mocked(isMacOS).mockReturnValue(false);
+    menuItemInstances.length = 0; // Clear tracked instances
+    menubar = { app: { quit: vi.fn() } } as unknown as Menubar;
     menuBuilder = new MenuBuilder(menubar);
   });
 
   describe('checkForUpdatesMenuItem', () => {
     it('default menu configuration', () => {
-      expect(MenuItem).toHaveBeenCalledWith({
-        label: 'Check for updates',
-        enabled: true,
-        click: expect.any(Function),
-      });
+      const config = getMenuItemConfigByLabel('Check for updates');
+      expect(config).toBeDefined();
+      expect(config?.label).toBe('Check for updates');
+      expect(config?.enabled).toBe(true);
+      expect(config?.click).toEqual(expect.any(Function));
     });
 
     it('should enable menu item', () => {
@@ -97,11 +115,11 @@ describe('main/menu.ts', () => {
 
   describe('noUpdateAvailableMenuItem', () => {
     it('default menu configuration', () => {
-      expect(MenuItem).toHaveBeenCalledWith({
-        label: 'No updates available',
-        enabled: false,
-        visible: false,
-      });
+      const config = getMenuItemConfigByLabel('No updates available');
+      expect(config).toBeDefined();
+      expect(config?.label).toBe('No updates available');
+      expect(config?.enabled).toBe(false);
+      expect(config?.visible).toBe(false);
     });
 
     it('should show menu item', () => {
@@ -119,11 +137,11 @@ describe('main/menu.ts', () => {
 
   describe('updateAvailableMenuItem', () => {
     it('default menu configuration', () => {
-      expect(MenuItem).toHaveBeenCalledWith({
-        label: 'An update is available',
-        enabled: false,
-        visible: false,
-      });
+      const config = getMenuItemConfigByLabel('An update is available');
+      expect(config).toBeDefined();
+      expect(config?.label).toBe('An update is available');
+      expect(config?.enabled).toBe(false);
+      expect(config?.visible).toBe(false);
     });
 
     it('should show menu item', () => {
@@ -141,12 +159,12 @@ describe('main/menu.ts', () => {
 
   describe('updateReadyForInstallMenuItem', () => {
     it('default menu configuration', () => {
-      expect(MenuItem).toHaveBeenCalledWith({
-        label: 'Restart to install update',
-        enabled: true,
-        visible: false,
-        click: expect.any(Function),
-      });
+      const config = getMenuItemConfigByLabel('Restart to install update');
+      expect(config).toBeDefined();
+      expect(config?.label).toBe('Restart to install update');
+      expect(config?.enabled).toBe(true);
+      expect(config?.visible).toBe(false);
+      expect(config?.click).toEqual(expect.any(Function));
     });
 
     it('should show menu item', () => {
@@ -179,7 +197,9 @@ describe('main/menu.ts', () => {
 
     it('developer submenu click actions execute expected functions', () => {
       const template = buildAndGetTemplate();
-      const devEntry = template.find((item) => item?.label === 'Developer');
+      const devEntry = template.find(
+        (item) => item?.label === 'Developer',
+      ) as TemplateItem;
       expect(devEntry).toBeDefined();
       const submenu = devEntry.submenu;
       const clickByLabel = (label: string) =>
@@ -216,43 +236,58 @@ describe('main/menu.ts', () => {
 
     it('developer submenu includes expected static accelerators', () => {
       const template = buildAndGetTemplate();
-      const devEntry = template.find((item) => item?.label === 'Developer');
+      const devEntry = template.find(
+        (item) => item?.label === 'Developer',
+      ) as TemplateItem;
       const reloadItem = devEntry.submenu.find((i) => i.role === 'reload');
       expect(reloadItem?.accelerator).toBe('CommandOrControl+R');
     });
   });
 
   describe('platform-specific accelerators', () => {
-    // Use isolateModules so we can alter the isMacOS return value before importing MenuBuilder
-    const buildTemplateWithPlatform = (isMac: boolean) => {
-      jest.isolateModules(() => {
-        jest.doMock('../shared/platform', () => ({ isMacOS: () => isMac }));
-        // re-mock electron for isolated module context (shared mock factory already defined globally)
-        // Clear prior captured calls
-        (Menu.buildFromTemplate as jest.Mock).mockClear();
-        const MB = require('./menu').default as typeof MenuBuilder;
-        const mb = new MB({ app: { quit: jest.fn() } } as unknown as Menubar);
-        mb.buildMenu();
-      });
-      // Return the newest template captured
-      return (Menu.buildFromTemplate as jest.Mock).mock.calls.at(
-        -1,
-      )[0] as TemplateItem[];
-    };
+    // We test the accelerator values using the actual menu template
+    // The isMacOS function is called during buildMenu, so we can verify the expected behavior
+    // by building the menu and inspecting the template
 
-    it('uses mac accelerator for toggleDevTools when on macOS', () => {
-      const template = buildTemplateWithPlatform(true);
-      const devEntry = template.find((item) => item?.label === 'Developer');
-      const toggleItem = devEntry.submenu.find(
+    it('uses mac accelerator for toggleDevTools when on macOS', async () => {
+      vi.mocked(isMacOS).mockReturnValue(true);
+      menuItemInstances.length = 0;
+      (Menu.buildFromTemplate as Mock).mockClear();
+
+      const mb = new MenuBuilder({
+        app: { quit: vi.fn() },
+      } as unknown as Menubar);
+      mb.buildMenu();
+
+      const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
+        -1,
+      )[0][0] as TemplateItem[];
+      const devEntry = template.find(
+        (i) => i?.label === 'Developer',
+      ) as TemplateItem;
+      const toggleItem = devEntry.submenu?.find(
         (i) => i.role === 'toggleDevTools',
       );
       expect(toggleItem?.accelerator).toBe('Alt+Cmd+I');
     });
 
-    it('uses non-mac accelerator for toggleDevTools otherwise', () => {
-      const template = buildTemplateWithPlatform(false);
-      const devEntry = template.find((item) => item?.label === 'Developer');
-      const toggleItem = devEntry.submenu.find(
+    it('uses non-mac accelerator for toggleDevTools otherwise', async () => {
+      vi.mocked(isMacOS).mockReturnValue(false);
+      menuItemInstances.length = 0;
+      (Menu.buildFromTemplate as Mock).mockClear();
+
+      const mb = new MenuBuilder({
+        app: { quit: vi.fn() },
+      } as unknown as Menubar);
+      mb.buildMenu();
+
+      const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
+        -1,
+      )[0][0] as TemplateItem[];
+      const devEntry = template.find(
+        (i) => i?.label === 'Developer',
+      ) as TemplateItem;
+      const toggleItem = devEntry.submenu?.find(
         (i) => i.role === 'toggleDevTools',
       );
       expect(toggleItem?.accelerator).toBe('Ctrl+Shift+I');

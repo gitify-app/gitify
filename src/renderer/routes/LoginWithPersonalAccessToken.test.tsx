@@ -13,26 +13,26 @@ import {
   validateForm,
 } from './LoginWithPersonalAccessToken';
 
-const navigateMock = jest.fn();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useNavigate: () => navigateMock,
 }));
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
-  const loginWithPersonalAccessTokenMock = jest.fn();
-  const openExternalLinkSpy = jest
+  const loginWithPersonalAccessTokenMock = vi.fn();
+  const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders correctly', () => {
     const tree = renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
@@ -115,9 +115,9 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should login using a token - failure', async () => {
-    const rendererLogErrorSpy = jest
+    const rendererLogErrorSpy = vi
       .spyOn(logger, 'rendererLogError')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
     renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {

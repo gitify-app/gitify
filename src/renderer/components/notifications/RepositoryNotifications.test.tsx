@@ -13,16 +13,16 @@ import {
   type RepositoryNotificationsProps,
 } from './RepositoryNotifications';
 
-jest.mock('./NotificationRow', () => ({
+vi.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
 }));
 
 describe('renderer/components/notifications/RepositoryNotifications.tsx', () => {
-  const markNotificationsAsReadMock = jest.fn();
-  const markNotificationsAsDoneMock = jest.fn();
+  const markNotificationsAsReadMock = vi.fn();
+  const markNotificationsAsDoneMock = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children', () => {
@@ -33,7 +33,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - all notifications are read', () => {
@@ -47,7 +47,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should open the browser when clicking on the repo name', async () => {
@@ -56,9 +56,9 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    const openExternalLinkSpy = jest
+    const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
-      .mockImplementation();
+      .mockImplementation(vi.fn());
 
     renderWithAppContext(<RepositoryNotifications {...props} />);
 
@@ -116,7 +116,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should toggle repository notifications visibility', async () => {
@@ -132,6 +132,6 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     await userEvent.click(screen.getByTestId('repository-toggle'));
 
     const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

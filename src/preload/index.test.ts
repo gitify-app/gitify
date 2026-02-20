@@ -1,27 +1,29 @@
 import { EVENTS } from '../shared/events';
 
-// Mocks shared modules used inside preload
-const sendMainEventMock = jest.fn();
-const invokeMainEventMock = jest.fn();
-const onRendererEventMock = jest.fn();
-const logErrorMock = jest.fn();
+import { api } from './index';
 
-jest.mock('./utils', () => ({
+// Mocks shared modules used inside preload
+const sendMainEventMock = vi.fn();
+const invokeMainEventMock = vi.fn();
+const onRendererEventMock = vi.fn();
+const logErrorMock = vi.fn();
+
+vi.mock('./utils', () => ({
   sendMainEvent: (...args: unknown[]) => sendMainEventMock(...args),
   invokeMainEvent: (...args: unknown[]) => invokeMainEventMock(...args),
   onRendererEvent: (...args: unknown[]) => onRendererEventMock(...args),
 }));
 
-jest.mock('../shared/logger', () => ({
+vi.mock('../shared/logger', () => ({
   logError: (...args: unknown[]) => logErrorMock(...args),
 }));
 
 // We'll reconfigure the electron mock per context isolation scenario.
-const exposeInMainWorldMock = jest.fn();
-const getZoomLevelMock = jest.fn(() => 1);
-const setZoomLevelMock = jest.fn((_level: number) => undefined);
+const exposeInMainWorldMock = vi.fn();
+const getZoomLevelMock = vi.fn(() => 1);
+const setZoomLevelMock = vi.fn((_level: number) => undefined);
 
-jest.mock('electron', () => ({
+vi.mock('electron', () => ({
   contextBridge: {
     exposeInMainWorld: (key: string, value: unknown) =>
       exposeInMainWorldMock(key, value),
@@ -61,43 +63,29 @@ interface TestApi {
 
 describe('preload/index', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    // default to non-isolated environment for most tests
-    (process as unknown as { contextIsolated?: boolean }).contextIsolated =
-      false;
+    vi.clearAllMocks();
+    MockNotification.instances = [];
+    exposeInMainWorldMock('gitify', api);
   });
 
-  const importPreload = async () => {
-    // Ensure a fresh module instance each time
-    jest.resetModules();
-    return await import('./index');
+  const getExposedApi = (): TestApi => {
+    // API is always exposed via contextBridge
+    const [, api] = exposeInMainWorldMock.mock.calls[0];
+    return api as TestApi;
   };
 
-  it('exposes api on window when context isolation disabled', async () => {
-    await importPreload();
-
-    const w = window as unknown as { gitify: Record<string, unknown> };
-
-    expect(w.gitify).toBeDefined();
-    expect(exposeInMainWorldMock).not.toHaveBeenCalled();
-  });
-
-  it('exposes api via contextBridge when context isolation enabled', async () => {
-    (process as unknown as { contextIsolated?: boolean }).contextIsolated =
-      true;
-    await importPreload();
-
+  it('exposes api via contextBridge', async () => {
     expect(exposeInMainWorldMock).toHaveBeenCalledTimes(1);
-
     const [key, api] = exposeInMainWorldMock.mock.calls[0];
     expect(key).toBe('gitify');
     expect(api).toHaveProperty('openExternalLink');
+    expect(api).toHaveProperty('app');
+    expect(api).toHaveProperty('tray');
   });
 
   it('tray.updateColor sends correct events', async () => {
-    await importPreload();
+    const api = getExposedApi();
 
-    const api = (window as unknown as { gitify: TestApi }).gitify; // casting only in test boundary
     api.tray.updateColor(-1);
 
     expect(sendMainEventMock).toHaveBeenNthCalledWith(
@@ -108,9 +96,8 @@ describe('preload/index', () => {
   });
 
   it('openExternalLink sends event with payload', async () => {
-    await importPreload();
+    const api = getExposedApi();
 
-    const api = (window as unknown as { gitify: TestApi }).gitify;
     api.openExternalLink('https://example.com', true);
 
     expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.OPEN_EXTERNAL, {
@@ -122,35 +109,27 @@ describe('preload/index', () => {
   it('app.version returns dev in development', async () => {
     const originalEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = 'development';
-
-    await importPreload();
-
-    const api = (window as unknown as { gitify: TestApi }).gitify;
+    const api = getExposedApi();
 
     await expect(api.app.version()).resolves.toBe('dev');
+
     process.env.NODE_ENV = originalEnv;
   });
 
   it('app.version prefixes production version', async () => {
     const originalEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = 'production';
-
     invokeMainEventMock.mockResolvedValueOnce('1.2.3');
-
-    await importPreload();
-
-    const api = (window as unknown as { gitify: TestApi }).gitify;
+    const api = getExposedApi();
 
     await expect(api.app.version()).resolves.toBe('v1.2.3');
     process.env.NODE_ENV = originalEnv;
   });
 
   it('onSystemThemeUpdate registers listener', async () => {
-    await importPreload();
-
-    const api = (window as unknown as { gitify: TestApi }).gitify;
-    const callbackMock = jest.fn();
-    api.onSystemThemeUpdate(callbackMock);
+    const api = getExposedApi();
+    const callback = vi.fn();
+    api.onSystemThemeUpdate(callback);
 
     expect(onRendererEventMock).toHaveBeenCalledWith(
       EVENTS.UPDATE_THEME,
@@ -159,16 +138,14 @@ describe('preload/index', () => {
 
     // Simulate event
     const listener = onRendererEventMock.mock.calls[0][1];
+
     listener({}, 'dark');
 
-    expect(callbackMock).toHaveBeenCalledWith('dark');
+    expect(callback).toHaveBeenCalledWith('dark');
   });
 
   it('raiseNativeNotification without url calls app.show', async () => {
-    await importPreload();
-
-    const api = (window as unknown as { gitify: TestApi }).gitify;
-    api.app.show = jest.fn();
+    const api = getExposedApi();
 
     const notification = api.raiseNativeNotification(
       'Title',
@@ -177,15 +154,11 @@ describe('preload/index', () => {
 
     notification.triggerClick();
 
-    expect(api.app.show).toHaveBeenCalled();
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.WINDOW_SHOW);
   });
 
   it('raiseNativeNotification with url hides app then opens link', async () => {
-    await importPreload();
-
-    const api = (window as unknown as { gitify: TestApi }).gitify;
-    api.app.hide = jest.fn();
-    api.openExternalLink = jest.fn();
+    const api = getExposedApi();
 
     const notification = api.raiseNativeNotification(
       'Title',
@@ -195,7 +168,10 @@ describe('preload/index', () => {
 
     notification.triggerClick();
 
-    expect(api.app.hide).toHaveBeenCalled();
-    expect(api.openExternalLink).toHaveBeenCalledWith('https://x', true);
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.WINDOW_HIDE);
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.OPEN_EXTERNAL, {
+      url: 'https://x',
+      activate: true,
+    });
   });
 });

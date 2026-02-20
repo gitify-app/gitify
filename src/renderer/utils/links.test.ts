@@ -24,12 +24,12 @@ import {
 } from './links';
 
 describe('renderer/utils/links.ts', () => {
-  const openExternalLinkSpy = jest
+  const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+    .mockImplementation(vi.fn());
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('openGitifyReleaseNotes', () => {
@@ -90,9 +90,9 @@ describe('renderer/utils/links.ts', () => {
 
   it('openDeveloperSettings', () => {
     const mockSettingsURL = 'https://github.com/settings/tokens' as Link;
-    jest
-      .spyOn(authUtils, 'getDeveloperSettingsURL')
-      .mockReturnValue(mockSettingsURL);
+    vi.spyOn(authUtils, 'getDeveloperSettingsURL').mockReturnValue(
+      mockSettingsURL,
+    );
 
     openDeveloperSettings(mockGitHubCloudAccount);
 
@@ -112,9 +112,9 @@ describe('renderer/utils/links.ts', () => {
 
   it('openNotification', async () => {
     const mockNotificationUrl = mockGitifyNotification.repository.htmlUrl;
-    jest
-      .spyOn(helpers, 'generateGitHubWebUrl')
-      .mockResolvedValue(mockNotificationUrl);
+    vi.spyOn(helpers, 'generateGitHubWebUrl').mockResolvedValue(
+      mockNotificationUrl,
+    );
 
     await openNotification(mockGitifyNotification);
 

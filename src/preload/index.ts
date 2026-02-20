@@ -2,7 +2,6 @@ import { contextBridge, webFrame } from 'electron';
 
 import { APPLICATION } from '../shared/constants';
 import { EVENTS } from '../shared/events';
-import { logError } from '../shared/logger';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
 import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
@@ -111,15 +110,14 @@ export const api = {
   },
 };
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
-if (process.contextIsolated) {
-  try {
-    contextBridge.exposeInMainWorld('gitify', api);
-  } catch (error) {
-    logError('preload', 'Failed to expose API to renderer', error);
-  }
-} else {
-  window.gitify = api;
+// Use `contextBridge` APIs to expose Electron APIs to renderer
+// Context isolation is always enabled in this app
+try {
+  contextBridge.exposeInMainWorld('gitify', api);
+} catch (error) {
+  // biome-ignore lint/suspicious/noConsole: preload environment is strictly sandboxed
+  console.error(
+    '[preload] Failed to expose Gitify Bridge API to renderer',
+    error,
+  );
 }

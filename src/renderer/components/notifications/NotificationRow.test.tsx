@@ -12,14 +12,14 @@ import * as links from '../../utils/links';
 import { NotificationRow, type NotificationRowProps } from './NotificationRow';
 
 describe('renderer/components/notifications/NotificationRow.tsx', () => {
-  jest.spyOn(links, 'openNotification').mockImplementation();
-  jest.spyOn(comms, 'openExternalLink').mockImplementation();
-  jest
-    .spyOn(globalThis.Date, 'now')
-    .mockImplementation(() => new Date('2024').valueOf());
+  vi.spyOn(links, 'openNotification').mockImplementation(vi.fn());
+  vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
+  vi.spyOn(globalThis.Date, 'now').mockImplementation(() =>
+    new Date('2024').valueOf(),
+  );
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render itself & its children - group by date', async () => {
@@ -32,7 +32,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       settings: { ...mockSettings, groupBy: GroupBy.DATE },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - group by repositories', async () => {
@@ -45,7 +45,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - hide numbers', async () => {
@@ -58,7 +58,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       settings: { ...mockSettings, showNumber: false },
     });
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - notification is read', async () => {
@@ -69,12 +69,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
     const tree = renderWithAppContext(<NotificationRow {...props} />);
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', async () => {
-      const markNotificationsAsReadMock = jest.fn();
+      const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
@@ -93,7 +93,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in the browser - delay notification setting enabled', async () => {
-      const markNotificationsAsReadMock = jest.fn();
+      const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
@@ -116,7 +116,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in browser & mark it as done', async () => {
-      const markNotificationsAsDoneMock = jest.fn();
+      const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
@@ -135,8 +135,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
-      const markNotificationsAsReadMock = jest.fn();
-      const markNotificationsAsDoneMock = jest.fn();
+      const markNotificationsAsReadMock = vi.fn();
+      const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
@@ -161,7 +161,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as read', async () => {
-      const markNotificationsAsReadMock = jest.fn();
+      const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
@@ -195,7 +195,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as done', async () => {
-      const markNotificationsAsDoneMock = jest.fn();
+      const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
@@ -247,7 +247,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should unsubscribe from a notification thread', async () => {
-      const unsubscribeNotificationMock = jest.fn();
+      const unsubscribeNotificationMock = vi.fn();
 
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,

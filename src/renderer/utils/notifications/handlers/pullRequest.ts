@@ -68,7 +68,7 @@ class PullRequestHandler extends DefaultHandler {
       labels:
         pr.labels?.nodes.map((label) => ({
           name: label.name,
-          color: (label as any).color,
+          color: label.color,
         })) ?? [],
       linkedIssues: pr.closingIssuesReferences?.nodes.map((issue) =>
         formatGitHubNumber(issue.number),

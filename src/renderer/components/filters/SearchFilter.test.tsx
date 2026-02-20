@@ -5,10 +5,10 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { SearchFilter } from './SearchFilter';
 
 describe('renderer/components/filters/SearchFilter.tsx', () => {
-  const updateFilterMock = jest.fn();
+  const updateFilterMock = vi.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Include Search Tokens', () => {

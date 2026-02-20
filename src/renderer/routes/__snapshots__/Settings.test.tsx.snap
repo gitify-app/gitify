@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = `
+exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] = `
 <div
   class="flex flex-col h-screen"
   data-testid="settings"
@@ -1991,7 +1991,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_ID_"
+          aria-describedby="_r_13_"
           class="prc-Button-ButtonBase-9n-Xk"
           data-loading="false"
           data-no-visuals="true"
@@ -2019,7 +2019,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="ne"
-          id="_r_ID_"
+          id="_r_13_"
           popover="auto"
           role="tooltip"
         >
@@ -2036,7 +2036,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_ID_"
+          aria-describedby="_r_15_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2072,7 +2072,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           role="tooltip"
         >
           <span
-            id="_r_ID_"
+            id="_r_15_"
           >
             Accounts
             <span
@@ -2111,7 +2111,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           </span>
         </span>
         <button
-          aria-describedby="_r_ID_"
+          aria-describedby="_r_17_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2147,7 +2147,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           role="tooltip"
         >
           <span
-            id="_r_ID_"
+            id="_r_17_"
           >
             Quit Gitify
             <span

@@ -127,7 +127,9 @@ export interface AppContextState {
   ) => void;
 }
 
-export const AppContext = createContext<Partial<AppContextState>>({});
+export const AppContext = createContext<Partial<AppContextState> | undefined>(
+  undefined,
+);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const existingState = loadState();

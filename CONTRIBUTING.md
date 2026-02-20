@@ -1,51 +1,50 @@
 # Gitify Contributing Guide
 
-Hi! We're really excited that you're interested in contributing to Gitify! Before submitting your contribution, please read through the following guide. We also suggest you read the [Project Philosophy](#project-philosophy) in our documentation.
+Hi! We're really excited that you're interested in contributing to Gitify! 
 
-### Installation
+Before submitting your contribution, please read through the following guide. 
 
-To get started, you'll need to clone the repository and install the dependencies.
+We also suggest you read the [Project Philosophy](#project-philosophy) in our documentation.
 
-```shell
-pnpm install
-```
-
-### Development
-
+### Getting Started
 > [!TIP]
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
 > ```shell
 > OAUTH_CLIENT_ID="123" pnpm build
 > ```
 
+To get started:
+
+Clone the repository and install dependencies:
+  ```shell
+  pnpm install
+  ```
+
 Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token.  This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
 ```shell
 GITHUB_TOKEN=<some personal access token>
-```  
-
-To watch for changes (`webpack`) in the `src` directory:
-
-```shell
-pnpm watch
 ```
 
-To run the **electron app**:
+Build static resources (tray icons, twemojis, etc). You only need to rebuild if you change static assets:
+  ```shell
+  pnpm build
+  ```
+
+Start development mode (includes GraphQL codegen and hot module reload):
+  ```shell
+  pnpm dev
+  ```
 
 > [!NOTE]
 > This will also install React Developer Tools extension automatically so you can inspect the renderer process.
 > Make sure you force a reload when first opening the `Developer Tools`.
 
-```shell
-pnpm start
-```
-
-To reload the app with the changes that `pnpm watch` has detected, you can use the `CmdOrCtrl+R` shortcut.
 
 ### Tests
 
-There are 2 checks:
-1. linter & formatter with [biome][biome-website]
-2. unit tests with [jest][jest-website]
+There are two main checks:
+1. Linter & formatter with [Biome][biome-website]
+2. Unit tests with [Vitest][vitest-website]
 
 ```shell
 # Run biome to check linting and formatting
@@ -54,28 +53,46 @@ pnpm lint:check
 # Run unit tests with coverage
 pnpm test
 
-# Update jest snapshots
+# Update vitest snapshots
 pnpm test -u
 ```
+
+### Code Style & Conventions
+
+- We use [Biome][biome-website] for linting and formatting. Please run `pnpm lint:check` before submitting a PR.
+- Follow existing file and folder naming conventions.
+- Keep commit messages clear and descriptive.
+
+### How to Report Bugs or Request Features
+
+If you encounter a bug or have a feature request, please [open an issue][github-issues] with clear steps to reproduce or a detailed description of your idea. Check for existing issues before creating a new one.
+
 
 ### Releases
 
 The release process is automated. Follow the steps below.
 
-1. Verify that all features you want targeted in the release have been merged to `main`.
-2. Check the [Renovate Dependency Dashboard][github-dependency-dashboard] to see if there are any updates you want included.
-3. Create a [new **draft** release][github-new-release]. Set the tag version to something with the format of `v1.2.3`. Save as a **draft** before moving to the next step
-4. Create a branch that starts with `release/vX.X.X` (ie. `release/v1.2.3`).  In this branch you need to:
-  * Run `pnpm version <new-version-number` to **bump the version** of the app . 
-  * Commit these changes and open a PR. A GitHub Actions workflow will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
-5. Merge your release branch into `main`.
-6. Publish the release once you've finalized the release notes and confirmed all assets are there.
-7. Edit current [Milestone][github-milestones] to have: 
-   * description: link to the release notes
-   * due date: date of release
-   * close milestone
-8. Create a [New Milestone][github-new-milestone] for upcoming release.
-9. A new homebrew cask will be [automatically published][homebrew-cask-autobump-workflow] (workflow runs ~3 hours)
+1. **Verify features:** Ensure all features and fixes you want included in the release are merged into `main`.
+2. **Check dependencies:** Review the [Renovate Dependency Dashboard][github-dependency-dashboard] for any dependency updates you want to include.
+3. **Create a release branch:**
+  - Name your branch `release/vX.X.X` (e.g., `release/v1.2.3`).
+  - Run `pnpm version <new-version-number>` to **bump the version** in `package.json` and create a version commit/tag.
+  - Update `sonar.projectVersion` within `sonar-project.properties`
+  - Commit and push these changes.
+  - Open a Pull Request (PR) from your release branch. 
+4. **GitHub release:** GitHub Actions will automatically build, sign, and upload release assets to a new draft release with automated release notes.
+5. **Merge the release branch:** Once the PR is approved and checks pass, merge your release branch into `main`.
+6. **Publish the release:**
+  - Finalize the release notes in the draft release on GitHub.
+  - Confirm all assets are present and correct.
+  - Publish the release.
+7. **Update milestones:**
+  - Edit the current [Milestone][github-milestones]:
+    - Add a link to the release notes in the description.
+    - Set the due date to the release date.
+    - Close the milestone.
+  - Create a [New Milestone][github-new-milestone] for the next release cycle.
+8. A new homebrew cask will be [automatically published][homebrew-cask-autobump-workflow] (workflow runs ~3 hours)
 
 ### Design Guidelines
 
@@ -99,10 +116,11 @@ This project is a tool for monitoring new notifications from GitHub. It's not me
 <!-- LINK LABELS -->
 [biome-website]: https://biomejs.dev/
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
+[github-issues]: https://github.com/setchy/gitify/issues
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
 [github-new-milestone]: https://github.com/gitify-app/gitify/milestones/new
 [github-new-release]: https://github.com/gitify-app/gitify/releases/new
 [github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
-[jest-website]: https://jestjs.io/
+[vitest-website]: https://vitest.dev/
 

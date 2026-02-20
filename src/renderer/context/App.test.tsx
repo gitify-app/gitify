@@ -1,4 +1,4 @@
-import { act, waitFor } from '@testing-library/react';
+import { act } from '@testing-library/react';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
@@ -26,7 +26,7 @@ import * as tray from '../utils/tray';
 import { type AppContextState, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 
-jest.mock('../hooks/useNotifications');
+vi.mock('../hooks/useNotifications');
 
 // Helper to render the context
 const renderWithContext = () => {
@@ -47,44 +47,49 @@ const renderWithContext = () => {
 };
 
 describe('renderer/context/App.tsx', () => {
-  const fetchNotificationsMock = jest.fn();
-  const markNotificationsAsReadMock = jest.fn();
-  const markNotificationsAsDoneMock = jest.fn();
-  const unsubscribeNotificationMock = jest.fn();
-  const removeAccountNotificationsMock = jest.fn();
+  const fetchNotificationsMock = vi.fn();
+  const markNotificationsAsReadMock = vi.fn();
+  const markNotificationsAsDoneMock = vi.fn();
+  const unsubscribeNotificationMock = vi.fn();
+  const removeAccountNotificationsMock = vi.fn();
 
-  const saveStateSpy = jest
+  const saveStateSpy = vi
     .spyOn(storage, 'saveState')
-    .mockImplementation(jest.fn());
+    .mockImplementation(vi.fn());
 
   beforeEach(() => {
-    jest.useFakeTimers();
-    (useNotifications as jest.Mock).mockReturnValue({
+    vi.useFakeTimers();
+    vi.mocked(useNotifications).mockReturnValue({
+      status: 'success',
+      globalError: null,
+      notifications: [],
+      notificationCount: 0,
+      hasNotifications: false,
+      unreadNotificationCount: 0,
+      hasUnreadNotifications: false,
       fetchNotifications: fetchNotificationsMock,
       markNotificationsAsRead: markNotificationsAsReadMock,
       markNotificationsAsDone: markNotificationsAsDoneMock,
       unsubscribeNotification: unsubscribeNotificationMock,
       removeAccountNotifications: removeAccountNotificationsMock,
-    });
+    } as ReturnType<typeof useNotifications>);
   });
 
   afterEach(() => {
-    jest.clearAllTimers();
-    jest.clearAllMocks();
+    vi.clearAllTimers();
+    vi.clearAllMocks();
   });
 
   describe('notification methods', () => {
-    const setTrayIconColorAndTitleSpy = jest
+    const setTrayIconColorAndTitleSpy = vi
       .spyOn(tray, 'setTrayIconColorAndTitle')
-      .mockImplementation(jest.fn());
+      .mockImplementation(vi.fn());
 
-    jest
-      .spyOn(notifications, 'getNotificationCount')
-      .mockImplementation(jest.fn());
+    vi.spyOn(notifications, 'getNotificationCount').mockImplementation(vi.fn());
 
-    jest
-      .spyOn(notifications, 'getUnreadNotificationCount')
-      .mockImplementation(jest.fn());
+    vi.spyOn(notifications, 'getUnreadNotificationCount').mockImplementation(
+      vi.fn(),
+    );
 
     const mockDefaultState = {
       auth: { accounts: [] },
@@ -94,26 +99,29 @@ describe('renderer/context/App.tsx', () => {
     it('fetch notifications each interval', async () => {
       renderWithAppContext(<AppProvider>{null}</AppProvider>);
 
-      await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
-      );
+      // Initial fetch happens on mount - advance timers to ensure it runs
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(0);
+      });
 
-      act(() => {
-        jest.advanceTimersByTime(
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
-      act(() => {
-        jest.advanceTimersByTime(
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
-      act(() => {
-        jest.advanceTimersByTime(
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(
           Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
         );
       });
@@ -178,9 +186,9 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('settings methods', () => {
-    const saveStateSpy = jest
+    const saveStateSpy = vi
       .spyOn(storage, 'saveState')
-      .mockImplementation(jest.fn());
+      .mockImplementation(vi.fn());
 
     it('should call updateSetting', async () => {
       const getContext = renderWithContext();
@@ -278,19 +286,22 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('authentication functions', () => {
-    const addAccountSpy = jest
+    const addAccountSpy = vi
       .spyOn(authUtils, 'addAccount')
-      .mockImplementation(jest.fn());
-    const removeAccountSpy = jest.spyOn(authUtils, 'removeAccount');
+      .mockImplementation(vi.fn())
+      .mockResolvedValueOnce({
+        accounts: [mockGitHubCloudAccount],
+      } as unknown as AuthState);
+    const removeAccountSpy = vi.spyOn(authUtils, 'removeAccount');
 
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('loginWithDeviceFlowStart calls startGitHubDeviceFlow', async () => {
-      const startGitHubDeviceFlowSpy = jest
+      const startGitHubDeviceFlowSpy = vi
         .spyOn(authUtils, 'startGitHubDeviceFlow')
-        .mockImplementation(jest.fn());
+        .mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
 
@@ -302,9 +313,9 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('loginWithDeviceFlowPoll calls pollGitHubDeviceFlow', async () => {
-      const pollGitHubDeviceFlowSpy = jest
+      const pollGitHubDeviceFlowSpy = vi
         .spyOn(authUtils, 'pollGitHubDeviceFlow')
-        .mockImplementation(jest.fn());
+        .mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
 
@@ -320,8 +331,8 @@ describe('renderer/context/App.tsx', () => {
     it('loginWithDeviceFlowComplete calls addAccount', async () => {
       const getContext = renderWithContext();
 
-      act(() => {
-        getContext().loginWithDeviceFlowComplete(
+      await act(async () => {
+        await getContext().loginWithDeviceFlowComplete(
           'token' as Token,
           Constants.GITHUB_HOSTNAME,
         );
@@ -336,7 +347,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('loginWithOAuthApp calls performGitHubWebOAuth', async () => {
-      const performGitHubWebOAuthSpy = jest.spyOn(
+      const performGitHubWebOAuthSpy = vi.spyOn(
         authUtils,
         'performGitHubWebOAuth',
       );
@@ -357,7 +368,9 @@ describe('renderer/context/App.tsx', () => {
     it('logoutFromAccount calls removeAccountNotifications, removeAccount', async () => {
       const getContext = renderWithContext();
 
-      getContext().logoutFromAccount(mockGitHubCloudAccount);
+      act(() => {
+        getContext().logoutFromAccount(mockGitHubCloudAccount);
+      });
 
       expect(removeAccountNotificationsMock).toHaveBeenCalledWith(
         mockGitHubCloudAccount,

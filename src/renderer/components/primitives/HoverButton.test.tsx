@@ -6,7 +6,7 @@ import { HoverButton } from './HoverButton';
 
 describe('renderer/components/primitives/HoverButton.tsx', () => {
   it('should render', () => {
-    const actionMock = jest.fn();
+    const actionMock = vi.fn();
 
     const tree = renderWithAppContext(
       <HoverButton
@@ -16,11 +16,11 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
         testid="hover-button"
       />,
     );
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 
   it('should render - disabled', () => {
-    const actionMock = jest.fn();
+    const actionMock = vi.fn();
 
     const tree = renderWithAppContext(
       <HoverButton
@@ -31,6 +31,6 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
         testid="hover-button"
       />,
     );
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

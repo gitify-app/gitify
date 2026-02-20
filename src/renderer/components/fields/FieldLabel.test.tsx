@@ -10,6 +10,6 @@ describe('renderer/components/fields/FieldLabel.tsx', () => {
 
   it('should render', () => {
     const tree = renderWithAppContext(<FieldLabel {...props} />);
-    expect(tree).toMatchSnapshot();
+    expect(tree.container).toMatchSnapshot();
   });
 });

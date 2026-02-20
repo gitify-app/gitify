@@ -1,12 +1,12 @@
-const MockOctokit = jest.fn().mockImplementation(() => ({
-  request: jest.fn(),
-  graphql: jest.fn(),
+const MockOctokit = vi.fn().mockImplementation(() => ({
+  request: vi.fn(),
+  graphql: vi.fn(),
   paginate: {
-    iterator: jest.fn(),
+    iterator: vi.fn(),
   },
 }));
 
 // biome-ignore lint/suspicious/noExplicitAny: Mock file
-(MockOctokit as any).plugin = jest.fn((..._plugins: any[]) => MockOctokit);
+(MockOctokit as any).plugin = vi.fn((..._plugins: any[]) => MockOctokit);
 
 export { MockOctokit as Octokit };

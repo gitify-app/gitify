@@ -1,9 +1,9 @@
 import { EVENTS } from '../shared/events';
 
-const onMock = jest.fn();
-const handleMock = jest.fn();
+const onMock = vi.fn();
+const handleMock = vi.fn();
 
-jest.mock('electron', () => ({
+vi.mock('electron', () => ({
   ipcMain: {
     on: (...args: unknown[]) => onMock(...args),
     handle: (...args: unknown[]) => handleMock(...args),
@@ -14,15 +14,17 @@ import type { Menubar } from 'menubar';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 
-type MockMenubar = { window: { webContents: { send: jest.Mock } } };
+type MockMenubar = {
+  window: { webContents: { send: ReturnType<typeof vi.fn> } };
+};
 
 describe('main/events', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('onMainEvent registers ipcMain.on listener', () => {
-    const listenerMock = jest.fn();
+    const listenerMock = vi.fn();
     onMainEvent(
       EVENTS.WINDOW_SHOW,
       listenerMock as unknown as (e: Electron.IpcMainEvent, d: unknown) => void,
@@ -31,7 +33,7 @@ describe('main/events', () => {
   });
 
   it('handleMainEvent registers ipcMain.handle listener', () => {
-    const listenerMock = jest.fn();
+    const listenerMock = vi.fn();
     handleMainEvent(
       EVENTS.VERSION,
       listenerMock as unknown as (
@@ -43,7 +45,7 @@ describe('main/events', () => {
   });
 
   it('sendRendererEvent forwards event to webContents with data', () => {
-    const sendMock = jest.fn();
+    const sendMock = vi.fn();
     const mb: MockMenubar = { window: { webContents: { send: sendMock } } };
     sendRendererEvent(
       mb as unknown as Menubar,
@@ -54,7 +56,7 @@ describe('main/events', () => {
   });
 
   it('sendRendererEvent forwards event without data', () => {
-    const sendMock = jest.fn();
+    const sendMock = vi.fn();
     const mb: MockMenubar = { window: { webContents: { send: sendMock } } };
     sendRendererEvent(mb as unknown as Menubar, EVENTS.RESET_APP);
     expect(sendMock).toHaveBeenCalledWith(EVENTS.RESET_APP, undefined);
