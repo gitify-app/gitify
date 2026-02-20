@@ -108,7 +108,7 @@
     "concurrently": "9.2.1",
     "date-fns": "4.1.0",
     "dotenv": "17.3.1",
-    "electron": "40.4.1",
+    "electron": "40.6.0",
     "electron-builder": "26.8.1",
     "final-form": "5.0.0",
     "graphql": "16.12.0",
