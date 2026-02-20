@@ -3,10 +3,11 @@ import type {
   FilterStateType,
   GitifyNotification,
   GitifyNotificationState,
-  SettingsState,
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
+
+import { useFiltersStore } from '../../../stores';
 
 const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
   draft: {
@@ -38,12 +39,14 @@ export const stateFilter: Filter<FilterStateType> = {
     return this.FILTER_TYPES[stateType];
   },
 
-  hasFilters(settings: SettingsState): boolean {
-    return settings.filterStates.length > 0;
+  hasFilters(): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.states.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, stateType: FilterStateType): boolean {
-    return settings.filterStates.includes(stateType);
+  isFilterSet(stateType: FilterStateType): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.states.includes(stateType);
   },
 
   getFilterCount(

@@ -17,7 +17,7 @@ export const UserTypeFilter: FC = () => {
   return (
     <FilterSection
       filter={userTypeFilter}
-      filterSetting="filterUserTypes"
+      filterSetting="userTypes"
       icon={FeedPersonIcon}
       id="filter-user-types"
       layout="horizontal"

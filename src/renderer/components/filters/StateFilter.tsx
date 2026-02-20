@@ -10,7 +10,7 @@ export const StateFilter: FC = () => {
   return (
     <FilterSection
       filter={stateFilter}
-      filterSetting="filterStates"
+      filterSetting="states"
       icon={IssueOpenedIcon}
       id="filter-state"
       title="State"

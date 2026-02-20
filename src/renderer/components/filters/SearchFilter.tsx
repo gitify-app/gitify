@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from 'react';
+import type { FC } from 'react';
 
 import {
   CheckCircleFillIcon,
@@ -16,6 +16,7 @@ import { Title } from '../primitives/Title';
 
 import { IconColor, type SearchToken, Size } from '../../types';
 
+import { useFiltersStore } from '../../stores';
 import { cn } from '../../utils/cn';
 import {
   hasExcludeSearchFilters,
@@ -25,30 +26,18 @@ import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificat
 import { TokenSearchInput } from './TokenSearchInput';
 
 export const SearchFilter: FC = () => {
-  const { updateFilter, settings } = useAppContext();
+  const { settings } = useAppContext();
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: only run on search filter changes
-  useEffect(() => {
-    if (!hasIncludeSearchFilters(settings)) {
-      setIncludeSearchTokens([]);
-    }
-
-    if (!hasExcludeSearchFilters(settings)) {
-      setExcludeSearchTokens([]);
-    }
-  }, [settings.filterIncludeSearchTokens, settings.filterExcludeSearchTokens]);
-
-  const [includeSearchTokens, setIncludeSearchTokens] = useState<SearchToken[]>(
-    settings.filterIncludeSearchTokens,
-  );
+  const updateFilter = useFiltersStore((s) => s.updateFilter);
+  const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
+  const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
 
   const addIncludeSearchToken = (value: string) => {
     if (!value || includeSearchTokens.includes(value as SearchToken)) {
       return;
     }
 
-    setIncludeSearchTokens([...includeSearchTokens, value as SearchToken]);
-    updateFilter('filterIncludeSearchTokens', value as SearchToken, true);
+    updateFilter('includeSearchTokens', value as SearchToken, true);
   };
 
   const removeIncludeSearchToken = (token: SearchToken) => {
@@ -56,21 +45,15 @@ export const SearchFilter: FC = () => {
       return;
     }
 
-    updateFilter('filterIncludeSearchTokens', token, false);
-    setIncludeSearchTokens(includeSearchTokens.filter((t) => t !== token));
+    updateFilter('includeSearchTokens', token, false);
   };
-
-  const [excludeSearchTokens, setExcludeSearchTokens] = useState<SearchToken[]>(
-    settings.filterExcludeSearchTokens,
-  );
 
   const addExcludeSearchToken = (value: string) => {
     if (!value || excludeSearchTokens.includes(value as SearchToken)) {
       return;
     }
 
-    setExcludeSearchTokens([...excludeSearchTokens, value as SearchToken]);
-    updateFilter('filterExcludeSearchTokens', value as SearchToken, true);
+    updateFilter('excludeSearchTokens', value as SearchToken, true);
   };
 
   const removeExcludeSearchToken = (token: SearchToken) => {
@@ -78,8 +61,7 @@ export const SearchFilter: FC = () => {
       return;
     }
 
-    updateFilter('filterExcludeSearchTokens', token, false);
-    setExcludeSearchTokens(excludeSearchTokens.filter((t) => t !== token));
+    updateFilter('excludeSearchTokens', token, false);
   };
 
   return (
@@ -126,7 +108,7 @@ export const SearchFilter: FC = () => {
           label="Include"
           onAdd={addIncludeSearchToken}
           onRemove={removeIncludeSearchToken}
-          showSuggestionsOnFocusIfEmpty={!hasIncludeSearchFilters(settings)}
+          showSuggestionsOnFocusIfEmpty={!hasIncludeSearchFilters()}
           tokens={includeSearchTokens}
         />
 
@@ -136,7 +118,7 @@ export const SearchFilter: FC = () => {
           label="Exclude"
           onAdd={addExcludeSearchToken}
           onRemove={removeExcludeSearchToken}
-          showSuggestionsOnFocusIfEmpty={!hasExcludeSearchFilters(settings)}
+          showSuggestionsOnFocusIfEmpty={!hasExcludeSearchFilters()}
           tokens={excludeSearchTokens}
         />
       </Stack>

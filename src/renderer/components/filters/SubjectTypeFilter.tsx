@@ -10,7 +10,7 @@ export const SubjectTypeFilter: FC = () => {
   return (
     <FilterSection
       filter={subjectTypeFilter}
-      filterSetting="filterSubjectTypes"
+      filterSetting="subjectTypes"
       icon={BellIcon}
       id="filter-subject-type"
       title="Type"

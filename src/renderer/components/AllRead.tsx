@@ -2,11 +2,9 @@ import { type FC, useMemo } from 'react';
 
 import { Constants } from '../constants';
 
-import { useAppContext } from '../hooks/useAppContext';
-
 import { EmojiSplash } from './layout/EmojiSplash';
 
-import { hasActiveFilters } from '../utils/notifications/filters/filter';
+import { useFiltersStore } from '../stores';
 
 interface AllReadProps {
   fullHeight?: boolean;
@@ -15,9 +13,7 @@ interface AllReadProps {
 export const AllRead: FC<AllReadProps> = ({
   fullHeight = true,
 }: AllReadProps) => {
-  const { settings } = useAppContext();
-
-  const hasFilters = hasActiveFilters(settings);
+  const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
   const emoji = useMemo(
     () =>

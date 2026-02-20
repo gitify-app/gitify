@@ -53,10 +53,6 @@ describe('renderer/context/App.tsx', () => {
   const unsubscribeNotificationMock = vi.fn();
   const removeAccountNotificationsMock = vi.fn();
 
-  const saveStateSpy = vi
-    .spyOn(storage, 'saveState')
-    .mockImplementation(vi.fn());
-
   beforeEach(() => {
     vi.useFakeTimers();
     vi.mocked(useNotifications).mockReturnValue({
@@ -220,67 +216,6 @@ describe('renderer/context/App.tsx', () => {
           accounts: [],
         } as AuthState,
         settings: defaultSettings,
-      });
-    });
-  });
-
-  describe('filter methods', () => {
-    it('should call updateFilter - checked', async () => {
-      const getContext = renderWithContext();
-
-      act(() => {
-        getContext().updateFilter('filterReasons', 'assign', true);
-      });
-
-      expect(saveStateSpy).toHaveBeenCalledWith({
-        auth: {
-          accounts: [],
-        } as AuthState,
-        settings: {
-          ...defaultSettings,
-          filterReasons: ['assign'],
-        } as SettingsState,
-      });
-    });
-
-    it('should call updateFilter - unchecked', async () => {
-      const getContext = renderWithContext();
-
-      act(() => {
-        getContext().updateFilter('filterReasons', 'assign', false);
-      });
-
-      expect(saveStateSpy).toHaveBeenCalledWith({
-        auth: {
-          accounts: [],
-        } as AuthState,
-        settings: {
-          ...defaultSettings,
-          filterReasons: [],
-        } as SettingsState,
-      });
-    });
-
-    it('should clear filters back to default', async () => {
-      const getContext = renderWithContext();
-
-      act(() => {
-        getContext().clearFilters();
-      });
-
-      expect(saveStateSpy).toHaveBeenCalledWith({
-        auth: {
-          accounts: [],
-        } as AuthState,
-        settings: {
-          ...mockSettings,
-          filterIncludeSearchTokens: defaultSettings.filterIncludeSearchTokens,
-          filterExcludeSearchTokens: defaultSettings.filterExcludeSearchTokens,
-          filterUserTypes: defaultSettings.filterUserTypes,
-          filterSubjectTypes: defaultSettings.filterSubjectTypes,
-          filterStates: defaultSettings.filterStates,
-          filterReasons: defaultSettings.filterReasons,
-        },
       });
     });
   });

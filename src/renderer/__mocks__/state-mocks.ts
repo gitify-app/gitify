@@ -4,7 +4,6 @@ import {
   type AppearanceSettingsState,
   type AuthState,
   FetchType,
-  type FilterSettingsState,
   type GitifyState,
   GroupBy,
   type NotificationSettingsState,
@@ -66,21 +65,11 @@ const mockSystemSettings: SystemSettingsState = {
   openAtStartup: false,
 };
 
-const mockFilters: FilterSettingsState = {
-  filterUserTypes: [],
-  filterIncludeSearchTokens: [],
-  filterExcludeSearchTokens: [],
-  filterSubjectTypes: [],
-  filterStates: [],
-  filterReasons: [],
-};
-
 export const mockSettings: SettingsState = {
   ...mockAppearanceSettings,
   ...mockNotificationSettings,
   ...mockTraySettings,
   ...mockSystemSettings,
-  ...mockFilters,
 };
 
 export const mockState: GitifyState = {

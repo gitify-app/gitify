@@ -1,11 +1,12 @@
 import type {
   AccountNotifications,
   GitifyNotification,
-  SettingsState,
   TypeDetails,
   UserType,
 } from '../../../types';
 import type { Filter } from './types';
+
+import { useFiltersStore } from '../../../stores';
 
 type FilterableUserType = Extract<UserType, 'User' | 'Bot' | 'Organization'>;
 
@@ -35,12 +36,14 @@ export const userTypeFilter: Filter<UserType> = {
     return this.FILTER_TYPES[userType];
   },
 
-  hasFilters(settings: SettingsState): boolean {
-    return settings.filterUserTypes.length > 0;
+  hasFilters(): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.userTypes.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, userType: UserType): boolean {
-    return settings.filterUserTypes.includes(userType);
+  isFilterSet(userType: UserType): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.userTypes.includes(userType);
   },
 
   getFilterCount(

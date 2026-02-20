@@ -52,14 +52,9 @@ export interface Account {
 }
 
 /**
- * All allowed Config and Filter Settings values to be stored in the application.
- */
-export type SettingsValue = ConfigSettingsValue | FilterSettingsValue[];
-
-/**
  * All Config Settings values to be stored in the application.
  */
-export type ConfigSettingsValue =
+export type SettingsValue =
   | boolean
   | number
   | FetchType
@@ -69,24 +64,9 @@ export type ConfigSettingsValue =
   | Theme;
 
 /**
- * All Filter Settings values to be stored in the application.
+ * All allowed Config Settings keys to be stored in the application.
  */
-export type FilterSettingsValue =
-  | FilterStateType
-  | Reason
-  | SearchToken
-  | SubjectType
-  | UserType;
-
-/**
- * All allowed Config and Filter Settings keys to be stored in the application.
- */
-export type SettingsState = ConfigSettingsState & FilterSettingsState;
-
-/**
- * All Config Settings keys to be stored in the application.
- */
-export type ConfigSettingsState = AppearanceSettingsState &
+export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
   TraySettingsState &
   SystemSettingsState;
@@ -139,18 +119,6 @@ export interface SystemSettingsState {
   playSound: boolean;
   notificationVolume: Percentage;
   openAtStartup: boolean;
-}
-
-/**
- * Settings related to the filtering of notifications within the application.
- */
-export interface FilterSettingsState {
-  filterIncludeSearchTokens: SearchToken[];
-  filterExcludeSearchTokens: SearchToken[];
-  filterUserTypes: UserType[];
-  filterSubjectTypes: SubjectType[];
-  filterStates: FilterStateType[];
-  filterReasons: Reason[];
 }
 
 export interface AuthState {

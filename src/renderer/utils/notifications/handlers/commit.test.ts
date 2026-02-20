@@ -8,6 +8,7 @@ import type {
   GetCommitResponse,
 } from '../../api/types';
 
+import { useFiltersStore } from '../../../stores';
 import * as apiClient from '../../api/client';
 import { commitHandler } from './commit';
 
@@ -79,6 +80,8 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     });
 
     it('return early if commit state filtered', async () => {
+      useFiltersStore.setState({ states: ['closed'] });
+
       const mockNotification = mockPartialGitifyNotification({
         title: 'This is a commit with comments',
         type: 'Commit',
@@ -86,10 +89,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         latestCommentUrl: null,
       });
 
-      const result = await commitHandler.enrich(mockNotification, {
-        ...mockSettings,
-        filterStates: ['closed'],
-      });
+      const result = await commitHandler.enrich(mockNotification, mockSettings);
 
       // Returns empty object when filtered (no API call made)
       expect(result).toEqual({});

@@ -5,6 +5,7 @@ import { mockRawUser } from '../../api/__mocks__/response-mocks';
 import type { GitifyNotification, Link } from '../../../types';
 import type { GetReleaseResponse } from '../../api/types';
 
+import { useFiltersStore } from '../../../stores';
 import * as apiClient from '../../api/client';
 import { releaseHandler } from './release';
 
@@ -44,10 +45,12 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     });
 
     it('return early if release state filtered', async () => {
-      const result = await releaseHandler.enrich(mockNotification, {
-        ...mockSettings,
-        filterStates: ['closed'],
-      });
+      useFiltersStore.setState({ states: ['closed'] });
+
+      const result = await releaseHandler.enrich(
+        mockNotification,
+        mockSettings,
+      );
 
       // Returns empty object when filtered (no API call made)
       expect(result).toEqual({});

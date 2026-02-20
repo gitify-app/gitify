@@ -10,7 +10,7 @@ export const ReasonFilter: FC = () => {
   return (
     <FilterSection
       filter={reasonFilter}
-      filterSetting="filterReasons"
+      filterSetting="reasons"
       icon={NoteIcon}
       id="filter-reasons"
       title="Reason"

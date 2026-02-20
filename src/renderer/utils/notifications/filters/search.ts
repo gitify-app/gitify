@@ -1,4 +1,6 @@
-import type { GitifyNotification, SettingsState } from '../../../types';
+import type { GitifyNotification } from '../../../types';
+
+import { useFiltersStore } from '../../../stores';
 
 export const SEARCH_DELIMITER = ':';
 
@@ -37,12 +39,14 @@ export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
 export const DETAILED_ONLY_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
   ALL_SEARCH_QUALIFIERS.filter((q) => q.requiresDetailsNotifications);
 
-export function hasIncludeSearchFilters(settings: SettingsState) {
-  return settings.filterIncludeSearchTokens.length > 0;
+export function hasIncludeSearchFilters() {
+  const filters = useFiltersStore.getState();
+  return filters.includeSearchTokens.length > 0;
 }
 
-export function hasExcludeSearchFilters(settings: SettingsState) {
-  return settings.filterExcludeSearchTokens.length > 0;
+export function hasExcludeSearchFilters() {
+  const filters = useFiltersStore.getState();
+  return filters.excludeSearchTokens.length > 0;
 }
 
 export interface ParsedSearchToken {
