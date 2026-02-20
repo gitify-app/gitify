@@ -73,7 +73,7 @@
     "react-router-dom": "7.13.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.2",
+    "@biomejs/biome": "2.4.3",
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.1",
     "@graphql-codegen/cli": "6.1.1",
@@ -108,8 +108,8 @@
     "concurrently": "9.2.1",
     "date-fns": "4.1.0",
     "dotenv": "17.3.1",
-    "electron": "40.4.1",
-    "electron-builder": "26.7.0",
+    "electron": "40.6.0",
+    "electron-builder": "26.8.1",
     "electron-devtools-installer": "4.0.0",
     "final-form": "5.0.0",
     "graphql": "16.12.0",
