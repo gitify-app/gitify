@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom/vitest';
 
-import { useFiltersStore } from '../stores';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 // Sets timezone to UTC for consistent date/time in tests and snapshots
 process.env.TZ = 'UTC';
@@ -10,6 +12,12 @@ process.env.TZ = 'UTC';
  */
 beforeEach(() => {
   useFiltersStore.getState().reset();
+  useSettingsStore.getState().reset();
+  useFiltersStore.getState().reset();
+  useAccountsStore.setState({
+    accounts: [mockGitHubCloudAccount],
+    refreshAccount: vi.fn(async (account) => account),
+  });
 });
 
 /**

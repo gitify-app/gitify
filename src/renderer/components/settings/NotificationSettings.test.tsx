@@ -32,17 +32,6 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(updateSettingSpy).toHaveBeenCalledWith('groupBy', 'DATE');
   });
 
-  it('should change the fetchType radio group', async () => {
-    await act(async () => {
-      renderWithAppContext(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('radio-fetchType-inactivity'));
-
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('fetchType', 'INACTIVITY');
-  });
-
   describe('fetch interval settings', () => {
     it('should update the fetch interval values when using the buttons', async () => {
       await act(async () => {

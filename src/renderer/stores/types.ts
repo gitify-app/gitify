@@ -176,13 +176,14 @@ export interface AppearanceSettingsState {
  * Settings related to the notifications within the application.
  */
 export interface NotificationSettingsState {
+  /**
+   * How to group notifications within the application.
+   */
   groupBy: GroupBy;
 
   /**
-   * The fetch type for notifications.
-   * TODO - Deprecate in v7?
+   * The amount of time (in milliseconds) between each fetch of new notifications.
    */
-  fetchType: FetchType;
   fetchInterval: number;
 
   /**

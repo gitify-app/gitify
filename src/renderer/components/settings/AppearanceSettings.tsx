@@ -27,7 +27,6 @@ import {
   decreaseZoom,
   increaseZoom,
   resetZoomLevel,
-  zoomLevelToPercentage,
 } from '../../utils/zoom';
 
 export const AppearanceSettings: FC = () => {
@@ -40,8 +39,7 @@ export const AppearanceSettings: FC = () => {
   const wrapNotificationTitle = useSettingsStore(
     (s) => s.wrapNotificationTitle,
   );
-
-  const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
+  const zoomPercentage = useSettingsStore((s) => s.zoomPercentage);
 
   return (
     <fieldset>

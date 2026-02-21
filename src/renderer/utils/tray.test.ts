@@ -33,7 +33,7 @@ describe('renderer/utils/tray.ts', () => {
       setTrayIconColorAndTitle(5, true);
 
       expect(updateTrayColorSpy).toHaveBeenCalledTimes(1);
-      expect(updateTrayColorSpy).toHaveBeenCalledWith(5);
+      expect(updateTrayColorSpy).toHaveBeenCalledWith(5, true);
       expect(updateTrayTitleSpy).toHaveBeenCalledTimes(1);
       expect(updateTrayTitleSpy).toHaveBeenCalledWith('');
     });
@@ -46,7 +46,7 @@ describe('renderer/utils/tray.ts', () => {
       setTrayIconColorAndTitle(0, true);
 
       expect(updateTrayColorSpy).toHaveBeenCalledTimes(1);
-      expect(updateTrayColorSpy).toHaveBeenCalledWith(0);
+      expect(updateTrayColorSpy).toHaveBeenCalledWith(0, true);
       expect(updateTrayTitleSpy).toHaveBeenCalledTimes(1);
       expect(updateTrayTitleSpy).toHaveBeenCalledWith('');
     });
