@@ -8,6 +8,12 @@ import {
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
+import './App.css';
+
+import { useEffect } from 'react';
+
+import { QueryClientProvider } from '@tanstack/react-query';
+
 import { AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
@@ -17,18 +23,24 @@ import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
 import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
+import { initializeStoreSubscriptions } from './stores/subscriptions';
 
 import { GlobalShortcuts } from './components/GlobalShortcuts';
 import { AppLayout } from './components/layout/AppLayout';
 
-import './App.css';
+import { queryClient } from './utils/api/client';
+import { rendererLogError } from './utils/logger';
+import { migrateContextToZustand } from './utils/storage';
 
-import { useAppContext } from './hooks/useAppContext';
+// Run migration from Context storage to Zustand stores (async)
+migrateContextToZustand().catch((error) => {
+  rendererLogError('App', 'Failed to migrate storage', error);
+});
 
 function RequireAuth({ children }) {
   const location = useLocation();
 
-  const { isLoggedIn } = useAppContext();
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
 
   return isLoggedIn ? (
     children
@@ -38,64 +50,72 @@ function RequireAuth({ children }) {
 }
 
 export const App = () => {
+  // Initialize store subscriptions with proper cleanup
+  useEffect(() => {
+    const cleanup = initializeStoreSubscriptions();
+    return cleanup;
+  }, []);
+
   return (
-    <ThemeProvider>
-      <BaseStyles>
-        <AppProvider>
-          <Router>
-            <GlobalShortcuts />
-            <AppLayout>
-              <Routes>
-                <Route
-                  element={
-                    <RequireAuth>
-                      <NotificationsRoute />
-                    </RequireAuth>
-                  }
-                  path="/"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <FiltersRoute />
-                    </RequireAuth>
-                  }
-                  path="/filters"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <SettingsRoute />
-                    </RequireAuth>
-                  }
-                  path="/settings"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <AccountsRoute />
-                    </RequireAuth>
-                  }
-                  path="/accounts"
-                />
-                <Route element={<LoginRoute />} path="/login" />
-                <Route
-                  element={<LoginWithDeviceFlowRoute />}
-                  path="/login-device-flow"
-                />
-                <Route
-                  element={<LoginWithPersonalAccessTokenRoute />}
-                  path="/login-personal-access-token"
-                />
-                <Route
-                  element={<LoginWithOAuthAppRoute />}
-                  path="/login-oauth-app"
-                />
-              </Routes>
-            </AppLayout>
-          </Router>
-        </AppProvider>
-      </BaseStyles>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <BaseStyles>
+          <AppProvider>
+            <Router>
+              <GlobalShortcuts />
+              <AppLayout>
+                <Routes>
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <NotificationsRoute />
+                      </RequireAuth>
+                    }
+                    path="/"
+                  />
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <FiltersRoute />
+                      </RequireAuth>
+                    }
+                    path="/filters"
+                  />
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <SettingsRoute />
+                      </RequireAuth>
+                    }
+                    path="/settings"
+                  />
+                  <Route
+                    element={
+                      <RequireAuth>
+                        <AccountsRoute />
+                      </RequireAuth>
+                    }
+                    path="/accounts"
+                  />
+                  <Route element={<LoginRoute />} path="/login" />
+                  <Route
+                    element={<LoginWithDeviceFlowRoute />}
+                    path="/login-device-flow"
+                  />
+                  <Route
+                    element={<LoginWithPersonalAccessTokenRoute />}
+                    path="/login-personal-access-token"
+                  />
+                  <Route
+                    element={<LoginWithOAuthAppRoute />}
+                    path="/login-oauth-app"
+                  />
+                </Routes>
+              </AppLayout>
+            </Router>
+          </AppProvider>
+        </BaseStyles>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };

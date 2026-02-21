@@ -5,14 +5,11 @@ import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { defaultSettings } from '../../context/defaults';
-import { useAppContext } from '../../hooks/useAppContext';
+import { OpenPreference, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
-
-import { OpenPreference } from '../../types';
 
 import {
   canDecreaseVolume,
@@ -24,7 +21,13 @@ import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
 export const SystemSettings: FC = () => {
-  const { settings, updateSetting } = useAppContext();
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+  const openLinks = useSettingsStore((s) => s.openLinks);
+  const keyboardShortcutEnabled = useSettingsStore((s) => s.keyboardShortcut);
+  const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
+  const playSoundNewNotifications = useSettingsStore((s) => s.playSound);
+  const notificationVolume = useSettingsStore((s) => s.notificationVolume);
+  const openAtStartup = useSettingsStore((s) => s.openAtStartup);
 
   return (
     <fieldset>
@@ -56,15 +59,15 @@ export const SystemSettings: FC = () => {
               </Text>
             </Stack>
           }
-          value={settings.openLinks}
+          value={openLinks}
         />
 
         <Checkbox
-          checked={settings.keyboardShortcut}
+          checked={keyboardShortcutEnabled}
           label="Enable keyboard shortcut"
           name="keyboardShortcut"
           onChange={() =>
-            updateSetting('keyboardShortcut', !settings.keyboardShortcut)
+            updateSetting('keyboardShortcut', !keyboardShortcutEnabled)
           }
           tooltip={
             <div>
@@ -78,11 +81,11 @@ export const SystemSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.showNotifications}
+          checked={showSystemNotifications}
           label="Show system notifications"
           name="showNotifications"
           onChange={() =>
-            updateSetting('showNotifications', !settings.showNotifications)
+            updateSetting('showNotifications', !showSystemNotifications)
           }
           tooltip={
             <Text>
@@ -99,26 +102,28 @@ export const SystemSettings: FC = () => {
           gap="condensed"
         >
           <Checkbox
-            checked={settings.playSound}
+            checked={playSoundNewNotifications}
             label="Play sound"
             name="playSound"
-            onChange={() => updateSetting('playSound', !settings.playSound)}
+            onChange={() =>
+              updateSetting('playSound', !playSoundNewNotifications)
+            }
           />
 
           <ButtonGroup
             className="ml-2"
             data-testid="settings-volume-group"
-            hidden={!settings.playSound}
+            hidden={!playSoundNewNotifications}
           >
             <IconButton
               aria-label="Volume down"
               data-testid="settings-volume-down"
-              disabled={!canDecreaseVolume(settings.notificationVolume)}
+              disabled={!canDecreaseVolume(notificationVolume)}
               icon={VolumeDownIcon}
               onClick={() => {
                 updateSetting(
                   'notificationVolume',
-                  decreaseVolume(settings.notificationVolume),
+                  decreaseVolume(notificationVolume),
                 );
               }}
               size="small"
@@ -126,18 +131,18 @@ export const SystemSettings: FC = () => {
             />
 
             <Button aria-label="Volume percentage" disabled size="small">
-              {settings.notificationVolume.toFixed(0)}%
+              {notificationVolume.toFixed(0)}%
             </Button>
 
             <IconButton
               aria-label="Volume up"
               data-testid="settings-volume-up"
-              disabled={!canIncreaseVolume(settings.notificationVolume)}
+              disabled={!canIncreaseVolume(notificationVolume)}
               icon={VolumeUpIcon}
               onClick={() => {
                 updateSetting(
                   'notificationVolume',
-                  increaseVolume(settings.notificationVolume),
+                  increaseVolume(notificationVolume),
                 );
               }}
               size="small"
@@ -151,7 +156,7 @@ export const SystemSettings: FC = () => {
               onClick={() => {
                 updateSetting(
                   'notificationVolume',
-                  defaultSettings.notificationVolume,
+                  useSettingsStore.getInitialState().notificationVolume,
                 );
               }}
               size="small"
@@ -162,12 +167,10 @@ export const SystemSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.openAtStartup}
+          checked={openAtStartup}
           label="Open at startup"
           name="openAtStartup"
-          onChange={() =>
-            updateSetting('openAtStartup', !settings.openAtStartup)
-          }
+          onChange={() => updateSetting('openAtStartup', !openAtStartup)}
           tooltip={
             <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
           }

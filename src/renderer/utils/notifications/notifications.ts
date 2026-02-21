@@ -1,11 +1,11 @@
 import { Constants } from '../../constants';
 
+import { useAccountsStore, useSettingsStore } from '../../stores';
+
 import type {
   AccountNotifications,
   GitifyNotification,
-  GitifyState,
   GitifySubject,
-  SettingsState,
 } from '../../types';
 
 import {
@@ -55,14 +55,12 @@ export function getUnreadNotificationCount(
   );
 }
 
-function getNotifications(state: GitifyState) {
-  return state.auth.accounts.map((account) => {
+function getNotifications() {
+  const accounts = useAccountsStore.getState().accounts;
+  return accounts.map((account) => {
     return {
       account,
-      notifications: listNotificationsForAuthenticatedUser(
-        account,
-        state.settings,
-      ),
+      notifications: listNotificationsForAuthenticatedUser(account),
     };
   });
 }
@@ -82,11 +80,9 @@ function getNotifications(state: GitifyState) {
  * @param state - The Gitify state.
  * @returns A promise that resolves to an array of account notifications.
  */
-export async function getAllNotifications(
-  state: GitifyState,
-): Promise<AccountNotifications[]> {
+export async function getAllNotifications(): Promise<AccountNotifications[]> {
   const accountNotifications: AccountNotifications[] = await Promise.all(
-    getNotifications(state)
+    getNotifications()
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
@@ -97,17 +93,12 @@ export async function getAllNotifications(
             accountNotifications.account,
           );
 
+          // TODO remove to query select filtering
           notifications = filterBaseNotifications(notifications);
 
-          notifications = await enrichNotifications(
-            notifications,
-            state.settings,
-          );
+          notifications = await enrichNotifications(notifications);
 
-          notifications = filterDetailedNotifications(
-            notifications,
-            state.settings,
-          );
+          notifications = filterDetailedNotifications(notifications);
 
           notifications = notifications.map((notification) => {
             return formatNotification(notification);
@@ -135,7 +126,7 @@ export async function getAllNotifications(
   );
 
   // Set the order property for the notifications
-  stabilizeNotificationsOrder(accountNotifications, state.settings);
+  stabilizeNotificationsOrder(accountNotifications);
 
   return accountNotifications;
 }
@@ -144,13 +135,13 @@ export async function getAllNotifications(
  * Enrich notification details
  *
  * @param notifications All Gitify inbox notifications
- * @param settings
  * @returns
  */
 export async function enrichNotifications(
   notifications: GitifyNotification[],
-  settings: SettingsState,
 ): Promise<GitifyNotification[]> {
+  const settings = useSettingsStore.getState();
+
   if (!settings.detailedNotifications) {
     return notifications;
   }
@@ -161,7 +152,7 @@ export async function enrichNotifications(
     notifications.map(async (notification: GitifyNotification) => {
       const fragment = mergedResults.get(notification);
 
-      return enrichNotification(notification, settings, fragment);
+      return enrichNotification(notification, fragment);
     }),
   );
   return enrichedNotifications;
@@ -219,23 +210,17 @@ async function fetchNotificationDetailsInBatches(
  * Enrich a notification with additional details.
  *
  * @param notification - The notification to enrich.
- * @param settings - The settings to use for enrichment.
  * @returns The enriched notification.
  */
 export async function enrichNotification(
   notification: GitifyNotification,
-  settings: SettingsState,
   fetchedData?: unknown,
 ): Promise<GitifyNotification> {
   let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(
-      notification,
-      settings,
-      fetchedData,
-    );
+    additionalSubjectDetails = await handler.enrich(notification, fetchedData);
   } catch (err) {
     rendererLogError(
       'enrichNotification',
@@ -268,14 +253,12 @@ export async function enrichNotification(
  */
 export function stabilizeNotificationsOrder(
   accountNotifications: AccountNotifications[],
-  settings: SettingsState,
 ) {
   let orderIndex = 0;
 
   for (const account of accountNotifications) {
     const flattenedNotifications = getFlattenedNotificationsByRepo(
       account.notifications,
-      settings,
     );
 
     for (const notification of flattenedNotifications) {

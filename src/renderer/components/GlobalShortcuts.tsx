@@ -1,6 +1,6 @@
 import { type FC, useEffect } from 'react';
 
-import { useShortcutActions } from '../hooks/useShortcutActions';
+import { useShortcutActions } from '../hooks/useGlobalShortcuts';
 
 /**
  * Component that registers global keyboard shortcuts for the renderer app.

@@ -8,7 +8,6 @@ import type {
   GitifyNotification,
   GitifySubject,
   Link,
-  SettingsState,
 } from '../../../types';
 
 import { actionsURL } from '../../helpers';
@@ -25,7 +24,6 @@ class WorkflowRunHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
     const state = getWorkflowRunAttributes(notification)?.status;
 

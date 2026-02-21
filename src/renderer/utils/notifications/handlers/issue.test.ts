@@ -1,5 +1,4 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
 import {
   mockAuthor,
   mockCommenter,
@@ -48,7 +47,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         },
       } satisfies FetchIssueByNumberQuery);
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const result = await issueHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -81,7 +80,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         },
       } satisfies FetchIssueByNumberQuery);
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const result = await issueHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -125,7 +124,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         },
       } satisfies FetchIssueByNumberQuery);
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const result = await issueHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -160,7 +159,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         },
       } satisfies FetchIssueByNumberQuery);
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const result = await issueHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -196,7 +195,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         },
       } satisfies FetchIssueByNumberQuery);
 
-      const result = await issueHandler.enrich(mockNotification, mockSettings);
+      const result = await issueHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,

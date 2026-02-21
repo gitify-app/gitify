@@ -7,17 +7,16 @@ import {
   mockPartialGitifyNotification,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { Constants } from '../../constants';
 
-import {
-  type AccountNotifications,
-  type GitifyNotification,
-  type GitifyRepository,
-  GroupBy,
-  type Link,
-  type SettingsState,
+import { GroupBy, useSettingsStore } from '../../stores';
+
+import type {
+  AccountNotifications,
+  GitifyNotification,
+  GitifyRepository,
+  Link,
 } from '../../types';
 
 import * as logger from '../../utils/logger';
@@ -76,7 +75,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
     vi.spyOn(apiClient, 'fetchIssueByNumber').mockRejectedValue(mockError);
 
-    await enrichNotification(mockNotification, mockSettings);
+    await enrichNotification(mockNotification);
 
     expect(rendererLogErrorSpy).toHaveBeenCalledWith(
       'enrichNotification',
@@ -115,12 +114,11 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const mockAccounts: AccountNotifications[] = [acc1, acc2];
 
     it('assigns sequential order across all notifications when not grouped (DATE)', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
+      useSettingsStore.setState({
         groupBy: GroupBy.DATE,
-      };
+      });
 
-      stabilizeNotificationsOrder(mockAccounts, settings);
+      stabilizeNotificationsOrder(mockAccounts);
 
       expect(
         mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order),
@@ -128,12 +126,11 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     });
 
     it('groups by repository when REPOSITORY and assigns order in first-seen repo groups', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
+      useSettingsStore.setState({
         groupBy: GroupBy.REPOSITORY,
-      };
+      });
 
-      stabilizeNotificationsOrder(mockAccounts, settings);
+      stabilizeNotificationsOrder(mockAccounts);
 
       expect(
         mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order),
@@ -143,51 +140,54 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
   describe('enrichNotifications', () => {
     it('should skip enrichment when detailedNotifications is false', async () => {
+      useSettingsStore.setState({
+        detailedNotifications: false,
+      });
+
       const notification = mockPartialGitifyNotification({
         title: 'Issue #1',
         type: 'Issue',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
       }) as GitifyNotification;
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: false,
-      };
 
-      const result = await enrichNotifications([notification], settings);
+      const result = await enrichNotifications([notification]);
 
       expect(result).toEqual([notification]);
     });
 
     it('should return notifications when all types do not support merge query', async () => {
+      useSettingsStore.setState({
+        detailedNotifications: true,
+      });
+
       // CheckSuite types don't support merge query and have no URL
       const notification = mockPartialGitifyNotification({
         title: 'CI workflow run',
         type: 'CheckSuite',
         url: null,
       }) as GitifyNotification;
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: true,
-      };
 
-      const result = await enrichNotifications([notification], settings);
+      const result = await enrichNotifications([notification]);
 
       expect(result).toHaveLength(1);
       expect(result[0].subject.title).toBe('CI workflow run');
     });
 
     it('should handle empty notifications array', async () => {
-      const settings: SettingsState = {
-        ...mockSettings,
+      useSettingsStore.setState({
         detailedNotifications: true,
-      };
+      });
 
-      const result = await enrichNotifications([], settings);
+      const result = await enrichNotifications([]);
 
       expect(result).toEqual([]);
     });
 
     it('should batch notifications by GITHUB_API_MERGE_BATCH_SIZE', async () => {
+      useSettingsStore.setState({
+        detailedNotifications: true,
+      });
+
       const fetchNotificationDetailsForListSpy = vi
         .spyOn(apiClient, 'fetchNotificationDetailsForList')
         .mockResolvedValue(new Map());
@@ -201,12 +201,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         }),
       ) as GitifyNotification[];
 
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: true,
-      };
-
-      await enrichNotifications(notifications, settings);
+      await enrichNotifications(notifications);
 
       // Should be called 3 times: batches of 100, 100, 50
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(3);
@@ -224,6 +219,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     });
 
     it('should handle single batch of notifications', async () => {
+      useSettingsStore.setState({
+        detailedNotifications: true,
+      });
+
       const fetchNotificationDetailsForListSpy = vi
         .spyOn(apiClient, 'fetchNotificationDetailsForList')
         .mockResolvedValue(new Map());
@@ -236,12 +235,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         }),
       ) as GitifyNotification[];
 
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: true,
-      };
-
-      await enrichNotifications(notifications, settings);
+      await enrichNotifications(notifications);
 
       // Should be called once for single batch
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);

@@ -8,7 +8,8 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
-import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
+
+import { useSettingsStore } from '../stores';
 
 import type { ListNotificationsForAuthenticatedUserResponse } from '../utils/api/types';
 
@@ -20,6 +21,8 @@ import * as sound from '../utils/notifications/sound';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {
+  const accounts = [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount];
+
   const rendererLogErrorSpy = vi
     .spyOn(logger, 'rendererLogError')
     .mockImplementation(vi.fn());
@@ -136,13 +139,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
       ];
 
     it('should fetch non-detailed notifications with success', async () => {
-      const mockState = {
-        auth: mockAuth,
-        settings: {
-          ...mockSettings,
-          detailedNotifications: false,
-        },
-      };
+      useSettingsStore.setState({
+        detailedNotifications: false,
+      });
 
       vi.spyOn(
         apiClient,
@@ -151,10 +150,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
         mockNotifications as ListNotificationsForAuthenticatedUserResponse,
       );
 
-      const { result } = renderHook(() => useNotifications());
+      const { result } = renderHook(() => useNotifications(accounts));
 
       act(() => {
-        result.current.fetchNotifications(mockState);
+        result.current.fetchNotifications();
       });
 
       expect(result.current.status).toBe('loading');

@@ -1,15 +1,10 @@
-import { defaultSettings } from '../context/defaults';
+import { OpenPreference, useSettingsStore } from '../stores';
 
-import { type Link, OpenPreference } from '../types';
-
-import { loadState } from './storage';
+import type { Link } from '../types';
 
 export function openExternalLink(url: Link): void {
-  // Load the state from local storage to avoid having to pass settings as a parameter
-  const { settings } = loadState();
-  const openPreference = settings
-    ? settings.openLinks
-    : defaultSettings.openLinks;
+  const settings = useSettingsStore.getState();
+  const openPreference = settings.openLinks;
 
   if (url.toLowerCase().startsWith('https://')) {
     window.gitify.openExternalLink(
@@ -65,9 +60,13 @@ export function setKeyboardShortcut(keyboardShortcut: boolean): void {
  * Passing a negative number will set the error state color.
  *
  * @param notificationsLength The number of unread notifications
+ * @param isOnline Whether the application is currently online
  */
-export function updateTrayColor(notificationsLength: number): void {
-  window.gitify.tray.updateColor(notificationsLength);
+export function updateTrayColor(
+  notificationsLength: number,
+  isOnline: boolean,
+): void {
+  window.gitify.tray.updateColor(notificationsLength, isOnline);
 }
 
 /**

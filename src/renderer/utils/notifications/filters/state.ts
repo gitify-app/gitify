@@ -1,13 +1,12 @@
+import { type FilterStateType, useFiltersStore } from '../../../stores';
+
 import type {
   AccountNotifications,
-  FilterStateType,
   GitifyNotification,
   GitifyNotificationState,
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
-
-import { useFiltersStore } from '../../../stores';
 
 const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
   draft: {

@@ -1,4 +1,4 @@
-import type { SettingsState } from '../types';
+import { useSettingsStore } from '../stores';
 
 import { updateTrayColor, updateTrayTitle } from './comms';
 
@@ -6,17 +6,22 @@ import { updateTrayColor, updateTrayTitle } from './comms';
  * Sets the tray icon color and title based on the number of unread notifications.
  *
  * @param unreadNotifications - The number of unread notifications
- * @param settings - The application settings
+ * @param isOnline - Whether the application is currently online
  */
 export function setTrayIconColorAndTitle(
   unreadNotifications: number,
-  settings: SettingsState,
+  isOnline: boolean,
 ) {
+  const settings = useSettingsStore.getState();
   let title = '';
-  if (settings.showNotificationsCountInTray && unreadNotifications > 0) {
+  if (
+    isOnline &&
+    settings.showNotificationsCountInTray &&
+    unreadNotifications > 0
+  ) {
     title = unreadNotifications.toString();
   }
 
-  updateTrayColor(unreadNotifications);
+  updateTrayColor(unreadNotifications, isOnline);
   updateTrayTitle(title);
 }

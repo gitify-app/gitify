@@ -5,7 +5,7 @@ import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useShortcutActions } from '../../hooks/useShortcutActions';
+import { useShortcutActions } from '../../hooks/useGlobalShortcuts';
 
 import { Footer } from '../primitives/Footer';
 

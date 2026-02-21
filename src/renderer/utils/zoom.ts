@@ -1,10 +1,11 @@
-import { defaultSettings } from '../context/defaults';
+import { useSettingsStore } from '../stores';
 
 import type { Percentage } from '../types';
 
 const MINIMUM_ZOOM_PERCENTAGE = 0 as Percentage;
 const MAXIMUM_ZOOM_PERCENTAGE = 120 as Percentage;
-const RECOMMENDED_ZOOM_PERCENTAGE = defaultSettings.zoomPercentage;
+const RECOMMENDED_ZOOM_PERCENTAGE =
+  useSettingsStore.getInitialState().zoomPercentage;
 const MULTIPLIER = 2;
 const ZOOM_STEP = 10 as Percentage;
 

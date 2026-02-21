@@ -1,11 +1,10 @@
+import { QueryClient } from '@tanstack/react-query';
+
 import { Constants } from '../../constants';
 
-import type {
-  Account,
-  GitifyNotification,
-  Link,
-  SettingsState,
-} from '../../types';
+import { useSettingsStore } from '../../stores';
+
+import type { Account, GitifyNotification, Link } from '../../types';
 import type {
   GetCommitCommentResponse,
   GetCommitResponse,
@@ -34,6 +33,20 @@ import { performGraphQLRequest, performGraphQLRequestString } from './request';
 import { getNumberFromUrl } from './utils';
 
 /**
+ * Tanstack Query Client
+ */
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      refetchIntervalInBackground: true,
+      staleTime: Constants.QUERY_STALE_TIME_MS,
+      networkMode: 'online',
+    },
+  },
+});
+
+/**
  * Fetch details of the currently authenticated GitHub user.
  *
  * Always fetches fresh data without caching to ensure up-to-date user info.
@@ -51,9 +64,9 @@ export async function fetchAuthenticatedUserDetails(account: Account) {
  */
 export async function listNotificationsForAuthenticatedUser(
   account: Account,
-  settings: SettingsState,
 ): Promise<ListNotificationsForAuthenticatedUserResponse> {
   const octokit = await createOctokitClient(account, 'rest');
+  const settings = useSettingsStore.getState();
 
   if (settings.fetchAllNotifications) {
     // Fetch all pages using Octokit's pagination

@@ -8,7 +8,6 @@ import {
   type GitifySubject,
   IconColor,
   type Link,
-  type SettingsState,
   type SubjectType,
   type UserType,
 } from '../../../types';
@@ -21,7 +20,6 @@ export class DefaultHandler implements NotificationTypeHandler {
 
   async enrich(
     _notification: GitifyNotification,
-    _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
     return {};
   }

@@ -1,6 +1,6 @@
 import type { ColorModeWithAuto } from '@primer/react/dist/ThemeProvider';
 
-import { Theme } from '../types';
+import { Theme } from '../stores';
 
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';
 export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';

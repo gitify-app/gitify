@@ -15,7 +15,6 @@ import {
   type GitifySubject,
   IconColor,
   type Link,
-  type SettingsState,
 } from '../../../types';
 
 import { actionsURL } from '../../helpers';
@@ -34,7 +33,6 @@ class CheckSuiteHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
     const state = getCheckSuiteAttributes(notification)?.status;
 

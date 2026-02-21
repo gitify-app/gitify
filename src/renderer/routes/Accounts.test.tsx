@@ -8,6 +8,8 @@ import {
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
 
+import { useAccountsStore } from '../stores';
+
 import * as authUtils from '../utils/auth/utils';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
@@ -108,16 +110,16 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should render with PAT scopes warning', async () => {
+      useAccountsStore.setState({
+        accounts: [
+          { ...mockPersonalAccessTokenAccount, hasRequiredScopes: false },
+          mockOAuthAccount,
+          mockGitHubAppAccount,
+        ],
+      });
+
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: {
-            accounts: [
-              { ...mockPersonalAccessTokenAccount, hasRequiredScopes: false },
-              mockOAuthAccount,
-              mockGitHubAppAccount,
-            ],
-          },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();

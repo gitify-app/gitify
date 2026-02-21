@@ -7,7 +7,6 @@ import type {
   GitifySubject,
   IconColor,
   Link,
-  SettingsState,
   SubjectType,
   UserType,
 } from '../../../types';
@@ -24,12 +23,10 @@ export interface NotificationTypeHandler {
    * Enriches a base notification with additional information (state, author, metrics, etc).
    *
    * @param notification The base notification being enriched
-   * @param settings The app settings, which for some handlers may not be used during enrichment.
    * @param fetchedData Previously fetched enrichment data (upstream).  If present, then enrich will skip fetching detailed data inline.
    */
   enrich(
     notification: GitifyNotification,
-    settings: SettingsState,
     fetchedData?: unknown,
   ): Promise<Partial<GitifySubject>>;
 

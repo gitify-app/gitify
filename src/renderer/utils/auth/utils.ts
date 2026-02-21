@@ -18,24 +18,21 @@ import type {
   Account,
   AccountUUID,
   AuthCode,
-  AuthState,
   ClientID,
   Hostname,
   Link,
   Token,
 } from '../../types';
 import type {
-  AuthMethod,
   AuthResponse,
   DeviceFlowErrorResponse,
   DeviceFlowSession,
   LoginOAuthWebOptions,
 } from './types';
 
-import { fetchAuthenticatedUserDetails } from '../api/client';
-import { encryptValue, openExternalLink } from '../comms';
+import { openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
-import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
+import { rendererLogError, rendererLogInfo } from '../logger';
 
 export function performGitHubWebOAuth(
   authOptions: LoginOAuthWebOptions,
@@ -183,103 +180,6 @@ export async function exchangeAuthCodeForAccessToken(
   return authentication.token as Token;
 }
 
-export async function addAccount(
-  auth: AuthState,
-  method: AuthMethod,
-  token: Token,
-  hostname: Hostname,
-): Promise<AuthState> {
-  const accountList = auth.accounts;
-  const encryptedToken = await encryptValue(token);
-
-  let newAccount = {
-    hostname: hostname,
-    method: method,
-    platform: getPlatformFromHostname(hostname),
-    token: encryptedToken,
-    user: null, // Will be updated during the refresh call below
-  } as Account;
-
-  newAccount = await refreshAccount(newAccount);
-  const newAccountUUID = getAccountUUID(newAccount);
-
-  const accountAlreadyExists = accountList.some(
-    (a) => getAccountUUID(a) === newAccountUUID,
-  );
-
-  if (accountAlreadyExists) {
-    rendererLogWarn(
-      'addAccount',
-      `account for user ${newAccount.user.login} already exists`,
-    );
-  } else {
-    accountList.push(newAccount);
-  }
-
-  return {
-    accounts: accountList,
-  };
-}
-
-export function removeAccount(auth: AuthState, account: Account): AuthState {
-  const updatedAccounts = auth.accounts.filter(
-    (a) => a.token !== account.token,
-  );
-
-  return {
-    accounts: updatedAccounts,
-  };
-}
-
-export async function refreshAccount(account: Account): Promise<Account> {
-  try {
-    const response = await fetchAuthenticatedUserDetails(account);
-
-    const user = response.data;
-
-    // Refresh user data
-    account.user = {
-      id: String(user.id),
-      login: user.login,
-      name: user.name,
-      avatar: user.avatar_url as Link,
-    };
-
-    account.version = 'latest';
-
-    account.version = extractHostVersion(
-      response.headers['x-github-enterprise-version'] as string,
-    );
-
-    const accountScopes = response.headers['x-oauth-scopes']
-      ?.split(',')
-      .map((scope: string) => scope.trim());
-
-    account.hasRequiredScopes =
-      Constants.OAUTH_SCOPES.RECOMMENDED.every((scope) =>
-        accountScopes.includes(scope),
-      ) ||
-      Constants.OAUTH_SCOPES.ALTERNATE.every((scope) =>
-        accountScopes.includes(scope),
-      );
-
-    if (!account.hasRequiredScopes) {
-      rendererLogWarn(
-        'refreshAccount',
-        `account for user ${account.user.login} is missing required scopes`,
-      );
-    }
-  } catch (err) {
-    rendererLogError(
-      'refreshAccount',
-      `failed to refresh account for user ${account.user?.login ?? account.hostname}`,
-      err,
-    );
-  }
-
-  return account;
-}
-
 export function extractHostVersion(version: string | null): string {
   if (version) {
     return semver.valid(semver.coerce(version));
@@ -382,21 +282,6 @@ export function getAccountUUID(account: Account): AccountUUID {
   return btoa(
     `${account.hostname}-${account.user.id}-${account.method}`,
   ) as AccountUUID;
-}
-
-/**
- *  Return the primary (first) account hostname
- */
-export function getPrimaryAccountHostname(auth: AuthState) {
-  return auth.accounts[0]?.hostname ?? Constants.GITHUB_HOSTNAME;
-}
-
-export function hasAccounts(auth: AuthState) {
-  return auth.accounts.length > 0;
-}
-
-export function hasMultipleAccounts(auth: AuthState) {
-  return auth.accounts.length > 1;
 }
 
 export function formatRecommendedOAuthScopes() {

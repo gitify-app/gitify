@@ -1,4 +1,4 @@
-import { Theme } from '../types';
+import { Theme } from '../stores';
 
 import {
   DEFAULT_DAY_COLOR_SCHEME,

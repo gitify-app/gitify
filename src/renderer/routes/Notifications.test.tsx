@@ -1,6 +1,7 @@
 import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockSettings } from '../__mocks__/state-mocks';
+
+import { useAccountsStore, useSettingsStore } from '../stores';
 
 import { Errors } from '../utils/errors';
 import { NotificationsRoute } from './Notifications';
@@ -32,10 +33,26 @@ describe('renderer/routes/Notifications.tsx', () => {
   });
 
   it('should render itself & its children (show account header)', () => {
+    useSettingsStore.setState({ showAccountHeader: true });
+    useAccountsStore.setState({
+      accounts: [mockMultipleAccountNotifications[0]],
+    });
+
     const tree = renderWithAppContext(<NotificationsRoute />, {
       notifications: [mockMultipleAccountNotifications[0]],
-      settings: { ...mockSettings, showAccountHeader: true },
     });
+    expect(tree.container).toMatchSnapshot();
+  });
+
+  it('should render Offline Error when not online', () => {
+    const tree = renderWithAppContext(<NotificationsRoute />, {
+      notifications: [],
+      hasNotifications: false,
+      status: 'success',
+      globalError: null,
+      isOnline: false,
+    });
+
     expect(tree.container).toMatchSnapshot();
   });
 

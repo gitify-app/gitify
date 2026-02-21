@@ -36,9 +36,9 @@ export function canIncreaseVolume(volumePercentage: Percentage) {
 /**
  * Decrease volume by step amount
  */
-export function decreaseVolume(volume: Percentage) {
+export function decreaseVolume(volume: Percentage): Percentage {
   if (canDecreaseVolume(volume)) {
-    return volume - VOLUME_STEP;
+    return (volume - VOLUME_STEP) as Percentage;
   }
 
   return MINIMUM_VOLUME_PERCENTAGE;
@@ -47,9 +47,9 @@ export function decreaseVolume(volume: Percentage) {
 /**
  * Increase volume by step amount
  */
-export function increaseVolume(volume: Percentage) {
+export function increaseVolume(volume: Percentage): Percentage {
   if (canIncreaseVolume(volume)) {
-    return volume + VOLUME_STEP;
+    return (volume + VOLUME_STEP) as Percentage;
   }
 
   return MAXIMUM_VOLUME_PERCENTAGE;

@@ -21,7 +21,7 @@ import {
   Text,
 } from '@primer/react';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore } from '../stores';
 
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
@@ -35,7 +35,6 @@ import {
   formatAlternateOAuthScopes,
   formatRecommendedOAuthScopes,
   getAccountUUID,
-  refreshAccount,
 } from '../utils/auth/utils';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
@@ -43,28 +42,30 @@ import {
   openDeveloperSettings,
   openHost,
 } from '../utils/links';
-import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
-
-  const { auth, settings, logoutFromAccount } = useAppContext();
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},
   );
 
+  const accounts = useAccountsStore((s) => s.accounts);
+  const removeAccount = useAccountsStore((s) => s.removeAccount);
+  const refreshAccount = useAccountsStore((s) => s.refreshAccount);
+
   const logoutAccount = useCallback(
     (account: Account) => {
-      logoutFromAccount(account);
+      removeAccount(account);
       navigate(-1);
     },
-    [logoutFromAccount],
+    [removeAccount],
   );
 
   const setAsPrimaryAccount = (account: Account) => {
-    auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
-    saveState({ auth, settings });
+    useAccountsStore.setState({
+      accounts: [account, ...accounts.filter((a) => a !== account)],
+    });
     navigate('/accounts', { replace: true });
   };
 
@@ -108,7 +109,7 @@ export const AccountsRoute: FC = () => {
       <Header icon={PersonIcon}>Accounts</Header>
 
       <Contents>
-        {auth.accounts.map((account, i) => {
+        {accounts.map((account, i) => {
           const AuthMethodIcon = getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);

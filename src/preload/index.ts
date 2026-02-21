@@ -34,8 +34,8 @@ export const api = {
   },
 
   tray: {
-    updateColor: (notificationsCount = 0) => {
-      sendMainEvent(EVENTS.UPDATE_ICON_COLOR, notificationsCount);
+    updateColor: (notificationsCount = 0, isOnline = true) => {
+      sendMainEvent(EVENTS.UPDATE_ICON_COLOR, { notificationsCount, isOnline });
     },
 
     updateTitle: (title = '') => sendMainEvent(EVENTS.UPDATE_ICON_TITLE, title),

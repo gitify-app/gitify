@@ -13,7 +13,6 @@ import type {
   GitifyNotification,
   GitifySubject,
   Link,
-  SettingsState,
 } from '../../../types';
 import { IconColor } from '../../../types';
 
@@ -29,7 +28,6 @@ class IssueHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
     fetchedData?: IssueDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const issue =

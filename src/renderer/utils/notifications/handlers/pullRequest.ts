@@ -16,7 +16,6 @@ import {
   type GitifySubject,
   IconColor,
   type Link,
-  type SettingsState,
 } from '../../../types';
 
 import { fetchPullByNumber } from '../../api/client';
@@ -35,7 +34,6 @@ class PullRequestHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
     fetchedData?: PullRequestDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const pr =

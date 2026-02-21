@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { getPrimaryAccountHostname } from '../utils/auth/utils';
+import { useAccountsStore, useSettingsStore } from '../stores';
+
 import { quitApp } from '../utils/comms';
 import {
   openGitHubIssues,
@@ -41,20 +42,16 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const {
-    auth,
-    fetchNotifications,
-    isLoggedIn,
-    status,
-    settings,
-    updateSetting,
-  } = useAppContext();
+  const { fetchNotifications, status } = useAppContext();
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
+  const primaryAccountHostname = useAccountsStore((s) =>
+    s.primaryAccountHostname(),
+  );
 
+  const isOnNotificationsRoute = location.pathname === '/';
   const isOnFiltersRoute = location.pathname.startsWith('/filters');
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
   const isLoading = status === 'loading';
-
-  const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
   const shortcuts: ShortcutConfigs = useMemo(() => {
     return {
@@ -71,7 +68,13 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       focusedMode: {
         key: 'w',
         isAllowed: isLoggedIn && !isLoading,
-        action: () => updateSetting('participating', !settings.participating),
+        action: () =>
+          useSettingsStore
+            .getState()
+            .updateSetting(
+              'participating',
+              !useSettingsStore.getState().participating,
+            ),
       },
       filters: {
         key: 'f',
@@ -101,7 +104,11 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
           if (isLoading) {
             return;
           }
-          navigate('/', { replace: true });
+
+          if (!isOnNotificationsRoute) {
+            navigate('/', { replace: true });
+          }
+
           void fetchNotifications();
         },
       },
@@ -129,13 +136,12 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       },
     };
   }, [
-    settings.participating,
     isLoggedIn,
     isLoading,
     isOnFiltersRoute,
     isOnSettingsRoute,
+    isOnNotificationsRoute,
     fetchNotifications,
-    updateSetting,
     primaryAccountHostname,
   ]);
 
