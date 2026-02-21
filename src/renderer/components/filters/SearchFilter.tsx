@@ -10,13 +10,12 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useFiltersStore, useSettingsStore } from '../../stores';
 
 import { Title } from '../primitives/Title';
 
 import { IconColor, type SearchToken, Size } from '../../types';
 
-import { useFiltersStore } from '../../stores';
 import { cn } from '../../utils/cn';
 import {
   hasExcludeSearchFilters,
@@ -26,11 +25,13 @@ import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificat
 import { TokenSearchInput } from './TokenSearchInput';
 
 export const SearchFilter: FC = () => {
-  const { settings } = useAppContext();
-
   const updateFilter = useFiltersStore((s) => s.updateFilter);
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
   const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
+
+  const detailedNotifications = useSettingsStore(
+    (s) => s.detailedNotifications,
+  );
 
   const addIncludeSearchToken = (value: string) => {
     if (!value || includeSearchTokens.includes(value as SearchToken)) {
@@ -78,7 +79,7 @@ export const SearchFilter: FC = () => {
                   <Text
                     className={cn(
                       'text-gitify-caution',
-                      !settings.detailedNotifications && 'line-through',
+                      !detailedNotifications && 'line-through',
                     )}
                   >
                     Author (author:handle)

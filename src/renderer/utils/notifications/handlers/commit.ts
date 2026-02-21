@@ -9,7 +9,6 @@ import type {
   GitifyNotificationUser,
   GitifySubject,
   Link,
-  SettingsState,
 } from '../../../types';
 
 import { getCommit, getCommitComment } from '../../api/client';
@@ -22,7 +21,6 @@ class CommitHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
     const commitState: GitifyNotificationState = null; // Commit notifications are stateless
 

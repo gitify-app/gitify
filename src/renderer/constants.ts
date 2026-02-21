@@ -1,10 +1,17 @@
 import type { ClientID, Hostname, Link } from './types';
 
 export const Constants = {
+  // TODO - remove after a few versions
   STORAGE_KEY: 'gitify-storage',
 
+  // Accounts store key
+  ACCOUNTS_STORE_KEY: 'gitify-accounts',
+
   // Filters store key
-  FILTERS_STORE_KEY: 'atlassify-filters',
+  FILTERS_STORE_KEY: 'gitify-filters',
+
+  // Settings store key
+  SETTINGS_STORE_KEY: 'gitify-settings',
 
   // GitHub OAuth Scopes
   OAUTH_SCOPES: {
@@ -25,12 +32,19 @@ export const Constants = {
 
   ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 
+  // Fetch notifications interval in milliseconds, used by useNotifications hook
   DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
   MIN_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
   MAX_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
+
+  // Fetch notifications interval in milliseconds, used by useNotifications hook
   FETCH_NOTIFICATIONS_INTERVAL_STEP_MS: 60 * 1000, // 1 minute
 
+  // Fetch accounts interval in milliseconds, used by useAccounts hook
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
+
+  // Query stale time in milliseconds, used by TanStack Query client
+  QUERY_STALE_TIME_MS: 30 * 1000, // 30 seconds
 
   // GraphQL Argument Defaults
   GRAPHQL_ARGS: {

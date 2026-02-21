@@ -2,9 +2,9 @@ import { type FC, useMemo } from 'react';
 
 import { Constants } from '../constants';
 
-import { EmojiSplash } from './layout/EmojiSplash';
-
 import { useFiltersStore } from '../stores';
+
+import { EmojiSplash } from './layout/EmojiSplash';
 
 interface AllReadProps {
   fullHeight?: boolean;

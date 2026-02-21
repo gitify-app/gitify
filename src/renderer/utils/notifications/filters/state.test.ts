@@ -1,7 +1,8 @@
 import type { DeepPartial } from '../../../__helpers__/test-utils';
 
+import type { FilterStateType } from '../../../stores';
+
 import type {
-  FilterStateType,
   GitifyNotification,
   GitifyNotificationState,
 } from '../../../types';

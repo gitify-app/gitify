@@ -1,6 +1,7 @@
-import { type FC, useMemo, useRef } from 'react';
+import { type FC, useMemo } from 'react';
 
 import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore, useSettingsStore } from '../stores';
 
 import { AllRead } from '../components/AllRead';
 import { Contents } from '../components/layout/Contents';
@@ -9,71 +10,43 @@ import { AccountNotifications } from '../components/notifications/AccountNotific
 import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
+import { Errors } from '../utils/errors';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, status, globalError, settings, hasNotifications } =
+  const { notifications, status, globalError, hasNotifications, isOnline } =
     useAppContext();
 
-  // Store previous successful state
-  const prevStateRef = useRef({
-    notifications,
-    status,
-    globalError,
-    hasNotifications,
-  });
-
-  // Update ref only if not loading
-  if (status !== 'loading') {
-    prevStateRef.current = {
-      notifications,
-      status,
-      globalError,
-      hasNotifications,
-    };
-  }
-
-  // Use previous state if loading
-  const displayState =
-    status === 'loading'
-      ? prevStateRef.current
-      : {
-          notifications,
-          status,
-          globalError,
-          hasNotifications,
-        };
-
-  const hasMultipleAccounts = useMemo(
-    () => displayState.notifications.length > 1,
-    [displayState.notifications],
-  );
-
   const hasNoAccountErrors = useMemo(
-    () => displayState.notifications.every((account) => account.error === null),
-    [displayState.notifications],
+    () => notifications.every((account) => account.error === null),
+    [notifications],
   );
 
-  if (displayState.status === 'error') {
-    return <Oops error={displayState.globalError} />;
+  const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
+  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
+
+  if (!isOnline) {
+    return <Oops error={Errors.OFFLINE} />;
   }
 
-  if (!displayState.hasNotifications && hasNoAccountErrors) {
+  if (status === 'error') {
+    return <Oops error={globalError ?? Errors.UNKNOWN} />;
+  }
+
+  if (!hasNotifications && hasNoAccountErrors) {
     return <AllRead />;
   }
 
   return (
     <Page testId="notifications">
       <Contents paddingHorizontal={false}>
-        {displayState.notifications.map((accountNotification) => {
+        {notifications.map((accountNotification) => {
           return (
             <AccountNotifications
               account={accountNotification.account}
               error={accountNotification.error}
               key={getAccountUUID(accountNotification.account)}
               notifications={accountNotification.notifications}
-              showAccountHeader={
-                hasMultipleAccounts || settings.showAccountHeader
-              }
+              showAccountHeader={hasMultipleAccounts || showAccountHeader}
             />
           );
         })}

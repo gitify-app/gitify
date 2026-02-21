@@ -1,11 +1,19 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+
+import { useFiltersStore, useSettingsStore } from '../stores';
 
 import type {
   Account,
   AccountNotifications,
   GitifyError,
   GitifyNotification,
-  GitifyState,
   Status,
 } from '../types';
 
@@ -14,12 +22,18 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
+import { notificationsKeys } from '../utils/api/queryKeys';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
+  Errors,
 } from '../utils/errors';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import { rendererLogError } from '../utils/logger';
+import {
+  filterBaseNotifications,
+  filterDetailedNotifications,
+} from '../utils/notifications/filters/filter';
 import { raiseNativeNotification } from '../utils/notifications/native';
 import {
   getAllNotifications,
@@ -40,30 +54,101 @@ interface NotificationsState {
   hasNotifications: boolean;
   hasUnreadNotifications: boolean;
 
-  fetchNotifications: (state: GitifyState) => Promise<void>;
-  removeAccountNotifications: (account: Account) => Promise<void>;
+  refetchNotifications: () => Promise<void>;
 
   markNotificationsAsRead: (
-    state: GitifyState,
     notifications: GitifyNotification[],
   ) => Promise<void>;
   markNotificationsAsDone: (
-    state: GitifyState,
     notifications: GitifyNotification[],
   ) => Promise<void>;
-  unsubscribeNotification: (
-    state: GitifyState,
-    notification: GitifyNotification,
-  ) => Promise<void>;
+  unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 }
 
-export const useNotifications = (): NotificationsState => {
-  const [status, setStatus] = useState<Status>('success');
-  const [globalError, setGlobalError] = useState<GitifyError>();
+export const useNotifications = (accounts: Account[]): NotificationsState => {
+  const queryClient = useQueryClient();
+  const previousNotificationsRef = useRef<AccountNotifications[]>([]);
 
-  const [notifications, setNotifications] = useState<AccountNotifications[]>(
-    [],
+  const fetchIntervalMs = useSettingsStore((s) => s.fetchInterval);
+  const markAsDoneOnUnsubscribe = useSettingsStore(
+    (s) => s.markAsDoneOnUnsubscribe,
   );
+
+  // Subscribe to filter store to trigger re-render when filters change
+  // This ensures the select function gets recreated with latest filter state
+  const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
+  const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
+  const userTypes = useFiltersStore((s) => s.userTypes);
+  const subjectTypes = useFiltersStore((s) => s.subjectTypes);
+  const states = useFiltersStore((s) => s.states);
+  const reasons = useFiltersStore((s) => s.reasons);
+
+  // Get settings to determine query key
+  const fetchReadNotifications = useSettingsStore(
+    (s) => s.fetchReadNotifications,
+  );
+  const fetchParticipatingNotifications = useSettingsStore(
+    (s) => s.participating,
+  );
+
+  // Query key excludes filters to prevent API refetches on filter changes
+  // Filters are applied client-side via subscription in subscriptions.ts
+  const notificationsQueryKey = useMemo(
+    () =>
+      notificationsKeys.list(
+        accounts.length,
+        fetchReadNotifications,
+        fetchParticipatingNotifications,
+      ),
+    [accounts.length, fetchReadNotifications, fetchParticipatingNotifications],
+  );
+
+  // Create select function that depends on filter state
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Recreate selection function on filter store changes
+  const selectFilteredNotifications = useMemo(
+    () => (data: AccountNotifications[]) =>
+      data.map((accountNotifications) => ({
+        ...accountNotifications,
+        // TODO FIX THIS
+        notifications: filterDetailedNotifications(
+          filterBaseNotifications(accountNotifications.notifications),
+        ),
+      })),
+    [
+      includeSearchTokens,
+      excludeSearchTokens,
+      userTypes,
+      subjectTypes,
+      states,
+      reasons,
+    ],
+  );
+
+  // Query for fetching notifications - React Query handles polling and refetching
+  const {
+    data: notifications = [],
+    isLoading,
+    isFetching,
+    isError,
+    isPaused,
+    refetch,
+  } = useQuery<AccountNotifications[], Error>({
+    queryKey: notificationsQueryKey,
+
+    queryFn: async () => {
+      return await getAllNotifications();
+    },
+
+    // Apply filters as a transformation on the cached data
+    // This allows filter changes to instantly update without refetching
+    select: selectFilteredNotifications,
+
+    placeholderData: keepPreviousData,
+
+    refetchInterval: fetchIntervalMs,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: true,
+  });
 
   const notificationCount = getNotificationCount(notifications);
 
@@ -79,167 +164,229 @@ export const useNotifications = (): NotificationsState => {
     [unreadNotificationCount],
   );
 
-  const removeAccountNotifications = useCallback(
-    async (account: Account) => {
-      setStatus('loading');
+  // Determine status and globalError from query state
+  const status: Status = useMemo(() => {
+    if (isLoading || isFetching) {
+      return 'loading';
+    }
 
-      const updatedNotifications = notifications.filter(
-        (notification) => notification.account !== account,
+    // Check if paused due to offline state first (instant detection)
+    if (isPaused) {
+      return 'error';
+    }
+
+    if (isError) {
+      return 'error';
+    }
+
+    return 'success';
+  }, [isLoading, isFetching, isPaused, isError]);
+
+  const globalError: GitifyError = useMemo(() => {
+    // If paused due to offline, show network error
+    if (isPaused) {
+      return Errors.NETWORK;
+    }
+
+    if (!isError || notifications.length === 0) {
+      return null;
+    }
+
+    const allAccountsHaveErrors = doesAllAccountsHaveErrors(notifications);
+    const allAccountErrorsAreSame = areAllAccountErrorsSame(notifications);
+
+    if (allAccountsHaveErrors && allAccountErrorsAreSame) {
+      return notifications[0].error;
+    }
+
+    return null;
+  }, [isPaused, isError, notifications]);
+
+  const refetchNotifications = useCallback(async () => {
+    await refetch();
+  }, [refetch]);
+
+  // Get settings for notifications side effects
+  const playSoundNewNotifications = useSettingsStore((s) => s.playSound);
+  const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
+  const notificationVolume = useSettingsStore((s) => s.notificationVolume);
+
+  // Handle sound and native notifications when new notifications arrive
+  useEffect(() => {
+    if (isLoading || isError || notifications.length === 0) {
+      return;
+    }
+
+    const allAccountsHaveErrors = doesAllAccountsHaveErrors(notifications);
+    if (allAccountsHaveErrors) {
+      return;
+    }
+
+    const unfilteredNotifications =
+      queryClient.getQueryData<AccountNotifications[]>(notificationsQueryKey) ||
+      [];
+
+    const diffNotifications = getNewNotifications(
+      previousNotificationsRef.current,
+      unfilteredNotifications,
+    );
+
+    if (diffNotifications.length > 0) {
+      // Apply filters to new notifications so only filtered notifications trigger alerts
+      // TODO fix me
+      const filteredDiffNotifications = filterDetailedNotifications(
+        filterBaseNotifications(diffNotifications),
       );
 
-      setNotifications(updatedNotifications);
-
-      setStatus('success');
-    },
-    [notifications],
-  );
-
-  const isFetchingRef = useRef(false);
-  const fetchNotifications = useCallback(
-    async (state: GitifyState) => {
-      if (isFetchingRef.current) {
-        // Prevent overlapping fetches
-        return;
-      }
-      isFetchingRef.current = true;
-      setStatus('loading');
-      try {
-        const previousNotifications = notifications;
-        const fetchedNotifications = await getAllNotifications(state);
-        setNotifications(fetchedNotifications);
-
-        // Set Global Error if all accounts have the same error
-        const allAccountsHaveErrors =
-          doesAllAccountsHaveErrors(fetchedNotifications);
-        const allAccountErrorsAreSame =
-          areAllAccountErrorsSame(fetchedNotifications);
-
-        if (allAccountsHaveErrors) {
-          const accountError = fetchedNotifications[0].error;
-          setStatus('error');
-          setGlobalError(allAccountErrorsAreSame ? accountError : null);
-          return;
+      if (filteredDiffNotifications.length > 0) {
+        if (playSoundNewNotifications) {
+          raiseSoundNotification(notificationVolume);
         }
 
-        const diffNotifications = getNewNotifications(
-          previousNotifications,
-          fetchedNotifications,
-        );
-
-        if (diffNotifications.length > 0) {
-          if (state.settings.playSound) {
-            raiseSoundNotification(state.settings.notificationVolume);
-          }
-
-          if (state.settings.showNotifications) {
-            raiseNativeNotification(diffNotifications);
-          }
+        if (showSystemNotifications) {
+          raiseNativeNotification(filteredDiffNotifications);
         }
-
-        setStatus('success');
-        setGlobalError(null);
-      } finally {
-        isFetchingRef.current = false;
       }
+    }
+
+    previousNotificationsRef.current = unfilteredNotifications;
+  }, [
+    notifications,
+    isLoading,
+    isError,
+    playSoundNewNotifications,
+    showSystemNotifications,
+    notificationVolume,
+    queryClient,
+    notificationsQueryKey,
+  ]);
+
+  const markNotificationsAsReadMutation = useMutation({
+    mutationFn: async ({
+      readNotifications,
+    }: {
+      readNotifications: GitifyNotification[];
+    }) => {
+      await Promise.all(
+        readNotifications.map((notification) =>
+          markNotificationThreadAsRead(notification.account, notification.id),
+        ),
+      );
+
+      const updatedNotifications = removeNotificationsForAccount(
+        readNotifications[0].account,
+        readNotifications,
+        notifications,
+      );
+
+      return updatedNotifications;
     },
-    [notifications],
-  );
 
-  const markNotificationsAsRead = useCallback(
-    async (state: GitifyState, readNotifications: GitifyNotification[]) => {
-      setStatus('loading');
-
-      try {
-        await Promise.all(
-          readNotifications.map((notification) =>
-            markNotificationThreadAsRead(notification.account, notification.id),
-          ),
-        );
-
-        const updatedNotifications = removeNotificationsForAccount(
-          readNotifications[0].account,
-          state.settings,
-          readNotifications,
-          notifications,
-        );
-
-        setNotifications(updatedNotifications);
-      } catch (err) {
-        rendererLogError(
-          'markNotificationsAsRead',
-          'Error occurred while marking notifications as read',
-          err,
-        );
-      }
-
-      setStatus('success');
+    onSuccess: (updatedNotifications) => {
+      queryClient.setQueryData(notificationsQueryKey, updatedNotifications);
     },
-    [notifications],
-  );
 
-  const markNotificationsAsDone = useCallback(
-    async (state: GitifyState, doneNotifications: GitifyNotification[]) => {
+    onError: (err) => {
+      rendererLogError(
+        'markNotificationsAsRead',
+        'Error occurred while marking notifications as read',
+        err,
+      );
+    },
+  });
+
+  const markNotificationsAsDoneMutation = useMutation({
+    mutationFn: async ({
+      doneNotifications,
+    }: {
+      doneNotifications: GitifyNotification[];
+    }) => {
       if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
         return;
       }
 
-      setStatus('loading');
+      await Promise.all(
+        doneNotifications.map((notification) =>
+          markNotificationThreadAsDone(notification.account, notification.id),
+        ),
+      );
 
-      try {
-        await Promise.all(
-          doneNotifications.map((notification) =>
-            markNotificationThreadAsDone(notification.account, notification.id),
-          ),
-        );
+      const updatedNotifications = removeNotificationsForAccount(
+        doneNotifications[0].account,
+        doneNotifications,
+        notifications,
+      );
 
-        const updatedNotifications = removeNotificationsForAccount(
-          doneNotifications[0].account,
-          state.settings,
-          doneNotifications,
-          notifications,
-        );
-
-        setNotifications(updatedNotifications);
-      } catch (err) {
-        rendererLogError(
-          'markNotificationsAsDone',
-          'Error occurred while marking notifications as done',
-          err,
-        );
-      }
-
-      setStatus('success');
+      return updatedNotifications;
     },
-    [notifications],
+
+    onSuccess: (updatedNotifications) => {
+      queryClient.setQueryData(notificationsQueryKey, updatedNotifications);
+    },
+
+    onError: (err) => {
+      rendererLogError(
+        'markNotificationsAsDone',
+        'Error occurred while marking notifications as done',
+        err,
+      );
+    },
+  });
+
+  const unsubscribeNotificationMutation = useMutation({
+    mutationFn: async ({
+      notification,
+    }: {
+      notification: GitifyNotification;
+    }) => {
+      await ignoreNotificationThreadSubscription(
+        notification.account,
+        notification.id,
+      );
+
+      if (markAsDoneOnUnsubscribe) {
+        await markNotificationsAsDoneMutation.mutateAsync({
+          doneNotifications: [notification],
+        });
+      } else {
+        await markNotificationsAsReadMutation.mutateAsync({
+          readNotifications: [notification],
+        });
+      }
+    },
+
+    onError: (err) => {
+      rendererLogError(
+        'unsubscribeNotification',
+        'Error occurred while unsubscribing notification threads',
+        err,
+      );
+    },
+  });
+
+  const markNotificationsAsRead = useCallback(
+    async (readNotifications: GitifyNotification[]) => {
+      await markNotificationsAsReadMutation.mutateAsync({ readNotifications });
+    },
+    [markNotificationsAsReadMutation],
+  );
+
+  const markNotificationsAsDone = useCallback(
+    async (doneNotifications: GitifyNotification[]) => {
+      await markNotificationsAsDoneMutation.mutateAsync({
+        doneNotifications,
+      });
+    },
+    [markNotificationsAsDoneMutation],
   );
 
   const unsubscribeNotification = useCallback(
-    async (state: GitifyState, notification: GitifyNotification) => {
-      setStatus('loading');
-
-      try {
-        await ignoreNotificationThreadSubscription(
-          notification.account,
-          notification.id,
-        );
-
-        if (state.settings.markAsDoneOnUnsubscribe) {
-          await markNotificationsAsDone(state, [notification]);
-        } else {
-          await markNotificationsAsRead(state, [notification]);
-        }
-      } catch (err) {
-        rendererLogError(
-          'unsubscribeNotification',
-          'Error occurred while unsubscribing from notification thread',
-          err,
-          notification,
-        );
-      }
-
-      setStatus('success');
+    async (notification: GitifyNotification) => {
+      await unsubscribeNotificationMutation.mutateAsync({
+        notification,
+      });
     },
-    [markNotificationsAsRead, markNotificationsAsDone],
+    [unsubscribeNotificationMutation],
   );
 
   return {
@@ -252,8 +399,7 @@ export const useNotifications = (): NotificationsState => {
     hasNotifications,
     hasUnreadNotifications,
 
-    fetchNotifications,
-    removeAccountNotifications,
+    refetchNotifications,
 
     markNotificationsAsRead,
     markNotificationsAsDone,

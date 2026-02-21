@@ -1,8 +1,9 @@
+import { useSettingsStore } from '../../stores';
+
 import type {
   Account,
   AccountNotifications,
   GitifyNotification,
-  SettingsState,
 } from '../../types';
 
 import { getAccountUUID } from '../auth/utils';
@@ -13,9 +14,8 @@ import { getAccountUUID } from '../auth/utils';
  * When `delayNotificationState` or `fetchReadNotifications` is enabled,
  * notifications stay in the list with reduced opacity instead of being removed.
  */
-export function shouldRemoveNotificationsFromState(
-  settings: SettingsState,
-): boolean {
+export function shouldRemoveNotificationsFromState(): boolean {
+  const settings = useSettingsStore.getState();
   return !settings.delayNotificationState && !settings.fetchReadNotifications;
 }
 
@@ -27,7 +27,6 @@ export function shouldRemoveNotificationsFromState(
  */
 export function removeNotificationsForAccount(
   account: Account,
-  settings: SettingsState,
   notificationsToRemove: GitifyNotification[],
   accountNotifications: AccountNotifications[],
 ): AccountNotifications[] {
@@ -39,7 +38,7 @@ export function removeNotificationsForAccount(
     notificationsToRemove.map((notification) => notification.id),
   );
 
-  const shouldRemove = shouldRemoveNotificationsFromState(settings);
+  const shouldRemove = shouldRemoveNotificationsFromState();
 
   return accountNotifications.map((accountNotifications) =>
     getAccountUUID(account) === getAccountUUID(accountNotifications.account)

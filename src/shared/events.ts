@@ -40,10 +40,16 @@ export interface IOpenExternal {
   activate: boolean;
 }
 
+export interface ITrayColorUpdate {
+  notificationsCount: number;
+  isOnline: boolean;
+}
+
 export type EventData =
   | string
   | number
   | boolean
   | IKeyboardShortcut
   | IAutoLaunch
-  | IOpenExternal;
+  | IOpenExternal
+  | ITrayColorUpdate;

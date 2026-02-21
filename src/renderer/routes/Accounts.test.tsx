@@ -8,10 +8,10 @@ import {
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
 
-import * as authUtils from '../utils/auth/utils';
+import { useAccountsStore } from '../stores';
+
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
-import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
 
 const navigateMock = vi.fn();
@@ -27,16 +27,16 @@ describe('renderer/routes/Accounts.tsx', () => {
 
   describe('General', () => {
     it('should render itself & its children', async () => {
+      useAccountsStore.setState({
+        accounts: [
+          mockPersonalAccessTokenAccount,
+          mockOAuthAccount,
+          mockGitHubAppAccount,
+        ],
+      });
+
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: {
-            accounts: [
-              mockPersonalAccessTokenAccount,
-              mockOAuthAccount,
-              mockGitHubAppAccount,
-            ],
-          },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
@@ -66,9 +66,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         .mockImplementation(vi.fn());
 
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockPersonalAccessTokenAccount] },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('account-profile'));
@@ -81,9 +79,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('open host in external browser', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockPersonalAccessTokenAccount] },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('account-host'));
@@ -94,9 +90,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('open developer settings in external browser', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockPersonalAccessTokenAccount] },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('account-developer-settings'));
@@ -108,16 +102,16 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should render with PAT scopes warning', async () => {
+      useAccountsStore.setState({
+        accounts: [
+          { ...mockPersonalAccessTokenAccount, hasRequiredScopes: false },
+          mockOAuthAccount,
+          mockGitHubAppAccount,
+        ],
+      });
+
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: {
-            accounts: [
-              { ...mockPersonalAccessTokenAccount, hasRequiredScopes: false },
-              mockOAuthAccount,
-              mockGitHubAppAccount,
-            ],
-          },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
@@ -133,20 +127,16 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should set account as primary account', async () => {
-      const saveStateSpy = vi
-        .spyOn(storage, 'saveState')
-        .mockImplementation(vi.fn());
-
+      const setStateSpy = vi.spyOn(useAccountsStore, 'setState');
+      useAccountsStore.setState({
+        accounts: [
+          mockOAuthAccount,
+          mockPersonalAccessTokenAccount,
+          mockGitHubAppAccount,
+        ],
+      });
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: {
-            accounts: [
-              mockPersonalAccessTokenAccount,
-              mockOAuthAccount,
-              mockGitHubAppAccount,
-            ],
-          },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
@@ -155,18 +145,20 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getAllByTestId('account-set-primary')[0]);
 
-      expect(saveStateSpy).toHaveBeenCalled();
+      expect(setStateSpy).toHaveBeenCalled();
     });
 
     it('should refresh account', async () => {
-      const refreshAccountSpy = vi
-        .spyOn(authUtils, 'refreshAccount')
-        .mockImplementation(vi.fn());
+      const refreshAccountSpy = vi.spyOn(
+        useAccountsStore.getState(),
+        'refreshAccount',
+      );
+      useAccountsStore.setState({
+        accounts: [mockPersonalAccessTokenAccount],
+      });
 
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockPersonalAccessTokenAccount] },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('account-refresh'));
@@ -179,18 +171,21 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should logout', async () => {
-      const logoutFromAccountMock = vi.fn();
+      const removeAccountSpy = vi.spyOn(
+        useAccountsStore.getState(),
+        'removeAccount',
+      );
+      useAccountsStore.setState({
+        accounts: [mockPersonalAccessTokenAccount],
+      });
 
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockPersonalAccessTokenAccount] },
-          logoutFromAccount: logoutFromAccountMock,
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('account-logout'));
 
-      expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
+      expect(removeAccountSpy).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith(-1);
     });
@@ -198,12 +193,6 @@ describe('renderer/routes/Accounts.tsx', () => {
 
   describe('Add new accounts', () => {
     it('should show login with github app', async () => {
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockOAuthAccount] },
-        });
-      });
-
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-github'));
 
@@ -214,12 +203,6 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should show login with personal access token', async () => {
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockOAuthAccount] },
-        });
-      });
-
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-pat'));
 
@@ -234,9 +217,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should show login with oauth app', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
-          auth: { accounts: [mockPersonalAccessTokenAccount] },
-        });
+        renderWithAppContext(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));

@@ -5,13 +5,19 @@ import { Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
 export const TraySettings: FC = () => {
-  const { settings, updateSetting } = useAppContext();
+  const showNotificationsCountInTray = useSettingsStore(
+    (s) => s.showNotificationsCountInTray,
+  );
+  const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
+  const useAlternateIdleIcon = useSettingsStore((s) => s.useAlternateIdleIcon);
+
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
 
   return (
     <fieldset>
@@ -19,13 +25,13 @@ export const TraySettings: FC = () => {
 
       <Stack direction="vertical" gap="condensed">
         <Checkbox
-          checked={settings.showNotificationsCountInTray}
+          checked={showNotificationsCountInTray}
           label="Show notification count"
           name="showNotificationsCountInTray"
           onChange={() =>
             updateSetting(
               'showNotificationsCountInTray',
-              !settings.showNotificationsCountInTray,
+              !showNotificationsCountInTray,
             )
           }
           tooltip={
@@ -38,11 +44,11 @@ export const TraySettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.useUnreadActiveIcon}
+          checked={useUnreadActiveIcon}
           label="Highlight unread notifications"
           name="useUnreadActiveIcon"
           onChange={() =>
-            updateSetting('useUnreadActiveIcon', !settings.useUnreadActiveIcon)
+            updateSetting('useUnreadActiveIcon', !useUnreadActiveIcon)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">
@@ -55,14 +61,11 @@ export const TraySettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.useAlternateIdleIcon}
+          checked={useAlternateIdleIcon}
           label="Use alternate idle icon"
           name="useAlternateIdleIcon"
           onChange={() =>
-            updateSetting(
-              'useAlternateIdleIcon',
-              !settings.useAlternateIdleIcon,
-            )
+            updateSetting('useAlternateIdleIcon', !useAlternateIdleIcon)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">

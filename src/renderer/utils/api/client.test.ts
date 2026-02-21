@@ -8,7 +8,9 @@ import {
 
 import { Constants } from '../../constants';
 
-import type { Link, SettingsState } from '../../types';
+import { useSettingsStore } from '../../stores';
+
+import type { Link } from '../../types';
 
 import {
   fetchAuthenticatedUserDetails,
@@ -130,16 +132,13 @@ describe('renderer/utils/api/client.ts', () => {
 
   describe('listNotificationsForAuthenticatedUser', () => {
     it('should list only participating notifications for user', async () => {
-      const mockSettings: Partial<SettingsState> = {
+      useSettingsStore.setState({
         participating: true,
         fetchReadNotifications: false,
         fetchAllNotifications: false,
-      };
+      });
 
-      await listNotificationsForAuthenticatedUser(
-        mockGitHubCloudAccount,
-        mockSettings as SettingsState,
-      );
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(createOctokitClientSpy).toHaveBeenCalledWith(
         mockGitHubCloudAccount,
@@ -158,16 +157,13 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should list participating and watching notifications for user', async () => {
-      const mockSettings: Partial<SettingsState> = {
+      useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: false,
         fetchAllNotifications: false,
-      };
+      });
 
-      await listNotificationsForAuthenticatedUser(
-        mockGitHubCloudAccount,
-        mockSettings as SettingsState,
-      );
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(createOctokitClientSpy).toHaveBeenCalledWith(
         mockGitHubCloudAccount,
@@ -186,16 +182,13 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should list read and done notifications for user', async () => {
-      const mockSettings: Partial<SettingsState> = {
+      useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: true,
         fetchAllNotifications: false,
-      };
+      });
 
-      await listNotificationsForAuthenticatedUser(
-        mockGitHubCloudAccount,
-        mockSettings as SettingsState,
-      );
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(createOctokitClientSpy).toHaveBeenCalledWith(
         mockGitHubCloudAccount,
@@ -214,16 +207,13 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should unpaginate notifications list for user', async () => {
-      const mockSettings: Partial<SettingsState> = {
+      useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: false,
         fetchAllNotifications: true,
-      };
+      });
 
-      await listNotificationsForAuthenticatedUser(
-        mockGitHubCloudAccount,
-        mockSettings as SettingsState,
-      );
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(createOctokitClientSpy).toHaveBeenCalledWith(
         mockGitHubCloudAccount,

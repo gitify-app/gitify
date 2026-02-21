@@ -1,11 +1,12 @@
+import { useSettingsStore } from '../../../stores';
+import useFiltersStore from '../../../stores/useFiltersStore';
+
 import type {
   GitifyNotification,
   GitifyNotificationState,
   GitifyNotificationUser,
-  SettingsState,
 } from '../../../types';
 
-import useFiltersStore from '../../../stores/useFiltersStore';
 import {
   BASE_SEARCH_QUALIFIERS,
   DETAILED_ONLY_SEARCH_QUALIFIERS,
@@ -60,10 +61,10 @@ export function filterBaseNotifications(
 
 export function filterDetailedNotifications(
   notifications: GitifyNotification[],
-  settings: SettingsState,
 ): GitifyNotification[] {
   return notifications.filter((notification) => {
     let passesFilters = true;
+    const settings = useSettingsStore.getState();
 
     if (settings.detailedNotifications) {
       passesFilters = passesFilters && passesUserFilters(notification);

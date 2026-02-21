@@ -3,10 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockSettings } from '../__mocks__/state-mocks';
 
-import { useFiltersStore } from '../stores';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
@@ -28,26 +29,28 @@ describe('renderer/components/Sidebar.tsx', () => {
   });
 
   it('should render itself & its children (logged in)', () => {
+    useAccountsStore.setState({
+      accounts: [mockGitHubCloudAccount],
+    });
+
     const tree = renderWithAppContext(
       <MemoryRouter initialEntries={['/']}>
         <Sidebar />
       </MemoryRouter>,
-      {
-        isLoggedIn: true,
-      },
     );
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children (logged out)', () => {
+    useAccountsStore.setState({
+      accounts: [],
+    });
+
     const tree = renderWithAppContext(
       <MemoryRouter initialEntries={['/landing']}>
         <Sidebar />
       </MemoryRouter>,
-      {
-        isLoggedIn: false,
-      },
     );
 
     expect(tree.container).toMatchSnapshot();
@@ -111,44 +114,42 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('Focused mode toggle', () => {
     it('renders the focused mode is off', () => {
+      useSettingsStore.setState({
+        participating: false,
+      });
+
       renderWithAppContext(
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
-        {
-          isLoggedIn: true,
-          settings: { ...mockSettings, participating: false },
-        },
       );
 
       expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
     });
 
     it('renders the focused mode is on', () => {
+      useSettingsStore.setState({
+        participating: true,
+      });
+
       renderWithAppContext(
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
-        {
-          isLoggedIn: true,
-          settings: { ...mockSettings, participating: true },
-        },
       );
 
       expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
     });
 
     it('toggles participating when clicked', async () => {
+      useSettingsStore.setState({
+        participating: false,
+      });
+
       renderWithAppContext(
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
-        {
-          isLoggedIn: true,
-          settings: { ...mockSettings, participating: false },
-          updateSetting: updateSettingMock,
-          fetchNotifications: fetchNotificationsMock,
-        },
       );
 
       await userEvent.click(screen.getByTestId('sidebar-focused-mode'));
@@ -192,9 +193,6 @@ describe('renderer/components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
-        {
-          settings: mockSettings,
-        },
       );
 
       expect(
@@ -309,14 +307,14 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   it('should quit the app', async () => {
     const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
+    useAccountsStore.setState({
+      accounts: [],
+    });
 
     renderWithAppContext(
       <MemoryRouter>
         <Sidebar />
       </MemoryRouter>,
-      {
-        isLoggedIn: false,
-      },
     );
 
     await userEvent.click(screen.getByTestId('sidebar-quit'));

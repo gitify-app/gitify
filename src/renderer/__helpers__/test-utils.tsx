@@ -3,31 +3,37 @@ import { type ReactElement, type ReactNode, useMemo } from 'react';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { AppContext, type AppContextState } from '../context/App';
 
 export type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> };
+
+const EMPTY_APP_CONTEXT: Partial<AppContextState> = {};
+
+/**
+ * Test context (settings removed as it's no longer in context)
+ */
+type TestAppContext = Partial<AppContextState>;
 
 /**
  * Props for the AppContextProvider wrapper
  */
 interface AppContextProviderProps {
   readonly children: ReactNode;
-  readonly value?: Partial<AppContextState>;
+  readonly value?: TestAppContext;
 }
 
 /**
  * Wrapper component that provides ThemeProvider, BaseStyles, and AppContext
  * with sensible defaults for testing.
  */
-function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
+function AppContextProvider({
+  children,
+  value = EMPTY_APP_CONTEXT,
+}: AppContextProviderProps) {
   const defaultValue: AppContextState = useMemo(() => {
     return {
-      auth: mockAuth,
-      settings: mockSettings,
-      isLoggedIn: true,
-
       notifications: [],
       notificationCount: 0,
       unreadNotificationCount: 0,
@@ -51,11 +57,6 @@ function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
       markNotificationsAsRead: vi.fn(),
       markNotificationsAsDone: vi.fn(),
       unsubscribeNotification: vi.fn(),
-
-      clearFilters: vi.fn(),
-      resetSettings: vi.fn(),
-      updateSetting: vi.fn(),
-      updateFilter: vi.fn(),
 
       ...value,
     } as AppContextState;
@@ -82,9 +83,21 @@ export function renderWithAppContext(
   ui: ReactElement,
   context: Partial<AppContextState> = {},
 ) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
+      },
+    },
+  });
+
   return render(ui, {
     wrapper: ({ children }) => (
-      <AppContextProvider value={context}>{children}</AppContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <AppContextProvider value={context}>{children}</AppContextProvider>
+      </QueryClientProvider>
     ),
   });
 }

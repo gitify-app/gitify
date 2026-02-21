@@ -1,5 +1,4 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
 import {
   mockAuthor,
   mockCommenter,
@@ -51,10 +50,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -89,10 +85,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -127,10 +120,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -165,10 +155,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -214,10 +201,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -259,10 +243,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -303,10 +284,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,
@@ -344,10 +322,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         number: 123,

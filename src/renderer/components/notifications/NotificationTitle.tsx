@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { cn } from '../../utils/cn';
 import { parseInlineCode } from '../../utils/helpers';
@@ -14,11 +14,14 @@ interface NotificationTitleProps {
 export const NotificationTitle: FC<NotificationTitleProps> = ({
   title,
 }: NotificationTitleProps) => {
-  const { settings } = useAppContext();
+  const wrapNotificationTitle = useSettingsStore(
+    (s) => s.wrapNotificationTitle,
+  );
+
   const parts = parseInlineCode(title);
 
   return (
-    <Text className={!settings.wrapNotificationTitle && 'truncate'}>
+    <Text className={!wrapNotificationTitle && 'truncate'}>
       {parts.map((part) => (
         <Text
           className={cn(

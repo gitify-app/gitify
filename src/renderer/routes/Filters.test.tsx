@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { renderWithAppContext } from '../__helpers__/test-utils';
 
 import { type FiltersStore, useFiltersStore } from '../stores';
+
 import { FiltersRoute } from './Filters';
 
 const navigateMock = vi.fn();

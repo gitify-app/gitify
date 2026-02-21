@@ -1,6 +1,7 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
 import { mockRawUser } from '../../api/__mocks__/response-mocks';
+
+import { useFiltersStore } from '../../../stores';
 
 import type { GitifyNotification, Link } from '../../../types';
 import type {
@@ -8,7 +9,6 @@ import type {
   GetCommitResponse,
 } from '../../api/types';
 
-import { useFiltersStore } from '../../../stores';
 import * as apiClient from '../../api/client';
 import { commitHandler } from './commit';
 
@@ -41,7 +41,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         user: mockCommenter,
       } as GetCommitCommentResponse);
 
-      const result = await commitHandler.enrich(mockNotification, mockSettings);
+      const result = await commitHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: null,
@@ -66,7 +66,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         author: mockAuthor,
       } as GetCommitResponse);
 
-      const result = await commitHandler.enrich(mockNotification, mockSettings);
+      const result = await commitHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: null,
@@ -89,7 +89,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
         latestCommentUrl: null,
       });
 
-      const result = await commitHandler.enrich(mockNotification, mockSettings);
+      const result = await commitHandler.enrich(mockNotification);
 
       // Returns empty object when filtered (no API call made)
       expect(result).toEqual({});

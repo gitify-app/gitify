@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Popover, Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { Opacity } from '../../types';
 
@@ -22,14 +22,16 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   open,
   inputValue,
 }) => {
-  const { settings } = useAppContext();
+  const detailedNotifications = useSettingsStore(
+    (s) => s.detailedNotifications,
+  );
 
   if (!open) {
     return null;
   }
 
   const lower = inputValue.toLowerCase();
-  const base = settings.detailedNotifications
+  const base = detailedNotifications
     ? ALL_SEARCH_QUALIFIERS
     : BASE_SEARCH_QUALIFIERS;
   const suggestions = base.filter(

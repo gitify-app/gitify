@@ -1,6 +1,7 @@
-import { mockSettings } from '../__mocks__/state-mocks';
+import { OpenPreference } from '../stores';
+import useSettingsStore from '../stores/useSettingsStore';
 
-import { type Link, OpenPreference } from '../types';
+import type { Link } from '../types';
 
 import {
   copyToClipboard,
@@ -17,7 +18,6 @@ import {
   updateTrayColor,
   updateTrayTitle,
 } from './comms';
-import * as storage from './storage';
 
 describe('renderer/utils/comms.ts', () => {
   afterEach(() => {
@@ -26,10 +26,9 @@ describe('renderer/utils/comms.ts', () => {
 
   describe('openExternalLink', () => {
     it('should open an external link', () => {
-      vi.spyOn(storage, 'loadState').mockReturnValue({
-        settings: { ...mockSettings, openLinks: OpenPreference.BACKGROUND },
+      useSettingsStore.setState({
+        openLinks: OpenPreference.BACKGROUND,
       });
-
       openExternalLink('https://gitify.io/' as Link);
 
       expect(window.gitify.openExternalLink).toHaveBeenCalledTimes(1);
@@ -40,26 +39,11 @@ describe('renderer/utils/comms.ts', () => {
     });
 
     it('should open in foreground when preference set to FOREGROUND', () => {
-      vi.spyOn(storage, 'loadState').mockReturnValue({
-        settings: { ...mockSettings, openLinks: OpenPreference.FOREGROUND },
+      useSettingsStore.setState({
+        openLinks: OpenPreference.FOREGROUND,
       });
-
       openExternalLink('https://gitify.io/' as Link);
 
-      expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
-        'https://gitify.io/',
-        true,
-      );
-    });
-
-    it('should use default open preference if user settings not found', () => {
-      vi.spyOn(storage, 'loadState').mockReturnValue({
-        settings: null,
-      });
-
-      openExternalLink('https://gitify.io/' as Link);
-
-      expect(window.gitify.openExternalLink).toHaveBeenCalledTimes(1);
       expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
         'https://gitify.io/',
         true,
@@ -146,10 +130,10 @@ describe('renderer/utils/comms.ts', () => {
 
   describe('tray helpers', () => {
     it('updates tray icon color with count', () => {
-      updateTrayColor(5);
+      updateTrayColor(5, true);
 
       expect(window.gitify.tray.updateColor).toHaveBeenCalledTimes(1);
-      expect(window.gitify.tray.updateColor).toHaveBeenCalledWith(5);
+      expect(window.gitify.tray.updateColor).toHaveBeenCalledWith(5, true);
     });
 
     it('updates tray title with provided value', () => {

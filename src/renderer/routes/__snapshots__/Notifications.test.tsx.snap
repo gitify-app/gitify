@@ -1,5 +1,24 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`renderer/routes/Notifications.tsx > should render Offline Error when not online 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <p>
+        Oops
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (all read notifications) 1`] = `
 <div>
   <div

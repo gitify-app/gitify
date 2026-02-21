@@ -1,3 +1,5 @@
+import { useFiltersStore } from '../../../stores';
+
 import type {
   AccountNotifications,
   GitifyNotification,
@@ -5,8 +7,6 @@ import type {
   UserType,
 } from '../../../types';
 import type { Filter } from './types';
-
-import { useFiltersStore } from '../../../stores';
 
 type FilterableUserType = Extract<UserType, 'User' | 'Bot' | 'Organization'>;
 

@@ -1,13 +1,15 @@
 import { type FC, useEffect } from 'react';
 
-import { useShortcutActions } from '../hooks/useShortcutActions';
+import { useGlobalShortcuts } from '../hooks/useGlobalShortcuts';
+
+import { getNormalizedKey, shouldIgnoreKeyboardEvent } from '../utils/keyboard';
 
 /**
  * Component that registers global keyboard shortcuts for the renderer app.
  * Mount once inside App, within Router + AppProvider.
  */
 export const GlobalShortcuts: FC = () => {
-  const { shortcuts } = useShortcutActions();
+  const { shortcuts } = useGlobalShortcuts();
 
   useEffect(() => {
     const keyToName = new Map<string, keyof typeof shortcuts>(
@@ -19,17 +21,11 @@ export const GlobalShortcuts: FC = () => {
 
     const handler = (event: KeyboardEvent) => {
       // Ignore if user is typing in an input, textarea, or with modifiers
-      if (
-        event.target instanceof HTMLInputElement ||
-        event.target instanceof HTMLTextAreaElement ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.altKey
-      ) {
+      if (shouldIgnoreKeyboardEvent(event)) {
         return;
       }
 
-      const key = event.key.toLowerCase();
+      const key = getNormalizedKey(event);
       const name = keyToName.get(key);
       if (!name) {
         return;

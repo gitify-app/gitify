@@ -51,111 +51,6 @@ export interface Account {
   hasRequiredScopes?: boolean;
 }
 
-/**
- * All Config Settings values to be stored in the application.
- */
-export type SettingsValue =
-  | boolean
-  | number
-  | FetchType
-  | GroupBy
-  | OpenPreference
-  | Percentage
-  | Theme;
-
-/**
- * All allowed Config Settings keys to be stored in the application.
- */
-export type SettingsState = AppearanceSettingsState &
-  NotificationSettingsState &
-  TraySettingsState &
-  SystemSettingsState;
-
-/**
- * Settings related to the appearance of the application.
- */
-export interface AppearanceSettingsState {
-  theme: Theme;
-  increaseContrast: boolean;
-  zoomPercentage: Percentage;
-  showAccountHeader: boolean;
-  wrapNotificationTitle: boolean;
-}
-
-/**
- * Settings related to the notifications within the application.
- */
-export interface NotificationSettingsState {
-  groupBy: GroupBy;
-  fetchType: FetchType;
-  fetchInterval: number;
-  fetchAllNotifications: boolean;
-  detailedNotifications: boolean;
-  showPills: boolean;
-  showNumber: boolean;
-  participating: boolean;
-  fetchReadNotifications: boolean;
-  markAsDoneOnOpen: boolean;
-  markAsDoneOnUnsubscribe: boolean;
-  delayNotificationState: boolean;
-}
-
-/**
- * Settings related to the tray / menu bar behavior.
- */
-export interface TraySettingsState {
-  showNotificationsCountInTray: boolean;
-  useUnreadActiveIcon: boolean;
-  useAlternateIdleIcon: boolean;
-}
-
-/**
- * Settings related to the system behavior of the application.
- */
-export interface SystemSettingsState {
-  openLinks: OpenPreference;
-  keyboardShortcut: boolean;
-  showNotifications: boolean;
-  playSound: boolean;
-  notificationVolume: Percentage;
-  openAtStartup: boolean;
-}
-
-export interface AuthState {
-  accounts: Account[];
-}
-
-export interface GitifyState {
-  auth?: AuthState;
-  settings?: SettingsState;
-}
-
-export enum Theme {
-  SYSTEM = 'SYSTEM',
-  LIGHT = 'LIGHT',
-  LIGHT_COLORBLIND = 'LIGHT_COLORBLIND',
-  LIGHT_TRITANOPIA = 'LIGHT_TRITANOPIA',
-  DARK = 'DARK',
-  DARK_COLORBLIND = 'DARK_COLORBLIND',
-  DARK_TRITANOPIA = 'DARK_TRITANOPIA',
-  DARK_DIMMED = 'DARK_DIMMED',
-}
-
-export enum OpenPreference {
-  FOREGROUND = 'FOREGROUND',
-  BACKGROUND = 'BACKGROUND',
-}
-
-export enum GroupBy {
-  REPOSITORY = 'REPOSITORY',
-  DATE = 'DATE',
-}
-
-export enum FetchType {
-  INTERVAL = 'INTERVAL',
-  INACTIVITY = 'INACTIVITY',
-}
-
 export interface RadioGroupItem {
   label: string;
   value: string;
@@ -184,6 +79,7 @@ export type ErrorType =
   | 'BAD_CREDENTIALS'
   | 'MISSING_SCOPES'
   | 'NETWORK'
+  | 'OFFLINE'
   | 'RATE_LIMITED'
   | 'UNKNOWN';
 
@@ -225,8 +121,6 @@ export interface Chevron {
   icon: FC<OcticonProps>;
   label: string;
 }
-
-export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
 
 /**
  *

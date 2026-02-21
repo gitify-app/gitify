@@ -3,9 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { GroupBy } from '../../types';
+import { GroupBy, useSettingsStore } from '../../stores';
 
 import * as comms from '../../utils/comms';
 import {
@@ -19,47 +18,47 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should render itself & its children - group by repositories', async () => {
+    useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+
     const props: NotificationHeaderProps = {
       notification: mockGitifyNotification,
     };
 
-    const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
-    });
+    const tree = renderWithAppContext(<NotificationHeader {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   describe('should render itself & its children - group by date', () => {
     it('with notification number', async () => {
+      useSettingsStore.setState({ groupBy: GroupBy.DATE });
+
       const props: NotificationHeaderProps = {
         notification: mockGitifyNotification,
       };
 
-      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-        settings: { ...mockSettings, groupBy: GroupBy.DATE },
-      });
+      const tree = renderWithAppContext(<NotificationHeader {...props} />);
 
       expect(tree.container).toMatchSnapshot();
     });
 
     it('with showNumber setting disabled', async () => {
+      useSettingsStore.setState({ groupBy: GroupBy.DATE, showNumber: false });
+
       const props: NotificationHeaderProps = {
         notification: mockGitifyNotification,
       };
 
-      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-        settings: {
-          ...mockSettings,
-          showNumber: false,
-          groupBy: GroupBy.DATE,
-        },
-      });
+      const tree = renderWithAppContext(<NotificationHeader {...props} />);
 
       expect(tree.container).toMatchSnapshot();
     });
 
     it('without notification number', async () => {
+      useSettingsStore.setState({
+        groupBy: GroupBy.DATE,
+      });
+
       const props: NotificationHeaderProps = {
         notification: {
           ...mockGitifyNotification,
@@ -67,15 +66,17 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         },
       };
 
-      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
-        settings: { ...mockSettings, groupBy: GroupBy.DATE },
-      });
+      const tree = renderWithAppContext(<NotificationHeader {...props} />);
 
       expect(tree.container).toMatchSnapshot();
     });
   });
 
   it('should open notification user profile - group by date', async () => {
+    useSettingsStore.setState({
+      groupBy: GroupBy.DATE,
+    });
+
     const openExternalLinkSpy = vi
       .spyOn(comms, 'openExternalLink')
       .mockImplementation(vi.fn());
@@ -84,9 +85,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       notification: mockGitifyNotification,
     };
 
-    renderWithAppContext(<NotificationHeader {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.DATE },
-    });
+    renderWithAppContext(<NotificationHeader {...props} />);
 
     await userEvent.click(screen.getByTestId('view-repository'));
 
