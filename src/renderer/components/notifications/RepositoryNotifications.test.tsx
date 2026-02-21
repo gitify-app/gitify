@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
 import type { Link } from '../../types';
 
@@ -77,7 +76,6 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     };
 
     renderWithAppContext(<RepositoryNotifications {...props} />, {
-      settings: { ...mockSettings },
       markNotificationsAsRead: markNotificationsAsReadMock,
     });
 
@@ -95,7 +93,6 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     };
 
     renderWithAppContext(<RepositoryNotifications {...props} />, {
-      settings: { ...mockSettings },
       markNotificationsAsDone: markNotificationsAsDoneMock,
     });
 

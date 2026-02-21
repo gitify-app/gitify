@@ -1,3 +1,5 @@
+import { useFiltersStore } from '../../../stores';
+
 import type {
   AccountNotifications,
   GitifyNotification,
@@ -6,7 +8,6 @@ import type {
 } from '../../../types';
 import type { Filter } from './types';
 
-import { useFiltersStore } from '../../../stores';
 import { REASON_TYPE_DETAILS } from '../../reason';
 
 export const reasonFilter: Filter<Reason> = {

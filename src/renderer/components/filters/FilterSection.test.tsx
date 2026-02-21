@@ -5,9 +5,9 @@ import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { useFiltersStore } from '../../stores';
+import { useFiltersStore, useSettingsStore } from '../../stores';
+
 import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
@@ -27,6 +27,8 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
   describe('should render itself & its children', () => {
     it('with detailed notifications enabled', () => {
+      useSettingsStore.setState({ detailedNotifications: true });
+
       const tree = renderWithAppContext(
         <FilterSection
           filter={{
@@ -39,10 +41,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           title={'FilterSectionTitle'}
         />,
         {
-          settings: {
-            ...mockSettings,
-            detailedNotifications: true,
-          },
           notifications: mockMultipleAccountNotifications,
         },
       );
@@ -51,6 +49,8 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     });
 
     it('with detailed notifications disabled', () => {
+      useSettingsStore.setState({ detailedNotifications: false });
+
       const tree = renderWithAppContext(
         <FilterSection
           filter={{
@@ -63,10 +63,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           title={'FilterSectionTitle'}
         />,
         {
-          settings: {
-            ...mockSettings,
-            detailedNotifications: false,
-          },
           notifications: mockMultipleAccountNotifications,
         },
       );
@@ -85,9 +81,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           id={'FilterSectionTest'}
           title={'FilterSectionTitle'}
         />,
-        {
-          settings: mockSettings,
-        },
       );
     });
 
@@ -114,9 +107,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           id={'FilterSectionTest'}
           title={'FilterSectionTitle'}
         />,
-        {
-          settings: mockSettings,
-        },
       );
     });
 

@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Constants } from '../constants';
 
-import type { Account } from '../types';
-
 import { useAccountsStore } from '../stores';
+
+import type { Account } from '../types';
 
 interface AccountsState {
   refetchAccounts: () => Promise<void>;

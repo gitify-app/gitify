@@ -3,9 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { GroupBy } from '../../types';
+import { GroupBy, useSettingsStore } from '../../stores';
 
 import * as comms from '../../utils/comms';
 import * as links from '../../utils/links';
@@ -23,40 +22,46 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children - group by date', async () => {
+    useSettingsStore.setState({
+      groupBy: GroupBy.DATE,
+    });
+
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithAppContext(<NotificationRow {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.DATE },
-    });
+    const tree = renderWithAppContext(<NotificationRow {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - group by repositories', async () => {
+    useSettingsStore.setState({
+      groupBy: GroupBy.REPOSITORY,
+    });
+
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithAppContext(<NotificationRow {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
-    });
+    const tree = renderWithAppContext(<NotificationRow {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - hide numbers', async () => {
+    useSettingsStore.setState({
+      showNumber: false,
+    });
+
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithAppContext(<NotificationRow {...props} />, {
-      settings: { ...mockSettings, showNumber: false },
-    });
+    const tree = renderWithAppContext(<NotificationRow {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -74,6 +79,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', async () => {
+      useSettingsStore.setState({
+        markAsDoneOnOpen: false,
+      });
+
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -82,7 +91,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: false },
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
@@ -93,6 +101,11 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in the browser - delay notification setting enabled', async () => {
+      useSettingsStore.setState({
+        markAsDoneOnOpen: false,
+        delayNotificationState: true,
+      });
+
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -101,11 +114,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: {
-          ...mockSettings,
-          markAsDoneOnOpen: false,
-          delayNotificationState: true,
-        },
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
@@ -116,6 +124,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should open a notification in browser & mark it as done', async () => {
+      useSettingsStore.setState({
+        markAsDoneOnOpen: true,
+      });
+
       const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -124,7 +136,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: true },
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
 
@@ -135,6 +146,11 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
+      useSettingsStore.setState({
+        markAsDoneOnOpen: true,
+        delayNotificationState: true,
+      });
+
       const markNotificationsAsReadMock = vi.fn();
       const markNotificationsAsDoneMock = vi.fn();
 
@@ -144,11 +160,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: {
-          ...mockSettings,
-          markAsDoneOnOpen: true,
-          fetchReadNotifications: true,
-        },
         markNotificationsAsRead: markNotificationsAsReadMock,
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
@@ -161,6 +172,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should mark notifications as read', async () => {
+      useSettingsStore.setState({
+        markAsDoneOnOpen: false,
+      });
+
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -169,7 +184,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: false },
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
@@ -203,7 +217,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: mockSettings,
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
 
@@ -229,14 +242,16 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     });
 
     it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
+      useSettingsStore.setState({
+        fetchReadNotifications: true,
+      });
+
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
         isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, fetchReadNotifications: true },
-      });
+      renderWithAppContext(<NotificationRow {...props} />);
 
       expect(
         screen.getByTestId('notification-mark-as-done'),

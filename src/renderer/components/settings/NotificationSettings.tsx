@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent, useState } from 'react';
+import type { FC, MouseEvent } from 'react';
 
 import {
   BellIcon,
@@ -57,8 +57,6 @@ export const NotificationSettings: FC = () => {
     (s) => s.fetchReadNotifications,
   );
 
-  const [localFetchInterval, setFetchInterval] = useState(fetchInterval);
-
   return (
     <fieldset>
       <Title icon={BellIcon}>Notifications</Title>
@@ -111,7 +109,6 @@ export const NotificationSettings: FC = () => {
                 );
 
                 if (newInterval !== fetchInterval) {
-                  setFetchInterval(newInterval);
                   updateSetting('fetchInterval', newInterval);
                 }
               }}
@@ -137,7 +134,6 @@ export const NotificationSettings: FC = () => {
                 );
 
                 if (newInterval !== fetchInterval) {
-                  setFetchInterval(newInterval);
                   updateSetting('fetchInterval', newInterval);
                 }
               }}
@@ -150,9 +146,6 @@ export const NotificationSettings: FC = () => {
               data-testid="settings-fetch-interval-reset"
               icon={SyncIcon}
               onClick={() => {
-                setFetchInterval(
-                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-                );
                 updateSetting(
                   'fetchInterval',
                   Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,

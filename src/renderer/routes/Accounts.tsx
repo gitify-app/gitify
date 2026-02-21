@@ -31,6 +31,7 @@ import { Header } from '../components/primitives/Header';
 
 import { type Account, Size } from '../types';
 
+import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
   formatAlternateOAuthScopes,
   formatRecommendedOAuthScopes,
@@ -57,6 +58,7 @@ export const AccountsRoute: FC = () => {
   const logoutAccount = useCallback(
     (account: Account) => {
       removeAccount(account);
+      clearOctokitClientCache();
       navigate(-1);
     },
     [removeAccount],

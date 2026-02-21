@@ -7,9 +7,9 @@ import {
 } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { GroupBy } from '../../types';
+import { GroupBy, useAccountsStore } from '../../stores';
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import * as links from '../../utils/links';
 import {
@@ -27,6 +27,8 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - group notifications by repositories', () => {
+    useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubCloudGitifyNotifications,
@@ -34,14 +36,14 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    const tree = renderWithAppContext(<AccountNotifications {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
-    });
+    const tree = renderWithAppContext(<AccountNotifications {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself - group notifications by date', () => {
+    useSettingsStore.setState({ groupBy: GroupBy.DATE });
+
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubCloudGitifyNotifications,
@@ -49,9 +51,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    const tree = renderWithAppContext(<AccountNotifications {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.DATE },
-    });
+    const tree = renderWithAppContext(<AccountNotifications {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -74,6 +74,10 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - account error for single account', async () => {
+    useAccountsStore.setState({
+      accounts: [mockGitHubCloudAccount],
+    });
+
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
@@ -88,9 +92,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     let tree: ReturnType<typeof renderWithAppContext> | null = null;
 
     await act(async () => {
-      tree = renderWithAppContext(<AccountNotifications {...props} />, {
-        auth: { accounts: [mockGitHubCloudAccount] },
-      });
+      tree = renderWithAppContext(<AccountNotifications {...props} />);
     });
 
     expect(tree.container).toMatchSnapshot();

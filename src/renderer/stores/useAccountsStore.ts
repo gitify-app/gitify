@@ -123,13 +123,6 @@ const useAccountsStore = create<AccountsStore>()(
         return get().hasAccounts();
       },
 
-      // hasUsernameAlready: (username: Username) => {
-      //   return get().accounts.some(
-      //     (a) =>
-      //       a.username.trim().toLowerCase() === username.trim().toLowerCase(),
-      //   );
-      // },
-
       primaryAccountHostname: () => {
         const accounts = get().accounts;
         if (accounts.length === 0) {

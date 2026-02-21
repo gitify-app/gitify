@@ -1,10 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.4.3/schema.json",
   "files": {
-    "includes": [
-      "**",
-      "!**/generated/**/*"
-    ]
+    "includes": ["**", "!**/generated/**/*"]
   },
   "assist": {
     "actions": {
@@ -15,15 +12,9 @@
             "groups": [
               ":NODE:",
               ":BLANK_LINE:",
-              [
-                "react*",
-                "@testing-library/**"
-              ],
+              ["react*", "@testing-library/**"],
               ":BLANK_LINE:",
-              [
-                "*electron*",
-                "menubar"
-              ],
+              ["*electron*", "menubar"],
               ":BLANK_LINE:",
               "@primer/**",
               ":BLANK_LINE:",
@@ -31,17 +22,11 @@
               ":BLANK_LINE:",
               ":PACKAGE:",
               ":BLANK_LINE:",
-              [
-                "**/__mocks__/**",
-                "**/__helpers__/**"
-              ],
+              ["**/__mocks__/**", "**/__helpers__/**"],
               ":BLANK_LINE:",
               "**/shared/**",
               ":BLANK_LINE:",
-              [
-                "**/constants",
-                "**/constants/**"
-              ],
+              ["**/constants", "**/constants/**"],
               ":BLANK_LINE:",
               [
                 "**/context/**",
@@ -95,10 +80,7 @@
         "useHookAtTopLevel": {
           "level": "error",
           "options": {
-            "ignore": [
-              "useAlternateIdleIcon",
-              "useUnreadActiveIcon"
-            ]
+            "ignore": ["useAlternateIdleIcon", "useUnreadActiveIcon"]
           }
         }
       },

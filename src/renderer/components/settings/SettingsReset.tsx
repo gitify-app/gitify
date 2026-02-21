@@ -2,12 +2,12 @@ import type { FC } from 'react';
 
 import { Button, Stack, useConfirm } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { rendererLogInfo } from '../../utils/logger';
 
 export const SettingsReset: FC = () => {
-  const { resetSettings } = useAppContext();
+  const resetSettings = useSettingsStore((s) => s.reset);
 
   const confirm = useConfirm();
 

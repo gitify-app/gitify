@@ -1,30 +1,21 @@
 import { act } from '@testing-library/react';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
-import { mockSettings } from '../__mocks__/state-mocks';
 
 import { Constants } from '../constants';
 
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
+import { useAccountsStore } from '../stores';
 
-import type {
-  AuthState,
-  ClientID,
-  ClientSecret,
-  SettingsState,
-  Token,
-} from '../types';
+import type { ClientID, ClientSecret, Token } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import * as authUtils from '../utils/auth/utils';
 import * as notifications from '../utils/notifications/notifications';
-import * as storage from '../utils/storage';
 import * as tray from '../utils/tray';
 import { type AppContextState, AppProvider } from './App';
-import { defaultSettings } from './defaults';
 
 vi.mock('../hooks/useNotifications');
 
@@ -47,11 +38,10 @@ const renderWithContext = () => {
 };
 
 describe('renderer/context/App.tsx', () => {
-  const fetchNotificationsMock = vi.fn();
+  const refetchNotificationsMock = vi.fn();
   const markNotificationsAsReadMock = vi.fn();
   const markNotificationsAsDoneMock = vi.fn();
   const unsubscribeNotificationMock = vi.fn();
-  const removeAccountNotificationsMock = vi.fn();
 
   beforeEach(() => {
     vi.useFakeTimers();
@@ -63,11 +53,10 @@ describe('renderer/context/App.tsx', () => {
       hasNotifications: false,
       unreadNotificationCount: 0,
       hasUnreadNotifications: false,
-      fetchNotifications: fetchNotificationsMock,
+      refetchNotifications: refetchNotificationsMock,
       markNotificationsAsRead: markNotificationsAsReadMock,
       markNotificationsAsDone: markNotificationsAsDoneMock,
       unsubscribeNotification: unsubscribeNotificationMock,
-      removeAccountNotifications: removeAccountNotificationsMock,
     } as ReturnType<typeof useNotifications>);
   });
 
@@ -87,52 +76,15 @@ describe('renderer/context/App.tsx', () => {
       vi.fn(),
     );
 
-    const mockDefaultState = {
-      auth: { accounts: [] },
-      settings: mockSettings,
-    };
-
-    it('fetch notifications each interval', async () => {
-      renderWithAppContext(<AppProvider>{null}</AppProvider>);
-
-      // Initial fetch happens on mount - advance timers to ensure it runs
-      await act(async () => {
-        await vi.advanceTimersByTimeAsync(0);
-      });
-
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
-
-      await act(async () => {
-        await vi.advanceTimersByTimeAsync(
-          Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-        );
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
-
-      await act(async () => {
-        await vi.advanceTimersByTimeAsync(
-          Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-        );
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
-
-      await act(async () => {
-        await vi.advanceTimersByTimeAsync(
-          Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-        );
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
-    });
-
     it('should call fetchNotifications', async () => {
       const getContext = renderWithContext();
-      fetchNotificationsMock.mockReset();
+      refetchNotificationsMock.mockReset();
 
       act(() => {
         getContext().fetchNotifications();
       });
 
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+      expect(refetchNotificationsMock).toHaveBeenCalledTimes(1);
     });
 
     it('should call markNotificationsAsRead', async () => {
@@ -143,10 +95,9 @@ describe('renderer/context/App.tsx', () => {
       });
 
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
-        mockDefaultState,
-        [mockGitifyNotification],
-      );
+      expect(markNotificationsAsReadMock).toHaveBeenCalledWith([
+        mockGitifyNotification,
+      ]);
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
 
@@ -158,10 +109,9 @@ describe('renderer/context/App.tsx', () => {
       });
 
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
-        mockDefaultState,
-        [mockGitifyNotification],
-      );
+      expect(markNotificationsAsDoneMock).toHaveBeenCalledWith([
+        mockGitifyNotification,
+      ]);
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
 
@@ -174,62 +124,20 @@ describe('renderer/context/App.tsx', () => {
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
-        mockDefaultState,
         mockGitifyNotification,
       );
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('settings methods', () => {
-    const saveStateSpy = vi
-      .spyOn(storage, 'saveState')
-      .mockImplementation(vi.fn());
-
-    it('should call updateSetting', async () => {
-      const getContext = renderWithContext();
-
-      act(() => {
-        getContext().updateSetting('participating', true);
-      });
-
-      expect(saveStateSpy).toHaveBeenCalledWith({
-        auth: {
-          accounts: [],
-        } as AuthState,
-        settings: {
-          ...defaultSettings,
-          participating: true,
-        } as SettingsState,
-      });
-    });
-
-    it('should call resetSettings', async () => {
-      const getContext = renderWithContext();
-
-      act(() => {
-        getContext().resetSettings();
-      });
-
-      expect(saveStateSpy).toHaveBeenCalledWith({
-        auth: {
-          accounts: [],
-        } as AuthState,
-        settings: defaultSettings,
-      });
-    });
-  });
-
   describe('authentication functions', () => {
-    const addAccountSpy = vi
-      .spyOn(authUtils, 'addAccount')
-      .mockImplementation(vi.fn())
-      .mockResolvedValueOnce({
-        accounts: [mockGitHubCloudAccount],
-      } as unknown as AuthState);
-    const removeAccountSpy = vi.spyOn(authUtils, 'removeAccount');
+    let createAccountSpy: ReturnType<typeof vi.spyOn>;
 
-    beforeEach(() => {
+    beforeEach(async () => {
+      createAccountSpy = vi.spyOn(useAccountsStore.getState(), 'createAccount');
+    });
+
+    afterEach(() => {
       vi.clearAllMocks();
     });
 
@@ -273,8 +181,7 @@ describe('renderer/context/App.tsx', () => {
         );
       });
 
-      expect(addAccountSpy).toHaveBeenCalledWith(
-        expect.anything(),
+      expect(createAccountSpy).toHaveBeenCalledWith(
         'GitHub App',
         'token',
         'github.com',
@@ -298,22 +205,6 @@ describe('renderer/context/App.tsx', () => {
       });
 
       expect(performGitHubWebOAuthSpy).toHaveBeenCalled();
-    });
-
-    it('logoutFromAccount calls removeAccountNotifications, removeAccount', async () => {
-      const getContext = renderWithContext();
-
-      act(() => {
-        getContext().logoutFromAccount(mockGitHubCloudAccount);
-      });
-
-      expect(removeAccountNotificationsMock).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-      );
-      expect(removeAccountSpy).toHaveBeenCalledWith(
-        expect.anything(),
-        mockGitHubCloudAccount,
-      );
     });
   });
 });

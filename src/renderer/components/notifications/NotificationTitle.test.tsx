@@ -1,5 +1,6 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockSettings } from '../../__mocks__/state-mocks';
+
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import { NotificationTitle } from './NotificationTitle';
 
@@ -45,28 +46,24 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should apply truncate className when wrapNotificationTitle is false', () => {
+    useSettingsStore.setState({
+      wrapNotificationTitle: false,
+    });
+
     const tree = renderWithAppContext(
       <NotificationTitle title="refactor: migrate deprecated atlaskit `xcss`" />,
-      {
-        settings: {
-          ...mockSettings,
-          wrapNotificationTitle: false,
-        },
-      },
     );
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should not apply truncate className when wrapNotificationTitle is true', () => {
+    useSettingsStore.setState({
+      wrapNotificationTitle: true,
+    });
+
     const tree = renderWithAppContext(
       <NotificationTitle title="refactor: migrate deprecated atlaskit `xcss`" />,
-      {
-        settings: {
-          ...mockSettings,
-          wrapNotificationTitle: true,
-        },
-      },
     );
 
     expect(tree.container).toMatchSnapshot();

@@ -31,7 +31,6 @@ import type {
 } from '../utils/auth/types';
 
 import { fetchAuthenticatedUserDetails } from '../utils/api/client';
-import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
   exchangeAuthCodeForAccessToken,
   performGitHubWebOAuth,

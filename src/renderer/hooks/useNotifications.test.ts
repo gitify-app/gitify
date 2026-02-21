@@ -1,6 +1,9 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
+import type { ReactNode } from 'react';
 
 import { RequestError } from '@octokit/request-error';
+
+import { QueryClient, type QueryClientProvider } from '@tanstack/react-query';
 
 import type { DeepPartial } from '../__helpers__/test-utils';
 import {
@@ -19,6 +22,23 @@ import * as logger from '../utils/logger';
 import * as native from '../utils/notifications/native';
 import * as sound from '../utils/notifications/sound';
 import { useNotifications } from './useNotifications';
+
+const createWrapper = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
+      },
+    },
+  });
+
+  return ({ children }: { children: ReactNode }) => {
+    <QueryClientProvider client =
+      { queryClient } > { children } < />CPQdeeeiilnorrrtuvy;
+  };
+};
 
 describe('renderer/hooks/useNotifications.ts', () => {
   const accounts = [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount];
@@ -150,13 +170,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
         mockNotifications as ListNotificationsForAuthenticatedUserResponse,
       );
 
-      const { result } = renderHook(() => useNotifications(accounts));
-
-      act(() => {
-        result.current.fetchNotifications();
+      const { result } = renderHook(() => useNotifications(accounts), {
+        wrapper: createWrapper(),
       });
 
-      expect(result.current.status).toBe('loading');
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
 
       await waitFor(() => {
         expect(result.current.status).toBe('success');

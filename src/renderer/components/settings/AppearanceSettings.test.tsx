@@ -1,49 +1,41 @@
-import { act, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
+
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import * as zoom from '../../utils/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {
-  const updateSettingMock = vi.fn();
+  let updateSettingSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(async () => {
+    updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
+
+    renderWithAppContext(<AppearanceSettings />);
+  });
 
   afterEach(() => {
     vi.clearAllMocks();
   });
 
   it('should change the theme mode dropdown', async () => {
-    await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        updateSetting: updateSettingMock,
-      });
-    });
-
     await userEvent.selectOptions(
       screen.getByTestId('settings-theme'),
       'LIGHT',
     );
 
-    expect(updateSettingMock).toHaveBeenCalledTimes(1);
-    expect(updateSettingMock).toHaveBeenCalledWith('theme', 'LIGHT');
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
   it('should toggle increase contrast checkbox', async () => {
-    await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        auth: {
-          accounts: [mockGitHubAppAccount],
-        },
-        updateSetting: updateSettingMock,
-      });
-    });
-
     await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
 
-    expect(updateSettingMock).toHaveBeenCalledTimes(1);
-    expect(updateSettingMock).toHaveBeenCalledWith('increaseContrast', true);
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('increaseContrast', true);
   });
 
   it('should update the zoom values when using the zoom buttons', async () => {
@@ -56,12 +48,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     const zoomResetSpy = vi
       .spyOn(zoom, 'resetZoomLevel')
       .mockImplementation(vi.fn());
-
-    await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        updateSetting: updateSettingMock,
-      });
-    });
 
     // Zoom Out
     await userEvent.click(screen.getByTestId('settings-zoom-out'));
@@ -80,35 +66,17 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should toggle account header checkbox', async () => {
-    await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        auth: {
-          accounts: [mockGitHubAppAccount],
-        },
-        updateSetting: updateSettingMock,
-      });
-    });
-
     await userEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
 
-    expect(updateSettingMock).toHaveBeenCalledTimes(1);
-    expect(updateSettingMock).toHaveBeenCalledWith('showAccountHeader', true);
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('showAccountHeader', true);
   });
 
   it('should toggle wrap notification title checkbox', async () => {
-    await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        auth: {
-          accounts: [mockGitHubAppAccount],
-        },
-        updateSetting: updateSettingMock,
-      });
-    });
-
     await userEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
 
-    expect(updateSettingMock).toHaveBeenCalledTimes(1);
-    expect(updateSettingMock).toHaveBeenCalledWith(
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith(
       'wrapNotificationTitle',
       true,
     );

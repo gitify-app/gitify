@@ -1,3 +1,5 @@
+import useFiltersStore from '../../../stores/useFiltersStore';
+
 import type {
   AccountNotifications,
   GitifyNotification,
@@ -5,8 +7,6 @@ import type {
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
-
-import useFiltersStore from '../../../stores/useFiltersStore';
 
 const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
   CheckSuite: {

@@ -65,7 +65,7 @@ export interface AccountsActions {
   hasAccounts: () => boolean;
   hasMultipleAccounts: () => boolean;
   isLoggedIn: () => boolean;
-  // hasUsernameAlready: (username: Username) => boolean;
+  primaryAccountHostname: () => Hostname;
   reset: () => void;
 }
 
