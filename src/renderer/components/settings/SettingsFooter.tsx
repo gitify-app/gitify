@@ -5,7 +5,7 @@ import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useShortcutActions } from '../../hooks/useGlobalShortcuts';
+import { useGlobalShortcuts } from '../../hooks/useGlobalShortcuts';
 
 import { Footer } from '../primitives/Footer';
 
@@ -14,7 +14,7 @@ import { openGitifyReleaseNotes } from '../../utils/links';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const { shortcuts } = useShortcutActions();
+  const { shortcuts } = useGlobalShortcuts();
 
   useEffect(() => {
     (async () => {

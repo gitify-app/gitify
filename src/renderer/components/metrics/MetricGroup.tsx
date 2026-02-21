@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import type { GitifyNotification } from '../../types';
 
@@ -16,9 +16,9 @@ export interface MetricGroupProps {
 }
 
 export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
-  const { settings } = useAppContext();
+  const showPills = useSettingsStore((s) => s.showPills);
 
-  if (!settings.showPills) {
+  if (!showPills) {
     return null;
   }
 

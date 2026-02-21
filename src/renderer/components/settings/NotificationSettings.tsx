@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent, useEffect, useState } from 'react';
+import { type FC, type MouseEvent, useState } from 'react';
 
 import {
   BellIcon,
@@ -21,27 +21,43 @@ import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { GroupBy, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
-import { FetchType, GroupBy, Size } from '../../types';
+import { Size } from '../../types';
 
 import { openGitHubParticipatingDocs } from '../../utils/links';
 
 export const NotificationSettings: FC = () => {
-  const { settings, updateSetting } = useAppContext();
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
 
-  const [fetchInterval, setFetchInterval] = useState<number>(
-    settings.fetchInterval,
+  const groupBy = useSettingsStore((s) => s.groupBy);
+  const fetchAllNotifications = useSettingsStore(
+    (s) => s.fetchAllNotifications,
+  );
+  const detailedNotifications = useSettingsStore(
+    (s) => s.detailedNotifications,
+  );
+  const fetchInterval = useSettingsStore((s) => s.fetchInterval);
+  const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
+  const markAsDoneOnUnsubscribe = useSettingsStore(
+    (s) => s.markAsDoneOnUnsubscribe,
+  );
+  const delayNotificationState = useSettingsStore(
+    (s) => s.delayNotificationState,
+  );
+  const showPills = useSettingsStore((s) => s.showPills);
+  const showNumber = useSettingsStore((s) => s.showNumber);
+  const participating = useSettingsStore((s) => s.participating);
+  const fetchReadNotifications = useSettingsStore(
+    (s) => s.fetchReadNotifications,
   );
 
-  useEffect(() => {
-    setFetchInterval(settings.fetchInterval);
-  }, [settings.fetchInterval]);
+  const [localFetchInterval, setFetchInterval] = useState(fetchInterval);
 
   return (
     <fieldset>
@@ -71,34 +87,7 @@ export const NotificationSettings: FC = () => {
               </Text>
             </Stack>
           }
-          value={settings.groupBy}
-        />
-
-        <RadioGroup
-          label="Fetch type:"
-          name="fetchType"
-          onChange={(evt) => {
-            updateSetting('fetchType', evt.target.value as FetchType);
-          }}
-          options={[
-            { label: 'Interval', value: FetchType.INTERVAL },
-            { label: 'Inactivity', value: FetchType.INACTIVITY },
-          ]}
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>Controls how new notifications are fetched.</Text>
-              <Text>
-                <Text as="strong">Interval</Text> will check for new
-                notifications on a regular scheduled interval.
-              </Text>
-              <Text>
-                <Text as="strong">Inactivity</Text> will check for new
-                notifications only when there has been no user activity within{' '}
-                {APPLICATION.NAME} for a specified period of time.
-              </Text>
-            </Stack>
-          }
-          value={settings.fetchType}
+          value={groupBy}
         />
 
         <Stack
@@ -177,14 +166,11 @@ export const NotificationSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.fetchAllNotifications}
+          checked={fetchAllNotifications}
           label="Fetch all notifications"
           name="fetchAllNotifications"
           onChange={() =>
-            updateSetting(
-              'fetchAllNotifications',
-              !settings.fetchAllNotifications,
-            )
+            updateSetting('fetchAllNotifications', !fetchAllNotifications)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">
@@ -202,14 +188,11 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.detailedNotifications}
+          checked={detailedNotifications}
           label="Fetch detailed notifications"
           name="detailedNotifications"
           onChange={() =>
-            updateSetting(
-              'detailedNotifications',
-              !settings.detailedNotifications,
-            )
+            updateSetting('detailedNotifications', !detailedNotifications)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">
@@ -233,13 +216,13 @@ export const NotificationSettings: FC = () => {
           }
         />
 
-        <div className="pl-6" hidden={!settings.detailedNotifications}>
+        <div className="pl-6" hidden={!detailedNotifications}>
           <Stack direction="vertical" gap="condensed">
             <Checkbox
-              checked={settings.showPills}
+              checked={showPills}
               label="Show notification metric pills"
               name="showPills"
-              onChange={() => updateSetting('showPills', !settings.showPills)}
+              onChange={() => updateSetting('showPills', !showPills)}
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show notification metric pills for:</Text>
@@ -276,10 +259,10 @@ export const NotificationSettings: FC = () => {
             />
 
             <Checkbox
-              checked={settings.showNumber}
+              checked={showNumber}
               label="Show GitHub number"
               name="showNumber"
-              onChange={() => updateSetting('showNumber', !settings.showNumber)}
+              onChange={() => updateSetting('showNumber', !showNumber)}
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show GitHub number for:</Text>
@@ -308,12 +291,10 @@ export const NotificationSettings: FC = () => {
         </div>
 
         <Checkbox
-          checked={settings.participating}
+          checked={participating}
           label="Fetch only participating"
           name="showOnlyParticipating"
-          onChange={() =>
-            updateSetting('participating', !settings.participating)
-          }
+          onChange={() => updateSetting('participating', !participating)}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
@@ -345,14 +326,11 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.fetchReadNotifications}
+          checked={fetchReadNotifications}
           label="Fetch read & done notifications"
           name="fetchReadNotifications"
           onChange={() =>
-            updateSetting(
-              'fetchReadNotifications',
-              !settings.fetchReadNotifications,
-            )
+            updateSetting('fetchReadNotifications', !fetchReadNotifications)
           }
           tooltip={
             <Stack direction="vertical" gap="condensed">
@@ -371,12 +349,10 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.markAsDoneOnOpen}
+          checked={markAsDoneOnOpen}
           label="Mark as done on open"
           name="markAsDoneOnOpen"
-          onChange={() =>
-            updateSetting('markAsDoneOnOpen', !settings.markAsDoneOnOpen)
-          }
+          onChange={() => updateSetting('markAsDoneOnOpen', !markAsDoneOnOpen)}
           tooltip={
             <Text>
               <Text as="strong">Mark as done</Text> feature is supported in
@@ -386,14 +362,11 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.markAsDoneOnUnsubscribe}
+          checked={markAsDoneOnUnsubscribe}
           label="Mark as done on unsubscribe"
           name="markAsDoneOnUnsubscribe"
           onChange={() =>
-            updateSetting(
-              'markAsDoneOnUnsubscribe',
-              !settings.markAsDoneOnUnsubscribe,
-            )
+            updateSetting('markAsDoneOnUnsubscribe', !markAsDoneOnUnsubscribe)
           }
           tooltip={
             <Text>
@@ -404,14 +377,11 @@ export const NotificationSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.delayNotificationState}
+          checked={delayNotificationState}
           label="Delay notification state"
           name="delayNotificationState"
           onChange={() =>
-            updateSetting(
-              'delayNotificationState',
-              !settings.delayNotificationState,
-            )
+            updateSetting('delayNotificationState', !delayNotificationState)
           }
           tooltip={
             <Text>

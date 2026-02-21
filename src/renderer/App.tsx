@@ -23,6 +23,7 @@ import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
 import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
+import { useAccountsStore } from './stores';
 import { initializeStoreSubscriptions } from './stores/subscriptions';
 
 import { GlobalShortcuts } from './components/GlobalShortcuts';

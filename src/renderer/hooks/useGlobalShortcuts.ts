@@ -38,7 +38,7 @@ type ShortcutConfigs = Record<ShortcutName, ShortcutConfig>;
  * Centralized shortcut actions + enabled state + hotkeys.
  * Used by both the global shortcuts component and UI buttons to avoid duplication.
  */
-export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
+export function useGlobalShortcuts(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
 

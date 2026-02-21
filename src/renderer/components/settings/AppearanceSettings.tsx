@@ -15,15 +15,12 @@ import {
   Text,
 } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { Theme, useAccountsStore, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
-import { Theme } from '../../types';
-
-import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   canDecreaseZoom,
   canIncreaseZoom,
@@ -34,7 +31,15 @@ import {
 } from '../../utils/zoom';
 
 export const AppearanceSettings: FC = () => {
-  const { auth, settings, updateSetting } = useAppContext();
+  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts);
+
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+  const theme = useSettingsStore((s) => s.theme);
+  const increaseContrast = useSettingsStore((s) => s.increaseContrast);
+  const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
+  const wrapNotificationTitle = useSettingsStore(
+    (s) => s.wrapNotificationTitle,
+  );
 
   const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
@@ -55,7 +60,7 @@ export const AppearanceSettings: FC = () => {
             onChange={(evt) =>
               updateSetting('theme', evt.target.value as Theme)
             }
-            value={settings.theme}
+            value={theme}
           >
             <Select.OptGroup label="System">
               <Select.Option value={Theme.SYSTEM}>System</Select.Option>
@@ -83,12 +88,10 @@ export const AppearanceSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.increaseContrast}
+          checked={increaseContrast}
           label="Increase contrast"
           name="increaseContrast"
-          onChange={() =>
-            updateSetting('increaseContrast', !settings.increaseContrast)
-          }
+          onChange={() => updateSetting('increaseContrast', !increaseContrast)}
           tooltip={
             <Text>
               Enable high contrast colors for improved legibility. This
@@ -144,11 +147,11 @@ export const AppearanceSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.showAccountHeader}
+          checked={showAccountHeader}
           label="Show account header"
           name="showAccountHeader"
           onChange={() =>
-            updateSetting('showAccountHeader', !settings.showAccountHeader)
+            updateSetting('showAccountHeader', !showAccountHeader)
           }
           tooltip={
             <Text>
@@ -156,18 +159,15 @@ export const AppearanceSettings: FC = () => {
               quick links) above the notifications list.
             </Text>
           }
-          visible={!hasMultipleAccounts(auth)}
+          visible={!hasMultipleAccounts()}
         />
 
         <Checkbox
-          checked={settings.wrapNotificationTitle}
+          checked={wrapNotificationTitle}
           label="Show full notification title"
           name="wrapNotificationTitle"
           onChange={() =>
-            updateSetting(
-              'wrapNotificationTitle',
-              !settings.wrapNotificationTitle,
-            )
+            updateSetting('wrapNotificationTitle', !wrapNotificationTitle)
           }
           tooltip={
             <Text>

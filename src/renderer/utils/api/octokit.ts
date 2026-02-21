@@ -1,7 +1,6 @@
 import { Octokit } from '@octokit/core';
 import { paginateRest } from '@octokit/plugin-paginate-rest';
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
-import { retry } from '@octokit/plugin-retry';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -13,11 +12,7 @@ import { decryptValue, getAppVersion } from '../comms';
 import { getGitHubAPIBaseUrl } from './utils';
 
 // Create the Octokit type with plugins
-const OctokitWithPlugins = Octokit.plugin(
-  paginateRest,
-  restEndpointMethods,
-  retry,
-);
+const OctokitWithPlugins = Octokit.plugin(paginateRest, restEndpointMethods);
 export type OctokitClient = InstanceType<typeof OctokitWithPlugins>;
 
 // Cache Octokit clients per account UUID + type (rest|graphql)
@@ -82,9 +77,6 @@ export async function createOctokitClientUncached(
     auth: decryptedToken,
     baseUrl: baseUrl,
     userAgent: userAgent,
-    retry: {
-      retries: 1,
-    },
   });
 }
 

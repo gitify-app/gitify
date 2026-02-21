@@ -2,7 +2,7 @@ import type { FC, MouseEvent } from 'react';
 
 import { Stack } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
@@ -18,10 +18,10 @@ export interface NotificationHeaderProps {
 export const NotificationHeader: FC<NotificationHeaderProps> = ({
   notification,
 }: NotificationHeaderProps) => {
-  const { settings } = useAppContext();
+  const showNumber = useSettingsStore((s) => s.showNumber);
 
   return (
-    isGroupByDate(settings) && (
+    isGroupByDate() && (
       <div className="py-0.5">
         <Stack align="center" direction="horizontal" gap="condensed">
           <button
@@ -44,11 +44,7 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
             />
           </button>
           <div
-            className={cn(
-              'text-xxs',
-              Opacity.READ,
-              !settings.showNumber && 'hidden',
-            )}
+            className={cn('text-xxs', Opacity.READ, !showNumber && 'hidden')}
           >
             {notification.display.number}
           </div>

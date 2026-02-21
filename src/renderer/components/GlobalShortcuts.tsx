@@ -1,13 +1,13 @@
 import { type FC, useEffect } from 'react';
 
-import { useShortcutActions } from '../hooks/useGlobalShortcuts';
+import { useGlobalShortcuts } from '../hooks/useGlobalShortcuts';
 
 /**
  * Component that registers global keyboard shortcuts for the renderer app.
  * Mount once inside App, within Router + AppProvider.
  */
 export const GlobalShortcuts: FC = () => {
-  const { shortcuts } = useShortcutActions();
+  const { shortcuts } = useGlobalShortcuts();
 
   useEffect(() => {
     const keyToName = new Map<string, keyof typeof shortcuts>(

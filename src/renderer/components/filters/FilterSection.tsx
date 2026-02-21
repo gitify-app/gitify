@@ -4,11 +4,15 @@ import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import {
+  type FiltersState,
+  useFiltersStore,
+  useSettingsStore,
+} from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
-import { type FiltersState, useFiltersStore } from '../../stores';
 import type { Filter } from '../../utils/notifications/filters';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
@@ -31,8 +35,12 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
   tooltip,
   layout = 'vertical',
 }: FilterSectionProps<K>) => {
-  const { notifications, settings } = useAppContext();
+  const { notifications } = useAppContext();
   const updateFilter = useFiltersStore((s) => s.updateFilter);
+
+  const detailedNotifications = useSettingsStore(
+    (s) => s.detailedNotifications,
+  );
 
   // Subscribe to the specific filter state so component re-renders when filters change
   useFiltersStore((s) => s[filterSetting]);
@@ -91,8 +99,7 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
                 checked={isChecked}
                 counter={count}
                 disabled={
-                  filter.requiresDetailsNotifications &&
-                  !settings.detailedNotifications
+                  filter.requiresDetailsNotifications && !detailedNotifications
                 }
                 key={type as string}
                 label={typeTitle}
