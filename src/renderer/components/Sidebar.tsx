@@ -18,7 +18,7 @@ import { APPLICATION } from '../../shared/constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { useShortcutActions } from '../hooks/useShortcutActions';
 
-import { hasActiveFilters } from '../utils/notifications/filters/filter';
+import { useFiltersStore } from '../stores';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
@@ -31,6 +31,8 @@ export const Sidebar: FC = () => {
   } = useAppContext();
 
   const { shortcuts } = useShortcutActions();
+
+  const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
   const isLoading = status === 'loading';
 
@@ -97,7 +99,7 @@ export const Sidebar: FC = () => {
               onClick={() => shortcuts.filters.action()}
               size="small"
               tooltipDirection="e"
-              variant={hasActiveFilters(settings) ? 'primary' : 'invisible'}
+              variant={hasFilters ? 'primary' : 'invisible'}
             />
           </>
         )}

@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../__helpers__/test-utils';
 
+import { type FiltersStore, useFiltersStore } from '../stores';
 import { FiltersRoute } from './Filters';
 
 const navigateMock = vi.fn();
@@ -12,8 +13,14 @@ vi.mock('react-router-dom', async () => ({
 }));
 
 describe('renderer/routes/Filters.tsx', () => {
-  const clearFiltersMock = vi.fn();
   const fetchNotificationsMock = vi.fn();
+
+  let resetSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    // spy the actions on the real store
+    resetSpy = vi.spyOn(useFiltersStore.getState() as FiltersStore, 'reset');
+  });
 
   afterEach(() => {
     vi.clearAllMocks();
@@ -46,14 +53,12 @@ describe('renderer/routes/Filters.tsx', () => {
   describe('Footer section', () => {
     it('should clear filters', async () => {
       await act(async () => {
-        renderWithAppContext(<FiltersRoute />, {
-          clearFilters: clearFiltersMock,
-        });
+        renderWithAppContext(<FiltersRoute />);
       });
 
       await userEvent.click(screen.getByTestId('filters-clear'));
 
-      expect(clearFiltersMock).toHaveBeenCalled();
+      expect(resetSpy).toHaveBeenCalled();
     });
   });
 });

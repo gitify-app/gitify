@@ -2,11 +2,11 @@ import type {
   AccountNotifications,
   GitifyNotification,
   Reason,
-  SettingsState,
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
 
+import { useFiltersStore } from '../../../stores';
 import { REASON_TYPE_DETAILS } from '../../reason';
 
 export const reasonFilter: Filter<Reason> = {
@@ -18,12 +18,14 @@ export const reasonFilter: Filter<Reason> = {
     return this.FILTER_TYPES[reason];
   },
 
-  hasFilters(settings: SettingsState): boolean {
-    return settings.filterReasons.length > 0;
+  hasFilters(): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.reasons.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, reason: Reason): boolean {
-    return settings.filterReasons.includes(reason);
+  isFilterSet(reason: Reason): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.reasons.includes(reason);
   },
 
   getFilterCount(

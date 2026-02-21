@@ -3,9 +3,7 @@ import { Constants } from '../constants';
 import {
   type AppearanceSettingsState,
   type AuthState,
-  type ConfigSettingsState,
   FetchType,
-  type FilterSettingsState,
   GroupBy,
   type NotificationSettingsState,
   OpenPreference,
@@ -58,23 +56,9 @@ const defaultSystemSettings: SystemSettingsState = {
   openAtStartup: false,
 };
 
-export const defaultFilterSettings: FilterSettingsState = {
-  filterUserTypes: [],
-  filterIncludeSearchTokens: [],
-  filterExcludeSearchTokens: [],
-  filterSubjectTypes: [],
-  filterStates: [],
-  filterReasons: [],
-};
-
-export const defaultConfigSettings: ConfigSettingsState = {
+export const defaultSettings: SettingsState = {
   ...defaultAppearanceSettings,
   ...defaultNotificationSettings,
   ...defaultTraySettings,
   ...defaultSystemSettings,
-};
-
-export const defaultSettings: SettingsState = {
-  ...defaultConfigSettings,
-  ...defaultFilterSettings,
 };

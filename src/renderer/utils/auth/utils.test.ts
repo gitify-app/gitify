@@ -70,6 +70,11 @@ describe('renderer/utils/auth/utils.ts', () => {
   });
 
   describe('performGitHubDeviceOAuth', () => {
+    beforeEach(() => {
+      // Mock OAUTH_DEVICE_FLOW_CLIENT_ID value
+      Constants.OAUTH_DEVICE_FLOW_CLIENT_ID = 'FAKE_CLIENT_ID_123' as ClientID;
+    });
+
     it('should authenticate using device flow for GitHub app', async () => {
       createDeviceCodeMock.mockResolvedValueOnce({
         data: {

@@ -6,6 +6,7 @@ import { renderWithAppContext } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
+import { useFiltersStore } from '../stores';
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
@@ -185,15 +186,14 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('highlight filters sidebar if any are saved', () => {
+      useFiltersStore.setState({ reasons: ['assign'] });
+
       renderWithAppContext(
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>,
         {
-          settings: {
-            ...mockSettings,
-            filterReasons: ['assign'],
-          },
+          settings: mockSettings,
         },
       );
 

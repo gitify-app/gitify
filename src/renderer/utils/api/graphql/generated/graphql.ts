@@ -4239,6 +4239,13 @@ export type PullRequestBranchUpdateMethod =
   /** Update branch via rebase */
   | 'REBASE';
 
+/** The policy controlling who can create pull requests in a repository. */
+export type PullRequestCreationPolicy =
+  /** Anyone can create pull requests. */
+  | 'ALL'
+  /** Only collaborators can create pull requests. */
+  | 'COLLABORATORS_ONLY';
+
 /** Represents available types of methods to use when merging a pull request. */
 export type PullRequestMergeMethod =
   /** Add all commits from the head branch to the base branch with a merge commit. */
@@ -7506,6 +7513,8 @@ export type UpdateRepositoryInput = {
   hasIssuesEnabled?: InputMaybe<Scalars['Boolean']['input']>;
   /** Indicates if the repository should have the project boards feature enabled. */
   hasProjectsEnabled?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Indicates if the repository should have the pull requests feature enabled. */
+  hasPullRequestsEnabled?: InputMaybe<Scalars['Boolean']['input']>;
   /** Indicates if the repository displays a Sponsor button for financial contributions. */
   hasSponsorshipsEnabled?: InputMaybe<Scalars['Boolean']['input']>;
   /** Indicates if the repository should have the wiki feature enabled. */
@@ -7514,6 +7523,8 @@ export type UpdateRepositoryInput = {
   homepageUrl?: InputMaybe<Scalars['URI']['input']>;
   /** The new name of the repository. */
   name?: InputMaybe<Scalars['String']['input']>;
+  /** The policy controlling who can create pull requests in this repository. */
+  pullRequestCreationPolicy?: InputMaybe<PullRequestCreationPolicy>;
   /** The ID of the repository to update. */
   repositoryId: Scalars['ID']['input'];
   /** Whether this repository should be marked as a template such that anyone who can access it can create new repositories with the same files and directory structure. */

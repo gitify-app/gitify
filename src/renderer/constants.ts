@@ -3,6 +3,9 @@ import type { ClientID, Hostname, Link } from './types';
 export const Constants = {
   STORAGE_KEY: 'gitify-storage',
 
+  // Filters store key
+  FILTERS_STORE_KEY: 'atlassify-filters',
+
   // GitHub OAuth Scopes
   OAUTH_SCOPES: {
     RECOMMENDED: ['read:user', 'notifications', 'repo'],

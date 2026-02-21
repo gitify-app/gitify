@@ -1,11 +1,12 @@
 import type {
   AccountNotifications,
   GitifyNotification,
-  SettingsState,
   SubjectType,
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
+
+import useFiltersStore from '../../../stores/useFiltersStore';
 
 const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
   CheckSuite: {
@@ -49,12 +50,14 @@ export const subjectTypeFilter: Filter<SubjectType> = {
     return this.FILTER_TYPES[subjectType];
   },
 
-  hasFilters(settings: SettingsState): boolean {
-    return settings.filterSubjectTypes.length > 0;
+  hasFilters(): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.subjectTypes.length > 0;
   },
 
-  isFilterSet(settings: SettingsState, subjectType: SubjectType): boolean {
-    return settings.filterSubjectTypes.includes(subjectType);
+  isFilterSet(subjectType: SubjectType): boolean {
+    const filters = useFiltersStore.getState();
+    return filters.subjectTypes.includes(subjectType);
   },
 
   getFilterCount(

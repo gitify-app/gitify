@@ -6,6 +6,7 @@ import {
 } from '../__helpers__/test-utils';
 import { mockSettings } from '../__mocks__/state-mocks';
 
+import { useFiltersStore } from '../stores';
 import { AllRead } from './AllRead';
 
 describe('renderer/components/AllRead.tsx', () => {
@@ -20,12 +21,6 @@ describe('renderer/components/AllRead.tsx', () => {
       tree = renderWithAppContext(<AllRead />, {
         settings: {
           ...mockSettings,
-          filterReasons: [],
-          filterStates: [],
-          filterSubjectTypes: [],
-          filterUserTypes: [],
-          filterIncludeSearchTokens: [],
-          filterExcludeSearchTokens: [],
         },
       });
     });
@@ -34,13 +29,14 @@ describe('renderer/components/AllRead.tsx', () => {
   });
 
   it('should render itself & its children - with filters', async () => {
+    useFiltersStore.setState({ reasons: ['author'] });
+
     let tree: ReturnType<typeof renderWithAppContext> | null = null;
 
     await act(async () => {
       tree = renderWithAppContext(<AllRead />, {
         settings: {
           ...mockSettings,
-          filterReasons: ['author'],
         },
       });
     });

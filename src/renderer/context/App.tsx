@@ -19,10 +19,6 @@ import type {
   Account,
   AccountNotifications,
   AuthState,
-  ConfigSettingsState,
-  ConfigSettingsValue,
-  FilterSettingsState,
-  FilterSettingsValue,
   GitifyError,
   GitifyNotification,
   Hostname,
@@ -38,6 +34,7 @@ import type {
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
+import { useFiltersStore } from '../stores';
 import { fetchAuthenticatedUserDetails } from '../utils/api/client';
 import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
@@ -70,11 +67,7 @@ import {
 } from '../utils/theme';
 import { setTrayIconColorAndTitle } from '../utils/tray';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/zoom';
-import {
-  defaultAuth,
-  defaultFilterSettings,
-  defaultSettings,
-} from './defaults';
+import { defaultAuth, defaultSettings } from './defaults';
 
 export interface AppContextState {
   auth: AuthState;
@@ -114,17 +107,8 @@ export interface AppContextState {
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 
   settings: SettingsState;
-  clearFilters: () => void;
   resetSettings: () => void;
-  updateSetting: (
-    name: keyof ConfigSettingsState,
-    value: ConfigSettingsValue,
-  ) => void;
-  updateFilter: (
-    name: keyof FilterSettingsState,
-    value: FilterSettingsValue,
-    checked: boolean,
-  ) => void;
+  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState> | undefined>(
@@ -165,6 +149,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markNotificationsAsDone,
     unsubscribeNotification,
   } = useNotifications();
+
+  const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
+  const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
+  const userTypes = useFiltersStore((s) => s.userTypes);
+  const subjectTypes = useFiltersStore((s) => s.subjectTypes);
+  const states = useFiltersStore((s) => s.states);
+  const reasons = useFiltersStore((s) => s.reasons);
 
   const persistAuth = useCallback(
     (nextAuth: AuthState) => {
@@ -236,12 +227,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [
     auth.accounts.length,
     settings.participating,
-    settings.filterIncludeSearchTokens,
-    settings.filterExcludeSearchTokens,
-    settings.filterUserTypes,
-    settings.filterSubjectTypes,
-    settings.filterStates,
-    settings.filterReasons,
+    includeSearchTokens,
+    excludeSearchTokens,
+    userTypes,
+    subjectTypes,
+    states,
+    reasons,
   ]);
 
   useIntervalTimer(
@@ -333,14 +324,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     });
   }, []);
 
-  const clearFilters = useCallback(() => {
-    setSettings((prevSettings) => {
-      const newSettings = { ...prevSettings, ...defaultFilterSettings };
-      saveState({ auth, settings: newSettings });
-      return newSettings;
-    });
-  }, [auth]);
-
   const resetSettings = useCallback(() => {
     setSettings(() => {
       saveState({ auth, settings: defaultSettings });
@@ -357,21 +340,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       });
     },
     [auth],
-  );
-
-  const updateFilter = useCallback(
-    (
-      name: keyof FilterSettingsState,
-      value: FilterSettingsValue,
-      checked: boolean,
-    ) => {
-      const updatedFilters = checked
-        ? [...settings[name], value]
-        : settings[name].filter((item) => item !== value);
-
-      updateSetting(name, updatedFilters);
-    },
-    [updateSetting, settings],
   );
 
   // Global window zoom handler / listener
@@ -551,10 +519,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       unsubscribeNotification: unsubscribeNotificationWithAccounts,
 
       settings,
-      clearFilters,
       resetSettings,
       updateSetting,
-      updateFilter,
     }),
     [
       auth,
@@ -583,10 +549,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       unsubscribeNotificationWithAccounts,
 
       settings,
-      clearFilters,
       resetSettings,
       updateSetting,
-      updateFilter,
     ],
   );
 

@@ -5,6 +5,7 @@ import type {
   SettingsState,
 } from '../../../types';
 
+import useFiltersStore from '../../../stores/useFiltersStore';
 import {
   BASE_SEARCH_QUALIFIERS,
   DETAILED_ONLY_SEARCH_QUALIFIERS,
@@ -20,9 +21,10 @@ import {
 
 export function filterBaseNotifications(
   notifications: GitifyNotification[],
-  settings: SettingsState,
 ): GitifyNotification[] {
   return notifications.filter((notification) => {
+    const filters = useFiltersStore.getState();
+
     let passesFilters = true;
 
     // Apply base qualifier include/exclude filters (org, repo, etc.)
@@ -33,21 +35,21 @@ export function filterBaseNotifications(
 
       passesFilters =
         passesFilters &&
-        passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
+        passesSearchTokenFiltersForQualifier(notification, qualifier);
     }
 
-    if (subjectTypeFilter.hasFilters(settings)) {
+    if (subjectTypeFilter.hasFilters()) {
       passesFilters =
         passesFilters &&
-        settings.filterSubjectTypes.some((subjectType) =>
+        filters.subjectTypes.some((subjectType) =>
           subjectTypeFilter.filterNotification(notification, subjectType),
         );
     }
 
-    if (reasonFilter.hasFilters(settings)) {
+    if (reasonFilter.hasFilters()) {
       passesFilters =
         passesFilters &&
-        settings.filterReasons.some((reason) =>
+        filters.reasons.some((reason) =>
           reasonFilter.filterNotification(notification, reason),
         );
     }
@@ -64,26 +66,13 @@ export function filterDetailedNotifications(
     let passesFilters = true;
 
     if (settings.detailedNotifications) {
-      passesFilters =
-        passesFilters && passesUserFilters(notification, settings);
+      passesFilters = passesFilters && passesUserFilters(notification);
 
-      passesFilters =
-        passesFilters && passesStateFilter(notification, settings);
+      passesFilters = passesFilters && passesStateFilter(notification);
     }
 
     return passesFilters;
   });
-}
-
-export function hasActiveFilters(settings: SettingsState): boolean {
-  return (
-    userTypeFilter.hasFilters(settings) ||
-    hasIncludeSearchFilters(settings) ||
-    hasExcludeSearchFilters(settings) ||
-    subjectTypeFilter.hasFilters(settings) ||
-    stateFilter.hasFilters(settings) ||
-    reasonFilter.hasFilters(settings)
-  );
 }
 
 /**
@@ -91,14 +80,15 @@ export function hasActiveFilters(settings: SettingsState): boolean {
  */
 function passesSearchTokenFiltersForQualifier(
   notification: GitifyNotification,
-  settings: SettingsState,
   qualifier: SearchQualifier,
 ): boolean {
+  const filters = useFiltersStore.getState();
+
   let passes = true;
   const prefix = qualifier.prefix;
 
-  if (hasIncludeSearchFilters(settings)) {
-    const includeTokens = settings.filterIncludeSearchTokens.filter((t) =>
+  if (hasIncludeSearchFilters()) {
+    const includeTokens = filters.includeSearchTokens.filter((t) =>
       t.startsWith(prefix),
     );
     if (includeTokens.length > 0) {
@@ -110,8 +100,8 @@ function passesSearchTokenFiltersForQualifier(
     }
   }
 
-  if (hasExcludeSearchFilters(settings)) {
-    const excludeTokens = settings.filterExcludeSearchTokens.filter((t) =>
+  if (hasExcludeSearchFilters()) {
+    const excludeTokens = filters.excludeSearchTokens.filter((t) =>
       t.startsWith(prefix),
     );
     if (excludeTokens.length > 0) {
@@ -126,16 +116,15 @@ function passesSearchTokenFiltersForQualifier(
   return passes;
 }
 
-function passesUserFilters(
-  notification: GitifyNotification,
-  settings: SettingsState,
-): boolean {
+function passesUserFilters(notification: GitifyNotification): boolean {
+  const filters = useFiltersStore.getState();
+
   let passesFilters = true;
 
-  if (userTypeFilter.hasFilters(settings)) {
+  if (userTypeFilter.hasFilters()) {
     passesFilters =
       passesFilters &&
-      settings.filterUserTypes.some((userType) =>
+      filters.userTypes.some((userType) =>
         userTypeFilter.filterNotification(notification, userType),
       );
   }
@@ -148,18 +137,17 @@ function passesUserFilters(
 
     passesFilters =
       passesFilters &&
-      passesSearchTokenFiltersForQualifier(notification, settings, qualifier);
+      passesSearchTokenFiltersForQualifier(notification, qualifier);
   }
 
   return passesFilters;
 }
 
-function passesStateFilter(
-  notification: GitifyNotification,
-  settings: SettingsState,
-): boolean {
-  if (stateFilter.hasFilters(settings)) {
-    return settings.filterStates.some((state) =>
+function passesStateFilter(notification: GitifyNotification): boolean {
+  const filters = useFiltersStore.getState();
+
+  if (stateFilter.hasFilters()) {
+    return filters.states.some((state) =>
       stateFilter.filterNotification(notification, state),
     );
   }
@@ -167,20 +155,14 @@ function passesStateFilter(
   return true;
 }
 
-export function isStateFilteredOut(
-  state: GitifyNotificationState,
-  settings: SettingsState,
-): boolean {
+export function isStateFilteredOut(state: GitifyNotificationState): boolean {
   const notification = { subject: { state: state } } as GitifyNotification;
 
-  return !passesStateFilter(notification, settings);
+  return !passesStateFilter(notification);
 }
 
-export function isUserFilteredOut(
-  user: GitifyNotificationUser,
-  settings: SettingsState,
-): boolean {
+export function isUserFilteredOut(user: GitifyNotificationUser): boolean {
   const notification = { subject: { user: user } } as GitifyNotification;
 
-  return !passesUserFilters(notification, settings);
+  return !passesUserFilters(notification);
 }

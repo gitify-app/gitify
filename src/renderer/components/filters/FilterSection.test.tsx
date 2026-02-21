@@ -7,14 +7,23 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { useFiltersStore } from '../../stores';
 import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 describe('renderer/components/filters/FilterSection.tsx', () => {
-  const updateFilterMock = vi.fn();
-
   const mockFilter = stateFilter;
-  const mockFilterSetting = 'filterStates';
+  const mockFilterSetting = 'states';
+
+  let updateFilterSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    updateFilterSpy = vi.spyOn(useFiltersStore.getState(), 'updateFilter');
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
 
   describe('should render itself & its children', () => {
     it('with detailed notifications enabled', () => {
@@ -77,29 +86,25 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           title={'FilterSectionTitle'}
         />,
         {
-          settings: {
-            ...mockSettings,
-            filterStates: [],
-          },
-          updateFilter: updateFilterMock,
+          settings: mockSettings,
         },
       );
     });
 
     await userEvent.click(screen.getByLabelText('Open'));
 
-    expect(updateFilterMock).toHaveBeenCalledWith(
+    expect(updateFilterSpy).toHaveBeenCalledWith(
       mockFilterSetting,
       'open',
       true,
     );
-
-    expect(
-      screen.getByLabelText('Open').parentNode.parentNode,
-    ).toMatchSnapshot();
   });
 
   it('should be able to toggle filter value - some filters already set', async () => {
+    useFiltersStore.setState({
+      states: ['open'],
+    });
+
     await act(async () => {
       renderWithAppContext(
         <FilterSection
@@ -110,25 +115,17 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
           title={'FilterSectionTitle'}
         />,
         {
-          settings: {
-            ...mockSettings,
-            filterStates: ['open'],
-          },
-          updateFilter: updateFilterMock,
+          settings: mockSettings,
         },
       );
     });
 
     await userEvent.click(screen.getByLabelText('Closed'));
 
-    expect(updateFilterMock).toHaveBeenCalledWith(
+    expect(updateFilterSpy).toHaveBeenCalledWith(
       mockFilterSetting,
       'closed',
       true,
     );
-
-    expect(
-      screen.getByLabelText('Closed').parentNode.parentNode,
-    ).toMatchSnapshot();
   });
 });

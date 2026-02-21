@@ -23,12 +23,12 @@ class ReleaseHandler extends DefaultHandler {
 
   async enrich(
     notification: GitifyNotification,
-    settings: SettingsState,
+    _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
     const releaseState: GitifyNotificationState = null; // Release notifications are stateless
 
     // Return early if this notification would be hidden by filters
-    if (isStateFilteredOut(releaseState, settings)) {
+    if (isStateFilteredOut(releaseState)) {
       return {};
     }
 

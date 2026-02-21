@@ -97,10 +97,7 @@ export async function getAllNotifications(
             accountNotifications.account,
           );
 
-          notifications = filterBaseNotifications(
-            notifications,
-            state.settings,
-          );
+          notifications = filterBaseNotifications(notifications);
 
           notifications = await enrichNotifications(
             notifications,

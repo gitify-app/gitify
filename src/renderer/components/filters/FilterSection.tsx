@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { memo, type ReactNode, useMemo } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
@@ -8,22 +8,21 @@ import { useAppContext } from '../../hooks/useAppContext';
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
-import type { FilterSettingsState, FilterSettingsValue } from '../../types';
-
+import { type FiltersState, useFiltersStore } from '../../stores';
 import type { Filter } from '../../utils/notifications/filters';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
-export interface FilterSectionProps<T extends FilterSettingsValue> {
+export interface FilterSectionProps<K extends keyof FiltersState> {
   id: string;
   title: string;
   icon: Icon;
-  filter: Filter<T>;
-  filterSetting: keyof FilterSettingsState;
+  filter: Filter<FiltersState[K][number]>;
+  filterSetting: K;
   tooltip?: ReactNode;
   layout?: 'horizontal' | 'vertical';
 }
 
-export const FilterSection = <T extends FilterSettingsValue>({
+const FilterSectionComponent = <K extends keyof FiltersState>({
   id,
   title,
   icon,
@@ -31,8 +30,23 @@ export const FilterSection = <T extends FilterSettingsValue>({
   filterSetting,
   tooltip,
   layout = 'vertical',
-}: FilterSectionProps<T>) => {
-  const { updateFilter, settings, notifications } = useAppContext();
+}: FilterSectionProps<K>) => {
+  const { notifications, settings } = useAppContext();
+  const updateFilter = useFiltersStore((s) => s.updateFilter);
+
+  // Subscribe to the specific filter state so component re-renders when filters change
+  useFiltersStore((s) => s[filterSetting]);
+
+  // Memoize filter counts to avoid recalculating on every render
+  const filterCounts = useMemo(() => {
+    const counts = new Map<FiltersState[K][number], number>();
+    for (const type of Object.keys(
+      filter.FILTER_TYPES,
+    ) as FiltersState[K][number][]) {
+      counts.set(type, filter.getFilterCount(notifications, type));
+    }
+    return counts;
+  }, [notifications, filter]);
 
   return (
     <fieldset id={id}>
@@ -56,7 +70,7 @@ export const FilterSection = <T extends FilterSettingsValue>({
         direction={layout}
         gap={layout === 'horizontal' ? 'normal' : 'condensed'}
       >
-        {(Object.keys(filter.FILTER_TYPES) as T[])
+        {(Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][])
           .sort((a, b) =>
             filter
               .getTypeDetails(a)
@@ -69,8 +83,8 @@ export const FilterSection = <T extends FilterSettingsValue>({
             const typeDetails = filter.getTypeDetails(type);
             const typeTitle = typeDetails.title;
             const typeDescription = typeDetails.description;
-            const isChecked = filter.isFilterSet(settings, type);
-            const count = filter.getFilterCount(notifications, type);
+            const isChecked = filter.isFilterSet(type);
+            const count = filterCounts.get(type) ?? 0;
 
             return (
               <Checkbox
@@ -94,3 +108,8 @@ export const FilterSection = <T extends FilterSettingsValue>({
     </fieldset>
   );
 };
+
+// Memoize the component to prevent unnecessary re-renders
+export const FilterSection = memo(
+  FilterSectionComponent,
+) as typeof FilterSectionComponent;
