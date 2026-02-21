@@ -35,6 +35,11 @@ Start development mode (includes GraphQL codegen and hot module reload):
   pnpm dev
   ```
 
+> [!NOTE]
+> This will also install React Developer Tools extension automatically so you can inspect the renderer process.
+> Make sure you force a reload when first opening the `Developer Tools`.
+
+
 ### Tests
 
 There are two main checks:

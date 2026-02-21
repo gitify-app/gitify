@@ -21,6 +21,7 @@ import {
 } from '../shared/events';
 import { logInfo, logWarn } from '../shared/logger';
 
+import { installReactDevtools } from './devtools';
 import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 import { onFirstRunMaybe } from './first-run';
 import { TrayIcons } from './icons';
@@ -89,6 +90,7 @@ let shouldUseUnreadActiveIcon = true;
 app.whenReady().then(async () => {
   preventSecondInstance();
 
+  await installReactDevtools();
   await onFirstRunMaybe();
 
   appUpdater.start();
