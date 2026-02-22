@@ -13,8 +13,8 @@ import { rendererLogError, rendererLogInfo } from './logger';
  * once all users have migrated from the old Context-based storage format.
  * Migration was introduced in v7.0.0.
  */
-export async function migrateContextToZustand() {
-  const existing = localStorage.getItem(Constants.STORAGE_KEY);
+export async function migrateLegacyStoreToZustand() {
+  const existing = localStorage.getItem(Constants.STORAGE.LEGACY);
 
   if (!existing) {
     // No old data to migrate
@@ -27,7 +27,7 @@ export async function migrateContextToZustand() {
     // Skip if already migrated
     if (parsed.migrated) {
       rendererLogInfo(
-        'migrateContextToStore',
+        'migrateLegacyStoreToZustand',
         `Storage already migrated on ${parsed.migratedAt}`,
       );
       return;
@@ -48,7 +48,7 @@ export async function migrateContextToZustand() {
 
     // Mark old storage key as migrated instead of removing it
     localStorage.setItem(
-      Constants.STORAGE_KEY,
+      Constants.STORAGE.LEGACY,
       JSON.stringify({
         migrated: true,
         migratedAt: new Date().toISOString(),
@@ -56,19 +56,14 @@ export async function migrateContextToZustand() {
     );
 
     rendererLogInfo(
-      'migrateContextToStore',
+      'migrateLegacyStoreToZustand',
       'Successfully migrated from Context storage to Zustand stores',
     );
   } catch (err) {
     rendererLogError(
-      'migrateContextToStore',
+      'migrateLegacyStoreToZustand',
       'Error during storage migration',
       err,
     );
-    // Don't throw - let the app continue with defaults
   }
-}
-
-export function clearState() {
-  localStorage.clear();
 }

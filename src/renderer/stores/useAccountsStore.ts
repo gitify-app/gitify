@@ -15,7 +15,7 @@ import { rendererLogError, rendererLogWarn } from '../utils/logger';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 
 /**
- * Atlassify Accounts store.
+ * Gitify Accounts store.
  *
  * Automatically persisted to local storage.
  * Tokens are encrypted via safeStorage before storage.
@@ -24,12 +24,6 @@ const useAccountsStore = create<AccountsStore>()(
   persist(
     (set, get, store) => ({
       ...DEFAULT_ACCOUNTS_STATE,
-
-      addAccount: (account) => {
-        set((state) => ({
-          accounts: [...state.accounts, account],
-        }));
-      },
 
       createAccount: async (
         method: AuthMethod,
@@ -111,16 +105,12 @@ const useAccountsStore = create<AccountsStore>()(
         }));
       },
 
-      hasAccounts: () => {
+      isLoggedIn: () => {
         return get().accounts.length > 0;
       },
 
       hasMultipleAccounts: () => {
         return get().accounts.length > 1;
-      },
-
-      isLoggedIn: () => {
-        return get().hasAccounts();
       },
 
       primaryAccountHostname: () => {
@@ -136,7 +126,7 @@ const useAccountsStore = create<AccountsStore>()(
       },
     }),
     {
-      name: Constants.ACCOUNTS_STORE_KEY,
+      name: Constants.STORAGE.ACCOUNTS,
     },
   ),
 );

@@ -8,42 +8,75 @@ import { OpenPreference } from './types';
 import { DEFAULT_SETTINGS_STATE } from './defaults';
 import useSettingsStore from './useSettingsStore';
 
-describe('useSettingsStore', () => {
+describe('renderer/stores/useSettingsStore.ts', () => {
   test('should start with default settings', () => {
     const { result } = renderHook(() => useSettingsStore());
+
     expect(result.current).toMatchObject(DEFAULT_SETTINGS_STATE);
+  });
+
+  describe('Toggle Setting', () => {
+    test('should toggle a representative setting', () => {
+      const { result } = renderHook(() => useSettingsStore());
+
+      expect(result.current.openAtStartup).toBe(true);
+
+      act(() => {
+        result.current.toggleSetting('openAtStartup');
+      });
+
+      expect(result.current.openAtStartup).toBe(false);
+    });
+
+    test('should throw error toggling non-boolean settings', () => {
+      const { result } = renderHook(() => useSettingsStore());
+
+      expect(() => {
+        act(() => {
+          result.current.toggleSetting('openLinks');
+        });
+      }).toThrowError("toggleSetting: 'openLinks' is not a boolean setting");
+    });
   });
 
   describe('Update Setting', () => {
     test('should update a representative appearance setting', () => {
       const { result } = renderHook(() => useSettingsStore());
+
       act(() => {
         result.current.updateSetting('theme', Theme.DARK);
       });
+
       expect(result.current.theme).toBe(Theme.DARK);
     });
 
     test('should update a representative notification setting', () => {
       const { result } = renderHook(() => useSettingsStore());
+
       act(() => {
         result.current.updateSetting('markAsDoneOnOpen', false);
       });
+
       expect(result.current.markAsDoneOnOpen).toBe(false);
     });
 
     test('should update a representative tray setting', () => {
       const { result } = renderHook(() => useSettingsStore());
+
       act(() => {
         result.current.updateSetting('showNotificationsCountInTray', false);
       });
+
       expect(result.current.showNotificationsCountInTray).toBe(false);
     });
 
     test('should update a representative system setting', () => {
       const { result } = renderHook(() => useSettingsStore());
+
       act(() => {
         result.current.updateSetting('openLinks', OpenPreference.BACKGROUND);
       });
+
       expect(result.current.openLinks).toBe(OpenPreference.BACKGROUND);
     });
 

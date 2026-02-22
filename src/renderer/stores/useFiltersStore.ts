@@ -8,7 +8,7 @@ import type { FiltersStore } from './types';
 import { DEFAULT_FILTERS_STATE } from './defaults';
 
 /**
- * Atlassify Filters store.
+ * Gitify Filters store.
  *
  * Automatically persisted to local storage
  */
@@ -48,7 +48,7 @@ const useFiltersStore = create<FiltersStore>()(
       },
     }),
     {
-      name: Constants.FILTERS_STORE_KEY,
+      name: Constants.STORAGE.FILTERS,
     },
   ),
 );

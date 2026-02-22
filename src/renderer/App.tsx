@@ -30,13 +30,10 @@ import { GlobalShortcuts } from './components/GlobalShortcuts';
 import { AppLayout } from './components/layout/AppLayout';
 
 import { queryClient } from './utils/api/client';
-import { rendererLogError } from './utils/logger';
-import { migrateContextToZustand } from './utils/storage';
+import { migrateLegacyStoreToZustand } from './utils/storage';
 
-// Run migration from Context storage to Zustand stores (async)
-migrateContextToZustand().catch((error) => {
-  rendererLogError('App', 'Failed to migrate storage', error);
-});
+// Run migration from legacy local storage to Zustand stores (async)
+migrateLegacyStoreToZustand();
 
 function RequireAuth({ children }) {
   const location = useLocation();

@@ -8,7 +8,7 @@ import type { SettingsStore } from './types';
 import { DEFAULT_SETTINGS_STATE } from './defaults';
 
 /**
- * Atlassify Settings store.
+ * Gitify Settings store.
  *
  * Automatically persisted to local storage
  */
@@ -22,12 +22,26 @@ const useSettingsStore = create<SettingsStore>()(
           set({ [name]: value });
         },
 
+        toggleSetting: (name) => {
+          set((state) => {
+            const current = state[name];
+
+            if (typeof current !== 'boolean') {
+              throw new Error(
+                `toggleSetting: '${String(name)}' is not a boolean setting`,
+              );
+            }
+
+            return { [name]: !current };
+          });
+        },
+
         reset: () => {
           set(store.getInitialState());
         },
       }),
       {
-        name: Constants.SETTINGS_STORE_KEY,
+        name: Constants.STORAGE.SETTINGS,
       },
     ),
   ),

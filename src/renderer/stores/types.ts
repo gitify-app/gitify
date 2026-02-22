@@ -54,18 +54,43 @@ export interface AccountsState {
  * Actions for managing accounts.
  */
 export interface AccountsActions {
-  addAccount: (account: Account) => void;
+  /**
+   * Creates and adds a new account.
+   */
   createAccount: (
     method: AuthMethod,
     token: Token,
     hostname: Hostname,
   ) => Promise<void>;
+
+  /**
+   * Refreshes the user details for an account.
+   */
   refreshAccount: (account: Account) => Promise<Account>;
+
+  /**
+   * Removes an account.
+   */
   removeAccount: (account: Account) => void;
-  hasAccounts: () => boolean;
-  hasMultipleAccounts: () => boolean;
+
+  /**
+   * Checks if the user is logged in (has at least one account).
+   */
   isLoggedIn: () => boolean;
+
+  /**
+   * Checks if there are multiple accounts.
+   */
+  hasMultipleAccounts: () => boolean;
+
+  /**
+   * Gets the primary account's hostname (first account).
+   */
   primaryAccountHostname: () => Hostname;
+
+  /**
+   * Resets accounts to default state.
+   */
   reset: () => void;
 }
 
@@ -116,26 +141,30 @@ export interface FiltersState {
 }
 
 /**
- * All allowed Filter types.
- * Automatically derived from the FiltersState.
- */
-export type FilterKey = keyof FiltersState;
-
-/**
- * Type-safe update function for filters.
- */
-export type UpdateFilter = <K extends FilterKey>(
-  key: K,
-  value: FiltersState[K][number],
-  checked: boolean,
-) => void;
-
-/**
  * Actions for managing filters.
  */
 export interface FiltersActions {
+  /**
+   * Checks if there are any active filters applied.
+   */
   hasActiveFilters: () => boolean;
-  updateFilter: UpdateFilter;
+
+  /**
+   * Updates a specific filter by key to a new value.
+   *
+   * @param name The filter key to update.
+   * @param value The new value for the filter.
+   * @param checked Whether to add or remove the value from the filter.
+   */
+  updateFilter: <K extends keyof FiltersState>(
+    name: K,
+    value: FiltersState[K][number],
+    checked: boolean,
+  ) => void;
+
+  /**
+   * Resets all filters to their default values.
+   */
   reset: () => void;
 }
 
@@ -301,10 +330,27 @@ export type SettingsState = AppearanceSettingsState &
  * Actions for managing settings.
  */
 export interface SettingsActions {
+  /**
+   * Updates a specific setting by key to a new value.
+   *
+   * @param name The setting key to update.
+   * @param value The new value for the setting.
+   */
   updateSetting: <K extends keyof SettingsState>(
     name: K,
     value: SettingsState[K],
   ) => void;
+
+  /**
+   * Toggles a boolean setting by key. Throws if the setting is not boolean.
+   *
+   * @param name The setting key to toggle.
+   */
+  toggleSetting: <K extends keyof SettingsState>(name: K) => void;
+
+  /**
+   * Resets all settings to their default values.
+   */
   reset: () => void;
 }
 

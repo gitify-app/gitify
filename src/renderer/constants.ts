@@ -1,17 +1,14 @@
 import type { ClientID, Hostname, Link } from './types';
 
 export const Constants = {
-  // TODO - remove after a few versions
-  STORAGE_KEY: 'gitify-storage',
-
-  // Accounts store key
-  ACCOUNTS_STORE_KEY: 'gitify-accounts',
-
-  // Filters store key
-  FILTERS_STORE_KEY: 'gitify-filters',
-
-  // Settings store key
-  SETTINGS_STORE_KEY: 'gitify-settings',
+  // Local storage keys
+  STORAGE: {
+    // Legacy storage key (deprecated - used for migration only)
+    LEGACY: 'gitify-storage',
+    ACCOUNTS: 'gitify-accounts',
+    FILTERS: 'gitify-filters',
+    SETTINGS: 'gitify-settings',
+  },
 
   // GitHub OAuth Scopes
   OAUTH_SCOPES: {

@@ -5,7 +5,7 @@ import type { SearchToken } from '../types';
 import { DEFAULT_FILTERS_STATE } from './defaults';
 import useFiltersStore from './useFiltersStore';
 
-describe('useFiltersStore', () => {
+describe('renderer/stores/useFiltersStore.ts', () => {
   test('should start with default filters', () => {
     const { result } = renderHook(() => useFiltersStore());
 

@@ -15,11 +15,11 @@ import type { RawGitHubNotification } from './types';
 import { getReasonDetails } from '../reason';
 
 /**
- * Transform all raw notifications from Atlassian types to Atlassify types.
+ * Transform all raw notifications from GitHub types to Gitify types.
  *
- * @param rawNotifications - The Atlassian notifications.
+ * @param rawNotifications - The GitHub notifications.
  * @param account - The account.
- * @returns Transformed Atlassify notifications.
+ * @returns Transformed Gitify notifications.
  */
 export function transformNotifications(
   rawNotifications: RawGitHubNotification[],
