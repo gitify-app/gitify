@@ -1,11 +1,15 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { use } from 'react';
 
 import {
   ensureStableEmojis,
   renderWithAppContext,
 } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 
 import { GroupBy, useAccountsStore } from '../../stores';
@@ -99,6 +103,10 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should render itself - account error for multiple accounts', async () => {
+    useAccountsStore.setState({
+      accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+    });
+
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
       notifications: [],
