@@ -35,18 +35,14 @@ describe('renderer/routes/Accounts.tsx', () => {
         ],
       });
 
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
       expect(screen.getAllByTestId('account-profile')).toHaveLength(3);
     });
 
     it('should go back by pressing the icon', async () => {
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -68,9 +64,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         accounts: [mockPersonalAccessTokenAccount],
       });
 
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       await userEvent.click(screen.getByTestId('account-profile'));
 
@@ -81,9 +75,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('open host in external browser', async () => {
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       await userEvent.click(screen.getByTestId('account-host'));
 
@@ -92,9 +84,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('open developer settings in external browser', async () => {
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       await userEvent.click(screen.getByTestId('account-developer-settings'));
 
@@ -113,9 +103,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         ],
       });
 
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
       // All 3 accounts render the warning button, but only 1 is visible
@@ -138,9 +126,8 @@ describe('renderer/routes/Accounts.tsx', () => {
           mockGitHubAppAccount,
         ],
       });
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+
+      renderWithAppContext(<AccountsRoute />);
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
       // All 3 accounts render the primary/set-primary button
@@ -160,9 +147,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         accounts: [mockPersonalAccessTokenAccount],
       });
 
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       await userEvent.click(screen.getByTestId('account-refresh'));
 
@@ -182,9 +167,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         accounts: [mockPersonalAccessTokenAccount],
       });
 
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       await userEvent.click(screen.getByTestId('account-logout'));
 
@@ -196,6 +179,8 @@ describe('renderer/routes/Accounts.tsx', () => {
 
   describe('Add new accounts', () => {
     it('should show login with github app', async () => {
+      renderWithAppContext(<AccountsRoute />);
+
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-github'));
 
@@ -206,6 +191,8 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should show login with personal access token', async () => {
+      renderWithAppContext(<AccountsRoute />);
+
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-pat'));
 
@@ -219,9 +206,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should show login with oauth app', async () => {
-      await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
-      });
+      renderWithAppContext(<AccountsRoute />);
 
       await userEvent.click(screen.getByTestId('account-add-new'));
       await userEvent.click(screen.getByTestId('account-add-oauth-app'));
