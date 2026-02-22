@@ -84,7 +84,7 @@
     "@octokit/oauth-methods": "6.0.2",
     "@octokit/plugin-paginate-rest": "14.0.0",
     "@octokit/plugin-rest-endpoint-methods": "17.0.0",
-    "@octokit/plugin-retry": "8.0.3",
+    "@octokit/plugin-retry": "8.1.0",
     "@octokit/request-error": "7.1.0",
     "@octokit/types": "16.0.0",
     "@parcel/watcher": "2.5.6",
