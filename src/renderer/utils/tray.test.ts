@@ -20,7 +20,7 @@ describe('renderer/utils/tray.ts', () => {
       setTrayIconColorAndTitle(5, true);
 
       expect(updateTrayColorSpy).toHaveBeenCalledTimes(1);
-      expect(updateTrayColorSpy).toHaveBeenCalledWith(5);
+      expect(updateTrayColorSpy).toHaveBeenCalledWith(5, true);
       expect(updateTrayTitleSpy).toHaveBeenCalledTimes(1);
       expect(updateTrayTitleSpy).toHaveBeenCalledWith('5');
     });
