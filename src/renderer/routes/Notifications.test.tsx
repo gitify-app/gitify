@@ -1,7 +1,11 @@
 import { renderWithAppContext } from '../__helpers__/test-utils';
+import {
+  mockGitHubAppAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../__mocks__/account-mocks';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 
-import { useSettingsStore } from '../stores';
+import { useAccountsStore, useSettingsStore } from '../stores';
 
 import { Errors } from '../utils/errors';
 import { NotificationsRoute } from './Notifications';
@@ -20,15 +24,44 @@ vi.mock('../components/Oops', () => ({
 
 describe('renderer/routes/Notifications.tsx', () => {
   it('should render itself & its children (with notifications)', () => {
+    useAccountsStore.setState({ accounts: [mockGitHubAppAccount] });
+
     const tree = renderWithAppContext(<NotificationsRoute />, {
       notifications: mockMultipleAccountNotifications,
+      hasNotifications: true,
+      status: 'success',
+      globalError: null,
+      isOnline: true,
+    });
+
+    expect(tree.container).toMatchSnapshot();
+  });
+
+  it('should force account header when multiple accounts', () => {
+    useAccountsStore.setState({
+      accounts: [mockGitHubAppAccount, mockGitHubEnterpriseServerAccount],
+    });
+
+    const tree = renderWithAppContext(<NotificationsRoute />, {
+      notifications: mockMultipleAccountNotifications,
+      hasNotifications: true,
+      status: 'success',
+      globalError: null,
+      isOnline: true,
     });
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children (all read notifications)', () => {
-    const tree = renderWithAppContext(<NotificationsRoute />);
+    const tree = renderWithAppContext(<NotificationsRoute />, {
+      notifications: [],
+      hasNotifications: false,
+      status: 'success',
+      globalError: null,
+      isOnline: true,
+    });
+
     expect(tree.container).toMatchSnapshot();
   });
 
@@ -37,7 +70,9 @@ describe('renderer/routes/Notifications.tsx', () => {
 
     const tree = renderWithAppContext(<NotificationsRoute />, {
       notifications: [mockMultipleAccountNotifications[0]],
+      isOnline: true,
     });
+
     expect(tree.container).toMatchSnapshot();
   });
 
@@ -53,50 +88,21 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  describe('should render itself & its children (error conditions - oops)', () => {
-    it('bad credentials', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
-        status: 'error',
-        globalError: Errors.BAD_CREDENTIALS,
-      });
-
-      expect(tree.container).toMatchSnapshot();
+  it.each([
+    ['bad credentials', Errors.BAD_CREDENTIALS],
+    ['missing scopes', Errors.MISSING_SCOPES],
+    ['rate limited', Errors.RATE_LIMITED],
+    ['unknown error', Errors.UNKNOWN],
+    ['default error', null],
+  ])('should render Oops for %s', (_label, globalError) => {
+    const tree = renderWithAppContext(<NotificationsRoute />, {
+      notifications: [],
+      hasNotifications: false,
+      status: 'error',
+      isOnline: true,
+      globalError,
     });
 
-    it('missing scopes', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
-        status: 'error',
-        globalError: Errors.MISSING_SCOPES,
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('rate limited', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
-        status: 'error',
-        globalError: Errors.RATE_LIMITED,
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('unknown error', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
-        status: 'error',
-        globalError: Errors.UNKNOWN,
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('default error', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
-        status: 'error',
-        globalError: null,
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
+    expect(tree.container).toMatchSnapshot();
   });
 });

@@ -21,11 +21,9 @@ describe('components/GlobalShortcuts.tsx', () => {
   const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
   let toggleSettingSpy: ReturnType<typeof vi.spyOn>;
-  let updateSettingSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
     toggleSettingSpy = vi.spyOn(useSettingsStore.getState(), 'toggleSetting');
-    updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
   afterEach(() => {
@@ -130,7 +128,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('w');
 
-        expect(updateSettingSpy).not.toHaveBeenCalled();
+        expect(toggleSettingSpy).not.toHaveBeenCalled();
       });
 
       it('does not toggle focus mode when logged out', async () => {
@@ -146,7 +144,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('w');
 
-        expect(updateSettingSpy).not.toHaveBeenCalled();
+        expect(toggleSettingSpy).not.toHaveBeenCalled();
       });
     });
 

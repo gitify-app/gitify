@@ -1,6 +1,132 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`renderer/routes/Notifications.tsx > should force account header when multiple accounts 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <div
+        class="flex flex-col h-screen"
+        data-testid="notifications"
+      >
+        <div
+          class="grow overflow-x-hidden overflow-y-auto"
+        >
+          <p>
+            AccountNotifications
+          </p>
+          <p>
+            AccountNotifications
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renderer/routes/Notifications.tsx > should render Offline Error when not online 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <p>
+        Oops
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > should render Oops for bad credentials 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <p>
+        Oops
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > should render Oops for default error 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <p>
+        Oops
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > should render Oops for missing scopes 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <p>
+        Oops
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > should render Oops for rate limited 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <p>
+        Oops
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > should render Oops for unknown error 1`] = `
 <div>
   <div
     data-color-mode="light"
@@ -38,101 +164,6 @@ exports[`renderer/routes/Notifications.tsx > should render itself & its children
 </div>
 `;
 
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > bad credentials 1`] = `
-<div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > default error 1`] = `
-<div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > missing scopes 1`] = `
-<div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > rate limited 1`] = `
-<div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > unknown error 1`] = `
-<div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
-</div>
-`;
-
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (show account header) 1`] = `
 <div>
   <div
@@ -163,9 +194,21 @@ exports[`renderer/routes/Notifications.tsx > should render itself & its children
       class="prc-src-BaseStyles-aopSS"
       data-portal-root="true"
     >
-      <p>
-        AllRead
-      </p>
+      <div
+        class="flex flex-col h-screen"
+        data-testid="notifications"
+      >
+        <div
+          class="grow overflow-x-hidden overflow-y-auto"
+        >
+          <p>
+            AccountNotifications
+          </p>
+          <p>
+            AccountNotifications
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

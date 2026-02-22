@@ -50,7 +50,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
                 class="text-xs opacity-90 prc-Text-Text-9mHv3"
               >
                 Please use one of the supported filters [
-                org, repo
+                author, org, repo
                 ]
               </span>
             </div>

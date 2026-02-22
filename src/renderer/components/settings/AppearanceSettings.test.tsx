@@ -36,8 +36,8 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   it('should toggle increase contrast checkbox', async () => {
     await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('increaseContrast', true);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('increaseContrast');
   });
 
   it('should update the zoom values when using the zoom buttons', async () => {
