@@ -79,7 +79,7 @@ const DEFAULT_SYSTEM_SETTINGS: SystemSettingsState = {
   showNotifications: true,
   playSound: true,
   notificationVolume: 20 as Percentage,
-  openAtStartup: false,
+  openAtStartup: true,
 };
 
 /**
