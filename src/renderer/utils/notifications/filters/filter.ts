@@ -4,7 +4,6 @@ import useFiltersStore from '../../../stores/useFiltersStore';
 import type {
   GitifyNotification,
   GitifyNotificationState,
-  GitifyNotificationUser,
 } from '../../../types';
 
 import {
@@ -160,10 +159,4 @@ export function isStateFilteredOut(state: GitifyNotificationState): boolean {
   const notification = { subject: { state: state } } as GitifyNotification;
 
   return !passesStateFilter(notification);
-}
-
-export function isUserFilteredOut(user: GitifyNotificationUser): boolean {
-  const notification = { subject: { user: user } } as GitifyNotification;
-
-  return !passesUserFilters(notification);
 }

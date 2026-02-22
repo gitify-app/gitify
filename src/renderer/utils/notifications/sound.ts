@@ -4,10 +4,27 @@ const MINIMUM_VOLUME_PERCENTAGE = 0 as Percentage;
 const MAXIMUM_VOLUME_PERCENTAGE = 100 as Percentage;
 const VOLUME_STEP = 10 as Percentage;
 
-export async function raiseSoundNotification(volume: Percentage) {
-  const path = await window.gitify.notificationSoundPath();
+// The notification sound path is static for the app session — cache it and one
+// Audio instance to avoid re-creating elements on every notification.
+let cachedPath: string | null = null;
+let cachedAudio: HTMLAudioElement | null = null;
 
-  const audio = new Audio(path);
+export async function raiseSoundNotification(volume: Percentage) {
+  if (!cachedPath) {
+    cachedPath = await window.gitify.notificationSoundPath();
+  }
+
+  if (!cachedPath) {
+    return;
+  }
+
+  if (!cachedAudio) {
+    cachedAudio = new Audio(cachedPath);
+    cachedAudio.preload = 'auto';
+  }
+
+  const audio = cachedAudio;
+
   audio.volume = volumePercentageToLevel(volume);
   audio.play();
 }

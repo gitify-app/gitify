@@ -1,14 +1,34 @@
 import { mockPartialGitifyNotification } from '../../__mocks__/notifications-mocks';
 
+import type { Link } from '../../types';
+
 import {
   formatForDisplay,
   formatMetricDescription,
+  formatNotification,
   formatNotificationNumber,
   formatNotificationTitle,
   formatNotificationType,
 } from './formatters';
 
 describe('renderer/utils/notifications/formatters.ts', () => {
+  it('formatNotification', () => {
+    const mockNotification = mockPartialGitifyNotification({
+      title: 'This is a mock discussion',
+      type: 'Discussion',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/discussions/123' as Link,
+      latestCommentUrl: null,
+    });
+
+    const formatted = formatNotification(mockNotification);
+
+    expect(formatted.display).toBeDefined();
+    expect(formatted.display.title).toBe('This is a mock discussion');
+    expect(formatted.display.type).toBe('Discussion');
+    expect(formatted.display.number).toBe('');
+    expect(formatted.display.defaultUserType).toBe('User');
+  });
+
   it('formatForDisplay', () => {
     expect(formatForDisplay(null)).toBe('');
     expect(formatForDisplay([])).toBe('');

@@ -1,4 +1,4 @@
-export const shouldIgnoreKeyboardEvent = (event: KeyboardEvent): boolean => {
+export function shouldIgnoreKeyboardEvent(event: KeyboardEvent): boolean {
   return (
     event.target instanceof HTMLInputElement ||
     event.target instanceof HTMLTextAreaElement ||
@@ -6,7 +6,8 @@ export const shouldIgnoreKeyboardEvent = (event: KeyboardEvent): boolean => {
     event.ctrlKey ||
     event.altKey
   );
-};
+}
 
-export const getNormalizedKey = (event: KeyboardEvent): string =>
-  event.key.toLowerCase();
+export function getNormalizedKey(event: KeyboardEvent): string {
+  return event.key.toLowerCase();
+}
