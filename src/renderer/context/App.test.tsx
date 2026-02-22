@@ -70,12 +70,6 @@ describe('renderer/context/App.tsx', () => {
       .spyOn(tray, 'setTrayIconColorAndTitle')
       .mockImplementation(vi.fn());
 
-    vi.spyOn(notifications, 'getNotificationCount').mockImplementation(vi.fn());
-
-    vi.spyOn(notifications, 'getUnreadNotificationCount').mockImplementation(
-      vi.fn(),
-    );
-
     it('should call fetchNotifications', async () => {
       const getContext = renderWithContext();
       refetchNotificationsMock.mockReset();
@@ -98,7 +92,7 @@ describe('renderer/context/App.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledWith([
         mockGitifyNotification,
       ]);
-      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
+      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(2);
     });
 
     it('should call markNotificationsAsDone', async () => {
@@ -112,7 +106,7 @@ describe('renderer/context/App.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledWith([
         mockGitifyNotification,
       ]);
-      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
+      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(2);
     });
 
     it('should call unsubscribeNotification', async () => {
@@ -126,7 +120,7 @@ describe('renderer/context/App.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         mockGitifyNotification,
       );
-      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
+      expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(2);
     });
   });
 

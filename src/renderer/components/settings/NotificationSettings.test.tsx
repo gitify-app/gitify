@@ -11,9 +11,11 @@ import * as comms from '../../utils/comms';
 import { NotificationSettings } from './NotificationSettings';
 
 describe('renderer/components/settings/NotificationSettings.tsx', () => {
+  let toggleSettingSpy: ReturnType<typeof vi.spyOn>;
   let updateSettingSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(async () => {
+    toggleSettingSpy = vi.spyOn(useSettingsStore.getState(), 'toggleSetting');
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
@@ -162,11 +164,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-fetchAllNotifications'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith(
-      'fetchAllNotifications',
-      false,
-    );
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('fetchAllNotifications');
   });
 
   it('should toggle detailed notifications checkbox', async () => {
@@ -176,11 +175,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-detailedNotifications'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith(
-      'detailedNotifications',
-      false,
-    );
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('detailedNotifications');
   });
 
   it('should toggle metric pills checkbox', async () => {
@@ -190,8 +186,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-showPills'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('showPills', false);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('showPills');
   });
 
   it('should toggle show number checkbox', async () => {
@@ -201,8 +197,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-showNumber'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('showNumber', false);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('showNumber');
   });
 
   it('should toggle the showOnlyParticipating checkbox', async () => {
@@ -212,8 +208,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-showOnlyParticipating'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('participating', true);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('participating');
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
@@ -251,11 +247,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       screen.getByTestId('checkbox-fetchReadNotifications'),
     );
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith(
-      'fetchReadNotifications',
-      true,
-    );
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('fetchReadNotifications');
   });
 
   it('should toggle the markAsDoneOnOpen checkbox', async () => {
@@ -265,8 +258,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-markAsDoneOnOpen'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('markAsDoneOnOpen', true);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('markAsDoneOnOpen');
   });
 
   it('should toggle the markAsDoneOnUnsubscribe checkbox', async () => {
@@ -278,11 +271,8 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       screen.getByTestId('checkbox-markAsDoneOnUnsubscribe'),
     );
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith(
-      'markAsDoneOnUnsubscribe',
-      true,
-    );
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('markAsDoneOnUnsubscribe');
   });
 
   it('should toggle the delayNotificationState checkbox', async () => {
@@ -294,10 +284,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       screen.getByTestId('checkbox-delayNotificationState'),
     );
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith(
-      'delayNotificationState',
-      true,
-    );
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('delayNotificationState');
   });
 });

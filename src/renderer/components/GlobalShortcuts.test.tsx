@@ -19,9 +19,12 @@ vi.mock('react-router-dom', async () => ({
 describe('components/GlobalShortcuts.tsx', () => {
   const fetchNotificationsMock = vi.fn();
   const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
+
+  let toggleSettingSpy: ReturnType<typeof vi.spyOn>;
   let updateSettingSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
+    toggleSettingSpy = vi.spyOn(useSettingsStore.getState(), 'toggleSetting');
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
@@ -108,7 +111,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('w');
 
-        expect(updateSettingSpy).toHaveBeenCalledWith('participating', true);
+        expect(toggleSettingSpy).toHaveBeenCalledWith('participating');
       });
 
       it('does not toggle focus mode when loading', async () => {

@@ -33,8 +33,11 @@ import { Size } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 
 export const NotificationSettings: FC = () => {
+  // Setting store actions
+  const toggleSetting = useSettingsStore((s) => s.toggleSetting);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
+  // Setting store values
   const groupBy = useSettingsStore((s) => s.groupBy);
   const fetchAllNotifications = useSettingsStore(
     (s) => s.fetchAllNotifications,
@@ -162,9 +165,7 @@ export const NotificationSettings: FC = () => {
           checked={fetchAllNotifications}
           label="Fetch all notifications"
           name="fetchAllNotifications"
-          onChange={() =>
-            updateSetting('fetchAllNotifications', !fetchAllNotifications)
-          }
+          onChange={() => toggleSetting('fetchAllNotifications')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
@@ -184,9 +185,7 @@ export const NotificationSettings: FC = () => {
           checked={detailedNotifications}
           label="Fetch detailed notifications"
           name="detailedNotifications"
-          onChange={() =>
-            updateSetting('detailedNotifications', !detailedNotifications)
-          }
+          onChange={() => toggleSetting('detailedNotifications')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
@@ -215,7 +214,7 @@ export const NotificationSettings: FC = () => {
               checked={showPills}
               label="Show notification metric pills"
               name="showPills"
-              onChange={() => updateSetting('showPills', !showPills)}
+              onChange={() => toggleSetting('showPills')}
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show notification metric pills for:</Text>
@@ -255,7 +254,7 @@ export const NotificationSettings: FC = () => {
               checked={showNumber}
               label="Show GitHub number"
               name="showNumber"
-              onChange={() => updateSetting('showNumber', !showNumber)}
+              onChange={() => toggleSetting('showNumber')}
               tooltip={
                 <Stack direction="vertical" gap="condensed">
                   <Text>Show GitHub number for:</Text>
@@ -287,7 +286,7 @@ export const NotificationSettings: FC = () => {
           checked={participating}
           label="Fetch only participating"
           name="showOnlyParticipating"
-          onChange={() => updateSetting('participating', !participating)}
+          onChange={() => toggleSetting('participating')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
@@ -322,9 +321,7 @@ export const NotificationSettings: FC = () => {
           checked={fetchReadNotifications}
           label="Fetch read & done notifications"
           name="fetchReadNotifications"
-          onChange={() =>
-            updateSetting('fetchReadNotifications', !fetchReadNotifications)
-          }
+          onChange={() => toggleSetting('fetchReadNotifications')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>Fetch all notifications including read and done.</Text>
@@ -345,7 +342,7 @@ export const NotificationSettings: FC = () => {
           checked={markAsDoneOnOpen}
           label="Mark as done on open"
           name="markAsDoneOnOpen"
-          onChange={() => updateSetting('markAsDoneOnOpen', !markAsDoneOnOpen)}
+          onChange={() => toggleSetting('markAsDoneOnOpen')}
           tooltip={
             <Text>
               <Text as="strong">Mark as done</Text> feature is supported in
@@ -358,9 +355,7 @@ export const NotificationSettings: FC = () => {
           checked={markAsDoneOnUnsubscribe}
           label="Mark as done on unsubscribe"
           name="markAsDoneOnUnsubscribe"
-          onChange={() =>
-            updateSetting('markAsDoneOnUnsubscribe', !markAsDoneOnUnsubscribe)
-          }
+          onChange={() => toggleSetting('markAsDoneOnUnsubscribe')}
           tooltip={
             <Text>
               <Text as="strong">Mark as done</Text> feature is supported in
@@ -373,9 +368,7 @@ export const NotificationSettings: FC = () => {
           checked={delayNotificationState}
           label="Delay notification state"
           name="delayNotificationState"
-          onChange={() =>
-            updateSetting('delayNotificationState', !delayNotificationState)
-          }
+          onChange={() => toggleSetting('delayNotificationState')}
           tooltip={
             <Text>
               Keep the notification within {APPLICATION.NAME} upon interaction

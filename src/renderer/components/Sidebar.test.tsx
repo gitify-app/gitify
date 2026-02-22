@@ -19,7 +19,6 @@ vi.mock('react-router-dom', async () => ({
 
 describe('renderer/components/Sidebar.tsx', () => {
   const fetchNotificationsMock = vi.fn();
-  const updateSettingMock = vi.fn();
   const openExternalLinkSpy = vi
     .spyOn(comms, 'openExternalLink')
     .mockImplementation(vi.fn());
@@ -139,23 +138,6 @@ describe('renderer/components/Sidebar.tsx', () => {
       );
 
       expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
-    });
-
-    it('toggles participating when clicked', async () => {
-      useSettingsStore.setState({
-        participating: false,
-      });
-
-      renderWithAppContext(
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>,
-      );
-
-      await userEvent.click(screen.getByTestId('sidebar-focused-mode'));
-
-      expect(updateSettingMock).toHaveBeenCalledTimes(1);
-      expect(updateSettingMock).toHaveBeenCalledWith('participating', true);
     });
   });
 

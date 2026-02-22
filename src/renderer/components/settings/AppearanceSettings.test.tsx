@@ -9,9 +9,11 @@ import * as zoom from '../../utils/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {
+  let toggleSettingSpy: ReturnType<typeof vi.spyOn>;
   let updateSettingSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(async () => {
+    toggleSettingSpy = vi.spyOn(useSettingsStore.getState(), 'toggleSetting');
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
 
     renderWithAppContext(<AppearanceSettings />);
@@ -68,17 +70,14 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   it('should toggle account header checkbox', async () => {
     await userEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('showAccountHeader', true);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('showAccountHeader');
   });
 
   it('should toggle wrap notification title checkbox', async () => {
     await userEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith(
-      'wrapNotificationTitle',
-      true,
-    );
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('wrapNotificationTitle');
   });
 });

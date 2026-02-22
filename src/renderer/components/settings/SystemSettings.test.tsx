@@ -10,9 +10,11 @@ import type { Percentage } from '../../types';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
+  let toggleSettingSpy: ReturnType<typeof vi.spyOn>;
   let updateSettingSpy: ReturnType<typeof vi.spyOn>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    toggleSettingSpy = vi.spyOn(useSettingsStore.getState(), 'toggleSetting');
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
@@ -38,8 +40,8 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-keyboardShortcut'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('keyboardShortcut', false);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('keyboardShortcut');
   });
 
   it('should toggle the showNotifications checkbox', async () => {
@@ -49,8 +51,8 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-showNotifications'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('showNotifications', false);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('showNotifications');
   });
 
   describe('playSound', () => {
@@ -59,8 +61,8 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
       await userEvent.click(screen.getByTestId('checkbox-playSound'));
 
-      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-      expect(updateSettingSpy).toHaveBeenCalledWith('playSound', false);
+      expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+      expect(toggleSettingSpy).toHaveBeenCalledWith('playSound');
     });
 
     it('volume controls should not be shown if playSound checkbox is false', async () => {
@@ -122,7 +124,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     await userEvent.click(screen.getByTestId('checkbox-openAtStartup'));
 
-    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-    expect(updateSettingSpy).toHaveBeenCalledWith('openAtStartup', true);
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('openAtStartup');
   });
 });

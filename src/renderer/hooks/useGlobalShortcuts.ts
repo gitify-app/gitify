@@ -69,12 +69,7 @@ export function useGlobalShortcuts(): { shortcuts: ShortcutConfigs } {
         key: 'w',
         isAllowed: isLoggedIn && !isLoading,
         action: () =>
-          useSettingsStore
-            .getState()
-            .updateSetting(
-              'participating',
-              !useSettingsStore.getState().participating,
-            ),
+          useSettingsStore.getState().toggleSetting('participating'),
       },
       filters: {
         key: 'f',

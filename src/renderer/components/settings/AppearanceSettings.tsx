@@ -30,9 +30,14 @@ import {
 } from '../../utils/zoom';
 
 export const AppearanceSettings: FC = () => {
+  // Account store values
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts);
 
+  // Setting store actions
+  const toggleSetting = useSettingsStore((s) => s.toggleSetting);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
+
+  // Setting store values
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -89,7 +94,7 @@ export const AppearanceSettings: FC = () => {
           checked={increaseContrast}
           label="Increase contrast"
           name="increaseContrast"
-          onChange={() => updateSetting('increaseContrast', !increaseContrast)}
+          onChange={() => toggleSetting('increaseContrast')}
           tooltip={
             <Text>
               Enable high contrast colors for improved legibility. This
@@ -148,9 +153,7 @@ export const AppearanceSettings: FC = () => {
           checked={showAccountHeader}
           label="Show account header"
           name="showAccountHeader"
-          onChange={() =>
-            updateSetting('showAccountHeader', !showAccountHeader)
-          }
+          onChange={() => toggleSetting('showAccountHeader')}
           tooltip={
             <Text>
               When enabled, displays an account header (avatar, username and
@@ -164,9 +167,7 @@ export const AppearanceSettings: FC = () => {
           checked={wrapNotificationTitle}
           label="Show full notification title"
           name="wrapNotificationTitle"
-          onChange={() =>
-            updateSetting('wrapNotificationTitle', !wrapNotificationTitle)
-          }
+          onChange={() => toggleSetting('wrapNotificationTitle')}
           tooltip={
             <Text>
               Wrap long notification titles onto multiple lines instead of

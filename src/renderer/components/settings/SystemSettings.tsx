@@ -21,7 +21,11 @@ import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
 export const SystemSettings: FC = () => {
+  // Setting store actions
+  const toggleSetting = useSettingsStore((s) => s.toggleSetting);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
+
+  // Setting store values
   const openLinks = useSettingsStore((s) => s.openLinks);
   const keyboardShortcutEnabled = useSettingsStore((s) => s.keyboardShortcut);
   const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
@@ -66,9 +70,7 @@ export const SystemSettings: FC = () => {
           checked={keyboardShortcutEnabled}
           label="Enable keyboard shortcut"
           name="keyboardShortcut"
-          onChange={() =>
-            updateSetting('keyboardShortcut', !keyboardShortcutEnabled)
-          }
+          onChange={() => toggleSetting('keyboardShortcut')}
           tooltip={
             <div>
               When enabled you can use the hotkeys{' '}
@@ -84,9 +86,7 @@ export const SystemSettings: FC = () => {
           checked={showSystemNotifications}
           label="Show system notifications"
           name="showNotifications"
-          onChange={() =>
-            updateSetting('showNotifications', !showSystemNotifications)
-          }
+          onChange={() => toggleSetting('showNotifications')}
           tooltip={
             <Text>
               Display native operating system notifications for new unread
@@ -105,9 +105,7 @@ export const SystemSettings: FC = () => {
             checked={playSoundNewNotifications}
             label="Play sound"
             name="playSound"
-            onChange={() =>
-              updateSetting('playSound', !playSoundNewNotifications)
-            }
+            onChange={() => toggleSetting('playSound')}
           />
 
           <ButtonGroup
@@ -170,7 +168,7 @@ export const SystemSettings: FC = () => {
           checked={openAtStartup}
           label="Open at startup"
           name="openAtStartup"
-          onChange={() => updateSetting('openAtStartup', !openAtStartup)}
+          onChange={() => toggleSetting('openAtStartup')}
           tooltip={
             <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
           }

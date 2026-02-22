@@ -26,11 +26,13 @@ export const Sidebar: FC = () => {
 
   const { shortcuts } = useGlobalShortcuts();
 
+  // Account store values
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
 
+  // Filters store values
   const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
-  // Subscribe to settings from store
+  // Settings store values
   const fetchReadNotifications = useSettingsStore(
     (s) => s.fetchReadNotifications,
   );

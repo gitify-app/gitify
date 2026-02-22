@@ -11,13 +11,15 @@ import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
 export const TraySettings: FC = () => {
+  // Setting store actions
+  const toggleSetting = useSettingsStore((s) => s.toggleSetting);
+
+  // Setting store values
   const showNotificationsCountInTray = useSettingsStore(
     (s) => s.showNotificationsCountInTray,
   );
   const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
   const useAlternateIdleIcon = useSettingsStore((s) => s.useAlternateIdleIcon);
-
-  const updateSetting = useSettingsStore((s) => s.updateSetting);
 
   return (
     <fieldset>
@@ -28,12 +30,7 @@ export const TraySettings: FC = () => {
           checked={showNotificationsCountInTray}
           label="Show notification count"
           name="showNotificationsCountInTray"
-          onChange={() =>
-            updateSetting(
-              'showNotificationsCountInTray',
-              !showNotificationsCountInTray,
-            )
-          }
+          onChange={() => toggleSetting('showNotificationsCountInTray')}
           tooltip={
             <Text>
               Show the unread notification count next to the tray icon. Useful
@@ -47,9 +44,7 @@ export const TraySettings: FC = () => {
           checked={useUnreadActiveIcon}
           label="Highlight unread notifications"
           name="useUnreadActiveIcon"
-          onChange={() =>
-            updateSetting('useUnreadActiveIcon', !useUnreadActiveIcon)
-          }
+          onChange={() => toggleSetting('useUnreadActiveIcon')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
@@ -64,9 +59,7 @@ export const TraySettings: FC = () => {
           checked={useAlternateIdleIcon}
           label="Use alternate idle icon"
           name="useAlternateIdleIcon"
-          onChange={() =>
-            updateSetting('useAlternateIdleIcon', !useAlternateIdleIcon)
-          }
+          onChange={() => toggleSetting('useAlternateIdleIcon')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>

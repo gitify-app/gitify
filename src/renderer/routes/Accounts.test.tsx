@@ -64,6 +64,9 @@ describe('renderer/routes/Accounts.tsx', () => {
       const openAccountProfileSpy = vi
         .spyOn(links, 'openAccountProfile')
         .mockImplementation(vi.fn());
+      useAccountsStore.setState({
+        accounts: [mockPersonalAccessTokenAccount],
+      });
 
       await act(async () => {
         renderWithAppContext(<AccountsRoute />);
