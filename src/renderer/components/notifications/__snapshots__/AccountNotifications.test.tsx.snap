@@ -224,7 +224,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 alt="🔥"
                 class="emoji"
                 draggable="false"
-                src="/mock/images/assets/1f525.svg"
+                src="/mock/assets/images/1f525.svg"
               />
             </div>
             <div
@@ -469,7 +469,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 alt="🔥"
                 class="emoji"
                 draggable="false"
-                src="/mock/images/assets/1f525.svg"
+                src="/mock/assets/images/1f525.svg"
               />
             </div>
             <div
@@ -1813,7 +1813,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 alt="🎊"
                 class="emoji"
                 draggable="false"
-                src="/mock/images/assets/1f38a.svg"
+                src="/mock/assets/images/1f38a.svg"
               />
             </div>
             <div

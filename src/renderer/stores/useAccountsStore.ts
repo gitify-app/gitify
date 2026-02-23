@@ -43,9 +43,16 @@ const useAccountsStore = create<AccountsStore>()(
         // Refresh user data
         newAccount = await get().refreshAccount(newAccount);
 
-        set((state) => ({
-          accounts: [...state.accounts, newAccount],
-        }));
+        if (get().hasAccountAlready(newAccount)) {
+          rendererLogWarn(
+            'createAccount',
+            `account for user ${newAccount.user.login} already exists`,
+          );
+        } else {
+          set((state) => ({
+            accounts: [...state.accounts, newAccount],
+          }));
+        }
       },
 
       refreshAccount: async (account: Account): Promise<Account> => {
@@ -111,6 +118,12 @@ const useAccountsStore = create<AccountsStore>()(
 
       hasMultipleAccounts: () => {
         return get().accounts.length > 1;
+      },
+
+      hasAccountAlready: (account: Account) => {
+        const newAccountUUID = getAccountUUID(account);
+
+        return get().accounts.some((a) => getAccountUUID(a) === newAccountUUID);
       },
 
       primaryAccountHostname: () => {

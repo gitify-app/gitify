@@ -5,10 +5,22 @@ import {
   canIncreaseVolume,
   decreaseVolume,
   increaseVolume,
+  raiseSoundNotification,
   volumePercentageToLevel,
 } from './sound';
 
 describe('renderer/utils/notifications/sound.ts', () => {
+  describe('raiseSoundNotification', () => {
+    it('should play sound at correct volume', async () => {
+      const audioPlaySpy = vi.spyOn(Audio.prototype, 'play');
+
+      await raiseSoundNotification(50 as Percentage);
+
+      expect(window.gitify.notificationSoundPath).toHaveBeenCalled();
+      expect(audioPlaySpy).toHaveBeenCalled();
+    });
+  });
+
   it('should convert percentage to sound level', () => {
     expect(volumePercentageToLevel(100 as Percentage)).toBe(1);
     expect(volumePercentageToLevel(50 as Percentage)).toBe(0.5);

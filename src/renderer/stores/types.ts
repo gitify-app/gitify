@@ -84,6 +84,11 @@ export interface AccountsActions {
   hasMultipleAccounts: () => boolean;
 
   /**
+   * Checks if an account already exists.
+   */
+  hasAccountAlready: (account: Account) => boolean;
+
+  /**
    * Gets the primary account's hostname (first account).
    */
   primaryAccountHostname: () => Hostname;

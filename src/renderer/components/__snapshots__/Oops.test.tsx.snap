@@ -44,7 +44,7 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - fa
                 alt="🤔"
                 class="emoji"
                 draggable="false"
-                src="/mock/images/assets/1f914.svg"
+                src="/mock/assets/images/1f914.svg"
               />
             </div>
             <div
@@ -109,7 +109,7 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - sp
                 alt="🔥"
                 class="emoji"
                 draggable="false"
-                src="/mock/images/assets/1f525.svg"
+                src="/mock/assets/images/1f525.svg"
               />
             </div>
             <div
