@@ -7,6 +7,19 @@ import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 // Sets timezone to UTC for consistent date/time in tests and snapshots
 process.env.TZ = 'UTC';
 
+// Mock for '@octokit/oauth-methods' to ensure consistent behavior
+vi.mock('@octokit/oauth-methods', async () => {
+  const actual = await vi.importActual<typeof import('@octokit/oauth-methods')>(
+    '@octokit/oauth-methods',
+  );
+  return {
+    ...actual,
+    createDeviceCode: vi.fn(),
+    exchangeDeviceCode: vi.fn(),
+    exchangeWebFlowCode: vi.fn(),
+  };
+});
+
 /**
  * Reset stores
  */

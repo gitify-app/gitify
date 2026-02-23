@@ -34,29 +34,28 @@ function AppContextProvider({
 }: AppContextProviderProps) {
   const defaultValue: AppContextState = useMemo(() => {
     return {
+      status: 'success',
+      globalError: null,
+
+      loginWithDeviceFlowStart: vi.fn(),
+      loginWithDeviceFlowPoll: vi.fn(),
+      loginWithDeviceFlowComplete: vi.fn(),
+      loginWithOAuthApp: vi.fn(),
+      loginWithPersonalAccessToken: vi.fn(),
+
       notifications: [],
       notificationCount: 0,
       unreadNotificationCount: 0,
       hasNotifications: false,
       hasUnreadNotifications: false,
 
-      status: 'success',
-      globalError: null,
-
-      // Default mock implementations for all required methods
-      loginWithDeviceFlowStart: vi.fn(),
-      loginWithDeviceFlowPoll: vi.fn(),
-      loginWithDeviceFlowComplete: vi.fn(),
-      loginWithOAuthApp: vi.fn(),
-      loginWithPersonalAccessToken: vi.fn(),
-      logoutFromAccount: vi.fn(),
-
       fetchNotifications: vi.fn(),
-      removeAccountNotifications: vi.fn(),
 
       markNotificationsAsRead: vi.fn(),
       markNotificationsAsDone: vi.fn(),
       unsubscribeNotification: vi.fn(),
+
+      isOnline: true,
 
       ...value,
     } as AppContextState;

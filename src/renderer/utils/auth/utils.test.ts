@@ -1,16 +1,3 @@
-// Use a hoist-safe mock factory for '@octokit/oauth-methods'
-vi.mock('@octokit/oauth-methods', async () => {
-  const actual = await vi.importActual<typeof import('@octokit/oauth-methods')>(
-    '@octokit/oauth-methods',
-  );
-  return {
-    ...actual,
-    createDeviceCode: vi.fn(),
-    exchangeDeviceCode: vi.fn(),
-    exchangeWebFlowCode: vi.fn(),
-  };
-});
-
 import {
   createDeviceCode,
   exchangeDeviceCode,
