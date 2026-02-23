@@ -13,7 +13,6 @@ import type { ClientID, ClientSecret, Token } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import * as authUtils from '../utils/auth/utils';
-import * as notifications from '../utils/notifications/notifications';
 import * as tray from '../utils/tray';
 import { type AppContextState, AppProvider } from './App';
 
@@ -128,7 +127,9 @@ describe('renderer/context/App.tsx', () => {
     let createAccountSpy: ReturnType<typeof vi.spyOn>;
 
     beforeEach(async () => {
-      createAccountSpy = vi.spyOn(useAccountsStore.getState(), 'createAccount');
+      createAccountSpy = vi
+        .spyOn(useAccountsStore.getState(), 'createAccount')
+        .mockImplementation(vi.fn());
     });
 
     afterEach(() => {
@@ -165,7 +166,7 @@ describe('renderer/context/App.tsx', () => {
       expect(pollGitHubDeviceFlowSpy).toHaveBeenCalledWith('session');
     });
 
-    it('loginWithDeviceFlowComplete calls addAccount', async () => {
+    it('loginWithDeviceFlowComplete calls createAccount', async () => {
       const getContext = renderWithContext();
 
       await act(async () => {
