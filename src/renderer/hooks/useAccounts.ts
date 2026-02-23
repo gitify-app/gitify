@@ -6,13 +6,13 @@ import { Constants } from '../constants';
 
 import { useAccountsStore } from '../stores';
 
-import type { Account } from '../types';
-
 interface AccountsState {
   refetchAccounts: () => Promise<void>;
 }
 
-export const useAccounts = (accounts: Account[]): AccountsState => {
+export const useAccounts = (): AccountsState => {
+  const accounts = useAccountsStore((state) => state.accounts);
+
   const { refetch } = useQuery<boolean, Error>({
     queryKey: ['accounts', accounts.length],
 

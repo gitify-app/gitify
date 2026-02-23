@@ -128,10 +128,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,
-  } = useNotifications(accounts);
+  } = useNotifications();
 
   // Periodic account refreshes
-  useAccounts(accounts);
+  useAccounts();
 
   // Theme
   useEffect(() => {

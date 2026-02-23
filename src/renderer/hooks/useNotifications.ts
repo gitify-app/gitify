@@ -7,10 +7,9 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
-import { useFiltersStore, useSettingsStore } from '../stores';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import type {
-  Account,
   AccountNotifications,
   GitifyError,
   GitifyNotification,
@@ -65,17 +64,14 @@ interface NotificationsState {
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 }
 
-export const useNotifications = (accounts: Account[]): NotificationsState => {
+export const useNotifications = (): NotificationsState => {
   const queryClient = useQueryClient();
   const previousNotificationsRef = useRef<AccountNotifications[]>([]);
 
-  const fetchIntervalMs = useSettingsStore((s) => s.fetchInterval);
-  const markAsDoneOnUnsubscribe = useSettingsStore(
-    (s) => s.markAsDoneOnUnsubscribe,
-  );
+  // Account store values
+  const accounts = useAccountsStore((s) => s.accounts);
 
-  // Subscribe to filter store to trigger re-render when filters change
-  // This ensures the select function gets recreated with latest filter state
+  // Filter store values
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
   const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
   const userTypes = useFiltersStore((s) => s.userTypes);
@@ -83,13 +79,20 @@ export const useNotifications = (accounts: Account[]): NotificationsState => {
   const states = useFiltersStore((s) => s.states);
   const reasons = useFiltersStore((s) => s.reasons);
 
-  // Get settings to determine query key
+  // Setting store values
   const fetchReadNotifications = useSettingsStore(
     (s) => s.fetchReadNotifications,
   );
   const fetchParticipatingNotifications = useSettingsStore(
     (s) => s.participating,
   );
+  const fetchIntervalMs = useSettingsStore((s) => s.fetchInterval);
+  const markAsDoneOnUnsubscribe = useSettingsStore(
+    (s) => s.markAsDoneOnUnsubscribe,
+  );
+  const playSoundNewNotifications = useSettingsStore((s) => s.playSound);
+  const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
+  const notificationVolume = useSettingsStore((s) => s.notificationVolume);
 
   // Query key excludes filters to prevent API refetches on filter changes
   // Filters are applied client-side via subscription in subscriptions.ts
@@ -185,7 +188,7 @@ export const useNotifications = (accounts: Account[]): NotificationsState => {
   const globalError: GitifyError = useMemo(() => {
     // If paused due to offline, show network error
     if (isPaused) {
-      return Errors.NETWORK;
+      return Errors.OFFLINE;
     }
 
     if (!isError || notifications.length === 0) {
@@ -205,11 +208,6 @@ export const useNotifications = (accounts: Account[]): NotificationsState => {
   const refetchNotifications = useCallback(async () => {
     await refetch();
   }, [refetch]);
-
-  // Get settings for notifications side effects
-  const playSoundNewNotifications = useSettingsStore((s) => s.playSound);
-  const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
-  const notificationVolume = useSettingsStore((s) => s.notificationVolume);
 
   // Handle sound and native notifications when new notifications arrive
   useEffect(() => {
