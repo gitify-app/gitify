@@ -3,11 +3,20 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+if (!process.env.GITHUB_TOKEN) {
+  // biome-ignore lint/suspicious/noConsole: CLI script output
+  console.warn(
+    '\x1b[33m⚠ GITHUB_TOKEN is not set. Skipping GraphQL codegen.\n' +
+      '  To generate updated types, create a .env file with a valid GitHub PAT.\n' +
+      '  See .env.template for details.\x1b[0m',
+  );
+  process.exit(0);
+}
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: {
     'https://api.github.com/graphql': {
-      // Add a custom header for authorization using your PAT
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
