@@ -137,7 +137,10 @@
       "electron",
       "esbuild",
       "unrs-resolver"
-    ]
+    ],
+    "overrides": {
+      "react-is": "19.2.4"
+    }
   },
   "lint-staged": {
     "*": "biome check --no-errors-on-unmatched",
