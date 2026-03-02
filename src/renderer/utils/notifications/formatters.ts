@@ -35,15 +35,27 @@ export function formatForDisplay(text: string[]): string {
     return '';
   }
 
-  return text
-    .join(' ')
-    .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between lowercase character followed by an uppercase character
-    .replaceAll('_', ' ') // Replace underscores with spaces
-    .replace(/\w+/g, (word) => {
-      // Convert to proper case (capitalize first letter of each word)
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    })
-    .trim();
+  return formatProperCase(
+    text
+      .join(' ')
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between lowercase character followed by an uppercase character
+      .replaceAll('_', ' ') // Replace underscores with spaces
+      .trim(),
+  );
+}
+
+/**
+ * Formats a string to proper case (capitalize the first letter of each word).
+ */
+export function formatProperCase(text: string) {
+  if (!text) {
+    return '';
+  }
+
+  return text.replace(/\w+/g, (word) => {
+    // Convert to proper case (capitalize first letter of each word)
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  });
 }
 
 /**

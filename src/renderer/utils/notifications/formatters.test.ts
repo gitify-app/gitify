@@ -6,9 +6,16 @@ import {
   formatNotificationNumber,
   formatNotificationTitle,
   formatNotificationType,
+  formatProperCase,
 } from './formatters';
 
 describe('renderer/utils/notifications/formatters.ts', () => {
+  it('formatProperCase', () => {
+    expect(formatProperCase(null)).toBe('');
+    expect(formatProperCase('')).toBe('');
+    expect(formatProperCase('OUTDATED discussion')).toBe('Outdated Discussion');
+  });
+
   it('formatForDisplay', () => {
     expect(formatForDisplay(null)).toBe('');
     expect(formatForDisplay([])).toBe('');
