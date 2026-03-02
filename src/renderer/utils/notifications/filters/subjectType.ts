@@ -27,6 +27,9 @@ const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
   Release: {
     title: 'Release',
   },
+  RepositoryAdvisory: {
+    title: 'Advisory',
+  },
   RepositoryDependabotAlertsThread: {
     title: 'Dependabot Alert',
   },

@@ -446,6 +446,7 @@ export type SubjectType =
   | 'Issue'
   | 'PullRequest'
   | 'Release'
+  | 'RepositoryAdvisory'
   | 'RepositoryDependabotAlertsThread'
   | 'RepositoryInvitation'
   | 'RepositoryVulnerabilityAlert'

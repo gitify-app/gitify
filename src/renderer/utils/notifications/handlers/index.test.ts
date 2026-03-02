@@ -11,6 +11,7 @@ import { createNotificationHandler } from './index';
 import { issueHandler } from './issue';
 import { pullRequestHandler } from './pullRequest';
 import { releaseHandler } from './release';
+import { repositoryAdvisoryHandler } from './repositoryAdvisory';
 import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
@@ -25,6 +26,7 @@ describe('renderer/utils/notifications/handlers/index.ts', () => {
       Issue: issueHandler,
       PullRequest: pullRequestHandler,
       Release: releaseHandler,
+      RepositoryAdvisory: repositoryAdvisoryHandler,
       RepositoryDependabotAlertsThread: repositoryDependabotAlertsThreadHandler,
       RepositoryInvitation: repositoryInvitationHandler,
       RepositoryVulnerabilityAlert: repositoryVulnerabilityAlertHandler,

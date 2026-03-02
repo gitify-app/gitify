@@ -8,6 +8,7 @@ import { discussionHandler } from './discussion';
 import { issueHandler } from './issue';
 import { pullRequestHandler } from './pullRequest';
 import { releaseHandler } from './release';
+import { repositoryAdvisoryHandler } from './repositoryAdvisory';
 import { repositoryDependabotAlertsThreadHandler } from './repositoryDependabotAlertsThread';
 import { repositoryInvitationHandler } from './repositoryInvitation';
 import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAlert';
@@ -29,6 +30,8 @@ export function createNotificationHandler(
       return pullRequestHandler;
     case 'Release':
       return releaseHandler;
+    case 'RepositoryAdvisory':
+      return repositoryAdvisoryHandler;
     case 'RepositoryDependabotAlertsThread':
       return repositoryDependabotAlertsThreadHandler;
     case 'RepositoryInvitation':
@@ -49,6 +52,7 @@ export const handlers = {
   issueHandler,
   pullRequestHandler,
   releaseHandler,
+  repositoryAdvisoryHandler,
   repositoryDependabotAlertsThreadHandler,
   repositoryInvitationHandler,
   repositoryVulnerabilityAlertHandler,
