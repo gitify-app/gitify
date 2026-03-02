@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  react-is: 19.2.4
+
 importers:
 
   .:
@@ -1240,7 +1243,7 @@ packages:
       '@types/react-is': 18.x || 19.x
       react: 18.x || 19.x
       react-dom: 18.x || 19.x
-      react-is: 18.x || 19.x
+      react-is: 19.2.4
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -3412,9 +3415,6 @@ packages:
     peerDependenciesMeta:
       react-dom:
         optional: true
-
-  react-is@17.0.2:
-    resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
   react-is@19.2.4:
     resolution: {integrity: sha512-W+EWGn2v0ApPKgKKCy/7s7WHXkboGcsrXE+2joLyVxkbyVQfO3MUEaUQDHoSmb8TFFrSKYa9mw64WZHNHSDzYA==}
@@ -7584,7 +7584,7 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
-      react-is: 17.0.2
+      react-is: 19.2.4
 
   proc-log@5.0.0: {}
 
@@ -7630,8 +7630,6 @@ snapshots:
       react: 19.2.4
     optionalDependencies:
       react-dom: 19.2.4(react@19.2.4)
-
-  react-is@17.0.2: {}
 
   react-is@19.2.4: {}
 
