@@ -1487,6 +1487,8 @@ export type CreateRepositoryCustomPropertyInput = {
   propertyName: Scalars['String']['input'];
   /** The regex pattern that the value of the custom property must match, if the `value_type` is `string`. */
   regex?: InputMaybe<Scalars['String']['input']>;
+  /** Whether this repository custom property requires explicit values. */
+  requireExplicitValues?: InputMaybe<Scalars['Boolean']['input']>;
   /** Whether the custom property is required. */
   required?: InputMaybe<Scalars['Boolean']['input']>;
   /** The global relay id of the source in which a new custom property should be created in. */
@@ -2946,6 +2948,10 @@ export type IssueTimelineItemsItemType =
   | 'DISCONNECTED_EVENT'
   /** Represents a comment on an Issue. */
   | 'ISSUE_COMMENT'
+  /** Represents a 'issue_comment_pinned' event on a given issue. */
+  | 'ISSUE_COMMENT_PINNED_EVENT'
+  /** Represents a 'issue_comment_unpinned' event on a given issue. */
+  | 'ISSUE_COMMENT_UNPINNED_EVENT'
   /** Represents a 'issue_field_added' event on a given issue. */
   | 'ISSUE_FIELD_ADDED_EVENT'
   /** Represents a 'issue_field_changed' event on a given issue. */
@@ -4412,6 +4418,10 @@ export type PullRequestTimelineItemsItemType =
   | 'HEAD_REF_RESTORED_EVENT'
   /** Represents a comment on an Issue. */
   | 'ISSUE_COMMENT'
+  /** Represents a 'issue_comment_pinned' event on a given issue. */
+  | 'ISSUE_COMMENT_PINNED_EVENT'
+  /** Represents a 'issue_comment_unpinned' event on a given issue. */
+  | 'ISSUE_COMMENT_UNPINNED_EVENT'
   /** Represents a 'issue_field_added' event on a given issue. */
   | 'ISSUE_FIELD_ADDED_EVENT'
   /** Represents a 'issue_field_changed' event on a given issue. */
@@ -7495,6 +7505,8 @@ export type UpdateRepositoryCustomPropertyInput = {
   regex?: InputMaybe<Scalars['String']['input']>;
   /** The global relay id of the source of the custom property. */
   repositoryCustomPropertyId: Scalars['ID']['input'];
+  /** Whether this repository custom property requires explicit values. */
+  requireExplicitValues?: InputMaybe<Scalars['Boolean']['input']>;
   /** Whether the updated custom property is required. */
   required?: InputMaybe<Scalars['Boolean']['input']>;
   /** The updated actors who can edit the values of the custom property. */

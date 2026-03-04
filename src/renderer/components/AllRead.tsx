@@ -17,8 +17,8 @@ export const AllRead: FC<AllReadProps> = ({
 
   const emoji = useMemo(
     () =>
-      Constants.ALL_READ_EMOJIS[
-        Math.floor(Math.random() * Constants.ALL_READ_EMOJIS.length)
+      Constants.EMOJIS.ALL_READ[
+        Math.floor(Math.random() * Constants.EMOJIS.ALL_READ.length)
       ],
     [],
   );

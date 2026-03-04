@@ -1,15 +1,17 @@
+import { Constants } from '../constants';
+
 import type { AccountNotifications, ErrorType, GitifyError } from '../types';
 
 export const Errors: Record<ErrorType, GitifyError> = {
   BAD_CREDENTIALS: {
     title: 'Bad Credentials',
     descriptions: ['Your credentials are either invalid or expired.'],
-    emojis: ['🔓'],
+    emojis: Constants.EMOJIS.ERRORS.BAD_CREDENTIALS,
   },
   MISSING_SCOPES: {
     title: 'Missing Scopes',
     descriptions: ['Your credentials are missing a required API scope.'],
-    emojis: ['🔭'],
+    emojis: Constants.EMOJIS.ERRORS.MISSING_SCOPES,
   },
   NETWORK: {
     title: 'Network Error',
@@ -17,17 +19,17 @@ export const Errors: Record<ErrorType, GitifyError> = {
       'Unable to connect to one or more of your GitHub environments.',
       'Please check your network connection, including whether you require a VPN, and try again.',
     ],
-    emojis: ['🛜'],
+    emojis: Constants.EMOJIS.ERRORS.NETWORK,
   },
   RATE_LIMITED: {
     title: 'Rate Limited',
     descriptions: ['Please wait a while before trying again.'],
-    emojis: ['😮‍💨'],
+    emojis: Constants.EMOJIS.ERRORS.RATE_LIMITED,
   },
   UNKNOWN: {
     title: 'Oops! Something went wrong',
     descriptions: ['Please try again later.'],
-    emojis: ['🤔', '🥲', '😳', '🫠', '🙃', '🙈'],
+    emojis: Constants.EMOJIS.ERRORS.UNKNOWN,
   },
 };
 
