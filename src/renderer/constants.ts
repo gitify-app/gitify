@@ -23,7 +23,17 @@ export const Constants = {
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
   GITHUB_API_MERGE_BATCH_SIZE: 100,
 
-  ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
+  // Emojis for different states and events
+  EMOJIS: {
+    ALL_READ: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
+    ERRORS: {
+      BAD_CREDENTIALS: ['🔓'],
+      MISSING_SCOPES: ['🔭'],
+      NETWORK: ['🛜'],
+      RATE_LIMITED: ['😮‍💨'],
+      UNKNOWN: ['🤔', '🥲', '😳', '🫠', '🙃', '🙈'],
+    },
+  },
 
   DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
   MIN_FETCH_NOTIFICATIONS_INTERVAL_MS: 60 * 1000, // 1 minute
