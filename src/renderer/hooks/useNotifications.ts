@@ -14,6 +14,7 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
+import { getAccountUUID } from '../utils/auth/utils';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
@@ -83,8 +84,9 @@ export const useNotifications = (): NotificationsState => {
     async (account: Account) => {
       setStatus('loading');
 
+      const accountUUID = getAccountUUID(account);
       const updatedNotifications = notifications.filter(
-        (notification) => notification.account !== account,
+        (notification) => getAccountUUID(notification.account) !== accountUUID,
       );
 
       setNotifications(updatedNotifications);
