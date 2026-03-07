@@ -29,9 +29,9 @@ export function takeScreenshot(mb: Menubar) {
 }
 
 export function openLogsDirectory() {
-  const filePath = log.transports.file?.getFile()?.path;
+  const logFilePath = log.transports.file?.getFile()?.path;
 
-  if (!filePath) {
+  if (!logFilePath) {
     logError(
       'openLogsDirectory',
       'Could not find log directory!',
@@ -40,7 +40,6 @@ export function openLogsDirectory() {
     return;
   }
 
-  const logDirectory = path.dirname(filePath);
-
+  const logDirectory = path.dirname(logFilePath);
   shell.openPath(logDirectory);
 }
