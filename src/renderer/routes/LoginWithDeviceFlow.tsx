@@ -68,7 +68,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
     };
 
     initializeDeviceFlow();
-  }, [loginWithDeviceFlowStart]);
+  }, [loginWithDeviceFlowStart, reAuthAccount]);
 
   // Poll for device flow completion
   useEffect(() => {
