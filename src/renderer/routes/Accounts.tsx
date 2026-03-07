@@ -142,7 +142,10 @@ export const AccountsRoute: FC = () => {
           state: { account },
         });
       case 'OAuth App':
-        return navigate('/login-oauth-app', { replace: true });
+        return navigate('/login-oauth-app', {
+          replace: true,
+          state: { account },
+        });
       default:
         break;
     }

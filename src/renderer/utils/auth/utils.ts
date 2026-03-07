@@ -210,7 +210,7 @@ export async function addAccount(
     (a) => getAccountUUID(a) === newAccountUUID,
   );
 
-  if (existingIndex !== -1) {
+  if (existingIndex >= 0) {
     // Clear the cached Octokit client so the new token is used
     clearOctokitClientCacheForAccount(accountList[existingIndex]);
     // Replace the existing account (e.g. re-authentication with a new token)
