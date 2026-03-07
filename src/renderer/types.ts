@@ -1,4 +1,4 @@
-import type { ComponentType, FC } from 'react';
+import type { FC } from 'react';
 
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { VariantType } from '@primer/react/dist/Button/types';
@@ -173,13 +173,6 @@ export interface GitifyUser {
   name: string | null;
   avatar: Link | null;
   id: string;
-}
-
-export interface GitifyErrorAction {
-  label: string;
-  route: string;
-  variant: 'default' | 'danger' | 'primary' | 'invisible';
-  icon: ComponentType;
 }
 
 export interface GitifyError {
