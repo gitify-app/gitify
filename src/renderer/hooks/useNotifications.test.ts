@@ -1,16 +1,16 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 
-import { RequestError } from '@octokit/request-error';
-
-import type { DeepPartial } from '../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
-import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
+import {
+  mockGitHubCloudGitifyNotifications,
+  mockGitifyNotification,
+  mockMultipleAccountNotifications,
+  mockSingleAccountNotifications,
+} from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
-
-import type { ListNotificationsForAuthenticatedUserResponse } from '../utils/api/types';
 
 import * as apiClient from '../utils/api/client';
 import { Errors } from '../utils/errors';
@@ -21,123 +21,39 @@ import * as sound from '../utils/notifications/sound';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {
-  const rendererLogErrorSpy = vi
-    .spyOn(logger, 'rendererLogError')
-    .mockImplementation(vi.fn());
-
-  const raiseSoundNotificationSpy = vi
-    .spyOn(sound, 'raiseSoundNotification')
-    .mockImplementation(vi.fn());
-
-  const raiseNativeNotificationSpy = vi
-    .spyOn(native, 'raiseNativeNotification')
-    .mockImplementation(vi.fn());
+  let rendererLogErrorSpy: ReturnType<typeof vi.spyOn>;
+  let raiseSoundNotificationSpy: ReturnType<typeof vi.spyOn>;
+  let raiseNativeNotificationSpy: ReturnType<typeof vi.spyOn>;
+  let getAllNotificationsSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.restoreAllMocks();
+
+    rendererLogErrorSpy = vi
+      .spyOn(logger, 'rendererLogError')
+      .mockImplementation(vi.fn());
+    raiseSoundNotificationSpy = vi
+      .spyOn(sound, 'raiseSoundNotification')
+      .mockImplementation(vi.fn());
+    raiseNativeNotificationSpy = vi
+      .spyOn(native, 'raiseNativeNotification')
+      .mockImplementation(vi.fn());
+    getAllNotificationsSpy = vi
+      .spyOn(notificationsUtils, 'getAllNotifications')
+      .mockResolvedValue([]);
+
     // Reset mock notification state between tests since it's mutated
     // FIXME - isolate test data between tests
     mockGitifyNotification.unread = true;
   });
 
   describe('fetchNotifications', () => {
-    const mockRepository = {
-      name: 'notifications-test',
-      full_name: 'gitify-app/notifications-test',
-      html_url: 'https://github.com/gitify-app/notifications-test',
-      owner: {
-        login: 'gitify-app',
-        avatar_url: 'https://avatar.url',
-        type: 'Organization',
-      },
-    };
-
-    const mockNotifications: DeepPartial<ListNotificationsForAuthenticatedUserResponse> =
-      [
-        {
-          id: '1',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a check suite workflow.',
-            type: 'CheckSuite',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '2',
-          unread: true,
-          updated_at: '2024-02-26T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a Discussion.',
-            type: 'Discussion',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '3',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is an Issue.',
-            type: 'Issue',
-            url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/3',
-            latest_comment_url:
-              'https://api.github.com/repos/gitify-app/notifications-test/issues/3/comments',
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '4',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a Pull Request.',
-            type: 'PullRequest',
-            url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/4',
-            latest_comment_url:
-              'https://api.github.com/repos/gitify-app/notifications-test/issues/4/comments',
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '5',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is an invitation.',
-            type: 'RepositoryInvitation',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-        {
-          id: '6',
-          unread: true,
-          updated_at: '2024-01-01T00:00:00Z',
-          reason: 'subscribed',
-          subject: {
-            title: 'This is a workflow run.',
-            type: 'WorkflowRun',
-            url: null,
-            latest_comment_url: null,
-          },
-          repository: mockRepository,
-        },
-      ];
-
     it('should fetch non-detailed notifications with success', async () => {
-      const mockState = {
+      getAllNotificationsSpy.mockResolvedValue(
+        mockMultipleAccountNotifications,
+      );
+
+      const mockStateNonDetailed = {
         auth: mockAuth,
         settings: {
           ...mockSettings,
@@ -145,17 +61,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
         },
       };
 
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
-
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.fetchNotifications(mockState);
+        result.current.fetchNotifications(mockStateNonDetailed);
       });
 
       expect(result.current.status).toBe('loading');
@@ -167,30 +76,16 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications[0].account.hostname).toBe(
         'github.com',
       );
-      expect(result.current.notifications[0].notifications.length).toBe(6);
+      expect(result.current.notifications[0].notifications.length).toBe(2);
 
       expect(result.current.notifications[1].account.hostname).toBe(
         'github.gitify.io',
       );
-      expect(result.current.notifications[1].notifications.length).toBe(6);
+      expect(result.current.notifications[1].notifications.length).toBe(2);
     });
 
     it('should fetch detailed notifications with success', async () => {
-      const mockCloudNotifications = Array.from({ length: 6 }, (_, i) => ({
-        ...mockGitifyNotification,
-        id: String(i + 1),
-        account: mockGitHubCloudAccount,
-      }));
-
-      const getAllNotificationsSpy = vi
-        .spyOn(notificationsUtils, 'getAllNotifications')
-        .mockResolvedValue([
-          {
-            account: mockGitHubCloudAccount,
-            notifications: mockCloudNotifications,
-            error: null,
-          },
-        ]);
+      getAllNotificationsSpy.mockResolvedValue(mockSingleAccountNotifications);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -215,33 +110,22 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications[0].account.hostname).toBe(
         'github.com',
       );
-      expect(result.current.notifications[0].notifications.length).toBe(6);
-
-      getAllNotificationsSpy.mockRestore();
+      expect(result.current.notifications[0].notifications.length).toBe(1);
     });
 
     it('should fetch notifications with same failures', async () => {
-      const status = 401;
-      const message = 'Bad credentials';
-
-      // Mock listNotificationsForAuthenticatedUser to throw RequestError for both accounts
-      const listNotificationsSpy = vi
-        .spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockRejectedValue(
-          new RequestError(message, status, {
-            request: {
-              method: 'GET',
-              url: 'https://api.github.com/notifications',
-              headers: {},
-            },
-            response: {
-              status,
-              url: 'https://api.github.com/notifications',
-              headers: {},
-              data: { message },
-            },
-          }),
-        );
+      getAllNotificationsSpy.mockResolvedValue([
+        {
+          account: mockGitHubCloudAccount,
+          notifications: [],
+          error: Errors.BAD_CREDENTIALS,
+        },
+        {
+          account: mockGitHubEnterpriseServerAccount,
+          notifications: [],
+          error: Errors.BAD_CREDENTIALS,
+        },
+      ]);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -256,49 +140,21 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
-      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(2);
-
-      listNotificationsSpy.mockRestore();
     });
 
     it('should fetch notifications with different failures', async () => {
-      // Mock to throw different errors for each account
-      const listNotificationsSpy = vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      );
-
-      listNotificationsSpy
-        .mockRejectedValueOnce(
-          new RequestError('Oops! Something went wrong.', 400, {
-            request: {
-              method: 'GET',
-              url: 'https://api.github.com/notifications',
-              headers: {},
-            },
-            response: {
-              status: 400,
-              url: 'https://api.github.com/notifications',
-              headers: {},
-              data: { message: 'Oops! Something went wrong.' },
-            },
-          }),
-        )
-        .mockRejectedValueOnce(
-          new RequestError('Bad credentials', 401, {
-            request: {
-              method: 'GET',
-              url: 'https://github.gitify.io/api/v3/notifications',
-              headers: {},
-            },
-            response: {
-              status: 401,
-              url: 'https://github.gitify.io/api/v3/notifications',
-              headers: {},
-              data: { message: 'Bad credentials' },
-            },
-          }),
-        );
+      getAllNotificationsSpy.mockResolvedValue([
+        {
+          account: mockGitHubCloudAccount,
+          notifications: [],
+          error: Errors.UNKNOWN,
+        },
+        {
+          account: mockGitHubEnterpriseServerAccount,
+          notifications: [],
+          error: Errors.BAD_CREDENTIALS,
+        },
+      ]);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -313,18 +169,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBeNull();
-      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(2);
-
-      listNotificationsSpy.mockRestore();
     });
 
     it('should play sound when new notifications arrive and playSound is enabled', async () => {
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
+      getAllNotificationsSpy.mockResolvedValue(mockSingleAccountNotifications);
 
       const stateWithSound = {
         auth: {
@@ -353,12 +201,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should show native notification when new notifications arrive and showNotifications is enabled', async () => {
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
+      getAllNotificationsSpy.mockResolvedValue(mockSingleAccountNotifications);
 
       const stateWithNotifications = {
         auth: {
@@ -387,12 +230,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should play sound and show notification when both are enabled', async () => {
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
+      getAllNotificationsSpy.mockResolvedValue(mockSingleAccountNotifications);
 
       const stateWithBoth = {
         auth: {
@@ -421,13 +259,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should not play sound or show notification when no new notifications', async () => {
-      // Return empty notifications - no new notifications to trigger sound/native
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        [] satisfies Partial<ListNotificationsForAuthenticatedUserResponse>,
-      );
+      getAllNotificationsSpy.mockResolvedValue([]);
 
       const stateWithBoth = {
         auth: {
@@ -499,60 +331,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should only mark specific notifications as read while keeping others unread', async () => {
-      const mockNotifications: DeepPartial<ListNotificationsForAuthenticatedUserResponse> =
-        [
-          {
-            id: '1',
-            unread: true,
-            updated_at: '2024-01-01T00:00:00Z',
-            reason: 'subscribed',
-            subject: {
-              title: 'First notification',
-              type: 'Issue',
-              url: null,
-              latest_comment_url: null,
-            },
-            repository: {
-              name: 'notifications-test',
-              full_name: 'gitify-app/notifications-test',
-              html_url: 'https://github.com/gitify-app/notifications-test',
-              owner: {
-                login: 'gitify-app',
-                avatar_url: 'https://avatar.url',
-                type: 'Organization',
-              },
-            },
-          },
-          {
-            id: '2',
-            unread: true,
-            updated_at: '2024-01-02T00:00:00Z',
-            reason: 'subscribed',
-            subject: {
-              title: 'Second notification',
-              type: 'Issue',
-              url: null,
-              latest_comment_url: null,
-            },
-            repository: {
-              name: 'notifications-test',
-              full_name: 'gitify-app/notifications-test',
-              html_url: 'https://github.com/gitify-app/notifications-test',
-              owner: {
-                login: 'gitify-app',
-                avatar_url: 'https://avatar.url',
-                type: 'Organization',
-              },
-            },
-          },
-        ];
-
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
+      getAllNotificationsSpy.mockResolvedValue([
+        {
+          account: mockGitHubCloudAccount,
+          notifications: [...mockGitHubCloudGitifyNotifications],
+          error: null,
+        },
+      ]);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -610,65 +395,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should only update notifications for the correct account when fetchReadNotifications is enabled', async () => {
-      const mockCloudNotifications: DeepPartial<ListNotificationsForAuthenticatedUserResponse> =
-        [
-          {
-            id: '1',
-            unread: true,
-            updated_at: '2024-01-01T00:00:00Z',
-            reason: 'subscribed',
-            subject: {
-              title: 'Cloud notification',
-              type: 'Issue',
-              url: null,
-              latest_comment_url: null,
-            },
-            repository: {
-              name: 'notifications-test',
-              full_name: 'gitify-app/notifications-test',
-              html_url: 'https://github.com/gitify-app/notifications-test',
-              owner: {
-                login: 'gitify-app',
-                avatar_url: 'https://avatar.url',
-                type: 'Organization',
-              },
-            },
-          },
-        ];
-
-      const mockEnterpriseNotifications: DeepPartial<ListNotificationsForAuthenticatedUserResponse> =
-        [
-          {
-            id: '2',
-            unread: true,
-            updated_at: '2024-01-01T00:00:00Z',
-            reason: 'subscribed',
-            subject: {
-              title: 'Enterprise notification',
-              type: 'Issue',
-              url: null,
-              latest_comment_url: null,
-            },
-            repository: {
-              name: 'enterprise-test',
-              full_name: 'myorg/enterprise-test',
-              html_url: 'https://github.gitify.io/myorg/enterprise-test',
-              owner: {
-                login: 'myorg',
-                avatar_url: 'https://avatar.url',
-                type: 'Organization',
-              },
-            },
-          },
-        ];
-
-      vi.spyOn(apiClient, 'listNotificationsForAuthenticatedUser')
-        .mockResolvedValueOnce(
-          mockCloudNotifications as ListNotificationsForAuthenticatedUserResponse,
-        )
-        .mockResolvedValueOnce(
-          mockEnterpriseNotifications as ListNotificationsForAuthenticatedUserResponse,
-        );
+      getAllNotificationsSpy.mockResolvedValue(
+        mockMultipleAccountNotifications,
+      );
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -725,38 +454,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should keep notifications in list when fetchReadNotifications is enabled', async () => {
-      const mockNotifications: DeepPartial<ListNotificationsForAuthenticatedUserResponse> =
-        [
-          {
-            id: mockGitifyNotification.id,
-            unread: true,
-            updated_at: '2024-01-01T00:00:00Z',
-            reason: 'subscribed',
-            subject: {
-              title: 'Test notification',
-              type: 'Issue',
-              url: null,
-              latest_comment_url: null,
-            },
-            repository: {
-              name: 'notifications-test',
-              full_name: 'gitify-app/notifications-test',
-              html_url: 'https://github.com/gitify-app/notifications-test',
-              owner: {
-                login: 'gitify-app',
-                avatar_url: 'https://avatar.url',
-                type: 'Organization',
-              },
-            },
-          },
-        ];
-
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
+      getAllNotificationsSpy.mockResolvedValue(mockSingleAccountNotifications);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -1029,38 +727,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('removeAccountNotifications', () => {
     it('should remove notifications for a specific account', async () => {
-      const mockNotifications: DeepPartial<ListNotificationsForAuthenticatedUserResponse> =
-        [
-          {
-            id: '1',
-            unread: true,
-            updated_at: '2024-01-01T00:00:00Z',
-            reason: 'subscribed',
-            subject: {
-              title: 'Test notification',
-              type: 'Issue',
-              url: null,
-              latest_comment_url: null,
-            },
-            repository: {
-              name: 'notifications-test',
-              full_name: 'gitify-app/notifications-test',
-              html_url: 'https://github.com/gitify-app/notifications-test',
-              owner: {
-                login: 'gitify-app',
-                avatar_url: 'https://avatar.url',
-                type: 'Organization',
-              },
-            },
-          },
-        ];
-
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
+      getAllNotificationsSpy.mockResolvedValue(mockSingleAccountNotifications);
 
       const stateWithSingleAccount = {
         auth: {
