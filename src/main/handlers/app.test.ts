@@ -19,7 +19,7 @@ vi.mock('electron', () => ({
 
 vi.mock('../config', () => ({
   Paths: {
-    notificationSound: 'file:///path/to/notification.wav',
+    notificationSound: 'file:///path/to/notification.mp3',
     twemojiFolder: 'file:///path/to/twemoji',
   },
 }));
