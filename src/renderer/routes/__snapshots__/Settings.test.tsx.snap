@@ -964,18 +964,35 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 d="M4.855.708c.5-.896 1.79-.896 2.29 0l4.675 8.351a1.312 1.312 0 0 1-1.146 1.954H1.33A1.313 1.313 0 0 1 .183 9.058ZM7 7V3H5v4Zm-1 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
               />
             </svg>
-            <span
-              class="prc-Text-Text-9mHv3"
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="vertical"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              One or more accounts are missing enrichment scopes — detailed notifications may be incomplete. Visit
-               
-              <strong
+              <span
                 class="prc-Text-Text-9mHv3"
               >
-                Accounts → Scopes
-              </strong>
-               to review.
-            </span>
+                One or more accounts are missing scopes required for notification enrichment. Notification details may be incomplete.
+              </span>
+              <span
+                class="prc-Text-Text-9mHv3"
+              >
+                Visit
+                 
+                <button
+                  class="text-gitify-link cursor-pointer"
+                  type="button"
+                >
+                  Accounts → Scopes
+                </button>
+                 
+                to review.
+              </span>
+            </div>
           </div>
           <div
             class="pl-6"

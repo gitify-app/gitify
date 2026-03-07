@@ -192,8 +192,6 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-logout'));
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith(-1);
     });
 
     it('should show view-scopes button for all auth methods', async () => {

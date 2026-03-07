@@ -118,7 +118,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith(-1);
+    expect(navigateMock).toHaveBeenCalledWith('/');
   });
 
   it('should login using a token - failure', async () => {
