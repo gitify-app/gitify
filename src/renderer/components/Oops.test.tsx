@@ -1,4 +1,6 @@
-import { act } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
+
+import { PersonIcon } from '@primer/octicons-react';
 
 import {
   ensureStableEmojis,
@@ -42,5 +44,36 @@ describe('renderer/components/Oops.tsx', () => {
     });
 
     expect(tree.container).toMatchSnapshot();
+  });
+
+  it('should render action buttons and navigate on click', async () => {
+    const mockError = {
+      title: 'Error title',
+      descriptions: ['Error description'],
+      emojis: ['🔥'],
+      actions: [
+        {
+          label: 'Go somewhere',
+          route: '/somewhere',
+          variant: 'danger' as const,
+          icon: PersonIcon,
+        },
+      ],
+    };
+
+    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+
+    await act(async () => {
+      tree = renderWithAppContext(<Oops error={mockError} />);
+    });
+
+    const btn = tree.getByText('Go somewhere');
+    expect(btn).toBeDefined();
+
+    await act(async () => {
+      fireEvent.click(btn);
+    });
+
+    expect(navigateMock).toHaveBeenCalledWith('/somewhere');
   });
 });
