@@ -41,7 +41,11 @@ import { getNumberFromUrl } from './utils';
 export async function fetchAuthenticatedUserDetails(account: Account) {
   const octokit = await createOctokitClientUncached(account, 'rest');
 
-  return await octokit.rest.users.getAuthenticated();
+  return await octokit.rest.users.getAuthenticated({
+    headers: {
+      'Cache-Control': 'no-cache', // Prevent caching
+    },
+  });
 }
 
 /**
