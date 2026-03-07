@@ -26,9 +26,8 @@ export const Oops: FC<OopsProps> = ({
     [err],
   );
 
-  const actions = err.actions?.length ? (
-    <>
-      {err.actions.map((action) => (
+  const actions = err.actions?.length
+    ? err.actions.map((action) => (
         <Button
           key={action.route}
           leadingVisual={action.icon}
@@ -37,9 +36,8 @@ export const Oops: FC<OopsProps> = ({
         >
           {action.label}
         </Button>
-      ))}
-    </>
-  ) : null;
+      ))
+    : null;
 
   return (
     <EmojiSplash

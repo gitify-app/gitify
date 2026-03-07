@@ -1,9 +1,11 @@
-import { act, fireEvent } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { PersonIcon } from '@primer/octicons-react';
 
 import {
   ensureStableEmojis,
+  navigateMock,
   renderWithAppContext,
 } from '../__helpers__/test-utils';
 
@@ -61,18 +63,9 @@ describe('renderer/components/Oops.tsx', () => {
       ],
     };
 
-    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+    renderWithAppContext(<Oops error={mockError} />);
 
-    await act(async () => {
-      tree = renderWithAppContext(<Oops error={mockError} />);
-    });
-
-    const btn = tree.getByText('Go somewhere');
-    expect(btn).toBeDefined();
-
-    await act(async () => {
-      fireEvent.click(btn);
-    });
+    await userEvent.click(screen.getByText('Go somewhere'));
 
     expect(navigateMock).toHaveBeenCalledWith('/somewhere');
   });

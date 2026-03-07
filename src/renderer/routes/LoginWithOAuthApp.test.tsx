@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
 import type { ClientID, ClientSecret, Hostname } from '../types';
 
@@ -12,12 +12,6 @@ import {
   LoginWithOAuthAppRoute,
   validateForm,
 } from './LoginWithOAuthApp';
-
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useNavigate: () => navigateMock,
-}));
 
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   const loginWithOAuthAppMock = vi.fn();

@@ -2,6 +2,15 @@ import '@testing-library/jest-dom/vitest';
 
 import { useFiltersStore } from '../stores';
 
+/**
+ * Shared navigate mock — import from test-utils in any test that needs to assert on navigation
+ */
+export const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
+  useNavigate: () => navigateMock,
+}));
+
 // Sets timezone to UTC for consistent date/time in tests and snapshots
 process.env.TZ = 'UTC';
 
@@ -10,6 +19,7 @@ process.env.TZ = 'UTC';
  */
 beforeEach(() => {
   useFiltersStore.getState().reset();
+  navigateMock.mockReset();
 });
 
 /**

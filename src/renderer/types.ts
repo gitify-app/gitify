@@ -1,6 +1,7 @@
 import type { ComponentType, FC } from 'react';
 
 import type { Icon, OcticonProps } from '@primer/octicons-react';
+import type { VariantType } from '@primer/react/dist/Button/types';
 
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
@@ -186,6 +187,13 @@ export interface GitifyError {
   descriptions: string[];
   emojis: string[];
   actions?: GitifyErrorAction[];
+}
+
+export interface GitifyErrorAction {
+  label: string;
+  route: string;
+  variant: VariantType;
+  icon: FC<OcticonProps>;
 }
 
 export type ErrorType =
