@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { type ReactElement, type ReactNode, useMemo } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
@@ -7,22 +8,39 @@ import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
 import { AppContext, type AppContextState } from '../context/App';
 
+export { navigateMock } from './vitest.setup';
 export type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> };
+
+const EMPTY_APP_CONTEXT: TestAppContext = {};
+
+interface RenderOptions extends Partial<AppContextState> {
+  initialEntries?: string[];
+}
+
+/**
+ * Test context
+ */
+type TestAppContext = Partial<AppContextState>;
 
 /**
  * Props for the AppContextProvider wrapper
  */
 interface AppContextProviderProps {
   readonly children: ReactNode;
-  readonly value?: Partial<AppContextState>;
+  readonly value?: TestAppContext;
+  readonly initialEntries?: string[];
 }
 
 /**
  * Wrapper component that provides ThemeProvider, BaseStyles, and AppContext
  * with sensible defaults for testing.
  */
-function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
-  const defaultValue: AppContextState = useMemo(() => {
+function AppContextProvider({
+  children,
+  value = EMPTY_APP_CONTEXT,
+  initialEntries,
+}: AppContextProviderProps) {
+  const defaultValue: TestAppContext = useMemo(() => {
     return {
       auth: mockAuth,
       settings: mockSettings,
@@ -58,17 +76,19 @@ function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
       updateFilter: vi.fn(),
 
       ...value,
-    } as AppContextState;
+    } as TestAppContext;
   }, [value]);
 
   return (
-    <ThemeProvider>
-      <BaseStyles>
-        <AppContext.Provider value={defaultValue}>
-          {children}
-        </AppContext.Provider>
-      </BaseStyles>
-    </ThemeProvider>
+    <MemoryRouter initialEntries={initialEntries}>
+      <ThemeProvider>
+        <BaseStyles>
+          <AppContext.Provider value={defaultValue}>
+            {children}
+          </AppContext.Provider>
+        </BaseStyles>
+      </ThemeProvider>
+    </MemoryRouter>
   );
 }
 
@@ -80,11 +100,13 @@ function AppContextProvider({ children, value = {} }: AppContextProviderProps) {
  */
 export function renderWithAppContext(
   ui: ReactElement,
-  context: Partial<AppContextState> = {},
+  { initialEntries, ...context }: RenderOptions = {},
 ) {
   return render(ui, {
     wrapper: ({ children }) => (
-      <AppContextProvider value={context}>{children}</AppContextProvider>
+      <AppContextProvider initialEntries={initialEntries} value={context}>
+        {children}
+      </AppContextProvider>
     ),
   });
 }

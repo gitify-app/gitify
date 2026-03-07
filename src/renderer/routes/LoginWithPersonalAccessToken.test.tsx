@@ -1,7 +1,9 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { renderWithAppContext,
+  navigateMock
+} from '../__helpers__/test-utils';
 
 import type { Hostname, Token } from '../types';
 
@@ -13,11 +15,6 @@ import {
   validateForm,
 } from './LoginWithPersonalAccessToken';
 
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useNavigate: () => navigateMock,
-}));
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   const loginWithPersonalAccessTokenMock = vi.fn();

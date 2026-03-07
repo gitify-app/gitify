@@ -5,16 +5,11 @@ import { PersonIcon } from '@primer/octicons-react';
 
 import {
   ensureStableEmojis,
+  navigateMock,
   renderWithAppContext,
 } from '../__helpers__/test-utils';
 
 import { Oops } from './Oops';
-
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useNavigate: () => navigateMock,
-}));
 
 describe('renderer/components/Oops.tsx', () => {
   beforeEach(() => {

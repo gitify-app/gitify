@@ -16,6 +16,7 @@ import * as apiClient from '../utils/api/client';
 import { Errors } from '../utils/errors';
 import * as logger from '../utils/logger';
 import * as native from '../utils/notifications/native';
+import * as notificationsUtils from '../utils/notifications/notifications';
 import * as sound from '../utils/notifications/sound';
 import { useNotifications } from './useNotifications';
 
@@ -175,16 +176,21 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should fetch detailed notifications with success', async () => {
-      vi.spyOn(
-        apiClient,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue(
-        mockNotifications as ListNotificationsForAuthenticatedUserResponse,
-      );
+      const mockCloudNotifications = Array.from({ length: 6 }, (_, i) => ({
+        ...mockGitifyNotification,
+        id: String(i + 1),
+        account: mockGitHubCloudAccount,
+      }));
 
-      vi.spyOn(apiClient, 'fetchNotificationDetailsForList').mockResolvedValue(
-        new Map(),
-      );
+      const getAllNotificationsSpy = vi
+        .spyOn(notificationsUtils, 'getAllNotifications')
+        .mockResolvedValue([
+          {
+            account: mockGitHubCloudAccount,
+            notifications: mockCloudNotifications,
+            error: null,
+          },
+        ]);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -210,6 +216,8 @@ describe('renderer/hooks/useNotifications.ts', () => {
         'github.com',
       );
       expect(result.current.notifications[0].notifications.length).toBe(6);
+
+      getAllNotificationsSpy.mockRestore();
     });
 
     it('should fetch notifications with same failures', async () => {

@@ -1,16 +1,13 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { renderWithAppContext,
+  navigateMock
+} from '../__helpers__/test-utils';
 
 import { type FiltersStore, useFiltersStore } from '../stores';
 import { FiltersRoute } from './Filters';
 
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useNavigate: () => navigateMock,
-}));
 
 describe('renderer/routes/Filters.tsx', () => {
   const fetchNotificationsMock = vi.fn();

@@ -1,16 +1,12 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { renderWithAppContext,
+  navigateMock
+} from '../__helpers__/test-utils';
 
 import { SettingsRoute } from './Settings';
 
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useNavigate: () => navigateMock,
-}));
 
 describe('renderer/routes/Settings.tsx', () => {
   const fetchNotificationsMock = vi.fn();
@@ -21,11 +17,7 @@ describe('renderer/routes/Settings.tsx', () => {
 
   it('should render itself & its children', async () => {
     await act(async () => {
-      renderWithAppContext(
-        <MemoryRouter initialEntries={['/settings']}>
-          <SettingsRoute />
-        </MemoryRouter>,
-      );
+      renderWithAppContext(<SettingsRoute />, { initialEntries: ['/settings'] });
     });
 
     expect(screen.getByTestId('settings')).toMatchSnapshot();
@@ -33,14 +25,7 @@ describe('renderer/routes/Settings.tsx', () => {
 
   it('should go back by pressing the icon', async () => {
     await act(async () => {
-      renderWithAppContext(
-        <MemoryRouter initialEntries={['/settings']}>
-          <SettingsRoute />
-        </MemoryRouter>,
-        {
-          fetchNotifications: fetchNotificationsMock,
-        },
-      );
+      renderWithAppContext(<SettingsRoute />, { initialEntries: ['/settings'], fetchNotifications: fetchNotificationsMock, });
     });
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
