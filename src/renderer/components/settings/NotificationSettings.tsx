@@ -1,4 +1,5 @@
 import { type FC, type MouseEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   AlertFillIcon,
@@ -38,6 +39,8 @@ import {
 import { openGitHubParticipatingDocs } from '../../utils/links';
 
 export const NotificationSettings: FC = () => {
+  const navigate = useNavigate();
+
   const { auth, settings, updateSetting } = useAppContext();
 
   const [fetchInterval, setFetchInterval] = useState<number>(
@@ -251,11 +254,24 @@ export const NotificationSettings: FC = () => {
               gap="condensed"
             >
               <AlertFillIcon className="text-gitify-warning" size={14} />
-              <Text>
-                One or more accounts are missing enrichment scopes — detailed
-                notifications may be incomplete. Visit{' '}
-                <Text as="strong">Accounts → Scopes</Text> to review.
-              </Text>
+              <Stack direction="vertical" gap="condensed">
+                <Text>
+                  One or more accounts are missing scopes required for
+                  notification enrichment. Notification details may be
+                  incomplete.
+                </Text>
+                <Text>
+                  Visit{' '}
+                  <button
+                    className="text-gitify-link cursor-pointer"
+                    onClick={() => navigate('/accounts')}
+                    type="button"
+                  >
+                    Accounts → Scopes
+                  </button>{' '}
+                  to review.
+                </Text>
+              </Stack>
             </Stack>
           )}
 

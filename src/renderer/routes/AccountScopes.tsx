@@ -93,6 +93,7 @@ export const AccountScopesRoute: FC = () => {
                         direction="horizontal"
                         justify="space-between"
                         key={name}
+                        padding="condensed"
                       >
                         <Stack direction="vertical" gap="none">
                           <Text className="text-xs font-mono">{name}</Text>
@@ -128,6 +129,7 @@ export const AccountScopesRoute: FC = () => {
                   data-testid="account-scopes-repo-scope"
                   direction="horizontal"
                   justify="space-between"
+                  padding="condensed"
                 >
                   <Stack direction="vertical" gap="none">
                     <Text className="text-xs font-mono">
@@ -147,6 +149,7 @@ export const AccountScopesRoute: FC = () => {
                   data-testid="account-scopes-public-repo-scope"
                   direction="horizontal"
                   justify="space-between"
+                  padding="condensed"
                 >
                   <Stack direction="vertical" gap="none">
                     <Text className="text-xs font-mono">
@@ -182,6 +185,7 @@ export const AccountScopesRoute: FC = () => {
                     data-testid="account-scopes-extra-scopes"
                     direction="horizontal"
                     gap="condensed"
+                    padding="condensed"
                   >
                     {extraScopes.map((scope) => (
                       <Label key={scope} size="small" variant="secondary">

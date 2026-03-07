@@ -76,7 +76,12 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(({ addBase }) => {
+     plugin(({ addBase, addComponents }) => {
+      addComponents({
+        '.gitify-scope-row': {
+          '@apply rounded-md bg-gitify-accounts': {},
+        },
+      });
       // TODO - ideally we would use GitHub Primer Design Tokens instead of TailwindCSS
       addBase({
         '[data-color-mode="light"]': {
@@ -103,8 +108,7 @@ const config: Config = {
           '--gitify-counter-secondary': colors.gray[600],
           '--gitify-counter-text': colors.gray[100],
         },
-      });
-    }),
+      });),
   ],
 };
 
