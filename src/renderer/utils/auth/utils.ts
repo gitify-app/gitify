@@ -314,8 +314,7 @@ export function getDeveloperSettingsURL(account: Account): Link {
 
   switch (account.method) {
     case 'GitHub App':
-      settingsURL.pathname =
-        '/settings/connections/applications/27a352516d3341cee376';
+      settingsURL.pathname = `/settings/connections/applications/${Constants.OAUTH_DEVICE_FLOW_CLIENT_ID}`;
       break;
     case 'OAuth App':
       settingsURL.pathname = '/settings/developers';
