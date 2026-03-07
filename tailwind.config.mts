@@ -48,6 +48,10 @@ const config: Config = {
 
           accounts: 'var(--bgColor-neutral-muted)',
 
+          success: colors.green[500],
+          danger: colors.red[500],
+          warning: colors.orange[500],
+
           account: {
             rest: 'var(--control-bgColor-active)',
             error: 'var(--gitify-account-error-bg)',
@@ -72,7 +76,12 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(({ addBase }) => {
+    plugin(({ addBase, addComponents }) => {
+      addComponents({
+        '.gitify-scope-row': {
+          '@apply rounded-md bg-gitify-accounts': {},
+        },
+      });
       // TODO - ideally we would use GitHub Primer Design Tokens instead of TailwindCSS
       addBase({
         '[data-color-mode="light"]': {

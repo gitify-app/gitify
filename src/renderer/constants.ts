@@ -1,15 +1,58 @@
 import type { ClientID, Hostname, Link } from './types';
 
+type OAuthScope = 'NOTIFICATIONS' | 'READ_USER' | 'REPO' | 'PUBLIC_REPO';
+
+type OAuthScopeDetails = {
+  readonly name: string;
+  readonly description: string;
+};
+
+/**
+ * Structured OAuth scope definitions. Co-locate name + description so they
+ * can never drift apart. Import OAUTH_SCOPE directly when you need to reference
+ * a specific scope object (e.g. to access its description in the UI).
+ */
+export const OAUTH_SCOPE: Record<OAuthScope, OAuthScopeDetails> = {
+  NOTIFICATIONS: {
+    name: 'notifications',
+    description: 'Access GitHub notification inbox',
+  },
+  READ_USER: {
+    name: 'read:user',
+    description: 'Account details (name, avatar, profile)',
+  },
+  REPO: {
+    name: 'repo',
+    description: 'Enriched notifications for private and public repositories',
+  },
+  PUBLIC_REPO: {
+    name: 'public_repo',
+    description: 'Enriched notifications for public repositories only',
+  },
+};
+
 export const Constants = {
   STORAGE_KEY: 'gitify-storage',
 
   // Filters store key
   FILTERS_STORE_KEY: 'atlassify-filters',
 
-  // GitHub OAuth Scopes
+  // GitHub OAuth Scopes — each tier is an ordered array of OAUTH_SCOPE objects.
+  // REQUIRED: minimum scopes Gitify needs to function.
+  // RECOMMENDED: recommended enrichment (private + public repos).
+  // ALTERNATE: lighter path — public repos only.
   OAUTH_SCOPES: {
-    RECOMMENDED: ['read:user', 'notifications', 'repo'],
-    ALTERNATE: ['read:user', 'notifications', 'public_repo'],
+    REQUIRED: [OAUTH_SCOPE.NOTIFICATIONS, OAUTH_SCOPE.READ_USER],
+    RECOMMENDED: [
+      OAUTH_SCOPE.NOTIFICATIONS,
+      OAUTH_SCOPE.READ_USER,
+      OAUTH_SCOPE.REPO,
+    ],
+    ALTERNATE: [
+      OAUTH_SCOPE.NOTIFICATIONS,
+      OAUTH_SCOPE.READ_USER,
+      OAUTH_SCOPE.PUBLIC_REPO,
+    ],
   },
 
   GITHUB_HOSTNAME: 'github.com' as Hostname,

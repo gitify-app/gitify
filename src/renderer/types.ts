@@ -49,7 +49,7 @@ export interface Account {
   hostname: Hostname;
   token: Token;
   user: GitifyUser | null;
-  hasRequiredScopes?: boolean;
+  scopes?: string[];
 }
 
 /**

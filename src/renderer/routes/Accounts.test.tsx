@@ -106,7 +106,10 @@ describe('renderer/routes/Accounts.tsx', () => {
         renderWithAppContext(<AccountsRoute />, {
           auth: {
             accounts: [
-              { ...mockPersonalAccessTokenAccount, hasRequiredScopes: false },
+              {
+                ...mockPersonalAccessTokenAccount,
+                scopes: ['read:user', 'notifications'],
+              },
               mockOAuthAccount,
               mockGitHubAppAccount,
             ],
@@ -115,15 +118,19 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
-      // All 3 accounts render the warning button, but only 1 is visible
-      expect(screen.getAllByTestId('account-missing-scopes')).toHaveLength(3);
 
-      await userEvent.click(screen.getAllByTestId('account-missing-scopes')[0]);
+      // Clicking the scopes button for the account with missing scopes
+      // navigates to the scopes route where the user can investigate.
+      await userEvent.click(screen.getAllByTestId('account-view-scopes')[0]);
 
-      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/settings/tokens',
-      );
+      expect(navigateMock).toHaveBeenCalledWith('/account-scopes', {
+        state: {
+          account: {
+            ...mockPersonalAccessTokenAccount,
+            scopes: ['read:user', 'notifications'],
+          },
+        },
+      });
     });
 
     it('should set account as primary account', async () => {
@@ -185,8 +192,36 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-logout'));
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith(-1);
+    });
+
+    it('should show view-scopes button for all auth methods', async () => {
+      await act(async () => {
+        renderWithAppContext(<AccountsRoute />, {
+          auth: {
+            accounts: [
+              mockPersonalAccessTokenAccount,
+              mockOAuthAccount,
+              mockGitHubAppAccount,
+            ],
+          },
+        });
+      });
+
+      expect(screen.getAllByTestId('account-view-scopes')).toHaveLength(3);
+    });
+
+    it('should navigate to account-scopes when clicking view-scopes', async () => {
+      await act(async () => {
+        renderWithAppContext(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-view-scopes'));
+
+      expect(navigateMock).toHaveBeenCalledWith('/account-scopes', {
+        state: { account: mockPersonalAccessTokenAccount },
+      });
     });
   });
 

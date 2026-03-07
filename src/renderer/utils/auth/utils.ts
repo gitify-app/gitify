@@ -33,6 +33,7 @@ import type {
 } from './types';
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
+import { clearOctokitClientCacheForAccount } from '../api/octokit';
 import { encryptValue, openExternalLink } from '../comms';
 import { getPlatformFromHostname } from '../helpers';
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
@@ -44,7 +45,7 @@ export function performGitHubWebOAuth(
     const { url } = getWebFlowAuthorizationUrl({
       clientType: 'oauth-app',
       clientId: authOptions.clientId,
-      scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+      scopes: getRecommendedScopeNames(),
       allowSignup: false,
       request: request.defaults({
         baseUrl: `https://${authOptions.hostname}`,
@@ -87,18 +88,20 @@ export function performGitHubWebOAuth(
   });
 }
 
-export async function startGitHubDeviceFlow(): Promise<DeviceFlowSession> {
+export async function startGitHubDeviceFlow(
+  hostname: Hostname = Constants.GITHUB_HOSTNAME,
+): Promise<DeviceFlowSession> {
   const deviceCode = await createDeviceCode({
     clientType: 'oauth-app' as const,
     clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
-    scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+    scopes: getRecommendedScopeNames(),
     request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(Constants.GITHUB_HOSTNAME).toString(),
+      baseUrl: getGitHubAuthBaseUrl(hostname).toString(),
     }),
   });
 
   return {
-    hostname: Constants.GITHUB_HOSTNAME,
+    hostname: hostname,
     clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
     deviceCode: deviceCode.data.device_code,
     userCode: deviceCode.data.user_code,
@@ -203,15 +206,19 @@ export async function addAccount(
   newAccount = await refreshAccount(newAccount);
   const newAccountUUID = getAccountUUID(newAccount);
 
-  const accountAlreadyExists = accountList.some(
+  const existingIndex = accountList.findIndex(
     (a) => getAccountUUID(a) === newAccountUUID,
   );
 
-  if (accountAlreadyExists) {
-    rendererLogWarn(
+  if (existingIndex >= 0) {
+    // Clear the cached Octokit client so the new token is used
+    clearOctokitClientCacheForAccount(accountList[existingIndex]);
+    // Replace the existing account (e.g. re-authentication with a new token)
+    rendererLogInfo(
       'addAccount',
-      `account for user ${newAccount.user.login} already exists`,
+      `updating existing account for user ${newAccount.user.login}`,
     );
+    accountList[existingIndex] = newAccount;
   } else {
     accountList.push(newAccount);
   }
@@ -255,15 +262,9 @@ export async function refreshAccount(account: Account): Promise<Account> {
       ?.split(',')
       .map((scope: string) => scope.trim());
 
-    account.hasRequiredScopes =
-      Constants.OAUTH_SCOPES.RECOMMENDED.every((scope) =>
-        accountScopes.includes(scope),
-      ) ||
-      Constants.OAUTH_SCOPES.ALTERNATE.every((scope) =>
-        accountScopes.includes(scope),
-      );
+    account.scopes = accountScopes ?? [];
 
-    if (!account.hasRequiredScopes) {
+    if (!hasRequiredScopes(account)) {
       rendererLogWarn(
         'refreshAccount',
         `account for user ${account.user.login} is missing required scopes`,
@@ -275,6 +276,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
       `failed to refresh account for user ${account.user?.login ?? account.hostname}`,
       err,
     );
+    throw err;
   }
 
   return account;
@@ -338,8 +340,9 @@ export function getNewTokenURL(hostname: Hostname): Link {
   );
   newTokenURL.searchParams.append(
     'scopes',
-    Constants.OAUTH_SCOPES.RECOMMENDED.join(','),
+    getRecommendedScopeNames().join(','),
   );
+  newTokenURL.searchParams.append('default_expires_at', '90'); // 90 days
 
   return newTokenURL.toString() as Link;
 }
@@ -398,10 +401,44 @@ export function hasMultipleAccounts(auth: AuthState) {
   return auth.accounts.length > 1;
 }
 
-export function formatRecommendedOAuthScopes() {
-  return Constants.OAUTH_SCOPES.RECOMMENDED.join(', ');
+export function hasRequiredScopes(account: Account): boolean {
+  return Constants.OAUTH_SCOPES.REQUIRED.every(({ name }) =>
+    (account.scopes ?? []).includes(name),
+  );
 }
 
-export function formatAlternateOAuthScopes() {
-  return Constants.OAUTH_SCOPES.ALTERNATE.join(', ');
+export function hasRecommendedScopes(account: Account): boolean {
+  return Constants.OAUTH_SCOPES.RECOMMENDED.every(({ name }) =>
+    (account.scopes ?? []).includes(name),
+  );
+}
+
+export function hasAlternateScopes(account: Account): boolean {
+  return Constants.OAUTH_SCOPES.ALTERNATE.every(({ name }) =>
+    (account.scopes ?? []).includes(name),
+  );
+}
+
+export function getRequiredScopeNames(): string[] {
+  return Constants.OAUTH_SCOPES.REQUIRED.map(({ name }) => name);
+}
+
+export function getRecommendedScopeNames(): string[] {
+  return Constants.OAUTH_SCOPES.RECOMMENDED.map(({ name }) => name);
+}
+
+export function getAlternateScopeNames(): string[] {
+  return Constants.OAUTH_SCOPES.ALTERNATE.map(({ name }) => name);
+}
+
+export function formatRequiredOAuthScopes(): string {
+  return getRequiredScopeNames().join(', ');
+}
+
+export function formatRecommendedOAuthScopes(): string {
+  return getRecommendedScopeNames().join(', ');
+}
+
+export function formatAlternateOAuthScopes(): string {
+  return getAlternateScopeNames().join(', ');
 }

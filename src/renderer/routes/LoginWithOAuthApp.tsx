@@ -1,5 +1,5 @@
 import { type FC, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   BookIcon,
@@ -27,7 +27,13 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { ClientID, ClientSecret, Hostname, Token } from '../types';
+import type {
+  Account,
+  ClientID,
+  ClientSecret,
+  Hostname,
+  Token,
+} from '../types';
 import type { LoginOAuthWebOptions } from '../utils/auth/types';
 
 import {
@@ -38,6 +44,10 @@ import {
 } from '../utils/auth/utils';
 import { openExternalLink } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
+
+interface LocationState {
+  account?: Account;
+}
 
 export interface IFormData {
   hostname: Hostname;
@@ -78,6 +88,8 @@ export const validateForm = (values: IFormData): IFormErrors => {
 
 export const LoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
   const { loginWithOAuthApp } = useAppContext();
 
@@ -85,7 +97,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
-    hostname: Constants.GITHUB_HOSTNAME,
+    hostname: reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME,
     clientId: '' as ClientID,
     clientSecret: '' as ClientSecret,
   } as IFormData);
@@ -117,7 +129,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
     async (data: IFormData) => {
       try {
         await loginWithOAuthApp(data as LoginOAuthWebOptions);
-        navigate(-1);
+        navigate('/');
       } catch (err) {
         rendererLogError(
           'loginWithOAuthApp',

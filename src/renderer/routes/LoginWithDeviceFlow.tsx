@@ -1,5 +1,5 @@
 import { type FC, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CopyIcon, SignInIcon, SyncIcon } from '@primer/octicons-react';
 import {
@@ -18,14 +18,20 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { Link } from '../types';
+import type { Account, Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import { copyToClipboard, openExternalLink } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
 
+interface LocationState {
+  account?: Account;
+}
+
 export const LoginWithDeviceFlowRoute: FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
   const {
     loginWithDeviceFlowStart,
@@ -41,7 +47,9 @@ export const LoginWithDeviceFlowRoute: FC = () => {
   useEffect(() => {
     const initializeDeviceFlow = async () => {
       try {
-        const newSession = await loginWithDeviceFlowStart();
+        const newSession = await loginWithDeviceFlowStart(
+          reAuthAccount?.hostname,
+        );
         setSession(newSession);
 
         // Auto-copy the user code to clipboard
@@ -60,7 +68,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
     };
 
     initializeDeviceFlow();
-  }, [loginWithDeviceFlowStart]);
+  }, [loginWithDeviceFlowStart, reAuthAccount]);
 
   // Poll for device flow completion
   useEffect(() => {
@@ -81,7 +89,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
 
           if (token && isActive) {
             await loginWithDeviceFlowComplete(token, session.hostname);
-            navigate(-1);
+            navigate('/');
             return;
           }
 

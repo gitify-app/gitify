@@ -1,6 +1,8 @@
 import { type FC, type MouseEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
+  AlertFillIcon,
   BellIcon,
   CheckIcon,
   CommentIcon,
@@ -30,10 +32,16 @@ import { Title } from '../primitives/Title';
 
 import { FetchType, GroupBy, Size } from '../../types';
 
+import {
+  hasAlternateScopes,
+  hasRecommendedScopes,
+} from '../../utils/auth/utils';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 
 export const NotificationSettings: FC = () => {
-  const { settings, updateSetting } = useAppContext();
+  const navigate = useNavigate();
+
+  const { auth, settings, updateSetting } = useAppContext();
 
   const [fetchInterval, setFetchInterval] = useState<number>(
     settings.fetchInterval,
@@ -232,6 +240,40 @@ export const NotificationSettings: FC = () => {
             </Stack>
           }
         />
+
+        {settings.detailedNotifications &&
+          auth.accounts.some(
+            (account) =>
+              !hasRecommendedScopes(account) && !hasAlternateScopes(account),
+          ) && (
+            <Stack
+              align="center"
+              className="rounded-md px-3 py-2 bg-gitify-accounts text-xs"
+              data-testid="settings-scope-warning"
+              direction="horizontal"
+              gap="condensed"
+            >
+              <AlertFillIcon className="text-gitify-warning" size={14} />
+              <Stack direction="vertical" gap="condensed">
+                <Text>
+                  One or more accounts are missing scopes required for
+                  notification enrichment. Notification details may be
+                  incomplete.
+                </Text>
+                <Text>
+                  Visit{' '}
+                  <button
+                    className="text-gitify-link cursor-pointer"
+                    onClick={() => navigate('/accounts')}
+                    type="button"
+                  >
+                    Accounts → Scopes
+                  </button>{' '}
+                  to review.
+                </Text>
+              </Stack>
+            </Stack>
+          )}
 
         <div className="pl-6" hidden={!settings.detailedNotifications}>
           <Stack direction="vertical" gap="condensed">

@@ -1,5 +1,5 @@
 import { type FC, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   BookIcon,
@@ -27,7 +27,7 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { Hostname, Token } from '../types';
+import type { Account, Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 
 import {
@@ -38,6 +38,10 @@ import {
 } from '../utils/auth/utils';
 import { openExternalLink } from '../utils/comms';
 import { rendererLogError } from '../utils/logger';
+
+interface LocationState {
+  account?: Account;
+}
 
 export interface IFormData {
   token: Token;
@@ -70,6 +74,8 @@ export const validateForm = (values: IFormData): IFormErrors => {
 
 export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
   const { loginWithPersonalAccessToken } = useAppContext();
 
@@ -78,7 +84,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
-    hostname: Constants.GITHUB_HOSTNAME,
+    hostname: reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME,
     token: '' as Token,
   } as IFormData);
 
@@ -110,7 +116,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         await loginWithPersonalAccessToken(
           data as LoginPersonalAccessTokenOptions,
         );
-        navigate(-1);
+        navigate('/');
       } catch (err) {
         rendererLogError(
           'loginWithPersonalAccessToken',
@@ -191,7 +197,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               The{' '}
               <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
                 <button type="button">
-                  <Text as="u">required scopes</Text>
+                  <Text as="u">recommended scopes</Text>
                 </button>
               </Tooltip>{' '}
               will be automatically selected for you.

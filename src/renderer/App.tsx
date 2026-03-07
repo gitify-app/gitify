@@ -9,6 +9,7 @@ import {
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
 import { AppProvider } from './context/App';
+import { AccountScopesRoute } from './routes/AccountScopes';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
@@ -77,6 +78,14 @@ export const App = () => {
                     </RequireAuth>
                   }
                   path="/accounts"
+                />
+                <Route
+                  element={
+                    <RequireAuth>
+                      <AccountScopesRoute />
+                    </RequireAuth>
+                  }
+                  path="/account-scopes"
                 />
                 <Route element={<LoginRoute />} path="/login" />
                 <Route

@@ -72,7 +72,7 @@ import { defaultAuth, defaultSettings } from './defaults';
 export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithDeviceFlowStart: () => Promise<DeviceFlowSession>;
+  loginWithDeviceFlowStart: (hostname?: Hostname) => Promise<DeviceFlowSession>;
   loginWithDeviceFlowPoll: (
     session: DeviceFlowSession,
   ) => Promise<Token | null>;
@@ -383,7 +383,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Initiate device flow session.
    */
   const loginWithDeviceFlowStart = useCallback(
-    async () => await startGitHubDeviceFlow(),
+    async (hostname?: Hostname) => await startGitHubDeviceFlow(hostname),
     [],
   );
 
@@ -404,11 +404,25 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    */
   const loginWithDeviceFlowComplete = useCallback(
     async (token: Token, hostname: Hostname) => {
+      const existingAccount = auth.accounts.find(
+        (a) => a.hostname === hostname && a.method === 'GitHub App',
+      );
+      if (existingAccount) {
+        await removeAccountNotifications(existingAccount);
+      }
+
       const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
 
       persistAuth(updatedAuth);
+      await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [auth, persistAuth],
+    [
+      auth,
+      settings,
+      persistAuth,
+      fetchNotifications,
+      removeAccountNotifications,
+    ],
   );
 
   /**
@@ -419,6 +433,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       const { authOptions, authCode } = await performGitHubWebOAuth(data);
       const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
 
+      const existingAccount = auth.accounts.find(
+        (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
+      );
+      if (existingAccount) {
+        await removeAccountNotifications(existingAccount);
+      }
+
       const updatedAuth = await addAccount(
         auth,
         'OAuth App',
@@ -427,8 +448,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       );
 
       persistAuth(updatedAuth);
+      await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [auth, persistAuth],
+    [
+      auth,
+      settings,
+      persistAuth,
+      fetchNotifications,
+      removeAccountNotifications,
+    ],
   );
 
   /**
@@ -442,6 +470,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         token: encryptedToken,
       } as Account);
 
+      const existingAccount = auth.accounts.find(
+        (a) => a.hostname === hostname && a.method === 'Personal Access Token',
+      );
+      if (existingAccount) {
+        await removeAccountNotifications(existingAccount);
+      }
+
       const updatedAuth = await addAccount(
         auth,
         'Personal Access Token',
@@ -450,8 +485,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       );
 
       persistAuth(updatedAuth);
+      await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [auth, persistAuth],
+    [
+      auth,
+      settings,
+      persistAuth,
+      fetchNotifications,
+      removeAccountNotifications,
+    ],
   );
 
   const logoutFromAccount = useCallback(

@@ -104,7 +104,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     await waitFor(() => {
       expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith(-1);
+      expect(navigateMock).toHaveBeenCalledWith('/');
     });
   });
 
