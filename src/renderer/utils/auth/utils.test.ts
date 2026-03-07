@@ -46,6 +46,7 @@ import {
   getGitHubAuthBaseUrl,
   getNewOAuthAppURL,
   getNewTokenURL,
+  getRecommendedScopeNames,
 } from './utils';
 
 const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<
@@ -97,7 +98,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(createDeviceCodeMock).toHaveBeenCalledWith({
         clientType: 'oauth-app',
         clientId: 'FAKE_CLIENT_ID_123',
-        scopes: Constants.OAUTH_SCOPES.RECOMMENDED,
+        scopes: getRecommendedScopeNames(),
         request: expect.any(Function),
       });
 
@@ -133,7 +134,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          'https://my.git.com/login/oauth/authorize?allow_signup=false&client_id=BYO_CLIENT_ID&scope=read%3Auser%2Cnotifications%2Crepo',
+          'https://my.git.com/login/oauth/authorize?allow_signup=false&client_id=BYO_CLIENT_ID&scope=notifications%2Cread%3Auser%2Crepo',
         ),
       );
 
@@ -164,7 +165,7 @@ describe('renderer/utils/auth/utils.ts', () => {
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          'https://github.com/login/oauth/authorize?allow_signup=false&client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
+          'https://github.com/login/oauth/authorize?allow_signup=false&client_id=FAKE_CLIENT_ID_123&scope=notifications%2Cread%3Auser%2Crepo',
         ),
       );
 
@@ -233,7 +234,7 @@ describe('renderer/utils/auth/utils.ts', () => {
           url: 'https://api.github.com/user',
           data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
           headers: {
-            'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
+            'x-oauth-scopes': getRecommendedScopeNames().join(', '),
           },
         });
       });
@@ -248,10 +249,10 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
-            hasRequiredScopes: true,
             hostname: 'github.com' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
+            scopes: getRecommendedScopeNames(),
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
@@ -274,10 +275,10 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
-            hasRequiredScopes: true,
             hostname: 'github.com' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Cloud',
+            scopes: getRecommendedScopeNames(),
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
@@ -299,7 +300,7 @@ describe('renderer/utils/auth/utils.ts', () => {
           data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
           headers: {
             'x-github-enterprise-version': '3.0.0',
-            'x-oauth-scopes': Constants.OAUTH_SCOPES.RECOMMENDED.join(', '),
+            'x-oauth-scopes': getRecommendedScopeNames().join(', '),
           },
         });
       });
@@ -314,10 +315,10 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
-            hasRequiredScopes: true,
             hostname: 'github.gitify.io' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
+            scopes: getRecommendedScopeNames(),
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
@@ -340,10 +341,10 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
-            hasRequiredScopes: true,
             hostname: 'github.gitify.io' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
+            scopes: getRecommendedScopeNames(),
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
@@ -432,7 +433,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         method: 'GitHub App',
       } as Account),
     ).toBe(
-      'https://github.com/settings/connections/applications/27a352516d3341cee376',
+      `https://github.com/settings/connections/applications/${Constants.OAUTH_DEVICE_FLOW_CLIENT_ID}`,
     );
 
     expect(

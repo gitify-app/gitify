@@ -7,6 +7,7 @@ import {
   MarkGithubIcon,
   PersonAddIcon,
   PersonIcon,
+  ShieldCheckIcon,
   SignOutIcon,
   StarFillIcon,
   StarIcon,
@@ -29,14 +30,16 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import { type Account, Size } from '../types';
+import { type Account, type GitifyError, Size } from '../types';
 
+import { determineFailureType } from '../utils/api/errors';
 import {
-  formatAlternateOAuthScopes,
-  formatRecommendedOAuthScopes,
   getAccountUUID,
+  hasAlternateScopes,
+  hasRecommendedScopes,
   refreshAccount,
 } from '../utils/auth/utils';
+import { Errors } from '../utils/errors';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
   openAccountProfile,
@@ -48,16 +51,19 @@ import { saveState } from '../utils/storage';
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { auth, settings, logoutFromAccount } = useAppContext();
+  const { auth, settings, logoutFromAccount, notifications } = useAppContext();
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},
   );
 
+  const [refreshErrorStates, setRefreshErrorStates] = useState<
+    Record<string, GitifyError>
+  >({});
+
   const logoutAccount = useCallback(
     (account: Account) => {
       logoutFromAccount(account);
-      navigate(-1);
     },
     [logoutFromAccount],
   );
@@ -71,12 +77,22 @@ export const AccountsRoute: FC = () => {
   const handleRefresh = async (account: Account) => {
     const accountUUID = getAccountUUID(account);
 
-    setLoadingStates((prev) => ({
-      ...prev,
-      [accountUUID]: true,
-    }));
+    setLoadingStates((prev) => ({ ...prev, [accountUUID]: true }));
+    setRefreshErrorStates((prev) => {
+      const next = { ...prev };
+      delete next[accountUUID];
+      return next;
+    });
 
-    await refreshAccount(account);
+    try {
+      await refreshAccount(account);
+    } catch (err) {
+      setRefreshErrorStates((prev) => ({
+        ...prev,
+        [accountUUID]: determineFailureType(err),
+      }));
+    }
+
     navigate('/accounts', { replace: true });
 
     /**
@@ -103,6 +119,35 @@ export const AccountsRoute: FC = () => {
     return navigate('/login-oauth-app', { replace: true });
   };
 
+  const getAccountError = (account: Account) => {
+    const accountUUID = getAccountUUID(account);
+    return (
+      refreshErrorStates[accountUUID] ??
+      notifications.find((n) => getAccountUUID(n.account) === accountUUID)
+        ?.error ??
+      null
+    );
+  };
+
+  const handleReAuthenticate = (account: Account) => {
+    switch (account.method) {
+      case 'GitHub App':
+        return navigate('/login-device-flow', {
+          replace: true,
+          state: { account },
+        });
+      case 'Personal Access Token':
+        return navigate('/login-personal-access-token', {
+          replace: true,
+          state: { account },
+        });
+      case 'OAuth App':
+        return navigate('/login-oauth-app', { replace: true });
+      default:
+        break;
+    }
+  };
+
   return (
     <Page testId="accounts">
       <Header icon={PersonIcon}>Accounts</Header>
@@ -112,6 +157,8 @@ export const AccountsRoute: FC = () => {
           const AuthMethodIcon = getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);
+          const accountError = getAccountError(account);
+          const hasBadCredentials = accountError === Errors.BAD_CREDENTIALS;
 
           return (
             <div
@@ -176,32 +223,65 @@ export const AccountsRoute: FC = () => {
                         <AuthMethodIcon />
                         <Text>{account.method}</Text>
                       </Stack>
+
+                      {hasBadCredentials && (
+                        <Stack
+                          align="center"
+                          className="cursor-pointer text-gitify-danger"
+                          data-testid="account-bad-credentials"
+                          direction="horizontal"
+                          gap="condensed"
+                          onClick={() => openDeveloperSettings(account)}
+                          title="Open developer settings ↗"
+                        >
+                          <AlertFillIcon />
+                          <Text>Invalid or expired credentials</Text>
+                        </Stack>
+                      )}
                     </Stack>
                   </div>
 
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
-                      aria-label={`This account is missing one or more required scopes: [${formatRecommendedOAuthScopes()}] or [${formatAlternateOAuthScopes()}]`}
-                      className={
-                        account.hasRequiredScopes ? 'invisible' : 'visible'
-                      }
-                      data-testid="account-missing-scopes"
-                      icon={AlertFillIcon}
-                      onClick={() => openDeveloperSettings(account)}
-                      size="small"
-                      style={{ color: 'orange' }}
-                    />
-
-                    <IconButton
-                      aria-label={
-                        i === 0 ? 'Primary account' : 'Set as primary account'
-                      }
+                      aria-label={`Set as primary account (${i === 0 ? 'current primary' : 'click to set'})`}
                       data-testid="account-set-primary"
                       icon={i === 0 ? StarFillIcon : StarIcon}
                       onClick={() => setAsPrimaryAccount(account)}
                       size="small"
                       variant={i === 0 ? 'primary' : 'default'}
                     />
+
+                    {!hasBadCredentials && (
+                      <IconButton
+                        aria-label={`View scopes for ${account.user.login}`}
+                        data-testid="account-view-scopes"
+                        icon={ShieldCheckIcon}
+                        onClick={() =>
+                          navigate('/account-scopes', {
+                            state: { account },
+                          })
+                        }
+                        size="small"
+                        variant={
+                          hasRecommendedScopes(account)
+                            ? 'primary'
+                            : hasAlternateScopes(account)
+                              ? 'default'
+                              : 'danger'
+                        }
+                      />
+                    )}
+
+                    {hasBadCredentials && (
+                      <IconButton
+                        aria-label={`Re-authenticate ${account.user.login}`}
+                        data-testid="account-reauthenticate"
+                        icon={KeyIcon}
+                        onClick={() => handleReAuthenticate(account)}
+                        size="small"
+                        variant="danger"
+                      />
+                    )}
 
                     <IconButton
                       aria-label={`Refresh ${account.user.login}`}

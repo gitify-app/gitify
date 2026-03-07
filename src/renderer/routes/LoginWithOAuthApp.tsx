@@ -117,7 +117,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
     async (data: IFormData) => {
       try {
         await loginWithOAuthApp(data as LoginOAuthWebOptions);
-        navigate(-1);
+        navigate('/');
       } catch (err) {
         rendererLogError(
           'loginWithOAuthApp',

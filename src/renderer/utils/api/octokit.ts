@@ -32,6 +32,18 @@ export function clearOctokitClientCache(): void {
 }
 
 /**
+ * Clear the Octokit client cache for a specific account
+ * Useful when an account token is refreshed or re-authenticated
+ *
+ * @param account The account to clear the cache for
+ */
+export function clearOctokitClientCacheForAccount(account: Account): void {
+  for (const type of ['rest', 'graphql'] as APIClientType[]) {
+    octokitClientCache.delete(getClientCacheKey(account, type));
+  }
+}
+
+/**
  * Create an authenticated Octokit client instance with caching
  * Clients are cached to avoid recreating them for every API call
  *

@@ -1,0 +1,129 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/icons/ScopeStatusIcon.tsx > granted state > renders a success icon when granted 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-check-circle-fill text-gitify-success"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="14"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 12 12"
+        width="14"
+      >
+        <path
+          d="M6 0a6 6 0 1 1 0 12A6 6 0 0 1 6 0Zm-.705 8.737L9.63 4.403 8.392 3.166 5.295 6.263l-1.7-1.702L2.356 5.8l2.938 2.938Z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/components/icons/ScopeStatusIcon.tsx > missing state > renders a danger icon when not granted 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-x-circle-fill text-gitify-danger"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="14"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 12 12"
+        width="14"
+      >
+        <path
+          d="M1.757 10.243a6.001 6.001 0 1 1 8.488-8.486 6.001 6.001 0 0 1-8.488 8.486ZM6 4.763l-2-2L2.763 4l2 2-2 2L4 9.237l2-2 2 2L9.237 8l-2-2 2-2L8 2.763Z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/components/icons/ScopeStatusIcon.tsx > notApplicable state > renders a dash icon when notApplicable 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-dash opacity-30"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="14"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="14"
+      >
+        <path
+          d="M2 7.75A.75.75 0 0 1 2.75 7h10a.75.75 0 0 1 0 1.5h-10A.75.75 0 0 1 2 7.75Z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/components/icons/ScopeStatusIcon.tsx > size prop > renders correctly with a custom size 1`] = `
+<div>
+  <div
+    data-color-mode="light"
+    data-dark-theme="dark"
+    data-light-theme="light"
+  >
+    <div
+      class="prc-src-BaseStyles-aopSS"
+      data-portal-root="true"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-check-circle-fill text-gitify-success"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="20"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="20"
+      >
+        <path
+          d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;

@@ -7,6 +7,12 @@ import {
 
 import { Oops } from './Oops';
 
+const navigateMock = vi.fn();
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
+  useNavigate: () => navigateMock,
+}));
+
 describe('renderer/components/Oops.tsx', () => {
   beforeEach(() => {
     ensureStableEmojis();

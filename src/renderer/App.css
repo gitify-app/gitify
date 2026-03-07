@@ -7,6 +7,12 @@
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
 
+@layer components {
+  .gitify-scope-row {
+    @apply rounded-md py-1.5 px-4 bg-gitify-accounts;
+  }
+}
+
 html,
 body,
 #root {

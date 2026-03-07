@@ -1,3 +1,5 @@
+import { PersonIcon } from '@primer/octicons-react';
+
 import { Constants } from '../constants';
 
 import type { AccountNotifications, ErrorType, GitifyError } from '../types';
@@ -7,11 +9,27 @@ export const Errors: Record<ErrorType, GitifyError> = {
     title: 'Bad Credentials',
     descriptions: ['Your credentials are either invalid or expired.'],
     emojis: Constants.EMOJIS.ERRORS.BAD_CREDENTIALS,
+    actions: [
+      {
+        label: 'Manage Accounts',
+        route: '/accounts',
+        variant: 'danger',
+        icon: PersonIcon,
+      },
+    ],
   },
   MISSING_SCOPES: {
     title: 'Missing Scopes',
     descriptions: ['Your credentials are missing a required API scope.'],
     emojis: Constants.EMOJIS.ERRORS.MISSING_SCOPES,
+    actions: [
+      {
+        label: 'Manage Accounts',
+        route: '/accounts',
+        variant: 'danger',
+        icon: PersonIcon,
+      },
+    ],
   },
   NETWORK: {
     title: 'Network Error',

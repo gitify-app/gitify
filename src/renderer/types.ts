@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { ComponentType, FC } from 'react';
 
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 
@@ -48,7 +48,7 @@ export interface Account {
   hostname: Hostname;
   token: Token;
   user: GitifyUser | null;
-  hasRequiredScopes?: boolean;
+  scopes?: string[];
 }
 
 /**
@@ -174,10 +174,18 @@ export interface GitifyUser {
   id: string;
 }
 
+export interface GitifyErrorAction {
+  label: string;
+  route: string;
+  variant: 'default' | 'danger' | 'primary' | 'invisible';
+  icon: ComponentType;
+}
+
 export interface GitifyError {
   title: string;
   descriptions: string[];
   emojis: string[];
+  actions?: GitifyErrorAction[];
 }
 
 export type ErrorType =

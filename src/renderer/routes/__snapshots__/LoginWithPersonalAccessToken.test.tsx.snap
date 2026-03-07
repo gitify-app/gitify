@@ -233,7 +233,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
                   <u
                     class="prc-Text-Text-9mHv3"
                   >
-                    required scopes
+                    recommended scopes
                   </u>
                 </button>
                 <span
@@ -244,7 +244,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
                   popover="auto"
                   role="tooltip"
                 >
-                  read:user, notifications, repo
+                  notifications, read:user, repo
                 </span>
                  
                 will be automatically selected for you.
