@@ -8,6 +8,7 @@ interface HoverGroupProps {
   children: ReactNode;
   bgColor:
     | 'group-hover:bg-gitify-account-rest'
+    | 'group-hover:bg-gitify-account-error'
     | 'group-hover:bg-gitify-repository'
     | 'group-hover:bg-gitify-notification-hover';
 }

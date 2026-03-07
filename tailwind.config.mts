@@ -50,7 +50,7 @@ const config: Config = {
 
           account: {
             rest: 'var(--control-bgColor-active)',
-            error: 'var(--bgColor-danger-emphasis)',
+            error: 'var(--gitify-account-error-bg)',
           },
 
           repository: 'var(--control-bgColor-disabled)',
@@ -77,6 +77,7 @@ const config: Config = {
       addBase({
         '[data-color-mode="light"]': {
           '--gitify-background': 'var(--bgColor-default)',
+          '--gitify-account-error-bg': 'var(--bgColor-danger-muted)',
 
           '--gitify-scrollbar-track': colors.gray[100],
           '--gitify-scrollbar-thumb': colors.gray[300],
@@ -88,6 +89,7 @@ const config: Config = {
         },
         '[data-color-mode="dark"]': {
           '--gitify-background': 'var(--bgColor-muted)',
+          '--gitify-account-error-bg': 'var(--bgColor-danger-emphasis)',
 
           '--gitify-scrollbar-track': colors.gray[900],
           '--gitify-scrollbar-thumb': colors.gray[700],
