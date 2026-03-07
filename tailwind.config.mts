@@ -76,7 +76,7 @@ const config: Config = {
     },
   },
   plugins: [
-     plugin(({ addBase, addComponents }) => {
+    plugin(({ addBase, addComponents }) => {
       addComponents({
         '.gitify-scope-row': {
           '@apply rounded-md bg-gitify-accounts': {},
@@ -108,7 +108,8 @@ const config: Config = {
           '--gitify-counter-secondary': colors.gray[600],
           '--gitify-counter-text': colors.gray[100],
         },
-      });),
+      });
+    }),
   ],
 };
 
