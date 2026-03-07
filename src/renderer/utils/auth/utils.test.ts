@@ -65,16 +65,16 @@ describe('renderer/utils/auth/utils.ts', () => {
     .spyOn(comms, 'openExternalLink')
     .mockImplementation(vi.fn());
 
+  beforeEach(() => {
+    // Mock OAUTH_DEVICE_FLOW_CLIENT_ID value
+    Constants.OAUTH_DEVICE_FLOW_CLIENT_ID = 'mock-oauth-client-id' as ClientID;
+  });
+
   afterEach(() => {
     vi.clearAllMocks();
   });
 
   describe('performGitHubDeviceOAuth', () => {
-    beforeEach(() => {
-      // Mock OAUTH_DEVICE_FLOW_CLIENT_ID value
-      Constants.OAUTH_DEVICE_FLOW_CLIENT_ID = 'FAKE_CLIENT_ID_123' as ClientID;
-    });
-
     it('should authenticate using device flow for GitHub app', async () => {
       createDeviceCodeMock.mockResolvedValueOnce({
         data: {
@@ -432,7 +432,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         method: 'GitHub App',
       } as Account),
     ).toBe(
-      'https://github.com/settings/connections/applications/27a352516d3341cee376',
+      'https://github.com/settings/connections/applications/mock-oauth-client-id',
     );
 
     expect(
