@@ -107,7 +107,13 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
             />
           </Button>
 
-          <HoverGroup bgColor="group-hover:bg-gitify-account-rest">
+          <HoverGroup
+            bgColor={
+              props.error
+                ? 'group-hover:bg-gitify-account-error'
+                : 'group-hover:bg-gitify-account-rest'
+            }
+          >
             <HoverButton
               action={() => openGitHubIssues(account.hostname)}
               icon={IssueOpenedIcon}
