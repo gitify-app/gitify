@@ -12,7 +12,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
       data-portal-root="true"
     >
       <div
-        class="h-screen prc-Stack-Stack-UQ9k6"
+        class="prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
         data-justify="center"
@@ -77,7 +77,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
       data-portal-root="true"
     >
       <div
-        class="h-screen prc-Stack-Stack-UQ9k6"
+        class="prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
         data-justify="center"

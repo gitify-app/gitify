@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -11,15 +11,12 @@ interface EmojiSplashProps {
   heading: string;
   subHeadings?: string[];
   fullHeight?: boolean;
+  actions?: ReactNode;
 }
 
-export const EmojiSplash: FC<EmojiSplashProps> = ({
-  fullHeight = true,
-  subHeadings = [],
-  ...props
-}: EmojiSplashProps) => {
+export const EmojiSplash: FC<EmojiSplashProps> = (props: EmojiSplashProps) => {
   return (
-    <Centered fullHeight={fullHeight}>
+    <Centered fullHeight={props.fullHeight}>
       <Stack
         align="center"
         direction="vertical"
@@ -31,7 +28,7 @@ export const EmojiSplash: FC<EmojiSplashProps> = ({
           <div className="text-xl font-semibold">{props.heading}</div>
         </Stack>
 
-        {subHeadings.map((description, i) => {
+        {props.subHeadings?.map((description, i) => {
           const key = `error_description_${i}`;
           return (
             <div className="text-center" key={key}>
@@ -39,6 +36,8 @@ export const EmojiSplash: FC<EmojiSplashProps> = ({
             </div>
           );
         })}
+
+        {props.actions && <div className="mt-2">{props.actions}</div>}
       </Stack>
     </Centered>
   );

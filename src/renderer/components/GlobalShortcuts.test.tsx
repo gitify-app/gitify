@@ -1,17 +1,10 @@
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
 import { GlobalShortcuts } from './GlobalShortcuts';
-
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useNavigate: () => navigateMock,
-}));
 
 describe('components/GlobalShortcuts.tsx', () => {
   const fetchNotificationsMock = vi.fn();
@@ -25,11 +18,7 @@ describe('components/GlobalShortcuts.tsx', () => {
   describe('key bindings', () => {
     describe('ignores keys that are not valid', () => {
       it('ignores B key', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-        );
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('b');
 
@@ -39,11 +28,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('home', () => {
       it('navigates home when pressing H key', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-        );
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('h');
 
@@ -57,14 +42,9 @@ describe('components/GlobalShortcuts.tsx', () => {
         .mockImplementation(vi.fn());
 
       it('opens primary account GitHub notifications webpage when pressing N while logged in', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('n');
 
@@ -72,14 +52,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not open primary account GitHub notifications webpage when logged out', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: false,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: false,
+        });
 
         await userEvent.keyboard('n');
 
@@ -89,15 +64,10 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('focus mode', () => {
       it('toggles focus when pressing W while logged in', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            updateSetting: updateSettingMock,
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          updateSetting: updateSettingMock,
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('w');
 
@@ -105,16 +75,11 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle focus mode when loading', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            updateSetting: updateSettingMock,
-            status: 'loading',
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          updateSetting: updateSettingMock,
+          status: 'loading',
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('w');
 
@@ -122,15 +87,10 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle focus mode when logged out', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            updateSetting: updateSettingMock,
-            isLoggedIn: false,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          updateSetting: updateSettingMock,
+          isLoggedIn: false,
+        });
 
         await userEvent.keyboard('w');
 
@@ -140,14 +100,9 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('filters', () => {
       it('toggles filters when pressing F while logged in', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('f');
 
@@ -155,14 +110,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle filters when logged out', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: false,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: false,
+        });
 
         await userEvent.keyboard('f');
 
@@ -176,14 +126,9 @@ describe('components/GlobalShortcuts.tsx', () => {
         .mockImplementation(vi.fn());
 
       it('opens primary account GitHub issues webpage when pressing I while logged in', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('i');
 
@@ -191,14 +136,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not open primary account GitHub issues webpage when logged out', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: false,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: false,
+        });
 
         await userEvent.keyboard('n');
 
@@ -212,14 +152,9 @@ describe('components/GlobalShortcuts.tsx', () => {
         .mockImplementation(vi.fn());
 
       it('opens primary account GitHub pull requests webpage when pressing N while logged in', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('p');
 
@@ -227,14 +162,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not open primary account GitHub pull requests webpage when logged out', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: false,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: false,
+        });
 
         await userEvent.keyboard('n');
 
@@ -244,14 +174,9 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('refresh', () => {
       it('refreshes notifications when pressing R key', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            fetchNotifications: fetchNotificationsMock,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          fetchNotifications: fetchNotificationsMock,
+        });
 
         await userEvent.keyboard('r');
 
@@ -260,14 +185,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not refresh when status is loading', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            status: 'loading',
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          status: 'loading',
+        });
 
         await userEvent.keyboard('r');
 
@@ -277,14 +197,9 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('settings', () => {
       it('toggles settings when pressing S while logged in', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('s');
 
@@ -292,14 +207,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle settings when logged out', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: false,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: false,
+        });
 
         await userEvent.keyboard('s');
 
@@ -309,14 +219,10 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('accounts', () => {
       it('navigates to accounts when pressing A on settings route', async () => {
-        renderWithAppContext(
-          <MemoryRouter initialEntries={['/settings']}>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          initialEntries: ['/settings'],
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('a');
 
@@ -324,14 +230,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not trigger accounts when not on settings route', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('a');
 
@@ -341,14 +242,10 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('quit app', () => {
       it('quits the app when pressing Q on settings route', async () => {
-        renderWithAppContext(
-          <MemoryRouter initialEntries={['/settings']}>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          initialEntries: ['/settings'],
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('q');
 
@@ -356,14 +253,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not quit the app when not on settings route', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         await userEvent.keyboard('q');
 
@@ -374,10 +266,10 @@ describe('components/GlobalShortcuts.tsx', () => {
     describe('modifiers', () => {
       it('ignores shortcuts when typing in an input', async () => {
         renderWithAppContext(
-          <MemoryRouter>
+          <>
             <GlobalShortcuts />
             <input id="test-input" />
-          </MemoryRouter>,
+          </>,
           {
             isLoggedIn: true,
           },
@@ -394,10 +286,10 @@ describe('components/GlobalShortcuts.tsx', () => {
 
       it('ignores shortcuts when typing in a textarea', async () => {
         renderWithAppContext(
-          <MemoryRouter>
+          <>
             <GlobalShortcuts />
             <textarea id="test-textarea" />
-          </MemoryRouter>,
+          </>,
           {
             isLoggedIn: true,
           },
@@ -413,14 +305,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('ignores shortcuts when modifier keys are pressed', async () => {
-        renderWithAppContext(
-          <MemoryRouter>
-            <GlobalShortcuts />
-          </MemoryRouter>,
-          {
-            isLoggedIn: true,
-          },
-        );
+        renderWithAppContext(<GlobalShortcuts />, {
+          isLoggedIn: true,
+        });
 
         const event = new KeyboardEvent('keydown', { key: 'h', metaKey: true });
         navigateMock.mockClear();
