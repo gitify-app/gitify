@@ -67,7 +67,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   beforeEach(() => {
     // Mock OAUTH_DEVICE_FLOW_CLIENT_ID value
-    Constants.OAUTH_DEVICE_FLOW_CLIENT_ID = 'mock-oauth-client-id' as ClientID;
+    Constants.OAUTH_DEVICE_FLOW_CLIENT_ID = 'FAKE_CLIENT_ID_123' as ClientID;
   });
 
   afterEach(() => {
@@ -432,7 +432,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         method: 'GitHub App',
       } as Account),
     ).toBe(
-      'https://github.com/settings/connections/applications/mock-oauth-client-id',
+      'https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123',
     );
 
     expect(
