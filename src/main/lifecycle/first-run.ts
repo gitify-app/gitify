@@ -7,6 +7,10 @@ import { APPLICATION } from '../../shared/constants';
 import { logError } from '../../shared/logger';
 import { isMacOS } from '../../shared/platform';
 
+/**
+ * On first launch, write the first-run marker file and prompt macOS users
+ * to move the app to the Applications folder. No-ops on subsequent launches.
+ */
 export async function onFirstRunMaybe() {
   if (isFirstRun()) {
     await promptMoveToApplicationsFolder();
@@ -38,6 +42,9 @@ async function promptMoveToApplicationsFolder() {
   }
 }
 
+/**
+ * Returns the absolute path to the first-run marker file in the user data directory.
+ */
 const getConfigPath = () => {
   const userDataPath = app.getPath('userData');
   return path.join(userDataPath, 'FirstRun', APPLICATION.FIRST_RUN_FOLDER);

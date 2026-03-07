@@ -20,6 +20,7 @@ export function registerAppHandlers(mb: Menubar): void {
 
   onMainEvent(EVENTS.QUIT, () => mb.app.quit());
 
+  // Path handlers for renderer queries about resource locations
   handleMainEvent(EVENTS.NOTIFICATION_SOUND_PATH, () => {
     return Paths.notificationSound;
   });
