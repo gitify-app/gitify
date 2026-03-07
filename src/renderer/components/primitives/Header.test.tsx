@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
-import { renderWithAppContext,
-  navigateMock
+import {
+  navigateMock,
+  renderWithAppContext,
 } from '../../__helpers__/test-utils';
 
 import { Header } from './Header';
-
 
 describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotificationsMock = vi.fn();

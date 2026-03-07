@@ -1,9 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext,
-  navigateMock
-} from '../__helpers__/test-utils';
+import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 import {
   mockGitHubAppAccount,
   mockOAuthAccount,
@@ -15,7 +13,6 @@ import * as comms from '../utils/comms';
 import * as links from '../utils/links';
 import * as storage from '../utils/storage';
 import { AccountsRoute } from './Accounts';
-
 
 describe('renderer/routes/Accounts.tsx', () => {
   afterEach(() => {

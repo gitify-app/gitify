@@ -1,13 +1,10 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext,
-  navigateMock
-} from '../__helpers__/test-utils';
+import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
 import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
-
 
 describe('renderer/routes/Login.tsx', () => {
   afterEach(() => {

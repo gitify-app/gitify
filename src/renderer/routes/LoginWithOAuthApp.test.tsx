@@ -1,9 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext,
-  navigateMock
-} from '../__helpers__/test-utils';
+import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
 import type { ClientID, ClientSecret, Hostname } from '../types';
 
@@ -14,7 +12,6 @@ import {
   LoginWithOAuthAppRoute,
   validateForm,
 } from './LoginWithOAuthApp';
-
 
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   const loginWithOAuthAppMock = vi.fn();

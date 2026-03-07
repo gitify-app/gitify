@@ -1,13 +1,13 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext,
-  navigateMock
+import {
+  navigateMock,
+  renderWithAppContext,
 } from '../../__helpers__/test-utils';
 
 import * as comms from '../../utils/comms';
 import { SettingsFooter } from './SettingsFooter';
-
 
 describe('renderer/components/settings/SettingsFooter.tsx', () => {
   let originalEnv: NodeJS.ProcessEnv;
@@ -23,7 +23,9 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
   it('should show app version', async () => {
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />, { initialEntries: ['/settings'] });
+      renderWithAppContext(<SettingsFooter />, {
+        initialEntries: ['/settings'],
+      });
     });
 
     expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
@@ -35,7 +37,9 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
       .mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />, { initialEntries: ['/settings'] });
+      renderWithAppContext(<SettingsFooter />, {
+        initialEntries: ['/settings'],
+      });
     });
 
     await userEvent.click(screen.getByTestId('settings-release-notes'));
@@ -48,7 +52,9 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
 
   it('should open account management', async () => {
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />, { initialEntries: ['/settings'] });
+      renderWithAppContext(<SettingsFooter />, {
+        initialEntries: ['/settings'],
+      });
     });
 
     await userEvent.click(screen.getByTestId('settings-accounts'));
@@ -60,7 +66,9 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithAppContext(<SettingsFooter />, { initialEntries: ['/settings'] });
+      renderWithAppContext(<SettingsFooter />, {
+        initialEntries: ['/settings'],
+      });
     });
 
     await userEvent.click(screen.getByTestId('settings-quit'));
