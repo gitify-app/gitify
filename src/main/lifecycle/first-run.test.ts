@@ -32,14 +32,14 @@ vi.mock('electron', () => ({
 }));
 
 const logErrorMock = vi.fn();
-vi.mock('../shared/logger', () => ({
+vi.mock('../../shared/logger', () => ({
   logError: (...a: unknown[]) => logErrorMock(...a),
 }));
 
 let mac = true;
-vi.mock('../shared/platform', () => ({ isMacOS: () => mac }));
+vi.mock('../../shared/platform', () => ({ isMacOS: () => mac }));
 
-import { APPLICATION } from '../shared/constants';
+import { APPLICATION } from '../../shared/constants';
 
 import { onFirstRunMaybe } from './first-run';
 
@@ -47,7 +47,7 @@ function configPath() {
   return path.join('/User/Data', 'FirstRun', APPLICATION.FIRST_RUN_FOLDER);
 }
 
-describe('main/first-run', () => {
+describe('main/lifecycle/first-run', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mac = true;
@@ -98,7 +98,7 @@ describe('main/first-run', () => {
     expect(moveToApplicationsFolderMock).not.toHaveBeenCalled();
   });
 
-  it('skips prompt on non-macOS', async () => {
+  it('does not prompt on non-macOS', async () => {
     mac = false;
     existsSyncMock.mockReturnValueOnce(false);
     existsSyncMock.mockReturnValueOnce(false);

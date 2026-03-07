@@ -2,15 +2,12 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { app, dialog, shell } from 'electron';
+import { app, shell } from 'electron';
 import log from 'electron-log';
 import type { Menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { EVENTS } from '../shared/events';
 import { logError, logInfo } from '../shared/logger';
-
-import { sendRendererEvent } from './events';
 
 export function isDevMode() {
   return !app.isPackaged;
@@ -31,29 +28,10 @@ export function takeScreenshot(mb: Menubar) {
   });
 }
 
-export function resetApp(mb: Menubar) {
-  const cancelButtonId = 0;
-  const resetButtonId = 1;
-
-  const response = dialog.showMessageBoxSync(mb.window, {
-    type: 'warning',
-    title: `Reset ${APPLICATION.NAME}`,
-    message: `Are you sure you want to reset ${APPLICATION.NAME}? You will be logged out of all accounts`,
-    buttons: ['Cancel', 'Reset'],
-    defaultId: cancelButtonId,
-    cancelId: cancelButtonId,
-  });
-
-  if (response === resetButtonId) {
-    sendRendererEvent(mb, EVENTS.RESET_APP);
-    mb.app.quit();
-  }
-}
-
 export function openLogsDirectory() {
-  const logDirectory = path.dirname(log.transports.file?.getFile()?.path);
+  const filePath = log.transports.file?.getFile()?.path;
 
-  if (!logDirectory) {
+  if (!filePath) {
     logError(
       'openLogsDirectory',
       'Could not find log directory!',
@@ -61,6 +39,8 @@ export function openLogsDirectory() {
     );
     return;
   }
+
+  const logDirectory = path.dirname(filePath);
 
   shell.openPath(logDirectory);
 }

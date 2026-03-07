@@ -3,9 +3,9 @@ import path from 'node:path';
 
 import { app, dialog } from 'electron';
 
-import { APPLICATION } from '../shared/constants';
-import { logError } from '../shared/logger';
-import { isMacOS } from '../shared/platform';
+import { APPLICATION } from '../../shared/constants';
+import { logError } from '../../shared/logger';
+import { isMacOS } from '../../shared/platform';
 
 export async function onFirstRunMaybe() {
   if (isFirstRun()) {
@@ -14,7 +14,7 @@ export async function onFirstRunMaybe() {
 }
 
 /**
- * Ask user if the app should be moved to the applications folder (masOS).
+ * Ask user if the app should be moved to the applications folder (macOS).
  */
 async function promptMoveToApplicationsFolder() {
   if (!isMacOS()) {
