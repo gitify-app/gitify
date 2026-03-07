@@ -5,7 +5,8 @@ import type { Menubar } from 'menubar';
 import { APPLICATION } from '../shared/constants';
 import { isMacOS } from '../shared/platform';
 
-import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
+import { resetApp } from './lifecycle/reset';
+import { openLogsDirectory, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
   private readonly checkForUpdatesMenuItem: MenuItem;

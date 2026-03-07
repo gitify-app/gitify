@@ -3,10 +3,14 @@ import path from 'node:path';
 
 import { app, dialog } from 'electron';
 
-import { APPLICATION } from '../shared/constants';
-import { logError } from '../shared/logger';
-import { isMacOS } from '../shared/platform';
+import { APPLICATION } from '../../shared/constants';
+import { logError } from '../../shared/logger';
+import { isMacOS } from '../../shared/platform';
 
+/**
+ * On first launch, write the first-run marker file and prompt macOS users
+ * to move the app to the Applications folder. No-ops on subsequent launches.
+ */
 export async function onFirstRunMaybe() {
   if (isFirstRun()) {
     await promptMoveToApplicationsFolder();
@@ -14,7 +18,7 @@ export async function onFirstRunMaybe() {
 }
 
 /**
- * Ask user if the app should be moved to the applications folder (masOS).
+ * Ask user if the app should be moved to the applications folder (macOS).
  */
 async function promptMoveToApplicationsFolder() {
   if (!isMacOS()) {
@@ -38,6 +42,9 @@ async function promptMoveToApplicationsFolder() {
   }
 }
 
+/**
+ * Returns the absolute path to the first-run marker file in the user data directory.
+ */
 const getConfigPath = () => {
   const userDataPath = app.getPath('userData');
   return path.join(userDataPath, 'FirstRun', APPLICATION.FIRST_RUN_FOLDER);

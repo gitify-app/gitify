@@ -7,8 +7,9 @@ import type { Mock } from 'vitest';
 import { APPLICATION } from '../shared/constants';
 import { isMacOS } from '../shared/platform';
 
+import { resetApp } from './lifecycle/reset';
 import MenuBuilder from './menu';
-import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
+import { openLogsDirectory, takeScreenshot } from './utils';
 
 // Track MenuItem instantiations for test assertions
 const menuItemInstances: Array<{
@@ -44,6 +45,9 @@ vi.mock('electron-updater', () => ({
 vi.mock('./utils', () => ({
   takeScreenshot: vi.fn(),
   openLogsDirectory: vi.fn(),
+}));
+
+vi.mock('./lifecycle/reset', () => ({
   resetApp: vi.fn(),
 }));
 

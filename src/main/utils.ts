@@ -2,20 +2,25 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { app, dialog, shell } from 'electron';
+import { app, shell } from 'electron';
 import log from 'electron-log';
 import type { Menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { EVENTS } from '../shared/events';
 import { logError, logInfo } from '../shared/logger';
 
-import { sendRendererEvent } from './events';
-
-export function isDevMode() {
+/**
+ * Returns true when the app is running in development mode (i.e. not packaged).
+ */
+export function isDevMode(): boolean {
   return !app.isPackaged;
 }
 
+/**
+ * Capture the current window contents and save a PNG file to the user's home directory.
+ * The filename includes an ISO timestamp and the application name.
+ * @param mb - The menubar instance whose window is captured.
+ */
 export function takeScreenshot(mb: Menubar) {
   const date = new Date();
   const dateStr = date.toISOString().replaceAll(':', '-');
@@ -31,29 +36,14 @@ export function takeScreenshot(mb: Menubar) {
   });
 }
 
-export function resetApp(mb: Menubar) {
-  const cancelButtonId = 0;
-  const resetButtonId = 1;
-
-  const response = dialog.showMessageBoxSync(mb.window, {
-    type: 'warning',
-    title: `Reset ${APPLICATION.NAME}`,
-    message: `Are you sure you want to reset ${APPLICATION.NAME}? You will be logged out of all accounts`,
-    buttons: ['Cancel', 'Reset'],
-    defaultId: cancelButtonId,
-    cancelId: cancelButtonId,
-  });
-
-  if (response === resetButtonId) {
-    sendRendererEvent(mb, EVENTS.RESET_APP);
-    mb.app.quit();
-  }
-}
-
+/**
+ * Open the directory containing the application log file in the OS file manager.
+ * Logs an error if the log file path cannot be resolved.
+ */
 export function openLogsDirectory() {
-  const logDirectory = path.dirname(log.transports.file?.getFile()?.path);
+  const logFilePath = log.transports.file?.getFile()?.path;
 
-  if (!logDirectory) {
+  if (!logFilePath) {
     logError(
       'openLogsDirectory',
       'Could not find log directory!',
@@ -62,5 +52,6 @@ export function openLogsDirectory() {
     return;
   }
 
+  const logDirectory = path.dirname(logFilePath);
   shell.openPath(logDirectory);
 }
