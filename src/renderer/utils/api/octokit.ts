@@ -38,9 +38,8 @@ export function clearOctokitClientCache(): void {
  * @param account The account to clear the cache for
  */
 export function clearOctokitClientCacheForAccount(account: Account): void {
-  for (const type of ['rest', 'graphql'] as APIClientType[]) {
-    octokitClientCache.delete(getClientCacheKey(account, type));
-  }
+  octokitClientCache.delete(getClientCacheKey(account, 'rest'));
+  octokitClientCache.delete(getClientCacheKey(account, 'graphql'));
 }
 
 /**
