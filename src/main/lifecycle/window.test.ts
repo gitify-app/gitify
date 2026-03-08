@@ -38,6 +38,7 @@ describe('main/lifecycle/window.ts', () => {
 
   it('configureWindowEvents returns early if no window', () => {
     const mbNoWindow = { ...menubar, window: null };
+
     expect(() => configureWindowEvents(mbNoWindow as Menubar)).not.toThrow();
   });
 

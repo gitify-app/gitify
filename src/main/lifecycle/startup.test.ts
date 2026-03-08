@@ -51,7 +51,9 @@ describe('main/lifecycle/startup.ts', () => {
     it('registers menubar ready handler', () => {
       const mb = createMb();
       const contextMenu = {} as Electron.Menu;
+
       initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
+
       expect(mb.on).toHaveBeenCalledWith('ready', expect.any(Function));
     });
 
@@ -59,7 +61,9 @@ describe('main/lifecycle/startup.ts', () => {
       requestSingleInstanceLockMock.mockReturnValueOnce(false);
       const mb = createMb();
       const contextMenu = {} as Electron.Menu;
+
       initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
+
       expect(appQuitMock).toHaveBeenCalled();
       expect(logWarnMock).toHaveBeenCalled();
     });

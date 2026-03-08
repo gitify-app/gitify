@@ -98,6 +98,7 @@ describe('main/menu.ts', () => {
   describe('checkForUpdatesMenuItem', () => {
     it('default menu configuration', () => {
       const config = getMenuItemConfigByLabel('Check for updates');
+
       expect(config).toBeDefined();
       expect(config?.label).toBe('Check for updates');
       expect(config?.enabled).toBe(true);
@@ -106,12 +107,14 @@ describe('main/menu.ts', () => {
 
     it('should enable menu item', () => {
       menuBuilder.setCheckForUpdatesMenuEnabled(true);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['checkForUpdatesMenuItem'].enabled).toBe(true);
     });
 
     it('should disable menu item', () => {
       menuBuilder.setCheckForUpdatesMenuEnabled(false);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['checkForUpdatesMenuItem'].enabled).toBe(false);
     });
@@ -120,6 +123,7 @@ describe('main/menu.ts', () => {
   describe('noUpdateAvailableMenuItem', () => {
     it('default menu configuration', () => {
       const config = getMenuItemConfigByLabel('No updates available');
+
       expect(config).toBeDefined();
       expect(config?.label).toBe('No updates available');
       expect(config?.enabled).toBe(false);
@@ -128,12 +132,14 @@ describe('main/menu.ts', () => {
 
     it('should show menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(true);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(true);
     });
 
     it('should hide  menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(false);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(false);
     });
@@ -142,6 +148,7 @@ describe('main/menu.ts', () => {
   describe('updateAvailableMenuItem', () => {
     it('default menu configuration', () => {
       const config = getMenuItemConfigByLabel('An update is available');
+
       expect(config).toBeDefined();
       expect(config?.label).toBe('An update is available');
       expect(config?.enabled).toBe(false);
@@ -150,12 +157,14 @@ describe('main/menu.ts', () => {
 
     it('should show menu item', () => {
       menuBuilder.setUpdateAvailableMenuVisibility(true);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(true);
     });
 
     it('should hide menu item', () => {
       menuBuilder.setUpdateAvailableMenuVisibility(false);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(false);
     });
@@ -164,6 +173,7 @@ describe('main/menu.ts', () => {
   describe('updateReadyForInstallMenuItem', () => {
     it('default menu configuration', () => {
       const config = getMenuItemConfigByLabel('Restart to install update');
+
       expect(config).toBeDefined();
       expect(config?.label).toBe('Restart to install update');
       expect(config?.enabled).toBe(true);
@@ -173,12 +183,14 @@ describe('main/menu.ts', () => {
 
     it('should show menu item', () => {
       menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(true);
     });
 
     it('should hide menu item', () => {
       menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
+
       // biome-ignore lint/complexity/useLiteralKeys: This is a test
       expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(false);
     });
@@ -188,14 +200,18 @@ describe('main/menu.ts', () => {
     it('invokes autoUpdater.checkForUpdatesAndNotify when clicking "Check for updates"', () => {
       const cfg = getMenuItemConfigByLabel('Check for updates');
       expect(cfg).toBeDefined();
+
       cfg.click();
+
       expect(autoUpdater.checkForUpdatesAndNotify).toHaveBeenCalled();
     });
 
     it('invokes autoUpdater.quitAndInstall when clicking "Restart to install update"', () => {
       const cfg = getMenuItemConfigByLabel('Restart to install update');
       expect(cfg).toBeDefined();
+
       cfg.click();
+
       expect(autoUpdater.quitAndInstall).toHaveBeenCalled();
     });
 
@@ -234,7 +250,9 @@ describe('main/menu.ts', () => {
     it('quit menu item quits the app', () => {
       const template = buildAndGetTemplate();
       const item = template.find((i) => i.label === `Quit ${APPLICATION.NAME}`);
+
       item.click();
+
       expect(menubar.app.quit).toHaveBeenCalled();
     });
 
@@ -244,6 +262,7 @@ describe('main/menu.ts', () => {
         (item) => item?.label === 'Developer',
       ) as TemplateItem;
       const reloadItem = devEntry.submenu.find((i) => i.role === 'reload');
+
       expect(reloadItem?.accelerator).toBe('CommandOrControl+R');
     });
   });
@@ -272,6 +291,7 @@ describe('main/menu.ts', () => {
       const toggleItem = devEntry.submenu?.find(
         (i) => i.role === 'toggleDevTools',
       );
+
       expect(toggleItem?.accelerator).toBe('Alt+Cmd+I');
     });
 
@@ -294,6 +314,7 @@ describe('main/menu.ts', () => {
       const toggleItem = devEntry.submenu?.find(
         (i) => i.role === 'toggleDevTools',
       );
+
       expect(toggleItem?.accelerator).toBe('Ctrl+Shift+I');
     });
   });

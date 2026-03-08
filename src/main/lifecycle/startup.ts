@@ -24,7 +24,9 @@ export function initializeAppLifecycle(
     mb.app.setAppUserModelId(APPLICATION.ID);
 
     mb.tray.setToolTip(APPLICATION.NAME);
+
     mb.tray.setIgnoreDoubleClickEvents(true);
+
     mb.tray.on('right-click', (_event, bounds) => {
       mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
     });

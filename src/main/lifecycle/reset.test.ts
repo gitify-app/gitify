@@ -30,7 +30,9 @@ describe('main/lifecycle/reset.ts', () => {
   it('sends reset event and quits when user confirms', () => {
     vi.mocked(dialog.showMessageBoxSync).mockReturnValue(1);
     const mb = createMb();
+
     resetApp(mb as unknown as Menubar);
+
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.RESET_APP);
     expect(mb.app.quit).toHaveBeenCalled();
   });
@@ -38,7 +40,9 @@ describe('main/lifecycle/reset.ts', () => {
   it('does nothing when user cancels', () => {
     vi.mocked(dialog.showMessageBoxSync).mockReturnValue(0);
     const mb = createMb();
+
     resetApp(mb as unknown as Menubar);
+
     expect(sendRendererEventMock).not.toHaveBeenCalled();
     expect(mb.app.quit).not.toHaveBeenCalled();
   });

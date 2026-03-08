@@ -3,14 +3,19 @@ import log from 'electron-log';
 import { menubar } from 'menubar';
 
 import { Paths, WindowConfig } from './config';
-import { registerAppHandlers } from './handlers/app';
-import { registerStorageHandlers } from './handlers/storage';
-import { registerSystemHandlers } from './handlers/system';
-import { registerTrayHandlers } from './handlers/tray';
+import {
+  registerAppHandlers,
+  registerStorageHandlers,
+  registerSystemHandlers,
+  registerTrayHandlers,
+} from './handlers';
 import { TrayIcons } from './icons';
-import { onFirstRunMaybe } from './lifecycle/first-run';
-import { handleProtocolURL, initializeAppLifecycle } from './lifecycle/startup';
-import { configureWindowEvents } from './lifecycle/window';
+import {
+  configureWindowEvents,
+  handleProtocolURL,
+  initializeAppLifecycle,
+  onFirstRunMaybe,
+} from './lifecycle';
 import MenuBuilder from './menu';
 import AppUpdater from './updater';
 import { isDevMode } from './utils';

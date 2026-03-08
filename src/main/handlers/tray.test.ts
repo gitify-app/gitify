@@ -31,19 +31,23 @@ describe('main/handlers/tray.ts', () => {
     } as unknown as Menubar;
   });
 
-  it('registers handlers without throwing', () => {
-    expect(() => registerTrayHandlers(menubar)).not.toThrow();
-  });
+  describe('registerTrayHandlers', () => {
+    it('registers handlers without throwing', () => {
+      expect(() => registerTrayHandlers(menubar)).not.toThrow();
+    });
 
-  it('registers expected IPC event handlers', () => {
-    registerTrayHandlers(menubar);
+    it('registers expected tray IPC event handlers', () => {
+      registerTrayHandlers(menubar);
 
-    const registeredEvents = onMock.mock.calls.map((call: [string]) => call[0]);
+      const registeredEvents = onMock.mock.calls.map(
+        (call: [string]) => call[0],
+      );
 
-    expect(registeredEvents).toContain(EVENTS.USE_ALTERNATE_IDLE_ICON);
-    expect(registeredEvents).toContain(EVENTS.USE_UNREAD_ACTIVE_ICON);
-    expect(registeredEvents).toContain(EVENTS.UPDATE_ICON_COLOR);
-    expect(registeredEvents).toContain(EVENTS.UPDATE_ICON_TITLE);
+      expect(registeredEvents).toContain(EVENTS.USE_ALTERNATE_IDLE_ICON);
+      expect(registeredEvents).toContain(EVENTS.USE_UNREAD_ACTIVE_ICON);
+      expect(registeredEvents).toContain(EVENTS.UPDATE_ICON_COLOR);
+      expect(registeredEvents).toContain(EVENTS.UPDATE_ICON_TITLE);
+    });
   });
 
   it('skips tray updates when tray is destroyed', () => {

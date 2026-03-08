@@ -9,6 +9,7 @@ import { TrayIcons } from '../icons';
 let shouldUseAlternateIdleIcon = false;
 let shouldUseUnreadActiveIcon = true;
 
+// TODO: Refactor to use ITrayColorUpdate type
 function setIdleIcon(mb: Menubar): void {
   if (shouldUseAlternateIdleIcon) {
     mb.tray.setImage(TrayIcons.idleAlternate);

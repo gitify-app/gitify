@@ -29,6 +29,7 @@ export function takeScreenshot(mb: Menubar) {
     os.homedir(),
     `${dateStr}-${APPLICATION.NAME}-screenshot.png`,
   );
+
   mb.window.capturePage().then((img) => {
     fs.writeFile(capturedPicFilePath, img.toPNG(), () =>
       logInfo('takeScreenshot', `Screenshot saved ${capturedPicFilePath}`),

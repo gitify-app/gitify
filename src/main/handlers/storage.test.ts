@@ -24,18 +24,20 @@ describe('main/handlers/storage.ts', () => {
     vi.clearAllMocks();
   });
 
-  it('registers handlers without throwing', () => {
-    expect(() => registerStorageHandlers()).not.toThrow();
-  });
+  describe('registerStorageHandlers', () => {
+    it('registers handlers without throwing', () => {
+      expect(() => registerStorageHandlers()).not.toThrow();
+    });
 
-  it('registers SAFE_STORAGE_ENCRYPT and SAFE_STORAGE_DECRYPT handlers', () => {
-    registerStorageHandlers();
+    it('registers expected storage IPC event handlers', () => {
+      registerStorageHandlers();
 
-    const registeredHandlers = handleMock.mock.calls.map(
-      (call: [string]) => call[0],
-    );
+      const registeredHandlers = handleMock.mock.calls.map(
+        (call: [string]) => call[0],
+      );
 
-    expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_ENCRYPT);
-    expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_DECRYPT);
+      expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_ENCRYPT);
+      expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_DECRYPT);
+    });
   });
 });

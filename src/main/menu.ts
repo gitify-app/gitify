@@ -8,6 +8,9 @@ import { isMacOS } from '../shared/platform';
 import { resetApp } from './lifecycle/reset';
 import { openLogsDirectory, takeScreenshot } from './utils';
 
+/**
+ * MenuBuilder constructs the right-click context menu for the tray icon and provides methods to update menu item states.
+ */
 export default class MenuBuilder {
   private readonly checkForUpdatesMenuItem: MenuItem;
   private readonly noUpdateAvailableMenuItem: MenuItem;
@@ -16,6 +19,9 @@ export default class MenuBuilder {
 
   private readonly menubar: Menubar;
 
+  /**
+   * @param menubar - The menubar instance used for window and app interactions within menu actions.
+   */
   constructor(menubar: Menubar) {
     this.menubar = menubar;
 
@@ -49,6 +55,9 @@ export default class MenuBuilder {
     });
   }
 
+  /**
+   * Build and return the tray right-click context menu.
+   */
   buildMenu(): Menu {
     const contextMenu = Menu.buildFromTemplate([
       this.checkForUpdatesMenuItem,
@@ -111,18 +120,39 @@ export default class MenuBuilder {
     return contextMenu;
   }
 
+  /**
+   * Enable or disable the "Check for updates" menu item.
+   * Disabled while an update check is in progress.
+   *
+   * @param enabled - Whether the menu item should be clickable.
+   */
   setCheckForUpdatesMenuEnabled(enabled: boolean) {
     this.checkForUpdatesMenuItem.enabled = enabled;
   }
 
+  /**
+   * Show or hide the "No updates available" status menu item.
+   *
+   * @param isVisible - Whether the item should be visible.
+   */
   setNoUpdateAvailableMenuVisibility(isVisible: boolean) {
     this.noUpdateAvailableMenuItem.visible = isVisible;
   }
 
+  /**
+   * Show or hide the "An update is available" status menu item.
+   *
+   * @param isVisible - Whether the item should be visible.
+   */
   setUpdateAvailableMenuVisibility(isVisible: boolean) {
     this.updateAvailableMenuItem.visible = isVisible;
   }
 
+  /**
+   * Show or hide the "Restart to install update" menu item.
+   *
+   * @param isVisible - Whether the item should be visible.
+   */
   setUpdateReadyForInstallMenuVisibility(isVisible: boolean) {
     this.updateReadyForInstallMenuItem.visible = isVisible;
   }

@@ -37,17 +37,21 @@ describe('main/handlers/system.ts', () => {
     } as unknown as Menubar;
   });
 
-  it('registers handlers without throwing', () => {
-    expect(() => registerSystemHandlers(menubar)).not.toThrow();
-  });
+  describe('registerSystemHandlers', () => {
+    it('registers handlers without throwing', () => {
+      expect(() => registerSystemHandlers(menubar)).not.toThrow();
+    });
 
-  it('registers expected IPC event handlers', () => {
-    registerSystemHandlers(menubar);
+    it('registers expected system IPC event handlers', () => {
+      registerSystemHandlers(menubar);
 
-    const registeredEvents = onMock.mock.calls.map((call: [string]) => call[0]);
+      const registeredEvents = onMock.mock.calls.map(
+        (call: [string]) => call[0],
+      );
 
-    expect(registeredEvents).toContain(EVENTS.OPEN_EXTERNAL);
-    expect(registeredEvents).toContain(EVENTS.UPDATE_KEYBOARD_SHORTCUT);
-    expect(registeredEvents).toContain(EVENTS.UPDATE_AUTO_LAUNCH);
+      expect(registeredEvents).toContain(EVENTS.OPEN_EXTERNAL);
+      expect(registeredEvents).toContain(EVENTS.UPDATE_KEYBOARD_SHORTCUT);
+      expect(registeredEvents).toContain(EVENTS.UPDATE_AUTO_LAUNCH);
+    });
   });
 });
