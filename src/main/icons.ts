@@ -9,5 +9,5 @@ export const TrayIcons = {
 };
 
 function getIconPath(iconName: string) {
-  return path.join(__dirname, '..', 'assets', 'images', iconName);
+  return path.resolve(__dirname, 'assets', 'images', iconName);
 }
