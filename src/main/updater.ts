@@ -122,8 +122,8 @@ export default class AppUpdater {
     try {
       logInfo('app updater', 'Checking for updates on application launch');
       await autoUpdater.checkForUpdatesAndNotify();
-    } catch (e) {
-      logError('auto updater', 'Initial check failed', e as Error);
+    } catch (err) {
+      logError('auto updater', 'Initial check failed', err as Error);
     }
   }
 
