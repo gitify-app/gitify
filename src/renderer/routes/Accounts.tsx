@@ -30,7 +30,7 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import { type Account, type GitifyError, Size } from '../types';
+import { type Account, type GitifyError, IconColor, Size } from '../types';
 
 import { determineFailureType } from '../utils/api/errors';
 import {
@@ -258,7 +258,17 @@ export const AccountsRoute: FC = () => {
                       <IconButton
                         aria-label={`View scopes for ${account.user.login}`}
                         data-testid="account-view-scopes"
-                        icon={ShieldCheckIcon}
+                        icon={() => (
+                          <ShieldCheckIcon
+                            className={
+                              hasRecommendedScopes(account)
+                                ? IconColor.GREEN
+                                : hasAlternateScopes(account)
+                                  ? 'text-gitify-warning'
+                                  : ''
+                            }
+                          />
+                        )}
                         onClick={() =>
                           navigate('/account-scopes', {
                             state: { account },
@@ -266,11 +276,10 @@ export const AccountsRoute: FC = () => {
                         }
                         size="small"
                         variant={
-                          hasRecommendedScopes(account)
-                            ? 'primary'
-                            : hasAlternateScopes(account)
-                              ? 'default'
-                              : 'danger'
+                          !hasRecommendedScopes(account) &&
+                          !hasAlternateScopes(account)
+                            ? 'danger'
+                            : 'default'
                         }
                       />
                     )}
