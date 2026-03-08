@@ -4,7 +4,7 @@ import { Button, Stack, useConfirm } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
 
-import { rendererLogInfo } from '../../utils/logger';
+import { rendererLogInfo } from '../../utils/core/logger';
 
 export const SettingsReset: FC = () => {
   const { resetSettings } = useAppContext();

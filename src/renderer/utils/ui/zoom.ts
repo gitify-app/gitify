@@ -1,6 +1,6 @@
-import { defaultSettings } from '../context/defaults';
+import { defaultSettings } from '../../context/defaults';
 
-import type { Percentage } from '../types';
+import type { Percentage } from '../../types';
 
 const MINIMUM_ZOOM_PERCENTAGE = 0 as Percentage;
 const MAXIMUM_ZOOM_PERCENTAGE = 120 as Percentage;

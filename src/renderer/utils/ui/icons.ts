@@ -20,8 +20,8 @@ import {
   IconColor,
   type PullRequestApprovalIcon,
   type UserType,
-} from '../types';
-import type { AuthMethod, PlatformType } from './auth/types';
+} from '../../types';
+import type { AuthMethod, PlatformType } from '../auth/types';
 
 export function getPullRequestReviewIcon(
   review: GitifyPullRequestReview,

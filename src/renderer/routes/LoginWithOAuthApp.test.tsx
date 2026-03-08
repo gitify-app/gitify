@@ -5,8 +5,8 @@ import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
 import type { ClientID, ClientSecret, Hostname } from '../types';
 
-import * as comms from '../utils/comms';
-import * as logger from '../utils/logger';
+import * as logger from '../utils/core/logger';
+import * as comms from '../utils/system/comms';
 import {
   type IFormData,
   LoginWithOAuthAppRoute,

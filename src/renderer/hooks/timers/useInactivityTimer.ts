@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { isOnline } from '../../utils/network';
+import { isOnline } from '../../utils/system/network';
 
 const events = ['mousedown', 'keypress', 'click'];
 

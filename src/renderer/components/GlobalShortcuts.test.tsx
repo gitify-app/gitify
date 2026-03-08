@@ -2,8 +2,8 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
-import * as comms from '../utils/comms';
-import * as links from '../utils/links';
+import * as comms from '../utils/system/comms';
+import * as links from '../utils/system/links';
 import { GlobalShortcuts } from './GlobalShortcuts';
 
 describe('components/GlobalShortcuts.tsx', () => {

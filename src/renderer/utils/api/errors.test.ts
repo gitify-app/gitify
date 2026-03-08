@@ -3,8 +3,8 @@ import { RequestError } from '@octokit/request-error';
 
 import { EVENTS } from '../../../shared/events';
 
-import { Errors } from '../errors';
-import * as rendererLogger from '../logger';
+import { Errors } from '../core/errors';
+import * as rendererLogger from '../core/logger';
 import { determineFailureType, handleGraphQLResponseError } from './errors';
 
 describe('renderer/utils/api/errors.ts', () => {

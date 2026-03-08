@@ -24,7 +24,7 @@ import {
   getRequiredScopeNames,
   hasRequiredScopes,
 } from '../utils/auth/utils';
-import { openDeveloperSettings } from '../utils/links';
+import { openDeveloperSettings } from '../utils/system/links';
 
 interface LocationState {
   account: Account;

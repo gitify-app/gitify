@@ -10,7 +10,7 @@ import type { Chevron, GitifyNotification, Hostname, Link } from '../types';
 import type { PlatformType } from './auth/types';
 
 import { getHtmlUrl } from './api/client';
-import { rendererLogError } from './logger';
+import { rendererLogError } from './core/logger';
 import { createNotificationHandler } from './notifications/handlers';
 
 export interface ParsedCodePart {

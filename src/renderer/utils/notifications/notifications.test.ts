@@ -20,7 +20,7 @@ import {
   type SettingsState,
 } from '../../types';
 
-import * as logger from '../../utils/logger';
+import * as logger from '../../utils/core/logger';
 import * as apiClient from '../api/client';
 import {
   enrichNotification,

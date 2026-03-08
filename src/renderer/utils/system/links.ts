@@ -1,6 +1,6 @@
-import { APPLICATION } from '../../shared/constants';
+import { APPLICATION } from '../../../shared/constants';
 
-import { Constants } from '../constants';
+import { Constants } from '../../constants';
 
 import type {
   Account,
@@ -9,11 +9,11 @@ import type {
   GitifyRepository,
   Hostname,
   Link,
-} from '../types';
+} from '../../types';
 
-import { getDeveloperSettingsURL } from './auth/utils';
+import { getDeveloperSettingsURL } from '../auth/utils';
+import { generateGitHubWebUrl } from '../helpers';
 import { openExternalLink } from './comms';
-import { generateGitHubWebUrl } from './helpers';
 
 export function openGitifyReleaseNotes(version: string) {
   openExternalLink(

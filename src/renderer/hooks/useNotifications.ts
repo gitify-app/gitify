@@ -18,18 +18,18 @@ import { getAccountUUID } from '../utils/auth/utils';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
-} from '../utils/errors';
+} from '../utils/core/errors';
+import { rendererLogError } from '../utils/core/logger';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
-import { rendererLogError } from '../utils/logger';
-import { raiseNativeNotification } from '../utils/notifications/native';
 import {
   getAllNotifications,
   getNotificationCount,
   getUnreadNotificationCount,
 } from '../utils/notifications/notifications';
 import { removeNotificationsForAccount } from '../utils/notifications/remove';
-import { raiseSoundNotification } from '../utils/notifications/sound';
 import { getNewNotifications } from '../utils/notifications/utils';
+import { raiseSoundNotification } from '../utils/system/audio';
+import { raiseNativeNotification } from '../utils/system/native';
 
 interface NotificationsState {
   status: Status;

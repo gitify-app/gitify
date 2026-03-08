@@ -13,11 +13,11 @@ import {
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
 
 import * as apiClient from '../utils/api/client';
-import { Errors } from '../utils/errors';
-import * as logger from '../utils/logger';
-import * as native from '../utils/notifications/native';
+import { Errors } from '../utils/core/errors';
+import * as logger from '../utils/core/logger';
 import * as notificationsUtils from '../utils/notifications/notifications';
-import * as sound from '../utils/notifications/sound';
+import * as sound from '../utils/system/audio';
+import * as native from '../utils/system/native';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {

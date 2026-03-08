@@ -11,7 +11,7 @@ import { Centered } from '../components/layout/Centered';
 
 import { Size } from '../types';
 
-import { showWindow } from '../utils/comms';
+import { showWindow } from '../utils/system/comms';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();

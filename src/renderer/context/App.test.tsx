@@ -20,9 +20,9 @@ import type {
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import * as authUtils from '../utils/auth/utils';
+import * as storage from '../utils/core/storage';
 import * as notifications from '../utils/notifications/notifications';
-import * as storage from '../utils/storage';
-import * as tray from '../utils/tray';
+import * as tray from '../utils/system/tray';
 import { type AppContextState, AppProvider } from './App';
 import { defaultSettings } from './defaults';
 

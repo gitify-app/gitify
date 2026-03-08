@@ -7,8 +7,8 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { GroupBy } from '../../types';
 
-import * as comms from '../../utils/comms';
-import * as links from '../../utils/links';
+import * as comms from '../../utils/system/comms';
+import * as links from '../../utils/system/links';
 import { NotificationRow, type NotificationRowProps } from './NotificationRow';
 
 describe('renderer/components/notifications/NotificationRow.tsx', () => {

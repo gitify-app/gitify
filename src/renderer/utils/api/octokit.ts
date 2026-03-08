@@ -9,7 +9,7 @@ import type { Account } from '../../types';
 import type { APIClientType } from './types';
 
 import { getAccountUUID } from '../auth/utils';
-import { decryptValue, getAppVersion } from '../comms';
+import { decryptValue, getAppVersion } from '../system/comms';
 import { getGitHubAPIBaseUrl } from './utils';
 
 // Create the Octokit type with plugins

@@ -1,7 +1,8 @@
-import { mockSettings } from '../__mocks__/state-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { type Link, OpenPreference } from '../types';
+import { type Link, OpenPreference } from '../../types';
 
+import * as storage from '../core/storage';
 import {
   copyToClipboard,
   decryptValue,
@@ -17,7 +18,6 @@ import {
   updateTrayColor,
   updateTrayTitle,
 } from './comms';
-import * as storage from './storage';
 
 describe('renderer/utils/comms.ts', () => {
   afterEach(() => {

@@ -6,7 +6,7 @@ import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
 import type { GitifyNotificationUser, Link } from '../../types';
 
-import * as comms from '../../utils/comms';
+import * as comms from '../../utils/system/comms';
 import {
   NotificationFooter,
   type NotificationFooterProps,

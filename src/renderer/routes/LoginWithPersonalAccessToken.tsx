@@ -36,8 +36,8 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import { openExternalLink } from '../utils/comms';
-import { rendererLogError } from '../utils/logger';
+import { rendererLogError } from '../utils/core/logger';
+import { openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
   account?: Account;

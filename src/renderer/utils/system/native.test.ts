@@ -8,7 +8,7 @@ import {
 import * as helpers from '../helpers';
 import * as native from './native';
 
-describe('renderer/utils/notifications/native.ts', () => {
+describe('renderer/utils/system/native.ts', () => {
   const mockHtmlUrl =
     mockSingleAccountNotifications[0].notifications[0].repository.htmlUrl;
 

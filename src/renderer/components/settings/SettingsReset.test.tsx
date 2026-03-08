@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 
-import * as logger from '../../utils/logger';
+import * as logger from '../../utils/core/logger';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {

@@ -1,14 +1,14 @@
-import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
-import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
-import { mockGitifyNotificationUser } from '../__mocks__/user-mocks';
+import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
+import { mockGitifyNotificationUser } from '../../__mocks__/user-mocks';
 
-import { Constants } from '../constants';
+import { Constants } from '../../constants';
 
-import type { GitifyRepository, Link } from '../types';
+import type { GitifyRepository, Link } from '../../types';
 
-import * as authUtils from './auth/utils';
+import * as authUtils from '../auth/utils';
+import * as helpers from '../helpers';
 import * as comms from './comms';
-import * as helpers from './helpers';
 import {
   openAccountProfile,
   openDeveloperSettings,

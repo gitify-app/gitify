@@ -48,6 +48,7 @@ import {
   removeAccount,
   startGitHubDeviceFlow,
 } from '../utils/auth/utils';
+import { clearState, loadState, saveState } from '../utils/core/storage';
 import {
   decryptValue,
   encryptValue,
@@ -55,8 +56,8 @@ import {
   setKeyboardShortcut,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
-} from '../utils/comms';
-import { clearState, loadState, saveState } from '../utils/storage';
+} from '../utils/system/comms';
+import { setTrayIconColorAndTitle } from '../utils/system/tray';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
   DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
@@ -64,9 +65,8 @@ import {
   DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
-} from '../utils/theme';
-import { setTrayIconColorAndTitle } from '../utils/tray';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/zoom';
+} from '../utils/ui/theme';
+import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
 import { defaultAuth, defaultSettings } from './defaults';
 
 export interface AppContextState {

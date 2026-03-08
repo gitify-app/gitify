@@ -1,6 +1,6 @@
-import { Constants } from '../constants';
+import { Constants } from '../../constants';
 
-import type { GitifyState } from '../types';
+import type { GitifyState } from '../../types';
 
 export function loadState(): GitifyState {
   const existing = localStorage.getItem(Constants.STORAGE_KEY);

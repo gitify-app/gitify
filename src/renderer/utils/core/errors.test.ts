@@ -1,6 +1,6 @@
-import { mockAccountWithError } from '../__mocks__/account-mocks';
+import { mockAccountWithError } from '../../__mocks__/account-mocks';
 
-import type { AccountNotifications } from '../types';
+import type { AccountNotifications } from '../../types';
 
 import {
   areAllAccountErrorsSame,

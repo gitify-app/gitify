@@ -5,8 +5,8 @@ import { EVENTS } from '../../../shared/events';
 
 import type { GitifyError } from '../../types';
 
-import { Errors } from '../errors';
-import { rendererLogError } from '../logger';
+import { Errors } from '../core/errors';
+import { rendererLogError } from '../core/logger';
 
 /**
  * Determine the failure type based on an error.

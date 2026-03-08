@@ -17,11 +17,11 @@ import { Title } from '../primitives/Title';
 import { IconColor, type SearchToken, Size } from '../../types';
 
 import { useFiltersStore } from '../../stores';
-import { cn } from '../../utils/cn';
 import {
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
 } from '../../utils/notifications/filters/search';
+import { cn } from '../../utils/ui/cn';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 

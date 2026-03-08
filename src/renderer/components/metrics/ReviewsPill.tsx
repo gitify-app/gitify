@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import type { GitifyPullRequestReview } from '../../types';
 
-import { getPullRequestReviewIcon } from '../../utils/icons';
+import { getPullRequestReviewIcon } from '../../utils/ui/icons';
 import { MetricPill } from './MetricPill';
 
 export interface ReviewsPillProps {

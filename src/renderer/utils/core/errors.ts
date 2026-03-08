@@ -1,8 +1,8 @@
 import { PersonIcon } from '@primer/octicons-react';
 
-import { Constants } from '../constants';
+import { Constants } from '../../constants';
 
-import type { AccountNotifications, ErrorType, GitifyError } from '../types';
+import type { AccountNotifications, ErrorType, GitifyError } from '../../types';
 
 export const Errors: Record<ErrorType, GitifyError> = {
   BAD_CREDENTIALS: {

@@ -1,6 +1,6 @@
-import { logError, logInfo, logWarn } from '../../shared/logger';
+import { logError, logInfo, logWarn } from '../../../shared/logger';
 
-import type { GitifyNotification } from '../types';
+import type { GitifyNotification } from '../../types';
 
 // Renderer logger augments log entries with notification context formatting.
 export function rendererLogInfo(

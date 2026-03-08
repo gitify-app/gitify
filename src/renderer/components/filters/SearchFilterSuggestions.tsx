@@ -6,12 +6,12 @@ import { useAppContext } from '../../hooks/useAppContext';
 
 import { Opacity } from '../../types';
 
-import { cn } from '../../utils/cn';
 import {
   ALL_SEARCH_QUALIFIERS,
   BASE_SEARCH_QUALIFIERS,
   SEARCH_DELIMITER,
 } from '../../utils/notifications/filters/search';
+import { cn } from '../../utils/ui/cn';
 
 interface SearchFilterSuggestionsProps {
   open: boolean;

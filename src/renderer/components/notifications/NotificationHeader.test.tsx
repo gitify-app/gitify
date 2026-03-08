@@ -7,7 +7,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { GroupBy } from '../../types';
 
-import * as comms from '../../utils/comms';
+import * as comms from '../../utils/system/comms';
 import {
   NotificationHeader,
   type NotificationHeaderProps,

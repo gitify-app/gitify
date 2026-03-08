@@ -21,8 +21,8 @@ import { Header } from '../components/primitives/Header';
 import type { Account, Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
-import { copyToClipboard, openExternalLink } from '../utils/comms';
-import { rendererLogError } from '../utils/logger';
+import { rendererLogError } from '../utils/core/logger';
+import { copyToClipboard, openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
   account?: Account;

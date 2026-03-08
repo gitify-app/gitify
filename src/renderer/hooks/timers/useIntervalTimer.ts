@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { isOnline } from '../../utils/network';
+import { isOnline } from '../../utils/system/network';
 
 /**
  * Hook that triggers a callback after a specified period of time.

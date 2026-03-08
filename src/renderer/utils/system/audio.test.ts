@@ -6,9 +6,9 @@ import {
   decreaseVolume,
   increaseVolume,
   volumePercentageToLevel,
-} from './sound';
+} from './audio';
 
-describe('renderer/utils/notifications/sound.ts', () => {
+describe('renderer/utils/system/audio.ts', () => {
   it('should convert percentage to sound level', () => {
     expect(volumePercentageToLevel(100 as Percentage)).toBe(1);
     expect(volumePercentageToLevel(50 as Percentage)).toBe(0.5);

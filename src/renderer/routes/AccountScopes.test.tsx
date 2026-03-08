@@ -10,7 +10,7 @@ import {
 
 import type { Account } from '../types';
 
-import * as links from '../utils/links';
+import * as links from '../utils/system/links';
 import { AccountScopesRoute } from './AccountScopes';
 
 const navigateMock = vi.fn();

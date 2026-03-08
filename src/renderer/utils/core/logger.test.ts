@@ -1,6 +1,6 @@
-import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
+import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
-import * as logger from '../../shared/logger';
+import * as logger from '../../../shared/logger';
 
 import { rendererLogError, rendererLogInfo, rendererLogWarn } from './logger';
 

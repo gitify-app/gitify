@@ -38,9 +38,9 @@ import type {
 import type { GetAuthenticatedUserResponse } from '../api/types';
 import type { AuthMethod, LoginOAuthWebOptions } from './types';
 
-import * as comms from '../../utils/comms';
+import * as comms from '../../utils/system/comms';
 import * as apiClient from '../api/client';
-import * as logger from '../logger';
+import * as logger from '../core/logger';
 import * as authUtils from './utils';
 import {
   getGitHubAuthBaseUrl,

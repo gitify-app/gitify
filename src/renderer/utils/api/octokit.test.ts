@@ -4,7 +4,7 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../__mocks__/account-mocks';
 
-import * as comms from '../comms';
+import * as comms from '../system/comms';
 import {
   clearOctokitClientCache,
   createOctokitClient,

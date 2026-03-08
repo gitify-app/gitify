@@ -1,4 +1,4 @@
-import type { Percentage } from '../types';
+import type { Percentage } from '../../types';
 
 import {
   canDecreaseZoom,

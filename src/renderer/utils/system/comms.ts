@@ -1,8 +1,8 @@
-import { defaultSettings } from '../context/defaults';
+import { defaultSettings } from '../../context/defaults';
 
-import { type Link, OpenPreference } from '../types';
+import { type Link, OpenPreference } from '../../types';
 
-import { loadState } from './storage';
+import { loadState } from '../core/storage';
 
 export function openExternalLink(url: Link): void {
   // Load the state from local storage to avoid having to pass settings as a parameter

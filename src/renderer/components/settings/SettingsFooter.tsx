@@ -9,8 +9,8 @@ import { useShortcutActions } from '../../hooks/useShortcutActions';
 
 import { Footer } from '../primitives/Footer';
 
-import { getAppVersion } from '../../utils/comms';
-import { openGitifyReleaseNotes } from '../../utils/links';
+import { getAppVersion } from '../../utils/system/comms';
+import { openGitifyReleaseNotes } from '../../utils/system/links';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);

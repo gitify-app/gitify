@@ -1,6 +1,6 @@
-import { mockSettings } from '../__mocks__/state-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
 
-import type { SettingsState } from '../types';
+import type { SettingsState } from '../../types';
 
 import * as comms from './comms';
 import { setTrayIconColorAndTitle } from './tray';

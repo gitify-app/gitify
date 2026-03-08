@@ -7,7 +7,7 @@ import {
   OrganizationIcon,
 } from '@primer/octicons-react';
 
-import { type GitifyPullRequestReview, IconColor } from '../types';
+import { type GitifyPullRequestReview, IconColor } from '../../types';
 
 import {
   getAuthMethodIcon,

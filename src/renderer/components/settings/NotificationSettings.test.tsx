@@ -6,7 +6,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { Constants } from '../../constants';
 
-import * as comms from '../../utils/comms';
+import * as comms from '../../utils/system/comms';
 import { NotificationSettings } from './NotificationSettings';
 
 describe('renderer/components/settings/NotificationSettings.tsx', () => {
