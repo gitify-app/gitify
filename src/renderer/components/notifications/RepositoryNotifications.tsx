@@ -10,11 +10,11 @@ import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
-import { cn } from '../../utils/cn';
-import { isMarkAsDoneFeatureSupported } from '../../utils/features';
-import { getChevronDetails } from '../../utils/helpers';
-import { openRepository } from '../../utils/links';
+import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
+import { openRepository } from '../../utils/system/links';
+import { cn } from '../../utils/ui/cn';
+import { getChevronDetails } from '../../utils/ui/display';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { NotificationRow } from './NotificationRow';
 

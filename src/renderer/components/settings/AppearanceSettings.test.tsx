@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 
-import * as zoom from '../../utils/zoom';
+import * as zoom from '../../utils/ui/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {

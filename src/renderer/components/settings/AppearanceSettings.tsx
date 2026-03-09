@@ -31,7 +31,7 @@ import {
   increaseZoom,
   resetZoomLevel,
   zoomLevelToPercentage,
-} from '../../utils/zoom';
+} from '../../utils/ui/zoom';
 
 export const AppearanceSettings: FC = () => {
   const { auth, settings, updateSetting } = useAppContext();

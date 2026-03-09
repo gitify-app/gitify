@@ -9,9 +9,9 @@ import {
 } from '../__mocks__/account-mocks';
 
 import * as authUtils from '../utils/auth/utils';
-import * as comms from '../utils/comms';
-import * as links from '../utils/links';
-import * as storage from '../utils/storage';
+import * as storage from '../utils/core/storage';
+import * as comms from '../utils/system/comms';
+import * as links from '../utils/system/links';
 import { AccountsRoute } from './Accounts';
 
 describe('renderer/routes/Accounts.tsx', () => {

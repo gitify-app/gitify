@@ -11,8 +11,8 @@ import type {
   SettingsState,
 } from '../../../types';
 
-import { actionsURL } from '../../helpers';
 import { DefaultHandler } from './default';
+import { actionsURL } from './utils';
 
 export interface WorkflowRunAttributes {
   user: string;

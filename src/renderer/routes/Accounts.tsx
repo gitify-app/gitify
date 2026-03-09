@@ -39,14 +39,14 @@ import {
   hasRecommendedScopes,
   refreshAccount,
 } from '../utils/auth/utils';
-import { Errors } from '../utils/errors';
-import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
+import { Errors } from '../utils/core/errors';
+import { saveState } from '../utils/core/storage';
 import {
   openAccountProfile,
   openDeveloperSettings,
   openHost,
-} from '../utils/links';
-import { saveState } from '../utils/storage';
+} from '../utils/system/links';
+import { getAuthMethodIcon, getPlatformIcon } from '../utils/ui/icons';
 
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
-import * as comms from '../utils/comms';
+import * as comms from '../utils/system/comms';
 import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
 
 describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {

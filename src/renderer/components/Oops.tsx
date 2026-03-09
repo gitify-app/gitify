@@ -7,7 +7,7 @@ import { EmojiSplash } from './layout/EmojiSplash';
 
 import type { GitifyError } from '../types';
 
-import { Errors } from '../utils/errors';
+import { Errors } from '../utils/core/errors';
 
 interface OopsProps {
   error: GitifyError;

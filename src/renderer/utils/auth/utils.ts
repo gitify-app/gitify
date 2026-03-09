@@ -34,9 +34,13 @@ import type {
 
 import { fetchAuthenticatedUserDetails } from '../api/client';
 import { clearOctokitClientCacheForAccount } from '../api/octokit';
-import { encryptValue, openExternalLink } from '../comms';
-import { getPlatformFromHostname } from '../helpers';
-import { rendererLogError, rendererLogInfo, rendererLogWarn } from '../logger';
+import {
+  rendererLogError,
+  rendererLogInfo,
+  rendererLogWarn,
+} from '../core/logger';
+import { encryptValue, openExternalLink } from '../system/comms';
+import { getPlatformFromHostname } from './platform';
 
 export function performGitHubWebOAuth(
   authOptions: LoginOAuthWebOptions,

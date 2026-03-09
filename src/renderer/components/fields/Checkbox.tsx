@@ -4,7 +4,7 @@ import { Stack } from '@primer/react';
 
 import { CustomCounter } from '../primitives/CustomCounter';
 
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils/ui/cn';
 import { Tooltip } from './Tooltip';
 
 export interface CheckboxProps {

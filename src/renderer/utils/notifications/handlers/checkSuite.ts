@@ -18,8 +18,8 @@ import {
   type SettingsState,
 } from '../../../types';
 
-import { actionsURL } from '../../helpers';
 import { DefaultHandler, defaultHandler } from './default';
+import { actionsURL } from './utils';
 
 export interface CheckSuiteAttributes {
   workflowName: string;

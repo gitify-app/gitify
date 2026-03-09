@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getPrimaryAccountHostname } from '../utils/auth/utils';
-import { quitApp } from '../utils/comms';
+import { quitApp } from '../utils/system/comms';
 import {
   openGitHubIssues,
   openGitHubNotifications,
   openGitHubPulls,
-} from '../utils/links';
+} from '../utils/system/links';
 import { useAppContext } from './useAppContext';
 
 type ShortcutName =

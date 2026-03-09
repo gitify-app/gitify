@@ -15,7 +15,7 @@ import {
 import { determineFailureType } from '../api/errors';
 import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
 import { transformNotifications } from '../api/transform';
-import { rendererLogError, rendererLogWarn } from '../logger';
+import { rendererLogError, rendererLogWarn } from '../core/logger';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,

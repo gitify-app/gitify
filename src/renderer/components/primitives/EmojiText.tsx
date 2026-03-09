@@ -1,6 +1,6 @@
 import { type FC, useEffect, useRef } from 'react';
 
-import { convertTextToEmojiImgHtml } from '../../utils/emojis';
+import { convertTextToEmojiImgHtml } from '../../utils/ui/emojis';
 
 export interface IEmojiText {
   text: string;

@@ -3,7 +3,7 @@ import { type FC, type ReactNode, useEffect, useRef, useState } from 'react';
 import { QuestionIcon } from '@primer/octicons-react';
 import { AnchoredOverlay } from '@primer/react';
 
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils/ui/cn';
 
 export interface TooltipProps {
   name: string;

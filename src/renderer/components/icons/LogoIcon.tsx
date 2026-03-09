@@ -4,7 +4,7 @@ import { APPLICATION } from '../../../shared/constants';
 
 import { Size } from '../../types';
 
-import { cn } from '../../utils/cn';
+import { cn } from '../../utils/ui/cn';
 
 interface LogoIconProps {
   isDark?: boolean;

@@ -11,7 +11,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { GroupBy } from '../../types';
 
-import * as links from '../../utils/links';
+import * as links from '../../utils/system/links';
 import {
   AccountNotifications,
   type AccountNotificationsProps,

@@ -17,8 +17,8 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
-import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { createNotificationHandler } from '../notifications/handlers';
+import { isAnsweredDiscussionFeatureSupported } from './features';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,

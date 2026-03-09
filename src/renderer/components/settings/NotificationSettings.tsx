@@ -36,7 +36,7 @@ import {
   hasAlternateScopes,
   hasRecommendedScopes,
 } from '../../utils/auth/utils';
-import { openGitHubParticipatingDocs } from '../../utils/links';
+import { openGitHubParticipatingDocs } from '../../utils/system/links';
 
 export const NotificationSettings: FC = () => {
   const navigate = useNavigate();

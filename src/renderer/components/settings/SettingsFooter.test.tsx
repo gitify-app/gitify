@@ -6,7 +6,7 @@ import {
   renderWithAppContext,
 } from '../../__helpers__/test-utils';
 
-import * as comms from '../../utils/comms';
+import * as comms from '../../utils/system/comms';
 import { SettingsFooter } from './SettingsFooter';
 
 describe('renderer/components/settings/SettingsFooter.tsx', () => {

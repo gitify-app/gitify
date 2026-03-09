@@ -4,8 +4,8 @@ import { RelativeTime, Stack, Text } from '@primer/react';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
-import { cn } from '../../utils/cn';
-import { openUserProfile } from '../../utils/links';
+import { openUserProfile } from '../../utils/system/links';
+import { cn } from '../../utils/ui/cn';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 

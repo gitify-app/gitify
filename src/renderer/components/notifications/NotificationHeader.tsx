@@ -6,9 +6,9 @@ import { useAppContext } from '../../hooks/useAppContext';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
-import { cn } from '../../utils/cn';
-import { openRepository } from '../../utils/links';
 import { isGroupByDate } from '../../utils/notifications/group';
+import { openRepository } from '../../utils/system/links';
+import { cn } from '../../utils/ui/cn';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 export interface NotificationHeaderProps {

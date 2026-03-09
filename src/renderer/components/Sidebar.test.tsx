@@ -6,7 +6,7 @@ import { mockMultipleAccountNotifications } from '../__mocks__/notifications-moc
 import { mockSettings } from '../__mocks__/state-mocks';
 
 import { useFiltersStore } from '../stores';
-import * as comms from '../utils/comms';
+import * as comms from '../utils/system/comms';
 import { Sidebar } from './Sidebar';
 
 describe('renderer/components/Sidebar.tsx', () => {
