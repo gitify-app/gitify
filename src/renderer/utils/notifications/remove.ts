@@ -24,6 +24,12 @@ export function shouldRemoveNotificationsFromState(
  *
  * When `delayNotificationState` or `fetchReadNotifications` is enabled,
  * notifications are marked as read instead of being removed from the list.
+ *
+ * @param account - The account whose notifications should be updated.
+ * @param settings - Application settings controlling removal vs. mark-as-read behaviour.
+ * @param notificationsToRemove - The notifications to remove or mark as read.
+ * @param accountNotifications - The full list of account notifications to update.
+ * @returns A new account notifications array with the specified notifications removed or marked as read.
  */
 export function removeNotificationsForAccount(
   account: Account,

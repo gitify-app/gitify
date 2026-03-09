@@ -58,6 +58,14 @@ interface NotificationsState {
   ) => Promise<void>;
 }
 
+/**
+ * Hook that manages all notification state and actions for the application.
+ *
+ * Handles fetching, filtering, sound/native notification triggering,
+ * mark-as-read, mark-as-done, and unsubscribe operations across all accounts.
+ *
+ * @returns The current notifications state and action callbacks.
+ */
 export const useNotifications = (): NotificationsState => {
   const [status, setStatus] = useState<Status>('success');
   const [globalError, setGlobalError] = useState<GitifyError>();

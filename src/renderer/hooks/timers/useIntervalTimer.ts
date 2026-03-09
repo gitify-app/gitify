@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-import { isOnline } from '../../utils/system/network';
-
 /**
- * Hook that triggers a callback after a specified period of time.
+ * Hook that triggers a callback on a recurring interval.
  *
  * Thanks to https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+ *
+ * @param callback - Function to call on each interval tick. Always uses the latest reference.
+ * @param delay - Interval duration in milliseconds. Pass `null` to disable.
  */
 export const useIntervalTimer = (callback: () => void, delay: number) => {
   const savedCallback = useRef<(() => void) | null>(null);
@@ -18,9 +19,7 @@ export const useIntervalTimer = (callback: () => void, delay: number) => {
   // Set up the interval.
   useEffect(() => {
     function tick() {
-      if (savedCallback.current && isOnline()) {
-        savedCallback.current();
-      }
+      savedCallback.current();
     }
 
     if (delay !== null) {

@@ -3,19 +3,21 @@ import { ipcRenderer } from 'electron';
 import type { EventData, EventType } from '../shared/events';
 
 /**
- * Send renderer event without expecting a response
- * @param event the type of event to send
- * @param data the data to send with the event
+ * Send a fire-and-forget IPC message from the renderer to the main process.
+ *
+ * @param event - The IPC event type to send.
+ * @param data - Optional payload to include with the event.
  */
 export function sendMainEvent(event: EventType, data?: EventData): void {
   ipcRenderer.send(event, data);
 }
 
 /**
- * Send renderer event and expect a response
- * @param event the type of event to send
- * @param data the data to send with the event
- * @returns
+ * Send an IPC message from the renderer to the main process and await a response.
+ *
+ * @param event - The IPC event type to invoke.
+ * @param data - Optional string payload to include with the event.
+ * @returns A promise that resolves to the string response from the main process.
  */
 export function invokeMainEvent(
   event: EventType,
@@ -25,7 +27,10 @@ export function invokeMainEvent(
 }
 
 /**
- * Handle renderer event without expecting a response
+ * Register a listener for an IPC event sent from the main process to the renderer.
+ *
+ * @param event - The IPC event type to listen for.
+ * @param listener - The callback invoked when the event is received.
  */
 export function onRendererEvent(
   event: EventType,

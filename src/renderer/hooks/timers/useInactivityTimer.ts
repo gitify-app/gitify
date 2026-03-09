@@ -6,7 +6,10 @@ const events = ['mousedown', 'keypress', 'click'];
 
 /**
  * Hook that triggers a callback after a specified period of user inactivity.
- * User activity as defined in `events` will reset the timer.
+ * User activity (mousedown, keypress, click) resets the timer.
+ *
+ * @param callback - The function to call once inactivity exceeds `delay`.
+ * @param delay - Inactivity timeout in milliseconds.
  */
 export const useInactivityTimer = (callback: () => void, delay: number) => {
   const savedCallback = useRef<(() => void) | null>(null);
