@@ -1,4 +1,4 @@
-import type { GitifyNotificationUser } from '../../../types';
+import type { GitifyNotificationUser, Link } from '../../../types';
 
 import type { AuthorFieldsFragment } from '../../api/graphql/generated/graphql';
 
@@ -33,4 +33,19 @@ export function getNotificationAuthor(
   }
 
   return subjectUser;
+}
+
+/**
+ * Construct a GitHub Actions URL for a repository with optional filters.
+ */
+export function actionsURL(repositoryURL: string, filters: string[]): Link {
+  const url = new URL(repositoryURL);
+  url.pathname += '/actions';
+
+  if (filters.length > 0) {
+    url.searchParams.append('query', filters.join('+'));
+  }
+
+  // Note: the GitHub Actions UI cannot handle encoded '+' characters.
+  return url.toString().replaceAll('%2B', '+') as Link;
 }

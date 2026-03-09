@@ -2,7 +2,7 @@ import { APPLICATION } from '../../../shared/constants';
 
 import type { GitifyNotification } from '../../types';
 
-import { generateGitHubWebUrl } from '../helpers';
+import { generateGitHubWebUrl } from '../notifications/url';
 
 export async function raiseNativeNotification(
   notifications: GitifyNotification[],

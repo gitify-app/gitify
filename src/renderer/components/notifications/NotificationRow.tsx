@@ -10,7 +10,7 @@ import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
-import { isMarkAsDoneFeatureSupported } from '../../utils/features';
+import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openNotification } from '../../utils/system/links';

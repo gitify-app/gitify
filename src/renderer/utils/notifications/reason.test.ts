@@ -1,8 +1,8 @@
-import type { Reason } from '../types';
+import type { Reason } from '../../types';
 
 import { getReasonDetails } from './reason';
 
-describe('renderer/utils/reason.ts', () => {
+describe('renderer/utils/notifications/reason.ts', () => {
   it('getReasonDetails - should get details for notification reason', () => {
     expect(getReasonDetails('approval_requested')).toMatchSnapshot();
     expect(getReasonDetails('assign')).toMatchSnapshot();

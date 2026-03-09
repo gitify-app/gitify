@@ -4,8 +4,8 @@ import { Text } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
 
-import { parseInlineCode } from '../../utils/helpers';
 import { cn } from '../../utils/ui/cn';
+import { parseInlineCode } from '../../utils/ui/display';
 
 interface NotificationTitleProps {
   title: string;

@@ -39,8 +39,8 @@ import {
   rendererLogInfo,
   rendererLogWarn,
 } from '../core/logger';
-import { getPlatformFromHostname } from '../helpers';
 import { encryptValue, openExternalLink } from '../system/comms';
+import { getPlatformFromHostname } from './platform';
 
 export function performGitHubWebOAuth(
   authOptions: LoginOAuthWebOptions,

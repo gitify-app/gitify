@@ -14,13 +14,13 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
+import { isMarkAsDoneFeatureSupported } from '../utils/api/features';
 import { getAccountUUID } from '../utils/auth/utils';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
 } from '../utils/core/errors';
 import { rendererLogError } from '../utils/core/logger';
-import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import {
   getAllNotifications,
   getNotificationCount,

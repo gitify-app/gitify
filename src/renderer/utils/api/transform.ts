@@ -12,7 +12,7 @@ import type {
 } from '../../types';
 import type { RawGitHubNotification } from './types';
 
-import { getReasonDetails } from '../reason';
+import { getReasonDetails } from '../notifications/reason';
 
 /**
  * Transform all raw notifications from Atlassian types to Atlassify types.

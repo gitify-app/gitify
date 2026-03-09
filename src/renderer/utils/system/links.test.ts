@@ -7,7 +7,7 @@ import { Constants } from '../../constants';
 import type { GitifyRepository, Link } from '../../types';
 
 import * as authUtils from '../auth/utils';
-import * as helpers from '../helpers';
+import * as url from '../notifications/url';
 import * as comms from './comms';
 import {
   openAccountProfile,
@@ -112,7 +112,7 @@ describe('renderer/utils/links.ts', () => {
 
   it('openNotification', async () => {
     const mockNotificationUrl = mockGitifyNotification.repository.htmlUrl;
-    vi.spyOn(helpers, 'generateGitHubWebUrl').mockResolvedValue(
+    vi.spyOn(url, 'generateGitHubWebUrl').mockResolvedValue(
       mockNotificationUrl,
     );
 

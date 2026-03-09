@@ -1,14 +1,14 @@
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
-} from '../__mocks__/account-mocks';
+} from '../../__mocks__/account-mocks';
 
 import {
   isAnsweredDiscussionFeatureSupported,
   isMarkAsDoneFeatureSupported,
 } from './features';
 
-describe('renderer/utils/features.ts', () => {
+describe('renderer/utils/api/features.ts', () => {
   describe('isMarkAsDoneFeatureSupported', () => {
     it('should return true for GitHub Cloud', () => {
       expect(isMarkAsDoneFeatureSupported(mockGitHubCloudAccount)).toBe(true);

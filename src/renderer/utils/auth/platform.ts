@@ -1,4 +1,5 @@
 import { Constants } from '../../constants';
+
 import type { Hostname } from '../../types';
 import type { PlatformType } from './types';
 

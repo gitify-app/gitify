@@ -16,7 +16,6 @@ import {
 } from '../../types';
 
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { getChevronDetails } from '../../utils/helpers';
 import {
   groupNotificationsByRepository,
   isGroupByRepository,
@@ -27,6 +26,7 @@ import {
   openGitHubPulls,
 } from '../../utils/system/links';
 import { cn } from '../../utils/ui/cn';
+import { getChevronDetails } from '../../utils/ui/display';
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { Oops } from '../Oops';

@@ -1,4 +1,4 @@
-import type { Reason, TypeDetails } from '../types';
+import type { Reason, TypeDetails } from '../../types';
 
 export const REASON_TYPE_DETAILS: Record<Reason, TypeDetails> = {
   approval_requested: {

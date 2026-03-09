@@ -12,7 +12,7 @@ import type {
 } from '../../types';
 
 import { getDeveloperSettingsURL } from '../auth/utils';
-import { generateGitHubWebUrl } from '../helpers';
+import { generateGitHubWebUrl } from '../notifications/url';
 import { openExternalLink } from './comms';
 
 export function openGitifyReleaseNotes(version: string) {

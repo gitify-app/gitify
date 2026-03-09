@@ -5,14 +5,14 @@ import {
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 
-import * as helpers from '../helpers';
+import * as url from '../notifications/url';
 import * as native from './native';
 
 describe('renderer/utils/system/native.ts', () => {
   const mockHtmlUrl =
     mockSingleAccountNotifications[0].notifications[0].repository.htmlUrl;
 
-  vi.spyOn(helpers, 'generateGitHubWebUrl').mockImplementation(
+  vi.spyOn(url, 'generateGitHubWebUrl').mockImplementation(
     async () => mockHtmlUrl,
   );
 
@@ -39,7 +39,7 @@ describe('renderer/utils/system/native.ts', () => {
       ),
       expect.stringContaining(mockHtmlUrl),
     );
-    expect(helpers.generateGitHubWebUrl).toHaveBeenCalledTimes(1);
+    expect(url.generateGitHubWebUrl).toHaveBeenCalledTimes(1);
   });
 
   it('should raise a native notification for multiple new notifications', async () => {
@@ -56,6 +56,6 @@ describe('renderer/utils/system/native.ts', () => {
       'You have 2 notifications',
       null,
     );
-    expect(helpers.generateGitHubWebUrl).toHaveBeenCalledTimes(0);
+    expect(url.generateGitHubWebUrl).toHaveBeenCalledTimes(0);
   });
 });
