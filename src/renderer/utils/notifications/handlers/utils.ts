@@ -36,7 +36,15 @@ export function getNotificationAuthor(
 }
 
 /**
- * Construct a GitHub Actions URL for a repository with optional filters.
+ * Construct a GitHub Actions URL for a repository with optional workflow filters.
+ *
+ * Appends the provided filter strings as a `+`-joined `query` search parameter.
+ * Note: `%2B` in the URL is un-encoded back to `+` because the GitHub Actions
+ * UI does not handle encoded plus signs correctly.
+ *
+ * @param repositoryURL - The base HTML URL of the repository.
+ * @param filters - Optional workflow filter strings to append as a query.
+ * @returns The GitHub Actions URL, with filters applied if provided.
  */
 export function actionsURL(repositoryURL: string, filters: string[]): Link {
   const url = new URL(repositoryURL);

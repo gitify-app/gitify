@@ -7,12 +7,12 @@ import type { TypedDocumentString } from './graphql/generated/graphql';
 import { createOctokitClient } from './octokit';
 
 /**
- * Perform a GraphQL API request with typed operation document
+ * Perform a GraphQL API request with typed operation document.
  *
- * @param url The API url
- * @param query The GraphQL operation/query statement
- * @param variables The GraphQL operation variables
- * @returns Resolves to a GitHub GraphQL response
+ * @param account - The authenticated account to make the request with.
+ * @param query - The typed GraphQL operation document.
+ * @param variables - The GraphQL operation variables.
+ * @returns Resolves to a typed GitHub GraphQL response.
  */
 export async function performGraphQLRequest<TResult, TVariables>(
   account: Account,
@@ -35,13 +35,12 @@ export async function performGraphQLRequest<TResult, TVariables>(
 /**
  * Perform a GraphQL API request using a raw query string instead of a TypedDocumentString.
  *
- * Useful for dynamically composed queries (e.g: merged queries built at runtime).
+ * Useful for dynamically composed queries (e.g. merged queries built at runtime).
  *
- * @param url The API url
- * @param token The GitHub token (decrypted)
- * @param query The GraphQL operation/query statement
- * @param variables The GraphQL operation variables
- * @returns Resolves to a GitHub GraphQL response
+ * @param account - The authenticated account to make the request with.
+ * @param query - The raw GraphQL operation/query string.
+ * @param variables - The GraphQL operation variables.
+ * @returns Resolves to a typed GitHub GraphQL response.
  */
 export async function performGraphQLRequestString<TResult>(
   account: Account,

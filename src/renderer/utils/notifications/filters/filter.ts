@@ -19,6 +19,16 @@ import {
   userTypeFilter,
 } from '.';
 
+/**
+ * Apply base (pre-enrichment) filters to a list of notifications.
+ *
+ * Filters by subject type, reason, and base search-token qualifiers
+ * (org, repo, etc.). Does NOT apply state or author filters, which
+ * require enriched data and are handled by `filterDetailedNotifications`.
+ *
+ * @param notifications - The raw/transformed notifications to filter.
+ * @returns The subset of notifications that pass all base filters.
+ */
 export function filterBaseNotifications(
   notifications: GitifyNotification[],
 ): GitifyNotification[] {
@@ -58,6 +68,16 @@ export function filterBaseNotifications(
   });
 }
 
+/**
+ * Apply detailed (post-enrichment) filters to a list of notifications.
+ *
+ * Only runs when `settings.detailedNotifications` is enabled. Applies
+ * user-type and state filters that depend on enriched subject data.
+ *
+ * @param notifications - The enriched notifications to filter.
+ * @param settings - Application settings controlling whether detailed filtering runs.
+ * @returns The subset of notifications that pass all detailed filters.
+ */
 export function filterDetailedNotifications(
   notifications: GitifyNotification[],
   settings: SettingsState,
@@ -155,12 +175,30 @@ function passesStateFilter(notification: GitifyNotification): boolean {
   return true;
 }
 
+/**
+ * Return true if a notification with the given state would be filtered out
+ * by the current state filter settings.
+ *
+ * Convenience helper used by UI components to indicate filtered-out states.
+ *
+ * @param state - The notification state to check.
+ * @returns `true` if the state is currently filtered out.
+ */
 export function isStateFilteredOut(state: GitifyNotificationState): boolean {
   const notification = { subject: { state: state } } as GitifyNotification;
 
   return !passesStateFilter(notification);
 }
 
+/**
+ * Return true if a notification with the given user would be filtered out
+ * by the current user-type filter settings.
+ *
+ * Convenience helper used by UI components to indicate filtered-out users.
+ *
+ * @param user - The notification user to check.
+ * @returns `true` if the user is currently filtered out.
+ */
 export function isUserFilteredOut(user: GitifyNotificationUser): boolean {
   const notification = { subject: { user: user } } as GitifyNotification;
 

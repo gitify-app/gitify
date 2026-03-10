@@ -141,11 +141,15 @@ export async function getAllNotifications(
 }
 
 /**
- * Enrich notification details
+ * Enrich notifications with detailed subject data (state, user, number, etc.).
  *
- * @param notifications All Gitify inbox notifications
- * @param settings
- * @returns
+ * Only runs when `settings.detailedNotifications` is enabled; returns the
+ * original list unchanged otherwise. Details are fetched in batches via
+ * GraphQL to avoid overwhelming the API.
+ *
+ * @param notifications - The notifications to enrich.
+ * @param settings - Application settings; controls whether enrichment runs.
+ * @returns The same notifications with subject fields populated from the API.
  */
 export async function enrichNotifications(
   notifications: GitifyNotification[],
