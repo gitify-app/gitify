@@ -23,7 +23,7 @@ import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
@@ -41,7 +41,9 @@ import { openGitHubParticipatingDocs } from '../../utils/system/links';
 export const NotificationSettings: FC = () => {
   const navigate = useNavigate();
 
-  const { auth, settings, updateSetting } = useAppContext();
+  const accounts = useAccountsStore((s) => s.accounts);
+  const settings = useSettingsStore();
+  const { updateSetting } = settings;
 
   const [fetchInterval, setFetchInterval] = useState<number>(
     settings.fetchInterval,
@@ -242,7 +244,7 @@ export const NotificationSettings: FC = () => {
         />
 
         {settings.detailedNotifications &&
-          auth.accounts.some(
+          accounts.some(
             (account) =>
               !hasRecommendedScopes(account) && !hasAlternateScopes(account),
           ) && (

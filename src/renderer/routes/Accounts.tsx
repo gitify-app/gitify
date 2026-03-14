@@ -24,6 +24,8 @@ import {
 
 import { useAppContext } from '../hooks/useAppContext';
 
+import { useAccountsStore } from '../stores';
+
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -40,7 +42,6 @@ import {
   refreshAccount,
 } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
-import { saveState } from '../utils/core/storage';
 import {
   openAccountProfile,
   openDeveloperSettings,
@@ -51,7 +52,10 @@ import { getAuthMethodIcon, getPlatformIcon } from '../utils/ui/icons';
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { auth, settings, logoutFromAccount, notifications } = useAppContext();
+  const { notifications } = useAppContext();
+
+  const accounts = useAccountsStore((s) => s.accounts);
+  const { logoutFromAccount } = useAccountsStore();
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},
@@ -69,8 +73,8 @@ export const AccountsRoute: FC = () => {
   );
 
   const setAsPrimaryAccount = (account: Account) => {
-    auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
-    saveState({ auth, settings });
+    const reordered = [account, ...accounts.filter((a) => a !== account)];
+    useAccountsStore.setState({ accounts: reordered });
     navigate('/accounts', { replace: true });
   };
 
@@ -85,7 +89,12 @@ export const AccountsRoute: FC = () => {
     });
 
     try {
-      await refreshAccount(account);
+      const refreshed = await refreshAccount(account);
+      useAccountsStore.setState((state) => ({
+        accounts: state.accounts.map((a) =>
+          getAccountUUID(a) === getAccountUUID(refreshed) ? refreshed : a,
+        ),
+      }));
     } catch (err) {
       setRefreshErrorStates((prev) => ({
         ...prev,
@@ -156,7 +165,7 @@ export const AccountsRoute: FC = () => {
       <Header icon={PersonIcon}>Accounts</Header>
 
       <Contents>
-        {auth.accounts.map((account, i) => {
+        {accounts.map((account, i) => {
           const AuthMethodIcon = getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);

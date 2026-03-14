@@ -1,6 +1,15 @@
 import '@testing-library/jest-dom/vitest';
 
-import { useFiltersStore } from '../stores';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
+
+import {
+  DEFAULT_RUNTIME_STATE,
+  useAccountsStore,
+  useFiltersStore,
+  useRuntimeStore,
+  useSettingsStore,
+} from '../stores';
 
 /**
  * Shared navigate mock — import from test-utils in any test that needs to assert on navigation
@@ -15,10 +24,18 @@ vi.mock('react-router-dom', async () => ({
 process.env.TZ = 'UTC';
 
 /**
- * Reset stores
+ * Reset stores and seed defaults before each test
  */
 beforeEach(() => {
   useFiltersStore.getState().reset();
+  useAccountsStore.getState().reset();
+  useSettingsStore.getState().resetSettings();
+  useRuntimeStore.setState(DEFAULT_RUNTIME_STATE);
+
+  // Seed default settings and a logged-in account so most tests work without extra setup
+  useSettingsStore.setState(mockSettings);
+  useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+
   navigateMock.mockReset();
 });
 

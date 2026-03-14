@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
+import { useAccountsStore, useSettingsStore } from '../stores';
 import * as comms from '../utils/system/comms';
 import * as links from '../utils/system/links';
 import { GlobalShortcuts } from './GlobalShortcuts';
@@ -42,9 +43,7 @@ describe('components/GlobalShortcuts.tsx', () => {
         .mockImplementation(vi.fn());
 
       it('opens primary account GitHub notifications webpage when pressing N while logged in', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('n');
 
@@ -52,9 +51,8 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not open primary account GitHub notifications webpage when logged out', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: false,
-        });
+        useAccountsStore.setState({ accounts: [] });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('n');
 
@@ -64,10 +62,8 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('focus mode', () => {
       it('toggles focus when pressing W while logged in', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          updateSetting: updateSettingMock,
-          isLoggedIn: true,
-        });
+        useSettingsStore.setState({ updateSetting: updateSettingMock as any });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('w');
 
@@ -75,10 +71,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle focus mode when loading', async () => {
+        useSettingsStore.setState({ updateSetting: updateSettingMock as any });
         renderWithAppContext(<GlobalShortcuts />, {
-          updateSetting: updateSettingMock,
           status: 'loading',
-          isLoggedIn: true,
         });
 
         await userEvent.keyboard('w');
@@ -87,10 +82,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle focus mode when logged out', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          updateSetting: updateSettingMock,
-          isLoggedIn: false,
-        });
+        useAccountsStore.setState({ accounts: [] });
+        useSettingsStore.setState({ updateSetting: updateSettingMock as any });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('w');
 
@@ -100,9 +94,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('filters', () => {
       it('toggles filters when pressing F while logged in', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('f');
 
@@ -110,9 +102,8 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle filters when logged out', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: false,
-        });
+        useAccountsStore.setState({ accounts: [] });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('f');
 
@@ -126,9 +117,7 @@ describe('components/GlobalShortcuts.tsx', () => {
         .mockImplementation(vi.fn());
 
       it('opens primary account GitHub issues webpage when pressing I while logged in', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('i');
 
@@ -136,9 +125,8 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not open primary account GitHub issues webpage when logged out', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: false,
-        });
+        useAccountsStore.setState({ accounts: [] });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('n');
 
@@ -152,9 +140,7 @@ describe('components/GlobalShortcuts.tsx', () => {
         .mockImplementation(vi.fn());
 
       it('opens primary account GitHub pull requests webpage when pressing N while logged in', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('p');
 
@@ -162,9 +148,8 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not open primary account GitHub pull requests webpage when logged out', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: false,
-        });
+        useAccountsStore.setState({ accounts: [] });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('n');
 
@@ -197,9 +182,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
     describe('settings', () => {
       it('toggles settings when pressing S while logged in', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('s');
 
@@ -207,9 +190,8 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not toggle settings when logged out', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: false,
-        });
+        useAccountsStore.setState({ accounts: [] });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('s');
 
@@ -221,7 +203,6 @@ describe('components/GlobalShortcuts.tsx', () => {
       it('navigates to accounts when pressing A on settings route', async () => {
         renderWithAppContext(<GlobalShortcuts />, {
           initialEntries: ['/settings'],
-          isLoggedIn: true,
         });
 
         await userEvent.keyboard('a');
@@ -230,9 +211,7 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not trigger accounts when not on settings route', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('a');
 
@@ -244,7 +223,6 @@ describe('components/GlobalShortcuts.tsx', () => {
       it('quits the app when pressing Q on settings route', async () => {
         renderWithAppContext(<GlobalShortcuts />, {
           initialEntries: ['/settings'],
-          isLoggedIn: true,
         });
 
         await userEvent.keyboard('q');
@@ -253,9 +231,7 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('does not quit the app when not on settings route', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         await userEvent.keyboard('q');
 
@@ -270,9 +246,6 @@ describe('components/GlobalShortcuts.tsx', () => {
             <GlobalShortcuts />
             <input id="test-input" />
           </>,
-          {
-            isLoggedIn: true,
-          },
         );
 
         const input = document.getElementById(
@@ -290,9 +263,6 @@ describe('components/GlobalShortcuts.tsx', () => {
             <GlobalShortcuts />
             <textarea id="test-textarea" />
           </>,
-          {
-            isLoggedIn: true,
-          },
         );
 
         const textarea = document.getElementById(
@@ -305,9 +275,7 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
 
       it('ignores shortcuts when modifier keys are pressed', async () => {
-        renderWithAppContext(<GlobalShortcuts />, {
-          isLoggedIn: true,
-        });
+        renderWithAppContext(<GlobalShortcuts />);
 
         const event = new KeyboardEvent('keydown', { key: 'h', metaKey: true });
         navigateMock.mockClear();

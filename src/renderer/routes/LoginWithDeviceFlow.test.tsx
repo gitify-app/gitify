@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
+import { useAccountsStore } from '../stores';
 import * as comms from '../utils/system/comms';
 import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
 
@@ -29,9 +30,8 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
-    });
+    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     expect(loginWithDeviceFlowStartMock).toHaveBeenCalled();
 
@@ -56,9 +56,8 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
-    });
+    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     await screen.findByText(/USER-1234/);
 
@@ -75,9 +74,8 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       .fn()
       .mockRejectedValueOnce(new Error('Network error'));
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
-    });
+    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     await screen.findByText(/Failed to start authentication/);
   });
@@ -93,9 +91,8 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
-      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
-    });
+    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     await screen.findByText(/USER-1234/);
 

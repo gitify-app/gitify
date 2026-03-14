@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { GroupBy } from '../../types';
 
+import { useSettingsStore } from '../../stores';
 import * as comms from '../../utils/system/comms';
 import * as links from '../../utils/system/links';
 import { NotificationRow, type NotificationRowProps } from './NotificationRow';
@@ -28,9 +28,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithAppContext(<NotificationRow {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.DATE },
-    });
+    useSettingsStore.setState({ groupBy: GroupBy.DATE });
+    const tree = renderWithAppContext(<NotificationRow {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -41,9 +40,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithAppContext(<NotificationRow {...props} />, {
-      settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
-    });
+    useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+    const tree = renderWithAppContext(<NotificationRow {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -54,9 +52,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithAppContext(<NotificationRow {...props} />, {
-      settings: { ...mockSettings, showNumber: false },
-    });
+    useSettingsStore.setState({ showNumber: false });
+    const tree = renderWithAppContext(<NotificationRow {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -81,8 +78,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
+      useSettingsStore.setState({ markAsDoneOnOpen: false });
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: false },
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
@@ -100,12 +97,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
+      useSettingsStore.setState({ markAsDoneOnOpen: false, delayNotificationState: true });
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: {
-          ...mockSettings,
-          markAsDoneOnOpen: false,
-          delayNotificationState: true,
-        },
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
@@ -123,8 +116,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
+      useSettingsStore.setState({ markAsDoneOnOpen: true });
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: true },
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
 
@@ -143,12 +136,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
+      useSettingsStore.setState({ markAsDoneOnOpen: true, fetchReadNotifications: true });
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: {
-          ...mockSettings,
-          markAsDoneOnOpen: true,
-          fetchReadNotifications: true,
-        },
         markNotificationsAsRead: markNotificationsAsReadMock,
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
@@ -168,8 +157,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
+      useSettingsStore.setState({ markAsDoneOnOpen: false });
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, markAsDoneOnOpen: false },
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
@@ -203,7 +192,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
 
       renderWithAppContext(<NotificationRow {...props} />, {
-        settings: mockSettings,
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
 
@@ -234,9 +222,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
-      renderWithAppContext(<NotificationRow {...props} />, {
-        settings: { ...mockSettings, fetchReadNotifications: true },
-      });
+      useSettingsStore.setState({ fetchReadNotifications: true });
+      renderWithAppContext(<NotificationRow {...props} />);
 
       expect(
         screen.getByTestId('notification-mark-as-done'),

@@ -4,7 +4,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useState,
+  useRef,
 } from 'react';
 
 import { useTheme } from '@primer/react';
@@ -21,34 +21,18 @@ import type {
   AuthState,
   GitifyError,
   GitifyNotification,
-  Hostname,
-  SettingsState,
-  SettingsValue,
   Status,
   Token,
 } from '../types';
 import { FetchType } from '../types';
-import type {
-  DeviceFlowSession,
-  LoginOAuthWebOptions,
-  LoginPersonalAccessTokenOptions,
-} from '../utils/auth/types';
 
-import { useFiltersStore } from '../stores';
-import { fetchAuthenticatedUserDetails } from '../utils/api/client';
-import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
-  addAccount,
-  exchangeAuthCodeForAccessToken,
-  getAccountUUID,
-  hasAccounts,
-  performGitHubWebOAuth,
-  pollGitHubDeviceFlow,
-  refreshAccount,
-  removeAccount,
-  startGitHubDeviceFlow,
-} from '../utils/auth/utils';
-import { clearState, loadState, saveState } from '../utils/core/storage';
+  useAccountsStore,
+  useFiltersStore,
+  useSettingsStore,
+} from '../stores';
+import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
+import { clearState } from '../utils/core/storage';
 import {
   decryptValue,
   encryptValue,
@@ -67,25 +51,8 @@ import {
   mapThemeModeToColorScheme,
 } from '../utils/ui/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
-import { defaultAuth, defaultSettings } from './defaults';
 
 export interface AppContextState {
-  auth: AuthState;
-  isLoggedIn: boolean;
-  loginWithDeviceFlowStart: (hostname?: Hostname) => Promise<DeviceFlowSession>;
-  loginWithDeviceFlowPoll: (
-    session: DeviceFlowSession,
-  ) => Promise<Token | null>;
-  loginWithDeviceFlowComplete: (
-    token: Token,
-    hostname: Hostname,
-  ) => Promise<void>;
-  loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
-  loginWithPersonalAccessToken: (
-    data: LoginPersonalAccessTokenOptions,
-  ) => Promise<void>;
-  logoutFromAccount: (account: Account) => Promise<void>;
-
   status: Status;
   globalError: GitifyError;
 
@@ -105,10 +72,6 @@ export interface AppContextState {
     notifications: GitifyNotification[],
   ) => Promise<void>;
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
-
-  settings: SettingsState;
-  resetSettings: () => void;
-  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState> | undefined>(
@@ -116,19 +79,10 @@ export const AppContext = createContext<Partial<AppContextState> | undefined>(
 );
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const existingState = loadState();
+  const accounts = useAccountsStore((s) => s.accounts);
+  const auth: AuthState = useMemo(() => ({ accounts }), [accounts]);
 
-  const [auth, setAuth] = useState<AuthState>(
-    existingState.auth
-      ? { ...defaultAuth, ...existingState.auth }
-      : defaultAuth,
-  );
-
-  const [settings, setSettings] = useState<SettingsState>(
-    existingState.settings
-      ? { ...defaultSettings, ...existingState.settings }
-      : defaultSettings,
-  );
+  const settings = useSettingsStore();
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
 
@@ -157,35 +111,42 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const states = useFiltersStore((s) => s.states);
   const reasons = useFiltersStore((s) => s.reasons);
 
-  const persistAuth = useCallback(
-    (nextAuth: AuthState) => {
-      setAuth(nextAuth);
-      saveState({ auth: nextAuth, settings });
-    },
-    [settings],
-  );
+  // Track previous accounts to detect removals and clean up notifications
+  const prevAccountsRef = useRef<Account[]>(accounts);
+  useEffect(() => {
+    const prev = prevAccountsRef.current;
+    prevAccountsRef.current = accounts;
+
+    const removedAccounts = prev.filter(
+      (prevAccount) =>
+        !accounts.some(
+          (a) => getAccountUUID(a) === getAccountUUID(prevAccount),
+        ),
+    );
+
+    for (const removed of removedAccounts) {
+      removeAccountNotifications(removed);
+    }
+  }, [accounts, removeAccountNotifications]);
 
   const refreshAllAccounts = useCallback(async () => {
-    if (!auth.accounts.length) {
+    const currentAccounts = useAccountsStore.getState().accounts;
+    if (!currentAccounts.length) {
       return;
     }
 
     const refreshedAccounts = await Promise.all(
-      auth.accounts.map((account) => refreshAccount(account)),
+      currentAccounts.map((account) => refreshAccount(account)),
     );
 
-    const updatedAuth: AuthState = {
-      ...auth,
-      accounts: refreshedAccounts,
-    };
-
-    persistAuth(updatedAuth);
-  }, [auth, persistAuth]);
+    useAccountsStore.setState({ accounts: refreshedAccounts });
+  }, []);
 
   // TODO - Remove migration logic in future release
   const migrateAuthTokens = useCallback(async () => {
+    const currentAccounts = useAccountsStore.getState().accounts;
     const migratedAccounts = await Promise.all(
-      auth.accounts.map(async (account) => {
+      currentAccounts.map(async (account) => {
         try {
           await decryptValue(account.token);
           return account;
@@ -197,7 +158,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     );
 
     const tokensMigrated = migratedAccounts.some((migratedAccount) => {
-      const originalAccount = auth.accounts.find(
+      const originalAccount = currentAccounts.find(
         (account) =>
           getAccountUUID(account) === getAccountUUID(migratedAccount),
       );
@@ -213,19 +174,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    const updatedAuth: AuthState = {
-      ...auth,
-      accounts: migratedAccounts,
-    };
-
-    persistAuth(updatedAuth);
-  }, [auth, persistAuth]);
+    useAccountsStore.setState({ accounts: migratedAccounts });
+  }, []);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
     fetchNotifications({ auth, settings });
   }, [
-    auth.accounts.length,
+    accounts.length,
     settings.participating,
     includeSearchTokens,
     excludeSearchTokens,
@@ -318,29 +274,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     window.gitify.onResetApp(() => {
+      useAccountsStore.getState().reset();
+      useSettingsStore.getState().resetSettings();
       clearState();
-      setAuth(defaultAuth);
-      setSettings(defaultSettings);
     });
   }, []);
-
-  const resetSettings = useCallback(() => {
-    setSettings(() => {
-      saveState({ auth, settings: defaultSettings });
-      return defaultSettings;
-    });
-  }, [auth]);
-
-  const updateSetting = useCallback(
-    (name: keyof SettingsState, value: SettingsValue) => {
-      setSettings((prevSettings) => {
-        const newSettings = { ...prevSettings, [name]: value };
-        saveState({ auth, settings: newSettings });
-        return newSettings;
-      });
-    },
-    [auth],
-  );
 
   // Global window zoom handler / listener
   // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
@@ -360,7 +298,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         );
 
         if (zoomPercentage !== settings.zoomPercentage) {
-          updateSetting('zoomPercentage', zoomPercentage);
+          useSettingsStore
+            .getState()
+            .updateSetting('zoomPercentage', zoomPercentage);
         }
       }, DELAY);
     };
@@ -372,143 +312,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       clearTimeout(timeout);
     };
   }, [settings.zoomPercentage]);
-
-  const isLoggedIn = useMemo(() => {
-    return hasAccounts(auth);
-  }, [auth]);
-
-  /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Initiate device flow session.
-   */
-  const loginWithDeviceFlowStart = useCallback(
-    async (hostname?: Hostname) => await startGitHubDeviceFlow(hostname),
-    [],
-  );
-
-  /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Poll for device flow session.
-   */
-  const loginWithDeviceFlowPoll = useCallback(
-    async (session: DeviceFlowSession) => await pollGitHubDeviceFlow(session),
-    [],
-  );
-
-  /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Finalize device flow session.
-   */
-  const loginWithDeviceFlowComplete = useCallback(
-    async (token: Token, hostname: Hostname) => {
-      const existingAccount = auth.accounts.find(
-        (a) => a.hostname === hostname && a.method === 'GitHub App',
-      );
-      if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
-      }
-
-      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
-
-      persistAuth(updatedAuth);
-      await fetchNotifications({ auth: updatedAuth, settings });
-    },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
-  );
-
-  /**
-   * Login with custom GitHub OAuth App.
-   */
-  const loginWithOAuthApp = useCallback(
-    async (data: LoginOAuthWebOptions) => {
-      const { authOptions, authCode } = await performGitHubWebOAuth(data);
-      const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
-
-      const existingAccount = auth.accounts.find(
-        (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
-      );
-      if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
-      }
-
-      const updatedAuth = await addAccount(
-        auth,
-        'OAuth App',
-        token,
-        authOptions.hostname,
-      );
-
-      persistAuth(updatedAuth);
-      await fetchNotifications({ auth: updatedAuth, settings });
-    },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
-  );
-
-  /**
-   * Login with Personal Access Token (PAT).
-   */
-  const loginWithPersonalAccessToken = useCallback(
-    async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
-      const encryptedToken = (await encryptValue(token)) as Token;
-      await fetchAuthenticatedUserDetails({
-        hostname,
-        token: encryptedToken,
-      } as Account);
-
-      const existingAccount = auth.accounts.find(
-        (a) => a.hostname === hostname && a.method === 'Personal Access Token',
-      );
-      if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
-      }
-
-      const updatedAuth = await addAccount(
-        auth,
-        'Personal Access Token',
-        token,
-        hostname,
-      );
-
-      persistAuth(updatedAuth);
-      await fetchNotifications({ auth: updatedAuth, settings });
-    },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
-  );
-
-  const logoutFromAccount = useCallback(
-    async (account: Account) => {
-      removeAccountNotifications(account);
-
-      const updatedAuth = removeAccount(auth, account);
-
-      // Clear Octokit client cache when removing account
-      clearOctokitClientCache();
-
-      persistAuth(updatedAuth);
-    },
-    [auth, removeAccountNotifications, persistAuth],
-  );
 
   const fetchNotificationsWithAccounts = useCallback(
     async () => await fetchNotifications({ auth, settings }),
@@ -535,15 +338,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const contextValues: AppContextState = useMemo(
     () => ({
-      auth,
-      isLoggedIn,
-      loginWithDeviceFlowStart,
-      loginWithDeviceFlowPoll,
-      loginWithDeviceFlowComplete,
-      loginWithOAuthApp,
-      loginWithPersonalAccessToken,
-      logoutFromAccount,
-
       status,
       globalError,
 
@@ -559,21 +353,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       markNotificationsAsRead: markNotificationsAsReadWithAccounts,
       markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
       unsubscribeNotification: unsubscribeNotificationWithAccounts,
-
-      settings,
-      resetSettings,
-      updateSetting,
     }),
     [
-      auth,
-      isLoggedIn,
-      loginWithDeviceFlowStart,
-      loginWithDeviceFlowPoll,
-      loginWithDeviceFlowComplete,
-      loginWithOAuthApp,
-      loginWithPersonalAccessToken,
-      logoutFromAccount,
-
       status,
       globalError,
 
@@ -589,10 +370,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       markNotificationsAsReadWithAccounts,
       markNotificationsAsDoneWithAccounts,
       unsubscribeNotificationWithAccounts,
-
-      settings,
-      resetSettings,
-      updateSetting,
     ],
   );
 

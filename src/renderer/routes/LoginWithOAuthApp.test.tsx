@@ -5,6 +5,7 @@ import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
 import type { ClientID, ClientSecret, Hostname } from '../types';
 
+import { useAccountsStore } from '../stores';
 import * as logger from '../utils/core/logger';
 import * as comms from '../utils/system/comms';
 import {
@@ -96,9 +97,8 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   it('should login using a token - success', async () => {
     loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
-    renderWithAppContext(<LoginWithOAuthAppRoute />, {
-      loginWithOAuthApp: loginWithOAuthAppMock,
-    });
+    useAccountsStore.setState({ loginWithOAuthApp: loginWithOAuthAppMock as any });
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -127,9 +127,8 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       .mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
-    renderWithAppContext(<LoginWithOAuthAppRoute />, {
-      loginWithOAuthApp: loginWithOAuthAppMock,
-    });
+    useAccountsStore.setState({ loginWithOAuthApp: loginWithOAuthAppMock as any });
+    renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);

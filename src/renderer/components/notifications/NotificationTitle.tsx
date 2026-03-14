@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { cn } from '../../utils/ui/cn';
 import { parseInlineCode } from '../../utils/ui/display';
@@ -14,7 +14,7 @@ interface NotificationTitleProps {
 export const NotificationTitle: FC<NotificationTitleProps> = ({
   title,
 }: NotificationTitleProps) => {
-  const { settings } = useAppContext();
+  const settings = useSettingsStore();
   const parts = parseInlineCode(title);
 
   return (

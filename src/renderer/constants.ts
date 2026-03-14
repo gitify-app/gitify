@@ -34,7 +34,9 @@ export const OAUTH_SCOPE: Record<OAuthScope, OAuthScopeDetails> = {
 export const Constants = {
   STORAGE_KEY: 'gitify-storage',
 
-  // Filters store key
+  // Zustand persist store keys
+  ACCOUNTS_STORE_KEY: 'gitify-accounts',
+  SETTINGS_STORE_KEY: 'gitify-settings',
   FILTERS_STORE_KEY: 'atlassify-filters',
 
   // GitHub OAuth Scopes — each tier is an ordered array of OAUTH_SCOPE objects.

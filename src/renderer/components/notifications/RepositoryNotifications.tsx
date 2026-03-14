@@ -5,6 +5,8 @@ import { Button, Stack } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
 
+import { useSettingsStore } from '../../stores';
+
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 
@@ -27,8 +29,10 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
 }) => {
-  const { settings, markNotificationsAsRead, markNotificationsAsDone } =
+  const { markNotificationsAsRead, markNotificationsAsDone } =
     useAppContext();
+
+  const settings = useSettingsStore();
 
   const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] =
     useState(false);

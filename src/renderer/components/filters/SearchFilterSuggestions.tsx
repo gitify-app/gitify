@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Popover, Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { Opacity } from '../../types';
 
@@ -22,7 +22,7 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   open,
   inputValue,
 }) => {
-  const { settings } = useAppContext();
+  const settings = useSettingsStore();
 
   if (!open) {
     return null;

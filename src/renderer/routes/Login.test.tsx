@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
+import { useAccountsStore } from '../stores';
 import * as comms from '../utils/system/comms';
 import { LoginRoute } from './Login';
 
@@ -12,7 +13,8 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
+    useAccountsStore.setState({ accounts: [] });
+    const tree = renderWithAppContext(<LoginRoute />);
 
     expect(tree.container).toMatchSnapshot();
 
@@ -22,9 +24,7 @@ describe('renderer/routes/Login.tsx', () => {
   it('should redirect to notifications once logged in', () => {
     const showWindowSpy = vi.spyOn(comms, 'showWindow');
 
-    renderWithAppContext(<LoginRoute />, {
-      isLoggedIn: true,
-    });
+    renderWithAppContext(<LoginRoute />);
 
     expect(showWindowSpy).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledTimes(1);
@@ -32,9 +32,8 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should login with github', async () => {
-    renderWithAppContext(<LoginRoute />, {
-      isLoggedIn: false,
-    });
+    useAccountsStore.setState({ accounts: [] });
+    renderWithAppContext(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('login-github'));
 
@@ -43,7 +42,8 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with personal access token', async () => {
-    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
+    useAccountsStore.setState({ accounts: [] });
+    renderWithAppContext(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
@@ -52,7 +52,8 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with oauth app', async () => {
-    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
+    useAccountsStore.setState({ accounts: [] });
+    renderWithAppContext(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 

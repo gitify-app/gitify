@@ -8,7 +8,7 @@ import { useAppContext } from '../../hooks/useAppContext';
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
-import { type FiltersState, useFiltersStore } from '../../stores';
+import { type FiltersState, useFiltersStore, useSettingsStore } from '../../stores';
 import type { Filter } from '../../utils/notifications/filters';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
@@ -31,7 +31,8 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
   tooltip,
   layout = 'vertical',
 }: FilterSectionProps<K>) => {
-  const { notifications, settings } = useAppContext();
+  const { notifications } = useAppContext();
+  const settings = useSettingsStore();
   const updateFilter = useFiltersStore((s) => s.updateFilter);
 
   // Subscribe to the specific filter state so component re-renders when filters change

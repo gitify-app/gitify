@@ -1,7 +1,7 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { useSettingsStore } from '../../stores';
 import { MetricGroup, type MetricGroupProps } from './MetricGroup';
 
 describe('renderer/components/metrics/MetricGroup.tsx', () => {
@@ -11,9 +11,8 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = renderWithAppContext(<MetricGroup {...props} />, {
-      settings: { ...mockSettings, showPills: false },
-    });
+    useSettingsStore.setState({ showPills: false });
+    const tree = renderWithAppContext(<MetricGroup {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -24,9 +23,8 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = renderWithAppContext(<MetricGroup {...props} />, {
-      settings: { ...mockSettings, showPills: true },
-    });
+    useSettingsStore.setState({ showPills: true });
+    const tree = renderWithAppContext(<MetricGroup {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });

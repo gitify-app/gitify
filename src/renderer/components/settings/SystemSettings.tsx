@@ -5,8 +5,7 @@ import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { defaultSettings } from '../../context/defaults';
-import { useAppContext } from '../../hooks/useAppContext';
+import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
@@ -24,7 +23,8 @@ import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
 export const SystemSettings: FC = () => {
-  const { settings, updateSetting } = useAppContext();
+  const settings = useSettingsStore();
+  const { updateSetting } = settings;
 
   return (
     <fieldset>
@@ -151,7 +151,7 @@ export const SystemSettings: FC = () => {
               onClick={() => {
                 updateSetting(
                   'notificationVolume',
-                  defaultSettings.notificationVolume,
+                  DEFAULT_SETTINGS_STATE.notificationVolume,
                 );
               }}
               size="small"

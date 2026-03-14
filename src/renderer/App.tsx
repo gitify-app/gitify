@@ -24,12 +24,16 @@ import { AppLayout } from './components/layout/AppLayout';
 
 import './App.css';
 
-import { useAppContext } from './hooks/useAppContext';
+import { useAccountsStore } from './stores';
+import { migrateStorageToStores } from './utils/core/storage';
+
+// Run once before React initialises — seeds Zustand keys from legacy storage
+migrateStorageToStores();
 
 function RequireAuth({ children }) {
   const location = useLocation();
 
-  const { isLoggedIn } = useAppContext();
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
 
   return isLoggedIn ? (
     children

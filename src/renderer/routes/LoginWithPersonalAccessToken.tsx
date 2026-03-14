@@ -20,7 +20,7 @@ import {
 
 import { Constants } from '../constants';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore } from '../stores';
 
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -77,7 +77,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
-  const { loginWithPersonalAccessToken } = useAppContext();
+  const { loginWithPersonalAccessToken } = useAccountsStore();
 
   const [shouldMaskPersonalAccessToken, setShouldMaskPersonalAccessToken] =
     useState(true);

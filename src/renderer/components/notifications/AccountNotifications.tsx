@@ -3,7 +3,7 @@ import { type FC, type MouseEvent, useMemo, useState } from 'react';
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -45,7 +45,9 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 ) => {
   const { account, showAccountHeader, notifications } = props;
 
-  const { auth, settings } = useAppContext();
+  const accounts = useAccountsStore((s) => s.accounts);
+  const auth = { accounts };
+  const settings = useSettingsStore();
 
   const [isAccountNotificationsVisible, setIsAccountNotificationsVisible] =
     useState(true);

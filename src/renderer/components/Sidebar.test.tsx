@@ -3,9 +3,8 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockSettings } from '../__mocks__/state-mocks';
 
-import { useFiltersStore } from '../stores';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 import * as comms from '../utils/system/comms';
 import { Sidebar } from './Sidebar';
 
@@ -23,16 +22,15 @@ describe('renderer/components/Sidebar.tsx', () => {
   it('should render itself & its children (logged in)', () => {
     const tree = renderWithAppContext(<Sidebar />, {
       initialEntries: ['/'],
-      isLoggedIn: true,
     });
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children (logged out)', () => {
+    useAccountsStore.setState({ accounts: [] });
     const tree = renderWithAppContext(<Sidebar />, {
       initialEntries: ['/landing'],
-      isLoggedIn: false,
     });
 
     expect(tree.container).toMatchSnapshot();
@@ -78,28 +76,22 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('Focused mode toggle', () => {
     it('renders the focused mode is off', () => {
-      renderWithAppContext(<Sidebar />, {
-        isLoggedIn: true,
-        settings: { ...mockSettings, participating: false },
-      });
+      useSettingsStore.setState({ participating: false });
+      renderWithAppContext(<Sidebar />);
 
       expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
     });
 
     it('renders the focused mode is on', () => {
-      renderWithAppContext(<Sidebar />, {
-        isLoggedIn: true,
-        settings: { ...mockSettings, participating: true },
-      });
+      useSettingsStore.setState({ participating: true });
+      renderWithAppContext(<Sidebar />);
 
       expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
     });
 
     it('toggles participating when clicked', async () => {
+      useSettingsStore.setState({ participating: false, updateSetting: updateSettingMock as any });
       renderWithAppContext(<Sidebar />, {
-        isLoggedIn: true,
-        settings: { ...mockSettings, participating: false },
-        updateSetting: updateSettingMock,
         fetchNotifications: fetchNotificationsMock,
       });
 
@@ -132,9 +124,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     it('highlight filters sidebar if any are saved', () => {
       useFiltersStore.setState({ reasons: ['assign'] });
 
-      renderWithAppContext(<Sidebar />, {
-        settings: mockSettings,
-      });
+      renderWithAppContext(<Sidebar />);
 
       expect(
         screen.getByTestId('sidebar-filter-notifications'),
@@ -221,9 +211,8 @@ describe('renderer/components/Sidebar.tsx', () => {
   it('should quit the app', async () => {
     const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
-    renderWithAppContext(<Sidebar />, {
-      isLoggedIn: false,
-    });
+    useAccountsStore.setState({ accounts: [] });
+    renderWithAppContext(<Sidebar />);
 
     await userEvent.click(screen.getByTestId('sidebar-quit'));
 

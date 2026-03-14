@@ -1,6 +1,6 @@
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { useSettingsStore } from '../../stores';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
@@ -13,56 +13,36 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
   });
 
   it('should render itself & its children - open without detailed notifications enabled', () => {
+    useSettingsStore.setState({ detailedNotifications: false });
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={''} open={true} />,
-      {
-        settings: {
-          ...mockSettings,
-          detailedNotifications: false,
-        },
-      },
     );
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - open with detailed notifications enabled', () => {
+    useSettingsStore.setState({ detailedNotifications: true });
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={''} open={true} />,
-      {
-        settings: {
-          ...mockSettings,
-          detailedNotifications: true,
-        },
-      },
     );
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - input token invalid', () => {
+    useSettingsStore.setState({ detailedNotifications: false });
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={'invalid'} open={true} />,
-      {
-        settings: {
-          ...mockSettings,
-          detailedNotifications: false,
-        },
-      },
     );
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - input token valid', () => {
+    useSettingsStore.setState({ detailedNotifications: false });
     const tree = renderWithAppContext(
       <SearchFilterSuggestions inputValue={'repo:'} open={true} />,
-      {
-        settings: {
-          ...mockSettings,
-          detailedNotifications: false,
-        },
-      },
     );
 
     expect(tree.container).toMatchSnapshot();

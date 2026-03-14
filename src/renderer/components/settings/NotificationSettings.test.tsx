@@ -2,9 +2,10 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { Constants } from '../../constants';
+
+import { useSettingsStore } from '../../stores';
 
 import * as comms from '../../utils/system/comms';
 import { NotificationSettings } from './NotificationSettings';
@@ -12,15 +13,17 @@ import { NotificationSettings } from './NotificationSettings';
 describe('renderer/components/settings/NotificationSettings.tsx', () => {
   const updateSettingMock = vi.fn();
 
+  beforeEach(() => {
+    useSettingsStore.setState({ updateSetting: updateSettingMock as any });
+  });
+
   afterEach(() => {
     vi.clearAllMocks();
   });
 
   it('should change the groupBy radio group', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('radio-groupBy-date'));
@@ -31,9 +34,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should change the fetchType radio group', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('radio-fetchType-inactivity'));
@@ -45,9 +46,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   describe('fetch interval settings', () => {
     it('should update the fetch interval values when using the buttons', async () => {
       await act(async () => {
-        renderWithAppContext(<NotificationSettings />, {
-          updateSetting: updateSettingMock,
-        });
+          renderWithAppContext(<NotificationSettings />);
       });
 
       // Increase fetch interval
@@ -107,16 +106,13 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     });
 
     it('should prevent going lower than minimum interval', async () => {
+      useSettingsStore.setState({
+        fetchInterval:
+          Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS +
+          Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+      });
       await act(async () => {
-        renderWithAppContext(<NotificationSettings />, {
-          settings: {
-            ...mockSettings,
-            fetchInterval:
-              Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS +
-              Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
-          },
-          updateSetting: updateSettingMock,
-        });
+        renderWithAppContext(<NotificationSettings />);
       });
 
       await act(async () => {
@@ -139,16 +135,13 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     });
 
     it('should prevent going above maximum interval', async () => {
+      useSettingsStore.setState({
+        fetchInterval:
+          Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS -
+          Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+      });
       await act(async () => {
-        renderWithAppContext(<NotificationSettings />, {
-          settings: {
-            ...mockSettings,
-            fetchInterval:
-              Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS -
-              Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
-          },
-          updateSetting: updateSettingMock,
-        });
+        renderWithAppContext(<NotificationSettings />);
       });
 
       await act(async () => {
@@ -176,9 +169,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle the fetchAllNotifications checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-fetchAllNotifications'));
@@ -192,9 +183,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle detailed notifications checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-detailedNotifications'));
@@ -208,9 +197,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle metric pills checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showPills'));
@@ -221,9 +208,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle show number checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showNumber'));
@@ -234,9 +219,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle the showOnlyParticipating checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showOnlyParticipating'));
@@ -251,9 +234,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
       .mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     const tooltipElement = screen.getByLabelText(
@@ -275,9 +256,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle the fetchReadNotifications checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(
@@ -293,9 +272,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle the markAsDoneOnOpen checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-markAsDoneOnOpen'));
@@ -306,9 +283,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle the markAsDoneOnUnsubscribe checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(
@@ -324,9 +299,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should toggle the delayNotificationState checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<NotificationSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<NotificationSettings />);
     });
 
     await userEvent.click(

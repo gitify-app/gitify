@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from '@primer/react';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore } from '../stores';
 
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -37,7 +37,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
     loginWithDeviceFlowStart,
     loginWithDeviceFlowPoll,
     loginWithDeviceFlowComplete,
-  } = useAppContext();
+  } = useAccountsStore();
 
   const [session, setSession] = useState<DeviceFlowSession | null>(null);
   const [isPolling, setIsPolling] = useState(false);

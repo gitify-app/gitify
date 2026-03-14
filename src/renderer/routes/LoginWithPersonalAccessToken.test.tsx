@@ -5,6 +5,7 @@ import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
 
 import type { Hostname, Token } from '../types';
 
+import { useAccountsStore } from '../stores';
 import * as logger from '../utils/core/logger';
 import * as comms from '../utils/system/comms';
 import {
@@ -61,9 +62,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
   describe("'Generate a PAT' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
-      });
+      useAccountsStore.setState({ loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock as any });
+      renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
 
@@ -73,9 +73,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     });
 
     it('should open in browser if hostname configured', async () => {
-      renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
-      });
+      useAccountsStore.setState({ loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock as any });
+      renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
       await userEvent.click(screen.getByTestId('login-create-token'));
 
@@ -86,9 +85,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   it('should login using a token - success', async () => {
     loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
-    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
-    });
+    useAccountsStore.setState({ loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock as any });
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -114,9 +112,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
       .mockImplementation(vi.fn());
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
-    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
-    });
+    useAccountsStore.setState({ loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock as any });
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -152,9 +149,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should open help docs in the browser', async () => {
-    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />, {
-      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
-    });
+    useAccountsStore.setState({ loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock as any });
+    renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
 

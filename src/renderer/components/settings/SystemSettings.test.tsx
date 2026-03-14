@@ -2,14 +2,18 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
 import type { Percentage } from '../../types';
 
+import { useSettingsStore } from '../../stores';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
   const updateSettingMock = vi.fn();
+
+  beforeEach(() => {
+    useSettingsStore.setState({ updateSetting: updateSettingMock as any });
+  });
 
   afterEach(() => {
     vi.clearAllMocks();
@@ -17,9 +21,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should change the open links radio group', async () => {
     await act(async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<SystemSettings />);
     });
 
     await userEvent.click(screen.getByTestId('radio-openLinks-background'));
@@ -30,9 +32,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should toggle the keyboardShortcut checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<SystemSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-keyboardShortcut'));
@@ -43,9 +43,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should toggle the showNotifications checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<SystemSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showNotifications'));
@@ -56,9 +54,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   describe('playSound', () => {
     it('should toggle the playSound checkbox', async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<SystemSettings />);
 
       await userEvent.click(screen.getByTestId('checkbox-playSound'));
 
@@ -67,27 +63,21 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     });
 
     it('volume controls should not be shown if playSound checkbox is false', async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-        settings: { ...mockSettings, playSound: false },
-      });
+      useSettingsStore.setState({ playSound: false });
+      renderWithAppContext(<SystemSettings />);
 
       expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
     });
 
     it('volume controls should be shown if playSound checkbox is true', async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-        settings: { ...mockSettings, playSound: true },
-      });
+      useSettingsStore.setState({ playSound: true });
+      renderWithAppContext(<SystemSettings />);
 
       expect(screen.getByTestId('settings-volume-group')).toBeVisible();
     });
 
     it('should increase notification volume', async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<SystemSettings />);
 
       await userEvent.click(screen.getByTestId('settings-volume-up'));
 
@@ -96,9 +86,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     });
 
     it('should decrease notification volume', async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<SystemSettings />);
 
       await userEvent.click(screen.getByTestId('settings-volume-down'));
 
@@ -107,10 +95,8 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     });
 
     it('should reset notification volume', async () => {
-      renderWithAppContext(<SystemSettings />, {
-        settings: { ...mockSettings, notificationVolume: 30 as Percentage },
-        updateSetting: updateSettingMock,
-      });
+      useSettingsStore.setState({ notificationVolume: 30 as Percentage });
+      renderWithAppContext(<SystemSettings />);
 
       await userEvent.click(screen.getByTestId('settings-volume-reset'));
 
@@ -121,9 +107,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it('should toggle the openAtStartup checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<SystemSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<SystemSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-openAtStartup'));

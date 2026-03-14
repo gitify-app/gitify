@@ -4,11 +4,16 @@ import userEvent from '@testing-library/user-event';
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 
+import { useAccountsStore, useSettingsStore } from '../../stores';
 import * as zoom from '../../utils/ui/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   const updateSettingMock = vi.fn();
+
+  beforeEach(() => {
+    useSettingsStore.setState({ updateSetting: updateSettingMock as any });
+  });
 
   afterEach(() => {
     vi.clearAllMocks();
@@ -16,9 +21,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
   it('should change the theme mode dropdown', async () => {
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<AppearanceSettings />);
     });
 
     await userEvent.selectOptions(
@@ -31,13 +34,9 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should toggle increase contrast checkbox', async () => {
+    useAccountsStore.setState({ accounts: [mockGitHubAppAccount] });
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        auth: {
-          accounts: [mockGitHubAppAccount],
-        },
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<AppearanceSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
@@ -58,9 +57,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       .mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<AppearanceSettings />);
     });
 
     // Zoom Out
@@ -80,13 +77,9 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should toggle account header checkbox', async () => {
+    useAccountsStore.setState({ accounts: [mockGitHubAppAccount] });
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        auth: {
-          accounts: [mockGitHubAppAccount],
-        },
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<AppearanceSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
@@ -96,13 +89,9 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   });
 
   it('should toggle wrap notification title checkbox', async () => {
+    useAccountsStore.setState({ accounts: [mockGitHubAppAccount] });
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
-        auth: {
-          accounts: [mockGitHubAppAccount],
-        },
-        updateSetting: updateSettingMock,
-      });
+      renderWithAppContext(<AppearanceSettings />);
     });
 
     await userEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useAccountsStore, useSettingsStore } from '../stores';
 import { getPrimaryAccountHostname } from '../utils/auth/utils';
 import { quitApp } from '../utils/system/comms';
 import {
@@ -42,19 +43,20 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const location = useLocation();
 
   const {
-    auth,
     fetchNotifications,
-    isLoggedIn,
     status,
-    settings,
-    updateSetting,
   } = useAppContext();
+
+  const accounts = useAccountsStore((s) => s.accounts);
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
+  const settings = useSettingsStore();
+  const { updateSetting } = settings;
 
   const isOnFiltersRoute = location.pathname.startsWith('/filters');
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
   const isLoading = status === 'loading';
 
-  const primaryAccountHostname = getPrimaryAccountHostname(auth);
+  const primaryAccountHostname = getPrimaryAccountHostname({ accounts });
 
   const shortcuts: ShortcutConfigs = useMemo(() => {
     return {

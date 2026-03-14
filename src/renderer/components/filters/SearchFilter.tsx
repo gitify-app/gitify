@@ -10,7 +10,7 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { Title } from '../primitives/Title';
 
@@ -26,7 +26,7 @@ import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificat
 import { TokenSearchInput } from './TokenSearchInput';
 
 export const SearchFilter: FC = () => {
-  const { settings } = useAppContext();
+  const settings = useSettingsStore();
 
   const updateFilter = useFiltersStore((s) => s.updateFilter);
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);

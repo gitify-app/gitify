@@ -15,7 +15,7 @@ import {
   Text,
 } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
@@ -34,7 +34,9 @@ import {
 } from '../../utils/ui/zoom';
 
 export const AppearanceSettings: FC = () => {
-  const { auth, settings, updateSetting } = useAppContext();
+  const accounts = useAccountsStore((s) => s.accounts);
+  const settings = useSettingsStore();
+  const { updateSetting } = settings;
 
   const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
@@ -156,7 +158,7 @@ export const AppearanceSettings: FC = () => {
               quick links) above the notifications list.
             </Text>
           }
-          visible={!hasMultipleAccounts(auth)}
+          visible={!hasMultipleAccounts({ accounts })}
         />
 
         <Checkbox

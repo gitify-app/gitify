@@ -2,7 +2,7 @@ import type { FC, MouseEvent } from 'react';
 
 import { Stack } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
@@ -18,7 +18,7 @@ export interface NotificationHeaderProps {
 export const NotificationHeader: FC<NotificationHeaderProps> = ({
   notification,
 }: NotificationHeaderProps) => {
-  const { settings } = useAppContext();
+  const settings = useSettingsStore();
 
   return (
     isGroupByDate(settings) && (

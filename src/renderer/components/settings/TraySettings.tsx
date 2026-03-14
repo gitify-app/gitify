@@ -5,13 +5,14 @@ import { Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
 export const TraySettings: FC = () => {
-  const { settings, updateSetting } = useAppContext();
+  const settings = useSettingsStore();
+  const { updateSetting } = settings;
 
   return (
     <fieldset>

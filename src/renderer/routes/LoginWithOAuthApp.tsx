@@ -20,7 +20,7 @@ import {
 
 import { Constants } from '../constants';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore } from '../stores';
 
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -91,7 +91,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
-  const { loginWithOAuthApp } = useAppContext();
+  const { loginWithOAuthApp } = useAccountsStore();
 
   const [shouldMaskClientSecret, setShouldMaskClientSecret] = useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);

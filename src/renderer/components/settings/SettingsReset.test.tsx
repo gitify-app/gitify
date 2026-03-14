@@ -3,13 +3,23 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 
+import { useSettingsStore } from '../../stores';
 import * as logger from '../../utils/core/logger';
 import { SettingsReset } from './SettingsReset';
+
+// Capture original action before any test can override it
+const _originalResetSettings = useSettingsStore.getState().resetSettings;
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
   const resetSettingsMock = vi.fn();
 
+  beforeEach(() => {
+    useSettingsStore.setState({ resetSettings: resetSettingsMock as any });
+  });
+
   afterEach(() => {
+    // Restore original so global beforeEach in vitest.setup.ts can call it safely
+    useSettingsStore.setState({ resetSettings: _originalResetSettings as any });
     vi.clearAllMocks();
   });
 
@@ -21,9 +31,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     globalThis.confirm = vi.fn(() => true); // always click 'OK'
 
     await act(async () => {
-      renderWithAppContext(<SettingsReset />, {
-        resetSettings: resetSettingsMock,
-      });
+      renderWithAppContext(<SettingsReset />);
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
@@ -37,9 +45,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     globalThis.confirm = vi.fn(() => false); // always click 'cancel'
 
     await act(async () => {
-      renderWithAppContext(<SettingsReset />, {
-        resetSettings: resetSettingsMock,
-      });
+      renderWithAppContext(<SettingsReset />);
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
