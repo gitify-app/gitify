@@ -3,8 +3,6 @@ import { type FC, type MouseEvent, useMemo, useState } from 'react';
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { useAccountsStore, useSettingsStore } from '../../stores';
-
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 
@@ -15,6 +13,7 @@ import {
   Size,
 } from '../../types';
 
+import { useAccountsStore, useSettingsStore } from '../../stores';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   groupNotificationsByRepository,

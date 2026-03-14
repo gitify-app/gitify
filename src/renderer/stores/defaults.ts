@@ -8,7 +8,6 @@ import {
   type SettingsState,
   Theme,
 } from '../types';
-
 import type { AccountsState, FiltersState, RuntimeState } from './types';
 
 /**

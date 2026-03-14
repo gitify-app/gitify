@@ -42,10 +42,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const {
-    fetchNotifications,
-    status,
-  } = useAppContext();
+  const { fetchNotifications, status } = useAppContext();
 
   const accounts = useAccountsStore((s) => s.accounts);
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());

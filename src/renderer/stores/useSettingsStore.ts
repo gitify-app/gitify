@@ -22,7 +22,7 @@ const useSettingsStore = create<SettingsStore>()(
       },
 
       toggleSetting: (name) => {
-        set((state) => ({ [name]: !state[name] } as Partial<SettingsStore>));
+        set((state) => ({ [name]: !state[name] }) as Partial<SettingsStore>);
       },
 
       resetSettings: () => {

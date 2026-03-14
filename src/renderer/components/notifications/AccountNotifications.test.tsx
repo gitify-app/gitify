@@ -5,7 +5,10 @@ import {
   ensureStableEmojis,
   renderWithAppContext,
 } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 
 import { GroupBy } from '../../types';
@@ -112,7 +115,9 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     let tree: ReturnType<typeof renderWithAppContext> | null = null;
 
-    useAccountsStore.setState({ accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount] });
+    useAccountsStore.setState({
+      accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+    });
     await act(async () => {
       tree = renderWithAppContext(<AccountNotifications {...props} />);
     });

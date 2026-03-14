@@ -11,8 +11,6 @@ import {
   Tooltip,
 } from '@primer/react';
 
-import { useAccountsStore } from '../stores';
-
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -21,6 +19,7 @@ import { Header } from '../components/primitives/Header';
 import type { Account, Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
+import { useAccountsStore } from '../stores';
 import { rendererLogError } from '../utils/core/logger';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
 

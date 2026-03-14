@@ -101,4 +101,3 @@ export function renderWithAppContext(
 export function ensureStableEmojis() {
   globalThis.Math.random = vi.fn(() => 0.1);
 }
-

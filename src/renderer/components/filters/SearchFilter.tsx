@@ -10,13 +10,11 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useSettingsStore } from '../../stores';
-
 import { Title } from '../primitives/Title';
 
 import { IconColor, type SearchToken, Size } from '../../types';
 
-import { useFiltersStore } from '../../stores';
+import { useFiltersStore, useSettingsStore } from '../../stores';
 import {
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,

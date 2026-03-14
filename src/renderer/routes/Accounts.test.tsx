@@ -21,7 +21,13 @@ describe('renderer/routes/Accounts.tsx', () => {
 
   describe('General', () => {
     it('should render itself & its children', async () => {
-      useAccountsStore.setState({ accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount] });
+      useAccountsStore.setState({
+        accounts: [
+          mockPersonalAccessTokenAccount,
+          mockOAuthAccount,
+          mockGitHubAppAccount,
+        ],
+      });
       await act(async () => {
         renderWithAppContext(<AccountsRoute />);
       });
@@ -92,14 +98,16 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should render with PAT scopes warning', async () => {
-      useAccountsStore.setState({ accounts: [
-        {
-          ...mockPersonalAccessTokenAccount,
-          scopes: ['read:user', 'notifications'],
-        },
-        mockOAuthAccount,
-        mockGitHubAppAccount,
-      ] });
+      useAccountsStore.setState({
+        accounts: [
+          {
+            ...mockPersonalAccessTokenAccount,
+            scopes: ['read:user', 'notifications'],
+          },
+          mockOAuthAccount,
+          mockGitHubAppAccount,
+        ],
+      });
       await act(async () => {
         renderWithAppContext(<AccountsRoute />);
       });
@@ -121,7 +129,13 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should set account as primary account', async () => {
-      useAccountsStore.setState({ accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount] });
+      useAccountsStore.setState({
+        accounts: [
+          mockPersonalAccessTokenAccount,
+          mockOAuthAccount,
+          mockGitHubAppAccount,
+        ],
+      });
       await act(async () => {
         renderWithAppContext(<AccountsRoute />);
       });
@@ -159,7 +173,10 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('should logout', async () => {
       const logoutFromAccountMock = vi.fn();
 
-      useAccountsStore.setState({ accounts: [mockPersonalAccessTokenAccount], logoutFromAccount: logoutFromAccountMock as any });
+      useAccountsStore.setState({
+        accounts: [mockPersonalAccessTokenAccount],
+        logoutFromAccount: logoutFromAccountMock as any,
+      });
 
       await act(async () => {
         renderWithAppContext(<AccountsRoute />);
@@ -171,7 +188,13 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should show view-scopes button for all auth methods', async () => {
-      useAccountsStore.setState({ accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount] });
+      useAccountsStore.setState({
+        accounts: [
+          mockPersonalAccessTokenAccount,
+          mockOAuthAccount,
+          mockGitHubAppAccount,
+        ],
+      });
       await act(async () => {
         renderWithAppContext(<AccountsRoute />);
       });

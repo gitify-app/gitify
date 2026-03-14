@@ -5,14 +5,13 @@ import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
-
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
 import { OpenPreference } from '../../types';
 
+import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 import {
   canDecreaseVolume,
   canIncreaseVolume,

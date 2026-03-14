@@ -20,8 +20,6 @@ import {
 
 import { Constants } from '../constants';
 
-import { useAccountsStore } from '../stores';
-
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -36,6 +34,7 @@ import type {
 } from '../types';
 import type { LoginOAuthWebOptions } from '../utils/auth/types';
 
+import { useAccountsStore } from '../stores';
 import {
   getNewOAuthAppURL,
   isValidClientId,

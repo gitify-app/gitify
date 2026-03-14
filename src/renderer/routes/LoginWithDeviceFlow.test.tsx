@@ -30,7 +30,9 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    useAccountsStore.setState({
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any,
+    });
     renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     expect(loginWithDeviceFlowStartMock).toHaveBeenCalled();
@@ -56,7 +58,9 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    useAccountsStore.setState({
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any,
+    });
     renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     await screen.findByText(/USER-1234/);
@@ -74,7 +78,9 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       .fn()
       .mockRejectedValueOnce(new Error('Network error'));
 
-    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    useAccountsStore.setState({
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any,
+    });
     renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     await screen.findByText(/Failed to start authentication/);
@@ -91,7 +97,9 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    useAccountsStore.setState({ loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any });
+    useAccountsStore.setState({
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock as any,
+    });
     renderWithAppContext(<LoginWithDeviceFlowRoute />);
 
     await screen.findByText(/USER-1234/);

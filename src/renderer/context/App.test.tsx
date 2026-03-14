@@ -9,10 +9,10 @@ import { Constants } from '../constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
 
+import { useAccountsStore } from '../stores';
 import * as notifications from '../utils/notifications/notifications';
 import * as tray from '../utils/system/tray';
 import { type AppContextState, AppProvider } from './App';
-import { useAccountsStore } from '../stores';
 
 vi.mock('../hooks/useNotifications');
 

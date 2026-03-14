@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import { Button, Stack, useConfirm } from '@primer/react';
 
 import { useSettingsStore } from '../../stores';
-
 import { rendererLogInfo } from '../../utils/core/logger';
 
 export const SettingsReset: FC = () => {

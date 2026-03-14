@@ -8,6 +8,7 @@ import type {
   LoginOAuthWebOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
+import type { AccountsStore } from './types';
 
 import { fetchAuthenticatedUserDetails } from '../utils/api/client';
 import { clearOctokitClientCache } from '../utils/api/octokit';
@@ -20,9 +21,6 @@ import {
   startGitHubDeviceFlow,
 } from '../utils/auth/utils';
 import { encryptValue } from '../utils/system/comms';
-
-import type { AccountsStore } from './types';
-
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 
 /**
@@ -45,13 +43,21 @@ const useAccountsStore = create<AccountsStore>()(
 
       loginWithDeviceFlowComplete: async (token: Token, hostname: Hostname) => {
         const auth: AuthState = { accounts: get().accounts };
-        const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+        const updatedAuth = await addAccount(
+          auth,
+          'GitHub App',
+          token,
+          hostname,
+        );
         set({ accounts: updatedAuth.accounts });
       },
 
       loginWithOAuthApp: async (data: LoginOAuthWebOptions) => {
         const { authOptions, authCode } = await performGitHubWebOAuth(data);
-        const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
+        const token = await exchangeAuthCodeForAccessToken(
+          authCode,
+          authOptions,
+        );
         const auth: AuthState = { accounts: get().accounts };
         const updatedAuth = await addAccount(
           auth,

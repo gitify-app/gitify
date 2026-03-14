@@ -20,8 +20,6 @@ import {
 
 import { Constants } from '../constants';
 
-import { useAccountsStore } from '../stores';
-
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -30,6 +28,7 @@ import { Header } from '../components/primitives/Header';
 import type { Account, Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 
+import { useAccountsStore } from '../stores';
 import {
   formatRecommendedOAuthScopes,
   getNewTokenURL,

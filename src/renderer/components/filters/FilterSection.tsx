@@ -8,7 +8,11 @@ import { useAppContext } from '../../hooks/useAppContext';
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
-import { type FiltersState, useFiltersStore, useSettingsStore } from '../../stores';
+import {
+  type FiltersState,
+  useFiltersStore,
+  useSettingsStore,
+} from '../../stores';
 import type { Filter } from '../../utils/notifications/filters';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 

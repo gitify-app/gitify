@@ -97,7 +97,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   it('should login using a token - success', async () => {
     loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
-    useAccountsStore.setState({ loginWithOAuthApp: loginWithOAuthAppMock as any });
+    useAccountsStore.setState({
+      loginWithOAuthApp: loginWithOAuthAppMock as any,
+    });
     renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
@@ -127,7 +129,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       .mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
-    useAccountsStore.setState({ loginWithOAuthApp: loginWithOAuthAppMock as any });
+    useAccountsStore.setState({
+      loginWithOAuthApp: loginWithOAuthAppMock as any,
+    });
     renderWithAppContext(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');

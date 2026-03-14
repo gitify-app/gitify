@@ -15,14 +15,13 @@ import {
   Text,
 } from '@primer/react';
 
-import { useAccountsStore, useSettingsStore } from '../../stores';
-
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
 import { Theme } from '../../types';
 
+import { useAccountsStore, useSettingsStore } from '../../stores';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   canDecreaseZoom,

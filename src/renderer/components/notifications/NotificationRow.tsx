@@ -5,13 +5,12 @@ import { Stack, Text, Tooltip } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
 
-import { useSettingsStore } from '../../stores';
-
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
+import { useSettingsStore } from '../../stores';
 import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';

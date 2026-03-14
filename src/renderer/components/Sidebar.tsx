@@ -22,11 +22,7 @@ import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const {
-    status,
-    notificationCount,
-    hasUnreadNotifications,
-  } = useAppContext();
+  const { status, notificationCount, hasUnreadNotifications } = useAppContext();
 
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
   const settings = useSettingsStore();

@@ -2,14 +2,13 @@ import { type FC, useMemo, useRef } from 'react';
 
 import { useAppContext } from '../hooks/useAppContext';
 
-import { useSettingsStore } from '../stores';
-
 import { AllRead } from '../components/AllRead';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { AccountNotifications } from '../components/notifications/AccountNotifications';
 import { Oops } from '../components/Oops';
 
+import { useSettingsStore } from '../stores';
 import { getAccountUUID } from '../utils/auth/utils';
 
 export const NotificationsRoute: FC = () => {

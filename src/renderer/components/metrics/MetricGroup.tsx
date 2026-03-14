@@ -1,9 +1,8 @@
 import type { FC } from 'react';
 
-import { useSettingsStore } from '../../stores';
-
 import type { GitifyNotification } from '../../types';
 
+import { useSettingsStore } from '../../stores';
 import { CommentsPill } from './CommentsPill';
 import { LabelsPill } from './LabelsPill';
 import { LinkedIssuesPill } from './LinkedIssuesPill';

@@ -95,9 +95,7 @@ export interface AccountsState {
 export interface AccountsActions {
   isLoggedIn: () => boolean;
 
-  loginWithDeviceFlowStart: (
-    hostname?: Hostname,
-  ) => Promise<DeviceFlowSession>;
+  loginWithDeviceFlowStart: (hostname?: Hostname) => Promise<DeviceFlowSession>;
   loginWithDeviceFlowPoll: (
     session: DeviceFlowSession,
   ) => Promise<Token | null>;

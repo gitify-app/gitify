@@ -2,10 +2,9 @@ import type { FC } from 'react';
 
 import { Popover, Stack, Text } from '@primer/react';
 
-import { useSettingsStore } from '../../stores';
-
 import { Opacity } from '../../types';
 
+import { useSettingsStore } from '../../stores';
 import {
   ALL_SEARCH_QUALIFIERS,
   BASE_SEARCH_QUALIFIERS,

@@ -5,13 +5,12 @@ import { Button, Stack } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
 
-import { useSettingsStore } from '../../stores';
-
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
+import { useSettingsStore } from '../../stores';
 import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openRepository } from '../../utils/system/links';
@@ -29,8 +28,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
 }) => {
-  const { markNotificationsAsRead, markNotificationsAsDone } =
-    useAppContext();
+  const { markNotificationsAsRead, markNotificationsAsDone } = useAppContext();
 
   const settings = useSettingsStore();
 

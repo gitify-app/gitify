@@ -24,8 +24,6 @@ import {
 
 import { useAppContext } from '../hooks/useAppContext';
 
-import { useAccountsStore } from '../stores';
-
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -34,6 +32,7 @@ import { Header } from '../components/primitives/Header';
 
 import { type Account, type GitifyError, IconColor, Size } from '../types';
 
+import { useAccountsStore } from '../stores';
 import { determineFailureType } from '../utils/api/errors';
 import {
   getAccountUUID,

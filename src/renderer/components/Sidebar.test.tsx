@@ -90,7 +90,10 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('toggles participating when clicked', async () => {
-      useSettingsStore.setState({ participating: false, updateSetting: updateSettingMock as any });
+      useSettingsStore.setState({
+        participating: false,
+        updateSetting: updateSettingMock as any,
+      });
       renderWithAppContext(<Sidebar />, {
         fetchNotifications: fetchNotificationsMock,
       });

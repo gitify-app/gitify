@@ -26,11 +26,7 @@ import type {
 } from '../types';
 import { FetchType } from '../types';
 
-import {
-  useAccountsStore,
-  useFiltersStore,
-  useSettingsStore,
-} from '../stores';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { clearState } from '../utils/core/storage';
 import {

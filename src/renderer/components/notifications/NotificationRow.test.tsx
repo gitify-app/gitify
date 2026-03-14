@@ -97,7 +97,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
-      useSettingsStore.setState({ markAsDoneOnOpen: false, delayNotificationState: true });
+      useSettingsStore.setState({
+        markAsDoneOnOpen: false,
+        delayNotificationState: true,
+      });
       renderWithAppContext(<NotificationRow {...props} />, {
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
@@ -136,7 +139,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
-      useSettingsStore.setState({ markAsDoneOnOpen: true, fetchReadNotifications: true });
+      useSettingsStore.setState({
+        markAsDoneOnOpen: true,
+        fetchReadNotifications: true,
+      });
       renderWithAppContext(<NotificationRow {...props} />, {
         markNotificationsAsRead: markNotificationsAsReadMock,
         markNotificationsAsDone: markNotificationsAsDoneMock,

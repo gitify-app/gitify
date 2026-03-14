@@ -6,7 +6,6 @@ import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { Constants } from '../../constants';
 
 import { useSettingsStore } from '../../stores';
-
 import * as comms from '../../utils/system/comms';
 import { NotificationSettings } from './NotificationSettings';
 
@@ -46,7 +45,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   describe('fetch interval settings', () => {
     it('should update the fetch interval values when using the buttons', async () => {
       await act(async () => {
-          renderWithAppContext(<NotificationSettings />);
+        renderWithAppContext(<NotificationSettings />);
       });
 
       // Increase fetch interval

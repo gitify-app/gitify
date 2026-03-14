@@ -23,8 +23,6 @@ import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
 
-import { useAccountsStore, useSettingsStore } from '../../stores';
-
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
@@ -32,6 +30,7 @@ import { Title } from '../primitives/Title';
 
 import { FetchType, GroupBy, Size } from '../../types';
 
+import { useAccountsStore, useSettingsStore } from '../../stores';
 import {
   hasAlternateScopes,
   hasRecommendedScopes,
