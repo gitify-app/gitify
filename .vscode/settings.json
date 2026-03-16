@@ -6,6 +6,9 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
