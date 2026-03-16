@@ -22,6 +22,10 @@ import { isDevMode } from './utils';
 
 log.initialize();
 
+if (!app.isPackaged) {
+  log.transports.file.fileName = 'main.dev.log';
+}
+
 const mb = menubar({
   icon: TrayIcons.idle,
   index: Paths.indexHtml,
