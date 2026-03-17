@@ -113,6 +113,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
               <label
                 class="prc-components-Label-2mrqP"
                 for="_r_2_"
+                id="_r_2_-label"
               >
                 <span
                   class="prc-components-RequiredText-7UsHS"
@@ -257,6 +258,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
               <label
                 class="prc-components-Label-2mrqP"
                 for="_r_a_"
+                id="_r_a_-label"
               >
                 <span
                   class="prc-components-RequiredText-7UsHS"
