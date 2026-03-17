@@ -113,6 +113,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
               <label
                 class="prc-components-Label-2mrqP"
                 for="_r_2_"
+                id="_r_2_-label"
               >
                 <span
                   class="prc-components-RequiredText-7UsHS"
@@ -225,6 +226,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
               <label
                 class="prc-components-Label-2mrqP"
                 for="_r_9_"
+                id="_r_9_-label"
               >
                 <span
                   class="prc-components-RequiredText-7UsHS"
@@ -263,6 +265,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
               <label
                 class="prc-components-Label-2mrqP"
                 for="_r_f_"
+                id="_r_f_-label"
               >
                 <span
                   class="prc-components-RequiredText-7UsHS"
