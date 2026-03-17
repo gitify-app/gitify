@@ -20,7 +20,6 @@ import { RequestError } from '@octokit/request-error';
 
 import type { MockedFunction } from 'vitest';
 
-import { simulateDeviceFlow } from '../../__helpers__/auth-helpers';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockRawUser } from '../api/__mocks__/response-mocks';
@@ -81,127 +80,91 @@ describe('renderer/utils/auth/utils.ts', () => {
     vi.clearAllMocks();
   });
 
-  describe('device OAuth orchestration (test helper)', () => {
-    it('should authenticate using device flow for GitHub app', async () => {
-      createDeviceCodeMock.mockResolvedValueOnce({
-        data: {
-          device_code: 'device-code',
-          user_code: 'user-code',
-          verification_uri: 'https://github.com/login/device',
-          expires_in: 900,
-          interval: 5,
-        },
-      } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
+  describe('Gitify GitHub OAuth - Device Code Flow', () => {
+    describe('startGitHubDeviceFlow', () => {
+      it('should request a device code and return a session', async () => {
+        createDeviceCodeMock.mockResolvedValueOnce({
+          data: {
+            device_code: 'device-code-xyz',
+            user_code: 'user-code-xyz',
+            verification_uri: 'https://github.com/login/device',
+            expires_in: 600,
+            interval: 5,
+          },
+        } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
 
-      exchangeDeviceCodeMock.mockResolvedValueOnce({
-        authentication: {
-          token: 'device-token',
-        },
-      } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
+        const session = await authUtils.startGitHubDeviceFlow();
 
-      const token = await simulateDeviceFlow();
+        expect(createDeviceCodeMock).toHaveBeenCalledWith({
+          clientType: 'oauth-app',
+          clientId: 'FAKE_CLIENT_ID_123',
+          scopes: getRecommendedScopeNames(),
+          request: expect.any(Function),
+        });
 
-      expect(createDeviceCodeMock).toHaveBeenCalledWith({
-        clientType: 'oauth-app',
-        clientId: 'FAKE_CLIENT_ID_123',
-        scopes: getRecommendedScopeNames(),
-        request: expect.any(Function),
+        expect(session.deviceCode).toBe('device-code-xyz');
+        expect(session.userCode).toBe('user-code-xyz');
+        expect(session.verificationUri).toBe('https://github.com/login/device');
+        expect(session.intervalSeconds).toBe(5);
+        expect(session.expiresAt).toBeGreaterThan(Date.now());
       });
-
-      expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
-        clientType: 'oauth-app',
-        clientId: 'FAKE_CLIENT_ID_123',
-        code: 'device-code',
-        request: expect.any(Function),
-      });
-
-      expect(token).toBe('device-token');
-    });
-  });
-
-  describe('startGitHubDeviceFlow', () => {
-    it('should request a device code and return a session', async () => {
-      createDeviceCodeMock.mockResolvedValueOnce({
-        data: {
-          device_code: 'device-code-xyz',
-          user_code: 'user-code-xyz',
-          verification_uri: 'https://github.com/login/device',
-          expires_in: 600,
-          interval: 5,
-        },
-      } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
-
-      const session = await authUtils.startGitHubDeviceFlow();
-
-      expect(createDeviceCodeMock).toHaveBeenCalledWith({
-        clientType: 'oauth-app',
-        clientId: 'FAKE_CLIENT_ID_123',
-        scopes: getRecommendedScopeNames(),
-        request: expect.any(Function),
-      });
-
-      expect(session.deviceCode).toBe('device-code-xyz');
-      expect(session.userCode).toBe('user-code-xyz');
-      expect(session.verificationUri).toBe('https://github.com/login/device');
-      expect(session.intervalSeconds).toBe(5);
-      expect(session.expiresAt).toBeGreaterThan(Date.now());
-    });
-  });
-
-  describe('pollGitHubDeviceFlow', () => {
-    const baseSession = {
-      hostname: 'github.com',
-      clientId: 'FAKE_CLIENT_ID_123',
-      deviceCode: 'device-code',
-      userCode: 'user-code',
-      verificationUri: 'https://github.com/login/device',
-      intervalSeconds: 5,
-      expiresAt: Date.now() + 10000,
-    } as const;
-
-    it('returns token on successful exchange', async () => {
-      exchangeDeviceCodeMock.mockResolvedValueOnce({
-        authentication: { token: 'device-token-xyz' },
-      } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
-
-      const token = await authUtils.pollGitHubDeviceFlow(
-        baseSession as DeviceFlowSession,
-      );
-
-      expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
-        clientType: 'oauth-app',
-        clientId: 'FAKE_CLIENT_ID_123',
-        code: 'device-code',
-        request: expect.any(Function),
-      });
-
-      expect(token).toBe('device-token-xyz');
     });
 
-    it('returns null when authorization is pending or slow_down', async () => {
-      const pendingErr = Object.create(RequestError.prototype);
-      pendingErr.response = { data: { error: 'authorization_pending' } };
+    describe('pollGitHubDeviceFlow', () => {
+      const baseSession = {
+        hostname: 'github.com',
+        clientId: 'FAKE_CLIENT_ID_123',
+        deviceCode: 'device-code',
+        userCode: 'user-code',
+        verificationUri: 'https://github.com/login/device',
+        intervalSeconds: 5,
+        expiresAt: Date.now() + 10000,
+      } as const;
 
-      exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
+      it('returns token on successful exchange', async () => {
+        exchangeDeviceCodeMock.mockResolvedValueOnce({
+          authentication: { token: 'device-token-xyz' },
+        } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
 
-      const token = await authUtils.pollGitHubDeviceFlow(
-        baseSession as DeviceFlowSession,
-      );
+        const token = await authUtils.pollGitHubDeviceFlow(
+          baseSession as DeviceFlowSession,
+        );
 
-      expect(token).toBeNull();
-    });
+        expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
+          clientType: 'oauth-app',
+          clientId: 'FAKE_CLIENT_ID_123',
+          code: 'device-code',
+          request: expect.any(Function),
+        });
 
-    it('throws on other errors', async () => {
-      const otherErr = new Error('boom');
+        expect(token).toBe('device-token-xyz');
+      });
 
-      exchangeDeviceCodeMock.mockRejectedValueOnce(otherErr);
+      it('returns null when authorization is pending or slow_down', async () => {
+        const pendingErr = Object.create(RequestError.prototype);
+        pendingErr.response = { data: { error: 'authorization_pending' } };
 
-      await expect(
-        async () =>
-          await authUtils.pollGitHubDeviceFlow(
-            baseSession as DeviceFlowSession,
-          ),
-      ).rejects.toThrow('boom');
+        exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
+
+        const token = await authUtils.pollGitHubDeviceFlow(
+          baseSession as DeviceFlowSession,
+        );
+
+        expect(token).toBeNull();
+      });
+
+      it('throws on other errors', async () => {
+        const otherErr = new Error('boom');
+
+        exchangeDeviceCodeMock.mockRejectedValueOnce(otherErr);
+
+        await expect(
+          async () =>
+            await authUtils.pollGitHubDeviceFlow(
+              baseSession as DeviceFlowSession,
+            ),
+        ).rejects.toThrow('boom');
+      });
     });
   });
 

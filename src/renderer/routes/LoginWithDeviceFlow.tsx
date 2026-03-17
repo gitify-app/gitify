@@ -169,6 +169,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           />
         )}
 
+        {/** GitHub Device Code Flow session */}
         {session ? (
           <Stack direction="vertical" gap="normal">
             <Stack direction="vertical" gap="condensed">
@@ -278,7 +279,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
               icon={SyncIcon}
               size="large"
               variant="invisible"
-            />{' '}
+            />
             <Text>Initializing authentication...</Text>
           </Stack>
         )}
