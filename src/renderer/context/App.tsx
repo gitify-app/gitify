@@ -72,7 +72,10 @@ import { defaultAuth, defaultSettings } from './defaults';
 export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithDeviceFlowStart: (hostname?: Hostname) => Promise<DeviceFlowSession>;
+  loginWithDeviceFlowStart: (
+    hostname?: Hostname,
+    scopes?: string[],
+  ) => Promise<DeviceFlowSession>;
   loginWithDeviceFlowPoll: (
     session: DeviceFlowSession,
   ) => Promise<Token | null>;
@@ -383,7 +386,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Initiate device flow session.
    */
   const loginWithDeviceFlowStart = useCallback(
-    async (hostname?: Hostname) => await startGitHubDeviceFlow(hostname),
+    async (hostname?: Hostname, scopes?: string[]) =>
+      await startGitHubDeviceFlow(hostname, scopes),
     [],
   );
 

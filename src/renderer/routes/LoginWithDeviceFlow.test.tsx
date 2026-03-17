@@ -18,7 +18,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     vi.clearAllMocks();
   });
 
-  it('should render and initialize device flow', async () => {
+  it('should render scope choice buttons', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -33,16 +33,71 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalled();
+    expect(screen.getByText('Receive notifications for:')).toBeInTheDocument();
+    expect(screen.getByTestId('device-scope-public')).toBeInTheDocument();
+    expect(screen.getByTestId('device-scope-full')).toBeInTheDocument();
 
-    await screen.findByText(/USER-1234/);
-    expect(screen.getByText(/github.com\/login\/device/)).toBeInTheDocument();
+    // Device flow should not start until user makes a choice
+    expect(loginWithDeviceFlowStartMock).not.toHaveBeenCalled();
+  });
+
+  it('should start device flow with public scope when clicking Public', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.com',
+      clientId: 'test-id',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
+    });
+
+    await userEvent.click(screen.getByTestId('device-scope-public'));
+
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
+      'notifications',
+      'read:user',
+      'public_repo',
+    ]);
+
+    await screen.findByTestId('device-user-code');
+    expect(screen.getByTestId('device-verification-link')).toBeInTheDocument();
 
     // Verify auto-copy and auto-open were called
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://github.com/login/device',
     );
+  });
+
+  it('should start device flow with full scope when clicking Public and Private', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.com',
+      clientId: 'test-id',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
+    });
+
+    await userEvent.click(screen.getByTestId('device-scope-full'));
+
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
+      'notifications',
+      'read:user',
+      'repo',
+    ]);
+
+    await screen.findByTestId('device-user-code');
   });
 
   it('should copy user code to clipboard when clicking copy button', async () => {
@@ -60,12 +115,13 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await screen.findByText(/USER-1234/);
+    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await screen.findByTestId('device-user-code');
 
     // Clear the auto-copy call from initialization
     copyToClipboardSpy.mockClear();
 
-    await userEvent.click(screen.getByLabelText('Copy device code'));
+    await userEvent.click(screen.getByTestId('copy-device-code'));
 
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
   });
@@ -79,10 +135,12 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
+    await userEvent.click(screen.getByTestId('device-scope-full'));
+
     await screen.findByText(/Failed to start authentication/);
   });
 
-  it('should navigate back on cancel', async () => {
+  it('should navigate back on cancel from scope choice', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -97,9 +155,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await screen.findByText(/USER-1234/);
-
-    await userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByTestId('cancel-button'));
 
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });
