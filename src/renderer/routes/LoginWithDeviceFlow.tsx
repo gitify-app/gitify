@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CopyIcon, SignInIcon, SyncIcon } from '@primer/octicons-react';
 import {
+  Banner,
   Button,
   IconButton,
   Link as PrimerLink,
@@ -21,12 +22,18 @@ import { Header } from '../components/primitives/Header';
 import type { Account, Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
+import {
+  getAlternateScopeNames,
+  getRecommendedScopeNames,
+} from '../utils/auth/utils';
 import { rendererLogError } from '../utils/core/logger';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
   account?: Account;
 }
+
+type ScopeChoice = 'public' | 'full';
 
 export const LoginWithDeviceFlowRoute: FC = () => {
   const navigate = useNavigate();
@@ -42,13 +49,20 @@ export const LoginWithDeviceFlowRoute: FC = () => {
   const [session, setSession] = useState<DeviceFlowSession | null>(null);
   const [isPolling, setIsPolling] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [scopeChoice, setScopeChoice] = useState<ScopeChoice | null>(null);
 
   // Initialize device flow session, copy code, and open browser
   useEffect(() => {
     const initializeDeviceFlow = async () => {
       try {
+        const scopes =
+          scopeChoice === 'public'
+            ? getAlternateScopeNames()
+            : getRecommendedScopeNames();
+
         const newSession = await loginWithDeviceFlowStart(
           reAuthAccount?.hostname,
+          scopes,
         );
         setSession(newSession);
 
@@ -67,8 +81,10 @@ export const LoginWithDeviceFlowRoute: FC = () => {
       }
     };
 
-    initializeDeviceFlow();
-  }, [loginWithDeviceFlowStart, reAuthAccount]);
+    if (scopeChoice) {
+      initializeDeviceFlow();
+    }
+  }, [loginWithDeviceFlowStart, reAuthAccount, scopeChoice]);
 
   // Poll for device flow completion
   useEffect(() => {
@@ -139,17 +155,19 @@ export const LoginWithDeviceFlowRoute: FC = () => {
 
       <Contents>
         {error && (
-          <div
-            style={{
-              backgroundColor: 'var(--color-danger-subtle)',
-              borderColor: 'var(--color-danger-emphasis)',
-              borderRadius: '6px',
-              borderWidth: '1px',
-              padding: '12px',
-            }}
-          >
-            <Text color="danger.fg">{error}</Text>
-          </div>
+          <Banner
+            data-testid="login-errors"
+            description={
+              <Text color="danger.fg">
+                <Stack direction="vertical" gap="condensed">
+                  <Text>{error}</Text>
+                </Stack>
+              </Text>
+            }
+            hideTitle
+            title="Login errors"
+            variant="critical"
+          />
         )}
 
         {session ? (
@@ -164,16 +182,11 @@ export const LoginWithDeviceFlowRoute: FC = () => {
               <Text as="p">and enter your device code when prompted:</Text>
             </Stack>
 
-            <div
-              style={{
-                backgroundColor: 'var(--color-canvas-subtle)',
-                borderRadius: '6px',
-                padding: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '8px',
-              }}
+            <Stack
+              align="center"
+              direction="horizontal"
+              justify="space-between"
+              padding="condensed"
             >
               <Text
                 as="div"
@@ -185,38 +198,66 @@ export const LoginWithDeviceFlowRoute: FC = () => {
               >
                 {session.userCode}
               </Text>
-              <Tooltip text="Copy code">
-                <IconButton
-                  aria-label="Copy device code"
-                  icon={CopyIcon}
-                  onClick={handleCopyUserCode}
-                  size="small"
-                  variant="default"
-                />
-              </Tooltip>
-            </div>
+              <IconButton
+                aria-label="Copy device code"
+                icon={CopyIcon}
+                onClick={handleCopyUserCode}
+                size="small"
+                variant="default"
+              />
+            </Stack>
 
-            <Stack direction="vertical" gap="condensed">
-              <Text
-                as="p"
-                style={{ fontSize: '12px', color: 'var(--color-fg-muted)' }}
-              >
-                We're waiting for authorization...
-              </Text>
-              {isPolling && (
-                <Stack align="center" gap="normal">
-                  <IconButton
-                    aria-label="Polling"
-                    className={'animate-spin'}
-                    icon={SyncIcon}
-                    size="small"
-                    variant="invisible"
-                  />
-                  <Text style={{ fontSize: '12px' }}>
-                    Polling for authorization
+            <Text as="p" size="small">
+              We're waiting for authorization...
+            </Text>
+            {isPolling && (
+              <Stack align="center" gap="normal">
+                <IconButton
+                  aria-label="Polling"
+                  className="animate-spin"
+                  icon={SyncIcon}
+                  size="small"
+                  variant="invisible"
+                />
+                <Text as="em" size="small">
+                  Polling for authorization
+                </Text>
+              </Stack>
+            )}
+          </Stack>
+        ) : !scopeChoice ? (
+          <Stack direction="vertical" gap="normal">
+            <Text as="p">Receive notifications for:</Text>
+
+            <Stack align="center" direction="vertical">
+              <Button block labelWrap onClick={() => setScopeChoice('public')}>
+                <Stack gap="none">
+                  <Text>Public</Text>
+                  <Text size="small">
+                    Limited experience with least privilege permissions.
+                  </Text>
+                  <Text as="em" size="small">
+                    Scopes: {getAlternateScopeNames().join(', ')}
                   </Text>
                 </Stack>
-              )}
+              </Button>
+
+              <Button
+                block
+                labelWrap
+                onClick={() => setScopeChoice('full')}
+                variant="primary"
+              >
+                <Stack gap="none">
+                  <Text as="strong">Public and Private</Text>
+                  <Text size="small">
+                    Best experience, but requires broader permissions.
+                  </Text>
+                  <Text as="em" size="small">
+                    Scopes: {getRecommendedScopeNames().join(', ')}
+                  </Text>
+                </Stack>
+              </Button>
             </Stack>
           </Stack>
         ) : (
@@ -237,21 +278,6 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         <Button onClick={() => navigate(-1)} variant="default">
           Cancel
         </Button>
-
-        {/* {session && (
-          <Button
-            disabled={!session || isPolling}
-            leadingVisual={SignInIcon}
-            onClick={() => {
-              if (session.verificationUri) {
-                window.open(session.verificationUri, '_blank');
-              }
-            }}
-            variant="primary"
-          >
-            Open Browser
-          </Button>
-        )} */}
       </Footer>
     </Page>
   );

@@ -18,7 +18,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     vi.clearAllMocks();
   });
 
-  it('should render and initialize device flow', async () => {
+  it('should render scope choice buttons', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -33,7 +33,42 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalled();
+    expect(
+      screen.getByText(
+        'Choose which repositories you want to receive notifications for:',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Public Repositories')).toBeInTheDocument();
+    expect(
+      screen.getByText('Public and Private Repositories'),
+    ).toBeInTheDocument();
+
+    // Device flow should not start until user makes a choice
+    expect(loginWithDeviceFlowStartMock).not.toHaveBeenCalled();
+  });
+
+  it('should start device flow with public scope when clicking Public Repositories', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.com',
+      clientId: 'test-id',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
+    });
+
+    await userEvent.click(screen.getByText('Public Repositories'));
+
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
+      'notifications',
+      'read:user',
+      'public_repo',
+    ]);
 
     await screen.findByText(/USER-1234/);
     expect(screen.getByText(/github.com\/login\/device/)).toBeInTheDocument();
@@ -43,6 +78,32 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://github.com/login/device',
     );
+  });
+
+  it('should start device flow with full scope when clicking Public and Private Repositories', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.com',
+      clientId: 'test-id',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
+    });
+
+    await userEvent.click(screen.getByText('Public and Private Repositories'));
+
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
+      'notifications',
+      'read:user',
+      'repo',
+    ]);
+
+    await screen.findByText(/USER-1234/);
   });
 
   it('should copy user code to clipboard when clicking copy button', async () => {
@@ -60,6 +121,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
+    await userEvent.click(screen.getByText('Public Repositories'));
     await screen.findByText(/USER-1234/);
 
     // Clear the auto-copy call from initialization
@@ -79,10 +141,12 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
+    await userEvent.click(screen.getByText('Public and Private Repositories'));
+
     await screen.findByText(/Failed to start authentication/);
   });
 
-  it('should navigate back on cancel', async () => {
+  it('should navigate back on cancel from scope choice', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -96,8 +160,6 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     renderWithAppContext(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
-
-    await screen.findByText(/USER-1234/);
 
     await userEvent.click(screen.getByText('Cancel'));
 

@@ -108,15 +108,17 @@ export function performGitHubWebOAuth(
  * (user code, verification URI, expiry) needed to complete the flow.
  *
  * @param hostname - The GitHub hostname to authenticate against. Defaults to github.com.
+ * @param scopes - Array of scope names to request. Defaults to recommended (full) scopes.
  * @returns The device flow session data.
  */
 export async function startGitHubDeviceFlow(
   hostname: Hostname = Constants.GITHUB_HOSTNAME,
+  scopes: string[] = getRecommendedScopeNames(),
 ): Promise<DeviceFlowSession> {
   const deviceCode = await createDeviceCode({
     clientType: 'oauth-app' as const,
     clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
-    scopes: getRecommendedScopeNames(),
+    scopes: scopes,
     request: request.defaults({
       baseUrl: getGitHubAuthBaseUrl(hostname).toString(),
     }),
@@ -175,33 +177,6 @@ export async function pollGitHubDeviceFlow(
 
     throw err;
   }
-}
-
-/**
- * Orchestrate a complete GitHub Device OAuth flow.
- *
- * Starts a device flow session, then polls at the session-specified interval
- * until the user approves the request or the device code expires.
- *
- * @returns The access token on successful authorization.
- * @throws If the device code expires before the user approves.
- */
-export async function performGitHubDeviceOAuth(): Promise<Token> {
-  const session = await startGitHubDeviceFlow();
-
-  const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
-
-  while (Date.now() < session.expiresAt) {
-    const token = await pollGitHubDeviceFlow(session);
-
-    if (token) {
-      return token;
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, intervalMs));
-  }
-
-  throw new Error('Device code expired before authorization completed');
 }
 
 /**
