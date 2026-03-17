@@ -38,7 +38,11 @@ import type {
   Token,
 } from '../../types';
 import type { GetAuthenticatedUserResponse } from '../api/types';
-import type { AuthMethod, LoginOAuthWebOptions } from './types';
+import type {
+  AuthMethod,
+  DeviceFlowSession,
+  LoginOAuthWebOptions,
+} from './types';
 
 import * as comms from '../../utils/system/comms';
 import * as apiClient from '../api/client';
@@ -160,7 +164,9 @@ describe('renderer/utils/auth/utils.ts', () => {
         authentication: { token: 'device-token-xyz' },
       } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
 
-      const token = await authUtils.pollGitHubDeviceFlow(baseSession as any);
+      const token = await authUtils.pollGitHubDeviceFlow(
+        baseSession as DeviceFlowSession,
+      );
 
       expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
         clientType: 'oauth-app',
@@ -178,7 +184,9 @@ describe('renderer/utils/auth/utils.ts', () => {
 
       exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
 
-      const token = await authUtils.pollGitHubDeviceFlow(baseSession as any);
+      const token = await authUtils.pollGitHubDeviceFlow(
+        baseSession as DeviceFlowSession,
+      );
 
       expect(token).toBeNull();
     });
@@ -189,7 +197,10 @@ describe('renderer/utils/auth/utils.ts', () => {
       exchangeDeviceCodeMock.mockRejectedValueOnce(otherErr);
 
       await expect(
-        async () => await authUtils.pollGitHubDeviceFlow(baseSession as any),
+        async () =>
+          await authUtils.pollGitHubDeviceFlow(
+            baseSession as DeviceFlowSession,
+          ),
       ).rejects.toThrow('boom');
     });
   });

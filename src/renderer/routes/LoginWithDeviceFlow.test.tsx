@@ -33,21 +33,15 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    expect(
-      screen.getByText(
-        'Choose which repositories you want to receive notifications for:',
-      ),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Public Repositories')).toBeInTheDocument();
-    expect(
-      screen.getByText('Public and Private Repositories'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Receive notifications for:')).toBeInTheDocument();
+    expect(screen.getByTestId('device-scope-public')).toBeInTheDocument();
+    expect(screen.getByTestId('device-scope-full')).toBeInTheDocument();
 
     // Device flow should not start until user makes a choice
     expect(loginWithDeviceFlowStartMock).not.toHaveBeenCalled();
   });
 
-  it('should start device flow with public scope when clicking Public Repositories', async () => {
+  it('should start device flow with public scope when clicking Public', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -62,7 +56,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByText('Public Repositories'));
+    await userEvent.click(screen.getByTestId('device-scope-public'));
 
     expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
       'notifications',
@@ -70,8 +64,8 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       'public_repo',
     ]);
 
-    await screen.findByText(/USER-1234/);
-    expect(screen.getByText(/github.com\/login\/device/)).toBeInTheDocument();
+    await screen.findByTestId('device-user-code');
+    expect(screen.getByTestId('device-verification-link')).toBeInTheDocument();
 
     // Verify auto-copy and auto-open were called
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
@@ -80,7 +74,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     );
   });
 
-  it('should start device flow with full scope when clicking Public and Private Repositories', async () => {
+  it('should start device flow with full scope when clicking Public and Private', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -95,7 +89,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByText('Public and Private Repositories'));
+    await userEvent.click(screen.getByTestId('device-scope-full'));
 
     expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
       'notifications',
@@ -103,7 +97,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       'repo',
     ]);
 
-    await screen.findByText(/USER-1234/);
+    await screen.findByTestId('device-user-code');
   });
 
   it('should copy user code to clipboard when clicking copy button', async () => {
@@ -121,13 +115,13 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByText('Public Repositories'));
-    await screen.findByText(/USER-1234/);
+    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await screen.findByTestId('device-user-code');
 
     // Clear the auto-copy call from initialization
     copyToClipboardSpy.mockClear();
 
-    await userEvent.click(screen.getByLabelText('Copy device code'));
+    await userEvent.click(screen.getByTestId('copy-device-code'));
 
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
   });
@@ -141,7 +135,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByText('Public and Private Repositories'));
+    await userEvent.click(screen.getByTestId('device-scope-full'));
 
     await screen.findByText(/Failed to start authentication/);
   });
@@ -161,7 +155,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByTestId('cancel-button'));
 
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });

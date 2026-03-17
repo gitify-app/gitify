@@ -9,7 +9,6 @@ import {
   Link as PrimerLink,
   Stack,
   Text,
-  Tooltip,
 } from '@primer/react';
 
 import { useAppContext } from '../hooks/useAppContext';
@@ -175,7 +174,10 @@ export const LoginWithDeviceFlowRoute: FC = () => {
             <Stack direction="vertical" gap="condensed">
               <Text as="p">
                 Go to{' '}
-                <PrimerLink href={session.verificationUri}>
+                <PrimerLink
+                  data-testid="device-verification-link"
+                  href={session.verificationUri}
+                >
                   <code>{session.verificationUri}</code>
                 </PrimerLink>
               </Text>
@@ -190,6 +192,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
             >
               <Text
                 as="div"
+                data-testid="device-user-code"
                 style={{
                   fontSize: '32px',
                   fontWeight: 'bold',
@@ -200,6 +203,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
               </Text>
               <IconButton
                 aria-label="Copy device code"
+                data-testid="copy-device-code"
                 icon={CopyIcon}
                 onClick={handleCopyUserCode}
                 size="small"
@@ -230,20 +234,9 @@ export const LoginWithDeviceFlowRoute: FC = () => {
             <Text as="p">Receive notifications for:</Text>
 
             <Stack align="center" direction="vertical">
-              <Button block labelWrap onClick={() => setScopeChoice('public')}>
-                <Stack gap="none">
-                  <Text>Public</Text>
-                  <Text size="small">
-                    Limited experience with least privilege permissions.
-                  </Text>
-                  <Text as="em" size="small">
-                    Scopes: {getAlternateScopeNames().join(', ')}
-                  </Text>
-                </Stack>
-              </Button>
-
               <Button
                 block
+                data-testid="device-scope-full"
                 labelWrap
                 onClick={() => setScopeChoice('full')}
                 variant="primary"
@@ -255,6 +248,23 @@ export const LoginWithDeviceFlowRoute: FC = () => {
                   </Text>
                   <Text as="em" size="small">
                     Scopes: {getRecommendedScopeNames().join(', ')}
+                  </Text>
+                </Stack>
+              </Button>
+
+              <Button
+                block
+                data-testid="device-scope-public"
+                labelWrap
+                onClick={() => setScopeChoice('public')}
+              >
+                <Stack gap="none">
+                  <Text>Public</Text>
+                  <Text size="small">
+                    Limited experience with least privilege permissions.
+                  </Text>
+                  <Text as="em" size="small">
+                    Scopes: {getAlternateScopeNames().join(', ')}
                   </Text>
                 </Stack>
               </Button>
@@ -275,7 +285,11 @@ export const LoginWithDeviceFlowRoute: FC = () => {
       </Contents>
 
       <Footer justify="space-between">
-        <Button onClick={() => navigate(-1)} variant="default">
+        <Button
+          data-testid="cancel-button"
+          onClick={() => navigate(-1)}
+          variant="default"
+        >
           Cancel
         </Button>
       </Footer>
