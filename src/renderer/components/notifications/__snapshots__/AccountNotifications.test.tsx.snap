@@ -871,7 +871,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 <relative-time
                   datetime="2017-05-20T17:51:57.000Z"
                 >
-                  #shadow-root
                   May 20, 2017
                 </relative-time>
               </div>
@@ -1277,7 +1276,6 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 <relative-time
                   datetime="2017-05-20T17:06:34.000Z"
                 >
-                  #shadow-root
                   May 20, 2017
                 </relative-time>
               </div>
