@@ -19,7 +19,7 @@ importers:
         version: 6.8.3
       menubar:
         specifier: 9.5.2
-        version: 9.5.2(electron@41.0.2)
+        version: 9.5.2(electron@41.0.3)
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -136,8 +136,8 @@ importers:
         specifier: 17.3.1
         version: 17.3.1
       electron:
-        specifier: 41.0.2
-        version: 41.0.2
+        specifier: 41.0.3
+        version: 41.0.3
       electron-builder:
         specifier: 26.8.1
         version: 26.8.1(electron-builder-squirrel-windows@26.8.1)
@@ -2146,8 +2146,8 @@ packages:
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
-  electron@41.0.2:
-    resolution: {integrity: sha512-raotm/aO8kOs1jD8SI8ssJ7EKciQOY295AOOprl1TxW7B0At8m5Ae7qNU1xdMxofiHMR8cNEGi9PKD3U+yT/mA==}
+  electron@41.0.3:
+    resolution: {integrity: sha512-IDjx8liW1q+r7+MOip5W1Eo1eMwJzVObmYrd9yz2dPCkS7XlgLq3qPVMR80TpiROFp73iY30kTzMdpA6fEVs3A==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -6543,7 +6543,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@41.0.2:
+  electron@41.0.3:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 24.12.0
@@ -7442,9 +7442,9 @@ snapshots:
 
   mdn-data@2.27.1: {}
 
-  menubar@9.5.2(electron@41.0.2):
+  menubar@9.5.2(electron@41.0.3):
     dependencies:
-      electron: 41.0.2
+      electron: 41.0.3
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
