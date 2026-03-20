@@ -61,10 +61,10 @@ import { autoUpdater } from 'electron-updater';
 describe('main/updater.ts', () => {
   let menubar: Menubar;
   class TestMenuBuilder extends MenuBuilder {
-    public setCheckForUpdatesMenuEnabled = vi.fn();
-    public setNoUpdateAvailableMenuVisibility = vi.fn();
-    public setUpdateAvailableMenuVisibility = vi.fn();
-    public setUpdateReadyForInstallMenuVisibility = vi.fn();
+    public override setCheckForUpdatesMenuEnabled = vi.fn();
+    public override setNoUpdateAvailableMenuVisibility = vi.fn();
+    public override setUpdateAvailableMenuVisibility = vi.fn();
+    public override setUpdateReadyForInstallMenuVisibility = vi.fn();
   }
 
   let menuBuilder: TestMenuBuilder;

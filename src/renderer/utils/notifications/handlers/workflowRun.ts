@@ -21,9 +21,7 @@ export interface WorkflowRunAttributes {
 }
 
 class WorkflowRunHandler extends DefaultHandler {
-  readonly type = 'WorkflowRun';
-
-  async enrich(
+  override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
@@ -40,11 +38,11 @@ class WorkflowRunHandler extends DefaultHandler {
     return {};
   }
 
-  iconType(_notification: GitifyNotification): FC<OcticonProps> {
+  override iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return RocketIcon;
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
+  override defaultUrl(notification: GitifyNotification): Link {
     return getWorkflowRunUrl(notification);
   }
 }

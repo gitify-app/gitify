@@ -8,17 +8,14 @@ import type {
   IconColor,
   Link,
   SettingsState,
-  SubjectType,
   UserType,
 } from '../../../types';
 
 export interface NotificationTypeHandler {
-  readonly type?: SubjectType;
-
   /**
    * Whether the notification handler supports enrichment via merged GraphQL query.
    */
-  readonly supportsMergedQueryEnrichment?: boolean;
+  readonly supportsMergedQueryEnrichment: boolean;
 
   /**
    * Enriches a base notification with additional information (state, author, metrics, etc).

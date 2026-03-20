@@ -9,15 +9,12 @@ import {
   IconColor,
   type Link,
   type SettingsState,
-  type SubjectType,
   type UserType,
 } from '../../../types';
 import type { NotificationTypeHandler } from './types';
 
 export class DefaultHandler implements NotificationTypeHandler {
-  type?: SubjectType;
-
-  supportsMergedQueryEnrichment?: boolean = false;
+  supportsMergedQueryEnrichment = false;
 
   async enrich(
     _notification: GitifyNotification,

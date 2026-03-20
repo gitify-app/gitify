@@ -44,18 +44,3 @@ export function createNotificationHandler(
       return defaultHandler;
   }
 }
-
-export const handlers = {
-  checkSuiteHandler,
-  commitHandler,
-  discussionHandler,
-  issueHandler,
-  pullRequestHandler,
-  releaseHandler,
-  repositoryAdvisoryHandler,
-  repositoryDependabotAlertsThreadHandler,
-  repositoryInvitationHandler,
-  repositoryVulnerabilityAlertHandler,
-  workflowRunHandler,
-  defaultHandler,
-};
