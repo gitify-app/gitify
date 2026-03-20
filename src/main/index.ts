@@ -34,8 +34,7 @@ const mb = menubar({
   index: Paths.indexHtml,
   browserWindow: WindowConfig,
   preloadWindow: true,
-  // Keep Dock icon in development to make the app easy to find/debug.
-  showDockIcon: false,
+  showDockIcon: false, // Hide the app from the macOS dock
 });
 
 const menuBuilder = new MenuBuilder(mb);
