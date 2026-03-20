@@ -1,3 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 import { dialog } from 'electron';
 import type { Menubar } from 'menubar';
 
@@ -33,6 +36,8 @@ vi.mock('electron-updater', () => ({
   },
 }));
 
+const userDataPath = path.join(process.cwd(), '.gitify-test-userdata');
+
 // Mock electron (dialog + basic Menu API used by MenuBuilder constructor)
 vi.mock('electron', () => {
   class MenuItem {
@@ -41,6 +46,7 @@ vi.mock('electron', () => {
     }
   }
   return {
+    app: { getPath: vi.fn(() => userDataPath) },
     dialog: { showMessageBox: vi.fn() },
     MenuItem,
     Menu: { buildFromTemplate: vi.fn() },
@@ -74,6 +80,13 @@ describe('main/updater.ts', () => {
     vi.clearAllMocks();
     for (const k of Object.keys(listeners)) {
       delete listeners[k];
+    }
+
+    try {
+      fs.mkdirSync(userDataPath, { recursive: true });
+      fs.unlinkSync(path.join(userDataPath, 'update-prompt-quiet.json'));
+    } catch {
+      // Ignore: missing state file is expected for fresh tests.
     }
 
     menubar = {

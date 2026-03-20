@@ -15,7 +15,14 @@ import {
   SyncIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
+import {
+  Button,
+  ButtonGroup,
+  IconButton,
+  Select,
+  Stack,
+  Text,
+} from '@primer/react';
 
 import { formatDuration, millisecondsToMinutes } from 'date-fns';
 
@@ -30,7 +37,12 @@ import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
-import { FetchType, GroupBy, Size } from '../../types';
+import {
+  FetchType,
+  GroupBy,
+  Size,
+  UpdatePromptQuietFrequency,
+} from '../../types';
 
 import {
   hasAlternateScopes,
@@ -50,6 +62,12 @@ export const NotificationSettings: FC = () => {
   useEffect(() => {
     setFetchInterval(settings.fetchInterval);
   }, [settings.fetchInterval]);
+
+  useEffect(() => {
+    window.gitify.updates?.setUpdatePromptQuietFrequency?.(
+      settings.updatePromptQuietFrequency,
+    );
+  }, [settings.updatePromptQuietFrequency]);
 
   return (
     <fieldset>
@@ -182,6 +200,41 @@ export const NotificationSettings: FC = () => {
               variant="danger"
             />
           </ButtonGroup>
+        </Stack>
+
+        <Stack
+          align="center"
+          className="text-sm"
+          direction="horizontal"
+          gap="condensed"
+        >
+          <FieldLabel
+            label="Update prompt:"
+            name="updatePromptQuietFrequency"
+          />
+          <Select
+            data-testid="settings-update-prompt-quiet-frequency"
+            onChange={(evt) => {
+              updateSetting(
+                'updatePromptQuietFrequency',
+                evt.target.value as UpdatePromptQuietFrequency,
+              );
+            }}
+            value={settings.updatePromptQuietFrequency}
+          >
+            <Select.Option value={UpdatePromptQuietFrequency.DAILY}>
+              Daily
+            </Select.Option>
+            <Select.Option value={UpdatePromptQuietFrequency.WEEKLY}>
+              Weekly
+            </Select.Option>
+            <Select.Option value={UpdatePromptQuietFrequency.MONTHLY}>
+              Monthly
+            </Select.Option>
+            <Select.Option value={UpdatePromptQuietFrequency.NEVER}>
+              Never
+            </Select.Option>
+          </Select>
         </Stack>
 
         <Checkbox

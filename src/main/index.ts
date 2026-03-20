@@ -2,7 +2,10 @@ import { app } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
 
+import { EVENTS } from '../shared/events';
+
 import { Paths, WindowConfig } from './config';
+import { onMainEvent } from './events';
 import {
   registerAppHandlers,
   registerStorageHandlers,
@@ -31,7 +34,8 @@ const mb = menubar({
   index: Paths.indexHtml,
   browserWindow: WindowConfig,
   preloadWindow: true,
-  showDockIcon: false, // Hide the app from the macOS dock
+  // Keep Dock icon in development to make the app easy to find/debug.
+  showDockIcon: isDevMode(),
 });
 
 const menuBuilder = new MenuBuilder(mb);
@@ -43,12 +47,23 @@ app.setAsDefaultProtocolClient(protocol);
 
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
+// Keep update-prompt quiet frequency in sync with renderer settings.
+onMainEvent(EVENTS.UPDATE_PROMPT_QUIET_FREQUENCY, (_, frequency: string) => {
+  appUpdater.setUpdatePromptQuietFrequency(
+    frequency as 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'NEVER',
+  );
+});
+
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
   appUpdater.start();
 
   initializeAppLifecycle(mb, contextMenu, protocol);
+
+  if (isDevMode()) {
+    mb.showWindow();
+  }
 
   // Configure window event handlers (Escape key, DevTools resize)
   configureWindowEvents(mb);

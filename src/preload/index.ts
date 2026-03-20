@@ -161,6 +161,18 @@ export const api = {
     },
   },
 
+  /** Application update prompt controls. */
+  updates: {
+    /**
+     * Set how often Gitify shows the “Application Update / Restart / Later” dialog
+     * after downloading an update.
+     *
+     * @param frequency - One of: DAILY | WEEKLY | MONTHLY | NEVER
+     */
+    setUpdatePromptQuietFrequency: (frequency: string) =>
+      sendMainEvent(EVENTS.UPDATE_PROMPT_QUIET_FREQUENCY, frequency),
+  },
+
   /** Electron web frame zoom controls. */
   zoom: {
     /**

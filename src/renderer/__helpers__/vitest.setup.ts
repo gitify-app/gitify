@@ -32,6 +32,9 @@ window.gitify = {
     quit: vi.fn(),
     show: vi.fn(),
   },
+  updates: {
+    setUpdatePromptQuietFrequency: vi.fn(),
+  },
   twemojiDirectory: vi.fn().mockResolvedValue('/mock/images/assets'),
   openExternalLink: vi.fn(),
   decryptValue: vi.fn().mockResolvedValue('decrypted'),

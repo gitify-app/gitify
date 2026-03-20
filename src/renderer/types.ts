@@ -59,6 +59,7 @@ export type SettingsValue =
   | boolean
   | number
   | FetchType
+  | UpdatePromptQuietFrequency
   | GroupBy
   | OpenPreference
   | Percentage
@@ -99,6 +100,7 @@ export interface NotificationSettingsState {
   markAsDoneOnOpen: boolean;
   markAsDoneOnUnsubscribe: boolean;
   delayNotificationState: boolean;
+  updatePromptQuietFrequency: UpdatePromptQuietFrequency;
 }
 
 /**
@@ -155,6 +157,13 @@ export enum GroupBy {
 export enum FetchType {
   INTERVAL = 'INTERVAL',
   INACTIVITY = 'INACTIVITY',
+}
+
+export enum UpdatePromptQuietFrequency {
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY',
+  MONTHLY = 'MONTHLY',
+  NEVER = 'NEVER',
 }
 
 export interface RadioGroupItem {

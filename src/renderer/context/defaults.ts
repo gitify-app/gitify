@@ -12,6 +12,7 @@ import {
   type SystemSettingsState,
   Theme,
   type TraySettingsState,
+  UpdatePromptQuietFrequency,
 } from '../types';
 
 export const defaultAuth: AuthState = {
@@ -39,6 +40,7 @@ const defaultNotificationSettings: NotificationSettingsState = {
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
+  updatePromptQuietFrequency: UpdatePromptQuietFrequency.DAILY,
 };
 
 const defaultTraySettings: TraySettingsState = {

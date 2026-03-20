@@ -14,6 +14,7 @@ import {
   Theme,
   type Token,
   type TraySettingsState,
+  UpdatePromptQuietFrequency,
 } from '../types';
 
 import {
@@ -48,6 +49,7 @@ const mockNotificationSettings: NotificationSettingsState = {
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
+  updatePromptQuietFrequency: UpdatePromptQuietFrequency.DAILY,
 };
 
 const mockTraySettings: TraySettingsState = {

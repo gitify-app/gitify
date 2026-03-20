@@ -14,6 +14,7 @@ export const EVENTS = {
   USE_UNREAD_ACTIVE_ICON: `${P}use-unread-active-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
+  UPDATE_PROMPT_QUIET_FREQUENCY: `${P}update-prompt-quiet-frequency`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,

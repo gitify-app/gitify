@@ -42,6 +42,25 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(updateSettingMock).toHaveBeenCalledWith('fetchType', 'INACTIVITY');
   });
 
+  it('should update update prompt quiet frequency with dropdown', async () => {
+    await act(async () => {
+      renderWithAppContext(<NotificationSettings />, {
+        updateSetting: updateSettingMock,
+      });
+    });
+
+    await userEvent.selectOptions(
+      screen.getByTestId('settings-update-prompt-quiet-frequency'),
+      'WEEKLY',
+    );
+
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith(
+      'updatePromptQuietFrequency',
+      'WEEKLY',
+    );
+  });
+
   describe('fetch interval settings', () => {
     it('should update the fetch interval values when using the buttons', async () => {
       await act(async () => {
