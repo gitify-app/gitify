@@ -18,8 +18,6 @@ import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class CommitHandler extends DefaultHandler {
-  override readonly type = 'Commit';
-
   override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,

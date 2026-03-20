@@ -21,8 +21,6 @@ export interface WorkflowRunAttributes {
 }
 
 class WorkflowRunHandler extends DefaultHandler {
-  override readonly type = 'WorkflowRun';
-
   override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,

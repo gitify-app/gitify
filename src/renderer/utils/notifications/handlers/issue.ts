@@ -23,8 +23,6 @@ import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
-  override readonly type = 'Issue';
-
   override readonly supportsMergedQueryEnrichment = true;
 
   override async enrich(

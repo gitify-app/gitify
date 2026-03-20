@@ -29,8 +29,6 @@ import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class PullRequestHandler extends DefaultHandler {
-  override readonly type = 'PullRequest' as const;
-
   override readonly supportsMergedQueryEnrichment = true;
 
   override async enrich(

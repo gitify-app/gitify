@@ -19,8 +19,6 @@ import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class ReleaseHandler extends DefaultHandler {
-  override readonly type = 'Release';
-
   override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,

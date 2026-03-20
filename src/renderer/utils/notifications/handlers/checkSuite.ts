@@ -30,8 +30,6 @@ export interface CheckSuiteAttributes {
 }
 
 class CheckSuiteHandler extends DefaultHandler {
-  override readonly type = 'CheckSuite';
-
   override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,

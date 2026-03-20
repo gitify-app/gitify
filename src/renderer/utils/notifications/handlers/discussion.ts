@@ -29,8 +29,6 @@ import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class DiscussionHandler extends DefaultHandler {
-  override readonly type = 'Discussion';
-
   override readonly supportsMergedQueryEnrichment = true;
 
   override async enrich(

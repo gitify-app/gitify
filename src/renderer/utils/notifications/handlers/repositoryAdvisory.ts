@@ -7,8 +7,6 @@ import type { GitifyNotification, Link, UserType } from '../../../types';
 import { DefaultHandler, defaultHandler } from './default';
 
 class RepositoryAdvisoryHandler extends DefaultHandler {
-  override readonly type = 'RepositoryAdvisory';
-
   override iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return AlertIcon;
   }
