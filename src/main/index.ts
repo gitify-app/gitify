@@ -35,7 +35,7 @@ const mb = menubar({
   browserWindow: WindowConfig,
   preloadWindow: true,
   // Keep Dock icon in development to make the app easy to find/debug.
-  showDockIcon: isDevMode(),
+  showDockIcon: false,
 });
 
 const menuBuilder = new MenuBuilder(mb);
@@ -60,10 +60,6 @@ app.whenReady().then(async () => {
   appUpdater.start();
 
   initializeAppLifecycle(mb, contextMenu, protocol);
-
-  if (isDevMode()) {
-    mb.showWindow();
-  }
 
   // Configure window event handlers (Escape key, DevTools resize)
   configureWindowEvents(mb);
