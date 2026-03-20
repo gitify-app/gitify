@@ -7,13 +7,13 @@ import type { GitifyNotification, Link } from '../../../types';
 import { DefaultHandler, defaultHandler } from './default';
 
 class RepositoryInvitationHandler extends DefaultHandler {
-  readonly type = 'RepositoryInvitation';
+  override readonly type = 'RepositoryInvitation';
 
-  iconType(_notification: GitifyNotification): FC<OcticonProps> {
+  override iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return MailIcon;
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
+  override defaultUrl(notification: GitifyNotification): Link {
     const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/invitations';
     return url.href as Link;

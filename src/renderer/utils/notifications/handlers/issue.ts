@@ -23,11 +23,11 @@ import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class IssueHandler extends DefaultHandler {
-  readonly type = 'Issue';
+  override readonly type = 'Issue';
 
-  readonly supportsMergedQueryEnrichment = true;
+  override readonly supportsMergedQueryEnrichment = true;
 
-  async enrich(
+  override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
     fetchedData?: IssueDetailsFragment,
@@ -66,7 +66,7 @@ class IssueHandler extends DefaultHandler {
     };
   }
 
-  iconType(notification: GitifyNotification): FC<OcticonProps> {
+  override iconType(notification: GitifyNotification): FC<OcticonProps> {
     switch (notification.subject.state as GitifyIssueState) {
       case 'CLOSED':
       case 'COMPLETED':
@@ -81,7 +81,7 @@ class IssueHandler extends DefaultHandler {
     }
   }
 
-  iconColor(notification: GitifyNotification): IconColor {
+  override iconColor(notification: GitifyNotification): IconColor {
     switch (notification.subject.state as GitifyIssueState) {
       case 'OPEN':
       case 'REOPENED':
@@ -95,7 +95,7 @@ class IssueHandler extends DefaultHandler {
     }
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
+  override defaultUrl(notification: GitifyNotification): Link {
     const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/issues';
     return url.href as Link;

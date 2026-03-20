@@ -19,9 +19,9 @@ import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class ReleaseHandler extends DefaultHandler {
-  readonly type = 'Release';
+  override readonly type = 'Release';
 
-  async enrich(
+  override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
@@ -52,11 +52,11 @@ class ReleaseHandler extends DefaultHandler {
     };
   }
 
-  iconType(_notification: GitifyNotification): FC<OcticonProps> {
+  override iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return TagIcon;
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
+  override defaultUrl(notification: GitifyNotification): Link {
     const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/releases';
     return url.href as Link;

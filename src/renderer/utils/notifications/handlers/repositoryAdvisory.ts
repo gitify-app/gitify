@@ -7,19 +7,19 @@ import type { GitifyNotification, Link, UserType } from '../../../types';
 import { DefaultHandler, defaultHandler } from './default';
 
 class RepositoryAdvisoryHandler extends DefaultHandler {
-  readonly type = 'RepositoryAdvisory';
+  override readonly type = 'RepositoryAdvisory';
 
-  iconType(_notification: GitifyNotification): FC<OcticonProps> {
+  override iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return AlertIcon;
   }
 
-  defaultUrl(notification: GitifyNotification): Link {
+  override defaultUrl(notification: GitifyNotification): Link {
     const url = new URL(defaultHandler.defaultUrl(notification));
     url.pathname += '/security/advisories';
     return url.href as Link;
   }
 
-  defaultUserType(): UserType {
+  override defaultUserType(): UserType {
     return 'Bot';
   }
 }

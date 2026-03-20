@@ -18,9 +18,9 @@ import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
 class CommitHandler extends DefaultHandler {
-  readonly type = 'Commit';
+  override readonly type = 'Commit';
 
-  async enrich(
+  override async enrich(
     notification: GitifyNotification,
     _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
@@ -65,7 +65,7 @@ class CommitHandler extends DefaultHandler {
     };
   }
 
-  iconType(_notification: GitifyNotification): FC<OcticonProps> {
+  override iconType(_notification: GitifyNotification): FC<OcticonProps> {
     return GitCommitIcon;
   }
 }
