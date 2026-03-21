@@ -26,7 +26,10 @@ export function onMainEvent(
  */
 export function handleMainEvent(
   event: EventType,
-  listener: (event: Electron.IpcMainInvokeEvent, data: EventData) => void,
+  listener: (
+    event: Electron.IpcMainInvokeEvent,
+    data: EventData,
+  ) => unknown | Promise<unknown>,
 ) {
   ipcMain.handle(event, listener);
 }

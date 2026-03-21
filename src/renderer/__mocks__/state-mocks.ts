@@ -1,3 +1,5 @@
+import { APPLICATION } from '../../shared/constants';
+
 import { Constants } from '../constants';
 
 import {
@@ -59,6 +61,7 @@ const mockTraySettings: TraySettingsState = {
 const mockSystemSettings: SystemSettingsState = {
   openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
+  openGitifyShortcut: APPLICATION.DEFAULT_KEYBOARD_SHORTCUT,
   showNotifications: true,
   playSound: true,
   notificationVolume: 20 as Percentage,

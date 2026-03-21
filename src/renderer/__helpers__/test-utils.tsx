@@ -77,6 +77,9 @@ function AppContextProvider({
       updateSetting: vi.fn(),
       updateFilter: vi.fn(),
 
+      shortcutRegistrationError: null,
+      clearShortcutRegistrationError: vi.fn(),
+
       ...value,
     } as TestAppContext;
   }, [value]);

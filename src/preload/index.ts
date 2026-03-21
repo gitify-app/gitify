@@ -1,10 +1,18 @@
 import { contextBridge, webFrame } from 'electron';
 
-import { APPLICATION } from '../shared/constants';
+import type {
+  IKeyboardShortcut,
+  IKeyboardShortcutResult,
+} from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
-import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
+import {
+  invokeMainEvent,
+  invokeMainEventWithData,
+  onRendererEvent,
+  sendMainEvent,
+} from './utils';
 
 /**
  * The Gitify Bridge API exposed to the renderer via `contextBridge`.
@@ -56,16 +64,16 @@ export const api = {
     }),
 
   /**
-   * Register or unregister the global keyboard shortcut for toggling the app window.
+   * Apply the global keyboard shortcut for toggling the app window visibility.
    *
-   * @param keyboardShortcut - `true` to register the shortcut, `false` to unregister.
+   * @param payload - Whether the shortcut is enabled and the Electron accelerator string.
+   * @returns Whether registration succeeded (when enabled).
    */
-  setKeyboardShortcut: (keyboardShortcut: boolean) => {
-    sendMainEvent(EVENTS.UPDATE_KEYBOARD_SHORTCUT, {
-      enabled: keyboardShortcut,
-      keyboardShortcut: APPLICATION.DEFAULT_KEYBOARD_SHORTCUT,
-    });
-  },
+  applyKeyboardShortcut: (payload: IKeyboardShortcut) =>
+    invokeMainEventWithData(
+      EVENTS.UPDATE_KEYBOARD_SHORTCUT,
+      payload,
+    ) as Promise<IKeyboardShortcutResult>,
 
   /** Tray icon controls. */
   tray: {

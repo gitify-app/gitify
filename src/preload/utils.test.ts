@@ -1,6 +1,11 @@
 import { EVENTS } from '../shared/events';
 
-import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
+import {
+  invokeMainEvent,
+  invokeMainEventWithData,
+  onRendererEvent,
+  sendMainEvent,
+} from './utils';
 
 vi.mock('electron', () => {
   type Listener = (event: unknown, ...args: unknown[]) => void;
@@ -42,6 +47,19 @@ describe('preload/utils', () => {
     const result = await invokeMainEvent(EVENTS.VERSION, 'data');
 
     expect(ipcRenderer.invoke).toHaveBeenCalledWith(EVENTS.VERSION, 'data');
+    expect(result).toBe('response');
+  });
+
+  it('invokeMainEventWithData forwards structured payload and resolves', async () => {
+    const payload = { enabled: true, keyboardShortcut: 'CommandOrControl+G' };
+    const result = await invokeMainEventWithData(
+      EVENTS.UPDATE_KEYBOARD_SHORTCUT,
+      payload,
+    );
+    expect(ipcRenderer.invoke).toHaveBeenCalledWith(
+      EVENTS.UPDATE_KEYBOARD_SHORTCUT,
+      payload,
+    );
     expect(result).toBe('response');
   });
 

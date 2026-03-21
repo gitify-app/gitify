@@ -24,6 +24,7 @@ const {
 vi.mock('./utils', () => ({
   sendMainEvent: (...args: unknown[]) => sendMainEventMock(...args),
   invokeMainEvent: (...args: unknown[]) => invokeMainEventMock(...args),
+  invokeMainEventWithData: (...args: unknown[]) => invokeMainEventMock(...args),
   onRendererEvent: (...args: unknown[]) => onRendererEventMock(...args),
 }));
 

@@ -4,6 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { APPLICATION } from '../../../shared/constants';
+
 import type { Percentage } from '../../types';
 
 import { SystemSettings } from './SystemSettings';
@@ -35,6 +37,23 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
     expect(updateSettingMock).toHaveBeenCalledWith('keyboardShortcut', false);
+  });
+
+  it('should reset global shortcut to default when customized', async () => {
+    renderWithAppContext(<SystemSettings />, {
+      updateSetting: updateSettingMock,
+      settings: {
+        ...mockSettings,
+        openGitifyShortcut: 'CommandOrControl+Shift+X',
+      },
+    });
+
+    await userEvent.click(screen.getByTestId('button-reset-global-shortcut'));
+
+    expect(updateSettingMock).toHaveBeenCalledWith(
+      'openGitifyShortcut',
+      APPLICATION.DEFAULT_KEYBOARD_SHORTCUT,
+    );
   });
 
   it('should toggle the showNotifications checkbox', async () => {

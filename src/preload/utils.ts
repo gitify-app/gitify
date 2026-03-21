@@ -33,6 +33,16 @@ export async function invokeMainEvent(
 }
 
 /**
+ * Invoke a main-process handler with structured `EventData` and await the result.
+ */
+export function invokeMainEventWithData(
+  event: EventType,
+  data?: EventData,
+): Promise<unknown> {
+  return ipcRenderer.invoke(event, data);
+}
+
+/**
  * Register a listener for an IPC event sent from the main process to the renderer.
  *
  * @param event - The IPC event type to listen for.

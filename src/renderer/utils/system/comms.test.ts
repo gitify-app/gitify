@@ -4,6 +4,7 @@ import { type Link, OpenPreference } from '../../types';
 
 import * as storage from '../core/storage';
 import {
+  applyKeyboardShortcut,
   copyToClipboard,
   decryptValue,
   encryptValue,
@@ -12,7 +13,6 @@ import {
   openExternalLink,
   quitApp,
   setAutoLaunch,
-  setKeyboardShortcut,
   setUseAlternateIdleIcon,
   showWindow,
   updateTrayColor,
@@ -132,11 +132,17 @@ describe('renderer/utils/comms.ts', () => {
       );
     });
 
-    it('sets keyboard shortcut', () => {
-      setKeyboardShortcut(true);
+    it('applies keyboard shortcut', async () => {
+      await applyKeyboardShortcut({
+        enabled: true,
+        accelerator: 'CommandOrControl+Shift+G',
+      });
 
-      expect(window.gitify.setKeyboardShortcut).toHaveBeenCalledTimes(1);
-      expect(window.gitify.setKeyboardShortcut).toHaveBeenCalledWith(true);
+      expect(window.gitify.applyKeyboardShortcut).toHaveBeenCalledTimes(1);
+      expect(window.gitify.applyKeyboardShortcut).toHaveBeenCalledWith({
+        enabled: true,
+        keyboardShortcut: 'CommandOrControl+Shift+G',
+      });
     });
   });
 

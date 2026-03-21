@@ -58,6 +58,7 @@ export interface Account {
 export type SettingsValue =
   | boolean
   | number
+  | string
   | FetchType
   | GroupBy
   | OpenPreference
@@ -116,6 +117,8 @@ export interface TraySettingsState {
 export interface SystemSettingsState {
   openLinks: OpenPreference;
   keyboardShortcut: boolean;
+  /** Electron accelerator string for toggling the app window (e.g. CommandOrControl+Shift+G). */
+  openGitifyShortcut: string;
   showNotifications: boolean;
   playSound: boolean;
   notificationVolume: Percentage;

@@ -4,6 +4,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -50,10 +51,10 @@ import {
 } from '../utils/auth/utils';
 import { clearState, loadState, saveState } from '../utils/core/storage';
 import {
+  applyKeyboardShortcut,
   decryptValue,
   encryptValue,
   setAutoLaunch,
-  setKeyboardShortcut,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/system/comms';
@@ -112,6 +113,10 @@ export interface AppContextState {
   settings: SettingsState;
   resetSettings: () => void;
   updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
+
+  /** Shown when the OS could not register the chosen global shortcut. */
+  shortcutRegistrationError: string | null;
+  clearShortcutRegistrationError: () => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState> | undefined>(
@@ -132,6 +137,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       ? { ...defaultSettings, ...existingState.settings }
       : defaultSettings,
   );
+
+  const lastAppliedOpenGitifyShortcutRef = useRef(settings.openGitifyShortcut);
+  const [shortcutRegistrationError, setShortcutRegistrationError] = useState<
+    string | null
+  >(null);
+
+  const clearShortcutRegistrationError = useCallback(() => {
+    setShortcutRegistrationError(null);
+  }, []);
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
 
@@ -312,8 +326,41 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   ]);
 
   useEffect(() => {
-    setKeyboardShortcut(settings.keyboardShortcut);
-  }, [settings.keyboardShortcut]);
+    let cancelled = false;
+
+    void (async () => {
+      const result = await applyKeyboardShortcut({
+        enabled: settings.keyboardShortcut,
+        accelerator: settings.openGitifyShortcut,
+      });
+
+      if (cancelled) {
+        return;
+      }
+
+      if (!result.success) {
+        setSettings((prev) => {
+          const reverted = {
+            ...prev,
+            openGitifyShortcut: lastAppliedOpenGitifyShortcutRef.current,
+          };
+          saveState({ auth, settings: reverted });
+          return reverted;
+        });
+        setShortcutRegistrationError(
+          'This shortcut could not be registered. It may already be in use.',
+        );
+        return;
+      }
+
+      lastAppliedOpenGitifyShortcutRef.current = settings.openGitifyShortcut;
+      setShortcutRegistrationError(null);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [auth, settings.keyboardShortcut, settings.openGitifyShortcut]);
 
   useEffect(() => {
     setAutoLaunch(settings.openAtStartup);
@@ -324,6 +371,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);
+      lastAppliedOpenGitifyShortcutRef.current =
+        defaultSettings.openGitifyShortcut;
+      setShortcutRegistrationError(null);
     });
   }, []);
 
@@ -332,6 +382,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       saveState({ auth, settings: defaultSettings });
       return defaultSettings;
     });
+    lastAppliedOpenGitifyShortcutRef.current =
+      defaultSettings.openGitifyShortcut;
+    setShortcutRegistrationError(null);
   }, [auth]);
 
   const updateSetting = useCallback(
@@ -567,6 +620,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       settings,
       resetSettings,
       updateSetting,
+
+      shortcutRegistrationError,
+      clearShortcutRegistrationError,
     }),
     [
       auth,
@@ -597,6 +653,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       settings,
       resetSettings,
       updateSetting,
+
+      shortcutRegistrationError,
+      clearShortcutRegistrationError,
     ],
   );
 
