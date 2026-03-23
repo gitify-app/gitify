@@ -1808,10 +1808,10 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="text-7xl"
             >
               <img
-                alt="🎊"
+                alt="🎉"
                 class="emoji"
                 draggable="false"
-                src="/mock/images/assets/1f38a.svg"
+                src="/mock/images/assets/1f389.svg"
               />
             </div>
             <div

@@ -5,6 +5,7 @@ import { Constants } from '../constants';
 import { EmojiSplash } from './layout/EmojiSplash';
 
 import { useFiltersStore } from '../stores';
+import { randomElement } from '../utils/core/random';
 
 interface AllReadProps {
   fullHeight?: boolean;
@@ -15,13 +16,7 @@ export const AllRead: FC<AllReadProps> = ({
 }: AllReadProps) => {
   const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
-  const emoji = useMemo(
-    () =>
-      Constants.EMOJIS.ALL_READ[
-        Math.floor(Math.random() * Constants.EMOJIS.ALL_READ.length)
-      ],
-    [],
-  );
+  const emoji = useMemo(() => randomElement(Constants.EMOJIS.ALL_READ), []);
 
   const heading = `No new ${hasFilters ? 'filtered ' : ''} notifications`;
 

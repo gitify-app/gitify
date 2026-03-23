@@ -11,6 +11,11 @@ vi.mock('react-router-dom', async () => ({
   useNavigate: () => navigateMock,
 }));
 
+// Ensure stability in EmojiSplash component snapshots
+vi.mock('../utils/core/random', () => ({
+  randomElement: vi.fn((arr: unknown[]) => arr[0]),
+}));
+
 // Sets timezone to UTC for consistent date/time in tests and snapshots
 process.env.TZ = 'UTC';
 
