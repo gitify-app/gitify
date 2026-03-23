@@ -46,7 +46,7 @@ body:
     attributes:
       label: Gitify Version
       description: What version of Gitify are you using?
-      placeholder: 5.x.x
+      placeholder: 6.x.x
     validations:
       required: true
 
@@ -59,7 +59,6 @@ body:
         - macOS
         - Windows
         - Linux
-        - Other
     validations:
       required: true
 
