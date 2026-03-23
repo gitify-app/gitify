@@ -21,7 +21,7 @@ export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({
   const description = formatMetricDescription(
     linkedIssues.length,
     'issue',
-    (noun) => `Linked to ${noun}: ${linkedIssues.join(', ')}`,
+    (_, noun) => `Linked to ${noun}: ${linkedIssues.join(', ')}`,
   );
 
   return (

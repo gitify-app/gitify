@@ -65,7 +65,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
         popover="auto"
         role="tooltip"
       >
-        Linked to 2: #1, #2
+        Linked to issues: #1, #2
       </span>
     </div>
   </div>
@@ -137,7 +137,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
         popover="auto"
         role="tooltip"
       >
-        Linked to 1: #1
+        Linked to issue: #1
       </span>
     </div>
   </div>
