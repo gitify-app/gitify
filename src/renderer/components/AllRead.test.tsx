@@ -3,7 +3,6 @@ import { act } from '@testing-library/react';
 import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockSettings } from '../__mocks__/state-mocks';
 
-import { useFiltersStore } from '../stores';
 import { AllRead } from './AllRead';
 
 describe('renderer/components/AllRead.tsx', () => {
