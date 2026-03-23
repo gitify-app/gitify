@@ -37,6 +37,7 @@ jobs:
 
   release:
     name: Publish ${{ matrix.platform }} (electron-builder)
+    needs: prepare
     strategy:
       matrix:
         include:
@@ -67,7 +68,7 @@ jobs:
       - name: Build application
         run: pnpm build
         env:
-          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          VITE_OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
 
       - name: Package and publish for ${{ matrix.platform }}
         run: ${{ matrix.package-cmd }}

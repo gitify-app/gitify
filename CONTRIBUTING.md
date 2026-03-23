@@ -10,7 +10,7 @@ We also suggest you read the [Project Philosophy](#project-philosophy) in our do
 > [!TIP]
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
 > ```shell
-> OAUTH_CLIENT_ID="123" pnpm build
+> VITE_OAUTH_CLIENT_ID="123" pnpm build
 > ```
 
 To get started:
@@ -24,11 +24,6 @@ Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub P
 ```shell
 GITHUB_TOKEN=<some personal access token>
 ```
-
-Build static resources (tray icons, twemojis, etc). You only need to rebuild if you change static assets:
-  ```shell
-  pnpm build
-  ```
 
 Start development mode (includes GraphQL codegen and hot module reload):
   ```shell
