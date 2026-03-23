@@ -25,11 +25,6 @@ Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub P
 GITHUB_TOKEN=<some personal access token>
 ```
 
-Build static resources (tray icons, twemojis, etc). You only need to rebuild if you change static assets:
-  ```shell
-  pnpm build
-  ```
-
 Start development mode (includes GraphQL codegen and hot module reload):
   ```shell
   pnpm dev

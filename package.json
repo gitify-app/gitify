@@ -125,7 +125,6 @@
     "vite-plugin-checker": "0.12.0",
     "vite-plugin-electron": "0.29.1",
     "vite-plugin-electron-renderer": "0.14.6",
-    "vite-plugin-static-copy": "3.3.0",
     "vitest": "4.1.0",
     "zustand": "5.0.12"
   },
