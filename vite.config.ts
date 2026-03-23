@@ -176,5 +176,17 @@ export default defineConfig(({ command }) => {
       outDir: fileURLToPath(new URL('build', import.meta.url)),
       emptyOutDir: true,
     },
+    // Define build-time replacements for the main process bundle.
+    // During CI builds `process.env.OAUTH_CLIENT_ID` will be injected via the environment.
+    define: isBuild
+      ? {
+          'process.env.OAUTH_CLIENT_ID': JSON.stringify(
+            process.env.OAUTH_CLIENT_ID ?? '',
+          ),
+        }
+      : {
+          // Development Keys - See CONTRIBUTING.md
+          'process.env.OAUTH_CLIENT_ID': JSON.stringify('Ov23liQIkFs5ehQLNzHF'),
+        },
   };
 });

@@ -10,7 +10,7 @@ We also suggest you read the [Project Philosophy](#project-philosophy) in our do
 > [!TIP]
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
 > ```shell
-> VITE_OAUTH_CLIENT_ID="123" pnpm build
+> OAUTH_CLIENT_ID="123" pnpm build
 > ```
 
 To get started:
