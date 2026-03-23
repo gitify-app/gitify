@@ -3,10 +3,23 @@ import { EVENTS } from '../shared/events';
 import { api } from './index';
 
 // Mocks shared modules used inside preload
-const sendMainEventMock = vi.fn();
-const invokeMainEventMock = vi.fn();
-const onRendererEventMock = vi.fn();
-const logErrorMock = vi.fn();
+const {
+  sendMainEventMock,
+  invokeMainEventMock,
+  onRendererEventMock,
+  logErrorMock,
+  exposeInMainWorldMock,
+  getZoomLevelMock,
+  setZoomLevelMock,
+} = vi.hoisted(() => ({
+  sendMainEventMock: vi.fn(),
+  invokeMainEventMock: vi.fn(),
+  onRendererEventMock: vi.fn(),
+  logErrorMock: vi.fn(),
+  exposeInMainWorldMock: vi.fn(),
+  getZoomLevelMock: vi.fn(() => 1),
+  setZoomLevelMock: vi.fn((_level: number) => undefined),
+}));
 
 vi.mock('./utils', () => ({
   sendMainEvent: (...args: unknown[]) => sendMainEventMock(...args),
@@ -17,11 +30,6 @@ vi.mock('./utils', () => ({
 vi.mock('../shared/logger', () => ({
   logError: (...args: unknown[]) => logErrorMock(...args),
 }));
-
-// We'll reconfigure the electron mock per context isolation scenario.
-const exposeInMainWorldMock = vi.fn();
-const getZoomLevelMock = vi.fn(() => 1);
-const setZoomLevelMock = vi.fn((_level: number) => undefined);
 
 vi.mock('electron', () => ({
   contextBridge: {
@@ -63,7 +71,6 @@ interface TestApi {
 
 describe('preload/index', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
     MockNotification.instances = [];
     exposeInMainWorldMock('gitify', api);
   });

@@ -20,8 +20,6 @@ describe('main/handlers/tray.ts', () => {
   let menubar: Menubar;
 
   beforeEach(() => {
-    vi.clearAllMocks();
-
     menubar = {
       tray: {
         isDestroyed: vi.fn().mockReturnValue(false),

@@ -7,10 +7,6 @@ import * as comms from '../utils/system/comms';
 import { LoginRoute } from './Login';
 
 describe('renderer/routes/Login.tsx', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
 

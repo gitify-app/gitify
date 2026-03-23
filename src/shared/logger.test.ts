@@ -9,10 +9,6 @@ describe('shared/logger.ts', () => {
 
   const mockError = new Error('baz');
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('logInfo', () => {
     it('logs info without contexts', () => {
       logInfo('foo', 'bar');

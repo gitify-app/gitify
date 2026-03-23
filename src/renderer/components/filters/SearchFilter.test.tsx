@@ -12,10 +12,6 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
     updateFilterSpy = vi.spyOn(useFiltersStore.getState(), 'updateFilter');
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('Include Search Tokens', () => {
     it('adds include actor token with prefix', () => {
       renderWithAppContext(<SearchFilter />);

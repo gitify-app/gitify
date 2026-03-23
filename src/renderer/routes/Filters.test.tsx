@@ -16,10 +16,6 @@ describe('renderer/routes/Filters.tsx', () => {
     resetSpy = vi.spyOn(useFiltersStore.getState() as FiltersStore, 'reset');
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {

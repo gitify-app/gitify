@@ -58,7 +58,6 @@ function createMb() {
 
 describe('main/utils', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
     fileGetFileMock.mockReturnValue({ path: '/var/log/app/app.log' });
   });
 

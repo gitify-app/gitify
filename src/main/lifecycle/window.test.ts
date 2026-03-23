@@ -13,8 +13,6 @@ describe('main/lifecycle/window.ts', () => {
   let menubar: Menubar;
 
   beforeEach(() => {
-    vi.clearAllMocks();
-
     menubar = {
       hideWindow: vi.fn(),
       tray: {

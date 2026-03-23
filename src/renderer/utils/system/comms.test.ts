@@ -20,10 +20,6 @@ import {
 } from './comms';
 
 describe('renderer/utils/comms.ts', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('openExternalLink', () => {
     it('should open an external link', () => {
       vi.spyOn(storage, 'loadState').mockReturnValue({

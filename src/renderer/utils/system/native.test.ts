@@ -16,10 +16,6 @@ describe('renderer/utils/system/native.ts', () => {
     async () => mockHtmlUrl,
   );
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should raise a native notification for a single new notification', async () => {
     native.raiseNativeNotification(
       mockSingleAccountNotifications[0].notifications,

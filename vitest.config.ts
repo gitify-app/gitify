@@ -6,6 +6,7 @@ export default defineConfig({
   test: {
     globals: true,
     pool: 'threads',
+    clearMocks: true,
     // Server configuration to handle external dependencies
     server: {
       deps: {
@@ -14,25 +15,11 @@ export default defineConfig({
     },
     coverage: {
       enabled: false,
-      provider: 'v8',
-      reportsDirectory: './coverage',
-      cleanOnRerun: true,
+      reportOnFailure: true,
       reporter: ['html', 'lcovonly'],
       include: ['src/**/*'],
-      exclude: [
-        '**/__snapshots__/**',
-        '**/graphql/generated/**',
-        '**/*.graphql',
-        '**/*.html',
-        '.DS_Store',
-      ],
+      exclude: ['**/*.html', '**/*.graphql', '**/graphql/generated/**'],
     },
-    exclude: [
-      '**/node_modules/**',
-      '**/build/**',
-      '**/dist/**',
-      '**/.{idea,git,cache,output,temp}/**',
-    ],
     projects: [
       {
         extends: true,

@@ -9,10 +9,6 @@ import type {
 import { stateFilter } from './state';
 
 describe('renderer/utils/notifications/filters/state.ts', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('can filter by notification states', () => {
     const mockNotification = {
       subject: { state: 'OPEN' },

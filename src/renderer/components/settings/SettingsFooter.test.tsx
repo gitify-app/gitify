@@ -17,7 +17,6 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   afterEach(() => {
-    vi.clearAllMocks();
     process.env = originalEnv;
   });
 

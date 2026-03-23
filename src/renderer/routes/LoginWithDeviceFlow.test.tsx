@@ -14,10 +14,6 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     .spyOn(comms, 'openExternalLink')
     .mockImplementation(vi.fn());
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render scope choice buttons', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',

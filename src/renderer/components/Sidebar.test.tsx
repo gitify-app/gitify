@@ -16,10 +16,6 @@ describe('renderer/components/Sidebar.tsx', () => {
     .spyOn(comms, 'openExternalLink')
     .mockImplementation(vi.fn());
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children (logged in)', () => {
     const tree = renderWithAppContext(<Sidebar />, {
       initialEntries: ['/'],

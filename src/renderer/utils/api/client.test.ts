@@ -114,10 +114,6 @@ describe('renderer/utils/api/client.ts', () => {
     });
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('fetchAuthenticatedUserDetails - should fetch authenticated user', async () => {
     await fetchAuthenticatedUserDetails(mockGitHubCloudAccount);
 

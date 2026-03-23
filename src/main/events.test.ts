@@ -19,10 +19,6 @@ type MockMenubar = {
 };
 
 describe('main/events', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('onMainEvent registers ipcMain.on listener', () => {
     const listenerMock = vi.fn();
 

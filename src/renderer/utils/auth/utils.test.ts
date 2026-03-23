@@ -76,10 +76,6 @@ describe('renderer/utils/auth/utils.ts', () => {
     Constants.OAUTH_DEVICE_FLOW_CLIENT_ID = 'FAKE_CLIENT_ID_123' as ClientID;
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('Gitify GitHub OAuth - Device Code Flow', () => {
     describe('startGitHubDeviceFlow', () => {
       it('should request a device code and return a session', async () => {

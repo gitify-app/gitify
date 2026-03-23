@@ -8,10 +8,6 @@ import { SettingsRoute } from './Settings';
 describe('renderer/routes/Settings.tsx', () => {
   const fetchNotificationsMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children', async () => {
     await act(async () => {
       renderWithAppContext(<SettingsRoute />, {

@@ -15,10 +15,6 @@ import * as links from '../utils/system/links';
 import { AccountsRoute } from './Accounts';
 
 describe('renderer/routes/Accounts.tsx', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {

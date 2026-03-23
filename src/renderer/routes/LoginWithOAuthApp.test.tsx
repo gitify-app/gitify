@@ -20,10 +20,6 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     .spyOn(comms, 'openExternalLink')
     .mockImplementation(vi.fn());
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('renders correctly', () => {
     const tree = renderWithAppContext(<LoginWithOAuthAppRoute />);
 

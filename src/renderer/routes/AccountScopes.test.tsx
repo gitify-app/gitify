@@ -39,10 +39,6 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     };
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children', async () => {
     await act(async () => {
       renderWithAppContext(<AccountScopesRoute />);

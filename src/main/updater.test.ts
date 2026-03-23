@@ -71,7 +71,6 @@ describe('main/updater.ts', () => {
   let updater: AppUpdater;
 
   beforeEach(() => {
-    vi.clearAllMocks();
     for (const k of Object.keys(listeners)) {
       delete listeners[k];
     }

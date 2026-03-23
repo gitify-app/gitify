@@ -16,14 +16,12 @@ describe('renderer/utils/api/octokit.ts', () => {
   const mockDecryptValue = vi.spyOn(comms, 'decryptValue');
 
   beforeEach(() => {
-    vi.clearAllMocks();
     mockDecryptValue.mockResolvedValue('decrypted-token');
     clearOctokitClientCache();
   });
 
   afterEach(() => {
     clearOctokitClientCache();
-    vi.clearAllMocks();
   });
 
   describe('createOctokitClient', () => {

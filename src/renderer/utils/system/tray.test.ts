@@ -9,10 +9,6 @@ describe('renderer/utils/tray.ts', () => {
   const updateTrayColorSpy = vi.spyOn(comms, 'updateTrayColor');
   const updateTrayTitleSpy = vi.spyOn(comms, 'updateTrayTitle');
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('setTrayIconColorAndTitle', () => {
     it('should update tray color and title when showNotificationsCountInTray is true and has unread notifications', () => {
       const settings: SettingsState = {

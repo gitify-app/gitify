@@ -8,10 +8,6 @@ import { TraySettings } from './TraySettings';
 describe('renderer/components/settings/TraySettings.tsx', () => {
   const updateSettingMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should toggle the showNotificationsCountInTray checkbox', async () => {
     await act(async () => {
       renderWithAppContext(<TraySettings />, {

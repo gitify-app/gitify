@@ -5,10 +5,6 @@ import type { GitifyNotification } from '../../../types';
 import { isNonHumanUser, userTypeFilter } from './userType';
 
 describe('renderer/utils/notifications/filters/userType.ts', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('isNonHumanUser', () => {
     expect(isNonHumanUser('User')).toBe(false);
     expect(isNonHumanUser('EnterpriseUserAccount')).toBe(false);

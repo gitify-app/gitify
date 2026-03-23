@@ -21,10 +21,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     updateFilterSpy = vi.spyOn(useFiltersStore.getState(), 'updateFilter');
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('should render itself & its children', () => {
     it('with detailed notifications enabled', () => {
       const tree = renderWithAppContext(

@@ -28,10 +28,6 @@ describe('renderer/utils/links.ts', () => {
     .spyOn(comms, 'openExternalLink')
     .mockImplementation(vi.fn());
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('openGitifyReleaseNotes', () => {
     openGitifyReleaseNotes('v1.0.0');
 
