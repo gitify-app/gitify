@@ -1,10 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import {
-  ensureStableEmojis,
-  renderWithAppContext,
-} from '../../__helpers__/test-utils';
+import { renderWithAppContext } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
@@ -17,21 +14,11 @@ import {
   type AccountNotificationsProps,
 } from './AccountNotifications';
 
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useNavigate: () => navigateMock,
-}));
-
 vi.mock('./RepositoryNotifications', () => ({
   RepositoryNotifications: () => <div>RepositoryNotifications</div>,
 }));
 
 describe('renderer/components/notifications/AccountNotifications.tsx', () => {
-  beforeEach(() => {
-    ensureStableEmojis();
-  });
-
   it('should render itself - group notifications by repositories', () => {
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,

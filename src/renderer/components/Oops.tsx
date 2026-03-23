@@ -8,6 +8,7 @@ import { EmojiSplash } from './layout/EmojiSplash';
 import type { GitifyError } from '../types';
 
 import { Errors } from '../utils/core/errors';
+import { randomElement } from '../utils/core/random';
 
 interface OopsProps {
   error: GitifyError;
@@ -21,10 +22,7 @@ export const Oops: FC<OopsProps> = ({
   const err = error ?? Errors.UNKNOWN;
   const navigate = useNavigate();
 
-  const emoji = useMemo(
-    () => err.emojis[Math.floor(Math.random() * err.emojis.length)],
-    [err],
-  );
+  const emoji = useMemo(() => randomElement(err.emojis), [err]);
 
   const actions = err.actions?.length
     ? err.actions.map((action) => (
