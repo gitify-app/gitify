@@ -10,10 +10,6 @@ import { AppearanceSettings } from './AppearanceSettings';
 describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   const updateSettingMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should change the theme mode dropdown', async () => {
     await act(async () => {
       renderWithAppContext(<AppearanceSettings />, {

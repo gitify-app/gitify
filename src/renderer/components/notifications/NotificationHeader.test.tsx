@@ -14,10 +14,6 @@ import {
 } from './NotificationHeader';
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children - group by repositories', async () => {
     const props: NotificationHeaderProps = {
       notification: mockGitifyNotification,

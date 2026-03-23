@@ -21,10 +21,6 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
   const markNotificationsAsReadMock = vi.fn();
   const markNotificationsAsDoneMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children', () => {
     const props: RepositoryNotificationsProps = {
       repoName: 'gitify-app/notifications-test',

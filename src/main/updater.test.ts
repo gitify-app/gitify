@@ -71,7 +71,6 @@ describe('main/updater.ts', () => {
   let updater: AppUpdater;
 
   beforeEach(() => {
-    vi.clearAllMocks();
     for (const k of Object.keys(listeners)) {
       delete listeners[k];
     }
@@ -111,7 +110,6 @@ describe('main/updater.ts', () => {
         }),
       );
       expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
-      // Menu state updates invoked
       expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(
         false,
       );
@@ -127,7 +125,9 @@ describe('main/updater.ts', () => {
       });
 
       await updater.start();
+
       emit('update-downloaded', { releaseName: 'v9.9.9' });
+
       // Allow then() of showMessageBox promise to resolve
       await Promise.resolve();
 
@@ -138,7 +138,9 @@ describe('main/updater.ts', () => {
   describe('update event handlers & scheduling', () => {
     it('skips when app is not packaged', async () => {
       Object.defineProperty(menubar.app, 'isPackaged', { value: false });
+
       await updater.start();
+
       expect(logInfo).toHaveBeenCalledWith(
         'app updater',
         'Skipping updater since app is in development mode',
@@ -148,7 +150,9 @@ describe('main/updater.ts', () => {
 
     it('handles checking-for-update', async () => {
       await updater.start();
+
       emit('checking-for-update');
+
       expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(
         false,
       );
@@ -159,7 +163,9 @@ describe('main/updater.ts', () => {
 
     it('handles update-available', async () => {
       await updater.start();
+
       emit('update-available');
+
       expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(
         true,
       );
@@ -170,7 +176,9 @@ describe('main/updater.ts', () => {
 
     it('handles download-progress', async () => {
       await updater.start();
+
       emit('download-progress', { percent: 12.3456 });
+
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(
         expect.stringContaining('12.35%'),
       );
@@ -178,7 +186,9 @@ describe('main/updater.ts', () => {
 
     it('handles update-not-available', async () => {
       await updater.start();
+
       emit('update-not-available');
+
       expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(
         true,
       );
@@ -198,9 +208,8 @@ describe('main/updater.ts', () => {
       try {
         await updater.start();
 
-        menuBuilder.setNoUpdateAvailableMenuVisibility.mockClear();
-
         emit('update-not-available');
+
         // Immediately shows the message
         expect(
           menuBuilder.setNoUpdateAvailableMenuVisibility,
@@ -220,9 +229,9 @@ describe('main/updater.ts', () => {
       vi.useFakeTimers();
       try {
         await updater.start();
-        menuBuilder.setNoUpdateAvailableMenuVisibility.mockClear();
 
         emit('update-not-available');
+
         // Message shown
         expect(
           menuBuilder.setNoUpdateAvailableMenuVisibility,
@@ -230,6 +239,7 @@ describe('main/updater.ts', () => {
 
         // New check should hide immediately and clear pending timeout
         emit('checking-for-update');
+
         expect(
           menuBuilder.setNoUpdateAvailableMenuVisibility,
         ).toHaveBeenLastCalledWith(false);
@@ -248,7 +258,9 @@ describe('main/updater.ts', () => {
 
     it('handles update-cancelled (reset state)', async () => {
       await updater.start();
+
       emit('update-cancelled');
+
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
       expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(
         true,
@@ -257,8 +269,10 @@ describe('main/updater.ts', () => {
 
     it('handles error (reset + logError)', async () => {
       await updater.start();
+
       const err = new Error('failure');
       emit('error', err);
+
       expect(logError).toHaveBeenCalledWith(
         'auto updater',
         'Error checking for update',
@@ -277,6 +291,7 @@ describe('main/updater.ts', () => {
         }) as unknown as typeof setInterval);
       try {
         await updater.start();
+
         // At minimum the initial check should have occurred
         const callCount = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock
           .calls.length;

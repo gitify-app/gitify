@@ -17,10 +17,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     new Date('2024').valueOf(),
   );
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children', async () => {
     const props: NotificationFooterProps = {
       notification: mockGitifyNotification,

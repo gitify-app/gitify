@@ -52,7 +52,6 @@ function configPath() {
 
 describe('main/lifecycle/first-run', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
     mac = true;
   });
 

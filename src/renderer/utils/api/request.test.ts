@@ -51,10 +51,6 @@ describe('renderer/utils/api/request.ts', () => {
     );
   });
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('performGraphQLRequest - perform call with correct params', async () => {
     mockOctokitInstance.graphql.mockResolvedValue({});
 

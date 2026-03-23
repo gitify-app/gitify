@@ -88,7 +88,6 @@ describe('main/menu.ts', () => {
   };
 
   beforeEach(() => {
-    vi.clearAllMocks();
     vi.mocked(isMacOS).mockReturnValue(false);
     menuItemInstances.length = 0; // Clear tracked instances
     menubar = { app: { quit: vi.fn() } } as unknown as Menubar;

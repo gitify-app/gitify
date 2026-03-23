@@ -23,10 +23,6 @@ function createMb() {
 }
 
 describe('main/lifecycle/reset.ts', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('sends reset event and quits when user confirms', () => {
     vi.mocked(dialog.showMessageBoxSync).mockReturnValue(1);
     const mb = createMb();

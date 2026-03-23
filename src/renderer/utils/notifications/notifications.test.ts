@@ -31,10 +31,6 @@ import {
 } from './notifications';
 
 describe('renderer/utils/notifications/notifications.ts', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('getNotificationCount', () => {
     const result = getNotificationCount(mockSingleAccountNotifications);
 

@@ -11,10 +11,6 @@ describe('components/GlobalShortcuts.tsx', () => {
   const updateSettingMock = vi.fn();
   const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('key bindings', () => {
     describe('ignores keys that are not valid', () => {
       it('ignores B key', async () => {

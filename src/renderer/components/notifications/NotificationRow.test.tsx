@@ -18,10 +18,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     new Date('2024').valueOf(),
   );
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children - group by date', async () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,

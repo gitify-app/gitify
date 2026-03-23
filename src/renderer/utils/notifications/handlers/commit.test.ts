@@ -20,10 +20,6 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
     const mockAuthor = mockRawUser('some-author');
     const mockCommenter = mockRawUser('some-commenter');
 
-    beforeEach(() => {
-      vi.clearAllMocks();
-    });
-
     it('get commit commenter', async () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'This is a commit with comments',

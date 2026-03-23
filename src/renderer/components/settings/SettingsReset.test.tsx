@@ -9,10 +9,6 @@ import { SettingsReset } from './SettingsReset';
 describe('renderer/components/settings/SettingsReset.tsx', () => {
   const resetSettingsMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should reset default settings when `OK`', async () => {
     const rendererLogInfoSpy = vi
       .spyOn(logger, 'rendererLogInfo')

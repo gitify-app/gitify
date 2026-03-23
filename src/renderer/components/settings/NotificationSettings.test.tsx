@@ -12,10 +12,6 @@ import { NotificationSettings } from './NotificationSettings';
 describe('renderer/components/settings/NotificationSettings.tsx', () => {
   const updateSettingMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should change the groupBy radio group', async () => {
     await act(async () => {
       renderWithAppContext(<NotificationSettings />, {

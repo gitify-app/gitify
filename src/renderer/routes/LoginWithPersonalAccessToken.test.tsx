@@ -19,10 +19,6 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     .spyOn(comms, 'openExternalLink')
     .mockImplementation(vi.fn());
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('renders correctly', () => {
     const tree = renderWithAppContext(<LoginWithPersonalAccessTokenRoute />);
 

@@ -1,7 +1,5 @@
 import { screen } from '@testing-library/react';
 
-import { describe, expect, it } from 'vitest';
-
 import { renderWithAppContext } from '../../__helpers__/test-utils';
 
 import { ScopeStatusIcon } from './ScopeStatusIcon';

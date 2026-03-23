@@ -41,10 +41,6 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     });
     mockNotification.updatedAt = '2024-01-01T00:00:00Z';
 
-    beforeEach(() => {
-      vi.clearAllMocks();
-    });
-
     it('answered discussion state - no stateReason', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });
 

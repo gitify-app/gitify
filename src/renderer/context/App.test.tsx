@@ -73,7 +73,6 @@ describe('renderer/context/App.tsx', () => {
 
   afterEach(() => {
     vi.clearAllTimers();
-    vi.clearAllMocks();
   });
 
   describe('notification methods', () => {
@@ -228,10 +227,6 @@ describe('renderer/context/App.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       } as unknown as AuthState);
     const removeAccountSpy = vi.spyOn(authUtils, 'removeAccount');
-
-    beforeEach(() => {
-      vi.clearAllMocks();
-    });
 
     it('loginWithDeviceFlowStart calls startGitHubDeviceFlow', async () => {
       const startGitHubDeviceFlowSpy = vi

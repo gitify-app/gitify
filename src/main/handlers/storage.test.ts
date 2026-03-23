@@ -20,10 +20,6 @@ vi.mock('../../shared/logger', () => ({
 }));
 
 describe('main/handlers/storage.ts', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('registerStorageHandlers', () => {
     it('registers handlers without throwing', () => {
       expect(() => registerStorageHandlers()).not.toThrow();

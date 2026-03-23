@@ -11,10 +11,6 @@ import { SystemSettings } from './SystemSettings';
 describe('renderer/components/settings/SystemSettings.tsx', () => {
   const updateSettingMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should change the open links radio group', async () => {
     await act(async () => {
       renderWithAppContext(<SystemSettings />, {

@@ -24,10 +24,6 @@ describe('renderer/utils/notifications/url.ts', () => {
 
     const getHtmlUrlSpy = vi.spyOn(apiClient, 'getHtmlUrl');
 
-    afterEach(() => {
-      vi.clearAllMocks();
-    });
-
     it('Subject HTML URL: prefer if available from enrichment stage', async () => {
       const mockSubjectHtmlUrl = 'https://gitify.io/' as Link;
       const mockSubjectUrl =

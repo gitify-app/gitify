@@ -43,10 +43,6 @@ function createMb() {
 }
 
 describe('main/lifecycle/startup.ts', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('initializeAppLifecycle', () => {
     it('registers menubar ready handler', () => {
       const mb = createMb();

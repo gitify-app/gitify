@@ -13,10 +13,6 @@ import { Header } from './Header';
 describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotificationsMock = vi.fn();
 
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should render itself & its children', () => {
     const tree = renderWithAppContext(
       <Header icon={MarkGithubIcon}>Test Header</Header>,

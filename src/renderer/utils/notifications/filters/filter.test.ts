@@ -7,10 +7,6 @@ import { useFiltersStore } from '../../../stores';
 import { filterBaseNotifications, filterDetailedNotifications } from './filter';
 
 describe('renderer/utils/notifications/filters/filter.ts', () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   describe('filterNotifications', () => {
     const mockNotifications = [
       mockPartialGitifyNotification(
