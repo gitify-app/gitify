@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
@@ -27,7 +27,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    const tree = renderWithAppContext(<AccountNotifications {...props} />, {
+    const tree = renderWithProviders(<AccountNotifications {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
@@ -42,7 +42,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    const tree = renderWithAppContext(<AccountNotifications {...props} />, {
+    const tree = renderWithProviders(<AccountNotifications {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.DATE },
     });
 
@@ -57,10 +57,10 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+    let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
-      tree = renderWithAppContext(<AccountNotifications {...props} />);
+      tree = renderWithProviders(<AccountNotifications {...props} />);
     });
 
     expect(tree.container).toMatchSnapshot();
@@ -78,10 +78,10 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       showAccountHeader: true,
     };
 
-    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+    let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
-      tree = renderWithAppContext(<AccountNotifications {...props} />, {
+      tree = renderWithProviders(<AccountNotifications {...props} />, {
         auth: { accounts: [mockGitHubCloudAccount] },
       });
     });
@@ -101,10 +101,10 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       showAccountHeader: true,
     };
 
-    let tree: ReturnType<typeof renderWithAppContext> | null = null;
+    let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
-      tree = renderWithAppContext(<AccountNotifications {...props} />);
+      tree = renderWithProviders(<AccountNotifications {...props} />);
     });
 
     expect(tree.container).toMatchSnapshot();
@@ -122,7 +122,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />);
+    renderWithProviders(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-profile'));
 
@@ -142,7 +142,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />);
+    renderWithProviders(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-issues'));
 
@@ -164,7 +164,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />);
+    renderWithProviders(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-pull-requests'));
 
@@ -182,11 +182,11 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       error: null,
     };
 
-    renderWithAppContext(<AccountNotifications {...props} />);
+    renderWithProviders(<AccountNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('account-toggle'));
 
-    const tree = renderWithAppContext(<AccountNotifications {...props} />);
+    const tree = renderWithProviders(<AccountNotifications {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });

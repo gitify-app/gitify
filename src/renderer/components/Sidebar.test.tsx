@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
@@ -17,7 +17,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     .mockImplementation(vi.fn());
 
   it('should render itself & its children (logged in)', () => {
-    const tree = renderWithAppContext(<Sidebar />, {
+    const tree = renderWithProviders(<Sidebar />, {
       initialEntries: ['/'],
       isLoggedIn: true,
     });
@@ -26,7 +26,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   });
 
   it('should render itself & its children (logged out)', () => {
-    const tree = renderWithAppContext(<Sidebar />, {
+    const tree = renderWithProviders(<Sidebar />, {
       initialEntries: ['/landing'],
       isLoggedIn: false,
     });
@@ -35,7 +35,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   });
 
   it('should navigate home when clicking logo', async () => {
-    renderWithAppContext(<Sidebar />);
+    renderWithProviders(<Sidebar />);
 
     await userEvent.click(screen.getByTestId('sidebar-home'));
 
@@ -45,7 +45,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('notifications icon', () => {
     it('opens notifications home when clicked', async () => {
-      renderWithAppContext(<Sidebar />);
+      renderWithProviders(<Sidebar />);
 
       await userEvent.click(screen.getByTestId('sidebar-notifications'));
 
@@ -56,7 +56,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('renders correct icon when there are no notifications', () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         notifications: [],
       });
 
@@ -64,7 +64,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('renders correct icon when there are notifications', () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         notifications: mockMultipleAccountNotifications,
       });
 
@@ -74,7 +74,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('Focused mode toggle', () => {
     it('renders the focused mode is off', () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         isLoggedIn: true,
         settings: { ...mockSettings, participating: false },
       });
@@ -83,7 +83,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('renders the focused mode is on', () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         isLoggedIn: true,
         settings: { ...mockSettings, participating: true },
       });
@@ -92,7 +92,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('toggles participating when clicked', async () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         isLoggedIn: true,
         settings: { ...mockSettings, participating: false },
         updateSetting: updateSettingMock,
@@ -108,7 +108,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('Filter notifications', () => {
     it('go to the filters route', async () => {
-      renderWithAppContext(<Sidebar />);
+      renderWithProviders(<Sidebar />);
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
@@ -117,7 +117,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('go to the home if filters path already shown', async () => {
-      renderWithAppContext(<Sidebar />, { initialEntries: ['/filters'] });
+      renderWithProviders(<Sidebar />, { initialEntries: ['/filters'] });
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
@@ -126,10 +126,9 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('highlight filters sidebar if any are saved', () => {
-      useFiltersStore.setState({ reasons: ['assign'] });
-
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         settings: mockSettings,
+        filters: { reasons: ['assign'] },
       });
 
       expect(
@@ -140,7 +139,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('quick links', () => {
     it('opens my github issues page', async () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         notifications: mockMultipleAccountNotifications,
       });
 
@@ -153,7 +152,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('opens my github pull requests page', async () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         notifications: mockMultipleAccountNotifications,
       });
 
@@ -168,7 +167,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('Refresh Notifications', () => {
     it('should refresh the notifications when status is not loading', async () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         fetchNotifications: fetchNotificationsMock,
         status: 'success',
       });
@@ -179,7 +178,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('should not refresh the notifications when status is loading', async () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         fetchNotifications: fetchNotificationsMock,
         status: 'loading',
       });
@@ -192,7 +191,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('Settings', () => {
     it('go to the settings route', async () => {
-      renderWithAppContext(<Sidebar />);
+      renderWithProviders(<Sidebar />);
 
       await userEvent.click(screen.getByTestId('sidebar-settings'));
 
@@ -201,7 +200,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('go to the home if settings path already shown', async () => {
-      renderWithAppContext(<Sidebar />, {
+      renderWithProviders(<Sidebar />, {
         initialEntries: ['/settings'],
         fetchNotifications: fetchNotificationsMock,
       });
@@ -217,7 +216,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   it('should quit the app', async () => {
     const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
-    renderWithAppContext(<Sidebar />, {
+    renderWithProviders(<Sidebar />, {
       isLoggedIn: false,
     });
 

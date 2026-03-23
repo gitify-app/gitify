@@ -1,10 +1,10 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { Footer } from './Footer';
 
 describe('renderer/components/primitives/Footer.tsx', () => {
   it('should render itself & its children - space-between', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <Footer justify="space-between">Test</Footer>,
     );
 
@@ -12,7 +12,7 @@ describe('renderer/components/primitives/Footer.tsx', () => {
   });
 
   it('should render itself & its children - end', () => {
-    const tree = renderWithAppContext(<Footer justify="end">Test</Footer>);
+    const tree = renderWithProviders(<Footer justify="end">Test</Footer>);
 
     expect(tree.container).toMatchSnapshot();
   });

@@ -1,4 +1,4 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { LabelsPill, type LabelsPillProps } from './LabelsPill';
 
@@ -6,7 +6,7 @@ describe('renderer/components/metrics/LabelsPill.tsx', () => {
   it('renders without labels', () => {
     const props: LabelsPillProps = { labels: [] };
 
-    const tree = renderWithAppContext(<LabelsPill {...props} />);
+    const tree = renderWithProviders(<LabelsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -19,7 +19,7 @@ describe('renderer/components/metrics/LabelsPill.tsx', () => {
       ],
     };
 
-    const tree = renderWithAppContext(<LabelsPill {...props} />);
+    const tree = renderWithProviders(<LabelsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });

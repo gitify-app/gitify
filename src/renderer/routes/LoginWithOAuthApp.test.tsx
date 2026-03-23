@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 
 import type { ClientID, ClientSecret, Hostname } from '../types';
 
@@ -21,13 +21,13 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     .mockImplementation(vi.fn());
 
   it('renders correctly', () => {
-    const tree = renderWithAppContext(<LoginWithOAuthAppRoute />);
+    const tree = renderWithProviders(<LoginWithOAuthAppRoute />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    renderWithAppContext(<LoginWithOAuthAppRoute />);
+    renderWithProviders(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -67,7 +67,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
   describe("'Create new OAuth App' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      renderWithAppContext(<LoginWithOAuthAppRoute />);
+      renderWithProviders(<LoginWithOAuthAppRoute />);
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
 
@@ -77,7 +77,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     });
 
     it('should open in browser if hostname configured', async () => {
-      renderWithAppContext(<LoginWithOAuthAppRoute />);
+      renderWithProviders(<LoginWithOAuthAppRoute />);
 
       const hostname = screen.getByTestId('login-hostname');
       await userEvent.clear(hostname);
@@ -92,7 +92,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   it('should login using a token - success', async () => {
     loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
-    renderWithAppContext(<LoginWithOAuthAppRoute />, {
+    renderWithProviders(<LoginWithOAuthAppRoute />, {
       loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
@@ -123,7 +123,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
       .mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
-    renderWithAppContext(<LoginWithOAuthAppRoute />, {
+    renderWithProviders(<LoginWithOAuthAppRoute />, {
       loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
@@ -151,7 +151,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should render the form with errors', async () => {
-    renderWithAppContext(<LoginWithOAuthAppRoute />);
+    renderWithProviders(<LoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -171,7 +171,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should open help docs in the browser', async () => {
-    renderWithAppContext(<LoginWithOAuthAppRoute />);
+    renderWithProviders(<LoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
 

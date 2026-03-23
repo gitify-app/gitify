@@ -5,7 +5,7 @@ import { MarkGithubIcon } from '@primer/octicons-react';
 
 import {
   navigateMock,
-  renderWithAppContext,
+  renderWithProviders,
 } from '../../__helpers__/test-utils';
 
 import { Header } from './Header';
@@ -14,7 +14,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotificationsMock = vi.fn();
 
   it('should render itself & its children', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <Header icon={MarkGithubIcon}>Test Header</Header>,
     );
 
@@ -22,7 +22,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
   });
 
   it('should navigate back', async () => {
-    renderWithAppContext(<Header icon={MarkGithubIcon}>Test Header</Header>);
+    renderWithProviders(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -31,7 +31,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
   });
 
   it('should navigate back and fetch notifications', async () => {
-    renderWithAppContext(
+    renderWithProviders(
       <Header fetchOnBack icon={MarkGithubIcon}>
         Test Header
       </Header>,

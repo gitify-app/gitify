@@ -1,10 +1,10 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { Centered } from './Centered';
 
 describe('renderer/components/layout/Centered.tsx', () => {
   it('should render itself & its children - full height true', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <Centered fullHeight={true}>Test</Centered>,
     );
 
@@ -12,7 +12,7 @@ describe('renderer/components/layout/Centered.tsx', () => {
   });
 
   it('should render itself & its children - full height false', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <Centered fullHeight={false}>Test</Centered>,
     );
 

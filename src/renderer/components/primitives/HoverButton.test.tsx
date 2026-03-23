@@ -1,6 +1,6 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { HoverButton } from './HoverButton';
 
@@ -8,7 +8,7 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
   it('should render', () => {
     const actionMock = vi.fn();
 
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <HoverButton
         action={actionMock}
         icon={MarkGithubIcon}
@@ -22,7 +22,7 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
   it('should render - disabled', () => {
     const actionMock = vi.fn();
 
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <HoverButton
         action={actionMock}
         enabled={false}

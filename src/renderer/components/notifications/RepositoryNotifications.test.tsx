@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
@@ -27,7 +27,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
+    const tree = renderWithProviders(<RepositoryNotifications {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -41,7 +41,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       })),
     };
 
-    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
+    const tree = renderWithProviders(<RepositoryNotifications {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -56,7 +56,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       .spyOn(comms, 'openExternalLink')
       .mockImplementation(vi.fn());
 
-    renderWithAppContext(<RepositoryNotifications {...props} />);
+    renderWithProviders(<RepositoryNotifications {...props} />);
 
     await userEvent.click(screen.getByTestId('open-repository'));
 
@@ -72,7 +72,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    renderWithAppContext(<RepositoryNotifications {...props} />, {
+    renderWithProviders(<RepositoryNotifications {...props} />, {
       settings: { ...mockSettings },
       markNotificationsAsRead: markNotificationsAsReadMock,
     });
@@ -90,7 +90,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    renderWithAppContext(<RepositoryNotifications {...props} />, {
+    renderWithProviders(<RepositoryNotifications {...props} />, {
       settings: { ...mockSettings },
       markNotificationsAsDone: markNotificationsAsDoneMock,
     });
@@ -110,7 +110,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     props.repoNotifications[0].repository.owner.avatarUrl = '' as Link;
 
-    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
+    const tree = renderWithProviders(<RepositoryNotifications {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -122,12 +122,12 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
     };
 
     await act(async () => {
-      renderWithAppContext(<RepositoryNotifications {...props} />);
+      renderWithProviders(<RepositoryNotifications {...props} />);
     });
 
     await userEvent.click(screen.getByTestId('repository-toggle'));
 
-    const tree = renderWithAppContext(<RepositoryNotifications {...props} />);
+    const tree = renderWithProviders(<RepositoryNotifications {...props} />);
     expect(tree.container).toMatchSnapshot();
   });
 });

@@ -1,4 +1,4 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { CommentsPill, type CommentsPillProps } from './CommentsPill';
 
@@ -6,7 +6,7 @@ describe('renderer/components/metrics/CommentsPill.tsx', () => {
   it('renders with no comments (null)', () => {
     const props: CommentsPillProps = null;
 
-    const tree = renderWithAppContext(<CommentsPill {...props} />);
+    const tree = renderWithProviders(<CommentsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -16,7 +16,7 @@ describe('renderer/components/metrics/CommentsPill.tsx', () => {
       commentCount: 1,
     };
 
-    const tree = renderWithAppContext(<CommentsPill {...props} />);
+    const tree = renderWithProviders(<CommentsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -26,7 +26,7 @@ describe('renderer/components/metrics/CommentsPill.tsx', () => {
       commentCount: 2,
     };
 
-    const tree = renderWithAppContext(<CommentsPill {...props} />);
+    const tree = renderWithProviders(<CommentsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });

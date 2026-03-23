@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { renderWithProviders } from '../__helpers__/test-utils';
 import {
   mockGitHubAppAccount,
   mockOAuthAccount,
@@ -41,7 +41,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should render itself & its children', async () => {
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     expect(screen.getByTestId('account-scopes')).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should show all-granted status when account has all recommended scopes', async () => {
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     // notifications + read:user (required) + repo (detailed) = 3 granted; public_repo = N/A (covered by repo)
@@ -64,7 +64,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should show required-scope row with granted/missing indicators', async () => {
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     const rows = screen.getAllByTestId('account-scopes-required-scope');
@@ -75,7 +75,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should show Detailed Notifications section with repo and public_repo rows', async () => {
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     expect(screen.getByText('Detailed Notifications')).toBeInTheDocument();
@@ -98,7 +98,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     };
 
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     // notifications + read:user (required) + public_repo (detailed) = 3 granted; repo = 1 missing
@@ -117,7 +117,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     };
 
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     // Both repo rows show missing
@@ -137,7 +137,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     };
 
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     // Required scope (notifications) is missing
@@ -159,7 +159,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     };
 
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     expect(
@@ -173,7 +173,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     mockLocationAccount = { ...mockGitHubAppAccount, scopes: undefined };
 
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     expect(screen.getByTestId('account-scopes-no-scopes')).toBeInTheDocument();
@@ -185,7 +185,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       .mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     await userEvent.click(screen.getByTestId('account-scopes-manage-link'));
@@ -195,7 +195,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should go back when pressing the back icon', async () => {
     await act(async () => {
-      renderWithAppContext(<AccountScopesRoute />);
+      renderWithProviders(<AccountScopesRoute />);
     });
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
@@ -215,7 +215,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       };
 
       await act(async () => {
-        renderWithAppContext(<AccountScopesRoute />);
+        renderWithProviders(<AccountScopesRoute />);
       });
 
       expect(screen.getByTestId('account-scopes')).toBeInTheDocument();

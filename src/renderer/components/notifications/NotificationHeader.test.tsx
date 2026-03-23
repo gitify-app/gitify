@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
@@ -19,7 +19,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       notification: mockGitifyNotification,
     };
 
-    const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+    const tree = renderWithProviders(<NotificationHeader {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
@@ -32,7 +32,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         notification: mockGitifyNotification,
       };
 
-      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+      const tree = renderWithProviders(<NotificationHeader {...props} />, {
         settings: { ...mockSettings, groupBy: GroupBy.DATE },
       });
 
@@ -44,7 +44,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         notification: mockGitifyNotification,
       };
 
-      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+      const tree = renderWithProviders(<NotificationHeader {...props} />, {
         settings: {
           ...mockSettings,
           showNumber: false,
@@ -63,7 +63,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
         },
       };
 
-      const tree = renderWithAppContext(<NotificationHeader {...props} />, {
+      const tree = renderWithProviders(<NotificationHeader {...props} />, {
         settings: { ...mockSettings, groupBy: GroupBy.DATE },
       });
 
@@ -80,7 +80,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       notification: mockGitifyNotification,
     };
 
-    renderWithAppContext(<NotificationHeader {...props} />, {
+    renderWithProviders(<NotificationHeader {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.DATE },
     });
 

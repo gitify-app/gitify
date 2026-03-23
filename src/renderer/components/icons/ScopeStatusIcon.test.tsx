@@ -1,27 +1,25 @@
 import { screen } from '@testing-library/react';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { ScopeStatusIcon } from './ScopeStatusIcon';
 
 describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
   describe('granted state', () => {
     it('renders a success icon when granted', () => {
-      const tree = renderWithAppContext(<ScopeStatusIcon granted={true} />);
+      const tree = renderWithProviders(<ScopeStatusIcon granted={true} />);
       expect(tree.container).toMatchSnapshot();
     });
 
     it('renders a success icon with test id when withTestId is true', () => {
-      renderWithAppContext(
-        <ScopeStatusIcon granted={true} withTestId={true} />,
-      );
+      renderWithProviders(<ScopeStatusIcon granted={true} withTestId={true} />);
       expect(
         screen.getByTestId('account-scopes-scope-granted'),
       ).toBeInTheDocument();
     });
 
     it('does not render a test id by default', () => {
-      renderWithAppContext(<ScopeStatusIcon granted={true} />);
+      renderWithProviders(<ScopeStatusIcon granted={true} />);
       expect(
         screen.queryByTestId('account-scopes-scope-granted'),
       ).not.toBeInTheDocument();
@@ -30,12 +28,12 @@ describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
 
   describe('missing state', () => {
     it('renders a danger icon when not granted', () => {
-      const tree = renderWithAppContext(<ScopeStatusIcon granted={false} />);
+      const tree = renderWithProviders(<ScopeStatusIcon granted={false} />);
       expect(tree.container).toMatchSnapshot();
     });
 
     it('renders a danger icon with test id when withTestId is true', () => {
-      renderWithAppContext(
+      renderWithProviders(
         <ScopeStatusIcon granted={false} withTestId={true} />,
       );
       expect(
@@ -44,7 +42,7 @@ describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
     });
 
     it('does not render a test id by default', () => {
-      renderWithAppContext(<ScopeStatusIcon granted={false} />);
+      renderWithProviders(<ScopeStatusIcon granted={false} />);
       expect(
         screen.queryByTestId('account-scopes-scope-missing'),
       ).not.toBeInTheDocument();
@@ -53,14 +51,14 @@ describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
 
   describe('notApplicable state', () => {
     it('renders a dash icon when notApplicable', () => {
-      const tree = renderWithAppContext(
+      const tree = renderWithProviders(
         <ScopeStatusIcon granted={false} notApplicable={true} />,
       );
       expect(tree.container).toMatchSnapshot();
     });
 
     it('renders a dash icon with test id when withTestId is true', () => {
-      renderWithAppContext(
+      renderWithProviders(
         <ScopeStatusIcon
           granted={false}
           notApplicable={true}
@@ -71,7 +69,7 @@ describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
     });
 
     it('does not render a test id by default', () => {
-      renderWithAppContext(
+      renderWithProviders(
         <ScopeStatusIcon granted={false} notApplicable={true} />,
       );
       expect(
@@ -80,7 +78,7 @@ describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
     });
 
     it('ignores granted=true when notApplicable is true', () => {
-      renderWithAppContext(
+      renderWithProviders(
         <ScopeStatusIcon
           granted={true}
           notApplicable={true}
@@ -96,7 +94,7 @@ describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
 
   describe('size prop', () => {
     it('renders correctly with a custom size', () => {
-      const tree = renderWithAppContext(
+      const tree = renderWithProviders(
         <ScopeStatusIcon granted={true} size={20} />,
       );
       expect(tree.container).toMatchSnapshot();

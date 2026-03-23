@@ -1,4 +1,4 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
 import { ReviewsPill, type ReviewsPillProps } from './ReviewsPill';
@@ -9,7 +9,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
       reviews: mockGitifyNotification.subject.reviews,
     };
 
-    const tree = renderWithAppContext(<ReviewsPill {...props} />);
+    const tree = renderWithProviders(<ReviewsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -19,7 +19,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
       reviews: [],
     };
 
-    const tree = renderWithAppContext(<ReviewsPill {...props} />);
+    const tree = renderWithProviders(<ReviewsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });

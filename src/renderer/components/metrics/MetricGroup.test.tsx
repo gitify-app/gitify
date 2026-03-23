@@ -1,4 +1,4 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
@@ -11,7 +11,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = renderWithAppContext(<MetricGroup {...props} />, {
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
       settings: { ...mockSettings, showPills: false },
     });
 
@@ -24,7 +24,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = renderWithAppContext(<MetricGroup {...props} />, {
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
       settings: { ...mockSettings, showPills: true },
     });
 

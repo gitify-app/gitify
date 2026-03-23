@@ -1,6 +1,6 @@
 import { act } from '@testing-library/react';
 
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
@@ -37,7 +37,7 @@ const renderWithContext = () => {
     return null;
   };
 
-  renderWithAppContext(
+  renderWithProviders(
     <AppProvider>
       <CaptureContext />
     </AppProvider>,
@@ -92,7 +92,7 @@ describe('renderer/context/App.tsx', () => {
     };
 
     it('fetch notifications each interval', async () => {
-      renderWithAppContext(<AppProvider>{null}</AppProvider>);
+      renderWithProviders(<AppProvider>{null}</AppProvider>);
 
       // Initial fetch happens on mount - advance timers to ensure it runs
       await act(async () => {

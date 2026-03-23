@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
@@ -23,7 +23,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
   describe('should render itself & its children', () => {
     it('with detailed notifications enabled', () => {
-      const tree = renderWithAppContext(
+      const tree = renderWithProviders(
         <FilterSection
           filter={{
             ...mockFilter,
@@ -47,7 +47,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     });
 
     it('with detailed notifications disabled', () => {
-      const tree = renderWithAppContext(
+      const tree = renderWithProviders(
         <FilterSection
           filter={{
             ...mockFilter,
@@ -73,7 +73,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
   it('should be able to toggle filter value - none already set', async () => {
     await act(async () => {
-      renderWithAppContext(
+      renderWithProviders(
         <FilterSection
           filter={mockFilter}
           filterSetting={mockFilterSetting}
@@ -97,12 +97,8 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
   });
 
   it('should be able to toggle filter value - some filters already set', async () => {
-    useFiltersStore.setState({
-      states: ['open'],
-    });
-
     await act(async () => {
-      renderWithAppContext(
+      renderWithProviders(
         <FilterSection
           filter={mockFilter}
           filterSetting={mockFilterSetting}
@@ -112,6 +108,9 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         />,
         {
           settings: mockSettings,
+          filters: {
+            states: ['open'],
+          },
         },
       );
     });

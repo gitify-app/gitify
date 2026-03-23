@@ -1,14 +1,14 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 
 import * as comms from '../utils/system/comms';
 import { LoginRoute } from './Login';
 
 describe('renderer/routes/Login.tsx', () => {
   it('should render itself & its children', () => {
-    const tree = renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
+    const tree = renderWithProviders(<LoginRoute />, { isLoggedIn: false });
 
     expect(tree.container).toMatchSnapshot();
 
@@ -18,7 +18,7 @@ describe('renderer/routes/Login.tsx', () => {
   it('should redirect to notifications once logged in', () => {
     const showWindowSpy = vi.spyOn(comms, 'showWindow');
 
-    renderWithAppContext(<LoginRoute />, {
+    renderWithProviders(<LoginRoute />, {
       isLoggedIn: true,
     });
 
@@ -28,7 +28,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should login with github', async () => {
-    renderWithAppContext(<LoginRoute />, {
+    renderWithProviders(<LoginRoute />, {
       isLoggedIn: false,
     });
 
@@ -39,7 +39,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with personal access token', async () => {
-    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
+    renderWithProviders(<LoginRoute />, { isLoggedIn: false });
 
     await userEvent.click(screen.getByTestId('login-pat'));
 
@@ -48,7 +48,7 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it('should navigate to login with oauth app', async () => {
-    renderWithAppContext(<LoginRoute />, { isLoggedIn: false });
+    renderWithProviders(<LoginRoute />, { isLoggedIn: false });
 
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 
