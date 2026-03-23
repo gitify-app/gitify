@@ -7,7 +7,8 @@ import { BaseStyles, ThemeProvider } from '@primer/react';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
 import { AppContext, type AppContextState } from '../context/App';
-import { useFiltersStore, type FiltersStore } from '../stores';
+
+import { type FiltersStore, useFiltersStore } from '../stores';
 
 export { navigateMock } from './vitest.setup';
 export type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> };
