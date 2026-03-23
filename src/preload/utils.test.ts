@@ -29,12 +29,6 @@ vi.mock('electron', () => {
 import { ipcRenderer } from 'electron';
 
 describe('preload/utils', () => {
-  afterEach(() => {
-    vi.mocked(ipcRenderer.send).mockClear();
-    vi.mocked(ipcRenderer.invoke).mockClear();
-    vi.mocked(ipcRenderer.on).mockClear();
-  });
-
   it('sendMainEvent forwards to ipcRenderer.send', () => {
     sendMainEvent(EVENTS.WINDOW_SHOW);
     expect(ipcRenderer.send).toHaveBeenCalledWith(
