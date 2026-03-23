@@ -1,4 +1,4 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { ReactionsPill, type ReactionsPillProps } from './ReactionsPill';
 
@@ -6,7 +6,7 @@ describe('renderer/components/metrics/ReactionsPill.tsx', () => {
   it('renders with no reactions', () => {
     const props: ReactionsPillProps = { reactionGroups: [], reactionsCount: 0 };
 
-    const tree = renderWithAppContext(<ReactionsPill {...props} />);
+    const tree = renderWithProviders(<ReactionsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -22,7 +22,7 @@ describe('renderer/components/metrics/ReactionsPill.tsx', () => {
       reactionsCount: 1,
     };
 
-    const tree = renderWithAppContext(<ReactionsPill {...props} />);
+    const tree = renderWithProviders(<ReactionsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -42,7 +42,7 @@ describe('renderer/components/metrics/ReactionsPill.tsx', () => {
       reactionsCount: 54,
     };
 
-    const tree = renderWithAppContext(<ReactionsPill {...props} />);
+    const tree = renderWithProviders(<ReactionsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });

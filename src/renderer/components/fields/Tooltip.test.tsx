@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { Tooltip, type TooltipProps } from './Tooltip';
 
@@ -12,14 +12,14 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
   };
 
   it('should render', () => {
-    renderWithAppContext(<Tooltip {...props} />);
+    renderWithProviders(<Tooltip {...props} />);
 
     expect(screen.getByTestId('tooltip-icon-test')).toBeInTheDocument();
     expect(screen.queryByText(props.tooltip as string)).not.toBeInTheDocument();
   });
 
   it('should toggle (show/hide) tooltip on clicking tooltip icon', async () => {
-    renderWithAppContext(<Tooltip {...props} />);
+    renderWithProviders(<Tooltip {...props} />);
 
     const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
 
@@ -33,7 +33,7 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
   });
 
   it('should hide tooltip when clicking outside', async () => {
-    renderWithAppContext(<Tooltip {...props} />);
+    renderWithProviders(<Tooltip {...props} />);
 
     const tooltipIconElement = screen.getByTestId('tooltip-icon-test');
 

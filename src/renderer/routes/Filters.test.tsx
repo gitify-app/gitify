@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 
 import { type FiltersStore, useFiltersStore } from '../stores';
 import { FiltersRoute } from './Filters';
@@ -19,7 +19,7 @@ describe('renderer/routes/Filters.tsx', () => {
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {
-        renderWithAppContext(<FiltersRoute />);
+        renderWithProviders(<FiltersRoute />);
       });
 
       expect(screen.getByTestId('filters')).toMatchSnapshot();
@@ -27,7 +27,7 @@ describe('renderer/routes/Filters.tsx', () => {
 
     it('should go back by pressing the icon', async () => {
       await act(async () => {
-        renderWithAppContext(<FiltersRoute />, {
+        renderWithProviders(<FiltersRoute />, {
           fetchNotifications: fetchNotificationsMock,
         });
       });
@@ -43,7 +43,7 @@ describe('renderer/routes/Filters.tsx', () => {
   describe('Footer section', () => {
     it('should clear filters', async () => {
       await act(async () => {
-        renderWithAppContext(<FiltersRoute />);
+        renderWithProviders(<FiltersRoute />);
       });
 
       await userEvent.click(screen.getByTestId('filters-clear'));

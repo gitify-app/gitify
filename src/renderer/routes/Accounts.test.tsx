@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 import {
   mockGitHubAppAccount,
   mockOAuthAccount,
@@ -18,7 +18,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: {
             accounts: [
               mockPersonalAccessTokenAccount,
@@ -35,7 +35,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should go back by pressing the icon', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />);
+        renderWithProviders(<AccountsRoute />);
       });
 
       await userEvent.click(screen.getByTestId('header-nav-back'));
@@ -56,7 +56,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         .mockImplementation(vi.fn());
 
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
         });
       });
@@ -71,7 +71,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('open host in external browser', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
         });
       });
@@ -84,7 +84,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('open developer settings in external browser', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
         });
       });
@@ -99,7 +99,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should render with PAT scopes warning', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: {
             accounts: [
               {
@@ -135,7 +135,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         .mockImplementation(vi.fn());
 
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: {
             accounts: [
               mockPersonalAccessTokenAccount,
@@ -161,7 +161,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         .mockImplementation(vi.fn());
 
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
         });
       });
@@ -179,7 +179,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       const logoutFromAccountMock = vi.fn();
 
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
           logoutFromAccount: logoutFromAccountMock,
         });
@@ -192,7 +192,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should show view-scopes button for all auth methods', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: {
             accounts: [
               mockPersonalAccessTokenAccount,
@@ -208,7 +208,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should navigate to account-scopes when clicking view-scopes', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
         });
       });
@@ -224,7 +224,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   describe('Add new accounts', () => {
     it('should show login with github app', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockOAuthAccount] },
         });
       });
@@ -240,7 +240,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should show login with personal access token', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockOAuthAccount] },
         });
       });
@@ -259,7 +259,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('should show login with oauth app', async () => {
       await act(async () => {
-        renderWithAppContext(<AccountsRoute />, {
+        renderWithProviders(<AccountsRoute />, {
           auth: { accounts: [mockPersonalAccessTokenAccount] },
         });
       });

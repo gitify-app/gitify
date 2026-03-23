@@ -1,4 +1,4 @@
-import { renderWithAppContext } from '../__helpers__/test-utils';
+import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
@@ -19,7 +19,7 @@ vi.mock('../components/Oops', () => ({
 
 describe('renderer/routes/Notifications.tsx', () => {
   it('should render itself & its children (with notifications)', () => {
-    const tree = renderWithAppContext(<NotificationsRoute />, {
+    const tree = renderWithProviders(<NotificationsRoute />, {
       notifications: mockMultipleAccountNotifications,
     });
 
@@ -27,12 +27,12 @@ describe('renderer/routes/Notifications.tsx', () => {
   });
 
   it('should render itself & its children (all read notifications)', () => {
-    const tree = renderWithAppContext(<NotificationsRoute />);
+    const tree = renderWithProviders(<NotificationsRoute />);
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render itself & its children (show account header)', () => {
-    const tree = renderWithAppContext(<NotificationsRoute />, {
+    const tree = renderWithProviders(<NotificationsRoute />, {
       notifications: [mockMultipleAccountNotifications[0]],
       settings: { ...mockSettings, showAccountHeader: true },
     });
@@ -41,7 +41,7 @@ describe('renderer/routes/Notifications.tsx', () => {
 
   describe('should render itself & its children (error conditions - oops)', () => {
     it('bad credentials', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
+      const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
         globalError: Errors.BAD_CREDENTIALS,
       });
@@ -50,7 +50,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     });
 
     it('missing scopes', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
+      const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
         globalError: Errors.MISSING_SCOPES,
       });
@@ -59,7 +59,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     });
 
     it('rate limited', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
+      const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
         globalError: Errors.RATE_LIMITED,
       });
@@ -68,7 +68,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     });
 
     it('unknown error', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
+      const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
         globalError: Errors.UNKNOWN,
       });
@@ -77,7 +77,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     });
 
     it('default error', () => {
-      const tree = renderWithAppContext(<NotificationsRoute />, {
+      const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
         globalError: null,
       });

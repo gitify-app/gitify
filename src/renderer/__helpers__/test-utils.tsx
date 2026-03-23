@@ -8,19 +8,22 @@ import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
 import { AppContext, type AppContextState } from '../context/App';
 
+import { type FiltersStore, useFiltersStore } from '../stores';
+
 export { navigateMock } from './vitest.setup';
 export type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> };
 
 const EMPTY_APP_CONTEXT: TestAppContext = {};
 
-interface RenderOptions extends Partial<AppContextState> {
-  initialEntries?: string[];
-}
-
 /**
  * Test context
  */
 type TestAppContext = Partial<AppContextState>;
+
+interface RenderOptions extends TestAppContext {
+  initialEntries?: string[];
+  filters?: Partial<FiltersStore>;
+}
 
 /**
  * Props for the AppContextProvider wrapper
@@ -83,7 +86,7 @@ function AppContextProvider({
     <MemoryRouter initialEntries={initialEntries}>
       <ThemeProvider>
         <BaseStyles>
-          <AppContext.Provider value={defaultValue}>
+          <AppContext.Provider value={defaultValue as AppContextState}>
             {children}
           </AppContext.Provider>
         </BaseStyles>
@@ -93,15 +96,20 @@ function AppContextProvider({
 }
 
 /**
- * Custom render that wraps components with AppContextProvider by default.
+ * Custom render that wraps components with all providers needed for testing:
+ * MemoryRouter, AppContext, and Zustand stores.
  *
  * Usage:
- *   renderWithAppContext(<MyComponent />, { auth, settings, ... })
+ *   renderWithProviders(<MyComponent />, { notifications, accounts, settings, filters, ... })
  */
-export function renderWithAppContext(
+export function renderWithProviders(
   ui: ReactElement,
-  { initialEntries, ...context }: RenderOptions = {},
+  { initialEntries, filters, ...context }: RenderOptions = {},
 ) {
+  if (filters) {
+    useFiltersStore.setState(filters);
+  }
+
   return render(ui, {
     wrapper: ({ children }) => (
       <AppContextProvider initialEntries={initialEntries} value={context}>

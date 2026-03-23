@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 
 import * as zoom from '../../utils/ui/zoom';
@@ -12,7 +12,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
   it('should change the theme mode dropdown', async () => {
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
+      renderWithProviders(<AppearanceSettings />, {
         updateSetting: updateSettingMock,
       });
     });
@@ -28,7 +28,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
   it('should toggle increase contrast checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
+      renderWithProviders(<AppearanceSettings />, {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
@@ -54,7 +54,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       .mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
+      renderWithProviders(<AppearanceSettings />, {
         updateSetting: updateSettingMock,
       });
     });
@@ -77,7 +77,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
   it('should toggle account header checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
+      renderWithProviders(<AppearanceSettings />, {
         auth: {
           accounts: [mockGitHubAppAccount],
         },
@@ -93,7 +93,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
   it('should toggle wrap notification title checkbox', async () => {
     await act(async () => {
-      renderWithAppContext(<AppearanceSettings />, {
+      renderWithProviders(<AppearanceSettings />, {
         auth: {
           accounts: [mockGitHubAppAccount],
         },

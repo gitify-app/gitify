@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { type Link, Size } from '../../types';
 
@@ -19,19 +19,19 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   };
 
   it('should render avatar - human user', () => {
-    const tree = renderWithAppContext(<AvatarWithFallback {...props} />);
+    const tree = renderWithProviders(<AvatarWithFallback {...props} />);
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render avatar - non-human user', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <AvatarWithFallback {...props} userType={'Organization'} />,
     );
     expect(tree.container).toMatchSnapshot();
   });
 
   it('renders the fallback icon when no src url - human user', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <AvatarWithFallback {...props} src={null} />,
     );
 
@@ -39,7 +39,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   });
 
   it('renders the fallback icon when no src url - non human user', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <AvatarWithFallback {...props} src={null} userType="Bot" />,
     );
 
@@ -47,7 +47,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   });
 
   it('renders the fallback icon when the image fails to load (isBroken = true) - human user', () => {
-    renderWithAppContext(<AvatarWithFallback {...props} />);
+    renderWithProviders(<AvatarWithFallback {...props} />);
 
     // Find the avatar element by its alt text
     const avatar = screen.getByAltText('gitify-app');
@@ -59,7 +59,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   });
 
   it('renders the fallback icon when the image fails to load (isBroken = true) - non human user', () => {
-    renderWithAppContext(<AvatarWithFallback {...props} userType={'Bot'} />);
+    renderWithProviders(<AvatarWithFallback {...props} userType={'Bot'} />);
 
     // Find the avatar element by its alt text
     const avatar = screen.getByAltText('gitify-app');

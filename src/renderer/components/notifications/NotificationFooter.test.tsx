@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
 import type { GitifyNotificationUser, Link } from '../../types';
@@ -22,7 +22,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       notification: mockGitifyNotification,
     };
 
-    const tree = renderWithAppContext(<NotificationFooter {...props} />);
+    const tree = renderWithProviders(<NotificationFooter {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -36,7 +36,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<NotificationFooter {...props} />);
+      const tree = renderWithProviders(<NotificationFooter {...props} />);
 
       expect(tree.container).toMatchSnapshot();
     });
@@ -49,7 +49,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithAppContext(<NotificationFooter {...props} />);
+      const tree = renderWithProviders(<NotificationFooter {...props} />);
 
       expect(tree.container).toMatchSnapshot();
     });
@@ -63,7 +63,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = renderWithAppContext(<NotificationFooter {...props} />);
+    const tree = renderWithProviders(<NotificationFooter {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -90,7 +90,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       },
     };
 
-    renderWithAppContext(<NotificationFooter {...props} />);
+    renderWithProviders(<NotificationFooter {...props} />);
 
     await userEvent.click(screen.getByTestId('view-profile'));
 

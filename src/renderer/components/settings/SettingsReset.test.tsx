@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import * as logger from '../../utils/core/logger';
 import { SettingsReset } from './SettingsReset';
@@ -17,7 +17,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     globalThis.confirm = vi.fn(() => true); // always click 'OK'
 
     await act(async () => {
-      renderWithAppContext(<SettingsReset />, {
+      renderWithProviders(<SettingsReset />, {
         resetSettings: resetSettingsMock,
       });
     });
@@ -33,7 +33,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     globalThis.confirm = vi.fn(() => false); // always click 'cancel'
 
     await act(async () => {
-      renderWithAppContext(<SettingsReset />, {
+      renderWithProviders(<SettingsReset />, {
         resetSettings: resetSettingsMock,
       });
     });

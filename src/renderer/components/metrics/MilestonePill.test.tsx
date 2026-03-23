@@ -1,4 +1,4 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { MilestonePill, type MilestonePillProps } from './MilestonePill';
 
@@ -6,7 +6,7 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
   it('renders with no milestone', () => {
     const props: MilestonePillProps = { milestone: null };
 
-    const tree = renderWithAppContext(<MilestonePill {...props} />);
+    const tree = renderWithProviders(<MilestonePill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -19,7 +19,7 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
       },
     };
 
-    const tree = renderWithAppContext(<MilestonePill {...props} />);
+    const tree = renderWithProviders(<MilestonePill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -32,7 +32,7 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
       },
     };
 
-    const tree = renderWithAppContext(<MilestonePill {...props} />);
+    const tree = renderWithProviders(<MilestonePill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });

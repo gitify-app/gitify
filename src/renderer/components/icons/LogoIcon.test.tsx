@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { Size } from '../../types';
 
@@ -9,20 +9,20 @@ import { LogoIcon } from './LogoIcon';
 
 describe('renderer/components/icons/LogoIcon.tsx', () => {
   it('renders correctly (light)', () => {
-    const tree = renderWithAppContext(<LogoIcon size={Size.SMALL} />);
+    const tree = renderWithProviders(<LogoIcon size={Size.SMALL} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('renders correctly (dark)', () => {
-    const tree = renderWithAppContext(<LogoIcon isDark size={Size.SMALL} />);
+    const tree = renderWithProviders(<LogoIcon isDark size={Size.SMALL} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should click on the logo', async () => {
     const onClickMock = vi.fn();
-    renderWithAppContext(<LogoIcon onClick={onClickMock} size={Size.SMALL} />);
+    renderWithProviders(<LogoIcon onClick={onClickMock} size={Size.SMALL} />);
 
     await userEvent.click(screen.getByLabelText('Gitify Logo'));
 
@@ -30,19 +30,19 @@ describe('renderer/components/icons/LogoIcon.tsx', () => {
   });
 
   it('should render small size', () => {
-    const tree = renderWithAppContext(<LogoIcon size={Size.SMALL} />);
+    const tree = renderWithProviders(<LogoIcon size={Size.SMALL} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render medium size', () => {
-    const tree = renderWithAppContext(<LogoIcon size={Size.MEDIUM} />);
+    const tree = renderWithProviders(<LogoIcon size={Size.MEDIUM} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render large size', () => {
-    const tree = renderWithAppContext(<LogoIcon size={Size.LARGE} />);
+    const tree = renderWithProviders(<LogoIcon size={Size.LARGE} />);
 
     expect(tree.container).toMatchSnapshot();
   });

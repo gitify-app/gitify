@@ -1,11 +1,11 @@
-import { renderWithAppContext } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { NotificationTitle } from './NotificationTitle';
 
 describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   it('should render plain text without code blocks', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <NotificationTitle title="Simple notification title" />,
     );
 
@@ -13,7 +13,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should render text with single inline code block', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <NotificationTitle title="refactor: migrate deprecated atlaskit `xcss`" />,
     );
 
@@ -21,7 +21,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should render text with multiple inline code blocks', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <NotificationTitle title="Replace `foo` with `bar` in config" />,
     );
 
@@ -29,7 +29,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should render text with code block at the start', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <NotificationTitle title="`useState` hook implementation" />,
     );
 
@@ -37,7 +37,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should render text with code block at the end', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <NotificationTitle title="Fix issue with `render`" />,
     );
 
@@ -45,7 +45,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should apply truncate className when wrapNotificationTitle is false', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <NotificationTitle title="refactor: migrate deprecated atlaskit `xcss`" />,
       {
         settings: {
@@ -59,7 +59,7 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should not apply truncate className when wrapNotificationTitle is true', () => {
-    const tree = renderWithAppContext(
+    const tree = renderWithProviders(
       <NotificationTitle title="refactor: migrate deprecated atlaskit `xcss`" />,
       {
         settings: {

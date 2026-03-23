@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithAppContext } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 
 import * as comms from '../utils/system/comms';
 import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
@@ -25,7 +25,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -48,7 +48,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -81,7 +81,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -107,7 +107,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -127,7 +127,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       .fn()
       .mockRejectedValueOnce(new Error('Network error'));
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -147,7 +147,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithAppContext(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
