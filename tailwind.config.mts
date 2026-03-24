@@ -5,7 +5,7 @@ import plugin from 'tailwindcss/plugin';
 const sidebarWidth = '2.5rem'; // 40px
 
 const config: Config = {
-  content: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx'],
+  content: ['./src/**/*.ts', './src/**/*.tsx'],
   darkMode: ['class', '[data-color-mode="dark"]'], // GitHub Primer Theme Provider color mode custom selector
   theme: {
     extend: {
