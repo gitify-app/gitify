@@ -17,6 +17,8 @@ import {
   Text,
 } from '@primer/react';
 
+import { Constants } from '../constants';
+
 import { useAppContext } from '../hooks/useAppContext';
 
 import { Contents } from '../components/layout/Contents';
@@ -33,6 +35,7 @@ import {
 } from '../utils/auth/utils';
 import { rendererLogError } from '../utils/core/logger';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
+import { openDeveloperSettings } from '../utils/system/links';
 
 interface LocationState {
   account?: Account;
@@ -262,6 +265,27 @@ export const LoginWithDeviceFlowRoute: FC = () => {
             </Text>
           </Stack>
         </Button>
+
+        <Stack gap="none">
+          <Text as="em" size="small">
+            Note: to change previously granted permissions, revoke Gitify's
+            access at{' '}
+            <button
+              className="text-gitify-link cursor-pointer"
+              onClick={() =>
+                openDeveloperSettings({
+                  hostname: Constants.GITHUB_HOSTNAME,
+                  method: 'GitHub App',
+                } as Account)
+              }
+              title="GitHub → Developer Settings"
+              type="button"
+            >
+              GitHub → Developer Settings
+            </button>
+            , then re-authorize above.
+          </Text>
+        </Stack>
       </Stack>
     </Stack>
   );
