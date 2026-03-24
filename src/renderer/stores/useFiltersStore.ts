@@ -48,7 +48,7 @@ const useFiltersStore = create<FiltersStore>()(
       },
     }),
     {
-      name: Constants.FILTERS_STORE_KEY,
+      name: Constants.STORAGE.FILTERS,
     },
   ),
 );

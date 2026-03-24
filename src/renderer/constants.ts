@@ -32,10 +32,14 @@ export const OAUTH_SCOPE: Record<OAuthScope, OAuthScopeDetails> = {
 };
 
 export const Constants = {
-  STORAGE_KEY: 'gitify-storage',
-
-  // Filters store key
-  FILTERS_STORE_KEY: 'atlassify-filters',
+  // Local storage keys
+  STORAGE: {
+    // Legacy storage key (soon to be deprecated)
+    LEGACY: 'gitify-storage',
+    // ACCOUNTS: 'gitify-accounts',
+    FILTERS: 'gitify-filters',
+    // SETTINGS: 'gitify-settings',
+  },
 
   // GitHub OAuth Scopes — each tier is an ordered array of OAUTH_SCOPE objects.
   // REQUIRED: minimum scopes Gitify needs to function.
