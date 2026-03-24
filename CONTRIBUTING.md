@@ -2,7 +2,7 @@
 
 Hi! We're really excited that you're interested in contributing to Gitify! 
 
-Before submitting your contribution, please read through the following guide. 
+Before submitting your contribution, please read through the following guide.
 
 We also suggest you read the [Project Philosophy](#project-philosophy) in our documentation.
 
@@ -56,7 +56,6 @@ pnpm test -u
 ### How to Report Bugs or Request Features
 
 If you encounter a bug or have a feature request, please [open an issue][github-issues] with clear steps to reproduce or a detailed description of your idea. Check for existing issues before creating a new one.
-
 
 ### Releases
 
