@@ -9,8 +9,8 @@ import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
 /**
  * The Gitify Bridge API exposed to the renderer via `contextBridge`.
  *
- * All renderer↔main IPC communication must go through this object.
- * It is available on `window.gitify` inside the renderer process.
+ * Provides a safe, sandboxed interface for IPC communication between renderer and main.
+ * Accessible as `window.gitify` in the renderer.
  */
 export const api = {
   /**
@@ -119,7 +119,6 @@ export const api = {
   twemojiDirectory: () => invokeMainEvent(EVENTS.TWEMOJI_DIRECTORY),
 
   /** Platform detection helpers. */
-  /** Platform detection helpers. */
   platform: {
     /** Returns `true` when running on Linux. */
     isLinux: () => isLinux(),
@@ -161,7 +160,7 @@ export const api = {
     },
   },
 
-  /** Electron web frame zoom controls. */
+  /** Electron `webFrame` zoom controls. */
   zoom: {
     /**
      * Return the current Electron zoom level.
@@ -231,8 +230,10 @@ export const api = {
   },
 };
 
-// Use `contextBridge` APIs to expose Electron APIs to renderer
-// Context isolation is always enabled in this app
+/**
+ * Use `contextBridge` APIs to expose Electron APIs to renderer.
+ * Context isolation is always enabled in this app
+ */
 try {
   contextBridge.exposeInMainWorld('gitify', api);
 } catch (error) {
