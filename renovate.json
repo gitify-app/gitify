@@ -4,6 +4,7 @@
     "config:best-practices",
     ":dependencyDashboardApproval",
     ":enableVulnerabilityAlerts",
+    ":semanticCommitTypeAll(chore)",
     ":separateMultipleMajorReleases",
     "customManagers:biomeVersions",
     "schedule:weekly"
