@@ -12,6 +12,14 @@ export interface ParsedCodePart {
   content: string;
 }
 
+/**
+ * Returns the appropriate chevron icon and accessible label for a collapsible section.
+ *
+ * @param hasNotifications - Whether the section has any notifications to display.
+ * @param isVisible - Whether the section is currently expanded/visible.
+ * @param type - The type of section (`'account'` or `'repository'`).
+ * @returns A `Chevron` object containing the icon component and its accessible label.
+ */
 export function getChevronDetails(
   hasNotifications: boolean,
   isVisible: boolean,
