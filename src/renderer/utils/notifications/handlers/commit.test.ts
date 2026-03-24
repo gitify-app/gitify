@@ -2,13 +2,14 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 import { mockSettings } from '../../../__mocks__/state-mocks';
 import { mockRawUser } from '../../api/__mocks__/response-mocks';
 
+import { useFiltersStore } from '../../../stores';
+
 import type { GitifyNotification, Link } from '../../../types';
 import type {
   GetCommitCommentResponse,
   GetCommitResponse,
 } from '../../api/types';
 
-import { useFiltersStore } from '../../../stores';
 import * as apiClient from '../../api/client';
 import { commitHandler } from './commit';
 

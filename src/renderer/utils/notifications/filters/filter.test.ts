@@ -1,9 +1,10 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 
+import { useFiltersStore } from '../../../stores';
+
 import type { GitifyOwner, Link, SearchToken } from '../../../types';
 
-import { useFiltersStore } from '../../../stores';
 import { filterBaseNotifications, filterDetailedNotifications } from './filter';
 
 describe('renderer/utils/notifications/filters/filter.ts', () => {

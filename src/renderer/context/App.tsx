@@ -14,6 +14,7 @@ import { Constants } from '../constants';
 import { useInactivityTimer } from '../hooks/timers/useInactivityTimer';
 import { useIntervalTimer } from '../hooks/timers/useIntervalTimer';
 import { useNotifications } from '../hooks/useNotifications';
+import { useFiltersStore } from '../stores';
 
 import type {
   Account,
@@ -34,7 +35,6 @@ import type {
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
-import { useFiltersStore } from '../stores';
 import { fetchAuthenticatedUserDetails } from '../utils/api/client';
 import { clearOctokitClientCache } from '../utils/api/octokit';
 import {

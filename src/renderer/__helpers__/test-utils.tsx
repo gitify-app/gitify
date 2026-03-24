@@ -7,7 +7,6 @@ import { BaseStyles, ThemeProvider } from '@primer/react';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
 import { AppContext, type AppContextState } from '../context/App';
-
 import { type FiltersStore, useFiltersStore } from '../stores';
 
 export { navigateMock } from './vitest.setup';

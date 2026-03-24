@@ -8,6 +8,7 @@ import { mockMultipleAccountNotifications } from '../../__mocks__/notifications-
 import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { useFiltersStore } from '../../stores';
+
 import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 

@@ -4,11 +4,11 @@ import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { type FiltersState, useFiltersStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
-import { type FiltersState, useFiltersStore } from '../../stores';
 import type { Filter } from '../../utils/notifications/filters';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
