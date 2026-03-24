@@ -28,36 +28,36 @@ export function openExternalLink(url: Link): void {
 }
 
 /**
- * Return the application version string from the main process.
+ * Returns the current application version string.
  *
- * @returns The version string (e.g. `"5.12.0"`).
+ * @returns Promise resolving to the app version (e.g. `"6.18.0"`).
  */
 export async function getAppVersion(): Promise<string> {
   return await window.gitify.app.version();
 }
 
 /**
- * Encrypt a plaintext value using Electron's safe storage.
+ * Encrypts a plaintext string using the native Electron encryption bridge.
  *
  * @param value - The plaintext string to encrypt.
- * @returns The encrypted string.
+ * @returns Promise resolving to the encrypted string.
  */
 export async function encryptValue(value: string): Promise<string> {
   return await window.gitify.encryptValue(value);
 }
 
 /**
- * Decrypt an encrypted value using Electron's safe storage.
+ * Decrypts a previously encrypted string using the native Electron decryption bridge.
  *
  * @param value - The encrypted string to decrypt.
- * @returns The plaintext string.
+ * @returns Promise resolving to the decrypted plaintext string.
  */
 export async function decryptValue(value: string): Promise<string> {
   return await window.gitify.decryptValue(value);
 }
 
 /**
- * Quit the Electron application.
+ * Quit the application.
  */
 export function quitApp(): void {
   window.gitify.app.quit();
@@ -78,7 +78,7 @@ export function hideWindow(): void {
 }
 
 /**
- * Enable or disable launching the application at system login.
+ * Enables or disables auto-launch of the application on system startup.
  *
  * @param value - `true` to enable auto-launch, `false` to disable.
  */
@@ -105,9 +105,9 @@ export function setUseUnreadActiveIcon(value: boolean): void {
 }
 
 /**
- * Register or unregister the global keyboard shortcut for the application.
+ * Registers or unregisters the global keyboard shortcut to toggle the application window.
  *
- * @param keyboardShortcut - `true` to enable the shortcut, `false` to disable.
+ * @param keyboardShortcut - `true` to register the shortcut, `false` to unregister.
  */
 export function setKeyboardShortcut(keyboardShortcut: boolean): void {
   window.gitify.setKeyboardShortcut(keyboardShortcut);
@@ -133,6 +133,11 @@ export function updateTrayTitle(title: string): void {
   window.gitify.tray.updateTitle(title);
 }
 
+/**
+ * Copies the specified text to the system clipboard.
+ *
+ * @param text - The text to copy to the clipboard.
+ */
 export async function copyToClipboard(text: string): Promise<void> {
   await navigator.clipboard.writeText(text);
 }

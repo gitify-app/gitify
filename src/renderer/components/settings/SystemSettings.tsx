@@ -19,7 +19,7 @@ import {
   canIncreaseVolume,
   decreaseVolume,
   increaseVolume,
-} from '../../utils/system/audio';
+} from '../../utils/ui/volume';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
