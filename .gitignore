@@ -2,6 +2,9 @@
 dist/
 build/
 
+# Environment variables
+.env
+
 # Dependency directories
 node_modules/
 
@@ -11,9 +14,6 @@ schema.graphql
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
-
-# Environment properties
-.env
 
 # Mac Files
 .DS_Store
