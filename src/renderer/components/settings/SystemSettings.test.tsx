@@ -40,7 +40,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   });
 
   it('should reset global shortcut to default when customized', async () => {
-    renderWithAppContext(<SystemSettings />, {
+    renderWithProviders(<SystemSettings />, {
       updateSetting: updateSettingMock,
       settings: {
         ...mockSettings,
