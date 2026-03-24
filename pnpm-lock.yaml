@@ -58,7 +58,7 @@ importers:
         specifier: 6.0.2
         version: 6.0.2
       '@octokit/openapi-types':
-        specifier: ^27.0.0
+        specifier: 27.0.0
         version: 27.0.0
       '@octokit/plugin-paginate-rest':
         specifier: 14.0.0
@@ -70,7 +70,7 @@ importers:
         specifier: 8.1.0
         version: 8.1.0(@octokit/core@7.0.6)
       '@octokit/request':
-        specifier: ^10.0.8
+        specifier: 10.0.8
         version: 10.0.8
       '@octokit/request-error':
         specifier: 7.1.0
