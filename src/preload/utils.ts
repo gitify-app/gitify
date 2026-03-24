@@ -19,11 +19,17 @@ export function sendMainEvent(event: EventType, data?: EventData): void {
  * @param data - Optional string payload to include with the event.
  * @returns A promise that resolves to the string response from the main process.
  */
-export function invokeMainEvent(
+export async function invokeMainEvent(
   event: EventType,
   data?: string,
 ): Promise<string> {
-  return ipcRenderer.invoke(event, data);
+  try {
+    return await ipcRenderer.invoke(event, data);
+  } catch (err) {
+    // biome-ignore lint/suspicious/noConsole: preload environment is strictly sandboxed
+    console.error(`[IPC] invoke failed: ${event}`, err);
+    throw err;
+  }
 }
 
 /**
