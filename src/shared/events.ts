@@ -2,6 +2,10 @@ import { APPLICATION } from './constants';
 
 const P = APPLICATION.EVENT_PREFIX;
 
+/**
+ * IPC event name constants for all Electron main ↔ renderer communication channels.
+ * Each value is prefixed with `APPLICATION.EVENT_PREFIX` to prevent collisions.
+ */
 export const EVENTS = {
   AUTH_CALLBACK: `${P}auth-callback`,
   QUIT: `${P}quit`,
@@ -23,23 +27,28 @@ export const EVENTS = {
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
 } as const;
 
+/** Union type of all valid IPC event name strings. */
 export type EventType = (typeof EVENTS)[keyof typeof EVENTS];
 
+/** Payload for the `UPDATE_AUTO_LAUNCH` event. */
 export interface IAutoLaunch {
   openAtLogin: boolean;
   openAsHidden: boolean;
 }
 
+/** Payload for the `UPDATE_KEYBOARD_SHORTCUT` event. */
 export interface IKeyboardShortcut {
   enabled: boolean;
   keyboardShortcut: string;
 }
 
+/** Payload for the `OPEN_EXTERNAL` event. */
 export interface IOpenExternal {
   url: string;
   activate: boolean;
 }
 
+/** Union of all possible IPC event payload types. */
 export type EventData =
   | string
   | number

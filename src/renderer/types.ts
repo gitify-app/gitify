@@ -421,13 +421,12 @@ export type GitifyCheckSuiteStatus =
   | 'WAITING';
 
 /**
- *
  * Gitify Type Enhancements
  *
  * These types represent the clean, UI-focused notification structure
- * used throughout the application. Raw GitHub API responses are
- * transformed into these types at the API boundary.
+ * used throughout the application.
  *
+ * Raw GitHub API responses are transformed into these types at the API boundary.
  **/
 
 // Stronger typings for string literal attributes
