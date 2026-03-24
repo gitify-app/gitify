@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 
 import { type FiltersStore, useFiltersStore } from '../stores';
+
 import { FiltersRoute } from './Filters';
 
 describe('renderer/routes/Filters.tsx', () => {

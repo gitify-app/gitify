@@ -1,6 +1,6 @@
-import type { GitifyNotification } from '../../../types';
-
 import { useFiltersStore } from '../../../stores';
+
+import type { GitifyNotification } from '../../../types';
 
 export const SEARCH_DELIMITER = ':';
 

@@ -11,12 +11,12 @@ import {
 import { Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useFiltersStore } from '../../stores';
 
 import { Title } from '../primitives/Title';
 
 import { IconColor, type SearchToken, Size } from '../../types';
 
-import { useFiltersStore } from '../../stores';
 import {
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,

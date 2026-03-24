@@ -28,7 +28,13 @@
               ":BLANK_LINE:",
               ["**/constants", "**/constants/**"],
               ":BLANK_LINE:",
-              ["**/context/**", "**/hooks/**", "**/routes/**"],
+              [
+                "**/context/**",
+                "**/hooks/**",
+                "**/routes/**",
+                "**/stores",
+                "**/stores/**"
+              ],
               ":BLANK_LINE:",
               [
                 "**/layout/**",
@@ -55,9 +61,6 @@
     },
     "rules": {
       "recommended": true,
-      "a11y": {
-        "useKeyWithClickEvents": "off"
-      },
       "correctness": {
         "noUnusedFunctionParameters": "error",
         "useExhaustiveDependencies": {
@@ -110,6 +113,12 @@
     "parser": {
       "tailwindDirectives": true
     }
+  },
+  "html": {
+    "formatter": {
+      "enabled": true
+    },
+    "experimentalFullSupportEnabled": true
   },
   "javascript": {
     "formatter": {

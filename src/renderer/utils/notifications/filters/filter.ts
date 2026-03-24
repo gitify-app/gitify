@@ -1,3 +1,5 @@
+import useFiltersStore from '../../../stores/useFiltersStore';
+
 import type {
   GitifyNotification,
   GitifyNotificationState,
@@ -5,7 +7,6 @@ import type {
   SettingsState,
 } from '../../../types';
 
-import useFiltersStore from '../../../stores/useFiltersStore';
 import {
   BASE_SEARCH_QUALIFIERS,
   DETAILED_ONLY_SEARCH_QUALIFIERS,

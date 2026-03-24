@@ -1,3 +1,5 @@
+import { useFiltersStore } from '../../../stores';
+
 import type {
   AccountNotifications,
   FilterStateType,
@@ -6,8 +8,6 @@ import type {
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
-
-import { useFiltersStore } from '../../../stores';
 
 const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
   draft: {

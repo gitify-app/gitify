@@ -24,6 +24,7 @@ export const LogoIcon: FC<LogoIconProps> = ({
   size = Size.SMALL,
   ...props
 }: LogoIconProps) => (
+  // biome-ignore lint/a11y/useKeyWithClickEvents: Logo is purely decorative
   <svg
     aria-hidden="true"
     aria-label={`${APPLICATION.NAME} Logo`}
