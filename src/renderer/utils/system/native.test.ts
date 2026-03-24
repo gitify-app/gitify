@@ -21,7 +21,6 @@ describe('renderer/utils/system/native.ts', () => {
       mockSingleAccountNotifications[0].notifications,
     );
 
-    // wait for async native handling (generateGitHubWebUrl) to complete
     await waitFor(() =>
       expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1),
     );
