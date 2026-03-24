@@ -52,5 +52,9 @@ export const WindowConfig: BrowserWindowConstructorOptions = {
     nodeIntegration: false,
     // Disable web security in development to allow CORS requests
     webSecurity: !process.env.VITE_DEV_SERVER_URL,
+    // Keep the renderer painting when the window is hidden so Chromium never
+    // freezes the last frame. Without this, reopening the menubar window shows
+    // stale notification content until the next React re-render completes.
+    backgroundThrottling: false,
   },
 };
