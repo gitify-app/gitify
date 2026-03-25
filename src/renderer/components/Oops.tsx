@@ -19,8 +19,9 @@ export const Oops: FC<OopsProps> = ({
   error,
   fullHeight = true,
 }: OopsProps) => {
-  const err = error ?? Errors.UNKNOWN;
   const navigate = useNavigate();
+
+  const err = error ?? Errors.UNKNOWN;
 
   const emoji = useMemo(() => randomElement(err.emojis), [err]);
 

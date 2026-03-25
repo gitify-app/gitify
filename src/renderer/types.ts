@@ -175,20 +175,59 @@ export interface GitifyUser {
   id: string;
 }
 
+/**
+ * Gitify error details.
+ */
 export interface GitifyError {
+  /**
+   * The title of the error.
+   */
   title: string;
+
+  /**
+   * The description paragraphs explaining the error.
+   */
   descriptions: string[];
+
+  /**
+   * An array of emojis that suitably summarize the error message.
+   */
   emojis: string[];
+
+  /**
+   * Optional actions that can be taken to resolve the error.
+   */
   actions?: GitifyErrorAction[];
 }
 
+/**
+ * An action that can be taken to resolve an error.
+ */
 export interface GitifyErrorAction {
+  /**
+   * The label for the error action button.
+   */
   label: string;
+
+  /**
+   * The route to navigate to when the error action button is clicked.
+   */
   route: string;
+
+  /**
+   * The visual variant of the error action button.
+   */
   variant: VariantType;
+
+  /**
+   * The icon to display on the error action button.
+   */
   icon: FC<OcticonProps>;
 }
 
+/**
+ * The different types of errors which may be encountered.
+ */
 export type ErrorType =
   | 'BAD_CREDENTIALS'
   | 'MISSING_SCOPES'
@@ -230,8 +269,19 @@ export enum Size {
   XLARGE = 20,
 }
 
+/**
+ * Details for Chevron header accordion.
+ */
 export interface Chevron {
+  /**
+   * The chevron icon.
+   */
+  // TODO - improve the type here to be more specific about which icons are allowed, if possible
   icon: FC<OcticonProps>;
+
+  /**
+   * The chevron label.
+   */
   label: string;
 }
 
