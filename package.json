@@ -148,6 +148,9 @@
   },
   "lint-staged": {
     "*": "biome check --no-errors-on-unmatched",
-    "*.{js,ts,tsx}": "pnpm test --changed --passWithNoTests --update"
+    "*.{js,ts,tsx}": [
+      "bash -c 'tsc --noEmit",
+      "pnpm test --changed --passWithNoTests --update"
+    ]
   }
 }
