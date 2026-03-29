@@ -154,8 +154,8 @@ importers:
         specifier: 16.13.2
         version: 16.13.2
       happy-dom:
-        specifier: 20.8.8
-        version: 20.8.8
+        specifier: 20.8.9
+        version: 20.8.9
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -191,7 +191,7 @@ importers:
         version: 0.14.6
       vitest:
         specifier: 4.1.1
-        version: 4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
+        version: 4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.9)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
       zustand:
         specifier: 5.0.12
         version: 5.0.12(@types/react@19.2.14)(react@19.2.4)
@@ -1479,6 +1479,7 @@ packages:
   '@xmldom/xmldom@0.8.11':
     resolution: {integrity: sha512-cQzWCtO6C8TQiYl1ruKNn2U6Ao4o4WBBcbL61yJl84x+j5sOWWFU9X7DpND8XZG3daDppSsigMdfAIl2upQBRw==}
     engines: {node: '>=10.0.0'}
+    deprecated: this version has critical issues, please update to the latest version
 
   abbrev@3.0.1:
     resolution: {integrity: sha512-AO2ac6pjRB3SJmGJo+v5/aK6Omggp6fsLrs6wN9bd35ulu4cCwaAU9+7ZhXjeqHVkaHThLuzH0nZr0YpCDhygg==}
@@ -2382,8 +2383,8 @@ packages:
     resolution: {integrity: sha512-5bJ+nf/UCpAjHM8i06fl7eLyVC9iuNAjm9qzkiu2ZGhM0VscSvS6WDPfAwkdkBuoXGM9FJSbKl6wylMwP9Ktig==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
-  happy-dom@20.8.8:
-    resolution: {integrity: sha512-5/F8wxkNxYtsN0bXfMwIyNLZ9WYsoOYPbmoluqVJqv8KBUbcyKZawJ7uYK4WTX8IHBLYv+VXIwfeNDPy1oKMwQ==}
+  happy-dom@20.8.9:
+    resolution: {integrity: sha512-Tz23LR9T9jOGVZm2x1EPdXqwA37G/owYMxRwU0E4miurAtFsPMQ1d2Jc2okUaSjZqAFz2oEn3FLXC5a0a+siyA==}
     engines: {node: '>=20.0.0'}
 
   has-flag@3.0.0:
@@ -5531,7 +5532,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
+      vitest: 4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.9)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
 
   '@vitest/expect@4.1.1':
     dependencies:
@@ -5577,7 +5578,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.1.0
-      vitest: 4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
+      vitest: 4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.9)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
 
   '@vitest/utils@4.1.1':
     dependencies:
@@ -6668,7 +6669,7 @@ snapshots:
 
   graphql@16.13.2: {}
 
-  happy-dom@20.8.8:
+  happy-dom@20.8.9:
     dependencies:
       '@types/node': 24.12.0
       '@types/whatwg-mimetype': 3.0.2
@@ -8077,7 +8078,7 @@ snapshots:
       jiti: 2.6.1
       yaml: 2.8.3
 
-  vitest@4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3)):
+  vitest@4.1.1(@types/node@24.12.0)(@vitest/ui@4.1.1)(happy-dom@20.8.9)(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3)):
     dependencies:
       '@vitest/expect': 4.1.1
       '@vitest/mocker': 4.1.1(vite@8.0.3(@types/node@24.12.0)(jiti@2.6.1)(yaml@2.8.3))
@@ -8102,7 +8103,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.12.0
       '@vitest/ui': 4.1.1(vitest@4.1.1)
-      happy-dom: 20.8.8
+      happy-dom: 20.8.9
     transitivePeerDependencies:
       - msw
 
