@@ -137,7 +137,7 @@ describe('renderer/context/App.tsx', () => {
     it('should call markNotificationsAsRead', async () => {
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().markNotificationsAsRead([mockGitifyNotification]);
       });
 
@@ -152,7 +152,7 @@ describe('renderer/context/App.tsx', () => {
     it('should call markNotificationsAsDone', async () => {
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().markNotificationsAsDone([mockGitifyNotification]);
       });
 
@@ -167,7 +167,7 @@ describe('renderer/context/App.tsx', () => {
     it('should call unsubscribeNotification', async () => {
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().unsubscribeNotification(mockGitifyNotification);
       });
 
@@ -188,7 +188,7 @@ describe('renderer/context/App.tsx', () => {
     it('should call updateSetting', async () => {
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().updateSetting('participating', true);
       });
 
@@ -235,7 +235,7 @@ describe('renderer/context/App.tsx', () => {
 
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().loginWithDeviceFlowStart();
       });
 
@@ -249,7 +249,7 @@ describe('renderer/context/App.tsx', () => {
 
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().loginWithDeviceFlowPoll(
           'session' as unknown as DeviceFlowSession,
         );
@@ -284,7 +284,7 @@ describe('renderer/context/App.tsx', () => {
 
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().loginWithOAuthApp({
           clientId: 'id' as ClientID,
           clientSecret: 'secret' as ClientSecret,
@@ -298,7 +298,7 @@ describe('renderer/context/App.tsx', () => {
     it('logoutFromAccount calls removeAccountNotifications, removeAccount', async () => {
       const getContext = renderWithContext();
 
-      act(() => {
+      await act(async () => {
         getContext().logoutFromAccount(mockGitHubCloudAccount);
       });
 
