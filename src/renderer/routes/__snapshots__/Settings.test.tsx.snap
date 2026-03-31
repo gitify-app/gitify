@@ -1695,68 +1695,8 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-padding="none"
             data-wrap="nowrap"
           >
-            <input
-              checked=""
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-keyboardShortcut"
-              id="keyboardShortcut"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="keyboardShortcut"
-            >
-              Enable keyboard shortcut
-            </label>
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="tooltip-keyboardShortcut"
-              data-testid="tooltip-icon-tooltip-keyboardShortcut"
-              id="tooltip-keyboardShortcut"
-              tabindex="0"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-UQ9k6"
-            data-align="stretch"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <span
-              class="prc-Text-Text-9mHv3"
-            >
-              Global shortcut:
-               
-              <strong
-                class="text-gitify-caution prc-Text-Text-9mHv3"
-              >
-                ⌘·⇧·G
-              </strong>
-            </span>
             <div
-              class="flex-nowrap prc-Stack-Stack-UQ9k6"
+              class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
               data-direction="horizontal"
               data-gap="condensed"
@@ -1764,51 +1704,139 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               data-padding="none"
               data-wrap="nowrap"
             >
+              <input
+                checked=""
+                class="size-4 rounded-sm cursor-pointer"
+                data-testid="checkbox-keyboardShortcut"
+                id="keyboardShortcut"
+                type="checkbox"
+              />
+              <label
+                class="font-medium text-gitify-font cursor-pointer"
+                for="keyboardShortcut"
+              >
+                Global shortcut
+              </label>
               <button
-                class="prc-Button-ButtonBase-9n-Xk"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="button-record-global-shortcut"
-                data-variant="default"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-keyboardShortcut"
+                data-testid="tooltip-icon-tooltip-keyboardShortcut"
+                id="tooltip-keyboardShortcut"
+                tabindex="0"
                 type="button"
               >
-                <span
-                  class="prc-Button-ButtonContent-Iohp5"
-                  data-align="center"
-                  data-component="buttonContent"
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
+              data-testid="settings-shortcut-group"
+            >
+              <div>
+                <button
+                  aria-label="Edit global shortcut"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-shortcut-edit"
+                  data-variant="default"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-pencil"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-label="Global shortcut"
+                  class="prc-Button-ButtonBase-9n-Xk"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-variant="default"
+                  disabled=""
+                  type="button"
                 >
                   <span
-                    class="prc-Button-Label-FWkx3"
-                    data-component="text"
+                    class="prc-Button-ButtonContent-Iohp5"
+                    data-align="center"
+                    data-component="buttonContent"
                   >
-                    Change shortcut
+                    <span
+                      class="prc-Button-Label-FWkx3"
+                      data-component="text"
+                    >
+                      <strong
+                        class="text-gitify-caution prc-Text-Text-9mHv3"
+                      >
+                        ⌘·⇧·G
+                      </strong>
+                    </span>
                   </span>
-                </span>
-              </button>
-              <button
-                class="prc-Button-ButtonBase-9n-Xk shrink-0"
-                data-loading="false"
-                data-no-visuals="true"
-                data-size="small"
-                data-testid="button-reset-global-shortcut"
-                data-variant="danger"
-                disabled=""
-                type="button"
-              >
-                <span
-                  class="prc-Button-ButtonContent-Iohp5"
-                  data-align="center"
-                  data-component="buttonContent"
+                </button>
+              </div>
+              <div>
+                <button
+                  aria-label="Reset global shortcut to default"
+                  class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="settings-shortcut-reset"
+                  data-variant="danger"
+                  type="button"
                 >
-                  <span
-                    class="prc-Button-Label-FWkx3"
-                    data-component="text"
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-sync"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
                   >
-                    Reset to default
-                  </span>
-                </span>
-              </button>
+                    <path
+                      d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
           <div
@@ -2123,7 +2151,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_15_"
+          aria-describedby="_r_16_"
           class="prc-Button-ButtonBase-9n-Xk"
           data-loading="false"
           data-no-visuals="true"
@@ -2151,7 +2179,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-direction="ne"
-          id="_r_15_"
+          id="_r_16_"
           popover="auto"
           role="tooltip"
         >
@@ -2168,7 +2196,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_17_"
+          aria-describedby="_r_18_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2204,7 +2232,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_17_"
+            id="_r_18_"
           >
             Accounts
             <span
@@ -2243,7 +2271,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </span>
         </span>
         <button
-          aria-describedby="_r_19_"
+          aria-describedby="_r_1a_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2279,7 +2307,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_19_"
+            id="_r_1a_"
           >
             Quit Gitify
             <span

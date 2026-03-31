@@ -2,7 +2,6 @@ import { type FC, useEffect, useRef, useState } from 'react';
 
 import {
   DeviceDesktopIcon,
-  HistoryIcon,
   PencilIcon,
   SyncIcon,
 } from '@primer/octicons-react';
@@ -174,119 +173,104 @@ export const SystemSettings: FC = () => {
           />
         )}
 
-        <Checkbox
-          checked={settings.keyboardShortcut}
-          label="Global keyboard shortcut"
-          name="keyboardShortcut"
-          onChange={() =>
-            updateSetting('keyboardShortcut', !settings.keyboardShortcut)
-          }
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>
-                Global keyboard shortcut to show or hide {APPLICATION.NAME}.
-              </Text>
-              <Text>Shortcuts must include:</Text>
-              <div className="pl-2">
-                <Stack direction="vertical" gap="none">
-                  <Stack direction="horizontal" gap="condensed">
-                    <Text>•</Text>
-                    <Text>
-                      Primary modifier:{' '}
-                      <Text as="strong" className="text-gitify-caution">
-                        {formatAcceleratorForDisplay('CommandOrControl', isMac)}
-                      </Text>
-                    </Text>
-                  </Stack>
-                  <Stack direction="horizontal" gap="condensed">
-                    <Text>•</Text>
-                    <Text>
-                      Optional modifiers:{' '}
-                      <Text as="strong" className="text-gitify-caution">
-                        {formatAcceleratorForDisplay('Shift', isMac)}
-                      </Text>
-                      ,{' '}
-                      <Text as="strong" className="text-gitify-caution">
-                        {formatAcceleratorForDisplay('Alt', isMac)}
-                      </Text>
-                    </Text>
-                  </Stack>
-                  <Stack direction="horizontal" gap="condensed">
-                    <Text>•</Text>
-                    <Text>A non-modifier key (letter, number, etc.)</Text>
-                  </Stack>
-                </Stack>
-              </div>
-            </Stack>
-          }
-        />
-
-        {settings.keyboardShortcut && (
-          <div className="pl-6">
-            <Stack
-              className="text-sm"
-              direction="vertical"
-              gap="condensed"
-              ref={shortcutRowRef}
-            >
-              <Text>
-                Global shortcut:{' '}
-                <Text as="strong" className="text-gitify-caution">
-                  {recordingShortcut
-                    ? hasLiveModifiers
-                      ? `${liveModifierDisplay}…`
-                      : 'Press keys…'
-                    : shortcutDisplay}
+        <Stack
+          align="center"
+          className="text-sm"
+          direction="horizontal"
+          gap="condensed"
+        >
+          <Checkbox
+            checked={settings.keyboardShortcut}
+            label="Global shortcut"
+            name="keyboardShortcut"
+            onChange={() =>
+              updateSetting('keyboardShortcut', !settings.keyboardShortcut)
+            }
+            tooltip={
+              <Stack direction="vertical" gap="condensed">
+                <Text>
+                  Global keyboard shortcut to show or hide {APPLICATION.NAME}.
                 </Text>
-              </Text>
-              {recordingShortcut && (
-                <Text className="italic">
-                  Click outside this area to cancel.
-                </Text>
-              )}
-              <Stack
-                align="center"
-                className="flex-nowrap"
-                direction="horizontal"
-                gap="condensed"
-              >
-                <Button
-                  data-testid="button-record-global-shortcut"
-                  disabled={recordingShortcut}
-                  leadingVisual={PencilIcon}
-                  onClick={() => {
-                    clearShortcutRegistrationError();
-                    setRecordingShortcut(true);
-                  }}
-                  size="small"
-                >
-                  Change shortcut
-                </Button>
-                <Button
-                  className="shrink-0"
-                  data-testid="button-reset-global-shortcut"
-                  disabled={
-                    recordingShortcut ||
-                    settings.openGitifyShortcut ===
-                      defaultSettings.openGitifyShortcut
-                  }
-                  leadingVisual={HistoryIcon}
-                  onClick={() => {
-                    clearShortcutRegistrationError();
-                    updateSetting(
-                      'openGitifyShortcut',
-                      defaultSettings.openGitifyShortcut,
-                    );
-                  }}
-                  size="small"
-                  variant="danger"
-                >
-                  Reset to default
-                </Button>
+                <Text>Shortcuts must include:</Text>
+                <div className="pl-2">
+                  <Stack direction="vertical" gap="none">
+                    <Stack direction="horizontal" gap="condensed">
+                      <Text>•</Text>
+                      <Text>
+                        Primary modifier:{' '}
+                        <Text as="strong" className="text-gitify-caution">
+                          {formatAcceleratorForDisplay(
+                            'CommandOrControl',
+                            isMac,
+                          )}
+                        </Text>
+                      </Text>
+                    </Stack>
+                    <Stack direction="horizontal" gap="condensed">
+                      <Text>•</Text>
+                      <Text>
+                        Optional modifiers:{' '}
+                        <Text as="strong" className="text-gitify-caution">
+                          {formatAcceleratorForDisplay('Shift', isMac)}
+                        </Text>
+                        ,{' '}
+                        <Text as="strong" className="text-gitify-caution">
+                          {formatAcceleratorForDisplay('Alt', isMac)}
+                        </Text>
+                      </Text>
+                    </Stack>
+                    <Stack direction="horizontal" gap="condensed">
+                      <Text>•</Text>
+                      <Text>A non-modifier key (letter, number, etc.)</Text>
+                    </Stack>
+                  </Stack>
+                </div>
               </Stack>
-            </Stack>
-          </div>
-        )}
+            }
+          />
+
+          <ButtonGroup
+            className="ml-2"
+            data-testid="settings-shortcut-group"
+            hidden={!settings.keyboardShortcut}
+          >
+            <IconButton
+              aria-label="Edit global shortcut"
+              data-testid="settings-shortcut-edit"
+              icon={PencilIcon}
+              onClick={() => {
+                clearShortcutRegistrationError();
+                setRecordingShortcut(true);
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+            />
+            <Button aria-label="Global shortcut" disabled size="small">
+              <Text as="strong" className="text-gitify-caution">
+                {recordingShortcut
+                  ? hasLiveModifiers
+                    ? `${liveModifierDisplay}…`
+                    : 'Press keys…'
+                  : shortcutDisplay}
+              </Text>
+            </Button>
+            <IconButton
+              aria-label="Reset global shortcut to default"
+              data-testid="settings-shortcut-reset"
+              icon={SyncIcon}
+              onClick={() => {
+                clearShortcutRegistrationError();
+                updateSetting(
+                  'openGitifyShortcut',
+                  defaultSettings.openGitifyShortcut,
+                );
+              }}
+              size="small"
+              unsafeDisableTooltip={true}
+              variant="danger"
+            />
+          </ButtonGroup>
+        </Stack>
 
         <Checkbox
           checked={settings.showNotifications}

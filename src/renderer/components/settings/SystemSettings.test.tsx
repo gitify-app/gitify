@@ -49,7 +49,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       },
     });
 
-    await userEvent.click(screen.getByTestId('button-reset-global-shortcut'));
+    await userEvent.click(screen.getByTestId('settings-shortcut-reset'));
 
     expect(updateSettingMock).toHaveBeenCalledWith(
       'openGitifyShortcut',
@@ -64,14 +64,9 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
         settings: { ...mockSettings, keyboardShortcut: true },
       });
 
-      await userEvent.click(
-        screen.getByTestId('button-record-global-shortcut'),
-      );
+      await userEvent.click(screen.getByTestId('settings-shortcut-edit'));
 
       expect(screen.getByText('Press keys…')).toBeInTheDocument();
-      expect(
-        screen.getByText('Click outside this area to cancel.'),
-      ).toBeInTheDocument();
     });
 
     it('should show live modifier keys as they are pressed', async () => {
@@ -80,9 +75,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
         settings: { ...mockSettings, keyboardShortcut: true },
       });
 
-      await userEvent.click(
-        screen.getByTestId('button-record-global-shortcut'),
-      );
+      await userEvent.click(screen.getByTestId('settings-shortcut-edit'));
 
       // Press Meta (⌘) — isMacOS is mocked to true in test setup
       act(() => {
@@ -134,9 +127,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
         settings: { ...mockSettings, keyboardShortcut: true },
       });
 
-      await userEvent.click(
-        screen.getByTestId('button-record-global-shortcut'),
-      );
+      await userEvent.click(screen.getByTestId('settings-shortcut-edit'));
 
       act(() => {
         window.dispatchEvent(
@@ -167,9 +158,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
         settings: { ...mockSettings, keyboardShortcut: true },
       });
 
-      await userEvent.click(
-        screen.getByTestId('button-record-global-shortcut'),
-      );
+      await userEvent.click(screen.getByTestId('settings-shortcut-edit'));
       expect(screen.getByText('Press keys…')).toBeInTheDocument();
 
       // Click somewhere outside the shortcut row
