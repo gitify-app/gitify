@@ -42,6 +42,11 @@ export interface IKeyboardShortcut {
   keyboardShortcut: string;
 }
 
+/** Result of applying the global open/close Gitify shortcut in the main process. */
+export interface IKeyboardShortcutResult {
+  success: boolean;
+}
+
 /** Payload for the `OPEN_EXTERNAL` event. */
 export interface IOpenExternal {
   url: string;

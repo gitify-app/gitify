@@ -42,6 +42,11 @@ export type Percentage = Branded<number, 'Percentage'>;
 
 export type AccountUUID = Branded<string, 'AccountUUID'>;
 
+export type KeyboardAcceleratorShortcut = Branded<
+  string,
+  'KeyboardAcceleratorShortcut'
+>;
+
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
@@ -58,6 +63,7 @@ export interface Account {
 export type SettingsValue =
   | boolean
   | number
+  | string
   | FetchType
   | GroupBy
   | OpenPreference
@@ -116,6 +122,8 @@ export interface TraySettingsState {
 export interface SystemSettingsState {
   openLinks: OpenPreference;
   keyboardShortcut: boolean;
+  /** Electron accelerator string for toggling the app window (e.g. CommandOrControl+Shift+G). */
+  openGitifyShortcut: KeyboardAcceleratorShortcut;
   showNotifications: boolean;
   playSound: boolean;
   notificationVolume: Percentage;

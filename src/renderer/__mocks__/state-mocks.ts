@@ -6,6 +6,7 @@ import {
   FetchType,
   type GitifyState,
   GroupBy,
+  type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
   OpenPreference,
   type Percentage,
@@ -59,6 +60,7 @@ const mockTraySettings: TraySettingsState = {
 const mockSystemSettings: SystemSettingsState = {
   openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
+  openGitifyShortcut: 'CommandOrControl+Shift+G' as KeyboardAcceleratorShortcut,
   showNotifications: true,
   playSound: true,
   notificationVolume: 20 as Percentage,

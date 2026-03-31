@@ -105,12 +105,18 @@ export function setUseUnreadActiveIcon(value: boolean): void {
 }
 
 /**
- * Registers or unregisters the global keyboard shortcut to toggle the application window.
+ * Apply the global keyboard shortcut for toggling the app window.
  *
- * @param keyboardShortcut - `true` to register the shortcut, `false` to unregister.
+ * @param payload - Whether the shortcut is enabled and the Electron accelerator string.
  */
-export function setKeyboardShortcut(keyboardShortcut: boolean): void {
-  window.gitify.setKeyboardShortcut(keyboardShortcut);
+export async function applyKeyboardShortcut(payload: {
+  enabled: boolean;
+  accelerator: string;
+}): Promise<{ success: boolean }> {
+  return await window.gitify.applyKeyboardShortcut({
+    enabled: payload.enabled,
+    keyboardShortcut: payload.accelerator,
+  });
 }
 
 /**

@@ -61,7 +61,7 @@ window.gitify = {
   onResetApp: vi.fn(),
   onSystemThemeUpdate: vi.fn(),
   setAutoLaunch: vi.fn(),
-  setKeyboardShortcut: vi.fn(),
+  applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
   raiseNativeNotification: vi.fn(),
 };
 
