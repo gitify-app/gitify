@@ -80,6 +80,50 @@ function normalizePhysicalKeyToAccelerator(
   return null;
 }
 
+export interface ModifierState {
+  meta: boolean;
+  ctrl: boolean;
+  shift: boolean;
+  alt: boolean;
+}
+
+export const emptyModifierState: ModifierState = {
+  meta: false,
+  ctrl: false,
+  shift: false,
+  alt: false,
+};
+
+export function modifiersFromEvent(event: KeyboardEvent): ModifierState {
+  return {
+    meta: event.metaKey,
+    ctrl: event.ctrlKey,
+    shift: event.shiftKey,
+    alt: event.altKey,
+  };
+}
+
+/**
+ * Human-readable representation of currently-pressed modifier keys while recording.
+ * Returns an empty string if no modifiers are active.
+ */
+export function formatModifiersForDisplay(
+  modifiers: ModifierState,
+  isMac: boolean,
+): string {
+  const parts: string[] = [];
+  if (modifiers.meta || modifiers.ctrl) {
+    parts.push(isMac ? '⌘' : 'Ctrl');
+  }
+  if (modifiers.shift) {
+    parts.push('⇧');
+  }
+  if (modifiers.alt) {
+    parts.push(isMac ? 'Option (⌥)' : 'Alt');
+  }
+  return parts.join(isMac ? '·' : '+');
+}
+
 /**
  * Human-readable shortcut for settings UI. Uses platform-appropriate modifier names.
  */

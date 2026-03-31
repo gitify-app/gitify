@@ -42,7 +42,6 @@ export interface IKeyboardShortcut {
   keyboardShortcut: string;
 }
 
-
 /** Result of applying the global open/close Gitify shortcut in the main process. */
 export interface IKeyboardShortcutResult {
   success: boolean;

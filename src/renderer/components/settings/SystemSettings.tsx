@@ -1,6 +1,11 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 
-import { DeviceDesktopIcon, SyncIcon } from '@primer/octicons-react';
+import {
+  DeviceDesktopIcon,
+  HistoryIcon,
+  PencilIcon,
+  SyncIcon,
+} from '@primer/octicons-react';
 import {
   Banner,
   Button,
@@ -22,16 +27,19 @@ import { Title } from '../primitives/Title';
 import { OpenPreference } from '../../types';
 
 import {
+  emptyModifierState,
+  formatAcceleratorForDisplay,
+  formatModifiersForDisplay,
+  keyboardEventToAccelerator,
+  type ModifierState,
+  modifiersFromEvent,
+} from '../../utils/system/keyboardShortcut';
+import {
   canDecreaseVolume,
   canIncreaseVolume,
   decreaseVolume,
   increaseVolume,
 } from '../../utils/ui/volume';
-
-import {
-  formatAcceleratorForDisplay,
-  keyboardEventToAccelerator,
-} from '../../utils/system/keyboardShortcut';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
@@ -44,6 +52,8 @@ export const SystemSettings: FC = () => {
   } = useAppContext();
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
+  const [liveModifiers, setLiveModifiers] =
+    useState<ModifierState>(emptyModifierState);
   const shortcutRowRef = useRef<HTMLDivElement>(null);
   const isMac = window.gitify.platform.isMacOS();
 
@@ -67,6 +77,7 @@ export const SystemSettings: FC = () => {
 
   useEffect(() => {
     if (!recordingShortcut) {
+      setLiveModifiers(emptyModifierState);
       return;
     }
 
@@ -74,17 +85,26 @@ export const SystemSettings: FC = () => {
       event.preventDefault();
       event.stopPropagation();
 
+      setLiveModifiers(modifiersFromEvent(event));
+
       const accelerator = keyboardEventToAccelerator(event);
       if (accelerator) {
         clearShortcutRegistrationError();
         updateSetting('openGitifyShortcut', accelerator);
+        setLiveModifiers(emptyModifierState);
         setRecordingShortcut(false);
       }
     };
 
+    const onKeyUp = (event: KeyboardEvent) => {
+      setLiveModifiers(modifiersFromEvent(event));
+    };
+
     window.addEventListener('keydown', onKeyDown, true);
+    window.addEventListener('keyup', onKeyUp, true);
     return () => {
       window.removeEventListener('keydown', onKeyDown, true);
+      window.removeEventListener('keyup', onKeyUp, true);
     };
   }, [recordingShortcut, updateSetting, clearShortcutRegistrationError]);
 
@@ -92,6 +112,13 @@ export const SystemSettings: FC = () => {
     settings.openGitifyShortcut,
     isMac,
   );
+
+  const hasLiveModifiers =
+    liveModifiers.meta ||
+    liveModifiers.ctrl ||
+    liveModifiers.shift ||
+    liveModifiers.alt;
+  const liveModifierDisplay = formatModifiersForDisplay(liveModifiers, isMac);
 
   return (
     <fieldset>
@@ -149,76 +176,116 @@ export const SystemSettings: FC = () => {
 
         <Checkbox
           checked={settings.keyboardShortcut}
-          label="Enable keyboard shortcut"
+          label="Global keyboard shortcut"
           name="keyboardShortcut"
           onChange={() =>
             updateSetting('keyboardShortcut', !settings.keyboardShortcut)
           }
           tooltip={
-            <div>
-              When enabled you can use{' '}
-              <Text as="strong" className="text-gitify-caution">
-                {shortcutDisplay}
-              </Text>{' '}
-              to show or hide {APPLICATION.NAME}.
-            </div>
+            <Stack direction="vertical" gap="condensed">
+              <Text>
+                Global keyboard shortcut to show or hide {APPLICATION.NAME}.
+              </Text>
+              <Text>Shortcuts must include:</Text>
+              <div className="pl-2">
+                <Stack direction="vertical" gap="none">
+                  <Stack direction="horizontal" gap="condensed">
+                    <Text>•</Text>
+                    <Text>
+                      Primary modifier:{' '}
+                      <Text as="strong" className="text-gitify-caution">
+                        {formatAcceleratorForDisplay('CommandOrControl', isMac)}
+                      </Text>
+                    </Text>
+                  </Stack>
+                  <Stack direction="horizontal" gap="condensed">
+                    <Text>•</Text>
+                    <Text>
+                      Optional modifiers:{' '}
+                      <Text as="strong" className="text-gitify-caution">
+                        {formatAcceleratorForDisplay('Shift', isMac)}
+                      </Text>
+                      ,{' '}
+                      <Text as="strong" className="text-gitify-caution">
+                        {formatAcceleratorForDisplay('Alt', isMac)}
+                      </Text>
+                    </Text>
+                  </Stack>
+                  <Stack direction="horizontal" gap="condensed">
+                    <Text>•</Text>
+                    <Text>A non-modifier key (letter, number, etc.)</Text>
+                  </Stack>
+                </Stack>
+              </div>
+            </Stack>
           }
         />
 
         {settings.keyboardShortcut && (
-          <Stack
-            className="text-sm"
-            direction="vertical"
-            gap="condensed"
-            ref={shortcutRowRef}
-          >
-            <Text>
-              Global shortcut:{' '}
-              <Text as="strong" className="text-gitify-caution">
-                {recordingShortcut
-                  ? 'Press keys… (click outside this area to cancel)'
-                  : shortcutDisplay}
-              </Text>
-            </Text>
+          <div className="pl-6">
             <Stack
-              align="center"
-              className="flex-nowrap"
-              direction="horizontal"
+              className="text-sm"
+              direction="vertical"
               gap="condensed"
+              ref={shortcutRowRef}
             >
-              <Button
-                data-testid="button-record-global-shortcut"
-                disabled={recordingShortcut}
-                onClick={() => {
-                  clearShortcutRegistrationError();
-                  setRecordingShortcut(true);
-                }}
-                size="small"
+              <Text>
+                Global shortcut:{' '}
+                <Text as="strong" className="text-gitify-caution">
+                  {recordingShortcut
+                    ? hasLiveModifiers
+                      ? `${liveModifierDisplay}…`
+                      : 'Press keys…'
+                    : shortcutDisplay}
+                </Text>
+              </Text>
+              {recordingShortcut && (
+                <Text className="italic">
+                  Click outside this area to cancel.
+                </Text>
+              )}
+              <Stack
+                align="center"
+                className="flex-nowrap"
+                direction="horizontal"
+                gap="condensed"
               >
-                Change shortcut
-              </Button>
-              <Button
-                className="shrink-0"
-                data-testid="button-reset-global-shortcut"
-                disabled={
-                  recordingShortcut ||
-                  settings.openGitifyShortcut ===
-                    APPLICATION.DEFAULT_KEYBOARD_SHORTCUT
-                }
-                onClick={() => {
-                  clearShortcutRegistrationError();
-                  updateSetting(
-                    'openGitifyShortcut',
-                    APPLICATION.DEFAULT_KEYBOARD_SHORTCUT,
-                  );
-                }}
-                size="small"
-                variant="danger"
-              >
-                Reset to default
-              </Button>
+                <Button
+                  data-testid="button-record-global-shortcut"
+                  disabled={recordingShortcut}
+                  leadingVisual={PencilIcon}
+                  onClick={() => {
+                    clearShortcutRegistrationError();
+                    setRecordingShortcut(true);
+                  }}
+                  size="small"
+                >
+                  Change shortcut
+                </Button>
+                <Button
+                  className="shrink-0"
+                  data-testid="button-reset-global-shortcut"
+                  disabled={
+                    recordingShortcut ||
+                    settings.openGitifyShortcut ===
+                      defaultSettings.openGitifyShortcut
+                  }
+                  leadingVisual={HistoryIcon}
+                  onClick={() => {
+                    clearShortcutRegistrationError();
+                    updateSetting(
+                      'openGitifyShortcut',
+                      defaultSettings.openGitifyShortcut,
+                    );
+                  }}
+                  size="small"
+                  variant="danger"
+                >
+                  Reset to default
+                </Button>
+              </Stack>
             </Stack>
-          </Stack>
+          </div>
         )}
 
         <Checkbox

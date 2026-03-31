@@ -1,5 +1,3 @@
-import { APPLICATION } from '../../shared/constants';
-
 import { Constants } from '../constants';
 
 import {
@@ -7,6 +5,7 @@ import {
   type AuthState,
   FetchType,
   GroupBy,
+  type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
   OpenPreference,
   type Percentage,
@@ -52,7 +51,7 @@ const defaultTraySettings: TraySettingsState = {
 const defaultSystemSettings: SystemSettingsState = {
   openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
-  openGitifyShortcut: APPLICATION.DEFAULT_KEYBOARD_SHORTCUT,
+  openGitifyShortcut: 'CommandOrControl+Shift+G' as KeyboardAcceleratorShortcut,
   showNotifications: true,
   playSound: true,
   notificationVolume: 20 as Percentage,
