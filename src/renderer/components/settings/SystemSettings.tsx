@@ -26,12 +26,9 @@ import { Title } from '../primitives/Title';
 import { OpenPreference } from '../../types';
 
 import {
-  emptyModifierState,
   formatAcceleratorForDisplay,
-  formatModifiersForDisplay,
   keyboardEventToAccelerator,
-  type ModifierState,
-  modifiersFromEvent,
+  MODIFIER_SEGMENTS,
 } from '../../utils/system/keyboardShortcut';
 import {
   canDecreaseVolume,
@@ -51,8 +48,7 @@ export const SystemSettings: FC = () => {
   } = useAppContext();
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
-  const [liveModifiers, setLiveModifiers] =
-    useState<ModifierState>(emptyModifierState);
+  const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
   const shortcutRowRef = useRef<HTMLDivElement>(null);
   const isMac = window.gitify.platform.isMacOS();
 
@@ -76,27 +72,32 @@ export const SystemSettings: FC = () => {
 
   useEffect(() => {
     if (!recordingShortcut) {
-      setLiveModifiers(emptyModifierState);
+      setLiveModifierAccelerator('');
       return;
     }
+
+    const activeModifierAccelerator = (event: KeyboardEvent) =>
+      MODIFIER_SEGMENTS.filter((m) => m.test(event))
+        .map((m) => m.accelerator)
+        .join('+');
 
     const onKeyDown = (event: KeyboardEvent) => {
       event.preventDefault();
       event.stopPropagation();
 
-      setLiveModifiers(modifiersFromEvent(event));
+      setLiveModifierAccelerator(activeModifierAccelerator(event));
 
       const accelerator = keyboardEventToAccelerator(event);
       if (accelerator) {
         clearShortcutRegistrationError();
         updateSetting('openGitifyShortcut', accelerator);
-        setLiveModifiers(emptyModifierState);
+        setLiveModifierAccelerator('');
         setRecordingShortcut(false);
       }
     };
 
     const onKeyUp = (event: KeyboardEvent) => {
-      setLiveModifiers(modifiersFromEvent(event));
+      setLiveModifierAccelerator(activeModifierAccelerator(event));
     };
 
     window.addEventListener('keydown', onKeyDown, true);
@@ -112,12 +113,11 @@ export const SystemSettings: FC = () => {
     isMac,
   );
 
-  const hasLiveModifiers =
-    liveModifiers.meta ||
-    liveModifiers.ctrl ||
-    liveModifiers.shift ||
-    liveModifiers.alt;
-  const liveModifierDisplay = formatModifiersForDisplay(liveModifiers, isMac);
+  const hasLiveModifiers = liveModifierAccelerator.length > 0;
+  const liveModifierDisplay = formatAcceleratorForDisplay(
+    liveModifierAccelerator,
+    isMac,
+  );
 
   return (
     <fieldset>
@@ -257,6 +257,10 @@ export const SystemSettings: FC = () => {
             <IconButton
               aria-label="Reset global shortcut to default"
               data-testid="settings-shortcut-reset"
+              disabled={
+                settings.openGitifyShortcut ===
+                defaultSettings.openGitifyShortcut
+              }
               icon={SyncIcon}
               onClick={() => {
                 clearShortcutRegistrationError();
