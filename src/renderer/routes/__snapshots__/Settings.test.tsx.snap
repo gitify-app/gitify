@@ -1817,6 +1817,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   data-size="small"
                   data-testid="settings-shortcut-reset"
                   data-variant="danger"
+                  disabled=""
                   type="button"
                 >
                   <svg
