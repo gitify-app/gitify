@@ -127,7 +127,7 @@ describe('renderer/context/App.tsx', () => {
       const getContext = renderWithContext();
       fetchNotificationsMock.mockReset();
 
-      act(() => {
+      await act(async () => {
         getContext().fetchNotifications();
       });
 
