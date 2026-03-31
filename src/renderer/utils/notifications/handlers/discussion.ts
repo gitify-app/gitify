@@ -8,7 +8,7 @@ import {
   DiscussionOutdatedIcon,
 } from '@primer/octicons-react';
 
-import { differenceInMilliseconds } from 'date-fns';
+import { differenceInMilliseconds } from 'date-fns/differenceInMilliseconds';
 
 import {
   type GitifyDiscussionState,

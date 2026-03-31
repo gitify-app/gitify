@@ -7,7 +7,7 @@ import {
 import { request } from '@octokit/request';
 import { RequestError } from '@octokit/request-error';
 
-import { format } from 'date-fns';
+import { format } from 'date-fns/format';
 import semver from 'semver';
 
 import { APPLICATION } from '../../../shared/constants';

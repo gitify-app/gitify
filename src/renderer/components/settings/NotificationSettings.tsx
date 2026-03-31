@@ -17,7 +17,8 @@ import {
 } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
-import { formatDuration, millisecondsToMinutes } from 'date-fns';
+import { formatDuration } from 'date-fns/formatDuration';
+import { millisecondsToMinutes } from 'date-fns/millisecondsToMinutes';
 
 import { APPLICATION } from '../../../shared/constants';
 
