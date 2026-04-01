@@ -5,12 +5,17 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    pool: 'threads',
+    pool: 'vmThreads',
     clearMocks: true,
     // Server configuration to handle external dependencies
     server: {
       deps: {
         inline: ['@primer/react', '@primer/css'],
+      },
+    },
+    experimental: {
+      importDurations: {
+        print: true,
       },
     },
     coverage: {
