@@ -44,7 +44,7 @@ export const WindowConfig: BrowserWindowConstructorOptions = {
   height: 400,
   minWidth: 500,
   minHeight: 400,
-  resizable: false,
+  resizable: true,
   /** Hide the app from the Windows taskbar */
   skipTaskbar: true,
   webPreferences: {
