@@ -2,143 +2,108 @@
 
 exports[`renderer/components/metrics/MilestonePill.tsx > renders closed milestone pill 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+  <button
+    aria-describedby="_r_1_"
+    type="button"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-size="small"
+      data-variant="secondary"
+      tabindex="0"
     >
-      <button
-        aria-describedby="_r_4_"
-        type="button"
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <span
-          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-          data-size="small"
-          data-variant="secondary"
-          tabindex="0"
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-milestone text-gitify-icon-done"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="12"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="12"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-milestone text-gitify-icon-done"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
-              />
-            </svg>
-          </div>
-        </span>
-      </button>
-      <span
-        aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-tLeuB"
-        data-direction="s"
-        id="_r_4_"
-        popover="auto"
-        role="tooltip"
-      >
-        Milestone 1
-      </span>
-    </div>
-  </div>
+          <path
+            d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
+          />
+        </svg>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-direction="s"
+    id="_r_1_"
+    popover="auto"
+    role="tooltip"
+  >
+    Milestone 1
+  </span>
 </div>
 `;
 
 exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone pill 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+  <button
+    aria-describedby="_r_0_"
+    type="button"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-size="small"
+      data-variant="secondary"
+      tabindex="0"
     >
-      <button
-        aria-describedby="_r_2_"
-        type="button"
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <span
-          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-          data-size="small"
-          data-variant="secondary"
-          tabindex="0"
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-milestone text-gitify-icon-open"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="12"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="12"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-milestone text-gitify-icon-open"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
-              />
-            </svg>
-          </div>
-        </span>
-      </button>
-      <span
-        aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-tLeuB"
-        data-direction="s"
-        id="_r_2_"
-        popover="auto"
-        role="tooltip"
-      >
-        Milestone 1
-      </span>
-    </div>
-  </div>
+          <path
+            d="M7.75 0a.75.75 0 0 1 .75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 0 1 0 2.672l-2.07 1.75a1.75 1.75 0 0 1-1.13.414H8.5v5.25a.75.75 0 0 1-1.5 0V10H2.75A1.75 1.75 0 0 1 1 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 0 1 7.75 0Zm4.384 8.5a.25.25 0 0 0 .161-.06l2.07-1.75a.248.248 0 0 0 0-.38l-2.07-1.75a.25.25 0 0 0-.161-.06H2.75a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h9.384Z"
+          />
+        </svg>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-direction="s"
+    id="_r_0_"
+    popover="auto"
+    role="tooltip"
+  >
+    Milestone 1
+  </span>
 </div>
 `;
 
-exports[`renderer/components/metrics/MilestonePill.tsx > renders with no milestone 1`] = `
-<div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    />
-  </div>
-</div>
-`;
+exports[`renderer/components/metrics/MilestonePill.tsx > renders with no milestone 1`] = `<div />`;

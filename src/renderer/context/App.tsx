@@ -39,15 +39,17 @@ import type {
 import { fetchAuthenticatedUserDetails } from '../utils/api/client';
 import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
-  addAccount,
   exchangeAuthCodeForAccessToken,
-  getAccountUUID,
-  hasAccounts,
   performGitHubWebOAuth,
   pollGitHubDeviceFlow,
+  startGitHubDeviceFlow,
+} from '../utils/auth/flows';
+import {
+  addAccount,
+  getAccountUUID,
+  hasAccounts,
   refreshAccount,
   removeAccount,
-  startGitHubDeviceFlow,
 } from '../utils/auth/utils';
 import { clearState, loadState, saveState } from '../utils/core/storage';
 import {

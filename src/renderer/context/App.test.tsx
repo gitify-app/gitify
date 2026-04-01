@@ -19,6 +19,7 @@ import type {
 } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
+import * as authFlows from '../utils/auth/flows';
 import * as authUtils from '../utils/auth/utils';
 import * as storage from '../utils/core/storage';
 import * as notifications from '../utils/notifications/notifications';
@@ -230,7 +231,7 @@ describe('renderer/context/App.tsx', () => {
 
     it('loginWithDeviceFlowStart calls startGitHubDeviceFlow', async () => {
       const startGitHubDeviceFlowSpy = vi
-        .spyOn(authUtils, 'startGitHubDeviceFlow')
+        .spyOn(authFlows, 'startGitHubDeviceFlow')
         .mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
@@ -244,7 +245,7 @@ describe('renderer/context/App.tsx', () => {
 
     it('loginWithDeviceFlowPoll calls pollGitHubDeviceFlow', async () => {
       const pollGitHubDeviceFlowSpy = vi
-        .spyOn(authUtils, 'pollGitHubDeviceFlow')
+        .spyOn(authFlows, 'pollGitHubDeviceFlow')
         .mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
@@ -278,7 +279,7 @@ describe('renderer/context/App.tsx', () => {
 
     it('loginWithOAuthApp calls performGitHubWebOAuth', async () => {
       const performGitHubWebOAuthSpy = vi.spyOn(
-        authUtils,
+        authFlows,
         'performGitHubWebOAuth',
       );
 

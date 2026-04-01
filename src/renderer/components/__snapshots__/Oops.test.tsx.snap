@@ -3,62 +3,51 @@
 exports[`renderer/components/Oops.tsx > should render itself & its children - fallback to unknown error 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="h-screen prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-direction="vertical"
+    data-justify="center"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
     <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+      class="prc-Stack-Stack-UQ9k6"
+      data-align="center"
+      data-direction="vertical"
+      data-gap="condensed"
+      data-justify="center"
+      data-padding="none"
+      data-wrap="nowrap"
     >
       <div
-        class="h-screen prc-Stack-Stack-UQ9k6"
+        class="prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
+        data-gap="spacious"
+        data-justify="start"
+        data-padding="none"
         data-wrap="nowrap"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="center"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="text-7xl"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="vertical"
-            data-gap="spacious"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <div
-              class="text-7xl"
-            >
-              <img
-                alt="🤔"
-                class="emoji"
-                draggable="false"
-                src="/mock/images/assets/1f914.svg"
-              />
-            </div>
-            <div
-              class="text-xl font-semibold"
-            >
-              Oops! Something went wrong
-            </div>
-          </div>
-          <div
-            class="text-center"
-          >
-            Please try again later.
-          </div>
+          <img
+            alt="🤔"
+            class="emoji"
+            draggable="false"
+            src="/mock/images/assets/1f914.svg"
+          />
         </div>
+        <div
+          class="text-xl font-semibold"
+        >
+          Oops! Something went wrong
+        </div>
+      </div>
+      <div
+        class="text-center"
+      >
+        Please try again later.
       </div>
     </div>
   </div>
@@ -68,62 +57,51 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - fa
 exports[`renderer/components/Oops.tsx > should render itself & its children - specified error 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="h-screen prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-direction="vertical"
+    data-justify="center"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
     <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+      class="prc-Stack-Stack-UQ9k6"
+      data-align="center"
+      data-direction="vertical"
+      data-gap="condensed"
+      data-justify="center"
+      data-padding="none"
+      data-wrap="nowrap"
     >
       <div
-        class="h-screen prc-Stack-Stack-UQ9k6"
+        class="prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
+        data-gap="spacious"
+        data-justify="start"
+        data-padding="none"
         data-wrap="nowrap"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="center"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="text-7xl"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="vertical"
-            data-gap="spacious"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <div
-              class="text-7xl"
-            >
-              <img
-                alt="🔥"
-                class="emoji"
-                draggable="false"
-                src="/mock/images/assets/1f525.svg"
-              />
-            </div>
-            <div
-              class="text-xl font-semibold"
-            >
-              Error title
-            </div>
-          </div>
-          <div
-            class="text-center"
-          >
-            Error description
-          </div>
+          <img
+            alt="🔥"
+            class="emoji"
+            draggable="false"
+            src="/mock/images/assets/1f525.svg"
+          />
         </div>
+        <div
+          class="text-xl font-semibold"
+        >
+          Error title
+        </div>
+      </div>
+      <div
+        class="text-center"
+      >
+        Error description
       </div>
     </div>
   </div>

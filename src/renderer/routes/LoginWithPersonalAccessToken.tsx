@@ -30,8 +30,8 @@ import { Header } from '../components/primitives/Header';
 import type { Account, Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 
+import { formatRecommendedOAuthScopes } from '../utils/auth/scopes';
 import {
-  formatRecommendedOAuthScopes,
   getNewTokenURL,
   isValidHostname,
   isValidToken,

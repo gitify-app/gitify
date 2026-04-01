@@ -32,7 +32,7 @@ import type { DeviceFlowSession } from '../utils/auth/types';
 import {
   getAlternateScopeNames,
   getRecommendedScopeNames,
-} from '../utils/auth/utils';
+} from '../utils/auth/scopes';
 import { rendererLogError } from '../utils/core/logger';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
 import { openDeveloperSettings } from '../utils/system/links';

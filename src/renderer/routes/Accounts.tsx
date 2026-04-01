@@ -33,12 +33,8 @@ import { Header } from '../components/primitives/Header';
 import { type Account, type GitifyError, IconColor, Size } from '../types';
 
 import { determineFailureType } from '../utils/api/errors';
-import {
-  getAccountUUID,
-  hasAlternateScopes,
-  hasRecommendedScopes,
-  refreshAccount,
-} from '../utils/auth/utils';
+import { hasAlternateScopes, hasRecommendedScopes } from '../utils/auth/scopes';
+import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 import { saveState } from '../utils/core/storage';
 import {

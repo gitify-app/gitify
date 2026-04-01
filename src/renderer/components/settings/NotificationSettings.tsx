@@ -36,7 +36,7 @@ import { FetchType, GroupBy, Size } from '../../types';
 import {
   hasAlternateScopes,
   hasRecommendedScopes,
-} from '../../utils/auth/utils';
+} from '../../utils/auth/scopes';
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
 
 export const NotificationSettings: FC = () => {

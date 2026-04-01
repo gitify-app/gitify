@@ -3,25 +3,14 @@
 exports[`renderer/components/primitives/EmojiText.tsx > should render 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="text-7xl"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <div
-        class="text-7xl"
-      >
-        <img
-          alt="🍺"
-          class="emoji"
-          draggable="false"
-          src="/mock/images/assets/1f37a.svg"
-        />
-      </div>
-    </div>
+    <img
+      alt="🍺"
+      class="emoji"
+      draggable="false"
+      src="/mock/images/assets/1f37a.svg"
+    />
   </div>
 </div>
 `;
