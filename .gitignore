@@ -2,6 +2,9 @@
 dist/
 build/
 
+# TypeScript incremental compilation cache
+*.tsbuildinfo
+
 # Environment variables
 .env
 
