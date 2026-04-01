@@ -8,7 +8,7 @@ import type {
   Token,
 } from '../types';
 
-import { getRecommendedScopeNames } from '../utils/auth/utils';
+import { getRecommendedScopeNames } from '../utils/auth/scopes';
 import { mockGitifyUser } from './user-mocks';
 
 export const mockGitHubAppAccount: Account = {

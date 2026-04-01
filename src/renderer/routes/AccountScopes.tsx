@@ -23,7 +23,7 @@ import {
   getRecommendedScopeNames,
   getRequiredScopeNames,
   hasRequiredScopes,
-} from '../utils/auth/utils';
+} from '../utils/auth/scopes';
 import { openDeveloperSettings } from '../utils/system/links';
 
 interface LocationState {
