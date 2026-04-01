@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 // Use a hoist-safe mock factory for '@octokit/oauth-methods'
 vi.mock('@octokit/oauth-methods', async () => {
   const actual = await vi.importActual<typeof import('@octokit/oauth-methods')>(

@@ -37,21 +37,25 @@ export default defineConfig({
           css: true,
           include: [
             'src/preload/**/*.test.{ts,tsx}',
-            'src/renderer/**/*.test.{ts,tsx}',
+            'src/renderer/**/*.test.tsx',
           ],
           setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
         },
       },
       {
-        // TODO - Opportunity in future to move some of the renderer util tests to node environment
         extends: true,
         test: {
-          name: 'node [main, shared]',
+          name: 'node [main, shared, renderer utils]',
           environment: 'node',
           include: [
             'src/shared/**/*.test.{ts,tsx}',
             'src/main/**/*.test.{ts,tsx}',
+            'src/renderer/**/*.test.ts',
           ],
+          // Conditionally sets up window.gitify for .ts files that opt into
+          // happy-dom via the `// @vitest-environment happy-dom` file docblock.
+          // The guard in the setup file makes it a no-op for pure node tests.
+          setupFiles: ['./src/renderer/__helpers__/vitest.dom.setup.ts'],
         },
       },
     ],

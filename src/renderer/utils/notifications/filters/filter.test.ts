@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
 
@@ -8,6 +9,10 @@ import type { GitifyOwner, Link, SearchToken } from '../../../types';
 import { filterBaseNotifications, filterDetailedNotifications } from './filter';
 
 describe('renderer/utils/notifications/filters/filter.ts', () => {
+  beforeEach(() => {
+    useFiltersStore.getState().reset();
+  });
+
   describe('filterNotifications', () => {
     const mockNotifications = [
       mockPartialGitifyNotification(

@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import { mockSettings } from '../../__mocks__/state-mocks';
 
 import type { SettingsState } from '../../types';

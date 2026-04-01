@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
 import { mockRawUser } from '../api/__mocks__/response-mocks';

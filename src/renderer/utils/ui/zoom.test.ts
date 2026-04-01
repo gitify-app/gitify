@@ -1,3 +1,4 @@
+// @vitest-environment happy-dom
 import type { Percentage } from '../../types';
 
 import {
