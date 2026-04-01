@@ -2,152 +2,64 @@
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (all read notifications) 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        AllRead
-      </p>
-    </div>
-  </div>
+  <p>
+    AllRead
+  </p>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > bad credentials 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
+  <p>
+    Oops
+  </p>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > default error 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
+  <p>
+    Oops
+  </p>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > missing scopes 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
+  <p>
+    Oops
+  </p>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > rate limited 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
+  <p>
+    Oops
+  </p>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > unknown error 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        Oops
-      </p>
-    </div>
-  </div>
+  <p>
+    Oops
+  </p>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (show account header) 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        AllRead
-      </p>
-    </div>
-  </div>
+  <p>
+    AllRead
+  </p>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (with notifications) 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <p>
-        AllRead
-      </p>
-    </div>
-  </div>
+  <p>
+    AllRead
+  </p>
 </div>
 `;

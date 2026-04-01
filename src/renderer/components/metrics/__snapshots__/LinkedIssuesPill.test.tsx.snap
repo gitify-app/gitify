@@ -2,159 +2,124 @@
 
 exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked to multiple issues/prs 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+  <button
+    aria-describedby="_r_1_"
+    type="button"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-size="small"
+      data-variant="secondary"
+      tabindex="0"
     >
-      <button
-        aria-describedby="_r_4_"
-        type="button"
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <span
-          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-          data-size="small"
-          data-variant="secondary"
-          tabindex="0"
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-issue-opened text-gitify-icon-muted"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="12"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="12"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-issue-opened text-gitify-icon-muted"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-              />
-              <path
-                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-              />
-            </svg>
-            <span
-              class="text-xxs px-1 prc-Text-Text-9mHv3"
-            >
-              2
-            </span>
-          </div>
+          <path
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+          />
+          <path
+            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+          />
+        </svg>
+        <span
+          class="text-xxs px-1 prc-Text-Text-9mHv3"
+        >
+          2
         </span>
-      </button>
-      <span
-        aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-tLeuB"
-        data-direction="s"
-        id="_r_4_"
-        popover="auto"
-        role="tooltip"
-      >
-        Linked to issues: #1, #2
-      </span>
-    </div>
-  </div>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-direction="s"
+    id="_r_1_"
+    popover="auto"
+    role="tooltip"
+  >
+    Linked to issues: #1, #2
+  </span>
 </div>
 `;
 
 exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked to one issue/pr 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+  <button
+    aria-describedby="_r_0_"
+    type="button"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-size="small"
+      data-variant="secondary"
+      tabindex="0"
     >
-      <button
-        aria-describedby="_r_2_"
-        type="button"
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <span
-          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-          data-size="small"
-          data-variant="secondary"
-          tabindex="0"
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-issue-opened text-gitify-icon-muted"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="12"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="12"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="none"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-issue-opened text-gitify-icon-muted"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 16 16"
-              width="12"
-            >
-              <path
-                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-              />
-              <path
-                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-              />
-            </svg>
-            <span
-              class="text-xxs px-1 prc-Text-Text-9mHv3"
-            >
-              1
-            </span>
-          </div>
+          <path
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+          />
+          <path
+            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+          />
+        </svg>
+        <span
+          class="text-xxs px-1 prc-Text-Text-9mHv3"
+        >
+          1
         </span>
-      </button>
-      <span
-        aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-tLeuB"
-        data-direction="s"
-        id="_r_2_"
-        popover="auto"
-        role="tooltip"
-      >
-        Linked to issue: #1
-      </span>
-    </div>
-  </div>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-direction="s"
+    id="_r_0_"
+    popover="auto"
+    role="tooltip"
+  >
+    Linked to issue: #1
+  </span>
 </div>
 `;
 
-exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when no linked issues/prs 1`] = `
-<div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
-  >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    />
-  </div>
-</div>
-`;
+exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when no linked issues/prs 1`] = `<div />`;

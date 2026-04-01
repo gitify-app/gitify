@@ -3,62 +3,51 @@
 exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading and sub-heading 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-direction="vertical"
+    data-justify="center"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
     <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+      class="prc-Stack-Stack-UQ9k6"
+      data-align="center"
+      data-direction="vertical"
+      data-gap="condensed"
+      data-justify="center"
+      data-padding="none"
+      data-wrap="nowrap"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
+        data-gap="spacious"
+        data-justify="start"
+        data-padding="none"
         data-wrap="nowrap"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="center"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="text-7xl"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="vertical"
-            data-gap="spacious"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <div
-              class="text-7xl"
-            >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="/mock/images/assets/1f37a.svg"
-              />
-            </div>
-            <div
-              class="text-xl font-semibold"
-            >
-              Test Heading
-            </div>
-          </div>
-          <div
-            class="text-center"
-          >
-            Test Sub-Heading
-          </div>
+          <img
+            alt="🍺"
+            class="emoji"
+            draggable="false"
+            src="/mock/images/assets/1f37a.svg"
+          />
         </div>
+        <div
+          class="text-xl font-semibold"
+        >
+          Test Heading
+        </div>
+      </div>
+      <div
+        class="text-center"
+      >
+        Test Sub-Heading
       </div>
     </div>
   </div>
@@ -68,56 +57,45 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
 exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading only 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-direction="vertical"
+    data-justify="center"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
     <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+      class="prc-Stack-Stack-UQ9k6"
+      data-align="center"
+      data-direction="vertical"
+      data-gap="condensed"
+      data-justify="center"
+      data-padding="none"
+      data-wrap="nowrap"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
+        data-gap="spacious"
+        data-justify="start"
+        data-padding="none"
         data-wrap="nowrap"
       >
         <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-direction="vertical"
-          data-gap="condensed"
-          data-justify="center"
-          data-padding="none"
-          data-wrap="nowrap"
+          class="text-7xl"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="vertical"
-            data-gap="spacious"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <div
-              class="text-7xl"
-            >
-              <img
-                alt="🍺"
-                class="emoji"
-                draggable="false"
-                src="/mock/images/assets/1f37a.svg"
-              />
-            </div>
-            <div
-              class="text-xl font-semibold"
-            >
-              Test Heading
-            </div>
-          </div>
+          <img
+            alt="🍺"
+            class="emoji"
+            draggable="false"
+            src="/mock/images/assets/1f37a.svg"
+          />
+        </div>
+        <div
+          class="text-xl font-semibold"
+        >
+          Test Heading
         </div>
       </div>
     </div>

@@ -2,28 +2,17 @@
 
 exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx > should render itself & its children 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+  <span
+    class="text-gitify-caution prc-Text-Text-9mHv3"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
+    ⚠️ This filter requires the 
+    <strong
+      class="prc-Text-Text-9mHv3"
     >
-      <span
-        class="text-gitify-caution prc-Text-Text-9mHv3"
-      >
-        ⚠️ This filter requires the 
-        <strong
-          class="prc-Text-Text-9mHv3"
-        >
-          Detailed Notifications
-        </strong>
-         
-        setting to be enabled.
-      </span>
-    </div>
-  </div>
+      Detailed Notifications
+    </strong>
+     
+    setting to be enabled.
+  </span>
 </div>
 `;

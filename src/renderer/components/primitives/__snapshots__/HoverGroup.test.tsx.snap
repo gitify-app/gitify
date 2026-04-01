@@ -3,26 +3,15 @@
 exports[`renderer/components/primitives/HoverGroup.tsx > should render 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-direction="horizontal"
+    data-gap="none"
+    data-justify="start"
+    data-padding="none"
+    data-wrap="nowrap"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <div
-        class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="horizontal"
-        data-gap="none"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
-      >
-        Hover Group
-      </div>
-    </div>
+    Hover Group
   </div>
 </div>
 `;

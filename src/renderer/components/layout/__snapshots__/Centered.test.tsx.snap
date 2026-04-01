@@ -3,25 +3,14 @@
 exports[`renderer/components/layout/Centered.tsx > should render itself & its children - full height false 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-direction="vertical"
+    data-justify="center"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <div
-        class="prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
-        data-wrap="nowrap"
-      >
-        Test
-      </div>
-    </div>
+    Test
   </div>
 </div>
 `;
@@ -29,25 +18,14 @@ exports[`renderer/components/layout/Centered.tsx > should render itself & its ch
 exports[`renderer/components/layout/Centered.tsx > should render itself & its children - full height true 1`] = `
 <div>
   <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+    class="h-screen prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-direction="vertical"
+    data-justify="center"
+    data-padding="spacious"
+    data-wrap="nowrap"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <div
-        class="h-screen prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-direction="vertical"
-        data-justify="center"
-        data-padding="spacious"
-        data-wrap="nowrap"
-      >
-        Test
-      </div>
-    </div>
+    Test
   </div>
 </div>
 `;

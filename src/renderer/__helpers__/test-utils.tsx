@@ -2,8 +2,6 @@ import { render } from '@testing-library/react';
 import { type ReactElement, type ReactNode, useMemo } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
-
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
 import { AppContext, type AppContextState } from '../context/App';
@@ -86,13 +84,9 @@ function AppContextProvider({
 
   return (
     <MemoryRouter initialEntries={initialEntries}>
-      <ThemeProvider>
-        <BaseStyles>
-          <AppContext.Provider value={defaultValue as AppContextState}>
-            {children}
-          </AppContext.Provider>
-        </BaseStyles>
-      </ThemeProvider>
+      <AppContext.Provider value={defaultValue as AppContextState}>
+        {children}
+      </AppContext.Provider>
     </MemoryRouter>
   );
 }

@@ -7,10 +7,13 @@ export default defineConfig({
     globals: true,
     pool: 'vmThreads',
     clearMocks: true,
-    // Server configuration to handle external dependencies
-    server: {
-      deps: {
-        inline: ['@primer/react', '@primer/css'],
+    // Pre-bundle @primer/react rather than re-transforming the raw package on every thread load.
+    // See https://vitest.dev/guide/profiling-test-performance.html#use-the-dependency-optimizer
+    deps: {
+      optimizer: {
+        client: {
+          include: ['@primer/react'],
+        },
       },
     },
     experimental: {

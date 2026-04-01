@@ -2057,7 +2057,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_s_"
+        aria-describedby="_r_r_"
         class="prc-Button-ButtonBase-9n-Xk"
         data-loading="false"
         data-size="medium"
@@ -2103,7 +2103,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-direction="n"
-        id="_r_s_"
+        id="_r_r_"
         popover="auto"
         role="tooltip"
       >

@@ -2,22 +2,11 @@
 
 exports[`renderer/components/fields/FieldLabel.tsx > should render 1`] = `
 <div>
-  <div
-    data-color-mode="light"
-    data-dark-theme="dark"
-    data-light-theme="light"
+  <label
+    class="mr-1 font-medium cursor-pointer"
+    for="appearance"
   >
-    <div
-      class="prc-src-BaseStyles-aopSS"
-      data-portal-root="true"
-    >
-      <label
-        class="mr-1 font-medium cursor-pointer"
-        for="appearance"
-      >
-        Appearance
-      </label>
-    </div>
-  </div>
+    Appearance
+  </label>
 </div>
 `;
