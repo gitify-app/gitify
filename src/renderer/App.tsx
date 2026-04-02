@@ -26,7 +26,7 @@ import './App.css';
 
 import { useAppContext } from './hooks/useAppContext';
 
-function RequireAuth({ children }) {
+function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation();
 
   const { isLoggedIn } = useAppContext();

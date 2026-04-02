@@ -79,7 +79,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     it('default error', () => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
-        globalError: null,
+        globalError: undefined,
       });
 
       expect(tree.container).toMatchSnapshot();

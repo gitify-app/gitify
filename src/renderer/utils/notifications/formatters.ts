@@ -82,7 +82,7 @@ export function formatNotificationType(
   notification: GitifyNotification,
 ): string {
   return formatForDisplay([
-    notification.subject.state,
+    notification.subject.state ?? '',
     notification.subject.type,
   ]);
 }

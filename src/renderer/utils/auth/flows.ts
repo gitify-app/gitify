@@ -141,7 +141,7 @@ export async function pollGitHubDeviceFlow(
     return authentication.token as Token;
   } catch (err) {
     if (err instanceof RequestError) {
-      const response = err.response.data as DeviceFlowErrorResponse;
+      const response = err.response!.data as DeviceFlowErrorResponse;
       const errorCode = response.error;
 
       if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
@@ -152,7 +152,7 @@ export async function pollGitHubDeviceFlow(
     rendererLogError(
       'pollGitHubDeviceFlow',
       'Error exchanging device code',
-      err,
+      err as Error,
     );
 
     throw err;

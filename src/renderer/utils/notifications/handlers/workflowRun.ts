@@ -17,7 +17,7 @@ import { actionsURL } from './utils';
 export interface WorkflowRunAttributes {
   user: string;
   statusDisplayName: string;
-  status: GitifyCheckSuiteStatus | null;
+  status?: GitifyCheckSuiteStatus;
 }
 
 class WorkflowRunHandler extends DefaultHandler {
@@ -30,7 +30,7 @@ class WorkflowRunHandler extends DefaultHandler {
     if (state) {
       return {
         state: state,
-        user: null,
+        user: undefined,
         htmlUrl: getWorkflowRunUrl(notification),
       };
     }
@@ -76,12 +76,12 @@ export function getWorkflowRunAttributes(
 
 function getWorkflowRunStatus(
   statusDisplayName: string,
-): GitifyCheckSuiteStatus {
+): GitifyCheckSuiteStatus | undefined {
   switch (statusDisplayName) {
     case 'review':
       return 'WAITING';
     default:
-      return null;
+      return undefined;
   }
 }
 

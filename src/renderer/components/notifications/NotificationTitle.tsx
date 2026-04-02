@@ -18,7 +18,7 @@ export const NotificationTitle: FC<NotificationTitleProps> = ({
   const parts = parseInlineCode(title);
 
   return (
-    <Text className={!settings.wrapNotificationTitle && 'truncate'}>
+    <Text className={!settings.wrapNotificationTitle ? 'truncate' : undefined}>
       {parts.map((part) => (
         <Text
           className={cn(

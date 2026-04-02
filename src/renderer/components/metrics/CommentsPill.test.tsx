@@ -4,7 +4,7 @@ import { CommentsPill, type CommentsPillProps } from './CommentsPill';
 
 describe('renderer/components/metrics/CommentsPill.tsx', () => {
   it('renders with no comments (null)', () => {
-    const props: CommentsPillProps = null;
+    const props = {} as CommentsPillProps;
 
     const tree = renderWithProviders(<CommentsPill {...props} />);
 

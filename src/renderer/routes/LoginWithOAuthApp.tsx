@@ -134,7 +134,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
         rendererLogError(
           'loginWithOAuthApp',
           'Failed to login with OAuth App',
-          err,
+          err as Error,
         );
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided Client ID and Secret against ${data.hostname}`,

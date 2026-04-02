@@ -58,7 +58,7 @@ describe('renderer/context/App.tsx', () => {
     vi.useFakeTimers();
     vi.mocked(useNotifications).mockReturnValue({
       status: 'success',
-      globalError: null,
+      globalError: undefined,
       notifications: [],
       notificationCount: 0,
       hasNotifications: false,

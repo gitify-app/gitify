@@ -78,7 +78,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name,
+              name: mockAuthenticatedResponse.name as string | null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },
@@ -104,7 +104,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name,
+              name: mockAuthenticatedResponse.name as string | null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },
@@ -144,7 +144,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name,
+              name: mockAuthenticatedResponse.name as string | null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },
@@ -170,7 +170,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name,
+              name: mockAuthenticatedResponse.name as string | null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },

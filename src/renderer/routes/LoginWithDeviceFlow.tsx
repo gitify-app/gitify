@@ -83,7 +83,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         rendererLogError(
           'LoginWithDeviceFlow',
           'Failed to start device flow',
-          err,
+          err as Error,
         );
         setError('Failed to start authentication. Please try again.');
       }
@@ -130,7 +130,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           rendererLogError(
             'LoginWithDeviceFlow',
             'Failed to poll device flow',
-            err,
+            err as Error,
           );
           setError('Authentication failed. Please try again.');
         }

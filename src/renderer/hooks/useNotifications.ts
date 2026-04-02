@@ -33,7 +33,7 @@ import { raiseNativeNotification } from '../utils/system/native';
 
 interface NotificationsState {
   status: Status;
-  globalError: GitifyError;
+  globalError: GitifyError | undefined;
 
   notifications: AccountNotifications[];
   notificationCount: number;
@@ -127,7 +127,9 @@ export const useNotifications = (): NotificationsState => {
         if (allAccountsHaveErrors) {
           const accountError = fetchedNotifications[0].error;
           setStatus('error');
-          setGlobalError(allAccountErrorsAreSame ? accountError : null);
+          setGlobalError(
+            allAccountErrorsAreSame ? (accountError ?? undefined) : undefined,
+          );
           return;
         }
 
@@ -137,17 +139,17 @@ export const useNotifications = (): NotificationsState => {
         );
 
         if (diffNotifications.length > 0) {
-          if (state.settings.playSound) {
-            raiseSoundNotification(state.settings.notificationVolume);
+          if (state.settings!.playSound) {
+            raiseSoundNotification(state.settings!.notificationVolume);
           }
 
-          if (state.settings.showNotifications) {
+          if (state.settings!.showNotifications) {
             raiseNativeNotification(diffNotifications);
           }
         }
 
         setStatus('success');
-        setGlobalError(null);
+        setGlobalError(undefined);
       } finally {
         isFetchingRef.current = false;
       }
@@ -168,7 +170,7 @@ export const useNotifications = (): NotificationsState => {
 
         const updatedNotifications = removeNotificationsForAccount(
           readNotifications[0].account,
-          state.settings,
+          state.settings!,
           readNotifications,
           notifications,
         );
@@ -178,7 +180,7 @@ export const useNotifications = (): NotificationsState => {
         rendererLogError(
           'markNotificationsAsRead',
           'Error occurred while marking notifications as read',
-          err,
+          err as Error,
         );
       }
 
@@ -204,7 +206,7 @@ export const useNotifications = (): NotificationsState => {
 
         const updatedNotifications = removeNotificationsForAccount(
           doneNotifications[0].account,
-          state.settings,
+          state.settings!,
           doneNotifications,
           notifications,
         );
@@ -214,7 +216,7 @@ export const useNotifications = (): NotificationsState => {
         rendererLogError(
           'markNotificationsAsDone',
           'Error occurred while marking notifications as done',
-          err,
+          err as Error,
         );
       }
 
@@ -233,7 +235,7 @@ export const useNotifications = (): NotificationsState => {
           notification.id,
         );
 
-        if (state.settings.markAsDoneOnUnsubscribe) {
+        if (state.settings!.markAsDoneOnUnsubscribe) {
           await markNotificationsAsDone(state, [notification]);
         } else {
           await markNotificationsAsRead(state, [notification]);
@@ -242,7 +244,7 @@ export const useNotifications = (): NotificationsState => {
         rendererLogError(
           'unsubscribeNotification',
           'Error occurred while unsubscribing from notification thread',
-          err,
+          err as Error,
           notification,
         );
       }

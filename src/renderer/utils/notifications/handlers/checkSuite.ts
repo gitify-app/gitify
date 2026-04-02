@@ -25,7 +25,7 @@ export interface CheckSuiteAttributes {
   workflowName: string;
   attemptNumber?: number;
   statusDisplayName: string;
-  status: GitifyCheckSuiteStatus | null;
+  status?: GitifyCheckSuiteStatus;
   branchName: string;
 }
 
@@ -39,7 +39,7 @@ class CheckSuiteHandler extends DefaultHandler {
     if (state) {
       return {
         state: state,
-        user: null,
+        user: undefined,
         htmlUrl: getCheckSuiteUrl(notification),
       };
     }
@@ -101,7 +101,9 @@ export function getCheckSuiteAttributes(
 
   return {
     workflowName,
-    attemptNumber: attemptNumber ? Number.parseInt(attemptNumber, 10) : null,
+    attemptNumber: attemptNumber
+      ? Number.parseInt(attemptNumber, 10)
+      : undefined,
     status: getCheckSuiteStatus(statusDisplayName),
     statusDisplayName,
     branchName,
@@ -110,7 +112,7 @@ export function getCheckSuiteAttributes(
 
 function getCheckSuiteStatus(
   statusDisplayName: string,
-): GitifyCheckSuiteStatus {
+): GitifyCheckSuiteStatus | undefined {
   switch (statusDisplayName) {
     case 'cancelled':
       return 'CANCELLED';
@@ -122,7 +124,7 @@ function getCheckSuiteStatus(
     case 'succeeded':
       return 'SUCCESS';
     default:
-      return null;
+      return undefined;
   }
 }
 

@@ -7,7 +7,7 @@ import { createNotificationHandler } from './handlers';
 export function generateNotificationReferrerId(
   notification: GitifyNotification,
 ): string {
-  const raw = `018:NotificationThread${notification.id}:${notification.account.user.id}`;
+  const raw = `018:NotificationThread${notification.id}:${notification.account.user!.id}`;
   return btoa(raw);
 }
 
@@ -40,7 +40,7 @@ export async function generateGitHubWebUrl(
       rendererLogError(
         'generateGitHubWebUrl',
         'Failed to resolve specific notification html url for',
-        err,
+        err as Error,
         notification,
       );
     }

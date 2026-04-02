@@ -50,7 +50,7 @@ describe('renderer/utils/comms.ts', () => {
 
     it('should use default open preference if user settings not found', () => {
       vi.spyOn(storage, 'loadState').mockReturnValue({
-        settings: null,
+        settings: undefined,
       });
 
       openExternalLink('https://gitify.io/' as Link);

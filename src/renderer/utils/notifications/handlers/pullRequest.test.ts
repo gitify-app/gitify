@@ -65,11 +65,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
-        milestone: null,
+        milestone: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
@@ -103,11 +103,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
-        milestone: null,
+        milestone: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
@@ -141,11 +141,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
-        milestone: null,
+        milestone: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
@@ -179,11 +179,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
-        milestone: null,
+        milestone: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
@@ -228,11 +228,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [],
         linkedIssues: [],
         commentCount: 1,
-        milestone: null,
+        milestone: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234' as Link,
         reactionsCount: 0,
@@ -273,11 +273,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [{ name: 'enhancement', color: '0e8a16' }],
         linkedIssues: [],
         commentCount: 0,
-        milestone: null,
+        milestone: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
@@ -317,11 +317,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [],
         linkedIssues: ['#789'],
         commentCount: 0,
-        milestone: null,
+        milestone: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
@@ -358,7 +358,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
-        reviews: null,
+        reviews: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -473,7 +473,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it('handles no PR reviews yet', async () => {
       const result = getLatestReviewForReviewers([]);
 
-      expect(result).toBeNull();
+      expect(result).toEqual([]);
     });
   });
 });

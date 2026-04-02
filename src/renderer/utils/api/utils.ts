@@ -27,5 +27,5 @@ export function getGitHubAPIBaseUrl(hostname: Hostname, type: APIClientType) {
 }
 
 export function getNumberFromUrl(url: string): number {
-  return Number.parseInt(url.split('/').pop(), 10);
+  return Number.parseInt(url.split('/').pop()!, 10);
 }

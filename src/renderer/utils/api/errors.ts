@@ -83,8 +83,8 @@ export function handleGraphQLResponseError<TResult>(
   context: string,
   payload: GraphqlResponseError<TResult>,
 ): never {
-  const errorMessages = payload.errors
-    .map((graphQLError) => graphQLError.message)
+  const errorMessages = payload
+    .errors!.map((graphQLError) => graphQLError.message)
     .join('; ');
 
   const err = new Error(

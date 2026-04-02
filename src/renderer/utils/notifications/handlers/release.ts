@@ -23,7 +23,7 @@ class ReleaseHandler extends DefaultHandler {
     notification: GitifyNotification,
     _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
-    const releaseState: GitifyNotificationState = null; // Release notifications are stateless
+    const releaseState: GitifyNotificationState | undefined = undefined; // Release notifications are stateless
 
     // Return early if this notification would be hidden by filters
     if (isStateFilteredOut(releaseState)) {
@@ -32,17 +32,17 @@ class ReleaseHandler extends DefaultHandler {
 
     const release = await getRelease(
       notification.account,
-      notification.subject.url,
+      notification.subject.url!,
     );
 
-    const user: GitifyNotificationUser = release.author
+    const user: GitifyNotificationUser | undefined = release.author
       ? {
           login: release.author.login,
           avatarUrl: release.author.avatar_url as Link,
           htmlUrl: release.author.html_url as Link,
           type: release.author.type as UserType,
         }
-      : null;
+      : undefined;
 
     return {
       state: releaseState,

@@ -18,7 +18,7 @@ export async function raiseNativeNotification(
 ) {
   let title: string;
   let body: string;
-  let url: string = null;
+  let url = '';
 
   if (notifications.length === 1) {
     const notification = notifications[0];

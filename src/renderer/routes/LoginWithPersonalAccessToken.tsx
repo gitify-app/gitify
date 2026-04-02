@@ -121,7 +121,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         rendererLogError(
           'loginWithPersonalAccessToken',
           'Failed to login with PAT',
-          err,
+          err as Error,
         );
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided token against ${data.hostname}`,

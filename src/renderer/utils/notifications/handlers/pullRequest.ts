@@ -13,6 +13,7 @@ import {
   type GitifyNotification,
   type GitifyPullRequestReview,
   type GitifyPullRequestState,
+  type GitifyReactionGroup,
   type GitifySubject,
   IconColor,
   type Link,
@@ -40,6 +41,10 @@ class PullRequestHandler extends DefaultHandler {
       fetchedData ??
       (await fetchPullByNumber(notification)).repository?.pullRequest;
 
+    if (!pr) {
+      return {};
+    }
+
     let prState: GitifyPullRequestState = pr.state;
     if (pr.isDraft) {
       prState = 'DRAFT';
@@ -47,11 +52,14 @@ class PullRequestHandler extends DefaultHandler {
       prState = 'MERGE_QUEUE';
     }
 
-    const prComment = pr.comments?.nodes[0];
+    const prComment = pr.comments?.nodes?.[0];
 
     const prUser = getNotificationAuthor([prComment?.author, pr.author]);
 
-    const reviews = getLatestReviewForReviewers(pr.reviews.nodes);
+    const reviews = getLatestReviewForReviewers(
+      (pr.reviews?.nodes?.filter(Boolean) ??
+        []) as PullRequestReviewFieldsFragment[],
+    );
 
     const prReactionCount =
       prComment?.reactions.totalCount ?? pr.reactions.totalCount;
@@ -64,17 +72,19 @@ class PullRequestHandler extends DefaultHandler {
       reviews: reviews,
       commentCount: pr.comments.totalCount,
       labels:
-        pr.labels?.nodes.map((label) => ({
-          name: label.name,
-          color: label.color,
+        pr.labels?.nodes?.filter(Boolean).map((label) => ({
+          name: label!.name,
+          color: label!.color,
         })) ?? [],
-      linkedIssues: pr.closingIssuesReferences?.nodes.map((issue) =>
-        formatGitHubNumber(issue.number),
-      ),
-      milestone: pr.milestone,
+      linkedIssues: pr.closingIssuesReferences?.nodes
+        ?.filter(Boolean)
+        .map((issue) => formatGitHubNumber(issue!.number)),
+      milestone: pr.milestone ?? undefined,
       htmlUrl: prComment?.url ?? pr.url,
       reactionsCount: prReactionCount,
-      reactionGroups: prReactionGroup,
+      reactionGroups: (prReactionGroup ?? undefined) as
+        | GitifyReactionGroup[]
+        | undefined,
     };
   }
 
@@ -121,7 +131,7 @@ export function getLatestReviewForReviewers(
   reviews: PullRequestReviewFieldsFragment[],
 ): GitifyPullRequestReview[] {
   if (!reviews.length) {
-    return null;
+    return [];
   }
 
   // Find the most recent review for each reviewer
@@ -129,7 +139,7 @@ export function getLatestReviewForReviewers(
   const sortedReviews = reviews.toReversed();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
-      (review) => review.author.login === prReview.author.login,
+      (review) => review.author?.login === prReview.author?.login,
     );
 
     if (!reviewerFound) {
@@ -145,11 +155,11 @@ export function getLatestReviewForReviewers(
     );
 
     if (reviewerFound) {
-      reviewerFound.users.push(prReview.author.login);
+      reviewerFound.users.push(prReview.author?.login ?? '');
     } else {
       reviewers.push({
         state: prReview.state,
-        users: [prReview.author.login],
+        users: [prReview.author?.login ?? ''],
       });
     }
   }

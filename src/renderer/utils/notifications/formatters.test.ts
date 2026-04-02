@@ -11,13 +11,13 @@ import {
 
 describe('renderer/utils/notifications/formatters.ts', () => {
   it('formatProperCase', () => {
-    expect(formatProperCase(null)).toBe('');
+    expect(formatProperCase(null as unknown as string)).toBe('');
     expect(formatProperCase('')).toBe('');
     expect(formatProperCase('OUTDATED discussion')).toBe('Outdated Discussion');
   });
 
   it('formatForDisplay', () => {
-    expect(formatForDisplay(null)).toBe('');
+    expect(formatForDisplay(null as unknown as string[])).toBe('');
     expect(formatForDisplay([])).toBe('');
     expect(formatForDisplay(['open', 'PullRequest'])).toBe('Open Pull Request');
     expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
@@ -43,7 +43,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
       const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'Issue',
-        state: null,
+        state: undefined,
       });
 
       expect(formatNotificationType(notification)).toBe('Issue');
@@ -98,7 +98,9 @@ describe('renderer/utils/notifications/formatters.ts', () => {
 
   describe('formatMetricDescription', () => {
     it('return empty if no count', () => {
-      expect(formatMetricDescription(null, 'bee')).toBe('');
+      expect(formatMetricDescription(null as unknown as number, 'bee')).toBe(
+        '',
+      );
     });
 
     it('return singular if count is 1', () => {

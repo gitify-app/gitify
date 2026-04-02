@@ -35,7 +35,7 @@ describe('renderer/utils/api/features.ts', () => {
     it('should return false for GitHub Enterprise Server when no version available', () => {
       const account = {
         ...mockGitHubEnterpriseServerAccount,
-        version: null,
+        version: undefined,
       };
 
       expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
@@ -70,7 +70,7 @@ describe('renderer/utils/api/features.ts', () => {
     it('should return false for GitHub Enterprise Server when no version available', () => {
       const account = {
         ...mockGitHubEnterpriseServerAccount,
-        version: null,
+        version: undefined,
       };
 
       expect(isAnsweredDiscussionFeatureSupported(account)).toBe(false);

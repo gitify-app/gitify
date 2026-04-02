@@ -22,7 +22,7 @@ class CommitHandler extends DefaultHandler {
     notification: GitifyNotification,
     _settings: SettingsState,
   ): Promise<Partial<GitifySubject>> {
-    const commitState: GitifyNotificationState = null; // Commit notifications are stateless
+    const commitState: GitifyNotificationState | undefined = undefined; // Commit notifications are stateless
 
     // Return early if this notification would be hidden by filters
     if (isStateFilteredOut(commitState)) {
@@ -38,22 +38,22 @@ class CommitHandler extends DefaultHandler {
       );
 
       user = {
-        login: commitComment.user.login,
-        avatarUrl: commitComment.user.avatar_url as Link,
-        htmlUrl: commitComment.user.html_url as Link,
-        type: commitComment.user.type as GitifyNotificationUser['type'],
+        login: commitComment.user!.login,
+        avatarUrl: commitComment.user!.avatar_url as Link,
+        htmlUrl: commitComment.user!.html_url as Link,
+        type: commitComment.user!.type as GitifyNotificationUser['type'],
       };
     } else {
       const commit = await getCommit(
         notification.account,
-        notification.subject.url,
+        notification.subject.url!,
       );
 
       user = {
-        login: commit.author.login,
-        avatarUrl: commit.author.avatar_url as Link,
-        htmlUrl: commit.author.html_url as Link,
-        type: commit.author.type as GitifyNotificationUser['type'],
+        login: commit.author!.login,
+        avatarUrl: commit.author!.avatar_url as Link,
+        htmlUrl: commit.author!.html_url as Link,
+        type: commit.author!.type as GitifyNotificationUser['type'],
       };
     }
 

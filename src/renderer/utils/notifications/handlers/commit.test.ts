@@ -41,7 +41,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       const result = await commitHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
-        state: null,
+        state: undefined,
         user: {
           login: mockCommenter.login,
           htmlUrl: mockCommenter.html_url,
@@ -66,7 +66,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       const result = await commitHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
-        state: null,
+        state: undefined,
         user: {
           login: mockAuthor.login,
           htmlUrl: mockAuthor.html_url,

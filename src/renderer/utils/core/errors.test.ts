@@ -1,6 +1,6 @@
 import { mockAccountWithError } from '../../__mocks__/account-mocks';
 
-import type { AccountNotifications } from '../../types';
+import type { AccountNotifications, GitifyError } from '../../types';
 
 import {
   areAllAccountErrorsSame,
@@ -17,7 +17,7 @@ describe('renderer/utils/errors.ts', () => {
     it('returns false when some accounts have no error', () => {
       const items: AccountNotifications[] = [
         mockAccountWithError(Errors.NETWORK),
-        mockAccountWithError(null),
+        mockAccountWithError(null as unknown as GitifyError),
       ];
 
       expect(doesAllAccountsHaveErrors(items)).toBe(false);
@@ -60,7 +60,7 @@ describe('renderer/utils/errors.ts', () => {
     it('returns false when one account has null error', () => {
       const items: AccountNotifications[] = [
         mockAccountWithError(Errors.NETWORK),
-        mockAccountWithError(null),
+        mockAccountWithError(null as unknown as GitifyError),
       ];
 
       expect(areAllAccountErrorsSame(items)).toBe(false);

@@ -11,7 +11,7 @@ export const Centered: FC<CenteredProps> = (props: CenteredProps) => {
   return (
     <Stack
       align="center"
-      className={props.fullHeight && 'h-screen'}
+      className={props.fullHeight ? 'h-screen' : undefined}
       direction="vertical"
       justify="center"
       padding="spacious"

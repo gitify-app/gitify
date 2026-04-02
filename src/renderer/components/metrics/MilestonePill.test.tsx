@@ -4,7 +4,7 @@ import { MilestonePill, type MilestonePillProps } from './MilestonePill';
 
 describe('renderer/components/metrics/MilestonePill.tsx', () => {
   it('renders with no milestone', () => {
-    const props: MilestonePillProps = { milestone: null };
+    const props: MilestonePillProps = { milestone: undefined! };
 
     const tree = renderWithProviders(<MilestonePill {...props} />);
 

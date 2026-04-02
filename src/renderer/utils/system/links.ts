@@ -41,7 +41,7 @@ export function openGitHubPulls(hostname: Hostname) {
 
 export function openAccountProfile(account: Account) {
   const url = new URL(`https://${account.hostname}`);
-  url.pathname = account.user.login;
+  url.pathname = account.user!.login;
   openExternalLink(url.toString() as Link);
 }
 

@@ -70,7 +70,7 @@ export async function addAccount(
     // Replace the existing account (e.g. re-authentication with a new token)
     rendererLogInfo(
       'addAccount',
-      `updating existing account for user ${newAccount.user.login}`,
+      `updating existing account for user ${newAccount.user!.login}`,
     );
     accountList[existingIndex] = newAccount;
   } else {
@@ -145,7 +145,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
     rendererLogError(
       'refreshAccount',
       `failed to refresh account for user ${account.user?.login ?? account.hostname}`,
-      err,
+      err as Error,
     );
     throw err;
   }
@@ -164,7 +164,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
  */
 export function extractHostVersion(version: string | null): string {
   if (version) {
-    return semver.valid(semver.coerce(version));
+    return semver.valid(semver.coerce(version))!;
   }
 
   return 'latest';
@@ -331,7 +331,7 @@ export function isValidToken(token: Token) {
  */
 export function getAccountUUID(account: Account): AccountUUID {
   return btoa(
-    `${account.hostname}-${account.user.id}-${account.method}`,
+    `${account.hostname}-${account.user!.id}-${account.method}`,
   ) as AccountUUID;
 }
 

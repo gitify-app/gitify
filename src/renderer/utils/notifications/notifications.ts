@@ -56,12 +56,12 @@ export function getUnreadNotificationCount(
 }
 
 function getNotifications(state: GitifyState) {
-  return state.auth.accounts.map((account) => {
+  return state.auth!.accounts.map((account) => {
     return {
       account,
       notifications: listNotificationsForAuthenticatedUser(
         account,
-        state.settings,
+        state.settings!,
       ),
     };
   });
@@ -101,12 +101,12 @@ export async function getAllNotifications(
 
           notifications = await enrichNotifications(
             notifications,
-            state.settings,
+            state.settings!,
           );
 
           notifications = filterDetailedNotifications(
             notifications,
-            state.settings,
+            state.settings!,
           );
 
           notifications = notifications.map((notification) => {
@@ -122,20 +122,20 @@ export async function getAllNotifications(
           rendererLogError(
             'getAllNotifications',
             'error occurred while fetching account notifications',
-            err,
+            err as Error,
           );
 
           return {
             account: accountNotifications.account,
             notifications: [],
-            error: determineFailureType(err),
+            error: determineFailureType(err as Error),
           };
         }
       }),
   );
 
   // Set the order property for the notifications
-  stabilizeNotificationsOrder(accountNotifications, state.settings);
+  stabilizeNotificationsOrder(accountNotifications, state.settings!);
 
   return accountNotifications;
 }
@@ -211,7 +211,7 @@ async function fetchNotificationDetailsInBatches(
       rendererLogError(
         'fetchNotificationDetailsInBatches',
         `Failed to fetch merged notification details for batch ${batchIndex}`,
-        err,
+        err as Error,
       );
     }
   }
@@ -244,7 +244,7 @@ export async function enrichNotification(
     rendererLogError(
       'enrichNotification',
       'failed to enrich notification details for',
-      err,
+      err as Error,
       notification,
     );
 

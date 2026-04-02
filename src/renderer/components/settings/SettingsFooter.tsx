@@ -29,7 +29,7 @@ export const SettingsFooter: FC = () => {
         <Tooltip direction="ne" text="View release notes">
           <Button
             data-testid="settings-release-notes"
-            onClick={() => openGitifyReleaseNotes(appVersion)}
+            onClick={() => openGitifyReleaseNotes(appVersion!)}
           >
             {APPLICATION.NAME} {appVersion}
           </Button>

@@ -57,7 +57,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
   it('should default to known avatar if no user found', async () => {
     const mockNotification = mockGitifyNotification;
-    mockNotification.subject.user = null;
+    mockNotification.subject.user = undefined;
 
     const props: NotificationFooterProps = {
       notification: mockNotification,
@@ -85,7 +85,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
               'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
             type: 'User' as GitifyNotificationUser['type'],
           },
-          reviews: null,
+          reviews: undefined,
         },
       },
     };
@@ -96,7 +96,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      props.notification.subject.user.htmlUrl,
+      props.notification.subject.user!.htmlUrl,
     );
   });
 });

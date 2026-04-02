@@ -59,7 +59,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       const props: NotificationHeaderProps = {
         notification: {
           ...mockGitifyNotification,
-          subject: { ...mockGitifyNotification.subject, number: null },
+          subject: { ...mockGitifyNotification.subject, number: undefined },
         },
       };
 
