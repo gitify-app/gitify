@@ -49,7 +49,7 @@ describe('renderer/utils/system/native.ts', () => {
     expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
       'Gitify',
       'You have 2 notifications',
-      '',
+      undefined,
     );
     expect(url.generateGitHubWebUrl).toHaveBeenCalledTimes(0);
   });

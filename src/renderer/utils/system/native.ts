@@ -18,7 +18,7 @@ export async function raiseNativeNotification(
 ) {
   let title: string;
   let body: string;
-  let url = '';
+  let url: string | null = null;
 
   if (notifications.length === 1) {
     const notification = notifications[0];
@@ -32,5 +32,5 @@ export async function raiseNativeNotification(
     body = `You have ${notifications.length} notifications`;
   }
 
-  return window.gitify.raiseNativeNotification(title, body, url);
+  return window.gitify.raiseNativeNotification(title, body, url ?? undefined);
 }
