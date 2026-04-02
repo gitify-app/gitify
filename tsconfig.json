@@ -11,7 +11,7 @@
     "outDir": "./build/",
     "types": ["vitest/globals", "vite/client"],
 
-    "strict": false,
+    "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "Node",
     "ignoreDeprecations": "6.0",
