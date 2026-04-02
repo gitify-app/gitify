@@ -31,4 +31,6 @@ jobs:
         run: |
           gh pr edit ${{ github.event.pull_request.number }} \
             --repo ${{ github.repository }} \
-            --milestone "${{ steps.milestone.outputs.milestone }}"
+            --milestone "${STEPS_MILESTONE_OUTPUTS_MILESTONE}"
+        env:
+          STEPS_MILESTONE_OUTPUTS_MILESTONE: ${{ steps.milestone.outputs.milestone }}
