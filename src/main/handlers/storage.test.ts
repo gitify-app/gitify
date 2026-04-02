@@ -29,7 +29,7 @@ describe('main/handlers/storage.ts', () => {
       registerStorageHandlers();
 
       const registeredHandlers = handleMock.mock.calls.map(
-        (call: [string]) => call[0],
+        (call: unknown[]) => call[0],
       );
 
       expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_ENCRYPT);

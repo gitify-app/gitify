@@ -13,6 +13,10 @@ import { sendRendererEvent } from '../events';
  * @param mb - The menubar instance used for the dialog parent window and quit.
  */
 export function resetApp(mb: Menubar): void {
+  if (!mb.window) {
+    return;
+  }
+
   const cancelButtonId = 0;
   const resetButtonId = 1;
 

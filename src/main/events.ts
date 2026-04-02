@@ -10,11 +10,11 @@ import type { EventData, EventType } from '../shared/events';
  * @param event - The IPC channel/event name to listen on.
  * @param listener - Callback invoked when the event is received.
  */
-export function onMainEvent(
+export function onMainEvent<T = EventData>(
   event: EventType,
-  listener: (event: Electron.IpcMainEvent, args: EventData) => void,
+  listener: (event: Electron.IpcMainEvent, args: T) => void,
 ) {
-  ipcMain.on(event, listener);
+  ipcMain.on(event, listener as Parameters<typeof ipcMain.on>[1]);
 }
 
 /**
@@ -24,14 +24,14 @@ export function onMainEvent(
  * @param event - The IPC channel/event name to handle.
  * @param listener - Callback whose return value is sent back to the renderer.
  */
-export function handleMainEvent(
+export function handleMainEvent<T = EventData>(
   event: EventType,
   listener: (
     event: Electron.IpcMainInvokeEvent,
-    data: EventData,
+    data: T,
   ) => unknown | Promise<unknown>,
 ) {
-  ipcMain.handle(event, listener);
+  ipcMain.handle(event, listener as Parameters<typeof ipcMain.handle>[1]);
 }
 
 /**
@@ -46,5 +46,5 @@ export function sendRendererEvent(
   event: EventType,
   data?: string,
 ) {
-  mb.window.webContents.send(event, data);
+  mb.window?.webContents.send(event, data);
 }

@@ -87,7 +87,7 @@ export default class AppUpdater {
       this.setTooltipWithStatus('A new update is ready to install');
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
-      this.showUpdateReadyDialog(event.releaseName);
+      this.showUpdateReadyDialog(event.releaseName ?? undefined);
     });
 
     autoUpdater.on('update-not-available', () => {
@@ -196,7 +196,7 @@ export default class AppUpdater {
    *
    * @param releaseName - The version string shown in the dialog message.
    */
-  private showUpdateReadyDialog(releaseName: string) {
+  private showUpdateReadyDialog(releaseName?: string) {
     const dialogOpts: MessageBoxOptions = {
       type: 'info',
       buttons: ['Restart', 'Later'],

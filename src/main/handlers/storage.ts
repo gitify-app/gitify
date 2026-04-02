@@ -22,11 +22,11 @@ export function registerStorageHandlers(): void {
   handleMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, (_, value: string) => {
     try {
       return safeStorage.decryptString(Buffer.from(value, 'base64'));
-    } catch (err) {
+    } catch (err: unknown) {
       logError(
         'main:safe-storage-decrypt',
         'Failed to decrypt value - data may be from old build',
-        err,
+        err as Error,
       );
       throw err;
     }

@@ -33,8 +33,8 @@ describe('main/config.ts', () => {
     expect(WindowConfig.resizable).toBe(false);
     expect(WindowConfig.skipTaskbar).toBe(true);
     expect(WindowConfig.webPreferences).toBeDefined();
-    expect(WindowConfig.webPreferences.contextIsolation).toBe(true);
-    expect(WindowConfig.webPreferences.nodeIntegration).toBe(false);
-    expect(WindowConfig.webPreferences.backgroundThrottling).toBe(false);
+    expect(WindowConfig.webPreferences?.contextIsolation).toBe(true);
+    expect(WindowConfig.webPreferences?.nodeIntegration).toBe(false);
+    expect(WindowConfig.webPreferences?.backgroundThrottling).toBe(false);
   });
 });

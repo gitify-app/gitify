@@ -71,7 +71,11 @@ function checkAndMarkFirstRun(): boolean {
 
     fs.writeFileSync(configPath, '');
   } catch (err) {
-    logError('checkAndMarkFirstRun', 'Unable to write firstRun file', err);
+    logError(
+      'checkAndMarkFirstRun',
+      'Unable to write firstRun file',
+      err as Error,
+    );
   }
 
   return true;

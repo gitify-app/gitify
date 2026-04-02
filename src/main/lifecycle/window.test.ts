@@ -37,21 +37,23 @@ describe('main/lifecycle/window.ts', () => {
   it('configureWindowEvents returns early if no window', () => {
     const mbNoWindow = { ...menubar, window: null };
 
-    expect(() => configureWindowEvents(mbNoWindow as Menubar)).not.toThrow();
+    expect(() =>
+      configureWindowEvents(mbNoWindow as unknown as Menubar),
+    ).not.toThrow();
   });
 
   it('configureWindowEvents registers webContents event listeners', () => {
     configureWindowEvents(menubar);
 
-    expect(menubar.window.webContents.on).toHaveBeenCalledWith(
+    expect(menubar.window?.webContents.on).toHaveBeenCalledWith(
       'before-input-event',
       expect.any(Function),
     );
-    expect(menubar.window.webContents.on).toHaveBeenCalledWith(
+    expect(menubar.window?.webContents.on).toHaveBeenCalledWith(
       'devtools-opened',
       expect.any(Function),
     );
-    expect(menubar.window.webContents.on).toHaveBeenCalledWith(
+    expect(menubar.window?.webContents.on).toHaveBeenCalledWith(
       'devtools-closed',
       expect.any(Function),
     );

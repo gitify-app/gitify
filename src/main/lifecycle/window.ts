@@ -26,10 +26,12 @@ export function configureWindowEvents(mb: Menubar): void {
    * When DevTools is opened, resize and center the window for better visibility and allow resizing.
    */
   mb.window.webContents.on('devtools-opened', () => {
-    mb.window.setSize(800, 600);
-    mb.window.center();
-    mb.window.resizable = true;
-    mb.window.setAlwaysOnTop(true);
+    mb.window?.setSize(800, 600);
+    mb.window?.center();
+    if (mb.window) {
+      mb.window.resizable = true;
+    }
+    mb.window?.setAlwaysOnTop(true);
   });
 
   /**
@@ -37,8 +39,10 @@ export function configureWindowEvents(mb: Menubar): void {
    */
   mb.window.webContents.on('devtools-closed', () => {
     const trayBounds = mb.tray.getBounds();
-    mb.window.setSize(WindowConfig.width, WindowConfig.height);
+    mb.window?.setSize(WindowConfig.width ?? 500, WindowConfig.height ?? 400);
     mb.positioner.move('trayCenter', trayBounds);
-    mb.window.resizable = false;
+    if (mb.window) {
+      mb.window.resizable = false;
+    }
   });
 }
