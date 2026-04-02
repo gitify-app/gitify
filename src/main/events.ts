@@ -46,5 +46,9 @@ export function sendRendererEvent(
   event: EventType,
   data?: string,
 ) {
-  mb.window?.webContents.send(event, data);
+  if (!mb.window) {
+    return;
+  }
+
+  mb.window.webContents.send(event, data);
 }
