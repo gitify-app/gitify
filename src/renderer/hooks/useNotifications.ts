@@ -20,7 +20,7 @@ import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
 } from '../utils/core/errors';
-import { rendererLogError } from '../utils/core/logger';
+import { rendererLogError, toError } from '../utils/core/logger';
 import {
   getAllNotifications,
   getNotificationCount,
@@ -139,11 +139,11 @@ export const useNotifications = (): NotificationsState => {
         );
 
         if (diffNotifications.length > 0) {
-          if (state.settings!.playSound) {
-            raiseSoundNotification(state.settings!.notificationVolume);
+          if (state.settings?.playSound) {
+            raiseSoundNotification(state.settings.notificationVolume);
           }
 
-          if (state.settings!.showNotifications) {
+          if (state.settings?.showNotifications) {
             raiseNativeNotification(diffNotifications);
           }
         }
@@ -159,6 +159,10 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationsAsRead = useCallback(
     async (state: GitifyState, readNotifications: GitifyNotification[]) => {
+      if (!state.settings) {
+        return;
+      }
+
       setStatus('loading');
 
       try {
@@ -170,7 +174,7 @@ export const useNotifications = (): NotificationsState => {
 
         const updatedNotifications = removeNotificationsForAccount(
           readNotifications[0].account,
-          state.settings!,
+          state.settings,
           readNotifications,
           notifications,
         );
@@ -180,7 +184,7 @@ export const useNotifications = (): NotificationsState => {
         rendererLogError(
           'markNotificationsAsRead',
           'Error occurred while marking notifications as read',
-          err as Error,
+          toError(err),
         );
       }
 
@@ -191,7 +195,10 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationsAsDone = useCallback(
     async (state: GitifyState, doneNotifications: GitifyNotification[]) => {
-      if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+      if (
+        !state.settings ||
+        !isMarkAsDoneFeatureSupported(doneNotifications[0].account)
+      ) {
         return;
       }
 
@@ -206,7 +213,7 @@ export const useNotifications = (): NotificationsState => {
 
         const updatedNotifications = removeNotificationsForAccount(
           doneNotifications[0].account,
-          state.settings!,
+          state.settings,
           doneNotifications,
           notifications,
         );
@@ -216,7 +223,7 @@ export const useNotifications = (): NotificationsState => {
         rendererLogError(
           'markNotificationsAsDone',
           'Error occurred while marking notifications as done',
-          err as Error,
+          toError(err),
         );
       }
 
@@ -227,6 +234,10 @@ export const useNotifications = (): NotificationsState => {
 
   const unsubscribeNotification = useCallback(
     async (state: GitifyState, notification: GitifyNotification) => {
+      if (!state.settings) {
+        return;
+      }
+
       setStatus('loading');
 
       try {
@@ -235,7 +246,7 @@ export const useNotifications = (): NotificationsState => {
           notification.id,
         );
 
-        if (state.settings!.markAsDoneOnUnsubscribe) {
+        if (state.settings.markAsDoneOnUnsubscribe) {
           await markNotificationsAsDone(state, [notification]);
         } else {
           await markNotificationsAsRead(state, [notification]);
@@ -244,7 +255,7 @@ export const useNotifications = (): NotificationsState => {
         rendererLogError(
           'unsubscribeNotification',
           'Error occurred while unsubscribing from notification thread',
-          err as Error,
+          toError(err),
           notification,
         );
       }

@@ -1,7 +1,7 @@
 import { safeStorage } from 'electron';
 
 import { EVENTS } from '../../shared/events';
-import { logError } from '../../shared/logger';
+import { logError, toError } from '../../shared/logger';
 
 import { handleMainEvent } from '../events';
 
@@ -22,11 +22,11 @@ export function registerStorageHandlers(): void {
   handleMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, (_, value: string) => {
     try {
       return safeStorage.decryptString(Buffer.from(value, 'base64'));
-    } catch (err: unknown) {
+    } catch (err) {
       logError(
         'main:safe-storage-decrypt',
         'Failed to decrypt value - data may be from old build',
-        err as Error,
+        toError(err),
       );
       throw err;
     }

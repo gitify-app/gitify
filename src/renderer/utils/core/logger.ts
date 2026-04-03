@@ -1,4 +1,6 @@
-import { logError, logInfo, logWarn } from '../../../shared/logger';
+import { logError, logInfo, logWarn, toError } from '../../../shared/logger';
+
+export { toError };
 
 import type { GitifyNotification } from '../../types';
 

@@ -4,10 +4,14 @@ import type { Menubar } from 'menubar';
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';
 
-vi.mock('../shared/logger', () => ({
-  logInfo: vi.fn(),
-  logError: vi.fn(),
-}));
+vi.mock('../shared/logger', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../shared/logger')>();
+  return {
+    ...actual,
+    logInfo: vi.fn(),
+    logError: vi.fn(),
+  };
+});
 
 import MenuBuilder from './menu';
 import AppUpdater from './updater';

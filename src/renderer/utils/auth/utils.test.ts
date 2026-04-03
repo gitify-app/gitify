@@ -206,7 +206,7 @@ describe('renderer/utils/auth/utils.ts', () => {
   it('extractHostVersion', () => {
     expect(authUtils.extractHostVersion(null)).toBe('latest');
 
-    expect(authUtils.extractHostVersion('foo')).toBe(null);
+    expect(authUtils.extractHostVersion('foo')).toBeUndefined();
 
     expect(authUtils.extractHostVersion('3')).toBe('3.0.0');
 

@@ -35,9 +35,13 @@ vi.mock('electron', () => ({
 vi.mock('../utils', () => ({ isDevMode: () => false }));
 
 const logErrorMock = vi.fn();
-vi.mock('../../shared/logger', () => ({
-  logError: (...a: unknown[]) => logErrorMock(...a),
-}));
+vi.mock('../../shared/logger', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../shared/logger')>();
+  return {
+    ...actual,
+    logError: (...a: unknown[]) => logErrorMock(...a),
+  };
+});
 
 let mac = true;
 vi.mock('../../shared/platform', () => ({ isMacOS: () => mac }));

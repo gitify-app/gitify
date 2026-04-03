@@ -36,7 +36,7 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import { rendererLogError } from '../utils/core/logger';
+import { rendererLogError, toError } from '../utils/core/logger';
 import { openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
@@ -121,7 +121,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         rendererLogError(
           'loginWithPersonalAccessToken',
           'Failed to login with PAT',
-          err as Error,
+          toError(err),
         );
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided token against ${data.hostname}`,

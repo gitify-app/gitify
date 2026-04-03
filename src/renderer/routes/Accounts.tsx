@@ -36,6 +36,7 @@ import { determineFailureType } from '../utils/api/errors';
 import { hasAlternateScopes, hasRecommendedScopes } from '../utils/auth/scopes';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
+import { toError } from '../utils/core/logger';
 import { saveState } from '../utils/core/storage';
 import {
   openAccountProfile,
@@ -85,7 +86,7 @@ export const AccountsRoute: FC = () => {
     } catch (err) {
       setRefreshErrorStates((prev) => ({
         ...prev,
-        [accountUUID]: determineFailureType(err as Error),
+        [accountUUID]: determineFailureType(toError(err)),
       }));
     }
 
@@ -153,8 +154,8 @@ export const AccountsRoute: FC = () => {
 
       <Contents>
         {auth.accounts.map((account, i) => {
-          const AuthMethodIcon = getAuthMethodIcon(account.method)!;
-          const PlatformIcon = getPlatformIcon(account.platform)!;
+          const AuthMethodIcon = getAuthMethodIcon(account.method);
+          const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);
           const accountError = getAccountError(account);
           const hasBadCredentials = accountError === Errors.BAD_CREDENTIALS;
@@ -172,10 +173,10 @@ export const AccountsRoute: FC = () => {
                     title="Open account profile ↗"
                   >
                     <AvatarWithFallback
-                      alt={account.user!.login}
-                      name={`@${account.user!.login}`}
+                      alt={account.user?.login}
+                      name={`@${account.user?.login}`}
                       size={Size.XLARGE}
-                      src={account.user!.avatar ?? undefined}
+                      src={account.user?.avatar ?? undefined}
                     />
                   </Button>
                 </Stack>
@@ -191,7 +192,7 @@ export const AccountsRoute: FC = () => {
                         align="center"
                         direction="horizontal"
                         gap="condensed"
-                        hidden={!account.user!.name}
+                        hidden={!account.user?.name}
                       >
                         <PersonIcon />
                         <Text>{account.user?.name}</Text>
@@ -206,7 +207,7 @@ export const AccountsRoute: FC = () => {
                         onClick={() => openHost(account.hostname)}
                         title="Open host ↗"
                       >
-                        <PlatformIcon />
+                        {PlatformIcon && <PlatformIcon />}
                         <Text>{account.hostname}</Text>
                       </Stack>
 
@@ -219,7 +220,7 @@ export const AccountsRoute: FC = () => {
                         onClick={() => openDeveloperSettings(account)}
                         title="Open developer settings ↗"
                       >
-                        <AuthMethodIcon />
+                        {AuthMethodIcon && <AuthMethodIcon />}
                         <Text>{account.method}</Text>
                       </Stack>
 
@@ -252,7 +253,7 @@ export const AccountsRoute: FC = () => {
 
                     {!hasBadCredentials && (
                       <IconButton
-                        aria-label={`View scopes for ${account.user!.login}`}
+                        aria-label={`View scopes for ${account.user?.login}`}
                         data-testid="account-view-scopes"
                         icon={() => (
                           <ShieldCheckIcon
@@ -282,7 +283,7 @@ export const AccountsRoute: FC = () => {
 
                     {hasBadCredentials && (
                       <IconButton
-                        aria-label={`Re-authenticate ${account.user!.login}`}
+                        aria-label={`Re-authenticate ${account.user?.login}`}
                         data-testid="account-reauthenticate"
                         icon={KeyIcon}
                         onClick={() => handleReAuthenticate(account)}
@@ -292,7 +293,7 @@ export const AccountsRoute: FC = () => {
                     )}
 
                     <IconButton
-                      aria-label={`Refresh ${account.user!.login}`}
+                      aria-label={`Refresh ${account.user?.login}`}
                       data-testid="account-refresh"
                       icon={SyncIcon}
                       loading={loadingStates[accountUUID] || false}
@@ -301,7 +302,7 @@ export const AccountsRoute: FC = () => {
                     />
 
                     <IconButton
-                      aria-label={`Logout ${account.user!.login}`}
+                      aria-label={`Logout ${account.user?.login}`}
                       data-testid="account-logout"
                       icon={SignOutIcon}
                       onClick={() => logoutAccount(account)}
