@@ -1,6 +1,6 @@
 import type { Percentage } from '../../types';
 
-import { rendererLogError } from '../core/logger';
+import { rendererLogError, toError } from '../core/logger';
 import { volumePercentageToLevel } from '../ui/volume';
 
 // Cache audio instance to avoid re-creating elements on every notification.
@@ -27,7 +27,11 @@ export async function raiseSoundNotification(volume: Percentage) {
   try {
     await audio.play();
   } catch (err) {
-    rendererLogError('audio', 'Failed to play notification sound:', err);
+    rendererLogError(
+      'audio',
+      'Failed to play notification sound:',
+      toError(err),
+    );
     cachedAudio = null;
   }
 }

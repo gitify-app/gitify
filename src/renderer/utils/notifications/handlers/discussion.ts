@@ -13,6 +13,7 @@ import { differenceInMilliseconds } from 'date-fns/differenceInMilliseconds';
 import {
   type GitifyDiscussionState,
   type GitifyNotification,
+  type GitifyReactionGroup,
   type GitifySubject,
   IconColor,
   type Link,
@@ -40,6 +41,10 @@ class DiscussionHandler extends DefaultHandler {
       fetchedData ??
       (await fetchDiscussionByNumber(notification)).repository?.discussion;
 
+    if (!discussion) {
+      return {};
+    }
+
     let discussionState: GitifyDiscussionState = 'OPEN';
 
     if (discussion.isAnswered) {
@@ -52,7 +57,8 @@ class DiscussionHandler extends DefaultHandler {
 
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
-      discussion.comments.nodes,
+      (discussion.comments.nodes?.filter(Boolean) ??
+        []) as DiscussionCommentFieldsFragment[],
     );
 
     const discussionReactionCount =
@@ -70,13 +76,15 @@ class DiscussionHandler extends DefaultHandler {
       ]),
       commentCount: discussion.comments.totalCount,
       labels:
-        discussion.labels?.nodes.map((label) => ({
-          name: label.name,
-          color: label.color,
+        discussion.labels?.nodes?.filter(Boolean).map((label) => ({
+          name: label!.name,
+          color: label!.color,
         })) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
       reactionsCount: discussionReactionCount,
-      reactionGroups: discussionReactionGroup,
+      reactionGroups: (discussionReactionGroup ?? undefined) as
+        | GitifyReactionGroup[]
+        | undefined,
     };
   }
 
@@ -124,17 +132,17 @@ export function getClosestDiscussionCommentOrReply(
   const targetTimestamp = notification.updatedAt;
 
   const allCommentsAndReplies = comments.flatMap((comment) => [
-    ...comment.replies.nodes,
+    ...(comment.replies?.nodes?.filter(Boolean) ?? []),
     comment,
   ]);
 
   // Find the closest match using the target timestamp
   const closestComment = allCommentsAndReplies.reduce((prev, curr) => {
     const prevDiff = Math.abs(
-      differenceInMilliseconds(prev.createdAt, targetTimestamp),
+      differenceInMilliseconds(prev!.createdAt, targetTimestamp),
     );
     const currDiff = Math.abs(
-      differenceInMilliseconds(curr.createdAt, targetTimestamp),
+      differenceInMilliseconds(curr!.createdAt, targetTimestamp),
     );
     return currDiff < prevDiff ? curr : prev;
   }, allCommentsAndReplies[0]);

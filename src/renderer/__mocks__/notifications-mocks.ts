@@ -114,7 +114,7 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
       latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965' as Link,
       type: 'Issue',
-      reviews: null,
+      reviews: undefined,
     },
     repository: mockGitHubRepository,
     display: {
@@ -168,7 +168,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       latestCommentUrl:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
       type: 'Release',
-      reviews: null,
+      reviews: undefined,
     },
     repository: mockEnterpriseRepository,
     display: {
@@ -199,7 +199,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       latestCommentUrl:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21' as Link,
       type: 'PullRequest',
-      reviews: null,
+      reviews: undefined,
     },
     repository: mockEnterpriseRepository,
     display: {

@@ -33,7 +33,7 @@ import {
   getAlternateScopeNames,
   getRecommendedScopeNames,
 } from '../utils/auth/scopes';
-import { rendererLogError } from '../utils/core/logger';
+import { rendererLogError, toError } from '../utils/core/logger';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
 import { openDeveloperSettings } from '../utils/system/links';
 
@@ -83,7 +83,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         rendererLogError(
           'LoginWithDeviceFlow',
           'Failed to start device flow',
-          err,
+          toError(err),
         );
         setError('Failed to start authentication. Please try again.');
       }
@@ -130,7 +130,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           rendererLogError(
             'LoginWithDeviceFlow',
             'Failed to poll device flow',
-            err,
+            toError(err),
           );
           setError('Authentication failed. Please try again.');
         }

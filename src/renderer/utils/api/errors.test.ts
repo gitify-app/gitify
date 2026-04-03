@@ -168,7 +168,7 @@ describe('renderer/utils/api/errors.ts', () => {
           errors: [
             { message: 'Error 1' },
             { message: 'Error 2' },
-          ] as unknown as GraphqlResponseError<unknown>['errors'],
+          ] as unknown as NonNullable<GraphqlResponseError<unknown>['errors']>,
         },
       );
 
@@ -191,7 +191,9 @@ function createGraphQLResponseError(
     {},
     {
       data: {},
-      errors: [{ message }] as GraphqlResponseError<unknown>['errors'],
+      errors: [{ message }] as unknown as NonNullable<
+        GraphqlResponseError<unknown>['errors']
+      >,
     },
   );
 }

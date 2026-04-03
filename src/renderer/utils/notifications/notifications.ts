@@ -2,6 +2,7 @@ import { Constants } from '../../constants';
 
 import type {
   AccountNotifications,
+  AuthState,
   GitifyNotification,
   GitifyState,
   GitifySubject,
@@ -15,7 +16,7 @@ import {
 import { determineFailureType } from '../api/errors';
 import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
 import { transformNotifications } from '../api/transform';
-import { rendererLogError, rendererLogWarn } from '../core/logger';
+import { rendererLogError, rendererLogWarn, toError } from '../core/logger';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -55,14 +56,11 @@ export function getUnreadNotificationCount(
   );
 }
 
-function getNotifications(state: GitifyState) {
-  return state.auth.accounts.map((account) => {
+function getNotifications(auth: AuthState, settings: SettingsState) {
+  return auth.accounts.map((account) => {
     return {
       account,
-      notifications: listNotificationsForAuthenticatedUser(
-        account,
-        state.settings,
-      ),
+      notifications: listNotificationsForAuthenticatedUser(account, settings),
     };
   });
 }
@@ -85,8 +83,14 @@ function getNotifications(state: GitifyState) {
 export async function getAllNotifications(
   state: GitifyState,
 ): Promise<AccountNotifications[]> {
+  if (!state.auth || !state.settings) {
+    return [];
+  }
+
+  const { auth, settings } = state;
+
   const accountNotifications: AccountNotifications[] = await Promise.all(
-    getNotifications(state)
+    getNotifications(auth, settings)
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
@@ -99,15 +103,9 @@ export async function getAllNotifications(
 
           notifications = filterBaseNotifications(notifications);
 
-          notifications = await enrichNotifications(
-            notifications,
-            state.settings,
-          );
+          notifications = await enrichNotifications(notifications, settings);
 
-          notifications = filterDetailedNotifications(
-            notifications,
-            state.settings,
-          );
+          notifications = filterDetailedNotifications(notifications, settings);
 
           notifications = notifications.map((notification) => {
             return formatNotification(notification);
@@ -122,20 +120,20 @@ export async function getAllNotifications(
           rendererLogError(
             'getAllNotifications',
             'error occurred while fetching account notifications',
-            err,
+            toError(err),
           );
 
           return {
             account: accountNotifications.account,
             notifications: [],
-            error: determineFailureType(err),
+            error: determineFailureType(toError(err)),
           };
         }
       }),
   );
 
   // Set the order property for the notifications
-  stabilizeNotificationsOrder(accountNotifications, state.settings);
+  stabilizeNotificationsOrder(accountNotifications, settings);
 
   return accountNotifications;
 }
@@ -211,7 +209,7 @@ async function fetchNotificationDetailsInBatches(
       rendererLogError(
         'fetchNotificationDetailsInBatches',
         `Failed to fetch merged notification details for batch ${batchIndex}`,
-        err,
+        toError(err),
       );
     }
   }
@@ -244,7 +242,7 @@ export async function enrichNotification(
     rendererLogError(
       'enrichNotification',
       'failed to enrich notification details for',
-      err,
+      toError(err),
       notification,
     );
 

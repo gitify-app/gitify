@@ -8,7 +8,10 @@ import { useEffect, useRef } from 'react';
  * @param callback - Function to call on each interval tick. Always uses the latest reference.
  * @param delay - Interval duration in milliseconds. Pass `null` to disable.
  */
-export const useIntervalTimer = (callback: () => void, delay: number) => {
+export const useIntervalTimer = (
+  callback: () => void,
+  delay: number | null,
+) => {
   const savedCallback = useRef<(() => void) | null>(null);
 
   // Remember the latest callback.
@@ -19,7 +22,7 @@ export const useIntervalTimer = (callback: () => void, delay: number) => {
   // Set up the interval.
   useEffect(() => {
     function tick() {
-      savedCallback.current();
+      savedCallback.current?.();
     }
 
     if (delay !== null) {

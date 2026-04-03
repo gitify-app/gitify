@@ -26,9 +26,10 @@ export const CustomCounter: FC<CustomCounterProps> = ({
   const baseStyles =
     'px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
 
-  const schemeStyles = {
+  const schemeStyles: Record<CounterScheme, string> = {
     primary: 'bg-gitify-counter-primary',
     secondary: 'bg-gitify-counter-secondary',
+    empty: '',
   };
 
   return <Text className={cn(baseStyles, schemeStyles[scheme])}>{value}</Text>;

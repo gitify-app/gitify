@@ -26,6 +26,10 @@ export function configureWindowEvents(mb: Menubar): void {
    * When DevTools is opened, resize and center the window for better visibility and allow resizing.
    */
   mb.window.webContents.on('devtools-opened', () => {
+    if (!mb.window) {
+      return;
+    }
+
     mb.window.setSize(800, 600);
     mb.window.center();
     mb.window.resizable = true;
@@ -36,8 +40,12 @@ export function configureWindowEvents(mb: Menubar): void {
    * When DevTools is closed, restore the window to its original size and position it centered on the tray icon.
    */
   mb.window.webContents.on('devtools-closed', () => {
+    if (!mb.window) {
+      return;
+    }
+
     const trayBounds = mb.tray.getBounds();
-    mb.window.setSize(WindowConfig.width, WindowConfig.height);
+    mb.window.setSize(WindowConfig.width!, WindowConfig.height!);
     mb.positioner.move('trayCenter', trayBounds);
     mb.window.resizable = false;
   });

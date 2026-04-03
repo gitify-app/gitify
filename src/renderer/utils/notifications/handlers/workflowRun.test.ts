@@ -20,7 +20,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
 
       expect(result).toEqual({
         state: 'WAITING',
-        user: null,
+        user: undefined,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/actions?query=is%3AWAITING',
       });
@@ -110,7 +110,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
       const result = getWorkflowRunAttributes(mockNotification);
 
       expect(result).toEqual({
-        status: null,
+        status: undefined,
         statusDisplayName: 'unknown-state',
         user: 'some-user',
       });

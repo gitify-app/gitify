@@ -42,7 +42,7 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import { rendererLogError } from '../utils/core/logger';
+import { rendererLogError, toError } from '../utils/core/logger';
 import { openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
@@ -134,7 +134,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
         rendererLogError(
           'loginWithOAuthApp',
           'Failed to login with OAuth App',
-          err,
+          toError(err),
         );
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided Client ID and Secret against ${data.hostname}`,

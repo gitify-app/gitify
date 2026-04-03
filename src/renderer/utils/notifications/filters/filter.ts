@@ -185,7 +185,9 @@ function passesStateFilter(notification: GitifyNotification): boolean {
  * @param state - The notification state to check.
  * @returns `true` if the state is currently filtered out.
  */
-export function isStateFilteredOut(state: GitifyNotificationState): boolean {
+export function isStateFilteredOut(
+  state: GitifyNotificationState | undefined,
+): boolean {
   const notification = { subject: { state: state } } as GitifyNotification;
 
   return !passesStateFilter(notification);

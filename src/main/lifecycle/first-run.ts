@@ -4,7 +4,7 @@ import path from 'node:path';
 import { app, dialog } from 'electron';
 
 import { APPLICATION } from '../../shared/constants';
-import { logError } from '../../shared/logger';
+import { logError, toError } from '../../shared/logger';
 import { isMacOS } from '../../shared/platform';
 
 import { isDevMode } from '../utils';
@@ -71,7 +71,11 @@ function checkAndMarkFirstRun(): boolean {
 
     fs.writeFileSync(configPath, '');
   } catch (err) {
-    logError('checkAndMarkFirstRun', 'Unable to write firstRun file', err);
+    logError(
+      'checkAndMarkFirstRun',
+      'Unable to write firstRun file',
+      toError(err),
+    );
   }
 
   return true;

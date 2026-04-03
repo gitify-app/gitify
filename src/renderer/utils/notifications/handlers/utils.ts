@@ -16,23 +16,19 @@ type AuthorInput =
  */
 export function getNotificationAuthor(
   users: AuthorInput[],
-): GitifyNotificationUser {
-  let subjectUser: GitifyNotificationUser = null;
-
+): GitifyNotificationUser | undefined {
   for (const user of users) {
     if (user) {
-      subjectUser = {
+      return {
         login: user.login,
         avatarUrl: user.avatarUrl,
         htmlUrl: user.htmlUrl,
         type: user.type,
       };
-
-      return subjectUser;
     }
   }
 
-  return subjectUser;
+  return undefined;
 }
 
 /**

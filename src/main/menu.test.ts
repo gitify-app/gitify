@@ -200,7 +200,7 @@ describe('main/menu.ts', () => {
       const cfg = getMenuItemConfigByLabel('Check for updates');
       expect(cfg).toBeDefined();
 
-      cfg.click();
+      cfg?.click?.();
 
       expect(autoUpdater.checkForUpdatesAndNotify).toHaveBeenCalled();
     });
@@ -209,7 +209,7 @@ describe('main/menu.ts', () => {
       const cfg = getMenuItemConfigByLabel('Restart to install update');
       expect(cfg).toBeDefined();
 
-      cfg.click();
+      cfg?.click?.();
 
       expect(autoUpdater.quitAndInstall).toHaveBeenCalled();
     });
@@ -220,7 +220,7 @@ describe('main/menu.ts', () => {
         (item) => item?.label === 'Developer',
       ) as TemplateItem;
       expect(devEntry).toBeDefined();
-      const submenu = devEntry.submenu;
+      const submenu = devEntry.submenu ?? [];
       const clickByLabel = (label: string) =>
         submenu.find((i) => i.label === label)?.click?.();
 
@@ -242,7 +242,7 @@ describe('main/menu.ts', () => {
     it('website menu item opens external URL', () => {
       const template = buildAndGetTemplate();
       const item = template.find((i) => i.label === 'Visit Website');
-      item.click();
+      item?.click?.();
       expect(shell.openExternal).toHaveBeenCalledWith(APPLICATION.WEBSITE);
     });
 
@@ -250,7 +250,7 @@ describe('main/menu.ts', () => {
       const template = buildAndGetTemplate();
       const item = template.find((i) => i.label === `Quit ${APPLICATION.NAME}`);
 
-      item.click();
+      item?.click?.();
 
       expect(menubar.app.quit).toHaveBeenCalled();
     });
@@ -260,7 +260,9 @@ describe('main/menu.ts', () => {
       const devEntry = template.find(
         (item) => item?.label === 'Developer',
       ) as TemplateItem;
-      const reloadItem = devEntry.submenu.find((i) => i.role === 'reload');
+      const reloadItem = (devEntry.submenu ?? []).find(
+        (i) => i.role === 'reload',
+      );
 
       expect(reloadItem?.accelerator).toBe('CommandOrControl+R');
     });

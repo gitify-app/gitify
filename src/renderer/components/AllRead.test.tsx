@@ -17,7 +17,7 @@ describe('renderer/components/AllRead.tsx', () => {
       });
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - with filters', async () => {
@@ -34,6 +34,6 @@ describe('renderer/components/AllRead.tsx', () => {
       });
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 });

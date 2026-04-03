@@ -44,10 +44,10 @@ describe('main/handlers/app.ts', () => {
       registerAppHandlers(menubar);
 
       const registeredHandlers = handleMock.mock.calls.map(
-        (call: [string]) => call[0],
+        (call: unknown[]) => call[0],
       );
       const registeredEvents = onMock.mock.calls.map(
-        (call: [string]) => call[0],
+        (call: unknown[]) => call[0],
       );
 
       expect(registeredHandlers).toContain(EVENTS.VERSION);

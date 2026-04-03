@@ -4,10 +4,10 @@ import { getNotificationAuthor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
-    it('returns null when all users are null', () => {
+    it('returns undefined when all users are null', () => {
       const result = getNotificationAuthor([null, null]);
 
-      expect(result).toBeNull();
+      expect(result).toBeUndefined();
     });
 
     it('returns first user', () => {

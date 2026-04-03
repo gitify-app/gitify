@@ -5,6 +5,8 @@ import { PersonIcon } from '@primer/octicons-react';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 
+import type { GitifyError } from '../types';
+
 import { Oops } from './Oops';
 
 describe('renderer/components/Oops.tsx', () => {
@@ -21,17 +23,19 @@ describe('renderer/components/Oops.tsx', () => {
       tree = renderWithProviders(<Oops error={mockError} />);
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should render itself & its children - fallback to unknown error', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
-      tree = renderWithProviders(<Oops error={null} />);
+      tree = renderWithProviders(
+        <Oops error={null as unknown as GitifyError} />,
+      );
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should render action buttons and navigate on click', async () => {

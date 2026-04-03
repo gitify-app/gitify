@@ -63,9 +63,9 @@ describe('main/handlers/system.ts', () => {
     it('registers expected system IPC event handlers', () => {
       registerSystemHandlers(menubar);
 
-      const onEvents = onMock.mock.calls.map((call: [string]) => call[0]);
+      const onEvents = onMock.mock.calls.map((call: unknown[]) => call[0]);
       const handleEvents = handleMock.mock.calls.map(
-        (call: [string]) => call[0],
+        (call: unknown[]) => call[0],
       );
 
       expect(onEvents).toContain(EVENTS.OPEN_EXTERNAL);

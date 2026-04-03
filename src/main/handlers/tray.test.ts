@@ -38,7 +38,7 @@ describe('main/handlers/tray.ts', () => {
       registerTrayHandlers(menubar);
 
       const registeredEvents = onMock.mock.calls.map(
-        (call: [string]) => call[0],
+        (call: unknown[]) => call[0],
       );
 
       expect(registeredEvents).toContain(EVENTS.USE_ALTERNATE_IDLE_ICON);
@@ -55,7 +55,7 @@ describe('main/handlers/tray.ts', () => {
     registerTrayHandlers(menubar);
 
     const updateColorHandler = onMock.mock.calls.find(
-      (call: [string]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
+      (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
     updateColorHandler?.({}, 5);
 
@@ -66,7 +66,7 @@ describe('main/handlers/tray.ts', () => {
     registerTrayHandlers(menubar);
 
     const updateColorHandler = onMock.mock.calls.find(
-      (call: [string]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
+      (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
     updateColorHandler?.({}, 0);
 
@@ -77,7 +77,7 @@ describe('main/handlers/tray.ts', () => {
     registerTrayHandlers(menubar);
 
     const updateColorHandler = onMock.mock.calls.find(
-      (call: [string]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
+      (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
     updateColorHandler?.({}, 3);
 
@@ -88,7 +88,7 @@ describe('main/handlers/tray.ts', () => {
     registerTrayHandlers(menubar);
 
     const updateColorHandler = onMock.mock.calls.find(
-      (call: [string]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
+      (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
     updateColorHandler?.({}, -1);
 
@@ -99,7 +99,7 @@ describe('main/handlers/tray.ts', () => {
     registerTrayHandlers(menubar);
 
     const updateTitleHandler = onMock.mock.calls.find(
-      (call: [string]) => call[0] === EVENTS.UPDATE_ICON_TITLE,
+      (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_TITLE,
     )?.[1];
     updateTitleHandler?.({}, '5');
 

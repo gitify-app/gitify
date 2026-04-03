@@ -17,7 +17,7 @@ import type {
   LoginOAuthWebOptions,
 } from './types';
 
-import { rendererLogError, rendererLogInfo } from '../core/logger';
+import { rendererLogError, rendererLogInfo, toError } from '../core/logger';
 import { openExternalLink } from '../system/comms';
 import { getRecommendedScopeNames } from './scopes';
 import { getGitHubAuthBaseUrl } from './utils';
@@ -141,7 +141,7 @@ export async function pollGitHubDeviceFlow(
     return authentication.token as Token;
   } catch (err) {
     if (err instanceof RequestError) {
-      const response = err.response.data as DeviceFlowErrorResponse;
+      const response = err.response?.data as DeviceFlowErrorResponse;
       const errorCode = response.error;
 
       if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
@@ -152,7 +152,7 @@ export async function pollGitHubDeviceFlow(
     rendererLogError(
       'pollGitHubDeviceFlow',
       'Error exchanging device code',
-      err,
+      toError(err),
     );
 
     throw err;

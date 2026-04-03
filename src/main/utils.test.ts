@@ -88,7 +88,7 @@ describe('main/utils', () => {
     });
 
     it('logs error when log path is unavailable', () => {
-      fileGetFileMock.mockReturnValueOnce(null);
+      fileGetFileMock.mockReturnValueOnce(null as unknown as { path: string });
       openLogsDirectory();
       expect(logErrorMock).toHaveBeenCalledWith(
         'openLogsDirectory',

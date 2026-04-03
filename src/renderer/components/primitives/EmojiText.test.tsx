@@ -16,6 +16,6 @@ describe('renderer/components/primitives/EmojiText.tsx', () => {
       tree = renderWithProviders(<EmojiText {...props} />);
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 });

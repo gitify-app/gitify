@@ -11,7 +11,10 @@ const events = ['mousedown', 'keypress', 'click'];
  * @param callback - The function to call once inactivity exceeds `delay`.
  * @param delay - Inactivity timeout in milliseconds.
  */
-export const useInactivityTimer = (callback: () => void, delay: number) => {
+export const useInactivityTimer = (
+  callback: () => void,
+  delay: number | null,
+) => {
   const savedCallback = useRef<(() => void) | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 

@@ -37,8 +37,8 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   describe('form validation', () => {
     it('should validate the form values are not empty', () => {
       const values: IFormData = {
-        hostname: null,
-        token: null,
+        hostname: null as unknown as Hostname,
+        token: null as unknown as Token,
       };
       expect(validateForm(values).hostname).toBe('Hostname is required');
       expect(validateForm(values).token).toBe('Token is required');

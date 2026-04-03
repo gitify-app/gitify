@@ -38,9 +38,9 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   describe('form validation', () => {
     it('should validate the form values are not empty', () => {
       const values: IFormData = {
-        hostname: null,
-        clientId: null,
-        clientSecret: null,
+        hostname: null as unknown as Hostname,
+        clientId: null as unknown as ClientID,
+        clientSecret: null as unknown as ClientSecret,
       };
 
       expect(validateForm(values).hostname).toBe('Hostname is required');

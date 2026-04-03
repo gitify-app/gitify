@@ -6,7 +6,7 @@ import { ReviewsPill, type ReviewsPillProps } from './ReviewsPill';
 describe('renderer/components/metrics/ReviewsPill.tsx', () => {
   it('renders review pills when reviews exist', () => {
     const props: ReviewsPillProps = {
-      reviews: mockGitifyNotification.subject.reviews,
+      reviews: mockGitifyNotification.subject.reviews ?? [],
     };
 
     const tree = renderWithProviders(<ReviewsPill {...props} />);

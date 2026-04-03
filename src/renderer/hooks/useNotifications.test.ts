@@ -168,7 +168,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('error');
       });
 
-      expect(result.current.globalError).toBeNull();
+      expect(result.current.globalError).toBeUndefined();
     });
 
     it('should play sound when new notifications arrive and playSound is enabled', async () => {
@@ -577,7 +577,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined);
+      ).mockResolvedValue(undefined as any);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -603,7 +603,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined);
+      ).mockResolvedValue(undefined as any);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
         undefined,
@@ -616,7 +616,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
           {
             ...mockState,
             settings: {
-              ...mockState.settings,
+              ...mockState.settings!,
               markAsDoneOnUnsubscribe: true,
             },
           },
@@ -662,7 +662,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined);
+      ).mockResolvedValue(undefined as any);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
         undefined,
@@ -675,7 +675,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
           {
             ...mockState,
             settings: {
-              ...mockState.settings,
+              ...mockState.settings!,
               markAsDoneOnUnsubscribe: true,
               fetchReadNotifications: true,
             },
@@ -695,7 +695,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       vi.spyOn(
         apiClient,
         'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined);
+      ).mockResolvedValue(undefined as any);
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
         undefined,
@@ -708,7 +708,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
           {
             ...mockState,
             settings: {
-              ...mockState.settings,
+              ...mockState.settings!,
               markAsDoneOnUnsubscribe: false,
               fetchReadNotifications: true,
             },

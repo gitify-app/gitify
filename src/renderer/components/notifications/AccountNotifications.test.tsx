@@ -31,7 +31,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should render itself - group notifications by date', () => {
@@ -46,7 +46,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       settings: { ...mockSettings, groupBy: GroupBy.DATE },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should render itself - no notifications', async () => {
@@ -63,7 +63,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       tree = renderWithProviders(<AccountNotifications {...props} />);
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should render itself - account error for single account', async () => {
@@ -86,7 +86,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       });
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should render itself - account error for multiple accounts', async () => {
@@ -107,7 +107,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       tree = renderWithProviders(<AccountNotifications {...props} />);
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 
   it('should open profile when clicked', async () => {
@@ -188,6 +188,6 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     const tree = renderWithProviders(<AccountNotifications {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree!.container).toMatchSnapshot();
   });
 });

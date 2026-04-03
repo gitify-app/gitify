@@ -67,7 +67,7 @@ export const userTypeFilter: Filter<UserType> = {
     const allUserTypes = ['User', 'EnterpriseUserAccount'];
 
     if (userType === 'User') {
-      return allUserTypes.includes(notification.subject?.user?.type);
+      return allUserTypes.includes(notification.subject?.user?.type ?? '');
     }
 
     return notification.subject?.user?.type === userType;

@@ -1,5 +1,7 @@
 import { logError, logInfo, logWarn } from '../../../shared/logger';
 
+export { toError } from '../../../shared/logger';
+
 import type { GitifyNotification } from '../../types';
 
 // Renderer logger augments log entries with notification context formatting.

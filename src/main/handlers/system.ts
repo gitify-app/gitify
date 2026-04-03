@@ -24,6 +24,10 @@ export function registerSystemHandlers(mb: Menubar): void {
   let lastRegisteredAccelerator: string | null = null;
 
   const toggleWindow = () => {
+    if (!mb.window) {
+      return;
+    }
+
     if (mb.window.isVisible()) {
       mb.hideWindow();
     } else {

@@ -16,7 +16,7 @@ interface EmojiSplashProps {
 
 export const EmojiSplash: FC<EmojiSplashProps> = (props: EmojiSplashProps) => {
   return (
-    <Centered fullHeight={props.fullHeight}>
+    <Centered fullHeight={props.fullHeight ?? false}>
       <Stack
         align="center"
         direction="vertical"

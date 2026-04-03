@@ -50,16 +50,17 @@ export class MergeQueryBuilder {
   private readonly fragments: FragmentInfo[] = [];
 
   // Precomputed, invariant template-derived data (computed once per module load)
-  private static readonly TEMPLATE_FRAGMENTS =
-    extractNonQueryFragments(TemplateDocument);
+  private static readonly TEMPLATE_FRAGMENTS = extractNonQueryFragments(
+    TemplateDocument as any,
+  );
   private static readonly TEMPLATE_QUERY_INNER = (() => {
-    const queryFrags = extractQueryFragments(TemplateDocument);
+    const queryFrags = extractQueryFragments(TemplateDocument as any);
     return queryFrags.length ? queryFrags[0].inner : null;
   })();
   private static readonly TEMPLATE_NON_INDEXED_DEFS =
-    extractNonIndexedVariableDefinitions(TemplateDocument);
+    extractNonIndexedVariableDefinitions(TemplateDocument as any);
   private static readonly TEMPLATE_INDEXED_VAR_DEFS =
-    extractIndexedVariableDefinitions(TemplateDocument);
+    extractIndexedVariableDefinitions(TemplateDocument as any);
 
   constructor() {
     // Add precomputed static fragments
@@ -132,7 +133,7 @@ export class MergeQueryBuilder {
     const selection = aliasFieldAndSubstituteIndexedVars(
       alias,
       index,
-      MergeQueryBuilder.TEMPLATE_QUERY_INNER,
+      MergeQueryBuilder.TEMPLATE_QUERY_INNER!,
     );
     this.addSelection(selection);
 

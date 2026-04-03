@@ -30,6 +30,10 @@ export function takeScreenshot(mb: Menubar) {
     `${dateStr}-${APPLICATION.NAME}-screenshot.png`,
   );
 
+  if (!mb.window) {
+    return;
+  }
+
   mb.window.capturePage().then((img) => {
     fs.writeFile(capturedPicFilePath, img.toPNG(), () =>
       logInfo('takeScreenshot', `Screenshot saved ${capturedPicFilePath}`),

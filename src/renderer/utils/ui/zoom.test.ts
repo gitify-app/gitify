@@ -28,7 +28,7 @@ describe('renderer/utils/zoom.ts', () => {
     expect(zoomLevelToPercentage(-2)).toBe(0);
     expect(zoomLevelToPercentage(1)).toBe(150);
 
-    expect(zoomLevelToPercentage(undefined)).toBe(100);
+    expect(zoomLevelToPercentage(undefined as unknown as number)).toBe(100);
   });
 
   it('can decrease zoom percentage', () => {

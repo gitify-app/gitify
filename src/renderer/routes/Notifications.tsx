@@ -54,7 +54,7 @@ export const NotificationsRoute: FC = () => {
   );
 
   if (displayState.status === 'error') {
-    return <Oops error={displayState.globalError} />;
+    return <Oops error={displayState.globalError!} />;
   }
 
   if (!displayState.hasNotifications && hasNoAccountErrors) {

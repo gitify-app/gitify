@@ -100,10 +100,10 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
             variant="invisible"
           >
             <AvatarWithFallback
-              alt={account.user.login}
-              name={`@${account.user.login}`}
+              alt={account.user!.login}
+              name={`@${account.user!.login}`}
               size={Size.MEDIUM}
-              src={account.user.avatar}
+              src={account.user!.avatar ?? undefined}
             />
           </Button>
 

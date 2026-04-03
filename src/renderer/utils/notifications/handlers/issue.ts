@@ -11,6 +11,7 @@ import {
 import type {
   GitifyIssueState,
   GitifyNotification,
+  GitifyReactionGroup,
   GitifySubject,
   Link,
   SettingsState,
@@ -33,6 +34,10 @@ class IssueHandler extends DefaultHandler {
     const issue =
       fetchedData ?? (await fetchIssueByNumber(notification)).repository?.issue;
 
+    if (!issue) {
+      return {};
+    }
+
     const issueState = issue.stateReason ?? issue.state;
 
     const issueComment = issue.comments?.nodes?.[0];
@@ -53,14 +58,16 @@ class IssueHandler extends DefaultHandler {
       user: issueUser,
       commentCount: issue.comments.totalCount,
       labels:
-        issue.labels?.nodes.map((label) => ({
-          name: label.name,
-          color: label.color,
+        issue.labels?.nodes?.filter(Boolean).map((label) => ({
+          name: label!.name,
+          color: label!.color,
         })) ?? [],
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
       reactionsCount: issueReactionCount,
-      reactionGroups: issueReactionGroup,
+      reactionGroups: (issueReactionGroup ?? undefined) as
+        | GitifyReactionGroup[]
+        | undefined,
     };
   }
 

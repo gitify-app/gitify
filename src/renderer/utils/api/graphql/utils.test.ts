@@ -15,7 +15,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('getQueryFragmentBody', () => {
     it('should extract query fragments from operation document', () => {
       const fragments = extractQueryFragments(
-        FetchMergedDetailsTemplateDocument,
+        FetchMergedDetailsTemplateDocument as any,
       );
 
       expect(fragments).not.toBeNull();
@@ -28,7 +28,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
 
     it('should extract query fragments from fragment document', () => {
       const fragments = extractQueryFragments(
-        MergedDetailsQueryTemplateFragmentDoc,
+        MergedDetailsQueryTemplateFragmentDoc as any,
       );
 
       expect(fragments).not.toBeNull();
@@ -49,7 +49,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('extractNonQueryFragments', () => {
     it('should extract non-query fragments from FetchBatchMergedTemplateDocument', () => {
       const fragments = extractNonQueryFragments(
-        FetchMergedDetailsTemplateDocument,
+        FetchMergedDetailsTemplateDocument as any,
       );
 
       expect(fragments).not.toBeNull();
@@ -72,7 +72,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('extractIndexedVariableDefinitions', () => {
     it('should extract indexed variable definitions from BatchMergedDetailsQueryTemplateFragmentDoc', () => {
       const varDefs = extractIndexedVariableDefinitions(
-        FetchMergedDetailsTemplateDocument,
+        FetchMergedDetailsTemplateDocument as any,
       );
 
       expect(varDefs).not.toBeNull();
@@ -91,7 +91,7 @@ describe('renderer/utils/api/graphql/utils.ts', () => {
   describe('extractNonIndexedVariableDefinitions', () => {
     it('should extract non-indexed variable definitions from extractNonIndexedVariableDefinitions', () => {
       const varDefs = extractNonIndexedVariableDefinitions(
-        FetchMergedDetailsTemplateDocument,
+        FetchMergedDetailsTemplateDocument as any,
       );
 
       expect(varDefs).not.toBeNull();

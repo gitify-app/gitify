@@ -15,9 +15,13 @@ vi.mock('electron', () => ({
 }));
 
 const logErrorMock = vi.fn();
-vi.mock('../../shared/logger', () => ({
-  logError: (...args: unknown[]) => logErrorMock(...args),
-}));
+vi.mock('../../shared/logger', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../shared/logger')>();
+  return {
+    ...actual,
+    logError: (...args: unknown[]) => logErrorMock(...args),
+  };
+});
 
 describe('main/handlers/storage.ts', () => {
   describe('registerStorageHandlers', () => {
@@ -29,7 +33,7 @@ describe('main/handlers/storage.ts', () => {
       registerStorageHandlers();
 
       const registeredHandlers = handleMock.mock.calls.map(
-        (call: [string]) => call[0],
+        (call: unknown[]) => call[0],
       );
 
       expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_ENCRYPT);

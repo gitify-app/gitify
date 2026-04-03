@@ -1,6 +1,7 @@
 import type {
   Account,
   GitifyNotification,
+  GitifyNotificationDisplay,
   GitifyOwner,
   GitifyReason,
   GitifyRepository,
@@ -54,7 +55,7 @@ function transformNotification(
     repository: transformRepository(raw.repository),
     account: account,
     order: 0, // Will be set later in stabilizeNotificationsOrder
-    display: undefined, // Display fields start as undefined, populated by formatNotification post-enrichment
+    display: undefined as unknown as GitifyNotificationDisplay, // Display fields start as undefined, populated by formatNotification post-enrichment
   };
 }
 
@@ -64,7 +65,7 @@ function transformReason(raw: RawGitHubNotification['reason']): GitifyReason {
   return {
     code: raw as Reason,
     title: reasonDetails.title,
-    description: reasonDetails.description,
+    description: reasonDetails.description ?? '',
   };
 }
 

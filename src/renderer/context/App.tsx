@@ -93,7 +93,7 @@ export interface AppContextState {
   logoutFromAccount: (account: Account) => Promise<void>;
 
   status: Status;
-  globalError: GitifyError;
+  globalError: GitifyError | undefined;
 
   notifications: AccountNotifications[];
   notificationCount: number;

@@ -30,7 +30,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
-            openUserProfile(notification.subject.user);
+            openUserProfile(notification.subject.user!);
           }}
           title={notification.subject.user.login}
           type="button"

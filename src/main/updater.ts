@@ -3,7 +3,7 @@ import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { logError, logInfo } from '../shared/logger';
+import { logError, logInfo, toError } from '../shared/logger';
 
 import type MenuBuilder from './menu';
 
@@ -87,7 +87,7 @@ export default class AppUpdater {
       this.setTooltipWithStatus('A new update is ready to install');
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
-      this.showUpdateReadyDialog(event.releaseName);
+      this.showUpdateReadyDialog(event.releaseName ?? undefined);
     });
 
     autoUpdater.on('update-not-available', () => {
@@ -123,7 +123,7 @@ export default class AppUpdater {
       logInfo('app updater', 'Checking for updates on application launch');
       await autoUpdater.checkForUpdatesAndNotify();
     } catch (err) {
-      logError('auto updater', 'Initial check failed', err as Error);
+      logError('auto updater', 'Initial check failed', toError(err));
     }
   }
 
@@ -136,7 +136,7 @@ export default class AppUpdater {
         logInfo('app updater', 'Checking for updates on a periodic schedule');
         await autoUpdater.checkForUpdatesAndNotify();
       } catch (e) {
-        logError('auto updater', 'Scheduled check failed', e as Error);
+        logError('auto updater', 'Scheduled check failed', toError(e));
       }
     };
 
@@ -196,7 +196,7 @@ export default class AppUpdater {
    *
    * @param releaseName - The version string shown in the dialog message.
    */
-  private showUpdateReadyDialog(releaseName: string) {
+  private showUpdateReadyDialog(releaseName?: string) {
     const dialogOpts: MessageBoxOptions = {
       type: 'info',
       buttons: ['Restart', 'Later'],

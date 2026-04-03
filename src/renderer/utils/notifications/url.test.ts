@@ -37,7 +37,7 @@ describe('renderer/utils/notifications/url.ts', () => {
         latestCommentUrl: mockLatestCommentUrl,
         type: 'Issue' as SubjectType,
         htmlUrl: mockSubjectHtmlUrl,
-      } as GitifySubject;
+      } as unknown as GitifySubject;
 
       const result = await generateGitHubWebUrl({
         ...mockGitifyNotification,
@@ -61,7 +61,7 @@ describe('renderer/utils/notifications/url.ts', () => {
         latestCommentUrl: mockLatestCommentUrl,
         type: 'Issue' as SubjectType,
         htmlUrl: mockSubjectHtmlUrl,
-      } as GitifySubject;
+      } as unknown as GitifySubject;
 
       getHtmlUrlSpy.mockResolvedValue({
         html_url: mockHtmlUrl,
@@ -92,7 +92,7 @@ describe('renderer/utils/notifications/url.ts', () => {
         latestCommentUrl: mockLatestCommentUrl,
         type: 'Issue' as SubjectType,
         htmlUrl: mockSubjectHtmlUrl,
-      } as GitifySubject;
+      } as unknown as GitifySubject;
 
       getHtmlUrlSpy.mockResolvedValue({
         html_url: mockHtmlUrl,

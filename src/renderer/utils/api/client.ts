@@ -216,7 +216,7 @@ async function followUrl<TResult>(
 export async function fetchDiscussionByNumber(
   notification: GitifyNotification,
 ): Promise<FetchDiscussionByNumberQuery> {
-  const number = getNumberFromUrl(notification.subject.url);
+  const number = getNumberFromUrl(notification.subject.url!);
 
   return performGraphQLRequest(
     notification.account,
@@ -241,7 +241,7 @@ export async function fetchDiscussionByNumber(
 export async function fetchIssueByNumber(
   notification: GitifyNotification,
 ): Promise<FetchIssueByNumberQuery> {
-  const number = getNumberFromUrl(notification.subject.url);
+  const number = getNumberFromUrl(notification.subject.url!);
 
   return performGraphQLRequest(
     notification.account,
@@ -262,7 +262,7 @@ export async function fetchIssueByNumber(
 export async function fetchPullByNumber(
   notification: GitifyNotification,
 ): Promise<FetchPullRequestByNumberQuery> {
-  const number = getNumberFromUrl(notification.subject.url);
+  const number = getNumberFromUrl(notification.subject.url!);
 
   return performGraphQLRequest(
     notification.account,
@@ -313,7 +313,7 @@ export async function fetchNotificationDetailsForList(
     const alias = builder.addNode({
       owner: notification.repository.owner.login,
       name: notification.repository.name,
-      number: getNumberFromUrl(notification.subject.url),
+      number: getNumberFromUrl(notification.subject.url!),
       isDiscussionNotification: notification.subject.type === 'Discussion',
       isIssueNotification: notification.subject.type === 'Issue',
       isPullRequestNotification: notification.subject.type === 'PullRequest',
@@ -348,7 +348,9 @@ export async function fetchNotificationDetailsForList(
   );
 
   for (const [alias, notification] of aliasToNotification) {
-    const repoData = response[alias] as Record<string, unknown> | undefined;
+    const repoData = (response as Record<string, unknown>)[alias] as
+      | Record<string, unknown>
+      | undefined;
     if (!repoData) {
       continue; // Skip if no data for this alias
     }

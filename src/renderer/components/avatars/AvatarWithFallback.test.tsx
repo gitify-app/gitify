@@ -32,7 +32,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
 
   it('renders the fallback icon when no src url - human user', () => {
     const tree = renderWithProviders(
-      <AvatarWithFallback {...props} src={null} />,
+      <AvatarWithFallback {...props} src={undefined} />,
     );
 
     expect(tree.container).toMatchSnapshot();
@@ -40,7 +40,7 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
 
   it('renders the fallback icon when no src url - non human user', () => {
     const tree = renderWithProviders(
-      <AvatarWithFallback {...props} src={null} userType="Bot" />,
+      <AvatarWithFallback {...props} src={undefined} userType="Bot" />,
     );
 
     expect(tree.container).toMatchSnapshot();
