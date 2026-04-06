@@ -3,13 +3,14 @@ name: Lint
 on:
   workflow_call:
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
-  lint:
-    name: biomejs
+  lint-code:
+    name: Lint Code [biomejs]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
@@ -22,3 +23,19 @@ jobs:
 
       - name: Run linter
         run: pnpm lint:check
+
+  lint-actions:
+    name: Lint GitHub Actions [actionlint]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+          sparse-checkout: .github/
+
+      - name: GitHub Actions linter
+        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667

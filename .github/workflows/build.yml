@@ -2,13 +2,26 @@ name: Build
 
 on:
   workflow_call:
+    secrets:
+      OAUTH_CLIENT_ID:
+        required: true
+      # Signing certificates
+      CSC_LINK:
+        required: true
+      WIN_CSC_LINK:
+        required: true
+      CSC_KEY_PASSWORD:
+        required: true
+      WIN_CSC_KEY_PASSWORD:
+        required: true
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
-    name: Build ${{ matrix.platform }} (electron-builder)
+    name: Build ${{ matrix.platform }} [electron-builder]
+    permissions:
+      contents: read
     strategy:
       matrix:
         include:

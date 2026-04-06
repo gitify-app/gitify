@@ -5,24 +5,38 @@ on:
     branches:
       - release/v*.*.* # macOS code-signing only works on `push` events and not `pull_request` events
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   lint:
     name: Lint App
     uses: ./.github/workflows/lint.yml
+    permissions:
+      contents: read
 
   tests:
     name: Tests
     uses: ./.github/workflows/test.yml
     needs: lint
-    secrets: inherit
+    permissions:
+      contents: read
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   publish:
     name: Publish
     uses: ./.github/workflows/publish.yml
     needs: tests
-    secrets: inherit
     permissions:
       contents: write
+    secrets:
+      OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+      # Signing certificates
+      CSC_LINK: ${{ secrets.CSC_LINK }}
+      WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+      CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+      WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+      # macOS specific
+      APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
+      APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+      APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
