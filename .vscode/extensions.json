@@ -5,6 +5,7 @@
     "GraphQL.vscode-graphql",
     "GraphQL.vscode-graphql-syntax",
     "SonarSource.sonarlint-vscode",
-    "vitest.explorer"
+    "vitest.explorer",
+    "zizmor.zizmor-vscode"
   ]
 }

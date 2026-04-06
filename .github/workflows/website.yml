@@ -6,12 +6,12 @@ on:
     types:
       - published # For running on release publish
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   redeploy-website:
     name: Deploy Website
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}

@@ -8,30 +8,45 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   prepare: # macOS code-signing only works on `push` events and not `pull_request` events
     if: ${{ !startsWith(github.head_ref, 'release/v') }}
     name: Prepare CI
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
-      - run: echo Running CI for branch ${{ github.head_ref }}
+      - run: echo "Running CI for branch ${GITHUB_HEAD_REF}"
+    env:
+      GITHUB_HEAD_REF: ${{ github.head_ref }}
 
   lint:
     name: Lint App
     uses: ./.github/workflows/lint.yml
     needs: prepare
+    permissions:
+      contents: read
 
   tests:
     name: Tests
     uses: ./.github/workflows/test.yml
     needs: lint
-    secrets: inherit
+    permissions:
+      contents: read
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build:
     name: Build
     uses: ./.github/workflows/build.yml
     needs: tests
-    secrets: inherit
+    permissions:
+      contents: read
+    secrets:
+      OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+      # Signing certificates
+      CSC_LINK: ${{ secrets.CSC_LINK }}
+      WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+      CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+      WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}

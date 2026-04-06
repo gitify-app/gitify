@@ -2,42 +2,68 @@ name: Publish
 
 on:
   workflow_call:
+    secrets:
+      OAUTH_CLIENT_ID:
+        required: true
+      # Signing certificates
+      CSC_LINK:
+        required: true
+      WIN_CSC_LINK:
+        required: true
+      CSC_KEY_PASSWORD:
+        required: true
+      WIN_CSC_KEY_PASSWORD:
+        required: true
+      # macOS specific
+      APPLE_ID_USERNAME:
+        required: true
+      APPLE_ID_PASSWORD:
+        required: true
+      APPLE_ID_TEAM_ID:
+        required: true
   workflow_dispatch: # For manually running release process to verify code-signing of artifacts
 
-permissions:
-  contents: write
+permissions: {}
 
 jobs:
   prepare:
     name: Prepare draft release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          persist-credentials: false
 
       - name: Parse release branch
         if: startsWith(github.ref, 'refs/heads/release/')
         run: |
           # Extract the branch name (e.g. release/v1.2.3[-meta])
           ref=${GITHUB_REF#refs/heads/}
-          echo "RELEASE_BRANCH=$ref" >> $GITHUB_ENV
+          echo "RELEASE_BRANCH=$ref" >> "$GITHUB_ENV"
           # Also export a RELEASE_TAG by removing the `release/` prefix (keeps leading 'v')
           tag=${ref#release/}
-          echo "RELEASE_TAG=$tag" >> $GITHUB_ENV
+          echo "RELEASE_TAG=$tag" >> "$GITHUB_ENV"
         shell: bash
 
       - name: Create draft release
-        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
-        with:
-          name: "${{ env.RELEASE_TAG }}"
-          tag_name: "${{ env.RELEASE_TAG }}"
-          draft: true
-          body: '# <img src="https://github.com/gitify-app/gitify/blob/3554605d32a6c08a3d4ec17b02b90e2dd276a152/assets/images/tray-active%402x.png" /> Gitify ${{ env.RELEASE_TAG }}'
-          generate_release_notes: true
+        run: |
+          gh release create "${RELEASE_TAG}" \
+            --title "${RELEASE_TAG}" \
+            --draft \
+            --notes "# <img src=\"https://github.com/gitify-app/gitify/blob/3554605d32a6c08a3d4ec17b02b90e2dd276a152/assets/images/tray-active%402x.png\" /> Gitify ${RELEASE_TAG}" \
+            --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
 
   release:
-    name: Publish ${{ matrix.platform }} (electron-builder)
+    name: Publish ${{ matrix.platform }} [electron-builder]
     needs: prepare
+    permissions:
+      contents: write
     strategy:
       matrix:
         include:
@@ -61,6 +87,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: ./.github/actions/setup-node

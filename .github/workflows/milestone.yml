@@ -7,28 +7,31 @@ on:
     types:
       - closed
 
-permissions:
-  pull-requests: write
+permissions: {}
 
 jobs:
   add-milestone:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
-      - name: Authenticate GitHub CLI
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-
       - name: Get open milestone
         id: milestone
         run: |
           milestone=$(gh api repos/${{ github.repository }}/milestones \
             --jq '.[] | select(.state=="open") | .title' | head -n 1)
           echo "Found milestone: $milestone"
-          echo "milestone=$milestone" >> $GITHUB_OUTPUT
+          echo "milestone=$milestone" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add milestone to PR
         if: steps.milestone.outputs.milestone != ''
         run: |
           gh pr edit ${{ github.event.pull_request.number }} \
             --repo ${{ github.repository }} \
-            --milestone "${{ steps.milestone.outputs.milestone }}"
+            --milestone "${STEPS_MILESTONE_OUTPUTS_MILESTONE}"
+        env:
+          STEPS_MILESTONE_OUTPUTS_MILESTONE: ${{ steps.milestone.outputs.milestone }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

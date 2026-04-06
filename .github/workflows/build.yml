@@ -2,13 +2,26 @@ name: Build
 
 on:
   workflow_call:
+    secrets:
+      OAUTH_CLIENT_ID:
+        required: true
+      # Signing certificates
+      CSC_LINK:
+        required: true
+      WIN_CSC_LINK:
+        required: true
+      CSC_KEY_PASSWORD:
+        required: true
+      WIN_CSC_KEY_PASSWORD:
+        required: true
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
-    name: Build ${{ matrix.platform }} (electron-builder)
+    name: Build ${{ matrix.platform }} [electron-builder]
+    permissions:
+      contents: read
     strategy:
       matrix:
         include:
@@ -32,6 +45,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
