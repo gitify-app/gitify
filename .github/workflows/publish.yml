@@ -42,10 +42,10 @@ jobs:
         run: |
           # Extract the branch name (e.g. release/v1.2.3[-meta])
           ref=${GITHUB_REF#refs/heads/}
-          echo "RELEASE_BRANCH=$ref" >> $GITHUB_ENV
+          echo "RELEASE_BRANCH=$ref" >> "$GITHUB_ENV"
           # Also export a RELEASE_TAG by removing the `release/` prefix (keeps leading 'v')
           tag=${ref#release/}
-          echo "RELEASE_TAG=$tag" >> $GITHUB_ENV
+          echo "RELEASE_TAG=$tag" >> "$GITHUB_ENV"
         shell: bash
 
       - name: Create draft release
@@ -53,7 +53,7 @@ jobs:
           gh release create "${RELEASE_TAG}" \
             --title "${RELEASE_TAG}" \
             --draft \
-            --notes "# <img src="https://github.com/gitify-app/gitify/blob/3554605d32a6c08a3d4ec17b02b90e2dd276a152/assets/images/tray-active%402x.png" /> Gitify ${RELEASE_TAG}" \
+            --notes "# <img src=\"https://github.com/gitify-app/gitify/blob/3554605d32a6c08a3d4ec17b02b90e2dd276a152/assets/images/tray-active%402x.png\" /> Gitify ${RELEASE_TAG}" \
             --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
