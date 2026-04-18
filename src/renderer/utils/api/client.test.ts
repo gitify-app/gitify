@@ -1,6 +1,9 @@
 import type { ExecutionResult } from 'graphql';
 
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import {
+  mockGiteaAccount,
+  mockGitHubCloudAccount,
+} from '../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
@@ -279,6 +282,12 @@ describe('renderer/utils/api/client.ts', () => {
       thread_id: Number(mockThreadId),
       ignored: true,
     });
+  });
+
+  it('ignoreNotificationThreadSubscription - should reject for Gitea accounts', async () => {
+    await expect(
+      ignoreNotificationThreadSubscription(mockGiteaAccount, mockThreadId),
+    ).rejects.toThrow(/not supported for Gitea/);
   });
 
   it('getHtmlUrl - should return the HTML URL', async () => {

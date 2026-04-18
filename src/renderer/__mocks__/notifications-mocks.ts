@@ -16,6 +16,7 @@ import {
 } from '../types';
 
 import {
+  mockGiteaAccount,
   mockGitHubAppAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -217,6 +218,12 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
 
 export const mockGitifyNotification: GitifyNotification =
   mockGitHubCloudGitifyNotifications[0];
+
+/** Same shape as cloud notification, but bound to a Gitea account (for forge-specific tests). */
+export const mockGiteaGitifyNotification: GitifyNotification = {
+  ...mockGitifyNotification,
+  account: mockGiteaAccount,
+};
 
 export const mockMultipleAccountNotifications: AccountNotifications[] = [
   {

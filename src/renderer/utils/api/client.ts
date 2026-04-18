@@ -175,8 +175,9 @@ export async function ignoreNotificationThreadSubscription(
   threadId: string,
 ): Promise<IgnoreNotificationThreadSubscriptionResponse> {
   if (isForgeGitea(account.forge)) {
-    await patchGiteaNotificationThread(account, threadId, 'read');
-    return {} as IgnoreNotificationThreadSubscriptionResponse;
+    throw new Error(
+      'Ignoring thread subscriptions is not supported for Gitea accounts.',
+    );
   }
 
   const octokit = await createOctokitClient(account, 'rest');
