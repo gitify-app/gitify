@@ -14,7 +14,10 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { isMarkAsDoneFeatureSupported } from '../utils/api/features';
+import {
+  isIgnoreThreadSubscriptionSupported,
+  isMarkAsDoneFeatureSupported,
+} from '../utils/api/features';
 import { getAccountUUID } from '../utils/auth/utils';
 import {
   areAllAccountErrorsSame,
@@ -195,10 +198,12 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationsAsDone = useCallback(
     async (state: GitifyState, doneNotifications: GitifyNotification[]) => {
-      if (
-        !state.settings ||
-        !isMarkAsDoneFeatureSupported(doneNotifications[0].account)
-      ) {
+      if (!state.settings) {
+        return;
+      }
+
+      if (!isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+        await markNotificationsAsRead(state, doneNotifications);
         return;
       }
 
@@ -229,12 +234,16 @@ export const useNotifications = (): NotificationsState => {
 
       setStatus('success');
     },
-    [notifications],
+    [notifications, markNotificationsAsRead],
   );
 
   const unsubscribeNotification = useCallback(
     async (state: GitifyState, notification: GitifyNotification) => {
       if (!state.settings) {
+        return;
+      }
+
+      if (!isIgnoreThreadSubscriptionSupported(notification.account)) {
         return;
       }
 

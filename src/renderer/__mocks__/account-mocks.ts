@@ -62,6 +62,15 @@ export const mockGitHubEnterpriseServerAccount: Account = {
   user: mockGitifyUser,
 };
 
+export const mockGiteaAccount: Account = {
+  forge: 'gitea',
+  platform: 'Gitea',
+  method: 'Personal Access Token',
+  token: 'token-gitea' as Token,
+  hostname: 'gitea.example.com' as Hostname,
+  user: mockGitifyUser,
+};
+
 export function mockAccountWithError(error: GitifyError): AccountNotifications {
   return {
     account: mockGitHubCloudAccount,

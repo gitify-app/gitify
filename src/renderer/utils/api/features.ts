@@ -10,6 +10,14 @@ import { isEnterpriseServerHost } from '../auth/platform';
  *
  * GitHub Cloud or GitHub Enterprise Server 3.13 or newer is required to support this feature.
  */
+/**
+ * GitHub's REST API supports ignoring a notification thread subscription.
+ * Gitea has no equivalent; do not surface unsubscribe as a supported action.
+ */
+export function isIgnoreThreadSubscriptionSupported(account: Account): boolean {
+  return !isForgeGitea(account.forge);
+}
+
 export function isMarkAsDoneFeatureSupported(account: Account): boolean {
   if (isForgeGitea(account.forge)) {
     return false;

@@ -1,14 +1,28 @@
 import {
+  mockGiteaAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../__mocks__/account-mocks';
 
 import {
   isAnsweredDiscussionFeatureSupported,
+  isIgnoreThreadSubscriptionSupported,
   isMarkAsDoneFeatureSupported,
 } from './features';
 
 describe('renderer/utils/api/features.ts', () => {
+  describe('isIgnoreThreadSubscriptionSupported', () => {
+    it('should return true for GitHub Cloud', () => {
+      expect(isIgnoreThreadSubscriptionSupported(mockGitHubCloudAccount)).toBe(
+        true,
+      );
+    });
+
+    it('should return false for Gitea', () => {
+      expect(isIgnoreThreadSubscriptionSupported(mockGiteaAccount)).toBe(false);
+    });
+  });
+
   describe('isMarkAsDoneFeatureSupported', () => {
     it('should return true for GitHub Cloud', () => {
       expect(isMarkAsDoneFeatureSupported(mockGitHubCloudAccount)).toBe(true);
@@ -39,6 +53,10 @@ describe('renderer/utils/api/features.ts', () => {
       };
 
       expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
+    });
+
+    it('should return false for Gitea', () => {
+      expect(isMarkAsDoneFeatureSupported(mockGiteaAccount)).toBe(false);
     });
   });
 
