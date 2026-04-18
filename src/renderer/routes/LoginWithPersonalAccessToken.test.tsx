@@ -40,8 +40,10 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
         hostname: null as unknown as Hostname,
         token: null as unknown as Token,
       };
-      expect(validateForm(values).hostname).toBe('Hostname is required');
-      expect(validateForm(values).token).toBe('Token is required');
+      expect(validateForm(values, 'github').hostname).toBe(
+        'Hostname is required',
+      );
+      expect(validateForm(values, 'github').token).toBe('Token is required');
     });
 
     it('should validate the form values are correct format', () => {
@@ -50,8 +52,12 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
         token: '!@£INVALID-.1' as Token,
       };
 
-      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-      expect(validateForm(values).token).toBe('Token format is invalid');
+      expect(validateForm(values, 'github').hostname).toBe(
+        'Hostname format is invalid',
+      );
+      expect(validateForm(values, 'github').token).toBe(
+        'Token format is invalid',
+      );
     });
   });
 

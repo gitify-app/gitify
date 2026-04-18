@@ -11,9 +11,10 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
     data-wrap="nowrap"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
+      class="max-w-md w-full px-2 prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-direction="vertical"
+      data-gap="spacious"
       data-justify="start"
       data-padding="none"
       data-wrap="nowrap"
@@ -66,7 +67,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
-        data-gap="none"
+        data-gap="condensed"
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
@@ -74,154 +75,88 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         <h2
           class="prc-Heading-Heading-MtWFE"
         >
-          GitHub Notifications
+          Gitify
         </h2>
-        <h3
-          class="prc-Heading-Heading-MtWFE"
+        <span
+          class="text-center max-w-sm prc-Text-Text-9mHv3"
+          color="fg.muted"
         >
-          on your menu bar
-        </h3>
+          Notifications from GitHub and Gitea in your menu bar.
+        </span>
       </div>
       <div
-        class="prc-Stack-Stack-UQ9k6"
-        data-align="center"
+        class="w-full prc-Stack-Stack-UQ9k6"
+        data-align="stretch"
         data-direction="vertical"
         data-gap="condensed"
         data-justify="start"
         data-padding="none"
         data-wrap="nowrap"
       >
-        <span
-          class="prc-Text-Text-9mHv3"
+        <div
+          class="rounded-md border border-gitify-notification-border bg-gitify-accounts overflow-hidden"
         >
-          Login with
-        </span>
-        <button
-          class="prc-Button-ButtonBase-9n-Xk"
-          data-loading="false"
-          data-size="medium"
-          data-testid="login-github"
-          data-variant="primary"
-          type="button"
-        >
-          <span
-            class="prc-Button-ButtonContent-Iohp5"
-            data-align="center"
-            data-component="buttonContent"
+          <button
+            aria-expanded="false"
+            class="flex w-full cursor-pointer items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-gitify-notification-hover/40"
+            data-testid="login-section-github-toggle"
+            type="button"
           >
             <span
-              class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-              data-component="leadingVisual"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-mark-github"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"
-                />
-              </svg>
-            </span>
-            <span
-              class="prc-Button-Label-FWkx3"
-              data-component="text"
+              class="text-sm font-semibold prc-Text-Text-9mHv3"
             >
               GitHub
             </span>
-          </span>
-        </button>
-        <button
-          class="prc-Button-ButtonBase-9n-Xk"
-          data-loading="false"
-          data-size="medium"
-          data-testid="login-pat"
-          data-variant="default"
-          type="button"
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-chevron-right"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          class="rounded-md border border-gitify-notification-border bg-gitify-accounts overflow-hidden"
         >
-          <span
-            class="prc-Button-ButtonContent-Iohp5"
-            data-align="center"
-            data-component="buttonContent"
+          <button
+            aria-expanded="false"
+            class="flex w-full cursor-pointer items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-gitify-notification-hover/40"
+            data-testid="login-section-gitea-toggle"
+            type="button"
           >
             <span
-              class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-              data-component="leadingVisual"
+              class="text-sm font-semibold prc-Text-Text-9mHv3"
             >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-key"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                />
-              </svg>
+              Gitea
             </span>
-            <span
-              class="prc-Button-Label-FWkx3"
-              data-component="text"
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-chevron-right"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="16"
             >
-              Personal Access Token
-            </span>
-          </span>
-        </button>
-        <button
-          class="prc-Button-ButtonBase-9n-Xk"
-          data-loading="false"
-          data-size="medium"
-          data-testid="login-oauth-app"
-          data-variant="default"
-          type="button"
-        >
-          <span
-            class="prc-Button-ButtonContent-Iohp5"
-            data-align="center"
-            data-component="buttonContent"
-          >
-            <span
-              class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-              data-component="leadingVisual"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-person"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
-                />
-              </svg>
-            </span>
-            <span
-              class="prc-Button-Label-FWkx3"
-              data-component="text"
-            >
-              OAuth App
-            </span>
-          </span>
-        </button>
+              <path
+                d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>

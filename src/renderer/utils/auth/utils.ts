@@ -10,6 +10,7 @@ import type {
   AccountUUID,
   AuthState,
   ClientID,
+  Forge,
   Hostname,
   Link,
   Token,
@@ -25,7 +26,8 @@ import {
   toError,
 } from '../core/logger';
 import { encryptValue } from '../system/comms';
-import { getPlatformFromHostname } from './platform';
+import { getResolvedForge, isForgeGitea } from './forge';
+import { getPlatformForForge, getPlatformFromHostname } from './platform';
 import { getRecommendedScopeNames, hasRequiredScopes } from './scopes';
 
 /**
@@ -38,7 +40,8 @@ import { getRecommendedScopeNames, hasRequiredScopes } from './scopes';
  * @param auth - The current auth state.
  * @param method - The authentication method used.
  * @param token - The plaintext access token to store (will be encrypted).
- * @param hostname - The GitHub hostname for the account.
+ * @param hostname - The GitHub or Gitea hostname for the account.
+ * @param forge - `github` (default) or `gitea`.
  * @returns The updated auth state.
  */
 export async function addAccount(
@@ -46,14 +49,17 @@ export async function addAccount(
   method: AuthMethod,
   token: Token,
   hostname: Hostname,
+  forge: Forge = 'github',
 ): Promise<AuthState> {
   const accountList = auth.accounts;
   const encryptedToken = await encryptValue(token);
+  const resolvedForge = getResolvedForge(forge);
 
   let newAccount = {
     hostname: hostname,
     method: method,
-    platform: getPlatformFromHostname(hostname),
+    forge: resolvedForge,
+    platform: getPlatformForForge(resolvedForge, hostname),
     token: encryptedToken,
     user: null, // Will be updated during the refresh call below
   } as Account;
@@ -124,7 +130,11 @@ export async function refreshAccount(account: Account): Promise<Account> {
       avatar: user.avatar_url as Link,
     };
 
-    account.version = 'latest';
+    if (isForgeGitea(account.forge)) {
+      account.version = 'latest';
+      account.scopes = [];
+      return account;
+    }
 
     account.version = extractHostVersion(
       response.headers['x-github-enterprise-version'] as string,
@@ -214,6 +224,10 @@ export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
  * @returns The URL to the relevant GitHub developer settings page.
  */
 export function getDeveloperSettingsURL(account: Account): Link {
+  if (isForgeGitea(account.forge)) {
+    return `https://${account.hostname}/user/settings/applications` as Link;
+  }
+
   const settingsURL = new URL(`https://${account.hostname}`);
 
   switch (account.method) {
@@ -242,6 +256,19 @@ export function getDeveloperSettingsURL(account: Account): Link {
  * @param hostname - The GitHub hostname to create the token on.
  * @returns The URL with pre-filled query parameters.
  */
+/**
+ * URL to create or manage personal access tokens (GitHub or Gitea).
+ */
+export function getPersonalAccessTokenSettingsUrl(
+  hostname: Hostname,
+  forge?: Forge,
+): Link {
+  if (getResolvedForge(forge) === 'gitea') {
+    return `https://${hostname}/user/settings/applications` as Link;
+  }
+  return getNewTokenURL(hostname);
+}
+
 export function getNewTokenURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
@@ -317,20 +344,28 @@ export function isValidClientId(clientId: ClientID) {
  * @param token - The token string to validate.
  * @returns `true` if valid.
  */
-export function isValidToken(token: Token) {
+export function isValidToken(token: Token, forge?: Forge) {
+  if (getResolvedForge(forge) === 'gitea') {
+    return token.length >= 8 && token.length <= 512 && !/[\r\n]/.test(token);
+  }
   return /^[A-Z0-9_]{40}$/i.test(token);
 }
 
 /**
  * Derive a stable, unique identifier for an account.
  *
- * Encodes `"<hostname>-<userId>-<method>"` as a base-64 string so the UUID
- * is safe for use as a cache key or map key.
+ * Encodes hostname, user id, and method (and forge for Gitea) as a base-64
+ * string so the UUID is safe for use as a cache key or map key.
  *
  * @param account - The account to identify.
  * @returns A base-64 encoded UUID string.
  */
 export function getAccountUUID(account: Account): AccountUUID {
+  if (getResolvedForge(account.forge) === 'gitea') {
+    return btoa(
+      `gitea-${account.hostname}-${account.user?.id}-${account.method}`,
+    ) as AccountUUID;
+  }
   return btoa(
     `${account.hostname}-${account.user?.id}-${account.method}`,
   ) as AccountUUID;

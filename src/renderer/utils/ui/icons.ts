@@ -75,6 +75,8 @@ export function getPlatformIcon(
   platform: PlatformType,
 ): FC<OcticonProps> | null {
   switch (platform) {
+    case 'Gitea':
+      return ServerIcon;
     case 'GitHub Enterprise Server':
       return ServerIcon;
     case 'GitHub Enterprise Cloud with Data Residency':

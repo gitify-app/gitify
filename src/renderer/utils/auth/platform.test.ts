@@ -1,12 +1,30 @@
 import type { Hostname } from '../../types';
 
 import {
+  getPlatformForForge,
   getPlatformFromHostname,
   isCloudDataResidencyHost,
   isEnterpriseServerHost,
 } from './platform';
 
 describe('renderer/utils/auth/platform.ts', () => {
+  describe('getPlatformForForge', () => {
+    it('should return Gitea when forge is gitea', () => {
+      expect(getPlatformForForge('gitea', 'code.example.org' as Hostname)).toBe(
+        'Gitea',
+      );
+    });
+
+    it('should delegate to hostname for GitHub forge', () => {
+      expect(getPlatformForForge('github', 'github.com' as Hostname)).toBe(
+        'GitHub Cloud',
+      );
+      expect(
+        getPlatformForForge(undefined, 'github.gitify.app' as Hostname),
+      ).toBe('GitHub Enterprise Server');
+    });
+  });
+
   describe('getPlatformFromHostname', () => {
     it('should return GitHub Cloud', () => {
       expect(getPlatformFromHostname('github.com' as Hostname)).toBe(
