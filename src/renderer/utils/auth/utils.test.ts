@@ -71,6 +71,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.com' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
@@ -97,6 +98,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.com' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Cloud',
@@ -137,6 +139,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.gitify.io' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
@@ -163,6 +166,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.gitify.io' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
@@ -369,6 +373,13 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     it('should validate token - invalid', () => {
       expect(authUtils.isValidToken('1234567890asdfg' as Token)).toBeFalsy();
+    });
+
+    it('should validate Gitea token length', () => {
+      expect(authUtils.isValidToken('short' as Token, 'gitea')).toBeFalsy();
+      expect(
+        authUtils.isValidToken('gitea-token-value-ok' as Token, 'gitea'),
+      ).toBeTruthy();
     });
   });
 

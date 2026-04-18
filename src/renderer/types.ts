@@ -47,9 +47,14 @@ export type KeyboardAcceleratorShortcut = Branded<
   'KeyboardAcceleratorShortcut'
 >;
 
+/** Code hosting provider for an account (GitHub, Gitea, etc.). */
+export type Forge = 'github' | 'gitea';
+
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
+  /** When omitted (legacy persisted accounts), treated as GitHub. */
+  forge?: Forge;
   version?: string;
   hostname: Hostname;
   token: Token;

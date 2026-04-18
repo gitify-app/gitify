@@ -8,6 +8,8 @@ import type {
   GitifySubject,
   SettingsState,
 } from '../../types';
+import type { GiteaNotificationThread } from '../api/gitea/types';
+import type { RawGitHubNotification } from '../api/types';
 
 import {
   fetchNotificationDetailsForList,
@@ -15,7 +17,11 @@ import {
 } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
-import { transformNotifications } from '../api/transform';
+import {
+  transformGiteaNotifications,
+  transformNotifications,
+} from '../api/transform';
+import { isForgeGitea } from '../auth/forge';
 import { rendererLogError, rendererLogWarn, toError } from '../core/logger';
 import {
   filterBaseNotifications,
@@ -96,10 +102,15 @@ export async function getAllNotifications(
         try {
           const rawNotifications = await accountNotifications.notifications;
 
-          let notifications = transformNotifications(
-            rawNotifications,
-            accountNotifications.account,
-          );
+          let notifications = isForgeGitea(accountNotifications.account.forge)
+            ? transformGiteaNotifications(
+                rawNotifications as unknown as GiteaNotificationThread[],
+                accountNotifications.account,
+              )
+            : transformNotifications(
+                rawNotifications as RawGitHubNotification[],
+                accountNotifications.account,
+              );
 
           notifications = filterBaseNotifications(notifications);
 
@@ -154,6 +165,10 @@ export async function enrichNotifications(
   settings: SettingsState,
 ): Promise<GitifyNotification[]> {
   if (!settings.detailedNotifications) {
+    return notifications;
+  }
+
+  if (notifications.length && isForgeGitea(notifications[0].account.forge)) {
     return notifications;
   }
 

@@ -2,12 +2,17 @@ import { Constants } from '../../constants';
 
 import type { Account } from '../../types';
 
+import { isForgeGitea } from './forge';
+
 /**
  * Return true if the account has all required OAuth scopes.
  *
  * @param account - The account whose scopes to check.
  */
 export function hasRequiredScopes(account: Account): boolean {
+  if (isForgeGitea(account.forge)) {
+    return true;
+  }
   return Constants.OAUTH_SCOPES.REQUIRED.every(({ name }) =>
     (account.scopes ?? []).includes(name),
   );

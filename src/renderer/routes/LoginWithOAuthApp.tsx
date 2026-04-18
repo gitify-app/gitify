@@ -146,7 +146,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
 
   return (
     <Page testId="Login With OAuth App">
-      <Header icon={PersonIcon}>Login with OAuth App</Header>
+      <Header icon={PersonIcon}>GitHub (OAuth App)</Header>
 
       <Contents>
         {errors.invalidCredentialsForHost && (

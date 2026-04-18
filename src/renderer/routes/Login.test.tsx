@@ -32,6 +32,7 @@ describe('renderer/routes/Login.tsx', () => {
       isLoggedIn: false,
     });
 
+    await userEvent.click(screen.getByTestId('login-section-github-toggle'));
     await userEvent.click(screen.getByTestId('login-github'));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
@@ -41,15 +42,29 @@ describe('renderer/routes/Login.tsx', () => {
   it('should navigate to login with personal access token', async () => {
     renderWithProviders(<LoginRoute />, { isLoggedIn: false });
 
+    await userEvent.click(screen.getByTestId('login-section-github-toggle'));
     await userEvent.click(screen.getByTestId('login-pat'));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token');
   });
 
+  it('should navigate to login with Gitea personal access token', async () => {
+    renderWithProviders(<LoginRoute />, { isLoggedIn: false });
+
+    await userEvent.click(screen.getByTestId('login-section-gitea-toggle'));
+    await userEvent.click(screen.getByTestId('login-gitea-pat'));
+
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
+      state: { forge: 'gitea' },
+    });
+  });
+
   it('should navigate to login with oauth app', async () => {
     renderWithProviders(<LoginRoute />, { isLoggedIn: false });
 
+    await userEvent.click(screen.getByTestId('login-section-github-toggle'));
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);

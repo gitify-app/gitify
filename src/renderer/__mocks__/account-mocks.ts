@@ -3,6 +3,7 @@ import { Constants } from '../constants';
 import type {
   Account,
   AccountNotifications,
+  Forge,
   GitifyError,
   Hostname,
   Token,
@@ -11,7 +12,10 @@ import type {
 import { getRecommendedScopeNames } from '../utils/auth/scopes';
 import { mockGitifyUser } from './user-mocks';
 
+const defaultForge: Forge = 'github';
+
 export const mockGitHubAppAccount: Account = {
+  forge: defaultForge,
   platform: 'GitHub Cloud',
   method: 'GitHub App',
   token: 'token-987654321' as Token,
@@ -30,6 +34,7 @@ export const mockPersonalAccessTokenAccount: Account = {
 };
 
 export const mockOAuthAccount: Account = {
+  forge: defaultForge,
   platform: 'GitHub Enterprise Server',
   method: 'OAuth App',
   token: 'token-1234568790' as Token,
@@ -39,6 +44,7 @@ export const mockOAuthAccount: Account = {
 };
 
 export const mockGitHubCloudAccount: Account = {
+  forge: defaultForge,
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
   token: 'token-123-456' as Token,
@@ -48,6 +54,7 @@ export const mockGitHubCloudAccount: Account = {
 };
 
 export const mockGitHubEnterpriseServerAccount: Account = {
+  forge: defaultForge,
   platform: 'GitHub Enterprise Server',
   method: 'Personal Access Token',
   token: 'token-1234568790' as Token,
