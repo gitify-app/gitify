@@ -92,7 +92,7 @@
     "@octokit/types": "16.0.0",
     "@parcel/watcher": "2.5.6",
     "@primer/css": "22.1.1",
-    "@primer/octicons-react": "19.23.1",
+    "@primer/octicons-react": "19.24.1",
     "@primer/react": "38.20.0",
     "@swc-contrib/plugin-graphql-codegen-client-preset": "0.20.0",
     "@tailwindcss/vite": "4.2.2",
