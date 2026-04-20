@@ -124,7 +124,7 @@
     "tailwindcss": "4.2.2",
     "typescript": "6.0.2",
     "vite": "8.0.8",
-    "vite-plugin-checker": "0.12.0",
+    "vite-plugin-checker": "0.13.0",
     "vite-plugin-electron": "0.29.1",
     "vite-plugin-electron-renderer": "0.14.6",
     "vitest": "4.1.4",
