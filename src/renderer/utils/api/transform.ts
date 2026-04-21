@@ -11,6 +11,7 @@ import type {
   SubjectType,
   UserType,
 } from '../../types';
+import type { GiteaNotificationThread } from './gitea/types';
 import type { RawGitHubNotification } from './types';
 
 import { getReasonDetails } from '../notifications/reason';
@@ -29,6 +30,101 @@ export function transformNotifications(
   return rawNotifications.map((raw) => {
     return transformNotification(raw, account);
   });
+}
+
+/**
+ * Transform Gitea API notification threads to GitifyNotification.
+ */
+export function transformGiteaNotifications(
+  rawNotifications: GiteaNotificationThread[],
+  account: Account,
+): GitifyNotification[] {
+  return rawNotifications.map((raw) => {
+    return transformGiteaNotification(raw, account);
+  });
+}
+
+function mapGiteaSubjectType(type: string): SubjectType {
+  switch (type) {
+    case 'Issue':
+      return 'Issue';
+    case 'Pull':
+      return 'PullRequest';
+    case 'Commit':
+      return 'Commit';
+    case 'Repository':
+      return 'Issue';
+    default:
+      return 'Issue';
+  }
+}
+
+function transformGiteaNotification(
+  raw: GiteaNotificationThread,
+  account: Account,
+): GitifyNotification {
+  const subject = raw.subject;
+  const repository = raw.repository;
+
+  const fallbackReason = 'subscribed' as Reason;
+  const reasonDetails = getReasonDetails(fallbackReason);
+
+  const placeholderRepo: GitifyRepository = {
+    name: 'unknown',
+    fullName: 'unknown',
+    htmlUrl: `https://${account.hostname}` as Link,
+    owner: {
+      login: 'unknown',
+      avatarUrl: '' as Link,
+      type: 'User',
+    },
+  };
+
+  return {
+    id: String(raw.id),
+    unread: raw.unread,
+    updatedAt: raw.updated_at,
+    reason: {
+      code: fallbackReason,
+      title: reasonDetails.title,
+      description: reasonDetails.description ?? '',
+    },
+    subject: subject
+      ? ({
+          title: subject.title,
+          type: mapGiteaSubjectType(subject.type),
+          url: (subject.url || null) as Link | null,
+          latestCommentUrl: (subject.latest_comment_url || null) as Link | null,
+        } as GitifySubject)
+      : ({
+          title: '',
+          type: 'Issue',
+          url: null,
+          latestCommentUrl: null,
+        } as GitifySubject),
+    repository: repository
+      ? transformGiteaRepository(repository)
+      : placeholderRepo,
+    account: account,
+    order: 0,
+    display: undefined as unknown as GitifyNotificationDisplay,
+  };
+}
+
+function transformGiteaRepository(
+  repo: NonNullable<GiteaNotificationThread['repository']>,
+): GitifyRepository {
+  const owner = repo.owner;
+  return {
+    name: repo.name,
+    fullName: repo.full_name,
+    htmlUrl: repo.html_url as Link,
+    owner: {
+      login: owner?.login ?? 'unknown',
+      avatarUrl: (owner?.avatar_url ?? '') as Link,
+      type: 'User',
+    },
+  };
 }
 
 /**

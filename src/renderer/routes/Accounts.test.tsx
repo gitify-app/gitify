@@ -257,6 +257,26 @@ describe('renderer/routes/Accounts.tsx', () => {
       );
     });
 
+    it('should show login with Gitea personal access token', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockOAuthAccount] },
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByTestId('account-add-gitea-pat'));
+
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith(
+        '/login-personal-access-token',
+        {
+          replace: true,
+          state: { forge: 'gitea' },
+        },
+      );
+    });
+
     it('should show login with oauth app', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {

@@ -17,8 +17,15 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
+import { isForgeGitea } from '../auth/forge';
 import { createNotificationHandler } from '../notifications/handlers';
 import { isAnsweredDiscussionFeatureSupported } from './features';
+import {
+  fetchGiteaAuthenticatedUser,
+  giteaGetJson,
+  listGiteaNotificationsForAuthenticatedUser,
+  patchGiteaNotificationThread,
+} from './gitea/client';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
@@ -39,6 +46,19 @@ import { getNumberFromUrl } from './utils';
  * Always fetches fresh data without caching to ensure up-to-date user info.
  */
 export async function fetchAuthenticatedUserDetails(account: Account) {
+  if (isForgeGitea(account.forge)) {
+    const user = await fetchGiteaAuthenticatedUser(account);
+    return {
+      data: {
+        id: user.id,
+        login: user.login,
+        name: user.full_name ?? null,
+        avatar_url: user.avatar_url ?? '',
+      },
+      headers: {} as Record<string, string | undefined>,
+    };
+  }
+
   const octokit = await createOctokitClientUncached(account, 'rest');
 
   return await octokit.rest.users.getAuthenticated({
@@ -57,6 +77,13 @@ export async function listNotificationsForAuthenticatedUser(
   account: Account,
   settings: SettingsState,
 ): Promise<ListNotificationsForAuthenticatedUserResponse> {
+  if (isForgeGitea(account.forge)) {
+    return listGiteaNotificationsForAuthenticatedUser(
+      account,
+      settings,
+    ) as unknown as ListNotificationsForAuthenticatedUserResponse;
+  }
+
   const octokit = await createOctokitClient(account, 'rest');
 
   if (settings.fetchAllNotifications) {
@@ -98,6 +125,11 @@ export async function markNotificationThreadAsRead(
   account: Account,
   threadId: string,
 ): Promise<MarkNotificationThreadAsReadResponse> {
+  if (isForgeGitea(account.forge)) {
+    await patchGiteaNotificationThread(account, threadId, 'read');
+    return;
+  }
+
   const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.markThreadAsRead({
@@ -119,6 +151,11 @@ export async function markNotificationThreadAsDone(
   account: Account,
   threadId: string,
 ): Promise<MarkNotificationThreadAsDoneResponse> {
+  if (isForgeGitea(account.forge)) {
+    await patchGiteaNotificationThread(account, threadId, 'read');
+    return;
+  }
+
   const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.markThreadAsDone({
@@ -137,6 +174,12 @@ export async function ignoreNotificationThreadSubscription(
   account: Account,
   threadId: string,
 ): Promise<IgnoreNotificationThreadSubscriptionResponse> {
+  if (isForgeGitea(account.forge)) {
+    throw new Error(
+      'Ignoring thread subscriptions is not supported for Gitea accounts.',
+    );
+  }
+
   const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.setThreadSubscription({
@@ -200,6 +243,10 @@ async function followUrl<TResult>(
   account: Account,
   url: Link,
 ): Promise<TResult> {
+  if (isForgeGitea(account.forge)) {
+    return giteaGetJson<TResult>(account, url);
+  }
+
   const octokit = await createOctokitClient(account, 'rest');
 
   // Perform a generic GET request using Octokit's request method and cast the response type
@@ -294,6 +341,10 @@ export async function fetchNotificationDetailsForList(
   >();
 
   if (!notifications.length) {
+    return results;
+  }
+
+  if (isForgeGitea(notifications[0].account.forge)) {
     return results;
   }
 

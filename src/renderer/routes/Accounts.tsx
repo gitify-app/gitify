@@ -7,6 +7,7 @@ import {
   MarkGithubIcon,
   PersonAddIcon,
   PersonIcon,
+  ServerIcon,
   ShieldCheckIcon,
   SignOutIcon,
   StarFillIcon,
@@ -110,6 +111,13 @@ export const AccountsRoute: FC = () => {
 
   const loginWithPersonalAccessToken = () => {
     return navigate('/login-personal-access-token', { replace: true });
+  };
+
+  const loginWithGiteaPersonalAccessToken = () => {
+    return navigate('/login-personal-access-token', {
+      replace: true,
+      state: { forge: 'gitea' as const },
+    });
   };
 
   const loginWithOAuthApp = () => {
@@ -344,7 +352,17 @@ export const AccountsRoute: FC = () => {
                 <ActionList.LeadingVisual>
                   <KeyIcon />
                 </ActionList.LeadingVisual>
-                Login with Personal Access Token
+                GitHub (Personal Access Token)
+              </ActionList.Item>
+
+              <ActionList.Item
+                data-testid="account-add-gitea-pat"
+                onSelect={() => loginWithGiteaPersonalAccessToken()}
+              >
+                <ActionList.LeadingVisual>
+                  <ServerIcon />
+                </ActionList.LeadingVisual>
+                Gitea (Personal Access Token)
               </ActionList.Item>
 
               <ActionList.Item
@@ -354,7 +372,7 @@ export const AccountsRoute: FC = () => {
                 <ActionList.LeadingVisual>
                   <PersonIcon />
                 </ActionList.LeadingVisual>
-                Login with OAuth App
+                GitHub (OAuth App)
               </ActionList.Item>
             </ActionList>
           </ActionMenu.Overlay>
