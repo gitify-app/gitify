@@ -22,6 +22,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-label="Open Issue"
           class="octicon octicon-issue-opened text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -220,6 +221,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-check text-gitify-icon-open"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -273,6 +275,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-file-diff text-gitify-icon-closed"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -332,6 +335,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-read"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -361,6 +365,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-check"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -390,6 +395,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-bell-slash"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -431,6 +437,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-label="Open Issue"
           class="octicon octicon-issue-opened text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -575,6 +582,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-check text-gitify-icon-open"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -628,6 +636,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-file-diff text-gitify-icon-closed"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -687,6 +696,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-read"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -716,6 +726,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-check"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -745,6 +756,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-bell-slash"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -786,6 +798,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-label="Open Issue"
           class="octicon octicon-issue-opened text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -930,6 +943,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-check text-gitify-icon-open"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -983,6 +997,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-file-diff text-gitify-icon-closed"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1042,6 +1057,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-read"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1071,6 +1087,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-check"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1100,6 +1117,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-bell-slash"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1141,6 +1159,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-label="Open Issue"
           class="octicon octicon-issue-opened text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -1285,6 +1304,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-check text-gitify-icon-open"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1338,6 +1358,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-file-diff text-gitify-icon-closed"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1397,6 +1418,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <svg
           aria-hidden="true"
           class="octicon octicon-bell-slash"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

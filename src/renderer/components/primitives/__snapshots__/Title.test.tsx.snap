@@ -19,6 +19,7 @@ exports[`renderer/routes/components/primitives/Title.tsx > should render the tit
         <svg
           aria-hidden="true"
           class="octicon octicon-person-fill"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -62,6 +63,7 @@ exports[`renderer/routes/components/primitives/Title.tsx > should render the tit
         <svg
           aria-hidden="true"
           class="octicon octicon-person-fill"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
