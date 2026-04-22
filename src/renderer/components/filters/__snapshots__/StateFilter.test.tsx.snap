@@ -22,6 +22,7 @@ exports[`renderer/components/filters/StateFilter.tsx > should render itself & it
           <svg
             aria-hidden="true"
             class="octicon octicon-issue-opened"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -55,6 +56,7 @@ exports[`renderer/components/filters/StateFilter.tsx > should render itself & it
             <svg
               aria-hidden="true"
               class="octicon octicon-question text-gitify-tooltip-icon"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -114,6 +116,7 @@ exports[`renderer/components/filters/StateFilter.tsx > should render itself & it
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -221,6 +224,7 @@ exports[`renderer/components/filters/StateFilter.tsx > should render itself & it
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -274,6 +278,7 @@ exports[`renderer/components/filters/StateFilter.tsx > should render itself & it
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"

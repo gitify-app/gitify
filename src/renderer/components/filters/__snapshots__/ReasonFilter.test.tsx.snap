@@ -22,6 +22,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-note"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -52,6 +53,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
             <svg
               aria-hidden="true"
               class="octicon octicon-question text-gitify-tooltip-icon"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -111,6 +113,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -164,6 +167,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -217,6 +221,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -270,6 +275,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -323,6 +329,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -376,6 +383,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -429,6 +437,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -482,6 +491,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -535,6 +545,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -588,6 +599,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -641,6 +653,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -694,6 +707,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -747,6 +761,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -800,6 +815,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -853,6 +869,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           <svg
             aria-hidden="true"
             class="octicon octicon-question text-gitify-tooltip-icon"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"

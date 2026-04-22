@@ -27,6 +27,7 @@ exports[`renderer/components/primitives/Header.tsx > should render itself & its 
         <svg
           aria-hidden="true"
           class="octicon octicon-arrow-left"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -58,6 +59,7 @@ exports[`renderer/components/primitives/Header.tsx > should render itself & its 
             <svg
               aria-hidden="true"
               class="octicon octicon-mark-github"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"

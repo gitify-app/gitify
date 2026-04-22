@@ -19,6 +19,7 @@ exports[`renderer/components/primitives/HoverButton.tsx > should render 1`] = `
     <svg
       aria-hidden="true"
       class="octicon octicon-mark-github"
+      data-component="Octicon"
       display="inline-block"
       fill="currentColor"
       focusable="false"

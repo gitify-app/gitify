@@ -15,6 +15,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
     <svg
       aria-hidden="true"
       class="octicon octicon-feed-person"
+      data-component="Octicon"
       display="inline-block"
       fill="currentColor"
       focusable="false"
@@ -55,6 +56,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
     <svg
       aria-hidden="true"
       class="octicon octicon-mark-github"
+      data-component="Octicon"
       display="inline-block"
       fill="currentColor"
       focusable="false"
@@ -94,6 +96,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
   <svg
     aria-hidden="true"
     class="octicon octicon-feed-person"
+    data-component="Octicon"
     display="inline-block"
     fill="currentColor"
     focusable="false"
@@ -132,6 +135,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
   <svg
     aria-hidden="true"
     class="octicon octicon-mark-github"
+    data-component="Octicon"
     display="inline-block"
     fill="currentColor"
     focusable="false"
