@@ -1,3 +1,5 @@
+import { DEFAULT_SOUND_ID } from '../../shared/sounds';
+
 import { Constants } from '../constants';
 
 import {
@@ -9,11 +11,20 @@ import {
   type NotificationSettingsState,
   OpenPreference,
   type Percentage,
+  type ReasonSoundMap,
   type SettingsState,
   type SystemSettingsState,
   Theme,
   type TraySettingsState,
 } from '../types';
+
+const defaultReasonSounds: ReasonSoundMap = {
+  assign: 'youre-the-last-one',
+  review_requested: 'youre-the-last-one',
+  review_approved: 'approved',
+  review_changes_requested: 'changes-requested',
+  pr_merged_assigned: 'tuturu',
+};
 
 export const defaultAuth: AuthState = {
   accounts: [],
@@ -56,6 +67,8 @@ const defaultSystemSettings: SystemSettingsState = {
   playSound: true,
   notificationVolume: 20 as Percentage,
   openAtStartup: false,
+  defaultSound: DEFAULT_SOUND_ID,
+  reasonSounds: defaultReasonSounds,
 };
 
 export const defaultSettings: SettingsState = {

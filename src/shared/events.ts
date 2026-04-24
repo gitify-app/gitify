@@ -21,6 +21,7 @@ export const EVENTS = {
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
+  NOTIFICATION_SOUND_PATH_BY_ID: `${P}notification-sound-path-by-id`,
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
   UPDATE_THEME: `${P}update-theme`,

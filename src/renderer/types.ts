@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { VariantType } from '@primer/react/dist/Button/types';
 
+import type { SoundChoice } from '../shared/sounds';
+
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
 import type {
@@ -68,6 +70,7 @@ export type SettingsValue =
   | GroupBy
   | OpenPreference
   | Percentage
+  | ReasonSoundMap
   | Theme;
 
 /**
@@ -128,7 +131,26 @@ export interface SystemSettingsState {
   playSound: boolean;
   notificationVolume: Percentage;
   openAtStartup: boolean;
+  /** Sound played when no per-reason override is set. */
+  defaultSound: SoundChoice;
+  /** Per-reason overrides; missing entries fall back to `defaultSound`. */
+  reasonSounds: ReasonSoundMap;
 }
+
+/**
+ * Synthetic events derived from a notification's enriched subject (state +
+ * reviews) when the raw `Reason` does not carry the information we want to
+ * key sounds off — e.g. distinguishing an APPROVED review from a
+ * CHANGES_REQUESTED review on a PR you authored.
+ */
+export type SyntheticSoundEvent =
+  | 'review_approved'
+  | 'review_changes_requested'
+  | 'pr_merged_assigned';
+
+export type SoundEvent = Reason | SyntheticSoundEvent;
+
+export type ReasonSoundMap = Partial<Record<SoundEvent, SoundChoice>>;
 
 export interface AuthState {
   accounts: Account[];

@@ -6,6 +6,7 @@ import type {
 } from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
+import type { SoundId } from '../shared/sounds';
 
 import {
   invokeMainEvent,
@@ -118,6 +119,15 @@ export const api = {
    * @returns A promise resolving to the sound file path.
    */
   notificationSoundPath: () => invokeMainEvent(EVENTS.NOTIFICATION_SOUND_PATH),
+
+  /**
+   * Resolve the absolute file path of a bundled notification sound by id.
+   * Falls back to the default sound when the id is unknown.
+   *
+   * @param id - The sound id from `AVAILABLE_SOUNDS`.
+   */
+  notificationSoundPathById: (id: SoundId) =>
+    invokeMainEvent(EVENTS.NOTIFICATION_SOUND_PATH_BY_ID, id),
 
   /**
    * Resolve the absolute directory path of the bundled Twemoji assets.

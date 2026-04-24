@@ -3,6 +3,7 @@ import { type FC, useEffect, useRef, useState } from 'react';
 import {
   DeviceDesktopIcon,
   PencilIcon,
+  PlayIcon,
   SyncIcon,
 } from '@primer/octicons-react';
 import {
@@ -15,6 +16,11 @@ import {
 } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
+import {
+  AVAILABLE_SOUNDS,
+  NO_SOUND,
+  type SoundChoice,
+} from '../../../shared/sounds';
 
 import { defaultSettings } from '../../context/defaults';
 import { useAppContext } from '../../hooks/useAppContext';
@@ -23,8 +29,15 @@ import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
-import { OpenPreference } from '../../types';
+import {
+  OpenPreference,
+  type Percentage,
+  type ReasonSoundMap,
+  type SoundEvent,
+} from '../../types';
 
+import { REASON_TYPE_DETAILS } from '../../utils/notifications/reason';
+import { raiseSoundNotification } from '../../utils/system/audio';
 import {
   formatAcceleratorForDisplay,
   keyboardEventToAccelerator,
@@ -38,6 +51,24 @@ import {
 } from '../../utils/ui/volume';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
+
+const SYNTHETIC_SOUND_EVENT_LABELS: Record<
+  Exclude<SoundEvent, keyof typeof REASON_TYPE_DETAILS>,
+  string
+> = {
+  pr_merged_assigned: 'Pull request merged',
+  review_approved: 'PR I authored was approved',
+  review_changes_requested: 'PR I authored: changes requested',
+};
+
+function getSoundEventLabel(event: SoundEvent): string {
+  if (event in REASON_TYPE_DETAILS) {
+    return REASON_TYPE_DETAILS[event as keyof typeof REASON_TYPE_DETAILS].title;
+  }
+  return SYNTHETIC_SOUND_EVENT_LABELS[
+    event as keyof typeof SYNTHETIC_SOUND_EVENT_LABELS
+  ];
+}
 
 export const SystemSettings: FC = () => {
   const {
@@ -360,6 +391,21 @@ export const SystemSettings: FC = () => {
           </ButtonGroup>
         </Stack>
 
+        {settings.playSound && (
+          <PerReasonSoundPanel
+            defaultSound={settings.defaultSound}
+            notificationVolume={settings.notificationVolume}
+            onChangeDefault={(value) => updateSetting('defaultSound', value)}
+            onChangeReasonSounds={(value) =>
+              updateSetting('reasonSounds', value)
+            }
+            onResetReasonSounds={() =>
+              updateSetting('reasonSounds', defaultSettings.reasonSounds)
+            }
+            reasonSounds={settings.reasonSounds}
+          />
+        )}
+
         <Checkbox
           checked={settings.openAtStartup}
           label="Open at startup"
@@ -374,5 +420,149 @@ export const SystemSettings: FC = () => {
         />
       </Stack>
     </fieldset>
+  );
+};
+
+interface PerReasonSoundPanelProps {
+  defaultSound: SoundChoice;
+  reasonSounds: ReasonSoundMap;
+  notificationVolume: Percentage;
+  onChangeDefault: (value: SoundChoice) => void;
+  onChangeReasonSounds: (value: ReasonSoundMap) => void;
+  onResetReasonSounds: () => void;
+}
+
+const DEFAULT_OPTION_VALUE = '__default__';
+
+/**
+ * Per-reason sound override panel. Kept collapsed by default to avoid
+ * overwhelming the settings view.
+ */
+const PerReasonSoundPanel: FC<PerReasonSoundPanelProps> = ({
+  defaultSound,
+  reasonSounds,
+  notificationVolume,
+  onChangeDefault,
+  onChangeReasonSounds,
+  onResetReasonSounds,
+}) => {
+  const events: SoundEvent[] = [
+    'pr_merged_assigned',
+    'review_approved',
+    'review_changes_requested',
+    ...(Object.keys(REASON_TYPE_DETAILS) as SoundEvent[]),
+  ];
+
+  const setEvent = (event: SoundEvent, rawValue: string) => {
+    const next: ReasonSoundMap = { ...reasonSounds };
+    if (rawValue === DEFAULT_OPTION_VALUE) {
+      delete next[event];
+    } else {
+      next[event] = rawValue as SoundChoice;
+    }
+    onChangeReasonSounds(next);
+  };
+
+  const preview = (choice: SoundChoice) => {
+    raiseSoundNotification(notificationVolume, choice);
+  };
+
+  return (
+    <details
+      className="ml-2 mt-1 text-sm"
+      data-testid="settings-per-reason-sounds"
+    >
+      <summary className="cursor-pointer select-none">
+        Per-notification sounds
+      </summary>
+      <Stack className="mt-2 ml-2" direction="vertical" gap="condensed">
+        <PerReasonSoundRow
+          data-testid="settings-sound-default"
+          label="Default (any other reason)"
+          onChange={(value) => onChangeDefault(value as SoundChoice)}
+          onPreview={() => preview(defaultSound)}
+          value={defaultSound}
+        />
+
+        {events.map((event) => {
+          const override = reasonSounds[event];
+          const effective: SoundChoice = override ?? defaultSound;
+          return (
+            <PerReasonSoundRow
+              data-testid={`settings-sound-${event}`}
+              includeDefaultOption
+              key={event}
+              label={getSoundEventLabel(event)}
+              onChange={(value) => setEvent(event, value)}
+              onPreview={() => preview(effective)}
+              value={override ?? DEFAULT_OPTION_VALUE}
+            />
+          );
+        })}
+
+        <Button
+          data-testid="settings-sound-reset"
+          onClick={onResetReasonSounds}
+          size="small"
+          variant="invisible"
+        >
+          Reset all to defaults
+        </Button>
+      </Stack>
+    </details>
+  );
+};
+
+interface PerReasonSoundRowProps {
+  'data-testid': string;
+  label: string;
+  value: string;
+  includeDefaultOption?: boolean;
+  onChange: (value: string) => void;
+  onPreview: () => void;
+}
+
+const PerReasonSoundRow: FC<PerReasonSoundRowProps> = ({
+  'data-testid': testId,
+  label,
+  value,
+  includeDefaultOption = false,
+  onChange,
+  onPreview,
+}) => {
+  return (
+    <Stack
+      align="center"
+      className="text-sm"
+      direction="horizontal"
+      gap="condensed"
+    >
+      <Text className="w-44 truncate">{label}</Text>
+      <select
+        aria-label={`Sound for ${label}`}
+        className="px-1 py-0.5 rounded border"
+        data-testid={testId}
+        onChange={(evt) => onChange(evt.target.value)}
+        value={value}
+      >
+        {includeDefaultOption && (
+          <option value={DEFAULT_OPTION_VALUE}>Default</option>
+        )}
+        {AVAILABLE_SOUNDS.map((sound) => (
+          <option key={sound.id} value={sound.id}>
+            {sound.label}
+          </option>
+        ))}
+        <option value={NO_SOUND}>No sound</option>
+      </select>
+      <IconButton
+        aria-label={`Preview sound for ${label}`}
+        data-testid={`${testId}-preview`}
+        icon={PlayIcon}
+        onClick={onPreview}
+        size="small"
+        unsafeDisableTooltip={true}
+      />
+    </Stack>
   );
 };

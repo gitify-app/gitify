@@ -8,6 +8,7 @@ import { defaultSettings } from '../../context/defaults';
 
 import type { KeyboardAcceleratorShortcut, Percentage } from '../../types';
 
+import * as audio from '../../utils/system/audio';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
@@ -245,6 +246,149 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
       expect(updateSettingMock).toHaveBeenCalledTimes(1);
       expect(updateSettingMock).toHaveBeenCalledWith('notificationVolume', 20);
+    });
+  });
+
+  describe('per-reason sound overrides', () => {
+    it('renders a row per reason with a preview button', async () => {
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: { ...mockSettings, playSound: true },
+      });
+
+      // Sanity-check a few rows exist.
+      expect(screen.getByTestId('settings-sound-default')).toBeInTheDocument();
+      expect(screen.getByTestId('settings-sound-mention')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('settings-sound-review_requested'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId('settings-sound-ci_activity'),
+      ).toBeInTheDocument();
+    });
+
+    it('does not render per-reason panel when playSound is off', async () => {
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: { ...mockSettings, playSound: false },
+      });
+
+      expect(
+        screen.queryByTestId('settings-per-reason-sounds'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('changing a reason select writes the override via updateSetting', async () => {
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: { ...mockSettings, playSound: true, reasonSounds: {} },
+      });
+
+      await userEvent.selectOptions(
+        screen.getByTestId('settings-sound-mention'),
+        'ping',
+      );
+
+      expect(updateSettingMock).toHaveBeenCalledWith('reasonSounds', {
+        mention: 'ping',
+      });
+    });
+
+    it('selecting "Default" removes the override for that reason', async () => {
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: {
+          ...mockSettings,
+          playSound: true,
+          reasonSounds: { mention: 'ping', ci_activity: 'glitch' },
+        },
+      });
+
+      await userEvent.selectOptions(
+        screen.getByTestId('settings-sound-mention'),
+        'Default',
+      );
+
+      expect(updateSettingMock).toHaveBeenCalledWith('reasonSounds', {
+        ci_activity: 'glitch',
+      });
+    });
+
+    it('changing the default sound writes defaultSound', async () => {
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: { ...mockSettings, playSound: true },
+      });
+
+      await userEvent.selectOptions(
+        screen.getByTestId('settings-sound-default'),
+        'bell',
+      );
+
+      expect(updateSettingMock).toHaveBeenCalledWith('defaultSound', 'bell');
+    });
+
+    it('preview button plays the chosen sound for a reason', async () => {
+      const playSpy = vi
+        .spyOn(audio, 'raiseSoundNotification')
+        .mockImplementation(vi.fn());
+
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: {
+          ...mockSettings,
+          playSound: true,
+          notificationVolume: 40 as Percentage,
+          reasonSounds: { mention: 'ping' },
+        },
+      });
+
+      await userEvent.click(
+        screen.getByTestId('settings-sound-mention-preview'),
+      );
+
+      expect(playSpy).toHaveBeenCalledWith(40, 'ping');
+    });
+
+    it('preview for an unmapped reason uses the default sound', async () => {
+      const playSpy = vi
+        .spyOn(audio, 'raiseSoundNotification')
+        .mockImplementation(vi.fn());
+
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: {
+          ...mockSettings,
+          playSound: true,
+          notificationVolume: 60 as Percentage,
+          defaultSound: 'bell',
+          reasonSounds: {},
+        },
+      });
+
+      await userEvent.click(
+        screen.getByTestId('settings-sound-comment-preview'),
+      );
+
+      expect(playSpy).toHaveBeenCalledWith(60, 'bell');
+    });
+
+    it('reset button restores reasonSounds to defaults', async () => {
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+        settings: {
+          ...mockSettings,
+          playSound: true,
+          reasonSounds: { mention: 'pop' },
+        },
+      });
+
+      await userEvent.click(screen.getByTestId('settings-sound-reset'));
+
+      expect(updateSettingMock).toHaveBeenCalledWith(
+        'reasonSounds',
+        defaultSettings.reasonSounds,
+      );
     });
   });
 

@@ -27,6 +27,7 @@ import {
   getUnreadNotificationCount,
 } from '../utils/notifications/notifications';
 import { removeNotificationsForAccount } from '../utils/notifications/remove';
+import { pickSoundEvent } from '../utils/notifications/sound-priority';
 import { getNewNotifications } from '../utils/notifications/utils';
 import { raiseSoundNotification } from '../utils/system/audio';
 import { raiseNativeNotification } from '../utils/system/native';
@@ -140,7 +141,11 @@ export const useNotifications = (): NotificationsState => {
 
         if (diffNotifications.length > 0) {
           if (state.settings?.playSound) {
-            raiseSoundNotification(state.settings.notificationVolume);
+            const winningEvent = pickSoundEvent(diffNotifications);
+            const soundId =
+              (winningEvent && state.settings.reasonSounds?.[winningEvent]) ??
+              state.settings.defaultSound;
+            raiseSoundNotification(state.settings.notificationVolume, soundId);
           }
 
           if (state.settings?.showNotifications) {

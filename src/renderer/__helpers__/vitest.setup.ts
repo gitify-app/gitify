@@ -57,6 +57,7 @@ window.gitify = {
     useUnreadActiveIcon: vi.fn(),
   },
   notificationSoundPath: vi.fn(),
+  notificationSoundPathById: vi.fn().mockResolvedValue('/mock/sound.mp3'),
   onAuthCallback: vi.fn(),
   onResetApp: vi.fn(),
   onSystemThemeUpdate: vi.fn(),

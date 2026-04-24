@@ -20,6 +20,7 @@ vi.mock('electron', () => ({
 vi.mock('../config', () => ({
   Paths: {
     notificationSound: 'file:///path/to/notification.mp3',
+    notificationSoundById: (id: string) => `file:///path/to/${id}.mp3`,
     twemojiFolder: 'file:///path/to/twemoji',
   },
 }));
@@ -52,6 +53,9 @@ describe('main/handlers/app.ts', () => {
 
       expect(registeredHandlers).toContain(EVENTS.VERSION);
       expect(registeredHandlers).toContain(EVENTS.NOTIFICATION_SOUND_PATH);
+      expect(registeredHandlers).toContain(
+        EVENTS.NOTIFICATION_SOUND_PATH_BY_ID,
+      );
       expect(registeredHandlers).toContain(EVENTS.TWEMOJI_DIRECTORY);
       expect(registeredEvents).toContain(EVENTS.WINDOW_SHOW);
       expect(registeredEvents).toContain(EVENTS.WINDOW_HIDE);

@@ -2,6 +2,7 @@ import { app } from 'electron';
 import type { Menubar } from 'menubar';
 
 import { EVENTS } from '../../shared/events';
+import type { SoundId } from '../../shared/sounds';
 
 import { Paths } from '../config';
 import { handleMainEvent, onMainEvent } from '../events';
@@ -23,6 +24,10 @@ export function registerAppHandlers(mb: Menubar): void {
   // Path handlers for renderer queries about resource locations
   handleMainEvent(EVENTS.NOTIFICATION_SOUND_PATH, () => {
     return Paths.notificationSound;
+  });
+
+  handleMainEvent<SoundId>(EVENTS.NOTIFICATION_SOUND_PATH_BY_ID, (_, id) => {
+    return Paths.notificationSoundById(id);
   });
 
   handleMainEvent(EVENTS.TWEMOJI_DIRECTORY, () => {

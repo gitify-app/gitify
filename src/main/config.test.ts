@@ -21,6 +21,13 @@ describe('main/config.ts', () => {
     expect(Paths.notificationSound).toBeDefined();
     expect(Paths.notificationSound).toContain('.mp3');
 
+    expect(Paths.notificationSoundById('ping')).toContain('ping.mp3');
+    expect(Paths.notificationSoundById('bell')).toContain('bell.mp3');
+    // Unknown id falls back to the default sound.
+    expect(Paths.notificationSoundById('bogus' as never)).toContain(
+      'tuturu_1.mp3',
+    );
+
     expect(Paths.twemojiFolder).toBeDefined();
     expect(Paths.twemojiFolder).toContain('twemoji');
   });

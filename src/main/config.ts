@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import type { BrowserWindowConstructorOptions } from 'electron';
 
 import { APPLICATION } from '../shared/constants';
+import { getSoundDefinition, type SoundId } from '../shared/sounds';
 
 import { isDevMode } from './utils';
 
@@ -27,6 +28,13 @@ export const Paths = {
         'sounds',
         APPLICATION.NOTIFICATION_SOUND,
       ),
+    ).href;
+  },
+
+  notificationSoundById(id: SoundId): string {
+    const sound = getSoundDefinition(id);
+    return pathToFileURL(
+      path.resolve(__dirname, 'assets', 'sounds', sound.filename),
     ).href;
   },
 
