@@ -30,7 +30,7 @@ describe('main/config.ts', () => {
     expect(WindowConfig.height).toBe(400);
     expect(WindowConfig.minWidth).toBe(500);
     expect(WindowConfig.minHeight).toBe(400);
-    expect(WindowConfig.resizable).toBe(false);
+    expect(WindowConfig.resizable).toBe(true);
     expect(WindowConfig.skipTaskbar).toBe(true);
     expect(WindowConfig.webPreferences).toBeDefined();
     expect(WindowConfig.webPreferences?.contextIsolation).toBe(true);

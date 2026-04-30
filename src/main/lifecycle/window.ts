@@ -38,6 +38,7 @@ export function configureWindowEvents(mb: Menubar): void {
 
   /**
    * When DevTools is closed, restore the window to its original size and position it centered on the tray icon.
+   * Keep the window resizable to allow users to adjust the size at any time.
    */
   mb.window.webContents.on('devtools-closed', () => {
     if (!mb.window) {
@@ -47,6 +48,5 @@ export function configureWindowEvents(mb: Menubar): void {
     const trayBounds = mb.tray.getBounds();
     mb.window.setSize(WindowConfig.width!, WindowConfig.height!);
     mb.positioner.move('trayCenter', trayBounds);
-    mb.window.resizable = false;
   });
 }
