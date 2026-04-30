@@ -24,6 +24,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when multiple r
         <svg
           aria-hidden="true"
           class="octicon octicon-smiley text-gitify-icon-muted"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -215,6 +216,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when one reacti
         <svg
           aria-hidden="true"
           class="octicon octicon-smiley text-gitify-icon-muted"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

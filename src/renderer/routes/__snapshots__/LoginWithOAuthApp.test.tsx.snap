@@ -31,6 +31,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
           <svg
             aria-hidden="true"
             class="octicon octicon-arrow-left"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -62,6 +63,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
               <svg
                 aria-hidden="true"
                 class="octicon octicon-person"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -176,6 +178,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-person"
+                  data-component="Octicon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -303,6 +306,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-eye"
+                  data-component="Octicon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -363,6 +367,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
               <svg
                 aria-hidden="true"
                 class="octicon octicon-book"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -418,6 +423,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-sign-in"
+                  data-component="Octicon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"

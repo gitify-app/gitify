@@ -116,6 +116,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               <svg
                 aria-hidden="true"
                 class="octicon octicon-mark-github"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -158,6 +159,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               <svg
                 aria-hidden="true"
                 class="octicon octicon-key"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -200,6 +202,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               <svg
                 aria-hidden="true"
                 class="octicon octicon-person"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"

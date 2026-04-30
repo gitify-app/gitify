@@ -105,6 +105,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-chevron-down"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -235,6 +236,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-read"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -264,6 +266,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-check"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -293,6 +296,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-chevron-down"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -361,6 +365,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
             <svg
               aria-hidden="true"
               class="octicon octicon-feed-person"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -430,6 +435,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-read"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -459,6 +465,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-check"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -488,6 +495,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-chevron-down"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -556,6 +564,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
             <svg
               aria-hidden="true"
               class="octicon octicon-feed-person"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -625,6 +634,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-read"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -654,6 +664,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-check"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -683,6 +694,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
         <svg
           aria-hidden="true"
           class="octicon octicon-chevron-down"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

@@ -24,6 +24,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
         <svg
           aria-hidden="true"
           class="octicon octicon-milestone text-gitify-icon-done"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -77,6 +78,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
         <svg
           aria-hidden="true"
           class="octicon octicon-milestone text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

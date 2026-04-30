@@ -83,6 +83,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             <svg
               aria-hidden="true"
               class="octicon octicon-check text-gitify-icon-open"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -136,6 +137,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             <svg
               aria-hidden="true"
               class="octicon octicon-file-diff text-gitify-icon-closed"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -255,6 +257,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             <svg
               aria-hidden="true"
               class="octicon octicon-check text-gitify-icon-open"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -308,6 +311,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             <svg
               aria-hidden="true"
               class="octicon octicon-file-diff text-gitify-icon-closed"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -368,6 +372,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
       <svg
         aria-hidden="true"
         class="octicon octicon-feed-person"
+        data-component="Octicon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
@@ -428,6 +433,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
             <svg
               aria-hidden="true"
               class="octicon octicon-check text-gitify-icon-open"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -481,6 +487,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
             <svg
               aria-hidden="true"
               class="octicon octicon-file-diff text-gitify-icon-closed"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -600,6 +607,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
             <svg
               aria-hidden="true"
               class="octicon octicon-check text-gitify-icon-open"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -653,6 +661,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
             <svg
               aria-hidden="true"
               class="octicon octicon-file-diff text-gitify-icon-closed"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"

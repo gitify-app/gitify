@@ -26,6 +26,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
         <svg
           aria-hidden="true"
           class="octicon octicon-check text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -79,6 +80,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
         <svg
           aria-hidden="true"
           class="octicon octicon-file-diff text-gitify-icon-closed"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

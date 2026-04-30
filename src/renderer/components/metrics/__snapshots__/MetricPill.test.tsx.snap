@@ -24,6 +24,7 @@ exports[`renderer/components/metrics/MetricPill.tsx > should render with metric 
         <svg
           aria-hidden="true"
           class="octicon octicon-mark-github text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -82,6 +83,7 @@ exports[`renderer/components/metrics/MetricPill.tsx > should render without metr
         <svg
           aria-hidden="true"
           class="octicon octicon-mark-github text-gitify-icon-open"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

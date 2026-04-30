@@ -5,6 +5,7 @@ exports[`renderer/components/icons/ScopeStatusIcon.tsx > granted state > renders
   <svg
     aria-hidden="true"
     class="octicon octicon-check-circle-fill text-gitify-success"
+    data-component="Octicon"
     display="inline-block"
     fill="currentColor"
     focusable="false"
@@ -26,6 +27,7 @@ exports[`renderer/components/icons/ScopeStatusIcon.tsx > missing state > renders
   <svg
     aria-hidden="true"
     class="octicon octicon-x-circle-fill text-gitify-danger"
+    data-component="Octicon"
     display="inline-block"
     fill="currentColor"
     focusable="false"
@@ -47,6 +49,7 @@ exports[`renderer/components/icons/ScopeStatusIcon.tsx > notApplicable state > r
   <svg
     aria-hidden="true"
     class="octicon octicon-dash opacity-30"
+    data-component="Octicon"
     display="inline-block"
     fill="currentColor"
     focusable="false"
@@ -68,6 +71,7 @@ exports[`renderer/components/icons/ScopeStatusIcon.tsx > size prop > renders cor
   <svg
     aria-hidden="true"
     class="octicon octicon-check-circle-fill text-gitify-success"
+    data-component="Octicon"
     display="inline-block"
     fill="currentColor"
     focusable="false"

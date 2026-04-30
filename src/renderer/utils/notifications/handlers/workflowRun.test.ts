@@ -22,7 +22,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         state: 'WAITING',
         user: undefined,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=is%3AWAITING',
+          'https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting',
       });
     });
 
@@ -68,20 +68,41 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     );
   });
 
-  it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+  describe('defaultUrl', () => {
+    it('unknown workflow attributes', () => {
+      const mockHtmlUrl =
+        'https://github.com/gitify-app/notifications-test' as Link;
 
-    expect(
-      workflowRunHandler.defaultUrl({
-        subject: {
-          title: 'Some notification',
-        },
-        repository: {
-          htmlUrl: mockHtmlUrl,
-        },
-      } as GitifyNotification),
-    ).toEqual(`${mockHtmlUrl}/actions`);
+      expect(
+        workflowRunHandler.defaultUrl({
+          subject: {
+            title: 'Some notification',
+            type: 'WorkflowRun',
+          },
+          repository: {
+            htmlUrl: mockHtmlUrl,
+          },
+        } as GitifyNotification),
+      ).toEqual(`${mockHtmlUrl}/actions`);
+    });
+
+    it('workflow attributes', () => {
+      const mockHtmlUrl =
+        'https://github.com/gitify-app/notifications-test' as Link;
+
+      expect(
+        workflowRunHandler.defaultUrl({
+          subject: {
+            title: 'someone requested your review to deploy to an environment',
+            type: 'WorkflowRun',
+            state: 'WAITING',
+          },
+          repository: {
+            htmlUrl: mockHtmlUrl,
+          },
+        } as GitifyNotification),
+      ).toEqual(`${mockHtmlUrl}/actions?query=is%3Awaiting`);
+    });
   });
 
   describe('getWorkflowRunAttributes', () => {

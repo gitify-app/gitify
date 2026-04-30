@@ -24,6 +24,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with 1 comment 1
         <svg
           aria-hidden="true"
           class="octicon octicon-comment text-gitify-icon-muted"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -82,6 +83,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with multiple co
         <svg
           aria-hidden="true"
           class="octicon octicon-comment text-gitify-icon-muted"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

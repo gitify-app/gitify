@@ -30,6 +30,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <svg
           aria-hidden="true"
           class="octicon octicon-arrow-left"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"
@@ -61,6 +62,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <svg
               aria-hidden="true"
               class="octicon octicon-gear"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -114,6 +116,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-paintbrush"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -268,6 +271,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -316,6 +320,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-zoom-out"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -375,6 +380,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-zoom-in"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -408,6 +414,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-sync"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -458,6 +465,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -493,6 +501,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-bell"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -599,6 +608,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -690,6 +700,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -738,6 +749,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-dash"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -793,6 +805,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-plus"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -823,6 +836,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-sync"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -874,6 +888,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -923,6 +938,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -951,6 +967,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <svg
               aria-hidden="true"
               class="octicon octicon-alert-fill text-gitify-warning"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"
@@ -1040,6 +1057,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-question text-gitify-tooltip-icon"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1089,6 +1107,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-question text-gitify-tooltip-icon"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1139,6 +1158,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1187,6 +1207,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1235,6 +1256,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1283,6 +1305,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1331,6 +1354,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1366,6 +1390,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-devices"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1433,6 +1458,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1482,6 +1508,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1530,6 +1557,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1565,6 +1593,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-device-desktop"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1671,6 +1700,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -1729,6 +1759,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-question text-gitify-tooltip-icon"
+                  data-component="Octicon"
                   display="inline-block"
                   fill="currentColor"
                   focusable="false"
@@ -1763,6 +1794,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-pencil"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1823,6 +1855,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-sync"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -1874,6 +1907,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -2032,6 +2066,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <svg
                     aria-hidden="true"
                     class="octicon octicon-sync"
+                    data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
                     focusable="false"
@@ -2082,6 +2117,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <svg
                 aria-hidden="true"
                 class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
                 display="inline-block"
                 fill="currentColor"
                 focusable="false"
@@ -2211,6 +2247,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <svg
             aria-hidden="true"
             class="octicon octicon-person"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -2286,6 +2323,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <svg
             aria-hidden="true"
             class="octicon octicon-x-circle"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"

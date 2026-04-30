@@ -24,6 +24,7 @@ exports[`renderer/components/metrics/LabelsPill.tsx > renders with labels 1`] = 
         <svg
           aria-hidden="true"
           class="octicon octicon-tag text-gitify-icon-muted"
+          data-component="Octicon"
           display="inline-block"
           fill="currentColor"
           focusable="false"

@@ -27,7 +27,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         state: 'CANCELLED',
         user: undefined,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ACANCELLED+branch%3Amain',
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Acancelled+branch%3Amain',
       });
     });
 
@@ -46,7 +46,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         state: 'FAILURE',
         user: undefined,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain',
       });
     });
 
@@ -65,7 +65,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         state: 'FAILURE',
         user: undefined,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain',
       });
     });
 
@@ -84,7 +84,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         state: 'FAILURE',
         user: undefined,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3AFAILURE+branch%3Amain',
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain',
       });
     });
 
@@ -103,7 +103,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         state: 'SKIPPED',
         user: undefined,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASKIPPED+branch%3Amain',
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain',
       });
     });
 
@@ -122,7 +122,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         state: 'SUCCESS',
         user: undefined,
         htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3ASUCCESS+branch%3Amain',
+          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain',
       });
     });
 
@@ -219,20 +219,43 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
   });
 
-  it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+  describe('defaultUrl', () => {
+    it('unknown checksuite attributes', () => {
+      const mockHtmlUrl =
+        'https://github.com/gitify-app/notifications-test' as Link;
 
-    expect(
-      checkSuiteHandler.defaultUrl({
-        subject: {
-          title: 'Some notification',
-        },
-        repository: {
-          htmlUrl: mockHtmlUrl,
-        },
-      } as GitifyNotification),
-    ).toEqual(`${mockHtmlUrl}/actions`);
+      expect(
+        checkSuiteHandler.defaultUrl({
+          subject: {
+            title: 'Some notification',
+            type: 'CheckSuite',
+          },
+          repository: {
+            htmlUrl: mockHtmlUrl,
+          },
+        } as GitifyNotification),
+      ).toEqual(`${mockHtmlUrl}/actions`);
+    });
+
+    it('checksuite attributes', () => {
+      const mockHtmlUrl =
+        'https://github.com/gitify-app/notifications-test' as Link;
+
+      expect(
+        checkSuiteHandler.defaultUrl({
+          subject: {
+            title: 'Lint workflow run failed for main branch',
+            type: 'CheckSuite',
+            state: 'FAILURE',
+          },
+          repository: {
+            htmlUrl: mockHtmlUrl,
+          },
+        } as GitifyNotification),
+      ).toEqual(
+        `${mockHtmlUrl}/actions?query=workflow%3A%22Lint%22+is%3Afailure+branch%3Amain`,
+      );
+    });
   });
 
   describe('getCheckSuiteState', () => {

@@ -22,6 +22,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           <svg
             aria-hidden="true"
             class="octicon octicon-bell"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -52,6 +53,7 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
             <svg
               aria-hidden="true"
               class="octicon octicon-question text-gitify-tooltip-icon"
+              data-component="Octicon"
               display="inline-block"
               fill="currentColor"
               focusable="false"

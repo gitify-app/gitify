@@ -147,6 +147,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <svg
             aria-hidden="true"
             class="octicon octicon-bell"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -222,6 +223,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <svg
             aria-hidden="true"
             class="octicon octicon-eye"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -297,6 +299,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <svg
             aria-hidden="true"
             class="octicon octicon-filter"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -371,6 +374,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <svg
             aria-hidden="true"
             class="octicon octicon-issue-opened"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -447,6 +451,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <svg
             aria-hidden="true"
             class="octicon octicon-git-pull-request"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -531,6 +536,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <svg
             aria-hidden="true"
             class="octicon octicon-sync"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"
@@ -606,6 +612,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <svg
             aria-hidden="true"
             class="octicon octicon-gear"
+            data-component="Octicon"
             display="inline-block"
             fill="currentColor"
             focusable="false"

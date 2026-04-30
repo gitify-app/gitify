@@ -128,7 +128,7 @@ function getCheckSuiteStatus(
   }
 }
 
-export function getCheckSuiteUrl(notification: GitifyNotification): Link {
+function getCheckSuiteUrl(notification: GitifyNotification): Link {
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -140,7 +140,7 @@ export function getCheckSuiteUrl(notification: GitifyNotification): Link {
   }
 
   if (checkSuiteAttributes?.status) {
-    filters.push(`is:${checkSuiteAttributes.status}`);
+    filters.push(`is:${checkSuiteAttributes.status.toLowerCase()}`);
   }
 
   if (checkSuiteAttributes?.branchName) {

@@ -85,13 +85,13 @@ function getWorkflowRunStatus(
   }
 }
 
-export function getWorkflowRunUrl(notification: GitifyNotification): Link {
+function getWorkflowRunUrl(notification: GitifyNotification): Link {
   const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
 
   if (workflowRunAttributes?.status) {
-    filters.push(`is:${workflowRunAttributes.status}`);
+    filters.push(`is:${workflowRunAttributes.status.toLowerCase()}`);
   }
 
   return actionsURL(notification.repository.htmlUrl, filters);

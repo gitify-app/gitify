@@ -132,6 +132,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - tooltip 1`] =
       <svg
         aria-hidden="true"
         class="octicon octicon-question text-gitify-tooltip-icon"
+        data-component="Octicon"
         display="inline-block"
         fill="currentColor"
         focusable="false"
