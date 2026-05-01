@@ -12,6 +12,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -249,6 +250,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -486,6 +488,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -701,6 +704,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="e"
         id="_r_8_"
         popover="auto"
@@ -903,6 +907,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_9_"
               popover="auto"
@@ -957,6 +962,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_a_"
               popover="auto"
@@ -1111,6 +1117,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="e"
         id="_r_e_"
         popover="auto"
@@ -1387,6 +1394,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -1578,6 +1586,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -1810,6 +1819,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should tog
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"

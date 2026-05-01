@@ -226,6 +226,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               <span
                 class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                 data-block="true"
+                data-component="TextInputWithTokens"
                 data-size="small"
               >
                 <div
@@ -238,6 +239,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
                     <input
                       aria-invalid="false"
                       class="prc-TextInputWithTokens-UnstyledTextInput-XwhBc prc-components-Input-IwWrt"
+                      data-component="TextInputWithTokens.Input"
                       tabindex="0"
                       title="Include searches"
                       type="text"
@@ -299,6 +301,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               <span
                 class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                 data-block="true"
+                data-component="TextInputWithTokens"
                 data-size="small"
               >
                 <div
@@ -311,6 +314,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
                     <input
                       aria-invalid="false"
                       class="prc-TextInputWithTokens-UnstyledTextInput-XwhBc prc-components-Input-IwWrt"
+                      data-component="TextInputWithTokens.Input"
                       tabindex="0"
                       title="Exclude searches"
                       type="text"
@@ -2092,6 +2096,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
       <button
         aria-describedby="_r_1j_"
         class="prc-Button-ButtonBase-9n-Xk"
+        data-component="Button"
         data-loading="false"
         data-size="medium"
         data-testid="filters-clear"
@@ -2136,6 +2141,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="n"
         id="_r_1j_"
         popover="auto"

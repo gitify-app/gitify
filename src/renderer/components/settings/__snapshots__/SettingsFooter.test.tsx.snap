@@ -4,6 +4,7 @@ exports[`renderer/components/settings/SettingsFooter.tsx > should show app versi
 <button
   aria-describedby="_r_0_"
   class="prc-Button-ButtonBase-9n-Xk"
+  data-component="Button"
   data-loading="false"
   data-no-visuals="true"
   data-size="medium"

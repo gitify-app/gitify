@@ -123,6 +123,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
             aria-busy="false"
             class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
             data-block="true"
+            data-component="TextInput"
           >
             <input
               aria-describedby="_r_1_-caption"
@@ -169,6 +170,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
           >
             <button
               class="prc-Button-ButtonBase-9n-Xk"
+              data-component="Button"
               data-loading="false"
               data-size="small"
               data-testid="login-create-token"
@@ -234,6 +236,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="se"
               id="_r_8_"
               popover="auto"
@@ -269,6 +272,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
             aria-busy="false"
             class="border-red-600 TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
             data-block="true"
+            data-component="TextInput"
             data-trailing-action="true"
           >
             <input
@@ -285,6 +289,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
             />
             <span
               class="TextInput-action prc-components-TextInputAction-CjGDX"
+              data-component="TextInput.Action"
             >
               <button
                 aria-labelledby="_r_f_"
@@ -317,6 +322,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
               <span
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
+                data-component="Tooltip"
                 data-direction="s"
                 id="_r_f_"
                 popover="auto"
@@ -342,6 +348,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
         <button
           aria-describedby="_r_h_"
           class="prc-Button-ButtonBase-9n-Xk"
+          data-component="Button"
           data-loading="false"
           data-size="small"
           data-testid="login-docs"
@@ -386,6 +393,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="ne"
           id="_r_h_"
           popover="auto"
@@ -398,6 +406,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
         >
           <button
             class="prc-Button-ButtonBase-9n-Xk"
+            data-component="Button"
             data-loading="false"
             data-size="medium"
             data-testid="login-submit"

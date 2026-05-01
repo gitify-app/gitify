@@ -12,6 +12,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -143,6 +144,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -334,6 +336,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"
@@ -533,6 +536,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   >
     <button
       class="prc-Button-ButtonBase-9n-Xk"
+      data-component="Button"
       data-has-count="true"
       data-loading="false"
       data-no-visuals="true"

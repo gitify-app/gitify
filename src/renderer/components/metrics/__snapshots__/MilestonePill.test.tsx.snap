@@ -44,6 +44,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_1_"
     popover="auto"
@@ -98,6 +99,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_0_"
     popover="auto"

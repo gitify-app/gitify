@@ -49,6 +49,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when multiple r
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_1_"
     popover="auto"
@@ -241,6 +242,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when one reacti
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_0_"
     popover="auto"

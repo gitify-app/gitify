@@ -44,6 +44,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="e"
         id="_r_0_"
         popover="auto"
@@ -246,6 +247,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_1_"
               popover="auto"
@@ -300,6 +302,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_2_"
               popover="auto"
@@ -459,6 +462,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="e"
         id="_r_6_"
         popover="auto"
@@ -607,6 +611,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_7_"
               popover="auto"
@@ -661,6 +666,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_8_"
               popover="auto"
@@ -820,6 +826,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="e"
         id="_r_c_"
         popover="auto"
@@ -968,6 +975,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_d_"
               popover="auto"
@@ -1022,6 +1030,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_e_"
               popover="auto"
@@ -1181,6 +1190,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="e"
         id="_r_i_"
         popover="auto"
@@ -1329,6 +1339,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_j_"
               popover="auto"
@@ -1383,6 +1394,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <span
               aria-hidden="true"
               class="prc-TooltipV2-Tooltip-tLeuB"
+              data-component="Tooltip"
               data-direction="s"
               id="_r_k_"
               popover="auto"

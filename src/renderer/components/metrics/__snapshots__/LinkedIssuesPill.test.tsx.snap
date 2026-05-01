@@ -52,6 +52,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_1_"
     popover="auto"
@@ -114,6 +115,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_0_"
     popover="auto"
