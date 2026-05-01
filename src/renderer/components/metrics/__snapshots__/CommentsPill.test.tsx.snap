@@ -49,6 +49,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with 1 comment 1
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_0_"
     popover="auto"
@@ -108,6 +109,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with multiple co
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_1_"
     popover="auto"

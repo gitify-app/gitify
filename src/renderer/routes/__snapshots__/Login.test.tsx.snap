@@ -98,6 +98,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         </span>
         <button
           class="prc-Button-ButtonBase-9n-Xk"
+          data-component="Button"
           data-loading="false"
           data-size="medium"
           data-testid="login-github"
@@ -141,6 +142,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         </button>
         <button
           class="prc-Button-ButtonBase-9n-Xk"
+          data-component="Button"
           data-loading="false"
           data-size="medium"
           data-testid="login-pat"
@@ -184,6 +186,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         </button>
         <button
           class="prc-Button-ButtonBase-9n-Xk"
+          data-component="Button"
           data-loading="false"
           data-size="medium"
           data-testid="login-oauth-app"

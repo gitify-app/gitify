@@ -89,6 +89,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
           role="tooltip"
@@ -108,6 +109,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -165,6 +167,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
           role="tooltip"
@@ -184,6 +187,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -241,6 +245,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
           role="tooltip"
@@ -260,6 +265,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -317,6 +323,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
           role="tooltip"
@@ -336,6 +343,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -395,6 +403,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
         >
@@ -413,6 +422,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -469,6 +479,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
         >
@@ -487,6 +498,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -554,6 +566,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
           role="tooltip"
@@ -573,6 +586,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -630,6 +644,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="e"
           popover="auto"
           role="tooltip"
@@ -649,6 +664,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"

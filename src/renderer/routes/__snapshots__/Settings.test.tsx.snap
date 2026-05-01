@@ -164,6 +164,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </label>
             <span
               class="prc-Select-TextInputWrapper-5NYFF prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+              data-component="TextInput"
             >
               <select
                 aria-invalid="false"
@@ -343,6 +344,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-label="Zoom percentage"
                   class="prc-Button-ButtonBase-9n-Xk"
+                  data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
@@ -769,6 +771,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-label="Fetch interval"
                   class="prc-Button-ButtonBase-9n-Xk"
+                  data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
@@ -1814,6 +1817,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-label="Global shortcut"
                   class="prc-Button-ButtonBase-9n-Xk"
+                  data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
@@ -1998,6 +2002,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-label="Volume percentage"
                   class="prc-Button-ButtonBase-9n-Xk"
+                  data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
@@ -2145,6 +2150,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
       >
         <button
           class="prc-Button-ButtonBase-9n-Xk w-[200px]"
+          data-component="Button"
           data-loading="false"
           data-no-visuals="true"
           data-size="medium"
@@ -2190,6 +2196,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <button
           aria-describedby="_r_1p_"
           class="prc-Button-ButtonBase-9n-Xk"
+          data-component="Button"
           data-loading="false"
           data-no-visuals="true"
           data-size="medium"
@@ -2215,6 +2222,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="ne"
           id="_r_1p_"
           popover="auto"
@@ -2265,6 +2273,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="n"
           popover="auto"
           role="tooltip"
@@ -2284,6 +2293,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
@@ -2341,6 +2351,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="nw"
           popover="auto"
           role="tooltip"
@@ -2360,6 +2371,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <span
             aria-hidden="true"
             class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
+            data-component="Tooltip.KeybindingHintContainer"
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"

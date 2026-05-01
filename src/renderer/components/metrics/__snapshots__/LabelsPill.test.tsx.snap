@@ -49,6 +49,7 @@ exports[`renderer/components/metrics/LabelsPill.tsx > renders with labels 1`] = 
   <span
     aria-hidden="true"
     class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
     data-direction="s"
     id="_r_0_"
     popover="auto"

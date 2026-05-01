@@ -108,6 +108,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_2_"
         popover="auto"
@@ -162,6 +163,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_3_"
         popover="auto"
@@ -282,6 +284,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_4_"
         popover="auto"
@@ -336,6 +339,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_5_"
         popover="auto"
@@ -458,6 +462,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_6_"
         popover="auto"
@@ -512,6 +517,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_7_"
         popover="auto"
@@ -632,6 +638,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_0_"
         popover="auto"
@@ -686,6 +693,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
       <span
         aria-hidden="true"
         class="prc-TooltipV2-Tooltip-tLeuB"
+        data-component="Tooltip"
         data-direction="s"
         id="_r_1_"
         popover="auto"

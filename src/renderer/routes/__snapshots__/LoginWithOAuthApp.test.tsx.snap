@@ -123,6 +123,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
             aria-busy="false"
             class="border-gitify-textInput-default TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
             data-block="true"
+            data-component="TextInput"
           >
             <input
               aria-describedby="_r_1_-caption"
@@ -160,6 +161,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
         >
           <button
             class="prc-Button-ButtonBase-9n-Xk"
+            data-component="Button"
             data-loading="false"
             data-size="small"
             data-testid="login-create-oauth-app"
@@ -237,6 +239,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
             aria-busy="false"
             class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
             data-block="true"
+            data-component="TextInput"
           >
             <input
               aria-invalid="false"
@@ -276,6 +279,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
             aria-busy="false"
             class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
             data-block="true"
+            data-component="TextInput"
             data-trailing-action="true"
           >
             <input
@@ -292,6 +296,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
             />
             <span
               class="TextInput-action prc-components-TextInputAction-CjGDX"
+              data-component="TextInput.Action"
             >
               <button
                 aria-labelledby="_r_k_"
@@ -324,6 +329,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
               <span
                 aria-hidden="true"
                 class="prc-TooltipV2-Tooltip-tLeuB"
+                data-component="Tooltip"
                 data-direction="s"
                 id="_r_k_"
                 popover="auto"
@@ -349,6 +355,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
         <button
           aria-describedby="_r_m_"
           class="prc-Button-ButtonBase-9n-Xk"
+          data-component="Button"
           data-loading="false"
           data-size="small"
           data-testid="login-docs"
@@ -393,6 +400,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"
+          data-component="Tooltip"
           data-direction="s"
           id="_r_m_"
           popover="auto"
@@ -405,6 +413,7 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx > renders correctly 1`] = `
         >
           <button
             class="prc-Button-ButtonBase-9n-Xk"
+            data-component="Button"
             data-loading="false"
             data-size="medium"
             data-testid="login-submit"
