@@ -188,7 +188,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           {
             author: mockCommenter,
             createdAt: '2024-02-01T00:00:00Z',
-            url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
+            url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
             replies: {
               totalCount: 0,
               nodes: [],
@@ -238,14 +238,14 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           {
             author: mockCommenter,
             createdAt: '2024-01-01T00:00:00Z',
-            url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234',
+            url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
             replies: {
               totalCount: 1,
               nodes: [
                 {
                   author: mockReplier,
                   createdAt: '2024-01-01T00:00:00Z',
-                  url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789',
+                  url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789' as Link,
                   reactions: {
                     totalCount: 0,
                   },

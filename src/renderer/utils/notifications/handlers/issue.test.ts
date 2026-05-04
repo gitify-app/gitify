@@ -111,10 +111,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         nodes: [
           {
             author: mockCommenter,
-            url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234',
+            url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
             reactions: {
               totalCount: 0,
             },
+            reactionGroups: noReactionGroups,
           },
         ],
       };

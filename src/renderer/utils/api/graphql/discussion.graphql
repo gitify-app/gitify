@@ -46,7 +46,6 @@ fragment DiscussionDetails on Discussion {
 }
 
 fragment CommentFields on DiscussionComment {
-  databaseId
   createdAt
   author {
     ...AuthorFields

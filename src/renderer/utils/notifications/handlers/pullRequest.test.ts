@@ -200,10 +200,11 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         nodes: [
           {
             author: mockCommenter,
-            url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234',
+            url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234' as Link,
             reactions: {
               totalCount: 0,
             },
+            reactionGroups: noReactionGroups,
           },
         ],
       };

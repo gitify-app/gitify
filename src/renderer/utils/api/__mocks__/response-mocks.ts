@@ -100,7 +100,7 @@ export function mockIssueResponseNode(mocks: {
     title: 'PR Title',
     state: mocks.state,
     stateReason: mocks.stateReason,
-    url: 'https://github.com/gitify-app/notifications-test/issues/123',
+    url: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
     author: mockAuthor,
     labels: { nodes: [] },
     comments: { totalCount: 0, nodes: [] },
@@ -129,7 +129,7 @@ export function mockPullRequestResponseNode(mocks: {
     isDraft: mocks.isDraft ?? false,
     merged: mocks.merged ?? false,
     isInMergeQueue: mocks.isInMergeQueue ?? false,
-    url: 'https://github.com/gitify-app/notifications-test/pulls/123',
+    url: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
     author: mockAuthor,
     labels: { nodes: [] },
     comments: {
