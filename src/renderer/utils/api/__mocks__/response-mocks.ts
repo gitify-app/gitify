@@ -72,7 +72,7 @@ export function mockDiscussionResponseNode(mocks: {
     number: 123,
     title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
-    stateReason: mocks.stateReason,
+    stateReason: mocks.stateReason ?? null,
     isAnswered: mocks.isAnswered,
     author: mockAuthor,
     comments: {
@@ -99,7 +99,7 @@ export function mockIssueResponseNode(mocks: {
     number: 123,
     title: 'PR Title',
     state: mocks.state,
-    stateReason: mocks.stateReason,
+    stateReason: mocks.stateReason ?? null,
     url: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
     author: mockAuthor,
     labels: { nodes: [] },

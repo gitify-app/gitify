@@ -1,7 +1,6 @@
 import type { FragmentInfo, VariableDef } from './types';
 
 import {
-  type Exact,
   FetchMergedDetailsTemplateDocument,
   type FetchMergedDetailsTemplateQueryVariables,
 } from './generated/graphql';
@@ -102,7 +101,7 @@ export class MergeQueryBuilder {
    * Set shared (non-indexed) variables
    */
   setSharedVariables(
-    values: Exact<FetchBatchMergedTemplateNonIndexedVariables>,
+    values: FetchBatchMergedTemplateNonIndexedVariables,
   ): this {
     for (const [name, value] of Object.entries(values)) {
       this.setVariableValue(name, value as VariableValue);
@@ -115,7 +114,7 @@ export class MergeQueryBuilder {
    * @param values The values for the selection set variables/arguments.
    * @returns the computed node alias name
    */
-  addNode(values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>): string {
+  addNode(values: FetchBatchMergedTemplateIndexedBaseVariables): string {
     const index = this.selections.length;
     const aliasWithIndex = `node${index}`;
     this.addSelectionNodeFromQueryTemplate(aliasWithIndex, index, values);
@@ -128,7 +127,7 @@ export class MergeQueryBuilder {
   private addSelectionNodeFromQueryTemplate(
     alias: string,
     index: number,
-    values: Exact<FetchBatchMergedTemplateIndexedBaseVariables>,
+    values: FetchBatchMergedTemplateIndexedBaseVariables,
   ): this {
     const selection = aliasFieldAndSubstituteIndexedVars(
       alias,

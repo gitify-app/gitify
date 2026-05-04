@@ -34,7 +34,6 @@ const config: CodegenConfig = {
           URI: '../../../../types#Link',
         },
         useTypeImports: true,
-        // fragmentMasking: false, // Disables masking
       },
     },
   },
