@@ -1,3 +1,6 @@
+import type { SafeStorage } from 'electron';
+import { safeStorage } from 'electron';
+
 import { EVENTS } from '../../shared/events';
 
 import { registerStorageHandlers } from './storage';
@@ -19,7 +22,7 @@ vi.mock('electron', () => ({
       shouldReEncrypt: false,
       result: buf.toString(),
     })),
-  },
+  } satisfies Pick<SafeStorage, 'encryptStringAsync' | 'decryptStringAsync'>,
 }));
 
 const logErrorMock = vi.fn();
@@ -77,6 +80,45 @@ describe('main/handlers/storage.ts', () => {
 
       expect(typeof result).toBe('string');
       expect(result).toBe('plain-token');
+    });
+
+    it('decrypt handler unwraps result when shouldReEncrypt is true', async () => {
+      vi.mocked(safeStorage.decryptStringAsync).mockResolvedValueOnce({
+        shouldReEncrypt: true,
+        result: 'rotated-token',
+      });
+      registerStorageHandlers();
+      const decrypt = getHandler(EVENTS.SAFE_STORAGE_DECRYPT);
+
+      const result = await decrypt({}, 'irrelevant');
+
+      expect(typeof result).toBe('string');
+      expect(result).toBe('rotated-token');
+    });
+
+    it('encrypt → decrypt round-trip preserves the original string', async () => {
+      registerStorageHandlers();
+      const encrypt = getHandler(EVENTS.SAFE_STORAGE_ENCRYPT);
+      const decrypt = getHandler(EVENTS.SAFE_STORAGE_DECRYPT);
+
+      const ciphertext = (await encrypt({}, 'round-trip-token')) as string;
+      const plaintext = await decrypt({}, ciphertext);
+
+      expect(plaintext).toBe('round-trip-token');
+    });
+
+    it('decrypt handler rethrows and logs on safeStorage failure', async () => {
+      const failure = new Error('keychain unavailable');
+      vi.mocked(safeStorage.decryptStringAsync).mockRejectedValueOnce(failure);
+      registerStorageHandlers();
+      const decrypt = getHandler(EVENTS.SAFE_STORAGE_DECRYPT);
+
+      await expect(decrypt({}, 'irrelevant')).rejects.toBe(failure);
+      expect(logErrorMock).toHaveBeenCalledWith(
+        'main:safe-storage-decrypt',
+        expect.any(String),
+        failure,
+      );
     });
   });
 });
