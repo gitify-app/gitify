@@ -108,4 +108,15 @@ export interface ForgeAdapter {
   loginMethods: ReadonlyArray<LoginMethodDescriptor>;
   /** External documentation link shown in the PAT login route. */
   documentationUrl: Link;
+
+  // --- OAuth scopes ---
+  // Forges without an OAuth scope concept (e.g. Gitea) report `true` for
+  // every check, signalling "nothing to verify".
+
+  /** Whether the account holds the minimum scopes Gitify needs to function. */
+  hasRequiredScopes(account: Account): boolean;
+  /** Whether the account holds the full recommended scope set. */
+  hasRecommendedScopes(account: Account): boolean;
+  /** Whether the account holds the alternate (legacy) scope set. */
+  hasAlternateScopes(account: Account): boolean;
 }

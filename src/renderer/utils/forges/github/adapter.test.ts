@@ -140,6 +140,47 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
   });
 
+  describe('OAuth scope helpers', () => {
+    function withScopes(scopes: string[]) {
+      return { ...mockGitHubCloudAccount, scopes };
+    }
+
+    it('hasRequiredScopes is true when notifications + read:user are present', () => {
+      expect(
+        githubAdapter.hasRequiredScopes(
+          withScopes(['notifications', 'read:user']),
+        ),
+      ).toBe(true);
+    });
+
+    it('hasRequiredScopes is false when a required scope is missing', () => {
+      expect(
+        githubAdapter.hasRequiredScopes(withScopes(['notifications'])),
+      ).toBe(false);
+    });
+
+    it('hasRecommendedScopes requires the full repo scope set', () => {
+      expect(
+        githubAdapter.hasRecommendedScopes(
+          withScopes(['notifications', 'read:user', 'repo']),
+        ),
+      ).toBe(true);
+      expect(
+        githubAdapter.hasRecommendedScopes(
+          withScopes(['notifications', 'read:user']),
+        ),
+      ).toBe(false);
+    });
+
+    it('hasAlternateScopes accepts public_repo as the legacy substitute', () => {
+      expect(
+        githubAdapter.hasAlternateScopes(
+          withScopes(['notifications', 'read:user', 'public_repo']),
+        ),
+      ).toBe(true);
+    });
+  });
+
   describe('followUrl', () => {
     it('issues a generic GET via Octokit and returns the response data', async () => {
       const requestMock = vi.fn().mockResolvedValue({

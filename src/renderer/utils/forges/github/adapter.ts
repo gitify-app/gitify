@@ -102,4 +102,17 @@ export const githubAdapter: ForgeAdapter = {
       route: '/login-oauth-app',
     },
   ],
+
+  hasRequiredScopes: (account) => accountHasScopes(account, 'REQUIRED'),
+  hasRecommendedScopes: (account) => accountHasScopes(account, 'RECOMMENDED'),
+  hasAlternateScopes: (account) => accountHasScopes(account, 'ALTERNATE'),
 };
+
+function accountHasScopes(
+  account: Account,
+  group: 'REQUIRED' | 'RECOMMENDED' | 'ALTERNATE',
+): boolean {
+  return Constants.OAUTH_SCOPES[group].every(({ name }) =>
+    (account.scopes ?? []).includes(name),
+  );
+}

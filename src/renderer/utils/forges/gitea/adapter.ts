@@ -94,4 +94,10 @@ export const giteaAdapter: ForgeAdapter = {
       state: { forge: 'gitea' },
     },
   ],
+
+  // Gitea has no GitHub-style OAuth scope concept; treat any token as fully
+  // scoped so the recommended/alternate UI prompts never surface for Gitea.
+  hasRequiredScopes: () => true,
+  hasRecommendedScopes: () => true,
+  hasAlternateScopes: () => true,
 };

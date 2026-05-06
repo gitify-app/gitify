@@ -2,21 +2,18 @@ import { Constants } from '../../constants';
 
 import type { Account } from '../../types';
 
+import { getAdapter } from '../forges/registry';
+
 /**
  * Return true if the account has all required OAuth scopes.
  *
- * Scopes only apply to GitHub OAuth tokens; non-GitHub forges do not expose a
- * comparable scope header, so they are treated as already satisfying the check.
+ * Scope semantics live on the forge adapter — forges without an OAuth scope
+ * concept (e.g. Gitea) report `true` for every check.
  *
  * @param account - The account whose scopes to check.
  */
 export function hasRequiredScopes(account: Account): boolean {
-  if (account.forge === 'gitea') {
-    return true;
-  }
-  return Constants.OAUTH_SCOPES.REQUIRED.every(({ name }) =>
-    (account.scopes ?? []).includes(name),
-  );
+  return getAdapter(account).hasRequiredScopes(account);
 }
 
 /**
@@ -25,9 +22,7 @@ export function hasRequiredScopes(account: Account): boolean {
  * @param account - The account whose scopes to check.
  */
 export function hasRecommendedScopes(account: Account): boolean {
-  return Constants.OAUTH_SCOPES.RECOMMENDED.every(({ name }) =>
-    (account.scopes ?? []).includes(name),
-  );
+  return getAdapter(account).hasRecommendedScopes(account);
 }
 
 /**
@@ -36,9 +31,7 @@ export function hasRecommendedScopes(account: Account): boolean {
  * @param account - The account whose scopes to check.
  */
 export function hasAlternateScopes(account: Account): boolean {
-  return Constants.OAUTH_SCOPES.ALTERNATE.every(({ name }) =>
-    (account.scopes ?? []).includes(name),
-  );
+  return getAdapter(account).hasAlternateScopes(account);
 }
 
 /**
