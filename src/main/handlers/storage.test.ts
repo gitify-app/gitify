@@ -9,8 +9,8 @@ vi.mock('electron', () => ({
     handle: (...args: unknown[]) => handleMock(...args),
   },
   safeStorage: {
-    encryptString: vi.fn((str: string) => Buffer.from(str)),
-    decryptString: vi.fn((buf: Buffer) => buf.toString()),
+    encryptStringAsync: vi.fn(async (str: string) => Buffer.from(str)),
+    decryptStringAsync: vi.fn(async (buf: Buffer) => buf.toString()),
   },
 }));
 
