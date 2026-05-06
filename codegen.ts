@@ -25,14 +25,15 @@ const config: CodegenConfig = {
   documents: ['src/renderer/utils/api/**/*.graphql'],
   generates: {
     'src/renderer/utils/api/graphql/generated/graphql.ts': {
-      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
+      plugins: ['typescript-operations', 'typed-document-node'],
       config: {
-        onlyOperationTypes: true,
         documentMode: 'string',
+        // enumType: 'native',
+        scalars: {
+          DateTime: 'string',
+          URI: '../../../../types#Link',
+        },
         useTypeImports: true,
-        enumsAsTypes: true,
-        skipTypename: true,
-        fragmentMasking: false, // Disables masking
       },
     },
   },

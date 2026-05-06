@@ -72,7 +72,7 @@ export function mockDiscussionResponseNode(mocks: {
     number: 123,
     title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
-    stateReason: mocks.stateReason,
+    stateReason: mocks.stateReason ?? null,
     isAnswered: mocks.isAnswered,
     author: mockAuthor,
     comments: {
@@ -99,8 +99,8 @@ export function mockIssueResponseNode(mocks: {
     number: 123,
     title: 'PR Title',
     state: mocks.state,
-    stateReason: mocks.stateReason,
-    url: 'https://github.com/gitify-app/notifications-test/issues/123',
+    stateReason: mocks.stateReason ?? null,
+    url: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
     author: mockAuthor,
     labels: { nodes: [] },
     comments: { totalCount: 0, nodes: [] },
@@ -129,7 +129,7 @@ export function mockPullRequestResponseNode(mocks: {
     isDraft: mocks.isDraft ?? false,
     merged: mocks.merged ?? false,
     isInMergeQueue: mocks.isInMergeQueue ?? false,
-    url: 'https://github.com/gitify-app/notifications-test/pulls/123',
+    url: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
     author: mockAuthor,
     labels: { nodes: [] },
     comments: {
