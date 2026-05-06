@@ -74,9 +74,10 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
           .sort((a, b) =>
             filter
               .getTypeDetails(a)
-              .title.toLocaleLowerCase()
+              .title.toLowerCase()
               .localeCompare(
-                filter.getTypeDetails(b).title.toLocaleLowerCase(),
+                filter.getTypeDetails(b).title.toLowerCase(),
+                'en',
               ),
           )
           .map((type) => {
