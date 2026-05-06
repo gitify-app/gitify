@@ -9,14 +9,11 @@ import type {
   SettingsState,
 } from '../../types';
 
-import {
-  fetchNotificationDetailsForList,
-  listNotificationsForAuthenticatedUser,
-} from '../api/client';
+import { fetchNotificationDetailsForList } from '../api/client';
 import { determineFailureType } from '../api/errors';
 import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
-import { transformNotifications } from '../api/transform';
 import { rendererLogError, rendererLogWarn, toError } from '../core/logger';
+import { getAdapter } from '../forges/registry';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -60,7 +57,7 @@ function getNotifications(auth: AuthState, settings: SettingsState) {
   return auth.accounts.map((account) => {
     return {
       account,
-      notifications: listNotificationsForAuthenticatedUser(account, settings),
+      notifications: getAdapter(account).listNotifications(account, settings),
     };
   });
 }
@@ -94,12 +91,9 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          const rawNotifications = await accountNotifications.notifications;
-
-          let notifications = transformNotifications(
-            rawNotifications,
-            accountNotifications.account,
-          );
+          // Adapter `listNotifications` returns already-transformed
+          // GitifyNotification objects (each adapter owns its raw types).
+          let notifications = await accountNotifications.notifications;
 
           notifications = filterBaseNotifications(notifications);
 
@@ -154,6 +148,16 @@ export async function enrichNotifications(
   settings: SettingsState,
 ): Promise<GitifyNotification[]> {
   if (!settings.detailedNotifications) {
+    return notifications;
+  }
+
+  // Forges without GraphQL enrichment (e.g. Gitea) skip detail enrichment.
+  if (
+    notifications.length &&
+    !getAdapter(notifications[0].account).capabilities.enrichment(
+      notifications[0].account,
+    )
+  ) {
     return notifications;
   }
 

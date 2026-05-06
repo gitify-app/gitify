@@ -37,8 +37,8 @@ import type {
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
-import { fetchAuthenticatedUserDetails } from '../utils/api/client';
 import { clearOctokitClientCache } from '../utils/api/octokit';
+import { getAdapterById } from '../utils/forges/registry';
 import {
   exchangeAuthCodeForAccessToken,
   performGitHubWebOAuth,
@@ -544,7 +544,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async ({ token, hostname, forge }: LoginPersonalAccessTokenOptions) => {
       const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
-      await fetchAuthenticatedUserDetails({
+      await getAdapterById(resolvedForge).fetchAuthenticatedUser({
         forge: resolvedForge,
         hostname,
         token: encryptedToken,

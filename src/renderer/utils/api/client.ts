@@ -17,8 +17,8 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
+import { githubCapabilities } from '../forges/github/capabilities';
 import { createNotificationHandler } from '../notifications/handlers';
-import { isAnsweredDiscussionFeatureSupported } from './features';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
@@ -228,7 +228,7 @@ export async function fetchDiscussionByNumber(
       firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
       lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
       lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
-      includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+      includeIsAnswered: githubCapabilities.answeredDiscussion(
         notification.account,
       ),
     },
@@ -327,7 +327,7 @@ export async function fetchNotificationDetailsForList(
   }
 
   builder.setSharedVariables({
-    includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+    includeIsAnswered: githubCapabilities.answeredDiscussion(
       notifications[0].account,
     ),
     firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,

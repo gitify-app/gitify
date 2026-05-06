@@ -17,8 +17,8 @@ import type {
 } from '../../types';
 import type { AuthMethod } from './types';
 
-import { fetchAuthenticatedUserDetails } from '../api/client';
 import { clearOctokitClientCacheForAccount } from '../api/octokit';
+import { getAdapter } from '../forges/registry';
 import {
   rendererLogError,
   rendererLogInfo,
@@ -115,7 +115,7 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
  */
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const response = await fetchAuthenticatedUserDetails(account);
+    const response = await getAdapter(account).fetchAuthenticatedUser(account);
 
     const user = response.data;
 
@@ -123,14 +123,12 @@ export async function refreshAccount(account: Account): Promise<Account> {
     account.user = {
       id: String(user.id),
       login: user.login,
-      name: user.name,
-      avatar: user.avatar_url as Link,
+      name: user.name ?? null,
+      avatar: (user.avatar_url ?? '') as Link,
     };
 
-    account.version = 'latest';
-
     account.version = extractHostVersion(
-      response.headers['x-github-enterprise-version'] as string,
+      response.headers['x-github-enterprise-version'],
     );
 
     const accountScopes = response.headers['x-oauth-scopes']

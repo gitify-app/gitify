@@ -5,9 +5,15 @@ import type { Account } from '../../types';
 /**
  * Return true if the account has all required OAuth scopes.
  *
+ * Scopes only apply to GitHub OAuth tokens; non-GitHub forges do not expose a
+ * comparable scope header, so they are treated as already satisfying the check.
+ *
  * @param account - The account whose scopes to check.
  */
 export function hasRequiredScopes(account: Account): boolean {
+  if (account.forge !== 'github') {
+    return true;
+  }
   return Constants.OAUTH_SCOPES.REQUIRED.every(({ name }) =>
     (account.scopes ?? []).includes(name),
   );
