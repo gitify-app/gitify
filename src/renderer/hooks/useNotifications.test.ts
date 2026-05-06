@@ -529,8 +529,17 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
     });
 
-    it('should not mark as done when account does not support the feature', async () => {
-      // GitHub Enterprise Server without version doesn't support mark as done
+    it('should fall back to mark as read when mark-as-done is not supported', async () => {
+      // GitHub Enterprise Server without version doesn't support mark as done;
+      // the action falls back to mark-as-read so the user-visible behaviour
+      // (the thread leaves the inbox) is preserved across forges/versions.
+      const readSpy = vi
+        .spyOn(apiClient, 'markNotificationThreadAsRead')
+        .mockResolvedValue(undefined);
+      const doneSpy = vi
+        .spyOn(apiClient, 'markNotificationThreadAsDone')
+        .mockResolvedValue(undefined);
+
       const mockEnterpriseNotification = {
         ...mockGitifyNotification,
         account: mockGitHubEnterpriseServerAccount, // No version set
@@ -538,16 +547,21 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       const { result } = renderHook(() => useNotifications());
 
-      // The API should NOT be called when account doesn't support the feature
       act(() => {
         result.current.markNotificationsAsDone(mockState, [
           mockEnterpriseNotification,
         ]);
       });
 
-      // Status should remain 'success' (not change to 'loading' since we return early)
-      expect(result.current.status).toBe('success');
-      // No API calls should have been made - nock will fail if unexpected calls are made
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
+
+      expect(readSpy).toHaveBeenCalledWith(
+        mockGitHubEnterpriseServerAccount,
+        mockEnterpriseNotification.id,
+      );
+      expect(doneSpy).not.toHaveBeenCalled();
     });
 
     it('should mark notifications as done with failure', async () => {
