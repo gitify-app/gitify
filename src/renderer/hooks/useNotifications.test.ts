@@ -5,6 +5,7 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
 import {
+  mockGiteaGitifyNotification,
   mockGitHubCloudGitifyNotifications,
   mockGitifyNotification,
   mockMultipleAccountNotifications,
@@ -587,6 +588,27 @@ describe('renderer/hooks/useNotifications.ts', () => {
   });
 
   describe('unsubscribeNotification', () => {
+    it('should not call unsubscribe APIs when thread ignore is unsupported (Gitea)', async () => {
+      const ignoreSpy = vi.spyOn(
+        apiClient,
+        'ignoreNotificationThreadSubscription',
+      );
+      const readSpy = vi.spyOn(apiClient, 'markNotificationThreadAsRead');
+
+      const { result } = renderHook(() => useNotifications());
+
+      act(() => {
+        result.current.unsubscribeNotification(
+          mockState,
+          mockGiteaGitifyNotification,
+        );
+      });
+
+      expect(ignoreSpy).not.toHaveBeenCalled();
+      expect(readSpy).not.toHaveBeenCalled();
+      expect(result.current.status).toBe('success');
+    });
+
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
       vi.spyOn(
         apiClient,

@@ -2,7 +2,10 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
+import {
+  mockGiteaGitifyNotification,
+  mockGitifyNotification,
+} from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { GroupBy } from '../../types';
@@ -259,6 +262,19 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       );
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not show unsubscribe for Gitea notifications', () => {
+      const props: NotificationRowProps = {
+        notification: mockGiteaGitifyNotification,
+        isRepositoryAnimatingExit: false,
+      };
+
+      renderWithProviders(<NotificationRow {...props} />);
+
+      expect(
+        screen.queryByTestId('notification-unsubscribe-from-thread'),
+      ).not.toBeInTheDocument();
     });
   });
 });

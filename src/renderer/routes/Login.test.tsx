@@ -55,4 +55,15 @@ describe('renderer/routes/Login.tsx', () => {
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith('/login-oauth-app');
   });
+
+  it('should navigate to login with Gitea personal access token', async () => {
+    renderWithProviders(<LoginRoute />, { isLoggedIn: false });
+
+    await userEvent.click(screen.getByTestId('login-gitea-pat'));
+
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
+      state: { forge: 'gitea' },
+    });
+  });
 });

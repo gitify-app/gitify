@@ -1,6 +1,7 @@
 import type { Account, Forge } from '../../types';
 import type { ForgeAdapter } from './types';
 
+import { giteaAdapter } from './gitea/adapter';
 import { githubAdapter } from './github/adapter';
 
 /**
@@ -9,8 +10,9 @@ import { githubAdapter } from './github/adapter';
  * Adding a new forge is one entry in this map. Shared code routes through
  * `getAdapter(account)` and never imports forge-specific modules directly.
  */
-const ADAPTERS: Partial<Record<Forge, ForgeAdapter>> = {
+const ADAPTERS: Record<Forge, ForgeAdapter> = {
   github: githubAdapter,
+  gitea: giteaAdapter,
 };
 
 /**
