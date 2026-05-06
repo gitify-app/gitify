@@ -1,18 +1,10 @@
 import { contextBridge, webFrame } from 'electron';
 
-import type {
-  IKeyboardShortcut,
-  IKeyboardShortcutResult,
-} from '../shared/events';
+import type { IKeyboardShortcut } from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
-import {
-  invokeMainEvent,
-  invokeMainEventWithData,
-  onRendererEvent,
-  sendMainEvent,
-} from './utils';
+import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
 
 /**
  * The Gitify Bridge API exposed to the renderer via `contextBridge`.
@@ -70,10 +62,7 @@ export const api = {
    * @returns Whether registration succeeded (when enabled).
    */
   applyKeyboardShortcut: (payload: IKeyboardShortcut) =>
-    invokeMainEventWithData(
-      EVENTS.UPDATE_KEYBOARD_SHORTCUT,
-      payload,
-    ) as Promise<IKeyboardShortcutResult>,
+    invokeMainEvent(EVENTS.UPDATE_KEYBOARD_SHORTCUT, payload),
 
   /** Tray icon controls. */
   tray: {
