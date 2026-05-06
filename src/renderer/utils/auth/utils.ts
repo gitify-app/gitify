@@ -128,7 +128,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
     };
 
     account.version = extractHostVersion(
-      response.headers['x-github-enterprise-version'],
+      response.headers['x-github-enterprise-version'] ?? null,
     );
 
     const accountScopes = response.headers['x-oauth-scopes']
