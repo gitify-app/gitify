@@ -22,16 +22,16 @@ const config: CodegenConfig = {
       },
     },
   },
-  documents: ['src/renderer/utils/api/**/*.graphql'],
+  documents: ['src/renderer/utils/forges/github/**/*.graphql'],
   generates: {
-    'src/renderer/utils/api/graphql/generated/graphql.ts': {
+    'src/renderer/utils/forges/github/graphql/generated/graphql.ts': {
       plugins: ['typescript-operations', 'typed-document-node'],
       config: {
         documentMode: 'string',
         // enumType: 'native',
         scalars: {
           DateTime: 'string',
-          URI: '../../../../types#Link',
+          URI: '../../../../../types#Link',
         },
         useTypeImports: true,
       },
