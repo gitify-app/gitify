@@ -93,7 +93,9 @@ describe('renderer/utils/api/features.ts', () => {
     });
 
     it('should return false for Gitea', () => {
-      expect(isAnsweredDiscussionFeatureSupported(mockGiteaAccount)).toBe(false);
+      expect(isAnsweredDiscussionFeatureSupported(mockGiteaAccount)).toBe(
+        false,
+      );
     });
   });
 });

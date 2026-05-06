@@ -1,9 +1,9 @@
 import semver from 'semver';
 
 import type { Account } from '../../../types';
+import type { ForgeCapabilities } from '../types';
 
 import { isEnterpriseServerHost } from '../../auth/platform';
-import type { ForgeCapabilities } from '../types';
 
 /**
  * GitHub feature capabilities.

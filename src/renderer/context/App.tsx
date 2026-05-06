@@ -38,7 +38,6 @@ import type {
 } from '../utils/auth/types';
 
 import { clearOctokitClientCache } from '../utils/api/octokit';
-import { getAdapterById } from '../utils/forges/registry';
 import {
   exchangeAuthCodeForAccessToken,
   performGitHubWebOAuth,
@@ -53,6 +52,7 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import { clearState, loadState, saveState } from '../utils/core/storage';
+import { getAdapterById } from '../utils/forges/registry';
 import {
   applyKeyboardShortcut,
   decryptValue,

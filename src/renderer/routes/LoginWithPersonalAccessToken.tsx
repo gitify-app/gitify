@@ -196,7 +196,9 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 leadingVisual={KeyIcon}
                 onClick={() =>
                   openExternalLink(
-                    adapter.getPersonalAccessTokenSettingsUrl(formData.hostname),
+                    adapter.getPersonalAccessTokenSettingsUrl(
+                      formData.hostname,
+                    ),
                   )
                 }
                 size="small"

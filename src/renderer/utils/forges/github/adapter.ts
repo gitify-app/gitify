@@ -1,8 +1,4 @@
-import {
-  KeyIcon,
-  MarkGithubIcon,
-  PersonIcon,
-} from '@primer/octicons-react';
+import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 
 import { Constants } from '../../../constants';
 
@@ -14,6 +10,7 @@ import type {
   SettingsState,
   Token,
 } from '../../../types';
+import type { ForgeAdapter, RefreshAccountData } from '../types';
 
 import {
   fetchAuthenticatedUserDetails,
@@ -29,7 +26,6 @@ import {
   getNewTokenURL as legacyGetNewTokenURL,
   isValidToken as legacyIsValidToken,
 } from '../../auth/utils';
-import type { ForgeAdapter, RefreshAccountData } from '../types';
 import { githubCapabilities } from './capabilities';
 
 async function fetchAuthenticatedUser(

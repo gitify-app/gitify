@@ -96,7 +96,9 @@ export async function listGiteaNotifications(
   return all;
 }
 
-export function fetchGiteaAuthenticatedUser(account: Account): Promise<GiteaUser> {
+export function fetchGiteaAuthenticatedUser(
+  account: Account,
+): Promise<GiteaUser> {
   return giteaRequest<GiteaUser>(account, 'user');
 }
 

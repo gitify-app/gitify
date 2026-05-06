@@ -11,7 +11,7 @@ import type { Account } from '../../types';
  * @param account - The account whose scopes to check.
  */
 export function hasRequiredScopes(account: Account): boolean {
-  if (account.forge !== 'github') {
+  if (account.forge === 'gitea') {
     return true;
   }
   return Constants.OAUTH_SCOPES.REQUIRED.every(({ name }) =>

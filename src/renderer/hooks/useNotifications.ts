@@ -10,12 +10,12 @@ import type {
 } from '../types';
 
 import { getAccountUUID } from '../utils/auth/utils';
-import { getAdapter } from '../utils/forges/registry';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
 } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getAdapter } from '../utils/forges/registry';
 import {
   getAllNotifications,
   getNotificationCount,

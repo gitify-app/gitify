@@ -18,13 +18,13 @@ import type {
 import type { AuthMethod } from './types';
 
 import { clearOctokitClientCacheForAccount } from '../api/octokit';
-import { getAdapter } from '../forges/registry';
 import {
   rendererLogError,
   rendererLogInfo,
   rendererLogWarn,
   toError,
 } from '../core/logger';
+import { getAdapter } from '../forges/registry';
 import { encryptValue } from '../system/comms';
 import { getPlatformFromHostname, resolvePlatform } from './platform';
 import { getRecommendedScopeNames, hasRequiredScopes } from './scopes';
@@ -123,8 +123,8 @@ export async function refreshAccount(account: Account): Promise<Account> {
     account.user = {
       id: String(user.id),
       login: user.login,
-      name: user.name ?? null,
-      avatar: (user.avatar_url ?? '') as Link,
+      name: user.name as string | null,
+      avatar: user.avatar_url as Link,
     };
 
     account.version = extractHostVersion(
