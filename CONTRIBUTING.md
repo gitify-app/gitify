@@ -90,7 +90,18 @@ The release process is automated. Follow the steps below.
 
 ### Project Philosophy
 
-This project is a tool for monitoring new notifications from GitHub. It's not meant to be a full-featured GitHub client. We want to keep it simple and focused on that core functionality. We're happy to accept contributions that help us achieve that goal, but we're also happy to say no to things that don't. We're not trying to be everything to everyone. 
+This project is a tool for monitoring new notifications from supported Git forges. It's not meant to be a full-featured forge client. We want to keep it simple and focused on that core functionality. We're happy to accept contributions that help us achieve that goal, but we're also happy to say no to things that don't. We're not trying to be everything to everyone.
+
+#### Multi-forge support
+
+Gitify supports notifications from multiple Git forges. New forges may be added under the following conditions:
+
+- **Adapter-based:** the forge is implemented behind the `ForgeAdapter` interface in `src/renderer/utils/forges/`. No forge-specific branching outside the adapter module.
+- **Designated maintainer:** every forge has at least one named maintainer in [`MAINTAINERS.md`](./MAINTAINERS.md) who owns triage and CI for that adapter.
+- **Capability-honest UI:** features unsupported by a forge (e.g. mark-as-done) must hide gracefully, not silently no-op.
+- **No core-platform churn:** Octicons, Octokit, and the Primer Design System remain in place. Octokit is scoped to the GitHub adapter; other adapters use plain `fetch`.
+
+Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Cloud with Data Residency).
 
 #### Things we won't do
 
@@ -100,7 +111,7 @@ This project is a tool for monitoring new notifications from GitHub. It's not me
 * Seeing past notifications. This is a tool for monitoring new notifications, not seeing old ones, which can be seen at https://github.com/notifications.
 * Specific UX/UI changes that add options and/or visual complexity for minor workflow improvements. e.g. https://github.com/gitify-app/gitify/issues/358, https://github.com/gitify-app/gitify/issues/411 and https://github.com/gitify-app/gitify/issues/979
 * UI for something that isn't core to Gitify, and/or can be trivially done another way. e.g. https://github.com/gitify-app/gitify/issues/476 and https://github.com/gitify-app/gitify/issues/221
-* Support anything other than GitHub. Doing so would be a major undertaking that we may consider in future.
+* Add a forge adapter without a designated maintainer who will own it long-term.
 
 <!-- LINK LABELS -->
 [biome-website]: https://biomejs.dev/
