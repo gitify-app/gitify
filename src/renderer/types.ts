@@ -47,7 +47,11 @@ export type KeyboardAcceleratorShortcut = Branded<
   'KeyboardAcceleratorShortcut'
 >;
 
+/** Code hosting provider for an account. New forges register themselves here. */
+export type Forge = 'github' | 'gitea';
+
 export interface Account {
+  forge: Forge;
   method: AuthMethod;
   platform: PlatformType;
   version?: string;

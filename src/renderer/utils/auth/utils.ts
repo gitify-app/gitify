@@ -10,6 +10,7 @@ import type {
   AccountUUID,
   AuthState,
   ClientID,
+  Forge,
   Hostname,
   Link,
   Token,
@@ -25,7 +26,7 @@ import {
   toError,
 } from '../core/logger';
 import { encryptValue } from '../system/comms';
-import { getPlatformFromHostname } from './platform';
+import { getPlatformFromHostname, resolvePlatform } from './platform';
 import { getRecommendedScopeNames, hasRequiredScopes } from './scopes';
 
 /**
@@ -46,14 +47,16 @@ export async function addAccount(
   method: AuthMethod,
   token: Token,
   hostname: Hostname,
+  forge: Forge = 'github',
 ): Promise<AuthState> {
   const accountList = auth.accounts;
   const encryptedToken = await encryptValue(token);
 
   let newAccount = {
+    forge,
     hostname: hostname,
     method: method,
-    platform: getPlatformFromHostname(hostname),
+    platform: resolvePlatform(forge, hostname),
     token: encryptedToken,
     user: null, // Will be updated during the refresh call below
   } as Account;

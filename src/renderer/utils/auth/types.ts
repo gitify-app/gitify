@@ -2,6 +2,7 @@ import type {
   AuthCode,
   ClientID,
   ClientSecret,
+  Forge,
   Hostname,
   Token,
 } from '../../types';
@@ -11,7 +12,8 @@ export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
 export type PlatformType =
   | 'GitHub Cloud'
   | 'GitHub Enterprise Server'
-  | 'GitHub Enterprise Cloud with Data Residency';
+  | 'GitHub Enterprise Cloud with Data Residency'
+  | 'Gitea';
 
 export interface LoginOAuthWebOptions {
   hostname: Hostname;
@@ -38,6 +40,8 @@ export type DeviceFlowErrorResponse = {
 export interface LoginPersonalAccessTokenOptions {
   hostname: Hostname;
   token: Token;
+  /** Defaults to GitHub when omitted. */
+  forge?: Forge;
 }
 
 export interface AuthResponse {

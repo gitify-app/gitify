@@ -12,6 +12,7 @@ import { getRecommendedScopeNames } from '../utils/auth/scopes';
 import { mockGitifyUser } from './user-mocks';
 
 export const mockGitHubAppAccount: Account = {
+  forge: 'github',
   platform: 'GitHub Cloud',
   method: 'GitHub App',
   token: 'token-987654321' as Token,
@@ -21,6 +22,7 @@ export const mockGitHubAppAccount: Account = {
 };
 
 export const mockPersonalAccessTokenAccount: Account = {
+  forge: 'github',
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
   token: 'token-123-456' as Token,
@@ -30,6 +32,7 @@ export const mockPersonalAccessTokenAccount: Account = {
 };
 
 export const mockOAuthAccount: Account = {
+  forge: 'github',
   platform: 'GitHub Enterprise Server',
   method: 'OAuth App',
   token: 'token-1234568790' as Token,
@@ -39,6 +42,7 @@ export const mockOAuthAccount: Account = {
 };
 
 export const mockGitHubCloudAccount: Account = {
+  forge: 'github',
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
   token: 'token-123-456' as Token,
@@ -48,6 +52,7 @@ export const mockGitHubCloudAccount: Account = {
 };
 
 export const mockGitHubEnterpriseServerAccount: Account = {
+  forge: 'github',
   platform: 'GitHub Enterprise Server',
   method: 'Personal Access Token',
   token: 'token-1234568790' as Token,

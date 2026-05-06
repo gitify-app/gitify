@@ -21,6 +21,7 @@ import type {
   Account,
   AccountNotifications,
   AuthState,
+  Forge,
   GitifyError,
   GitifyNotification,
   Hostname,
@@ -71,6 +72,17 @@ import {
 } from '../utils/ui/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
 import { defaultAuth, defaultSettings } from './defaults';
+
+/**
+ * Backfill the `forge` field on accounts persisted before multi-forge support.
+ * Legacy accounts default to GitHub.
+ */
+function migrateLegacyAuthState(auth: AuthState): AuthState {
+  return {
+    ...auth,
+    accounts: auth.accounts.map((a) => ({ ...a, forge: a.forge ?? 'github' })),
+  };
+}
 
 export interface AppContextState {
   auth: AuthState;
@@ -130,7 +142,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const [auth, setAuth] = useState<AuthState>(
     existingState.auth
-      ? { ...defaultAuth, ...existingState.auth }
+      ? migrateLegacyAuthState({ ...defaultAuth, ...existingState.auth })
       : defaultAuth,
   );
 
@@ -470,7 +482,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+      const updatedAuth = await addAccount(
+        auth,
+        'GitHub App',
+        token,
+        hostname,
+        'github',
+      );
 
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
@@ -504,6 +522,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         'OAuth App',
         token,
         authOptions.hostname,
+        'github',
       );
 
       persistAuth(updatedAuth);
@@ -522,15 +541,20 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Login with Personal Access Token (PAT).
    */
   const loginWithPersonalAccessToken = useCallback(
-    async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
+    async ({ token, hostname, forge }: LoginPersonalAccessTokenOptions) => {
+      const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
       await fetchAuthenticatedUserDetails({
+        forge: resolvedForge,
         hostname,
         token: encryptedToken,
       } as Account);
 
       const existingAccount = auth.accounts.find(
-        (a) => a.hostname === hostname && a.method === 'Personal Access Token',
+        (a) =>
+          a.hostname === hostname &&
+          a.method === 'Personal Access Token' &&
+          a.forge === resolvedForge,
       );
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
@@ -541,6 +565,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         'Personal Access Token',
         token,
         hostname,
+        resolvedForge,
       );
 
       persistAuth(updatedAuth);

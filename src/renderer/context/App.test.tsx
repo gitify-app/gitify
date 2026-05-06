@@ -274,6 +274,7 @@ describe('renderer/context/App.tsx', () => {
         'GitHub App',
         'token',
         'github.com',
+        'github',
       );
     });
 
