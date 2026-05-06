@@ -33,4 +33,4 @@ jobs:
       statuses: write # to generate status
       checks: write # to generate status
     steps:
-      - uses: fuxingloh/multi-labeler@b15a54460c38f54043fa75f7b08a0e2aa5b94b5b # v4.0.0
+      - uses: fuxingloh/multi-labeler@bcd50af464202999e57f556b4aefcf05a34abf85 # v5
