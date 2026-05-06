@@ -9,7 +9,7 @@ import type {
   Link,
   SettingsState,
   UserType,
-} from '../../../types';
+} from '../../../../types';
 
 export interface NotificationTypeHandler {
   /**

@@ -15,11 +15,11 @@ import type {
   GitifySubject,
   Link,
   SettingsState,
-} from '../../../types';
-import { IconColor } from '../../../types';
+} from '../../../../types';
+import { IconColor } from '../../../../types';
 
-import { fetchIssueByNumber } from '../../forges/github/client';
-import type { IssueDetailsFragment } from '../../forges/github/graphql/generated/graphql';
+import { fetchIssueByNumber } from '../client';
+import type { IssueDetailsFragment } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 

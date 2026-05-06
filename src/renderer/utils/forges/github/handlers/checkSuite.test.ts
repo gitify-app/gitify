@@ -1,12 +1,12 @@
-import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
+import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../../../__mocks__/state-mocks';
 
-import type { GitifyNotification } from '../../../types';
+import type { GitifyNotification } from '../../../../types';
 import {
   type GitifyCheckSuiteStatus,
   IconColor,
   type Link,
-} from '../../../types';
+} from '../../../../types';
 
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 

@@ -17,7 +17,6 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
-import { createNotificationHandler } from '../../notifications/handlers';
 import { githubCapabilities } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
@@ -29,6 +28,7 @@ import {
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
+import { createNotificationHandler } from './handlers';
 import { createOctokitClient, createOctokitClientUncached } from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
 import { getNumberFromUrl } from './utils';

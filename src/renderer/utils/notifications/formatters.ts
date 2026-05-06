@@ -1,6 +1,8 @@
 import type { GitifyNotification } from '../../types';
 
-import { createNotificationHandler } from './handlers';
+// TODO(multi-forge): see note in url.ts — display helpers should eventually
+// live on the adapter so shared formatting code does not depend on a forge.
+import { createNotificationHandler } from '../forges/github/handlers';
 
 /**
  * Populates the display property on a notification with formatted,

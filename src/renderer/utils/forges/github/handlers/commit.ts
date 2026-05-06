@@ -10,10 +10,10 @@ import type {
   GitifySubject,
   Link,
   SettingsState,
-} from '../../../types';
+} from '../../../../types';
 
-import { getCommit, getCommitComment } from '../../forges/github/client';
-import { isStateFilteredOut } from '../filters/filter';
+import { isStateFilteredOut } from '../../../notifications/filters/filter';
+import { getCommit, getCommitComment } from '../client';
 import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 

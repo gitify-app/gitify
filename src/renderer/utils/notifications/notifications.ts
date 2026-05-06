@@ -1,18 +1,13 @@
-import { Constants } from '../../constants';
-
 import type {
   AccountNotifications,
   AuthState,
   GitifyNotification,
   GitifyState,
-  GitifySubject,
   SettingsState,
 } from '../../types';
 
 import { determineFailureType } from '../api/errors';
-import { rendererLogError, rendererLogWarn, toError } from '../core/logger';
-import { fetchNotificationDetailsForList } from '../forges/github/client';
-import type { FetchMergedDetailsTemplateQuery } from '../forges/github/graphql/generated/graphql';
+import { rendererLogError, toError } from '../core/logger';
 import { getAdapter } from '../forges/registry';
 import {
   filterBaseNotifications,
@@ -20,7 +15,6 @@ import {
 } from './filters/filter';
 import { formatNotification } from './formatters';
 import { getFlattenedNotificationsByRepo } from './group';
-import { createNotificationHandler } from './handlers';
 
 /**
  * Get the count of notifications across all accounts.
@@ -147,122 +141,17 @@ export async function enrichNotifications(
   notifications: GitifyNotification[],
   settings: SettingsState,
 ): Promise<GitifyNotification[]> {
-  if (!settings.detailedNotifications) {
+  if (!settings.detailedNotifications || !notifications.length) {
     return notifications;
   }
 
-  // Forges without GraphQL enrichment (e.g. Gitea) skip detail enrichment.
-  if (
-    notifications.length &&
-    !getAdapter(notifications[0].account).capabilities.enrichment(
-      notifications[0].account,
-    )
-  ) {
+  // Adapters that do not implement enrichment (e.g. Gitea) leave
+  // notifications unchanged.
+  const enrich = getAdapter(notifications[0].account).enrichNotifications;
+  if (!enrich) {
     return notifications;
   }
-
-  const mergedResults = await fetchNotificationDetailsInBatches(notifications);
-
-  const enrichedNotifications = await Promise.all(
-    notifications.map(async (notification: GitifyNotification) => {
-      const fragment = mergedResults.get(notification);
-
-      return enrichNotification(notification, settings, fragment);
-    }),
-  );
-  return enrichedNotifications;
-}
-
-/**
- * Fetch notification details in batches to avoid overwhelming the API.
- *
- * @param notifications - The notifications to fetch details for.
- * @returns A map of notifications to their repository details.
- */
-async function fetchNotificationDetailsInBatches(
-  notifications: GitifyNotification[],
-): Promise<
-  Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
-> {
-  const mergedResults: Map<
-    GitifyNotification,
-    FetchMergedDetailsTemplateQuery['repository']
-  > = new Map();
-
-  const batchSize = Constants.GITHUB_API_MERGE_BATCH_SIZE;
-
-  for (
-    let batchStart = 0;
-    batchStart < notifications.length;
-    batchStart += batchSize
-  ) {
-    const batchIndex = Math.floor(batchStart / batchSize) + 1;
-    const batchNotifications = notifications.slice(
-      batchStart,
-      batchStart + batchSize,
-    );
-
-    try {
-      const batchResults =
-        await fetchNotificationDetailsForList(batchNotifications);
-
-      for (const [notification, repository] of batchResults) {
-        mergedResults.set(notification, repository);
-      }
-    } catch (err) {
-      rendererLogError(
-        'fetchNotificationDetailsInBatches',
-        `Failed to fetch merged notification details for batch ${batchIndex}`,
-        toError(err),
-      );
-    }
-  }
-
-  return mergedResults;
-}
-
-/**
- * Enrich a notification with additional details.
- *
- * @param notification - The notification to enrich.
- * @param settings - The settings to use for enrichment.
- * @returns The enriched notification.
- */
-export async function enrichNotification(
-  notification: GitifyNotification,
-  settings: SettingsState,
-  fetchedData?: unknown,
-): Promise<GitifyNotification> {
-  let additionalSubjectDetails: Partial<GitifySubject> = {};
-
-  try {
-    const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(
-      notification,
-      settings,
-      fetchedData,
-    );
-  } catch (err) {
-    rendererLogError(
-      'enrichNotification',
-      'failed to enrich notification details for',
-      toError(err),
-      notification,
-    );
-
-    rendererLogWarn(
-      'enrichNotification',
-      'Continuing with base notification details',
-    );
-  }
-
-  return {
-    ...notification,
-    subject: {
-      ...notification.subject,
-      ...additionalSubjectDetails,
-    },
-  };
+  return enrich(notifications, settings);
 }
 
 /**

@@ -45,7 +45,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
       ) : (
         <AvatarWithFallback
           size={Size.SMALL}
-          userType={notification.display.defaultUserType}
+          userType={notification.display?.defaultUserType ?? 'User'}
         />
       )}
 

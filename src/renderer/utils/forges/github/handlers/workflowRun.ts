@@ -9,7 +9,7 @@ import type {
   GitifySubject,
   Link,
   SettingsState,
-} from '../../../types';
+} from '../../../../types';
 
 import { DefaultHandler } from './default';
 import { actionsURL } from './utils';

@@ -27,7 +27,6 @@ const GITEA_DOCS_URL = 'https://docs.gitea.com/development/api-usage' as Link;
 const capabilities: ForgeCapabilities = {
   markAsDone: () => false,
   unsubscribeThread: () => false,
-  enrichment: () => false,
   answeredDiscussion: () => false,
 };
 
@@ -77,8 +76,8 @@ export const giteaAdapter: ForgeAdapter = {
     return giteaGetJson<T>(account, url);
   },
 
-  validateToken: (token: Token) =>
-    token.length >= 8 && token.length <= 512 && !/[\r\n]/.test(token),
+  // Gitea PATs from /user/settings/applications are 40-char lowercase hex.
+  validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
     `https://${hostname}/user/settings/applications` as Link,
   getDeveloperSettingsUrl: (account: Account) =>

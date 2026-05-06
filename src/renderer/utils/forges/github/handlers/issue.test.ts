@@ -1,22 +1,22 @@
-import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
+import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../../../__mocks__/state-mocks';
 import {
   mockAuthor,
   mockCommenter,
   mockIssueResponseNode,
   noReactionGroups,
-} from '../../forges/github/__mocks__/response-mocks';
+} from '../__mocks__/response-mocks';
 
-import type { GitifyNotification } from '../../../types';
+import type { GitifyNotification } from '../../../../types';
 import {
   type GitifyIssueState,
   type GitifySubject,
   IconColor,
   type Link,
-} from '../../../types';
+} from '../../../../types';
 
-import * as apiClient from '../../forges/github/client';
-import type { FetchIssueByNumberQuery } from '../../forges/github/graphql/generated/graphql';
+import * as apiClient from '../client';
+import type { FetchIssueByNumberQuery } from '../graphql/generated/graphql';
 import { issueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {

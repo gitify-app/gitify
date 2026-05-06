@@ -10,7 +10,7 @@ import {
   type Link,
   type SettingsState,
   type UserType,
-} from '../../../types';
+} from '../../../../types';
 import type { NotificationTypeHandler } from './types';
 
 export class DefaultHandler implements NotificationTypeHandler {

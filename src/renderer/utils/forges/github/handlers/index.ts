@@ -1,4 +1,4 @@
-import type { GitifyNotification } from '../../../types';
+import type { GitifyNotification } from '../../../../types';
 import type { NotificationTypeHandler } from './types';
 
 import { checkSuiteHandler } from './checkSuite';

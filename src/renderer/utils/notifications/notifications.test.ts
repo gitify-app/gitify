@@ -14,16 +14,13 @@ import { Constants } from '../../constants';
 import {
   type AccountNotifications,
   type GitifyNotification,
-  type GitifyRepository,
   GroupBy,
   type Link,
   type SettingsState,
 } from '../../types';
 
-import * as logger from '../../utils/core/logger';
 import * as apiClient from '../forges/github/client';
 import {
-  enrichNotification,
   enrichNotifications,
   getNotificationCount,
   getUnreadNotificationCount,
@@ -41,50 +38,6 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const result = getUnreadNotificationCount(mockSingleAccountNotifications);
 
     expect(result).toBe(1);
-  });
-
-  it('enrichNotification - catches error and logs message', async () => {
-    const rendererLogErrorSpy = vi
-      .spyOn(logger, 'rendererLogError')
-      .mockImplementation(vi.fn());
-    const rendererLogWarnSpy = vi
-      .spyOn(logger, 'rendererLogWarn')
-      .mockImplementation(vi.fn());
-
-    const mockError = new Error('Test error');
-    const mockNotification = mockPartialGitifyNotification({
-      title: 'This issue will throw an error',
-      type: 'Issue',
-      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
-    });
-    const mockRepository: GitifyRepository = {
-      name: 'notifications-test',
-      fullName: 'gitify-app/notifications-test',
-      htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
-      owner: {
-        login: 'gitify-app',
-        avatarUrl:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
-        type: 'Organization',
-      },
-    };
-    mockNotification.repository = mockRepository;
-
-    vi.spyOn(apiClient, 'fetchIssueByNumber').mockRejectedValue(mockError);
-
-    await enrichNotification(mockNotification, mockSettings);
-
-    expect(rendererLogErrorSpy).toHaveBeenCalledWith(
-      'enrichNotification',
-      'failed to enrich notification details for',
-      mockError,
-      mockNotification,
-    );
-
-    expect(rendererLogWarnSpy).toHaveBeenCalledWith(
-      'enrichNotification',
-      'Continuing with base notification details',
-    );
   });
 
   describe('stabilizeNotificationsOrder', () => {

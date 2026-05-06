@@ -1,16 +1,13 @@
-import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
-import { mockRawUser } from '../../forges/github/__mocks__/response-mocks';
+import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../../../__mocks__/state-mocks';
+import { mockRawUser } from '../__mocks__/response-mocks';
 
-import { useFiltersStore } from '../../../stores';
+import { useFiltersStore } from '../../../../stores';
 
-import type { GitifyNotification, Link } from '../../../types';
-import type {
-  GetCommitCommentResponse,
-  GetCommitResponse,
-} from '../../forges/github/types';
+import type { GitifyNotification, Link } from '../../../../types';
+import type { GetCommitCommentResponse, GetCommitResponse } from '../types';
 
-import * as apiClient from '../../forges/github/client';
+import * as apiClient from '../client';
 import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {

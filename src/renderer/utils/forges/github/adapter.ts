@@ -25,6 +25,7 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from './client';
+import { enrichGitHubNotifications } from './enrich';
 import { createOctokitClient } from './octokit';
 import { transformNotifications } from './transform';
 
@@ -70,6 +71,8 @@ export const githubAdapter: ForgeAdapter = {
   unsubscribeThread: async (account, threadId) => {
     await ignoreNotificationThreadSubscription(account, threadId);
   },
+
+  enrichNotifications: enrichGitHubNotifications,
 
   followUrl,
 

@@ -23,8 +23,6 @@ export interface ForgeCapabilities {
   markAsDone(account: Account): boolean;
   /** Whether the forge supports ignoring a thread's subscription (unsubscribe). */
   unsubscribeThread(account: Account): boolean;
-  /** Whether the forge supports detailed notification enrichment (typically GraphQL). */
-  enrichment(account: Account): boolean;
   /** Whether the forge surfaces an "answered" state for discussions. */
   answeredDiscussion(account: Account): boolean;
 }
@@ -87,6 +85,17 @@ export interface ForgeAdapter {
   markThreadAsRead(account: Account, threadId: string): Promise<void>;
   markThreadAsDone(account: Account, threadId: string): Promise<void>;
   unsubscribeThread(account: Account, threadId: string): Promise<void>;
+
+  /**
+   * Enrich notifications with forge-specific subject details (state, user,
+   * comment count, etc.). Optional — forges that do not support detailed
+   * enrichment (e.g. Gitea) omit this and the orchestrator returns the input
+   * unchanged.
+   */
+  enrichNotifications?(
+    notifications: GitifyNotification[],
+    settings: SettingsState,
+  ): Promise<GitifyNotification[]>;
 
   /**
    * GET an arbitrary forge URL and return JSON. Used by notification

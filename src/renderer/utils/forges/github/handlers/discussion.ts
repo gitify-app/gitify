@@ -18,14 +18,14 @@ import {
   IconColor,
   type Link,
   type SettingsState,
-} from '../../../types';
+} from '../../../../types';
 
-import { fetchDiscussionByNumber } from '../../forges/github/client';
+import { fetchDiscussionByNumber } from '../client';
 import type {
   CommentFieldsFragment,
   DiscussionCommentFieldsFragment,
   DiscussionDetailsFragment,
-} from '../../forges/github/graphql/generated/graphql';
+} from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 

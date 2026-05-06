@@ -19,12 +19,13 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       expect(
         giteaAdapter.capabilities.unsubscribeThread(mockGiteaAccount),
       ).toBe(false);
-      expect(giteaAdapter.capabilities.enrichment(mockGiteaAccount)).toBe(
-        false,
-      );
       expect(
         giteaAdapter.capabilities.answeredDiscussion(mockGiteaAccount),
       ).toBe(false);
+    });
+
+    it('does not implement detailed enrichment', () => {
+      expect(giteaAdapter.enrichNotifications).toBeUndefined();
     });
 
     it('exposes a single PAT login method', () => {
@@ -50,22 +51,36 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
   });
 
   describe('validateToken', () => {
-    it('rejects tokens shorter than 8 characters', () => {
-      expect(giteaAdapter.validateToken('short' as Token)).toBe(false);
+    it('rejects tokens shorter than 40 characters', () => {
+      expect(giteaAdapter.validateToken('a1b2c3d4' as Token)).toBe(false);
     });
 
-    it('rejects tokens longer than 512 characters', () => {
-      expect(giteaAdapter.validateToken('x'.repeat(513) as Token)).toBe(false);
+    it('rejects tokens longer than 40 characters', () => {
+      expect(giteaAdapter.validateToken('a'.repeat(41) as Token)).toBe(false);
     });
 
-    it('rejects tokens that contain newlines', () => {
-      expect(giteaAdapter.validateToken('abcd1234\n' as Token)).toBe(false);
+    it('rejects tokens with non-hex characters', () => {
+      expect(
+        giteaAdapter.validateToken(
+          'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ' as Token,
+        ),
+      ).toBe(false);
     });
 
-    it('accepts a normal Gitea token', () => {
-      expect(giteaAdapter.validateToken('abcdefgh12345678' as Token)).toBe(
-        true,
-      );
+    it('rejects uppercase hex (Gitea normalises to lowercase)', () => {
+      expect(
+        giteaAdapter.validateToken(
+          'ABCDEF0123456789ABCDEF0123456789ABCDEF01' as Token,
+        ),
+      ).toBe(false);
+    });
+
+    it('accepts a 40-character lowercase hex token', () => {
+      expect(
+        giteaAdapter.validateToken(
+          '25da6ab8f66d379349b7b5cce0395c2092e2abb2' as Token,
+        ),
+      ).toBe(true);
     });
   });
 

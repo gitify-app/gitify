@@ -1,7 +1,6 @@
 import type {
   Account,
   GitifyNotification,
-  GitifyNotificationDisplay,
   GitifyRepository,
   GitifySubject,
   Link,
@@ -40,7 +39,7 @@ function transformGiteaNotification(
     repository: transformRepository(raw, account),
     account,
     order: 0,
-    display: undefined as unknown as GitifyNotificationDisplay,
+    // `display` is populated by formatNotification post-enrichment.
   };
 }
 

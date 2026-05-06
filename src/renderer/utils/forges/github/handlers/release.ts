@@ -11,10 +11,10 @@ import type {
   Link,
   SettingsState,
   UserType,
-} from '../../../types';
+} from '../../../../types';
 
-import { getRelease } from '../../forges/github/client';
-import { isStateFilteredOut } from '../filters/filter';
+import { isStateFilteredOut } from '../../../notifications/filters/filter';
+import { getRelease } from '../client';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 

@@ -18,14 +18,14 @@ import {
   IconColor,
   type Link,
   type SettingsState,
-} from '../../../types';
+} from '../../../../types';
 
-import { fetchPullByNumber } from '../../forges/github/client';
+import { formatGitHubNumber } from '../../../notifications/formatters';
+import { fetchPullByNumber } from '../client';
 import type {
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
-} from '../../forges/github/graphql/generated/graphql';
-import { formatGitHubNumber } from '../formatters';
+} from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 

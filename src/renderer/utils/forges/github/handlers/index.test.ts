@@ -1,6 +1,6 @@
-import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 
-import type { SubjectType } from '../../../types';
+import type { SubjectType } from '../../../../types';
 import type { NotificationTypeHandler } from './types';
 
 import { checkSuiteHandler } from './checkSuite';

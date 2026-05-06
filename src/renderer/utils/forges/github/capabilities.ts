@@ -25,9 +25,6 @@ export const githubCapabilities: ForgeCapabilities = {
   unsubscribeThread(): boolean {
     return true;
   },
-  enrichment(): boolean {
-    return true;
-  },
   answeredDiscussion(account: Account): boolean {
     if (!isEnterpriseServerHost(account.hostname)) {
       return true;

@@ -73,14 +73,26 @@ import {
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
 import { defaultAuth, defaultSettings } from './defaults';
 
+const KNOWN_FORGES: ReadonlySet<Forge> = new Set(['github', 'gitea']);
+
+function isKnownForge(forge: unknown): forge is Forge {
+  return typeof forge === 'string' && KNOWN_FORGES.has(forge as Forge);
+}
+
 /**
  * Backfill the `forge` field on accounts persisted before multi-forge support.
- * Legacy accounts default to GitHub.
+ *
+ * Persisted state is untrusted JSON, so we accept only the registered forge
+ * IDs here — anything else (missing, empty string, casing mismatch, value
+ * removed in a later release) is treated as legacy GitHub.
  */
 function migrateLegacyAuthState(auth: AuthState): AuthState {
   return {
     ...auth,
-    accounts: auth.accounts.map((a) => ({ ...a, forge: a.forge ?? 'github' })),
+    accounts: auth.accounts.map((a) => ({
+      ...a,
+      forge: isKnownForge(a.forge) ? a.forge : 'github',
+    })),
   };
 }
 

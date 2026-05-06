@@ -331,8 +331,14 @@ export interface GitifyNotification {
   account: Account;
   /** UI ordering index */
   order: number;
-  /** Formatted information for display/presentation to user */
-  display: GitifyNotificationDisplay;
+  /**
+   * Formatted information for display/presentation to user.
+   *
+   * Populated by `formatNotification` after enrichment; consumers that read
+   * this field run after that pipeline stage, so it is always present at the
+   * UI boundary.
+   */
+  display?: GitifyNotificationDisplay;
 }
 
 /**

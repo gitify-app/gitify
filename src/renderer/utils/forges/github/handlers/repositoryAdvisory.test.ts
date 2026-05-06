@@ -1,6 +1,6 @@
-import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
+import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 
-import type { GitifyNotification, Link } from '../../../types';
+import type { GitifyNotification, Link } from '../../../../types';
 
 import { repositoryAdvisoryHandler } from './repositoryAdvisory';
 

@@ -16,7 +16,7 @@ import {
   IconColor,
   type Link,
   type SettingsState,
-} from '../../../types';
+} from '../../../../types';
 
 import { DefaultHandler, defaultHandler } from './default';
 import { actionsURL } from './utils';
