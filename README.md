@@ -32,6 +32,8 @@ Gitify uses a forge adapter pattern (see [`MAINTAINERS.md`](MAINTAINERS.md)) so 
 | **Azure DevOps**                                | 💭 Considering | —             | —         | —         | —           | —                |
 | **Gerrit**                                      | 💭 Considering | —             | —         | —         | —           | —                |
 
+**Status legend:** ✅ Supported · 🧪 Experimental (rough edges expected) · 🚧 In progress (adapter is being worked on) · 💭 Considering (open to a maintainer picking it up).
+
 A new forge needs an [adapter](src/renderer/utils/forges/) plus a designated maintainer — see [the contributing guide](CONTRIBUTING.md#multi-forge-support) for the full policy.
 
 
