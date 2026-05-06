@@ -185,10 +185,10 @@ importers:
         version: 0.13.0(@biomejs/biome@2.4.13)(typescript@6.0.3)(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1)(yaml@2.8.3))
       vite-plugin-electron:
         specifier: 0.29.1
-        version: 0.29.1(vite-plugin-electron-renderer@0.14.6)
+        version: 0.29.1(vite-plugin-electron-renderer@0.14.7)
       vite-plugin-electron-renderer:
-        specifier: 0.14.6
-        version: 0.14.6
+        specifier: 0.14.7
+        version: 0.14.7
       vitest:
         specifier: 4.1.5
         version: 4.1.5(@types/node@24.12.2)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.9.0)(vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1)(yaml@2.8.3))
@@ -3714,8 +3714,8 @@ packages:
       vue-tsc:
         optional: true
 
-  vite-plugin-electron-renderer@0.14.6:
-    resolution: {integrity: sha512-oqkWFa7kQIkvHXG7+Mnl1RTroA4sP0yesKatmAy0gjZC4VwUqlvF9IvOpHd1fpLWsqYX/eZlVxlhULNtaQ78Jw==}
+  vite-plugin-electron-renderer@0.14.7:
+    resolution: {integrity: sha512-hHBMKuZ24MB2SIxG7U7ix+DDEnvxou7Bgy/TdhYxNz3S5N3Yh7Hjvj9blfMeGEJ0oaZJn7y5z0V/RyDmJ5OuCA==}
 
   vite-plugin-electron@0.29.1:
     resolution: {integrity: sha512-AejNed5BgHFnuw8h5puTa61C6vdP4ydbsbo/uVjH1fTdHAlCDz1+o6pDQ/scQj1udDrGvH01+vTbzQh/vMnR9w==}
@@ -7662,11 +7662,11 @@ snapshots:
       '@biomejs/biome': 2.4.13
       typescript: 6.0.3
 
-  vite-plugin-electron-renderer@0.14.6: {}
+  vite-plugin-electron-renderer@0.14.7: {}
 
-  vite-plugin-electron@0.29.1(vite-plugin-electron-renderer@0.14.6):
+  vite-plugin-electron@0.29.1(vite-plugin-electron-renderer@0.14.7):
     optionalDependencies:
-      vite-plugin-electron-renderer: 0.14.6
+      vite-plugin-electron-renderer: 0.14.7
 
   vite@8.0.10(@types/node@24.12.2)(jiti@2.6.1)(yaml@2.8.3):
     dependencies:
