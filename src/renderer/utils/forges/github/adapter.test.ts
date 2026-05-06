@@ -2,8 +2,8 @@ import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 
 import type { Hostname, Link, SettingsState, Token } from '../../../types';
 
-import * as client from './client';
 import { githubAdapter } from './adapter';
+import * as client from './client';
 import * as octokit from './octokit';
 
 describe('renderer/utils/forges/github/adapter.ts', () => {
@@ -23,9 +23,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
 
     it('validates a 40-character token', () => {
-      expect(
-        githubAdapter.validateToken('a'.repeat(40) as Token),
-      ).toBe(true);
+      expect(githubAdapter.validateToken('a'.repeat(40) as Token)).toBe(true);
       expect(githubAdapter.validateToken('short' as Token)).toBe(false);
     });
 
@@ -57,16 +55,17 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       );
 
       expect(result.data.login).toBe('octocat');
-      expect(result.headers['x-oauth-scopes']).toBe(
-        'notifications,read:user',
-      );
+      expect(result.headers['x-oauth-scopes']).toBe('notifications,read:user');
     });
   });
 
   describe('listNotifications', () => {
     it('lists notifications and transforms them to GitifyNotification', async () => {
       const settings = {} as SettingsState;
-      vi.spyOn(client, 'listNotificationsForAuthenticatedUser').mockResolvedValue([
+      vi.spyOn(
+        client,
+        'listNotificationsForAuthenticatedUser',
+      ).mockResolvedValue([
         {
           id: '1',
           unread: true,
@@ -129,9 +128,11 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     it('unsubscribeThread delegates to the GitHub client', async () => {
       const spy = vi
         .spyOn(client, 'ignoreNotificationThreadSubscription')
-        .mockResolvedValue(undefined as unknown as Awaited<
-          ReturnType<typeof client.ignoreNotificationThreadSubscription>
-        >);
+        .mockResolvedValue(
+          undefined as unknown as Awaited<
+            ReturnType<typeof client.ignoreNotificationThreadSubscription>
+          >,
+        );
 
       await githubAdapter.unsubscribeThread(mockGitHubCloudAccount, '9');
 
@@ -146,9 +147,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       });
       vi.spyOn(octokit, 'createOctokitClient').mockResolvedValue({
         request: requestMock,
-      } as unknown as Awaited<
-        ReturnType<typeof octokit.createOctokitClient>
-      >);
+      } as unknown as Awaited<ReturnType<typeof octokit.createOctokitClient>>);
 
       const result = await githubAdapter.followUrl<{ html_url: string }>(
         mockGitHubCloudAccount,

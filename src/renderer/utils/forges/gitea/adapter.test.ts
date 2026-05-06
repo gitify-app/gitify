@@ -2,8 +2,8 @@ import { mockGiteaAccount } from '../../../__mocks__/account-mocks';
 
 import type { Hostname, Link, SettingsState, Token } from '../../../types';
 
-import * as client from './client';
 import { giteaAdapter } from './adapter';
+import * as client from './client';
 
 describe('renderer/utils/forges/gitea/adapter.ts', () => {
   describe('static fields', () => {
@@ -19,7 +19,9 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       expect(
         giteaAdapter.capabilities.unsubscribeThread(mockGiteaAccount),
       ).toBe(false);
-      expect(giteaAdapter.capabilities.enrichment(mockGiteaAccount)).toBe(false);
+      expect(giteaAdapter.capabilities.enrichment(mockGiteaAccount)).toBe(
+        false,
+      );
       expect(
         giteaAdapter.capabilities.answeredDiscussion(mockGiteaAccount),
       ).toBe(false);
@@ -76,9 +78,8 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         avatar_url: 'https://example.com/a.png',
       });
 
-      const result = await giteaAdapter.fetchAuthenticatedUser(
-        mockGiteaAccount,
-      );
+      const result =
+        await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
 
       expect(result).toEqual({
         data: {
@@ -97,9 +98,8 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         login: 'octocat',
       });
 
-      const result = await giteaAdapter.fetchAuthenticatedUser(
-        mockGiteaAccount,
-      );
+      const result =
+        await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
 
       expect(result.data.name).toBeNull();
       expect(result.data.avatar_url).toBe('');

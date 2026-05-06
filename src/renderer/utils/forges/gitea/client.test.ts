@@ -103,9 +103,7 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
 
   describe('fetchGiteaAuthenticatedUser', () => {
     it('returns the user payload', async () => {
-      fetchSpy.mockResolvedValueOnce(
-        jsonResponse({ id: 7, login: 'octocat' }),
-      );
+      fetchSpy.mockResolvedValueOnce(jsonResponse({ id: 7, login: 'octocat' }));
 
       const result = await fetchGiteaAuthenticatedUser(mockGiteaAccount);
 
