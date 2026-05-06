@@ -87,6 +87,16 @@ export function setAutoLaunch(value: boolean): void {
 }
 
 /**
+ * Enable or disable hiding the application window to the tray when the
+ * window receives a close request (e.g. from the OS / window manager).
+ *
+ * @param value - `true` to hide on close, `false` to quit on close.
+ */
+export function setKeepRunningInTray(value: boolean): void {
+  window.gitify.setKeepRunningInTray(value);
+}
+
+/**
  * Switch the tray icon to an alternate idle icon variant.
  *
  * @param value - `true` to use the alternate idle icon, `false` for the default.
