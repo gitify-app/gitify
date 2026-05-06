@@ -1,14 +1,14 @@
 import type { ExecutionResult } from 'graphql';
 
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
-} from '../../__mocks__/notifications-mocks';
+} from '../../../__mocks__/notifications-mocks';
 
-import { Constants } from '../../constants';
+import { Constants } from '../../../constants';
 
-import type { Link, SettingsState } from '../../types';
+import type { Link, SettingsState } from '../../../types';
 
 import {
   fetchAuthenticatedUserDetails,
@@ -39,7 +39,7 @@ import * as apiRequests from './request';
 
 const mockThreadId = '1234';
 
-describe('renderer/utils/api/client.ts', () => {
+describe('renderer/utils/forges/github/client.ts', () => {
   const mockOctokit = {
     rest: {
       activity: {

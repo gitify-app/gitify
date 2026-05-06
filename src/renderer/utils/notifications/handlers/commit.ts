@@ -12,7 +12,7 @@ import type {
   SettingsState,
 } from '../../../types';
 
-import { getCommit, getCommitComment } from '../../api/client';
+import { getCommit, getCommitComment } from '../../forges/github/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler } from './default';
 import { getNotificationAuthor } from './utils';

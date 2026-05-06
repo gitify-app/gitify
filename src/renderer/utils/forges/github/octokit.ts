@@ -3,13 +3,13 @@ import { paginateRest } from '@octokit/plugin-paginate-rest';
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
 import { retry } from '@octokit/plugin-retry';
 
-import { APPLICATION } from '../../../shared/constants';
+import { APPLICATION } from '../../../../shared/constants';
 
-import type { Account } from '../../types';
+import type { Account } from '../../../types';
 import type { APIClientType } from './types';
 
-import { getAccountUUID } from '../auth/utils';
-import { decryptValue, getAppVersion } from '../system/comms';
+import { getAccountUUID } from '../../auth/utils';
+import { decryptValue, getAppVersion } from '../../system/comms';
 import { getGitHubAPIBaseUrl } from './utils';
 
 // Create the Octokit type with plugins

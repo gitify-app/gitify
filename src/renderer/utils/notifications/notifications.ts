@@ -9,10 +9,10 @@ import type {
   SettingsState,
 } from '../../types';
 
-import { fetchNotificationDetailsForList } from '../api/client';
 import { determineFailureType } from '../api/errors';
-import type { FetchMergedDetailsTemplateQuery } from '../api/graphql/generated/graphql';
 import { rendererLogError, rendererLogWarn, toError } from '../core/logger';
+import { fetchNotificationDetailsForList } from '../forges/github/client';
+import type { FetchMergedDetailsTemplateQuery } from '../forges/github/graphql/generated/graphql';
 import { getAdapter } from '../forges/registry';
 import {
   filterBaseNotifications,

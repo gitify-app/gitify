@@ -13,9 +13,9 @@ import {
 } from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings, mockState } from '../__mocks__/state-mocks';
 
-import * as apiClient from '../utils/api/client';
 import { Errors } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
+import * as apiClient from '../utils/forges/github/client';
 import * as notificationsUtils from '../utils/notifications/notifications';
 import * as sound from '../utils/system/audio';
 import * as native from '../utils/system/native';

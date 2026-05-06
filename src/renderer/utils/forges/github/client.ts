@@ -1,11 +1,11 @@
-import { Constants } from '../../constants';
+import { Constants } from '../../../constants';
 
 import type {
   Account,
   GitifyNotification,
   Link,
   SettingsState,
-} from '../../types';
+} from '../../../types';
 import type {
   GetCommitCommentResponse,
   GetCommitResponse,
@@ -17,8 +17,8 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
-import { githubCapabilities } from '../forges/github/capabilities';
-import { createNotificationHandler } from '../notifications/handlers';
+import { createNotificationHandler } from '../../notifications/handlers';
+import { githubCapabilities } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,

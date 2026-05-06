@@ -5,7 +5,7 @@ import {
   mockCommenter,
   mockIssueResponseNode,
   noReactionGroups,
-} from '../../api/__mocks__/response-mocks';
+} from '../../forges/github/__mocks__/response-mocks';
 
 import type { GitifyNotification } from '../../../types';
 import {
@@ -15,8 +15,8 @@ import {
   type Link,
 } from '../../../types';
 
-import * as apiClient from '../../api/client';
-import type { FetchIssueByNumberQuery } from '../../api/graphql/generated/graphql';
+import * as apiClient from '../../forges/github/client';
+import type { FetchIssueByNumberQuery } from '../../forges/github/graphql/generated/graphql';
 import { issueHandler } from './issue';
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {

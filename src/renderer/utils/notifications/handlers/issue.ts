@@ -18,8 +18,8 @@ import type {
 } from '../../../types';
 import { IconColor } from '../../../types';
 
-import { fetchIssueByNumber } from '../../api/client';
-import type { IssueDetailsFragment } from '../../api/graphql/generated/graphql';
+import { fetchIssueByNumber } from '../../forges/github/client';
+import type { IssueDetailsFragment } from '../../forges/github/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 

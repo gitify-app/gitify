@@ -4,7 +4,7 @@ import {
   MergeQueryBuilder,
 } from './MergeQueryBuilder';
 
-describe('renderer/utils/api/graphql/MergeQueryBuilder.ts', () => {
+describe('renderer/utils/forges/github/graphql/MergeQueryBuilder.ts', () => {
   const sharedVars: FetchBatchMergedTemplateNonIndexedVariables = {
     lastComments: 5,
     lastThreadedComments: 3,

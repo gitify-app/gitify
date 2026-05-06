@@ -1,9 +1,9 @@
-import { Constants } from '../../constants';
+import { Constants } from '../../../constants';
 
-import type { Hostname } from '../../types';
+import type { Hostname } from '../../../types';
 import type { APIClientType } from './types';
 
-import { getPlatformFromHostname } from '../auth/platform';
+import { getPlatformFromHostname } from '../../auth/platform';
 
 export function getGitHubAPIBaseUrl(hostname: Hostname, type: APIClientType) {
   const platform = getPlatformFromHostname(hostname);

@@ -14,7 +14,7 @@ import type {
   PullRequestReviewState,
   PullRequestState,
   ReactionGroupFieldsFragment,
-} from './utils/api/graphql/generated/graphql';
+} from './utils/forges/github/graphql/generated/graphql';
 
 declare const __brand: unique symbol;
 

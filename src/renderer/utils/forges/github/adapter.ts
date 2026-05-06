@@ -13,20 +13,20 @@ import type {
 import type { ForgeAdapter, RefreshAccountData } from '../types';
 
 import {
-  fetchAuthenticatedUserDetails,
-  ignoreNotificationThreadSubscription,
-  listNotificationsForAuthenticatedUser,
-  markNotificationThreadAsDone,
-  markNotificationThreadAsRead,
-} from '../../api/client';
-import { createOctokitClient } from '../../api/octokit';
-import { transformNotifications } from '../../api/transform';
-import {
   getDeveloperSettingsURL as legacyGetDeveloperSettingsURL,
   getNewTokenURL as legacyGetNewTokenURL,
   isValidToken as legacyIsValidToken,
 } from '../../auth/utils';
 import { githubCapabilities } from './capabilities';
+import {
+  fetchAuthenticatedUserDetails,
+  ignoreNotificationThreadSubscription,
+  listNotificationsForAuthenticatedUser,
+  markNotificationThreadAsDone,
+  markNotificationThreadAsRead,
+} from './client';
+import { createOctokitClient } from './octokit';
+import { transformNotifications } from './transform';
 
 async function fetchAuthenticatedUser(
   account: Account,

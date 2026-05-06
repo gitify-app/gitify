@@ -21,7 +21,7 @@ import {
 } from '../../types';
 
 import * as logger from '../../utils/core/logger';
-import * as apiClient from '../api/client';
+import * as apiClient from '../forges/github/client';
 import {
   enrichNotification,
   enrichNotifications,

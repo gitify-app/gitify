@@ -10,10 +10,10 @@ import type {
   Reason,
   SubjectType,
   UserType,
-} from '../../types';
+} from '../../../types';
 import type { RawGitHubNotification } from './types';
 
-import { getReasonDetails } from '../notifications/reason';
+import { getReasonDetails } from '../../notifications/reason';
 
 /**
  * Transform all raw notifications from Atlassian types to Atlassify types.

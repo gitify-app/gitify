@@ -5,7 +5,7 @@ import {
   mockCommenter,
   mockPullRequestResponseNode,
   noReactionGroups,
-} from '../../api/__mocks__/response-mocks';
+} from '../../forges/github/__mocks__/response-mocks';
 
 import type { GitifyNotification } from '../../../types';
 import {
@@ -15,11 +15,11 @@ import {
   type Link,
 } from '../../../types';
 
-import * as apiClient from '../../api/client';
+import * as apiClient from '../../forges/github/client';
 import type {
   FetchPullRequestByNumberQuery,
   PullRequestReviewState,
-} from '../../api/graphql/generated/graphql';
+} from '../../forges/github/graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {

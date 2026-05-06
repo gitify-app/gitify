@@ -13,7 +13,7 @@ import type {
   UserType,
 } from '../../../types';
 
-import { getRelease } from '../../api/client';
+import { getRelease } from '../../forges/github/client';
 import { isStateFilteredOut } from '../filters/filter';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';

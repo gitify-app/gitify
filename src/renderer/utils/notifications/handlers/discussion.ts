@@ -20,12 +20,12 @@ import {
   type SettingsState,
 } from '../../../types';
 
-import { fetchDiscussionByNumber } from '../../api/client';
+import { fetchDiscussionByNumber } from '../../forges/github/client';
 import type {
   CommentFieldsFragment,
   DiscussionCommentFieldsFragment,
   DiscussionDetailsFragment,
-} from '../../api/graphql/generated/graphql';
+} from '../../forges/github/graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 

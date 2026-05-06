@@ -1,6 +1,6 @@
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
-import { mockRawUser } from '../api/__mocks__/response-mocks';
+import { mockRawUser } from '../forges/github/__mocks__/response-mocks';
 
 import { Constants } from '../../constants';
 
@@ -12,11 +12,11 @@ import type {
   Link,
   Token,
 } from '../../types';
-import type { GetAuthenticatedUserResponse } from '../api/types';
+import type { GetAuthenticatedUserResponse } from '../forges/github/types';
 import type { AuthMethod } from './types';
 
-import * as apiClient from '../api/client';
 import * as logger from '../core/logger';
+import * as apiClient from '../forges/github/client';
 import { getRecommendedScopeNames } from './scopes';
 import * as authUtils from './utils';
 import {

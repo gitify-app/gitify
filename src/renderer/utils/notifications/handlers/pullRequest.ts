@@ -20,11 +20,11 @@ import {
   type SettingsState,
 } from '../../../types';
 
-import { fetchPullByNumber } from '../../api/client';
+import { fetchPullByNumber } from '../../forges/github/client';
 import type {
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
-} from '../../api/graphql/generated/graphql';
+} from '../../forges/github/graphql/generated/graphql';
 import { formatGitHubNumber } from '../formatters';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';

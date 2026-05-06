@@ -1,6 +1,6 @@
 import type { GitifyNotificationUser, Link } from '../../../types';
 
-import type { AuthorFieldsFragment } from '../../api/graphql/generated/graphql';
+import type { AuthorFieldsFragment } from '../../forges/github/graphql/generated/graphql';
 
 // Author type from GraphQL or manually constructed
 type AuthorInput =

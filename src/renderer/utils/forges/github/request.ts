@@ -1,8 +1,8 @@
 import { GraphqlResponseError } from '@octokit/graphql';
 
-import type { Account } from '../../types';
+import type { Account } from '../../../types';
 
-import { handleGraphQLResponseError } from './errors';
+import { handleGraphQLResponseError } from '../../api/errors';
 import type { TypedDocumentString } from './graphql/generated/graphql';
 import { createOctokitClient } from './octokit';
 

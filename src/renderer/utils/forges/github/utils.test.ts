@@ -1,10 +1,10 @@
-import { Constants } from '../../constants';
+import { Constants } from '../../../constants';
 
-import type { Hostname } from '../../types';
+import type { Hostname } from '../../../types';
 
 import { getGitHubAPIBaseUrl } from './utils';
 
-describe('renderer/utils/api/utils.ts', () => {
+describe('renderer/utils/forges/github/utils.ts', () => {
   describe('getGitHubAPIBaseUrl', () => {
     it('should generate a GitHub REST API url - non enterprise', () => {
       const result = getGitHubAPIBaseUrl(Constants.GITHUB_HOSTNAME, 'rest');

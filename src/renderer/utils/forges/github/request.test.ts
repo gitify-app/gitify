@@ -1,4 +1,4 @@
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 
 import { FetchIssueByNumberDocument } from './graphql/generated/graphql';
 import type { OctokitClient } from './octokit';
@@ -30,7 +30,7 @@ vi.mock('@octokit/plugin-rest-endpoint-methods', () => ({
   restEndpointMethods: vi.fn((octokit: any) => octokit),
 }));
 
-describe('renderer/utils/api/request.ts', () => {
+describe('renderer/utils/forges/github/request.ts', () => {
   let mockOctokitInstance: {
     request: ReturnType<typeof vi.fn>;
     graphql: ReturnType<typeof vi.fn>;

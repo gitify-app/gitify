@@ -1,6 +1,6 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { mockRawUser } from '../../api/__mocks__/response-mocks';
+import { mockRawUser } from '../../forges/github/__mocks__/response-mocks';
 
 import { useFiltersStore } from '../../../stores';
 
@@ -8,9 +8,9 @@ import type { GitifyNotification, Link } from '../../../types';
 import type {
   GetCommitCommentResponse,
   GetCommitResponse,
-} from '../../api/types';
+} from '../../forges/github/types';
 
-import * as apiClient from '../../api/client';
+import * as apiClient from '../../forges/github/client';
 import { commitHandler } from './commit';
 
 describe('renderer/utils/notifications/handlers/commit.ts', () => {

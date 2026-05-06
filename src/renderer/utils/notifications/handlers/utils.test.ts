@@ -1,4 +1,4 @@
-import { mockAuthor } from '../../api/__mocks__/response-mocks';
+import { mockAuthor } from '../../forges/github/__mocks__/response-mocks';
 
 import { getNotificationAuthor } from './utils';
 

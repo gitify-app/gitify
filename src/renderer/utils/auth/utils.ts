@@ -17,13 +17,13 @@ import type {
 } from '../../types';
 import type { AuthMethod } from './types';
 
-import { clearOctokitClientCacheForAccount } from '../api/octokit';
 import {
   rendererLogError,
   rendererLogInfo,
   rendererLogWarn,
   toError,
 } from '../core/logger';
+import { clearOctokitClientCacheForAccount } from '../forges/github/octokit';
 import { getAdapter } from '../forges/registry';
 import { encryptValue } from '../system/comms';
 import { getPlatformFromHostname, resolvePlatform } from './platform';

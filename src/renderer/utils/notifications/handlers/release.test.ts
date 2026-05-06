@@ -1,13 +1,13 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../../__mocks__/state-mocks';
-import { mockRawUser } from '../../api/__mocks__/response-mocks';
+import { mockRawUser } from '../../forges/github/__mocks__/response-mocks';
 
 import { useFiltersStore } from '../../../stores';
 
 import type { GitifyNotification, Link } from '../../../types';
-import type { GetReleaseResponse } from '../../api/types';
+import type { GetReleaseResponse } from '../../forges/github/types';
 
-import * as apiClient from '../../api/client';
+import * as apiClient from '../../forges/github/client';
 import { releaseHandler } from './release';
 
 describe('renderer/utils/notifications/handlers/release.ts', () => {

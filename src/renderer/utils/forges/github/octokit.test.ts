@@ -2,9 +2,9 @@ import {
   mockGitHubAppAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
-} from '../../__mocks__/account-mocks';
+} from '../../../__mocks__/account-mocks';
 
-import * as comms from '../system/comms';
+import * as comms from '../../system/comms';
 import {
   clearOctokitClientCache,
   createOctokitClient,
@@ -12,7 +12,7 @@ import {
 } from './octokit';
 import * as utils from './utils';
 
-describe('renderer/utils/api/octokit.ts', () => {
+describe('renderer/utils/forges/github/octokit.ts', () => {
   const mockDecryptValue = vi.spyOn(comms, 'decryptValue');
 
   beforeEach(() => {

@@ -11,7 +11,7 @@ import {
   extractQueryFragments,
 } from './utils';
 
-describe('renderer/utils/api/graphql/utils.ts', () => {
+describe('renderer/utils/forges/github/graphql/utils.ts', () => {
   describe('getQueryFragmentBody', () => {
     it('should extract query fragments from operation document', () => {
       const fragments = extractQueryFragments(

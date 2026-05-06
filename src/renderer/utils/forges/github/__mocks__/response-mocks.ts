@@ -1,4 +1,4 @@
-import type { Link } from '../../../types';
+import type { Link } from '../../../../types';
 import type { RawUser } from '../types';
 
 import type {

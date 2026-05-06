@@ -1,7 +1,7 @@
 import type { GitifyNotification, Link } from '../../types';
 
-import { getHtmlUrl } from '../api/client';
 import { rendererLogError, toError } from '../core/logger';
+import { getHtmlUrl } from '../forges/github/client';
 import { createNotificationHandler } from './handlers';
 
 export function generateNotificationReferrerId(
