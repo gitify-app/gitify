@@ -17,6 +17,24 @@
 - ⚡ Fast, native experience
 
 
+## Supported forges
+
+Gitify uses a forge adapter pattern (see [`MAINTAINERS.md`](MAINTAINERS.md)) so notifications can come from any compatible Git forge, not just GitHub.
+
+| Forge                                           | Status         | Notifications | Mark read | Mark done | Unsubscribe | Enriched details |
+| ----------------------------------------------- | -------------- | :-----------: | :-------: | :-------: | :---------: | :--------------: |
+| **GitHub** Cloud                                | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
+| **GitHub** Enterprise Server (≥ 3.13)           | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
+| **GitHub** Enterprise Cloud with Data Residency | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
+| **Gitea** (incl. Forgejo, Codeberg)             | ✅ Supported   | ✅            | ✅        | —         | —           | —                |
+| **GitLab** (todos)                              | 💭 Considering | —             | —         | —         | —           | —                |
+| **Bitbucket** Cloud / Data Center               | 💭 Considering | —             | —         | —         | —           | —                |
+| **Azure DevOps**                                | 💭 Considering | —             | —         | —         | —           | —                |
+| **Gerrit**                                      | 💭 Considering | —             | —         | —         | —           | —                |
+
+A new forge needs an [adapter](src/renderer/utils/forges/) plus a designated maintainer — see [the contributing guide](CONTRIBUTING.md#multi-forge-support) for the full policy.
+
+
 ## Quick Start
 
 1. **Download** Gitify for free from [gitify.io][website].
