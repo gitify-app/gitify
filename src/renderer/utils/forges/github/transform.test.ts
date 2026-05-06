@@ -131,7 +131,12 @@ describe('renderer/utils/forges/github/transform.ts', () => {
 
   it('preserves a null latest_comment_url', () => {
     const raw = rawNotification();
-    raw.subject = { ...raw.subject, latest_comment_url: null };
+    // The Octokit type narrows latest_comment_url to string, but the GitHub
+    // REST API returns null for threads with no replies — exercise that path.
+    raw.subject = {
+      ...raw.subject,
+      latest_comment_url: null as unknown as string,
+    };
 
     const [n] = transformNotifications([raw], mockGitHubCloudAccount);
 
