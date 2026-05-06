@@ -12,16 +12,20 @@ export function registerStorageHandlers(): void {
   /**
    * Encrypt a string using Electron's safeStorage and return the encrypted value as a base64 string.
    */
-  handleMainEvent(EVENTS.SAFE_STORAGE_ENCRYPT, (_, value: string) => {
-    return safeStorage.encryptString(value).toString('base64');
+  handleMainEvent(EVENTS.SAFE_STORAGE_ENCRYPT, async (_, value: string) => {
+    const encrypted = await safeStorage.encryptStringAsync(value);
+    return encrypted.toString('base64');
   });
 
   /**
    * Decrypt a base64-encoded string using Electron's safeStorage and return the decrypted value.
    */
-  handleMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, (_, value: string) => {
+  handleMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, async (_, value: string) => {
     try {
-      return safeStorage.decryptString(Buffer.from(value, 'base64'));
+      const { result } = await safeStorage.decryptStringAsync(
+        Buffer.from(value, 'base64'),
+      );
+      return result;
     } catch (err) {
       logError(
         'main:safe-storage-decrypt',
