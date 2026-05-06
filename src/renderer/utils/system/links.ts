@@ -11,7 +11,7 @@ import type {
   Link,
 } from '../../types';
 
-import { getDeveloperSettingsURL } from '../auth/utils';
+import { getAdapter } from '../forges/registry';
 import { generateGitHubWebUrl } from '../notifications/url';
 import { openExternalLink } from './comms';
 
@@ -54,7 +54,7 @@ export function openHost(hostname: Hostname) {
 }
 
 export function openDeveloperSettings(account: Account) {
-  const url = getDeveloperSettingsURL(account);
+  const url = getAdapter(account).getDeveloperSettingsUrl(account);
   openExternalLink(url);
 }
 

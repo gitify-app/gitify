@@ -73,7 +73,9 @@ export const giteaAdapter: ForgeAdapter = {
     patchGiteaNotificationThread(account, threadId, 'read'),
   unsubscribeThread: () => unsupported('Ignoring thread subscriptions'),
 
-  followUrl: <T,>(account: Account, url: Link) => giteaGetJson<T>(account, url),
+  followUrl<T>(account: Account, url: Link): Promise<T> {
+    return giteaGetJson<T>(account, url);
+  },
 
   validateToken: (token: Token) =>
     token.length >= 8 && token.length <= 512 && !/[\r\n]/.test(token),
