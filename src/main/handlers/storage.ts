@@ -22,7 +22,10 @@ export function registerStorageHandlers(): void {
    */
   handleMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, async (_, value: string) => {
     try {
-      return await safeStorage.decryptStringAsync(Buffer.from(value, 'base64'));
+      const { result } = await safeStorage.decryptStringAsync(
+        Buffer.from(value, 'base64'),
+      );
+      return result;
     } catch (err) {
       logError(
         'main:safe-storage-decrypt',

@@ -2,6 +2,11 @@ import { EVENTS } from '../../shared/events';
 
 import { registerStorageHandlers } from './storage';
 
+type IpcHandler = (
+  event: unknown,
+  ...args: unknown[]
+) => unknown | Promise<unknown>;
+
 const handleMock = vi.fn();
 
 vi.mock('electron', () => ({
@@ -10,7 +15,10 @@ vi.mock('electron', () => ({
   },
   safeStorage: {
     encryptStringAsync: vi.fn(async (str: string) => Buffer.from(str)),
-    decryptStringAsync: vi.fn(async (buf: Buffer) => buf.toString()),
+    decryptStringAsync: vi.fn(async (buf: Buffer) => ({
+      shouldReEncrypt: false,
+      result: buf.toString(),
+    })),
   },
 }));
 
@@ -22,6 +30,16 @@ vi.mock('../../shared/logger', async (importOriginal) => {
     logError: (...args: unknown[]) => logErrorMock(...args),
   };
 });
+
+function getHandler(event: string): IpcHandler {
+  const call = handleMock.mock.calls.find(
+    (entry: unknown[]) => entry[0] === event,
+  );
+  if (!call) {
+    throw new Error(`No handler registered for ${event}`);
+  }
+  return call[1] as IpcHandler;
+}
 
 describe('main/handlers/storage.ts', () => {
   describe('registerStorageHandlers', () => {
@@ -38,6 +56,27 @@ describe('main/handlers/storage.ts', () => {
 
       expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_ENCRYPT);
       expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_DECRYPT);
+    });
+
+    it('encrypt handler returns a base64 string', async () => {
+      registerStorageHandlers();
+      const encrypt = getHandler(EVENTS.SAFE_STORAGE_ENCRYPT);
+
+      const result = await encrypt({}, 'plain-token');
+
+      expect(typeof result).toBe('string');
+      expect(result).toBe(Buffer.from('plain-token').toString('base64'));
+    });
+
+    it('decrypt handler returns the unwrapped plaintext string', async () => {
+      registerStorageHandlers();
+      const decrypt = getHandler(EVENTS.SAFE_STORAGE_DECRYPT);
+
+      const ciphertext = Buffer.from('plain-token').toString('base64');
+      const result = await decrypt({}, ciphertext);
+
+      expect(typeof result).toBe('string');
+      expect(result).toBe('plain-token');
     });
   });
 });
