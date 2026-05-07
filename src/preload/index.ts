@@ -193,15 +193,6 @@ export const api = {
   },
 
   /**
-   * Register a callback invoked when the OS system theme changes.
-   *
-   * @param callback - Called with the new theme string (`"light"` or `"dark"`).
-   */
-  onSystemThemeUpdate: (callback: (theme: string) => void) => {
-    onRendererEvent(EVENTS.UPDATE_THEME, (_, theme) => callback(theme));
-  },
-
-  /**
    * Display a native OS notification.
    *
    * Clicking the notification opens `url` in the browser (hiding the app window),
