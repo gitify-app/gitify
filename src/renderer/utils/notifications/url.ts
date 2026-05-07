@@ -1,8 +1,8 @@
 import type { GitifyNotification, Link } from '../../types';
 
-import { getHtmlUrl } from '../api/client';
 import { rendererLogError, toError } from '../core/logger';
-import { createNotificationHandler } from './handlers';
+import { getHtmlUrl } from '../forges/github/client';
+import { getAdapter } from '../forges/registry';
 
 export function generateNotificationReferrerId(
   notification: GitifyNotification,
@@ -14,8 +14,9 @@ export function generateNotificationReferrerId(
 export async function generateGitHubWebUrl(
   notification: GitifyNotification,
 ): Promise<Link> {
-  const handler = createNotificationHandler(notification);
-  const url = new URL(handler.defaultUrl(notification));
+  const url = new URL(
+    getAdapter(notification.account).getDisplayHelpers(notification).defaultUrl,
+  );
 
   if (notification.subject.htmlUrl) {
     url.href = notification.subject.htmlUrl;

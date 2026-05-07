@@ -1,41 +1,31 @@
-import semver from 'semver';
-
 import type { Account } from '../../types';
 
-import { isEnterpriseServerHost } from '../auth/platform';
+import { getAdapter } from '../forges/registry';
 
 /**
- * Check if the "Mark as done" feature is supported for the given account.
+ * Whether the account's forge supports a distinct "mark as done" action.
  *
- * GitHub Cloud or GitHub Enterprise Server 3.13 or newer is required to support this feature.
+ * Capability resolution is delegated to the forge adapter; for example, GitHub
+ * Enterprise Server requires version 3.13 or newer, while Gitea has no
+ * equivalent and always reports false.
  */
 export function isMarkAsDoneFeatureSupported(account: Account): boolean {
-  if (isEnterpriseServerHost(account.hostname)) {
-    if (account.version) {
-      return semver.gte(account.version, '3.13.0');
-    }
-
-    return false;
-  }
-
-  return true;
+  return getAdapter(account).capabilities.markAsDone(account);
 }
 
 /**
- * Check if the "answered" discussions are supported for the given account.
- *
- * GitHub Cloud or GitHub Enterprise Server 3.12 or newer is required to support this feature.
+ * Whether the account's forge surfaces an "answered" discussion state during
+ * notification enrichment.
  */
 export function isAnsweredDiscussionFeatureSupported(
   account: Account,
 ): boolean {
-  if (isEnterpriseServerHost(account.hostname)) {
-    if (account.version) {
-      return semver.gte(account.version, '3.12.0');
-    }
+  return getAdapter(account).capabilities.answeredDiscussion(account);
+}
 
-    return false;
-  }
-
-  return true;
+/**
+ * Whether the account's forge supports ignoring a thread subscription.
+ */
+export function isUnsubscribeThreadSupported(account: Account): boolean {
+  return getAdapter(account).capabilities.unsubscribeThread(account);
 }

@@ -21,6 +21,7 @@ import type {
   Account,
   AccountNotifications,
   AuthState,
+  Forge,
   GitifyError,
   GitifyNotification,
   Hostname,
@@ -36,8 +37,6 @@ import type {
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
-import { fetchAuthenticatedUserDetails } from '../utils/api/client';
-import { clearOctokitClientCache } from '../utils/api/octokit';
 import {
   exchangeAuthCodeForAccessToken,
   performGitHubWebOAuth,
@@ -48,10 +47,12 @@ import {
   addAccount,
   getAccountUUID,
   hasAccounts,
+  isValidHostname,
   refreshAccount,
   removeAccount,
 } from '../utils/auth/utils';
 import { clearState, loadState, saveState } from '../utils/core/storage';
+import { getAdapter, isKnownForge } from '../utils/forges/registry';
 import {
   applyKeyboardShortcut,
   decryptValue,
@@ -71,6 +72,34 @@ import {
 } from '../utils/ui/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
 import { defaultAuth, defaultSettings } from './defaults';
+
+/**
+ * Sanitise persisted auth state. Persisted JSON is untrusted (XSS, malicious
+ * extension, file-system tampering), so we project only the known fields,
+ * coerce `forge` to a registered value, and drop accounts with a
+ * structurally invalid hostname before the renderer ever touches them.
+ */
+function migrateLegacyAuthState(auth: AuthState): AuthState {
+  return {
+    ...auth,
+    accounts: auth.accounts.flatMap((a) => {
+      if (!a.hostname || !isValidHostname(a.hostname)) {
+        return [];
+      }
+      const sanitised: Account = {
+        forge: isKnownForge(a.forge) ? a.forge : 'github',
+        method: a.method,
+        platform: a.platform,
+        version: a.version,
+        hostname: a.hostname,
+        token: a.token,
+        user: a.user,
+        scopes: a.scopes,
+      };
+      return [sanitised];
+    }),
+  };
+}
 
 export interface AppContextState {
   auth: AuthState;
@@ -130,7 +159,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const [auth, setAuth] = useState<AuthState>(
     existingState.auth
-      ? { ...defaultAuth, ...existingState.auth }
+      ? migrateLegacyAuthState({ ...defaultAuth, ...existingState.auth })
       : defaultAuth,
   );
 
@@ -473,7 +502,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
+      const updatedAuth = await addAccount(
+        auth,
+        'GitHub App',
+        token,
+        hostname,
+        'github',
+      );
 
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
@@ -507,6 +542,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         'OAuth App',
         token,
         authOptions.hostname,
+        'github',
       );
 
       persistAuth(updatedAuth);
@@ -525,15 +561,20 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Login with Personal Access Token (PAT).
    */
   const loginWithPersonalAccessToken = useCallback(
-    async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
+    async ({ token, hostname, forge }: LoginPersonalAccessTokenOptions) => {
+      const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
-      await fetchAuthenticatedUserDetails({
+      await getAdapter(resolvedForge).fetchAuthenticatedUser({
+        forge: resolvedForge,
         hostname,
         token: encryptedToken,
       } as Account);
 
       const existingAccount = auth.accounts.find(
-        (a) => a.hostname === hostname && a.method === 'Personal Access Token',
+        (a) =>
+          a.hostname === hostname &&
+          a.method === 'Personal Access Token' &&
+          a.forge === resolvedForge,
       );
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
@@ -544,6 +585,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         'Personal Access Token',
         token,
         hostname,
+        resolvedForge,
       );
 
       persistAuth(updatedAuth);
@@ -564,8 +606,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const updatedAuth = removeAccount(auth, account);
 
-      // Clear Octokit client cache when removing account
-      clearOctokitClientCache();
+      // Drop any forge-specific HTTP client state for the logged-out account.
+      getAdapter(account).onAccountTokenChange?.(account);
 
       persistAuth(updatedAuth);
     },

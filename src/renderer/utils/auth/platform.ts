@@ -1,7 +1,23 @@
 import { Constants } from '../../constants';
 
-import type { Hostname } from '../../types';
+import type { Forge, Hostname } from '../../types';
 import type { PlatformType } from './types';
+
+/**
+ * Resolve the UI platform label from forge + hostname.
+ *
+ * Gitea always reports as 'Gitea'; GitHub varies by hostname (Cloud, Enterprise
+ * Server, Enterprise Cloud with Data Residency).
+ */
+export function resolvePlatform(
+  forge: Forge,
+  hostname: Hostname,
+): PlatformType {
+  if (forge === 'gitea') {
+    return 'Gitea';
+  }
+  return getPlatformFromHostname(hostname);
+}
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
   if (hostname.endsWith(Constants.GITHUB_HOSTNAME)) {

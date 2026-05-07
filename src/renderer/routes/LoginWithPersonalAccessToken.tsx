@@ -18,8 +18,6 @@ import {
   Tooltip,
 } from '@primer/react';
 
-import { Constants } from '../constants';
-
 import { useAppContext } from '../hooks/useAppContext';
 
 import { Contents } from '../components/layout/Contents';
@@ -27,19 +25,16 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { Account, Hostname, Token } from '../types';
-import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
+import type { Account, Forge, Hostname, Token } from '../types';
+import type { LoginRouteState } from '../utils/forges/types';
 
 import { formatRecommendedOAuthScopes } from '../utils/auth/scopes';
-import {
-  getNewTokenURL,
-  isValidHostname,
-  isValidToken,
-} from '../utils/auth/utils';
+import { isValidHostname } from '../utils/auth/utils';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getAdapter } from '../utils/forges/registry';
 import { openExternalLink } from '../utils/system/comms';
 
-interface LocationState {
+interface LocationState extends LoginRouteState {
   account?: Account;
 }
 
@@ -54,8 +49,12 @@ interface IFormErrors {
   invalidCredentialsForHost?: string;
 }
 
-export const validateForm = (values: IFormData): IFormErrors => {
+export const validateForm = (
+  values: IFormData,
+  forge: Forge = 'github',
+): IFormErrors => {
   const errors: IFormErrors = {};
+  const adapter = getAdapter(forge);
 
   if (!values.hostname) {
     errors.hostname = 'Hostname is required';
@@ -65,7 +64,7 @@ export const validateForm = (values: IFormData): IFormErrors => {
 
   if (!values.token) {
     errors.token = 'Token is required';
-  } else if (!isValidToken(values.token)) {
+  } else if (!adapter.validateToken(values.token)) {
     errors.token = 'Token format is invalid';
   }
 
@@ -75,7 +74,12 @@ export const validateForm = (values: IFormData): IFormErrors => {
 export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
+  const { account: reAuthAccount, forge: stateForge } = (location.state ??
+    {}) as LocationState;
+
+  const forge: Forge = reAuthAccount?.forge ?? stateForge ?? 'github';
+  const adapter = getAdapter(forge);
+  const isGitea = forge === 'gitea';
 
   const { loginWithPersonalAccessToken } = useAppContext();
 
@@ -84,7 +88,8 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
-    hostname: reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME,
+    hostname:
+      reAuthAccount?.hostname ?? adapter.defaultHostname ?? ('' as Hostname),
     token: '' as Token,
   } as IFormData);
 
@@ -92,7 +97,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
-    const newErrors = validateForm(formData);
+    const newErrors = validateForm(formData, forge);
 
     setErrors(newErrors);
 
@@ -113,9 +118,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const verifyLoginCredentials = useCallback(
     async (data: IFormData) => {
       try {
-        await loginWithPersonalAccessToken(
-          data as LoginPersonalAccessTokenOptions,
-        );
+        await loginWithPersonalAccessToken({
+          hostname: data.hostname,
+          token: data.token,
+          forge,
+        });
         navigate('/');
       } catch (err) {
         rendererLogError(
@@ -128,12 +135,16 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         });
       }
     },
-    [loginWithPersonalAccessToken],
+    [loginWithPersonalAccessToken, forge, navigate],
   );
 
   return (
     <Page testId="Login With Personal Access Token">
-      <Header icon={KeyIcon}>Login with Personal Access Token</Header>
+      <Header icon={KeyIcon}>
+        {isGitea
+          ? 'Login to Gitea with Personal Access Token'
+          : 'Login with Personal Access Token'}
+      </Header>
 
       <Contents>
         {errors.invalidCredentialsForHost && (
@@ -156,7 +167,9 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
             <FormControl.Label>Hostname</FormControl.Label>
             <FormControl.Caption>
               <Text as="i">
-                Change only if you are using GitHub Enterprise Server
+                {isGitea
+                  ? 'Your Gitea instance hostname (for example gitea.example.com)'
+                  : 'Change only if you are using GitHub Enterprise Server'}
               </Text>
             </FormControl.Caption>
             <TextInput
@@ -165,7 +178,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               data-testid="login-hostname"
               name="hostname"
               onChange={handleInputChange}
-              placeholder="github.com"
+              placeholder={isGitea ? 'gitea.example.com' : 'github.com'}
               value={formData.hostname}
             />
             {errors.hostname && (
@@ -182,26 +195,34 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 disabled={!formData.hostname}
                 leadingVisual={KeyIcon}
                 onClick={() =>
-                  openExternalLink(getNewTokenURL(formData.hostname))
+                  openExternalLink(
+                    adapter.getPersonalAccessTokenSettingsUrl(
+                      formData.hostname,
+                    ),
+                  )
                 }
                 size="small"
               >
-                Generate a PAT
+                {isGitea ? 'Open token settings' : 'Generate a PAT'}
               </Button>
               <Text className="text-xs">
-                on GitHub to paste the token below.
+                {isGitea
+                  ? 'on your Gitea instance to create a token, then paste it below.'
+                  : 'on GitHub to paste the token below.'}
               </Text>
             </Stack>
 
-            <Text as="i" className="text-xs">
-              The{' '}
-              <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
-                <button type="button">
-                  <Text as="u">recommended scopes</Text>
-                </button>
-              </Tooltip>{' '}
-              will be automatically selected for you.
-            </Text>
+            {!isGitea && (
+              <Text as="i" className="text-xs">
+                The{' '}
+                <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
+                  <button type="button">
+                    <Text as="u">recommended scopes</Text>
+                  </button>
+                </Tooltip>{' '}
+                will be automatically selected for you.
+              </Text>
+            )}
           </Stack>
 
           <FormControl required>
@@ -209,16 +230,15 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
             <TextInput
               aria-invalid={errors.token ? 'true' : 'false'}
               block
-              // className={
-              //   errors.token
-              //     ? 'border-gitify-textInput-error'
-              //     : 'border-gitify-textInput-default'
-              // }
               className="border-red-600"
               data-testid="login-token"
               name="token"
               onChange={handleInputChange}
-              placeholder="Your generated token (40 characters)"
+              placeholder={
+                isGitea
+                  ? 'Your Gitea personal access token'
+                  : 'Your generated token (40 characters)'
+              }
               trailingAction={
                 <TextInput.Action
                   aria-label={
@@ -245,11 +265,14 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
       </Contents>
 
       <Footer justify="space-between">
-        <Tooltip direction="ne" text="GitHub documentation">
+        <Tooltip
+          direction="ne"
+          text={isGitea ? 'Gitea API documentation' : 'GitHub documentation'}
+        >
           <Button
             data-testid="login-docs"
             leadingVisual={BookIcon}
-            onClick={() => openExternalLink(Constants.GITHUB_DOCS.PAT_URL)}
+            onClick={() => openExternalLink(adapter.documentationUrl)}
             size="small"
           >
             Docs

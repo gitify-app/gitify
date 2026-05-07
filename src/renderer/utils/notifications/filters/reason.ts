@@ -2,7 +2,7 @@ import { useFiltersStore } from '../../../stores';
 
 import type {
   AccountNotifications,
-  GitifyNotification,
+  RawGitifyNotification,
   Reason,
   TypeDetails,
 } from '../../../types';
@@ -43,7 +43,7 @@ export const reasonFilter: Filter<Reason> = {
   },
 
   filterNotification(
-    notification: GitifyNotification,
+    notification: RawGitifyNotification,
     reason: Reason,
   ): boolean {
     return notification.reason.code === reason;

@@ -9,18 +9,13 @@ import type {
   Status,
 } from '../types';
 
-import {
-  ignoreNotificationThreadSubscription,
-  markNotificationThreadAsDone,
-  markNotificationThreadAsRead,
-} from '../utils/api/client';
-import { isMarkAsDoneFeatureSupported } from '../utils/api/features';
 import { getAccountUUID } from '../utils/auth/utils';
 import {
   areAllAccountErrorsSame,
   doesAllAccountsHaveErrors,
 } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getAdapter } from '../utils/forges/registry';
 import {
   getAllNotifications,
   getNotificationCount,
@@ -168,7 +163,10 @@ export const useNotifications = (): NotificationsState => {
       try {
         await Promise.all(
           readNotifications.map((notification) =>
-            markNotificationThreadAsRead(notification.account, notification.id),
+            getAdapter(notification.account).markThreadAsRead(
+              notification.account,
+              notification.id,
+            ),
           ),
         );
 
@@ -195,10 +193,16 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationsAsDone = useCallback(
     async (state: GitifyState, doneNotifications: GitifyNotification[]) => {
-      if (
-        !state.settings ||
-        !isMarkAsDoneFeatureSupported(doneNotifications[0].account)
-      ) {
+      if (!state.settings) {
+        return;
+      }
+
+      const account = doneNotifications[0].account;
+
+      // Forges that don't support a distinct "done" state fall back to
+      // marking as read so the user-visible action still removes the thread.
+      if (!getAdapter(account).capabilities.markAsDone(account)) {
+        await markNotificationsAsRead(state, doneNotifications);
         return;
       }
 
@@ -207,7 +211,10 @@ export const useNotifications = (): NotificationsState => {
       try {
         await Promise.all(
           doneNotifications.map((notification) =>
-            markNotificationThreadAsDone(notification.account, notification.id),
+            getAdapter(notification.account).markThreadAsDone(
+              notification.account,
+              notification.id,
+            ),
           ),
         );
 
@@ -229,7 +236,7 @@ export const useNotifications = (): NotificationsState => {
 
       setStatus('success');
     },
-    [notifications],
+    [notifications, markNotificationsAsRead],
   );
 
   const unsubscribeNotification = useCallback(
@@ -238,13 +245,18 @@ export const useNotifications = (): NotificationsState => {
         return;
       }
 
+      const adapter = getAdapter(notification.account);
+
+      // Forges without thread-subscription support cannot unsubscribe; the UI
+      // already hides the action, but treat duplicate calls as no-ops.
+      if (!adapter.capabilities.unsubscribeThread(notification.account)) {
+        return;
+      }
+
       setStatus('loading');
 
       try {
-        await ignoreNotificationThreadSubscription(
-          notification.account,
-          notification.id,
-        );
+        await adapter.unsubscribeThread(notification.account, notification.id);
 
         if (state.settings.markAsDoneOnUnsubscribe) {
           await markNotificationsAsDone(state, [notification]);

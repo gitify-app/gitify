@@ -1,19 +1,21 @@
-import type { GitifyNotification } from '../../types';
+import type { GitifyNotification, RawGitifyNotification } from '../../types';
 
-import { createNotificationHandler } from './handlers';
+import { getAdapter } from '../forges/registry';
 
 /**
  * Populates the display property on a notification with formatted,
  * UI-ready values. Must be called after enrichment has completed,
  * as formatting depends on enriched subject data (state, number, etc.).
  *
- * @param notification - The enriched notification to format
- * @returns The notification with populated display property
+ * Widens `RawGitifyNotification` (no display) into `GitifyNotification`
+ * (display populated). The UI never sees the raw shape directly.
  */
 export function formatNotification(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): GitifyNotification {
-  const handler = createNotificationHandler(notification);
+  const helpers = getAdapter(notification.account).getDisplayHelpers(
+    notification,
+  );
 
   return {
     ...notification,
@@ -22,10 +24,10 @@ export function formatNotification(
       number: formatNotificationNumber(notification),
       title: formatNotificationTitle(notification),
       icon: {
-        type: handler.iconType(notification),
-        color: handler.iconColor(notification),
+        type: helpers.iconType,
+        color: helpers.iconColor,
       },
-      defaultUserType: handler.defaultUserType(),
+      defaultUserType: helpers.defaultUserType,
     },
   };
 }
@@ -79,7 +81,7 @@ export function formatProperCase(text: string) {
  * @returns A human-readable type string (e.g. "Open Pull Request").
  */
 export function formatNotificationType(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): string {
   return formatForDisplay([
     notification.subject.state ?? '',
@@ -104,7 +106,7 @@ export function formatGitHubNumber(num: number): string {
  * @returns A `"#N"` string when a subject number is present, otherwise `""`.
  */
 export function formatNotificationNumber(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): string {
   return notification.subject?.number
     ? formatGitHubNumber(notification.subject.number)
@@ -121,7 +123,7 @@ export function formatNotificationNumber(
  * @returns The display title string.
  */
 export function formatNotificationTitle(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): string {
   let title = notification.subject.title;
   const number = formatNotificationNumber(notification);

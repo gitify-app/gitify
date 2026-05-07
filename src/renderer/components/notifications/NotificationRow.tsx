@@ -10,7 +10,10 @@ import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
-import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
+import {
+  isMarkAsDoneFeatureSupported,
+  isUnsubscribeThreadSupported,
+} from '../../utils/api/features';
 import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openNotification } from '../../utils/system/links';
@@ -154,6 +157,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <HoverButton
             action={actionUnsubscribeFromThread}
+            enabled={isUnsubscribeThreadSupported(notification.account)}
             icon={BellSlashIcon}
             label="Unsubscribe from thread"
             testid="notification-unsubscribe-from-thread"

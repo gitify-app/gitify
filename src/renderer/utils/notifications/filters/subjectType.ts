@@ -2,7 +2,7 @@ import useFiltersStore from '../../../stores/useFiltersStore';
 
 import type {
   AccountNotifications,
-  GitifyNotification,
+  RawGitifyNotification,
   SubjectType,
   TypeDetails,
 } from '../../../types';
@@ -78,7 +78,7 @@ export const subjectTypeFilter: Filter<SubjectType> = {
   },
 
   filterNotification(
-    notification: GitifyNotification,
+    notification: RawGitifyNotification,
     subjectType: SubjectType,
   ): boolean {
     return notification.subject.type === subjectType;
