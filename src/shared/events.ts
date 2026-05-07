@@ -51,6 +51,19 @@ export interface IOpenExternal {
   activate: boolean;
 }
 
+/**
+ * Result of decrypting a value via Electron's safe storage.
+ *
+ * `reEncryptedToken` is set when the OS keychain rotated keys during decrypt
+ * (signaled by `safeStorage.decryptStringAsync`'s `shouldReEncrypt` flag).
+ * Callers that persist the original ciphertext should overwrite it with the
+ * new value so future sessions stay aligned with the active keychain key.
+ */
+export interface ISafeStorageDecryptResult {
+  token: string;
+  reEncryptedToken?: string;
+}
+
 /** Shape of a single event contract: a request payload and a response payload. */
 type Contract = { request: unknown; response: unknown };
 
@@ -83,7 +96,10 @@ export type EventContracts = AssertEventCoverage<{
   };
   [EVENTS.UPDATE_AUTO_LAUNCH]: { request: IAutoLaunch; response: undefined };
   [EVENTS.SAFE_STORAGE_ENCRYPT]: { request: string; response: string };
-  [EVENTS.SAFE_STORAGE_DECRYPT]: { request: string; response: string };
+  [EVENTS.SAFE_STORAGE_DECRYPT]: {
+    request: string;
+    response: ISafeStorageDecryptResult;
+  };
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
