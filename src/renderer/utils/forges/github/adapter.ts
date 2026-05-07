@@ -5,18 +5,16 @@ import { Constants } from '../../../constants';
 import type {
   Account,
   GitifyNotification,
-  Hostname,
   Link,
   SettingsState,
-  Token,
 } from '../../../types';
 import type { ForgeAdapter, RefreshAccountData } from '../types';
 
 import {
   extractHostVersion,
-  getDeveloperSettingsURL as legacyGetDeveloperSettingsURL,
-  getNewTokenURL as legacyGetNewTokenURL,
-  isValidToken as legacyIsValidToken,
+  getDeveloperSettingsURL,
+  getNewTokenURL,
+  isValidToken,
 } from '../../auth/utils';
 import { githubCapabilities } from './capabilities';
 import {
@@ -97,11 +95,9 @@ export const githubAdapter: ForgeAdapter = {
   followUrl,
 
   defaultHostname: Constants.GITHUB_HOSTNAME,
-  validateToken: (token: Token) => legacyIsValidToken(token),
-  getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
-    legacyGetNewTokenURL(hostname),
-  getDeveloperSettingsUrl: (account: Account) =>
-    legacyGetDeveloperSettingsURL(account),
+  validateToken: isValidToken,
+  getPersonalAccessTokenSettingsUrl: getNewTokenURL,
+  getDeveloperSettingsUrl: getDeveloperSettingsURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
 
   loginMethods: [

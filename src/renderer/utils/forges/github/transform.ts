@@ -1,14 +1,15 @@
-import type {
-  Account,
-  GitifyNotification,
-  GitifyOwner,
-  GitifyReason,
-  GitifyRepository,
-  GitifySubject,
-  Link,
-  Reason,
-  SubjectType,
-  UserType,
+import {
+  type Account,
+  type GitifyNotification,
+  type GitifyOwner,
+  type GitifyReason,
+  type GitifyRepository,
+  type GitifySubject,
+  type Reason,
+  type SubjectType,
+  type UserType,
+  toLink,
+  toLinkOrNull,
 } from '../../../types';
 import type { RawGitHubNotification } from './types';
 
@@ -74,8 +75,8 @@ function transformSubject(
   return {
     title: raw.title,
     type: raw.type as SubjectType,
-    url: raw.url as Link | null,
-    latestCommentUrl: raw.latest_comment_url as Link | null,
+    url: toLinkOrNull(raw.url),
+    latestCommentUrl: toLinkOrNull(raw.latest_comment_url),
 
     // Enriched fields start as undefined, populated by handlers
   };
@@ -87,7 +88,7 @@ function transformRepository(
   return {
     name: raw.name,
     fullName: raw.full_name,
-    htmlUrl: raw.html_url as Link,
+    htmlUrl: toLink(raw.html_url),
     owner: transformOwner(raw.owner),
   };
 }
@@ -97,7 +98,7 @@ function transformOwner(
 ): GitifyOwner {
   return {
     login: raw.login,
-    avatarUrl: raw.avatar_url as Link,
+    avatarUrl: toLink(raw.avatar_url),
     type: raw.type as UserType,
   };
 }

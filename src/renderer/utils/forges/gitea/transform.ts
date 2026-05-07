@@ -1,11 +1,12 @@
-import type {
-  Account,
-  GitifyNotification,
-  GitifyRepository,
-  GitifySubject,
-  Link,
-  Reason,
-  SubjectType,
+import {
+  type Account,
+  type GitifyNotification,
+  type GitifyRepository,
+  type GitifySubject,
+  type Reason,
+  type SubjectType,
+  toLink,
+  toLinkOrNull,
 } from '../../../types';
 import type { GiteaNotificationThread, GiteaNotifySubjectType } from './types';
 
@@ -56,8 +57,8 @@ function transformSubject(raw: GiteaNotificationThread): GitifySubject {
   return {
     title: raw.subject.title,
     type: mapSubjectType(raw.subject.type),
-    url: (raw.subject.url || null) as Link | null,
-    latestCommentUrl: (raw.subject.latest_comment_url || null) as Link | null,
+    url: toLinkOrNull(raw.subject.url),
+    latestCommentUrl: toLinkOrNull(raw.subject.latest_comment_url),
   };
 }
 
@@ -69,10 +70,10 @@ function transformRepository(
     return {
       name: 'unknown',
       fullName: 'unknown',
-      htmlUrl: `https://${account.hostname}` as Link,
+      htmlUrl: toLink(`https://${account.hostname}`),
       owner: {
         login: 'unknown',
-        avatarUrl: '' as Link,
+        avatarUrl: toLink(''),
         type: 'User',
       },
     };
@@ -81,10 +82,10 @@ function transformRepository(
   return {
     name: raw.repository.name,
     fullName: raw.repository.full_name,
-    htmlUrl: raw.repository.html_url as Link,
+    htmlUrl: toLink(raw.repository.html_url),
     owner: {
       login: raw.repository.owner?.login ?? 'unknown',
-      avatarUrl: (raw.repository.owner?.avatar_url ?? '') as Link,
+      avatarUrl: toLink(raw.repository.owner?.avatar_url ?? ''),
       type: 'User',
     },
   };

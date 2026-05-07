@@ -48,6 +48,15 @@ export interface RefreshAccountData {
 }
 
 /**
+ * Router state forwarded from a login method descriptor into the
+ * destination route. Currently used to pre-select the forge when entering
+ * the personal-access-token form.
+ */
+export interface LoginRouteState {
+  forge?: Forge;
+}
+
+/**
  * A login entry rendered in the Login route's forge section.
  */
 export interface LoginMethodDescriptor {
@@ -58,7 +67,7 @@ export interface LoginMethodDescriptor {
   /** Route to navigate to. */
   route: string;
   /** Optional router state to pass with navigation. */
-  state?: Record<string, unknown>;
+  state?: LoginRouteState;
 }
 
 /**
@@ -66,6 +75,11 @@ export interface LoginMethodDescriptor {
  *
  * Goal: shared code (notifications orchestrator, hooks, UI) routes through
  * `getAdapter(account)` and never imports forge-specific modules directly.
+ *
+ * @see ./github/adapter.ts — full reference implementation (REST + GraphQL,
+ *      enrichment, Octokit cache lifecycle).
+ * @see ./gitea/adapter.ts — minimal implementation (no enrichment, no
+ *      thread-subscription, fetch-only HTTP client).
  */
 export interface ForgeAdapter {
   readonly id: Forge;
@@ -100,6 +114,9 @@ export interface ForgeAdapter {
    * comment count, etc.). Optional — forges that do not support detailed
    * enrichment (e.g. Gitea) omit this and the orchestrator returns the input
    * unchanged.
+   *
+   * @see ../notifications/notifications.ts `enrichNotifications` — orchestrator
+   *      that delegates here when the user has detailed notifications enabled.
    */
   enrichNotifications?(
     notifications: GitifyNotification[],

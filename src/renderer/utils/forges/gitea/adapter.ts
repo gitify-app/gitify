@@ -52,10 +52,6 @@ async function listNotifications(
   return transformGiteaNotifications(raw, account);
 }
 
-function unsupported(action: string): never {
-  throw new Error(`${action} is not supported for Gitea accounts.`);
-}
-
 export const giteaAdapter: ForgeAdapter = {
   id: 'gitea',
   displayName: 'Gitea',
@@ -69,7 +65,11 @@ export const giteaAdapter: ForgeAdapter = {
     patchGiteaNotificationThread(account, threadId, 'read'),
   markThreadAsDone: (account, threadId) =>
     patchGiteaNotificationThread(account, threadId, 'read'),
-  unsubscribeThread: () => unsupported('Ignoring thread subscriptions'),
+  unsubscribeThread: () => {
+    throw new Error(
+      'Ignoring thread subscriptions is not supported for Gitea accounts.',
+    );
+  },
 
   followUrl<T>(account: Account, url: Link): Promise<T> {
     return giteaGetJson<T>(account, url);

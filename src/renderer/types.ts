@@ -34,6 +34,20 @@ export type Hostname = Branded<string, 'Hostname'>;
 
 export type Link = Branded<string, 'WebUrl'>;
 
+/**
+ * Cast a plain string into the branded `Link` type. Use at adapter
+ * boundaries where forge responses produce raw URL strings — calling out
+ * the cast in one place is more honest than scattering `as Link` everywhere.
+ */
+export function toLink(value: string): Link {
+  return value as Link;
+}
+
+/** Variant of `toLink` that preserves null. */
+export function toLinkOrNull(value: string | null | undefined): Link | null {
+  return value ? (value as Link) : null;
+}
+
 export type SearchToken = Branded<string, 'SearchToken'>;
 
 export type Status = 'loading' | 'success' | 'error';

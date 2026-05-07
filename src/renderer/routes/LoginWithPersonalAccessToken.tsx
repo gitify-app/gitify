@@ -26,6 +26,7 @@ import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
 import type { Account, Forge, Hostname, Token } from '../types';
+import type { LoginRouteState } from '../utils/forges/types';
 
 import { formatRecommendedOAuthScopes } from '../utils/auth/scopes';
 import { isValidHostname } from '../utils/auth/utils';
@@ -33,9 +34,8 @@ import { rendererLogError, toError } from '../utils/core/logger';
 import { getAdapter } from '../utils/forges/registry';
 import { openExternalLink } from '../utils/system/comms';
 
-interface LocationState {
+interface LocationState extends LoginRouteState {
   account?: Account;
-  forge?: Forge;
 }
 
 export interface IFormData {
