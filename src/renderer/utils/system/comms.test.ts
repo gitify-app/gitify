@@ -94,7 +94,7 @@ describe('renderer/utils/comms.ts', () => {
 
       expect(window.gitify.decryptValue).toHaveBeenCalledTimes(1);
       expect(window.gitify.decryptValue).toHaveBeenCalledWith('encrypted');
-      expect(value).toBe('decrypted');
+      expect(value).toEqual({ token: 'decrypted' });
     });
   });
 

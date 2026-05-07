@@ -206,7 +206,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const migratedAccounts = await Promise.all(
       auth.accounts.map(async (account) => {
         try {
-          await decryptValue(account.token);
+          const { reEncryptedToken } = await decryptValue(account.token);
+          if (reEncryptedToken) {
+            return { ...account, token: reEncryptedToken as Token };
+          }
           return account;
         } catch {
           const encryptedToken = (await encryptValue(account.token)) as Token;

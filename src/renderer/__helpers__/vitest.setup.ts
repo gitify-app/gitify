@@ -39,7 +39,7 @@ window.gitify = {
   },
   twemojiDirectory: vi.fn().mockResolvedValue('/mock/images/assets'),
   openExternalLink: vi.fn(),
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+  decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
   encryptValue: vi.fn().mockResolvedValue('encrypted'),
   platform: {
     isLinux: vi.fn().mockReturnValue(false),
