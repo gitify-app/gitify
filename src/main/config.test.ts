@@ -7,7 +7,7 @@ vi.mock('./utils', () => ({
 vi.mock('electron', () => ({
   app: {
     isPackaged: true,
-  },
+  } satisfies Pick<Electron.App, 'isPackaged'>,
 }));
 
 describe('main/config.ts', () => {

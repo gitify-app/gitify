@@ -1,7 +1,9 @@
 import type { Menubar } from 'menubar';
 
 vi.mock('electron', () => ({
-  dialog: { showMessageBoxSync: vi.fn(() => 0) },
+  dialog: {
+    showMessageBoxSync: vi.fn(() => 0),
+  } satisfies Pick<Electron.Dialog, 'showMessageBoxSync'>,
 }));
 
 const sendRendererEventMock = vi.fn();

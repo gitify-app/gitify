@@ -36,11 +36,11 @@ vi.mock('electron', () => ({
   contextBridge: {
     exposeInMainWorld: (key: string, value: unknown) =>
       exposeInMainWorldMock(key, value),
-  },
+  } satisfies Pick<Electron.ContextBridge, 'exposeInMainWorld'>,
   webFrame: {
     getZoomLevel: () => getZoomLevelMock(),
     setZoomLevel: (level: number) => setZoomLevelMock(level),
-  },
+  } satisfies Pick<Electron.WebFrame, 'getZoomLevel' | 'setZoomLevel'>,
 }));
 
 // Simple Notification stub

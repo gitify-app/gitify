@@ -12,17 +12,17 @@ vi.mock('electron', () => ({
   ipcMain: {
     on: (...args: unknown[]) => onMock(...args),
     handle: (...args: unknown[]) => handleMock(...args),
-  },
+  } satisfies Pick<Electron.IpcMain, 'on' | 'handle'>,
   globalShortcut: {
     register: vi.fn(),
     unregister: vi.fn(),
-  },
+  } satisfies Pick<Electron.GlobalShortcut, 'register' | 'unregister'>,
   app: {
     setLoginItemSettings: vi.fn(),
-  },
+  } satisfies Pick<Electron.App, 'setLoginItemSettings'>,
   shell: {
     openExternal: vi.fn(),
-  },
+  } satisfies Pick<Electron.Shell, 'openExternal'>,
 }));
 
 describe('main/handlers/system.ts', () => {
