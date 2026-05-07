@@ -2,7 +2,7 @@
 
 [![CI Workflow][ci-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coverage][coverage-badge]][coverage] [![Quality Gate Status][quality-badge]][quality] [![Renovate enabled][renovate-badge]][renovate] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
 
-> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
+> Git Notifications on your menu bar. Available on macOS, Windows and Linux.
 
 ![Gitify][gitify-social]
 
@@ -10,7 +10,7 @@
 
 ## Features
 
-- 🔔 Unified notifications from GitHub Cloud & GitHub Enterprise Server
+- 🔔 Unified notifications from your favorite Git forges (GitHub Cloud, GitHub Enterprise Server & Gitea)
 - 💻 Cross-platform: macOS, Windows, and Linux
 - 🎨 Customizable settings, filters and themes
 - 🖥️ Tray/menu bar integration
@@ -41,7 +41,7 @@ A new forge needs an [adapter](src/renderer/utils/forges/) plus a designated mai
 
 1. **Download** Gitify for free from [gitify.io][website].
 2. **Install** and launch the app for your platform.
-3. **Authenticate** with your GitHub account, Personal Access Token or OAuth client/secret and start receiving notifications.
+3. **Authenticate** with one or many supported accounts and start receiving notifications.
 
 
 #### Homebrew
