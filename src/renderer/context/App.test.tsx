@@ -23,6 +23,7 @@ import * as authFlows from '../utils/auth/flows';
 import * as authUtils from '../utils/auth/utils';
 import * as storage from '../utils/core/storage';
 import * as notifications from '../utils/notifications/notifications';
+import * as comms from '../utils/system/comms';
 import * as tray from '../utils/system/tray';
 import { type AppContextState, AppProvider } from './App';
 import { defaultSettings } from './defaults';
@@ -311,6 +312,94 @@ describe('renderer/context/App.tsx', () => {
         expect.anything(),
         mockGitHubCloudAccount,
       );
+    });
+  });
+
+  describe('migrateAuthTokens (startup)', () => {
+    const refreshAccountSpy = vi
+      .spyOn(authUtils, 'refreshAccount')
+      .mockImplementation(async (account) => account);
+    const decryptValueSpy = vi.spyOn(comms, 'decryptValue');
+    const encryptValueSpy = vi.spyOn(comms, 'encryptValue');
+    const saveStateSpy = vi
+      .spyOn(storage, 'saveState')
+      .mockImplementation(vi.fn());
+    const loadStateSpy = vi.spyOn(storage, 'loadState');
+
+    beforeEach(() => {
+      vi.useRealTimers();
+      saveStateSpy.mockClear();
+      decryptValueSpy.mockReset();
+      encryptValueSpy.mockReset();
+      refreshAccountSpy.mockClear();
+    });
+
+    afterEach(() => {
+      vi.useFakeTimers();
+    });
+
+    it('persists rotated ciphertext when decryptValue reports a re-encryption', async () => {
+      loadStateSpy.mockReturnValue({
+        auth: { accounts: [mockGitHubCloudAccount] } as AuthState,
+        settings: mockSettings,
+      });
+      decryptValueSpy.mockResolvedValue({
+        token: 'plain-token',
+        reEncryptedToken: 'rotated-cipher',
+      });
+
+      await act(async () => {
+        renderWithProviders(<AppProvider>{null}</AppProvider>);
+      });
+
+      const persistCall = saveStateSpy.mock.calls.find(
+        ([state]) =>
+          (state as { auth: AuthState }).auth.accounts[0]?.token ===
+          'rotated-cipher',
+      );
+      expect(persistCall).toBeDefined();
+    });
+
+    it('does not persist when decryptValue returns no rotated ciphertext', async () => {
+      loadStateSpy.mockReturnValue({
+        auth: { accounts: [mockGitHubCloudAccount] } as AuthState,
+        settings: mockSettings,
+      });
+      decryptValueSpy.mockResolvedValue({ token: 'plain-token' });
+
+      await act(async () => {
+        renderWithProviders(<AppProvider>{null}</AppProvider>);
+      });
+
+      const tokenChanged = saveStateSpy.mock.calls.some(
+        ([state]) =>
+          (state as { auth: AuthState }).auth.accounts[0]?.token !==
+          mockGitHubCloudAccount.token,
+      );
+      expect(tokenChanged).toBe(false);
+    });
+
+    it('re-encrypts plaintext token (legacy migration) when decrypt throws', async () => {
+      loadStateSpy.mockReturnValue({
+        auth: { accounts: [mockGitHubCloudAccount] } as AuthState,
+        settings: mockSettings,
+      });
+      decryptValueSpy.mockRejectedValue(new Error('not encrypted'));
+      encryptValueSpy.mockResolvedValue('newly-encrypted');
+
+      await act(async () => {
+        renderWithProviders(<AppProvider>{null}</AppProvider>);
+      });
+
+      expect(encryptValueSpy).toHaveBeenCalledWith(
+        mockGitHubCloudAccount.token,
+      );
+      const persistCall = saveStateSpy.mock.calls.find(
+        ([state]) =>
+          (state as { auth: AuthState }).auth.accounts[0]?.token ===
+          'newly-encrypted',
+      );
+      expect(persistCall).toBeDefined();
     });
   });
 });

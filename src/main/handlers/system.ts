@@ -1,14 +1,7 @@
 import { app, globalShortcut, shell } from 'electron';
 import type { Menubar } from 'menubar';
 
-import {
-  EVENTS,
-  type EventData,
-  type IAutoLaunch,
-  type IKeyboardShortcut,
-  type IKeyboardShortcutResult,
-  type IOpenExternal,
-} from '../../shared/events';
+import { EVENTS } from '../../shared/events';
 
 import { handleMainEvent, onMainEvent } from '../events';
 
@@ -38,7 +31,7 @@ export function registerSystemHandlers(mb: Menubar): void {
   /**
    * Open the given URL in the user's default browser, with an option to activate the app.
    */
-  onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }: IOpenExternal) =>
+  onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }) =>
     shell.openExternal(url, { activate }),
   );
 
@@ -47,8 +40,7 @@ export function registerSystemHandlers(mb: Menubar): void {
    */
   handleMainEvent(
     EVENTS.UPDATE_KEYBOARD_SHORTCUT,
-    (_, data: EventData): IKeyboardShortcutResult => {
-      const { enabled, keyboardShortcut } = data as IKeyboardShortcut;
+    (_, { enabled, keyboardShortcut }) => {
       const previous = lastRegisteredAccelerator;
 
       if (lastRegisteredAccelerator) {
@@ -77,7 +69,7 @@ export function registerSystemHandlers(mb: Menubar): void {
   /**
    * Update the application's auto-launch setting based on the provided configuration.
    */
-  onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings: IAutoLaunch) => {
+  onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings) => {
     app.setLoginItemSettings(settings);
   });
 }

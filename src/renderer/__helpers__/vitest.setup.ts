@@ -39,7 +39,7 @@ window.gitify = {
   },
   twemojiDirectory: vi.fn().mockResolvedValue('/mock/images/assets'),
   openExternalLink: vi.fn(),
-  decryptValue: vi.fn().mockResolvedValue('decrypted'),
+  decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
   encryptValue: vi.fn().mockResolvedValue('encrypted'),
   platform: {
     isLinux: vi.fn().mockReturnValue(false),
@@ -59,7 +59,6 @@ window.gitify = {
   notificationSoundPath: vi.fn(),
   onAuthCallback: vi.fn(),
   onResetApp: vi.fn(),
-  onSystemThemeUpdate: vi.fn(),
   setAutoLaunch: vi.fn(),
   applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
   raiseNativeNotification: vi.fn(),

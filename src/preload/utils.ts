@@ -1,30 +1,33 @@
 import { ipcRenderer } from 'electron';
 
-import type { EventData, EventType } from '../shared/events';
+import type {
+  EventArgs,
+  EventRequest,
+  EventResponse,
+  EventType,
+} from '../shared/events';
 
 /**
  * Send a fire-and-forget IPC message from the renderer to the main process.
- *
- * @param event - The IPC event type to send.
- * @param data - Optional payload to include with the event.
+ * Variadic so events without a payload can be called as `sendMainEvent(event)`.
  */
-export function sendMainEvent(event: EventType, data?: EventData): void {
-  ipcRenderer.send(event, data);
+export function sendMainEvent<E extends EventType>(
+  event: E,
+  ...args: EventArgs<E>
+): void {
+  ipcRenderer.send(event, ...args);
 }
 
 /**
  * Send an IPC message from the renderer to the main process and await a response.
- *
- * @param event - The IPC event type to invoke.
- * @param data - Optional string payload to include with the event.
- * @returns A promise that resolves to the string response from the main process.
+ * The resolved value type is enforced by the event's contract.
  */
-export async function invokeMainEvent(
-  event: EventType,
-  data?: string,
-): Promise<string> {
+export async function invokeMainEvent<E extends EventType>(
+  event: E,
+  ...args: EventArgs<E>
+): Promise<EventResponse<E>> {
   try {
-    return await ipcRenderer.invoke(event, data);
+    return await ipcRenderer.invoke(event, ...args);
   } catch (err) {
     // biome-ignore lint/suspicious/noConsole: preload environment is strictly sandboxed
     console.error(`[IPC] invoke failed: ${event}`, err);
@@ -33,24 +36,11 @@ export async function invokeMainEvent(
 }
 
 /**
- * Invoke a main-process handler with structured `EventData` and await the result.
- */
-export function invokeMainEventWithData(
-  event: EventType,
-  data?: EventData,
-): Promise<unknown> {
-  return ipcRenderer.invoke(event, data);
-}
-
-/**
  * Register a listener for an IPC event sent from the main process to the renderer.
- *
- * @param event - The IPC event type to listen for.
- * @param listener - The callback invoked when the event is received.
  */
-export function onRendererEvent(
-  event: EventType,
-  listener: (event: Electron.IpcRendererEvent, args: string) => void,
-) {
-  ipcRenderer.on(event, listener);
+export function onRendererEvent<E extends EventType>(
+  event: E,
+  listener: (event: Electron.IpcRendererEvent, data: EventRequest<E>) => void,
+): void {
+  ipcRenderer.on(event, listener as Parameters<typeof ipcRenderer.on>[1]);
 }

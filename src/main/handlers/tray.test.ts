@@ -10,10 +10,10 @@ const onMock = vi.fn();
 vi.mock('electron', () => ({
   ipcMain: {
     on: (...args: unknown[]) => onMock(...args),
-  },
+  } satisfies Pick<Electron.IpcMain, 'on'>,
   net: {
     isOnline: vi.fn().mockReturnValue(true),
-  },
+  } satisfies Pick<Electron.Net, 'isOnline'>,
 }));
 
 describe('main/handlers/tray.ts', () => {

@@ -80,7 +80,7 @@ export async function createOctokitClientUncached(
   account: Account,
   type: APIClientType,
 ): Promise<OctokitClient> {
-  const decryptedToken = await decryptValue(account.token);
+  const { token: decryptedToken } = await decryptValue(account.token);
 
   const version = await getAppVersion();
   const userAgent = `${APPLICATION.NAME}/${version}`;
