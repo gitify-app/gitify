@@ -18,14 +18,26 @@ export function registerStorageHandlers(): void {
   });
 
   /**
-   * Decrypt a base64-encoded string using Electron's safeStorage and return the decrypted value.
+   * Decrypt a base64-encoded string using Electron's safeStorage and return the
+   * decrypted token. When the OS keychain has rotated keys during decryption,
+   * also re-encrypt the value with the current key and return the new
+   * ciphertext under `reEncryptedToken` so callers can persist it.
    */
   handleMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, async (_, value: string) => {
     try {
-      const { result } = await safeStorage.decryptStringAsync(
+      const { result, shouldReEncrypt } = await safeStorage.decryptStringAsync(
         Buffer.from(value, 'base64'),
       );
-      return result;
+
+      if (!shouldReEncrypt) {
+        return { token: result };
+      }
+
+      const reEncrypted = await safeStorage.encryptStringAsync(result);
+      return {
+        token: result,
+        reEncryptedToken: reEncrypted.toString('base64'),
+      };
     } catch (err) {
       logError(
         'main:safe-storage-decrypt',

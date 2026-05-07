@@ -71,18 +71,18 @@ describe('main/handlers/storage.ts', () => {
       expect(result).toBe(Buffer.from('plain-token').toString('base64'));
     });
 
-    it('decrypt handler returns the unwrapped plaintext string', async () => {
+    it('decrypt handler returns the unwrapped token without rotation', async () => {
       registerStorageHandlers();
       const decrypt = getHandler(EVENTS.SAFE_STORAGE_DECRYPT);
 
       const ciphertext = Buffer.from('plain-token').toString('base64');
       const result = await decrypt({}, ciphertext);
 
-      expect(typeof result).toBe('string');
-      expect(result).toBe('plain-token');
+      expect(result).toEqual({ token: 'plain-token' });
+      expect(safeStorage.encryptStringAsync).not.toHaveBeenCalled();
     });
 
-    it('decrypt handler unwraps result when shouldReEncrypt is true', async () => {
+    it('decrypt handler re-encrypts and returns new ciphertext when shouldReEncrypt is true', async () => {
       vi.mocked(safeStorage.decryptStringAsync).mockResolvedValueOnce({
         shouldReEncrypt: true,
         result: 'rotated-token',
@@ -92,8 +92,13 @@ describe('main/handlers/storage.ts', () => {
 
       const result = await decrypt({}, 'irrelevant');
 
-      expect(typeof result).toBe('string');
-      expect(result).toBe('rotated-token');
+      expect(safeStorage.encryptStringAsync).toHaveBeenCalledWith(
+        'rotated-token',
+      );
+      expect(result).toEqual({
+        token: 'rotated-token',
+        reEncryptedToken: Buffer.from('rotated-token').toString('base64'),
+      });
     });
 
     it('encrypt → decrypt round-trip preserves the original string', async () => {
@@ -102,9 +107,9 @@ describe('main/handlers/storage.ts', () => {
       const decrypt = getHandler(EVENTS.SAFE_STORAGE_DECRYPT);
 
       const ciphertext = (await encrypt({}, 'round-trip-token')) as string;
-      const plaintext = await decrypt({}, ciphertext);
+      const result = (await decrypt({}, ciphertext)) as { token: string };
 
-      expect(plaintext).toBe('round-trip-token');
+      expect(result.token).toBe('round-trip-token');
     });
 
     it('decrypt handler rethrows and logs on safeStorage failure', async () => {
