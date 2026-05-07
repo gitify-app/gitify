@@ -81,9 +81,12 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       expect(fetchSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('throws when the API responds with a non-ok status', async () => {
+    it('throws on a non-ok status without echoing the response body', async () => {
       fetchSpy.mockResolvedValueOnce(
-        new Response('forbidden', { status: 403, statusText: 'Forbidden' }),
+        new Response('Authorization: token leaked-pat', {
+          status: 403,
+          statusText: 'Forbidden',
+        }),
       );
 
       await expect(
@@ -91,7 +94,15 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
           fetchAllNotifications: false,
           fetchReadNotifications: false,
         } as SettingsState),
-      ).rejects.toThrow(/Gitea API 403 Forbidden: forbidden/);
+      ).rejects.toThrow(/^Gitea API 403 Forbidden$/);
+      // The thrown error must not include the response body — a hostile
+      // server could echo back the Authorization header into logs.
+      await expect(
+        listGiteaNotifications(mockGiteaAccount, {
+          fetchAllNotifications: false,
+          fetchReadNotifications: false,
+        } as SettingsState),
+      ).rejects.toThrow();
     });
   });
 
@@ -133,14 +144,41 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       expect(headers.Authorization).toBe('token decrypted');
     });
 
-    it('throws on a non-ok response', async () => {
+    it('throws on a non-ok response without echoing the body', async () => {
       fetchSpy.mockResolvedValueOnce(
-        new Response('nope', { status: 500, statusText: 'Server Error' }),
+        new Response('echoed Authorization: token leaked-pat', {
+          status: 500,
+          statusText: 'Server Error',
+        }),
       );
 
       await expect(
-        giteaGetJson(mockGiteaAccount, 'https://gitea.example.com/x'),
-      ).rejects.toThrow(/Gitea API 500 Server Error: nope/);
+        giteaGetJson(
+          mockGiteaAccount,
+          'https://gitea.example.com/api/v1/x',
+        ),
+      ).rejects.toThrow(/^Gitea API 500 Server Error$/);
+    });
+
+    it('refuses cross-origin URLs without sending a request', async () => {
+      await expect(
+        giteaGetJson(mockGiteaAccount, 'https://attacker.com/api/v1/x'),
+      ).rejects.toThrow(/cross-origin Gitea URL/);
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it('refuses non-https URLs without sending a request', async () => {
+      await expect(
+        giteaGetJson(mockGiteaAccount, 'http://gitea.example.com/x'),
+      ).rejects.toThrow(/cross-origin Gitea URL/);
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it('refuses malformed URLs without sending a request', async () => {
+      await expect(
+        giteaGetJson(mockGiteaAccount, 'not-a-url'),
+      ).rejects.toThrow(/malformed Gitea URL/);
+      expect(fetchSpy).not.toHaveBeenCalled();
     });
   });
 });
