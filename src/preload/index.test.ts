@@ -66,7 +66,6 @@ interface TestApi {
   tray: { updateColor: (n?: number) => void };
   openExternalLink: (u: string, f: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
-  onSystemThemeUpdate: (cb: (t: string) => void) => void;
   raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
 }
 
@@ -132,24 +131,6 @@ describe('preload/index', () => {
 
     await expect(api.app.version()).resolves.toBe('v1.2.3');
     process.env.NODE_ENV = originalEnv;
-  });
-
-  it('onSystemThemeUpdate registers listener', async () => {
-    const api = getExposedApi();
-    const callback = vi.fn();
-    api.onSystemThemeUpdate(callback);
-
-    expect(onRendererEventMock).toHaveBeenCalledWith(
-      EVENTS.UPDATE_THEME,
-      expect.any(Function),
-    );
-
-    // Simulate event
-    const listener = onRendererEventMock.mock.calls[0][1];
-
-    listener({}, 'dark');
-
-    expect(callback).toHaveBeenCalledWith('dark');
   });
 
   it('raiseNativeNotification without url calls app.show', async () => {

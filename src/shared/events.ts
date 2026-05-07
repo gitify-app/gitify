@@ -21,7 +21,6 @@ export const EVENTS = {
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
-  UPDATE_THEME: `${P}update-theme`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
 } as const;
 
@@ -87,7 +86,6 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
-  [EVENTS.UPDATE_THEME]: { request: string; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
 }>;
 
