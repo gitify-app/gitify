@@ -63,11 +63,17 @@ export const giteaAdapter: ForgeAdapter = {
 
   markThreadAsRead: (account, threadId) =>
     patchGiteaNotificationThread(account, threadId, 'read'),
-  markThreadAsDone: (account, threadId) =>
-    patchGiteaNotificationThread(account, threadId, 'read'),
+  // Gitea has no "done" state — capability `markAsDone(account)` returns
+  // false so the UI gates this off. Throwing rather than silently aliasing to
+  // markThreadAsRead surfaces any caller that bypasses the capability check.
+  markThreadAsDone: () => {
+    throw new Error(
+      'Mark-as-done is not supported for Gitea accounts; check capabilities.markAsDone before calling.',
+    );
+  },
   unsubscribeThread: () => {
     throw new Error(
-      'Ignoring thread subscriptions is not supported for Gitea accounts.',
+      'Ignoring thread subscriptions is not supported for Gitea accounts; check capabilities.unsubscribeThread before calling.',
     );
   },
 

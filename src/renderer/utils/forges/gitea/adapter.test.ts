@@ -159,14 +159,14 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       expect(patchSpy).toHaveBeenCalledWith(mockGiteaAccount, '12', 'read');
     });
 
-    it('markThreadAsDone falls back to PATCH read (Gitea has no done state)', async () => {
-      const patchSpy = vi
-        .spyOn(client, 'patchGiteaNotificationThread')
-        .mockResolvedValue(undefined);
-
-      await giteaAdapter.markThreadAsDone(mockGiteaAccount, '13');
-
-      expect(patchSpy).toHaveBeenCalledWith(mockGiteaAccount, '13', 'read');
+    it('markThreadAsDone throws — capability gate is the contract', () => {
+      // The capability flag returns false for Gitea; the orchestrator falls
+      // back to mark-as-read before reaching here. Throwing surfaces any
+      // caller that bypasses the capability check rather than silently
+      // doing the wrong thing.
+      expect(() =>
+        giteaAdapter.markThreadAsDone(mockGiteaAccount, '13'),
+      ).toThrow(/check capabilities.markAsDone/);
     });
 
     it('unsubscribeThread throws because Gitea has no equivalent', () => {
