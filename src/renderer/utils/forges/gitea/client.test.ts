@@ -16,13 +16,7 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
 
   beforeEach(() => {
     fetchSpy.mockReset();
-    vi.spyOn(comms, 'decryptValue').mockResolvedValue(
-      'decrypted' as ReturnType<typeof comms.decryptValue> extends Promise<
-        infer R
-      >
-        ? R
-        : never,
-    );
+    vi.spyOn(comms, 'decryptValue').mockResolvedValue({ token: 'decrypted' });
   });
 
   function jsonResponse<T>(body: T, init: ResponseInit = { status: 200 }) {

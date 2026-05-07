@@ -10,7 +10,7 @@ export function getGiteaApiBaseUrl(hostname: Hostname): URL {
 }
 
 async function authHeaders(account: Account): Promise<HeadersInit> {
-  const token = await decryptValue(account.token);
+  const { token } = await decryptValue(account.token);
   return {
     Accept: 'application/json',
     Authorization: `token ${token}`,
