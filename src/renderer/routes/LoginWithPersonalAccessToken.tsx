@@ -30,7 +30,7 @@ import type { Account, Forge, Hostname, Token } from '../types';
 import { formatRecommendedOAuthScopes } from '../utils/auth/scopes';
 import { isValidHostname } from '../utils/auth/utils';
 import { rendererLogError, toError } from '../utils/core/logger';
-import { getAdapterById } from '../utils/forges/registry';
+import { getAdapter } from '../utils/forges/registry';
 import { openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
@@ -54,7 +54,7 @@ export const validateForm = (
   forge: Forge = 'github',
 ): IFormErrors => {
   const errors: IFormErrors = {};
-  const adapter = getAdapterById(forge);
+  const adapter = getAdapter(forge);
 
   if (!values.hostname) {
     errors.hostname = 'Hostname is required';
@@ -78,7 +78,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
     {}) as LocationState;
 
   const forge: Forge = reAuthAccount?.forge ?? stateForge ?? 'github';
-  const adapter = getAdapterById(forge);
+  const adapter = getAdapter(forge);
   const isGitea = forge === 'gitea';
 
   const { loginWithPersonalAccessToken } = useAppContext();

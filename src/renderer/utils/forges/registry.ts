@@ -15,25 +15,29 @@ const ADAPTERS: Record<Forge, ForgeAdapter> = {
   gitea: giteaAdapter,
 };
 
-/**
- * Resolve the adapter for a given account.
- *
- * Throws if the account's forge is not registered — this should be impossible
- * once `Account.forge` is required and migration has run, but we surface a
- * loud error rather than crashing on a property access.
- */
-export function getAdapter(account: Account): ForgeAdapter {
-  const adapter = ADAPTERS[account.forge];
-  if (!adapter) {
-    throw new Error(`No forge adapter registered for "${account.forge}"`);
-  }
-  return adapter;
+/** Single source of truth for the runtime set of registered forges. */
+export const KNOWN_FORGES: ReadonlySet<Forge> = new Set(
+  Object.keys(ADAPTERS) as Forge[],
+);
+
+/** Type guard for unknown JSON values (e.g. persisted account state). */
+export function isKnownForge(forge: unknown): forge is Forge {
+  return typeof forge === 'string' && KNOWN_FORGES.has(forge as Forge);
 }
 
-export function getAdapterById(forge: Forge): ForgeAdapter {
-  const adapter = ADAPTERS[forge];
+/**
+ * Resolve the adapter for an account or a forge id.
+ *
+ * Throws if the forge is not registered — should be impossible once
+ * `Account.forge` is required and migration has run, but we surface a loud
+ * error rather than crashing on a property access.
+ */
+export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
+  const id =
+    typeof forgeOrAccount === 'string' ? forgeOrAccount : forgeOrAccount.forge;
+  const adapter = ADAPTERS[id];
   if (!adapter) {
-    throw new Error(`No forge adapter registered for "${forge}"`);
+    throw new Error(`No forge adapter registered for "${id}"`);
   }
   return adapter;
 }

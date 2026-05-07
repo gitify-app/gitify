@@ -52,7 +52,8 @@ import {
 } from '../utils/auth/utils';
 import { clearState, loadState, saveState } from '../utils/core/storage';
 import { clearOctokitClientCache } from '../utils/forges/github/octokit';
-import { getAdapterById } from '../utils/forges/registry';
+import { getAdapter, isKnownForge } from '../utils/forges/registry';
+import { isValidHostname } from '../utils/auth/utils';
 import {
   applyKeyboardShortcut,
   decryptValue,
@@ -73,26 +74,31 @@ import {
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
 import { defaultAuth, defaultSettings } from './defaults';
 
-const KNOWN_FORGES: ReadonlySet<Forge> = new Set(['github', 'gitea']);
-
-function isKnownForge(forge: unknown): forge is Forge {
-  return typeof forge === 'string' && KNOWN_FORGES.has(forge as Forge);
-}
-
 /**
- * Backfill the `forge` field on accounts persisted before multi-forge support.
- *
- * Persisted state is untrusted JSON, so we accept only the registered forge
- * IDs here — anything else (missing, empty string, casing mismatch, value
- * removed in a later release) is treated as legacy GitHub.
+ * Sanitise persisted auth state. Persisted JSON is untrusted (XSS, malicious
+ * extension, file-system tampering), so we project only the known fields,
+ * coerce `forge` to a registered value, and drop accounts with a
+ * structurally invalid hostname before the renderer ever touches them.
  */
 function migrateLegacyAuthState(auth: AuthState): AuthState {
   return {
     ...auth,
-    accounts: auth.accounts.map((a) => ({
-      ...a,
-      forge: isKnownForge(a.forge) ? a.forge : 'github',
-    })),
+    accounts: auth.accounts.flatMap((a) => {
+      if (!a.hostname || !isValidHostname(a.hostname)) {
+        return [];
+      }
+      const sanitised: Account = {
+        forge: isKnownForge(a.forge) ? a.forge : 'github',
+        method: a.method,
+        platform: a.platform,
+        version: a.version,
+        hostname: a.hostname,
+        token: a.token,
+        user: a.user,
+        scopes: a.scopes,
+      };
+      return [sanitised];
+    }),
   };
 }
 
@@ -559,7 +565,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async ({ token, hostname, forge }: LoginPersonalAccessTokenOptions) => {
       const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
-      await getAdapterById(resolvedForge).fetchAuthenticatedUser({
+      await getAdapter(resolvedForge).fetchAuthenticatedUser({
         forge: resolvedForge,
         hostname,
         token: encryptedToken,
