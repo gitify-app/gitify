@@ -23,16 +23,24 @@ Gitify uses a forge adapter pattern (see [`MAINTAINERS.md`](MAINTAINERS.md)) so 
 
 | Forge                                           | Status         | Notifications | Mark read | Mark done | Unsubscribe | Enriched details |
 | ----------------------------------------------- | -------------- | :-----------: | :-------: | :-------: | :---------: | :--------------: |
-| **GitHub** Cloud                                | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
-| **GitHub** Enterprise Server (≥ 3.13)           | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
-| **GitHub** Enterprise Cloud with Data Residency | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
-| **Gitea** (incl. Forgejo, Codeberg)             | ✅ Supported   | ✅            | ✅        | —         | —           | —                |
-| **GitLab** (todos)                              | 💭 Considering | —             | —         | —         | —           | —                |
-| **Bitbucket** Cloud                             | 💭 Considering | —             | —         | —         | —           | —                |
-| **Azure DevOps**                                | 💭 Considering | —             | —         | —         | —           | —                |
-| **Gerrit**                                      | 💭 Considering | —             | —         | —         | —           | —                |
+| **GitHub** Cloud                                | ✅   | ✅            | ✅        | ✅        | ✅          | ✅               |
+| **GitHub** Enterprise Server (≥ 3.13)           | ✅   | ✅            | ✅        | ✅        | ✅          | ✅               |
+| **GitHub** Enterprise Cloud with Data Residency | ✅   | ✅            | ✅        | ✅        | ✅          | ✅               |
+| **Gitea** (incl. Forgejo, Codeberg)             | ✅   | ✅            | ✅        | —         | —           | —                |
+| **GitLab** (todos)                              | 💭 | —             | —         | —         | —           | —                |
+| **Bitbucket** Cloud                             | 💭 | —             | —         | —         | —           | —                |
+| **Azure DevOps**                                | 💭 | —             | —         | —         | —           | —                |
+| **Gerrit**                                      | 💭 | —             | —         | —         | —           | —                |
 
-**Status legend:** ✅ Supported · 🧪 Experimental (rough edges expected) · 🚧 In progress (adapter is being worked on) · 💭 Considering (open to a maintainer picking it up).
+> [!NOTE]
+> **Status legend**
+>
+> | Symbol | Meaning |
+> | ------ | ------- |
+> | ✅ | Supported |
+> | 🧪 | Experimental (rough edges expected) |
+> | 🚧 | In progress (adapter is being worked on) |
+> | 💭 | Considering (open to a maintainer picking it up) |
 
 A new forge needs an [adapter](src/renderer/utils/forges/) plus a designated maintainer — see [the contributing guide](CONTRIBUTING.md#multi-forge-support) for the full policy.
 
