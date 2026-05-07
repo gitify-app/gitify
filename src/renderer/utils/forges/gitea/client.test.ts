@@ -153,10 +153,7 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       );
 
       await expect(
-        giteaGetJson(
-          mockGiteaAccount,
-          'https://gitea.example.com/api/v1/x',
-        ),
+        giteaGetJson(mockGiteaAccount, 'https://gitea.example.com/api/v1/x'),
       ).rejects.toThrow(/^Gitea API 500 Server Error$/);
     });
 
@@ -175,9 +172,9 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
     });
 
     it('refuses malformed URLs without sending a request', async () => {
-      await expect(
-        giteaGetJson(mockGiteaAccount, 'not-a-url'),
-      ).rejects.toThrow(/malformed Gitea URL/);
+      await expect(giteaGetJson(mockGiteaAccount, 'not-a-url')).rejects.toThrow(
+        /malformed Gitea URL/,
+      );
       expect(fetchSpy).not.toHaveBeenCalled();
     });
   });

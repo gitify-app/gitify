@@ -1,4 +1,4 @@
-import type { GitifyNotification } from '../../types';
+import type { GitifyNotification, RawGitifyNotification } from '../../types';
 
 // TODO(multi-forge): see note in url.ts — display helpers should eventually
 // live on the adapter so shared formatting code does not depend on a forge.
@@ -9,11 +9,11 @@ import { createNotificationHandler } from '../forges/github/handlers';
  * UI-ready values. Must be called after enrichment has completed,
  * as formatting depends on enriched subject data (state, number, etc.).
  *
- * @param notification - The enriched notification to format
- * @returns The notification with populated display property
+ * Widens `RawGitifyNotification` (no display) into `GitifyNotification`
+ * (display populated). The UI never sees the raw shape directly.
  */
 export function formatNotification(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): GitifyNotification {
   const handler = createNotificationHandler(notification);
 
@@ -81,7 +81,7 @@ export function formatProperCase(text: string) {
  * @returns A human-readable type string (e.g. "Open Pull Request").
  */
 export function formatNotificationType(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): string {
   return formatForDisplay([
     notification.subject.state ?? '',
@@ -106,7 +106,7 @@ export function formatGitHubNumber(num: number): string {
  * @returns A `"#N"` string when a subject number is present, otherwise `""`.
  */
 export function formatNotificationNumber(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): string {
   return notification.subject?.number
     ? formatGitHubNumber(notification.subject.number)
@@ -123,7 +123,7 @@ export function formatNotificationNumber(
  * @returns The display title string.
  */
 export function formatNotificationTitle(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): string {
   let title = notification.subject.title;
   const number = formatNotificationNumber(notification);

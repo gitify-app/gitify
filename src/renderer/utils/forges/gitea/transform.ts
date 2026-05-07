@@ -1,8 +1,8 @@
 import {
   type Account,
-  type GitifyNotification,
   type GitifyRepository,
   type GitifySubject,
+  type RawGitifyNotification,
   type Reason,
   type SubjectType,
   toLink,
@@ -17,14 +17,14 @@ const FALLBACK_REASON: Reason = 'subscribed';
 export function transformGiteaNotifications(
   raw: GiteaNotificationThread[],
   account: Account,
-): GitifyNotification[] {
+): RawGitifyNotification[] {
   return raw.map((thread) => transformGiteaNotification(thread, account));
 }
 
 function transformGiteaNotification(
   raw: GiteaNotificationThread,
   account: Account,
-): GitifyNotification {
+): RawGitifyNotification {
   const reasonDetails = getReasonDetails(FALLBACK_REASON);
 
   return {
@@ -40,7 +40,6 @@ function transformGiteaNotification(
     repository: transformRepository(raw, account),
     account,
     order: 0,
-    // `display` is populated by formatNotification post-enrichment.
   };
 }
 

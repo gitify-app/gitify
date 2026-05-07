@@ -69,14 +69,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     unsubscribeNotification(notification);
   };
 
-  // `display` is populated by formatNotification before the UI ever sees the
-  // notification; the guard exists only to satisfy the type checker.
-  const display = notification.display;
-  if (!display) {
-    return null;
-  }
-
-  const NotificationIcon = display.icon.type;
+  const NotificationIcon = notification.display.icon.type;
   const isNotificationRead = !notification.unread;
 
   return (
@@ -92,11 +85,11 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       id={notification.id}
     >
       <Stack align="center" direction="horizontal" gap="condensed">
-        <Tooltip direction="e" text={display.type}>
+        <Tooltip direction="e" text={notification.display.type}>
           <button type="button">
             <NotificationIcon
-              aria-label={display.type}
-              className={display.icon.color}
+              aria-label={notification.display.type}
+              className={notification.display.icon.color}
               size={Size.LARGE}
             />
           </button>
@@ -123,7 +116,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             direction="horizontal"
             gap="condensed"
             justify="space-between"
-            title={display.title}
+            title={notification.display.title}
           >
             <NotificationTitle title={notification.subject.title} />
             <Text
@@ -133,7 +126,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
                 (isGroupByDate(settings) || !settings.showNumber) && 'hidden',
               )}
             >
-              {display.number}
+              {notification.display.number}
             </Text>
           </Stack>
 

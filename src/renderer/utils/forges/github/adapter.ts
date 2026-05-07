@@ -4,8 +4,8 @@ import { Constants } from '../../../constants';
 
 import type {
   Account,
-  GitifyNotification,
   Link,
+  RawGitifyNotification,
   SettingsState,
 } from '../../../types';
 import type { ForgeAdapter, RefreshAccountData } from '../types';
@@ -49,9 +49,7 @@ async function fetchAuthenticatedUser(
       name: user.name ?? null,
       avatar: user.avatar_url ?? '',
     },
-    version: extractHostVersion(
-      headers['x-github-enterprise-version'] ?? null,
-    ),
+    version: extractHostVersion(headers['x-github-enterprise-version'] ?? null),
     scopes,
   };
 }
@@ -59,7 +57,7 @@ async function fetchAuthenticatedUser(
 async function listNotifications(
   account: Account,
   settings: SettingsState,
-): Promise<GitifyNotification[]> {
+): Promise<RawGitifyNotification[]> {
   const raw = await listNotificationsForAuthenticatedUser(account, settings);
   return transformNotifications(raw, account);
 }

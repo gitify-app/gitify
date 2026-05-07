@@ -1,15 +1,15 @@
 import {
   type Account,
-  type GitifyNotification,
   type GitifyOwner,
   type GitifyReason,
   type GitifyRepository,
   type GitifySubject,
+  type RawGitifyNotification,
   type Reason,
   type SubjectType,
-  type UserType,
   toLink,
   toLinkOrNull,
+  type UserType,
 } from '../../../types';
 import type { RawGitHubNotification } from './types';
 
@@ -25,7 +25,7 @@ import { getReasonDetails } from '../../notifications/reason';
 export function transformNotifications(
   rawNotifications: RawGitHubNotification[],
   account: Account,
-): GitifyNotification[] {
+): RawGitifyNotification[] {
   return rawNotifications.map((raw) => {
     return transformNotification(raw, account);
   });
@@ -45,7 +45,7 @@ export function transformNotifications(
 function transformNotification(
   raw: RawGitHubNotification,
   account: Account,
-): GitifyNotification {
+): RawGitifyNotification {
   return {
     id: raw.id,
     unread: raw.unread,
@@ -55,7 +55,6 @@ function transformNotification(
     repository: transformRepository(raw.repository),
     account: account,
     order: 0, // Will be set later in stabilizeNotificationsOrder
-    // `display` is populated by formatNotification post-enrichment.
   };
 }
 

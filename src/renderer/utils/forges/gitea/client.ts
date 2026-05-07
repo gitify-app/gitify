@@ -8,7 +8,7 @@ const PAGE_SIZE = 100;
 
 export function getGiteaApiBaseUrl(hostname: Hostname): URL {
   if (!isValidHostname(hostname)) {
-    throw new Error(`Refusing to build a Gitea API URL for invalid hostname.`);
+    throw new Error('Refusing to build a Gitea API URL for invalid hostname.');
   }
   return new URL(`https://${hostname}/api/v1/`);
 }

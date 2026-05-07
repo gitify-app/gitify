@@ -50,7 +50,7 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
               !settings.showNumber && 'hidden',
             )}
           >
-            {notification.display?.number}
+            {notification.display.number}
           </div>
         </Stack>
       </div>

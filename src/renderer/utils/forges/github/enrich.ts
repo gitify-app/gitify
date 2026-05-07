@@ -1,8 +1,8 @@
 import { Constants } from '../../../constants';
 
 import type {
-  GitifyNotification,
   GitifySubject,
+  RawGitifyNotification,
   SettingsState,
 } from '../../../types';
 
@@ -20,9 +20,9 @@ import { createNotificationHandler } from './handlers';
  * orchestrator stays adapter-agnostic.
  */
 export async function enrichGitHubNotifications(
-  notifications: GitifyNotification[],
+  notifications: RawGitifyNotification[],
   settings: SettingsState,
-): Promise<GitifyNotification[]> {
+): Promise<RawGitifyNotification[]> {
   const fragments = await fetchInBatches(notifications);
 
   return Promise.all(
@@ -33,12 +33,12 @@ export async function enrichGitHubNotifications(
 }
 
 async function fetchInBatches(
-  notifications: GitifyNotification[],
+  notifications: RawGitifyNotification[],
 ): Promise<
-  Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
+  Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
 > {
   const merged = new Map<
-    GitifyNotification,
+    RawGitifyNotification,
     FetchMergedDetailsTemplateQuery['repository']
   >();
 
@@ -66,10 +66,10 @@ async function fetchInBatches(
 }
 
 async function enrichSingle(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
   settings: SettingsState,
   fetchedData: FetchMergedDetailsTemplateQuery['repository'] | undefined,
-): Promise<GitifyNotification> {
+): Promise<RawGitifyNotification> {
   let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {

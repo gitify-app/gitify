@@ -2,9 +2,9 @@ import { KeyIcon, ServerIcon } from '@primer/octicons-react';
 
 import type {
   Account,
-  GitifyNotification,
   Hostname,
   Link,
+  RawGitifyNotification,
   SettingsState,
   Token,
 } from '../../../types';
@@ -47,7 +47,7 @@ async function fetchAuthenticatedUser(
 async function listNotifications(
   account: Account,
   settings: SettingsState,
-): Promise<GitifyNotification[]> {
+): Promise<RawGitifyNotification[]> {
   const raw = await listGiteaNotifications(account, settings);
   return transformGiteaNotifications(raw, account);
 }

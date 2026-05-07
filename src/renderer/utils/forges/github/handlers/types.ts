@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import type { OcticonProps } from '@primer/octicons-react';
 
 import type {
-  GitifyNotification,
   GitifySubject,
   IconColor,
   Link,
+  RawGitifyNotification,
   SettingsState,
   UserType,
 } from '../../../../types';
@@ -25,7 +25,7 @@ export interface NotificationTypeHandler {
    * @param fetchedData Previously fetched enrichment data (upstream).  If present, then enrich will skip fetching detailed data inline.
    */
   enrich(
-    notification: GitifyNotification,
+    notification: RawGitifyNotification,
     settings: SettingsState,
     fetchedData?: unknown,
   ): Promise<Partial<GitifySubject>>;
@@ -33,17 +33,17 @@ export interface NotificationTypeHandler {
   /**
    * Return the icon component for this notification type.
    */
-  iconType(notification: GitifyNotification): FC<OcticonProps>;
+  iconType(notification: RawGitifyNotification): FC<OcticonProps>;
 
   /**
    * Return the icon color for this notification type.
    */
-  iconColor(notification: GitifyNotification): IconColor;
+  iconColor(notification: RawGitifyNotification): IconColor;
 
   /**
    * Default url for notification type.
    */
-  defaultUrl(notification: GitifyNotification): Link;
+  defaultUrl(notification: RawGitifyNotification): Link;
 
   /**
    * Default user type for notification type.

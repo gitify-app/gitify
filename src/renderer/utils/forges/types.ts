@@ -5,9 +5,9 @@ import type { OcticonProps } from '@primer/octicons-react';
 import type {
   Account,
   Forge,
-  GitifyNotification,
   Hostname,
   Link,
+  RawGitifyNotification,
   SettingsState,
   Token,
 } from '../../types';
@@ -99,11 +99,15 @@ export interface ForgeAdapter {
    */
   onAccountTokenChange?(account: Account): void;
 
-  /** List notifications (already transformed to GitifyNotification). */
+  /**
+   * List notifications already transformed to the shared shape.
+   * Returns `RawGitifyNotification[]` — `display` is populated later by the
+   * orchestrator's `formatNotification` step.
+   */
   listNotifications(
     account: Account,
     settings: SettingsState,
-  ): Promise<GitifyNotification[]>;
+  ): Promise<RawGitifyNotification[]>;
 
   markThreadAsRead(account: Account, threadId: string): Promise<void>;
   markThreadAsDone(account: Account, threadId: string): Promise<void>;
@@ -119,9 +123,9 @@ export interface ForgeAdapter {
    *      that delegates here when the user has detailed notifications enabled.
    */
   enrichNotifications?(
-    notifications: GitifyNotification[],
+    notifications: RawGitifyNotification[],
     settings: SettingsState,
-  ): Promise<GitifyNotification[]>;
+  ): Promise<RawGitifyNotification[]>;
 
   /**
    * GET an arbitrary forge URL and return JSON. Used by notification

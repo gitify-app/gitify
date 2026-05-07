@@ -47,12 +47,12 @@ import {
   addAccount,
   getAccountUUID,
   hasAccounts,
+  isValidHostname,
   refreshAccount,
   removeAccount,
 } from '../utils/auth/utils';
 import { clearState, loadState, saveState } from '../utils/core/storage';
 import { getAdapter, isKnownForge } from '../utils/forges/registry';
-import { isValidHostname } from '../utils/auth/utils';
 import {
   applyKeyboardShortcut,
   decryptValue,

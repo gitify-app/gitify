@@ -1,6 +1,6 @@
 import type {
   AccountNotifications,
-  GitifyNotification,
+  RawGitifyNotification,
   TypeDetails,
 } from '../../../types';
 
@@ -40,5 +40,5 @@ export interface Filter<T extends string> {
    * @param notification Notifications
    * @param type filter value to use
    */
-  filterNotification(notification: GitifyNotification, type: T): boolean;
+  filterNotification(notification: RawGitifyNotification, type: T): boolean;
 }

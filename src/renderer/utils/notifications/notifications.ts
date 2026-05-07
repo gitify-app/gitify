@@ -1,8 +1,8 @@
 import type {
   AccountNotifications,
   AuthState,
-  GitifyNotification,
   GitifyState,
+  RawGitifyNotification,
   SettingsState,
 } from '../../types';
 
@@ -85,9 +85,8 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          // Adapter `listNotifications` returns already-transformed
-          // GitifyNotification objects (each adapter owns its raw types).
-          let notifications = await accountNotifications.notifications;
+          let notifications: RawGitifyNotification[] =
+            await accountNotifications.notifications;
 
           notifications = filterBaseNotifications(notifications);
 
@@ -95,13 +94,13 @@ export async function getAllNotifications(
 
           notifications = filterDetailedNotifications(notifications, settings);
 
-          notifications = notifications.map((notification) => {
-            return formatNotification(notification);
-          });
+          const formatted = notifications.map((notification) =>
+            formatNotification(notification),
+          );
 
           return {
             account: accountNotifications.account,
-            notifications: notifications,
+            notifications: formatted,
             error: null,
           };
         } catch (err) {
@@ -138,9 +137,9 @@ export async function getAllNotifications(
  * @returns The same notifications with subject fields populated from the API.
  */
 export async function enrichNotifications(
-  notifications: GitifyNotification[],
+  notifications: RawGitifyNotification[],
   settings: SettingsState,
-): Promise<GitifyNotification[]> {
+): Promise<RawGitifyNotification[]> {
   if (!settings.detailedNotifications || !notifications.length) {
     return notifications;
   }

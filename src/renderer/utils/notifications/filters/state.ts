@@ -3,8 +3,8 @@ import { useFiltersStore } from '../../../stores';
 import type {
   AccountNotifications,
   FilterStateType,
-  GitifyNotification,
   GitifyNotificationState,
+  RawGitifyNotification,
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
@@ -64,7 +64,7 @@ export const stateFilter: Filter<FilterStateType> = {
   },
 
   filterNotification(
-    notification: GitifyNotification,
+    notification: RawGitifyNotification,
     stateType: FilterStateType,
   ): boolean {
     const mapped = mapStateToFilter(notification.subject?.state);

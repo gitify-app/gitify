@@ -2,7 +2,7 @@ import { useFiltersStore } from '../../../stores';
 
 import type {
   AccountNotifications,
-  GitifyNotification,
+  RawGitifyNotification,
   TypeDetails,
   UserType,
 } from '../../../types';
@@ -61,7 +61,7 @@ export const userTypeFilter: Filter<UserType> = {
   },
 
   filterNotification(
-    notification: GitifyNotification,
+    notification: RawGitifyNotification,
     userType: UserType,
   ): boolean {
     const allUserTypes = ['User', 'EnterpriseUserAccount'];

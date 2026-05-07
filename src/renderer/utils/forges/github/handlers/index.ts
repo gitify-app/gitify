@@ -1,4 +1,4 @@
-import type { GitifyNotification } from '../../../../types';
+import type { RawGitifyNotification } from '../../../../types';
 import type { NotificationTypeHandler } from './types';
 
 import { checkSuiteHandler } from './checkSuite';
@@ -15,7 +15,7 @@ import { repositoryVulnerabilityAlertHandler } from './repositoryVulnerabilityAl
 import { workflowRunHandler } from './workflowRun';
 
 export function createNotificationHandler(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): NotificationTypeHandler {
   switch (notification.subject.type) {
     case 'CheckSuite':

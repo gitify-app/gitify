@@ -345,15 +345,17 @@ export interface GitifyNotification {
   account: Account;
   /** UI ordering index */
   order: number;
-  /**
-   * Formatted information for display/presentation to user.
-   *
-   * Populated by `formatNotification` after enrichment; consumers that read
-   * this field run after that pipeline stage, so it is always present at the
-   * UI boundary.
-   */
-  display?: GitifyNotificationDisplay;
+  /** Formatted information for display/presentation to user. */
+  display: GitifyNotificationDisplay;
 }
+
+/**
+ * A notification that has been transformed from a forge response but not yet
+ * formatted for display. The orchestrator pipeline (transform → filter →
+ * enrich → filter) operates on this type; `formatNotification` is the only
+ * place that widens it to `GitifyNotification` by populating `display`.
+ */
+export type RawGitifyNotification = Omit<GitifyNotification, 'display'>;
 
 /**
  * Notification reason details

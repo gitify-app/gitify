@@ -2,8 +2,8 @@ import { Constants } from '../../../constants';
 
 import type {
   Account,
-  GitifyNotification,
   Link,
+  RawGitifyNotification,
   SettingsState,
 } from '../../../types';
 import type {
@@ -214,7 +214,7 @@ async function followUrl<TResult>(
  * Fetch GitHub Discussion by Discussion Number.
  */
 export async function fetchDiscussionByNumber(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): Promise<FetchDiscussionByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
@@ -239,7 +239,7 @@ export async function fetchDiscussionByNumber(
  * Fetch GitHub Issue by Issue Number.
  */
 export async function fetchIssueByNumber(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): Promise<FetchIssueByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
@@ -260,7 +260,7 @@ export async function fetchIssueByNumber(
  * Fetch GitHub Pull Request by PR Number.
  */
 export async function fetchPullByNumber(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
 ): Promise<FetchPullRequestByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
@@ -284,12 +284,12 @@ export async function fetchPullByNumber(
  * making the most efficient use of the available GitHub API quota limits.
  */
 export async function fetchNotificationDetailsForList(
-  notifications: GitifyNotification[],
+  notifications: RawGitifyNotification[],
 ): Promise<
-  Map<GitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
+  Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
 > {
   const results = new Map<
-    GitifyNotification,
+    RawGitifyNotification,
     FetchMergedDetailsTemplateQuery['repository']
   >();
 
@@ -299,7 +299,7 @@ export async function fetchNotificationDetailsForList(
 
   // Build merged query using the builder
   const builder = new MergeQueryBuilder();
-  const aliasToNotification = new Map<string, GitifyNotification>();
+  const aliasToNotification = new Map<string, RawGitifyNotification>();
   let hasSupportedNotification = false;
 
   for (const notification of notifications) {
