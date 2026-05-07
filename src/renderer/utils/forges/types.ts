@@ -6,10 +6,12 @@ import type {
   Account,
   Forge,
   Hostname,
+  IconColor,
   Link,
   RawGitifyNotification,
   SettingsState,
   Token,
+  UserType,
 } from '../../types';
 
 /**
@@ -54,6 +56,18 @@ export interface RefreshAccountData {
  */
 export interface LoginRouteState {
   forge?: Forge;
+}
+
+/**
+ * Forge-agnostic display surface for a single notification. The adapter
+ * computes these on demand for shared code (`formatters.ts`, `url.ts`) so
+ * the format/UI layer never imports forge-specific dispatch.
+ */
+export interface NotificationDisplayHelpers {
+  iconType: FC<OcticonProps>;
+  iconColor: IconColor;
+  defaultUrl: Link;
+  defaultUserType: UserType;
 }
 
 /**
@@ -132,6 +146,15 @@ export interface ForgeAdapter {
    * handlers to follow subject/comment URLs.
    */
   followUrl<T>(account: Account, url: Link): Promise<T>;
+
+  /**
+   * Return the display-surface values (icon, color, default url, default user
+   * type) for a notification. Adapter-internal dispatch keeps shared
+   * formatting code (`formatters.ts`, `url.ts`) forge-agnostic.
+   */
+  getDisplayHelpers(
+    notification: RawGitifyNotification,
+  ): NotificationDisplayHelpers;
 
   // --- Login & token UX ---
 

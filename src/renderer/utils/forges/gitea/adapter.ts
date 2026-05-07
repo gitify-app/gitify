@@ -11,9 +11,11 @@ import type {
 import type {
   ForgeAdapter,
   ForgeCapabilities,
+  NotificationDisplayHelpers,
   RefreshAccountData,
 } from '../types';
 
+import { createNotificationHandler } from '../github/handlers';
 import {
   fetchGiteaAuthenticatedUser,
   giteaGetJson,
@@ -52,6 +54,23 @@ async function listNotifications(
   return transformGiteaNotifications(raw, account);
 }
 
+// Gitea reuses GitHub's notification-type handler dispatch for display
+// helpers. The dispatch is keyed on `subject.type` (Issue / PullRequest /
+// Commit) which Gitea's transform produces in the same vocabulary, so the
+// icon/color/url logic applies cleanly. Routing it through the adapter keeps
+// shared formatting code (`formatters.ts`, `url.ts`) forge-agnostic.
+function getDisplayHelpers(
+  notification: RawGitifyNotification,
+): NotificationDisplayHelpers {
+  const handler = createNotificationHandler(notification);
+  return {
+    iconType: handler.iconType(notification),
+    iconColor: handler.iconColor(notification),
+    defaultUrl: handler.defaultUrl(notification),
+    defaultUserType: handler.defaultUserType(),
+  };
+}
+
 export const giteaAdapter: ForgeAdapter = {
   id: 'gitea',
   displayName: 'Gitea',
@@ -80,6 +99,7 @@ export const giteaAdapter: ForgeAdapter = {
   followUrl<T>(account: Account, url: Link): Promise<T> {
     return giteaGetJson<T>(account, url);
   },
+  getDisplayHelpers,
 
   // Gitea PATs from /user/settings/applications are 40-char lowercase hex.
   validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),

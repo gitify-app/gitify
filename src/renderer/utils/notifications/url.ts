@@ -2,11 +2,7 @@ import type { GitifyNotification, Link } from '../../types';
 
 import { rendererLogError, toError } from '../core/logger';
 import { getHtmlUrl } from '../forges/github/client';
-// TODO(multi-forge): the handler factory lives under the GitHub adapter
-// because every handler talks to GitHub APIs. Its display-side helpers
-// (defaultUrl, etc.) are technically forge-agnostic — a future refactor
-// should split that surface so this file does not depend on a forge.
-import { createNotificationHandler } from '../forges/github/handlers';
+import { getAdapter } from '../forges/registry';
 
 export function generateNotificationReferrerId(
   notification: GitifyNotification,
@@ -18,8 +14,9 @@ export function generateNotificationReferrerId(
 export async function generateGitHubWebUrl(
   notification: GitifyNotification,
 ): Promise<Link> {
-  const handler = createNotificationHandler(notification);
-  const url = new URL(handler.defaultUrl(notification));
+  const url = new URL(
+    getAdapter(notification.account).getDisplayHelpers(notification).defaultUrl,
+  );
 
   if (notification.subject.htmlUrl) {
     url.href = notification.subject.htmlUrl;

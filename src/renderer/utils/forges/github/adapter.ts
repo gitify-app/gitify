@@ -8,7 +8,11 @@ import type {
   RawGitifyNotification,
   SettingsState,
 } from '../../../types';
-import type { ForgeAdapter, RefreshAccountData } from '../types';
+import type {
+  ForgeAdapter,
+  NotificationDisplayHelpers,
+  RefreshAccountData,
+} from '../types';
 
 import {
   extractHostVersion,
@@ -25,6 +29,7 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
+import { createNotificationHandler } from './handlers';
 import {
   clearOctokitClientCacheForAccount,
   createOctokitClient,
@@ -68,6 +73,18 @@ async function followUrl<T>(account: Account, url: Link): Promise<T> {
   return response.data as T;
 }
 
+function getDisplayHelpers(
+  notification: RawGitifyNotification,
+): NotificationDisplayHelpers {
+  const handler = createNotificationHandler(notification);
+  return {
+    iconType: handler.iconType(notification),
+    iconColor: handler.iconColor(notification),
+    defaultUrl: handler.defaultUrl(notification),
+    defaultUserType: handler.defaultUserType(),
+  };
+}
+
 export const githubAdapter: ForgeAdapter = {
   id: 'github',
   displayName: 'GitHub',
@@ -91,6 +108,7 @@ export const githubAdapter: ForgeAdapter = {
   onAccountTokenChange: clearOctokitClientCacheForAccount,
 
   followUrl,
+  getDisplayHelpers,
 
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,

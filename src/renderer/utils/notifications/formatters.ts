@@ -1,8 +1,6 @@
 import type { GitifyNotification, RawGitifyNotification } from '../../types';
 
-// TODO(multi-forge): see note in url.ts — display helpers should eventually
-// live on the adapter so shared formatting code does not depend on a forge.
-import { createNotificationHandler } from '../forges/github/handlers';
+import { getAdapter } from '../forges/registry';
 
 /**
  * Populates the display property on a notification with formatted,
@@ -15,7 +13,9 @@ import { createNotificationHandler } from '../forges/github/handlers';
 export function formatNotification(
   notification: RawGitifyNotification,
 ): GitifyNotification {
-  const handler = createNotificationHandler(notification);
+  const helpers = getAdapter(notification.account).getDisplayHelpers(
+    notification,
+  );
 
   return {
     ...notification,
@@ -24,10 +24,10 @@ export function formatNotification(
       number: formatNotificationNumber(notification),
       title: formatNotificationTitle(notification),
       icon: {
-        type: handler.iconType(notification),
-        color: handler.iconColor(notification),
+        type: helpers.iconType,
+        color: helpers.iconColor,
       },
-      defaultUserType: handler.defaultUserType(),
+      defaultUserType: helpers.defaultUserType,
     },
   };
 }
