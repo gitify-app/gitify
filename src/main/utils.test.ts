@@ -19,9 +19,13 @@ vi.mock('node:os', () => ({
 vi.mock('electron', () => ({
   app: {
     isPackaged: true,
-  },
-  shell: { openPath: vi.fn(() => Promise.resolve('')) },
-  dialog: { showMessageBoxSync: vi.fn(() => 0) },
+  } satisfies Pick<Electron.App, 'isPackaged'>,
+  shell: {
+    openPath: vi.fn(() => Promise.resolve('')),
+  } satisfies Pick<Electron.Shell, 'openPath'>,
+  dialog: {
+    showMessageBoxSync: vi.fn(() => 0),
+  } satisfies Pick<Electron.Dialog, 'showMessageBoxSync'>,
 }));
 
 const fileGetFileMock = vi.fn(() => ({ path: '/var/log/app/app.log' }));

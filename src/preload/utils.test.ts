@@ -3,22 +3,30 @@ import { EVENTS } from '../shared/events';
 import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
 
 vi.mock('electron', () => {
-  type Listener = (event: unknown, ...args: unknown[]) => void;
+  type Listener = Parameters<Electron.IpcRenderer['on']>[1];
   const listeners: Record<string, Listener[]> = {};
+  const ipcRendererStub = {
+    send: vi.fn(),
+    invoke: vi.fn().mockResolvedValue('response'),
+    on: vi.fn(function (
+      this: Electron.IpcRenderer,
+      channel: string,
+      listener: Listener,
+    ) {
+      if (!listeners[channel]) {
+        listeners[channel] = [];
+      }
+      listeners[channel].push(listener);
+      return this;
+    }),
+  } satisfies Pick<Electron.IpcRenderer, 'send' | 'invoke' | 'on'>;
   return {
     ipcRenderer: {
-      send: vi.fn(),
-      invoke: vi.fn().mockResolvedValue('response'),
-      on: vi.fn((channel: string, listener: Listener) => {
-        if (!listeners[channel]) {
-          listeners[channel] = [];
-        }
-        listeners[channel].push(listener);
-      }),
+      ...ipcRendererStub,
       __emit: (channel: string, ...args: unknown[]) => {
         const list = listeners[channel] || [];
         for (const l of list) {
-          l({}, ...args);
+          l({} as Electron.IpcRendererEvent, ...args);
         }
       },
       __listeners: listeners,

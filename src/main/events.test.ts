@@ -7,7 +7,7 @@ vi.mock('electron', () => ({
   ipcMain: {
     on: (...args: unknown[]) => onMock(...args),
     handle: (...args: unknown[]) => handleMock(...args),
-  },
+  } satisfies Pick<Electron.IpcMain, 'on' | 'handle'>,
 }));
 
 import type { Menubar } from 'menubar';

@@ -20,15 +20,23 @@ const moveToApplicationsFolderMock = vi.fn();
 const isInApplicationsFolderMock = vi.fn(() => false);
 const getPathMock = vi.fn(() => '/User/Data');
 
-const showMessageBoxMock = vi.fn(async () => ({ response: 0 }));
+const showMessageBoxMock = vi.fn(async () => ({
+  response: 0,
+  checkboxChecked: false,
+}));
 
 vi.mock('electron', () => ({
   app: {
     getPath: () => getPathMock(),
     isInApplicationsFolder: () => isInApplicationsFolderMock(),
     moveToApplicationsFolder: () => moveToApplicationsFolderMock(),
-  },
-  dialog: { showMessageBox: () => showMessageBoxMock() },
+  } satisfies Pick<
+    Electron.App,
+    'getPath' | 'isInApplicationsFolder' | 'moveToApplicationsFolder'
+  >,
+  dialog: {
+    showMessageBox: () => showMessageBoxMock(),
+  } satisfies Pick<Electron.Dialog, 'showMessageBox'>,
 }));
 
 // Ensure the module under test thinks we're not in dev mode
@@ -97,7 +105,10 @@ describe('main/lifecycle/first-run', () => {
   it('prompts and moves app on macOS when user accepts', async () => {
     existsSyncMock.mockReturnValueOnce(false); // marker
     existsSyncMock.mockReturnValueOnce(false); // folder
-    showMessageBoxMock.mockResolvedValueOnce({ response: 0 });
+    showMessageBoxMock.mockResolvedValueOnce({
+      response: 0,
+      checkboxChecked: false,
+    });
 
     await onFirstRunMaybe();
 
@@ -107,7 +118,10 @@ describe('main/lifecycle/first-run', () => {
   it('does not move when user declines', async () => {
     existsSyncMock.mockReturnValueOnce(false);
     existsSyncMock.mockReturnValueOnce(false);
-    showMessageBoxMock.mockResolvedValueOnce({ response: 1 });
+    showMessageBoxMock.mockResolvedValueOnce({
+      response: 1,
+      checkboxChecked: false,
+    });
 
     await onFirstRunMaybe();
 

@@ -45,10 +45,16 @@ vi.mock('electron', () => {
     }
   }
   return {
-    dialog: { showMessageBox: vi.fn() },
+    dialog: {
+      showMessageBox: vi.fn(),
+    } satisfies Pick<Electron.Dialog, 'showMessageBox'>,
     MenuItem,
-    Menu: { buildFromTemplate: vi.fn() },
-    shell: { openExternal: vi.fn() },
+    Menu: {
+      buildFromTemplate: vi.fn(),
+    } satisfies Pick<typeof Electron.Menu, 'buildFromTemplate'>,
+    shell: {
+      openExternal: vi.fn(),
+    } satisfies Pick<Electron.Shell, 'openExternal'>,
   };
 });
 
