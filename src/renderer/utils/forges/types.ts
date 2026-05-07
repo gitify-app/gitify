@@ -28,20 +28,23 @@ export interface ForgeCapabilities {
 }
 
 /**
- * Refreshed account data returned by `fetchAuthenticatedUser`.
+ * Normalised account data returned by `fetchAuthenticatedUser`.
  *
- * Uses the snake_case shape produced by the GitHub REST API so the existing
- * GitHub-side `refreshAccount` logic continues to work unmodified. Other
- * adapters map their native response into this shape.
+ * Each adapter parses its native API response (REST headers, JSON body) and
+ * returns this shared shape. Shared `refreshAccount` consumes this directly
+ * without knowing about forge-specific transports.
  */
 export interface RefreshAccountData {
-  data: {
-    id: string | number;
+  user: {
+    id: string;
     login: string;
-    name?: string | null;
-    avatar_url?: string;
+    name: string | null;
+    avatar: string;
   };
-  headers: Record<string, string | undefined>;
+  /** Forge instance version, if the forge advertises one (GHES). */
+  version?: string;
+  /** OAuth scope names attached to the token, if the forge has scopes. */
+  scopes?: string[];
 }
 
 /**
@@ -75,6 +78,12 @@ export interface ForgeAdapter {
 
   /** Fetch the authenticated user (used during login & on refresh). */
   fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData>;
+
+  /**
+   * Optional lifecycle hook called when an account's token rotates. Forges
+   * with HTTP client caches (e.g. GitHub Octokit) drop their cache here.
+   */
+  onAccountTokenChange?(account: Account): void;
 
   /** List notifications (already transformed to GitifyNotification). */
   listNotifications(

@@ -13,6 +13,7 @@ import type {
 import type { ForgeAdapter, RefreshAccountData } from '../types';
 
 import {
+  extractHostVersion,
   getDeveloperSettingsURL as legacyGetDeveloperSettingsURL,
   getNewTokenURL as legacyGetNewTokenURL,
   isValidToken as legacyIsValidToken,
@@ -26,16 +27,34 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
-import { createOctokitClient } from './octokit';
+import {
+  clearOctokitClientCacheForAccount,
+  createOctokitClient,
+} from './octokit';
 import { transformNotifications } from './transform';
 
 async function fetchAuthenticatedUser(
   account: Account,
 ): Promise<RefreshAccountData> {
   const response = await fetchAuthenticatedUserDetails(account);
+  const user = response.data;
+  const headers = response.headers as Record<string, string | undefined>;
+
+  const scopes = headers['x-oauth-scopes']
+    ?.split(',')
+    .map((scope) => scope.trim());
+
   return {
-    data: response.data as RefreshAccountData['data'],
-    headers: response.headers as RefreshAccountData['headers'],
+    user: {
+      id: String(user.id),
+      login: user.login,
+      name: user.name ?? null,
+      avatar: user.avatar_url ?? '',
+    },
+    version: extractHostVersion(
+      headers['x-github-enterprise-version'] ?? null,
+    ),
+    scopes,
   };
 }
 
@@ -73,6 +92,7 @@ export const githubAdapter: ForgeAdapter = {
   },
 
   enrichNotifications: enrichGitHubNotifications,
+  onAccountTokenChange: clearOctokitClientCacheForAccount,
 
   followUrl,
 

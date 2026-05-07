@@ -35,13 +35,12 @@ async function fetchAuthenticatedUser(
 ): Promise<RefreshAccountData> {
   const user = await fetchGiteaAuthenticatedUser(account);
   return {
-    data: {
-      id: user.id,
+    user: {
+      id: String(user.id),
       login: user.login,
       name: user.full_name ?? null,
-      avatar_url: user.avatar_url ?? '',
+      avatar: user.avatar_url ?? '',
     },
-    headers: {},
   };
 }
 

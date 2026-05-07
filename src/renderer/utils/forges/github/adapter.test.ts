@@ -42,10 +42,18 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
   });
 
   describe('fetchAuthenticatedUser', () => {
-    it('passes through the GitHub REST response shape', async () => {
+    it('normalises the GitHub REST response into the shared shape', async () => {
       vi.spyOn(client, 'fetchAuthenticatedUserDetails').mockResolvedValue({
-        data: { id: 1, login: 'octocat', name: null, avatar_url: 'a' },
-        headers: { 'x-oauth-scopes': 'notifications,read:user' },
+        data: {
+          id: 42,
+          login: 'octocat',
+          name: 'The Octocat',
+          avatar_url: 'https://github.com/octocat.png',
+        },
+        headers: {
+          'x-oauth-scopes': 'notifications, read:user',
+          'x-github-enterprise-version': '3.13.0',
+        },
       } as unknown as Awaited<
         ReturnType<typeof client.fetchAuthenticatedUserDetails>
       >);
@@ -54,8 +62,32 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         mockGitHubCloudAccount,
       );
 
-      expect(result.data.login).toBe('octocat');
-      expect(result.headers['x-oauth-scopes']).toBe('notifications,read:user');
+      expect(result).toEqual({
+        user: {
+          id: '42',
+          login: 'octocat',
+          name: 'The Octocat',
+          avatar: 'https://github.com/octocat.png',
+        },
+        version: '3.13.0',
+        scopes: ['notifications', 'read:user'],
+      });
+    });
+
+    it('returns version "latest" when the enterprise version header is absent', async () => {
+      vi.spyOn(client, 'fetchAuthenticatedUserDetails').mockResolvedValue({
+        data: { id: 1, login: 'octocat', name: null, avatar_url: '' },
+        headers: {},
+      } as unknown as Awaited<
+        ReturnType<typeof client.fetchAuthenticatedUserDetails>
+      >);
+
+      const result = await githubAdapter.fetchAuthenticatedUser(
+        mockGitHubCloudAccount,
+      );
+
+      expect(result.version).toBe('latest');
+      expect(result.scopes).toBeUndefined();
     });
   });
 

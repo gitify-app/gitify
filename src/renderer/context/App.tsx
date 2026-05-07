@@ -51,7 +51,6 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import { clearState, loadState, saveState } from '../utils/core/storage';
-import { clearOctokitClientCache } from '../utils/forges/github/octokit';
 import { getAdapter, isKnownForge } from '../utils/forges/registry';
 import { isValidHostname } from '../utils/auth/utils';
 import {
@@ -607,8 +606,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const updatedAuth = removeAccount(auth, account);
 
-      // Clear Octokit client cache when removing account
-      clearOctokitClientCache();
+      // Drop any forge-specific HTTP client state for the logged-out account.
+      getAdapter(account).onAccountTokenChange?.(account);
 
       persistAuth(updatedAuth);
     },

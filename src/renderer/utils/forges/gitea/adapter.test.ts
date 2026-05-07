@@ -97,13 +97,12 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
 
       expect(result).toEqual({
-        data: {
-          id: 7,
+        user: {
+          id: '7',
           login: 'octocat',
           name: 'The Octocat',
-          avatar_url: 'https://example.com/a.png',
+          avatar: 'https://example.com/a.png',
         },
-        headers: {},
       });
     });
 
@@ -116,8 +115,8 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       const result =
         await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
 
-      expect(result.data.name).toBeNull();
-      expect(result.data.avatar_url).toBe('');
+      expect(result.user.name).toBeNull();
+      expect(result.user.avatar).toBe('');
     });
   });
 
