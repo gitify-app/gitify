@@ -31,8 +31,8 @@ export const FiltersRoute: FC = () => {
 
       <Contents paddingBottom>
         <Stack direction="vertical" gap="spacious">
-          <SearchFilter />
           {hasMultipleAccounts && <AccountFilter />}
+          <SearchFilter />
           <UserTypeFilter />
           <SubjectTypeFilter />
           <StateFilter />
