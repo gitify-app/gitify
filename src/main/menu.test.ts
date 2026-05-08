@@ -257,6 +257,78 @@ describe('main/menu.ts', () => {
       expect(menubar.app.quit).toHaveBeenCalled();
     });
 
+    it('toggle menu item shows the window when hidden', () => {
+      const showWindow = vi.fn();
+      const hideWindow = vi.fn();
+      const mb = {
+        app: { quit: vi.fn() },
+        window: { isVisible: () => false },
+        showWindow,
+        hideWindow,
+      } as unknown as Menubar;
+      const builder = new MenuBuilder(mb);
+      builder.buildMenu();
+      const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
+        -1,
+      )[0][0] as TemplateItem[];
+
+      const item = template.find(
+        (i) => i.label === `Toggle ${APPLICATION.NAME}`,
+      );
+      item?.click?.();
+
+      expect(showWindow).toHaveBeenCalled();
+      expect(hideWindow).not.toHaveBeenCalled();
+    });
+
+    it('toggle menu item hides the window when visible', () => {
+      const showWindow = vi.fn();
+      const hideWindow = vi.fn();
+      const mb = {
+        app: { quit: vi.fn() },
+        window: { isVisible: () => true },
+        showWindow,
+        hideWindow,
+      } as unknown as Menubar;
+      const builder = new MenuBuilder(mb);
+      builder.buildMenu();
+      const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
+        -1,
+      )[0][0] as TemplateItem[];
+
+      const item = template.find(
+        (i) => i.label === `Toggle ${APPLICATION.NAME}`,
+      );
+      item?.click?.();
+
+      expect(hideWindow).toHaveBeenCalled();
+      expect(showWindow).not.toHaveBeenCalled();
+    });
+
+    it('toggle menu item shows the window when no window exists yet', () => {
+      const showWindow = vi.fn();
+      const hideWindow = vi.fn();
+      const mb = {
+        app: { quit: vi.fn() },
+        window: undefined,
+        showWindow,
+        hideWindow,
+      } as unknown as Menubar;
+      const builder = new MenuBuilder(mb);
+      builder.buildMenu();
+      const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
+        -1,
+      )[0][0] as TemplateItem[];
+
+      const item = template.find(
+        (i) => i.label === `Toggle ${APPLICATION.NAME}`,
+      );
+      item?.click?.();
+
+      expect(showWindow).toHaveBeenCalled();
+      expect(hideWindow).not.toHaveBeenCalled();
+    });
+
     it('developer submenu includes expected static accelerators', () => {
       const template = buildAndGetTemplate();
       const devEntry = template.find(

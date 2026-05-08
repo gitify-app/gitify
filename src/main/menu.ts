@@ -60,6 +60,17 @@ export default class MenuBuilder {
    */
   buildMenu(): Menu {
     const contextMenu = Menu.buildFromTemplate([
+      {
+        label: `Toggle ${APPLICATION.NAME}`,
+        click: () => {
+          if (this.menubar.window?.isVisible()) {
+            this.menubar.hideWindow();
+          } else {
+            this.menubar.showWindow();
+          }
+        },
+      },
+      { type: 'separator' },
       this.checkForUpdatesMenuItem,
       this.noUpdateAvailableMenuItem,
       this.updateAvailableMenuItem,
