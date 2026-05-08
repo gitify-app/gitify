@@ -5,7 +5,6 @@ import { EVENTS } from '../../shared/events';
 
 import { Paths } from '../config';
 import { handleMainEvent, onMainEvent } from '../events';
-import { setKeepRunningInTray } from '../lifecycle/window';
 
 /**
  * Register IPC handlers for general application queries and window/app control.
@@ -20,10 +19,6 @@ export function registerAppHandlers(mb: Menubar): void {
   onMainEvent(EVENTS.WINDOW_HIDE, () => mb.hideWindow());
 
   onMainEvent(EVENTS.QUIT, () => mb.app.quit());
-
-  onMainEvent(EVENTS.UPDATE_KEEP_RUNNING_IN_TRAY, (_, value: boolean) => {
-    setKeepRunningInTray(value);
-  });
 
   // Path handlers for renderer queries about resource locations
   handleMainEvent(EVENTS.NOTIFICATION_SOUND_PATH, () => {

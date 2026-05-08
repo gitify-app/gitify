@@ -146,7 +146,6 @@ export interface SystemSettingsState {
   playSound: boolean;
   notificationVolume: Percentage;
   openAtStartup: boolean;
-  keepRunningInTray: boolean;
 }
 
 export interface AuthState {

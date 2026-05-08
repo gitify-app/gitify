@@ -3,7 +3,6 @@ import type { Menubar } from 'menubar';
 import {
   __resetWindowLifecycleForTests,
   configureWindowEvents,
-  setKeepRunningInTray,
 } from './window';
 
 const appOnMock = vi.fn();
@@ -57,7 +56,6 @@ describe('main/lifecycle/window.ts', () => {
     appOnMock.mockClear();
     appQuitMock.mockClear();
     __resetWindowLifecycleForTests();
-    setKeepRunningInTray(false);
     setPlatform('linux');
 
     menubar = {
@@ -128,9 +126,8 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   describe('window close handler', () => {
-    it('hides the window and restores menubar reference when keepRunningInTray is enabled', async () => {
+    it('hides the window and restores menubar reference on a WM close', async () => {
       configureWindowEvents(menubar);
-      setKeepRunningInTray(true);
 
       const closeHandler = findWindowHandler(menubar, 'close');
       const event = { preventDefault: vi.fn() };
@@ -153,7 +150,6 @@ describe('main/lifecycle/window.ts', () => {
 
     it('skips the deferred hide when the captured window is destroyed', async () => {
       configureWindowEvents(menubar);
-      setKeepRunningInTray(true);
 
       const captured = menubar.window;
       const closeHandler = findWindowHandler(menubar, 'close');
@@ -166,22 +162,8 @@ describe('main/lifecycle/window.ts', () => {
       expect(captured?.hide).not.toHaveBeenCalled();
     });
 
-    it('lets the window close normally when keepRunningInTray is disabled', async () => {
+    it('lets the window close during quit', async () => {
       configureWindowEvents(menubar);
-
-      const closeHandler = findWindowHandler(menubar, 'close');
-      const event = { preventDefault: vi.fn() };
-      closeHandler?.(event);
-
-      await flushDeferred();
-
-      expect(event.preventDefault).not.toHaveBeenCalled();
-      expect(menubar.window?.hide).not.toHaveBeenCalled();
-    });
-
-    it('lets the window close during quit even when keepRunningInTray is enabled', async () => {
-      configureWindowEvents(menubar);
-      setKeepRunningInTray(true);
 
       findAppHandler('before-quit')?.();
 
@@ -197,26 +179,16 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   describe('window-all-closed handler', () => {
-    it('keeps the app alive when keepRunningInTray is enabled', () => {
+    it('keeps the app alive when not quitting', () => {
       configureWindowEvents(menubar);
-      setKeepRunningInTray(true);
 
       findAppHandler('window-all-closed')?.();
 
       expect(appQuitMock).not.toHaveBeenCalled();
     });
 
-    it('quits when keepRunningInTray is disabled (linux)', () => {
+    it('quits on linux when the user is quitting', () => {
       configureWindowEvents(menubar);
-
-      findAppHandler('window-all-closed')?.();
-
-      expect(appQuitMock).toHaveBeenCalled();
-    });
-
-    it('quits when the user is quitting even if keepRunningInTray is enabled', () => {
-      configureWindowEvents(menubar);
-      setKeepRunningInTray(true);
 
       findAppHandler('before-quit')?.();
       findAppHandler('window-all-closed')?.();
@@ -224,10 +196,11 @@ describe('main/lifecycle/window.ts', () => {
       expect(appQuitMock).toHaveBeenCalled();
     });
 
-    it('does not quit on macOS when keepRunningInTray is disabled', () => {
+    it('does not quit on macOS', () => {
       setPlatform('darwin');
       configureWindowEvents(menubar);
 
+      findAppHandler('before-quit')?.();
       findAppHandler('window-all-closed')?.();
 
       expect(appQuitMock).not.toHaveBeenCalled();

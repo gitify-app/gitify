@@ -372,28 +372,6 @@ export const SystemSettings: FC = () => {
           }
           visible={!window.gitify.platform.isLinux()}
         />
-
-        <Checkbox
-          checked={settings.keepRunningInTray}
-          label="Close to tray"
-          name="keepRunningInTray"
-          onChange={() =>
-            updateSetting('keepRunningInTray', !settings.keepRunningInTray)
-          }
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>
-                Hide {APPLICATION.NAME} to the system tray when the window is
-                closed by the operating system or window manager, instead of
-                quitting the application.
-              </Text>
-              <Text>
-                Use the tray menu or the Quit shortcut to fully exit{' '}
-                {APPLICATION.NAME}.
-              </Text>
-            </Stack>
-          }
-        />
       </Stack>
     </fieldset>
   );
