@@ -56,6 +56,15 @@ export const api = {
     }),
 
   /**
+   * Enable or disable hiding the application window to the tray when the
+   * window receives a close request (e.g. from the OS / window manager).
+   *
+   * @param value - `true` to hide on close, `false` to quit on close.
+   */
+  setKeepRunningInTray: (value: boolean) =>
+    sendMainEvent(EVENTS.UPDATE_KEEP_RUNNING_IN_TRAY, value),
+
+  /**
    * Apply the global keyboard shortcut for toggling the app window visibility.
    *
    * @param payload - Whether the shortcut is enabled and the Electron accelerator string.
