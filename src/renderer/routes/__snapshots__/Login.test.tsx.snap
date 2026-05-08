@@ -18,7 +18,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-direction="vertical"
-      data-gap="normal"
+      data-gap="condensed"
       data-justify="start"
       data-padding="none"
       data-wrap="nowrap"
@@ -170,18 +170,12 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
           data-padding="none"
           data-wrap="nowrap"
         >
-          <p
-            class="text-center text-[var(--fgColor-muted)] prc-Text-Text-9mHv3"
-            data-size="small"
-          >
-            github.com & GitHub Enterprise
-          </p>
           <button
             class="prc-Button-ButtonBase-9n-Xk"
             data-block="block"
             data-component="Button"
             data-loading="false"
-            data-size="large"
+            data-size="medium"
             data-testid="login-github"
             data-variant="primary"
             type="button"
@@ -222,112 +216,102 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               </span>
             </span>
           </button>
-          <div
-            class="pt-1 prc-Stack-Stack-UQ9k6"
-            data-align="stretch"
-            data-direction="vertical"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+          <button
+            class="prc-Button-ButtonBase-9n-Xk"
+            data-block="block"
+            data-component="Button"
+            data-loading="false"
+            data-size="medium"
+            data-testid="login-pat"
+            data-variant="invisible"
+            type="button"
           >
-            <div
-              class="text-center text-[var(--fgColor-muted)] uppercase tracking-wider text-xxs prc-Text-Text-9mHv3"
-              data-size="small"
-            >
-              or sign in with
-            </div>
-            <button
-              class="prc-Button-ButtonBase-9n-Xk"
-              data-block="block"
-              data-component="Button"
-              data-loading="false"
-              data-size="medium"
-              data-testid="login-pat"
-              data-variant="invisible"
-              type="button"
+            <span
+              class="prc-Button-ButtonContent-Iohp5"
+              data-align="center"
+              data-component="buttonContent"
             >
               <span
-                class="prc-Button-ButtonContent-Iohp5"
-                data-align="center"
-                data-component="buttonContent"
+                class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+                data-component="leadingVisual"
               >
-                <span
-                  class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-                  data-component="leadingVisual"
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-key"
+                  data-component="Octicon"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
                 >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-key"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                    />
-                  </svg>
-                </span>
-                <span
-                  class="prc-Button-Label-FWkx3"
-                  data-component="text"
-                >
-                  Personal Access Token
-                </span>
+                  <path
+                    d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                  />
+                </svg>
               </span>
-            </button>
-            <button
-              class="prc-Button-ButtonBase-9n-Xk"
-              data-block="block"
-              data-component="Button"
-              data-loading="false"
-              data-size="medium"
-              data-testid="login-oauth-app"
-              data-variant="invisible"
-              type="button"
+              <span
+                class="prc-Button-Label-FWkx3"
+                data-component="text"
+              >
+                Personal Access Token
+              </span>
+            </span>
+          </button>
+          <button
+            class="prc-Button-ButtonBase-9n-Xk"
+            data-block="block"
+            data-component="Button"
+            data-loading="false"
+            data-size="medium"
+            data-testid="login-oauth-app"
+            data-variant="invisible"
+            type="button"
+          >
+            <span
+              class="prc-Button-ButtonContent-Iohp5"
+              data-align="center"
+              data-component="buttonContent"
             >
               <span
-                class="prc-Button-ButtonContent-Iohp5"
-                data-align="center"
-                data-component="buttonContent"
+                class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+                data-component="leadingVisual"
               >
-                <span
-                  class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
-                  data-component="leadingVisual"
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-person"
+                  data-component="Octicon"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
                 >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-person"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
-                    />
-                  </svg>
-                </span>
-                <span
-                  class="prc-Button-Label-FWkx3"
-                  data-component="text"
-                >
-                  OAuth App
-                </span>
+                  <path
+                    d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+                  />
+                </svg>
               </span>
-            </button>
-          </div>
+              <span
+                class="prc-Button-Label-FWkx3"
+                data-component="text"
+              >
+                OAuth App
+              </span>
+            </span>
+          </button>
+          <p
+            class="pt-1 text-center text-[var(--fgColor-muted)] text-xxs prc-Text-Text-9mHv3"
+            data-size="small"
+          >
+            github.com & GitHub Enterprise
+          </p>
         </div>
       </div>
     </div>

@@ -65,7 +65,7 @@ export const LoginRoute: FC = () => {
     <Centered fullHeight={true}>
       <div aria-hidden="true" className="gitify-login-halo" />
 
-      <Stack align="center" direction="vertical" gap="normal">
+      <Stack align="center" direction="vertical" gap="condensed">
         <div className="gitify-login-fade" style={{ animationDelay: '0ms' }}>
           <LogoIcon isDark size={Size.LARGE} />
         </div>
@@ -130,56 +130,39 @@ export const LoginRoute: FC = () => {
           role="tabpanel"
         >
           <Stack align="stretch" direction="vertical" gap="condensed">
-            {activeAdapter.tagline && (
-              <Text
-                as="p"
-                className="text-center text-[var(--fgColor-muted)]"
-                size="small"
-              >
-                {activeAdapter.tagline}
-              </Text>
-            )}
-
             {primary && (
               <Button
                 block
                 data-testid={primary.testId}
                 leadingVisual={primary.icon}
                 onClick={() => goTo(primary)}
-                size="large"
                 variant="primary"
               >
                 Continue with {activeAdapter.displayName}
               </Button>
             )}
 
-            {alternates.length > 0 && (
-              <Stack
-                align="stretch"
-                className="pt-1"
-                direction="vertical"
-                gap="condensed"
+            {alternates.map((method) => (
+              <Button
+                block
+                data-testid={method.testId}
+                key={method.testId}
+                leadingVisual={method.icon}
+                onClick={() => goTo(method)}
+                variant={method.variant ?? 'invisible'}
               >
-                <Text
-                  as="div"
-                  className="text-center text-[var(--fgColor-muted)] uppercase tracking-wider text-xxs"
-                  size="small"
-                >
-                  or sign in with
-                </Text>
-                {alternates.map((method) => (
-                  <Button
-                    block
-                    data-testid={method.testId}
-                    key={method.testId}
-                    leadingVisual={method.icon}
-                    onClick={() => goTo(method)}
-                    variant={method.variant ?? 'invisible'}
-                  >
-                    {method.label}
-                  </Button>
-                ))}
-              </Stack>
+                {method.label}
+              </Button>
+            ))}
+
+            {activeAdapter.tagline && (
+              <Text
+                as="p"
+                className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
+                size="small"
+              >
+                {activeAdapter.tagline}
+              </Text>
             )}
           </Stack>
         </div>
