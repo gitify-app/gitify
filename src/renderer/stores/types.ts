@@ -1,4 +1,5 @@
 import type {
+  AccountUUID,
   FilterStateType,
   Reason,
   SearchToken,
@@ -23,6 +24,12 @@ export interface FiltersState {
    * The search tokens to exclude notifications by.
    */
   excludeSearchTokens: SearchToken[];
+
+  /**
+   * The account UUIDs to filter notifications by.
+   * When empty, all accounts are shown.
+   */
+  accounts: AccountUUID[];
 
   /**
    * The user types to filter notifications by.
