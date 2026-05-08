@@ -16,6 +16,7 @@ export const EVENTS = {
   USE_UNREAD_ACTIVE_ICON: `${P}use-unread-active-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
+  UPDATE_KEEP_RUNNING_IN_TRAY: `${P}update-keep-running-in-tray`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
@@ -94,6 +95,10 @@ export type EventContracts = AssertEventCoverage<{
     response: IKeyboardShortcutResult;
   };
   [EVENTS.UPDATE_AUTO_LAUNCH]: { request: IAutoLaunch; response: undefined };
+  [EVENTS.UPDATE_KEEP_RUNNING_IN_TRAY]: {
+    request: boolean;
+    response: undefined;
+  };
   [EVENTS.SAFE_STORAGE_ENCRYPT]: { request: string; response: string };
   [EVENTS.SAFE_STORAGE_DECRYPT]: {
     request: string;
