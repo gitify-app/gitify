@@ -2,6 +2,7 @@ import { app, type BrowserWindow } from 'electron';
 import type { Menubar } from 'menubar';
 
 import { logWarn, toError } from '../../shared/logger';
+import { isMacOS } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
 
@@ -119,7 +120,7 @@ export function configureWindowEvents(mb: Menubar): void {
     if (keepRunningInTray && !isQuitting) {
       return;
     }
-    if (process.platform !== 'darwin') {
+    if (!isMacOS()) {
       app.quit();
     }
   });
