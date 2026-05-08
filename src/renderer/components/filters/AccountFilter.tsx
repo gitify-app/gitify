@@ -31,7 +31,7 @@ export const AccountFilter: FC = () => {
 
       <Stack direction="vertical" gap="condensed">
         {accounts.map((account) => {
-          const uuid = getAccountUUID(account) as AccountUUID;
+          const uuid = getAccountUUID(account);
           const isChecked = filteredAccounts.includes(uuid);
           const label = account.user?.login ?? account.hostname;
           const accountNotificationCount =
