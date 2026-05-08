@@ -116,6 +116,8 @@ export const githubAdapter: ForgeAdapter = {
   getDeveloperSettingsUrl: getDeveloperSettingsURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
 
+  supportsOAuthScopes: true,
+
   loginMethods: [
     {
       testId: 'login-github',

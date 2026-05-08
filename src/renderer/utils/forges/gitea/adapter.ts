@@ -109,6 +109,8 @@ export const giteaAdapter: ForgeAdapter = {
     `https://${account.hostname}/user/settings/applications` as Link,
   documentationUrl: GITEA_DOCS_URL,
 
+  supportsOAuthScopes: false,
+
   loginMethods: [
     {
       testId: 'login-gitea-pat',
