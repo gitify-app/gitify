@@ -11,10 +11,6 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
     data-wrap="nowrap"
   >
     <div
-      aria-hidden="true"
-      class="gitify-login-halo"
-    />
-    <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-direction="vertical"
@@ -24,7 +20,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
       data-wrap="nowrap"
     >
       <div
-        class="gitify-login-fade"
+        class="motion-reduce:animate-none animate-login-fade-up"
         style="animation-delay: 0ms;"
       >
         <svg
@@ -73,7 +69,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         </svg>
       </div>
       <div
-        class="gitify-login-fade prc-Stack-Stack-UQ9k6"
+        class="motion-reduce:animate-none animate-login-fade-up prc-Stack-Stack-UQ9k6"
         data-align="center"
         data-direction="vertical"
         data-gap="none"
@@ -95,14 +91,14 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
       </div>
       <div
         aria-label="Choose a forge"
-        class="gitify-login-fade relative inline-flex items-center rounded-full border border-[var(--borderColor-default)] bg-[var(--bgColor-muted)] p-1"
+        class="motion-reduce:animate-none animate-login-fade-up relative inline-flex items-center rounded-full border border-[var(--borderColor-default)] bg-[var(--bgColor-muted)] p-1"
         data-testid="forge-tablist"
         role="tablist"
         style="animation-delay: 120ms;"
       >
         <span
           aria-hidden="true"
-          class="gitify-forge-pill"
+          class="pointer-events-none absolute top-1 bottom-1 rounded-full bg-[var(--bgColor-default)] shadow-sm transition-[left,width] duration-300 ease-login-out motion-reduce:transition-none"
           data-testid="forge-tab-indicator"
           style="left: 0px; width: 0px;"
         />
@@ -163,7 +159,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
       </div>
       <div
         aria-labelledby="forge-tab-github"
-        class="gitify-login-panel w-full max-w-xs"
+        class="motion-reduce:animate-none animate-login-panel-fade w-full max-w-xs"
         id="forge-panel-github"
         role="tabpanel"
       >

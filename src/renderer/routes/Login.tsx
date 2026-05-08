@@ -101,16 +101,17 @@ export const LoginRoute: FC = () => {
 
   return (
     <Centered fullHeight={true}>
-      <div aria-hidden="true" className="gitify-login-halo" />
-
       <Stack align="center" direction="vertical" gap="condensed">
-        <div className="gitify-login-fade" style={{ animationDelay: '0ms' }}>
+        <div
+          className="motion-reduce:animate-none animate-login-fade-up"
+          style={{ animationDelay: '0ms' }}
+        >
           <LogoIcon isDark size={Size.LARGE} />
         </div>
 
         <Stack
           align="center"
-          className="gitify-login-fade"
+          className="motion-reduce:animate-none animate-login-fade-up"
           gap="none"
           style={{ animationDelay: '60ms' }}
         >
@@ -122,7 +123,7 @@ export const LoginRoute: FC = () => {
           <div
             aria-label="Choose a forge"
             className={cn(
-              'gitify-login-fade',
+              'motion-reduce:animate-none animate-login-fade-up',
               'relative inline-flex items-center rounded-full',
               'border border-[var(--borderColor-default)]',
               'bg-[var(--bgColor-muted)] p-1',
@@ -135,7 +136,12 @@ export const LoginRoute: FC = () => {
             {pillRect && (
               <span
                 aria-hidden="true"
-                className="gitify-forge-pill"
+                className={cn(
+                  'pointer-events-none absolute top-1 bottom-1 rounded-full',
+                  'bg-[var(--bgColor-default)] shadow-sm',
+                  'transition-[left,width] duration-300 ease-login-out',
+                  'motion-reduce:transition-none',
+                )}
                 data-testid="forge-tab-indicator"
                 style={{ left: pillRect.left, width: pillRect.width }}
               />
@@ -178,7 +184,7 @@ export const LoginRoute: FC = () => {
 
         <div
           aria-labelledby={`forge-tab-${activeAdapter.id}`}
-          className="gitify-login-panel w-full max-w-xs"
+          className="motion-reduce:animate-none animate-login-panel-fade w-full max-w-xs"
           id={`forge-panel-${activeAdapter.id}`}
           key={activeAdapter.id}
           role="tabpanel"
