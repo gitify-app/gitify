@@ -26,7 +26,7 @@ export interface FiltersState {
   excludeSearchTokens: SearchToken[];
 
   /**
-   * The account UUIDs to filter notifications by. 
+   * The account UUIDs to filter notifications by.
    * When empty, all accounts are shown.
    */
   accounts: AccountUUID[];
