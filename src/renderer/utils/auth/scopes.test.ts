@@ -12,6 +12,10 @@ import {
   hasRequiredScopes,
 } from './scopes';
 
+function githubAccount(scopes: string[] | undefined): Account {
+  return { forge: 'github', scopes } as Account;
+}
+
 describe('renderer/utils/auth/scopes.ts', () => {
   describe('getRequiredScopeNames', () => {
     it('returns the required scope names', () => {
@@ -63,53 +67,57 @@ describe('renderer/utils/auth/scopes.ts', () => {
 
   describe('hasRequiredScopes', () => {
     it('returns true when the account has all required scopes', () => {
-      const account = {
-        scopes: ['notifications', 'read:user', 'repo'],
-      } as Account;
-      expect(hasRequiredScopes(account)).toBe(true);
+      expect(
+        hasRequiredScopes(
+          githubAccount(['notifications', 'read:user', 'repo']),
+        ),
+      ).toBe(true);
     });
 
     it('returns true for exactly the required scopes', () => {
-      const account = { scopes: ['notifications', 'read:user'] } as Account;
-      expect(hasRequiredScopes(account)).toBe(true);
+      expect(
+        hasRequiredScopes(githubAccount(['notifications', 'read:user'])),
+      ).toBe(true);
     });
 
     it('returns false when a required scope is missing', () => {
-      const account = { scopes: ['notifications'] } as Account;
-      expect(hasRequiredScopes(account)).toBe(false);
+      expect(hasRequiredScopes(githubAccount(['notifications']))).toBe(false);
     });
 
     it('returns false when scopes is undefined', () => {
-      const account = { scopes: undefined } as Account;
-      expect(hasRequiredScopes(account)).toBe(false);
+      expect(hasRequiredScopes(githubAccount(undefined))).toBe(false);
     });
   });
 
   describe('hasRecommendedScopes', () => {
     it('returns true when the account has all recommended scopes', () => {
-      const account = {
-        scopes: ['notifications', 'read:user', 'repo'],
-      } as Account;
-      expect(hasRecommendedScopes(account)).toBe(true);
+      expect(
+        hasRecommendedScopes(
+          githubAccount(['notifications', 'read:user', 'repo']),
+        ),
+      ).toBe(true);
     });
 
     it('returns false when a recommended scope is missing', () => {
-      const account = { scopes: ['notifications', 'read:user'] } as Account;
-      expect(hasRecommendedScopes(account)).toBe(false);
+      expect(
+        hasRecommendedScopes(githubAccount(['notifications', 'read:user'])),
+      ).toBe(false);
     });
   });
 
   describe('hasAlternateScopes', () => {
     it('returns true when the account has all alternate scopes', () => {
-      const account = {
-        scopes: ['notifications', 'read:user', 'public_repo'],
-      } as Account;
-      expect(hasAlternateScopes(account)).toBe(true);
+      expect(
+        hasAlternateScopes(
+          githubAccount(['notifications', 'read:user', 'public_repo']),
+        ),
+      ).toBe(true);
     });
 
     it('returns false when an alternate scope is missing', () => {
-      const account = { scopes: ['notifications', 'read:user'] } as Account;
-      expect(hasAlternateScopes(account)).toBe(false);
+      expect(
+        hasAlternateScopes(githubAccount(['notifications', 'read:user'])),
+      ).toBe(false);
     });
   });
 });

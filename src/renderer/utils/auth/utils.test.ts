@@ -1,6 +1,6 @@
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockAuth } from '../../__mocks__/state-mocks';
-import { mockRawUser } from '../api/__mocks__/response-mocks';
+import { mockRawUser } from '../forges/github/__mocks__/response-mocks';
 
 import { Constants } from '../../constants';
 
@@ -12,11 +12,11 @@ import type {
   Link,
   Token,
 } from '../../types';
-import type { GetAuthenticatedUserResponse } from '../api/types';
+import type { GetAuthenticatedUserResponse } from '../forges/github/types';
 import type { AuthMethod } from './types';
 
-import * as apiClient from '../api/client';
 import * as logger from '../core/logger';
+import * as apiClient from '../forges/github/client';
 import { getRecommendedScopeNames } from './scopes';
 import * as authUtils from './utils';
 import {
@@ -71,6 +71,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.com' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
@@ -78,7 +79,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name as string | null,
+              name: mockAuthenticatedResponse.name ?? null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },
@@ -97,6 +98,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.com' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Cloud',
@@ -104,7 +106,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name as string | null,
+              name: mockAuthenticatedResponse.name ?? null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },
@@ -137,6 +139,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.gitify.io' as Hostname,
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
@@ -144,7 +147,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name as string | null,
+              name: mockAuthenticatedResponse.name ?? null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },
@@ -163,6 +166,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
         expect(result.accounts).toEqual([
           {
+            forge: 'github',
             hostname: 'github.gitify.io' as Hostname,
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
@@ -170,7 +174,7 @@ describe('renderer/utils/auth/utils.ts', () => {
             token: 'encrypted' as Token,
             user: {
               id: String(mockAuthenticatedResponse.id),
-              name: mockAuthenticatedResponse.name as string | null,
+              name: mockAuthenticatedResponse.name ?? null,
               login: mockAuthenticatedResponse.login,
               avatar: mockAuthenticatedResponse.avatar_url as Link,
             },

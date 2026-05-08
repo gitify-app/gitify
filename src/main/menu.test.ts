@@ -29,9 +29,11 @@ vi.mock('electron', () => {
   return {
     Menu: {
       buildFromTemplate: vi.fn(),
-    },
+    } satisfies Pick<typeof Electron.Menu, 'buildFromTemplate'>,
     MenuItem: MockMenuItem,
-    shell: { openExternal: vi.fn() },
+    shell: {
+      openExternal: vi.fn(),
+    } satisfies Pick<Electron.Shell, 'openExternal'>,
   };
 });
 

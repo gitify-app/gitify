@@ -13,7 +13,7 @@ vi.mock('electron', () => ({
     requestSingleInstanceLock: () => requestSingleInstanceLockMock(),
     on: (...a: unknown[]) => appOnMock(...a),
     quit: () => appQuitMock(),
-  },
+  } satisfies Pick<Electron.App, 'requestSingleInstanceLock' | 'on' | 'quit'>,
 }));
 
 const sendRendererEventMock = vi.fn();

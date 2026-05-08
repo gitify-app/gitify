@@ -3,7 +3,7 @@ import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
 import type { GitifySubject, Link, SubjectType } from '../../types';
 
-import * as apiClient from '../api/client';
+import * as apiClient from '../forges/github/client';
 import { generateGitHubWebUrl, generateNotificationReferrerId } from './url';
 
 describe('renderer/utils/notifications/url.ts', () => {

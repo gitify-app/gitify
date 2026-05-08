@@ -1,18 +1,10 @@
 import { contextBridge, webFrame } from 'electron';
 
-import type {
-  IKeyboardShortcut,
-  IKeyboardShortcutResult,
-} from '../shared/events';
+import type { IKeyboardShortcut } from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
-import {
-  invokeMainEvent,
-  invokeMainEventWithData,
-  onRendererEvent,
-  sendMainEvent,
-} from './utils';
+import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
 
 /**
  * The Gitify Bridge API exposed to the renderer via `contextBridge`.
@@ -79,10 +71,7 @@ export const api = {
    * @returns Whether registration succeeded (when enabled).
    */
   applyKeyboardShortcut: (payload: IKeyboardShortcut) =>
-    invokeMainEventWithData(
-      EVENTS.UPDATE_KEYBOARD_SHORTCUT,
-      payload,
-    ) as Promise<IKeyboardShortcutResult>,
+    invokeMainEvent(EVENTS.UPDATE_KEYBOARD_SHORTCUT, payload),
 
   /** Tray icon controls. */
   tray: {
@@ -210,15 +199,6 @@ export const api = {
    */
   onAuthCallback: (callback: (url: string) => void) => {
     onRendererEvent(EVENTS.AUTH_CALLBACK, (_, url) => callback(url));
-  },
-
-  /**
-   * Register a callback invoked when the OS system theme changes.
-   *
-   * @param callback - Called with the new theme string (`"light"` or `"dark"`).
-   */
-  onSystemThemeUpdate: (callback: (theme: string) => void) => {
-    onRendererEvent(EVENTS.UPDATE_THEME, (_, theme) => callback(theme));
   },
 
   /**

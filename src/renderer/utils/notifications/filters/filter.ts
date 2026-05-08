@@ -1,9 +1,9 @@
 import useFiltersStore from '../../../stores/useFiltersStore';
 
 import type {
-  GitifyNotification,
   GitifyNotificationState,
   GitifyNotificationUser,
+  RawGitifyNotification,
   SettingsState,
 } from '../../../types';
 
@@ -31,8 +31,8 @@ import {
  * @returns The subset of notifications that pass all base filters.
  */
 export function filterBaseNotifications(
-  notifications: GitifyNotification[],
-): GitifyNotification[] {
+  notifications: RawGitifyNotification[],
+): RawGitifyNotification[] {
   return notifications.filter((notification) => {
     const filters = useFiltersStore.getState();
 
@@ -80,9 +80,9 @@ export function filterBaseNotifications(
  * @returns The subset of notifications that pass all detailed filters.
  */
 export function filterDetailedNotifications(
-  notifications: GitifyNotification[],
+  notifications: RawGitifyNotification[],
   settings: SettingsState,
-): GitifyNotification[] {
+): RawGitifyNotification[] {
   return notifications.filter((notification) => {
     let passesFilters = true;
 
@@ -100,7 +100,7 @@ export function filterDetailedNotifications(
  * Apply include/exclude search token logic for a specific search qualifier prefix.
  */
 function passesSearchTokenFiltersForQualifier(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
   qualifier: SearchQualifier,
 ): boolean {
   const filters = useFiltersStore.getState();
@@ -137,7 +137,7 @@ function passesSearchTokenFiltersForQualifier(
   return passes;
 }
 
-function passesUserFilters(notification: GitifyNotification): boolean {
+function passesUserFilters(notification: RawGitifyNotification): boolean {
   const filters = useFiltersStore.getState();
 
   let passesFilters = true;
@@ -164,7 +164,7 @@ function passesUserFilters(notification: GitifyNotification): boolean {
   return passesFilters;
 }
 
-function passesStateFilter(notification: GitifyNotification): boolean {
+function passesStateFilter(notification: RawGitifyNotification): boolean {
   const filters = useFiltersStore.getState();
 
   if (stateFilter.hasFilters()) {
@@ -188,7 +188,7 @@ function passesStateFilter(notification: GitifyNotification): boolean {
 export function isStateFilteredOut(
   state: GitifyNotificationState | undefined,
 ): boolean {
-  const notification = { subject: { state: state } } as GitifyNotification;
+  const notification = { subject: { state: state } } as RawGitifyNotification;
 
   return !passesStateFilter(notification);
 }
@@ -203,7 +203,7 @@ export function isStateFilteredOut(
  * @returns `true` if the user is currently filtered out.
  */
 export function isUserFilteredOut(user: GitifyNotificationUser): boolean {
-  const notification = { subject: { user: user } } as GitifyNotification;
+  const notification = { subject: { user: user } } as RawGitifyNotification;
 
   return !passesUserFilters(notification);
 }

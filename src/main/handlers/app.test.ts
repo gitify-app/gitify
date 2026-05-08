@@ -11,10 +11,10 @@ vi.mock('electron', () => ({
   ipcMain: {
     handle: (...args: unknown[]) => handleMock(...args),
     on: (...args: unknown[]) => onMock(...args),
-  },
+  } satisfies Pick<Electron.IpcMain, 'handle' | 'on'>,
   app: {
     getVersion: vi.fn(() => '1.0.0'),
-  },
+  } satisfies Pick<Electron.App, 'getVersion'>,
 }));
 
 vi.mock('../config', () => ({

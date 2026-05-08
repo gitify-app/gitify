@@ -1,6 +1,6 @@
 import { useFiltersStore } from '../../../stores';
 
-import type { GitifyNotification } from '../../../types';
+import type { RawGitifyNotification } from '../../../types';
 
 export const SEARCH_DELIMITER = ':';
 
@@ -9,19 +9,19 @@ const SEARCH_QUALIFIERS = {
     prefix: 'author:',
     description: 'filter by notification author',
     requiresDetailsNotifications: true,
-    extract: (n: GitifyNotification) => n.subject?.user?.login,
+    extract: (n: RawGitifyNotification) => n.subject?.user?.login,
   },
   org: {
     prefix: 'org:',
     description: 'filter by organization owner',
     requiresDetailsNotifications: false,
-    extract: (n: GitifyNotification) => n.repository?.owner?.login,
+    extract: (n: RawGitifyNotification) => n.repository?.owner?.login,
   },
   repo: {
     prefix: 'repo:',
     description: 'filter by repository full name',
     requiresDetailsNotifications: false,
-    extract: (n: GitifyNotification) => n.repository?.fullName,
+    extract: (n: RawGitifyNotification) => n.repository?.fullName,
   },
 } as const;
 
@@ -84,7 +84,7 @@ export function parseSearchInput(raw: string): ParsedSearchToken | null {
 }
 
 export function filterNotificationBySearchTerm(
-  notification: GitifyNotification,
+  notification: RawGitifyNotification,
   token: string,
 ): boolean {
   const parsed = parseSearchInput(token);

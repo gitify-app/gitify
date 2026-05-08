@@ -1,7 +1,6 @@
 import { type FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 import { Button, Heading, Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../hooks/useAppContext';
@@ -11,10 +10,12 @@ import { Centered } from '../components/layout/Centered';
 
 import { Size } from '../types';
 
+import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
+  const adapters = listAdapters();
 
   const { isLoggedIn } = useAppContext();
 
@@ -31,37 +32,36 @@ export const LoginRoute: FC = () => {
         <LogoIcon isDark size={Size.LARGE} />
 
         <Stack align="center" gap="none">
-          <Heading as="h2">GitHub Notifications</Heading>
+          <Heading as="h2">Notifications</Heading>
           <Heading as="h3">on your menu bar</Heading>
         </Stack>
 
-        <Stack align="center" gap="condensed">
-          <Text>Login with</Text>
-
-          <Button
-            data-testid="login-github"
-            leadingVisual={MarkGithubIcon}
-            onClick={() => navigate('/login-device-flow')}
-            variant="primary"
-          >
-            GitHub
-          </Button>
-
-          <Button
-            data-testid="login-pat"
-            leadingVisual={KeyIcon}
-            onClick={() => navigate('/login-personal-access-token')}
-          >
-            Personal Access Token
-          </Button>
-
-          <Button
-            data-testid="login-oauth-app"
-            leadingVisual={PersonIcon}
-            onClick={() => navigate('/login-oauth-app')}
-          >
-            OAuth App
-          </Button>
+        <Stack align="stretch" direction="vertical" gap="normal">
+          {adapters.map((adapter) => (
+            <Stack
+              align="center"
+              direction="vertical"
+              gap="condensed"
+              key={adapter.id}
+            >
+              <Text>{adapter.displayName}</Text>
+              {adapter.loginMethods.map((method) => (
+                <Button
+                  data-testid={method.testId}
+                  key={method.testId}
+                  leadingVisual={method.icon}
+                  onClick={() =>
+                    method.state
+                      ? navigate(method.route, { state: method.state })
+                      : navigate(method.route)
+                  }
+                  variant={method.variant}
+                >
+                  {method.label}
+                </Button>
+              ))}
+            </Stack>
+          ))}
         </Stack>
       </Stack>
     </Centered>

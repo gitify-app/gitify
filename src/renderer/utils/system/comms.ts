@@ -1,3 +1,5 @@
+import type { ISafeStorageDecryptResult } from '../../../shared/events';
+
 import { defaultSettings } from '../../context/defaults';
 
 import { type Link, OpenPreference } from '../../types';
@@ -49,10 +51,15 @@ export async function encryptValue(value: string): Promise<string> {
 /**
  * Decrypts a previously encrypted string using the native Electron decryption bridge.
  *
+ * Resolves to the decrypted token. When the OS keychain rotated keys during
+ * decryption, `reEncryptedToken` is also set so callers can persist the new
+ * ciphertext alongside or in place of the original.
+ *
  * @param value - The encrypted string to decrypt.
- * @returns Promise resolving to the decrypted plaintext string.
  */
-export async function decryptValue(value: string): Promise<string> {
+export async function decryptValue(
+  value: string,
+): Promise<ISafeStorageDecryptResult> {
   return await window.gitify.decryptValue(value);
 }
 

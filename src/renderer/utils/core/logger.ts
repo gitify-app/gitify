@@ -2,7 +2,7 @@ import { logError, logInfo, logWarn } from '../../../shared/logger';
 
 export { toError } from '../../../shared/logger';
 
-import type { GitifyNotification } from '../../types';
+import type { RawGitifyNotification } from '../../types';
 
 // Renderer logger augments log entries with notification context formatting.
 
@@ -16,7 +16,7 @@ import type { GitifyNotification } from '../../types';
 export function rendererLogInfo(
   type: string,
   message: string,
-  notification?: GitifyNotification,
+  notification?: RawGitifyNotification,
 ) {
   logInfo(type, message, buildContexts(notification));
 }
@@ -31,7 +31,7 @@ export function rendererLogInfo(
 export function rendererLogWarn(
   type: string,
   message: string,
-  notification?: GitifyNotification,
+  notification?: RawGitifyNotification,
 ) {
   logWarn(type, message, buildContexts(notification));
 }
@@ -48,12 +48,12 @@ export function rendererLogError(
   type: string,
   message: string,
   err: Error,
-  notification?: GitifyNotification,
+  notification?: RawGitifyNotification,
 ) {
   logError(type, message, err, buildContexts(notification));
 }
 
-function buildContexts(notification?: GitifyNotification): string[] {
+function buildContexts(notification?: RawGitifyNotification): string[] {
   if (!notification) {
     return [];
   }

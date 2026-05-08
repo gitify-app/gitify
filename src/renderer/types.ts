@@ -14,7 +14,7 @@ import type {
   PullRequestReviewState,
   PullRequestState,
   ReactionGroupFieldsFragment,
-} from './utils/api/graphql/generated/graphql';
+} from './utils/forges/github/graphql/generated/graphql';
 
 declare const __brand: unique symbol;
 
@@ -34,6 +34,20 @@ export type Hostname = Branded<string, 'Hostname'>;
 
 export type Link = Branded<string, 'WebUrl'>;
 
+/**
+ * Cast a plain string into the branded `Link` type. Use at adapter
+ * boundaries where forge responses produce raw URL strings — calling out
+ * the cast in one place is more honest than scattering `as Link` everywhere.
+ */
+export function toLink(value: string): Link {
+  return value as Link;
+}
+
+/** Variant of `toLink` that preserves null. */
+export function toLinkOrNull(value: string | null | undefined): Link | null {
+  return value ? (value as Link) : null;
+}
+
 export type SearchToken = Branded<string, 'SearchToken'>;
 
 export type Status = 'loading' | 'success' | 'error';
@@ -47,7 +61,11 @@ export type KeyboardAcceleratorShortcut = Branded<
   'KeyboardAcceleratorShortcut'
 >;
 
+/** Code hosting provider for an account. New forges register themselves here. */
+export type Forge = 'github' | 'gitea';
+
 export interface Account {
+  forge: Forge;
   method: AuthMethod;
   platform: PlatformType;
   version?: string;
@@ -328,9 +346,17 @@ export interface GitifyNotification {
   account: Account;
   /** UI ordering index */
   order: number;
-  /** Formatted information for display/presentation to user */
+  /** Formatted information for display/presentation to user. */
   display: GitifyNotificationDisplay;
 }
+
+/**
+ * A notification that has been transformed from a forge response but not yet
+ * formatted for display. The orchestrator pipeline (transform → filter →
+ * enrich → filter) operates on this type; `formatNotification` is the only
+ * place that widens it to `GitifyNotification` by populating `display`.
+ */
+export type RawGitifyNotification = Omit<GitifyNotification, 'display'>;
 
 /**
  * Notification reason details

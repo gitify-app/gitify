@@ -10,22 +10,22 @@ import type {
   AccountUUID,
   AuthState,
   ClientID,
+  Forge,
   Hostname,
   Link,
   Token,
 } from '../../types';
 import type { AuthMethod } from './types';
 
-import { fetchAuthenticatedUserDetails } from '../api/client';
-import { clearOctokitClientCacheForAccount } from '../api/octokit';
 import {
   rendererLogError,
   rendererLogInfo,
   rendererLogWarn,
   toError,
 } from '../core/logger';
+import { getAdapter } from '../forges/registry';
 import { encryptValue } from '../system/comms';
-import { getPlatformFromHostname } from './platform';
+import { getPlatformFromHostname, resolvePlatform } from './platform';
 import { getRecommendedScopeNames, hasRequiredScopes } from './scopes';
 
 /**
@@ -46,14 +46,16 @@ export async function addAccount(
   method: AuthMethod,
   token: Token,
   hostname: Hostname,
+  forge: Forge = 'github',
 ): Promise<AuthState> {
   const accountList = auth.accounts;
   const encryptedToken = await encryptValue(token);
 
   let newAccount = {
+    forge,
     hostname: hostname,
     method: method,
-    platform: getPlatformFromHostname(hostname),
+    platform: resolvePlatform(forge, hostname),
     token: encryptedToken,
     user: null, // Will be updated during the refresh call below
   } as Account;
@@ -66,8 +68,10 @@ export async function addAccount(
   );
 
   if (existingIndex >= 0) {
-    // Clear the cached Octokit client so the new token is used
-    clearOctokitClientCacheForAccount(accountList[existingIndex]);
+    // Drop any forge-specific HTTP client cache so the new token is used.
+    getAdapter(accountList[existingIndex]).onAccountTokenChange?.(
+      accountList[existingIndex],
+    );
     // Replace the existing account (e.g. re-authentication with a new token)
     rendererLogInfo(
       'addAccount',
@@ -112,29 +116,16 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
  */
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const response = await fetchAuthenticatedUserDetails(account);
+    const refreshed = await getAdapter(account).fetchAuthenticatedUser(account);
 
-    const user = response.data;
-
-    // Refresh user data
     account.user = {
-      id: String(user.id),
-      login: user.login,
-      name: user.name,
-      avatar: user.avatar_url as Link,
+      id: refreshed.user.id,
+      login: refreshed.user.login,
+      name: refreshed.user.name,
+      avatar: refreshed.user.avatar as Link,
     };
-
-    account.version = 'latest';
-
-    account.version = extractHostVersion(
-      response.headers['x-github-enterprise-version'] as string,
-    );
-
-    const accountScopes = response.headers['x-oauth-scopes']
-      ?.split(',')
-      .map((scope: string) => scope.trim());
-
-    account.scopes = accountScopes ?? [];
+    account.version = refreshed.version;
+    account.scopes = refreshed.scopes ?? [];
 
     if (!hasRequiredScopes(account)) {
       rendererLogWarn(
