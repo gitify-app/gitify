@@ -103,9 +103,10 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         <button
           aria-controls="forge-panel-github"
           aria-selected="true"
-          class="inline-flex cursor-pointer items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] bg-[var(--bgColor-default)] text-[var(--fgColor-default)] shadow-sm"
+          class="inline-flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] bg-[var(--bgColor-default)] text-[var(--fgColor-default)] shadow-sm"
           data-testid="forge-tab-github"
           role="tab"
+          style="border-radius: 9999px;"
           type="button"
         >
           <svg
@@ -130,9 +131,10 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         <button
           aria-controls="forge-panel-gitea"
           aria-selected="false"
-          class="inline-flex cursor-pointer items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]"
+          class="inline-flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]"
           data-testid="forge-tab-gitea"
           role="tab"
+          style="border-radius: 9999px;"
           type="button"
         >
           <svg

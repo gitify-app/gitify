@@ -101,7 +101,7 @@ export const LoginRoute: FC = () => {
                   aria-controls={`forge-panel-${adapter.id}`}
                   aria-selected={isActive}
                   className={cn(
-                    'inline-flex cursor-pointer items-center gap-2 rounded-full',
+                    'inline-flex cursor-pointer items-center gap-2',
                     'px-3 py-1.5 text-sm font-medium transition-colors',
                     'outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
                     isActive
@@ -112,6 +112,7 @@ export const LoginRoute: FC = () => {
                   key={adapter.id}
                   onClick={() => setActiveForge(adapter.id)}
                   role="tab"
+                  style={{ borderRadius: '9999px' }}
                   type="button"
                 >
                   <Icon size={14} />
