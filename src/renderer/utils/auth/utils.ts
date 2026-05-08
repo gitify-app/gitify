@@ -47,6 +47,7 @@ export async function addAccount(
   token: Token,
   hostname: Hostname,
   forge: Forge = 'github',
+  username?: string,
 ): Promise<AuthState> {
   const accountList = auth.accounts;
   const encryptedToken = await encryptValue(token);
@@ -57,6 +58,7 @@ export async function addAccount(
     method: method,
     platform: resolvePlatform(forge, hostname),
     token: encryptedToken,
+    username: username ?? undefined,
     user: null, // Will be updated during the refresh call below
   } as Account;
 

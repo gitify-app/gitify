@@ -292,5 +292,25 @@ describe('renderer/routes/Accounts.tsx', () => {
         },
       );
     });
+
+    it('should show login with bitbucket personal access token', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockOAuthAccount] },
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByTestId('account-add-bitbucket-pat'));
+
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith(
+        '/login-personal-access-token',
+        {
+          replace: true,
+          state: { forge: 'bitbucket' },
+        },
+      );
+    });
   });
 });

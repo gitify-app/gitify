@@ -62,7 +62,7 @@ export type KeyboardAcceleratorShortcut = Branded<
 >;
 
 /** Code hosting provider for an account. New forges register themselves here. */
-export type Forge = 'github' | 'gitea';
+export type Forge = 'github' | 'gitea' | 'bitbucket';
 
 export interface Account {
   forge: Forge;
@@ -70,6 +70,8 @@ export interface Account {
   platform: PlatformType;
   version?: string;
   hostname: Hostname;
+  /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
+  username?: string;
   token: Token;
   user: GitifyUser | null;
   scopes?: string[];
@@ -542,7 +544,8 @@ export type SubjectType =
   | 'RepositoryDependabotAlertsThread'
   | 'RepositoryInvitation'
   | 'RepositoryVulnerabilityAlert'
-  | 'WorkflowRun';
+  | 'WorkflowRun'
+  | 'BitbucketNotification';
 
 export type UserType =
   | 'Bot'

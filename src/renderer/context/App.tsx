@@ -561,12 +561,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Login with Personal Access Token (PAT).
    */
   const loginWithPersonalAccessToken = useCallback(
-    async ({ token, hostname, forge }: LoginPersonalAccessTokenOptions) => {
+    async ({
+      token,
+      hostname,
+      username,
+      forge,
+    }: LoginPersonalAccessTokenOptions) => {
       const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
       await getAdapter(resolvedForge).fetchAuthenticatedUser({
         forge: resolvedForge,
         hostname,
+        username,
         token: encryptedToken,
       } as Account);
 
@@ -586,6 +592,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         token,
         hostname,
         resolvedForge,
+        username,
       );
 
       persistAuth(updatedAuth);

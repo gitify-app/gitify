@@ -1,0 +1,85 @@
+query Me {
+  me {
+    user {
+      accountId
+      name
+      picture
+    }
+  }
+}
+
+query MyNotifications(
+  $readState: InfluentsNotificationReadState
+  $flat: Boolean = true
+  $first: Int
+) {
+  notifications {
+    unseenNotificationCount
+    notificationFeed(
+      flat: $flat
+      first: $first
+      filter: { readStateFilter: $readState }
+    ) {
+      pageInfo {
+        hasNextPage
+      }
+      nodes {
+        ...AtlassianNotification
+      }
+    }
+  }
+}
+
+fragment AtlassianNotification on InfluentsNotificationHeadItem {
+  groupId
+  groupSize
+  additionalActors {
+    displayName
+    avatarURL
+  }
+  headNotification {
+    ...AtlassianHeadNotification
+  }
+}
+
+mutation MarkAsRead($notificationIDs: [String!]!) {
+  notifications {
+    markNotificationsByIdsAsRead(ids: $notificationIDs)
+  }
+}
+
+mutation MarkAsUnread($notificationIDs: [String!]!) {
+  notifications {
+    markNotificationsByIdsAsUnread(ids: $notificationIDs)
+  }
+}
+
+fragment AtlassianHeadNotification on InfluentsNotificationItem {
+  notificationId
+  timestamp
+  readState
+  category
+  content {
+    type
+    message
+    url
+    entity {
+      title
+      iconUrl
+      url
+    }
+    path {
+      title
+      iconUrl
+      url
+    }
+    actor {
+      displayName
+      avatarURL
+    }
+  }
+  analyticsAttributes {
+    key
+    value
+  }
+}

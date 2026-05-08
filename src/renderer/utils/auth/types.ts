@@ -13,7 +13,8 @@ export type PlatformType =
   | 'GitHub Cloud'
   | 'GitHub Enterprise Server'
   | 'GitHub Enterprise Cloud with Data Residency'
-  | 'Gitea';
+  | 'Gitea'
+  | 'Bitbucket Cloud';
 
 export interface LoginOAuthWebOptions {
   hostname: Hostname;
@@ -40,6 +41,8 @@ export type DeviceFlowErrorResponse = {
 export interface LoginPersonalAccessTokenOptions {
   hostname: Hostname;
   token: Token;
+  /** Atlassian account email — required for Bitbucket Basic Auth. */
+  username?: string;
   /** Defaults to GitHub when omitted. */
   forge?: Forge;
 }
