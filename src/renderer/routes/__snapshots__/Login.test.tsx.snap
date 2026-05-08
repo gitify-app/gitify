@@ -95,18 +95,23 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
       </div>
       <div
         aria-label="Choose a forge"
-        class="gitify-login-fade inline-flex items-center gap-1 rounded-full border border-[var(--borderColor-default)] bg-[var(--bgColor-muted)] p-1"
+        class="gitify-login-fade relative inline-flex items-center rounded-full border border-[var(--borderColor-default)] bg-[var(--bgColor-muted)] p-1"
         data-testid="forge-tablist"
         role="tablist"
         style="animation-delay: 120ms;"
       >
+        <span
+          aria-hidden="true"
+          class="gitify-forge-pill"
+          data-testid="forge-tab-indicator"
+          style="left: 0px; width: 0px;"
+        />
         <button
           aria-controls="forge-panel-github"
           aria-selected="true"
-          class="inline-flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] bg-[var(--bgColor-default)] text-[var(--fgColor-default)] shadow-sm"
+          class="relative z-10 inline-flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] text-[var(--fgColor-default)]"
           data-testid="forge-tab-github"
           role="tab"
-          style="border-radius: 9999px;"
           type="button"
         >
           <svg
@@ -131,10 +136,9 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         <button
           aria-controls="forge-panel-gitea"
           aria-selected="false"
-          class="inline-flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]"
+          class="relative z-10 inline-flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]"
           data-testid="forge-tab-gitea"
           role="tab"
-          style="border-radius: 9999px;"
           type="button"
         >
           <svg

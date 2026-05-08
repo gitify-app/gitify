@@ -84,6 +84,20 @@ img.emoji {
   animation: gitify-login-panel-fade 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
+/* Sliding active-tab indicator. Position is set inline from measured DOM. */
+.gitify-forge-pill {
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  background-color: var(--bgColor-default);
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  pointer-events: none;
+  transition:
+    left 280ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    width 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
 /* Soft brand halo behind the logo — anchored to the page, ignores layout. */
 .gitify-login-halo {
   position: fixed;
@@ -104,5 +118,8 @@ img.emoji {
   .gitify-login-fade,
   .gitify-login-panel {
     animation: none;
+  }
+  .gitify-forge-pill {
+    transition: none;
   }
 }

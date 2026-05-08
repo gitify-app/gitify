@@ -1,4 +1,11 @@
-import { type FC, useEffect, useMemo, useState } from 'react';
+import {
+  type FC,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
@@ -43,6 +50,37 @@ export const LoginRoute: FC = () => {
     [activeForge, adapters],
   );
 
+  const tablistRef = useRef<HTMLDivElement | null>(null);
+  const tabRefs = useRef(new Map<Forge, HTMLButtonElement>());
+  const [pillRect, setPillRect] = useState<{
+    left: number;
+    width: number;
+  } | null>(null);
+
+  // Measure the active tab so the indicator pill can slide between tabs
+  // instead of snapping bg colors. Runs synchronously after layout so the
+  // pill is positioned before paint.
+  useLayoutEffect(() => {
+    const tablist = tablistRef.current;
+    const active = tabRefs.current.get(activeForge);
+    if (!tablist || !active) {
+      return;
+    }
+    const parentRect = tablist.getBoundingClientRect();
+    const btnRect = active.getBoundingClientRect();
+    setPillRect((prev) => {
+      const next = {
+        left: btnRect.left - parentRect.left,
+        width: btnRect.width,
+      };
+      // Avoid setState->layout->setState loops when nothing changed.
+      if (prev && prev.left === next.left && prev.width === next.width) {
+        return prev;
+      }
+      return next;
+    });
+  }, [activeForge]);
+
   useEffect(() => {
     if (isLoggedIn) {
       showWindow();
@@ -85,14 +123,23 @@ export const LoginRoute: FC = () => {
             aria-label="Choose a forge"
             className={cn(
               'gitify-login-fade',
-              'inline-flex items-center gap-1 rounded-full',
+              'relative inline-flex items-center rounded-full',
               'border border-[var(--borderColor-default)]',
               'bg-[var(--bgColor-muted)] p-1',
             )}
             data-testid="forge-tablist"
+            ref={tablistRef}
             role="tablist"
             style={{ animationDelay: '120ms' }}
           >
+            {pillRect && (
+              <span
+                aria-hidden="true"
+                className="gitify-forge-pill"
+                data-testid="forge-tab-indicator"
+                style={{ left: pillRect.left, width: pillRect.width }}
+              />
+            )}
             {adapters.map((adapter) => {
               const Icon = adapter.icon;
               const isActive = adapter.id === activeForge;
@@ -101,18 +148,24 @@ export const LoginRoute: FC = () => {
                   aria-controls={`forge-panel-${adapter.id}`}
                   aria-selected={isActive}
                   className={cn(
-                    'inline-flex cursor-pointer items-center gap-2',
+                    'relative z-10 inline-flex cursor-pointer items-center gap-2',
                     'px-3 py-1.5 text-sm font-medium transition-colors',
                     'outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
                     isActive
-                      ? 'bg-[var(--bgColor-default)] text-[var(--fgColor-default)] shadow-sm'
+                      ? 'text-[var(--fgColor-default)]'
                       : 'text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]',
                   )}
                   data-testid={`forge-tab-${adapter.id}`}
                   key={adapter.id}
                   onClick={() => setActiveForge(adapter.id)}
+                  ref={(el) => {
+                    if (el) {
+                      tabRefs.current.set(adapter.id, el);
+                    } else {
+                      tabRefs.current.delete(adapter.id);
+                    }
+                  }}
                   role="tab"
-                  style={{ borderRadius: '9999px' }}
                   type="button"
                 >
                   <Icon size={14} />
