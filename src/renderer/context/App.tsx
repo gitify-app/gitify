@@ -58,7 +58,6 @@ import {
   decryptValue,
   encryptValue,
   setAutoLaunch,
-  setKeepRunningInTray,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/system/comms';
@@ -400,10 +399,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setAutoLaunch(settings.openAtStartup);
   }, [settings.openAtStartup]);
-
-  useEffect(() => {
-    setKeepRunningInTray(settings.keepRunningInTray);
-  }, [settings.keepRunningInTray]);
 
   useEffect(() => {
     window.gitify.onResetApp(() => {

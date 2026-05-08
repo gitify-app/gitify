@@ -6,18 +6,7 @@ import { isMacOS } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
 
-let keepRunningInTray = false;
 let isQuitting = false;
-
-/**
- * Update the "keep running in tray" preference. When `true`, an OS / window
- * manager close request hides the window instead of quitting the app.
- *
- * @param value - `true` to hide on window close, `false` to quit.
- */
-export function setKeepRunningInTray(value: boolean): void {
-  keepRunningInTray = value;
-}
 
 /**
  * Reset module-level lifecycle flags. Module-level state is unavoidable
@@ -27,7 +16,6 @@ export function setKeepRunningInTray(value: boolean): void {
  * @internal
  */
 export function __resetWindowLifecycleForTests(): void {
-  keepRunningInTray = false;
   isQuitting = false;
 }
 
@@ -94,7 +82,7 @@ export function configureWindowEvents(mb: Menubar): void {
    *      first.
    */
   win.on('close', (event) => {
-    if (!keepRunningInTray || isQuitting) {
+    if (isQuitting) {
       return;
     }
 
@@ -117,7 +105,7 @@ export function configureWindowEvents(mb: Menubar): void {
    * the next tray click.
    */
   app.on('window-all-closed', () => {
-    if (keepRunningInTray && !isQuitting) {
+    if (!isQuitting) {
       return;
     }
     if (!isMacOS()) {
