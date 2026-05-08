@@ -88,6 +88,7 @@ function getDisplayHelpers(
 export const githubAdapter: ForgeAdapter = {
   id: 'github',
   displayName: 'GitHub',
+  tagline: 'github.com & GitHub Enterprise',
   icon: MarkGithubIcon,
   capabilities: githubCapabilities,
 

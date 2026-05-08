@@ -74,6 +74,7 @@ function getDisplayHelpers(
 export const giteaAdapter: ForgeAdapter = {
   id: 'gitea',
   displayName: 'Gitea',
+  tagline: 'Self-hosted Git service',
   icon: ServerIcon,
   capabilities,
 

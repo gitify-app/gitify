@@ -99,6 +99,8 @@ export interface ForgeAdapter {
   readonly id: Forge;
   /** User-facing forge name (e.g. "GitHub", "Gitea"). */
   readonly displayName: string;
+  /** Short caption shown beside the forge name on the login screen. */
+  readonly tagline?: string;
   /** Icon used for the platform in the UI. */
   readonly icon: FC<OcticonProps>;
   /** Static or computed capability matrix for this forge. */
