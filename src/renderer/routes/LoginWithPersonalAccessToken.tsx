@@ -41,11 +41,13 @@ interface LocationState extends LoginRouteState {
 export interface IFormData {
   token: Token;
   hostname: Hostname;
+  username?: string;
 }
 
 interface IFormErrors {
   token?: string;
   hostname?: string;
+  username?: string;
   invalidCredentialsForHost?: string;
 }
 
@@ -55,11 +57,18 @@ export const validateForm = (
 ): IFormErrors => {
   const errors: IFormErrors = {};
   const adapter = getAdapter(forge);
+  const isBitbucket = forge === 'bitbucket';
 
-  if (!values.hostname) {
-    errors.hostname = 'Hostname is required';
-  } else if (!isValidHostname(values.hostname)) {
-    errors.hostname = 'Hostname format is invalid';
+  if (!isBitbucket) {
+    if (!values.hostname) {
+      errors.hostname = 'Hostname is required';
+    } else if (!isValidHostname(values.hostname)) {
+      errors.hostname = 'Hostname format is invalid';
+    }
+  }
+
+  if (isBitbucket && !values.username) {
+    errors.username = 'Atlassian email is required';
   }
 
   if (!values.token) {
@@ -80,6 +89,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const forge: Forge = reAuthAccount?.forge ?? stateForge ?? 'github';
   const adapter = getAdapter(forge);
   const isGitea = forge === 'gitea';
+  const isBitbucket = forge === 'bitbucket';
 
   const { loginWithPersonalAccessToken } = useAppContext();
 
@@ -91,6 +101,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
     hostname:
       reAuthAccount?.hostname ?? adapter.defaultHostname ?? ('' as Hostname),
     token: '' as Token,
+    username: reAuthAccount?.username ?? '',
   } as IFormData);
 
   const [errors, setErrors] = useState({} as IFormErrors);
@@ -101,7 +112,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
     setErrors(newErrors);
 
-    if (!newErrors.hostname && !newErrors.token) {
+    if (!newErrors.hostname && !newErrors.token && !newErrors.username) {
       verifyLoginCredentials(formData);
     }
     setIsVerifyingCredentials(false);
@@ -121,6 +132,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         await loginWithPersonalAccessToken({
           hostname: data.hostname,
           token: data.token,
+          username: data.username || undefined,
           forge,
         });
         navigate('/');
@@ -135,15 +147,17 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         });
       }
     },
-    [loginWithPersonalAccessToken, forge, navigate],
+    [loginWithPersonalAccessToken, forge],
   );
 
   return (
     <Page testId="Login With Personal Access Token">
       <Header icon={KeyIcon}>
-        {isGitea
-          ? 'Login to Gitea with Personal Access Token'
-          : 'Login with Personal Access Token'}
+        {isBitbucket
+          ? 'Login to Bitbucket with Atlassian API Token'
+          : isGitea
+            ? 'Login to Gitea with Personal Access Token'
+            : 'Login with Personal Access Token'}
       </Header>
 
       <Contents>
@@ -163,36 +177,60 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           />
         )}
         <Stack direction="vertical" gap="normal">
-          <FormControl required>
-            <FormControl.Label>Hostname</FormControl.Label>
-            <FormControl.Caption>
-              <Text as="i">
-                {isGitea
-                  ? 'Your Gitea instance hostname (for example gitea.example.com)'
-                  : 'Change only if you are using GitHub Enterprise Server'}
-              </Text>
-            </FormControl.Caption>
-            <TextInput
-              aria-invalid={errors.hostname ? 'true' : 'false'}
-              block
-              data-testid="login-hostname"
-              name="hostname"
-              onChange={handleInputChange}
-              placeholder={isGitea ? 'gitea.example.com' : 'github.com'}
-              value={formData.hostname}
-            />
-            {errors.hostname && (
-              <FormControl.Validation variant="error">
-                {errors.hostname}
-              </FormControl.Validation>
-            )}
-          </FormControl>
+          {isBitbucket ? (
+            <FormControl required>
+              <FormControl.Label>Atlassian Email</FormControl.Label>
+              <FormControl.Caption>
+                <Text as="i">Your Atlassian account email address</Text>
+              </FormControl.Caption>
+              <TextInput
+                aria-invalid={errors.username ? 'true' : 'false'}
+                block
+                data-testid="login-username"
+                name="username"
+                onChange={handleInputChange}
+                placeholder="you@example.com"
+                type="email"
+                value={formData.username}
+              />
+              {errors.username && (
+                <FormControl.Validation variant="error">
+                  {errors.username}
+                </FormControl.Validation>
+              )}
+            </FormControl>
+          ) : (
+            <FormControl required>
+              <FormControl.Label>Hostname</FormControl.Label>
+              <FormControl.Caption>
+                <Text as="i">
+                  {isGitea
+                    ? 'Your Gitea instance hostname (for example gitea.example.com)'
+                    : 'Change only if you are using GitHub Enterprise Server'}
+                </Text>
+              </FormControl.Caption>
+              <TextInput
+                aria-invalid={errors.hostname ? 'true' : 'false'}
+                block
+                data-testid="login-hostname"
+                name="hostname"
+                onChange={handleInputChange}
+                placeholder={isGitea ? 'gitea.example.com' : 'github.com'}
+                value={formData.hostname}
+              />
+              {errors.hostname && (
+                <FormControl.Validation variant="error">
+                  {errors.hostname}
+                </FormControl.Validation>
+              )}
+            </FormControl>
+          )}
 
           <Stack direction="vertical" gap="condensed">
             <Stack align="center" direction="horizontal" gap="condensed">
               <Button
                 data-testid="login-create-token"
-                disabled={!formData.hostname}
+                disabled={!isBitbucket && !formData.hostname}
                 leadingVisual={KeyIcon}
                 onClick={() =>
                   openExternalLink(
@@ -203,16 +241,22 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 }
                 size="small"
               >
-                {isGitea ? 'Open token settings' : 'Generate a PAT'}
+                {isBitbucket
+                  ? 'Open Atlassian token settings'
+                  : isGitea
+                    ? 'Open token settings'
+                    : 'Generate a PAT'}
               </Button>
               <Text className="text-xs">
-                {isGitea
-                  ? 'on your Gitea instance to create a token, then paste it below.'
-                  : 'on GitHub to paste the token below.'}
+                {isBitbucket
+                  ? 'on your Atlassian account to create a token, then paste it below.'
+                  : isGitea
+                    ? 'on your Gitea instance to create a token, then paste it below.'
+                    : 'on GitHub to paste the token below.'}
               </Text>
             </Stack>
 
-            {!isGitea && (
+            {!isGitea && !isBitbucket && (
               <Text as="i" className="text-xs">
                 The{' '}
                 <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
@@ -235,9 +279,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               name="token"
               onChange={handleInputChange}
               placeholder={
-                isGitea
-                  ? 'Your Gitea personal access token'
-                  : 'Your generated token (40 characters)'
+                isBitbucket
+                  ? 'Your Atlassian API token'
+                  : isGitea
+                    ? 'Your Gitea personal access token'
+                    : 'Your generated token (40 characters)'
               }
               trailingAction={
                 <TextInput.Action
@@ -267,7 +313,13 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
       <Footer justify="space-between">
         <Tooltip
           direction="ne"
-          text={isGitea ? 'Gitea API documentation' : 'GitHub documentation'}
+          text={
+            isBitbucket
+              ? 'Atlassian API token documentation'
+              : isGitea
+                ? 'Gitea API documentation'
+                : 'GitHub documentation'
+          }
         >
           <Button
             data-testid="login-docs"

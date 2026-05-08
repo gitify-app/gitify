@@ -120,6 +120,13 @@ export const AccountsRoute: FC = () => {
     });
   };
 
+  const loginWithBitbucketPersonalAccessToken = () => {
+    return navigate('/login-personal-access-token', {
+      replace: true,
+      state: { forge: 'bitbucket' as const },
+    });
+  };
+
   const loginWithOAuthApp = () => {
     return navigate('/login-oauth-app', { replace: true });
   };
@@ -373,6 +380,16 @@ export const AccountsRoute: FC = () => {
                   <ServerIcon />
                 </ActionList.LeadingVisual>
                 Login with Gitea (Personal Access Token)
+              </ActionList.Item>
+
+              <ActionList.Item
+                data-testid="account-add-bitbucket-pat"
+                onSelect={() => loginWithBitbucketPersonalAccessToken()}
+              >
+                <ActionList.LeadingVisual>
+                  <KeyIcon />
+                </ActionList.LeadingVisual>
+                Login with Bitbucket (Atlassian API Token)
               </ActionList.Item>
             </ActionList>
           </ActionMenu.Overlay>

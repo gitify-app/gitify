@@ -69,6 +69,16 @@ export const mockGiteaAccount: Account = {
   user: mockGitifyUser,
 };
 
+export const mockBitbucketAccount: Account = {
+  forge: 'bitbucket',
+  platform: 'Bitbucket Cloud',
+  method: 'Personal Access Token',
+  token: 'token-bitbucket' as Token,
+  hostname: 'bitbucket.org' as Hostname,
+  username: 'user@example.com',
+  user: mockGitifyUser,
+};
+
 export function mockAccountWithError(error: GitifyError): AccountNotifications {
   return {
     account: mockGitHubCloudAccount,

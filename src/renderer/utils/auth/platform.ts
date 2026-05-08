@@ -16,6 +16,9 @@ export function resolvePlatform(
   if (forge === 'gitea') {
     return 'Gitea';
   }
+  if (forge === 'bitbucket') {
+    return 'Bitbucket Cloud';
+  }
   return getPlatformFromHostname(hostname);
 }
 

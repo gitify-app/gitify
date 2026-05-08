@@ -27,8 +27,8 @@ Gitify uses a forge adapter pattern (see [`MAINTAINERS.md`](MAINTAINERS.md)) so 
 | **GitHub** Enterprise Server (≥ 3.13)           | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
 | **GitHub** Enterprise Cloud with Data Residency | ✅ Supported   | ✅            | ✅        | ✅        | ✅          | ✅               |
 | **Gitea** (incl. Forgejo, Codeberg)             | ✅ Supported   | ✅            | ✅        | —         | —           | —                |
+| **Bitbucket** Cloud                             | 🚧    |            | ✅          | ✅          | ✅           | —                |
 | **GitLab** (todos)                              | 💭 Considering | —             | —         | —         | —           | —                |
-| **Bitbucket** Cloud                             | 💭 Considering | —             | —         | —         | —           | —                |
 | **Azure DevOps**                                | 💭 Considering | —             | —         | —         | —           | —                |
 | **Gerrit**                                      | 💭 Considering | —             | —         | —         | —           | —                |
 
