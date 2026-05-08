@@ -50,3 +50,59 @@ img.emoji {
   margin: 0 0.05em 0 0.1em;
   vertical-align: -0.1em;
 }
+
+/* --- Login route ------------------------------------------------------ */
+
+@keyframes gitify-login-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gitify-login-panel-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gitify-login-fade {
+  animation: gitify-login-fade-up 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Re-fires whenever the active forge changes (key={activeAdapter.id}). */
+.gitify-login-panel {
+  animation: gitify-login-panel-fade 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Soft brand halo behind the logo — anchored to the page, ignores layout. */
+.gitify-login-halo {
+  position: fixed;
+  inset: -10% 50% auto -10%;
+  pointer-events: none;
+  width: 120%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at 50% 25%,
+    color-mix(in srgb, var(--fgColor-accent) 10%, transparent) 0%,
+    transparent 60%
+  );
+  z-index: 0;
+  filter: blur(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gitify-login-fade,
+  .gitify-login-panel {
+    animation: none;
+  }
+}
