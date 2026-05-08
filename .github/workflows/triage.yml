@@ -1,7 +1,16 @@
 name: Triage PR
 
 on:
-  pull_request:
+  # `pull_request_target` is required so the labeler/title-validator can
+  # write labels and statuses on PRs from forks (under `pull_request`,
+  # GitHub forces GITHUB_TOKEN to read-only for fork PRs). Safe here
+  # because this workflow:
+  #   - never checks out PR code (no actions/checkout),
+  #   - has no `run:` steps that interpolate PR fields,
+  #   - only invokes SHA-pinned actions that read PR metadata via the API,
+  #   - is locked behind required code-owner review (see .github/CODEOWNERS)
+  #     so future edits cannot quietly add privileged execution surface.
+  pull_request_target: # zizmor: ignore[dangerous-triggers]
     branches:
       - main
     types:
@@ -29,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read # the config file
-      pull-requests: write # for labeling pull requests (on: pull_request_target or on: pull_request)
+      pull-requests: write # for labeling pull requests
       statuses: write # to generate status
       checks: write # to generate status
     steps:
