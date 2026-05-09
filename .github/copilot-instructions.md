@@ -30,14 +30,11 @@ Gitify is a Node.js/Electron desktop application that displays GitHub notificati
 
 ### Linting and Code Quality
 
-- **Check linting**:
-  - `pnpm lint:check` -- takes <1 second using oxlint
+- **Check formatting, linting, and types**:
+  - `pnpm check` -- runs Vite+'s unified format/lint/type-check pipeline
   - **ALWAYS run before committing** or CI will fail
-- **Check formatting**:
-  - `pnpm format:check` -- takes <1 second using oxfmt
 - **Auto-fix issues**:
-  - `pnpm lint` -- automatically fixes lint issues
-  - `pnpm format` -- automatically formats files
+  - `pnpm check:fix` -- formats and applies lint fixes
 
 ### Testing
 
@@ -110,8 +107,7 @@ Warnings are acceptable - the important part is that it completes successfully.
 ### Configuration Files
 
 - **package.json**: Main project configuration and scripts
-- **.oxlintrc.json**: Linting rules
-- **.oxfmtrc.json**: Formatter settings
+- **vite.config.ts**: Vite+ unified config — `lint`, `fmt`, and `staged` blocks live here
 - **vitest.config.ts**: Test configuration
 - **tsconfig.json**: TypeScript configuration
 - **tailwind.config.ts**: CSS framework configuration
@@ -136,7 +132,7 @@ Warnings are acceptable - the important part is that it completes successfully.
 ### Pre-commit Checks
 
 - **Automatic via Husky**: Git hooks run `pnpx lint-staged` on commit
-- **Manual validation**: Run `pnpm lint:check && pnpm format:check && pnpm tsc --noEmit && pnpm test`
+- **Manual validation**: Run `pnpm check && pnpm tsc --noEmit && pnpm test`
 
 ## Important Constraints and Limitations
 
@@ -181,8 +177,7 @@ This project focuses on GitHub notification monitoring, not being a full GitHub 
 - **React 19+**: UI library
 - **TypeScript 5+**: Language
 - **pnpm 10+**: Package manager
-- **oxlint**: Linting
-- **oxfmt**: Formatting
+- **Vite+**: Unified toolchain (lint via oxlint, format via oxfmt, dev/build/test)
 - **Jest**: Testing framework
 - **Webpack 5**: Build system
 - **Tailwind CSS**: Styling framework

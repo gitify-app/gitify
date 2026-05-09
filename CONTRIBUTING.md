@@ -37,18 +37,14 @@ pnpm dev
 
 ### Tests
 
-There are three main checks:
-
-1. Linter with [oxlint][oxlint-website]
-2. Formatter with [oxfmt][oxfmt-website]
-3. Unit tests with [Vitest][vitest-website]
+Tooling is unified through [Vite+][vite-plus-website], which bundles the linter (oxlint), formatter (oxfmt), test runner (Vitest), and dev/build pipeline (Vite).
 
 ```shell
-# Run oxlint to check linting
-pnpm lint:check
+# Run lint, format, and type checks
+pnpm check
 
-# Run oxfmt to check formatting
-pnpm format:check
+# Auto-fix formatting and lint issues
+pnpm check:fix
 
 # Run unit tests with coverage
 pnpm test
@@ -59,7 +55,7 @@ pnpm test -u
 
 ### Code Style & Conventions
 
-- We use [oxlint][oxlint-website] for linting and [oxfmt][oxfmt-website] for formatting. Please run `pnpm lint:check` and `pnpm format:check` before submitting a PR.
+- Linting and formatting are configured in `vite.config.ts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
 - Follow existing file and folder naming conventions.
 - Keep commit messages clear and descriptive.
 
@@ -131,8 +127,7 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 
 <!-- LINK LABELS -->
 
-[oxlint-website]: https://oxc.rs/docs/guide/usage/linter
-[oxfmt-website]: https://oxc.rs/docs/guide/usage/formatter
+[vite-plus-website]: https://viteplus.dev/
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
 [github-issues]: https://github.com/setchy/gitify/issues
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
