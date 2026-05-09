@@ -148,8 +148,8 @@ importers:
         specifier: 26.8.1
         version: 26.8.1(electron-builder-squirrel-windows@26.8.1)
       final-form:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.1
+        version: 5.0.1
       graphql:
         specifier: 16.13.2
         version: 16.13.2
@@ -193,8 +193,8 @@ importers:
         specifier: 4.1.5
         version: 4.1.5(@types/node@24.12.2)(@vitest/coverage-v8@4.1.5)(@vitest/ui@4.1.5)(happy-dom@20.9.0)(vite@8.0.10(@types/node@24.12.2)(jiti@2.7.0)(yaml@2.8.4))
       zustand:
-        specifier: 5.0.12
-        version: 5.0.12(@types/react@19.2.14)(react@19.2.5)
+        specifier: 5.0.13
+        version: 5.0.13(@types/react@19.2.14)(react@19.2.5)
 
 packages:
 
@@ -2160,9 +2160,9 @@ packages:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
 
-  final-form@5.0.0:
-    resolution: {integrity: sha512-HByosvP7x3N4bWTCPoBeUeoMatadewRifxaH3qhCQI2DBwFNO0m5wxETLVUXNGWz2yokdSCMdJEvtjfZoXnqDA==}
-    engines: {node: '>=8'}
+  final-form@5.0.1:
+    resolution: {integrity: sha512-Ohygw2lDgc2HNynfUu82Jp5U45+OLLeBQcwWbrex1IAbQw0uNaFMUbm5dhYCF6y7jcORgl5tg19/1zYxlJtLmg==}
+    engines: {node: '>=18'}
 
   flatted@3.4.2:
     resolution: {integrity: sha512-PjDse7RzhcPkIJwy5t7KPWQSZ9cAbzQXcafsetQoD7sOJRQlGikNbx7yZp2OotDnJyrDcbyRq3Ttb18iYOqkxA==}
@@ -3933,8 +3933,8 @@ packages:
     resolution: {integrity: sha512-CzhO+pFNo8ajLM2d2IW/R93ipy99LWjtwblvC1RsoSUMZgyLbYFr221TnSNT7GjGdYui6P459mw9JH/g/zW2ug==}
     engines: {node: '>=18'}
 
-  zustand@5.0.12:
-    resolution: {integrity: sha512-i77ae3aZq4dhMlRhJVCYgMLKuSiZAaUPAct2AksxQ+gOtimhGMdXljRT21P5BNpeT4kXlLIckvkPM029OljD7g==}
+  zustand@5.0.13:
+    resolution: {integrity: sha512-efI2tVaVQPqtOh114loML/Z80Y4NP3yc+Ff0fYiZJPauNeWZeIp/bRFD7I9bfmCOYBh/PHxlglQ9+wvlwnPikQ==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -6158,7 +6158,7 @@ snapshots:
     dependencies:
       to-regex-range: 5.0.1
 
-  final-form@5.0.0:
+  final-form@5.0.1:
     dependencies:
       '@babel/runtime': 7.29.2
 
@@ -7738,7 +7738,7 @@ snapshots:
 
   yoctocolors@2.1.2: {}
 
-  zustand@5.0.12(@types/react@19.2.14)(react@19.2.5):
+  zustand@5.0.13(@types/react@19.2.14)(react@19.2.5):
     optionalDependencies:
       '@types/react': 19.2.14
       react: 19.2.5

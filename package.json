@@ -114,7 +114,7 @@
     "dotenv": "17.4.2",
     "electron": "42.0.0",
     "electron-builder": "26.8.1",
-    "final-form": "5.0.0",
+    "final-form": "5.0.1",
     "graphql": "16.13.2",
     "happy-dom": "20.9.0",
     "husky": "9.1.7",
@@ -129,9 +129,9 @@
     "vite-plugin-electron": "0.29.1",
     "vite-plugin-electron-renderer": "0.14.7",
     "vitest": "4.1.5",
-    "zustand": "5.0.12"
+    "zustand": "5.0.13"
   },
-  "packageManager": "pnpm@11.0.4",
+  "packageManager": "pnpm@11.0.6",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
