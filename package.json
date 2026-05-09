@@ -69,8 +69,8 @@
     "electron-log": "5.4.3",
     "electron-updater": "6.8.3",
     "menubar": "9.5.2",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "react-router-dom": "7.15.0"
   },
   "devDependencies": {
@@ -144,7 +144,7 @@
       "unrs-resolver"
     ],
     "overrides": {
-      "react-is": "19.2.5"
+      "react-is": "19.2.6"
     }
   },
   "lint-staged": {
