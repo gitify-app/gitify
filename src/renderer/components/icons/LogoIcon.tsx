@@ -24,7 +24,7 @@ export const LogoIcon: FC<LogoIconProps> = ({
   size = Size.SMALL,
   ...props
 }: LogoIconProps) => (
-  // biome-ignore lint/a11y/useKeyWithClickEvents: Logo is purely decorative
+  // oxlint-disable-next-line jsx-a11y/click-events-have-key-events -- Logo is purely decorative
   <svg
     aria-hidden="true"
     aria-label={`${APPLICATION.NAME} Logo`}
@@ -47,21 +47,13 @@ export const LogoIcon: FC<LogoIconProps> = ({
         y1="80.0676288%"
         y2="32.7108237%"
       >
-        <stop
-          offset="0%"
-          stopColor={isDark ? DARK_GRADIENT_START : LIGHT_GRADIENT_START}
-        />
-        <stop
-          offset="100%"
-          stopColor={isDark ? DARK_GRADIENT_END : LIGHT_GRADIENT_END}
-        />
+        <stop offset="0%" stopColor={isDark ? DARK_GRADIENT_START : LIGHT_GRADIENT_START} />
+        <stop offset="100%" stopColor={isDark ? DARK_GRADIENT_END : LIGHT_GRADIENT_END} />
       </linearGradient>
     </defs>
     <g fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
       <g
-        fill={`url(${
-          isDark ? '#linearGradient-dark' : '#linearGradient-light'
-        })`}
+        fill={`url(${isDark ? '#linearGradient-dark' : '#linearGradient-light'})`}
         fillRule="nonzero"
         id="Logo"
         transform="translate(6.000000, 6.000000)"

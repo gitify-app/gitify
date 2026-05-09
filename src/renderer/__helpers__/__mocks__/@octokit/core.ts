@@ -6,7 +6,7 @@ const MockOctokit = vi.fn().mockImplementation(() => ({
   },
 }));
 
-// biome-ignore lint/suspicious/noExplicitAny: Mock file
+// oxlint-disable-next-line typescript/no-explicit-any -- Mock file
 (MockOctokit as any).plugin = vi.fn((..._plugins: any[]) => MockOctokit);
 
 export { MockOctokit as Octokit };

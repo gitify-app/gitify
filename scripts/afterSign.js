@@ -1,7 +1,7 @@
 const { notarize } = require('@electron/notarize');
 
 function logAfterSignProgress(msg) {
-  // biome-ignore lint/suspicious/noConsole: log notarizing progress
+  // oxlint-disable-next-line no-console -- log notarizing progress
   console.log(`  • [afterSign]: ${msg}`);
 }
 
@@ -16,9 +16,7 @@ const afterSign = async (context) => {
   const shouldNotarize = process.env.NOTARIZE === 'true';
 
   if (!shouldNotarize) {
-    logAfterSignProgress(
-      'skipping notarize step as NOTARIZE env flag was not set',
-    );
+    logAfterSignProgress('skipping notarize step as NOTARIZE env flag was not set');
     return;
   }
 
