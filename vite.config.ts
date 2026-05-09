@@ -5,10 +5,10 @@ import { fileURLToPath } from 'node:url';
 import twemoji from '@discordapp/twemoji';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import type { Plugin } from 'vite-plus';
-import { defineConfig } from 'vite-plus';
 import checker from 'vite-plugin-checker';
 import electron from 'vite-plugin-electron/simple';
+import type { Plugin } from 'vite-plus';
+import { defineConfig } from 'vite-plus';
 
 import { Constants } from './src/renderer/constants.ts';
 
@@ -229,6 +229,57 @@ export default defineConfig({
       '.context/**',
       'index.html',
     ],
+    sortImports: {
+      newlinesBetween: true,
+      customGroups: [
+        { groupName: 'react', elementNamePattern: ['react', 'react-*', '@testing-library/**'] },
+        { groupName: 'electron', elementNamePattern: ['*electron*', 'menubar'] },
+        { groupName: 'primer', elementNamePattern: ['@primer/**'] },
+        { groupName: 'octokit', elementNamePattern: ['@octokit/**'] },
+        {
+          groupName: 'mocks-helpers',
+          elementNamePattern: ['**/__mocks__/**', '**/__helpers__/**'],
+        },
+        { groupName: 'shared', elementNamePattern: ['**/shared/**'] },
+        { groupName: 'constants', elementNamePattern: ['**/constants', '**/constants/**'] },
+        {
+          groupName: 'state',
+          elementNamePattern: [
+            '**/context/**',
+            '**/hooks/**',
+            '**/routes/**',
+            '**/stores',
+            '**/stores/**',
+          ],
+        },
+        {
+          groupName: 'ui',
+          elementNamePattern: [
+            '**/layout/**',
+            '**/components/**',
+            '**/fields/**',
+            '**/primitives/**',
+          ],
+        },
+        { groupName: 'types', elementNamePattern: ['**/types'] },
+      ],
+      groups: [
+        'builtin',
+        'react',
+        'electron',
+        'primer',
+        'octokit',
+        'external',
+        'mocks-helpers',
+        'shared',
+        'constants',
+        'state',
+        'ui',
+        'types',
+        ['internal', 'parent', 'sibling', 'index', 'subpath'],
+        'unknown',
+      ],
+    },
   },
   staged: {
     '*': 'vp fmt --no-error-on-unmatched-pattern',
