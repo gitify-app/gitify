@@ -114,7 +114,7 @@
     "dotenv": "17.4.2",
     "electron": "42.0.0",
     "electron-builder": "26.8.1",
-    "final-form": "5.0.0",
+    "final-form": "5.0.1",
     "graphql": "16.13.2",
     "happy-dom": "20.9.0",
     "husky": "9.1.7",
