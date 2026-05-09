@@ -4,8 +4,8 @@
   },
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
-  "oxc.lint.configPath": ".oxlintrc.json",
-  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.lint.configPath": "./vite.config.ts",
+  "oxc.fmt.configPath": "./vite.config.ts",
   "files.associations": {
     "*.css": "tailwindcss"
   },
