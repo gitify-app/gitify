@@ -1,5 +1,6 @@
 import type { Menubar } from 'menubar';
 
+import type MenuBuilder from '../menu';
 import {
   __resetWindowLifecycleForTests,
   configureWindowEvents,
@@ -51,6 +52,7 @@ const flushDeferred = () => new Promise((resolve) => setImmediate(resolve));
 
 describe('main/lifecycle/window.ts', () => {
   let menubar: Menubar;
+  let menuBuilder: MenuBuilder;
 
   beforeEach(() => {
     appOnMock.mockClear();
@@ -80,6 +82,9 @@ describe('main/lifecycle/window.ts', () => {
         move: vi.fn(),
       },
     } as unknown as Menubar;
+    menuBuilder = {
+      setWindowVisibility: vi.fn(),
+    } as unknown as MenuBuilder;
   });
 
   afterEach(() => {
@@ -90,12 +95,12 @@ describe('main/lifecycle/window.ts', () => {
     const mbNoWindow = { ...menubar, window: null };
 
     expect(() =>
-      configureWindowEvents(mbNoWindow as unknown as Menubar),
+      configureWindowEvents(mbNoWindow as unknown as Menubar, menuBuilder),
     ).not.toThrow();
   });
 
   it('configureWindowEvents registers webContents event listeners', () => {
-    configureWindowEvents(menubar);
+    configureWindowEvents(menubar, menuBuilder);
 
     expect(menubar.window?.webContents.on).toHaveBeenCalledWith(
       'before-input-event',
@@ -112,7 +117,7 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   it('configureWindowEvents registers window close, before-quit and window-all-closed listeners', () => {
-    configureWindowEvents(menubar);
+    configureWindowEvents(menubar, menuBuilder);
 
     expect(menubar.window?.on).toHaveBeenCalledWith(
       'close',
@@ -125,9 +130,29 @@ describe('main/lifecycle/window.ts', () => {
     );
   });
 
+  describe('window visibility forwarding', () => {
+    it('forwards window show events to menu builder', () => {
+      configureWindowEvents(menubar, menuBuilder);
+
+      const showHandler = findWindowHandler(menubar, 'show');
+      showHandler?.({ preventDefault: vi.fn() });
+
+      expect(menuBuilder.setWindowVisibility).toHaveBeenCalledWith(true);
+    });
+
+    it('forwards window hide events to menu builder', () => {
+      configureWindowEvents(menubar, menuBuilder);
+
+      const hideHandler = findWindowHandler(menubar, 'hide');
+      hideHandler?.({ preventDefault: vi.fn() });
+
+      expect(menuBuilder.setWindowVisibility).toHaveBeenCalledWith(false);
+    });
+  });
+
   describe('window close handler', () => {
     it('hides the window and restores menubar reference on a WM close', async () => {
-      configureWindowEvents(menubar);
+      configureWindowEvents(menubar, menuBuilder);
 
       const closeHandler = findWindowHandler(menubar, 'close');
       const event = { preventDefault: vi.fn() };
@@ -149,7 +174,7 @@ describe('main/lifecycle/window.ts', () => {
     });
 
     it('skips the deferred hide when the captured window is destroyed', async () => {
-      configureWindowEvents(menubar);
+      configureWindowEvents(menubar, menuBuilder);
 
       const captured = menubar.window;
       const closeHandler = findWindowHandler(menubar, 'close');
@@ -163,7 +188,7 @@ describe('main/lifecycle/window.ts', () => {
     });
 
     it('lets the window close during quit', async () => {
-      configureWindowEvents(menubar);
+      configureWindowEvents(menubar, menuBuilder);
 
       findAppHandler('before-quit')?.();
 
@@ -180,7 +205,7 @@ describe('main/lifecycle/window.ts', () => {
 
   describe('window-all-closed handler', () => {
     it('keeps the app alive when not quitting', () => {
-      configureWindowEvents(menubar);
+      configureWindowEvents(menubar, menuBuilder);
 
       findAppHandler('window-all-closed')?.();
 
@@ -188,7 +213,7 @@ describe('main/lifecycle/window.ts', () => {
     });
 
     it('quits on linux when the user is quitting', () => {
-      configureWindowEvents(menubar);
+      configureWindowEvents(menubar, menuBuilder);
 
       findAppHandler('before-quit')?.();
       findAppHandler('window-all-closed')?.();
@@ -198,7 +223,7 @@ describe('main/lifecycle/window.ts', () => {
 
     it('does not quit on macOS', () => {
       setPlatform('darwin');
-      configureWindowEvents(menubar);
+      configureWindowEvents(menubar, menuBuilder);
 
       findAppHandler('before-quit')?.();
       findAppHandler('window-all-closed')?.();
