@@ -3,8 +3,9 @@ import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'reac
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
 import { AppProvider } from './context/App';
-import { AccountScopesRoute } from './routes/AccountScopes';
+import { useAppContext } from './hooks/useAppContext';
 import { AccountsRoute } from './routes/Accounts';
+import { AccountScopesRoute } from './routes/AccountScopes';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
 import { LoginWithDeviceFlowRoute } from './routes/LoginWithDeviceFlow';
@@ -14,11 +15,9 @@ import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 
 import { GlobalShortcuts } from './components/GlobalShortcuts';
-import { AppLayout } from './components/layout/AppLayout';
 
 import './App.css';
-
-import { useAppContext } from './hooks/useAppContext';
+import { AppLayout } from './components/layout/AppLayout';
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation();

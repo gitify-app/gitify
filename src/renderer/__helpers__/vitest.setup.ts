@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom/vitest';
-
 import { useFiltersStore } from '../stores';
 
 /**
