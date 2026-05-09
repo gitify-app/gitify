@@ -10,7 +10,8 @@
 
 ## Features
 
-- 🔔 Unified notifications from your favorite Git forges (GitHub Cloud, GitHub Enterprise Server & Gitea)
+- 🔔 Unified notifications from your Git platforms
+- ⚒️ Multi-forge: GitHub Cloud, GitHub Enterprise, Gitea, Forjego, Codeberg
 - 💻 Cross-platform: macOS, Windows, and Linux
 - 🎨 Customizable settings, filters and themes
 - 🖥️ Tray/menu bar integration
