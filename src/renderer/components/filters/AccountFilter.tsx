@@ -9,8 +9,6 @@ import { useFiltersStore } from '../../stores';
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
-import type { AccountUUID } from '../../types';
-
 import { getAccountUUID } from '../../utils/auth/utils';
 
 export const AccountFilter: FC = () => {
