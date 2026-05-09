@@ -1,4 +1,5 @@
 allowBuilds:
   '@parcel/watcher': true
+  '@primer/primitives': false
   electron: true
   electron-winstaller: true
