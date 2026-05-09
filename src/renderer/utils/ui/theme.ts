@@ -1,8 +1,6 @@
-import { Theme } from '../../types';
+import type { ColorModeWithAuto } from '@primer/react/dist/ThemeProvider';
 
-// Mirrors `@primer/react`'s ThemeProvider ColorModeWithAuto, which isn't part of
-// its public exports map.
-type ColorModeWithAuto = 'day' | 'night' | 'light' | 'dark' | 'auto';
+import { Theme } from '../../types';
 
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';
 export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
