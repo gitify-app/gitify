@@ -1,21 +1,8 @@
-import {
-  type FC,
-  type ReactNode,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { type FC, type ReactNode, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CopyIcon, SignInIcon, SyncIcon } from '@primer/octicons-react';
-import {
-  Banner,
-  Button,
-  IconButton,
-  Link as PrimerLink,
-  Stack,
-  Text,
-} from '@primer/react';
+import { Banner, Button, IconButton, Link as PrimerLink, Stack, Text } from '@primer/react';
 
 import { Constants } from '../constants';
 
@@ -29,10 +16,7 @@ import { Header } from '../components/primitives/Header';
 import type { Account, Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
-import {
-  getAlternateScopeNames,
-  getRecommendedScopeNames,
-} from '../utils/auth/scopes';
+import { getAlternateScopeNames, getRecommendedScopeNames } from '../utils/auth/scopes';
 import { rendererLogError, toError } from '../utils/core/logger';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
 import { openDeveloperSettings } from '../utils/system/links';
@@ -48,11 +32,8 @@ export const LoginWithDeviceFlowRoute: FC = () => {
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
-  const {
-    loginWithDeviceFlowStart,
-    loginWithDeviceFlowPoll,
-    loginWithDeviceFlowComplete,
-  } = useAppContext();
+  const { loginWithDeviceFlowStart, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete } =
+    useAppContext();
 
   const [session, setSession] = useState<DeviceFlowSession | null>(null);
   const [isPolling, setIsPolling] = useState(false);
@@ -64,14 +45,9 @@ export const LoginWithDeviceFlowRoute: FC = () => {
     const initializeDeviceFlow = async () => {
       try {
         const scopes =
-          scopeChoice === 'public'
-            ? getAlternateScopeNames()
-            : getRecommendedScopeNames();
+          scopeChoice === 'public' ? getAlternateScopeNames() : getRecommendedScopeNames();
 
-        const newSession = await loginWithDeviceFlowStart(
-          reAuthAccount?.hostname,
-          scopes,
-        );
+        const newSession = await loginWithDeviceFlowStart(reAuthAccount?.hostname, scopes);
         setSession(newSession);
 
         // Auto-copy the user code to clipboard
@@ -80,11 +56,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         // Auto-open the verification URL in the browser
         openExternalLink(newSession.verificationUri as Link);
       } catch (err) {
-        rendererLogError(
-          'LoginWithDeviceFlow',
-          'Failed to start device flow',
-          toError(err),
-        );
+        rendererLogError('LoginWithDeviceFlow', 'Failed to start device flow', toError(err));
         setError('Failed to start authentication. Please try again.');
       }
     };
@@ -127,11 +99,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         }
       } catch (err) {
         if (isActive) {
-          rendererLogError(
-            'LoginWithDeviceFlow',
-            'Failed to poll device flow',
-            toError(err),
-          );
+          rendererLogError('LoginWithDeviceFlow', 'Failed to poll device flow', toError(err));
           setError('Authentication failed. Please try again.');
         }
       } finally {
@@ -149,6 +117,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         clearTimeout(timeoutId);
       }
     };
+    // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [session, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete]);
 
   const handleCopyUserCode = useCallback(async () => {
@@ -168,22 +137,14 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         <Stack direction="vertical" gap="condensed">
           <Text as="p">
             Go to{' '}
-            <PrimerLink
-              data-testid="device-verification-link"
-              href={session.verificationUri}
-            >
+            <PrimerLink data-testid="device-verification-link" href={session.verificationUri}>
               <code>{session.verificationUri}</code>
             </PrimerLink>
           </Text>
           <Text as="p">and enter your device code when prompted:</Text>
         </Stack>
 
-        <Stack
-          align="center"
-          direction="horizontal"
-          justify="space-between"
-          padding="condensed"
-        >
+        <Stack align="center" direction="horizontal" justify="space-between" padding="condensed">
           <Text
             as="div"
             data-testid="device-user-code"
@@ -240,9 +201,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         >
           <Stack gap="none">
             <Text as="strong">Public and Private</Text>
-            <Text size="small">
-              Best experience, but requires broader permissions.
-            </Text>
+            <Text size="small">Best experience, but requires broader permissions.</Text>
             <Text as="em" size="small">
               Scopes: {getRecommendedScopeNames().join(', ')}
             </Text>
@@ -257,9 +216,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         >
           <Stack gap="none">
             <Text>Public</Text>
-            <Text size="small">
-              Limited experience with least privilege permissions.
-            </Text>
+            <Text size="small">Limited experience with least privilege permissions.</Text>
             <Text as="em" size="small">
               Scopes: {getAlternateScopeNames().join(', ')}
             </Text>
@@ -268,8 +225,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
 
         <Stack gap="none">
           <Text as="em" size="small">
-            Note: to change previously granted permissions, revoke Gitify's
-            access at{' '}
+            Note: to change previously granted permissions, revoke Gitify's access at{' '}
             <button
               className="text-gitify-link cursor-pointer"
               onClick={() =>
@@ -336,11 +292,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
       </Contents>
 
       <Footer justify="space-between">
-        <Button
-          data-testid="cancel-button"
-          onClick={() => navigate(-1)}
-          variant="default"
-        >
+        <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
           Cancel
         </Button>
       </Footer>

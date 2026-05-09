@@ -3,11 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getPrimaryAccountHostname } from '../utils/auth/utils';
 import { quitApp } from '../utils/system/comms';
-import {
-  openGitHubIssues,
-  openGitHubNotifications,
-  openGitHubPulls,
-} from '../utils/system/links';
+import { openGitHubIssues, openGitHubNotifications, openGitHubPulls } from '../utils/system/links';
 import { useAppContext } from './useAppContext';
 
 type ShortcutName =
@@ -41,14 +37,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const {
-    auth,
-    fetchNotifications,
-    isLoggedIn,
-    status,
-    settings,
-    updateSetting,
-  } = useAppContext();
+  const { auth, fetchNotifications, isLoggedIn, status, settings, updateSetting } = useAppContext();
 
   const isOnFiltersRoute = location.pathname.startsWith('/filters');
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
@@ -128,6 +117,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
         action: () => quitApp(),
       },
     };
+    // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [
     settings.participating,
     isLoggedIn,

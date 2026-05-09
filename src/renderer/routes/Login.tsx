@@ -1,11 +1,4 @@
-import {
-  type FC,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { type FC, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
@@ -16,10 +9,7 @@ import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
 
 import { type Forge, Size } from '../types';
-import type {
-  ForgeAdapter,
-  LoginMethodDescriptor,
-} from '../utils/forges/types';
+import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
 
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
@@ -29,13 +19,8 @@ import { cn } from '../utils/ui/cn';
  * Pick the method that should drive the dominant CTA for a forge.
  * Falls back to the first registered method when no `primary` variant exists.
  */
-function pickPrimaryMethod(
-  adapter: ForgeAdapter,
-): LoginMethodDescriptor | undefined {
-  return (
-    adapter.loginMethods.find((m) => m.variant === 'primary') ??
-    adapter.loginMethods[0]
-  );
+function pickPrimaryMethod(adapter: ForgeAdapter): LoginMethodDescriptor | undefined {
+  return adapter.loginMethods.find((m) => m.variant === 'primary') ?? adapter.loginMethods[0];
 }
 
 export const LoginRoute: FC = () => {
@@ -86,6 +71,7 @@ export const LoginRoute: FC = () => {
       showWindow();
       navigate('/', { replace: true });
     }
+    // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [isLoggedIn]);
 
   const goTo = (method: LoginMethodDescriptor) => {

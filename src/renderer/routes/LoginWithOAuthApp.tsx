@@ -1,22 +1,8 @@
 import { type FC, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import {
-  BookIcon,
-  EyeClosedIcon,
-  EyeIcon,
-  PersonIcon,
-  SignInIcon,
-} from '@primer/octicons-react';
-import {
-  Banner,
-  Button,
-  FormControl,
-  Stack,
-  Text,
-  TextInput,
-  Tooltip,
-} from '@primer/react';
+import { BookIcon, EyeClosedIcon, EyeIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
 import { Constants } from '../constants';
 
@@ -27,13 +13,7 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type {
-  Account,
-  ClientID,
-  ClientSecret,
-  Hostname,
-  Token,
-} from '../types';
+import type { Account, ClientID, ClientSecret, Hostname, Token } from '../types';
 import type { LoginOAuthWebOptions } from '../utils/auth/types';
 
 import {
@@ -131,16 +111,13 @@ export const LoginWithOAuthAppRoute: FC = () => {
         await loginWithOAuthApp(data as LoginOAuthWebOptions);
         navigate('/');
       } catch (err) {
-        rendererLogError(
-          'loginWithOAuthApp',
-          'Failed to login with OAuth App',
-          toError(err),
-        );
+        rendererLogError('loginWithOAuthApp', 'Failed to login with OAuth App', toError(err));
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided Client ID and Secret against ${data.hostname}`,
         });
       }
     },
+    // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
     [loginWithOAuthApp],
   );
 
@@ -168,9 +145,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
           <FormControl required>
             <FormControl.Label>Hostname</FormControl.Label>
             <FormControl.Caption>
-              <Text as="i">
-                Change only if you are using GitHub Enterprise Server
-              </Text>
+              <Text as="i">Change only if you are using GitHub Enterprise Server</Text>
             </FormControl.Caption>
             <TextInput
               aria-invalid={errors.hostname ? 'true' : 'false'}
@@ -187,9 +162,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
               value={formData.hostname}
             />
             {errors.hostname && (
-              <FormControl.Validation variant="error">
-                {errors.hostname}
-              </FormControl.Validation>
+              <FormControl.Validation variant="error">{errors.hostname}</FormControl.Validation>
             )}
           </FormControl>
           <Stack align="center" direction="horizontal" gap="condensed">
@@ -197,9 +170,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
               data-testid="login-create-oauth-app"
               disabled={!formData.hostname}
               leadingVisual={PersonIcon}
-              onClick={() =>
-                openExternalLink(getNewOAuthAppURL(formData.hostname))
-              }
+              onClick={() => openExternalLink(getNewOAuthAppURL(formData.hostname))}
               size="small"
             >
               Create new OAuth App
@@ -220,9 +191,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
               value={formData.clientId}
             />
             {errors.clientId && (
-              <FormControl.Validation variant="error">
-                {errors.clientId}
-              </FormControl.Validation>
+              <FormControl.Validation variant="error">{errors.clientId}</FormControl.Validation>
             )}
           </FormControl>
           <FormControl required>
@@ -236,22 +205,16 @@ export const LoginWithOAuthAppRoute: FC = () => {
               placeholder="Your generated client secret (40 characters)"
               trailingAction={
                 <TextInput.Action
-                  aria-label={
-                    shouldMaskClientSecret ? 'Show token' : 'Hide token'
-                  }
+                  aria-label={shouldMaskClientSecret ? 'Show token' : 'Hide token'}
                   icon={shouldMaskClientSecret ? EyeIcon : EyeClosedIcon}
-                  onClick={() =>
-                    setShouldMaskClientSecret(!shouldMaskClientSecret)
-                  }
+                  onClick={() => setShouldMaskClientSecret(!shouldMaskClientSecret)}
                 />
               }
               type={shouldMaskClientSecret ? 'password' : 'text'}
               value={formData.clientSecret}
             />
             {errors.clientSecret && (
-              <FormControl.Validation variant="error">
-                {errors.clientSecret}
-              </FormControl.Validation>
+              <FormControl.Validation variant="error">{errors.clientSecret}</FormControl.Validation>
             )}
           </FormControl>
         </Stack>
