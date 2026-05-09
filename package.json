@@ -129,7 +129,7 @@
     "vite-plugin-electron": "0.29.1",
     "vite-plugin-electron-renderer": "0.14.7",
     "vitest": "4.1.5",
-    "zustand": "5.0.12"
+    "zustand": "5.0.13"
   },
   "packageManager": "pnpm@11.0.6",
   "pnpm": {
