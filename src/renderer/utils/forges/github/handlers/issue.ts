@@ -11,7 +11,6 @@ import {
 import type {
   GitifyIssueState,
   GitifyNotification,
-  GitifyReactionGroup,
   GitifySubject,
   Link,
   SettingsState,
@@ -59,7 +58,7 @@ class IssueHandler extends DefaultHandler {
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
       reactionsCount: issueReactionCount,
-      reactionGroups: (issueReactionGroup ?? undefined) as GitifyReactionGroup[] | undefined,
+      reactionGroups: issueReactionGroup ?? undefined,
     };
   }
 

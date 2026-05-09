@@ -13,7 +13,6 @@ import {
   type GitifyNotification,
   type GitifyPullRequestReview,
   type GitifyPullRequestState,
-  type GitifyReactionGroup,
   type GitifySubject,
   IconColor,
   type Link,
@@ -78,7 +77,7 @@ class PullRequestHandler extends DefaultHandler {
       milestone: pr.milestone ?? undefined,
       htmlUrl: prComment?.url ?? pr.url,
       reactionsCount: prReactionCount,
-      reactionGroups: (prReactionGroup ?? undefined) as GitifyReactionGroup[] | undefined,
+      reactionGroups: prReactionGroup ?? undefined,
     };
   }
 

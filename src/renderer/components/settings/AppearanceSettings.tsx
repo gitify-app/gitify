@@ -35,7 +35,7 @@ export const AppearanceSettings: FC = () => {
           <FieldLabel label="Theme:" name="theme" />
           <Select
             data-testid="settings-theme"
-            onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
+            onChange={(evt) => updateSetting('theme', evt.target.value)}
             value={settings.theme}
           >
             <Select.OptGroup label="System">

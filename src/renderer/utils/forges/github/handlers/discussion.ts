@@ -13,7 +13,6 @@ import { differenceInMilliseconds } from 'date-fns/differenceInMilliseconds';
 import {
   type GitifyDiscussionState,
   type GitifyNotification,
-  type GitifyReactionGroup,
   type GitifySubject,
   IconColor,
   type Link,
@@ -76,7 +75,7 @@ class DiscussionHandler extends DefaultHandler {
         })) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
       reactionsCount: discussionReactionCount,
-      reactionGroups: (discussionReactionGroup ?? undefined) as GitifyReactionGroup[] | undefined,
+      reactionGroups: discussionReactionGroup ?? undefined,
     };
   }
 
