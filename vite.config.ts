@@ -19,9 +19,7 @@ import { Constants } from './src/renderer/constants';
  */
 const copyStaticAssetsPlugin = (): Plugin => {
   const flatten = (obj: object): string[] =>
-    Object.values(obj).flatMap((v) =>
-      Array.isArray(v) ? v : flatten(v as object),
-    );
+    Object.values(obj).flatMap((v) => (Array.isArray(v) ? v : flatten(v as object)));
 
   const extractSvgFilename = (imgHtml: string) =>
     imgHtml
@@ -43,22 +41,15 @@ const copyStaticAssetsPlugin = (): Plugin => {
     const twemojiSrcDir = fileURLToPath(
       new URL('node_modules/@discordapp/twemoji/dist/svg', import.meta.url),
     );
-    const twemojiDestDir = fileURLToPath(
-      new URL('build/assets/images/twemoji', import.meta.url),
-    );
+    const twemojiDestDir = fileURLToPath(new URL('build/assets/images/twemoji', import.meta.url));
 
     fs.mkdirSync(twemojiDestDir, { recursive: true });
 
     const allEmojis = flatten(Constants.EMOJIS);
     for (const emoji of allEmojis) {
-      const filename = extractSvgFilename(
-        twemoji.parse(emoji, { folder: 'svg', ext: '.svg' }),
-      );
+      const filename = extractSvgFilename(twemoji.parse(emoji, { folder: 'svg', ext: '.svg' }));
       if (filename) {
-        fs.copyFileSync(
-          path.join(twemojiSrcDir, filename),
-          path.join(twemojiDestDir, filename),
-        );
+        fs.copyFileSync(path.join(twemojiSrcDir, filename), path.join(twemojiDestDir, filename));
       }
     }
   };
@@ -98,10 +89,7 @@ const reactDevToolsPlugin = (): Plugin => ({
         '<meta http-equiv="Content-Security-Policy" content="script-src \'self\';',
         '<meta http-equiv="Content-Security-Policy" content="script-src \'self\' http://localhost:8097;',
       )
-      .replace(
-        '</head>',
-        '  <script src="http://localhost:8097"></script>\n  </head>',
-      );
+      .replace('</head>', '  <script src="http://localhost:8097"></script>\n  </head>');
   },
 });
 
@@ -116,7 +104,7 @@ export default defineConfig(({ command }) => {
         : [
             checker({
               typescript: true,
-              biome: { dev: { logLevel: ['error'] } },
+              oxlint: { dev: { logLevel: ['error'] } },
             }),
           ]),
       reactDevToolsPlugin(),
@@ -155,9 +143,7 @@ export default defineConfig(({ command }) => {
           },
         },
         preload: {
-          input: fileURLToPath(
-            new URL('src/preload/index.ts', import.meta.url),
-          ),
+          input: fileURLToPath(new URL('src/preload/index.ts', import.meta.url)),
           vite: {
             build: {
               outDir: fileURLToPath(new URL('build', import.meta.url)),
@@ -180,9 +166,7 @@ export default defineConfig(({ command }) => {
     // During CI builds `process.env.OAUTH_CLIENT_ID` will be injected via the environment.
     define: isBuild
       ? {
-          'process.env.OAUTH_CLIENT_ID': JSON.stringify(
-            process.env.OAUTH_CLIENT_ID ?? '',
-          ),
+          'process.env.OAUTH_CLIENT_ID': JSON.stringify(process.env.OAUTH_CLIENT_ID ?? ''),
         }
       : {
           // Development Keys - See CONTRIBUTING.md
