@@ -47,22 +47,24 @@
   "scripts": {
     "clean": "rimraf build coverage dist node_modules",
     "prepare": "husky",
-    "build": "vite build",
+    "build": "vp build",
     "codegen": "graphql-codegen --config codegen.ts",
     "codegen:watch": "pnpm codegen --watch",
-    "dev": "concurrently --names \"vite,codegen\" --prefix-colors \"blue,magenta\" \"vite dev\" \"pnpm codegen:watch\"",
+    "dev": "concurrently --names \"vite,codegen\" --prefix-colors \"blue,magenta\" \"vp dev\" \"pnpm codegen:watch\"",
     "devtools": "concurrently --names \"dev,devtools\" --prefix-colors \"cyan,green\" \"pnpm dev\" \"react-devtools\"",
     "start": "pnpm build && pnpm dev",
     "package:linux": "electron-builder --linux",
     "package:macos": "electron-builder --mac",
     "package:win": "electron-builder --win",
-    "lint": "oxlint --fix",
-    "lint:check": "oxlint",
-    "format": "oxfmt",
-    "format:check": "oxfmt --check",
-    "test": "vitest --coverage --run",
-    "test:watch": "vitest --watch --coverage",
-    "test:ui": "vitest --ui"
+    "check": "vp check",
+    "check:fix": "vp check --fix",
+    "lint": "vp lint --fix",
+    "lint:check": "vp lint",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
+    "test": "vp test --coverage --run",
+    "test:watch": "vp test --watch --coverage",
+    "test:ui": "vp test --ui"
   },
   "dependencies": {
     "electron-log": "5.4.3",
@@ -116,8 +118,6 @@
     "graphql": "16.13.2",
     "happy-dom": "20.9.0",
     "husky": "9.1.7",
-    "oxfmt": "0.48.0",
-    "oxlint": "1.63.0",
     "react-devtools": "7.0.1",
     "rimraf": "6.1.3",
     "semver": "7.7.4",
@@ -128,16 +128,9 @@
     "vite-plugin-checker": "0.13.0",
     "vite-plugin-electron": "0.29.1",
     "vite-plugin-electron-renderer": "0.14.7",
+    "vite-plus": "0.1.20",
     "vitest": "4.1.5",
     "zustand": "5.0.13"
-  },
-  "lint-staged": {
-    "*": "oxfmt --no-error-on-unmatched-pattern",
-    "*.{js,jsx,ts,tsx}": "oxlint --fix --no-error-on-unmatched-pattern",
-    "*.{js,ts,tsx}": [
-      "bash -c 'tsc --noEmit",
-      "pnpm test --changed --passWithNoTests --update"
-    ]
   },
   "engines": {
     "node": ">=24"
