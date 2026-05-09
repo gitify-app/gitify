@@ -74,6 +74,7 @@ function getDisplayHelpers(
 export const giteaAdapter: ForgeAdapter = {
   id: 'gitea',
   displayName: 'Gitea',
+  tagline: 'Gitea, Forgejo & Codeberg',
   icon: ServerIcon,
   capabilities,
 
@@ -108,6 +109,8 @@ export const giteaAdapter: ForgeAdapter = {
   getDeveloperSettingsUrl: (account: Account) =>
     `https://${account.hostname}/user/settings/applications` as Link,
   documentationUrl: GITEA_DOCS_URL,
+
+  supportsOAuthScopes: false,
 
   loginMethods: [
     {

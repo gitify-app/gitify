@@ -88,6 +88,7 @@ function getDisplayHelpers(
 export const githubAdapter: ForgeAdapter = {
   id: 'github',
   displayName: 'GitHub',
+  tagline: 'github.com & GitHub Enterprise',
   icon: MarkGithubIcon,
   capabilities: githubCapabilities,
 
@@ -115,6 +116,8 @@ export const githubAdapter: ForgeAdapter = {
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   getDeveloperSettingsUrl: getDeveloperSettingsURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
+
+  supportsOAuthScopes: true,
 
   loginMethods: [
     {

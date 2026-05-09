@@ -23,6 +23,7 @@ const useFiltersStore = create<FiltersStore>()(
         return (
           state.includeSearchTokens.length > 0 ||
           state.excludeSearchTokens.length > 0 ||
+          state.accounts.length > 0 ||
           state.userTypes.length > 0 ||
           state.subjectTypes.length > 0 ||
           state.states.length > 0 ||

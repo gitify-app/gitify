@@ -39,6 +39,7 @@ import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 import { toError } from '../utils/core/logger';
 import { saveState } from '../utils/core/storage';
+import { getAdapter } from '../utils/forges/registry';
 import {
   openAccountProfile,
   openDeveloperSettings,
@@ -259,35 +260,36 @@ export const AccountsRoute: FC = () => {
                       variant={i === 0 ? 'primary' : 'default'}
                     />
 
-                    {!hasBadCredentials && (
-                      <IconButton
-                        aria-label={`View scopes for ${account.user?.login}`}
-                        data-testid="account-view-scopes"
-                        icon={() => (
-                          <ShieldCheckIcon
-                            className={
-                              hasRecommendedScopes(account)
-                                ? IconColor.GREEN
-                                : hasAlternateScopes(account)
-                                  ? 'text-gitify-warning'
-                                  : ''
-                            }
-                          />
-                        )}
-                        onClick={() =>
-                          navigate('/account-scopes', {
-                            state: { account },
-                          })
-                        }
-                        size="small"
-                        variant={
-                          !hasRecommendedScopes(account) &&
-                          !hasAlternateScopes(account)
-                            ? 'danger'
-                            : 'default'
-                        }
-                      />
-                    )}
+                    {!hasBadCredentials &&
+                      getAdapter(account).supportsOAuthScopes && (
+                        <IconButton
+                          aria-label={`View scopes for ${account.user?.login}`}
+                          data-testid="account-view-scopes"
+                          icon={() => (
+                            <ShieldCheckIcon
+                              className={
+                                hasRecommendedScopes(account)
+                                  ? IconColor.GREEN
+                                  : hasAlternateScopes(account)
+                                    ? 'text-gitify-warning'
+                                    : ''
+                              }
+                            />
+                          )}
+                          onClick={() =>
+                            navigate('/account-scopes', {
+                              state: { account },
+                            })
+                          }
+                          size="small"
+                          variant={
+                            !hasRecommendedScopes(account) &&
+                            !hasAlternateScopes(account)
+                              ? 'danger'
+                              : 'default'
+                          }
+                        />
+                      )}
 
                     {hasBadCredentials && (
                       <IconButton

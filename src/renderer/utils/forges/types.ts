@@ -99,6 +99,8 @@ export interface ForgeAdapter {
   readonly id: Forge;
   /** User-facing forge name (e.g. "GitHub", "Gitea"). */
   readonly displayName: string;
+  /** Short caption shown beside the forge name on the login screen. */
+  readonly tagline?: string;
   /** Icon used for the platform in the UI. */
   readonly icon: FC<OcticonProps>;
   /** Static or computed capability matrix for this forge. */
@@ -175,6 +177,13 @@ export interface ForgeAdapter {
   // Forges without an OAuth scope concept (e.g. Gitea) report `true` for
   // every check, signalling "nothing to verify".
 
+  /**
+   * Whether this forge has an OAuth scope concept at all. Drives whether the
+   * UI surfaces a scopes affordance (account view scopes, scope health icon).
+   * Forges that return `false` here should have callers skip rendering any
+   * scopes UI rather than showing a meaningless "all granted" or empty state.
+   */
+  readonly supportsOAuthScopes: boolean;
   /** Whether the account holds the minimum scopes Gitify needs to function. */
   hasRequiredScopes(account: Account): boolean;
   /** Whether the account holds the full recommended scope set. */
