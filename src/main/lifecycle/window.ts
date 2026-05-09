@@ -5,6 +5,7 @@ import { logWarn, toError } from '../../shared/logger';
 import { isMacOS } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
+import type MenuBuilder from '../menu';
 
 let isQuitting = false;
 
@@ -44,12 +45,25 @@ function restoreMenubarWindowReference(mb: Menubar, win: BrowserWindow): void {
  * Attach window-level event listeners for keyboard input and DevTools.
  *
  * @param mb - The menubar instance whose window events are configured.
+ * @param menuBuilder - The menu builder used to keep the Show / Hide tray
+ *   menu items in sync with window visibility.
  */
-export function configureWindowEvents(mb: Menubar): void {
+export function configureWindowEvents(
+  mb: Menubar,
+  menuBuilder: MenuBuilder,
+): void {
   const win = mb.window;
   if (!win) {
     return;
   }
+
+  win.on('show', () => {
+    menuBuilder.setWindowVisibility(true);
+  });
+
+  win.on('hide', () => {
+    menuBuilder.setWindowVisibility(false);
+  });
 
   /**
    * Track explicit quit requests so the close handlers can distinguish

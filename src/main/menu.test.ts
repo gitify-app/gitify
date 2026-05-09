@@ -5,7 +5,7 @@ import type { Menubar } from 'menubar';
 import type { Mock } from 'vitest';
 
 import { APPLICATION } from '../shared/constants';
-import { isMacOS } from '../shared/platform';
+import { isLinux, isMacOS } from '../shared/platform';
 
 import { resetApp } from './lifecycle/reset';
 import MenuBuilder from './menu';
@@ -54,6 +54,7 @@ vi.mock('./lifecycle/reset', () => ({
 }));
 
 vi.mock('../shared/platform', () => ({
+  isLinux: vi.fn(() => false),
   isMacOS: vi.fn(),
 }));
 
@@ -90,9 +91,18 @@ describe('main/menu.ts', () => {
   };
 
   beforeEach(() => {
+    vi.mocked(isLinux).mockReturnValue(false);
     vi.mocked(isMacOS).mockReturnValue(false);
     menuItemInstances.length = 0; // Clear tracked instances
-    menubar = { app: { quit: vi.fn() } } as unknown as Menubar;
+    menubar = {
+      app: { quit: vi.fn() },
+      showWindow: vi.fn(),
+      hideWindow: vi.fn(),
+      tray: {
+        isDestroyed: vi.fn(() => false),
+        setContextMenu: vi.fn(),
+      },
+    } as unknown as Menubar;
     menuBuilder = new MenuBuilder(menubar);
   });
 
@@ -197,6 +207,71 @@ describe('main/menu.ts', () => {
     });
   });
 
+  describe('windowVisibilityMenuItems', () => {
+    it('show item is visible by default; hide item is not', () => {
+      const showCfg = getMenuItemConfigByLabel(`Show ${APPLICATION.NAME}`);
+      const hideCfg = getMenuItemConfigByLabel(`Hide ${APPLICATION.NAME}`);
+
+      expect(showCfg?.visible).toBe(true);
+      expect(hideCfg?.visible).toBe(false);
+    });
+
+    it('setWindowVisibility(true) shows hide item, hides show item', () => {
+      menuBuilder.setWindowVisibility(true);
+
+      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      expect(menuBuilder['showWindowMenuItem'].visible).toBe(false);
+      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      expect(menuBuilder['hideWindowMenuItem'].visible).toBe(true);
+    });
+
+    it('setWindowVisibility(false) shows show item, hides hide item', () => {
+      menuBuilder.setWindowVisibility(true);
+      menuBuilder.setWindowVisibility(false);
+
+      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      expect(menuBuilder['showWindowMenuItem'].visible).toBe(true);
+      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      expect(menuBuilder['hideWindowMenuItem'].visible).toBe(false);
+    });
+
+    it('does not re-publish the menu on non-Linux platforms', () => {
+      menuBuilder.buildMenu();
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
+    });
+
+    it('re-publishes the menu over D-Bus on Linux', () => {
+      vi.mocked(isLinux).mockReturnValue(true);
+      const menu = {} as Electron.Menu;
+      (Menu.buildFromTemplate as Mock).mockReturnValueOnce(menu);
+      menuBuilder.buildMenu();
+
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).toHaveBeenCalledWith(menu);
+    });
+
+    it('skips re-publishing if buildMenu has not run yet', () => {
+      vi.mocked(isLinux).mockReturnValue(true);
+
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
+    });
+
+    it('skips re-publishing when the tray is destroyed', () => {
+      vi.mocked(isLinux).mockReturnValue(true);
+      menuBuilder.buildMenu();
+      (menubar.tray.isDestroyed as Mock).mockReturnValue(true);
+
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
+    });
+  });
+
   describe('click handlers', () => {
     it('invokes autoUpdater.checkForUpdatesAndNotify when clicking "Check for updates"', () => {
       const cfg = getMenuItemConfigByLabel('Check for updates');
@@ -255,6 +330,18 @@ describe('main/menu.ts', () => {
       item?.click?.();
 
       expect(menubar.app.quit).toHaveBeenCalled();
+    });
+
+    it('show window menu item calls showWindow', () => {
+      const cfg = getMenuItemConfigByLabel(`Show ${APPLICATION.NAME}`);
+      cfg?.click?.();
+      expect(menubar.showWindow).toHaveBeenCalled();
+    });
+
+    it('hide window menu item calls hideWindow', () => {
+      const cfg = getMenuItemConfigByLabel(`Hide ${APPLICATION.NAME}`);
+      cfg?.click?.();
+      expect(menubar.hideWindow).toHaveBeenCalled();
     });
 
     it('developer submenu includes expected static accelerators', () => {

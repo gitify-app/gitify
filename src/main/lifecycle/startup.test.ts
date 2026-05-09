@@ -28,6 +28,11 @@ vi.mock('../../shared/logger', () => ({
   logWarn: (...a: unknown[]) => logWarnMock(...a),
 }));
 
+const isLinuxMock = vi.fn(() => false);
+vi.mock('../../shared/platform', () => ({
+  isLinux: () => isLinuxMock(),
+}));
+
 function createMb() {
   return {
     on: vi.fn(),
@@ -38,6 +43,7 @@ function createMb() {
       setIgnoreDoubleClickEvents: vi.fn(),
       on: vi.fn(),
       popUpContextMenu: vi.fn(),
+      setContextMenu: vi.fn(),
     },
   };
 }
@@ -62,6 +68,44 @@ describe('main/lifecycle/startup.ts', () => {
 
       expect(appQuitMock).toHaveBeenCalled();
       expect(logWarnMock).toHaveBeenCalled();
+    });
+
+    it('uses setContextMenu on Linux', () => {
+      isLinuxMock.mockReturnValueOnce(true);
+      const mb = createMb();
+      const contextMenu = {} as Electron.Menu;
+
+      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
+
+      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock
+        .calls[0]?.[1];
+      expect(readyHandler).toBeDefined();
+      readyHandler?.();
+
+      expect(mb.tray.setContextMenu).toHaveBeenCalledWith(contextMenu);
+      expect(mb.tray.on).not.toHaveBeenCalledWith(
+        'right-click',
+        expect.any(Function),
+      );
+    });
+
+    it('uses popUpContextMenu on non-Linux platforms', () => {
+      isLinuxMock.mockReturnValueOnce(false);
+      const mb = createMb();
+      const contextMenu = {} as Electron.Menu;
+
+      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
+
+      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock
+        .calls[0]?.[1];
+      expect(readyHandler).toBeDefined();
+      readyHandler?.();
+
+      expect(mb.tray.setContextMenu).not.toHaveBeenCalled();
+      expect(mb.tray.on).toHaveBeenCalledWith(
+        'right-click',
+        expect.any(Function),
+      );
     });
   });
 
