@@ -71,9 +71,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       stabilizeNotificationsOrder(mockAccounts, settings);
 
-      expect(
-        mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order),
-      ).toEqual([0, 1, 2, 3, 4, 5]);
+      expect(mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order)).toEqual([
+        0, 1, 2, 3, 4, 5,
+      ]);
     });
 
     it('groups by repository when REPOSITORY and assigns order in first-seen repo groups', () => {
@@ -84,9 +84,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       stabilizeNotificationsOrder(mockAccounts, settings);
 
-      expect(
-        mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order),
-      ).toEqual([0, 2, 1, 3, 5, 4]);
+      expect(mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order)).toEqual([
+        0, 2, 1, 3, 5, 4,
+      ]);
     });
   });
 
@@ -167,9 +167,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(fetchNotificationDetailsForListSpy.mock.calls[1][0]).toHaveLength(
         Constants.GITHUB_API_MERGE_BATCH_SIZE,
       );
-      expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(
-        50,
-      );
+      expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(50);
     });
 
     it('should handle single batch of notifications', async () => {
@@ -194,9 +192,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       // Should be called once for single batch
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
-      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(
-        50,
-      );
+      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(50);
     });
   });
 });

@@ -17,9 +17,7 @@ export function isMarkAsDoneFeatureSupported(account: Account): boolean {
  * Whether the account's forge surfaces an "answered" discussion state during
  * notification enrichment.
  */
-export function isAnsweredDiscussionFeatureSupported(
-  account: Account,
-): boolean {
+export function isAnsweredDiscussionFeatureSupported(account: Account): boolean {
   return getAdapter(account).capabilities.answeredDiscussion(account);
 }
 

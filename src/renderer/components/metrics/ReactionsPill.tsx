@@ -23,10 +23,7 @@ const reactionEmojiMap: Record<string, string> = {
   HEART: '❤️',
 };
 
-export const ReactionsPill: FC<ReactionsPillProps> = ({
-  reactionsCount,
-  reactionGroups,
-}) => {
+export const ReactionsPill: FC<ReactionsPillProps> = ({ reactionsCount, reactionGroups }) => {
   if (!reactionsCount) {
     return null;
   }

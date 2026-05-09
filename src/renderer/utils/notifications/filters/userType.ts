@@ -16,16 +16,12 @@ const USER_TYPE_DETAILS: Record<UserType, TypeDetails> = {
   },
   Bot: {
     title: 'Bot',
-    description:
-      'Bot accounts such as @copilot, @dependabot, @renovate, @netlify, etc',
+    description: 'Bot accounts such as @copilot, @dependabot, @renovate, @netlify, etc',
   },
   Organization: {
     title: 'Organization',
   },
-} satisfies Partial<Record<FilterableUserType, TypeDetails>> as Record<
-  UserType,
-  TypeDetails
->;
+} satisfies Partial<Record<FilterableUserType, TypeDetails>> as Record<UserType, TypeDetails>;
 
 export const userTypeFilter: Filter<UserType> = {
   FILTER_TYPES: USER_TYPE_DETAILS,
@@ -46,24 +42,15 @@ export const userTypeFilter: Filter<UserType> = {
     return filters.userTypes.includes(userType);
   },
 
-  getFilterCount(
-    accountNotifications: AccountNotifications[],
-    userType: UserType,
-  ): number {
+  getFilterCount(accountNotifications: AccountNotifications[], userType: UserType): number {
     return accountNotifications.reduce(
       (sum, account) =>
-        sum +
-        account.notifications.filter((n) =>
-          this.filterNotification(n, userType),
-        ).length,
+        sum + account.notifications.filter((n) => this.filterNotification(n, userType)).length,
       0,
     );
   },
 
-  filterNotification(
-    notification: RawGitifyNotification,
-    userType: UserType,
-  ): boolean {
+  filterNotification(notification: RawGitifyNotification, userType: UserType): boolean {
     const allUserTypes = ['User', 'EnterpriseUserAccount'];
 
     if (userType === 'User') {

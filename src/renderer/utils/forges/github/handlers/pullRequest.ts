@@ -37,9 +37,7 @@ class PullRequestHandler extends DefaultHandler {
     _settings: SettingsState,
     fetchedData?: PullRequestDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    const pr =
-      fetchedData ??
-      (await fetchPullByNumber(notification)).repository?.pullRequest;
+    const pr = fetchedData ?? (await fetchPullByNumber(notification)).repository?.pullRequest;
 
     if (!pr) {
       return {};
@@ -57,12 +55,10 @@ class PullRequestHandler extends DefaultHandler {
     const prUser = getNotificationAuthor([prComment?.author, pr.author]);
 
     const reviews = getLatestReviewForReviewers(
-      (pr.reviews?.nodes?.filter(Boolean) ??
-        []) as PullRequestReviewFieldsFragment[],
+      (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
     );
 
-    const prReactionCount =
-      prComment?.reactions.totalCount ?? pr.reactions.totalCount;
+    const prReactionCount = prComment?.reactions.totalCount ?? pr.reactions.totalCount;
     const prReactionGroup = prComment?.reactionGroups ?? pr.reactionGroups;
 
     return {
@@ -82,9 +78,7 @@ class PullRequestHandler extends DefaultHandler {
       milestone: pr.milestone ?? undefined,
       htmlUrl: prComment?.url ?? pr.url,
       reactionsCount: prReactionCount,
-      reactionGroups: (prReactionGroup ?? undefined) as
-        | GitifyReactionGroup[]
-        | undefined,
+      reactionGroups: (prReactionGroup ?? undefined) as GitifyReactionGroup[] | undefined,
     };
   }
 
@@ -150,9 +144,7 @@ export function getLatestReviewForReviewers(
   // Group by the review state
   const reviewers: GitifyPullRequestReview[] = [];
   for (const prReview of latestReviews) {
-    const reviewerFound = reviewers.find(
-      (review) => review.state === prReview.state,
-    );
+    const reviewerFound = reviewers.find((review) => review.state === prReview.state);
 
     if (reviewerFound) {
       reviewerFound.users.push(prReview.author?.login ?? '');

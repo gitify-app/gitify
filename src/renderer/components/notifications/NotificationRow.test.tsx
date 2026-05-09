@@ -17,9 +17,7 @@ import { NotificationRow, type NotificationRowProps } from './NotificationRow';
 describe('renderer/components/notifications/NotificationRow.tsx', () => {
   vi.spyOn(links, 'openNotification').mockImplementation(vi.fn());
   vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
-  vi.spyOn(globalThis.Date, 'now').mockImplementation(() =>
-    new Date('2024').valueOf(),
-  );
+  vi.spyOn(globalThis.Date, 'now').mockImplementation(() => new Date('2024').valueOf());
 
   it('should render itself & its children - group by date', async () => {
     const props: NotificationRowProps = {
@@ -188,9 +186,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       renderWithProviders(<NotificationRow {...props} />);
 
-      expect(
-        screen.queryByTestId('notification-mark-as-read'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId('notification-mark-as-read')).not.toBeInTheDocument();
     });
 
     it('should mark notifications as done', async () => {
@@ -222,9 +218,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       renderWithProviders(<NotificationRow {...props} />);
 
-      expect(
-        screen.queryByTestId('notification-mark-as-done'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId('notification-mark-as-done')).not.toBeInTheDocument();
     });
 
     it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
@@ -237,12 +231,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         settings: { ...mockSettings, fetchReadNotifications: true },
       });
 
-      expect(
-        screen.getByTestId('notification-mark-as-done'),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByTestId('notification-mark-as-read'),
-      ).toBeInTheDocument();
+      expect(screen.getByTestId('notification-mark-as-done')).toBeInTheDocument();
+      expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
     });
 
     it('should unsubscribe from a notification thread', async () => {
@@ -257,9 +247,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         unsubscribeNotification: unsubscribeNotificationMock,
       });
 
-      await userEvent.click(
-        screen.getByTestId('notification-unsubscribe-from-thread'),
-      );
+      await userEvent.click(screen.getByTestId('notification-unsubscribe-from-thread'));
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
     });
@@ -272,9 +260,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       renderWithProviders(<NotificationRow {...props} />);
 
-      expect(
-        screen.queryByTestId('notification-unsubscribe-from-thread'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByTestId('notification-unsubscribe-from-thread')).not.toBeInTheDocument();
     });
   });
 });

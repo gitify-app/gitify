@@ -25,7 +25,7 @@ jobs:
 
       - uses: ./.github/actions/setup-node
         with:
-          run-install: "false"
+          run-install: 'false'
 
       - name: Install Renovate
         run: pnpm install --global renovate

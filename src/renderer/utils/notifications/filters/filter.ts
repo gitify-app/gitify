@@ -45,8 +45,7 @@ export function filterBaseNotifications(
       }
 
       passesFilters =
-        passesFilters &&
-        passesSearchTokenFiltersForQualifier(notification, qualifier);
+        passesFilters && passesSearchTokenFiltersForQualifier(notification, qualifier);
     }
 
     if (subjectTypeFilter.hasFilters()) {
@@ -60,9 +59,7 @@ export function filterBaseNotifications(
     if (reasonFilter.hasFilters()) {
       passesFilters =
         passesFilters &&
-        filters.reasons.some((reason) =>
-          reasonFilter.filterNotification(notification, reason),
-        );
+        filters.reasons.some((reason) => reasonFilter.filterNotification(notification, reason));
     }
 
     return passesFilters;
@@ -109,28 +106,20 @@ function passesSearchTokenFiltersForQualifier(
   const prefix = qualifier.prefix;
 
   if (hasIncludeSearchFilters()) {
-    const includeTokens = filters.includeSearchTokens.filter((t) =>
-      t.startsWith(prefix),
-    );
+    const includeTokens = filters.includeSearchTokens.filter((t) => t.startsWith(prefix));
     if (includeTokens.length > 0) {
       passes =
         passes &&
-        includeTokens.some((token) =>
-          filterNotificationBySearchTerm(notification, token),
-        );
+        includeTokens.some((token) => filterNotificationBySearchTerm(notification, token));
     }
   }
 
   if (hasExcludeSearchFilters()) {
-    const excludeTokens = filters.excludeSearchTokens.filter((t) =>
-      t.startsWith(prefix),
-    );
+    const excludeTokens = filters.excludeSearchTokens.filter((t) => t.startsWith(prefix));
     if (excludeTokens.length > 0) {
       passes =
         passes &&
-        !excludeTokens.some((token) =>
-          filterNotificationBySearchTerm(notification, token),
-        );
+        !excludeTokens.some((token) => filterNotificationBySearchTerm(notification, token));
     }
   }
 
@@ -156,9 +145,7 @@ function passesUserFilters(notification: RawGitifyNotification): boolean {
       break;
     }
 
-    passesFilters =
-      passesFilters &&
-      passesSearchTokenFiltersForQualifier(notification, qualifier);
+    passesFilters = passesFilters && passesSearchTokenFiltersForQualifier(notification, qualifier);
   }
 
   return passesFilters;
@@ -168,9 +155,7 @@ function passesStateFilter(notification: RawGitifyNotification): boolean {
   const filters = useFiltersStore.getState();
 
   if (stateFilter.hasFilters()) {
-    return filters.states.some((state) =>
-      stateFilter.filterNotification(notification, state),
-    );
+    return filters.states.some((state) => stateFilter.filterNotification(notification, state));
   }
 
   return true;
@@ -185,9 +170,7 @@ function passesStateFilter(notification: RawGitifyNotification): boolean {
  * @param state - The notification state to check.
  * @returns `true` if the state is currently filtered out.
  */
-export function isStateFilteredOut(
-  state: GitifyNotificationState | undefined,
-): boolean {
+export function isStateFilteredOut(state: GitifyNotificationState | undefined): boolean {
   const notification = { subject: { state: state } } as RawGitifyNotification;
 
   return !passesStateFilter(notification);

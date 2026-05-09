@@ -29,23 +29,15 @@ export const reasonFilter: Filter<Reason> = {
     return filters.reasons.includes(reason);
   },
 
-  getFilterCount(
-    accountNotifications: AccountNotifications[],
-    reason: Reason,
-  ): number {
+  getFilterCount(accountNotifications: AccountNotifications[], reason: Reason): number {
     return accountNotifications.reduce(
       (sum, account) =>
-        sum +
-        account.notifications.filter((n) => this.filterNotification(n, reason))
-          .length,
+        sum + account.notifications.filter((n) => this.filterNotification(n, reason)).length,
       0,
     );
   },
 
-  filterNotification(
-    notification: RawGitifyNotification,
-    reason: Reason,
-  ): boolean {
+  filterNotification(notification: RawGitifyNotification, reason: Reason): boolean {
     return notification.reason.code === reason;
   },
 };

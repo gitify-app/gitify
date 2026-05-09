@@ -1,9 +1,6 @@
 import { renderWithProviders } from '../../__helpers__/test-utils';
 
-import {
-  LinkedIssuesPill,
-  type LinkedIssuesPillProps,
-} from './LinkedIssuesPill';
+import { LinkedIssuesPill, type LinkedIssuesPillProps } from './LinkedIssuesPill';
 
 describe('renderer/components/metrics/LinkedIssuesPill.tsx', () => {
   it('renders when no linked issues/prs', () => {

@@ -9,10 +9,7 @@ import type { PlatformType } from './types';
  * Gitea always reports as 'Gitea'; GitHub varies by hostname (Cloud, Enterprise
  * Server, Enterprise Cloud with Data Residency).
  */
-export function resolvePlatform(
-  forge: Forge,
-  hostname: Hostname,
-): PlatformType {
+export function resolvePlatform(forge: Forge, hostname: Hostname): PlatformType {
   if (forge === 'gitea') {
     return 'Gitea';
   }
@@ -24,9 +21,7 @@ export function getPlatformFromHostname(hostname: string): PlatformType {
     return 'GitHub Cloud';
   }
 
-  if (
-    hostname.endsWith(Constants.GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY_HOSTNAME)
-  ) {
+  if (hostname.endsWith(Constants.GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY_HOSTNAME)) {
     return 'GitHub Enterprise Cloud with Data Residency';
   }
 
@@ -38,8 +33,5 @@ export function isEnterpriseServerHost(hostname: Hostname): boolean {
 }
 
 export function isCloudDataResidencyHost(hostname: Hostname): boolean {
-  return (
-    getPlatformFromHostname(hostname) ===
-    'GitHub Enterprise Cloud with Data Residency'
-  );
+  return getPlatformFromHostname(hostname) === 'GitHub Enterprise Cloud with Data Residency';
 }

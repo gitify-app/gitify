@@ -38,8 +38,7 @@ class DiscussionHandler extends DefaultHandler {
     fetchedData?: DiscussionDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const discussion =
-      fetchedData ??
-      (await fetchDiscussionByNumber(notification)).repository?.discussion;
+      fetchedData ?? (await fetchDiscussionByNumber(notification)).repository?.discussion;
 
     if (!discussion) {
       return {};
@@ -57,23 +56,18 @@ class DiscussionHandler extends DefaultHandler {
 
     const latestDiscussionComment = getClosestDiscussionCommentOrReply(
       notification,
-      (discussion.comments.nodes?.filter(Boolean) ??
-        []) as DiscussionCommentFieldsFragment[],
+      (discussion.comments.nodes?.filter(Boolean) ?? []) as DiscussionCommentFieldsFragment[],
     );
 
     const discussionReactionCount =
-      latestDiscussionComment?.reactions.totalCount ??
-      discussion.reactions.totalCount;
+      latestDiscussionComment?.reactions.totalCount ?? discussion.reactions.totalCount;
     const discussionReactionGroup =
       latestDiscussionComment?.reactionGroups ?? discussion.reactionGroups;
 
     return {
       number: discussion.number,
       state: discussionState,
-      user: getNotificationAuthor([
-        latestDiscussionComment?.author,
-        discussion.author,
-      ]),
+      user: getNotificationAuthor([latestDiscussionComment?.author, discussion.author]),
       commentCount: discussion.comments.totalCount,
       labels:
         discussion.labels?.nodes?.filter(Boolean).map((label) => ({
@@ -82,9 +76,7 @@ class DiscussionHandler extends DefaultHandler {
         })) ?? [],
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
       reactionsCount: discussionReactionCount,
-      reactionGroups: (discussionReactionGroup ?? undefined) as
-        | GitifyReactionGroup[]
-        | undefined,
+      reactionGroups: (discussionReactionGroup ?? undefined) as GitifyReactionGroup[] | undefined,
     };
   }
 
@@ -138,12 +130,8 @@ export function getClosestDiscussionCommentOrReply(
 
   // Find the closest match using the target timestamp
   const closestComment = allCommentsAndReplies.reduce((prev, curr) => {
-    const prevDiff = Math.abs(
-      differenceInMilliseconds(prev!.createdAt, targetTimestamp),
-    );
-    const currDiff = Math.abs(
-      differenceInMilliseconds(curr!.createdAt, targetTimestamp),
-    );
+    const prevDiff = Math.abs(differenceInMilliseconds(prev!.createdAt, targetTimestamp));
+    const currDiff = Math.abs(differenceInMilliseconds(curr!.createdAt, targetTimestamp));
     return currDiff < prevDiff ? curr : prev;
   }, allCommentsAndReplies[0]);
 

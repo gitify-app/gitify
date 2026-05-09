@@ -1,19 +1,7 @@
 import type { FC } from 'react';
 
-import {
-  PaintbrushIcon,
-  SyncIcon,
-  ZoomInIcon,
-  ZoomOutIcon,
-} from '@primer/octicons-react';
-import {
-  Button,
-  ButtonGroup,
-  IconButton,
-  Select,
-  Stack,
-  Text,
-} from '@primer/react';
+import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
+import { Button, ButtonGroup, IconButton, Select, Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
 
@@ -43,18 +31,11 @@ export const AppearanceSettings: FC = () => {
       <Title icon={PaintbrushIcon}>Appearance</Title>
 
       <Stack direction="vertical" gap="condensed">
-        <Stack
-          align="center"
-          className="text-sm"
-          direction="horizontal"
-          gap="condensed"
-        >
+        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <FieldLabel label="Theme:" name="theme" />
           <Select
             data-testid="settings-theme"
-            onChange={(evt) =>
-              updateSetting('theme', evt.target.value as Theme)
-            }
+            onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
             value={settings.theme}
           >
             <Select.OptGroup label="System">
@@ -62,21 +43,13 @@ export const AppearanceSettings: FC = () => {
             </Select.OptGroup>
             <Select.OptGroup label="Light">
               <Select.Option value={Theme.LIGHT}>Light default</Select.Option>
-              <Select.Option value={Theme.LIGHT_COLORBLIND}>
-                Light colorblind
-              </Select.Option>
-              <Select.Option value={Theme.LIGHT_TRITANOPIA}>
-                Light Tritanopia
-              </Select.Option>
+              <Select.Option value={Theme.LIGHT_COLORBLIND}>Light colorblind</Select.Option>
+              <Select.Option value={Theme.LIGHT_TRITANOPIA}>Light Tritanopia</Select.Option>
             </Select.OptGroup>
             <Select.OptGroup label="Dark">
               <Select.Option value={Theme.DARK}>Dark default</Select.Option>
-              <Select.Option value={Theme.DARK_COLORBLIND}>
-                Dark colorblind
-              </Select.Option>
-              <Select.Option value={Theme.DARK_TRITANOPIA}>
-                Dark Tritanopia
-              </Select.Option>
+              <Select.Option value={Theme.DARK_COLORBLIND}>Dark colorblind</Select.Option>
+              <Select.Option value={Theme.DARK_TRITANOPIA}>Dark Tritanopia</Select.Option>
               <Select.Option value={Theme.DARK_DIMMED}>Soft dark</Select.Option>
             </Select.OptGroup>
           </Select>
@@ -86,24 +59,16 @@ export const AppearanceSettings: FC = () => {
           checked={settings.increaseContrast}
           label="Increase contrast"
           name="increaseContrast"
-          onChange={() =>
-            updateSetting('increaseContrast', !settings.increaseContrast)
-          }
+          onChange={() => updateSetting('increaseContrast', !settings.increaseContrast)}
           tooltip={
             <Text>
-              Enable high contrast colors for improved legibility. This
-              increases color contrast across the UI and may affect some
-              color-specific themes.
+              Enable high contrast colors for improved legibility. This increases color contrast
+              across the UI and may affect some color-specific themes.
             </Text>
           }
         />
 
-        <Stack
-          align="center"
-          className="text-sm"
-          direction="horizontal"
-          gap="condensed"
-        >
+        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <FieldLabel label="Zoom:" name="zoom" />
 
           <ButtonGroup className="ml-2">
@@ -147,13 +112,11 @@ export const AppearanceSettings: FC = () => {
           checked={settings.showAccountHeader}
           label="Show account header"
           name="showAccountHeader"
-          onChange={() =>
-            updateSetting('showAccountHeader', !settings.showAccountHeader)
-          }
+          onChange={() => updateSetting('showAccountHeader', !settings.showAccountHeader)}
           tooltip={
             <Text>
-              When enabled, displays an account header (avatar, username and
-              quick links) above the notifications list.
+              When enabled, displays an account header (avatar, username and quick links) above the
+              notifications list.
             </Text>
           }
           visible={!hasMultipleAccounts(auth)}
@@ -163,17 +126,12 @@ export const AppearanceSettings: FC = () => {
           checked={settings.wrapNotificationTitle}
           label="Show full notification title"
           name="wrapNotificationTitle"
-          onChange={() =>
-            updateSetting(
-              'wrapNotificationTitle',
-              !settings.wrapNotificationTitle,
-            )
-          }
+          onChange={() => updateSetting('wrapNotificationTitle', !settings.wrapNotificationTitle)}
           tooltip={
             <Text>
-              Wrap long notification titles onto multiple lines instead of
-              truncating with an ellipsis. This shows the full title but may
-              increase the height of the notification list.
+              Wrap long notification titles onto multiple lines instead of truncating with an
+              ellipsis. This shows the full title but may increase the height of the notification
+              list.
             </Text>
           }
         />

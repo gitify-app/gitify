@@ -1,11 +1,6 @@
 import { Constants } from '../../../constants';
 
-import type {
-  Account,
-  Link,
-  RawGitifyNotification,
-  SettingsState,
-} from '../../../types';
+import type { Account, Link, RawGitifyNotification, SettingsState } from '../../../types';
 import type {
   GetCommitCommentResponse,
   GetCommitResponse,
@@ -61,22 +56,7 @@ export async function listNotificationsForAuthenticatedUser(
 
   if (settings.fetchAllNotifications) {
     // Fetch all pages using Octokit's pagination
-    return await octokit.paginate(
-      octokit.rest.activity.listNotificationsForAuthenticatedUser,
-      {
-        participating: settings.participating,
-        all: settings.fetchReadNotifications,
-        per_page: 100,
-        headers: {
-          'Cache-Control': 'no-cache', // Prevent caching
-        },
-      },
-    );
-  }
-
-  // Single page request
-  const response =
-    await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+    return await octokit.paginate(octokit.rest.activity.listNotificationsForAuthenticatedUser, {
       participating: settings.participating,
       all: settings.fetchReadNotifications,
       per_page: 100,
@@ -84,6 +64,17 @@ export async function listNotificationsForAuthenticatedUser(
         'Cache-Control': 'no-cache', // Prevent caching
       },
     });
+  }
+
+  // Single page request
+  const response = await octokit.rest.activity.listNotificationsForAuthenticatedUser({
+    participating: settings.participating,
+    all: settings.fetchReadNotifications,
+    per_page: 100,
+    headers: {
+      'Cache-Control': 'no-cache', // Prevent caching
+    },
+  });
 
   return response.data;
 }
@@ -152,10 +143,7 @@ export async function ignoreNotificationThreadSubscription(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export async function getCommit(
-  account: Account,
-  url: Link,
-): Promise<GetCommitResponse> {
+export async function getCommit(account: Account, url: Link): Promise<GetCommitResponse> {
   return followUrl<GetCommitResponse>(account, url);
 }
 
@@ -176,30 +164,21 @@ export async function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export async function getRelease(
-  account: Account,
-  url: Link,
-): Promise<GetReleaseResponse> {
+export async function getRelease(account: Account, url: Link): Promise<GetReleaseResponse> {
   return followUrl<GetReleaseResponse>(account, url);
 }
 
 /**
  * Get the `html_url` from the GitHub response
  */
-export async function getHtmlUrl(
-  account: Account,
-  url: Link,
-): Promise<GitHubHtmlUrlResponse> {
+export async function getHtmlUrl(account: Account, url: Link): Promise<GitHubHtmlUrlResponse> {
   return followUrl<GitHubHtmlUrlResponse>(account, url);
 }
 
 /**
  * Follow GitHub Response URL
  */
-async function followUrl<TResult>(
-  account: Account,
-  url: Link,
-): Promise<TResult> {
+async function followUrl<TResult>(account: Account, url: Link): Promise<TResult> {
   const octokit = await createOctokitClient(account, 'rest');
 
   // Perform a generic GET request using Octokit's request method and cast the response type
@@ -218,21 +197,15 @@ export async function fetchDiscussionByNumber(
 ): Promise<FetchDiscussionByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
-  return performGraphQLRequest(
-    notification.account,
-    FetchDiscussionByNumberDocument,
-    {
-      owner: notification.repository.owner.login,
-      name: notification.repository.name,
-      number: number,
-      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-      lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
-      lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
-      includeIsAnswered: githubCapabilities.answeredDiscussion(
-        notification.account,
-      ),
-    },
-  );
+  return performGraphQLRequest(notification.account, FetchDiscussionByNumberDocument, {
+    owner: notification.repository.owner.login,
+    name: notification.repository.name,
+    number: number,
+    firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+    lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
+    includeIsAnswered: githubCapabilities.answeredDiscussion(notification.account),
+  });
 }
 
 /**
@@ -243,17 +216,13 @@ export async function fetchIssueByNumber(
 ): Promise<FetchIssueByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
-  return performGraphQLRequest(
-    notification.account,
-    FetchIssueByNumberDocument,
-    {
-      owner: notification.repository.owner.login,
-      name: notification.repository.name,
-      number: number,
-      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
-    },
-  );
+  return performGraphQLRequest(notification.account, FetchIssueByNumberDocument, {
+    owner: notification.repository.owner.login,
+    name: notification.repository.name,
+    number: number,
+    firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+  });
 }
 
 /**
@@ -264,19 +233,15 @@ export async function fetchPullByNumber(
 ): Promise<FetchPullRequestByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
-  return performGraphQLRequest(
-    notification.account,
-    FetchPullRequestByNumberDocument,
-    {
-      owner: notification.repository.owner.login,
-      name: notification.repository.name,
-      number: number,
-      firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
-      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
-      lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
-    },
-  );
+  return performGraphQLRequest(notification.account, FetchPullRequestByNumberDocument, {
+    owner: notification.repository.owner.login,
+    name: notification.repository.name,
+    number: number,
+    firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
+    firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+    lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+  });
 } /**
  * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
 
@@ -285,13 +250,8 @@ export async function fetchPullByNumber(
  */
 export async function fetchNotificationDetailsForList(
   notifications: RawGitifyNotification[],
-): Promise<
-  Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
-> {
-  const results = new Map<
-    RawGitifyNotification,
-    FetchMergedDetailsTemplateQuery['repository']
-  >();
+): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
+  const results = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
 
   if (!notifications.length) {
     return results;
@@ -327,9 +287,7 @@ export async function fetchNotificationDetailsForList(
   }
 
   builder.setSharedVariables({
-    includeIsAnswered: githubCapabilities.answeredDiscussion(
-      notifications[0].account,
-    ),
+    includeIsAnswered: githubCapabilities.answeredDiscussion(notifications[0].account),
     firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
@@ -341,11 +299,7 @@ export async function fetchNotificationDetailsForList(
   const query = builder.getGraphQLQuery();
   const variables = builder.getGraphQLVariables();
 
-  const response = await performGraphQLRequestString(
-    notifications[0].account,
-    query,
-    variables,
-  );
+  const response = await performGraphQLRequestString(notifications[0].account, query, variables);
 
   for (const [alias, notification] of aliasToNotification) {
     const repoData = (response as Record<string, unknown>)[alias] as
@@ -354,9 +308,7 @@ export async function fetchNotificationDetailsForList(
     if (!repoData) {
       continue; // Skip if no data for this alias
     }
-    const fragment = Object.values(
-      repoData,
-    )[0] as FetchMergedDetailsTemplateQuery['repository'];
+    const fragment = Object.values(repoData)[0] as FetchMergedDetailsTemplateQuery['repository'];
     results.set(notification, fragment);
   }
 

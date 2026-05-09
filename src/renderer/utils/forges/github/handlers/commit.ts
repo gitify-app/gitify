@@ -44,10 +44,7 @@ class CommitHandler extends DefaultHandler {
         type: commitComment.user!.type as GitifyNotificationUser['type'],
       };
     } else {
-      const commit = await getCommit(
-        notification.account,
-        notification.subject.url!,
-      );
+      const commit = await getCommit(notification.account, notification.subject.url!);
 
       user = {
         login: commit.author!.login,

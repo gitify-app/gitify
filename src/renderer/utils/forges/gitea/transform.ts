@@ -61,10 +61,7 @@ function transformSubject(raw: GiteaNotificationThread): GitifySubject {
   };
 }
 
-function transformRepository(
-  raw: GiteaNotificationThread,
-  account: Account,
-): GitifyRepository {
+function transformRepository(raw: GiteaNotificationThread, account: Account): GitifyRepository {
   if (!raw.repository) {
     return {
       name: 'unknown',

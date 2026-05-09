@@ -10,9 +10,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
   const resetSettingsMock = vi.fn();
 
   it('should reset default settings when `OK`', async () => {
-    const rendererLogInfoSpy = vi
-      .spyOn(logger, 'rendererLogInfo')
-      .mockImplementation(vi.fn());
+    const rendererLogInfoSpy = vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
 
     globalThis.confirm = vi.fn(() => true); // always click 'OK'
 

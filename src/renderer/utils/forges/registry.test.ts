@@ -1,16 +1,8 @@
-import {
-  mockGiteaAccount,
-  mockGitHubCloudAccount,
-} from '../../__mocks__/account-mocks';
+import { mockGiteaAccount, mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 
 import type { Account, Forge } from '../../types';
 
-import {
-  getAdapter,
-  isKnownForge,
-  KNOWN_FORGES,
-  listAdapters,
-} from './registry';
+import { getAdapter, isKnownForge, KNOWN_FORGES, listAdapters } from './registry';
 
 describe('renderer/utils/forges/registry.ts', () => {
   describe('getAdapter', () => {
@@ -36,9 +28,7 @@ describe('renderer/utils/forges/registry.ts', () => {
     });
 
     it('throws for an unknown forge id', () => {
-      expect(() => getAdapter('mystery' as Forge)).toThrow(
-        /No forge adapter registered/,
-      );
+      expect(() => getAdapter('mystery' as Forge)).toThrow(/No forge adapter registered/);
     });
   });
 

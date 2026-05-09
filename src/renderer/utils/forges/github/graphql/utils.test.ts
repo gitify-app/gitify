@@ -14,9 +14,7 @@ import {
 describe('renderer/utils/forges/github/graphql/utils.ts', () => {
   describe('getQueryFragmentBody', () => {
     it('should extract query fragments from operation document', () => {
-      const fragments = extractQueryFragments(
-        FetchMergedDetailsTemplateDocument as any,
-      );
+      const fragments = extractQueryFragments(FetchMergedDetailsTemplateDocument as any);
 
       expect(fragments).not.toBeNull();
       expect(fragments.length).toBe(1);
@@ -27,9 +25,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
     });
 
     it('should extract query fragments from fragment document', () => {
-      const fragments = extractQueryFragments(
-        MergedDetailsQueryTemplateFragmentDoc as any,
-      );
+      const fragments = extractQueryFragments(MergedDetailsQueryTemplateFragmentDoc as any);
 
       expect(fragments).not.toBeNull();
       expect(fragments.length).toBe(1);
@@ -48,9 +44,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
 
   describe('extractNonQueryFragments', () => {
     it('should extract non-query fragments from FetchBatchMergedTemplateDocument', () => {
-      const fragments = extractNonQueryFragments(
-        FetchMergedDetailsTemplateDocument as any,
-      );
+      const fragments = extractNonQueryFragments(FetchMergedDetailsTemplateDocument as any);
 
       expect(fragments).not.toBeNull();
       expect(fragments.length).toBe(10);
@@ -71,9 +65,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
 
   describe('extractIndexedVariableDefinitions', () => {
     it('should extract indexed variable definitions from BatchMergedDetailsQueryTemplateFragmentDoc', () => {
-      const varDefs = extractIndexedVariableDefinitions(
-        FetchMergedDetailsTemplateDocument as any,
-      );
+      const varDefs = extractIndexedVariableDefinitions(FetchMergedDetailsTemplateDocument as any);
 
       expect(varDefs).not.toBeNull();
       expect(varDefs.length).toBe(6);

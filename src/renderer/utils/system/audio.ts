@@ -27,11 +27,7 @@ export async function raiseSoundNotification(volume: Percentage) {
   try {
     await audio.play();
   } catch (err) {
-    rendererLogError(
-      'audio',
-      'Failed to play notification sound:',
-      toError(err),
-    );
+    rendererLogError('audio', 'Failed to play notification sound:', toError(err));
     cachedAudio = null;
   }
 }

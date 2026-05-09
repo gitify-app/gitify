@@ -49,32 +49,21 @@ export const stateFilter: Filter<FilterStateType> = {
     return filters.states.includes(stateType);
   },
 
-  getFilterCount(
-    accountNotifications: AccountNotifications[],
-    stateType: FilterStateType,
-  ): number {
+  getFilterCount(accountNotifications: AccountNotifications[], stateType: FilterStateType): number {
     return accountNotifications.reduce(
       (sum, account) =>
-        sum +
-        account.notifications.filter((n) =>
-          this.filterNotification(n, stateType),
-        ).length,
+        sum + account.notifications.filter((n) => this.filterNotification(n, stateType)).length,
       0,
     );
   },
 
-  filterNotification(
-    notification: RawGitifyNotification,
-    stateType: FilterStateType,
-  ): boolean {
+  filterNotification(notification: RawGitifyNotification, stateType: FilterStateType): boolean {
     const mapped = mapStateToFilter(notification.subject?.state);
     return stateType === mapped;
   },
 };
 
-function mapStateToFilter(
-  state: GitifyNotificationState | null | undefined,
-): FilterStateType {
+function mapStateToFilter(state: GitifyNotificationState | null | undefined): FilterStateType {
   switch (state) {
     case 'OPEN':
     case 'REOPENED':

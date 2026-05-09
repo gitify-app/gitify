@@ -74,9 +74,7 @@ export function getWorkflowRunAttributes(
   };
 }
 
-function getWorkflowRunStatus(
-  statusDisplayName: string,
-): GitifyCheckSuiteStatus | undefined {
+function getWorkflowRunStatus(statusDisplayName: string): GitifyCheckSuiteStatus | undefined {
   switch (statusDisplayName) {
     case 'review':
       return 'WAITING';

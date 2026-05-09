@@ -1,8 +1,4 @@
-import type {
-  AccountNotifications,
-  RawGitifyNotification,
-  TypeDetails,
-} from '../../../types';
+import type { AccountNotifications, RawGitifyNotification, TypeDetails } from '../../../types';
 
 export interface Filter<T extends string> {
   FILTER_TYPES: Record<T, TypeDetails>;

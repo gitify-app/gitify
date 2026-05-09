@@ -1,10 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import {
-  navigateMock,
-  renderWithProviders,
-} from '../../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 
 import * as comms from '../../utils/system/comms';
 import { SettingsFooter } from './SettingsFooter';
@@ -31,9 +28,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
   });
 
   it('should open release notes', async () => {
-    const openExternalLinkSpy = vi
-      .spyOn(comms, 'openExternalLink')
-      .mockImplementation(vi.fn());
+    const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     await act(async () => {
       renderWithProviders(<SettingsFooter />, {

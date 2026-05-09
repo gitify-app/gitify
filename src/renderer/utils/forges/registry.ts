@@ -16,9 +16,7 @@ const ADAPTERS: Record<Forge, ForgeAdapter> = {
 };
 
 /** Single source of truth for the runtime set of registered forges. */
-export const KNOWN_FORGES: ReadonlySet<Forge> = new Set(
-  Object.keys(ADAPTERS) as Forge[],
-);
+export const KNOWN_FORGES: ReadonlySet<Forge> = new Set(Object.keys(ADAPTERS) as Forge[]);
 
 /** Type guard for unknown JSON values (e.g. persisted account state). */
 export function isKnownForge(forge: unknown): forge is Forge {
@@ -33,8 +31,7 @@ export function isKnownForge(forge: unknown): forge is Forge {
  * error rather than crashing on a property access.
  */
 export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
-  const id =
-    typeof forgeOrAccount === 'string' ? forgeOrAccount : forgeOrAccount.forge;
+  const id = typeof forgeOrAccount === 'string' ? forgeOrAccount : forgeOrAccount.forge;
   const adapter = ADAPTERS[id];
   if (!adapter) {
     throw new Error(`No forge adapter registered for "${id}"`);

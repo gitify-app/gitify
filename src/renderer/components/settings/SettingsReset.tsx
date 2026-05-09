@@ -14,8 +14,7 @@ export const SettingsReset: FC = () => {
   const handleReset = async () => {
     const confirmed = await confirm({
       title: 'Reset settings?',
-      content:
-        'Please confirm that you want to reset all settings to the Gitify defaults',
+      content: 'Please confirm that you want to reset all settings to the Gitify defaults',
 
       confirmButtonContent: 'Reset',
       cancelButtonContent: 'Cancel',

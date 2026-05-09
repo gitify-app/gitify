@@ -1,8 +1,8 @@
 /** Tailwind CSS */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /** GitHub Primer Design System */
-@import "@primer/css/dist/primer.css";
+@import '@primer/css/dist/primer.css';
 
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
@@ -34,8 +34,8 @@ body,
 
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
   cursor: default;
 }

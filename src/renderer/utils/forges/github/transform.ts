@@ -68,9 +68,7 @@ function transformReason(raw: RawGitHubNotification['reason']): GitifyReason {
   };
 }
 
-function transformSubject(
-  raw: RawGitHubNotification['subject'],
-): GitifySubject {
+function transformSubject(raw: RawGitHubNotification['subject']): GitifySubject {
   return {
     title: raw.title,
     type: raw.type as SubjectType,
@@ -81,9 +79,7 @@ function transformSubject(
   };
 }
 
-function transformRepository(
-  raw: RawGitHubNotification['repository'],
-): GitifyRepository {
+function transformRepository(raw: RawGitHubNotification['repository']): GitifyRepository {
   return {
     name: raw.name,
     fullName: raw.full_name,

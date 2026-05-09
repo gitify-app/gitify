@@ -30,9 +30,7 @@ describe('renderer/components/Oops.tsx', () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
-      tree = renderWithProviders(
-        <Oops error={null as unknown as GitifyError} />,
-      );
+      tree = renderWithProviders(<Oops error={null as unknown as GitifyError} />);
     });
 
     expect(tree!.container).toMatchSnapshot();

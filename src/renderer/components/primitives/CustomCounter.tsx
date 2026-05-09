@@ -19,10 +19,7 @@ interface CustomCounterProps {
  * - would show screen vertical scrollbar which is undesirable.
  * - would not render '0' within a counter.
  */
-export const CustomCounter: FC<CustomCounterProps> = ({
-  value,
-  scheme = 'secondary',
-}) => {
+export const CustomCounter: FC<CustomCounterProps> = ({ value, scheme = 'secondary' }) => {
   const baseStyles =
     'px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
 

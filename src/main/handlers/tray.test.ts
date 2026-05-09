@@ -37,9 +37,7 @@ describe('main/handlers/tray.ts', () => {
     it('registers expected tray IPC event handlers', () => {
       registerTrayHandlers(menubar);
 
-      const registeredEvents = onMock.mock.calls.map(
-        (call: unknown[]) => call[0],
-      );
+      const registeredEvents = onMock.mock.calls.map((call: unknown[]) => call[0]);
 
       expect(registeredEvents).toContain(EVENTS.USE_ALTERNATE_IDLE_ICON);
       expect(registeredEvents).toContain(EVENTS.USE_UNREAD_ACTIVE_ICON);
@@ -49,9 +47,7 @@ describe('main/handlers/tray.ts', () => {
   });
 
   it('skips tray updates when tray is destroyed', () => {
-    (menubar.tray.isDestroyed as ReturnType<typeof vi.fn>).mockReturnValue(
-      true,
-    );
+    (menubar.tray.isDestroyed as ReturnType<typeof vi.fn>).mockReturnValue(true);
     registerTrayHandlers(menubar);
 
     const updateColorHandler = onMock.mock.calls.find(

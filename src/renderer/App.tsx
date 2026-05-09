@@ -1,10 +1,4 @@
-import {
-  Navigate,
-  Route,
-  HashRouter as Router,
-  Routes,
-  useLocation,
-} from 'react-router-dom';
+import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
@@ -31,11 +25,7 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 
   const { isLoggedIn } = useAppContext();
 
-  return isLoggedIn ? (
-    children
-  ) : (
-    <Navigate replace state={{ from: location }} to="/login" />
-  );
+  return isLoggedIn ? children : <Navigate replace state={{ from: location }} to="/login" />;
 }
 
 export const App = () => {
@@ -88,18 +78,12 @@ export const App = () => {
                   path="/account-scopes"
                 />
                 <Route element={<LoginRoute />} path="/login" />
-                <Route
-                  element={<LoginWithDeviceFlowRoute />}
-                  path="/login-device-flow"
-                />
+                <Route element={<LoginWithDeviceFlowRoute />} path="/login-device-flow" />
                 <Route
                   element={<LoginWithPersonalAccessTokenRoute />}
                   path="/login-personal-access-token"
                 />
-                <Route
-                  element={<LoginWithOAuthAppRoute />}
-                  path="/login-oauth-app"
-                />
+                <Route element={<LoginWithOAuthAppRoute />} path="/login-oauth-app" />
               </Routes>
             </AppLayout>
           </Router>

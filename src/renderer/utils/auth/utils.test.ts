@@ -4,14 +4,7 @@ import { mockRawUser } from '../forges/github/__mocks__/response-mocks';
 
 import { Constants } from '../../constants';
 
-import type {
-  Account,
-  AuthState,
-  ClientID,
-  Hostname,
-  Link,
-  Token,
-} from '../../types';
+import type { Account, AuthState, ClientID, Hostname, Link, Token } from '../../types';
 import type { GetAuthenticatedUserResponse } from '../forges/github/types';
 import type { AuthMethod } from './types';
 
@@ -19,11 +12,7 @@ import * as logger from '../core/logger';
 import * as apiClient from '../forges/github/client';
 import { getRecommendedScopeNames } from './scopes';
 import * as authUtils from './utils';
-import {
-  getGitHubAuthBaseUrl,
-  getNewOAuthAppURL,
-  getNewTokenURL,
-} from './utils';
+import { getGitHubAuthBaseUrl, getNewOAuthAppURL, getNewTokenURL } from './utils';
 
 describe('renderer/utils/auth/utils.ts', () => {
   vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
@@ -38,10 +27,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     const mockAuthenticatedResponse = mockRawUser('authenticated-user');
 
-    const fetchAuthenticatedUserDetailsSpy = vi.spyOn(
-      apiClient,
-      'fetchAuthenticatedUserDetails',
-    );
+    const fetchAuthenticatedUserDetailsSpy = vi.spyOn(apiClient, 'fetchAuthenticatedUserDetails');
 
     beforeEach(() => {
       mockAuthState = {
@@ -222,17 +208,11 @@ describe('renderer/utils/auth/utils.ts', () => {
 
     expect(authUtils.extractHostVersion('enterprise-server@3')).toBe('3.0.0');
 
-    expect(authUtils.extractHostVersion('enterprise-server@3.15')).toBe(
-      '3.15.0',
-    );
+    expect(authUtils.extractHostVersion('enterprise-server@3.15')).toBe('3.15.0');
 
-    expect(authUtils.extractHostVersion('enterprise-server@3.15.0')).toBe(
-      '3.15.0',
-    );
+    expect(authUtils.extractHostVersion('enterprise-server@3.15.0')).toBe('3.15.0');
 
-    expect(authUtils.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe(
-      '3.15.0',
-    );
+    expect(authUtils.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe('3.15.0');
   });
 
   describe('getGitHubAuthBaseUrl', () => {
@@ -258,9 +238,7 @@ describe('renderer/utils/auth/utils.ts', () => {
         hostname: 'github.com' as Hostname,
         method: 'GitHub App',
       } as Account),
-    ).toBe(
-      'https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123',
-    );
+    ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
 
     expect(
       authUtils.getDeveloperSettingsURL({
@@ -326,9 +304,7 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should validate hostname - github enterprise server', () => {
-      expect(
-        authUtils.isValidHostname('github.gitify.io' as Hostname),
-      ).toBeTruthy();
+      expect(authUtils.isValidHostname('github.gitify.io' as Hostname)).toBeTruthy();
     });
 
     it('should invalidate hostname - empty', () => {
@@ -342,9 +318,7 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('isValidClientId', () => {
     it('should validate client id - valid', () => {
-      expect(
-        authUtils.isValidClientId('1234567890_ASDFGHJKL' as ClientID),
-      ).toBeTruthy();
+      expect(authUtils.isValidClientId('1234567890_ASDFGHJKL' as ClientID)).toBeTruthy();
     });
 
     it('should validate client id - empty', () => {
@@ -352,18 +326,14 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
 
     it('should validate client id - invalid', () => {
-      expect(
-        authUtils.isValidClientId('1234567890asdfg' as ClientID),
-      ).toBeFalsy();
+      expect(authUtils.isValidClientId('1234567890asdfg' as ClientID)).toBeFalsy();
     });
   });
 
   describe('isValidToken', () => {
     it('should validate token - valid', () => {
       expect(
-        authUtils.isValidToken(
-          '1234567890_asdfghjklPOIUYTREWQ0987654321' as Token,
-        ),
+        authUtils.isValidToken('1234567890_asdfghjklPOIUYTREWQ0987654321' as Token),
       ).toBeTruthy();
     });
 
@@ -386,15 +356,11 @@ describe('renderer/utils/auth/utils.ts', () => {
 
   describe('getPrimaryAccountHostname', () => {
     it('should return first (primary) account hostname when multiple', () => {
-      expect(authUtils.getPrimaryAccountHostname(mockAuth)).toBe(
-        mockGitHubCloudAccount.hostname,
-      );
+      expect(authUtils.getPrimaryAccountHostname(mockAuth)).toBe(mockGitHubCloudAccount.hostname);
     });
 
     it('should use default hostname if no accounts', () => {
-      expect(authUtils.getPrimaryAccountHostname({ accounts: [] })).toBe(
-        Constants.GITHUB_HOSTNAME,
-      );
+      expect(authUtils.getPrimaryAccountHostname({ accounts: [] })).toBe(Constants.GITHUB_HOSTNAME);
     });
   });
 

@@ -13,10 +13,7 @@ interface HoverGroupProps {
     | 'group-hover:bg-gitify-notification-hover';
 }
 
-export const HoverGroup: FC<HoverGroupProps> = ({
-  bgColor,
-  children,
-}: HoverGroupProps) => {
+export const HoverGroup: FC<HoverGroupProps> = ({ bgColor, children }: HoverGroupProps) => {
   return (
     <Stack
       align="center"

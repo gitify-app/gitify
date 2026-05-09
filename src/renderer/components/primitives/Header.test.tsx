@@ -3,10 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 
-import {
-  navigateMock,
-  renderWithProviders,
-} from '../../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 
 import { Header } from './Header';
 
@@ -14,9 +11,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotificationsMock = vi.fn();
 
   it('should render itself & its children', () => {
-    const tree = renderWithProviders(
-      <Header icon={MarkGithubIcon}>Test Header</Header>,
-    );
+    const tree = renderWithProviders(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     expect(tree.container).toMatchSnapshot();
   });

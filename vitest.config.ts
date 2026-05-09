@@ -35,10 +35,7 @@ export default defineConfig({
           name: 'happy-dom [preload, renderer]',
           environment: 'happy-dom',
           css: true,
-          include: [
-            'src/preload/**/*.test.{ts,tsx}',
-            'src/renderer/**/*.test.{ts,tsx}',
-          ],
+          include: ['src/preload/**/*.test.{ts,tsx}', 'src/renderer/**/*.test.{ts,tsx}'],
           setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
         },
       },
@@ -48,10 +45,7 @@ export default defineConfig({
         test: {
           name: 'node [main, shared]',
           environment: 'node',
-          include: [
-            'src/shared/**/*.test.{ts,tsx}',
-            'src/main/**/*.test.{ts,tsx}',
-          ],
+          include: ['src/shared/**/*.test.{ts,tsx}', 'src/main/**/*.test.{ts,tsx}'],
         },
       },
     ],

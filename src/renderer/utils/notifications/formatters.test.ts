@@ -20,12 +20,8 @@ describe('renderer/utils/notifications/formatters.ts', () => {
     expect(formatForDisplay(null as unknown as string[])).toBe('');
     expect(formatForDisplay([])).toBe('');
     expect(formatForDisplay(['open', 'PullRequest'])).toBe('Open Pull Request');
-    expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
-      'Outdated Discussion',
-    );
-    expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
-      'Not Planned Issue',
-    );
+    expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe('Outdated Discussion');
+    expect(formatForDisplay(['not_planned', 'Issue'])).toBe('Not Planned Issue');
   });
 
   describe('formattedNotificationType', () => {
@@ -98,9 +94,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
 
   describe('formatMetricDescription', () => {
     it('return empty if no count', () => {
-      expect(formatMetricDescription(null as unknown as number, 'bee')).toBe(
-        '',
-      );
+      expect(formatMetricDescription(null as unknown as number, 'bee')).toBe('');
     });
 
     it('return singular if count is 1', () => {

@@ -58,9 +58,5 @@ function buildContexts(notification?: RawGitifyNotification): string[] {
     return [];
   }
 
-  return [
-    notification.subject.type,
-    notification.repository.fullName,
-    notification.subject.title,
-  ];
+  return [notification.subject.type, notification.repository.fullName, notification.subject.title];
 }

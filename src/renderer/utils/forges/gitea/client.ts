@@ -30,11 +30,7 @@ function apiError(status: number, statusText: string): Error {
   return new Error(`Gitea API ${status} ${statusText}`);
 }
 
-async function giteaRequest<T>(
-  account: Account,
-  pathname: string,
-  init?: RequestInit,
-): Promise<T> {
+async function giteaRequest<T>(account: Account, pathname: string, init?: RequestInit): Promise<T> {
   const base = getGiteaApiBaseUrl(account.hostname);
   const url = new URL(pathname.replace(/^\//, ''), base);
 
@@ -61,9 +57,7 @@ function buildNotificationQuery(settings: SettingsState): string {
   const params = new URLSearchParams();
   params.set('limit', String(PAGE_SIZE));
 
-  const statusTypes = settings.fetchReadNotifications
-    ? ['unread', 'read']
-    : ['unread'];
+  const statusTypes = settings.fetchReadNotifications ? ['unread', 'read'] : ['unread'];
 
   for (const status of statusTypes) {
     params.append('status-types', status);
@@ -79,10 +73,7 @@ export async function listGiteaNotifications(
   const query = buildNotificationQuery(settings);
 
   if (!settings.fetchAllNotifications) {
-    return giteaRequest<GiteaNotificationThread[]>(
-      account,
-      `notifications?${query}&page=1`,
-    );
+    return giteaRequest<GiteaNotificationThread[]>(account, `notifications?${query}&page=1`);
   }
 
   const all: GiteaNotificationThread[] = [];
@@ -106,9 +97,7 @@ export async function listGiteaNotifications(
   return all;
 }
 
-export function fetchGiteaAuthenticatedUser(
-  account: Account,
-): Promise<GiteaUser> {
+export function fetchGiteaAuthenticatedUser(account: Account): Promise<GiteaUser> {
   return giteaRequest<GiteaUser>(account, 'user');
 }
 
@@ -118,11 +107,9 @@ export async function patchGiteaNotificationThread(
   toStatus: 'read' | 'unread' | 'pinned' = 'read',
 ): Promise<void> {
   const params = new URLSearchParams({ 'to-status': toStatus });
-  await giteaRequest<void>(
-    account,
-    `notifications/threads/${threadId}?${params.toString()}`,
-    { method: 'PATCH' },
-  );
+  await giteaRequest<void>(account, `notifications/threads/${threadId}?${params.toString()}`, {
+    method: 'PATCH',
+  });
 }
 
 /**
@@ -130,10 +117,7 @@ export async function patchGiteaNotificationThread(
  * `latest_comment_url`). The URL must point at the same origin as the
  * authenticated account — we never send the PAT to a different host.
  */
-export async function giteaGetJson<T>(
-  account: Account,
-  url: string,
-): Promise<T> {
+export async function giteaGetJson<T>(account: Account, url: string): Promise<T> {
   const expected = getGiteaApiBaseUrl(account.hostname);
   let parsed: URL;
   try {

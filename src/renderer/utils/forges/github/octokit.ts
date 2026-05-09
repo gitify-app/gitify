@@ -13,11 +13,7 @@ import { decryptValue, getAppVersion } from '../../system/comms';
 import { getGitHubAPIBaseUrl } from './utils';
 
 // Create the Octokit type with plugins
-const OctokitWithPlugins = Octokit.plugin(
-  paginateRest,
-  restEndpointMethods,
-  retry,
-);
+const OctokitWithPlugins = Octokit.plugin(paginateRest, restEndpointMethods, retry);
 export type OctokitClient = InstanceType<typeof OctokitWithPlugins>;
 
 // Cache Octokit clients per account UUID + type (rest|graphql)
@@ -85,9 +81,7 @@ export async function createOctokitClientUncached(
   const version = await getAppVersion();
   const userAgent = `${APPLICATION.NAME}/${version}`;
 
-  const baseUrl = getGitHubAPIBaseUrl(account.hostname, type)
-    .toString()
-    .replace(/\/$/, '');
+  const baseUrl = getGitHubAPIBaseUrl(account.hostname, type).toString().replace(/\/$/, '');
 
   return new OctokitWithPlugins({
     auth: decryptedToken,

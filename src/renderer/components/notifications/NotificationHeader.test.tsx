@@ -8,10 +8,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
 
 import * as comms from '../../utils/system/comms';
-import {
-  NotificationHeader,
-  type NotificationHeaderProps,
-} from './NotificationHeader';
+import { NotificationHeader, type NotificationHeaderProps } from './NotificationHeader';
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   it('should render itself & its children - group by repositories', async () => {
@@ -72,9 +69,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   });
 
   it('should open notification user profile - group by date', async () => {
-    const openExternalLinkSpy = vi
-      .spyOn(comms, 'openExternalLink')
-      .mockImplementation(vi.fn());
+    const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     const props: NotificationHeaderProps = {
       notification: mockGitifyNotification,
@@ -87,8 +82,6 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     await userEvent.click(screen.getByTestId('view-repository'));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      props.notification.repository.htmlUrl,
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(props.notification.repository.htmlUrl);
   });
 });

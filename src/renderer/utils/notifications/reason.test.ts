@@ -19,8 +19,6 @@ describe('renderer/utils/notifications/reason.ts', () => {
     expect(getReasonDetails('state_change')).toMatchSnapshot();
     expect(getReasonDetails('subscribed')).toMatchSnapshot();
     expect(getReasonDetails('team_mention')).toMatchSnapshot();
-    expect(
-      getReasonDetails('something_else_unknown' as Reason),
-    ).toMatchSnapshot();
+    expect(getReasonDetails('something_else_unknown' as Reason)).toMatchSnapshot();
   });
 });

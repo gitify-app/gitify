@@ -120,10 +120,7 @@ export interface ForgeAdapter {
    * Returns `RawGitifyNotification[]` — `display` is populated later by the
    * orchestrator's `formatNotification` step.
    */
-  listNotifications(
-    account: Account,
-    settings: SettingsState,
-  ): Promise<RawGitifyNotification[]>;
+  listNotifications(account: Account, settings: SettingsState): Promise<RawGitifyNotification[]>;
 
   markThreadAsRead(account: Account, threadId: string): Promise<void>;
   markThreadAsDone(account: Account, threadId: string): Promise<void>;
@@ -154,9 +151,7 @@ export interface ForgeAdapter {
    * type) for a notification. Adapter-internal dispatch keeps shared
    * formatting code (`formatters.ts`, `url.ts`) forge-agnostic.
    */
-  getDisplayHelpers(
-    notification: RawGitifyNotification,
-  ): NotificationDisplayHelpers;
+  getDisplayHelpers(notification: RawGitifyNotification): NotificationDisplayHelpers;
 
   // --- Login & token UX ---
 

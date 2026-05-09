@@ -39,17 +39,13 @@ describe('renderer/utils/api/errors.ts', () => {
       });
 
       it('missing scopes - 403 with scope message', () => {
-        const mockError = new RequestError(
-          "Missing the 'notifications' scope",
-          403,
-          {
-            request: {
-              method: 'GET',
-              url: 'https://api.github.com',
-              headers: {},
-            },
+        const mockError = new RequestError("Missing the 'notifications' scope", 403, {
+          request: {
+            method: 'GET',
+            url: 'https://api.github.com',
+            headers: {},
           },
-        );
+        });
         const result = determineFailureType(mockError);
         expect(result).toBe(Errors.MISSING_SCOPES);
       });
@@ -67,17 +63,13 @@ describe('renderer/utils/api/errors.ts', () => {
       });
 
       it('rate limited - secondary rate limit', () => {
-        const mockError = new RequestError(
-          'You have exceeded a secondary rate limit',
-          403,
-          {
-            request: {
-              method: 'GET',
-              url: 'https://api.github.com',
-              headers: {},
-            },
+        const mockError = new RequestError('You have exceeded a secondary rate limit', 403, {
+          request: {
+            method: 'GET',
+            url: 'https://api.github.com',
+            headers: {},
           },
-        );
+        });
         const result = determineFailureType(mockError);
         expect(result).toBe(Errors.RATE_LIMITED);
       });
@@ -121,9 +113,7 @@ describe('renderer/utils/api/errors.ts', () => {
       });
 
       it('rate limited - secondary rate limit', () => {
-        const mockError = createGraphQLResponseError(
-          'You have exceeded a secondary rate limit',
-        );
+        const mockError = createGraphQLResponseError('You have exceeded a secondary rate limit');
         const result = determineFailureType(mockError);
         expect(result).toBe(Errors.RATE_LIMITED);
       });
@@ -165,10 +155,9 @@ describe('renderer/utils/api/errors.ts', () => {
         {},
         {
           data: {},
-          errors: [
-            { message: 'Error 1' },
-            { message: 'Error 2' },
-          ] as unknown as NonNullable<GraphqlResponseError<unknown>['errors']>,
+          errors: [{ message: 'Error 1' }, { message: 'Error 2' }] as unknown as NonNullable<
+            GraphqlResponseError<unknown>['errors']
+          >,
         },
       );
 
@@ -179,9 +168,7 @@ describe('renderer/utils/api/errors.ts', () => {
   });
 });
 
-function createGraphQLResponseError(
-  message: string,
-): GraphqlResponseError<unknown> {
+function createGraphQLResponseError(message: string): GraphqlResponseError<unknown> {
   return new GraphqlResponseError(
     {
       method: 'POST',
@@ -191,9 +178,7 @@ function createGraphQLResponseError(
     {},
     {
       data: {},
-      errors: [{ message }] as unknown as NonNullable<
-        GraphqlResponseError<unknown>['errors']
-      >,
+      errors: [{ message }] as unknown as NonNullable<GraphqlResponseError<unknown>['errors']>,
     },
   );
 }

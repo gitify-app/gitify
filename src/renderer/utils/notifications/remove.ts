@@ -1,9 +1,4 @@
-import type {
-  Account,
-  AccountNotifications,
-  GitifyNotification,
-  SettingsState,
-} from '../../types';
+import type { Account, AccountNotifications, GitifyNotification, SettingsState } from '../../types';
 
 import { getAccountUUID } from '../auth/utils';
 
@@ -13,9 +8,7 @@ import { getAccountUUID } from '../auth/utils';
  * When `delayNotificationState` or `fetchReadNotifications` is enabled,
  * notifications stay in the list with reduced opacity instead of being removed.
  */
-export function shouldRemoveNotificationsFromState(
-  settings: SettingsState,
-): boolean {
+export function shouldRemoveNotificationsFromState(settings: SettingsState): boolean {
   return !settings.delayNotificationState && !settings.fetchReadNotifications;
 }
 

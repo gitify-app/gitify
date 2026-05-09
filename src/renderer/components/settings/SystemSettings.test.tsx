@@ -44,8 +44,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       updateSetting: updateSettingMock,
       settings: {
         ...mockSettings,
-        openGitifyShortcut:
-          'CommandOrControl+Shift+X' as KeyboardAcceleratorShortcut,
+        openGitifyShortcut: 'CommandOrControl+Shift+X' as KeyboardAcceleratorShortcut,
       },
     });
 
@@ -147,9 +146,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
         'CommandOrControl+Shift+G',
       );
       // Recording mode should exit
-      expect(
-        screen.queryByText('Click outside this area to cancel.'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText('Click outside this area to cancel.')).not.toBeInTheDocument();
     });
 
     it('should cancel recording when clicking outside the shortcut area', async () => {
@@ -164,9 +161,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       // Click somewhere outside the shortcut row
       await userEvent.click(document.body);
 
-      expect(
-        screen.queryByText('Click outside this area to cancel.'),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText('Click outside this area to cancel.')).not.toBeInTheDocument();
     });
   });
 

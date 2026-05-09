@@ -7,9 +7,7 @@ export const mockGitifyUser: GitifyUser = {
   avatar: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
 };
 
-export function mockGitifyNotificationUser(
-  login: string,
-): GitifyNotificationUser {
+export function mockGitifyNotificationUser(login: string): GitifyNotificationUser {
   return {
     login: login,
     htmlUrl: `https://github.com/${login}` as Link,

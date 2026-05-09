@@ -8,23 +8,14 @@ import { useAppContext } from '../../hooks/useAppContext';
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 
-import {
-  type Account,
-  type GitifyError,
-  type GitifyNotification,
-  Size,
-} from '../../types';
+import { type Account, type GitifyError, type GitifyNotification, Size } from '../../types';
 
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   groupNotificationsByRepository,
   isGroupByRepository,
 } from '../../utils/notifications/group';
-import {
-  openAccountProfile,
-  openGitHubIssues,
-  openGitHubPulls,
-} from '../../utils/system/links';
+import { openAccountProfile, openGitHubIssues, openGitHubPulls } from '../../utils/system/links';
 import { cn } from '../../utils/ui/cn';
 import { getChevronDetails } from '../../utils/ui/display';
 import { AllRead } from '../AllRead';
@@ -47,8 +38,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 
   const { auth, settings } = useAppContext();
 
-  const [isAccountNotificationsVisible, setIsAccountNotificationsVisible] =
-    useState(true);
+  const [isAccountNotificationsVisible, setIsAccountNotificationsVisible] = useState(true);
 
   const sortedNotifications = useMemo(
     () => [...notifications].sort((a, b) => a.order - b.order),
@@ -61,20 +51,13 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
     return Array.from(map.entries());
   }, [sortedNotifications]);
 
-  const hasNotifications = useMemo(
-    () => notifications.length > 0,
-    [notifications],
-  );
+  const hasNotifications = useMemo(() => notifications.length > 0, [notifications]);
 
   const actionToggleAccountNotifications = () => {
     setIsAccountNotificationsVisible(!isAccountNotificationsVisible);
   };
 
-  const Chevron = getChevronDetails(
-    hasNotifications,
-    isAccountNotificationsVisible,
-    'account',
-  );
+  const Chevron = getChevronDetails(hasNotifications, isAccountNotificationsVisible, 'account');
 
   return (
     <>
@@ -140,9 +123,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 
       {isAccountNotificationsVisible && (
         <>
-          {props.error && (
-            <Oops error={props.error} fullHeight={!hasMultipleAccounts(auth)} />
-          )}
+          {props.error && <Oops error={props.error} fullHeight={!hasMultipleAccounts(auth)} />}
 
           {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
 

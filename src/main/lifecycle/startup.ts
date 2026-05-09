@@ -54,11 +54,7 @@ export function initializeAppLifecycle(
  * @param url - The protocol URL to handle.
  * @param protocol - The custom protocol string to match.
  */
-export function handleProtocolURL(
-  mb: Menubar,
-  url: string,
-  protocol: string,
-): void {
+export function handleProtocolURL(mb: Menubar, url: string, protocol: string): void {
   if (url.startsWith(`${protocol}://`)) {
     logInfo('main:handleUrl', `forwarding URL ${url} to renderer process`);
     sendRendererEvent(mb, EVENTS.AUTH_CALLBACK, url);
@@ -82,10 +78,7 @@ function preventSecondInstance(mb: Menubar, protocol: string): void {
   }
 
   app.on('second-instance', (_event, commandLine) => {
-    logInfo(
-      'main:second-instance',
-      'Second instance was launched. Extracting command to forward',
-    );
+    logInfo('main:second-instance', 'Second instance was launched. Extracting command to forward');
 
     const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
 

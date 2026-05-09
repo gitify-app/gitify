@@ -10,14 +10,11 @@ describe('renderer/utils/notifications/handlers/repositoryAdvisory.ts', () => {
       type: 'RepositoryAdvisory',
     });
 
-    expect(
-      repositoryAdvisoryHandler.iconType(mockNotification).displayName,
-    ).toBe('AlertIcon');
+    expect(repositoryAdvisoryHandler.iconType(mockNotification).displayName).toBe('AlertIcon');
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       repositoryAdvisoryHandler.defaultUrl({

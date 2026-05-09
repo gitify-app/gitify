@@ -10,9 +10,7 @@ describe('renderer/components/layout/EmojiSplash.tsx', () => {
 
     await act(async () => {
       tree = await act(async () => {
-        return renderWithProviders(
-          <EmojiSplash emoji="🍺" heading="Test Heading" />,
-        );
+        return renderWithProviders(<EmojiSplash emoji="🍺" heading="Test Heading" />);
       });
     });
 
@@ -25,11 +23,7 @@ describe('renderer/components/layout/EmojiSplash.tsx', () => {
     await act(async () => {
       tree = await act(async () => {
         return renderWithProviders(
-          <EmojiSplash
-            emoji="🍺"
-            heading="Test Heading"
-            subHeadings={['Test Sub-Heading']}
-          />,
+          <EmojiSplash emoji="🍺" heading="Test Heading" subHeadings={['Test Sub-Heading']} />,
         );
       });
     });

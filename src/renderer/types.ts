@@ -56,10 +56,7 @@ export type Percentage = Branded<number, 'Percentage'>;
 
 export type AccountUUID = Branded<string, 'AccountUUID'>;
 
-export type KeyboardAcceleratorShortcut = Branded<
-  string,
-  'KeyboardAcceleratorShortcut'
->;
+export type KeyboardAcceleratorShortcut = Branded<string, 'KeyboardAcceleratorShortcut'>;
 
 /** Code hosting provider for an account. New forges register themselves here. */
 export type Forge = 'github' | 'gitea';
@@ -544,9 +541,4 @@ export type SubjectType =
   | 'RepositoryVulnerabilityAlert'
   | 'WorkflowRun';
 
-export type UserType =
-  | 'Bot'
-  | 'EnterpriseUserAccount'
-  | 'Mannequin'
-  | 'Organization'
-  | 'User';
+export type UserType = 'Bot' | 'EnterpriseUserAccount' | 'Mannequin' | 'Organization' | 'User';

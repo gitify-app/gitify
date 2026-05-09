@@ -2,11 +2,7 @@ import { mockPartialGitifyNotification } from '../../../../__mocks__/notificatio
 import { mockSettings } from '../../../../__mocks__/state-mocks';
 
 import type { GitifyNotification } from '../../../../types';
-import {
-  type GitifyNotificationState,
-  IconColor,
-  type Link,
-} from '../../../../types';
+import { type GitifyNotificationState, IconColor, type Link } from '../../../../types';
 
 import { defaultHandler } from './default';
 
@@ -20,15 +16,11 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   describe('enrich', () => {
     it('unhandled subject details', async () => {
       const mockNotification = mockPartialGitifyNotification({
-        title:
-          'There is no special subject handling for this notification type',
+        title: 'There is no special subject handling for this notification type',
         type: 'RepositoryInvitation',
       });
 
-      const result = await defaultHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await defaultHandler.enrich(mockNotification, mockSettings);
 
       // Default handler returns empty object (no enrichment)
       expect(result).toEqual({});
@@ -38,9 +30,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   it('iconType', () => {
     const mockNotification = mockPartialGitifyNotification({});
 
-    expect(defaultHandler.iconType(mockNotification).displayName).toBe(
-      'QuestionIcon',
-    );
+    expect(defaultHandler.iconType(mockNotification).displayName).toBe('QuestionIcon');
   });
 
   describe('iconColor', () => {
@@ -62,8 +52,7 @@ describe('renderer/utils/notifications/handlers/default.ts', () => {
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       defaultHandler.defaultUrl({

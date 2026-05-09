@@ -8,9 +8,7 @@ const INDEXED_SUFFIX = 'INDEX';
 
 // AST-based helpers for robust fragment parsing and deduping
 
-function toDocumentNode(
-  doc: TypedDocumentString<unknown, unknown>,
-): DocumentNode {
+function toDocumentNode(doc: TypedDocumentString<unknown, unknown>): DocumentNode {
   return parse(doc.toString());
 }
 
@@ -23,9 +21,7 @@ function toDocumentNode(
 /**
  * Return only `Query` fragments from a GraphQL document.
  */
-export function extractQueryFragments(
-  doc: TypedDocumentString<unknown, unknown>,
-): FragmentInfo[] {
+export function extractQueryFragments(doc: TypedDocumentString<unknown, unknown>): FragmentInfo[] {
   return extractAllFragments(doc).filter((f) => f.typeCondition === 'Query');
 }
 
@@ -41,9 +37,7 @@ export function extractNonQueryFragments(
 /**
  * Extract all fragments from a GraphQL document with metadata.
  */
-function extractAllFragments(
-  doc: TypedDocumentString<unknown, unknown>,
-): FragmentInfo[] {
+function extractAllFragments(doc: TypedDocumentString<unknown, unknown>): FragmentInfo[] {
   const ast: DocumentNode = toDocumentNode(doc);
   const fragments: FragmentInfo[] = [];
 
@@ -59,10 +53,7 @@ function extractAllFragments(
         name: def.name.value,
         typeCondition: def.typeCondition.name.value,
         printed: printed,
-        inner:
-          open >= 0 && close >= 0
-            ? printedSel.slice(open + 1, close).trim()
-            : '',
+        inner: open >= 0 && close >= 0 ? printedSel.slice(open + 1, close).trim() : '',
       });
     }
   }
@@ -126,14 +117,10 @@ function filterVariableDefinitionsByIndexSuffix(
   variableDefs: VariableDef[],
   indexed: boolean,
 ): VariableDef[] {
-  return variableDefs.filter(
-    (varDef) => varDef.name.endsWith(INDEXED_SUFFIX) === indexed,
-  );
+  return variableDefs.filter((varDef) => varDef.name.endsWith(INDEXED_SUFFIX) === indexed);
 }
 
-function extractVariableDefinitions(
-  doc: TypedDocumentString<unknown, unknown>,
-): VariableDef[] {
+function extractVariableDefinitions(doc: TypedDocumentString<unknown, unknown>): VariableDef[] {
   const ast = toDocumentNode(doc);
   const defs: VariableDef[] = [];
 

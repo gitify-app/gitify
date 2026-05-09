@@ -67,24 +67,14 @@ describe('shared/logger.ts', () => {
       logError('foo', 'bar', mockError, ['ctx']);
 
       expect(logErrorSpy).toHaveBeenCalledTimes(1);
-      expect(logErrorSpy).toHaveBeenCalledWith(
-        '[foo]',
-        'bar',
-        '[ctx]',
-        mockError,
-      );
+      expect(logErrorSpy).toHaveBeenCalledWith('[foo]', 'bar', '[ctx]', mockError);
     });
 
     it('logs error with multiple contexts', () => {
       logError('foo', 'bar', mockError, ['ctx1', 'ctx2']);
 
       expect(logErrorSpy).toHaveBeenCalledTimes(1);
-      expect(logErrorSpy).toHaveBeenCalledWith(
-        '[foo]',
-        'bar',
-        '[ctx1 >> ctx2]',
-        mockError,
-      );
+      expect(logErrorSpy).toHaveBeenCalledWith('[foo]', 'bar', '[ctx1 >> ctx2]', mockError);
     });
   });
 });

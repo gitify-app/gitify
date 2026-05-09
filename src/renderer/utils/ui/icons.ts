@@ -71,9 +71,7 @@ export function getAuthMethodIcon(method: AuthMethod): FC<OcticonProps> | null {
   }
 }
 
-export function getPlatformIcon(
-  platform: PlatformType,
-): FC<OcticonProps> | null {
+export function getPlatformIcon(platform: PlatformType): FC<OcticonProps> | null {
   switch (platform) {
     case 'Gitea':
       return ServerIcon;

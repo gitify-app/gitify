@@ -8,10 +8,7 @@ import { updateTrayColor, updateTrayTitle } from './comms';
  * @param unreadNotifications - The number of unread notifications
  * @param settings - The application settings
  */
-export function setTrayIconColorAndTitle(
-  unreadNotifications: number,
-  settings: SettingsState,
-) {
+export function setTrayIconColorAndTitle(unreadNotifications: number, settings: SettingsState) {
   let title = '';
   if (settings.showNotificationsCountInTray && unreadNotifications > 0) {
     title = unreadNotifications.toString();

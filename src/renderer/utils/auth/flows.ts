@@ -31,9 +31,7 @@ import { getGitHubAuthBaseUrl } from './utils';
  * @param authOptions - The OAuth App client configuration and target hostname.
  * @returns Resolves with the authorization code and options on success.
  */
-export function performGitHubWebOAuth(
-  authOptions: LoginOAuthWebOptions,
-): Promise<AuthResponse> {
+export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
     const { url } = getWebFlowAuthorizationUrl({
       clientType: 'oauth-app',
@@ -125,9 +123,7 @@ export async function startGitHubDeviceFlow(
  * @param session - The active device flow session.
  * @returns The access token when granted, or `null` when still pending.
  */
-export async function pollGitHubDeviceFlow(
-  session: DeviceFlowSession,
-): Promise<Token | null> {
+export async function pollGitHubDeviceFlow(session: DeviceFlowSession): Promise<Token | null> {
   try {
     const { authentication } = await exchangeDeviceCode({
       clientType: 'oauth-app' as const,
@@ -149,11 +145,7 @@ export async function pollGitHubDeviceFlow(
       }
     }
 
-    rendererLogError(
-      'pollGitHubDeviceFlow',
-      'Error exchanging device code',
-      toError(err),
-    );
+    rendererLogError('pollGitHubDeviceFlow', 'Error exchanging device code', toError(err));
 
     throw err;
   }
@@ -184,9 +176,7 @@ export async function exchangeAuthCodeForAccessToken(
     clientSecret: authOptions.clientSecret,
     code: authCode,
     request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname)
-        .toString()
-        .replace(/\/$/, ''),
+      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString().replace(/\/$/, ''),
     }),
   });
 

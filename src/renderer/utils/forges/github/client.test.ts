@@ -57,28 +57,19 @@ describe('renderer/utils/forges/github/client.ts', () => {
   };
 
   const createOctokitClientSpy = vi.spyOn(octokitModule, 'createOctokitClient');
-  const createOctokitClientUncachedSpy = vi.spyOn(
-    octokitModule,
-    'createOctokitClientUncached',
-  );
+  const createOctokitClientUncachedSpy = vi.spyOn(octokitModule, 'createOctokitClientUncached');
 
   beforeEach(() => {
     // Mock createOctokitClient to return our mock
-    createOctokitClientSpy.mockResolvedValue(
-      mockOctokit as unknown as OctokitClient,
-    );
-    createOctokitClientUncachedSpy.mockResolvedValue(
-      mockOctokit as unknown as OctokitClient,
-    );
+    createOctokitClientSpy.mockResolvedValue(mockOctokit as unknown as OctokitClient);
+    createOctokitClientUncachedSpy.mockResolvedValue(mockOctokit as unknown as OctokitClient);
 
     // Mock Octokit REST method
-    mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue(
-      {
-        data: [],
-        status: 200,
-        headers: {},
-      },
-    );
+    mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue({
+      data: [],
+      status: 200,
+      headers: {},
+    });
 
     // Mock paginate
     mockOctokit.paginate.mockResolvedValue([]);
@@ -117,10 +108,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   it('fetchAuthenticatedUserDetails - should fetch authenticated user', async () => {
     await fetchAuthenticatedUserDetails(mockGitHubCloudAccount);
 
-    expect(createOctokitClientUncachedSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
+    expect(createOctokitClientUncachedSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
     expect(mockOctokit.rest.users.getAuthenticated).toHaveBeenCalled();
   });
 
@@ -137,13 +125,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(createOctokitClientSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-        'rest',
-      );
-      expect(
-        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
-      ).toHaveBeenCalledWith({
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
+      expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: true,
         all: false,
         per_page: 100,
@@ -165,13 +148,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(createOctokitClientSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-        'rest',
-      );
-      expect(
-        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
-      ).toHaveBeenCalledWith({
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
+      expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: false,
         all: false,
         per_page: 100,
@@ -193,13 +171,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(createOctokitClientSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-        'rest',
-      );
-      expect(
-        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
-      ).toHaveBeenCalledWith({
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
+      expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: false,
         all: true,
         per_page: 100,
@@ -221,10 +194,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         mockSettings as SettingsState,
       );
 
-      expect(createOctokitClientSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-        'rest',
-      );
+      expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
       expect(mockOctokit.paginate).toHaveBeenCalledWith(
         mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
         {
@@ -242,10 +212,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   it('markNotificationThreadAsRead - should mark notification thread as read', async () => {
     await markNotificationThreadAsRead(mockGitHubCloudAccount, mockThreadId);
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
     expect(mockOctokit.rest.activity.markThreadAsRead).toHaveBeenCalledWith({
       thread_id: Number(mockThreadId),
     });
@@ -254,28 +221,17 @@ describe('renderer/utils/forges/github/client.ts', () => {
   it('markNotificationThreadAsDone - should mark notification thread as done', async () => {
     await markNotificationThreadAsDone(mockGitHubCloudAccount, mockThreadId);
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
     expect(mockOctokit.rest.activity.markThreadAsDone).toHaveBeenCalledWith({
       thread_id: Number(mockThreadId),
     });
   });
 
   it('ignoreNotificationThreadSubscription - should ignore notification thread subscription', async () => {
-    await ignoreNotificationThreadSubscription(
-      mockGitHubCloudAccount,
-      mockThreadId,
-    );
+    await ignoreNotificationThreadSubscription(mockGitHubCloudAccount, mockThreadId);
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
-    expect(
-      mockOctokit.rest.activity.setThreadSubscription,
-    ).toHaveBeenCalledWith({
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
+    expect(mockOctokit.rest.activity.setThreadSubscription).toHaveBeenCalledWith({
       thread_id: Number(mockThreadId),
       ignored: true,
     });
@@ -287,65 +243,47 @@ describe('renderer/utils/forges/github/client.ts', () => {
       'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
     );
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
     expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
       url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
     });
   });
 
   it('getCommit - should fetch commit details', async () => {
-    const commitUrl =
-      'https://api.github.com/repos/gitify-app/gitify/commits/abc123' as Link;
+    const commitUrl = 'https://api.github.com/repos/gitify-app/gitify/commits/abc123' as Link;
 
     await getCommit(mockGitHubCloudAccount, commitUrl);
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
     expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
       url: commitUrl,
     });
   });
 
   it('getCommitComment - should fetch commit comment details', async () => {
-    const commentUrl =
-      'https://api.github.com/repos/gitify-app/gitify/comments/456' as Link;
+    const commentUrl = 'https://api.github.com/repos/gitify-app/gitify/comments/456' as Link;
 
     await getCommitComment(mockGitHubCloudAccount, commentUrl);
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
     expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
       url: commentUrl,
     });
   });
 
   it('getRelease - should fetch release details', async () => {
-    const releaseUrl =
-      'https://api.github.com/repos/gitify-app/gitify/releases/789' as Link;
+    const releaseUrl = 'https://api.github.com/repos/gitify-app/gitify/releases/789' as Link;
 
     await getRelease(mockGitHubCloudAccount, releaseUrl);
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'rest',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
     expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
       url: releaseUrl,
     });
   });
 
   it('fetchDiscussionByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.spyOn(
-      apiRequests,
-      'performGraphQLRequest',
-    );
+    const performGraphQLRequestSpy = vi.spyOn(apiRequests, 'performGraphQLRequest');
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some discussion',
@@ -353,9 +291,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       type: 'Discussion',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue(
-      {} as ExecutionResult<FetchDiscussionByNumberQuery>,
-    );
+    performGraphQLRequestSpy.mockResolvedValue({} as ExecutionResult<FetchDiscussionByNumberQuery>);
 
     await fetchDiscussionByNumber(mockNotification);
 
@@ -375,10 +311,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   });
 
   it('fetchIssueByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.spyOn(
-      apiRequests,
-      'performGraphQLRequest',
-    );
+    const performGraphQLRequestSpy = vi.spyOn(apiRequests, 'performGraphQLRequest');
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some issue',
@@ -386,9 +319,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       type: 'Issue',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue(
-      {} as ExecutionResult<FetchIssueByNumberQuery>,
-    );
+    performGraphQLRequestSpy.mockResolvedValue({} as ExecutionResult<FetchIssueByNumberQuery>);
 
     await fetchIssueByNumber(mockNotification);
 
@@ -406,10 +337,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   });
 
   it('fetchPullByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.spyOn(
-      apiRequests,
-      'performGraphQLRequest',
-    );
+    const performGraphQLRequestSpy = vi.spyOn(apiRequests, 'performGraphQLRequest');
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some pull request',
@@ -440,10 +368,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
 
   describe('fetchNotificationDetailsForList', () => {
     it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.spyOn(
-        apiRequests,
-        'performGraphQLRequestString',
-      );
+      const performGraphQLRequestStringSpy = vi.spyOn(apiRequests, 'performGraphQLRequestString');
 
       const mockNotification = mockPartialGitifyNotification({
         title: 'Some commit',
@@ -451,9 +376,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         type: 'Commit',
       });
 
-      performGraphQLRequestStringSpy.mockResolvedValue(
-        {} as ExecutionResult<unknown>,
-      );
+      performGraphQLRequestStringSpy.mockResolvedValue({} as ExecutionResult<unknown>);
 
       await fetchNotificationDetailsForList([mockNotification]);
 
@@ -461,14 +384,9 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList returns empty map if no supported notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.spyOn(
-        apiRequests,
-        'performGraphQLRequestString',
-      );
+      const performGraphQLRequestStringSpy = vi.spyOn(apiRequests, 'performGraphQLRequestString');
 
-      performGraphQLRequestStringSpy.mockResolvedValue(
-        {} as ExecutionResult<unknown>,
-      );
+      performGraphQLRequestStringSpy.mockResolvedValue({} as ExecutionResult<unknown>);
 
       await fetchNotificationDetailsForList([]);
 
@@ -476,10 +394,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.spyOn(
-        apiRequests,
-        'performGraphQLRequestString',
-      );
+      const performGraphQLRequestStringSpy = vi.spyOn(apiRequests, 'performGraphQLRequestString');
 
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},

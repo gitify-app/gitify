@@ -26,23 +26,17 @@ describe('renderer/components/fields/Checkbox.tsx', () => {
   });
 
   it('should render - tooltip', () => {
-    const tree = renderWithProviders(
-      <Checkbox {...props} tooltip={<div>Hello world</div>} />,
-    );
+    const tree = renderWithProviders(<Checkbox {...props} tooltip={<div>Hello world</div>} />);
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render - positive counter unselected', () => {
-    const tree = renderWithProviders(
-      <Checkbox {...props} checked={false} counter={5} />,
-    );
+    const tree = renderWithProviders(<Checkbox {...props} checked={false} counter={5} />);
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render - positive counter selected', () => {
-    const tree = renderWithProviders(
-      <Checkbox {...props} checked={true} counter={5} />,
-    );
+    const tree = renderWithProviders(<Checkbox {...props} checked={true} counter={5} />);
     expect(tree.container).toMatchSnapshot();
   });
 

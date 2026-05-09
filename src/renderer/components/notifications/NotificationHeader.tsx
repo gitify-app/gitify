@@ -43,13 +43,7 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
               userType={notification.repository.owner.type}
             />
           </button>
-          <div
-            className={cn(
-              'text-xxs',
-              Opacity.READ,
-              !settings.showNumber && 'hidden',
-            )}
-          >
+          <div className={cn('text-xxs', Opacity.READ, !settings.showNumber && 'hidden')}>
             {notification.display.number}
           </div>
         </Stack>

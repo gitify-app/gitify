@@ -1,8 +1,4 @@
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from '@primer/octicons-react';
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@primer/octicons-react';
 
 import { getChevronDetails, parseInlineCode } from './display';
 
@@ -38,9 +34,7 @@ describe('renderer/utils/ui/display.ts', () => {
     });
 
     it('should parse single inline code block', () => {
-      expect(
-        parseInlineCode('refactor: migrate deprecated atlaskit `xcss`'),
-      ).toEqual([
+      expect(parseInlineCode('refactor: migrate deprecated atlaskit `xcss`')).toEqual([
         {
           id: '0',
           type: 'text',

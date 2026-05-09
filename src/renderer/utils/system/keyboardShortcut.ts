@@ -42,9 +42,7 @@ const MODIFIER_KEYS = new Set(['Control', 'Shift', 'Alt', 'Meta', 'Dead']);
  * Convert a keydown event to an Electron accelerator string, or `null` if invalid.
  * Requires Command (macOS) or Control (Windows/Linux) plus a non-modifier key.
  */
-export function keyboardEventToAccelerator(
-  event: KeyboardEvent,
-): string | null {
+export function keyboardEventToAccelerator(event: KeyboardEvent): string | null {
   if (event.repeat) {
     return null;
   }
@@ -65,9 +63,7 @@ export function keyboardEventToAccelerator(
   ].join('+');
 }
 
-function normalizePhysicalKeyToAccelerator(
-  event: KeyboardEvent,
-): string | null {
+function normalizePhysicalKeyToAccelerator(event: KeyboardEvent): string | null {
   const { code, key } = event;
 
   if (MODIFIER_KEYS.has(key)) {
@@ -90,10 +86,7 @@ function normalizePhysicalKeyToAccelerator(
 /**
  * Human-readable shortcut for settings UI. Uses platform-appropriate modifier names.
  */
-export function formatAcceleratorForDisplay(
-  accelerator: string,
-  isMac: boolean,
-): string {
+export function formatAcceleratorForDisplay(accelerator: string, isMac: boolean): string {
   return accelerator
     .split('+')
     .map((segment) => {

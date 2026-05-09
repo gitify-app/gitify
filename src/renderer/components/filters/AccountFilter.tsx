@@ -20,10 +20,7 @@ export const AccountFilter: FC = () => {
 
   return (
     <fieldset id="filter-accounts">
-      <Title
-        icon={PersonIcon}
-        tooltip={<Text>Filter notifications by account.</Text>}
-      >
+      <Title icon={PersonIcon} tooltip={<Text>Filter notifications by account.</Text>}>
         Account
       </Title>
 
@@ -33,8 +30,8 @@ export const AccountFilter: FC = () => {
           const isChecked = filteredAccounts.includes(uuid);
           const label = account.user?.login ?? account.hostname;
           const accountNotificationCount =
-            notifications?.find((n) => getAccountUUID(n.account) === uuid)
-              ?.notifications.length ?? 0;
+            notifications?.find((n) => getAccountUUID(n.account) === uuid)?.notifications.length ??
+            0;
 
           return (
             <Checkbox
