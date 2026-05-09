@@ -1,6 +1,8 @@
 # Build files
 dist/
 build/
+# vite-plugin-electron stub at project root
+/index.html
 
 # TypeScript incremental compilation cache
 *.tsbuildinfo
