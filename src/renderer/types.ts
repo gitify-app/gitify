@@ -1,7 +1,10 @@
 import type { FC } from 'react';
 
 import type { Icon, OcticonProps } from '@primer/octicons-react';
-import type { VariantType } from '@primer/react/dist/Button/types';
+
+// Mirrors `@primer/react`'s internal Button VariantType, which isn't part of its
+// public exports map.
+type VariantType = 'default' | 'primary' | 'invisible' | 'danger' | 'link';
 
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
