@@ -29,10 +29,7 @@ describe('renderer/utils/comms.ts', () => {
       openExternalLink('https://gitify.io/' as Link);
 
       expect(window.gitify.openExternalLink).toHaveBeenCalledTimes(1);
-      expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
-        'https://gitify.io/',
-        false,
-      );
+      expect(window.gitify.openExternalLink).toHaveBeenCalledWith('https://gitify.io/', false);
     });
 
     it('should open in foreground when preference set to FOREGROUND', () => {
@@ -42,10 +39,7 @@ describe('renderer/utils/comms.ts', () => {
 
       openExternalLink('https://gitify.io/' as Link);
 
-      expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
-        'https://gitify.io/',
-        true,
-      );
+      expect(window.gitify.openExternalLink).toHaveBeenCalledWith('https://gitify.io/', true);
     });
 
     it('should use default open preference if user settings not found', () => {
@@ -56,10 +50,7 @@ describe('renderer/utils/comms.ts', () => {
       openExternalLink('https://gitify.io/' as Link);
 
       expect(window.gitify.openExternalLink).toHaveBeenCalledTimes(1);
-      expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
-        'https://gitify.io/',
-        true,
-      );
+      expect(window.gitify.openExternalLink).toHaveBeenCalledWith('https://gitify.io/', true);
     });
 
     it('should ignore opening external local links file:///', () => {
@@ -127,9 +118,7 @@ describe('renderer/utils/comms.ts', () => {
       setUseAlternateIdleIcon(false);
 
       expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledTimes(1);
-      expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledWith(
-        false,
-      );
+      expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledWith(false);
     });
 
     it('applies keyboard shortcut', async () => {

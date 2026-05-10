@@ -29,10 +29,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         author: mockAuthor,
       } as GetReleaseResponse);
 
-      const result = await releaseHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await releaseHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: undefined,
@@ -48,10 +45,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     it('return early if release state filtered', async () => {
       useFiltersStore.setState({ states: ['closed'] });
 
-      const result = await releaseHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await releaseHandler.enrich(mockNotification, mockSettings);
 
       // Returns empty object when filtered (no API call made)
       expect(result).toEqual({});
@@ -59,14 +53,11 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   it('iconType', () => {
-    expect(releaseHandler.iconType(mockNotification).displayName).toBe(
-      'TagIcon',
-    );
+    expect(releaseHandler.iconType(mockNotification).displayName).toBe('TagIcon');
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       releaseHandler.defaultUrl({

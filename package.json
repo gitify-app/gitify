@@ -3,41 +3,20 @@
   "version": "6.20.0",
   "private": true,
   "description": "GitHub notifications on your menu bar.",
-  "main": "build/main.js",
-  "scripts": {
-    "clean": "rimraf build coverage dist node_modules",
-    "prepare": "husky",
-    "build": "vite build",
-    "codegen": "graphql-codegen --config codegen.ts",
-    "codegen:watch": "pnpm codegen --watch",
-    "dev": "concurrently --names \"vite,codegen\" --prefix-colors \"blue,magenta\" \"vite dev\" \"pnpm codegen:watch\"",
-    "devtools": "concurrently --names \"dev,devtools\" --prefix-colors \"cyan,green\" \"pnpm dev\" \"react-devtools\"",
-    "start": "pnpm build && pnpm dev",
-    "package:linux": "electron-builder --linux",
-    "package:macos": "electron-builder --mac",
-    "package:win": "electron-builder --win",
-    "lint": "biome check --fix",
-    "lint:check": "biome check",
-    "test": "vitest --coverage --run",
-    "test:watch": "vitest --watch --coverage",
-    "test:ui": "vitest --ui"
-  },
-  "engines": {
-    "node": ">=24"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gitify-app/gitify.git"
-  },
   "keywords": [
-    "gitify",
-    "github",
-    "notifications",
     "electron",
+    "github",
+    "gitify",
     "menubar",
+    "notifications",
     "taskbar",
     "tray"
   ],
+  "homepage": "https://gitify.io/",
+  "bugs": {
+    "url": "https://github.com/gitify-app/gitify/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "Adam Setch",
     "url": "https://github.com/setchy"
@@ -60,11 +39,33 @@
       "url": "https://github.com/afonsojramos"
     }
   ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gitify-app/gitify/issues"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gitify-app/gitify.git"
   },
-  "homepage": "https://gitify.io/",
+  "main": "build/main.js",
+  "scripts": {
+    "clean": "rimraf build coverage dist node_modules",
+    "prepare": "husky",
+    "build": "vp build",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "codegen:watch": "pnpm codegen --watch",
+    "dev": "concurrently --names \"vite,codegen\" --prefix-colors \"blue,magenta\" \"vp dev\" \"pnpm codegen:watch\"",
+    "devtools": "concurrently --names \"dev,devtools\" --prefix-colors \"cyan,green\" \"pnpm dev\" \"react-devtools\"",
+    "start": "pnpm build && pnpm dev",
+    "package:linux": "electron-builder --linux",
+    "package:macos": "electron-builder --mac",
+    "package:win": "electron-builder --win",
+    "check": "vp check",
+    "check:fix": "vp check --fix",
+    "lint": "vp lint --fix",
+    "lint:check": "vp lint",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
+    "test": "vp test --coverage --run",
+    "test:watch": "vp test --watch --coverage",
+    "test:ui": "vp test --ui"
+  },
   "dependencies": {
     "electron-log": "5.4.3",
     "electron-updater": "6.8.3",
@@ -74,7 +75,6 @@
     "react-router-dom": "7.15.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.14",
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.1",
     "@graphql-codegen/cli": "7.0.0",
@@ -128,13 +128,16 @@
     "vite-plugin-checker": "0.13.0",
     "vite-plugin-electron": "0.29.1",
     "vite-plugin-electron-renderer": "0.14.7",
+    "vite-plus": "0.1.20",
     "vitest": "4.1.5",
     "zustand": "5.0.13"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "packageManager": "pnpm@11.0.6",
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@biomejs/biome",
       "@parcel/watcher",
       "@swc/core",
       "@tailwindcss/oxide",
@@ -146,12 +149,5 @@
     "overrides": {
       "react-is": "19.2.6"
     }
-  },
-  "lint-staged": {
-    "*": "biome check --no-errors-on-unmatched",
-    "*.{js,ts,tsx}": [
-      "bash -c 'tsc --noEmit",
-      "pnpm test --changed --passWithNoTests --update"
-    ]
   }
 }

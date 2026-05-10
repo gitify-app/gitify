@@ -116,8 +116,6 @@ export type EventResponse<E extends EventType> = EventContracts[E]['response'];
  * otherwise `[request]`. Lets callers write `send(EVENTS.QUIT)` instead of
  * `send(EVENTS.QUIT, undefined)`.
  */
-export type EventArgs<E extends EventType> = [EventRequest<E>] extends [
-  undefined,
-]
+export type EventArgs<E extends EventType> = [EventRequest<E>] extends [undefined]
   ? []
   : [EventRequest<E>];

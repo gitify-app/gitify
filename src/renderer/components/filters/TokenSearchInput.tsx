@@ -4,10 +4,7 @@ import { Stack, Text, TextInputWithTokens } from '@primer/react';
 
 import type { SearchToken } from '../../types';
 
-import {
-  parseSearchInput,
-  SEARCH_DELIMITER,
-} from '../../utils/notifications/filters/search';
+import { parseSearchInput, SEARCH_DELIMITER } from '../../utils/notifications/filters/search';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 interface TokenSearchInputProps {
@@ -32,15 +29,12 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   onRemove,
 }) => {
   const [inputValue, setInputValue] = useState('');
-  const [shouldShowFilterSuggestions, setShouldShowFilterSuggestions] =
-    useState(false);
+  const [shouldShowFilterSuggestions, setShouldShowFilterSuggestions] = useState(false);
 
   const tokenItems = tokens.map((text, id) => ({ id, text }));
 
   function tryAddToken(
-    event:
-      | React.KeyboardEvent<HTMLInputElement>
-      | React.FocusEvent<HTMLInputElement>,
+    event: React.KeyboardEvent<HTMLInputElement> | React.FocusEvent<HTMLInputElement>,
   ) {
     const raw = (event.target as HTMLInputElement).value;
     const parsed = parseSearchInput(raw);
@@ -62,12 +56,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   }
 
   return (
-    <Stack
-      align="center"
-      className="text-sm"
-      direction="horizontal"
-      gap="condensed"
-    >
+    <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
       <div className="font-medium text-gitify-font w-20">
         <Stack align="center" direction="horizontal" gap="condensed">
           <Icon className={iconColorClass} />
@@ -84,10 +73,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setInputValue(e.target.value);
             const val = e.target.value.trim();
-            if (
-              !val.includes(SEARCH_DELIMITER) ||
-              val.endsWith(SEARCH_DELIMITER)
-            ) {
+            if (!val.includes(SEARCH_DELIMITER) || val.endsWith(SEARCH_DELIMITER)) {
               setShouldShowFilterSuggestions(true);
             } else {
               setShouldShowFilterSuggestions(false);
@@ -113,10 +99,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
           title={`${label} searches`}
           tokens={tokenItems}
         />
-        <SearchFilterSuggestions
-          inputValue={inputValue}
-          open={shouldShowFilterSuggestions}
-        />
+        <SearchFilterSuggestions inputValue={inputValue} open={shouldShowFilterSuggestions} />
       </div>
     </Stack>
   );

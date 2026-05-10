@@ -5,7 +5,7 @@ const builderConfig = require('../electron-builder');
 const electronLanguages = builderConfig.electronLanguages;
 
 function logAfterPackProgress(msg) {
-  // biome-ignore lint/suspicious/noConsole: log notarizing progress
+  // oxlint-disable-next-line no-console -- log notarizing progress
   console.log(`  • [afterPack]: ${msg}`);
 }
 
@@ -46,9 +46,7 @@ const removeUnusedLocales = (appOutDir, appName) => {
   );
 
   // Get all locale directories
-  const allLocales = fs
-    .readdirSync(resourcesPath)
-    .filter((file) => file.endsWith('.lproj'));
+  const allLocales = fs.readdirSync(resourcesPath).filter((file) => file.endsWith('.lproj'));
 
   const langLocales = electronLanguages.map((lang) => `${lang}.lproj`);
 

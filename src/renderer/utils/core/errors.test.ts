@@ -2,11 +2,7 @@ import { mockAccountWithError } from '../../__mocks__/account-mocks';
 
 import type { AccountNotifications, GitifyError } from '../../types';
 
-import {
-  areAllAccountErrorsSame,
-  doesAllAccountsHaveErrors,
-  Errors,
-} from './errors';
+import { areAllAccountErrorsSame, doesAllAccountsHaveErrors, Errors } from './errors';
 
 describe('renderer/utils/errors.ts', () => {
   describe('doesAllAccountsHaveErrors', () => {
@@ -40,10 +36,7 @@ describe('renderer/utils/errors.ts', () => {
 
     it('returns true when all errors are identical object reference', () => {
       const err = Errors.NETWORK;
-      const items: AccountNotifications[] = [
-        mockAccountWithError(err),
-        mockAccountWithError(err),
-      ];
+      const items: AccountNotifications[] = [mockAccountWithError(err), mockAccountWithError(err)];
 
       expect(areAllAccountErrorsSame(items)).toBe(true);
     });

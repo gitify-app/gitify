@@ -7,12 +7,8 @@ import * as comms from '../utils/system/comms';
 import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
 
 describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
-  const copyToClipboardSpy = vi
-    .spyOn(comms, 'copyToClipboard')
-    .mockResolvedValue();
-  const openExternalLinkSpy = vi
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation(vi.fn());
+  const copyToClipboardSpy = vi.spyOn(comms, 'copyToClipboard').mockResolvedValue();
+  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   it('should render scope choice buttons', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
@@ -65,9 +61,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
 
     // Verify auto-copy and auto-open were called
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      'https://github.com/login/device',
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/login/device');
   });
 
   it('should start device flow with full scope when clicking Public and Private', async () => {
@@ -123,9 +117,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should handle device flow errors during initialization', async () => {
-    const loginWithDeviceFlowStartMock = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('Network error'));
+    const loginWithDeviceFlowStartMock = vi.fn().mockRejectedValueOnce(new Error('Network error'));
 
     renderWithProviders(<LoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,

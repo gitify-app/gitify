@@ -7,18 +7,12 @@ import type { ClientID, ClientSecret, Hostname } from '../types';
 
 import * as logger from '../utils/core/logger';
 import * as comms from '../utils/system/comms';
-import {
-  type IFormData,
-  LoginWithOAuthAppRoute,
-  validateForm,
-} from './LoginWithOAuthApp';
+import { type IFormData, LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
 
 describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   const loginWithOAuthAppMock = vi.fn();
 
-  const openExternalLinkSpy = vi
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   it('renders correctly', () => {
     const tree = renderWithProviders(<LoginWithOAuthAppRoute />);
@@ -45,9 +39,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
       expect(validateForm(values).hostname).toBe('Hostname is required');
       expect(validateForm(values).clientId).toBe('Client ID is required');
-      expect(validateForm(values).clientSecret).toBe(
-        'Client Secret is required',
-      );
+      expect(validateForm(values).clientSecret).toBe('Client Secret is required');
     });
 
     it('should validate the form values are correct format', () => {
@@ -59,9 +51,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
       expect(validateForm(values).hostname).toBe('Hostname format is invalid');
       expect(validateForm(values).clientId).toBe('Client ID format is invalid');
-      expect(validateForm(values).clientSecret).toBe(
-        'Client Secret format is invalid',
-      );
+      expect(validateForm(values).clientSecret).toBe('Client Secret format is invalid');
     });
   });
 
@@ -100,10 +90,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.com');
 
-    await userEvent.type(
-      screen.getByTestId('login-clientId'),
-      '1234567890_ASDFGHJKL',
-    );
+    await userEvent.type(screen.getByTestId('login-clientId'), '1234567890_ASDFGHJKL');
 
     await userEvent.type(
       screen.getByTestId('login-clientSecret'),
@@ -118,9 +105,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should login using a token - failure', async () => {
-    const rendererLogErrorSpy = vi
-      .spyOn(logger, 'rendererLogError')
-      .mockImplementation(vi.fn());
+    const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
     renderWithProviders(<LoginWithOAuthAppRoute />, {
@@ -131,10 +116,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.com');
 
-    await userEvent.type(
-      screen.getByTestId('login-clientId'),
-      '1234567890_ASDFGHJKL',
-    );
+    await userEvent.type(screen.getByTestId('login-clientId'), '1234567890_ASDFGHJKL');
 
     await userEvent.type(
       screen.getByTestId('login-clientSecret'),
@@ -165,9 +147,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Client ID format is invalid')).toBeInTheDocument();
-    expect(
-      screen.getByText('Client Secret format is invalid'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Client Secret format is invalid')).toBeInTheDocument();
   });
 
   it('should open help docs in the browser', async () => {

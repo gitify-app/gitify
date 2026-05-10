@@ -11,8 +11,7 @@ exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx > 
     >
       Detailed Notifications
     </strong>
-     
-    setting to be enabled.
+     setting to be enabled.
   </span>
 </div>
 `;

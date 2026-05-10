@@ -9,10 +9,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 import { GroupBy } from '../../types';
 
 import * as links from '../../utils/system/links';
-import {
-  AccountNotifications,
-  type AccountNotificationsProps,
-} from './AccountNotifications';
+import { AccountNotifications, type AccountNotificationsProps } from './AccountNotifications';
 
 vi.mock('./RepositoryNotifications', () => ({
   RepositoryNotifications: () => <div>RepositoryNotifications</div>,
@@ -111,9 +108,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open profile when clicked', async () => {
-    const openAccountProfileSpy = vi
-      .spyOn(links, 'openAccountProfile')
-      .mockImplementation(vi.fn());
+    const openAccountProfileSpy = vi.spyOn(links, 'openAccountProfile').mockImplementation(vi.fn());
 
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
@@ -131,9 +126,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   });
 
   it('should open my issues when clicked', async () => {
-    const openGitHubIssuesSpy = vi
-      .spyOn(links, 'openGitHubIssues')
-      .mockImplementation(vi.fn());
+    const openGitHubIssuesSpy = vi.spyOn(links, 'openGitHubIssues').mockImplementation(vi.fn());
 
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
@@ -147,15 +140,11 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     await userEvent.click(screen.getByTestId('account-issues'));
 
     expect(openGitHubIssuesSpy).toHaveBeenCalledTimes(1);
-    expect(openGitHubIssuesSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount.hostname,
-    );
+    expect(openGitHubIssuesSpy).toHaveBeenCalledWith(mockGitHubCloudAccount.hostname);
   });
 
   it('should open my pull requests when clicked', async () => {
-    const openGitHubPullsSpy = vi
-      .spyOn(links, 'openGitHubPulls')
-      .mockImplementation(vi.fn());
+    const openGitHubPullsSpy = vi.spyOn(links, 'openGitHubPulls').mockImplementation(vi.fn());
 
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,
@@ -169,9 +158,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     await userEvent.click(screen.getByTestId('account-pull-requests'));
 
     expect(openGitHubPullsSpy).toHaveBeenCalledTimes(1);
-    expect(openGitHubPullsSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount.hostname,
-    );
+    expect(openGitHubPullsSpy).toHaveBeenCalledWith(mockGitHubCloudAccount.hostname);
   });
 
   it('should toggle account notifications visibility', async () => {

@@ -34,10 +34,7 @@ function restoreMenubarWindowReference(mb: Menubar, win: BrowserWindow): void {
   try {
     (mb as unknown as { _browserWindow: BrowserWindow })._browserWindow = win;
   } catch (error) {
-    logWarn(
-      'main:window',
-      `failed to restore menubar window reference: ${toError(error).message}`,
-    );
+    logWarn('main:window', `failed to restore menubar window reference: ${toError(error).message}`);
   }
 }
 
@@ -48,10 +45,7 @@ function restoreMenubarWindowReference(mb: Menubar, win: BrowserWindow): void {
  * @param menuBuilder - The menu builder used to keep the Show / Hide tray
  *   menu items in sync with window visibility.
  */
-export function configureWindowEvents(
-  mb: Menubar,
-  menuBuilder: MenuBuilder,
-): void {
+export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): void {
   const win = mb.window;
   if (!win) {
     return;

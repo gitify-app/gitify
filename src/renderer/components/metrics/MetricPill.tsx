@@ -27,9 +27,7 @@ export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
         >
           <Stack align="center" direction="horizontal" gap="none">
             <Icon className={props.color} size={Size.XSMALL} />
-            {props.metric ? (
-              <Text className="text-xxs px-1">{props.metric}</Text>
-            ) : null}
+            {props.metric ? <Text className="text-xxs px-1">{props.metric}</Text> : null}
           </Stack>
         </Label>
       </button>

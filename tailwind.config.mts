@@ -23,10 +23,8 @@ const config: Config = {
         },
       },
       animation: {
-        'login-fade-up':
-          'login-fade-up 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
-        'login-panel-fade':
-          'login-panel-fade 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+        'login-fade-up': 'login-fade-up 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+        'login-panel-fade': 'login-panel-fade 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
       },
       transitionTimingFunction: {
         'login-out': 'cubic-bezier(0.2, 0.7, 0.2, 1)',

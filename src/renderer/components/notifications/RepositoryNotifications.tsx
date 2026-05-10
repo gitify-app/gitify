@@ -27,15 +27,10 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
 }) => {
-  const { settings, markNotificationsAsRead, markNotificationsAsDone } =
-    useAppContext();
+  const { settings, markNotificationsAsRead, markNotificationsAsDone } = useAppContext();
 
-  const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] =
-    useState(false);
-  const [
-    isRepositoryNotificationsVisible,
-    setIsRepositoryNotificationsVisible,
-  ] = useState(true);
+  const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] = useState(false);
+  const [isRepositoryNotificationsVisible, setIsRepositoryNotificationsVisible] = useState(true);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
@@ -62,11 +57,7 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
     (notification) => !notification.unread,
   );
 
-  const Chevron = getChevronDetails(
-    true,
-    isRepositoryNotificationsVisible,
-    'repository',
-  );
+  const Chevron = getChevronDetails(true, isRepositoryNotificationsVisible, 'repository');
 
   return (
     <>

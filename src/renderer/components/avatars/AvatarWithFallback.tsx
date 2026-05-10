@@ -30,12 +30,7 @@ export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
 
   // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
   return (
-    <Stack
-      align="center"
-      data-testid="avatar"
-      direction="horizontal"
-      gap="condensed"
-    >
+    <Stack align="center" data-testid="avatar" direction="horizontal" gap="condensed">
       {!src || hasBrokenAvatarSource ? (
         <DefaultUserIcon size={size} />
       ) : (

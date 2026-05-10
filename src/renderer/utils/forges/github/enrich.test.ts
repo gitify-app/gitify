@@ -9,18 +9,12 @@ import { enrichGitHubNotifications } from './enrich';
 
 describe('renderer/utils/forges/github/enrich.ts', () => {
   it('logs and continues when a per-notification handler throws', async () => {
-    const rendererLogErrorSpy = vi
-      .spyOn(logger, 'rendererLogError')
-      .mockImplementation(vi.fn());
-    const rendererLogWarnSpy = vi
-      .spyOn(logger, 'rendererLogWarn')
-      .mockImplementation(vi.fn());
+    const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
+    const rendererLogWarnSpy = vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
 
     // No batched fragments — each handler will fall back to its single-fetch
     // path, which we make fail.
-    vi.spyOn(client, 'fetchNotificationDetailsForList').mockResolvedValue(
-      new Map(),
-    );
+    vi.spyOn(client, 'fetchNotificationDetailsForList').mockResolvedValue(new Map());
 
     const mockError = new Error('Test error');
     const mockNotification = mockPartialGitifyNotification({
@@ -34,8 +28,7 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
       htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
       owner: {
         login: 'gitify-app',
-        avatarUrl:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+        avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
         type: 'Organization',
       },
     };
@@ -43,10 +36,7 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
 
     vi.spyOn(client, 'fetchIssueByNumber').mockRejectedValue(mockError);
 
-    const [result] = await enrichGitHubNotifications(
-      [mockNotification],
-      mockSettings,
-    );
+    const [result] = await enrichGitHubNotifications([mockNotification], mockSettings);
 
     expect(result).toBeDefined();
     expect(rendererLogErrorSpy).toHaveBeenCalledWith(

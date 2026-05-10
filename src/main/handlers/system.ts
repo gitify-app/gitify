@@ -38,33 +38,30 @@ export function registerSystemHandlers(mb: Menubar): void {
   /**
    * Register or unregister a global keyboard shortcut that toggles the menubar window visibility.
    */
-  handleMainEvent(
-    EVENTS.UPDATE_KEYBOARD_SHORTCUT,
-    (_, { enabled, keyboardShortcut }) => {
-      const previous = lastRegisteredAccelerator;
+  handleMainEvent(EVENTS.UPDATE_KEYBOARD_SHORTCUT, (_, { enabled, keyboardShortcut }) => {
+    const previous = lastRegisteredAccelerator;
 
-      if (lastRegisteredAccelerator) {
-        globalShortcut.unregister(lastRegisteredAccelerator);
-        lastRegisteredAccelerator = null;
-      }
+    if (lastRegisteredAccelerator) {
+      globalShortcut.unregister(lastRegisteredAccelerator);
+      lastRegisteredAccelerator = null;
+    }
 
-      if (!enabled) {
-        return { success: true };
-      }
+    if (!enabled) {
+      return { success: true };
+    }
 
-      const ok = globalShortcut.register(keyboardShortcut, toggleWindow);
-      if (ok) {
-        lastRegisteredAccelerator = keyboardShortcut;
-        return { success: true };
-      }
+    const ok = globalShortcut.register(keyboardShortcut, toggleWindow);
+    if (ok) {
+      lastRegisteredAccelerator = keyboardShortcut;
+      return { success: true };
+    }
 
-      if (previous) {
-        globalShortcut.register(previous, toggleWindow);
-        lastRegisteredAccelerator = previous;
-      }
-      return { success: false };
-    },
-  );
+    if (previous) {
+      globalShortcut.register(previous, toggleWindow);
+      lastRegisteredAccelerator = previous;
+    }
+    return { success: false };
+  });
 
   /**
    * Update the application's auto-launch setting based on the provided configuration.

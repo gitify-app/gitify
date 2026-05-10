@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 if (!process.env.GITHUB_TOKEN) {
-  // biome-ignore lint/suspicious/noConsole: CLI script output
+  // oxlint-disable-next-line no-console -- CLI script output
   console.warn(
     '\x1b[33m⚠ GITHUB_TOKEN is not set. Skipping GraphQL codegen.\n' +
       '  To generate updated types, create a .env file with a valid GitHub PAT.\n' +

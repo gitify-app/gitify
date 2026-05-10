@@ -1,7 +1,4 @@
-import {
-  FeedPullRequestOpenIcon,
-  IssueOpenedIcon,
-} from '@primer/octicons-react';
+import { FeedPullRequestOpenIcon, IssueOpenedIcon } from '@primer/octicons-react';
 
 import {
   type AccountNotifications,
@@ -24,8 +21,7 @@ import {
 
 const mockGitHubOwner: GitifyOwner = {
   login: 'gitify-app',
-  avatarUrl:
-    'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+  avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
   type: 'User',
 };
 
@@ -39,8 +35,7 @@ const mockGitHubRepository: GitifyRepository = {
 const mockSubjectUser: GitifyNotificationUser = {
   login: 'gitify-app',
   htmlUrl: 'https://github.com/gitify-app' as Link,
-  avatarUrl:
-    'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+  avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
   type: 'User',
 };
 
@@ -216,8 +211,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
   },
 ];
 
-export const mockGitifyNotification: GitifyNotification =
-  mockGitHubCloudGitifyNotifications[0];
+export const mockGitifyNotification: GitifyNotification = mockGitHubCloudGitifyNotifications[0];
 
 /** Same shape as cloud notification, but bound to a Gitea account. */
 export const mockGiteaGitifyNotification: GitifyNotification = {

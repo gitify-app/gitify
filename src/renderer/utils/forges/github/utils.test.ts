@@ -13,10 +13,7 @@ describe('renderer/utils/forges/github/utils.ts', () => {
     });
 
     it('should generate a GitHub REST API url - enterprise server', () => {
-      const result = getGitHubAPIBaseUrl(
-        'github.gitify.io' as Hostname,
-        'rest',
-      );
+      const result = getGitHubAPIBaseUrl('github.gitify.io' as Hostname, 'rest');
 
       expect(result.toString()).toBe('https://github.gitify.io/api/v3/');
     });
@@ -35,10 +32,7 @@ describe('renderer/utils/forges/github/utils.ts', () => {
   });
 
   it('should generate a GitHub GraphQL url - enterprise server', () => {
-    const result = getGitHubAPIBaseUrl(
-      'github.gitify.io' as Hostname,
-      'graphql',
-    );
+    const result = getGitHubAPIBaseUrl('github.gitify.io' as Hostname, 'graphql');
 
     expect(result.toString()).toBe('https://github.gitify.io/api/');
   });

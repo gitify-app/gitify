@@ -9,10 +9,10 @@ Gitify is maintained by a small team. Each forge adapter has at least one design
 
 ## Forge adapter maintainers
 
-| Forge  | Maintainer                                          | Source                                  |
-| ------ | --------------------------------------------------- | --------------------------------------- |
+| Forge  | Maintainer                                                                             | Source                              |
+| ------ | -------------------------------------------------------------------------------------- | ----------------------------------- |
 | GitHub | [@setchy](https://github.com/setchy), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/github/` |
-| Gitea  | [@bircni](https://github.com/bircni), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/gitea/` |
+| Gitea  | [@bircni](https://github.com/bircni), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/gitea/`  |
 
 ## Adding a new forge
 

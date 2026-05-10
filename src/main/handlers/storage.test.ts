@@ -5,10 +5,7 @@ import { EVENTS } from '../../shared/events';
 
 import { registerStorageHandlers } from './storage';
 
-type IpcHandler = (
-  event: unknown,
-  ...args: unknown[]
-) => unknown | Promise<unknown>;
+type IpcHandler = (event: unknown, ...args: unknown[]) => unknown | Promise<unknown>;
 
 const handleMock = vi.fn();
 
@@ -35,9 +32,7 @@ vi.mock('../../shared/logger', async (importOriginal) => {
 });
 
 function getHandler(event: string): IpcHandler {
-  const call = handleMock.mock.calls.find(
-    (entry: unknown[]) => entry[0] === event,
-  );
+  const call = handleMock.mock.calls.find((entry: unknown[]) => entry[0] === event);
   if (!call) {
     throw new Error(`No handler registered for ${event}`);
   }
@@ -53,9 +48,7 @@ describe('main/handlers/storage.ts', () => {
     it('registers expected storage IPC event handlers', () => {
       registerStorageHandlers();
 
-      const registeredHandlers = handleMock.mock.calls.map(
-        (call: unknown[]) => call[0],
-      );
+      const registeredHandlers = handleMock.mock.calls.map((call: unknown[]) => call[0]);
 
       expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_ENCRYPT);
       expect(registeredHandlers).toContain(EVENTS.SAFE_STORAGE_DECRYPT);
@@ -92,9 +85,7 @@ describe('main/handlers/storage.ts', () => {
 
       const result = await decrypt({}, 'irrelevant');
 
-      expect(safeStorage.encryptStringAsync).toHaveBeenCalledWith(
-        'rotated-token',
-      );
+      expect(safeStorage.encryptStringAsync).toHaveBeenCalledWith('rotated-token');
       expect(result).toEqual({
         token: 'rotated-token',
         reEncryptedToken: Buffer.from('rotated-token').toString('base64'),

@@ -14,14 +14,7 @@ import {
   StarIcon,
   SyncIcon,
 } from '@primer/octicons-react';
-import {
-  ActionList,
-  ActionMenu,
-  Button,
-  IconButton,
-  Stack,
-  Text,
-} from '@primer/react';
+import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../hooks/useAppContext';
 
@@ -40,11 +33,7 @@ import { Errors } from '../utils/core/errors';
 import { toError } from '../utils/core/logger';
 import { saveState } from '../utils/core/storage';
 import { getAdapter } from '../utils/forges/registry';
-import {
-  openAccountProfile,
-  openDeveloperSettings,
-  openHost,
-} from '../utils/system/links';
+import { openAccountProfile, openDeveloperSettings, openHost } from '../utils/system/links';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/ui/icons';
 
 export const AccountsRoute: FC = () => {
@@ -52,13 +41,9 @@ export const AccountsRoute: FC = () => {
 
   const { auth, settings, logoutFromAccount, notifications } = useAppContext();
 
-  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
-    {},
-  );
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
 
-  const [refreshErrorStates, setRefreshErrorStates] = useState<
-    Record<string, GitifyError>
-  >({});
+  const [refreshErrorStates, setRefreshErrorStates] = useState<Record<string, GitifyError>>({});
 
   const logoutAccount = useCallback(
     (account: Account) => {
@@ -129,8 +114,7 @@ export const AccountsRoute: FC = () => {
     const accountUUID = getAccountUUID(account);
     return (
       refreshErrorStates[accountUUID] ??
-      notifications.find((n) => getAccountUUID(n.account) === accountUUID)
-        ?.error ??
+      notifications.find((n) => getAccountUUID(n.account) === accountUUID)?.error ??
       null
     );
   };
@@ -170,10 +154,7 @@ export const AccountsRoute: FC = () => {
           const hasBadCredentials = accountError === Errors.BAD_CREDENTIALS;
 
           return (
-            <div
-              className="rounded-md p-2 mb-4 bg-gitify-accounts"
-              key={accountUUID}
-            >
+            <div className="rounded-md p-2 mb-4 bg-gitify-accounts" key={accountUUID}>
               <Stack align="stretch" direction="vertical">
                 <Stack align="start" direction="horizontal">
                   <Button
@@ -190,11 +171,7 @@ export const AccountsRoute: FC = () => {
                   </Button>
                 </Stack>
 
-                <Stack
-                  align="start"
-                  direction="horizontal"
-                  justify="space-between"
-                >
+                <Stack align="start" direction="horizontal" justify="space-between">
                   <div className="pl-2 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
                       <Stack
@@ -260,36 +237,34 @@ export const AccountsRoute: FC = () => {
                       variant={i === 0 ? 'primary' : 'default'}
                     />
 
-                    {!hasBadCredentials &&
-                      getAdapter(account).supportsOAuthScopes && (
-                        <IconButton
-                          aria-label={`View scopes for ${account.user?.login}`}
-                          data-testid="account-view-scopes"
-                          icon={() => (
-                            <ShieldCheckIcon
-                              className={
-                                hasRecommendedScopes(account)
-                                  ? IconColor.GREEN
-                                  : hasAlternateScopes(account)
-                                    ? 'text-gitify-warning'
-                                    : ''
-                              }
-                            />
-                          )}
-                          onClick={() =>
-                            navigate('/account-scopes', {
-                              state: { account },
-                            })
-                          }
-                          size="small"
-                          variant={
-                            !hasRecommendedScopes(account) &&
-                            !hasAlternateScopes(account)
-                              ? 'danger'
-                              : 'default'
-                          }
-                        />
-                      )}
+                    {!hasBadCredentials && getAdapter(account).supportsOAuthScopes && (
+                      <IconButton
+                        aria-label={`View scopes for ${account.user?.login}`}
+                        data-testid="account-view-scopes"
+                        icon={() => (
+                          <ShieldCheckIcon
+                            className={
+                              hasRecommendedScopes(account)
+                                ? IconColor.GREEN
+                                : hasAlternateScopes(account)
+                                  ? 'text-gitify-warning'
+                                  : ''
+                            }
+                          />
+                        )}
+                        onClick={() =>
+                          navigate('/account-scopes', {
+                            state: { account },
+                          })
+                        }
+                        size="small"
+                        variant={
+                          !hasRecommendedScopes(account) && !hasAlternateScopes(account)
+                            ? 'danger'
+                            : 'default'
+                        }
+                      />
+                    )}
 
                     {hasBadCredentials && (
                       <IconButton
@@ -337,10 +312,7 @@ export const AccountsRoute: FC = () => {
 
           <ActionMenu.Overlay width="medium">
             <ActionList>
-              <ActionList.Item
-                data-testid="account-add-github"
-                onSelect={() => loginWithGitHub()}
-              >
+              <ActionList.Item data-testid="account-add-github" onSelect={() => loginWithGitHub()}>
                 <ActionList.LeadingVisual>
                   <MarkGithubIcon />
                 </ActionList.LeadingVisual>

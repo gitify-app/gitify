@@ -17,12 +17,7 @@ import type {
 } from '../../types';
 import type { AuthMethod } from './types';
 
-import {
-  rendererLogError,
-  rendererLogInfo,
-  rendererLogWarn,
-  toError,
-} from '../core/logger';
+import { rendererLogError, rendererLogInfo, rendererLogWarn, toError } from '../core/logger';
 import { getAdapter } from '../forges/registry';
 import { encryptValue } from '../system/comms';
 import { getPlatformFromHostname, resolvePlatform } from './platform';
@@ -63,20 +58,13 @@ export async function addAccount(
   newAccount = await refreshAccount(newAccount);
   const newAccountUUID = getAccountUUID(newAccount);
 
-  const existingIndex = accountList.findIndex(
-    (a) => getAccountUUID(a) === newAccountUUID,
-  );
+  const existingIndex = accountList.findIndex((a) => getAccountUUID(a) === newAccountUUID);
 
   if (existingIndex >= 0) {
     // Drop any forge-specific HTTP client cache so the new token is used.
-    getAdapter(accountList[existingIndex]).onAccountTokenChange?.(
-      accountList[existingIndex],
-    );
+    getAdapter(accountList[existingIndex]).onAccountTokenChange?.(accountList[existingIndex]);
     // Replace the existing account (e.g. re-authentication with a new token)
-    rendererLogInfo(
-      'addAccount',
-      `updating existing account for user ${newAccount.user?.login}`,
-    );
+    rendererLogInfo('addAccount', `updating existing account for user ${newAccount.user?.login}`);
     accountList[existingIndex] = newAccount;
   } else {
     accountList.push(newAccount);
@@ -95,9 +83,7 @@ export async function addAccount(
  * @returns A new auth state with the account removed.
  */
 export function removeAccount(auth: AuthState, account: Account): AuthState {
-  const updatedAccounts = auth.accounts.filter(
-    (a) => a.token !== account.token,
-  );
+  const updatedAccounts = auth.accounts.filter((a) => a.token !== account.token);
 
   return {
     accounts: updatedAccounts,
@@ -236,14 +222,8 @@ export function getDeveloperSettingsURL(account: Account): Link {
 export function getNewTokenURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
-  newTokenURL.searchParams.append(
-    'description',
-    `${APPLICATION.NAME} (Created on ${date})`,
-  );
-  newTokenURL.searchParams.append(
-    'scopes',
-    getRecommendedScopeNames().join(','),
-  );
+  newTokenURL.searchParams.append('description', `${APPLICATION.NAME} (Created on ${date})`);
+  newTokenURL.searchParams.append('scopes', getRecommendedScopeNames().join(','));
   newTokenURL.searchParams.append('default_expires_at', '90'); // 90 days
 
   return newTokenURL.toString() as Link;
@@ -260,21 +240,13 @@ export function getNewTokenURL(hostname: Hostname): Link {
  */
 export function getNewOAuthAppURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
-  const newOAuthAppURL = new URL(
-    `https://${hostname}/settings/applications/new`,
-  );
+  const newOAuthAppURL = new URL(`https://${hostname}/settings/applications/new`);
   newOAuthAppURL.searchParams.append(
     'oauth_application[name]',
     `${APPLICATION.NAME} (Created on ${date})`,
   );
-  newOAuthAppURL.searchParams.append(
-    'oauth_application[url]',
-    'https://gitify.io',
-  );
-  newOAuthAppURL.searchParams.append(
-    'oauth_application[callback_url]',
-    'gitify://oauth',
-  );
+  newOAuthAppURL.searchParams.append('oauth_application[url]', 'https://gitify.io');
+  newOAuthAppURL.searchParams.append('oauth_application[callback_url]', 'gitify://oauth');
 
   return newOAuthAppURL.toString() as Link;
 }
@@ -322,9 +294,7 @@ export function isValidToken(token: Token) {
  * @returns A base-64 encoded UUID string.
  */
 export function getAccountUUID(account: Account): AccountUUID {
-  return btoa(
-    `${account.hostname}-${account.user?.id}-${account.method}`,
-  ) as AccountUUID;
+  return btoa(`${account.hostname}-${account.user?.id}-${account.method}`) as AccountUUID;
 }
 
 /**

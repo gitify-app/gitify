@@ -1,10 +1,6 @@
 import type { FC } from 'react';
 
-import {
-  CheckCircleFillIcon,
-  DashIcon,
-  XCircleFillIcon,
-} from '@primer/octicons-react';
+import { CheckCircleFillIcon, DashIcon, XCircleFillIcon } from '@primer/octicons-react';
 
 export interface ScopeStatusIconProps {
   granted: boolean;

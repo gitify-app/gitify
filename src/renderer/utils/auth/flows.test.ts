@@ -1,8 +1,7 @@
 // Use a hoist-safe mock factory for '@octokit/oauth-methods'
 vi.mock('@octokit/oauth-methods', async () => {
-  const actual = await vi.importActual<typeof import('@octokit/oauth-methods')>(
-    '@octokit/oauth-methods',
-  );
+  const actual =
+    await vi.importActual<typeof import('@octokit/oauth-methods')>('@octokit/oauth-methods');
   return {
     ...actual,
     createDeviceCode: vi.fn(),
@@ -11,11 +10,7 @@ vi.mock('@octokit/oauth-methods', async () => {
   };
 });
 
-import {
-  createDeviceCode,
-  exchangeDeviceCode,
-  exchangeWebFlowCode,
-} from '@octokit/oauth-methods';
+import { createDeviceCode, exchangeDeviceCode, exchangeWebFlowCode } from '@octokit/oauth-methods';
 import { RequestError } from '@octokit/request-error';
 
 import type { MockedFunction } from 'vitest';
@@ -30,22 +25,19 @@ import * as logger from '../core/logger';
 import * as authUtils from './flows';
 import { getRecommendedScopeNames } from './scopes';
 
-const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<
-  typeof createDeviceCode
->;
+const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<typeof createDeviceCode>;
 
 const exchangeDeviceCodeMock = exchangeDeviceCode as unknown as MockedFunction<
   typeof exchangeDeviceCode
 >;
 
-const exchangeWebFlowCodeMock =
-  exchangeWebFlowCode as unknown as MockedFunction<typeof exchangeWebFlowCode>;
+const exchangeWebFlowCodeMock = exchangeWebFlowCode as unknown as MockedFunction<
+  typeof exchangeWebFlowCode
+>;
 
 describe('renderer/utils/auth/flows.ts', () => {
   vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
-  const openExternalLinkSpy = vi
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   beforeEach(() => {
     // Mock OAUTH_DEVICE_FLOW_CLIENT_ID value
@@ -98,9 +90,7 @@ describe('renderer/utils/auth/flows.ts', () => {
           authentication: { token: 'device-token-xyz' },
         } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
 
-        const token = await authUtils.pollGitHubDeviceFlow(
-          baseSession as DeviceFlowSession,
-        );
+        const token = await authUtils.pollGitHubDeviceFlow(baseSession as DeviceFlowSession);
 
         expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
           clientType: 'oauth-app',
@@ -118,9 +108,7 @@ describe('renderer/utils/auth/flows.ts', () => {
 
         exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
 
-        const token = await authUtils.pollGitHubDeviceFlow(
-          baseSession as DeviceFlowSession,
-        );
+        const token = await authUtils.pollGitHubDeviceFlow(baseSession as DeviceFlowSession);
 
         expect(token).toBeNull();
       });
@@ -131,10 +119,7 @@ describe('renderer/utils/auth/flows.ts', () => {
         exchangeDeviceCodeMock.mockRejectedValueOnce(otherErr);
 
         await expect(
-          async () =>
-            await authUtils.pollGitHubDeviceFlow(
-              baseSession as DeviceFlowSession,
-            ),
+          async () => await authUtils.pollGitHubDeviceFlow(baseSession as DeviceFlowSession),
         ).rejects.toThrow('boom');
       });
     });
@@ -166,9 +151,7 @@ describe('renderer/utils/auth/flows.ts', () => {
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
-        expect.any(Function),
-      );
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
 
       expect(res.authMethod).toBe('OAuth App');
       expect(res.authCode).toBe('123-456');
@@ -197,9 +180,7 @@ describe('renderer/utils/auth/flows.ts', () => {
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
-        expect.any(Function),
-      );
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
     });
 
     describe('exchangeAuthCodeForAccessToken', () => {

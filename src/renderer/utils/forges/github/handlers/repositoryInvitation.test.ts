@@ -10,14 +10,11 @@ describe('renderer/utils/notifications/handlers/repositoryInvitation.ts', () => 
       type: 'RepositoryInvitation',
     });
 
-    expect(
-      repositoryInvitationHandler.iconType(mockNotification).displayName,
-    ).toBe('MailIcon');
+    expect(repositoryInvitationHandler.iconType(mockNotification).displayName).toBe('MailIcon');
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       repositoryInvitationHandler.defaultUrl({

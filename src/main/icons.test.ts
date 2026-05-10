@@ -6,9 +6,7 @@ describe('main/icons.ts', () => {
 
     expect(TrayIcons.idle).toContain('assets/images/tray-idleTemplate.png');
 
-    expect(TrayIcons.idleAlternate).toContain(
-      'assets/images/tray-idle-white.png',
-    );
+    expect(TrayIcons.idleAlternate).toContain('assets/images/tray-idle-white.png');
 
     expect(TrayIcons.error).toContain('assets/images/tray-error.png');
 

@@ -6,7 +6,6 @@
     ":enableVulnerabilityAlerts",
     ":semanticCommitTypeAll(chore)",
     ":separateMultipleMajorReleases",
-    "customManagers:biomeVersions",
     "schedule:weekly"
   ],
   "labels": ["dependency"],

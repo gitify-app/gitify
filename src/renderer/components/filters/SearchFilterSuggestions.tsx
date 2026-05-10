@@ -18,10 +18,7 @@ interface SearchFilterSuggestionsProps {
   inputValue: string;
 }
 
-export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
-  open,
-  inputValue,
-}) => {
+export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({ open, inputValue }) => {
   const { settings } = useAppContext();
 
   if (!open) {
@@ -29,12 +26,8 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
   }
 
   const lower = inputValue.toLowerCase();
-  const base = settings.detailedNotifications
-    ? ALL_SEARCH_QUALIFIERS
-    : BASE_SEARCH_QUALIFIERS;
-  const suggestions = base.filter(
-    (q) => q.prefix.startsWith(lower) || inputValue === '',
-  );
+  const base = settings.detailedNotifications ? ALL_SEARCH_QUALIFIERS : BASE_SEARCH_QUALIFIERS;
+  const suggestions = base.filter((q) => q.prefix.startsWith(lower) || inputValue === '');
   const beginsWithKnownQualifier = base.some((q) => lower.startsWith(q.prefix));
 
   return (
@@ -46,25 +39,18 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({
               <div key={q.prefix}>
                 <Stack direction="vertical" gap="none">
                   <Text className="text-xs font-semibold">{q.prefix}</Text>
-                  <Text className={cn('text-xs', Opacity.HIGH)}>
-                    {q.description}
-                  </Text>
+                  <Text className={cn('text-xs', Opacity.HIGH)}>{q.description}</Text>
                 </Stack>
               </div>
             ))}
-          {inputValue !== '' &&
-            suggestions.length === 0 &&
-            !beginsWithKnownQualifier && (
-              <div>
-                <Text className={cn('text-xs', Opacity.HIGH)}>
-                  Please use one of the supported filters [
-                  {base
-                    .map((q) => q.prefix.replace(SEARCH_DELIMITER, ''))
-                    .join(', ')}
-                  ]
-                </Text>
-              </div>
-            )}
+          {inputValue !== '' && suggestions.length === 0 && !beginsWithKnownQualifier && (
+            <div>
+              <Text className={cn('text-xs', Opacity.HIGH)}>
+                Please use one of the supported filters [
+                {base.map((q) => q.prefix.replace(SEARCH_DELIMITER, '')).join(', ')}]
+              </Text>
+            </div>
+          )}
         </Stack>
       </Popover.Content>
     </Popover>

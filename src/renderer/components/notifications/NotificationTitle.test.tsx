@@ -5,9 +5,7 @@ import { NotificationTitle } from './NotificationTitle';
 
 describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   it('should render plain text without code blocks', () => {
-    const tree = renderWithProviders(
-      <NotificationTitle title="Simple notification title" />,
-    );
+    const tree = renderWithProviders(<NotificationTitle title="Simple notification title" />);
 
     expect(tree.container).toMatchSnapshot();
   });
@@ -29,17 +27,13 @@ describe('renderer/components/notifications/NotificationTitle.tsx', () => {
   });
 
   it('should render text with code block at the start', () => {
-    const tree = renderWithProviders(
-      <NotificationTitle title="`useState` hook implementation" />,
-    );
+    const tree = renderWithProviders(<NotificationTitle title="`useState` hook implementation" />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('should render text with code block at the end', () => {
-    const tree = renderWithProviders(
-      <NotificationTitle title="Fix issue with `render`" />,
-    );
+    const tree = renderWithProviders(<NotificationTitle title="Fix issue with `render`" />);
 
     expect(tree.container).toMatchSnapshot();
   });

@@ -1,8 +1,4 @@
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from '@primer/octicons-react';
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@primer/octicons-react';
 
 import type { Chevron } from '../../types';
 

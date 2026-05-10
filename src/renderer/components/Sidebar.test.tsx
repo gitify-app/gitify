@@ -11,9 +11,7 @@ import { Sidebar } from './Sidebar';
 describe('renderer/components/Sidebar.tsx', () => {
   const fetchNotificationsMock = vi.fn();
   const updateSettingMock = vi.fn();
-  const openExternalLinkSpy = vi
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   it('should render itself & its children (logged in)', () => {
     const tree = renderWithProviders(<Sidebar />, {
@@ -49,9 +47,7 @@ describe('renderer/components/Sidebar.tsx', () => {
       await userEvent.click(screen.getByTestId('sidebar-notifications'));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/notifications',
-      );
+      expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/notifications');
     });
 
     it('renders correct icon when there are no notifications', () => {
@@ -130,9 +126,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         filters: { reasons: ['assign'] },
       });
 
-      expect(
-        screen.getByTestId('sidebar-filter-notifications'),
-      ).toMatchSnapshot();
+      expect(screen.getByTestId('sidebar-filter-notifications')).toMatchSnapshot();
     });
   });
 
@@ -145,9 +139,7 @@ describe('renderer/components/Sidebar.tsx', () => {
       await userEvent.click(screen.getByTestId('sidebar-my-issues'));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/issues',
-      );
+      expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/issues');
     });
 
     it('opens my github pull requests page', async () => {
@@ -158,9 +150,7 @@ describe('renderer/components/Sidebar.tsx', () => {
       await userEvent.click(screen.getByTestId('sidebar-my-pull-requests'));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/pulls',
-      );
+      expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/pulls');
     });
   });
 

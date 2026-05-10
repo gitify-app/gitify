@@ -1,10 +1,6 @@
 import { Constants } from '../../../constants';
 
-import type {
-  GitifySubject,
-  RawGitifyNotification,
-  SettingsState,
-} from '../../../types';
+import type { GitifySubject, RawGitifyNotification, SettingsState } from '../../../types';
 
 import { rendererLogError, rendererLogWarn, toError } from '../../core/logger';
 import { fetchNotificationDetailsForList } from './client';
@@ -34,13 +30,8 @@ export async function enrichGitHubNotifications(
 
 async function fetchInBatches(
   notifications: RawGitifyNotification[],
-): Promise<
-  Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>
-> {
-  const merged = new Map<
-    RawGitifyNotification,
-    FetchMergedDetailsTemplateQuery['repository']
-  >();
+): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
+  const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
 
   const batchSize = Constants.GITHUB_API_MERGE_BATCH_SIZE;
 
@@ -74,11 +65,7 @@ async function enrichSingle(
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(
-      notification,
-      settings,
-      fetchedData,
-    );
+    additionalSubjectDetails = await handler.enrich(notification, settings, fetchedData);
   } catch (err) {
     rendererLogError(
       'enrichGitHubNotifications',
@@ -87,10 +74,7 @@ async function enrichSingle(
       notification,
     );
 
-    rendererLogWarn(
-      'enrichGitHubNotifications',
-      'Continuing with base notification details',
-    );
+    rendererLogWarn('enrichGitHubNotifications', 'Continuing with base notification details');
   }
 
   return {

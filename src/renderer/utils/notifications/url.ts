@@ -4,19 +4,13 @@ import { rendererLogError, toError } from '../core/logger';
 import { getHtmlUrl } from '../forges/github/client';
 import { getAdapter } from '../forges/registry';
 
-export function generateNotificationReferrerId(
-  notification: GitifyNotification,
-): string {
+export function generateNotificationReferrerId(notification: GitifyNotification): string {
   const raw = `018:NotificationThread${notification.id}:${notification.account.user?.id}`;
   return btoa(raw);
 }
 
-export async function generateGitHubWebUrl(
-  notification: GitifyNotification,
-): Promise<Link> {
-  const url = new URL(
-    getAdapter(notification.account).getDisplayHelpers(notification).defaultUrl,
-  );
+export async function generateGitHubWebUrl(notification: GitifyNotification): Promise<Link> {
+  const url = new URL(getAdapter(notification.account).getDisplayHelpers(notification).defaultUrl);
 
   if (notification.subject.htmlUrl) {
     url.href = notification.subject.htmlUrl;
@@ -30,10 +24,7 @@ export async function generateGitHubWebUrl(
 
         url.href = response.html_url;
       } else if (notification.subject.url) {
-        const response = await getHtmlUrl(
-          notification.account,
-          notification.subject.url,
-        );
+        const response = await getHtmlUrl(notification.account, notification.subject.url);
 
         url.href = response.html_url;
       }
@@ -47,10 +38,7 @@ export async function generateGitHubWebUrl(
     }
   }
 
-  url.searchParams.set(
-    'notification_referrer_id',
-    generateNotificationReferrerId(notification),
-  );
+  url.searchParams.set('notification_referrer_id', generateNotificationReferrerId(notification));
 
   return url.toString() as Link;
 }

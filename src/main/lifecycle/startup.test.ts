@@ -77,16 +77,12 @@ describe('main/lifecycle/startup.ts', () => {
 
       initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
 
-      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock
-        .calls[0]?.[1];
+      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1];
       expect(readyHandler).toBeDefined();
       readyHandler?.();
 
       expect(mb.tray.setContextMenu).toHaveBeenCalledWith(contextMenu);
-      expect(mb.tray.on).not.toHaveBeenCalledWith(
-        'right-click',
-        expect.any(Function),
-      );
+      expect(mb.tray.on).not.toHaveBeenCalledWith('right-click', expect.any(Function));
     });
 
     it('uses popUpContextMenu on non-Linux platforms', () => {
@@ -96,16 +92,12 @@ describe('main/lifecycle/startup.ts', () => {
 
       initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
 
-      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock
-        .calls[0]?.[1];
+      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1];
       expect(readyHandler).toBeDefined();
       readyHandler?.();
 
       expect(mb.tray.setContextMenu).not.toHaveBeenCalled();
-      expect(mb.tray.on).toHaveBeenCalledWith(
-        'right-click',
-        expect.any(Function),
-      );
+      expect(mb.tray.on).toHaveBeenCalledWith('right-click', expect.any(Function));
     });
   });
 
@@ -114,20 +106,12 @@ describe('main/lifecycle/startup.ts', () => {
       const mb = createMb();
       const url = 'gitify://callback?code=abc123';
       handleProtocolURL(mb as unknown as Menubar, url, 'gitify');
-      expect(sendRendererEventMock).toHaveBeenCalledWith(
-        mb,
-        EVENTS.AUTH_CALLBACK,
-        url,
-      );
+      expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.AUTH_CALLBACK, url);
     });
 
     it('ignores URLs that do not match the protocol', () => {
       const mb = createMb();
-      handleProtocolURL(
-        mb as unknown as Menubar,
-        'https://github.com',
-        'gitify',
-      );
+      handleProtocolURL(mb as unknown as Menubar, 'https://github.com', 'gitify');
       expect(sendRendererEventMock).not.toHaveBeenCalled();
     });
   });

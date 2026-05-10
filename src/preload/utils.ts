@@ -1,20 +1,12 @@
 import { ipcRenderer } from 'electron';
 
-import type {
-  EventArgs,
-  EventRequest,
-  EventResponse,
-  EventType,
-} from '../shared/events';
+import type { EventArgs, EventRequest, EventResponse, EventType } from '../shared/events';
 
 /**
  * Send a fire-and-forget IPC message from the renderer to the main process.
  * Variadic so events without a payload can be called as `sendMainEvent(event)`.
  */
-export function sendMainEvent<E extends EventType>(
-  event: E,
-  ...args: EventArgs<E>
-): void {
+export function sendMainEvent<E extends EventType>(event: E, ...args: EventArgs<E>): void {
   ipcRenderer.send(event, ...args);
 }
 
@@ -29,7 +21,7 @@ export async function invokeMainEvent<E extends EventType>(
   try {
     return await ipcRenderer.invoke(event, ...args);
   } catch (err) {
-    // biome-ignore lint/suspicious/noConsole: preload environment is strictly sandboxed
+    // oxlint-disable-next-line no-console -- preload environment is strictly sandboxed
     console.error(`[IPC] invoke failed: ${event}`, err);
     throw err;
   }

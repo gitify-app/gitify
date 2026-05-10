@@ -15,8 +15,7 @@ export const REASON_TYPE_DETAILS: Record<Reason, TypeDetails> = {
   },
   ci_activity: {
     title: 'Workflow Run Completed',
-    description:
-      'A GitHub Actions workflow run was triggered for your repository.',
+    description: 'A GitHub Actions workflow run was triggered for your repository.',
   },
   comment: {
     title: 'Commented',
@@ -41,8 +40,7 @@ export const REASON_TYPE_DETAILS: Record<Reason, TypeDetails> = {
   },
   review_requested: {
     title: 'Review Requested',
-    description:
-      "You, or a team you're a member of, were requested to review a pull request.",
+    description: "You, or a team you're a member of, were requested to review a pull request.",
   },
   security_advisory_credit: {
     title: 'Security Advisory Credit Received',
@@ -50,8 +48,7 @@ export const REASON_TYPE_DETAILS: Record<Reason, TypeDetails> = {
   },
   security_alert: {
     title: 'Security Alert Received',
-    description:
-      'GitHub discovered a security vulnerability in your repository.',
+    description: 'GitHub discovered a security vulnerability in your repository.',
   },
   state_change: {
     title: 'State Changed',

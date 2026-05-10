@@ -117,9 +117,7 @@ describe('components/GlobalShortcuts.tsx', () => {
     });
 
     describe('openGitHubIssues', () => {
-      const openGitHubIssuesSpy = vi
-        .spyOn(links, 'openGitHubIssues')
-        .mockImplementation(vi.fn());
+      const openGitHubIssuesSpy = vi.spyOn(links, 'openGitHubIssues').mockImplementation(vi.fn());
 
       it('opens primary account GitHub issues webpage when pressing I while logged in', async () => {
         renderWithProviders(<GlobalShortcuts />, {
@@ -143,9 +141,7 @@ describe('components/GlobalShortcuts.tsx', () => {
     });
 
     describe('openGitHubPulls', () => {
-      const openGitHubPullsSpy = vi
-        .spyOn(links, 'openGitHubPulls')
-        .mockImplementation(vi.fn());
+      const openGitHubPullsSpy = vi.spyOn(links, 'openGitHubPulls').mockImplementation(vi.fn());
 
       it('opens primary account GitHub pull requests webpage when pressing N while logged in', async () => {
         renderWithProviders(<GlobalShortcuts />, {
@@ -271,9 +267,7 @@ describe('components/GlobalShortcuts.tsx', () => {
           },
         );
 
-        const input = document.getElementById(
-          'test-input',
-        ) as HTMLTextAreaElement;
+        const input = document.getElementById('test-input') as HTMLTextAreaElement;
         input.focus();
         await userEvent.type(input, 'h');
 
@@ -291,9 +285,7 @@ describe('components/GlobalShortcuts.tsx', () => {
           },
         );
 
-        const textarea = document.getElementById(
-          'test-textarea',
-        ) as HTMLTextAreaElement;
+        const textarea = document.getElementById('test-textarea') as HTMLTextAreaElement;
         textarea.focus();
         await userEvent.type(textarea, 'h');
 

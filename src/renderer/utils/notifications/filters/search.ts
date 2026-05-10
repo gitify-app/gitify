@@ -33,8 +33,9 @@ export const ALL_SEARCH_QUALIFIERS: readonly SearchQualifier[] = Object.values(
   SEARCH_QUALIFIERS,
 ) as readonly SearchQualifier[];
 
-export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
-  ALL_SEARCH_QUALIFIERS.filter((q) => !q.requiresDetailsNotifications);
+export const BASE_SEARCH_QUALIFIERS: readonly SearchQualifier[] = ALL_SEARCH_QUALIFIERS.filter(
+  (q) => !q.requiresDetailsNotifications,
+);
 
 export const DETAILED_ONLY_SEARCH_QUALIFIERS: readonly SearchQualifier[] =
   ALL_SEARCH_QUALIFIERS.filter((q) => q.requiresDetailsNotifications);

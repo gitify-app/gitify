@@ -17,10 +17,7 @@ import {
   type TraySettingsState,
 } from '../types';
 
-import {
-  mockGitHubCloudAccount,
-  mockGitHubEnterpriseServerAccount,
-} from './account-mocks';
+import { mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount } from './account-mocks';
 
 export const mockAuth: AuthState = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],

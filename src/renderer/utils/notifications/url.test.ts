@@ -10,15 +10,12 @@ describe('renderer/utils/notifications/url.ts', () => {
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
       const referrerId = generateNotificationReferrerId(mockGitifyNotification);
-      expect(referrerId).toBe(
-        'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
-      );
+      expect(referrerId).toBe('MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=');
     });
   });
 
   describe('generateGitHubWebUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test/issues/785' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test/issues/785' as Link;
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
@@ -73,10 +70,7 @@ describe('renderer/utils/notifications/url.ts', () => {
       });
 
       expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
-      expect(getHtmlUrlSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-        mockLatestCommentUrl,
-      );
+      expect(getHtmlUrlSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, mockLatestCommentUrl);
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
 
@@ -104,10 +98,7 @@ describe('renderer/utils/notifications/url.ts', () => {
       });
 
       expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
-      expect(getHtmlUrlSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-        mockSubjectUrl,
-      );
+      expect(getHtmlUrlSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, mockSubjectUrl);
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
   });

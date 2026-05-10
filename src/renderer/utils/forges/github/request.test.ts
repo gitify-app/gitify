@@ -14,19 +14,19 @@ vi.mock('@octokit/core', () => {
   };
 
   const MockOctokitClass = vi.fn(() => mockOctokit);
-  // biome-ignore lint/suspicious/noExplicitAny: Mock type
+  // oxlint-disable-next-line typescript/no-explicit-any -- Mock type
   (MockOctokitClass as any).plugin = vi.fn(() => MockOctokitClass);
 
   return { Octokit: MockOctokitClass };
 });
 
 vi.mock('@octokit/plugin-paginate-rest', () => ({
-  // biome-ignore lint/suspicious/noExplicitAny: Mock type
+  // oxlint-disable-next-line typescript/no-explicit-any -- Mock type
   paginateRest: vi.fn((octokit: any) => octokit),
 }));
 
 vi.mock('@octokit/plugin-rest-endpoint-methods', () => ({
-  // biome-ignore lint/suspicious/noExplicitAny: Mock type
+  // oxlint-disable-next-line typescript/no-explicit-any -- Mock type
   restEndpointMethods: vi.fn((octokit: any) => octokit),
 }));
 
@@ -54,16 +54,13 @@ describe('renderer/utils/forges/github/request.ts', () => {
   it('performGraphQLRequest - perform call with correct params', async () => {
     mockOctokitInstance.graphql.mockResolvedValue({});
 
-    await performGraphQLRequest(
-      mockGitHubCloudAccount,
-      FetchIssueByNumberDocument,
-      { owner: 'test', name: 'repo', number: 1 },
-    );
+    await performGraphQLRequest(mockGitHubCloudAccount, FetchIssueByNumberDocument, {
+      owner: 'test',
+      name: 'repo',
+      number: 1,
+    });
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'graphql',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'graphql');
     expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(
       FetchIssueByNumberDocument.toString(),
       { owner: 'test', name: 'repo', number: 1 },
@@ -76,10 +73,7 @@ describe('renderer/utils/forges/github/request.ts', () => {
 
     await performGraphQLRequestString(mockGitHubCloudAccount, queryString, {});
 
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(
-      mockGitHubCloudAccount,
-      'graphql',
-    );
+    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'graphql');
     expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {});
   });
 });

@@ -5,9 +5,7 @@ import type { RawGitHubNotification } from './types';
 import { transformNotifications } from './transform';
 
 describe('renderer/utils/forges/github/transform.ts', () => {
-  function rawNotification(
-    overrides: Partial<RawGitHubNotification> = {},
-  ): RawGitHubNotification {
+  function rawNotification(overrides: Partial<RawGitHubNotification> = {}): RawGitHubNotification {
     return {
       id: '1',
       unread: true,
@@ -20,8 +18,7 @@ describe('renderer/utils/forges/github/transform.ts', () => {
         title: 'Issue title',
         type: 'Issue',
         url: 'https://api.github.com/repos/o/r/issues/1',
-        latest_comment_url:
-          'https://api.github.com/repos/o/r/issues/comments/2',
+        latest_comment_url: 'https://api.github.com/repos/o/r/issues/comments/2',
       },
       repository: {
         id: 1,
@@ -96,10 +93,7 @@ describe('renderer/utils/forges/github/transform.ts', () => {
   }
 
   it('maps a raw notification onto the GitifyNotification shape', () => {
-    const [n] = transformNotifications(
-      [rawNotification()],
-      mockGitHubCloudAccount,
-    );
+    const [n] = transformNotifications([rawNotification()], mockGitHubCloudAccount);
 
     expect(n.id).toBe('1');
     expect(n.unread).toBe(true);

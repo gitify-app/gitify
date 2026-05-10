@@ -30,10 +30,7 @@ vi.mock('electron', () => ({
     getPath: () => getPathMock(),
     isInApplicationsFolder: () => isInApplicationsFolderMock(),
     moveToApplicationsFolder: () => moveToApplicationsFolderMock(),
-  } satisfies Pick<
-    Electron.App,
-    'getPath' | 'isInApplicationsFolder' | 'moveToApplicationsFolder'
-  >,
+  } satisfies Pick<Electron.App, 'getPath' | 'isInApplicationsFolder' | 'moveToApplicationsFolder'>,
   dialog: {
     showMessageBox: () => showMessageBoxMock(),
   } satisfies Pick<Electron.Dialog, 'showMessageBox'>,

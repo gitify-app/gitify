@@ -1,11 +1,6 @@
-import {
-  formatAcceleratorForDisplay,
-  keyboardEventToAccelerator,
-} from './keyboardShortcut';
+import { formatAcceleratorForDisplay, keyboardEventToAccelerator } from './keyboardShortcut';
 
-function makeKeyDown(
-  init: Partial<KeyboardEventInit> & { code: string },
-): KeyboardEvent {
+function makeKeyDown(init: Partial<KeyboardEventInit> & { code: string }): KeyboardEvent {
   return new KeyboardEvent('keydown', {
     bubbles: true,
     cancelable: true,
@@ -66,14 +61,12 @@ describe('keyboardEventToAccelerator', () => {
 
 describe('formatAcceleratorForDisplay', () => {
   it('uses Option on mac for Alt segment', () => {
-    expect(
-      formatAcceleratorForDisplay('CommandOrControl+Shift+Alt+G', true),
-    ).toBe('⌘·⇧·Option (⌥)·G');
+    expect(formatAcceleratorForDisplay('CommandOrControl+Shift+Alt+G', true)).toBe(
+      '⌘·⇧·Option (⌥)·G',
+    );
   });
 
   it('uses Alt on non-mac', () => {
-    expect(
-      formatAcceleratorForDisplay('CommandOrControl+Shift+Alt+G', false),
-    ).toBe('Ctrl+⇧+Alt+G');
+    expect(formatAcceleratorForDisplay('CommandOrControl+Shift+Alt+G', false)).toBe('Ctrl+⇧+Alt+G');
   });
 });

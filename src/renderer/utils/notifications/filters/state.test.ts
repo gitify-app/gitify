@@ -1,10 +1,6 @@
 import type { DeepPartial } from '../../../__helpers__/test-utils';
 
-import type {
-  FilterStateType,
-  GitifyNotification,
-  GitifyNotificationState,
-} from '../../../types';
+import type { FilterStateType, GitifyNotification, GitifyNotificationState } from '../../../types';
 
 import { stateFilter } from './state';
 
@@ -47,15 +43,12 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
       WAITING: 'other',
     } satisfies Record<GitifyNotificationState, FilterStateType>;
 
-    it.each(
-      Object.entries(cases) as Array<
-        [GitifyNotificationState, FilterStateType]
-      >,
-    )('filter notification with state %s as %s', (notificationState, expectedFilter) => {
-      mockNotification.subject.state = notificationState;
-      expect(
-        stateFilter.filterNotification(mockNotification, expectedFilter),
-      ).toBe(true);
-    });
+    it.each(Object.entries(cases) as Array<[GitifyNotificationState, FilterStateType]>)(
+      'filter notification with state %s as %s',
+      (notificationState, expectedFilter) => {
+        mockNotification.subject.state = notificationState;
+        expect(stateFilter.filterNotification(mockNotification, expectedFilter)).toBe(true);
+      },
+    );
   });
 });

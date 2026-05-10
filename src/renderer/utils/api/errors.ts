@@ -54,8 +54,7 @@ export function determineFailureType(
 
   // Handle Octokit GraphQL GraphqlResponseError
   if (err instanceof GraphqlResponseError) {
-    const errorMessages =
-      err.errors?.map((e) => e.message).join('; ') || message;
+    const errorMessages = err.errors?.map((e) => e.message).join('; ') || message;
 
     if (errorMessages.includes('Bad credentials')) {
       return Errors.BAD_CREDENTIALS;
@@ -83,9 +82,7 @@ export function handleGraphQLResponseError<TResult>(
   context: string,
   payload: GraphqlResponseError<TResult>,
 ): never {
-  const errorMessages = payload
-    .errors!.map((graphQLError) => graphQLError.message)
-    .join('; ');
+  const errorMessages = payload.errors!.map((graphQLError) => graphQLError.message).join('; ');
 
   const err = new Error(
     errorMessages

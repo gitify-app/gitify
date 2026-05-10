@@ -43,9 +43,7 @@ describe('main/handlers/system.ts', () => {
 
   function getKeyboardShortcutHandler() {
     registerSystemHandlers(menubar);
-    const handleCall = handleMock.mock.calls.find(
-      (c) => c[0] === EVENTS.UPDATE_KEYBOARD_SHORTCUT,
-    );
+    const handleCall = handleMock.mock.calls.find((c) => c[0] === EVENTS.UPDATE_KEYBOARD_SHORTCUT);
     if (!handleCall) {
       throw new Error('UPDATE_KEYBOARD_SHORTCUT handler not registered');
     }
@@ -64,9 +62,7 @@ describe('main/handlers/system.ts', () => {
       registerSystemHandlers(menubar);
 
       const onEvents = onMock.mock.calls.map((call: unknown[]) => call[0]);
-      const handleEvents = handleMock.mock.calls.map(
-        (call: unknown[]) => call[0],
-      );
+      const handleEvents = handleMock.mock.calls.map((call: unknown[]) => call[0]);
 
       expect(onEvents).toContain(EVENTS.OPEN_EXTERNAL);
       expect(onEvents).toContain(EVENTS.UPDATE_AUTO_LAUNCH);
@@ -105,9 +101,7 @@ describe('main/handlers/system.ts', () => {
       });
 
       expect(result).toEqual({ success: true });
-      expect(globalShortcut.unregister).toHaveBeenCalledWith(
-        'CommandOrControl+Shift+A',
-      );
+      expect(globalShortcut.unregister).toHaveBeenCalledWith('CommandOrControl+Shift+A');
       expect(globalShortcut.register).not.toHaveBeenCalled();
     });
 
@@ -125,9 +119,7 @@ describe('main/handlers/system.ts', () => {
         keyboardShortcut: 'CommandOrControl+Shift+B',
       });
 
-      expect(globalShortcut.unregister).toHaveBeenCalledWith(
-        'CommandOrControl+Shift+A',
-      );
+      expect(globalShortcut.unregister).toHaveBeenCalledWith('CommandOrControl+Shift+A');
       expect(globalShortcut.register).toHaveBeenCalledWith(
         'CommandOrControl+Shift+B',
         expect.any(Function),
@@ -142,9 +134,7 @@ describe('main/handlers/system.ts', () => {
         keyboardShortcut: 'CommandOrControl+Shift+A',
       });
       vi.clearAllMocks();
-      vi.mocked(globalShortcut.register)
-        .mockReturnValueOnce(false)
-        .mockReturnValue(true);
+      vi.mocked(globalShortcut.register).mockReturnValueOnce(false).mockReturnValue(true);
 
       const result = handler({} as Electron.IpcMainInvokeEvent, {
         enabled: true,

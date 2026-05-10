@@ -10,15 +10,13 @@ describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread
       type: 'RepositoryDependabotAlertsThread',
     });
 
-    expect(
-      repositoryDependabotAlertsThreadHandler.iconType(mockNotification)
-        .displayName,
-    ).toBe('AlertIcon');
+    expect(repositoryDependabotAlertsThreadHandler.iconType(mockNotification).displayName).toBe(
+      'AlertIcon',
+    );
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       repositoryDependabotAlertsThreadHandler.defaultUrl({
@@ -30,8 +28,6 @@ describe('renderer/utils/notifications/handlers/repositoryDependabotAlertsThread
   });
 
   it('defaultUserType', () => {
-    expect(repositoryDependabotAlertsThreadHandler.defaultUserType()).toEqual(
-      'Bot',
-    );
+    expect(repositoryDependabotAlertsThreadHandler.defaultUserType()).toEqual('Bot');
   });
 });

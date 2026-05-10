@@ -43,12 +43,8 @@ describe('main/handlers/app.ts', () => {
     it('registers expected app IPC event handlers', () => {
       registerAppHandlers(menubar);
 
-      const registeredHandlers = handleMock.mock.calls.map(
-        (call: unknown[]) => call[0],
-      );
-      const registeredEvents = onMock.mock.calls.map(
-        (call: unknown[]) => call[0],
-      );
+      const registeredHandlers = handleMock.mock.calls.map((call: unknown[]) => call[0]);
+      const registeredEvents = onMock.mock.calls.map((call: unknown[]) => call[0]);
 
       expect(registeredHandlers).toContain(EVENTS.VERSION);
       expect(registeredHandlers).toContain(EVENTS.NOTIFICATION_SOUND_PATH);

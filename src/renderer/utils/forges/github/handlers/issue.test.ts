@@ -8,12 +8,7 @@ import {
 } from '../__mocks__/response-mocks';
 
 import type { GitifyNotification } from '../../../../types';
-import {
-  type GitifyIssueState,
-  type GitifySubject,
-  IconColor,
-  type Link,
-} from '../../../../types';
+import { type GitifyIssueState, type GitifySubject, IconColor, type Link } from '../../../../types';
 
 import * as apiClient from '../client';
 import type { FetchIssueByNumberQuery } from '../graphql/generated/graphql';
@@ -60,8 +55,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: undefined,
         reactionsCount: 0,
@@ -93,8 +87,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: undefined,
         reactionsCount: 0,
@@ -173,8 +166,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [{ name: 'enhancement', color: '0e8a16' }],
         milestone: undefined,
         reactionsCount: 0,
@@ -209,8 +201,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           type: mockAuthor.type,
         },
         commentCount: 0,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/issues/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         milestone: {
           state: 'OPEN',
@@ -232,18 +223,17 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       REOPENED: 'IssueReopenedIcon',
     } satisfies Record<GitifyIssueState, string>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
-    )('iconType for issue with state %s', (issueState, issueIconType) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'Issue',
-        state: issueState,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyIssueState, IconColor]>)(
+      'iconType for issue with state %s',
+      (issueState, issueIconType) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'Issue',
+          state: issueState,
+        });
 
-      expect(issueHandler.iconType(mockNotification).displayName).toBe(
-        issueIconType,
-      );
-    });
+        expect(issueHandler.iconType(mockNotification).displayName).toBe(issueIconType);
+      },
+    );
   });
 
   describe('iconColor', () => {
@@ -256,21 +246,21 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       REOPENED: IconColor.GREEN,
     } satisfies Record<GitifyIssueState, IconColor>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyIssueState, IconColor]>,
-    )('iconColor for issue with state %s', (issueState, issueIconColor) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'Issue',
-        state: issueState,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyIssueState, IconColor]>)(
+      'iconColor for issue with state %s',
+      (issueState, issueIconColor) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'Issue',
+          state: issueState,
+        });
 
-      expect(issueHandler.iconColor(mockNotification)).toBe(issueIconColor);
-    });
+        expect(issueHandler.iconColor(mockNotification)).toBe(issueIconColor);
+      },
+    );
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       issueHandler.defaultUrl({

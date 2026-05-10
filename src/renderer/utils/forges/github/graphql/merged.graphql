@@ -20,9 +20,7 @@ query FetchMergedDetailsTemplate(
 
 fragment MergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
-    discussion(number: $numberINDEX)
-      @include(if: $isDiscussionNotificationINDEX)
-    {
+    discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
       ...DiscussionDetails
     }
 
@@ -30,9 +28,7 @@ fragment MergedDetailsQueryTemplate on Query {
       ...IssueDetails
     }
 
-    pullRequest(number: $numberINDEX)
-      @include(if: $isPullRequestNotificationINDEX)
-    {
+    pullRequest(number: $numberINDEX) @include(if: $isPullRequestNotificationINDEX) {
       ...PullRequestDetails
     }
   }

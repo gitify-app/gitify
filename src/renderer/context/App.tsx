@@ -104,21 +104,11 @@ function migrateLegacyAuthState(auth: AuthState): AuthState {
 export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithDeviceFlowStart: (
-    hostname?: Hostname,
-    scopes?: string[],
-  ) => Promise<DeviceFlowSession>;
-  loginWithDeviceFlowPoll: (
-    session: DeviceFlowSession,
-  ) => Promise<Token | null>;
-  loginWithDeviceFlowComplete: (
-    token: Token,
-    hostname: Hostname,
-  ) => Promise<void>;
+  loginWithDeviceFlowStart: (hostname?: Hostname, scopes?: string[]) => Promise<DeviceFlowSession>;
+  loginWithDeviceFlowPoll: (session: DeviceFlowSession) => Promise<Token | null>;
+  loginWithDeviceFlowComplete: (token: Token, hostname: Hostname) => Promise<void>;
   loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
-  loginWithPersonalAccessToken: (
-    data: LoginPersonalAccessTokenOptions,
-  ) => Promise<void>;
+  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
   logoutFromAccount: (account: Account) => Promise<void>;
 
   status: Status;
@@ -133,12 +123,8 @@ export interface AppContextState {
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
-  markNotificationsAsRead: (
-    notifications: GitifyNotification[],
-  ) => Promise<void>;
-  markNotificationsAsDone: (
-    notifications: GitifyNotification[],
-  ) => Promise<void>;
+  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<void>;
+  markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 
   settings: SettingsState;
@@ -150,9 +136,7 @@ export interface AppContextState {
   clearShortcutRegistrationError: () => void;
 }
 
-export const AppContext = createContext<Partial<AppContextState> | undefined>(
-  undefined,
-);
+export const AppContext = createContext<Partial<AppContextState> | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const existingState = loadState();
@@ -164,15 +148,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const [settings, setSettings] = useState<SettingsState>(
-    existingState.settings
-      ? { ...defaultSettings, ...existingState.settings }
-      : defaultSettings,
+    existingState.settings ? { ...defaultSettings, ...existingState.settings } : defaultSettings,
   );
 
   const lastAppliedOpenGitifyShortcutRef = useRef(settings.openGitifyShortcut);
-  const [shortcutRegistrationError, setShortcutRegistrationError] = useState<
-    string | null
-  >(null);
+  const [shortcutRegistrationError, setShortcutRegistrationError] = useState<string | null>(null);
 
   const clearShortcutRegistrationError = useCallback(() => {
     setShortcutRegistrationError(null);
@@ -249,8 +229,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     const tokensMigrated = migratedAccounts.some((migratedAccount) => {
       const originalAccount = auth.accounts.find(
-        (account) =>
-          getAccountUUID(account) === getAccountUUID(migratedAccount),
+        (account) => getAccountUUID(account) === getAccountUUID(migratedAccount),
       );
 
       if (!originalAccount) {
@@ -272,9 +251,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     persistAuth(updatedAuth);
   }, [auth, persistAuth]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
     fetchNotifications({ auth, settings });
+    // oxlint-disable-next-line react/exhaustive-deps -- Fetch new notifications when account count or filters change
   }, [
     auth.accounts.length,
     settings.participating,
@@ -303,12 +282,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   /**
    * On startup, check if auth tokens need encrypting and refresh all account details
    */
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Run once on startup
   useEffect(() => {
     void (async () => {
       await migrateAuthTokens();
       await refreshAllAccounts();
     })();
+    // oxlint-disable-next-line react/exhaustive-deps -- Run once on startup
   }, []);
 
   // Refresh account details on interval
@@ -319,10 +298,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // Theme
   useEffect(() => {
     const colorMode = mapThemeModeToColorMode(settings.theme);
-    const colorScheme = mapThemeModeToColorScheme(
-      settings.theme,
-      settings.increaseContrast,
-    );
+    const colorScheme = mapThemeModeToColorScheme(settings.theme, settings.increaseContrast);
 
     setColorMode(colorMode);
 
@@ -337,21 +313,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     setDayScheme(colorScheme ?? dayFallback);
     setNightScheme(colorScheme ?? nightFallback);
-  }, [
-    settings.theme,
-    settings.increaseContrast,
-    setColorMode,
-    setDayScheme,
-    setNightScheme,
-  ]);
+  }, [settings.theme, settings.increaseContrast, setColorMode, setDayScheme, setNightScheme]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update the tray on setting or notification changes
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
 
     const trayCount = status === 'error' ? -1 : notificationCount;
     setTrayIconColorAndTitle(trayCount, settings);
+    // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
@@ -405,8 +375,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);
-      lastAppliedOpenGitifyShortcutRef.current =
-        defaultSettings.openGitifyShortcut;
+      lastAppliedOpenGitifyShortcutRef.current = defaultSettings.openGitifyShortcut;
       setShortcutRegistrationError(null);
     });
   }, []);
@@ -416,8 +385,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       saveState({ auth, settings: defaultSettings });
       return defaultSettings;
     });
-    lastAppliedOpenGitifyShortcutRef.current =
-      defaultSettings.openGitifyShortcut;
+    lastAppliedOpenGitifyShortcutRef.current = defaultSettings.openGitifyShortcut;
     setShortcutRegistrationError(null);
   }, [auth]);
 
@@ -433,7 +401,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   // Global window zoom handler / listener
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
   useEffect(() => {
     // Set the zoom level when settings.zoomPercentage changes
     window.gitify.zoom.setLevel(zoomPercentageToLevel(settings.zoomPercentage));
@@ -445,9 +412,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const handleResize = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        const zoomPercentage = zoomLevelToPercentage(
-          window.gitify.zoom.getLevel(),
-        );
+        const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
         if (zoomPercentage !== settings.zoomPercentage) {
           updateSetting('zoomPercentage', zoomPercentage);
@@ -461,6 +426,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       window.removeEventListener('resize', handleResize);
       clearTimeout(timeout);
     };
+    // oxlint-disable-next-line react/exhaustive-deps -- We want to update on settings.zoomPercentage changes
   }, [settings.zoomPercentage]);
 
   const isLoggedIn = useMemo(() => {
@@ -473,8 +439,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Initiate device flow session.
    */
   const loginWithDeviceFlowStart = useCallback(
-    async (hostname?: Hostname, scopes?: string[]) =>
-      await startGitHubDeviceFlow(hostname, scopes),
+    async (hostname?: Hostname, scopes?: string[]) => await startGitHubDeviceFlow(hostname, scopes),
     [],
   );
 
@@ -502,24 +467,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(
-        auth,
-        'GitHub App',
-        token,
-        hostname,
-        'github',
-      );
+      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname, 'github');
 
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
+    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
   );
 
   /**
@@ -548,13 +501,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
+    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
   );
 
   /**
@@ -591,13 +538,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
+    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
   );
 
   const logoutFromAccount = useCallback(
@@ -706,7 +647,5 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     ],
   );
 
-  return (
-    <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>;
 };

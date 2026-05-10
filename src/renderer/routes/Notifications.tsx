@@ -12,8 +12,7 @@ import { Oops } from '../components/Oops';
 import { getAccountUUID } from '../utils/auth/utils';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, status, globalError, settings, hasNotifications } =
-    useAppContext();
+  const { notifications, status, globalError, settings, hasNotifications } = useAppContext();
   const filteredAccounts = useFiltersStore((s) => s.accounts);
 
   // Store previous successful state
@@ -83,9 +82,7 @@ export const NotificationsRoute: FC = () => {
               error={accountNotification.error}
               key={getAccountUUID(accountNotification.account)}
               notifications={accountNotification.notifications}
-              showAccountHeader={
-                hasMultipleAccounts || settings.showAccountHeader
-              }
+              showAccountHeader={hasMultipleAccounts || settings.showAccountHeader}
             />
           );
         })}

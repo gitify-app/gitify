@@ -35,8 +35,7 @@ export function zoomLevelToPercentage(zoom: number): Percentage {
     return RECOMMENDED_ZOOM_PERCENTAGE;
   }
 
-  return ((zoom / MULTIPLIER) * 100 +
-    RECOMMENDED_ZOOM_PERCENTAGE) as Percentage;
+  return ((zoom / MULTIPLIER) * 100 + RECOMMENDED_ZOOM_PERCENTAGE) as Percentage;
 }
 
 /**
@@ -66,9 +65,7 @@ export function canIncreaseZoom(zoomPercentage: Percentage) {
  */
 export function decreaseZoom(zoomPercentage: Percentage) {
   if (canDecreaseZoom(zoomPercentage)) {
-    window.gitify.zoom.setLevel(
-      zoomPercentageToLevel((zoomPercentage - ZOOM_STEP) as Percentage),
-    );
+    window.gitify.zoom.setLevel(zoomPercentageToLevel((zoomPercentage - ZOOM_STEP) as Percentage));
   }
 }
 
@@ -79,9 +76,7 @@ export function decreaseZoom(zoomPercentage: Percentage) {
  */
 export function increaseZoom(zoomPercentage: Percentage) {
   if (canIncreaseZoom(zoomPercentage)) {
-    window.gitify.zoom.setLevel(
-      zoomPercentageToLevel((zoomPercentage + ZOOM_STEP) as Percentage),
-    );
+    window.gitify.zoom.setLevel(zoomPercentageToLevel((zoomPercentage + ZOOM_STEP) as Percentage));
   }
 }
 
@@ -89,7 +84,5 @@ export function increaseZoom(zoomPercentage: Percentage) {
  * Resets the zoom level to the recommended default, then applies it via the Electron zoom bridge.
  */
 export function resetZoomLevel() {
-  window.gitify.zoom.setLevel(
-    zoomPercentageToLevel(RECOMMENDED_ZOOM_PERCENTAGE),
-  );
+  window.gitify.zoom.setLevel(zoomPercentageToLevel(RECOMMENDED_ZOOM_PERCENTAGE));
 }

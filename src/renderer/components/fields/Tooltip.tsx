@@ -11,8 +11,7 @@ export interface TooltipProps {
 }
 
 export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
-  const [shouldShowTooltipContents, setShouldShowTooltipContents] =
-    useState(false);
+  const [shouldShowTooltipContents, setShouldShowTooltipContents] = useState(false);
 
   const scrollContainerRef = useRef<HTMLElement | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -23,9 +22,7 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
     }
 
     // Find the scrollable parent container
-    const findScrollContainer = (
-      element: HTMLElement | null,
-    ): HTMLElement | null => {
+    const findScrollContainer = (element: HTMLElement | null): HTMLElement | null => {
       if (!element) {
         return null;
       }
@@ -81,9 +78,7 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
           aria-label={props.name}
           data-testid={`tooltip-icon-${props.name}`}
           id={props.name}
-          onClick={() =>
-            setShouldShowTooltipContents(!shouldShowTooltipContents)
-          }
+          onClick={() => setShouldShowTooltipContents(!shouldShowTooltipContents)}
           type="button"
         >
           <QuestionIcon className="text-gitify-tooltip-icon" />

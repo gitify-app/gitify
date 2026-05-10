@@ -15,10 +15,7 @@ interface OopsProps {
   fullHeight?: boolean;
 }
 
-export const Oops: FC<OopsProps> = ({
-  error,
-  fullHeight = true,
-}: OopsProps) => {
+export const Oops: FC<OopsProps> = ({ error, fullHeight = true }: OopsProps) => {
   const navigate = useNavigate();
 
   const err = error ?? Errors.UNKNOWN;

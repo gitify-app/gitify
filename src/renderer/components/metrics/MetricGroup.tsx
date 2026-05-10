@@ -24,9 +24,7 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
   return (
     <div className="flex gap-1">
-      <LinkedIssuesPill
-        linkedIssues={notification.subject.linkedIssues ?? []}
-      />
+      <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
 
       <ReactionsPill
         reactionGroups={notification.subject.reactionGroups ?? []}

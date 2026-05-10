@@ -1,20 +1,29 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.biome": "explicit"
+    "source.fixAll.oxc": "explicit"
   },
-  "editor.defaultFormatter": "biomejs.biome",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "oxc.lint.configPath": "./vite.config.ts",
+  "oxc.fmt.configPath": "./vite.config.ts",
   "files.associations": {
     "*.css": "tailwindcss"
   },
   "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "sonarlint.connectedMode.project": {
     "connectionId": "gitify-app",
     "projectKey": "gitify-app_gitify"
   },
-  "cSpell.words": ["codegen"]
+  "cSpell.words": ["codegen", "oxfmt", "oxlint"]
 }

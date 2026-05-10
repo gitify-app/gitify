@@ -9,7 +9,7 @@ labels:
   - label: 'build'
     sync: true
     matcher:
-      title: '^(ci|build)(\((?!release)\w+\))?: (?!.*\brelease\b).*'  
+      title: '^(ci|build)(\((?!release)\w+\))?: (?!.*\brelease\b).*'
 
   - label: 'chore'
     sync: true
@@ -46,7 +46,7 @@ labels:
     sync: true
     matcher:
       title: '^test(\(\w+\))?: .*'
- 
+
 checks:
   - context: 'Semantic Pull Request'
     description:

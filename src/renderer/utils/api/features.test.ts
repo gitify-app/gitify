@@ -60,9 +60,7 @@ describe('renderer/utils/api/features.ts', () => {
 
   describe('isAnsweredDiscussionFeatureSupported', () => {
     it('should return true for GitHub Cloud', () => {
-      expect(isAnsweredDiscussionFeatureSupported(mockGitHubCloudAccount)).toBe(
-        true,
-      );
+      expect(isAnsweredDiscussionFeatureSupported(mockGitHubCloudAccount)).toBe(true);
     });
 
     it('should return false for GitHub Enterprise Server < v3.12', () => {
@@ -93,9 +91,7 @@ describe('renderer/utils/api/features.ts', () => {
     });
 
     it('should return false for Gitea', () => {
-      expect(isAnsweredDiscussionFeatureSupported(mockGiteaAccount)).toBe(
-        false,
-      );
+      expect(isAnsweredDiscussionFeatureSupported(mockGiteaAccount)).toBe(false);
     });
   });
 });

@@ -7,15 +7,10 @@ import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import type { GitifyNotificationUser, Link } from '../../types';
 
 import * as comms from '../../utils/system/comms';
-import {
-  NotificationFooter,
-  type NotificationFooterProps,
-} from './NotificationFooter';
+import { NotificationFooter, type NotificationFooterProps } from './NotificationFooter';
 
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
-  vi.spyOn(globalThis.Date, 'now').mockImplementation(() =>
-    new Date('2024').valueOf(),
-  );
+  vi.spyOn(globalThis.Date, 'now').mockImplementation(() => new Date('2024').valueOf());
 
   it('should render itself & its children', async () => {
     const props: NotificationFooterProps = {
@@ -69,9 +64,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   });
 
   it('should open notification user profile', async () => {
-    const openExternalLinkSpy = vi
-      .spyOn(comms, 'openExternalLink')
-      .mockImplementation(vi.fn());
+    const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     const props: NotificationFooterProps = {
       notification: {
@@ -81,8 +74,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
           user: {
             login: 'some-user',
             htmlUrl: 'https://github.com/some-user' as Link,
-            avatarUrl:
-              'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
             type: 'User' as GitifyNotificationUser['type'],
           },
           reviews: undefined,
@@ -95,8 +87,6 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     await userEvent.click(screen.getByTestId('view-profile'));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      props.notification.subject.user!.htmlUrl,
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(props.notification.subject.user!.htmlUrl);
   });
 });

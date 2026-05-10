@@ -21,11 +21,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       fireEvent.change(includeInput, { target: { value: 'author:octocat' } });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(updateFilterSpy).toHaveBeenCalledWith(
-        'includeSearchTokens',
-        'author:octocat',
-        true,
-      );
+      expect(updateFilterSpy).toHaveBeenCalledWith('includeSearchTokens', 'author:octocat', true);
     });
 
     it('adds include org token with prefix', () => {
@@ -35,11 +31,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       fireEvent.change(includeInput, { target: { value: 'org:gitify-app' } });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(updateFilterSpy).toHaveBeenCalledWith(
-        'includeSearchTokens',
-        'org:gitify-app',
-        true,
-      );
+      expect(updateFilterSpy).toHaveBeenCalledWith('includeSearchTokens', 'org:gitify-app', true);
     });
 
     it('adds include repo token with prefix', () => {
@@ -79,11 +71,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       fireEvent.change(includeInput, { target: { value: 'author:octocat' } });
       fireEvent.keyDown(includeInput, { key: 'Enter' });
 
-      expect(updateFilterSpy).toHaveBeenCalledWith(
-        'excludeSearchTokens',
-        'author:octocat',
-        true,
-      );
+      expect(updateFilterSpy).toHaveBeenCalledWith('excludeSearchTokens', 'author:octocat', true);
     });
 
     it('adds exclude org token with prefix', () => {
@@ -93,11 +81,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       fireEvent.change(excludeInput, { target: { value: 'org:gitify-app' } });
       fireEvent.keyDown(excludeInput, { key: 'Enter' });
 
-      expect(updateFilterSpy).toHaveBeenCalledWith(
-        'excludeSearchTokens',
-        'org:gitify-app',
-        true,
-      );
+      expect(updateFilterSpy).toHaveBeenCalledWith('excludeSearchTokens', 'org:gitify-app', true);
     });
 
     it('adds exclude repo token with prefix', () => {

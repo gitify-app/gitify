@@ -54,9 +54,7 @@ export const Errors: Record<ErrorType, GitifyError> = {
 /**
  * Check if all accounts have errors
  */
-export function doesAllAccountsHaveErrors(
-  accountNotifications: AccountNotifications[],
-) {
+export function doesAllAccountsHaveErrors(accountNotifications: AccountNotifications[]) {
   return (
     accountNotifications.length > 0 &&
     accountNotifications.every((account) => account.error !== null)
@@ -66,9 +64,7 @@ export function doesAllAccountsHaveErrors(
 /**
  * Check if all account errors are the same
  */
-export function areAllAccountErrorsSame(
-  accountNotifications: AccountNotifications[],
-) {
+export function areAllAccountErrorsSame(accountNotifications: AccountNotifications[]) {
   if (accountNotifications.length === 0) {
     return true;
   }

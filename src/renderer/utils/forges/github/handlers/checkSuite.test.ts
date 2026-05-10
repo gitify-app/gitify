@@ -2,11 +2,7 @@ import { mockPartialGitifyNotification } from '../../../../__mocks__/notificatio
 import { mockSettings } from '../../../../__mocks__/state-mocks';
 
 import type { GitifyNotification } from '../../../../types';
-import {
-  type GitifyCheckSuiteStatus,
-  IconColor,
-  type Link,
-} from '../../../../types';
+import { type GitifyCheckSuiteStatus, IconColor, type Link } from '../../../../types';
 
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
@@ -18,10 +14,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: 'CANCELLED',
@@ -37,10 +30,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: 'FAILURE',
@@ -56,10 +46,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: 'FAILURE',
@@ -75,10 +62,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: 'FAILURE',
@@ -94,10 +78,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: 'SKIPPED',
@@ -113,10 +94,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: 'SUCCESS',
@@ -132,10 +110,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       // Returns empty object when state cannot be determined
       expect(result).toEqual({});
@@ -147,10 +122,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
 
       // Returns empty object when title cannot be parsed
       expect(result).toEqual({});
@@ -174,18 +146,17 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       WAITING: 'RocketIcon',
     } satisfies Record<GitifyCheckSuiteStatus, string>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
-    )('iconType for check suite with status %s', (checkSuiteStatus, checkSuiteIconType) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'CheckSuite',
-        state: checkSuiteStatus,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>)(
+      'iconType for check suite with status %s',
+      (checkSuiteStatus, checkSuiteIconType) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'CheckSuite',
+          state: checkSuiteStatus,
+        });
 
-      expect(checkSuiteHandler.iconType(mockNotification).displayName).toBe(
-        checkSuiteIconType,
-      );
-    });
+        expect(checkSuiteHandler.iconType(mockNotification).displayName).toBe(checkSuiteIconType);
+      },
+    );
   });
 
   describe('iconColor', () => {
@@ -205,24 +176,22 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       WAITING: IconColor.GRAY,
     } satisfies Record<GitifyCheckSuiteStatus, IconColor>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>,
-    )('iconColor for check suite with status %s', (checkSuiteStatus, checkSuiteIconColor) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'CheckSuite',
-        state: checkSuiteStatus,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyCheckSuiteStatus, IconColor]>)(
+      'iconColor for check suite with status %s',
+      (checkSuiteStatus, checkSuiteIconColor) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'CheckSuite',
+          state: checkSuiteStatus,
+        });
 
-      expect(checkSuiteHandler.iconColor(mockNotification)).toBe(
-        checkSuiteIconColor,
-      );
-    });
+        expect(checkSuiteHandler.iconColor(mockNotification)).toBe(checkSuiteIconColor);
+      },
+    );
   });
 
   describe('defaultUrl', () => {
     it('unknown checksuite attributes', () => {
-      const mockHtmlUrl =
-        'https://github.com/gitify-app/notifications-test' as Link;
+      const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
       expect(
         checkSuiteHandler.defaultUrl({
@@ -238,8 +207,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
     });
 
     it('checksuite attributes', () => {
-      const mockHtmlUrl =
-        'https://github.com/gitify-app/notifications-test' as Link;
+      const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
       expect(
         checkSuiteHandler.defaultUrl({
@@ -252,9 +220,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
             htmlUrl: mockHtmlUrl,
           },
         } as GitifyNotification),
-      ).toEqual(
-        `${mockHtmlUrl}/actions?query=workflow%3A%22Lint%22+is%3Afailure+branch%3Amain`,
-      );
+      ).toEqual(`${mockHtmlUrl}/actions?query=workflow%3A%22Lint%22+is%3Afailure+branch%3Amain`);
     });
   });
 

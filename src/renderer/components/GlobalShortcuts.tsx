@@ -11,10 +11,7 @@ export const GlobalShortcuts: FC = () => {
 
   useEffect(() => {
     const keyToName = new Map<string, keyof typeof shortcuts>(
-      Object.entries(shortcuts).map(([name, cfg]) => [
-        cfg.key,
-        name as keyof typeof shortcuts,
-      ]),
+      Object.entries(shortcuts).map(([name, cfg]) => [cfg.key, name as keyof typeof shortcuts]),
     );
 
     const handler = (event: KeyboardEvent) => {

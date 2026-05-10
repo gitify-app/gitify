@@ -11,18 +11,14 @@ export function getNewNotifications(
 ): GitifyNotification[] {
   return newAccountNotifications.flatMap((accountNotifications) => {
     const accountPreviousNotifications = previousAccountNotifications.find(
-      (item) =>
-        getAccountUUID(item.account) ===
-        getAccountUUID(accountNotifications.account),
+      (item) => getAccountUUID(item.account) === getAccountUUID(accountNotifications.account),
     );
 
     if (!accountPreviousNotifications) {
       return accountNotifications.notifications;
     }
 
-    const previousIds = new Set(
-      accountPreviousNotifications.notifications.map((item) => item.id),
-    );
+    const previousIds = new Set(accountPreviousNotifications.notifications.map((item) => item.id));
 
     return accountNotifications.notifications.filter(
       (notification) => !previousIds.has(notification.id),

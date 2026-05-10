@@ -8,11 +8,7 @@ vi.mock('electron', () => {
   const ipcRendererStub = {
     send: vi.fn(),
     invoke: vi.fn().mockResolvedValue('response'),
-    on: vi.fn(function (
-      this: Electron.IpcRenderer,
-      channel: string,
-      listener: Listener,
-    ) {
+    on: vi.fn(function (this: Electron.IpcRenderer, channel: string, listener: Listener) {
       if (!listeners[channel]) {
         listeners[channel] = [];
       }
@@ -53,15 +49,9 @@ describe('preload/utils', () => {
   it('invokeMainEvent forwards a structured payload and resolves', async () => {
     const payload = { enabled: true, keyboardShortcut: 'CommandOrControl+G' };
 
-    const result = await invokeMainEvent(
-      EVENTS.UPDATE_KEYBOARD_SHORTCUT,
-      payload,
-    );
+    const result = await invokeMainEvent(EVENTS.UPDATE_KEYBOARD_SHORTCUT, payload);
 
-    expect(ipcRenderer.invoke).toHaveBeenCalledWith(
-      EVENTS.UPDATE_KEYBOARD_SHORTCUT,
-      payload,
-    );
+    expect(ipcRenderer.invoke).toHaveBeenCalledWith(EVENTS.UPDATE_KEYBOARD_SHORTCUT, payload);
     expect(result).toBe('response');
   });
 
@@ -74,10 +64,7 @@ describe('preload/utils', () => {
       }
     ).__emit(EVENTS.UPDATE_ICON_TITLE, 'payload');
 
-    expect(ipcRenderer.on).toHaveBeenCalledWith(
-      EVENTS.UPDATE_ICON_TITLE,
-      handlerMock,
-    );
+    expect(ipcRenderer.on).toHaveBeenCalledWith(EVENTS.UPDATE_ICON_TITLE, handlerMock);
     expect(handlerMock).toHaveBeenCalledWith({}, 'payload');
   });
 });

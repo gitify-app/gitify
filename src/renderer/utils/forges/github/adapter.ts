@@ -2,17 +2,8 @@ import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 
 import { Constants } from '../../../constants';
 
-import type {
-  Account,
-  Link,
-  RawGitifyNotification,
-  SettingsState,
-} from '../../../types';
-import type {
-  ForgeAdapter,
-  NotificationDisplayHelpers,
-  RefreshAccountData,
-} from '../types';
+import type { Account, Link, RawGitifyNotification, SettingsState } from '../../../types';
+import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
 import {
   extractHostVersion,
@@ -30,22 +21,15 @@ import {
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
 import { createNotificationHandler } from './handlers';
-import {
-  clearOctokitClientCacheForAccount,
-  createOctokitClient,
-} from './octokit';
+import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
 import { transformNotifications } from './transform';
 
-async function fetchAuthenticatedUser(
-  account: Account,
-): Promise<RefreshAccountData> {
+async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
   const response = await fetchAuthenticatedUserDetails(account);
   const user = response.data;
   const headers = response.headers as Record<string, string | undefined>;
 
-  const scopes = headers['x-oauth-scopes']
-    ?.split(',')
-    .map((scope) => scope.trim());
+  const scopes = headers['x-oauth-scopes']?.split(',').map((scope) => scope.trim());
 
   return {
     user: {
@@ -73,9 +57,7 @@ async function followUrl<T>(account: Account, url: Link): Promise<T> {
   return response.data as T;
 }
 
-function getDisplayHelpers(
-  notification: RawGitifyNotification,
-): NotificationDisplayHelpers {
+function getDisplayHelpers(notification: RawGitifyNotification): NotificationDisplayHelpers {
   const handler = createNotificationHandler(notification);
   return {
     iconType: handler.iconType(notification),
@@ -150,7 +132,5 @@ function accountHasScopes(
   account: Account,
   group: 'REQUIRED' | 'RECOMMENDED' | 'ALTERNATE',
 ): boolean {
-  return Constants.OAUTH_SCOPES[group].every(({ name }) =>
-    (account.scopes ?? []).includes(name),
-  );
+  return Constants.OAUTH_SCOPES[group].every(({ name }) => (account.scopes ?? []).includes(name));
 }

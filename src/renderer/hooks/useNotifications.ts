@@ -10,10 +10,7 @@ import type {
 } from '../types';
 
 import { getAccountUUID } from '../utils/auth/utils';
-import {
-  areAllAccountErrorsSame,
-  doesAllAccountsHaveErrors,
-} from '../utils/core/errors';
+import { areAllAccountErrorsSame, doesAllAccountsHaveErrors } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
 import { getAdapter } from '../utils/forges/registry';
 import {
@@ -47,10 +44,7 @@ interface NotificationsState {
     state: GitifyState,
     notifications: GitifyNotification[],
   ) => Promise<void>;
-  unsubscribeNotification: (
-    state: GitifyState,
-    notification: GitifyNotification,
-  ) => Promise<void>;
+  unsubscribeNotification: (state: GitifyState, notification: GitifyNotification) => Promise<void>;
 }
 
 /**
@@ -65,18 +59,13 @@ export const useNotifications = (): NotificationsState => {
   const [status, setStatus] = useState<Status>('success');
   const [globalError, setGlobalError] = useState<GitifyError>();
 
-  const [notifications, setNotifications] = useState<AccountNotifications[]>(
-    [],
-  );
+  const [notifications, setNotifications] = useState<AccountNotifications[]>([]);
 
   const notificationCount = getNotificationCount(notifications);
 
   const unreadNotificationCount = getUnreadNotificationCount(notifications);
 
-  const hasNotifications = useMemo(
-    () => notificationCount > 0,
-    [notificationCount],
-  );
+  const hasNotifications = useMemo(() => notificationCount > 0, [notificationCount]);
 
   const hasUnreadNotifications = useMemo(
     () => unreadNotificationCount > 0,
@@ -114,24 +103,17 @@ export const useNotifications = (): NotificationsState => {
         setNotifications(fetchedNotifications);
 
         // Set Global Error if all accounts have the same error
-        const allAccountsHaveErrors =
-          doesAllAccountsHaveErrors(fetchedNotifications);
-        const allAccountErrorsAreSame =
-          areAllAccountErrorsSame(fetchedNotifications);
+        const allAccountsHaveErrors = doesAllAccountsHaveErrors(fetchedNotifications);
+        const allAccountErrorsAreSame = areAllAccountErrorsSame(fetchedNotifications);
 
         if (allAccountsHaveErrors) {
           const accountError = fetchedNotifications[0].error;
           setStatus('error');
-          setGlobalError(
-            allAccountErrorsAreSame ? (accountError ?? undefined) : undefined,
-          );
+          setGlobalError(allAccountErrorsAreSame ? (accountError ?? undefined) : undefined);
           return;
         }
 
-        const diffNotifications = getNewNotifications(
-          previousNotifications,
-          fetchedNotifications,
-        );
+        const diffNotifications = getNewNotifications(previousNotifications, fetchedNotifications);
 
         if (diffNotifications.length > 0) {
           if (state.settings?.playSound) {

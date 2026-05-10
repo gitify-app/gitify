@@ -43,22 +43,16 @@ export function registerTrayHandlers(mb: Menubar): void {
   /**
    * Toggle the alternate idle tray icon variant.
    */
-  onMainEvent(
-    EVENTS.USE_ALTERNATE_IDLE_ICON,
-    (_, useAlternateIdleIcon: boolean) => {
-      shouldUseAlternateIdleIcon = useAlternateIdleIcon;
-    },
-  );
+  onMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, (_, useAlternateIdleIcon: boolean) => {
+    shouldUseAlternateIdleIcon = useAlternateIdleIcon;
+  });
 
   /**
    * Toggle whether unread notifications show an active (coloured) tray icon.
    */
-  onMainEvent(
-    EVENTS.USE_UNREAD_ACTIVE_ICON,
-    (_, useUnreadActiveIcon: boolean) => {
-      shouldUseUnreadActiveIcon = useUnreadActiveIcon;
-    },
-  );
+  onMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, (_, useUnreadActiveIcon: boolean) => {
+    shouldUseUnreadActiveIcon = useUnreadActiveIcon;
+  });
 
   /**
    * Update the tray icon based on the current notification count.

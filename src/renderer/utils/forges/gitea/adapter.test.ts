@@ -13,15 +13,9 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     });
 
     it('reports unsupported capabilities', () => {
-      expect(giteaAdapter.capabilities.markAsDone(mockGiteaAccount)).toBe(
-        false,
-      );
-      expect(
-        giteaAdapter.capabilities.unsubscribeThread(mockGiteaAccount),
-      ).toBe(false);
-      expect(
-        giteaAdapter.capabilities.answeredDiscussion(mockGiteaAccount),
-      ).toBe(false);
+      expect(giteaAdapter.capabilities.markAsDone(mockGiteaAccount)).toBe(false);
+      expect(giteaAdapter.capabilities.unsubscribeThread(mockGiteaAccount)).toBe(false);
+      expect(giteaAdapter.capabilities.answeredDiscussion(mockGiteaAccount)).toBe(false);
     });
 
     it('does not implement detailed enrichment', () => {
@@ -38,11 +32,9 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     });
 
     it('builds PAT settings and developer settings URLs from the hostname', () => {
-      expect(
-        giteaAdapter.getPersonalAccessTokenSettingsUrl(
-          'gitea.example.com' as Hostname,
-        ),
-      ).toBe('https://gitea.example.com/user/settings/applications');
+      expect(giteaAdapter.getPersonalAccessTokenSettingsUrl('gitea.example.com' as Hostname)).toBe(
+        'https://gitea.example.com/user/settings/applications',
+      );
 
       expect(giteaAdapter.getDeveloperSettingsUrl(mockGiteaAccount)).toBe(
         'https://gitea.example.com/user/settings/applications',
@@ -60,27 +52,21 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     });
 
     it('rejects tokens with non-hex characters', () => {
-      expect(
-        giteaAdapter.validateToken(
-          'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ' as Token,
-        ),
-      ).toBe(false);
+      expect(giteaAdapter.validateToken('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ' as Token)).toBe(
+        false,
+      );
     });
 
     it('rejects uppercase hex (Gitea normalises to lowercase)', () => {
-      expect(
-        giteaAdapter.validateToken(
-          'ABCDEF0123456789ABCDEF0123456789ABCDEF01' as Token,
-        ),
-      ).toBe(false);
+      expect(giteaAdapter.validateToken('ABCDEF0123456789ABCDEF0123456789ABCDEF01' as Token)).toBe(
+        false,
+      );
     });
 
     it('accepts a 40-character lowercase hex token', () => {
-      expect(
-        giteaAdapter.validateToken(
-          '25da6ab8f66d379349b7b5cce0395c2092e2abb2' as Token,
-        ),
-      ).toBe(true);
+      expect(giteaAdapter.validateToken('25da6ab8f66d379349b7b5cce0395c2092e2abb2' as Token)).toBe(
+        true,
+      );
     });
   });
 
@@ -93,8 +79,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         avatar_url: 'https://example.com/a.png',
       });
 
-      const result =
-        await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
+      const result = await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
 
       expect(result).toEqual({
         user: {
@@ -112,8 +97,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         login: 'octocat',
       });
 
-      const result =
-        await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
+      const result = await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
 
       expect(result.user.name).toBeNull();
       expect(result.user.avatar).toBe('');
@@ -164,15 +148,15 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       // back to mark-as-read before reaching here. Throwing surfaces any
       // caller that bypasses the capability check rather than silently
       // doing the wrong thing.
-      expect(() =>
-        giteaAdapter.markThreadAsDone(mockGiteaAccount, '13'),
-      ).toThrow(/check capabilities.markAsDone/);
+      expect(() => giteaAdapter.markThreadAsDone(mockGiteaAccount, '13')).toThrow(
+        /check capabilities.markAsDone/,
+      );
     });
 
     it('unsubscribeThread throws because Gitea has no equivalent', () => {
-      expect(() =>
-        giteaAdapter.unsubscribeThread(mockGiteaAccount, '14'),
-      ).toThrow(/not supported for Gitea/);
+      expect(() => giteaAdapter.unsubscribeThread(mockGiteaAccount, '14')).toThrow(
+        /not supported for Gitea/,
+      );
     });
   });
 
@@ -186,9 +170,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
 
   describe('followUrl', () => {
     it('delegates to giteaGetJson', async () => {
-      const getJsonSpy = vi
-        .spyOn(client, 'giteaGetJson')
-        .mockResolvedValue({ html_url: 'x' });
+      const getJsonSpy = vi.spyOn(client, 'giteaGetJson').mockResolvedValue({ html_url: 'x' });
 
       const result = await giteaAdapter.followUrl<{ html_url: string }>(
         mockGiteaAccount,

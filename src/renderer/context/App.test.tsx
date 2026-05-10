@@ -10,13 +10,7 @@ import { Constants } from '../constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { useNotifications } from '../hooks/useNotifications';
 
-import type {
-  AuthState,
-  ClientID,
-  ClientSecret,
-  SettingsState,
-  Token,
-} from '../types';
+import type { AuthState, ClientID, ClientSecret, SettingsState, Token } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import * as authFlows from '../utils/auth/flows';
@@ -84,9 +78,7 @@ describe('renderer/context/App.tsx', () => {
 
     vi.spyOn(notifications, 'getNotificationCount').mockImplementation(vi.fn());
 
-    vi.spyOn(notifications, 'getUnreadNotificationCount').mockImplementation(
-      vi.fn(),
-    );
+    vi.spyOn(notifications, 'getUnreadNotificationCount').mockImplementation(vi.fn());
 
     const mockDefaultState = {
       auth: { accounts: [] },
@@ -104,23 +96,17 @@ describe('renderer/context/App.tsx', () => {
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
 
       await act(async () => {
-        await vi.advanceTimersByTimeAsync(
-          Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-        );
+        await vi.advanceTimersByTimeAsync(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
       await act(async () => {
-        await vi.advanceTimersByTimeAsync(
-          Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-        );
+        await vi.advanceTimersByTimeAsync(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
       await act(async () => {
-        await vi.advanceTimersByTimeAsync(
-          Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-        );
+        await vi.advanceTimersByTimeAsync(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
     });
@@ -144,10 +130,9 @@ describe('renderer/context/App.tsx', () => {
       });
 
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
-        mockDefaultState,
-        [mockGitifyNotification],
-      );
+      expect(markNotificationsAsReadMock).toHaveBeenCalledWith(mockDefaultState, [
+        mockGitifyNotification,
+      ]);
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
 
@@ -159,10 +144,9 @@ describe('renderer/context/App.tsx', () => {
       });
 
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
-        mockDefaultState,
-        [mockGitifyNotification],
-      );
+      expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(mockDefaultState, [
+        mockGitifyNotification,
+      ]);
       expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledTimes(1);
     });
 
@@ -183,9 +167,7 @@ describe('renderer/context/App.tsx', () => {
   });
 
   describe('settings methods', () => {
-    const saveStateSpy = vi
-      .spyOn(storage, 'saveState')
-      .mockImplementation(vi.fn());
+    const saveStateSpy = vi.spyOn(storage, 'saveState').mockImplementation(vi.fn());
 
     it('should call updateSetting', async () => {
       const getContext = renderWithContext();
@@ -252,9 +234,7 @@ describe('renderer/context/App.tsx', () => {
       const getContext = renderWithContext();
 
       await act(async () => {
-        getContext().loginWithDeviceFlowPoll(
-          'session' as unknown as DeviceFlowSession,
-        );
+        getContext().loginWithDeviceFlowPoll('session' as unknown as DeviceFlowSession);
       });
 
       expect(pollGitHubDeviceFlowSpy).toHaveBeenCalledWith('session');
@@ -264,10 +244,7 @@ describe('renderer/context/App.tsx', () => {
       const getContext = renderWithContext();
 
       await act(async () => {
-        await getContext().loginWithDeviceFlowComplete(
-          'token' as Token,
-          Constants.GITHUB_HOSTNAME,
-        );
+        await getContext().loginWithDeviceFlowComplete('token' as Token, Constants.GITHUB_HOSTNAME);
       });
 
       expect(addAccountSpy).toHaveBeenCalledWith(
@@ -280,10 +257,7 @@ describe('renderer/context/App.tsx', () => {
     });
 
     it('loginWithOAuthApp calls performGitHubWebOAuth', async () => {
-      const performGitHubWebOAuthSpy = vi.spyOn(
-        authFlows,
-        'performGitHubWebOAuth',
-      );
+      const performGitHubWebOAuthSpy = vi.spyOn(authFlows, 'performGitHubWebOAuth');
 
       const getContext = renderWithContext();
 
@@ -305,13 +279,8 @@ describe('renderer/context/App.tsx', () => {
         getContext().logoutFromAccount(mockGitHubCloudAccount);
       });
 
-      expect(removeAccountNotificationsMock).toHaveBeenCalledWith(
-        mockGitHubCloudAccount,
-      );
-      expect(removeAccountSpy).toHaveBeenCalledWith(
-        expect.anything(),
-        mockGitHubCloudAccount,
-      );
+      expect(removeAccountNotificationsMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
+      expect(removeAccountSpy).toHaveBeenCalledWith(expect.anything(), mockGitHubCloudAccount);
     });
   });
 
@@ -321,9 +290,7 @@ describe('renderer/context/App.tsx', () => {
       .mockImplementation(async (account) => account);
     const decryptValueSpy = vi.spyOn(comms, 'decryptValue');
     const encryptValueSpy = vi.spyOn(comms, 'encryptValue');
-    const saveStateSpy = vi
-      .spyOn(storage, 'saveState')
-      .mockImplementation(vi.fn());
+    const saveStateSpy = vi.spyOn(storage, 'saveState').mockImplementation(vi.fn());
     const loadStateSpy = vi.spyOn(storage, 'loadState');
 
     beforeEach(() => {
@@ -353,9 +320,7 @@ describe('renderer/context/App.tsx', () => {
       });
 
       const persistCall = saveStateSpy.mock.calls.find(
-        ([state]) =>
-          (state as { auth: AuthState }).auth.accounts[0]?.token ===
-          'rotated-cipher',
+        ([state]) => (state as { auth: AuthState }).auth.accounts[0]?.token === 'rotated-cipher',
       );
       expect(persistCall).toBeDefined();
     });
@@ -373,8 +338,7 @@ describe('renderer/context/App.tsx', () => {
 
       const tokenChanged = saveStateSpy.mock.calls.some(
         ([state]) =>
-          (state as { auth: AuthState }).auth.accounts[0]?.token !==
-          mockGitHubCloudAccount.token,
+          (state as { auth: AuthState }).auth.accounts[0]?.token !== mockGitHubCloudAccount.token,
       );
       expect(tokenChanged).toBe(false);
     });
@@ -391,13 +355,9 @@ describe('renderer/context/App.tsx', () => {
         renderWithProviders(<AppProvider>{null}</AppProvider>);
       });
 
-      expect(encryptValueSpy).toHaveBeenCalledWith(
-        mockGitHubCloudAccount.token,
-      );
+      expect(encryptValueSpy).toHaveBeenCalledWith(mockGitHubCloudAccount.token);
       const persistCall = saveStateSpy.mock.calls.find(
-        ([state]) =>
-          (state as { auth: AuthState }).auth.accounts[0]?.token ===
-          'newly-encrypted',
+        ([state]) => (state as { auth: AuthState }).auth.accounts[0]?.token === 'newly-encrypted',
       );
       expect(persistCall).toBeDefined();
     });

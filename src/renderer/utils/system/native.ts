@@ -13,18 +13,14 @@ import { generateGitHubWebUrl } from '../notifications/url';
  *
  * @param notifications - The notifications to surface as a native OS notification.
  */
-export async function raiseNativeNotification(
-  notifications: GitifyNotification[],
-) {
+export async function raiseNativeNotification(notifications: GitifyNotification[]) {
   let title: string;
   let body: string;
   let url: string | null = null;
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = window.gitify.platform.isWindows()
-      ? ''
-      : notification.repository.fullName;
+    title = window.gitify.platform.isWindows() ? '' : notification.repository.fullName;
     body = notification.subject.title;
     url = await generateGitHubWebUrl(notification);
   } else {

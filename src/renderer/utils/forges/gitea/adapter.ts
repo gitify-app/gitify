@@ -32,9 +32,7 @@ const capabilities: ForgeCapabilities = {
   answeredDiscussion: () => false,
 };
 
-async function fetchAuthenticatedUser(
-  account: Account,
-): Promise<RefreshAccountData> {
+async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
   const user = await fetchGiteaAuthenticatedUser(account);
   return {
     user: {
@@ -59,9 +57,7 @@ async function listNotifications(
 // Commit) which Gitea's transform produces in the same vocabulary, so the
 // icon/color/url logic applies cleanly. Routing it through the adapter keeps
 // shared formatting code (`formatters.ts`, `url.ts`) forge-agnostic.
-function getDisplayHelpers(
-  notification: RawGitifyNotification,
-): NotificationDisplayHelpers {
+function getDisplayHelpers(notification: RawGitifyNotification): NotificationDisplayHelpers {
   const handler = createNotificationHandler(notification);
   return {
     iconType: handler.iconType(notification),
@@ -81,8 +77,7 @@ export const giteaAdapter: ForgeAdapter = {
   fetchAuthenticatedUser,
   listNotifications,
 
-  markThreadAsRead: (account, threadId) =>
-    patchGiteaNotificationThread(account, threadId, 'read'),
+  markThreadAsRead: (account, threadId) => patchGiteaNotificationThread(account, threadId, 'read'),
   // Gitea has no "done" state — capability `markAsDone(account)` returns
   // false so the UI gates this off. Throwing rather than silently aliasing to
   // markThreadAsRead surfaces any caller that bypasses the capability check.

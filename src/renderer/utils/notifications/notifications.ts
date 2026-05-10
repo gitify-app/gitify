@@ -9,10 +9,7 @@ import type {
 import { determineFailureType } from '../api/errors';
 import { rendererLogError, toError } from '../core/logger';
 import { getAdapter } from '../forges/registry';
-import {
-  filterBaseNotifications,
-  filterDetailedNotifications,
-} from './filters/filter';
+import { filterBaseNotifications, filterDetailedNotifications } from './filters/filter';
 import { formatNotification } from './formatters';
 import { getFlattenedNotificationsByRepo } from './group';
 
@@ -22,13 +19,8 @@ import { getFlattenedNotificationsByRepo } from './group';
  * @param accountNotifications - The account notifications to check.
  * @returns The count of all notifications.
  */
-export function getNotificationCount(
-  accountNotifications: AccountNotifications[],
-) {
-  return accountNotifications.reduce(
-    (sum, account) => sum + account.notifications.length,
-    0,
-  );
+export function getNotificationCount(accountNotifications: AccountNotifications[]) {
+  return accountNotifications.reduce((sum, account) => sum + account.notifications.length, 0);
 }
 
 /**
@@ -37,12 +29,9 @@ export function getNotificationCount(
  * @param accountNotifications - The account notifications to check.
  * @returns The count of unread notifications.
  */
-export function getUnreadNotificationCount(
-  accountNotifications: AccountNotifications[],
-) {
+export function getUnreadNotificationCount(accountNotifications: AccountNotifications[]) {
   return accountNotifications.reduce(
-    (sum, account) =>
-      sum + account.notifications.filter((n) => n.unread === true).length,
+    (sum, account) => sum + account.notifications.filter((n) => n.unread === true).length,
     0,
   );
 }
@@ -71,9 +60,7 @@ function getNotifications(auth: AuthState, settings: SettingsState) {
  * @param state - The Gitify state.
  * @returns A promise that resolves to an array of account notifications.
  */
-export async function getAllNotifications(
-  state: GitifyState,
-): Promise<AccountNotifications[]> {
+export async function getAllNotifications(state: GitifyState): Promise<AccountNotifications[]> {
   if (!state.auth || !state.settings) {
     return [];
   }
@@ -85,8 +72,7 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          let notifications: RawGitifyNotification[] =
-            await accountNotifications.notifications;
+          let notifications: RawGitifyNotification[] = await accountNotifications.notifications;
 
           notifications = filterBaseNotifications(notifications);
 
@@ -94,9 +80,7 @@ export async function getAllNotifications(
 
           notifications = filterDetailedNotifications(notifications, settings);
 
-          const formatted = notifications.map((notification) =>
-            formatNotification(notification),
-          );
+          const formatted = notifications.map((notification) => formatNotification(notification));
 
           return {
             account: accountNotifications.account,
@@ -167,10 +151,7 @@ export function stabilizeNotificationsOrder(
   let orderIndex = 0;
 
   for (const account of accountNotifications) {
-    const flattenedNotifications = getFlattenedNotificationsByRepo(
-      account.notifications,
-      settings,
-    );
+    const flattenedNotifications = getFlattenedNotificationsByRepo(account.notifications, settings);
 
     for (const notification of flattenedNotifications) {
       notification.order = orderIndex++;

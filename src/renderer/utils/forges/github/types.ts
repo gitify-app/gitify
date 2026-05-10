@@ -3,8 +3,7 @@ import type { Endpoints } from '@octokit/types';
 
 export type APIClientType = 'rest' | 'graphql';
 
-export type GetAuthenticatedUserResponse =
-  Endpoints['GET /user']['response']['data'];
+export type GetAuthenticatedUserResponse = Endpoints['GET /user']['response']['data'];
 
 export type ListNotificationsForAuthenticatedUserResponse =
   Endpoints['GET /notifications']['response']['data'];
@@ -21,8 +20,7 @@ export type GetCommitCommentResponse =
 export type GetReleaseResponse =
   Endpoints['GET /repos/{owner}/{repo}/releases/{release_id}']['response']['data'];
 
-export type RawGitHubNotification =
-  Endpoints['GET /notifications']['response']['data'][number];
+export type RawGitHubNotification = Endpoints['GET /notifications']['response']['data'][number];
 
 export type RawUser = components['schemas']['simple-user'];
 
@@ -40,8 +38,8 @@ export type GitHubHtmlUrlResponse = {
  *  - Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data']
  *  - Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
  */
-// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+// oxlint-disable-next-line typescript/no-invalid-void-type -- This endpoint has no response body
 export type MarkNotificationThreadAsReadResponse = void;
 
-// biome-ignore lint/suspicious/noConfusingVoidType: This endpoint has no response body
+// oxlint-disable-next-line typescript/no-invalid-void-type -- This endpoint has no response body
 export type MarkNotificationThreadAsDoneResponse = void;

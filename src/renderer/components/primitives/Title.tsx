@@ -12,18 +12,13 @@ interface TitleProps {
   tooltip?: ReactNode;
 }
 
-export const Title: FC<TitleProps> = ({ size = 2, ...props }) => {
+export const Title: FC<TitleProps> = ({ size: _size = 2, ...props }) => {
   const name = props.children.toLowerCase().replaceAll(' ', '-');
 
   return (
     <legend>
       <div className="mb-2">
-        <Stack
-          align="center"
-          direction="horizontal"
-          gap="condensed"
-          id={`title-${name}`}
-        >
+        <Stack align="center" direction="horizontal" gap="condensed" id={`title-${name}`}>
           <props.icon size="small" />
           <Heading as="h4">{props.children}</Heading>
           {props.tooltip && (

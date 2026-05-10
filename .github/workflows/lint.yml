@@ -7,7 +7,7 @@ permissions: {}
 
 jobs:
   lint-code:
-    name: Lint Code [biomejs]
+    name: Lint Code [vite-plus]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -21,8 +21,8 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
 
-      - name: Run linter
-        run: pnpm lint:check
+      - name: Run lint and format checks
+        run: pnpm check
 
   lint-actions:
     name: Lint GitHub Actions [actionlint]

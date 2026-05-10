@@ -7,10 +7,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import type { SettingsState } from '../../types';
 
-import {
-  removeNotificationsForAccount,
-  shouldRemoveNotificationsFromState,
-} from './remove';
+import { removeNotificationsForAccount, shouldRemoveNotificationsFromState } from './remove';
 
 describe('renderer/utils/remove.ts', () => {
   describe('shouldRemoveNotificationsFromState', () => {
@@ -19,8 +16,7 @@ describe('renderer/utils/remove.ts', () => {
         delayNotificationState: false,
         fetchReadNotifications: false,
         expected: true,
-        description:
-          'both delayNotificationState and fetchReadNotifications are false',
+        description: 'both delayNotificationState and fetchReadNotifications are false',
       },
       {
         delayNotificationState: true,
@@ -38,22 +34,20 @@ describe('renderer/utils/remove.ts', () => {
         delayNotificationState: true,
         fetchReadNotifications: true,
         expected: false,
-        description:
-          'both delayNotificationState and fetchReadNotifications are true',
+        description: 'both delayNotificationState and fetchReadNotifications are true',
       },
-    ])('should return $expected when $description', ({
-      delayNotificationState,
-      fetchReadNotifications,
-      expected,
-    }) => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        delayNotificationState,
-        fetchReadNotifications,
-      };
+    ])(
+      'should return $expected when $description',
+      ({ delayNotificationState, fetchReadNotifications, expected }) => {
+        const settings: SettingsState = {
+          ...mockSettings,
+          delayNotificationState,
+          fetchReadNotifications,
+        };
 
-      expect(shouldRemoveNotificationsFromState(settings)).toBe(expected);
-    });
+        expect(shouldRemoveNotificationsFromState(settings)).toBe(expected);
+      },
+    );
   });
 
   describe('removeNotificationsForAccount', () => {
@@ -114,9 +108,7 @@ describe('renderer/utils/remove.ts', () => {
       );
 
       expect(result[0].notifications.length).toBe(1);
-      expect(result[0].notifications[0]).toBe(
-        mockSingleAccountNotifications[0].notifications[0],
-      );
+      expect(result[0].notifications[0]).toBe(mockSingleAccountNotifications[0].notifications[0]);
     });
 
     it('should not modify notifications when account UUID does not match', () => {
@@ -128,9 +120,7 @@ describe('renderer/utils/remove.ts', () => {
       );
 
       expect(result[0].notifications.length).toBe(1);
-      expect(result[0].notifications[0]).toBe(
-        mockSingleAccountNotifications[0].notifications[0],
-      );
+      expect(result[0].notifications[0]).toBe(mockSingleAccountNotifications[0].notifications[0]);
     });
 
     it('should mark as read and skip removal when fetchReadNotifications is enabled', () => {
