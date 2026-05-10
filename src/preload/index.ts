@@ -54,6 +54,16 @@ export const api = {
     }),
 
   /**
+   * Enable or disable keeping the window open when it loses focus.
+   *
+   * Implemented by toggling the window's `alwaysOnTop` flag, which the
+   * `menubar` library uses to short-circuit its blur-driven hide.
+   *
+   * @param value - `true` to keep the window open on blur, `false` to hide.
+   */
+  setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
+
+  /**
    * Apply the global keyboard shortcut for toggling the app window visibility.
    *
    * @param payload - Whether the shortcut is enabled and the Electron accelerator string.

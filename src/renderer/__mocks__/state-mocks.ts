@@ -62,6 +62,7 @@ const mockSystemSettings: SystemSettingsState = {
   playSound: true,
   notificationVolume: 20 as Percentage,
   openAtStartup: false,
+  keepWindowOnBlur: false,
 };
 
 export const mockSettings: SettingsState = {

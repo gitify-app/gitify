@@ -304,6 +304,19 @@ export const SystemSettings: FC = () => {
           tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
           visible={!window.gitify.platform.isLinux()}
         />
+
+        <Checkbox
+          checked={settings.keepWindowOnBlur}
+          label="Keep window open when it loses focus"
+          name="keepWindowOnBlur"
+          onChange={() => updateSetting('keepWindowOnBlur', !settings.keepWindowOnBlur)}
+          tooltip={
+            <Text>
+              Prevent the {APPLICATION.NAME} window from automatically hiding when you click outside
+              it.
+            </Text>
+          }
+        />
       </Stack>
     </fieldset>
   );

@@ -3,7 +3,12 @@ import type { Menubar } from 'menubar';
 
 import { EVENTS } from '../../shared/events';
 
+import { applyKeepWindowOnBlur } from '../lifecycle/window';
 import { registerSystemHandlers } from './system';
+
+vi.mock('../lifecycle/window', () => ({
+  applyKeepWindowOnBlur: vi.fn(),
+}));
 
 const onMock = vi.fn();
 const handleMock = vi.fn();
@@ -66,7 +71,21 @@ describe('main/handlers/system.ts', () => {
 
       expect(onEvents).toContain(EVENTS.OPEN_EXTERNAL);
       expect(onEvents).toContain(EVENTS.UPDATE_AUTO_LAUNCH);
+      expect(onEvents).toContain(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR);
       expect(handleEvents).toContain(EVENTS.UPDATE_KEYBOARD_SHORTCUT);
+    });
+  });
+
+  describe('UPDATE_KEEP_WINDOW_ON_BLUR', () => {
+    it('forwards the value to applyKeepWindowOnBlur', () => {
+      registerSystemHandlers(menubar);
+
+      const handler = onMock.mock.calls.find(
+        (call: unknown[]) => call[0] === EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR,
+      )?.[1];
+      handler?.({}, true);
+
+      expect(applyKeepWindowOnBlur).toHaveBeenCalledWith(menubar, true);
     });
   });
 

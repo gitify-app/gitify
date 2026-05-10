@@ -1,7 +1,11 @@
 import type { Menubar } from 'menubar';
 
 import type MenuBuilder from '../menu';
-import { __resetWindowLifecycleForTests, configureWindowEvents } from './window';
+import {
+  __resetWindowLifecycleForTests,
+  configureWindowEvents,
+  applyKeepWindowOnBlur,
+} from './window';
 
 const appOnMock = vi.fn();
 const appQuitMock = vi.fn();
@@ -41,6 +45,12 @@ const findWindowHandler = (
   const onMock = menubar.window?.on as ReturnType<typeof vi.fn>;
   const call = onMock.mock.calls.find(([name]) => name === eventName);
   return call?.[1] as ((event: { preventDefault: () => void }) => void) | undefined;
+};
+
+const findWebContentsHandler = (menubar: Menubar, eventName: string): (() => void) | undefined => {
+  const onMock = menubar.window?.webContents.on as ReturnType<typeof vi.fn>;
+  const call = onMock.mock.calls.find(([name]) => name === eventName);
+  return call?.[1] as (() => void) | undefined;
 };
 
 const flushDeferred = () => new Promise((resolve) => setImmediate(resolve));
@@ -186,6 +196,42 @@ describe('main/lifecycle/window.ts', () => {
 
       expect(event.preventDefault).not.toHaveBeenCalled();
       expect(menubar.window?.hide).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('applyKeepWindowOnBlur', () => {
+    it('forwards the value to the underlying window', () => {
+      applyKeepWindowOnBlur(menubar, true);
+
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
+    });
+
+    it('skips the call when the window is destroyed', () => {
+      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
+      (menubar.window?.isDestroyed as ReturnType<typeof vi.fn>).mockReturnValue(true);
+
+      applyKeepWindowOnBlur(menubar, true);
+
+      expect(menubar.window?.setAlwaysOnTop).not.toHaveBeenCalled();
+    });
+
+    it('is restored after DevTools closes', () => {
+      configureWindowEvents(menubar, menuBuilder);
+      applyKeepWindowOnBlur(menubar, true);
+      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
+      (menubar.window?.setAlwaysOnTop as ReturnType<typeof vi.fn>).mockClear();
+
+      findWebContentsHandler(menubar, 'devtools-closed')?.();
+
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
+    });
+
+    it('is cleared after DevTools closes when the user did not opt in', () => {
+      configureWindowEvents(menubar, menuBuilder);
+
+      findWebContentsHandler(menubar, 'devtools-closed')?.();
+
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(false);
     });
   });
 
