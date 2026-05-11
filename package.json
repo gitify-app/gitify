@@ -67,7 +67,7 @@
     "test:ui": "vp test --ui"
   },
   "dependencies": {
-    "@gitify/menubar": "link:../../menubar/victoria-v2",
+    "@gitify/menubar": "^10.0.0",
     "electron-log": "5.4.3",
     "electron-updater": "6.8.3",
     "react": "19.2.6",
