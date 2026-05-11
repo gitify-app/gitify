@@ -4,6 +4,7 @@ import type { OcticonProps } from '@primer/octicons-react';
 
 import type {
   Account,
+  AuthCode,
   Forge,
   Hostname,
   IconColor,
@@ -13,6 +14,12 @@ import type {
   Token,
   UserType,
 } from '../../types';
+import type {
+  AuthMethod,
+  AuthResponse,
+  DeviceFlowSession,
+  LoginOAuthWebOptions,
+} from '../auth/types';
 
 /**
  * Capability flags exposed by a forge adapter.
@@ -25,8 +32,6 @@ export interface ForgeCapabilities {
   markAsDone(account: Account): boolean;
   /** Whether the forge supports ignoring a thread's subscription (unsubscribe). */
   unsubscribeThread(account: Account): boolean;
-  /** Whether the forge surfaces an "answered" state for discussions. */
-  answeredDiscussion(account: Account): boolean;
 }
 
 /**
@@ -161,12 +166,36 @@ export interface ForgeAdapter {
   validateToken(token: Token): boolean;
   /** URL to manage/create a personal access token on the forge. */
   getPersonalAccessTokenSettingsUrl(hostname: Hostname): Link;
-  /** URL to the developer settings page for the account's auth method. */
-  getDeveloperSettingsUrl(account: Account): Link;
+  /**
+   * URL to the forge page where the user manages this account's auth method
+   * (e.g. tokens, OAuth apps, GitHub Apps). Forges may key this off the
+   * account's auth method.
+   */
+  getAccountSettingsUrl(account: Account): Link;
   /** Login entries rendered in the Login route. */
   loginMethods: ReadonlyArray<LoginMethodDescriptor>;
   /** External documentation link shown in the PAT login route. */
   documentationUrl: Link;
+
+  // --- Auth flows ---
+  // Optional because not every forge supports every flow. Gitea today is
+  // PAT-only and implements none of these. The orchestrator gates UI on the
+  // presence of these methods (and on `loginMethods` entries pointing at
+  // `/login-device-flow` or `/login-oauth-app`).
+
+  /**
+   * The `AuthMethod` string recorded on the account when a successful device
+   * flow login completes. Required when `startDeviceFlow` is provided.
+   */
+  deviceFlowAuthMethod?: AuthMethod;
+  /** Start an OAuth device-flow authorization session. */
+  startDeviceFlow?(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
+  /** Poll for completion of a device-flow session; resolves to a token when granted. */
+  pollDeviceFlow?(session: DeviceFlowSession): Promise<Token | null>;
+  /** Initiate a custom-OAuth-app web flow. */
+  performWebOAuth?(options: LoginOAuthWebOptions): Promise<AuthResponse>;
+  /** Exchange an OAuth web-flow authorization code for an access token. */
+  exchangeAuthCodeForToken?(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
 
   // --- OAuth scopes ---
   // Forges without an OAuth scope concept (e.g. Gitea) report `true` for

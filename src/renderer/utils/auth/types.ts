@@ -24,12 +24,6 @@ export interface DeviceFlowSession {
   expiresAt: number;
 }
 
-export type DeviceFlowErrorResponse = {
-  error: string;
-  error_description: string;
-  error_uri: string;
-};
-
 export interface LoginPersonalAccessTokenOptions {
   hostname: Hostname;
   token: Token;

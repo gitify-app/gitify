@@ -53,8 +53,8 @@ export function openHost(hostname: Hostname) {
   openExternalLink(`https://${hostname}` as Link);
 }
 
-export function openDeveloperSettings(account: Account) {
-  const url = getAdapter(account).getDeveloperSettingsUrl(account);
+export function openAccountSettings(account: Account) {
+  const url = getAdapter(account).getAccountSettingsUrl(account);
   openExternalLink(url);
 }
 
