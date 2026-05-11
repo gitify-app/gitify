@@ -87,6 +87,15 @@ export function setAutoLaunch(value: boolean): void {
 }
 
 /**
+ * Enables or disables keeping the window open when it loses focus.
+ *
+ * @param value - `true` to keep the window open on blur, `false` to hide.
+ */
+export function setKeepWindowOnBlur(value: boolean): void {
+  window.gitify.setKeepWindowOnBlur(value);
+}
+
+/**
  * Switch the tray icon to an alternate idle icon variant.
  *
  * @param value - `true` to use the alternate idle icon, `false` for the default.

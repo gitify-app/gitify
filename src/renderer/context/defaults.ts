@@ -56,6 +56,7 @@ const defaultSystemSettings: SystemSettingsState = {
   playSound: true,
   notificationVolume: 20 as Percentage,
   openAtStartup: false,
+  keepWindowOnBlur: false,
 };
 
 export const defaultSettings: SettingsState = {

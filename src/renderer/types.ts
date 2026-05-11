@@ -143,6 +143,7 @@ export interface SystemSettingsState {
   playSound: boolean;
   notificationVolume: Percentage;
   openAtStartup: boolean;
+  keepWindowOnBlur: boolean;
 }
 
 export interface AuthState {

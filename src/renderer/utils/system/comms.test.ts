@@ -13,6 +13,7 @@ import {
   openExternalLink,
   quitApp,
   setAutoLaunch,
+  setKeepWindowOnBlur,
   setUseAlternateIdleIcon,
   showWindow,
   updateTrayColor,
@@ -119,6 +120,13 @@ describe('renderer/utils/comms.ts', () => {
 
       expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledTimes(1);
       expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledWith(false);
+    });
+
+    it('sets keep window on blur', () => {
+      setKeepWindowOnBlur(true);
+
+      expect(window.gitify.setKeepWindowOnBlur).toHaveBeenCalledTimes(1);
+      expect(window.gitify.setKeepWindowOnBlur).toHaveBeenCalledWith(true);
     });
 
     it('applies keyboard shortcut', async () => {

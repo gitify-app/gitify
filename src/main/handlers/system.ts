@@ -4,6 +4,7 @@ import type { Menubar } from 'menubar';
 import { EVENTS } from '../../shared/events';
 
 import { handleMainEvent, onMainEvent } from '../events';
+import { applyKeepWindowOnBlur } from '../lifecycle/window';
 
 /**
  * Register IPC handlers for OS-level system operations.
@@ -68,5 +69,12 @@ export function registerSystemHandlers(mb: Menubar): void {
    */
   onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings) => {
     app.setLoginItemSettings(settings);
+  });
+
+  /**
+   * Toggle whether the window stays open when it loses focus.
+   */
+  onMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, (_, value: boolean) => {
+    applyKeepWindowOnBlur(mb, value);
   });
 }

@@ -297,6 +297,19 @@ export const SystemSettings: FC = () => {
         </Stack>
 
         <Checkbox
+          checked={settings.keepWindowOnBlur}
+          label="Keep window open when it loses focus"
+          name="keepWindowOnBlur"
+          onChange={() => updateSetting('keepWindowOnBlur', !settings.keepWindowOnBlur)}
+          tooltip={
+            <Text>
+              Prevent the {APPLICATION.NAME} window from automatically hiding when you click outside
+              it.
+            </Text>
+          }
+        />
+
+        <Checkbox
           checked={settings.openAtStartup}
           label="Open at startup"
           name="openAtStartup"

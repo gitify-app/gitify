@@ -255,4 +255,17 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
     expect(updateSettingMock).toHaveBeenCalledWith('openAtStartup', true);
   });
+
+  it('should toggle the keepWindowOnBlur checkbox', async () => {
+    await act(async () => {
+      renderWithProviders(<SystemSettings />, {
+        updateSetting: updateSettingMock,
+      });
+    });
+
+    await userEvent.click(screen.getByTestId('checkbox-keepWindowOnBlur'));
+
+    expect(updateSettingMock).toHaveBeenCalledTimes(1);
+    expect(updateSettingMock).toHaveBeenCalledWith('keepWindowOnBlur', true);
+  });
 });

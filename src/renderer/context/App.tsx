@@ -58,6 +58,7 @@ import {
   decryptValue,
   encryptValue,
   setAutoLaunch,
+  setKeepWindowOnBlur,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/system/comms';
@@ -369,6 +370,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setAutoLaunch(settings.openAtStartup);
   }, [settings.openAtStartup]);
+
+  useEffect(() => {
+    setKeepWindowOnBlur(settings.keepWindowOnBlur);
+  }, [settings.keepWindowOnBlur]);
 
   useEffect(() => {
     window.gitify.onResetApp(() => {
