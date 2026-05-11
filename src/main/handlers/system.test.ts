@@ -1,4 +1,3 @@
-import { globalShortcut } from 'electron';
 import type { Menubar } from '@gitify/menubar';
 
 import { EVENTS } from '../../shared/events';
@@ -18,10 +17,6 @@ vi.mock('electron', () => ({
     on: (...args: unknown[]) => onMock(...args),
     handle: (...args: unknown[]) => handleMock(...args),
   } satisfies Pick<Electron.IpcMain, 'on' | 'handle'>,
-  globalShortcut: {
-    register: vi.fn(),
-    unregister: vi.fn(),
-  } satisfies Pick<Electron.GlobalShortcut, 'register' | 'unregister'>,
   app: {
     setLoginItemSettings: vi.fn(),
   } satisfies Pick<Electron.App, 'setLoginItemSettings'>,
@@ -32,14 +27,16 @@ vi.mock('electron', () => ({
 
 describe('main/handlers/system.ts', () => {
   let menubar: Menubar;
+  let setGlobalShortcutMock: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(globalShortcut.register).mockReturnValue(true);
+    setGlobalShortcutMock = vi.fn().mockReturnValue(true);
 
     menubar = {
       showWindow: vi.fn(),
       hideWindow: vi.fn(),
+      setGlobalShortcut: setGlobalShortcutMock,
       window: {
         isVisible: vi.fn().mockReturnValue(false),
       },
@@ -90,7 +87,7 @@ describe('main/handlers/system.ts', () => {
   });
 
   describe('UPDATE_KEYBOARD_SHORTCUT', () => {
-    it('registers shortcut when enabled', () => {
+    it('delegates registration to mb.setGlobalShortcut when enabled', () => {
       const handler = getKeyboardShortcutHandler();
 
       const result = handler({} as Electron.IpcMainInvokeEvent, {
@@ -99,20 +96,17 @@ describe('main/handlers/system.ts', () => {
       });
 
       expect(result).toEqual({ success: true });
-      expect(globalShortcut.register).toHaveBeenCalledWith(
-        'CommandOrControl+Shift+G',
-        expect.any(Function),
-      );
+      expect(setGlobalShortcutMock).toHaveBeenCalledWith('CommandOrControl+Shift+G');
     });
 
-    it('unregisters when disabled after being enabled', () => {
+    it('clears the shortcut when disabled', () => {
       const handler = getKeyboardShortcutHandler();
 
       handler({} as Electron.IpcMainInvokeEvent, {
         enabled: true,
         keyboardShortcut: 'CommandOrControl+Shift+A',
       });
-      vi.clearAllMocks();
+      setGlobalShortcutMock.mockClear();
 
       const result = handler({} as Electron.IpcMainInvokeEvent, {
         enabled: false,
@@ -120,40 +114,18 @@ describe('main/handlers/system.ts', () => {
       });
 
       expect(result).toEqual({ success: true });
-      expect(globalShortcut.unregister).toHaveBeenCalledWith('CommandOrControl+Shift+A');
-      expect(globalShortcut.register).not.toHaveBeenCalled();
+      expect(setGlobalShortcutMock).toHaveBeenCalledWith(undefined);
     });
 
-    it('unregisters previous shortcut when switching to a new one', () => {
+    it('returns success false and rolls back to the previous shortcut when the new registration fails', () => {
       const handler = getKeyboardShortcutHandler();
 
       handler({} as Electron.IpcMainInvokeEvent, {
         enabled: true,
         keyboardShortcut: 'CommandOrControl+Shift+A',
       });
-      vi.clearAllMocks();
-
-      handler({} as Electron.IpcMainInvokeEvent, {
-        enabled: true,
-        keyboardShortcut: 'CommandOrControl+Shift+B',
-      });
-
-      expect(globalShortcut.unregister).toHaveBeenCalledWith('CommandOrControl+Shift+A');
-      expect(globalShortcut.register).toHaveBeenCalledWith(
-        'CommandOrControl+Shift+B',
-        expect.any(Function),
-      );
-    });
-
-    it('returns success false and restores previous shortcut when new registration fails', () => {
-      const handler = getKeyboardShortcutHandler();
-
-      handler({} as Electron.IpcMainInvokeEvent, {
-        enabled: true,
-        keyboardShortcut: 'CommandOrControl+Shift+A',
-      });
-      vi.clearAllMocks();
-      vi.mocked(globalShortcut.register).mockReturnValueOnce(false).mockReturnValue(true);
+      setGlobalShortcutMock.mockClear();
+      setGlobalShortcutMock.mockReturnValueOnce(false).mockReturnValue(true);
 
       const result = handler({} as Electron.IpcMainInvokeEvent, {
         enabled: true,
@@ -161,16 +133,8 @@ describe('main/handlers/system.ts', () => {
       });
 
       expect(result).toEqual({ success: false });
-      expect(globalShortcut.register).toHaveBeenNthCalledWith(
-        1,
-        'CommandOrControl+Shift+B',
-        expect.any(Function),
-      );
-      expect(globalShortcut.register).toHaveBeenNthCalledWith(
-        2,
-        'CommandOrControl+Shift+A',
-        expect.any(Function),
-      );
+      expect(setGlobalShortcutMock).toHaveBeenNthCalledWith(1, 'CommandOrControl+Shift+B');
+      expect(setGlobalShortcutMock).toHaveBeenNthCalledWith(2, 'CommandOrControl+Shift+A');
     });
   });
 });
