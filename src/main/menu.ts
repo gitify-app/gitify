@@ -1,5 +1,6 @@
 import { Menu, MenuItem, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
+
 import type { Menubar } from '@gitify/menubar';
 
 import { APPLICATION } from '../shared/constants';

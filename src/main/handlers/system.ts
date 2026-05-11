@@ -1,4 +1,5 @@
 import { app, shell } from 'electron';
+
 import type { Menubar } from '@gitify/menubar';
 
 import { EVENTS } from '../../shared/events';

@@ -1,4 +1,5 @@
 import { app } from 'electron';
+
 import type { Menubar } from '@gitify/menubar';
 
 import { APPLICATION } from '../../shared/constants';
