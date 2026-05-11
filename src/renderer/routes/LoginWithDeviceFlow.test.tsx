@@ -50,7 +50,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
 
     await userEvent.click(screen.getByTestId('device-scope-public'));
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
       'notifications',
       'read:user',
       'public_repo',
@@ -81,7 +81,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
 
     await userEvent.click(screen.getByTestId('device-scope-full'));
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(undefined, [
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
       'notifications',
       'read:user',
       'repo',

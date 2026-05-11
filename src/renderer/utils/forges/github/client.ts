@@ -12,7 +12,7 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
-import { githubCapabilities } from './capabilities';
+import { supportsAnsweredDiscussion } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
@@ -204,7 +204,7 @@ export async function fetchDiscussionByNumber(
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
-    includeIsAnswered: githubCapabilities.answeredDiscussion(notification.account),
+    includeIsAnswered: supportsAnsweredDiscussion(notification.account),
   });
 }
 
@@ -287,7 +287,7 @@ export async function fetchNotificationDetailsForList(
   }
 
   builder.setSharedVariables({
-    includeIsAnswered: githubCapabilities.answeredDiscussion(notifications[0].account),
+    includeIsAnswered: supportsAnsweredDiscussion(notifications[0].account),
     firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,

@@ -5,12 +5,7 @@ import { Constants } from '../../../constants';
 import type { Account, Link, RawGitifyNotification, SettingsState } from '../../../types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
-import {
-  extractHostVersion,
-  getDeveloperSettingsURL,
-  getNewTokenURL,
-  isValidToken,
-} from '../../auth/utils';
+import { extractHostVersion, getDeveloperSettingsURL, getNewTokenURL, isValidToken } from './auth';
 import { githubCapabilities } from './capabilities';
 import {
   fetchAuthenticatedUserDetails,
@@ -20,6 +15,12 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
+import {
+  exchangeAuthCodeForAccessToken,
+  performGitHubWebOAuth,
+  pollGitHubDeviceFlow,
+  startGitHubDeviceFlow,
+} from './flows';
 import { createNotificationHandler } from './handlers';
 import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
 import { transformNotifications } from './transform';
@@ -96,7 +97,7 @@ export const githubAdapter: ForgeAdapter = {
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
-  getDeveloperSettingsUrl: getDeveloperSettingsURL,
+  getAccountSettingsUrl: getDeveloperSettingsURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
 
   supportsOAuthScopes: true,
@@ -108,6 +109,7 @@ export const githubAdapter: ForgeAdapter = {
       label: 'GitHub',
       variant: 'primary',
       route: '/login-device-flow',
+      state: { forge: 'github' },
     },
     {
       testId: 'login-pat',
@@ -120,8 +122,15 @@ export const githubAdapter: ForgeAdapter = {
       icon: PersonIcon,
       label: 'OAuth App',
       route: '/login-oauth-app',
+      state: { forge: 'github' },
     },
   ],
+
+  deviceFlowAuthMethod: 'GitHub App',
+  startDeviceFlow: startGitHubDeviceFlow,
+  pollDeviceFlow: pollGitHubDeviceFlow,
+  performWebOAuth: performGitHubWebOAuth,
+  exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
 
   hasRequiredScopes: (account) => accountHasScopes(account, 'REQUIRED'),
   hasRecommendedScopes: (account) => accountHasScopes(account, 'RECOMMENDED'),

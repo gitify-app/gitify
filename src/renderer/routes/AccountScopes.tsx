@@ -20,7 +20,7 @@ import {
   getRequiredScopeNames,
   hasRequiredScopes,
 } from '../utils/auth/scopes';
-import { openDeveloperSettings } from '../utils/system/links';
+import { openAccountSettings } from '../utils/system/links';
 
 interface LocationState {
   account: Account;
@@ -186,7 +186,7 @@ export const AccountScopesRoute: FC = () => {
         <Button
           data-testid="account-scopes-manage-link"
           leadingVisual={LinkExternalIcon}
-          onClick={() => openDeveloperSettings(account)}
+          onClick={() => openAccountSettings(account)}
         >
           Developer settings
         </Button>

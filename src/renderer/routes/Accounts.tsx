@@ -33,7 +33,7 @@ import { Errors } from '../utils/core/errors';
 import { toError } from '../utils/core/logger';
 import { saveState } from '../utils/core/storage';
 import { getAdapter } from '../utils/forges/registry';
-import { openAccountProfile, openDeveloperSettings, openHost } from '../utils/system/links';
+import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/ui/icons';
 
 export const AccountsRoute: FC = () => {
@@ -92,7 +92,10 @@ export const AccountsRoute: FC = () => {
   };
 
   const loginWithGitHub = async () => {
-    return navigate('/login-device-flow', { replace: true });
+    return navigate('/login-device-flow', {
+      replace: true,
+      state: { forge: 'github' as const },
+    });
   };
 
   const loginWithPersonalAccessToken = () => {
@@ -107,7 +110,10 @@ export const AccountsRoute: FC = () => {
   };
 
   const loginWithOAuthApp = () => {
-    return navigate('/login-oauth-app', { replace: true });
+    return navigate('/login-oauth-app', {
+      replace: true,
+      state: { forge: 'github' as const },
+    });
   };
 
   const getAccountError = (account: Account) => {
@@ -203,7 +209,7 @@ export const AccountsRoute: FC = () => {
                         data-testid="account-developer-settings"
                         direction="horizontal"
                         gap="condensed"
-                        onClick={() => openDeveloperSettings(account)}
+                        onClick={() => openAccountSettings(account)}
                         title="Open developer settings ↗"
                       >
                         {AuthMethodIcon && <AuthMethodIcon />}
@@ -217,7 +223,7 @@ export const AccountsRoute: FC = () => {
                           data-testid="account-bad-credentials"
                           direction="horizontal"
                           gap="condensed"
-                          onClick={() => openDeveloperSettings(account)}
+                          onClick={() => openAccountSettings(account)}
                           title="Open developer settings ↗"
                         >
                           <AlertFillIcon />

@@ -15,7 +15,6 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     it('reports unsupported capabilities', () => {
       expect(giteaAdapter.capabilities.markAsDone(mockGiteaAccount)).toBe(false);
       expect(giteaAdapter.capabilities.unsubscribeThread(mockGiteaAccount)).toBe(false);
-      expect(giteaAdapter.capabilities.answeredDiscussion(mockGiteaAccount)).toBe(false);
     });
 
     it('does not implement detailed enrichment', () => {
@@ -31,12 +30,12 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       });
     });
 
-    it('builds PAT settings and developer settings URLs from the hostname', () => {
+    it('builds PAT settings and account settings URLs from the hostname', () => {
       expect(giteaAdapter.getPersonalAccessTokenSettingsUrl('gitea.example.com' as Hostname)).toBe(
         'https://gitea.example.com/user/settings/applications',
       );
 
-      expect(giteaAdapter.getDeveloperSettingsUrl(mockGiteaAccount)).toBe(
+      expect(giteaAdapter.getAccountSettingsUrl(mockGiteaAccount)).toBe(
         'https://gitea.example.com/user/settings/applications',
       );
     });

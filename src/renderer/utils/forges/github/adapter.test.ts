@@ -32,10 +32,18 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(url).toContain('https://github.com/settings/tokens/new');
     });
 
-    it('routes getDeveloperSettingsUrl through the auth-method helper', () => {
-      expect(githubAdapter.getDeveloperSettingsUrl(mockGitHubCloudAccount)).toBe(
+    it('routes getAccountSettingsUrl through the auth-method helper', () => {
+      expect(githubAdapter.getAccountSettingsUrl(mockGitHubCloudAccount)).toBe(
         'https://github.com/settings/tokens',
       );
+    });
+
+    it('wires the device-flow and OAuth-app methods so the context can dispatch via the adapter', () => {
+      expect(githubAdapter.deviceFlowAuthMethod).toBe('GitHub App');
+      expect(githubAdapter.startDeviceFlow).toBeDefined();
+      expect(githubAdapter.pollDeviceFlow).toBeDefined();
+      expect(githubAdapter.performWebOAuth).toBeDefined();
+      expect(githubAdapter.exchangeAuthCodeForToken).toBeDefined();
     });
   });
 

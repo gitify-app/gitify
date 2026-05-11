@@ -29,7 +29,6 @@ const GITEA_DOCS_URL = 'https://docs.gitea.com/development/api-usage' as Link;
 const capabilities: ForgeCapabilities = {
   markAsDone: () => false,
   unsubscribeThread: () => false,
-  answeredDiscussion: () => false,
 };
 
 async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
@@ -101,7 +100,7 @@ export const giteaAdapter: ForgeAdapter = {
   validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
     `https://${hostname}/user/settings/applications` as Link,
-  getDeveloperSettingsUrl: (account: Account) =>
+  getAccountSettingsUrl: (account: Account) =>
     `https://${account.hostname}/user/settings/applications` as Link,
   documentationUrl: GITEA_DOCS_URL,
 

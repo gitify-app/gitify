@@ -13,27 +13,22 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { Account, ClientID, ClientSecret, Hostname, Token } from '../types';
+import type { Account, ClientID, ClientSecret, Forge, Token } from '../types';
 import type { LoginOAuthWebOptions } from '../utils/auth/types';
 
-import {
-  getNewOAuthAppURL,
-  isValidClientId,
-  isValidHostname,
-  isValidToken,
-} from '../utils/auth/utils';
+import { isValidHostname } from '../utils/auth/utils';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getNewOAuthAppURL, isValidClientId, isValidToken } from '../utils/forges/github/auth';
 import { openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
   account?: Account;
+  forge?: Forge;
 }
 
-export interface IFormData {
-  hostname: Hostname;
-  clientId: ClientID;
-  clientSecret: ClientSecret;
-}
+// IFormData mirrors LoginOAuthWebOptions exactly — keep them aliased so the
+// form can be passed straight into the context callback without casting.
+export type IFormData = LoginOAuthWebOptions;
 
 interface IFormErrors {
   hostname?: string;
@@ -69,7 +64,8 @@ export const validateForm = (values: IFormData): IFormErrors => {
 export const LoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
+  const { account: reAuthAccount, forge: routeForge } = (location.state ?? {}) as LocationState;
+  const forge: Forge = routeForge ?? reAuthAccount?.forge ?? 'github';
 
   const { loginWithOAuthApp } = useAppContext();
 
@@ -108,7 +104,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const verifyLoginCredentials = useCallback(
     async (data: IFormData) => {
       try {
-        await loginWithOAuthApp(data as LoginOAuthWebOptions);
+        await loginWithOAuthApp(forge, data);
         navigate('/');
       } catch (err) {
         rendererLogError('loginWithOAuthApp', 'Failed to login with OAuth App', toError(err));
@@ -118,7 +114,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
       }
     },
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
-    [loginWithOAuthApp],
+    [loginWithOAuthApp, forge],
   );
 
   return (
