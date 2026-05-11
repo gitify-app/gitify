@@ -3,7 +3,7 @@ import { autoUpdater } from 'electron-updater';
 import type { Menubar } from '@gitify/menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { isLinux, isMacOS } from '../shared/platform';
+import { isMacOS } from '../shared/platform';
 
 import { resetApp } from './lifecycle/reset';
 import { openLogsDirectory, takeScreenshot } from './utils';
@@ -142,27 +142,15 @@ export default class MenuBuilder {
 
   /**
    * Reflect the current window visibility in the Show / Hide menu items.
-   * On Linux, the indicator caches the menu over D-Bus, so we re-publish
-   * via setContextMenu to push the visibility flip through immediately
-   * instead of waiting for the next mutation event.
+   * `@gitify/menubar` re-publishes the menu to the SNI host on every
+   * show/hide automatically, so a Linux libappindicator user sees the
+   * visibility flip without us touching the tray here.
    *
    * @param isVisible - Whether the popup window is currently visible.
    */
   setWindowVisibility(isVisible: boolean) {
     this.showWindowMenuItem.visible = !isVisible;
     this.hideWindowMenuItem.visible = isVisible;
-
-    if (!isLinux() || !this.menu) {
-      return;
-    }
-    try {
-      if (!this.menubar.tray.isDestroyed()) {
-        this.menubar.tray.setContextMenu(this.menu);
-      }
-    } catch {
-      // Tray not yet ready; the initial setContextMenu in
-      // initializeAppLifecycle will pick up the current state.
-    }
   }
 
   /**
