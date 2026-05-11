@@ -8,15 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@gitify/menubar':
+        specifier: link:../../menubar/victoria-v2
+        version: link:../../menubar/victoria-v2
       electron-log:
         specifier: 5.4.3
         version: 5.4.3
       electron-updater:
         specifier: 6.8.3
         version: 6.8.3
-      menubar:
-        specifier: 9.5.2
-        version: 9.5.2(electron@42.0.0)
       react:
         specifier: 19.2.6
         version: 19.2.6
@@ -2364,9 +2364,6 @@ packages:
     resolution: {integrity: sha512-sOUsM3LjZdugatazSQ/XTyNcw8dfvH1SYhXWiJyfYodAAKOZdHs0txPiLDXFzOZbhXgAgshQkshH2ccq0feyLQ==}
     engines: {node: '>= 14'}
 
-  electron-positioner@4.1.0:
-    resolution: {integrity: sha512-726DfbI9ZNoCg+Fcu6XLuTKTnzf+6nFqv7h+K/V6Ug7IbaPMI7s9S8URnGtWFCy5N5PL4HSzRFF2mXuinftDdg==}
-
   electron-publish@26.8.1:
     resolution: {integrity: sha512-q+jrSTIh/Cv4eGZa7oVR+grEJo/FoLMYBAnSL5GCtqwUpr1T+VgKB/dn1pnzxIxqD8S/jP1yilT9VrwCqINR4w==}
 
@@ -3193,11 +3190,6 @@ packages:
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
-
-  menubar@9.5.2:
-    resolution: {integrity: sha512-yUn4jCMPOiNuqxplEE+SITlTX+Wy92ZNZaG5tsTczEvVT1El8plHR3kinOTfUPwfQcAYcWE0SLiBM41z/hS6pg==}
-    peerDependencies:
-      electron: '>=9.0.0 <35.0.0'
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -6559,8 +6551,6 @@ snapshots:
 
   electron-log@5.4.3: {}
 
-  electron-positioner@4.1.0: {}
-
   electron-publish@26.8.1:
     dependencies:
       '@types/fs-extra': 9.0.13
@@ -7394,11 +7384,6 @@ snapshots:
     optional: true
 
   math-intrinsics@1.1.0: {}
-
-  menubar@9.5.2(electron@42.0.0):
-    dependencies:
-      electron: 42.0.0
-      electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
 

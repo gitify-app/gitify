@@ -1,4 +1,4 @@
-import type { Menubar } from 'menubar';
+import type { Menubar } from '@gitify/menubar';
 
 import type MenuBuilder from '../menu';
 import {

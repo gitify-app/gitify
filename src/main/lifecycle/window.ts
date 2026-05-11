@@ -1,5 +1,5 @@
 import { app, type BrowserWindow } from 'electron';
-import type { Menubar } from 'menubar';
+import type { Menubar } from '@gitify/menubar';
 
 import { logWarn, toError } from '../../shared/logger';
 import { isMacOS } from '../../shared/platform';

@@ -1,5 +1,5 @@
 import { dialog } from 'electron';
-import type { Menubar } from 'menubar';
+import type { Menubar } from '@gitify/menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';

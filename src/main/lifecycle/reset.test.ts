@@ -1,4 +1,4 @@
-import type { Menubar } from 'menubar';
+import type { Menubar } from '@gitify/menubar';
 
 vi.mock('electron', () => ({
   dialog: {
