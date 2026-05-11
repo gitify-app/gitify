@@ -297,15 +297,6 @@ export const SystemSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.openAtStartup}
-          label="Open at startup"
-          name="openAtStartup"
-          onChange={() => updateSetting('openAtStartup', !settings.openAtStartup)}
-          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
-          visible={!window.gitify.platform.isLinux()}
-        />
-
-        <Checkbox
           checked={settings.keepWindowOnBlur}
           label="Keep window open when it loses focus"
           name="keepWindowOnBlur"
@@ -316,6 +307,15 @@ export const SystemSettings: FC = () => {
               it.
             </Text>
           }
+        />
+
+        <Checkbox
+          checked={settings.openAtStartup}
+          label="Open at startup"
+          name="openAtStartup"
+          onChange={() => updateSetting('openAtStartup', !settings.openAtStartup)}
+          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
+          visible={!window.gitify.platform.isLinux()}
         />
       </Stack>
     </fieldset>

@@ -2100,22 +2100,22 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-openAtStartup"
-              id="openAtStartup"
+              data-testid="checkbox-keepWindowOnBlur"
+              id="keepWindowOnBlur"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="openAtStartup"
+              for="keepWindowOnBlur"
             >
-              Open at startup
+              Keep window open when it loses focus
             </label>
             <button
               aria-expanded="false"
               aria-haspopup="true"
-              aria-label="tooltip-openAtStartup"
-              data-testid="tooltip-icon-tooltip-openAtStartup"
-              id="tooltip-openAtStartup"
+              aria-label="tooltip-keepWindowOnBlur"
+              data-testid="tooltip-icon-tooltip-keepWindowOnBlur"
+              id="tooltip-keepWindowOnBlur"
               tabindex="0"
               type="button"
             >
@@ -2149,22 +2149,22 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-keepWindowOnBlur"
-              id="keepWindowOnBlur"
+              data-testid="checkbox-openAtStartup"
+              id="openAtStartup"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="keepWindowOnBlur"
+              for="openAtStartup"
             >
-              Keep window open when it loses focus
+              Open at startup
             </label>
             <button
               aria-expanded="false"
               aria-haspopup="true"
-              aria-label="tooltip-keepWindowOnBlur"
-              data-testid="tooltip-icon-tooltip-keepWindowOnBlur"
-              id="tooltip-keepWindowOnBlur"
+              aria-label="tooltip-openAtStartup"
+              data-testid="tooltip-icon-tooltip-openAtStartup"
+              id="tooltip-openAtStartup"
               tabindex="0"
               type="button"
             >
