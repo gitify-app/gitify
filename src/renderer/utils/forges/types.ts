@@ -176,6 +176,12 @@ export interface ForgeAdapter {
   loginMethods: ReadonlyArray<LoginMethodDescriptor>;
   /** External documentation link shown in the PAT login route. */
   documentationUrl: Link;
+  /**
+   * Icon for the given auth method, used in the Accounts list. Adapters that
+   * only support a subset of `AuthMethod` should return a sensible fallback
+   * (e.g. KeyIcon) for unknown values rather than throwing.
+   */
+  getAuthMethodIcon(method: AuthMethod): FC<OcticonProps>;
 
   // --- Auth flows ---
   // Optional because not every forge supports every flow. Gitea today is

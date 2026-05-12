@@ -1,8 +1,9 @@
-import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import { AppsIcon, KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 
 import { Constants } from '../../../constants';
 
 import type { Account, Link, RawGitifyNotification, SettingsState } from '../../../types';
+import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
 import { extractHostVersion, getDeveloperSettingsURL, getNewTokenURL, isValidToken } from './auth';
@@ -99,6 +100,7 @@ export const githubAdapter: ForgeAdapter = {
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   getAccountSettingsUrl: getDeveloperSettingsURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
+  getAuthMethodIcon: githubAuthMethodIcon,
 
   supportsOAuthScopes: true,
 
@@ -142,4 +144,15 @@ function accountHasScopes(
   group: 'REQUIRED' | 'RECOMMENDED' | 'ALTERNATE',
 ): boolean {
   return Constants.OAUTH_SCOPES[group].every(({ name }) => (account.scopes ?? []).includes(name));
+}
+
+function githubAuthMethodIcon(method: AuthMethod) {
+  switch (method) {
+    case 'GitHub App':
+      return AppsIcon;
+    case 'OAuth App':
+      return PersonIcon;
+    default:
+      return KeyIcon;
+  }
 }

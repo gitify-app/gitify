@@ -1,3 +1,5 @@
+import { KeyIcon } from '@primer/octicons-react';
+
 import { mockGiteaAccount } from '../../../__mocks__/account-mocks';
 
 import type { Hostname, Link, SettingsState, Token } from '../../../types';
@@ -38,6 +40,12 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       expect(giteaAdapter.getAccountSettingsUrl(mockGiteaAccount)).toBe(
         'https://gitea.example.com/user/settings/applications',
       );
+    });
+
+    it('returns the key icon for every auth method (PAT-only forge today)', () => {
+      expect(giteaAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
+      expect(giteaAdapter.getAuthMethodIcon('GitHub App')).toBe(KeyIcon);
+      expect(giteaAdapter.getAuthMethodIcon('OAuth App')).toBe(KeyIcon);
     });
   });
 
