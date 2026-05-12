@@ -9,8 +9,6 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { Constants } from '../../constants';
-
 import {
   type AccountNotifications,
   type GitifyNotification,
@@ -20,6 +18,7 @@ import {
 } from '../../types';
 
 import * as apiClient from '../forges/github/client';
+import { GITHUB_API_MERGE_BATCH_SIZE } from '../forges/github/enrich';
 import {
   enrichNotifications,
   getNotificationCount,
@@ -141,7 +140,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         .spyOn(apiClient, 'fetchNotificationDetailsForList')
         .mockResolvedValue(new Map());
 
-      const notificationCount = Constants.GITHUB_API_MERGE_BATCH_SIZE * 2.5;
+      const notificationCount = GITHUB_API_MERGE_BATCH_SIZE * 2.5;
       const notifications = Array.from({ length: notificationCount }, (_, i) =>
         mockPartialGitifyNotification({
           title: `Notification ${i}`,
@@ -162,10 +161,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       // Verify batch sizes
       expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(
-        Constants.GITHUB_API_MERGE_BATCH_SIZE,
+        GITHUB_API_MERGE_BATCH_SIZE,
       );
       expect(fetchNotificationDetailsForListSpy.mock.calls[1][0]).toHaveLength(
-        Constants.GITHUB_API_MERGE_BATCH_SIZE,
+        GITHUB_API_MERGE_BATCH_SIZE,
       );
       expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(50);
     });
