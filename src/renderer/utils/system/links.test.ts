@@ -12,10 +12,10 @@ import * as comms from './comms';
 import {
   openAccountProfile,
   openAccountSettings,
-  openGitHubIssues,
-  openGitHubNotifications,
+  openHostIssues,
+  openHostNotifications,
   openGitHubParticipatingDocs,
-  openGitHubPulls,
+  openHostPulls,
   openGitifyReleaseNotes,
   openHost,
   openNotification,
@@ -34,20 +34,20 @@ describe('renderer/utils/links.ts', () => {
     );
   });
 
-  it('openGitHubNotifications', () => {
-    openGitHubNotifications(mockGitHubCloudAccount.hostname);
+  it('openHostNotifications', () => {
+    openHostNotifications(mockGitHubCloudAccount.hostname);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/notifications');
   });
 
-  it('openGitHubIssues', () => {
-    openGitHubIssues(mockGitHubCloudAccount.hostname);
+  it('openHostIssues', () => {
+    openHostIssues(mockGitHubCloudAccount.hostname);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/issues');
   });
 
-  it('openGitHubPulls', () => {
-    openGitHubPulls(mockGitHubCloudAccount.hostname);
+  it('openHostPulls', () => {
+    openHostPulls(mockGitHubCloudAccount.hostname);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/pulls');
   });
