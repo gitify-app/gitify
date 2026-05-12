@@ -47,9 +47,10 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
 
     it('wires the device-flow and OAuth-app methods so the context can dispatch via the adapter', () => {
-      expect(githubAdapter.deviceFlowAuthMethod).toBe('GitHub App');
-      expect(githubAdapter.startDeviceFlow).toBeDefined();
-      expect(githubAdapter.pollDeviceFlow).toBeDefined();
+      expect(githubAdapter.deviceFlow?.authMethod).toBe('GitHub App');
+      expect(githubAdapter.deviceFlow?.start).toBeDefined();
+      expect(githubAdapter.deviceFlow?.poll).toBeDefined();
+      expect(githubAdapter.deviceFlow?.getRevokeAccessUrl).toBeDefined();
       expect(githubAdapter.oauthWebApp?.performWebOAuth).toBeDefined();
       expect(githubAdapter.oauthWebApp?.exchangeAuthCodeForToken).toBeDefined();
       expect(githubAdapter.oauthWebApp?.validateClientId).toBeDefined();

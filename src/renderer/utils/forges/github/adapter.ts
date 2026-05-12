@@ -133,9 +133,13 @@ export const githubAdapter: ForgeAdapter = {
     },
   ],
 
-  deviceFlowAuthMethod: 'GitHub App',
-  startDeviceFlow: startGitHubDeviceFlow,
-  pollDeviceFlow: pollGitHubDeviceFlow,
+  deviceFlow: {
+    authMethod: 'GitHub App',
+    start: startGitHubDeviceFlow,
+    poll: pollGitHubDeviceFlow,
+    getRevokeAccessUrl: (hostname) =>
+      getDeveloperSettingsURL({ hostname, method: 'GitHub App' } as Account),
+  },
 
   oauthWebApp: {
     performWebOAuth: performGitHubWebOAuth,

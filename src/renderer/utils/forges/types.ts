@@ -185,19 +185,16 @@ export interface ForgeAdapter {
 
   // --- Auth flows ---
   // Optional because not every forge supports every flow. Gitea today is
-  // PAT-only and implements none of these. The orchestrator gates UI on the
-  // presence of these methods (and on `loginMethods` entries pointing at
+  // PAT-only and omits both bundles. The orchestrator gates UI on the
+  // presence of these bundles (and on `loginMethods` entries pointing at
   // `/login-device-flow` or `/login-oauth-app`).
 
   /**
-   * The `AuthMethod` string recorded on the account when a successful device
-   * flow login completes. Required when `startDeviceFlow` is provided.
+   * OAuth device-flow capability. Forges without device-flow support (e.g.
+   * Gitea) omit this bundle entirely — callers gate the device-flow UI on
+   * its presence.
    */
-  deviceFlowAuthMethod?: AuthMethod;
-  /** Start an OAuth device-flow authorization session. */
-  startDeviceFlow?(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
-  /** Poll for completion of a device-flow session; resolves to a token when granted. */
-  pollDeviceFlow?(session: DeviceFlowSession): Promise<Token | null>;
+  deviceFlow?: DeviceFlowSupport;
 
   /**
    * Custom-OAuth-app web flow. Forges without OAuth-app support (e.g. Gitea)
@@ -241,4 +238,19 @@ export interface OAuthWebAppSupport {
   validateClientId(clientId: string): boolean;
   /** URL the user visits to create a new OAuth app on the forge. */
   getNewOAuthAppUrl(hostname: Hostname): Link;
+}
+
+/**
+ * OAuth device-flow capability bundle. Present only on forges that support
+ * browser-side device authorisation (GitHub today).
+ */
+export interface DeviceFlowSupport {
+  /** `AuthMethod` recorded on the account when a successful login completes. */
+  authMethod: AuthMethod;
+  /** Start a device-flow authorization session. */
+  start(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
+  /** Poll for completion; resolves to a token when granted. */
+  poll(session: DeviceFlowSession): Promise<Token | null>;
+  /** URL the user visits to revoke Gitify's access on this forge. */
+  getRevokeAccessUrl(hostname: Hostname): Link;
 }

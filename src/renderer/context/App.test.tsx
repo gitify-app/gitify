@@ -214,7 +214,7 @@ describe('renderer/context/App.tsx', () => {
 
     it('loginWithDeviceFlowStart delegates to the forge adapter', async () => {
       const adapter = getAdapter('github');
-      const startSpy = vi.spyOn(adapter, 'startDeviceFlow').mockImplementation(vi.fn());
+      const startSpy = vi.spyOn(adapter.deviceFlow!, 'start').mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
 
@@ -227,7 +227,7 @@ describe('renderer/context/App.tsx', () => {
 
     it('loginWithDeviceFlowPoll delegates to the forge adapter', async () => {
       const adapter = getAdapter('github');
-      const pollSpy = vi.spyOn(adapter, 'pollDeviceFlow').mockImplementation(vi.fn());
+      const pollSpy = vi.spyOn(adapter.deviceFlow!, 'poll').mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
 
@@ -291,7 +291,7 @@ describe('renderer/context/App.tsx', () => {
       ).rejects.toThrow(/Device flow is not supported for forge "gitea"/);
     });
 
-    it('loginWithDeviceFlowComplete throws when the forge declares no auth method', async () => {
+    it('loginWithDeviceFlowComplete throws when the forge does not support device flow', async () => {
       const getContext = renderWithContext();
 
       await expect(
@@ -300,7 +300,7 @@ describe('renderer/context/App.tsx', () => {
           'token' as Token,
           Constants.GITHUB_HOSTNAME,
         ),
-      ).rejects.toThrow(/did not declare a device-flow auth method/);
+      ).rejects.toThrow(/does not support device flow/);
     });
 
     it('loginWithOAuthApp throws when the forge does not support OAuth app login', async () => {

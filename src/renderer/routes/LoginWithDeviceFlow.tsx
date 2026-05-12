@@ -13,13 +13,13 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { Account, Forge, Link } from '../types';
+import type { Account, Forge, Hostname, Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import { getAlternateScopeNames, getRecommendedScopeNames } from '../utils/auth/scopes';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getAdapter } from '../utils/forges/registry';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
-import { openAccountSettings } from '../utils/system/links';
 
 interface LocationState {
   account?: Account;
@@ -229,25 +229,32 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           </Stack>
         </Button>
 
-        <Stack gap="none">
-          <Text as="em" size="small">
-            Note: to change previously granted permissions, revoke Gitify's access at{' '}
-            <button
-              className="text-gitify-link cursor-pointer"
-              onClick={() =>
-                openAccountSettings({
-                  hostname: Constants.GITHUB_HOSTNAME,
-                  method: 'GitHub App',
-                } as Account)
-              }
-              title="GitHub → Developer Settings"
-              type="button"
-            >
-              GitHub → Developer Settings
-            </button>
-            , then re-authorize above.
-          </Text>
-        </Stack>
+        {(() => {
+          const adapter = getAdapter(forge);
+          const revokeUrl = adapter.deviceFlow?.getRevokeAccessUrl(
+            (reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME) as Hostname,
+          );
+          if (!revokeUrl) {
+            return null;
+          }
+          const label = `${adapter.displayName} → Developer Settings`;
+          return (
+            <Stack gap="none">
+              <Text as="em" size="small">
+                Note: to change previously granted permissions, revoke Gitify's access at{' '}
+                <button
+                  className="text-gitify-link cursor-pointer"
+                  onClick={() => openExternalLink(revokeUrl)}
+                  title={label}
+                  type="button"
+                >
+                  {label}
+                </button>
+                , then re-authorize above.
+              </Text>
+            </Stack>
+          );
+        })()}
       </Stack>
     </Stack>
   );
