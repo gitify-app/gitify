@@ -34,7 +34,7 @@ import { toError } from '../utils/core/logger';
 import { saveState } from '../utils/core/storage';
 import { getAdapter } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
-import { getAuthMethodIcon, getPlatformIcon } from '../utils/ui/icons';
+import { getPlatformIcon } from '../utils/ui/icons';
 
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
@@ -153,7 +153,7 @@ export const AccountsRoute: FC = () => {
 
       <Contents>
         {auth.accounts.map((account, i) => {
-          const AuthMethodIcon = getAuthMethodIcon(account.method);
+          const AuthMethodIcon = getAdapter(account).getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);
           const accountError = getAccountError(account);

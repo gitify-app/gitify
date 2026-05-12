@@ -1,3 +1,5 @@
+import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
+
 import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 
 import type { Hostname, Link, SettingsState, Token } from '../../../types';
@@ -36,6 +38,12 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(githubAdapter.getAccountSettingsUrl(mockGitHubCloudAccount)).toBe(
         'https://github.com/settings/tokens',
       );
+    });
+
+    it('maps each auth method to its icon', () => {
+      expect(githubAdapter.getAuthMethodIcon('GitHub App')).toBe(AppsIcon);
+      expect(githubAdapter.getAuthMethodIcon('OAuth App')).toBe(PersonIcon);
+      expect(githubAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
     });
 
     it('wires the device-flow and OAuth-app methods so the context can dispatch via the adapter', () => {
