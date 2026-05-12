@@ -212,9 +212,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     const tooltipElement = screen.getByLabelText('tooltip-showOnlyParticipating');
 
     await userEvent.click(tooltipElement);
-    await userEvent.click(
-      screen.getByTitle('Open GitHub documentation for participating and watching notifications'),
-    );
+    await userEvent.click(screen.getByTitle('Open the participating-vs-watching documentation'));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(

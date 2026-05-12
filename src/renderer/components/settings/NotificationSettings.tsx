@@ -34,7 +34,8 @@ import { Title } from '../primitives/Title';
 import { FetchType, GroupBy, Size } from '../../types';
 
 import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scopes';
-import { openGitHubParticipatingDocs } from '../../utils/system/links';
+import { getAdapter } from '../../utils/forges/registry';
+import { openExternalLink } from '../../utils/system/comms';
 
 export const NotificationSettings: FC = () => {
   const navigate = useNavigate();
@@ -42,6 +43,12 @@ export const NotificationSettings: FC = () => {
   const { auth, settings, updateSetting } = useAppContext();
 
   const [fetchInterval, setFetchInterval] = useState<number>(settings.fetchInterval);
+
+  // Surface the first signed-in forge's participating-vs-watching docs link.
+  // Hidden when no registered account advertises one (e.g. Gitea-only setups).
+  const participatingDocsUrl = auth.accounts
+    .map((account) => getAdapter(account).participatingDocsUrl)
+    .find((url): url is NonNullable<typeof url> => Boolean(url));
 
   useEffect(() => {
     setFetchInterval(settings.fetchInterval);
@@ -332,22 +339,24 @@ export const NotificationSettings: FC = () => {
                 When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will fetch participating and
                 watching notifications.
               </Text>
-              <Text>
-                See{' '}
-                <button
-                  className="text-gitify-link cursor-pointer"
-                  onClick={(event: MouseEvent<HTMLElement>) => {
-                    // Don't trigger onClick of parent element.
-                    event.stopPropagation();
-                    openGitHubParticipatingDocs();
-                  }}
-                  title="Open GitHub documentation for participating and watching notifications"
-                  type="button"
-                >
-                  official docs
-                </button>{' '}
-                for more details.
-              </Text>
+              {participatingDocsUrl && (
+                <Text>
+                  See{' '}
+                  <button
+                    className="text-gitify-link cursor-pointer"
+                    onClick={(event: MouseEvent<HTMLElement>) => {
+                      // Don't trigger onClick of parent element.
+                      event.stopPropagation();
+                      openExternalLink(participatingDocsUrl);
+                    }}
+                    title="Open the participating-vs-watching documentation"
+                    type="button"
+                  >
+                    official docs
+                  </button>{' '}
+                  for more details.
+                </Text>
+              )}
             </Stack>
           }
         />

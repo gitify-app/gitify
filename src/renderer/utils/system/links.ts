@@ -1,7 +1,5 @@
 import { APPLICATION } from '../../../shared/constants';
 
-import { Constants } from '../../constants';
-
 import type {
   Account,
   GitifyNotification,
@@ -65,8 +63,4 @@ export function openRepository(repository: GitifyRepository) {
 export async function openNotification(notification: GitifyNotification) {
   const url = await generateGitHubWebUrl(notification);
   openExternalLink(url);
-}
-
-export function openGitHubParticipatingDocs() {
-  openExternalLink(Constants.GITHUB_DOCS.PARTICIPATING_URL);
 }

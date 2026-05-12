@@ -14,7 +14,6 @@ import {
   openAccountSettings,
   openHostIssues,
   openHostNotifications,
-  openGitHubParticipatingDocs,
   openHostPulls,
   openGitifyReleaseNotes,
   openHost,
@@ -99,11 +98,5 @@ describe('renderer/utils/links.ts', () => {
     await openNotification(mockGitifyNotification);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith(mockNotificationUrl);
-  });
-
-  it('openParticipatingDocs', () => {
-    openGitHubParticipatingDocs();
-
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(Constants.GITHUB_DOCS.PARTICIPATING_URL);
   });
 });

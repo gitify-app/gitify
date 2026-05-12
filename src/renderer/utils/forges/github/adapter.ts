@@ -99,6 +99,7 @@ export const githubAdapter: ForgeAdapter = {
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   getAccountSettingsUrl: getDeveloperSettingsURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
+  participatingDocsUrl: Constants.GITHUB_DOCS.PARTICIPATING_URL,
 
   supportsOAuthScopes: true,
 

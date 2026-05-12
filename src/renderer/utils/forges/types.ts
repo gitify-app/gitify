@@ -176,6 +176,12 @@ export interface ForgeAdapter {
   loginMethods: ReadonlyArray<LoginMethodDescriptor>;
   /** External documentation link shown in the PAT login route. */
   documentationUrl: Link;
+  /**
+   * Optional link to the forge's docs explaining participating-vs-watching
+   * notification behaviour. Surfaced in NotificationSettings; the button is
+   * hidden when no registered account exposes one.
+   */
+  participatingDocsUrl?: Link;
 
   // --- Auth flows ---
   // Optional because not every forge supports every flow. Gitea today is
