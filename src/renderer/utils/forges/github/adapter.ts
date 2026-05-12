@@ -109,8 +109,6 @@ export const githubAdapter: ForgeAdapter = {
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
   getAuthMethodIcon: githubAuthMethodIcon,
 
-  supportsOAuthScopes: true,
-
   loginMethods: [
     {
       testId: 'login-github',
@@ -146,9 +144,11 @@ export const githubAdapter: ForgeAdapter = {
     getNewOAuthAppUrl: getNewOAuthAppURL,
   },
 
-  hasRequiredScopes: (account) => accountHasScopes(account, 'REQUIRED'),
-  hasRecommendedScopes: (account) => accountHasScopes(account, 'RECOMMENDED'),
-  hasAlternateScopes: (account) => accountHasScopes(account, 'ALTERNATE'),
+  oauthScopes: {
+    hasRequired: (account) => accountHasScopes(account, 'REQUIRED'),
+    hasRecommended: (account) => accountHasScopes(account, 'RECOMMENDED'),
+    hasAlternate: (account) => accountHasScopes(account, 'ALTERNATE'),
+  },
 };
 
 function accountHasScopes(

@@ -167,11 +167,9 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     });
   });
 
-  describe('OAuth scope helpers', () => {
-    it('always reports every scope check as satisfied', () => {
-      expect(giteaAdapter.hasRequiredScopes(mockGiteaAccount)).toBe(true);
-      expect(giteaAdapter.hasRecommendedScopes(mockGiteaAccount)).toBe(true);
-      expect(giteaAdapter.hasAlternateScopes(mockGiteaAccount)).toBe(true);
+  describe('oauthScopes capability bundle', () => {
+    it('is omitted because Gitea has no OAuth scope concept', () => {
+      expect(giteaAdapter.oauthScopes).toBeUndefined();
     });
   });
 

@@ -108,8 +108,6 @@ export const giteaAdapter: ForgeAdapter = {
   // for those branches.
   getAuthMethodIcon: () => KeyIcon,
 
-  supportsOAuthScopes: false,
-
   loginMethods: [
     {
       testId: 'login-gitea-pat',
@@ -120,9 +118,6 @@ export const giteaAdapter: ForgeAdapter = {
     },
   ],
 
-  // Gitea has no GitHub-style OAuth scope concept; treat any token as fully
-  // scoped so the recommended/alternate UI prompts never surface for Gitea.
-  hasRequiredScopes: () => true,
-  hasRecommendedScopes: () => true,
-  hasAlternateScopes: () => true,
+  // Gitea has no GitHub-style OAuth scope concept, so `oauthScopes` is
+  // omitted. Callers skip scopes UI when this is undefined.
 };

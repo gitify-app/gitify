@@ -205,23 +205,26 @@ export interface ForgeAdapter {
    */
   oauthWebApp?: OAuthWebAppSupport;
 
-  // --- OAuth scopes ---
-  // Forges without an OAuth scope concept (e.g. Gitea) report `true` for
-  // every check, signalling "nothing to verify".
-
   /**
-   * Whether this forge has an OAuth scope concept at all. Drives whether the
-   * UI surfaces a scopes affordance (account view scopes, scope health icon).
-   * Forges that return `false` here should have callers skip rendering any
-   * scopes UI rather than showing a meaningless "all granted" or empty state.
+   * OAuth scope checks. Forges with no scope concept (e.g. Gitea) omit this
+   * bundle entirely — callers should treat `oauthScopes === undefined` as
+   * "nothing to verify" and skip any scopes UI rather than render a
+   * meaningless "all granted" state.
    */
-  readonly supportsOAuthScopes: boolean;
+  oauthScopes?: OAuthScopesSupport;
+}
+
+/**
+ * OAuth scope-checking capability bundle. Present only on forges with an
+ * OAuth scope concept (GitHub today).
+ */
+export interface OAuthScopesSupport {
   /** Whether the account holds the minimum scopes Gitify needs to function. */
-  hasRequiredScopes(account: Account): boolean;
+  hasRequired(account: Account): boolean;
   /** Whether the account holds the full recommended scope set. */
-  hasRecommendedScopes(account: Account): boolean;
+  hasRecommended(account: Account): boolean;
   /** Whether the account holds the alternate (legacy) scope set. */
-  hasAlternateScopes(account: Account): boolean;
+  hasAlternate(account: Account): boolean;
 }
 
 /**
