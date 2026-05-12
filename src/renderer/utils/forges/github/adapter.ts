@@ -131,6 +131,8 @@ export const githubAdapter: ForgeAdapter = {
   pollDeviceFlow: pollGitHubDeviceFlow,
   performWebOAuth: performGitHubWebOAuth,
   exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
+  getDeviceFlowRevokeAccessUrl: (hostname) =>
+    getDeveloperSettingsURL({ hostname, method: 'GitHub App' } as Account),
 
   hasRequiredScopes: (account) => accountHasScopes(account, 'REQUIRED'),
   hasRecommendedScopes: (account) => accountHasScopes(account, 'RECOMMENDED'),

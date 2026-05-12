@@ -196,6 +196,13 @@ export interface ForgeAdapter {
   performWebOAuth?(options: LoginOAuthWebOptions): Promise<AuthResponse>;
   /** Exchange an OAuth web-flow authorization code for an access token. */
   exchangeAuthCodeForToken?(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
+  /**
+   * URL where the user can revoke the device-flow OAuth grant on the given
+   * hostname (so they can re-authorize with different scopes). Required when
+   * `startDeviceFlow` is provided — the route uses it to render the
+   * "revoke access" hint.
+   */
+  getDeviceFlowRevokeAccessUrl?(hostname: Hostname): Link;
 
   // --- OAuth scopes ---
   // Forges without an OAuth scope concept (e.g. Gitea) report `true` for

@@ -18,8 +18,8 @@ import type { DeviceFlowSession } from '../utils/auth/types';
 
 import { getAlternateScopeNames, getRecommendedScopeNames } from '../utils/auth/scopes';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getAdapter } from '../utils/forges/registry';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
-import { openAccountSettings } from '../utils/system/links';
 
 interface LocationState {
   account?: Account;
@@ -37,6 +37,9 @@ export const LoginWithDeviceFlowRoute: FC = () => {
   // here through a registered adapter, so a missing forge would indicate a
   // mis-registered route — fall back to 'github' to preserve existing UX.
   const forge: Forge = routeForge ?? reAuthAccount?.forge ?? 'github';
+  const adapter = getAdapter(forge);
+  const revokeHostname = reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME;
+  const revokeAccessUrl = adapter.getDeviceFlowRevokeAccessUrl?.(revokeHostname);
 
   const { loginWithDeviceFlowStart, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete } =
     useAppContext();
@@ -229,25 +232,22 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           </Stack>
         </Button>
 
-        <Stack gap="none">
-          <Text as="em" size="small">
-            Note: to change previously granted permissions, revoke Gitify's access at{' '}
-            <button
-              className="text-gitify-link cursor-pointer"
-              onClick={() =>
-                openAccountSettings({
-                  hostname: Constants.GITHUB_HOSTNAME,
-                  method: 'GitHub App',
-                } as Account)
-              }
-              title="GitHub → Developer Settings"
-              type="button"
-            >
-              GitHub → Developer Settings
-            </button>
-            , then re-authorize above.
-          </Text>
-        </Stack>
+        {revokeAccessUrl && (
+          <Stack gap="none">
+            <Text as="em" size="small">
+              Note: to change previously granted permissions, revoke Gitify's access at{' '}
+              <button
+                className="text-gitify-link cursor-pointer"
+                onClick={() => openExternalLink(revokeAccessUrl)}
+                title={`${adapter.displayName} → Developer Settings`}
+                type="button"
+              >
+                {adapter.displayName} → Developer Settings
+              </button>
+              , then re-authorize above.
+            </Text>
+          </Stack>
+        )}
       </Stack>
     </Stack>
   );
