@@ -11,7 +11,7 @@ import * as native from './native';
 describe('renderer/utils/system/native.ts', () => {
   const mockHtmlUrl = mockSingleAccountNotifications[0].notifications[0].repository.htmlUrl;
 
-  vi.spyOn(url, 'generateGitHubWebUrl').mockImplementation(async () => mockHtmlUrl);
+  vi.spyOn(url, 'generateNotificationWebUrl').mockImplementation(async () => mockHtmlUrl);
 
   it('should raise a native notification for a single new notification', async () => {
     native.raiseNativeNotification(mockSingleAccountNotifications[0].notifications);
@@ -25,7 +25,7 @@ describe('renderer/utils/system/native.ts', () => {
       expect.stringContaining(mockSingleAccountNotifications[0].notifications[0].subject.title),
       expect.stringContaining(mockHtmlUrl),
     );
-    expect(url.generateGitHubWebUrl).toHaveBeenCalledTimes(1);
+    expect(url.generateNotificationWebUrl).toHaveBeenCalledTimes(1);
   });
 
   it('should raise a native notification for multiple new notifications', async () => {
@@ -38,6 +38,6 @@ describe('renderer/utils/system/native.ts', () => {
       'You have 2 notifications',
       undefined,
     );
-    expect(url.generateGitHubWebUrl).toHaveBeenCalledTimes(0);
+    expect(url.generateNotificationWebUrl).toHaveBeenCalledTimes(0);
   });
 });

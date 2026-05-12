@@ -1,7 +1,6 @@
 import type { GitifyNotification, Link } from '../../types';
 
 import { rendererLogError, toError } from '../core/logger';
-import { getHtmlUrl } from '../forges/github/client';
 import { getAdapter } from '../forges/registry';
 
 export function generateNotificationReferrerId(notification: GitifyNotification): string {
@@ -9,28 +8,26 @@ export function generateNotificationReferrerId(notification: GitifyNotification)
   return btoa(raw);
 }
 
-export async function generateGitHubWebUrl(notification: GitifyNotification): Promise<Link> {
-  const url = new URL(getAdapter(notification.account).getDisplayHelpers(notification).defaultUrl);
+export async function generateNotificationWebUrl(notification: GitifyNotification): Promise<Link> {
+  const adapter = getAdapter(notification.account);
+  const url = new URL(adapter.getDisplayHelpers(notification).defaultUrl);
 
   if (notification.subject.htmlUrl) {
     url.href = notification.subject.htmlUrl;
   } else {
     try {
-      if (notification.subject.latestCommentUrl) {
-        const response = await getHtmlUrl(
+      const followTarget =
+        notification.subject.latestCommentUrl ?? notification.subject.url ?? null;
+      if (followTarget) {
+        const response = await adapter.followUrl<{ html_url: string }>(
           notification.account,
-          notification.subject.latestCommentUrl,
+          followTarget,
         );
-
-        url.href = response.html_url;
-      } else if (notification.subject.url) {
-        const response = await getHtmlUrl(notification.account, notification.subject.url);
-
         url.href = response.html_url;
       }
     } catch (err) {
       rendererLogError(
-        'generateGitHubWebUrl',
+        'generateNotificationWebUrl',
         'Failed to resolve specific notification html url for',
         toError(err),
         notification,

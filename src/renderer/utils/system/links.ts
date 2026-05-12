@@ -12,7 +12,7 @@ import type {
 } from '../../types';
 
 import { getAdapter } from '../forges/registry';
-import { generateGitHubWebUrl } from '../notifications/url';
+import { generateNotificationWebUrl } from '../notifications/url';
 import { openExternalLink } from './comms';
 
 export function openGitifyReleaseNotes(version: string) {
@@ -63,7 +63,7 @@ export function openRepository(repository: GitifyRepository) {
 }
 
 export async function openNotification(notification: GitifyNotification) {
-  const url = await generateGitHubWebUrl(notification);
+  const url = await generateNotificationWebUrl(notification);
   openExternalLink(url);
 }
 

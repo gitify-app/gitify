@@ -3,8 +3,8 @@ import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
 import type { GitifySubject, Link, SubjectType } from '../../types';
 
-import * as apiClient from '../forges/github/client';
-import { generateGitHubWebUrl, generateNotificationReferrerId } from './url';
+import { githubAdapter } from '../forges/github/adapter';
+import { generateNotificationReferrerId, generateNotificationWebUrl } from './url';
 
 describe('renderer/utils/notifications/url.ts', () => {
   describe('generateNotificationReferrerId', () => {
@@ -14,12 +14,12 @@ describe('renderer/utils/notifications/url.ts', () => {
     });
   });
 
-  describe('generateGitHubWebUrl', () => {
+  describe('generateNotificationWebUrl', () => {
     const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test/issues/785' as Link;
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
-    const getHtmlUrlSpy = vi.spyOn(apiClient, 'getHtmlUrl');
+    const followUrlSpy = vi.spyOn(githubAdapter, 'followUrl');
 
     it('Subject HTML URL: prefer if available from enrichment stage', async () => {
       const mockSubjectHtmlUrl = 'https://gitify.io/' as Link;
@@ -36,12 +36,12 @@ describe('renderer/utils/notifications/url.ts', () => {
         htmlUrl: mockSubjectHtmlUrl,
       } as unknown as GitifySubject;
 
-      const result = await generateGitHubWebUrl({
+      const result = await generateNotificationWebUrl({
         ...mockGitifyNotification,
         subject: subject,
       });
 
-      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(0);
+      expect(followUrlSpy).toHaveBeenCalledTimes(0);
       expect(result).toBe(`${mockSubjectHtmlUrl}?${mockNotificationReferrer}`);
     });
 
@@ -60,17 +60,15 @@ describe('renderer/utils/notifications/url.ts', () => {
         htmlUrl: mockSubjectHtmlUrl,
       } as unknown as GitifySubject;
 
-      getHtmlUrlSpy.mockResolvedValue({
-        html_url: mockHtmlUrl,
-      });
+      followUrlSpy.mockResolvedValue({ html_url: mockHtmlUrl });
 
-      const result = await generateGitHubWebUrl({
+      const result = await generateNotificationWebUrl({
         ...mockGitifyNotification,
         subject: subject,
       });
 
-      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
-      expect(getHtmlUrlSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, mockLatestCommentUrl);
+      expect(followUrlSpy).toHaveBeenCalledTimes(1);
+      expect(followUrlSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, mockLatestCommentUrl);
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
 
@@ -88,17 +86,15 @@ describe('renderer/utils/notifications/url.ts', () => {
         htmlUrl: mockSubjectHtmlUrl,
       } as unknown as GitifySubject;
 
-      getHtmlUrlSpy.mockResolvedValue({
-        html_url: mockHtmlUrl,
-      });
+      followUrlSpy.mockResolvedValue({ html_url: mockHtmlUrl });
 
-      const result = await generateGitHubWebUrl({
+      const result = await generateNotificationWebUrl({
         ...mockGitifyNotification,
         subject: subject,
       });
 
-      expect(getHtmlUrlSpy).toHaveBeenCalledTimes(1);
-      expect(getHtmlUrlSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, mockSubjectUrl);
+      expect(followUrlSpy).toHaveBeenCalledTimes(1);
+      expect(followUrlSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, mockSubjectUrl);
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
   });

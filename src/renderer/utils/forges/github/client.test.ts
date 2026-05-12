@@ -18,7 +18,6 @@ import {
   fetchPullByNumber,
   getCommit,
   getCommitComment,
-  getHtmlUrl,
   getRelease,
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
@@ -234,18 +233,6 @@ describe('renderer/utils/forges/github/client.ts', () => {
     expect(mockOctokit.rest.activity.setThreadSubscription).toHaveBeenCalledWith({
       thread_id: Number(mockThreadId),
       ignored: true,
-    });
-  });
-
-  it('getHtmlUrl - should return the HTML URL', async () => {
-    await getHtmlUrl(
-      mockGitHubCloudAccount,
-      'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
-    );
-
-    expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
-    expect(mockOctokit.request).toHaveBeenCalledWith('GET {+url}', {
-      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
     });
   });
 

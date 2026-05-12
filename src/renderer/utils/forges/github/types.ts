@@ -25,15 +25,6 @@ export type RawGitHubNotification = Endpoints['GET /notifications']['response'][
 export type RawUser = components['schemas']['simple-user'];
 
 /**
- * Minimal response for endpoints where we're only interested in the `html_url`.
- *
- * Used when following a notification thread's subject URL or latest comment URL.
- */
-export type GitHubHtmlUrlResponse = {
-  html_url: string;
-};
-
-/**
  * These API endpoints don't return a response body:
  *  - Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data']
  *  - Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
