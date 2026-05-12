@@ -492,13 +492,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    */
   const loginWithOAuthApp = useCallback(
     async (forge: Forge, data: LoginOAuthWebOptions) => {
-      const adapter = getAdapter(forge);
-      if (!adapter.performWebOAuth || !adapter.exchangeAuthCodeForToken) {
+      const { oauthWebApp } = getAdapter(forge);
+      if (!oauthWebApp) {
         throw new Error(`OAuth app login is not supported for forge "${forge}".`);
       }
 
-      const { authOptions, authCode } = await adapter.performWebOAuth(data);
-      const token = await adapter.exchangeAuthCodeForToken(authCode, authOptions);
+      const { authOptions, authCode } = await oauthWebApp.performWebOAuth(data);
+      const token = await oauthWebApp.exchangeAuthCodeForToken(authCode, authOptions);
 
       const existingAccount = auth.accounts.find(
         (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',

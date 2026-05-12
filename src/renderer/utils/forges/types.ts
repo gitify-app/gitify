@@ -198,10 +198,12 @@ export interface ForgeAdapter {
   startDeviceFlow?(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
   /** Poll for completion of a device-flow session; resolves to a token when granted. */
   pollDeviceFlow?(session: DeviceFlowSession): Promise<Token | null>;
-  /** Initiate a custom-OAuth-app web flow. */
-  performWebOAuth?(options: LoginOAuthWebOptions): Promise<AuthResponse>;
-  /** Exchange an OAuth web-flow authorization code for an access token. */
-  exchangeAuthCodeForToken?(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
+
+  /**
+   * Custom-OAuth-app web flow. Forges without OAuth-app support (e.g. Gitea)
+   * omit this bundle entirely — callers gate the OAuth-app UI on its presence.
+   */
+  oauthWebApp?: OAuthWebAppSupport;
 
   // --- OAuth scopes ---
   // Forges without an OAuth scope concept (e.g. Gitea) report `true` for
@@ -220,4 +222,20 @@ export interface ForgeAdapter {
   hasRecommendedScopes(account: Account): boolean;
   /** Whether the account holds the alternate (legacy) scope set. */
   hasAlternateScopes(account: Account): boolean;
+}
+
+/**
+ * Custom-OAuth-app web flow capability bundle. Present only on forges that
+ * support browser-redirect OAuth with user-supplied client credentials
+ * (GitHub today).
+ */
+export interface OAuthWebAppSupport {
+  /** Start the OAuth web flow and return the auth code once the user consents. */
+  performWebOAuth(options: LoginOAuthWebOptions): Promise<AuthResponse>;
+  /** Exchange an OAuth web-flow authorization code for an access token. */
+  exchangeAuthCodeForToken(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
+  /** Whether the supplied OAuth client ID matches the forge's expected format. */
+  validateClientId(clientId: string): boolean;
+  /** URL the user visits to create a new OAuth app on the forge. */
+  getNewOAuthAppUrl(hostname: Hostname): Link;
 }

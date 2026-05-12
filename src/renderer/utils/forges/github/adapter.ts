@@ -6,7 +6,14 @@ import type { Account, Link, RawGitifyNotification, SettingsState } from '../../
 import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
-import { extractHostVersion, getDeveloperSettingsURL, getNewTokenURL, isValidToken } from './auth';
+import {
+  extractHostVersion,
+  getDeveloperSettingsURL,
+  getNewOAuthAppURL,
+  getNewTokenURL,
+  isValidClientId,
+  isValidToken,
+} from './auth';
 import { githubCapabilities } from './capabilities';
 import {
   fetchAuthenticatedUserDetails,
@@ -131,8 +138,13 @@ export const githubAdapter: ForgeAdapter = {
   deviceFlowAuthMethod: 'GitHub App',
   startDeviceFlow: startGitHubDeviceFlow,
   pollDeviceFlow: pollGitHubDeviceFlow,
-  performWebOAuth: performGitHubWebOAuth,
-  exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
+
+  oauthWebApp: {
+    performWebOAuth: performGitHubWebOAuth,
+    exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
+    validateClientId: isValidClientId,
+    getNewOAuthAppUrl: getNewOAuthAppURL,
+  },
 
   hasRequiredScopes: (account) => accountHasScopes(account, 'REQUIRED'),
   hasRecommendedScopes: (account) => accountHasScopes(account, 'RECOMMENDED'),

@@ -18,7 +18,7 @@ import type { LoginOAuthWebOptions } from '../utils/auth/types';
 
 import { isValidHostname } from '../utils/auth/utils';
 import { rendererLogError, toError } from '../utils/core/logger';
-import { getNewOAuthAppURL, isValidClientId, isValidToken } from '../utils/forges/github/auth';
+import { getAdapter } from '../utils/forges/registry';
 import { openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
@@ -37,8 +37,9 @@ interface IFormErrors {
   invalidCredentialsForHost?: string;
 }
 
-export const validateForm = (values: IFormData): IFormErrors => {
+export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
   const errors: IFormErrors = {};
+  const adapter = getAdapter(forge);
 
   if (!values.hostname) {
     errors.hostname = 'Hostname is required';
@@ -48,13 +49,13 @@ export const validateForm = (values: IFormData): IFormErrors => {
 
   if (!values.clientId) {
     errors.clientId = 'Client ID is required';
-  } else if (!isValidClientId(values.clientId)) {
+  } else if (!adapter.oauthWebApp?.validateClientId(values.clientId)) {
     errors.clientId = 'Client ID format is invalid';
   }
 
   if (!values.clientSecret) {
     errors.clientSecret = 'Client Secret is required';
-  } else if (!isValidToken(values.clientSecret as unknown as Token)) {
+  } else if (!adapter.validateToken(values.clientSecret as unknown as Token)) {
     errors.clientSecret = 'Client Secret format is invalid';
   }
 
@@ -83,7 +84,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
 
-    const newErrors = validateForm(formData);
+    const newErrors = validateForm(formData, forge);
 
     setErrors(newErrors);
 
@@ -166,7 +167,12 @@ export const LoginWithOAuthAppRoute: FC = () => {
               data-testid="login-create-oauth-app"
               disabled={!formData.hostname}
               leadingVisual={PersonIcon}
-              onClick={() => openExternalLink(getNewOAuthAppURL(formData.hostname))}
+              onClick={() => {
+                const url = getAdapter(forge).oauthWebApp?.getNewOAuthAppUrl(formData.hostname);
+                if (url) {
+                  openExternalLink(url);
+                }
+              }}
               size="small"
             >
               Create new OAuth App

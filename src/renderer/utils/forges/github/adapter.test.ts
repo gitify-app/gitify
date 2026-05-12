@@ -50,8 +50,10 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(githubAdapter.deviceFlowAuthMethod).toBe('GitHub App');
       expect(githubAdapter.startDeviceFlow).toBeDefined();
       expect(githubAdapter.pollDeviceFlow).toBeDefined();
-      expect(githubAdapter.performWebOAuth).toBeDefined();
-      expect(githubAdapter.exchangeAuthCodeForToken).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.performWebOAuth).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.exchangeAuthCodeForToken).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.validateClientId).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.getNewOAuthAppUrl).toBeDefined();
     });
   });
 

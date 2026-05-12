@@ -260,7 +260,7 @@ describe('renderer/context/App.tsx', () => {
 
     it('loginWithOAuthApp delegates to the forge adapter', async () => {
       const adapter = getAdapter('github');
-      const oauthSpy = vi.spyOn(adapter, 'performWebOAuth');
+      const oauthSpy = vi.spyOn(adapter.oauthWebApp!, 'performWebOAuth');
 
       const getContext = renderWithContext();
 
