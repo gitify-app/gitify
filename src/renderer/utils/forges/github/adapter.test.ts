@@ -47,11 +47,14 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
 
     it('wires the device-flow and OAuth-app methods so the context can dispatch via the adapter', () => {
-      expect(githubAdapter.deviceFlowAuthMethod).toBe('GitHub App');
-      expect(githubAdapter.startDeviceFlow).toBeDefined();
-      expect(githubAdapter.pollDeviceFlow).toBeDefined();
-      expect(githubAdapter.performWebOAuth).toBeDefined();
-      expect(githubAdapter.exchangeAuthCodeForToken).toBeDefined();
+      expect(githubAdapter.deviceFlow?.authMethod).toBe('GitHub App');
+      expect(githubAdapter.deviceFlow?.start).toBeDefined();
+      expect(githubAdapter.deviceFlow?.poll).toBeDefined();
+      expect(githubAdapter.deviceFlow?.getRevokeAccessUrl).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.performWebOAuth).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.exchangeAuthCodeForToken).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.validateClientId).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.getNewOAuthAppUrl).toBeDefined();
     });
   });
 
@@ -166,33 +169,41 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
   });
 
-  describe('OAuth scope helpers', () => {
+  describe('oauthScopes capability bundle', () => {
     function withScopes(scopes: string[]) {
       return { ...mockGitHubCloudAccount, scopes };
     }
 
-    it('hasRequiredScopes is true when notifications + read:user are present', () => {
-      expect(githubAdapter.hasRequiredScopes(withScopes(['notifications', 'read:user']))).toBe(
-        true,
-      );
+    it('exposes the bundle (GitHub has an OAuth scope concept)', () => {
+      expect(githubAdapter.oauthScopes).toBeDefined();
     });
 
-    it('hasRequiredScopes is false when a required scope is missing', () => {
-      expect(githubAdapter.hasRequiredScopes(withScopes(['notifications']))).toBe(false);
-    });
-
-    it('hasRecommendedScopes requires the full repo scope set', () => {
+    it('hasRequired is true when notifications + read:user are present', () => {
       expect(
-        githubAdapter.hasRecommendedScopes(withScopes(['notifications', 'read:user', 'repo'])),
+        githubAdapter.oauthScopes!.hasRequired(withScopes(['notifications', 'read:user'])),
       ).toBe(true);
-      expect(githubAdapter.hasRecommendedScopes(withScopes(['notifications', 'read:user']))).toBe(
-        false,
-      );
     });
 
-    it('hasAlternateScopes accepts public_repo as the legacy substitute', () => {
+    it('hasRequired is false when a required scope is missing', () => {
+      expect(githubAdapter.oauthScopes!.hasRequired(withScopes(['notifications']))).toBe(false);
+    });
+
+    it('hasRecommended requires the full repo scope set', () => {
       expect(
-        githubAdapter.hasAlternateScopes(withScopes(['notifications', 'read:user', 'public_repo'])),
+        githubAdapter.oauthScopes!.hasRecommended(
+          withScopes(['notifications', 'read:user', 'repo']),
+        ),
+      ).toBe(true);
+      expect(
+        githubAdapter.oauthScopes!.hasRecommended(withScopes(['notifications', 'read:user'])),
+      ).toBe(false);
+    });
+
+    it('hasAlternate accepts public_repo as the legacy substitute', () => {
+      expect(
+        githubAdapter.oauthScopes!.hasAlternate(
+          withScopes(['notifications', 'read:user', 'public_repo']),
+        ),
       ).toBe(true);
     });
   });

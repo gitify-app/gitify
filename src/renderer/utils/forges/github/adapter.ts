@@ -6,7 +6,14 @@ import type { Account, Link, RawGitifyNotification, SettingsState } from '../../
 import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
-import { extractHostVersion, getDeveloperSettingsURL, getNewTokenURL, isValidToken } from './auth';
+import {
+  extractHostVersion,
+  getDeveloperSettingsURL,
+  getNewOAuthAppURL,
+  getNewTokenURL,
+  isValidClientId,
+  isValidToken,
+} from './auth';
 import { githubCapabilities } from './capabilities';
 import {
   fetchAuthenticatedUserDetails,
@@ -102,8 +109,6 @@ export const githubAdapter: ForgeAdapter = {
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
   getAuthMethodIcon: githubAuthMethodIcon,
 
-  supportsOAuthScopes: true,
-
   loginMethods: [
     {
       testId: 'login-github',
@@ -128,15 +133,26 @@ export const githubAdapter: ForgeAdapter = {
     },
   ],
 
-  deviceFlowAuthMethod: 'GitHub App',
-  startDeviceFlow: startGitHubDeviceFlow,
-  pollDeviceFlow: pollGitHubDeviceFlow,
-  performWebOAuth: performGitHubWebOAuth,
-  exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
+  deviceFlow: {
+    authMethod: 'GitHub App',
+    start: startGitHubDeviceFlow,
+    poll: pollGitHubDeviceFlow,
+    getRevokeAccessUrl: (hostname) =>
+      getDeveloperSettingsURL({ hostname, method: 'GitHub App' } as Account),
+  },
 
-  hasRequiredScopes: (account) => accountHasScopes(account, 'REQUIRED'),
-  hasRecommendedScopes: (account) => accountHasScopes(account, 'RECOMMENDED'),
-  hasAlternateScopes: (account) => accountHasScopes(account, 'ALTERNATE'),
+  oauthWebApp: {
+    performWebOAuth: performGitHubWebOAuth,
+    exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
+    validateClientId: isValidClientId,
+    getNewOAuthAppUrl: getNewOAuthAppURL,
+  },
+
+  oauthScopes: {
+    hasRequired: (account) => accountHasScopes(account, 'REQUIRED'),
+    hasRecommended: (account) => accountHasScopes(account, 'RECOMMENDED'),
+    hasAlternate: (account) => accountHasScopes(account, 'ALTERNATE'),
+  },
 };
 
 function accountHasScopes(

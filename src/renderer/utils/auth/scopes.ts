@@ -8,12 +8,12 @@ import { getAdapter } from '../forges/registry';
  * Return true if the account has all required OAuth scopes.
  *
  * Scope semantics live on the forge adapter — forges without an OAuth scope
- * concept (e.g. Gitea) report `true` for every check.
+ * concept (e.g. Gitea) omit `oauthScopes`, and every check resolves to `true`.
  *
  * @param account - The account whose scopes to check.
  */
 export function hasRequiredScopes(account: Account): boolean {
-  return getAdapter(account).hasRequiredScopes(account);
+  return getAdapter(account).oauthScopes?.hasRequired(account) ?? true;
 }
 
 /**
@@ -22,7 +22,7 @@ export function hasRequiredScopes(account: Account): boolean {
  * @param account - The account whose scopes to check.
  */
 export function hasRecommendedScopes(account: Account): boolean {
-  return getAdapter(account).hasRecommendedScopes(account);
+  return getAdapter(account).oauthScopes?.hasRecommended(account) ?? true;
 }
 
 /**
@@ -31,7 +31,7 @@ export function hasRecommendedScopes(account: Account): boolean {
  * @param account - The account whose scopes to check.
  */
 export function hasAlternateScopes(account: Account): boolean {
-  return getAdapter(account).hasAlternateScopes(account);
+  return getAdapter(account).oauthScopes?.hasAlternate(account) ?? true;
 }
 
 /**

@@ -185,39 +185,72 @@ export interface ForgeAdapter {
 
   // --- Auth flows ---
   // Optional because not every forge supports every flow. Gitea today is
-  // PAT-only and implements none of these. The orchestrator gates UI on the
-  // presence of these methods (and on `loginMethods` entries pointing at
+  // PAT-only and omits both bundles. The orchestrator gates UI on the
+  // presence of these bundles (and on `loginMethods` entries pointing at
   // `/login-device-flow` or `/login-oauth-app`).
 
   /**
-   * The `AuthMethod` string recorded on the account when a successful device
-   * flow login completes. Required when `startDeviceFlow` is provided.
+   * OAuth device-flow capability. Forges without device-flow support (e.g.
+   * Gitea) omit this bundle entirely — callers gate the device-flow UI on
+   * its presence.
    */
-  deviceFlowAuthMethod?: AuthMethod;
-  /** Start an OAuth device-flow authorization session. */
-  startDeviceFlow?(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
-  /** Poll for completion of a device-flow session; resolves to a token when granted. */
-  pollDeviceFlow?(session: DeviceFlowSession): Promise<Token | null>;
-  /** Initiate a custom-OAuth-app web flow. */
-  performWebOAuth?(options: LoginOAuthWebOptions): Promise<AuthResponse>;
-  /** Exchange an OAuth web-flow authorization code for an access token. */
-  exchangeAuthCodeForToken?(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
-
-  // --- OAuth scopes ---
-  // Forges without an OAuth scope concept (e.g. Gitea) report `true` for
-  // every check, signalling "nothing to verify".
+  deviceFlow?: DeviceFlowSupport;
 
   /**
-   * Whether this forge has an OAuth scope concept at all. Drives whether the
-   * UI surfaces a scopes affordance (account view scopes, scope health icon).
-   * Forges that return `false` here should have callers skip rendering any
-   * scopes UI rather than showing a meaningless "all granted" or empty state.
+   * Custom-OAuth-app web flow. Forges without OAuth-app support (e.g. Gitea)
+   * omit this bundle entirely — callers gate the OAuth-app UI on its presence.
    */
-  readonly supportsOAuthScopes: boolean;
+  oauthWebApp?: OAuthWebAppSupport;
+
+  /**
+   * OAuth scope checks. Forges with no scope concept (e.g. Gitea) omit this
+   * bundle entirely — callers should treat `oauthScopes === undefined` as
+   * "nothing to verify" and skip any scopes UI rather than render a
+   * meaningless "all granted" state.
+   */
+  oauthScopes?: OAuthScopesSupport;
+}
+
+/**
+ * OAuth scope-checking capability bundle. Present only on forges with an
+ * OAuth scope concept (GitHub today).
+ */
+export interface OAuthScopesSupport {
   /** Whether the account holds the minimum scopes Gitify needs to function. */
-  hasRequiredScopes(account: Account): boolean;
+  hasRequired(account: Account): boolean;
   /** Whether the account holds the full recommended scope set. */
-  hasRecommendedScopes(account: Account): boolean;
+  hasRecommended(account: Account): boolean;
   /** Whether the account holds the alternate (legacy) scope set. */
-  hasAlternateScopes(account: Account): boolean;
+  hasAlternate(account: Account): boolean;
+}
+
+/**
+ * Custom-OAuth-app web flow capability bundle. Present only on forges that
+ * support browser-redirect OAuth with user-supplied client credentials
+ * (GitHub today).
+ */
+export interface OAuthWebAppSupport {
+  /** Start the OAuth web flow and return the auth code once the user consents. */
+  performWebOAuth(options: LoginOAuthWebOptions): Promise<AuthResponse>;
+  /** Exchange an OAuth web-flow authorization code for an access token. */
+  exchangeAuthCodeForToken(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
+  /** Whether the supplied OAuth client ID matches the forge's expected format. */
+  validateClientId(clientId: string): boolean;
+  /** URL the user visits to create a new OAuth app on the forge. */
+  getNewOAuthAppUrl(hostname: Hostname): Link;
+}
+
+/**
+ * OAuth device-flow capability bundle. Present only on forges that support
+ * browser-side device authorisation (GitHub today).
+ */
+export interface DeviceFlowSupport {
+  /** `AuthMethod` recorded on the account when a successful login completes. */
+  authMethod: AuthMethod;
+  /** Start a device-flow authorization session. */
+  start(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
+  /** Poll for completion; resolves to a token when granted. */
+  poll(session: DeviceFlowSession): Promise<Token | null>;
+  /** URL the user visits to revoke Gitify's access on this forge. */
+  getRevokeAccessUrl(hostname: Hostname): Link;
 }

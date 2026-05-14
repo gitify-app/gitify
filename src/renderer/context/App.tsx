@@ -441,11 +441,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    */
   const loginWithDeviceFlowStart = useCallback(
     async (forge: Forge, hostname?: Hostname, scopes?: string[]) => {
-      const adapter = getAdapter(forge);
-      if (!adapter.startDeviceFlow) {
+      const { deviceFlow } = getAdapter(forge);
+      if (!deviceFlow) {
         throw new Error(`Device flow is not supported for forge "${forge}".`);
       }
-      return await adapter.startDeviceFlow(hostname, scopes);
+      return await deviceFlow.start(hostname, scopes);
     },
     [],
   );
@@ -454,11 +454,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    * Poll for completion of an OAuth device-flow session.
    */
   const loginWithDeviceFlowPoll = useCallback(async (forge: Forge, session: DeviceFlowSession) => {
-    const adapter = getAdapter(forge);
-    if (!adapter.pollDeviceFlow) {
+    const { deviceFlow } = getAdapter(forge);
+    if (!deviceFlow) {
       throw new Error(`Device flow is not supported for forge "${forge}".`);
     }
-    return await adapter.pollDeviceFlow(session);
+    return await deviceFlow.poll(session);
   }, []);
 
   /**
@@ -466,11 +466,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    */
   const loginWithDeviceFlowComplete = useCallback(
     async (forge: Forge, token: Token, hostname: Hostname) => {
-      const adapter = getAdapter(forge);
-      const method = adapter.deviceFlowAuthMethod;
-      if (!method) {
-        throw new Error(`Forge "${forge}" did not declare a device-flow auth method.`);
+      const { deviceFlow } = getAdapter(forge);
+      if (!deviceFlow) {
+        throw new Error(`Forge "${forge}" does not support device flow.`);
       }
+      const method = deviceFlow.authMethod;
 
       const existingAccount = auth.accounts.find(
         (a) => a.hostname === hostname && a.method === method,
@@ -492,13 +492,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
    */
   const loginWithOAuthApp = useCallback(
     async (forge: Forge, data: LoginOAuthWebOptions) => {
-      const adapter = getAdapter(forge);
-      if (!adapter.performWebOAuth || !adapter.exchangeAuthCodeForToken) {
+      const { oauthWebApp } = getAdapter(forge);
+      if (!oauthWebApp) {
         throw new Error(`OAuth app login is not supported for forge "${forge}".`);
       }
 
-      const { authOptions, authCode } = await adapter.performWebOAuth(data);
-      const token = await adapter.exchangeAuthCodeForToken(authCode, authOptions);
+      const { authOptions, authCode } = await oauthWebApp.performWebOAuth(data);
+      const token = await oauthWebApp.exchangeAuthCodeForToken(authCode, authOptions);
 
       const existingAccount = auth.accounts.find(
         (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',

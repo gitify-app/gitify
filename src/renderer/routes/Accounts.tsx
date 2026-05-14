@@ -243,7 +243,7 @@ export const AccountsRoute: FC = () => {
                       variant={i === 0 ? 'primary' : 'default'}
                     />
 
-                    {!hasBadCredentials && getAdapter(account).supportsOAuthScopes && (
+                    {!hasBadCredentials && getAdapter(account).oauthScopes && (
                       <IconButton
                         aria-label={`View scopes for ${account.user?.login}`}
                         data-testid="account-view-scopes"
