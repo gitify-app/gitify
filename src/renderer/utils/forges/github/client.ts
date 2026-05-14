@@ -5,7 +5,6 @@ import type {
   GetCommitCommentResponse,
   GetCommitResponse,
   GetReleaseResponse,
-  GitHubHtmlUrlResponse,
   IgnoreNotificationThreadSubscriptionResponse,
   ListNotificationsForAuthenticatedUserResponse,
   MarkNotificationThreadAsDoneResponse,
@@ -166,13 +165,6 @@ export async function getCommitComment(
  */
 export async function getRelease(account: Account, url: Link): Promise<GetReleaseResponse> {
   return followUrl<GetReleaseResponse>(account, url);
-}
-
-/**
- * Get the `html_url` from the GitHub response
- */
-export async function getHtmlUrl(account: Account, url: Link): Promise<GitHubHtmlUrlResponse> {
-  return followUrl<GitHubHtmlUrlResponse>(account, url);
 }
 
 /**

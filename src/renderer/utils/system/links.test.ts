@@ -94,7 +94,7 @@ describe('renderer/utils/links.ts', () => {
 
   it('openNotification', async () => {
     const mockNotificationUrl = mockGitifyNotification.repository.htmlUrl;
-    vi.spyOn(url, 'generateGitHubWebUrl').mockResolvedValue(mockNotificationUrl);
+    vi.spyOn(url, 'generateNotificationWebUrl').mockResolvedValue(mockNotificationUrl);
 
     await openNotification(mockGitifyNotification);
 
