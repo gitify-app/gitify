@@ -16,7 +16,7 @@ importers:
         version: 6.8.3
       menubar:
         specifier: 9.5.2
-        version: 9.5.2(electron@42.0.0)
+        version: 9.5.2(electron@42.0.1)
       react:
         specifier: 19.2.6
         version: 19.2.6
@@ -139,8 +139,8 @@ importers:
         specifier: 17.4.2
         version: 17.4.2
       electron:
-        specifier: 42.0.0
-        version: 42.0.0
+        specifier: 42.0.1
+        version: 42.0.1
       electron-builder:
         specifier: 26.8.1
         version: 26.8.1(electron-builder-squirrel-windows@26.8.1)
@@ -2385,8 +2385,8 @@ packages:
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
-  electron@42.0.0:
-    resolution: {integrity: sha512-in5jnW/Ywy3Rh3FPr4MR80exPEkywKYAmDJRZ/gIKlr8VXEi3zXgiAZbf0Si7KRccHTF2y8euVMRz7M6HqTjMA==}
+  electron@42.0.1:
+    resolution: {integrity: sha512-d8HnycE970DGESe91Nj30eonFBUcAI9EZ1TwUGJVzSAnJZdh0BkFEinAXjdklvDYst+bVDc8HsksCuqVLrnqdg==}
     engines: {node: '>= 22.12.0'}
     hasBin: true
 
@@ -5740,7 +5740,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.2.0
       '@types/keyv': 3.1.4
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
       '@types/responselike': 1.0.3
 
   '@types/chai@5.2.3':
@@ -5758,7 +5758,7 @@ snapshots:
 
   '@types/fs-extra@9.0.13':
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
 
   '@types/history@4.7.11': {}
 
@@ -5766,7 +5766,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
 
   '@types/ms@2.1.0': {}
 
@@ -5782,7 +5782,7 @@ snapshots:
 
   '@types/plist@3.0.5':
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
       xmlbuilder: 15.1.1
     optional: true
 
@@ -5807,7 +5807,7 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
 
   '@types/semver@7.7.1': {}
 
@@ -5818,11 +5818,11 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
     optional: true
 
   '@vitejs/plugin-react@6.0.1(vite@8.0.12(@types/node@24.12.3)(jiti@2.7.0)(yaml@2.8.4))':
@@ -6609,10 +6609,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@42.0.0:
+  electron@42.0.1:
     dependencies:
       '@electron/get': 5.0.0
-      '@types/node': 24.12.2
+      '@types/node': 24.12.3
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -7395,9 +7395,9 @@ snapshots:
 
   math-intrinsics@1.1.0: {}
 
-  menubar@9.5.2(electron@42.0.0):
+  menubar@9.5.2(electron@42.0.1):
     dependencies:
-      electron: 42.0.0
+      electron: 42.0.1
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
