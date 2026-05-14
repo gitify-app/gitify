@@ -1,5 +1,6 @@
-import { app, globalShortcut, shell } from 'electron';
-import type { Menubar } from 'menubar';
+import { app, shell } from 'electron';
+
+import type { Menubar } from '@gitify/menubar';
 
 import { EVENTS } from '../../shared/events';
 
@@ -13,21 +14,11 @@ import { applyKeepWindowOnBlur } from '../lifecycle/window';
  */
 export function registerSystemHandlers(mb: Menubar): void {
   /**
-   * Currently registered accelerator for the global shortcut, or `null` when none.
+   * Last accelerator the user successfully bound, so a failed change can
+   * roll back to the previous working one rather than leave the user with
+   * no shortcut at all.
    */
   let lastRegisteredAccelerator: string | null = null;
-
-  const toggleWindow = () => {
-    if (!mb.window) {
-      return;
-    }
-
-    if (mb.window.isVisible()) {
-      mb.hideWindow();
-    } else {
-      mb.showWindow();
-    }
-  };
 
   /**
    * Open the given URL in the user's default browser, with an option to activate the app.
@@ -38,27 +29,27 @@ export function registerSystemHandlers(mb: Menubar): void {
 
   /**
    * Register or unregister a global keyboard shortcut that toggles the menubar window visibility.
+   *
+   * `mb.setGlobalShortcut` handles unregister-then-register and the callback
+   * (`mb.toggleWindow()`); we layer rollback on top because the library
+   * does not retain a failed registration.
    */
   handleMainEvent(EVENTS.UPDATE_KEYBOARD_SHORTCUT, (_, { enabled, keyboardShortcut }) => {
     const previous = lastRegisteredAccelerator;
 
-    if (lastRegisteredAccelerator) {
-      globalShortcut.unregister(lastRegisteredAccelerator);
-      lastRegisteredAccelerator = null;
-    }
-
     if (!enabled) {
+      mb.setGlobalShortcut(undefined);
+      lastRegisteredAccelerator = null;
       return { success: true };
     }
 
-    const ok = globalShortcut.register(keyboardShortcut, toggleWindow);
-    if (ok) {
+    if (mb.setGlobalShortcut(keyboardShortcut)) {
       lastRegisteredAccelerator = keyboardShortcut;
       return { success: true };
     }
 
     if (previous) {
-      globalShortcut.register(previous, toggleWindow);
+      mb.setGlobalShortcut(previous);
       lastRegisteredAccelerator = previous;
     }
     return { success: false };
