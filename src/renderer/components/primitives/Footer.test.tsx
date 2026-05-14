@@ -4,9 +4,7 @@ import { Footer } from './Footer';
 
 describe('renderer/components/primitives/Footer.tsx', () => {
   it('should render itself & its children - space-between', () => {
-    const tree = renderWithProviders(
-      <Footer justify="space-between">Test</Footer>,
-    );
+    const tree = renderWithProviders(<Footer justify="space-between">Test</Footer>);
 
     expect(tree.container).toMatchSnapshot();
   });

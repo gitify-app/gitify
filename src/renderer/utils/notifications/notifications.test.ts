@@ -9,8 +9,6 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { Constants } from '../../constants';
-
 import {
   type AccountNotifications,
   type GitifyNotification,
@@ -20,6 +18,7 @@ import {
 } from '../../types';
 
 import * as apiClient from '../forges/github/client';
+import { GITHUB_API_MERGE_BATCH_SIZE } from '../forges/github/enrich';
 import {
   enrichNotifications,
   getNotificationCount,
@@ -71,9 +70,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       stabilizeNotificationsOrder(mockAccounts, settings);
 
-      expect(
-        mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order),
-      ).toEqual([0, 1, 2, 3, 4, 5]);
+      expect(mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order)).toEqual([
+        0, 1, 2, 3, 4, 5,
+      ]);
     });
 
     it('groups by repository when REPOSITORY and assigns order in first-seen repo groups', () => {
@@ -84,9 +83,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       stabilizeNotificationsOrder(mockAccounts, settings);
 
-      expect(
-        mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order),
-      ).toEqual([0, 2, 1, 3, 5, 4]);
+      expect(mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order)).toEqual([
+        0, 2, 1, 3, 5, 4,
+      ]);
     });
   });
 
@@ -141,7 +140,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         .spyOn(apiClient, 'fetchNotificationDetailsForList')
         .mockResolvedValue(new Map());
 
-      const notificationCount = Constants.GITHUB_API_MERGE_BATCH_SIZE * 2.5;
+      const notificationCount = GITHUB_API_MERGE_BATCH_SIZE * 2.5;
       const notifications = Array.from({ length: notificationCount }, (_, i) =>
         mockPartialGitifyNotification({
           title: `Notification ${i}`,
@@ -162,14 +161,12 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       // Verify batch sizes
       expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(
-        Constants.GITHUB_API_MERGE_BATCH_SIZE,
+        GITHUB_API_MERGE_BATCH_SIZE,
       );
       expect(fetchNotificationDetailsForListSpy.mock.calls[1][0]).toHaveLength(
-        Constants.GITHUB_API_MERGE_BATCH_SIZE,
+        GITHUB_API_MERGE_BATCH_SIZE,
       );
-      expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(
-        50,
-      );
+      expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(50);
     });
 
     it('should handle single batch of notifications', async () => {
@@ -194,9 +191,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       // Should be called once for single batch
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
-      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(
-        50,
-      );
+      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(50);
     });
   });
 });

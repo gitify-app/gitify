@@ -11,7 +11,6 @@ import {
 import type {
   GitifyIssueState,
   GitifyNotification,
-  GitifyReactionGroup,
   GitifySubject,
   Link,
   SettingsState,
@@ -31,8 +30,7 @@ class IssueHandler extends DefaultHandler {
     _settings: SettingsState,
     fetchedData?: IssueDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
-    const issue =
-      fetchedData ?? (await fetchIssueByNumber(notification)).repository?.issue;
+    const issue = fetchedData ?? (await fetchIssueByNumber(notification)).repository?.issue;
 
     if (!issue) {
       return {};
@@ -42,15 +40,10 @@ class IssueHandler extends DefaultHandler {
 
     const issueComment = issue.comments?.nodes?.[0];
 
-    const issueUser = getNotificationAuthor([
-      issueComment?.author,
-      issue.author,
-    ]);
+    const issueUser = getNotificationAuthor([issueComment?.author, issue.author]);
 
-    const issueReactionCount =
-      issueComment?.reactions.totalCount ?? issue.reactions.totalCount;
-    const issueReactionGroup =
-      issueComment?.reactionGroups ?? issue.reactionGroups;
+    const issueReactionCount = issueComment?.reactions.totalCount ?? issue.reactions.totalCount;
+    const issueReactionGroup = issueComment?.reactionGroups ?? issue.reactionGroups;
 
     return {
       number: issue.number,
@@ -65,9 +58,7 @@ class IssueHandler extends DefaultHandler {
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
       reactionsCount: issueReactionCount,
-      reactionGroups: (issueReactionGroup ?? undefined) as
-        | GitifyReactionGroup[]
-        | undefined,
+      reactionGroups: issueReactionGroup ?? undefined,
     };
   }
 

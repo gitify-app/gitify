@@ -66,31 +66,25 @@ async function performAtlassianRequest<TResult, TVariables>(
   return json.data;
 }
 
-export async function fetchBitbucketAuthenticatedUser(
-  account: Account,
-): Promise<MeQuery> {
-  return performAtlassianRequest<MeQuery, MeQueryVariables>(
-    account,
-    MeDocument,
-  );
+export async function fetchBitbucketAuthenticatedUser(account: Account): Promise<MeQuery> {
+  return performAtlassianRequest<MeQuery, MeQueryVariables>(account, MeDocument);
 }
 
 export async function listRawBitbucketNotifications(
   account: Account,
   fetchOnlyUnread = true,
 ): Promise<AtlassianNotificationFragment[]> {
-  const readState = fetchOnlyUnread
-    ? InfluentsNotificationReadState.Unread
-    : undefined;
+  const readState = fetchOnlyUnread ? InfluentsNotificationReadState.Unread : undefined;
 
-  const data = await performAtlassianRequest<
-    MyNotificationsQuery,
-    MyNotificationsQueryVariables
-  >(account, MyNotificationsDocument, {
-    first: MAX_NOTIFICATIONS,
-    flat: true,
-    readState,
-  });
+  const data = await performAtlassianRequest<MyNotificationsQuery, MyNotificationsQueryVariables>(
+    account,
+    MyNotificationsDocument,
+    {
+      first: MAX_NOTIFICATIONS,
+      flat: true,
+      readState,
+    },
+  );
 
   const nodes = data.notifications?.notificationFeed?.nodes ?? [];
 
@@ -106,18 +100,20 @@ export async function markBitbucketNotificationsAsRead(
   account: Account,
   notificationIds: string[],
 ): Promise<void> {
-  await performAtlassianRequest<
-    MarkAsReadMutation,
-    MarkAsReadMutationVariables
-  >(account, MarkAsReadDocument, { notificationIDs: notificationIds });
+  await performAtlassianRequest<MarkAsReadMutation, MarkAsReadMutationVariables>(
+    account,
+    MarkAsReadDocument,
+    { notificationIDs: notificationIds },
+  );
 }
 
 export async function markBitbucketNotificationsAsUnread(
   account: Account,
   notificationIds: string[],
 ): Promise<void> {
-  await performAtlassianRequest<
-    MarkAsUnreadMutation,
-    MarkAsUnreadMutationVariables
-  >(account, MarkAsUnreadDocument, { notificationIDs: notificationIds });
+  await performAtlassianRequest<MarkAsUnreadMutation, MarkAsUnreadMutationVariables>(
+    account,
+    MarkAsUnreadDocument,
+    { notificationIDs: notificationIds },
+  );
 }

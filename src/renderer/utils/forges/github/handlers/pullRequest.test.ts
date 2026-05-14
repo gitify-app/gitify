@@ -51,10 +51,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -70,8 +67,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -89,10 +85,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -108,8 +101,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -127,10 +119,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -146,8 +135,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -165,10 +153,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -184,8 +169,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -215,10 +199,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -260,10 +241,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -279,8 +257,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -304,10 +281,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -323,8 +297,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         linkedIssues: ['#789'],
         commentCount: 0,
         milestone: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -345,10 +318,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       } satisfies FetchPullRequestByNumberQuery);
 
-      const result = await pullRequestHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await pullRequestHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -367,8 +337,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           state: 'OPEN',
           title: 'Open Milestone',
         },
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -384,18 +353,17 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       OPEN: 'GitPullRequestIcon',
     } satisfies Record<GitifyPullRequestState, string>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
-    )('iconType for pull request with state %s', (pullRequestState, pullRequestIconType) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'PullRequest',
-        state: pullRequestState,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>)(
+      'iconType for pull request with state %s',
+      (pullRequestState, pullRequestIconType) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'PullRequest',
+          state: pullRequestState,
+        });
 
-      expect(pullRequestHandler.iconType(mockNotification).displayName).toBe(
-        pullRequestIconType,
-      );
-    });
+        expect(pullRequestHandler.iconType(mockNotification).displayName).toBe(pullRequestIconType);
+      },
+    );
   });
 
   describe('iconColor', () => {
@@ -407,23 +375,21 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       OPEN: IconColor.GREEN,
     } satisfies Record<GitifyPullRequestState, IconColor>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>,
-    )('iconType for pull request with state %s', (pullRequestState, pullRequestIconColor) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'PullRequest',
-        state: pullRequestState,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyPullRequestState, IconColor]>)(
+      'iconType for pull request with state %s',
+      (pullRequestState, pullRequestIconColor) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'PullRequest',
+          state: pullRequestState,
+        });
 
-      expect(pullRequestHandler.iconColor(mockNotification)).toBe(
-        pullRequestIconColor,
-      );
-    });
+        expect(pullRequestHandler.iconColor(mockNotification)).toBe(pullRequestIconColor);
+      },
+    );
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       pullRequestHandler.defaultUrl({

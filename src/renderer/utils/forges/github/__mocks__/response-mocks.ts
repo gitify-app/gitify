@@ -26,19 +26,14 @@ export function mockRawUser(login: string): RawUser {
     url: `https://api.github.com/users/${login}` as Link,
     html_url: `https://github.com/${login}` as Link,
     followers_url: `https://api.github.com/users/${login}/followers` as Link,
-    following_url:
-      `https://api.github.com/users/${login}/following{/other_user}` as Link,
+    following_url: `https://api.github.com/users/${login}/following{/other_user}` as Link,
     gists_url: `https://api.github.com/users/${login}/gists{/gist_id}` as Link,
-    starred_url:
-      `https://api.github.com/users/${login}/starred{/owner}{/repo}` as Link,
-    subscriptions_url:
-      `https://api.github.com/users/${login}/subscriptions` as Link,
+    starred_url: `https://api.github.com/users/${login}/starred{/owner}{/repo}` as Link,
+    subscriptions_url: `https://api.github.com/users/${login}/subscriptions` as Link,
     organizations_url: `https://api.github.com/users/${login}/orgs` as Link,
     repos_url: `https://api.github.com/users/${login}/repos` as Link,
-    events_url:
-      `https://api.github.com/users/${login}/events{/privacy}` as Link,
-    received_events_url:
-      `https://api.github.com/users/${login}/received_events` as Link,
+    events_url: `https://api.github.com/users/${login}/events{/privacy}` as Link,
+    received_events_url: `https://api.github.com/users/${login}/received_events` as Link,
     type: 'User',
     site_admin: false,
   } satisfies RawUser;

@@ -18,20 +18,12 @@ export interface CheckboxProps {
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Checkbox: FC<CheckboxProps> = ({
-  visible = true,
-  ...props
-}: CheckboxProps) => {
+export const Checkbox: FC<CheckboxProps> = ({ visible = true, ...props }: CheckboxProps) => {
   const counter = props?.counter === 0 ? '0' : props.counter;
 
   return (
     visible && (
-      <Stack
-        align="center"
-        className="text-sm"
-        direction="horizontal"
-        gap="condensed"
-      >
+      <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
         <input
           checked={props.checked}
           className="size-4 rounded-sm cursor-pointer"
@@ -52,15 +44,10 @@ export const Checkbox: FC<CheckboxProps> = ({
           {props.label}
         </label>
 
-        {props.tooltip && (
-          <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
-        )}
+        {props.tooltip && <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />}
 
         {counter && (
-          <CustomCounter
-            scheme={props.checked ? 'primary' : 'secondary'}
-            value={counter}
-          />
+          <CustomCounter scheme={props.checked ? 'primary' : 'secondary'} value={counter} />
         )}
       </Stack>
     )

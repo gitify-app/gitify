@@ -71,10 +71,7 @@ describe('transformBitbucketNotifications', () => {
         category: InfluentsNotificationCategory.Direct,
       },
     });
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
     expect(notif.reason.code).toBe('assign');
   });
 
@@ -85,48 +82,31 @@ describe('transformBitbucketNotifications', () => {
         category: InfluentsNotificationCategory.Watching,
       },
     });
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
     expect(notif.reason.code).toBe('subscribed');
   });
 
   it('sets subject type to BitbucketNotification', () => {
     const raw = makeMockNotification();
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
     expect(notif.subject.type).toBe('BitbucketNotification');
   });
 
   it('uses entity title as subject title', () => {
     const raw = makeMockNotification();
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
     expect(notif.subject.title).toBe('Add new feature');
   });
 
   it('sets subject url from entity url', () => {
     const raw = makeMockNotification();
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
-    expect(notif.subject.url).toBe(
-      'https://bitbucket.org/myorg/myrepo/pull-requests/42',
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
+    expect(notif.subject.url).toBe('https://bitbucket.org/myorg/myrepo/pull-requests/42');
   });
 
   it('extracts repository owner/repo from entity url', () => {
     const raw = makeMockNotification();
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
     expect(notif.repository.fullName).toBe('myorg/myrepo');
     expect(notif.repository.name).toBe('myrepo');
     expect(notif.repository.owner.login).toBe('myorg');
@@ -139,10 +119,7 @@ describe('transformBitbucketNotifications', () => {
         readState: InfluentsNotificationReadState.Read,
       },
     });
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
     expect(notif.unread).toBe(false);
   });
 
@@ -151,10 +128,7 @@ describe('transformBitbucketNotifications', () => {
     raw.headNotification.content.entity = null;
     raw.headNotification.content.url = null;
 
-    const [notif] = transformBitbucketNotifications(
-      [raw],
-      mockBitbucketAccount,
-    );
+    const [notif] = transformBitbucketNotifications([raw], mockBitbucketAccount);
     expect(notif.subject.url).toBeNull();
     expect(notif.repository.fullName).toBe('bitbucket');
   });
@@ -167,10 +141,7 @@ describe('transformBitbucketNotifications', () => {
         notificationId: 'notif-456',
       },
     });
-    const result = transformBitbucketNotifications(
-      [raw1, raw2],
-      mockBitbucketAccount,
-    );
+    const result = transformBitbucketNotifications([raw1, raw2], mockBitbucketAccount);
     expect(result).toHaveLength(2);
     expect(result[1].id).toBe('notif-456');
   });

@@ -31,15 +31,10 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
   isRepositoryAnimatingExit,
 }: NotificationRowProps) => {
-  const {
-    settings,
-    markNotificationsAsRead,
-    markNotificationsAsDone,
-    unsubscribeNotification,
-  } = useAppContext();
+  const { settings, markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
+    useAppContext();
 
-  const [shouldAnimateNotificationExit, setShouldAnimateNotificationExit] =
-    useState(false);
+  const [shouldAnimateNotificationExit, setShouldAnimateNotificationExit] = useState(false);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
 
@@ -108,10 +103,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <Stack
             align="start"
-            className={cn(
-              'mb-0.5',
-              !settings.wrapNotificationTitle && 'truncate',
-            )}
+            className={cn('mb-0.5', !settings.wrapNotificationTitle && 'truncate')}
             data-testid="notification-row"
             direction="horizontal"
             gap="condensed"
@@ -146,10 +138,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <HoverButton
             action={actionMarkAsDone}
-            enabled={
-              isMarkAsDoneFeatureSupported(notification.account) &&
-              notification.unread
-            }
+            enabled={isMarkAsDoneFeatureSupported(notification.account) && notification.unread}
             icon={CheckIcon}
             label="Mark as done"
             testid="notification-mark-as-done"

@@ -51,7 +51,7 @@ app.whenReady().then(async () => {
   initializeAppLifecycle(mb, contextMenu, protocol);
 
   // Configure window event handlers (Escape key, DevTools resize)
-  configureWindowEvents(mb);
+  configureWindowEvents(mb, menuBuilder);
 
   // Register IPC handlers for various channels
   registerTrayHandlers(mb);

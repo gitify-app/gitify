@@ -1,3 +1,5 @@
+import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
+
 import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 
 import type { Hostname, Link, SettingsState, Token } from '../../../types';
@@ -28,16 +30,31 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
 
     it('builds the PAT settings URL via getNewTokenURL', () => {
-      const url = githubAdapter.getPersonalAccessTokenSettingsUrl(
-        'github.com' as Hostname,
-      );
+      const url = githubAdapter.getPersonalAccessTokenSettingsUrl('github.com' as Hostname);
       expect(url).toContain('https://github.com/settings/tokens/new');
     });
 
-    it('routes getDeveloperSettingsUrl through the auth-method helper', () => {
-      expect(
-        githubAdapter.getDeveloperSettingsUrl(mockGitHubCloudAccount),
-      ).toBe('https://github.com/settings/tokens');
+    it('routes getAccountSettingsUrl through the auth-method helper', () => {
+      expect(githubAdapter.getAccountSettingsUrl(mockGitHubCloudAccount)).toBe(
+        'https://github.com/settings/tokens',
+      );
+    });
+
+    it('maps each auth method to its icon', () => {
+      expect(githubAdapter.getAuthMethodIcon('GitHub App')).toBe(AppsIcon);
+      expect(githubAdapter.getAuthMethodIcon('OAuth App')).toBe(PersonIcon);
+      expect(githubAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
+    });
+
+    it('wires the device-flow and OAuth-app methods so the context can dispatch via the adapter', () => {
+      expect(githubAdapter.deviceFlow?.authMethod).toBe('GitHub App');
+      expect(githubAdapter.deviceFlow?.start).toBeDefined();
+      expect(githubAdapter.deviceFlow?.poll).toBeDefined();
+      expect(githubAdapter.deviceFlow?.getRevokeAccessUrl).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.performWebOAuth).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.exchangeAuthCodeForToken).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.validateClientId).toBeDefined();
+      expect(githubAdapter.oauthWebApp?.getNewOAuthAppUrl).toBeDefined();
     });
   });
 
@@ -54,13 +71,9 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
           'x-oauth-scopes': 'notifications, read:user',
           'x-github-enterprise-version': '3.13.0',
         },
-      } as unknown as Awaited<
-        ReturnType<typeof client.fetchAuthenticatedUserDetails>
-      >);
+      } as unknown as Awaited<ReturnType<typeof client.fetchAuthenticatedUserDetails>>);
 
-      const result = await githubAdapter.fetchAuthenticatedUser(
-        mockGitHubCloudAccount,
-      );
+      const result = await githubAdapter.fetchAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(result).toEqual({
         user: {
@@ -78,13 +91,9 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       vi.spyOn(client, 'fetchAuthenticatedUserDetails').mockResolvedValue({
         data: { id: 1, login: 'octocat', name: null, avatar_url: '' },
         headers: {},
-      } as unknown as Awaited<
-        ReturnType<typeof client.fetchAuthenticatedUserDetails>
-      >);
+      } as unknown as Awaited<ReturnType<typeof client.fetchAuthenticatedUserDetails>>);
 
-      const result = await githubAdapter.fetchAuthenticatedUser(
-        mockGitHubCloudAccount,
-      );
+      const result = await githubAdapter.fetchAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(result.version).toBe('latest');
       expect(result.scopes).toBeUndefined();
@@ -94,10 +103,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
   describe('listNotifications', () => {
     it('lists notifications and transforms them to GitifyNotification', async () => {
       const settings = {} as SettingsState;
-      vi.spyOn(
-        client,
-        'listNotificationsForAuthenticatedUser',
-      ).mockResolvedValue([
+      vi.spyOn(client, 'listNotificationsForAuthenticatedUser').mockResolvedValue([
         {
           id: '1',
           unread: true,
@@ -120,14 +126,9 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
             },
           },
         },
-      ] as unknown as Awaited<
-        ReturnType<typeof client.listNotificationsForAuthenticatedUser>
-      >);
+      ] as unknown as Awaited<ReturnType<typeof client.listNotificationsForAuthenticatedUser>>);
 
-      const result = await githubAdapter.listNotifications(
-        mockGitHubCloudAccount,
-        settings,
-      );
+      const result = await githubAdapter.listNotifications(mockGitHubCloudAccount, settings);
 
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('1');
@@ -138,9 +139,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
 
   describe('thread mutation methods', () => {
     it('markThreadAsRead delegates to the GitHub client', async () => {
-      const spy = vi
-        .spyOn(client, 'markNotificationThreadAsRead')
-        .mockResolvedValue(undefined);
+      const spy = vi.spyOn(client, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
       await githubAdapter.markThreadAsRead(mockGitHubCloudAccount, '7');
 
@@ -148,9 +147,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
 
     it('markThreadAsDone delegates to the GitHub client', async () => {
-      const spy = vi
-        .spyOn(client, 'markNotificationThreadAsDone')
-        .mockResolvedValue(undefined);
+      const spy = vi.spyOn(client, 'markNotificationThreadAsDone').mockResolvedValue(undefined);
 
       await githubAdapter.markThreadAsDone(mockGitHubCloudAccount, '8');
 
@@ -172,41 +169,39 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
   });
 
-  describe('OAuth scope helpers', () => {
+  describe('oauthScopes capability bundle', () => {
     function withScopes(scopes: string[]) {
       return { ...mockGitHubCloudAccount, scopes };
     }
 
-    it('hasRequiredScopes is true when notifications + read:user are present', () => {
+    it('exposes the bundle (GitHub has an OAuth scope concept)', () => {
+      expect(githubAdapter.oauthScopes).toBeDefined();
+    });
+
+    it('hasRequired is true when notifications + read:user are present', () => {
       expect(
-        githubAdapter.hasRequiredScopes(
-          withScopes(['notifications', 'read:user']),
-        ),
+        githubAdapter.oauthScopes!.hasRequired(withScopes(['notifications', 'read:user'])),
       ).toBe(true);
     });
 
-    it('hasRequiredScopes is false when a required scope is missing', () => {
-      expect(
-        githubAdapter.hasRequiredScopes(withScopes(['notifications'])),
-      ).toBe(false);
+    it('hasRequired is false when a required scope is missing', () => {
+      expect(githubAdapter.oauthScopes!.hasRequired(withScopes(['notifications']))).toBe(false);
     });
 
-    it('hasRecommendedScopes requires the full repo scope set', () => {
+    it('hasRecommended requires the full repo scope set', () => {
       expect(
-        githubAdapter.hasRecommendedScopes(
+        githubAdapter.oauthScopes!.hasRecommended(
           withScopes(['notifications', 'read:user', 'repo']),
         ),
       ).toBe(true);
       expect(
-        githubAdapter.hasRecommendedScopes(
-          withScopes(['notifications', 'read:user']),
-        ),
+        githubAdapter.oauthScopes!.hasRecommended(withScopes(['notifications', 'read:user'])),
       ).toBe(false);
     });
 
-    it('hasAlternateScopes accepts public_repo as the legacy substitute', () => {
+    it('hasAlternate accepts public_repo as the legacy substitute', () => {
       expect(
-        githubAdapter.hasAlternateScopes(
+        githubAdapter.oauthScopes!.hasAlternate(
           withScopes(['notifications', 'read:user', 'public_repo']),
         ),
       ).toBe(true);

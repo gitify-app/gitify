@@ -1,8 +1,7 @@
 // Use a hoist-safe mock factory for '@octokit/oauth-methods'
 vi.mock('@octokit/oauth-methods', async () => {
-  const actual = await vi.importActual<typeof import('@octokit/oauth-methods')>(
-    '@octokit/oauth-methods',
-  );
+  const actual =
+    await vi.importActual<typeof import('@octokit/oauth-methods')>('@octokit/oauth-methods');
   return {
     ...actual,
     createDeviceCode: vi.fn(),
@@ -11,41 +10,34 @@ vi.mock('@octokit/oauth-methods', async () => {
   };
 });
 
-import {
-  createDeviceCode,
-  exchangeDeviceCode,
-  exchangeWebFlowCode,
-} from '@octokit/oauth-methods';
+import { createDeviceCode, exchangeDeviceCode, exchangeWebFlowCode } from '@octokit/oauth-methods';
 import { RequestError } from '@octokit/request-error';
 
 import type { MockedFunction } from 'vitest';
 
-import { Constants } from '../../constants';
+import { Constants } from '../../../constants';
 
-import type { AuthCode, ClientID, ClientSecret, Hostname } from '../../types';
-import type { DeviceFlowSession, LoginOAuthWebOptions } from './types';
+import type { AuthCode, ClientID, ClientSecret, Hostname } from '../../../types';
+import type { DeviceFlowSession, LoginOAuthWebOptions } from '../../auth/types';
 
-import * as comms from '../../utils/system/comms';
-import * as logger from '../core/logger';
-import * as authUtils from './flows';
-import { getRecommendedScopeNames } from './scopes';
+import { getRecommendedScopeNames } from '../../auth/scopes';
+import * as logger from '../../core/logger';
+import * as comms from '../../system/comms';
+import * as flows from './flows';
 
-const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<
-  typeof createDeviceCode
->;
+const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<typeof createDeviceCode>;
 
 const exchangeDeviceCodeMock = exchangeDeviceCode as unknown as MockedFunction<
   typeof exchangeDeviceCode
 >;
 
-const exchangeWebFlowCodeMock =
-  exchangeWebFlowCode as unknown as MockedFunction<typeof exchangeWebFlowCode>;
+const exchangeWebFlowCodeMock = exchangeWebFlowCode as unknown as MockedFunction<
+  typeof exchangeWebFlowCode
+>;
 
-describe('renderer/utils/auth/flows.ts', () => {
+describe('renderer/utils/forges/github/flows.ts', () => {
   vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
-  const openExternalLinkSpy = vi
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   beforeEach(() => {
     // Mock OAUTH_DEVICE_FLOW_CLIENT_ID value
@@ -65,7 +57,7 @@ describe('renderer/utils/auth/flows.ts', () => {
           },
         } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
 
-        const session = await authUtils.startGitHubDeviceFlow();
+        const session = await flows.startGitHubDeviceFlow();
 
         expect(createDeviceCodeMock).toHaveBeenCalledWith({
           clientType: 'oauth-app',
@@ -98,9 +90,7 @@ describe('renderer/utils/auth/flows.ts', () => {
           authentication: { token: 'device-token-xyz' },
         } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
 
-        const token = await authUtils.pollGitHubDeviceFlow(
-          baseSession as DeviceFlowSession,
-        );
+        const token = await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession);
 
         expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
           clientType: 'oauth-app',
@@ -118,9 +108,7 @@ describe('renderer/utils/auth/flows.ts', () => {
 
         exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
 
-        const token = await authUtils.pollGitHubDeviceFlow(
-          baseSession as DeviceFlowSession,
-        );
+        const token = await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession);
 
         expect(token).toBeNull();
       });
@@ -131,10 +119,7 @@ describe('renderer/utils/auth/flows.ts', () => {
         exchangeDeviceCodeMock.mockRejectedValueOnce(otherErr);
 
         await expect(
-          async () =>
-            await authUtils.pollGitHubDeviceFlow(
-              baseSession as DeviceFlowSession,
-            ),
+          async () => await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession),
         ).rejects.toThrow('boom');
       });
     });
@@ -152,7 +137,7 @@ describe('renderer/utils/auth/flows.ts', () => {
         callback('gitify://oauth?code=123-456');
       });
 
-      const res = await authUtils.performGitHubWebOAuth({
+      const res = await flows.performGitHubWebOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
         clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
         hostname: 'my.git.com' as Hostname,
@@ -166,9 +151,7 @@ describe('renderer/utils/auth/flows.ts', () => {
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
-        expect.any(Function),
-      );
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
 
       expect(res.authMethod).toBe('OAuth App');
       expect(res.authCode).toBe('123-456');
@@ -181,9 +164,7 @@ describe('renderer/utils/auth/flows.ts', () => {
         );
       });
 
-      await expect(
-        async () => await authUtils.performGitHubWebOAuth(webAuthOptions),
-      ).rejects.toEqual(
+      await expect(async () => await flows.performGitHubWebOAuth(webAuthOptions)).rejects.toEqual(
         new Error(
           "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
         ),
@@ -197,9 +178,7 @@ describe('renderer/utils/auth/flows.ts', () => {
       );
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(
-        expect.any(Function),
-      );
+      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
     });
 
     describe('exchangeAuthCodeForAccessToken', () => {
@@ -212,7 +191,7 @@ describe('renderer/utils/auth/flows.ts', () => {
           },
         } as unknown as Awaited<ReturnType<typeof exchangeWebFlowCode>>);
 
-        const res = await authUtils.exchangeAuthCodeForAccessToken(authCode, {
+        const res = await flows.exchangeAuthCodeForAccessToken(authCode, {
           ...webAuthOptions,
         });
 
@@ -229,7 +208,7 @@ describe('renderer/utils/auth/flows.ts', () => {
       it('should throw when client secret is missing', async () => {
         await expect(
           async () =>
-            await authUtils.exchangeAuthCodeForAccessToken(authCode, {
+            await flows.exchangeAuthCodeForAccessToken(authCode, {
               ...webAuthOptions,
               clientSecret: undefined as unknown as ClientSecret,
             }),

@@ -37,9 +37,7 @@ const makeRawNode = (registrationProduct: string) => ({
       path: null,
       actor: { displayName: 'Bob', avatarURL: null },
     },
-    analyticsAttributes: [
-      { key: 'registrationProduct', value: registrationProduct },
-    ],
+    analyticsAttributes: [{ key: 'registrationProduct', value: registrationProduct }],
   },
 });
 
@@ -55,11 +53,7 @@ describe('listRawBitbucketNotifications', () => {
           unseenNotificationCount: 2,
           notificationFeed: {
             pageInfo: { hasNextPage: false },
-            nodes: [
-              makeRawNode('bitbucket'),
-              makeRawNode('jira'),
-              makeRawNode('confluence'),
-            ],
+            nodes: [makeRawNode('bitbucket'), makeRawNode('jira'), makeRawNode('confluence')],
           },
         },
       },
@@ -73,9 +67,8 @@ describe('listRawBitbucketNotifications', () => {
     const result = await listRawBitbucketNotifications(mockBitbucketAccount);
     expect(result).toHaveLength(1);
     expect(
-      result[0].headNotification.analyticsAttributes?.find(
-        (a) => a.key === 'registrationProduct',
-      )?.value,
+      result[0].headNotification.analyticsAttributes?.find((a) => a.key === 'registrationProduct')
+        ?.value,
     ).toBe('bitbucket');
   });
 
@@ -103,9 +96,9 @@ describe('listRawBitbucketNotifications', () => {
       statusText: 'Unauthorized',
     } as Response);
 
-    await expect(
-      listRawBitbucketNotifications(mockBitbucketAccount),
-    ).rejects.toThrow('Atlassian API 401 Unauthorized');
+    await expect(listRawBitbucketNotifications(mockBitbucketAccount)).rejects.toThrow(
+      'Atlassian API 401 Unauthorized',
+    );
   });
 
   it('throws on GraphQL errors in response', async () => {
@@ -117,9 +110,9 @@ describe('listRawBitbucketNotifications', () => {
       }),
     } as Response);
 
-    await expect(
-      listRawBitbucketNotifications(mockBitbucketAccount),
-    ).rejects.toThrow('Atlassian GraphQL errors');
+    await expect(listRawBitbucketNotifications(mockBitbucketAccount)).rejects.toThrow(
+      'Atlassian GraphQL errors',
+    );
   });
 });
 
@@ -143,9 +136,7 @@ describe('markBitbucketNotificationsAsRead', () => {
     ).resolves.toBeUndefined();
 
     expect(fetch).toHaveBeenCalledTimes(1);
-    const body = JSON.parse(
-      (vi.mocked(fetch).mock.calls[0][1] as RequestInit).body as string,
-    );
+    const body = JSON.parse((vi.mocked(fetch).mock.calls[0][1] as RequestInit).body as string);
     expect(body.variables.notificationIDs).toEqual(['n1', 'n2']);
   });
 
@@ -156,9 +147,9 @@ describe('markBitbucketNotificationsAsRead', () => {
       statusText: 'Forbidden',
     } as Response);
 
-    await expect(
-      markBitbucketNotificationsAsRead(mockBitbucketAccount, ['n1']),
-    ).rejects.toThrow('Atlassian API 403 Forbidden');
+    await expect(markBitbucketNotificationsAsRead(mockBitbucketAccount, ['n1'])).rejects.toThrow(
+      'Atlassian API 403 Forbidden',
+    );
   });
 });
 
@@ -182,9 +173,7 @@ describe('markBitbucketNotificationsAsUnread', () => {
     ).resolves.toBeUndefined();
 
     expect(fetch).toHaveBeenCalledTimes(1);
-    const body = JSON.parse(
-      (vi.mocked(fetch).mock.calls[0][1] as RequestInit).body as string,
-    );
+    const body = JSON.parse((vi.mocked(fetch).mock.calls[0][1] as RequestInit).body as string);
     expect(body.variables.notificationIDs).toEqual(['n1']);
   });
 
@@ -195,8 +184,8 @@ describe('markBitbucketNotificationsAsUnread', () => {
       statusText: 'Internal Server Error',
     } as Response);
 
-    await expect(
-      markBitbucketNotificationsAsUnread(mockBitbucketAccount, ['n1']),
-    ).rejects.toThrow('Atlassian API 500 Internal Server Error');
+    await expect(markBitbucketNotificationsAsUnread(mockBitbucketAccount, ['n1'])).rejects.toThrow(
+      'Atlassian API 500 Internal Server Error',
+    );
   });
 });

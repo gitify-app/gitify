@@ -5,9 +5,7 @@ import { HoverGroup } from './HoverGroup';
 describe('renderer/components/primitives/HoverGroup.tsx', () => {
   it('should render', () => {
     const tree = renderWithProviders(
-      <HoverGroup bgColor="group-hover:bg-gitify-repository">
-        Hover Group
-      </HoverGroup>,
+      <HoverGroup bgColor="group-hover:bg-gitify-repository">Hover Group</HoverGroup>,
     );
     expect(tree.container).toMatchSnapshot();
   });

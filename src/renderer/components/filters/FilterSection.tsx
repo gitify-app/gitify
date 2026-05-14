@@ -40,9 +40,7 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
   // Memoize filter counts to avoid recalculating on every render
   const filterCounts = useMemo(() => {
     const counts = new Map<FiltersState[K][number], number>();
-    for (const type of Object.keys(
-      filter.FILTER_TYPES,
-    ) as FiltersState[K][number][]) {
+    for (const type of Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][]) {
       counts.set(type, filter.getFilterCount(notifications, type));
     }
     return counts;
@@ -56,9 +54,7 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
           tooltip && (
             <>
               {tooltip}
-              {filter.requiresDetailsNotifications && (
-                <RequiresDetailedNotificationWarning />
-              )}
+              {filter.requiresDetailsNotifications && <RequiresDetailedNotificationWarning />}
             </>
           )
         }
@@ -66,19 +62,13 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
         {title}
       </Title>
 
-      <Stack
-        direction={layout}
-        gap={layout === 'horizontal' ? 'normal' : 'condensed'}
-      >
+      <Stack direction={layout} gap={layout === 'horizontal' ? 'normal' : 'condensed'}>
         {(Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][])
           .sort((a, b) =>
             filter
               .getTypeDetails(a)
               .title.toLowerCase()
-              .localeCompare(
-                filter.getTypeDetails(b).title.toLowerCase(),
-                'en',
-              ),
+              .localeCompare(filter.getTypeDetails(b).title.toLowerCase(), 'en'),
           )
           .map((type) => {
             const typeDetails = filter.getTypeDetails(type);
@@ -91,17 +81,12 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
               <Checkbox
                 checked={isChecked}
                 counter={count}
-                disabled={
-                  filter.requiresDetailsNotifications &&
-                  !settings.detailedNotifications
-                }
+                disabled={filter.requiresDetailsNotifications && !settings.detailedNotifications}
                 key={type as string}
                 label={typeTitle}
                 name={typeTitle}
                 onChange={() => updateFilter(filterSetting, type, !isChecked)}
-                tooltip={
-                  typeDescription ? <Text>{typeDescription}</Text> : null
-                }
+                tooltip={typeDescription ? <Text>{typeDescription}</Text> : null}
               />
             );
           })}
@@ -111,6 +96,4 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
 };
 
 // Memoize the component to prevent unnecessary re-renders
-export const FilterSection = memo(
-  FilterSectionComponent,
-) as typeof FilterSectionComponent;
+export const FilterSection = memo(FilterSectionComponent) as typeof FilterSectionComponent;

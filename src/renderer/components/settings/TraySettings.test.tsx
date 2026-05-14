@@ -15,15 +15,10 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
       });
     });
 
-    await userEvent.click(
-      screen.getByTestId('checkbox-showNotificationsCountInTray'),
-    );
+    await userEvent.click(screen.getByTestId('checkbox-showNotificationsCountInTray'));
 
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
-    expect(updateSettingMock).toHaveBeenCalledWith(
-      'showNotificationsCountInTray',
-      false,
-    );
+    expect(updateSettingMock).toHaveBeenCalledWith('showNotificationsCountInTray', false);
   });
 
   it('should toggle the useUnreadActiveIcon checkbox', async () => {
@@ -36,10 +31,7 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
     await userEvent.click(screen.getByTestId('checkbox-useUnreadActiveIcon'));
 
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
-    expect(updateSettingMock).toHaveBeenCalledWith(
-      'useUnreadActiveIcon',
-      false,
-    );
+    expect(updateSettingMock).toHaveBeenCalledWith('useUnreadActiveIcon', false);
   });
 
   it('should toggle the useAlternateIdleIcon checkbox', async () => {
@@ -52,9 +44,6 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
     await userEvent.click(screen.getByTestId('checkbox-useAlternateIdleIcon'));
 
     expect(updateSettingMock).toHaveBeenCalledTimes(1);
-    expect(updateSettingMock).toHaveBeenCalledWith(
-      'useAlternateIdleIcon',
-      true,
-    );
+    expect(updateSettingMock).toHaveBeenCalledWith('useAlternateIdleIcon', true);
   });
 });

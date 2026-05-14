@@ -1,22 +1,8 @@
 import { type FC, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import {
-  BookIcon,
-  EyeClosedIcon,
-  EyeIcon,
-  KeyIcon,
-  SignInIcon,
-} from '@primer/octicons-react';
-import {
-  Banner,
-  Button,
-  FormControl,
-  Stack,
-  Text,
-  TextInput,
-  Tooltip,
-} from '@primer/react';
+import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
+import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
 import { useAppContext } from '../hooks/useAppContext';
 
@@ -51,10 +37,7 @@ interface IFormErrors {
   invalidCredentialsForHost?: string;
 }
 
-export const validateForm = (
-  values: IFormData,
-  forge: Forge = 'github',
-): IFormErrors => {
+export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
   const errors: IFormErrors = {};
   const adapter = getAdapter(forge);
   const isBitbucket = forge === 'bitbucket';
@@ -83,8 +66,7 @@ export const validateForm = (
 export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount, forge: stateForge } = (location.state ??
-    {}) as LocationState;
+  const { account: reAuthAccount, forge: stateForge } = (location.state ?? {}) as LocationState;
 
   const forge: Forge = reAuthAccount?.forge ?? stateForge ?? 'github';
   const adapter = getAdapter(forge);
@@ -93,13 +75,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   const { loginWithPersonalAccessToken } = useAppContext();
 
-  const [shouldMaskPersonalAccessToken, setShouldMaskPersonalAccessToken] =
-    useState(true);
+  const [shouldMaskPersonalAccessToken, setShouldMaskPersonalAccessToken] = useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);
 
   const [formData, setFormData] = useState({
-    hostname:
-      reAuthAccount?.hostname ?? adapter.defaultHostname ?? ('' as Hostname),
+    hostname: reAuthAccount?.hostname ?? adapter.defaultHostname ?? ('' as Hostname),
     token: '' as Token,
     username: reAuthAccount?.username ?? '',
   } as IFormData);
@@ -137,11 +117,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         });
         navigate('/');
       } catch (err) {
-        rendererLogError(
-          'loginWithPersonalAccessToken',
-          'Failed to login with PAT',
-          toError(err),
-        );
+        rendererLogError('loginWithPersonalAccessToken', 'Failed to login with PAT', toError(err));
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided token against ${data.hostname}`,
         });
@@ -194,9 +170,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 value={formData.username}
               />
               {errors.username && (
-                <FormControl.Validation variant="error">
-                  {errors.username}
-                </FormControl.Validation>
+                <FormControl.Validation variant="error">{errors.username}</FormControl.Validation>
               )}
             </FormControl>
           ) : (
@@ -219,9 +193,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 value={formData.hostname}
               />
               {errors.hostname && (
-                <FormControl.Validation variant="error">
-                  {errors.hostname}
-                </FormControl.Validation>
+                <FormControl.Validation variant="error">{errors.hostname}</FormControl.Validation>
               )}
             </FormControl>
           )}
@@ -233,11 +205,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 disabled={!isBitbucket && !formData.hostname}
                 leadingVisual={KeyIcon}
                 onClick={() =>
-                  openExternalLink(
-                    adapter.getPersonalAccessTokenSettingsUrl(
-                      formData.hostname,
-                    ),
-                  )
+                  openExternalLink(adapter.getPersonalAccessTokenSettingsUrl(formData.hostname))
                 }
                 size="small"
               >
@@ -287,24 +255,16 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               }
               trailingAction={
                 <TextInput.Action
-                  aria-label={
-                    shouldMaskPersonalAccessToken ? 'Show token' : 'Hide token'
-                  }
+                  aria-label={shouldMaskPersonalAccessToken ? 'Show token' : 'Hide token'}
                   icon={shouldMaskPersonalAccessToken ? EyeIcon : EyeClosedIcon}
-                  onClick={() =>
-                    setShouldMaskPersonalAccessToken(
-                      !shouldMaskPersonalAccessToken,
-                    )
-                  }
+                  onClick={() => setShouldMaskPersonalAccessToken(!shouldMaskPersonalAccessToken)}
                 />
               }
               type={shouldMaskPersonalAccessToken ? 'password' : 'text'}
               value={formData.token}
             />
             {errors.token && (
-              <FormControl.Validation variant="error">
-                {errors.token}
-              </FormControl.Validation>
+              <FormControl.Validation variant="error">{errors.token}</FormControl.Validation>
             )}
           </FormControl>
         </Stack>

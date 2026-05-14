@@ -14,16 +14,6 @@ export function isMarkAsDoneFeatureSupported(account: Account): boolean {
 }
 
 /**
- * Whether the account's forge surfaces an "answered" discussion state during
- * notification enrichment.
- */
-export function isAnsweredDiscussionFeatureSupported(
-  account: Account,
-): boolean {
-  return getAdapter(account).capabilities.answeredDiscussion(account);
-}
-
-/**
  * Whether the account's forge supports ignoring a thread subscription.
  */
 export function isUnsubscribeThreadSupported(account: Account): boolean {

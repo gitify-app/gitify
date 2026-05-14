@@ -20,11 +20,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           auth: {
-            accounts: [
-              mockPersonalAccessTokenAccount,
-              mockOAuthAccount,
-              mockGitHubAppAccount,
-            ],
+            accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
           },
         });
       });
@@ -46,9 +42,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Account interactions', () => {
-    const openExternalLinkSpy = vi
-      .spyOn(comms, 'openExternalLink')
-      .mockImplementation(vi.fn());
+    const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     it('open profile in external browser', async () => {
       const openAccountProfileSpy = vi
@@ -64,9 +58,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-profile'));
 
       expect(openAccountProfileSpy).toHaveBeenCalledTimes(1);
-      expect(openAccountProfileSpy).toHaveBeenCalledWith(
-        mockPersonalAccessTokenAccount,
-      );
+      expect(openAccountProfileSpy).toHaveBeenCalledWith(mockPersonalAccessTokenAccount);
     });
 
     it('open host in external browser', async () => {
@@ -92,9 +84,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-developer-settings'));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        'https://github.com/settings/tokens',
-      );
+      expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/settings/tokens');
     });
 
     it('should render with PAT scopes warning', async () => {
@@ -130,18 +120,12 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should set account as primary account', async () => {
-      const saveStateSpy = vi
-        .spyOn(storage, 'saveState')
-        .mockImplementation(vi.fn());
+      const saveStateSpy = vi.spyOn(storage, 'saveState').mockImplementation(vi.fn());
 
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           auth: {
-            accounts: [
-              mockPersonalAccessTokenAccount,
-              mockOAuthAccount,
-              mockGitHubAppAccount,
-            ],
+            accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
           },
         });
       });
@@ -156,9 +140,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should refresh account', async () => {
-      const refreshAccountSpy = vi
-        .spyOn(authUtils, 'refreshAccount')
-        .mockImplementation(vi.fn());
+      const refreshAccountSpy = vi.spyOn(authUtils, 'refreshAccount').mockImplementation(vi.fn());
 
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
@@ -194,11 +176,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           auth: {
-            accounts: [
-              mockPersonalAccessTokenAccount,
-              mockOAuthAccount,
-              mockGitHubAppAccount,
-            ],
+            accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
           },
         });
       });
@@ -235,6 +213,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login-device-flow', {
         replace: true,
+        state: { forge: 'github' },
       });
     });
 
@@ -249,12 +228,9 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-add-pat'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith(
-        '/login-personal-access-token',
-        {
-          replace: true,
-        },
-      );
+      expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
+        replace: true,
+      });
     });
 
     it('should show login with oauth app', async () => {
@@ -270,6 +246,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login-oauth-app', {
         replace: true,
+        state: { forge: 'github' },
       });
     });
 
@@ -284,13 +261,10 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-add-gitea-pat'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith(
-        '/login-personal-access-token',
-        {
-          replace: true,
-          state: { forge: 'gitea' },
-        },
-      );
+      expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
+        replace: true,
+        state: { forge: 'gitea' },
+      });
     });
 
     it('should show login with bitbucket personal access token', async () => {
@@ -304,13 +278,10 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByTestId('account-add-bitbucket-pat'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith(
-        '/login-personal-access-token',
-        {
-          replace: true,
-          state: { forge: 'bitbucket' },
-        },
-      );
+      expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
+        replace: true,
+        state: { forge: 'bitbucket' },
+      });
     });
   });
 });

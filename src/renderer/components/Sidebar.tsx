@@ -22,13 +22,8 @@ import { useFiltersStore } from '../stores';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const {
-    status,
-    isLoggedIn,
-    settings,
-    notificationCount,
-    hasUnreadNotifications,
-  } = useAppContext();
+  const { status, isLoggedIn, settings, notificationCount, hasUnreadNotifications } =
+    useAppContext();
 
   const { shortcuts } = useShortcutActions();
 
@@ -42,12 +37,7 @@ export const Sidebar: FC = () => {
       direction="vertical"
       justify="space-between"
     >
-      <Stack
-        align="center"
-        direction="vertical"
-        gap="condensed"
-        padding="normal"
-      >
+      <Stack align="center" direction="vertical" gap="condensed" padding="normal">
         <IconButton
           aria-label={APPLICATION.NAME}
           data-testid="sidebar-home"
@@ -127,12 +117,7 @@ export const Sidebar: FC = () => {
         />
       </Stack>
 
-      <Stack
-        align="center"
-        direction="vertical"
-        gap="condensed"
-        padding="normal"
-      >
+      <Stack align="center" direction="vertical" gap="condensed" padding="normal">
         {isLoggedIn && (
           <>
             <IconButton

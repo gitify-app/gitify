@@ -15,11 +15,7 @@ query MyNotifications(
 ) {
   notifications {
     unseenNotificationCount
-    notificationFeed(
-      flat: $flat
-      first: $first
-      filter: { readStateFilter: $readState }
-    ) {
+    notificationFeed(flat: $flat, first: $first, filter: { readStateFilter: $readState }) {
       pageInfo {
         hasNextPage
       }

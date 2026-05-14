@@ -30,9 +30,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
 
-    rendererLogErrorSpy = vi
-      .spyOn(logger, 'rendererLogError')
-      .mockImplementation(vi.fn());
+    rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     raiseSoundNotificationSpy = vi
       .spyOn(sound, 'raiseSoundNotification')
       .mockImplementation(vi.fn());
@@ -50,9 +48,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('fetchNotifications', () => {
     it('should fetch non-detailed notifications with success', async () => {
-      getAllNotificationsSpy.mockResolvedValue(
-        mockMultipleAccountNotifications,
-      );
+      getAllNotificationsSpy.mockResolvedValue(mockMultipleAccountNotifications);
 
       const mockStateNonDetailed = {
         auth: mockAuth,
@@ -74,14 +70,10 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('success');
       });
 
-      expect(result.current.notifications[0].account.hostname).toBe(
-        'github.com',
-      );
+      expect(result.current.notifications[0].account.hostname).toBe('github.com');
       expect(result.current.notifications[0].notifications.length).toBe(2);
 
-      expect(result.current.notifications[1].account.hostname).toBe(
-        'github.gitify.io',
-      );
+      expect(result.current.notifications[1].account.hostname).toBe('github.gitify.io');
       expect(result.current.notifications[1].notifications.length).toBe(2);
     });
 
@@ -108,9 +100,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('success');
       });
 
-      expect(result.current.notifications[0].account.hostname).toBe(
-        'github.com',
-      );
+      expect(result.current.notifications[0].account.hostname).toBe('github.com');
       expect(result.current.notifications[0].notifications.length).toBe(1);
     });
 
@@ -291,16 +281,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('markNotificationsAsRead', () => {
     it('should mark notifications as read with success', async () => {
-      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        undefined,
-      );
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationsAsRead(mockState, [
-          mockGitifyNotification,
-        ]);
+        result.current.markNotificationsAsRead(mockState, [mockGitifyNotification]);
       });
 
       await waitFor(() => {
@@ -318,9 +304,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationsAsRead(mockState, [
-          mockGitifyNotification,
-        ]);
+        result.current.markNotificationsAsRead(mockState, [mockGitifyNotification]);
       });
 
       await waitFor(() => {
@@ -340,9 +324,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         },
       ]);
 
-      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        undefined,
-      );
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
       const stateWithFetchRead = {
         auth: {
@@ -367,12 +349,8 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications[0].notifications.length).toBe(2);
-      expect(result.current.notifications[0].notifications[0].unread).toBe(
-        true,
-      );
-      expect(result.current.notifications[0].notifications[1].unread).toBe(
-        true,
-      );
+      expect(result.current.notifications[0].notifications[0].unread).toBe(true);
+      expect(result.current.notifications[0].notifications[1].unread).toBe(true);
 
       // Mark only the first notification as read
       act(() => {
@@ -386,23 +364,15 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       // First notification should be marked as read
-      expect(result.current.notifications[0].notifications[0].unread).toBe(
-        false,
-      );
+      expect(result.current.notifications[0].notifications[0].unread).toBe(false);
       // Second notification should remain unread
-      expect(result.current.notifications[0].notifications[1].unread).toBe(
-        true,
-      );
+      expect(result.current.notifications[0].notifications[1].unread).toBe(true);
     });
 
     it('should only update notifications for the correct account when fetchReadNotifications is enabled', async () => {
-      getAllNotificationsSpy.mockResolvedValue(
-        mockMultipleAccountNotifications,
-      );
+      getAllNotificationsSpy.mockResolvedValue(mockMultipleAccountNotifications);
 
-      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        undefined,
-      );
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
       const stateWithMultipleAccounts = {
         auth: mockAuth,
@@ -425,12 +395,8 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(2);
-      expect(result.current.notifications[0].notifications[0].unread).toBe(
-        true,
-      );
-      expect(result.current.notifications[1].notifications[0].unread).toBe(
-        true,
-      );
+      expect(result.current.notifications[0].notifications[0].unread).toBe(true);
+      expect(result.current.notifications[1].notifications[0].unread).toBe(true);
 
       // Mark only the cloud notification as read
       act(() => {
@@ -445,21 +411,15 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       // Cloud notification should be marked as read
-      expect(result.current.notifications[0].notifications[0].unread).toBe(
-        false,
-      );
+      expect(result.current.notifications[0].notifications[0].unread).toBe(false);
       // Enterprise notification should remain unread
-      expect(result.current.notifications[1].notifications[0].unread).toBe(
-        true,
-      );
+      expect(result.current.notifications[1].notifications[0].unread).toBe(true);
     });
 
     it('should keep notifications in list when fetchReadNotifications is enabled', async () => {
       getAllNotificationsSpy.mockResolvedValue(mockSingleAccountNotifications);
 
-      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        undefined,
-      );
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
       const stateWithFetchRead = {
         auth: {
@@ -484,9 +444,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(1);
-      expect(result.current.notifications[0].notifications[0].unread).toBe(
-        true,
-      );
+      expect(result.current.notifications[0].notifications[0].unread).toBe(true);
 
       // Now mark as read with fetchReadNotifications enabled
       act(() => {
@@ -503,24 +461,18 @@ describe('renderer/hooks/useNotifications.ts', () => {
       // Notifications should still be in the list but marked as read
       expect(result.current.notifications.length).toBe(1);
       expect(result.current.notifications[0].notifications.length).toBe(1);
-      expect(result.current.notifications[0].notifications[0].unread).toBe(
-        false,
-      );
+      expect(result.current.notifications[0].notifications[0].unread).toBe(false);
     });
   });
 
   describe('markNotificationsAsDone', () => {
     it('should mark notifications as done with success', async () => {
-      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
-        undefined,
-      );
+      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationsAsDone(mockState, [
-          mockGitifyNotification,
-        ]);
+        result.current.markNotificationsAsDone(mockState, [mockGitifyNotification]);
       });
 
       await waitFor(() => {
@@ -549,9 +501,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationsAsDone(mockState, [
-          mockEnterpriseNotification,
-        ]);
+        result.current.markNotificationsAsDone(mockState, [mockEnterpriseNotification]);
       });
 
       await waitFor(() => {
@@ -573,9 +523,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationsAsDone(mockState, [
-          mockGitifyNotification,
-        ]);
+        result.current.markNotificationsAsDone(mockState, [mockGitifyNotification]);
       });
 
       await waitFor(() => {
@@ -589,19 +537,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('unsubscribeNotification', () => {
     it('should not call unsubscribe APIs when thread ignore is unsupported (Gitea)', async () => {
-      const ignoreSpy = vi.spyOn(
-        apiClient,
-        'ignoreNotificationThreadSubscription',
-      );
+      const ignoreSpy = vi.spyOn(apiClient, 'ignoreNotificationThreadSubscription');
       const readSpy = vi.spyOn(apiClient, 'markNotificationThreadAsRead');
 
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.unsubscribeNotification(
-          mockState,
-          mockGiteaGitifyNotification,
-        );
+        result.current.unsubscribeNotification(mockState, mockGiteaGitifyNotification);
       });
 
       expect(ignoreSpy).not.toHaveBeenCalled();
@@ -610,22 +552,16 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
-      vi.spyOn(
-        apiClient,
-        'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined as any);
-
-      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        undefined,
+      vi.spyOn(apiClient, 'ignoreNotificationThreadSubscription').mockResolvedValue(
+        undefined as any,
       );
+
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.unsubscribeNotification(
-          mockState,
-          mockGitifyNotification,
-        );
+        result.current.unsubscribeNotification(mockState, mockGitifyNotification);
       });
 
       await waitFor(() => {
@@ -636,14 +572,11 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = true', async () => {
-      vi.spyOn(
-        apiClient,
-        'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined as any);
-
-      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
-        undefined,
+      vi.spyOn(apiClient, 'ignoreNotificationThreadSubscription').mockResolvedValue(
+        undefined as any,
       );
+
+      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -668,10 +601,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should unsubscribe from a notification with failure', async () => {
-      vi.spyOn(
-        apiClient,
-        'ignoreNotificationThreadSubscription',
-      ).mockRejectedValue(new Error('Bad request'));
+      vi.spyOn(apiClient, 'ignoreNotificationThreadSubscription').mockRejectedValue(
+        new Error('Bad request'),
+      );
 
       vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockRejectedValue(
         new Error('Bad request'),
@@ -680,10 +612,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.unsubscribeNotification(
-          mockState,
-          mockGitifyNotification,
-        );
+        result.current.unsubscribeNotification(mockState, mockGitifyNotification);
       });
 
       await waitFor(() => {
@@ -695,14 +624,11 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark as done when markAsDoneOnUnsubscribe is true even with fetchReadNotifications enabled', async () => {
-      vi.spyOn(
-        apiClient,
-        'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined as any);
-
-      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(
-        undefined,
+      vi.spyOn(apiClient, 'ignoreNotificationThreadSubscription').mockResolvedValue(
+        undefined as any,
       );
+
+      vi.spyOn(apiClient, 'markNotificationThreadAsDone').mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useNotifications());
 
@@ -728,14 +654,11 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('should mark as read when markAsDoneOnUnsubscribe is false and fetchReadNotifications is enabled', async () => {
-      vi.spyOn(
-        apiClient,
-        'ignoreNotificationThreadSubscription',
-      ).mockResolvedValue(undefined as any);
-
-      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(
-        undefined,
+      vi.spyOn(apiClient, 'ignoreNotificationThreadSubscription').mockResolvedValue(
+        undefined as any,
       );
+
+      vi.spyOn(apiClient, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
       const { result } = renderHook(() => useNotifications());
 

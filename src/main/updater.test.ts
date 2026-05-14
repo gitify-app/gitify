@@ -120,12 +120,8 @@ describe('main/updater.ts', () => {
         }),
       );
       expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(
-        false,
-      );
-      expect(
-        menuBuilder.setUpdateReadyForInstallMenuVisibility,
-      ).toHaveBeenCalledWith(true);
+      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(true);
     });
 
     it('invokes quitAndInstall when user clicks Restart', async () => {
@@ -163,12 +159,8 @@ describe('main/updater.ts', () => {
 
       emit('checking-for-update');
 
-      expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(
-        false,
-      );
-      expect(
-        menuBuilder.setNoUpdateAvailableMenuVisibility,
-      ).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setNoUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
     });
 
     it('handles update-available', async () => {
@@ -176,9 +168,7 @@ describe('main/updater.ts', () => {
 
       emit('update-available');
 
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(
-        true,
-      );
+      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(true);
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(
         expect.stringContaining('A new update is available'),
       );
@@ -189,9 +179,7 @@ describe('main/updater.ts', () => {
 
       emit('download-progress', { percent: 12.3456 });
 
-      expect(menubar.tray.setToolTip).toHaveBeenCalledWith(
-        expect.stringContaining('12.35%'),
-      );
+      expect(menubar.tray.setToolTip).toHaveBeenCalledWith(expect.stringContaining('12.35%'));
     });
 
     it('handles update-not-available', async () => {
@@ -199,18 +187,10 @@ describe('main/updater.ts', () => {
 
       emit('update-not-available');
 
-      expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(
-        true,
-      );
-      expect(
-        menuBuilder.setNoUpdateAvailableMenuVisibility,
-      ).toHaveBeenCalledWith(true);
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(
-        false,
-      );
-      expect(
-        menuBuilder.setUpdateReadyForInstallMenuVisibility,
-      ).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(true);
+      expect(menuBuilder.setNoUpdateAvailableMenuVisibility).toHaveBeenCalledWith(true);
+      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(false);
     });
 
     it('auto-hides "No updates available" after configured timeout', async () => {
@@ -221,15 +201,11 @@ describe('main/updater.ts', () => {
         emit('update-not-available');
 
         // Immediately shows the message
-        expect(
-          menuBuilder.setNoUpdateAvailableMenuVisibility,
-        ).toHaveBeenCalledWith(true);
+        expect(menuBuilder.setNoUpdateAvailableMenuVisibility).toHaveBeenCalledWith(true);
 
         // Then hides it after the configured timeout
         vi.advanceTimersByTime(APPLICATION.UPDATE_NOT_AVAILABLE_DISPLAY_MS);
-        expect(
-          menuBuilder.setNoUpdateAvailableMenuVisibility,
-        ).toHaveBeenLastCalledWith(false);
+        expect(menuBuilder.setNoUpdateAvailableMenuVisibility).toHaveBeenLastCalledWith(false);
       } finally {
         vi.useRealTimers();
       }
@@ -243,24 +219,17 @@ describe('main/updater.ts', () => {
         emit('update-not-available');
 
         // Message shown
-        expect(
-          menuBuilder.setNoUpdateAvailableMenuVisibility,
-        ).toHaveBeenCalledWith(true);
+        expect(menuBuilder.setNoUpdateAvailableMenuVisibility).toHaveBeenCalledWith(true);
 
         // New check should hide immediately and clear pending timeout
         emit('checking-for-update');
 
-        expect(
-          menuBuilder.setNoUpdateAvailableMenuVisibility,
-        ).toHaveBeenLastCalledWith(false);
+        expect(menuBuilder.setNoUpdateAvailableMenuVisibility).toHaveBeenLastCalledWith(false);
 
-        const callsBefore =
-          menuBuilder.setNoUpdateAvailableMenuVisibility.mock.calls.length;
+        const callsBefore = menuBuilder.setNoUpdateAvailableMenuVisibility.mock.calls.length;
         vi.advanceTimersByTime(APPLICATION.UPDATE_NOT_AVAILABLE_DISPLAY_MS * 2);
         // No additional hide call due to cleared timeout
-        expect(
-          menuBuilder.setNoUpdateAvailableMenuVisibility.mock.calls.length,
-        ).toBe(callsBefore);
+        expect(menuBuilder.setNoUpdateAvailableMenuVisibility.mock.calls.length).toBe(callsBefore);
       } finally {
         vi.useRealTimers();
       }
@@ -272,9 +241,7 @@ describe('main/updater.ts', () => {
       emit('update-cancelled');
 
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
-      expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(
-        true,
-      );
+      expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(true);
     });
 
     it('handles error (reset + logError)', async () => {
@@ -283,28 +250,23 @@ describe('main/updater.ts', () => {
       const err = new Error('failure');
       emit('error', err);
 
-      expect(logError).toHaveBeenCalledWith(
-        'auto updater',
-        'Error checking for update',
-        err,
-      );
+      expect(logError).toHaveBeenCalledWith('auto updater', 'Error checking for update', err);
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
     });
 
     it('performs initial check and schedules periodic checks', async () => {
       const originalSetInterval = globalThis.setInterval;
-      const setIntervalSpy = vi
-        .spyOn(globalThis, 'setInterval')
-        .mockImplementation(((fn: () => void) => {
-          fn();
-          return 0 as unknown as NodeJS.Timeout;
-        }) as unknown as typeof setInterval);
+      const setIntervalSpy = vi.spyOn(globalThis, 'setInterval').mockImplementation(((
+        fn: () => void,
+      ) => {
+        fn();
+        return 0 as unknown as NodeJS.Timeout;
+      }) as unknown as typeof setInterval);
       try {
         await updater.start();
 
         // At minimum the initial check should have occurred
-        const callCount = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock
-          .calls.length;
+        const callCount = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
         expect(callCount).toBeGreaterThanOrEqual(1);
 
         // If the periodic interval was scheduled during this test run, assert its arguments

@@ -13,30 +13,22 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await workflowRunHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         state: 'WAITING',
         user: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting',
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting',
       });
     });
 
     it('unknown workflow run state', async () => {
       const mockNotification = mockPartialGitifyNotification({
-        title:
-          'some-user requested your unknown-state to deploy to an environment',
+        title: 'some-user requested your unknown-state to deploy to an environment',
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await workflowRunHandler.enrich(mockNotification, mockSettings);
 
       // Returns empty object when state cannot be determined
       expect(result).toEqual({});
@@ -48,10 +40,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await workflowRunHandler.enrich(mockNotification, mockSettings);
 
       // Returns empty object when title cannot be parsed
       expect(result).toEqual({});
@@ -63,15 +52,12 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
       type: 'WorkflowRun',
     });
 
-    expect(workflowRunHandler.iconType(mockNotification).displayName).toBe(
-      'RocketIcon',
-    );
+    expect(workflowRunHandler.iconType(mockNotification).displayName).toBe('RocketIcon');
   });
 
   describe('defaultUrl', () => {
     it('unknown workflow attributes', () => {
-      const mockHtmlUrl =
-        'https://github.com/gitify-app/notifications-test' as Link;
+      const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
       expect(
         workflowRunHandler.defaultUrl({
@@ -87,8 +73,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
     });
 
     it('workflow attributes', () => {
-      const mockHtmlUrl =
-        'https://github.com/gitify-app/notifications-test' as Link;
+      const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
       expect(
         workflowRunHandler.defaultUrl({
@@ -123,8 +108,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
 
     it('unknown workflow run state', async () => {
       const mockNotification = mockPartialGitifyNotification({
-        title:
-          'some-user requested your unknown-state to deploy to an environment',
+        title: 'some-user requested your unknown-state to deploy to an environment',
         type: 'WorkflowRun',
       });
 

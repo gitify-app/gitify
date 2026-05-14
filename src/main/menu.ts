@@ -3,7 +3,7 @@ import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { isMacOS } from '../shared/platform';
+import { isLinux, isMacOS } from '../shared/platform';
 
 import { resetApp } from './lifecycle/reset';
 import { openLogsDirectory, takeScreenshot } from './utils';
@@ -16,8 +16,11 @@ export default class MenuBuilder {
   private readonly noUpdateAvailableMenuItem: MenuItem;
   private readonly updateAvailableMenuItem: MenuItem;
   private readonly updateReadyForInstallMenuItem: MenuItem;
+  private readonly showWindowMenuItem: MenuItem;
+  private readonly hideWindowMenuItem: MenuItem;
 
   private readonly menubar: Menubar;
+  private menu?: Menu;
 
   /**
    * @param menubar - The menubar instance used for window and app interactions within menu actions.
@@ -53,13 +56,32 @@ export default class MenuBuilder {
         autoUpdater.quitAndInstall();
       },
     });
+
+    this.showWindowMenuItem = new MenuItem({
+      label: `Show ${APPLICATION.NAME}`,
+      visible: true,
+      click: () => {
+        this.menubar.showWindow();
+      },
+    });
+
+    this.hideWindowMenuItem = new MenuItem({
+      label: `Hide ${APPLICATION.NAME}`,
+      visible: false,
+      click: () => {
+        this.menubar.hideWindow();
+      },
+    });
   }
 
   /**
    * Build and return the tray right-click context menu.
    */
   buildMenu(): Menu {
-    const contextMenu = Menu.buildFromTemplate([
+    this.menu = Menu.buildFromTemplate([
+      this.showWindowMenuItem,
+      this.hideWindowMenuItem,
+      { type: 'separator' },
       this.checkForUpdatesMenuItem,
       this.noUpdateAvailableMenuItem,
       this.updateAvailableMenuItem,
@@ -88,9 +110,7 @@ export default class MenuBuilder {
           {
             label: 'Visit Repository',
             click: () => {
-              shell.openExternal(
-                `${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}`,
-              );
+              shell.openExternal(`${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}`);
             },
           },
           {
@@ -117,7 +137,32 @@ export default class MenuBuilder {
       },
     ]);
 
-    return contextMenu;
+    return this.menu;
+  }
+
+  /**
+   * Reflect the current window visibility in the Show / Hide menu items.
+   * On Linux, the indicator caches the menu over D-Bus, so we re-publish
+   * via setContextMenu to push the visibility flip through immediately
+   * instead of waiting for the next mutation event.
+   *
+   * @param isVisible - Whether the popup window is currently visible.
+   */
+  setWindowVisibility(isVisible: boolean) {
+    this.showWindowMenuItem.visible = !isVisible;
+    this.hideWindowMenuItem.visible = isVisible;
+
+    if (!isLinux() || !this.menu) {
+      return;
+    }
+    try {
+      if (!this.menubar.tray.isDestroyed()) {
+        this.menubar.tray.setContextMenu(this.menu);
+      }
+    } catch {
+      // Tray not yet ready; the initial setContextMenu in
+      // initializeAppLifecycle will pick up the current state.
+    }
   }
 
   /**

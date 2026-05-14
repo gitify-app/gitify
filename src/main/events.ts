@@ -1,12 +1,7 @@
 import { ipcMain } from 'electron';
 import type { Menubar } from 'menubar';
 
-import type {
-  EventArgs,
-  EventRequest,
-  EventResponse,
-  EventType,
-} from '../shared/events';
+import type { EventArgs, EventRequest, EventResponse, EventType } from '../shared/events';
 
 /**
  * Register a fire-and-forget IPC listener on the main process (ipcMain.on).

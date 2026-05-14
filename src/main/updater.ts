@@ -41,10 +41,7 @@ export default class AppUpdater {
     }
 
     if (!this.menubar.app.isPackaged) {
-      logInfo(
-        'app updater',
-        'Skipping updater since app is in development mode',
-      );
+      logInfo('app updater', 'Skipping updater since app is in development mode');
       return;
     }
 
@@ -77,9 +74,7 @@ export default class AppUpdater {
     });
 
     autoUpdater.on('download-progress', (progressObj) => {
-      this.setTooltipWithStatus(
-        `Downloading update: ${progressObj.percent.toFixed(2)}%`,
-      );
+      this.setTooltipWithStatus(`Downloading update: ${progressObj.percent.toFixed(2)}%`);
     });
 
     autoUpdater.on('update-downloaded', (event) => {
@@ -144,10 +139,7 @@ export default class AppUpdater {
     // This avoids an immediate duplicate check on startup.
     setTimeout(async () => {
       await runScheduledCheck();
-      this.periodicInterval = setInterval(
-        runScheduledCheck,
-        APPLICATION.UPDATE_CHECK_INTERVAL_MS,
-      );
+      this.periodicInterval = setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
   }
 
@@ -202,8 +194,7 @@ export default class AppUpdater {
       buttons: ['Restart', 'Later'],
       title: 'Application Update',
       message: `${APPLICATION.NAME} ${releaseName} has been downloaded`,
-      detail:
-        'Restart to apply the update. You can also restart later from the tray menu.',
+      detail: 'Restart to apply the update. You can also restart later from the tray menu.',
     };
 
     dialog.showMessageBox(dialogOpts).then((returnValue) => {

@@ -66,9 +66,7 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
 
     it('paginates until an empty page is returned', async () => {
       fetchSpy
-        .mockResolvedValueOnce(
-          jsonResponse(Array.from({ length: 100 }, (_, i) => ({ id: i }))),
-        )
+        .mockResolvedValueOnce(jsonResponse(Array.from({ length: 100 }, (_, i) => ({ id: i }))))
         .mockResolvedValueOnce(jsonResponse([{ id: 100 }]))
         .mockResolvedValueOnce(jsonResponse([]));
 
@@ -139,8 +137,7 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       );
 
       expect(result).toEqual({ html_url: 'x' });
-      const headers = (fetchSpy.mock.calls[0][1] as RequestInit)
-        .headers as Record<string, string>;
+      const headers = (fetchSpy.mock.calls[0][1] as RequestInit).headers as Record<string, string>;
       expect(headers.Authorization).toBe('token decrypted');
     });
 
@@ -158,16 +155,16 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
     });
 
     it('refuses cross-origin URLs without sending a request', async () => {
-      await expect(
-        giteaGetJson(mockGiteaAccount, 'https://attacker.com/api/v1/x'),
-      ).rejects.toThrow(/cross-origin Gitea URL/);
+      await expect(giteaGetJson(mockGiteaAccount, 'https://attacker.com/api/v1/x')).rejects.toThrow(
+        /cross-origin Gitea URL/,
+      );
       expect(fetchSpy).not.toHaveBeenCalled();
     });
 
     it('refuses non-https URLs without sending a request', async () => {
-      await expect(
-        giteaGetJson(mockGiteaAccount, 'http://gitea.example.com/x'),
-      ).rejects.toThrow(/cross-origin Gitea URL/);
+      await expect(giteaGetJson(mockGiteaAccount, 'http://gitea.example.com/x')).rejects.toThrow(
+        /cross-origin Gitea URL/,
+      );
       expect(fetchSpy).not.toHaveBeenCalled();
     });
 

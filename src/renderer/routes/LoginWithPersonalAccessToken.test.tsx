@@ -15,9 +15,7 @@ import {
 
 describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   const loginWithPersonalAccessTokenMock = vi.fn();
-  const openExternalLinkSpy = vi
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   it('renders correctly', () => {
     const tree = renderWithProviders(<LoginWithPersonalAccessTokenRoute />);
@@ -105,9 +103,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should login using a token - failure', async () => {
-    const rendererLogErrorSpy = vi
-      .spyOn(logger, 'rendererLogError')
-      .mockImplementation(vi.fn());
+    const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
     renderWithProviders(<LoginWithPersonalAccessTokenRoute />, {

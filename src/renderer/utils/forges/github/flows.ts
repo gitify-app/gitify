@@ -7,20 +7,21 @@ import {
 import { request } from '@octokit/request';
 import { RequestError } from '@octokit/request-error';
 
-import { Constants } from '../../constants';
+import { Constants } from '../../../constants';
 
-import type { AuthCode, Hostname, Link, Token } from '../../types';
-import type {
-  AuthResponse,
-  DeviceFlowErrorResponse,
-  DeviceFlowSession,
-  LoginOAuthWebOptions,
-} from './types';
+import type { AuthCode, Hostname, Link, Token } from '../../../types';
+import type { AuthResponse, DeviceFlowSession, LoginOAuthWebOptions } from '../../auth/types';
 
-import { rendererLogError, rendererLogInfo, toError } from '../core/logger';
-import { openExternalLink } from '../system/comms';
-import { getRecommendedScopeNames } from './scopes';
-import { getGitHubAuthBaseUrl } from './utils';
+import { getRecommendedScopeNames } from '../../auth/scopes';
+import { rendererLogError, rendererLogInfo, toError } from '../../core/logger';
+import { openExternalLink } from '../../system/comms';
+import { getGitHubAuthBaseUrl } from './auth';
+
+type DeviceFlowErrorResponse = {
+  error: string;
+  error_description: string;
+  error_uri: string;
+};
 
 /**
  * Initiate a GitHub OAuth Web Flow (OAuth App) authentication.
@@ -31,9 +32,7 @@ import { getGitHubAuthBaseUrl } from './utils';
  * @param authOptions - The OAuth App client configuration and target hostname.
  * @returns Resolves with the authorization code and options on success.
  */
-export function performGitHubWebOAuth(
-  authOptions: LoginOAuthWebOptions,
-): Promise<AuthResponse> {
+export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
     const { url } = getWebFlowAuthorizationUrl({
       clientType: 'oauth-app',
@@ -125,9 +124,7 @@ export async function startGitHubDeviceFlow(
  * @param session - The active device flow session.
  * @returns The access token when granted, or `null` when still pending.
  */
-export async function pollGitHubDeviceFlow(
-  session: DeviceFlowSession,
-): Promise<Token | null> {
+export async function pollGitHubDeviceFlow(session: DeviceFlowSession): Promise<Token | null> {
   try {
     const { authentication } = await exchangeDeviceCode({
       clientType: 'oauth-app' as const,
@@ -149,11 +146,7 @@ export async function pollGitHubDeviceFlow(
       }
     }
 
-    rendererLogError(
-      'pollGitHubDeviceFlow',
-      'Error exchanging device code',
-      toError(err),
-    );
+    rendererLogError('pollGitHubDeviceFlow', 'Error exchanging device code', toError(err));
 
     throw err;
   }
@@ -184,9 +177,7 @@ export async function exchangeAuthCodeForAccessToken(
     clientSecret: authOptions.clientSecret,
     code: authCode,
     request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname)
-        .toString()
-        .replace(/\/$/, ''),
+      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString().replace(/\/$/, ''),
     }),
   });
 

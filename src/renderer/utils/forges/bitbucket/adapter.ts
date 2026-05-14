@@ -1,12 +1,6 @@
 import { KeyIcon, MarkGithubIcon } from '@primer/octicons-react';
 
-import type {
-  Account,
-  Hostname,
-  Link,
-  RawGitifyNotification,
-  SettingsState,
-} from '../../../types';
+import type { Account, Hostname, Link, RawGitifyNotification, SettingsState } from '../../../types';
 import { IconColor } from '../../../types';
 import type {
   ForgeAdapter,
@@ -32,12 +26,9 @@ const ATLASSIAN_TOKEN_SETTINGS_URL =
 const capabilities: ForgeCapabilities = {
   markAsDone: () => false,
   unsubscribeThread: () => false,
-  answeredDiscussion: () => false,
 };
 
-async function fetchAuthenticatedUser(
-  account: Account,
-): Promise<RefreshAccountData> {
+async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
   const data = await fetchBitbucketAuthenticatedUser(account);
   const user = data.me?.user;
 
@@ -64,9 +55,7 @@ async function listNotifications(
   return transformBitbucketNotifications(raw, account);
 }
 
-function getDisplayHelpers(
-  notification: RawGitifyNotification,
-): NotificationDisplayHelpers {
+function getDisplayHelpers(notification: RawGitifyNotification): NotificationDisplayHelpers {
   return {
     iconType: MarkGithubIcon,
     iconColor: IconColor.GRAY,
@@ -123,12 +112,13 @@ export const bitbucketAdapter: ForgeAdapter = {
 
   validateToken: (token) => token.length > 0,
 
-  getPersonalAccessTokenSettingsUrl: (_hostname: Hostname) =>
-    ATLASSIAN_TOKEN_SETTINGS_URL,
+  getPersonalAccessTokenSettingsUrl: (_hostname: Hostname) => ATLASSIAN_TOKEN_SETTINGS_URL,
 
-  getDeveloperSettingsUrl: (_account: Account) => ATLASSIAN_TOKEN_SETTINGS_URL,
+  getAccountSettingsUrl: (_account: Account) => ATLASSIAN_TOKEN_SETTINGS_URL,
 
   documentationUrl: BITBUCKET_DOCS_URL,
+
+  getAuthMethodIcon: () => KeyIcon,
 
   loginMethods: [
     {
@@ -139,8 +129,4 @@ export const bitbucketAdapter: ForgeAdapter = {
       state: { forge: 'bitbucket' },
     },
   ],
-
-  hasRequiredScopes: () => true,
-  hasRecommendedScopes: () => true,
-  hasAlternateScopes: () => true,
 };

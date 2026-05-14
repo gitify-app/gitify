@@ -43,10 +43,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
           />
         </button>
       ) : (
-        <AvatarWithFallback
-          size={Size.SMALL}
-          userType={notification.display.defaultUserType}
-        />
+        <AvatarWithFallback size={Size.SMALL} userType={notification.display.defaultUserType} />
       )}
 
       <Stack direction="horizontal" gap="none">

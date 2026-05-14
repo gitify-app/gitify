@@ -16,16 +16,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           user: {
             login: 'github-user',
             htmlUrl: 'https://github.com/user' as Link,
-            avatarUrl:
-              'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
             type: 'User',
           },
         },
         {
           owner: {
             login: 'gitify-app',
-            avatarUrl:
-              'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
             type: 'Organization',
           } as GitifyOwner,
           fullName: 'gitify-app/gitify',
@@ -37,16 +35,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           user: {
             login: 'github-bot',
             htmlUrl: 'https://github.com/bot' as Link,
-            avatarUrl:
-              'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
             type: 'Bot',
           },
         },
         {
           owner: {
             login: 'github',
-            avatarUrl:
-              'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
             type: 'Organization',
           } as GitifyOwner,
           fullName: 'github/github',
@@ -191,10 +187,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         mockNotifications[0].subject.state = 'OPEN';
         mockNotifications[1].subject.state = 'CLOSED';
-        const result = filterDetailedNotifications(
-          mockNotifications,
-          mockSettings,
-        );
+        const result = filterDetailedNotifications(mockNotifications, mockSettings);
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);

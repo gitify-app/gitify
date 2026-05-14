@@ -52,9 +52,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       repoNotifications: mockGitHubCloudGitifyNotifications,
     };
 
-    const openExternalLinkSpy = vi
-      .spyOn(comms, 'openExternalLink')
-      .mockImplementation(vi.fn());
+    const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     renderWithProviders(<RepositoryNotifications {...props} />);
 
@@ -79,9 +77,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     await userEvent.click(screen.getByTestId('repository-mark-as-read'));
 
-    expect(markNotificationsAsReadMock).toHaveBeenCalledWith(
-      mockGitHubCloudGitifyNotifications,
-    );
+    expect(markNotificationsAsReadMock).toHaveBeenCalledWith(mockGitHubCloudGitifyNotifications);
   });
 
   it('should mark a repo as done', async () => {
@@ -97,9 +93,7 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     await userEvent.click(screen.getByTestId('repository-mark-as-done'));
 
-    expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(
-      mockGitHubCloudGitifyNotifications,
-    );
+    expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(mockGitHubCloudGitifyNotifications);
   });
 
   it('should use default repository icon when avatar is not available', () => {

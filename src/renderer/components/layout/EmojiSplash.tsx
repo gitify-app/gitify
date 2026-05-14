@@ -17,12 +17,7 @@ interface EmojiSplashProps {
 export const EmojiSplash: FC<EmojiSplashProps> = (props: EmojiSplashProps) => {
   return (
     <Centered fullHeight={props.fullHeight ?? false}>
-      <Stack
-        align="center"
-        direction="vertical"
-        gap="condensed"
-        justify={'center'}
-      >
+      <Stack align="center" direction="vertical" gap="condensed" justify={'center'}>
         <Stack align="center" direction="vertical" gap="spacious">
           <EmojiText text={props.emoji} />
           <div className="text-xl font-semibold">{props.heading}</div>

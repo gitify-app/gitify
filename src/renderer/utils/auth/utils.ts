@@ -1,32 +1,13 @@
-import { format } from 'date-fns/format';
-import semver from 'semver';
-
-import { APPLICATION } from '../../../shared/constants';
-
 import { Constants } from '../../constants';
 
-import type {
-  Account,
-  AccountUUID,
-  AuthState,
-  ClientID,
-  Forge,
-  Hostname,
-  Link,
-  Token,
-} from '../../types';
+import type { Account, AccountUUID, AuthState, Forge, Hostname, Link, Token } from '../../types';
 import type { AuthMethod } from './types';
 
-import {
-  rendererLogError,
-  rendererLogInfo,
-  rendererLogWarn,
-  toError,
-} from '../core/logger';
+import { rendererLogError, rendererLogInfo, rendererLogWarn, toError } from '../core/logger';
 import { getAdapter } from '../forges/registry';
 import { encryptValue } from '../system/comms';
-import { getPlatformFromHostname, resolvePlatform } from './platform';
-import { getRecommendedScopeNames, hasRequiredScopes } from './scopes';
+import { resolvePlatform } from './platform';
+import { hasRequiredScopes } from './scopes';
 
 /**
  * Add or update an account in the auth state.
@@ -38,7 +19,7 @@ import { getRecommendedScopeNames, hasRequiredScopes } from './scopes';
  * @param auth - The current auth state.
  * @param method - The authentication method used.
  * @param token - The plaintext access token to store (will be encrypted).
- * @param hostname - The GitHub hostname for the account.
+ * @param hostname - The forge hostname for the account.
  * @returns The updated auth state.
  */
 export async function addAccount(
@@ -65,20 +46,13 @@ export async function addAccount(
   newAccount = await refreshAccount(newAccount);
   const newAccountUUID = getAccountUUID(newAccount);
 
-  const existingIndex = accountList.findIndex(
-    (a) => getAccountUUID(a) === newAccountUUID,
-  );
+  const existingIndex = accountList.findIndex((a) => getAccountUUID(a) === newAccountUUID);
 
   if (existingIndex >= 0) {
     // Drop any forge-specific HTTP client cache so the new token is used.
-    getAdapter(accountList[existingIndex]).onAccountTokenChange?.(
-      accountList[existingIndex],
-    );
+    getAdapter(accountList[existingIndex]).onAccountTokenChange?.(accountList[existingIndex]);
     // Replace the existing account (e.g. re-authentication with a new token)
-    rendererLogInfo(
-      'addAccount',
-      `updating existing account for user ${newAccount.user?.login}`,
-    );
+    rendererLogInfo('addAccount', `updating existing account for user ${newAccount.user?.login}`);
     accountList[existingIndex] = newAccount;
   } else {
     accountList.push(newAccount);
@@ -97,9 +71,7 @@ export async function addAccount(
  * @returns A new auth state with the account removed.
  */
 export function removeAccount(auth: AuthState, account: Account): AuthState {
-  const updatedAccounts = auth.accounts.filter(
-    (a) => a.token !== account.token,
-  );
+  const updatedAccounts = auth.accounts.filter((a) => a.token !== account.token);
 
   return {
     accounts: updatedAccounts,
@@ -148,140 +120,6 @@ export async function refreshAccount(account: Account): Promise<Account> {
 }
 
 /**
- * Normalize a GitHub Enterprise Server version string to a semver string.
- *
- * Returns `"latest"` when `version` is null/empty (GitHub Cloud or unknown),
- * which is treated as "supports all features" by feature-flag checks.
- *
- * @param version - The raw version string from the `x-github-enterprise-version` header.
- * @returns A normalized semver string, or `"latest"` if unset.
- */
-export function extractHostVersion(version: string | null): string | undefined {
-  if (version) {
-    return semver.valid(semver.coerce(version)) ?? undefined;
-  }
-
-  return 'latest';
-}
-
-/**
- * Build the GitHub authentication base URL for the given hostname.
- *
- * The URL structure differs by platform:
- * - GitHub.com → `https://github.com/`
- * - GitHub Enterprise Server → `https://<hostname>/api/v3/`
- * - GitHub Enterprise Cloud with Data Residency → `https://api.<hostname>/`
- *
- * @param hostname - The GitHub hostname.
- * @returns The base URL to use for OAuth API requests.
- */
-export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
-  const platform = getPlatformFromHostname(hostname);
-  const url = new URL(APPLICATION.GITHUB_BASE_URL);
-
-  switch (platform) {
-    case 'GitHub Enterprise Server':
-      url.hostname = hostname;
-      url.pathname = '/api/v3/';
-      break;
-    case 'GitHub Enterprise Cloud with Data Residency':
-      url.hostname = `api.${hostname}`;
-      url.pathname = '/';
-      break;
-    default:
-      url.pathname = '/';
-      break;
-  }
-
-  return url;
-}
-
-/**
- * Return the GitHub developer settings URL appropriate for the account's auth method.
- *
- * - GitHub App → application connections page
- * - OAuth App → developer settings page
- * - Personal Access Token → tokens settings page
- *
- * @param account - The account whose settings URL to build.
- * @returns The URL to the relevant GitHub developer settings page.
- */
-export function getDeveloperSettingsURL(account: Account): Link {
-  const settingsURL = new URL(`https://${account.hostname}`);
-
-  switch (account.method) {
-    case 'GitHub App':
-      settingsURL.pathname = `/settings/connections/applications/${Constants.OAUTH_DEVICE_FLOW_CLIENT_ID}`;
-      break;
-    case 'OAuth App':
-      settingsURL.pathname = '/settings/developers';
-      break;
-    case 'Personal Access Token':
-      settingsURL.pathname = '/settings/tokens';
-      break;
-    default:
-      settingsURL.pathname = '/settings';
-      break;
-  }
-  return settingsURL.toString() as Link;
-}
-
-/**
- * Build a pre-filled URL for creating a new Personal Access Token.
- *
- * Pre-populates the token description (with app name and current date),
- * the required OAuth scopes, and a 90-day expiry.
- *
- * @param hostname - The GitHub hostname to create the token on.
- * @returns The URL with pre-filled query parameters.
- */
-export function getNewTokenURL(hostname: Hostname): Link {
-  const date = format(new Date(), 'PP p');
-  const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
-  newTokenURL.searchParams.append(
-    'description',
-    `${APPLICATION.NAME} (Created on ${date})`,
-  );
-  newTokenURL.searchParams.append(
-    'scopes',
-    getRecommendedScopeNames().join(','),
-  );
-  newTokenURL.searchParams.append('default_expires_at', '90'); // 90 days
-
-  return newTokenURL.toString() as Link;
-}
-
-/**
- * Build a pre-filled URL for registering a new OAuth App.
- *
- * Pre-populates the app name (with creation date), homepage URL, and
- * the `gitify://oauth` callback URL.
- *
- * @param hostname - The GitHub hostname to register the app on.
- * @returns The URL with pre-filled query parameters.
- */
-export function getNewOAuthAppURL(hostname: Hostname): Link {
-  const date = format(new Date(), 'PP p');
-  const newOAuthAppURL = new URL(
-    `https://${hostname}/settings/applications/new`,
-  );
-  newOAuthAppURL.searchParams.append(
-    'oauth_application[name]',
-    `${APPLICATION.NAME} (Created on ${date})`,
-  );
-  newOAuthAppURL.searchParams.append(
-    'oauth_application[url]',
-    'https://gitify.io',
-  );
-  newOAuthAppURL.searchParams.append(
-    'oauth_application[callback_url]',
-    'gitify://oauth',
-  );
-
-  return newOAuthAppURL.toString() as Link;
-}
-
-/**
  * Return true if `hostname` is a valid DNS hostname (e.g. `github.com`).
  * Accepts hostnames with 2-6 character TLDs; rejects IP addresses and bare labels.
  *
@@ -290,28 +128,6 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
  */
 export function isValidHostname(hostname: Hostname) {
   return /^([A-Z0-9]([A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}$/i.test(hostname);
-}
-
-/**
- * Return true if `clientId` matches the expected GitHub OAuth App format
- * (20 alphanumeric/underscore characters).
- *
- * @param clientId - The client ID string to validate.
- * @returns `true` if valid.
- */
-export function isValidClientId(clientId: ClientID) {
-  return /^[A-Z0-9_]{20}$/i.test(clientId);
-}
-
-/**
- * Return true if `token` matches the expected Personal Access Token format
- * (40 alphanumeric/underscore characters).
- *
- * @param token - The token string to validate.
- * @returns `true` if valid.
- */
-export function isValidToken(token: Token) {
-  return /^[A-Z0-9_]{40}$/i.test(token);
 }
 
 /**
@@ -324,9 +140,7 @@ export function isValidToken(token: Token) {
  * @returns A base-64 encoded UUID string.
  */
 export function getAccountUUID(account: Account): AccountUUID {
-  return btoa(
-    `${account.hostname}-${account.user?.id}-${account.method}`,
-  ) as AccountUUID;
+  return btoa(`${account.hostname}-${account.user?.id}-${account.method}`) as AccountUUID;
 }
 
 /**

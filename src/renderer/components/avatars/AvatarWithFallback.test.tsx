@@ -4,10 +4,7 @@ import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { type Link, Size } from '../../types';
 
-import {
-  AvatarWithFallback,
-  type AvatarWithFallbackProps,
-} from './AvatarWithFallback';
+import { AvatarWithFallback, type AvatarWithFallbackProps } from './AvatarWithFallback';
 
 describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   const props: AvatarWithFallbackProps = {
@@ -24,16 +21,12 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   });
 
   it('should render avatar - non-human user', () => {
-    const tree = renderWithProviders(
-      <AvatarWithFallback {...props} userType={'Organization'} />,
-    );
+    const tree = renderWithProviders(<AvatarWithFallback {...props} userType={'Organization'} />);
     expect(tree.container).toMatchSnapshot();
   });
 
   it('renders the fallback icon when no src url - human user', () => {
-    const tree = renderWithProviders(
-      <AvatarWithFallback {...props} src={undefined} />,
-    );
+    const tree = renderWithProviders(<AvatarWithFallback {...props} src={undefined} />);
 
     expect(tree.container).toMatchSnapshot();
   });

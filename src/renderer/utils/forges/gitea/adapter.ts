@@ -29,12 +29,9 @@ const GITEA_DOCS_URL = 'https://docs.gitea.com/development/api-usage' as Link;
 const capabilities: ForgeCapabilities = {
   markAsDone: () => false,
   unsubscribeThread: () => false,
-  answeredDiscussion: () => false,
 };
 
-async function fetchAuthenticatedUser(
-  account: Account,
-): Promise<RefreshAccountData> {
+async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
   const user = await fetchGiteaAuthenticatedUser(account);
   return {
     user: {
@@ -59,9 +56,7 @@ async function listNotifications(
 // Commit) which Gitea's transform produces in the same vocabulary, so the
 // icon/color/url logic applies cleanly. Routing it through the adapter keeps
 // shared formatting code (`formatters.ts`, `url.ts`) forge-agnostic.
-function getDisplayHelpers(
-  notification: RawGitifyNotification,
-): NotificationDisplayHelpers {
+function getDisplayHelpers(notification: RawGitifyNotification): NotificationDisplayHelpers {
   const handler = createNotificationHandler(notification);
   return {
     iconType: handler.iconType(notification),
@@ -74,14 +69,14 @@ function getDisplayHelpers(
 export const giteaAdapter: ForgeAdapter = {
   id: 'gitea',
   displayName: 'Gitea',
+  tagline: 'Gitea, Forgejo & Codeberg',
   icon: ServerIcon,
   capabilities,
 
   fetchAuthenticatedUser,
   listNotifications,
 
-  markThreadAsRead: (account, threadId) =>
-    patchGiteaNotificationThread(account, threadId, 'read'),
+  markThreadAsRead: (account, threadId) => patchGiteaNotificationThread(account, threadId, 'read'),
   // Gitea has no "done" state — capability `markAsDone(account)` returns
   // false so the UI gates this off. Throwing rather than silently aliasing to
   // markThreadAsRead surfaces any caller that bypasses the capability check.
@@ -105,9 +100,13 @@ export const giteaAdapter: ForgeAdapter = {
   validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
     `https://${hostname}/user/settings/applications` as Link,
-  getDeveloperSettingsUrl: (account: Account) =>
+  getAccountSettingsUrl: (account: Account) =>
     `https://${account.hostname}/user/settings/applications` as Link,
   documentationUrl: GITEA_DOCS_URL,
+  // Gitea only supports PAT today, so every method falls through to the key
+  // icon. Adding device-flow/OAuth support later means returning their icons
+  // for those branches.
+  getAuthMethodIcon: () => KeyIcon,
 
   loginMethods: [
     {
@@ -119,9 +118,6 @@ export const giteaAdapter: ForgeAdapter = {
     },
   ],
 
-  // Gitea has no GitHub-style OAuth scope concept; treat any token as fully
-  // scoped so the recommended/alternate UI prompts never surface for Gitea.
-  hasRequiredScopes: () => true,
-  hasRecommendedScopes: () => true,
-  hasAlternateScopes: () => true,
+  // Gitea has no GitHub-style OAuth scope concept, so `oauthScopes` is
+  // omitted. Callers skip scopes UI when this is undefined.
 };

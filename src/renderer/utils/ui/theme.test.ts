@@ -23,43 +23,27 @@ describe('renderer/utils/theme.ts', () => {
 
   it('should map theme mode to github primer color scheme', () => {
     expect(mapThemeModeToColorScheme(Theme.LIGHT, false)).toBe('light');
-    expect(mapThemeModeToColorScheme(Theme.LIGHT, true)).toBe(
-      'light_high_contrast',
-    );
-    expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND, false)).toBe(
-      'light_colorblind',
-    );
+    expect(mapThemeModeToColorScheme(Theme.LIGHT, true)).toBe('light_high_contrast');
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND, false)).toBe('light_colorblind');
     expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND, true)).toBe(
       'light_colorblind_high_contrast',
     );
-    expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA, false)).toBe(
-      'light_tritanopia',
-    );
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA, false)).toBe('light_tritanopia');
     expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA, true)).toBe(
       'light_tritanopia_high_contrast',
     );
     expect(mapThemeModeToColorScheme(Theme.DARK, false)).toBe('dark');
-    expect(mapThemeModeToColorScheme(Theme.DARK, true)).toBe(
-      'dark_high_contrast',
-    );
-    expect(mapThemeModeToColorScheme(Theme.DARK_COLORBLIND, false)).toBe(
-      'dark_colorblind',
-    );
+    expect(mapThemeModeToColorScheme(Theme.DARK, true)).toBe('dark_high_contrast');
+    expect(mapThemeModeToColorScheme(Theme.DARK_COLORBLIND, false)).toBe('dark_colorblind');
     expect(mapThemeModeToColorScheme(Theme.DARK_COLORBLIND, true)).toBe(
       'dark_colorblind_high_contrast',
     );
-    expect(mapThemeModeToColorScheme(Theme.DARK_TRITANOPIA, false)).toBe(
-      'dark_tritanopia',
-    );
+    expect(mapThemeModeToColorScheme(Theme.DARK_TRITANOPIA, false)).toBe('dark_tritanopia');
     expect(mapThemeModeToColorScheme(Theme.DARK_TRITANOPIA, true)).toBe(
       'dark_tritanopia_high_contrast',
     );
-    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED, false)).toBe(
-      'dark_dimmed',
-    );
-    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED, true)).toBe(
-      'dark_dimmed_high_contrast',
-    );
+    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED, false)).toBe('dark_dimmed');
+    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED, true)).toBe('dark_dimmed_high_contrast');
     expect(mapThemeModeToColorScheme(Theme.SYSTEM, false)).toBe(null);
     expect(mapThemeModeToColorScheme(Theme.SYSTEM, true)).toBe(null);
   });

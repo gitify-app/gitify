@@ -28,19 +28,13 @@ type DeindexKeys<T> = {
   [K in keyof T as K extends `${infer B}INDEX` ? B : never]: T[K];
 };
 
-type FetchBatchMergedTemplateIndexedVariables = Pick<
-  TemplateVariables,
-  IndexedKeys
->;
+type FetchBatchMergedTemplateIndexedVariables = Pick<TemplateVariables, IndexedKeys>;
 
 // Base-key form (e.g., `owner`, `name`, `number`, ...) without `INDEX` suffix
 export type FetchBatchMergedTemplateIndexedBaseVariables =
   DeindexKeys<FetchBatchMergedTemplateIndexedVariables>;
 
-export type FetchBatchMergedTemplateNonIndexedVariables = Pick<
-  TemplateVariables,
-  NonIndexedKeys
->;
+export type FetchBatchMergedTemplateNonIndexedVariables = Pick<TemplateVariables, NonIndexedKeys>;
 
 export class MergeQueryBuilder {
   private readonly selections: string[] = [];
@@ -49,17 +43,17 @@ export class MergeQueryBuilder {
   private readonly fragments: FragmentInfo[] = [];
 
   // Precomputed, invariant template-derived data (computed once per module load)
-  private static readonly TEMPLATE_FRAGMENTS = extractNonQueryFragments(
-    TemplateDocument as any,
-  );
+  private static readonly TEMPLATE_FRAGMENTS = extractNonQueryFragments(TemplateDocument as any);
   private static readonly TEMPLATE_QUERY_INNER = (() => {
     const queryFrags = extractQueryFragments(TemplateDocument as any);
     return queryFrags.length ? queryFrags[0].inner : null;
   })();
-  private static readonly TEMPLATE_NON_INDEXED_DEFS =
-    extractNonIndexedVariableDefinitions(TemplateDocument as any);
-  private static readonly TEMPLATE_INDEXED_VAR_DEFS =
-    extractIndexedVariableDefinitions(TemplateDocument as any);
+  private static readonly TEMPLATE_NON_INDEXED_DEFS = extractNonIndexedVariableDefinitions(
+    TemplateDocument as any,
+  );
+  private static readonly TEMPLATE_INDEXED_VAR_DEFS = extractIndexedVariableDefinitions(
+    TemplateDocument as any,
+  );
 
   constructor() {
     // Add precomputed static fragments
@@ -100,9 +94,7 @@ export class MergeQueryBuilder {
   /**
    * Set shared (non-indexed) variables
    */
-  setSharedVariables(
-    values: FetchBatchMergedTemplateNonIndexedVariables,
-  ): this {
+  setSharedVariables(values: FetchBatchMergedTemplateNonIndexedVariables): this {
     for (const [name, value] of Object.entries(values)) {
       this.setVariableValue(name, value as VariableValue);
     }
@@ -136,13 +128,14 @@ export class MergeQueryBuilder {
     );
     this.addSelection(selection);
 
-    const renamedIndexVarDefs: VariableDef[] =
-      MergeQueryBuilder.TEMPLATE_INDEXED_VAR_DEFS.map((varDef) => {
+    const renamedIndexVarDefs: VariableDef[] = MergeQueryBuilder.TEMPLATE_INDEXED_VAR_DEFS.map(
+      (varDef) => {
         return {
           name: varDef.name.replace('INDEX', `${index}`),
           type: varDef.type,
         };
-      });
+      },
+    );
 
     this.addVariableDefinitions(renamedIndexVarDefs);
 

@@ -14,14 +14,7 @@ import {
   StarIcon,
   SyncIcon,
 } from '@primer/octicons-react';
-import {
-  ActionList,
-  ActionMenu,
-  Button,
-  IconButton,
-  Stack,
-  Text,
-} from '@primer/react';
+import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../hooks/useAppContext';
 
@@ -39,25 +32,18 @@ import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 import { toError } from '../utils/core/logger';
 import { saveState } from '../utils/core/storage';
-import {
-  openAccountProfile,
-  openDeveloperSettings,
-  openHost,
-} from '../utils/system/links';
-import { getAuthMethodIcon, getPlatformIcon } from '../utils/ui/icons';
+import { getAdapter } from '../utils/forges/registry';
+import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
+import { getPlatformIcon } from '../utils/ui/icons';
 
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
 
   const { auth, settings, logoutFromAccount, notifications } = useAppContext();
 
-  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
-    {},
-  );
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
 
-  const [refreshErrorStates, setRefreshErrorStates] = useState<
-    Record<string, GitifyError>
-  >({});
+  const [refreshErrorStates, setRefreshErrorStates] = useState<Record<string, GitifyError>>({});
 
   const logoutAccount = useCallback(
     (account: Account) => {
@@ -106,7 +92,10 @@ export const AccountsRoute: FC = () => {
   };
 
   const loginWithGitHub = async () => {
-    return navigate('/login-device-flow', { replace: true });
+    return navigate('/login-device-flow', {
+      replace: true,
+      state: { forge: 'github' as const },
+    });
   };
 
   const loginWithPersonalAccessToken = () => {
@@ -128,15 +117,17 @@ export const AccountsRoute: FC = () => {
   };
 
   const loginWithOAuthApp = () => {
-    return navigate('/login-oauth-app', { replace: true });
+    return navigate('/login-oauth-app', {
+      replace: true,
+      state: { forge: 'github' as const },
+    });
   };
 
   const getAccountError = (account: Account) => {
     const accountUUID = getAccountUUID(account);
     return (
       refreshErrorStates[accountUUID] ??
-      notifications.find((n) => getAccountUUID(n.account) === accountUUID)
-        ?.error ??
+      notifications.find((n) => getAccountUUID(n.account) === accountUUID)?.error ??
       null
     );
   };
@@ -169,17 +160,14 @@ export const AccountsRoute: FC = () => {
 
       <Contents>
         {auth.accounts.map((account, i) => {
-          const AuthMethodIcon = getAuthMethodIcon(account.method);
+          const AuthMethodIcon = getAdapter(account).getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);
           const accountError = getAccountError(account);
           const hasBadCredentials = accountError === Errors.BAD_CREDENTIALS;
 
           return (
-            <div
-              className="rounded-md p-2 mb-4 bg-gitify-accounts"
-              key={accountUUID}
-            >
+            <div className="rounded-md p-2 mb-4 bg-gitify-accounts" key={accountUUID}>
               <Stack align="stretch" direction="vertical">
                 <Stack align="start" direction="horizontal">
                   <Button
@@ -196,11 +184,7 @@ export const AccountsRoute: FC = () => {
                   </Button>
                 </Stack>
 
-                <Stack
-                  align="start"
-                  direction="horizontal"
-                  justify="space-between"
-                >
+                <Stack align="start" direction="horizontal" justify="space-between">
                   <div className="pl-2 pb-2 text-xs">
                     <Stack direction="vertical" gap="condensed">
                       <Stack
@@ -232,7 +216,7 @@ export const AccountsRoute: FC = () => {
                         data-testid="account-developer-settings"
                         direction="horizontal"
                         gap="condensed"
-                        onClick={() => openDeveloperSettings(account)}
+                        onClick={() => openAccountSettings(account)}
                         title="Open developer settings ↗"
                       >
                         {AuthMethodIcon && <AuthMethodIcon />}
@@ -246,7 +230,7 @@ export const AccountsRoute: FC = () => {
                           data-testid="account-bad-credentials"
                           direction="horizontal"
                           gap="condensed"
-                          onClick={() => openDeveloperSettings(account)}
+                          onClick={() => openAccountSettings(account)}
                           title="Open developer settings ↗"
                         >
                           <AlertFillIcon />
@@ -266,7 +250,7 @@ export const AccountsRoute: FC = () => {
                       variant={i === 0 ? 'primary' : 'default'}
                     />
 
-                    {!hasBadCredentials && (
+                    {!hasBadCredentials && getAdapter(account).oauthScopes && (
                       <IconButton
                         aria-label={`View scopes for ${account.user?.login}`}
                         data-testid="account-view-scopes"
@@ -288,8 +272,7 @@ export const AccountsRoute: FC = () => {
                         }
                         size="small"
                         variant={
-                          !hasRecommendedScopes(account) &&
-                          !hasAlternateScopes(account)
+                          !hasRecommendedScopes(account) && !hasAlternateScopes(account)
                             ? 'danger'
                             : 'default'
                         }
@@ -342,10 +325,7 @@ export const AccountsRoute: FC = () => {
 
           <ActionMenu.Overlay width="medium">
             <ActionList>
-              <ActionList.Item
-                data-testid="account-add-github"
-                onSelect={() => loginWithGitHub()}
-              >
+              <ActionList.Item data-testid="account-add-github" onSelect={() => loginWithGitHub()}>
                 <ActionList.LeadingVisual>
                   <MarkGithubIcon />
                 </ActionList.LeadingVisual>

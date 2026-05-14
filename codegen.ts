@@ -3,23 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const githubConfig: CodegenConfig['generates'][string] | null = process.env
-  .GITHUB_TOKEN
-  ? {
-      plugins: ['typescript-operations', 'typed-document-node'],
-      config: {
-        documentMode: 'string',
-        scalars: {
-          DateTime: 'string',
-          URI: '../../../../../types#Link',
-        },
-        useTypeImports: true,
-      },
-    }
-  : null;
-
-if (!githubConfig) {
-  // biome-ignore lint/suspicious/noConsole: CLI script output
+if (!process.env.GITHUB_TOKEN) {
+  // oxlint-disable-next-line no-console -- CLI script output
   console.warn(
     '\x1b[33m⚠ GITHUB_TOKEN is not set. Skipping GitHub GraphQL codegen.\n' +
       '  To generate updated GitHub types, create a .env file with a valid GitHub PAT.\n' +

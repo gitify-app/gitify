@@ -18,24 +18,14 @@ export interface RadioGroupProps {
 
 export const RadioGroup: FC<RadioGroupProps> = (props: RadioGroupProps) => {
   return (
-    <Stack
-      align="center"
-      className="text-sm"
-      direction="horizontal"
-      gap="condensed"
-    >
+    <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
       <FieldLabel label={props.label} name={props.name} />
 
       {props.options.map((item) => {
         const name = `radio-${props.name}-${item.value.toLowerCase()}`;
 
         return (
-          <Stack
-            align="center"
-            direction="horizontal"
-            gap="condensed"
-            key={name}
-          >
+          <Stack align="center" direction="horizontal" gap="condensed" key={name}>
             <input
               checked={item.value === props.value}
               className="size-4 cursor-pointer"
@@ -51,9 +41,7 @@ export const RadioGroup: FC<RadioGroupProps> = (props: RadioGroupProps) => {
         );
       })}
 
-      {props.tooltip && (
-        <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
-      )}
+      {props.tooltip && <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />}
     </Stack>
   );
 };

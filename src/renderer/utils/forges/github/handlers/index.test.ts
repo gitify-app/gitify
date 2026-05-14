@@ -34,13 +34,14 @@ describe('renderer/utils/notifications/handlers/index.ts', () => {
       WorkflowRun: workflowRunHandler,
     } satisfies Record<SubjectType, NotificationTypeHandler>;
 
-    it.each(
-      Object.entries(cases) as Array<[SubjectType, NotificationTypeHandler]>,
-    )('returns expected handler instance for %s', (type, expected) => {
-      const notification = mockPartialGitifyNotification({ type });
-      const handler = createNotificationHandler(notification);
-      expect(handler).toBe(expected);
-    });
+    it.each(Object.entries(cases) as Array<[SubjectType, NotificationTypeHandler]>)(
+      'returns expected handler instance for %s',
+      (type, expected) => {
+        const notification = mockPartialGitifyNotification({ type });
+        const handler = createNotificationHandler(notification);
+        expect(handler).toBe(expected);
+      },
+    );
 
     it('falls back to default handler for unknown type', () => {
       const notification = mockPartialGitifyNotification({

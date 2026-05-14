@@ -1,13 +1,7 @@
 import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
-import {
-  CheckIcon,
-  RocketIcon,
-  SkipIcon,
-  StopIcon,
-  XIcon,
-} from '@primer/octicons-react';
+import { CheckIcon, RocketIcon, SkipIcon, StopIcon, XIcon } from '@primer/octicons-react';
 
 import {
   type GitifyCheckSuiteStatus,
@@ -96,23 +90,18 @@ export function getCheckSuiteAttributes(
     return null;
   }
 
-  const { workflowName, attemptNumber, statusDisplayName, branchName } =
-    match.groups;
+  const { workflowName, attemptNumber, statusDisplayName, branchName } = match.groups;
 
   return {
     workflowName,
-    attemptNumber: attemptNumber
-      ? Number.parseInt(attemptNumber, 10)
-      : undefined,
+    attemptNumber: attemptNumber ? Number.parseInt(attemptNumber, 10) : undefined,
     status: getCheckSuiteStatus(statusDisplayName),
     statusDisplayName,
     branchName,
   };
 }
 
-function getCheckSuiteStatus(
-  statusDisplayName: string,
-): GitifyCheckSuiteStatus | undefined {
+function getCheckSuiteStatus(statusDisplayName: string): GitifyCheckSuiteStatus | undefined {
   switch (statusDisplayName) {
     case 'cancelled':
       return 'CANCELLED';
@@ -134,9 +123,7 @@ function getCheckSuiteUrl(notification: GitifyNotification): Link {
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
 
   if (checkSuiteAttributes?.workflowName) {
-    filters.push(
-      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`,
-    );
+    filters.push(`workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`);
   }
 
   if (checkSuiteAttributes?.status) {

@@ -17,10 +17,7 @@ import {
   type TraySettingsState,
 } from '../types';
 
-import {
-  mockGitHubCloudAccount,
-  mockGitHubEnterpriseServerAccount,
-} from './account-mocks';
+import { mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount } from './account-mocks';
 
 export const mockAuth: AuthState = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
@@ -65,6 +62,7 @@ const mockSystemSettings: SystemSettingsState = {
   playSound: true,
   notificationVolume: 20 as Percentage,
   openAtStartup: false,
+  keepWindowOnBlur: false,
 };
 
 export const mockSettings: SettingsState = {

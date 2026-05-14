@@ -96,14 +96,11 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       type: 'Commit',
     });
 
-    expect(commitHandler.iconType(mockNotification).displayName).toBe(
-      'GitCommitIcon',
-    );
+    expect(commitHandler.iconType(mockNotification).displayName).toBe('GitCommitIcon');
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       commitHandler.defaultUrl({

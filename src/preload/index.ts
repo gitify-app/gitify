@@ -32,8 +32,7 @@ export const api = {
    * @param value - The plaintext string to encrypt.
    * @returns A promise resolving to the encrypted string.
    */
-  encryptValue: (value: string) =>
-    invokeMainEvent(EVENTS.SAFE_STORAGE_ENCRYPT, value),
+  encryptValue: (value: string) => invokeMainEvent(EVENTS.SAFE_STORAGE_ENCRYPT, value),
 
   /**
    * Decrypt an encrypted string using Electron's safe storage.
@@ -41,8 +40,7 @@ export const api = {
    * @param value - The encrypted string to decrypt.
    * @returns A promise resolving to the plaintext string.
    */
-  decryptValue: (value: string) =>
-    invokeMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, value),
+  decryptValue: (value: string) => invokeMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, value),
 
   /**
    * Enable or disable launching the application at system login.
@@ -54,6 +52,16 @@ export const api = {
       openAtLogin: value,
       openAsHidden: value,
     }),
+
+  /**
+   * Enable or disable keeping the window open when it loses focus.
+   *
+   * Implemented by toggling the window's `alwaysOnTop` flag, which the
+   * `menubar` library uses to short-circuit its blur-driven hide.
+   *
+   * @param value - `true` to keep the window open on blur, `false` to hide.
+   */
+  setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
 
   /**
    * Apply the global keyboard shortcut for toggling the app window visibility.
@@ -89,16 +97,14 @@ export const api = {
      *
      * @param value - `true` to use the alternate idle icon, `false` for the default.
      */
-    useAlternateIdleIcon: (value: boolean) =>
-      sendMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, value),
+    useAlternateIdleIcon: (value: boolean) => sendMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, value),
 
     /**
      * Switch the tray icon to an "active" variant when there are unread notifications.
      *
      * @param value - `true` to use the unread-active icon, `false` for the default.
      */
-    useUnreadActiveIcon: (value: boolean) =>
-      sendMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, value),
+    useUnreadActiveIcon: (value: boolean) => sendMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, value),
   },
 
   /**
@@ -225,9 +231,6 @@ export const api = {
 try {
   contextBridge.exposeInMainWorld('gitify', api);
 } catch (error) {
-  // biome-ignore lint/suspicious/noConsole: preload environment is strictly sandboxed
-  console.error(
-    '[preload] Failed to expose Gitify Bridge API to renderer',
-    error,
-  );
+  // oxlint-disable-next-line no-console -- preload environment is strictly sandboxed
+  console.error('[preload] Failed to expose Gitify Bridge API to renderer', error);
 }

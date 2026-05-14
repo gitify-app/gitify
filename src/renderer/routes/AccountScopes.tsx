@@ -1,11 +1,7 @@
 import type { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import {
-  AlertFillIcon,
-  LinkExternalIcon,
-  ShieldCheckIcon,
-} from '@primer/octicons-react';
+import { AlertFillIcon, LinkExternalIcon, ShieldCheckIcon } from '@primer/octicons-react';
 import { Button, Label, Stack, Text } from '@primer/react';
 
 import { Constants, OAUTH_SCOPE } from '../constants';
@@ -24,7 +20,7 @@ import {
   getRequiredScopeNames,
   hasRequiredScopes,
 } from '../utils/auth/scopes';
-import { openDeveloperSettings } from '../utils/system/links';
+import { openAccountSettings } from '../utils/system/links';
 
 interface LocationState {
   account: Account;
@@ -40,8 +36,7 @@ export const AccountScopesRoute: FC = () => {
   const hasRequired = scopesLoaded && hasRequiredScopes(account);
   const repoGranted = scopes.includes(OAUTH_SCOPE.REPO.name);
   const publicRepoGranted = scopes.includes(OAUTH_SCOPE.PUBLIC_REPO.name);
-  const hasDetailedNotifications =
-    scopesLoaded && (repoGranted || publicRepoGranted);
+  const hasDetailedNotifications = scopesLoaded && (repoGranted || publicRepoGranted);
 
   // Scopes that don't belong to any known tier
   const allKnownNames = new Set<string>([
@@ -82,30 +77,26 @@ export const AccountScopesRoute: FC = () => {
                   <Text>Required</Text>
                 </Stack>
 
-                {Constants.OAUTH_SCOPES.REQUIRED.map(
-                  ({ name, description }) => {
-                    const granted = scopes.includes(name);
-                    return (
-                      <Stack
-                        align="center"
-                        className="gitify-scope-row"
-                        data-testid="account-scopes-required-scope"
-                        direction="horizontal"
-                        justify="space-between"
-                        key={name}
-                        padding="condensed"
-                      >
-                        <Stack direction="vertical" gap="none">
-                          <Text className="text-xs font-mono">{name}</Text>
-                          <Text className="text-xs opacity-60">
-                            {description}
-                          </Text>
-                        </Stack>
-                        <ScopeStatusIcon granted={granted} withTestId />
+                {Constants.OAUTH_SCOPES.REQUIRED.map(({ name, description }) => {
+                  const granted = scopes.includes(name);
+                  return (
+                    <Stack
+                      align="center"
+                      className="gitify-scope-row"
+                      data-testid="account-scopes-required-scope"
+                      direction="horizontal"
+                      justify="space-between"
+                      key={name}
+                      padding="condensed"
+                    >
+                      <Stack direction="vertical" gap="none">
+                        <Text className="text-xs font-mono">{name}</Text>
+                        <Text className="text-xs opacity-60">{description}</Text>
                       </Stack>
-                    );
-                  },
-                )}
+                      <ScopeStatusIcon granted={granted} withTestId />
+                    </Stack>
+                  );
+                })}
               </Stack>
 
               <Stack direction="vertical" gap="condensed">
@@ -115,10 +106,7 @@ export const AccountScopesRoute: FC = () => {
                   direction="horizontal"
                   gap="condensed"
                 >
-                  <ScopeStatusIcon
-                    granted={hasDetailedNotifications}
-                    size={12}
-                  />
+                  <ScopeStatusIcon granted={hasDetailedNotifications} size={12} />
                   <Text>Detailed Notifications</Text>
                 </Stack>
 
@@ -132,12 +120,8 @@ export const AccountScopesRoute: FC = () => {
                   padding="condensed"
                 >
                   <Stack direction="vertical" gap="none">
-                    <Text className="text-xs font-mono">
-                      {OAUTH_SCOPE.REPO.name}
-                    </Text>
-                    <Text className="text-xs opacity-60">
-                      {OAUTH_SCOPE.REPO.description}
-                    </Text>
+                    <Text className="text-xs font-mono">{OAUTH_SCOPE.REPO.name}</Text>
+                    <Text className="text-xs opacity-60">{OAUTH_SCOPE.REPO.description}</Text>
                   </Stack>
                   <ScopeStatusIcon granted={repoGranted} withTestId />
                 </Stack>
@@ -152,9 +136,7 @@ export const AccountScopesRoute: FC = () => {
                   padding="condensed"
                 >
                   <Stack direction="vertical" gap="none">
-                    <Text className="text-xs font-mono">
-                      {OAUTH_SCOPE.PUBLIC_REPO.name}
-                    </Text>
+                    <Text className="text-xs font-mono">{OAUTH_SCOPE.PUBLIC_REPO.name}</Text>
                     <Text className="text-xs opacity-60">
                       {OAUTH_SCOPE.PUBLIC_REPO.description}
                     </Text>
@@ -204,7 +186,7 @@ export const AccountScopesRoute: FC = () => {
         <Button
           data-testid="account-scopes-manage-link"
           leadingVisual={LinkExternalIcon}
-          onClick={() => openDeveloperSettings(account)}
+          onClick={() => openAccountSettings(account)}
         >
           Developer settings
         </Button>

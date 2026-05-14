@@ -1,18 +1,7 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 
-import {
-  DeviceDesktopIcon,
-  PencilIcon,
-  SyncIcon,
-} from '@primer/octicons-react';
-import {
-  Banner,
-  Button,
-  ButtonGroup,
-  IconButton,
-  Stack,
-  Text,
-} from '@primer/react';
+import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
+import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -40,12 +29,8 @@ import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
 export const SystemSettings: FC = () => {
-  const {
-    settings,
-    updateSetting,
-    shortcutRegistrationError,
-    clearShortcutRegistrationError,
-  } = useAppContext();
+  const { settings, updateSetting, shortcutRegistrationError, clearShortcutRegistrationError } =
+    useAppContext();
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
@@ -108,16 +93,10 @@ export const SystemSettings: FC = () => {
     };
   }, [recordingShortcut, updateSetting, clearShortcutRegistrationError]);
 
-  const shortcutDisplay = formatAcceleratorForDisplay(
-    settings.openGitifyShortcut,
-    isMac,
-  );
+  const shortcutDisplay = formatAcceleratorForDisplay(settings.openGitifyShortcut, isMac);
 
   const hasLiveModifiers = liveModifierAccelerator.length > 0;
-  const liveModifierDisplay = formatAcceleratorForDisplay(
-    liveModifierAccelerator,
-    isMac,
-  );
+  const liveModifierDisplay = formatAcceleratorForDisplay(liveModifierAccelerator, isMac);
 
   return (
     <fieldset>
@@ -136,16 +115,14 @@ export const SystemSettings: FC = () => {
           ]}
           tooltip={
             <Stack direction="vertical" gap="condensed">
+              <Text>Controls the behavior of how external links should opened.</Text>
               <Text>
-                Controls the behavior of how external links should opened.
+                <Text as="strong">Foreground</Text> will open the link and bring the opened window
+                or browser to the front.
               </Text>
               <Text>
-                <Text as="strong">Foreground</Text> will open the link and bring
-                the opened window or browser to the front.
-              </Text>
-              <Text>
-                <Text as="strong">Background</Text> opens the link without
-                stealing focus from the current window.
+                <Text as="strong">Background</Text> opens the link without stealing focus from the
+                current window.
               </Text>
             </Stack>
           }
@@ -158,11 +135,7 @@ export const SystemSettings: FC = () => {
             description={
               <Stack direction="vertical" gap="condensed">
                 <Text>{shortcutRegistrationError}</Text>
-                <Button
-                  onClick={clearShortcutRegistrationError}
-                  size="small"
-                  variant="invisible"
-                >
+                <Button onClick={clearShortcutRegistrationError} size="small" variant="invisible">
                   Dismiss
                 </Button>
               </Stack>
@@ -173,24 +146,15 @@ export const SystemSettings: FC = () => {
           />
         )}
 
-        <Stack
-          align="center"
-          className="text-sm"
-          direction="horizontal"
-          gap="condensed"
-        >
+        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <Checkbox
             checked={settings.keyboardShortcut}
             label="Global shortcut"
             name="keyboardShortcut"
-            onChange={() =>
-              updateSetting('keyboardShortcut', !settings.keyboardShortcut)
-            }
+            onChange={() => updateSetting('keyboardShortcut', !settings.keyboardShortcut)}
             tooltip={
               <Stack direction="vertical" gap="condensed">
-                <Text>
-                  Global keyboard shortcut to show or hide {APPLICATION.NAME}.
-                </Text>
+                <Text>Global keyboard shortcut to show or hide {APPLICATION.NAME}.</Text>
                 <Text>Shortcuts must include:</Text>
                 <div className="pl-2">
                   <Stack direction="vertical" gap="none">
@@ -199,10 +163,7 @@ export const SystemSettings: FC = () => {
                       <Text>
                         Primary modifier:{' '}
                         <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay(
-                            'CommandOrControl',
-                            isMac,
-                          )}
+                          {formatAcceleratorForDisplay('CommandOrControl', isMac)}
                         </Text>
                       </Text>
                     </Stack>
@@ -257,17 +218,11 @@ export const SystemSettings: FC = () => {
             <IconButton
               aria-label="Reset global shortcut to default"
               data-testid="settings-shortcut-reset"
-              disabled={
-                settings.openGitifyShortcut ===
-                defaultSettings.openGitifyShortcut
-              }
+              disabled={settings.openGitifyShortcut === defaultSettings.openGitifyShortcut}
               icon={SyncIcon}
               onClick={() => {
                 clearShortcutRegistrationError();
-                updateSetting(
-                  'openGitifyShortcut',
-                  defaultSettings.openGitifyShortcut,
-                );
+                updateSetting('openGitifyShortcut', defaultSettings.openGitifyShortcut);
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -280,23 +235,13 @@ export const SystemSettings: FC = () => {
           checked={settings.showNotifications}
           label="Show system notifications"
           name="showNotifications"
-          onChange={() =>
-            updateSetting('showNotifications', !settings.showNotifications)
-          }
+          onChange={() => updateSetting('showNotifications', !settings.showNotifications)}
           tooltip={
-            <Text>
-              Display native operating system notifications for new unread
-              notifications.
-            </Text>
+            <Text>Display native operating system notifications for new unread notifications.</Text>
           }
         />
 
-        <Stack
-          align="center"
-          className="text-sm"
-          direction="horizontal"
-          gap="condensed"
-        >
+        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <Checkbox
             checked={settings.playSound}
             label="Play sound"
@@ -315,10 +260,7 @@ export const SystemSettings: FC = () => {
               disabled={!canDecreaseVolume(settings.notificationVolume)}
               icon={VolumeDownIcon}
               onClick={() => {
-                updateSetting(
-                  'notificationVolume',
-                  decreaseVolume(settings.notificationVolume),
-                );
+                updateSetting('notificationVolume', decreaseVolume(settings.notificationVolume));
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -334,10 +276,7 @@ export const SystemSettings: FC = () => {
               disabled={!canIncreaseVolume(settings.notificationVolume)}
               icon={VolumeUpIcon}
               onClick={() => {
-                updateSetting(
-                  'notificationVolume',
-                  increaseVolume(settings.notificationVolume),
-                );
+                updateSetting('notificationVolume', increaseVolume(settings.notificationVolume));
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -348,10 +287,7 @@ export const SystemSettings: FC = () => {
               data-testid="settings-volume-reset"
               icon={SyncIcon}
               onClick={() => {
-                updateSetting(
-                  'notificationVolume',
-                  defaultSettings.notificationVolume,
-                );
+                updateSetting('notificationVolume', defaultSettings.notificationVolume);
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -361,15 +297,24 @@ export const SystemSettings: FC = () => {
         </Stack>
 
         <Checkbox
+          checked={settings.keepWindowOnBlur}
+          label="Keep window open when it loses focus"
+          name="keepWindowOnBlur"
+          onChange={() => updateSetting('keepWindowOnBlur', !settings.keepWindowOnBlur)}
+          tooltip={
+            <Text>
+              Prevent the {APPLICATION.NAME} window from automatically hiding when you click outside
+              it.
+            </Text>
+          }
+        />
+
+        <Checkbox
           checked={settings.openAtStartup}
           label="Open at startup"
           name="openAtStartup"
-          onChange={() =>
-            updateSetting('openAtStartup', !settings.openAtStartup)
-          }
-          tooltip={
-            <Text>Launch {APPLICATION.NAME} automatically at startup.</Text>
-          }
+          onChange={() => updateSetting('openAtStartup', !settings.openAtStartup)}
+          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
           visible={!window.gitify.platform.isLinux()}
         />
       </Stack>

@@ -3,20 +3,14 @@ import type { GitifyNotificationUser, Link } from '../../../../types';
 import type { AuthorFieldsFragment } from '../graphql/generated/graphql';
 
 // Author type from GraphQL or manually constructed
-type AuthorInput =
-  | AuthorFieldsFragment
-  | GitifyNotificationUser
-  | null
-  | undefined;
+type AuthorInput = AuthorFieldsFragment | GitifyNotificationUser | null | undefined;
 
 /**
  * Construct the notification subject user based on an order prioritized list of users
  * @param users array of users in order or priority
  * @returns the subject user
  */
-export function getNotificationAuthor(
-  users: AuthorInput[],
-): GitifyNotificationUser | undefined {
+export function getNotificationAuthor(users: AuthorInput[]): GitifyNotificationUser | undefined {
   for (const user of users) {
     if (user) {
       return {

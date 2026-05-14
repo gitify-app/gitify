@@ -5,7 +5,7 @@ import type { Menubar } from 'menubar';
 import type { Mock } from 'vitest';
 
 import { APPLICATION } from '../shared/constants';
-import { isMacOS } from '../shared/platform';
+import { isLinux, isMacOS } from '../shared/platform';
 
 import { resetApp } from './lifecycle/reset';
 import MenuBuilder from './menu';
@@ -54,6 +54,7 @@ vi.mock('./lifecycle/reset', () => ({
 }));
 
 vi.mock('../shared/platform', () => ({
+  isLinux: vi.fn(() => false),
   isMacOS: vi.fn(),
 }));
 
@@ -84,15 +85,22 @@ describe('main/menu.ts', () => {
   /** Helper: build menu & return template (first arg passed to buildFromTemplate) */
   const buildAndGetTemplate = () => {
     menuBuilder.buildMenu();
-    return (Menu.buildFromTemplate as Mock).mock.calls.slice(
-      -1,
-    )[0][0] as TemplateItem[];
+    return (Menu.buildFromTemplate as Mock).mock.calls.slice(-1)[0][0] as TemplateItem[];
   };
 
   beforeEach(() => {
+    vi.mocked(isLinux).mockReturnValue(false);
     vi.mocked(isMacOS).mockReturnValue(false);
     menuItemInstances.length = 0; // Clear tracked instances
-    menubar = { app: { quit: vi.fn() } } as unknown as Menubar;
+    menubar = {
+      app: { quit: vi.fn() },
+      showWindow: vi.fn(),
+      hideWindow: vi.fn(),
+      tray: {
+        isDestroyed: vi.fn(() => false),
+        setContextMenu: vi.fn(),
+      },
+    } as unknown as Menubar;
     menuBuilder = new MenuBuilder(menubar);
   });
 
@@ -109,14 +117,14 @@ describe('main/menu.ts', () => {
     it('should enable menu item', () => {
       menuBuilder.setCheckForUpdatesMenuEnabled(true);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['checkForUpdatesMenuItem'].enabled).toBe(true);
     });
 
     it('should disable menu item', () => {
       menuBuilder.setCheckForUpdatesMenuEnabled(false);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['checkForUpdatesMenuItem'].enabled).toBe(false);
     });
   });
@@ -134,14 +142,14 @@ describe('main/menu.ts', () => {
     it('should show menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(true);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(true);
     });
 
     it('should hide  menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(false);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(false);
     });
   });
@@ -159,14 +167,14 @@ describe('main/menu.ts', () => {
     it('should show menu item', () => {
       menuBuilder.setUpdateAvailableMenuVisibility(true);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(true);
     });
 
     it('should hide menu item', () => {
       menuBuilder.setUpdateAvailableMenuVisibility(false);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(false);
     });
   });
@@ -185,15 +193,80 @@ describe('main/menu.ts', () => {
     it('should show menu item', () => {
       menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(true);
     });
 
     it('should hide menu item', () => {
       menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
 
-      // biome-ignore lint/complexity/useLiteralKeys: This is a test
+      // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(false);
+    });
+  });
+
+  describe('windowVisibilityMenuItems', () => {
+    it('show item is visible by default; hide item is not', () => {
+      const showCfg = getMenuItemConfigByLabel(`Show ${APPLICATION.NAME}`);
+      const hideCfg = getMenuItemConfigByLabel(`Hide ${APPLICATION.NAME}`);
+
+      expect(showCfg?.visible).toBe(true);
+      expect(hideCfg?.visible).toBe(false);
+    });
+
+    it('setWindowVisibility(true) shows hide item, hides show item', () => {
+      menuBuilder.setWindowVisibility(true);
+
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['showWindowMenuItem'].visible).toBe(false);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['hideWindowMenuItem'].visible).toBe(true);
+    });
+
+    it('setWindowVisibility(false) shows show item, hides hide item', () => {
+      menuBuilder.setWindowVisibility(true);
+      menuBuilder.setWindowVisibility(false);
+
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['showWindowMenuItem'].visible).toBe(true);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['hideWindowMenuItem'].visible).toBe(false);
+    });
+
+    it('does not re-publish the menu on non-Linux platforms', () => {
+      menuBuilder.buildMenu();
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
+    });
+
+    it('re-publishes the menu over D-Bus on Linux', () => {
+      vi.mocked(isLinux).mockReturnValue(true);
+      const menu = {} as Electron.Menu;
+      (Menu.buildFromTemplate as Mock).mockReturnValueOnce(menu);
+      menuBuilder.buildMenu();
+
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).toHaveBeenCalledWith(menu);
+    });
+
+    it('skips re-publishing if buildMenu has not run yet', () => {
+      vi.mocked(isLinux).mockReturnValue(true);
+
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
+    });
+
+    it('skips re-publishing when the tray is destroyed', () => {
+      vi.mocked(isLinux).mockReturnValue(true);
+      menuBuilder.buildMenu();
+      (menubar.tray.isDestroyed as Mock).mockReturnValue(true);
+
+      menuBuilder.setWindowVisibility(true);
+
+      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
     });
   });
 
@@ -218,13 +291,10 @@ describe('main/menu.ts', () => {
 
     it('developer submenu click actions execute expected functions', () => {
       const template = buildAndGetTemplate();
-      const devEntry = template.find(
-        (item) => item?.label === 'Developer',
-      ) as TemplateItem;
+      const devEntry = template.find((item) => item?.label === 'Developer') as TemplateItem;
       expect(devEntry).toBeDefined();
       const submenu = devEntry.submenu ?? [];
-      const clickByLabel = (label: string) =>
-        submenu.find((i) => i.label === label)?.click?.();
+      const clickByLabel = (label: string) => submenu.find((i) => i.label === label)?.click?.();
 
       clickByLabel('Take Screenshot');
       expect(takeScreenshot).toHaveBeenCalledWith(menubar);
@@ -257,14 +327,22 @@ describe('main/menu.ts', () => {
       expect(menubar.app.quit).toHaveBeenCalled();
     });
 
+    it('show window menu item calls showWindow', () => {
+      const cfg = getMenuItemConfigByLabel(`Show ${APPLICATION.NAME}`);
+      cfg?.click?.();
+      expect(menubar.showWindow).toHaveBeenCalled();
+    });
+
+    it('hide window menu item calls hideWindow', () => {
+      const cfg = getMenuItemConfigByLabel(`Hide ${APPLICATION.NAME}`);
+      cfg?.click?.();
+      expect(menubar.hideWindow).toHaveBeenCalled();
+    });
+
     it('developer submenu includes expected static accelerators', () => {
       const template = buildAndGetTemplate();
-      const devEntry = template.find(
-        (item) => item?.label === 'Developer',
-      ) as TemplateItem;
-      const reloadItem = (devEntry.submenu ?? []).find(
-        (i) => i.role === 'reload',
-      );
+      const devEntry = template.find((item) => item?.label === 'Developer') as TemplateItem;
+      const reloadItem = (devEntry.submenu ?? []).find((i) => i.role === 'reload');
 
       expect(reloadItem?.accelerator).toBe('CommandOrControl+R');
     });
@@ -288,12 +366,8 @@ describe('main/menu.ts', () => {
       const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
         -1,
       )[0][0] as TemplateItem[];
-      const devEntry = template.find(
-        (i) => i?.label === 'Developer',
-      ) as TemplateItem;
-      const toggleItem = devEntry.submenu?.find(
-        (i) => i.role === 'toggleDevTools',
-      );
+      const devEntry = template.find((i) => i?.label === 'Developer') as TemplateItem;
+      const toggleItem = devEntry.submenu?.find((i) => i.role === 'toggleDevTools');
 
       expect(toggleItem?.accelerator).toBe('Alt+Cmd+I');
     });
@@ -311,12 +385,8 @@ describe('main/menu.ts', () => {
       const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
         -1,
       )[0][0] as TemplateItem[];
-      const devEntry = template.find(
-        (i) => i?.label === 'Developer',
-      ) as TemplateItem;
-      const toggleItem = devEntry.submenu?.find(
-        (i) => i.role === 'toggleDevTools',
-      );
+      const devEntry = template.find((i) => i?.label === 'Developer') as TemplateItem;
+      const toggleItem = devEntry.submenu?.find((i) => i.role === 'toggleDevTools');
 
       expect(toggleItem?.accelerator).toBe('Ctrl+Shift+I');
     });

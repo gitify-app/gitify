@@ -17,15 +17,10 @@ import { loadState } from '../core/storage';
 export function openExternalLink(url: Link): void {
   // Load the state from local storage to avoid having to pass settings as a parameter
   const { settings } = loadState();
-  const openPreference = settings
-    ? settings.openLinks
-    : defaultSettings.openLinks;
+  const openPreference = settings ? settings.openLinks : defaultSettings.openLinks;
 
   if (url.toLowerCase().startsWith('https://')) {
-    window.gitify.openExternalLink(
-      url,
-      openPreference === OpenPreference.FOREGROUND,
-    );
+    window.gitify.openExternalLink(url, openPreference === OpenPreference.FOREGROUND);
   }
 }
 
@@ -57,9 +52,7 @@ export async function encryptValue(value: string): Promise<string> {
  *
  * @param value - The encrypted string to decrypt.
  */
-export async function decryptValue(
-  value: string,
-): Promise<ISafeStorageDecryptResult> {
+export async function decryptValue(value: string): Promise<ISafeStorageDecryptResult> {
   return await window.gitify.decryptValue(value);
 }
 
@@ -91,6 +84,15 @@ export function hideWindow(): void {
  */
 export function setAutoLaunch(value: boolean): void {
   window.gitify.setAutoLaunch(value);
+}
+
+/**
+ * Enables or disables keeping the window open when it loses focus.
+ *
+ * @param value - `true` to keep the window open on blur, `false` to hide.
+ */
+export function setKeepWindowOnBlur(value: boolean): void {
+  window.gitify.setKeepWindowOnBlur(value);
 }
 
 /**

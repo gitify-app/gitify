@@ -56,10 +56,7 @@ export type Percentage = Branded<number, 'Percentage'>;
 
 export type AccountUUID = Branded<string, 'AccountUUID'>;
 
-export type KeyboardAcceleratorShortcut = Branded<
-  string,
-  'KeyboardAcceleratorShortcut'
->;
+export type KeyboardAcceleratorShortcut = Branded<string, 'KeyboardAcceleratorShortcut'>;
 
 /** Code hosting provider for an account. New forges register themselves here. */
 export type Forge = 'github' | 'gitea' | 'bitbucket';
@@ -148,6 +145,7 @@ export interface SystemSettingsState {
   playSound: boolean;
   notificationVolume: Percentage;
   openAtStartup: boolean;
+  keepWindowOnBlur: boolean;
 }
 
 export interface AuthState {
@@ -547,9 +545,4 @@ export type SubjectType =
   | 'WorkflowRun'
   | 'BitbucketNotification';
 
-export type UserType =
-  | 'Bot'
-  | 'EnterpriseUserAccount'
-  | 'Mannequin'
-  | 'Organization'
-  | 'User';
+export type UserType = 'Bot' | 'EnterpriseUserAccount' | 'Mannequin' | 'Organization' | 'User';

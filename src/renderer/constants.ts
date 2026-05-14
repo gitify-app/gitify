@@ -47,16 +47,8 @@ export const Constants = {
   // ALTERNATE: lighter path — public repos only.
   OAUTH_SCOPES: {
     REQUIRED: [OAUTH_SCOPE.NOTIFICATIONS, OAUTH_SCOPE.READ_USER],
-    RECOMMENDED: [
-      OAUTH_SCOPE.NOTIFICATIONS,
-      OAUTH_SCOPE.READ_USER,
-      OAUTH_SCOPE.REPO,
-    ],
-    ALTERNATE: [
-      OAUTH_SCOPE.NOTIFICATIONS,
-      OAUTH_SCOPE.READ_USER,
-      OAUTH_SCOPE.PUBLIC_REPO,
-    ],
+    RECOMMENDED: [OAUTH_SCOPE.NOTIFICATIONS, OAUTH_SCOPE.READ_USER, OAUTH_SCOPE.REPO],
+    ALTERNATE: [OAUTH_SCOPE.NOTIFICATIONS, OAUTH_SCOPE.READ_USER, OAUTH_SCOPE.PUBLIC_REPO],
   },
 
   GITHUB_HOSTNAME: 'github.com' as Hostname,
@@ -68,7 +60,6 @@ export const Constants = {
 
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
-  GITHUB_API_MERGE_BATCH_SIZE: 100,
 
   // Emojis for different states and events
   EMOJIS: {

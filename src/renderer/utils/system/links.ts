@@ -12,7 +12,7 @@ import type {
 } from '../../types';
 
 import { getAdapter } from '../forges/registry';
-import { generateGitHubWebUrl } from '../notifications/url';
+import { generateNotificationWebUrl } from '../notifications/url';
 import { openExternalLink } from './comms';
 
 export function openGitifyReleaseNotes(version: string) {
@@ -21,19 +21,19 @@ export function openGitifyReleaseNotes(version: string) {
   );
 }
 
-export function openGitHubNotifications(hostname: Hostname) {
+export function openHostNotifications(hostname: Hostname) {
   const url = new URL(`https://${hostname}`);
   url.pathname = 'notifications';
   openExternalLink(url.toString() as Link);
 }
 
-export function openGitHubIssues(hostname: Hostname) {
+export function openHostIssues(hostname: Hostname) {
   const url = new URL(`https://${hostname}`);
   url.pathname = 'issues';
   openExternalLink(url.toString() as Link);
 }
 
-export function openGitHubPulls(hostname: Hostname) {
+export function openHostPulls(hostname: Hostname) {
   const url = new URL(`https://${hostname}`);
   url.pathname = 'pulls';
   openExternalLink(url.toString() as Link);
@@ -53,8 +53,8 @@ export function openHost(hostname: Hostname) {
   openExternalLink(`https://${hostname}` as Link);
 }
 
-export function openDeveloperSettings(account: Account) {
-  const url = getAdapter(account).getDeveloperSettingsUrl(account);
+export function openAccountSettings(account: Account) {
+  const url = getAdapter(account).getAccountSettingsUrl(account);
   openExternalLink(url);
 }
 
@@ -63,7 +63,7 @@ export function openRepository(repository: GitifyRepository) {
 }
 
 export async function openNotification(notification: GitifyNotification) {
-  const url = await generateGitHubWebUrl(notification);
+  const url = await generateNotificationWebUrl(notification);
   openExternalLink(url);
 }
 

@@ -23,26 +23,15 @@ describe('renderer/utils/notifications/filters/userType.ts', () => {
     } satisfies DeepPartial<GitifyNotification> as GitifyNotification;
 
     mockPartialNotification.subject.user!.type = 'User';
-    expect(
-      userTypeFilter.filterNotification(mockPartialNotification, 'User'),
-    ).toBe(true);
+    expect(userTypeFilter.filterNotification(mockPartialNotification, 'User')).toBe(true);
 
     mockPartialNotification.subject.user!.type = 'EnterpriseUserAccount';
-    expect(
-      userTypeFilter.filterNotification(mockPartialNotification, 'User'),
-    ).toBe(true);
+    expect(userTypeFilter.filterNotification(mockPartialNotification, 'User')).toBe(true);
 
     mockPartialNotification.subject.user!.type = 'Bot';
-    expect(
-      userTypeFilter.filterNotification(mockPartialNotification, 'Bot'),
-    ).toBe(true);
+    expect(userTypeFilter.filterNotification(mockPartialNotification, 'Bot')).toBe(true);
 
     mockPartialNotification.subject.user!.type = 'Organization';
-    expect(
-      userTypeFilter.filterNotification(
-        mockPartialNotification,
-        'Organization',
-      ),
-    ).toBe(true);
+    expect(userTypeFilter.filterNotification(mockPartialNotification, 'Organization')).toBe(true);
   });
 });

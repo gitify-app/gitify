@@ -90,11 +90,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
     await userEvent.click(screen.getByLabelText('Open'));
 
-    expect(updateFilterSpy).toHaveBeenCalledWith(
-      mockFilterSetting,
-      'open',
-      true,
-    );
+    expect(updateFilterSpy).toHaveBeenCalledWith(mockFilterSetting, 'open', true);
   });
 
   it('should be able to toggle filter value - some filters already set', async () => {
@@ -118,10 +114,6 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
     await userEvent.click(screen.getByLabelText('Closed'));
 
-    expect(updateFilterSpy).toHaveBeenCalledWith(
-      mockFilterSetting,
-      'closed',
-      true,
-    );
+    expect(updateFilterSpy).toHaveBeenCalledWith(mockFilterSetting, 'closed', true);
   });
 });

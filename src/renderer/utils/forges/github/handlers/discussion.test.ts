@@ -28,10 +28,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   });
 
   describe('enrich', () => {
-    const fetchDiscussionByNumberSpy = vi.spyOn(
-      apiClient,
-      'fetchDiscussionByNumber',
-    );
+    const fetchDiscussionByNumberSpy = vi.spyOn(apiClient, 'fetchDiscussionByNumber');
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock discussion',
@@ -50,10 +47,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
       } satisfies FetchDiscussionByNumberQuery);
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await discussionHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -66,8 +60,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         commentCount: 0,
         labels: [],
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -82,10 +75,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
       } satisfies FetchDiscussionByNumberQuery);
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await discussionHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -98,8 +88,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         commentCount: 0,
         labels: [],
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -117,10 +106,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
       } satisfies FetchDiscussionByNumberQuery);
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await discussionHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -133,8 +119,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         commentCount: 0,
         labels: [],
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -157,10 +142,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
       } satisfies FetchDiscussionByNumberQuery);
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await discussionHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -173,8 +155,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         commentCount: 0,
         labels: [{ name: 'enhancement', color: '0e8a16' }],
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -207,10 +188,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
       } satisfies FetchDiscussionByNumberQuery);
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await discussionHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -267,10 +245,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
       } satisfies FetchDiscussionByNumberQuery);
 
-      const result = await discussionHandler.enrich(
-        mockNotification,
-        mockSettings,
-      );
+      const result = await discussionHandler.enrich(mockNotification, mockSettings);
 
       expect(result).toEqual({
         number: 123,
@@ -301,18 +276,17 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       RESOLVED: 'DiscussionClosedIcon',
     } satisfies Record<GitifyDiscussionState, string>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>,
-    )('iconType for discussion with state %s', (discussionState, discussionIconType) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'Discussion',
-        state: discussionState,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>)(
+      'iconType for discussion with state %s',
+      (discussionState, discussionIconType) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'Discussion',
+          state: discussionState,
+        });
 
-      expect(discussionHandler.iconType(mockNotification).displayName).toBe(
-        discussionIconType,
-      );
-    });
+        expect(discussionHandler.iconType(mockNotification).displayName).toBe(discussionIconType);
+      },
+    );
   });
 
   describe('iconColor', () => {
@@ -325,23 +299,21 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
       RESOLVED: IconColor.PURPLE,
     } satisfies Record<GitifyDiscussionState, IconColor>;
 
-    it.each(
-      Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>,
-    )('iconColor for discussion with state %s', (discussionState, discussionIconColor) => {
-      const mockNotification = mockPartialGitifyNotification({
-        type: 'Discussion',
-        state: discussionState,
-      });
+    it.each(Object.entries(cases) as Array<[GitifyDiscussionState, IconColor]>)(
+      'iconColor for discussion with state %s',
+      (discussionState, discussionIconColor) => {
+        const mockNotification = mockPartialGitifyNotification({
+          type: 'Discussion',
+          state: discussionState,
+        });
 
-      expect(discussionHandler.iconColor(mockNotification)).toBe(
-        discussionIconColor,
-      );
-    });
+        expect(discussionHandler.iconColor(mockNotification)).toBe(discussionIconColor);
+      },
+    );
   });
 
   it('defaultUrl', () => {
-    const mockHtmlUrl =
-      'https://github.com/gitify-app/notifications-test' as Link;
+    const mockHtmlUrl = 'https://github.com/gitify-app/notifications-test' as Link;
 
     expect(
       discussionHandler.defaultUrl({

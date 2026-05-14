@@ -4,6 +4,7 @@ import type { Menubar } from 'menubar';
 import { APPLICATION } from '../../shared/constants';
 import { EVENTS } from '../../shared/events';
 import { logInfo, logWarn } from '../../shared/logger';
+import { isLinux } from '../../shared/platform';
 
 import { sendRendererEvent } from '../events';
 
@@ -27,9 +28,19 @@ export function initializeAppLifecycle(
 
     mb.tray.setIgnoreDoubleClickEvents(true);
 
-    mb.tray.on('right-click', (_event, bounds) => {
-      mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
-    });
+    if (isLinux()) {
+      // Linux trays go through libappindicator / StatusNotifierItem (D-Bus),
+      // where Electron only emits 'right-click' if no context menu is set.
+      // setContextMenu hands the menu to the host indicator so it renders
+      // natively on right-click. Don't use this on macOS — there
+      // setContextMenu intercepts left-click too and would break the
+      // menubar window toggle.
+      mb.tray.setContextMenu(contextMenu);
+    } else {
+      mb.tray.on('right-click', (_event, bounds) => {
+        mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
+      });
+    }
   });
 
   preventSecondInstance(mb, protocol);
@@ -43,11 +54,7 @@ export function initializeAppLifecycle(
  * @param url - The protocol URL to handle.
  * @param protocol - The custom protocol string to match.
  */
-export function handleProtocolURL(
-  mb: Menubar,
-  url: string,
-  protocol: string,
-): void {
+export function handleProtocolURL(mb: Menubar, url: string, protocol: string): void {
   if (url.startsWith(`${protocol}://`)) {
     logInfo('main:handleUrl', `forwarding URL ${url} to renderer process`);
     sendRendererEvent(mb, EVENTS.AUTH_CALLBACK, url);
@@ -71,10 +78,7 @@ function preventSecondInstance(mb: Menubar, protocol: string): void {
   }
 
   app.on('second-instance', (_event, commandLine) => {
-    logInfo(
-      'main:second-instance',
-      'Second instance was launched. Extracting command to forward',
-    );
+    logInfo('main:second-instance', 'Second instance was launched. Extracting command to forward');
 
     const url = commandLine.find((arg) => arg.startsWith(`${protocol}://`));
 

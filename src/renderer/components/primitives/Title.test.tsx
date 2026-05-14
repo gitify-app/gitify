@@ -6,9 +6,7 @@ import { Title } from './Title';
 
 describe('renderer/routes/components/primitives/Title.tsx', () => {
   it('should render the title - default size', async () => {
-    const { container } = renderWithProviders(
-      <Title icon={PersonFillIcon}>Legend</Title>,
-    );
+    const { container } = renderWithProviders(<Title icon={PersonFillIcon}>Legend</Title>);
 
     expect(container).toMatchSnapshot();
   });

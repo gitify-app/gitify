@@ -1,16 +1,13 @@
 import type { FC } from 'react';
 
 import {
-  AppsIcon,
   CheckIcon,
   CommentIcon,
   FeedPersonIcon,
   FileDiffIcon,
-  KeyIcon,
   MarkGithubIcon,
   type OcticonProps,
   OrganizationIcon,
-  PersonIcon,
   ServerIcon,
   ShieldCheckIcon,
 } from '@primer/octicons-react';
@@ -21,7 +18,7 @@ import {
   type PullRequestApprovalIcon,
   type UserType,
 } from '../../types';
-import type { AuthMethod, PlatformType } from '../auth/types';
+import type { PlatformType } from '../auth/types';
 
 export function getPullRequestReviewIcon(
   review: GitifyPullRequestReview,
@@ -60,20 +57,7 @@ export function getPullRequestReviewIcon(
   }
 }
 
-export function getAuthMethodIcon(method: AuthMethod): FC<OcticonProps> | null {
-  switch (method) {
-    case 'GitHub App':
-      return AppsIcon;
-    case 'OAuth App':
-      return PersonIcon;
-    default:
-      return KeyIcon;
-  }
-}
-
-export function getPlatformIcon(
-  platform: PlatformType,
-): FC<OcticonProps> | null {
+export function getPlatformIcon(platform: PlatformType): FC<OcticonProps> | null {
   switch (platform) {
     case 'Gitea':
       return ServerIcon;

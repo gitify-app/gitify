@@ -1,14 +1,16 @@
 # Gitify Contributing Guide
 
-Hi! We're really excited that you're interested in contributing to Gitify! 
+Hi! We're really excited that you're interested in contributing to Gitify!
 
 Before submitting your contribution, please read through the following guide.
 
 We also suggest you read the [Project Philosophy](#project-philosophy) in our documentation.
 
 ### Getting Started
+
 > [!TIP]
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
+>
 > ```shell
 > OAUTH_CLIENT_ID="123" pnpm build
 > ```
@@ -16,29 +18,33 @@ We also suggest you read the [Project Philosophy](#project-philosophy) in our do
 To get started:
 
 Clone the repository and install dependencies:
-  ```shell
-  pnpm install
-  ```
 
-Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token.  This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
+```shell
+pnpm install
+```
+
+Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token. This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
+
 ```shell
 GITHUB_TOKEN=<some personal access token>
 ```
 
 Start development mode (includes GraphQL codegen and hot module reload):
-  ```shell
-  pnpm dev
-  ```
+
+```shell
+pnpm dev
+```
 
 ### Tests
 
-There are two main checks:
-1. Linter & formatter with [Biome][biome-website]
-2. Unit tests with [Vitest][vitest-website]
+Tooling is unified through [Vite+][vite-plus-website], which bundles the linter (oxlint), formatter (oxfmt), test runner (Vitest), and dev/build pipeline (Vite).
 
 ```shell
-# Run biome to check linting and formatting
-pnpm lint:check
+# Run lint, format, and type checks
+pnpm check
+
+# Auto-fix formatting and lint issues
+pnpm check:fix
 
 # Run unit tests with coverage
 pnpm test
@@ -49,7 +55,7 @@ pnpm test -u
 
 ### Code Style & Conventions
 
-- We use [Biome][biome-website] for linting and formatting. Please run `pnpm lint:check` before submitting a PR.
+- Linting and formatting are configured in `vite.config.ts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
 - Follow existing file and folder naming conventions.
 - Keep commit messages clear and descriptive.
 
@@ -64,23 +70,29 @@ The release process is automated. Follow the steps below.
 1. **Verify features:** Ensure all features and fixes you want included in the release are merged into `main`.
 2. **Check dependencies:** Review the [Renovate Dependency Dashboard][github-dependency-dashboard] for any dependency updates you want to include.
 3. **Create a release branch:**
-  - Name your branch `release/vX.X.X` (e.g., `release/v1.2.3`).
-  - Run `pnpm version <new-version-number>` to **bump the version** in `package.json` and create a version commit/tag.
-  - Update `sonar.projectVersion` within `sonar-project.properties`
-  - Commit and push these changes.
-  - Open a Pull Request (PR) from your release branch. 
+
+- Name your branch `release/vX.X.X` (e.g., `release/v1.2.3`).
+- Run `pnpm version <new-version-number>` to **bump the version** in `package.json` and create a version commit/tag.
+- Update `sonar.projectVersion` within `sonar-project.properties`
+- Commit and push these changes.
+- Open a Pull Request (PR) from your release branch.
+
 4. **GitHub release:** GitHub Actions will automatically build, sign, and upload release assets to a new draft release with automated release notes.
 5. **Merge the release branch:** Once the PR is approved and checks pass, merge your release branch into `main`.
 6. **Publish the release:**
-  - Finalize the release notes in the draft release on GitHub.
-  - Confirm all assets are present and correct.
-  - Publish the release.
+
+- Finalize the release notes in the draft release on GitHub.
+- Confirm all assets are present and correct.
+- Publish the release.
+
 7. **Update milestones:**
-  - Edit the current [Milestone][github-milestones]:
-    - Add a link to the release notes in the description.
-    - Set the due date to the release date.
-    - Close the milestone.
-  - Create a [New Milestone][github-new-milestone] for the next release cycle.
+
+- Edit the current [Milestone][github-milestones]:
+  - Add a link to the release notes in the description.
+  - Set the due date to the release date.
+  - Close the milestone.
+- Create a [New Milestone][github-new-milestone] for the next release cycle.
+
 8. A new homebrew cask will be [automatically published][homebrew-cask-autobump-workflow] (workflow runs ~3 hours)
 
 ### Design Guidelines
@@ -105,16 +117,17 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 
 #### Things we won't do
 
-* Operating-system level features
-  * Do not disturb, including on schedules. https://github.com/gitify-app/gitify/issues/416#issuecomment-1746480130
-  * Persistent notifications like https://github.com/gitify-app/gitify/issues/281. e.g. macOS has Alerts, instead of Banners, which makes them persistent
-* Seeing past notifications. This is a tool for monitoring new notifications, not seeing old ones, which can be seen at https://github.com/notifications.
-* Specific UX/UI changes that add options and/or visual complexity for minor workflow improvements. e.g. https://github.com/gitify-app/gitify/issues/358, https://github.com/gitify-app/gitify/issues/411 and https://github.com/gitify-app/gitify/issues/979
-* UI for something that isn't core to Gitify, and/or can be trivially done another way. e.g. https://github.com/gitify-app/gitify/issues/476 and https://github.com/gitify-app/gitify/issues/221
-* Add a forge adapter without a designated maintainer who will own it long-term.
+- Operating-system level features
+  - Do not disturb, including on schedules. https://github.com/gitify-app/gitify/issues/416#issuecomment-1746480130
+  - Persistent notifications like https://github.com/gitify-app/gitify/issues/281. e.g. macOS has Alerts, instead of Banners, which makes them persistent
+- Seeing past notifications. This is a tool for monitoring new notifications, not seeing old ones, which can be seen at https://github.com/notifications.
+- Specific UX/UI changes that add options and/or visual complexity for minor workflow improvements. e.g. https://github.com/gitify-app/gitify/issues/358, https://github.com/gitify-app/gitify/issues/411 and https://github.com/gitify-app/gitify/issues/979
+- UI for something that isn't core to Gitify, and/or can be trivially done another way. e.g. https://github.com/gitify-app/gitify/issues/476 and https://github.com/gitify-app/gitify/issues/221
+- Add a forge adapter without a designated maintainer who will own it long-term.
 
 <!-- LINK LABELS -->
-[biome-website]: https://biomejs.dev/
+
+[vite-plus-website]: https://viteplus.dev/
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
 [github-issues]: https://github.com/setchy/gitify/issues
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
@@ -123,4 +136,3 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 [github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
 [vitest-website]: https://vitest.dev/
-

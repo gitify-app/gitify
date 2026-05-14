@@ -23,15 +23,12 @@ export const TraySettings: FC = () => {
           label="Show notification count"
           name="showNotificationsCountInTray"
           onChange={() =>
-            updateSetting(
-              'showNotificationsCountInTray',
-              !settings.showNotificationsCountInTray,
-            )
+            updateSetting('showNotificationsCountInTray', !settings.showNotificationsCountInTray)
           }
           tooltip={
             <Text>
-              Show the unread notification count next to the tray icon. Useful
-              for a quick glance at unread activity.
+              Show the unread notification count next to the tray icon. Useful for a quick glance at
+              unread activity.
             </Text>
           }
           visible={window.gitify.platform.isMacOS()}
@@ -41,15 +38,10 @@ export const TraySettings: FC = () => {
           checked={settings.useUnreadActiveIcon}
           label="Highlight unread notifications"
           name="useUnreadActiveIcon"
-          onChange={() =>
-            updateSetting('useUnreadActiveIcon', !settings.useUnreadActiveIcon)
-          }
+          onChange={() => updateSetting('useUnreadActiveIcon', !settings.useUnreadActiveIcon)}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>
-                Use a green {APPLICATION.NAME} logo when there are unread
-                notifications.
-              </Text>
+              <Text>Use a green {APPLICATION.NAME} logo when there are unread notifications.</Text>
             </Stack>
           }
         />
@@ -58,21 +50,15 @@ export const TraySettings: FC = () => {
           checked={settings.useAlternateIdleIcon}
           label="Use alternate idle icon"
           name="useAlternateIdleIcon"
-          onChange={() =>
-            updateSetting(
-              'useAlternateIdleIcon',
-              !settings.useAlternateIdleIcon,
-            )
-          }
+          onChange={() => updateSetting('useAlternateIdleIcon', !settings.useAlternateIdleIcon)}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                Use a white {APPLICATION.NAME} logo (instead of the default
-                black logo) when all notifications are read.
+                Use a white {APPLICATION.NAME} logo (instead of the default black logo) when all
+                notifications are read.
               </Text>
               <Text>
-                This is particularly useful for devices which have a dark-themed
-                menubar or taskbar.
+                This is particularly useful for devices which have a dark-themed menubar or taskbar.
               </Text>
             </Stack>
           }

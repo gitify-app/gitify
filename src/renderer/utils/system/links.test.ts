@@ -6,16 +6,16 @@ import { Constants } from '../../constants';
 
 import type { GitifyRepository, Link } from '../../types';
 
-import * as authUtils from '../auth/utils';
+import * as githubAuth from '../forges/github/auth';
 import * as url from '../notifications/url';
 import * as comms from './comms';
 import {
   openAccountProfile,
-  openDeveloperSettings,
-  openGitHubIssues,
-  openGitHubNotifications,
+  openAccountSettings,
+  openHostIssues,
+  openHostNotifications,
   openGitHubParticipatingDocs,
-  openGitHubPulls,
+  openHostPulls,
   openGitifyReleaseNotes,
   openHost,
   openNotification,
@@ -24,9 +24,7 @@ import {
 } from './links';
 
 describe('renderer/utils/links.ts', () => {
-  const openExternalLinkSpy = vi
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation(vi.fn());
+  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   it('openGitifyReleaseNotes', () => {
     openGitifyReleaseNotes('v1.0.0');
@@ -36,36 +34,28 @@ describe('renderer/utils/links.ts', () => {
     );
   });
 
-  it('openGitHubNotifications', () => {
-    openGitHubNotifications(mockGitHubCloudAccount.hostname);
+  it('openHostNotifications', () => {
+    openHostNotifications(mockGitHubCloudAccount.hostname);
 
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      'https://github.com/notifications',
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/notifications');
   });
 
-  it('openGitHubIssues', () => {
-    openGitHubIssues(mockGitHubCloudAccount.hostname);
+  it('openHostIssues', () => {
+    openHostIssues(mockGitHubCloudAccount.hostname);
 
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      'https://github.com/issues',
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/issues');
   });
 
-  it('openGitHubPulls', () => {
-    openGitHubPulls(mockGitHubCloudAccount.hostname);
+  it('openHostPulls', () => {
+    openHostPulls(mockGitHubCloudAccount.hostname);
 
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      'https://github.com/pulls',
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/pulls');
   });
 
   it('openAccountProfile', () => {
     openAccountProfile(mockGitHubCloudAccount);
 
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      'https://github.com/octocat',
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/octocat');
   });
 
   it('openUserProfile', () => {
@@ -73,9 +63,7 @@ describe('renderer/utils/links.ts', () => {
 
     openUserProfile(mockUser);
 
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      'https://github.com/mock-user',
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/mock-user');
   });
 
   it('openHost', () => {
@@ -84,13 +72,11 @@ describe('renderer/utils/links.ts', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com');
   });
 
-  it('openDeveloperSettings', () => {
+  it('openAccountSettings', () => {
     const mockSettingsURL = 'https://github.com/settings/tokens' as Link;
-    vi.spyOn(authUtils, 'getDeveloperSettingsURL').mockReturnValue(
-      mockSettingsURL,
-    );
+    vi.spyOn(githubAuth, 'getDeveloperSettingsURL').mockReturnValue(mockSettingsURL);
 
-    openDeveloperSettings(mockGitHubCloudAccount);
+    openAccountSettings(mockGitHubCloudAccount);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith(mockSettingsURL);
   });
@@ -108,9 +94,7 @@ describe('renderer/utils/links.ts', () => {
 
   it('openNotification', async () => {
     const mockNotificationUrl = mockGitifyNotification.repository.htmlUrl;
-    vi.spyOn(url, 'generateGitHubWebUrl').mockResolvedValue(
-      mockNotificationUrl,
-    );
+    vi.spyOn(url, 'generateNotificationWebUrl').mockResolvedValue(mockNotificationUrl);
 
     await openNotification(mockGitifyNotification);
 
@@ -120,8 +104,6 @@ describe('renderer/utils/links.ts', () => {
   it('openParticipatingDocs', () => {
     openGitHubParticipatingDocs();
 
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      Constants.GITHUB_DOCS.PARTICIPATING_URL,
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(Constants.GITHUB_DOCS.PARTICIPATING_URL);
   });
 });

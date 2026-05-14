@@ -5,8 +5,10 @@ import { logWarn, toError } from '../../shared/logger';
 import { isMacOS } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
+import type MenuBuilder from '../menu';
 
 let isQuitting = false;
+let keepWindowOnBlur = false;
 
 /**
  * Reset module-level lifecycle flags. Module-level state is unavoidable
@@ -17,6 +19,22 @@ let isQuitting = false;
  */
 export function __resetWindowLifecycleForTests(): void {
   isQuitting = false;
+  keepWindowOnBlur = false;
+}
+
+/**
+ * Apply the user's "keep window open when it loses focus" preference.
+ *
+ * Implemented by toggling the window's `alwaysOnTop` flag, which the
+ * `menubar` library checks to short-circuit its blur-driven hide. The
+ * value is also remembered so the `devtools-closed` handler can restore
+ * it after DevTools temporarily forces it on.
+ */
+export function applyKeepWindowOnBlur(mb: Menubar, value: boolean): void {
+  keepWindowOnBlur = value;
+  if (mb.window && !mb.window.isDestroyed()) {
+    mb.window.setAlwaysOnTop(value);
+  }
 }
 
 /**
@@ -33,10 +51,7 @@ function restoreMenubarWindowReference(mb: Menubar, win: BrowserWindow): void {
   try {
     (mb as unknown as { _browserWindow: BrowserWindow })._browserWindow = win;
   } catch (error) {
-    logWarn(
-      'main:window',
-      `failed to restore menubar window reference: ${toError(error).message}`,
-    );
+    logWarn('main:window', `failed to restore menubar window reference: ${toError(error).message}`);
   }
 }
 
@@ -44,12 +59,22 @@ function restoreMenubarWindowReference(mb: Menubar, win: BrowserWindow): void {
  * Attach window-level event listeners for keyboard input and DevTools.
  *
  * @param mb - The menubar instance whose window events are configured.
+ * @param menuBuilder - The menu builder used to keep the Show / Hide tray
+ *   menu items in sync with window visibility.
  */
-export function configureWindowEvents(mb: Menubar): void {
+export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): void {
   const win = mb.window;
   if (!win) {
     return;
   }
+
+  win.on('show', () => {
+    menuBuilder.setWindowVisibility(true);
+  });
+
+  win.on('hide', () => {
+    menuBuilder.setWindowVisibility(false);
+  });
 
   /**
    * Track explicit quit requests so the close handlers can distinguish
@@ -139,6 +164,10 @@ export function configureWindowEvents(mb: Menubar): void {
 
   /**
    * When DevTools is closed, restore the window to its original size and position it centered on the tray icon.
+   *
+   * `devtools-opened` forces `alwaysOnTop` true for usability while
+   * debugging; restore it to the user's preference here so DevTools
+   * doesn't leave the flag stuck on.
    */
   mb.window.webContents.on('devtools-closed', () => {
     if (!mb.window) {
@@ -149,5 +178,6 @@ export function configureWindowEvents(mb: Menubar): void {
     mb.window.setSize(WindowConfig.width!, WindowConfig.height!);
     mb.positioner.move('trayCenter', trayBounds);
     mb.window.resizable = false;
+    mb.window.setAlwaysOnTop(keepWindowOnBlur);
   });
 }

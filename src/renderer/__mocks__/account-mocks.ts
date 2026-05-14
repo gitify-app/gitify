@@ -1,12 +1,6 @@
 import { Constants } from '../constants';
 
-import type {
-  Account,
-  AccountNotifications,
-  GitifyError,
-  Hostname,
-  Token,
-} from '../types';
+import type { Account, AccountNotifications, GitifyError, Hostname, Token } from '../types';
 
 import { getRecommendedScopeNames } from '../utils/auth/scopes';
 import { mockGitifyUser } from './user-mocks';

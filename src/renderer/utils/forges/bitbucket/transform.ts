@@ -17,9 +17,7 @@ const CATEGORY_REASON_MAP: Record<InfluentsNotificationCategory, Reason> = {
   [InfluentsNotificationCategory.Watching]: 'subscribed',
 };
 
-function mapCategoryToReason(
-  category: InfluentsNotificationCategory,
-): GitifyReason {
+function mapCategoryToReason(category: InfluentsNotificationCategory): GitifyReason {
   const code: Reason = CATEGORY_REASON_MAP[category] ?? 'subscribed';
   const details = getReasonDetails(code);
   return {
@@ -71,8 +69,7 @@ function transformRepository(
   const [owner] = fullName.split('/');
 
   const repoUrl =
-    entityUrl?.split('/').slice(0, 5).join('/') ??
-    `https://bitbucket.org/${fullName}`;
+    entityUrl?.split('/').slice(0, 5).join('/') ?? `https://bitbucket.org/${fullName}`;
 
   return {
     name: fullName.split('/')[1] ?? fullName,
@@ -90,9 +87,7 @@ export function transformBitbucketNotifications(
   raw: AtlassianNotificationFragment[],
   account: Account,
 ): RawGitifyNotification[] {
-  return raw.map((notification) =>
-    transformBitbucketNotification(notification, account),
-  );
+  return raw.map((notification) => transformBitbucketNotification(notification, account));
 }
 
 function transformBitbucketNotification(

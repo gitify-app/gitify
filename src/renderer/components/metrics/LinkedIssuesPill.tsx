@@ -11,9 +11,7 @@ export interface LinkedIssuesPillProps {
   linkedIssues: string[];
 }
 
-export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({
-  linkedIssues,
-}) => {
+export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) => {
   if (!linkedIssues?.length) {
     return null;
   }

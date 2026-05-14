@@ -10,12 +10,8 @@ import { getAdapter } from '../forges/registry';
  * Widens `RawGitifyNotification` (no display) into `GitifyNotification`
  * (display populated). The UI never sees the raw shape directly.
  */
-export function formatNotification(
-  notification: RawGitifyNotification,
-): GitifyNotification {
-  const helpers = getAdapter(notification.account).getDisplayHelpers(
-    notification,
-  );
+export function formatNotification(notification: RawGitifyNotification): GitifyNotification {
+  const helpers = getAdapter(notification.account).getDisplayHelpers(notification);
 
   return {
     ...notification,
@@ -80,13 +76,8 @@ export function formatProperCase(text: string) {
  * @param notification - The notification whose type to format.
  * @returns A human-readable type string (e.g. "Open Pull Request").
  */
-export function formatNotificationType(
-  notification: RawGitifyNotification,
-): string {
-  return formatForDisplay([
-    notification.subject.state ?? '',
-    notification.subject.type,
-  ]);
+export function formatNotificationType(notification: RawGitifyNotification): string {
+  return formatForDisplay([notification.subject.state ?? '', notification.subject.type]);
 }
 
 /**
@@ -105,12 +96,8 @@ export function formatGitHubNumber(num: number): string {
  * @param notification - The notification whose subject number to format.
  * @returns A `"#N"` string when a subject number is present, otherwise `""`.
  */
-export function formatNotificationNumber(
-  notification: RawGitifyNotification,
-): string {
-  return notification.subject?.number
-    ? formatGitHubNumber(notification.subject.number)
-    : '';
+export function formatNotificationNumber(notification: RawGitifyNotification): string {
+  return notification.subject?.number ? formatGitHubNumber(notification.subject.number) : '';
 }
 
 /**
@@ -122,9 +109,7 @@ export function formatNotificationNumber(
  * @param notification - The notification whose title to format.
  * @returns The display title string.
  */
-export function formatNotificationTitle(
-  notification: RawGitifyNotification,
-): string {
+export function formatNotificationTitle(notification: RawGitifyNotification): string {
   let title = notification.subject.title;
   const number = formatNotificationNumber(notification);
 

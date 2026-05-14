@@ -6,6 +6,7 @@ export default defineConfig({
   test: {
     globals: true,
     pool: 'vmThreads',
+    isolate: false,
     clearMocks: true,
     // Pre-bundle @primer/react rather than re-transforming the raw package on every thread load.
     // See https://vitest.dev/guide/profiling-test-performance.html#use-the-dependency-optimizer
@@ -35,10 +36,7 @@ export default defineConfig({
           name: 'happy-dom [preload, renderer]',
           environment: 'happy-dom',
           css: true,
-          include: [
-            'src/preload/**/*.test.{ts,tsx}',
-            'src/renderer/**/*.test.{ts,tsx}',
-          ],
+          include: ['src/preload/**/*.test.{ts,tsx}', 'src/renderer/**/*.test.{ts,tsx}'],
           setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
         },
       },
@@ -48,10 +46,7 @@ export default defineConfig({
         test: {
           name: 'node [main, shared]',
           environment: 'node',
-          include: [
-            'src/shared/**/*.test.{ts,tsx}',
-            'src/main/**/*.test.{ts,tsx}',
-          ],
+          include: ['src/shared/**/*.test.{ts,tsx}', 'src/main/**/*.test.{ts,tsx}'],
         },
       },
     ],

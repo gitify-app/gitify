@@ -1,11 +1,4 @@
-import type {
-  AuthCode,
-  ClientID,
-  ClientSecret,
-  Forge,
-  Hostname,
-  Token,
-} from '../../types';
+import type { AuthCode, ClientID, ClientSecret, Forge, Hostname, Token } from '../../types';
 
 export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
 
@@ -31,12 +24,6 @@ export interface DeviceFlowSession {
   intervalSeconds: number;
   expiresAt: number;
 }
-
-export type DeviceFlowErrorResponse = {
-  error: string;
-  error_description: string;
-  error_uri: string;
-};
 
 export interface LoginPersonalAccessTokenOptions {
   hostname: Hostname;

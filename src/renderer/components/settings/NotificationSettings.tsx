@@ -33,10 +33,7 @@ import { Title } from '../primitives/Title';
 
 import { FetchType, GroupBy, Size } from '../../types';
 
-import {
-  hasAlternateScopes,
-  hasRecommendedScopes,
-} from '../../utils/auth/scopes';
+import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scopes';
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
 
 export const NotificationSettings: FC = () => {
@@ -44,9 +41,7 @@ export const NotificationSettings: FC = () => {
 
   const { auth, settings, updateSetting } = useAppContext();
 
-  const [fetchInterval, setFetchInterval] = useState<number>(
-    settings.fetchInterval,
-  );
+  const [fetchInterval, setFetchInterval] = useState<number>(settings.fetchInterval);
 
   useEffect(() => {
     setFetchInterval(settings.fetchInterval);
@@ -71,12 +66,11 @@ export const NotificationSettings: FC = () => {
             <Stack direction="vertical" gap="condensed">
               <Text>Choose how notifications are displayed in the list.</Text>
               <Text>
-                <Text as="strong">Repository</Text> groups notifications by
-                their repository full name.
+                <Text as="strong">Repository</Text> groups notifications by their repository full
+                name.
               </Text>
               <Text>
-                <Text as="strong">Date</Text> shows notifications in
-                chronological order.
+                <Text as="strong">Date</Text> shows notifications in chronological order.
               </Text>
             </Stack>
           }
@@ -97,25 +91,19 @@ export const NotificationSettings: FC = () => {
             <Stack direction="vertical" gap="condensed">
               <Text>Controls how new notifications are fetched.</Text>
               <Text>
-                <Text as="strong">Interval</Text> will check for new
-                notifications on a regular scheduled interval.
+                <Text as="strong">Interval</Text> will check for new notifications on a regular
+                scheduled interval.
               </Text>
               <Text>
-                <Text as="strong">Inactivity</Text> will check for new
-                notifications only when there has been no user activity within{' '}
-                {APPLICATION.NAME} for a specified period of time.
+                <Text as="strong">Inactivity</Text> will check for new notifications only when there
+                has been no user activity within {APPLICATION.NAME} for a specified period of time.
               </Text>
             </Stack>
           }
           value={settings.fetchType}
         />
 
-        <Stack
-          align="center"
-          className="text-sm"
-          direction="horizontal"
-          gap="condensed"
-        >
+        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <FieldLabel label="Fetch interval:" name="fetchInterval" />
 
           <ButtonGroup className="ml-2">
@@ -125,8 +113,7 @@ export const NotificationSettings: FC = () => {
               icon={DashIcon}
               onClick={() => {
                 const newInterval = Math.max(
-                  fetchInterval -
-                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  fetchInterval - Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
                   Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS,
                 );
 
@@ -151,8 +138,7 @@ export const NotificationSettings: FC = () => {
               icon={PlusIcon}
               onClick={() => {
                 const newInterval = Math.min(
-                  fetchInterval +
-                    Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
+                  fetchInterval + Constants.FETCH_NOTIFICATIONS_INTERVAL_STEP_MS,
                   Constants.MAX_FETCH_NOTIFICATIONS_INTERVAL_MS,
                 );
 
@@ -170,13 +156,8 @@ export const NotificationSettings: FC = () => {
               data-testid="settings-fetch-interval-reset"
               icon={SyncIcon}
               onClick={() => {
-                setFetchInterval(
-                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-                );
-                updateSetting(
-                  'fetchInterval',
-                  Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
-                );
+                setFetchInterval(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
+                updateSetting('fetchInterval', Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -189,12 +170,7 @@ export const NotificationSettings: FC = () => {
           checked={settings.fetchAllNotifications}
           label="Fetch all notifications"
           name="fetchAllNotifications"
-          onChange={() =>
-            updateSetting(
-              'fetchAllNotifications',
-              !settings.fetchAllNotifications,
-            )
-          }
+          onChange={() => updateSetting('fetchAllNotifications', !settings.fetchAllNotifications)}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
@@ -202,9 +178,8 @@ export const NotificationSettings: FC = () => {
                 <Text as="strong">all</Text> notifications from your inbox.
               </Text>
               <Text>
-                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will
-                fetch the first page of notifications (max 50 records per GitHub
-                account)
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will fetch the first page of
+                notifications (max 50 records per GitHub account)
               </Text>
             </Stack>
           }
@@ -214,29 +189,23 @@ export const NotificationSettings: FC = () => {
           checked={settings.detailedNotifications}
           label="Fetch detailed notifications"
           name="detailedNotifications"
-          onChange={() =>
-            updateSetting(
-              'detailedNotifications',
-              !settings.detailedNotifications,
-            )
-          }
+          onChange={() => updateSetting('detailedNotifications', !settings.detailedNotifications)}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                When <Text as="u">checked</Text>, {APPLICATION.NAME} will enrich
-                notifications with detailed user and state information. You may
-                also choose to display{' '}
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will enrich notifications with
+                detailed user and state information. You may also choose to display{' '}
                 <Text as="strong">notification metric pills</Text> or{' '}
                 <Text as="strong">notification reference numbers</Text>.
               </Text>
               <Text>
-                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will only
-                fetch basic notification details.
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will only fetch basic
+                notification details.
               </Text>
               <Text className="text-gitify-caution">
-                ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
-                experience rate limiting under certain circumstances. Please
-                disable this setting if you experience this.
+                ⚠️ Users with a large number of unread notifications <i>may</i> experience rate
+                limiting under certain circumstances. Please disable this setting if you experience
+                this.
               </Text>
             </Stack>
           }
@@ -244,8 +213,7 @@ export const NotificationSettings: FC = () => {
 
         {settings.detailedNotifications &&
           auth.accounts.some(
-            (account) =>
-              !hasRecommendedScopes(account) && !hasAlternateScopes(account),
+            (account) => !hasRecommendedScopes(account) && !hasAlternateScopes(account),
           ) && (
             <Stack
               align="center"
@@ -257,9 +225,8 @@ export const NotificationSettings: FC = () => {
               <AlertFillIcon className="text-gitify-warning" size={14} />
               <Stack direction="vertical" gap="condensed">
                 <Text>
-                  One or more accounts are missing scopes required for
-                  notification enrichment. Notification details may be
-                  incomplete.
+                  One or more accounts are missing scopes required for notification enrichment.
+                  Notification details may be incomplete.
                 </Text>
                 <Text>
                   Visit{' '}
@@ -354,18 +321,16 @@ export const NotificationSettings: FC = () => {
           checked={settings.participating}
           label="Fetch only participating"
           name="showOnlyParticipating"
-          onChange={() =>
-            updateSetting('participating', !settings.participating)
-          }
+          onChange={() => updateSetting('participating', !settings.participating)}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch
-                only participating notifications.
+                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch only participating
+                notifications.
               </Text>
               <Text>
-                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will
-                fetch participating and watching notifications.
+                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will fetch participating and
+                watching notifications.
               </Text>
               <Text>
                 See{' '}
@@ -391,23 +356,17 @@ export const NotificationSettings: FC = () => {
           checked={settings.fetchReadNotifications}
           label="Fetch read & done notifications"
           name="fetchReadNotifications"
-          onChange={() =>
-            updateSetting(
-              'fetchReadNotifications',
-              !settings.fetchReadNotifications,
-            )
-          }
+          onChange={() => updateSetting('fetchReadNotifications', !settings.fetchReadNotifications)}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>Fetch all notifications including read and done.</Text>
               <Text className="text-gitify-caution">
-                ⚠️ GitHub's API does not distinguish between read and done
-                states, so 'Mark as done' actions will be unavailable when this
-                setting is enabled.
+                ⚠️ GitHub's API does not distinguish between read and done states, so 'Mark as done'
+                actions will be unavailable when this setting is enabled.
               </Text>
               <Text className="text-gitify-caution">
-                ⚠️ Enabling this setting will increase API usage and may cause
-                rate limiting for users with many notifications.
+                ⚠️ Enabling this setting will increase API usage and may cause rate limiting for
+                users with many notifications.
               </Text>
             </Stack>
           }
@@ -417,13 +376,11 @@ export const NotificationSettings: FC = () => {
           checked={settings.markAsDoneOnOpen}
           label="Mark as done on open"
           name="markAsDoneOnOpen"
-          onChange={() =>
-            updateSetting('markAsDoneOnOpen', !settings.markAsDoneOnOpen)
-          }
+          onChange={() => updateSetting('markAsDoneOnOpen', !settings.markAsDoneOnOpen)}
           tooltip={
             <Text>
-              <Text as="strong">Mark as done</Text> feature is supported in
-              GitHub Cloud and GitHub Enterprise Server 3.13 or later.
+              <Text as="strong">Mark as done</Text> feature is supported in GitHub Cloud and GitHub
+              Enterprise Server 3.13 or later.
             </Text>
           }
         />
@@ -433,15 +390,12 @@ export const NotificationSettings: FC = () => {
           label="Mark as done on unsubscribe"
           name="markAsDoneOnUnsubscribe"
           onChange={() =>
-            updateSetting(
-              'markAsDoneOnUnsubscribe',
-              !settings.markAsDoneOnUnsubscribe,
-            )
+            updateSetting('markAsDoneOnUnsubscribe', !settings.markAsDoneOnUnsubscribe)
           }
           tooltip={
             <Text>
-              <Text as="strong">Mark as done</Text> feature is supported in
-              GitHub Cloud and GitHub Enterprise Server 3.13 or later.
+              <Text as="strong">Mark as done</Text> feature is supported in GitHub Cloud and GitHub
+              Enterprise Server 3.13 or later.
             </Text>
           }
         />
@@ -450,17 +404,12 @@ export const NotificationSettings: FC = () => {
           checked={settings.delayNotificationState}
           label="Delay notification state"
           name="delayNotificationState"
-          onChange={() =>
-            updateSetting(
-              'delayNotificationState',
-              !settings.delayNotificationState,
-            )
-          }
+          onChange={() => updateSetting('delayNotificationState', !settings.delayNotificationState)}
           tooltip={
             <Text>
-              Keep the notification within {APPLICATION.NAME} upon interaction
-              (ie: open notification, mark as read, mark as done) until the next
-              refresh window (scheduled or user initiated).
+              Keep the notification within {APPLICATION.NAME} upon interaction (ie: open
+              notification, mark as read, mark as done) until the next refresh window (scheduled or
+              user initiated).
             </Text>
           }
         />

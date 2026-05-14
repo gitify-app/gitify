@@ -32,9 +32,9 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
     });
 
-    describe('openGitHubNotifications', () => {
-      const openGitHubNotificationsSpy = vi
-        .spyOn(links, 'openGitHubNotifications')
+    describe('openHostNotifications', () => {
+      const openHostNotificationsSpy = vi
+        .spyOn(links, 'openHostNotifications')
         .mockImplementation(vi.fn());
 
       it('opens primary account GitHub notifications webpage when pressing N while logged in', async () => {
@@ -44,7 +44,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('n');
 
-        expect(openGitHubNotificationsSpy).toHaveBeenCalledTimes(1);
+        expect(openHostNotificationsSpy).toHaveBeenCalledTimes(1);
       });
 
       it('does not open primary account GitHub notifications webpage when logged out', async () => {
@@ -54,7 +54,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('n');
 
-        expect(openGitHubNotificationsSpy).not.toHaveBeenCalled();
+        expect(openHostNotificationsSpy).not.toHaveBeenCalled();
       });
     });
 
@@ -116,10 +116,8 @@ describe('components/GlobalShortcuts.tsx', () => {
       });
     });
 
-    describe('openGitHubIssues', () => {
-      const openGitHubIssuesSpy = vi
-        .spyOn(links, 'openGitHubIssues')
-        .mockImplementation(vi.fn());
+    describe('openHostIssues', () => {
+      const openHostIssuesSpy = vi.spyOn(links, 'openHostIssues').mockImplementation(vi.fn());
 
       it('opens primary account GitHub issues webpage when pressing I while logged in', async () => {
         renderWithProviders(<GlobalShortcuts />, {
@@ -128,7 +126,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('i');
 
-        expect(openGitHubIssuesSpy).toHaveBeenCalledTimes(1);
+        expect(openHostIssuesSpy).toHaveBeenCalledTimes(1);
       });
 
       it('does not open primary account GitHub issues webpage when logged out', async () => {
@@ -138,14 +136,12 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('n');
 
-        expect(openGitHubIssuesSpy).not.toHaveBeenCalled();
+        expect(openHostIssuesSpy).not.toHaveBeenCalled();
       });
     });
 
-    describe('openGitHubPulls', () => {
-      const openGitHubPullsSpy = vi
-        .spyOn(links, 'openGitHubPulls')
-        .mockImplementation(vi.fn());
+    describe('openHostPulls', () => {
+      const openHostPullsSpy = vi.spyOn(links, 'openHostPulls').mockImplementation(vi.fn());
 
       it('opens primary account GitHub pull requests webpage when pressing N while logged in', async () => {
         renderWithProviders(<GlobalShortcuts />, {
@@ -154,7 +150,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('p');
 
-        expect(openGitHubPullsSpy).toHaveBeenCalledTimes(1);
+        expect(openHostPullsSpy).toHaveBeenCalledTimes(1);
       });
 
       it('does not open primary account GitHub pull requests webpage when logged out', async () => {
@@ -164,7 +160,7 @@ describe('components/GlobalShortcuts.tsx', () => {
 
         await userEvent.keyboard('n');
 
-        expect(openGitHubPullsSpy).not.toHaveBeenCalled();
+        expect(openHostPullsSpy).not.toHaveBeenCalled();
       });
     });
 
@@ -271,9 +267,7 @@ describe('components/GlobalShortcuts.tsx', () => {
           },
         );
 
-        const input = document.getElementById(
-          'test-input',
-        ) as HTMLTextAreaElement;
+        const input = document.getElementById('test-input') as HTMLTextAreaElement;
         input.focus();
         await userEvent.type(input, 'h');
 
@@ -291,9 +285,7 @@ describe('components/GlobalShortcuts.tsx', () => {
           },
         );
 
-        const textarea = document.getElementById(
-          'test-textarea',
-        ) as HTMLTextAreaElement;
+        const textarea = document.getElementById('test-textarea') as HTMLTextAreaElement;
         textarea.focus();
         await userEvent.type(textarea, 'h');
 

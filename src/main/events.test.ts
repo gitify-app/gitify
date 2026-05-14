@@ -39,11 +39,7 @@ describe('main/events', () => {
     const sendMock = vi.fn();
     const mb: MockMenubar = { window: { webContents: { send: sendMock } } };
 
-    sendRendererEvent(
-      mb as unknown as Menubar,
-      EVENTS.UPDATE_ICON_TITLE,
-      'title',
-    );
+    sendRendererEvent(mb as unknown as Menubar, EVENTS.UPDATE_ICON_TITLE, 'title');
 
     expect(sendMock).toHaveBeenCalledWith(EVENTS.UPDATE_ICON_TITLE, 'title');
   });

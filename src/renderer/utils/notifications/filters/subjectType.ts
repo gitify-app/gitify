@@ -66,24 +66,15 @@ export const subjectTypeFilter: Filter<SubjectType> = {
     return filters.subjectTypes.includes(subjectType);
   },
 
-  getFilterCount(
-    accountNotifications: AccountNotifications[],
-    subjectType: SubjectType,
-  ): number {
+  getFilterCount(accountNotifications: AccountNotifications[], subjectType: SubjectType): number {
     return accountNotifications.reduce(
       (sum, account) =>
-        sum +
-        account.notifications.filter((n) =>
-          this.filterNotification(n, subjectType),
-        ).length,
+        sum + account.notifications.filter((n) => this.filterNotification(n, subjectType)).length,
       0,
     );
   },
 
-  filterNotification(
-    notification: RawGitifyNotification,
-    subjectType: SubjectType,
-  ): boolean {
+  filterNotification(notification: RawGitifyNotification, subjectType: SubjectType): boolean {
     return notification.subject.type === subjectType;
   },
 };

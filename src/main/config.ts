@@ -21,18 +21,12 @@ export const Paths = {
 
   get notificationSound(): string {
     return pathToFileURL(
-      path.resolve(
-        __dirname,
-        'assets',
-        'sounds',
-        APPLICATION.NOTIFICATION_SOUND,
-      ),
+      path.resolve(__dirname, 'assets', 'sounds', APPLICATION.NOTIFICATION_SOUND),
     ).href;
   },
 
   get twemojiFolder(): string {
-    return pathToFileURL(path.resolve(__dirname, 'assets', 'images', 'twemoji'))
-      .href;
+    return pathToFileURL(path.resolve(__dirname, 'assets', 'images', 'twemoji')).href;
   },
 };
 

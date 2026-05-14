@@ -38,12 +38,6 @@ import type {
 } from '../utils/auth/types';
 
 import {
-  exchangeAuthCodeForAccessToken,
-  performGitHubWebOAuth,
-  pollGitHubDeviceFlow,
-  startGitHubDeviceFlow,
-} from '../utils/auth/flows';
-import {
   addAccount,
   getAccountUUID,
   hasAccounts,
@@ -58,6 +52,7 @@ import {
   decryptValue,
   encryptValue,
   setAutoLaunch,
+  setKeepWindowOnBlur,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/system/comms';
@@ -105,20 +100,14 @@ export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
   loginWithDeviceFlowStart: (
+    forge: Forge,
     hostname?: Hostname,
     scopes?: string[],
   ) => Promise<DeviceFlowSession>;
-  loginWithDeviceFlowPoll: (
-    session: DeviceFlowSession,
-  ) => Promise<Token | null>;
-  loginWithDeviceFlowComplete: (
-    token: Token,
-    hostname: Hostname,
-  ) => Promise<void>;
-  loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
-  loginWithPersonalAccessToken: (
-    data: LoginPersonalAccessTokenOptions,
-  ) => Promise<void>;
+  loginWithDeviceFlowPoll: (forge: Forge, session: DeviceFlowSession) => Promise<Token | null>;
+  loginWithDeviceFlowComplete: (forge: Forge, token: Token, hostname: Hostname) => Promise<void>;
+  loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
+  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
   logoutFromAccount: (account: Account) => Promise<void>;
 
   status: Status;
@@ -133,12 +122,8 @@ export interface AppContextState {
   fetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
-  markNotificationsAsRead: (
-    notifications: GitifyNotification[],
-  ) => Promise<void>;
-  markNotificationsAsDone: (
-    notifications: GitifyNotification[],
-  ) => Promise<void>;
+  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<void>;
+  markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 
   settings: SettingsState;
@@ -150,9 +135,7 @@ export interface AppContextState {
   clearShortcutRegistrationError: () => void;
 }
 
-export const AppContext = createContext<Partial<AppContextState> | undefined>(
-  undefined,
-);
+export const AppContext = createContext<Partial<AppContextState> | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const existingState = loadState();
@@ -164,15 +147,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const [settings, setSettings] = useState<SettingsState>(
-    existingState.settings
-      ? { ...defaultSettings, ...existingState.settings }
-      : defaultSettings,
+    existingState.settings ? { ...defaultSettings, ...existingState.settings } : defaultSettings,
   );
 
   const lastAppliedOpenGitifyShortcutRef = useRef(settings.openGitifyShortcut);
-  const [shortcutRegistrationError, setShortcutRegistrationError] = useState<
-    string | null
-  >(null);
+  const [shortcutRegistrationError, setShortcutRegistrationError] = useState<string | null>(null);
 
   const clearShortcutRegistrationError = useCallback(() => {
     setShortcutRegistrationError(null);
@@ -249,8 +228,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     const tokensMigrated = migratedAccounts.some((migratedAccount) => {
       const originalAccount = auth.accounts.find(
-        (account) =>
-          getAccountUUID(account) === getAccountUUID(migratedAccount),
+        (account) => getAccountUUID(account) === getAccountUUID(migratedAccount),
       );
 
       if (!originalAccount) {
@@ -272,9 +250,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     persistAuth(updatedAuth);
   }, [auth, persistAuth]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Fetch new notifications when account count or filters change
   useEffect(() => {
     fetchNotifications({ auth, settings });
+    // oxlint-disable-next-line react/exhaustive-deps -- Fetch new notifications when account count or filters change
   }, [
     auth.accounts.length,
     settings.participating,
@@ -303,12 +281,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   /**
    * On startup, check if auth tokens need encrypting and refresh all account details
    */
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Run once on startup
   useEffect(() => {
     void (async () => {
       await migrateAuthTokens();
       await refreshAllAccounts();
     })();
+    // oxlint-disable-next-line react/exhaustive-deps -- Run once on startup
   }, []);
 
   // Refresh account details on interval
@@ -319,10 +297,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // Theme
   useEffect(() => {
     const colorMode = mapThemeModeToColorMode(settings.theme);
-    const colorScheme = mapThemeModeToColorScheme(
-      settings.theme,
-      settings.increaseContrast,
-    );
+    const colorScheme = mapThemeModeToColorScheme(settings.theme, settings.increaseContrast);
 
     setColorMode(colorMode);
 
@@ -337,21 +312,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     setDayScheme(colorScheme ?? dayFallback);
     setNightScheme(colorScheme ?? nightFallback);
-  }, [
-    settings.theme,
-    settings.increaseContrast,
-    setColorMode,
-    setDayScheme,
-    setNightScheme,
-  ]);
+  }, [settings.theme, settings.increaseContrast, setColorMode, setDayScheme, setNightScheme]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update the tray on setting or notification changes
   useEffect(() => {
     setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
     setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
 
     const trayCount = status === 'error' ? -1 : notificationCount;
     setTrayIconColorAndTitle(trayCount, settings);
+    // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   }, [
     settings.showNotificationsCountInTray,
     settings.useUnreadActiveIcon,
@@ -401,12 +370,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.openAtStartup]);
 
   useEffect(() => {
+    setKeepWindowOnBlur(settings.keepWindowOnBlur);
+  }, [settings.keepWindowOnBlur]);
+
+  useEffect(() => {
     window.gitify.onResetApp(() => {
       clearState();
       setAuth(defaultAuth);
       setSettings(defaultSettings);
-      lastAppliedOpenGitifyShortcutRef.current =
-        defaultSettings.openGitifyShortcut;
+      lastAppliedOpenGitifyShortcutRef.current = defaultSettings.openGitifyShortcut;
       setShortcutRegistrationError(null);
     });
   }, []);
@@ -416,8 +388,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       saveState({ auth, settings: defaultSettings });
       return defaultSettings;
     });
-    lastAppliedOpenGitifyShortcutRef.current =
-      defaultSettings.openGitifyShortcut;
+    lastAppliedOpenGitifyShortcutRef.current = defaultSettings.openGitifyShortcut;
     setShortcutRegistrationError(null);
   }, [auth]);
 
@@ -433,7 +404,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   // Global window zoom handler / listener
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to update on settings.zoomPercentage changes
   useEffect(() => {
     // Set the zoom level when settings.zoomPercentage changes
     window.gitify.zoom.setLevel(zoomPercentageToLevel(settings.zoomPercentage));
@@ -445,9 +415,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const handleResize = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        const zoomPercentage = zoomLevelToPercentage(
-          window.gitify.zoom.getLevel(),
-        );
+        const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
 
         if (zoomPercentage !== settings.zoomPercentage) {
           updateSetting('zoomPercentage', zoomPercentage);
@@ -461,6 +429,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       window.removeEventListener('resize', handleResize);
       clearTimeout(timeout);
     };
+    // oxlint-disable-next-line react/exhaustive-deps -- We want to update on settings.zoomPercentage changes
   }, [settings.zoomPercentage]);
 
   const isLoggedIn = useMemo(() => {
@@ -468,67 +437,68 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth]);
 
   /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Initiate device flow session.
+   * Initiate an OAuth device-flow session for the given forge.
    */
   const loginWithDeviceFlowStart = useCallback(
-    async (hostname?: Hostname, scopes?: string[]) =>
-      await startGitHubDeviceFlow(hostname, scopes),
+    async (forge: Forge, hostname?: Hostname, scopes?: string[]) => {
+      const { deviceFlow } = getAdapter(forge);
+      if (!deviceFlow) {
+        throw new Error(`Device flow is not supported for forge "${forge}".`);
+      }
+      return await deviceFlow.start(hostname, scopes);
+    },
     [],
   );
 
   /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Poll for device flow session.
+   * Poll for completion of an OAuth device-flow session.
    */
-  const loginWithDeviceFlowPoll = useCallback(
-    async (session: DeviceFlowSession) => await pollGitHubDeviceFlow(session),
-    [],
-  );
+  const loginWithDeviceFlowPoll = useCallback(async (forge: Forge, session: DeviceFlowSession) => {
+    const { deviceFlow } = getAdapter(forge);
+    if (!deviceFlow) {
+      throw new Error(`Device flow is not supported for forge "${forge}".`);
+    }
+    return await deviceFlow.poll(session);
+  }, []);
 
   /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Finalize device flow session.
+   * Finalise an OAuth device-flow session by recording the account.
    */
   const loginWithDeviceFlowComplete = useCallback(
-    async (token: Token, hostname: Hostname) => {
+    async (forge: Forge, token: Token, hostname: Hostname) => {
+      const { deviceFlow } = getAdapter(forge);
+      if (!deviceFlow) {
+        throw new Error(`Forge "${forge}" does not support device flow.`);
+      }
+      const method = deviceFlow.authMethod;
+
       const existingAccount = auth.accounts.find(
-        (a) => a.hostname === hostname && a.method === 'GitHub App',
+        (a) => a.hostname === hostname && a.method === method,
       );
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(
-        auth,
-        'GitHub App',
-        token,
-        hostname,
-        'github',
-      );
+      const updatedAuth = await addAccount(auth, method, token, hostname, forge);
 
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
+    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
   );
 
   /**
-   * Login with custom GitHub OAuth App.
+   * Login with a custom OAuth app on the given forge.
    */
   const loginWithOAuthApp = useCallback(
-    async (data: LoginOAuthWebOptions) => {
-      const { authOptions, authCode } = await performGitHubWebOAuth(data);
-      const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
+    async (forge: Forge, data: LoginOAuthWebOptions) => {
+      const { oauthWebApp } = getAdapter(forge);
+      if (!oauthWebApp) {
+        throw new Error(`OAuth app login is not supported for forge "${forge}".`);
+      }
+
+      const { authOptions, authCode } = await oauthWebApp.performWebOAuth(data);
+      const token = await oauthWebApp.exchangeAuthCodeForToken(authCode, authOptions);
 
       const existingAccount = auth.accounts.find(
         (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
@@ -537,36 +507,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(
-        auth,
-        'OAuth App',
-        token,
-        authOptions.hostname,
-        'github',
-      );
+      const updatedAuth = await addAccount(auth, 'OAuth App', token, authOptions.hostname, forge);
 
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
+    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
   );
 
   /**
    * Login with Personal Access Token (PAT).
    */
   const loginWithPersonalAccessToken = useCallback(
-    async ({
-      token,
-      hostname,
-      username,
-      forge,
-    }: LoginPersonalAccessTokenOptions) => {
+    async ({ token, hostname, username, forge }: LoginPersonalAccessTokenOptions) => {
       const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
       await getAdapter(resolvedForge).fetchAuthenticatedUser({
@@ -598,13 +551,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
     },
-    [
-      auth,
-      settings,
-      persistAuth,
-      fetchNotifications,
-      removeAccountNotifications,
-    ],
+    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
   );
 
   const logoutFromAccount = useCallback(
@@ -713,7 +660,5 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     ],
   );
 
-  return (
-    <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>;
 };

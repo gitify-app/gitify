@@ -53,12 +53,8 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     });
 
     // notifications + read:user (required) + repo (detailed) = 3 granted; public_repo = N/A (covered by repo)
-    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(
-      3,
-    );
-    expect(
-      screen.queryAllByTestId('account-scopes-scope-missing'),
-    ).toHaveLength(0);
+    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(3);
+    expect(screen.queryAllByTestId('account-scopes-scope-missing')).toHaveLength(0);
     expect(screen.getAllByTestId('account-scopes-scope-na')).toHaveLength(1);
   });
 
@@ -80,15 +76,9 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
     expect(screen.getByText('Detailed Notifications')).toBeInTheDocument();
     expect(screen.getByTestId('account-scopes-repo-scope')).toBeInTheDocument();
-    expect(screen.getByTestId('account-scopes-repo-scope')).toHaveTextContent(
-      'repo',
-    );
-    expect(
-      screen.getByTestId('account-scopes-public-repo-scope'),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByTestId('account-scopes-public-repo-scope'),
-    ).toHaveTextContent('public_repo');
+    expect(screen.getByTestId('account-scopes-repo-scope')).toHaveTextContent('repo');
+    expect(screen.getByTestId('account-scopes-public-repo-scope')).toBeInTheDocument();
+    expect(screen.getByTestId('account-scopes-public-repo-scope')).toHaveTextContent('public_repo');
   });
 
   it('should show all-granted status when account has public_repo instead of repo', async () => {
@@ -102,12 +92,8 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     });
 
     // notifications + read:user (required) + public_repo (detailed) = 3 granted; repo = 1 missing
-    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(
-      3,
-    );
-    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(
-      1,
-    );
+    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(3);
+    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(1);
   });
 
   it('should show missing indicator when neither repo nor public_repo is granted', async () => {
@@ -121,13 +107,9 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     });
 
     // Both repo rows show missing
-    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(
-      2,
-    );
+    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(2);
     expect(screen.getByTestId('account-scopes-repo-scope')).toBeInTheDocument();
-    expect(
-      screen.getByTestId('account-scopes-public-repo-scope'),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('account-scopes-public-repo-scope')).toBeInTheDocument();
   });
 
   it('should show missing indicator when notifications scope is absent', async () => {
@@ -141,30 +123,20 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     });
 
     // Required scope (notifications) is missing
-    expect(
-      screen.queryAllByTestId('account-scopes-scope-missing').length,
-    ).toBeGreaterThan(0);
+    expect(screen.queryAllByTestId('account-scopes-scope-missing').length).toBeGreaterThan(0);
   });
 
   it('should show extra scopes when token has additional permissions', async () => {
     mockLocationAccount = {
       ...mockGitHubAppAccount,
-      scopes: [
-        'read:user',
-        'notifications',
-        'repo',
-        'write:packages',
-        'read:org',
-      ],
+      scopes: ['read:user', 'notifications', 'repo', 'write:packages', 'read:org'],
     };
 
     await act(async () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    expect(
-      screen.getByTestId('account-scopes-extra-scopes'),
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('account-scopes-extra-scopes')).toBeInTheDocument();
     expect(screen.getByText('write:packages')).toBeInTheDocument();
     expect(screen.getByText('read:org')).toBeInTheDocument();
   });
@@ -179,9 +151,9 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     expect(screen.getByTestId('account-scopes-no-scopes')).toBeInTheDocument();
   });
 
-  it('should open developer settings when manage link is clicked', async () => {
-    const openDeveloperSettingsSpy = vi
-      .spyOn(links, 'openDeveloperSettings')
+  it('should open account settings when manage link is clicked', async () => {
+    const openAccountSettingsSpy = vi
+      .spyOn(links, 'openAccountSettings')
       .mockImplementation(vi.fn());
 
     await act(async () => {
@@ -190,7 +162,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
     await userEvent.click(screen.getByTestId('account-scopes-manage-link'));
 
-    expect(openDeveloperSettingsSpy).toHaveBeenCalledTimes(1);
+    expect(openAccountSettingsSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should go back when pressing the back icon', async () => {
