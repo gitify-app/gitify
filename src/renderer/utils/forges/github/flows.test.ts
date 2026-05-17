@@ -102,15 +102,30 @@ describe('renderer/utils/forges/github/flows.ts', () => {
         expect(token).toBe('device-token-xyz');
       });
 
-      it('returns null when authorization is pending or slow_down', async () => {
+      it('returns null and does not change interval when authorization is pending', async () => {
         const pendingErr = Object.create(RequestError.prototype);
         pendingErr.response = { data: { error: 'authorization_pending' } };
 
         exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
 
-        const token = await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession);
+        const session = { ...baseSession } as DeviceFlowSession;
+        const token = await flows.pollGitHubDeviceFlow(session);
 
         expect(token).toBeNull();
+        expect(session.intervalSeconds).toBe(5);
+      });
+
+      it('returns null and increases interval by 5 when slow_down', async () => {
+        const slowDownErr = Object.create(RequestError.prototype);
+        slowDownErr.response = { data: { error: 'slow_down' } };
+
+        exchangeDeviceCodeMock.mockRejectedValueOnce(slowDownErr);
+
+        const session = { ...baseSession } as DeviceFlowSession;
+        const token = await flows.pollGitHubDeviceFlow(session);
+
+        expect(token).toBeNull();
+        expect(session.intervalSeconds).toBe(10);
       });
 
       it('throws on other errors', async () => {
