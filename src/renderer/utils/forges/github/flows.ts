@@ -141,7 +141,12 @@ export async function pollGitHubDeviceFlow(session: DeviceFlowSession): Promise<
       const response = err.response?.data as DeviceFlowErrorResponse;
       const errorCode = response.error;
 
-      if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
+      if (errorCode === 'authorization_pending') {
+        return null;
+      }
+
+      if (errorCode === 'slow_down') {
+        session.intervalSeconds += 5;
         return null;
       }
     }

@@ -83,7 +83,6 @@ export const LoginWithDeviceFlowRoute: FC = () => {
 
     const startPolling = async () => {
       setIsPolling(true);
-      const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
 
       try {
         while (isActive && Date.now() < session.expiresAt) {
@@ -95,6 +94,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
             return;
           }
 
+          const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
           await new Promise((resolve) => {
             timeoutId = setTimeout(resolve, intervalMs);
           });
