@@ -110,7 +110,7 @@
     "@vitest/ui": "4.1.6",
     "clsx": "2.1.1",
     "concurrently": "9.2.1",
-    "date-fns": "4.1.0",
+    "date-fns": "4.2.1",
     "dotenv": "17.4.2",
     "electron": "42.2.0",
     "electron-builder": "26.8.1",
