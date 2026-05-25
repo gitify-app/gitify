@@ -128,7 +128,7 @@
     "vite-plugin-checker": "0.13.0",
     "vite-plugin-electron": "0.29.1",
     "vite-plugin-electron-renderer": "0.14.7",
-    "vite-plus": "0.1.21",
+    "vite-plus": "0.1.22",
     "vitest": "4.1.6",
     "zustand": "5.0.13"
   },
