@@ -88,7 +88,7 @@
     "@octokit/plugin-paginate-rest": "14.0.0",
     "@octokit/plugin-rest-endpoint-methods": "17.0.0",
     "@octokit/plugin-retry": "8.1.0",
-    "@octokit/request": "10.0.9",
+    "@octokit/request": "10.0.10",
     "@octokit/request-error": "7.1.0",
     "@octokit/types": "16.0.0",
     "@parcel/watcher": "2.5.6",
