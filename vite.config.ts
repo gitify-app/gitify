@@ -122,6 +122,14 @@ export default defineConfig({
     electron({
       main: {
         entry: fileURLToPath(new URL('src/main/index.ts', import.meta.url)),
+        onstart: async ({ startup }) => {
+          // vite-plugin-electron v1 starts Electron with `cwd: server.config.root`.
+          // Our Vite root is `src/renderer`, so we must override `cwd` back to the
+          // repository root or Electron will try to boot from `src/renderer`.
+          await startup(undefined, {
+            cwd: fileURLToPath(new URL('.', import.meta.url)),
+          });
+        },
         vite: {
           // The outer Vite config sets root:'src/renderer', so we must
           // explicitly tell the main-process sub-build where to find .env files.
