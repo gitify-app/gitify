@@ -94,7 +94,7 @@
     "@parcel/watcher": "2.5.6",
     "@primer/css": "22.2.0",
     "@primer/octicons-react": "19.28.0",
-    "@primer/react": "38.23.0",
+    "@primer/react": "38.26.0",
     "@swc-contrib/plugin-graphql-codegen-client-preset": "0.24.0",
     "@tailwindcss/vite": "4.3.0",
     "@testing-library/jest-dom": "6.9.1",

@@ -8,6 +8,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when multiple r
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
@@ -57,6 +58,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when multiple r
   >
     <ul
       class="prc-LabelGroup-Container-E-ePP"
+      data-component="LabelGroup"
       data-list="true"
       data-overflow="inline"
     >
@@ -201,6 +203,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when one reacti
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
@@ -250,6 +253,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when one reacti
   >
     <ul
       class="prc-LabelGroup-Container-E-ePP"
+      data-component="LabelGroup"
       data-list="true"
       data-overflow="inline"
     >

@@ -38,6 +38,7 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           </svg>
           <h4
             class="prc-Heading-Heading-MtWFE"
+            data-component="Heading"
           >
             FilterSectionTitle
           </h4>
@@ -312,6 +313,7 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           </svg>
           <h4
             class="prc-Heading-Heading-MtWFE"
+            data-component="Heading"
           >
             FilterSectionTitle
           </h4>

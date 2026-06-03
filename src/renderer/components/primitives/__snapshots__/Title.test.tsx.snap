@@ -35,6 +35,7 @@ exports[`renderer/routes/components/primitives/Title.tsx > should render the tit
         </svg>
         <h4
           class="prc-Heading-Heading-MtWFE"
+          data-component="Heading"
         >
           Legend
         </h4>
@@ -79,6 +80,7 @@ exports[`renderer/routes/components/primitives/Title.tsx > should render the tit
         </svg>
         <h4
           class="prc-Heading-Heading-MtWFE"
+          data-component="Heading"
         >
           Legend
         </h4>

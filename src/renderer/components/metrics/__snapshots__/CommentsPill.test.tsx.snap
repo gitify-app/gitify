@@ -8,6 +8,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with 1 comment 1
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
@@ -68,6 +69,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with multiple co
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
