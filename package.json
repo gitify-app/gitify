@@ -130,7 +130,7 @@
     "vite-plugin-electron-renderer": "0.14.7",
     "vite-plus": "0.1.23",
     "vitest": "4.1.7",
-    "zustand": "5.0.13"
+    "zustand": "5.0.14"
   },
   "engines": {
     "node": ">=24"
