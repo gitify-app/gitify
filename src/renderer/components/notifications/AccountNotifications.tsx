@@ -15,7 +15,7 @@ import {
   groupNotificationsByRepository,
   isGroupByRepository,
 } from '../../utils/notifications/group';
-import { openAccountProfile, openGitHubIssues, openGitHubPulls } from '../../utils/system/links';
+import { openAccountProfile, openHostIssues, openHostPulls } from '../../utils/system/links';
 import { cn } from '../../utils/ui/cn';
 import { getChevronDetails } from '../../utils/ui/display';
 import { AllRead } from '../AllRead';
@@ -98,14 +98,14 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
             }
           >
             <HoverButton
-              action={() => openGitHubIssues(account.hostname)}
+              action={() => openHostIssues(account.hostname)}
               icon={IssueOpenedIcon}
               label="My issues ↗"
               testid="account-issues"
             />
 
             <HoverButton
-              action={() => openGitHubPulls(account.hostname)}
+              action={() => openHostPulls(account.hostname)}
               icon={GitPullRequestIcon}
               label="My pull requests ↗"
               testid="account-pull-requests"

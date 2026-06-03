@@ -1,3 +1,5 @@
+import { KeyIcon } from '@primer/octicons-react';
+
 import { mockGiteaAccount } from '../../../__mocks__/account-mocks';
 
 import type { Hostname, Link, SettingsState, Token } from '../../../types';
@@ -15,7 +17,6 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     it('reports unsupported capabilities', () => {
       expect(giteaAdapter.capabilities.markAsDone(mockGiteaAccount)).toBe(false);
       expect(giteaAdapter.capabilities.unsubscribeThread(mockGiteaAccount)).toBe(false);
-      expect(giteaAdapter.capabilities.answeredDiscussion(mockGiteaAccount)).toBe(false);
     });
 
     it('does not implement detailed enrichment', () => {
@@ -31,14 +32,20 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       });
     });
 
-    it('builds PAT settings and developer settings URLs from the hostname', () => {
+    it('builds PAT settings and account settings URLs from the hostname', () => {
       expect(giteaAdapter.getPersonalAccessTokenSettingsUrl('gitea.example.com' as Hostname)).toBe(
         'https://gitea.example.com/user/settings/applications',
       );
 
-      expect(giteaAdapter.getDeveloperSettingsUrl(mockGiteaAccount)).toBe(
+      expect(giteaAdapter.getAccountSettingsUrl(mockGiteaAccount)).toBe(
         'https://gitea.example.com/user/settings/applications',
       );
+    });
+
+    it('returns the key icon for every auth method (PAT-only forge today)', () => {
+      expect(giteaAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
+      expect(giteaAdapter.getAuthMethodIcon('GitHub App')).toBe(KeyIcon);
+      expect(giteaAdapter.getAuthMethodIcon('OAuth App')).toBe(KeyIcon);
     });
   });
 
@@ -160,11 +167,9 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     });
   });
 
-  describe('OAuth scope helpers', () => {
-    it('always reports every scope check as satisfied', () => {
-      expect(giteaAdapter.hasRequiredScopes(mockGiteaAccount)).toBe(true);
-      expect(giteaAdapter.hasRecommendedScopes(mockGiteaAccount)).toBe(true);
-      expect(giteaAdapter.hasAlternateScopes(mockGiteaAccount)).toBe(true);
+  describe('oauthScopes capability bundle', () => {
+    it('is omitted because Gitea has no OAuth scope concept', () => {
+      expect(giteaAdapter.oauthScopes).toBeUndefined();
     });
   });
 

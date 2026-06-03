@@ -151,9 +151,9 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     expect(screen.getByTestId('account-scopes-no-scopes')).toBeInTheDocument();
   });
 
-  it('should open developer settings when manage link is clicked', async () => {
-    const openDeveloperSettingsSpy = vi
-      .spyOn(links, 'openDeveloperSettings')
+  it('should open account settings when manage link is clicked', async () => {
+    const openAccountSettingsSpy = vi
+      .spyOn(links, 'openAccountSettings')
       .mockImplementation(vi.fn());
 
     await act(async () => {
@@ -162,7 +162,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
     await userEvent.click(screen.getByTestId('account-scopes-manage-link'));
 
-    expect(openDeveloperSettingsSpy).toHaveBeenCalledTimes(1);
+    expect(openAccountSettingsSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should go back when pressing the back icon', async () => {

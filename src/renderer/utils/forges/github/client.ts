@@ -5,14 +5,13 @@ import type {
   GetCommitCommentResponse,
   GetCommitResponse,
   GetReleaseResponse,
-  GitHubHtmlUrlResponse,
   IgnoreNotificationThreadSubscriptionResponse,
   ListNotificationsForAuthenticatedUserResponse,
   MarkNotificationThreadAsDoneResponse,
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
-import { githubCapabilities } from './capabilities';
+import { supportsAnsweredDiscussion } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
@@ -169,13 +168,6 @@ export async function getRelease(account: Account, url: Link): Promise<GetReleas
 }
 
 /**
- * Get the `html_url` from the GitHub response
- */
-export async function getHtmlUrl(account: Account, url: Link): Promise<GitHubHtmlUrlResponse> {
-  return followUrl<GitHubHtmlUrlResponse>(account, url);
-}
-
-/**
  * Follow GitHub Response URL
  */
 async function followUrl<TResult>(account: Account, url: Link): Promise<TResult> {
@@ -204,7 +196,7 @@ export async function fetchDiscussionByNumber(
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
-    includeIsAnswered: githubCapabilities.answeredDiscussion(notification.account),
+    includeIsAnswered: supportsAnsweredDiscussion(notification.account),
   });
 }
 
@@ -287,7 +279,7 @@ export async function fetchNotificationDetailsForList(
   }
 
   builder.setSharedVariables({
-    includeIsAnswered: githubCapabilities.answeredDiscussion(notifications[0].account),
+    includeIsAnswered: supportsAnsweredDiscussion(notifications[0].account),
     firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,

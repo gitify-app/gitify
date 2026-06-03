@@ -213,6 +213,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login-device-flow', {
         replace: true,
+        state: { forge: 'github' },
       });
     });
 
@@ -245,6 +246,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login-oauth-app', {
         replace: true,
+        state: { forge: 'github' },
       });
     });
 

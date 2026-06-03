@@ -29,7 +29,6 @@ const GITEA_DOCS_URL = 'https://docs.gitea.com/development/api-usage' as Link;
 const capabilities: ForgeCapabilities = {
   markAsDone: () => false,
   unsubscribeThread: () => false,
-  answeredDiscussion: () => false,
 };
 
 async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
@@ -101,11 +100,13 @@ export const giteaAdapter: ForgeAdapter = {
   validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
     `https://${hostname}/user/settings/applications` as Link,
-  getDeveloperSettingsUrl: (account: Account) =>
+  getAccountSettingsUrl: (account: Account) =>
     `https://${account.hostname}/user/settings/applications` as Link,
   documentationUrl: GITEA_DOCS_URL,
-
-  supportsOAuthScopes: false,
+  // Gitea only supports PAT today, so every method falls through to the key
+  // icon. Adding device-flow/OAuth support later means returning their icons
+  // for those branches.
+  getAuthMethodIcon: () => KeyIcon,
 
   loginMethods: [
     {
@@ -117,9 +118,6 @@ export const giteaAdapter: ForgeAdapter = {
     },
   ],
 
-  // Gitea has no GitHub-style OAuth scope concept; treat any token as fully
-  // scoped so the recommended/alternate UI prompts never surface for Gitea.
-  hasRequiredScopes: () => true,
-  hasRecommendedScopes: () => true,
-  hasAlternateScopes: () => true,
+  // Gitea has no GitHub-style OAuth scope concept, so `oauthScopes` is
+  // omitted. Callers skip scopes UI when this is undefined.
 };

@@ -13,9 +13,9 @@ import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, ClientID, ClientSecret, SettingsState, Token } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
-import * as authFlows from '../utils/auth/flows';
 import * as authUtils from '../utils/auth/utils';
 import * as storage from '../utils/core/storage';
+import { getAdapter } from '../utils/forges/registry';
 import * as notifications from '../utils/notifications/notifications';
 import * as comms from '../utils/system/comms';
 import * as tray from '../utils/system/tray';
@@ -212,39 +212,41 @@ describe('renderer/context/App.tsx', () => {
       } as unknown as AuthState);
     const removeAccountSpy = vi.spyOn(authUtils, 'removeAccount');
 
-    it('loginWithDeviceFlowStart calls startGitHubDeviceFlow', async () => {
-      const startGitHubDeviceFlowSpy = vi
-        .spyOn(authFlows, 'startGitHubDeviceFlow')
-        .mockImplementation(vi.fn());
+    it('loginWithDeviceFlowStart delegates to the forge adapter', async () => {
+      const adapter = getAdapter('github');
+      const startSpy = vi.spyOn(adapter.deviceFlow!, 'start').mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
 
       await act(async () => {
-        getContext().loginWithDeviceFlowStart();
+        getContext().loginWithDeviceFlowStart('github');
       });
 
-      expect(startGitHubDeviceFlowSpy).toHaveBeenCalled();
+      expect(startSpy).toHaveBeenCalled();
     });
 
-    it('loginWithDeviceFlowPoll calls pollGitHubDeviceFlow', async () => {
-      const pollGitHubDeviceFlowSpy = vi
-        .spyOn(authFlows, 'pollGitHubDeviceFlow')
-        .mockImplementation(vi.fn());
+    it('loginWithDeviceFlowPoll delegates to the forge adapter', async () => {
+      const adapter = getAdapter('github');
+      const pollSpy = vi.spyOn(adapter.deviceFlow!, 'poll').mockImplementation(vi.fn());
 
       const getContext = renderWithContext();
 
       await act(async () => {
-        getContext().loginWithDeviceFlowPoll('session' as unknown as DeviceFlowSession);
+        getContext().loginWithDeviceFlowPoll('github', 'session' as unknown as DeviceFlowSession);
       });
 
-      expect(pollGitHubDeviceFlowSpy).toHaveBeenCalledWith('session');
+      expect(pollSpy).toHaveBeenCalledWith('session');
     });
 
     it('loginWithDeviceFlowComplete calls addAccount', async () => {
       const getContext = renderWithContext();
 
       await act(async () => {
-        await getContext().loginWithDeviceFlowComplete('token' as Token, Constants.GITHUB_HOSTNAME);
+        await getContext().loginWithDeviceFlowComplete(
+          'github',
+          'token' as Token,
+          Constants.GITHUB_HOSTNAME,
+        );
       });
 
       expect(addAccountSpy).toHaveBeenCalledWith(
@@ -256,20 +258,61 @@ describe('renderer/context/App.tsx', () => {
       );
     });
 
-    it('loginWithOAuthApp calls performGitHubWebOAuth', async () => {
-      const performGitHubWebOAuthSpy = vi.spyOn(authFlows, 'performGitHubWebOAuth');
+    it('loginWithOAuthApp delegates to the forge adapter', async () => {
+      const adapter = getAdapter('github');
+      const oauthSpy = vi.spyOn(adapter.oauthWebApp!, 'performWebOAuth');
 
       const getContext = renderWithContext();
 
       await act(async () => {
-        getContext().loginWithOAuthApp({
+        getContext().loginWithOAuthApp('github', {
           clientId: 'id' as ClientID,
           clientSecret: 'secret' as ClientSecret,
           hostname: Constants.GITHUB_HOSTNAME,
         });
       });
 
-      expect(performGitHubWebOAuthSpy).toHaveBeenCalled();
+      expect(oauthSpy).toHaveBeenCalled();
+    });
+
+    it('loginWithDeviceFlowStart throws when the forge does not support device flow', async () => {
+      const getContext = renderWithContext();
+
+      await expect(getContext().loginWithDeviceFlowStart('gitea')).rejects.toThrow(
+        /Device flow is not supported for forge "gitea"/,
+      );
+    });
+
+    it('loginWithDeviceFlowPoll throws when the forge does not support device flow', async () => {
+      const getContext = renderWithContext();
+
+      await expect(
+        getContext().loginWithDeviceFlowPoll('gitea', {} as DeviceFlowSession),
+      ).rejects.toThrow(/Device flow is not supported for forge "gitea"/);
+    });
+
+    it('loginWithDeviceFlowComplete throws when the forge does not support device flow', async () => {
+      const getContext = renderWithContext();
+
+      await expect(
+        getContext().loginWithDeviceFlowComplete(
+          'gitea',
+          'token' as Token,
+          Constants.GITHUB_HOSTNAME,
+        ),
+      ).rejects.toThrow(/does not support device flow/);
+    });
+
+    it('loginWithOAuthApp throws when the forge does not support OAuth app login', async () => {
+      const getContext = renderWithContext();
+
+      await expect(
+        getContext().loginWithOAuthApp('gitea', {
+          clientId: 'id' as ClientID,
+          clientSecret: 'secret' as ClientSecret,
+          hostname: Constants.GITHUB_HOSTNAME,
+        }),
+      ).rejects.toThrow(/OAuth app login is not supported for forge "gitea"/);
     });
 
     it('logoutFromAccount calls removeAccountNotifications, removeAccount', async () => {

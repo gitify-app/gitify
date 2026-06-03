@@ -79,6 +79,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Login with Personal Access Token
               </h4>
@@ -101,10 +102,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
       >
         <div
           class="prc-FormControl-ControlVerticalLayout-8YotI"
+          data-component="FormControl"
           data-has-label=""
         >
           <label
             class="prc-components-Label-2mrqP"
+            data-component="FormControl.Label"
             for="_r_1_"
             id="_r_1_-label"
           >
@@ -124,6 +127,9 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
             class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
             data-block="true"
             data-component="TextInput"
+            data-no-leading-visual="true"
+            data-no-trailing-action="true"
+            data-no-trailing-visual="true"
           >
             <input
               aria-describedby="_r_1_-caption"
@@ -141,6 +147,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
           </span>
           <span
             class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
+            data-component="FormControl.Caption"
             id="_r_1_-caption"
           >
             <i
@@ -250,10 +257,12 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
         </div>
         <div
           class="prc-FormControl-ControlVerticalLayout-8YotI"
+          data-component="FormControl"
           data-has-label=""
         >
           <label
             class="prc-components-Label-2mrqP"
+            data-component="FormControl.Label"
             for="_r_9_"
             id="_r_9_-label"
           >
@@ -273,6 +282,8 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx > renders correctly 1`
             class="border-red-600 TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
             data-block="true"
             data-component="TextInput"
+            data-no-leading-visual="true"
+            data-no-trailing-visual="true"
             data-trailing-action="true"
           >
             <input

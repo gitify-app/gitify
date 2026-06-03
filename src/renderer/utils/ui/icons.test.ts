@@ -9,12 +9,7 @@ import {
 
 import { type GitifyPullRequestReview, IconColor } from '../../types';
 
-import {
-  getAuthMethodIcon,
-  getDefaultUserIcon,
-  getPlatformIcon,
-  getPullRequestReviewIcon,
-} from './icons';
+import { getDefaultUserIcon, getPlatformIcon, getPullRequestReviewIcon } from './icons';
 
 describe('renderer/utils/icons.ts', () => {
   describe('getPullRequestReviewIcon', () => {
@@ -108,14 +103,6 @@ describe('renderer/utils/icons.ts', () => {
 
       expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toBeNull();
     });
-  });
-
-  it('getAuthMethodIcon', () => {
-    expect(getAuthMethodIcon('GitHub App')).toMatchSnapshot();
-
-    expect(getAuthMethodIcon('OAuth App')).toMatchSnapshot();
-
-    expect(getAuthMethodIcon('Personal Access Token')).toMatchSnapshot();
   });
 
   it('getPlatformIcon', () => {

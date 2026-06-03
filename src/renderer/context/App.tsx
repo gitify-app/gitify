@@ -38,12 +38,6 @@ import type {
 } from '../utils/auth/types';
 
 import {
-  exchangeAuthCodeForAccessToken,
-  performGitHubWebOAuth,
-  pollGitHubDeviceFlow,
-  startGitHubDeviceFlow,
-} from '../utils/auth/flows';
-import {
   addAccount,
   getAccountUUID,
   hasAccounts,
@@ -105,10 +99,14 @@ function migrateLegacyAuthState(auth: AuthState): AuthState {
 export interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  loginWithDeviceFlowStart: (hostname?: Hostname, scopes?: string[]) => Promise<DeviceFlowSession>;
-  loginWithDeviceFlowPoll: (session: DeviceFlowSession) => Promise<Token | null>;
-  loginWithDeviceFlowComplete: (token: Token, hostname: Hostname) => Promise<void>;
-  loginWithOAuthApp: (data: LoginOAuthWebOptions) => Promise<void>;
+  loginWithDeviceFlowStart: (
+    forge: Forge,
+    hostname?: Hostname,
+    scopes?: string[],
+  ) => Promise<DeviceFlowSession>;
+  loginWithDeviceFlowPoll: (forge: Forge, session: DeviceFlowSession) => Promise<Token | null>;
+  loginWithDeviceFlowComplete: (forge: Forge, token: Token, hostname: Hostname) => Promise<void>;
+  loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
   logoutFromAccount: (account: Account) => Promise<void>;
 
@@ -439,40 +437,49 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [auth]);
 
   /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Initiate device flow session.
+   * Initiate an OAuth device-flow session for the given forge.
    */
   const loginWithDeviceFlowStart = useCallback(
-    async (hostname?: Hostname, scopes?: string[]) => await startGitHubDeviceFlow(hostname, scopes),
+    async (forge: Forge, hostname?: Hostname, scopes?: string[]) => {
+      const { deviceFlow } = getAdapter(forge);
+      if (!deviceFlow) {
+        throw new Error(`Device flow is not supported for forge "${forge}".`);
+      }
+      return await deviceFlow.start(hostname, scopes);
+    },
     [],
   );
 
   /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Poll for device flow session.
+   * Poll for completion of an OAuth device-flow session.
    */
-  const loginWithDeviceFlowPoll = useCallback(
-    async (session: DeviceFlowSession) => await pollGitHubDeviceFlow(session),
-    [],
-  );
+  const loginWithDeviceFlowPoll = useCallback(async (forge: Forge, session: DeviceFlowSession) => {
+    const { deviceFlow } = getAdapter(forge);
+    if (!deviceFlow) {
+      throw new Error(`Device flow is not supported for forge "${forge}".`);
+    }
+    return await deviceFlow.poll(session);
+  }, []);
 
   /**
-   * Login to GitHub Gitify OAuth App.
-   *
-   * Finalize device flow session.
+   * Finalise an OAuth device-flow session by recording the account.
    */
   const loginWithDeviceFlowComplete = useCallback(
-    async (token: Token, hostname: Hostname) => {
+    async (forge: Forge, token: Token, hostname: Hostname) => {
+      const { deviceFlow } = getAdapter(forge);
+      if (!deviceFlow) {
+        throw new Error(`Forge "${forge}" does not support device flow.`);
+      }
+      const method = deviceFlow.authMethod;
+
       const existingAccount = auth.accounts.find(
-        (a) => a.hostname === hostname && a.method === 'GitHub App',
+        (a) => a.hostname === hostname && a.method === method,
       );
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname, 'github');
+      const updatedAuth = await addAccount(auth, method, token, hostname, forge);
 
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });
@@ -481,12 +488,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   /**
-   * Login with custom GitHub OAuth App.
+   * Login with a custom OAuth app on the given forge.
    */
   const loginWithOAuthApp = useCallback(
-    async (data: LoginOAuthWebOptions) => {
-      const { authOptions, authCode } = await performGitHubWebOAuth(data);
-      const token = await exchangeAuthCodeForAccessToken(authCode, authOptions);
+    async (forge: Forge, data: LoginOAuthWebOptions) => {
+      const { oauthWebApp } = getAdapter(forge);
+      if (!oauthWebApp) {
+        throw new Error(`OAuth app login is not supported for forge "${forge}".`);
+      }
+
+      const { authOptions, authCode } = await oauthWebApp.performWebOAuth(data);
+      const token = await oauthWebApp.exchangeAuthCodeForToken(authCode, authOptions);
 
       const existingAccount = auth.accounts.find(
         (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
@@ -495,13 +507,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(
-        auth,
-        'OAuth App',
-        token,
-        authOptions.hostname,
-        'github',
-      );
+      const updatedAuth = await addAccount(auth, 'OAuth App', token, authOptions.hostname, forge);
 
       persistAuth(updatedAuth);
       await fetchNotifications({ auth: updatedAuth, settings });

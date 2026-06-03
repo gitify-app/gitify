@@ -1,26 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/utils/icons.ts > getAuthMethodIcon 1`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
-exports[`renderer/utils/icons.ts > getAuthMethodIcon 2`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
-exports[`renderer/utils/icons.ts > getAuthMethodIcon 3`] = `
-{
-  "$$typeof": Symbol(react.forward_ref),
-  "render": [Function],
-}
-`;
-
 exports[`renderer/utils/icons.ts > getPlatformIcon 1`] = `
 {
   "$$typeof": Symbol(react.forward_ref),

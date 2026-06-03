@@ -202,6 +202,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -280,6 +281,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -358,6 +360,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -436,6 +439,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -515,6 +519,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -591,6 +596,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -679,6 +685,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -757,6 +764,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -886,6 +894,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -964,6 +973,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -1043,6 +1053,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -1119,6 +1130,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span
@@ -1205,6 +1217,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         >
           <kbd
             class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+            data-component="KeybindingHint"
             data-testid="keybinding-hint"
           >
             <span

@@ -7,20 +7,21 @@ import {
 import { request } from '@octokit/request';
 import { RequestError } from '@octokit/request-error';
 
-import { Constants } from '../../constants';
+import { Constants } from '../../../constants';
 
-import type { AuthCode, Hostname, Link, Token } from '../../types';
-import type {
-  AuthResponse,
-  DeviceFlowErrorResponse,
-  DeviceFlowSession,
-  LoginOAuthWebOptions,
-} from './types';
+import type { AuthCode, Hostname, Link, Token } from '../../../types';
+import type { AuthResponse, DeviceFlowSession, LoginOAuthWebOptions } from '../../auth/types';
 
-import { rendererLogError, rendererLogInfo, toError } from '../core/logger';
-import { openExternalLink } from '../system/comms';
-import { getRecommendedScopeNames } from './scopes';
-import { getGitHubAuthBaseUrl } from './utils';
+import { getRecommendedScopeNames } from '../../auth/scopes';
+import { rendererLogError, rendererLogInfo, toError } from '../../core/logger';
+import { openExternalLink } from '../../system/comms';
+import { getGitHubAuthBaseUrl } from './auth';
+
+type DeviceFlowErrorResponse = {
+  error: string;
+  error_description: string;
+  error_uri: string;
+};
 
 /**
  * Initiate a GitHub OAuth Web Flow (OAuth App) authentication.
@@ -140,7 +141,12 @@ export async function pollGitHubDeviceFlow(session: DeviceFlowSession): Promise<
       const response = err.response?.data as DeviceFlowErrorResponse;
       const errorCode = response.error;
 
-      if (errorCode === 'authorization_pending' || errorCode === 'slow_down') {
+      if (errorCode === 'authorization_pending') {
+        return null;
+      }
+
+      if (errorCode === 'slow_down') {
+        session.intervalSeconds += 5;
         return null;
       }
     }

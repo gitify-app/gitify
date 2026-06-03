@@ -78,6 +78,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
             </svg>
             <h4
               class="prc-Heading-Heading-MtWFE"
+              data-component="Heading"
             >
               Filters
             </h4>
@@ -134,6 +135,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Account
               </h4>
@@ -266,6 +268,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Search
               </h4>
@@ -361,6 +364,9 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
                 class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                 data-block="true"
                 data-component="TextInputWithTokens"
+                data-no-leading-visual="true"
+                data-no-trailing-action="true"
+                data-no-trailing-visual="true"
                 data-size="small"
               >
                 <div
@@ -436,6 +442,9 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
                 class="prc-TextInputWithTokens-TextInputWrapper-HAIfc prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
                 data-block="true"
                 data-component="TextInputWithTokens"
+                data-no-leading-visual="true"
+                data-no-trailing-action="true"
+                data-no-trailing-visual="true"
                 data-size="small"
               >
                 <div
@@ -496,6 +505,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 User Type
               </h4>
@@ -684,6 +694,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Type
               </h4>
@@ -1064,6 +1075,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 State
               </h4>
@@ -1360,6 +1372,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Reason
               </h4>

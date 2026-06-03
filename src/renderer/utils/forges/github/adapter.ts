@@ -1,16 +1,19 @@
-import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import { AppsIcon, KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 
 import { Constants } from '../../../constants';
 
 import type { Account, Link, RawGitifyNotification, SettingsState } from '../../../types';
+import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
 import {
   extractHostVersion,
   getDeveloperSettingsURL,
+  getNewOAuthAppURL,
   getNewTokenURL,
+  isValidClientId,
   isValidToken,
-} from '../../auth/utils';
+} from './auth';
 import { githubCapabilities } from './capabilities';
 import {
   fetchAuthenticatedUserDetails,
@@ -20,6 +23,12 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
+import {
+  exchangeAuthCodeForAccessToken,
+  performGitHubWebOAuth,
+  pollGitHubDeviceFlow,
+  startGitHubDeviceFlow,
+} from './flows';
 import { createNotificationHandler } from './handlers';
 import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
 import { transformNotifications } from './transform';
@@ -96,10 +105,9 @@ export const githubAdapter: ForgeAdapter = {
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
-  getDeveloperSettingsUrl: getDeveloperSettingsURL,
+  getAccountSettingsUrl: getDeveloperSettingsURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
-
-  supportsOAuthScopes: true,
+  getAuthMethodIcon: githubAuthMethodIcon,
 
   loginMethods: [
     {
@@ -108,6 +116,7 @@ export const githubAdapter: ForgeAdapter = {
       label: 'GitHub',
       variant: 'primary',
       route: '/login-device-flow',
+      state: { forge: 'github' },
     },
     {
       testId: 'login-pat',
@@ -120,12 +129,30 @@ export const githubAdapter: ForgeAdapter = {
       icon: PersonIcon,
       label: 'OAuth App',
       route: '/login-oauth-app',
+      state: { forge: 'github' },
     },
   ],
 
-  hasRequiredScopes: (account) => accountHasScopes(account, 'REQUIRED'),
-  hasRecommendedScopes: (account) => accountHasScopes(account, 'RECOMMENDED'),
-  hasAlternateScopes: (account) => accountHasScopes(account, 'ALTERNATE'),
+  deviceFlow: {
+    authMethod: 'GitHub App',
+    start: startGitHubDeviceFlow,
+    poll: pollGitHubDeviceFlow,
+    getRevokeAccessUrl: (hostname) =>
+      getDeveloperSettingsURL({ hostname, method: 'GitHub App' } as Account),
+  },
+
+  oauthWebApp: {
+    performWebOAuth: performGitHubWebOAuth,
+    exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
+    validateClientId: isValidClientId,
+    getNewOAuthAppUrl: getNewOAuthAppURL,
+  },
+
+  oauthScopes: {
+    hasRequired: (account) => accountHasScopes(account, 'REQUIRED'),
+    hasRecommended: (account) => accountHasScopes(account, 'RECOMMENDED'),
+    hasAlternate: (account) => accountHasScopes(account, 'ALTERNATE'),
+  },
 };
 
 function accountHasScopes(
@@ -133,4 +160,15 @@ function accountHasScopes(
   group: 'REQUIRED' | 'RECOMMENDED' | 'ALTERNATE',
 ): boolean {
   return Constants.OAUTH_SCOPES[group].every(({ name }) => (account.scopes ?? []).includes(name));
+}
+
+function githubAuthMethodIcon(method: AuthMethod) {
+  switch (method) {
+    case 'GitHub App':
+      return AppsIcon;
+    case 'OAuth App':
+      return PersonIcon;
+    default:
+      return KeyIcon;
+  }
 }

@@ -1,11 +1,17 @@
-import { Constants } from '../../../constants';
-
 import type { GitifySubject, RawGitifyNotification, SettingsState } from '../../../types';
 
 import { rendererLogError, rendererLogWarn, toError } from '../../core/logger';
 import { fetchNotificationDetailsForList } from './client';
 import type { FetchMergedDetailsTemplateQuery } from './graphql/generated/graphql';
 import { createNotificationHandler } from './handlers';
+
+/**
+ * Maximum number of notifications batched into a single merged GraphQL query
+ * by `enrichGitHubNotifications`. GitHub's GraphQL alias cap is well above
+ * 100; this is a conservative ceiling that keeps individual responses small
+ * and parseable.
+ */
+export const GITHUB_API_MERGE_BATCH_SIZE = 100;
 
 /**
  * Enrich GitHub notifications with additional subject details (state, user,
@@ -33,7 +39,7 @@ async function fetchInBatches(
 ): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
   const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
 
-  const batchSize = Constants.GITHUB_API_MERGE_BATCH_SIZE;
+  const batchSize = GITHUB_API_MERGE_BATCH_SIZE;
 
   for (let start = 0; start < notifications.length; start += batchSize) {
     const batchIndex = Math.floor(start / batchSize) + 1;

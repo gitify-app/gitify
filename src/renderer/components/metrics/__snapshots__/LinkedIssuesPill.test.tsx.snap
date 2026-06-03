@@ -8,6 +8,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
@@ -71,6 +72,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"

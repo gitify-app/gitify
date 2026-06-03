@@ -13,27 +13,22 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { Account, ClientID, ClientSecret, Hostname, Token } from '../types';
+import type { Account, ClientID, ClientSecret, Forge, Token } from '../types';
 import type { LoginOAuthWebOptions } from '../utils/auth/types';
 
-import {
-  getNewOAuthAppURL,
-  isValidClientId,
-  isValidHostname,
-  isValidToken,
-} from '../utils/auth/utils';
+import { isValidHostname } from '../utils/auth/utils';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getAdapter } from '../utils/forges/registry';
 import { openExternalLink } from '../utils/system/comms';
 
 interface LocationState {
   account?: Account;
+  forge?: Forge;
 }
 
-export interface IFormData {
-  hostname: Hostname;
-  clientId: ClientID;
-  clientSecret: ClientSecret;
-}
+// IFormData mirrors LoginOAuthWebOptions exactly — keep them aliased so the
+// form can be passed straight into the context callback without casting.
+export type IFormData = LoginOAuthWebOptions;
 
 interface IFormErrors {
   hostname?: string;
@@ -42,8 +37,9 @@ interface IFormErrors {
   invalidCredentialsForHost?: string;
 }
 
-export const validateForm = (values: IFormData): IFormErrors => {
+export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
   const errors: IFormErrors = {};
+  const adapter = getAdapter(forge);
 
   if (!values.hostname) {
     errors.hostname = 'Hostname is required';
@@ -53,13 +49,13 @@ export const validateForm = (values: IFormData): IFormErrors => {
 
   if (!values.clientId) {
     errors.clientId = 'Client ID is required';
-  } else if (!isValidClientId(values.clientId)) {
+  } else if (!adapter.oauthWebApp?.validateClientId(values.clientId)) {
     errors.clientId = 'Client ID format is invalid';
   }
 
   if (!values.clientSecret) {
     errors.clientSecret = 'Client Secret is required';
-  } else if (!isValidToken(values.clientSecret as unknown as Token)) {
+  } else if (!adapter.validateToken(values.clientSecret as unknown as Token)) {
     errors.clientSecret = 'Client Secret format is invalid';
   }
 
@@ -69,7 +65,8 @@ export const validateForm = (values: IFormData): IFormErrors => {
 export const LoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
+  const { account: reAuthAccount, forge: routeForge } = (location.state ?? {}) as LocationState;
+  const forge: Forge = routeForge ?? reAuthAccount?.forge ?? 'github';
 
   const { loginWithOAuthApp } = useAppContext();
 
@@ -87,7 +84,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
 
-    const newErrors = validateForm(formData);
+    const newErrors = validateForm(formData, forge);
 
     setErrors(newErrors);
 
@@ -108,7 +105,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
   const verifyLoginCredentials = useCallback(
     async (data: IFormData) => {
       try {
-        await loginWithOAuthApp(data as LoginOAuthWebOptions);
+        await loginWithOAuthApp(forge, data);
         navigate('/');
       } catch (err) {
         rendererLogError('loginWithOAuthApp', 'Failed to login with OAuth App', toError(err));
@@ -118,7 +115,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
       }
     },
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
-    [loginWithOAuthApp],
+    [loginWithOAuthApp, forge],
   );
 
   return (
@@ -170,7 +167,12 @@ export const LoginWithOAuthAppRoute: FC = () => {
               data-testid="login-create-oauth-app"
               disabled={!formData.hostname}
               leadingVisual={PersonIcon}
-              onClick={() => openExternalLink(getNewOAuthAppURL(formData.hostname))}
+              onClick={() => {
+                const url = getAdapter(forge).oauthWebApp?.getNewOAuthAppUrl(formData.hostname);
+                if (url) {
+                  openExternalLink(url);
+                }
+              }}
               size="small"
             >
               Create new OAuth App

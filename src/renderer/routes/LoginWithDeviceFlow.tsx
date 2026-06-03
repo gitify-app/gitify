@@ -13,16 +13,17 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-import type { Account, Link } from '../types';
+import type { Account, Forge, Hostname, Link } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import { getAlternateScopeNames, getRecommendedScopeNames } from '../utils/auth/scopes';
 import { rendererLogError, toError } from '../utils/core/logger';
+import { getAdapter } from '../utils/forges/registry';
 import { copyToClipboard, openExternalLink } from '../utils/system/comms';
-import { openDeveloperSettings } from '../utils/system/links';
 
 interface LocationState {
   account?: Account;
+  forge?: Forge;
 }
 
 type ScopeChoice = 'public' | 'full';
@@ -30,7 +31,12 @@ type ScopeChoice = 'public' | 'full';
 export const LoginWithDeviceFlowRoute: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
+  const { account: reAuthAccount, forge: routeForge } = (location.state ?? {}) as LocationState;
+  // Forge is supplied either by the login-method descriptor's state (new
+  // login) or via the re-authenticating account (re-auth). Either path lands
+  // here through a registered adapter, so a missing forge would indicate a
+  // mis-registered route — fall back to 'github' to preserve existing UX.
+  const forge: Forge = routeForge ?? reAuthAccount?.forge ?? 'github';
 
   const { loginWithDeviceFlowStart, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete } =
     useAppContext();
@@ -47,7 +53,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
         const scopes =
           scopeChoice === 'public' ? getAlternateScopeNames() : getRecommendedScopeNames();
 
-        const newSession = await loginWithDeviceFlowStart(reAuthAccount?.hostname, scopes);
+        const newSession = await loginWithDeviceFlowStart(forge, reAuthAccount?.hostname, scopes);
         setSession(newSession);
 
         // Auto-copy the user code to clipboard
@@ -64,7 +70,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
     if (scopeChoice) {
       initializeDeviceFlow();
     }
-  }, [loginWithDeviceFlowStart, reAuthAccount, scopeChoice]);
+  }, [loginWithDeviceFlowStart, reAuthAccount, scopeChoice, forge]);
 
   // Poll for device flow completion
   useEffect(() => {
@@ -77,18 +83,18 @@ export const LoginWithDeviceFlowRoute: FC = () => {
 
     const startPolling = async () => {
       setIsPolling(true);
-      const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
 
       try {
         while (isActive && Date.now() < session.expiresAt) {
-          const token = await loginWithDeviceFlowPoll(session);
+          const token = await loginWithDeviceFlowPoll(forge, session);
 
           if (token && isActive) {
-            await loginWithDeviceFlowComplete(token, session.hostname);
+            await loginWithDeviceFlowComplete(forge, token, session.hostname);
             navigate('/');
             return;
           }
 
+          const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
           await new Promise((resolve) => {
             timeoutId = setTimeout(resolve, intervalMs);
           });
@@ -118,7 +124,7 @@ export const LoginWithDeviceFlowRoute: FC = () => {
       }
     };
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
-  }, [session, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete]);
+  }, [session, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete, forge]);
 
   const handleCopyUserCode = useCallback(async () => {
     if (session?.userCode) {
@@ -223,25 +229,32 @@ export const LoginWithDeviceFlowRoute: FC = () => {
           </Stack>
         </Button>
 
-        <Stack gap="none">
-          <Text as="em" size="small">
-            Note: to change previously granted permissions, revoke Gitify's access at{' '}
-            <button
-              className="text-gitify-link cursor-pointer"
-              onClick={() =>
-                openDeveloperSettings({
-                  hostname: Constants.GITHUB_HOSTNAME,
-                  method: 'GitHub App',
-                } as Account)
-              }
-              title="GitHub → Developer Settings"
-              type="button"
-            >
-              GitHub → Developer Settings
-            </button>
-            , then re-authorize above.
-          </Text>
-        </Stack>
+        {(() => {
+          const adapter = getAdapter(forge);
+          const revokeUrl = adapter.deviceFlow?.getRevokeAccessUrl(
+            (reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME) as Hostname,
+          );
+          if (!revokeUrl) {
+            return null;
+          }
+          const label = `${adapter.displayName} → Developer Settings`;
+          return (
+            <Stack gap="none">
+              <Text as="em" size="small">
+                Note: to change previously granted permissions, revoke Gitify's access at{' '}
+                <button
+                  className="text-gitify-link cursor-pointer"
+                  onClick={() => openExternalLink(revokeUrl)}
+                  title={label}
+                  type="button"
+                >
+                  {label}
+                </button>
+                , then re-authorize above.
+              </Text>
+            </Stack>
+          );
+        })()}
       </Stack>
     </Stack>
   );

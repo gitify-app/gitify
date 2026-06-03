@@ -8,6 +8,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
@@ -63,6 +64,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
