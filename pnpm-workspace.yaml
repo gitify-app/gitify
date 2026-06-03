@@ -8,6 +8,6 @@ overrides:
   # Force patched versions of transitive dev-tooling deps pulled in by
   # react-devtools (old electron/got/cross-spawn) so they don't trip security
   # scanners. None of these ship in the packaged app.
-  cross-spawn: '^7.0.6'
-  got: '^11.8.5'
+  cross-spawn: '7.0.6'
+  got: '11.8.6'
   electron: '$electron'
