@@ -6,8 +6,8 @@ settings:
 
 overrides:
   react-is: 19.2.6
-  cross-spawn: ^7.0.6
-  got: ^11.8.5
+  cross-spawn: 7.0.6
+  got: 11.8.6
   electron: 42.3.0
 
 importers:
