@@ -145,9 +145,6 @@
       "electron-winstaller",
       "esbuild",
       "unrs-resolver"
-    ],
-    "overrides": {
-      "react-is": "19.2.6"
-    }
+    ]
   }
 }
