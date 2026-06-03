@@ -1252,12 +1252,6 @@ packages:
   '@primer/live-region-element@0.8.0':
     resolution: {integrity: sha512-DIp04IeZvZ+gwCUcBchIvRwJA2PikP/6hnFhcLKgwttcg5OYjBH9t0cZjLnv10Aq1jN0rAFFG+WPMd3bw4hXcA==}
 
-  '@primer/octicons-react@19.27.0':
-    resolution: {integrity: sha512-9bm6DPfMlRMPnAfbqKhRIk9aaYbEw89DHqE9L0k2Xph0AjR+OxCy59of5X0G0epuplMBGFCnkaNhR2HmeJnNJw==}
-    engines: {node: '>=8'}
-    peerDependencies:
-      react: '>=16.3'
-
   '@primer/octicons-react@19.28.0':
     resolution: {integrity: sha512-Xe3ZS/NtxRK/QXMlqh6Xn49nM4153VXgPQcwyIx6r2McZKkrAhP7xPe7yLhfx3X34rnxj6yimCnX7kswV30Vqw==}
     engines: {node: '>=8'}
@@ -1820,8 +1814,8 @@ packages:
     resolution: {integrity: sha512-b4PhJ+zYj4357zwk4TTuF2nEe0vVtOrwdsrNo5hL+u1ojXNhh1FgJ6pg1jzDlwlT4oBdzfSwaBwMCtFCsIWg8Q==}
     engines: {node: '>=18.0.0'}
 
-  '@whatwg-node/node-fetch@0.8.5':
-    resolution: {integrity: sha512-4xzCl/zphPqlp9tASLVeUhB5+WJHbuWGYpfoC2q1qh5dw0AqZBW7L27V5roxYWijPxj4sspRAAoOH3d2ztaHUQ==}
+  '@whatwg-node/node-fetch@0.8.6':
+    resolution: {integrity: sha512-BDMdYFcerLQkwA2RTldxOqRCs6ZQD1S7UgP3pUdGUkcbgTrP/V5ko77ZkCww9DHmC4lpoYuwigGfQYj285gMvA==}
     engines: {node: '>=18.0.0'}
 
   '@whatwg-node/promise-helpers@1.3.2':
@@ -5426,10 +5420,6 @@ snapshots:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.6.0
 
-  '@primer/octicons-react@19.27.0(react@19.2.6)':
-    dependencies:
-      react: 19.2.6
-
   '@primer/octicons-react@19.28.0(react@19.2.6)':
     dependencies:
       react: 19.2.6
@@ -5445,7 +5435,7 @@ snapshots:
       '@oddbird/popover-polyfill': 0.5.2
       '@primer/behaviors': 1.10.3
       '@primer/live-region-element': 0.8.0
-      '@primer/octicons-react': 19.27.0(react@19.2.6)
+      '@primer/octicons-react': 19.28.0(react@19.2.6)
       '@primer/primitives': 11.9.0
       '@tanstack/react-virtual': 3.14.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       clsx: 2.1.1
@@ -5888,10 +5878,10 @@ snapshots:
 
   '@whatwg-node/fetch@0.10.13':
     dependencies:
-      '@whatwg-node/node-fetch': 0.8.5
+      '@whatwg-node/node-fetch': 0.8.6
       urlpattern-polyfill: 10.1.0
 
-  '@whatwg-node/node-fetch@0.8.5':
+  '@whatwg-node/node-fetch@0.8.6':
     dependencies:
       '@fastify/busboy': 3.2.0
       '@whatwg-node/disposablestack': 0.0.6
