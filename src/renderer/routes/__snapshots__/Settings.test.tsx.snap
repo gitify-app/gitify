@@ -78,6 +78,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </svg>
             <h4
               class="prc-Heading-Heading-MtWFE"
+              data-component="Heading"
             >
               Settings
             </h4>
@@ -132,6 +133,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Appearance
               </h4>
@@ -165,6 +167,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <span
               class="prc-Select-TextInputWrapper-5NYFF prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
               data-component="TextInput"
+              data-no-leading-visual="true"
+              data-no-trailing-action="true"
+              data-no-trailing-visual="true"
             >
               <select
                 aria-invalid="false"
@@ -305,6 +310,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </label>
             <div
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
+              data-component="ButtonGroup"
             >
               <div>
                 <button
@@ -519,6 +525,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Notifications
               </h4>
@@ -735,6 +742,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </label>
             <div
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
+              data-component="ButtonGroup"
             >
               <div>
                 <button
@@ -1412,6 +1420,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 Tray
               </h4>
@@ -1612,6 +1621,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </svg>
               <h4
                 class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
               >
                 System
               </h4>
@@ -1780,6 +1790,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </div>
             <div
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
+              data-component="ButtonGroup"
               data-testid="settings-shortcut-group"
             >
               <div>
@@ -1961,6 +1972,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </div>
             <div
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
+              data-component="ButtonGroup"
               data-testid="settings-volume-group"
             >
               <div>
@@ -2346,6 +2358,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -2424,6 +2437,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span

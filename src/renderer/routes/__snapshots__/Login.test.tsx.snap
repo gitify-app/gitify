@@ -80,11 +80,13 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
       >
         <h2
           class="prc-Heading-Heading-MtWFE"
+          data-component="Heading"
         >
           Notifications
         </h2>
         <h3
           class="prc-Heading-Heading-MtWFE"
+          data-component="Heading"
         >
           on your menu bar
         </h3>

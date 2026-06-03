@@ -113,6 +113,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -191,6 +192,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -269,6 +271,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -347,6 +350,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -426,6 +430,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -502,6 +507,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -590,6 +596,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span
@@ -668,6 +675,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
           >
             <kbd
               class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
+              data-component="KeybindingHint"
               data-testid="keybinding-hint"
             >
               <span

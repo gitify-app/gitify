@@ -8,6 +8,7 @@ exports[`renderer/components/metrics/LabelsPill.tsx > renders with labels 1`] = 
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
@@ -57,6 +58,7 @@ exports[`renderer/components/metrics/LabelsPill.tsx > renders with labels 1`] = 
   >
     <ul
       class="prc-LabelGroup-Container-E-ePP"
+      data-component="LabelGroup"
       data-list="true"
       data-overflow="inline"
     >

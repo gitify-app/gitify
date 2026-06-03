@@ -41,6 +41,7 @@ exports[`renderer/components/filters/StateFilter.tsx > should render itself & it
           </svg>
           <h4
             class="prc-Heading-Heading-MtWFE"
+            data-component="Heading"
           >
             State
           </h4>

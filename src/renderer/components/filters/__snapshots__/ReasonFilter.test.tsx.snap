@@ -38,6 +38,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           </svg>
           <h4
             class="prc-Heading-Heading-MtWFE"
+            data-component="Heading"
           >
             Reason
           </h4>

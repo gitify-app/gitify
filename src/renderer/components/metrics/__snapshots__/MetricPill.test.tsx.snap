@@ -8,6 +8,7 @@ exports[`renderer/components/metrics/MetricPill.tsx > should render with metric 
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"
@@ -68,6 +69,7 @@ exports[`renderer/components/metrics/MetricPill.tsx > should render without metr
   >
     <span
       class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
       data-size="small"
       data-variant="secondary"
       tabindex="0"

@@ -75,6 +75,7 @@ exports[`renderer/components/primitives/Header.tsx > should render itself & its 
             </svg>
             <h4
               class="prc-Heading-Heading-MtWFE"
+              data-component="Heading"
             >
               Test Header
             </h4>
