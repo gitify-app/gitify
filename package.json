@@ -126,8 +126,7 @@
     "typescript": "6.0.3",
     "vite": "8.0.14",
     "vite-plugin-checker": "0.14.1",
-    "vite-plugin-electron": "0.29.1",
-    "vite-plugin-electron-renderer": "0.14.7",
+    "vite-plugin-electron": "1.0.0",
     "vite-plus": "0.1.23",
     "vitest": "4.1.7",
     "zustand": "5.0.14"
@@ -135,16 +134,5 @@
   "engines": {
     "node": ">=24"
   },
-  "packageManager": "pnpm@11.5.0",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@swc/core",
-      "@tailwindcss/oxide",
-      "electron",
-      "electron-winstaller",
-      "esbuild",
-      "unrs-resolver"
-    ]
-  }
+  "packageManager": "pnpm@11.5.0"
 }
