@@ -1,10 +1,18 @@
 allowBuilds:
   '@parcel/watcher': true
   '@primer/primitives': false
+  '@swc/core': true
+  '@tailwindcss/oxide': true
   electron: true
   electron-winstaller: true
+  esbuild: true
+  unrs-resolver: true
 overrides:
   react-is: '19.2.6'
+  # Temporary workaround for electron/electron#51619.
+  # Electron installs can miss `path.txt` on Node 24.16+ until the upstream
+  # yauzl fix is picked up. Remove this once Electron ships a proper fix.
+  yauzl: '3.3.1'
   # Force patched versions of transitive dev-tooling deps pulled in by
   # react-devtools (old electron/got/cross-spawn) so they don't trip security
   # scanners. None of these ship in the packaged app.
