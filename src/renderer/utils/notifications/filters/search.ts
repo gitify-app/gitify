@@ -7,9 +7,15 @@ export const SEARCH_DELIMITER = ':';
 const SEARCH_QUALIFIERS = {
   author: {
     prefix: 'author:',
-    description: 'filter by notification author',
+    description: 'filter by thread author',
     requiresDetailsNotifications: true,
-    extract: (n: RawGitifyNotification) => n.subject?.user?.login,
+    extract: (n: RawGitifyNotification) => n.subject?.author?.login,
+  },
+  commenter: {
+    prefix: 'commenter:',
+    description: 'filter by latest comment author',
+    requiresDetailsNotifications: true,
+    extract: (n: RawGitifyNotification) => n.subject?.commenter?.login,
   },
   org: {
     prefix: 'org:',

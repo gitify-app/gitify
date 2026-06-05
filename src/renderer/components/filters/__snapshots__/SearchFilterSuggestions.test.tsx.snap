@@ -126,7 +126,29 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
             <span
               class="text-xs opacity-90 prc-Text-Text-9mHv3"
             >
-              filter by notification author
+              filter by thread author
+            </span>
+          </div>
+        </div>
+        <div>
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-direction="vertical"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <span
+              class="text-xs font-semibold prc-Text-Text-9mHv3"
+            >
+              commenter:
+            </span>
+            <span
+              class="text-xs opacity-90 prc-Text-Text-9mHv3"
+            >
+              filter by latest comment author
             </span>
           </div>
         </div>

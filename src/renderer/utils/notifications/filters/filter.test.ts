@@ -19,6 +19,18 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
             avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
             type: 'User',
           },
+          author: {
+            login: 'github-user',
+            htmlUrl: 'https://github.com/user' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+            type: 'User',
+          },
+          commenter: {
+            login: 'coderabbitai',
+            htmlUrl: 'https://github.com/coderabbitai' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+            type: 'Bot',
+          },
         },
         {
           owner: {
@@ -33,6 +45,12 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         {
           title: 'Bot authored notification',
           user: {
+            login: 'github-bot',
+            htmlUrl: 'https://github.com/bot' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+            type: 'Bot',
+          },
+          author: {
             login: 'github-bot',
             htmlUrl: 'https://github.com/bot' as Link,
             avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
@@ -180,6 +198,50 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('should not match author handle against the latest commenter', async () => {
+        // The bot is the latest commenter on the human-authored notification,
+        // but it is not the author, so an author exclude must not hide it.
+        useFiltersStore.setState({
+          excludeSearchTokens: ['author:coderabbitai' as SearchToken],
+        });
+
+        const result = filterDetailedNotifications(mockNotifications, {
+          ...mockSettings,
+          detailedNotifications: true,
+        });
+
+        expect(result.length).toBe(2);
+        expect(result).toEqual(mockNotifications);
+      });
+
+      it('should filter notifications that match include commenter handle', async () => {
+        useFiltersStore.setState({
+          includeSearchTokens: ['commenter:coderabbitai' as SearchToken],
+        });
+
+        const result = filterDetailedNotifications(mockNotifications, {
+          ...mockSettings,
+          detailedNotifications: true,
+        });
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('should filter notifications that match exclude commenter handle', async () => {
+        useFiltersStore.setState({
+          excludeSearchTokens: ['commenter:coderabbitai' as SearchToken],
+        });
+
+        const result = filterDetailedNotifications(mockNotifications, {
+          ...mockSettings,
+          detailedNotifications: true,
+        });
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[1]]);
       });
 
       it('should filter notifications by state when provided', async () => {
