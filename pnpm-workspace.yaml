@@ -21,3 +21,4 @@ overrides:
   cross-spawn: '7.0.6'
   got: '11.8.6'
   electron: '$electron'
+savePrefix: ''

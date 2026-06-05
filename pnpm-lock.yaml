@@ -19,7 +19,7 @@ importers:
         specifier: 5.4.4
         version: 5.4.4
       electron-menubar:
-        specifier: ^10.0.2
+        specifier: 10.0.2
         version: 10.0.2(electron@42.3.0)
       electron-updater:
         specifier: 6.8.3
