@@ -7,6 +7,8 @@ allowBuilds:
   electron-winstaller: true
   esbuild: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - electron-menubar@10.0.2
 overrides:
   react-is: '19.2.6'
   # Temporary workaround for electron/electron#51619.
@@ -19,3 +21,4 @@ overrides:
   cross-spawn: '7.0.6'
   got: '11.8.6'
   electron: '$electron'
+savePrefix: ''

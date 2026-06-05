@@ -1,4 +1,4 @@
-import type { Menubar } from 'menubar';
+import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
 

@@ -1,4 +1,4 @@
-import type { Menubar } from 'menubar';
+import type { Menubar } from 'electron-menubar';
 
 vi.mock('electron', () => ({
   dialog: {
