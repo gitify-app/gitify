@@ -385,8 +385,16 @@ export interface GitifySubject {
   number?: number;
   /** Parsed state */
   state?: GitifyNotificationState;
-  /** Latest comment/PR author */
+  /**
+   * Identity shown for this notification in the UI (avatar, user-type filter).
+   * Resolves to the most recent actor: the latest commenter, falling back to
+   * the author.
+   */
   user?: GitifyNotificationUser;
+  /** Author who created the thread (pull request/issue/discussion/release/commit) */
+  author?: GitifyNotificationUser;
+  /** Author of the latest comment, when the subject has comments */
+  commenter?: GitifyNotificationUser;
   /** PR review states & reviewers */
   reviews?: GitifyPullRequestReview[];
   /** PRs closing issues */

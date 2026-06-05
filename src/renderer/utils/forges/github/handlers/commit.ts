@@ -11,11 +11,26 @@ import type {
   Link,
   SettingsState,
 } from '../../../../types';
+import type { RawUser } from '../types';
 
 import { isStateFilteredOut } from '../../../notifications/filters/filter';
 import { getCommit, getCommitComment } from '../client';
 import { DefaultHandler } from './default';
-import { getNotificationAuthor } from './utils';
+
+function toNotificationUser(
+  user: RawUser | Record<string, never> | null | undefined,
+): GitifyNotificationUser | undefined {
+  if (!user || !('login' in user)) {
+    return undefined;
+  }
+
+  return {
+    login: user.login,
+    avatarUrl: user.avatar_url as Link,
+    htmlUrl: user.html_url as Link,
+    type: user.type as GitifyNotificationUser['type'],
+  };
+}
 
 class CommitHandler extends DefaultHandler {
   override async enrich(
@@ -29,34 +44,31 @@ class CommitHandler extends DefaultHandler {
       return {};
     }
 
-    let user: GitifyNotificationUser;
+    // Always resolve the commit author; additionally resolve the latest
+    // comment author when the notification points at a comment. Both calls run
+    // in parallel so populating both roles costs no extra latency.
+    let author: GitifyNotificationUser | undefined;
+    let commenter: GitifyNotificationUser | undefined;
 
     if (notification.subject.latestCommentUrl) {
-      const commitComment = await getCommitComment(
-        notification.account,
-        notification.subject.latestCommentUrl,
-      );
+      const [commit, commitComment] = await Promise.all([
+        getCommit(notification.account, notification.subject.url!),
+        getCommitComment(notification.account, notification.subject.latestCommentUrl),
+      ]);
 
-      user = {
-        login: commitComment.user!.login,
-        avatarUrl: commitComment.user!.avatar_url as Link,
-        htmlUrl: commitComment.user!.html_url as Link,
-        type: commitComment.user!.type as GitifyNotificationUser['type'],
-      };
+      author = toNotificationUser(commit.author);
+      commenter = toNotificationUser(commitComment.user);
     } else {
       const commit = await getCommit(notification.account, notification.subject.url!);
 
-      user = {
-        login: commit.author!.login,
-        avatarUrl: commit.author!.avatar_url as Link,
-        htmlUrl: commit.author!.html_url as Link,
-        type: commit.author!.type as GitifyNotificationUser['type'],
-      };
+      author = toNotificationUser(commit.author);
     }
 
     return {
       state: commitState,
-      user: getNotificationAuthor([user]),
+      user: commenter ?? author,
+      author: author,
+      commenter: commenter,
     };
   }
 

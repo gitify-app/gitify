@@ -58,6 +58,12 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
         commentCount: 0,
         labels: [],
         htmlUrl: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
@@ -81,6 +87,12 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        author: {
           login: mockAuthor.login,
           avatarUrl: mockAuthor.avatarUrl,
           htmlUrl: mockAuthor.htmlUrl,
@@ -117,6 +129,12 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
         commentCount: 0,
         labels: [],
         htmlUrl: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
@@ -148,6 +166,12 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        author: {
           login: mockAuthor.login,
           avatarUrl: mockAuthor.avatarUrl,
           htmlUrl: mockAuthor.htmlUrl,
@@ -194,6 +218,18 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
+          login: mockCommenter.login,
+          avatarUrl: mockCommenter.avatarUrl,
+          htmlUrl: mockCommenter.htmlUrl,
+          type: mockCommenter.type,
+        },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        commenter: {
           login: mockCommenter.login,
           avatarUrl: mockCommenter.avatarUrl,
           htmlUrl: mockCommenter.htmlUrl,
@@ -251,6 +287,18 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         number: 123,
         state: 'ANSWERED',
         user: {
+          login: mockReplier.login,
+          avatarUrl: mockReplier.avatarUrl,
+          htmlUrl: mockReplier.htmlUrl,
+          type: mockReplier.type,
+        },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        commenter: {
           login: mockReplier.login,
           avatarUrl: mockReplier.avatarUrl,
           htmlUrl: mockReplier.htmlUrl,

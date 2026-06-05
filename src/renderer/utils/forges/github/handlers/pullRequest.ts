@@ -51,7 +51,9 @@ class PullRequestHandler extends DefaultHandler {
 
     const prComment = pr.comments?.nodes?.[0];
 
-    const prUser = getNotificationAuthor([prComment?.author, pr.author]);
+    const author = getNotificationAuthor([pr.author]);
+    const commenter = getNotificationAuthor([prComment?.author]);
+    const prUser = commenter ?? author;
 
     const reviews = getLatestReviewForReviewers(
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
@@ -64,6 +66,8 @@ class PullRequestHandler extends DefaultHandler {
       number: pr.number,
       state: prState,
       user: prUser,
+      author: author,
+      commenter: commenter,
       reviews: reviews,
       commentCount: pr.comments.totalCount,
       labels:

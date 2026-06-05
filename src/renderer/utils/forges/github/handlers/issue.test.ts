@@ -54,6 +54,12 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
@@ -81,6 +87,12 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         number: 123,
         state: 'COMPLETED',
         user: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        author: {
           login: mockAuthor.login,
           avatarUrl: mockAuthor.avatarUrl,
           htmlUrl: mockAuthor.htmlUrl,
@@ -130,6 +142,18 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        commenter: {
+          login: mockCommenter.login,
+          avatarUrl: mockCommenter.avatarUrl,
+          htmlUrl: mockCommenter.htmlUrl,
+          type: mockCommenter.type,
+        },
         commentCount: 1,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
@@ -165,6 +189,12 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [{ name: 'enhancement', color: '0e8a16' }],
@@ -195,6 +225,12 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         number: 123,
         state: 'OPEN',
         user: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        author: {
           login: mockAuthor.login,
           avatarUrl: mockAuthor.avatarUrl,
           htmlUrl: mockAuthor.htmlUrl,
