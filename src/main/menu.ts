@@ -1,7 +1,6 @@
 import { Menu, MenuItem, shell } from 'electron';
+import type { Menubar } from 'electron-menubar';
 import { autoUpdater } from 'electron-updater';
-
-import type { Menubar } from '@gitify/menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { isMacOS } from '../shared/platform';
@@ -143,7 +142,7 @@ export default class MenuBuilder {
 
   /**
    * Reflect the current window visibility in the Show / Hide menu items.
-   * `@gitify/menubar` re-publishes the menu to the SNI host on every
+   * `electron-menubar` re-publishes the menu to the SNI host on every
    * show/hide automatically, so a Linux libappindicator user sees the
    * visibility flip without us touching the tray here.
    *

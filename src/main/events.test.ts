@@ -10,7 +10,7 @@ vi.mock('electron', () => ({
   } satisfies Pick<Electron.IpcMain, 'on' | 'handle'>,
 }));
 
-import type { Menubar } from '@gitify/menubar';
+import type { Menubar } from 'electron-menubar';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from './events';
 

@@ -4,8 +4,7 @@ import path from 'node:path';
 
 import { app, shell } from 'electron';
 import log from 'electron-log';
-
-import type { Menubar } from '@gitify/menubar';
+import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';

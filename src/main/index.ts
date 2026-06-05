@@ -1,7 +1,6 @@
 import { app } from 'electron';
 import log from 'electron-log';
-
-import { menubar } from '@gitify/menubar';
+import { menubar } from 'electron-menubar';
 
 import { Paths, WindowConfig } from './config';
 import {

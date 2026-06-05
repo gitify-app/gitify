@@ -1,6 +1,5 @@
 import { app } from 'electron';
-
-import type { Menubar } from '@gitify/menubar';
+import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../../shared/constants';
 import { EVENTS } from '../../shared/events';
@@ -14,7 +13,7 @@ import { sendRendererEvent } from '../events';
  *
  * The tray's context-menu wiring (Linux `setContextMenu` vs macOS/Windows
  * right-click popup) and the macOS `setIgnoreDoubleClickEvents` default
- * are owned by `@gitify/menubar` — pass `contextMenu` here and the library
+ * are owned by `electron-menubar` — pass `contextMenu` here and the library
  * picks the right binding per platform.
  *
  * @param mb - The menubar instance to attach lifecycle events to.

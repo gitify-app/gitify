@@ -1,6 +1,5 @@
 import { app } from 'electron';
-
-import type { Menubar } from '@gitify/menubar';
+import type { Menubar } from 'electron-menubar';
 
 import { isMacOS } from '../../shared/platform';
 
@@ -41,7 +40,7 @@ export function applyKeepWindowOnBlur(mb: Menubar, value: boolean): void {
  * Attach window-level event listeners for DevTools and visibility sync.
  *
  * Window close-as-hide, the Wayland half-closed-surface defer, and the
- * Escape-to-hide handler are all provided by `@gitify/menubar` via
+ * Escape-to-hide handler are all provided by `electron-menubar` via
  * `hideOnClose` and `escapeToHide` options (configured in `main/index.ts`).
  *
  * @param mb - The menubar instance whose window events are configured.

@@ -67,8 +67,8 @@
     "test:ui": "vp test --ui"
   },
   "dependencies": {
-    "@gitify/menubar": "^10.0.0",
     "electron-log": "5.4.4",
+    "electron-menubar": "^10.0.2",
     "electron-updater": "6.8.3",
     "react": "19.2.6",
     "react-dom": "19.2.6",

@@ -3,6 +3,8 @@ allowBuilds:
   '@primer/primitives': false
   electron: true
   electron-winstaller: true
+minimumReleaseAgeExclude:
+  - electron-menubar@10.0.2
 overrides:
   react-is: '19.2.6'
   # Force patched versions of transitive dev-tooling deps pulled in by

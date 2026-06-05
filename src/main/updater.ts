@@ -1,7 +1,6 @@
 import { dialog, type MessageBoxOptions } from 'electron';
+import type { Menubar } from 'electron-menubar';
 import { autoUpdater } from 'electron-updater';
-
-import type { Menubar } from '@gitify/menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo, toError } from '../shared/logger';
