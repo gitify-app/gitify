@@ -9,7 +9,7 @@ overrides:
   yauzl: 3.3.1
   cross-spawn: 7.0.6
   got: 11.8.6
-  electron: 42.3.0
+  electron: 42.3.3
 
 importers:
 
@@ -20,7 +20,7 @@ importers:
         version: 5.4.4
       electron-menubar:
         specifier: 10.0.2
-        version: 10.0.2(electron@42.3.0)
+        version: 10.0.2(electron@42.3.3)
       electron-updater:
         specifier: 6.8.8
         version: 6.8.8
@@ -146,8 +146,8 @@ importers:
         specifier: 17.4.2
         version: 17.4.2
       electron:
-        specifier: 42.3.0
-        version: 42.3.0
+        specifier: 42.3.3
+        version: 42.3.3
       electron-builder:
         specifier: 26.8.1
         version: 26.8.1(electron-builder-squirrel-windows@26.8.1)
@@ -2366,7 +2366,7 @@ packages:
   electron-menubar@10.0.2:
     resolution: {integrity: sha512-KXe+tAqjGrxj7Dp/YpF6+0L7qiO3DiMht26wG+yqUJKhcthib7K0GpORWLz7KQRYWNh40t3RqQwc99fg+X+U/Q==}
     peerDependencies:
-      electron: 42.3.0
+      electron: 42.3.3
 
   electron-publish@26.8.1:
     resolution: {integrity: sha512-q+jrSTIh/Cv4eGZa7oVR+grEJo/FoLMYBAnSL5GCtqwUpr1T+VgKB/dn1pnzxIxqD8S/jP1yilT9VrwCqINR4w==}
@@ -2381,8 +2381,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@42.3.0:
-    resolution: {integrity: sha512-9ZiLdRXk+WDxW1OgIUz8J2rIQ5TYU9o629gCOjU48Q3dQiOmym7osWsH5Ubs/Jh4uuFLn6m6SBD2rmRXLAPz9g==}
+  electron@42.3.3:
+    resolution: {integrity: sha512-0MwYp9wTb7TrtTalOYqeW+suqd9T/Znstr/nDLKqFGIjHdBZX339guo3mQqTPURRZ/UQmYM4uMpzKpI5wLptfQ==}
     engines: {node: '>= 22.12.0'}
     hasBin: true
 
@@ -6493,9 +6493,9 @@ snapshots:
 
   electron-log@5.4.4: {}
 
-  electron-menubar@10.0.2(electron@42.3.0):
+  electron-menubar@10.0.2(electron@42.3.3):
     dependencies:
-      electron: 42.3.0
+      electron: 42.3.3
 
   electron-publish@26.8.1:
     dependencies:
@@ -6537,7 +6537,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@42.3.0:
+  electron@42.3.3:
     dependencies:
       '@electron/get': 5.0.0
       '@types/node': 24.12.4
@@ -7683,7 +7683,7 @@ snapshots:
   react-devtools@7.0.1:
     dependencies:
       cross-spawn: 7.0.6
-      electron: 42.3.0
+      electron: 42.3.3
       internal-ip: 6.2.0
       minimist: 1.2.8
       react-devtools-core: 7.0.1
