@@ -89,8 +89,8 @@ importers:
         specifier: 22.2.0
         version: 22.2.0(@primer/primitives@11.9.0)
       '@primer/octicons-react':
-        specifier: 19.28.0
-        version: 19.28.0(react@19.2.6)
+        specifier: 19.28.1
+        version: 19.28.1(react@19.2.6)
       '@primer/react':
         specifier: 38.26.0
         version: 38.26.0(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)
@@ -1252,6 +1252,12 @@ packages:
 
   '@primer/octicons-react@19.28.0':
     resolution: {integrity: sha512-Xe3ZS/NtxRK/QXMlqh6Xn49nM4153VXgPQcwyIx6r2McZKkrAhP7xPe7yLhfx3X34rnxj6yimCnX7kswV30Vqw==}
+    engines: {node: '>=8'}
+    peerDependencies:
+      react: '>=16.3'
+
+  '@primer/octicons-react@19.28.1':
+    resolution: {integrity: sha512-ZADBMOPk6qoXXH3GEQuf3fYdhr9wCShgeJRGXsr5liaZG8P+hXGEQAy/eg7/FZjFIu8aRCmx+UBKmHvNTp7zpw==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.3'
@@ -5444,6 +5450,10 @@ snapshots:
       '@lit-labs/ssr-dom-shim': 1.6.0
 
   '@primer/octicons-react@19.28.0(react@19.2.6)':
+    dependencies:
+      react: 19.2.6
+
+  '@primer/octicons-react@19.28.1(react@19.2.6)':
     dependencies:
       react: 19.2.6
 
