@@ -1,9 +1,9 @@
 {
   "recommendations": [
-    "oxc.oxc-vscode",
     "bradlc.vscode-tailwindcss",
     "GraphQL.vscode-graphql",
     "GraphQL.vscode-graphql-syntax",
+    "oxc.oxc-vscode",
     "SonarSource.sonarlint-vscode",
     "vitest.explorer",
     "zizmor.zizmor-vscode"
