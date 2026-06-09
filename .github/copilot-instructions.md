@@ -131,7 +131,7 @@ Warnings are acceptable - the important part is that it completes successfully.
 
 ### Pre-commit Checks
 
-- **Automatic via Husky**: Git hooks run `pnpx lint-staged` on commit
+- **Automatic via Husky**: Git hooks run `pnpm exec vp staged` on commit
 - **Manual validation**: Run `pnpm check && pnpm tsc --noEmit && pnpm test`
 
 ## Important Constraints and Limitations
