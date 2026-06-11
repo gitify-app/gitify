@@ -10,7 +10,7 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - electron-menubar@10.0.2
 overrides:
-  react-is: '19.2.6'
+  react-is: '19.2.7'
   # Temporary workaround for electron/electron#51619.
   # Electron installs can miss `path.txt` on Node 24.16+ until the upstream
   # yauzl fix is picked up. Remove this once Electron ships a proper fix.
