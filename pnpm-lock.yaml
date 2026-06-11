@@ -41,8 +41,8 @@ importers:
         specifier: 3.1.1
         version: 3.1.1
       '@graphql-codegen/cli':
-        specifier: 7.1.1
-        version: 7.1.1(@parcel/watcher@2.5.6)(@types/node@24.12.4)(graphql@16.14.1)(typescript@6.0.3)
+        specifier: 7.1.2
+        version: 7.1.2(@parcel/watcher@2.5.6)(@types/node@24.12.4)(graphql@16.14.1)(typescript@6.0.3)
       '@graphql-codegen/schema-ast':
         specifier: 6.0.1
         version: 6.0.1(graphql@16.14.1)
@@ -388,8 +388,8 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
 
-  '@graphql-codegen/cli@7.1.1':
-    resolution: {integrity: sha512-7XPBWHBwzpdfan5a8lE91YV9AeHhYEnZ32nhjdx7o/7ZN0Lvl3oIjeNuXnMX5CFDCBDNuA75cWhBjDrjqX8GZw==}
+  '@graphql-codegen/cli@7.1.2':
+    resolution: {integrity: sha512-RiXedOZhanodp8fCBlpciyic17kSv0hSMboDaE9/ZWXC6f4g1aQBTZmQJOsT9Dtxy0SxqmMY674NoTlJgELNeA==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
@@ -4609,7 +4609,7 @@ snapshots:
       graphql: 16.14.1
       tslib: 2.8.1
 
-  '@graphql-codegen/cli@7.1.1(@parcel/watcher@2.5.6)(@types/node@24.12.4)(graphql@16.14.1)(typescript@6.0.3)':
+  '@graphql-codegen/cli@7.1.2(@parcel/watcher@2.5.6)(@types/node@24.12.4)(graphql@16.14.1)(typescript@6.0.3)':
     dependencies:
       '@babel/generator': 7.29.7
       '@babel/template': 7.29.7
