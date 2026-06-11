@@ -126,7 +126,7 @@
     "typescript": "6.0.3",
     "vite": "8.0.14",
     "vite-plugin-checker": "0.14.1",
-    "vite-plugin-electron": "1.0.0",
+    "vite-plugin-electron": "1.0.4",
     "vite-plus": "0.1.23",
     "vitest": "4.1.7",
     "zustand": "5.0.14"
