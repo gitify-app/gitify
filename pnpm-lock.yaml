@@ -92,8 +92,8 @@ importers:
         specifier: 19.28.1
         version: 19.28.1(react@19.2.6)
       '@primer/react':
-        specifier: 38.26.0
-        version: 38.26.0(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)
+        specifier: 38.27.0
+        version: 38.27.0(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)
       '@swc-contrib/plugin-graphql-codegen-client-preset':
         specifier: 0.24.0
         version: 0.24.0
@@ -1250,12 +1250,6 @@ packages:
   '@primer/live-region-element@0.8.0':
     resolution: {integrity: sha512-DIp04IeZvZ+gwCUcBchIvRwJA2PikP/6hnFhcLKgwttcg5OYjBH9t0cZjLnv10Aq1jN0rAFFG+WPMd3bw4hXcA==}
 
-  '@primer/octicons-react@19.28.0':
-    resolution: {integrity: sha512-Xe3ZS/NtxRK/QXMlqh6Xn49nM4153VXgPQcwyIx6r2McZKkrAhP7xPe7yLhfx3X34rnxj6yimCnX7kswV30Vqw==}
-    engines: {node: '>=8'}
-    peerDependencies:
-      react: '>=16.3'
-
   '@primer/octicons-react@19.28.1':
     resolution: {integrity: sha512-ZADBMOPk6qoXXH3GEQuf3fYdhr9wCShgeJRGXsr5liaZG8P+hXGEQAy/eg7/FZjFIu8aRCmx+UBKmHvNTp7zpw==}
     engines: {node: '>=8'}
@@ -1265,8 +1259,8 @@ packages:
   '@primer/primitives@11.9.0':
     resolution: {integrity: sha512-yESOalhd7s7S3unV1V32v3Z0RszXiiz6pzy6hVI9xpdTh1q1Gt8vyDFxRlqIvuwc5ZaO1+gYQTDbjxb4nWBzMw==}
 
-  '@primer/react@38.26.0':
-    resolution: {integrity: sha512-PH8dH9DPuW256/y6WPLXBeNXZm/KIUNAXCduehE/WJii0F8972fWTv9TwCugxSngp1SY13Mxfa5HFxuufKGrAQ==}
+  '@primer/react@38.27.0':
+    resolution: {integrity: sha512-hcXxdAXgU1gR2/LFr220isHHMb6dyuBNFx5w76lGdGx7hEcFA4LfsFXp9l/s56A4QRcexXiun8i8CqMkYnF5lw==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -5453,17 +5447,13 @@ snapshots:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.6.0
 
-  '@primer/octicons-react@19.28.0(react@19.2.6)':
-    dependencies:
-      react: 19.2.6
-
   '@primer/octicons-react@19.28.1(react@19.2.6)':
     dependencies:
       react: 19.2.6
 
   '@primer/primitives@11.9.0': {}
 
-  '@primer/react@38.26.0(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)':
+  '@primer/react@38.27.0(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.6(react@19.2.6))(react-is@19.2.6)(react@19.2.6)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 5.0.0
@@ -5472,7 +5462,7 @@ snapshots:
       '@oddbird/popover-polyfill': 0.5.2
       '@primer/behaviors': 1.10.3
       '@primer/live-region-element': 0.8.0
-      '@primer/octicons-react': 19.28.0(react@19.2.6)
+      '@primer/octicons-react': 19.28.1(react@19.2.6)
       '@primer/primitives': 11.9.0
       '@tanstack/react-virtual': 3.14.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       clsx: 2.1.1
