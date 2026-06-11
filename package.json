@@ -116,7 +116,7 @@
     "electron-builder": "26.8.1",
     "final-form": "5.0.1",
     "graphql": "16.14.0",
-    "happy-dom": "20.9.0",
+    "happy-dom": "20.10.2",
     "husky": "9.1.7",
     "react-devtools": "7.0.1",
     "rimraf": "6.1.3",
