@@ -6,7 +6,6 @@ settings:
 
 overrides:
   react-is: 19.2.7
-  yauzl: 3.4.0
   cross-spawn: 7.0.6
   got: 11.8.6
   electron: 42.4.0
