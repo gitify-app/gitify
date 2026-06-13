@@ -144,7 +144,7 @@ describe('main/menu.ts', () => {
       expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(true);
     });
 
-    it('should hide  menu item', () => {
+    it('should hide menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(false);
 
       // oxlint-disable-next-line dot-notation -- This is a test

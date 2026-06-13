@@ -6,6 +6,10 @@ import type { EventArgs, EventRequest, EventResponse, EventType } from '../share
 /**
  * Register a fire-and-forget IPC listener on the main process (ipcMain.on).
  * Use this when the renderer sends a one-way message and no return value is needed.
+ * 
+ * @param event - The IPC channel/event name to listen on.
+ * @param listener - Callback invoked when the event is received.
+
  */
 export function onMainEvent<E extends EventType>(
   event: E,
@@ -17,6 +21,10 @@ export function onMainEvent<E extends EventType>(
 /**
  * Register a request/response IPC handler on the main process (ipcMain.handle).
  * The listener's return type is enforced by the event's contract.
+ * 
+ * @param event - The IPC channel/event name to handle.
+ * @param listener - Callback whose return value is sent back to the renderer.
+
  */
 export function handleMainEvent<E extends EventType>(
   event: E,
@@ -31,6 +39,10 @@ export function handleMainEvent<E extends EventType>(
 /**
  * Push an event from the main process to the renderer via webContents.
  * Variadic so events without a payload can be called as `sendRendererEvent(mb, event)`.
+ *
+ * @param mb - The menubar instance whose window receives the event.
+ * @param event - The IPC channel/event name to emit.
+ * @param data - Optional payload sent with the event.
  */
 export function sendRendererEvent<E extends EventType>(
   mb: Menubar,
