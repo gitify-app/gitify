@@ -115,7 +115,7 @@
     "electron": "42.4.0",
     "electron-builder": "26.15.2",
     "final-form": "5.0.1",
-    "graphql": "16.14.1",
+    "graphql": "16.14.2",
     "happy-dom": "20.10.2",
     "husky": "9.1.7",
     "react-devtools": "7.0.1",
