@@ -113,7 +113,7 @@
     "date-fns": "4.4.0",
     "dotenv": "17.4.2",
     "electron": "42.4.0",
-    "electron-builder": "26.15.2",
+    "electron-builder": "26.15.3",
     "final-form": "5.0.1",
     "graphql": "16.14.1",
     "happy-dom": "20.10.2",
