@@ -51,13 +51,15 @@ export const userTypeFilter: Filter<UserType> = {
   },
 
   filterNotification(notification: RawGitifyNotification, userType: UserType): boolean {
+    // Match on the thread author so e.g. "Bot" means "authored by a bot"
+    // (dependabot, renovate) rather than "a bot left the latest comment".
     const allUserTypes = ['User', 'EnterpriseUserAccount'];
 
     if (userType === 'User') {
-      return allUserTypes.includes(notification.subject?.user?.type ?? '');
+      return allUserTypes.includes(notification.subject?.author?.type ?? '');
     }
 
-    return notification.subject?.user?.type === userType;
+    return notification.subject?.author?.type === userType;
   },
 };
 
