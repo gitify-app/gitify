@@ -95,7 +95,7 @@
     "@primer/css": "22.3.0",
     "@primer/octicons-react": "19.28.1",
     "@primer/react": "38.27.0",
-    "@swc-contrib/plugin-graphql-codegen-client-preset": "0.24.0",
+    "@swc-contrib/plugin-graphql-codegen-client-preset": "0.26.0",
     "@tailwindcss/vite": "4.3.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",

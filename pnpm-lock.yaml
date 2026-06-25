@@ -94,8 +94,8 @@ importers:
         specifier: 38.27.0
         version: 38.27.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)
       '@swc-contrib/plugin-graphql-codegen-client-preset':
-        specifier: 0.24.0
-        version: 0.24.0
+        specifier: 0.26.0
+        version: 0.26.0
       '@tailwindcss/vite':
         specifier: 4.3.1
         version: 4.3.1(vite@8.0.16(@types/node@24.13.2)(jiti@2.7.0)(yaml@2.9.0))
@@ -1410,8 +1410,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@swc-contrib/plugin-graphql-codegen-client-preset@0.24.0':
-    resolution: {integrity: sha512-TJF6gmDdh15I+sZpTVLBnnbgIynA7eZc4ApRyCnlX5CM0IKoEjddSIF9xf6h/3TiA8phQBdvIK3/kNGvhudCCg==}
+  '@swc-contrib/plugin-graphql-codegen-client-preset@0.26.0':
+    resolution: {integrity: sha512-nEtglzmjbR2GwQ8uYm3ljeImhsbUMD0h8TGFtd1JgJYAr3ktW7zxOr9hYG5RtzPKDDfTnyj0zdwqGBq+OQUzIg==}
     engines: {node: '>=16'}
 
   '@szmarczak/http-timer@4.0.6':
@@ -5541,7 +5541,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@swc-contrib/plugin-graphql-codegen-client-preset@0.24.0': {}
+  '@swc-contrib/plugin-graphql-codegen-client-preset@0.26.0': {}
 
   '@szmarczak/http-timer@4.0.6':
     dependencies:
