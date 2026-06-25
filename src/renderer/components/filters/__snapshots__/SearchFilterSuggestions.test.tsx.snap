@@ -7,10 +7,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
   <div
     class="prc-Popover-Popover-7QIH8"
     data-caret="top-left"
+    data-component="Popover"
     data-open=""
   >
     <div
       class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
+      data-component="Popover.Content"
       data-height="auto"
       data-width="auto"
     >
@@ -43,10 +45,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
   <div
     class="prc-Popover-Popover-7QIH8"
     data-caret="top-left"
+    data-component="Popover"
     data-open=""
   >
     <div
       class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
+      data-component="Popover.Content"
       data-height="auto"
       data-width="auto"
     >
@@ -92,10 +96,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
   <div
     class="prc-Popover-Popover-7QIH8"
     data-caret="top-left"
+    data-component="Popover"
     data-open=""
   >
     <div
       class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
+      data-component="Popover.Content"
       data-height="auto"
       data-width="auto"
     >
@@ -185,10 +191,12 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
   <div
     class="prc-Popover-Popover-7QIH8"
     data-caret="top-left"
+    data-component="Popover"
     data-open=""
   >
     <div
       class="p-2 mt-2 prc-Popover-PopoverContent-2x-Aj"
+      data-component="Popover.Content"
       data-height="auto"
       data-width="auto"
     >
