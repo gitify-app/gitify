@@ -27,7 +27,7 @@ export default defineConfig({
       reportOnFailure: true,
       reporter: ['html', 'lcovonly'],
       include: ['src/**/*'],
-      exclude: ['**/*.html', '**/*.graphql', '**/graphql/generated/**'],
+      exclude: ['**/*.html', '**/*.graphql', '**/graphql/generated/**', '**/.DS_Store'],
     },
     projects: [
       {
