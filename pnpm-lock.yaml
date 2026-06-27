@@ -181,8 +181,8 @@ importers:
         specifier: 0.14.4
         version: 0.14.4(oxlint@1.70.0(oxlint-tsgolint@0.23.0)(vite-plus@0.2.1(@types/node@24.13.2)(@vitest/coverage-v8@4.1.9)(@vitest/ui@4.1.9)(happy-dom@20.10.6)(jiti@2.7.0)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.7.0)(yaml@2.9.0))(yaml@2.9.0)))(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.7.0)(yaml@2.9.0))
       vite-plugin-electron:
-        specifier: 1.0.4
-        version: 1.0.4
+        specifier: 1.1.0
+        version: 1.1.0
       vite-plus:
         specifier: 0.2.1
         version: 0.2.1(@types/node@24.13.2)(@vitest/coverage-v8@4.1.9)(@vitest/ui@4.1.9)(happy-dom@20.10.6)(jiti@2.7.0)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.7.0)(yaml@2.9.0))(yaml@2.9.0)
@@ -4032,8 +4032,8 @@ packages:
       vue-tsc:
         optional: true
 
-  vite-plugin-electron@1.0.4:
-    resolution: {integrity: sha512-YBpc7l0gQMAhmt/aETr1Xa4IXEmPUFEoY+2FZK05wusfdsqtvAVcSGStfOPc/JpQBdtLPwFNERoxUB/brn8VLw==}
+  vite-plugin-electron@1.1.0:
+    resolution: {integrity: sha512-4qktNiYlRsaOp+n0vVknIA9m6Abjp6WDHLE9E/czElJgl8WRMJIqmw7ZvlYWflEK28hH5FHUuWEQLEwx9lMCWg==}
     peerDependencies:
       vite-plugin-electron-renderer: '*'
     peerDependenciesMeta:
@@ -8082,7 +8082,7 @@ snapshots:
       oxlint: 1.70.0(oxlint-tsgolint@0.23.0)(vite-plus@0.2.1(@types/node@24.13.2)(@vitest/coverage-v8@4.1.9)(@vitest/ui@4.1.9)(happy-dom@20.10.6)(jiti@2.7.0)(typescript@6.0.3)(vite@8.0.16(@types/node@24.13.2)(jiti@2.7.0)(yaml@2.9.0))(yaml@2.9.0))
       typescript: 6.0.3
 
-  vite-plugin-electron@1.0.4:
+  vite-plugin-electron@1.1.0:
     dependencies:
       local-pkg: 1.2.1
 
