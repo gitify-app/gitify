@@ -14,6 +14,14 @@ import * as apiClient from '../client';
 import type { FetchIssueByNumberQuery } from '../graphql/generated/graphql';
 import { issueHandler } from './issue';
 
+vi.mock('../client', async () => {
+  const actual = await vi.importActual<typeof import('../client')>('../client');
+  return {
+    ...actual,
+    fetchIssueByNumber: vi.fn(),
+  };
+});
+
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('supportsMergedQueryEnrichment', () => {
     it('should support merge query', () => {
@@ -22,7 +30,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
   });
 
   describe('enrich', () => {
-    const fetchIssueByNumberSpy = vi.spyOn(apiClient, 'fetchIssueByNumber');
+    const fetchIssueByNumberSpy = vi.mocked(apiClient.fetchIssueByNumber);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock issue',

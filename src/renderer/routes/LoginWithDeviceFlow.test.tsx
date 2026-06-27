@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 
+import * as logger from '../utils/core/logger';
 import * as comms from '../utils/system/comms';
 import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
 
@@ -117,6 +118,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should handle device flow errors during initialization', async () => {
+    const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     const loginWithDeviceFlowStartMock = vi.fn().mockRejectedValueOnce(new Error('Network error'));
 
     renderWithProviders(<LoginWithDeviceFlowRoute />, {
@@ -126,6 +128,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     await userEvent.click(screen.getByTestId('device-scope-full'));
 
     await screen.findByText(/Failed to start authentication/);
+    expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should navigate back on cancel from scope choice', async () => {

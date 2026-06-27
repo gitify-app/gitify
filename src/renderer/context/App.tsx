@@ -1,12 +1,4 @@
-import {
-  createContext,
-  type ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useTheme } from '@primer/react';
 
@@ -19,15 +11,12 @@ import { useFiltersStore } from '../stores';
 
 import type {
   Account,
-  AccountNotifications,
   AuthState,
   Forge,
-  GitifyError,
   GitifyNotification,
   Hostname,
   SettingsState,
   SettingsValue,
-  Status,
   Token,
 } from '../types';
 import { FetchType } from '../types';
@@ -66,6 +55,7 @@ import {
   mapThemeModeToColorScheme,
 } from '../utils/ui/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
+import { AppContext, type AppContextState } from './context';
 import { defaultAuth, defaultSettings } from './defaults';
 
 /**
@@ -95,47 +85,6 @@ function migrateLegacyAuthState(auth: AuthState): AuthState {
     }),
   };
 }
-
-export interface AppContextState {
-  auth: AuthState;
-  isLoggedIn: boolean;
-  loginWithDeviceFlowStart: (
-    forge: Forge,
-    hostname?: Hostname,
-    scopes?: string[],
-  ) => Promise<DeviceFlowSession>;
-  loginWithDeviceFlowPoll: (forge: Forge, session: DeviceFlowSession) => Promise<Token | null>;
-  loginWithDeviceFlowComplete: (forge: Forge, token: Token, hostname: Hostname) => Promise<void>;
-  loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
-  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
-  logoutFromAccount: (account: Account) => Promise<void>;
-
-  status: Status;
-  globalError: GitifyError | undefined;
-
-  notifications: AccountNotifications[];
-  notificationCount: number;
-  unreadNotificationCount: number;
-  hasNotifications: boolean;
-  hasUnreadNotifications: boolean;
-
-  fetchNotifications: () => Promise<void>;
-  removeAccountNotifications: (account: Account) => Promise<void>;
-
-  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<void>;
-  markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
-  unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
-
-  settings: SettingsState;
-  resetSettings: () => void;
-  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
-
-  /** Shown when the OS could not register the chosen global shortcut. */
-  shortcutRegistrationError: string | null;
-  clearShortcutRegistrationError: () => void;
-}
-
-export const AppContext = createContext<Partial<AppContextState> | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const existingState = loadState();

@@ -20,6 +20,14 @@ import * as apiClient from '../client';
 import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
 import { discussionHandler } from './discussion';
 
+vi.mock('../client', async () => {
+  const actual = await vi.importActual<typeof import('../client')>('../client');
+  return {
+    ...actual,
+    fetchDiscussionByNumber: vi.fn(),
+  };
+});
+
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('supportsMergedQueryEnrichment', () => {
     it('should support merge query', () => {
@@ -28,7 +36,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   });
 
   describe('enrich', () => {
-    const fetchDiscussionByNumberSpy = vi.spyOn(apiClient, 'fetchDiscussionByNumber');
+    const fetchDiscussionByNumberSpy = vi.mocked(apiClient.fetchDiscussionByNumber);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock discussion',

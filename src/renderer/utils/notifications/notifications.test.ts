@@ -26,7 +26,23 @@ import {
   stabilizeNotificationsOrder,
 } from './notifications';
 
+vi.mock('../forges/github/client', async () => {
+  const actual =
+    await vi.importActual<typeof import('../forges/github/client')>('../forges/github/client');
+  return {
+    ...actual,
+    fetchNotificationDetailsForList: vi.fn(),
+    fetchIssueByNumber: vi.fn(),
+  };
+});
+
 describe('renderer/utils/notifications/notifications.ts', () => {
+  beforeEach(() => {
+    vi.mocked(apiClient.fetchNotificationDetailsForList).mockReset();
+    vi.mocked(apiClient.fetchNotificationDetailsForList).mockResolvedValue(new Map());
+    vi.mocked(apiClient.fetchIssueByNumber).mockReset();
+  });
+
   it('getNotificationCount', () => {
     const result = getNotificationCount(mockSingleAccountNotifications);
 
@@ -122,6 +138,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       expect(result).toHaveLength(1);
       expect(result[0].subject.title).toBe('CI workflow run');
+      expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
     });
 
     it('should handle empty notifications array', async () => {
@@ -133,12 +150,15 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       const result = await enrichNotifications([], settings);
 
       expect(result).toEqual([]);
+      expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
     });
 
     it('should batch notifications by GITHUB_API_MERGE_BATCH_SIZE', async () => {
-      const fetchNotificationDetailsForListSpy = vi
-        .spyOn(apiClient, 'fetchNotificationDetailsForList')
-        .mockResolvedValue(new Map());
+      const fetchNotificationDetailsForListSpy = vi.mocked(
+        apiClient.fetchNotificationDetailsForList,
+      );
+      vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
 
       const notificationCount = GITHUB_API_MERGE_BATCH_SIZE * 2.5;
       const notifications = Array.from({ length: notificationCount }, (_, i) =>
@@ -170,9 +190,11 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     });
 
     it('should handle single batch of notifications', async () => {
-      const fetchNotificationDetailsForListSpy = vi
-        .spyOn(apiClient, 'fetchNotificationDetailsForList')
-        .mockResolvedValue(new Map());
+      const fetchNotificationDetailsForListSpy = vi.mocked(
+        apiClient.fetchNotificationDetailsForList,
+      );
+      vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
 
       const notifications = Array.from({ length: 50 }, (_, i) =>
         mockPartialGitifyNotification({

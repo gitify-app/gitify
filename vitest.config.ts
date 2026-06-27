@@ -8,6 +8,8 @@ export default defineConfig({
     pool: 'vmThreads',
     isolate: false,
     clearMocks: true,
+    unstubEnvs: true,
+    unstubGlobals: true,
     // Pre-bundle @primer/react rather than re-transforming the raw package on every thread load.
     // See https://vitest.dev/guide/profiling-test-performance.html#use-the-dependency-optimizer
     deps: {

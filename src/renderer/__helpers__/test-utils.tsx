@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
-import { AppContext, type AppContextState } from '../context/App';
+import { AppContext, type AppContextState } from '../context/context';
 import { type FiltersStore, useFiltersStore } from '../stores';
 
 export { navigateMock } from './vitest.setup';
