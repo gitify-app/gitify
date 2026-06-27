@@ -7,6 +7,8 @@ allowBuilds:
   electron-winstaller: true
   esbuild: true
   unrs-resolver: true
+catalog:
+  electron: '42.5.0'
 overrides:
   react-is: '19.2.7'
   # Force patched versions of transitive dev-tooling deps pulled in by
@@ -14,5 +16,5 @@ overrides:
   # scanners. None of these ship in the packaged app.
   cross-spawn: '7.0.6'
   got: '11.8.6'
-  electron: '$electron'
+  electron: 'catalog:'
 savePrefix: ''
