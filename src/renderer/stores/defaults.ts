@@ -11,4 +11,5 @@ export const DEFAULT_FILTERS_STATE: FiltersState = {
   subjectTypes: [],
   states: [],
   reasons: [],
+  reviewRequestTypes: [],
 };

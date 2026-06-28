@@ -2,6 +2,7 @@ import type {
   AccountUUID,
   FilterStateType,
   Reason,
+  ReviewRequestType,
   SearchToken,
   SubjectType,
   UserType,
@@ -50,6 +51,11 @@ export interface FiltersState {
    * The reasons to filter notifications by.
    */
   reasons: Reason[];
+
+  /**
+   * The review request types to filter notifications by.
+   */
+  reviewRequestTypes: ReviewRequestType[];
 }
 
 /**

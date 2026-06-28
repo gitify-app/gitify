@@ -274,7 +274,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer: { __typename: "User", login: string } | { __typename: "Team" } | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
             | { login: string }
             | { login: string }
             | { login: string }
@@ -324,7 +324,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer: { __typename: "User", login: string } | { __typename: "Team" } | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
             | { login: string }
             | { login: string }
             | { login: string }
@@ -355,7 +355,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer: { __typename: "User", login: string } | { __typename: "Team" } | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
             | { login: string }
             | { login: string }
             | { login: string }
@@ -375,7 +375,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer: { __typename: "User", login: string } | { __typename: "Team" } | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
         | { login: string }
         | { login: string }
         | { login: string }
@@ -665,6 +665,19 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
       }
     }
   }
+  reviewRequests(first: 10) {
+    nodes {
+      requestedReviewer {
+        __typename
+        ... on User {
+          login
+        }
+        ... on Team {
+          __typename
+        }
+      }
+    }
+  }
   reviews(last: $lastReviews) {
     totalCount
     nodes {
@@ -865,6 +878,19 @@ fragment PullRequestDetails on PullRequest {
       }
       reactionGroups {
         ...ReactionGroupFields
+      }
+    }
+  }
+  reviewRequests(first: 10) {
+    nodes {
+      requestedReviewer {
+        __typename
+        ... on User {
+          login
+        }
+        ... on Team {
+          __typename
+        }
       }
     }
   }
@@ -1196,6 +1222,19 @@ fragment PullRequestDetails on PullRequest {
       }
     }
   }
+  reviewRequests(first: 10) {
+    nodes {
+      requestedReviewer {
+        __typename
+        ... on User {
+          login
+        }
+        ... on Team {
+          __typename
+        }
+      }
+    }
+  }
   reviews(last: $lastReviews) {
     totalCount
     nodes {
@@ -1280,6 +1319,19 @@ fragment PullRequestDetails on PullRequest {
       }
       reactionGroups {
         ...ReactionGroupFields
+      }
+    }
+  }
+  reviewRequests(first: 10) {
+    nodes {
+      requestedReviewer {
+        __typename
+        ... on User {
+          login
+        }
+        ... on Team {
+          __typename
+        }
       }
     }
   }

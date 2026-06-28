@@ -135,6 +135,9 @@ export function mockPullRequestResponseNode(mocks: {
       totalCount: 0,
       nodes: [],
     },
+    reviewRequests: {
+      nodes: [],
+    },
     milestone: null,
     closingIssuesReferences: {
       nodes: [],

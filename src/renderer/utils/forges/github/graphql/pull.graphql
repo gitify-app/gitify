@@ -46,6 +46,19 @@ fragment PullRequestDetails on PullRequest {
       }
     }
   }
+  reviewRequests(first: 10) {
+    nodes {
+      requestedReviewer {
+        __typename
+        ... on User {
+          login
+        }
+        ... on Team {
+          __typename
+        }
+      }
+    }
+  }
   reviews(last: $lastReviews) {
     totalCount
     nodes {
