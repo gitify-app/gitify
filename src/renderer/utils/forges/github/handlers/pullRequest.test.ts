@@ -20,7 +20,11 @@ import type {
   FetchPullRequestByNumberQuery,
   PullRequestReviewState,
 } from '../graphql/generated/graphql';
-import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
+import {
+  getLatestReviewForReviewers,
+  getReviewRequestTypes,
+  pullRequestHandler,
+} from './pullRequest';
 
 vi.mock('../client', async () => {
   const actual = await vi.importActual<typeof import('../client')>('../client');
@@ -70,6 +74,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [],
         linkedIssues: [],
@@ -104,6 +109,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [],
         linkedIssues: [],
@@ -138,6 +144,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [],
         linkedIssues: [],
@@ -172,6 +179,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [],
         linkedIssues: [],
@@ -218,6 +226,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [],
         linkedIssues: [],
@@ -260,6 +269,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [{ name: 'enhancement', color: '0e8a16' }],
         linkedIssues: [],
@@ -300,6 +310,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [],
         linkedIssues: ['#789'],
@@ -337,6 +348,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockAuthor.htmlUrl,
           type: mockAuthor.type,
         },
+        reviewRequested: [],
         reviews: [],
         labels: [],
         linkedIssues: [],
@@ -448,6 +460,92 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it('handles no PR reviews yet', async () => {
       const result = getLatestReviewForReviewers([]);
 
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe('Pull Request Review Requests - getReviewRequestTypes', () => {
+    it('returns direct when user is directly requested', () => {
+      const nodes = [
+        {
+          requestedReviewer: {
+            __typename: 'User' as const,
+            login: 'current-user',
+          },
+        },
+      ];
+
+      const result = getReviewRequestTypes(nodes, 'current-user');
+
+      expect(result).toEqual(['direct']);
+    });
+
+    it('returns team when a team is requested', () => {
+      const nodes = [
+        {
+          requestedReviewer: {
+            __typename: 'Team' as const,
+          },
+        },
+      ];
+
+      const result = getReviewRequestTypes(nodes, 'current-user');
+
+      expect(result).toEqual(['team']);
+    });
+
+    it('returns both when user is directly requested and team is requested', () => {
+      const nodes = [
+        {
+          requestedReviewer: {
+            __typename: 'User' as const,
+            login: 'current-user',
+          },
+        },
+        {
+          requestedReviewer: {
+            __typename: 'Team' as const,
+          },
+        },
+      ];
+
+      const result = getReviewRequestTypes(nodes, 'current-user');
+
+      expect(result).toContain('direct');
+      expect(result).toContain('team');
+    });
+
+    it('does not include direct for other users', () => {
+      const nodes = [
+        {
+          requestedReviewer: {
+            __typename: 'User' as const,
+            login: 'other-user',
+          },
+        },
+      ];
+
+      const result = getReviewRequestTypes(nodes, 'current-user');
+
+      expect(result).not.toContain('direct');
+    });
+
+    it('returns empty array when no nodes', () => {
+      const result = getReviewRequestTypes([], 'current-user');
+      expect(result).toEqual([]);
+    });
+
+    it('returns empty array when no current user login', () => {
+      const nodes = [
+        {
+          requestedReviewer: {
+            __typename: 'User' as const,
+            login: 'current-user',
+          },
+        },
+      ];
+
+      const result = getReviewRequestTypes(nodes, undefined);
       expect(result).toEqual([]);
     });
   });

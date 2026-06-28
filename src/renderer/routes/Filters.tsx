@@ -8,6 +8,7 @@ import { useFiltersStore } from '../stores';
 
 import { AccountFilter } from '../components/filters/AccountFilter';
 import { ReasonFilter } from '../components/filters/ReasonFilter';
+import { ReviewRequestTypeFilter } from '../components/filters/ReviewRequestTypeFilter';
 import { SearchFilter } from '../components/filters/SearchFilter';
 import { StateFilter } from '../components/filters/StateFilter';
 import { SubjectTypeFilter } from '../components/filters/SubjectTypeFilter';
@@ -36,6 +37,7 @@ export const FiltersRoute: FC = () => {
           <UserTypeFilter />
           <SubjectTypeFilter />
           <StateFilter />
+          <ReviewRequestTypeFilter />
           <ReasonFilter />
         </Stack>
       </Contents>
