@@ -36,6 +36,15 @@ import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
 import * as apiRequests from './request';
 
+vi.mock('./request', async () => {
+  const actual = await vi.importActual<typeof import('./request')>('./request');
+  return {
+    ...actual,
+    performGraphQLRequest: vi.fn(),
+    performGraphQLRequestString: vi.fn(),
+  };
+});
+
 const mockThreadId = '1234';
 
 describe('renderer/utils/forges/github/client.ts', () => {
@@ -59,6 +68,9 @@ describe('renderer/utils/forges/github/client.ts', () => {
   const createOctokitClientUncachedSpy = vi.spyOn(octokitModule, 'createOctokitClientUncached');
 
   beforeEach(() => {
+    vi.mocked(apiRequests.performGraphQLRequest).mockReset();
+    vi.mocked(apiRequests.performGraphQLRequestString).mockReset();
+
     // Mock createOctokitClient to return our mock
     createOctokitClientSpy.mockResolvedValue(mockOctokit as unknown as OctokitClient);
     createOctokitClientUncachedSpy.mockResolvedValue(mockOctokit as unknown as OctokitClient);
@@ -270,7 +282,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   });
 
   it('fetchDiscussionByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.spyOn(apiRequests, 'performGraphQLRequest');
+    const performGraphQLRequestSpy = vi.mocked(apiRequests.performGraphQLRequest);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some discussion',
@@ -298,7 +310,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   });
 
   it('fetchIssueByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.spyOn(apiRequests, 'performGraphQLRequest');
+    const performGraphQLRequestSpy = vi.mocked(apiRequests.performGraphQLRequest);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some issue',
@@ -324,7 +336,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   });
 
   it('fetchPullByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.spyOn(apiRequests, 'performGraphQLRequest');
+    const performGraphQLRequestSpy = vi.mocked(apiRequests.performGraphQLRequest);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some pull request',
@@ -355,7 +367,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
 
   describe('fetchNotificationDetailsForList', () => {
     it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.spyOn(apiRequests, 'performGraphQLRequestString');
+      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
 
       const mockNotification = mockPartialGitifyNotification({
         title: 'Some commit',
@@ -371,7 +383,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList returns empty map if no supported notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.spyOn(apiRequests, 'performGraphQLRequestString');
+      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
 
       performGraphQLRequestStringSpy.mockResolvedValue({} as ExecutionResult<unknown>);
 
@@ -381,7 +393,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.spyOn(apiRequests, 'performGraphQLRequestString');
+      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
 
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},

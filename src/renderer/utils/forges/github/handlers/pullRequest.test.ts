@@ -22,6 +22,14 @@ import type {
 } from '../graphql/generated/graphql';
 import { getLatestReviewForReviewers, pullRequestHandler } from './pullRequest';
 
+vi.mock('../client', async () => {
+  const actual = await vi.importActual<typeof import('../client')>('../client');
+  return {
+    ...actual,
+    fetchPullByNumber: vi.fn(),
+  };
+});
+
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   describe('mergeQueryConfig', () => {
     describe('supportsMergedQueryEnrichment', () => {
@@ -32,7 +40,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   });
 
   describe('enrich', () => {
-    const fetchPullByNumberSpy = vi.spyOn(apiClient, 'fetchPullByNumber');
+    const fetchPullByNumberSpy = vi.mocked(apiClient.fetchPullByNumber);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock pull request',

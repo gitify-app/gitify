@@ -37,6 +37,7 @@ const exchangeWebFlowCodeMock = exchangeWebFlowCode as unknown as MockedFunction
 
 describe('renderer/utils/forges/github/flows.ts', () => {
   vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
+  const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   beforeEach(() => {
@@ -136,6 +137,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
         await expect(
           async () => await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession),
         ).rejects.toThrow('boom');
+        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
       });
     });
   });

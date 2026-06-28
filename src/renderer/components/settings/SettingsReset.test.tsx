@@ -12,7 +12,10 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
   it('should reset default settings when `OK`', async () => {
     const rendererLogInfoSpy = vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
 
-    globalThis.confirm = vi.fn(() => true); // always click 'OK'
+    vi.stubGlobal(
+      'confirm',
+      vi.fn(() => true),
+    ); // always click 'OK'
 
     await act(async () => {
       renderWithProviders(<SettingsReset />, {
@@ -28,7 +31,10 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
   });
 
   it('should skip reset default settings when `cancelled`', async () => {
-    globalThis.confirm = vi.fn(() => false); // always click 'cancel'
+    vi.stubGlobal(
+      'confirm',
+      vi.fn(() => false),
+    ); // always click 'cancel'
 
     await act(async () => {
       renderWithProviders(<SettingsReset />, {
