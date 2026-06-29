@@ -1,11 +1,6 @@
 import useFiltersStore from '../../../stores/useFiltersStore';
 
-import type {
-  GitifyNotificationState,
-  GitifyNotificationUser,
-  RawGitifyNotification,
-  SettingsState,
-} from '../../../types';
+import type { GitifyNotificationState, RawGitifyNotification, SettingsState } from '../../../types';
 
 import {
   BASE_SEARCH_QUALIFIERS,
@@ -189,19 +184,4 @@ export function isStateFilteredOut(state: GitifyNotificationState | undefined): 
   const notification = { subject: { state: state } } as RawGitifyNotification;
 
   return !passesStateFilter(notification);
-}
-
-/**
- * Return true if a notification with the given user would be filtered out
- * by the current user-type filter settings.
- *
- * Convenience helper used by UI components to indicate filtered-out users.
- *
- * @param user - The notification user to check.
- * @returns `true` if the user is currently filtered out.
- */
-export function isUserFilteredOut(user: GitifyNotificationUser): boolean {
-  const notification = { subject: { user: user } } as RawGitifyNotification;
-
-  return !passesUserFilters(notification);
 }

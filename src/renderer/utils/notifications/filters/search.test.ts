@@ -4,8 +4,6 @@ import type { GitifyOwner, Link } from '../../../types';
 
 import { ALL_SEARCH_QUALIFIERS, filterNotificationBySearchTerm, parseSearchInput } from './search';
 
-// (helper removed – no longer used)
-
 describe('renderer/utils/notifications/filters/search.ts', () => {
   describe('parseSearchInput (prefix matching behavior)', () => {
     it('returns null for empty string', () => {
@@ -36,11 +34,17 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
     const mockNotification = mockPartialGitifyNotification(
       {
         title: 'User authored notification',
-        user: {
+        author: {
           login: 'github-user',
           htmlUrl: 'https://github.com/user' as Link,
           avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
           type: 'User',
+        },
+        commenter: {
+          login: 'coderabbitai',
+          htmlUrl: 'https://github.com/coderabbitai' as Link,
+          avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+          type: 'Bot',
         },
       },
       {
@@ -53,12 +57,24 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
       },
     );
 
-    it('matches author qualifier (case-insensitive)', () => {
+    it('matches author qualifier against the thread author (case-insensitive)', () => {
       expect(filterNotificationBySearchTerm(mockNotification, 'author:github-user')).toBe(true);
 
       expect(filterNotificationBySearchTerm(mockNotification, 'author:GITHUB-USER')).toBe(true);
 
+      // The latest commenter is not the author.
+      expect(filterNotificationBySearchTerm(mockNotification, 'author:coderabbitai')).toBe(false);
+
       expect(filterNotificationBySearchTerm(mockNotification, 'author:some-bot')).toBe(false);
+    });
+
+    it('matches commenter qualifier against the latest comment author (case-insensitive)', () => {
+      expect(filterNotificationBySearchTerm(mockNotification, 'commenter:coderabbitai')).toBe(true);
+
+      expect(filterNotificationBySearchTerm(mockNotification, 'commenter:CODERABBITAI')).toBe(true);
+
+      // The thread author is not the latest commenter.
+      expect(filterNotificationBySearchTerm(mockNotification, 'commenter:github-user')).toBe(false);
     });
 
     it('matches org qualifier (case-insensitive)', () => {

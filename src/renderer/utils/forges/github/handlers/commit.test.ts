@@ -45,6 +45,18 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
           avatarUrl: mockCommenter.avatar_url,
           type: mockCommenter.type,
         },
+        author: {
+          login: mockAuthor.login,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
+          type: mockAuthor.type,
+        },
+        commenter: {
+          login: mockCommenter.login,
+          htmlUrl: mockCommenter.html_url,
+          avatarUrl: mockCommenter.avatar_url,
+          type: mockCommenter.type,
+        },
       });
     });
 
@@ -70,7 +82,32 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
           avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
+        author: {
+          login: mockAuthor.login,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
+          type: mockAuthor.type,
+        },
       });
+    });
+
+    it('leaves roles undefined when the commit has no linked GitHub user', async () => {
+      const mockNotification = mockPartialGitifyNotification({
+        title: 'This is a commit with comments',
+        type: 'Commit',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
+        latestCommentUrl: null,
+      });
+
+      getCommitSpy.mockResolvedValue({
+        author: null,
+      } as GetCommitResponse);
+
+      const result = await commitHandler.enrich(mockNotification, mockSettings);
+
+      expect(result.user).toBeUndefined();
+      expect(result.author).toBeUndefined();
+      expect(result.commenter).toBeUndefined();
     });
 
     it('return early if commit state filtered', async () => {

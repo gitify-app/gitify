@@ -13,25 +13,25 @@ describe('renderer/utils/notifications/filters/userType.ts', () => {
     expect(isNonHumanUser('Mannequin')).toBe(true);
   });
 
-  it('can filter by user types', () => {
+  it('can filter by author user types', () => {
     const mockPartialNotification = {
       subject: {
-        user: {
+        author: {
           type: 'User',
         },
       },
     } satisfies DeepPartial<GitifyNotification> as GitifyNotification;
 
-    mockPartialNotification.subject.user!.type = 'User';
+    mockPartialNotification.subject.author!.type = 'User';
     expect(userTypeFilter.filterNotification(mockPartialNotification, 'User')).toBe(true);
 
-    mockPartialNotification.subject.user!.type = 'EnterpriseUserAccount';
+    mockPartialNotification.subject.author!.type = 'EnterpriseUserAccount';
     expect(userTypeFilter.filterNotification(mockPartialNotification, 'User')).toBe(true);
 
-    mockPartialNotification.subject.user!.type = 'Bot';
+    mockPartialNotification.subject.author!.type = 'Bot';
     expect(userTypeFilter.filterNotification(mockPartialNotification, 'Bot')).toBe(true);
 
-    mockPartialNotification.subject.user!.type = 'Organization';
+    mockPartialNotification.subject.author!.type = 'Organization';
     expect(userTypeFilter.filterNotification(mockPartialNotification, 'Organization')).toBe(true);
   });
 });

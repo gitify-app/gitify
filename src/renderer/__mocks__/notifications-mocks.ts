@@ -66,6 +66,7 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
       type: 'Issue',
       state: 'OPEN',
       user: mockSubjectUser,
+      author: mockSubjectUser,
       reviews: [
         {
           state: 'APPROVED',
