@@ -1,5 +1,5 @@
 import { dialog } from 'electron';
-import type { Menubar } from 'menubar';
+import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../../shared/constants';
 import { EVENTS } from '../../shared/events';

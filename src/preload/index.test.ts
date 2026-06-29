@@ -108,23 +108,18 @@ describe('preload/index', () => {
   });
 
   it('app.version returns dev in development', async () => {
-    const originalEnv = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'development';
+    vi.stubEnv('NODE_ENV', 'development');
     const api = getExposedApi();
 
     await expect(api.app.version()).resolves.toBe('dev');
-
-    process.env.NODE_ENV = originalEnv;
   });
 
   it('app.version prefixes production version', async () => {
-    const originalEnv = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'production';
+    vi.stubEnv('NODE_ENV', 'production');
     invokeMainEventMock.mockResolvedValueOnce('1.2.3');
     const api = getExposedApi();
 
     await expect(api.app.version()).resolves.toBe('v1.2.3');
-    process.env.NODE_ENV = originalEnv;
   });
 
   it('raiseNativeNotification without url calls app.show', async () => {

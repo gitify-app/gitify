@@ -38,12 +38,15 @@ async function fetchInBatches(
   notifications: RawGitifyNotification[],
 ): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
   const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
+  const supportedNotifications = notifications.filter(
+    (notification) => createNotificationHandler(notification).supportsMergedQueryEnrichment,
+  );
 
   const batchSize = GITHUB_API_MERGE_BATCH_SIZE;
 
-  for (let start = 0; start < notifications.length; start += batchSize) {
+  for (let start = 0; start < supportedNotifications.length; start += batchSize) {
     const batchIndex = Math.floor(start / batchSize) + 1;
-    const slice = notifications.slice(start, start + batchSize);
+    const slice = supportedNotifications.slice(start, start + batchSize);
 
     try {
       const batchResults = await fetchNotificationDetailsForList(slice);

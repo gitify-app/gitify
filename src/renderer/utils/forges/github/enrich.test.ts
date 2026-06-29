@@ -7,6 +7,15 @@ import * as logger from '../../core/logger';
 import * as client from './client';
 import { enrichGitHubNotifications } from './enrich';
 
+vi.mock('./client', async () => {
+  const actual = await vi.importActual<typeof import('./client')>('./client');
+  return {
+    ...actual,
+    fetchNotificationDetailsForList: vi.fn(),
+    fetchIssueByNumber: vi.fn(),
+  };
+});
+
 describe('renderer/utils/forges/github/enrich.ts', () => {
   it('logs and continues when a per-notification handler throws', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
@@ -14,7 +23,7 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
 
     // No batched fragments — each handler will fall back to its single-fetch
     // path, which we make fail.
-    vi.spyOn(client, 'fetchNotificationDetailsForList').mockResolvedValue(new Map());
+    vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue(new Map());
 
     const mockError = new Error('Test error');
     const mockNotification = mockPartialGitifyNotification({
@@ -34,7 +43,7 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
     };
     mockNotification.repository = mockRepository;
 
-    vi.spyOn(client, 'fetchIssueByNumber').mockRejectedValue(mockError);
+    vi.mocked(client.fetchIssueByNumber).mockRejectedValue(mockError);
 
     const [result] = await enrichGitHubNotifications([mockNotification], mockSettings);
 

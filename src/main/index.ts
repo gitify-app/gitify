@@ -1,6 +1,6 @@
 import { app } from 'electron';
 import log from 'electron-log';
-import { menubar } from 'menubar';
+import { menubar } from 'electron-menubar';
 
 import { Paths, WindowConfig } from './config';
 import {
@@ -32,6 +32,8 @@ const mb = menubar({
   browserWindow: WindowConfig,
   preloadWindow: true,
   showDockIcon: false, // Hide the app from the macOS dock
+  hideOnClose: true, // Keep renderer state across WM close; Wayland-safe.
+  escapeToHide: true, // Hide the window when Escape is pressed.
 });
 
 const menuBuilder = new MenuBuilder(mb);

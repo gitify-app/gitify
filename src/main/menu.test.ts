@@ -1,11 +1,11 @@
 import { Menu, shell } from 'electron';
+import type { Menubar } from 'electron-menubar';
 import { autoUpdater } from 'electron-updater';
-import type { Menubar } from 'menubar';
 
 import type { Mock } from 'vitest';
 
 import { APPLICATION } from '../shared/constants';
-import { isLinux, isMacOS } from '../shared/platform';
+import { isMacOS } from '../shared/platform';
 
 import { resetApp } from './lifecycle/reset';
 import MenuBuilder from './menu';
@@ -54,7 +54,6 @@ vi.mock('./lifecycle/reset', () => ({
 }));
 
 vi.mock('../shared/platform', () => ({
-  isLinux: vi.fn(() => false),
   isMacOS: vi.fn(),
 }));
 
@@ -89,7 +88,6 @@ describe('main/menu.ts', () => {
   };
 
   beforeEach(() => {
-    vi.mocked(isLinux).mockReturnValue(false);
     vi.mocked(isMacOS).mockReturnValue(false);
     menuItemInstances.length = 0; // Clear tracked instances
     menubar = {
@@ -146,7 +144,7 @@ describe('main/menu.ts', () => {
       expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(true);
     });
 
-    it('should hide  menu item', () => {
+    it('should hide menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(false);
 
       // oxlint-disable-next-line dot-notation -- This is a test
@@ -233,37 +231,8 @@ describe('main/menu.ts', () => {
       expect(menuBuilder['hideWindowMenuItem'].visible).toBe(false);
     });
 
-    it('does not re-publish the menu on non-Linux platforms', () => {
+    it('does not touch the tray on visibility change (library re-publishes on show/hide)', () => {
       menuBuilder.buildMenu();
-      menuBuilder.setWindowVisibility(true);
-
-      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
-    });
-
-    it('re-publishes the menu over D-Bus on Linux', () => {
-      vi.mocked(isLinux).mockReturnValue(true);
-      const menu = {} as Electron.Menu;
-      (Menu.buildFromTemplate as Mock).mockReturnValueOnce(menu);
-      menuBuilder.buildMenu();
-
-      menuBuilder.setWindowVisibility(true);
-
-      expect(menubar.tray.setContextMenu).toHaveBeenCalledWith(menu);
-    });
-
-    it('skips re-publishing if buildMenu has not run yet', () => {
-      vi.mocked(isLinux).mockReturnValue(true);
-
-      menuBuilder.setWindowVisibility(true);
-
-      expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();
-    });
-
-    it('skips re-publishing when the tray is destroyed', () => {
-      vi.mocked(isLinux).mockReturnValue(true);
-      menuBuilder.buildMenu();
-      (menubar.tray.isDestroyed as Mock).mockReturnValue(true);
-
       menuBuilder.setWindowVisibility(true);
 
       expect(menubar.tray.setContextMenu).not.toHaveBeenCalled();

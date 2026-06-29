@@ -395,6 +395,8 @@ export interface GitifySubject {
   author?: GitifyNotificationUser;
   /** Author of the latest comment, when the subject has comments */
   commenter?: GitifyNotificationUser;
+  /** Whether the current user was directly requested or via team */
+  reviewRequested?: ReviewRequestType[];
   /** PR review states & reviewers */
   reviews?: GitifyPullRequestReview[];
   /** PRs closing issues */
@@ -551,3 +553,5 @@ export type SubjectType =
   | 'WorkflowRun';
 
 export type UserType = 'Bot' | 'EnterpriseUserAccount' | 'Mannequin' | 'Organization' | 'User';
+
+export type ReviewRequestType = 'direct' | 'team';

@@ -16,6 +16,7 @@ import {
   type GitifySubject,
   IconColor,
   type Link,
+  type ReviewRequestType,
   type SettingsState,
 } from '../../../../types';
 
@@ -59,6 +60,11 @@ class PullRequestHandler extends DefaultHandler {
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
     );
 
+    const reviewRequested = getReviewRequestTypes(
+      pr.reviewRequests?.nodes?.filter(Boolean) ?? [],
+      notification.account?.user?.login,
+    );
+
     const prReactionCount = prComment?.reactions.totalCount ?? pr.reactions.totalCount;
     const prReactionGroup = prComment?.reactionGroups ?? pr.reactionGroups;
 
@@ -68,6 +74,7 @@ class PullRequestHandler extends DefaultHandler {
       user: prUser,
       author: author,
       commenter: commenter,
+      reviewRequested,
       reviews: reviews,
       commentCount: pr.comments.totalCount,
       labels:
@@ -123,6 +130,34 @@ class PullRequestHandler extends DefaultHandler {
 }
 
 export const pullRequestHandler = new PullRequestHandler();
+
+export function getReviewRequestTypes(
+  nodes: NonNullable<NonNullable<PullRequestDetailsFragment['reviewRequests']>['nodes']>,
+  currentUserLogin: string | undefined,
+): ReviewRequestType[] {
+  if (!nodes.length || !currentUserLogin) {
+    return [];
+  }
+
+  const types = new Set<ReviewRequestType>();
+
+  for (const node of nodes) {
+    if (!node?.requestedReviewer) {
+      continue;
+    }
+
+    if (
+      node.requestedReviewer.__typename === 'User' &&
+      node.requestedReviewer.login === currentUserLogin
+    ) {
+      types.add('direct');
+    } else if (node.requestedReviewer.__typename === 'Team') {
+      types.add('team');
+    }
+  }
+
+  return Array.from(types);
+}
 
 export function getLatestReviewForReviewers(
   reviews: PullRequestReviewFieldsFragment[],

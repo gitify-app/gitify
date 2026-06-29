@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import type { Menubar } from 'menubar';
+import type { Menubar } from 'electron-menubar';
 
 const writeFile = vi.fn((_p: string, _d: unknown, cb: () => void) => cb());
 vi.mock('node:fs', () => ({

@@ -19,7 +19,8 @@ import { getAdapter } from '../utils/forges/registry';
 import * as notifications from '../utils/notifications/notifications';
 import * as comms from '../utils/system/comms';
 import * as tray from '../utils/system/tray';
-import { type AppContextState, AppProvider } from './App';
+import { AppProvider } from './App';
+import { type AppContextState } from './context';
 import { defaultSettings } from './defaults';
 
 vi.mock('../hooks/useNotifications');

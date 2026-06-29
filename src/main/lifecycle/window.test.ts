@@ -1,4 +1,4 @@
-import type { Menubar } from 'menubar';
+import type { Menubar } from 'electron-menubar';
 
 import type MenuBuilder from '../menu';
 import {
@@ -53,8 +53,6 @@ const findWebContentsHandler = (menubar: Menubar, eventName: string): (() => voi
   return call?.[1] as (() => void) | undefined;
 };
 
-const flushDeferred = () => new Promise((resolve) => setImmediate(resolve));
-
 describe('main/lifecycle/window.ts', () => {
   let menubar: Menubar;
   let menuBuilder: MenuBuilder;
@@ -67,6 +65,7 @@ describe('main/lifecycle/window.ts', () => {
 
     menubar = {
       hideWindow: vi.fn(),
+      recenterOnTray: vi.fn(),
       tray: {
         getBounds: vi.fn().mockReturnValue({ x: 100, y: 100, width: 22, height: 22 }),
       },
@@ -80,9 +79,6 @@ describe('main/lifecycle/window.ts', () => {
         webContents: {
           on: vi.fn(),
         },
-      },
-      positioner: {
-        move: vi.fn(),
       },
     } as unknown as Menubar;
     menuBuilder = {
@@ -102,13 +98,9 @@ describe('main/lifecycle/window.ts', () => {
     ).not.toThrow();
   });
 
-  it('configureWindowEvents registers webContents event listeners', () => {
+  it('configureWindowEvents registers webContents devtools listeners', () => {
     configureWindowEvents(menubar, menuBuilder);
 
-    expect(menubar.window?.webContents.on).toHaveBeenCalledWith(
-      'before-input-event',
-      expect.any(Function),
-    );
     expect(menubar.window?.webContents.on).toHaveBeenCalledWith(
       'devtools-opened',
       expect.any(Function),
@@ -119,10 +111,19 @@ describe('main/lifecycle/window.ts', () => {
     );
   });
 
-  it('configureWindowEvents registers window close, before-quit and window-all-closed listeners', () => {
+  it('does not register a close, before-input-event, or its own escape handler (library owns those)', () => {
     configureWindowEvents(menubar, menuBuilder);
 
-    expect(menubar.window?.on).toHaveBeenCalledWith('close', expect.any(Function));
+    expect(menubar.window?.on).not.toHaveBeenCalledWith('close', expect.any(Function));
+    expect(menubar.window?.webContents.on).not.toHaveBeenCalledWith(
+      'before-input-event',
+      expect.any(Function),
+    );
+  });
+
+  it('configureWindowEvents registers before-quit and window-all-closed app listeners', () => {
+    configureWindowEvents(menubar, menuBuilder);
+
     expect(appOnMock).toHaveBeenCalledWith('before-quit', expect.any(Function));
     expect(appOnMock).toHaveBeenCalledWith('window-all-closed', expect.any(Function));
   });
@@ -144,58 +145,6 @@ describe('main/lifecycle/window.ts', () => {
       hideHandler?.({ preventDefault: vi.fn() });
 
       expect(menuBuilder.setWindowVisibility).toHaveBeenCalledWith(false);
-    });
-  });
-
-  describe('window close handler', () => {
-    it('hides the window and restores menubar reference on a WM close', async () => {
-      configureWindowEvents(menubar, menuBuilder);
-
-      const closeHandler = findWindowHandler(menubar, 'close');
-      const event = { preventDefault: vi.fn() };
-      closeHandler?.(event);
-
-      expect(event.preventDefault).toHaveBeenCalled();
-      expect(menubar.window?.hide).not.toHaveBeenCalled();
-
-      // Simulate menubar's windowClear nulling its reference.
-      const captured = menubar.window;
-      (menubar as unknown as { window: undefined }).window = undefined;
-
-      await flushDeferred();
-
-      expect(captured?.hide).toHaveBeenCalled();
-      expect((menubar as unknown as { _browserWindow: unknown })._browserWindow).toBe(captured);
-    });
-
-    it('skips the deferred hide when the captured window is destroyed', async () => {
-      configureWindowEvents(menubar, menuBuilder);
-
-      const captured = menubar.window;
-      const closeHandler = findWindowHandler(menubar, 'close');
-      closeHandler?.({ preventDefault: vi.fn() });
-
-      // oxlint-disable-next-line no-unsafe-optional-chaining -- captured is guaranteed defined in this test
-      (captured?.isDestroyed as ReturnType<typeof vi.fn>).mockReturnValue(true);
-
-      await flushDeferred();
-
-      expect(captured?.hide).not.toHaveBeenCalled();
-    });
-
-    it('lets the window close during quit', async () => {
-      configureWindowEvents(menubar, menuBuilder);
-
-      findAppHandler('before-quit')?.();
-
-      const closeHandler = findWindowHandler(menubar, 'close');
-      const event = { preventDefault: vi.fn() };
-      closeHandler?.(event);
-
-      await flushDeferred();
-
-      expect(event.preventDefault).not.toHaveBeenCalled();
-      expect(menubar.window?.hide).not.toHaveBeenCalled();
     });
   });
 
@@ -232,6 +181,16 @@ describe('main/lifecycle/window.ts', () => {
       findWebContentsHandler(menubar, 'devtools-closed')?.();
 
       expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(false);
+    });
+  });
+
+  describe('devtools-closed handler', () => {
+    it('delegates re-centering to mb.recenterOnTray()', () => {
+      configureWindowEvents(menubar, menuBuilder);
+
+      findWebContentsHandler(menubar, 'devtools-closed')?.();
+
+      expect(menubar.recenterOnTray).toHaveBeenCalled();
     });
   });
 

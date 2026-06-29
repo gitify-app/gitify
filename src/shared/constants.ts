@@ -18,4 +18,4 @@ export const APPLICATION = {
   UPDATE_CHECK_INTERVAL_MS: 24 * 60 * 60 * 1000, // 24 hours
 
   UPDATE_NOT_AVAILABLE_DISPLAY_MS: 60 * 1000, // 60 seconds
-};
+} as const;

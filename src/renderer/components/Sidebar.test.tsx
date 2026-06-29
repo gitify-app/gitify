@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
-import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
 import * as comms from '../utils/system/comms';
@@ -60,7 +59,9 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     it('renders correct icon when there are notifications', () => {
       renderWithProviders(<Sidebar />, {
-        notifications: mockMultipleAccountNotifications,
+        notificationCount: 2,
+        hasNotifications: true,
+        hasUnreadNotifications: false,
       });
 
       expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
@@ -132,9 +133,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('quick links', () => {
     it('opens my github issues page', async () => {
-      renderWithProviders(<Sidebar />, {
-        notifications: mockMultipleAccountNotifications,
-      });
+      renderWithProviders(<Sidebar />);
 
       await userEvent.click(screen.getByTestId('sidebar-my-issues'));
 
@@ -143,9 +142,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('opens my github pull requests page', async () => {
-      renderWithProviders(<Sidebar />, {
-        notifications: mockMultipleAccountNotifications,
-      });
+      renderWithProviders(<Sidebar />);
 
       await userEvent.click(screen.getByTestId('sidebar-my-pull-requests'));
 

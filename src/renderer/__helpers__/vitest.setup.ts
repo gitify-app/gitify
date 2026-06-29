@@ -15,54 +15,82 @@ vi.mock('../utils/core/random', () => ({
   randomElement: vi.fn((arr: unknown[]) => arr[0]),
 }));
 
-// Sets timezone to UTC for consistent date/time in tests and snapshots
-process.env.TZ = 'UTC';
+function getRequestTarget(input: RequestInfo | URL): string {
+  if (typeof input === 'string') {
+    return input;
+  }
+
+  if (input instanceof URL) {
+    return input.href;
+  }
+
+  if (typeof Request !== 'undefined' && input instanceof Request) {
+    return input.url;
+  }
+
+  return String(input);
+}
+
+function createGitifyBridgeApi(): Window['gitify'] {
+  return {
+    app: {
+      version: vi.fn().mockResolvedValue('v0.0.1'),
+      hide: vi.fn(),
+      quit: vi.fn(),
+      show: vi.fn(),
+    },
+    twemojiDirectory: vi.fn().mockResolvedValue('/mock/images/assets'),
+    openExternalLink: vi.fn(),
+    decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
+    encryptValue: vi.fn().mockResolvedValue('encrypted'),
+    platform: {
+      isLinux: vi.fn().mockReturnValue(false),
+      isMacOS: vi.fn().mockReturnValue(true),
+      isWindows: vi.fn().mockReturnValue(false),
+    },
+    zoom: {
+      getLevel: vi.fn(),
+      setLevel: vi.fn(),
+    },
+    tray: {
+      updateColor: vi.fn(),
+      updateTitle: vi.fn(),
+      useAlternateIdleIcon: vi.fn(),
+      useUnreadActiveIcon: vi.fn(),
+    },
+    notificationSoundPath: vi.fn(),
+    onAuthCallback: vi.fn(),
+    onResetApp: vi.fn(),
+    setAutoLaunch: vi.fn(),
+    setKeepWindowOnBlur: vi.fn(),
+    applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
+    raiseNativeNotification: vi.fn(),
+  };
+}
+
+window.gitify = createGitifyBridgeApi();
 
 /**
  * Reset stores
  */
 beforeEach(() => {
+  vi.stubEnv('TZ', 'UTC');
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async (input: RequestInfo | URL) => {
+      throw new Error(
+        `Unexpected network request in test: ${getRequestTarget(input)}. Mock the network boundary explicitly.`,
+      );
+    }),
+  );
   useFiltersStore.getState().reset();
   navigateMock.mockReset();
+  window.gitify = createGitifyBridgeApi();
 });
 
-/**
- * Gitify context bridge API
- */
-window.gitify = {
-  app: {
-    version: vi.fn().mockResolvedValue('v0.0.1'),
-    hide: vi.fn(),
-    quit: vi.fn(),
-    show: vi.fn(),
-  },
-  twemojiDirectory: vi.fn().mockResolvedValue('/mock/images/assets'),
-  openExternalLink: vi.fn(),
-  decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
-  encryptValue: vi.fn().mockResolvedValue('encrypted'),
-  platform: {
-    isLinux: vi.fn().mockReturnValue(false),
-    isMacOS: vi.fn().mockReturnValue(true),
-    isWindows: vi.fn().mockReturnValue(false),
-  },
-  zoom: {
-    getLevel: vi.fn(),
-    setLevel: vi.fn(),
-  },
-  tray: {
-    updateColor: vi.fn(),
-    updateTitle: vi.fn(),
-    useAlternateIdleIcon: vi.fn(),
-    useUnreadActiveIcon: vi.fn(),
-  },
-  notificationSoundPath: vi.fn(),
-  onAuthCallback: vi.fn(),
-  onResetApp: vi.fn(),
-  setAutoLaunch: vi.fn(),
-  setKeepWindowOnBlur: vi.fn(),
-  applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
-  raiseNativeNotification: vi.fn(),
-};
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 // Mock clipboard API
 Object.defineProperty(navigator, 'clipboard', {
