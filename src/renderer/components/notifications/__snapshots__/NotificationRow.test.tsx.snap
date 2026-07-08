@@ -180,22 +180,40 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
-            data-gap="none"
+            data-gap="condensed"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
-            <span
-              class="pr-1 prc-Text-Text-9mHv3"
-              title="You're watching the repository."
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              Updated
-            </span>
-            <relative-time
-              datetime="2017-05-20T17:51:57.000Z"
+              <span
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
+            <button
+              class="hidden font-medium hover:underline group-hover:inline"
+              data-testid="view-author-profile"
+              title="Open gitify-app's profile ↗"
+              type="button"
             >
-              May 20, 2017
-            </relative-time>
+              by gitify-app
+            </button>
           </div>
           <div
             class="flex gap-1"
@@ -546,22 +564,40 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
-            data-gap="none"
+            data-gap="condensed"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
-            <span
-              class="pr-1 prc-Text-Text-9mHv3"
-              title="You're watching the repository."
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              Updated
-            </span>
-            <relative-time
-              datetime="2017-05-20T17:51:57.000Z"
+              <span
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
+            <button
+              class="hidden font-medium hover:underline group-hover:inline"
+              data-testid="view-author-profile"
+              title="Open gitify-app's profile ↗"
+              type="button"
             >
-              May 20, 2017
-            </relative-time>
+              by gitify-app
+            </button>
           </div>
           <div
             class="flex gap-1"
@@ -912,22 +948,40 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
-            data-gap="none"
+            data-gap="condensed"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
-            <span
-              class="pr-1 prc-Text-Text-9mHv3"
-              title="You're watching the repository."
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              Updated
-            </span>
-            <relative-time
-              datetime="2017-05-20T17:51:57.000Z"
+              <span
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
+            <button
+              class="hidden font-medium hover:underline group-hover:inline"
+              data-testid="view-author-profile"
+              title="Open gitify-app's profile ↗"
+              type="button"
             >
-              May 20, 2017
-            </relative-time>
+              by gitify-app
+            </button>
           </div>
           <div
             class="flex gap-1"
@@ -1278,22 +1332,40 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
             data-direction="horizontal"
-            data-gap="none"
+            data-gap="condensed"
             data-justify="start"
             data-padding="none"
             data-wrap="nowrap"
           >
-            <span
-              class="pr-1 prc-Text-Text-9mHv3"
-              title="You're watching the repository."
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-direction="horizontal"
+              data-gap="none"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
             >
-              Updated
-            </span>
-            <relative-time
-              datetime="2017-05-20T17:51:57.000Z"
+              <span
+                class="pr-1 prc-Text-Text-9mHv3"
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <relative-time
+                datetime="2017-05-20T17:51:57.000Z"
+              >
+                May 20, 2017
+              </relative-time>
+            </div>
+            <button
+              class="hidden font-medium hover:underline group-hover:inline"
+              data-testid="view-author-profile"
+              title="Open gitify-app's profile ↗"
+              type="button"
             >
-              May 20, 2017
-            </relative-time>
+              by gitify-app
+            </button>
           </div>
           <div
             class="flex gap-1"
