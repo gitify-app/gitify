@@ -40,7 +40,9 @@ class IssueHandler extends DefaultHandler {
 
     const issueComment = issue.comments?.nodes?.[0];
 
-    const issueUser = getNotificationAuthor([issueComment?.author, issue.author]);
+    const author = getNotificationAuthor([issue.author]);
+    const commenter = getNotificationAuthor([issueComment?.author]);
+    const issueUser = commenter ?? author;
 
     const issueReactionCount = issueComment?.reactions.totalCount ?? issue.reactions.totalCount;
     const issueReactionGroup = issueComment?.reactionGroups ?? issue.reactionGroups;
@@ -49,6 +51,8 @@ class IssueHandler extends DefaultHandler {
       number: issue.number,
       state: issueState,
       user: issueUser,
+      author: author,
+      commenter: commenter,
       commentCount: issue.comments.totalCount,
       labels:
         issue.labels?.nodes?.filter(Boolean).map((label) => ({

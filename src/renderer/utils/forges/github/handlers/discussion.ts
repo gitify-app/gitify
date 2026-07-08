@@ -63,10 +63,15 @@ class DiscussionHandler extends DefaultHandler {
     const discussionReactionGroup =
       latestDiscussionComment?.reactionGroups ?? discussion.reactionGroups;
 
+    const author = getNotificationAuthor([discussion.author]);
+    const commenter = getNotificationAuthor([latestDiscussionComment?.author]);
+
     return {
       number: discussion.number,
       state: discussionState,
-      user: getNotificationAuthor([latestDiscussionComment?.author, discussion.author]),
+      user: commenter ?? author,
+      author: author,
+      commenter: commenter,
       commentCount: discussion.comments.totalCount,
       labels:
         discussion.labels?.nodes?.filter(Boolean).map((label) => ({

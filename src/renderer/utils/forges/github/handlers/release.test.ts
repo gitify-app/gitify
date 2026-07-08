@@ -39,6 +39,12 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
           avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
+        author: {
+          login: mockAuthor.login,
+          htmlUrl: mockAuthor.html_url,
+          avatarUrl: mockAuthor.avatar_url,
+          type: mockAuthor.type,
+        },
       });
     });
 

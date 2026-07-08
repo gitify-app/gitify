@@ -16,7 +16,6 @@ import type {
 import { isStateFilteredOut } from '../../../notifications/filters/filter';
 import { getRelease } from '../client';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor } from './utils';
 
 class ReleaseHandler extends DefaultHandler {
   override async enrich(
@@ -32,7 +31,7 @@ class ReleaseHandler extends DefaultHandler {
 
     const release = await getRelease(notification.account, notification.subject.url!);
 
-    const user: GitifyNotificationUser | undefined = release.author
+    const author: GitifyNotificationUser | undefined = release.author
       ? {
           login: release.author.login,
           avatarUrl: release.author.avatar_url as Link,
@@ -43,7 +42,8 @@ class ReleaseHandler extends DefaultHandler {
 
     return {
       state: releaseState,
-      user: getNotificationAuthor([user]),
+      user: author,
+      author: author,
     };
   }
 
