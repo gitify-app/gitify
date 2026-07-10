@@ -328,7 +328,7 @@ describe('renderer/context/App.tsx', () => {
     });
   });
 
-  describe('migrateAuthTokens (startup)', () => {
+  describe('persistRotatedAuthTokens (startup)', () => {
     const refreshAccountSpy = vi
       .spyOn(authUtils, 'refreshAccount')
       .mockImplementation(async (account) => account);
@@ -387,23 +387,23 @@ describe('renderer/context/App.tsx', () => {
       expect(tokenChanged).toBe(false);
     });
 
-    it('re-encrypts plaintext token (legacy migration) when decrypt throws', async () => {
+    it('does not re-encrypt or persist when decrypt throws', async () => {
       loadStateSpy.mockReturnValue({
         auth: { accounts: [mockGitHubCloudAccount] } as AuthState,
         settings: mockSettings,
       });
       decryptValueSpy.mockRejectedValue(new Error('not encrypted'));
-      encryptValueSpy.mockResolvedValue('newly-encrypted');
 
       await act(async () => {
         renderWithProviders(<AppProvider>{null}</AppProvider>);
       });
 
-      expect(encryptValueSpy).toHaveBeenCalledWith(mockGitHubCloudAccount.token);
-      const persistCall = saveStateSpy.mock.calls.find(
-        ([state]) => (state as { auth: AuthState }).auth.accounts[0]?.token === 'newly-encrypted',
+      expect(encryptValueSpy).not.toHaveBeenCalled();
+      const tokenChanged = saveStateSpy.mock.calls.some(
+        ([state]) =>
+          (state as { auth: AuthState }).auth.accounts[0]?.token !== mockGitHubCloudAccount.token,
       );
-      expect(persistCall).toBeDefined();
+      expect(tokenChanged).toBe(false);
     });
   });
 });

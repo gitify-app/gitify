@@ -28,7 +28,6 @@ import type {
 
 import {
   addAccount,
-  getAccountUUID,
   hasAccounts,
   isValidHostname,
   refreshAccount,
@@ -64,7 +63,7 @@ import { defaultAuth, defaultSettings } from './defaults';
  * coerce `forge` to a registered value, and drop accounts with a
  * structurally invalid hostname before the renderer ever touches them.
  */
-function migrateLegacyAuthState(auth: AuthState): AuthState {
+function sanitiseAuthState(auth: AuthState): AuthState {
   return {
     ...auth,
     accounts: auth.accounts.flatMap((a) => {
@@ -90,9 +89,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const existingState = loadState();
 
   const [auth, setAuth] = useState<AuthState>(
-    existingState.auth
-      ? migrateLegacyAuthState({ ...defaultAuth, ...existingState.auth })
-      : defaultAuth,
+    existingState.auth ? sanitiseAuthState({ ...defaultAuth, ...existingState.auth }) : defaultAuth,
   );
 
   const [settings, setSettings] = useState<SettingsState>(
@@ -158,45 +155,38 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     persistAuth(updatedAuth);
   }, [auth, persistAuth]);
 
-  // TODO - Remove migration logic in future release
-  const migrateAuthTokens = useCallback(async () => {
-    const migratedAccounts = await Promise.all(
+  /**
+   * Persist tokens re-encrypted after OS keychain key rotation.
+   * Tokens are expected to already be encrypted at rest; plaintext tokens
+   * from pre-encryption releases are no longer migrated.
+   */
+  const persistRotatedAuthTokens = useCallback(async () => {
+    const rotatedAccounts = await Promise.all(
       auth.accounts.map(async (account) => {
         try {
           const { reEncryptedToken } = await decryptValue(account.token);
           if (reEncryptedToken) {
             return { ...account, token: reEncryptedToken as Token };
           }
-          return account;
         } catch {
-          const encryptedToken = (await encryptValue(account.token)) as Token;
-          return { ...account, token: encryptedToken };
+          // Leave the account unchanged if decrypt fails (e.g. corrupted ciphertext).
         }
+        return account;
       }),
     );
 
-    const tokensMigrated = migratedAccounts.some((migratedAccount) => {
-      const originalAccount = auth.accounts.find(
-        (account) => getAccountUUID(account) === getAccountUUID(migratedAccount),
-      );
+    const tokensRotated = rotatedAccounts.some(
+      (account, index) => account.token !== auth.accounts[index]?.token,
+    );
 
-      if (!originalAccount) {
-        return true;
-      }
-
-      return migratedAccount.token !== originalAccount.token;
-    });
-
-    if (!tokensMigrated) {
+    if (!tokensRotated) {
       return;
     }
 
-    const updatedAuth: AuthState = {
+    persistAuth({
       ...auth,
-      accounts: migratedAccounts,
-    };
-
-    persistAuth(updatedAuth);
+      accounts: rotatedAccounts,
+    });
   }, [auth, persistAuth]);
 
   useEffect(() => {
@@ -228,11 +218,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   /**
-   * On startup, check if auth tokens need encrypting and refresh all account details
+   * On startup, persist any keychain-rotated token ciphertext and refresh accounts
    */
   useEffect(() => {
     void (async () => {
-      await migrateAuthTokens();
+      await persistRotatedAuthTokens();
       await refreshAllAccounts();
     })();
     // oxlint-disable-next-line react/exhaustive-deps -- Run once on startup
