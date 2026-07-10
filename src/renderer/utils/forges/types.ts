@@ -55,15 +55,6 @@ export interface RefreshAccountData {
 }
 
 /**
- * Router state forwarded from a login method descriptor into the
- * destination route. Currently used to pre-select the forge when entering
- * the personal-access-token form.
- */
-export interface LoginRouteState {
-  forge?: Forge;
-}
-
-/**
  * Forge-agnostic display surface for a single notification. The adapter
  * computes these on demand for shared code (`formatters.ts`, `url.ts`) so
  * the format/UI layer never imports forge-specific dispatch.
@@ -83,10 +74,13 @@ export interface LoginMethodDescriptor {
   icon: FC<OcticonProps>;
   label: string;
   variant?: 'primary' | 'default';
-  /** Route to navigate to. */
+  /** Forge-specific route to navigate to (e.g. `/login/github/device-flow`). */
   route: string;
-  /** Optional router state to pass with navigation. */
-  state?: LoginRouteState;
+  /**
+   * Auth method recorded on accounts created via this login method. Used to
+   * route re-authentication back to the matching login route.
+   */
+  authMethod: AuthMethod;
 }
 
 /**
@@ -187,7 +181,7 @@ export interface ForgeAdapter {
   // Optional because not every forge supports every flow. Gitea today is
   // PAT-only and omits both bundles. The orchestrator gates UI on the
   // presence of these bundles (and on `loginMethods` entries pointing at
-  // `/login-device-flow` or `/login-oauth-app`).
+  // the forge's device-flow or OAuth-app routes).
 
   /**
    * OAuth device-flow capability. Forges without device-flow support (e.g.

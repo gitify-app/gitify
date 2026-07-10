@@ -1,13 +1,13 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 
-import * as logger from '../utils/core/logger';
-import * as comms from '../utils/system/comms';
-import { LoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
+import * as logger from '../../utils/core/logger';
+import * as comms from '../../utils/system/comms';
+import { GitHubLoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
 
-describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
+describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
   const copyToClipboardSpy = vi.spyOn(comms, 'copyToClipboard').mockResolvedValue();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
@@ -22,7 +22,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -45,7 +45,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -76,7 +76,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -102,7 +102,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -121,7 +121,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     const loginWithDeviceFlowStartMock = vi.fn().mockRejectedValueOnce(new Error('Network error'));
 
-    renderWithProviders(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -142,7 +142,7 @@ describe('renderer/routes/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<LoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 

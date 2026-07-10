@@ -1,30 +1,31 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 
-import type { Hostname, Token } from '../types';
-
-import * as logger from '../utils/core/logger';
-import * as comms from '../utils/system/comms';
 import {
   type IFormData,
-  LoginWithPersonalAccessTokenRoute,
   validateForm,
-} from './LoginWithPersonalAccessToken';
+} from '../../components/login/LoginWithPersonalAccessTokenForm';
 
-describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
+import type { Hostname, Token } from '../../types';
+
+import * as logger from '../../utils/core/logger';
+import * as comms from '../../utils/system/comms';
+import { GitHubLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
+
+describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
   const loginWithPersonalAccessTokenMock = vi.fn();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   it('renders correctly', () => {
-    const tree = renderWithProviders(<LoginWithPersonalAccessTokenRoute />);
+    const tree = renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    renderWithProviders(<LoginWithPersonalAccessTokenRoute />);
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -55,7 +56,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
   describe("'Generate a PAT' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      renderWithProviders(<LoginWithPersonalAccessTokenRoute />, {
+      renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
         loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
 
@@ -67,7 +68,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     });
 
     it('should open in browser if hostname configured', async () => {
-      renderWithProviders(<LoginWithPersonalAccessTokenRoute />, {
+      renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
         loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
 
@@ -80,7 +81,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   it('should login using a token - success', async () => {
     loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
-    renderWithProviders(<LoginWithPersonalAccessTokenRoute />, {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
@@ -97,6 +98,11 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
 
     await waitFor(() => {
       expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+      expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledWith({
+        hostname: 'github.com',
+        token: '1234567890123456789012345678901234567890',
+        forge: 'github',
+      });
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/');
     });
@@ -106,7 +112,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
-    renderWithProviders(<LoginWithPersonalAccessTokenRoute />, {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
@@ -129,7 +135,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should render the form with errors', async () => {
-    renderWithProviders(<LoginWithPersonalAccessTokenRoute />);
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -144,7 +150,7 @@ describe('renderer/routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should open help docs in the browser', async () => {
-    renderWithProviders(<LoginWithPersonalAccessTokenRoute />, {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 

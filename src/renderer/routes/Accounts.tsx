@@ -4,10 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import {
   AlertFillIcon,
   KeyIcon,
-  MarkGithubIcon,
   PersonAddIcon,
   PersonIcon,
-  ServerIcon,
   ShieldCheckIcon,
   SignOutIcon,
   StarFillIcon,
@@ -30,9 +28,9 @@ import { determineFailureType } from '../utils/api/errors';
 import { hasAlternateScopes, hasRecommendedScopes } from '../utils/auth/scopes';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
-import { toError } from '../utils/core/logger';
+import { rendererLogError, toError } from '../utils/core/logger';
 import { saveState } from '../utils/core/storage';
-import { getAdapter } from '../utils/forges/registry';
+import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
@@ -91,31 +89,6 @@ export const AccountsRoute: FC = () => {
     }, 500);
   };
 
-  const loginWithGitHub = async () => {
-    return navigate('/login-device-flow', {
-      replace: true,
-      state: { forge: 'github' as const },
-    });
-  };
-
-  const loginWithPersonalAccessToken = () => {
-    return navigate('/login-personal-access-token', { replace: true });
-  };
-
-  const loginWithGiteaPersonalAccessToken = () => {
-    return navigate('/login-personal-access-token', {
-      replace: true,
-      state: { forge: 'gitea' as const },
-    });
-  };
-
-  const loginWithOAuthApp = () => {
-    return navigate('/login-oauth-app', {
-      replace: true,
-      state: { forge: 'github' as const },
-    });
-  };
-
   const getAccountError = (account: Account) => {
     const accountUUID = getAccountUUID(account);
     return (
@@ -126,25 +99,23 @@ export const AccountsRoute: FC = () => {
   };
 
   const handleReAuthenticate = (account: Account) => {
-    switch (account.method) {
-      case 'GitHub App':
-        return navigate('/login-device-flow', {
-          replace: true,
-          state: { account },
-        });
-      case 'Personal Access Token':
-        return navigate('/login-personal-access-token', {
-          replace: true,
-          state: { account },
-        });
-      case 'OAuth App':
-        return navigate('/login-oauth-app', {
-          replace: true,
-          state: { account },
-        });
-      default:
-        break;
+    const loginMethod = getAdapter(account).loginMethods.find(
+      (method) => method.authMethod === account.method,
+    );
+
+    if (!loginMethod) {
+      rendererLogError(
+        'handleReAuthenticate',
+        `no login method registered for forge ${account.forge} and auth method ${account.method}`,
+        new Error('Unable to re-authenticate account'),
+      );
+      return;
     }
+
+    navigate(loginMethod.route, {
+      replace: true,
+      state: { account },
+    });
   };
 
   return (
@@ -318,42 +289,28 @@ export const AccountsRoute: FC = () => {
 
           <ActionMenu.Overlay width="medium">
             <ActionList>
-              <ActionList.Item data-testid="account-add-github" onSelect={() => loginWithGitHub()}>
-                <ActionList.LeadingVisual>
-                  <MarkGithubIcon />
-                </ActionList.LeadingVisual>
-                Login with GitHub
-              </ActionList.Item>
+              {listAdapters().flatMap((adapter) =>
+                adapter.loginMethods.map((method) => {
+                  const MethodIcon = method.icon;
+                  const label =
+                    method.label === adapter.displayName
+                      ? `Login with ${adapter.displayName}`
+                      : `Login with ${adapter.displayName} (${method.label})`;
 
-              <ActionList.Item
-                data-testid="account-add-pat"
-                onSelect={() => loginWithPersonalAccessToken()}
-              >
-                <ActionList.LeadingVisual>
-                  <KeyIcon />
-                </ActionList.LeadingVisual>
-                Login with Personal Access Token
-              </ActionList.Item>
-
-              <ActionList.Item
-                data-testid="account-add-oauth-app"
-                onSelect={() => loginWithOAuthApp()}
-              >
-                <ActionList.LeadingVisual>
-                  <PersonIcon />
-                </ActionList.LeadingVisual>
-                Login with OAuth App
-              </ActionList.Item>
-
-              <ActionList.Item
-                data-testid="account-add-gitea-pat"
-                onSelect={() => loginWithGiteaPersonalAccessToken()}
-              >
-                <ActionList.LeadingVisual>
-                  <ServerIcon />
-                </ActionList.LeadingVisual>
-                Login with Gitea (Personal Access Token)
-              </ActionList.Item>
+                  return (
+                    <ActionList.Item
+                      data-testid={`account-add-${method.testId.replace(/^login-/, '')}`}
+                      key={method.testId}
+                      onSelect={() => navigate(method.route, { replace: true })}
+                    >
+                      <ActionList.LeadingVisual>
+                        <MethodIcon />
+                      </ActionList.LeadingVisual>
+                      {label}
+                    </ActionList.Item>
+                  );
+                }),
+              )}
             </ActionList>
           </ActionMenu.Overlay>
         </ActionMenu>

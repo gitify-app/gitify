@@ -35,9 +35,7 @@ describe('renderer/routes/Login.tsx', () => {
     await userEvent.click(screen.getByTestId('login-github'));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith('/login-device-flow', {
-      state: { forge: 'github' },
-    });
+    expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow');
   });
 
   it('should navigate to login with personal access token', async () => {
@@ -46,7 +44,7 @@ describe('renderer/routes/Login.tsx', () => {
     await userEvent.click(screen.getByTestId('login-pat'));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token');
+    expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token');
   });
 
   it('should navigate to login with oauth app', async () => {
@@ -55,9 +53,7 @@ describe('renderer/routes/Login.tsx', () => {
     await userEvent.click(screen.getByTestId('login-oauth-app'));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith('/login-oauth-app', {
-      state: { forge: 'github' },
-    });
+    expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app');
   });
 
   it('should navigate to login with Gitea personal access token', async () => {
@@ -67,9 +63,7 @@ describe('renderer/routes/Login.tsx', () => {
     await userEvent.click(screen.getByTestId('login-gitea-pat'));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
-      state: { forge: 'gitea' },
-    });
+    expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token');
   });
 
   it('should switch the visible login methods when changing forges', async () => {

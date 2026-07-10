@@ -113,8 +113,8 @@ export const giteaAdapter: ForgeAdapter = {
       testId: 'login-gitea-pat',
       icon: KeyIcon,
       label: 'Personal Access Token',
-      route: '/login-personal-access-token',
-      state: { forge: 'gitea' },
+      route: '/login/gitea/personal-access-token',
+      authMethod: 'Personal Access Token',
     },
   ],
 

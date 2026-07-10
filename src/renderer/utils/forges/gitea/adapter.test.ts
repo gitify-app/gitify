@@ -27,8 +27,8 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       expect(giteaAdapter.loginMethods).toHaveLength(1);
       expect(giteaAdapter.loginMethods[0]).toMatchObject({
         testId: 'login-gitea-pat',
-        route: '/login-personal-access-token',
-        state: { forge: 'gitea' },
+        route: '/login/gitea/personal-access-token',
+        authMethod: 'Personal Access Token',
       });
     });
 
