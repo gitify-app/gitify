@@ -3,12 +3,15 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 import {
+  mockGiteaAccount,
   mockGitHubAppAccount,
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
 
 import * as authUtils from '../utils/auth/utils';
+import { Errors } from '../utils/core/errors';
+import * as logger from '../utils/core/logger';
 import * as storage from '../utils/core/storage';
 import * as comms from '../utils/system/comms';
 import * as links from '../utils/system/links';
@@ -208,12 +211,14 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
+
+      expect(screen.getByTestId('account-add-github')).toHaveTextContent('Login with GitHub');
+
       await userEvent.click(screen.getByTestId('account-add-github'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login-device-flow', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow', {
         replace: true,
-        state: { forge: 'github' },
       });
     });
 
@@ -225,10 +230,15 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
+
+      expect(screen.getByTestId('account-add-pat')).toHaveTextContent(
+        'Login with GitHub (Personal Access Token)',
+      );
+
       await userEvent.click(screen.getByTestId('account-add-pat'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token', {
         replace: true,
       });
     });
@@ -241,12 +251,16 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
+
+      expect(screen.getByTestId('account-add-oauth-app')).toHaveTextContent(
+        'Login with GitHub (OAuth App)',
+      );
+
       await userEvent.click(screen.getByTestId('account-add-oauth-app'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login-oauth-app', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
         replace: true,
-        state: { forge: 'github' },
       });
     });
 
@@ -258,13 +272,197 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
+
+      expect(screen.getByTestId('account-add-gitea-pat')).toHaveTextContent(
+        'Login with Gitea (Personal Access Token)',
+      );
+
       await userEvent.click(screen.getByTestId('account-add-gitea-pat'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login-personal-access-token', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token', {
         replace: true,
-        state: { forge: 'gitea' },
       });
+    });
+  });
+
+  describe('Re-authenticate', () => {
+    it('should re-authenticate a github personal access token account', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+          notifications: [
+            {
+              account: mockPersonalAccessTokenAccount,
+              notifications: [],
+              error: Errors.BAD_CREDENTIALS,
+            },
+          ],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token', {
+        replace: true,
+        state: { account: mockPersonalAccessTokenAccount },
+      });
+    });
+
+    it('should re-authenticate a github app account', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockGitHubAppAccount] },
+          notifications: [
+            {
+              account: mockGitHubAppAccount,
+              notifications: [],
+              error: Errors.BAD_CREDENTIALS,
+            },
+          ],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow', {
+        replace: true,
+        state: { account: mockGitHubAppAccount },
+      });
+    });
+
+    it('should re-authenticate an oauth app account', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockOAuthAccount] },
+          notifications: [
+            {
+              account: mockOAuthAccount,
+              notifications: [],
+              error: Errors.BAD_CREDENTIALS,
+            },
+          ],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
+        replace: true,
+        state: { account: mockOAuthAccount },
+      });
+    });
+
+    it('should re-authenticate a gitea personal access token account', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockGiteaAccount] },
+          notifications: [
+            {
+              account: mockGiteaAccount,
+              notifications: [],
+              error: Errors.BAD_CREDENTIALS,
+            },
+          ],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token', {
+        replace: true,
+        state: { account: mockGiteaAccount },
+      });
+    });
+
+    it('should log and skip re-authenticate when no login method matches', async () => {
+      const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
+      // Gitea only registers PAT — a GitHub App method has no matching loginMethod.
+      const unsupportedAccount = {
+        ...mockGiteaAccount,
+        method: 'GitHub App' as const,
+      };
+
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [unsupportedAccount] },
+          notifications: [
+            {
+              account: unsupportedAccount,
+              notifications: [],
+              error: Errors.BAD_CREDENTIALS,
+            },
+          ],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+
+      expect(navigateMock).not.toHaveBeenCalled();
+      expect(rendererLogErrorSpy).toHaveBeenCalledWith(
+        'handleReAuthenticate',
+        expect.stringContaining('no login method registered'),
+        expect.any(Error),
+      );
+    });
+
+    it('should open developer settings when clicking the bad credentials banner', async () => {
+      const openAccountSettingsSpy = vi
+        .spyOn(links, 'openAccountSettings')
+        .mockImplementation(vi.fn());
+
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+          notifications: [
+            {
+              account: mockPersonalAccessTokenAccount,
+              notifications: [],
+              error: Errors.BAD_CREDENTIALS,
+            },
+          ],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-bad-credentials'));
+
+      expect(openAccountSettingsSpy).toHaveBeenCalledTimes(1);
+      expect(openAccountSettingsSpy).toHaveBeenCalledWith(mockPersonalAccessTokenAccount);
+    });
+  });
+
+  describe('Refresh errors', () => {
+    it('should surface a refresh failure without navigating away from accounts', async () => {
+      const refreshAccountSpy = vi
+        .spyOn(authUtils, 'refreshAccount')
+        .mockRejectedValueOnce(new Error('network down'));
+
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockPersonalAccessTokenAccount] },
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-refresh'));
+
+      expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith('/accounts', { replace: true });
+    });
+  });
+
+  describe('Gitea account affordances', () => {
+    it('should hide view-scopes for forges without an oauthScopes capability', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          auth: { accounts: [mockGiteaAccount] },
+        });
+      });
+
+      expect(screen.queryByTestId('account-view-scopes')).not.toBeInTheDocument();
     });
   });
 });

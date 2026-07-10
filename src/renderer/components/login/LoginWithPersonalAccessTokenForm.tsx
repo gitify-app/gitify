@@ -1,26 +1,24 @@
-import { type FC, useCallback, useState } from 'react';
+import { type FC, type ReactNode, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAppContext } from '../../hooks/useAppContext';
 
-import { Contents } from '../components/layout/Contents';
-import { Page } from '../components/layout/Page';
-import { Footer } from '../components/primitives/Footer';
-import { Header } from '../components/primitives/Header';
+import { Contents } from '../layout/Contents';
+import { Page } from '../layout/Page';
+import { Footer } from '../primitives/Footer';
+import { Header } from '../primitives/Header';
 
-import type { Account, Forge, Hostname, Token } from '../types';
-import type { LoginRouteState } from '../utils/forges/types';
+import type { Account, Forge, Hostname, Token } from '../../types';
 
-import { formatRecommendedOAuthScopes } from '../utils/auth/scopes';
-import { isValidHostname } from '../utils/auth/utils';
-import { rendererLogError, toError } from '../utils/core/logger';
-import { getAdapter } from '../utils/forges/registry';
-import { openExternalLink } from '../utils/system/comms';
+import { isValidHostname } from '../../utils/auth/utils';
+import { rendererLogError, toError } from '../../utils/core/logger';
+import { getAdapter } from '../../utils/forges/registry';
+import { openExternalLink } from '../../utils/system/comms';
 
-interface LocationState extends LoginRouteState {
+interface LocationState {
   account?: Account;
 }
 
@@ -54,14 +52,46 @@ export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormE
   return errors;
 };
 
-export const LoginWithPersonalAccessTokenRoute: FC = () => {
+export interface LoginWithPersonalAccessTokenFormProps {
+  forge: Forge;
+  /** Page header title. */
+  title: string;
+  /** Caption below the hostname label. */
+  hostnameCaption: string;
+  hostnamePlaceholder: string;
+  /** Label for the button that opens the forge's token settings page. */
+  tokenSettingsLabel: string;
+  /** Text rendered beside the token settings button. */
+  tokenSettingsCaption: string;
+  tokenPlaceholder: string;
+  /** Tooltip for the documentation button. */
+  docsTooltip: string;
+  /** Forge-specific content rendered below the token settings row (e.g. scope hints). */
+  children?: ReactNode;
+}
+
+/**
+ * Shared personal-access-token login form.
+ *
+ * Forge-specific route components (`routes/github`, `routes/gitea`) supply
+ * their own copy via props so this form stays free of forge conditionals.
+ */
+export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFormProps> = ({
+  forge,
+  title,
+  hostnameCaption,
+  hostnamePlaceholder,
+  tokenSettingsLabel,
+  tokenSettingsCaption,
+  tokenPlaceholder,
+  docsTooltip,
+  children,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount, forge: stateForge } = (location.state ?? {}) as LocationState;
+  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
-  const forge: Forge = reAuthAccount?.forge ?? stateForge ?? 'github';
   const adapter = getAdapter(forge);
-  const isGitea = forge === 'gitea';
 
   const { loginWithPersonalAccessToken } = useAppContext();
 
@@ -116,9 +146,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
 
   return (
     <Page testId="Login With Personal Access Token">
-      <Header icon={KeyIcon}>
-        {isGitea ? 'Login to Gitea with Personal Access Token' : 'Login with Personal Access Token'}
-      </Header>
+      <Header icon={KeyIcon}>{title}</Header>
 
       <Contents>
         {errors.invalidCredentialsForHost && (
@@ -140,11 +168,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
           <FormControl required>
             <FormControl.Label>Hostname</FormControl.Label>
             <FormControl.Caption>
-              <Text as="i">
-                {isGitea
-                  ? 'Your Gitea instance hostname (for example gitea.example.com)'
-                  : 'Change only if you are using GitHub Enterprise Server'}
-              </Text>
+              <Text as="i">{hostnameCaption}</Text>
             </FormControl.Caption>
             <TextInput
               aria-invalid={errors.hostname ? 'true' : 'false'}
@@ -152,7 +176,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               data-testid="login-hostname"
               name="hostname"
               onChange={handleInputChange}
-              placeholder={isGitea ? 'gitea.example.com' : 'github.com'}
+              placeholder={hostnamePlaceholder}
               value={formData.hostname}
             />
             {errors.hostname && (
@@ -171,26 +195,12 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                 }
                 size="small"
               >
-                {isGitea ? 'Open token settings' : 'Generate a PAT'}
+                {tokenSettingsLabel}
               </Button>
-              <Text className="text-xs">
-                {isGitea
-                  ? 'on your Gitea instance to create a token, then paste it below.'
-                  : 'on GitHub to paste the token below.'}
-              </Text>
+              <Text className="text-xs">{tokenSettingsCaption}</Text>
             </Stack>
 
-            {!isGitea && (
-              <Text as="i" className="text-xs">
-                The{' '}
-                <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
-                  <button type="button">
-                    <Text as="u">recommended scopes</Text>
-                  </button>
-                </Tooltip>{' '}
-                will be automatically selected for you.
-              </Text>
-            )}
+            {children}
           </Stack>
 
           <FormControl required>
@@ -202,11 +212,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               data-testid="login-token"
               name="token"
               onChange={handleInputChange}
-              placeholder={
-                isGitea
-                  ? 'Your Gitea personal access token'
-                  : 'Your generated token (40 characters)'
-              }
+              placeholder={tokenPlaceholder}
               trailingAction={
                 <TextInput.Action
                   aria-label={shouldMaskPersonalAccessToken ? 'Show token' : 'Hide token'}
@@ -225,7 +231,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
       </Contents>
 
       <Footer justify="space-between">
-        <Tooltip direction="ne" text={isGitea ? 'Gitea API documentation' : 'GitHub documentation'}>
+        <Tooltip direction="ne" text={docsTooltip}>
           <Button
             data-testid="login-docs"
             leadingVisual={BookIcon}

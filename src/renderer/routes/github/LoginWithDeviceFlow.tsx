@@ -4,39 +4,35 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CopyIcon, SignInIcon, SyncIcon } from '@primer/octicons-react';
 import { Banner, Button, IconButton, Link as PrimerLink, Stack, Text } from '@primer/react';
 
-import { Constants } from '../constants';
+import { Constants } from '../../constants';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAppContext } from '../../hooks/useAppContext';
 
-import { Contents } from '../components/layout/Contents';
-import { Page } from '../components/layout/Page';
-import { Footer } from '../components/primitives/Footer';
-import { Header } from '../components/primitives/Header';
+import { Contents } from '../../components/layout/Contents';
+import { Page } from '../../components/layout/Page';
+import { Footer } from '../../components/primitives/Footer';
+import { Header } from '../../components/primitives/Header';
 
-import type { Account, Forge, Hostname, Link } from '../types';
-import type { DeviceFlowSession } from '../utils/auth/types';
+import type { Account, Forge, Hostname, Link } from '../../types';
+import type { DeviceFlowSession } from '../../utils/auth/types';
 
-import { getAlternateScopeNames, getRecommendedScopeNames } from '../utils/auth/scopes';
-import { rendererLogError, toError } from '../utils/core/logger';
-import { getAdapter } from '../utils/forges/registry';
-import { copyToClipboard, openExternalLink } from '../utils/system/comms';
+import { getAlternateScopeNames, getRecommendedScopeNames } from '../../utils/auth/scopes';
+import { rendererLogError, toError } from '../../utils/core/logger';
+import { getAdapter } from '../../utils/forges/registry';
+import { copyToClipboard, openExternalLink } from '../../utils/system/comms';
 
 interface LocationState {
   account?: Account;
-  forge?: Forge;
 }
 
 type ScopeChoice = 'public' | 'full';
 
-export const LoginWithDeviceFlowRoute: FC = () => {
+export const GitHubLoginWithDeviceFlowRoute: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount, forge: routeForge } = (location.state ?? {}) as LocationState;
-  // Forge is supplied either by the login-method descriptor's state (new
-  // login) or via the re-authenticating account (re-auth). Either path lands
-  // here through a registered adapter, so a missing forge would indicate a
-  // mis-registered route — fall back to 'github' to preserve existing UX.
-  const forge: Forge = routeForge ?? reAuthAccount?.forge ?? 'github';
+  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
+
+  const forge: Forge = 'github';
 
   const { loginWithDeviceFlowStart, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete } =
     useAppContext();

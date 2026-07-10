@@ -4,26 +4,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { BookIcon, EyeClosedIcon, EyeIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
 import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
-import { Constants } from '../constants';
+import { Constants } from '../../constants';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAppContext } from '../../hooks/useAppContext';
 
-import { Contents } from '../components/layout/Contents';
-import { Page } from '../components/layout/Page';
-import { Footer } from '../components/primitives/Footer';
-import { Header } from '../components/primitives/Header';
+import { Contents } from '../../components/layout/Contents';
+import { Page } from '../../components/layout/Page';
+import { Footer } from '../../components/primitives/Footer';
+import { Header } from '../../components/primitives/Header';
 
-import type { Account, ClientID, ClientSecret, Forge, Token } from '../types';
-import type { LoginOAuthWebOptions } from '../utils/auth/types';
+import type { Account, ClientID, ClientSecret, Forge, Token } from '../../types';
+import type { LoginOAuthWebOptions } from '../../utils/auth/types';
 
-import { isValidHostname } from '../utils/auth/utils';
-import { rendererLogError, toError } from '../utils/core/logger';
-import { getAdapter } from '../utils/forges/registry';
-import { openExternalLink } from '../utils/system/comms';
+import { isValidHostname } from '../../utils/auth/utils';
+import { rendererLogError, toError } from '../../utils/core/logger';
+import { getAdapter } from '../../utils/forges/registry';
+import { openExternalLink } from '../../utils/system/comms';
 
 interface LocationState {
   account?: Account;
-  forge?: Forge;
 }
 
 // IFormData mirrors LoginOAuthWebOptions exactly — keep them aliased so the
@@ -62,11 +61,12 @@ export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormE
   return errors;
 };
 
-export const LoginWithOAuthAppRoute: FC = () => {
+export const GitHubLoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account: reAuthAccount, forge: routeForge } = (location.state ?? {}) as LocationState;
-  const forge: Forge = routeForge ?? reAuthAccount?.forge ?? 'github';
+  const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
+
+  const forge: Forge = 'github';
 
   const { loginWithOAuthApp } = useAppContext();
 

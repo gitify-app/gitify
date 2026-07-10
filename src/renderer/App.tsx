@@ -7,10 +7,11 @@ import { useAppContext } from './hooks/useAppContext';
 import { AccountsRoute } from './routes/Accounts';
 import { AccountScopesRoute } from './routes/AccountScopes';
 import { FiltersRoute } from './routes/Filters';
+import { GiteaLoginWithPersonalAccessTokenRoute } from './routes/gitea/LoginWithPersonalAccessToken';
+import { GitHubLoginWithDeviceFlowRoute } from './routes/github/LoginWithDeviceFlow';
+import { GitHubLoginWithOAuthAppRoute } from './routes/github/LoginWithOAuthApp';
+import { GitHubLoginWithPersonalAccessTokenRoute } from './routes/github/LoginWithPersonalAccessToken';
 import { LoginRoute } from './routes/Login';
-import { LoginWithDeviceFlowRoute } from './routes/LoginWithDeviceFlow';
-import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
-import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 
@@ -77,12 +78,19 @@ export const App = () => {
                   path="/account-scopes"
                 />
                 <Route element={<LoginRoute />} path="/login" />
-                <Route element={<LoginWithDeviceFlowRoute />} path="/login-device-flow" />
                 <Route
-                  element={<LoginWithPersonalAccessTokenRoute />}
-                  path="/login-personal-access-token"
+                  element={<GitHubLoginWithDeviceFlowRoute />}
+                  path="/login/github/device-flow"
                 />
-                <Route element={<LoginWithOAuthAppRoute />} path="/login-oauth-app" />
+                <Route
+                  element={<GitHubLoginWithPersonalAccessTokenRoute />}
+                  path="/login/github/personal-access-token"
+                />
+                <Route element={<GitHubLoginWithOAuthAppRoute />} path="/login/github/oauth-app" />
+                <Route
+                  element={<GiteaLoginWithPersonalAccessTokenRoute />}
+                  path="/login/gitea/personal-access-token"
+                />
               </Routes>
             </AppLayout>
           </Router>
