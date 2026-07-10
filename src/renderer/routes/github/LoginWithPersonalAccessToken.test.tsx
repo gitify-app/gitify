@@ -2,6 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
+import { mockPersonalAccessTokenAccount } from '../../__mocks__/account-mocks';
 
 import {
   type IFormData,
@@ -131,6 +132,9 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
       expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(0);
       expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+      expect(screen.getByTestId('login-errors')).toHaveTextContent(
+        'Failed to validate provided token against github.com',
+      );
     });
   });
 
@@ -157,5 +161,36 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     await userEvent.click(screen.getByTestId('login-docs'));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should toggle token visibility', async () => {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
+
+    const tokenInput = screen.getByTestId('login-token');
+    expect(tokenInput).toHaveAttribute('type', 'password');
+
+    await userEvent.click(screen.getByLabelText('Show token'));
+    expect(tokenInput).toHaveAttribute('type', 'text');
+
+    await userEvent.click(screen.getByLabelText('Hide token'));
+    expect(tokenInput).toHaveAttribute('type', 'password');
+  });
+
+  it('should prefill hostname from the re-auth account in location state', () => {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
+      initialEntries: [
+        {
+          pathname: '/login/github/personal-access-token',
+          state: {
+            account: {
+              ...mockPersonalAccessTokenAccount,
+              hostname: 'github.enterprise.example' as Hostname,
+            },
+          },
+        },
+      ],
+    });
+
+    expect(screen.getByTestId('login-hostname')).toHaveValue('github.enterprise.example');
   });
 });

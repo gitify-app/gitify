@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { type ReactElement, type ReactNode, useMemo } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 
@@ -18,7 +18,8 @@ const EMPTY_APP_CONTEXT: TestAppContext = {};
 type TestAppContext = Partial<AppContextState>;
 
 interface RenderOptions extends TestAppContext {
-  initialEntries?: string[];
+  /** Supports path strings or location objects (e.g. with `state` for re-auth). */
+  initialEntries?: InitialEntry[];
   filters?: Partial<FiltersStore>;
 }
 
@@ -28,7 +29,7 @@ interface RenderOptions extends TestAppContext {
 interface AppContextProviderProps {
   readonly children: ReactNode;
   readonly value?: TestAppContext;
-  readonly initialEntries?: string[];
+  readonly initialEntries?: InitialEntry[];
 }
 
 /**

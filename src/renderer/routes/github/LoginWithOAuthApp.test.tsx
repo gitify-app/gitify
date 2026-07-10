@@ -157,4 +157,17 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('should toggle client secret visibility', async () => {
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
+
+    const secretInput = screen.getByTestId('login-clientSecret');
+    expect(secretInput).toHaveAttribute('type', 'password');
+
+    await userEvent.click(screen.getByLabelText('Show token'));
+    expect(secretInput).toHaveAttribute('type', 'text');
+
+    await userEvent.click(screen.getByLabelText('Hide token'));
+    expect(secretInput).toHaveAttribute('type', 'password');
+  });
 });

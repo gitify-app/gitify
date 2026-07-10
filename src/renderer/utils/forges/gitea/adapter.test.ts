@@ -1,6 +1,7 @@
 import { KeyIcon } from '@primer/octicons-react';
 
 import { mockGiteaAccount } from '../../../__mocks__/account-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 
 import type { Hostname, Link, SettingsState, Token } from '../../../types';
 
@@ -187,6 +188,30 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         mockGiteaAccount,
         'https://gitea.example.com/api/v1/x',
       );
+    });
+  });
+
+  describe('getDisplayHelpers', () => {
+    it('returns icon/color/url helpers via the shared subject-type handlers', () => {
+      const notification = mockPartialGitifyNotification(
+        {
+          title: 'Gitea issue',
+          type: 'Issue',
+          state: 'OPEN',
+        },
+        {
+          htmlUrl: 'https://gitea.example.com/org/repo' as Link,
+        },
+      );
+      notification.account = mockGiteaAccount;
+
+      const helpers = giteaAdapter.getDisplayHelpers(notification);
+
+      expect(helpers.iconType).toBeDefined();
+      expect(helpers.iconColor).toBeDefined();
+      // Issue handler appends /issues to the repository URL when no subject URL exists.
+      expect(helpers.defaultUrl).toBe('https://gitea.example.com/org/repo/issues');
+      expect(helpers.defaultUserType).toBe('User');
     });
   });
 });
