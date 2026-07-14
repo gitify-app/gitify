@@ -2,49 +2,27 @@ import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } fro
 
 import { useTheme } from '@primer/react';
 
-import { Constants } from '../constants';
+import { onlineManager, useQueryClient } from '@tanstack/react-query';
 
-import { useInactivityTimer } from '../hooks/timers/useInactivityTimer';
-import { useIntervalTimer } from '../hooks/timers/useIntervalTimer';
+import { useAccounts } from '../hooks/useAccounts';
 import { useNotifications } from '../hooks/useNotifications';
-import { useFiltersStore } from '../stores';
+import {
+  DEFAULT_SETTINGS_STATE,
+  useAccountsStore,
+  useFiltersStore,
+  useSettingsStore,
+} from '../stores';
 
-import type {
-  Account,
-  AuthState,
-  Forge,
-  GitifyNotification,
-  Hostname,
-  SettingsState,
-  SettingsValue,
-  Token,
-} from '../types';
-import { FetchType } from '../types';
+import type { Account, Forge, Hostname, Token } from '../types';
 import type {
   DeviceFlowSession,
   LoginOAuthWebOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
-import {
-  addAccount,
-  getAccountUUID,
-  hasAccounts,
-  isValidHostname,
-  refreshAccount,
-  removeAccount,
-} from '../utils/auth/utils';
-import { clearState, loadState, saveState } from '../utils/core/storage';
-import { getAdapter, isKnownForge } from '../utils/forges/registry';
-import {
-  applyKeyboardShortcut,
-  decryptValue,
-  encryptValue,
-  setAutoLaunch,
-  setKeepWindowOnBlur,
-  setUseAlternateIdleIcon,
-  setUseUnreadActiveIcon,
-} from '../utils/system/comms';
+import { notificationsKeys } from '../utils/api/queryKeys';
+import { getAdapter } from '../utils/forges/registry';
+import { applyKeyboardShortcut, encryptValue } from '../utils/system/comms';
 import { setTrayIconColorAndTitle } from '../utils/system/tray';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -54,52 +32,49 @@ import {
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
 } from '../utils/ui/theme';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
 import { AppContext, type AppContextState } from './context';
-import { defaultAuth, defaultSettings } from './defaults';
-
-/**
- * Sanitise persisted auth state. Persisted JSON is untrusted (XSS, malicious
- * extension, file-system tampering), so we project only the known fields,
- * coerce `forge` to a registered value, and drop accounts with a
- * structurally invalid hostname before the renderer ever touches them.
- */
-function migrateLegacyAuthState(auth: AuthState): AuthState {
-  return {
-    ...auth,
-    accounts: auth.accounts.flatMap((a) => {
-      if (!a.hostname || !isValidHostname(a.hostname)) {
-        return [];
-      }
-      const sanitised: Account = {
-        forge: isKnownForge(a.forge) ? a.forge : 'github',
-        method: a.method,
-        platform: a.platform,
-        version: a.version,
-        hostname: a.hostname,
-        token: a.token,
-        user: a.user,
-        scopes: a.scopes,
-      };
-      return [sanitised];
-    }),
-  };
-}
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const existingState = loadState();
+  const queryClient = useQueryClient();
 
-  const [auth, setAuth] = useState<AuthState>(
-    existingState.auth
-      ? migrateLegacyAuthState({ ...defaultAuth, ...existingState.auth })
-      : defaultAuth,
+  // Store actions and reset functions
+  const resetAccounts = useAccountsStore((s) => s.reset);
+  const resetFilters = useFiltersStore((s) => s.reset);
+  const resetSettings = useSettingsStore((s) => s.reset);
+
+  const accounts = useAccountsStore((s) => s.accounts);
+  const createAccountInStore = useAccountsStore((s) => s.createAccount);
+  const removeAccount = useAccountsStore((s) => s.removeAccount);
+
+  /**
+   * Create (or update) an account, then refetch notifications. Re-authenticating
+   * an existing account keeps the same account count, so the notifications
+   * query key does not change and the cache must be invalidated explicitly.
+   */
+  const createAccount = useCallback(
+    async (...args: Parameters<typeof createAccountInStore>) => {
+      await createAccountInStore(...args);
+
+      await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+    },
+    [createAccountInStore, queryClient],
   );
 
-  const [settings, setSettings] = useState<SettingsState>(
-    existingState.settings ? { ...defaultSettings, ...existingState.settings } : defaultSettings,
-  );
+  // Subscribe to tray-related settings for useEffect dependencies
+  const showNotificationsCountInTray = useSettingsStore((s) => s.showNotificationsCountInTray);
+  const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
+  const useAlternateIdleIcon = useSettingsStore((s) => s.useAlternateIdleIcon);
 
-  const lastAppliedOpenGitifyShortcutRef = useRef(settings.openGitifyShortcut);
+  // Subscribe to theme related settings for useEffect dependencies
+  const theme = useSettingsStore((s) => s.theme);
+  const increaseContrast = useSettingsStore((s) => s.increaseContrast);
+
+  // Global keyboard shortcut settings
+  const keyboardShortcut = useSettingsStore((s) => s.keyboardShortcut);
+  const openGitifyShortcut = useSettingsStore((s) => s.openGitifyShortcut);
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+
+  const lastAppliedOpenGitifyShortcutRef = useRef(openGitifyShortcut);
   const [shortcutRegistrationError, setShortcutRegistrationError] = useState<string | null>(null);
 
   const clearShortcutRegistrationError = useCallback(() => {
@@ -107,6 +82,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
+
+  const [isOnline, setIsOnline] = useState(true);
 
   const {
     status,
@@ -118,7 +95,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     hasNotifications,
     hasUnreadNotifications,
 
-    fetchNotifications,
+    refetchNotifications,
     removeAccountNotifications,
 
     markNotificationsAsRead,
@@ -126,164 +103,50 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
   } = useNotifications();
 
-  const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
-  const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
-  const userTypes = useFiltersStore((s) => s.userTypes);
-  const subjectTypes = useFiltersStore((s) => s.subjectTypes);
-  const states = useFiltersStore((s) => s.states);
-  const reasons = useFiltersStore((s) => s.reasons);
-
-  const persistAuth = useCallback(
-    (nextAuth: AuthState) => {
-      setAuth(nextAuth);
-      saveState({ auth: nextAuth, settings });
-    },
-    [settings],
-  );
-
-  const refreshAllAccounts = useCallback(async () => {
-    if (!auth.accounts.length) {
-      return;
-    }
-
-    const refreshedAccounts = await Promise.all(
-      auth.accounts.map((account) => refreshAccount(account)),
-    );
-
-    const updatedAuth: AuthState = {
-      ...auth,
-      accounts: refreshedAccounts,
-    };
-
-    persistAuth(updatedAuth);
-  }, [auth, persistAuth]);
-
-  // TODO - Remove migration logic in future release
-  const migrateAuthTokens = useCallback(async () => {
-    const migratedAccounts = await Promise.all(
-      auth.accounts.map(async (account) => {
-        try {
-          const { reEncryptedToken } = await decryptValue(account.token);
-          if (reEncryptedToken) {
-            return { ...account, token: reEncryptedToken as Token };
-          }
-          return account;
-        } catch {
-          const encryptedToken = (await encryptValue(account.token)) as Token;
-          return { ...account, token: encryptedToken };
-        }
-      }),
-    );
-
-    const tokensMigrated = migratedAccounts.some((migratedAccount) => {
-      const originalAccount = auth.accounts.find(
-        (account) => getAccountUUID(account) === getAccountUUID(migratedAccount),
-      );
-
-      if (!originalAccount) {
-        return true;
-      }
-
-      return migratedAccount.token !== originalAccount.token;
-    });
-
-    if (!tokensMigrated) {
-      return;
-    }
-
-    const updatedAuth: AuthState = {
-      ...auth,
-      accounts: migratedAccounts,
-    };
-
-    persistAuth(updatedAuth);
-  }, [auth, persistAuth]);
-
-  useEffect(() => {
-    fetchNotifications({ auth, settings });
-    // oxlint-disable-next-line react/exhaustive-deps -- Fetch new notifications when account count or filters change
-  }, [
-    auth.accounts.length,
-    settings.participating,
-    includeSearchTokens,
-    excludeSearchTokens,
-    userTypes,
-    subjectTypes,
-    states,
-    reasons,
-  ]);
-
-  useIntervalTimer(
-    () => {
-      fetchNotifications({ auth, settings });
-    },
-    settings.fetchType === FetchType.INTERVAL ? settings.fetchInterval : null,
-  );
-
-  useInactivityTimer(
-    () => {
-      fetchNotifications({ auth, settings });
-    },
-    settings.fetchType === FetchType.INACTIVITY ? settings.fetchInterval : null,
-  );
-
-  /**
-   * On startup, check if auth tokens need encrypting and refresh all account details
-   */
-  useEffect(() => {
-    void (async () => {
-      await migrateAuthTokens();
-      await refreshAllAccounts();
-    })();
-    // oxlint-disable-next-line react/exhaustive-deps -- Run once on startup
-  }, []);
-
-  // Refresh account details on interval
-  useIntervalTimer(() => {
-    refreshAllAccounts();
-  }, Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
+  // Periodic account refreshes (startup + hourly interval)
+  useAccounts();
 
   // Theme
   useEffect(() => {
-    const colorMode = mapThemeModeToColorMode(settings.theme);
-    const colorScheme = mapThemeModeToColorScheme(settings.theme, settings.increaseContrast);
+    const colorMode = mapThemeModeToColorMode(theme);
+    const colorScheme = mapThemeModeToColorScheme(theme, increaseContrast);
 
     setColorMode(colorMode);
 
     // When colorScheme is null (System theme), use appropriate fallbacks
     // based on whether high contrast is enabled
-    const dayFallback = settings.increaseContrast
+    const dayFallback = increaseContrast
       ? DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME
       : DEFAULT_DAY_COLOR_SCHEME;
-    const nightFallback = settings.increaseContrast
+    const nightFallback = increaseContrast
       ? DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME
       : DEFAULT_NIGHT_COLOR_SCHEME;
 
     setDayScheme(colorScheme ?? dayFallback);
     setNightScheme(colorScheme ?? nightFallback);
-  }, [settings.theme, settings.increaseContrast, setColorMode, setDayScheme, setNightScheme]);
+  }, [theme, increaseContrast, setColorMode, setDayScheme, setNightScheme]);
 
+  // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   useEffect(() => {
-    setUseUnreadActiveIcon(settings.useUnreadActiveIcon);
-    setUseAlternateIdleIcon(settings.useAlternateIdleIcon);
-
     const trayCount = status === 'error' ? -1 : notificationCount;
-    setTrayIconColorAndTitle(trayCount, settings);
-    // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
+    setTrayIconColorAndTitle(trayCount, isOnline);
   }, [
-    settings.showNotificationsCountInTray,
-    settings.useUnreadActiveIcon,
-    settings.useAlternateIdleIcon,
-    notifications,
+    showNotificationsCountInTray,
+    useUnreadActiveIcon,
+    useAlternateIdleIcon,
+    status,
+    notificationCount,
+    isOnline,
   ]);
 
+  // Global keyboard shortcut registration, reverting on failure
   useEffect(() => {
     let cancelled = false;
 
     void (async () => {
       const result = await applyKeyboardShortcut({
-        enabled: settings.keyboardShortcut,
-        accelerator: settings.openGitifyShortcut,
+        enabled: keyboardShortcut,
+        accelerator: openGitifyShortcut,
       });
 
       if (cancelled) {
@@ -291,99 +154,45 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       }
 
       if (!result.success) {
-        setSettings((prev) => {
-          const reverted = {
-            ...prev,
-            openGitifyShortcut: lastAppliedOpenGitifyShortcutRef.current,
-          };
-          saveState({ auth, settings: reverted });
-          return reverted;
-        });
+        updateSetting('openGitifyShortcut', lastAppliedOpenGitifyShortcutRef.current);
         setShortcutRegistrationError(
           'This shortcut could not be registered. It may already be in use.',
         );
         return;
       }
 
-      lastAppliedOpenGitifyShortcutRef.current = settings.openGitifyShortcut;
+      lastAppliedOpenGitifyShortcutRef.current = openGitifyShortcut;
       setShortcutRegistrationError(null);
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [auth, settings.keyboardShortcut, settings.openGitifyShortcut]);
-
-  useEffect(() => {
-    setAutoLaunch(settings.openAtStartup);
-  }, [settings.openAtStartup]);
-
-  useEffect(() => {
-    setKeepWindowOnBlur(settings.keepWindowOnBlur);
-  }, [settings.keepWindowOnBlur]);
+  }, [keyboardShortcut, openGitifyShortcut, updateSetting]);
 
   useEffect(() => {
     window.gitify.onResetApp(() => {
-      clearState();
-      setAuth(defaultAuth);
-      setSettings(defaultSettings);
-      lastAppliedOpenGitifyShortcutRef.current = defaultSettings.openGitifyShortcut;
+      resetAccounts();
+      resetSettings();
+      resetFilters();
+      queryClient.clear();
+      lastAppliedOpenGitifyShortcutRef.current = DEFAULT_SETTINGS_STATE.openGitifyShortcut;
       setShortcutRegistrationError(null);
     });
-  }, []);
+  }, [resetAccounts, resetSettings, resetFilters, queryClient]);
 
-  const resetSettings = useCallback(() => {
-    setSettings(() => {
-      saveState({ auth, settings: defaultSettings });
-      return defaultSettings;
-    });
-    lastAppliedOpenGitifyShortcutRef.current = defaultSettings.openGitifyShortcut;
-    setShortcutRegistrationError(null);
-  }, [auth]);
-
-  const updateSetting = useCallback(
-    (name: keyof SettingsState, value: SettingsValue) => {
-      setSettings((prevSettings) => {
-        const newSettings = { ...prevSettings, [name]: value };
-        saveState({ auth, settings: newSettings });
-        return newSettings;
-      });
-    },
-    [auth],
-  );
-
-  // Global window zoom handler / listener
+  // Online / Offline status monitoring via TanStack Query onlineManager
   useEffect(() => {
-    // Set the zoom level when settings.zoomPercentage changes
-    window.gitify.zoom.setLevel(zoomPercentageToLevel(settings.zoomPercentage));
-
-    // Sync zoom percentage in settings when window is resized
-    let timeout: NodeJS.Timeout;
-    const DELAY = 200;
-
-    const handleResize = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
-
-        if (zoomPercentage !== settings.zoomPercentage) {
-          updateSetting('zoomPercentage', zoomPercentage);
-        }
-      }, DELAY);
+    const handle = () => {
+      setIsOnline(onlineManager.isOnline());
     };
 
-    window.addEventListener('resize', handleResize);
+    // Subscribe and call immediately to set initial status
+    const unsubscribe = onlineManager.subscribe(handle);
+    handle();
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(timeout);
-    };
-    // oxlint-disable-next-line react/exhaustive-deps -- We want to update on settings.zoomPercentage changes
-  }, [settings.zoomPercentage]);
-
-  const isLoggedIn = useMemo(() => {
-    return hasAccounts(auth);
-  }, [auth]);
+    return () => unsubscribe();
+  }, []);
 
   /**
    * Initiate an OAuth device-flow session for the given forge.
@@ -421,19 +230,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       }
       const method = deviceFlow.authMethod;
 
-      const existingAccount = auth.accounts.find(
-        (a) => a.hostname === hostname && a.method === method,
-      );
+      const existingAccount = accounts.find((a) => a.hostname === hostname && a.method === method);
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(auth, method, token, hostname, forge);
-
-      persistAuth(updatedAuth);
-      await fetchNotifications({ auth: updatedAuth, settings });
+      await createAccount(method, token, hostname, forge);
     },
-    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
+    [accounts, createAccount, removeAccountNotifications],
   );
 
   /**
@@ -449,19 +253,16 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       const { authOptions, authCode } = await oauthWebApp.performWebOAuth(data);
       const token = await oauthWebApp.exchangeAuthCodeForToken(authCode, authOptions);
 
-      const existingAccount = auth.accounts.find(
+      const existingAccount = accounts.find(
         (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
       );
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(auth, 'OAuth App', token, authOptions.hostname, forge);
-
-      persistAuth(updatedAuth);
-      await fetchNotifications({ auth: updatedAuth, settings });
+      await createAccount('OAuth App', token, authOptions.hostname, forge);
     },
-    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
+    [accounts, createAccount, removeAccountNotifications],
   );
 
   /**
@@ -477,7 +278,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         token: encryptedToken,
       } as Account);
 
-      const existingAccount = auth.accounts.find(
+      const existingAccount = accounts.find(
         (a) =>
           a.hostname === hostname &&
           a.method === 'Personal Access Token' &&
@@ -487,61 +288,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         await removeAccountNotifications(existingAccount);
       }
 
-      const updatedAuth = await addAccount(
-        auth,
-        'Personal Access Token',
-        token,
-        hostname,
-        resolvedForge,
-      );
-
-      persistAuth(updatedAuth);
-      await fetchNotifications({ auth: updatedAuth, settings });
+      await createAccount('Personal Access Token', token, hostname, resolvedForge);
     },
-    [auth, settings, persistAuth, fetchNotifications, removeAccountNotifications],
+    [accounts, createAccount, removeAccountNotifications],
   );
 
   const logoutFromAccount = useCallback(
     async (account: Account) => {
-      removeAccountNotifications(account);
+      await removeAccountNotifications(account);
 
-      const updatedAuth = removeAccount(auth, account);
-
-      // Drop any forge-specific HTTP client state for the logged-out account.
-      getAdapter(account).onAccountTokenChange?.(account);
-
-      persistAuth(updatedAuth);
+      removeAccount(account);
     },
-    [auth, removeAccountNotifications, persistAuth],
-  );
-
-  const fetchNotificationsWithAccounts = useCallback(
-    async () => await fetchNotifications({ auth, settings }),
-    [auth, settings, fetchNotifications],
-  );
-
-  const markNotificationsAsReadWithAccounts = useCallback(
-    async (notifications: GitifyNotification[]) =>
-      await markNotificationsAsRead({ auth, settings }, notifications),
-    [auth, settings, markNotificationsAsRead],
-  );
-
-  const markNotificationsAsDoneWithAccounts = useCallback(
-    async (notifications: GitifyNotification[]) =>
-      await markNotificationsAsDone({ auth, settings }, notifications),
-    [auth, settings, markNotificationsAsDone],
-  );
-
-  const unsubscribeNotificationWithAccounts = useCallback(
-    async (notification: GitifyNotification) =>
-      await unsubscribeNotification({ auth, settings }, notification),
-    [auth, settings, unsubscribeNotification],
+    [removeAccountNotifications, removeAccount],
   );
 
   const contextValues: AppContextState = useMemo(
     () => ({
-      auth,
-      isLoggedIn,
       loginWithDeviceFlowStart,
       loginWithDeviceFlowPoll,
       loginWithDeviceFlowComplete,
@@ -558,23 +320,19 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       hasNotifications,
       hasUnreadNotifications,
 
-      fetchNotifications: fetchNotificationsWithAccounts,
+      fetchNotifications: refetchNotifications,
       removeAccountNotifications,
 
-      markNotificationsAsRead: markNotificationsAsReadWithAccounts,
-      markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
-      unsubscribeNotification: unsubscribeNotificationWithAccounts,
+      markNotificationsAsRead,
+      markNotificationsAsDone,
+      unsubscribeNotification,
 
-      settings,
-      resetSettings,
-      updateSetting,
+      isOnline,
 
       shortcutRegistrationError,
       clearShortcutRegistrationError,
     }),
     [
-      auth,
-      isLoggedIn,
       loginWithDeviceFlowStart,
       loginWithDeviceFlowPoll,
       loginWithDeviceFlowComplete,
@@ -591,16 +349,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       hasNotifications,
       hasUnreadNotifications,
 
-      fetchNotificationsWithAccounts,
+      refetchNotifications,
       removeAccountNotifications,
 
-      markNotificationsAsReadWithAccounts,
-      markNotificationsAsDoneWithAccounts,
-      unsubscribeNotificationWithAccounts,
+      markNotificationsAsRead,
+      markNotificationsAsDone,
+      unsubscribeNotification,
 
-      settings,
-      resetSettings,
-      updateSetting,
+      isOnline,
 
       shortcutRegistrationError,
       clearShortcutRegistrationError,

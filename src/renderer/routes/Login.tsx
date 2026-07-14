@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore } from '../stores';
 
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
@@ -27,7 +27,7 @@ export const LoginRoute: FC = () => {
   const navigate = useNavigate();
   const adapters = listAdapters();
 
-  const { isLoggedIn } = useAppContext();
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
 
   const [activeForge, setActiveForge] = useState<Forge>(adapters[0].id);
   const activeAdapter = useMemo(

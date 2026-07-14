@@ -1,5 +1,10 @@
 import '@testing-library/jest-dom/vitest';
-import { useFiltersStore } from '../stores';
+// Import store modules directly (not the stores barrel) to keep this setup
+// file's import graph light. The accounts store pulls in the forge adapter
+// graph, so it is loaded lazily in beforeEach (after each test file's
+// vi.mock registrations) to avoid pre-caching unmocked forge modules.
+import useFiltersStore from '../stores/useFiltersStore';
+import useSettingsStore from '../stores/useSettingsStore';
 
 /**
  * Shared navigate mock — import from test-utils in any test that needs to assert on navigation
@@ -84,8 +89,14 @@ beforeEach(() => {
     }),
   );
   useFiltersStore.getState().reset();
+  useSettingsStore.getState().reset();
   navigateMock.mockReset();
   window.gitify = createGitifyBridgeApi();
+});
+
+beforeEach(async () => {
+  const { default: useAccountsStore } = await import('../stores/useAccountsStore');
+  useAccountsStore.getState().reset();
 });
 
 afterEach(() => {

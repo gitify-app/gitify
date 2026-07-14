@@ -4,7 +4,6 @@ import {
   type AppearanceSettingsState,
   type AuthState,
   FetchType,
-  type GitifyState,
   GroupBy,
   type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
@@ -70,9 +69,4 @@ export const mockSettings: SettingsState = {
   ...mockNotificationSettings,
   ...mockTraySettings,
   ...mockSystemSettings,
-};
-
-export const mockState: GitifyState = {
-  auth: mockAuth,
-  settings: mockSettings,
 };

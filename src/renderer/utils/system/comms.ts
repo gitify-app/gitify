@@ -1,10 +1,8 @@
 import type { ISafeStorageDecryptResult } from '../../../shared/events';
 
-import { defaultSettings } from '../../context/defaults';
+import { OpenPreference, useSettingsStore } from '../../stores';
 
-import { type Link, OpenPreference } from '../../types';
-
-import { loadState } from '../core/storage';
+import type { Link } from '../../types';
 
 /**
  * Open a URL in the user's default browser.
@@ -15,9 +13,7 @@ import { loadState } from '../core/storage';
  * @param url - The URL to open.
  */
 export function openExternalLink(url: Link): void {
-  // Load the state from local storage to avoid having to pass settings as a parameter
-  const { settings } = loadState();
-  const openPreference = settings ? settings.openLinks : defaultSettings.openLinks;
+  const openPreference = useSettingsStore.getState().openLinks;
 
   if (url.toLowerCase().startsWith('https://')) {
     window.gitify.openExternalLink(url, openPreference === OpenPreference.FOREGROUND);
@@ -134,9 +130,10 @@ export async function applyKeyboardShortcut(payload: {
  * Passing a negative number will set the error state color.
  *
  * @param notificationsLength The number of unread notifications
+ * @param isOnline Whether the application is currently online
  */
-export function updateTrayColor(notificationsLength: number): void {
-  window.gitify.tray.updateColor(notificationsLength);
+export function updateTrayColor(notificationsLength: number, isOnline: boolean): void {
+  window.gitify.tray.updateColor(notificationsLength, isOnline);
 }
 
 /**

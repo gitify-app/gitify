@@ -1,6 +1,7 @@
 import useFiltersStore from '../../../stores/useFiltersStore';
+import useSettingsStore from '../../../stores/useSettingsStore';
 
-import type { GitifyNotificationState, RawGitifyNotification, SettingsState } from '../../../types';
+import type { GitifyNotificationState, RawGitifyNotification } from '../../../types';
 
 import {
   BASE_SEARCH_QUALIFIERS,
@@ -69,15 +70,14 @@ export function filterBaseNotifications(
  * user-type and state filters that depend on enriched subject data.
  *
  * @param notifications - The enriched notifications to filter.
- * @param settings - Application settings controlling whether detailed filtering runs.
  * @returns The subset of notifications that pass all detailed filters.
  */
 export function filterDetailedNotifications(
   notifications: RawGitifyNotification[],
-  settings: SettingsState,
 ): RawGitifyNotification[] {
   return notifications.filter((notification) => {
     let passesFilters = true;
+    const settings = useSettingsStore.getState();
 
     if (settings.detailedNotifications) {
       passesFilters = passesFilters && passesUserFilters(notification);

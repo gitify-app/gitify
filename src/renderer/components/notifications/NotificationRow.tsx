@@ -4,6 +4,7 @@ import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
 import { useAppContext } from '../../hooks/useAppContext';
+import { useSettingsStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -31,18 +32,22 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
   isRepositoryAnimatingExit,
 }: NotificationRowProps) => {
-  const { settings, markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
+  const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
     useAppContext();
+
+  const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
+  const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
+  const showNumber = useSettingsStore((s) => s.showNumber);
 
   const [shouldAnimateNotificationExit, setShouldAnimateNotificationExit] = useState(false);
 
-  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
+  const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
   const actionNotificationInteraction = () => {
     setShouldAnimateNotificationExit(shouldAnimateExit);
     openNotification(notification);
 
-    if (settings.markAsDoneOnOpen) {
+    if (markAsDoneOnOpen) {
       markNotificationsAsDone([notification]);
     } else {
       markNotificationsAsRead([notification]);
@@ -91,10 +96,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Tooltip>
 
         <Stack
-          className={cn(
-            'cursor-pointer text-sm w-full',
-            !settings.wrapNotificationTitle && 'truncate',
-          )}
+          className={cn('cursor-pointer text-sm w-full', !wrapNotificationTitle && 'truncate')}
           direction="vertical"
           gap="none"
           onClick={actionNotificationInteraction}
@@ -103,7 +105,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
           <Stack
             align="start"
-            className={cn('mb-0.5', !settings.wrapNotificationTitle && 'truncate')}
+            className={cn('mb-0.5', !wrapNotificationTitle && 'truncate')}
             data-testid="notification-row"
             direction="horizontal"
             gap="condensed"
@@ -115,7 +117,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
               className={cn(
                 'text-xxs ml-auto mr-2',
                 Opacity.READ,
-                (isGroupByDate(settings) || !settings.showNumber) && 'hidden',
+                (isGroupByDate() || !showNumber) && 'hidden',
               )}
             >
               {notification.display.number}

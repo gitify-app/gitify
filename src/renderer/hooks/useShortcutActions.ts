@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { getPrimaryAccountHostname } from '../utils/auth/utils';
+import { useAccountsStore, useSettingsStore } from '../stores';
+
 import { quitApp } from '../utils/system/comms';
 import { openHostIssues, openHostNotifications, openHostPulls } from '../utils/system/links';
 import { useAppContext } from './useAppContext';
@@ -37,13 +38,17 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { auth, fetchNotifications, isLoggedIn, status, settings, updateSetting } = useAppContext();
+  const { fetchNotifications, status } = useAppContext();
+
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
+  const primaryAccountHostname = useAccountsStore((s) => s.primaryAccountHostname());
+
+  const participating = useSettingsStore((s) => s.participating);
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
 
   const isOnFiltersRoute = location.pathname.startsWith('/filters');
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
   const isLoading = status === 'loading';
-
-  const primaryAccountHostname = getPrimaryAccountHostname(auth);
 
   const shortcuts: ShortcutConfigs = useMemo(() => {
     return {
@@ -60,7 +65,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       focusedMode: {
         key: 'w',
         isAllowed: isLoggedIn && !isLoading,
-        action: () => updateSetting('participating', !settings.participating),
+        action: () => updateSetting('participating', !participating),
       },
       filters: {
         key: 'f',
@@ -119,7 +124,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
     };
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [
-    settings.participating,
+    participating,
     isLoggedIn,
     isLoading,
     isOnFiltersRoute,

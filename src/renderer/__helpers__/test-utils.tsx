@@ -2,10 +2,12 @@ import { render } from '@testing-library/react';
 import { type ReactElement, type ReactNode, useMemo } from 'react';
 import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { AppContext, type AppContextState } from '../context/context';
-import { type FiltersStore, useFiltersStore } from '../stores';
+import { type FiltersStore, useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+
+import type { Account, SettingsState } from '../types';
 
 export { navigateMock } from './vitest.setup';
 export type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> };
@@ -20,6 +22,11 @@ type TestAppContext = Partial<AppContextState>;
 interface RenderOptions extends TestAppContext {
   /** Supports path strings or location objects (e.g. with `state` for re-auth). */
   initialEntries?: InitialEntry[];
+  /** Seed the accounts store with these accounts. */
+  accounts?: Account[];
+  /** Seed the settings store with these settings. */
+  settings?: Partial<SettingsState>;
+  /** Seed the filters store. */
   filters?: Partial<FiltersStore>;
 }
 
@@ -33,7 +40,7 @@ interface AppContextProviderProps {
 }
 
 /**
- * Wrapper component that provides ThemeProvider, BaseStyles, and AppContext
+ * Wrapper component that provides MemoryRouter and AppContext
  * with sensible defaults for testing.
  */
 function AppContextProvider({
@@ -43,10 +50,6 @@ function AppContextProvider({
 }: AppContextProviderProps) {
   const defaultValue: TestAppContext = useMemo(() => {
     return {
-      auth: mockAuth,
-      settings: mockSettings,
-      isLoggedIn: true,
-
       notifications: [],
       notificationCount: 0,
       unreadNotificationCount: 0,
@@ -54,7 +57,7 @@ function AppContextProvider({
       hasUnreadNotifications: false,
 
       status: 'success',
-      globalError: null,
+      globalError: undefined,
 
       // Default mock implementations for all required methods
       loginWithDeviceFlowStart: vi.fn(),
@@ -71,10 +74,7 @@ function AppContextProvider({
       markNotificationsAsDone: vi.fn(),
       unsubscribeNotification: vi.fn(),
 
-      clearFilters: vi.fn(),
-      resetSettings: vi.fn(),
-      updateSetting: vi.fn(),
-      updateFilter: vi.fn(),
+      isOnline: true,
 
       shortcutRegistrationError: null,
       clearShortcutRegistrationError: vi.fn(),
@@ -92,24 +92,47 @@ function AppContextProvider({
 
 /**
  * Custom render that wraps components with all providers needed for testing:
- * MemoryRouter, AppContext, and Zustand stores.
+ * MemoryRouter, QueryClientProvider, AppContext, and Zustand stores.
+ *
+ * Account and settings state is seeded directly into the Zustand stores;
+ * the remaining options override the (slim) AppContext values.
  *
  * Usage:
  *   renderWithProviders(<MyComponent />, { notifications, accounts, settings, filters, ... })
  */
 export function renderWithProviders(
   ui: ReactElement,
-  { initialEntries, filters, ...context }: RenderOptions = {},
+  { initialEntries, accounts, settings, filters, ...context }: RenderOptions = {},
 ) {
+  if (accounts) {
+    useAccountsStore.setState({ accounts });
+  }
+
+  if (settings) {
+    useSettingsStore.setState(settings);
+  }
+
   if (filters) {
     useFiltersStore.setState(filters);
   }
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
+      },
+    },
+  });
+
   return render(ui, {
     wrapper: ({ children }) => (
-      <AppContextProvider initialEntries={initialEntries} value={context}>
-        {children}
-      </AppContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <AppContextProvider initialEntries={initialEntries} value={context}>
+          {children}
+        </AppContextProvider>
+      </QueryClientProvider>
     ),
   });
 }

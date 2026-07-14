@@ -14,7 +14,7 @@ import { DEFAULT_FILTERS_STATE } from './defaults';
  */
 const useFiltersStore = create<FiltersStore>()(
   persist(
-    (set, get, store) => ({
+    (set, get) => ({
       ...DEFAULT_FILTERS_STATE,
 
       /** Returns `true` if any filter group has one or more active values. */
@@ -47,9 +47,9 @@ const useFiltersStore = create<FiltersStore>()(
         });
       },
 
-      /** Resets the store to its initial state, clearing all active filters. */
+      /** Resets the store to its default state, clearing all active filters. */
       reset: () => {
-        set(store.getInitialState());
+        set({ ...DEFAULT_FILTERS_STATE });
       },
     }),
     {

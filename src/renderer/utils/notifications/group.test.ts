@@ -1,8 +1,8 @@
 import { mockGitifyNotificationForRepoName } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
-import type { GitifyNotification, SettingsState } from '../../types';
-import { GroupBy } from '../../types';
+import { GroupBy, useSettingsStore } from '../../stores';
+
+import type { GitifyNotification } from '../../types';
 
 import {
   getFlattenedNotificationsByRepo,
@@ -14,37 +14,29 @@ import {
 describe('renderer/utils/notifications/group.ts', () => {
   describe('isGroupByDate', () => {
     it('returns true when groupBy is DATE', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.DATE,
-      };
-      expect(isGroupByDate(settings)).toBe(true);
+      useSettingsStore.setState({ groupBy: GroupBy.DATE });
+
+      expect(isGroupByDate()).toBe(true);
     });
 
     it('returns false when groupBy is REPOSITORY', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.REPOSITORY,
-      };
-      expect(isGroupByDate(settings)).toBe(false);
+      useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+
+      expect(isGroupByDate()).toBe(false);
     });
   });
 
   describe('isGroupByRepository', () => {
     it('returns true when groupBy is REPOSITORY', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.REPOSITORY,
-      };
-      expect(isGroupByRepository(settings)).toBe(true);
+      useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+
+      expect(isGroupByRepository()).toBe(true);
     });
 
     it('returns false when groupBy is DATE', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.DATE,
-      };
-      expect(isGroupByRepository(settings)).toBe(false);
+      useSettingsStore.setState({ groupBy: GroupBy.DATE });
+
+      expect(isGroupByRepository()).toBe(false);
     });
   });
 
@@ -112,10 +104,8 @@ describe('renderer/utils/notifications/group.ts', () => {
 
   describe('getFlattenedNotificationsByRepo', () => {
     it('returns repository-grouped order when groupBy is REPOSITORY', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.REPOSITORY,
-      };
+      useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-b'),
         mockGitifyNotificationForRepoName('2', 'owner/repo-a'),
@@ -123,70 +113,62 @@ describe('renderer/utils/notifications/group.ts', () => {
         mockGitifyNotificationForRepoName('4', 'owner/repo-a'),
       ];
 
-      const result = getFlattenedNotificationsByRepo(notifications, settings);
+      const result = getFlattenedNotificationsByRepo(notifications);
 
       // First repo-b notifications, then repo-a notifications
       expect(result.map((n) => n.id)).toEqual(['1', '3', '2', '4']);
     });
 
     it('returns natural account order when groupBy is DATE', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.DATE,
-      };
+      useSettingsStore.setState({ groupBy: GroupBy.DATE });
+
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-b'),
         mockGitifyNotificationForRepoName('2', 'owner/repo-a'),
         mockGitifyNotificationForRepoName('3', 'owner/repo-b'),
       ];
 
-      const result = getFlattenedNotificationsByRepo(notifications, settings);
+      const result = getFlattenedNotificationsByRepo(notifications);
 
       // Natural order preserved
       expect(result.map((n) => n.id)).toEqual(['1', '2', '3']);
     });
 
     it('returns empty array when no notifications', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.REPOSITORY,
-      };
+      useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+
       const notifications: GitifyNotification[] = [];
 
-      const result = getFlattenedNotificationsByRepo(notifications, settings);
+      const result = getFlattenedNotificationsByRepo(notifications);
 
       expect(result).toEqual([]);
     });
 
     it('handles notifications without repository data when grouped', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.REPOSITORY,
-      };
+      useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
+
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
         mockGitifyNotificationForRepoName('2', null),
         mockGitifyNotificationForRepoName('3', 'owner/repo-a'),
       ];
 
-      const result = getFlattenedNotificationsByRepo(notifications, settings);
+      const result = getFlattenedNotificationsByRepo(notifications);
 
       // Only notifications with repository data are included when grouped
       expect(result.map((n) => n.id)).toEqual(['1', '3']);
     });
 
     it('preserves notifications without repository data when not grouped', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.DATE,
-      };
+      useSettingsStore.setState({ groupBy: GroupBy.DATE });
+
       const notifications: GitifyNotification[] = [
         mockGitifyNotificationForRepoName('1', 'owner/repo-a'),
         mockGitifyNotificationForRepoName('2', null),
         mockGitifyNotificationForRepoName('3', 'owner/repo-a'),
       ];
 
-      const result = getFlattenedNotificationsByRepo(notifications, settings);
+      const result = getFlattenedNotificationsByRepo(notifications);
 
       // All notifications preserved in natural order
       expect(result.map((n) => n.id)).toEqual(['1', '2', '3']);

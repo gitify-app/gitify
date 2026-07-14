@@ -15,6 +15,7 @@ import {
 import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
 
 import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore } from '../stores';
 
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
@@ -26,10 +27,9 @@ import { type Account, type GitifyError, IconColor, Size } from '../types';
 
 import { determineFailureType } from '../utils/api/errors';
 import { hasAlternateScopes, hasRecommendedScopes } from '../utils/auth/scopes';
-import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
+import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
-import { saveState } from '../utils/core/storage';
 import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
@@ -37,7 +37,10 @@ import { getPlatformIcon } from '../utils/ui/icons';
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { auth, settings, logoutFromAccount, notifications } = useAppContext();
+  const { logoutFromAccount, notifications } = useAppContext();
+
+  const accounts = useAccountsStore((s) => s.accounts);
+  const refreshAccount = useAccountsStore((s) => s.refreshAccount);
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
 
@@ -51,8 +54,9 @@ export const AccountsRoute: FC = () => {
   );
 
   const setAsPrimaryAccount = (account: Account) => {
-    auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
-    saveState({ auth, settings });
+    useAccountsStore.setState({
+      accounts: [account, ...accounts.filter((a) => a !== account)],
+    });
     navigate('/accounts', { replace: true });
   };
 
@@ -123,7 +127,7 @@ export const AccountsRoute: FC = () => {
       <Header icon={PersonIcon}>Accounts</Header>
 
       <Contents>
-        {auth.accounts.map((account, i) => {
+        {accounts.map((account, i) => {
           const AuthMethodIcon = getAdapter(account).getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);

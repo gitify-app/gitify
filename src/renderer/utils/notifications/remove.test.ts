@@ -3,9 +3,8 @@ import {
   mockGitifyNotification,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
-import type { SettingsState } from '../../types';
+import { useSettingsStore } from '../../stores';
 
 import { removeNotificationsForAccount, shouldRemoveNotificationsFromState } from './remove';
 
@@ -39,24 +38,26 @@ describe('renderer/utils/remove.ts', () => {
     ])(
       'should return $expected when $description',
       ({ delayNotificationState, fetchReadNotifications, expected }) => {
-        const settings: SettingsState = {
-          ...mockSettings,
+        useSettingsStore.setState({
           delayNotificationState,
           fetchReadNotifications,
-        };
+        });
 
-        expect(shouldRemoveNotificationsFromState(settings)).toBe(expected);
+        expect(shouldRemoveNotificationsFromState()).toBe(expected);
       },
     );
   });
 
   describe('removeNotificationsForAccount', () => {
     it('should remove a notification if it exists', () => {
+      useSettingsStore.setState({
+        delayNotificationState: false,
+      });
+
       expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
       const result = removeNotificationsForAccount(
         mockSingleAccountNotifications[0].account,
-        { ...mockSettings, delayNotificationState: false },
         [mockGitifyNotification],
         mockSingleAccountNotifications,
       );
@@ -65,11 +66,14 @@ describe('renderer/utils/remove.ts', () => {
     });
 
     it('should mark as read and skip notification removal if delay state enabled', () => {
+      useSettingsStore.setState({
+        delayNotificationState: true,
+      });
+
       expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
       const result = removeNotificationsForAccount(
         mockSingleAccountNotifications[0].account,
-        { ...mockSettings, delayNotificationState: true },
         [mockGitifyNotification],
         mockSingleAccountNotifications,
       );
@@ -79,11 +83,14 @@ describe('renderer/utils/remove.ts', () => {
     });
 
     it('should skip notification removal if delay state enabled and nothing to remove', () => {
+      useSettingsStore.setState({
+        delayNotificationState: true,
+      });
+
       expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
       const result = removeNotificationsForAccount(
         mockSingleAccountNotifications[0].account,
-        { ...mockSettings, delayNotificationState: true },
         [
           {
             ...mockGitifyNotification,
@@ -102,7 +109,6 @@ describe('renderer/utils/remove.ts', () => {
 
       const result = removeNotificationsForAccount(
         mockSingleAccountNotifications[0].account,
-        { ...mockSettings, delayNotificationState: false },
         [],
         mockSingleAccountNotifications,
       );
@@ -114,7 +120,6 @@ describe('renderer/utils/remove.ts', () => {
     it('should not modify notifications when account UUID does not match', () => {
       const result = removeNotificationsForAccount(
         mockGitHubEnterpriseServerAccount, // Different account
-        { ...mockSettings, delayNotificationState: false },
         [mockGitifyNotification],
         mockSingleAccountNotifications,
       );
@@ -124,11 +129,14 @@ describe('renderer/utils/remove.ts', () => {
     });
 
     it('should mark as read and skip removal when fetchReadNotifications is enabled', () => {
+      useSettingsStore.setState({
+        fetchReadNotifications: true,
+      });
+
       expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
       const result = removeNotificationsForAccount(
         mockSingleAccountNotifications[0].account,
-        { ...mockSettings, fetchReadNotifications: true },
         [mockGitifyNotification],
         mockSingleAccountNotifications,
       );
@@ -138,11 +146,14 @@ describe('renderer/utils/remove.ts', () => {
     });
 
     it('should remove notifications when fetchReadNotifications is disabled', () => {
+      useSettingsStore.setState({
+        fetchReadNotifications: false,
+      });
+
       expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
       const result = removeNotificationsForAccount(
         mockSingleAccountNotifications[0].account,
-        { ...mockSettings, fetchReadNotifications: false },
         [mockGitifyNotification],
         mockSingleAccountNotifications,
       );

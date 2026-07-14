@@ -51,6 +51,12 @@ export interface IOpenExternal {
   activate: boolean;
 }
 
+/** Payload for the `UPDATE_ICON_COLOR` event. */
+export interface ITrayColorUpdate {
+  notificationsCount: number;
+  isOnline: boolean;
+}
+
 /**
  * Result of decrypting a value via Electron's safe storage.
  *
@@ -86,7 +92,7 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.WINDOW_SHOW]: { request: undefined; response: undefined };
   [EVENTS.WINDOW_HIDE]: { request: undefined; response: undefined };
   [EVENTS.VERSION]: { request: undefined; response: string };
-  [EVENTS.UPDATE_ICON_COLOR]: { request: number; response: undefined };
+  [EVENTS.UPDATE_ICON_COLOR]: { request: ITrayColorUpdate; response: undefined };
   [EVENTS.UPDATE_ICON_TITLE]: { request: string; response: undefined };
   [EVENTS.USE_ALTERNATE_IDLE_ICON]: { request: boolean; response: undefined };
   [EVENTS.USE_UNREAD_ACTIVE_ICON]: { request: boolean; response: undefined };

@@ -3,13 +3,10 @@ import { createContext } from 'react';
 import type {
   Account,
   AccountNotifications,
-  AuthState,
   Forge,
   GitifyError,
   GitifyNotification,
   Hostname,
-  SettingsState,
-  SettingsValue,
   Status,
   Token,
 } from '../types';
@@ -20,8 +17,6 @@ import type {
 } from '../utils/auth/types';
 
 export interface AppContextState {
-  auth: AuthState;
-  isLoggedIn: boolean;
   loginWithDeviceFlowStart: (
     forge: Forge,
     hostname?: Hostname,
@@ -49,9 +44,7 @@ export interface AppContextState {
   markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 
-  settings: SettingsState;
-  resetSettings: () => void;
-  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
+  isOnline: boolean;
 
   shortcutRegistrationError: string | null;
   clearShortcutRegistrationError: () => void;

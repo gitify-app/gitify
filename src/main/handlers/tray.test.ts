@@ -11,9 +11,6 @@ vi.mock('electron', () => ({
   ipcMain: {
     on: (...args: unknown[]) => onMock(...args),
   } satisfies Pick<Electron.IpcMain, 'on'>,
-  net: {
-    isOnline: vi.fn().mockReturnValue(true),
-  } satisfies Pick<Electron.Net, 'isOnline'>,
 }));
 
 describe('main/handlers/tray.ts', () => {
@@ -53,7 +50,7 @@ describe('main/handlers/tray.ts', () => {
     const updateColorHandler = onMock.mock.calls.find(
       (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
-    updateColorHandler?.({}, 5);
+    updateColorHandler?.({}, { notificationsCount: 5, isOnline: true });
 
     expect(menubar.tray.setImage).not.toHaveBeenCalled();
   });
@@ -64,7 +61,7 @@ describe('main/handlers/tray.ts', () => {
     const updateColorHandler = onMock.mock.calls.find(
       (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
-    updateColorHandler?.({}, 0);
+    updateColorHandler?.({}, { notificationsCount: 0, isOnline: true });
 
     expect(menubar.tray.setImage).toHaveBeenCalledWith(TrayIcons.idle);
   });
@@ -75,9 +72,20 @@ describe('main/handlers/tray.ts', () => {
     const updateColorHandler = onMock.mock.calls.find(
       (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
-    updateColorHandler?.({}, 3);
+    updateColorHandler?.({}, { notificationsCount: 3, isOnline: true });
 
     expect(menubar.tray.setImage).toHaveBeenCalledWith(TrayIcons.active);
+  });
+
+  it('sets offline icon when offline', () => {
+    registerTrayHandlers(menubar);
+
+    const updateColorHandler = onMock.mock.calls.find(
+      (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
+    )?.[1];
+    updateColorHandler?.({}, { notificationsCount: 0, isOnline: false });
+
+    expect(menubar.tray.setImage).toHaveBeenCalledWith(TrayIcons.offline);
   });
 
   it('sets error icon when notifications count is negative', () => {
@@ -86,7 +94,7 @@ describe('main/handlers/tray.ts', () => {
     const updateColorHandler = onMock.mock.calls.find(
       (call: unknown[]) => call[0] === EVENTS.UPDATE_ICON_COLOR,
     )?.[1];
-    updateColorHandler?.({}, -1);
+    updateColorHandler?.({}, { notificationsCount: -1, isOnline: true });
 
     expect(menubar.tray.setImage).toHaveBeenCalledWith(TrayIcons.error);
   });

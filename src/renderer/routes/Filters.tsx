@@ -3,8 +3,7 @@ import type { FC } from 'react';
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
 
-import { useAppContext } from '../hooks/useAppContext';
-import { useFiltersStore } from '../stores';
+import { useAccountsStore, useFiltersStore } from '../stores';
 
 import { AccountFilter } from '../components/filters/AccountFilter';
 import { ReasonFilter } from '../components/filters/ReasonFilter';
@@ -19,10 +18,9 @@ import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
 export const FiltersRoute: FC = () => {
-  const { auth } = useAppContext();
   const clearFilters = useFiltersStore((s) => s.reset);
 
-  const hasMultipleAccounts = (auth?.accounts.length ?? 0) > 1;
+  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 
   return (
     <Page testId="filters">

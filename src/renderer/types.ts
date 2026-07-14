@@ -73,19 +73,6 @@ export interface Account {
 }
 
 /**
- * All Config Settings values to be stored in the application.
- */
-export type SettingsValue =
-  | boolean
-  | number
-  | string
-  | FetchType
-  | GroupBy
-  | OpenPreference
-  | Percentage
-  | Theme;
-
-/**
  * All allowed Config Settings keys to be stored in the application.
  */
 export type SettingsState = AppearanceSettingsState &
@@ -148,11 +135,6 @@ export interface SystemSettingsState {
 
 export interface AuthState {
   accounts: Account[];
-}
-
-export interface GitifyState {
-  auth?: AuthState;
-  settings?: SettingsState;
 }
 
 export enum Theme {
@@ -256,6 +238,7 @@ export type ErrorType =
   | 'BAD_CREDENTIALS'
   | 'MISSING_SCOPES'
   | 'NETWORK'
+  | 'OFFLINE'
   | 'RATE_LIMITED'
   | 'UNKNOWN';
 

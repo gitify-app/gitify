@@ -1,7 +1,6 @@
-import { net } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
-import { EVENTS } from '../../shared/events';
+import { EVENTS, type ITrayColorUpdate } from '../../shared/events';
 
 import { onMainEvent } from '../events';
 import { TrayIcons } from '../icons';
@@ -9,7 +8,6 @@ import { TrayIcons } from '../icons';
 let shouldUseAlternateIdleIcon = false;
 let shouldUseUnreadActiveIcon = true;
 
-// TODO: Refactor to use ITrayColorUpdate type
 function setIdleIcon(mb: Menubar): void {
   if (shouldUseAlternateIdleIcon) {
     mb.tray.setImage(TrayIcons.idleAlternate);
@@ -57,9 +55,9 @@ export function registerTrayHandlers(mb: Menubar): void {
   /**
    * Update the tray icon based on the current notification count.
    */
-  onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, notificationsCount: number) => {
+  onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, { notificationsCount, isOnline }: ITrayColorUpdate) => {
     if (!mb.tray.isDestroyed()) {
-      if (!net.isOnline()) {
+      if (!isOnline) {
         setOfflineIcon(mb);
         return;
       }

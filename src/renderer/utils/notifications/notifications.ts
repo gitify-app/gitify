@@ -1,7 +1,8 @@
+import { useAccountsStore, useSettingsStore } from '../../stores';
+
 import type {
   AccountNotifications,
   AuthState,
-  GitifyState,
   RawGitifyNotification,
   SettingsState,
 } from '../../types';
@@ -57,15 +58,11 @@ function getNotifications(auth: AuthState, settings: SettingsState) {
  *  - Formatting
  *  - Ordering
  *
- * @param state - The Gitify state.
  * @returns A promise that resolves to an array of account notifications.
  */
-export async function getAllNotifications(state: GitifyState): Promise<AccountNotifications[]> {
-  if (!state.auth || !state.settings) {
-    return [];
-  }
-
-  const { auth, settings } = state;
+export async function getAllNotifications(): Promise<AccountNotifications[]> {
+  const auth: AuthState = { accounts: useAccountsStore.getState().accounts };
+  const settings = useSettingsStore.getState();
 
   const accountNotifications: AccountNotifications[] = await Promise.all(
     getNotifications(auth, settings)
@@ -78,7 +75,7 @@ export async function getAllNotifications(state: GitifyState): Promise<AccountNo
 
           notifications = await enrichNotifications(notifications, settings);
 
-          notifications = filterDetailedNotifications(notifications, settings);
+          notifications = filterDetailedNotifications(notifications);
 
           const formatted = notifications.map((notification) => formatNotification(notification));
 
@@ -104,7 +101,7 @@ export async function getAllNotifications(state: GitifyState): Promise<AccountNo
   );
 
   // Set the order property for the notifications
-  stabilizeNotificationsOrder(accountNotifications, settings);
+  stabilizeNotificationsOrder(accountNotifications);
 
   return accountNotifications;
 }
@@ -142,16 +139,12 @@ export async function enrichNotifications(
  * during notification interaction events (mark as read, mark as done, etc.)
  *
  * @param accountNotifications
- * @param settings
  */
-export function stabilizeNotificationsOrder(
-  accountNotifications: AccountNotifications[],
-  settings: SettingsState,
-) {
+export function stabilizeNotificationsOrder(accountNotifications: AccountNotifications[]) {
   let orderIndex = 0;
 
   for (const account of accountNotifications) {
-    const flattenedNotifications = getFlattenedNotificationsByRepo(account.notifications, settings);
+    const flattenedNotifications = getFlattenedNotificationsByRepo(account.notifications);
 
     for (const notification of flattenedNotifications) {
       notification.order = orderIndex++;

@@ -27,13 +27,13 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
 }) => {
-  const { settings, markNotificationsAsRead, markNotificationsAsDone } = useAppContext();
+  const { markNotificationsAsRead, markNotificationsAsDone } = useAppContext();
 
   const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] = useState(false);
   const [isRepositoryNotificationsVisible, setIsRepositoryNotificationsVisible] = useState(true);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
-  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
+  const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
   const actionRepositoryInteraction = () => {
     openRepository(repoNotifications[0].repository);

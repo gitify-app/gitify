@@ -1,7 +1,6 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
 
-import { useFiltersStore } from '../../../stores';
+import { useFiltersStore, useSettingsStore } from '../../../stores';
 
 import type { GitifyOwner, Link, SearchToken } from '../../../types';
 
@@ -149,10 +148,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           states: ['merged'],
         });
 
-        const result = filterDetailedNotifications(mockNotifications, {
-          ...mockSettings,
-          detailedNotifications: false,
-        });
+        useSettingsStore.setState({ detailedNotifications: false });
+
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(2);
         expect(result).toEqual(mockNotifications);
@@ -163,10 +161,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           userTypes: ['Bot'],
         });
 
-        const result = filterDetailedNotifications(mockNotifications, {
-          ...mockSettings,
-          detailedNotifications: true,
-        });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);
@@ -177,10 +174,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           includeSearchTokens: ['author:github-user' as SearchToken],
         });
 
-        const result = filterDetailedNotifications(mockNotifications, {
-          ...mockSettings,
-          detailedNotifications: true,
-        });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[0]]);
@@ -191,10 +187,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           excludeSearchTokens: ['author:github-bot' as SearchToken],
         });
 
-        const result = filterDetailedNotifications(mockNotifications, {
-          ...mockSettings,
-          detailedNotifications: true,
-        });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[0]]);
@@ -207,10 +202,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           excludeSearchTokens: ['author:coderabbitai' as SearchToken],
         });
 
-        const result = filterDetailedNotifications(mockNotifications, {
-          ...mockSettings,
-          detailedNotifications: true,
-        });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(2);
         expect(result).toEqual(mockNotifications);
@@ -221,10 +215,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           includeSearchTokens: ['commenter:coderabbitai' as SearchToken],
         });
 
-        const result = filterDetailedNotifications(mockNotifications, {
-          ...mockSettings,
-          detailedNotifications: true,
-        });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[0]]);
@@ -235,10 +228,9 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
           excludeSearchTokens: ['commenter:coderabbitai' as SearchToken],
         });
 
-        const result = filterDetailedNotifications(mockNotifications, {
-          ...mockSettings,
-          detailedNotifications: true,
-        });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);
@@ -249,7 +241,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         mockNotifications[0].subject.state = 'OPEN';
         mockNotifications[1].subject.state = 'CLOSED';
-        const result = filterDetailedNotifications(mockNotifications, mockSettings);
+        const result = filterDetailedNotifications(mockNotifications);
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);
