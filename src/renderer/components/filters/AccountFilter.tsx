@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { PersonIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useNotifications } from '../../hooks/useNotifications';
 import { useAccountsStore, useFiltersStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
@@ -12,7 +12,7 @@ import { Title } from '../primitives/Title';
 import { getAccountUUID } from '../../utils/auth/utils';
 
 export const AccountFilter: FC = () => {
-  const { notifications } = useAppContext();
+  const { notifications } = useNotifications();
   const accounts = useAccountsStore((s) => s.accounts);
   const filteredAccounts = useFiltersStore((s) => s.accounts);
   const updateFilter = useFiltersStore((s) => s.updateFilter);

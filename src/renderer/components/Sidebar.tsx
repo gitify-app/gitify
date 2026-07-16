@@ -15,14 +15,14 @@ import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useShortcutActions } from '../hooks/useShortcutActions';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const { status, notificationCount, hasUnreadNotifications } = useAppContext();
+  const { status, notificationCount, hasUnreadNotifications } = useNotifications();
 
   const { shortcuts } = useShortcutActions();
 

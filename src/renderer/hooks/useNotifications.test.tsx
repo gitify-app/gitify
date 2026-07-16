@@ -25,6 +25,9 @@ import * as audio from '../utils/system/audio';
 import * as native from '../utils/system/native';
 import { useNotifications } from './useNotifications';
 
+// Exercise the real hook implementation (globally mocked in vitest.setup)
+vi.unmock('./useNotifications');
+
 vi.mock('../utils/notifications/notifications', async () => {
   const actual = await vi.importActual<typeof import('../utils/notifications/notifications')>(
     '../utils/notifications/notifications',
@@ -54,7 +57,7 @@ const createWrapper = () => {
 };
 
 const renderNotificationsHook = () =>
-  renderHook(() => useNotifications(), { wrapper: createWrapper() });
+  renderHook(() => useNotifications({ withSideEffects: true }), { wrapper: createWrapper() });
 
 describe('renderer/hooks/useNotifications.ts', () => {
   const githubAdapter = getAdapter('github');

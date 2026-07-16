@@ -1,6 +1,7 @@
 import { type FC, useMemo } from 'react';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useNotifications } from '../hooks/useNotifications';
+import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { AllRead } from '../components/AllRead';
@@ -13,7 +14,8 @@ import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, status, globalError, hasNotifications, isOnline } = useAppContext();
+  const { notifications, status, globalError, hasNotifications } = useNotifications();
+  const isOnline = useOnlineStatus();
 
   const filteredAccounts = useFiltersStore((s) => s.accounts);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);

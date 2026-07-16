@@ -3,7 +3,7 @@ import { type FC, useState } from 'react';
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useNotifications } from '../../hooks/useNotifications';
 import { useSettingsStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
@@ -33,7 +33,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   isRepositoryAnimatingExit,
 }: NotificationRowProps) => {
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
-    useAppContext();
+    useNotifications();
 
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);

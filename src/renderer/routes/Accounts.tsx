@@ -14,7 +14,8 @@ import {
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useLogins } from '../hooks/useLogins';
+import { useNotifications } from '../hooks/useNotifications';
 import { useAccountsStore } from '../stores';
 
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
@@ -37,7 +38,8 @@ import { getPlatformIcon } from '../utils/ui/icons';
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
 
-  const { logoutFromAccount, notifications } = useAppContext();
+  const { logoutFromAccount } = useLogins();
+  const { notifications } = useNotifications();
 
   const accounts = useAccountsStore((s) => s.accounts);
   const refreshAccount = useAccountsStore((s) => s.refreshAccount);

@@ -3,7 +3,7 @@ import { memo, type ReactNode, useMemo } from 'react';
 import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useNotifications } from '../../hooks/useNotifications';
 import { type FiltersState, useFiltersStore, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
@@ -31,7 +31,7 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
   tooltip,
   layout = 'vertical',
 }: FilterSectionProps<K>) => {
-  const { notifications } = useAppContext();
+  const { notifications } = useNotifications();
   const updateFilter = useFiltersStore((s) => s.updateFilter);
 
   const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);

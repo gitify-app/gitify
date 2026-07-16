@@ -20,6 +20,42 @@ vi.mock('../utils/core/random', () => ({
   randomElement: vi.fn((arr: unknown[]) => arr[0]),
 }));
 
+/**
+ * Globally mock the app-level hooks so component tests can inject state via
+ * `renderWithProviders` options (see hook-mocks.ts). Hook test files that
+ * exercise the real implementations opt out with `vi.unmock(...)`.
+ */
+vi.mock('../hooks/useNotifications', async () => {
+  const actual = await vi.importActual<typeof import('../hooks/useNotifications')>(
+    '../hooks/useNotifications',
+  );
+  const { getMockedNotificationsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useNotifications: () => getMockedNotificationsState(),
+  };
+});
+
+vi.mock('../hooks/useLogins', async () => {
+  const actual = await vi.importActual<typeof import('../hooks/useLogins')>('../hooks/useLogins');
+  const { getMockedLoginsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useLogins: () => getMockedLoginsState(),
+  };
+});
+
+vi.mock('../hooks/useOnlineStatus', async () => {
+  const actual = await vi.importActual<typeof import('../hooks/useOnlineStatus')>(
+    '../hooks/useOnlineStatus',
+  );
+  const { getMockedIsOnline } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useOnlineStatus: () => getMockedIsOnline(),
+  };
+});
+
 function getRequestTarget(input: RequestInfo | URL): string {
   if (typeof input === 'string') {
     return input;
@@ -97,6 +133,12 @@ beforeEach(() => {
 beforeEach(async () => {
   const { default: useAccountsStore } = await import('../stores/useAccountsStore');
   useAccountsStore.getState().reset();
+
+  const { resetHookMocks } = await import('./hook-mocks');
+  resetHookMocks();
+
+  const { useShortcutRegistrationStore } = await import('../hooks/useShortcutRegistration');
+  useShortcutRegistrationStore.getState().reset();
 });
 
 afterEach(() => {

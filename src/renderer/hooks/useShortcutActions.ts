@@ -5,7 +5,7 @@ import { useAccountsStore, useSettingsStore } from '../stores';
 
 import { quitApp } from '../utils/system/comms';
 import { openHostIssues, openHostNotifications, openHostPulls } from '../utils/system/links';
-import { useAppContext } from './useAppContext';
+import { useNotifications } from './useNotifications';
 
 type ShortcutName =
   | 'home'
@@ -38,7 +38,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { fetchNotifications, status } = useAppContext();
+  const { refetchNotifications: fetchNotifications, status } = useNotifications();
 
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
   const primaryAccountHostname = useAccountsStore((s) => s.primaryAccountHostname());

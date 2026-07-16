@@ -52,15 +52,27 @@ interface NotificationsState {
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
 }
 
+interface UseNotificationsOptions {
+  /**
+   * Run the singleton side effects (sound/native alerts for new notifications
+   * and inactivity-based refetching). Only the app-level effects host should
+   * enable this; all other consumers share the query cache without them.
+   */
+  withSideEffects?: boolean;
+}
+
 /**
  * Hook that manages all notification state and actions for the application.
  *
  * Fetching, polling and caching are handled by TanStack Query; account and
- * settings state are read from the Zustand stores.
+ * settings state are read from the Zustand stores. Safe to use from any
+ * component - all consumers share the same query cache.
  *
  * @returns The current notifications state and action callbacks.
  */
-export const useNotifications = (): NotificationsState => {
+export const useNotifications = ({
+  withSideEffects = false,
+}: UseNotificationsOptions = {}): NotificationsState => {
   const queryClient = useQueryClient();
   const previousNotificationsRef = useRef<AccountNotifications[]>([]);
 
@@ -153,7 +165,7 @@ export const useNotifications = (): NotificationsState => {
     () => {
       refetch();
     },
-    fetchType === FetchType.INACTIVITY ? fetchIntervalMs : null,
+    withSideEffects && fetchType === FetchType.INACTIVITY ? fetchIntervalMs : null,
   );
 
   const notificationCount = getNotificationCount(notifications);
@@ -232,7 +244,7 @@ export const useNotifications = (): NotificationsState => {
 
   // Handle sound and native notifications when new notifications arrive
   useEffect(() => {
-    if (isLoading || isError || notifications.length === 0) {
+    if (!withSideEffects || isLoading || isError || notifications.length === 0) {
       return;
     }
 
@@ -268,6 +280,7 @@ export const useNotifications = (): NotificationsState => {
 
     previousNotificationsRef.current = unfilteredNotifications;
   }, [
+    withSideEffects,
     notifications,
     isLoading,
     isError,

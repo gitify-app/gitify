@@ -6,7 +6,7 @@ import { Banner, Button, IconButton, Link as PrimerLink, Stack, Text } from '@pr
 
 import { Constants } from '../../constants';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../../components/layout/Contents';
 import { Page } from '../../components/layout/Page';
@@ -35,7 +35,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
   const forge: Forge = 'github';
 
   const { loginWithDeviceFlowStart, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete } =
-    useAppContext();
+    useLogins();
 
   const [session, setSession] = useState<DeviceFlowSession | null>(null);
   const [isPolling, setIsPolling] = useState(false);

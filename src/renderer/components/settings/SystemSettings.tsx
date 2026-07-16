@@ -5,7 +5,7 @@ import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/re
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useShortcutRegistrationStore } from '../../hooks/useShortcutRegistration';
 import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
@@ -31,7 +31,12 @@ import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
 export const SystemSettings: FC = () => {
-  const { shortcutRegistrationError, clearShortcutRegistrationError } = useAppContext();
+  const shortcutRegistrationError = useShortcutRegistrationStore(
+    (s) => s.shortcutRegistrationError,
+  );
+  const clearShortcutRegistrationError = useShortcutRegistrationStore(
+    (s) => s.clearShortcutRegistrationError,
+  );
 
   // Setting store actions
   const toggleSetting = useSettingsStore((s) => s.toggleSetting);

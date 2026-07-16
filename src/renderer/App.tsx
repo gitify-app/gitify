@@ -5,7 +5,6 @@ import { BaseStyles, ThemeProvider } from '@primer/react';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 
-import { AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { AccountScopesRoute } from './routes/AccountScopes';
 import { FiltersRoute } from './routes/Filters';
@@ -19,6 +18,7 @@ import { SettingsRoute } from './routes/Settings';
 import { useAccountsStore } from './stores';
 import { initializeStoreSubscriptions } from './stores/subscriptions';
 
+import { GlobalEffects } from './components/GlobalEffects';
 import { GlobalShortcuts } from './components/GlobalShortcuts';
 
 import './App.css';
@@ -49,72 +49,68 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <BaseStyles>
-          <AppProvider>
-            <Router>
-              <GlobalShortcuts />
-              <AppLayout>
-                <Routes>
-                  <Route
-                    element={
-                      <RequireAuth>
-                        <NotificationsRoute />
-                      </RequireAuth>
-                    }
-                    path="/"
-                  />
-                  <Route
-                    element={
-                      <RequireAuth>
-                        <FiltersRoute />
-                      </RequireAuth>
-                    }
-                    path="/filters"
-                  />
-                  <Route
-                    element={
-                      <RequireAuth>
-                        <SettingsRoute />
-                      </RequireAuth>
-                    }
-                    path="/settings"
-                  />
-                  <Route
-                    element={
-                      <RequireAuth>
-                        <AccountsRoute />
-                      </RequireAuth>
-                    }
-                    path="/accounts"
-                  />
-                  <Route
-                    element={
-                      <RequireAuth>
-                        <AccountScopesRoute />
-                      </RequireAuth>
-                    }
-                    path="/account-scopes"
-                  />
-                  <Route element={<LoginRoute />} path="/login" />
-                  <Route
-                    element={<GitHubLoginWithDeviceFlowRoute />}
-                    path="/login/github/device-flow"
-                  />
-                  <Route
-                    element={<GitHubLoginWithPersonalAccessTokenRoute />}
-                    path="/login/github/personal-access-token"
-                  />
-                  <Route
-                    element={<GitHubLoginWithOAuthAppRoute />}
-                    path="/login/github/oauth-app"
-                  />
-                  <Route
-                    element={<GiteaLoginWithPersonalAccessTokenRoute />}
-                    path="/login/gitea/personal-access-token"
-                  />
-                </Routes>
-              </AppLayout>
-            </Router>
-          </AppProvider>
+          <GlobalEffects />
+          <Router>
+            <GlobalShortcuts />
+            <AppLayout>
+              <Routes>
+                <Route
+                  element={
+                    <RequireAuth>
+                      <NotificationsRoute />
+                    </RequireAuth>
+                  }
+                  path="/"
+                />
+                <Route
+                  element={
+                    <RequireAuth>
+                      <FiltersRoute />
+                    </RequireAuth>
+                  }
+                  path="/filters"
+                />
+                <Route
+                  element={
+                    <RequireAuth>
+                      <SettingsRoute />
+                    </RequireAuth>
+                  }
+                  path="/settings"
+                />
+                <Route
+                  element={
+                    <RequireAuth>
+                      <AccountsRoute />
+                    </RequireAuth>
+                  }
+                  path="/accounts"
+                />
+                <Route
+                  element={
+                    <RequireAuth>
+                      <AccountScopesRoute />
+                    </RequireAuth>
+                  }
+                  path="/account-scopes"
+                />
+                <Route element={<LoginRoute />} path="/login" />
+                <Route
+                  element={<GitHubLoginWithDeviceFlowRoute />}
+                  path="/login/github/device-flow"
+                />
+                <Route
+                  element={<GitHubLoginWithPersonalAccessTokenRoute />}
+                  path="/login/github/personal-access-token"
+                />
+                <Route element={<GitHubLoginWithOAuthAppRoute />} path="/login/github/oauth-app" />
+                <Route
+                  element={<GiteaLoginWithPersonalAccessTokenRoute />}
+                  path="/login/gitea/personal-access-token"
+                />
+              </Routes>
+            </AppLayout>
+          </Router>
         </BaseStyles>
       </ThemeProvider>
     </QueryClientProvider>
