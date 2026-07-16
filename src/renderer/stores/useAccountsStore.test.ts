@@ -6,6 +6,8 @@ import {
 } from '../__mocks__/account-mocks';
 import { mockRawUser } from '../utils/forges/github/__mocks__/response-mocks';
 
+import { Constants } from '../constants';
+
 import type { Account, Hostname, Link, Token } from '../types';
 import type { GetAuthenticatedUserResponse } from '../utils/forges/github/types';
 
@@ -226,6 +228,24 @@ describe('renderer/stores/useAccountsStore.ts', () => {
       const { result } = renderHook(() => useAccountsStore());
 
       expect(result.current.hasMultipleAccounts()).toBe(true);
+    });
+  });
+
+  describe('primaryAccountHostname', () => {
+    test('should return first (primary) account hostname when multiple', () => {
+      useAccountsStore.setState({
+        accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+      });
+
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccountHostname()).toBe(mockGitHubCloudAccount.hostname);
+    });
+
+    test('should use default hostname if no accounts', () => {
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccountHostname()).toBe(Constants.GITHUB_HOSTNAME);
     });
   });
 
