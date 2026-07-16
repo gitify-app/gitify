@@ -3,7 +3,7 @@ import { type FC, type MouseEvent, useState } from 'react';
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useNotifications } from '../../hooks/useNotifications';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -27,13 +27,13 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
   repoName,
   repoNotifications,
 }) => {
-  const { settings, markNotificationsAsRead, markNotificationsAsDone } = useAppContext();
+  const { markNotificationsAsRead, markNotificationsAsDone } = useNotifications();
 
   const [shouldAnimateRepositoryExit, setShouldAnimateRepositoryExit] = useState(false);
   const [isRepositoryNotificationsVisible, setIsRepositoryNotificationsVisible] = useState(true);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatarUrl;
-  const shouldAnimateExit = shouldRemoveNotificationsFromState(settings);
+  const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
   const actionRepositoryInteraction = () => {
     openRepository(repoNotifications[0].repository);

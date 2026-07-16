@@ -451,6 +451,55 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           >
             <input
               class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showAccountHeader"
+              id="showAccountHeader"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="showAccountHeader"
+            >
+              Show account header
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-showAccountHeader"
+              data-testid="tooltip-icon-tooltip-showAccountHeader"
+              id="tooltip-showAccountHeader"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
               data-testid="checkbox-wrapNotificationTitle"
               id="wrapNotificationTitle"
               type="checkbox"
@@ -964,63 +1013,6 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 />
               </svg>
             </button>
-          </div>
-          <div
-            class="rounded-md px-3 py-2 bg-gitify-accounts text-xs prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-testid="settings-scope-warning"
-            data-wrap="nowrap"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-alert-fill text-gitify-warning"
-              data-component="Octicon"
-              display="inline-block"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
-              viewBox="0 0 12 12"
-              width="14"
-            >
-              <path
-                d="M4.855.708c.5-.896 1.79-.896 2.29 0l4.675 8.351a1.312 1.312 0 0 1-1.146 1.954H1.33A1.313 1.313 0 0 1 .183 9.058ZM7 7V3H5v4Zm-1 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
-              />
-            </svg>
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="stretch"
-              data-direction="vertical"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <span
-                class="prc-Text-Text-9mHv3"
-              >
-                One or more accounts are missing scopes required for notification enrichment. Notification details may be incomplete.
-              </span>
-              <span
-                class="prc-Text-Text-9mHv3"
-              >
-                Visit
-                 
-                <button
-                  class="text-gitify-link cursor-pointer"
-                  type="button"
-                >
-                  Accounts → Scopes
-                </button>
-                 
-                to review.
-              </span>
-            </div>
           </div>
           <div
             class="pl-6"
@@ -2255,7 +2247,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_1r_"
+          aria-describedby="_r_1t_"
           class="prc-Button-ButtonBase-9n-Xk"
           data-component="Button"
           data-loading="false"
@@ -2285,7 +2277,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-component="Tooltip"
           data-direction="ne"
-          id="_r_1r_"
+          id="_r_1t_"
           popover="auto"
           role="tooltip"
         >
@@ -2302,7 +2294,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_1t_"
+          aria-describedby="_r_1v_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2340,7 +2332,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_1t_"
+            id="_r_1v_"
           >
             Accounts
             <span
@@ -2381,7 +2373,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </span>
         </span>
         <button
-          aria-describedby="_r_1v_"
+          aria-describedby="_r_21_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2419,7 +2411,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_1v_"
+            id="_r_21_"
           >
             Quit Gitify
             <span

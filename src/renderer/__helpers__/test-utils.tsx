@@ -1,114 +1,128 @@
 import { render } from '@testing-library/react';
-import { type ReactElement, type ReactNode, useMemo } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import type { ReactElement } from 'react';
+import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { AppContext, type AppContextState } from '../context/context';
-import { type FiltersStore, useFiltersStore } from '../stores';
+import { useShortcutRegistrationStore } from '../hooks/useShortcutRegistration';
+import { type FiltersStore, useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+
+import type { Account, SettingsState } from '../types';
+
+import {
+  type LoginsState,
+  type NotificationsState,
+  setIsOnlineOverride,
+  setLoginsOverrides,
+  setNotificationsOverrides,
+} from './hook-mocks';
 
 export { navigateMock } from './vitest.setup';
 export type DeepPartial<T> = { [K in keyof T]?: DeepPartial<T[K]> };
 
-const EMPTY_APP_CONTEXT: TestAppContext = {};
-
-/**
- * Test context
- */
-type TestAppContext = Partial<AppContextState>;
-
-interface RenderOptions extends TestAppContext {
-  initialEntries?: string[];
+interface RenderOptions extends Partial<NotificationsState>, Partial<LoginsState> {
+  /** Supports path strings or location objects (e.g. with `state` for re-auth). */
+  initialEntries?: InitialEntry[];
+  /** Seed the accounts store with these accounts. */
+  accounts?: Account[];
+  /** Seed the settings store with these settings. */
+  settings?: Partial<SettingsState>;
+  /** Seed the filters store. */
   filters?: Partial<FiltersStore>;
+  /** Override the mocked `useNotifications().refetchNotifications`. */
+  fetchNotifications?: NotificationsState['refetchNotifications'];
+  /** Override the mocked online status. */
+  isOnline?: boolean;
+  /** Seed the shortcut registration error state. */
+  shortcutRegistrationError?: string | null;
 }
 
-/**
- * Props for the AppContextProvider wrapper
- */
-interface AppContextProviderProps {
-  readonly children: ReactNode;
-  readonly value?: TestAppContext;
-  readonly initialEntries?: string[];
-}
-
-/**
- * Wrapper component that provides ThemeProvider, BaseStyles, and AppContext
- * with sensible defaults for testing.
- */
-function AppContextProvider({
-  children,
-  value = EMPTY_APP_CONTEXT,
-  initialEntries,
-}: AppContextProviderProps) {
-  const defaultValue: TestAppContext = useMemo(() => {
-    return {
-      auth: mockAuth,
-      settings: mockSettings,
-      isLoggedIn: true,
-
-      notifications: [],
-      notificationCount: 0,
-      unreadNotificationCount: 0,
-      hasNotifications: false,
-      hasUnreadNotifications: false,
-
-      status: 'success',
-      globalError: null,
-
-      // Default mock implementations for all required methods
-      loginWithDeviceFlowStart: vi.fn(),
-      loginWithDeviceFlowPoll: vi.fn(),
-      loginWithDeviceFlowComplete: vi.fn(),
-      loginWithOAuthApp: vi.fn(),
-      loginWithPersonalAccessToken: vi.fn(),
-      logoutFromAccount: vi.fn(),
-
-      fetchNotifications: vi.fn(),
-      removeAccountNotifications: vi.fn(),
-
-      markNotificationsAsRead: vi.fn(),
-      markNotificationsAsDone: vi.fn(),
-      unsubscribeNotification: vi.fn(),
-
-      clearFilters: vi.fn(),
-      resetSettings: vi.fn(),
-      updateSetting: vi.fn(),
-      updateFilter: vi.fn(),
-
-      shortcutRegistrationError: null,
-      clearShortcutRegistrationError: vi.fn(),
-
-      ...value,
-    } as TestAppContext;
-  }, [value]);
-
-  return (
-    <MemoryRouter initialEntries={initialEntries}>
-      <AppContext.Provider value={defaultValue as AppContextState}>{children}</AppContext.Provider>
-    </MemoryRouter>
-  );
-}
+const LOGIN_KEYS = [
+  'loginWithDeviceFlowStart',
+  'loginWithDeviceFlowPoll',
+  'loginWithDeviceFlowComplete',
+  'loginWithOAuthApp',
+  'loginWithPersonalAccessToken',
+  'logoutFromAccount',
+] as const;
 
 /**
  * Custom render that wraps components with all providers needed for testing:
- * MemoryRouter, AppContext, and Zustand stores.
+ * MemoryRouter, QueryClientProvider, and Zustand stores.
+ *
+ * Account, settings, and filter state is seeded directly into the Zustand
+ * stores; the remaining options override the globally mocked `useNotifications`,
+ * `useLogins`, and `useOnlineStatus` hooks (see hook-mocks.ts).
  *
  * Usage:
  *   renderWithProviders(<MyComponent />, { notifications, accounts, settings, filters, ... })
  */
 export function renderWithProviders(
   ui: ReactElement,
-  { initialEntries, filters, ...context }: RenderOptions = {},
+  {
+    initialEntries,
+    accounts,
+    settings,
+    filters,
+    fetchNotifications,
+    isOnline,
+    shortcutRegistrationError,
+    ...hookOverrides
+  }: RenderOptions = {},
 ) {
+  if (accounts) {
+    useAccountsStore.setState({ accounts });
+  }
+
+  if (settings) {
+    useSettingsStore.setState(settings);
+  }
+
   if (filters) {
     useFiltersStore.setState(filters);
   }
 
+  if (isOnline !== undefined) {
+    setIsOnlineOverride(isOnline);
+  }
+
+  if (shortcutRegistrationError !== undefined) {
+    useShortcutRegistrationStore.getState().setShortcutRegistrationError(shortcutRegistrationError);
+  }
+
+  const loginsOverrides: Partial<LoginsState> = {};
+  const notificationsOverrides: Partial<NotificationsState> = {};
+
+  for (const [key, value] of Object.entries(hookOverrides)) {
+    if ((LOGIN_KEYS as readonly string[]).includes(key)) {
+      loginsOverrides[key as keyof LoginsState] = value as never;
+    } else {
+      notificationsOverrides[key as keyof NotificationsState] = value as never;
+    }
+  }
+
+  if (fetchNotifications) {
+    notificationsOverrides.refetchNotifications = fetchNotifications;
+  }
+
+  setNotificationsOverrides(notificationsOverrides);
+  setLoginsOverrides(loginsOverrides);
+
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
+      },
+    },
+  });
+
   return render(ui, {
     wrapper: ({ children }) => (
-      <AppContextProvider initialEntries={initialEntries} value={context}>
-        {children}
-      </AppContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
+      </QueryClientProvider>
     ),
   });
 }

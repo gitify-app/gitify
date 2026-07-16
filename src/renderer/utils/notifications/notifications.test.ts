@@ -9,6 +9,8 @@ import {
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { useSettingsStore } from '../../stores';
+
 import {
   type AccountNotifications,
   type GitifyNotification,
@@ -79,12 +81,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     const mockAccounts: AccountNotifications[] = [acc1, acc2];
 
     it('assigns sequential order across all notifications when not grouped (DATE)', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.DATE,
-      };
+      useSettingsStore.setState({ groupBy: GroupBy.DATE });
 
-      stabilizeNotificationsOrder(mockAccounts, settings);
+      stabilizeNotificationsOrder(mockAccounts);
 
       expect(mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order)).toEqual([
         0, 1, 2, 3, 4, 5,
@@ -92,12 +91,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     });
 
     it('groups by repository when REPOSITORY and assigns order in first-seen repo groups', () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        groupBy: GroupBy.REPOSITORY,
-      };
+      useSettingsStore.setState({ groupBy: GroupBy.REPOSITORY });
 
-      stabilizeNotificationsOrder(mockAccounts, settings);
+      stabilizeNotificationsOrder(mockAccounts);
 
       expect(mockAccounts.flatMap((acc) => acc.notifications).map((n) => n.order)).toEqual([
         0, 2, 1, 3, 5, 4,

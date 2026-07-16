@@ -3,14 +3,13 @@ import { type FC, type MouseEvent, useMemo, useState } from 'react';
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useAccountsStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type Account, type GitifyError, type GitifyNotification, Size } from '../../types';
 
-import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   groupNotificationsByRepository,
   isGroupByRepository,
@@ -36,7 +35,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 ) => {
   const { account, showAccountHeader, notifications } = props;
 
-  const { auth, settings } = useAppContext();
+  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 
   const [isAccountNotificationsVisible, setIsAccountNotificationsVisible] = useState(true);
 
@@ -123,11 +122,11 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
 
       {isAccountNotificationsVisible && (
         <>
-          {props.error && <Oops error={props.error} fullHeight={!hasMultipleAccounts(auth)} />}
+          {props.error && <Oops error={props.error} fullHeight={!hasMultipleAccounts} />}
 
           {!hasNotifications && !props.error && <AllRead fullHeight={false} />}
 
-          {isGroupByRepository(settings)
+          {isGroupByRepository()
             ? groupedNotifications.map(([repoSlug, repoNotifications]) => (
                 <RepositoryNotifications
                   key={repoSlug}

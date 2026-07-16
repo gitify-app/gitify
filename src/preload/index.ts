@@ -80,9 +80,10 @@ export const api = {
      * Pass a negative number to set the error state color.
      *
      * @param notificationsCount - Number of unread notifications.
+     * @param isOnline - Whether the application is currently online.
      */
-    updateColor: (notificationsCount = 0) => {
-      sendMainEvent(EVENTS.UPDATE_ICON_COLOR, notificationsCount);
+    updateColor: (notificationsCount = 0, isOnline = true) => {
+      sendMainEvent(EVENTS.UPDATE_ICON_COLOR, { notificationsCount, isOnline });
     },
 
     /**

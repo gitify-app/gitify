@@ -39,6 +39,11 @@ export const Errors: Record<ErrorType, GitifyError> = {
     ],
     emojis: Constants.EMOJIS.ERRORS.NETWORK,
   },
+  OFFLINE: {
+    title: 'Network Offline',
+    descriptions: ['Your device is offline.', 'Please check your network connection.'],
+    emojis: Constants.EMOJIS.ERRORS.OFFLINE,
+  },
   RATE_LIMITED: {
     title: 'Rate Limited',
     descriptions: ['Please wait a while before trying again.'],

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useAccountsStore } from '../stores';
 
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
@@ -27,7 +27,7 @@ export const LoginRoute: FC = () => {
   const navigate = useNavigate();
   const adapters = listAdapters();
 
-  const { isLoggedIn } = useAppContext();
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
 
   const [activeForge, setActiveForge] = useState<Forge>(adapters[0].id);
   const activeAdapter = useMemo(
@@ -73,14 +73,6 @@ export const LoginRoute: FC = () => {
     }
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [isLoggedIn]);
-
-  const goTo = (method: LoginMethodDescriptor) => {
-    if (method.state) {
-      navigate(method.route, { state: method.state });
-    } else {
-      navigate(method.route);
-    }
-  };
 
   const primary = pickPrimaryMethod(activeAdapter);
   const alternates = activeAdapter.loginMethods.filter((m) => m !== primary);
@@ -181,7 +173,7 @@ export const LoginRoute: FC = () => {
                 block
                 data-testid={primary.testId}
                 leadingVisual={primary.icon}
-                onClick={() => goTo(primary)}
+                onClick={() => navigate(primary.route)}
                 variant="primary"
               >
                 Continue with {activeAdapter.displayName}
@@ -194,7 +186,7 @@ export const LoginRoute: FC = () => {
                 data-testid={method.testId}
                 key={method.testId}
                 leadingVisual={method.icon}
-                onClick={() => goTo(method)}
+                onClick={() => navigate(method.route)}
                 variant={method.variant ?? 'invisible'}
               >
                 {method.label}

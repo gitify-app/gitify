@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, Select, Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
@@ -11,20 +11,28 @@ import { Title } from '../primitives/Title';
 
 import { Theme } from '../../types';
 
-import { hasMultipleAccounts } from '../../utils/auth/utils';
 import {
   canDecreaseZoom,
   canIncreaseZoom,
   decreaseZoom,
   increaseZoom,
   resetZoomLevel,
-  zoomLevelToPercentage,
 } from '../../utils/ui/zoom';
 
 export const AppearanceSettings: FC = () => {
-  const { auth, settings, updateSetting } = useAppContext();
+  // Account store values
+  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts);
 
-  const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
+  // Setting store actions
+  const toggleSetting = useSettingsStore((s) => s.toggleSetting);
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+
+  // Setting store values
+  const theme = useSettingsStore((s) => s.theme);
+  const increaseContrast = useSettingsStore((s) => s.increaseContrast);
+  const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
+  const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
+  const zoomPercentage = useSettingsStore((s) => s.zoomPercentage);
 
   return (
     <fieldset>
@@ -35,8 +43,8 @@ export const AppearanceSettings: FC = () => {
           <FieldLabel label="Theme:" name="theme" />
           <Select
             data-testid="settings-theme"
-            onChange={(evt) => updateSetting('theme', evt.target.value)}
-            value={settings.theme}
+            onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
+            value={theme}
           >
             <Select.OptGroup label="System">
               <Select.Option value={Theme.SYSTEM}>System</Select.Option>
@@ -56,10 +64,10 @@ export const AppearanceSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.increaseContrast}
+          checked={increaseContrast}
           label="Increase contrast"
           name="increaseContrast"
-          onChange={() => updateSetting('increaseContrast', !settings.increaseContrast)}
+          onChange={() => toggleSetting('increaseContrast')}
           tooltip={
             <Text>
               Enable high contrast colors for improved legibility. This increases color contrast
@@ -109,24 +117,24 @@ export const AppearanceSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.showAccountHeader}
+          checked={showAccountHeader}
           label="Show account header"
           name="showAccountHeader"
-          onChange={() => updateSetting('showAccountHeader', !settings.showAccountHeader)}
+          onChange={() => toggleSetting('showAccountHeader')}
           tooltip={
             <Text>
               When enabled, displays an account header (avatar, username and quick links) above the
               notifications list.
             </Text>
           }
-          visible={!hasMultipleAccounts(auth)}
+          visible={!hasMultipleAccounts()}
         />
 
         <Checkbox
-          checked={settings.wrapNotificationTitle}
+          checked={wrapNotificationTitle}
           label="Show full notification title"
           name="wrapNotificationTitle"
-          onChange={() => updateSetting('wrapNotificationTitle', !settings.wrapNotificationTitle)}
+          onChange={() => toggleSetting('wrapNotificationTitle')}
           tooltip={
             <Text>
               Wrap long notification titles onto multiple lines instead of truncating with an

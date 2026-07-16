@@ -3,11 +3,19 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 
+import { useSettingsStore } from '../../stores';
+
 import * as logger from '../../utils/core/logger';
 import { SettingsReset } from './SettingsReset';
 
 describe('renderer/components/settings/SettingsReset.tsx', () => {
-  const resetSettingsMock = vi.fn();
+  let resetSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    resetSpy = vi.spyOn(useSettingsStore.getState(), 'reset');
+    // Discard the reset call made by the global test setup's store cleanup
+    resetSpy.mockClear();
+  });
 
   it('should reset default settings when `OK`', async () => {
     const rendererLogInfoSpy = vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
@@ -18,15 +26,13 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     ); // always click 'OK'
 
     await act(async () => {
-      renderWithProviders(<SettingsReset />, {
-        resetSettings: resetSettingsMock,
-      });
+      renderWithProviders(<SettingsReset />);
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
     await userEvent.click(screen.getByText('Reset'));
 
-    expect(resetSettingsMock).toHaveBeenCalled();
+    expect(resetSpy).toHaveBeenCalled();
     expect(rendererLogInfoSpy).toHaveBeenCalled();
   });
 
@@ -37,14 +43,12 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     ); // always click 'cancel'
 
     await act(async () => {
-      renderWithProviders(<SettingsReset />, {
-        resetSettings: resetSettingsMock,
-      });
+      renderWithProviders(<SettingsReset />);
     });
 
     await userEvent.click(screen.getByTestId('settings-reset'));
     await userEvent.click(screen.getByText('Cancel'));
 
-    expect(resetSettingsMock).not.toHaveBeenCalled();
+    expect(resetSpy).not.toHaveBeenCalled();
   });
 });

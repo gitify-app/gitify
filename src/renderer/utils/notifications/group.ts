@@ -1,4 +1,6 @@
-import type { GitifyNotification, SettingsState } from '../../types';
+import { useSettingsStore } from '../../stores';
+
+import type { GitifyNotification } from '../../types';
 
 /**
  * Returns true when settings say to group by date.
@@ -6,8 +8,8 @@ import type { GitifyNotification, SettingsState } from '../../types';
  * @param settings - The application settings.
  * @returns `true` when `groupBy` is `"DATE"`.
  */
-export function isGroupByDate(settings: SettingsState) {
-  return settings.groupBy === 'DATE';
+export function isGroupByDate() {
+  return useSettingsStore.getState().groupBy === 'DATE';
 }
 
 /**
@@ -16,8 +18,8 @@ export function isGroupByDate(settings: SettingsState) {
  * @param settings - The application settings.
  * @returns `true` when `groupBy` is `"REPOSITORY"`.
  */
-export function isGroupByRepository(settings: SettingsState) {
-  return settings.groupBy === 'REPOSITORY';
+export function isGroupByRepository() {
+  return useSettingsStore.getState().groupBy === 'REPOSITORY';
 }
 
 /**
@@ -62,9 +64,8 @@ export function groupNotificationsByRepository(
  */
 export function getFlattenedNotificationsByRepo(
   notifications: GitifyNotification[],
-  settings: SettingsState,
 ): GitifyNotification[] {
-  if (isGroupByRepository(settings)) {
+  if (isGroupByRepository()) {
     const groupedNotifications = groupNotificationsByRepository(notifications);
 
     return Array.from(groupedNotifications.values()).flat();

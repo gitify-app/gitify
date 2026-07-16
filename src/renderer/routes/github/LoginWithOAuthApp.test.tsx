@@ -1,27 +1,27 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 
-import type { ClientID, ClientSecret, Hostname } from '../types';
+import type { ClientID, ClientSecret, Hostname } from '../../types';
 
-import * as logger from '../utils/core/logger';
-import * as comms from '../utils/system/comms';
-import { type IFormData, LoginWithOAuthAppRoute, validateForm } from './LoginWithOAuthApp';
+import * as logger from '../../utils/core/logger';
+import * as comms from '../../utils/system/comms';
+import { GitHubLoginWithOAuthAppRoute, type IFormData, validateForm } from './LoginWithOAuthApp';
 
-describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
+describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
   const loginWithOAuthAppMock = vi.fn();
 
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   it('renders correctly', () => {
-    const tree = renderWithProviders(<LoginWithOAuthAppRoute />);
+    const tree = renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
   it('let us go back', async () => {
-    renderWithProviders(<LoginWithOAuthAppRoute />);
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
 
@@ -57,7 +57,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
 
   describe("'Create new OAuth App' button", () => {
     it('should be disabled if no hostname configured', async () => {
-      renderWithProviders(<LoginWithOAuthAppRoute />);
+      renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
 
@@ -67,7 +67,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     });
 
     it('should open in browser if hostname configured', async () => {
-      renderWithProviders(<LoginWithOAuthAppRoute />);
+      renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
       const hostname = screen.getByTestId('login-hostname');
       await userEvent.clear(hostname);
@@ -82,7 +82,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   it('should login using a token - success', async () => {
     loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
-    renderWithProviders(<LoginWithOAuthAppRoute />, {
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />, {
       loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
@@ -108,7 +108,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
-    renderWithProviders(<LoginWithOAuthAppRoute />, {
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />, {
       loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
@@ -133,7 +133,7 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should render the form with errors', async () => {
-    renderWithProviders(<LoginWithOAuthAppRoute />);
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
     await userEvent.clear(hostname);
@@ -151,10 +151,23 @@ describe('renderer/routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('should open help docs in the browser', async () => {
-    renderWithProviders(<LoginWithOAuthAppRoute />);
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should toggle client secret visibility', async () => {
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
+
+    const secretInput = screen.getByTestId('login-clientSecret');
+    expect(secretInput).toHaveAttribute('type', 'password');
+
+    await userEvent.click(screen.getByLabelText('Show token'));
+    expect(secretInput).toHaveAttribute('type', 'text');
+
+    await userEvent.click(screen.getByLabelText('Hide token'));
+    expect(secretInput).toHaveAttribute('type', 'password');
   });
 });
