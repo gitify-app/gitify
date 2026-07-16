@@ -10,8 +10,7 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
-import { useFiltersStore } from '../../stores';
+import { useFiltersStore, useSettingsStore } from '../../stores';
 
 import { Title } from '../primitives/Title';
 
@@ -26,11 +25,11 @@ import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificat
 import { TokenSearchInput } from './TokenSearchInput';
 
 export const SearchFilter: FC = () => {
-  const { settings } = useAppContext();
-
   const updateFilter = useFiltersStore((s) => s.updateFilter);
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
   const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
+
+  const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
 
   const addIncludeSearchToken = (value: string) => {
     if (!value || includeSearchTokens.includes(value as SearchToken)) {
@@ -76,10 +75,7 @@ export const SearchFilter: FC = () => {
                 <Stack direction="horizontal" gap="condensed">
                   <PersonIcon size={Size.SMALL} />
                   <Text
-                    className={cn(
-                      'text-gitify-caution',
-                      !settings.detailedNotifications && 'line-through',
-                    )}
+                    className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
                     Author (author:handle)
                   </Text>

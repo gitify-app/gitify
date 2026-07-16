@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 
 import { BaseStyles, ThemeProvider } from '@primer/react';
 
-import { AppProvider } from './context/App';
-import { useAppContext } from './hooks/useAppContext';
+import { QueryClientProvider } from '@tanstack/react-query';
+
 import { AccountsRoute } from './routes/Accounts';
 import { AccountScopesRoute } from './routes/AccountScopes';
 import { FiltersRoute } from './routes/Filters';
@@ -14,25 +15,41 @@ import { GitHubLoginWithPersonalAccessTokenRoute } from './routes/github/LoginWi
 import { LoginRoute } from './routes/Login';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
+import { useAccountsStore } from './stores';
+import { initializeStoreSubscriptions } from './stores/subscriptions';
 
+import { GlobalEffects } from './components/GlobalEffects';
 import { GlobalShortcuts } from './components/GlobalShortcuts';
 
 import './App.css';
 import { AppLayout } from './components/layout/AppLayout';
 
+import { queryClient } from './utils/api/queryClient';
+import { migrateLegacyStoreToZustand } from './utils/core/storage';
+
+// Run migration from legacy local storage to Zustand stores
+migrateLegacyStoreToZustand();
+
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation();
 
-  const { isLoggedIn } = useAppContext();
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
 
   return isLoggedIn ? children : <Navigate replace state={{ from: location }} to="/login" />;
 }
 
 export const App = () => {
+  // Initialize store subscriptions with proper cleanup
+  useEffect(() => {
+    const cleanup = initializeStoreSubscriptions();
+    return cleanup;
+  }, []);
+
   return (
-    <ThemeProvider>
-      <BaseStyles>
-        <AppProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <BaseStyles>
+          <GlobalEffects />
           <Router>
             <GlobalShortcuts />
             <AppLayout>
@@ -94,8 +111,8 @@ export const App = () => {
               </Routes>
             </AppLayout>
           </Router>
-        </AppProvider>
-      </BaseStyles>
-    </ThemeProvider>
+        </BaseStyles>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };

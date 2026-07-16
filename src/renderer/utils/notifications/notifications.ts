@@ -1,7 +1,8 @@
+import { useAccountsStore, useSettingsStore } from '../../stores';
+
 import type {
   AccountNotifications,
   AuthState,
-  GitifyState,
   RawGitifyNotification,
   SettingsState,
 } from '../../types';
@@ -9,7 +10,7 @@ import type {
 import { determineFailureType } from '../api/errors';
 import { rendererLogError, toError } from '../core/logger';
 import { getAdapter } from '../forges/registry';
-import { filterBaseNotifications, filterDetailedNotifications } from './filters/filter';
+import { filterBaseNotifications } from './filters/filter';
 import { formatNotification } from './formatters';
 import { getFlattenedNotificationsByRepo } from './group';
 
@@ -57,30 +58,35 @@ function getNotifications(auth: AuthState, settings: SettingsState) {
  *  - Formatting
  *  - Ordering
  *
- * @param state - The Gitify state.
  * @returns A promise that resolves to an array of account notifications.
  */
-export async function getAllNotifications(state: GitifyState): Promise<AccountNotifications[]> {
-  if (!state.auth || !state.settings) {
-    return [];
-  }
-
-  const { auth, settings } = state;
+export async function getAllNotifications(): Promise<AccountNotifications[]> {
+  const auth: AuthState = { accounts: useAccountsStore.getState().accounts };
+  const settings = useSettingsStore.getState();
 
   const accountNotifications: AccountNotifications[] = await Promise.all(
     getNotifications(auth, settings)
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          let notifications: RawGitifyNotification[] = await accountNotifications.notifications;
+          const notifications: RawGitifyNotification[] = await accountNotifications.notifications;
 
-          notifications = filterBaseNotifications(notifications);
+          // All notifications are cached unfiltered; filtering happens in the
+          // notifications query `select` so filter changes apply instantly
+          // without refetching. Enrichment is limited to notifications that
+          // pass the current base filters to bound API usage - notifications
+          // hidden by an active filter are enriched on a later poll once they
+          // become visible.
+          const baseFiltered = filterBaseNotifications(notifications);
 
-          notifications = await enrichNotifications(notifications, settings);
+          const enriched = await enrichNotifications(baseFiltered, settings);
+          const enrichedById = new Map(
+            enriched.map((notification) => [notification.id, notification]),
+          );
 
-          notifications = filterDetailedNotifications(notifications, settings);
-
-          const formatted = notifications.map((notification) => formatNotification(notification));
+          const formatted = notifications.map((notification) =>
+            formatNotification(enrichedById.get(notification.id) ?? notification),
+          );
 
           return {
             account: accountNotifications.account,
@@ -104,7 +110,7 @@ export async function getAllNotifications(state: GitifyState): Promise<AccountNo
   );
 
   // Set the order property for the notifications
-  stabilizeNotificationsOrder(accountNotifications, settings);
+  stabilizeNotificationsOrder(accountNotifications);
 
   return accountNotifications;
 }
@@ -142,16 +148,12 @@ export async function enrichNotifications(
  * during notification interaction events (mark as read, mark as done, etc.)
  *
  * @param accountNotifications
- * @param settings
  */
-export function stabilizeNotificationsOrder(
-  accountNotifications: AccountNotifications[],
-  settings: SettingsState,
-) {
+export function stabilizeNotificationsOrder(accountNotifications: AccountNotifications[]) {
   let orderIndex = 0;
 
   for (const account of accountNotifications) {
-    const flattenedNotifications = getFlattenedNotificationsByRepo(account.notifications, settings);
+    const flattenedNotifications = getFlattenedNotificationsByRepo(account.notifications);
 
     for (const notification of flattenedNotifications) {
       notification.order = orderIndex++;

@@ -6,7 +6,7 @@ import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@p
 
 import { Constants } from '../../constants';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../../components/layout/Contents';
 import { Page } from '../../components/layout/Page';
@@ -68,7 +68,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
 
   const forge: Forge = 'github';
 
-  const { loginWithOAuthApp } = useAppContext();
+  const { loginWithOAuthApp } = useLogins();
 
   const [shouldMaskClientSecret, setShouldMaskClientSecret] = useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);

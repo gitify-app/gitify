@@ -34,11 +34,11 @@ export const OAUTH_SCOPE: Record<OAuthScope, OAuthScopeDetails> = {
 export const Constants = {
   // Local storage keys
   STORAGE: {
-    // Legacy storage key (soon to be deprecated)
+    // Legacy storage key (deprecated - used for migration only)
     LEGACY: 'gitify-storage',
-    // ACCOUNTS: 'gitify-accounts',
+    ACCOUNTS: 'gitify-accounts',
     FILTERS: 'gitify-filters',
-    // SETTINGS: 'gitify-settings',
+    SETTINGS: 'gitify-settings',
   },
 
   // GitHub OAuth Scopes — each tier is an ordered array of OAUTH_SCOPE objects.
@@ -68,6 +68,7 @@ export const Constants = {
       BAD_CREDENTIALS: ['🔓'],
       MISSING_SCOPES: ['🔭'],
       NETWORK: ['🛜'],
+      OFFLINE: ['🛜'],
       RATE_LIMITED: ['😮‍💨'],
       UNKNOWN: ['🤔', '🥲', '😳', '🫠', '🙃', '🙈'],
     },
@@ -79,6 +80,9 @@ export const Constants = {
   FETCH_NOTIFICATIONS_INTERVAL_STEP_MS: 60 * 1000, // 1 minute
 
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
+
+  // Query stale time in milliseconds, used by TanStack Query client
+  QUERY_STALE_TIME_MS: 30 * 1000, // 30 seconds
 
   // GraphQL Argument Defaults
   GRAPHQL_ARGS: {

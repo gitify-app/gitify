@@ -61,7 +61,7 @@ class MockNotification {
 (global as unknown as { Notification: unknown }).Notification = MockNotification;
 
 interface TestApi {
-  tray: { updateColor: (n?: number) => void };
+  tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
@@ -93,7 +93,10 @@ describe('preload/index', () => {
 
     api.tray.updateColor(-1);
 
-    expect(sendMainEventMock).toHaveBeenNthCalledWith(1, EVENTS.UPDATE_ICON_COLOR, -1);
+    expect(sendMainEventMock).toHaveBeenNthCalledWith(1, EVENTS.UPDATE_ICON_COLOR, {
+      isOnline: true,
+      notificationsCount: -1,
+    });
   });
 
   it('openExternalLink sends event with payload', async () => {

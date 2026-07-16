@@ -2,6 +2,7 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
+import { mockAuth } from '../__mocks__/state-mocks';
 
 import { type FiltersStore, useFiltersStore } from '../stores';
 
@@ -20,7 +21,9 @@ describe('renderer/routes/Filters.tsx', () => {
   describe('General', () => {
     it('should render itself & its children', async () => {
       await act(async () => {
-        renderWithProviders(<FiltersRoute />);
+        renderWithProviders(<FiltersRoute />, {
+          accounts: mockAuth.accounts,
+        });
       });
 
       expect(screen.getByTestId('filters')).toMatchSnapshot();

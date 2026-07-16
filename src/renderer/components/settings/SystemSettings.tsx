@@ -5,14 +5,14 @@ import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/re
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { defaultSettings } from '../../context/defaults';
-import { useAppContext } from '../../hooks/useAppContext';
+import { useShortcutRegistrationStore } from '../../hooks/useShortcutRegistration';
+import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
-import { OpenPreference } from '../../types';
+import { type KeyboardAcceleratorShortcut, OpenPreference } from '../../types';
 
 import {
   formatAcceleratorForDisplay,
@@ -28,9 +28,29 @@ import {
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
+const defaultSettings = DEFAULT_SETTINGS_STATE;
+
 export const SystemSettings: FC = () => {
-  const { settings, updateSetting, shortcutRegistrationError, clearShortcutRegistrationError } =
-    useAppContext();
+  const shortcutRegistrationError = useShortcutRegistrationStore(
+    (s) => s.shortcutRegistrationError,
+  );
+  const clearShortcutRegistrationError = useShortcutRegistrationStore(
+    (s) => s.clearShortcutRegistrationError,
+  );
+
+  // Setting store actions
+  const toggleSetting = useSettingsStore((s) => s.toggleSetting);
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+
+  // Setting store values
+  const openLinks = useSettingsStore((s) => s.openLinks);
+  const keyboardShortcut = useSettingsStore((s) => s.keyboardShortcut);
+  const openGitifyShortcut = useSettingsStore((s) => s.openGitifyShortcut);
+  const showNotifications = useSettingsStore((s) => s.showNotifications);
+  const playSound = useSettingsStore((s) => s.playSound);
+  const notificationVolume = useSettingsStore((s) => s.notificationVolume);
+  const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
+  const openAtStartup = useSettingsStore((s) => s.openAtStartup);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
@@ -75,7 +95,7 @@ export const SystemSettings: FC = () => {
       const accelerator = keyboardEventToAccelerator(event);
       if (accelerator) {
         clearShortcutRegistrationError();
-        updateSetting('openGitifyShortcut', accelerator);
+        updateSetting('openGitifyShortcut', accelerator as KeyboardAcceleratorShortcut);
         setLiveModifierAccelerator('');
         setRecordingShortcut(false);
       }
@@ -93,7 +113,7 @@ export const SystemSettings: FC = () => {
     };
   }, [recordingShortcut, updateSetting, clearShortcutRegistrationError]);
 
-  const shortcutDisplay = formatAcceleratorForDisplay(settings.openGitifyShortcut, isMac);
+  const shortcutDisplay = formatAcceleratorForDisplay(openGitifyShortcut, isMac);
 
   const hasLiveModifiers = liveModifierAccelerator.length > 0;
   const liveModifierDisplay = formatAcceleratorForDisplay(liveModifierAccelerator, isMac);
@@ -126,7 +146,7 @@ export const SystemSettings: FC = () => {
               </Text>
             </Stack>
           }
-          value={settings.openLinks}
+          value={openLinks}
         />
 
         {shortcutRegistrationError && (
@@ -148,10 +168,10 @@ export const SystemSettings: FC = () => {
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <Checkbox
-            checked={settings.keyboardShortcut}
+            checked={keyboardShortcut}
             label="Global shortcut"
             name="keyboardShortcut"
-            onChange={() => updateSetting('keyboardShortcut', !settings.keyboardShortcut)}
+            onChange={() => toggleSetting('keyboardShortcut')}
             tooltip={
               <Stack direction="vertical" gap="condensed">
                 <Text>Global keyboard shortcut to show or hide {APPLICATION.NAME}.</Text>
@@ -193,7 +213,7 @@ export const SystemSettings: FC = () => {
           <ButtonGroup
             className="ml-2"
             data-testid="settings-shortcut-group"
-            hidden={!settings.keyboardShortcut}
+            hidden={!keyboardShortcut}
           >
             <IconButton
               aria-label="Edit global shortcut"
@@ -218,7 +238,7 @@ export const SystemSettings: FC = () => {
             <IconButton
               aria-label="Reset global shortcut to default"
               data-testid="settings-shortcut-reset"
-              disabled={settings.openGitifyShortcut === defaultSettings.openGitifyShortcut}
+              disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
               icon={SyncIcon}
               onClick={() => {
                 clearShortcutRegistrationError();
@@ -232,10 +252,10 @@ export const SystemSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.showNotifications}
+          checked={showNotifications}
           label="Show system notifications"
           name="showNotifications"
-          onChange={() => updateSetting('showNotifications', !settings.showNotifications)}
+          onChange={() => toggleSetting('showNotifications')}
           tooltip={
             <Text>Display native operating system notifications for new unread notifications.</Text>
           }
@@ -243,40 +263,36 @@ export const SystemSettings: FC = () => {
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <Checkbox
-            checked={settings.playSound}
+            checked={playSound}
             label="Play sound"
             name="playSound"
-            onChange={() => updateSetting('playSound', !settings.playSound)}
+            onChange={() => toggleSetting('playSound')}
           />
 
-          <ButtonGroup
-            className="ml-2"
-            data-testid="settings-volume-group"
-            hidden={!settings.playSound}
-          >
+          <ButtonGroup className="ml-2" data-testid="settings-volume-group" hidden={!playSound}>
             <IconButton
               aria-label="Volume down"
               data-testid="settings-volume-down"
-              disabled={!canDecreaseVolume(settings.notificationVolume)}
+              disabled={!canDecreaseVolume(notificationVolume)}
               icon={VolumeDownIcon}
               onClick={() => {
-                updateSetting('notificationVolume', decreaseVolume(settings.notificationVolume));
+                updateSetting('notificationVolume', decreaseVolume(notificationVolume));
               }}
               size="small"
               unsafeDisableTooltip={true}
             />
 
             <Button aria-label="Volume percentage" disabled size="small">
-              {settings.notificationVolume.toFixed(0)}%
+              {notificationVolume.toFixed(0)}%
             </Button>
 
             <IconButton
               aria-label="Volume up"
               data-testid="settings-volume-up"
-              disabled={!canIncreaseVolume(settings.notificationVolume)}
+              disabled={!canIncreaseVolume(notificationVolume)}
               icon={VolumeUpIcon}
               onClick={() => {
-                updateSetting('notificationVolume', increaseVolume(settings.notificationVolume));
+                updateSetting('notificationVolume', increaseVolume(notificationVolume));
               }}
               size="small"
               unsafeDisableTooltip={true}
@@ -297,10 +313,10 @@ export const SystemSettings: FC = () => {
         </Stack>
 
         <Checkbox
-          checked={settings.keepWindowOnBlur}
+          checked={keepWindowOnBlur}
           label="Keep window open when it loses focus"
           name="keepWindowOnBlur"
-          onChange={() => updateSetting('keepWindowOnBlur', !settings.keepWindowOnBlur)}
+          onChange={() => toggleSetting('keepWindowOnBlur')}
           tooltip={
             <Text>
               Prevent the {APPLICATION.NAME} window from automatically hiding when you click outside
@@ -310,10 +326,10 @@ export const SystemSettings: FC = () => {
         />
 
         <Checkbox
-          checked={settings.openAtStartup}
+          checked={openAtStartup}
           label="Open at startup"
           name="openAtStartup"
-          onChange={() => updateSetting('openAtStartup', !settings.openAtStartup)}
+          onChange={() => toggleSetting('openAtStartup')}
           tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
           visible={!window.gitify.platform.isLinux()}
         />

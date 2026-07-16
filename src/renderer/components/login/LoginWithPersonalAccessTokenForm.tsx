@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
-import { useAppContext } from '../../hooks/useAppContext';
+import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../layout/Contents';
 import { Page } from '../layout/Page';
@@ -93,7 +93,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
 
   const adapter = getAdapter(forge);
 
-  const { loginWithPersonalAccessToken } = useAppContext();
+  const { loginWithPersonalAccessToken } = useLogins();
 
   const [shouldMaskPersonalAccessToken, setShouldMaskPersonalAccessToken] = useState(true);
   const [isVerifyingCredentials, setIsVerifyingCredentials] = useState(false);

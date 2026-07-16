@@ -1,3 +1,5 @@
+import { screen } from '@testing-library/react';
+
 import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
@@ -37,6 +39,14 @@ describe('renderer/routes/Notifications.tsx', () => {
       settings: { ...mockSettings, showAccountHeader: true },
     });
     expect(tree.container).toMatchSnapshot();
+  });
+
+  it('should render offline error when not online', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      isOnline: false,
+    });
+
+    expect(screen.getByText('Oops')).toBeInTheDocument();
   });
 
   describe('should render itself & its children (error conditions - oops)', () => {

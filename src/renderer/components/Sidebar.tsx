@@ -15,19 +15,23 @@ import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
 
-import { useAppContext } from '../hooks/useAppContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useShortcutActions } from '../hooks/useShortcutActions';
-import { useFiltersStore } from '../stores';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const { status, isLoggedIn, settings, notificationCount, hasUnreadNotifications } =
-    useAppContext();
+  const { status, notificationCount, hasUnreadNotifications } = useNotifications();
 
   const { shortcuts } = useShortcutActions();
 
+  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
+
   const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
+
+  const fetchReadNotifications = useSettingsStore((s) => s.fetchReadNotifications);
+  const participating = useSettingsStore((s) => s.participating);
 
   const isLoading = status === 'loading';
 
@@ -53,7 +57,7 @@ export const Sidebar: FC = () => {
         <IconButton
           aria-label="Notifications"
           data-testid="sidebar-notifications"
-          description={`${notificationCount} ${settings.fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
+          description={`${notificationCount} ${fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
           icon={BellIcon}
           keybindingHint={shortcuts.myNotifications.key}
           onClick={() => shortcuts.myNotifications.action()}
@@ -68,16 +72,14 @@ export const Sidebar: FC = () => {
               aria-label="Toggle focused mode"
               data-testid="sidebar-focused-mode"
               description={
-                settings.participating
-                  ? 'Focused (participating only)'
-                  : 'Participating and watching'
+                participating ? 'Focused (participating only)' : 'Participating and watching'
               }
-              icon={settings.participating ? CrosshairsIcon : EyeIcon}
+              icon={participating ? CrosshairsIcon : EyeIcon}
               keybindingHint={shortcuts.focusedMode.key}
               onClick={() => shortcuts.focusedMode.action()}
               size="small"
               tooltipDirection="e"
-              variant={settings.participating ? 'primary' : 'invisible'}
+              variant={participating ? 'primary' : 'invisible'}
             />
 
             <IconButton

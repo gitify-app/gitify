@@ -1,4 +1,6 @@
-import type { Account, AccountNotifications, GitifyNotification, SettingsState } from '../../types';
+import { useSettingsStore } from '../../stores';
+
+import type { Account, AccountNotifications, GitifyNotification } from '../../types';
 
 import { getAccountUUID } from '../auth/utils';
 
@@ -8,7 +10,8 @@ import { getAccountUUID } from '../auth/utils';
  * When `delayNotificationState` or `fetchReadNotifications` is enabled,
  * notifications stay in the list with reduced opacity instead of being removed.
  */
-export function shouldRemoveNotificationsFromState(settings: SettingsState): boolean {
+export function shouldRemoveNotificationsFromState(): boolean {
+  const settings = useSettingsStore.getState();
   return !settings.delayNotificationState && !settings.fetchReadNotifications;
 }
 
@@ -19,14 +22,12 @@ export function shouldRemoveNotificationsFromState(settings: SettingsState): boo
  * notifications are marked as read instead of being removed from the list.
  *
  * @param account - The account whose notifications should be updated.
- * @param settings - Application settings controlling removal vs. mark-as-read behaviour.
  * @param notificationsToRemove - The notifications to remove or mark as read.
  * @param accountNotifications - The full list of account notifications to update.
  * @returns A new account notifications array with the specified notifications removed or marked as read.
  */
 export function removeNotificationsForAccount(
   account: Account,
-  settings: SettingsState,
   notificationsToRemove: GitifyNotification[],
   accountNotifications: AccountNotifications[],
 ): AccountNotifications[] {
@@ -38,7 +39,7 @@ export function removeNotificationsForAccount(
     notificationsToRemove.map((notification) => notification.id),
   );
 
-  const shouldRemove = shouldRemoveNotificationsFromState(settings);
+  const shouldRemove = shouldRemoveNotificationsFromState();
 
   return accountNotifications.map((accountNotifications) =>
     getAccountUUID(account) === getAccountUUID(accountNotifications.account)

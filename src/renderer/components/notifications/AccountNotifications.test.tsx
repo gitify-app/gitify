@@ -2,7 +2,10 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../__mocks__/account-mocks';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
@@ -79,7 +82,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
 
     await act(async () => {
       tree = renderWithProviders(<AccountNotifications {...props} />, {
-        auth: { accounts: [mockGitHubCloudAccount] },
+        accounts: [mockGitHubCloudAccount],
       });
     });
 
@@ -101,7 +104,9 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
-      tree = renderWithProviders(<AccountNotifications {...props} />);
+      tree = renderWithProviders(<AccountNotifications {...props} />, {
+        accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+      });
     });
 
     expect(tree!.container).toMatchSnapshot();

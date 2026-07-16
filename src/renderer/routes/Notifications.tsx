@@ -1,7 +1,8 @@
-import { type FC, useMemo, useRef } from 'react';
+import { type FC, useMemo } from 'react';
 
-import { useAppContext } from '../hooks/useAppContext';
-import { useFiltersStore } from '../stores';
+import { useNotifications } from '../hooks/useNotifications';
+import { useOnlineStatus } from '../hooks/useOnlineStatus';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { AllRead } from '../components/AllRead';
 import { Contents } from '../components/layout/Contents';
@@ -10,53 +11,22 @@ import { AccountNotifications } from '../components/notifications/AccountNotific
 import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
+import { Errors } from '../utils/core/errors';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, status, globalError, settings, hasNotifications } = useAppContext();
+  const { notifications, status, globalError, hasNotifications } = useNotifications();
+  const isOnline = useOnlineStatus();
+
   const filteredAccounts = useFiltersStore((s) => s.accounts);
-
-  // Store previous successful state
-  const prevStateRef = useRef({
-    notifications,
-    status,
-    globalError,
-    hasNotifications,
-  });
-
-  // Update ref only if not loading
-  if (status !== 'loading') {
-    prevStateRef.current = {
-      notifications,
-      status,
-      globalError,
-      hasNotifications,
-    };
-  }
-
-  // Use previous state if loading
-  const displayState =
-    status === 'loading'
-      ? prevStateRef.current
-      : {
-          notifications,
-          status,
-          globalError,
-          hasNotifications,
-        };
-
-  const hasMultipleAccounts = useMemo(
-    () => displayState.notifications.length > 1,
-    [displayState.notifications],
-  );
+  const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
+  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 
   const visibleNotifications = useMemo(
     () =>
       filteredAccounts.length === 0
-        ? displayState.notifications
-        : displayState.notifications.filter((n) =>
-            filteredAccounts.includes(getAccountUUID(n.account)),
-          ),
-    [displayState.notifications, filteredAccounts],
+        ? notifications
+        : notifications.filter((n) => filteredAccounts.includes(getAccountUUID(n.account))),
+    [notifications, filteredAccounts],
   );
 
   const hasNoAccountErrors = useMemo(
@@ -64,11 +34,15 @@ export const NotificationsRoute: FC = () => {
     [visibleNotifications],
   );
 
-  if (displayState.status === 'error') {
-    return <Oops error={displayState.globalError!} />;
+  if (!isOnline) {
+    return <Oops error={Errors.OFFLINE} />;
   }
 
-  if (!displayState.hasNotifications && hasNoAccountErrors) {
+  if (status === 'error') {
+    return <Oops error={globalError ?? Errors.UNKNOWN} />;
+  }
+
+  if (!hasNotifications && hasNoAccountErrors) {
     return <AllRead />;
   }
 
@@ -82,7 +56,7 @@ export const NotificationsRoute: FC = () => {
               error={accountNotification.error}
               key={getAccountUUID(accountNotification.account)}
               notifications={accountNotification.notifications}
-              showAccountHeader={hasMultipleAccounts || settings.showAccountHeader}
+              showAccountHeader={hasMultipleAccounts || showAccountHeader}
             />
           );
         })}

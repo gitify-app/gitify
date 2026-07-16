@@ -2,20 +2,28 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
+
+import { useSettingsStore } from '../stores';
 
 import * as comms from '../utils/system/comms';
 import { Sidebar } from './Sidebar';
 
 describe('renderer/components/Sidebar.tsx', () => {
   const fetchNotificationsMock = vi.fn();
-  const updateSettingMock = vi.fn();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
+
+  let updateSettingSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
+  });
 
   it('should render itself & its children (logged in)', () => {
     const tree = renderWithProviders(<Sidebar />, {
       initialEntries: ['/'],
-      isLoggedIn: true,
+      accounts: [mockGitHubCloudAccount],
     });
 
     expect(tree.container).toMatchSnapshot();
@@ -24,7 +32,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   it('should render itself & its children (logged out)', () => {
     const tree = renderWithProviders(<Sidebar />, {
       initialEntries: ['/landing'],
-      isLoggedIn: false,
+      accounts: [],
     });
 
     expect(tree.container).toMatchSnapshot();
@@ -71,7 +79,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   describe('Focused mode toggle', () => {
     it('renders the focused mode is off', () => {
       renderWithProviders(<Sidebar />, {
-        isLoggedIn: true,
+        accounts: [mockGitHubCloudAccount],
         settings: { ...mockSettings, participating: false },
       });
 
@@ -80,7 +88,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     it('renders the focused mode is on', () => {
       renderWithProviders(<Sidebar />, {
-        isLoggedIn: true,
+        accounts: [mockGitHubCloudAccount],
         settings: { ...mockSettings, participating: true },
       });
 
@@ -89,22 +97,23 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     it('toggles participating when clicked', async () => {
       renderWithProviders(<Sidebar />, {
-        isLoggedIn: true,
+        accounts: [mockGitHubCloudAccount],
         settings: { ...mockSettings, participating: false },
-        updateSetting: updateSettingMock,
         fetchNotifications: fetchNotificationsMock,
       });
 
       await userEvent.click(screen.getByTestId('sidebar-focused-mode'));
 
-      expect(updateSettingMock).toHaveBeenCalledTimes(1);
-      expect(updateSettingMock).toHaveBeenCalledWith('participating', true);
+      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+      expect(updateSettingSpy).toHaveBeenCalledWith('participating', true);
     });
   });
 
   describe('Filter notifications', () => {
     it('go to the filters route', async () => {
-      renderWithProviders(<Sidebar />);
+      renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+      });
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
@@ -113,7 +122,10 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('go to the home if filters path already shown', async () => {
-      renderWithProviders(<Sidebar />, { initialEntries: ['/filters'] });
+      renderWithProviders(<Sidebar />, {
+        initialEntries: ['/filters'],
+        accounts: [mockGitHubCloudAccount],
+      });
 
       await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
@@ -123,6 +135,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     it('highlight filters sidebar if any are saved', () => {
       renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
         settings: mockSettings,
         filters: { reasons: ['assign'] },
       });
@@ -154,6 +167,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   describe('Refresh Notifications', () => {
     it('should refresh the notifications when status is not loading', async () => {
       renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
         fetchNotifications: fetchNotificationsMock,
         status: 'success',
       });
@@ -165,6 +179,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     it('should not refresh the notifications when status is loading', async () => {
       renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
         fetchNotifications: fetchNotificationsMock,
         status: 'loading',
       });
@@ -177,7 +192,9 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('Settings', () => {
     it('go to the settings route', async () => {
-      renderWithProviders(<Sidebar />);
+      renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+      });
 
       await userEvent.click(screen.getByTestId('sidebar-settings'));
 
@@ -188,6 +205,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     it('go to the home if settings path already shown', async () => {
       renderWithProviders(<Sidebar />, {
         initialEntries: ['/settings'],
+        accounts: [mockGitHubCloudAccount],
         fetchNotifications: fetchNotificationsMock,
       });
 
@@ -203,7 +221,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
     renderWithProviders(<Sidebar />, {
-      isLoggedIn: false,
+      accounts: [],
     });
 
     await userEvent.click(screen.getByTestId('sidebar-quit'));

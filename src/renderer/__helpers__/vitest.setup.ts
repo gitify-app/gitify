@@ -1,5 +1,10 @@
 import '@testing-library/jest-dom/vitest';
-import { useFiltersStore } from '../stores';
+// Import store modules directly (not the stores barrel) to keep this setup
+// file's import graph light. The accounts store pulls in the forge adapter
+// graph, so it is loaded lazily in beforeEach (after each test file's
+// vi.mock registrations) to avoid pre-caching unmocked forge modules.
+import useFiltersStore from '../stores/useFiltersStore';
+import useSettingsStore from '../stores/useSettingsStore';
 
 /**
  * Shared navigate mock — import from test-utils in any test that needs to assert on navigation
@@ -14,6 +19,42 @@ vi.mock('react-router-dom', async () => ({
 vi.mock('../utils/core/random', () => ({
   randomElement: vi.fn((arr: unknown[]) => arr[0]),
 }));
+
+/**
+ * Globally mock the app-level hooks so component tests can inject state via
+ * `renderWithProviders` options (see hook-mocks.ts). Hook test files that
+ * exercise the real implementations opt out with `vi.unmock(...)`.
+ */
+vi.mock('../hooks/useNotifications', async () => {
+  const actual = await vi.importActual<typeof import('../hooks/useNotifications')>(
+    '../hooks/useNotifications',
+  );
+  const { getMockedNotificationsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useNotifications: () => getMockedNotificationsState(),
+  };
+});
+
+vi.mock('../hooks/useLogins', async () => {
+  const actual = await vi.importActual<typeof import('../hooks/useLogins')>('../hooks/useLogins');
+  const { getMockedLoginsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useLogins: () => getMockedLoginsState(),
+  };
+});
+
+vi.mock('../hooks/useOnlineStatus', async () => {
+  const actual = await vi.importActual<typeof import('../hooks/useOnlineStatus')>(
+    '../hooks/useOnlineStatus',
+  );
+  const { getMockedIsOnline } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useOnlineStatus: () => getMockedIsOnline(),
+  };
+});
 
 function getRequestTarget(input: RequestInfo | URL): string {
   if (typeof input === 'string') {
@@ -84,8 +125,20 @@ beforeEach(() => {
     }),
   );
   useFiltersStore.getState().reset();
+  useSettingsStore.getState().reset();
   navigateMock.mockReset();
   window.gitify = createGitifyBridgeApi();
+});
+
+beforeEach(async () => {
+  const { default: useAccountsStore } = await import('../stores/useAccountsStore');
+  useAccountsStore.getState().reset();
+
+  const { resetHookMocks } = await import('./hook-mocks');
+  resetHookMocks();
+
+  const { useShortcutRegistrationStore } = await import('../hooks/useShortcutRegistration');
+  useShortcutRegistrationStore.getState().reset();
 });
 
 afterEach(() => {
