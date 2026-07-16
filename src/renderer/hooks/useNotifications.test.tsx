@@ -13,7 +13,7 @@ import {
   mockSingleAccountNotifications,
 } from '../__mocks__/notifications-mocks';
 
-import { useAccountsStore, useSettingsStore } from '../stores';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import type { AccountNotifications, Percentage } from '../types';
 
@@ -96,6 +96,28 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.hasNotifications).toBe(true);
       expect(result.current.hasUnreadNotifications).toBe(true);
       expect(result.current.globalError).toBeUndefined();
+    });
+
+    it('applies and loosens filters instantly from the cache without refetching', async () => {
+      // Two cloud notifications with reasons 'subscribed' and 'author'
+      getAllNotificationsMock.mockResolvedValue([mockMultipleAccountNotifications[0]]);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.notificationCount).toBe(2));
+
+      // Narrowing: only the 'author' notification remains visible
+      act(() => {
+        useFiltersStore.setState({ reasons: ['author'] });
+      });
+      await waitFor(() => expect(result.current.notificationCount).toBe(1));
+
+      // Loosening: the hidden notification reappears from the cache
+      act(() => {
+        useFiltersStore.getState().reset();
+      });
+      await waitFor(() => expect(result.current.notificationCount).toBe(2));
+
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
     });
 
     it('sets error status and global error when all accounts share the same error', async () => {

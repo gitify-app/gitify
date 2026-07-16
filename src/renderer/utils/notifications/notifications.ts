@@ -10,7 +10,7 @@ import type {
 import { determineFailureType } from '../api/errors';
 import { rendererLogError, toError } from '../core/logger';
 import { getAdapter } from '../forges/registry';
-import { filterBaseNotifications, filterDetailedNotifications } from './filters/filter';
+import { filterBaseNotifications } from './filters/filter';
 import { formatNotification } from './formatters';
 import { getFlattenedNotificationsByRepo } from './group';
 
@@ -69,15 +69,24 @@ export async function getAllNotifications(): Promise<AccountNotifications[]> {
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          let notifications: RawGitifyNotification[] = await accountNotifications.notifications;
+          const notifications: RawGitifyNotification[] = await accountNotifications.notifications;
 
-          notifications = filterBaseNotifications(notifications);
+          // All notifications are cached unfiltered; filtering happens in the
+          // notifications query `select` so filter changes apply instantly
+          // without refetching. Enrichment is limited to notifications that
+          // pass the current base filters to bound API usage - notifications
+          // hidden by an active filter are enriched on a later poll once they
+          // become visible.
+          const baseFiltered = filterBaseNotifications(notifications);
 
-          notifications = await enrichNotifications(notifications, settings);
+          const enriched = await enrichNotifications(baseFiltered, settings);
+          const enrichedById = new Map(
+            enriched.map((notification) => [notification.id, notification]),
+          );
 
-          notifications = filterDetailedNotifications(notifications);
-
-          const formatted = notifications.map((notification) => formatNotification(notification));
+          const formatted = notifications.map((notification) =>
+            formatNotification(enrichedById.get(notification.id) ?? notification),
+          );
 
           return {
             account: accountNotifications.account,

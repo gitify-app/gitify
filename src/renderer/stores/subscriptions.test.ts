@@ -1,10 +1,8 @@
 import type { Percentage } from '../types';
 
-import { queryClient } from '../utils/api/queryClient';
 import * as comms from '../utils/system/comms';
 import * as zoom from '../utils/ui/zoom';
 import { initializeStoreSubscriptions } from './subscriptions';
-import useFiltersStore from './useFiltersStore';
 import useSettingsStore from './useSettingsStore';
 
 describe('renderer/stores/subscriptions.ts', () => {
@@ -16,7 +14,6 @@ describe('renderer/stores/subscriptions.ts', () => {
   const setUseAlternateIdleIconSpy = vi
     .spyOn(comms, 'setUseAlternateIdleIcon')
     .mockImplementation(vi.fn());
-  const invalidateQueriesSpy = vi.spyOn(queryClient, 'invalidateQueries');
 
   let cleanup: (() => void) | null = null;
 
@@ -82,17 +79,6 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     expect(useSettingsStore.getState().zoomPercentage).toBe(80);
     vi.useRealTimers();
-  });
-
-  it('invalidates the notifications query when filters change', () => {
-    cleanup = initializeStoreSubscriptions();
-    vi.clearAllMocks();
-
-    useFiltersStore.getState().updateFilter('reasons', 'subscribed', true);
-
-    expect(invalidateQueriesSpy).toHaveBeenCalledWith(
-      expect.objectContaining({ queryKey: ['notifications'] }),
-    );
   });
 
   it('stops reacting to changes after cleanup', () => {

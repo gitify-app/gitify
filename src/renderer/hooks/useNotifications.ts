@@ -85,8 +85,8 @@ export const useNotifications = (): NotificationsState => {
   const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
 
-  // Query key excludes filters; filter changes re-run the select for instant
-  // narrowing and trigger a refetch via the subscription in subscriptions.ts
+  // Query key excludes filters: the cache holds unfiltered data and filter
+  // changes re-run the select below, applying instantly without refetching
   const notificationsQueryKey = useMemo(
     () =>
       notificationsKeys.list(

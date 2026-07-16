@@ -5,8 +5,6 @@
  * to ensure proper lifecycle management and cleanup on unmount.
  */
 
-import { queryClient } from '../utils/api/queryClient';
-import { notificationsKeys } from '../utils/api/queryKeys';
 import {
   setAutoLaunch,
   setKeepWindowOnBlur,
@@ -14,7 +12,7 @@ import {
   setUseUnreadActiveIcon,
 } from '../utils/system/comms';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
-import { useFiltersStore, useSettingsStore } from './';
+import { useSettingsStore } from './';
 
 /**
  * Initialize all store side-effect subscriptions and startup values for main.
@@ -111,18 +109,9 @@ export function initializeStoreSubscriptions(): () => void {
     clearTimeout(timeout);
   });
 
-  // ========================================================================
-  // Filters Store Side Effects
-  // ========================================================================
-
-  // Subscribe to filters store changes
-  const unsubFilters = useFiltersStore.subscribe(() => {
-    // When filters change, the query select re-runs immediately for instant
-    // narrowing, and invalidation refetches so notifications hidden by the
-    // previous filters (which are filtered out at fetch time) reappear.
-    queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
-  });
-  unsubscribers.push(unsubFilters);
+  // Filter changes need no subscription here: the notifications query caches
+  // unfiltered data and useNotifications recreates its `select` whenever the
+  // filters store changes, so filtering is applied instantly without refetching.
 
   // Return cleanup function that unsubscribes all listeners
   return () => {
