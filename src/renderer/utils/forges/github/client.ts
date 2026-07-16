@@ -1,6 +1,6 @@
 import { Constants } from '../../../constants';
 
-import { useSettingsStore } from '../../../stores';
+import useSettingsStore from '../../../stores/useSettingsStore';
 
 import type { Account, Link, RawGitifyNotification } from '../../../types';
 import type {
