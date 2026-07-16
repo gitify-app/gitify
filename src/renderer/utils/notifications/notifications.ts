@@ -1,8 +1,8 @@
 import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import type {
+  Account,
   AccountNotifications,
-  AuthState,
   RawGitifyNotification,
   SettingsState,
 } from '../../types';
@@ -37,8 +37,8 @@ export function getUnreadNotificationCount(accountNotifications: AccountNotifica
   );
 }
 
-function getNotifications(auth: AuthState, settings: SettingsState) {
-  return auth.accounts.map((account) => {
+function getNotifications(accounts: Account[], settings: SettingsState) {
+  return accounts.map((account) => {
     return {
       account,
       notifications: getAdapter(account).listNotifications(account, settings),
@@ -61,11 +61,10 @@ function getNotifications(auth: AuthState, settings: SettingsState) {
  * @returns A promise that resolves to an array of account notifications.
  */
 export async function getAllNotifications(): Promise<AccountNotifications[]> {
-  const auth: AuthState = { accounts: useAccountsStore.getState().accounts };
   const settings = useSettingsStore.getState();
 
   const accountNotifications: AccountNotifications[] = await Promise.all(
-    getNotifications(auth, settings)
+    getNotifications(useAccountsStore.getState().accounts, settings)
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {

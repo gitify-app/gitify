@@ -133,10 +133,6 @@ export interface SystemSettingsState {
   keepWindowOnBlur: boolean;
 }
 
-export interface AuthState {
-  accounts: Account[];
-}
-
 export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',

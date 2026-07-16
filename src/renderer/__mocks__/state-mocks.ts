@@ -1,8 +1,8 @@
 import { Constants } from '../constants';
 
 import {
+  type Account,
   type AppearanceSettingsState,
-  type AuthState,
   FetchType,
   GroupBy,
   type KeyboardAcceleratorShortcut,
@@ -18,7 +18,7 @@ import {
 
 import { mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount } from './account-mocks';
 
-export const mockAuth: AuthState = {
+export const mockAuth: { accounts: Account[] } = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
 };
 
