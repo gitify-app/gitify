@@ -7,7 +7,6 @@ import {
   mockPartialGitifyNotification,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { useSettingsStore } from '../../stores';
 
@@ -16,7 +15,6 @@ import {
   type GitifyNotification,
   GroupBy,
   type Link,
-  type SettingsState,
 } from '../../types';
 
 import * as apiClient from '../forges/github/client';
@@ -108,12 +106,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         type: 'Issue',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
       }) as GitifyNotification;
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: false,
-      };
+      useSettingsStore.setState({ detailedNotifications: false });
 
-      const result = await enrichNotifications([notification], settings);
+      const result = await enrichNotifications([notification]);
 
       expect(result).toEqual([notification]);
     });
@@ -125,12 +120,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         type: 'CheckSuite',
         url: null,
       }) as GitifyNotification;
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: true,
-      };
+      useSettingsStore.setState({ detailedNotifications: true });
 
-      const result = await enrichNotifications([notification], settings);
+      const result = await enrichNotifications([notification]);
 
       expect(result).toHaveLength(1);
       expect(result[0].subject.title).toBe('CI workflow run');
@@ -138,12 +130,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     });
 
     it('should handle empty notifications array', async () => {
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: true,
-      };
+      useSettingsStore.setState({ detailedNotifications: true });
 
-      const result = await enrichNotifications([], settings);
+      const result = await enrichNotifications([]);
 
       expect(result).toEqual([]);
       expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
@@ -165,12 +154,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         }),
       ) as GitifyNotification[];
 
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: true,
-      };
+      useSettingsStore.setState({ detailedNotifications: true });
 
-      await enrichNotifications(notifications, settings);
+      await enrichNotifications(notifications);
 
       // Should be called 3 times: batches of 100, 100, 50
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(3);
@@ -200,12 +186,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         }),
       ) as GitifyNotification[];
 
-      const settings: SettingsState = {
-        ...mockSettings,
-        detailedNotifications: true,
-      };
+      useSettingsStore.setState({ detailedNotifications: true });
 
-      await enrichNotifications(notifications, settings);
+      await enrichNotifications(notifications);
 
       // Should be called once for single batch
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);

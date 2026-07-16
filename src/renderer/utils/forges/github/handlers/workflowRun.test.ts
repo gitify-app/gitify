@@ -1,5 +1,4 @@
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../../__mocks__/state-mocks';
 
 import type { GitifyNotification, Link } from '../../../../types';
 
@@ -13,7 +12,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(mockNotification, mockSettings);
+      const result = await workflowRunHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'WAITING',
@@ -28,7 +27,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(mockNotification, mockSettings);
+      const result = await workflowRunHandler.enrich(mockNotification);
 
       // Returns empty object when state cannot be determined
       expect(result).toEqual({});
@@ -40,7 +39,7 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(mockNotification, mockSettings);
+      const result = await workflowRunHandler.enrich(mockNotification);
 
       // Returns empty object when title cannot be parsed
       expect(result).toEqual({});

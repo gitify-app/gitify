@@ -8,7 +8,6 @@ import {
   type GitifySubject,
   IconColor,
   type Link,
-  type SettingsState,
   type UserType,
 } from '../../../../types';
 import type { NotificationTypeHandler } from './types';
@@ -16,10 +15,7 @@ import type { NotificationTypeHandler } from './types';
 export class DefaultHandler implements NotificationTypeHandler {
   supportsMergedQueryEnrichment = false;
 
-  async enrich(
-    _notification: GitifyNotification,
-    _settings: SettingsState,
-  ): Promise<Partial<GitifySubject>> {
+  async enrich(_notification: GitifyNotification): Promise<Partial<GitifySubject>> {
     return {};
   }
 

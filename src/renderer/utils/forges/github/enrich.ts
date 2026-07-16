@@ -1,4 +1,4 @@
-import type { GitifySubject, RawGitifyNotification, SettingsState } from '../../../types';
+import type { GitifySubject, RawGitifyNotification } from '../../../types';
 
 import { rendererLogError, rendererLogWarn, toError } from '../../core/logger';
 import { fetchNotificationDetailsForList } from './client';
@@ -23,14 +23,11 @@ export const GITHUB_API_MERGE_BATCH_SIZE = 100;
  */
 export async function enrichGitHubNotifications(
   notifications: RawGitifyNotification[],
-  settings: SettingsState,
 ): Promise<RawGitifyNotification[]> {
   const fragments = await fetchInBatches(notifications);
 
   return Promise.all(
-    notifications.map((notification) =>
-      enrichSingle(notification, settings, fragments.get(notification)),
-    ),
+    notifications.map((notification) => enrichSingle(notification, fragments.get(notification))),
   );
 }
 
@@ -67,14 +64,13 @@ async function fetchInBatches(
 
 async function enrichSingle(
   notification: RawGitifyNotification,
-  settings: SettingsState,
   fetchedData: FetchMergedDetailsTemplateQuery['repository'] | undefined,
 ): Promise<RawGitifyNotification> {
   let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(notification, settings, fetchedData);
+    additionalSubjectDetails = await handler.enrich(notification, fetchedData);
   } catch (err) {
     rendererLogError(
       'enrichGitHubNotifications',
