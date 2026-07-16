@@ -56,16 +56,16 @@ const useAccountsStore = create<AccountsStore>()(
         hostname: Hostname,
         forge: Forge = 'github',
       ) => {
-        const encryptedToken = await encryptValue(token);
+        const encryptedToken = (await encryptValue(token)) as Token;
 
-        let newAccount = {
+        let newAccount: Account = {
           forge,
           hostname: hostname,
           method: method,
           platform: resolvePlatform(forge, hostname),
           token: encryptedToken,
           user: null, // Will be updated during the refresh call below
-        } as Account;
+        };
 
         newAccount = await refreshAccount(newAccount);
         const newAccountUUID = getAccountUUID(newAccount);
