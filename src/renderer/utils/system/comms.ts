@@ -1,8 +1,8 @@
 import type { ISafeStorageDecryptResult } from '../../../shared/events';
 
-import { OpenPreference, useSettingsStore } from '../../stores';
+import { useSettingsStore } from '../../stores';
 
-import type { Link } from '../../types';
+import { type Link, OpenPreference } from '../../types';
 
 /**
  * Open a URL in the user's default browser.

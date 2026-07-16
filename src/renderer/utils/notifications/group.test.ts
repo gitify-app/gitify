@@ -1,8 +1,8 @@
 import { mockGitifyNotificationForRepoName } from '../../__mocks__/notifications-mocks';
 
-import { GroupBy, useSettingsStore } from '../../stores';
+import { useSettingsStore } from '../../stores';
 
-import type { GitifyNotification } from '../../types';
+import { type GitifyNotification, GroupBy } from '../../types';
 
 import {
   getFlattenedNotificationsByRepo,

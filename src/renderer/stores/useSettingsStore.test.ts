@@ -2,8 +2,7 @@ import { act, renderHook } from '@testing-library/react';
 
 import { Theme } from '../../shared/theme';
 
-import type { Percentage } from '../types';
-import { OpenPreference } from './types';
+import { OpenPreference, type Percentage } from '../types';
 
 import { DEFAULT_SETTINGS_STATE } from './defaults';
 import useSettingsStore from './useSettingsStore';

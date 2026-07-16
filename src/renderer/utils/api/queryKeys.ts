@@ -1,3 +1,5 @@
+import type { AccountUUID } from '../../types';
+
 /**
  * Centralized query key factory for TanStack Query.
  * This ensures consistent query keys across the application and makes
@@ -17,13 +19,17 @@ export const notificationsKeys = {
   all: ['notifications'] as const,
 
   /**
-   * Key for listing notifications with specific parameters
-   * @param accountsLength - Number of accounts
+   * Key for listing notifications with specific parameters.
+   *
+   * Keyed by account identities (not count) so adding, removing, or swapping
+   * accounts always resolves to a distinct cache entry.
+   *
+   * @param accountUUIDs - The UUIDs of all accounts being fetched
    * @param fetchReadNotifications - Whether to fetch only unread notifications
    * @param participating - Whether to fetch only participating notifications
    */
-  list: (accountsLength: number, fetchReadNotifications: boolean, participating: boolean) =>
-    [...notificationsKeys.all, accountsLength, fetchReadNotifications, participating] as const,
+  list: (accountUUIDs: AccountUUID[], fetchReadNotifications: boolean, participating: boolean) =>
+    [...notificationsKeys.all, accountUUIDs, fetchReadNotifications, participating] as const,
 };
 
 /**
@@ -37,7 +43,7 @@ export const accountsKeys = {
 
   /**
    * Key for refreshing account details
-   * @param accountsLength - Number of accounts
+   * @param accountUUIDs - The UUIDs of all accounts being refreshed
    */
-  refresh: (accountsLength: number) => [...accountsKeys.all, accountsLength] as const,
+  refresh: (accountUUIDs: AccountUUID[]) => [...accountsKeys.all, accountUUIDs] as const,
 };

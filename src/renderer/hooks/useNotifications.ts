@@ -2,16 +2,18 @@ import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { FetchType, useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
-import type {
-  Account,
-  AccountNotifications,
-  GitifyError,
-  GitifyNotification,
-  Status,
+import {
+  type Account,
+  type AccountNotifications,
+  FetchType,
+  type GitifyError,
+  type GitifyNotification,
+  type Status,
 } from '../types';
 
+import { isMarkAsDoneFeatureSupported, isUnsubscribeThreadSupported } from '../utils/api/features';
 import { notificationsKeys } from '../utils/api/queryKeys';
 import { getAccountUUID } from '../utils/auth/utils';
 import { areAllAccountErrorsSame, doesAllAccountsHaveErrors, Errors } from '../utils/core/errors';
@@ -90,11 +92,11 @@ export const useNotifications = (): NotificationsState => {
   const notificationsQueryKey = useMemo(
     () =>
       notificationsKeys.list(
-        accounts.length,
+        accounts.map(getAccountUUID),
         fetchReadNotifications,
         fetchParticipatingNotifications,
       ),
-    [accounts.length, fetchReadNotifications, fetchParticipatingNotifications],
+    [accounts, fetchReadNotifications, fetchParticipatingNotifications],
   );
 
   // Create select function that depends on filter state
@@ -312,7 +314,7 @@ export const useNotifications = (): NotificationsState => {
 
       // Forges that don't support a distinct "done" state fall back to
       // marking as read so the user-visible action still removes the thread.
-      if (!getAdapter(account).capabilities.markAsDone(account)) {
+      if (!isMarkAsDoneFeatureSupported(account)) {
         await markNotificationsAsReadMutation.mutateAsync({
           readNotifications: doneNotifications,
         });
@@ -354,15 +356,16 @@ export const useNotifications = (): NotificationsState => {
 
   const unsubscribeNotificationMutation = useMutation({
     mutationFn: async ({ notification }: { notification: GitifyNotification }) => {
-      const adapter = getAdapter(notification.account);
-
       // Forges without thread-subscription support cannot unsubscribe; the UI
       // already hides the action, but treat duplicate calls as no-ops.
-      if (!adapter.capabilities.unsubscribeThread(notification.account)) {
+      if (!isUnsubscribeThreadSupported(notification.account)) {
         return;
       }
 
-      await adapter.unsubscribeThread(notification.account, notification.id);
+      await getAdapter(notification.account).unsubscribeThread(
+        notification.account,
+        notification.id,
+      );
 
       if (markAsDoneOnUnsubscribe) {
         await markNotificationsAsDoneMutation.mutateAsync({

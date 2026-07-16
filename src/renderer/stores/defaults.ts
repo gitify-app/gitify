@@ -1,19 +1,19 @@
 import { Constants } from '../constants';
 
-import type { KeyboardAcceleratorShortcut, Percentage } from '../types';
 import {
-  type AccountsState,
   type AppearanceSettingsState,
   FetchType,
-  type FiltersState,
   GroupBy,
+  type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
   OpenPreference,
+  type Percentage,
   type SettingsState,
   type SystemSettingsState,
   Theme,
   type TraySettingsState,
-} from './types';
+} from '../types';
+import type { AccountsState, FiltersState } from './types';
 
 /**
  * Default accounts state

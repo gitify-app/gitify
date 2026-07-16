@@ -14,16 +14,6 @@ import type {
 } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 
-// Re-export state types and enums so consumers can import them alongside the stores.
-export type {
-  AppearanceSettingsState,
-  NotificationSettingsState,
-  SettingsState,
-  SystemSettingsState,
-  TraySettingsState,
-} from '../types';
-export { FetchType, GroupBy, OpenPreference, Theme } from '../types';
-
 // ============================================================================
 // Accounts Store Types
 // ============================================================================

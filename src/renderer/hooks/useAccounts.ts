@@ -7,6 +7,7 @@ import { Constants } from '../constants';
 import { useAccountsStore } from '../stores';
 
 import { accountsKeys } from '../utils/api/queryKeys';
+import { getAccountUUID } from '../utils/auth/utils';
 
 interface AccountsState {
   refetchAccounts: () => Promise<void>;
@@ -25,7 +26,7 @@ export const useAccounts = (): AccountsState => {
   const hasMigratedTokensRef = useRef(false);
 
   const { refetch } = useQuery<boolean, Error>({
-    queryKey: accountsKeys.refresh(accounts.length),
+    queryKey: accountsKeys.refresh(accounts.map(getAccountUUID)),
 
     queryFn: async () => {
       // TODO - Remove token migration logic in future release
