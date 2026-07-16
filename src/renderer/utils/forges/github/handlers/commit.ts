@@ -9,7 +9,6 @@ import type {
   GitifyNotificationUser,
   GitifySubject,
   Link,
-  SettingsState,
 } from '../../../../types';
 import type { RawUser } from '../types';
 
@@ -33,10 +32,7 @@ function toNotificationUser(
 }
 
 class CommitHandler extends DefaultHandler {
-  override async enrich(
-    notification: GitifyNotification,
-    _settings: SettingsState,
-  ): Promise<Partial<GitifySubject>> {
+  override async enrich(notification: GitifyNotification): Promise<Partial<GitifySubject>> {
     const commitState: GitifyNotificationState | undefined = undefined; // Commit notifications are stateless
 
     // Return early if this notification would be hidden by filters

@@ -1,6 +1,8 @@
 import { Constants } from '../../../constants';
 
-import type { Account, Link, RawGitifyNotification, SettingsState } from '../../../types';
+import { useSettingsStore } from '../../../stores';
+
+import type { Account, Link, RawGitifyNotification } from '../../../types';
 import type {
   GetCommitCommentResponse,
   GetCommitResponse,
@@ -49,8 +51,8 @@ export async function fetchAuthenticatedUserDetails(account: Account) {
  */
 export async function listNotificationsForAuthenticatedUser(
   account: Account,
-  settings: SettingsState,
 ): Promise<ListNotificationsForAuthenticatedUserResponse> {
+  const settings = useSettingsStore.getState();
   const octokit = await createOctokitClient(account, 'rest');
 
   if (settings.fetchAllNotifications) {

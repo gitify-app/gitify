@@ -9,7 +9,6 @@ import type {
   GitifyNotificationUser,
   GitifySubject,
   Link,
-  SettingsState,
   UserType,
 } from '../../../../types';
 
@@ -18,10 +17,7 @@ import { getRelease } from '../client';
 import { DefaultHandler, defaultHandler } from './default';
 
 class ReleaseHandler extends DefaultHandler {
-  override async enrich(
-    notification: GitifyNotification,
-    _settings: SettingsState,
-  ): Promise<Partial<GitifySubject>> {
+  override async enrich(notification: GitifyNotification): Promise<Partial<GitifySubject>> {
     const releaseState: GitifyNotificationState | undefined = undefined; // Release notifications are stateless
 
     // Return early if this notification would be hidden by filters

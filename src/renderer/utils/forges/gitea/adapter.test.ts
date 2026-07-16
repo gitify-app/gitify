@@ -3,7 +3,9 @@ import { KeyIcon } from '@primer/octicons-react';
 import { mockGiteaAccount } from '../../../__mocks__/account-mocks';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 
-import type { Hostname, Link, SettingsState, Token } from '../../../types';
+import { useSettingsStore } from '../../../stores';
+
+import type { Hostname, Link, Token } from '../../../types';
 
 import { giteaAdapter } from './adapter';
 import * as client from './client';
@@ -129,10 +131,9 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         },
       ]);
 
-      const result = await giteaAdapter.listNotifications(mockGiteaAccount, {
-        fetchAllNotifications: false,
-        fetchReadNotifications: false,
-      } as SettingsState);
+      useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
+
+      const result = await giteaAdapter.listNotifications(mockGiteaAccount);
 
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('99');
