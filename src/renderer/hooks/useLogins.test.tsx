@@ -10,10 +10,9 @@ import { Constants } from '../constants';
 
 import { useAccountsStore } from '../stores';
 
-import type { AuthState, ClientID, ClientSecret, Token } from '../types';
+import type { ClientID, ClientSecret, Token } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
-import * as authUtils from '../utils/auth/utils';
 import { getAdapter } from '../utils/forges/registry';
 import { useLogins } from './useLogins';
 
@@ -36,19 +35,20 @@ const renderLoginsHook = () => renderHook(() => useLogins(), { wrapper: createWr
 
 describe('renderer/hooks/useLogins.ts', () => {
   const removeAccountNotificationsMock = vi.fn();
+  let createAccountSpy: ReturnType<typeof vi.spyOn>;
+  let removeAccountSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
     removeAccountNotificationsMock.mockReset();
     setNotificationsOverrides({ removeAccountNotifications: removeAccountNotificationsMock });
-  });
 
-  const addAccountSpy = vi
-    .spyOn(authUtils, 'addAccount')
-    .mockImplementation(vi.fn())
-    .mockResolvedValueOnce({
-      accounts: [mockGitHubCloudAccount],
-    } as unknown as AuthState);
-  const removeAccountSpy = vi.spyOn(authUtils, 'removeAccount');
+    createAccountSpy = vi
+      .spyOn(useAccountsStore.getState(), 'createAccount')
+      .mockResolvedValue(undefined);
+    createAccountSpy.mockClear();
+    removeAccountSpy = vi.spyOn(useAccountsStore.getState(), 'removeAccount');
+    removeAccountSpy.mockClear();
+  });
 
   it('loginWithDeviceFlowStart delegates to the forge adapter', async () => {
     const adapter = getAdapter('github');
@@ -76,7 +76,7 @@ describe('renderer/hooks/useLogins.ts', () => {
     expect(pollSpy).toHaveBeenCalledWith('session');
   });
 
-  it('loginWithDeviceFlowComplete calls addAccount', async () => {
+  it('loginWithDeviceFlowComplete creates the account', async () => {
     const { result } = renderLoginsHook();
 
     await act(async () => {
@@ -87,13 +87,7 @@ describe('renderer/hooks/useLogins.ts', () => {
       );
     });
 
-    expect(addAccountSpy).toHaveBeenCalledWith(
-      expect.anything(),
-      'GitHub App',
-      'token',
-      'github.com',
-      'github',
-    );
+    expect(createAccountSpy).toHaveBeenCalledWith('GitHub App', 'token', 'github.com', 'github');
   });
 
   it('loginWithOAuthApp delegates to the forge adapter', async () => {
@@ -163,6 +157,6 @@ describe('renderer/hooks/useLogins.ts', () => {
     });
 
     expect(removeAccountNotificationsMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
-    expect(removeAccountSpy).toHaveBeenCalledWith(expect.anything(), mockGitHubCloudAccount);
+    expect(removeAccountSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 });

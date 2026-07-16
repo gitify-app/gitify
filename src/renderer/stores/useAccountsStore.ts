@@ -7,17 +7,9 @@ import type { Account, Forge, Hostname, Token } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 import type { AccountsState, AccountsStore } from './types';
 
-import {
-  addAccount,
-  getAccountUUID,
-  getPrimaryAccountHostname,
-  hasAccounts,
-  hasMultipleAccounts,
-  isValidHostname,
-  refreshAccount,
-  removeAccount,
-} from '../utils/auth/utils';
-import { rendererLogWarn } from '../utils/core/logger';
+import { resolvePlatform } from '../utils/auth/platform';
+import { getAccountUUID, isValidHostname, refreshAccount } from '../utils/auth/utils';
+import { rendererLogInfo, rendererLogWarn } from '../utils/core/logger';
 import { getAdapter, isKnownForge } from '../utils/forges/registry';
 import { decryptValue, encryptValue } from '../utils/system/comms';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
@@ -64,15 +56,43 @@ const useAccountsStore = create<AccountsStore>()(
         hostname: Hostname,
         forge: Forge = 'github',
       ) => {
-        const updated = await addAccount(
-          { accounts: [...get().accounts] },
-          method,
-          token,
-          hostname,
+        const encryptedToken = await encryptValue(token);
+
+        let newAccount = {
           forge,
+          hostname: hostname,
+          method: method,
+          platform: resolvePlatform(forge, hostname),
+          token: encryptedToken,
+          user: null, // Will be updated during the refresh call below
+        } as Account;
+
+        newAccount = await refreshAccount(newAccount);
+        const newAccountUUID = getAccountUUID(newAccount);
+
+        const accounts = get().accounts;
+        const existingAccount = accounts.find(
+          (account) => getAccountUUID(account) === newAccountUUID,
         );
 
-        set({ accounts: updated.accounts });
+        if (existingAccount) {
+          // Drop any forge-specific HTTP client cache so the new token is used.
+          getAdapter(existingAccount).onAccountTokenChange?.(existingAccount);
+
+          // Replace the existing account (e.g. re-authentication with a new token)
+          rendererLogInfo(
+            'createAccount',
+            `updating existing account for user ${newAccount.user?.login}`,
+          );
+
+          set({
+            accounts: accounts.map((account) =>
+              getAccountUUID(account) === newAccountUUID ? newAccount : account,
+            ),
+          });
+        } else {
+          set({ accounts: [...accounts, newAccount] });
+        }
       },
 
       refreshAccount: async (account: Account): Promise<Account> => {
@@ -90,12 +110,12 @@ const useAccountsStore = create<AccountsStore>()(
       },
 
       removeAccount: (account) => {
-        const updated = removeAccount({ accounts: get().accounts }, account);
-
         // Drop any forge-specific HTTP client state for the removed account.
         getAdapter(account).onAccountTokenChange?.(account);
 
-        set({ accounts: updated.accounts });
+        set((state) => ({
+          accounts: state.accounts.filter((a) => a.token !== account.token),
+        }));
       },
 
       migrateAccountTokens: async () => {
@@ -134,15 +154,15 @@ const useAccountsStore = create<AccountsStore>()(
       },
 
       isLoggedIn: () => {
-        return hasAccounts({ accounts: get().accounts });
+        return get().accounts.length > 0;
       },
 
       hasMultipleAccounts: () => {
-        return hasMultipleAccounts({ accounts: get().accounts });
+        return get().accounts.length > 1;
       },
 
       primaryAccountHostname: () => {
-        return getPrimaryAccountHostname({ accounts: get().accounts });
+        return get().accounts[0]?.hostname ?? Constants.GITHUB_HOSTNAME;
       },
 
       reset: () => {
