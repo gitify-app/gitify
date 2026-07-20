@@ -2,7 +2,7 @@ import { AppsIcon, KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-
 
 import { Constants } from '../../../constants';
 
-import type { Account, Link, RawGitifyNotification, SettingsState } from '../../../types';
+import type { Account, Link, RawGitifyNotification } from '../../../types';
 import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
@@ -52,11 +52,8 @@ async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountD
   };
 }
 
-async function listNotifications(
-  account: Account,
-  settings: SettingsState,
-): Promise<RawGitifyNotification[]> {
-  const raw = await listNotificationsForAuthenticatedUser(account, settings);
+async function listNotifications(account: Account): Promise<RawGitifyNotification[]> {
+  const raw = await listNotificationsForAuthenticatedUser(account);
   return transformNotifications(raw, account);
 }
 
