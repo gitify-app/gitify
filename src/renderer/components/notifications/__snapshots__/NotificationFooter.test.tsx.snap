@@ -5,6 +5,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
   <div
     class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -19,6 +20,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -40,6 +42,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -48,14 +51,16 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
     >
       <span
         class="pr-1 prc-Text-Text-9mHv3"
+        data-component="Text"
         title="You're watching the repository."
       >
         Updated
       </span>
       <relative-time
+        data-component="RelativeTime"
         datetime="2017-05-20T17:51:57.000Z"
       >
-        May 20, 2017
+        May 21, 2017
       </relative-time>
     </div>
     <div
@@ -75,6 +80,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -100,6 +106,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>
@@ -131,6 +138,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -156,6 +164,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>
@@ -183,6 +192,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
   <div
     class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -197,6 +207,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -218,6 +229,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -226,14 +238,16 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
     >
       <span
         class="pr-1 prc-Text-Text-9mHv3"
+        data-component="Text"
         title="You're watching the repository."
       >
         Updated
       </span>
       <relative-time
+        data-component="RelativeTime"
         datetime="2017-05-20T17:51:57.000Z"
       >
-        May 20, 2017
+        May 21, 2017
       </relative-time>
     </div>
     <div
@@ -253,6 +267,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -278,6 +293,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>
@@ -309,6 +325,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -334,6 +351,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>
@@ -361,6 +379,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
   <div
     class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -370,6 +389,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -398,6 +418,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -406,14 +427,16 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
     >
       <span
         class="pr-1 prc-Text-Text-9mHv3"
+        data-component="Text"
         title="You're watching the repository."
       >
         Updated
       </span>
       <relative-time
+        data-component="RelativeTime"
         datetime="2017-05-20T17:51:57.000Z"
       >
-        May 20, 2017
+        May 21, 2017
       </relative-time>
     </div>
     <div
@@ -433,6 +456,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -458,6 +482,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>
@@ -489,6 +514,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -514,6 +540,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should defau
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>
@@ -541,6 +568,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
   <div
     class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -555,6 +583,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -576,6 +605,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -584,14 +614,16 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
     >
       <span
         class="pr-1 prc-Text-Text-9mHv3"
+        data-component="Text"
         title="You're watching the repository."
       >
         Updated
       </span>
       <relative-time
+        data-component="RelativeTime"
         datetime="2017-05-20T17:51:57.000Z"
       >
-        May 20, 2017
+        May 21, 2017
       </relative-time>
     </div>
     <div
@@ -611,6 +643,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -636,6 +669,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>
@@ -667,6 +701,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -692,6 +727,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
             </svg>
             <span
               class="text-xxs px-1 prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               1
             </span>

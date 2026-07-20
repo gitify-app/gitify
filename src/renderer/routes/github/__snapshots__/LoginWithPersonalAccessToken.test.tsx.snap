@@ -12,6 +12,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="horizontal"
         data-justify="space-between"
         data-padding="none"
@@ -53,6 +54,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -94,6 +96,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="normal"
         data-justify="start"
@@ -152,6 +155,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
           >
             <i
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               Change only if you are using GitHub Enterprise Server
             </i>
@@ -160,6 +164,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
+          data-component="Stack"
           data-direction="vertical"
           data-gap="condensed"
           data-justify="start"
@@ -169,6 +174,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -221,12 +227,14 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
             </button>
             <span
               class="text-xs prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               on GitHub to paste the token below.
             </span>
           </div>
           <i
             class="text-xs prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             The
              
@@ -236,6 +244,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
             >
               <u
                 class="prc-Text-Text-9mHv3"
+                data-component="Text"
               >
                 recommended scopes
               </u>
@@ -351,6 +360,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="horizontal"
         data-justify="space-between"
         data-padding="condensed"

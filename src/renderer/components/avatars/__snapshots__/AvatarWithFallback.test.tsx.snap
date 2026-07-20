@@ -5,6 +5,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
   <div
     class="prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -46,6 +47,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
   <div
     class="prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -86,6 +88,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
 <div
   class="prc-Stack-Stack-UQ9k6"
   data-align="center"
+  data-component="Stack"
   data-direction="horizontal"
   data-gap="condensed"
   data-justify="start"
@@ -125,6 +128,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
 <div
   class="prc-Stack-Stack-UQ9k6"
   data-align="center"
+  data-component="Stack"
   data-direction="horizontal"
   data-gap="condensed"
   data-justify="start"
@@ -165,6 +169,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > should render avat
   <div
     class="prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -198,6 +203,7 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > should render avat
   <div
     class="prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"

@@ -4,14 +4,17 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should apply 
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       refactor: migrate deprecated atlaskit 
     </span>
     <span
       class="px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       xcss
     </span>
@@ -23,14 +26,17 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should not ap
 <div>
   <span
     class="prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       refactor: migrate deprecated atlaskit 
     </span>
     <span
       class="px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       xcss
     </span>
@@ -42,9 +48,11 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       Simple notification title
     </span>
@@ -56,14 +64,17 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       Fix issue with 
     </span>
     <span
       class="px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       render
     </span>
@@ -75,14 +86,17 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     <span
       class="px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       useState
     </span>
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
        hook implementation
     </span>
@@ -94,29 +108,35 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       Replace 
     </span>
     <span
       class="px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       foo
     </span>
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
        with 
     </span>
     <span
       class="px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       bar
     </span>
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
        in config
     </span>
@@ -128,14 +148,17 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     <span
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       refactor: migrate deprecated atlaskit 
     </span>
     <span
       class="px-1 py-0.5 rounded bg-gitify-notification-hover font-mono text-xs prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       xcss
     </span>

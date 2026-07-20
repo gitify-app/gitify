@@ -12,6 +12,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -75,6 +76,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="normal"
       data-justify="start"
@@ -84,6 +86,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -131,6 +134,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -138,6 +142,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -158,6 +163,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
         </label>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -165,6 +171,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -185,6 +192,7 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
         </label>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           1
         </span>

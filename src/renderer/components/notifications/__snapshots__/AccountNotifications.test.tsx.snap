@@ -5,6 +5,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="group relative pr-1 py-0.5 bg-gitify-account-error prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -34,6 +35,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -85,6 +87,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -189,6 +192,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="vertical"
     data-justify="center"
     data-padding="spacious"
@@ -197,6 +201,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="vertical"
       data-gap="condensed"
       data-justify="center"
@@ -206,6 +211,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="spacious"
         data-justify="start"
@@ -243,6 +249,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="group relative pr-1 py-0.5 bg-gitify-account-error prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -272,6 +279,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -323,6 +331,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -427,6 +436,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="vertical"
     data-justify="center"
     data-padding="spacious"
@@ -435,6 +445,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="vertical"
       data-gap="condensed"
       data-justify="center"
@@ -444,6 +455,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="spacious"
         data-justify="start"
@@ -481,6 +493,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="group relative pr-1 py-0.5 bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -510,6 +523,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -561,6 +575,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -669,6 +684,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -715,6 +731,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       <div
         class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="none"
         data-justify="start"
@@ -727,6 +744,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -742,6 +760,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               <div
                 class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
+                data-component="Stack"
                 data-direction="horizontal"
                 data-gap="condensed"
                 data-justify="start"
@@ -778,6 +797,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         <div
           class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
           data-align="start"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="space-between"
@@ -788,15 +808,18 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         >
           <span
             class="truncate prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             <span
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               I am a robot and this is a test!
             </span>
           </span>
           <span
             class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             123
           </span>
@@ -804,6 +827,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         <div
           class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -818,6 +842,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -839,6 +864,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -847,14 +873,16 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           >
             <span
               class="pr-1 prc-Text-Text-9mHv3"
+              data-component="Text"
               title="You're watching the repository."
             >
               Updated
             </span>
             <relative-time
+              data-component="RelativeTime"
               datetime="2017-05-20T17:51:57.000Z"
             >
-              May 20, 2017
+              May 21, 2017
             </relative-time>
           </div>
           <div
@@ -874,6 +902,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -899,6 +928,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -930,6 +960,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -955,6 +986,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -979,6 +1011,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -1084,6 +1117,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -1130,6 +1164,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       <div
         class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="none"
         data-justify="start"
@@ -1142,6 +1177,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1157,6 +1193,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               <div
                 class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
+                data-component="Stack"
                 data-direction="horizontal"
                 data-gap="condensed"
                 data-justify="start"
@@ -1193,6 +1230,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         <div
           class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
           data-align="start"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="space-between"
@@ -1203,15 +1241,18 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         >
           <span
             class="truncate prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             <span
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               Improve the UI
             </span>
           </span>
           <span
             class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             456
           </span>
@@ -1219,6 +1260,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         <div
           class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -1228,6 +1270,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1256,6 +1299,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -1264,14 +1308,16 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           >
             <span
               class="pr-1 prc-Text-Text-9mHv3"
+              data-component="Text"
               title="You created the thread."
             >
               Authored
             </span>
             <relative-time
+              data-component="RelativeTime"
               datetime="2017-05-20T17:06:34.000Z"
             >
-              May 20, 2017
+              May 21, 2017
             </relative-time>
           </div>
           <div
@@ -1283,6 +1329,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -1389,6 +1436,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="group relative pr-1 py-0.5 bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -1418,6 +1466,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1469,6 +1518,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -1581,6 +1631,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="group relative pr-1 py-0.5 bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -1610,6 +1661,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1661,6 +1713,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -1765,6 +1818,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
   <div
     class="prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="vertical"
     data-justify="center"
     data-padding="spacious"
@@ -1773,6 +1827,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="vertical"
       data-gap="condensed"
       data-justify="center"
@@ -1782,6 +1837,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="spacious"
         data-justify="start"
@@ -1814,6 +1870,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should tog
   <div
     class="group relative pr-1 py-0.5 bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -1843,6 +1900,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should tog
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1894,6 +1952,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should tog
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"

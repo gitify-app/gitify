@@ -5,6 +5,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - disabled 1`] 
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -36,6 +37,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - positive coun
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -57,6 +59,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - positive coun
     </label>
     <span
       class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       5
     </span>
@@ -69,6 +72,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - positive coun
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -89,6 +93,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - positive coun
     </label>
     <span
       class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       5
     </span>
@@ -101,6 +106,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - tooltip 1`] =
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -156,6 +162,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - visible 1`] =
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -184,6 +191,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - zero counter 
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -205,6 +213,7 @@ exports[`renderer/components/fields/Checkbox.tsx > should render - zero counter 
     </label>
     <span
       class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-primary prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       0
     </span>

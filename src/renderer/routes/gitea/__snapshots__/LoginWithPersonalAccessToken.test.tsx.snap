@@ -12,6 +12,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="horizontal"
         data-justify="space-between"
         data-padding="none"
@@ -53,6 +54,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -94,6 +96,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="normal"
         data-justify="start"
@@ -152,6 +155,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
           >
             <i
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               Your Gitea instance hostname (for example gitea.example.com)
             </i>
@@ -160,6 +164,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
+          data-component="Stack"
           data-direction="vertical"
           data-gap="condensed"
           data-justify="start"
@@ -169,6 +174,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -222,6 +228,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
             </button>
             <span
               class="text-xs prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               on your Gitea instance to create a token, then paste it below.
             </span>
@@ -323,6 +330,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="horizontal"
         data-justify="space-between"
         data-padding="condensed"
