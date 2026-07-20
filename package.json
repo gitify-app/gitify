@@ -106,7 +106,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
     "@vitejs/plugin-react": "6.0.3",
-    "@vitest/coverage-v8": "4.1.9",
+    "@vitest/coverage-v8": "4.1.10",
     "clsx": "2.1.1",
     "concurrently": "10.0.3",
     "date-fns": "4.4.0",
@@ -127,7 +127,7 @@
     "vite-plugin-checker": "0.14.4",
     "vite-plugin-electron": "1.1.0",
     "vite-plus": "0.2.1",
-    "vitest": "4.1.9",
+    "vitest": "4.1.10",
     "zustand": "5.0.14"
   },
   "engines": {
