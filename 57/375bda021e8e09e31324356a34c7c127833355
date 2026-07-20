@@ -1,0 +1,85 @@
+src/renderer/utils/forges/registry.test.ts
+  s_1fedd968db5497::t_93bc84c6044c04 21-24,28,48,64,68
+  s_1fedd968db5497::t_6c60b7b4b26cf7 1-5
+src/renderer/utils/forges/bitbucket/graphql/client.graphql
+  s_1fedd968db5497::t_32f57cddfc5e41 1-81
+src/renderer/components/login/LoginWithPersonalAccessTokenForm.tsx
+  s_1fedd968db5497::t_37785a9124ec80 183-206
+  s_1fedd968db5497::t_edba17f9eb38d4 28,34,48-51,75-78,98-100,117,128
+  s_1fedd968db5497::t_da44322ab5e82f 148
+src/renderer/utils/forges/bitbucket/types.ts
+  s_1fedd968db5497::t_5917ffc372a7f5 1-12
+src/renderer/utils/forges/bitbucket/transform.test.ts
+  s_1fedd968db5497::t_2100af5db97042 1-148
+src/renderer/utils/auth/types.ts
+  s_1fedd968db5497::t_077c77e3cab4d7 6,31-32
+src/renderer/App.tsx
+  s_1fedd968db5497::t_e3947d43ed6beb 10,112-114
+  s_1fedd968db5497::t_8852a60092854d 115
+src/renderer/utils/forges/bitbucket/client.ts
+  s_1fedd968db5497::t_57053f0b89c371 1-124
+src/renderer/utils/forges/bitbucket/graphql/generated/graphql.ts
+  s_1fedd968db5497::t_69021ebdc34935 1-224
+src/renderer/stores/useAccountsStore.ts
+  s_1fedd968db5497::t_077c77e3cab4d7 35
+  s_1fedd968db5497::t_0055226768d744 59,69
+src/renderer/hooks/useLogins.test.tsx
+  s_1fedd968db5497::t_ec7a58a88d616e 162-191
+  s_1fedd968db5497::t_fa4ef8295364f3 7
+src/renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx
+  s_1fedd968db5497::t_0236b3ad7625c9 1-19
+src/renderer/utils/forges/bitbucket/client.test.ts
+  s_1fedd968db5497::t_6c60b7b4b26cf7 194-196
+  s_1fedd968db5497::t_bb1ccf19d0a44d 1-193,197-198
+src/renderer/stores/types.ts
+  s_1fedd968db5497::t_0055226768d744 40
+src/renderer/utils/forges/registry.ts
+  s_1fedd968db5497::t_c53bf0b71ae7b3 4
+  s_1fedd968db5497::t_323676c7e43723 17
+src/renderer/utils/forges/bitbucket/adapter.ts
+  s_1fedd968db5497::t_6c60b7b4b26cf7 3-4
+  s_1fedd968db5497::t_cb10532cd57f85 1-2,5-133
+src/renderer/__mocks__/account-mocks.ts
+  s_1fedd968db5497::t_236166a3768293 66-75
+src/renderer/utils/auth/platform.test.ts
+  s_1fedd968db5497::t_12751cbff5d9b3 7,65-77
+  s_1fedd968db5497::t_014d61a7d35606 78
+src/renderer/utils/forges/github/handlers/index.test.ts
+  s_1fedd968db5497::t_970d000c19a4a5 23
+src/renderer/types.ts
+  s_1fedd968db5497::t_077c77e3cab4d7 62,71-72,524
+src/renderer/hooks/useLogins.ts
+  s_1fedd968db5497::t_0055226768d744 136,143,156
+src/renderer/routes/bitbucket/LoginWithPersonalAccessToken.test.tsx
+  s_1fedd968db5497::t_ca55fdd823d97e 1-136
+src/renderer/utils/auth/platform.ts
+  s_1fedd968db5497::t_077c77e3cab4d7 13-15
+src/renderer/utils/notifications/filters/subjectType.ts
+  s_1fedd968db5497::t_9d1d8651f03fe9 12-14
+src/renderer/utils/forges/bitbucket/transform.ts
+  s_1fedd968db5497::t_22fa2472936f10 1-109
+src/renderer/components/filters/__snapshots__/SubjectTypeFilter.test.tsx.snap
+  s_1fedd968db5497::t_003f8ff4d2c3fa 115-143
+src/renderer/routes/__snapshots__/Filters.test.tsx.snap
+  s_1fedd968db5497::t_406e13128830b3 808-836
+src/renderer/routes/__snapshots__/Login.test.tsx.snap
+  s_1fedd968db5497::t_739980b3a2e740 164-190
+src/renderer/routes/bitbucket/__snapshots__/LoginWithPersonalAccessToken.test.tsx.snap
+  s_1fedd968db5497::t_48d55c83a5968c 1-504
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "57375bda021e8e09e31324356a34c7c127833355",
+  "prompts": {},
+  "sessions": {
+    "s_1fedd968db5497": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1dec95a4-6697-4e45-ad30-5ead417d9fa3",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
