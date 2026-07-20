@@ -20,7 +20,7 @@ describe('renderer/utils/core/storage.ts', () => {
     expect(localStorage.getItem(Constants.STORAGE.LEGACY)).toBeNull();
   });
 
-  it('migrates legacy auth and settings into the stores and marks the key as migrated', () => {
+  it('migrates legacy auth and settings into the stores and removes the legacy key', () => {
     localStorage.setItem(
       Constants.STORAGE.LEGACY,
       JSON.stringify({
@@ -36,9 +36,7 @@ describe('renderer/utils/core/storage.ts', () => {
     expect(useSettingsStore.getState().theme).toBe(Theme.DARK);
     expect(useSettingsStore.getState().playSound).toBe(false);
 
-    const marker = JSON.parse(localStorage.getItem(Constants.STORAGE.LEGACY)!);
-    expect(marker.migrated).toBe(true);
-    expect(marker.migratedAt).toBeDefined();
+    expect(localStorage.getItem(Constants.STORAGE.LEGACY)).toBeNull();
   });
 
   it('drops legacy accounts with invalid hostnames during migration', () => {
@@ -68,17 +66,13 @@ describe('renderer/utils/core/storage.ts', () => {
     expect(useAccountsStore.getState().accounts).toHaveLength(1);
   });
 
-  it('skips migration when already migrated', () => {
-    localStorage.setItem(
-      Constants.STORAGE.LEGACY,
-      JSON.stringify({ migrated: true, migratedAt: '2026-01-01T00:00:00Z' }),
-    );
+  it('removes a legacy key with no migratable data', () => {
+    localStorage.setItem(Constants.STORAGE.LEGACY, JSON.stringify({}));
 
     migrateLegacyStoreToZustand();
 
     expect(useAccountsStore.getState().accounts).toEqual([]);
-    const marker = JSON.parse(localStorage.getItem(Constants.STORAGE.LEGACY)!);
-    expect(marker.migratedAt).toBe('2026-01-01T00:00:00Z');
+    expect(localStorage.getItem(Constants.STORAGE.LEGACY)).toBeNull();
   });
 
   it('logs an error and leaves stores untouched on malformed legacy data', () => {
