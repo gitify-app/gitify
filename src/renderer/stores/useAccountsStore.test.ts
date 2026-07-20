@@ -4,7 +4,16 @@ import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
+import { mockRawUser } from '../utils/forges/github/__mocks__/response-mocks';
 
+import { Constants } from '../constants';
+
+import type { Account, Hostname, Link, Token } from '../types';
+import type { GetAuthenticatedUserResponse } from '../utils/forges/github/types';
+
+import { getRecommendedScopeNames } from '../utils/auth/scopes';
+import * as logger from '../utils/core/logger';
+import * as apiClient from '../utils/forges/github/client';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 import useAccountsStore from './useAccountsStore';
 
@@ -17,6 +26,139 @@ describe('renderer/stores/useAccountsStore.ts', () => {
     const { result } = renderHook(() => useAccountsStore());
 
     expect(result.current).toMatchObject(DEFAULT_ACCOUNTS_STATE);
+  });
+
+  describe('createAccount', () => {
+    vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
+
+    const mockAuthenticatedResponse = mockRawUser('authenticated-user');
+
+    const fetchAuthenticatedUserDetailsSpy = vi.spyOn(apiClient, 'fetchAuthenticatedUserDetails');
+
+    const expectedUser = () => ({
+      id: String(mockAuthenticatedResponse.id),
+      name: mockAuthenticatedResponse.name ?? null,
+      login: mockAuthenticatedResponse.login,
+      avatar: mockAuthenticatedResponse.avatar_url as Link,
+    });
+
+    describe('GitHub Cloud accounts', () => {
+      beforeEach(() => {
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
+          status: 200,
+          url: 'https://api.github.com/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
+          headers: {
+            'x-oauth-scopes': getRecommendedScopeNames().join(', '),
+          },
+        });
+      });
+
+      test('should add personal access token account', async () => {
+        await useAccountsStore
+          .getState()
+          .createAccount('Personal Access Token', '123-456' as Token, 'github.com' as Hostname);
+
+        expect(useAccountsStore.getState().accounts).toEqual([
+          {
+            forge: 'github',
+            hostname: 'github.com' as Hostname,
+            method: 'Personal Access Token',
+            platform: 'GitHub Cloud',
+            scopes: getRecommendedScopeNames(),
+            token: 'encrypted' as Token,
+            user: expectedUser(),
+            version: 'latest',
+          } satisfies Account,
+        ]);
+      });
+
+      test('should add oauth app account', async () => {
+        await useAccountsStore
+          .getState()
+          .createAccount('OAuth App', '123-456' as Token, 'github.com' as Hostname);
+
+        expect(useAccountsStore.getState().accounts).toEqual([
+          {
+            forge: 'github',
+            hostname: 'github.com' as Hostname,
+            method: 'OAuth App',
+            platform: 'GitHub Cloud',
+            scopes: getRecommendedScopeNames(),
+            token: 'encrypted' as Token,
+            user: expectedUser(),
+            version: 'latest',
+          } satisfies Account,
+        ]);
+      });
+
+      test('should replace an existing account on re-authentication', async () => {
+        await useAccountsStore
+          .getState()
+          .createAccount('Personal Access Token', '123-456' as Token, 'github.com' as Hostname);
+        await useAccountsStore
+          .getState()
+          .createAccount('Personal Access Token', '789-000' as Token, 'github.com' as Hostname);
+
+        expect(useAccountsStore.getState().accounts).toHaveLength(1);
+      });
+    });
+
+    describe('GitHub Enterprise Server accounts', () => {
+      beforeEach(() => {
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValue({
+          status: 200,
+          url: 'https://github.gitify.io/api/v3/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
+          headers: {
+            'x-github-enterprise-version': '3.0.0',
+            'x-oauth-scopes': getRecommendedScopeNames().join(', '),
+          },
+        });
+      });
+
+      test('should add personal access token account', async () => {
+        await useAccountsStore
+          .getState()
+          .createAccount(
+            'Personal Access Token',
+            '123-456' as Token,
+            'github.gitify.io' as Hostname,
+          );
+
+        expect(useAccountsStore.getState().accounts).toEqual([
+          {
+            forge: 'github',
+            hostname: 'github.gitify.io' as Hostname,
+            method: 'Personal Access Token',
+            platform: 'GitHub Enterprise Server',
+            scopes: getRecommendedScopeNames(),
+            token: 'encrypted' as Token,
+            user: expectedUser(),
+            version: '3.0.0',
+          } satisfies Account,
+        ]);
+      });
+
+      test('should add oauth app account', async () => {
+        await useAccountsStore
+          .getState()
+          .createAccount('OAuth App', '123-456' as Token, 'github.gitify.io' as Hostname);
+
+        expect(useAccountsStore.getState().accounts).toEqual([
+          {
+            forge: 'github',
+            hostname: 'github.gitify.io' as Hostname,
+            method: 'OAuth App',
+            platform: 'GitHub Enterprise Server',
+            scopes: getRecommendedScopeNames(),
+            token: 'encrypted' as Token,
+            user: expectedUser(),
+            version: '3.0.0',
+          } satisfies Account,
+        ]);
+      });
+    });
   });
 
   describe('removeAccount', () => {
@@ -86,6 +228,24 @@ describe('renderer/stores/useAccountsStore.ts', () => {
       const { result } = renderHook(() => useAccountsStore());
 
       expect(result.current.hasMultipleAccounts()).toBe(true);
+    });
+  });
+
+  describe('primaryAccountHostname', () => {
+    test('should return first (primary) account hostname when multiple', () => {
+      useAccountsStore.setState({
+        accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+      });
+
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccountHostname()).toBe(mockGitHubCloudAccount.hostname);
+    });
+
+    test('should use default hostname if no accounts', () => {
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccountHostname()).toBe(Constants.GITHUB_HOSTNAME);
     });
   });
 
