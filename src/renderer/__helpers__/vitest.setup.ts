@@ -115,7 +115,6 @@ window.gitify = createGitifyBridgeApi();
  * Reset stores
  */
 beforeEach(() => {
-  vi.stubEnv('TZ', 'UTC');
   vi.stubGlobal(
     'fetch',
     vi.fn(async (input: RequestInfo | URL) => {
