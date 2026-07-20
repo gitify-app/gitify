@@ -8,7 +8,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 catalog:
-  electron: '42.5.0'
+  electron: '42.7.0'
 overrides:
   react-is: '19.2.7'
   # Force patched versions of transitive dev-tooling deps pulled in by
