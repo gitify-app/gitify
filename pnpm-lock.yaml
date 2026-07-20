@@ -88,8 +88,8 @@ importers:
         specifier: 19.29.2
         version: 19.29.2(react@19.2.7)
       '@primer/react':
-        specifier: 38.29.0
-        version: 38.29.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)
+        specifier: 38.32.0
+        version: 38.32.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)
       '@swc-contrib/plugin-graphql-codegen-client-preset':
         specifier: 0.27.0
         version: 0.27.0
@@ -1277,8 +1277,8 @@ packages:
   '@primer/primitives@11.9.0':
     resolution: {integrity: sha512-yESOalhd7s7S3unV1V32v3Z0RszXiiz6pzy6hVI9xpdTh1q1Gt8vyDFxRlqIvuwc5ZaO1+gYQTDbjxb4nWBzMw==}
 
-  '@primer/react@38.29.0':
-    resolution: {integrity: sha512-QOv616syu+TbOcya2/3bb7SQhCHbe7i8yFDZbR8ejnUZTknfTvejp/joLxEtOkWuBRIDyZ4DFZ0EpYBw78hhBw==}
+  '@primer/react@38.32.0':
+    resolution: {integrity: sha512-pjEJyvjK7P3f8vC1d+4Il5Rnu9Pnn7FIL+LpMAh2s6GrKZSC0um13RBNGJog7nS8EybOvCe0JodPfJ+Amh6RqQ==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -3516,8 +3516,8 @@ packages:
     peerDependencies:
       react: ^19.2.7
 
-  react-intersection-observer@9.16.0:
-    resolution: {integrity: sha512-w9nJSEp+DrW9KmQmeWHQyfaP6b03v+TdXynaoA964Wxt7mdR3An11z4NNCQgL4gKSK7y1ver2Fq+JKH6CWEzUA==}
+  react-intersection-observer@10.1.0:
+    resolution: {integrity: sha512-V8HDu3+Llg6OEhOxx8LnUSS0t4VS+1Xk9ZatkI8Jct/H0CwKnqFTCu8NT3q7ghJTghTdIrEMPSWr2dkKPG+gdQ==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -5449,7 +5449,7 @@ snapshots:
 
   '@primer/primitives@11.9.0': {}
 
-  '@primer/react@38.29.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)':
+  '@primer/react@38.32.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 5.2.0
@@ -5472,7 +5472,7 @@ snapshots:
       react: 19.2.7
       react-compiler-runtime: 1.0.0(react@19.2.7)
       react-dom: 19.2.7(react@19.2.7)
-      react-intersection-observer: 9.16.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react-intersection-observer: 10.1.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react-is: 19.2.7
     optionalDependencies:
       '@types/react': 19.2.17
@@ -7607,7 +7607,7 @@ snapshots:
       react: 19.2.7
       scheduler: 0.27.0
 
-  react-intersection-observer@9.16.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  react-intersection-observer@10.1.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       react: 19.2.7
     optionalDependencies:
