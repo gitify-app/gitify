@@ -17,7 +17,6 @@ import {
   IconColor,
   type Link,
   type ReviewRequestType,
-  type SettingsState,
 } from '../../../../types';
 
 import { formatGitHubNumber } from '../../../notifications/formatters';
@@ -34,7 +33,6 @@ class PullRequestHandler extends DefaultHandler {
 
   override async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
     fetchedData?: PullRequestDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const pr = fetchedData ?? (await fetchPullByNumber(notification)).repository?.pullRequest;

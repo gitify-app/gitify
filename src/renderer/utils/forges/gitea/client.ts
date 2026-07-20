@@ -1,4 +1,6 @@
-import type { Account, Hostname, SettingsState } from '../../../types';
+import useSettingsStore from '../../../stores/useSettingsStore';
+
+import type { Account, Hostname } from '../../../types';
 import type { GiteaNotificationThread, GiteaUser } from './types';
 
 import { isValidHostname } from '../../auth/utils';
@@ -53,7 +55,9 @@ async function giteaRequest<T>(account: Account, pathname: string, init?: Reques
   return response.json() as Promise<T>;
 }
 
-function buildNotificationQuery(settings: SettingsState): string {
+function buildNotificationQuery(): string {
+  const settings = useSettingsStore.getState();
+
   const params = new URLSearchParams();
   params.set('limit', String(PAGE_SIZE));
 
@@ -66,13 +70,10 @@ function buildNotificationQuery(settings: SettingsState): string {
   return params.toString();
 }
 
-export async function listGiteaNotifications(
-  account: Account,
-  settings: SettingsState,
-): Promise<GiteaNotificationThread[]> {
-  const query = buildNotificationQuery(settings);
+export async function listGiteaNotifications(account: Account): Promise<GiteaNotificationThread[]> {
+  const query = buildNotificationQuery();
 
-  if (!settings.fetchAllNotifications) {
+  if (!useSettingsStore.getState().fetchAllNotifications) {
     return giteaRequest<GiteaNotificationThread[]>(account, `notifications?${query}&page=1`);
   }
 

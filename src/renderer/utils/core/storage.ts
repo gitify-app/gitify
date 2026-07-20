@@ -22,18 +22,7 @@ export function migrateLegacyStoreToZustand() {
   }
 
   try {
-    const parsed = JSON.parse(existing);
-
-    // Skip if already migrated
-    if (parsed.migrated) {
-      rendererLogInfo(
-        'migrateLegacyStoreToZustand',
-        `Storage already migrated on ${parsed.migratedAt}`,
-      );
-      return;
-    }
-
-    const { auth, settings } = parsed;
+    const { auth, settings } = JSON.parse(existing);
 
     // Migrate auth to AccountsStore if it exists and store is empty
     if (auth?.accounts && useAccountsStore.getState().accounts.length === 0) {
@@ -49,14 +38,8 @@ export function migrateLegacyStoreToZustand() {
       useSettingsStore.setState(knownSettings);
     }
 
-    // Mark old storage key as migrated instead of removing it
-    localStorage.setItem(
-      Constants.STORAGE.LEGACY,
-      JSON.stringify({
-        migrated: true,
-        migratedAt: new Date().toISOString(),
-      }),
-    );
+    // Remove the legacy key so subsequent launches skip migration entirely
+    localStorage.removeItem(Constants.STORAGE.LEGACY);
 
     rendererLogInfo(
       'migrateLegacyStoreToZustand',

@@ -8,13 +8,7 @@ import {
   SkipIcon,
 } from '@primer/octicons-react';
 
-import type {
-  GitifyIssueState,
-  GitifyNotification,
-  GitifySubject,
-  Link,
-  SettingsState,
-} from '../../../../types';
+import type { GitifyIssueState, GitifyNotification, GitifySubject, Link } from '../../../../types';
 import { IconColor } from '../../../../types';
 
 import { fetchIssueByNumber } from '../client';
@@ -27,7 +21,6 @@ class IssueHandler extends DefaultHandler {
 
   override async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
     fetchedData?: IssueDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const issue = fetchedData ?? (await fetchIssueByNumber(notification)).repository?.issue;

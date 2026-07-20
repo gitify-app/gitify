@@ -17,22 +17,21 @@ interface AccountsState {
  * Hook that keeps account details fresh.
  *
  * Refreshes all accounts on startup and on an hourly interval via TanStack
- * Query. Token migration runs once, before the first refresh, so legacy or
- * rotated tokens are re-encrypted ahead of any API calls.
+ * Query. Any keychain-rotated token ciphertext is persisted once, before the
+ * first refresh, so rotated tokens are stored ahead of any API calls.
  */
 export const useAccounts = (): AccountsState => {
   const accounts = useAccountsStore((state) => state.accounts);
 
-  const hasMigratedTokensRef = useRef(false);
+  const hasPersistedRotatedTokensRef = useRef(false);
 
   const { refetch } = useQuery<boolean, Error>({
     queryKey: accountsKeys.refresh(accounts.map(getAccountUUID)),
 
     queryFn: async () => {
-      // TODO - Remove token migration logic in future release
-      if (!hasMigratedTokensRef.current) {
-        await useAccountsStore.getState().migrateAccountTokens();
-        hasMigratedTokensRef.current = true;
+      if (!hasPersistedRotatedTokensRef.current) {
+        await useAccountsStore.getState().persistRotatedAccountTokens();
+        hasPersistedRotatedTokensRef.current = true;
       }
 
       const refreshAccount = useAccountsStore.getState().refreshAccount;

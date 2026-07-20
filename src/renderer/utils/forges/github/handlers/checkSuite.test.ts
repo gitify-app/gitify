@@ -1,5 +1,4 @@
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../../__mocks__/state-mocks';
 
 import type { GitifyNotification } from '../../../../types';
 import { type GitifyCheckSuiteStatus, IconColor, type Link } from '../../../../types';
@@ -14,7 +13,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'CANCELLED',
@@ -30,7 +29,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'FAILURE',
@@ -46,7 +45,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'FAILURE',
@@ -62,7 +61,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'FAILURE',
@@ -78,7 +77,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'SKIPPED',
@@ -94,7 +93,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'SUCCESS',
@@ -110,7 +109,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       // Returns empty object when state cannot be determined
       expect(result).toEqual({});
@@ -122,7 +121,7 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification, mockSettings);
+      const result = await checkSuiteHandler.enrich(mockNotification);
 
       // Returns empty object when title cannot be parsed
       expect(result).toEqual({});

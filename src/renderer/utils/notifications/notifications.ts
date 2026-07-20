@@ -1,11 +1,6 @@
 import { useAccountsStore, useSettingsStore } from '../../stores';
 
-import type {
-  Account,
-  AccountNotifications,
-  RawGitifyNotification,
-  SettingsState,
-} from '../../types';
+import type { Account, AccountNotifications, RawGitifyNotification } from '../../types';
 
 import { determineFailureType } from '../api/errors';
 import { rendererLogError, toError } from '../core/logger';
@@ -37,11 +32,11 @@ export function getUnreadNotificationCount(accountNotifications: AccountNotifica
   );
 }
 
-function getNotifications(accounts: Account[], settings: SettingsState) {
+function getNotifications(accounts: Account[]) {
   return accounts.map((account) => {
     return {
       account,
-      notifications: getAdapter(account).listNotifications(account, settings),
+      notifications: getAdapter(account).listNotifications(account),
     };
   });
 }
@@ -61,10 +56,8 @@ function getNotifications(accounts: Account[], settings: SettingsState) {
  * @returns A promise that resolves to an array of account notifications.
  */
 export async function getAllNotifications(): Promise<AccountNotifications[]> {
-  const settings = useSettingsStore.getState();
-
   const accountNotifications: AccountNotifications[] = await Promise.all(
-    getNotifications(useAccountsStore.getState().accounts, settings)
+    getNotifications(useAccountsStore.getState().accounts)
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
@@ -78,7 +71,7 @@ export async function getAllNotifications(): Promise<AccountNotifications[]> {
           // become visible.
           const baseFiltered = filterBaseNotifications(notifications);
 
-          const enriched = await enrichNotifications(baseFiltered, settings);
+          const enriched = await enrichNotifications(baseFiltered);
           const enrichedById = new Map(
             enriched.map((notification) => [notification.id, notification]),
           );
@@ -122,14 +115,12 @@ export async function getAllNotifications(): Promise<AccountNotifications[]> {
  * GraphQL to avoid overwhelming the API.
  *
  * @param notifications - The notifications to enrich.
- * @param settings - Application settings; controls whether enrichment runs.
  * @returns The same notifications with subject fields populated from the API.
  */
 export async function enrichNotifications(
   notifications: RawGitifyNotification[],
-  settings: SettingsState,
 ): Promise<RawGitifyNotification[]> {
-  if (!settings.detailedNotifications || !notifications.length) {
+  if (!useSettingsStore.getState().detailedNotifications || !notifications.length) {
     return notifications;
   }
 
@@ -139,7 +130,7 @@ export async function enrichNotifications(
   if (!enrich) {
     return notifications;
   }
-  return enrich(notifications, settings);
+  return enrich(notifications);
 }
 
 /**

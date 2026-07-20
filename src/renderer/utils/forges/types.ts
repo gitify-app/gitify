@@ -10,7 +10,6 @@ import type {
   IconColor,
   Link,
   RawGitifyNotification,
-  SettingsState,
   Token,
   UserType,
 } from '../../types';
@@ -119,7 +118,7 @@ export interface ForgeAdapter {
    * Returns `RawGitifyNotification[]` — `display` is populated later by the
    * orchestrator's `formatNotification` step.
    */
-  listNotifications(account: Account, settings: SettingsState): Promise<RawGitifyNotification[]>;
+  listNotifications(account: Account): Promise<RawGitifyNotification[]>;
 
   markThreadAsRead(account: Account, threadId: string): Promise<void>;
   markThreadAsDone(account: Account, threadId: string): Promise<void>;
@@ -134,10 +133,7 @@ export interface ForgeAdapter {
    * @see ../notifications/notifications.ts `enrichNotifications` — orchestrator
    *      that delegates here when the user has detailed notifications enabled.
    */
-  enrichNotifications?(
-    notifications: RawGitifyNotification[],
-    settings: SettingsState,
-  ): Promise<RawGitifyNotification[]>;
+  enrichNotifications?(notifications: RawGitifyNotification[]): Promise<RawGitifyNotification[]>;
 
   /**
    * GET an arbitrary forge URL and return JSON. Used by notification

@@ -1,5 +1,4 @@
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../../__mocks__/state-mocks';
 import { mockRawUser } from '../__mocks__/response-mocks';
 
 import { useFiltersStore } from '../../../../stores';
@@ -29,7 +28,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
         author: mockAuthor,
       } as GetReleaseResponse);
 
-      const result = await releaseHandler.enrich(mockNotification, mockSettings);
+      const result = await releaseHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: undefined,
@@ -51,7 +50,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     it('return early if release state filtered', async () => {
       useFiltersStore.setState({ states: ['closed'] });
 
-      const result = await releaseHandler.enrich(mockNotification, mockSettings);
+      const result = await releaseHandler.enrich(mockNotification);
 
       // Returns empty object when filtered (no API call made)
       expect(result).toEqual({});

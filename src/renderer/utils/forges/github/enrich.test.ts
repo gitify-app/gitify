@@ -1,5 +1,4 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
-import { mockSettings } from '../../../__mocks__/state-mocks';
 
 import type { GitifyRepository, Link } from '../../../types';
 
@@ -45,7 +44,7 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
 
     vi.mocked(client.fetchIssueByNumber).mockRejectedValue(mockError);
 
-    const [result] = await enrichGitHubNotifications([mockNotification], mockSettings);
+    const [result] = await enrichGitHubNotifications([mockNotification]);
 
     expect(result).toBeDefined();
     expect(rendererLogErrorSpy).toHaveBeenCalledWith(

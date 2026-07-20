@@ -2,7 +2,7 @@ import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
 
 import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 
-import type { Hostname, Link, SettingsState, Token } from '../../../types';
+import type { Hostname, Link, Token } from '../../../types';
 
 import { githubAdapter } from './adapter';
 import * as client from './client';
@@ -102,7 +102,6 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
 
   describe('listNotifications', () => {
     it('lists notifications and transforms them to GitifyNotification', async () => {
-      const settings = {} as SettingsState;
       vi.spyOn(client, 'listNotificationsForAuthenticatedUser').mockResolvedValue([
         {
           id: '1',
@@ -128,7 +127,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         },
       ] as unknown as Awaited<ReturnType<typeof client.listNotificationsForAuthenticatedUser>>);
 
-      const result = await githubAdapter.listNotifications(mockGitHubCloudAccount, settings);
+      const result = await githubAdapter.listNotifications(mockGitHubCloudAccount);
 
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('1');

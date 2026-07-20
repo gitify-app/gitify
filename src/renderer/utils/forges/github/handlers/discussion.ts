@@ -16,7 +16,6 @@ import {
   type GitifySubject,
   IconColor,
   type Link,
-  type SettingsState,
 } from '../../../../types';
 
 import { fetchDiscussionByNumber } from '../client';
@@ -33,7 +32,6 @@ class DiscussionHandler extends DefaultHandler {
 
   override async enrich(
     notification: GitifyNotification,
-    _settings: SettingsState,
     fetchedData?: DiscussionDetailsFragment,
   ): Promise<Partial<GitifySubject>> {
     const discussion =

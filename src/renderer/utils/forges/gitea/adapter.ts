@@ -1,13 +1,6 @@
 import { KeyIcon, ServerIcon } from '@primer/octicons-react';
 
-import type {
-  Account,
-  Hostname,
-  Link,
-  RawGitifyNotification,
-  SettingsState,
-  Token,
-} from '../../../types';
+import type { Account, Hostname, Link, RawGitifyNotification, Token } from '../../../types';
 import type {
   ForgeAdapter,
   ForgeCapabilities,
@@ -43,11 +36,8 @@ async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountD
   };
 }
 
-async function listNotifications(
-  account: Account,
-  settings: SettingsState,
-): Promise<RawGitifyNotification[]> {
-  const raw = await listGiteaNotifications(account, settings);
+async function listNotifications(account: Account): Promise<RawGitifyNotification[]> {
+  const raw = await listGiteaNotifications(account);
   return transformGiteaNotifications(raw, account);
 }
 

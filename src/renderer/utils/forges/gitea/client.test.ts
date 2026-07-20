@@ -1,6 +1,8 @@
 import { mockGiteaAccount } from '../../../__mocks__/account-mocks';
 
-import type { Hostname, SettingsState } from '../../../types';
+import { useSettingsStore } from '../../../stores';
+
+import type { Hostname } from '../../../types';
 
 import * as comms from '../../system/comms';
 import {
@@ -37,10 +39,9 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
     it('fetches a single page when fetchAllNotifications is false', async () => {
       fetchMock().mockResolvedValueOnce(jsonResponse([{ id: 1 }]));
 
-      const result = await listGiteaNotifications(mockGiteaAccount, {
-        fetchAllNotifications: false,
-        fetchReadNotifications: false,
-      } as SettingsState);
+      useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
+
+      const result = await listGiteaNotifications(mockGiteaAccount);
 
       expect(result).toEqual([{ id: 1 }]);
       expect(fetchMock()).toHaveBeenCalledTimes(1);
@@ -54,10 +55,9 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
     it('includes read status when fetchReadNotifications is true', async () => {
       fetchMock().mockResolvedValueOnce(jsonResponse([]));
 
-      await listGiteaNotifications(mockGiteaAccount, {
-        fetchAllNotifications: false,
-        fetchReadNotifications: true,
-      } as SettingsState);
+      useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: true });
+
+      await listGiteaNotifications(mockGiteaAccount);
 
       const calledUrl = fetchMock().mock.calls[0][0] as string;
       expect(calledUrl).toContain('status-types=unread');
@@ -70,10 +70,9 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
         .mockResolvedValueOnce(jsonResponse([{ id: 100 }]))
         .mockResolvedValueOnce(jsonResponse([]));
 
-      const result = await listGiteaNotifications(mockGiteaAccount, {
-        fetchAllNotifications: true,
-        fetchReadNotifications: false,
-      } as SettingsState);
+      useSettingsStore.setState({ fetchAllNotifications: true, fetchReadNotifications: false });
+
+      const result = await listGiteaNotifications(mockGiteaAccount);
 
       expect(result).toHaveLength(101);
       expect(fetchMock()).toHaveBeenCalledTimes(2);
@@ -87,20 +86,14 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
         }),
       );
 
-      await expect(
-        listGiteaNotifications(mockGiteaAccount, {
-          fetchAllNotifications: false,
-          fetchReadNotifications: false,
-        } as SettingsState),
-      ).rejects.toThrow(/^Gitea API 403 Forbidden$/);
+      useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
+
+      await expect(listGiteaNotifications(mockGiteaAccount)).rejects.toThrow(
+        /^Gitea API 403 Forbidden$/,
+      );
       // The thrown error must not include the response body — a hostile
       // server could echo back the Authorization header into logs.
-      await expect(
-        listGiteaNotifications(mockGiteaAccount, {
-          fetchAllNotifications: false,
-          fetchReadNotifications: false,
-        } as SettingsState),
-      ).rejects.toThrow();
+      await expect(listGiteaNotifications(mockGiteaAccount)).rejects.toThrow();
     });
   });
 

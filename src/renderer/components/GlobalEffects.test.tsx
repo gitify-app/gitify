@@ -54,7 +54,7 @@ describe('renderer/components/GlobalEffects.tsx', () => {
     expect(useShortcutRegistrationStore.getState().shortcutRegistrationError).toBeNull();
   });
 
-  describe('migrateAccountTokens (startup)', () => {
+  describe('persistRotatedAccountTokens (startup)', () => {
     const refreshAccountSpy = vi
       .spyOn(authUtils, 'refreshAccount')
       .mockImplementation(async (account) => account);
@@ -94,9 +94,8 @@ describe('renderer/components/GlobalEffects.tsx', () => {
       expect(useAccountsStore.getState().accounts[0]?.token).toBe(mockGitHubCloudAccount.token);
     });
 
-    it('re-encrypts plaintext token (legacy migration) when decrypt throws', async () => {
+    it('does not re-encrypt or persist when decrypt throws', async () => {
       decryptValueSpy.mockRejectedValue(new Error('not encrypted'));
-      encryptValueSpy.mockResolvedValue('newly-encrypted');
 
       await act(async () => {
         renderWithProviders(<GlobalEffects />, {
@@ -104,8 +103,8 @@ describe('renderer/components/GlobalEffects.tsx', () => {
         });
       });
 
-      expect(encryptValueSpy).toHaveBeenCalledWith(mockGitHubCloudAccount.token);
-      expect(useAccountsStore.getState().accounts[0]?.token).toBe('newly-encrypted');
+      expect(encryptValueSpy).not.toHaveBeenCalled();
+      expect(useAccountsStore.getState().accounts[0]?.token).toBe(mockGitHubCloudAccount.token);
     });
   });
 });

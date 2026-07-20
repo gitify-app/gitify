@@ -9,7 +9,6 @@ import {
   type GitifySubject,
   IconColor,
   type Link,
-  type SettingsState,
 } from '../../../../types';
 
 import { DefaultHandler, defaultHandler } from './default';
@@ -24,10 +23,7 @@ export interface CheckSuiteAttributes {
 }
 
 class CheckSuiteHandler extends DefaultHandler {
-  override async enrich(
-    notification: GitifyNotification,
-    _settings: SettingsState,
-  ): Promise<Partial<GitifySubject>> {
+  override async enrich(notification: GitifyNotification): Promise<Partial<GitifySubject>> {
     const state = getCheckSuiteAttributes(notification)?.status;
 
     if (state) {
