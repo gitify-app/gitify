@@ -68,7 +68,7 @@
   },
   "dependencies": {
     "electron-log": "5.4.4",
-    "electron-menubar": "10.0.2",
+    "electron-menubar": "10.1.2",
     "electron-updater": "6.8.9",
     "react": "19.2.7",
     "react-dom": "19.2.7",
