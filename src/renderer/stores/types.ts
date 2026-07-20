@@ -50,12 +50,12 @@ export interface AccountsActions {
   removeAccount: (account: Account) => void;
 
   /**
-   * Re-encrypts persisted account tokens when the OS keychain rotated keys,
-   * and encrypts any tokens persisted in plaintext by legacy versions.
+   * Persists account tokens re-encrypted after the OS keychain rotated keys.
    *
-   * TODO - Remove migration logic in future release
+   * Tokens are expected to already be encrypted at rest; plaintext tokens from
+   * pre-encryption releases are no longer migrated and require re-authentication.
    */
-  migrateAccountTokens: () => Promise<void>;
+  persistRotatedAccountTokens: () => Promise<void>;
 
   /**
    * Checks if the user is logged in (has at least one account).

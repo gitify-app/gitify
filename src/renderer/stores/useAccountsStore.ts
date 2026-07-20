@@ -19,7 +19,7 @@ import {
 } from '../utils/auth/utils';
 import { rendererLogWarn } from '../utils/core/logger';
 import { getAdapter, isKnownForge } from '../utils/forges/registry';
-import { decryptValue, encryptValue } from '../utils/system/comms';
+import { decryptValue } from '../utils/system/comms';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 
 /**
@@ -98,38 +98,35 @@ const useAccountsStore = create<AccountsStore>()(
         set({ accounts: updated.accounts });
       },
 
-      migrateAccountTokens: async () => {
+      persistRotatedAccountTokens: async () => {
         const accounts = get().accounts;
 
-        const migratedAccounts = await Promise.all(
+        const rotatedAccounts = await Promise.all(
           accounts.map(async (account) => {
             try {
               const { reEncryptedToken } = await decryptValue(account.token);
               if (reEncryptedToken) {
                 return { ...account, token: reEncryptedToken as Token };
               }
-              return account;
             } catch {
+              // Tokens are expected to already be encrypted at rest; plaintext
+              // tokens from pre-encryption releases are no longer migrated.
+              // Leave the account unchanged (the user must re-authenticate).
               rendererLogWarn(
-                'migrateAccountTokens',
-                `token for account ${account.user?.login ?? account.hostname} could not be decrypted, re-encrypting`,
+                'persistRotatedAccountTokens',
+                `token for account ${account.user?.login ?? account.hostname} could not be decrypted; the account may need to be re-authenticated`,
               );
-              const encryptedToken = (await encryptValue(account.token)) as Token;
-              return { ...account, token: encryptedToken };
             }
+            return account;
           }),
         );
 
-        const tokensMigrated = migratedAccounts.some((migratedAccount) => {
-          const originalAccount = accounts.find(
-            (account) => getAccountUUID(account) === getAccountUUID(migratedAccount),
-          );
+        const tokensRotated = rotatedAccounts.some(
+          (account, index) => account.token !== accounts[index]?.token,
+        );
 
-          return !originalAccount || migratedAccount.token !== originalAccount.token;
-        });
-
-        if (tokensMigrated) {
-          set({ accounts: migratedAccounts });
+        if (tokensRotated) {
+          set({ accounts: rotatedAccounts });
         }
       },
 
