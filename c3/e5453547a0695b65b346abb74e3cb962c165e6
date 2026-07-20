@@ -1,0 +1,25 @@
+vitest.config.ts
+  s_a783eb25f62028::t_fd4ad8fc964a80 4-8
+src/renderer/components/notifications/__snapshots__/AccountNotifications.test.tsx.snap
+  s_a783eb25f62028::t_4619634a825a0a 885,1320
+src/renderer/components/notifications/__snapshots__/NotificationFooter.test.tsx.snap
+  s_a783eb25f62028::t_a18d9369994609 63,250,439,626
+src/renderer/components/notifications/__snapshots__/NotificationRow.test.tsx.snap
+  s_a783eb25f62028::t_1f6b034010134a 210,592,974,1356
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "c3e5453547a0695b65b346abb74e3cb962c165e6",
+  "prompts": {},
+  "sessions": {
+    "s_a783eb25f62028": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "d6127af8-2218-44f6-abaf-626e343bce70",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
