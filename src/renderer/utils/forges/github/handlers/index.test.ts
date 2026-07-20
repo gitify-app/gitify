@@ -20,6 +20,7 @@ import { workflowRunHandler } from './workflowRun';
 describe('renderer/utils/notifications/handlers/index.ts', () => {
   describe('createNotificationHandler', () => {
     const cases = {
+      BitbucketNotification: defaultHandler,
       CheckSuite: checkSuiteHandler,
       Commit: commitHandler,
       Discussion: discussionHandler,

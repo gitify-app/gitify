@@ -32,6 +32,7 @@ export function sanitizeAccounts(accounts: Account[]): Account[] {
       version: a.version,
       hostname: a.hostname,
       token: a.token,
+      username: a.username,
       user: a.user,
       scopes: a.scopes,
     };
@@ -55,6 +56,7 @@ const useAccountsStore = create<AccountsStore>()(
         token: Token,
         hostname: Hostname,
         forge: Forge = 'github',
+        username?: string,
       ) => {
         const encryptedToken = (await encryptValue(token)) as Token;
 
@@ -64,6 +66,7 @@ const useAccountsStore = create<AccountsStore>()(
           method: method,
           platform: resolvePlatform(forge, hostname),
           token: encryptedToken,
+          username,
           user: null, // Will be updated during the refresh call below
         };
 

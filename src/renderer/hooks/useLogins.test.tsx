@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { setNotificationsOverrides } from '../__helpers__/hook-mocks';
-import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+import { mockBitbucketAccount, mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
 import { Constants } from '../constants';
 
@@ -158,5 +158,35 @@ describe('renderer/hooks/useLogins.ts', () => {
 
     expect(removeAccountNotificationsMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
     expect(removeAccountSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
+  });
+
+  it('loginWithPersonalAccessToken forwards username for Bitbucket accounts', async () => {
+    vi.spyOn(getAdapter('bitbucket'), 'fetchAuthenticatedUser').mockResolvedValue({
+      user: {
+        id: mockBitbucketAccount.user!.id,
+        login: mockBitbucketAccount.user!.login,
+        name: mockBitbucketAccount.user!.name,
+        avatar: mockBitbucketAccount.user!.avatar!,
+      },
+    });
+
+    const { result } = renderLoginsHook();
+
+    await act(async () => {
+      await result.current.loginWithPersonalAccessToken({
+        token: mockBitbucketAccount.token,
+        hostname: mockBitbucketAccount.hostname,
+        forge: 'bitbucket',
+        username: 'user@example.com',
+      });
+    });
+
+    expect(createAccountSpy).toHaveBeenCalledWith(
+      'Personal Access Token',
+      mockBitbucketAccount.token,
+      mockBitbucketAccount.hostname,
+      'bitbucket',
+      'user@example.com',
+    );
   });
 });

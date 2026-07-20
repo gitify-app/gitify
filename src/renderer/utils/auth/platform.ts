@@ -10,6 +10,9 @@ import type { PlatformType } from './types';
  * Server, Enterprise Cloud with Data Residency).
  */
 export function resolvePlatform(forge: Forge, hostname: Hostname): PlatformType {
+  if (forge === 'bitbucket') {
+    return 'Bitbucket Cloud';
+  }
   if (forge === 'gitea') {
     return 'Gitea';
   }

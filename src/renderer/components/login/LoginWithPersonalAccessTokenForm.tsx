@@ -25,11 +25,13 @@ interface LocationState {
 export interface IFormData {
   token: Token;
   hostname: Hostname;
+  username?: string;
 }
 
 interface IFormErrors {
   token?: string;
   hostname?: string;
+  username?: string;
   invalidCredentialsForHost?: string;
 }
 
@@ -41,6 +43,10 @@ export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormE
     errors.hostname = 'Hostname is required';
   } else if (!isValidHostname(values.hostname)) {
     errors.hostname = 'Hostname format is invalid';
+  }
+
+  if (forge === 'bitbucket' && !values.username) {
+    errors.username = 'Atlassian email is required';
   }
 
   if (!values.token) {
@@ -66,6 +72,10 @@ export interface LoginWithPersonalAccessTokenFormProps {
   tokenPlaceholder: string;
   /** Tooltip for the documentation button. */
   docsTooltip: string;
+  /** When true, renders an email/username field above the token input (for Bitbucket). */
+  showUsernameField?: boolean;
+  usernamePlaceholder?: string;
+  usernameCaption?: string;
   /** Forge-specific content rendered below the token settings row (e.g. scope hints). */
   children?: ReactNode;
 }
@@ -85,6 +95,9 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
   tokenSettingsCaption,
   tokenPlaceholder,
   docsTooltip,
+  showUsernameField = false,
+  usernamePlaceholder = '',
+  usernameCaption = '',
   children,
 }) => {
   const navigate = useNavigate();
@@ -101,6 +114,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
   const [formData, setFormData] = useState({
     hostname: reAuthAccount?.hostname ?? adapter.defaultHostname ?? ('' as Hostname),
     token: '' as Token,
+    username: reAuthAccount?.username ?? '',
   } as IFormData);
 
   const [errors, setErrors] = useState({} as IFormErrors);
@@ -111,7 +125,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
 
     setErrors(newErrors);
 
-    if (!newErrors.hostname && !newErrors.token) {
+    if (!newErrors.hostname && !newErrors.token && !newErrors.username) {
       verifyLoginCredentials(formData);
     }
     setIsVerifyingCredentials(false);
@@ -131,6 +145,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
         await loginWithPersonalAccessToken({
           hostname: data.hostname,
           token: data.token,
+          ...(data.username ? { username: data.username } : {}),
           forge,
         });
         navigate('/');
@@ -165,6 +180,30 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
           />
         )}
         <Stack direction="vertical" gap="normal">
+          {showUsernameField && (
+            <FormControl required>
+              <FormControl.Label>Atlassian Email</FormControl.Label>
+              {usernameCaption && (
+                <FormControl.Caption>
+                  <Text as="i">{usernameCaption}</Text>
+                </FormControl.Caption>
+              )}
+              <TextInput
+                aria-invalid={errors.username ? 'true' : 'false'}
+                block
+                data-testid="login-username"
+                name="username"
+                onChange={handleInputChange}
+                placeholder={usernamePlaceholder}
+                type="email"
+                value={formData.username ?? ''}
+              />
+              {errors.username && (
+                <FormControl.Validation variant="error">{errors.username}</FormControl.Validation>
+              )}
+            </FormControl>
+          )}
+
           <FormControl required>
             <FormControl.Label>Hostname</FormControl.Label>
             <FormControl.Caption>

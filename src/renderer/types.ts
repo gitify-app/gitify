@@ -59,7 +59,7 @@ export type AccountUUID = Branded<string, 'AccountUUID'>;
 export type KeyboardAcceleratorShortcut = Branded<string, 'KeyboardAcceleratorShortcut'>;
 
 /** Code hosting provider for an account. New forges register themselves here. */
-export type Forge = 'github' | 'gitea';
+export type Forge = 'github' | 'gitea' | 'bitbucket';
 
 export interface Account {
   forge: Forge;
@@ -68,6 +68,8 @@ export interface Account {
   version?: string;
   hostname: Hostname;
   token: Token;
+  /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
+  username?: string;
   user: GitifyUser | null;
   scopes?: string[];
 }
@@ -519,6 +521,7 @@ export type Reason =
   | 'team_mention';
 
 export type SubjectType =
+  | 'BitbucketNotification'
   | 'CheckSuite'
   | 'Commit'
   | 'Discussion'
