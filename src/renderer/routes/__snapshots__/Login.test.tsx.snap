@@ -5,6 +5,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="vertical"
     data-justify="center"
     data-padding="spacious"
@@ -13,6 +14,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="vertical"
       data-gap="condensed"
       data-justify="start"
@@ -71,6 +73,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
       <div
         class="motion-reduce:animate-none animate-login-fade-up prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="none"
         data-justify="start"
@@ -168,6 +171,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
+          data-component="Stack"
           data-direction="vertical"
           data-gap="condensed"
           data-justify="start"
@@ -312,6 +316,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
           </button>
           <p
             class="pt-1 text-center text-[var(--fgColor-muted)] text-xxs prc-Text-Text-9mHv3"
+            data-component="Text"
             data-size="small"
           >
             github.com & GitHub Enterprise

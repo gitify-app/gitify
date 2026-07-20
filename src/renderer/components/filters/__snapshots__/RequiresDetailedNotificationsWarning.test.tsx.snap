@@ -4,10 +4,12 @@ exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx > 
 <div>
   <span
     class="text-gitify-caution prc-Text-Text-9mHv3"
+    data-component="Text"
   >
     ⚠️ This filter requires the 
     <strong
       class="prc-Text-Text-9mHv3"
+      data-component="Text"
     >
       Detailed Notifications
     </strong>

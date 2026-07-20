@@ -12,6 +12,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -75,6 +76,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="vertical"
       data-gap="condensed"
       data-justify="start"
@@ -84,6 +86,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -131,6 +134,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -138,6 +142,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -185,6 +190,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -192,6 +198,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -239,6 +246,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           1
         </span>
@@ -246,6 +254,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -293,6 +302,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -300,6 +310,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -347,6 +358,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -354,6 +366,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -401,6 +414,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -408,6 +422,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -455,6 +470,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -462,6 +478,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -509,6 +526,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -516,6 +534,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -563,6 +582,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -570,6 +590,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -617,6 +638,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -624,6 +646,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -671,6 +694,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -678,6 +702,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -725,6 +750,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -732,6 +758,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -779,6 +806,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>
@@ -786,6 +814,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -833,6 +862,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           3
         </span>
@@ -840,6 +870,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
       <div
         class="text-sm prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="condensed"
         data-justify="start"
@@ -887,6 +918,7 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
         </button>
         <span
           class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           0
         </span>

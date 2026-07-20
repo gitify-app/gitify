@@ -5,6 +5,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render 1`] = `
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -20,6 +21,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render 1`] = `
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -44,6 +46,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render 1`] = `
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -75,6 +78,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render as disabled 1
   <div
     class="text-sm prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="condensed"
     data-justify="start"
@@ -90,6 +94,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render as disabled 1
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -114,6 +119,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render as disabled 1
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"

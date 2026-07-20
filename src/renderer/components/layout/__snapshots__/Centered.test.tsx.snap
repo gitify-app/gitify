@@ -5,6 +5,7 @@ exports[`renderer/components/layout/Centered.tsx > should render itself & its ch
   <div
     class="prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="vertical"
     data-justify="center"
     data-padding="spacious"
@@ -20,6 +21,7 @@ exports[`renderer/components/layout/Centered.tsx > should render itself & its ch
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="vertical"
     data-justify="center"
     data-padding="spacious"
