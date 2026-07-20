@@ -882,7 +882,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               data-component="RelativeTime"
               datetime="2017-05-20T17:51:57.000Z"
             >
-              May 21, 2017
+              May 20, 2017
             </relative-time>
           </div>
           <div
@@ -1317,7 +1317,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               data-component="RelativeTime"
               datetime="2017-05-20T17:06:34.000Z"
             >
-              May 21, 2017
+              May 20, 2017
             </relative-time>
           </div>
           <div
