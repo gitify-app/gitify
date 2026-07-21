@@ -1,6 +1,9 @@
-import type { ColorModeWithAuto } from '@primer/react/dist/ThemeProvider';
+import type { ThemeProviderProps } from '@primer/react';
 
 import { Theme } from '../../types';
+
+// Derived from public @primer/react component props rather than internal types
+type ColorModeWithAuto = NonNullable<ThemeProviderProps['colorMode']>;
 
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';
 export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';

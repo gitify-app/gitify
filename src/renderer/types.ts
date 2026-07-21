@@ -1,7 +1,10 @@
 import type { FC } from 'react';
 
 import type { Icon, OcticonProps } from '@primer/octicons-react';
-import type { VariantType } from '@primer/react/dist/Button/types';
+import type { Button } from '@primer/react';
+
+// Derived from public @primer/react component props rather than internal types
+type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
 
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
