@@ -9,6 +9,9 @@ import type {
 import type { Filter } from './types';
 
 const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
+  BitbucketNotification: {
+    title: 'Bitbucket',
+  },
   CheckSuite: {
     title: 'Check Suite',
   },

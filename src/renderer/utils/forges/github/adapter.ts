@@ -76,9 +76,11 @@ function getDisplayHelpers(notification: RawGitifyNotification): NotificationDis
 export const githubAdapter: ForgeAdapter = {
   id: 'github',
   displayName: 'GitHub',
-  tagline: 'github.com & GitHub Enterprise',
+  tagline: 'GitHub Cloud & GitHub Enterprise Server',
   icon: MarkGithubIcon,
   capabilities: githubCapabilities,
+
+  formatUserLogin: (login) => `@${login}`,
 
   fetchAuthenticatedUser,
   listNotifications,

@@ -37,6 +37,7 @@ export interface AccountsActions {
     token: Token,
     hostname: Hostname,
     forge?: Forge,
+    username?: string,
   ) => Promise<void>;
 
   /**

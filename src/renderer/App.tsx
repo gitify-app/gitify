@@ -7,6 +7,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 
 import { AccountsRoute } from './routes/Accounts';
 import { AccountScopesRoute } from './routes/AccountScopes';
+import { BitbucketLoginWithPersonalAccessTokenRoute } from './routes/bitbucket/LoginWithPersonalAccessToken';
 import { FiltersRoute } from './routes/Filters';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './routes/gitea/LoginWithPersonalAccessToken';
 import { GitHubLoginWithDeviceFlowRoute } from './routes/github/LoginWithDeviceFlow';
@@ -107,6 +108,10 @@ export const App = () => {
                 <Route
                   element={<GiteaLoginWithPersonalAccessTokenRoute />}
                   path="/login/gitea/personal-access-token"
+                />
+                <Route
+                  element={<BitbucketLoginWithPersonalAccessTokenRoute />}
+                  path="/login/bitbucket/personal-access-token"
                 />
               </Routes>
             </AppLayout>

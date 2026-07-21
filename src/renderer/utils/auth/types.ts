@@ -3,6 +3,7 @@ import type { AuthCode, ClientID, ClientSecret, Forge, Hostname, Token } from '.
 export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
 
 export type PlatformType =
+  | 'Bitbucket Cloud'
   | 'GitHub Cloud'
   | 'GitHub Enterprise Server'
   | 'GitHub Enterprise Cloud with Data Residency'
@@ -27,6 +28,8 @@ export interface DeviceFlowSession {
 export interface LoginPersonalAccessTokenOptions {
   hostname: Hostname;
   token: Token;
+  /** Atlassian account email — required for Bitbucket Basic Auth. */
+  username?: string;
   /** Defaults to GitHub when omitted. */
   forge?: Forge;
 }

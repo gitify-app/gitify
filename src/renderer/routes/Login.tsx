@@ -93,7 +93,7 @@ export const LoginRoute: FC = () => {
           gap="none"
           style={{ animationDelay: '60ms' }}
         >
-          <Heading as="h2">Notifications</Heading>
+          <Heading as="h2">Git Notifications</Heading>
           <Heading as="h3">on your menu bar</Heading>
         </Stack>
 

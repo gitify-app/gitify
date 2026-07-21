@@ -1,6 +1,7 @@
 import type { Account, Forge } from '../../types';
 import type { ForgeAdapter } from './types';
 
+import { bitbucketAdapter } from './bitbucket/adapter';
 import { giteaAdapter } from './gitea/adapter';
 import { githubAdapter } from './github/adapter';
 
@@ -13,6 +14,7 @@ import { githubAdapter } from './github/adapter';
 const ADAPTERS: Record<Forge, ForgeAdapter> = {
   github: githubAdapter,
   gitea: giteaAdapter,
+  bitbucket: bitbucketAdapter,
 };
 
 /** Single source of truth for the runtime set of registered forges. */

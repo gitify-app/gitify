@@ -4,6 +4,7 @@ import {
   getPlatformFromHostname,
   isCloudDataResidencyHost,
   isEnterpriseServerHost,
+  resolvePlatform,
 } from './platform';
 
 describe('renderer/utils/auth/platform.ts', () => {
@@ -59,6 +60,20 @@ describe('renderer/utils/auth/platform.ts', () => {
     it('should return false for ghe.com host', () => {
       expect(isEnterpriseServerHost('gitify.ghe.com' as Hostname)).toBe(false);
       expect(isEnterpriseServerHost('acme-corp.ghe.com' as Hostname)).toBe(false);
+    });
+  });
+
+  describe('resolvePlatform', () => {
+    it('returns Bitbucket Cloud for bitbucket forge', () => {
+      expect(resolvePlatform('bitbucket', 'bitbucket.org' as Hostname)).toBe('Bitbucket Cloud');
+    });
+
+    it('returns Gitea for gitea forge', () => {
+      expect(resolvePlatform('gitea', 'gitea.example.com' as Hostname)).toBe('Gitea');
+    });
+
+    it('returns GitHub Cloud for github.com', () => {
+      expect(resolvePlatform('github', 'github.com' as Hostname)).toBe('GitHub Cloud');
     });
   });
 });

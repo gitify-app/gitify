@@ -10,6 +10,7 @@ import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type Account, type GitifyError, type GitifyNotification, Size } from '../../types';
 
+import { getAdapter } from '../../utils/forges/registry';
 import {
   groupNotificationsByRepository,
   isGroupByRepository,
@@ -83,7 +84,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
           >
             <AvatarWithFallback
               alt={account.user!.login}
-              name={`@${account.user!.login}`}
+              name={getAdapter(account).formatUserLogin(account.user!.login)}
               size={Size.MEDIUM}
               src={account.user!.avatar ?? undefined}
             />

@@ -133,13 +133,14 @@ export const useLogins = (): LoginsState => {
    * Login with Personal Access Token (PAT).
    */
   const loginWithPersonalAccessToken = useCallback(
-    async ({ token, hostname, forge }: LoginPersonalAccessTokenOptions) => {
+    async ({ token, hostname, forge, username }: LoginPersonalAccessTokenOptions) => {
       const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
       await getAdapter(resolvedForge).fetchAuthenticatedUser({
         forge: resolvedForge,
         hostname,
         token: encryptedToken,
+        username,
       } as Account);
 
       const existingAccount = accounts.find(
@@ -152,7 +153,7 @@ export const useLogins = (): LoginsState => {
         await removeAccountNotifications(existingAccount);
       }
 
-      await createAccount('Personal Access Token', token, hostname, resolvedForge);
+      await createAccount('Personal Access Token', token, hostname, resolvedForge, username);
     },
     [accounts, createAccount, removeAccountNotifications],
   );

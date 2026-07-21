@@ -63,6 +63,8 @@ export const giteaAdapter: ForgeAdapter = {
   icon: ServerIcon,
   capabilities,
 
+  formatUserLogin: (login) => `@${login}`,
+
   fetchAuthenticatedUser,
   listNotifications,
 

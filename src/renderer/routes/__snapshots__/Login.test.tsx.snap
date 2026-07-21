@@ -85,7 +85,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
           class="prc-Heading-Heading-MtWFE"
           data-component="Heading"
         >
-          Notifications
+          Git Notifications
         </h2>
         <h3
           class="prc-Heading-Heading-MtWFE"
@@ -160,6 +160,28 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
             />
           </svg>
           Gitea
+        </button>
+        <button
+          aria-controls="forge-panel-bitbucket"
+          aria-selected="false"
+          class="relative z-10 inline-flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)] text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]"
+          data-testid="forge-tab-bitbucket"
+          role="tab"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            height="14"
+            viewBox="0 0 24 24"
+            width="14"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M.778 1.213a.768.768 0 00-.768.892l3.263 19.81c.084.5.515.868 1.022.873H19.95a.772.772 0 00.77-.646l3.27-20.03a.768.768 0 00-.768-.891zM14.52 15.53H9.522L8.17 8.466h7.561z"
+            />
+          </svg>
+          Bitbucket
         </button>
       </div>
       <div
@@ -319,7 +341,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
             data-component="Text"
             data-size="small"
           >
-            github.com & GitHub Enterprise
+            GitHub Cloud & GitHub Enterprise Server
           </p>
         </div>
       </div>
