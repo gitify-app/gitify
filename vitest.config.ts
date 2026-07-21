@@ -1,6 +1,11 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
+// Set a stable timezone before any workers start so that Intl (used by
+// @primer/react's RelativeTime component) always formats dates in UTC,
+// regardless of the local system timezone (e.g. when travelling).
+process.env.TZ = 'UTC';
+
 export default defineConfig({
   plugins: [react()],
   test: {

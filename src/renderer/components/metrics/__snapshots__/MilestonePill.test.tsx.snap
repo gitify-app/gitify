@@ -16,6 +16,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="none"
         data-justify="start"
@@ -72,6 +73,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="none"
         data-justify="start"

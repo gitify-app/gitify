@@ -9,6 +9,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -55,6 +56,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <div
         class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="none"
         data-justify="start"
@@ -67,6 +69,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -82,6 +85,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
               <div
                 class="prc-Stack-Stack-UQ9k6"
                 data-align="center"
+                data-component="Stack"
                 data-direction="horizontal"
                 data-gap="condensed"
                 data-justify="start"
@@ -118,6 +122,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
           data-align="start"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="space-between"
@@ -128,15 +133,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         >
           <span
             class="truncate prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             <span
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               I am a robot and this is a test!
             </span>
           </span>
           <span
             class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             123
           </span>
@@ -144,6 +152,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -158,6 +167,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -179,6 +189,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -187,11 +198,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           >
             <span
               class="pr-1 prc-Text-Text-9mHv3"
+              data-component="Text"
               title="You're watching the repository."
             >
               Updated
             </span>
             <relative-time
+              data-component="RelativeTime"
               datetime="2017-05-20T17:51:57.000Z"
             >
               May 20, 2017
@@ -214,6 +227,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -239,6 +253,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -270,6 +285,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -295,6 +311,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -319,6 +336,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -429,6 +447,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -475,6 +494,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <div
         class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="none"
         data-justify="start"
@@ -484,6 +504,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
           data-align="start"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="space-between"
@@ -494,15 +515,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         >
           <span
             class="truncate prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             <span
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               I am a robot and this is a test!
             </span>
           </span>
           <span
             class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             123
           </span>
@@ -510,6 +534,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -524,6 +549,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -545,6 +571,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -553,11 +580,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           >
             <span
               class="pr-1 prc-Text-Text-9mHv3"
+              data-component="Text"
               title="You're watching the repository."
             >
               Updated
             </span>
             <relative-time
+              data-component="RelativeTime"
               datetime="2017-05-20T17:51:57.000Z"
             >
               May 20, 2017
@@ -580,6 +609,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -605,6 +635,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -636,6 +667,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -661,6 +693,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -685,6 +718,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -795,6 +829,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -841,6 +876,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <div
         class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="none"
         data-justify="start"
@@ -850,6 +886,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
           data-align="start"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="space-between"
@@ -860,15 +897,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         >
           <span
             class="truncate prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             <span
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               I am a robot and this is a test!
             </span>
           </span>
           <span
             class="text-xxs ml-auto mr-2 opacity-50 hidden prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             123
           </span>
@@ -876,6 +916,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -890,6 +931,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -911,6 +953,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -919,11 +962,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           >
             <span
               class="pr-1 prc-Text-Text-9mHv3"
+              data-component="Text"
               title="You're watching the repository."
             >
               Updated
             </span>
             <relative-time
+              data-component="RelativeTime"
               datetime="2017-05-20T17:51:57.000Z"
             >
               May 20, 2017
@@ -946,6 +991,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -971,6 +1017,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -1002,6 +1049,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -1027,6 +1075,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -1051,6 +1100,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -1161,6 +1211,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="condensed"
       data-justify="start"
@@ -1207,6 +1258,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       <div
         class="cursor-pointer text-sm w-full truncate prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="vertical"
         data-gap="none"
         data-justify="start"
@@ -1216,6 +1268,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="mb-0.5 truncate prc-Stack-Stack-UQ9k6"
           data-align="start"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="space-between"
@@ -1226,15 +1279,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         >
           <span
             class="truncate prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             <span
               class="prc-Text-Text-9mHv3"
+              data-component="Text"
             >
               I am a robot and this is a test!
             </span>
           </span>
           <span
             class="text-xxs ml-auto mr-2 opacity-50 prc-Text-Text-9mHv3"
+            data-component="Text"
           >
             123
           </span>
@@ -1242,6 +1298,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         <div
           class="text-xs opacity-80 prc-Stack-Stack-UQ9k6"
           data-align="center"
+          data-component="Stack"
           data-direction="horizontal"
           data-gap="condensed"
           data-justify="start"
@@ -1256,6 +1313,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -1277,6 +1335,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="none"
             data-justify="start"
@@ -1285,11 +1344,13 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           >
             <span
               class="pr-1 prc-Text-Text-9mHv3"
+              data-component="Text"
               title="You're watching the repository."
             >
               Updated
             </span>
             <relative-time
+              data-component="RelativeTime"
               datetime="2017-05-20T17:51:57.000Z"
             >
               May 20, 2017
@@ -1312,6 +1373,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -1337,6 +1399,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -1368,6 +1431,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                 <div
                   class="prc-Stack-Stack-UQ9k6"
                   data-align="center"
+                  data-component="Stack"
                   data-direction="horizontal"
                   data-gap="none"
                   data-justify="start"
@@ -1393,6 +1457,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
                   </svg>
                   <span
                     class="text-xxs px-1 prc-Text-Text-9mHv3"
+                    data-component="Text"
                   >
                     1
                   </span>
@@ -1417,6 +1482,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"

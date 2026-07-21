@@ -11,6 +11,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="horizontal"
       data-justify="space-between"
       data-padding="none"
@@ -52,6 +53,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -93,6 +95,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="vertical"
       data-gap="spacious"
       data-justify="start"
@@ -107,6 +110,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -143,6 +147,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
+          data-component="Stack"
           data-direction="vertical"
           data-gap="condensed"
           data-justify="start"
@@ -152,6 +157,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -174,56 +180,68 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <select
                 aria-invalid="false"
                 class="prc-Select-Select-dJWwD"
+                data-component="Select"
                 data-hasplaceholder="false"
                 data-testid="settings-theme"
               >
                 <optgroup
+                  data-component="Select.OptGroup"
                   label="System"
                 >
                   <option
+                    data-component="Select.Option"
                     value="SYSTEM"
                   >
                     System
                   </option>
                 </optgroup>
                 <optgroup
+                  data-component="Select.OptGroup"
                   label="Light"
                 >
                   <option
+                    data-component="Select.Option"
                     value="LIGHT"
                   >
                     Light default
                   </option>
                   <option
+                    data-component="Select.Option"
                     value="LIGHT_COLORBLIND"
                   >
                     Light colorblind
                   </option>
                   <option
+                    data-component="Select.Option"
                     value="LIGHT_TRITANOPIA"
                   >
                     Light Tritanopia
                   </option>
                 </optgroup>
                 <optgroup
+                  data-component="Select.OptGroup"
                   label="Dark"
                 >
                   <option
+                    data-component="Select.Option"
                     value="DARK"
                   >
                     Dark default
                   </option>
                   <option
+                    data-component="Select.Option"
                     value="DARK_COLORBLIND"
                   >
                     Dark colorblind
                   </option>
                   <option
+                    data-component="Select.Option"
                     value="DARK_TRITANOPIA"
                   >
                     Dark Tritanopia
                   </option>
                   <option
+                    data-component="Select.Option"
                     value="DARK_DIMMED"
                   >
                     Soft dark
@@ -247,6 +265,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -296,6 +315,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -312,7 +332,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
               data-component="ButtonGroup"
             >
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Zoom out"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -346,7 +368,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </svg>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Zoom percentage"
                   class="prc-Button-ButtonBase-9n-Xk"
@@ -373,7 +397,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </span>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Zoom in"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -407,7 +433,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </svg>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Reset zoom"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -443,6 +471,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -492,6 +521,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -548,6 +578,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -584,6 +615,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
+          data-component="Stack"
           data-direction="vertical"
           data-gap="condensed"
           data-justify="start"
@@ -593,6 +625,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -608,6 +641,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -633,6 +667,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -685,6 +720,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -700,6 +736,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -725,6 +762,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -777,6 +815,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -793,7 +832,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
               data-component="ButtonGroup"
             >
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Decrease fetch interval"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -824,7 +865,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </svg>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Fetch interval"
                   class="prc-Button-ButtonBase-9n-Xk"
@@ -850,7 +893,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </span>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Increase fetch interval"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -881,7 +926,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </svg>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Reset fetch interval"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -917,6 +964,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -967,6 +1015,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1020,6 +1069,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="stretch"
+              data-component="Stack"
               data-direction="vertical"
               data-gap="condensed"
               data-justify="start"
@@ -1029,6 +1079,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
+                data-component="Stack"
                 data-direction="horizontal"
                 data-gap="condensed"
                 data-justify="start"
@@ -1079,6 +1130,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="text-sm prc-Stack-Stack-UQ9k6"
                 data-align="center"
+                data-component="Stack"
                 data-direction="horizontal"
                 data-gap="condensed"
                 data-justify="start"
@@ -1131,6 +1183,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1180,6 +1233,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1229,6 +1283,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1278,6 +1333,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1327,6 +1383,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1383,6 +1440,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -1422,6 +1480,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
+          data-component="Stack"
           data-direction="vertical"
           data-gap="condensed"
           data-justify="start"
@@ -1431,6 +1490,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1481,6 +1541,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1531,6 +1592,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1587,6 +1649,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -1623,6 +1686,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
+          data-component="Stack"
           data-direction="vertical"
           data-gap="condensed"
           data-justify="start"
@@ -1632,6 +1696,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1647,6 +1712,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -1672,6 +1738,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -1724,6 +1791,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1733,6 +1801,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -1785,7 +1854,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               data-component="ButtonGroup"
               data-testid="settings-shortcut-group"
             >
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Edit global shortcut"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -1816,7 +1887,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </svg>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Global shortcut"
                   class="prc-Button-ButtonBase-9n-Xk"
@@ -1839,6 +1912,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     >
                       <strong
                         class="text-gitify-caution prc-Text-Text-9mHv3"
+                        data-component="Text"
                       >
                         ⌘·⇧·G
                       </strong>
@@ -1846,7 +1920,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </span>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Reset global shortcut to default"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -1883,6 +1959,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1933,6 +2010,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -1942,6 +2020,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="text-sm prc-Stack-Stack-UQ9k6"
               data-align="center"
+              data-component="Stack"
               data-direction="horizontal"
               data-gap="condensed"
               data-justify="start"
@@ -1967,7 +2046,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               data-component="ButtonGroup"
               data-testid="settings-volume-group"
             >
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Volume down"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -2002,7 +2083,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </svg>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Volume percentage"
                   class="prc-Button-ButtonBase-9n-Xk"
@@ -2029,7 +2112,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </span>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Volume up"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -2060,7 +2145,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </svg>
                 </button>
               </div>
-              <div>
+              <div
+                class="prc-ButtonGroup-Item-PqvDl"
+              >
                 <button
                   aria-label="Reset volume"
                   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
@@ -2096,6 +2183,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -2145,6 +2233,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -2196,6 +2285,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="vertical"
         data-justify="start"
         data-padding="none"
@@ -2233,6 +2323,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
     <div
       class="prc-Stack-Stack-UQ9k6"
       data-align="stretch"
+      data-component="Stack"
       data-direction="horizontal"
       data-justify="space-between"
       data-padding="condensed"
@@ -2241,6 +2332,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="horizontal"
         data-justify="start"
         data-padding="none"
@@ -2287,6 +2379,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="stretch"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="normal"
         data-justify="start"
@@ -2355,6 +2448,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             >
               <span
                 class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                data-component="Text"
                 data-kbd-chord="true"
               >
                  
@@ -2434,6 +2528,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             >
               <span
                 class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
+                data-component="Text"
                 data-kbd-chord="true"
               >
                  

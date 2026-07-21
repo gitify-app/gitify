@@ -5,6 +5,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   <div
     class="group relative pr-1 py-0.5 bg-gitify-repository opacity-50 prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -34,6 +35,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -85,6 +87,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -137,6 +140,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   <div
     class="group relative pr-1 py-0.5 bg-gitify-repository prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -166,6 +170,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -217,6 +222,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -329,6 +335,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   <div
     class="group relative pr-1 py-0.5 bg-gitify-repository prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -358,6 +365,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -417,6 +425,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"
@@ -529,6 +538,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
   <div
     class="group relative pr-1 py-0.5 bg-gitify-repository prc-Stack-Stack-UQ9k6"
     data-align="stretch"
+    data-component="Stack"
     data-direction="horizontal"
     data-justify="start"
     data-padding="none"
@@ -558,6 +568,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="center"
+            data-component="Stack"
             data-direction="horizontal"
             data-gap="condensed"
             data-justify="start"
@@ -617,6 +628,7 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx > should 
     <div
       class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-UQ9k6"
       data-align="center"
+      data-component="Stack"
       data-direction="horizontal"
       data-gap="none"
       data-justify="start"

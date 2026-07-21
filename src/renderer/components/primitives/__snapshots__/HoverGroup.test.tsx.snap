@@ -5,6 +5,7 @@ exports[`renderer/components/primitives/HoverGroup.tsx > should render 1`] = `
   <div
     class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-repository prc-Stack-Stack-UQ9k6"
     data-align="center"
+    data-component="Stack"
     data-direction="horizontal"
     data-gap="none"
     data-justify="start"

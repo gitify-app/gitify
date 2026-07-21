@@ -16,6 +16,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="none"
         data-justify="start"
@@ -44,6 +45,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
         </svg>
         <span
           class="text-xxs px-1 prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           2
         </span>
@@ -80,6 +82,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
       <div
         class="prc-Stack-Stack-UQ9k6"
         data-align="center"
+        data-component="Stack"
         data-direction="horizontal"
         data-gap="none"
         data-justify="start"
@@ -108,6 +111,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
         </svg>
         <span
           class="text-xxs px-1 prc-Text-Text-9mHv3"
+          data-component="Text"
         >
           1
         </span>
