@@ -1,0 +1,19 @@
+.github/copilot-instructions.md
+  s_971f973aad9beb::t_49810eed6a06e3 3,7,9-11,13,15-22,24,26,28-30,32,34,36-39,41,43,45,47,49-52,54,56-61,63,65-69,71,73,75,77,83,85-89,93-116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "0699c334c2a71f13d9cda944e14ce16f6080fef3",
+  "prompts": {},
+  "sessions": {
+    "s_971f973aad9beb": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "4a726047-c30f-4adb-b8b5-ea8bcfeb1e2b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
