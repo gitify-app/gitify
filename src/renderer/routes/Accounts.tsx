@@ -1,8 +1,10 @@
-import { type FC, useCallback, useState } from 'react';
+import { type FC, useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
   AlertFillIcon,
+  ArrowLeftIcon,
+  ChevronRightIcon,
   KeyIcon,
   PersonAddIcon,
   PersonIcon,
@@ -25,6 +27,7 @@ import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
 import { type Account, type GitifyError, IconColor, Size } from '../types';
+import type { ForgeAdapter } from '../utils/forges/types';
 
 import { determineFailureType } from '../utils/api/errors';
 import { hasAlternateScopes, hasRecommendedScopes } from '../utils/auth/scopes';
@@ -47,6 +50,10 @@ export const AccountsRoute: FC = () => {
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
 
   const [refreshErrorStates, setRefreshErrorStates] = useState<Record<string, GitifyError>>({});
+
+  const [addMenuOpen, setAddMenuOpen] = useState(false);
+  const [selectedForge, setSelectedForge] = useState<ForgeAdapter | null>(null);
+  const keepMenuOpenRef = useRef(false);
 
   const logoutAccount = useCallback(
     (account: Account) => {
@@ -286,7 +293,17 @@ export const AccountsRoute: FC = () => {
       </Contents>
 
       <Footer justify="end">
-        <ActionMenu>
+        <ActionMenu
+          open={addMenuOpen}
+          onOpenChange={(open) => {
+            if (!open && keepMenuOpenRef.current) {
+              keepMenuOpenRef.current = false;
+              return;
+            }
+            setAddMenuOpen(open);
+            if (!open) {setSelectedForge(null);}
+          }}
+        >
           <ActionMenu.Anchor>
             <Button data-testid="account-add-new" leadingVisual={PersonAddIcon}>
               Add new account
@@ -294,30 +311,83 @@ export const AccountsRoute: FC = () => {
           </ActionMenu.Anchor>
 
           <ActionMenu.Overlay width="medium">
-            <ActionList>
-              {listAdapters().flatMap((adapter) =>
-                adapter.loginMethods.map((method) => {
-                  const MethodIcon = method.icon;
-                  const label =
-                    method.label === adapter.displayName
-                      ? `Login with ${adapter.displayName}`
-                      : `Login with ${adapter.displayName} (${method.label})`;
+            {selectedForge ? (
+              <ActionList>
+                <ActionList.Item
+                  onSelect={() => {
+                    keepMenuOpenRef.current = true;
+                    setSelectedForge(null);
+                  }}
+                >
+                  <ActionList.LeadingVisual>
+                    <ArrowLeftIcon />
+                  </ActionList.LeadingVisual>
+                  Back
+                </ActionList.Item>
+
+                <ActionList.Divider />
+
+                <ActionList.Group>
+                  <ActionList.GroupHeading>
+                    <Stack align="center" direction="horizontal" gap="condensed">
+                      <selectedForge.icon size={12} />
+                      {selectedForge.displayName}
+                    </Stack>
+                  </ActionList.GroupHeading>
+
+                  {selectedForge.loginMethods.map((method) => {
+                    const MethodIcon = method.icon;
+                    return (
+                      <ActionList.Item
+                        data-testid={`account-add-${method.testId.replace(/^login-/, '')}`}
+                        key={method.testId}
+                        onSelect={() => navigate(method.route, { replace: true })}
+                      >
+                        <ActionList.LeadingVisual>
+                          <MethodIcon />
+                        </ActionList.LeadingVisual>
+                        {method.label}
+                      </ActionList.Item>
+                    );
+                  })}
+                </ActionList.Group>
+              </ActionList>
+            ) : (
+              <ActionList>
+                {listAdapters().map((adapter) => {
+                  const ForgeIcon = adapter.icon;
+                  const hasMultipleMethods = adapter.loginMethods.length > 1;
 
                   return (
                     <ActionList.Item
-                      data-testid={`account-add-${method.testId.replace(/^login-/, '')}`}
-                      key={method.testId}
-                      onSelect={() => navigate(method.route, { replace: true })}
+                      data-testid={`account-add-forge-${adapter.id}`}
+                      key={adapter.id}
+                      onSelect={() => {
+                        if (hasMultipleMethods) {
+                          keepMenuOpenRef.current = true;
+                          setSelectedForge(adapter);
+                        } else {
+                          navigate(adapter.loginMethods[0].route, { replace: true });
+                        }
+                      }}
                     >
                       <ActionList.LeadingVisual>
-                        <MethodIcon />
+                        <ForgeIcon />
                       </ActionList.LeadingVisual>
-                      {label}
+                      <Stack direction="vertical" gap="none">
+                        <span>{adapter.displayName}</span>
+                        <Text className="text-xs">{adapter.tagline}</Text>
+                      </Stack>
+                      {hasMultipleMethods && (
+                        <ActionList.TrailingVisual>
+                          <ChevronRightIcon />
+                        </ActionList.TrailingVisual>
+                      )}
                     </ActionList.Item>
                   );
-                }),
-              )}
-            </ActionList>
+                })}
+              </ActionList>
+            )}
           </ActionMenu.Overlay>
         </ActionMenu>
       </Footer>

@@ -131,6 +131,7 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
     });
 
     expect(screen.getByTestId('login-username')).toHaveValue('user@example.com');
-    expect(screen.getByTestId('login-hostname')).toHaveValue('bitbucket.org');
+    // hostname is always bitbucket.org and not shown as an editable field
+    expect(screen.queryByTestId('login-hostname')).not.toBeInTheDocument();
   });
 });

@@ -162,64 +162,6 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
           </span>
         </div>
         <div
-          class="prc-FormControl-ControlVerticalLayout-8YotI"
-          data-component="FormControl"
-          data-has-label=""
-        >
-          <label
-            class="prc-components-Label-2mrqP"
-            data-component="FormControl.Label"
-            for="_r_7_"
-            id="_r_7_-label"
-          >
-            <span
-              class="prc-components-RequiredText-7UsHS"
-            >
-              <span>
-                Hostname
-              </span>
-              <span>
-                *
-              </span>
-            </span>
-          </label>
-          <span
-            aria-busy="false"
-            class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
-            data-block="true"
-            data-component="TextInput"
-            data-no-leading-visual="true"
-            data-no-trailing-action="true"
-            data-no-trailing-visual="true"
-          >
-            <input
-              aria-describedby="_r_7_-caption"
-              aria-invalid="false"
-              aria-required="true"
-              class="prc-components-Input-IwWrt"
-              data-component="input"
-              data-testid="login-hostname"
-              id="_r_7_"
-              name="hostname"
-              placeholder="bitbucket.org"
-              type="text"
-              value="bitbucket.org"
-            />
-          </span>
-          <span
-            class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
-            data-component="FormControl.Caption"
-            id="_r_7_-caption"
-          >
-            <i
-              class="prc-Text-Text-9mHv3"
-              data-component="Text"
-            >
-              Bitbucket Cloud hostname
-            </i>
-          </span>
-        </div>
-        <div
           class="prc-Stack-Stack-UQ9k6"
           data-align="stretch"
           data-component="Stack"
@@ -299,8 +241,8 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
           <label
             class="prc-components-Label-2mrqP"
             data-component="FormControl.Label"
-            for="_r_e_"
-            id="_r_e_-label"
+            for="_r_8_"
+            id="_r_8_-label"
           >
             <span
               class="prc-components-RequiredText-7UsHS"
@@ -328,7 +270,7 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
               class="prc-components-Input-IwWrt"
               data-component="input"
               data-testid="login-token"
-              id="_r_e_"
+              id="_r_8_"
               name="token"
               placeholder="Your Atlassian API token"
               type="password"
@@ -339,7 +281,7 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
               data-component="TextInput.Action"
             >
               <button
-                aria-labelledby="_r_k_"
+                aria-labelledby="_r_e_"
                 class="prc-Button-ButtonBase-9n-Xk prc-components-Invisible-bKOcl prc-Button-IconButton-fyge7"
                 data-component="IconButton"
                 data-loading="false"
@@ -371,7 +313,7 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
                 class="prc-TooltipV2-Tooltip-tLeuB"
                 data-component="Tooltip"
                 data-direction="s"
-                id="_r_k_"
+                id="_r_e_"
                 popover="auto"
               >
                 Show token
@@ -394,7 +336,7 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_m_"
+          aria-describedby="_r_g_"
           class="prc-Button-ButtonBase-9n-Xk"
           data-component="Button"
           data-loading="false"
@@ -443,7 +385,7 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-component="Tooltip"
           data-direction="ne"
-          id="_r_m_"
+          id="_r_g_"
           popover="auto"
           role="tooltip"
         >

@@ -6,8 +6,7 @@ export const BitbucketLoginWithPersonalAccessTokenRoute: FC = () => (
   <LoginWithPersonalAccessTokenForm
     docsTooltip="Atlassian API token documentation"
     forge="bitbucket"
-    hostnameCaption="Bitbucket Cloud hostname"
-    hostnamePlaceholder="bitbucket.org"
+    showHostnameField={false}
     showUsernameField
     title="Login to Bitbucket Cloud with API Token"
     tokenPlaceholder="Your Atlassian API token"

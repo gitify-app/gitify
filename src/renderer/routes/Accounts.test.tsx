@@ -196,7 +196,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Add new accounts', () => {
-    it('should show login with github app', async () => {
+    it('should show github login methods after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -205,7 +205,11 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-add-new'));
 
-      expect(screen.getByTestId('account-add-github')).toHaveTextContent('Login with GitHub');
+      expect(screen.getByTestId('account-add-forge-github')).toHaveTextContent('GitHub');
+
+      await userEvent.click(screen.getByTestId('account-add-forge-github'));
+
+      expect(screen.getByTestId('account-add-github')).toHaveTextContent('GitHub');
 
       await userEvent.click(screen.getByTestId('account-add-github'));
 
@@ -215,7 +219,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should show login with personal access token', async () => {
+    it('should show login with personal access token after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -223,10 +227,9 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByTestId('account-add-forge-github'));
 
-      expect(screen.getByTestId('account-add-pat')).toHaveTextContent(
-        'Login with GitHub (Personal Access Token)',
-      );
+      expect(screen.getByTestId('account-add-pat')).toHaveTextContent('Personal Access Token');
 
       await userEvent.click(screen.getByTestId('account-add-pat'));
 
@@ -236,7 +239,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should show login with oauth app', async () => {
+    it('should show login with oauth app after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockPersonalAccessTokenAccount],
@@ -244,10 +247,9 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByTestId('account-add-forge-github'));
 
-      expect(screen.getByTestId('account-add-oauth-app')).toHaveTextContent(
-        'Login with GitHub (OAuth App)',
-      );
+      expect(screen.getByTestId('account-add-oauth-app')).toHaveTextContent('OAuth App');
 
       await userEvent.click(screen.getByTestId('account-add-oauth-app'));
 
@@ -257,7 +259,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should show login with gitea personal access token', async () => {
+    it('should navigate directly to gitea login (single method forge)', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -266,14 +268,31 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getByTestId('account-add-new'));
 
-      expect(screen.getByTestId('account-add-gitea-pat')).toHaveTextContent(
-        'Login with Gitea (Personal Access Token)',
-      );
+      expect(screen.getByTestId('account-add-forge-gitea')).toHaveTextContent('Gitea');
 
-      await userEvent.click(screen.getByTestId('account-add-gitea-pat'));
+      await userEvent.click(screen.getByTestId('account-add-forge-gitea'));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token', {
+        replace: true,
+      });
+    });
+
+    it('should navigate directly to bitbucket login (single method forge)', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          accounts: [mockOAuthAccount],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-add-new'));
+
+      expect(screen.getByTestId('account-add-forge-bitbucket')).toHaveTextContent('Bitbucket');
+
+      await userEvent.click(screen.getByTestId('account-add-forge-bitbucket'));
+
+      expect(navigateMock).toHaveBeenCalledTimes(1);
+      expect(navigateMock).toHaveBeenCalledWith('/login/bitbucket/personal-access-token', {
         replace: true,
       });
     });

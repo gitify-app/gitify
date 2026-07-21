@@ -62,9 +62,15 @@ export interface LoginWithPersonalAccessTokenFormProps {
   forge: Forge;
   /** Page header title. */
   title: string;
-  /** Caption below the hostname label. */
-  hostnameCaption: string;
-  hostnamePlaceholder: string;
+  /**
+   * When false the hostname field is hidden and the value from
+   * `adapter.defaultHostname` is used silently (e.g. Bitbucket, which is
+   * always bitbucket.org).
+   */
+  showHostnameField?: boolean;
+  /** Caption below the hostname label. Only used when showHostnameField is true. */
+  hostnameCaption?: string;
+  hostnamePlaceholder?: string;
   /** Label for the button that opens the forge's token settings page. */
   tokenSettingsLabel: string;
   /** Text rendered beside the token settings button. */
@@ -89,12 +95,13 @@ export interface LoginWithPersonalAccessTokenFormProps {
 export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFormProps> = ({
   forge,
   title,
-  hostnameCaption,
-  hostnamePlaceholder,
+  hostnameCaption = '',
+  hostnamePlaceholder = '',
   tokenSettingsLabel,
   tokenSettingsCaption,
   tokenPlaceholder,
   docsTooltip,
+  showHostnameField = true,
   showUsernameField = false,
   usernamePlaceholder = '',
   usernameCaption = '',
@@ -204,24 +211,26 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
             </FormControl>
           )}
 
-          <FormControl required>
-            <FormControl.Label>Hostname</FormControl.Label>
-            <FormControl.Caption>
-              <Text as="i">{hostnameCaption}</Text>
-            </FormControl.Caption>
-            <TextInput
-              aria-invalid={errors.hostname ? 'true' : 'false'}
-              block
-              data-testid="login-hostname"
-              name="hostname"
-              onChange={handleInputChange}
-              placeholder={hostnamePlaceholder}
-              value={formData.hostname}
-            />
-            {errors.hostname && (
-              <FormControl.Validation variant="error">{errors.hostname}</FormControl.Validation>
-            )}
-          </FormControl>
+          {showHostnameField && (
+            <FormControl required>
+              <FormControl.Label>Hostname</FormControl.Label>
+              <FormControl.Caption>
+                <Text as="i">{hostnameCaption}</Text>
+              </FormControl.Caption>
+              <TextInput
+                aria-invalid={errors.hostname ? 'true' : 'false'}
+                block
+                data-testid="login-hostname"
+                name="hostname"
+                onChange={handleInputChange}
+                placeholder={hostnamePlaceholder}
+                value={formData.hostname}
+              />
+              {errors.hostname && (
+                <FormControl.Validation variant="error">{errors.hostname}</FormControl.Validation>
+              )}
+            </FormControl>
+          )}
 
           <Stack direction="vertical" gap="condensed">
             <Stack align="center" direction="horizontal" gap="condensed">

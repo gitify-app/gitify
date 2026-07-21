@@ -5,6 +5,8 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 
 import { useSettingsStore } from '../../../stores';
 
+import { BitbucketIcon } from '../../../components/icons/BitbucketIcon';
+
 import type { Hostname, Link, Token } from '../../../types';
 import { IconColor } from '../../../types';
 import type { AtlassianNotificationFragment } from './types';
@@ -278,7 +280,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
 
       const helpers = bitbucketAdapter.getDisplayHelpers(notification);
 
-      expect(helpers.iconType).toBe(KeyIcon);
+      expect(helpers.iconType).toBe(BitbucketIcon);
       expect(helpers.iconColor).toBe(IconColor.GRAY);
       expect(helpers.defaultUrl).toBe('https://bitbucket.org/myorg/myrepo/pull-requests/1');
       expect(helpers.defaultUserType).toBe('User');

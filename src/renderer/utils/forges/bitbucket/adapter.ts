@@ -2,6 +2,8 @@ import { KeyIcon } from '@primer/octicons-react';
 
 import useSettingsStore from '../../../stores/useSettingsStore';
 
+import { BitbucketIcon } from '../../../components/icons/BitbucketIcon';
+
 import type { Account, Hostname, Link, RawGitifyNotification } from '../../../types';
 import { IconColor } from '../../../types';
 import type {
@@ -57,7 +59,7 @@ async function listNotifications(account: Account): Promise<RawGitifyNotificatio
 
 function getDisplayHelpers(notification: RawGitifyNotification): NotificationDisplayHelpers {
   return {
-    iconType: KeyIcon,
+    iconType: BitbucketIcon,
     iconColor: IconColor.GRAY,
     defaultUrl: notification.subject.url ?? ('' as Link),
     defaultUserType: 'User',
@@ -86,7 +88,7 @@ export const bitbucketAdapter: ForgeAdapter = {
   id: 'bitbucket',
   displayName: 'Bitbucket',
   tagline: 'Bitbucket Cloud',
-  icon: KeyIcon,
+  icon: BitbucketIcon,
   capabilities,
 
   fetchAuthenticatedUser,

@@ -12,6 +12,8 @@ import {
   ShieldCheckIcon,
 } from '@primer/octicons-react';
 
+import { BitbucketIcon } from '../../components/icons/BitbucketIcon';
+
 import {
   type GitifyPullRequestReview,
   IconColor,
@@ -59,6 +61,8 @@ export function getPullRequestReviewIcon(
 
 export function getPlatformIcon(platform: PlatformType): FC<OcticonProps> | null {
   switch (platform) {
+    case 'Bitbucket Cloud':
+      return BitbucketIcon;
     case 'Gitea':
       return ServerIcon;
     case 'GitHub Enterprise Server':
