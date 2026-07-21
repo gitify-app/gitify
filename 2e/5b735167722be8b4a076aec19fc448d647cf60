@@ -1,0 +1,19 @@
+src/renderer/utils/forges/bitbucket/types.ts
+  s_971f973aad9beb::t_72b9de74453214 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "2e5b735167722be8b4a076aec19fc448d647cf60",
+  "prompts": {},
+  "sessions": {
+    "s_971f973aad9beb": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "4a726047-c30f-4adb-b8b5-ea8bcfeb1e2b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
