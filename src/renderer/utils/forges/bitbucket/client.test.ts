@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockBitbucketAccount } from '../../../__mocks__/account-mocks';
 
 import {
+  fetchBitbucketAuthenticatedUser,
   listRawBitbucketNotifications,
   markBitbucketNotificationsAsRead,
   markBitbucketNotificationsAsUnread,
@@ -193,6 +194,58 @@ describe('markBitbucketNotificationsAsUnread', () => {
 
     await expect(markBitbucketNotificationsAsUnread(mockBitbucketAccount, ['n1'])).rejects.toThrow(
       'Atlassian API 500 Internal Server Error',
+    );
+  });
+});
+
+describe('fetchBitbucketAuthenticatedUser', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
+  it('returns the me query response on success', async () => {
+    const mockResponse = {
+      data: {
+        me: {
+          user: {
+            accountId: 'atlas-001',
+            name: 'Test User',
+            picture: 'https://example.com/avatar.png',
+          },
+        },
+      },
+    };
+
+    vi.mocked(fetch).mockResolvedValueOnce({
+      ok: true,
+      json: async () => mockResponse,
+    } as Response);
+
+    const result = await fetchBitbucketAuthenticatedUser(mockBitbucketAccount);
+
+    expect(result.me?.user).toMatchObject({
+      accountId: 'atlas-001',
+      name: 'Test User',
+      picture: 'https://example.com/avatar.png',
+    });
+  });
+
+  it('throws on non-OK HTTP response', async () => {
+    vi.mocked(fetch).mockResolvedValueOnce({
+      ok: false,
+      status: 401,
+      statusText: 'Unauthorized',
+    } as Response);
+
+    await expect(fetchBitbucketAuthenticatedUser(mockBitbucketAccount)).rejects.toThrow(
+      'Atlassian API 401 Unauthorized',
+    );
+  });
+
+  it('throws when account has no username', async () => {
+    const accountWithoutUsername = { ...mockBitbucketAccount, username: undefined };
+    await expect(fetchBitbucketAuthenticatedUser(accountWithoutUsername)).rejects.toThrow(
+      'Bitbucket account is missing username',
     );
   });
 });
