@@ -1,0 +1,31 @@
+tsconfig.json
+  s_2dca7d99e8483e::t_a7cf56dccb047b 16
+src/renderer/types.ts
+  s_2dca7d99e8483e::t_da479bc180dae4 4
+  s_2dca7d99e8483e::t_e792cf1c25f4c6 5
+  s_2dca7d99e8483e::t_93c86191278e30 6-7
+src/renderer/utils/ui/theme.ts
+  s_2dca7d99e8483e::t_93c86191278e30 1,5-6
+  s_2dca7d99e8483e::t_5338f0d8fc3769 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "86c054b35efba16eb5cf098806a0fe4443da391c",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_2dca7d99e8483e": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "a57c6d29-f47c-45a1-a818-b664f695e6fb",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
