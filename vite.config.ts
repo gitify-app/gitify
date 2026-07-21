@@ -102,7 +102,6 @@ export default defineConfig({
       ? []
       : [
           checker({
-            typescript: true,
             oxlint: { dev: { logLevel: ['error'] } },
           }),
         ]),
