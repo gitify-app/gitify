@@ -1,0 +1,26 @@
+src/main/handlers/system.test.ts
+  s_971f973aad9beb::t_661b4f68bc8ec4 12-15,106-111,113-115
+src/main/handlers/system.ts
+  h_ac004aadb63da9 5,51-56,58-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "afe4abfb9cdec7382feb05e4441aa92426cfda9e",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_971f973aad9beb": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "4a726047-c30f-4adb-b8b5-ea8bcfeb1e2b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
