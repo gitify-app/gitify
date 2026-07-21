@@ -23,6 +23,7 @@ export const EVENTS = {
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
+  SYSTEM_WAKE: `${P}system-wake`,
 } as const;
 
 /** Union type of all valid IPC event name strings. */
@@ -114,6 +115,7 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
+  [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
 }>;
 
 /** Request payload type for a given event. */

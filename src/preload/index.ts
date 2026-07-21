@@ -191,6 +191,19 @@ export const api = {
   },
 
   /**
+   * Register a callback invoked when the system wakes from sleep or the user
+   * unlocks their screen.
+   *
+   * Use this to refetch stale data and re-sync online/offline state without
+   * waiting for the next scheduled poll interval.
+   *
+   * @param callback - Called with no arguments on every wake event.
+   */
+  onSystemWake: (callback: () => void) => {
+    onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
+  },
+
+  /**
    * Register a callback invoked when the main process delivers an OAuth callback URL.
    *
    * @param callback - Called with the full callback URL (e.g. `gitify://oauth?code=...`).

@@ -1,9 +1,10 @@
-import { app, shell } from 'electron';
+import { app, powerMonitor, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
 
 import { handleMainEvent, onMainEvent } from '../events';
+import { sendRendererEvent } from '../events';
 import { applyKeepWindowOnBlur } from '../lifecycle/window';
 
 /**
@@ -67,4 +68,16 @@ export function registerSystemHandlers(mb: Menubar): void {
   onMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, (_, value: boolean) => {
     applyKeepWindowOnBlur(mb, value);
   });
+
+  /**
+   * Forward `powerMonitor` wake events to the renderer so hooks can refetch
+   * stale data and re-sync online state after a sleep/unlock cycle.
+   *
+   * Both `resume` (waking from sleep) and `unlock-screen` (user unlocks the
+   * machine without a prior sleep) are treated identically: the user is back
+   * at their device and data should be refreshed immediately.
+   */
+  const sendWakeEvent = () => sendRendererEvent(mb, EVENTS.SYSTEM_WAKE);
+  powerMonitor.on('resume', sendWakeEvent);
+  powerMonitor.on('unlock-screen', sendWakeEvent);
 }

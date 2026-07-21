@@ -227,6 +227,14 @@ export const useNotifications = ({
     await refetch();
   }, [refetch]);
 
+  // Refetch notifications immediately when the system wakes from sleep or the
+  // user unlocks their screen, without waiting for the next poll interval.
+  useEffect(() => {
+    window.gitify.onSystemWake(() => {
+      refetch();
+    });
+  }, [refetch]);
+
   const removeAccountNotifications = useCallback(
     async (account: Account) => {
       const accountUUID = getAccountUUID(account);
