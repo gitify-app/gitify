@@ -104,6 +104,12 @@ export interface ForgeAdapter {
   /** Static or computed capability matrix for this forge. */
   readonly capabilities: ForgeCapabilities;
 
+  /**
+   * Format a user login for display (e.g. prepend "@" for GitHub/Gitea,
+   * return as-is for Bitbucket where the login is an email address).
+   */
+  formatUserLogin(login: string): string;
+
   /** Fetch the authenticated user (used during login & on refresh). */
   fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData>;
 

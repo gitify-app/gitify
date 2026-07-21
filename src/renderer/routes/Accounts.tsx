@@ -137,7 +137,8 @@ export const AccountsRoute: FC = () => {
 
       <Contents>
         {accounts.map((account, i) => {
-          const AuthMethodIcon = getAdapter(account).getAuthMethodIcon(account.method);
+          const adapter = getAdapter(account);
+          const AuthMethodIcon = adapter.getAuthMethodIcon(account.method);
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);
           const accountError = getAccountError(account);
@@ -154,7 +155,7 @@ export const AccountsRoute: FC = () => {
                   >
                     <AvatarWithFallback
                       alt={account.user?.login}
-                      name={`@${account.user?.login}`}
+                      name={adapter.formatUserLogin(account.user?.login ?? '')}
                       size={Size.XLARGE}
                       src={account.user?.avatar ?? undefined}
                     />
@@ -227,7 +228,7 @@ export const AccountsRoute: FC = () => {
                       variant={i === 0 ? 'primary' : 'default'}
                     />
 
-                    {!hasBadCredentials && getAdapter(account).oauthScopes && (
+                    {!hasBadCredentials && adapter.oauthScopes && (
                       <IconButton
                         aria-label={`View scopes for ${account.user?.login}`}
                         data-testid="account-view-scopes"
@@ -301,7 +302,9 @@ export const AccountsRoute: FC = () => {
               return;
             }
             setAddMenuOpen(open);
-            if (!open) {setSelectedForge(null);}
+            if (!open) {
+              setSelectedForge(null);
+            }
           }}
         >
           <ActionMenu.Anchor>
