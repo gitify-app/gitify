@@ -3,8 +3,7 @@ import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
 
-import { handleMainEvent, onMainEvent } from '../events';
-import { sendRendererEvent } from '../events';
+import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
 import { applyKeepWindowOnBlur } from '../lifecycle/window';
 
 /**
