@@ -1,0 +1,33 @@
+src/renderer/routes/github/LoginWithDeviceFlow.tsx
+  h_ac004aadb63da9 8,10,159,194,332
+  s_20adfe7955184b::t_8668d135b5de0f 12,158,160
+  s_20adfe7955184b::t_db824cd663f5df 4-7,9,11,138-149,162,170,181,185-186,188-192,198-203,329-331,333-337,340-341
+  s_20adfe7955184b::t_76fb48f38348a3 193,195,327
+  s_20adfe7955184b::t_66064f23c8e05f 319-326,328,338-339,342-349
+  s_20adfe7955184b::t_1f3956b1c77993 187
+src/renderer/routes/github/LoginWithDeviceFlow.test.tsx
+  s_20adfe7955184b::t_76fb48f38348a3 116
+  s_20adfe7955184b::t_b18ab28be1c6b4 64,97-115,117-147
+  s_20adfe7955184b::t_b4963d32226b9d 148
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "734f660043ebb344341b0a9f9a3d410a04f44419",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_20adfe7955184b": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "cc506e69-ca6c-4d7e-bc9a-fcb698722223",
+        "model": "claude-sonnet-4.6"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
