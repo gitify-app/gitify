@@ -1,194 +1,116 @@
 # Gitify Development Instructions
 
-Gitify is a Node.js/Electron desktop application that displays GitHub notifications in the system tray. It's built with React, TypeScript, and uses pnpm for package management.
+Gitify is a multi-forge notification client — an Electron desktop app that surfaces GitHub, Gitea, and Bitbucket Cloud notifications in the system tray. Built with React, TypeScript, Vite, and pnpm.
 
 **ALWAYS follow these instructions first and only fallback to additional search and context gathering if the information in the instructions is incomplete or found to be in error.**
 
-## Working Effectively
+## Prerequisites and Setup
 
-### Prerequisites and Setup
+- **Node.js**: `>=24` (`.nvmrc` pins `24.18.0`). Use `nvm use` to activate the right version.
+- **Install pnpm globally**: `npm install -g pnpm`
+- **Bootstrap the repository**: `pnpm install` — takes up to a minute on a clean install. NEVER CANCEL. Set timeout to 5+ minutes.
 
-- **Install pnpm globally first**: `npm install -g pnpm`
-- **Node.js requirement**: This project requires Node.js >=22 (check .nvmrc), though it works with Node 20+ with warnings
-- **Bootstrap the repository**:
-  - `pnpm install` -- takes 2.5 minutes. NEVER CANCEL. Set timeout to 5+ minutes.
+## Key Commands
 
-### Development Workflow
+| Command             | What it does                                                                | Timing        |
+| ------------------- | --------------------------------------------------------------------------- | ------------- |
+| `pnpm dev`          | Vite dev server + GraphQL codegen watch (main development loop)             | ~10s to start |
+| `pnpm build`        | Production build for all Electron targets (main, preload, renderer, shared) | ~30s clean    |
+| `pnpm test`         | Run full Vitest suite with coverage                                         | ~15s          |
+| `pnpm check`        | oxlint + oxfmt + type-check (unified via vite-plus)                         | <5s           |
+| `pnpm check:fix`    | Same as check but auto-fixes formatting and lint                            | <5s           |
+| `pnpm tsc --noEmit` | TypeScript-only type-check                                                  | ~5s           |
 
-- **Build the application**:
-  - `pnpm build` -- takes 32 seconds. NEVER CANCEL. Set timeout to 60+ minutes.
-  - Builds both main (Electron process) and renderer (React UI) bundles
-  - Output goes to `build/` directory
-- **Development mode with hot reload**:
-  - `pnpm watch` -- starts webpack in watch mode for both main and renderer
-  - Takes ~15 seconds for initial compilation
-  - Leave running while developing
-- **Run the Electron app**:
-  - `pnpm start` -- launches the desktop application
-  - NOTE: Will fail in headless/container environments due to Electron sandbox restrictions (expected)
-  - Use `CmdOrCtrl+R` to reload when watch mode detects changes
+**NEVER CANCEL long-running commands** (`pnpm install`, `pnpm build`). Set terminal timeouts to 5+ minutes.
 
-### Linting and Code Quality
+## Development Workflow
 
-- **Check formatting, linting, and types**:
-  - `pnpm check` -- runs Vite+'s unified format/lint/type-check pipeline
-  - **ALWAYS run before committing** or CI will fail
-- **Auto-fix issues**:
-  - `pnpm check:fix` -- formats and applies lint fixes
+- **Day-to-day development**: `pnpm dev` — starts both the Vite dev server and GraphQL codegen watcher concurrently. Leave running while developing.
+- **Full build**: `pnpm build` — builds all targets via `vp build`. Output goes to `build/` (subdirectories: `main/`, `preload/`, `renderer/`, `shared/`).
+- **Run the Electron app**: `pnpm start` — runs `pnpm build` then `pnpm dev`. Will fail in headless/container environments due to Electron sandbox restrictions (this is expected and normal).
 
-### Testing
+## Validation
 
-- **Run TypeScript compilation check**:
-  - `pnpm tsc --noEmit` -- takes 5 seconds. NEVER CANCEL. Set timeout to 10+ minutes.
-- **Run unit tests**:
-  - `pnpm test` -- takes 35 seconds. NEVER CANCEL. Set timeout to 30+ minutes.
-  - Uses Vitest with happy-dom environment
-  - NOTE: Some existing snapshot tests may fail but still return success - this is normal
-  - Update snapshots after legitimate UI changes with `pnpm test -u`
+After making changes, validate in this order:
 
-## Validation Scenarios
+1. **Type-check**: `pnpm tsc --noEmit` — must complete with no errors
+2. **Lint + format**: `pnpm check` — warnings are acceptable, errors are not
+3. **Tests**: `pnpm test` — focus on no NEW failures; existing snapshots may differ on timezone-mismatched machines
+4. **Build**: `pnpm build` — look for `✓ built in [time]` for each target (main, preload, renderer, shared)
 
-**CRITICAL**: After making changes, ALWAYS validate your work by running these scenarios:
+**Snapshot test failures**: Run `pnpm test -u` to regenerate after legitimate UI changes.
 
-### Build Validation
+**Pre-commit**: Husky runs `vp staged` automatically on `git commit`. Manual equivalent: `pnpm check && pnpm test`.
 
-1. **Clean build test**: `rm -rf build && pnpm build`
-2. **Verify build outputs**: Check that `build/main.js`, `build/renderer.js`, and `build/styles.css` are created
-3. **File sizes should be reasonable**: main.js ~300KB, renderer.js ~2MB, styles.css ~1MB
-4. **Success indicators**: Look for "webpack compiled successfully" messages for both main and renderer
+## File Map
 
-### Code Quality Validation
+### Source
 
-1. **Linting passes**: `pnpm lint:check` should show warnings but complete successfully (exit code 0)
-2. **TypeScript compiles**: `pnpm tsc --noEmit` should complete without errors
-3. **Tests pass**: Run `pnpm test` and ensure no new test failures (some existing ones may fail - focus on your changes)
+- `src/main/` — Electron main process (Node.js)
+- `src/preload/` — Electron preload scripts
+- `src/renderer/` — React UI (the visible app)
+- `src/shared/` — Code shared across all processes
 
-### Development Environment Testing
+### Key renderer paths
 
-1. **Watch mode works**: Start `pnpm watch`, make a small change to a file in `src/`, verify webpack recompiles (look for compilation success messages)
-2. **Development build**: The watch mode creates development builds with source maps in `build/` directory
+- `src/renderer/utils/forges/` — Per-forge adapters (github/, gitea/, bitbucket/) and registry
+- `src/renderer/utils/auth/` — Authentication utilities
+- `src/renderer/hooks/useNotifications.ts` — Core notification polling logic
+- `src/renderer/components/` — UI components
+- `src/renderer/routes/` — Page-level route components
+- `src/renderer/stores/` — Zustand stores
 
-## Expected Command Outputs
+### Configuration
 
-### Successful Build
+- `vite.config.ts` — Primary build config; also hosts `lint`, `fmt`, and `staged` blocks used by `pnpm check` and Husky
+- `vitest.config.ts` — Test configuration (Vitest projects: happy-dom for renderer/preload, node for main/shared)
+- `tsconfig.json` — TypeScript configuration
+- `tailwind.config.mts` — Tailwind CSS configuration
+- `package.json` — Scripts and dependency versions
 
-```
-webpack 5.101.2 compiled successfully in [time]
-```
+### Assets
 
-### Successful Tests (with some expected failures)
+- `assets/` — Icons, sounds, and static resources
 
-```
-Test Suites: X failed, Y passed, Z total
-Tests:       A failed, B passed, C total
-```
+## Local Packaging
 
-Note: Focus on ensuring no NEW test failures from your changes.
-
-### Successful Linting
-
-```
-Checked X files in Yms. No fixes applied.
-Found Z warnings.
-```
-
-Warnings are acceptable - the important part is that it completes successfully.
-
-## Common Tasks and File Locations
-
-### Key Files and Directories
-
-- **Main Electron process**: `src/main/` - Node.js backend code
-- **Renderer process**: `src/renderer/` - React frontend code
-- **Shared code**: `src/shared/` - Common utilities and types
-- **Build configuration**: `config/` - Webpack configs and electron-builder settings
-- **Assets**: `assets/` - Icons, sounds, and static resources
-
-### Configuration Files
-
-- **package.json**: Main project configuration and scripts
-- **vite.config.ts**: Vite+ unified config — `lint`, `fmt`, and `staged` blocks live here
-- **vitest.config.ts**: Test configuration
-- **tsconfig.json**: TypeScript configuration
-- **tailwind.config.ts**: CSS framework configuration
-
-### Frequently Modified Areas
-
-- **Notification logic**: `src/renderer/hooks/useNotifications.ts`
-- **GitHub API client**: `src/renderer/utils/api/`
-- **UI components**: `src/renderer/components/`
-- **Authentication**: `src/renderer/utils/auth/`
-- **Settings**: `src/renderer/routes/Settings.tsx`
-
-## Build and Release Process
-
-### Local Packaging (for testing)
+Requires a prior `pnpm build` and platform-specific tooling:
 
 - **macOS**: `pnpm package:macos --publish=never`
 - **Windows**: `pnpm package:win --publish=never`
 - **Linux**: `pnpm package:linux --publish=never`
-- **NOTE**: These require the full build first and additional platform-specific dependencies
 
-### Pre-commit Checks
+## Constraints and Gotchas
 
-- **Automatic via Husky**: Git hooks run `pnpm exec vp staged` on commit
-- **Manual validation**: Run `pnpm check && pnpm tsc --noEmit && pnpm test`
-
-## Important Constraints and Limitations
-
-### Timing Expectations
-
-- **Dependency installation**: 2-3 minutes (normal for Electron projects)
-- **Full build (clean)**: 30-35 seconds
-- **Watch mode initial compilation**: 10-15 seconds
-- **Watch mode recompilation**: 5-8 seconds for incremental changes
-- **Test suite**: 60-70 seconds
-- **TypeScript compilation**: 5 seconds
-- **Linting**: <1 second
-
-### Environment Issues
-
-- **Electron in containers**: Will fail to start due to sandbox restrictions (expected behavior in headless environments)
-- **Node version warnings**: Project requires Node >=22, works with 20+ but shows warnings in `pnpm` commands
-- **Build warnings**: Some PostCSS/Tailwind warnings in renderer build are normal and expected
-- **Linting warnings**: Existing codebase has some linting warnings - focus only on your changes
-
-### Common Troubleshooting
-
-- **Build failures**: Check Node version, ensure `pnpm install` completed successfully
-- **Test snapshot failures**: Run `pnpm test -u` to update snapshots after legitimate UI changes
-- **Linting errors**: Run `pnpm lint` to auto-fix most issues
-- **Watch mode not updating**: Restart watch mode, check file permissions
+- **Electron won't start in CI/containers**: Sandbox restrictions make `pnpm start` / `pnpm dev` fail headlessly. This is expected — test logic; don't try to fix the launch.
+- **Node version is strict**: `>=24` required. Check `.nvmrc` and run `nvm use` if commands behave oddly.
+- **Snapshot drift on non-UTC machines**: Some snapshot tests encode relative dates. Tests may fail locally if your timezone differs from UTC. The test setup stubs `TZ=UTC` via `vi.stubEnv`.
+- **Lint warnings are OK**: The codebase has pre-existing lint warnings. Only new errors block CI.
+- **GraphQL codegen**: Running `pnpm dev` auto-watches for schema changes. If you edit `.graphql` files manually, re-run `pnpm codegen` to regenerate `graphql/generated/graphql.ts`.
 
 ## Development Philosophy
 
-This project focuses on GitHub notification monitoring, not being a full GitHub client. Keep changes:
+This is a notification _viewer_, not a full forge client. Keep changes:
 
-- **Simple and focused** on core notification functionality
-- **Consistent** with existing UI patterns and design language
-- **Minimal** - avoid adding complexity for edge cases
-- **Cross-platform** compatible (macOS, Windows, Linux)
+- **Focused** on the notification surface — don't expand scope into full forge feature parity
+- **Forge-agnostic** at the orchestration layer — new forge behaviour belongs in the forge adapter (`src/renderer/utils/forges/<forge>/adapter.ts`), not in shared hooks or components
+- **Minimal** — avoid adding complexity for edge cases
+- **Cross-platform** (macOS, Windows, Linux)
 
-## Technology Stack Reference
+## Technology Stack
 
-**Core Technologies:**
-
-- **Electron 40+**: Desktop app framework
-- **React 19+**: UI library
-- **TypeScript 5+**: Language
-- **pnpm 10+**: Package manager
-- **Vite+**: Unified toolchain (lint via oxlint, format via oxfmt, dev/build/test)
-- **Jest**: Testing framework
-- **Webpack 5**: Build system
-- **Tailwind CSS**: Styling framework
-
-**Key Dependencies:**
-
-- **menubar**: System tray integration
-- **electron-updater**: Auto-update functionality
-- **@primer/react**: GitHub's React component library
-- **octokit**: HTTP client for GitHub API
-- **@primer/octicons-react**: GitHub icon library
-- **date-fns**: Date utilities
-
-ALWAYS reference this information first before exploring the codebase or running commands to save time and avoid common pitfalls.
+- **Electron 43+** — desktop app host
+- **React 19+** — UI
+- **TypeScript 5+** — language
+- **pnpm 10+** — package manager
+- **Vite + vite-plus** — unified build, dev, lint (`oxlint`), format (`oxfmt`), and test toolchain. The `vp` CLI drives all tooling.
+- **Vitest** — test runner (via `vp test`); `@testing-library/jest-dom` provides DOM matchers
+- **Tailwind CSS v4** — styling
+- **Zustand** — client state management
+- **TanStack Query** — server state / notification fetching
+- **electron-menubar** — system tray integration
+- **electron-updater** — auto-update
+- **@primer/react** — GitHub's component library (UI primitives)
+- **@primer/octicons-react** — icon library
+- **octokit** — GitHub API HTTP client (GitHub forge only)
+- **date-fns** — date utilities
