@@ -1,0 +1,28 @@
+src/renderer/utils/forges/gitea/adapter.ts
+  s_971f973aad9beb::t_186aa0e6526c5b 66-67
+src/renderer/utils/forges/bitbucket/adapter.ts
+  s_971f973aad9beb::t_186aa0e6526c5b 94-95
+src/renderer/utils/forges/types.ts
+  s_971f973aad9beb::t_186aa0e6526c5b 107-112
+src/renderer/utils/forges/github/adapter.ts
+  s_971f973aad9beb::t_186aa0e6526c5b 83-84
+src/renderer/routes/Accounts.tsx
+  s_971f973aad9beb::t_feef8222e2ac26 158,231
+  s_971f973aad9beb::t_c3c9e32db28c39 140-141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "93c2337dfccf130a2ab5805f93d018153101ab73",
+  "prompts": {},
+  "sessions": {
+    "s_971f973aad9beb": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "4a726047-c30f-4adb-b8b5-ea8bcfeb1e2b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
