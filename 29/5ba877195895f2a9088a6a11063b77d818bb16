@@ -1,0 +1,51 @@
+src/renderer/utils/forges/bitbucket/adapter.ts
+  s_971f973aad9beb::t_062d2b83e5cbdc 62,91
+src/renderer/routes/bitbucket/LoginWithPersonalAccessToken.test.tsx
+  s_971f973aad9beb::t_7eecb34c6e122b 134-135
+src/renderer/routes/Accounts.tsx
+  s_971f973aad9beb::t_22b529a3e3bf46 1,6-7,30,54-57,296-306,314-359,363-372,375,377,379,381-385,388-390
+  s_971f973aad9beb::t_d097a76ab11c75 378,380
+src/renderer/routes/Login.tsx
+  h_ac004aadb63da9 96
+src/renderer/routes/Accounts.test.tsx
+  s_971f973aad9beb::t_f5ec89b4c111fb 199,208-212,222,230,232,242,250,252,262,271,273,280-295,297
+  s_971f973aad9beb::t_07372e45000d53 296
+  s_971f973aad9beb::t_682181f49b4062 298
+src/renderer/components/icons/BitbucketIcon.tsx
+  s_971f973aad9beb::t_19eec448cae4e3 1-28
+src/renderer/utils/forges/bitbucket/adapter.test.ts
+  s_971f973aad9beb::t_71ff82279896ca 283
+src/renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx
+  s_971f973aad9beb::t_f479b789619f08 9
+src/renderer/utils/ui/icons.ts
+  s_971f973aad9beb::t_eeccb79a2daa7c 15-16,64-65
+src/renderer/components/login/LoginWithPersonalAccessTokenForm.tsx
+  s_971f973aad9beb::t_f479b789619f08 65-73,98-99,104,214-233
+src/renderer/utils/forges/github/adapter.ts
+  s_971f973aad9beb::t_d9e3edf690f897 79
+src/renderer/routes/__snapshots__/Login.test.tsx.snap
+  s_971f973aad9beb::t_17c5dfcdef36e6 88,176,178,181,344
+src/renderer/routes/bitbucket/__snapshots__/LoginWithPersonalAccessToken.test.tsx.snap
+  s_971f973aad9beb::t_01514bec0bd89c 244-245,273,284,316,339,388
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "295ba877195895f2a9088a6a11063b77d818bb16",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_971f973aad9beb": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "4a726047-c30f-4adb-b8b5-ea8bcfeb1e2b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
