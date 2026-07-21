@@ -1,6 +1,4 @@
-import type { AtlassianNotificationFragment } from './graphql/generated/graphql';
-
-export type { AtlassianNotificationFragment };
+export type { AtlassianNotificationFragment } from './graphql/generated/graphql';
 
 /** The product string returned in analyticsAttributes for Bitbucket notifications. */
 export const BITBUCKET_REGISTRATION_PRODUCT = 'bitbucket';
