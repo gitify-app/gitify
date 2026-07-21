@@ -93,7 +93,7 @@
     "@parcel/watcher": "2.5.6",
     "@primer/css": "22.3.0",
     "@primer/octicons-react": "19.29.2",
-    "@primer/react": "38.29.0",
+    "@primer/react": "38.32.0",
     "@swc-contrib/plugin-graphql-codegen-client-preset": "0.27.0",
     "@tailwindcss/vite": "4.3.3",
     "@tanstack/react-query": "5.101.2",
@@ -106,7 +106,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.7.1",
     "@vitejs/plugin-react": "6.0.3",
-    "@vitest/coverage-v8": "4.1.9",
+    "@vitest/coverage-v8": "4.1.10",
     "clsx": "2.1.1",
     "concurrently": "10.0.3",
     "date-fns": "4.4.0",
@@ -126,8 +126,8 @@
     "vite": "8.1.5",
     "vite-plugin-checker": "0.14.4",
     "vite-plugin-electron": "1.1.0",
-    "vite-plus": "0.2.1",
-    "vitest": "4.1.9",
+    "vite-plus": "0.2.5",
+    "vitest": "4.1.10",
     "zustand": "5.0.14"
   },
   "engines": {
