@@ -61,7 +61,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     ]);
 
     await screen.findByTestId('device-user-code');
-    expect(screen.getByTestId('device-verification-link')).toBeInTheDocument();
+    expect(screen.getByTestId('open-browser-button')).toBeInTheDocument();
 
     // Verify auto-copy and auto-open were called
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
@@ -92,6 +92,58 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     ]);
 
     await screen.findByTestId('device-user-code');
+  });
+
+  it('should show status indicators after device flow starts', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.com',
+      clientId: 'test-id',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
+    });
+
+    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await screen.findByTestId('device-user-code');
+
+    expect(screen.getByText('Code copied to clipboard')).toBeInTheDocument();
+    expect(screen.getByText('Opened GitHub.com')).toBeInTheDocument();
+    expect(screen.getByText('Waiting for authorization...')).toBeInTheDocument();
+  });
+
+  it('should open browser and copy link via footer buttons', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.com',
+      clientId: 'test-id',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+      loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
+    });
+
+    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await screen.findByTestId('device-user-code');
+
+    // Reset spies to isolate button interactions
+    openExternalLinkSpy.mockClear();
+    copyToClipboardSpy.mockClear();
+
+    await userEvent.click(screen.getByTestId('open-browser-button'));
+    expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/login/device');
+
+    await userEvent.click(screen.getByTestId('copy-link-button'));
+    expect(copyToClipboardSpy).toHaveBeenCalledWith('https://github.com/login/device');
   });
 
   it('should copy user code to clipboard when clicking copy button', async () => {

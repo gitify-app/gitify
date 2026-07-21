@@ -1,8 +1,15 @@
 import { type FC, type ReactNode, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { CopyIcon, SignInIcon, SyncIcon } from '@primer/octicons-react';
-import { Banner, Button, IconButton, Link as PrimerLink, Stack, Text } from '@primer/react';
+import {
+  CheckCircleFillIcon,
+  CopyIcon,
+  GlobeIcon,
+  LinkIcon,
+  SignInIcon,
+  SyncIcon,
+} from '@primer/octicons-react';
+import { Banner, Button, Heading, IconButton, Stack, Text } from '@primer/react';
 
 import { Constants } from '../../constants';
 
@@ -128,6 +135,18 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
     }
   }, [session?.userCode]);
 
+  const handleOpenBrowser = useCallback(() => {
+    if (session?.verificationUri) {
+      openExternalLink(session.verificationUri as Link);
+    }
+  }, [session?.verificationUri]);
+
+  const handleCopyVerificationLink = useCallback(async () => {
+    if (session?.verificationUri) {
+      await copyToClipboard(session.verificationUri);
+    }
+  }, [session?.verificationUri]);
+
   // Render UI states as separate functions for clarity
   const renderSessionUI = () => {
     if (!session) {
@@ -136,17 +155,11 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
 
     return (
       <Stack direction="vertical" gap="normal">
-        <Stack direction="vertical" gap="condensed">
-          <Text as="p">
-            Go to{' '}
-            <PrimerLink data-testid="device-verification-link" href={session.verificationUri}>
-              <code>{session.verificationUri}</code>
-            </PrimerLink>
-          </Text>
-          <Text as="p">and enter your device code when prompted:</Text>
-        </Stack>
+        <Heading as="h3">
+          Authorize the app <Text as="span">using this code.</Text>
+        </Heading>
 
-        <Stack align="center" direction="horizontal" justify="space-between" padding="condensed">
+        <Stack align="center" direction="horizontal" gap="condensed">
           <Text
             as="div"
             data-testid="device-user-code"
@@ -154,6 +167,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
               fontSize: '32px',
               fontWeight: 'bold',
               fontFamily: 'monospace',
+              letterSpacing: '0.05em',
             }}
           >
             {session.userCode}
@@ -164,27 +178,29 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
             icon={CopyIcon}
             onClick={handleCopyUserCode}
             size="small"
-            variant="default"
+            variant="invisible"
           />
         </Stack>
 
-        <Text as="p" size="small">
-          We're waiting for authorization...
-        </Text>
-        {isPolling && (
-          <Stack align="center" gap="normal">
-            <IconButton
-              aria-label="Polling"
-              className="animate-spin"
-              icon={SyncIcon}
-              size="small"
-              variant="invisible"
-            />
-            <Text as="em" size="small">
-              Polling for authorization
+        <Stack direction="vertical" gap="condensed">
+          <Stack align="center" direction="horizontal" gap="condensed">
+            <CheckCircleFillIcon size={16} />
+            <Text size="small">Code copied to clipboard</Text>
+          </Stack>
+
+          <Stack align="center" direction="horizontal" gap="condensed">
+            <GlobeIcon size={16} />
+            <Text size="small">
+              Opened{' '}
+              {session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname}
             </Text>
           </Stack>
-        )}
+
+          <Stack align="center" direction="horizontal" gap="condensed">
+            <SyncIcon className={isPolling ? 'animate-spin' : 'opacity-30'} size={16} />
+            <Text size="small">Waiting for authorization...</Text>
+          </Stack>
+        </Stack>
       </Stack>
     );
   };
@@ -300,11 +316,37 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
         {mainContent}
       </Contents>
 
-      <Footer justify="space-between">
-        <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
-          Cancel
-        </Button>
-      </Footer>
+      {session ? (
+        <Footer justify="space-between">
+          <Button
+            data-testid="open-browser-button"
+            leadingVisual={GlobeIcon}
+            onClick={handleOpenBrowser}
+            variant="primary"
+          >
+            Open {session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname}
+          </Button>
+          <Stack direction="horizontal" gap="condensed">
+            <Button
+              data-testid="copy-link-button"
+              leadingVisual={LinkIcon}
+              onClick={handleCopyVerificationLink}
+              variant="default"
+            >
+              Copy link
+            </Button>
+            <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
+              Cancel
+            </Button>
+          </Stack>
+        </Footer>
+      ) : (
+        <Footer justify="end">
+          <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
+            Cancel
+          </Button>
+        </Footer>
+      )}
     </Page>
   );
 };
