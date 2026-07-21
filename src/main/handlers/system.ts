@@ -2,6 +2,7 @@ import { app, powerMonitor, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
+import { logInfo } from '../../shared/logger';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
 import { applyKeepWindowOnBlur } from '../lifecycle/window';
@@ -18,13 +19,6 @@ export function registerSystemHandlers(mb: Menubar): void {
    * no shortcut at all.
    */
   let lastRegisteredAccelerator: string | null = null;
-
-  /**
-   * Open the given URL in the user's default browser, with an option to activate the app.
-   */
-  onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }) =>
-    shell.openExternal(url, { activate }),
-  );
 
   /**
    * Register or unregister a global keyboard shortcut that toggles the menubar window visibility.
@@ -55,6 +49,29 @@ export function registerSystemHandlers(mb: Menubar): void {
   });
 
   /**
+   * Handle system wake from sleep/hibernate
+   */
+  powerMonitor.on('resume', () => {
+    sendRendererEvent(mb, EVENTS.SYSTEM_WAKE);
+    logInfo('power-monitor', 'resume event triggered, will refetch data');
+  });
+
+  /**
+   * Handle screen unlock (user returned to device)
+   */
+  powerMonitor.on('unlock-screen', () => {
+    sendRendererEvent(mb, EVENTS.SYSTEM_WAKE);
+    logInfo('power-monitor', 'unlock-screen event triggered, will refetch data');
+  });
+
+  /**
+   * Open the given URL in the user's default browser, with an option to activate the app.
+   */
+  onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }) =>
+    shell.openExternal(url, { activate }),
+  );
+
+  /**
    * Update the application's auto-launch setting based on the provided configuration.
    */
   onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings) => {
@@ -67,16 +84,4 @@ export function registerSystemHandlers(mb: Menubar): void {
   onMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, (_, value: boolean) => {
     applyKeepWindowOnBlur(mb, value);
   });
-
-  /**
-   * Forward `powerMonitor` wake events to the renderer so hooks can refetch
-   * stale data and re-sync online state after a sleep/unlock cycle.
-   *
-   * Both `resume` (waking from sleep) and `unlock-screen` (user unlocks the
-   * machine without a prior sleep) are treated identically: the user is back
-   * at their device and data should be refreshed immediately.
-   */
-  const sendWakeEvent = () => sendRendererEvent(mb, EVENTS.SYSTEM_WAKE);
-  powerMonitor.on('resume', sendWakeEvent);
-  powerMonitor.on('unlock-screen', sendWakeEvent);
 }

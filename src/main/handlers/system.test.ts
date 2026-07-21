@@ -9,6 +9,10 @@ vi.mock('../lifecycle/window', () => ({
   applyKeepWindowOnBlur: vi.fn(),
 }));
 
+vi.mock('../../shared/logger', () => ({
+  logInfo: vi.fn(),
+}));
+
 const onMock = vi.fn();
 const handleMock = vi.fn();
 
@@ -99,11 +103,16 @@ describe('main/handlers/system.ts', () => {
       const calls = vi.mocked(powerMonitor.on).mock.calls as unknown as Array<[string, () => void]>;
       const resumeHandler = calls.find((c) => c[0] === 'resume')?.[1];
       const unlockHandler = calls.find((c) => c[0] === 'unlock-screen')?.[1];
+      const webContentsSend = (
+        menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } }
+      ).webContents.send;
 
-      // Both handlers should be the same function (sendWakeEvent)
-      expect(resumeHandler).toBeDefined();
-      expect(unlockHandler).toBeDefined();
-      expect(resumeHandler).toBe(unlockHandler);
+      resumeHandler?.();
+      expect(webContentsSend).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
+
+      webContentsSend.mockClear();
+      unlockHandler?.();
+      expect(webContentsSend).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
     });
 
     it('invoking the wake handler sends SYSTEM_WAKE to the renderer', async () => {
