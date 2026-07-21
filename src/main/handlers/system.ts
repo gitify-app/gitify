@@ -1,9 +1,10 @@
-import { app, shell } from 'electron';
+import { app, powerMonitor, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
+import { logInfo } from '../../shared/logger';
 
-import { handleMainEvent, onMainEvent } from '../events';
+import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
 import { applyKeepWindowOnBlur } from '../lifecycle/window';
 
 /**
@@ -18,13 +19,6 @@ export function registerSystemHandlers(mb: Menubar): void {
    * no shortcut at all.
    */
   let lastRegisteredAccelerator: string | null = null;
-
-  /**
-   * Open the given URL in the user's default browser, with an option to activate the app.
-   */
-  onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }) =>
-    shell.openExternal(url, { activate }),
-  );
 
   /**
    * Register or unregister a global keyboard shortcut that toggles the menubar window visibility.
@@ -53,6 +47,29 @@ export function registerSystemHandlers(mb: Menubar): void {
     }
     return { success: false };
   });
+
+  /**
+   * Handle system wake from sleep/hibernate
+   */
+  powerMonitor.on('resume', () => {
+    sendRendererEvent(mb, EVENTS.SYSTEM_WAKE);
+    logInfo('power-monitor', 'resume event triggered, will refetch data');
+  });
+
+  /**
+   * Handle screen unlock (user returned to device)
+   */
+  powerMonitor.on('unlock-screen', () => {
+    sendRendererEvent(mb, EVENTS.SYSTEM_WAKE);
+    logInfo('power-monitor', 'unlock-screen event triggered, will refetch data');
+  });
+
+  /**
+   * Open the given URL in the user's default browser, with an option to activate the app.
+   */
+  onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }) =>
+    shell.openExternal(url, { activate }),
+  );
 
   /**
    * Update the application's auto-launch setting based on the provided configuration.

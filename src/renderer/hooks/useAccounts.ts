@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -48,6 +48,14 @@ export const useAccounts = (): AccountsState => {
 
   const refetchAccounts = useCallback(async () => {
     await refetch();
+  }, [refetch]);
+
+  // Refetch accounts immediately when the system wakes from sleep or the user
+  // unlocks their screen, without waiting for the next scheduled interval.
+  useEffect(() => {
+    window.gitify.onSystemWake(() => {
+      refetch();
+    });
   }, [refetch]);
 
   return {

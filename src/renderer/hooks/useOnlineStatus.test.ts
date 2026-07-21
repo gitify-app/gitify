@@ -31,4 +31,22 @@ describe('renderer/hooks/useOnlineStatus.ts', () => {
 
     expect(result.current).toBe(true);
   });
+
+  it('re-probes online state when the system wakes', () => {
+    act(() => {
+      onlineManager.setOnline(false);
+    });
+
+    renderHook(() => useOnlineStatus());
+
+    // Simulate a wake event by invoking the callback registered with onSystemWake
+    const wakeCallback = vi.mocked(window.gitify.onSystemWake).mock.calls[0][0];
+
+    act(() => {
+      Object.defineProperty(navigator, 'onLine', { value: true, configurable: true });
+      wakeCallback();
+    });
+
+    expect(onlineManager.isOnline()).toBe(true);
+  });
 });

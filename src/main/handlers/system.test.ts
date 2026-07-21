@@ -9,6 +9,10 @@ vi.mock('../lifecycle/window', () => ({
   applyKeepWindowOnBlur: vi.fn(),
 }));
 
+vi.mock('../../shared/logger', () => ({
+  logInfo: vi.fn(),
+}));
+
 const onMock = vi.fn();
 const handleMock = vi.fn();
 
@@ -23,6 +27,9 @@ vi.mock('electron', () => ({
   shell: {
     openExternal: vi.fn(),
   } satisfies Pick<Electron.Shell, 'openExternal'>,
+  powerMonitor: {
+    on: vi.fn(),
+  } satisfies Pick<Electron.PowerMonitor, 'on'>,
 }));
 
 describe('main/handlers/system.ts', () => {
@@ -39,6 +46,9 @@ describe('main/handlers/system.ts', () => {
       setGlobalShortcut: setGlobalShortcutMock,
       window: {
         isVisible: vi.fn().mockReturnValue(false),
+        webContents: {
+          send: vi.fn(),
+        },
       },
     } as unknown as Menubar;
   });
@@ -70,6 +80,53 @@ describe('main/handlers/system.ts', () => {
       expect(onEvents).toContain(EVENTS.UPDATE_AUTO_LAUNCH);
       expect(onEvents).toContain(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR);
       expect(handleEvents).toContain(EVENTS.UPDATE_KEYBOARD_SHORTCUT);
+    });
+  });
+
+  describe('SYSTEM_WAKE', () => {
+    it('registers powerMonitor listeners for resume and unlock-screen', async () => {
+      const { powerMonitor } = await import('electron');
+      registerSystemHandlers(menubar);
+
+      const registeredEvents = vi
+        .mocked(powerMonitor.on)
+        .mock.calls.map((call) => call[0] as string);
+
+      expect(registeredEvents).toContain('resume');
+      expect(registeredEvents).toContain('unlock-screen');
+    });
+
+    it('both powerMonitor events send a SYSTEM_WAKE renderer event', async () => {
+      const { powerMonitor } = await import('electron');
+      registerSystemHandlers(menubar);
+
+      const calls = vi.mocked(powerMonitor.on).mock.calls as unknown as Array<[string, () => void]>;
+      const resumeHandler = calls.find((c) => c[0] === 'resume')?.[1];
+      const unlockHandler = calls.find((c) => c[0] === 'unlock-screen')?.[1];
+      const webContentsSend = (
+        menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } }
+      ).webContents.send;
+
+      resumeHandler?.();
+      expect(webContentsSend).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
+
+      webContentsSend.mockClear();
+      unlockHandler?.();
+      expect(webContentsSend).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
+    });
+
+    it('invoking the wake handler sends SYSTEM_WAKE to the renderer', async () => {
+      const { powerMonitor } = await import('electron');
+      registerSystemHandlers(menubar);
+
+      const calls = vi.mocked(powerMonitor.on).mock.calls as unknown as Array<[string, () => void]>;
+      const resumeHandler = calls.find((c) => c[0] === 'resume')?.[1];
+      resumeHandler?.();
+
+      expect(
+        (menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } })
+          .webContents.send,
+      ).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
     });
   });
 
