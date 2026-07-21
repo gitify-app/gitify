@@ -107,4 +107,27 @@ describe('renderer/components/GlobalEffects.tsx', () => {
       expect(useAccountsStore.getState().accounts[0]?.token).toBe(mockGitHubCloudAccount.token);
     });
   });
+
+  describe('system wake (useAccounts)', () => {
+    it('refetches accounts when the system wakes', async () => {
+      const refreshAccountSpy = vi
+        .spyOn(authUtils, 'refreshAccount')
+        .mockImplementation(async (account) => account);
+
+      await act(async () => {
+        renderWithProviders(<GlobalEffects />, {
+          accounts: [mockGitHubCloudAccount],
+        });
+      });
+
+      const callCountAfterMount = refreshAccountSpy.mock.calls.length;
+
+      const wakeCallback = vi.mocked(window.gitify.onSystemWake).mock.calls[0][0];
+      await act(async () => {
+        wakeCallback();
+      });
+
+      expect(refreshAccountSpy.mock.calls.length).toBeGreaterThan(callCountAfterMount);
+    });
+  });
 });

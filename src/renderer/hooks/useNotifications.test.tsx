@@ -370,4 +370,21 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(result.current.notifications[0].account).toEqual(mockGitHubEnterpriseServerAccount);
     });
   });
+
+  describe('system wake', () => {
+    it('refetches notifications when the system wakes', async () => {
+      useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      renderNotificationsHook();
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
+
+      const wakeCallback = vi.mocked(window.gitify.onSystemWake).mock.calls[0][0];
+      act(() => {
+        wakeCallback();
+      });
+
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(2));
+    });
+  });
 });

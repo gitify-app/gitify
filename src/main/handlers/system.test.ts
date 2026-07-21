@@ -42,6 +42,9 @@ describe('main/handlers/system.ts', () => {
       setGlobalShortcut: setGlobalShortcutMock,
       window: {
         isVisible: vi.fn().mockReturnValue(false),
+        webContents: {
+          send: vi.fn(),
+        },
       },
     } as unknown as Menubar;
   });
@@ -101,6 +104,20 @@ describe('main/handlers/system.ts', () => {
       expect(resumeHandler).toBeDefined();
       expect(unlockHandler).toBeDefined();
       expect(resumeHandler).toBe(unlockHandler);
+    });
+
+    it('invoking the wake handler sends SYSTEM_WAKE to the renderer', async () => {
+      const { powerMonitor } = await import('electron');
+      registerSystemHandlers(menubar);
+
+      const calls = vi.mocked(powerMonitor.on).mock.calls as unknown as Array<[string, () => void]>;
+      const resumeHandler = calls.find((c) => c[0] === 'resume')?.[1];
+      resumeHandler?.();
+
+      expect(
+        (menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } })
+          .webContents.send,
+      ).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
     });
   });
 
