@@ -1,0 +1,14 @@
+.github/workflows/test.yml
+  h_ac004aadb63da9 50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "53f2ca2423cc83779872e22d37176b53a0feff7d",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
