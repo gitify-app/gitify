@@ -1,0 +1,44 @@
+src/renderer/hooks/useAccounts.ts
+  s_971f973aad9beb::t_451ff6152c75cc 53-60
+  s_971f973aad9beb::t_c0c70c2009d652 1
+src/renderer/hooks/useOnlineStatus.ts
+  s_971f973aad9beb::t_2ca1a5446e5d1a 22-26
+src/main/handlers/system.test.ts
+  s_971f973aad9beb::t_815aca649f1318 84-86,96-98
+  s_971f973aad9beb::t_f18f49f4591a52 79,81-83,87-91,93-95,99-106
+  s_971f973aad9beb::t_46fccfab68dd6c 26-28
+  s_971f973aad9beb::t_68563f3c289f74 80,92
+src/shared/events.ts
+  s_971f973aad9beb::t_4abbf397230a53 26,118
+src/main/handlers/system.ts
+  s_971f973aad9beb::t_3a007774457586 1
+  s_971f973aad9beb::t_425509342456cc 7,71-82
+src/renderer/hooks/useNotifications.ts
+  s_971f973aad9beb::t_0820e52f89bd0f 230-237
+src/renderer/__helpers__/vitest.setup.ts
+  s_971f973aad9beb::t_46fccfab68dd6c 105
+src/preload/index.ts
+  s_971f973aad9beb::t_22ab4aaa3567cc 194-205
+  s_971f973aad9beb::t_918f65b07b1874 193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "a5fac3a4863fccc8ae9ee20a927ab93018f58dd7",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_971f973aad9beb": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "4a726047-c30f-4adb-b8b5-ea8bcfeb1e2b",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
