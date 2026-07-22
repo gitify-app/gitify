@@ -1,5 +1,6 @@
 * @afonsojramos @setchy
 
 # Forge adapters — see MAINTAINERS.md
+/src/renderer/utils/forges/bitbucket/ @setchy
 /src/renderer/utils/forges/github/ @afonsojramos @setchy
 /src/renderer/utils/forges/gitea/  @afonsojramos @bircni
