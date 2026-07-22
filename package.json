@@ -2,9 +2,11 @@
   "name": "gitify",
   "version": "7.0.0",
   "private": true,
-  "description": "GitHub notifications on your menu bar.",
+  "description": "Git notifications on your menu bar.",
   "keywords": [
+    "bitbucket",
     "electron",
+    "gitea",
     "github",
     "gitify",
     "menubar",
