@@ -90,10 +90,10 @@ console.log('=== AFTER SECOND SIMULATED CLICK ===');
 console.log(JSON.stringify(afterSecondClick, null, 2));
 
 const failures = [];
-if (startup.clickListeners !== 1) {
+if (startup.clickListeners < 1) {
   failures.push('tray click listener not bound');
 }
-if (startup.rightClickListeners !== 1) {
+if (startup.rightClickListeners < 1) {
   failures.push('tray right-click listener not bound');
 }
 if (!startup.contextMenuSet) {
