@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "private": true,
   "description": "Git notifications on your menu bar.",
   "keywords": [
