@@ -35,3 +35,29 @@ jobs:
 
       - name: Run diagnostic
         run: node scripts/diag-3064.mjs
+
+  package-win:
+    name: Package instrumented Windows build
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Build
+        run: pnpm build
+
+      - name: Package (unsigned)
+        run: pnpm package:win --publish=never
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: Gitify-diag-3064-win
+          path: dist/Gitify-Setup-*.exe
