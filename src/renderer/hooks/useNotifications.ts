@@ -54,9 +54,15 @@ interface NotificationsState {
 
 interface UseNotificationsOptions {
   /**
-   * Run the singleton side effects (sound/native alerts for new notifications
-   * and inactivity-based refetching). Only the app-level effects host should
-   * enable this; all other consumers share the query cache without them.
+   * Run the singleton side effects (sound/native alerts for new notifications,
+   * inactivity-based refetching, and interval/focus/reconnect polling). Only
+   * the app-level effects host should enable this; all other consumers share
+   * the query cache without them.
+   *
+   * Polling is owned by the singleton host because TanStack Query schedules
+   * `refetchInterval` per mounted observer, not per query. Every consumer
+   * (each notification row, repo group, sidebar, etc.) would otherwise run
+   * its own staggered poll timer, multiplying API requests.
    */
   withSideEffects?: boolean;
 }
@@ -154,9 +160,12 @@ export const useNotifications = ({
 
     placeholderData: keepPreviousData,
 
-    refetchInterval: fetchType === FetchType.INTERVAL ? fetchIntervalMs : false,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
+    // Only the singleton side-effects host polls. Other consumers share the
+    // cached data and would otherwise each schedule their own refetch timer.
+    refetchInterval: withSideEffects && fetchType === FetchType.INTERVAL ? fetchIntervalMs : false,
+    refetchOnMount: withSideEffects,
+    refetchOnReconnect: withSideEffects,
+    refetchOnWindowFocus: withSideEffects,
   });
 
   // Inactivity-based fetching re-fetches once the user has been idle for the

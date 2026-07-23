@@ -16,6 +16,7 @@ import {
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import type { AccountNotifications, Percentage } from '../types';
+import { FetchType } from '../types';
 
 import { Errors } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
@@ -171,6 +172,71 @@ describe('renderer/hooks/useNotifications.ts', () => {
       await waitFor(() => expect(result.current.status).toBe('error'));
 
       expect(result.current.globalError).toBeUndefined();
+    });
+  });
+
+  describe('polling', () => {
+    it('only polls once per interval, regardless of consumer count', async () => {
+      vi.useFakeTimers();
+      try {
+        getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+        useSettingsStore.setState({
+          fetchType: FetchType.INTERVAL,
+          fetchInterval: 1000,
+        });
+
+        // A single shared wrapper so all consumers share one query cache
+        const wrapper = createWrapper();
+
+        // Singleton side-effects host (GlobalEffects)
+        renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+
+        // Plain consumers (notification rows, repo groups, sidebar, etc.)
+        // mount staggered over time, like real components rendering across
+        // frames. With per-observer polling each schedules its own interval
+        // timer on a different offset, so their fetches cannot dedupe.
+        for (let i = 0; i < 3; i++) {
+          await act(async () => {
+            await vi.advanceTimersByTimeAsync(100);
+          });
+          renderHook(() => useNotifications(), { wrapper });
+        }
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(3_000);
+        });
+
+        // 1 initial fetch + 3 interval polls. Without polling ownership the
+        // staggered consumers would each poll on their own timer (~10 extra
+        // fetches here, and far more in a full notification list).
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(4);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('plain consumers do not poll on their own', async () => {
+      vi.useFakeTimers();
+      try {
+        getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+        useSettingsStore.setState({
+          fetchType: FetchType.INTERVAL,
+          fetchInterval: 1000,
+        });
+
+        renderHook(() => useNotifications(), { wrapper: createWrapper() });
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(3_500);
+        });
+
+        // Initial fetch only; no interval polls without the side-effects host
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+      } finally {
+        vi.useRealTimers();
+      }
     });
   });
 
