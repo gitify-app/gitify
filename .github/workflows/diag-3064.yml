@@ -2,6 +2,9 @@ name: Diagnose 3064
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - investigate/3064-windows-tray
 
 permissions: {}
 
