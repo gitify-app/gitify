@@ -1,0 +1,34 @@
+name: Diagnose 3064
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  diag:
+    name: Diag [${{ matrix.runner }}]
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [windows-2025, windows-2022, macos-15]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Build
+        run: pnpm build
+
+      - name: Install playwright-core
+        run: pnpm add -D playwright-core@1.61.1
+
+      - name: Run diagnostic
+        run: node scripts/diag-3064.mjs
