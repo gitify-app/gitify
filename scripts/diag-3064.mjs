@@ -90,19 +90,35 @@ console.log('=== AFTER SECOND SIMULATED CLICK ===');
 console.log(JSON.stringify(afterSecondClick, null, 2));
 
 const failures = [];
-if (startup.clickListeners !== 1) failures.push('tray click listener not bound');
-if (startup.rightClickListeners !== 1) failures.push('tray right-click listener not bound');
-if (!startup.contextMenuSet) failures.push('context menu never set (mb ready missed?)');
-if (!startup.diagEvents.some(([ev]) => ev === 'ready')) failures.push('mb ready never fired');
-if (afterClick.error) failures.push(`clicked() threw: ${afterClick.error}`);
-if (afterClick.windowVisible !== true) failures.push('window not visible after simulated click');
-if (afterSecondClick.windowVisible !== false) failures.push('window did not hide on second click');
+if (startup.clickListeners !== 1) {
+  failures.push('tray click listener not bound');
+}
+if (startup.rightClickListeners !== 1) {
+  failures.push('tray right-click listener not bound');
+}
+if (!startup.contextMenuSet) {
+  failures.push('context menu never set (mb ready missed?)');
+}
+if (!startup.diagEvents.some(([ev]) => ev === 'ready')) {
+  failures.push('mb ready never fired');
+}
+if (afterClick.error) {
+  failures.push(`clicked() threw: ${afterClick.error}`);
+}
+if (afterClick.windowVisible !== true) {
+  failures.push('window not visible after simulated click');
+}
+if (afterSecondClick.windowVisible !== false) {
+  failures.push('window did not hide on second click');
+}
 
 await app.close().catch(() => {});
 
 if (failures.length > 0) {
   console.error('DIAG FAILURES:');
-  for (const f of failures) console.error(`  - ${f}`);
+  for (const f of failures) {
+    console.error(`  - ${f}`);
+  }
   process.exit(1);
 }
 console.log('DIAG OK: JS layer behaves correctly on this platform');
