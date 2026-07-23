@@ -15,7 +15,15 @@ vi.mock('electron', () => {
       listeners[channel].push(listener);
       return this;
     }),
-  } satisfies Pick<Electron.IpcRenderer, 'send' | 'invoke' | 'on'>;
+    removeListener: vi.fn(function (
+      this: Electron.IpcRenderer,
+      channel: string,
+      listener: Listener,
+    ) {
+      listeners[channel] = (listeners[channel] || []).filter((l) => l !== listener);
+      return this;
+    }),
+  } satisfies Pick<Electron.IpcRenderer, 'send' | 'invoke' | 'on' | 'removeListener'>;
   return {
     ipcRenderer: {
       ...ipcRendererStub,
@@ -66,5 +74,20 @@ describe('preload/utils', () => {
 
     expect(ipcRenderer.on).toHaveBeenCalledWith(EVENTS.UPDATE_ICON_TITLE, handlerMock);
     expect(handlerMock).toHaveBeenCalledWith({}, 'payload');
+  });
+
+  it('onRendererEvent returns an unsubscribe function that removes the listener', () => {
+    const handlerMock = vi.fn();
+    const unsubscribe = onRendererEvent(EVENTS.UPDATE_ICON_TITLE, handlerMock);
+
+    unsubscribe();
+    (
+      ipcRenderer as unknown as {
+        __emit: (channel: string, ...a: unknown[]) => void;
+      }
+    ).__emit(EVENTS.UPDATE_ICON_TITLE, 'payload');
+
+    expect(ipcRenderer.removeListener).toHaveBeenCalledWith(EVENTS.UPDATE_ICON_TITLE, handlerMock);
+    expect(handlerMock).not.toHaveBeenCalled();
   });
 });
