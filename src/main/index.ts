@@ -36,6 +36,28 @@ const mb = menubar({
   escapeToHide: true, // Hide the window when Escape is pressed.
 });
 
+if (process.env.GITIFY_DIAG) {
+  const diagEvents: Array<[string, number]> = [];
+  // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
+  (globalThis as any).__mb = mb;
+  // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
+  (globalThis as any).__gitifyDiagEvents = diagEvents;
+  for (const ev of [
+    'ready',
+    'create-window',
+    'before-load',
+    'after-create-window',
+    'show',
+    'after-show',
+    'hide',
+    'after-hide',
+    'focus-lost',
+    'after-close',
+  ]) {
+    mb.on(ev, () => diagEvents.push([ev, Date.now()]));
+  }
+}
+
 const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
