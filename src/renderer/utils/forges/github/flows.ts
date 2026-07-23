@@ -46,8 +46,20 @@ export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promis
 
     openExternalLink(url as Link);
 
+    // Assigned once the listener is registered below; optional-chained in
+    // `handleCallback` so a synchronously-firing callback cannot hit the
+    // temporal dead zone.
+    let unsubscribeAuthCallback: (() => void) | undefined;
+
     const handleCallback = (callbackUrl: string) => {
-      const url = new URL(callbackUrl);
+      let url: URL;
+      try {
+        url = new URL(callbackUrl);
+      } catch {
+        unsubscribeAuthCallback?.();
+        reject(new Error(`Received an invalid authentication callback URL: ${callbackUrl}`));
+        return;
+      }
 
       const type = url.hostname;
       const code = url.searchParams.get('code');
@@ -56,12 +68,14 @@ export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promis
       const errorUri = url.searchParams.get('error_uri');
 
       if (code && type === 'oauth') {
+        unsubscribeAuthCallback?.();
         resolve({
           authMethod: 'OAuth App',
           authCode: code as AuthCode,
           authOptions: authOptions,
         });
       } else if (error) {
+        unsubscribeAuthCallback?.();
         reject(
           new Error(
             `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
@@ -70,7 +84,9 @@ export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promis
       }
     };
 
-    window.gitify.onAuthCallback((callbackUrl: string) => {
+    // Unsubscribed inside `handleCallback` once the flow settles so repeated
+    // login attempts do not accumulate stale ipcRenderer listeners.
+    unsubscribeAuthCallback = window.gitify.onAuthCallback((callbackUrl: string) => {
       rendererLogInfo(
         'renderer:auth-callback',
         `received authentication callback URL ${callbackUrl}`,

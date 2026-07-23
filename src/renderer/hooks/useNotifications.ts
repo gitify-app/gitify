@@ -238,11 +238,18 @@ export const useNotifications = ({
 
   // Refetch notifications immediately when the system wakes from sleep or the
   // user unlocks their screen, without waiting for the next poll interval.
+  // Owned by the singleton side-effects host: every consumer registering a
+  // wake listener would both multiply refetches and leak ipcRenderer
+  // listeners on unmount.
   useEffect(() => {
-    window.gitify.onSystemWake(() => {
+    if (!withSideEffects) {
+      return;
+    }
+
+    return window.gitify.onSystemWake(() => {
       refetch();
     });
-  }, [refetch]);
+  }, [withSideEffects, refetch]);
 
   const removeAccountNotifications = useCallback(
     async (account: Account) => {

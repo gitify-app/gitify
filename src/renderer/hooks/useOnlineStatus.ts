@@ -22,9 +22,14 @@ export function useOnlineStatus(): boolean {
     // Re-probe network state when the system wakes from sleep or the user
     // unlocks their screen. The browser's online/offline events may not have
     // fired yet by the time the renderer runs after a sleep cycle.
-    window.gitify.onSystemWake(() => onlineManager.setOnline(navigator.onLine));
+    const unsubscribeWake = window.gitify.onSystemWake(() =>
+      onlineManager.setOnline(navigator.onLine),
+    );
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      unsubscribeWake();
+    };
   }, []);
 
   return isOnline;

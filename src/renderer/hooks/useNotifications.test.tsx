@@ -452,5 +452,26 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(2));
     });
+
+    it('only the side-effects host registers a wake listener', async () => {
+      vi.mocked(window.gitify.onSystemWake).mockClear();
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const wrapper = createWrapper();
+
+      // Plain consumers (notification rows, repo groups, sidebar, etc.)
+      renderHook(() => useNotifications(), { wrapper });
+      renderHook(() => useNotifications(), { wrapper });
+
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
+
+      // Each consumer registering its own listener would leak an ipcRenderer
+      // listener per mounted row and multiply wake-triggered refetches.
+      expect(vi.mocked(window.gitify.onSystemWake)).not.toHaveBeenCalled();
+
+      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+
+      expect(vi.mocked(window.gitify.onSystemWake)).toHaveBeenCalledTimes(1);
+    });
   });
 });

@@ -53,7 +53,7 @@ export const useAccounts = (): AccountsState => {
   // Refetch accounts immediately when the system wakes from sleep or the user
   // unlocks their screen, without waiting for the next scheduled interval.
   useEffect(() => {
-    window.gitify.onSystemWake(() => {
+    return window.gitify.onSystemWake(() => {
       refetch();
     });
   }, [refetch]);
