@@ -84,6 +84,9 @@ export const Constants = {
   // Query stale time in milliseconds, used by TanStack Query client
   QUERY_STALE_TIME_MS: 30 * 1000, // 30 seconds
 
+  // Cooldown before retrying a failed query, used by TanStack Query client
+  QUERY_RETRY_DELAY_MS: 30 * 1000, // 30 seconds
+
   // GraphQL Argument Defaults
   GRAPHQL_ARGS: {
     FIRST_LABELS: 100,

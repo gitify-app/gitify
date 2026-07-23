@@ -185,9 +185,10 @@ export const api = {
    * Register a callback invoked when the main process requests an app reset.
    *
    * @param callback - Called when the reset event is received.
+   * @returns A function that removes the listener.
    */
   onResetApp: (callback: () => void) => {
-    onRendererEvent(EVENTS.RESET_APP, () => callback());
+    return onRendererEvent(EVENTS.RESET_APP, () => callback());
   },
 
   /**
@@ -198,18 +199,20 @@ export const api = {
    * waiting for the next scheduled poll interval.
    *
    * @param callback - Called with no arguments on every wake event.
+   * @returns A function that removes the listener.
    */
   onSystemWake: (callback: () => void) => {
-    onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
+    return onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
   },
 
   /**
    * Register a callback invoked when the main process delivers an OAuth callback URL.
    *
    * @param callback - Called with the full callback URL (e.g. `gitify://oauth?code=...`).
+   * @returns A function that removes the listener.
    */
   onAuthCallback: (callback: (url: string) => void) => {
-    onRendererEvent(EVENTS.AUTH_CALLBACK, (_, url) => callback(url));
+    return onRendererEvent(EVENTS.AUTH_CALLBACK, (_, url) => callback(url));
   },
 
   /**

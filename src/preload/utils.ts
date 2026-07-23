@@ -29,10 +29,19 @@ export async function invokeMainEvent<E extends EventType>(
 
 /**
  * Register a listener for an IPC event sent from the main process to the renderer.
+ *
+ * @returns A function that removes the listener. Callers that register
+ * listeners from React effects must return it as the effect cleanup,
+ * otherwise every remount leaks a permanent ipcRenderer listener.
  */
 export function onRendererEvent<E extends EventType>(
   event: E,
   listener: (event: Electron.IpcRendererEvent, data: EventRequest<E>) => void,
-): void {
-  ipcRenderer.on(event, listener as Parameters<typeof ipcRenderer.on>[1]);
+): () => void {
+  const typedListener = listener as Parameters<typeof ipcRenderer.on>[1];
+  ipcRenderer.on(event, typedListener);
+
+  return () => {
+    ipcRenderer.removeListener(event, typedListener);
+  };
 }

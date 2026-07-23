@@ -93,7 +93,7 @@ export const GlobalEffects: FC = () => {
   ]);
 
   useEffect(() => {
-    window.gitify.onResetApp(() => {
+    return window.gitify.onResetApp(() => {
       resetAccounts();
       resetSettings();
       resetFilters();
