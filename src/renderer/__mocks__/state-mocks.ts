@@ -3,7 +3,6 @@ import { Constants } from '../constants';
 import {
   type Account,
   type AppearanceSettingsState,
-  FetchType,
   GroupBy,
   type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
@@ -34,7 +33,6 @@ const mockAppearanceSettings: AppearanceSettingsState = {
 
 const mockNotificationSettings: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
-  fetchType: FetchType.INTERVAL,
   fetchInterval: Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
   fetchAllNotifications: true,
   detailedNotifications: true,

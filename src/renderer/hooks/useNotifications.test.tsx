@@ -16,7 +16,6 @@ import {
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import type { AccountNotifications, Percentage } from '../types';
-import { FetchType } from '../types';
 
 import { Errors } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
@@ -182,7 +181,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
         getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
         useSettingsStore.setState({
-          fetchType: FetchType.INTERVAL,
           fetchInterval: 1000,
         });
 
@@ -222,7 +220,6 @@ describe('renderer/hooks/useNotifications.ts', () => {
         getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
         useSettingsStore.setState({
-          fetchType: FetchType.INTERVAL,
           fetchInterval: 1000,
         });
 
