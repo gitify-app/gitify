@@ -31,7 +31,7 @@ import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
-import { FetchType, GroupBy, Size } from '../../types';
+import { GroupBy, Size } from '../../types';
 
 import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scopes';
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
@@ -48,7 +48,6 @@ export const NotificationSettings: FC = () => {
 
   // Setting store values
   const groupBy = useSettingsStore((s) => s.groupBy);
-  const fetchType = useSettingsStore((s) => s.fetchType);
   const fetchInterval = useSettingsStore((s) => s.fetchInterval);
   const fetchAllNotifications = useSettingsStore((s) => s.fetchAllNotifications);
   const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
@@ -88,32 +87,6 @@ export const NotificationSettings: FC = () => {
             </Stack>
           }
           value={groupBy}
-        />
-
-        <RadioGroup
-          label="Fetch type:"
-          name="fetchType"
-          onChange={(evt) => {
-            updateSetting('fetchType', evt.target.value as FetchType);
-          }}
-          options={[
-            { label: 'Interval', value: FetchType.INTERVAL },
-            { label: 'Inactivity', value: FetchType.INACTIVITY },
-          ]}
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>Controls how new notifications are fetched.</Text>
-              <Text>
-                <Text as="strong">Interval</Text> will check for new notifications on a regular
-                scheduled interval.
-              </Text>
-              <Text>
-                <Text as="strong">Inactivity</Text> will check for new notifications only when there
-                has been no user activity within {APPLICATION.NAME} for a specified period of time.
-              </Text>
-            </Stack>
-          }
-          value={fetchType}
         />
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">

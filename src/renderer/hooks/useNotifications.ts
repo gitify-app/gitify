@@ -7,7 +7,6 @@ import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 import {
   type Account,
   type AccountNotifications,
-  FetchType,
   type GitifyError,
   type GitifyNotification,
   type Status,
@@ -32,7 +31,6 @@ import { removeNotificationsForAccount } from '../utils/notifications/remove';
 import { getNewNotifications } from '../utils/notifications/utils';
 import { raiseSoundNotification } from '../utils/system/audio';
 import { raiseNativeNotification } from '../utils/system/native';
-import { useInactivityTimer } from './timers/useInactivityTimer';
 
 interface NotificationsState {
   status: Status;
@@ -54,10 +52,10 @@ interface NotificationsState {
 
 interface UseNotificationsOptions {
   /**
-   * Run the singleton side effects (sound/native alerts for new notifications,
-   * inactivity-based refetching, and interval/focus/reconnect polling). Only
-   * the app-level effects host should enable this; all other consumers share
-   * the query cache without them.
+   * Run the singleton side effects (sound/native alerts for new notifications
+   * and interval/focus/reconnect polling). Only the app-level effects host
+   * should enable this; all other consumers share the query cache without
+   * them.
    *
    * Polling is owned by the singleton host because TanStack Query schedules
    * `refetchInterval` per mounted observer, not per query. Every consumer
@@ -98,7 +96,6 @@ export const useNotifications = ({
   // Setting store values
   const fetchReadNotifications = useSettingsStore((s) => s.fetchReadNotifications);
   const fetchParticipatingNotifications = useSettingsStore((s) => s.participating);
-  const fetchType = useSettingsStore((s) => s.fetchType);
   const fetchIntervalMs = useSettingsStore((s) => s.fetchInterval);
   const markAsDoneOnUnsubscribe = useSettingsStore((s) => s.markAsDoneOnUnsubscribe);
   const playSoundNewNotifications = useSettingsStore((s) => s.playSound);
@@ -162,20 +159,11 @@ export const useNotifications = ({
 
     // Only the singleton side-effects host polls. Other consumers share the
     // cached data and would otherwise each schedule their own refetch timer.
-    refetchInterval: withSideEffects && fetchType === FetchType.INTERVAL ? fetchIntervalMs : false,
+    refetchInterval: withSideEffects ? fetchIntervalMs : false,
     refetchOnMount: withSideEffects,
     refetchOnReconnect: withSideEffects,
     refetchOnWindowFocus: withSideEffects,
   });
-
-  // Inactivity-based fetching re-fetches once the user has been idle for the
-  // configured interval, instead of polling on a fixed schedule.
-  useInactivityTimer(
-    () => {
-      refetch();
-    },
-    withSideEffects && fetchType === FetchType.INACTIVITY ? fetchIntervalMs : null,
-  );
 
   const notificationCount = getNotificationCount(notifications);
 

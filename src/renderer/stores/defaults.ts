@@ -2,7 +2,6 @@ import { Constants } from '../constants';
 
 import {
   type AppearanceSettingsState,
-  FetchType,
   GroupBy,
   type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
@@ -52,7 +51,6 @@ const DEFAULT_APPEARANCE_SETTINGS: AppearanceSettingsState = {
  */
 const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettingsState = {
   groupBy: GroupBy.REPOSITORY,
-  fetchType: FetchType.INTERVAL,
   fetchInterval: Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS,
   fetchAllNotifications: true,
   detailedNotifications: true,

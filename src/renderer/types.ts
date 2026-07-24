@@ -101,7 +101,6 @@ export interface AppearanceSettingsState {
  */
 export interface NotificationSettingsState {
   groupBy: GroupBy;
-  fetchType: FetchType;
   fetchInterval: number;
   fetchAllNotifications: boolean;
   detailedNotifications: boolean;
@@ -157,11 +156,6 @@ export enum OpenPreference {
 export enum GroupBy {
   REPOSITORY = 'REPOSITORY',
   DATE = 'DATE',
-}
-
-export enum FetchType {
-  INTERVAL = 'INTERVAL',
-  INACTIVITY = 'INACTIVITY',
 }
 
 export interface RadioGroupItem {
