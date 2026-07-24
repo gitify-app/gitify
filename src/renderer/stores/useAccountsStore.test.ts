@@ -14,6 +14,7 @@ import type { GetAuthenticatedUserResponse } from '../utils/forges/github/types'
 import { getRecommendedScopeNames } from '../utils/auth/scopes';
 import * as logger from '../utils/core/logger';
 import * as apiClient from '../utils/forges/github/client';
+import { getAdapter } from '../utils/forges/registry';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 import useAccountsStore from './useAccountsStore';
 
@@ -263,6 +264,26 @@ describe('renderer/stores/useAccountsStore.ts', () => {
 
       expect(result.current).toMatchObject(DEFAULT_ACCOUNTS_STATE);
       expect(result.current.accounts).toEqual([]);
+    });
+
+    test('should drop forge client state for every account', () => {
+      const onAccountTokenChangeSpy = vi
+        .spyOn(getAdapter(mockGitHubCloudAccount), 'onAccountTokenChange')
+        .mockImplementation(vi.fn());
+
+      useAccountsStore.setState({
+        accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+      });
+
+      const { result } = renderHook(() => useAccountsStore());
+
+      act(() => {
+        result.current.reset();
+      });
+
+      expect(onAccountTokenChangeSpy).toHaveBeenCalledTimes(2);
+      expect(onAccountTokenChangeSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
+      expect(onAccountTokenChangeSpy).toHaveBeenCalledWith(mockGitHubEnterpriseServerAccount);
     });
   });
 });

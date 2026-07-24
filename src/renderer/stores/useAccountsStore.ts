@@ -166,6 +166,12 @@ const useAccountsStore = create<AccountsStore>()(
       },
 
       reset: () => {
+        // Drop forge-specific HTTP client state (e.g. cached authenticated
+        // Octokit clients) for every account being wiped.
+        for (const account of get().accounts) {
+          getAdapter(account).onAccountTokenChange?.(account);
+        }
+
         set({ ...DEFAULT_ACCOUNTS_STATE });
       },
     }),
