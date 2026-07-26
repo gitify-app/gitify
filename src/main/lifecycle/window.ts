@@ -1,7 +1,7 @@
 import { app } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
-import { isMacOS } from '../../shared/platform';
+import { isMacOS, isWindows } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
 import type MenuBuilder from '../menu';
@@ -60,6 +60,25 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
   win.on('hide', () => {
     menuBuilder.setWindowVisibility(false);
   });
+
+  // Windows tray blur race workaround:
+  // On Windows, clicking the tray icon may not transfer focus to the window,
+  // triggering electron-menubar's internal blur→hide timeout before first paint.
+  // Temporarily set alwaysOnTop so the blur handler emits 'focus-lost' instead
+  // of hiding; restore the user's preference after the blur window passes.
+  if (isWindows()) {
+    mb.on('after-show', () => {
+      const w = mb.window;
+      if (!w || w.isDestroyed()) return;
+      const restoreOnBlur = keepWindowOnBlur;
+      w.setAlwaysOnTop(true);
+      setTimeout(() => {
+        if (!w.isDestroyed()) {
+          w.setAlwaysOnTop(restoreOnBlur);
+        }
+      }, 400);
+    });
+  }
 
   app.on('before-quit', () => {
     isQuitting = true;
