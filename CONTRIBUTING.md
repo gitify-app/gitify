@@ -65,35 +65,20 @@ If you encounter a bug or have a feature request, please [open an issue][github-
 
 ### Releases
 
-The release process is automated. Follow the steps below.
+Releases are automated with [release-please][release-please]. There is no release branch and no manual version bump.
 
-1. **Verify features:** Ensure all features and fixes you want included in the release are merged into `main`.
-2. **Check dependencies:** Review the [Renovate Dependency Dashboard][github-dependency-dashboard] for any dependency updates you want to include.
-3. **Create a release branch:**
+1. **Merge changes into `main`.** Use [Conventional Commits][conventional-commits] for PR titles (`feat:`, `fix:`, `docs:`, `chore(deps):`, ...). The commit type decides the version bump and the changelog section it lands in.
+2. **Review the release PR.** release-please keeps an open `chore: release X.Y.Z` pull request up to date as commits land. It bumps the version in `package.json`, regenerates `CHANGELOG.md`, and updates `sonar.projectVersion` in `sonar-project.properties`. Check the [Renovate Dependency Dashboard][github-dependency-dashboard] for any dependency updates you want to include first.
+3. **Merge the release PR when you are ready to ship.** Merging is the "go" decision. GitHub Actions then automatically:
 
-- Name your branch `release/vX.X.X` (e.g., `release/v1.2.3`).
-- Run `pnpm version <new-version-number>` to **bump the version** in `package.json` and create a version commit/tag.
-- Update `sonar.projectVersion` within `sonar-project.properties`
-- Commit and push these changes.
-- Open a Pull Request (PR) from your release branch.
+- builds, signs, and notarizes the app on macOS, Windows, and Linux,
+- attaches the assets to the release that release-please drafted, and
+- publishes the release (creating the `vX.Y.Z` tag), which redeploys the website and triggers the automatic [Homebrew cask bump][homebrew-cask-autobump-workflow] (workflow runs ~3 hours).
 
-4. **GitHub release:** GitHub Actions will automatically build, sign, and upload release assets to a new draft release with automated release notes.
-5. **Merge the release branch:** Once the PR is approved and checks pass, merge your release branch into `main`.
-6. **Publish the release:**
+4. **(Optional) Update milestones:**
 
-- Finalize the release notes in the draft release on GitHub.
-- Confirm all assets are present and correct.
-- Publish the release.
-
-7. **Update milestones:**
-
-- Edit the current [Milestone][github-milestones]:
-  - Add a link to the release notes in the description.
-  - Set the due date to the release date.
-  - Close the milestone.
+- Edit the current [Milestone][github-milestones]: add a link to the release notes, set the due date to the release date, and close it.
 - Create a [New Milestone][github-new-milestone] for the next release cycle.
-
-8. A new homebrew cask will be [automatically published][homebrew-cask-autobump-workflow] (workflow runs ~3 hours)
 
 ### Design Guidelines
 
@@ -128,6 +113,8 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 <!-- LINK LABELS -->
 
 [vite-plus-website]: https://viteplus.dev/
+[conventional-commits]: https://www.conventionalcommits.org
+[release-please]: https://github.com/googleapis/release-please
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
 [github-issues]: https://github.com/setchy/gitify/issues
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
