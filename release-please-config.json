@@ -8,17 +8,17 @@
       "draft": true,
       "extra-files": [{ "type": "generic", "path": "sonar-project.properties" }],
       "changelog-sections": [
-        { "type": "feat", "section": "Features" },
-        { "type": "fix", "section": "Bug Fixes" },
-        { "type": "perf", "section": "Performance" },
-        { "type": "refactor", "section": "Refactor" },
-        { "type": "build", "section": "Build" },
-        { "type": "ci", "section": "CI" },
-        { "type": "docs", "section": "Documentation" },
-        { "type": "test", "section": "Tests", "hidden": true },
-        { "type": "style", "section": "Styles", "hidden": true },
-        { "type": "chore(deps)", "section": "Dependencies" },
-        { "type": "chore", "section": "Chores", "hidden": true }
+        { "type": "feat", "section": "🚀 Features" },
+        { "type": "fix", "section": "🐛 Bug Fixes" },
+        { "type": "perf", "section": "⚡ Performance" },
+        { "type": "refactor", "section": "🧼 Code Refactoring" },
+        { "type": "docs", "section": "📚 Documentation" },
+        { "type": "build", "section": "🏗️ Build System" },
+        { "type": "ci", "section": "🤖 Continuous Integration" },
+        { "type": "chore(deps)", "section": "📦 Dependency Updates" },
+        { "type": "test", "section": "🧪 Testing", "hidden": true },
+        { "type": "style", "section": "🎨 Styles", "hidden": true },
+        { "type": "chore", "section": "🧹 Chore", "hidden": true }
       ]
     }
   }
