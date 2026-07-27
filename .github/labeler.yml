@@ -9,7 +9,7 @@ labels:
   - label: 'build'
     sync: true
     matcher:
-      title: '^(ci|build)(\((?!release)\w+\))?: (?!.*\brelease\b).*'
+      title: '^(ci|build)(\(\w+\))?: .*'
 
   - label: 'chore'
     sync: true
@@ -37,11 +37,6 @@ labels:
     matcher:
       title: '^refactor(\(\w+\))?: .*'
 
-  - label: 'release'
-    sync: true
-    matcher:
-      branch: '^release/.*'
-
   - label: 'test'
     sync: true
     matcher:
@@ -60,6 +55,5 @@ checks:
         - documentation
         - test
         - build
-        - release
         - chore
         - dependency
