@@ -15,9 +15,9 @@
         { "type": "docs", "section": "📚 Documentation" },
         { "type": "build", "section": "🏗️ Build System" },
         { "type": "ci", "section": "🤖 Continuous Integration" },
-        { "type": "chore(deps)", "section": "📦 Dependency Updates" },
         { "type": "test", "section": "🧪 Testing", "hidden": true },
         { "type": "style", "section": "🎨 Styles", "hidden": true },
+        { "type": "chore(deps)", "section": "📦 Dependency Updates", "hidden": true },
         { "type": "chore", "section": "🧹 Chore", "hidden": true }
       ]
     }
