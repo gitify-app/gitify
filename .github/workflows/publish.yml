@@ -2,6 +2,11 @@ name: Publish
 
 on:
   workflow_call:
+    inputs:
+      tag_name:
+        description: The draft release tag to attach artifacts to and publish (e.g. v7.1.0)
+        required: true
+        type: string
     secrets:
       OAUTH_CLIENT_ID:
         required: true
@@ -22,46 +27,17 @@ on:
       APPLE_ID_TEAM_ID:
         required: true
   workflow_dispatch: # For manually running release process to verify code-signing of artifacts
+    inputs:
+      tag_name:
+        description: The draft release tag to publish (leave blank for a signing-only dry run)
+        required: false
+        type: string
 
 permissions: {}
 
 jobs:
-  prepare:
-    name: Prepare draft release
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
-        with:
-          persist-credentials: false
-
-      - name: Parse release branch
-        if: startsWith(github.ref, 'refs/heads/release/')
-        run: |
-          # Extract the branch name (e.g. release/v1.2.3[-meta])
-          ref=${GITHUB_REF#refs/heads/}
-          echo "RELEASE_BRANCH=$ref" >> "$GITHUB_ENV"
-          # Also export a RELEASE_TAG by removing the `release/` prefix (keeps leading 'v')
-          tag=${ref#release/}
-          echo "RELEASE_TAG=$tag" >> "$GITHUB_ENV"
-        shell: bash
-
-      - name: Create draft release
-        run: |
-          gh release create "${RELEASE_TAG}" \
-            --title "${RELEASE_TAG}" \
-            --draft \
-            --notes "# <img src=\"https://github.com/gitify-app/gitify/blob/3554605d32a6c08a3d4ec17b02b90e2dd276a152/assets/images/tray-active%402x.png\" /> Gitify ${RELEASE_TAG}" \
-            --generate-notes
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_TAG: ${{ env.RELEASE_TAG }}
-
   release:
     name: Publish ${{ matrix.platform }} [electron-builder]
-    needs: prepare
     permissions:
       contents: write
     strategy:
@@ -120,3 +96,22 @@ jobs:
             dist/*
             !dist/*/
           overwrite: true
+
+  publish-release:
+    name: Publish release
+    needs: release
+    if: ${{ inputs.tag_name != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # release-please creates the release as a draft so electron-builder can attach
+      # signed artifacts to it. Now that every platform has uploaded, flip it to
+      # published: this materialises the git tag and fires the `release: published`
+      # event that redeploys the website.
+      - name: Publish draft release
+        run: gh release edit "${TAG_NAME}" --draft=false --repo "${REPO}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ inputs.tag_name }}
+          REPO: ${{ github.repository }}
