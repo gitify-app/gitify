@@ -7,13 +7,21 @@ import { handleProtocolURL, initializeAppLifecycle } from './startup';
 const requestSingleInstanceLockMock = vi.fn(() => true);
 const appOnMock = vi.fn();
 const appQuitMock = vi.fn();
+const dockIsVisibleMock = vi.fn(() => false);
+const dockHideMock = vi.fn();
 
 vi.mock('electron', () => ({
   app: {
     requestSingleInstanceLock: () => requestSingleInstanceLockMock(),
     on: (...a: unknown[]) => appOnMock(...a),
     quit: () => appQuitMock(),
-  } satisfies Pick<Electron.App, 'requestSingleInstanceLock' | 'on' | 'quit'>,
+    dock: {
+      isVisible: () => dockIsVisibleMock(),
+      hide: () => dockHideMock(),
+    },
+  } satisfies Pick<Electron.App, 'requestSingleInstanceLock' | 'on' | 'quit'> & {
+    dock: { isVisible: () => boolean; hide: () => void };
+  },
 }));
 
 const sendRendererEventMock = vi.fn();
@@ -73,6 +81,37 @@ describe('main/lifecycle/startup.ts', () => {
       readyHandler?.();
 
       expect(mb.setContextMenu).toHaveBeenCalledWith(contextMenu);
+    });
+
+    it('re-hides the dock icon when the startup hide was dropped (#3069)', () => {
+      vi.useFakeTimers();
+      dockIsVisibleMock.mockReturnValue(true);
+      const mb = createMb();
+
+      initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu, 'gitify');
+      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1];
+      readyHandler?.();
+
+      expect(dockHideMock).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(2_000);
+      expect(dockHideMock).toHaveBeenCalled();
+
+      vi.useRealTimers();
+    });
+
+    it('leaves the dock alone when it is already hidden', () => {
+      vi.useFakeTimers();
+      dockIsVisibleMock.mockReturnValue(false);
+      const mb = createMb();
+
+      initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu, 'gitify');
+      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1];
+      readyHandler?.();
+
+      vi.advanceTimersByTime(2_000);
+      expect(dockHideMock).not.toHaveBeenCalled();
+
+      vi.useRealTimers();
     });
   });
 
