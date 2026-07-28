@@ -11,7 +11,7 @@ import { HoverGroup } from '../primitives/HoverGroup';
 
 import { type Account, type GitifyError, Size } from '../../types';
 
-import { getAdapter } from '../../utils/forges/registry';
+import { getAccountAdapter, getAdapter } from '../../utils/forges/registry';
 import { openAccountProfile, openHostIssues, openHostPulls } from '../../utils/system/links';
 import { getChevronDetails } from '../../utils/ui/display';
 import { getChevronIcon } from '../../utils/ui/icons';
@@ -69,12 +69,14 @@ export function AccountHeader({
           error ? 'group-hover:bg-gitify-account-error' : 'group-hover:bg-gitify-account-rest'
         }
       >
-        <HoverButton
-          action={() => openHostIssues(account)}
-          icon={IssueOpenedIcon}
-          label={t('accounts.my_issues', 'My issues ↗')}
-          testid="account-issues"
-        />
+        {getAccountAdapter(account).getIssuesUrl() && (
+          <HoverButton
+            action={() => openHostIssues(account)}
+            icon={IssueOpenedIcon}
+            label={t('accounts.my_issues', 'My issues ↗')}
+            testid="account-issues"
+          />
+        )}
 
         <HoverButton
           action={() => openHostPulls(account)}

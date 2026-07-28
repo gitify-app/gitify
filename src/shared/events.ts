@@ -24,6 +24,7 @@ export const EVENTS = {
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
   GITHUB_CLI_TOKEN: `${P}github-cli-token`,
+  GERRIT_REQUEST: `${P}gerrit-request`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
@@ -127,6 +128,24 @@ export type IGitHubCliTokenResult =
   | { token: string; error?: never; detail?: never }
   | { token?: never; error: GitHubCliTokenError; detail?: string };
 
+/**
+ * An authenticated Gerrit REST call, run by the main process because Gerrit
+ * servers rarely allow the renderer's origin via CORS.
+ */
+export interface IGerritRequest {
+  url: string;
+  method: 'GET' | 'POST';
+  authorization: string;
+  body?: string;
+}
+
+/** Raw Gerrit HTTP response; the renderer parses the body. */
+export interface IGerritResponse {
+  status: number;
+  statusText: string;
+  body: string;
+}
+
 /** A structured request to publish an operating-system notification. */
 export interface INativeNotificationPayload {
   /** Short, opaque identity for this notification. */
@@ -208,6 +227,7 @@ export type EventContracts = AssertEventCoverage<{
     request: string;
     response: IGitHubCliTokenResult;
   };
+  [EVENTS.GERRIT_REQUEST]: { request: IGerritRequest; response: IGerritResponse };
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };

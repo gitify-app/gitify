@@ -9,6 +9,7 @@
     "electron",
     "electron-menubar",
     "forgejo",
+    "gerrit",
     "gitea",
     "github",
     "gitify",

@@ -4,6 +4,7 @@ import { AccountsRoute } from './routes/Accounts';
 import { AccountScopesRoute } from './routes/AccountScopes';
 import { BitbucketLoginWithPersonalAccessTokenRoute } from './routes/bitbucket/LoginWithPersonalAccessToken';
 import { FiltersRoute } from './routes/Filters';
+import { GerritLoginWithPersonalAccessTokenRoute } from './routes/gerrit/LoginWithPersonalAccessToken';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './routes/gitea/LoginWithPersonalAccessToken';
 import { GitHubLoginWithCustomOAuthAppRoute } from './routes/github/LoginWithCustomOAuthApp';
 import { GitHubLoginWithDeviceFlowRoute } from './routes/github/LoginWithDeviceFlow';
@@ -52,6 +53,10 @@ export const routes: RouteObject[] = [
       {
         element: <GitLabLoginWithPersonalAccessTokenRoute />,
         path: 'login/gitlab/personal-access-token',
+      },
+      {
+        element: <GerritLoginWithPersonalAccessTokenRoute />,
+        path: 'login/gerrit/personal-access-token',
       },
       {
         element: <ProtectedLayout />,

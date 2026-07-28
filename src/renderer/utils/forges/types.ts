@@ -241,11 +241,13 @@ export interface ForgeAccountAdapter {
    */
   getAccountSettingsUrl(): Link;
   /** URL to the forge's "my issues" list for the account's host. */
-  getIssuesUrl(): Link;
+  getIssuesUrl(): Link | undefined;
   /** URL to the forge's "my pull requests" list for the account's host. */
   getPullRequestsUrl(): Link;
   /** URL to the forge's notification centre for the account's host. */
   getNotificationsUrl(): Link;
+  /** Forge-specific account profile; absent for forges using the standard user path. */
+  getAccountProfileUrl?(): Link;
 
   /**
    * OAuth scope checks. Forges with no scope concept (e.g. Gitea) omit this
@@ -288,9 +290,10 @@ export interface ForgeAccountOperations {
   unsubscribeThread(account: Account, threadId: string): Promise<void>;
   followUrl<T>(account: Account, url: Link): Promise<T>;
   getAccountSettingsUrl(account: Account): Link;
-  getIssuesUrl(account: Account): Link;
+  getIssuesUrl(account: Account): Link | undefined;
   getPullRequestsUrl(account: Account): Link;
   getNotificationsUrl(account: Account): Link;
+  getAccountProfileUrl?(account: Account): Link;
   readonly oauthScopes?: {
     hasRequired(account: Account): boolean;
     hasRecommended(account: Account): boolean;

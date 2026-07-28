@@ -33,6 +33,27 @@ function topOf(locator: ReturnType<typeof page.getByTestId>): number {
 }
 
 describe('renderer/routes/Login composition visual regression', () => {
+  it('keeps every forge tab inside the selector', async () => {
+    renderLogin(Theme.LIGHT, DesignLanguage.CLASSIC);
+
+    try {
+      // The window is at least 500px wide; 465px is its CSS width at the maximum 120% zoom.
+      for (const width of [465, 500]) {
+        await page.viewport(width, 400);
+
+        const selector = page.getByRole('tablist', { name: 'Choose a forge' }).element();
+        const bounds = selector.getBoundingClientRect();
+        for (const tab of selector.querySelectorAll('[role="tab"]')) {
+          const rect = tab.getBoundingClientRect();
+          expect(rect.left).toBeGreaterThanOrEqual(bounds.left);
+          expect(rect.right).toBeLessThanOrEqual(bounds.right);
+        }
+      }
+    } finally {
+      await page.viewport(500, 400);
+    }
+  });
+
   describe.each(THEME_VARIANTS)('$label', ({ designLanguage, theme }) => {
     it('captures a single-method forge', async () => {
       renderLogin(theme, designLanguage);

@@ -7,6 +7,7 @@ import { logError, toError } from '../shared/logger';
 import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
+  registerGerritHandlers,
   registerGitHubCliHandlers,
   registerNativeNotificationHandlers,
   registerStorageHandlers,
@@ -78,6 +79,7 @@ app
     registerSystemHandlers(mb);
     registerStorageHandlers();
     registerGitHubCliHandlers();
+    registerGerritHandlers();
     registerAppHandlers(mb);
     registerUpdaterHandlers(appUpdater);
   })

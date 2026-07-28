@@ -66,6 +66,9 @@ export const validatePersonalAccessTokenForm = (
   if (forge === 'bitbucket' && !values.username) {
     errors.username = i18n.t('login.pat.atlassian_email_required', 'Atlassian email is required');
   }
+  if (forge === 'gerrit' && !values.username) {
+    errors.username = i18n.t('login.pat.username_required', 'Username is required');
+  }
 
   if (!values.token) {
     errors.token = i18n.t('login.pat.token_required', 'Token is required');

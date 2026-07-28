@@ -20,6 +20,7 @@ import {
 } from '../types';
 
 import {
+  mockGerritAccount,
   mockGiteaAccount,
   mockGitifyOAuthAppAccount,
   mockGitHubCloudAccount,
@@ -304,6 +305,12 @@ export const mockAgentSessionGitifyNotification: GitifyNotification = {
 export const mockGiteaGitifyNotification: GitifyNotification = {
   ...mockGitifyNotification,
   account: mockGiteaAccount,
+};
+
+/** Same shape as cloud notification, but bound to a Gerrit account. */
+export const mockGerritGitifyNotification: GitifyNotification = {
+  ...mockGitifyNotification,
+  account: mockGerritAccount,
 };
 
 export const mockMultipleAccountNotifications: AccountNotifications[] = [

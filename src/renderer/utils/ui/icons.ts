@@ -25,6 +25,7 @@ import type { PlatformType } from '../auth/types';
 
 import i18n from '../../i18n';
 import { BitbucketIcon } from '../../icons/BitbucketIcon';
+import { GerritIcon } from '../../icons/GerritIcon';
 import { GitLabIcon } from '../../icons/GitLabIcon';
 import type { PullRequestReviewState } from '../forges/github/graphql/generated/graphql';
 
@@ -87,6 +88,8 @@ export function getPlatformIcon(platform: PlatformType): FC<OcticonProps> | null
       return BitbucketIcon;
     case 'Gitea':
       return ServerIcon;
+    case 'Gerrit':
+      return GerritIcon;
     case 'GitLab Cloud':
     case 'GitLab Self-Managed':
       return GitLabIcon;

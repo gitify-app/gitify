@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+import { mockGerritAccount, mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
 import { APPLICATION } from '../../shared/constants';
@@ -338,4 +338,16 @@ describe('renderer/components/Sidebar.tsx', () => {
     expect(quitAppSpy).toHaveBeenCalledTimes(1);
   });
   // Keyboard bindings moved to App.test.tsx
+  it('opens Gerrit changes and hides the unsupported issues link', async () => {
+    renderWithProviders(<Sidebar />, { accounts: [mockGerritAccount] });
+    expect(screen.queryByRole('button', { name: /^My issues/ })).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: /^My pull requests/ }));
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://gerrit.example.com/q/status:open+owner:jdoe',
+    );
+    await userEvent.click(screen.getByRole('button', { name: /^Notifications/ }));
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://gerrit.example.com/q/attention:jdoe',
+    );
+  });
 });

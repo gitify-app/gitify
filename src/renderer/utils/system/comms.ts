@@ -1,4 +1,6 @@
 import type {
+  IGerritRequest,
+  IGerritResponse,
   IGitHubCliTokenResult,
   ISafeStorageDecryptResult,
   TrayIconAppearance,
@@ -63,6 +65,16 @@ export async function decryptValue(value: string): Promise<ISafeStorageDecryptRe
  */
 export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTokenResult> {
   return await window.gitify.githubCliToken(hostname);
+}
+
+/**
+ * Runs an authenticated Gerrit REST call from the main process, outside CORS.
+ *
+ * @param request - The `/a/` API URL, method, Basic auth header and optional JSON body.
+ * @returns The response status and raw body text.
+ */
+export async function sendGerritRequest(request: IGerritRequest): Promise<IGerritResponse> {
+  return await window.gitify.gerritRequest(request);
 }
 
 /**
