@@ -109,8 +109,22 @@ jobs:
       # signed artifacts to it. Now that every platform has uploaded, flip it to
       # published: this materialises the git tag and fires the `release: published`
       # event that redeploys the website.
+      #
+      # We resolve the release by id rather than `gh release edit <tag>`: a draft
+      # has no git tag yet, so the tag lookup fails with HTTP 422. Patching the
+      # draft flag by id is also idempotent, so re-running an already-published
+      # release is a no-op.
       - name: Publish draft release
-        run: gh release edit "${TAG_NAME}" --draft=false --repo "${REPO}"
+        run: |
+          # The draft is the newest release, so a single page comfortably covers it.
+          release_id=$(gh api "repos/${REPO}/releases?per_page=100" \
+            --jq 'map(select(.tag_name == env.TAG_NAME)) | .[0].id // empty')
+          if [ -z "${release_id}" ]; then
+            echo "::error::No release found for tag ${TAG_NAME}"
+            exit 1
+          fi
+          gh api --method PATCH "repos/${REPO}/releases/${release_id}" -F draft=false > /dev/null
+          echo "Published ${TAG_NAME} (release id ${release_id})"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ inputs.tag_name }}
