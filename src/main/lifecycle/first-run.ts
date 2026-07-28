@@ -38,6 +38,10 @@ async function promptMoveToApplicationsFolder() {
     message: 'Move to Applications Folder?',
   });
 
+  // Parentless dialogs pull a dock-hidden (accessory) app into the Dock and
+  // macOS does not restore the accessory policy on close; re-hide (#3069).
+  app.dock?.hide();
+
   if (response === 0) {
     app.moveToApplicationsFolder();
   }
