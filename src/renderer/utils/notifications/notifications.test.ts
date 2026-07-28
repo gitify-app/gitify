@@ -20,6 +20,7 @@ import {
 import * as apiClient from '../forges/github/client';
 import { GITHUB_API_MERGE_BATCH_SIZE } from '../forges/github/enrich';
 import {
+  clearEnrichmentCache,
   enrichNotifications,
   getNotificationCount,
   getUnreadNotificationCount,
@@ -41,6 +42,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
     vi.mocked(apiClient.fetchNotificationDetailsForList).mockReset();
     vi.mocked(apiClient.fetchNotificationDetailsForList).mockResolvedValue(new Map());
     vi.mocked(apiClient.fetchIssueByNumber).mockReset();
+    clearEnrichmentCache();
   });
 
   it('getNotificationCount', () => {
@@ -193,6 +195,55 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       // Should be called once for single batch
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
       expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(50);
+    });
+
+    it('should skip re-fetch when a notification updatedAt is unchanged', async () => {
+      const fetchNotificationDetailsForListSpy = vi.mocked(
+        apiClient.fetchNotificationDetailsForList,
+      );
+      vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+
+      useSettingsStore.setState({ detailedNotifications: true });
+
+      const notification = {
+        ...(mockPartialGitifyNotification({
+          title: 'Issue #1',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+        }) as GitifyNotification),
+        id: '1',
+        updatedAt: '2026-01-01T00:00:00Z',
+      };
+
+      // First poll fetches details; second poll with an unchanged
+      // `updatedAt` must reuse the cached subject and not re-fetch.
+      await enrichNotifications([notification]);
+      await enrichNotifications([notification]);
+
+      expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should re-fetch when a notification updatedAt changes', async () => {
+      const fetchNotificationDetailsForListSpy = vi.mocked(
+        apiClient.fetchNotificationDetailsForList,
+      );
+      vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+
+      useSettingsStore.setState({ detailedNotifications: true });
+
+      const base = mockPartialGitifyNotification({
+        title: 'Issue #1',
+        type: 'Issue',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+      }) as GitifyNotification;
+
+      // A changed `updatedAt` invalidates the cache and forces a re-fetch.
+      await enrichNotifications([{ ...base, id: '1', updatedAt: '2026-01-01T00:00:00Z' }]);
+      await enrichNotifications([{ ...base, id: '1', updatedAt: '2026-01-02T00:00:00Z' }]);
+
+      expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
     });
   });
 });

@@ -1,8 +1,14 @@
 import { useAccountsStore, useSettingsStore } from '../../stores';
 
-import type { Account, AccountNotifications, RawGitifyNotification } from '../../types';
+import type {
+  Account,
+  AccountNotifications,
+  GitifySubject,
+  RawGitifyNotification,
+} from '../../types';
 
 import { determineFailureType } from '../api/errors';
+import { getAccountUUID } from '../auth/utils';
 import { rendererLogError, toError } from '../core/logger';
 import { getAdapter } from '../forges/registry';
 import { filterBaseNotifications } from './filters/filter';
@@ -114,6 +120,14 @@ export async function getAllNotifications(): Promise<AccountNotifications[]> {
  * original list unchanged otherwise. Details are fetched in batches via
  * GraphQL to avoid overwhelming the API.
  *
+ * To avoid re-fetching details for notifications that have not changed,
+ * previously-enriched subjects are cached keyed by account, notification id,
+ * and `updatedAt` (see {@link enrichmentCacheKey}). GitHub bumps a
+ * notification's `updatedAt` whenever its subject changes in a way worth
+ * surfacing, so an unchanged `updatedAt` means the cached subject is still
+ * valid and the detail fetch can be skipped entirely. This sharply reduces
+ * per-poll API request volume for users with many long-lived notifications.
+ *
  * @param notifications - The notifications to enrich.
  * @returns The same notifications with subject fields populated from the API.
  */
@@ -130,7 +144,73 @@ export async function enrichNotifications(
   if (!enrich) {
     return notifications;
   }
-  return enrich(notifications);
+
+  // Reuse cached subjects for notifications whose `updatedAt` is unchanged and
+  // only fetch details for cache misses, so unchanged notifications are not
+  // re-fetched on every poll cycle. The cached subject is applied onto the
+  // freshly-fetched notification so read-state and ordering stay current.
+  const liveKeys = new Set<string>();
+  const result: RawGitifyNotification[] = [];
+  const misses: RawGitifyNotification[] = [];
+  const missIndexes: number[] = [];
+
+  notifications.forEach((notification, index) => {
+    const key = enrichmentCacheKey(notification);
+    liveKeys.add(key);
+
+    const cachedSubject = enrichmentCache.get(key);
+    if (cachedSubject) {
+      result[index] = { ...notification, subject: cachedSubject };
+    } else {
+      misses.push(notification);
+      missIndexes.push(index);
+    }
+  });
+
+  if (misses.length) {
+    // Adapters return enriched notifications in the same order as their input,
+    // so map results back positionally rather than by id.
+    const enriched = await enrich(misses);
+    enriched.forEach((enrichedNotification, i) => {
+      const index = missIndexes[i];
+      result[index] = enrichedNotification;
+      enrichmentCache.set(enrichmentCacheKey(enrichedNotification), enrichedNotification.subject);
+    });
+  }
+
+  // Bound cache growth: drop entries for notifications no longer present.
+  for (const key of enrichmentCache.keys()) {
+    if (!liveKeys.has(key)) {
+      enrichmentCache.delete(key);
+    }
+  }
+
+  return result;
+}
+
+/**
+ * In-memory cache of enriched subjects keyed by {@link enrichmentCacheKey}.
+ * Persists across poll cycles so unchanged notifications can skip enrichment,
+ * and is pruned each cycle to the set of currently-present notifications so it
+ * stays bounded to the live notification working set.
+ */
+const enrichmentCache = new Map<string, GitifySubject>();
+
+/**
+ * Build the enrichment cache key for a notification from its account, id, and
+ * last-updated timestamp. A change to any of these invalidates the cached
+ * subject and forces a re-fetch.
+ */
+function enrichmentCacheKey(notification: RawGitifyNotification): string {
+  return `${getAccountUUID(notification.account)}:${notification.id}:${notification.updatedAt}`;
+}
+
+/**
+ * Clear the enrichment cache. Intended for use in tests to keep the
+ * module-level cache from leaking state across cases.
+ */
+export function clearEnrichmentCache(): void {
+  enrichmentCache.clear();
 }
 
 /**
