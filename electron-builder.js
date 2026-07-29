@@ -24,6 +24,14 @@ const config = {
   mac: {
     category: 'public.app-category.developer-tools',
     icon: 'assets/images/app-icon.icns',
+    extendInfo: {
+      // Launch as a macOS agent app so no dock tile is ever created. Without
+      // this the app starts as a regular dock app and `app.dock.hide()` has to
+      // transform it after the fact, leaving a ~300ms window where the icon is
+      // real; macOS can silently drop that transform and strand the icon for
+      // the whole session, which only a restart clears (#3069).
+      LSUIElement: true,
+    },
     identity: 'Adam Setch (5KD23H9729)',
     type: 'distribution',
     notarize: false, // Handle notarization in afterSign.js
