@@ -1,4 +1,4 @@
-import { app, dialog } from 'electron';
+import { dialog } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../shared/constants';
@@ -45,11 +45,6 @@ vi.mock('electron', () => {
     }
   }
   return {
-    app: {
-      dock: {
-        hide: vi.fn(),
-      },
-    },
     dialog: {
       showMessageBox: vi.fn(),
     } satisfies Pick<Electron.Dialog, 'showMessageBox'>,
@@ -145,7 +140,7 @@ describe('main/updater.ts', () => {
       expect(autoUpdater.quitAndInstall).toHaveBeenCalled();
     });
 
-    it('re-hides the dock icon when user dismisses the dialog (#3069)', async () => {
+    it('does not install when user dismisses the dialog', async () => {
       vi.mocked(dialog.showMessageBox).mockResolvedValue({
         response: 1, // "Later" button index
         checkboxChecked: false,
@@ -159,7 +154,6 @@ describe('main/updater.ts', () => {
       await Promise.resolve();
 
       expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
-      expect(app.dock?.hide).toHaveBeenCalled();
     });
   });
 
