@@ -7,6 +7,10 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release-please:
     name: Release Please
@@ -34,7 +38,7 @@ jobs:
           echo "count=${count}" >> "$GITHUB_OUTPUT"
 
       - name: Run release-please (release PR)
-        if: ${{ steps.drafts.outputs.count == '0' }}
+        if: ${{ steps.release.outputs.release_created != 'true' && steps.drafts.outputs.count == '0' }}
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
           skip-github-release: true
