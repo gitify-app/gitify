@@ -35,7 +35,7 @@ labels:
   - label: 'refactor'
     sync: true
     matcher:
-      title: '^refactor(\(\w+\))?: .*'
+      title: '^(refactor|perf)(\(\w+\))?: .*'
 
   - label: 'test'
     sync: true
