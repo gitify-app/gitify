@@ -1,5 +1,23 @@
 # Changelog
 
+## [7.1.1](https://github.com/gitify-app/gitify/compare/v7.1.0...v7.1.1) (2026-07-29)
+
+
+### 🐛 Bug Fixes
+
+* re-hide macos dock icon after parentless dialogs ([#3100](https://github.com/gitify-app/gitify/issues/3100)) ([8f4b33a](https://github.com/gitify-app/gitify/commit/8f4b33a54ccdbfc9295ed4cdf35528cf3adfdd08))
+
+
+### 🏗️ Build System
+
+* update labeler for perf semantic commit type ([#3105](https://github.com/gitify-app/gitify/issues/3105)) ([9d29de4](https://github.com/gitify-app/gitify/commit/9d29de427cb9d9dcc91193b307ffd6558905200c))
+
+
+### 🤖 Continuous Integration
+
+* publish draft release by id to avoid HTTP 422 on tag lookup ([#3098](https://github.com/gitify-app/gitify/issues/3098)) ([c83528d](https://github.com/gitify-app/gitify/commit/c83528dd93b0239aa26e9650547628ef4dc7c024))
+* update perf emoji ([b6c9c6e](https://github.com/gitify-app/gitify/commit/b6c9c6ef8683749fa816eefc30ecf55d8b997938))
+
 ## [7.1.0](https://github.com/gitify-app/gitify/compare/v7.0.1...v7.1.0) (2026-07-27)
 
 
