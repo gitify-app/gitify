@@ -58,4 +58,36 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
       'Continuing with base notification details',
     );
   });
+
+  it('preserves the original subject reference only when enrichment fails', async () => {
+    vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
+    vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
+
+    vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue(new Map());
+
+    const failingNotification = mockPartialGitifyNotification({
+      title: 'This issue will fail to enrich',
+      type: 'Issue',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+    });
+    const succeedingNotification = mockPartialGitifyNotification({
+      title: 'This issue will enrich',
+      type: 'Issue',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/2' as Link,
+    });
+
+    vi.mocked(client.fetchIssueByNumber)
+      .mockRejectedValueOnce(new Error('Test error'))
+      .mockResolvedValueOnce({ repository: {} } as never);
+
+    const [failed, succeeded] = await enrichGitHubNotifications([
+      failingNotification,
+      succeedingNotification,
+    ]);
+
+    // Adapter contract: a failed enrichment keeps the original `subject`
+    // reference so callers can detect it; a completed one returns a new one.
+    expect(failed.subject).toBe(failingNotification.subject);
+    expect(succeeded.subject).not.toBe(succeedingNotification.subject);
+  });
 });
