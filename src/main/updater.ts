@@ -1,4 +1,4 @@
-import { dialog, type MessageBoxOptions } from 'electron';
+import { app, dialog, type MessageBoxOptions } from 'electron';
 import type { Menubar } from 'electron-menubar';
 import { autoUpdater } from 'electron-updater';
 
@@ -200,7 +200,14 @@ export default class AppUpdater {
     dialog.showMessageBox(dialogOpts).then((returnValue) => {
       if (returnValue.response === 0) {
         autoUpdater.quitAndInstall();
+        return;
       }
+
+      // Presenting a parentless dialog forces a dock-hidden (accessory) macOS
+      // app to activate into the Dock, and the accessory policy is not
+      // restored when the dialog closes. Re-assert it so the dock icon
+      // disappears again (#3069).
+      app.dock?.hide();
     });
   }
 }
