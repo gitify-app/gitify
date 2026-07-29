@@ -117,13 +117,44 @@ jobs:
       - name: Publish draft release
         run: |
           # The draft is the newest release, so a single page comfortably covers it.
-          release_id=$(gh api "repos/${REPO}/releases?per_page=100" \
-            --jq 'map(select(.tag_name == env.TAG_NAME)) | .[0].id // empty')
+          release=$(gh api "repos/${REPO}/releases?per_page=100" \
+            --jq 'map(select(.tag_name == env.TAG_NAME)) | .[0] // empty')
+          release_id=$(printf '%s' "${release}" | jq -r '.id // empty')
           if [ -z "${release_id}" ]; then
             echo "::error::No release found for tag ${TAG_NAME}"
             exit 1
           fi
-          gh api --method PATCH "repos/${REPO}/releases/${release_id}" -F draft=false > /dev/null
+
+          # Credit contributors in the release body. GitHub's generated notes
+          # attribute every PR to its author; the @mentions also drive the
+          # contributor avatar strip on the release page. The tag does not
+          # exist yet, so generate against the draft's target commitish.
+          target=$(printf '%s' "${release}" | jq -r '.target_commitish')
+          notes=$(gh api --method POST "repos/${REPO}/releases/generate-notes" \
+            -f tag_name="${TAG_NAME}" -f target_commitish="${target}" --jq '.body' || true)
+          contributors=$(printf '%s\n' "${notes}" | grep -oE 'by @[A-Za-z0-9-]+' | sed 's/^by //' \
+            | sort -u | grep -viE '^@(github-actions|renovate|dependabot)$' | paste -sd ' ' - || true)
+          new_contributors=$(printf '%s\n' "${notes}" | sed -n '/^## New Contributors/,/^$/p')
+
+          # Idempotency: a re-run of an already-published release must not
+          # append the contributor sections a second time.
+          body=$(printf '%s' "${release}" | jq -r '.body')
+          case "${body}" in
+            *'### 🫶 Contributors'*) contributors='' new_contributors='' ;;
+          esac
+
+          {
+            printf '%s\n' "${body}"
+            if [ -n "${contributors}" ]; then
+              printf '\n### 🫶 Contributors\n\n%s\n' "${contributors}"
+            fi
+            if [ -n "${new_contributors}" ]; then
+              printf '\n%s\n' "${new_contributors}"
+            fi
+          } > /tmp/release-body.md
+
+          gh api --method PATCH "repos/${REPO}/releases/${release_id}" \
+            -F draft=false -F 'body=@/tmp/release-body.md' > /dev/null
           echo "Published ${TAG_NAME} (release id ${release_id})"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
