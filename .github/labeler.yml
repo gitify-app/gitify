@@ -37,6 +37,11 @@ labels:
     matcher:
       title: '^(refactor|perf)(\(\w+\))?: .*'
 
+  - label: 'release'
+    sync: true
+    matcher:
+      title: '^chore(main): release .*'
+
   - label: 'test'
     sync: true
     matcher:
