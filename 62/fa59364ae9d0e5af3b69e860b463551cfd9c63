@@ -1,0 +1,14 @@
+.github/labeler.yml
+  h_ac004aadb63da9 40-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "62fa59364ae9d0e5af3b69e860b463551cfd9c63",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
