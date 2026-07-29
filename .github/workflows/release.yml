@@ -18,9 +18,37 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - name: Run release-please
+      # Phase 1: create releases only. The release PR phase is deliberately
+      # skipped here because our releases start as drafts (electron-builder can
+      # only upload artifacts to a draft): a draft has no git tag yet, and a
+      # release-please PR pass that runs before the tag exists cannot find the
+      # just-released version, so it regenerates a bogus next-release PR from a
+      # months-old base (#3096, #3107).
+      - name: Run release-please (releases)
         id: release
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          skip-github-pull-request: true
+
+      # A pending draft means a release pipeline is in flight (or stuck): its
+      # tag does not exist yet, so the PR phase must wait. This also covers the
+      # draft the step above may have just created.
+      - name: Check for unpublished draft releases
+        id: drafts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          count=$(gh api "repos/${REPO}/releases?per_page=20" --jq '[.[] | select(.draft)] | length')
+          echo "count=${count}" >> "$GITHUB_OUTPUT"
+
+      # Phase 2: create or refresh the next release PR, only when every
+      # release is published and its tag exists.
+      - name: Run release-please (release PR)
+        if: ${{ steps.drafts.outputs.count == '0' }}
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          skip-github-release: true
 
   lint:
     name: Lint App
