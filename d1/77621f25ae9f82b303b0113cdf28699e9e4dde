@@ -1,0 +1,19 @@
+.vscode/settings.json
+  s_3495c0c638c51f::t_61b18164801e62 28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "d177621f25ae9f82b303b0113cdf28699e9e4dde",
+  "prompts": {},
+  "sessions": {
+    "s_3495c0c638c51f": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "bed865c4-684e-4781-b68e-4dc3f4116710",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
