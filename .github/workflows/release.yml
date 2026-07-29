@@ -18,9 +18,26 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - name: Run release-please
+      - name: Run release-please (releases)
         id: release
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          skip-github-pull-request: true
+
+      - name: Check for unpublished draft releases
+        id: drafts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          count=$(gh api "repos/${REPO}/releases?per_page=20" --jq '[.[] | select(.draft)] | length')
+          echo "count=${count}" >> "$GITHUB_OUTPUT"
+
+      - name: Run release-please (release PR)
+        if: ${{ steps.drafts.outputs.count == '0' }}
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          skip-github-release: true
 
   lint:
     name: Lint App

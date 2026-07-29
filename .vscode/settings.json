@@ -25,5 +25,5 @@
     "connectionId": "gitify-app",
     "projectKey": "gitify-app_gitify"
   },
-  "cSpell.words": ["codegen", "oxfmt", "oxlint"]
+  "cSpell.words": ["codegen", "Gitify", "oxfmt", "oxlint"]
 }

@@ -21,11 +21,7 @@ const copyStaticAssetsPlugin = (): Plugin => {
   const flatten = (obj: object): string[] =>
     Object.values(obj).flatMap((v) => (Array.isArray(v) ? v : flatten(v as object)));
 
-  const extractSvgFilename = (imgHtml: string) =>
-    imgHtml
-      .match(/src="(.*)"/)?.[1]
-      .split('/')
-      .pop();
+  const extractSvgFilename = (imgHtml: string) => /src="(.*)"/.exec(imgHtml)?.[1].split('/').pop();
 
   let isBuild = false;
 
@@ -102,21 +98,11 @@ export default defineConfig({
       ? []
       : [
           checker({
-            oxlint: { dev: { logLevel: ['error'] } },
+            oxlint: { lintCommand: 'oxlint', dev: { logLevel: ['error'] } },
           }),
         ]),
     reactDevToolsPlugin(),
-    react({
-      plugins: [
-        [
-          '@swc-contrib/plugin-graphql-codegen-client-preset',
-          {
-            artifactDirectory: './src/renderer/utils/api/graphql/generated',
-            gqlTagName: 'graphql',
-          },
-        ],
-      ],
-    }),
+    react(),
     tailwindcss(),
     electron({
       main: {
@@ -141,8 +127,8 @@ export default defineConfig({
                 'electron',
                 // TODO - how many of these are truly needed?
                 'electron-log',
+                'electron-menubar',
                 'electron-updater',
-                'menubar',
               ],
             },
           },

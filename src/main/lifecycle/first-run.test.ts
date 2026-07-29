@@ -19,6 +19,7 @@ vi.mock('node:fs', () => ({
 const moveToApplicationsFolderMock = vi.fn();
 const isInApplicationsFolderMock = vi.fn(() => false);
 const getPathMock = vi.fn(() => '/User/Data');
+const dockHideMock = vi.fn();
 
 const showMessageBoxMock = vi.fn(async () => ({
   response: 0,
@@ -30,7 +31,15 @@ vi.mock('electron', () => ({
     getPath: () => getPathMock(),
     isInApplicationsFolder: () => isInApplicationsFolderMock(),
     moveToApplicationsFolder: () => moveToApplicationsFolderMock(),
-  } satisfies Pick<Electron.App, 'getPath' | 'isInApplicationsFolder' | 'moveToApplicationsFolder'>,
+    dock: {
+      hide: () => dockHideMock(),
+    },
+  } satisfies Pick<
+    Electron.App,
+    'getPath' | 'isInApplicationsFolder' | 'moveToApplicationsFolder'
+  > & {
+    dock: { hide: () => void };
+  },
   dialog: {
     showMessageBox: () => showMessageBoxMock(),
   } satisfies Pick<Electron.Dialog, 'showMessageBox'>,
@@ -123,6 +132,19 @@ describe('main/lifecycle/first-run', () => {
     await onFirstRunMaybe();
 
     expect(moveToApplicationsFolderMock).not.toHaveBeenCalled();
+  });
+
+  it('re-hides the dock icon after the prompt closes (#3069)', async () => {
+    existsSyncMock.mockReturnValueOnce(false);
+    existsSyncMock.mockReturnValueOnce(false);
+    showMessageBoxMock.mockResolvedValueOnce({
+      response: 1,
+      checkboxChecked: false,
+    });
+
+    await onFirstRunMaybe();
+
+    expect(dockHideMock).toHaveBeenCalled();
   });
 
   it('does not prompt on non-macOS', async () => {

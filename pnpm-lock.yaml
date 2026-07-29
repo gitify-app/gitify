@@ -18,8 +18,8 @@ importers:
         specifier: 5.4.4
         version: 5.4.4
       electron-menubar:
-        specifier: 10.1.3
-        version: 10.1.3(electron@43.2.0(supports-color@10.2.2))
+        specifier: 10.1.7
+        version: 10.1.7(electron@43.2.0(supports-color@10.2.2))
       electron-updater:
         specifier: 6.8.9
         version: 6.8.9(supports-color@10.2.2)
@@ -90,9 +90,6 @@ importers:
       '@primer/react':
         specifier: 38.34.0
         version: 38.34.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)
-      '@swc-contrib/plugin-graphql-codegen-client-preset':
-        specifier: 0.27.0
-        version: 0.27.0
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(vite@8.1.5(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))
@@ -1397,10 +1394,6 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@swc-contrib/plugin-graphql-codegen-client-preset@0.27.0':
-    resolution: {integrity: sha512-6kAF8RQ35cME6Mk+Kd4rErN+gxrPcnSwhDjD1dhpAdKzn5BTEUGKxdCdvrMTIziRW364vEMlP3+0nmBP3eVd4Q==}
-    engines: {node: '>=16'}
-
   '@szmarczak/http-timer@4.0.6':
     resolution: {integrity: sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==}
     engines: {node: '>=10'}
@@ -2559,8 +2552,8 @@ packages:
     resolution: {integrity: sha512-istWgaXjBfURBSS8LWVW9C3jsc6+ac+tY1lXrQEOTp0lVj+a4OlO1Tmqb36GgnEUDv92DGC9VI1HNXwJinWpgA==}
     engines: {node: '>= 14'}
 
-  electron-menubar@10.1.3:
-    resolution: {integrity: sha512-5XRQCmYCiObJDvjROSGP3+MX/7AEA3qp5mVUtpo/CfOGCkhNA6q1dvhKnPC8B2+aKCJDjBQBMhgVW8pMMbedCQ==}
+  electron-menubar@10.1.7:
+    resolution: {integrity: sha512-bziv/6r4CYYQadI6uwjP1xS/zwwsnsybYPKgoZfwpsOnzbJkOyStHKLLdHLbFs3UtUxXjAvH1STVaUm5l7dsZw==}
     peerDependencies:
       electron: 43.2.0
 
@@ -5838,8 +5831,6 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@swc-contrib/plugin-graphql-codegen-client-preset@0.27.0': {}
-
   '@szmarczak/http-timer@4.0.6':
     dependencies:
       defer-to-connect: 2.0.1
@@ -6849,7 +6840,7 @@ snapshots:
 
   electron-log@5.4.4: {}
 
-  electron-menubar@10.1.3(electron@43.2.0(supports-color@10.2.2)):
+  electron-menubar@10.1.7(electron@43.2.0(supports-color@10.2.2)):
     dependencies:
       electron: 43.2.0(supports-color@10.2.2)
 
