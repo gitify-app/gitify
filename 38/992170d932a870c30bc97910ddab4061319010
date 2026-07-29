@@ -1,0 +1,25 @@
+vite.config.ts
+  h_ac004aadb63da9 24,101,130
+  s_3495c0c638c51f::t_b8ae8c4379d9a8 105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "38992170d932a870c30bc97910ddab4061319010",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_3495c0c638c51f": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "bed865c4-684e-4781-b68e-4dc3f4116710",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
