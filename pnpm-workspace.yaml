@@ -10,9 +10,9 @@ allowBuilds:
 catalog:
   electron: '43.2.0'
 # Adopt this freshly published, first-party release ahead of pnpm's default
-# minimumReleaseAge gate; it carries the Windows tray click fix (#3064).
+# minimumReleaseAge gate; it carries the macOS dock icon fix (#3069).
 minimumReleaseAgeExclude:
-  - electron-menubar@10.1.3
+  - electron-menubar@10.1.4
 overrides:
   react-is: '19.2.8'
   # Force patched versions of transitive dev-tooling deps pulled in by
