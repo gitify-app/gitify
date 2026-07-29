@@ -21,9 +21,7 @@ export async function raiseNativeNotification(notifications: GitifyNotification[
   if (notifications.length === 1) {
     const notification = notifications[0];
     title = notification.repository.fullName;
-    body = notification.subject.type
-      ? `${notification.subject.title} [${notification.subject.type}]`
-      : notification.subject.title;
+    body = notification.subject.title;
     url = await generateNotificationWebUrl(notification);
   } else {
     title = APPLICATION.NAME;
