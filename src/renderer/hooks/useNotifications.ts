@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  focusManager,
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
@@ -26,6 +32,7 @@ import {
   getAllNotifications,
   getNotificationCount,
   getUnreadNotificationCount,
+  refreshEnrichmentCache,
 } from '../utils/notifications/notifications';
 import { computeRefetchIntervalMs } from '../utils/notifications/pollInterval';
 import { removeNotificationsForAccount } from '../utils/notifications/remove';
@@ -243,6 +250,29 @@ export const useNotifications = ({
       refetch();
     });
   }, [withSideEffects, refetch]);
+
+  // Enriched subject details are cached per `updatedAt`, which label,
+  // milestone, and reaction changes never bump, so they can drift while the
+  // app polls in the background. Drop the cache when the window regains focus
+  // and refetch, so the inbox the user actually looks at re-enriches at that
+  // moment. The refetch is explicit because the stale-gated focus refetch
+  // (`refetchOnWindowFocus` above) does not fire within `staleTime`; when it
+  // does fire too, TanStack dedupes the concurrent fetches. Clearing is
+  // synchronous within the focus dispatch while any refetch reads the cache
+  // only after its own awaits, so the clear always lands first. Throttled to
+  // the fetch interval to avoid re-enrichment bursts from rapid open/close
+  // cycles.
+  useEffect(() => {
+    if (!withSideEffects) {
+      return;
+    }
+
+    return focusManager.subscribe((focused) => {
+      if (focused && refreshEnrichmentCache(fetchIntervalMs)) {
+        refetch();
+      }
+    });
+  }, [withSideEffects, fetchIntervalMs, refetch]);
 
   const removeAccountNotifications = useCallback(
     async (account: Account) => {

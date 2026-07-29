@@ -217,11 +217,45 @@ function enrichmentCacheKey(notification: RawGitifyNotification): string {
 }
 
 /**
- * Clear the enrichment cache. Intended for use in tests to keep the
- * module-level cache from leaking state across cases.
+ * Timestamp of the last {@link refreshEnrichmentCache} that actually cleared
+ * the cache, used to throttle focus-triggered refreshes.
+ */
+let lastEnrichmentCacheRefreshAt = 0;
+
+/**
+ * Drop all cached subjects so the next enrichment pass re-fetches every
+ * notification. Called when the window regains focus: some subject changes
+ * (labels, milestones, reactions) never bump a notification's `updatedAt`,
+ * so cached details can drift while the app polls in the background. Clearing
+ * at the moment the user looks at the inbox bounds that drift to the moment
+ * of viewing.
+ *
+ * Throttled so rapid window open/close cycles cost at most one extra
+ * enrichment pass per `throttleMs`.
+ *
+ * @param throttleMs - Minimum time between cache-clearing refreshes.
+ * @returns Whether the cache was cleared (`false` when throttled), so callers
+ *          can trigger an immediate re-enrichment pass only when needed.
+ */
+export function refreshEnrichmentCache(throttleMs: number): boolean {
+  const now = Date.now();
+  if (now - lastEnrichmentCacheRefreshAt < throttleMs) {
+    return false;
+  }
+
+  lastEnrichmentCacheRefreshAt = now;
+  enrichmentCache.clear();
+
+  return true;
+}
+
+/**
+ * Clear the enrichment cache and its refresh throttle. Intended for use in
+ * tests to keep the module-level state from leaking across cases.
  */
 export function clearEnrichmentCache(): void {
   enrichmentCache.clear();
+  lastEnrichmentCacheRefreshAt = 0;
 }
 
 /**

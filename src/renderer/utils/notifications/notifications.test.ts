@@ -24,6 +24,7 @@ import {
   enrichNotifications,
   getNotificationCount,
   getUnreadNotificationCount,
+  refreshEnrichmentCache,
   stabilizeNotificationsOrder,
 } from './notifications';
 
@@ -311,6 +312,53 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       await enrichNotifications([notification]);
 
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('refreshEnrichmentCache', () => {
+    it('should clear cached subjects and throttle repeated refreshes', async () => {
+      vi.useFakeTimers();
+      try {
+        const fetchNotificationDetailsForListSpy = vi.mocked(
+          apiClient.fetchNotificationDetailsForList,
+        );
+        vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+        fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        const notification = {
+          ...(mockPartialGitifyNotification({
+            title: 'Issue #1',
+            type: 'Issue',
+            url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+          }) as GitifyNotification),
+          id: '1',
+          updatedAt: '2026-01-01T00:00:00Z',
+        };
+
+        await enrichNotifications([notification]);
+        expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
+
+        // A refresh clears the cache, so the next poll re-fetches.
+        expect(refreshEnrichmentCache(60000)).toBe(true);
+        await enrichNotifications([notification]);
+        expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
+
+        // A second refresh within the throttle window is a no-op; the cache
+        // entry from the previous poll is still served.
+        expect(refreshEnrichmentCache(60000)).toBe(false);
+        await enrichNotifications([notification]);
+        expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
+
+        // Once the throttle window has passed, refreshing clears again.
+        vi.advanceTimersByTime(60001);
+        expect(refreshEnrichmentCache(60000)).toBe(true);
+        await enrichNotifications([notification]);
+        expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(3);
+      } finally {
+        vi.useRealTimers();
+      }
     });
   });
 });

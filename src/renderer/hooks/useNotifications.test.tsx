@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import {
   mockGitHubCloudAccount,
@@ -39,10 +39,12 @@ vi.mock('../utils/notifications/notifications', async () => {
   return {
     ...actual,
     getAllNotifications: vi.fn(),
+    refreshEnrichmentCache: vi.fn(),
   };
 });
 
 const getAllNotificationsMock = vi.mocked(notificationsUtils.getAllNotifications);
+const refreshEnrichmentCacheMock = vi.mocked(notificationsUtils.refreshEnrichmentCache);
 
 const createWrapper = () => {
   const queryClient = new QueryClient({
@@ -81,6 +83,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     raiseSoundNotificationSpy.mockClear();
     raiseNativeNotificationSpy.mockClear();
     getAllNotificationsMock.mockReset();
+    refreshEnrichmentCacheMock.mockReset();
     clearServerPollIntervals();
 
     useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
@@ -279,6 +282,98 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
       } finally {
         vi.useRealTimers();
+      }
+    });
+  });
+
+  describe('window focus', () => {
+    it('refreshes the enrichment cache when the window regains focus', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+      refreshEnrichmentCacheMock.mockReturnValue(false);
+
+      useSettingsStore.setState({ fetchInterval: 1234 });
+
+      renderNotificationsHook();
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalled());
+
+      try {
+        await act(async () => {
+          focusManager.setFocused(false);
+        });
+        expect(refreshEnrichmentCacheMock).not.toHaveBeenCalled();
+
+        await act(async () => {
+          focusManager.setFocused(true);
+        });
+
+        // Throttled to the configured fetch interval
+        expect(refreshEnrichmentCacheMock).toHaveBeenCalledWith(1234);
+      } finally {
+        await act(async () => {
+          focusManager.setFocused(undefined);
+        });
+      }
+    });
+
+    it('refetches immediately when the cache is cleared on focus, even if the query is fresh', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+      refreshEnrichmentCacheMock.mockReturnValue(true);
+
+      // A never-stale query suppresses the stale-gated `refetchOnWindowFocus`
+      // refetch, so any second fetch can only come from the explicit refetch
+      // issued when the enrichment cache is cleared.
+      const queryClient = new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+            refetchOnWindowFocus: false,
+            refetchInterval: false,
+            staleTime: Number.POSITIVE_INFINITY,
+          },
+        },
+      });
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      );
+
+      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
+
+      try {
+        await act(async () => {
+          focusManager.setFocused(false);
+        });
+        await act(async () => {
+          focusManager.setFocused(true);
+        });
+
+        await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(2));
+      } finally {
+        await act(async () => {
+          focusManager.setFocused(undefined);
+        });
+      }
+    });
+
+    it('plain consumers do not refresh the enrichment cache on focus', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      renderHook(() => useNotifications(), { wrapper: createWrapper() });
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalled());
+
+      try {
+        await act(async () => {
+          focusManager.setFocused(false);
+        });
+        await act(async () => {
+          focusManager.setFocused(true);
+        });
+
+        expect(refreshEnrichmentCacheMock).not.toHaveBeenCalled();
+      } finally {
+        await act(async () => {
+          focusManager.setFocused(undefined);
+        });
       }
     });
   });
