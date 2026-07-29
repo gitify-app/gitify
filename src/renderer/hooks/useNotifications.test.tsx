@@ -21,6 +21,10 @@ import { Errors } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
 import { getAdapter } from '../utils/forges/registry';
 import * as notificationsUtils from '../utils/notifications/notifications';
+import {
+  clearServerPollIntervals,
+  reportServerPollInterval,
+} from '../utils/notifications/pollInterval';
 import * as audio from '../utils/system/audio';
 import * as native from '../utils/system/native';
 import { useNotifications } from './useNotifications';
@@ -77,6 +81,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     raiseSoundNotificationSpy.mockClear();
     raiseNativeNotificationSpy.mockClear();
     getAllNotificationsMock.mockReset();
+    clearServerPollIntervals();
 
     useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
 
@@ -231,6 +236,47 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
         // Initial fetch only; no interval polls without the side-effects host
         expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('stretches the polling interval to the server-recommended minimum', async () => {
+      vi.useFakeTimers();
+      try {
+        // The forge client reports the `X-Poll-Interval` header while the
+        // fetch runs, so each poll refreshes the recommendation.
+        getAllNotificationsMock.mockImplementation(async () => {
+          reportServerPollInterval(mockGitHubCloudAccount, 5);
+          return mockSingleAccountNotifications;
+        });
+
+        useSettingsStore.setState({
+          fetchInterval: 1000,
+        });
+
+        renderHook(() => useNotifications({ withSideEffects: true }), {
+          wrapper: createWrapper(),
+        });
+
+        // Initial mount fetch reports a 5s server minimum.
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(0);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        // The 1s user interval would fire ~3 polls here; the server minimum
+        // suppresses them all.
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(3_500);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        // Just past the 5s server minimum, exactly one poll fires.
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(2_000);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
       } finally {
         vi.useRealTimers();
       }

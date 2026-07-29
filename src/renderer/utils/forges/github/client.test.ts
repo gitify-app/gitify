@@ -13,6 +13,10 @@ import { useSettingsStore } from '../../../stores';
 import type { Link } from '../../../types';
 
 import {
+  clearServerPollIntervals,
+  computeRefetchIntervalMs,
+} from '../../notifications/pollInterval';
+import {
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
@@ -70,6 +74,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
   const createOctokitClientUncachedSpy = vi.spyOn(octokitModule, 'createOctokitClientUncached');
 
   beforeEach(() => {
+    clearServerPollIntervals();
+
     vi.mocked(apiRequests.performGraphQLRequest).mockReset();
     vi.mocked(apiRequests.performGraphQLRequestString).mockReset();
 
@@ -206,7 +212,42 @@ describe('renderer/utils/forges/github/client.ts', () => {
             'Cache-Control': 'no-cache',
           },
         },
+        expect.any(Function),
       );
+    });
+
+    it('should capture the X-Poll-Interval header for the account', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: false,
+      });
+
+      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue({
+        data: [],
+        status: 200,
+        headers: { 'x-poll-interval': '75' },
+      });
+
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(computeRefetchIntervalMs(0, [mockGitHubCloudAccount])).toBe(75000);
+    });
+
+    it('should capture the X-Poll-Interval header when paginating', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: true,
+      });
+
+      mockOctokit.paginate.mockImplementation((_endpoint, _parameters, mapFn) =>
+        Promise.resolve(mapFn({ data: [], headers: { 'x-poll-interval': '120' } })),
+      );
+
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(computeRefetchIntervalMs(0, [mockGitHubCloudAccount])).toBe(120000);
     });
   });
 

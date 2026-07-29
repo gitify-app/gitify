@@ -27,6 +27,7 @@ import {
   getNotificationCount,
   getUnreadNotificationCount,
 } from '../utils/notifications/notifications';
+import { computeRefetchIntervalMs } from '../utils/notifications/pollInterval';
 import { removeNotificationsForAccount } from '../utils/notifications/remove';
 import { getNewNotifications } from '../utils/notifications/utils';
 import { raiseSoundNotification } from '../utils/system/audio';
@@ -159,7 +160,11 @@ export const useNotifications = ({
 
     // Only the singleton side-effects host polls. Other consumers share the
     // cached data and would otherwise each schedule their own refetch timer.
-    refetchInterval: withSideEffects ? fetchIntervalMs : false,
+    // The interval is re-evaluated after each fetch so it stretches to the
+    // latest server-recommended minimum (`X-Poll-Interval`) when required.
+    refetchInterval: withSideEffects
+      ? () => computeRefetchIntervalMs(fetchIntervalMs, accounts)
+      : false,
     refetchOnMount: withSideEffects,
     refetchOnReconnect: withSideEffects,
     refetchOnWindowFocus: withSideEffects,
