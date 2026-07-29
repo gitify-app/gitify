@@ -33,6 +33,19 @@
       "description": "Group vite-plus with vitest and @vitest/coverage-v8 so their versions always stay in sync. vite-plus bundles vitest as a direct dep; a mismatch causes SnapshotClient errors at runtime.",
       "matchPackageNames": ["vite-plus", "vitest", "@vitest/coverage-v8"],
       "groupName": "vite-plus / vitest"
+    },
+    {
+      "description": "Give updates to core runtime dependencies (Electron shell, tray integration, UI primitives, GitHub API client) a distinct commit scope so release-please can surface them in the changelog instead of hiding them with routine dependency bumps",
+      "matchPackageNames": [
+        "electron",
+        "electron-menubar",
+        "electron-updater",
+        "@primer/react",
+        "@primer/octicons-react",
+        "@primer/css",
+        "@octokit/**"
+      ],
+      "semanticCommitScope": "deps-core"
     }
   ],
   "customManagers": [
