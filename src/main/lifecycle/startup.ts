@@ -7,9 +7,6 @@ import { logInfo, logWarn } from '../../shared/logger';
 
 import { sendRendererEvent } from '../events';
 
-/** Delay before re-asserting the hidden dock after startup (see #3069). */
-const DOCK_REHIDE_DELAY_MS = 2_000;
-
 /**
  * Set up core application lifecycle events including tray ready setup,
  * protocol URL handling, and single-instance enforcement.
@@ -32,17 +29,6 @@ export function initializeAppLifecycle(
     mb.app.setAppUserModelId(APPLICATION.ID);
     mb.tray.setToolTip(APPLICATION.NAME);
     mb.setContextMenu(contextMenu);
-
-    // macOS can silently drop `app.dock.hide()` when it races an app
-    // activation transition, and `electron-menubar` calls it very early in
-    // startup. If that hide was swallowed, the dock icon sticks around for
-    // the whole session (#3069). Re-check once startup has settled; guarded
-    // on visibility because `dock.hide()` also deactivates the app.
-    setTimeout(() => {
-      if (app.dock?.isVisible()) {
-        app.dock.hide();
-      }
-    }, DOCK_REHIDE_DELAY_MS);
   });
 
   preventSecondInstance(mb, protocol);
