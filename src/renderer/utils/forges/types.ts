@@ -136,6 +136,11 @@ export interface ForgeAdapter {
    * enrichment (e.g. Gitea) omit this and the orchestrator returns the input
    * unchanged.
    *
+   * Implementations must return notifications in input order, and must return
+   * a notification whose detail fetch failed with its original `subject`
+   * reference unchanged, so callers can detect the failure (e.g. to avoid
+   * caching base details as if they were enriched).
+   *
    * @see ../notifications/notifications.ts `enrichNotifications` — orchestrator
    *      that delegates here when the user has detailed notifications enabled.
    */

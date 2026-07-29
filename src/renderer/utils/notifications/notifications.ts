@@ -174,13 +174,24 @@ export async function enrichNotifications(
     enriched.forEach((enrichedNotification, i) => {
       const index = missIndexes[i];
       result[index] = enrichedNotification;
-      enrichmentCache.set(enrichmentCacheKey(enrichedNotification), enrichedNotification.subject);
+
+      // Adapters signal a failed enrichment by returning the notification
+      // with its original `subject` reference unchanged. Skip caching those
+      // so they are retried on the next poll instead of serving base details
+      // until `updatedAt` next changes.
+      if (enrichedNotification.subject !== misses[i].subject) {
+        enrichmentCache.set(enrichmentCacheKey(enrichedNotification), enrichedNotification.subject);
+      }
     });
   }
 
-  // Bound cache growth: drop entries for notifications no longer present.
+  // Bound cache growth: drop this account's entries for notifications no
+  // longer present. Enrichment runs once per account (and concurrently across
+  // accounts), so the prune must not touch other accounts' entries, which are
+  // never in `liveKeys`.
+  const accountKeyPrefix = `${getAccountUUID(notifications[0].account)}:`;
   for (const key of enrichmentCache.keys()) {
-    if (!liveKeys.has(key)) {
+    if (key.startsWith(accountKeyPrefix) && !liveKeys.has(key)) {
       enrichmentCache.delete(key);
     }
   }
@@ -191,8 +202,8 @@ export async function enrichNotifications(
 /**
  * In-memory cache of enriched subjects keyed by {@link enrichmentCacheKey}.
  * Persists across poll cycles so unchanged notifications can skip enrichment,
- * and is pruned each cycle to the set of currently-present notifications so it
- * stays bounded to the live notification working set.
+ * and is pruned per account each cycle to that account's currently-present
+ * notifications so it stays bounded to the live notification working set.
  */
 const enrichmentCache = new Map<string, GitifySubject>();
 

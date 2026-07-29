@@ -245,5 +245,72 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
     });
+
+    it('should keep cache entries for other accounts when pruning', async () => {
+      const fetchNotificationDetailsForListSpy = vi.mocked(
+        apiClient.fetchNotificationDetailsForList,
+      );
+      vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+
+      useSettingsStore.setState({ detailedNotifications: true });
+
+      const base = mockPartialGitifyNotification({
+        title: 'Issue #1',
+        type: 'Issue',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+      }) as GitifyNotification;
+
+      const cloudNotification = {
+        ...base,
+        id: '1',
+        updatedAt: '2026-01-01T00:00:00Z',
+        account: mockGitHubCloudAccount,
+      };
+      const enterpriseNotification = {
+        ...base,
+        id: '2',
+        updatedAt: '2026-01-01T00:00:00Z',
+        account: mockGitHubEnterpriseServerAccount,
+      };
+
+      // `getAllNotifications` enriches each account in a separate call, so
+      // pruning one account's stale entries must not evict the other's.
+      await enrichNotifications([cloudNotification]);
+      await enrichNotifications([enterpriseNotification]);
+      await enrichNotifications([cloudNotification]);
+      await enrichNotifications([enterpriseNotification]);
+
+      expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('should re-fetch on the next poll when enrichment failed', async () => {
+      const fetchNotificationDetailsForListSpy = vi.mocked(
+        apiClient.fetchNotificationDetailsForList,
+      );
+      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+      // First poll: the per-notification fallback fetch fails, so the
+      // notification is returned with base details only.
+      vi.mocked(apiClient.fetchIssueByNumber).mockRejectedValueOnce(new Error('transient outage'));
+      vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+
+      useSettingsStore.setState({ detailedNotifications: true });
+
+      const notification = {
+        ...(mockPartialGitifyNotification({
+          title: 'Issue #1',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+        }) as GitifyNotification),
+        id: '1',
+        updatedAt: '2026-01-01T00:00:00Z',
+      };
+
+      // The failed enrichment must not be cached, so the second poll retries.
+      await enrichNotifications([notification]);
+      await enrichNotifications([notification]);
+
+      expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
+    });
   });
 });

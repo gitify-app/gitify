@@ -18,6 +18,10 @@ export const GITHUB_API_MERGE_BATCH_SIZE = 100;
  * comment count, labels, etc.) by issuing a single batched GraphQL query
  * and dispatching to per-subject-type handlers.
  *
+ * Notifications whose detail fetch fails are returned unchanged, preserving
+ * their original `subject` reference so callers can detect the failure (see
+ * the `enrichNotifications` adapter contract).
+ *
  * Exposed via `githubAdapter.enrichNotifications` so the shared notification
  * orchestrator stays adapter-agnostic.
  */
@@ -80,6 +84,10 @@ async function enrichSingle(
     );
 
     rendererLogWarn('enrichGitHubNotifications', 'Continuing with base notification details');
+
+    // Keep the original subject reference so callers can tell this
+    // notification was not enriched and retry it on a later poll.
+    return notification;
   }
 
   return {
