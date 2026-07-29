@@ -22,7 +22,7 @@ describe('renderer/utils/system/native.ts', () => {
       expect.stringContaining(
         mockSingleAccountNotifications[0].notifications[0].repository.fullName,
       ),
-      expect.stringContaining(mockSingleAccountNotifications[0].notifications[0].subject.title),
+      mockSingleAccountNotifications[0].notifications[0].subject.title,
       expect.stringContaining(mockHtmlUrl),
     );
     expect(url.generateNotificationWebUrl).toHaveBeenCalledTimes(1);
