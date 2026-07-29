@@ -1,0 +1,28 @@
+renovate.json
+  s_c36042117edc26::t_1fb35068e97cb8 36-40,44
+  s_c36042117edc26::t_be02862f368394 41-43
+  s_c36042117edc26::t_0b4728ad2239c7 45-47
+release-please-config.json
+  h_ac004aadb63da9 20-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "c32410556a0a7448bf2fbf5d8fbfccbf122b8dc9",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_c36042117edc26": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "fdb7a084-f640-4b65-b1ea-bc45ef0302c4",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
