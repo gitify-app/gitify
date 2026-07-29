@@ -13,6 +13,7 @@ import { useSettingsStore } from '../../../stores';
 import type { Link } from '../../../types';
 
 import {
+  clearNotificationsListCache,
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
@@ -70,6 +71,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
   const createOctokitClientUncachedSpy = vi.spyOn(octokitModule, 'createOctokitClientUncached');
 
   beforeEach(() => {
+    clearNotificationsListCache();
+
     vi.mocked(apiRequests.performGraphQLRequest).mockReset();
     vi.mocked(apiRequests.performGraphQLRequestString).mockReset();
 
@@ -206,7 +209,86 @@ describe('renderer/utils/forges/github/client.ts', () => {
             'Cache-Control': 'no-cache',
           },
         },
+        expect.any(Function),
       );
+    });
+
+    it('sends a conditional request using the ETag from the previous response', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: false,
+      });
+
+      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValueOnce({
+        data: [],
+        status: 200,
+        headers: { etag: 'W/"abc"' },
+      });
+
+      // First poll primes the cache with the returned ETag.
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+      // Second poll should replay the ETag as a conditional request.
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(
+        mockOctokit.rest.activity.listNotificationsForAuthenticatedUser,
+      ).toHaveBeenLastCalledWith({
+        participating: false,
+        all: false,
+        per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache',
+          'If-None-Match': 'W/"abc"',
+        },
+      });
+    });
+
+    it('returns the cached notifications when GitHub responds 304 Not Modified', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: false,
+      });
+
+      const cachedNotifications = [{ id: '123' }] as unknown as Awaited<
+        ReturnType<typeof listNotificationsForAuthenticatedUser>
+      >;
+
+      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValueOnce({
+        data: cachedNotifications,
+        status: 200,
+        headers: { etag: 'W/"abc"' },
+      });
+      // Octokit throws a RequestError with status 304 for unchanged conditional requests.
+      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockRejectedValueOnce({
+        status: 304,
+      });
+
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+      const result = await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(result).toEqual(cachedNotifications);
+    });
+
+    it('returns the cached notifications when a paginated poll responds 304 Not Modified', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: true,
+      });
+
+      const cachedNotifications = [{ id: '123' }] as unknown as Awaited<
+        ReturnType<typeof listNotificationsForAuthenticatedUser>
+      >;
+
+      mockOctokit.paginate.mockResolvedValueOnce(cachedNotifications);
+      mockOctokit.paginate.mockRejectedValueOnce({ status: 304 });
+
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+      const result = await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(result).toEqual(cachedNotifications);
     });
   });
 

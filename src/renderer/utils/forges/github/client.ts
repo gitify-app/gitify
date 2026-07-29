@@ -13,6 +13,7 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
+import { getAccountUUID } from '../../auth/utils';
 import { supportsAnsweredDiscussion } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
@@ -45,7 +46,68 @@ export async function fetchAuthenticatedUserDetails(account: Account) {
 }
 
 /**
+ * In-memory store of the last notifications-list response per account, used to
+ * make conditional requests. When GitHub responds `304 Not Modified` (because
+ * nothing has changed since the previous poll) the cached list is returned
+ * without transferring or re-parsing the full body. A `304` response also does
+ * not count against the primary rate limit.
+ */
+type NotificationsListCacheEntry = {
+  etag?: string;
+  lastModified?: string;
+  data: ListNotificationsForAuthenticatedUserResponse;
+};
+
+const notificationsListCache = new Map<string, NotificationsListCacheEntry>();
+
+/**
+ * Clear the notifications-list conditional-request cache.
+ * Exposed primarily so tests can start from a clean state.
+ */
+export function clearNotificationsListCache(): void {
+  notificationsListCache.clear();
+}
+
+/**
+ * Build the request headers for the notifications list, adding conditional
+ * request validators (`If-None-Match` / `If-Modified-Since`) when a previous
+ * response has been cached for the account.
+ */
+function buildNotificationsListHeaders(
+  cached: NotificationsListCacheEntry | undefined,
+): Record<string, string> {
+  const headers: Record<string, string> = {
+    'Cache-Control': 'no-cache', // Force revalidation rather than using a stale cached response
+  };
+
+  if (cached?.etag) {
+    headers['If-None-Match'] = cached.etag;
+  } else if (cached?.lastModified) {
+    headers['If-Modified-Since'] = cached.lastModified;
+  }
+
+  return headers;
+}
+
+/**
+ * Determine whether an error thrown by Octokit represents a `304 Not Modified`
+ * response. Octokit throws a `RequestError` with `status === 304` for
+ * conditional requests that hit an unchanged resource.
+ */
+function isNotModifiedError(error: unknown): boolean {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'status' in error &&
+    (error as { status?: number }).status === 304
+  );
+}
+
+/**
  * List all notifications for the current user, sorted by most recently updated.
+ *
+ * Uses conditional requests so that an unchanged notifications list is returned
+ * from cache on a `304 Not Modified` response instead of being re-downloaded.
  *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
@@ -55,29 +117,64 @@ export async function listNotificationsForAuthenticatedUser(
   const settings = useSettingsStore.getState();
   const octokit = await createOctokitClient(account, 'rest');
 
-  if (settings.fetchAllNotifications) {
-    // Fetch all pages using Octokit's pagination
-    return await octokit.paginate(octokit.rest.activity.listNotificationsForAuthenticatedUser, {
+  const cacheKey = getAccountUUID(account);
+  const cached = notificationsListCache.get(cacheKey);
+  const headers = buildNotificationsListHeaders(cached);
+
+  try {
+    if (settings.fetchAllNotifications) {
+      // Fetch all pages using Octokit's pagination, capturing the validators
+      // from the first page so the next poll can be made conditional.
+      let captured = false;
+      let etag: string | undefined;
+      let lastModified: string | undefined;
+
+      const data = await octokit.paginate(
+        octokit.rest.activity.listNotificationsForAuthenticatedUser,
+        {
+          participating: settings.participating,
+          all: settings.fetchReadNotifications,
+          per_page: 100,
+          headers,
+        },
+        (response) => {
+          if (!captured) {
+            captured = true;
+            etag = response.headers.etag;
+            lastModified = response.headers['last-modified'];
+          }
+
+          return response.data;
+        },
+      );
+
+      notificationsListCache.set(cacheKey, { etag, lastModified, data });
+
+      return data;
+    }
+
+    // Single page request
+    const response = await octokit.rest.activity.listNotificationsForAuthenticatedUser({
       participating: settings.participating,
       all: settings.fetchReadNotifications,
       per_page: 100,
-      headers: {
-        'Cache-Control': 'no-cache', // Prevent caching
-      },
+      headers,
     });
+
+    notificationsListCache.set(cacheKey, {
+      etag: response.headers.etag,
+      lastModified: response.headers['last-modified'],
+      data: response.data,
+    });
+
+    return response.data;
+  } catch (error) {
+    if (isNotModifiedError(error) && cached) {
+      return cached.data;
+    }
+
+    throw error;
   }
-
-  // Single page request
-  const response = await octokit.rest.activity.listNotificationsForAuthenticatedUser({
-    participating: settings.participating,
-    all: settings.fetchReadNotifications,
-    per_page: 100,
-    headers: {
-      'Cache-Control': 'no-cache', // Prevent caching
-    },
-  });
-
-  return response.data;
 }
 
 /**
