@@ -13,6 +13,7 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
+import { reportServerPollInterval } from '../../notifications/pollInterval';
 import { supportsAnsweredDiscussion } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
@@ -47,6 +48,10 @@ export async function fetchAuthenticatedUserDetails(account: Account) {
 /**
  * List all notifications for the current user, sorted by most recently updated.
  *
+ * The server-recommended minimum poll interval (`X-Poll-Interval` header) is
+ * reported to the poll interval registry so the notifications query can slow
+ * down when GitHub asks clients to back off.
+ *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
 export async function listNotificationsForAuthenticatedUser(
@@ -57,14 +62,22 @@ export async function listNotificationsForAuthenticatedUser(
 
   if (settings.fetchAllNotifications) {
     // Fetch all pages using Octokit's pagination
-    return await octokit.paginate(octokit.rest.activity.listNotificationsForAuthenticatedUser, {
-      participating: settings.participating,
-      all: settings.fetchReadNotifications,
-      per_page: 100,
-      headers: {
-        'Cache-Control': 'no-cache', // Prevent caching
+    return await octokit.paginate(
+      octokit.rest.activity.listNotificationsForAuthenticatedUser,
+      {
+        participating: settings.participating,
+        all: settings.fetchReadNotifications,
+        per_page: 100,
+        headers: {
+          'Cache-Control': 'no-cache', // Prevent caching
+        },
       },
-    });
+      (response) => {
+        reportServerPollInterval(account, Number(response.headers['x-poll-interval']));
+
+        return response.data;
+      },
+    );
   }
 
   // Single page request
@@ -76,6 +89,8 @@ export async function listNotificationsForAuthenticatedUser(
       'Cache-Control': 'no-cache', // Prevent caching
     },
   });
+
+  reportServerPollInterval(account, Number(response.headers['x-poll-interval']));
 
   return response.data;
 }
