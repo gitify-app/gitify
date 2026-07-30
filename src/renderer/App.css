@@ -7,6 +7,30 @@
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
 
+/**
+ * Design-language chrome tokens.
+ *
+ * A design language re-skins chrome (radius / shadow / blur) by re-pointing
+ * these `--gitify-*` vars under `[data-theme="..."]`, mirroring how colors are
+ * re-pointed under `[data-color-mode]` in tailwind.config.mts. Classic aliases
+ * Tailwind's own values, so it renders identically. `@theme inline` exposes the
+ * tokens as utilities that resolve to the live var (so they re-resolve under the
+ * active `[data-theme]`); plain `@theme` would freeze them at `:root`.
+ */
+:root {
+  --gitify-radius-sm: var(--radius-sm);
+  --gitify-radius-md: var(--radius-md);
+  --gitify-radius-full: calc(infinity * 1px);
+  --gitify-shadow-sm: var(--shadow-sm);
+}
+
+@theme inline {
+  --radius-gitify-sm: var(--gitify-radius-sm);
+  --radius-gitify-md: var(--gitify-radius-md);
+  --radius-gitify-full: var(--gitify-radius-full);
+  --shadow-gitify-sm: var(--gitify-shadow-sm);
+}
+
 html,
 body,
 #root {
