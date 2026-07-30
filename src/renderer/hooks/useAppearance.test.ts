@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 
 import { useSettingsStore } from '../stores';
 
@@ -10,6 +10,7 @@ describe('renderer/hooks/useAppearance.ts', () => {
   afterEach(() => {
     document.documentElement.removeAttribute('data-theme');
     document.documentElement.removeAttribute('data-glass-material');
+    document.documentElement.classList.remove('gitify-vibrant');
   });
 
   it('marks the root with the Classic design language by default', () => {
@@ -40,5 +41,32 @@ describe('renderer/hooks/useAppearance.ts', () => {
     renderHook(() => useAppearance());
 
     expect(document.documentElement.getAttribute('data-glass-material')).toBe('backdrop-filter');
+  });
+
+  it('applies vibrancy and marks the root vibrant on macOS Glass', async () => {
+    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS });
+
+    renderHook(() => useAppearance());
+
+    expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(true);
+    await waitFor(() =>
+      expect(document.documentElement.classList.contains('gitify-vibrant')).toBe(true),
+    );
+  });
+
+  it('disables vibrancy for Classic on macOS', () => {
+    renderHook(() => useAppearance());
+
+    expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
+    expect(document.documentElement.classList.contains('gitify-vibrant')).toBe(false);
+  });
+
+  it('does not touch vibrancy off macOS', () => {
+    vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(false);
+    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS });
+
+    renderHook(() => useAppearance());
+
+    expect(window.gitify.setWindowVibrancy).not.toHaveBeenCalled();
   });
 });

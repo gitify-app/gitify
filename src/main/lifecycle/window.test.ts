@@ -3,8 +3,9 @@ import type { Menubar } from 'electron-menubar';
 import type MenuBuilder from '../menu';
 import {
   __resetWindowLifecycleForTests,
-  configureWindowEvents,
   applyKeepWindowOnBlur,
+  applyWindowVibrancy,
+  configureWindowEvents,
 } from './window';
 
 const appOnMock = vi.fn();
@@ -73,6 +74,7 @@ describe('main/lifecycle/window.ts', () => {
         setSize: vi.fn(),
         center: vi.fn(),
         setAlwaysOnTop: vi.fn(),
+        setVibrancy: vi.fn(),
         hide: vi.fn(),
         isDestroyed: vi.fn().mockReturnValue(false),
         on: vi.fn(),
@@ -181,6 +183,52 @@ describe('main/lifecycle/window.ts', () => {
       findWebContentsHandler(menubar, 'devtools-closed')?.();
 
       expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(false);
+    });
+  });
+
+  describe('applyWindowVibrancy', () => {
+    it('applies the material on macOS when enabled', () => {
+      setPlatform('darwin');
+
+      applyWindowVibrancy(menubar, true);
+
+      expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('under-window');
+    });
+
+    it('removes the material on macOS when disabled', () => {
+      setPlatform('darwin');
+
+      applyWindowVibrancy(menubar, false);
+
+      expect(menubar.window?.setVibrancy).toHaveBeenCalledWith(null);
+    });
+
+    it('is a no-op off macOS', () => {
+      applyWindowVibrancy(menubar, true);
+
+      expect(menubar.window?.setVibrancy).not.toHaveBeenCalled();
+    });
+
+    it('skips the call when the window is destroyed', () => {
+      setPlatform('darwin');
+      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
+      (menubar.window?.isDestroyed as ReturnType<typeof vi.fn>).mockReturnValue(true);
+
+      applyWindowVibrancy(menubar, true);
+
+      expect(menubar.window?.setVibrancy).not.toHaveBeenCalled();
+    });
+
+    it('re-applies the remembered material when the window is shown', () => {
+      setPlatform('darwin');
+      configureWindowEvents(menubar, menuBuilder);
+      applyWindowVibrancy(menubar, true);
+      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
+      (menubar.window?.setVibrancy as ReturnType<typeof vi.fn>).mockClear();
+
+      findWindowHandler(menubar, 'show')?.({ preventDefault: vi.fn() });
+
+      expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('under-window');
     });
   });
 

@@ -5,7 +5,7 @@ import { EVENTS } from '../../shared/events';
 import { logInfo } from '../../shared/logger';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
-import { applyKeepWindowOnBlur } from '../lifecycle/window';
+import { applyKeepWindowOnBlur, applyWindowVibrancy } from '../lifecycle/window';
 
 /**
  * Register IPC handlers for OS-level system operations.
@@ -83,5 +83,15 @@ export function registerSystemHandlers(mb: Menubar): void {
    */
   onMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, (_, value: boolean) => {
     applyKeepWindowOnBlur(mb, value);
+  });
+
+  /**
+   * Toggle the macOS window vibrancy material for the Glass design language.
+   * Request/response so the renderer can await the material before clearing the
+   * window's own background (avoids a black frame during the switch).
+   */
+  handleMainEvent(EVENTS.SET_WINDOW_VIBRANCY, (_, enabled: boolean) => {
+    applyWindowVibrancy(mb, enabled);
+    return undefined;
   });
 }

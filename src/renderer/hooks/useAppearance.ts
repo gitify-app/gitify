@@ -4,6 +4,8 @@ import { useSettingsStore } from '../stores';
 
 import { useTheme } from '../components/ui';
 
+import { DesignLanguage } from '../types';
+
 import {
   DEFAULT_DAY_COLOR_SCHEME,
   DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
@@ -57,4 +59,25 @@ export function useAppearance(): void {
       window.gitify.platform.isMacOS() ? 'vibrancy' : 'backdrop-filter',
     );
   }, []);
+
+  useEffect(() => {
+    if (!window.gitify.platform.isMacOS()) {
+      return;
+    }
+
+    const root = document.documentElement;
+    const enable = designLanguage === DesignLanguage.GLASS;
+
+    // The `gitify-vibrant` class clears the window's own background so the native
+    // material shows. Add it only after vibrancy is applied, and remove it before
+    // vibrancy is dropped, so the window never renders black mid-switch.
+    if (!enable) {
+      root.classList.remove('gitify-vibrant');
+    }
+
+    window.gitify.setWindowVibrancy(enable).then(
+      () => enable && root.classList.add('gitify-vibrant'),
+      () => root.classList.remove('gitify-vibrant'),
+    );
+  }, [designLanguage]);
 }

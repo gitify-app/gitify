@@ -56,13 +56,15 @@
   backdrop-filter: blur(16px) saturate(1.6);
 }
 
-/* Vibrancy path: clear the app's own backgrounds so the native material shows. */
-[data-theme='glass'][data-glass-material='vibrancy'] {
+/* Vibrancy path: `.gitify-vibrant` is set on the root only once the native
+ * material is applied (see useAppearance), so clearing the app's own backgrounds
+ * to reveal it never flashes black mid-switch. */
+.gitify-vibrant {
   --gitify-background: transparent;
 }
 
-[data-theme='glass'][data-glass-material='vibrancy'] body,
-[data-theme='glass'][data-glass-material='vibrancy'] #root {
+.gitify-vibrant body,
+.gitify-vibrant #root {
   background-color: transparent;
 }
 

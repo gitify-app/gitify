@@ -64,6 +64,12 @@ export const api = {
   setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
 
   /**
+   * Enable or disable the macOS window vibrancy material for Glass. Resolves once
+   * the material has been applied so the renderer can order the visual switch.
+   */
+  setWindowVibrancy: (enabled: boolean) => invokeMainEvent(EVENTS.SET_WINDOW_VIBRANCY, enabled),
+
+  /**
    * Apply the global keyboard shortcut for toggling the app window visibility.
    *
    * @param payload - Whether the shortcut is enabled and the Electron accelerator string.

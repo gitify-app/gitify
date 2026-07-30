@@ -84,6 +84,7 @@ function createGitifyBridgeApi(): Window['gitify'] {
     openExternalLink: vi.fn(),
     decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
     encryptValue: vi.fn().mockResolvedValue('encrypted'),
+    setWindowVibrancy: vi.fn().mockResolvedValue(undefined),
     platform: {
       isLinux: vi.fn().mockReturnValue(false),
       isMacOS: vi.fn().mockReturnValue(true),
