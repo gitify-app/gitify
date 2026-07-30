@@ -56,19 +56,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(screen.queryByRole('option', { name: 'Dark Tritanopia' })).not.toBeInTheDocument();
   });
 
-  it('should toggle increase contrast checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
-      });
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('increaseContrast');
-  });
-
   it('should update the zoom values when using the zoom buttons', async () => {
     const zoomOutSpy = vi.spyOn(zoom, 'decreaseZoom').mockImplementation(vi.fn());
     const zoomInSpy = vi.spyOn(zoom, 'increaseZoom').mockImplementation(vi.fn());

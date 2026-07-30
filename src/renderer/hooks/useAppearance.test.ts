@@ -2,7 +2,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 
 import { useSettingsStore } from '../stores';
 
-import { DesignLanguage } from '../types';
+import { DesignLanguage, Theme } from '../types';
 
 import { useAppearance } from './useAppearance';
 
@@ -10,11 +10,7 @@ describe('renderer/hooks/useAppearance.ts', () => {
   afterEach(() => {
     document.documentElement.removeAttribute('data-theme');
     document.documentElement.removeAttribute('data-glass-material');
-    document.documentElement.classList.remove(
-      'gitify-vibrant',
-      'gitify-solid',
-      'gitify-translucent',
-    );
+    document.documentElement.classList.remove('gitify-vibrant', 'gitify-translucent');
   });
 
   it('marks the root with the Classic design language by default', () => {
@@ -74,12 +70,27 @@ describe('renderer/hooks/useAppearance.ts', () => {
     expect(window.gitify.setWindowVibrancy).not.toHaveBeenCalled();
   });
 
-  it('degrades Glass to solid (no vibrancy) under increased contrast', () => {
-    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS, increaseContrast: true });
+  it('syncs the native theme to light for a light color mode', () => {
+    useSettingsStore.setState({ theme: Theme.LIGHT });
 
     renderHook(() => useAppearance());
 
-    expect(document.documentElement.classList.contains('gitify-solid')).toBe(true);
-    expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
+    expect(window.gitify.setNativeTheme).toHaveBeenCalledWith('light');
+  });
+
+  it('syncs the native theme to dark for a dark color mode', () => {
+    useSettingsStore.setState({ theme: Theme.DARK });
+
+    renderHook(() => useAppearance());
+
+    expect(window.gitify.setNativeTheme).toHaveBeenCalledWith('dark');
+  });
+
+  it('syncs the native theme to system for the auto color mode', () => {
+    useSettingsStore.setState({ theme: Theme.SYSTEM });
+
+    renderHook(() => useAppearance());
+
+    expect(window.gitify.setNativeTheme).toHaveBeenCalledWith('system');
   });
 });

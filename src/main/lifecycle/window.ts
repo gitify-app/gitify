@@ -33,10 +33,13 @@ export function applyWindowVibrancy(mb: Menubar, enabled: boolean): void {
   if (!isMacOS() || !mb.window || mb.window.isDestroyed()) {
     return;
   }
-  mb.window.setVibrancy(enabled ? 'under-window' : null);
-  // Clear the window's own (opaque white) background so the vibrancy material
-  // shows; restore it when vibrancy is off so Classic keeps its solid backdrop.
-  mb.window.setBackgroundColor(enabled ? '#00000000' : '#ffffff');
+  mb.window.setVibrancy(enabled ? 'popover' : null);
+  // The window is not `transparent`, so the vibrancy material itself is the
+  // background when Glass is on — don't paint over it. Only Classic needs an
+  // explicit opaque backdrop once the material is removed.
+  if (!enabled) {
+    mb.window.setBackgroundColor('#ffffff');
+  }
 }
 
 /**

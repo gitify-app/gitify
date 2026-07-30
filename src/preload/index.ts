@@ -1,6 +1,6 @@
 import { contextBridge, webFrame } from 'electron';
 
-import type { IKeyboardShortcut } from '../shared/events';
+import type { IKeyboardShortcut, NativeThemeSource } from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
@@ -68,6 +68,13 @@ export const api = {
    * the material has been applied so the renderer can order the visual switch.
    */
   setWindowVibrancy: (enabled: boolean) => invokeMainEvent(EVENTS.SET_WINDOW_VIBRANCY, enabled),
+
+  /**
+   * Sync the native window appearance (`nativeTheme.themeSource`) with the app's
+   * color mode, so the macOS vibrancy material renders light/dark to match —
+   * otherwise dark Glass gets a light material and its light text washes out.
+   */
+  setNativeTheme: (source: NativeThemeSource) => invokeMainEvent(EVENTS.SET_NATIVE_THEME, source),
 
   /**
    * Apply the global keyboard shortcut for toggling the app window visibility.

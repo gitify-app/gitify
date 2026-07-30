@@ -92,7 +92,6 @@ export interface AppearanceSettingsState {
   designLanguage: DesignLanguage;
   /** The color-mode axis (color scheme / accessibility palette). */
   theme: Theme;
-  increaseContrast: boolean;
   zoomPercentage: Percentage;
   showAccountHeader: boolean;
   wrapNotificationTitle: boolean;

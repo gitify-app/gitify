@@ -1,4 +1,4 @@
-import { app, powerMonitor, shell } from 'electron';
+import { app, nativeTheme, powerMonitor, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
@@ -99,6 +99,16 @@ export function registerSystemHandlers(mb: Menubar): void {
    */
   handleMainEvent(EVENTS.SET_WINDOW_VIBRANCY, (_, enabled: boolean) => {
     applyWindowVibrancy(mb, enabled);
+    return undefined;
+  });
+
+  /**
+   * Sync the native appearance with the app's color mode so the macOS vibrancy
+   * material renders light/dark to match; without this, dark Glass gets a light
+   * material and its light text becomes illegible.
+   */
+  handleMainEvent(EVENTS.SET_NATIVE_THEME, (_, source) => {
+    nativeTheme.themeSource = source;
     return undefined;
   });
 }

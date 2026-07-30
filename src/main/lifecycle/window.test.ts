@@ -193,7 +193,7 @@ describe('main/lifecycle/window.ts', () => {
 
       applyWindowVibrancy(menubar, true);
 
-      expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('under-window');
+      expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('popover');
     });
 
     it('removes the material on macOS when disabled', () => {
@@ -229,7 +229,7 @@ describe('main/lifecycle/window.ts', () => {
 
       findWindowHandler(menubar, 'show')?.({ preventDefault: vi.fn() });
 
-      expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('under-window');
+      expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('popover');
     });
   });
 

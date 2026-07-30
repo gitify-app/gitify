@@ -150,15 +150,21 @@
   --gitify-background: transparent;
 }
 
+/* The `[data-color-mode]` wrapper (Primer's ThemeProvider) sits below the root and
+ * both paints `background: var(--bgColor-default)` (via `@primer/css`) and re-declares
+ * `--gitify-background` (via Tailwind), so it would shadow the root's transparency for
+ * itself and descendants like AppLayout. Clear both at that level so the native
+ * material shows through the whole window. */
 .gitify-vibrant body,
-.gitify-vibrant #root {
+.gitify-vibrant #root,
+.gitify-vibrant [data-color-mode] {
+  --gitify-background: transparent;
   background-color: transparent;
 }
 
 /* Accessibility degradation: solid, legible surfaces under the OS Reduce
- * Transparency / Increase Contrast settings, or `.gitify-solid` (increase-contrast
- * or the in-app translucency toggle — see useAppearance). The vibrancy base needs
- * no fallback here: useAppearance withholds `.gitify-vibrant` in these states. */
+ * Transparency / Increase Contrast settings. The vibrancy base needs no fallback
+ * here: useAppearance withholds `.gitify-vibrant` under reduced transparency. */
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   [data-theme='glass'] {
     --gitify-glass-tint: var(--bgColor-neutral-muted);
@@ -174,21 +180,6 @@
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
-}
-
-[data-theme='glass'].gitify-solid {
-  --gitify-glass-tint: var(--bgColor-neutral-muted);
-  --gitify-sidebar: #24292e;
-  --gitify-icon-open: var(--fgColor-open);
-  --gitify-icon-closed: var(--fgColor-closed);
-  --gitify-icon-done: var(--fgColor-done);
-  --gitify-icon-attention: var(--fgColor-attention);
-  --gitify-link: var(--fgColor-link);
-}
-
-[data-theme='glass'].gitify-solid :where(.bg-gitify-sidebar, .bg-gitify-footer) {
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
 }
 
 html,

@@ -31,7 +31,6 @@ export const AppearanceSettings: FC = () => {
   // Setting store values
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
-  const increaseContrast = useSettingsStore((s) => s.increaseContrast);
 
   const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -88,19 +87,6 @@ export const AppearanceSettings: FC = () => {
             </Select.OptGroup>
           </Select>
         </Stack>
-
-        <Checkbox
-          checked={increaseContrast}
-          label="Increase contrast"
-          name="increaseContrast"
-          onChange={() => toggleSetting('increaseContrast')}
-          tooltip={
-            <Text>
-              Enable high contrast colors for improved legibility. This increases color contrast
-              across the UI and may affect some color-specific themes.
-            </Text>
-          }
-        />
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <FieldLabel label="Zoom:" name="zoom" />

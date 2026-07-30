@@ -8,9 +8,7 @@ import { DesignLanguage } from '../types';
 
 import {
   DEFAULT_DAY_COLOR_SCHEME,
-  DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
-  DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
   resolveColorMode,
@@ -26,7 +24,6 @@ import { usePrefersReducedTransparency } from './usePrefersReducedTransparency';
 export function useAppearance(): void {
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
-  const increaseContrast = useSettingsStore((s) => s.increaseContrast);
   const prefersReducedTransparency = usePrefersReducedTransparency();
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
@@ -34,22 +31,20 @@ export function useAppearance(): void {
   useEffect(() => {
     const effectiveTheme = resolveColorMode(designLanguage, theme);
     const colorMode = mapThemeModeToColorMode(effectiveTheme);
-    const colorScheme = mapThemeModeToColorScheme(effectiveTheme, increaseContrast);
+    const colorScheme = mapThemeModeToColorScheme(effectiveTheme);
 
     setColorMode(colorMode);
 
-    // System theme has no fixed scheme; fall back to a day/night pair that still
-    // honours high contrast.
-    const dayFallback = increaseContrast
-      ? DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME
-      : DEFAULT_DAY_COLOR_SCHEME;
-    const nightFallback = increaseContrast
-      ? DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME
-      : DEFAULT_NIGHT_COLOR_SCHEME;
+    // Keep the native window appearance in sync so the macOS vibrancy material
+    // renders light/dark to match (else dark Glass gets a light material).
+    window.gitify.setNativeTheme(
+      colorMode === 'day' ? 'light' : colorMode === 'night' ? 'dark' : 'system',
+    );
 
-    setDayScheme(colorScheme ?? dayFallback);
-    setNightScheme(colorScheme ?? nightFallback);
-  }, [designLanguage, theme, increaseContrast, setColorMode, setDayScheme, setNightScheme]);
+    // System theme has no fixed scheme; fall back to a day/night pair.
+    setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
+    setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
+  }, [designLanguage, theme, setColorMode, setDayScheme, setNightScheme]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', designLanguage);
@@ -65,15 +60,9 @@ export function useAppearance(): void {
   useEffect(() => {
     const root = document.documentElement;
 
-    // Glass is always translucent; it only degrades to solid under increased
-    // contrast (`.gitify-solid`) or OS Reduce Transparency (a media query in App.css).
-    const solid = increaseContrast;
-    root.classList.toggle('gitify-solid', solid);
-
-    // The full translucent Glass treatment (dissolved chrome, hairline dividers)
-    // is active only when nothing is forcing solid surfaces.
-    const vibrant =
-      designLanguage === DesignLanguage.GLASS && !solid && !prefersReducedTransparency;
+    // Glass is always translucent; it only degrades to solid under the OS Reduce
+    // Transparency / Increase Contrast settings (a media query in App.css).
+    const vibrant = designLanguage === DesignLanguage.GLASS && !prefersReducedTransparency;
     root.classList.toggle('gitify-translucent', vibrant);
 
     if (!window.gitify.platform.isMacOS()) {
@@ -90,5 +79,5 @@ export function useAppearance(): void {
       () => vibrant && root.classList.add('gitify-vibrant'),
       () => root.classList.remove('gitify-vibrant'),
     );
-  }, [designLanguage, increaseContrast, prefersReducedTransparency]);
+  }, [designLanguage, prefersReducedTransparency]);
 }

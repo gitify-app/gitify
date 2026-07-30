@@ -133,7 +133,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       // A blob persisted before designLanguage existed (zustand writes version 0).
       localStorage.setItem(
         Constants.STORAGE.SETTINGS,
-        JSON.stringify({ state: { theme: Theme.DARK_DIMMED, increaseContrast: true }, version: 0 }),
+        JSON.stringify({ state: { theme: Theme.DARK_DIMMED }, version: 0 }),
       );
 
       await act(async () => {
@@ -142,7 +142,6 @@ describe('renderer/stores/useSettingsStore.ts', () => {
 
       expect(useSettingsStore.getState().designLanguage).toBe(DesignLanguage.CLASSIC);
       expect(useSettingsStore.getState().theme).toBe(Theme.DARK_DIMMED);
-      expect(useSettingsStore.getState().increaseContrast).toBe(true);
     });
 
     test('should update the design language', () => {

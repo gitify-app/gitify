@@ -2,9 +2,7 @@ import { DesignLanguage, Theme } from '../../types';
 
 import {
   DEFAULT_DAY_COLOR_SCHEME,
-  DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
-  DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
   resolveColorMode,
@@ -24,35 +22,14 @@ describe('renderer/utils/theme.ts', () => {
   });
 
   it('should map theme mode to github primer color scheme', () => {
-    expect(mapThemeModeToColorScheme(Theme.LIGHT, false)).toBe('light');
-    expect(mapThemeModeToColorScheme(Theme.LIGHT, true)).toBe('light_high_contrast');
-    expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND, false)).toBe('light_colorblind');
-    expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND, true)).toBe(
-      'light_colorblind_high_contrast',
-    );
-    expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA, false)).toBe('light_tritanopia');
-    expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA, true)).toBe(
-      'light_tritanopia_high_contrast',
-    );
-    expect(mapThemeModeToColorScheme(Theme.DARK, false)).toBe('dark');
-    expect(mapThemeModeToColorScheme(Theme.DARK, true)).toBe('dark_high_contrast');
-    expect(mapThemeModeToColorScheme(Theme.DARK_COLORBLIND, false)).toBe('dark_colorblind');
-    expect(mapThemeModeToColorScheme(Theme.DARK_COLORBLIND, true)).toBe(
-      'dark_colorblind_high_contrast',
-    );
-    expect(mapThemeModeToColorScheme(Theme.DARK_TRITANOPIA, false)).toBe('dark_tritanopia');
-    expect(mapThemeModeToColorScheme(Theme.DARK_TRITANOPIA, true)).toBe(
-      'dark_tritanopia_high_contrast',
-    );
-    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED, false)).toBe('dark_dimmed');
-    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED, true)).toBe('dark_dimmed_high_contrast');
-    expect(mapThemeModeToColorScheme(Theme.SYSTEM, false)).toBe(null);
-    expect(mapThemeModeToColorScheme(Theme.SYSTEM, true)).toBe(null);
-  });
-
-  it('should export high contrast color scheme constants', () => {
-    expect(DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME).toBe('light_high_contrast');
-    expect(DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME).toBe('dark_high_contrast');
+    expect(mapThemeModeToColorScheme(Theme.LIGHT)).toBe('light');
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND)).toBe('light_colorblind');
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA)).toBe('light_tritanopia');
+    expect(mapThemeModeToColorScheme(Theme.DARK)).toBe('dark');
+    expect(mapThemeModeToColorScheme(Theme.DARK_COLORBLIND)).toBe('dark_colorblind');
+    expect(mapThemeModeToColorScheme(Theme.DARK_TRITANOPIA)).toBe('dark_tritanopia');
+    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED)).toBe('dark_dimmed');
+    expect(mapThemeModeToColorScheme(Theme.SYSTEM)).toBe(null);
   });
 
   it('should export default color scheme constants', () => {
