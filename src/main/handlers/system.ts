@@ -6,6 +6,7 @@ import { logInfo } from '../../shared/logger';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
 import { applyKeepWindowOnBlur, applyWindowVibrancy } from '../lifecycle/window';
+import { isDevMode } from '../utils';
 
 /**
  * Register IPC handlers for OS-level system operations.
@@ -73,8 +74,14 @@ export function registerSystemHandlers(mb: Menubar): void {
 
   /**
    * Update the application's auto-launch setting based on the provided configuration.
+   *
+   * Skipped in development: the unsigned dev Electron binary cannot register as a
+   * macOS login item, so calling this would only emit a Chromium error log.
    */
   onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings) => {
+    if (isDevMode()) {
+      return;
+    }
     app.setLoginItemSettings(settings);
   });
 
