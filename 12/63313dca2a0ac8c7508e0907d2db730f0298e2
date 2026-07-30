@@ -1,0 +1,19 @@
+.github/workflows/publish.yml
+  s_100b669cd8acd3::t_ddf41d76005fc5 136
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "1263313dca2a0ac8c7508e0907d2db730f0298e2",
+  "prompts": {},
+  "sessions": {
+    "s_100b669cd8acd3": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "0d6004d6-a56a-48ee-846c-1a1a3435754a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
