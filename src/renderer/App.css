@@ -68,6 +68,32 @@
   background-color: transparent;
 }
 
+/* Accessibility degradation: solid, legible surfaces under the OS Reduce
+ * Transparency / Increase Contrast settings, or `.gitify-solid` (increase-contrast
+ * or the in-app translucency toggle — see useAppearance). The vibrancy base needs
+ * no fallback here: useAppearance withholds `.gitify-vibrant` in these states. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  [data-theme='glass'] {
+    --gitify-glass-tint: var(--bgColor-neutral-muted);
+    --gitify-sidebar: #24292e;
+  }
+
+  [data-theme='glass'] :where(.bg-gitify-sidebar, .bg-gitify-footer) {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+[data-theme='glass'].gitify-solid {
+  --gitify-glass-tint: var(--bgColor-neutral-muted);
+  --gitify-sidebar: #24292e;
+}
+
+[data-theme='glass'].gitify-solid :where(.bg-gitify-sidebar, .bg-gitify-footer) {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 html,
 body,
 #root {

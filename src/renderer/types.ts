@@ -93,6 +93,8 @@ export interface AppearanceSettingsState {
   /** The color-mode axis (color scheme / accessibility palette). */
   theme: Theme;
   increaseContrast: boolean;
+  /** Glass translucency, forced off by increase-contrast or OS Reduce Transparency. */
+  enableTranslucency: boolean;
   zoomPercentage: Percentage;
   showAccountHeader: boolean;
   wrapNotificationTitle: boolean;

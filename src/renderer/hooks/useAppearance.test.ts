@@ -10,7 +10,7 @@ describe('renderer/hooks/useAppearance.ts', () => {
   afterEach(() => {
     document.documentElement.removeAttribute('data-theme');
     document.documentElement.removeAttribute('data-glass-material');
-    document.documentElement.classList.remove('gitify-vibrant');
+    document.documentElement.classList.remove('gitify-vibrant', 'gitify-solid');
   });
 
   it('marks the root with the Classic design language by default', () => {
@@ -68,5 +68,23 @@ describe('renderer/hooks/useAppearance.ts', () => {
     renderHook(() => useAppearance());
 
     expect(window.gitify.setWindowVibrancy).not.toHaveBeenCalled();
+  });
+
+  it('degrades Glass to solid (no vibrancy) under increased contrast', () => {
+    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS, increaseContrast: true });
+
+    renderHook(() => useAppearance());
+
+    expect(document.documentElement.classList.contains('gitify-solid')).toBe(true);
+    expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
+  });
+
+  it('degrades Glass to solid when translucency is disabled', () => {
+    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS, enableTranslucency: false });
+
+    renderHook(() => useAppearance());
+
+    expect(document.documentElement.classList.contains('gitify-solid')).toBe(true);
+    expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
   });
 });

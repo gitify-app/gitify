@@ -15,6 +15,7 @@ import {
   mapThemeModeToColorScheme,
   resolveColorMode,
 } from '../utils/ui/theme';
+import { usePrefersReducedTransparency } from './usePrefersReducedTransparency';
 
 /**
  * Applies appearance side effects: Primer color mode/scheme plus the root
@@ -26,6 +27,8 @@ export function useAppearance(): void {
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
+  const enableTranslucency = useSettingsStore((s) => s.enableTranslucency);
+  const prefersReducedTransparency = usePrefersReducedTransparency();
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
 
@@ -61,23 +64,30 @@ export function useAppearance(): void {
   }, []);
 
   useEffect(() => {
+    const root = document.documentElement;
+
+    // Glass degrades to solid surfaces under increased contrast or when the user
+    // turns translucency off; `.gitify-solid` drives that in CSS (the OS Reduce
+    // Transparency setting is handled by a media query in App.css).
+    const solid = increaseContrast || !enableTranslucency;
+    root.classList.toggle('gitify-solid', solid);
+
     if (!window.gitify.platform.isMacOS()) {
       return;
     }
 
-    const root = document.documentElement;
-    const enable = designLanguage === DesignLanguage.GLASS;
+    const vibrant =
+      designLanguage === DesignLanguage.GLASS && !solid && !prefersReducedTransparency;
 
-    // The `gitify-vibrant` class clears the window's own background so the native
-    // material shows. Add it only after vibrancy is applied, and remove it before
-    // vibrancy is dropped, so the window never renders black mid-switch.
-    if (!enable) {
+    // Add `.gitify-vibrant` only after the material is applied, and drop it before
+    // vibrancy is removed, so the window never renders black mid-switch.
+    if (!vibrant) {
       root.classList.remove('gitify-vibrant');
     }
 
-    window.gitify.setWindowVibrancy(enable).then(
-      () => enable && root.classList.add('gitify-vibrant'),
+    window.gitify.setWindowVibrancy(vibrant).then(
+      () => vibrant && root.classList.add('gitify-vibrant'),
       () => root.classList.remove('gitify-vibrant'),
     );
-  }, [designLanguage]);
+  }, [designLanguage, increaseContrast, enableTranslucency, prefersReducedTransparency]);
 }

@@ -43,6 +43,7 @@ const DEFAULT_APPEARANCE_SETTINGS: AppearanceSettingsState = {
   designLanguage: DesignLanguage.CLASSIC,
   theme: Theme.SYSTEM,
   increaseContrast: false,
+  enableTranslucency: true,
   zoomPercentage: 100 as Percentage,
   showAccountHeader: false,
   wrapNotificationTitle: false,
