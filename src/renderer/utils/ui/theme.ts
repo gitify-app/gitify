@@ -61,12 +61,7 @@ export function mapThemeModeToColorScheme(
   return increaseContrast ? `${base}_high_contrast` : base;
 }
 
-/**
- * The color-mode (`Theme`) values a design language supports. Classic exposes
- * the full palette including the accessibility variants; Glass offers only
- * light / dark / system (its accessibility story is degradation to solid
- * surfaces, not bespoke colorblind/tritanopia palettes).
- */
+/** The `Theme` values a design language exposes (Glass: light/dark/system only). */
 export function supportedColorModes(designLanguage: DesignLanguage): Theme[] {
   if (designLanguage === DesignLanguage.GLASS) {
     return [Theme.SYSTEM, Theme.LIGHT, Theme.DARK];
@@ -85,15 +80,9 @@ export function supportedColorModes(designLanguage: DesignLanguage): Theme[] {
 }
 
 /**
- * Clamp a stored color mode to the nearest value the active design language
- * supports. Classic is the identity (every value is supported), so existing
- * users are unaffected. For Glass, the accessibility/dimmed variants collapse
- * to their base light or dark.
- *
- * The stored `theme` is never mutated by a language switch — clamping happens
- * only at render/selection time — so switching Glass → Classic restores the
- * user's original scheme (e.g. `dark_dimmed`) unless they explicitly picked a
- * different one while on Glass.
+ * Clamps a stored color mode to what the active language supports (identity for
+ * Classic). The stored `theme` is never mutated — clamping is render-time only —
+ * so switching Glass → Classic restores the user's original scheme.
  */
 export function resolveColorMode(designLanguage: DesignLanguage, theme: Theme): Theme {
   if (designLanguage !== DesignLanguage.GLASS) {

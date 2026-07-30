@@ -1,21 +1,11 @@
 /**
- * App-owned UI layer.
+ * App-owned UI layer. The renderer imports Primer components through here rather
+ * than `@primer/react` directly, so a design language can swap an implementation
+ * behind this seam. Phase 1 re-exports Primer unchanged; replace a line with a
+ * dedicated module when a component needs to diverge.
  *
- * The renderer imports these instead of `@primer/react` directly, so a design
- * language can later swap an implementation behind this seam without touching
- * call sites (the D4 decision in the plan). Phase 1 (Classic) re-exports Primer
- * unchanged, so rendering is byte-identical; the value of the layer today is the
- * single, lint-enforced import boundary and the per-component swap point it
- * creates. When a language needs a component to diverge structurally, replace
- * that component's line here with a dedicated implementation module.
- *
- * `ThemeProvider` / `BaseStyles` / `useTheme` / `useConfirm` are re-exported too
- * so ALL Primer value imports live under this directory: the provider stays as
- * the token/attribute engine, and `useConfirm`'s dialog depends on it.
- *
- * Note: Primer *types* are intentionally still imported directly via
- * `import type` at the two sites that need them (`derive from public props`
- * convention) — the boundary isolates Primer components, not Primer types.
+ * Value imports are boundary-enforced (see index.test.ts); `import type` from
+ * `@primer/react` is still allowed at call sites.
  */
 export {
   ActionList,

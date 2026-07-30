@@ -8,14 +8,10 @@
 @config "../../tailwind.config.mts";
 
 /**
- * Design-language chrome tokens.
- *
- * A design language re-skins chrome (radius / shadow / blur) by re-pointing
- * these `--gitify-*` vars under `[data-theme="..."]`, mirroring how colors are
- * re-pointed under `[data-color-mode]` in tailwind.config.mts. Classic aliases
- * Tailwind's own values, so it renders identically. `@theme inline` exposes the
- * tokens as utilities that resolve to the live var (so they re-resolve under the
- * active `[data-theme]`); plain `@theme` would freeze them at `:root`.
+ * Design-language chrome tokens: a language re-skins radius/shadow/blur by
+ * re-pointing these `--gitify-*` vars under `[data-theme]`. Classic aliases
+ * Tailwind's own values. `@theme inline` (not plain `@theme`) is required so the
+ * utilities re-resolve under the active scope instead of freezing at `:root`.
  */
 :root {
   --gitify-radius-sm: var(--radius-sm);

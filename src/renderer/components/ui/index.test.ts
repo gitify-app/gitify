@@ -1,19 +1,9 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
-/**
- * Import boundary guard.
- *
- * The renderer must import Primer components through the app-owned `ui/` layer,
- * never from `@primer/react` directly — otherwise the seam that lets a design
- * language swap an implementation erodes and the two themes drift back together.
- *
- * `import type { ... } from '@primer/react'` is allowed anywhere (the app derives
- * prop types from Primer's public surface); only value imports are restricted.
- *
- * This replaces a linter `no-restricted-imports` rule, which the bundled
- * `vp lint` config does not expose for custom configuration.
- */
+// Enforces the Primer import boundary in lieu of a `no-restricted-imports` lint
+// rule, which the bundled `vp lint` config does not expose. Only value imports
+// are restricted; `import type` from `@primer/react` is allowed anywhere.
 const RENDERER = path.join(process.cwd(), 'src/renderer');
 const UI_DIR = path.join(RENDERER, 'components', 'ui');
 const PRIMER_VALUE_IMPORT = /^import \{[^}]*\} from '@primer\/react'/m;
