@@ -120,6 +120,12 @@
     color: var(--fgColor-muted);
   }
 
+  /* The logo paints a hardcoded gradient fill, so `color` can't reach it; make it
+   * follow the icon colour so it stays visible on light glass. */
+  .gitify-translucent .gitify-sidebar [fill^='url'] {
+    fill: currentColor;
+  }
+
   .gitify-translucent .gitify-sidebar::after {
     content: '';
     position: absolute;
