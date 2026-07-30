@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 
 import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
-import { Button, ButtonGroup, IconButton, Select, Stack, Text } from '@primer/react';
 
 import { useAccountsStore, useSettingsStore } from '../../stores';
 
@@ -18,6 +17,7 @@ import {
   increaseZoom,
   resetZoomLevel,
 } from '../../utils/ui/zoom';
+import { Button, ButtonGroup, IconButton, Select, Stack, Text } from '../ui';
 
 export const AppearanceSettings: FC = () => {
   // Account store values

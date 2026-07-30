@@ -1,12 +1,11 @@
 import { type FC, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Heading, Stack, Text } from '@primer/react';
-
 import { useAccountsStore } from '../stores';
 
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
+import { Button, Heading, Stack, Text } from '../components/ui';
 
 import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';

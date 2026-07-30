@@ -1,9 +1,10 @@
 import type { FC, ReactNode } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
-import { Label, Stack, Text, Tooltip } from '@primer/react';
 
 import { type IconColor, Size } from '../../types';
+
+import { Label, Stack, Text, Tooltip } from '../ui';
 
 export interface MetricPillProps {
   contents: string | ReactNode;

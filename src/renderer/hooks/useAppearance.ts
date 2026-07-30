@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { useTheme } from '@primer/react';
-
 import { useSettingsStore } from '../stores';
+
+import { useTheme } from '../components/ui';
 
 import {
   DEFAULT_DAY_COLOR_SCHEME,

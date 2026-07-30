@@ -1,9 +1,8 @@
 import type { FC, ReactNode } from 'react';
 
-import { Stack } from '@primer/react';
-
 import { EmojiText } from '../primitives/EmojiText';
 
+import { Stack } from '../ui';
 import { Centered } from './Centered';
 
 interface EmojiSplashProps {

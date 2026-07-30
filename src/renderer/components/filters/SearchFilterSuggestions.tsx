@@ -1,7 +1,5 @@
 import type { FC } from 'react';
 
-import { Popover, Stack, Text } from '@primer/react';
-
 import { useSettingsStore } from '../../stores';
 
 import { Opacity } from '../../types';
@@ -12,6 +10,7 @@ import {
   SEARCH_DELIMITER,
 } from '../../utils/notifications/filters/search';
 import { cn } from '../../utils/ui/cn';
+import { Popover, Stack, Text } from '../ui';
 
 interface SearchFilterSuggestionsProps {
   open: boolean;

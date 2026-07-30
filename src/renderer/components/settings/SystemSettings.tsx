@@ -1,7 +1,6 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 
 import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
-import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -27,6 +26,7 @@ import {
 } from '../../utils/ui/volume';
 import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
+import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '../ui';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 

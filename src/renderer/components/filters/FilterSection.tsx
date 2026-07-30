@@ -1,7 +1,6 @@
 import { memo, type ReactNode, useMemo } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
-import { Stack, Text } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
 import { type FiltersState, useFiltersStore, useSettingsStore } from '../../stores';
@@ -10,6 +9,7 @@ import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
 import type { Filter } from '../../utils/notifications/filters';
+import { Stack, Text } from '../ui';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
 export interface FilterSectionProps<K extends keyof FiltersState> {

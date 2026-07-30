@@ -1,13 +1,12 @@
 import type { FC, MouseEvent } from 'react';
 
-import { RelativeTime, Stack, Text } from '@primer/react';
-
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
 import { openUserProfile } from '../../utils/system/links';
 import { cn } from '../../utils/ui/cn';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
+import { RelativeTime, Stack, Text } from '../ui';
 
 export interface NotificationFooterProps {
   notification: GitifyNotification;

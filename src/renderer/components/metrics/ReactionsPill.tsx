@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 
 import { SmileyIcon } from '@primer/octicons-react';
-import { IssueLabelToken, LabelGroup } from '@primer/react';
 
 import { type GitifyReactionGroup, IconColor } from '../../types';
 
+import { IssueLabelToken, LabelGroup } from '../ui';
 import { MetricPill } from './MetricPill';
 
 export interface ReactionsPillProps {

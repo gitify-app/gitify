@@ -11,7 +11,6 @@ import {
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { IconButton, Stack } from '@primer/react';
 
 import { APPLICATION } from '../../shared/constants';
 
@@ -20,6 +19,7 @@ import { useShortcutActions } from '../hooks/useShortcutActions';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { LogoIcon } from './icons/LogoIcon';
+import { IconButton, Stack } from './ui';
 
 export const Sidebar: FC = () => {
   const { status, notificationCount, hasUnreadNotifications } = useNotifications();

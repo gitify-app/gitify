@@ -1,9 +1,10 @@
 import type { FC, ReactNode } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
-import { Heading, Stack } from '@primer/react';
 
 import { Tooltip } from '../fields/Tooltip';
+
+import { Heading, Stack } from '../ui';
 
 interface TitleProps {
   icon: Icon;

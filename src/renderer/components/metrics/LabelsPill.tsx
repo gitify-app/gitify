@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 
 import { TagIcon } from '@primer/octicons-react';
-import { IssueLabelToken, LabelGroup } from '@primer/react';
 
 import { type GitifyLabels, IconColor } from '../../types';
 
+import { IssueLabelToken, LabelGroup } from '../ui';
 import { MetricPill } from './MetricPill';
 
 export interface LabelsPillProps {

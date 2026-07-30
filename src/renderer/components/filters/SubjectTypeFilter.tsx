@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 
 import { BellIcon } from '@primer/octicons-react';
-import { Text } from '@primer/react';
 
 import { subjectTypeFilter } from '../../utils/notifications/filters';
+import { Text } from '../ui';
 import { FilterSection } from './FilterSection';
 
 export const SubjectTypeFilter: FC = () => {

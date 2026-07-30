@@ -8,7 +8,6 @@ import {
   RepoIcon,
   SearchIcon,
 } from '@primer/octicons-react';
-import { Stack, Text } from '@primer/react';
 
 import { useFiltersStore, useSettingsStore } from '../../stores';
 
@@ -21,6 +20,7 @@ import {
   hasIncludeSearchFilters,
 } from '../../utils/notifications/filters/search';
 import { cn } from '../../utils/ui/cn';
+import { Stack, Text } from '../ui';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 

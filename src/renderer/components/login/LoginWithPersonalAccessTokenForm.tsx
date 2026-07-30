@@ -2,7 +2,6 @@ import { type FC, type ReactNode, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
-import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
 import { useLogins } from '../../hooks/useLogins';
 
@@ -17,6 +16,7 @@ import { isValidHostname } from '../../utils/auth/utils';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
+import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '../ui';
 
 interface LocationState {
   account?: Account;

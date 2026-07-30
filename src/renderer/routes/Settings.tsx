@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 
 import { GearIcon } from '@primer/octicons-react';
-import { Stack } from '@primer/react';
 
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
@@ -12,6 +11,7 @@ import { SettingsFooter } from '../components/settings/SettingsFooter';
 import { SettingsReset } from '../components/settings/SettingsReset';
 import { SystemSettings } from '../components/settings/SystemSettings';
 import { TraySettings } from '../components/settings/TraySettings';
+import { Stack } from '../components/ui';
 
 export const SettingsRoute: FC = () => {
   return (

@@ -1,7 +1,6 @@
 import { type FC, useEffect, useState } from 'react';
 
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
-import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -11,6 +10,7 @@ import { Footer } from '../primitives/Footer';
 
 import { getAppVersion } from '../../utils/system/comms';
 import { openGitifyReleaseNotes } from '../../utils/system/links';
+import { Button, IconButton, Stack, Tooltip } from '../ui';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);

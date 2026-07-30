@@ -2,10 +2,10 @@ import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
-import { IconButton, Stack } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
 
+import { IconButton, Stack } from '../ui';
 import { Title } from './Title';
 
 interface HeaderProps {

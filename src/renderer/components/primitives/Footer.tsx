@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 
-import { Stack } from '@primer/react';
+import { Stack } from '../ui';
 
 interface FooterProps {
   children: ReactNode;

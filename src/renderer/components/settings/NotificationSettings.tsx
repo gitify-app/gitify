@@ -15,7 +15,6 @@ import {
   SyncIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { formatDuration } from 'date-fns/formatDuration';
 import { millisecondsToMinutes } from 'date-fns/millisecondsToMinutes';
@@ -35,6 +34,7 @@ import { GroupBy, Size } from '../../types';
 
 import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scopes';
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
+import { Button, ButtonGroup, IconButton, Stack, Text } from '../ui';
 
 export const NotificationSettings: FC = () => {
   const navigate = useNavigate();

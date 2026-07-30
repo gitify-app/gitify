@@ -1,14 +1,13 @@
 import { type FC, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '@primer/react';
-
 import { EmojiSplash } from './layout/EmojiSplash';
 
 import type { GitifyError } from '../types';
 
 import { Errors } from '../utils/core/errors';
 import { randomElement } from '../utils/core/random';
+import { Button } from './ui';
 
 interface OopsProps {
   error: GitifyError;
