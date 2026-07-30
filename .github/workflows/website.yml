@@ -18,4 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: {}
     steps:
-      - run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+      - name: Trigger Netlify build
+        env:
+          BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        run: curl --fail --silent --show-error -X POST -d '{}' "$BUILD_HOOK_URL"
