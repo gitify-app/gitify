@@ -99,10 +99,19 @@
       var(--bgColor-success-emphasis),
       var(--fgColor-muted) 34%
     );
+
+    /* Neutralise the blue notification-count pill. */
+    --gitify-counter-primary: var(--gitify-counter-secondary);
   }
 
   .gitify-translucent .gitify-sidebar {
     background: transparent;
+  }
+
+  /* Repo / account grouping bands become faint glass tints instead of solid
+   * fills, so the list reads as one surface while keeping the grouping. */
+  .gitify-translucent :where(.bg-gitify-repository, .bg-gitify-account-rest) {
+    background: color-mix(in oklab, var(--gitify-glass-tint), transparent 45%);
   }
 
   .gitify-translucent .gitify-sidebar :where(svg) {
