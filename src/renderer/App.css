@@ -44,13 +44,14 @@
  * keep their opaque backgrounds. Tint/blur values are starting points to tune.
  */
 [data-theme='glass'][data-color-mode='light'] {
-  --gitify-glass-tint: rgb(255 255 255 / 0.72);
+  /* Lighter tints let the native material carry the look instead of flattening it. */
+  --gitify-glass-tint: rgb(255 255 255 / 0.35);
   --gitify-glass-border: rgb(0 0 0 / 0.14);
   --gitify-glass-divider: rgb(0 0 0 / 0.28);
 }
 
 [data-theme='glass'][data-color-mode='dark'] {
-  --gitify-glass-tint: rgb(22 27 34 / 0.62);
+  --gitify-glass-tint: rgb(22 27 34 / 0.3);
   --gitify-glass-border: rgb(255 255 255 / 0.14);
   --gitify-glass-divider: rgb(255 255 255 / 0.2);
 }
@@ -71,8 +72,9 @@
 
 [data-theme='glass'][data-glass-material='backdrop-filter']
   :where(.bg-gitify-sidebar, .bg-gitify-footer) {
-  -webkit-backdrop-filter: blur(16px) saturate(1.6);
-  backdrop-filter: blur(16px) saturate(1.6);
+  /* Softer, more material-like than a heavy web blur. */
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  backdrop-filter: blur(22px) saturate(1.2);
 }
 
 /**
@@ -108,6 +110,10 @@
 
   .gitify-translucent .gitify-sidebar {
     background: transparent;
+    /* Active nav item: a translucent accent wash, not a solid GitHub-green tile. */
+    --button-primary-bgColor-rest: color-mix(in oklab, var(--fgColor-accent), transparent 82%);
+    --button-primary-bgColor-hover: color-mix(in oklab, var(--fgColor-accent), transparent 74%);
+    --button-primary-bgColor-active: color-mix(in oklab, var(--fgColor-accent), transparent 68%);
   }
 
   /* Repo / account grouping bands become faint glass tints instead of solid
