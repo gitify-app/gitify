@@ -133,7 +133,7 @@ jobs:
           notes=$(gh api --method POST "repos/${REPO}/releases/generate-notes" \
             -f tag_name="${TAG_NAME}" -f target_commitish="${target}" --jq '.body' || true)
           contributors=$(printf '%s\n' "${notes}" | grep -oE 'by @[A-Za-z0-9-]+' | sed 's/^by //' \
-            | sort -u | grep -viE '^@(github-actions|renovate|dependabot)$' | sed 's/^/- /' || true)
+            | sort -u | grep -viE '^@(github-actions|renovate|dependabot)$' | sed 's/^/* /' || true)
           new_contributors=$(printf '%s\n' "${notes}" | sed -n '/^## New Contributors/,/^$/p')
 
           # Idempotency: a re-run of an already-published release must not
