@@ -45,13 +45,13 @@
  */
 [data-theme='glass'][data-color-mode='light'] {
   /* Lighter tints let the native material carry the look instead of flattening it. */
-  --gitify-glass-tint: rgb(255 255 255 / 0.35);
+  --gitify-glass-tint: rgb(255 255 255 / 0.22);
   --gitify-glass-border: rgb(0 0 0 / 0.14);
   --gitify-glass-divider: rgb(0 0 0 / 0.28);
 }
 
 [data-theme='glass'][data-color-mode='dark'] {
-  --gitify-glass-tint: rgb(22 27 34 / 0.3);
+  --gitify-glass-tint: rgb(22 27 34 / 0.2);
   --gitify-glass-border: rgb(255 255 255 / 0.14);
   --gitify-glass-divider: rgb(255 255 255 / 0.2);
 }
@@ -120,6 +120,36 @@
    * fills, so the list reads as one surface while keeping the grouping. */
   .gitify-translucent :where(.bg-gitify-repository, .bg-gitify-account-rest) {
     background: color-mix(in oklab, var(--gitify-glass-tint), transparent 45%);
+  }
+
+  /* Row action buttons (mark-as-read / done / chevron) float as bare icons under
+   * Glass: drop the hover band behind the group and the invisible-button fills. */
+  .gitify-translucent .gitify-hover-actions {
+    background: transparent;
+  }
+
+  .gitify-translucent .gitify-hover-actions :where(button) {
+    --button-invisible-bgColor-rest: transparent;
+    --button-invisible-bgColor-hover: transparent;
+    --button-invisible-bgColor-active: transparent;
+  }
+
+  /* Let the glass show through the scrollbar: drop the opaque track fill so only
+   * the thumb remains. */
+  .gitify-translucent *::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  /* With bare (background-less) action buttons there's no band to hide the row
+   * text behind them, so on hover fade the row content out under the buttons
+   * instead — the title/number dissolve into the glass rather than colliding. */
+  .gitify-translucent .group:hover .gitify-row-content {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - 120px),
+      transparent calc(100% - 88px)
+    );
+    mask-image: linear-gradient(to right, #000 calc(100% - 120px), transparent calc(100% - 88px));
   }
 
   .gitify-translucent .gitify-sidebar :where(svg) {

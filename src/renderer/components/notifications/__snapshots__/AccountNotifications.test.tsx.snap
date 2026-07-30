@@ -85,7 +85,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       </span>
     </button>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -329,7 +329,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       </span>
     </button>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -573,7 +573,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       </span>
     </button>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -682,7 +682,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     id="138661096"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
+      class="gitify-row-content prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1009,7 +1009,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       </div>
     </div>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1115,7 +1115,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
     id="148827438"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
+      class="gitify-row-content prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1327,7 +1327,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       </div>
     </div>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1516,7 +1516,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       </span>
     </button>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1711,7 +1711,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       </span>
     </button>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1950,7 +1950,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should tog
       </span>
     </button>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-rest prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"

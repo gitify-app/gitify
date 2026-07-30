@@ -84,7 +84,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       )}
       id={notification.id}
     >
-      <Stack align="center" direction="horizontal" gap="condensed">
+      <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
         <Tooltip direction="e" text={notification.display.type}>
           <button type="button">
             <NotificationIcon

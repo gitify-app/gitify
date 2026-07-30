@@ -7,7 +7,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     id="138661096"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
+      class="gitify-row-content prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -334,7 +334,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       </div>
     </div>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -445,7 +445,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     id="138661096"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
+      class="gitify-row-content prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -716,7 +716,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       </div>
     </div>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -827,7 +827,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     id="138661096"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
+      class="gitify-row-content prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1098,7 +1098,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       </div>
     </div>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1209,7 +1209,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
     id="138661096"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
+      class="gitify-row-content prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -1480,7 +1480,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       </div>
     </div>
     <div
-      class="absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-notification-hover prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
