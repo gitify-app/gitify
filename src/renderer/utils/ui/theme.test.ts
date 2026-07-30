@@ -1,4 +1,4 @@
-import { Theme } from '../../types';
+import { DesignLanguage, Theme } from '../../types';
 
 import {
   DEFAULT_DAY_COLOR_SCHEME,
@@ -7,6 +7,8 @@ import {
   DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
+  resolveColorMode,
+  supportedColorModes,
 } from './theme';
 
 describe('renderer/utils/theme.ts', () => {
@@ -56,5 +58,50 @@ describe('renderer/utils/theme.ts', () => {
   it('should export default color scheme constants', () => {
     expect(DEFAULT_DAY_COLOR_SCHEME).toBe('light');
     expect(DEFAULT_NIGHT_COLOR_SCHEME).toBe('dark');
+  });
+
+  describe('supportedColorModes', () => {
+    it('Classic supports the full palette including accessibility variants', () => {
+      expect(supportedColorModes(DesignLanguage.CLASSIC)).toEqual([
+        Theme.SYSTEM,
+        Theme.LIGHT,
+        Theme.LIGHT_COLORBLIND,
+        Theme.LIGHT_TRITANOPIA,
+        Theme.DARK,
+        Theme.DARK_COLORBLIND,
+        Theme.DARK_TRITANOPIA,
+        Theme.DARK_DIMMED,
+      ]);
+    });
+
+    it('Glass supports only light / dark / system', () => {
+      expect(supportedColorModes(DesignLanguage.GLASS)).toEqual([
+        Theme.SYSTEM,
+        Theme.LIGHT,
+        Theme.DARK,
+      ]);
+    });
+  });
+
+  describe('resolveColorMode', () => {
+    it('is the identity for Classic (every value supported)', () => {
+      for (const mode of supportedColorModes(DesignLanguage.CLASSIC)) {
+        expect(resolveColorMode(DesignLanguage.CLASSIC, mode)).toBe(mode);
+      }
+    });
+
+    it('keeps system / light / dark unchanged under Glass', () => {
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.SYSTEM)).toBe(Theme.SYSTEM);
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.LIGHT)).toBe(Theme.LIGHT);
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.DARK)).toBe(Theme.DARK);
+    });
+
+    it('clamps Classic-only variants to their base light/dark under Glass', () => {
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.LIGHT_COLORBLIND)).toBe(Theme.LIGHT);
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.LIGHT_TRITANOPIA)).toBe(Theme.LIGHT);
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.DARK_COLORBLIND)).toBe(Theme.DARK);
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.DARK_TRITANOPIA)).toBe(Theme.DARK);
+      expect(resolveColorMode(DesignLanguage.GLASS, Theme.DARK_DIMMED)).toBe(Theme.DARK);
+    });
   });
 });

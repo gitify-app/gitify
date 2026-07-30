@@ -166,6 +166,63 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           >
             <label
               class="mr-1 font-medium cursor-pointer"
+              for="design-language"
+            >
+              Design:
+            </label>
+            <span
+              class="prc-Select-TextInputWrapper-5NYFF prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+              data-component="TextInput"
+              data-no-leading-visual="true"
+              data-no-trailing-action="true"
+              data-no-trailing-visual="true"
+            >
+              <select
+                aria-invalid="false"
+                class="prc-Select-Select-dJWwD"
+                data-component="Select"
+                data-hasplaceholder="false"
+                data-testid="settings-design-language"
+              >
+                <option
+                  data-component="Select.Option"
+                  value="classic"
+                >
+                  Classic
+                </option>
+                <option
+                  data-component="Select.Option"
+                  value="glass"
+                >
+                  Glass
+                </option>
+              </select>
+              <svg
+                aria-hidden="true"
+                class="prc-Select-ArrowIndicator-WjH-8 prc-Select-ArrowIndicator-WjH-8"
+                fill="currentColor"
+                height="16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.074 9.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.043 9H4.251a.25.25 0 0 0-.177.427ZM4.074 7.47 7.47 4.073a.25.25 0 0 1 .354 0L11.22 7.47a.25.25 0 0 1-.177.426H4.251a.25.25 0 0 1-.177-.426Z"
+                />
+              </svg>
+            </span>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <label
+              class="mr-1 font-medium cursor-pointer"
               for="theme"
             >
               Theme:

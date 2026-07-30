@@ -8,8 +8,9 @@ import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { Title } from '../primitives/Title';
 
-import { Theme } from '../../types';
+import { DesignLanguage, Theme } from '../../types';
 
+import { resolveColorMode, supportedColorModes } from '../../utils/ui/theme';
 import {
   canDecreaseZoom,
   canIncreaseZoom,
@@ -28,8 +29,11 @@ export const AppearanceSettings: FC = () => {
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
   // Setting store values
+  const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
+
+  const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
   const zoomPercentage = useSettingsStore((s) => s.zoomPercentage);
@@ -40,25 +44,47 @@ export const AppearanceSettings: FC = () => {
 
       <Stack direction="vertical" gap="condensed">
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
+          <FieldLabel label="Design:" name="design-language" />
+          <Select
+            data-testid="settings-design-language"
+            onChange={(evt) => updateSetting('designLanguage', evt.target.value as DesignLanguage)}
+            value={designLanguage}
+          >
+            <Select.Option value={DesignLanguage.CLASSIC}>Classic</Select.Option>
+            <Select.Option value={DesignLanguage.GLASS}>Glass</Select.Option>
+          </Select>
+        </Stack>
+
+        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <FieldLabel label="Theme:" name="theme" />
           <Select
             data-testid="settings-theme"
             onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
-            value={theme}
+            value={resolveColorMode(designLanguage, theme)}
           >
             <Select.OptGroup label="System">
               <Select.Option value={Theme.SYSTEM}>System</Select.Option>
             </Select.OptGroup>
             <Select.OptGroup label="Light">
               <Select.Option value={Theme.LIGHT}>Light default</Select.Option>
-              <Select.Option value={Theme.LIGHT_COLORBLIND}>Light colorblind</Select.Option>
-              <Select.Option value={Theme.LIGHT_TRITANOPIA}>Light Tritanopia</Select.Option>
+              {colorModeSupported(Theme.LIGHT_COLORBLIND) && (
+                <Select.Option value={Theme.LIGHT_COLORBLIND}>Light colorblind</Select.Option>
+              )}
+              {colorModeSupported(Theme.LIGHT_TRITANOPIA) && (
+                <Select.Option value={Theme.LIGHT_TRITANOPIA}>Light Tritanopia</Select.Option>
+              )}
             </Select.OptGroup>
             <Select.OptGroup label="Dark">
               <Select.Option value={Theme.DARK}>Dark default</Select.Option>
-              <Select.Option value={Theme.DARK_COLORBLIND}>Dark colorblind</Select.Option>
-              <Select.Option value={Theme.DARK_TRITANOPIA}>Dark Tritanopia</Select.Option>
-              <Select.Option value={Theme.DARK_DIMMED}>Soft dark</Select.Option>
+              {colorModeSupported(Theme.DARK_COLORBLIND) && (
+                <Select.Option value={Theme.DARK_COLORBLIND}>Dark colorblind</Select.Option>
+              )}
+              {colorModeSupported(Theme.DARK_TRITANOPIA) && (
+                <Select.Option value={Theme.DARK_TRITANOPIA}>Dark Tritanopia</Select.Option>
+              )}
+              {colorModeSupported(Theme.DARK_DIMMED) && (
+                <Select.Option value={Theme.DARK_DIMMED}>Soft dark</Select.Option>
+              )}
             </Select.OptGroup>
           </Select>
         </Stack>

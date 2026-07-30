@@ -11,6 +11,7 @@ import {
   DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
+  resolveColorMode,
 } from '../utils/ui/theme';
 
 /**
@@ -24,21 +25,25 @@ import {
  *   (`data-glass-material`) attributes that the CSS token layer keys off,
  *   alongside the `data-color-mode` attribute Primer's `ThemeProvider` owns.
  *
- * `data-theme` is currently always `classic` — a settings-driven design
- * language is introduced later. `data-glass-material` is derived from the OS
- * so `App.css` can branch base-transparency / blur behaviour declaratively.
- * Every rule keyed off `data-glass-material` must also be scoped under
- * `[data-theme="glass"]`, so these attributes are inert under Classic.
+ * `data-theme` mirrors the active design language. `data-glass-material` is
+ * derived from the OS so `App.css` can branch base-transparency / blur
+ * behaviour declaratively. Every rule keyed off `data-glass-material` must also
+ * be scoped under `[data-theme="glass"]`, so these attributes are inert under
+ * Classic.
  */
 export function useAppearance(): void {
+  const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
 
   useEffect(() => {
-    const colorMode = mapThemeModeToColorMode(theme);
-    const colorScheme = mapThemeModeToColorScheme(theme, increaseContrast);
+    // Clamp the stored scheme to what the active language supports (identity for
+    // Classic, so existing users are unaffected).
+    const effectiveTheme = resolveColorMode(designLanguage, theme);
+    const colorMode = mapThemeModeToColorMode(effectiveTheme);
+    const colorScheme = mapThemeModeToColorScheme(effectiveTheme, increaseContrast);
 
     setColorMode(colorMode);
 
@@ -53,18 +58,17 @@ export function useAppearance(): void {
 
     setDayScheme(colorScheme ?? dayFallback);
     setNightScheme(colorScheme ?? nightFallback);
-  }, [theme, increaseContrast, setColorMode, setDayScheme, setNightScheme]);
+  }, [designLanguage, theme, increaseContrast, setColorMode, setDayScheme, setNightScheme]);
 
   useEffect(() => {
-    const root = document.documentElement;
+    // The enum value is already the lower-cased attribute value.
+    document.documentElement.setAttribute('data-theme', designLanguage);
+  }, [designLanguage]);
 
-    // The only design language today is Classic; a settings-driven language
-    // is wired in later.
-    root.setAttribute('data-theme', 'classic');
-
+  useEffect(() => {
     // Material fidelity is platform-decided: real vibrancy on macOS, CSS
     // backdrop-filter elsewhere. Inert until a Glass language keys off it.
-    root.setAttribute(
+    document.documentElement.setAttribute(
       'data-glass-material',
       window.gitify.platform.isMacOS() ? 'vibrancy' : 'backdrop-filter',
     );

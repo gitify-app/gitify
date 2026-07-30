@@ -6,6 +6,8 @@ import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 
 import { useSettingsStore } from '../../stores';
 
+import { DesignLanguage } from '../../types';
+
 import * as zoom from '../../utils/ui/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 
@@ -27,6 +29,31 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('theme', 'LIGHT');
+  });
+
+  it('should change the design language dropdown', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    await userEvent.selectOptions(screen.getByTestId('settings-design-language'), 'glass');
+
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
+  });
+
+  it('hides accessibility color modes when Glass is the active design language', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />, {
+        settings: { designLanguage: DesignLanguage.GLASS },
+      });
+    });
+
+    expect(screen.getByRole('option', { name: 'System' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'Dark default' })).toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'Soft dark' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'Light colorblind' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'Dark Tritanopia' })).not.toBeInTheDocument();
   });
 
   it('should toggle increase contrast checkbox', async () => {

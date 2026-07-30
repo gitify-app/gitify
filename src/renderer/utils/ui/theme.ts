@@ -1,6 +1,6 @@
 import type { ThemeProviderProps } from '@primer/react';
 
-import { Theme } from '../../types';
+import { DesignLanguage, Theme } from '../../types';
 
 // Derived from public @primer/react component props rather than internal types
 type ColorModeWithAuto = NonNullable<ThemeProviderProps['colorMode']>;
@@ -59,4 +59,56 @@ export function mapThemeModeToColorScheme(
   }
 
   return increaseContrast ? `${base}_high_contrast` : base;
+}
+
+/**
+ * The color-mode (`Theme`) values a design language supports. Classic exposes
+ * the full palette including the accessibility variants; Glass offers only
+ * light / dark / system (its accessibility story is degradation to solid
+ * surfaces, not bespoke colorblind/tritanopia palettes).
+ */
+export function supportedColorModes(designLanguage: DesignLanguage): Theme[] {
+  if (designLanguage === DesignLanguage.GLASS) {
+    return [Theme.SYSTEM, Theme.LIGHT, Theme.DARK];
+  }
+
+  return [
+    Theme.SYSTEM,
+    Theme.LIGHT,
+    Theme.LIGHT_COLORBLIND,
+    Theme.LIGHT_TRITANOPIA,
+    Theme.DARK,
+    Theme.DARK_COLORBLIND,
+    Theme.DARK_TRITANOPIA,
+    Theme.DARK_DIMMED,
+  ];
+}
+
+/**
+ * Clamp a stored color mode to the nearest value the active design language
+ * supports. Classic is the identity (every value is supported), so existing
+ * users are unaffected. For Glass, the accessibility/dimmed variants collapse
+ * to their base light or dark.
+ *
+ * The stored `theme` is never mutated by a language switch — clamping happens
+ * only at render/selection time — so switching Glass → Classic restores the
+ * user's original scheme (e.g. `dark_dimmed`) unless they explicitly picked a
+ * different one while on Glass.
+ */
+export function resolveColorMode(designLanguage: DesignLanguage, theme: Theme): Theme {
+  if (designLanguage !== DesignLanguage.GLASS) {
+    return theme;
+  }
+
+  switch (theme) {
+    case Theme.SYSTEM:
+    case Theme.LIGHT:
+    case Theme.DARK:
+      return theme;
+    case Theme.LIGHT_COLORBLIND:
+    case Theme.LIGHT_TRITANOPIA:
+      return Theme.LIGHT;
+    default:
+      return Theme.DARK;
+  }
 }

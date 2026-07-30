@@ -2,6 +2,7 @@ import { Constants } from '../constants';
 
 import {
   type AppearanceSettingsState,
+  DesignLanguage,
   GroupBy,
   type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
@@ -39,6 +40,7 @@ export const DEFAULT_FILTERS_STATE: FiltersState = {
  * Default appearance settings
  */
 const DEFAULT_APPEARANCE_SETTINGS: AppearanceSettingsState = {
+  designLanguage: DesignLanguage.CLASSIC,
   theme: Theme.SYSTEM,
   increaseContrast: false,
   zoomPercentage: 100 as Percentage,

@@ -89,6 +89,9 @@ export type SettingsState = AppearanceSettingsState &
  * Settings related to the appearance of the application.
  */
 export interface AppearanceSettingsState {
+  /** The active design language. Its value doubles as the root `data-theme`. */
+  designLanguage: DesignLanguage;
+  /** The color scheme / accessibility palette (the color-mode axis). */
   theme: Theme;
   increaseContrast: boolean;
   zoomPercentage: Percentage;
@@ -135,6 +138,17 @@ export interface SystemSettingsState {
   notificationVolume: Percentage;
   openAtStartup: boolean;
   keepWindowOnBlur: boolean;
+}
+
+/**
+ * A design language is a full visual language (chrome, materials), distinct
+ * from the color-mode axis (`Theme`). Values are lower-cased because they double
+ * as the root `data-theme` attribute the CSS token layer keys off, mirroring the
+ * lower-cased `data-color-mode` convention.
+ */
+export enum DesignLanguage {
+  CLASSIC = 'classic',
+  GLASS = 'glass',
 }
 
 export enum Theme {
