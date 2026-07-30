@@ -231,6 +231,24 @@ describe('main/lifecycle/window.ts', () => {
 
       expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('popover');
     });
+
+    it('clears the window background when enabled so the material can show', () => {
+      setPlatform('darwin');
+
+      applyWindowVibrancy(menubar, true);
+
+      // Regression: a runtime Classic -> Glass switch must clear the opaque
+      // backdrop left by Classic, otherwise vibrancy cannot sample the desktop.
+      expect(menubar.window?.setBackgroundColor).toHaveBeenCalledWith('#00000000');
+    });
+
+    it('restores an opaque backdrop when disabled', () => {
+      setPlatform('darwin');
+
+      applyWindowVibrancy(menubar, false);
+
+      expect(menubar.window?.setBackgroundColor).toHaveBeenCalledWith('#ffffff');
+    });
   });
 
   describe('devtools-closed handler', () => {

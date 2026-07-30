@@ -34,12 +34,12 @@ export function applyWindowVibrancy(mb: Menubar, enabled: boolean): void {
     return;
   }
   mb.window.setVibrancy(enabled ? 'popover' : null);
-  // The window is not `transparent`, so the vibrancy material itself is the
-  // background when Glass is on — don't paint over it. Only Classic needs an
-  // explicit opaque backdrop once the material is removed.
-  if (!enabled) {
-    mb.window.setBackgroundColor('#ffffff');
-  }
+  // Clear the window's own background so the vibrancy material can sample the
+  // desktop; a prior Classic disable leaves it opaque, which would otherwise
+  // block Glass on a runtime Classic → Glass switch. `#00000000` works without a
+  // `transparent` window because the vibrancy view provides the translucency.
+  // Restore an opaque backdrop for Classic once the material is removed.
+  mb.window.setBackgroundColor(enabled ? '#00000000' : '#ffffff');
 }
 
 /**
