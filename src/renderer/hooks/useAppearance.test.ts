@@ -93,4 +93,17 @@ describe('renderer/hooks/useAppearance.ts', () => {
 
     expect(window.gitify.setNativeTheme).toHaveBeenCalledWith('system');
   });
+
+  it('syncs the native theme from the Glass-clamped color mode', () => {
+    // Glass clamps DARK_DIMMED down to its base dark; the native theme must
+    // follow the clamped mode, not the raw stored theme.
+    useSettingsStore.setState({
+      designLanguage: DesignLanguage.GLASS,
+      theme: Theme.DARK_DIMMED,
+    });
+
+    renderHook(() => useAppearance());
+
+    expect(window.gitify.setNativeTheme).toHaveBeenCalledWith('dark');
+  });
 });

@@ -6,6 +6,7 @@ import { useTheme } from '../components/ui';
 
 import { DesignLanguage } from '../types';
 
+import { rendererLogError, toError } from '../utils/core/logger';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
@@ -36,10 +37,14 @@ export function useAppearance(): void {
     setColorMode(colorMode);
 
     // Keep the native window appearance in sync so the macOS vibrancy material
-    // renders light/dark to match (else dark Glass gets a light material).
-    window.gitify.setNativeTheme(
-      colorMode === 'day' ? 'light' : colorMode === 'night' ? 'dark' : 'system',
-    );
+    // renders light/dark to match (else dark Glass gets a light material). Not
+    // gated to macOS: on other platforms this simply aligns native chrome with
+    // the chosen theme, which is harmless (SYSTEM sends 'system', i.e. no override).
+    window.gitify
+      .setNativeTheme(colorMode === 'day' ? 'light' : colorMode === 'night' ? 'dark' : 'system')
+      .catch((err) =>
+        rendererLogError('useAppearance', 'Failed to sync native theme source', toError(err)),
+      );
 
     // System theme has no fixed scheme; fall back to a day/night pair.
     setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
