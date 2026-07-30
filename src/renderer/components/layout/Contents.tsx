@@ -6,6 +6,7 @@ interface IContents {
   children: ReactNode;
   paddingHorizontal?: boolean;
   paddingBottom?: boolean;
+  scrollFade?: boolean;
 }
 
 /**
@@ -16,6 +17,7 @@ export const Contents: FC<IContents> = ({
   children,
   paddingHorizontal = true,
   paddingBottom = false,
+  scrollFade = false,
 }) => {
   return (
     <div
@@ -23,6 +25,7 @@ export const Contents: FC<IContents> = ({
         'grow overflow-x-hidden overflow-y-auto',
         paddingHorizontal && 'px-5',
         paddingBottom && 'pb-2',
+        scrollFade && 'gitify-scroll-fade',
       )}
     >
       {children}

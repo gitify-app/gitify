@@ -170,7 +170,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
     <Page testId="Login With Personal Access Token">
       <Header icon={KeyIcon}>{title}</Header>
 
-      <Contents>
+      <Contents scrollFade>
         {errors.invalidCredentialsForHost && (
           <Banner
             data-testid="login-errors"

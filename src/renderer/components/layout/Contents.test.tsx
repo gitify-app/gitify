@@ -8,4 +8,10 @@ describe('renderer/components/layout/Contents.tsx', () => {
 
     expect(tree.container).toMatchSnapshot();
   });
+
+  it('should render with scroll fade', () => {
+    const tree = renderWithProviders(<Contents scrollFade>Test</Contents>);
+
+    expect(tree.container).toMatchSnapshot();
+  });
 });

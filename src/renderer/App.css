@@ -32,6 +32,60 @@ body,
   background-color: var(--gitify-scrollbar-thumb-hover);
 }
 
+/**
+ * Softens the top and bottom edges of a scroll container, revealing each edge
+ * only while there is more content to scroll in that direction.
+ */
+@property --gitify-scroll-fade-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --gitify-scroll-fade-bottom {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes gitify-scroll-fade-top {
+  from {
+    --gitify-scroll-fade-top: 0px;
+  }
+  to {
+    --gitify-scroll-fade-top: var(--gitify-scroll-fade-size);
+  }
+}
+
+@keyframes gitify-scroll-fade-bottom {
+  from {
+    --gitify-scroll-fade-bottom: var(--gitify-scroll-fade-size);
+  }
+  to {
+    --gitify-scroll-fade-bottom: 0px;
+  }
+}
+
+.gitify-scroll-fade {
+  --gitify-scroll-fade-size: 1.5rem;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black var(--gitify-scroll-fade-top),
+    black calc(100% - var(--gitify-scroll-fade-bottom)),
+    transparent
+  );
+
+  animation:
+    gitify-scroll-fade-top linear both,
+    gitify-scroll-fade-bottom linear both;
+  animation-timeline: scroll(self block);
+  animation-range:
+    0px var(--gitify-scroll-fade-size),
+    calc(100% - var(--gitify-scroll-fade-size)) 100%;
+}
+
 body {
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',

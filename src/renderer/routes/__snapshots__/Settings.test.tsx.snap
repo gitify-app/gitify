@@ -90,7 +90,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
     </div>
   </div>
   <div
-    class="grow overflow-x-hidden overflow-y-auto px-5 pb-2"
+    class="grow overflow-x-hidden overflow-y-auto px-5 pb-2 gitify-scroll-fade"
   >
     <div
       class="prc-Stack-Stack-UQ9k6"

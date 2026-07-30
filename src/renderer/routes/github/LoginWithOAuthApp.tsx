@@ -122,7 +122,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
     <Page testId="Login With OAuth App">
       <Header icon={PersonIcon}>Login with OAuth App</Header>
 
-      <Contents>
+      <Contents scrollFade>
         {errors.invalidCredentialsForHost && (
           <Banner
             data-testid="login-errors"
