@@ -44,18 +44,18 @@ const config: Config = {
 
           caution: colors.orange[600],
           error: 'var(--fgColor-danger)',
-          link: 'var(--fgColor-link)',
+          link: 'var(--gitify-link)',
           input: {
             rest: 'var(--control-bgColor-rest)',
             focus: 'var(--control-bgColor-active)',
           },
 
           icon: {
-            attention: 'var(--fgColor-attention)',
-            closed: 'var(--fgColor-closed)',
-            done: 'var(--fgColor-done)',
+            attention: 'var(--gitify-icon-attention)',
+            closed: 'var(--gitify-icon-closed)',
+            done: 'var(--gitify-icon-done)',
             muted: 'var(--fgColor-muted)',
-            open: 'var(--fgColor-open)',
+            open: 'var(--gitify-icon-open)',
           },
 
           counter: {

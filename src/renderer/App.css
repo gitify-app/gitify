@@ -21,6 +21,13 @@
 
   --gitify-sidebar: #24292e;
   --gitify-footer: var(--bgColor-neutral-muted);
+
+  /* Status/accent colours, indirected so Glass can desaturate them. */
+  --gitify-icon-open: var(--fgColor-open);
+  --gitify-icon-closed: var(--fgColor-closed);
+  --gitify-icon-done: var(--fgColor-done);
+  --gitify-icon-attention: var(--fgColor-attention);
+  --gitify-link: var(--fgColor-link);
 }
 
 @theme inline {
@@ -48,6 +55,14 @@
   /* Sidebar stays dark in both modes so its forced-white icons stay legible. */
   --gitify-sidebar: rgb(22 27 34 / 0.55);
   --gitify-footer: var(--gitify-glass-tint);
+
+  /* Restrained, near-native palette: blend GitHub's vivid status/accent colours
+   * toward the muted foreground (the `45%` is the dial to tune). */
+  --gitify-icon-open: color-mix(in oklab, var(--fgColor-open), var(--fgColor-muted) 45%);
+  --gitify-icon-closed: color-mix(in oklab, var(--fgColor-closed), var(--fgColor-muted) 45%);
+  --gitify-icon-done: color-mix(in oklab, var(--fgColor-done), var(--fgColor-muted) 45%);
+  --gitify-icon-attention: color-mix(in oklab, var(--fgColor-attention), var(--fgColor-muted) 45%);
+  --gitify-link: color-mix(in oklab, var(--fgColor-link), var(--fgColor-muted) 30%);
 }
 
 [data-theme='glass'][data-glass-material='backdrop-filter']
@@ -76,6 +91,11 @@
   [data-theme='glass'] {
     --gitify-glass-tint: var(--bgColor-neutral-muted);
     --gitify-sidebar: #24292e;
+    --gitify-icon-open: var(--fgColor-open);
+    --gitify-icon-closed: var(--fgColor-closed);
+    --gitify-icon-done: var(--fgColor-done);
+    --gitify-icon-attention: var(--fgColor-attention);
+    --gitify-link: var(--fgColor-link);
   }
 
   [data-theme='glass'] :where(.bg-gitify-sidebar, .bg-gitify-footer) {
@@ -87,6 +107,11 @@
 [data-theme='glass'].gitify-solid {
   --gitify-glass-tint: var(--bgColor-neutral-muted);
   --gitify-sidebar: #24292e;
+  --gitify-icon-open: var(--fgColor-open);
+  --gitify-icon-closed: var(--fgColor-closed);
+  --gitify-icon-done: var(--fgColor-done);
+  --gitify-icon-attention: var(--fgColor-attention);
+  --gitify-link: var(--fgColor-link);
 }
 
 [data-theme='glass'].gitify-solid :where(.bg-gitify-sidebar, .bg-gitify-footer) {
