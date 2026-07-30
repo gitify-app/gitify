@@ -82,13 +82,4 @@ describe('renderer/hooks/useAppearance.ts', () => {
     expect(document.documentElement.classList.contains('gitify-solid')).toBe(true);
     expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
   });
-
-  it('degrades Glass to solid when translucency is disabled', () => {
-    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS, enableTranslucency: false });
-
-    renderHook(() => useAppearance());
-
-    expect(document.documentElement.classList.contains('gitify-solid')).toBe(true);
-    expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
-  });
 });

@@ -27,7 +27,6 @@ export function useAppearance(): void {
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
-  const enableTranslucency = useSettingsStore((s) => s.enableTranslucency);
   const prefersReducedTransparency = usePrefersReducedTransparency();
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
@@ -66,10 +65,9 @@ export function useAppearance(): void {
   useEffect(() => {
     const root = document.documentElement;
 
-    // Glass degrades to solid surfaces under increased contrast or when the user
-    // turns translucency off; `.gitify-solid` drives that in CSS (the OS Reduce
-    // Transparency setting is handled by a media query in App.css).
-    const solid = increaseContrast || !enableTranslucency;
+    // Glass is always translucent; it only degrades to solid under increased
+    // contrast (`.gitify-solid`) or OS Reduce Transparency (a media query in App.css).
+    const solid = increaseContrast;
     root.classList.toggle('gitify-solid', solid);
 
     // The full translucent Glass treatment (dissolved chrome, hairline dividers)
@@ -92,5 +90,5 @@ export function useAppearance(): void {
       () => vibrant && root.classList.add('gitify-vibrant'),
       () => root.classList.remove('gitify-vibrant'),
     );
-  }, [designLanguage, increaseContrast, enableTranslucency, prefersReducedTransparency]);
+  }, [designLanguage, increaseContrast, prefersReducedTransparency]);
 }

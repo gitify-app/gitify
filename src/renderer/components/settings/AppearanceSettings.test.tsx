@@ -56,44 +56,6 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(screen.queryByRole('option', { name: 'Dark Tritanopia' })).not.toBeInTheDocument();
   });
 
-  it('shows and toggles the translucency checkbox on Glass', async () => {
-    await act(async () => {
-      renderWithProviders(<AppearanceSettings />, {
-        settings: { designLanguage: DesignLanguage.GLASS },
-      });
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-enableTranslucency'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledWith('enableTranslucency');
-  });
-
-  it('hides the translucency checkbox on Classic', async () => {
-    await act(async () => {
-      renderWithProviders(<AppearanceSettings />);
-    });
-
-    expect(screen.queryByTestId('checkbox-enableTranslucency')).not.toBeInTheDocument();
-  });
-
-  it('disables the translucency checkbox under OS reduced transparency', async () => {
-    vi.spyOn(window, 'matchMedia').mockReturnValue({
-      matches: true,
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-    } as unknown as MediaQueryList);
-
-    await act(async () => {
-      renderWithProviders(<AppearanceSettings />, {
-        settings: { designLanguage: DesignLanguage.GLASS },
-      });
-    });
-
-    expect(screen.getByTestId('checkbox-enableTranslucency')).toBeDisabled();
-
-    vi.restoreAllMocks();
-  });
-
   it('should toggle increase contrast checkbox', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {

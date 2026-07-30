@@ -2,7 +2,6 @@ import type { FC } from 'react';
 
 import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
 
-import { usePrefersReducedTransparency } from '../../hooks/usePrefersReducedTransparency';
 import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
@@ -33,8 +32,6 @@ export const AppearanceSettings: FC = () => {
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
-  const enableTranslucency = useSettingsStore((s) => s.enableTranslucency);
-  const prefersReducedTransparency = usePrefersReducedTransparency();
 
   const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -103,28 +100,6 @@ export const AppearanceSettings: FC = () => {
               across the UI and may affect some color-specific themes.
             </Text>
           }
-        />
-
-        <Checkbox
-          checked={enableTranslucency && !prefersReducedTransparency}
-          disabled={prefersReducedTransparency}
-          label="Enable translucency"
-          name="enableTranslucency"
-          onChange={() => toggleSetting('enableTranslucency')}
-          tooltip={
-            prefersReducedTransparency ? (
-              <Text>
-                Disabled because Reduce Transparency is enabled in your system accessibility
-                settings.
-              </Text>
-            ) : (
-              <Text>
-                Use translucent Glass surfaces. Automatically turns off under Reduce Transparency or
-                Increase Contrast.
-              </Text>
-            )
-          }
-          visible={designLanguage === DesignLanguage.GLASS}
         />
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">

@@ -46,11 +46,13 @@
 [data-theme='glass'][data-color-mode='light'] {
   --gitify-glass-tint: rgb(255 255 255 / 0.72);
   --gitify-glass-border: rgb(0 0 0 / 0.14);
+  --gitify-glass-divider: rgb(0 0 0 / 0.28);
 }
 
 [data-theme='glass'][data-color-mode='dark'] {
   --gitify-glass-tint: rgb(22 27 34 / 0.62);
   --gitify-glass-border: rgb(255 255 255 / 0.14);
+  --gitify-glass-divider: rgb(255 255 255 / 0.2);
 }
 
 [data-theme='glass'] {
@@ -125,7 +127,7 @@
     right: 0;
     bottom: 14px;
     width: 1px;
-    background: var(--gitify-glass-border);
+    background: var(--gitify-glass-divider);
   }
 }
 
