@@ -13,7 +13,7 @@ exports[`renderer/components/layout/AppLayout.tsx > should render itself & its c
       type="button"
     />
     <div
-      class="fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-UQ9k6"
+      class="gitify-sidebar fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white prc-Stack-Stack-UQ9k6"
       data-align="stretch"
       data-component="Stack"
       data-direction="vertical"

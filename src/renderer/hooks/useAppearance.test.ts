@@ -10,7 +10,11 @@ describe('renderer/hooks/useAppearance.ts', () => {
   afterEach(() => {
     document.documentElement.removeAttribute('data-theme');
     document.documentElement.removeAttribute('data-glass-material');
-    document.documentElement.classList.remove('gitify-vibrant', 'gitify-solid');
+    document.documentElement.classList.remove(
+      'gitify-vibrant',
+      'gitify-solid',
+      'gitify-translucent',
+    );
   });
 
   it('marks the root with the Classic design language by default', () => {

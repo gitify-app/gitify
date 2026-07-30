@@ -72,12 +72,15 @@ export function useAppearance(): void {
     const solid = increaseContrast || !enableTranslucency;
     root.classList.toggle('gitify-solid', solid);
 
+    // The full translucent Glass treatment (dissolved chrome, hairline dividers)
+    // is active only when nothing is forcing solid surfaces.
+    const vibrant =
+      designLanguage === DesignLanguage.GLASS && !solid && !prefersReducedTransparency;
+    root.classList.toggle('gitify-translucent', vibrant);
+
     if (!window.gitify.platform.isMacOS()) {
       return;
     }
-
-    const vibrant =
-      designLanguage === DesignLanguage.GLASS && !solid && !prefersReducedTransparency;
 
     // Add `.gitify-vibrant` only after the material is applied, and drop it before
     // vibrancy is removed, so the window never renders black mid-switch.

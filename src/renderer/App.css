@@ -45,10 +45,12 @@
  */
 [data-theme='glass'][data-color-mode='light'] {
   --gitify-glass-tint: rgb(255 255 255 / 0.72);
+  --gitify-glass-border: rgb(0 0 0 / 0.14);
 }
 
 [data-theme='glass'][data-color-mode='dark'] {
   --gitify-glass-tint: rgb(22 27 34 / 0.62);
+  --gitify-glass-border: rgb(255 255 255 / 0.14);
 }
 
 [data-theme='glass'] {
@@ -69,6 +71,53 @@
   :where(.bg-gitify-sidebar, .bg-gitify-footer) {
   -webkit-backdrop-filter: blur(16px) saturate(1.6);
   backdrop-filter: blur(16px) saturate(1.6);
+}
+
+/**
+ * All-in Glass: when translucency is actually on (`.gitify-translucent`, gated by
+ * a no-preference media query so OS Reduce Transparency still wins), the window is
+ * one continuous glass surface. The sidebar loses its fill and becomes icons on the
+ * glass, separated from the content by an inset hairline instead of a solid block.
+ */
+@media (prefers-reduced-transparency: no-preference) {
+  /* Primer sets its colour tokens on the `data-color-mode` wrapper, so Glass
+   * overrides of Primer tokens must target that element (root-level ones are
+   * shadowed by it). Mute the vivid primary CTA (success-green) toward neutral. */
+  .gitify-translucent [data-color-mode] {
+    --button-primary-bgColor-rest: color-mix(
+      in oklab,
+      var(--bgColor-success-emphasis),
+      var(--fgColor-muted) 55%
+    );
+    --button-primary-bgColor-hover: color-mix(
+      in oklab,
+      var(--bgColor-success-emphasis),
+      var(--fgColor-muted) 42%
+    );
+    --button-primary-bgColor-active: color-mix(
+      in oklab,
+      var(--bgColor-success-emphasis),
+      var(--fgColor-muted) 34%
+    );
+  }
+
+  .gitify-translucent .gitify-sidebar {
+    background: transparent;
+  }
+
+  .gitify-translucent .gitify-sidebar :where(svg) {
+    color: var(--fgColor-muted);
+  }
+
+  .gitify-translucent .gitify-sidebar::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: 0;
+    bottom: 14px;
+    width: 1px;
+    background: var(--gitify-glass-border);
+  }
 }
 
 /* Vibrancy path: `.gitify-vibrant` is set on the root only once the native
