@@ -28,7 +28,7 @@ export const FiltersRoute: FC = () => {
         Filters
       </Header>
 
-      <Contents paddingBottom>
+      <Contents paddingBottom scrollFade>
         <Stack direction="vertical" gap="spacious">
           {hasMultipleAccounts && <AccountFilter />}
           <SearchFilter />

@@ -135,7 +135,7 @@ export const AccountsRoute: FC = () => {
     <Page testId="accounts">
       <Header icon={PersonIcon}>Accounts</Header>
 
-      <Contents>
+      <Contents scrollFade>
         {accounts.map((account, i) => {
           const adapter = getAdapter(account);
           const AuthMethodIcon = adapter.getAuthMethodIcon(account.method);

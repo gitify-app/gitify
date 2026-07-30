@@ -91,7 +91,7 @@ exports[`renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx > renders co
       </div>
     </div>
     <div
-      class="grow overflow-x-hidden overflow-y-auto px-5"
+      class="grow overflow-x-hidden overflow-y-auto px-5 gitify-scroll-fade"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"

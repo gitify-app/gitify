@@ -49,7 +49,7 @@ export const AccountScopesRoute: FC = () => {
   return (
     <Page testId="account-scopes">
       <Header icon={ShieldCheckIcon}>Scopes</Header>
-      <Contents>
+      <Contents scrollFade>
         <Stack direction="vertical" gap="none">
           {!scopesLoaded && (
             <Stack

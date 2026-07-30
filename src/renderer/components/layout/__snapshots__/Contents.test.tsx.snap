@@ -9,3 +9,13 @@ exports[`renderer/components/layout/Contents.tsx > should render itself & its ch
   </div>
 </div>
 `;
+
+exports[`renderer/components/layout/Contents.tsx > should render with scroll fade 1`] = `
+<div>
+  <div
+    class="grow overflow-x-hidden overflow-y-auto px-5 gitify-scroll-fade"
+  >
+    Test
+  </div>
+</div>
+`;

@@ -297,7 +297,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
     <Page testId="Login With Device Flow">
       <Header icon={SignInIcon}>Authorize with GitHub</Header>
 
-      <Contents>
+      <Contents scrollFade>
         {error && (
           <Banner
             data-testid="login-errors"
