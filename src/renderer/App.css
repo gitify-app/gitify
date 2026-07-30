@@ -18,6 +18,9 @@
   --gitify-radius-md: var(--radius-md);
   --gitify-radius-full: calc(infinity * 1px);
   --gitify-shadow-sm: var(--shadow-sm);
+
+  --gitify-sidebar: #24292e;
+  --gitify-footer: var(--bgColor-neutral-muted);
 }
 
 @theme inline {
@@ -25,6 +28,42 @@
   --radius-gitify-md: var(--gitify-radius-md);
   --radius-gitify-full: var(--gitify-radius-full);
   --shadow-gitify-sm: var(--gitify-shadow-sm);
+}
+
+/**
+ * Glass design language. Shell surfaces become translucent tints; the material
+ * hook decides where the blur comes from — the OS on macOS (`vibrancy`) or CSS
+ * `backdrop-filter` elsewhere. Glass touches the shell only; notification rows
+ * keep their opaque backgrounds. Tint/blur values are starting points to tune.
+ */
+[data-theme='glass'][data-color-mode='light'] {
+  --gitify-glass-tint: rgb(255 255 255 / 0.72);
+}
+
+[data-theme='glass'][data-color-mode='dark'] {
+  --gitify-glass-tint: rgb(22 27 34 / 0.62);
+}
+
+[data-theme='glass'] {
+  /* Sidebar stays dark in both modes so its forced-white icons stay legible. */
+  --gitify-sidebar: rgb(22 27 34 / 0.55);
+  --gitify-footer: var(--gitify-glass-tint);
+}
+
+[data-theme='glass'][data-glass-material='backdrop-filter']
+  :where(.bg-gitify-sidebar, .bg-gitify-footer) {
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  backdrop-filter: blur(16px) saturate(1.6);
+}
+
+/* Vibrancy path: clear the app's own backgrounds so the native material shows. */
+[data-theme='glass'][data-glass-material='vibrancy'] {
+  --gitify-background: transparent;
+}
+
+[data-theme='glass'][data-glass-material='vibrancy'] body,
+[data-theme='glass'][data-glass-material='vibrancy'] #root {
+  background-color: transparent;
 }
 
 html,

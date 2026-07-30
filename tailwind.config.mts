@@ -39,8 +39,8 @@ const config: Config = {
         gitify: {
           font: 'var(--fgColor-default)',
           background: 'var(--gitify-background)',
-          sidebar: '#24292e',
-          footer: 'var(--bgColor-neutral-muted)',
+          sidebar: 'var(--gitify-sidebar)',
+          footer: 'var(--gitify-footer)',
 
           caution: colors.orange[600],
           error: 'var(--fgColor-danger)',
