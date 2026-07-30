@@ -1,10 +1,14 @@
 name: Website
 
 on:
+  workflow_call: # For chaining onto the release pipeline
+    secrets:
+      NETLIFY_BUILD_HOOK_URL:
+        required: true
   workflow_dispatch: # For manually running website deployment
   release:
     types:
-      - published # For running on release publish
+      - published # For releases published by hand via the GitHub UI
 
 permissions: {}
 

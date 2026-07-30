@@ -79,3 +79,11 @@ jobs:
       APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
       APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
       APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
+
+  website:
+    name: Website
+    uses: ./.github/workflows/website.yml
+    needs: publish
+    permissions: {}
+    secrets:
+      NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
