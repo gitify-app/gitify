@@ -34,6 +34,9 @@ export function applyWindowVibrancy(mb: Menubar, enabled: boolean): void {
     return;
   }
   mb.window.setVibrancy(enabled ? 'under-window' : null);
+  // Clear the window's own (opaque white) background so the vibrancy material
+  // shows; restore it when vibrancy is off so Classic keeps its solid backdrop.
+  mb.window.setBackgroundColor(enabled ? '#00000000' : '#ffffff');
 }
 
 /**

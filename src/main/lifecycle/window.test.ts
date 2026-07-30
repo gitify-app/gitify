@@ -75,6 +75,7 @@ describe('main/lifecycle/window.ts', () => {
         center: vi.fn(),
         setAlwaysOnTop: vi.fn(),
         setVibrancy: vi.fn(),
+        setBackgroundColor: vi.fn(),
         hide: vi.fn(),
         isDestroyed: vi.fn().mockReturnValue(false),
         on: vi.fn(),

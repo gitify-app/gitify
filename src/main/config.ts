@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import type { BrowserWindowConstructorOptions } from 'electron';
 
 import { APPLICATION } from '../shared/constants';
+import { isMacOS } from '../shared/platform';
 
 import { isDevMode } from './utils';
 
@@ -39,6 +40,15 @@ export const WindowConfig: BrowserWindowConstructorOptions = {
   minWidth: 500,
   minHeight: 400,
   resizable: false,
+  /**
+   * macOS Glass needs a transparent, vibrant window so the native material can
+   * show through; `setVibrancy()` alone can't clear the opaque window background.
+   * `transparent` is immutable after creation, so it's on for all macOS sessions
+   * — Classic simply paints an opaque background over it. Not applied on
+   * Windows/Linux, where `transparent` needs a frameless window and the CSS
+   * `backdrop-filter` path handles Glass instead.
+   */
+  ...(isMacOS() ? { transparent: true, vibrancy: 'under-window' as const } : {}),
   /** Hide the app from the Windows taskbar */
   skipTaskbar: true,
   webPreferences: {
