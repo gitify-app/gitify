@@ -1,0 +1,19 @@
+renovate.json
+  s_4d84cd823f03fa::t_1f62db51849900 49-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.18",
+  "base_commit_sha": "0da7bc8f676f1dd0dc0efbd51612123ecce9b2b8",
+  "prompts": {},
+  "sessions": {
+    "s_4d84cd823f03fa": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "764bf2e5-7232-43e3-a8c5-b3ce10c55d57",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
