@@ -111,7 +111,13 @@ export const NotificationSettings: FC = () => {
               unsafeDisableTooltip={true}
             />
 
-            <Button aria-label="Fetch interval" disabled size="small">
+            {/* Value display, not a control: styled like the group but inert. */}
+            <Button
+              aria-label="Fetch interval"
+              className="pointer-events-none"
+              size="small"
+              tabIndex={-1}
+            >
               {formatDuration({
                 minutes: millisecondsToMinutes(fetchInterval),
               })}

@@ -1,4 +1,4 @@
-import { type FC, useState } from 'react';
+import { type CSSProperties, type FC, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 
@@ -72,6 +72,14 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const NotificationIcon = notification.display.icon.type;
   const isNotificationRead = !notification.unread;
 
+  // How many action buttons the HoverGroup below actually renders. Exposed as a
+  // CSS var so the Glass hover-fade (App.css) sizes to the buttons instead of a
+  // fixed width, which would over-fade rows that show fewer than three.
+  const enabledActionCount =
+    Number(!isNotificationRead) +
+    Number(isMarkAsDoneFeatureSupported(notification.account) && notification.unread) +
+    Number(isUnsubscribeThreadSupported(notification.account));
+
   return (
     <div
       className={cn(
@@ -83,6 +91,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
+      style={{ '--gitify-actions': enabledActionCount } as CSSProperties}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
         <Tooltip direction="e" text={notification.display.type}>

@@ -380,13 +380,13 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-label="Zoom percentage"
-                  class="prc-Button-ButtonBase-9n-Xk"
+                  class="prc-Button-ButtonBase-9n-Xk pointer-events-none"
                   data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
                   data-variant="default"
-                  disabled=""
+                  tabindex="-1"
                   type="button"
                 >
                   <span
@@ -782,13 +782,13 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-label="Fetch interval"
-                  class="prc-Button-ButtonBase-9n-Xk"
+                  class="prc-Button-ButtonBase-9n-Xk pointer-events-none"
                   data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
                   data-variant="default"
-                  disabled=""
+                  tabindex="-1"
                   type="button"
                 >
                   <span
@@ -1804,13 +1804,13 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-label="Global shortcut"
-                  class="prc-Button-ButtonBase-9n-Xk"
+                  class="prc-Button-ButtonBase-9n-Xk pointer-events-none"
                   data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
                   data-variant="default"
-                  disabled=""
+                  tabindex="-1"
                   type="button"
                 >
                   <span
@@ -2000,13 +2000,13 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-label="Volume percentage"
-                  class="prc-Button-ButtonBase-9n-Xk"
+                  class="prc-Button-ButtonBase-9n-Xk pointer-events-none"
                   data-component="Button"
                   data-loading="false"
                   data-no-visuals="true"
                   data-size="small"
                   data-variant="default"
-                  disabled=""
+                  tabindex="-1"
                   type="button"
                 >
                   <span

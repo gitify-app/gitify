@@ -5,6 +5,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
   <div
     class="group relative border-b pl-2.75 pr-1 py-0.75 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
     id="138661096"
+    style="--gitify-actions: 3;"
   >
     <div
       class="gitify-row-content prc-Stack-Stack-UQ9k6"
@@ -443,6 +444,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
   <div
     class="group relative border-b pl-2.75 pr-1 py-0.75 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
     id="138661096"
+    style="--gitify-actions: 3;"
   >
     <div
       class="gitify-row-content prc-Stack-Stack-UQ9k6"
@@ -825,6 +827,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
   <div
     class="group relative border-b pl-2.75 pr-1 py-0.75 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover"
     id="138661096"
+    style="--gitify-actions: 3;"
   >
     <div
       class="gitify-row-content prc-Stack-Stack-UQ9k6"
@@ -1207,6 +1210,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
   <div
     class="group relative border-b pl-2.75 pr-1 py-0.75 text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover opacity-50"
     id="138661096"
+    style="--gitify-actions: 1;"
   >
     <div
       class="gitify-row-content prc-Stack-Stack-UQ9k6"

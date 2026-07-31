@@ -226,7 +226,13 @@ export const SystemSettings: FC = () => {
               size="small"
               unsafeDisableTooltip={true}
             />
-            <Button aria-label="Global shortcut" disabled size="small">
+            {/* Value display, not a control: styled like the group but inert. */}
+            <Button
+              aria-label="Global shortcut"
+              className="pointer-events-none"
+              size="small"
+              tabIndex={-1}
+            >
               <Text as="strong" className="text-gitify-caution">
                 {recordingShortcut
                   ? hasLiveModifiers
@@ -282,7 +288,13 @@ export const SystemSettings: FC = () => {
               unsafeDisableTooltip={true}
             />
 
-            <Button aria-label="Volume percentage" disabled size="small">
+            {/* Value display, not a control: styled like the group but inert. */}
+            <Button
+              aria-label="Volume percentage"
+              className="pointer-events-none"
+              size="small"
+              tabIndex={-1}
+            >
               {notificationVolume.toFixed(0)}%
             </Button>
 

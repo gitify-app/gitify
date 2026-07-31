@@ -111,10 +111,7 @@ export default defineConfig({
           // vite-plugin-electron v1 starts Electron with `cwd: server.config.root`.
           // Our Vite root is `src/renderer`, so we must override `cwd` back to the
           // repository root or Electron will try to boot from `src/renderer`.
-          // `--log-level=3` (FATAL only) silences Chromium-internal ERROR spam in dev
-          // (e.g. `SetApplicationIsDaemon` paramErr from renderer processes), which is
-          // upstream noise we cannot act on. App/electron-log output is unaffected.
-          await startup(['.', '--no-sandbox', '--log-level=3'], {
+          await startup(undefined, {
             cwd: fileURLToPath(new URL('.', import.meta.url)),
           });
         },

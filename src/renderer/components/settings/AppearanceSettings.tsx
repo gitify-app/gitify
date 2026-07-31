@@ -102,7 +102,14 @@ export const AppearanceSettings: FC = () => {
               unsafeDisableTooltip={true}
             />
 
-            <Button aria-label="Zoom percentage" disabled size="small">
+            {/* Value display, not a control: styled like the group but inert
+             * (no disabled wash, no pointer interaction, no tab stop). */}
+            <Button
+              aria-label="Zoom percentage"
+              className="pointer-events-none"
+              size="small"
+              tabIndex={-1}
+            >
               {zoomPercentage.toFixed(0)}%
             </Button>
 
