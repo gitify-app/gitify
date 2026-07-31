@@ -48,9 +48,10 @@
       "semanticCommitScope": "deps-core"
     },
     {
-      "description": "electron-menubar is a first-party dependency, so skip the minimum release age gate applied to other packages",
+      "description": "electron-menubar is a first-party dependency, so skip the minimum release age gate and weekly schedule applied to other packages",
       "matchPackageNames": ["electron-menubar"],
-      "minimumReleaseAge": "0 days"
+      "minimumReleaseAge": "0 days",
+      "schedule": ["at any time"]
     }
   ],
   "customManagers": [
