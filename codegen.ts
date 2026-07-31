@@ -1,21 +1,15 @@
-import { existsSync } from 'node:fs';
-
 import type { CodegenConfig } from '@graphql-codegen/cli';
 import dotenv from 'dotenv';
 
-dotenv.config({ quiet: true });
+dotenv.config();
 
 if (!process.env.GITHUB_TOKEN) {
-  // Only warn when a .env file exists: its absence means the contributor never
-  // opted into codegen, so nagging on every `pnpm dev` run would just be noise.
-  if (existsSync('.env')) {
-    // oxlint-disable-next-line no-console -- CLI script output
-    console.warn(
-      '\x1b[33m⚠ GITHUB_TOKEN is not set. Skipping GraphQL codegen.\n' +
-        '  To generate updated types, add a valid GitHub PAT to your .env file.\n' +
-        '  See .env.template for details.\x1b[0m',
-    );
-  }
+  // oxlint-disable-next-line no-console -- CLI script output
+  console.warn(
+    '\x1b[33m⚠ GITHUB_TOKEN is not set. Skipping GraphQL codegen.\n' +
+      '  To generate updated types, create a .env file with a valid GitHub PAT.\n' +
+      '  See .env.template for details.\x1b[0m',
+  );
   process.exit(0);
 }
 
