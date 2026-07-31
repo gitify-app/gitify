@@ -205,6 +205,13 @@
     background: var(--gitify-glass-control-rest);
   }
 
+  /* The account-profile button (avatar + username) sits bare inside the card:
+   * no tile at rest, just the hover wash. `data-testid` is the stable hook. */
+  .gitify-translucent [data-testid='account-profile'] {
+    --button-default-bgColor-rest: transparent;
+    --button-default-borderColor-rest: transparent;
+  }
+
   /* Row hover is a light glass wash instead of the solid Classic fill. */
   .gitify-translucent .hover\:bg-gitify-notification-hover:hover {
     background-color: var(--gitify-glass-control-rest);
