@@ -1,8 +1,9 @@
 import type { ChangeEvent, FC, ReactNode } from 'react';
 
+import { Stack } from '@primer/react';
+
 import type { RadioGroupItem } from '../../types';
 
-import { Stack } from '../ui';
 import { FieldLabel } from './FieldLabel';
 import { Tooltip } from './Tooltip';
 

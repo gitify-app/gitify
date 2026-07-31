@@ -6,11 +6,11 @@ import {
   OrganizationIcon,
   PersonIcon,
 } from '@primer/octicons-react';
+import { Stack, Text } from '@primer/react';
 
 import { Size } from '../../types';
 
 import { userTypeFilter } from '../../utils/notifications/filters';
-import { Stack, Text } from '../ui';
 import { FilterSection } from './FilterSection';
 
 export const UserTypeFilter: FC = () => {

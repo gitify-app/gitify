@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import { DevicesIcon } from '@primer/octicons-react';
+import { Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
@@ -8,8 +9,6 @@ import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
-
-import { Stack, Text } from '../ui';
 
 export const TraySettings: FC = () => {
   // Setting store actions

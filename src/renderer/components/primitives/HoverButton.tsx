@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
-
-import { IconButton } from '../ui';
+import { IconButton } from '@primer/react';
 
 interface HoverButtonProps {
   label: string;

@@ -1,6 +1,7 @@
 import { type CSSProperties, type FC, useState } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
+import { Stack, Text, Tooltip } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
 import { useSettingsStore } from '../../stores';
@@ -18,7 +19,6 @@ import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openNotification } from '../../utils/system/links';
 import { cn } from '../../utils/ui/cn';
-import { Stack, Text, Tooltip } from '../ui';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
 import { NotificationTitle } from './NotificationTitle';

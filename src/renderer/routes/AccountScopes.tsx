@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AlertFillIcon, LinkExternalIcon, ShieldCheckIcon } from '@primer/octicons-react';
+import { Button, Label, Stack, Text } from '@primer/react';
 
 import { Constants, OAUTH_SCOPE } from '../constants';
 
@@ -10,7 +11,6 @@ import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { Button, Label, Stack, Text } from '../components/ui';
 
 import type { Account } from '../types';
 

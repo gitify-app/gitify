@@ -1,9 +1,10 @@
 import type { FC, ReactNode } from 'react';
 
+import { Stack } from '@primer/react';
+
 import { CustomCounter } from '../primitives/CustomCounter';
 
 import { cn } from '../../utils/ui/cn';
-import { Stack } from '../ui';
 import { Tooltip } from './Tooltip';
 
 export interface CheckboxProps {

@@ -9,6 +9,7 @@ import {
   SignInIcon,
   SyncIcon,
 } from '@primer/octicons-react';
+import { Banner, Button, Heading, IconButton, Stack, Text } from '@primer/react';
 
 import { Constants } from '../../constants';
 
@@ -18,7 +19,6 @@ import { Contents } from '../../components/layout/Contents';
 import { Page } from '../../components/layout/Page';
 import { Footer } from '../../components/primitives/Footer';
 import { Header } from '../../components/primitives/Header';
-import { Banner, Button, Heading, IconButton, Stack, Text } from '../../components/ui';
 
 import type { Account, Forge, Hostname, Link } from '../../types';
 import type { DeviceFlowSession } from '../../utils/auth/types';

@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 
+import { Text, Tooltip } from '@primer/react';
+
 import { LoginWithPersonalAccessTokenForm } from '../../components/login/LoginWithPersonalAccessTokenForm';
-import { Text, Tooltip } from '../../components/ui';
 
 import { formatRecommendedOAuthScopes } from '../../utils/auth/scopes';
 

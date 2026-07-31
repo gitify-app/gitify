@@ -1,6 +1,7 @@
 import { type FC, type MouseEvent, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
+import { Button, Stack } from '@primer/react';
 
 import { useAccountsStore } from '../../stores';
 
@@ -20,7 +21,6 @@ import { getChevronDetails } from '../../utils/ui/display';
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { Oops } from '../Oops';
-import { Button, Stack } from '../ui';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
 

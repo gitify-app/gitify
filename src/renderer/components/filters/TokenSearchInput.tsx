@@ -1,9 +1,10 @@
 import { type FC, useState } from 'react';
 
+import { Stack, Text, TextInputWithTokens } from '@primer/react';
+
 import type { SearchToken } from '../../types';
 
 import { parseSearchInput, SEARCH_DELIMITER } from '../../utils/notifications/filters/search';
-import { Stack, Text, TextInputWithTokens } from '../ui';
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 interface TokenSearchInputProps {

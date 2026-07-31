@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { useSettingsStore } from '../stores';
+import { useTheme } from '@primer/react';
 
-import { useTheme } from '../components/ui';
+import { useSettingsStore } from '../stores';
 
 import { DesignLanguage } from '../types';
 

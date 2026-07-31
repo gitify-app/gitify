@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 
-import { Stack } from '../ui';
+import { Stack } from '@primer/react';
 
 interface CenteredProps {
   children: ReactNode;

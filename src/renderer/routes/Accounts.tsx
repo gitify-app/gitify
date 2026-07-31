@@ -14,6 +14,7 @@ import {
   StarIcon,
   SyncIcon,
 } from '@primer/octicons-react';
+import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
 
 import { useLogins } from '../hooks/useLogins';
 import { useNotifications } from '../hooks/useNotifications';
@@ -24,7 +25,6 @@ import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
-import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '../components/ui';
 
 import { type Account, type GitifyError, IconColor, Size } from '../types';
 import type { ForgeAdapter } from '../utils/forges/types';

@@ -1,11 +1,12 @@
 import type React from 'react';
 import { useState } from 'react';
 
+import { Avatar, Stack, Truncate } from '@primer/react';
+
 import { type Link, Size, type UserType } from '../../types';
 
 import { isNonHumanUser } from '../../utils/notifications/filters/userType';
 import { getDefaultUserIcon } from '../../utils/ui/icons';
-import { Avatar, Stack, Truncate } from '../ui';
 
 export interface AvatarWithFallbackProps {
   src?: Link;

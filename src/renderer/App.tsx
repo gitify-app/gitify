@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 
+import { BaseStyles, ThemeProvider } from '@primer/react';
+
 import { QueryClientProvider } from '@tanstack/react-query';
 
 import { AccountsRoute } from './routes/Accounts';
@@ -19,10 +21,9 @@ import { initializeStoreSubscriptions } from './stores/subscriptions';
 
 import { GlobalEffects } from './components/GlobalEffects';
 import { GlobalShortcuts } from './components/GlobalShortcuts';
-import { AppLayout } from './components/layout/AppLayout';
 
 import './App.css';
-import { BaseStyles, ThemeProvider } from './components/ui';
+import { AppLayout } from './components/layout/AppLayout';
 
 import { queryClient } from './utils/api/queryClient';
 import { migrateLegacyStoreToZustand } from './utils/core/storage';

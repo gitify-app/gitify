@@ -2,6 +2,7 @@ import { type FC, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
 import { Constants } from '../../constants';
 
@@ -11,7 +12,6 @@ import { Contents } from '../../components/layout/Contents';
 import { Page } from '../../components/layout/Page';
 import { Footer } from '../../components/primitives/Footer';
 import { Header } from '../../components/primitives/Header';
-import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '../../components/ui';
 
 import type { Account, ClientID, ClientSecret, Forge, Token } from '../../types';
 import type { LoginOAuthWebOptions } from '../../utils/auth/types';

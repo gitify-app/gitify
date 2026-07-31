@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 
+import { Text } from '@primer/react';
+
 import { cn } from '../../utils/ui/cn';
-import { Text } from '../ui';
 
 type CounterScheme = 'primary' | 'secondary' | 'empty';
 

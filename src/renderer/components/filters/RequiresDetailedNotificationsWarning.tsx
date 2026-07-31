@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { Text } from '../ui';
+import { Text } from '@primer/react';
 
 export const RequiresDetailedNotificationWarning: FC = () => (
   <Text className="text-gitify-caution">

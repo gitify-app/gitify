@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 
 import { GitPullRequestIcon } from '@primer/octicons-react';
+import { Text } from '@primer/react';
 
 import { reviewRequestTypeFilter } from '../../utils/notifications/filters';
-import { Text } from '../ui';
 import { FilterSection } from './FilterSection';
 
 export const ReviewRequestTypeFilter: FC = () => {

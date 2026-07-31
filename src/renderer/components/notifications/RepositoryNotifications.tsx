@@ -1,6 +1,7 @@
 import { type FC, type MouseEvent, useState } from 'react';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
+import { Button, Stack } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
 
@@ -15,7 +16,6 @@ import { openRepository } from '../../utils/system/links';
 import { cn } from '../../utils/ui/cn';
 import { getChevronDetails } from '../../utils/ui/display';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
-import { Button, Stack } from '../ui';
 import { NotificationRow } from './NotificationRow';
 
 export interface RepositoryNotificationsProps {

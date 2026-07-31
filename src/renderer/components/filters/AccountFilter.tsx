@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import { PersonIcon } from '@primer/octicons-react';
+import { Stack, Text } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
 import { useAccountsStore, useFiltersStore } from '../../stores';
@@ -9,7 +10,6 @@ import { Checkbox } from '../fields/Checkbox';
 import { Title } from '../primitives/Title';
 
 import { getAccountUUID } from '../../utils/auth/utils';
-import { Stack, Text } from '../ui';
 
 export const AccountFilter: FC = () => {
   const { notifications } = useNotifications();
