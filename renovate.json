@@ -46,6 +46,11 @@
         "@octokit/**"
       ],
       "semanticCommitScope": "deps-core"
+    },
+    {
+      "description": "electron-menubar is a first-party dependency, so skip the minimum release age gate applied to other packages",
+      "matchPackageNames": ["electron-menubar"],
+      "minimumReleaseAge": "0 days"
     }
   ],
   "customManagers": [
