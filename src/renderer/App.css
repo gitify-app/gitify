@@ -168,13 +168,18 @@
     --button-invisible-bgColor-active: var(--gitify-glass-control-hover);
   }
 
-  /* Repo / account grouping bands become faint glass tints, so the list reads
-   * as one surface while keeping the grouping. Bands and notification rows
-   * float as rounded cards on the glass: a small inline inset makes the
-   * rounding visible (macOS list-row geometry), and the band lifts with the
-   * same glass wash as row hover. */
-  .gitify-translucent :where(.bg-gitify-repository, .bg-gitify-account-rest) {
+  /* Repo grouping bands become faint glass tints, so the list reads as one
+   * surface while keeping the grouping. The account header floats directly on
+   * the glass with no tint. Bands and notification rows float as rounded cards
+   * on the glass: a small inline inset makes the rounding visible (macOS
+   * list-row geometry), and the band lifts with the same glass wash as row
+   * hover. */
+  .gitify-translucent .bg-gitify-repository {
     background: color-mix(in oklab, var(--gitify-glass-tint), transparent 62%);
+  }
+
+  .gitify-translucent .bg-gitify-account-rest {
+    background: transparent;
   }
 
   .gitify-translucent :where(.bg-gitify-repository, .bg-gitify-account-rest):hover {
