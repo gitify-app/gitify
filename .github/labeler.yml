@@ -25,17 +25,17 @@ labels:
   - label: 'forge:github'
     sync: true
     matcher:
-      scope: '^github$'
+      title: '^\w+\(github\): .*'
 
   - label: 'forge:bitbucket'
     sync: true
     matcher:
-      scope: '^bitbucket$'
+      title: '^\w+\(bitbucket\): .*'
 
   - label: 'forge:gitea'
     sync: true
     matcher:
-      scope: '^(gitea|codeberg|forgejo)$'
+      title: '^\w+\((gitea|codeberg|forgejo)\): .*'
 
   - label: 'documentation'
     sync: true
