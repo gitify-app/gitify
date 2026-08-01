@@ -22,6 +22,21 @@ labels:
       branch: '^renovate/.*'
       files: ['pnpm-lock.yaml']
 
+  - label: 'forge:github'
+    sync: true
+    matcher:
+      title: '^\w+\(github\): .*'
+
+  - label: 'forge:bitbucket'
+    sync: true
+    matcher:
+      title: '^\w+\(bitbucket\): .*'
+
+  - label: 'forge:gitea'
+    sync: true
+    matcher:
+      title: '^\w+\((gitea|codeberg|forgejo)\): .*'
+
   - label: 'documentation'
     sync: true
     matcher:
