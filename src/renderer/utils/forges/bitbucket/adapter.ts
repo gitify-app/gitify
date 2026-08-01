@@ -61,7 +61,7 @@ function getDisplayHelpers(notification: RawGitifyNotification): NotificationDis
   return {
     iconType: BitbucketIcon,
     iconColor: IconColor.GRAY,
-    defaultUrl: notification.subject.url ?? ('' as Link),
+    defaultUrl: notification.subject.url ?? notification.repository.htmlUrl,
     defaultUserType: 'User',
   };
 }
