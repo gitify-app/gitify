@@ -12,6 +12,7 @@ build/
 
 # Dependency directories
 node_modules/
+.pnpm-store/
 
 # Generated GraphQL Files
 schema.graphql
