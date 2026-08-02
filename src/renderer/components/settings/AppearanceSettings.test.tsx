@@ -81,6 +81,29 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(zoomResetSpy).toHaveBeenCalledTimes(1);
   });
 
+  it('should toggle increase contrast checkbox for Classic', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />, {
+        accounts: [mockGitHubAppAccount],
+      });
+    });
+
+    await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
+
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('increaseContrast');
+  });
+
+  it('hides the increase contrast checkbox for Glass', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />, {
+        settings: { designLanguage: DesignLanguage.GLASS },
+      });
+    });
+
+    expect(screen.queryByTestId('checkbox-increaseContrast')).not.toBeInTheDocument();
+  });
+
   it('should toggle account header checkbox', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {

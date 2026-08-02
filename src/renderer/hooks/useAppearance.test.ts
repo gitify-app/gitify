@@ -6,6 +6,29 @@ import { DesignLanguage, Theme } from '../types';
 
 import { useAppearance } from './useAppearance';
 
+// Capture the Primer color-scheme setters so high-contrast schemes can be asserted.
+const primerTheme = vi.hoisted(() => ({
+  setColorMode: vi.fn(),
+  setDayScheme: vi.fn(),
+  setNightScheme: vi.fn(),
+}));
+
+vi.mock('@primer/react', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@primer/react')>()),
+  useTheme: () => primerTheme,
+}));
+
+function mockPrefersContrast(matches: boolean) {
+  return vi.spyOn(window, 'matchMedia').mockImplementation(
+    (query: string) =>
+      ({
+        matches: query.includes('prefers-contrast') ? matches : false,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }) as unknown as MediaQueryList,
+  );
+}
+
 describe('renderer/hooks/useAppearance.ts', () => {
   afterEach(() => {
     document.documentElement.removeAttribute('data-theme');
@@ -105,5 +128,53 @@ describe('renderer/hooks/useAppearance.ts', () => {
     renderHook(() => useAppearance());
 
     expect(window.gitify.setNativeTheme).toHaveBeenCalledWith('dark');
+  });
+
+  it('applies the high-contrast schemes for Classic under the increase contrast setting', () => {
+    useSettingsStore.setState({
+      designLanguage: DesignLanguage.CLASSIC,
+      theme: Theme.LIGHT,
+      increaseContrast: true,
+    });
+
+    renderHook(() => useAppearance());
+
+    expect(primerTheme.setDayScheme).toHaveBeenCalledWith('light_high_contrast');
+  });
+
+  it('does not apply high-contrast schemes for Glass', () => {
+    useSettingsStore.setState({
+      designLanguage: DesignLanguage.GLASS,
+      theme: Theme.LIGHT,
+      increaseContrast: true,
+    });
+
+    renderHook(() => useAppearance());
+
+    expect(primerTheme.setDayScheme).toHaveBeenCalledWith('light');
+  });
+
+  it('applies high contrast for Classic from the OS increase-contrast setting', () => {
+    const spy = mockPrefersContrast(true);
+    useSettingsStore.setState({
+      designLanguage: DesignLanguage.CLASSIC,
+      theme: Theme.LIGHT,
+      increaseContrast: false,
+    });
+
+    renderHook(() => useAppearance());
+
+    expect(primerTheme.setDayScheme).toHaveBeenCalledWith('light_high_contrast');
+    spy.mockRestore();
+  });
+
+  it('degrades Glass to solid under the OS increase-contrast setting', () => {
+    const spy = mockPrefersContrast(true);
+    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS });
+
+    renderHook(() => useAppearance());
+
+    expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
+    spy.mockRestore();
   });
 });

@@ -9,11 +9,14 @@ import { DesignLanguage } from '../types';
 import { rendererLogError, toError } from '../utils/core/logger';
 import {
   DEFAULT_DAY_COLOR_SCHEME,
+  DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
+  DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
   resolveColorMode,
 } from '../utils/ui/theme';
+import { usePrefersContrast } from './usePrefersContrast';
 import { usePrefersReducedTransparency } from './usePrefersReducedTransparency';
 
 /**
@@ -25,14 +28,22 @@ import { usePrefersReducedTransparency } from './usePrefersReducedTransparency';
 export function useAppearance(): void {
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
+  const increaseContrast = useSettingsStore((s) => s.increaseContrast);
   const prefersReducedTransparency = usePrefersReducedTransparency();
+  const prefersContrast = usePrefersContrast();
 
   const { setColorMode, setDayScheme, setNightScheme } = useTheme();
 
   useEffect(() => {
     const effectiveTheme = resolveColorMode(designLanguage, theme);
     const colorMode = mapThemeModeToColorMode(effectiveTheme);
-    const colorScheme = mapThemeModeToColorScheme(effectiveTheme);
+
+    // High contrast swaps in Primer's `*_high_contrast` schemes for Classic, driven by
+    // the in-app setting or the OS "Increase Contrast" preference. Glass never takes
+    // them; it degrades to a solid surface instead (see the vibrancy effect below).
+    const highContrast =
+      designLanguage === DesignLanguage.CLASSIC && (increaseContrast || prefersContrast);
+    const colorScheme = mapThemeModeToColorScheme(effectiveTheme, highContrast);
 
     setColorMode(colorMode);
 
@@ -46,10 +57,25 @@ export function useAppearance(): void {
         rendererLogError('useAppearance', 'Failed to sync native theme source', toError(err)),
       );
 
-    // System theme has no fixed scheme; fall back to a day/night pair.
-    setDayScheme(colorScheme ?? DEFAULT_DAY_COLOR_SCHEME);
-    setNightScheme(colorScheme ?? DEFAULT_NIGHT_COLOR_SCHEME);
-  }, [designLanguage, theme, setColorMode, setDayScheme, setNightScheme]);
+    // System theme has no fixed scheme; fall back to a day/night pair that honours
+    // high contrast.
+    setDayScheme(
+      colorScheme ??
+        (highContrast ? DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME : DEFAULT_DAY_COLOR_SCHEME),
+    );
+    setNightScheme(
+      colorScheme ??
+        (highContrast ? DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME : DEFAULT_NIGHT_COLOR_SCHEME),
+    );
+  }, [
+    designLanguage,
+    theme,
+    increaseContrast,
+    prefersContrast,
+    setColorMode,
+    setDayScheme,
+    setNightScheme,
+  ]);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', designLanguage);
@@ -65,9 +91,10 @@ export function useAppearance(): void {
   useEffect(() => {
     const root = document.documentElement;
 
-    // Glass is always translucent; it only degrades to solid under the OS Reduce
-    // Transparency / Increase Contrast settings (a media query in App.css).
-    const vibrant = designLanguage === DesignLanguage.GLASS && !prefersReducedTransparency;
+    // Glass is always translucent; it degrades to solid under the OS Reduce
+    // Transparency or Increase Contrast settings (matched by a media query in App.css).
+    const vibrant =
+      designLanguage === DesignLanguage.GLASS && !prefersReducedTransparency && !prefersContrast;
     root.classList.toggle('gitify-translucent', vibrant);
 
     if (!window.gitify.platform.isMacOS()) {
@@ -84,5 +111,5 @@ export function useAppearance(): void {
       () => vibrant && root.classList.add('gitify-vibrant'),
       () => root.classList.remove('gitify-vibrant'),
     );
-  }, [designLanguage, prefersReducedTransparency]);
+  }, [designLanguage, prefersReducedTransparency, prefersContrast]);
 }

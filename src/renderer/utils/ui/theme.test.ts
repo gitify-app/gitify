@@ -2,7 +2,9 @@ import { DesignLanguage, Theme } from '../../types';
 
 import {
   DEFAULT_DAY_COLOR_SCHEME,
+  DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME,
   DEFAULT_NIGHT_COLOR_SCHEME,
+  DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME,
   mapThemeModeToColorMode,
   mapThemeModeToColorScheme,
   resolveColorMode,
@@ -32,9 +34,21 @@ describe('renderer/utils/theme.ts', () => {
     expect(mapThemeModeToColorScheme(Theme.SYSTEM)).toBe(null);
   });
 
+  it('appends the high-contrast variant when requested', () => {
+    expect(mapThemeModeToColorScheme(Theme.LIGHT, true)).toBe('light_high_contrast');
+    expect(mapThemeModeToColorScheme(Theme.DARK, true)).toBe('dark_high_contrast');
+    expect(mapThemeModeToColorScheme(Theme.DARK_DIMMED, true)).toBe('dark_dimmed_high_contrast');
+    expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND, true)).toBe(
+      'light_colorblind_high_contrast',
+    );
+    expect(mapThemeModeToColorScheme(Theme.SYSTEM, true)).toBe(null);
+  });
+
   it('should export default color scheme constants', () => {
     expect(DEFAULT_DAY_COLOR_SCHEME).toBe('light');
     expect(DEFAULT_NIGHT_COLOR_SCHEME).toBe('dark');
+    expect(DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME).toBe('light_high_contrast');
+    expect(DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME).toBe('dark_high_contrast');
   });
 
   describe('supportedColorModes', () => {

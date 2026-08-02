@@ -7,6 +7,8 @@ type ColorModeWithAuto = NonNullable<ThemeProviderProps['colorMode']>;
 
 export const DEFAULT_DAY_COLOR_SCHEME = 'light';
 export const DEFAULT_NIGHT_COLOR_SCHEME = 'dark';
+export const DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME = 'light_high_contrast';
+export const DEFAULT_NIGHT_HIGH_CONTRAST_COLOR_SCHEME = 'dark_high_contrast';
 
 export function mapThemeModeToColorMode(themeMode: Theme): ColorModeWithAuto {
   switch (themeMode) {
@@ -24,25 +26,36 @@ export function mapThemeModeToColorMode(themeMode: Theme): ColorModeWithAuto {
   }
 }
 
-export function mapThemeModeToColorScheme(themeMode: Theme): string | null {
+export function mapThemeModeToColorScheme(themeMode: Theme, highContrast = false): string | null {
+  let base: string | null;
+
   switch (themeMode) {
     case Theme.LIGHT:
-      return 'light';
+      base = 'light';
+      break;
     case Theme.LIGHT_COLORBLIND:
-      return 'light_colorblind';
+      base = 'light_colorblind';
+      break;
     case Theme.LIGHT_TRITANOPIA:
-      return 'light_tritanopia';
+      base = 'light_tritanopia';
+      break;
     case Theme.DARK:
-      return 'dark';
+      base = 'dark';
+      break;
     case Theme.DARK_COLORBLIND:
-      return 'dark_colorblind';
+      base = 'dark_colorblind';
+      break;
     case Theme.DARK_TRITANOPIA:
-      return 'dark_tritanopia';
+      base = 'dark_tritanopia';
+      break;
     case Theme.DARK_DIMMED:
-      return 'dark_dimmed';
+      base = 'dark_dimmed';
+      break;
     default:
       return null;
   }
+
+  return highContrast ? `${base}_high_contrast` : base;
 }
 
 /** The `Theme` values a design language exposes (Glass: light/dark/system only). */

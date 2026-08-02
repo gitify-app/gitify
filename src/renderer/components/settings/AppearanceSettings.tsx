@@ -31,6 +31,7 @@ export const AppearanceSettings: FC = () => {
   // Setting store values
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
+  const increaseContrast = useSettingsStore((s) => s.increaseContrast);
 
   const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -88,6 +89,20 @@ export const AppearanceSettings: FC = () => {
           </Select>
         </Stack>
 
+        <Checkbox
+          checked={increaseContrast}
+          label="Increase contrast"
+          name="increaseContrast"
+          onChange={() => toggleSetting('increaseContrast')}
+          tooltip={
+            <Text>
+              Use GitHub's high-contrast color schemes for improved legibility. Also applied
+              automatically when your system's increase-contrast setting is enabled.
+            </Text>
+          }
+          visible={designLanguage === DesignLanguage.CLASSIC}
+        />
+
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <FieldLabel label="Zoom:" name="zoom" />
 
@@ -102,8 +117,6 @@ export const AppearanceSettings: FC = () => {
               unsafeDisableTooltip={true}
             />
 
-            {/* Value display, not a control: styled like the group but inert
-             * (no disabled wash, no pointer interaction, no tab stop). */}
             <Button
               aria-label="Zoom percentage"
               className="pointer-events-none"
