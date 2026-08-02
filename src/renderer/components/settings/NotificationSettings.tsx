@@ -111,7 +111,6 @@ export const NotificationSettings: FC = () => {
               unsafeDisableTooltip={true}
             />
 
-            {/* Value display, not a control: styled like the group but inert. */}
             <Button
               aria-label="Fetch interval"
               className="pointer-events-none"

@@ -226,7 +226,6 @@ export const SystemSettings: FC = () => {
               size="small"
               unsafeDisableTooltip={true}
             />
-            {/* Value display, not a control: styled like the group but inert. */}
             <Button
               aria-label="Global shortcut"
               className="pointer-events-none"
@@ -288,7 +287,6 @@ export const SystemSettings: FC = () => {
               unsafeDisableTooltip={true}
             />
 
-            {/* Value display, not a control: styled like the group but inert. */}
             <Button
               aria-label="Volume percentage"
               className="pointer-events-none"
