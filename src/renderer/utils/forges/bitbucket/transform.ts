@@ -68,13 +68,10 @@ function transformRepository(
   const fullName = extractRepositoryName(entityUrl);
   const [owner] = fullName.split('/');
 
-  const repoUrl =
-    entityUrl?.split('/').slice(0, 5).join('/') ?? `https://bitbucket.org/${fullName}`;
-
   return {
     name: fullName.split('/')[1] ?? fullName,
     fullName,
-    htmlUrl: toLink(repoUrl),
+    htmlUrl: toLink(`https://bitbucket.org/${fullName}`),
     owner: {
       login: owner,
       avatarUrl: toLink(`https://bitbucket.org/${owner}/avatar`),
