@@ -286,17 +286,22 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
       expect(helpers.defaultUserType).toBe('User');
     });
 
-    it('falls back to an empty string when the subject has no URL', () => {
-      const notification = mockPartialGitifyNotification({
-        title: 'Bitbucket notification',
-        type: 'BitbucketNotification',
-        url: null,
-      });
+    it('falls back to the repository URL when the subject has no URL', () => {
+      const notification = mockPartialGitifyNotification(
+        {
+          title: 'Bitbucket notification',
+          type: 'BitbucketNotification',
+          url: null,
+        },
+        {
+          htmlUrl: 'https://bitbucket.org/myorg/myrepo' as Link,
+        },
+      );
       notification.account = mockBitbucketAccount;
 
       const helpers = bitbucketAdapter.getDisplayHelpers(notification);
 
-      expect(helpers.defaultUrl).toBe('');
+      expect(helpers.defaultUrl).toBe('https://bitbucket.org/myorg/myrepo');
     });
   });
 });

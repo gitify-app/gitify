@@ -1,7 +1,7 @@
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockBitbucketAccount, mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
-import type { GitifySubject, Link, SubjectType } from '../../types';
+import type { GitifyNotification, GitifySubject, Link, SubjectType } from '../../types';
 
 import { githubAdapter } from '../forges/github/adapter';
 import { generateNotificationReferrerId, generateNotificationWebUrl } from './url';
@@ -96,6 +96,31 @@ describe('renderer/utils/notifications/url.ts', () => {
       expect(followUrlSpy).toHaveBeenCalledTimes(1);
       expect(followUrlSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, mockSubjectUrl);
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
+    });
+
+    it('falls back to the repository URL when a Bitbucket notification has no subject URL', async () => {
+      const repositoryUrl = 'https://bitbucket.org/myorg/myrepo' as Link;
+      const notification: GitifyNotification = {
+        ...mockGitifyNotification,
+        account: mockBitbucketAccount,
+        subject: {
+          title: 'Bitbucket notification',
+          type: 'BitbucketNotification',
+          url: null,
+          latestCommentUrl: null,
+        },
+        repository: {
+          ...mockGitifyNotification.repository,
+          htmlUrl: repositoryUrl,
+        },
+      };
+      const expectedUrl = new URL(repositoryUrl);
+      expectedUrl.searchParams.set(
+        'notification_referrer_id',
+        generateNotificationReferrerId(notification),
+      );
+
+      await expect(generateNotificationWebUrl(notification)).resolves.toBe(expectedUrl.toString());
     });
   });
 });
