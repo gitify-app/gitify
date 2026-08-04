@@ -11,6 +11,14 @@ export function useOnlineStatus(): boolean {
   const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
+    // Force-correct TanStack Query's internal online state to match the
+    // browser's actual state on mount. `onlineManager` otherwise initializes
+    // to `online: true` regardless of reality, only self-correcting once the
+    // browser fires its first native online/offline event - which means an
+    // app cold-started while offline would fire (and fail/retry) a query
+    // before ever discovering it should be paused.
+    onlineManager.setOnline(navigator.onLine);
+
     const handle = () => {
       setIsOnline(onlineManager.isOnline());
     };
