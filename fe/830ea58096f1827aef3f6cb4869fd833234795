@@ -1,0 +1,26 @@
+src/renderer/hooks/useAccounts.ts
+  s_36a14359b48ab2::t_e653e520f0e0e2 45-48
+src/renderer/hooks/useAccounts.test.tsx
+  s_36a14359b48ab2::t_883b7f91fdeb2c 64-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "fe830ea58096f1827aef3f6cb4869fd833234795",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_36a14359b48ab2": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0364eb031ffeC57h59J3QbMbpC",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
