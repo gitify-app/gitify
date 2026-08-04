@@ -1,0 +1,46 @@
+src/renderer/utils/api/queryClient.test.ts
+  s_36a14359b48ab2::t_a5ea379e250846 1,4-11,16-27
+  h_ac004aadb63da9 2-3,12-15
+src/renderer/hooks/useAccounts.test.tsx
+  s_36a14359b48ab2::t_2971274eebb84c 32,56-58
+  s_36a14359b48ab2::t_9b9d101b47011a 1
+  s_36a14359b48ab2::t_a6f1f217c7d004 2-4,29-31
+  s_36a14359b48ab2::t_23e4773b58b526 33-35,53-55
+  s_36a14359b48ab2::t_421a5f9f66397c 59-61
+  h_ac004aadb63da9 5-28,36-52,62
+src/renderer/constants.ts
+  s_36a14359b48ab2::t_9c7900726b0a70 87-93
+src/renderer/hooks/useNotifications.ts
+  s_36a14359b48ab2::t_8f6e80c163bcce 11
+  h_ac004aadb63da9 12
+  s_36a14359b48ab2::t_d55b15d2ad4903 170-176
+src/renderer/hooks/useNotifications.test.tsx
+  s_36a14359b48ab2::t_6c5d3531b25ad8 292,312
+  s_36a14359b48ab2::t_c299b73ec56a4f 313
+  s_36a14359b48ab2::t_7299ecdf717b43 291,293-311,314-316
+  h_ac004aadb63da9 16-17
+src/renderer/utils/api/queryClient.ts
+  s_36a14359b48ab2::t_091acabb657bf7 12,15-17,25
+  h_ac004aadb63da9 13-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "9beaf3c1299296f59c1fc942f4561d4d409c1fcf",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_36a14359b48ab2": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0364eb031ffeC57h59J3QbMbpC",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
