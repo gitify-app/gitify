@@ -1,0 +1,108 @@
+src/renderer/__helpers__/hook-mocks.ts
+  s_36a14359b48ab2::t_cf700315ad4725 44-45
+src/renderer/components/notifications/RepositoryNotifications.tsx
+  s_36a14359b48ab2::t_6866a32e74a417 52,55-58
+  s_36a14359b48ab2::t_aa76674fdeeb2e 7,48,51,53-54,61-63
+  s_36a14359b48ab2::t_0bbf45eb468c12 43-47
+  s_36a14359b48ab2::t_36b059f6de9127 64
+src/renderer/utils/api/errors.test.ts
+  s_36a14359b48ab2::t_6030e1dc59c78d 77-92
+src/renderer/stores/index.ts
+  s_36a14359b48ab2::t_c96f566dd100cc 6
+src/renderer/constants.ts
+  s_36a14359b48ab2::t_6037e091107d90 68
+src/renderer/utils/notifications/mutations.ts
+  s_36a14359b48ab2::t_a4bfc7d7a6e64f 10-11,20-21,29-37,75-76,78-83,85-86
+  s_36a14359b48ab2::t_b37da06de15141 1-9,12-19,22-28,38-74,77,84,87-130
+src/renderer/hooks/useNotifications.test.tsx
+  s_36a14359b48ab2::t_20c9fb7fa53e03 11
+  s_36a14359b48ab2::t_d5eb7b34d059a0 451-502
+src/renderer/components/notifications/NotificationRow.tsx
+  s_36a14359b48ab2::t_b1da1ee717748d 52-56,61-65
+  s_36a14359b48ab2::t_55f05a3d2d303c 60,157,159,166,168,175
+  s_36a14359b48ab2::t_c0d19d397f58f7 58
+  s_36a14359b48ab2::t_0fbdb9f69bdf45 7,66,69-71,79-83,86-88
+  s_36a14359b48ab2::t_ce4bf14a88d411 35-40,50-51,72
+  s_36a14359b48ab2::t_12aa1d8e856e64 57
+  s_36a14359b48ab2::t_950b1a52f6fc30 59
+  s_36a14359b48ab2::t_c3fded1fef73b6 89-90
+src/renderer/types.ts
+  s_36a14359b48ab2::t_a8a344f4548533 233
+  s_36a14359b48ab2::t_879a9a7822b17e 7
+src/renderer/components/primitives/HoverButton.tsx
+  s_36a14359b48ab2::t_f824e847187c2b 7,14,19,35
+  s_36a14359b48ab2::t_457567c4496245 6
+src/renderer/hooks/useNotifications.ts
+  s_36a14359b48ab2::t_2e1392b643cc90 590
+  s_36a14359b48ab2::t_af5604d4a5fc58 360-361,368-382,443-444,449-457,469-472,481-483,499,504-505,507-508,510-514,525-529,540-542,556,559-560,563-566,576-579,581-587,591-594,601-604
+  s_36a14359b48ab2::t_98b23a5068ca8f 651-652
+  s_36a14359b48ab2::t_e349210e1160af 383-387
+  s_36a14359b48ab2::t_a44d516e212ce9 459-462
+  s_36a14359b48ab2::t_d88f35053df4ec 429
+  s_36a14359b48ab2::t_623925739d2328 12-13
+  s_36a14359b48ab2::t_37add943bfe8ed 41
+  s_36a14359b48ab2::t_99e2bed7626c6f 392,410-413
+  s_36a14359b48ab2::t_a3061c706898c9 580
+  s_36a14359b48ab2::t_9ac4433ede1bd6 458
+  s_36a14359b48ab2::t_a5482164edacc0 532-536
+  s_36a14359b48ab2::t_e73f0f9ac707a0 362-367
+  s_36a14359b48ab2::t_392f30dcccb4c4 388-390,393-409,414-423,428,430-440
+  s_36a14359b48ab2::t_7df443dc963327 448,463-468,509,516,519-524
+  s_36a14359b48ab2::t_a22440581af5ca 11,14-18,38-40,42
+  s_36a14359b48ab2::t_d8acd789fd614b 391
+  s_36a14359b48ab2::t_710b8eeb1b4f5b 424-427
+  s_36a14359b48ab2::t_f000c176524118 473-477
+  s_36a14359b48ab2::t_24cd13c0d321ec 71-76
+  s_36a14359b48ab2::t_0a979c657d44a1 595-600
+  s_36a14359b48ab2::t_2901ef87b86ee3 77
+  s_36a14359b48ab2::t_1b1a7bafd7f4b8 605
+src/renderer/utils/core/errors.ts
+  s_36a14359b48ab2::t_046319c9781e19 10
+  s_36a14359b48ab2::t_6a50e2b2a46356 8-9,11-12
+src/renderer/components/notifications/NotificationRow.test.tsx
+  s_36a14359b48ab2::t_baee6c799e3a00 356-406
+  s_36a14359b48ab2::t_6b5f6878e1b5c7 271,281-284,287,299,301-305,307-308,310,313,328,334,349-350,352
+  s_36a14359b48ab2::t_d60271ee012a99 269-270,272-280,285-286,288-298,300,306,311-312,314-327,329-333,335-348,351,353-355,407
+  s_36a14359b48ab2::t_6c561f443d420d 309
+  s_36a14359b48ab2::t_9de4bef4e511a2 11-12
+  s_36a14359b48ab2::t_197f3ccf6ed32c 15
+src/renderer/stores/types.ts
+  s_36a14359b48ab2::t_dc1d2a040f7758 6
+  s_36a14359b48ab2::t_17e8be4455ce70 200-205,226-228,232-234,236,238-246,248-270
+  s_36a14359b48ab2::t_da778e1fe42bb3 206-225,235,237,247
+  s_36a14359b48ab2::t_41a0239f8aa535 229-231
+src/renderer/components/notifications/RepositoryNotifications.test.tsx
+  s_36a14359b48ab2::t_b7c472b6f74862 131-134,142-152,156
+  s_36a14359b48ab2::t_7692b83ff2bdd1 129-130,135-141,153-155,157-166
+  s_36a14359b48ab2::t_2636ebf992aed3 8-9
+src/renderer/utils/api/errors.ts
+  s_36a14359b48ab2::t_8b81fdc0635259 47
+src/renderer/utils/notifications/mutations.test.ts
+  s_36a14359b48ab2::t_f4ebd5025efa6b 89-90
+  s_36a14359b48ab2::t_71761274ce19f3 112-113
+  s_36a14359b48ab2::t_332c6220c71b26 1-88,91-111,114-126
+src/renderer/stores/useNotificationActionFailuresStore.ts
+  s_36a14359b48ab2::t_ec2570c45c87db 18-19
+  s_36a14359b48ab2::t_a788b378bad767 1-17,20-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "f6b4c8959dc1d46cf47a45a7299159ef81713163",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_36a14359b48ab2": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0364eb031ffeC57h59J3QbMbpC",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
