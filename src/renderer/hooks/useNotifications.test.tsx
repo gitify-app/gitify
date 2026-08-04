@@ -8,6 +8,7 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
 import {
+  mockGitHubCloudGitifyNotifications,
   mockGitifyNotification,
   mockMultipleAccountNotifications,
   mockSingleAccountNotifications,
@@ -478,6 +479,58 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       expect(rendererLogErrorSpy).toHaveBeenCalled();
+    });
+
+    it('rolls back the cache for a failed notification while a failed request does not affect it', async () => {
+      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      await act(async () => {
+        await result.current.markNotificationsAsRead([mockGitifyNotification]).catch(() => {});
+      });
+
+      // The notification remains in the cache since its action failed
+      await waitFor(() => expect(result.current.notificationCount).toBe(1));
+      expect(result.current.notificationFailures[mockGitifyNotification.id]).toBeDefined();
+    });
+
+    it('tracks succeeded and failed notifications independently within a single bulk call', async () => {
+      const [succeedsNotification, failsNotification] = mockGitHubCloudGitifyNotifications;
+
+      getAllNotificationsMock.mockResolvedValue([
+        {
+          account: succeedsNotification.account,
+          notifications: [succeedsNotification, failsNotification],
+          error: null,
+        },
+      ]);
+
+      vi.spyOn(githubAdapter, 'markThreadAsRead').mockImplementation(async (_account, id) => {
+        if (id === failsNotification.id) {
+          throw new Error('boom');
+        }
+      });
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.notificationCount).toBe(2));
+
+      await act(async () => {
+        await result.current
+          .markNotificationsAsRead([succeedsNotification, failsNotification])
+          .catch(() => {});
+      });
+
+      // The succeeded notification is removed; the failed one remains and is
+      // recorded in the failure map, not the other way around.
+      await waitFor(() => expect(result.current.notificationCount).toBe(1));
+      expect(
+        result.current.notifications[0]?.notifications.some((n) => n.id === failsNotification.id),
+      ).toBe(true);
+      expect(result.current.notificationFailures[failsNotification.id]).toBeDefined();
+      expect(result.current.notificationFailures[succeedsNotification.id]).toBeUndefined();
     });
   });
 

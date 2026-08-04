@@ -4,7 +4,7 @@ import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
-import { useSettingsStore } from '../../stores';
+import { useNotificationActionFailuresStore, useSettingsStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -32,8 +32,12 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
   isRepositoryAnimatingExit,
 }: NotificationRowProps) => {
-  const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
-    useNotifications();
+  const {
+    markNotificationsAsRead,
+    markNotificationsAsDone,
+    unsubscribeNotification,
+    notificationFailures,
+  } = useNotifications();
 
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
@@ -43,31 +47,47 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
-  const actionNotificationInteraction = () => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-    openNotification(notification);
+  const failure = notificationFailures[notification.id];
 
-    if (markAsDoneOnOpen) {
-      markNotificationsAsDone([notification]);
-    } else {
-      markNotificationsAsRead([notification]);
+  // Explains the failed action and suggests the browser as a fallback,
+  // rather than a dedicated retry control - clicking the (now red) hover
+  // action again re-attempts it. Phrased as "You can also..." rather than
+  // "...instead", since some descriptions already suggest waiting/retrying
+  // (e.g. `RATE_LIMITED`), which "instead" would read as contradicting.
+  const failureTooltip = failure
+    ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in the browser.`
+    : undefined;
+
+  // Starts the exit animation immediately, then reverts it if this specific
+  // action failed, checked directly against the failure store once it
+  // settles. Checking a stale value (e.g. via an effect watching the failure
+  // map) would wrongly revert a retry's animation using the previous
+  // attempt's still-present entry.
+  const runAction = async (action: () => Promise<void>) => {
+    setShouldAnimateNotificationExit(shouldAnimateExit);
+
+    await action();
+
+    if (useNotificationActionFailuresStore.getState().failures[notification.id]) {
+      setShouldAnimateNotificationExit(false);
     }
   };
 
-  const actionMarkAsDone = () => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-    markNotificationsAsDone([notification]);
+  const actionNotificationInteraction = () => {
+    openNotification(notification);
+
+    runAction(() =>
+      markAsDoneOnOpen
+        ? markNotificationsAsDone([notification])
+        : markNotificationsAsRead([notification]),
+    );
   };
 
-  const actionMarkAsRead = () => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-    markNotificationsAsRead([notification]);
-  };
+  const actionMarkAsDone = () => runAction(() => markNotificationsAsDone([notification]));
 
-  const actionUnsubscribeFromThread = () => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-    unsubscribeNotification(notification);
-  };
+  const actionMarkAsRead = () => runAction(() => markNotificationsAsRead([notification]));
+
+  const actionUnsubscribeFromThread = () => runAction(() => unsubscribeNotification(notification));
 
   const NotificationIcon = notification.display.icon.type;
   const isNotificationRead = !notification.unread;
@@ -143,24 +163,27 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             action={actionMarkAsRead}
             enabled={!isNotificationRead}
             icon={ReadIcon}
-            label="Mark as read"
+            label={failureTooltip ?? 'Mark as read'}
             testid="notification-mark-as-read"
+            variant={failure ? 'danger' : 'invisible'}
           />
 
           <HoverButton
             action={actionMarkAsDone}
             enabled={isMarkAsDoneFeatureSupported(notification.account) && notification.unread}
             icon={CheckIcon}
-            label="Mark as done"
+            label={failureTooltip ?? 'Mark as done'}
             testid="notification-mark-as-done"
+            variant={failure ? 'danger' : 'invisible'}
           />
 
           <HoverButton
             action={actionUnsubscribeFromThread}
             enabled={isUnsubscribeThreadSupported(notification.account)}
             icon={BellSlashIcon}
-            label="Unsubscribe from thread"
+            label={failureTooltip ?? 'Unsubscribe from thread'}
             testid="notification-unsubscribe-from-thread"
+            variant={failure ? 'danger' : 'invisible'}
           />
         </HoverGroup>
       )}

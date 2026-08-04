@@ -74,6 +74,22 @@ describe('renderer/utils/api/errors.ts', () => {
         expect(result).toBe(Errors.RATE_LIMITED);
       });
 
+      it('action forbidden - unmatched 403', () => {
+        const mockError = new RequestError(
+          'As an Enterprise Managed User, you cannot access this content',
+          403,
+          {
+            request: {
+              method: 'GET',
+              url: 'https://api.github.com',
+              headers: {},
+            },
+          },
+        );
+        const result = determineFailureType(mockError);
+        expect(result).toBe(Errors.ACTION_FORBIDDEN);
+      });
+
       it('network error - no status', () => {
         const mockError = new RequestError('Network error', 500, {
           request: {

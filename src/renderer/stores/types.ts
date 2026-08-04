@@ -3,6 +3,7 @@ import type {
   AccountUUID,
   FilterStateType,
   Forge,
+  GitifyError,
   Hostname,
   Reason,
   ReviewRequestType,
@@ -196,3 +197,74 @@ export interface SettingsActions {
  * Complete settings store type.
  */
 export type SettingsStore = SettingsState & SettingsActions;
+
+// ============================================================================
+// Notification Action Failures Store Types
+// ============================================================================
+
+/**
+ * The notification action that most recently failed for a given notification.
+ */
+export type NotificationFailedActionType = 'markAsRead' | 'markAsDone' | 'unsubscribe';
+
+/**
+ * A recorded action failure for a single notification.
+ */
+export interface NotificationActionFailure {
+  /**
+   * The action that failed (used to know what to re-invoke on retry).
+   */
+  action: NotificationFailedActionType;
+
+  /**
+   * The classified error for the failure.
+   */
+  error: GitifyError;
+}
+
+/**
+ * Ephemeral, session-local state tracking per-notification action failures.
+ *
+ * Not persisted and not part of the TanStack Query cache - a failed
+ * mark-as-read/mark-as-done/unsubscribe action for a notification is
+ * recorded here so `NotificationRow` can recolor/re-label that row's hover
+ * actions, independent of the notification data itself.
+ */
+export interface NotificationActionFailuresState {
+  /**
+   * Map of notification ID to the details of its most recent failed action attempt.
+   */
+  failures: Record<string, NotificationActionFailure>;
+}
+
+/**
+ * Actions for managing per-notification action failures.
+ */
+export interface NotificationActionFailuresActions {
+  /**
+   * Records a failed action for a notification.
+   */
+  setFailure: (notificationId: string, failure: NotificationActionFailure) => void;
+
+  /**
+   * Clears a recorded failure for a notification (e.g. after a successful retry).
+   */
+  clearFailure: (notificationId: string) => void;
+
+  /**
+   * Clears any recorded failures for notification IDs not present in `notificationIds`
+   * (e.g. once a notification no longer appears in the notifications list).
+   */
+  pruneFailures: (notificationIds: string[]) => void;
+
+  /**
+   * Resets the store to its default (empty) state.
+   */
+  reset: () => void;
+}
+
+/**
+ * Complete notification action failures store type.
+ */
+export type NotificationActionFailuresStore = NotificationActionFailuresState &
+  NotificationActionFailuresActions;

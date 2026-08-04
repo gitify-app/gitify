@@ -10,7 +10,14 @@ import {
 
 import { Constants } from '../constants';
 
-import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+import {
+  type NotificationActionFailure,
+  type NotificationFailedActionType,
+  useAccountsStore,
+  useFiltersStore,
+  useNotificationActionFailuresStore,
+  useSettingsStore,
+} from '../stores';
 
 import {
   type Account,
@@ -30,6 +37,11 @@ import {
   filterBaseNotifications,
   filterDetailedNotifications,
 } from '../utils/notifications/filters/filter';
+import {
+  restoreFailedNotifications,
+  settleNotificationActions,
+  type NotificationQuerySnapshot,
+} from '../utils/notifications/mutations';
 import {
   getAllNotifications,
   getNotificationCount,
@@ -58,6 +70,13 @@ interface NotificationsState {
   markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<void>;
   markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
+
+  /**
+   * Session-local map of notification ID to the classified error from its
+   * most recent failed mark-as-read/mark-as-done/unsubscribe action attempt.
+   * Not persisted and not part of the notifications data itself.
+   */
+  notificationFailures: Record<string, NotificationActionFailure>;
 }
 
 interface UseNotificationsOptions {
@@ -349,28 +368,130 @@ export const useNotifications = ({
     notificationsQueryKey,
   ]);
 
+  const notificationFailures = useNotificationActionFailuresStore((s) => s.failures);
+
+  // Session-local failure entries are independent of the notifications
+  // cache, so they must be pruned separately once a notification no longer
+  // appears in the (unfiltered) list - e.g. actioned successfully elsewhere,
+  // or its account was removed. Owned by the singleton side-effects host so
+  // it runs once per notifications update rather than once per mounted
+  // row/consumer.
+  useEffect(() => {
+    if (!withSideEffects) {
+      return;
+    }
+
+    const unfilteredNotifications =
+      queryClient.getQueryData<AccountNotifications[]>(notificationsQueryKey) || [];
+
+    const currentNotificationIds = unfilteredNotifications.flatMap((accountNotifications) =>
+      accountNotifications.notifications.map((notification) => notification.id),
+    );
+
+    useNotificationActionFailuresStore.getState().pruneFailures(currentNotificationIds);
+  }, [withSideEffects, notifications, queryClient, notificationsQueryKey]);
+
+  // Shared by all three mutations' `onSuccess`. Records each failure's
+  // classified error in the session-local failure map and logs it; also
+  // re-applies `snapshot` for any failed notification missing from the
+  // cache, as a defensive guard (these mutations don't remove notifications
+  // until they succeed, so this is normally a no-op).
+  const reconcileFailedNotifications = useCallback(
+    (
+      failed: Array<{ notification: GitifyNotification; error: GitifyError; rawError: Error }>,
+      snapshot: NotificationQuerySnapshot | undefined,
+      action: NotificationFailedActionType,
+      context: string,
+    ) => {
+      if (failed.length === 0) {
+        return;
+      }
+
+      const failedNotifications = failed.map((f) => f.notification);
+
+      if (snapshot) {
+        for (const [queryKey, snapshotData] of snapshot) {
+          queryClient.setQueryData<AccountNotifications[]>(queryKey, (existing) =>
+            restoreFailedNotifications(failedNotifications, snapshotData ?? [], existing ?? []),
+          );
+        }
+      }
+
+      for (const { notification, error, rawError } of failed) {
+        useNotificationActionFailuresStore.getState().setFailure(notification.id, {
+          action,
+          error,
+        });
+        rendererLogError(
+          context,
+          `Error occurred while processing notification ${notification.id}`,
+          rawError,
+        );
+      }
+    },
+    [queryClient],
+  );
+
+  // Full-cache restore for `onError`, covering the rare case where a
+  // mutation function throws directly (e.g. a bug) rather than resolving via
+  // `settleNotificationActions`. Per-notification failures are handled by
+  // `reconcileFailedNotifications` above instead.
+  const restoreSnapshot = useCallback(
+    (snapshot?: NotificationQuerySnapshot) => {
+      if (!snapshot) {
+        return;
+      }
+
+      for (const [queryKey, data] of snapshot) {
+        queryClient.setQueryData(queryKey, data);
+      }
+    },
+    [queryClient],
+  );
+
   const markNotificationsAsReadMutation = useMutation({
     mutationFn: async ({ readNotifications }: { readNotifications: GitifyNotification[] }) => {
-      await Promise.all(
-        readNotifications.map((notification) =>
-          getAdapter(notification.account).markThreadAsRead(notification.account, notification.id),
-        ),
+      return await settleNotificationActions(readNotifications, (notification) =>
+        getAdapter(notification.account).markThreadAsRead(notification.account, notification.id),
       );
     },
 
-    onSuccess: (_, { readNotifications }) => {
-      // Update the cached (unfiltered) data in place so filtered-out
-      // notifications are preserved and concurrent mutations compose.
-      queryClient.setQueryData<AccountNotifications[]>(notificationsQueryKey, (existing) =>
-        removeNotificationsForAccount(
-          readNotifications[0].account,
-          readNotifications,
-          existing ?? [],
-        ),
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
+
+      const snapshot = queryClient.getQueriesData<AccountNotifications[]>({
+        queryKey: notificationsKeys.all,
+      });
+
+      return { snapshot };
+    },
+
+    onSuccess: ({ succeeded, failed }, _variables, context) => {
+      // Cache removal happens here (once the request resolves) rather than
+      // optimistically in `onMutate`, so the row's exit animation - started
+      // synchronously on click - has time to play before the notification
+      // disappears from the list.
+      if (succeeded.length > 0) {
+        queryClient.setQueryData<AccountNotifications[]>(notificationsQueryKey, (existing) =>
+          removeNotificationsForAccount(succeeded[0].account, succeeded, existing ?? []),
+        );
+      }
+
+      for (const notification of succeeded) {
+        useNotificationActionFailuresStore.getState().clearFailure(notification.id);
+      }
+
+      reconcileFailedNotifications(
+        failed,
+        context?.snapshot,
+        'markAsRead',
+        'markNotificationsAsRead',
       );
     },
 
-    onError: (err) => {
+    onError: (err, _variables, context) => {
+      restoreSnapshot(context?.snapshot);
+
       rendererLogError(
         'markNotificationsAsRead',
         'Error occurred while marking notifications as read',
@@ -386,37 +507,50 @@ export const useNotifications = ({
       // Forges that don't support a distinct "done" state fall back to
       // marking as read so the user-visible action still removes the thread.
       if (!isMarkAsDoneFeatureSupported(account)) {
-        await markNotificationsAsReadMutation.mutateAsync({
+        return await markNotificationsAsReadMutation.mutateAsync({
           readNotifications: doneNotifications,
         });
-        return false;
       }
 
-      await Promise.all(
-        doneNotifications.map((notification) =>
-          getAdapter(notification.account).markThreadAsDone(notification.account, notification.id),
-        ),
-      );
-
-      return true;
-    },
-
-    onSuccess: (didMarkAsDone, { doneNotifications }) => {
-      // The mark-as-read fallback already updated the cache.
-      if (!didMarkAsDone) {
-        return;
-      }
-
-      queryClient.setQueryData<AccountNotifications[]>(notificationsQueryKey, (existing) =>
-        removeNotificationsForAccount(
-          doneNotifications[0].account,
-          doneNotifications,
-          existing ?? [],
-        ),
+      return await settleNotificationActions(doneNotifications, (notification) =>
+        getAdapter(notification.account).markThreadAsDone(notification.account, notification.id),
       );
     },
 
-    onError: (err) => {
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
+
+      const snapshot = queryClient.getQueriesData<AccountNotifications[]>({
+        queryKey: notificationsKeys.all,
+      });
+
+      return { snapshot };
+    },
+
+    onSuccess: ({ succeeded, failed }, { doneNotifications }, context) => {
+      // The mark-as-read fallback (for forges without a distinct "done"
+      // state) already updated the cache via its own mutation/onSuccess.
+      if (succeeded.length > 0 && isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+        queryClient.setQueryData<AccountNotifications[]>(notificationsQueryKey, (existing) =>
+          removeNotificationsForAccount(succeeded[0].account, succeeded, existing ?? []),
+        );
+      }
+
+      for (const notification of succeeded) {
+        useNotificationActionFailuresStore.getState().clearFailure(notification.id);
+      }
+
+      reconcileFailedNotifications(
+        failed,
+        context?.snapshot,
+        'markAsDone',
+        'markNotificationsAsDone',
+      );
+    },
+
+    onError: (err, _variables, context) => {
+      restoreSnapshot(context?.snapshot);
+
       rendererLogError(
         'markNotificationsAsDone',
         'Error occurred while marking notifications as done',
@@ -430,13 +564,16 @@ export const useNotifications = ({
       // Forges without thread-subscription support cannot unsubscribe; the UI
       // already hides the action, but treat duplicate calls as no-ops.
       if (!isUnsubscribeThreadSupported(notification.account)) {
-        return;
+        return { succeeded: [notification], failed: [] };
       }
 
-      await getAdapter(notification.account).unsubscribeThread(
-        notification.account,
-        notification.id,
+      const result = await settleNotificationActions([notification], (n) =>
+        getAdapter(n.account).unsubscribeThread(n.account, n.id),
       );
+
+      if (result.failed.length > 0) {
+        return result;
+      }
 
       if (markAsDoneOnUnsubscribe) {
         await markNotificationsAsDoneMutation.mutateAsync({
@@ -447,9 +584,36 @@ export const useNotifications = ({
           readNotifications: [notification],
         });
       }
+
+      return result;
     },
 
-    onError: (err) => {
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
+
+      const snapshot = queryClient.getQueriesData<AccountNotifications[]>({
+        queryKey: notificationsKeys.all,
+      });
+
+      return { snapshot };
+    },
+
+    onSuccess: ({ succeeded, failed }, _variables, context) => {
+      for (const notification of succeeded) {
+        useNotificationActionFailuresStore.getState().clearFailure(notification.id);
+      }
+
+      reconcileFailedNotifications(
+        failed,
+        context?.snapshot,
+        'unsubscribe',
+        'unsubscribeNotification',
+      );
+    },
+
+    onError: (err, _variables, context) => {
+      restoreSnapshot(context?.snapshot);
+
       rendererLogError(
         'unsubscribeNotification',
         'Error occurred while unsubscribing from notification thread',
@@ -458,8 +622,6 @@ export const useNotifications = ({
     },
   });
 
-  // Mutation failures are logged via each mutation's onError handler and
-  // swallowed here so UI callers can fire-and-forget these actions.
   const markNotificationsAsRead = useCallback(
     async (readNotifications: GitifyNotification[]) => {
       await markNotificationsAsReadMutation.mutateAsync({ readNotifications }).catch(() => {});
@@ -497,5 +659,7 @@ export const useNotifications = ({
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,
+
+    notificationFailures,
   };
 };

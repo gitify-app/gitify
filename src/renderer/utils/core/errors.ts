@@ -5,6 +5,11 @@ import { Constants } from '../../constants';
 import type { AccountNotifications, ErrorType, GitifyError } from '../../types';
 
 export const Errors: Record<ErrorType, GitifyError> = {
+  ACTION_FORBIDDEN: {
+    title: 'Action Forbidden',
+    descriptions: ['GitHub rejected this action for this account when performed via Gitify.'],
+    emojis: Constants.EMOJIS.ERRORS.ACTION_FORBIDDEN,
+  },
   BAD_CREDENTIALS: {
     title: 'Bad Credentials',
     descriptions: ['Your credentials are either invalid or expired.'],

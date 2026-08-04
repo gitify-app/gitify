@@ -3,16 +3,20 @@ import type { FC } from 'react';
 import type { Icon } from '@primer/octicons-react';
 import { IconButton } from '@primer/react';
 
+import type { VariantType } from '../../types';
+
 interface HoverButtonProps {
   label: string;
   icon: Icon;
   enabled?: boolean;
   testid: string;
   action: () => void;
+  variant?: VariantType;
 }
 
 export const HoverButton: FC<HoverButtonProps> = ({
   enabled = true,
+  variant = 'invisible',
   ...props
 }: HoverButtonProps) => {
   return (
@@ -28,7 +32,7 @@ export const HoverButton: FC<HoverButtonProps> = ({
         size="small"
         title={props.label}
         unsafeDisableTooltip={true}
-        variant="invisible"
+        variant={variant}
       />
     )
   );

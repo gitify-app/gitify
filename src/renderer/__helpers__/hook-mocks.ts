@@ -41,6 +41,8 @@ function buildNotificationsDefaults(): NotificationsState {
     markNotificationsAsRead: vi.fn(),
     markNotificationsAsDone: vi.fn(),
     unsubscribeNotification: vi.fn(),
+
+    notificationFailures: {},
   };
 }
 

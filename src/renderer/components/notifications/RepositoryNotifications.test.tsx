@@ -5,6 +5,8 @@ import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { useNotificationActionFailuresStore } from '../../stores';
+
 import type { Link } from '../../types';
 
 import * as comms from '../../utils/system/comms';
@@ -123,5 +125,43 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
 
     const tree = renderWithProviders(<RepositoryNotifications {...props} />);
     expect(tree.container).toMatchSnapshot();
+  });
+
+  describe('partial bulk failure', () => {
+    afterEach(() => {
+      useNotificationActionFailuresStore.getState().reset();
+    });
+
+    it('reverts the group exit animation when a notification within the bulk action failed', async () => {
+      const props: RepositoryNotificationsProps = {
+        repoName: 'gitify-app/notifications-test',
+        repoNotifications: mockGitHubCloudGitifyNotifications,
+      };
+
+      const [, secondNotification] = mockGitHubCloudGitifyNotifications;
+
+      // Simulate the mutation reconciliation that records a failure in the
+      // real (non-mocked) failure store, since `runGroupAction` reads
+      // directly from it rather than through the mocked `useNotifications`
+      // hook.
+      const markNotificationsAsReadWithFailure = vi.fn().mockImplementation(async () => {
+        useNotificationActionFailuresStore.getState().setFailure(secondNotification.id, {
+          action: 'markAsRead',
+          error: { title: 'Action Forbidden', descriptions: [], emojis: [] },
+        });
+      });
+
+      renderWithProviders(<RepositoryNotifications {...props} />, {
+        settings: { ...mockSettings },
+        markNotificationsAsRead: markNotificationsAsReadWithFailure,
+      });
+
+      await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+
+      // Since one of this group's notifications has a recorded failure, the
+      // repository row's own exit animation is reverted - its hover actions
+      // remain reachable rather than staying hidden.
+      expect(screen.getByTestId('repository-mark-as-read')).toBeInTheDocument();
+    });
   });
 });
