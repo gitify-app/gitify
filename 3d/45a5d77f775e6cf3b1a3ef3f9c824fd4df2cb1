@@ -1,0 +1,27 @@
+src/renderer/hooks/useOnlineStatus.test.ts
+  s_36a14359b48ab2::t_5809008b506576 15,53-76
+  s_36a14359b48ab2::t_2ced291d519a03 77
+src/renderer/hooks/useOnlineStatus.ts
+  s_36a14359b48ab2::t_537022fd937471 14-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "3d45a5d77f775e6cf3b1a3ef3f9c824fd4df2cb1",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_36a14359b48ab2": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0364eb031ffeC57h59J3QbMbpC",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
