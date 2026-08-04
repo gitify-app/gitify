@@ -81,11 +81,15 @@ export const Constants = {
 
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
 
-  // Query stale time in milliseconds, used by TanStack Query client
-  QUERY_STALE_TIME_MS: 30 * 1000, // 30 seconds
-
   // Cooldown before retrying a failed query, used by TanStack Query client
   QUERY_RETRY_DELAY_MS: 30 * 1000, // 30 seconds
+
+  // Garbage-collection time for inactive query cache entries, used by
+  // TanStack Query client. Comfortably longer than either query's own
+  // refetch interval (notifications: 60s-60min, accounts: 1hr), so stale
+  // cache entries (e.g. from account churn) are collected well after they
+  // stop being read.
+  QUERY_GC_TIME_MS: 10 * 60 * 1000, // 10 minutes
 
   // GraphQL Argument Defaults
   GRAPHQL_ARGS: {

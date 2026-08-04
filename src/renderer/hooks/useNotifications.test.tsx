@@ -13,6 +13,8 @@ import {
   mockSingleAccountNotifications,
 } from '../__mocks__/notifications-mocks';
 
+import { Constants } from '../constants';
+
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import type { AccountNotifications, Percentage } from '../types';
@@ -283,6 +285,32 @@ describe('renderer/hooks/useNotifications.ts', () => {
       } finally {
         vi.useRealTimers();
       }
+    });
+  });
+
+  describe('query cache configuration', () => {
+    it('sets an explicit staleTime aligned to the minimum poll interval', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const queryClient = new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+            refetchOnWindowFocus: false,
+            refetchInterval: false,
+          },
+        },
+      });
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      );
+
+      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
+
+      const [query] = queryClient.getQueryCache().getAll();
+      const options = query.options as { staleTime?: number };
+      expect(options.staleTime).toBe(Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS);
     });
   });
 
