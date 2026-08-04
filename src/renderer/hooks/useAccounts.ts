@@ -42,6 +42,10 @@ export const useAccounts = (): AccountsState => {
 
     enabled: accounts.length > 0,
 
+    // Fresh for the whole refresh interval, so mounting a new observer (or
+    // this hook's own remount on account-list changes) doesn't trigger an
+    // immediate extra refetch on top of the hourly poll.
+    staleTime: Constants.REFRESH_ACCOUNTS_INTERVAL_MS,
     refetchInterval: Constants.REFRESH_ACCOUNTS_INTERVAL_MS,
     refetchOnWindowFocus: false,
   });

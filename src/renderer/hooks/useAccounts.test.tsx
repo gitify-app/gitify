@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
+import { Constants } from '../constants';
+
 import { useAccountsStore } from '../stores';
 
 import * as authUtils from '../utils/auth/utils';
@@ -58,5 +60,16 @@ describe('renderer/hooks/useAccounts.ts', () => {
     });
 
     await waitFor(() => expect(refreshAccountSpy).toHaveBeenCalledTimes(2));
+  });
+
+  it('sets an explicit staleTime aligned to the refresh interval', async () => {
+    const { queryClient, wrapper } = createWrapper();
+
+    renderHook(() => useAccounts(), { wrapper });
+    await waitFor(() => expect(refreshAccountSpy).toHaveBeenCalledTimes(1));
+
+    const [query] = queryClient.getQueryCache().getAll();
+    const options = query.options as { staleTime?: number };
+    expect(options.staleTime).toBe(Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
   });
 });
