@@ -101,10 +101,6 @@ const config: Config = {
         },
       });
       // TODO - ideally we would use GitHub Primer Design Tokens instead of TailwindCSS
-      // Keyed off `[data-color-mode]` presence rather than its value: the System
-      // theme renders `data-color-mode="auto"`, so value-specific selectors would
-      // match neither and leave every token below undefined. `light-dark()`
-      // resolves each pair against the wrapper's `color-scheme`.
       addBase({
         '[data-color-mode]': {
           '--gitify-background': 'light-dark(var(--bgColor-default), var(--bgColor-muted))',
