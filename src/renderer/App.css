@@ -83,12 +83,13 @@
 [data-theme='glass'] [data-color-mode] {
   --gitify-footer: var(--gitify-glass-tint);
 
-  /* Restrained, near-native palette: blend GitHub's vivid status/accent colours
-   * toward the muted foreground (the `45%` is the dial to tune). */
-  --gitify-icon-open: color-mix(in oklab, var(--fgColor-open), var(--fgColor-muted) 45%);
-  --gitify-icon-closed: color-mix(in oklab, var(--fgColor-closed), var(--fgColor-muted) 45%);
-  --gitify-icon-done: color-mix(in oklab, var(--fgColor-done), var(--fgColor-muted) 45%);
-  --gitify-icon-attention: color-mix(in oklab, var(--fgColor-attention), var(--fgColor-muted) 45%);
+  /* Monochrome status icons: type icons follow the surrounding text instead of
+   * GitHub's vivid state colours, keeping the glass surface restrained. The
+   * accessibility degradation block below restores the colour coding. */
+  --gitify-icon-open: currentColor;
+  --gitify-icon-closed: currentColor;
+  --gitify-icon-done: currentColor;
+  --gitify-icon-attention: currentColor;
   --gitify-link: color-mix(in oklab, var(--fgColor-link), var(--fgColor-muted) 30%);
 }
 
