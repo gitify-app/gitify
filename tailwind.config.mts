@@ -100,9 +100,6 @@ const config: Config = {
           '@apply rounded-md bg-gitify-accounts': {},
         },
       });
-      // Primer tokens resolve per colour scheme on the wrapper (including the
-      // accessibility and high-contrast palettes), so only the two tokens with an
-      // intentional light/dark asymmetry need `light-dark()`.
       addBase({
         '[data-color-mode]': {
           '--gitify-background': 'light-dark(var(--bgColor-default), var(--bgColor-muted))',
