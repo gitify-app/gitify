@@ -87,7 +87,7 @@
     "@octokit/graphql": "9.0.4",
     "@octokit/oauth-methods": "6.0.3",
     "@octokit/openapi-types": "28.0.0",
-    "@octokit/plugin-paginate-rest": "14.0.0",
+    "@octokit/plugin-paginate-rest": "15.0.0",
     "@octokit/plugin-rest-endpoint-methods": "17.0.0",
     "@octokit/request": "10.0.13",
     "@octokit/request-error": "7.1.1",
