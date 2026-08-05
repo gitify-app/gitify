@@ -20,6 +20,14 @@
   --gitify-shadow-sm: var(--shadow-sm);
 
   --gitify-sidebar: #24292e;
+}
+
+/* Primer declares its `--fgColor-*` / `--bgColor-*` tokens on the `[data-color-mode]`
+ * wrapper rather than the root, so indirections built on them must be declared there
+ * too. At `:root` the `var()` references resolve to nothing, which makes the whole
+ * declaration invalid and leaves consumers falling back — status icons in particular
+ * inherit their colour and render black. */
+[data-color-mode] {
   --gitify-footer: var(--bgColor-neutral-muted);
 
   /* Status/accent colours, indirected so Glass can desaturate them. */
@@ -69,6 +77,10 @@
 [data-theme='glass'] {
   /* Sidebar stays dark in both modes so its forced-white icons stay legible. */
   --gitify-sidebar: rgb(22 27 34 / 0.55);
+}
+
+/* Same wrapper scoping as the base tokens above: these build on Primer's colours. */
+[data-theme='glass'] [data-color-mode] {
   --gitify-footer: var(--gitify-glass-tint);
 
   /* Restrained, near-native palette: blend GitHub's vivid status/accent colours
@@ -445,8 +457,11 @@
  * here: useAppearance withholds `.gitify-vibrant` under reduced transparency. */
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   [data-theme='glass'] {
-    --gitify-glass-tint: var(--bgColor-neutral-muted);
     --gitify-sidebar: #24292e;
+  }
+
+  [data-theme='glass'] [data-color-mode] {
+    --gitify-glass-tint: var(--bgColor-neutral-muted);
     --gitify-icon-open: var(--fgColor-open);
     --gitify-icon-closed: var(--fgColor-closed);
     --gitify-icon-done: var(--fgColor-done);
