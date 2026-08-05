@@ -49,28 +49,21 @@
 /* `data-theme` lives on the root while Primer sets `data-color-mode` on its
  * ThemeProvider descendant, so these must use a descendant combinator (not a
  * same-element compound) to define the mode-specific tints where the content
- * can inherit them. */
-[data-theme='glass'] [data-color-mode='light'] {
+ * can inherit them. `light-dark()` resolves against that wrapper's `color-scheme`,
+ * which also covers the System theme: it sets `data-color-mode="auto"`, so keying
+ * off `[data-color-mode='light'|'dark']` would match neither and leave every
+ * token undefined. */
+[data-theme='glass'] [data-color-mode] {
   /* Lighter tints let the native material carry the look instead of flattening it. */
-  --gitify-glass-tint: rgb(255 255 255 / 0.22);
-  --gitify-glass-border: rgb(0 0 0 / 0.14);
+  --gitify-glass-tint: light-dark(rgb(255 255 255 / 0.22), rgb(22 27 34 / 0.2));
+  --gitify-glass-border: light-dark(rgb(0 0 0 / 0.14), rgb(255 255 255 / 0.14));
 
-  /* Stepped control fills: rest < hover < active reads as gentle depth on glass. */
-  --gitify-glass-control-rest: rgb(255 255 255 / 0.35);
-  --gitify-glass-control-hover: rgb(255 255 255 / 0.5);
-  --gitify-glass-control-active: rgb(255 255 255 / 0.62);
-  --gitify-glass-control-disabled: rgb(255 255 255 / 0.18);
-}
-
-[data-theme='glass'] [data-color-mode='dark'] {
-  --gitify-glass-tint: rgb(22 27 34 / 0.2);
-  --gitify-glass-border: rgb(255 255 255 / 0.14);
-
-  /* On dark glass, controls lighten the material instead of darkening it. */
-  --gitify-glass-control-rest: rgb(255 255 255 / 0.09);
-  --gitify-glass-control-hover: rgb(255 255 255 / 0.15);
-  --gitify-glass-control-active: rgb(255 255 255 / 0.22);
-  --gitify-glass-control-disabled: rgb(255 255 255 / 0.05);
+  /* Stepped control fills: rest < hover < active reads as gentle depth on glass.
+   * On dark glass, controls lighten the material instead of darkening it. */
+  --gitify-glass-control-rest: light-dark(rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.09));
+  --gitify-glass-control-hover: light-dark(rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.15));
+  --gitify-glass-control-active: light-dark(rgb(255 255 255 / 0.62), rgb(255 255 255 / 0.22));
+  --gitify-glass-control-disabled: light-dark(rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.05));
 }
 
 [data-theme='glass'] {
@@ -276,15 +269,13 @@
     -webkit-backdrop-filter: blur(14px) saturate(1.5);
     backdrop-filter: blur(14px) saturate(1.5);
     border: 1px solid var(--gitify-glass-border);
-  }
-
-  .gitify-translucent [data-color-mode='light'] [data-component='Tooltip'] {
-    background-color: color-mix(in oklab, var(--bgColor-default), transparent 8%);
-    color: var(--fgColor-default);
-  }
-
-  .gitify-translucent [data-color-mode='dark'] [data-component='Tooltip'] {
-    background-color: color-mix(in oklab, var(--bgColor-neutral-emphasis), transparent 30%);
+    background-color: light-dark(
+      color-mix(in oklab, var(--bgColor-default), transparent 8%),
+      color-mix(in oklab, var(--bgColor-neutral-emphasis), transparent 30%)
+    );
+    /* The light tint needs the default dark text; dark glass keeps the
+     * on-emphasis white that Tooltip already defaults to. */
+    color: light-dark(var(--fgColor-default), var(--fgColor-onEmphasis));
   }
 
   /* Primer's AnchoredOverlay wrapper (what the `?` popouts render inside)
