@@ -67,8 +67,8 @@ importers:
         specifier: 15.0.0
         version: 15.0.0(@octokit/core@7.0.7)
       '@octokit/plugin-rest-endpoint-methods':
-        specifier: 17.0.0
-        version: 17.0.0(@octokit/core@7.0.7)
+        specifier: 18.0.0
+        version: 18.0.0(@octokit/core@7.0.7)
       '@octokit/request':
         specifier: 10.0.13
         version: 10.0.13
@@ -822,8 +822,8 @@ packages:
     peerDependencies:
       '@octokit/core': '>=6'
 
-  '@octokit/plugin-rest-endpoint-methods@17.0.0':
-    resolution: {integrity: sha512-B5yCyIlOJFPqUUeiD0cnBJwWJO8lkJs5d8+ze9QDP6SvfiXSz1BF+91+0MeI1d2yxgOhU/O+CvtiZ9jSkHhFAw==}
+  '@octokit/plugin-rest-endpoint-methods@18.0.0':
+    resolution: {integrity: sha512-1wM02pQTHEarWYij0Bb4gu8X8fBy2FJdI4HMTSFDxtYLbOkJErGVx5ywmM6jeS8tOmC0iCiRLrn6YsSIecUeOQ==}
     engines: {node: '>= 20'}
     peerDependencies:
       '@octokit/core': '>=6'
@@ -5432,10 +5432,10 @@ snapshots:
       '@octokit/core': 7.0.7
       '@octokit/types': 17.0.0
 
-  '@octokit/plugin-rest-endpoint-methods@17.0.0(@octokit/core@7.0.7)':
+  '@octokit/plugin-rest-endpoint-methods@18.0.0(@octokit/core@7.0.7)':
     dependencies:
       '@octokit/core': 7.0.7
-      '@octokit/types': 16.0.0
+      '@octokit/types': 17.0.0
 
   '@octokit/request-error@7.1.1':
     dependencies:
