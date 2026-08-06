@@ -8,6 +8,8 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
+import { Constants } from '../constants';
+
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import {
@@ -164,6 +166,15 @@ export const useNotifications = ({
     select: selectFilteredNotifications,
 
     placeholderData: keepPreviousData,
+
+    // Fresh for at least one poll cycle at the fastest possible interval, so
+    // data isn't treated as stale before a refetch could realistically have
+    // occurred. Uses the static floor rather than the live interval because
+    // the latter stretches with `X-Poll-Interval`; pinning staleTime to it
+    // would suppress mount/focus/reconnect refetches for as long as a forge
+    // asks Gitify to back off. Only those refetches are stale-gated - the
+    // poll itself fires on `refetchInterval` regardless.
+    staleTime: Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS,
 
     // Only the singleton side-effects host polls. Other consumers share the
     // cached data and would otherwise each schedule their own refetch timer.

@@ -81,11 +81,16 @@ export const Constants = {
 
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
 
-  // Query stale time in milliseconds, used by TanStack Query client
-  QUERY_STALE_TIME_MS: 30 * 1000, // 30 seconds
-
   // Cooldown before retrying a failed query, used by TanStack Query client
   QUERY_RETRY_DELAY_MS: 30 * 1000, // 30 seconds
+
+  // How long an unobserved query cache entry is kept before collection, used
+  // by TanStack Query client. Only entries nothing is subscribed to are
+  // collected, so this never applies to the notifications or accounts
+  // queries while the app runs - both are observed for the lifetime of
+  // `GlobalEffects`. It governs keys that fall out of use, such as the
+  // per-account-list keys left behind by adding or removing an account.
+  QUERY_GC_TIME_MS: 10 * 60 * 1000, // 10 minutes
 
   // GraphQL Argument Defaults
   GRAPHQL_ARGS: {
