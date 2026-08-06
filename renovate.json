@@ -48,6 +48,12 @@
       "semanticCommitScope": "deps-core"
     },
     {
+      "description": "Keep all @octokit packages in a single PR. They share @octokit/openapi-types, and a partial bump resolves two copies of it at once, so the `id: number | bigint` widening lands in only half the types and typechecking fails. `:separateMultipleMajorReleases` otherwise splits the group into one branch per target major.",
+      "matchPackageNames": ["@octokit/**"],
+      "groupName": "octokit",
+      "separateMultipleMajor": false
+    },
+    {
       "description": "electron-menubar is a first-party dependency, so skip the minimum release age gate and weekly schedule applied to other packages",
       "matchPackageNames": ["electron-menubar"],
       "minimumReleaseAge": "0 days",
