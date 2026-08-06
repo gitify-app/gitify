@@ -33,6 +33,16 @@ describe('renderer/hooks/useOnlineStatus.ts', () => {
     expect(result.current).toBe(true);
   });
 
+  it('reports offline on the very first render, before any effect runs', () => {
+    // `queryClient.ts` syncs onlineManager from the browser at import time,
+    // so a cold start while offline must not paint one frame as online.
+    onlineManager.setOnline(false);
+
+    const { result } = renderHook(() => useOnlineStatus());
+
+    expect(result.current).toBe(false);
+  });
+
   it('re-probes online state when the system wakes', () => {
     act(() => {
       onlineManager.setOnline(false);
