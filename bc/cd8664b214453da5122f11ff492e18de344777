@@ -1,0 +1,25 @@
+src/renderer/components/settings/AppearanceSettings.test.tsx
+  s_c9d8346fddafb8::t_990ab09bf4ad12 84-88,95,98
+src/renderer/hooks/useAppearance.ts
+  s_c9d8346fddafb8::t_0cf14cd30bf674 56-61,63,89,93-95
+  s_c9d8346fddafb8::t_dd8d8fc0d987ff 5-6
+src/renderer/App.css
+  s_c9d8346fddafb8::t_77bf11300b6ba2 88-90
+  s_c9d8346fddafb8::t_b6c61058313f74 91-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "bccd8664b214453da5122f11ff492e18de344777",
+  "prompts": {},
+  "sessions": {
+    "s_c9d8346fddafb8": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1e0cdd9f-bd3f-4f95-a022-b6f09dd5f3eb",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
