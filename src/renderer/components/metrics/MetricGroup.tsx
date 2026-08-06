@@ -32,6 +32,7 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
       <StackedPrsPill
         isStacked={notification.subject.isStacked}
+        stackPosition={notification.subject.stackPosition}
         stackDepth={notification.subject.stackDepth}
       />
 

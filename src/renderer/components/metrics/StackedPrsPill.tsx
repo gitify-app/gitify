@@ -8,24 +8,27 @@ import { MetricPill } from './MetricPill';
 
 export interface StackedPrsPillProps {
   isStacked?: boolean;
+  stackPosition?: number;
   stackDepth?: number;
 }
 
-export const StackedPrsPill: FC<StackedPrsPillProps> = ({ isStacked, stackDepth }) => {
+export const StackedPrsPill: FC<StackedPrsPillProps> = ({
+  isStacked,
+  stackPosition,
+  stackDepth,
+}) => {
   if (!isStacked) {
     return null;
   }
 
-  const contents = stackDepth
-    ? `Part of a stacked PR series (${stackDepth} PRs)`
-    : 'Part of a stacked PR series';
+  const metric = stackPosition && stackDepth ? `${stackPosition}/${stackDepth}` : undefined;
 
   return (
     <MetricPill
       color={IconColor.YELLOW}
-      contents={contents}
+      contents="Part of a stacked PR series"
       icon={GitMergeIcon}
-      metric={stackDepth}
+      metric={metric}
     />
   );
 };

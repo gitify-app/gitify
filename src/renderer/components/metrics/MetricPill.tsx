@@ -7,7 +7,7 @@ import { type IconColor, Size } from '../../types';
 
 export interface MetricPillProps {
   contents: string | ReactNode;
-  metric?: number;
+  metric?: string | number;
   icon: Icon;
   color: IconColor;
 }

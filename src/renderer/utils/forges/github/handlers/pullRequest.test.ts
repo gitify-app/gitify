@@ -250,6 +250,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviews: [],
         labels: [],
         isStacked: true,
+        stackPosition: 2,
         stackDepth: 3,
         linkedIssues: [],
         commentCount: 0,

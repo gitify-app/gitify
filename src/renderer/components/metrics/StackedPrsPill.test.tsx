@@ -9,7 +9,12 @@ describe('renderer/components/metrics/StackedPrsPill.tsx', () => {
   });
 
   it('renders a pill when stacked', () => {
+    const tree = renderWithProviders(<StackedPrsPill isStacked stackPosition={1} stackDepth={2} />);
+    expect(tree.getByText('1/2')).toBeInTheDocument();
+  });
+
+  it('renders a pill with no position/depth metric when position is missing', () => {
     const tree = renderWithProviders(<StackedPrsPill isStacked stackDepth={2} />);
-    expect(tree.getByText('2')).toBeInTheDocument();
+    expect(tree.queryByText('2')).not.toBeInTheDocument();
   });
 });

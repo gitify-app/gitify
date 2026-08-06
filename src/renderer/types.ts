@@ -396,6 +396,8 @@ export interface GitifySubject {
   labels?: GitifyLabels[];
   /** Whether the PR is part of a GitHub native stacked PR series */
   isStacked?: boolean;
+  /** This PR's 1-indexed position in the stack, when part of a stacked PR series */
+  stackPosition?: number;
   /** Total number of PRs in the stack, when part of a stacked PR series */
   stackDepth?: number;
   /** GitHub-native issue type (e.g. Bug, Feature, Task) */
