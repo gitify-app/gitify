@@ -30,15 +30,20 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     expect(updateSettingSpy).toHaveBeenCalledWith('openLinks', 'BACKGROUND');
   });
 
-  it('should toggle the keyboardShortcut checkbox', async () => {
+  it.each([
+    ['checkbox-keyboardShortcut', 'keyboardShortcut'],
+    ['checkbox-showNotifications', 'showNotifications'],
+    ['checkbox-openAtStartup', 'openAtStartup'],
+    ['checkbox-keepWindowOnBlur', 'keepWindowOnBlur'],
+  ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
       renderWithProviders(<SystemSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-keyboardShortcut'));
+    await userEvent.click(screen.getByTestId(testId));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('keyboardShortcut');
+    expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
   it('should reset global shortcut to default when customized', async () => {
