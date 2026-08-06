@@ -1,0 +1,28 @@
+src/renderer/components/settings/SystemSettings.test.tsx
+  s_c9d8346fddafb8::t_d07ecf9bdd7cde 33-38,43,46
+src/renderer/components/settings/TraySettings.test.tsx
+  s_c9d8346fddafb8::t_b2a91007ca7fb2 21-26,29
+src/renderer/components/settings/NotificationSettings.test.tsx
+  s_c9d8346fddafb8::t_5dcdaef2053daa 127-137,142,145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "3d127542864023d64e44b7484e58c30f8835edd2",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_c9d8346fddafb8": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1e0cdd9f-bd3f-4f95-a022-b6f09dd5f3eb",
+        "model": "gpt-5-mini"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
