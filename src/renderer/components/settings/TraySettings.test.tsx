@@ -18,24 +18,14 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
     });
   });
 
-  it('should toggle the showNotificationsCountInTray checkbox', async () => {
-    await userEvent.click(screen.getByTestId('checkbox-showNotificationsCountInTray'));
+  it.each([
+    ['checkbox-showNotificationsCountInTray', 'showNotificationsCountInTray'],
+    ['checkbox-useUnreadActiveIcon', 'useUnreadActiveIcon'],
+    ['checkbox-useAlternateIdleIcon', 'useAlternateIdleIcon'],
+  ] as const)('should toggle %s checkbox', async (testId, setting) => {
+    await userEvent.click(screen.getByTestId(testId));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('showNotificationsCountInTray');
-  });
-
-  it('should toggle the useUnreadActiveIcon checkbox', async () => {
-    await userEvent.click(screen.getByTestId('checkbox-useUnreadActiveIcon'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('useUnreadActiveIcon');
-  });
-
-  it('should toggle the useAlternateIdleIcon checkbox', async () => {
-    await userEvent.click(screen.getByTestId('checkbox-useAlternateIdleIcon'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('useAlternateIdleIcon');
+    expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 });
