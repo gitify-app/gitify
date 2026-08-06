@@ -1,4 +1,4 @@
-import { FeedPullRequestOpenIcon, IssueOpenedIcon } from '@primer/octicons-react';
+import { GitPullRequestIcon, IssueOpenedIcon, TagIcon } from '@primer/octicons-react';
 
 import {
   type AccountNotifications,
@@ -173,7 +173,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       title: 'Release 0.0.1',
       type: 'Release',
       icon: {
-        type: IssueOpenedIcon,
+        type: TagIcon,
         color: IconColor.GREEN,
       },
       defaultUserType: 'User',
@@ -204,7 +204,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       title: 'Bump Version [#123]',
       type: 'Pull Request',
       icon: {
-        type: FeedPullRequestOpenIcon,
+        type: GitPullRequestIcon,
         color: IconColor.GREEN,
       },
       defaultUserType: 'User',
