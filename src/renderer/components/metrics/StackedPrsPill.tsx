@@ -21,7 +21,8 @@ export const StackedPrsPill: FC<StackedPrsPillProps> = ({
     return null;
   }
 
-  const metric = stackPosition && stackDepth ? `${stackPosition}/${stackDepth}` : undefined;
+  const metric =
+    stackPosition != null && stackDepth != null ? `${stackPosition}/${stackDepth}` : undefined;
 
   return (
     <MetricPill
