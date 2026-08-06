@@ -72,15 +72,7 @@
   --gitify-glass-control-hover: light-dark(rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.15));
   --gitify-glass-control-active: light-dark(rgb(255 255 255 / 0.62), rgb(255 255 255 / 0.22));
   --gitify-glass-control-disabled: light-dark(rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.05));
-}
 
-[data-theme='glass'] {
-  /* Sidebar stays dark in both modes so its forced-white icons stay legible. */
-  --gitify-sidebar: rgb(22 27 34 / 0.55);
-}
-
-/* Same wrapper scoping as the base tokens above: these build on Primer's colours. */
-[data-theme='glass'] [data-color-mode] {
   --gitify-footer: var(--gitify-glass-tint);
 
   /* Monochrome status icons: type icons follow the surrounding text instead of
@@ -91,6 +83,11 @@
   --gitify-icon-done: currentColor;
   --gitify-icon-attention: currentColor;
   --gitify-link: color-mix(in oklab, var(--fgColor-link), var(--fgColor-muted) 30%);
+}
+
+[data-theme='glass'] {
+  /* Sidebar stays dark in both modes so its forced-white icons stay legible. */
+  --gitify-sidebar: rgb(22 27 34 / 0.55);
 }
 
 [data-theme='glass'][data-glass-material='backdrop-filter']

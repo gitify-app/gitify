@@ -81,17 +81,21 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(zoomResetSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle increase contrast checkbox for Classic', async () => {
+  it.each([
+    ['checkbox-increaseContrast', 'increaseContrast'],
+    ['checkbox-showAccountHeader', 'showAccountHeader'],
+    ['checkbox-wrapNotificationTitle', 'wrapNotificationTitle'],
+  ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
         accounts: [mockGitHubAppAccount],
       });
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
+    await userEvent.click(screen.getByTestId(testId));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('increaseContrast');
+    expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
   it('hides the increase contrast checkbox for Glass', async () => {
@@ -102,31 +106,5 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     });
 
     expect(screen.queryByTestId('checkbox-increaseContrast')).not.toBeInTheDocument();
-  });
-
-  it('should toggle account header checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
-      });
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('showAccountHeader');
-  });
-
-  it('should toggle wrap notification title checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
-      });
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('wrapNotificationTitle');
   });
 });

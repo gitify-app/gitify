@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 
 import { useTheme } from '@primer/react';
 
+import type { NativeThemeSource } from '../../shared/events';
+
 import { useSettingsStore } from '../stores';
 
 import { DesignLanguage } from '../types';
@@ -51,8 +53,14 @@ export function useAppearance(): void {
     // renders light/dark to match (else dark Glass gets a light material). Not
     // gated to macOS: on other platforms this simply aligns native chrome with
     // the chosen theme, which is harmless (SYSTEM sends 'system', i.e. no override).
+    let nativeTheme: NativeThemeSource = 'system';
+    if (colorMode === 'day') {
+      nativeTheme = 'light';
+    } else if (colorMode === 'night') {
+      nativeTheme = 'dark';
+    }
     window.gitify
-      .setNativeTheme(colorMode === 'day' ? 'light' : colorMode === 'night' ? 'dark' : 'system')
+      .setNativeTheme(nativeTheme)
       .catch((err) =>
         rendererLogError('useAppearance', 'Failed to sync native theme source', toError(err)),
       );
@@ -78,14 +86,13 @@ export function useAppearance(): void {
   ]);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', designLanguage);
+    document.documentElement.dataset.theme = designLanguage;
   }, [designLanguage]);
 
   useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-glass-material',
-      window.gitify.platform.isMacOS() ? 'vibrancy' : 'backdrop-filter',
-    );
+    document.documentElement.dataset.glassMaterial = window.gitify.platform.isMacOS()
+      ? 'vibrancy'
+      : 'backdrop-filter';
   }, []);
 
   useEffect(() => {
