@@ -214,6 +214,53 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       } satisfies Partial<GitifySubject>);
     });
 
+    it('pull request that is part of a native stacked PR series', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.stackEntry = {
+        position: 2,
+        stack: {
+          size: 3,
+        },
+      };
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: {
+          pullRequest: mockPullRequest,
+        },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result).toEqual({
+        number: 123,
+        state: 'OPEN',
+        user: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        reviewRequested: [],
+        reviews: [],
+        labels: [],
+        isStacked: true,
+        stackPosition: 2,
+        stackDepth: 3,
+        linkedIssues: [],
+        commentCount: 0,
+        milestone: undefined,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
+      } satisfies Partial<GitifySubject>);
+    });
+
     it('with comments', async () => {
       const mockPullRequest = mockPullRequestResponseNode({
         state: 'OPEN',

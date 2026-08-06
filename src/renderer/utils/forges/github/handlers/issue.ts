@@ -14,7 +14,7 @@ import { IconColor } from '../../../../types';
 import { fetchIssueByNumber } from '../client';
 import type { IssueDetailsFragment } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor } from './utils';
+import { getNotificationAuthor, mapIssueTypeColor } from './utils';
 
 class IssueHandler extends DefaultHandler {
   override readonly supportsMergedQueryEnrichment = true;
@@ -52,6 +52,9 @@ class IssueHandler extends DefaultHandler {
           name: label!.name,
           color: label!.color,
         })) ?? [],
+      issueType: issue.issueType
+        ? { name: issue.issueType.name, color: mapIssueTypeColor(issue.issueType.color) }
+        : undefined,
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
       reactionsCount: issueReactionCount,

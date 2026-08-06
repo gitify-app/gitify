@@ -254,6 +254,48 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
+
+    it('with native issue type', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.issueType = {
+        name: 'Bug',
+        color: 'RED',
+      };
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result).toEqual({
+        number: 123,
+        state: 'OPEN',
+        user: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        author: {
+          login: mockAuthor.login,
+          avatarUrl: mockAuthor.avatarUrl,
+          htmlUrl: mockAuthor.htmlUrl,
+          type: mockAuthor.type,
+        },
+        commentCount: 0,
+        htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
+        labels: [],
+        issueType: { name: 'Bug', color: IconColor.RED },
+        milestone: undefined,
+        reactionsCount: 0,
+        reactionGroups: noReactionGroups,
+      } satisfies Partial<GitifySubject>);
+    });
   });
 
   describe('iconType', () => {

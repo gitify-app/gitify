@@ -80,6 +80,9 @@ class PullRequestHandler extends DefaultHandler {
           name: label!.name,
           color: label!.color,
         })) ?? [],
+      isStacked: pr.stackEntry ? true : undefined,
+      stackPosition: pr.stackEntry?.position,
+      stackDepth: pr.stackEntry?.stack?.size,
       linkedIssues: pr.closingIssuesReferences?.nodes
         ?.filter(Boolean)
         .map((issue) => formatGitHubNumber(issue!.number)),

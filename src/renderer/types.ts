@@ -394,6 +394,14 @@ export interface GitifySubject {
   commentCount?: number;
   /** Labels names and colors */
   labels?: GitifyLabels[];
+  /** Whether the PR is part of a GitHub native stacked PR series */
+  isStacked?: boolean;
+  /** This PR's 1-indexed position in the stack, when part of a stacked PR series */
+  stackPosition?: number;
+  /** Total number of PRs in the stack, when part of a stacked PR series */
+  stackDepth?: number;
+  /** GitHub-native issue type (e.g. Bug, Feature, Task) */
+  issueType?: GitifyIssueType;
   /** Milestone state/title */
   milestone?: GitifyMilestone;
   /** Deep link to notification thread */
@@ -461,6 +469,12 @@ export interface GitifyNotificationDisplay {
   };
   /** Notification default user type for fallback scenarios */
   defaultUserType: UserType;
+}
+
+/** GitHub-native issue type, normalized to a Gitify icon color token */
+export interface GitifyIssueType {
+  name: string;
+  color: IconColor;
 }
 
 export type GitifyMilestone = MilestoneFieldsFragment;
