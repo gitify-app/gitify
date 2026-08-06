@@ -15,12 +15,5 @@ export const IssueTypesPill: FC<IssueTypesPillProps> = ({ issueType }) => {
     return null;
   }
 
-  return (
-    <MetricPill
-      color={issueType.color}
-      contents={issueType.name}
-      icon={IssueOpenedIcon}
-      metric={undefined}
-    />
-  );
+  return <MetricPill color={issueType.color} contents={issueType.name} icon={IssueOpenedIcon} />;
 };
