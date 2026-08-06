@@ -1,6 +1,9 @@
 import { mockAuthor } from '../__mocks__/response-mocks';
 
-import { getNotificationAuthor } from './utils';
+import { IconColor } from '../../../../types';
+
+import type { IssueTypeColor } from '../graphql/generated/graphql';
+import { getNotificationAuthor, mapIssueTypeColor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
@@ -30,6 +33,28 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
         htmlUrl: mockAuthor.htmlUrl,
         type: mockAuthor.type,
       });
+    });
+  });
+
+  describe('mapIssueTypeColor', () => {
+    it.each([
+      ['RED', IconColor.RED],
+      ['GREEN', IconColor.GREEN],
+      ['YELLOW', IconColor.YELLOW],
+      ['ORANGE', IconColor.YELLOW],
+      ['BLUE', IconColor.PURPLE],
+      ['PURPLE', IconColor.PURPLE],
+      ['PINK', IconColor.PURPLE],
+      ['GRAY', IconColor.GRAY],
+    ] satisfies [IssueTypeColor, IconColor][])(
+      'maps %s to the expected token',
+      (color, expected) => {
+        expect(mapIssueTypeColor(color)).toBe(expected);
+      },
+    );
+
+    it('falls back to gray for a colour Gitify does not know about', () => {
+      expect(mapIssueTypeColor('CHARTREUSE' as IssueTypeColor)).toBe(IconColor.GRAY);
     });
   });
 });
