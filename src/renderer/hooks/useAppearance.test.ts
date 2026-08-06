@@ -33,7 +33,11 @@ describe('renderer/hooks/useAppearance.ts', () => {
   afterEach(() => {
     document.documentElement.removeAttribute('data-theme');
     document.documentElement.removeAttribute('data-glass-material');
-    document.documentElement.classList.remove('gitify-vibrant', 'gitify-translucent');
+    document.documentElement.classList.remove(
+      'gitify-vibrant',
+      'gitify-translucent',
+      'gitify-colored-icons',
+    );
   });
 
   it('marks the root with the Classic design language by default', () => {
@@ -176,5 +180,35 @@ describe('renderer/hooks/useAppearance.ts', () => {
 
     expect(window.gitify.setWindowVibrancy).toHaveBeenCalledWith(false);
     spy.mockRestore();
+  });
+
+  it('marks the root for colored status icons under Glass when enabled', () => {
+    useSettingsStore.setState({
+      designLanguage: DesignLanguage.GLASS,
+      showStatusIconColors: true,
+    });
+
+    renderHook(() => useAppearance());
+
+    expect(document.documentElement.classList.contains('gitify-colored-icons')).toBe(true);
+  });
+
+  it('keeps Glass status icons monochrome by default', () => {
+    useSettingsStore.setState({ designLanguage: DesignLanguage.GLASS });
+
+    renderHook(() => useAppearance());
+
+    expect(document.documentElement.classList.contains('gitify-colored-icons')).toBe(false);
+  });
+
+  it('ignores the status icon colors setting under Classic', () => {
+    useSettingsStore.setState({
+      designLanguage: DesignLanguage.CLASSIC,
+      showStatusIconColors: true,
+    });
+
+    renderHook(() => useAppearance());
+
+    expect(document.documentElement.classList.contains('gitify-colored-icons')).toBe(false);
   });
 });

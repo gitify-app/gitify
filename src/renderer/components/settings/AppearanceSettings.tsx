@@ -32,6 +32,7 @@ export const AppearanceSettings: FC = () => {
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
+  const showStatusIconColors = useSettingsStore((s) => s.showStatusIconColors);
 
   const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -101,6 +102,20 @@ export const AppearanceSettings: FC = () => {
             </Text>
           }
           visible={designLanguage === DesignLanguage.CLASSIC}
+        />
+
+        <Checkbox
+          checked={showStatusIconColors}
+          label="Show status icon colors"
+          name="showStatusIconColors"
+          onChange={() => toggleSetting('showStatusIconColors')}
+          tooltip={
+            <Text>
+              Color the notification type icons by their state (open, closed, done, attention).
+              Glass renders them monochrome by default.
+            </Text>
+          }
+          visible={designLanguage === DesignLanguage.GLASS}
         />
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">

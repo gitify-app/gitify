@@ -85,6 +85,16 @@
   --gitify-link: color-mix(in oklab, var(--fgColor-link), var(--fgColor-muted) 30%);
 }
 
+/* Opt-in status icon colours under Glass (`.gitify-colored-icons`, set from the
+ * appearance setting): a restrained palette that blends the vivid Primer state
+ * colours toward the muted foreground. */
+.gitify-colored-icons [data-color-mode] {
+  --gitify-icon-open: color-mix(in oklab, var(--fgColor-open), var(--fgColor-muted) 45%);
+  --gitify-icon-closed: color-mix(in oklab, var(--fgColor-closed), var(--fgColor-muted) 45%);
+  --gitify-icon-done: color-mix(in oklab, var(--fgColor-done), var(--fgColor-muted) 45%);
+  --gitify-icon-attention: color-mix(in oklab, var(--fgColor-attention), var(--fgColor-muted) 45%);
+}
+
 [data-theme='glass'] {
   /* Sidebar stays dark in both modes so its forced-white icons stay legible. */
   --gitify-sidebar: rgb(22 27 34 / 0.55);

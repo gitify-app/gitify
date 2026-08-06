@@ -31,6 +31,7 @@ export function useAppearance(): void {
   const designLanguage = useSettingsStore((s) => s.designLanguage);
   const theme = useSettingsStore((s) => s.theme);
   const increaseContrast = useSettingsStore((s) => s.increaseContrast);
+  const showStatusIconColors = useSettingsStore((s) => s.showStatusIconColors);
   const prefersReducedTransparency = usePrefersReducedTransparency();
   const prefersContrast = usePrefersContrast();
 
@@ -94,6 +95,13 @@ export function useAppearance(): void {
       ? 'vibrancy'
       : 'backdrop-filter';
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle(
+      'gitify-colored-icons',
+      designLanguage === DesignLanguage.GLASS && showStatusIconColors,
+    );
+  }, [designLanguage, showStatusIconColors]);
 
   useEffect(() => {
     const root = document.documentElement;
