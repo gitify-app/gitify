@@ -1,3 +1,4 @@
+import { nativeTheme } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
@@ -30,6 +31,9 @@ vi.mock('electron', () => ({
   powerMonitor: {
     on: vi.fn(),
   } satisfies Pick<Electron.PowerMonitor, 'on'>,
+  nativeTheme: {
+    themeSource: 'system',
+  } satisfies Pick<Electron.NativeTheme, 'themeSource'>,
 }));
 
 describe('main/handlers/system.ts', () => {
@@ -127,6 +131,19 @@ describe('main/handlers/system.ts', () => {
         (menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } })
           .webContents.send,
       ).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
+    });
+  });
+
+  describe('SET_NATIVE_THEME', () => {
+    it('syncs nativeTheme.themeSource with the requested source', () => {
+      registerSystemHandlers(menubar);
+
+      const handler = handleMock.mock.calls.find(
+        (call: unknown[]) => call[0] === EVENTS.SET_NATIVE_THEME,
+      )?.[1];
+      handler?.({}, 'dark');
+
+      expect(nativeTheme.themeSource).toBe('dark');
     });
   });
 

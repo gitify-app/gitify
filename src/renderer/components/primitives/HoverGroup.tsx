@@ -18,6 +18,7 @@ export const HoverGroup: FC<HoverGroupProps> = ({ bgColor, children }: HoverGrou
     <Stack
       align="center"
       className={cn(
+        'gitify-hover-actions',
         'absolute inset-y-0 right-0 pr-1',
         'opacity-0 transition-opacity group-hover:opacity-100',
         bgColor,

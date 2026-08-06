@@ -6,6 +6,8 @@ import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 
 import { useSettingsStore } from '../../stores';
 
+import { DesignLanguage } from '../../types';
+
 import * as zoom from '../../utils/ui/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 
@@ -29,17 +31,29 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSettingSpy).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
-  it('should toggle increase contrast checkbox', async () => {
+  it('should change the design language dropdown', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    await userEvent.selectOptions(screen.getByTestId('settings-design-language'), 'glass');
+
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
+  });
+
+  it('hides accessibility color modes when Glass is the active design language', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
+        settings: { designLanguage: DesignLanguage.GLASS },
       });
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('increaseContrast');
+    expect(screen.getByRole('option', { name: 'System' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'Dark default' })).toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'Soft dark' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'Light colorblind' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'Dark Tritanopia' })).not.toBeInTheDocument();
   });
 
   it('should update the zoom values when using the zoom buttons', async () => {
@@ -67,29 +81,30 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(zoomResetSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle account header checkbox', async () => {
+  it.each([
+    ['checkbox-increaseContrast', 'increaseContrast'],
+    ['checkbox-showAccountHeader', 'showAccountHeader'],
+    ['checkbox-wrapNotificationTitle', 'wrapNotificationTitle'],
+  ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
         accounts: [mockGitHubAppAccount],
       });
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-showAccountHeader'));
+    await userEvent.click(screen.getByTestId(testId));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('showAccountHeader');
+    expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
-  it('should toggle wrap notification title checkbox', async () => {
+  it('hides the increase contrast checkbox for Glass', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
+        settings: { designLanguage: DesignLanguage.GLASS },
       });
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-wrapNotificationTitle'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('wrapNotificationTitle');
+    expect(screen.queryByTestId('checkbox-increaseContrast')).not.toBeInTheDocument();
   });
 });

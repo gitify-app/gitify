@@ -39,23 +39,23 @@ const config: Config = {
         gitify: {
           font: 'var(--fgColor-default)',
           background: 'var(--gitify-background)',
-          sidebar: '#24292e',
-          footer: 'var(--bgColor-neutral-muted)',
+          sidebar: 'var(--gitify-sidebar)',
+          footer: 'var(--gitify-footer)',
 
           caution: colors.orange[600],
           error: 'var(--fgColor-danger)',
-          link: 'var(--fgColor-link)',
+          link: 'var(--gitify-link)',
           input: {
             rest: 'var(--control-bgColor-rest)',
             focus: 'var(--control-bgColor-active)',
           },
 
           icon: {
-            attention: 'var(--fgColor-attention)',
-            closed: 'var(--fgColor-closed)',
-            done: 'var(--fgColor-done)',
+            attention: 'var(--gitify-icon-attention)',
+            closed: 'var(--gitify-icon-closed)',
+            done: 'var(--gitify-icon-done)',
             muted: 'var(--fgColor-muted)',
-            open: 'var(--fgColor-open)',
+            open: 'var(--gitify-icon-open)',
           },
 
           counter: {
@@ -102,29 +102,18 @@ const config: Config = {
       });
       // TODO - ideally we would use GitHub Primer Design Tokens instead of TailwindCSS
       addBase({
-        '[data-color-mode="light"]': {
-          '--gitify-background': 'var(--bgColor-default)',
-          '--gitify-account-error-bg': 'var(--bgColor-danger-muted)',
+        '[data-color-mode]': {
+          '--gitify-background': 'light-dark(var(--bgColor-default), var(--bgColor-muted))',
+          '--gitify-account-error-bg':
+            'light-dark(var(--bgColor-danger-muted), var(--bgColor-danger-emphasis))',
 
-          '--gitify-scrollbar-track': colors.gray[100],
-          '--gitify-scrollbar-thumb': colors.gray[300],
-          '--gitify-scrollbar-thumb-hover': colors.gray[400],
+          '--gitify-scrollbar-track': `light-dark(${colors.gray[100]}, ${colors.gray[900]})`,
+          '--gitify-scrollbar-thumb': `light-dark(${colors.gray[300]}, ${colors.gray[700]})`,
+          '--gitify-scrollbar-thumb-hover': `light-dark(${colors.gray[400]}, ${colors.gray[600]})`,
 
-          '--gitify-counter-primary': colors.blue[300],
-          '--gitify-counter-secondary': colors.gray[200],
-          '--gitify-counter-text': colors.gray[800],
-        },
-        '[data-color-mode="dark"]': {
-          '--gitify-background': 'var(--bgColor-muted)',
-          '--gitify-account-error-bg': 'var(--bgColor-danger-emphasis)',
-
-          '--gitify-scrollbar-track': colors.gray[900],
-          '--gitify-scrollbar-thumb': colors.gray[700],
-          '--gitify-scrollbar-thumb-hover': colors.gray[600],
-
-          '--gitify-counter-primary': colors.blue[400],
-          '--gitify-counter-secondary': colors.gray[600],
-          '--gitify-counter-text': colors.gray[100],
+          '--gitify-counter-primary': `light-dark(${colors.blue[300]}, ${colors.blue[400]})`,
+          '--gitify-counter-secondary': `light-dark(${colors.gray[200]}, ${colors.gray[600]})`,
+          '--gitify-counter-text': `light-dark(${colors.gray[800]}, ${colors.gray[100]})`,
         },
       });
     }),

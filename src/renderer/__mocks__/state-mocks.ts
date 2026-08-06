@@ -3,6 +3,7 @@ import { Constants } from '../constants';
 import {
   type Account,
   type AppearanceSettingsState,
+  DesignLanguage,
   GroupBy,
   type KeyboardAcceleratorShortcut,
   type NotificationSettingsState,
@@ -24,6 +25,7 @@ export const mockAuth: { accounts: Account[] } = {
 export const mockToken = 'token-123-456' as Token;
 
 const mockAppearanceSettings: AppearanceSettingsState = {
+  designLanguage: DesignLanguage.CLASSIC,
   theme: Theme.SYSTEM,
   increaseContrast: false,
   zoomPercentage: 100 as Percentage,

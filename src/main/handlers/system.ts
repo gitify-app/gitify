@@ -1,11 +1,12 @@
-import { app, powerMonitor, shell } from 'electron';
+import { app, nativeTheme, powerMonitor, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
 import { logInfo } from '../../shared/logger';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
-import { applyKeepWindowOnBlur } from '../lifecycle/window';
+import { applyKeepWindowOnBlur, applyWindowVibrancy } from '../lifecycle/window';
+import { isDevMode } from '../utils';
 
 /**
  * Register IPC handlers for OS-level system operations.
@@ -73,8 +74,14 @@ export function registerSystemHandlers(mb: Menubar): void {
 
   /**
    * Update the application's auto-launch setting based on the provided configuration.
+   *
+   * Skipped in development: the unsigned dev Electron binary cannot register as a
+   * macOS login item, so calling this would only emit a Chromium error log.
    */
   onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings) => {
+    if (isDevMode()) {
+      return;
+    }
     app.setLoginItemSettings(settings);
   });
 
@@ -83,5 +90,25 @@ export function registerSystemHandlers(mb: Menubar): void {
    */
   onMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, (_, value: boolean) => {
     applyKeepWindowOnBlur(mb, value);
+  });
+
+  /**
+   * Toggle the macOS window vibrancy material for the Glass design language.
+   * Request/response so the renderer can await the material before clearing the
+   * window's own background (avoids a black frame during the switch).
+   */
+  handleMainEvent(EVENTS.SET_WINDOW_VIBRANCY, (_, enabled: boolean) => {
+    applyWindowVibrancy(mb, enabled);
+    return undefined;
+  });
+
+  /**
+   * Sync the native appearance with the app's color mode so the macOS vibrancy
+   * material renders light/dark to match; without this, dark Glass gets a light
+   * material and its light text becomes illegible.
+   */
+  handleMainEvent(EVENTS.SET_NATIVE_THEME, (_, source) => {
+    nativeTheme.themeSource = source;
+    return undefined;
   });
 }

@@ -7,6 +7,472 @@
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
 
+/**
+ * Design-language chrome tokens: a language re-skins radius/shadow/blur by
+ * re-pointing these `--gitify-*` vars under `[data-theme]`. Classic aliases
+ * Tailwind's own values. `@theme inline` (not plain `@theme`) is required so the
+ * utilities re-resolve under the active scope instead of freezing at `:root`.
+ */
+:root {
+  --gitify-radius-sm: var(--radius-sm);
+  --gitify-radius-md: var(--radius-md);
+  --gitify-radius-full: calc(infinity * 1px);
+  --gitify-shadow-sm: var(--shadow-sm);
+
+  --gitify-sidebar: #24292e;
+}
+
+/* Primer declares its `--fgColor-*` / `--bgColor-*` tokens on the `[data-color-mode]`
+ * wrapper rather than the root, so indirections built on them must be declared there
+ * too. At `:root` the `var()` references resolve to nothing, which makes the whole
+ * declaration invalid and leaves consumers falling back — status icons in particular
+ * inherit their colour and render black. */
+[data-color-mode] {
+  --gitify-footer: var(--bgColor-neutral-muted);
+
+  /* Status/accent colours, indirected so Glass can desaturate them. */
+  --gitify-icon-open: var(--fgColor-open);
+  --gitify-icon-closed: var(--fgColor-closed);
+  --gitify-icon-done: var(--fgColor-done);
+  --gitify-icon-attention: var(--fgColor-attention);
+  --gitify-link: var(--fgColor-link);
+}
+
+@theme inline {
+  --radius-gitify-sm: var(--gitify-radius-sm);
+  --radius-gitify-md: var(--gitify-radius-md);
+  --radius-gitify-full: var(--gitify-radius-full);
+  --shadow-gitify-sm: var(--gitify-shadow-sm);
+}
+
+/**
+ * Glass design language. The window is one continuous material: the shell
+ * (sidebar/footer) and every functional control (buttons, inputs, pills,
+ * checkboxes) become translucent tints with hairline borders, while the
+ * content layer (notification rows) stays clear so the material shows through.
+ * The blur comes from the OS on macOS (`vibrancy`) or CSS `backdrop-filter`
+ * elsewhere. Follows Apple's materials guidance: glass for functional chrome,
+ * vibrant foregrounds on top of tints, hairlines for separation.
+ */
+/* `data-theme` lives on the root while Primer sets `data-color-mode` on its
+ * ThemeProvider descendant, so these must use a descendant combinator (not a
+ * same-element compound) to define the mode-specific tints where the content
+ * can inherit them. `light-dark()` resolves against that wrapper's `color-scheme`,
+ * which also covers the System theme: it sets `data-color-mode="auto"`, so keying
+ * off `[data-color-mode='light'|'dark']` would match neither and leave every
+ * token undefined. */
+[data-theme='glass'] [data-color-mode] {
+  /* Lighter tints let the native material carry the look instead of flattening it. */
+  --gitify-glass-tint: light-dark(rgb(255 255 255 / 0.22), rgb(22 27 34 / 0.2));
+  --gitify-glass-border: light-dark(rgb(0 0 0 / 0.14), rgb(255 255 255 / 0.14));
+
+  /* Stepped control fills: rest < hover < active reads as gentle depth on glass.
+   * On dark glass, controls lighten the material instead of darkening it. */
+  --gitify-glass-control-rest: light-dark(rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.09));
+  --gitify-glass-control-hover: light-dark(rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.15));
+  --gitify-glass-control-active: light-dark(rgb(255 255 255 / 0.62), rgb(255 255 255 / 0.22));
+  --gitify-glass-control-disabled: light-dark(rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.05));
+
+  --gitify-footer: var(--gitify-glass-tint);
+
+  /* Monochrome status icons: type icons follow the surrounding text instead of
+   * GitHub's vivid state colours, keeping the glass surface restrained. The
+   * accessibility degradation block below restores the colour coding. */
+  --gitify-icon-open: currentColor;
+  --gitify-icon-closed: currentColor;
+  --gitify-icon-done: currentColor;
+  --gitify-icon-attention: currentColor;
+  --gitify-link: color-mix(in oklab, var(--fgColor-link), var(--fgColor-muted) 30%);
+}
+
+[data-theme='glass'] {
+  /* Sidebar stays dark in both modes so its forced-white icons stay legible. */
+  --gitify-sidebar: rgb(22 27 34 / 0.55);
+}
+
+[data-theme='glass'][data-glass-material='backdrop-filter']
+  :where(.bg-gitify-sidebar, .bg-gitify-footer) {
+  /* Softer, more material-like than a heavy web blur. */
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  backdrop-filter: blur(22px) saturate(1.2);
+}
+
+/**
+ * All-in Glass: when translucency is actually on (`.gitify-translucent`, gated by
+ * a no-preference media query so OS Reduce Transparency still wins), the window is
+ * one continuous glass surface. The sidebar loses its fill and becomes icons
+ * floating directly on the glass.
+ */
+@media (prefers-reduced-transparency: no-preference) {
+  /* Primer sets its colour tokens on the `data-color-mode` wrapper, so Glass
+   * overrides of Primer tokens must target that element (root-level ones are
+   * shadowed by it). This re-skins Primer's button family as glass. */
+  .gitify-translucent [data-color-mode] {
+    /* Neutralise the vivid primary CTA (success-green) toward neutral. */
+    --button-primary-bgColor-rest: color-mix(
+      in oklab,
+      var(--bgColor-success-emphasis),
+      var(--fgColor-muted) 55%
+    );
+    --button-primary-bgColor-hover: color-mix(
+      in oklab,
+      var(--bgColor-success-emphasis),
+      var(--fgColor-muted) 42%
+    );
+    --button-primary-bgColor-active: color-mix(
+      in oklab,
+      var(--bgColor-success-emphasis),
+      var(--fgColor-muted) 34%
+    );
+
+    /* Default buttons (footer pills, steppers, secondary actions) become glass
+     * tiles: stepped translucent fills with a hairline border, no drop shadow. */
+    --button-default-bgColor-rest: var(--gitify-glass-control-rest);
+    --button-default-bgColor-hover: var(--gitify-glass-control-hover);
+    --button-default-bgColor-active: var(--gitify-glass-control-active);
+    --button-default-bgColor-selected: var(--gitify-glass-control-active);
+    --button-default-bgColor-disabled: var(--gitify-glass-control-disabled);
+    --button-default-borderColor-rest: var(--gitify-glass-border);
+    --button-default-borderColor-hover: var(--gitify-glass-border);
+    --button-default-borderColor-active: var(--gitify-glass-border);
+    --button-default-shadow-resting: none;
+    --button-default-shadow-inset: none;
+
+    /* Danger buttons behave like normal glass buttons: the same neutral tile
+     * and wash steps as the default variant, with the red foreground/icon as
+     * the only destructive signal, and it never changes between states
+     * (Primer's danger hover would otherwise flip the text to white). */
+    --button-danger-bgColor-rest: var(--gitify-glass-control-rest);
+    --button-danger-bgColor-hover: var(--gitify-glass-control-hover);
+    --button-danger-bgColor-active: var(--gitify-glass-control-active);
+    --button-danger-bgColor-disabled: var(--gitify-glass-control-disabled);
+    --button-danger-fgColor-hover: var(--button-danger-fgColor-rest);
+    --button-danger-fgColor-active: var(--button-danger-fgColor-rest);
+    --button-danger-iconColor-hover: var(--button-danger-iconColor-rest);
+    --button-danger-iconColor-active: var(--button-danger-iconColor-rest);
+    --button-danger-borderColor-hover: var(--gitify-glass-border);
+    --button-danger-borderColor-active: var(--gitify-glass-border);
+
+    /* Bare-icon buttons (band actions, header icons) lift with a glass wash on
+     * hover instead of Primer's solid gray square. Row hover-actions stay fully
+     * bare (see the `.gitify-hover-actions` rule below). */
+    --button-invisible-bgColor-hover: var(--gitify-glass-control-hover);
+    --button-invisible-bgColor-active: var(--gitify-glass-control-active);
+  }
+
+  .gitify-translucent .gitify-sidebar {
+    background: transparent;
+    /* Active nav item: a translucent accent wash, not a solid GitHub-green tile. */
+    --button-primary-bgColor-rest: color-mix(in oklab, var(--fgColor-accent), transparent 82%);
+    --button-primary-bgColor-hover: color-mix(in oklab, var(--fgColor-accent), transparent 74%);
+    --button-primary-bgColor-active: color-mix(in oklab, var(--fgColor-accent), transparent 68%);
+    /* Sidebar icon hovers stay whisper-quiet against the glass. */
+    --button-invisible-bgColor-hover: var(--gitify-glass-control-rest);
+    --button-invisible-bgColor-active: var(--gitify-glass-control-hover);
+  }
+
+  /* Repo grouping bands become faint glass tints, so the list reads as one
+   * surface while keeping the grouping. The account header floats directly on
+   * the glass with no tint. Bands and notification rows float as rounded cards
+   * on the glass: a small inline inset makes the rounding visible (macOS
+   * list-row geometry), and the band lifts with the same glass wash as row
+   * hover. */
+  .gitify-translucent .bg-gitify-repository {
+    background: color-mix(in oklab, var(--gitify-glass-tint), transparent 62%);
+  }
+
+  .gitify-translucent .bg-gitify-account-rest {
+    background: transparent;
+  }
+
+  .gitify-translucent :where(.bg-gitify-repository, .bg-gitify-account-rest):hover {
+    background: var(--gitify-glass-control-rest);
+  }
+
+  /* The repo-name button inside a band is `variant="invisible"`; suppress its
+   * own hover wash so it doesn't double-paint over the band's wash with a hard
+   * edge where the button ends. The band hover already lifts the whole row. */
+  .gitify-translucent :where(.bg-gitify-repository, .bg-gitify-account-rest) > button {
+    --button-invisible-bgColor-hover: transparent;
+    --button-invisible-bgColor-active: transparent;
+  }
+
+  .gitify-translucent :where(.bg-gitify-repository, .bg-gitify-account-rest),
+  .gitify-translucent .group.relative.border-b {
+    margin-inline: 4px;
+    border-radius: var(--gitify-radius-md);
+  }
+
+  /* Account scope rows (Accounts route) match the control tint. */
+  .gitify-translucent :where(.bg-gitify-accounts) {
+    background: var(--gitify-glass-control-rest);
+  }
+
+  /* The account-profile button (avatar + username) sits bare inside the card:
+   * no tile at rest, just the hover wash. `data-testid` is the stable hook. */
+  .gitify-translucent [data-testid='account-profile'] {
+    --button-default-bgColor-rest: transparent;
+    --button-default-borderColor-rest: transparent;
+  }
+
+  /* Row hover is a light glass wash instead of the solid Classic fill. */
+  .gitify-translucent .hover\:bg-gitify-notification-hover:hover {
+    background-color: var(--gitify-glass-control-rest);
+  }
+
+  /* Inline-code spans inside notification titles share the same token as a
+   * plain (non-hover) class; give them the frosted treatment too. */
+  .gitify-translucent .bg-gitify-notification-hover {
+    background-color: var(--gitify-glass-control-rest);
+  }
+
+  /* Count pills (notification counts, filter counts) become borderless frosted
+   * chips: at this size a hairline reads as noise, and macOS count badges rely
+   * on fill contrast alone. Covers both CustomCounter and the Primer Labels
+   * used by the metric pills (whose muted border is dropped). */
+  .gitify-translucent :where(.bg-gitify-counter-primary, .bg-gitify-counter-secondary) {
+    background-color: var(--gitify-glass-control-rest);
+  }
+
+  .gitify-translucent [data-color-mode] [data-component='Label'][data-variant='secondary'] {
+    background-color: var(--gitify-glass-control-rest);
+    border-color: transparent;
+  }
+
+  /* Metric-pill hover lifts to the next glass step instead of the solid fill. */
+  .gitify-translucent .hover\:bg-gitify-notification-pill-hover:hover {
+    background-color: var(--gitify-glass-control-hover);
+  }
+
+  /* Avatars get a hairline ring so white-backed org logos don't read as solid
+   * tiles floating on the glass. */
+  .gitify-translucent [data-component='Avatar'] {
+    box-shadow: 0 0 0 1px var(--gitify-glass-border);
+  }
+
+  /* Issue-label tokens carry their GitHub colour as inline `--label-r/g/b`
+   * vars; re-render them as tinted glass (same hue, mostly translucent, hue
+   * hairline) instead of solid chips. Text keeps Primer's contrast-chosen
+   * colour, which still reads on the softened fill. */
+  .gitify-translucent [data-color-mode] [style*='--label-r'] {
+    background-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.78);
+    border-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.4);
+  }
+
+  /* Row action buttons (mark-as-read / done / chevron) float as bare icons under
+   * Glass: drop the hover band behind the group and the invisible-button fills.
+   * The `:hover` variant guards against the `group-hover:` utility winning on
+   * specificity when the row is hovered. */
+  .gitify-translucent .gitify-hover-actions,
+  .gitify-translucent .group:hover .gitify-hover-actions {
+    background: transparent;
+  }
+
+  /* Hover tooltips float as frosted glass with a hairline (the macOS tooltip
+   * material) instead of Primer's solid slab: light frosted with dark text in
+   * light mode, dark frosted with white text in dark mode. Targets
+   * `[data-component='Tooltip']` rather than `[role='tooltip']` because Primer
+   * label-type tooltips (from `aria-label`, e.g. the sidebar issue/PR links)
+   * carry no role and would stay black otherwise. The `::after` caret is only
+   * a hit-area, so restyling the body is safe. */
+  .gitify-translucent [data-color-mode] [data-component='Tooltip'] {
+    -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    backdrop-filter: blur(14px) saturate(1.5);
+    border: 1px solid var(--gitify-glass-border);
+    background-color: light-dark(
+      color-mix(in oklab, var(--bgColor-default), transparent 8%),
+      color-mix(in oklab, var(--bgColor-neutral-emphasis), transparent 30%)
+    );
+    /* The light tint needs the default dark text; dark glass keeps the
+     * on-emphasis white that Tooltip already defaults to. */
+    color: light-dark(var(--fgColor-default), var(--fgColor-onEmphasis));
+  }
+
+  /* Primer's AnchoredOverlay wrapper (what the `?` popouts render inside)
+   * paints a solid background beneath the translucent popout, stacking it to
+   * near-opaque. Clear it so only the popout's own frosted fill shows. */
+  .gitify-translucent [data-color-mode] [data-component='AnchoredOverlay'] {
+    background: transparent;
+  }
+
+  /* The `?` info popouts match the hover-tooltips: the same frosted fill,
+   * blur and hairline. `bgColor-default` keeps them mode-aware without a
+   * per-mode split. (Selector weights past the tooltip rules above.) */
+  .gitify-translucent [role='tooltip'].bg-gitify-tooltip-popout {
+    background-color: color-mix(in oklab, var(--bgColor-default), transparent 8%);
+    -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    backdrop-filter: blur(14px) saturate(1.5);
+    border-color: var(--gitify-glass-border);
+  }
+
+  .gitify-translucent .gitify-hover-actions :where(button) {
+    --button-invisible-bgColor-rest: transparent;
+    --button-invisible-bgColor-hover: transparent;
+    --button-invisible-bgColor-active: transparent;
+
+    /* Bare icons still need affordance: dimmed at rest, full colour on hover,
+     * a press dip on active. */
+    opacity: 0.65;
+    transition: opacity 120ms ease-in-out;
+  }
+
+  .gitify-translucent .gitify-hover-actions :where(button):hover {
+    opacity: 1;
+  }
+
+  .gitify-translucent .gitify-hover-actions :where(button):active {
+    opacity: 0.85;
+  }
+
+  /* Let the glass show through the scrollbar: drop the opaque track fill so only
+   * a slim, floating translucent thumb remains. */
+  .gitify-translucent *::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .gitify-translucent *::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklab, var(--fgColor-muted), transparent 60%);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .gitify-translucent *::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--fgColor-muted), transparent 35%);
+  }
+
+  /* With bare (background-less) action buttons there's no band to hide the row
+   * text behind them, so on hover fade the row content out under the buttons
+   * instead — the title/number dissolve into the glass rather than colliding.
+   * `--gitify-actions` (rendered button count, set on the row) sizes the fade so
+   * rows with fewer buttons don't over-fade: each small IconButton is ~1.75rem
+   * plus the group's right padding, with a 2rem soft leading edge. */
+  .gitify-translucent .group:hover .gitify-row-content {
+    --gitify-actions-width: calc(var(--gitify-actions, 3) * 1.75rem + 0.25rem);
+    -webkit-mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - var(--gitify-actions-width) - 2rem),
+      transparent calc(100% - var(--gitify-actions-width))
+    );
+    mask-image: linear-gradient(
+      to right,
+      #000 calc(100% - var(--gitify-actions-width) - 2rem),
+      transparent calc(100% - var(--gitify-actions-width))
+    );
+  }
+
+  /* Form controls (Select / TextInput) read as glass instead of Primer's solid
+   * field: a faint translucent fill, borderless at rest (macOS controls carry
+   * no outline), with an accent ring only while focused. Targets the stable
+   * `[data-component]` wrapper, not Primer's hashed class. */
+  .gitify-translucent [data-color-mode] [data-component='TextInput'] {
+    background-color: var(--gitify-glass-control-rest);
+    border: none;
+    box-shadow: none;
+  }
+
+  .gitify-translucent [data-color-mode] [data-component='TextInput']:focus-within {
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--fgColor-accent), transparent 40%);
+  }
+
+  /* Primer's `<select>` has `background-color: inherit`, which would re-paint
+   * the wrapper's glass fill over itself (a darker slab beside the chevron).
+   * Only the wrapper paints. */
+  .gitify-translucent [data-color-mode] [data-component='Select'] {
+    background-color: transparent;
+  }
+
+  /* Checkboxes and radios trade the stark opaque white face for a glass one;
+   * checked state fills with the vibrant accent (per materials guidance,
+   * vibrant foregrounds carry legibility on translucent surfaces). */
+  .gitify-translucent [data-color-mode] :where(input[type='checkbox'], input[type='radio']) {
+    appearance: none;
+    margin: 0;
+    background-color: var(--gitify-glass-control-rest);
+    border: 1px solid var(--gitify-glass-border);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .gitify-translucent [data-color-mode] input[type='radio'] {
+    border-radius: 50%;
+  }
+
+  .gitify-translucent
+    [data-color-mode]
+    :where(input[type='checkbox'], input[type='radio']):checked {
+    background-color: var(--fgColor-accent);
+    border-color: transparent;
+  }
+
+  .gitify-translucent [data-color-mode] input[type='checkbox']:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23ffffff' d='M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z'/%3E%3C/svg%3E");
+    background-size: 0.75rem;
+  }
+
+  .gitify-translucent [data-color-mode] input[type='radio']:checked {
+    background-image: radial-gradient(circle at 50% 50%, #ffffff 0 2.5px, transparent 3px);
+  }
+
+  .gitify-translucent
+    [data-color-mode]
+    :where(input[type='checkbox'], input[type='radio']):focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--fgColor-accent), transparent 30%);
+    outline-offset: 1px;
+  }
+
+  .gitify-translucent .gitify-sidebar :where(svg) {
+    color: var(--fgColor-muted);
+  }
+
+  /* The logo paints a hardcoded gradient fill, so `color` can't reach it; make it
+   * follow the icon colour so it stays visible on light glass. */
+  .gitify-translucent .gitify-sidebar [fill^='url'] {
+    fill: currentColor;
+  }
+}
+
+/* Vibrancy path: `.gitify-vibrant` is set on the root only once the native
+ * material is applied (see useAppearance), so clearing the app's own backgrounds
+ * to reveal it never flashes black mid-switch. */
+.gitify-vibrant {
+  --gitify-background: transparent;
+}
+
+/* The `[data-color-mode]` wrapper (Primer's ThemeProvider) sits below the root and
+ * both paints `background: var(--bgColor-default)` (via `@primer/css`) and re-declares
+ * `--gitify-background` (via Tailwind), so it would shadow the root's transparency for
+ * itself and descendants like AppLayout. Clear both at that level so the native
+ * material shows through the whole window. */
+.gitify-vibrant body,
+.gitify-vibrant #root,
+.gitify-vibrant [data-color-mode] {
+  --gitify-background: transparent;
+  background-color: transparent;
+}
+
+/* Accessibility degradation: solid, legible surfaces under the OS Reduce
+ * Transparency / Increase Contrast settings. The vibrancy base needs no fallback
+ * here: useAppearance withholds `.gitify-vibrant` under reduced transparency. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  [data-theme='glass'] {
+    --gitify-sidebar: #24292e;
+  }
+
+  [data-theme='glass'] [data-color-mode] {
+    --gitify-glass-tint: var(--bgColor-neutral-muted);
+    --gitify-icon-open: var(--fgColor-open);
+    --gitify-icon-closed: var(--fgColor-closed);
+    --gitify-icon-done: var(--fgColor-done);
+    --gitify-icon-attention: var(--fgColor-attention);
+    --gitify-link: var(--fgColor-link);
+  }
+
+  [data-theme='glass'] :where(.bg-gitify-sidebar, .bg-gitify-footer) {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 html,
 body,
 #root {

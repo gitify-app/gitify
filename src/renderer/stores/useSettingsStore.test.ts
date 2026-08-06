@@ -1,8 +1,8 @@
 import { act, renderHook } from '@testing-library/react';
 
-import { Theme } from '../../shared/theme';
+import { Constants } from '../constants';
 
-import { OpenPreference, type Percentage } from '../types';
+import { DesignLanguage, OpenPreference, type Percentage, Theme } from '../types';
 
 import { DEFAULT_SETTINGS_STATE } from './defaults';
 import useSettingsStore from './useSettingsStore';
@@ -115,6 +115,44 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       });
 
       expect(result.current).toMatchObject(DEFAULT_SETTINGS_STATE);
+    });
+  });
+
+  describe('Design language (additive migration)', () => {
+    afterEach(() => {
+      localStorage.removeItem(Constants.STORAGE.SETTINGS);
+    });
+
+    test('should default the design language to Classic', () => {
+      const { result } = renderHook(() => useSettingsStore());
+
+      expect(result.current.designLanguage).toBe(DesignLanguage.CLASSIC);
+    });
+
+    test('should give an existing persisted blob the Classic default while preserving its theme', async () => {
+      // A blob persisted before designLanguage existed (zustand writes version 0).
+      localStorage.setItem(
+        Constants.STORAGE.SETTINGS,
+        JSON.stringify({ state: { theme: Theme.DARK_DIMMED, increaseContrast: true }, version: 0 }),
+      );
+
+      await act(async () => {
+        await useSettingsStore.persist.rehydrate();
+      });
+
+      expect(useSettingsStore.getState().designLanguage).toBe(DesignLanguage.CLASSIC);
+      expect(useSettingsStore.getState().theme).toBe(Theme.DARK_DIMMED);
+      expect(useSettingsStore.getState().increaseContrast).toBe(true);
+    });
+
+    test('should update the design language', () => {
+      const { result } = renderHook(() => useSettingsStore());
+
+      act(() => {
+        result.current.updateSetting('designLanguage', DesignLanguage.GLASS);
+      });
+
+      expect(result.current.designLanguage).toBe(DesignLanguage.GLASS);
     });
   });
 });

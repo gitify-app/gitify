@@ -89,7 +89,10 @@ export type SettingsState = AppearanceSettingsState &
  * Settings related to the appearance of the application.
  */
 export interface AppearanceSettingsState {
+  designLanguage: DesignLanguage;
+  /** The color-mode axis (color scheme / accessibility palette). */
   theme: Theme;
+  /** High-contrast Primer schemes for Classic; also honours the OS setting. */
   increaseContrast: boolean;
   zoomPercentage: Percentage;
   showAccountHeader: boolean;
@@ -135,6 +138,12 @@ export interface SystemSettingsState {
   notificationVolume: Percentage;
   openAtStartup: boolean;
   keepWindowOnBlur: boolean;
+}
+
+/** Values are lower-cased because they double as the root `data-theme` attribute. */
+export enum DesignLanguage {
+  CLASSIC = 'classic',
+  GLASS = 'glass',
 }
 
 export enum Theme {

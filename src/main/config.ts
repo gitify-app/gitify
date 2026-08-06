@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import type { BrowserWindowConstructorOptions } from 'electron';
 
 import { APPLICATION } from '../shared/constants';
+import { isMacOS } from '../shared/platform';
 
 import { isDevMode } from './utils';
 
@@ -39,6 +40,23 @@ export const WindowConfig: BrowserWindowConstructorOptions = {
   minWidth: 500,
   minHeight: 400,
   resizable: false,
+  /**
+   * macOS Glass uses a native vibrancy material as the window background, which
+   * blurs the real desktop behind it. Deliberately NOT `transparent: true`: a
+   * transparent window makes behind-window vibrancy sample almost nothing (it
+   * renders near-opaque over the desktop), so the material must own the
+   * background instead. `popover` is a bright, frosted menu-style material (a
+   * touch more see-through than `menu`); `under-window` looks solid over the
+   * desktop. `active` keeps it translucent even though the popup shows without
+   * activating the app.
+   * Not applied on Windows/Linux, where the CSS `backdrop-filter` path handles Glass.
+   */
+  ...(isMacOS()
+    ? {
+        vibrancy: 'popover' as const,
+        visualEffectState: 'active' as const,
+      }
+    : {}),
   /** Hide the app from the Windows taskbar */
   skipTaskbar: true,
   webPreferences: {

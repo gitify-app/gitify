@@ -8,6 +8,7 @@ import type MenuBuilder from '../menu';
 
 let isQuitting = false;
 let keepWindowOnBlur = false;
+let windowVibrancyEnabled = false;
 
 /**
  * Reset module-level lifecycle flags. Module-level state is unavoidable
@@ -19,6 +20,26 @@ let keepWindowOnBlur = false;
 export function __resetWindowLifecycleForTests(): void {
   isQuitting = false;
   keepWindowOnBlur = false;
+  windowVibrancyEnabled = false;
+}
+
+/**
+ * Enable or disable the macOS window vibrancy material (the Glass design
+ * language). No-op off macOS. The desired state is remembered so it can be
+ * re-applied if `electron-menubar` rebuilds the window (see `configureWindowEvents`).
+ */
+export function applyWindowVibrancy(mb: Menubar, enabled: boolean): void {
+  windowVibrancyEnabled = enabled;
+  if (!isMacOS() || !mb.window || mb.window.isDestroyed()) {
+    return;
+  }
+  mb.window.setVibrancy(enabled ? 'popover' : null);
+  // Clear the window's own background so the vibrancy material can sample the
+  // desktop; a prior Classic disable leaves it opaque, which would otherwise
+  // block Glass on a runtime Classic → Glass switch. `#00000000` works without a
+  // `transparent` window because the vibrancy view provides the translucency.
+  // Restore an opaque backdrop for Classic once the material is removed.
+  mb.window.setBackgroundColor(enabled ? '#00000000' : '#ffffff');
 }
 
 /**
@@ -55,6 +76,8 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
 
   win.on('show', () => {
     menuBuilder.setWindowVisibility(true);
+    // Re-apply vibrancy in case the window was rebuilt since it was last set.
+    applyWindowVibrancy(mb, windowVibrancyEnabled);
   });
 
   win.on('hide', () => {
