@@ -1,0 +1,65 @@
+src/renderer/utils/forges/github/handlers/issue.ts
+  s_c9d8346fddafb8::t_5a78de9207a7f2 17,55-57
+src/renderer/utils/forges/github/graphql/issue.graphql
+  s_c9d8346fddafb8::t_fbdf0942ec7cb6 50-53
+src/renderer/utils/forges/github/handlers/pullRequest.ts
+  s_c9d8346fddafb8::t_5a78de9207a7f2 83-84
+src/renderer/utils/forges/github/graphql/pull.graphql
+  s_c9d8346fddafb8::t_fbdf0942ec7cb6 78-83
+src/renderer/components/metrics/StackedPrsPill.test.tsx
+  s_c9d8346fddafb8::t_c5844d39bd0638 1-15
+src/renderer/utils/forges/github/handlers/utils.ts
+  s_c9d8346fddafb8::t_e11a34a3b52a63 51-52,56,72-73
+  s_c9d8346fddafb8::t_c8b3de25984b3e 2,4
+  s_c9d8346fddafb8::t_f9f208e72eee6c 53-55,57-71
+src/renderer/utils/forges/github/handlers/issue.test.ts
+  s_c9d8346fddafb8::t_d1d2b7af9db10a 257-298
+src/renderer/components/metrics/StackedPrsPill.tsx
+  s_c9d8346fddafb8::t_f2a72f7f648789 1-19,21-31
+  s_c9d8346fddafb8::t_8b902193546d07 20
+codegen.ts
+  s_c9d8346fddafb8::t_0c1146df8eeed7 23-26
+src/renderer/components/metrics/MetricGroup.tsx
+  s_c9d8346fddafb8::t_00042b5ddc65fd 14,33-36
+  s_c9d8346fddafb8::t_9889e1ac6334b7 8
+  h_ac004aadb63da9 29-30,37
+src/renderer/components/metrics/IssueTypesPill.tsx
+  s_c9d8346fddafb8::t_8b902193546d07 5,10,19-24
+  s_c9d8346fddafb8::t_67e263eb5afd08 1-4,6-9,11-18,25-26
+src/renderer/types.ts
+  h_ac004aadb63da9 472-477
+  s_c9d8346fddafb8::t_5f3ab75998c955 398,400
+  s_c9d8346fddafb8::t_08fd2dfc879fc5 397,399,401-402
+src/renderer/utils/forges/github/__mocks__/response-mocks.ts
+  s_c9d8346fddafb8::t_5dd5b9257f710d 103,146
+src/renderer/components/metrics/IssueTypesPill.test.tsx
+  s_c9d8346fddafb8::t_25066f24a09a78 1
+  s_c9d8346fddafb8::t_9889e1ac6334b7 2-3,16
+  s_c9d8346fddafb8::t_e454eb84fa598b 4,7-14,17-19
+  s_c9d8346fddafb8::t_774b13d295b463 5-6,15
+src/renderer/utils/forges/github/handlers/pullRequest.test.ts
+  s_c9d8346fddafb8::t_c56f6393b3724c 217-262
+src/renderer/utils/forges/github/graphql/generated/graphql.ts
+  s_c9d8346fddafb8::t_e7c04400678faa 36-54,221,235,284,296-302,308,340,352-358,364,389-395,401,415-421,427,645-648,744-749,900-903,970-975,1124-1127,1242-1245,1325-1330,1431-1436
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "c2a9753ff5e511c7772c127cccb5d7a057056cd6",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_c9d8346fddafb8": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1e0cdd9f-bd3f-4f95-a022-b6f09dd5f3eb",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
