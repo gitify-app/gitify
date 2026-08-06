@@ -21,5 +21,15 @@ schema.graphql
 coverage
 *.lcov
 
+# Visual regression screenshots. Only the Linux baselines CI compares against
+# are committed; anything generated on a developer's own OS would never match
+# it (font rendering differs) and must not become a baseline. Regenerate with
+# `pnpm test:visual:update`, which runs in the pinned Linux container.
+src/renderer/**/__screenshots__/**/*.png
+!src/renderer/**/__screenshots__/**/*-chromium-linux.png
+
+# Actual/diff images written by a failing visual regression run
+.vitest-attachments/
+
 # Mac Files
 .DS_Store
