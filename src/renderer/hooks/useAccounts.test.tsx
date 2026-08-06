@@ -3,9 +3,10 @@ import type { ReactNode } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
-
-import { Constants } from '../constants';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../__mocks__/account-mocks';
 
 import { useAccountsStore } from '../stores';
 
@@ -62,14 +63,36 @@ describe('renderer/hooks/useAccounts.ts', () => {
     await waitFor(() => expect(refreshAccountSpy).toHaveBeenCalledTimes(2));
   });
 
-  it('sets an explicit staleTime aligned to the refresh interval', async () => {
-    const { queryClient, wrapper } = createWrapper();
+  it('serves a newly mounted observer from cache instead of refreshing again', async () => {
+    const { wrapper } = createWrapper();
 
     renderHook(() => useAccounts(), { wrapper });
     await waitFor(() => expect(refreshAccountSpy).toHaveBeenCalledTimes(1));
 
-    const [query] = queryClient.getQueryCache().getAll();
-    const options = query.options as { staleTime?: number };
-    expect(options.staleTime).toBe(Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
+    // A second observer on the same key, well inside the refresh interval
+    renderHook(() => useAccounts(), { wrapper });
+
+    await act(async () => {
+      await Promise.resolve();
+    });
+
+    expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('refreshes again when the account list changes, despite the staleTime', async () => {
+    const { wrapper } = createWrapper();
+
+    renderHook(() => useAccounts(), { wrapper });
+    await waitFor(() => expect(refreshAccountSpy).toHaveBeenCalledTimes(1));
+
+    // A different account list is a different query key, so it has no cached
+    // data to be considered fresh
+    await act(async () => {
+      useAccountsStore.setState({
+        accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+      });
+    });
+
+    await waitFor(() => expect(refreshAccountSpy.mock.calls.length).toBeGreaterThan(1));
   });
 });

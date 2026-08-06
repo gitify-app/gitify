@@ -13,8 +13,6 @@ import {
   mockSingleAccountNotifications,
 } from '../__mocks__/notifications-mocks';
 
-import { Constants } from '../constants';
-
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import type { AccountNotifications, Percentage } from '../types';
@@ -289,7 +287,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
   });
 
   describe('query cache configuration', () => {
-    it('sets an explicit staleTime aligned to the minimum poll interval', async () => {
+    it('does not refetch on mount while the cached data is still fresh', async () => {
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
       const queryClient = new QueryClient({
@@ -308,9 +306,15 @@ describe('renderer/hooks/useNotifications.ts', () => {
       renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
       await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
 
-      const [query] = queryClient.getQueryCache().getAll();
-      const options = query.options as { staleTime?: number };
-      expect(options.staleTime).toBe(Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS);
+      // `refetchOnMount` is stale-gated, so a second host mounting inside the
+      // staleTime window shares the cached data rather than refetching.
+      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
     });
   });
 
