@@ -100,20 +100,19 @@ const config: Config = {
           '@apply rounded-md bg-gitify-accounts': {},
         },
       });
-      // TODO - ideally we would use GitHub Primer Design Tokens instead of TailwindCSS
       addBase({
         '[data-color-mode]': {
           '--gitify-background': 'light-dark(var(--bgColor-default), var(--bgColor-muted))',
           '--gitify-account-error-bg':
             'light-dark(var(--bgColor-danger-muted), var(--bgColor-danger-emphasis))',
 
-          '--gitify-scrollbar-track': `light-dark(${colors.gray[100]}, ${colors.gray[900]})`,
-          '--gitify-scrollbar-thumb': `light-dark(${colors.gray[300]}, ${colors.gray[700]})`,
-          '--gitify-scrollbar-thumb-hover': `light-dark(${colors.gray[400]}, ${colors.gray[600]})`,
+          '--gitify-scrollbar-track': 'var(--bgColor-muted)',
+          '--gitify-scrollbar-thumb': 'var(--borderColor-default)',
+          '--gitify-scrollbar-thumb-hover': 'var(--borderColor-emphasis)',
 
-          '--gitify-counter-primary': `light-dark(${colors.blue[300]}, ${colors.blue[400]})`,
-          '--gitify-counter-secondary': `light-dark(${colors.gray[200]}, ${colors.gray[600]})`,
-          '--gitify-counter-text': `light-dark(${colors.gray[800]}, ${colors.gray[100]})`,
+          '--gitify-counter-primary': 'var(--bgColor-accent-muted)',
+          '--gitify-counter-secondary': 'var(--bgColor-neutral-muted)',
+          '--gitify-counter-text': 'var(--fgColor-default)',
         },
       });
     }),
