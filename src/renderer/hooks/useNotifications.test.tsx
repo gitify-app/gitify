@@ -286,6 +286,38 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
   });
 
+  describe('query cache configuration', () => {
+    it('does not refetch on mount while the cached data is still fresh', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const queryClient = new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+            refetchOnWindowFocus: false,
+            refetchInterval: false,
+          },
+        },
+      });
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      );
+
+      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
+
+      // `refetchOnMount` is stale-gated, so a second host mounting inside the
+      // staleTime window shares the cached data rather than refetching.
+      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+
+      await act(async () => {
+        await Promise.resolve();
+      });
+
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('window focus', () => {
     it('refreshes the enrichment cache when the window regains focus', async () => {
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);

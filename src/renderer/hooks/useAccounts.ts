@@ -42,6 +42,11 @@ export const useAccounts = (): AccountsState => {
 
     enabled: accounts.length > 0,
 
+    // Fresh for the whole refresh interval, so a newly mounted observer
+    // reuses the cached refresh rather than firing one on top of the hourly
+    // poll. Changing the account list does not go through this: it produces
+    // a new query key with no cached data, which always fetches.
+    staleTime: Constants.REFRESH_ACCOUNTS_INTERVAL_MS,
     refetchInterval: Constants.REFRESH_ACCOUNTS_INTERVAL_MS,
     refetchOnWindowFocus: false,
   });

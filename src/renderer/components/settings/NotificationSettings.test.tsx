@@ -124,59 +124,25 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     });
   });
 
-  it('should toggle the fetchAllNotifications checkbox', async () => {
+  it.each([
+    ['checkbox-fetchAllNotifications', 'fetchAllNotifications'],
+    ['checkbox-detailedNotifications', 'detailedNotifications'],
+    ['checkbox-showPills', 'showPills'],
+    ['checkbox-showNumber', 'showNumber'],
+    ['checkbox-showOnlyParticipating', 'participating'],
+    ['checkbox-fetchReadNotifications', 'fetchReadNotifications'],
+    ['checkbox-markAsDoneOnOpen', 'markAsDoneOnOpen'],
+    ['checkbox-markAsDoneOnUnsubscribe', 'markAsDoneOnUnsubscribe'],
+    ['checkbox-delayNotificationState', 'delayNotificationState'],
+  ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
       renderWithProviders(<NotificationSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-fetchAllNotifications'));
+    await userEvent.click(screen.getByTestId(testId));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('fetchAllNotifications');
-  });
-
-  it('should toggle detailed notifications checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-detailedNotifications'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('detailedNotifications');
-  });
-
-  it('should toggle metric pills checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-showPills'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('showPills');
-  });
-
-  it('should toggle show number checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-showNumber'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('showNumber');
-  });
-
-  it('should toggle the showOnlyParticipating checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-showOnlyParticipating'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('participating');
+    expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
@@ -197,49 +163,5 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
       'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
     );
-  });
-
-  it('should toggle the fetchReadNotifications checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-fetchReadNotifications'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('fetchReadNotifications');
-  });
-
-  it('should toggle the markAsDoneOnOpen checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-markAsDoneOnOpen'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('markAsDoneOnOpen');
-  });
-
-  it('should toggle the markAsDoneOnUnsubscribe checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-markAsDoneOnUnsubscribe'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('markAsDoneOnUnsubscribe');
-  });
-
-  it('should toggle the delayNotificationState checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<NotificationSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-delayNotificationState'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('delayNotificationState');
   });
 });
