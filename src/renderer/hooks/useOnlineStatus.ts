@@ -8,7 +8,7 @@ import { onlineManager } from '@tanstack/react-query';
  * pause/resume behaviour.
  */
 export function useOnlineStatus(): boolean {
-  const [isOnline, setIsOnline] = useState(true);
+  const [isOnline, setIsOnline] = useState(() => onlineManager.isOnline());
 
   useEffect(() => {
     const handle = () => {

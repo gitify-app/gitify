@@ -1,6 +1,22 @@
-import { QueryClient } from '@tanstack/react-query';
+import { onlineManager, QueryClient } from '@tanstack/react-query';
 
 import { Constants } from '../../constants';
+
+/**
+ * Set TanStack Query's online state from the browser's actual network state.
+ *
+ * `onlineManager` initializes to `online: true` regardless of reality, and
+ * self-corrects only once the browser fires a native online/offline event.
+ * Browsers emit those on transitions only, so a device already offline when
+ * Gitify launches never gets one.
+ */
+export function syncOnlineManagerWithBrowser(): void {
+  onlineManager.setOnline(navigator.onLine);
+}
+
+// Runs at import, before the client below exists and therefore before any
+// query can fire, so a cold start while offline pauses rather than fetches.
+syncOnlineManagerWithBrowser();
 
 /**
  * TanStack Query client for all API state.
