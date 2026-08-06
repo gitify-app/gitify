@@ -1,0 +1,31 @@
+src/renderer/components/metrics/MetricPill.tsx
+  s_c9d8346fddafb8::t_ad9f2f4e91e3bf 10
+src/renderer/components/metrics/StackedPrsPill.test.tsx
+  s_c9d8346fddafb8::t_c162005d37b79c 12-16,18
+src/renderer/utils/forges/github/handlers/pullRequest.ts
+  s_c9d8346fddafb8::t_869988c931284c 84
+src/renderer/utils/forges/github/handlers/pullRequest.test.ts
+  s_c9d8346fddafb8::t_8bd11dd3d17279 253
+src/renderer/types.ts
+  s_c9d8346fddafb8::t_869988c931284c 399-400
+src/renderer/components/metrics/MetricGroup.tsx
+  s_c9d8346fddafb8::t_788bf6786c56f2 35
+src/renderer/components/metrics/StackedPrsPill.tsx
+  s_c9d8346fddafb8::t_869988c931284c 11,15-19,24,29,31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "3285815a3f9e93a7122dcfec49fae4ff216ce1a0",
+  "prompts": {},
+  "sessions": {
+    "s_c9d8346fddafb8": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1e0cdd9f-bd3f-4f95-a022-b6f09dd5f3eb",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
