@@ -20,6 +20,10 @@ const config: CodegenConfig = {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
+      // GitHub's live schema currently fails graphql-js's stricter
+      // interface-deprecation-consistency validation (added in graphql v17).
+      // Skip validation so introspection can still succeed.
+      assumeValid: true,
     },
   },
   documents: ['src/renderer/utils/forges/github/**/*.graphql'],

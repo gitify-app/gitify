@@ -5,11 +5,13 @@ import { useSettingsStore } from '../../stores';
 import type { GitifyNotification } from '../../types';
 
 import { CommentsPill } from './CommentsPill';
+import { IssueTypesPill } from './IssueTypesPill';
 import { LabelsPill } from './LabelsPill';
 import { LinkedIssuesPill } from './LinkedIssuesPill';
 import { MilestonePill } from './MilestonePill';
 import { ReactionsPill } from './ReactionsPill';
 import { ReviewsPill } from './ReviewsPill';
+import { StackedPrsPill } from './StackedPrsPill';
 
 export interface MetricGroupProps {
   notification: GitifyNotification;
@@ -24,7 +26,14 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
   return (
     <div className="flex gap-1">
+      <IssueTypesPill issueType={notification.subject.issueType} />
+
       <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
+
+      <StackedPrsPill
+        isStacked={notification.subject.isStacked}
+        stackDepth={notification.subject.stackDepth}
+      />
 
       <ReactionsPill
         reactionGroups={notification.subject.reactionGroups ?? []}

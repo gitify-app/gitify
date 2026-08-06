@@ -100,6 +100,7 @@ export function mockIssueResponseNode(mocks: {
     labels: { nodes: [] },
     comments: { totalCount: 0, nodes: [] },
     milestone: null,
+    issueType: null,
     reactions: {
       totalCount: 0,
     },
@@ -142,6 +143,7 @@ export function mockPullRequestResponseNode(mocks: {
     closingIssuesReferences: {
       nodes: [],
     },
+    stackEntry: null,
     reactions: {
       totalCount: 0,
     },

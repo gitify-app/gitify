@@ -47,6 +47,10 @@ fragment IssueDetails on Issue {
       ...LabelFields
     }
   }
+  issueType {
+    name
+    color
+  }
   reactions {
     totalCount
   }

@@ -75,6 +75,12 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
+  stackEntry {
+    position
+    stack {
+      size
+    }
+  }
   reactions {
     totalCount
   }
