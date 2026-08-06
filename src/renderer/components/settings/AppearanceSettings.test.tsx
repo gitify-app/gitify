@@ -107,4 +107,25 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     expect(screen.queryByTestId('checkbox-increaseContrast')).not.toBeInTheDocument();
   });
+
+  it('should toggle the status icon colors checkbox for Glass', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />, {
+        settings: { designLanguage: DesignLanguage.GLASS },
+      });
+    });
+
+    await userEvent.click(screen.getByTestId('checkbox-showStatusIconColors'));
+
+    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('showStatusIconColors');
+  });
+
+  it('hides the status icon colors checkbox for Classic', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    expect(screen.queryByTestId('checkbox-showStatusIconColors')).not.toBeInTheDocument();
+  });
 });
