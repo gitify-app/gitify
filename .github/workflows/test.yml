@@ -36,49 +36,22 @@ jobs:
           name: code-coverage-report
           path: coverage/lcov.info
 
-  # `container` below is resolved before any step runs, so the image tag cannot
-  # be read from package.json in that job. This one exists to pass it across.
-  resolve-playwright-image:
-    name: Resolve Playwright Image
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    outputs:
-      image: ${{ steps.resolve.outputs.image }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Resolve the image from the pinned playwright version
-        id: resolve
-        run: |
-          version="$(node -p "require('./package.json').devDependencies.playwright")"
-          # package.json is attacker-controlled on fork PRs, and this value ends
-          # up in $GITHUB_OUTPUT; refuse anything but a plain version number.
-          case "${version}" in
-            '' | *[!0-9.]*)
-              echo "Unexpected playwright version in package.json: ${version}" >&2
-              exit 1
-              ;;
-          esac
-          echo "image=mcr.microsoft.com/playwright:v${version}-noble" >> "$GITHUB_OUTPUT"
-
   visual-regression:
     name: Visual Regression
     # arm64 to match `scripts/visual.sh`, which cannot generate amd64 baselines
     # because Chromium segfaults under emulation on Apple Silicon.
     runs-on: ubuntu-24.04-arm
-    needs: resolve-playwright-image
     permissions:
       contents: read
 
     # The same image the baselines were generated with. The committed
     # screenshots are comparable only against an identical browser build and
     # font stack, which a bare runner does not provide.
-    container: ${{ needs.resolve-playwright-image.outputs.image }}
+    #
+    # This tag must match the `playwright` devDependency, which ships the
+    # matching browser build. Renovate groups the two so they always move
+    # together; `scripts/visual.sh` reads the version straight from package.json.
+    container: mcr.microsoft.com/playwright:v1.62.1-noble
 
     steps:
       - name: Checkout
