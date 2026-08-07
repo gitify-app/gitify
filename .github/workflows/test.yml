@@ -59,6 +59,10 @@ jobs:
         uses: ./.github/actions/setup-node
 
       - name: Run visual regression tests
+        # The job already runs in the pinned image, so the script runs vitest
+        # directly instead of starting another container.
+        env:
+          GITIFY_VISUAL_IN_CONTAINER: '1'
         run: pnpm test:visual
 
       # Vitest writes the actual and diff images here; the reference stays in

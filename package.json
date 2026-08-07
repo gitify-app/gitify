@@ -67,8 +67,8 @@
     "test": "vp test --coverage --run --project 'happy-dom [preload, renderer]' --project 'node [main, shared]'",
     "test:watch": "vp test --watch --coverage",
     "test:ui": "vp test --ui",
-    "test:visual": "vp test --run --project 'browser [visual]'",
-    "test:visual:update": "scripts/visual-baselines.sh"
+    "test:visual": "scripts/visual.sh",
+    "test:visual:update": "scripts/visual.sh --update"
   },
   "dependencies": {
     "electron-log": "5.4.4",

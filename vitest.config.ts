@@ -80,6 +80,9 @@ export default defineConfig({
           name: 'browser [visual]',
           include: ['src/renderer/**/*.visual.test.tsx'],
           setupFiles: ['./src/renderer/__helpers__/visual.setup.ts'],
+          // Hard-stops the run outside Linux, where Vitest would otherwise
+          // create per-platform baselines and pass against them.
+          globalSetup: ['./src/renderer/__helpers__/visual.global-setup.ts'],
           browser: {
             enabled: true,
             headless: true,

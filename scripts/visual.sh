@@ -1,22 +1,37 @@
 #!/usr/bin/env bash
 #
-# Regenerates the committed visual regression baselines.
+# Runs the visual regression suite, or regenerates its baselines with --update.
 #
 # Screenshots are only comparable against an identical browser build and font
-# stack, so they are always generated inside the pinned Playwright image rather
-# than on the host, whatever the host happens to be. The CI job in
-# .github/workflows/test.yml runs the same image on arm64 runners.
+# stack, so the suite always runs inside the pinned Playwright image rather than
+# on the host. This script puts it there; when it is already inside that image
+# (CI, or the nested call below) it runs vitest directly.
 #
 # arm64 rather than amd64 because Chromium segfaults under amd64 emulation on
-# Apple Silicon, which makes local regeneration impossible on the machines the
-# maintainers actually use. The tradeoff is that regenerating baselines needs an
-# arm64 host; verifying them (the common case) needs nothing but CI.
+# Apple Silicon, which makes local runs impossible on the machines the
+# maintainers actually use. The tradeoff is that running this locally needs an
+# arm64 host; CI covers everyone else.
 #
 # Usage:
-#   scripts/visual-baselines.sh            # update every baseline
-#   scripts/visual-baselines.sh settings   # update baselines matching a name
+#   scripts/visual.sh                     # verify against committed baselines
+#   scripts/visual.sh --update            # regenerate every baseline
+#   scripts/visual.sh --update settings   # regenerate baselines matching a name
 
 set -euo pipefail
+
+UPDATE=""
+if [ "${1:-}" = "--update" ]; then
+  UPDATE="--update"
+  shift
+fi
+FILTER="${1:-}"
+
+# Already inside the pinned image (set by the CI job and by the docker run
+# below), so run the suite rather than nesting another container.
+if [ -n "${GITIFY_VISUAL_IN_CONTAINER:-}" ]; then
+  # shellcheck disable=SC2086 -- word splitting is intended for the optional flags
+  exec corepack pnpm exec vitest --project 'browser [visual]' --run ${UPDATE} ${FILTER:+-t "${FILTER}"}
+fi
 
 # Keep in step with the `playwright` devDependency; the image ships the matching
 # browser build, and a mismatched pair renders differently.
@@ -33,13 +48,14 @@ if [ "${PACKAGE_VERSION}" != "${PLAYWRIGHT_VERSION}" ]; then
 fi
 
 if ! docker info >/dev/null 2>&1; then
-  echo "Docker is not running. Baselines can only be generated inside the pinned Linux image." >&2
+  echo "Docker is not running. Visual regression tests only run inside the pinned Linux image." >&2
+  echo "Push the branch and let the Visual Regression CI job report the diff instead." >&2
   exit 1
 fi
 
 HOST_ARCH="$(uname -m)"
 if [ "${HOST_ARCH}" != "arm64" ] && [ "${HOST_ARCH}" != "aarch64" ]; then
-  echo "Baselines must be generated on an arm64 host to match CI; this machine is ${HOST_ARCH}." >&2
+  echo "Visual regression tests need an arm64 host to match CI; this machine is ${HOST_ARCH}." >&2
   echo "Push the branch and let the Visual Regression CI job report the diff instead." >&2
   exit 1
 fi
@@ -64,14 +80,17 @@ docker run --rm "${TTY_FLAGS[@]}" \
   --volume gitify-visual-pnpm-store:/root/.local/share/pnpm/store \
   --workdir /gitify \
   --env HUSKY=0 \
+  --env GITIFY_VISUAL_IN_CONTAINER=1 \
   "${IMAGE}" \
   bash -c "
     set -euo pipefail
     corepack enable
     corepack pnpm install --frozen-lockfile
-    corepack pnpm exec vitest --project 'browser [visual]' --run --update ${1:+-t '$1'}
+    scripts/visual.sh ${UPDATE} ${FILTER}
   "
 
-echo
-echo "Baselines updated. Review the diff before committing:"
-echo "  git status --short src/renderer"
+if [ -n "${UPDATE}" ]; then
+  echo
+  echo "Baselines updated. Review the diff before committing:"
+  echo "  git status --short src/renderer"
+fi
