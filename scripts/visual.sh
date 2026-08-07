@@ -33,19 +33,13 @@ if [ -n "${GITIFY_VISUAL_IN_CONTAINER:-}" ]; then
   exec corepack pnpm exec vitest --project 'browser [visual]' --run ${UPDATE} ${FILTER:+-t "${FILTER}"}
 fi
 
-# Keep in step with the `playwright` devDependency; the image ships the matching
-# browser build, and a mismatched pair renders differently.
-PLAYWRIGHT_VERSION="1.62.1"
-IMAGE="mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-noble"
-
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-PACKAGE_VERSION="$(node -p "require('${REPO_ROOT}/package.json').devDependencies.playwright")"
-if [ "${PACKAGE_VERSION}" != "${PLAYWRIGHT_VERSION}" ]; then
-  echo "playwright is pinned to ${PACKAGE_VERSION} in package.json but this script uses ${PLAYWRIGHT_VERSION}." >&2
-  echo "Update PLAYWRIGHT_VERSION in $0 so the image matches the browser build." >&2
-  exit 1
-fi
+# Derived from the `playwright` devDependency rather than pinned here: the image
+# ships the browser build that exact release expects, and a mismatched pair
+# fails to launch. Renovate bumping the dependency moves the image with it.
+PLAYWRIGHT_VERSION="$(node -p "require('${REPO_ROOT}/package.json').devDependencies.playwright")"
+IMAGE="mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-noble"
 
 if ! docker info >/dev/null 2>&1; then
   echo "Docker is not running. Visual regression tests only run inside the pinned Linux image." >&2
