@@ -122,5 +122,22 @@ describe('renderer/utils/notifications/mutations.ts', () => {
       expect(result[0].notifications).toEqual([second]);
       expect(result[1].notifications).toEqual(mockGithubEnterpriseGitifyNotifications);
     });
+
+    it('preserves notifications added to current after the snapshot was taken', () => {
+      const [first, second] = mockGitHubCloudGitifyNotifications;
+      const concurrent = { ...first, id: 'concurrent-notification' };
+      const account = first.account;
+
+      const snapshot: AccountNotifications[] = [
+        { account, notifications: [first, second], error: null },
+      ];
+      const current: AccountNotifications[] = [
+        { account, notifications: [first, concurrent], error: null },
+      ];
+
+      const result = restoreFailedNotifications([second], snapshot, current);
+
+      expect(result[0].notifications).toEqual([first, concurrent, second]);
+    });
   });
 });

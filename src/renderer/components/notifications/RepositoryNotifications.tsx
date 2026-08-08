@@ -4,7 +4,7 @@ import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
-import { useNotificationActionFailuresStore } from '../../stores';
+import { getNotificationFailureKey, useNotificationActionFailuresStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -51,7 +51,9 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
     await action();
 
     const { failures } = useNotificationActionFailuresStore.getState();
-    const hasFailure = repoNotifications.some((notification) => failures[notification.id]);
+    const hasFailure = repoNotifications.some(
+      (notification) => failures[getNotificationFailureKey(notification.account, notification.id)],
+    );
 
     if (hasFailure) {
       setShouldAnimateRepositoryExit(false);

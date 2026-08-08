@@ -4,7 +4,11 @@ import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
-import { useNotificationActionFailuresStore, useSettingsStore } from '../../stores';
+import {
+  getNotificationFailureKey,
+  useNotificationActionFailuresStore,
+  useSettingsStore,
+} from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -32,12 +36,8 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
   isRepositoryAnimatingExit,
 }: NotificationRowProps) => {
-  const {
-    markNotificationsAsRead,
-    markNotificationsAsDone,
-    unsubscribeNotification,
-    notificationFailures,
-  } = useNotifications();
+  const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
+    useNotifications();
 
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
@@ -47,7 +47,10 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
-  const failure = notificationFailures[notification.id];
+  const notificationFailureKey = getNotificationFailureKey(notification.account, notification.id);
+  const failure = useNotificationActionFailuresStore(
+    (state) => state.failures[notificationFailureKey],
+  );
 
   // Explains the failed action and suggests the browser as a fallback,
   // rather than a dedicated retry control - clicking the (now red) hover
@@ -68,7 +71,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
 
     await action();
 
-    if (useNotificationActionFailuresStore.getState().failures[notification.id]) {
+    if (useNotificationActionFailuresStore.getState().failures[notificationFailureKey]) {
       setShouldAnimateNotificationExit(false);
     }
   };
@@ -163,27 +166,35 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             action={actionMarkAsRead}
             enabled={!isNotificationRead}
             icon={ReadIcon}
-            label={failureTooltip ?? 'Mark as read'}
+            label={
+              failure?.action === 'markAsRead' ? (failureTooltip ?? 'Mark as read') : 'Mark as read'
+            }
             testid="notification-mark-as-read"
-            variant={failure ? 'danger' : 'invisible'}
+            variant={failure?.action === 'markAsRead' ? 'danger' : 'invisible'}
           />
 
           <HoverButton
             action={actionMarkAsDone}
             enabled={isMarkAsDoneFeatureSupported(notification.account) && notification.unread}
             icon={CheckIcon}
-            label={failureTooltip ?? 'Mark as done'}
+            label={
+              failure?.action === 'markAsDone' ? (failureTooltip ?? 'Mark as done') : 'Mark as done'
+            }
             testid="notification-mark-as-done"
-            variant={failure ? 'danger' : 'invisible'}
+            variant={failure?.action === 'markAsDone' ? 'danger' : 'invisible'}
           />
 
           <HoverButton
             action={actionUnsubscribeFromThread}
             enabled={isUnsubscribeThreadSupported(notification.account)}
             icon={BellSlashIcon}
-            label={failureTooltip ?? 'Unsubscribe from thread'}
+            label={
+              failure?.action === 'unsubscribe'
+                ? (failureTooltip ?? 'Unsubscribe from thread')
+                : 'Unsubscribe from thread'
+            }
             testid="notification-unsubscribe-from-thread"
-            variant={failure ? 'danger' : 'invisible'}
+            variant={failure?.action === 'unsubscribe' ? 'danger' : 'invisible'}
           />
         </HoverGroup>
       )}

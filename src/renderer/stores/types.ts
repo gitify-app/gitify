@@ -244,18 +244,23 @@ export interface NotificationActionFailuresActions {
   /**
    * Records a failed action for a notification.
    */
-  setFailure: (notificationId: string, failure: NotificationActionFailure) => void;
+  setFailure: (notificationKey: string, failure: NotificationActionFailure) => void;
 
   /**
    * Clears a recorded failure for a notification (e.g. after a successful retry).
    */
-  clearFailure: (notificationId: string) => void;
+  clearFailure: (notificationKey: string) => void;
+
+  /**
+   * Clears recorded failures for multiple notification keys.
+   */
+  clearFailures: (notificationKeys: string[]) => void;
 
   /**
    * Clears any recorded failures for notification IDs not present in `notificationIds`
    * (e.g. once a notification no longer appears in the notifications list).
    */
-  pruneFailures: (notificationIds: string[]) => void;
+  pruneFailures: (notificationKeys: string[]) => void;
 
   /**
    * Resets the store to its default (empty) state.

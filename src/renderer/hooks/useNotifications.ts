@@ -11,20 +11,20 @@ import {
 import { Constants } from '../constants';
 
 import {
-  type NotificationActionFailure,
   type NotificationFailedActionType,
+  getNotificationFailureKey,
   useAccountsStore,
   useFiltersStore,
   useNotificationActionFailuresStore,
   useSettingsStore,
 } from '../stores';
 
-import {
-  type Account,
-  type AccountNotifications,
-  type GitifyError,
-  type GitifyNotification,
-  type Status,
+import type {
+  Account,
+  AccountNotifications,
+  GitifyError,
+  GitifyNotification,
+  Status,
 } from '../types';
 
 import { isMarkAsDoneFeatureSupported, isUnsubscribeThreadSupported } from '../utils/api/features';
@@ -38,6 +38,7 @@ import {
   filterDetailedNotifications,
 } from '../utils/notifications/filters/filter';
 import {
+  type FailedNotificationAction,
   restoreFailedNotifications,
   settleNotificationActions,
   type NotificationQuerySnapshot,
@@ -70,13 +71,6 @@ interface NotificationsState {
   markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<void>;
   markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
   unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
-
-  /**
-   * Session-local map of notification ID to the classified error from its
-   * most recent failed mark-as-read/mark-as-done/unsubscribe action attempt.
-   * Not persisted and not part of the notifications data itself.
-   */
-  notificationFailures: Record<string, NotificationActionFailure>;
 }
 
 interface UseNotificationsOptions {
@@ -368,8 +362,6 @@ export const useNotifications = ({
     notificationsQueryKey,
   ]);
 
-  const notificationFailures = useNotificationActionFailuresStore((s) => s.failures);
-
   // Session-local failure entries are independent of the notifications
   // cache, so they must be pruned separately once a notification no longer
   // appears in the (unfiltered) list - e.g. actioned successfully elsewhere,
@@ -384,11 +376,13 @@ export const useNotifications = ({
     const unfilteredNotifications =
       queryClient.getQueryData<AccountNotifications[]>(notificationsQueryKey) || [];
 
-    const currentNotificationIds = unfilteredNotifications.flatMap((accountNotifications) =>
-      accountNotifications.notifications.map((notification) => notification.id),
+    const currentNotificationKeys = unfilteredNotifications.flatMap((accountNotifications) =>
+      accountNotifications.notifications.map((notification) =>
+        getNotificationFailureKey(notification.account, notification.id),
+      ),
     );
 
-    useNotificationActionFailuresStore.getState().pruneFailures(currentNotificationIds);
+    useNotificationActionFailuresStore.getState().pruneFailures(currentNotificationKeys);
   }, [withSideEffects, notifications, queryClient, notificationsQueryKey]);
 
   // Shared by all three mutations' `onSuccess`. Records each failure's
@@ -398,7 +392,7 @@ export const useNotifications = ({
   // until they succeed, so this is normally a no-op).
   const reconcileFailedNotifications = useCallback(
     (
-      failed: Array<{ notification: GitifyNotification; error: GitifyError; rawError: Error }>,
+      failed: FailedNotificationAction[],
       snapshot: NotificationQuerySnapshot | undefined,
       action: NotificationFailedActionType,
       context: string,
@@ -418,10 +412,10 @@ export const useNotifications = ({
       }
 
       for (const { notification, error, rawError } of failed) {
-        useNotificationActionFailuresStore.getState().setFailure(notification.id, {
-          action,
-          error,
-        });
+        const notificationKey = getNotificationFailureKey(notification.account, notification.id);
+        useNotificationActionFailuresStore
+          .getState()
+          .setFailure(notificationKey, { action, error });
         rendererLogError(
           context,
           `Error occurred while processing notification ${notification.id}`,
@@ -449,6 +443,26 @@ export const useNotifications = ({
     [queryClient],
   );
 
+  const snapshotNotifications = useCallback(async () => {
+    // Prevent an older in-flight poll from overwriting the mutation's eventual cache update.
+    await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
+
+    const snapshot = queryClient.getQueriesData<AccountNotifications[]>({
+      queryKey: notificationsKeys.all,
+    });
+
+    return { snapshot };
+  }, [queryClient]);
+
+  const createMutationErrorHandler = useCallback(
+    (logContext: string, message: string) =>
+      (err: Error, _variables: unknown, context?: { snapshot: NotificationQuerySnapshot }) => {
+        restoreSnapshot(context?.snapshot);
+        rendererLogError(logContext, message, toError(err));
+      },
+    [restoreSnapshot],
+  );
+
   const markNotificationsAsReadMutation = useMutation({
     mutationFn: async ({ readNotifications }: { readNotifications: GitifyNotification[] }) => {
       return await settleNotificationActions(readNotifications, (notification) =>
@@ -456,15 +470,7 @@ export const useNotifications = ({
       );
     },
 
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
-
-      const snapshot = queryClient.getQueriesData<AccountNotifications[]>({
-        queryKey: notificationsKeys.all,
-      });
-
-      return { snapshot };
-    },
+    onMutate: snapshotNotifications,
 
     onSuccess: ({ succeeded, failed }, _variables, context) => {
       // Cache removal happens here (once the request resolves) rather than
@@ -477,9 +483,13 @@ export const useNotifications = ({
         );
       }
 
-      for (const notification of succeeded) {
-        useNotificationActionFailuresStore.getState().clearFailure(notification.id);
-      }
+      useNotificationActionFailuresStore
+        .getState()
+        .clearFailures(
+          succeeded.map((notification) =>
+            getNotificationFailureKey(notification.account, notification.id),
+          ),
+        );
 
       reconcileFailedNotifications(
         failed,
@@ -489,15 +499,10 @@ export const useNotifications = ({
       );
     },
 
-    onError: (err, _variables, context) => {
-      restoreSnapshot(context?.snapshot);
-
-      rendererLogError(
-        'markNotificationsAsRead',
-        'Error occurred while marking notifications as read',
-        toError(err),
-      );
-    },
+    onError: createMutationErrorHandler(
+      'markNotificationsAsRead',
+      'Error occurred while marking notifications as read',
+    ),
   });
 
   const markNotificationsAsDoneMutation = useMutation({
@@ -517,15 +522,7 @@ export const useNotifications = ({
       );
     },
 
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
-
-      const snapshot = queryClient.getQueriesData<AccountNotifications[]>({
-        queryKey: notificationsKeys.all,
-      });
-
-      return { snapshot };
-    },
+    onMutate: snapshotNotifications,
 
     onSuccess: ({ succeeded, failed }, { doneNotifications }, context) => {
       // The mark-as-read fallback (for forges without a distinct "done"
@@ -536,27 +533,28 @@ export const useNotifications = ({
         );
       }
 
-      for (const notification of succeeded) {
-        useNotificationActionFailuresStore.getState().clearFailure(notification.id);
+      useNotificationActionFailuresStore
+        .getState()
+        .clearFailures(
+          succeeded.map((notification) =>
+            getNotificationFailureKey(notification.account, notification.id),
+          ),
+        );
+
+      if (isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+        reconcileFailedNotifications(
+          failed,
+          context?.snapshot,
+          'markAsDone',
+          'markNotificationsAsDone',
+        );
       }
-
-      reconcileFailedNotifications(
-        failed,
-        context?.snapshot,
-        'markAsDone',
-        'markNotificationsAsDone',
-      );
     },
 
-    onError: (err, _variables, context) => {
-      restoreSnapshot(context?.snapshot);
-
-      rendererLogError(
-        'markNotificationsAsDone',
-        'Error occurred while marking notifications as done',
-        toError(err),
-      );
-    },
+    onError: createMutationErrorHandler(
+      'markNotificationsAsDone',
+      'Error occurred while marking notifications as done',
+    ),
   });
 
   const unsubscribeNotificationMutation = useMutation({
@@ -575,33 +573,27 @@ export const useNotifications = ({
         return result;
       }
 
-      if (markAsDoneOnUnsubscribe) {
-        await markNotificationsAsDoneMutation.mutateAsync({
-          doneNotifications: [notification],
-        });
-      } else {
-        await markNotificationsAsReadMutation.mutateAsync({
-          readNotifications: [notification],
-        });
-      }
+      const followUp = markAsDoneOnUnsubscribe
+        ? await markNotificationsAsDoneMutation.mutateAsync({
+            doneNotifications: [notification],
+          })
+        : await markNotificationsAsReadMutation.mutateAsync({
+            readNotifications: [notification],
+          });
 
-      return result;
+      return followUp.failed.length > 0 ? followUp : result;
     },
 
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
-
-      const snapshot = queryClient.getQueriesData<AccountNotifications[]>({
-        queryKey: notificationsKeys.all,
-      });
-
-      return { snapshot };
-    },
+    onMutate: snapshotNotifications,
 
     onSuccess: ({ succeeded, failed }, _variables, context) => {
-      for (const notification of succeeded) {
-        useNotificationActionFailuresStore.getState().clearFailure(notification.id);
-      }
+      useNotificationActionFailuresStore
+        .getState()
+        .clearFailures(
+          succeeded.map((notification) =>
+            getNotificationFailureKey(notification.account, notification.id),
+          ),
+        );
 
       reconcileFailedNotifications(
         failed,
@@ -611,15 +603,10 @@ export const useNotifications = ({
       );
     },
 
-    onError: (err, _variables, context) => {
-      restoreSnapshot(context?.snapshot);
-
-      rendererLogError(
-        'unsubscribeNotification',
-        'Error occurred while unsubscribing from notification thread',
-        toError(err),
-      );
-    },
+    onError: createMutationErrorHandler(
+      'unsubscribeNotification',
+      'Error occurred while unsubscribing from notification thread',
+    ),
   });
 
   const markNotificationsAsRead = useCallback(
@@ -659,7 +646,5 @@ export const useNotifications = ({
     markNotificationsAsRead,
     markNotificationsAsDone,
     unsubscribeNotification,
-
-    notificationFailures,
   };
 };

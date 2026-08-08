@@ -1,6 +1,13 @@
 import { create } from 'zustand';
 
+import type { Account } from '../types';
 import type { NotificationActionFailuresStore } from './types';
+
+import { getAccountUUID } from '../utils/auth/utils';
+
+export function getNotificationFailureKey(account: Account, notificationId: string): string {
+  return `${getAccountUUID(account)}:${notificationId}`;
+}
 
 /**
  * Gitify Notification Action Failures store.
@@ -14,27 +21,41 @@ import type { NotificationActionFailuresStore } from './types';
 const useNotificationActionFailuresStore = create<NotificationActionFailuresStore>((set, get) => ({
   failures: {},
 
-  setFailure: (notificationId, failure) => {
-    set((state) => ({ failures: { ...state.failures, [notificationId]: failure } }));
+  setFailure: (notificationKey, failure) => {
+    set((state) => ({ failures: { ...state.failures, [notificationKey]: failure } }));
   },
 
-  clearFailure: (notificationId) => {
+  clearFailure: (notificationKey) => {
     const { failures } = get();
-    if (!(notificationId in failures)) {
+    if (!(notificationKey in failures)) {
       return;
     }
 
     const nextFailures = { ...failures };
-    delete nextFailures[notificationId];
+    delete nextFailures[notificationKey];
     set({ failures: nextFailures });
   },
 
-  pruneFailures: (notificationIds) => {
+  clearFailures: (notificationKeys) => {
     const { failures } = get();
-    const idsToKeep = new Set(notificationIds);
+    const keysToClear = new Set(notificationKeys);
+    const remainingEntries = Object.entries(failures).filter(
+      ([notificationKey]) => !keysToClear.has(notificationKey),
+    );
 
-    const remainingEntries = Object.entries(failures).filter(([notificationId]) =>
-      idsToKeep.has(notificationId),
+    if (remainingEntries.length === Object.keys(failures).length) {
+      return;
+    }
+
+    set({ failures: Object.fromEntries(remainingEntries) });
+  },
+
+  pruneFailures: (notificationKeys) => {
+    const { failures } = get();
+    const keysToKeep = new Set(notificationKeys);
+
+    const remainingEntries = Object.entries(failures).filter(([notificationKey]) =>
+      keysToKeep.has(notificationKey),
     );
 
     if (remainingEntries.length === Object.keys(failures).length) {

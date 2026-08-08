@@ -2,13 +2,14 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
+import { mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
 import {
   mockGiteaGitifyNotification,
   mockGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { useNotificationActionFailuresStore } from '../../stores';
+import { getNotificationFailureKey, useNotificationActionFailuresStore } from '../../stores';
 
 import { GroupBy } from '../../types';
 
@@ -268,15 +269,22 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   describe('failure recovery', () => {
+    const failureKey = getNotificationFailureKey(
+      mockGitifyNotification.account,
+      mockGitifyNotification.id,
+    );
+
+    afterEach(() => {
+      useNotificationActionFailuresStore.getState().reset();
+    });
+
     it('shows hover actions in their normal (non-danger) state when there is no recorded failure', () => {
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
         isRepositoryAnimatingExit: false,
       };
 
-      renderWithProviders(<NotificationRow {...props} />, {
-        notificationFailures: {},
-      });
+      renderWithProviders(<NotificationRow {...props} />);
 
       expect(screen.getByTestId('notification-mark-as-read')).toHaveAttribute(
         'title',
@@ -284,17 +292,17 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       );
     });
 
-    it('colors the hover actions and explains the failure via their tooltip when the notification has a recorded failure', () => {
+    it('styles and explains only the action that failed', () => {
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
         isRepositoryAnimatingExit: false,
       };
 
-      renderWithProviders(<NotificationRow {...props} />, {
-        notificationFailures: {
-          [mockGitifyNotification.id]: { action: 'markAsRead', error: Errors.ACTION_FORBIDDEN },
-        },
+      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
+        action: 'markAsRead',
+        error: Errors.ACTION_FORBIDDEN,
       });
+      renderWithProviders(<NotificationRow {...props} />);
 
       const markAsReadButton = screen.getByTestId('notification-mark-as-read');
 
@@ -308,6 +316,42 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         'title',
         expect.stringContaining('You can also try opening this notification in the browser.'),
       );
+      expect(screen.getByTestId('notification-mark-as-done')).toHaveAttribute(
+        'title',
+        'Mark as done',
+      );
+      expect(screen.getByTestId('notification-unsubscribe-from-thread')).toHaveAttribute(
+        'title',
+        'Unsubscribe from thread',
+      );
+    });
+
+    it('isolates failures for notifications with the same id across accounts', () => {
+      const sameIdOtherAccount = {
+        ...mockGitifyNotification,
+        account: mockGitHubEnterpriseServerAccount,
+      };
+      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
+        action: 'markAsRead',
+        error: Errors.ACTION_FORBIDDEN,
+      });
+
+      renderWithProviders(
+        <>
+          <NotificationRow
+            isRepositoryAnimatingExit={false}
+            notification={mockGitifyNotification}
+          />
+          <NotificationRow isRepositoryAnimatingExit={false} notification={sameIdOtherAccount} />
+        </>,
+      );
+
+      const [failedButton, unaffectedButton] = screen.getAllByTestId('notification-mark-as-read');
+      expect(failedButton).toHaveAttribute(
+        'title',
+        expect.stringContaining(Errors.ACTION_FORBIDDEN.title),
+      );
+      expect(unaffectedButton).toHaveAttribute('title', 'Mark as read');
     });
 
     it('re-invokes the same action on click, acting as a retry, when a failure is recorded', async () => {
@@ -318,11 +362,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
+      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
+        action: 'markAsDone',
+        error: Errors.ACTION_FORBIDDEN,
+      });
       renderWithProviders(<NotificationRow {...props} />, {
         markNotificationsAsDone: markNotificationsAsDoneMock,
-        notificationFailures: {
-          [mockGitifyNotification.id]: { action: 'markAsDone', error: Errors.ACTION_FORBIDDEN },
-        },
       });
 
       await userEvent.click(screen.getByTestId('notification-mark-as-done'));
@@ -339,11 +384,12 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
+      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
+        action: 'markAsRead',
+        error: Errors.ACTION_FORBIDDEN,
+      });
       renderWithProviders(<NotificationRow {...props} />, {
         markNotificationsAsRead: markNotificationsAsReadMock,
-        notificationFailures: {
-          [mockGitifyNotification.id]: { action: 'markAsRead', error: Errors.ACTION_FORBIDDEN },
-        },
       });
 
       const markAsReadButton = screen.getByTestId('notification-mark-as-read');
@@ -360,7 +406,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       // (possibly stale, still-present-from-the-previous-attempt) failure
       // map - so a retry always gets to animate out and, if it fails again,
       // animate back in, instead of being short-circuited immediately.
-      useNotificationActionFailuresStore.getState().setFailure(mockGitifyNotification.id, {
+      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsRead',
         error: Errors.ACTION_FORBIDDEN,
       });
@@ -381,9 +427,6 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       renderWithProviders(<NotificationRow {...props} />, {
         settings: { ...mockSettings, delayNotificationState: false, fetchReadNotifications: false },
         markNotificationsAsRead: markNotificationsAsReadMock,
-        notificationFailures: {
-          [mockGitifyNotification.id]: { action: 'markAsRead', error: Errors.ACTION_FORBIDDEN },
-        },
       });
 
       await userEvent.click(screen.getByTestId('notification-mark-as-read'));
@@ -394,15 +437,13 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       // The retry fails again; the store still has a (new) failure entry for
       // this notification once the mutation resolves.
-      useNotificationActionFailuresStore.getState().setFailure(mockGitifyNotification.id, {
+      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsRead',
         error: Errors.ACTION_FORBIDDEN,
       });
       resolveRetry();
 
       await screen.findByTestId('notification-mark-as-read');
-
-      useNotificationActionFailuresStore.getState().reset();
     });
   });
 });

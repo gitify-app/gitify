@@ -121,10 +121,17 @@ export function restoreFailedNotifications(
 
     const currentIds = new Set(accountEntry.notifications.map((notification) => notification.id));
 
-    const restoredNotifications = snapshotEntry.notifications.filter(
-      (notification) => currentIds.has(notification.id) || failedIds.has(notification.id),
+    const missingNotifications = snapshotEntry.notifications.filter(
+      (notification) => failedIds.has(notification.id) && !currentIds.has(notification.id),
     );
 
-    return { ...accountEntry, notifications: restoredNotifications };
+    if (missingNotifications.length === 0) {
+      return accountEntry;
+    }
+
+    return {
+      ...accountEntry,
+      notifications: [...accountEntry.notifications, ...missingNotifications],
+    };
   });
 }

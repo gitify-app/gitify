@@ -5,7 +5,7 @@ import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { useNotificationActionFailuresStore } from '../../stores';
+import { getNotificationFailureKey, useNotificationActionFailuresStore } from '../../stores';
 
 import type { Link } from '../../types';
 
@@ -145,7 +145,11 @@ describe('renderer/components/notifications/RepositoryNotifications.tsx', () => 
       // directly from it rather than through the mocked `useNotifications`
       // hook.
       const markNotificationsAsReadWithFailure = vi.fn().mockImplementation(async () => {
-        useNotificationActionFailuresStore.getState().setFailure(secondNotification.id, {
+        const failureKey = getNotificationFailureKey(
+          secondNotification.account,
+          secondNotification.id,
+        );
+        useNotificationActionFailuresStore.getState().setFailure(failureKey, {
           action: 'markAsRead',
           error: { title: 'Action Forbidden', descriptions: [], emojis: [] },
         });
