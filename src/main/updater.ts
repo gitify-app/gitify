@@ -21,7 +21,6 @@ export default class AppUpdater {
   private readonly menuBuilder: MenuBuilder;
   private started = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
-  private periodicInterval?: NodeJS.Timeout;
 
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
@@ -82,7 +81,7 @@ export default class AppUpdater {
       this.setTooltipWithStatus('A new update is ready to install');
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
-      this.showUpdateReadyDialog(event.releaseName ?? undefined);
+      this.showUpdateReadyDialog(event.releaseName ?? event.version);
     });
 
     autoUpdater.on('update-not-available', () => {
@@ -139,7 +138,7 @@ export default class AppUpdater {
     // This avoids an immediate duplicate check on startup.
     setTimeout(async () => {
       await runScheduledCheck();
-      this.periodicInterval = setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+      setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
   }
 
@@ -164,6 +163,8 @@ export default class AppUpdater {
 
   /**
    * Reset tray tooltip and all update-related menu items to their default state.
+   * Leaves the periodic check schedule running so a cancelled or failed check
+   * does not stop the app looking for later updates.
    */
   private resetState() {
     this.menubar.tray.setToolTip(APPLICATION.NAME);
@@ -174,26 +175,20 @@ export default class AppUpdater {
 
     // Clear any pending timeout
     this.clearNoUpdateTimeout();
-
-    // Clear periodic interval if present
-    if (this.periodicInterval) {
-      clearInterval(this.periodicInterval);
-      this.periodicInterval = undefined;
-    }
   }
 
   /**
    * Show a dialog informing the user that an update is ready to install.
    * If the user chooses to restart, quitAndInstall is called immediately.
    *
-   * @param releaseName - The version string shown in the dialog message.
+   * @param release - The release name shown in the dialog message.
    */
-  private showUpdateReadyDialog(releaseName?: string) {
+  private showUpdateReadyDialog(release: string) {
     const dialogOpts: MessageBoxOptions = {
       type: 'info',
       buttons: ['Restart', 'Later'],
       title: 'Application Update',
-      message: `${APPLICATION.NAME} ${releaseName} has been downloaded`,
+      message: `${APPLICATION.NAME} ${release} has been downloaded`,
       detail: 'Restart to apply the update. You can also restart later from the tray menu.',
     };
 
