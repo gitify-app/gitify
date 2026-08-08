@@ -1,0 +1,70 @@
+src/renderer/utils/notifications/mutations.ts
+  s_7c490b79c0561f::t_f1a88275684b73 124-125,128-135
+src/renderer/components/notifications/RepositoryNotifications.tsx
+  s_7c490b79c0561f::t_e864b7ebdfed90 54,56
+  s_7c490b79c0561f::t_8669520b4a91b9 7,55
+src/renderer/components/notifications/NotificationRow.tsx
+  s_7c490b79c0561f::t_8669520b4a91b9 39-40,169-171,180-182,191-195
+  s_7c490b79c0561f::t_e864b7ebdfed90 7-11,50-53,74,173,184,197
+src/renderer/utils/notifications/mutations.test.ts
+  s_7c490b79c0561f::t_f1a88275684b73 125-141
+src/renderer/stores/types.ts
+  s_36a14359b48ab2::t_17e8be4455ce70 253-254
+  s_7c490b79c0561f::t_e864b7ebdfed90 247,252,255-257,263
+src/renderer/stores/index.ts
+  s_7c490b79c0561f::t_e864b7ebdfed90 6,9
+  s_7c490b79c0561f::t_8669520b4a91b9 7-8
+src/renderer/utils/core/errors.ts
+  s_7c490b79c0561f::t_43f6009b4627f4 10
+src/renderer/hooks/useNotifications.test.tsx
+  s_7c490b79c0561f::t_c26530480cf64e 681-693,699-700
+  s_7c490b79c0561f::t_8669520b4a91b9 543
+  s_7c490b79c0561f::t_921604b1078dbc 17-23,97,504-508,544-549,694-698
+  s_7c490b79c0561f::t_495cc6704af185 600-625
+src/renderer/components/notifications/RepositoryNotifications.test.tsx
+  s_7c490b79c0561f::t_aa771fbd814678 148-151
+  s_7c490b79c0561f::t_8669520b4a91b9 8,152
+src/renderer/hooks/useNotifications.ts
+  s_7c490b79c0561f::t_43f6009b4627f4 41,395,544-551
+  s_7c490b79c0561f::t_cac965274de7c1 446-465,473,502-505,525,554-557,587,606-609
+  s_7c490b79c0561f::t_c26530480cf64e 576-582,584
+  s_7c490b79c0561f::t_729f0184ab8f2c 22-27
+  s_7c490b79c0561f::t_e864b7ebdfed90 15,379-382,385,415-418,486-492,536-542,590-596
+src/renderer/components/notifications/NotificationRow.test.tsx
+  s_7c490b79c0561f::t_eb66a3e966341a 5,327-344,346-354
+  s_7c490b79c0561f::t_68118015b94a0c 272-280,287,295,301-303,305,319-325,365-368,387-390,409,440
+  s_7c490b79c0561f::t_8669520b4a91b9 12,345
+  s_36a14359b48ab2::t_6b5f6878e1b5c7 326
+src/renderer/stores/useNotificationActionFailuresStore.ts
+  s_36a14359b48ab2::t_a788b378bad767 11,51-52
+  s_7c490b79c0561f::t_e864b7ebdfed90 3,6-10,24-25,28,30,35,39-50,53,55,57-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "8cc323db144bf987975dcfa2e637c6f37f53242d",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_36a14359b48ab2": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_0364eb031ffeC57h59J3QbMbpC",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    },
+    "s_7c490b79c0561f": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "bf4b27a5-6ef4-46b1-992a-03c1bc83e984",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
