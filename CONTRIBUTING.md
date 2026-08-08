@@ -53,6 +53,38 @@ pnpm test
 pnpm test -u
 ```
 
+#### Visual regression tests
+
+`pnpm test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
+spacing, theme changes) are covered separately by a browser-mode project that
+screenshots every route across the light, dark, accessibility, and Glass themes.
+
+Screenshots only match when the browser build and font stack are identical, so
+both commands below run the suite inside a pinned Playwright container, and CI
+verifies against that same container. You do not need to install Playwright's
+browsers locally.
+
+```shell
+# Verify against the committed baselines
+pnpm test:visual
+
+# Regenerate them after an intentional UI change
+pnpm test:visual:update
+```
+
+Both need Docker on an arm64 host, because Chromium crashes under amd64
+emulation on Apple Silicon. On any other machine, push the branch and read the
+diff from the Visual Regression job's `visual-regression-diffs` artifact.
+
+Do not invoke the `browser [visual]` project through `vitest` directly. Vitest
+namespaces baselines per platform and creates missing ones automatically, so a
+bare run on macOS writes a fresh set from your working tree and then passes
+against it — reporting green even on a branch that has a real regression. A
+guard fails the run outside Linux rather than letting that happen.
+
+Note that these baselines capture the `backdrop-filter` fallback for Glass, not
+the macOS native vibrancy material, which Chromium cannot render.
+
 ### Code Style & Conventions
 
 - Linting and formatting are configured in `vite.config.ts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
