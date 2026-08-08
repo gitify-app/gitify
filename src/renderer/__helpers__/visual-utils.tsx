@@ -1,4 +1,4 @@
-import { act, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import type { ReactElement } from 'react';
 import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
@@ -70,9 +70,12 @@ function Appearance() {
 
 /**
  * Renders a route inside the full app chrome (Primer theme, sidebar, layout) at
- * the menubar window size, then waits for effects to flush.
+ * the menubar window size.
  *
- * Returns the element to screenshot. Callers pass it to `toMatchScreenshot`.
+ * Not wrapped in `act()`: `render` already applies its own, and awaiting this
+ * call yields long enough for the async effects to land (`EmojiText` fills its
+ * `innerHTML` from a promise). `toMatchScreenshot` retries until the page is
+ * stable anyway, so it is the backstop rather than this function.
  */
 export async function renderRoute(
   ui: ReactElement,
@@ -118,21 +121,19 @@ export async function renderRoute(
   container.style.cssText = 'position:fixed;inset:0;overflow:hidden';
   document.body.appendChild(container);
 
-  await act(async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <BaseStyles>
-            <Appearance />
-            {/* Routes reading `location.state` (AccountScopes) get their
-                account through here, so it needs stubbing too. */}
-            <MemoryRouter initialEntries={withStubbedAvatars(initialEntries)}>
-              <AppLayout>{ui}</AppLayout>
-            </MemoryRouter>
-          </BaseStyles>
-        </ThemeProvider>
-      </QueryClientProvider>,
-      { container },
-    );
-  });
+  render(
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <BaseStyles>
+          <Appearance />
+          {/* Routes reading `location.state` (AccountScopes) get their
+              account through here, so it needs stubbing too. */}
+          <MemoryRouter initialEntries={withStubbedAvatars(initialEntries)}>
+            <AppLayout>{ui}</AppLayout>
+          </MemoryRouter>
+        </BaseStyles>
+      </ThemeProvider>
+    </QueryClientProvider>,
+    { container },
+  );
 }
