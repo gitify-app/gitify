@@ -21,7 +21,6 @@ export default class AppUpdater {
   private readonly menuBuilder: MenuBuilder;
   private started = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
-  private periodicInterval?: NodeJS.Timeout;
 
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
@@ -139,7 +138,7 @@ export default class AppUpdater {
     // This avoids an immediate duplicate check on startup.
     setTimeout(async () => {
       await runScheduledCheck();
-      this.periodicInterval = setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+      setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
   }
 
@@ -164,6 +163,8 @@ export default class AppUpdater {
 
   /**
    * Reset tray tooltip and all update-related menu items to their default state.
+   * Leaves the periodic check schedule running so a cancelled or failed check
+   * does not stop the app looking for later updates.
    */
   private resetState() {
     this.menubar.tray.setToolTip(APPLICATION.NAME);
@@ -174,12 +175,6 @@ export default class AppUpdater {
 
     // Clear any pending timeout
     this.clearNoUpdateTimeout();
-
-    // Clear periodic interval if present
-    if (this.periodicInterval) {
-      clearInterval(this.periodicInterval);
-      this.periodicInterval = undefined;
-    }
   }
 
   /**

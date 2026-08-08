@@ -270,6 +270,27 @@ describe('main/updater.ts', () => {
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
     });
 
+    it('keeps checking on schedule after an error', async () => {
+      vi.useFakeTimers();
+      try {
+        await updater.start();
+
+        // Let the first scheduled check run, which registers the interval
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+        const callsBeforeError = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
+
+        emit('error', new Error('offline'));
+
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+
+        expect(vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length).toBeGreaterThan(
+          callsBeforeError,
+        );
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
     it('performs initial check and schedules periodic checks', async () => {
       const originalSetInterval = globalThis.setInterval;
       const setIntervalSpy = vi.spyOn(globalThis, 'setInterval').mockImplementation(((
