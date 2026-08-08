@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.1](https://github.com/gitify-app/gitify/compare/v7.3.0...v7.3.1) (2026-08-08)
+
+
+### 🐛 Bug Fixes
+
+* restart to install update, and three update-flow bugs ([#3167](https://github.com/gitify-app/gitify/issues/3167)) ([01fed23](https://github.com/gitify-app/gitify/commit/01fed233f579a802ae2c03150095485714e777c8))
+
 ## [7.3.0](https://github.com/gitify-app/gitify/compare/v7.2.0...v7.3.0) (2026-08-08)
 
 
