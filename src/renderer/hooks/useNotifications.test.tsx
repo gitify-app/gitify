@@ -8,12 +8,19 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
 import {
+  mockGitHubCloudGitifyNotifications,
   mockGitifyNotification,
   mockMultipleAccountNotifications,
   mockSingleAccountNotifications,
 } from '../__mocks__/notifications-mocks';
 
-import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+import {
+  getNotificationFailureKey,
+  useAccountsStore,
+  useFiltersStore,
+  useNotificationActionFailuresStore,
+  useSettingsStore,
+} from '../stores';
 
 import type { AccountNotifications, Percentage } from '../types';
 
@@ -87,6 +94,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     clearServerPollIntervals();
 
     useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+    useNotificationActionFailuresStore.getState().reset();
 
     // Reset mock notification state between tests since it's mutated
     mockGitifyNotification.unread = true;
@@ -479,6 +487,67 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       expect(rendererLogErrorSpy).toHaveBeenCalled();
     });
+
+    it('rolls back the cache for a failed notification while a failed request does not affect it', async () => {
+      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      await act(async () => {
+        await result.current.markNotificationsAsRead([mockGitifyNotification]).catch(() => {});
+      });
+
+      // The notification remains in the cache since its action failed
+      await waitFor(() => expect(result.current.notificationCount).toBe(1));
+      const failureKey = getNotificationFailureKey(
+        mockGitifyNotification.account,
+        mockGitifyNotification.id,
+      );
+      expect(useNotificationActionFailuresStore.getState().failures[failureKey]).toBeDefined();
+    });
+
+    it('tracks succeeded and failed notifications independently within a single bulk call', async () => {
+      const [succeedsNotification, failsNotification] = mockGitHubCloudGitifyNotifications;
+
+      getAllNotificationsMock.mockResolvedValue([
+        {
+          account: succeedsNotification.account,
+          notifications: [succeedsNotification, failsNotification],
+          error: null,
+        },
+      ]);
+
+      vi.spyOn(githubAdapter, 'markThreadAsRead').mockImplementation(async (_account, id) => {
+        if (id === failsNotification.id) {
+          throw new Error('boom');
+        }
+      });
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.notificationCount).toBe(2));
+
+      await act(async () => {
+        await result.current
+          .markNotificationsAsRead([succeedsNotification, failsNotification])
+          .catch(() => {});
+      });
+
+      // The succeeded notification is removed; the failed one remains and is
+      // recorded in the failure map, not the other way around.
+      await waitFor(() => expect(result.current.notificationCount).toBe(1));
+      expect(
+        result.current.notifications[0]?.notifications.some((n) => n.id === failsNotification.id),
+      ).toBe(true);
+      const failsKey = getNotificationFailureKey(failsNotification.account, failsNotification.id);
+      const succeedsKey = getNotificationFailureKey(
+        succeedsNotification.account,
+        succeedsNotification.id,
+      );
+      expect(useNotificationActionFailuresStore.getState().failures[failsKey]).toBeDefined();
+      expect(useNotificationActionFailuresStore.getState().failures[succeedsKey]).toBeUndefined();
+    });
   });
 
   describe('markNotificationsAsDone', () => {
@@ -525,6 +594,32 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(markAsDoneCapabilitySpy).toHaveBeenCalled();
       expect(markThreadAsDoneSpy).not.toHaveBeenCalled();
       expect(markThreadAsReadSpy).toHaveBeenCalledTimes(1);
+
+      markAsDoneCapabilitySpy.mockRestore();
+    });
+
+    it('reconciles a failed mark-as-read fallback only once', async () => {
+      const markAsDoneCapabilitySpy = vi
+        .spyOn(githubAdapter.capabilities, 'markAsDone')
+        .mockReturnValue(false);
+      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      await act(async () => {
+        await result.current.markNotificationsAsDone([mockGitifyNotification]);
+      });
+
+      const failureKey = getNotificationFailureKey(
+        mockGitifyNotification.account,
+        mockGitifyNotification.id,
+      );
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+      expect(useNotificationActionFailuresStore.getState().failures[failureKey]?.action).toBe(
+        'markAsRead',
+      );
 
       markAsDoneCapabilitySpy.mockRestore();
     });
@@ -582,6 +677,26 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(unsubscribeThreadSpy).toHaveBeenCalledTimes(1);
       expect(markThreadAsDoneSpy).toHaveBeenCalledTimes(1);
       expect(markThreadAsReadSpy).not.toHaveBeenCalled();
+    });
+
+    it('keeps a failed follow-up action recorded after unsubscribe succeeds', async () => {
+      vi.spyOn(githubAdapter, 'unsubscribeThread').mockResolvedValue(undefined);
+      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      await act(async () => {
+        await result.current.unsubscribeNotification(mockGitifyNotification);
+      });
+
+      const failureKey = getNotificationFailureKey(
+        mockGitifyNotification.account,
+        mockGitifyNotification.id,
+      );
+      expect(useNotificationActionFailuresStore.getState().failures[failureKey]).toBeDefined();
+      expect(result.current.notificationCount).toBe(1);
     });
   });
 

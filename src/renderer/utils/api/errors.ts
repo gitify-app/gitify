@@ -44,7 +44,7 @@ export function determineFailureType(
           return Errors.RATE_LIMITED;
         }
 
-        break;
+        return Errors.ACTION_FORBIDDEN;
       case 500:
         return Errors.NETWORK;
       default:

@@ -65,6 +65,7 @@ export const Constants = {
   EMOJIS: {
     ALL_READ: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
     ERRORS: {
+      ACTION_FORBIDDEN: ['🚫'],
       BAD_CREDENTIALS: ['🔓'],
       MISSING_SCOPES: ['🔭'],
       NETWORK: ['🛜'],

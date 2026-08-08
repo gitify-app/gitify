@@ -4,7 +4,7 @@ import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { Button } from '@primer/react';
 
 // Derived from public @primer/react component props rather than internal types
-type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
+export type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
 
 import type { AuthMethod, PlatformType } from './utils/auth/types';
 
@@ -241,6 +241,7 @@ export interface GitifyErrorAction {
  * The different types of errors which may be encountered.
  */
 export type ErrorType =
+  | 'ACTION_FORBIDDEN'
   | 'BAD_CREDENTIALS'
   | 'MISSING_SCOPES'
   | 'NETWORK'

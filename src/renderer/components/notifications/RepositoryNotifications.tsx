@@ -4,6 +4,7 @@ import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
 import { useNotifications } from '../../hooks/useNotifications';
+import { getNotificationFailureKey, useNotificationActionFailuresStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -39,15 +40,29 @@ export const RepositoryNotifications: FC<RepositoryNotificationsProps> = ({
     openRepository(repoNotifications[0].repository);
   };
 
-  const actionMarkAsDone = () => {
+  // Starts the group's exit animation immediately, then reverts it if any
+  // notification in this bulk action failed, checked directly against the
+  // failure store once it settles (see `NotificationRow`'s `runAction` for
+  // why not a stale-state effect). There is no group-level rollup indicator;
+  // only the specific failed row(s) recolor their own hover actions.
+  const runGroupAction = async (action: () => Promise<void>) => {
     setShouldAnimateRepositoryExit(shouldAnimateExit);
-    markNotificationsAsDone(repoNotifications);
+
+    await action();
+
+    const { failures } = useNotificationActionFailuresStore.getState();
+    const hasFailure = repoNotifications.some(
+      (notification) => failures[getNotificationFailureKey(notification.account, notification.id)],
+    );
+
+    if (hasFailure) {
+      setShouldAnimateRepositoryExit(false);
+    }
   };
 
-  const actionMarkAsRead = () => {
-    setShouldAnimateRepositoryExit(shouldAnimateExit);
-    markNotificationsAsRead(repoNotifications);
-  };
+  const actionMarkAsDone = () => runGroupAction(() => markNotificationsAsDone(repoNotifications));
+
+  const actionMarkAsRead = () => runGroupAction(() => markNotificationsAsRead(repoNotifications));
 
   const actionToggleRepositoryNotifications = () => {
     setIsRepositoryNotificationsVisible(!isRepositoryNotificationsVisible);
