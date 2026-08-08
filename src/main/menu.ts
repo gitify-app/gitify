@@ -154,6 +154,17 @@ export default class MenuBuilder {
   }
 
   /**
+   * Publish in-place menu item changes to the tray.
+   *
+   * Linux serves libappindicator a cached serialization of the menu, so an
+   * item mutated after the menu was attached keeps rendering its old state
+   * until the menu is set again. A no-op on macOS and Windows.
+   */
+  private refreshMenu() {
+    this.menubar.refreshContextMenu();
+  }
+
+  /**
    * Enable or disable the "Check for updates" menu item.
    * Disabled while an update check is in progress.
    *
@@ -161,6 +172,7 @@ export default class MenuBuilder {
    */
   setCheckForUpdatesMenuEnabled(enabled: boolean) {
     this.checkForUpdatesMenuItem.enabled = enabled;
+    this.refreshMenu();
   }
 
   /**
@@ -170,6 +182,7 @@ export default class MenuBuilder {
    */
   setNoUpdateAvailableMenuVisibility(isVisible: boolean) {
     this.noUpdateAvailableMenuItem.visible = isVisible;
+    this.refreshMenu();
   }
 
   /**
@@ -179,6 +192,7 @@ export default class MenuBuilder {
    */
   setUpdateAvailableMenuVisibility(isVisible: boolean) {
     this.updateAvailableMenuItem.visible = isVisible;
+    this.refreshMenu();
   }
 
   /**
@@ -188,5 +202,6 @@ export default class MenuBuilder {
    */
   setUpdateReadyForInstallMenuVisibility(isVisible: boolean) {
     this.updateReadyForInstallMenuItem.visible = isVisible;
+    this.refreshMenu();
   }
 }

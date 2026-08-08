@@ -17,7 +17,7 @@ import MenuBuilder from './menu';
 import AppUpdater from './updater';
 
 // Mock electron-updater with an EventEmitter-like interface
-type UpdateDownloadedEvent = { releaseName: string };
+type UpdateDownloadedEvent = { releaseName?: string | null; version?: string };
 type ListenerArgs = UpdateDownloadedEvent | object | undefined;
 type Listener = (arg: ListenerArgs) => void;
 type ListenerMap = Record<string, Listener[]>;
@@ -122,6 +122,23 @@ describe('main/updater.ts', () => {
       expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
       expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
       expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(true);
+    });
+
+    it('falls back to the version when the release has no name', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 1, // "Later" button index
+        checkboxChecked: false,
+      });
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: null, version: '1.2.3' });
+
+      expect(dialog.showMessageBox).toHaveBeenCalledWith(
+        expect.objectContaining({
+          message: `${APPLICATION.NAME} 1.2.3 has been downloaded`,
+        }),
+      );
     });
 
     it('invokes quitAndInstall when user clicks Restart', async () => {
@@ -268,6 +285,27 @@ describe('main/updater.ts', () => {
 
       expect(logError).toHaveBeenCalledWith('auto updater', 'Error checking for update', err);
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
+    });
+
+    it('keeps checking on schedule after an error', async () => {
+      vi.useFakeTimers();
+      try {
+        await updater.start();
+
+        // Let the first scheduled check run, which registers the interval
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+        const callsBeforeError = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
+
+        emit('error', new Error('offline'));
+
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+
+        expect(vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length).toBeGreaterThan(
+          callsBeforeError,
+        );
+      } finally {
+        vi.useRealTimers();
+      }
     });
 
     it('performs initial check and schedules periodic checks', async () => {

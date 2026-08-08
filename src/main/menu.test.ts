@@ -94,6 +94,7 @@ describe('main/menu.ts', () => {
       app: { quit: vi.fn() },
       showWindow: vi.fn(),
       hideWindow: vi.fn(),
+      refreshContextMenu: vi.fn(),
       tray: {
         isDestroyed: vi.fn(() => false),
         setContextMenu: vi.fn(),
@@ -200,6 +201,12 @@ describe('main/menu.ts', () => {
 
       // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(false);
+    });
+
+    it('republishes the menu so Linux picks up the visibility change', () => {
+      menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
+
+      expect(menubar.refreshContextMenu).toHaveBeenCalled();
     });
   });
 
