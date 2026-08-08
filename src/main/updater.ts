@@ -81,7 +81,7 @@ export default class AppUpdater {
       this.setTooltipWithStatus('A new update is ready to install');
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
-      this.showUpdateReadyDialog(event.releaseName ?? undefined);
+      this.showUpdateReadyDialog(event.releaseName ?? event.version);
     });
 
     autoUpdater.on('update-not-available', () => {
@@ -181,14 +181,14 @@ export default class AppUpdater {
    * Show a dialog informing the user that an update is ready to install.
    * If the user chooses to restart, quitAndInstall is called immediately.
    *
-   * @param releaseName - The version string shown in the dialog message.
+   * @param release - The release name shown in the dialog message.
    */
-  private showUpdateReadyDialog(releaseName?: string) {
+  private showUpdateReadyDialog(release: string) {
     const dialogOpts: MessageBoxOptions = {
       type: 'info',
       buttons: ['Restart', 'Later'],
       title: 'Application Update',
-      message: `${APPLICATION.NAME} ${releaseName} has been downloaded`,
+      message: `${APPLICATION.NAME} ${release} has been downloaded`,
       detail: 'Restart to apply the update. You can also restart later from the tray menu.',
     };
 
