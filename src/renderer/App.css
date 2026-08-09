@@ -553,9 +553,10 @@ body,
     transparent
   );
 
-  animation:
-    gitify-scroll-fade-top linear both,
-    gitify-scroll-fade-bottom linear both;
+  animation-name: gitify-scroll-fade-top, gitify-scroll-fade-bottom;
+  animation-duration: auto;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
   animation-timeline: scroll(self block);
   animation-range:
     0px var(--gitify-scroll-fade-size),
