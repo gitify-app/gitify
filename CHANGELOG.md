@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.2](https://github.com/gitify-app/gitify/compare/v7.3.1...v7.3.2) (2026-08-09)
+
+
+### 🐛 Bug Fixes
+
+* keep the scroll fade ramping in packaged builds ([#3170](https://github.com/gitify-app/gitify/issues/3170)) ([ef2aec0](https://github.com/gitify-app/gitify/commit/ef2aec062f27de8b54b01394696c492825b90fa9))
+
 ## [7.3.1](https://github.com/gitify-app/gitify/compare/v7.3.0...v7.3.1) (2026-08-08)
 
 
