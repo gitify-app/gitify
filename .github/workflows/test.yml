@@ -51,7 +51,7 @@ jobs:
     # This tag must match the `playwright` devDependency, which ships the
     # matching browser build. Renovate groups the two so they always move
     # together; `scripts/visual.sh` reads the version straight from package.json.
-    container: mcr.microsoft.com/playwright:v1.62.1-noble
+    container: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
 
     steps:
       - name: Checkout
