@@ -3,7 +3,11 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
 
-import { githubCapabilities, supportsAnsweredDiscussion } from './capabilities';
+import {
+  githubCapabilities,
+  supportsAnsweredDiscussion,
+  supportsStackedPullRequests,
+} from './capabilities';
 
 describe('renderer/utils/forges/github/capabilities.ts', () => {
   describe('markAsDone', () => {
@@ -65,6 +69,25 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
     it('returns false when the GHES version is unknown', () => {
       expect(
         supportsAnsweredDiscussion({
+          ...mockGitHubEnterpriseServerAccount,
+          version: undefined,
+        }),
+      ).toBe(false);
+    });
+  });
+
+  describe('supportsStackedPullRequests', () => {
+    it('returns true for GitHub Cloud', () => {
+      expect(supportsStackedPullRequests(mockGitHubCloudAccount)).toBe(true);
+    });
+
+    it('returns false for GitHub Enterprise Server', () => {
+      expect(supportsStackedPullRequests(mockGitHubEnterpriseServerAccount)).toBe(false);
+    });
+
+    it('returns false when the GHES version is unknown', () => {
+      expect(
+        supportsStackedPullRequests({
           ...mockGitHubEnterpriseServerAccount,
           version: undefined,
         }),

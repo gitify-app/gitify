@@ -3,7 +3,7 @@ import semver from 'semver';
 import type { Account } from '../../../types';
 import type { ForgeCapabilities } from '../types';
 
-import { isEnterpriseServerHost } from '../../auth/platform';
+import { isGitHubCloudHost, isGitHubEnterpriseServerHost } from './platform';
 
 /**
  * GitHub feature capabilities exposed through the forge adapter contract.
@@ -14,7 +14,7 @@ import { isEnterpriseServerHost } from '../../auth/platform';
  */
 export const githubCapabilities: ForgeCapabilities = {
   markAsDone(account: Account): boolean {
-    if (!isEnterpriseServerHost(account.hostname)) {
+    if (!isGitHubEnterpriseServerHost(account.hostname)) {
       return true;
     }
     if (account.version) {
@@ -36,11 +36,24 @@ export const githubCapabilities: ForgeCapabilities = {
  * GHES exposed `isAnswered` from version 3.12 onwards.
  */
 export function supportsAnsweredDiscussion(account: Account): boolean {
-  if (!isEnterpriseServerHost(account.hostname)) {
+  if (!isGitHubEnterpriseServerHost(account.hostname)) {
     return true;
   }
   if (account.version) {
     return semver.gte(account.version, '3.12.0');
   }
   return false;
+}
+
+/**
+ * GitHub-only capability: whether the GraphQL `PullRequest` schema exposes the
+ * native `stackEntry` field used for stacked PR metrics. Lives outside the
+ * shared `ForgeCapabilities` because no other forge supports stacked PRs and
+ * the only consumer is the GitHub GraphQL query construction in `client.ts`.
+ *
+ * Stacked PRs are a GitHub Cloud feature and are not available on GitHub
+ * Enterprise Server.
+ */
+export function supportsStackedPullRequests(account: Account): boolean {
+  return isGitHubCloudHost(account.hostname);
 }

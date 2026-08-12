@@ -7,8 +7,8 @@ import { Constants } from '../../../constants';
 
 import type { Account, ClientID, Hostname, Link, Token } from '../../../types';
 
-import { getPlatformFromHostname } from '../../auth/platform';
 import { getRecommendedScopeNames } from '../../auth/scopes';
+import { getGitHubPlatform } from './platform';
 
 /**
  * Normalize a GitHub Enterprise Server version string to a semver string.
@@ -39,7 +39,7 @@ export function extractHostVersion(version: string | null): string | undefined {
  * @returns The base URL to use for OAuth API requests.
  */
 export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
-  const platform = getPlatformFromHostname(hostname);
+  const platform = getGitHubPlatform(hostname);
   const url = new URL(APPLICATION.GITHUB_BASE_URL);
 
   switch (platform) {

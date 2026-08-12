@@ -14,7 +14,7 @@ import type {
 } from './types';
 
 import { reportServerPollInterval } from '../../notifications/pollInterval';
-import { supportsAnsweredDiscussion } from './capabilities';
+import { supportsAnsweredDiscussion, supportsStackedPullRequests } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
@@ -250,6 +250,7 @@ export async function fetchPullByNumber(
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+    includeStackEntry: supportsStackedPullRequests(notification.account),
   });
 } /**
  * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
@@ -297,6 +298,7 @@ export async function fetchNotificationDetailsForList(
 
   builder.setSharedVariables({
     includeIsAnswered: supportsAnsweredDiscussion(notifications[0].account),
+    includeStackEntry: supportsStackedPullRequests(notifications[0].account),
     firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,

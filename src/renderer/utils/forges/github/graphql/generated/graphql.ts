@@ -248,6 +248,7 @@ export type FetchMergedDetailsTemplateQueryVariables = Exact<{
   firstLabels?: number | null | undefined;
   firstClosingIssues?: number | null | undefined;
   includeIsAnswered: boolean;
+  includeStackEntry: boolean;
 }>;
 
 
@@ -305,7 +306,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered?: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -361,7 +362,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: string;
@@ -371,6 +372,7 @@ export type FetchPullRequestByNumberQueryVariables = Exact<{
   lastComments?: number | null | undefined;
   lastReviews?: number | null | undefined;
   firstClosingIssues?: number | null | undefined;
+  includeStackEntry: boolean;
 }>;
 
 
@@ -398,7 +400,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -424,7 +426,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
         | { login: string }
         | { login: string }
         | { login: string }
-       | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
+       | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, author:
     | { login: string }
@@ -741,7 +743,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
       number
     }
   }
-  stackEntry {
+  stackEntry @include(if: $includeStackEntry) {
     position
     stack {
       size
@@ -967,7 +969,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry {
+  stackEntry @include(if: $includeStackEntry) {
     position
     stack {
       size
@@ -1133,7 +1135,7 @@ fragment IssueDetails on Issue {
   }
 }`) as unknown as TypedDocumentString<FetchIssueByNumberQuery, FetchIssueByNumberQueryVariables>;
 export const FetchMergedDetailsTemplateDocument = new TypedDocumentString(`
-    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!) {
+    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!, $includeStackEntry: Boolean!) {
   ...MergedDetailsQueryTemplate
 }
     fragment AuthorFields on Actor {
@@ -1322,7 +1324,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry {
+  stackEntry @include(if: $includeStackEntry) {
     position
     stack {
       size
@@ -1342,7 +1344,7 @@ fragment PullRequestReviewFields on PullRequestReview {
   }
 }`) as unknown as TypedDocumentString<FetchMergedDetailsTemplateQuery, FetchMergedDetailsTemplateQueryVariables>;
 export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
-    query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int) {
+    query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int, $includeStackEntry: Boolean!) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
       ...PullRequestDetails
@@ -1428,7 +1430,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry {
+  stackEntry @include(if: $includeStackEntry) {
     position
     stack {
       size
