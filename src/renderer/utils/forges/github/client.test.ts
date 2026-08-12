@@ -392,6 +392,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
         lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
         lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+        includeStackEntry: true,
       },
     );
   });
@@ -440,6 +441,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
           firstClosingIssues: 100,
           firstLabels: 100,
           includeIsAnswered: true,
+          includeStackEntry: true,
           isDiscussionNotification0: false,
           isDiscussionNotification1: false,
           isIssueNotification0: true,

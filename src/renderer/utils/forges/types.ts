@@ -18,6 +18,7 @@ import type {
   AuthResponse,
   DeviceFlowSession,
   LoginOAuthWebOptions,
+  PlatformType,
 } from '../auth/types';
 
 /**
@@ -103,6 +104,12 @@ export interface ForgeAdapter {
   readonly icon: FC<OcticonProps>;
   /** Static or computed capability matrix for this forge. */
   readonly capabilities: ForgeCapabilities;
+
+  /**
+   * Resolve the platform label (e.g. "GitHub Cloud") for a given hostname.
+   * Forges like GitHub vary by hostname; others report a single platform.
+   */
+  getPlatform(hostname: Hostname): PlatformType;
 
   /**
    * Format a user login for display (e.g. prepend "@" for GitHub/Gitea,
