@@ -29,9 +29,7 @@ export function stripGatedSelections(doc: string, capabilities: Record<string, b
 
       const requiresArg = gated.arguments?.find((arg) => arg.name.value === GATED_REQUIRES_ARG);
       const capability =
-        requiresArg && requiresArg.value.kind === 'StringValue'
-          ? requiresArg.value.value
-          : undefined;
+        requiresArg?.value.kind === 'StringValue' ? requiresArg.value.value : undefined;
 
       if (capability && !capabilities[capability]) {
         return null;
