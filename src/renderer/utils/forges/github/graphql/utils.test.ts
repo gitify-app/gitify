@@ -1,5 +1,6 @@
 import {
   FetchMergedDetailsTemplateDocument,
+  FetchPullRequestByNumberDocument,
   IssueDetailsFragmentDoc,
   MergedDetailsQueryTemplateFragmentDoc,
 } from './generated/graphql';
@@ -9,6 +10,7 @@ import {
   extractNonIndexedVariableDefinitions,
   extractNonQueryFragments,
   extractQueryFragments,
+  stripGatedSelections,
 } from './utils';
 
 describe('renderer/utils/forges/github/graphql/utils.ts', () => {
@@ -87,7 +89,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       );
 
       expect(varDefs).not.toBeNull();
-      expect(varDefs.length).toBe(8);
+      expect(varDefs.length).toBe(6);
       expect(varDefs.flatMap((v) => v.name)).toEqual([
         'lastComments',
         'lastThreadedComments',
@@ -95,8 +97,6 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
         'lastReviews',
         'firstLabels',
         'firstClosingIssues',
-        'includeIsAnswered',
-        'includeStackEntry',
       ]);
     });
   });
@@ -117,6 +117,62 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       expect(result).not.toContain('$number0');
       expect(result).toContain('$isIssueNotification0');
       expect(result).not.toContain('$isIssueNotificationINDEX');
+    });
+  });
+
+  describe('stripGatedSelections', () => {
+    const allCapabilities = {
+      stackedPullRequests: true,
+      answeredDiscussion: true,
+    };
+
+    it('strips @gated directives but keeps gated fields when supported', () => {
+      const result = stripGatedSelections(
+        FetchPullRequestByNumberDocument.toString(),
+        allCapabilities,
+      );
+
+      expect(result).not.toContain('@gated');
+      expect(result).not.toContain('gated');
+      expect(result).toContain('stackEntry');
+      expect(result).toContain('query FetchPullRequestByNumber');
+    });
+
+    it('removes gated fields when their capability is unsupported', () => {
+      const result = stripGatedSelections(FetchPullRequestByNumberDocument.toString(), {
+        ...allCapabilities,
+        stackedPullRequests: false,
+      });
+
+      expect(result).not.toContain('stackEntry');
+      expect(result).not.toContain('@gated');
+      expect(result).toContain('query FetchPullRequestByNumber');
+      expect(result).toContain('repository');
+    });
+
+    it('strips @gated directives from the merged template when supported', () => {
+      const result = stripGatedSelections(
+        FetchMergedDetailsTemplateDocument.toString(),
+        allCapabilities,
+      );
+
+      expect(result).not.toContain('@gated');
+      expect(result).toContain('stackEntry');
+      expect(result).toContain('isAnswered');
+      expect(result).toContain('query FetchMergedDetailsTemplate');
+    });
+
+    it('removes gated fields from the merged template when unsupported', () => {
+      const result = stripGatedSelections(FetchMergedDetailsTemplateDocument.toString(), {
+        stackedPullRequests: false,
+        answeredDiscussion: false,
+      });
+
+      expect(result).not.toContain('stackEntry');
+      expect(result).not.toContain('isAnswered');
+      expect(result).not.toContain('@gated');
+      expect(result).toContain('query FetchMergedDetailsTemplate');
+      expect(result).toContain('PullRequestDetails');
     });
   });
 });

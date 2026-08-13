@@ -131,11 +131,10 @@ export type FetchDiscussionByNumberQueryVariables = Exact<{
   lastThreadedComments?: number | null | undefined;
   lastReplies?: number | null | undefined;
   firstLabels?: number | null | undefined;
-  includeIsAnswered: boolean;
 }>;
 
 
-export type FetchDiscussionByNumberQuery = { repository: { discussion: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered?: boolean | null, url: Link, author:
+export type FetchDiscussionByNumberQuery = { repository: { discussion: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -155,7 +154,7 @@ export type FetchDiscussionByNumberQuery = { repository: { discussion: { __typen
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
-export type DiscussionDetailsFragment = { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered?: boolean | null, url: Link, author:
+export type DiscussionDetailsFragment = { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -247,12 +246,10 @@ export type FetchMergedDetailsTemplateQueryVariables = Exact<{
   lastReviews?: number | null | undefined;
   firstLabels?: number | null | undefined;
   firstClosingIssues?: number | null | undefined;
-  includeIsAnswered: boolean;
-  includeStackEntry: boolean;
 }>;
 
 
-export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered?: boolean | null, url: Link, author:
+export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -306,9 +303,9 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
-export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered?: boolean | null, url: Link, author:
+export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -362,7 +359,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: string;
@@ -372,7 +369,6 @@ export type FetchPullRequestByNumberQueryVariables = Exact<{
   lastComments?: number | null | undefined;
   lastReviews?: number | null | undefined;
   firstClosingIssues?: number | null | undefined;
-  includeStackEntry: boolean;
 }>;
 
 
@@ -400,7 +396,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+           | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -426,7 +422,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
         | { login: string }
         | { login: string }
         | { login: string }
-       | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
+       | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, author:
     | { login: string }
@@ -543,7 +539,7 @@ export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
   number
   title
   stateReason
-  isAnswered @include(if: $includeIsAnswered)
+  isAnswered @gated(requires: "answeredDiscussion")
   url
   author {
     ...AuthorFields
@@ -743,7 +739,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
       number
     }
   }
-  stackEntry @include(if: $includeStackEntry) {
+  stackEntry @gated(requires: "stackedPullRequests") {
     position
     stack {
       size
@@ -821,7 +817,7 @@ fragment DiscussionDetails on Discussion {
   number
   title
   stateReason
-  isAnswered @include(if: $includeIsAnswered)
+  isAnswered @gated(requires: "answeredDiscussion")
   url
   author {
     ...AuthorFields
@@ -969,7 +965,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry @include(if: $includeStackEntry) {
+  stackEntry @gated(requires: "stackedPullRequests") {
     position
     stack {
       size
@@ -989,7 +985,7 @@ fragment PullRequestReviewFields on PullRequestReview {
   }
 }`, {"fragmentName":"MergedDetailsQueryTemplate"}) as unknown as TypedDocumentString<MergedDetailsQueryTemplateFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
-    query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastThreadedComments: Int, $lastReplies: Int, $firstLabels: Int, $includeIsAnswered: Boolean!) {
+    query FetchDiscussionByNumber($owner: String!, $name: String!, $number: Int!, $lastThreadedComments: Int, $lastReplies: Int, $firstLabels: Int) {
   repository(owner: $owner, name: $name) {
     discussion(number: $number) {
       ...DiscussionDetails
@@ -1017,7 +1013,7 @@ fragment DiscussionDetails on Discussion {
   number
   title
   stateReason
-  isAnswered @include(if: $includeIsAnswered)
+  isAnswered @gated(requires: "answeredDiscussion")
   url
   author {
     ...AuthorFields
@@ -1135,7 +1131,7 @@ fragment IssueDetails on Issue {
   }
 }`) as unknown as TypedDocumentString<FetchIssueByNumberQuery, FetchIssueByNumberQueryVariables>;
 export const FetchMergedDetailsTemplateDocument = new TypedDocumentString(`
-    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int, $includeIsAnswered: Boolean!, $includeStackEntry: Boolean!) {
+    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstLabels: Int, $firstClosingIssues: Int) {
   ...MergedDetailsQueryTemplate
 }
     fragment AuthorFields on Actor {
@@ -1163,7 +1159,7 @@ fragment DiscussionDetails on Discussion {
   number
   title
   stateReason
-  isAnswered @include(if: $includeIsAnswered)
+  isAnswered @gated(requires: "answeredDiscussion")
   url
   author {
     ...AuthorFields
@@ -1324,7 +1320,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry @include(if: $includeStackEntry) {
+  stackEntry @gated(requires: "stackedPullRequests") {
     position
     stack {
       size
@@ -1344,7 +1340,7 @@ fragment PullRequestReviewFields on PullRequestReview {
   }
 }`) as unknown as TypedDocumentString<FetchMergedDetailsTemplateQuery, FetchMergedDetailsTemplateQueryVariables>;
 export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
-    query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int, $includeStackEntry: Boolean!) {
+    query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstClosingIssues: Int) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
       ...PullRequestDetails
@@ -1430,7 +1426,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry @include(if: $includeStackEntry) {
+  stackEntry @gated(requires: "stackedPullRequests") {
     position
     stack {
       size

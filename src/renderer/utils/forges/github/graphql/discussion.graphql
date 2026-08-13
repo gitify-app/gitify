@@ -7,7 +7,6 @@ query FetchDiscussionByNumber(
   $lastThreadedComments: Int
   $lastReplies: Int
   $firstLabels: Int
-  $includeIsAnswered: Boolean!
 ) {
   repository(owner: $owner, name: $name) {
     discussion(number: $number) {
@@ -21,7 +20,7 @@ fragment DiscussionDetails on Discussion {
   number
   title
   stateReason
-  isAnswered @include(if: $includeIsAnswered)
+  isAnswered @gated(requires: "answeredDiscussion")
   url
   author {
     ...AuthorFields
