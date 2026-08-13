@@ -20,12 +20,27 @@ on:
       - synchronize
       - ready_for_review
 
+  # release-please PRs are opened with `GITHUB_TOKEN`, for which GitHub does
+  # not create `pull_request_target` workflow runs at all (only `pull_request`
+  # runs, which require approval). The jobs below are guarded to the
+  # release-please head branch so this only fires for release PRs.
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+      - ready_for_review
+
 permissions: {}
 
 jobs:
   pr-title:
     name: Validate PR title
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request_target' || (github.event_name == 'pull_request' && startsWith(github.head_ref, 'release-please--')) }}
     permissions:
       pull-requests: read
     steps:
@@ -36,6 +51,7 @@ jobs:
   pr-labeler:
     name: Auto-label PR
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request_target' || (github.event_name == 'pull_request' && startsWith(github.head_ref, 'release-please--')) }}
     permissions:
       contents: read # the config file
       pull-requests: write # for labeling pull requests
