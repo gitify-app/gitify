@@ -387,10 +387,8 @@ export interface GitifySubject {
   commenter?: GitifyNotificationUser;
   /** Whether the current user was directly requested or via team */
   reviewRequested?: ReviewRequestType[];
-  /** PR review states & reviewers */
-  reviews?: GitifyPullRequestReview[];
-  /** PR review thread resolution and discussion summary */
-  reviewThreads?: GitifyPullRequestReviewThreads;
+  /** PR reviewer states and review thread resolution counts */
+  reviewers?: GitifyPullRequestReviewer[];
   /** PRs closing issues */
   linkedIssues?: string[];
   /** Total comment count */
@@ -486,21 +484,13 @@ export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 
 export type GitifyLabels = LabelFieldsFragment;
 
-export interface GitifyPullRequestReview {
-  state: PullRequestReviewState;
-  users: string[];
-}
-
-export interface GitifyPullRequestReviewThreadStarter {
+export interface GitifyPullRequestReviewer {
   user: string;
-  resolved: number;
-  total: number;
-}
-
-export interface GitifyPullRequestReviewThreads {
-  total: number;
-  unresolved: number;
-  starters: GitifyPullRequestReviewThreadStarter[];
+  state?: PullRequestReviewState;
+  threads: {
+    resolved: number;
+    total: number;
+  };
 }
 
 export type GitifyDiscussionState = DiscussionStateReason | 'OPEN' | 'ANSWERED';

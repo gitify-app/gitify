@@ -7,14 +7,19 @@ import {
   OrganizationIcon,
 } from '@primer/octicons-react';
 
-import { type GitifyPullRequestReview, IconColor } from '../../types';
+import { IconColor } from '../../types';
 
-import { getDefaultUserIcon, getPlatformIcon, getPullRequestReviewIcon } from './icons';
+import {
+  getDefaultUserIcon,
+  getPlatformIcon,
+  getPullRequestReviewIcon,
+  type PullRequestReviewGroup,
+} from './icons';
 
 describe('renderer/utils/icons.ts', () => {
   describe('getPullRequestReviewIcon', () => {
-    let mockReviewSingleReviewer: GitifyPullRequestReview;
-    let mockReviewMultipleReviewer: GitifyPullRequestReview;
+    let mockReviewSingleReviewer: PullRequestReviewGroup;
+    let mockReviewMultipleReviewer: PullRequestReviewGroup;
 
     beforeEach(() => {
       mockReviewSingleReviewer = {

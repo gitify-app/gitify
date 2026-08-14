@@ -2,32 +2,35 @@ import type { FC } from 'react';
 
 import { CommentIcon } from '@primer/octicons-react';
 
-import {
-  type GitifyPullRequestReview,
-  type GitifyPullRequestReviewThreads,
-  IconColor,
-} from '../../types';
+import { type GitifyPullRequestReviewer, IconColor } from '../../types';
 
-import { getPullRequestReviewIcon } from '../../utils/ui/icons';
+import { getPullRequestReviewIcon, type PullRequestReviewGroup } from '../../utils/ui/icons';
 import { MetricPill } from './MetricPill';
 
 export interface ReviewsPillProps {
-  reviews: GitifyPullRequestReview[];
-  reviewThreads?: GitifyPullRequestReviewThreads;
+  reviewers: GitifyPullRequestReviewer[];
 }
 
-export const ReviewsPill: FC<ReviewsPillProps> = ({ reviews, reviewThreads }) => {
-  if (!reviews?.length && !reviewThreads) {
+export const ReviewsPill: FC<ReviewsPillProps> = ({ reviewers }) => {
+  if (!reviewers.length) {
     return null;
   }
 
-  const threadDescription = reviewThreads
-    ? formatReviewThreadDescription(reviewThreads)
-    : undefined;
+  const reviewGroups = getReviewGroups(reviewers);
+  const reviewersWithThreads = reviewers.filter((reviewer) => reviewer.threads.total > 0);
+  const threadTotal = reviewersWithThreads.reduce(
+    (total, reviewer) => total + reviewer.threads.total,
+    0,
+  );
+  const resolvedThreadTotal = reviewersWithThreads.reduce(
+    (total, reviewer) => total + reviewer.threads.resolved,
+    0,
+  );
+  const unresolvedThreadTotal = threadTotal - resolvedThreadTotal;
 
   return (
     <>
-      {reviews.map((review) => {
+      {reviewGroups.map((review) => {
         if (review.state === 'COMMENTED') {
           return null;
         }
@@ -49,21 +52,35 @@ export const ReviewsPill: FC<ReviewsPillProps> = ({ reviews, reviewThreads }) =>
         );
       })}
 
-      {reviewThreads ? (
+      {threadTotal ? (
         <MetricPill
-          color={reviewThreads.unresolved ? IconColor.YELLOW : IconColor.GREEN}
-          contents={threadDescription!}
+          color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
+          contents={formatReviewThreadDescription(reviewersWithThreads)}
           icon={CommentIcon}
-          metric={reviewThreads.unresolved || reviewThreads.total}
+          metric={unresolvedThreadTotal || threadTotal}
         />
       ) : null}
     </>
   );
 };
 
-function formatReviewThreadDescription(threads: GitifyPullRequestReviewThreads): string {
-  return threads.starters
+function getReviewGroups(reviewers: GitifyPullRequestReviewer[]): PullRequestReviewGroup[] {
+  const groups = new Map<NonNullable<GitifyPullRequestReviewer['state']>, string[]>();
+
+  for (const reviewer of reviewers) {
+    if (reviewer.state) {
+      groups.set(reviewer.state, [...(groups.get(reviewer.state) ?? []), reviewer.user]);
+    }
+  }
+
+  return Array.from(groups, ([state, users]) => ({ state, users })).sort((a, b) =>
+    a.state.localeCompare(b.state),
+  );
+}
+
+function formatReviewThreadDescription(reviewers: GitifyPullRequestReviewer[]): string {
+  return reviewers
     .toSorted((a, b) => a.user.localeCompare(b.user))
-    .map(({ user, resolved, total }) => `${user}: ${resolved}/${total} resolved`)
+    .map(({ user, threads }) => `${user}: ${threads.resolved}/${threads.total} resolved`)
     .join(' · ');
 }

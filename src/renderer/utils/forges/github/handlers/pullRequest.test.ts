@@ -19,12 +19,7 @@ import type {
   FetchPullRequestByNumberQuery,
   PullRequestReviewState,
 } from '../graphql/generated/graphql';
-import {
-  getLatestReviewForReviewers,
-  getReviewThreadSummary,
-  getReviewRequestTypes,
-  pullRequestHandler,
-} from './pullRequest';
+import { getPullRequestReviewers, getReviewRequestTypes, pullRequestHandler } from './pullRequest';
 
 vi.mock('../client', async () => {
   const actual = await vi.importActual<typeof import('../client')>('../client');
@@ -83,7 +78,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -116,14 +111,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       const result = await pullRequestHandler.enrich(mockNotification);
 
-      expect(result.reviewThreads).toEqual({
-        total: 2,
-        unresolved: 1,
-        starters: [
-          { user: 'reviewer-1', resolved: 0, total: 1 },
-          { user: 'Unknown reviewer', resolved: 1, total: 1 },
-        ],
-      });
+      expect(result.reviewers).toEqual([
+        { user: 'reviewer-1', threads: { resolved: 0, total: 1 } },
+        { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
+      ]);
     });
 
     it('fetches remaining review thread pages before enriching', async () => {
@@ -156,14 +147,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       const result = await pullRequestHandler.enrich(mockNotification, mockPullRequest);
 
       expect(fetchReviewThreadsSpy).toHaveBeenCalledWith(mockNotification, 'page-2');
-      expect(result.reviewThreads).toEqual({
-        total: 2,
-        unresolved: 1,
-        starters: [
-          { user: 'alice', resolved: 0, total: 1 },
-          { user: 'bob', resolved: 1, total: 1 },
-        ],
-      });
+      expect(result.reviewers).toEqual([
+        { user: 'alice', threads: { resolved: 0, total: 1 } },
+        { user: 'bob', threads: { resolved: 1, total: 1 } },
+      ]);
     });
 
     it('omits review thread status when pagination fails', async () => {
@@ -181,7 +168,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       const result = await pullRequestHandler.enrich(mockNotification, mockPullRequest);
 
-      expect(result.reviewThreads).toBeUndefined();
+      expect(result.reviewers).toEqual([]);
       expect(result.state).toBe('OPEN');
     });
 
@@ -215,7 +202,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -256,7 +243,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -297,7 +284,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -341,7 +328,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         isStacked: true,
         stackPosition: 2,
@@ -403,7 +390,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockCommenter.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 1,
@@ -452,7 +439,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [{ name: 'enhancement', color: '0e8a16' }],
         linkedIssues: [],
         commentCount: 0,
@@ -499,7 +486,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: ['#789'],
         commentCount: 0,
@@ -543,7 +530,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -614,8 +601,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     ).toEqual(`${mockHtmlUrl}/pulls`);
   });
 
-  describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {
-    it('returns latest review state per reviewer', async () => {
+  describe('Pull Request Reviewers', () => {
+    it('merges latest states and thread counts by reviewer', () => {
       const mockReviews = [
         {
           author: {
@@ -643,42 +630,16 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ];
 
-      const result = getLatestReviewForReviewers(mockReviews);
-
-      expect(result).toEqual([
-        { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
-        { state: 'COMMENTED', users: ['reviewer-2'] },
-      ]);
-    });
-
-    it('handles no PR reviews yet', async () => {
-      const result = getLatestReviewForReviewers([]);
-
-      expect(result).toEqual([]);
-    });
-  });
-
-  describe('Pull Request Review Threads', () => {
-    it('aggregates mixed resolution, replies, and thread starters across pages', () => {
-      const result = getReviewThreadSummary([
+      const result = getPullRequestReviewers(mockReviews, [
         {
           nodes: [
             {
               isResolved: false,
-              comments: { nodes: [{ author: { login: 'zoe' } }] },
+              comments: { nodes: [{ author: { login: 'reviewer-1' } }] },
             },
             {
               isResolved: true,
-              comments: { nodes: [{ author: { login: 'alice' } }] },
-            },
-          ],
-          pageInfo: { hasNextPage: true, endCursor: 'page-2' },
-        },
-        {
-          nodes: [
-            {
-              isResolved: false,
-              comments: { nodes: [{ author: { login: 'alice' } }] },
+              comments: { nodes: [{ author: { login: 'thread-only' } }] },
             },
             {
               isResolved: true,
@@ -689,21 +650,58 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ]);
 
-      expect(result).toEqual({
-        total: 4,
-        unresolved: 2,
-        starters: [
-          { user: 'alice', resolved: 1, total: 2 },
-          { user: 'Unknown reviewer', resolved: 1, total: 1 },
-          { user: 'zoe', resolved: 0, total: 1 },
-        ],
-      });
+      expect(result).toEqual([
+        { user: 'reviewer-1', state: 'APPROVED', threads: { resolved: 0, total: 1 } },
+        { user: 'reviewer-2', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
+        { user: 'reviewer-3', state: 'APPROVED', threads: { resolved: 0, total: 0 } },
+        { user: 'thread-only', threads: { resolved: 1, total: 1 } },
+        { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
+      ]);
     });
 
-    it('returns no summary when no review threads exist', () => {
-      expect(
-        getReviewThreadSummary([{ nodes: [], pageInfo: { hasNextPage: false, endCursor: null } }]),
-      ).toBeUndefined();
+    it('handles no reviews or threads', () => {
+      const result = getPullRequestReviewers([]);
+
+      expect(result).toEqual([]);
+    });
+    it('aggregates thread resolution across pages', () => {
+      const result = getPullRequestReviewers(
+        [],
+        [
+          {
+            nodes: [
+              {
+                isResolved: false,
+                comments: { nodes: [{ author: { login: 'zoe' } }] },
+              },
+              {
+                isResolved: true,
+                comments: { nodes: [{ author: { login: 'alice' } }] },
+              },
+            ],
+            pageInfo: { hasNextPage: true, endCursor: 'page-2' },
+          },
+          {
+            nodes: [
+              {
+                isResolved: false,
+                comments: { nodes: [{ author: { login: 'alice' } }] },
+              },
+              {
+                isResolved: true,
+                comments: { nodes: [{ author: null }] },
+              },
+            ],
+            pageInfo: { hasNextPage: false, endCursor: null },
+          },
+        ],
+      );
+
+      expect(result).toEqual([
+        { user: 'alice', threads: { resolved: 1, total: 2 } },
+        { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
+        { user: 'zoe', threads: { resolved: 0, total: 1 } },
+      ]);
     });
   });
 

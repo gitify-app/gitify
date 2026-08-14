@@ -6,15 +6,10 @@ import { ReviewsPill, type ReviewsPillProps } from './ReviewsPill';
 describe('renderer/components/metrics/ReviewsPill.tsx', () => {
   it('renders review pills when reviews exist', () => {
     const props: ReviewsPillProps = {
-      reviews: mockGitifyNotification.subject.reviews ?? [],
-      reviewThreads: {
-        total: 3,
-        unresolved: 2,
-        starters: [
-          { user: 'octocat', resolved: 1, total: 1 },
-          { user: 'gitify-app', resolved: 0, total: 2 },
-        ],
-      },
+      reviewers: [
+        ...(mockGitifyNotification.subject.reviewers ?? []),
+        { user: 'thread-only', threads: { resolved: 0, total: 2 } },
+      ],
     };
 
     const tree = renderWithProviders(<ReviewsPill {...props} />);
@@ -24,7 +19,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
 
   it('renders nothing when no reviews', () => {
     const props: ReviewsPillProps = {
-      reviews: [],
+      reviewers: [],
     };
 
     const tree = renderWithProviders(<ReviewsPill {...props} />);
@@ -35,17 +30,9 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
   it('renders unresolved thread status and activity in deterministic order', () => {
     const tree = renderWithProviders(
       <ReviewsPill
-        reviewThreads={{
-          total: 4,
-          unresolved: 2,
-          starters: [
-            { user: 'zoe', resolved: 1, total: 1 },
-            { user: 'alice', resolved: 1, total: 3 },
-          ],
-        }}
-        reviews={[
-          { state: 'COMMENTED', users: ['zoe'] },
-          { state: 'APPROVED', users: ['alice'] },
+        reviewers={[
+          { user: 'zoe', state: 'COMMENTED', threads: { resolved: 1, total: 1 } },
+          { user: 'alice', state: 'APPROVED', threads: { resolved: 1, total: 3 } },
         ]}
       />,
     );
@@ -57,14 +44,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
 
   it('renders resolved thread total with singular descriptions', () => {
     const tree = renderWithProviders(
-      <ReviewsPill
-        reviewThreads={{
-          total: 1,
-          unresolved: 0,
-          starters: [{ user: 'reviewer', resolved: 1, total: 1 }],
-        }}
-        reviews={[]}
-      />,
+      <ReviewsPill reviewers={[{ user: 'reviewer', threads: { resolved: 1, total: 1 } }]} />,
     );
 
     expect(tree.getByText('1')).toBeInTheDocument();
@@ -73,7 +53,9 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
 
   it('renders nothing for commented reviews without threads', () => {
     const tree = renderWithProviders(
-      <ReviewsPill reviews={[{ state: 'COMMENTED', users: ['reviewer'] }]} />,
+      <ReviewsPill
+        reviewers={[{ user: 'reviewer', state: 'COMMENTED', threads: { resolved: 0, total: 0 } }]}
+      />,
     );
 
     expect(tree.container).toBeEmptyDOMElement();

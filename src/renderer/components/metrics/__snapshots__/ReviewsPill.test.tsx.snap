@@ -176,7 +176,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
     popover="auto"
     role="tooltip"
   >
-    gitify-app: 0/2 resolved · octocat: 1/1 resolved
+    thread-only: 0/2 resolved
   </span>
 </div>
 `;

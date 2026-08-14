@@ -11,8 +11,7 @@ import {
 
 import {
   type GitifyNotification,
-  type GitifyPullRequestReview,
-  type GitifyPullRequestReviewThreads,
+  type GitifyPullRequestReviewer,
   type GitifyPullRequestState,
   type GitifySubject,
   IconColor,
@@ -57,10 +56,11 @@ class PullRequestHandler extends DefaultHandler {
     const commenter = getNotificationAuthor([prComment?.author]);
     const prUser = commenter ?? author;
 
-    const reviews = getLatestReviewForReviewers(
+    const reviewThreads = await getCompleteReviewThreads(notification, pr.reviewThreads);
+    const reviewers = getPullRequestReviewers(
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
+      reviewThreads,
     );
-    const reviewThreads = await getCompleteReviewThreadSummary(notification, pr.reviewThreads);
 
     const reviewRequested = getReviewRequestTypes(
       pr.reviewRequests?.nodes?.filter(Boolean) ?? [],
@@ -77,8 +77,7 @@ class PullRequestHandler extends DefaultHandler {
       author: author,
       commenter: commenter,
       reviewRequested,
-      reviews: reviews,
-      ...(reviewThreads ? { reviewThreads } : {}),
+      reviewers,
       commentCount: pr.comments.totalCount,
       labels:
         pr.labels?.nodes?.filter(Boolean).map((label) => ({
@@ -165,83 +164,45 @@ export function getReviewRequestTypes(
   return Array.from(types);
 }
 
-export function getLatestReviewForReviewers(
+export function getPullRequestReviewers(
   reviews: PullRequestReviewFieldsFragment[],
-): GitifyPullRequestReview[] {
-  if (!reviews.length) {
-    return [];
-  }
+  threadConnections?: PullRequestReviewThreadConnectionFieldsFragment[],
+): GitifyPullRequestReviewer[] {
+  const reviewers = new Map<string, GitifyPullRequestReviewer>();
 
-  // Find the most recent review for each reviewer
-  const latestReviews: PullRequestReviewFieldsFragment[] = [];
-  const sortedReviews = reviews.toReversed();
-  for (const prReview of sortedReviews) {
-    const reviewerFound = latestReviews.find(
-      (review) => review.author?.login === prReview.author?.login,
-    );
-
-    if (!reviewerFound) {
-      latestReviews.push(prReview);
-    }
-  }
-
-  // Group by the review state
-  const reviewers: GitifyPullRequestReview[] = [];
-  for (const prReview of latestReviews) {
-    const reviewerFound = reviewers.find((review) => review.state === prReview.state);
-
-    if (reviewerFound) {
-      reviewerFound.users.push(prReview.author?.login ?? '');
-    } else {
-      reviewers.push({
-        state: prReview.state,
-        users: [prReview.author?.login ?? ''],
+  for (const review of reviews.toReversed()) {
+    const user = review.author?.login;
+    if (user && !reviewers.has(user)) {
+      reviewers.set(user, {
+        user,
+        state: review.state,
+        threads: { resolved: 0, total: 0 },
       });
     }
   }
 
-  // Sort reviews by state for consistent order when rendering
-  return reviewers.sort((a, b) => {
-    return a.state.localeCompare(b.state);
-  });
-}
+  for (const thread of threadConnections?.flatMap((connection) => connection.nodes) ?? []) {
+    if (!thread) {
+      continue;
+    }
 
-export function getReviewThreadSummary(
-  connections: PullRequestReviewThreadConnectionFieldsFragment[],
-): GitifyPullRequestReviewThreads | undefined {
-  const threads = connections.flatMap(
-    (connection) => connection.nodes?.filter((thread) => thread !== null) ?? [],
-  );
-  if (!threads.length) {
-    return undefined;
+    const user = thread.comments.nodes?.[0]?.author?.login ?? 'Unknown reviewer';
+    const reviewer = reviewers.get(user) ?? {
+      user,
+      threads: { resolved: 0, total: 0 },
+    };
+    reviewer.threads.total += 1;
+    reviewer.threads.resolved += Number(thread.isResolved);
+    reviewers.set(user, reviewer);
   }
 
-  const starters = new Map<string, { resolved: number; total: number }>();
-  let resolvedCount = 0;
-
-  for (const thread of threads) {
-    resolvedCount += Number(thread.isResolved);
-
-    const starter = thread.comments.nodes?.[0]?.author?.login ?? 'Unknown reviewer';
-    const counts = starters.get(starter) ?? { resolved: 0, total: 0 };
-    counts.total += 1;
-    counts.resolved += Number(thread.isResolved);
-    starters.set(starter, counts);
-  }
-
-  return {
-    total: threads.length,
-    unresolved: threads.length - resolvedCount,
-    starters: Array.from(starters, ([user, counts]) => ({ user, ...counts })).sort((a, b) =>
-      a.user.localeCompare(b.user),
-    ),
-  };
+  return Array.from(reviewers.values()).sort((a, b) => a.user.localeCompare(b.user));
 }
 
-async function getCompleteReviewThreadSummary(
+async function getCompleteReviewThreads(
   notification: GitifyNotification,
   initialConnection: PullRequestReviewThreadConnectionFieldsFragment,
-): Promise<GitifyPullRequestReviewThreads | undefined> {
+): Promise<PullRequestReviewThreadConnectionFieldsFragment[] | undefined> {
   const connections = [initialConnection];
   let pageInfo = initialConnection.pageInfo;
 
@@ -262,7 +223,7 @@ async function getCompleteReviewThreadSummary(
     }
   } catch (error) {
     rendererLogError(
-      'getCompleteReviewThreadSummary',
+      'getCompleteReviewThreads',
       'Failed to fetch complete pull request review threads',
       toError(error),
       notification,
@@ -270,5 +231,5 @@ async function getCompleteReviewThreadSummary(
     return undefined;
   }
 
-  return getReviewThreadSummary(connections);
+  return connections;
 }
