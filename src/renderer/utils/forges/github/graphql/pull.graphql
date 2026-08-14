@@ -112,24 +112,4 @@ fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConne
       }
     }
   }
-  pageInfo {
-    hasNextPage
-    endCursor
-  }
-}
-
-query FetchPullRequestReviewThreads(
-  $owner: String!
-  $name: String!
-  $number: Int!
-  $firstReviewThreads: Int!
-  $after: String
-) {
-  repository(owner: $owner, name: $name) {
-    pullRequest(number: $number) {
-      reviewThreads(first: $firstReviewThreads, after: $after) {
-        ...PullRequestReviewThreadConnectionFields
-      }
-    }
-  }
 }

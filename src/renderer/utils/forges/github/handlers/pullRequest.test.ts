@@ -26,7 +26,6 @@ vi.mock('../client', async () => {
   return {
     ...actual,
     fetchPullByNumber: vi.fn(),
-    fetchPullRequestReviewThreads: vi.fn(),
   };
 });
 
@@ -41,7 +40,6 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
   describe('enrich', () => {
     const fetchPullByNumberSpy = vi.mocked(apiClient.fetchPullByNumber);
-    const fetchReviewThreadsSpy = vi.mocked(apiClient.fetchPullRequestReviewThreads);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock pull request',
@@ -102,7 +100,6 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             comments: { nodes: [{ author: null }] },
           },
         ],
-        pageInfo: { hasNextPage: false, endCursor: null },
       };
 
       fetchPullByNumberSpy.mockResolvedValue({
@@ -115,61 +112,6 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         { user: 'reviewer-1', threads: { resolved: 0, total: 1 } },
         { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
       ]);
-    });
-
-    it('fetches remaining review thread pages before enriching', async () => {
-      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
-      mockPullRequest.reviewThreads = {
-        nodes: [
-          {
-            isResolved: false,
-            comments: { nodes: [{ author: { login: 'alice' } }] },
-          },
-        ],
-        pageInfo: { hasNextPage: true, endCursor: 'page-2' },
-      };
-      fetchReviewThreadsSpy.mockResolvedValue({
-        repository: {
-          pullRequest: {
-            reviewThreads: {
-              nodes: [
-                {
-                  isResolved: true,
-                  comments: { nodes: [{ author: { login: 'bob' } }] },
-                },
-              ],
-              pageInfo: { hasNextPage: false, endCursor: null },
-            },
-          },
-        },
-      });
-
-      const result = await pullRequestHandler.enrich(mockNotification, mockPullRequest);
-
-      expect(fetchReviewThreadsSpy).toHaveBeenCalledWith(mockNotification, 'page-2');
-      expect(result.reviewers).toEqual([
-        { user: 'alice', threads: { resolved: 0, total: 1 } },
-        { user: 'bob', threads: { resolved: 1, total: 1 } },
-      ]);
-    });
-
-    it('omits review thread status when pagination fails', async () => {
-      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
-      mockPullRequest.reviewThreads = {
-        nodes: [
-          {
-            isResolved: false,
-            comments: { nodes: [{ author: { login: 'alice' } }] },
-          },
-        ],
-        pageInfo: { hasNextPage: true, endCursor: 'page-2' },
-      };
-      fetchReviewThreadsSpy.mockRejectedValue(new Error('pagination failed'));
-
-      const result = await pullRequestHandler.enrich(mockNotification, mockPullRequest);
-
-      expect(result.reviewers).toEqual([]);
-      expect(result.state).toBe('OPEN');
     });
 
     it('draft pull request state', async () => {
@@ -630,25 +572,22 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ];
 
-      const result = getPullRequestReviewers(mockReviews, [
-        {
-          nodes: [
-            {
-              isResolved: false,
-              comments: { nodes: [{ author: { login: 'reviewer-1' } }] },
-            },
-            {
-              isResolved: true,
-              comments: { nodes: [{ author: { login: 'thread-only' } }] },
-            },
-            {
-              isResolved: true,
-              comments: { nodes: [{ author: null }] },
-            },
-          ],
-          pageInfo: { hasNextPage: false, endCursor: null },
-        },
-      ]);
+      const result = getPullRequestReviewers(mockReviews, {
+        nodes: [
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'reviewer-1' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: { login: 'thread-only' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: null }] },
+          },
+        ],
+      });
 
       expect(result).toEqual([
         { user: 'reviewer-1', state: 'APPROVED', threads: { resolved: 0, total: 1 } },
@@ -664,38 +603,27 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       expect(result).toEqual([]);
     });
-    it('aggregates thread resolution across pages', () => {
-      const result = getPullRequestReviewers(
-        [],
-        [
+    it('aggregates thread resolution from the fetched thread page', () => {
+      const result = getPullRequestReviewers([], {
+        nodes: [
           {
-            nodes: [
-              {
-                isResolved: false,
-                comments: { nodes: [{ author: { login: 'zoe' } }] },
-              },
-              {
-                isResolved: true,
-                comments: { nodes: [{ author: { login: 'alice' } }] },
-              },
-            ],
-            pageInfo: { hasNextPage: true, endCursor: 'page-2' },
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'zoe' } }] },
           },
           {
-            nodes: [
-              {
-                isResolved: false,
-                comments: { nodes: [{ author: { login: 'alice' } }] },
-              },
-              {
-                isResolved: true,
-                comments: { nodes: [{ author: null }] },
-              },
-            ],
-            pageInfo: { hasNextPage: false, endCursor: null },
+            isResolved: true,
+            comments: { nodes: [{ author: { login: 'alice' } }] },
+          },
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'alice' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: null }] },
           },
         ],
-      );
+      });
 
       expect(result).toEqual([
         { user: 'alice', threads: { resolved: 1, total: 2 } },

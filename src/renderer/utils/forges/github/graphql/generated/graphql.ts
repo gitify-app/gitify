@@ -313,7 +313,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null, pageInfo: { hasNextPage: boolean, endCursor: string | null } }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered?: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -375,7 +375,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null, pageInfo: { hasNextPage: boolean, endCursor: string | null } }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: string;
@@ -420,7 +420,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null, pageInfo: { hasNextPage: boolean, endCursor: string | null } }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -452,7 +452,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } } | null> | null, pageInfo: { hasNextPage: boolean, endCursor: string | null } }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
+           | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, author:
     | { login: string }
@@ -468,24 +468,7 @@ export type PullRequestReviewThreadConnectionFieldsFragment = { nodes: Array<{ i
           | { login: string }
           | { login: string }
           | { login: string }
-         | null } | null> | null } } | null> | null, pageInfo: { hasNextPage: boolean, endCursor: string | null } };
-
-export type FetchPullRequestReviewThreadsQueryVariables = Exact<{
-  owner: string;
-  name: string;
-  number: number;
-  firstReviewThreads: number;
-  after?: string | null | undefined;
-}>;
-
-
-export type FetchPullRequestReviewThreadsQuery = { repository: { pullRequest: { reviewThreads: { nodes: Array<{ isResolved: boolean, comments: { nodes: Array<{ author:
-                | { login: string }
-                | { login: string }
-                | { login: string }
-                | { login: string }
-                | { login: string }
-               | null } | null> | null } } | null> | null, pageInfo: { hasNextPage: boolean, endCursor: string | null } } } | null } | null };
+         | null } | null> | null } } | null> | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -746,10 +729,6 @@ export const PullRequestReviewThreadConnectionFieldsFragmentDoc = new TypedDocum
       }
     }
   }
-  pageInfo {
-    hasNextPage
-    endCursor
-  }
 }
     `, {"fragmentName":"PullRequestReviewThreadConnectionFields"}) as unknown as TypedDocumentString<PullRequestReviewThreadConnectionFieldsFragment, unknown>;
 export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
@@ -864,10 +843,6 @@ fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConne
         }
       }
     }
-  }
-  pageInfo {
-    hasNextPage
-    endCursor
   }
 }`, {"fragmentName":"PullRequestDetails"}) as unknown as TypedDocumentString<PullRequestDetailsFragment, unknown>;
 export const MergedDetailsQueryTemplateFragmentDoc = new TypedDocumentString(`
@@ -1089,10 +1064,6 @@ fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConne
         }
       }
     }
-  }
-  pageInfo {
-    hasNextPage
-    endCursor
   }
 }`, {"fragmentName":"MergedDetailsQueryTemplate"}) as unknown as TypedDocumentString<MergedDetailsQueryTemplateFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
@@ -1464,10 +1435,6 @@ fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConne
       }
     }
   }
-  pageInfo {
-    hasNextPage
-    endCursor
-  }
 }`) as unknown as TypedDocumentString<FetchMergedDetailsTemplateQuery, FetchMergedDetailsTemplateQueryVariables>;
 export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
     query FetchPullRequestByNumber($owner: String!, $name: String!, $number: Int!, $firstLabels: Int, $lastComments: Int, $lastReviews: Int, $firstReviewThreads: Int, $firstClosingIssues: Int, $includeStackEntry: Boolean!) {
@@ -1589,34 +1556,4 @@ fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConne
       }
     }
   }
-  pageInfo {
-    hasNextPage
-    endCursor
-  }
 }`) as unknown as TypedDocumentString<FetchPullRequestByNumberQuery, FetchPullRequestByNumberQueryVariables>;
-export const FetchPullRequestReviewThreadsDocument = new TypedDocumentString(`
-    query FetchPullRequestReviewThreads($owner: String!, $name: String!, $number: Int!, $firstReviewThreads: Int!, $after: String) {
-  repository(owner: $owner, name: $name) {
-    pullRequest(number: $number) {
-      reviewThreads(first: $firstReviewThreads, after: $after) {
-        ...PullRequestReviewThreadConnectionFields
-      }
-    }
-  }
-}
-    fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConnection {
-  nodes {
-    isResolved
-    comments(first: 1) {
-      nodes {
-        author {
-          login
-        }
-      }
-    }
-  }
-  pageInfo {
-    hasNextPage
-    endCursor
-  }
-}`) as unknown as TypedDocumentString<FetchPullRequestReviewThreadsQuery, FetchPullRequestReviewThreadsQueryVariables>;

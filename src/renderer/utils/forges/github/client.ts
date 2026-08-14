@@ -23,8 +23,6 @@ import {
   type FetchMergedDetailsTemplateQuery,
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
-  FetchPullRequestReviewThreadsDocument,
-  type FetchPullRequestReviewThreadsQuery,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { createNotificationHandler } from './handlers';
@@ -254,19 +252,6 @@ export async function fetchPullByNumber(
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
     firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
     includeStackEntry: supportsStackedPullRequests(notification.account),
-  });
-}
-
-export async function fetchPullRequestReviewThreads(
-  notification: RawGitifyNotification,
-  after: string,
-): Promise<FetchPullRequestReviewThreadsQuery> {
-  return performGraphQLRequest(notification.account, FetchPullRequestReviewThreadsDocument, {
-    owner: notification.repository.owner.login,
-    name: notification.repository.name,
-    number: getNumberFromUrl(notification.subject.url!),
-    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
-    after,
   });
 }
 

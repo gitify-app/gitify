@@ -138,10 +138,6 @@ export function mockPullRequestResponseNode(mocks: {
     },
     reviewThreads: {
       nodes: [],
-      pageInfo: {
-        hasNextPage: false,
-        endCursor: null,
-      },
     },
     reviewRequests: {
       nodes: [],

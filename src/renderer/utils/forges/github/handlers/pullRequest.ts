@@ -19,9 +19,8 @@ import {
   type ReviewRequestType,
 } from '../../../../types';
 
-import { rendererLogError, toError } from '../../../core/logger';
 import { formatGitHubNumber } from '../../../notifications/formatters';
-import { fetchPullByNumber, fetchPullRequestReviewThreads } from '../client';
+import { fetchPullByNumber } from '../client';
 import type {
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
@@ -56,10 +55,9 @@ class PullRequestHandler extends DefaultHandler {
     const commenter = getNotificationAuthor([prComment?.author]);
     const prUser = commenter ?? author;
 
-    const reviewThreads = await getCompleteReviewThreads(notification, pr.reviewThreads);
     const reviewers = getPullRequestReviewers(
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
-      reviewThreads,
+      pr.reviewThreads,
     );
 
     const reviewRequested = getReviewRequestTypes(
@@ -166,7 +164,7 @@ export function getReviewRequestTypes(
 
 export function getPullRequestReviewers(
   reviews: PullRequestReviewFieldsFragment[],
-  threadConnections?: PullRequestReviewThreadConnectionFieldsFragment[],
+  threadConnection?: PullRequestReviewThreadConnectionFieldsFragment,
 ): GitifyPullRequestReviewer[] {
   const reviewers = new Map<string, GitifyPullRequestReviewer>();
 
@@ -181,7 +179,7 @@ export function getPullRequestReviewers(
     }
   }
 
-  for (const thread of threadConnections?.flatMap((connection) => connection.nodes) ?? []) {
+  for (const thread of threadConnection?.nodes ?? []) {
     if (!thread) {
       continue;
     }
@@ -197,39 +195,4 @@ export function getPullRequestReviewers(
   }
 
   return Array.from(reviewers.values()).sort((a, b) => a.user.localeCompare(b.user));
-}
-
-async function getCompleteReviewThreads(
-  notification: GitifyNotification,
-  initialConnection: PullRequestReviewThreadConnectionFieldsFragment,
-): Promise<PullRequestReviewThreadConnectionFieldsFragment[] | undefined> {
-  const connections = [initialConnection];
-  let pageInfo = initialConnection.pageInfo;
-
-  try {
-    while (pageInfo.hasNextPage) {
-      if (!pageInfo.endCursor) {
-        throw new Error('Review thread page has no end cursor');
-      }
-
-      const response = await fetchPullRequestReviewThreads(notification, pageInfo.endCursor);
-      const connection = response.repository?.pullRequest?.reviewThreads;
-      if (!connection) {
-        throw new Error('Review thread page is unavailable');
-      }
-
-      connections.push(connection);
-      pageInfo = connection.pageInfo;
-    }
-  } catch (error) {
-    rendererLogError(
-      'getCompleteReviewThreads',
-      'Failed to fetch complete pull request review threads',
-      toError(error),
-      notification,
-    );
-    return undefined;
-  }
-
-  return connections;
 }

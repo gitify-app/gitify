@@ -22,7 +22,6 @@ import {
   fetchIssueByNumber,
   fetchNotificationDetailsForList,
   fetchPullByNumber,
-  fetchPullRequestReviewThreads,
   getCommit,
   getCommitComment,
   getRelease,
@@ -38,7 +37,6 @@ import {
   type FetchIssueByNumberQuery,
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
-  FetchPullRequestReviewThreadsDocument,
 } from './graphql/generated/graphql';
 import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
@@ -396,29 +394,6 @@ describe('renderer/utils/forges/github/client.ts', () => {
         lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
         firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
         includeStackEntry: true,
-      },
-    );
-  });
-
-  it('fetchPullRequestReviewThreads requests the next thread page', async () => {
-    const performGraphQLRequestSpy = vi.mocked(apiRequests.performGraphQLRequest);
-    const mockNotification = mockPartialGitifyNotification({
-      title: 'Some pull request',
-      url: 'https://api.github.com/repos/gitify-app/gitify/pulls/123' as Link,
-      type: 'PullRequest',
-    });
-
-    await fetchPullRequestReviewThreads(mockNotification, 'next-page');
-
-    expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      mockNotification.account,
-      FetchPullRequestReviewThreadsDocument,
-      {
-        owner: mockNotification.repository.owner.login,
-        name: mockNotification.repository.name,
-        number: 123,
-        firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
-        after: 'next-page',
       },
     );
   });
