@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.3](https://github.com/gitify-app/gitify/compare/v7.3.2...v7.3.3) (2026-08-12)
+
+
+### 🐛 Bug Fixes
+
+* **metrics:** fetch stacked pr metrics only for GitHub Cloud ([#3175](https://github.com/gitify-app/gitify/issues/3175)) ([bfd2672](https://github.com/gitify-app/gitify/commit/bfd267267960d9b5254594de7d98f39e38deff9f))
+
 ## [7.3.2](https://github.com/gitify-app/gitify/compare/v7.3.1...v7.3.2) (2026-08-09)
 
 

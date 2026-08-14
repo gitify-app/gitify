@@ -13,6 +13,7 @@ describe('renderer/utils/forges/github/graphql/MergeQueryBuilder.ts', () => {
     firstLabels: 10,
     firstClosingIssues: 8,
     includeIsAnswered: true,
+    includeStackEntry: true,
   };
 
   const nodeVarsA: FetchBatchMergedTemplateIndexedBaseVariables = {
@@ -51,6 +52,7 @@ describe('renderer/utils/forges/github/graphql/MergeQueryBuilder.ts', () => {
     expect(query).toContain('$firstLabels: Int');
     expect(query).toContain('$firstClosingIssues: Int');
     expect(query).toContain('$includeIsAnswered: Boolean!');
+    expect(query).toContain('$includeStackEntry: Boolean!');
 
     expect(query).toContain('$owner0: String!');
     expect(query).toContain('$name0: String!');
@@ -82,6 +84,7 @@ describe('renderer/utils/forges/github/graphql/MergeQueryBuilder.ts', () => {
       firstLabels: 10,
       firstClosingIssues: 8,
       includeIsAnswered: true,
+      includeStackEntry: true,
       owner0: 'octocat',
       name0: 'hello-world',
       number0: 123,

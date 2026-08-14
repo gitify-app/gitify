@@ -8,6 +8,7 @@ query FetchPullRequestByNumber(
   $lastComments: Int
   $lastReviews: Int
   $firstClosingIssues: Int
+  $includeStackEntry: Boolean!
 ) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
@@ -75,7 +76,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry {
+  stackEntry @include(if: $includeStackEntry) {
     position
     stack {
       size

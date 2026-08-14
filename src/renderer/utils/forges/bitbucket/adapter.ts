@@ -91,6 +91,7 @@ export const bitbucketAdapter: ForgeAdapter = {
   icon: BitbucketIcon,
   capabilities,
 
+  getPlatform: () => 'Bitbucket Cloud',
   formatUserLogin: (login) => login,
   formatNotificationUser: (_account, user) => user.login,
 

@@ -63,6 +63,7 @@ export const giteaAdapter: ForgeAdapter = {
   icon: ServerIcon,
   capabilities,
 
+  getPlatform: () => 'Gitea',
   formatUserLogin: (login) => login,
   formatNotificationUser: (_account, user) => user.login,
 

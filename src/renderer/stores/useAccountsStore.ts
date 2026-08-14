@@ -7,7 +7,6 @@ import type { Account, Forge, Hostname, Token } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 import type { AccountsState, AccountsStore } from './types';
 
-import { resolvePlatform } from '../utils/auth/platform';
 import { getAccountUUID, isValidHostname, refreshAccount } from '../utils/auth/utils';
 import { rendererLogInfo, rendererLogWarn } from '../utils/core/logger';
 import { getAdapter, isKnownForge } from '../utils/forges/registry';
@@ -64,7 +63,7 @@ const useAccountsStore = create<AccountsStore>()(
           forge,
           hostname: hostname,
           method: method,
-          platform: resolvePlatform(forge, hostname),
+          platform: getAdapter(forge).getPlatform(hostname),
           token: encryptedToken,
           username,
           user: null, // Will be updated during the refresh call below

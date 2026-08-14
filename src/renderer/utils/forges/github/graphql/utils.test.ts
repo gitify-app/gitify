@@ -87,7 +87,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       );
 
       expect(varDefs).not.toBeNull();
-      expect(varDefs.length).toBe(7);
+      expect(varDefs.length).toBe(8);
       expect(varDefs.flatMap((v) => v.name)).toEqual([
         'lastComments',
         'lastThreadedComments',
@@ -96,6 +96,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
         'firstLabels',
         'firstClosingIssues',
         'includeIsAnswered',
+        'includeStackEntry',
       ]);
     });
   });
