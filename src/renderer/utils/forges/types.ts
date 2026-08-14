@@ -106,8 +106,7 @@ export interface ForgeAdapter {
   readonly capabilities: ForgeCapabilities;
 
   /**
-   * Format a user login for display (e.g. prepend "@" for GitHub/Gitea,
-   * return as-is for Bitbucket where the login is an email address).
+   * Format an authenticated user login according to the forge's display convention.
    */
   formatUserLogin(login: string): string;
 

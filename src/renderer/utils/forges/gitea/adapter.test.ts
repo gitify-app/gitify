@@ -34,7 +34,11 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
           htmlUrl: '' as Link,
           type: 'User',
         } satisfies GitifyNotificationUser),
-      ).toBe('@octocat');
+      ).toBe('octocat');
+    });
+
+    it('uses plain logins for account identity surfaces', () => {
+      expect(giteaAdapter.formatUserLogin('octocat')).toBe('octocat');
     });
 
     it('exposes a single PAT login method', () => {

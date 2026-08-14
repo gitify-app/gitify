@@ -60,10 +60,10 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
 
   describe('formatNotificationUser', () => {
     const user: GitifyNotificationUser = {
-      login: 'asetch_cisco',
-      name: 'Adam Setch',
+      login: 'notification-author_gitify',
+      name: 'Notification Author',
       avatarUrl: '' as Link,
-      htmlUrl: 'https://github.com/asetch_cisco' as Link,
+      htmlUrl: 'https://github.com/notification-author_gitify' as Link,
       type: 'EnterpriseUserAccount',
     };
 
@@ -71,9 +71,9 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(
         githubAdapter.formatNotificationUser(mockGitHubCloudAccount, {
           ...user,
-          name: '  Adam Setch  ',
+          name: '  Notification Author  ',
         }),
-      ).toBe('Adam Setch (@asetch_cisco)');
+      ).toBe('Notification Author (notification-author_gitify)');
     });
 
     it.each([null, undefined, '', '   '])(
@@ -81,7 +81,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       (name) => {
         expect(
           githubAdapter.formatNotificationUser(mockGitHubCloudAccount, { ...user, name }),
-        ).toBe('@asetch_cisco');
+        ).toBe('notification-author_gitify');
       },
     );
 
@@ -89,20 +89,20 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(
         githubAdapter.formatNotificationUser(mockGitHubCloudAccount, {
           ...user,
-          login: 'setchy',
+          login: 'notification-author',
           type: 'User',
         }),
-      ).toBe('@setchy');
+      ).toBe('notification-author');
     });
 
     it('uses the profile name for a managed actor returned as User', () => {
       const managedAccount = {
         ...mockGitHubCloudAccount,
-        user: { ...mockGitHubCloudAccount.user!, login: 'asetch_cisco' },
+        user: { ...mockGitHubCloudAccount.user!, login: 'octocat_gitify' },
       };
 
       expect(githubAdapter.formatNotificationUser(managedAccount, { ...user, type: 'User' })).toBe(
-        'Adam Setch (@asetch_cisco)',
+        'Notification Author (notification-author_gitify)',
       );
     });
   });

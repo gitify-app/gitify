@@ -6,7 +6,7 @@ export function formatGitHubNotificationUser(
 ): string {
   const name = user.name?.trim();
   if (!name) {
-    return `@${user.login}`;
+    return user.login;
   }
 
   const managedUserSuffix = account.user?.login.match(/(_[^_]+)$/)?.[1];
@@ -14,5 +14,5 @@ export function formatGitHubNotificationUser(
     user.type === 'EnterpriseUserAccount' ||
     (managedUserSuffix !== undefined && user.login.endsWith(managedUserSuffix));
 
-  return isManagedUser ? `${name} (@${user.login})` : `@${user.login}`;
+  return isManagedUser ? `${name} (${user.login})` : user.login;
 }

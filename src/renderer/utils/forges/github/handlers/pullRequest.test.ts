@@ -557,21 +557,21 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       const result = getLatestReviewForReviewers(mockGitHubCloudAccount, mockReviews);
 
       expect(result).toEqual([
-        { state: 'APPROVED', users: ['@reviewer-3', '@reviewer-1'] },
-        { state: 'COMMENTED', users: ['@reviewer-2'] },
+        { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
+        { state: 'COMMENTED', users: ['reviewer-2'] },
       ]);
     });
 
     it('uses managed user names in review labels', () => {
       const account = {
         ...mockGitHubCloudAccount,
-        user: { ...mockGitHubCloudAccount.user!, login: 'asetch_cisco' },
+        user: { ...mockGitHubCloudAccount.user!, login: 'octocat_gitify' },
       };
       const result = getLatestReviewForReviewers(account, [
         {
           author: {
-            login: 'asetch_cisco',
-            name: 'Adam Setch',
+            login: 'notification-author_gitify',
+            name: 'Notification Author',
             htmlUrl: mockAuthor.htmlUrl,
             avatarUrl: mockAuthor.avatarUrl,
             type: 'User',
@@ -580,7 +580,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ]);
 
-      expect(result).toEqual([{ state: 'APPROVED', users: ['Adam Setch (@asetch_cisco)'] }]);
+      expect(result).toEqual([
+        { state: 'APPROVED', users: ['Notification Author (notification-author_gitify)'] },
+      ]);
     });
 
     it('handles no PR reviews yet', async () => {

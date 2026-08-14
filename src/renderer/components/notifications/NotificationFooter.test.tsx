@@ -97,8 +97,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         ...mockGitifyNotification.subject,
         user: {
           ...mockGitifyNotification.subject.user!,
-          login: 'asetch_cisco',
-          name: 'Adam Setch',
+          login: 'notification-author_gitify',
+          name: 'Notification Author',
           avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
           type: 'EnterpriseUserAccount' as const,
         },
@@ -109,9 +109,11 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     expect(screen.getByTestId('view-profile')).toHaveAttribute(
       'title',
-      'Adam Setch (@asetch_cisco)',
+      'Notification Author (notification-author_gitify)',
     );
-    expect(screen.getByAltText('Adam Setch (@asetch_cisco)')).toBeInTheDocument();
+    expect(
+      screen.getByAltText('Notification Author (notification-author_gitify)'),
+    ).toBeInTheDocument();
   });
 
   it('uses the GitHub handle for a regular user with a profile name', () => {
@@ -121,8 +123,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         ...mockGitifyNotification.subject,
         user: {
           ...mockGitifyNotification.subject.user!,
-          login: 'setchy',
-          name: 'Adam Setch',
+          login: 'notification-author',
+          name: 'Notification Author',
           avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
           type: 'User' as const,
         },
@@ -131,8 +133,8 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     renderWithProviders(<NotificationFooter notification={notification} />);
 
-    expect(screen.getByTestId('view-profile')).toHaveAttribute('title', '@setchy');
-    expect(screen.getByAltText('@setchy')).toBeInTheDocument();
+    expect(screen.getByTestId('view-profile')).toHaveAttribute('title', 'notification-author');
+    expect(screen.getByAltText('notification-author')).toBeInTheDocument();
   });
 
   it('uses the profile name for a managed account actor returned as User', () => {
@@ -140,14 +142,14 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       ...mockGitifyNotification,
       account: {
         ...mockGitifyNotification.account,
-        user: { ...mockGitifyNotification.account.user!, login: 'asetch_cisco' },
+        user: { ...mockGitifyNotification.account.user!, login: 'octocat_gitify' },
       },
       subject: {
         ...mockGitifyNotification.subject,
         user: {
           ...mockGitifyNotification.subject.user!,
-          login: 'asetch_cisco',
-          name: 'Adam Setch',
+          login: 'notification-author_gitify',
+          name: 'Notification Author',
           avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
           type: 'User' as const,
         },
@@ -158,8 +160,10 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     expect(screen.getByTestId('view-profile')).toHaveAttribute(
       'title',
-      'Adam Setch (@asetch_cisco)',
+      'Notification Author (notification-author_gitify)',
     );
-    expect(screen.getByAltText('Adam Setch (@asetch_cisco)')).toBeInTheDocument();
+    expect(
+      screen.getByAltText('Notification Author (notification-author_gitify)'),
+    ).toBeInTheDocument();
   });
 });

@@ -81,7 +81,7 @@ export const githubAdapter: ForgeAdapter = {
   icon: MarkGithubIcon,
   capabilities: githubCapabilities,
 
-  formatUserLogin: (login) => `@${login}`,
+  formatUserLogin: (login) => login,
   formatNotificationUser: formatGitHubNotificationUser,
 
   fetchAuthenticatedUser,

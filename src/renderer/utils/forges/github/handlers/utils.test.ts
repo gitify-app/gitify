@@ -37,10 +37,10 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
     it('preserves an enterprise managed user name', () => {
       const result = getNotificationAuthor([
-        { ...mockAuthor, type: 'EnterpriseUserAccount', name: 'Adam Setch' },
+        { ...mockAuthor, type: 'EnterpriseUserAccount', name: 'Notification Author' },
       ]);
 
-      expect(result?.name).toBe('Adam Setch');
+      expect(result?.name).toBe('Notification Author');
     });
   });
 
