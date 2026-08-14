@@ -136,6 +136,13 @@ export function mockPullRequestResponseNode(mocks: {
       totalCount: 0,
       nodes: [],
     },
+    reviewThreads: {
+      nodes: [],
+      pageInfo: {
+        hasNextPage: false,
+        endCursor: null,
+      },
+    },
     reviewRequests: {
       nodes: [],
     },

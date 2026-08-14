@@ -389,6 +389,8 @@ export interface GitifySubject {
   reviewRequested?: ReviewRequestType[];
   /** PR review states & reviewers */
   reviews?: GitifyPullRequestReview[];
+  /** PR review thread resolution and discussion summary */
+  reviewThreads?: GitifyPullRequestReviewThreads;
   /** PRs closing issues */
   linkedIssues?: string[];
   /** Total comment count */
@@ -487,6 +489,18 @@ export type GitifyLabels = LabelFieldsFragment;
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
   users: string[];
+}
+
+export interface GitifyPullRequestReviewThreadStarter {
+  user: string;
+  resolved: number;
+  total: number;
+}
+
+export interface GitifyPullRequestReviewThreads {
+  total: number;
+  unresolved: number;
+  starters: GitifyPullRequestReviewThreadStarter[];
 }
 
 export type GitifyDiscussionState = DiscussionStateReason | 'OPEN' | 'ANSWERED';

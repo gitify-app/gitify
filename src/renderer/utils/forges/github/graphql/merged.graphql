@@ -11,6 +11,7 @@ query FetchMergedDetailsTemplate(
   $lastThreadedComments: Int
   $lastReplies: Int
   $lastReviews: Int
+  $firstReviewThreads: Int
   $firstLabels: Int
   $firstClosingIssues: Int
   $includeIsAnswered: Boolean!

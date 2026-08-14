@@ -101,6 +101,7 @@ export const Constants = {
     LAST_THREADED_COMMENTS: 10,
     LAST_REPLIES: 10,
     LAST_REVIEWS: 100,
+    FIRST_REVIEW_THREADS: 100,
   },
 
   // GitHub Docs

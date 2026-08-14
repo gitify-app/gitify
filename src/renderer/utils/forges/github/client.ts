@@ -23,6 +23,8 @@ import {
   type FetchMergedDetailsTemplateQuery,
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
+  FetchPullRequestReviewThreadsDocument,
+  type FetchPullRequestReviewThreadsQuery,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { createNotificationHandler } from './handlers';
@@ -250,9 +252,25 @@ export async function fetchPullByNumber(
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
     includeStackEntry: supportsStackedPullRequests(notification.account),
   });
-} /**
+}
+
+export async function fetchPullRequestReviewThreads(
+  notification: RawGitifyNotification,
+  after: string,
+): Promise<FetchPullRequestReviewThreadsQuery> {
+  return performGraphQLRequest(notification.account, FetchPullRequestReviewThreadsDocument, {
+    owner: notification.repository.owner.login,
+    name: notification.repository.name,
+    number: getNumberFromUrl(notification.subject.url!),
+    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
+    after,
+  });
+}
+
+/**
  * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
 
  * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
@@ -305,6 +323,7 @@ export async function fetchNotificationDetailsForList(
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
   });
 
   const query = builder.getGraphQLQuery();

@@ -21,6 +21,7 @@ import type {
 } from '../graphql/generated/graphql';
 import {
   getLatestReviewForReviewers,
+  getReviewThreadSummary,
   getReviewRequestTypes,
   pullRequestHandler,
 } from './pullRequest';
@@ -30,6 +31,7 @@ vi.mock('../client', async () => {
   return {
     ...actual,
     fetchPullByNumber: vi.fn(),
+    fetchPullRequestReviewThreads: vi.fn(),
   };
 });
 
@@ -44,6 +46,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
   describe('enrich', () => {
     const fetchPullByNumberSpy = vi.mocked(apiClient.fetchPullByNumber);
+    const fetchReviewThreadsSpy = vi.mocked(apiClient.fetchPullRequestReviewThreads);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'This is a mock pull request',
@@ -89,6 +92,97 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+
+    it('enriches review thread status and activity', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.reviewThreads = {
+        nodes: [
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'reviewer-1' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: null }] },
+          },
+        ],
+        pageInfo: { hasNextPage: false, endCursor: null },
+      };
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.reviewThreads).toEqual({
+        total: 2,
+        unresolved: 1,
+        starters: [
+          { user: 'reviewer-1', resolved: 0, total: 1 },
+          { user: 'Unknown reviewer', resolved: 1, total: 1 },
+        ],
+      });
+    });
+
+    it('fetches remaining review thread pages before enriching', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.reviewThreads = {
+        nodes: [
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'alice' } }] },
+          },
+        ],
+        pageInfo: { hasNextPage: true, endCursor: 'page-2' },
+      };
+      fetchReviewThreadsSpy.mockResolvedValue({
+        repository: {
+          pullRequest: {
+            reviewThreads: {
+              nodes: [
+                {
+                  isResolved: true,
+                  comments: { nodes: [{ author: { login: 'bob' } }] },
+                },
+              ],
+              pageInfo: { hasNextPage: false, endCursor: null },
+            },
+          },
+        },
+      });
+
+      const result = await pullRequestHandler.enrich(mockNotification, mockPullRequest);
+
+      expect(fetchReviewThreadsSpy).toHaveBeenCalledWith(mockNotification, 'page-2');
+      expect(result.reviewThreads).toEqual({
+        total: 2,
+        unresolved: 1,
+        starters: [
+          { user: 'alice', resolved: 0, total: 1 },
+          { user: 'bob', resolved: 1, total: 1 },
+        ],
+      });
+    });
+
+    it('omits review thread status when pagination fails', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.reviewThreads = {
+        nodes: [
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'alice' } }] },
+          },
+        ],
+        pageInfo: { hasNextPage: true, endCursor: 'page-2' },
+      };
+      fetchReviewThreadsSpy.mockRejectedValue(new Error('pagination failed'));
+
+      const result = await pullRequestHandler.enrich(mockNotification, mockPullRequest);
+
+      expect(result.reviewThreads).toBeUndefined();
+      expect(result.state).toBe('OPEN');
     });
 
     it('draft pull request state', async () => {
@@ -561,6 +655,55 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       const result = getLatestReviewForReviewers([]);
 
       expect(result).toEqual([]);
+    });
+  });
+
+  describe('Pull Request Review Threads', () => {
+    it('aggregates mixed resolution, replies, and thread starters across pages', () => {
+      const result = getReviewThreadSummary([
+        {
+          nodes: [
+            {
+              isResolved: false,
+              comments: { nodes: [{ author: { login: 'zoe' } }] },
+            },
+            {
+              isResolved: true,
+              comments: { nodes: [{ author: { login: 'alice' } }] },
+            },
+          ],
+          pageInfo: { hasNextPage: true, endCursor: 'page-2' },
+        },
+        {
+          nodes: [
+            {
+              isResolved: false,
+              comments: { nodes: [{ author: { login: 'alice' } }] },
+            },
+            {
+              isResolved: true,
+              comments: { nodes: [{ author: null }] },
+            },
+          ],
+          pageInfo: { hasNextPage: false, endCursor: null },
+        },
+      ]);
+
+      expect(result).toEqual({
+        total: 4,
+        unresolved: 2,
+        starters: [
+          { user: 'alice', resolved: 1, total: 2 },
+          { user: 'Unknown reviewer', resolved: 1, total: 1 },
+          { user: 'zoe', resolved: 0, total: 1 },
+        ],
+      });
+    });
+
+    it('returns no summary when no review threads exist', () => {
+      expect(
+        getReviewThreadSummary([{ nodes: [], pageInfo: { hasNextPage: false, endCursor: null } }]),
+      ).toBeUndefined();
     });
   });
 
