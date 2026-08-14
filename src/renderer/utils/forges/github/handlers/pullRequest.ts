@@ -25,6 +25,7 @@ import type {
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
 } from '../graphql/generated/graphql';
+import { formatGitHubNotificationUser } from '../users';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -183,14 +184,15 @@ export function getLatestReviewForReviewers(
   // Group by the review state
   const reviewers: GitifyPullRequestReview[] = [];
   for (const prReview of latestReviews) {
+    const reviewer = prReview.author ? formatGitHubNotificationUser(prReview.author) : '';
     const reviewerFound = reviewers.find((review) => review.state === prReview.state);
 
     if (reviewerFound) {
-      reviewerFound.users.push(prReview.author?.login ?? '');
+      reviewerFound.users.push(reviewer);
     } else {
       reviewers.push({
         state: prReview.state,
-        users: [prReview.author?.login ?? ''],
+        users: [reviewer],
       });
     }
   }

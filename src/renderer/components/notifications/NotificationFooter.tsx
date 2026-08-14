@@ -4,6 +4,7 @@ import { RelativeTime, Stack, Text } from '@primer/react';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
+import { getAdapter } from '../../utils/forges/registry';
 import { openUserProfile } from '../../utils/system/links';
 import { cn } from '../../utils/ui/cn';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
@@ -16,6 +17,11 @@ export interface NotificationFooterProps {
 export const NotificationFooter: FC<NotificationFooterProps> = ({
   notification,
 }: NotificationFooterProps) => {
+  const user = notification.subject.user;
+  const userLabel = user
+    ? (getAdapter(notification.account).formatNotificationUser?.(user) ?? user.login)
+    : undefined;
+
   return (
     <Stack
       align="center"
@@ -24,22 +30,22 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
       gap="condensed"
       wrap="wrap"
     >
-      {notification.subject.user ? (
+      {user ? (
         <button
           data-testid="view-profile"
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
-            openUserProfile(notification.subject.user!);
+            openUserProfile(user);
           }}
-          title={notification.subject.user.login}
+          title={userLabel}
           type="button"
         >
           <AvatarWithFallback
-            alt={notification.subject.user.login}
+            alt={userLabel}
             size={Size.SMALL}
-            src={notification.subject.user.avatarUrl}
-            userType={notification.subject.user.type}
+            src={user.avatarUrl}
+            userType={user.type}
           />
         </button>
       ) : (

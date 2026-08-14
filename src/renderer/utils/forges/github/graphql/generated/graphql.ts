@@ -301,11 +301,11 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { __typename: 'Team' }
             | { __typename: 'User', login: string }
            | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
-            | { login: string }
-            | { login: string }
-            | { login: string }
-            | { login: string }
-            | { login: string }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered?: boolean | null, url: Link, author:
@@ -357,11 +357,11 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { __typename: 'Team' }
             | { __typename: 'User', login: string }
            | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
-            | { login: string }
-            | { login: string }
-            | { login: string }
-            | { login: string }
-            | { login: string }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
@@ -395,11 +395,11 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
             | { __typename: 'Team' }
             | { __typename: 'User', login: string }
            | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
-            | { login: string }
-            | { login: string }
-            | { login: string }
-            | { login: string }
-            | { login: string }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
+            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
@@ -421,19 +421,19 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
         | { __typename: 'Team' }
         | { __typename: 'User', login: string }
        | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
-        | { login: string }
-        | { login: string }
-        | { login: string }
-        | { login: string }
-        | { login: string }
+        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
+        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
+        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
+        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry?: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, author:
-    | { login: string }
-    | { login: string }
-    | { login: string }
-    | { login: string }
-    | { login: string }
+    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
+    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
+    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
+    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
    | null };
 
 export class TypedDocumentString<TResult, TVariables>
@@ -679,10 +679,15 @@ export const PullRequestReviewFieldsFragmentDoc = new TypedDocumentString(`
     fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
-    login
+    ...AuthorFields
   }
 }
-    `, {"fragmentName":"PullRequestReviewFields"}) as unknown as TypedDocumentString<PullRequestReviewFieldsFragment, unknown>;
+    fragment AuthorFields on Actor {
+  login
+  htmlUrl: url
+  avatarUrl: avatarUrl
+  type: __typename
+}`, {"fragmentName":"PullRequestReviewFields"}) as unknown as TypedDocumentString<PullRequestReviewFieldsFragment, unknown>;
 export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
     fragment PullRequestDetails on PullRequest {
   __typename
@@ -779,7 +784,7 @@ fragment LabelFields on Label {
 fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
-    login
+    ...AuthorFields
   }
 }`, {"fragmentName":"PullRequestDetails"}) as unknown as TypedDocumentString<PullRequestDetailsFragment, unknown>;
 export const MergedDetailsQueryTemplateFragmentDoc = new TypedDocumentString(`
@@ -985,7 +990,7 @@ fragment PullRequestDetails on PullRequest {
 fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
-    login
+    ...AuthorFields
   }
 }`, {"fragmentName":"MergedDetailsQueryTemplate"}) as unknown as TypedDocumentString<MergedDetailsQueryTemplateFragment, unknown>;
 export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
@@ -1340,7 +1345,7 @@ fragment PullRequestDetails on PullRequest {
 fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
-    login
+    ...AuthorFields
   }
 }`) as unknown as TypedDocumentString<FetchMergedDetailsTemplateQuery, FetchMergedDetailsTemplateQueryVariables>;
 export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
@@ -1446,6 +1451,6 @@ fragment PullRequestDetails on PullRequest {
 fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
-    login
+    ...AuthorFields
   }
 }`) as unknown as TypedDocumentString<FetchPullRequestByNumberQuery, FetchPullRequestByNumberQueryVariables>;

@@ -93,6 +93,6 @@ fragment PullRequestDetails on PullRequest {
 fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
-    login
+    ...AuthorFields
   }
 }
