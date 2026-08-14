@@ -14,7 +14,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
   >
     <button
       data-testid="view-profile"
-      title="gitify-app"
+      title="@gitify-app"
       type="button"
     >
       <div
@@ -29,7 +29,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
         data-wrap="nowrap"
       >
         <img
-          alt="gitify-app"
+          alt="@gitify-app"
           class="prc-Avatar-Avatar-0xaUi"
           data-component="Avatar"
           height="14"
@@ -201,7 +201,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
   >
     <button
       data-testid="view-profile"
-      title="gitify-app"
+      title="@gitify-app"
       type="button"
     >
       <div
@@ -216,7 +216,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > security ale
         data-wrap="nowrap"
       >
         <img
-          alt="gitify-app"
+          alt="@gitify-app"
           class="prc-Avatar-Avatar-0xaUi"
           data-component="Avatar"
           height="14"
@@ -577,7 +577,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
   >
     <button
       data-testid="view-profile"
-      title="gitify-app"
+      title="@gitify-app"
       type="button"
     >
       <div
@@ -592,7 +592,7 @@ exports[`renderer/components/notifications/NotificationFooter.tsx > should rende
         data-wrap="nowrap"
       >
         <img
-          alt="gitify-app"
+          alt="@gitify-app"
           class="prc-Avatar-Avatar-0xaUi"
           data-component="Avatar"
           height="14"

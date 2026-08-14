@@ -89,4 +89,77 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(props.notification.subject.user!.htmlUrl);
   });
+
+  it('uses the GitHub EMU profile name for hover and accessible avatar text', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          ...mockGitifyNotification.subject.user!,
+          login: 'asetch_cisco',
+          name: 'Adam Setch',
+          avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
+          type: 'EnterpriseUserAccount' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByTestId('view-profile')).toHaveAttribute(
+      'title',
+      'Adam Setch (@asetch_cisco)',
+    );
+    expect(screen.getByAltText('Adam Setch (@asetch_cisco)')).toBeInTheDocument();
+  });
+
+  it('uses the GitHub handle for a regular user with a profile name', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          ...mockGitifyNotification.subject.user!,
+          login: 'setchy',
+          name: 'Adam Setch',
+          avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
+          type: 'User' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByTestId('view-profile')).toHaveAttribute('title', '@setchy');
+    expect(screen.getByAltText('@setchy')).toBeInTheDocument();
+  });
+
+  it('uses the profile name for a managed account actor returned as User', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      account: {
+        ...mockGitifyNotification.account,
+        user: { ...mockGitifyNotification.account.user!, login: 'asetch_cisco' },
+      },
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          ...mockGitifyNotification.subject.user!,
+          login: 'asetch_cisco',
+          name: 'Adam Setch',
+          avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
+          type: 'User' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByTestId('view-profile')).toHaveAttribute(
+      'title',
+      'Adam Setch (@asetch_cisco)',
+    );
+    expect(screen.getByAltText('Adam Setch (@asetch_cisco)')).toBeInTheDocument();
+  });
 });

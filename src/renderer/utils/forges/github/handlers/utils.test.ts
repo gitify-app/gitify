@@ -34,6 +34,14 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
         type: mockAuthor.type,
       });
     });
+
+    it('preserves an enterprise managed user name', () => {
+      const result = getNotificationAuthor([
+        { ...mockAuthor, type: 'EnterpriseUserAccount', name: 'Adam Setch' },
+      ]);
+
+      expect(result?.name).toBe('Adam Setch');
+    });
   });
 
   describe('mapIssueTypeColor', () => {

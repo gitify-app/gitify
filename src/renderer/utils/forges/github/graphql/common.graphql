@@ -3,6 +3,12 @@ fragment AuthorFields on Actor {
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 
 fragment MilestoneFields on Milestone {

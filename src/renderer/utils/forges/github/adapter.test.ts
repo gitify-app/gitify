@@ -2,7 +2,7 @@ import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
 
 import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 
-import type { Hostname, Link, Token } from '../../../types';
+import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 
 import { githubAdapter } from './adapter';
 import * as client from './client';
@@ -55,6 +55,55 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(githubAdapter.oauthWebApp?.exchangeAuthCodeForToken).toBeDefined();
       expect(githubAdapter.oauthWebApp?.validateClientId).toBeDefined();
       expect(githubAdapter.oauthWebApp?.getNewOAuthAppUrl).toBeDefined();
+    });
+  });
+
+  describe('formatNotificationUser', () => {
+    const user: GitifyNotificationUser = {
+      login: 'asetch_cisco',
+      name: 'Adam Setch',
+      avatarUrl: '' as Link,
+      htmlUrl: 'https://github.com/asetch_cisco' as Link,
+      type: 'EnterpriseUserAccount',
+    };
+
+    it('uses a trimmed profile name for an enterprise managed user', () => {
+      expect(
+        githubAdapter.formatNotificationUser(mockGitHubCloudAccount, {
+          ...user,
+          name: '  Adam Setch  ',
+        }),
+      ).toBe('Adam Setch (@asetch_cisco)');
+    });
+
+    it.each([null, undefined, '', '   '])(
+      'falls back to the formatted login when the EMU name is %s',
+      (name) => {
+        expect(
+          githubAdapter.formatNotificationUser(mockGitHubCloudAccount, { ...user, name }),
+        ).toBe('@asetch_cisco');
+      },
+    );
+
+    it('keeps the formatted login for a regular user with a profile name', () => {
+      expect(
+        githubAdapter.formatNotificationUser(mockGitHubCloudAccount, {
+          ...user,
+          login: 'setchy',
+          type: 'User',
+        }),
+      ).toBe('@setchy');
+    });
+
+    it('uses the profile name for a managed actor returned as User', () => {
+      const managedAccount = {
+        ...mockGitHubCloudAccount,
+        user: { ...mockGitHubCloudAccount.user!, login: 'asetch_cisco' },
+      };
+
+      expect(githubAdapter.formatNotificationUser(managedAccount, { ...user, type: 'User' })).toBe(
+        'Adam Setch (@asetch_cisco)',
+      );
     });
   });
 

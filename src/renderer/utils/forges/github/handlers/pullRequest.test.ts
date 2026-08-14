@@ -1,3 +1,4 @@
+import { mockGitHubCloudAccount } from '../../../../__mocks__/account-mocks';
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 import {
   mockAuthor,
@@ -525,40 +526,65 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       const mockReviews = [
         {
           author: {
+            ...mockAuthor,
             login: 'reviewer-1',
           },
           state: 'CHANGES_REQUESTED' as PullRequestReviewState,
         },
         {
           author: {
+            ...mockAuthor,
             login: 'reviewer-2',
           },
           state: 'COMMENTED' as PullRequestReviewState,
         },
         {
           author: {
+            ...mockAuthor,
             login: 'reviewer-1',
           },
           state: 'APPROVED' as PullRequestReviewState,
         },
         {
           author: {
+            ...mockAuthor,
             login: 'reviewer-3',
           },
           state: 'APPROVED' as PullRequestReviewState,
         },
       ];
 
-      const result = getLatestReviewForReviewers(mockReviews);
+      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, mockReviews);
 
       expect(result).toEqual([
-        { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
-        { state: 'COMMENTED', users: ['reviewer-2'] },
+        { state: 'APPROVED', users: ['@reviewer-3', '@reviewer-1'] },
+        { state: 'COMMENTED', users: ['@reviewer-2'] },
       ]);
     });
 
+    it('uses managed user names in review labels', () => {
+      const account = {
+        ...mockGitHubCloudAccount,
+        user: { ...mockGitHubCloudAccount.user!, login: 'asetch_cisco' },
+      };
+      const result = getLatestReviewForReviewers(account, [
+        {
+          author: {
+            login: 'asetch_cisco',
+            name: 'Adam Setch',
+            htmlUrl: mockAuthor.htmlUrl,
+            avatarUrl: mockAuthor.avatarUrl,
+            type: 'User',
+          },
+          state: 'APPROVED',
+        },
+      ]);
+
+      expect(result).toEqual([{ state: 'APPROVED', users: ['Adam Setch (@asetch_cisco)'] }]);
+    });
+
     it('handles no PR reviews yet', async () => {
-      const result = getLatestReviewForReviewers([]);
+      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, []);
 
       expect(result).toEqual([]);
     });

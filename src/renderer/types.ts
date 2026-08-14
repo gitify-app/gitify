@@ -445,6 +445,8 @@ export interface GitifyOwner {
 export interface GitifyNotificationUser {
   /** Notification user login name */
   login: string;
+  /** Notification user's optional profile name */
+  name?: string | null;
   /**  Notification user avatar URL */
   avatarUrl: Link;
   /**  Notification user html URL */
