@@ -47,7 +47,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       const fragments = extractNonQueryFragments(FetchMergedDetailsTemplateDocument as any);
 
       expect(fragments).not.toBeNull();
-      expect(fragments.length).toBe(10);
+      expect(fragments.length).toBe(11);
       expect(fragments.flatMap((f) => f.typeCondition).toSorted()).toEqual([
         'Actor',
         'Discussion',
@@ -58,6 +58,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
         'Milestone',
         'PullRequest',
         'PullRequestReview',
+        'PullRequestReviewThreadConnection',
         'ReactionGroup',
       ]);
     });
@@ -87,12 +88,13 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       );
 
       expect(varDefs).not.toBeNull();
-      expect(varDefs.length).toBe(8);
+      expect(varDefs.length).toBe(9);
       expect(varDefs.flatMap((v) => v.name)).toEqual([
         'lastComments',
         'lastThreadedComments',
         'lastReplies',
         'lastReviews',
+        'firstReviewThreads',
         'firstLabels',
         'firstClosingIssues',
         'includeIsAnswered',
