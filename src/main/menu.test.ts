@@ -210,6 +210,48 @@ describe('main/menu.ts', () => {
     });
   });
 
+  describe('updateMenuVisibility', () => {
+    it('hides the update section and its separator', () => {
+      menuBuilder.setUpdateAvailableMenuVisibility(true);
+
+      menuBuilder.setUpdateMenuVisibility(false);
+
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['updatesSeparatorMenuItem'].visible).toBe(false);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['checkForUpdatesMenuItem'].visible).toBe(false);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(false);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(false);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(false);
+    });
+
+    it('shows the update section without revealing the status items', () => {
+      menuBuilder.setUpdateMenuVisibility(false);
+
+      menuBuilder.setUpdateMenuVisibility(true);
+
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['updatesSeparatorMenuItem'].visible).toBe(true);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['checkForUpdatesMenuItem'].visible).toBe(true);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(false);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(false);
+      // oxlint-disable-next-line dot-notation -- This is a test
+      expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(false);
+    });
+
+    it('republishes the menu so Linux picks up the visibility change', () => {
+      menuBuilder.setUpdateMenuVisibility(false);
+
+      expect(menubar.refreshContextMenu).toHaveBeenCalled();
+    });
+  });
+
   describe('windowVisibilityMenuItems', () => {
     it('show item is visible by default; hide item is not', () => {
       const showCfg = getMenuItemConfigByLabel(`Show ${APPLICATION.NAME}`);

@@ -51,6 +51,7 @@ export const SystemSettings: FC = () => {
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
+  const automaticUpdates = useSettingsStore((s) => s.automaticUpdates);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
@@ -342,6 +343,16 @@ export const SystemSettings: FC = () => {
           onChange={() => toggleSetting('openAtStartup')}
           tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
           visible={!window.gitify.platform.isLinux()}
+        />
+
+        <Checkbox
+          checked={automaticUpdates}
+          label="Automatic updates"
+          name="automaticUpdates"
+          onChange={() => toggleSetting('automaticUpdates')}
+          tooltip={
+            <Text>Check for new {APPLICATION.NAME} releases and install them automatically.</Text>
+          }
         />
       </Stack>
     </fieldset>

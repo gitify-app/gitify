@@ -1,6 +1,6 @@
 import { dialog, type MessageBoxOptions } from 'electron';
 import type { Menubar } from 'electron-menubar';
-import { autoUpdater } from 'electron-updater';
+import { autoUpdater, type UpdateCheckResult } from 'electron-updater';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo, toError } from '../shared/logger';
@@ -12,6 +12,8 @@ import type MenuBuilder from './menu';
  *
  * Supports scheduled and manual updates for all platforms.
  *
+ * The updater stays idle until the renderer reports the "Automatic updates" setting via `setEnabled`
+ *
  * Documentation: https://www.electron.build/auto-update
  *
  * NOTE: previously we tried update-electron-app (Squirrel-focused, no Linux + NSIS) before migrating to electron-updater for cross-platform support.
@@ -19,8 +21,13 @@ import type MenuBuilder from './menu';
 export default class AppUpdater {
   private readonly menubar: Menubar;
   private readonly menuBuilder: MenuBuilder;
+  private enabled = false;
   private started = false;
+  private listenersRegistered = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
+  private periodicCheckStartTimeout?: NodeJS.Timeout;
+  private periodicCheckInterval?: NodeJS.Timeout;
+  private updateCheckResult: UpdateCheckResult | null = null;
 
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
@@ -31,10 +38,26 @@ export default class AppUpdater {
   }
 
   /**
+   * Enable or disable automatic update checks and update notifications.
+   *
+   * @param enabled - `true` to start checking for updates, `false` to stop.
+   */
+  async setEnabled(enabled: boolean): Promise<void> {
+    this.enabled = enabled;
+    this.menuBuilder.setUpdateMenuVisibility(enabled);
+
+    if (enabled) {
+      await this.start();
+    } else {
+      this.stop();
+    }
+  }
+
+  /**
    * Start the updater: register event listeners, perform the initial update check,
    * and schedule periodic checks. Idempotent — safe to call multiple times.
    */
-  async start(): Promise<void> {
+  private async start(): Promise<void> {
     if (this.started) {
       return; // idempotent
     }
@@ -47,16 +70,55 @@ export default class AppUpdater {
     logInfo('app updater', 'Starting updater');
 
     this.registerListeners();
-    await this.performInitialCheck();
-    this.schedulePeriodicChecks();
-
+    autoUpdater.autoInstallOnAppQuit = true;
     this.started = true;
+
+    await this.performInitialCheck();
+
+    // The setting can be turned off while the initial check is in flight
+    if (!this.enabled) {
+      this.stop();
+      return;
+    }
+
+    this.schedulePeriodicChecks();
+  }
+
+  /**
+   * Stop the updater: cancel scheduled checks, abort any in-flight download and
+   * clear all update-related UI state
+   */
+  private stop(): void {
+    // Applied unconditionally: an update downloaded before this point would
+    // otherwise still install itself the next time the app quits.
+    autoUpdater.autoInstallOnAppQuit = false;
+    this.updateCheckResult?.cancellationToken?.cancel();
+    this.updateCheckResult = null;
+
+    if (!this.started) {
+      return;
+    }
+
+    logInfo('app updater', 'Stopping updater');
+
+    clearTimeout(this.periodicCheckStartTimeout);
+    clearInterval(this.periodicCheckInterval);
+    this.periodicCheckStartTimeout = undefined;
+    this.periodicCheckInterval = undefined;
+
+    this.resetState();
+    this.started = false;
   }
 
   /**
    * Attach all electron-updater event listeners and wire them to menu state setters.
    */
   private registerListeners() {
+    if (this.listenersRegistered) {
+      return;
+    }
+    this.listenersRegistered = true;
+
     autoUpdater.on('checking-for-update', () => {
       logInfo('auto updater', 'Checking for update');
       this.menuBuilder.setCheckForUpdatesMenuEnabled(false);
@@ -115,7 +177,7 @@ export default class AppUpdater {
   private async performInitialCheck() {
     try {
       logInfo('app updater', 'Checking for updates on application launch');
-      await autoUpdater.checkForUpdatesAndNotify();
+      await this.checkForUpdates();
     } catch (err) {
       logError('auto updater', 'Initial check failed', toError(err));
     }
@@ -128,7 +190,7 @@ export default class AppUpdater {
     const runScheduledCheck = async () => {
       try {
         logInfo('app updater', 'Checking for updates on a periodic schedule');
-        await autoUpdater.checkForUpdatesAndNotify();
+        await this.checkForUpdates();
       } catch (e) {
         logError('auto updater', 'Scheduled check failed', toError(e));
       }
@@ -136,10 +198,21 @@ export default class AppUpdater {
 
     // Defer the first periodic check until after the interval elapses.
     // This avoids an immediate duplicate check on startup.
-    setTimeout(async () => {
+    this.periodicCheckStartTimeout = setTimeout(async () => {
       await runScheduledCheck();
-      setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+      this.periodicCheckInterval = setInterval(
+        runScheduledCheck,
+        APPLICATION.UPDATE_CHECK_INTERVAL_MS,
+      );
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+  }
+
+  /**
+   * Check for updates, retaining the result so an in-flight download can be
+   * cancelled if automatic updates are turned off.
+   */
+  private async checkForUpdates() {
+    this.updateCheckResult = (await autoUpdater.checkForUpdatesAndNotify()) ?? null;
   }
 
   /**

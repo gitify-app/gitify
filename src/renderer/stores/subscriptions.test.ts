@@ -14,6 +14,7 @@ describe('renderer/stores/subscriptions.ts', () => {
   const setUseAlternateIdleIconSpy = vi
     .spyOn(comms, 'setUseAlternateIdleIcon')
     .mockImplementation(vi.fn());
+  const setAutomaticUpdatesSpy = vi.spyOn(comms, 'setAutomaticUpdates').mockImplementation(vi.fn());
 
   let cleanup: (() => void) | null = null;
 
@@ -35,6 +36,9 @@ describe('renderer/stores/subscriptions.ts', () => {
     expect(setUseAlternateIdleIconSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().useAlternateIdleIcon,
     );
+    expect(setAutomaticUpdatesSpy).toHaveBeenCalledWith(
+      useSettingsStore.getState().automaticUpdates,
+    );
     expect(window.gitify.zoom.setLevel).toHaveBeenCalled();
   });
 
@@ -53,6 +57,9 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     useSettingsStore.getState().updateSetting('useAlternateIdleIcon', true);
     expect(setUseAlternateIdleIconSpy).toHaveBeenCalledWith(true);
+
+    useSettingsStore.getState().updateSetting('automaticUpdates', false);
+    expect(setAutomaticUpdatesSpy).toHaveBeenCalledWith(false);
   });
 
   it('applies zoom level when zoom percentage changes', () => {

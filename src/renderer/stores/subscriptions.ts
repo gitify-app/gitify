@@ -6,6 +6,7 @@
  */
 
 import {
+  setAutomaticUpdates,
   setAutoLaunch,
   setKeepWindowOnBlur,
   setUseAlternateIdleIcon,
@@ -33,6 +34,7 @@ export function initializeStoreSubscriptions(): () => void {
   setKeepWindowOnBlur(useSettingsStore.getState().keepWindowOnBlur);
   setUseUnreadActiveIcon(useSettingsStore.getState().useUnreadActiveIcon);
   setUseAlternateIdleIcon(useSettingsStore.getState().useAlternateIdleIcon);
+  setAutomaticUpdates(useSettingsStore.getState().automaticUpdates);
 
   // ========================================================================
   // Settings Store Side Effects
@@ -73,6 +75,15 @@ export function initializeStoreSubscriptions(): () => void {
     },
   );
   unsubscribers.push(unsubAlternateIdle);
+
+  // Automatic update checks and notifications
+  const unsubAutomaticUpdates = useSettingsStore.subscribe(
+    (state) => state.automaticUpdates,
+    (automaticUpdates) => {
+      setAutomaticUpdates(automaticUpdates);
+    },
+  );
+  unsubscribers.push(unsubAutomaticUpdates);
 
   // Initialize zoom level from saved settings on startup
   const initialZoomPercentage = useSettingsStore.getState().zoomPercentage;

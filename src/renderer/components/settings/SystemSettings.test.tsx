@@ -35,6 +35,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     ['checkbox-showNotifications', 'showNotifications'],
     ['checkbox-openAtStartup', 'openAtStartup'],
     ['checkbox-keepWindowOnBlur', 'keepWindowOnBlur'],
+    ['checkbox-automaticUpdates', 'automaticUpdates'],
   ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
       renderWithProviders(<SystemSettings />);
