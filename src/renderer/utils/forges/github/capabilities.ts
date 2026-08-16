@@ -57,3 +57,25 @@ export function supportsAnsweredDiscussion(account: Account): boolean {
 export function supportsStackedPullRequests(account: Account): boolean {
   return isGitHubCloudHost(account.hostname);
 }
+
+/**
+ * The set of capabilities that gate GraphQL field selections via the custom
+ * `@gated(requires: ...)` directive. The keys must match the `requires`
+ * argument used in the GraphQL documents.
+ */
+export type GitHubGatedCapabilities = {
+  stackedPullRequests: boolean;
+  answeredDiscussion: boolean;
+};
+
+/**
+ * Resolve the gated-field capabilities for an account. Consumed by the query
+ * sanitizer in `graphql/utils.ts` to strip `@gated` selections that the
+ * account's GitHub platform/version does not support.
+ */
+export function getGitHubCapabilities(account: Account): GitHubGatedCapabilities {
+  return {
+    stackedPullRequests: supportsStackedPullRequests(account),
+    answeredDiscussion: supportsAnsweredDiscussion(account),
+  };
+}

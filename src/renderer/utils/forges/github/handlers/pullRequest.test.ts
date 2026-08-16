@@ -1,6 +1,7 @@
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 import {
   mockAuthor,
+  mockAuthorResponseNode,
   mockCommenter,
   mockPullRequestResponseNode,
   noReactionGroups,
@@ -525,25 +526,25 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       const mockReviews = [
         {
           author: {
-            login: 'reviewer-1',
+            ...mockAuthorResponseNode('reviewer-1'),
           },
           state: 'CHANGES_REQUESTED' as PullRequestReviewState,
         },
         {
           author: {
-            login: 'reviewer-2',
+            ...mockAuthorResponseNode('reviewer-2'),
           },
           state: 'COMMENTED' as PullRequestReviewState,
         },
         {
           author: {
-            login: 'reviewer-1',
+            ...mockAuthorResponseNode('reviewer-1'),
           },
           state: 'APPROVED' as PullRequestReviewState,
         },
         {
           author: {
-            login: 'reviewer-3',
+            ...mockAuthorResponseNode('reviewer-3'),
           },
           state: 'APPROVED' as PullRequestReviewState,
         },
@@ -561,6 +562,22 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       const result = getLatestReviewForReviewers([]);
 
       expect(result).toEqual([]);
+    });
+
+    it('formats bot names used by review metric tooltips', () => {
+      const result = getLatestReviewForReviewers([
+        {
+          author: {
+            login: 'copilot-pull-request-reviewer',
+            htmlUrl: 'https://github.com/apps/copilot-pull-request-reviewer' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+            type: 'Bot' as const,
+          },
+          state: 'COMMENTED' as PullRequestReviewState,
+        },
+      ]);
+
+      expect(result).toEqual([{ state: 'COMMENTED', users: ['copilot[ai]'] }]);
     });
   });
 
