@@ -8,6 +8,7 @@ import type {
   Forge,
   Hostname,
   IconColor,
+  GitifyNotificationUser,
   Link,
   RawGitifyNotification,
   Token,
@@ -116,6 +117,9 @@ export interface ForgeAdapter {
    * return as-is for Bitbucket where the login is an email address).
    */
   formatUserLogin(login: string): string;
+
+  /** Format a notification actor for accessible identity metadata. */
+  formatNotificationUser?(user: GitifyNotificationUser): string;
 
   /** Fetch the authenticated user (used during login & on refresh). */
   fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData>;
