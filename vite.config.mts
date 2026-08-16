@@ -202,7 +202,7 @@ export default defineConfig({
         },
       },
       {
-        files: ['scripts/**', 'codegen.ts', 'vite.config.ts', 'vitest.config.ts'],
+        files: ['scripts/**', 'codegen.ts', 'vite.config.mts', 'vitest.config.mts'],
         rules: {
           'no-console': 'off',
         },

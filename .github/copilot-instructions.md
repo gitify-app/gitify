@@ -62,8 +62,8 @@ After making changes, validate in this order:
 
 ### Configuration
 
-- `vite.config.ts` — Primary build config; also hosts `lint`, `fmt`, and `staged` blocks used by `pnpm check` and Husky
-- `vitest.config.ts` — Test configuration (Vitest projects: happy-dom for renderer/preload, node for main/shared)
+- `vite.config.mts` — Primary build config; also hosts `lint`, `fmt`, and `staged` blocks used by `pnpm check` and Husky
+- `vitest.config.mts` — Test configuration (Vitest projects: happy-dom for renderer/preload, node for main/shared)
 - `tsconfig.json` — TypeScript configuration
 - `tailwind.config.mts` — Tailwind CSS configuration
 - `package.json` — Scripts and dependency versions
