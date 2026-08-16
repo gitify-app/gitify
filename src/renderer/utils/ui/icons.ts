@@ -14,16 +14,18 @@ import {
 
 import { BitbucketIcon } from '../../components/icons/BitbucketIcon';
 
-import {
-  type GitifyPullRequestReview,
-  IconColor,
-  type PullRequestApprovalIcon,
-  type UserType,
-} from '../../types';
+import { IconColor, type PullRequestApprovalIcon, type UserType } from '../../types';
 import type { PlatformType } from '../auth/types';
 
+import type { PullRequestReviewState } from '../forges/github/graphql/generated/graphql';
+
+export interface PullRequestReviewGroup {
+  state: PullRequestReviewState;
+  users: string[];
+}
+
 export function getPullRequestReviewIcon(
-  review: GitifyPullRequestReview,
+  review: PullRequestReviewGroup,
 ): PullRequestApprovalIcon | null {
   const descriptionPrefix = review.users.join(', ');
 

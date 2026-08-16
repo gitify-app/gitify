@@ -137,6 +137,9 @@ export function mockPullRequestResponseNode(mocks: {
       totalCount: 0,
       nodes: [],
     },
+    reviewThreads: {
+      nodes: [],
+    },
     reviewRequests: {
       nodes: [],
     },

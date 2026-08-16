@@ -21,11 +21,7 @@ import type {
   FetchPullRequestByNumberQuery,
   PullRequestReviewState,
 } from '../graphql/generated/graphql';
-import {
-  getLatestReviewForReviewers,
-  getReviewRequestTypes,
-  pullRequestHandler,
-} from './pullRequest';
+import { getPullRequestReviewers, getReviewRequestTypes, pullRequestHandler } from './pullRequest';
 
 vi.mock('../client', async () => {
   const actual = await vi.importActual<typeof import('../client')>('../client');
@@ -82,7 +78,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -91,6 +87,33 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+
+    it('enriches review thread status and activity', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.reviewThreads = {
+        nodes: [
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'reviewer-1' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: null }] },
+          },
+        ],
+      };
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.reviewers).toEqual([
+        { user: 'reviewer-1', threads: { resolved: 0, total: 1 } },
+        { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
+      ]);
     });
 
     it('draft pull request state', async () => {
@@ -123,7 +146,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -164,7 +187,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -205,7 +228,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -249,7 +272,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         isStacked: true,
         stackPosition: 2,
@@ -311,7 +334,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockCommenter.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 1,
@@ -360,7 +383,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [{ name: 'enhancement', color: '0e8a16' }],
         linkedIssues: [],
         commentCount: 0,
@@ -407,7 +430,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: ['#789'],
         commentCount: 0,
@@ -451,7 +474,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           type: mockAuthor.type,
         },
         reviewRequested: [],
-        reviews: [],
+        reviewers: [],
         labels: [],
         linkedIssues: [],
         commentCount: 0,
@@ -522,8 +545,8 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     ).toEqual(`${mockHtmlUrl}/pulls`);
   });
 
-  describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {
-    it('returns latest review state per reviewer', async () => {
+  describe('Pull Request Reviewers', () => {
+    it('merges latest states and thread counts by reviewer', () => {
       const mockReviews = [
         {
           author: mockAuthorResponseNode('reviewer-1'),
@@ -543,11 +566,64 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ];
 
-      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, mockReviews);
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, mockReviews, {
+        nodes: [
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'reviewer-1' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: { login: 'thread-only' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: null }] },
+          },
+        ],
+      });
 
       expect(result).toEqual([
-        { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
-        { state: 'COMMENTED', users: ['reviewer-2'] },
+        { user: 'reviewer-1', state: 'APPROVED', threads: { resolved: 0, total: 1 } },
+        { user: 'reviewer-2', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
+        { user: 'reviewer-3', state: 'APPROVED', threads: { resolved: 0, total: 0 } },
+        { user: 'thread-only', threads: { resolved: 1, total: 1 } },
+        { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
+      ]);
+    });
+
+    it('handles no reviews or threads', () => {
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, []);
+
+      expect(result).toEqual([]);
+    });
+
+    it('aggregates thread resolution from the fetched thread page', () => {
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, [], {
+        nodes: [
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'zoe' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: { login: 'alice' } }] },
+          },
+          {
+            isResolved: false,
+            comments: { nodes: [{ author: { login: 'alice' } }] },
+          },
+          {
+            isResolved: true,
+            comments: { nodes: [{ author: null }] },
+          },
+        ],
+      });
+
+      expect(result).toEqual([
+        { user: 'alice', threads: { resolved: 1, total: 2 } },
+        { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
+        { user: 'zoe', threads: { resolved: 0, total: 1 } },
       ]);
     });
 
@@ -556,7 +632,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         ...mockGitHubCloudAccount,
         user: { ...mockGitHubCloudAccount.user!, login: 'octocat_gitify' },
       };
-      const result = getLatestReviewForReviewers(account, [
+      const result = getPullRequestReviewers(account, [
         {
           author: {
             login: 'notification-author_gitify',
@@ -570,18 +646,16 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       ]);
 
       expect(result).toEqual([
-        { state: 'APPROVED', users: ['Notification Author (notification-author_gitify)'] },
+        {
+          user: 'Notification Author (notification-author_gitify)',
+          state: 'APPROVED',
+          threads: { resolved: 0, total: 0 },
+        },
       ]);
     });
 
-    it('handles no PR reviews yet', async () => {
-      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, []);
-
-      expect(result).toEqual([]);
-    });
-
     it('formats bot names used by review metric tooltips', () => {
-      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, [
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, [
         {
           author: {
             login: 'copilot-pull-request-reviewer',
@@ -593,7 +667,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ]);
 
-      expect(result).toEqual([{ state: 'COMMENTED', users: ['copilot[ai]'] }]);
+      expect(result).toEqual([
+        { user: 'copilot[ai]', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
+      ]);
     });
   });
 

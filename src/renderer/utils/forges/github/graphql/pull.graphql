@@ -7,6 +7,7 @@ query FetchPullRequestByNumber(
   $firstLabels: Int
   $lastComments: Int
   $lastReviews: Int
+  $firstReviewThreads: Int
   $firstClosingIssues: Int
 ) {
   repository(owner: $owner, name: $name) {
@@ -65,6 +66,9 @@ fragment PullRequestDetails on PullRequest {
       ...PullRequestReviewFields
     }
   }
+  reviewThreads(first: $firstReviewThreads) {
+    ...PullRequestReviewThreadConnectionFields
+  }
   labels(first: $firstLabels) {
     nodes {
       ...LabelFields
@@ -93,5 +97,18 @@ fragment PullRequestReviewFields on PullRequestReview {
   state
   author {
     ...AuthorFields
+  }
+}
+
+fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConnection {
+  nodes {
+    isResolved
+    comments(first: 1) {
+      nodes {
+        author {
+          login
+        }
+      }
+    }
   }
 }

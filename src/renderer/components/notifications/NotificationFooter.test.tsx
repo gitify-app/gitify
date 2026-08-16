@@ -77,7 +77,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
             avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
             type: 'User' as GitifyNotificationUser['type'],
           },
-          reviews: undefined,
+          reviewers: undefined,
         },
       },
     };

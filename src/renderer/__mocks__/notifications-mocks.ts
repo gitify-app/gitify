@@ -67,18 +67,21 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
       state: 'OPEN',
       user: mockSubjectUser,
       author: mockSubjectUser,
-      reviews: [
+      reviewers: [
         {
+          user: 'octocat',
           state: 'APPROVED',
-          users: ['octocat'],
+          threads: { resolved: 0, total: 0 },
         },
         {
+          user: 'gitify-app',
           state: 'CHANGES_REQUESTED',
-          users: ['gitify-app'],
+          threads: { resolved: 0, total: 0 },
         },
         {
+          user: 'gitify-user',
           state: 'PENDING',
-          users: ['gitify-user'],
+          threads: { resolved: 0, total: 0 },
         },
       ],
     },
@@ -111,7 +114,7 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
       latestCommentUrl:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965' as Link,
       type: 'Issue',
-      reviews: undefined,
+      reviewers: undefined,
     },
     repository: mockGitHubRepository,
     display: {
@@ -165,7 +168,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       latestCommentUrl:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
       type: 'Release',
-      reviews: undefined,
+      reviewers: undefined,
     },
     repository: mockEnterpriseRepository,
     display: {
@@ -196,7 +199,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       latestCommentUrl:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21' as Link,
       type: 'PullRequest',
-      reviews: undefined,
+      reviewers: undefined,
     },
     repository: mockEnterpriseRepository,
     display: {

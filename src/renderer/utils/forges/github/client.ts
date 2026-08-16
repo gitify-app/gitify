@@ -260,8 +260,11 @@ export async function fetchPullByNumber(
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
   });
-} /**
+}
+
+/**
  * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
 
  * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
@@ -312,6 +315,7 @@ export async function fetchNotificationDetailsForList(
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
   });
 
   const query = stripGatedSelections(
