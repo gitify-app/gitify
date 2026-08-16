@@ -162,7 +162,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
           class="text-xxs px-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
-          2
+          0/2
         </span>
       </div>
     </span>

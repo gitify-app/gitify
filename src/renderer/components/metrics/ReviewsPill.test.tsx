@@ -37,7 +37,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
       />,
     );
 
-    expect(tree.getByText('2')).toBeInTheDocument();
+    expect(tree.getByText('2/4')).toBeInTheDocument();
     expect(tree.getByText('alice: 1/3 resolved · zoe: 1/1 resolved')).toBeInTheDocument();
     expect(tree.queryByText('zoe left review comments')).not.toBeInTheDocument();
   });
@@ -47,7 +47,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
       <ReviewsPill reviewers={[{ user: 'reviewer', threads: { resolved: 1, total: 1 } }]} />,
     );
 
-    expect(tree.getByText('1')).toBeInTheDocument();
+    expect(tree.getByText('1/1')).toBeInTheDocument();
     expect(tree.getByText('reviewer: 1/1 resolved')).toBeInTheDocument();
   });
 

@@ -57,7 +57,7 @@ export const ReviewsPill: FC<ReviewsPillProps> = ({ reviewers }) => {
           color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
           contents={formatReviewThreadDescription(reviewersWithThreads)}
           icon={CommentIcon}
-          metric={unresolvedThreadTotal || threadTotal}
+          metric={`${resolvedThreadTotal}/${threadTotal}`}
         />
       ) : null}
     </>
