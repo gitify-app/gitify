@@ -90,6 +90,57 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith(props.notification.subject.user!.htmlUrl);
   });
 
+  it.each([
+    ['github-actions[bot]', 'github-actions', 'https://github.com/apps/github-actions'],
+    [
+      'copilot[ai]',
+      'copilot-pull-request-reviewer',
+      'https://github.com/apps/copilot-pull-request-reviewer',
+    ],
+  ])('should format a GitHub App actor as %s in the avatar alt', (label, login, htmlUrl) => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          login,
+          htmlUrl: htmlUrl as Link,
+          avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+          type: 'Bot' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByAltText(label)).toBeInTheDocument();
+    expect(screen.getByTitle(label)).toBeInTheDocument();
+    expect(screen.queryByText(login)).not.toBeInTheDocument();
+    expect(screen.queryByTestId('notification-user-badge')).not.toBeInTheDocument();
+  });
+
+  it('should not render a badge for an unsupported actor', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          login: 'octocat',
+          htmlUrl: 'https://github.com/octocat' as Link,
+          avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+          type: 'User' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByAltText('octocat')).toBeInTheDocument();
+    expect(screen.getByTitle('octocat')).toBeInTheDocument();
+    expect(screen.queryByText('octocat')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('notification-user-badge')).not.toBeInTheDocument();
+  });
+
   it('uses the GitHub EMU profile name for hover and accessible avatar text', () => {
     const notification = {
       ...mockGitifyNotification,

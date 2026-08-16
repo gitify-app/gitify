@@ -8,8 +8,8 @@ import type {
   Forge,
   Hostname,
   IconColor,
-  Link,
   GitifyNotificationUser,
+  Link,
   RawGitifyNotification,
   Token,
   UserType,
@@ -117,7 +117,7 @@ export interface ForgeAdapter {
    */
   formatUserLogin(login: string): string;
 
-  /** Format a normalized notification actor according to forge identity conventions. */
+  /** Format a notification actor for display (e.g. bots, managed users) according to forge identity conventions. */
   formatNotificationUser(account: Account, user: GitifyNotificationUser): string;
 
   /** Fetch the authenticated user (used during login & on refresh). */

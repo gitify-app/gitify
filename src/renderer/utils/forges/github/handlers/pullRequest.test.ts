@@ -2,6 +2,7 @@ import { mockGitHubCloudAccount } from '../../../../__mocks__/account-mocks';
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 import {
   mockAuthor,
+  mockAuthorResponseNode,
   mockCommenter,
   mockPullRequestResponseNode,
   noReactionGroups,
@@ -525,31 +526,19 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it('returns latest review state per reviewer', async () => {
       const mockReviews = [
         {
-          author: {
-            ...mockAuthor,
-            login: 'reviewer-1',
-          },
+          author: mockAuthorResponseNode('reviewer-1'),
           state: 'CHANGES_REQUESTED' as PullRequestReviewState,
         },
         {
-          author: {
-            ...mockAuthor,
-            login: 'reviewer-2',
-          },
+          author: mockAuthorResponseNode('reviewer-2'),
           state: 'COMMENTED' as PullRequestReviewState,
         },
         {
-          author: {
-            ...mockAuthor,
-            login: 'reviewer-1',
-          },
+          author: mockAuthorResponseNode('reviewer-1'),
           state: 'APPROVED' as PullRequestReviewState,
         },
         {
-          author: {
-            ...mockAuthor,
-            login: 'reviewer-3',
-          },
+          author: mockAuthorResponseNode('reviewer-3'),
           state: 'APPROVED' as PullRequestReviewState,
         },
       ];
@@ -589,6 +578,22 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       const result = getLatestReviewForReviewers(mockGitHubCloudAccount, []);
 
       expect(result).toEqual([]);
+    });
+
+    it('formats bot names used by review metric tooltips', () => {
+      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, [
+        {
+          author: {
+            login: 'copilot-pull-request-reviewer',
+            htmlUrl: 'https://github.com/apps/copilot-pull-request-reviewer' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+            type: 'Bot' as const,
+          },
+          state: 'COMMENTED' as PullRequestReviewState,
+        },
+      ]);
+
+      expect(result).toEqual([{ state: 'COMMENTED', users: ['copilot[ai]'] }]);
     });
   });
 
