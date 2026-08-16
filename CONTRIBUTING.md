@@ -87,7 +87,7 @@ the macOS native vibrancy material, which Chromium cannot render.
 
 ### Code Style & Conventions
 
-- Linting and formatting are configured in `vite.config.ts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
+- Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
 - Follow existing file and folder naming conventions.
 - Keep commit messages clear and descriptive.
 
