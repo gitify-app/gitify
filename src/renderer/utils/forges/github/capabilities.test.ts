@@ -5,6 +5,7 @@ import {
 
 import {
   githubCapabilities,
+  getGitHubCapabilities,
   supportsAnsweredDiscussion,
   supportsStackedPullRequests,
 } from './capabilities';
@@ -92,6 +93,22 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
           version: undefined,
         }),
       ).toBe(false);
+    });
+  });
+
+  describe('getGitHubCapabilities', () => {
+    it('enables all gated capabilities for GitHub Cloud', () => {
+      expect(getGitHubCapabilities(mockGitHubCloudAccount)).toEqual({
+        stackedPullRequests: true,
+        answeredDiscussion: true,
+      });
+    });
+
+    it('disables gated capabilities for GitHub Enterprise Server', () => {
+      expect(getGitHubCapabilities(mockGitHubEnterpriseServerAccount)).toEqual({
+        stackedPullRequests: false,
+        answeredDiscussion: false,
+      });
     });
   });
 });

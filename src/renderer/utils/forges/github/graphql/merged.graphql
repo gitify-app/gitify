@@ -13,8 +13,6 @@ query FetchMergedDetailsTemplate(
   $lastReviews: Int
   $firstLabels: Int
   $firstClosingIssues: Int
-  $includeIsAnswered: Boolean!
-  $includeStackEntry: Boolean!
 ) {
   ...MergedDetailsQueryTemplate
 }
