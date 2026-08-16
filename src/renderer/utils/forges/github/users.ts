@@ -11,7 +11,8 @@ export function formatGitHubNotificationUser(user: GitifyNotificationUser): stri
   }
 
   try {
-    const match = new URL(user.htmlUrl).pathname.match(/^\/apps\/([^/]+)\/?$/);
+    const pathname = new URL(user.htmlUrl).pathname;
+    const match = /^\/apps\/([^/]+)\/?$/.exec(pathname);
     if (!match) {
       return user.login;
     }
