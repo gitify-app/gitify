@@ -1,3 +1,5 @@
+import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
+
 import type { GitifyNotificationUser, Link } from '../../../types';
 
 import { formatGitHubNotificationUser } from './users';
@@ -16,14 +18,18 @@ function createUser(
 
 describe('renderer/utils/forges/github/users.ts', () => {
   it('formats an ordinary GitHub App profile as Bot', () => {
-    expect(formatGitHubNotificationUser(createUser('https://github.com/apps/github-actions'))).toBe(
-      'github-actions[bot]',
-    );
+    expect(
+      formatGitHubNotificationUser(
+        mockGitHubCloudAccount,
+        createUser('https://github.com/apps/github-actions'),
+      ),
+    ).toBe('github-actions[bot]');
   });
 
   it('formats the Copilot pull request reviewer app as AI', () => {
     expect(
       formatGitHubNotificationUser(
+        mockGitHubCloudAccount,
         createUser('https://github.com/apps/copilot-pull-request-reviewer'),
       ),
     ).toBe('copilot[ai]');
@@ -31,7 +37,10 @@ describe('renderer/utils/forges/github/users.ts', () => {
 
   it('supports GitHub Enterprise App profile URLs', () => {
     expect(
-      formatGitHubNotificationUser(createUser('https://github.example.com/apps/github-actions')),
+      formatGitHubNotificationUser(
+        mockGitHubCloudAccount,
+        createUser('https://github.example.com/apps/github-actions'),
+      ),
     ).toBe('github-actions[bot]');
   });
 
@@ -41,12 +50,15 @@ describe('renderer/utils/forges/github/users.ts', () => {
     ['an app path with extra segments', 'https://github.com/apps/github-actions/settings'],
     ['a malformed URL', 'not a URL'],
   ])('preserves the login for %s', (_description, htmlUrl) => {
-    expect(formatGitHubNotificationUser(createUser(htmlUrl))).toBe('actor');
+    expect(formatGitHubNotificationUser(mockGitHubCloudAccount, createUser(htmlUrl))).toBe('actor');
   });
 
   it('preserves the login for a non-bot actor with an app profile URL', () => {
     expect(
-      formatGitHubNotificationUser(createUser('https://github.com/apps/github-actions', 'User')),
+      formatGitHubNotificationUser(
+        mockGitHubCloudAccount,
+        createUser('https://github.com/apps/github-actions', 'User'),
+      ),
     ).toBe('actor');
   });
 });

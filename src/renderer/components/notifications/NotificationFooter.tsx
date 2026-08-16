@@ -19,7 +19,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
 }: NotificationFooterProps) => {
   const user = notification.subject.user;
   const userLabel = user
-    ? (getAdapter(notification.account).formatNotificationUser?.(user) ?? user.login)
+    ? getAdapter(notification.account).formatNotificationUser(notification.account, user)
     : undefined;
 
   return (

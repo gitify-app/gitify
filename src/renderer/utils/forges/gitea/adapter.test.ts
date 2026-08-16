@@ -5,7 +5,7 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 
 import { useSettingsStore } from '../../../stores';
 
-import type { Hostname, Link, Token } from '../../../types';
+import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 
 import { giteaAdapter } from './adapter';
 import * as client from './client';
@@ -24,6 +24,21 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
 
     it('does not implement detailed enrichment', () => {
       expect(giteaAdapter.enrichNotifications).toBeUndefined();
+    });
+
+    it('uses the formatted login as a notification actor label', () => {
+      expect(
+        giteaAdapter.formatNotificationUser(mockGiteaAccount, {
+          login: 'octocat',
+          avatarUrl: '' as Link,
+          htmlUrl: '' as Link,
+          type: 'User',
+        } satisfies GitifyNotificationUser),
+      ).toBe('octocat');
+    });
+
+    it('uses plain logins for account identity surfaces', () => {
+      expect(giteaAdapter.formatUserLogin('octocat')).toBe('octocat');
     });
 
     it('exposes a single PAT login method', () => {

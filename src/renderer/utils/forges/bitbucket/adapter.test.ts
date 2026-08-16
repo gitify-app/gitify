@@ -7,7 +7,7 @@ import { useSettingsStore } from '../../../stores';
 
 import { BitbucketIcon } from '../../../components/icons/BitbucketIcon';
 
-import type { Hostname, Link, Token } from '../../../types';
+import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 import { IconColor } from '../../../types';
 import type { AtlassianNotificationFragment } from './types';
 
@@ -74,6 +74,17 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
 
     it('sets the default hostname to bitbucket.org', () => {
       expect(bitbucketAdapter.defaultHostname).toBe('bitbucket.org');
+    });
+
+    it('uses the native login as a notification actor label', () => {
+      expect(
+        bitbucketAdapter.formatNotificationUser(mockBitbucketAccount, {
+          login: 'user@example.com',
+          avatarUrl: '' as Link,
+          htmlUrl: '' as Link,
+          type: 'User',
+        } satisfies GitifyNotificationUser),
+      ).toBe('user@example.com');
     });
 
     it('returns the Atlassian token settings URL for PAT settings', () => {

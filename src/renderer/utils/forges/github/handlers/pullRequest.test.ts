@@ -1,3 +1,4 @@
+import { mockGitHubCloudAccount } from '../../../../__mocks__/account-mocks';
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 import {
   mockAuthor,
@@ -525,32 +526,24 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it('returns latest review state per reviewer', async () => {
       const mockReviews = [
         {
-          author: {
-            ...mockAuthorResponseNode('reviewer-1'),
-          },
+          author: mockAuthorResponseNode('reviewer-1'),
           state: 'CHANGES_REQUESTED' as PullRequestReviewState,
         },
         {
-          author: {
-            ...mockAuthorResponseNode('reviewer-2'),
-          },
+          author: mockAuthorResponseNode('reviewer-2'),
           state: 'COMMENTED' as PullRequestReviewState,
         },
         {
-          author: {
-            ...mockAuthorResponseNode('reviewer-1'),
-          },
+          author: mockAuthorResponseNode('reviewer-1'),
           state: 'APPROVED' as PullRequestReviewState,
         },
         {
-          author: {
-            ...mockAuthorResponseNode('reviewer-3'),
-          },
+          author: mockAuthorResponseNode('reviewer-3'),
           state: 'APPROVED' as PullRequestReviewState,
         },
       ];
 
-      const result = getLatestReviewForReviewers(mockReviews);
+      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, mockReviews);
 
       expect(result).toEqual([
         { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
@@ -558,14 +551,37 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       ]);
     });
 
+    it('uses managed user names in review labels', () => {
+      const account = {
+        ...mockGitHubCloudAccount,
+        user: { ...mockGitHubCloudAccount.user!, login: 'octocat_gitify' },
+      };
+      const result = getLatestReviewForReviewers(account, [
+        {
+          author: {
+            login: 'notification-author_gitify',
+            name: 'Notification Author',
+            htmlUrl: mockAuthor.htmlUrl,
+            avatarUrl: mockAuthor.avatarUrl,
+            type: 'User',
+          },
+          state: 'APPROVED',
+        },
+      ]);
+
+      expect(result).toEqual([
+        { state: 'APPROVED', users: ['Notification Author (notification-author_gitify)'] },
+      ]);
+    });
+
     it('handles no PR reviews yet', async () => {
-      const result = getLatestReviewForReviewers([]);
+      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, []);
 
       expect(result).toEqual([]);
     });
 
     it('formats bot names used by review metric tooltips', () => {
-      const result = getLatestReviewForReviewers([
+      const result = getLatestReviewForReviewers(mockGitHubCloudAccount, [
         {
           author: {
             login: 'copilot-pull-request-reviewer',

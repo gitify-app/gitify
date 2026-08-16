@@ -113,13 +113,12 @@ export interface ForgeAdapter {
   getPlatform(hostname: Hostname): PlatformType;
 
   /**
-   * Format a user login for display (e.g. prepend "@" for GitHub/Gitea,
-   * return as-is for Bitbucket where the login is an email address).
+   * Format an authenticated user login according to the forge's display convention.
    */
   formatUserLogin(login: string): string;
 
-  /** Format a notification actor for accessible identity metadata. */
-  formatNotificationUser?(user: GitifyNotificationUser): string;
+  /** Format a notification actor for display (e.g. bots, managed users) according to forge identity conventions. */
+  formatNotificationUser(account: Account, user: GitifyNotificationUser): string;
 
   /** Fetch the authenticated user (used during login & on refresh). */
   fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData>;

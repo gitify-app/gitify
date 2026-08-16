@@ -83,7 +83,7 @@ export const githubAdapter: ForgeAdapter = {
   capabilities: githubCapabilities,
 
   getPlatform: getGitHubPlatform,
-  formatUserLogin: (login) => `@${login}`,
+  formatUserLogin: (login) => login,
   formatNotificationUser: formatGitHubNotificationUser,
 
   fetchAuthenticatedUser,

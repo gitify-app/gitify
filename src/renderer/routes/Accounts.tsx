@@ -154,7 +154,7 @@ export const AccountsRoute: FC = () => {
                     title="Open account profile ↗"
                   >
                     <AvatarWithFallback
-                      alt={account.user?.login}
+                      alt={adapter.formatUserLogin(account.user?.login ?? '')}
                       name={adapter.formatUserLogin(account.user?.login ?? '')}
                       size={Size.XLARGE}
                       src={account.user?.avatar ?? undefined}

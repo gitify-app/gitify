@@ -140,4 +140,81 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(screen.queryByText('octocat')).not.toBeInTheDocument();
     expect(screen.queryByTestId('notification-user-badge')).not.toBeInTheDocument();
   });
+
+  it('uses the GitHub EMU profile name for hover and accessible avatar text', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          ...mockGitifyNotification.subject.user!,
+          login: 'notification-author_gitify',
+          name: 'Notification Author',
+          avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
+          type: 'EnterpriseUserAccount' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByTestId('view-profile')).toHaveAttribute(
+      'title',
+      'Notification Author (notification-author_gitify)',
+    );
+    expect(
+      screen.getByAltText('Notification Author (notification-author_gitify)'),
+    ).toBeInTheDocument();
+  });
+
+  it('uses the GitHub handle for a regular user with a profile name', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          ...mockGitifyNotification.subject.user!,
+          login: 'notification-author',
+          name: 'Notification Author',
+          avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
+          type: 'User' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByTestId('view-profile')).toHaveAttribute('title', 'notification-author');
+    expect(screen.getByAltText('notification-author')).toBeInTheDocument();
+  });
+
+  it('uses the profile name for a managed account actor returned as User', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      account: {
+        ...mockGitifyNotification.account,
+        user: { ...mockGitifyNotification.account.user!, login: 'octocat_gitify' },
+      },
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          ...mockGitifyNotification.subject.user!,
+          login: 'notification-author_gitify',
+          name: 'Notification Author',
+          avatarUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"/>' as Link,
+          type: 'User' as const,
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    expect(screen.getByTestId('view-profile')).toHaveAttribute(
+      'title',
+      'Notification Author (notification-author_gitify)',
+    );
+    expect(
+      screen.getByAltText('Notification Author (notification-author_gitify)'),
+    ).toBeInTheDocument();
+  });
 });

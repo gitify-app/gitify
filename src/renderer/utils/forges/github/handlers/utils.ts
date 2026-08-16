@@ -16,6 +16,7 @@ export function getNotificationAuthor(users: AuthorInput[]): GitifyNotificationU
     if (user) {
       return {
         login: user.login,
+        ...('name' in user && user.name ? { name: user.name } : {}),
         avatarUrl: user.avatarUrl,
         htmlUrl: user.htmlUrl,
         type: user.type,

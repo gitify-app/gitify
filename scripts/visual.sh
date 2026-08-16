@@ -58,7 +58,8 @@ fi
 # worktree (its .git file points outside the mount).
 #
 # Only allocate a TTY when there is one, so the script also works from a
-# non-interactive shell.
+# non-interactive shell. The `${arr[@]+"${arr[@]}"}` expansion keeps an empty
+# array from tripping `set -u` on macOS's bash 3.2.
 TTY_FLAGS=()
 if [ -t 0 ] && [ -t 1 ]; then
   TTY_FLAGS=(--interactive --tty)
@@ -67,7 +68,7 @@ fi
 # The host's node_modules holds darwin binaries (esbuild, @tailwindcss/oxide),
 # so the container gets its own install in a named volume. It persists between
 # runs, making everything after the first invocation fast.
-docker run --rm "${TTY_FLAGS[@]}" \
+docker run --rm "${TTY_FLAGS[@]+"${TTY_FLAGS[@]}"}" \
   --platform linux/arm64 \
   --volume "${REPO_ROOT}":/gitify \
   --volume gitify-visual-node-modules:/gitify/node_modules \

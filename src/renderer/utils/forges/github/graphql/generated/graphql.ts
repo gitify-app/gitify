@@ -102,13 +102,13 @@ export type ReactionContent =
 
 type AuthorFields_Bot_Fragment = { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' };
 
-type AuthorFields_EnterpriseUserAccount_Fragment = { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' };
+type AuthorFields_EnterpriseUserAccount_Fragment = { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' };
 
 type AuthorFields_Mannequin_Fragment = { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' };
 
 type AuthorFields_Organization_Fragment = { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' };
 
-type AuthorFields_User_Fragment = { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' };
+type AuthorFields_User_Fragment = { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' };
 
 export type AuthorFieldsFragment =
   | AuthorFields_Bot_Fragment
@@ -136,64 +136,64 @@ export type FetchDiscussionByNumberQueryVariables = Exact<{
 
 export type FetchDiscussionByNumberQuery = { repository: { discussion: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, replies: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, author:
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-                | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+                | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-                | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+                | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
                | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type DiscussionDetailsFragment = { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
    | null, comments: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, replies: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type CommentFieldsFragment = { createdAt: string, url: Link, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
    | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type DiscussionCommentFieldsFragment = { createdAt: string, url: Link, replies: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
    | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type FetchIssueByNumberQueryVariables = Exact<{
@@ -207,30 +207,30 @@ export type FetchIssueByNumberQueryVariables = Exact<{
 
 export type FetchIssueByNumberQuery = { repository: { issue: { __typename: 'Issue', number: number, title: string, url: Link, state: IssueState, stateReason: IssueStateReason | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type IssueDetailsFragment = { __typename: 'Issue', number: number, title: string, url: Link, state: IssueState, stateReason: IssueStateReason | null, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
    | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type FetchMergedDetailsTemplateQueryVariables = Exact<{
@@ -251,46 +251,46 @@ export type FetchMergedDetailsTemplateQueryVariables = Exact<{
 
 export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, replies: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, author:
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-                | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+                | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-                | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+                | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
                | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: Link, state: IssueState, stateReason: IssueStateReason | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer:
             | { __typename: 'Bot' }
             | { __typename: 'EnterpriseTeam' }
@@ -299,54 +299,54 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { __typename: 'User', login: string }
            | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, replies: { totalCount: number, nodes: Array<{ createdAt: string, url: Link, author:
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-                | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+                | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
                 | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-                | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+                | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
                | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, issue?: { __typename: 'Issue', number: number, title: string, url: Link, state: IssueState, stateReason: IssueStateReason | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer:
             | { __typename: 'Bot' }
             | { __typename: 'EnterpriseTeam' }
@@ -355,10 +355,10 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { __typename: 'User', login: string }
            | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
@@ -374,16 +374,16 @@ export type FetchPullRequestByNumberQueryVariables = Exact<{
 
 export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer:
             | { __typename: 'Bot' }
             | { __typename: 'EnterpriseTeam' }
@@ -392,24 +392,24 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
             | { __typename: 'User', login: string }
            | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-            | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+            | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
            | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
    | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, reviewRequests: { nodes: Array<{ requestedReviewer:
         | { __typename: 'Bot' }
         | { __typename: 'EnterpriseTeam' }
@@ -418,18 +418,18 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
         | { __typename: 'User', login: string }
        | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-        | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+        | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
        | null } | null> | null } | null, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
-    | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
+    | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
    | null };
 
 export class TypedDocumentString<TResult, TVariables>
@@ -456,6 +456,12 @@ export const AuthorFieldsFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
     `, {"fragmentName":"AuthorFields"}) as unknown as TypedDocumentString<AuthorFieldsFragment, unknown>;
 export const ReactionGroupFieldsFragmentDoc = new TypedDocumentString(`
@@ -485,6 +491,12 @@ export const CommentFieldsFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment ReactionGroupFields on ReactionGroup {
   content
@@ -507,6 +519,12 @@ export const DiscussionCommentFieldsFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment ReactionGroupFields on ReactionGroup {
   content
@@ -567,6 +585,12 @@ export const DiscussionDetailsFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment ReactionGroupFields on ReactionGroup {
   content
@@ -656,6 +680,12 @@ export const IssueDetailsFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment MilestoneFields on Milestone {
   state
@@ -683,6 +713,12 @@ export const PullRequestReviewFieldsFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }`, {"fragmentName":"PullRequestReviewFields"}) as unknown as TypedDocumentString<PullRequestReviewFieldsFragment, unknown>;
 export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
     fragment PullRequestDetails on PullRequest {
@@ -762,6 +798,12 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment MilestoneFields on Milestone {
   state
@@ -802,6 +844,12 @@ export const MergedDetailsQueryTemplateFragmentDoc = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment MilestoneFields on Milestone {
   state
@@ -1002,6 +1050,12 @@ export const FetchDiscussionByNumberDocument = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment ReactionGroupFields on ReactionGroup {
   content
@@ -1076,6 +1130,12 @@ export const FetchIssueByNumberDocument = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment MilestoneFields on Milestone {
   state
@@ -1144,6 +1204,12 @@ export const FetchMergedDetailsTemplateDocument = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment MilestoneFields on Milestone {
   state
@@ -1357,6 +1423,12 @@ export const FetchPullRequestByNumberDocument = new TypedDocumentString(`
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 fragment MilestoneFields on Milestone {
   state

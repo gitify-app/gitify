@@ -10,6 +10,7 @@ import {
 } from '@primer/octicons-react';
 
 import {
+  type Account,
   type GitifyNotification,
   type GitifyPullRequestReview,
   type GitifyPullRequestState,
@@ -56,6 +57,7 @@ class PullRequestHandler extends DefaultHandler {
     const prUser = commenter ?? author;
 
     const reviews = getLatestReviewForReviewers(
+      notification.account,
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
     );
 
@@ -162,6 +164,7 @@ export function getReviewRequestTypes(
 }
 
 export function getLatestReviewForReviewers(
+  account: Account,
   reviews: PullRequestReviewFieldsFragment[],
 ): GitifyPullRequestReview[] {
   if (!reviews.length) {
@@ -184,15 +187,16 @@ export function getLatestReviewForReviewers(
   // Group by the review state
   const reviewers: GitifyPullRequestReview[] = [];
   for (const prReview of latestReviews) {
-    const reviewer = prReview.author ? formatGitHubNotificationUser(prReview.author) : '';
+    const author = getNotificationAuthor([prReview.author]);
+    const authorLabel = author ? formatGitHubNotificationUser(account, author) : '';
     const reviewerFound = reviewers.find((review) => review.state === prReview.state);
 
     if (reviewerFound) {
-      reviewerFound.users.push(reviewer);
+      reviewerFound.users.push(authorLabel);
     } else {
       reviewers.push({
         state: prReview.state,
-        users: [reviewer],
+        users: [authorLabel],
       });
     }
   }
