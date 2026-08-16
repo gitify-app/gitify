@@ -1,6 +1,8 @@
+import { mockGitHubCloudAccount } from '../../../../__mocks__/account-mocks';
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 import {
   mockAuthor,
+  mockAuthorResponseNode,
   mockCommenter,
   mockPullRequestResponseNode,
   noReactionGroups,
@@ -547,32 +549,24 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     it('merges latest states and thread counts by reviewer', () => {
       const mockReviews = [
         {
-          author: {
-            login: 'reviewer-1',
-          },
+          author: mockAuthorResponseNode('reviewer-1'),
           state: 'CHANGES_REQUESTED' as PullRequestReviewState,
         },
         {
-          author: {
-            login: 'reviewer-2',
-          },
+          author: mockAuthorResponseNode('reviewer-2'),
           state: 'COMMENTED' as PullRequestReviewState,
         },
         {
-          author: {
-            login: 'reviewer-1',
-          },
+          author: mockAuthorResponseNode('reviewer-1'),
           state: 'APPROVED' as PullRequestReviewState,
         },
         {
-          author: {
-            login: 'reviewer-3',
-          },
+          author: mockAuthorResponseNode('reviewer-3'),
           state: 'APPROVED' as PullRequestReviewState,
         },
       ];
 
-      const result = getPullRequestReviewers(mockReviews, {
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, mockReviews, {
         nodes: [
           {
             isResolved: false,
@@ -599,12 +593,13 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
     });
 
     it('handles no reviews or threads', () => {
-      const result = getPullRequestReviewers([]);
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, []);
 
       expect(result).toEqual([]);
     });
+
     it('aggregates thread resolution from the fetched thread page', () => {
-      const result = getPullRequestReviewers([], {
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, [], {
         nodes: [
           {
             isResolved: false,
@@ -629,6 +624,51 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         { user: 'alice', threads: { resolved: 1, total: 2 } },
         { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
         { user: 'zoe', threads: { resolved: 0, total: 1 } },
+      ]);
+    });
+
+    it('uses managed user names in review labels', () => {
+      const account = {
+        ...mockGitHubCloudAccount,
+        user: { ...mockGitHubCloudAccount.user!, login: 'octocat_gitify' },
+      };
+      const result = getPullRequestReviewers(account, [
+        {
+          author: {
+            login: 'notification-author_gitify',
+            name: 'Notification Author',
+            htmlUrl: mockAuthor.htmlUrl,
+            avatarUrl: mockAuthor.avatarUrl,
+            type: 'User',
+          },
+          state: 'APPROVED',
+        },
+      ]);
+
+      expect(result).toEqual([
+        {
+          user: 'Notification Author (notification-author_gitify)',
+          state: 'APPROVED',
+          threads: { resolved: 0, total: 0 },
+        },
+      ]);
+    });
+
+    it('formats bot names used by review metric tooltips', () => {
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, [
+        {
+          author: {
+            login: 'copilot-pull-request-reviewer',
+            htmlUrl: 'https://github.com/apps/copilot-pull-request-reviewer' as Link,
+            avatarUrl: 'https://avatars.githubusercontent.com/u/1' as Link,
+            type: 'Bot' as const,
+          },
+          state: 'COMMENTED' as PullRequestReviewState,
+        },
+      ]);
+
+      expect(result).toEqual([
+        { user: 'copilot[ai]', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
       ]);
     });
   });

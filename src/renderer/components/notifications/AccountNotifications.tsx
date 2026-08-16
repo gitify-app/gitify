@@ -83,7 +83,7 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
             variant="invisible"
           >
             <AvatarWithFallback
-              alt={account.user!.login}
+              alt={getAdapter(account).formatUserLogin(account.user!.login)}
               name={getAdapter(account).formatUserLogin(account.user!.login)}
               size={Size.MEDIUM}
               src={account.user!.avatar ?? undefined}

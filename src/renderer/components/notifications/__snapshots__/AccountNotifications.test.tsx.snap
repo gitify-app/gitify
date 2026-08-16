@@ -56,9 +56,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
-              title="@octocat"
+              title="octocat"
             >
-              @octocat
+              octocat
             </div>
           </div>
         </span>
@@ -300,9 +300,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
-              title="@octocat"
+              title="octocat"
             >
-              @octocat
+              octocat
             </div>
           </div>
         </span>
@@ -544,9 +544,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
-              title="@octocat"
+              title="octocat"
             >
-              @octocat
+              octocat
             </div>
           </div>
         </span>
@@ -693,7 +693,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_8_"
+        aria-describedby="_r_c_"
         type="button"
       >
         <svg
@@ -723,7 +723,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-component="Tooltip"
         data-direction="e"
-        id="_r_8_"
+        id="_r_c_"
         popover="auto"
         role="tooltip"
       >
@@ -890,7 +890,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
             class="flex gap-1"
           >
             <button
-              aria-describedby="_r_9_"
+              aria-describedby="_r_d_"
               type="button"
             >
               <span
@@ -941,14 +941,14 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-component="Tooltip"
               data-direction="s"
-              id="_r_9_"
+              id="_r_d_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_a_"
+              aria-describedby="_r_e_"
               type="button"
             >
               <span
@@ -999,7 +999,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-component="Tooltip"
               data-direction="s"
-              id="_r_a_"
+              id="_r_e_"
               popover="auto"
               role="tooltip"
             >
@@ -1127,7 +1127,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_e_"
+        aria-describedby="_r_i_"
         type="button"
       >
         <svg
@@ -1157,7 +1157,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-component="Tooltip"
         data-direction="e"
-        id="_r_e_"
+        id="_r_i_"
         popover="auto"
         role="tooltip"
       >
@@ -1489,9 +1489,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
-              title="@octocat"
+              title="octocat"
             >
-              @octocat
+              octocat
             </div>
           </div>
         </span>
@@ -1684,9 +1684,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should ren
               class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
-              title="@octocat"
+              title="octocat"
             >
-              @octocat
+              octocat
             </div>
           </div>
         </span>
@@ -1923,9 +1923,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx > should tog
               class="prc-Truncate-Truncate-2G1eo"
               data-inline="true"
               style="--truncate-max-width: 280px;"
-              title="@octocat"
+              title="octocat"
             >
-              @octocat
+              octocat
             </div>
           </div>
         </span>

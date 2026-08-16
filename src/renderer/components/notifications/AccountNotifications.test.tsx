@@ -19,6 +19,29 @@ vi.mock('./RepositoryNotifications', () => ({
 }));
 
 describe('renderer/components/notifications/AccountNotifications.tsx', () => {
+  it('renders the managed GitHub account identity in the account header', () => {
+    const account = {
+      ...mockGitHubCloudAccount,
+      user: {
+        ...mockGitHubCloudAccount.user!,
+        login: 'octocat_gitify',
+        name: 'Mona Lisa Octocat',
+      },
+    };
+
+    renderWithProviders(
+      <AccountNotifications
+        account={account}
+        error={null}
+        notifications={mockGitHubCloudGitifyNotifications}
+        showAccountHeader
+      />,
+    );
+
+    expect(screen.getByText('octocat_gitify')).toBeInTheDocument();
+    expect(screen.getByAltText('octocat_gitify')).toBeInTheDocument();
+  });
+
   it('should render itself - group notifications by repositories', () => {
     const props: AccountNotificationsProps = {
       account: mockGitHubCloudAccount,

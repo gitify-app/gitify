@@ -10,6 +10,7 @@ import {
 } from '@primer/octicons-react';
 
 import {
+  type Account,
   type GitifyNotification,
   type GitifyPullRequestReviewer,
   type GitifyPullRequestState,
@@ -26,6 +27,7 @@ import type {
   PullRequestReviewFieldsFragment,
   PullRequestReviewThreadConnectionFieldsFragment,
 } from '../graphql/generated/graphql';
+import { formatGitHubNotificationUser } from '../users';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -56,6 +58,7 @@ class PullRequestHandler extends DefaultHandler {
     const prUser = commenter ?? author;
 
     const reviewers = getPullRequestReviewers(
+      notification.account,
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
       pr.reviewThreads,
     );
@@ -163,6 +166,7 @@ export function getReviewRequestTypes(
 }
 
 export function getPullRequestReviewers(
+  account: Account,
   reviews: PullRequestReviewFieldsFragment[],
   threadConnection?: PullRequestReviewThreadConnectionFieldsFragment,
 ): GitifyPullRequestReviewer[] {
@@ -171,8 +175,9 @@ export function getPullRequestReviewers(
   for (const review of reviews.toReversed()) {
     const user = review.author?.login;
     if (user && !reviewers.has(user)) {
+      const author = getNotificationAuthor([review.author]);
       reviewers.set(user, {
-        user,
+        user: author ? formatGitHubNotificationUser(account, author) : user,
         state: review.state,
         threads: { resolved: 0, total: 0 },
       });
