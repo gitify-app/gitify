@@ -1,5 +1,19 @@
 # Changelog
 
+## [7.4.0](https://github.com/gitify-app/gitify/compare/v7.3.3...v7.4.0) (2026-08-16)
+
+
+### 🚀 Features
+
+* **github:** format and render Bot account names ([#3183](https://github.com/gitify-app/gitify/issues/3183)) ([12efd18](https://github.com/gitify-app/gitify/commit/12efd18d1ac4437c90c855fe07fddf9bfa0445ca))
+* **github:** update actor display names (managed and unmanaged) ([#3182](https://github.com/gitify-app/gitify/issues/3182)) ([5353e92](https://github.com/gitify-app/gitify/commit/5353e9231ba40df87e4b8a56e696f5b7c030c6be))
+* **metrics:** improve pr review metric pill ([#3184](https://github.com/gitify-app/gitify/issues/3184)) ([9db47c8](https://github.com/gitify-app/gitify/commit/9db47c879a9967765fb7a84fb8e20363c16d5ec8))
+
+
+### 🐛 Bug Fixes
+
+* **forge/github:** sanitize gql query docs based on gated feature compatibility ([#3178](https://github.com/gitify-app/gitify/issues/3178)) ([6ae87ca](https://github.com/gitify-app/gitify/commit/6ae87cad593e762edc7a54aa0bc3cba1cb34cc78))
+
 ## [7.3.3](https://github.com/gitify-app/gitify/compare/v7.3.2...v7.3.3) (2026-08-12)
 
 
