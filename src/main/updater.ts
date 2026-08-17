@@ -1,18 +1,18 @@
 import { dialog, type MessageBoxOptions } from 'electron';
 import type { Menubar } from 'electron-menubar';
-import { autoUpdater, type UpdateCheckResult } from 'electron-updater';
+import { autoUpdater } from 'electron-updater';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo, toError } from '../shared/logger';
 
 import type MenuBuilder from './menu';
+import type { PackageManager } from './packageManager';
 
 /**
  * Updater class for handling application updates.
  *
- * Supports scheduled and manual updates for all platforms.
- *
- * The updater stays idle until the renderer reports the "Automatic updates" setting via `setEnabled`
+ * Supports scheduled and manual updates for all platforms, except for installs
+ * owned by a package manager - those update through the package manager instead.
  *
  * Documentation: https://www.electron.build/auto-update
  *
@@ -21,43 +21,29 @@ import type MenuBuilder from './menu';
 export default class AppUpdater {
   private readonly menubar: Menubar;
   private readonly menuBuilder: MenuBuilder;
-  private enabled = false;
+  private readonly packageManager: PackageManager | null;
   private started = false;
-  private listenersRegistered = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
-  private periodicCheckStartTimeout?: NodeJS.Timeout;
-  private periodicCheckInterval?: NodeJS.Timeout;
-  private updateCheckResult: UpdateCheckResult | null = null;
 
-  constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
+  /**
+   * @param menubar - The menubar instance whose tray and window the updater reports status through.
+   * @param menuBuilder - The menu builder whose update menu items track the update state.
+   * @param packageManager - The package manager that owns this install, or `null` when the app was installed manually.
+   */
+  constructor(menubar: Menubar, menuBuilder: MenuBuilder, packageManager: PackageManager | null) {
     this.menubar = menubar;
     this.menuBuilder = menuBuilder;
+    this.packageManager = packageManager;
     // Disable electron-updater's own logging to avoid duplicate log messages
     // We'll handle all logging through our event listeners
     autoUpdater.logger = null;
   }
 
   /**
-   * Enable or disable automatic update checks and update notifications.
-   *
-   * @param enabled - `true` to start checking for updates, `false` to stop.
-   */
-  async setEnabled(enabled: boolean): Promise<void> {
-    this.enabled = enabled;
-    this.menuBuilder.setUpdateMenuVisibility(enabled);
-
-    if (enabled) {
-      await this.start();
-    } else {
-      this.stop();
-    }
-  }
-
-  /**
    * Start the updater: register event listeners, perform the initial update check,
    * and schedule periodic checks. Idempotent — safe to call multiple times.
    */
-  private async start(): Promise<void> {
+  async start(): Promise<void> {
     if (this.started) {
       return; // idempotent
     }
@@ -67,58 +53,24 @@ export default class AppUpdater {
       return;
     }
 
+    if (this.packageManager) {
+      logInfo('app updater', `Skipping updater since app was installed via ${this.packageManager}`);
+      return;
+    }
+
     logInfo('app updater', 'Starting updater');
 
     this.registerListeners();
-    autoUpdater.autoInstallOnAppQuit = true;
-    this.started = true;
-
     await this.performInitialCheck();
-
-    // The setting can be turned off while the initial check is in flight
-    if (!this.enabled) {
-      this.stop();
-      return;
-    }
-
     this.schedulePeriodicChecks();
-  }
 
-  /**
-   * Stop the updater: cancel scheduled checks, abort any in-flight download and
-   * clear all update-related UI state
-   */
-  private stop(): void {
-    // Applied unconditionally: an update downloaded before this point would
-    // otherwise still install itself the next time the app quits.
-    autoUpdater.autoInstallOnAppQuit = false;
-    this.updateCheckResult?.cancellationToken?.cancel();
-    this.updateCheckResult = null;
-
-    if (!this.started) {
-      return;
-    }
-
-    logInfo('app updater', 'Stopping updater');
-
-    clearTimeout(this.periodicCheckStartTimeout);
-    clearInterval(this.periodicCheckInterval);
-    this.periodicCheckStartTimeout = undefined;
-    this.periodicCheckInterval = undefined;
-
-    this.resetState();
-    this.started = false;
+    this.started = true;
   }
 
   /**
    * Attach all electron-updater event listeners and wire them to menu state setters.
    */
   private registerListeners() {
-    if (this.listenersRegistered) {
-      return;
-    }
-    this.listenersRegistered = true;
-
     autoUpdater.on('checking-for-update', () => {
       logInfo('auto updater', 'Checking for update');
       this.menuBuilder.setCheckForUpdatesMenuEnabled(false);
@@ -177,7 +129,7 @@ export default class AppUpdater {
   private async performInitialCheck() {
     try {
       logInfo('app updater', 'Checking for updates on application launch');
-      await this.checkForUpdates();
+      await autoUpdater.checkForUpdatesAndNotify();
     } catch (err) {
       logError('auto updater', 'Initial check failed', toError(err));
     }
@@ -190,7 +142,7 @@ export default class AppUpdater {
     const runScheduledCheck = async () => {
       try {
         logInfo('app updater', 'Checking for updates on a periodic schedule');
-        await this.checkForUpdates();
+        await autoUpdater.checkForUpdatesAndNotify();
       } catch (e) {
         logError('auto updater', 'Scheduled check failed', toError(e));
       }
@@ -198,21 +150,10 @@ export default class AppUpdater {
 
     // Defer the first periodic check until after the interval elapses.
     // This avoids an immediate duplicate check on startup.
-    this.periodicCheckStartTimeout = setTimeout(async () => {
+    setTimeout(async () => {
       await runScheduledCheck();
-      this.periodicCheckInterval = setInterval(
-        runScheduledCheck,
-        APPLICATION.UPDATE_CHECK_INTERVAL_MS,
-      );
+      setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
-  }
-
-  /**
-   * Check for updates, retaining the result so an in-flight download can be
-   * cancelled if automatic updates are turned off.
-   */
-  private async checkForUpdates() {
-    this.updateCheckResult = (await autoUpdater.checkForUpdatesAndNotify()) ?? null;
   }
 
   /**

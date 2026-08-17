@@ -34,7 +34,6 @@ vi.mock('electron-updater', () => ({
     }),
     checkForUpdatesAndNotify: vi.fn().mockResolvedValue(undefined),
     quitAndInstall: vi.fn(),
-    autoInstallOnAppQuit: true,
   },
 }));
 
@@ -67,7 +66,7 @@ const emit = (event: string, arg?: ListenerArgs) => {
 };
 
 // Re-import autoUpdater after mocking
-import { autoUpdater, type UpdateCheckResult } from 'electron-updater';
+import { autoUpdater } from 'electron-updater';
 
 describe('main/updater.ts', () => {
   let menubar: Menubar;
@@ -76,7 +75,6 @@ describe('main/updater.ts', () => {
     public override setNoUpdateAvailableMenuVisibility = vi.fn();
     public override setUpdateAvailableMenuVisibility = vi.fn();
     public override setUpdateReadyForInstallMenuVisibility = vi.fn();
-    public override setUpdateMenuVisibility = vi.fn();
   }
 
   let menuBuilder: TestMenuBuilder;
@@ -96,8 +94,8 @@ describe('main/updater.ts', () => {
       tray: { setToolTip: vi.fn() },
     } as unknown as Menubar;
 
-    menuBuilder = new TestMenuBuilder(menubar);
-    updater = new AppUpdater(menubar, menuBuilder);
+    menuBuilder = new TestMenuBuilder(menubar, null);
+    updater = new AppUpdater(menubar, menuBuilder, null);
   });
 
   describe('update available dialog', () => {
@@ -107,7 +105,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.setEnabled(true);
+      await updater.start();
 
       // Simulate update downloaded event
       const releaseName = 'v1.2.3';
@@ -132,7 +130,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('update-downloaded', { releaseName: null, version: '1.2.3' });
 
@@ -149,7 +147,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('update-downloaded', { releaseName: 'v9.9.9' });
 
@@ -165,7 +163,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('update-downloaded', { releaseName: 'v9.9.9' });
 
@@ -180,7 +178,7 @@ describe('main/updater.ts', () => {
     it('skips when app is not packaged', async () => {
       Object.defineProperty(menubar.app, 'isPackaged', { value: false });
 
-      await updater.setEnabled(true);
+      await updater.start();
 
       expect(logInfo).toHaveBeenCalledWith(
         'app updater',
@@ -189,8 +187,20 @@ describe('main/updater.ts', () => {
       expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
     });
 
+    it('skips when the app was installed by a package manager', async () => {
+      updater = new AppUpdater(menubar, menuBuilder, 'Homebrew');
+
+      await updater.start();
+
+      expect(logInfo).toHaveBeenCalledWith(
+        'app updater',
+        'Skipping updater since app was installed via Homebrew',
+      );
+      expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+    });
+
     it('handles checking-for-update', async () => {
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('checking-for-update');
 
@@ -199,7 +209,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles update-available', async () => {
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('update-available');
 
@@ -210,7 +220,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles download-progress', async () => {
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('download-progress', { percent: 12.3456 });
 
@@ -218,7 +228,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles update-not-available', async () => {
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('update-not-available');
 
@@ -231,7 +241,7 @@ describe('main/updater.ts', () => {
     it('auto-hides "No updates available" after configured timeout', async () => {
       vi.useFakeTimers();
       try {
-        await updater.setEnabled(true);
+        await updater.start();
 
         emit('update-not-available');
 
@@ -249,7 +259,7 @@ describe('main/updater.ts', () => {
     it('clears pending hide timer when a new check starts', async () => {
       vi.useFakeTimers();
       try {
-        await updater.setEnabled(true);
+        await updater.start();
 
         emit('update-not-available');
 
@@ -271,7 +281,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles update-cancelled (reset state)', async () => {
-      await updater.setEnabled(true);
+      await updater.start();
 
       emit('update-cancelled');
 
@@ -280,7 +290,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles error (reset + logError)', async () => {
-      await updater.setEnabled(true);
+      await updater.start();
 
       const err = new Error('failure');
       emit('error', err);
@@ -292,7 +302,7 @@ describe('main/updater.ts', () => {
     it('keeps checking on schedule after an error', async () => {
       vi.useFakeTimers();
       try {
-        await updater.setEnabled(true);
+        await updater.start();
 
         // Let the first scheduled check run, which registers the interval
         await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
@@ -319,7 +329,7 @@ describe('main/updater.ts', () => {
         return 0 as unknown as NodeJS.Timeout;
       }) as unknown as typeof setInterval);
       try {
-        await updater.setEnabled(true);
+        await updater.start();
 
         // At minimum the initial check should have occurred
         const callCount = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
@@ -336,95 +346,6 @@ describe('main/updater.ts', () => {
         setIntervalSpy.mockRestore();
         globalThis.setInterval = originalSetInterval;
       }
-    });
-  });
-
-  describe('enabling and disabling', () => {
-    it('does not check for updates until enabled', () => {
-      expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
-    });
-
-    it('stops scheduled checks once disabled', async () => {
-      vi.useFakeTimers();
-      try {
-        await updater.setEnabled(true);
-
-        // Let the deferred first periodic check run, which registers the interval
-        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
-        const callsWhileEnabled = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
-
-        await updater.setEnabled(false);
-        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS * 3);
-
-        expect(vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length).toBe(
-          callsWhileEnabled,
-        );
-      } finally {
-        vi.useRealTimers();
-      }
-    });
-
-    it('cancels an in-flight download when disabled', async () => {
-      const cancel = vi.fn();
-      vi.mocked(autoUpdater.checkForUpdatesAndNotify).mockResolvedValueOnce({
-        cancellationToken: { cancel },
-      } as unknown as UpdateCheckResult);
-
-      await updater.setEnabled(true);
-      await updater.setEnabled(false);
-
-      expect(cancel).toHaveBeenCalled();
-    });
-
-    it('prevents an already downloaded update from installing on quit when disabled', async () => {
-      await updater.setEnabled(true);
-      expect(autoUpdater.autoInstallOnAppQuit).toBe(true);
-
-      await updater.setEnabled(false);
-      expect(autoUpdater.autoInstallOnAppQuit).toBe(false);
-
-      await updater.setEnabled(true);
-      expect(autoUpdater.autoInstallOnAppQuit).toBe(true);
-    });
-
-    it('opts out of install on quit even when the updater never started', async () => {
-      await updater.setEnabled(false);
-
-      expect(autoUpdater.autoInstallOnAppQuit).toBe(false);
-      expect(logInfo).not.toHaveBeenCalledWith('app updater', 'Stopping updater');
-    });
-
-    it('hides the update menu section when disabled', async () => {
-      await updater.setEnabled(false);
-      expect(menuBuilder.setUpdateMenuVisibility).toHaveBeenCalledWith(false);
-
-      await updater.setEnabled(true);
-      expect(menuBuilder.setUpdateMenuVisibility).toHaveBeenCalledWith(true);
-    });
-
-    it('clears update menu state when disabled', async () => {
-      await updater.setEnabled(true);
-      await updater.setEnabled(false);
-
-      expect(menubar.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
-      expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(true);
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
-      expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(false);
-    });
-
-    it('does not register duplicate listeners when re-enabled', async () => {
-      await updater.setEnabled(true);
-      await updater.setEnabled(false);
-      await updater.setEnabled(true);
-
-      vi.mocked(dialog.showMessageBox).mockResolvedValue({
-        response: 1,
-        checkboxChecked: false,
-      });
-
-      emit('update-downloaded', { releaseName: 'v1.2.3' });
-
-      expect(dialog.showMessageBox).toHaveBeenCalledTimes(1);
     });
   });
 });

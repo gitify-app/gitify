@@ -17,7 +17,6 @@ export const EVENTS = {
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
   UPDATE_KEEP_WINDOW_ON_BLUR: `${P}update-keep-window-on-blur`,
-  UPDATE_AUTOMATIC_UPDATES: `${P}update-automatic-updates`,
   SET_WINDOW_VIBRANCY: `${P}set-window-vibrancy`,
   SET_NATIVE_THEME: `${P}set-native-theme`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
@@ -109,10 +108,6 @@ export type EventContracts = AssertEventCoverage<{
   };
   [EVENTS.UPDATE_AUTO_LAUNCH]: { request: IAutoLaunch; response: undefined };
   [EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR]: {
-    request: boolean;
-    response: undefined;
-  };
-  [EVENTS.UPDATE_AUTOMATIC_UPDATES]: {
     request: boolean;
     response: undefined;
   };

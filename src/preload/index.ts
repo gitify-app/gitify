@@ -64,17 +64,6 @@ export const api = {
   setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
 
   /**
-   * Enable or disable automatic update checks and update notifications.
-   *
-   * The main process owns the updater but has no access to the renderer's
-   * persisted settings, so the renderer pushes this value on startup and on
-   * every change. Nothing is checked until the renderer enables it.
-   *
-   * @param value - `true` to allow automatic updates, `false` to disable them.
-   */
-  setAutomaticUpdates: (value: boolean) => sendMainEvent(EVENTS.UPDATE_AUTOMATIC_UPDATES, value),
-
-  /**
    * Enable or disable the macOS window vibrancy material for Glass. Resolves once
    * the material has been applied so the renderer can order the visual switch.
    */

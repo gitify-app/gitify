@@ -107,7 +107,6 @@ function createGitifyBridgeApi(): Window['gitify'] {
     onSystemWake: vi.fn(() => vi.fn()),
     setAutoLaunch: vi.fn(),
     setKeepWindowOnBlur: vi.fn(),
-    setAutomaticUpdates: vi.fn(),
     applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
     raiseNativeNotification: vi.fn(),
   };

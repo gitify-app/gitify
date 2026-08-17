@@ -6,13 +6,13 @@ import { APPLICATION } from '../shared/constants';
 import { isMacOS } from '../shared/platform';
 
 import { resetApp } from './lifecycle/reset';
+import type { PackageManager } from './packageManager';
 import { openLogsDirectory, takeScreenshot } from './utils';
 
 /**
  * MenuBuilder constructs the right-click context menu for the tray icon and provides methods to update menu item states.
  */
 export default class MenuBuilder {
-  private readonly updatesSeparatorMenuItem: MenuItem;
   private readonly checkForUpdatesMenuItem: MenuItem;
   private readonly noUpdateAvailableMenuItem: MenuItem;
   private readonly updateAvailableMenuItem: MenuItem;
@@ -21,17 +21,16 @@ export default class MenuBuilder {
   private readonly hideWindowMenuItem: MenuItem;
 
   private readonly menubar: Menubar;
+  private readonly packageManager: PackageManager | null;
   private menu?: Menu;
 
   /**
    * @param menubar - The menubar instance used for window and app interactions within menu actions.
+   * @param packageManager - The package manager that owns this install, or `null` when the app was installed manually.
    */
-  constructor(menubar: Menubar) {
+  constructor(menubar: Menubar, packageManager: PackageManager | null) {
     this.menubar = menubar;
-
-    this.updatesSeparatorMenuItem = new MenuItem({
-      type: 'separator',
-    });
+    this.packageManager = packageManager;
 
     this.checkForUpdatesMenuItem = new MenuItem({
       label: 'Check for updates',
@@ -86,11 +85,8 @@ export default class MenuBuilder {
     this.menu = Menu.buildFromTemplate([
       this.showWindowMenuItem,
       this.hideWindowMenuItem,
-      this.updatesSeparatorMenuItem,
-      this.checkForUpdatesMenuItem,
-      this.noUpdateAvailableMenuItem,
-      this.updateAvailableMenuItem,
-      this.updateReadyForInstallMenuItem,
+      { type: 'separator' },
+      ...this.buildUpdateMenuItems(),
       { type: 'separator' },
       {
         label: 'Developer',
@@ -143,6 +139,30 @@ export default class MenuBuilder {
     ]);
 
     return this.menu;
+  }
+
+  /**
+   * Build the update section of the menu.
+   *
+   * A package managed install never checks for updates, so it gets a note naming
+   * the package manager to update through instead of controls that do nothing.
+   */
+  private buildUpdateMenuItems(): MenuItem[] {
+    if (this.packageManager) {
+      return [
+        new MenuItem({
+          label: `Updates are managed by ${this.packageManager}`,
+          enabled: false,
+        }),
+      ];
+    }
+
+    return [
+      this.checkForUpdatesMenuItem,
+      this.noUpdateAvailableMenuItem,
+      this.updateAvailableMenuItem,
+      this.updateReadyForInstallMenuItem,
+    ];
   }
 
   /**
@@ -207,27 +227,6 @@ export default class MenuBuilder {
    */
   setUpdateReadyForInstallMenuVisibility(isVisible: boolean) {
     this.updateReadyForInstallMenuItem.visible = isVisible;
-    this.refreshMenu();
-  }
-
-  /**
-   * Show or hide the whole update section, including its separator.
-   *
-   * Showing the section only restores "Check for updates" — the status items
-   * stay hidden until an update event reveals them.
-   *
-   * @param isVisible - Whether the update section should be visible.
-   */
-  setUpdateMenuVisibility(isVisible: boolean) {
-    this.updatesSeparatorMenuItem.visible = isVisible;
-    this.checkForUpdatesMenuItem.visible = isVisible;
-
-    if (!isVisible) {
-      this.noUpdateAvailableMenuItem.visible = false;
-      this.updateAvailableMenuItem.visible = false;
-      this.updateReadyForInstallMenuItem.visible = false;
-    }
-
     this.refreshMenu();
   }
 }

@@ -100,7 +100,7 @@ describe('main/menu.ts', () => {
         setContextMenu: vi.fn(),
       },
     } as unknown as Menubar;
-    menuBuilder = new MenuBuilder(menubar);
+    menuBuilder = new MenuBuilder(menubar, null);
   });
 
   describe('checkForUpdatesMenuItem', () => {
@@ -210,45 +210,31 @@ describe('main/menu.ts', () => {
     });
   });
 
-  describe('updateMenuVisibility', () => {
-    it('hides the update section and its separator', () => {
-      menuBuilder.setUpdateAvailableMenuVisibility(true);
-
-      menuBuilder.setUpdateMenuVisibility(false);
-
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updatesSeparatorMenuItem'].visible).toBe(false);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['checkForUpdatesMenuItem'].visible).toBe(false);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(false);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(false);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(false);
+  describe('package managed updates', () => {
+    beforeEach(() => {
+      menuItemInstances.length = 0;
+      menuBuilder = new MenuBuilder(menubar, 'Homebrew');
     });
 
-    it('shows the update section without revealing the status items', () => {
-      menuBuilder.setUpdateMenuVisibility(false);
+    it('names the package manager that owns updates', () => {
+      menuBuilder.buildMenu();
 
-      menuBuilder.setUpdateMenuVisibility(true);
+      const config = getMenuItemConfigByLabel('Updates are managed by Homebrew');
 
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updatesSeparatorMenuItem'].visible).toBe(true);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['checkForUpdatesMenuItem'].visible).toBe(true);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(false);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(false);
-      // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(false);
+      expect(config).toBeDefined();
+      expect(config?.enabled).toBe(false);
+      expect(config?.click).toBeUndefined();
     });
 
-    it('republishes the menu so Linux picks up the visibility change', () => {
-      menuBuilder.setUpdateMenuVisibility(false);
+    it('replaces the update menu items with the notice', () => {
+      const template = buildAndGetTemplate();
+      const labels = template.map((item) => item?.label);
 
-      expect(menubar.refreshContextMenu).toHaveBeenCalled();
+      expect(labels).toContain('Updates are managed by Homebrew');
+      expect(labels).not.toContain('Check for updates');
+      expect(labels).not.toContain('No updates available');
+      expect(labels).not.toContain('An update is available');
+      expect(labels).not.toContain('Restart to install update');
     });
   });
 
@@ -376,9 +362,12 @@ describe('main/menu.ts', () => {
       menuItemInstances.length = 0;
       (Menu.buildFromTemplate as Mock).mockClear();
 
-      const mb = new MenuBuilder({
-        app: { quit: vi.fn() },
-      } as unknown as Menubar);
+      const mb = new MenuBuilder(
+        {
+          app: { quit: vi.fn() },
+        } as unknown as Menubar,
+        null,
+      );
       mb.buildMenu();
 
       const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
@@ -395,9 +384,12 @@ describe('main/menu.ts', () => {
       menuItemInstances.length = 0;
       (Menu.buildFromTemplate as Mock).mockClear();
 
-      const mb = new MenuBuilder({
-        app: { quit: vi.fn() },
-      } as unknown as Menubar);
+      const mb = new MenuBuilder(
+        {
+          app: { quit: vi.fn() },
+        } as unknown as Menubar,
+        null,
+      );
       mb.buildMenu();
 
       const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(

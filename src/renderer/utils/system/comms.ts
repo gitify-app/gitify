@@ -92,15 +92,6 @@ export function setKeepWindowOnBlur(value: boolean): void {
 }
 
 /**
- * Enables or disables automatic update checks and update notifications.
- *
- * @param value - `true` to allow automatic updates, `false` to disable them.
- */
-export function setAutomaticUpdates(value: boolean): void {
-  window.gitify.setAutomaticUpdates(value);
-}
-
-/**
  * Switch the tray icon to an alternate idle icon variant.
  *
  * @param value - `true` to use the alternate idle icon, `false` for the default.

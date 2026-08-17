@@ -8,7 +8,6 @@ import {
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
-  registerUpdaterHandlers,
 } from './handlers';
 import { TrayIcons } from './icons';
 import {
@@ -18,6 +17,7 @@ import {
   onFirstRunMaybe,
 } from './lifecycle';
 import MenuBuilder from './menu';
+import { detectPackageManager } from './packageManager';
 import AppUpdater from './updater';
 import { isDevMode } from './utils';
 
@@ -37,17 +37,23 @@ const mb = menubar({
   escapeToHide: true, // Hide the window when Escape is pressed.
 });
 
-const menuBuilder = new MenuBuilder(mb);
+// A package manager that installed the app also owns its updates, which shapes
+// both the update menu items and whether the updater runs at all
+const packageManager = detectPackageManager();
+
+const menuBuilder = new MenuBuilder(mb, packageManager);
 const contextMenu = menuBuilder.buildMenu();
 
 // Register your app as the handler for a custom protocol
 const protocol = isDevMode() ? 'gitify-dev' : 'gitify';
 app.setAsDefaultProtocolClient(protocol);
 
-const appUpdater = new AppUpdater(mb, menuBuilder);
+const appUpdater = new AppUpdater(mb, menuBuilder, packageManager);
 
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
+
+  appUpdater.start();
 
   initializeAppLifecycle(mb, contextMenu, protocol);
 
@@ -59,9 +65,6 @@ app.whenReady().then(async () => {
   registerSystemHandlers(mb);
   registerStorageHandlers();
   registerAppHandlers(mb);
-
-  // The updater starts once the renderer reports the automatic updates setting
-  registerUpdaterHandlers(appUpdater);
 });
 
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback
