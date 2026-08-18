@@ -1,6 +1,7 @@
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 import {
   mockAuthor,
+  mockAuthorResponseNode,
   mockCommenter,
   mockPullRequestResponseNode,
   noReactionGroups,
@@ -21,6 +22,7 @@ import type {
 } from '../graphql/generated/graphql';
 import {
   getLatestReviewForReviewers,
+  getClosestPullRequestActivity,
   getReviewRequestTypes,
   pullRequestHandler,
 } from './pullRequest';
@@ -270,6 +272,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         nodes: [
           {
             author: mockCommenter,
+            updatedAt: mockNotification.updatedAt,
             url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234' as Link,
             reactions: {
               totalCount: 0,
@@ -319,6 +322,52 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+
+    it('selects a Copilot review after an earlier Actions comment', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      const actionsAuthor = {
+        ...mockAuthorResponseNode('github-actions'),
+        htmlUrl: 'https://github.com/apps/github-actions' as Link,
+        type: 'Bot' as const,
+      };
+      const copilotAuthor = {
+        ...mockAuthorResponseNode('copilot-pull-request-reviewer'),
+        htmlUrl: 'https://github.com/apps/copilot-pull-request-reviewer' as Link,
+        type: 'Bot' as const,
+      };
+      mockPullRequest.comments = {
+        totalCount: 1,
+        nodes: [
+          {
+            author: actionsAuthor,
+            updatedAt: '2026-01-01T16:55:00Z',
+            url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+            reactions: { totalCount: 2 },
+            reactionGroups: noReactionGroups,
+          },
+        ],
+      };
+      mockPullRequest.reviews = {
+        totalCount: 1,
+        nodes: [
+          {
+            author: copilotAuthor,
+            state: 'COMMENTED',
+            submittedAt: '2026-01-01T16:59:59Z',
+            url: 'https://github.com/example/repo/pull/123#pullrequestreview-1' as Link,
+          },
+        ],
+      };
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.user).toEqual(copilotAuthor);
+      expect(result.htmlUrl).toBe('https://github.com/example/repo/pull/123#pullrequestreview-1');
+      expect(result.reactionsCount).toBe(0);
     });
 
     it('with labels', async () => {
@@ -461,6 +510,114 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+  });
+
+  describe('getClosestPullRequestActivity', () => {
+    it('selects an issue comment when it is closest and preserves its reactions', () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.comments.nodes = [
+        {
+          author: mockCommenter,
+          updatedAt: '2026-01-01T17:00:01Z',
+          url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+          reactions: { totalCount: 3 },
+          reactionGroups: noReactionGroups,
+        },
+      ];
+      mockPullRequest.reviews!.nodes = [
+        {
+          author: mockAuthor,
+          state: 'COMMENTED',
+          submittedAt: '2026-01-01T16:59:00Z',
+          url: 'https://github.com/example/repo/pull/123#pullrequestreview-1' as Link,
+        },
+      ];
+
+      const result = getClosestPullRequestActivity('2026-01-01T17:00:00Z', mockPullRequest);
+
+      expect(result?.author).toBe(mockCommenter);
+      expect(result?.comment?.reactions.totalCount).toBe(3);
+    });
+
+    it('handles timestamp lag by selecting the smallest absolute difference', () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.reviews!.nodes = [
+        {
+          author: mockCommenter,
+          state: 'COMMENTED',
+          submittedAt: '2026-01-01T16:59:45Z',
+          url: 'https://github.com/example/repo/pull/123#pullrequestreview-1' as Link,
+        },
+        {
+          author: mockAuthor,
+          state: 'APPROVED',
+          submittedAt: '2026-01-01T16:59:58Z',
+          url: 'https://github.com/example/repo/pull/123#pullrequestreview-2' as Link,
+        },
+      ];
+
+      const result = getClosestPullRequestActivity('2026-01-01T17:00:03Z', mockPullRequest);
+
+      expect(result?.author).toBe(mockAuthor);
+    });
+
+    it('ignores incomplete and invalid activity candidates', () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.comments.nodes = [
+        {
+          author: null,
+          updatedAt: '2026-01-01T17:00:00Z',
+          url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+          reactions: { totalCount: 0 },
+          reactionGroups: noReactionGroups,
+        },
+      ];
+      mockPullRequest.reviews!.nodes = [
+        {
+          author: mockAuthor,
+          state: 'COMMENTED',
+          submittedAt: 'invalid timestamp',
+          url: 'https://github.com/example/repo/pull/123#pullrequestreview-1' as Link,
+        },
+      ];
+
+      expect(
+        getClosestPullRequestActivity('2026-01-01T17:00:00Z', mockPullRequest),
+      ).toBeUndefined();
+    });
+
+    it('deterministically prefers an issue comment on an exact tie', () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.comments.nodes = [
+        {
+          author: mockCommenter,
+          updatedAt: '2026-01-01T16:59:59Z',
+          url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+          reactions: { totalCount: 0 },
+          reactionGroups: noReactionGroups,
+        },
+      ];
+      mockPullRequest.reviews!.nodes = [
+        {
+          author: mockAuthor,
+          state: 'COMMENTED',
+          submittedAt: '2026-01-01T17:00:01Z',
+          url: 'https://github.com/example/repo/pull/123#pullrequestreview-1' as Link,
+        },
+      ];
+
+      const result = getClosestPullRequestActivity('2026-01-01T17:00:00Z', mockPullRequest);
+
+      expect(result?.author).toBe(mockCommenter);
+    });
+
+    it('returns no activity when the pull request has none', () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+
+      expect(
+        getClosestPullRequestActivity('2026-01-01T17:00:00Z', mockPullRequest),
+      ).toBeUndefined();
     });
   });
 

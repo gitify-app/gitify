@@ -35,6 +35,7 @@ fragment PullRequestDetails on PullRequest {
   comments(last: $lastComments) {
     totalCount
     nodes {
+      updatedAt
       url
       author {
         ...AuthorFields
@@ -92,7 +93,9 @@ fragment PullRequestDetails on PullRequest {
 
 fragment PullRequestReviewFields on PullRequestReview {
   state
+  submittedAt
+  url
   author {
-    login
+    ...AuthorFields
   }
 }

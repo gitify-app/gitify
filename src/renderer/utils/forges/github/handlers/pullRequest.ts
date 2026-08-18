@@ -9,6 +9,8 @@ import {
   GitPullRequestIcon,
 } from '@primer/octicons-react';
 
+import { differenceInMilliseconds } from 'date-fns/differenceInMilliseconds';
+
 import {
   type GitifyNotification,
   type GitifyPullRequestReview,
@@ -22,11 +24,19 @@ import {
 import { formatGitHubNumber } from '../../../notifications/formatters';
 import { fetchPullByNumber } from '../client';
 import type {
+  AuthorFieldsFragment,
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
 } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
+
+type PullRequestActivity = {
+  author: AuthorFieldsFragment;
+  timestamp: string;
+  url: Link;
+  comment?: NonNullable<NonNullable<PullRequestDetailsFragment['comments']['nodes']>[number]>;
+};
 
 class PullRequestHandler extends DefaultHandler {
   override readonly supportsMergedQueryEnrichment = true;
@@ -49,10 +59,11 @@ class PullRequestHandler extends DefaultHandler {
     }
 
     const prComment = pr.comments?.nodes?.[0];
+    const activity = getClosestPullRequestActivity(notification.updatedAt, pr);
 
     const author = getNotificationAuthor([pr.author]);
     const commenter = getNotificationAuthor([prComment?.author]);
-    const prUser = commenter ?? author;
+    const prUser = getNotificationAuthor([activity?.author]) ?? author;
 
     const reviews = getLatestReviewForReviewers(
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
@@ -63,8 +74,8 @@ class PullRequestHandler extends DefaultHandler {
       notification.account?.user?.login,
     );
 
-    const prReactionCount = prComment?.reactions.totalCount ?? pr.reactions.totalCount;
-    const prReactionGroup = prComment?.reactionGroups ?? pr.reactionGroups;
+    const prReactionCount = activity?.comment?.reactions.totalCount ?? pr.reactions.totalCount;
+    const prReactionGroup = activity?.comment?.reactionGroups ?? pr.reactionGroups;
 
     return {
       number: pr.number,
@@ -87,7 +98,7 @@ class PullRequestHandler extends DefaultHandler {
         ?.filter(Boolean)
         .map((issue) => formatGitHubNumber(issue!.number)),
       milestone: pr.milestone ?? undefined,
-      htmlUrl: prComment?.url ?? pr.url,
+      htmlUrl: activity?.url ?? pr.url,
       reactionsCount: prReactionCount,
       reactionGroups: prReactionGroup ?? undefined,
     };
@@ -132,6 +143,58 @@ class PullRequestHandler extends DefaultHandler {
 
 export const pullRequestHandler = new PullRequestHandler();
 
+export function getClosestPullRequestActivity(
+  notificationUpdatedAt: string,
+  pullRequest: PullRequestDetailsFragment,
+): PullRequestActivity | undefined {
+  const activities: PullRequestActivity[] = [];
+
+  for (const comment of pullRequest.comments.nodes ?? []) {
+    if (!comment) {
+      continue;
+    }
+
+    if (comment.author && comment.updatedAt && comment.url) {
+      activities.push({
+        author: comment.author,
+        timestamp: comment.updatedAt,
+        url: comment.url,
+        comment,
+      });
+    }
+  }
+
+  for (const review of pullRequest.reviews?.nodes ?? []) {
+    if (!review) {
+      continue;
+    }
+
+    if (review.author && review.submittedAt && review.url) {
+      activities.push({
+        author: review.author,
+        timestamp: review.submittedAt,
+        url: review.url,
+      });
+    }
+  }
+
+  return activities.reduce<PullRequestActivity | undefined>((closest, activity) => {
+    const distance = Math.abs(differenceInMilliseconds(activity.timestamp, notificationUpdatedAt));
+    if (Number.isNaN(distance)) {
+      return closest;
+    }
+
+    if (!closest) {
+      return activity;
+    }
+
+    const closestDistance = Math.abs(
+      differenceInMilliseconds(closest.timestamp, notificationUpdatedAt),
+    );
+    return distance < closestDistance ? activity : closest;
+  }, undefined);
+}
+
 export function getReviewRequestTypes(
   nodes: NonNullable<NonNullable<PullRequestDetailsFragment['reviewRequests']>['nodes']>,
   currentUserLogin: string | undefined,
@@ -160,15 +223,19 @@ export function getReviewRequestTypes(
   return Array.from(types);
 }
 
+type ReviewForMetrics = Pick<PullRequestReviewFieldsFragment, 'state'> & {
+  author?: { login: string } | null;
+};
+
 export function getLatestReviewForReviewers(
-  reviews: PullRequestReviewFieldsFragment[],
+  reviews: ReviewForMetrics[],
 ): GitifyPullRequestReview[] {
   if (!reviews.length) {
     return [];
   }
 
   // Find the most recent review for each reviewer
-  const latestReviews: PullRequestReviewFieldsFragment[] = [];
+  const latestReviews: ReviewForMetrics[] = [];
   const sortedReviews = reviews.toReversed();
   for (const prReview of sortedReviews) {
     const reviewerFound = latestReviews.find(
