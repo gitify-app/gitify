@@ -1,10 +1,51 @@
-import { type DocumentNode, parse, print, type TypeNode } from 'graphql';
+import { type DocumentNode, parse, print, type TypeNode, visit } from 'graphql';
 
 import type { FragmentInfo, VariableDef } from './types';
 
 import type { TypedDocumentString } from './generated/graphql';
 
 const INDEXED_SUFFIX = 'INDEX';
+
+const GATED_DIRECTIVE = 'gated';
+const GATED_REQUIRES_ARG = 'requires';
+
+/**
+ * Return a copy of a GraphQL document with `@gated(requires: ...)` selections
+ * processed for the given capabilities.
+ *
+ * Fields gated behind a capability that is not supported are removed entirely,
+ * and every `@gated` directive is stripped from the remaining selections. The
+ * directive is a client-side marker only and must never reach the GitHub server.
+ */
+export function stripGatedSelections(doc: string, capabilities: Record<string, boolean>): string {
+  const ast: DocumentNode = parse(doc);
+
+  const sanitized = visit(ast, {
+    Field(node) {
+      const gated = node.directives?.find((directive) => directive.name.value === GATED_DIRECTIVE);
+      if (!gated) {
+        return undefined;
+      }
+
+      const requiresArg = gated.arguments?.find((arg) => arg.name.value === GATED_REQUIRES_ARG);
+      const capability =
+        requiresArg?.value.kind === 'StringValue' ? requiresArg.value.value : undefined;
+
+      if (capability && !capabilities[capability]) {
+        return null;
+      }
+
+      return {
+        ...node,
+        directives: node.directives?.filter(
+          (directive) => directive.name.value !== GATED_DIRECTIVE,
+        ),
+      };
+    },
+  });
+
+  return print(sanitized);
+}
 
 // AST-based helpers for robust fragment parsing and deduping
 

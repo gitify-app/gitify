@@ -14,7 +14,7 @@ labels:
   - label: 'chore'
     sync: true
     matcher:
-      title: '^chore(\((?!deps)[\w/]+\))?: .*'
+      title: '^chore(\((?!deps)[\w/]+\))?: (?!release ).*'
 
   - label: 'dependency'
     sync: true
@@ -55,7 +55,7 @@ labels:
   - label: 'release'
     sync: true
     matcher:
-      title: '^chore(main): release .*'
+      title: '^chore\(main\): release .*'
 
   - label: 'test'
     sync: true

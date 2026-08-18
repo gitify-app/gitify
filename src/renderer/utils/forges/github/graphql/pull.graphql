@@ -7,8 +7,8 @@ query FetchPullRequestByNumber(
   $firstLabels: Int
   $lastComments: Int
   $lastReviews: Int
+  $firstReviewThreads: Int
   $firstClosingIssues: Int
-  $includeStackEntry: Boolean!
 ) {
   repository(owner: $owner, name: $name) {
     pullRequest(number: $number) {
@@ -67,6 +67,9 @@ fragment PullRequestDetails on PullRequest {
       ...PullRequestReviewFields
     }
   }
+  reviewThreads(first: $firstReviewThreads) {
+    ...PullRequestReviewThreadConnectionFields
+  }
   labels(first: $firstLabels) {
     nodes {
       ...LabelFields
@@ -77,7 +80,7 @@ fragment PullRequestDetails on PullRequest {
       number
     }
   }
-  stackEntry @include(if: $includeStackEntry) {
+  stackEntry @gated(requires: "stackedPullRequests") {
     position
     stack {
       size
@@ -97,5 +100,18 @@ fragment PullRequestReviewFields on PullRequestReview {
   url
   author {
     ...AuthorFields
+  }
+}
+
+fragment PullRequestReviewThreadConnectionFields on PullRequestReviewThreadConnection {
+  nodes {
+    isResolved
+    comments(first: 1) {
+      nodes {
+        author {
+          login
+        }
+      }
+    }
   }
 }

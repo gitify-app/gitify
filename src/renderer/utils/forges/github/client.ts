@@ -14,7 +14,7 @@ import type {
 } from './types';
 
 import { reportServerPollInterval } from '../../notifications/pollInterval';
-import { supportsAnsweredDiscussion, supportsStackedPullRequests } from './capabilities';
+import { getGitHubCapabilities } from './capabilities';
 import {
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
@@ -25,6 +25,7 @@ import {
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
+import { stripGatedSelections } from './graphql/utils';
 import { createNotificationHandler } from './handlers';
 import { createOctokitClient, createOctokitClientUncached } from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
@@ -206,14 +207,18 @@ export async function fetchDiscussionByNumber(
 ): Promise<FetchDiscussionByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
-  return performGraphQLRequest(notification.account, FetchDiscussionByNumberDocument, {
+  const query = stripGatedSelections(
+    FetchDiscussionByNumberDocument.toString(),
+    getGitHubCapabilities(notification.account),
+  );
+
+  return performGraphQLRequestString<FetchDiscussionByNumberQuery>(notification.account, query, {
     owner: notification.repository.owner.login,
     name: notification.repository.name,
     number: number,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
-    includeIsAnswered: supportsAnsweredDiscussion(notification.account),
   });
 }
 
@@ -242,7 +247,12 @@ export async function fetchPullByNumber(
 ): Promise<FetchPullRequestByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
-  return performGraphQLRequest(notification.account, FetchPullRequestByNumberDocument, {
+  const query = stripGatedSelections(
+    FetchPullRequestByNumberDocument.toString(),
+    getGitHubCapabilities(notification.account),
+  );
+
+  return performGraphQLRequestString<FetchPullRequestByNumberQuery>(notification.account, query, {
     owner: notification.repository.owner.login,
     name: notification.repository.name,
     number: number,
@@ -250,9 +260,11 @@ export async function fetchPullByNumber(
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
-    includeStackEntry: supportsStackedPullRequests(notification.account),
+    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
   });
-} /**
+}
+
+/**
  * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
 
  * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
@@ -297,17 +309,19 @@ export async function fetchNotificationDetailsForList(
   }
 
   builder.setSharedVariables({
-    includeIsAnswered: supportsAnsweredDiscussion(notifications[0].account),
-    includeStackEntry: supportsStackedPullRequests(notifications[0].account),
     firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
     lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+    firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
   });
 
-  const query = builder.getGraphQLQuery();
+  const query = stripGatedSelections(
+    builder.getGraphQLQuery(),
+    getGitHubCapabilities(notifications[0].account),
+  );
   const variables = builder.getGraphQLVariables();
 
   const response = await performGraphQLRequestString(notifications[0].account, query, variables);

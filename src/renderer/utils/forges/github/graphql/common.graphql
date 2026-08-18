@@ -1,8 +1,20 @@
+# Custom directive that marks a field selection as gated behind a GitHub
+# capability (e.g. `stackedPullRequests`, `answeredDiscussion`). The query
+# sanitizer strips the directive (and the field itself for unsupported
+# capabilities) before the query is sent, so it never reaches GitHub.
+directive @gated(requires: String!) on FIELD
+
 fragment AuthorFields on Actor {
   login
   htmlUrl: url
   avatarUrl: avatarUrl
   type: __typename
+  ... on EnterpriseUserAccount {
+    name
+  }
+  ... on User {
+    name
+  }
 }
 
 fragment MilestoneFields on Milestone {

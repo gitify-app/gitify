@@ -40,6 +40,25 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith(-1);
     });
+
+    it('renders the managed GitHub account login and profile name separately', async () => {
+      const account = {
+        ...mockPersonalAccessTokenAccount,
+        user: {
+          ...mockPersonalAccessTokenAccount.user!,
+          login: 'octocat_gitify',
+          name: 'Mona Lisa Octocat',
+        },
+      };
+
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, { accounts: [account] });
+      });
+
+      expect(screen.getByText('octocat_gitify')).toBeInTheDocument();
+      expect(screen.getByAltText('octocat_gitify')).toBeInTheDocument();
+      expect(screen.getByText('Mona Lisa Octocat')).toBeInTheDocument();
+    });
   });
 
   describe('Account interactions', () => {

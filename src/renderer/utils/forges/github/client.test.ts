@@ -1,6 +1,9 @@
 import type { ExecutionResult } from 'graphql';
 
-import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../../__mocks__/account-mocks';
 import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
@@ -31,11 +34,9 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import {
-  FetchDiscussionByNumberDocument,
-  type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
+  type FetchDiscussionByNumberQuery,
   type FetchIssueByNumberQuery,
-  FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
 } from './graphql/generated/graphql';
 import type { OctokitClient } from './octokit';
@@ -312,8 +313,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('fetchDiscussionByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.mocked(apiRequests.performGraphQLRequest);
+  it('fetchDiscussionByNumber calls performGraphQLRequestString with sanitized query', async () => {
+    const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some discussion',
@@ -321,23 +322,47 @@ describe('renderer/utils/forges/github/client.ts', () => {
       type: 'Discussion',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({} as ExecutionResult<FetchDiscussionByNumberQuery>);
+    performGraphQLRequestStringSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchDiscussionByNumberQuery>,
+    );
 
     await fetchDiscussionByNumber(mockNotification);
 
-    expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      mockNotification.account,
-      FetchDiscussionByNumberDocument,
-      {
-        owner: mockNotification.repository.owner.login,
-        name: mockNotification.repository.name,
-        number: 123,
-        firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-        lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
-        lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
-        includeIsAnswered: true,
-      },
+    const [account, query, variables] = performGraphQLRequestStringSpy.mock.calls[0];
+    expect(account).toBe(mockNotification.account);
+    expect(query).toContain('isAnswered');
+    expect(query).not.toContain('@gated');
+    expect(query).toContain('query FetchDiscussionByNumber');
+    expect(variables).toEqual({
+      owner: mockNotification.repository.owner.login,
+      name: mockNotification.repository.name,
+      number: 123,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
+      lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
+    });
+  });
+
+  it('fetchDiscussionByNumber strips isAnswered for GitHub Enterprise Server accounts', async () => {
+    const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+
+    const mockNotification = mockPartialGitifyNotification({
+      title: 'Some discussion',
+      url: 'https://github.gitify.io/api/v3/repos/gitify-app/gitify/discussion/123' as Link,
+      type: 'Discussion',
+    });
+    mockNotification.account = mockGitHubEnterpriseServerAccount;
+
+    performGraphQLRequestStringSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchDiscussionByNumberQuery>,
     );
+
+    await fetchDiscussionByNumber(mockNotification);
+
+    const [account, query] = performGraphQLRequestStringSpy.mock.calls[0];
+    expect(account).toBe(mockGitHubEnterpriseServerAccount);
+    expect(query).not.toContain('isAnswered');
+    expect(query).not.toContain('@gated');
   });
 
   it('fetchIssueByNumber calls performGraphQLRequest with correct args', async () => {
@@ -366,8 +391,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
     );
   });
 
-  it('fetchPullByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.mocked(apiRequests.performGraphQLRequest);
+  it('fetchPullByNumber calls performGraphQLRequestString with sanitized query', async () => {
+    const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some pull request',
@@ -375,26 +400,50 @@ describe('renderer/utils/forges/github/client.ts', () => {
       type: 'PullRequest',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue(
+    performGraphQLRequestStringSpy.mockResolvedValue(
       {} as ExecutionResult<FetchPullRequestByNumberQuery>,
     );
 
     await fetchPullByNumber(mockNotification);
 
-    expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
-      mockNotification.account,
-      FetchPullRequestByNumberDocument,
-      {
-        owner: mockNotification.repository.owner.login,
-        name: mockNotification.repository.name,
-        number: 123,
-        firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
-        firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-        lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
-        lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
-        includeStackEntry: true,
-      },
+    const [account, query, variables] = performGraphQLRequestStringSpy.mock.calls[0];
+    expect(account).toBe(mockNotification.account);
+    expect(query).toContain('stackEntry');
+    expect(query).not.toContain('@gated');
+    expect(query).toContain('query FetchPullRequestByNumber');
+    expect(variables).toEqual({
+      owner: mockNotification.repository.owner.login,
+      name: mockNotification.repository.name,
+      number: 123,
+      firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
+      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+      lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
+      firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
+    });
+  });
+
+  it('fetchPullByNumber strips stackEntry for GitHub Enterprise Server accounts', async () => {
+    const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+
+    const mockNotification = mockPartialGitifyNotification({
+      title: 'Some pull request',
+      url: 'https://github.gitify.io/api/v3/repos/gitify-app/gitify/pulls/123' as Link,
+      type: 'PullRequest',
+    });
+    mockNotification.account = mockGitHubEnterpriseServerAccount;
+
+    performGraphQLRequestStringSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchPullRequestByNumberQuery>,
     );
+
+    await fetchPullByNumber(mockNotification);
+
+    const [account, query] = performGraphQLRequestStringSpy.mock.calls[0];
+    expect(account).toBe(mockGitHubEnterpriseServerAccount);
+    expect(query).not.toContain('stackEntry');
+    expect(query).not.toContain('@gated');
+    expect(query).toContain('query FetchPullRequestByNumber');
   });
 
   describe('fetchNotificationDetailsForList', () => {
@@ -440,8 +489,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         {
           firstClosingIssues: 100,
           firstLabels: 100,
-          includeIsAnswered: true,
-          includeStackEntry: true,
+          firstReviewThreads: 100,
           isDiscussionNotification0: false,
           isDiscussionNotification1: false,
           isIssueNotification0: true,
@@ -460,6 +508,36 @@ describe('renderer/utils/forges/github/client.ts', () => {
           owner1: 'gitify-app',
         },
       );
+
+      const query = performGraphQLRequestStringSpy.mock.calls[0][1];
+      expect(query).toContain('stackEntry');
+      expect(query).toContain('isAnswered');
+      expect(query).not.toContain('@gated');
+    });
+
+    it('fetchNotificationDetailsForList strips gated fields for GitHub Enterprise Server accounts', async () => {
+      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+
+      const notifications = mockGitHubCloudGitifyNotifications.map((notification) => ({
+        ...notification,
+        account: mockGitHubEnterpriseServerAccount,
+      }));
+
+      performGraphQLRequestStringSpy.mockResolvedValue({
+        data: {},
+        headers: {},
+      } as ExecutionResult<unknown>);
+
+      await fetchNotificationDetailsForList(notifications);
+
+      const [account, query, variables] = performGraphQLRequestStringSpy.mock.calls[0];
+      expect(account).toBe(mockGitHubEnterpriseServerAccount);
+      expect(query).not.toContain('stackEntry');
+      expect(query).not.toContain('isAnswered');
+      expect(query).not.toContain('@gated');
+      expect(query).toContain('FetchMergedNotifications');
+      expect(variables).not.toHaveProperty('includeStackEntry');
+      expect(variables).not.toHaveProperty('includeIsAnswered');
     });
   });
 });

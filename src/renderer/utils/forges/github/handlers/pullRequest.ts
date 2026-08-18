@@ -12,8 +12,9 @@ import {
 import { differenceInMilliseconds } from 'date-fns/differenceInMilliseconds';
 
 import {
+  type Account,
   type GitifyNotification,
-  type GitifyPullRequestReview,
+  type GitifyPullRequestReviewer,
   type GitifyPullRequestState,
   type GitifySubject,
   IconColor,
@@ -27,7 +28,9 @@ import type {
   AuthorFieldsFragment,
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
+  PullRequestReviewThreadConnectionFieldsFragment,
 } from '../graphql/generated/graphql';
+import { formatGitHubNotificationUser } from '../users';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
 
@@ -65,8 +68,10 @@ class PullRequestHandler extends DefaultHandler {
     const commenter = getNotificationAuthor([prComment?.author]);
     const prUser = getNotificationAuthor([activity?.author]) ?? author;
 
-    const reviews = getLatestReviewForReviewers(
+    const reviewers = getPullRequestReviewers(
+      notification.account,
       (pr.reviews?.nodes?.filter(Boolean) ?? []) as PullRequestReviewFieldsFragment[],
+      pr.reviewThreads,
     );
 
     const reviewRequested = getReviewRequestTypes(
@@ -84,7 +89,7 @@ class PullRequestHandler extends DefaultHandler {
       author: author,
       commenter: commenter,
       reviewRequested,
-      reviews: reviews,
+      reviewers,
       commentCount: pr.comments.totalCount,
       labels:
         pr.labels?.nodes?.filter(Boolean).map((label) => ({
@@ -223,47 +228,39 @@ export function getReviewRequestTypes(
   return Array.from(types);
 }
 
-type ReviewForMetrics = Pick<PullRequestReviewFieldsFragment, 'state'> & {
-  author?: { login: string } | null;
-};
+export function getPullRequestReviewers(
+  account: Account,
+  reviews: Pick<PullRequestReviewFieldsFragment, 'state' | 'author'>[],
+  threadConnection?: PullRequestReviewThreadConnectionFieldsFragment,
+): GitifyPullRequestReviewer[] {
+  const reviewers = new Map<string, GitifyPullRequestReviewer>();
 
-export function getLatestReviewForReviewers(
-  reviews: ReviewForMetrics[],
-): GitifyPullRequestReview[] {
-  if (!reviews.length) {
-    return [];
-  }
-
-  // Find the most recent review for each reviewer
-  const latestReviews: ReviewForMetrics[] = [];
-  const sortedReviews = reviews.toReversed();
-  for (const prReview of sortedReviews) {
-    const reviewerFound = latestReviews.find(
-      (review) => review.author?.login === prReview.author?.login,
-    );
-
-    if (!reviewerFound) {
-      latestReviews.push(prReview);
-    }
-  }
-
-  // Group by the review state
-  const reviewers: GitifyPullRequestReview[] = [];
-  for (const prReview of latestReviews) {
-    const reviewerFound = reviewers.find((review) => review.state === prReview.state);
-
-    if (reviewerFound) {
-      reviewerFound.users.push(prReview.author?.login ?? '');
-    } else {
-      reviewers.push({
-        state: prReview.state,
-        users: [prReview.author?.login ?? ''],
+  for (const review of reviews.toReversed()) {
+    const user = review.author?.login;
+    if (user && !reviewers.has(user)) {
+      const author = getNotificationAuthor([review.author]);
+      reviewers.set(user, {
+        user: author ? formatGitHubNotificationUser(account, author) : user,
+        state: review.state,
+        threads: { resolved: 0, total: 0 },
       });
     }
   }
 
-  // Sort reviews by state for consistent order when rendering
-  return reviewers.sort((a, b) => {
-    return a.state.localeCompare(b.state);
-  });
+  for (const thread of threadConnection?.nodes ?? []) {
+    if (!thread) {
+      continue;
+    }
+
+    const user = thread.comments.nodes?.[0]?.author?.login ?? 'Unknown reviewer';
+    const reviewer = reviewers.get(user) ?? {
+      user,
+      threads: { resolved: 0, total: 0 },
+    };
+    reviewer.threads.total += 1;
+    reviewer.threads.resolved += Number(thread.isResolved);
+    reviewers.set(user, reviewer);
+  }
+
+  return Array.from(reviewers.values()).sort((a, b) => a.user.localeCompare(b.user));
 }

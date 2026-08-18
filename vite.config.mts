@@ -202,7 +202,7 @@ export default defineConfig({
         },
       },
       {
-        files: ['scripts/**', 'codegen.ts', 'vite.config.ts', 'vitest.config.ts'],
+        files: ['scripts/**', 'codegen.ts', 'vite.config.mts', 'vitest.config.mts'],
         rules: {
           'no-console': 'off',
         },
@@ -279,6 +279,9 @@ export default defineConfig({
   staged: {
     '*': 'vp fmt --no-error-on-unmatched-pattern',
     '*.{js,jsx,ts,tsx}': 'vp lint --fix --no-error-on-unmatched-pattern',
-    '*.{js,ts,tsx}': ['bash -c "tsc --noEmit"', 'vp test --changed --passWithNoTests --update'],
+    '*.{js,ts,tsx}': [
+      'bash -c "tsc --noEmit"',
+      "vp test --changed --passWithNoTests --update --project 'happy-dom [preload, renderer]' --project 'node [main, shared]'",
+    ],
   },
 });

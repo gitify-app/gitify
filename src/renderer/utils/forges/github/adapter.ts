@@ -33,6 +33,7 @@ import { createNotificationHandler } from './handlers';
 import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
 import { getGitHubPlatform } from './platform';
 import { transformNotifications } from './transform';
+import { formatGitHubNotificationUser } from './users';
 
 async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
   const response = await fetchAuthenticatedUserDetails(account);
@@ -82,7 +83,8 @@ export const githubAdapter: ForgeAdapter = {
   capabilities: githubCapabilities,
 
   getPlatform: getGitHubPlatform,
-  formatUserLogin: (login) => `@${login}`,
+  formatUserLogin: (login) => login,
+  formatNotificationUser: formatGitHubNotificationUser,
 
   fetchAuthenticatedUser,
   listNotifications,

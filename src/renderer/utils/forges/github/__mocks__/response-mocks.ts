@@ -49,6 +49,7 @@ export const mockReplier = mockAuthorResponseNode('notification-replier');
 export function mockAuthorResponseNode(login: string): AuthorFieldsFragment {
   return {
     login: login,
+    name: null,
     htmlUrl: `https://github.com/${login}` as Link,
     avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
     type: 'User',
@@ -134,6 +135,9 @@ export function mockPullRequestResponseNode(mocks: {
     },
     reviews: {
       totalCount: 0,
+      nodes: [],
+    },
+    reviewThreads: {
       nodes: [],
     },
     reviewRequests: {
