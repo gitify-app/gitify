@@ -61,7 +61,7 @@ fragment PullRequestDetails on PullRequest {
       }
     }
   }
-  reviews(last: $lastReviews) {
+  reviews(last: $lastReviews, orderBy: { field: CREATED_AT, direction: ASC }) {
     totalCount
     nodes {
       ...PullRequestReviewFields

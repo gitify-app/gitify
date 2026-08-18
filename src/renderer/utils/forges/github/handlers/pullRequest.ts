@@ -230,19 +230,39 @@ export function getReviewRequestTypes(
 
 export function getPullRequestReviewers(
   account: Account,
-  reviews: Pick<PullRequestReviewFieldsFragment, 'state' | 'author'>[],
+  reviews: (Pick<PullRequestReviewFieldsFragment, 'state' | 'author'> & {
+    submittedAt?: string | null;
+  })[],
   threadConnection?: PullRequestReviewThreadConnectionFieldsFragment,
 ): GitifyPullRequestReviewer[] {
-  const reviewers = new Map<string, GitifyPullRequestReviewer>();
+  const reviewers = new Map<
+    string,
+    { reviewer: GitifyPullRequestReviewer; submittedAt?: string | null }
+  >();
 
-  for (const review of reviews.toReversed()) {
+  for (const review of reviews) {
     const user = review.author?.login;
-    if (user && !reviewers.has(user)) {
+    if (!user) {
+      continue;
+    }
+
+    const existingEntry = reviewers.get(user);
+    const existingTimestamp = existingEntry?.submittedAt;
+    const reviewTimestamp = review.submittedAt;
+    const isNewerReview =
+      !existingEntry ||
+      (reviewTimestamp && (!existingTimestamp || reviewTimestamp > existingTimestamp)) ||
+      (!reviewTimestamp && !existingTimestamp);
+
+    if (isNewerReview) {
       const author = getNotificationAuthor([review.author]);
       reviewers.set(user, {
-        user: author ? formatGitHubNotificationUser(account, author) : user,
-        state: review.state,
-        threads: { resolved: 0, total: 0 },
+        reviewer: {
+          user: author ? formatGitHubNotificationUser(account, author) : user,
+          state: review.state,
+          threads: existingEntry?.reviewer.threads ?? { resolved: 0, total: 0 },
+        },
+        submittedAt: reviewTimestamp,
       });
     }
   }
@@ -253,14 +273,15 @@ export function getPullRequestReviewers(
     }
 
     const user = thread.comments.nodes?.[0]?.author?.login ?? 'Unknown reviewer';
-    const reviewer = reviewers.get(user) ?? {
-      user,
-      threads: { resolved: 0, total: 0 },
+    const entry = reviewers.get(user) ?? {
+      reviewer: { user, threads: { resolved: 0, total: 0 } },
     };
-    reviewer.threads.total += 1;
-    reviewer.threads.resolved += Number(thread.isResolved);
-    reviewers.set(user, reviewer);
+    entry.reviewer.threads.total += 1;
+    entry.reviewer.threads.resolved += Number(thread.isResolved);
+    reviewers.set(user, entry);
   }
 
-  return Array.from(reviewers.values()).sort((a, b) => a.user.localeCompare(b.user));
+  return Array.from(reviewers.values())
+    .map(({ reviewer }) => reviewer)
+    .sort((a, b) => a.user.localeCompare(b.user));
 }
