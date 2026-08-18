@@ -188,6 +188,26 @@ describe('renderer/components/Sidebar.tsx', () => {
 
       expect(fetchNotificationsMock).not.toHaveBeenCalled();
     });
+
+    it('animates the refresh icon while a background fetch is in flight, regardless of settled status', () => {
+      renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+        status: 'error',
+        isFetching: true,
+      });
+
+      expect(screen.getByTestId('sidebar-refresh')).toHaveClass('animate-spin');
+    });
+
+    it('does not animate the refresh icon when settled and no fetch is in flight', () => {
+      renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+        status: 'error',
+        isFetching: false,
+      });
+
+      expect(screen.getByTestId('sidebar-refresh')).not.toHaveClass('animate-spin');
+    });
   });
 
   describe('Settings', () => {
