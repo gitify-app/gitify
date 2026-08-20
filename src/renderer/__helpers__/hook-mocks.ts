@@ -29,6 +29,8 @@ function buildNotificationsDefaults(): NotificationsState {
     status: 'success',
     globalError: undefined,
 
+    isFetching: false,
+
     notifications: [],
     notificationCount: 0,
     unreadNotificationCount: 0,

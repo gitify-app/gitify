@@ -59,6 +59,9 @@ interface NotificationsState {
   status: Status;
   globalError: GitifyError | undefined;
 
+  /** Whether a fetch (initial, background poll, or manual refetch) is currently in flight. */
+  isFetching: boolean;
+
   notifications: AccountNotifications[];
   notificationCount: number;
   unreadNotificationCount: number;
@@ -212,9 +215,12 @@ export const useNotifications = ({
     [unreadNotificationCount],
   );
 
-  // Determine status and globalError from query state
+  // Determine status and globalError from query state. Only the initial
+  // fetch (no settled success or error yet) reports 'loading' - background
+  // refetches of already-settled data keep their settled status so
+  // consumers like the tray icon don't flicker on every poll/retry.
   const status: Status = useMemo(() => {
-    if (isLoading || isFetching) {
+    if (isLoading) {
       return 'loading';
     }
 
@@ -233,7 +239,7 @@ export const useNotifications = ({
     }
 
     return 'success';
-  }, [isLoading, isFetching, isPaused, isError, notifications]);
+  }, [isLoading, isPaused, isError, notifications]);
 
   const globalError: GitifyError | undefined = useMemo(() => {
     // If paused due to offline, show network error
@@ -633,6 +639,8 @@ export const useNotifications = ({
   return {
     status,
     globalError,
+
+    isFetching,
 
     notifications,
     notificationCount,

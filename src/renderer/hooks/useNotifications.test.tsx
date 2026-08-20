@@ -190,6 +190,80 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
   });
 
+  describe('status stability during background refetches', () => {
+    it('keeps status as error while a retry during an ongoing outage is in flight', async () => {
+      let rejectRetry: (() => void) | undefined;
+      getAllNotificationsMock
+        .mockResolvedValueOnce(mockSingleAccountNotifications)
+        .mockRejectedValueOnce(new Error('network error'))
+        .mockImplementationOnce(
+          () =>
+            new Promise((_resolve, reject) => {
+              rejectRetry = () => reject(new Error('network error'));
+            }),
+        );
+
+      const { result } = renderNotificationsHook();
+
+      // Establish a prior successful fetch, then let the next poll fail -
+      // mirroring an outage starting after notifications had already loaded.
+      await waitFor(() => expect(result.current.status).toBe('success'));
+
+      act(() => {
+        result.current.refetchNotifications();
+      });
+      await waitFor(() => expect(result.current.status).toBe('error'));
+      expect(result.current.isFetching).toBe(false);
+
+      // Trigger a retry that stays unsettled.
+      act(() => {
+        result.current.refetchNotifications();
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(true));
+      expect(result.current.status).toBe('error');
+
+      await act(async () => {
+        rejectRetry?.();
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(false));
+      expect(result.current.status).toBe('error');
+    });
+
+    it('keeps status as success while a background refetch of loaded data is in flight', async () => {
+      let resolveRefetch: ((data: AccountNotifications[]) => void) | undefined;
+      getAllNotificationsMock
+        .mockResolvedValueOnce(mockSingleAccountNotifications)
+        .mockImplementationOnce(
+          () =>
+            new Promise((resolve) => {
+              resolveRefetch = resolve;
+            }),
+        );
+
+      const { result } = renderNotificationsHook();
+
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(result.current.isFetching).toBe(false);
+
+      // Trigger a background refetch that stays unsettled.
+      act(() => {
+        result.current.refetchNotifications();
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(true));
+      expect(result.current.status).toBe('success');
+
+      await act(async () => {
+        resolveRefetch?.(mockSingleAccountNotifications);
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(false));
+      expect(result.current.status).toBe('success');
+    });
+  });
+
   describe('polling', () => {
     it('only polls once per interval, regardless of consumer count', async () => {
       vi.useFakeTimers();
