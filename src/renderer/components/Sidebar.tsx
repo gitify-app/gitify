@@ -22,7 +22,7 @@ import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
-  const { status, notificationCount, hasUnreadNotifications } = useNotifications();
+  const { status, notificationCount, hasUnreadNotifications, isFetching } = useNotifications();
 
   const { shortcuts } = useShortcutActions();
 
@@ -124,7 +124,7 @@ export const Sidebar: FC = () => {
           <>
             <IconButton
               aria-label="Refresh"
-              className={status === 'loading' ? 'animate-spin' : ''}
+              className={status === 'loading' || isFetching ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
               disabled={isLoading}

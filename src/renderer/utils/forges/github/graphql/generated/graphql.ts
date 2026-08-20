@@ -286,7 +286,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-       | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
+       | null, comments: { totalCount: number, nodes: Array<{ updatedAt: string, url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -298,7 +298,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { __typename: 'Mannequin' }
             | { __typename: 'Team' }
             | { __typename: 'User', login: string }
-           | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+           | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, submittedAt: string | null, url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -348,7 +348,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-       | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
+       | null, comments: { totalCount: number, nodes: Array<{ updatedAt: string, url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -360,7 +360,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { __typename: 'Mannequin' }
             | { __typename: 'Team' }
             | { __typename: 'User', login: string }
-           | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+           | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, submittedAt: string | null, url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -392,7 +392,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-       | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
+       | null, comments: { totalCount: number, nodes: Array<{ updatedAt: string, url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -404,7 +404,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
             | { __typename: 'Mannequin' }
             | { __typename: 'Team' }
             | { __typename: 'User', login: string }
-           | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+           | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, submittedAt: string | null, url: Link, author:
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -424,7 +424,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
     | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-   | null, comments: { totalCount: number, nodes: Array<{ url: Link, author:
+   | null, comments: { totalCount: number, nodes: Array<{ updatedAt: string, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -436,7 +436,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
         | { __typename: 'Mannequin' }
         | { __typename: 'Team' }
         | { __typename: 'User', login: string }
-       | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, author:
+       | null } | null> | null } | null, reviews: { totalCount: number, nodes: Array<{ state: PullRequestReviewState, submittedAt: string | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -450,7 +450,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
             | { login: string }
            | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
-export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, author:
+export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, submittedAt: string | null, url: Link, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
     | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -738,6 +738,8 @@ fragment LabelFields on Label {
 export const PullRequestReviewFieldsFragmentDoc = new TypedDocumentString(`
     fragment PullRequestReviewFields on PullRequestReview {
   state
+  submittedAt
+  url
   author {
     ...AuthorFields
   }
@@ -787,6 +789,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   comments(last: $lastComments) {
     totalCount
     nodes {
+      updatedAt
       url
       author {
         ...AuthorFields
@@ -872,6 +875,8 @@ fragment LabelFields on Label {
 }
 fragment PullRequestReviewFields on PullRequestReview {
   state
+  submittedAt
+  url
   author {
     ...AuthorFields
   }
@@ -1040,6 +1045,7 @@ fragment PullRequestDetails on PullRequest {
   comments(last: $lastComments) {
     totalCount
     nodes {
+      updatedAt
       url
       author {
         ...AuthorFields
@@ -1099,6 +1105,8 @@ fragment PullRequestDetails on PullRequest {
 }
 fragment PullRequestReviewFields on PullRequestReview {
   state
+  submittedAt
+  url
   author {
     ...AuthorFields
   }
@@ -1428,6 +1436,7 @@ fragment PullRequestDetails on PullRequest {
   comments(last: $lastComments) {
     totalCount
     nodes {
+      updatedAt
       url
       author {
         ...AuthorFields
@@ -1487,6 +1496,8 @@ fragment PullRequestDetails on PullRequest {
 }
 fragment PullRequestReviewFields on PullRequestReview {
   state
+  submittedAt
+  url
   author {
     ...AuthorFields
   }
@@ -1555,6 +1566,7 @@ fragment PullRequestDetails on PullRequest {
   comments(last: $lastComments) {
     totalCount
     nodes {
+      updatedAt
       url
       author {
         ...AuthorFields
@@ -1614,6 +1626,8 @@ fragment PullRequestDetails on PullRequest {
 }
 fragment PullRequestReviewFields on PullRequestReview {
   state
+  submittedAt
+  url
   author {
     ...AuthorFields
   }

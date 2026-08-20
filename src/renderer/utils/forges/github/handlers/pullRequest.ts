@@ -9,6 +9,8 @@ import {
   GitPullRequestIcon,
 } from '@primer/octicons-react';
 
+import { differenceInMilliseconds } from 'date-fns/differenceInMilliseconds';
+
 import {
   type Account,
   type GitifyNotification,
@@ -23,6 +25,7 @@ import {
 import { formatGitHubNumber } from '../../../notifications/formatters';
 import { fetchPullByNumber } from '../client';
 import type {
+  AuthorFieldsFragment,
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
   PullRequestReviewThreadConnectionFieldsFragment,
@@ -30,6 +33,13 @@ import type {
 import { formatGitHubNotificationUser } from '../users';
 import { DefaultHandler, defaultHandler } from './default';
 import { getNotificationAuthor } from './utils';
+
+type PullRequestActivity = {
+  author: AuthorFieldsFragment;
+  timestamp: string;
+  url: Link;
+  comment?: NonNullable<NonNullable<PullRequestDetailsFragment['comments']['nodes']>[number]>;
+};
 
 class PullRequestHandler extends DefaultHandler {
   override readonly supportsMergedQueryEnrichment = true;
@@ -52,10 +62,11 @@ class PullRequestHandler extends DefaultHandler {
     }
 
     const prComment = pr.comments?.nodes?.[0];
+    const activity = getClosestPullRequestActivity(notification.updatedAt, pr);
 
     const author = getNotificationAuthor([pr.author]);
     const commenter = getNotificationAuthor([prComment?.author]);
-    const prUser = commenter ?? author;
+    const prUser = getNotificationAuthor([activity?.author]) ?? author;
 
     const reviewers = getPullRequestReviewers(
       notification.account,
@@ -68,8 +79,8 @@ class PullRequestHandler extends DefaultHandler {
       notification.account?.user?.login,
     );
 
-    const prReactionCount = prComment?.reactions.totalCount ?? pr.reactions.totalCount;
-    const prReactionGroup = prComment?.reactionGroups ?? pr.reactionGroups;
+    const prReactionCount = activity?.comment?.reactions.totalCount ?? pr.reactions.totalCount;
+    const prReactionGroup = activity?.comment?.reactionGroups ?? pr.reactionGroups;
 
     return {
       number: pr.number,
@@ -92,7 +103,7 @@ class PullRequestHandler extends DefaultHandler {
         ?.filter(Boolean)
         .map((issue) => formatGitHubNumber(issue!.number)),
       milestone: pr.milestone ?? undefined,
-      htmlUrl: prComment?.url ?? pr.url,
+      htmlUrl: activity?.url ?? pr.url,
       reactionsCount: prReactionCount,
       reactionGroups: prReactionGroup ?? undefined,
     };
@@ -137,6 +148,58 @@ class PullRequestHandler extends DefaultHandler {
 
 export const pullRequestHandler = new PullRequestHandler();
 
+export function getClosestPullRequestActivity(
+  notificationUpdatedAt: string,
+  pullRequest: PullRequestDetailsFragment,
+): PullRequestActivity | undefined {
+  const activities: PullRequestActivity[] = [];
+
+  for (const comment of pullRequest.comments.nodes ?? []) {
+    if (!comment) {
+      continue;
+    }
+
+    if (comment.author && comment.updatedAt && comment.url) {
+      activities.push({
+        author: comment.author,
+        timestamp: comment.updatedAt,
+        url: comment.url,
+        comment,
+      });
+    }
+  }
+
+  for (const review of pullRequest.reviews?.nodes ?? []) {
+    if (!review) {
+      continue;
+    }
+
+    if (review.author && review.submittedAt && review.url) {
+      activities.push({
+        author: review.author,
+        timestamp: review.submittedAt,
+        url: review.url,
+      });
+    }
+  }
+
+  return activities.reduce<PullRequestActivity | undefined>((closest, activity) => {
+    const distance = Math.abs(differenceInMilliseconds(activity.timestamp, notificationUpdatedAt));
+    if (Number.isNaN(distance)) {
+      return closest;
+    }
+
+    if (!closest) {
+      return activity;
+    }
+
+    const closestDistance = Math.abs(
+      differenceInMilliseconds(closest.timestamp, notificationUpdatedAt),
+    );
+    return distance < closestDistance ? activity : closest;
+  }, undefined);
+}
+
 export function getReviewRequestTypes(
   nodes: NonNullable<NonNullable<PullRequestDetailsFragment['reviewRequests']>['nodes']>,
   currentUserLogin: string | undefined,
@@ -167,19 +230,39 @@ export function getReviewRequestTypes(
 
 export function getPullRequestReviewers(
   account: Account,
-  reviews: PullRequestReviewFieldsFragment[],
+  reviews: (Pick<PullRequestReviewFieldsFragment, 'state' | 'author'> & {
+    submittedAt?: string | null;
+  })[],
   threadConnection?: PullRequestReviewThreadConnectionFieldsFragment,
 ): GitifyPullRequestReviewer[] {
-  const reviewers = new Map<string, GitifyPullRequestReviewer>();
+  const reviewers = new Map<
+    string,
+    { reviewer: GitifyPullRequestReviewer; submittedAt?: string | null }
+  >();
 
-  for (const review of reviews.toReversed()) {
+  for (const review of reviews) {
     const user = review.author?.login;
-    if (user && !reviewers.has(user)) {
+    if (!user) {
+      continue;
+    }
+
+    const existingEntry = reviewers.get(user);
+    const existingTimestamp = existingEntry?.submittedAt;
+    const reviewTimestamp = review.submittedAt;
+    const isNewerReview =
+      !existingEntry ||
+      (reviewTimestamp && (!existingTimestamp || reviewTimestamp > existingTimestamp)) ||
+      (!reviewTimestamp && !existingTimestamp);
+
+    if (isNewerReview) {
       const author = getNotificationAuthor([review.author]);
       reviewers.set(user, {
-        user: author ? formatGitHubNotificationUser(account, author) : user,
-        state: review.state,
-        threads: { resolved: 0, total: 0 },
+        reviewer: {
+          user: author ? formatGitHubNotificationUser(account, author) : user,
+          state: review.state,
+          threads: existingEntry?.reviewer.threads ?? { resolved: 0, total: 0 },
+        },
+        submittedAt: reviewTimestamp,
       });
     }
   }
@@ -190,14 +273,15 @@ export function getPullRequestReviewers(
     }
 
     const user = thread.comments.nodes?.[0]?.author?.login ?? 'Unknown reviewer';
-    const reviewer = reviewers.get(user) ?? {
-      user,
-      threads: { resolved: 0, total: 0 },
+    const entry = reviewers.get(user) ?? {
+      reviewer: { user, threads: { resolved: 0, total: 0 } },
     };
-    reviewer.threads.total += 1;
-    reviewer.threads.resolved += Number(thread.isResolved);
-    reviewers.set(user, reviewer);
+    entry.reviewer.threads.total += 1;
+    entry.reviewer.threads.resolved += Number(thread.isResolved);
+    reviewers.set(user, entry);
   }
 
-  return Array.from(reviewers.values()).sort((a, b) => a.user.localeCompare(b.user));
+  return Array.from(reviewers.values())
+    .map(({ reviewer }) => reviewer)
+    .sort((a, b) => a.user.localeCompare(b.user));
 }

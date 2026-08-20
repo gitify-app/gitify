@@ -8,7 +8,7 @@ overrides:
   react-is: 19.2.8
   cross-spawn: 7.0.6
   got: 11.8.6
-  electron: 43.4.0
+  electron: 43.2.0
 
 importers:
 
@@ -18,8 +18,8 @@ importers:
         specifier: 5.4.4
         version: 5.4.4
       electron-menubar:
-        specifier: 10.2.0
-        version: 10.2.0(electron@43.4.0(supports-color@10.2.2))
+        specifier: 10.2.1
+        version: 10.2.1(electron@43.2.0(supports-color@10.2.2))
       electron-updater:
         specifier: 6.8.9
         version: 6.8.9(supports-color@10.2.2)
@@ -136,8 +136,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       concurrently:
-        specifier: 10.0.4
-        version: 10.0.4
+        specifier: 10.0.5
+        version: 10.0.5
       date-fns:
         specifier: 4.4.0
         version: 4.4.0
@@ -145,8 +145,8 @@ importers:
         specifier: 17.4.2
         version: 17.4.2
       electron:
-        specifier: 43.4.0
-        version: 43.4.0(supports-color@10.2.2)
+        specifier: 43.2.0
+        version: 43.2.0(supports-color@10.2.2)
       electron-builder:
         specifier: 26.15.3
         version: 26.15.3(electron-builder-squirrel-windows@26.15.3)(supports-color@10.2.2)
@@ -2350,8 +2350,8 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  concurrently@10.0.4:
-    resolution: {integrity: sha512-trZql+7l/0+WRAsAnEdctr4+iiOS6ZrViI6H8QWcCF9MFS/LT0dKpe8vluB1to6it+OxSI4VospFTIFMW8DJRw==}
+  concurrently@10.0.5:
+    resolution: {integrity: sha512-JaP/CoftUrCcAFW/g//RbgEGwlelnEae6cfBLgH6ZdO6s8jPkn6p9SB9u6pdVxYXoiSnFqseOlHfrEfF82TVOg==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -2548,10 +2548,10 @@ packages:
     resolution: {integrity: sha512-istWgaXjBfURBSS8LWVW9C3jsc6+ac+tY1lXrQEOTp0lVj+a4OlO1Tmqb36GgnEUDv92DGC9VI1HNXwJinWpgA==}
     engines: {node: '>= 14'}
 
-  electron-menubar@10.2.0:
-    resolution: {integrity: sha512-CMhVE91BZg5OQkViOHOknM2+HQMwwopxJjNR+Uuu7flc37I/MdujpeOgGPTAQJXgPnwYsPZ+VXo5K2kB+QrLpA==}
+  electron-menubar@10.2.1:
+    resolution: {integrity: sha512-JIpqGjVYUSloNJn/8hqotzFIRNmJ0jpGQJjXGs4GB/viy8cXIBlWj2G30w+SqJR7TKa+EBhXrMLSA73HdP/VgA==}
     peerDependencies:
-      electron: 43.4.0
+      electron: 43.2.0
 
   electron-publish@26.15.3:
     resolution: {integrity: sha512-g/2bn8YTavY4cuS5F+jOS7zmZbXXBV8KZ8yHKfJjFPoKtzBqrpCdNPxBd3tqdBwP7BVd0lGzf7Bk2s0KesWZ4Q==}
@@ -2566,8 +2566,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@43.4.0:
-    resolution: {integrity: sha512-3qxGF0CeQbiox5oWV1JlbWGQ1VerbmDhTFqW4sJ8h7uqTHniFYPObXJcDna0DMh32et0fFyKzz0YY8lJv3t5jg==}
+  electron@43.2.0:
+    resolution: {integrity: sha512-80zvrgG7ZRXD+tD0IyLvrnN9n+veSxadMRsMaC9wKKP3iUbtC7rGM8+dVuCmOb0Rrwwv8ESW4awnUZh9Hbp1fA==}
     engines: {node: '>= 22.12.0'}
     hasBin: true
 
@@ -6639,7 +6639,7 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  concurrently@10.0.4:
+  concurrently@10.0.5:
     dependencies:
       chalk: 5.6.2
       rxjs: 7.8.2
@@ -6837,9 +6837,9 @@ snapshots:
 
   electron-log@5.4.4: {}
 
-  electron-menubar@10.2.0(electron@43.4.0(supports-color@10.2.2)):
+  electron-menubar@10.2.1(electron@43.2.0(supports-color@10.2.2)):
     dependencies:
-      electron: 43.4.0(supports-color@10.2.2)
+      electron: 43.2.0(supports-color@10.2.2)
 
   electron-publish@26.15.3(supports-color@10.2.2):
     dependencies:
@@ -6882,7 +6882,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@43.4.0(supports-color@10.2.2):
+  electron@43.2.0(supports-color@10.2.2):
     dependencies:
       '@electron-internal/extract-zip': 1.0.5
       '@electron/get': 5.1.0(supports-color@10.2.2)
@@ -8066,7 +8066,7 @@ snapshots:
   react-devtools@7.0.1(supports-color@10.2.2):
     dependencies:
       cross-spawn: 7.0.6
-      electron: 43.4.0(supports-color@10.2.2)
+      electron: 43.2.0(supports-color@10.2.2)
       internal-ip: 6.2.0
       minimist: 1.2.8
       react-devtools-core: 7.0.1
