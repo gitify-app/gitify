@@ -35,8 +35,8 @@
       "allowedVersions": "<43.3.0"
     },
     {
-      "description": "Group vite-plus with vitest and @vitest/coverage-v8 so their versions always stay in sync. vite-plus bundles vitest as a direct dep; a mismatch causes SnapshotClient errors at runtime.",
-      "matchPackageNames": ["vite-plus", "vitest", "@vitest/coverage-v8"],
+      "description": "Group vite-plus with vitest and @vitest/** so their versions always stay in sync. vite-plus bundles vitest as a direct dep; a mismatch causes SnapshotClient errors at runtime.",
+      "matchPackageNames": ["vite-plus", "vitest", "@vitest/**"],
       "groupName": "vite-plus / vitest"
     },
     {
