@@ -1,5 +1,18 @@
 # Changelog
 
+## [7.5.0](https://github.com/gitify-app/gitify/compare/v7.4.0...v7.5.0) (2026-08-22)
+
+
+### 🚀 Features
+
+* **github:** improve pr enriched data ([#3204](https://github.com/gitify-app/gitify/issues/3204)) ([13aeba7](https://github.com/gitify-app/gitify/commit/13aeba72cc6f049b773f4597d50f6e3a69aaa260))
+
+
+### 🐛 Bug Fixes
+
+* **deps-core:** pin electron to 43.2.0 to restore Linux tray icons ([#3208](https://github.com/gitify-app/gitify/issues/3208)) ([73fb716](https://github.com/gitify-app/gitify/commit/73fb716da6ca219f36952bb3898a0d37327f592d))
+* menubar icon state ([#3205](https://github.com/gitify-app/gitify/issues/3205)) ([9b08a09](https://github.com/gitify-app/gitify/commit/9b08a097f665b1e80fd0a979bd4e69913a14d1f5))
+
 ## [7.4.0](https://github.com/gitify-app/gitify/compare/v7.3.3...v7.4.0) (2026-08-16)
 
 
