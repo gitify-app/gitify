@@ -6,11 +6,13 @@ import { APPLICATION } from '../shared/constants';
 import { logError, logInfo, toError } from '../shared/logger';
 
 import type MenuBuilder from './menu';
+import type { PackageManager } from './packageManager';
 
 /**
  * Updater class for handling application updates.
  *
- * Supports scheduled and manual updates for all platforms.
+ * Supports scheduled and manual updates for all platforms, except for installs
+ * owned by a package manager - those update through the package manager instead.
  *
  * Documentation: https://www.electron.build/auto-update
  *
@@ -19,12 +21,19 @@ import type MenuBuilder from './menu';
 export default class AppUpdater {
   private readonly menubar: Menubar;
   private readonly menuBuilder: MenuBuilder;
+  private readonly packageManager: PackageManager | null;
   private started = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
 
-  constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
+  /**
+   * @param menubar - The menubar instance whose tray and window the updater reports status through.
+   * @param menuBuilder - The menu builder whose update menu items track the update state.
+   * @param packageManager - The package manager that owns this install, or `null` when the app was installed manually.
+   */
+  constructor(menubar: Menubar, menuBuilder: MenuBuilder, packageManager: PackageManager | null) {
     this.menubar = menubar;
     this.menuBuilder = menuBuilder;
+    this.packageManager = packageManager;
     // Disable electron-updater's own logging to avoid duplicate log messages
     // We'll handle all logging through our event listeners
     autoUpdater.logger = null;
@@ -41,6 +50,11 @@ export default class AppUpdater {
 
     if (!this.menubar.app.isPackaged) {
       logInfo('app updater', 'Skipping updater since app is in development mode');
+      return;
+    }
+
+    if (this.packageManager) {
+      logInfo('app updater', `Skipping updater since app was installed via ${this.packageManager}`);
       return;
     }
 

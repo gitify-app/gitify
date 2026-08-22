@@ -94,8 +94,8 @@ describe('main/updater.ts', () => {
       tray: { setToolTip: vi.fn() },
     } as unknown as Menubar;
 
-    menuBuilder = new TestMenuBuilder(menubar);
-    updater = new AppUpdater(menubar, menuBuilder);
+    menuBuilder = new TestMenuBuilder(menubar, null);
+    updater = new AppUpdater(menubar, menuBuilder, null);
   });
 
   describe('update available dialog', () => {
@@ -183,6 +183,18 @@ describe('main/updater.ts', () => {
       expect(logInfo).toHaveBeenCalledWith(
         'app updater',
         'Skipping updater since app is in development mode',
+      );
+      expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+    });
+
+    it('skips when the app was installed by a package manager', async () => {
+      updater = new AppUpdater(menubar, menuBuilder, 'Homebrew');
+
+      await updater.start();
+
+      expect(logInfo).toHaveBeenCalledWith(
+        'app updater',
+        'Skipping updater since app was installed via Homebrew',
       );
       expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
     });
