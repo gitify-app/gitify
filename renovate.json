@@ -35,9 +35,14 @@
       "allowedVersions": "<43.3.0"
     },
     {
-      "description": "Group vite-plus with vitest and @vitest/** so their versions always stay in sync. vite-plus bundles vitest as a direct dep; a mismatch causes SnapshotClient errors at runtime.",
+      "description": "Group vite-plus with vitest and @vitest/** so they land in a single PR. Grouping alone does not keep them compatible (a group still bumps whichever member has an update); the pnpm-workspace.yaml overrides pinning the vitest family enforce a single copy at runtime, and the hold below stops renovate from proposing versions vite-plus does not bundle yet.",
       "matchPackageNames": ["vite-plus", "vitest", "@vitest/**"],
       "groupName": "vite-plus / vitest"
+    },
+    {
+      "description": "Hold vitest and @vitest/* below 4.1.11. vite-plus 0.2.9 bundles exactly these versions and vp test runs through that bundled copy; anything newer splits the copies inside the test workers and every expect(...).rejects/.resolves.toThrow() fails with 'TypeError: Cannot read properties of undefined (reading 'indexOf')'. The matching pnpm overrides in pnpm-workspace.yaml are the runtime backstop. To lift this hold: read the vitest/@vitest/* versions pinned in the target vite-plus release's package.json, then raise this cap and the override pins in the same commit so the grouped PR moves everything in lockstep.",
+      "matchPackageNames": ["vitest", "@vitest/**"],
+      "allowedVersions": "<4.1.11"
     },
     {
       "description": "Group the playwright package with the Playwright container image that the visual regression job runs in. The image ships the browser build that exact release expects, so a mismatch fails to launch Chromium and would strand the committed screenshot baselines.",
