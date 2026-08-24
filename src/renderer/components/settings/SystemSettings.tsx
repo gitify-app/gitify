@@ -51,6 +51,7 @@ export const SystemSettings: FC = () => {
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
+  const useX11Backend = useSettingsStore((s) => s.useX11Backend);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
@@ -342,6 +343,22 @@ export const SystemSettings: FC = () => {
           onChange={() => toggleSetting('openAtStartup')}
           tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
           visible={!window.gitify.platform.isLinux()}
+        />
+
+        <Checkbox
+          checked={useX11Backend}
+          label="Use X11 backend (restart required)"
+          name="useX11Backend"
+          onChange={() => toggleSetting('useX11Backend')}
+          tooltip={
+            <Text>
+              Run under X11/XWayland so the window opens next to the tray icon. On Wayland the
+              compositor decides where windows appear, so {APPLICATION.NAME} opens in the middle of
+              the screen. Enabling this may soften text on displays using fractional scaling. Takes
+              effect after restarting {APPLICATION.NAME}.
+            </Text>
+          }
+          visible={window.gitify.platform.isLinux()}
         />
       </Stack>
     </fieldset>

@@ -92,6 +92,18 @@ export function setKeepWindowOnBlur(value: boolean): void {
 }
 
 /**
+ * Persist whether Linux should run under the X11 backend.
+ *
+ * The Ozone platform is fixed while the app starts, so this only takes effect
+ * on the next launch.
+ *
+ * @param value - `true` to force X11/XWayland, `false` to let Electron pick.
+ */
+export function setUseX11Backend(value: boolean): void {
+  window.gitify.setUseX11Backend(value);
+}
+
+/**
  * Switch the tray icon to an alternate idle icon variant.
  *
  * @param value - `true` to use the alternate idle icon, `false` for the default.

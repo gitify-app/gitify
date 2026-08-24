@@ -64,6 +64,14 @@ export const api = {
   setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
 
   /**
+   * Persist whether Linux should run under the X11 backend. Applied at startup,
+   * so the change only takes effect after the app is restarted.
+   *
+   * @param value - `true` to force X11/XWayland, `false` to let Electron pick.
+   */
+  setUseX11Backend: (value: boolean) => sendMainEvent(EVENTS.UPDATE_USE_X11_BACKEND, value),
+
+  /**
    * Enable or disable the macOS window vibrancy material for Glass. Resolves once
    * the material has been applied so the renderer can order the visual switch.
    */

@@ -87,6 +87,7 @@ const DEFAULT_SYSTEM_SETTINGS: SystemSettingsState = {
   notificationVolume: 20 as Percentage,
   openAtStartup: false,
   keepWindowOnBlur: false,
+  useX11Backend: false,
 };
 
 /**
