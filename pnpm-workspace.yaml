@@ -16,9 +16,9 @@ catalog:
   # of undefined (reading 'indexOf')". These are overridden (below) to keep a
   # single copy, and they move in lockstep with vite-plus via the
   # "vite-plus / vitest" group in renovate.json.
-  vitest: '4.1.10'
-  '@vitest/browser-playwright': '4.1.10'
-  '@vitest/coverage-v8': '4.1.10'
+  vitest: &vitest_version '4.1.10'
+  '@vitest/browser-playwright': *vitest_version
+  '@vitest/coverage-v8': *vitest_version
 minimumReleaseAgeExclude:
   - electron-menubar
 overrides:
