@@ -9,13 +9,8 @@ allowBuilds:
   unrs-resolver: true
 catalog:
   electron: '43.2.0'
-  # Pin the vitest family to the exact version vite-plus bundles. `vp test`
-  # runs vite-plus's own vitest; if our devDependencies resolve a different
-  # copy, both get loaded into the test workers and every
-  # rejects/.resolves.toThrow() assertion dies with "Cannot read properties
-  # of undefined (reading 'indexOf')". These are overridden (below) to keep a
-  # single copy, and they move in lockstep with vite-plus via the
-  # "vite-plus / vitest" group in renovate.json.
+  # Pin the vitest family to the same version note: we need to keep this
+  # in-sync with vite-plus bundled version.
   vitest: &vitest_version '4.1.10'
   '@vitest/browser-playwright': *vitest_version
   '@vitest/coverage-v8': *vitest_version
