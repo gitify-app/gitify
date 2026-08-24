@@ -9,6 +9,16 @@ allowBuilds:
   unrs-resolver: true
 catalog:
   electron: '43.2.0'
+  # Pin the vitest family to the exact version vite-plus bundles. `vp test`
+  # runs vite-plus's own vitest; if our devDependencies resolve a different
+  # copy, both get loaded into the test workers and every
+  # rejects/.resolves.toThrow() assertion dies with "Cannot read properties
+  # of undefined (reading 'indexOf')". These are overridden (below) to keep a
+  # single copy, and they move in lockstep with vite-plus via the
+  # "vite-plus / vitest" group in renovate.json.
+  vitest: '4.1.10'
+  '@vitest/browser-playwright': '4.1.10'
+  '@vitest/coverage-v8': '4.1.10'
 minimumReleaseAgeExclude:
   - electron-menubar
 overrides:
@@ -19,13 +29,7 @@ overrides:
   cross-spawn: '7.0.6'
   got: '11.8.6'
   electron: 'catalog:'
-  # Pin the vitest family to the exact version vite-plus bundles (see the
-  # "vite-plus / vitest" holds in renovate.json). `vp test` runs vite-plus's
-  # own vitest; if our devDependencies resolve a different copy, both get
-  # loaded into the test workers and every rejects/.resolves.toThrow()
-  # assertion dies with "Cannot read properties of undefined (reading
-  # 'indexOf')". Bump these together with vite-plus and the renovate cap.
-  vitest: '4.1.10'
-  '@vitest/browser-playwright': '4.1.10'
-  '@vitest/coverage-v8': '4.1.10'
+  vitest: 'catalog:'
+  '@vitest/browser-playwright': 'catalog:'
+  '@vitest/coverage-v8': 'catalog:'
 savePrefix: ''
