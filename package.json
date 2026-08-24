@@ -109,9 +109,9 @@
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.8.0",
     "@vitejs/plugin-react": "6.1.0",
-    "@vitest/browser": "4.1.10",
-    "@vitest/browser-playwright": "4.1.10",
-    "@vitest/coverage-v8": "4.1.10",
+    "@vitest/browser": "4.1.11",
+    "@vitest/browser-playwright": "4.1.11",
+    "@vitest/coverage-v8": "4.1.11",
     "clsx": "2.1.1",
     "concurrently": "10.0.5",
     "date-fns": "4.4.0",
@@ -133,7 +133,7 @@
     "vite-plugin-checker": "0.14.5",
     "vite-plugin-electron": "1.1.1",
     "vite-plus": "0.2.9",
-    "vitest": "4.1.10",
+    "vitest": "4.1.11",
     "zustand": "5.0.15"
   },
   "engines": {
