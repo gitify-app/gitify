@@ -35,7 +35,7 @@
       "allowedVersions": "<43.3.0"
     },
     {
-      "description": "Group vite-plus with vitest and @vitest/** so their versions always stay in sync. vite-plus bundles vitest as a direct dep; a mismatch causes SnapshotClient errors at runtime.",
+      "description": "Group vite-plus with vitest and @vitest/** so they land in a single PR and are bumped in lockstep. The vitest family versions are centralized in pnpm-workspace.yaml's catalog (and enforced as overrides) so a mismatched copy can never be installed.",
       "matchPackageNames": ["vite-plus", "vitest", "@vitest/**"],
       "groupName": "vite-plus / vitest"
     },

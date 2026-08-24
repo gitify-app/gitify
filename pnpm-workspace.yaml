@@ -9,6 +9,11 @@ allowBuilds:
   unrs-resolver: true
 catalog:
   electron: '43.2.0'
+  # Pin the vitest family to the same version note: we need to keep this
+  # in-sync with vite-plus bundled version.
+  vitest: &vitest_version '4.1.10'
+  '@vitest/browser-playwright': *vitest_version
+  '@vitest/coverage-v8': *vitest_version
 minimumReleaseAgeExclude:
   - electron-menubar
 overrides:
@@ -19,4 +24,7 @@ overrides:
   cross-spawn: '7.0.6'
   got: '11.8.6'
   electron: 'catalog:'
+  vitest: 'catalog:'
+  '@vitest/browser-playwright': 'catalog:'
+  '@vitest/coverage-v8': 'catalog:'
 savePrefix: ''
