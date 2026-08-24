@@ -63,6 +63,37 @@ describe('main/ozone.ts', () => {
       expect(() => setX11Backend(false)).not.toThrow();
       expect(logErrorMock).not.toHaveBeenCalled();
     });
+
+    it('logs and swallows a failure to write the marker', () => {
+      const writeSpy = vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {
+        throw new Error('EACCES');
+      });
+
+      expect(() => setX11Backend(true)).not.toThrow();
+      expect(logErrorMock).toHaveBeenCalledWith(
+        'setX11Backend',
+        expect.stringContaining('Unable to persist'),
+        expect.anything(),
+      );
+
+      writeSpy.mockRestore();
+    });
+
+    it('reports disabled when the marker cannot be read', () => {
+      const existsSpy = vi.spyOn(fs, 'existsSync').mockImplementation(() => {
+        throw new Error('EIO');
+      });
+
+      // Defaulting to "off" keeps a broken read from silently forcing X11.
+      expect(isX11BackendEnabled()).toBe(false);
+      expect(logErrorMock).toHaveBeenCalledWith(
+        'isX11BackendEnabled',
+        expect.stringContaining('Unable to read'),
+        expect.anything(),
+      );
+
+      existsSpy.mockRestore();
+    });
   });
 
   describe('applyOzonePlatform', () => {

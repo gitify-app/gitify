@@ -14,6 +14,7 @@ import {
   setAutoLaunch,
   setKeepWindowOnBlur,
   setUseAlternateIdleIcon,
+  setUseX11Backend,
   showWindow,
   updateTrayColor,
   updateTrayTitle,
@@ -118,6 +119,13 @@ describe('renderer/utils/comms.ts', () => {
 
       expect(window.gitify.setKeepWindowOnBlur).toHaveBeenCalledTimes(1);
       expect(window.gitify.setKeepWindowOnBlur).toHaveBeenCalledWith(true);
+    });
+
+    it('sets the X11 backend preference', () => {
+      setUseX11Backend(true);
+
+      expect(window.gitify.setUseX11Backend).toHaveBeenCalledTimes(1);
+      expect(window.gitify.setUseX11Backend).toHaveBeenCalledWith(true);
     });
 
     it('applies keyboard shortcut', async () => {

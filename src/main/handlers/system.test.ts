@@ -4,7 +4,12 @@ import type { Menubar } from 'electron-menubar';
 import { EVENTS } from '../../shared/events';
 
 import { applyKeepWindowOnBlur } from '../lifecycle/window';
+import { setX11Backend } from '../ozone';
 import { registerSystemHandlers } from './system';
+
+vi.mock('../ozone', () => ({
+  setX11Backend: vi.fn(),
+}));
 
 vi.mock('../lifecycle/window', () => ({
   applyKeepWindowOnBlur: vi.fn(),
@@ -157,6 +162,19 @@ describe('main/handlers/system.ts', () => {
       handler?.({}, true);
 
       expect(applyKeepWindowOnBlur).toHaveBeenCalledWith(menubar, true);
+    });
+  });
+
+  describe('UPDATE_USE_X11_BACKEND', () => {
+    it('forwards the value to setX11Backend', () => {
+      registerSystemHandlers(menubar);
+
+      const handler = onMock.mock.calls.find(
+        (call: unknown[]) => call[0] === EVENTS.UPDATE_USE_X11_BACKEND,
+      )?.[1];
+      handler?.({}, true);
+
+      expect(setX11Backend).toHaveBeenCalledWith(true);
     });
   });
 
