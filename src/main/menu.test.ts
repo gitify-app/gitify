@@ -100,7 +100,7 @@ describe('main/menu.ts', () => {
         setContextMenu: vi.fn(),
       },
     } as unknown as Menubar;
-    menuBuilder = new MenuBuilder(menubar, null);
+    menuBuilder = new MenuBuilder(menubar);
   });
 
   describe('checkForUpdatesMenuItem', () => {
@@ -207,34 +207,6 @@ describe('main/menu.ts', () => {
       menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
 
       expect(menubar.refreshContextMenu).toHaveBeenCalled();
-    });
-  });
-
-  describe('package managed updates', () => {
-    beforeEach(() => {
-      menuItemInstances.length = 0;
-      menuBuilder = new MenuBuilder(menubar, 'Homebrew');
-    });
-
-    it('names the package manager that owns updates', () => {
-      menuBuilder.buildMenu();
-
-      const config = getMenuItemConfigByLabel('Updates are managed by Homebrew');
-
-      expect(config).toBeDefined();
-      expect(config?.enabled).toBe(false);
-      expect(config?.click).toBeUndefined();
-    });
-
-    it('replaces the update menu items with the notice', () => {
-      const template = buildAndGetTemplate();
-      const labels = template.map((item) => item?.label);
-
-      expect(labels).toContain('Updates are managed by Homebrew');
-      expect(labels).not.toContain('Check for updates');
-      expect(labels).not.toContain('No updates available');
-      expect(labels).not.toContain('An update is available');
-      expect(labels).not.toContain('Restart to install update');
     });
   });
 
@@ -362,12 +334,9 @@ describe('main/menu.ts', () => {
       menuItemInstances.length = 0;
       (Menu.buildFromTemplate as Mock).mockClear();
 
-      const mb = new MenuBuilder(
-        {
-          app: { quit: vi.fn() },
-        } as unknown as Menubar,
-        null,
-      );
+      const mb = new MenuBuilder({
+        app: { quit: vi.fn() },
+      } as unknown as Menubar);
       mb.buildMenu();
 
       const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(
@@ -384,12 +353,9 @@ describe('main/menu.ts', () => {
       menuItemInstances.length = 0;
       (Menu.buildFromTemplate as Mock).mockClear();
 
-      const mb = new MenuBuilder(
-        {
-          app: { quit: vi.fn() },
-        } as unknown as Menubar,
-        null,
-      );
+      const mb = new MenuBuilder({
+        app: { quit: vi.fn() },
+      } as unknown as Menubar);
       mb.buildMenu();
 
       const template = (Menu.buildFromTemplate as Mock).mock.calls.slice(

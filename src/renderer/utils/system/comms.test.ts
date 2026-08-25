@@ -13,6 +13,7 @@ import {
   quitApp,
   setAutoLaunch,
   setKeepWindowOnBlur,
+  setShowUpdateNotifications,
   setUseAlternateIdleIcon,
   showWindow,
   updateTrayColor,
@@ -118,6 +119,13 @@ describe('renderer/utils/comms.ts', () => {
 
       expect(window.gitify.setKeepWindowOnBlur).toHaveBeenCalledTimes(1);
       expect(window.gitify.setKeepWindowOnBlur).toHaveBeenCalledWith(true);
+    });
+
+    it('sets whether update notifications are shown', () => {
+      setShowUpdateNotifications(false);
+
+      expect(window.gitify.setShowUpdateNotifications).toHaveBeenCalledTimes(1);
+      expect(window.gitify.setShowUpdateNotifications).toHaveBeenCalledWith(false);
     });
 
     it('applies keyboard shortcut', async () => {

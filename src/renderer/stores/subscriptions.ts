@@ -8,6 +8,7 @@
 import {
   setAutoLaunch,
   setKeepWindowOnBlur,
+  setShowUpdateNotifications,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
 } from '../utils/system/comms';
@@ -31,6 +32,7 @@ export function initializeStoreSubscriptions(): () => void {
   // ========================================================================
   setAutoLaunch(useSettingsStore.getState().openAtStartup);
   setKeepWindowOnBlur(useSettingsStore.getState().keepWindowOnBlur);
+  setShowUpdateNotifications(useSettingsStore.getState().showUpdateNotifications);
   setUseUnreadActiveIcon(useSettingsStore.getState().useUnreadActiveIcon);
   setUseAlternateIdleIcon(useSettingsStore.getState().useAlternateIdleIcon);
 
@@ -55,6 +57,15 @@ export function initializeStoreSubscriptions(): () => void {
     },
   );
   unsubscribers.push(unsubKeepWindowOnBlur);
+
+  // Automatic update notifications
+  const unsubShowUpdateNotifications = useSettingsStore.subscribe(
+    (state) => state.showUpdateNotifications,
+    (showUpdateNotifications) => {
+      setShowUpdateNotifications(showUpdateNotifications);
+    },
+  );
+  unsubscribers.push(unsubShowUpdateNotifications);
 
   // Tray icon settings (unread active icon)
   const unsubUnreadActive = useSettingsStore.subscribe(

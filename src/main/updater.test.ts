@@ -32,6 +32,7 @@ vi.mock('electron-updater', () => ({
       listeners[event].push(cb);
       return this;
     }),
+    checkForUpdates: vi.fn().mockResolvedValue(undefined),
     checkForUpdatesAndNotify: vi.fn().mockResolvedValue(undefined),
     quitAndInstall: vi.fn(),
   },
@@ -94,8 +95,8 @@ describe('main/updater.ts', () => {
       tray: { setToolTip: vi.fn() },
     } as unknown as Menubar;
 
-    menuBuilder = new TestMenuBuilder(menubar, null);
-    updater = new AppUpdater(menubar, menuBuilder, null);
+    menuBuilder = new TestMenuBuilder(menubar);
+    updater = new AppUpdater(menubar, menuBuilder);
   });
 
   describe('update available dialog', () => {
@@ -139,6 +140,18 @@ describe('main/updater.ts', () => {
           message: `${APPLICATION.NAME} 1.2.3 has been downloaded`,
         }),
       );
+    });
+
+    it('reports a downloaded update in the menu without showing a dialog when notifications are disabled', async () => {
+      updater.setNotificationsEnabled(false);
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3' });
+
+      expect(dialog.showMessageBox).not.toHaveBeenCalled();
+      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(true);
     });
 
     it('invokes quitAndInstall when user clicks Restart', async () => {
@@ -187,16 +200,36 @@ describe('main/updater.ts', () => {
       expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
     });
 
-    it('skips when the app was installed by a package manager', async () => {
-      updater = new AppUpdater(menubar, menuBuilder, 'Homebrew');
+    it('starts only once when settings updates arrive concurrently', async () => {
+      await Promise.all([updater.start(), updater.start()]);
+
+      expect(autoUpdater.checkForUpdatesAndNotify).toHaveBeenCalledTimes(1);
+    });
+
+    it('checks silently when update notifications are disabled', async () => {
+      updater.setNotificationsEnabled(false);
 
       await updater.start();
 
-      expect(logInfo).toHaveBeenCalledWith(
-        'app updater',
-        'Skipping updater since app was installed via Homebrew',
-      );
+      expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
       expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+    });
+
+    it('keeps silent update checks running on schedule when notifications are disabled', async () => {
+      vi.useFakeTimers();
+      try {
+        updater.setNotificationsEnabled(false);
+
+        await updater.start();
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
+
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(2);
+        expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+      } finally {
+        vi.useRealTimers();
+      }
     });
 
     it('handles checking-for-update', async () => {

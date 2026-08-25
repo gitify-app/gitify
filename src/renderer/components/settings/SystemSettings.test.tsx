@@ -33,6 +33,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   it.each([
     ['checkbox-keyboardShortcut', 'keyboardShortcut'],
     ['checkbox-showNotifications', 'showNotifications'],
+    ['checkbox-showUpdateNotifications', 'showUpdateNotifications'],
     ['checkbox-openAtStartup', 'openAtStartup'],
     ['checkbox-keepWindowOnBlur', 'keepWindowOnBlur'],
   ] as const)('should toggle %s checkbox', async (testId, setting) => {

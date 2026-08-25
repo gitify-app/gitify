@@ -140,6 +140,7 @@ export interface SystemSettingsState {
   notificationVolume: Percentage;
   openAtStartup: boolean;
   keepWindowOnBlur: boolean;
+  showUpdateNotifications: boolean;
 }
 
 /** Values are lower-cased because they double as the root `data-theme` attribute. */

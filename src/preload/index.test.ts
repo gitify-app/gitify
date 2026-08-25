@@ -63,6 +63,7 @@ class MockNotification {
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
+  setShowUpdateNotifications: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
 }
@@ -108,6 +109,14 @@ describe('preload/index', () => {
       url: 'https://example.com',
       activate: true,
     });
+  });
+
+  it('setShowUpdateNotifications sends the preference to main', () => {
+    const api = getExposedApi();
+
+    api.setShowUpdateNotifications(false);
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS, false);
   });
 
   it('app.version returns dev in development', async () => {
