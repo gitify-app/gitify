@@ -354,8 +354,9 @@ export const SystemSettings: FC = () => {
             <Text>
               Run under X11/XWayland so the window opens next to the tray icon. On Wayland the
               compositor decides where windows appear, so {APPLICATION.NAME} opens in the middle of
-              the screen. Enabling this may soften text on displays using fractional scaling. Takes
-              effect after restarting {APPLICATION.NAME}.
+              the screen. Enabling this also disables Vulkan, which crashes under X11 on some
+              drivers, and may soften text on displays using fractional scaling. Takes effect after
+              restarting {APPLICATION.NAME}.
             </Text>
           }
           visible={window.gitify.platform.isLinux()}

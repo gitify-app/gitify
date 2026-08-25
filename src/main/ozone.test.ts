@@ -106,11 +106,24 @@ describe('main/ozone.ts', () => {
       expect(appendSwitchMock).toHaveBeenCalledWith('ozone-platform', 'x11');
     });
 
+    it('disables Vulkan alongside x11', () => {
+      setPlatform('linux');
+      setX11Backend(true);
+
+      applyOzonePlatform();
+
+      // Vulkan on X11 segfaults the GPU process on the NVIDIA proprietary
+      // driver, so the popup never paints. Both switches have to travel
+      // together or the setting trades a misplaced window for no window.
+      expect(appendSwitchMock).toHaveBeenCalledWith('disable-features', 'Vulkan');
+    });
+
     it('leaves the platform alone on Linux when disabled', () => {
       setPlatform('linux');
 
       applyOzonePlatform();
 
+      // Wayland users keep Vulkan; the switch is only a companion to X11.
       expect(appendSwitchMock).not.toHaveBeenCalled();
     });
 

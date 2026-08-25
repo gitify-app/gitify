@@ -64,5 +64,14 @@ export function applyOzonePlatform(): void {
   }
 
   app.commandLine.appendSwitch('ozone-platform', 'x11');
-  logInfo('applyOzonePlatform', 'X11 backend enabled, forcing --ozone-platform=x11');
+  // Chromium skips Vulkan under Wayland because the two are incompatible, then
+  // initialises it once X11 is in play. On the NVIDIA proprietary driver that
+  // segfaults the GPU process, leaving the tray icon clickable but no window
+  // painted. Disabling Vulkan keeps the rest of GPU acceleration intact, which
+  // `--disable-gpu` would not.
+  app.commandLine.appendSwitch('disable-features', 'Vulkan');
+  logInfo(
+    'applyOzonePlatform',
+    'X11 backend enabled, forcing --ozone-platform=x11 --disable-features=Vulkan',
+  );
 }
