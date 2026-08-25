@@ -13,7 +13,7 @@ vi.mock('@octokit/oauth-methods', async () => {
 import { createDeviceCode, exchangeDeviceCode, exchangeWebFlowCode } from '@octokit/oauth-methods';
 import { RequestError } from '@octokit/request-error';
 
-import type { MockedFunction } from 'vitest';
+import type { MockedFunction } from 'vite-plus/test';
 
 import { Constants } from '../../../constants';
 

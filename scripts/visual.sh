@@ -30,7 +30,7 @@ FILTER="${1:-}"
 # below), so run the suite rather than nesting another container.
 if [ -n "${GITIFY_VISUAL_IN_CONTAINER:-}" ]; then
   # shellcheck disable=SC2086 -- word splitting is intended for the optional flags
-  exec corepack pnpm exec vitest --project 'browser [visual]' --run ${UPDATE} ${FILTER:+-t "${FILTER}"}
+  exec corepack pnpm exec vp test --project 'browser [visual]' --run ${UPDATE} ${FILTER:+-t "${FILTER}"}
 fi
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

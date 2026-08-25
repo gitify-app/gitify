@@ -35,11 +35,6 @@
       "allowedVersions": "<43.3.0"
     },
     {
-      "description": "Group vite-plus with vitest and @vitest/** so they land in a single PR and are bumped in lockstep. The vitest family versions are centralized in pnpm-workspace.yaml's catalog (and enforced as overrides) so a mismatched copy can never be installed.",
-      "matchPackageNames": ["vite-plus", "vitest", "@vitest/**"],
-      "groupName": "vite-plus / vitest"
-    },
-    {
       "description": "Group the playwright package with the Playwright container image that the visual regression job runs in. The image ships the browser build that exact release expects, so a mismatch fails to launch Chromium and would strand the committed screenshot baselines.",
       "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"],
       "groupName": "playwright"
