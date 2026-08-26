@@ -64,6 +64,27 @@ describe('renderer/utils/notifications/formatters.ts', () => {
 
       expect(formatNotificationType(notification)).toBe('Issue');
     });
+
+    it('keeps the brand name intact for GitLab to-do items', () => {
+      // Camel-splitting would render this as "Git Lab Todo".
+      const notification = mockPartialGitifyNotification({
+        title: 'Sample',
+        type: 'GitLabTodo',
+        state: undefined,
+      });
+
+      expect(formatNotificationType(notification)).toBe('GitLab To-Do');
+    });
+
+    it('prefixes the state for GitLab to-do items', () => {
+      const notification = mockPartialGitifyNotification({
+        title: 'Sample',
+        type: 'GitLabTodo',
+        state: 'OPEN',
+      });
+
+      expect(formatNotificationType(notification)).toBe('Open GitLab To-Do');
+    });
   });
 
   describe('formattedNotificationNumber', () => {
