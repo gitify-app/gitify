@@ -13,6 +13,7 @@ import { GiteaLoginWithPersonalAccessTokenRoute } from './routes/gitea/LoginWith
 import { GitHubLoginWithDeviceFlowRoute } from './routes/github/LoginWithDeviceFlow';
 import { GitHubLoginWithOAuthAppRoute } from './routes/github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './routes/github/LoginWithPersonalAccessToken';
+import { GitLabLoginWithPersonalAccessTokenRoute } from './routes/gitlab/LoginWithPersonalAccessToken';
 import { LoginRoute } from './routes/Login';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
@@ -112,6 +113,10 @@ export const App = () => {
                 <Route
                   element={<BitbucketLoginWithPersonalAccessTokenRoute />}
                   path="/login/bitbucket/personal-access-token"
+                />
+                <Route
+                  element={<GitLabLoginWithPersonalAccessTokenRoute />}
+                  path="/login/gitlab/personal-access-token"
                 />
               </Routes>
             </AppLayout>
