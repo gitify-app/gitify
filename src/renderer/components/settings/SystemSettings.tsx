@@ -51,6 +51,7 @@ export const SystemSettings: FC = () => {
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
+  const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
   const useX11Backend = useSettingsStore((s) => s.useX11Backend);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
@@ -343,6 +344,19 @@ export const SystemSettings: FC = () => {
           onChange={() => toggleSetting('openAtStartup')}
           tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
           visible={!window.gitify.platform.isLinux()}
+        />
+
+        <Checkbox
+          checked={showUpdateNotifications}
+          label="Show update notifications"
+          name="showUpdateNotifications"
+          onChange={() => toggleSetting('showUpdateNotifications')}
+          tooltip={
+            <Text>
+              Show a notification when a {APPLICATION.NAME} update is ready. Updates will still be
+              checked and shown in the menu bar.
+            </Text>
+          }
         />
 
         <Checkbox

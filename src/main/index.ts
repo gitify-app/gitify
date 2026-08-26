@@ -8,6 +8,7 @@ import {
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
+  registerUpdaterHandlers,
 } from './handlers';
 import { TrayIcons } from './icons';
 import {
@@ -53,8 +54,6 @@ const appUpdater = new AppUpdater(mb, menuBuilder);
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
-  appUpdater.start();
-
   initializeAppLifecycle(mb, contextMenu, protocol);
 
   // Configure window event handlers (Escape key, DevTools resize)
@@ -65,6 +64,7 @@ app.whenReady().then(async () => {
   registerSystemHandlers(mb);
   registerStorageHandlers();
   registerAppHandlers(mb);
+  registerUpdaterHandlers(appUpdater);
 });
 
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback

@@ -19,15 +19,28 @@ import type MenuBuilder from './menu';
 export default class AppUpdater {
   private readonly menubar: Menubar;
   private readonly menuBuilder: MenuBuilder;
+  private notificationsEnabled = true;
   private started = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
 
+  /**
+   * @param menubar - The menubar instance whose tray and window the updater reports status through.
+   * @param menuBuilder - The menu builder whose update menu items track the update state.
+   */
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
     this.menuBuilder = menuBuilder;
     // Disable electron-updater's own logging to avoid duplicate log messages
     // We'll handle all logging through our event listeners
     autoUpdater.logger = null;
+  }
+
+  /**
+   * Enable or suppress update notifications without changing update checks,
+   * downloads, or menubar state.
+   */
+  setNotificationsEnabled(enabled: boolean): void {
+    this.notificationsEnabled = enabled;
   }
 
   /**
@@ -46,11 +59,10 @@ export default class AppUpdater {
 
     logInfo('app updater', 'Starting updater');
 
+    this.started = true;
     this.registerListeners();
     await this.performInitialCheck();
     this.schedulePeriodicChecks();
-
-    this.started = true;
   }
 
   /**
@@ -81,7 +93,9 @@ export default class AppUpdater {
       this.setTooltipWithStatus('A new update is ready to install');
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
-      this.showUpdateReadyDialog(event.releaseName ?? event.version);
+      if (this.notificationsEnabled) {
+        this.showUpdateReadyDialog(event.releaseName ?? event.version);
+      }
     });
 
     autoUpdater.on('update-not-available', () => {
@@ -115,7 +129,7 @@ export default class AppUpdater {
   private async performInitialCheck() {
     try {
       logInfo('app updater', 'Checking for updates on application launch');
-      await autoUpdater.checkForUpdatesAndNotify();
+      await this.checkForUpdates();
     } catch (err) {
       logError('auto updater', 'Initial check failed', toError(err));
     }
@@ -128,7 +142,7 @@ export default class AppUpdater {
     const runScheduledCheck = async () => {
       try {
         logInfo('app updater', 'Checking for updates on a periodic schedule');
-        await autoUpdater.checkForUpdatesAndNotify();
+        await this.checkForUpdates();
       } catch (e) {
         logError('auto updater', 'Scheduled check failed', toError(e));
       }
@@ -140,6 +154,18 @@ export default class AppUpdater {
       await runScheduledCheck();
       setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
     }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+  }
+
+  /**
+   * Check and download updates, using electron-updater's native notification
+   * only when the user has opted in.
+   */
+  private async checkForUpdates() {
+    if (this.notificationsEnabled) {
+      return await autoUpdater.checkForUpdatesAndNotify();
+    }
+
+    return await autoUpdater.checkForUpdates();
   }
 
   /**

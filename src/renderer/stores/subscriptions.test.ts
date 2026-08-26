@@ -8,6 +8,9 @@ import useSettingsStore from './useSettingsStore';
 describe('renderer/stores/subscriptions.ts', () => {
   const setAutoLaunchSpy = vi.spyOn(comms, 'setAutoLaunch').mockImplementation(vi.fn());
   const setKeepWindowOnBlurSpy = vi.spyOn(comms, 'setKeepWindowOnBlur').mockImplementation(vi.fn());
+  const setShowUpdateNotificationsSpy = vi
+    .spyOn(comms, 'setShowUpdateNotifications')
+    .mockImplementation(vi.fn());
   const setUseUnreadActiveIconSpy = vi
     .spyOn(comms, 'setUseUnreadActiveIcon')
     .mockImplementation(vi.fn());
@@ -30,6 +33,9 @@ describe('renderer/stores/subscriptions.ts', () => {
     expect(setKeepWindowOnBlurSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().keepWindowOnBlur,
     );
+    expect(setShowUpdateNotificationsSpy).toHaveBeenCalledWith(
+      useSettingsStore.getState().showUpdateNotifications,
+    );
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().useUnreadActiveIcon,
     );
@@ -48,6 +54,9 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     useSettingsStore.getState().updateSetting('keepWindowOnBlur', true);
     expect(setKeepWindowOnBlurSpy).toHaveBeenCalledWith(true);
+
+    useSettingsStore.getState().updateSetting('showUpdateNotifications', false);
+    expect(setShowUpdateNotificationsSpy).toHaveBeenCalledWith(false);
 
     useSettingsStore.getState().updateSetting('useUnreadActiveIcon', false);
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(false);

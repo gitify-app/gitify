@@ -32,6 +32,7 @@ vi.mock('electron-updater', () => ({
       listeners[event].push(cb);
       return this;
     }),
+    checkForUpdates: vi.fn().mockResolvedValue(undefined),
     checkForUpdatesAndNotify: vi.fn().mockResolvedValue(undefined),
     quitAndInstall: vi.fn(),
   },
@@ -141,6 +142,18 @@ describe('main/updater.ts', () => {
       );
     });
 
+    it('reports a downloaded update in the menu without showing a dialog when notifications are disabled', async () => {
+      updater.setNotificationsEnabled(false);
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3' });
+
+      expect(dialog.showMessageBox).not.toHaveBeenCalled();
+      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(true);
+    });
+
     it('invokes quitAndInstall when user clicks Restart', async () => {
       vi.mocked(dialog.showMessageBox).mockResolvedValue({
         response: 0, // "Restart" button index
@@ -185,6 +198,38 @@ describe('main/updater.ts', () => {
         'Skipping updater since app is in development mode',
       );
       expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+    });
+
+    it('starts only once when settings updates arrive concurrently', async () => {
+      await Promise.all([updater.start(), updater.start()]);
+
+      expect(autoUpdater.checkForUpdatesAndNotify).toHaveBeenCalledTimes(1);
+    });
+
+    it('checks silently when update notifications are disabled', async () => {
+      updater.setNotificationsEnabled(false);
+
+      await updater.start();
+
+      expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
+      expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+    });
+
+    it('keeps silent update checks running on schedule when notifications are disabled', async () => {
+      vi.useFakeTimers();
+      try {
+        updater.setNotificationsEnabled(false);
+
+        await updater.start();
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
+
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(2);
+        expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+      } finally {
+        vi.useRealTimers();
+      }
     });
 
     it('handles checking-for-update', async () => {

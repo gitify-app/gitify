@@ -140,6 +140,7 @@ export interface SystemSettingsState {
   notificationVolume: Percentage;
   openAtStartup: boolean;
   keepWindowOnBlur: boolean;
+  showUpdateNotifications: boolean;
   /** Linux only. Runs under X11/XWayland so the popup can be anchored to the tray icon. */
   useX11Backend: boolean;
 }

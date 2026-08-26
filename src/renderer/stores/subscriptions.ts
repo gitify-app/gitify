@@ -8,6 +8,7 @@
 import {
   setAutoLaunch,
   setKeepWindowOnBlur,
+  setShowUpdateNotifications,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
   setUseX11Backend,
@@ -32,6 +33,7 @@ export function initializeStoreSubscriptions(): () => void {
   // ========================================================================
   setAutoLaunch(useSettingsStore.getState().openAtStartup);
   setKeepWindowOnBlur(useSettingsStore.getState().keepWindowOnBlur);
+  setShowUpdateNotifications(useSettingsStore.getState().showUpdateNotifications);
   setUseUnreadActiveIcon(useSettingsStore.getState().useUnreadActiveIcon);
   setUseAlternateIdleIcon(useSettingsStore.getState().useAlternateIdleIcon);
 
@@ -56,6 +58,15 @@ export function initializeStoreSubscriptions(): () => void {
     },
   );
   unsubscribers.push(unsubKeepWindowOnBlur);
+
+  // Automatic update notifications
+  const unsubShowUpdateNotifications = useSettingsStore.subscribe(
+    (state) => state.showUpdateNotifications,
+    (showUpdateNotifications) => {
+      setShowUpdateNotifications(showUpdateNotifications);
+    },
+  );
+  unsubscribers.push(unsubShowUpdateNotifications);
 
   // Linux X11 backend. Not applied on startup: the main process reads its own
   // marker file before the renderer exists, so mirroring it here would be

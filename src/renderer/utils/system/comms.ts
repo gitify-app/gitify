@@ -92,6 +92,15 @@ export function setKeepWindowOnBlur(value: boolean): void {
 }
 
 /**
+ * Enables or suppresses automatic update notifications.
+ *
+ * @param value - `true` to show update notifications, `false` to suppress them.
+ */
+export function setShowUpdateNotifications(value: boolean): void {
+  window.gitify.setShowUpdateNotifications(value);
+}
+
+/**
  * Persist whether Linux should run under the X11 backend.
  *
  * The Ozone platform is fixed while the app starts, so this only takes effect
