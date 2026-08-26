@@ -20,6 +20,7 @@ import { GiteaLoginWithPersonalAccessTokenRoute } from './gitea/LoginWithPersona
 import { GitHubLoginWithDeviceFlowRoute } from './github/LoginWithDeviceFlow';
 import { GitHubLoginWithOAuthAppRoute } from './github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './github/LoginWithPersonalAccessToken';
+import { GitLabLoginWithPersonalAccessTokenRoute } from './gitlab/LoginWithPersonalAccessToken';
 import { LoginRoute } from './Login';
 import { NotificationsRoute } from './Notifications';
 import { SettingsRoute } from './Settings';
@@ -95,6 +96,11 @@ const ROUTES: RouteCase[] = [
     name: 'login-bitbucket-personal-access-token',
     element: <BitbucketLoginWithPersonalAccessTokenRoute />,
     state: { initialEntries: ['/login/bitbucket/personal-access-token'] },
+  },
+  {
+    name: 'login-gitlab-personal-access-token',
+    element: <GitLabLoginWithPersonalAccessTokenRoute />,
+    state: { initialEntries: ['/login/gitlab/personal-access-token'] },
   },
 ];
 

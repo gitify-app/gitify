@@ -1,4 +1,4 @@
-import type { GitifyNotification, RawGitifyNotification } from '../../types';
+import type { GitifyNotification, RawGitifyNotification, SubjectType } from '../../types';
 
 import { getAdapter } from '../forges/registry';
 
@@ -71,13 +71,30 @@ export function formatProperCase(text: string) {
 }
 
 /**
+ * Labels for subject types whose camel-case split reads wrong. `GitLabTodo`
+ * would otherwise render as "Git Lab Todo", because the split fires inside the
+ * brand name.
+ */
+const SUBJECT_TYPE_LABELS: Partial<Record<SubjectType, string>> = {
+  GitLabTodo: 'GitLab To-Do',
+};
+
+/**
  * Return the formatted notification type for this notification.
  *
  * @param notification - The notification whose type to format.
  * @returns A human-readable type string (e.g. "Open Pull Request").
  */
 export function formatNotificationType(notification: RawGitifyNotification): string {
-  return formatForDisplay([notification.subject.state ?? '', notification.subject.type]);
+  const { state, type } = notification.subject;
+  const override = SUBJECT_TYPE_LABELS[type];
+
+  if (!override) {
+    return formatForDisplay([state ?? '', type]);
+  }
+
+  const prefix = formatForDisplay([state ?? '']);
+  return prefix ? `${prefix} ${override}` : override;
 }
 
 /**

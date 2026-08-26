@@ -13,6 +13,7 @@ Gitify is maintained by a small team. Each forge adapter has at least one design
 | ------ | -------------------------------------------------------------------------------------- | ----------------------------------- |
 | GitHub | [@setchy](https://github.com/setchy), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/github/` |
 | Gitea  | [@bircni](https://github.com/bircni), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/gitea/`  |
+| GitLab | [@afonsojramos](https://github.com/afonsojramos)                                       | `src/renderer/utils/forges/gitlab/` |
 
 ## Adding a new forge
 

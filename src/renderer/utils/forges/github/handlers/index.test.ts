@@ -24,6 +24,7 @@ describe('renderer/utils/notifications/handlers/index.ts', () => {
       CheckSuite: checkSuiteHandler,
       Commit: commitHandler,
       Discussion: discussionHandler,
+      GitLabTodo: defaultHandler,
       Issue: issueHandler,
       PullRequest: pullRequestHandler,
       Release: releaseHandler,

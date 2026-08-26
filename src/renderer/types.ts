@@ -62,7 +62,7 @@ export type AccountUUID = Branded<string, 'AccountUUID'>;
 export type KeyboardAcceleratorShortcut = Branded<string, 'KeyboardAcceleratorShortcut'>;
 
 /** Code hosting provider for an account. New forges register themselves here. */
-export type Forge = 'github' | 'gitea' | 'bitbucket';
+export type Forge = 'github' | 'gitea' | 'bitbucket' | 'gitlab';
 
 export interface Account {
   forge: Forge;
@@ -557,6 +557,7 @@ export type SubjectType =
   | 'CheckSuite'
   | 'Commit'
   | 'Discussion'
+  | 'GitLabTodo'
   | 'Issue'
   | 'PullRequest'
   | 'Release'

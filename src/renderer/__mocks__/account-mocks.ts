@@ -63,6 +63,15 @@ export const mockGiteaAccount: Account = {
   user: mockGitifyUser,
 };
 
+export const mockGitLabAccount: Account = {
+  forge: 'gitlab',
+  platform: 'GitLab Cloud',
+  method: 'Personal Access Token',
+  token: 'token-gitlab' as Token,
+  hostname: 'gitlab.com' as Hostname,
+  user: mockGitifyUser,
+};
+
 export const mockBitbucketAccount: Account = {
   forge: 'bitbucket',
   platform: 'Bitbucket Cloud',
