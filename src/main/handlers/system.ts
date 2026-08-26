@@ -6,6 +6,7 @@ import { logInfo } from '../../shared/logger';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
 import { applyKeepWindowOnBlur, applyWindowVibrancy } from '../lifecycle/window';
+import { setX11Backend } from '../ozone';
 import { isDevMode } from '../utils';
 
 /**
@@ -90,6 +91,14 @@ export function registerSystemHandlers(mb: Menubar): void {
    */
   onMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, (_, value: boolean) => {
     applyKeepWindowOnBlur(mb, value);
+  });
+
+  /**
+   * Persist the Linux X11 backend preference. Only read during startup, so the
+   * change applies on the next launch.
+   */
+  onMainEvent(EVENTS.UPDATE_USE_X11_BACKEND, (_, value: boolean) => {
+    setX11Backend(value);
   });
 
   /**

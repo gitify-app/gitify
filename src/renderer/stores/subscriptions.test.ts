@@ -14,6 +14,7 @@ describe('renderer/stores/subscriptions.ts', () => {
   const setUseAlternateIdleIconSpy = vi
     .spyOn(comms, 'setUseAlternateIdleIcon')
     .mockImplementation(vi.fn());
+  const setUseX11BackendSpy = vi.spyOn(comms, 'setUseX11Backend').mockImplementation(vi.fn());
 
   let cleanup: (() => void) | null = null;
 
@@ -53,6 +54,9 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     useSettingsStore.getState().updateSetting('useAlternateIdleIcon', true);
     expect(setUseAlternateIdleIconSpy).toHaveBeenCalledWith(true);
+
+    useSettingsStore.getState().updateSetting('useX11Backend', true);
+    expect(setUseX11BackendSpy).toHaveBeenCalledWith(true);
   });
 
   it('applies zoom level when zoom percentage changes', () => {

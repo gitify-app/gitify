@@ -63,6 +63,7 @@ class MockNotification {
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
+  setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
 }
@@ -97,6 +98,14 @@ describe('preload/index', () => {
       isOnline: true,
       notificationsCount: -1,
     });
+  });
+
+  it('setUseX11Backend sends the preference to main', async () => {
+    const api = getExposedApi();
+
+    api.setUseX11Backend(true);
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_USE_X11_BACKEND, true);
   });
 
   it('openExternalLink sends event with payload', async () => {
