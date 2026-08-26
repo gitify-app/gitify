@@ -12,6 +12,7 @@ import type {
   RefreshAccountData,
 } from '../types';
 
+import { rendererLogWarn, toError } from '../../core/logger';
 import { createNotificationHandler } from '../github/handlers';
 import {
   fetchGitLabAuthenticatedUser,
@@ -39,7 +40,11 @@ const capabilities: ForgeCapabilities = {
 };
 
 async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
-  const user = await fetchGitLabAuthenticatedUser(account);
+  const [user, version, scopes] = await Promise.all([
+    fetchGitLabAuthenticatedUser(account),
+    fetchVersionOrUndefined(account),
+    fetchScopesOrUndefined(account),
+  ]);
 
   return {
     user: {
@@ -48,21 +53,25 @@ async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountD
       name: user.name ?? null,
       avatar: user.avatar_url ?? '',
     },
-    version: await fetchVersionOrUndefined(account),
-    scopes: await fetchScopesOrUndefined(account),
+    version,
+    scopes,
   };
 }
 
 /**
  * Instance version and token scopes are supplementary: a token without the
- * breadth to read them still works for notifications, so a failure here must
- * not fail the login.
+ * breadth to read them still works for notifications, so a failure here is
+ * logged and dropped rather than failing the login.
  */
 async function fetchVersionOrUndefined(account: Account): Promise<string | undefined> {
   try {
     const { version } = await fetchGitLabVersion(account);
     return version;
-  } catch {
+  } catch (err) {
+    rendererLogWarn(
+      'gitlab',
+      `Could not read instance version for ${account.hostname}: ${toError(err).message}`,
+    );
     return undefined;
   }
 }
@@ -71,7 +80,11 @@ async function fetchScopesOrUndefined(account: Account): Promise<string[] | unde
   try {
     const { scopes } = await fetchGitLabTokenMetadata(account);
     return scopes;
-  } catch {
+  } catch (err) {
+    rendererLogWarn(
+      'gitlab',
+      `Could not read token scopes for ${account.hostname}: ${toError(err).message}`,
+    );
     return undefined;
   }
 }
