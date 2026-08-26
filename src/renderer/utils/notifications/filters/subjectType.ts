@@ -21,6 +21,9 @@ const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
   Discussion: {
     title: 'Discussion',
   },
+  GitLabTodo: {
+    title: 'GitLab To-Do',
+  },
   Issue: {
     title: 'Issue',
   },

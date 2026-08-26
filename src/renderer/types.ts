@@ -557,6 +557,7 @@ export type SubjectType =
   | 'CheckSuite'
   | 'Commit'
   | 'Discussion'
+  | 'GitLabTodo'
   | 'Issue'
   | 'PullRequest'
   | 'Release'
