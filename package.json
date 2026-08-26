@@ -99,7 +99,7 @@
     "@primer/octicons-react": "19.33.0",
     "@primer/react": "38.36.0",
     "@tailwindcss/vite": "4.3.3",
-    "@tanstack/react-query": "5.101.4",
+    "@tanstack/react-query": "5.102.1",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.6",
