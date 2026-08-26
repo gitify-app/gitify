@@ -28,11 +28,13 @@ const GITLAB_DOCS_URL = 'https://docs.gitlab.com/api/todos/' as Link;
 const GITLAB_CLOUD_HOSTNAME = 'gitlab.com' as Hostname;
 
 /**
- * GitLab's only to-do state transition is "mark as done", so Gitify exposes it
- * as the done action and aliases mark-as-read onto the same call.
+ * GitLab offers exactly one to-do transition (`mark_as_done`), so there is no
+ * distinct done state to expose alongside mark-as-read. Reporting `false` keeps
+ * the row to a single button; the orchestrator routes mark-as-done through the
+ * mark-as-read fallback, which lands on the same endpoint.
  */
 const capabilities: ForgeCapabilities = {
-  markAsDone: () => true,
+  markAsDone: () => false,
   unsubscribeThread: () => false,
 };
 
@@ -122,10 +124,15 @@ export const gitlabAdapter: ForgeAdapter = {
   fetchAuthenticatedUser,
   listNotifications,
 
-  // GitLab exposes a single state transition for a to-do item, so both verbs
-  // resolve to the same call rather than one of them throwing.
   markThreadAsRead: (account, threadId) => markGitLabTodoAsDone(account, threadId),
-  markThreadAsDone: (account, threadId) => markGitLabTodoAsDone(account, threadId),
+  // Capability `markAsDone(account)` returns false, so the orchestrator falls
+  // back to mark-as-read before reaching here. Throwing surfaces any caller
+  // that bypasses the capability check.
+  markThreadAsDone: () => {
+    throw new Error(
+      'Mark-as-done is not supported for GitLab accounts; check capabilities.markAsDone before calling.',
+    );
+  },
   unsubscribeThread: () => {
     throw new Error(
       'Ignoring thread subscriptions is not supported for GitLab accounts; check capabilities.unsubscribeThread before calling.',

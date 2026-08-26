@@ -24,8 +24,8 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
       expect(gitlabAdapter.icon).toBe(GitLabIcon);
     });
 
-    it('supports mark-as-done because that is GitLab’s only transition', () => {
-      expect(gitlabAdapter.capabilities.markAsDone(mockGitLabAccount)).toBe(true);
+    it('reports no distinct done state — GitLab has one transition', () => {
+      expect(gitlabAdapter.capabilities.markAsDone(mockGitLabAccount)).toBe(false);
       expect(gitlabAdapter.capabilities.unsubscribeThread(mockGitLabAccount)).toBe(false);
     });
 
@@ -229,12 +229,12 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
       expect(spy).toHaveBeenCalledWith(mockGitLabAccount, '12');
     });
 
-    it('markThreadAsDone hits the same endpoint — GitLab has one transition', async () => {
-      const spy = vi.spyOn(client, 'markGitLabTodoAsDone').mockResolvedValue(undefined);
-
-      await gitlabAdapter.markThreadAsDone(mockGitLabAccount, '13');
-
-      expect(spy).toHaveBeenCalledWith(mockGitLabAccount, '13');
+    it('markThreadAsDone throws — the capability gate is the contract', () => {
+      // The orchestrator falls back to mark-as-read for forges reporting
+      // markAsDone: false, which lands on the same GitLab endpoint anyway.
+      expect(() => gitlabAdapter.markThreadAsDone(mockGitLabAccount, '13')).toThrow(
+        /check capabilities.markAsDone/,
+      );
     });
 
     it('unsubscribeThread throws because the capability is off', () => {
