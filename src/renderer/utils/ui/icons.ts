@@ -13,6 +13,7 @@ import {
 } from '@primer/octicons-react';
 
 import { BitbucketIcon } from '../../components/icons/BitbucketIcon';
+import { GitLabIcon } from '../../components/icons/GitLabIcon';
 
 import { IconColor, type PullRequestApprovalIcon, type UserType } from '../../types';
 import type { PlatformType } from '../auth/types';
@@ -67,6 +68,9 @@ export function getPlatformIcon(platform: PlatformType): FC<OcticonProps> | null
       return BitbucketIcon;
     case 'Gitea':
       return ServerIcon;
+    case 'GitLab Cloud':
+    case 'GitLab Self-Managed':
+      return GitLabIcon;
     case 'GitHub Enterprise Server':
       return ServerIcon;
     case 'GitHub Enterprise Cloud with Data Residency':

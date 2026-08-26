@@ -7,6 +7,8 @@ export type PlatformType =
   | 'GitHub Cloud'
   | 'GitHub Enterprise Server'
   | 'GitHub Enterprise Cloud with Data Residency'
+  | 'GitLab Cloud'
+  | 'GitLab Self-Managed'
   | 'Gitea';
 
 export interface LoginOAuthWebOptions {
