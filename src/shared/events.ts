@@ -18,6 +18,7 @@ export const EVENTS = {
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
   UPDATE_KEEP_WINDOW_ON_BLUR: `${P}update-keep-window-on-blur`,
   UPDATE_SHOW_UPDATE_NOTIFICATIONS: `${P}update-show-update-notifications`,
+  UPDATE_USE_X11_BACKEND: `${P}update-use-x11-backend`,
   SET_WINDOW_VIBRANCY: `${P}set-window-vibrancy`,
   SET_NATIVE_THEME: `${P}set-native-theme`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
@@ -113,6 +114,10 @@ export type EventContracts = AssertEventCoverage<{
     response: undefined;
   };
   [EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS]: {
+    request: boolean;
+    response: undefined;
+  };
+  [EVENTS.UPDATE_USE_X11_BACKEND]: {
     request: boolean;
     response: undefined;
   };

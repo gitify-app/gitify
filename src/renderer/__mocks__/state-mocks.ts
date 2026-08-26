@@ -64,6 +64,7 @@ const mockSystemSettings: SystemSettingsState = {
   openAtStartup: false,
   keepWindowOnBlur: false,
   showUpdateNotifications: true,
+  useX11Backend: false,
 };
 
 export const mockSettings: SettingsState = {

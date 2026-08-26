@@ -47,6 +47,34 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
+  describe('X11 backend checkbox', () => {
+    // `window.gitify` is rebuilt in a global `beforeEach`, so the mock has to
+    // be read inside each test rather than captured at describe scope.
+    const isLinuxMock = () => window.gitify.platform.isLinux as unknown as ReturnType<typeof vi.fn>;
+
+    it('is hidden off Linux', async () => {
+      isLinuxMock().mockReturnValue(false);
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />);
+      });
+
+      expect(screen.queryByTestId('checkbox-useX11Backend')).not.toBeInTheDocument();
+    });
+
+    it('is shown and toggles on Linux', async () => {
+      isLinuxMock().mockReturnValue(true);
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />);
+      });
+
+      await userEvent.click(screen.getByTestId('checkbox-useX11Backend'));
+
+      expect(toggleSettingSpy).toHaveBeenCalledWith('useX11Backend');
+    });
+  });
+
   it('should reset global shortcut to default when customized', async () => {
     renderWithProviders(<SystemSettings />, {
       settings: {

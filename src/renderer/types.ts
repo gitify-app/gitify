@@ -141,6 +141,8 @@ export interface SystemSettingsState {
   openAtStartup: boolean;
   keepWindowOnBlur: boolean;
   showUpdateNotifications: boolean;
+  /** Linux only. Runs under X11/XWayland so the popup can be anchored to the tray icon. */
+  useX11Backend: boolean;
 }
 
 /** Values are lower-cased because they double as the root `data-theme` attribute. */

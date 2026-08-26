@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { page } from 'vitest/browser';
+import { page } from 'vite-plus/test/browser';
 
 import { renderRoute, type VisualRenderOptions } from '../__helpers__/visual-utils';
 import {

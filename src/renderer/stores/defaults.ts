@@ -88,6 +88,7 @@ const DEFAULT_SYSTEM_SETTINGS: SystemSettingsState = {
   openAtStartup: false,
   keepWindowOnBlur: false,
   showUpdateNotifications: true,
+  useX11Backend: false,
 };
 
 /**

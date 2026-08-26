@@ -35,11 +35,6 @@
       "allowedVersions": "<43.3.0"
     },
     {
-      "description": "Group vite-plus with vitest and @vitest/coverage-v8 so their versions always stay in sync. vite-plus bundles vitest as a direct dep; a mismatch causes SnapshotClient errors at runtime.",
-      "matchPackageNames": ["vite-plus", "vitest", "@vitest/coverage-v8"],
-      "groupName": "vite-plus / vitest"
-    },
-    {
       "description": "Group the playwright package with the Playwright container image that the visual regression job runs in. The image ships the browser build that exact release expects, so a mismatch fails to launch Chromium and would strand the committed screenshot baselines.",
       "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"],
       "groupName": "playwright"

@@ -18,8 +18,13 @@ import {
   onFirstRunMaybe,
 } from './lifecycle';
 import MenuBuilder from './menu';
+import { applyOzonePlatform } from './ozone';
 import AppUpdater from './updater';
 import { isDevMode } from './utils';
+
+// Runs at module load: the Ozone platform is read during app startup, so this
+// has to happen before `app.whenReady()` below.
+applyOzonePlatform();
 
 log.initialize();
 

@@ -17,8 +17,13 @@
         { "type": "ci", "section": "🤖 Continuous Integration" },
         { "type": "test", "section": "🧪 Testing", "hidden": true },
         { "type": "style", "section": "🎨 Styles", "hidden": true },
-        { "type": "chore(deps-core)", "section": "📦 Dependency Updates (Core)" },
-        { "type": "chore(deps)", "section": "📦 Dependency Updates (Other)", "hidden": true },
+        { "type": "chore", "scope": "deps-core", "section": "📦 Dependency Updates (Core)" },
+        {
+          "type": "chore",
+          "scope": "deps",
+          "section": "📦 Dependency Updates (Other)",
+          "hidden": true
+        },
         { "type": "chore", "section": "🧹 Chore", "hidden": true }
       ]
     }

@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import { playwright } from '@vitest/browser-playwright';
-import { defaultExclude, defineConfig } from 'vitest/config';
+import { defaultExclude, defineConfig } from 'vite-plus';
+import { playwright } from 'vite-plus/test/browser-playwright';
 
 // Set a stable timezone before any workers start so that Intl (used by
 // @primer/react's RelativeTime component) always formats dates in UTC,

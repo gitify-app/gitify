@@ -9,7 +9,7 @@
     "jsx": "react-jsx",
     "rootDir": "./src",
     "outDir": "./build/",
-    "types": ["vitest/globals", "vite/client"],
+    "types": ["vite-plus/test/globals", "vite/client"],
 
     "strict": true,
     "esModuleInterop": true,

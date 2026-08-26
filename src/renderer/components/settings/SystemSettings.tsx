@@ -52,6 +52,7 @@ export const SystemSettings: FC = () => {
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
   const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
+  const useX11Backend = useSettingsStore((s) => s.useX11Backend);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
@@ -356,6 +357,23 @@ export const SystemSettings: FC = () => {
               checked and shown in the menu bar.
             </Text>
           }
+        />
+
+        <Checkbox
+          checked={useX11Backend}
+          label="Use X11 backend (restart required)"
+          name="useX11Backend"
+          onChange={() => toggleSetting('useX11Backend')}
+          tooltip={
+            <Text>
+              Run under X11/XWayland so the window opens next to the tray icon. On Wayland the
+              compositor decides where windows appear, so {APPLICATION.NAME} opens in the middle of
+              the screen. Enabling this also disables Vulkan, which crashes under X11 on some
+              drivers, and may soften text on displays using fractional scaling. Takes effect after
+              restarting {APPLICATION.NAME}.
+            </Text>
+          }
+          visible={window.gitify.platform.isLinux()}
         />
       </Stack>
     </fieldset>

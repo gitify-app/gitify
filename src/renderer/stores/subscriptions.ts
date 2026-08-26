@@ -11,6 +11,7 @@ import {
   setShowUpdateNotifications,
   setUseAlternateIdleIcon,
   setUseUnreadActiveIcon,
+  setUseX11Backend,
 } from '../utils/system/comms';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
 import { useSettingsStore } from './';
@@ -66,6 +67,17 @@ export function initializeStoreSubscriptions(): () => void {
     },
   );
   unsubscribers.push(unsubShowUpdateNotifications);
+
+  // Linux X11 backend. Not applied on startup: the main process reads its own
+  // marker file before the renderer exists, so mirroring it here would be
+  // redundant. Only the change needs forwarding.
+  const unsubUseX11Backend = useSettingsStore.subscribe(
+    (state) => state.useX11Backend,
+    (useX11Backend) => {
+      setUseX11Backend(useX11Backend);
+    },
+  );
+  unsubscribers.push(unsubUseX11Backend);
 
   // Tray icon settings (unread active icon)
   const unsubUnreadActive = useSettingsStore.subscribe(
