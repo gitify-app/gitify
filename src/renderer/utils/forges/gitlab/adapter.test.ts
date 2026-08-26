@@ -201,6 +201,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
           id: 99,
           action_name: 'assigned',
           target_type: 'Issue',
+          target: null,
           target_url: 'https://gitlab.com/o/r/-/issues/1',
           body: 'Issue title',
           state: 'pending',

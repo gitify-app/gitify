@@ -21,16 +21,15 @@ function mockTodo(overrides: Partial<GitLabTodo> = {}): GitLabTodo {
       description: '',
     },
     author: {
-      id: 2846743,
-      username: 'afonsojramos',
-      name: 'Afonso Jorge Ramos',
-      avatar_url: 'https://gitlab.com/uploads/-/system/user/avatar/2846743/avatar.png',
-      web_url: 'https://gitlab.com/afonsojramos',
+      id: 111,
+      username: 'triggering-user',
+      name: 'Triggering User',
+      avatar_url: 'https://gitlab.com/avatar/triggering.png',
+      web_url: 'https://gitlab.com/triggering-user',
     },
     action_name: 'assigned',
     target_type: 'Issue',
     target: {
-      id: 199190353,
       iid: 1,
       title: 'gitify-scope-scratch',
       state: 'opened',
@@ -115,7 +114,7 @@ describe('renderer/utils/forges/gitlab/transform.ts', () => {
 
     it('falls back to the body when the target has no title', () => {
       const [result] = transformGitLabTodos(
-        [mockTodo({ target: undefined, body: 'fallback title' })],
+        [mockTodo({ target: null, body: 'fallback title' })],
         mockGitLabAccount,
       );
 
@@ -138,17 +137,21 @@ describe('renderer/utils/forges/gitlab/transform.ts', () => {
         expect(result.subject.type).toBe(expected);
       });
 
-      it.each(['Epic', 'DesignManagement::Design', 'Vulnerability', 'WikiPage::Meta'] as const)(
-        'falls back to GitLabTodo for %s',
-        (targetType) => {
-          const [result] = transformGitLabTodos(
-            [mockTodo({ target_type: targetType })],
-            mockGitLabAccount,
-          );
+      it.each([
+        'Epic',
+        'DesignManagement::Design',
+        'Vulnerability',
+        'WikiPage::Meta',
+        // A target type GitLab has not shipped yet must not throw.
+        'SomethingNew',
+      ] as const)('falls back to GitLabTodo for %s', (targetType) => {
+        const [result] = transformGitLabTodos(
+          [mockTodo({ target_type: targetType })],
+          mockGitLabAccount,
+        );
 
-          expect(result.subject.type).toBe('GitLabTodo');
-        },
-      );
+        expect(result.subject.type).toBe('GitLabTodo');
+      });
     });
 
     describe('reason mapping', () => {
@@ -162,6 +165,8 @@ describe('renderer/utils/forges/gitlab/transform.ts', () => {
         ['unmergeable', 'state_change'],
         ['merge_train_removed', 'state_change'],
         ['member_access_requested', 'member_feature_requested'],
+        ['review_requested', 'review_requested'],
+        ['review_submitted', 'comment'],
       ] as const)('maps %s to %s', (action, expected) => {
         const [result] = transformGitLabTodos(
           [mockTodo({ action_name: action })],
@@ -174,7 +179,7 @@ describe('renderer/utils/forges/gitlab/transform.ts', () => {
 
       it('falls back to subscribed for an unknown action', () => {
         const [result] = transformGitLabTodos(
-          [mockTodo({ action_name: 'something_new' as never })],
+          [mockTodo({ action_name: 'okr_checkin_requested' })],
           mockGitLabAccount,
         );
 
@@ -215,6 +220,42 @@ describe('renderer/utils/forges/gitlab/transform.ts', () => {
         expect(result.subject.state).toBe('DRAFT');
       });
 
+      it('reports a closed draft merge request as CLOSED, not DRAFT', () => {
+        // GitLab derives `draft` from the `Draft:` title prefix, which survives
+        // closing, so a closed draft still arrives with draft: true.
+        const [result] = transformGitLabTodos(
+          [
+            mockTodo({
+              target_type: 'MergeRequest',
+              target: {
+                iid: 5,
+                title: 'Draft: mr',
+                state: 'closed',
+                draft: true,
+                work_in_progress: true,
+              },
+            }),
+          ],
+          mockGitLabAccount,
+        );
+
+        expect(result.subject.state).toBe('CLOSED');
+      });
+
+      it('reports a merged merge request as MERGED even if draft lingers', () => {
+        const [result] = transformGitLabTodos(
+          [
+            mockTodo({
+              target_type: 'MergeRequest',
+              target: { iid: 5, title: 'mr', state: 'merged', draft: true },
+            }),
+          ],
+          mockGitLabAccount,
+        );
+
+        expect(result.subject.state).toBe('MERGED');
+      });
+
       it('ignores merged state for issues', () => {
         const [result] = transformGitLabTodos(
           [mockTodo({ target: { iid: 1, title: 'i', state: 'merged' } })],
@@ -226,22 +267,47 @@ describe('renderer/utils/forges/gitlab/transform.ts', () => {
     });
 
     describe('user mapping', () => {
-      it('uses the target author as the notification user', () => {
+      it('shows the to-do author as the actor and the target author as creator', () => {
+        // These are different people in every case except self-assignment,
+        // which is why the fixture uses two distinct users.
         const [result] = transformGitLabTodos([mockTodo()], mockGitLabAccount);
 
-        expect(result.subject.user?.login).toBe('afonsojramos');
+        expect(result.subject.user?.login).toBe('triggering-user');
+        expect(result.subject.user?.htmlUrl).toBe('https://gitlab.com/triggering-user');
         expect(result.subject.author?.login).toBe('afonsojramos');
-        expect(result.subject.user?.htmlUrl).toBe('https://gitlab.com/afonsojramos');
       });
 
-      it('omits the user when the target has no author', () => {
+      it('omits the creator when the target has no author', () => {
         const [result] = transformGitLabTodos(
           [mockTodo({ target: { iid: 1, title: 't', state: 'opened' } })],
           mockGitLabAccount,
         );
 
-        expect(result.subject.user).toBeUndefined();
         expect(result.subject.author).toBeUndefined();
+        expect(result.subject.user?.login).toBe('triggering-user');
+      });
+
+      it('omits the actor when the to-do has no author', () => {
+        const [result] = transformGitLabTodos([mockTodo({ author: undefined })], mockGitLabAccount);
+
+        expect(result.subject.user).toBeUndefined();
+      });
+    });
+
+    describe('deep link fallback', () => {
+      it('falls back to the project url when target_url is empty', () => {
+        const [result] = transformGitLabTodos([mockTodo({ target_url: '' })], mockGitLabAccount);
+
+        expect(result.subject.htmlUrl).toBe('https://gitlab.com/afonsojramos/Fonts');
+      });
+
+      it('falls back to the hostname when there is no project either', () => {
+        const [result] = transformGitLabTodos(
+          [mockTodo({ target_url: '', project: undefined })],
+          mockGitLabAccount,
+        );
+
+        expect(result.subject.htmlUrl).toBe('https://gitlab.com');
       });
     });
   });

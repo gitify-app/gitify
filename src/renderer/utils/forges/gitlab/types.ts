@@ -7,11 +7,11 @@
  */
 
 /**
- * Trigger that created the to-do item.
+ * Triggers that created the to-do item and that Gitify maps explicitly.
  *
  * @see https://docs.gitlab.com/api/todos/#list-all-to-do-items
  */
-export type GitLabTodoActionName =
+export type KnownGitLabTodoActionName =
   | 'assigned'
   | 'mentioned'
   | 'build_failed'
@@ -20,13 +20,18 @@ export type GitLabTodoActionName =
   | 'unmergeable'
   | 'directly_addressed'
   | 'merge_train_removed'
-  | 'member_access_requested';
+  | 'member_access_requested'
+  | 'review_requested'
+  | 'review_submitted';
 
 /**
- * Type of the object a to-do item points at. GitLab keeps adding to this list,
- * so consumers must treat unknown values as a fallback rather than exhaustive.
+ * GitLab keeps adding triggers, so the wire value stays open. The known set is
+ * what the transform maps; anything else reaches the fallback at runtime.
  */
-export type GitLabTodoTargetType =
+export type GitLabTodoActionName = KnownGitLabTodoActionName | (string & {});
+
+/** Target types Gitify maps onto one of its own subject types. */
+export type KnownGitLabTodoTargetType =
   | 'Issue'
   | 'MergeRequest'
   | 'Commit'
@@ -37,6 +42,12 @@ export type GitLabTodoTargetType =
   | 'Namespace'
   | 'Vulnerability'
   | 'WikiPage::Meta';
+
+/**
+ * Type of the object a to-do item points at. Left open for the same reason as
+ * the action name: GitLab keeps adding to this list.
+ */
+export type GitLabTodoTargetType = KnownGitLabTodoTargetType | (string & {});
 
 /** GitLab to-do items are pending until explicitly marked done; there is no read/unread axis. */
 export type GitLabTodoState = 'pending' | 'done';
@@ -73,14 +84,17 @@ export interface GitLabTodoProject {
  * renders and leaves the rest optional.
  */
 export interface GitLabTodoTarget {
-  id?: number;
   iid?: number;
   title?: string;
-  state?: string;
+  state?: GitLabTodoTargetState;
   web_url?: string;
   user_notes_count?: number;
+  /**
+   * Present on issue and merge-request targets. Commit targets carry
+   * `author_name`/`author_email` strings instead and so resolve to no user.
+   */
   author?: GitLabUser;
-  labels?: string[];
+  /** Merge-request only; GitLab derives both from the `Draft:` title prefix. */
   draft?: boolean;
   work_in_progress?: boolean;
   /** Commit targets are keyed by SHA rather than iid. */
@@ -89,13 +103,19 @@ export interface GitLabTodoTarget {
   updated_at?: string;
 }
 
+/**
+ * Lifecycle state shared by issue and merge-request targets. `merged` only
+ * occurs on merge requests.
+ */
+export type GitLabTodoTargetState = 'opened' | 'closed' | 'merged' | 'locked';
+
 export interface GitLabTodo {
   id: number;
   project?: GitLabTodoProject;
   author?: GitLabUser;
   action_name: GitLabTodoActionName;
   target_type: GitLabTodoTargetType;
-  target?: GitLabTodoTarget | null;
+  target: GitLabTodoTarget | null;
   target_url: string;
   body: string;
   state: GitLabTodoState;
