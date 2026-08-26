@@ -2,6 +2,7 @@ import {
   mockBitbucketAccount,
   mockGiteaAccount,
   mockGitHubCloudAccount,
+  mockGitLabAccount,
 } from '../../__mocks__/account-mocks';
 
 import type { Account, Forge } from '../../types';
@@ -22,10 +23,15 @@ describe('renderer/utils/forges/registry.ts', () => {
       expect(getAdapter(mockBitbucketAccount).id).toBe('bitbucket');
     });
 
+    it('returns the GitLab adapter for gitlab accounts', () => {
+      expect(getAdapter(mockGitLabAccount).id).toBe('gitlab');
+    });
+
     it('returns the registered adapter by forge id', () => {
       expect(getAdapter('github').id).toBe('github');
       expect(getAdapter('gitea').id).toBe('gitea');
       expect(getAdapter('bitbucket').id).toBe('bitbucket');
+      expect(getAdapter('gitlab').id).toBe('gitlab');
     });
 
     it('throws for an unknown forge on an account', () => {
@@ -46,6 +52,7 @@ describe('renderer/utils/forges/registry.ts', () => {
       expect(isKnownForge('github')).toBe(true);
       expect(isKnownForge('gitea')).toBe(true);
       expect(isKnownForge('bitbucket')).toBe(true);
+      expect(isKnownForge('gitlab')).toBe(true);
     });
 
     it('rejects nullish, casing mismatch, empty, and stranger values', () => {
@@ -61,11 +68,11 @@ describe('renderer/utils/forges/registry.ts', () => {
   describe('listAdapters / KNOWN_FORGES', () => {
     it('returns every registered adapter', () => {
       const ids = listAdapters().map((a) => a.id);
-      expect(ids).toEqual(expect.arrayContaining(['github', 'gitea', 'bitbucket']));
+      expect(ids).toEqual(expect.arrayContaining(['github', 'gitea', 'bitbucket', 'gitlab']));
     });
 
     it('every Forge value has a registered adapter (exhaustive)', () => {
-      const forges: Forge[] = ['github', 'gitea', 'bitbucket'];
+      const forges: Forge[] = ['github', 'gitea', 'bitbucket', 'gitlab'];
       for (const id of forges) {
         expect(KNOWN_FORGES.has(id)).toBe(true);
         expect(() => getAdapter(id)).not.toThrow();
