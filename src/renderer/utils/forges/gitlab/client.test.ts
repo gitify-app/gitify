@@ -111,6 +111,20 @@ describe('renderer/utils/forges/gitlab/client.ts', () => {
       expect(fetchMock()).toHaveBeenCalledTimes(2);
     });
 
+    it('stops after the page cap rather than walking an unbounded done list', async () => {
+      // GitLab never expires completed to-do items, so the walk must be bounded.
+      // A fresh Response per call: a body can only be consumed once.
+      const fullPage = Array.from({ length: 100 }, (_, i) => ({ id: i }));
+      fetchMock().mockImplementation(() => Promise.resolve(jsonResponse(fullPage)));
+
+      useSettingsStore.setState({ fetchAllNotifications: true, fetchReadNotifications: false });
+
+      const result = await listGitLabTodos(mockGitLabAccount);
+
+      expect(fetchMock()).toHaveBeenCalledTimes(10);
+      expect(result).toHaveLength(1000);
+    });
+
     it('throws on a non-ok status without echoing the response body', async () => {
       fetchMock().mockResolvedValue(
         new Response('PRIVATE-TOKEN: leaked-pat', {

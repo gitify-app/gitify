@@ -10,9 +10,17 @@ import type {
 } from './types';
 
 import { isValidHostname } from '../../auth/utils';
+import { rendererLogWarn } from '../../core/logger';
 import { decryptValue } from '../../system/comms';
 
 const PAGE_SIZE = 100;
+
+/**
+ * Upper bound on pages walked per state. GitLab never expires completed to-do
+ * items, so a long-lived account's `done` list grows without limit and an
+ * unbounded walk would stall the fetch on every poll.
+ */
+const MAX_PAGES = 10;
 
 export function getGitLabApiBaseUrl(hostname: Hostname): URL {
   if (!isValidHostname(hostname)) {
@@ -76,9 +84,8 @@ async function listTodosForState(account: Account, state: GitLabTodoState): Prom
   }
 
   const all: GitLabTodo[] = [];
-  let page = 1;
 
-  while (true) {
+  for (let page = 1; page <= MAX_PAGES; page += 1) {
     params.set('page', String(page));
     const batch = await gitlabRequest<GitLabTodo[]>(account, `todos?${params.toString()}`);
     if (!batch.length) {
@@ -88,7 +95,12 @@ async function listTodosForState(account: Account, state: GitLabTodoState): Prom
     if (batch.length < PAGE_SIZE) {
       break;
     }
-    page += 1;
+    if (page === MAX_PAGES) {
+      rendererLogWarn(
+        'listGitLabTodos',
+        `Stopped at ${String(MAX_PAGES * PAGE_SIZE)} ${state} to-do items for ${account.hostname}; older items were not fetched.`,
+      );
+    }
   }
 
   return all;
