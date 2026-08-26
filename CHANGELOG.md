@@ -1,5 +1,24 @@
 # Changelog
 
+## [7.6.0](https://github.com/gitify-app/gitify/compare/v7.5.0...v7.6.0) (2026-08-26)
+
+
+### 🚀 Features
+
+* **linux:** add opt-in X11 backend for tray-anchored positioning ([#3218](https://github.com/gitify-app/gitify/issues/3218)) ([d7df927](https://github.com/gitify-app/gitify/commit/d7df92723a68c029b374d575f08986d7a00127db))
+* **updater:** add setting to opt-out of update notifications ([#3201](https://github.com/gitify-app/gitify/issues/3201)) ([54cf67a](https://github.com/gitify-app/gitify/commit/54cf67a1659f0899d9226e8e2062ddb5dfd56978))
+
+
+### 📚 Documentation
+
+* Update CONTRIBUTING.md ([d0a462b](https://github.com/gitify-app/gitify/commit/d0a462b9b0e4b869c93a5ece06ed2d95cfc8a720))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @octokit/request to v10.0.15 ([#3223](https://github.com/gitify-app/gitify/issues/3223)) ([7c74375](https://github.com/gitify-app/gitify/commit/7c74375ecbbaa67c8f619bb6193d46e9f0a8bdfe))
+* **deps-core:** update @primer/react to v38.36.0 ([#3219](https://github.com/gitify-app/gitify/issues/3219)) ([ec10db1](https://github.com/gitify-app/gitify/commit/ec10db1ac999a4a3d8c5ee9040601557fc69f5ba))
+
 ## [7.5.0](https://github.com/gitify-app/gitify/compare/v7.4.0...v7.5.0) (2026-08-22)
 
 
