@@ -1,5 +1,36 @@
 # Changelog
 
+## [7.7.0](https://github.com/gitify-app/gitify/compare/v7.6.0...v7.7.0) (2026-08-26)
+
+
+### 🚀 Features
+
+* **forge:** add GitLab support ([#3225](https://github.com/gitify-app/gitify/issues/3225)) ([6711eb7](https://github.com/gitify-app/gitify/commit/6711eb71d6986cea6ac7f9e6363ca2d74e6ff081))
+* **gitlab:** add brand icon and platform types ([c86e798](https://github.com/gitify-app/gitify/commit/c86e798a9061de363267b5a73a543b7c7ab36f46))
+* **gitlab:** add forge adapter backed by the to-do API ([b917ac6](https://github.com/gitify-app/gitify/commit/b917ac63d3ad4307179980412bcafd434cb9f7a2))
+* **gitlab:** add GitLabTodo subject type ([cb66678](https://github.com/gitify-app/gitify/commit/cb66678ee7a43ef1612eba4f5556a26c3b876654))
+* **gitlab:** add personal access token login route ([fdefd7b](https://github.com/gitify-app/gitify/commit/fdefd7b3fa8f66ed7137209fcb66d4e65a4b8011))
+
+
+### 🐛 Bug Fixes
+
+* **deps:** declare Vitest test dependencies ([e34b6d8](https://github.com/gitify-app/gitify/commit/e34b6d87f8870ad08ad9ca87b594d17386142fad))
+* **gitlab:** bound to-do pagination ([8c2fbe5](https://github.com/gitify-app/gitify/commit/8c2fbe50f559ed594726867999ba970d8f380b9d))
+* **gitlab:** correct the to-do actor, draft state and action mappings ([fa12e89](https://github.com/gitify-app/gitify/commit/fa12e89decec2affc3cb9e546b00c3471e7951de))
+* **gitlab:** remove the duplicate mark-as-done action ([364e125](https://github.com/gitify-app/gitify/commit/364e1252e5516c94854578a9d83c5fe8346de192))
+* **notifications:** keep the GitLab brand name in the subject type label ([f54bf69](https://github.com/gitify-app/gitify/commit/f54bf69a0304e55ee0339e01e489a39229fd938b))
+
+
+### 🧼 Code Refactoring
+
+* **gitlab:** fetch login metadata in parallel and log dropped failures ([7b34c09](https://github.com/gitify-app/gitify/commit/7b34c0989d4ae9e03d0aa4fab409a662c5c10cf0))
+
+
+### 📚 Documentation
+
+* add GitLab to the supported forge matrix ([7c3a465](https://github.com/gitify-app/gitify/commit/7c3a465e6e38d40c866235a845a556b5b2ff2e38))
+* assign GitLab forge maintainer and codeowner ([cad5e7d](https://github.com/gitify-app/gitify/commit/cad5e7d9f00a9c00d65bbf35f77c615c3474bec1))
+
 ## [7.6.0](https://github.com/gitify-app/gitify/compare/v7.5.0...v7.6.0) (2026-08-26)
 
 
