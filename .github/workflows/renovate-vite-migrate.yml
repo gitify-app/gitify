@@ -39,7 +39,7 @@ jobs:
           persist-credentials: true
 
       - name: Setup Node.js
-        uses: $/.github/actions/setup-node
+        uses: ./.github/actions/setup-node
 
       - name: Run vp migrate
         run: pnpm exec vp migrate --no-interactive
