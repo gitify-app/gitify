@@ -119,7 +119,7 @@
     "electron-builder": "26.15.3",
     "final-form": "5.0.1",
     "graphql": "17.0.2",
-    "happy-dom": "20.11.6",
+    "happy-dom": "20.11.12",
     "husky": "9.1.7",
     "playwright": "1.62.1",
     "react-devtools": "7.0.1",
