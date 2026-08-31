@@ -39,6 +39,9 @@ pnpm dev
 
 Tooling is unified through [Vite+][vite-plus-website], which bundles the linter (oxlint), formatter (oxfmt), test runner (Vitest), and dev/build pipeline (Vite).
 
+> [!IMPORTANT]
+> `vite-plus`, `vite`, `vitest`, and the `@vitest/*` family are version-coupled: `vite-plus` bundles/targets a specific `vite`/`vitest` release internally, and this project depends on the same real packages directly. Bumping one side independently has broken the test suite before by loading two different `vitest` copies into the test workers. Renovate groups these packages into a single PR, and CI (`vp migrate --no-interactive`, currently advisory) fails if they drift apart — but if you ever bump one of these packages by hand, always run `pnpm exec vp migrate` afterward and let it manage `package.json`/`pnpm-workspace.yaml` (catalog references), rather than pinning a raw version yourself. See `openspec/changes/fix-vite-plus-dependency-drift` for the incident history.
+
 ```shell
 # Run lint, format, and type checks
 pnpm check

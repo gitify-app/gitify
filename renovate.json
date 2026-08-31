@@ -63,8 +63,15 @@
       "matchPackageNames": ["electron-menubar"],
       "minimumReleaseAge": "0 days",
       "schedule": ["at any time"]
+    },
+    {
+      "description": "Keep vite-plus and the toolchain packages whose versions it bundles internally (vite, vitest, @vitest/*) in a single PR. vite-plus targets a specific vite/vitest release each version, and this project depends on the same real packages directly (not an aliased core build), so an independent bump on either side loads mismatched copies at runtime. This has broken the test suite twice before (vitest 4.1.10/4.1.11 split, PR #3215) and a third time was narrowly avoided by hand (#3224, #3226-era fix). A GitHub Actions workflow runs `vp migrate` against this group's PR branch to reconcile catalog/override entries automatically; see openspec/changes/fix-vite-plus-dependency-drift.",
+      "matchPackageNames": ["vite-plus", "vite", "vitest", "@vitest/**"],
+      "groupName": "vite monorepo",
+      "separateMultipleMajor": false
     }
   ],
+  "gitIgnoredAuthors": ["41898282+github-actions[bot]@users.noreply.github.com"],
   "customManagers": [
     {
       "description": "Keep sonar.projectVersion variables in sonar-project.properties in-sync",

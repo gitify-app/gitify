@@ -39,3 +39,34 @@ jobs:
 
       - name: GitHub Actions linter
         uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+
+  vite-toolchain-drift:
+    name: Check vite-plus/vite/vitest drift [vp migrate]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      # Fails if vite-plus, vite, vitest, or the @vitest/* family have drifted
+      # out of the alignment vp migrate expects (e.g. a raw version pin
+      # instead of a catalog: reference, or a version vite-plus does not
+      # bundle). Complements the Renovate `vite monorepo` packageRules group,
+      # which prevents a *Renovate* PR from splitting these updates, by also
+      # catching drift introduced by a manual edit. See
+      # openspec/changes/fix-vite-plus-dependency-drift.
+      - name: Run vp migrate and check for drift
+        run: |
+          pnpm exec vp migrate --no-interactive
+          if ! git diff --quiet; then
+            echo "::error::vp migrate produced changes. This means vite-plus, vite, vitest, or the @vitest/* family have drifted out of alignment. Run 'pnpm exec vp migrate' locally and commit the result."
+            git diff
+            exit 1
+          fi

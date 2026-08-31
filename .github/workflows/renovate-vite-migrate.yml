@@ -1,0 +1,60 @@
+name: Renovate vite toolchain reconcile
+
+# Runs `vp migrate` against Renovate's grouped vite-plus/vite/vitest PR branch
+# and pushes back any reconciliation it makes (catalog/override alignment),
+# so the versions vite-plus bundles internally and the versions this project
+# depends on directly can never land out of sync. See
+# openspec/changes/fix-vite-plus-dependency-drift for the incident history
+# and rationale.
+#
+# Triggered on file changes rather than branch name, since Renovate's grouped
+# branch/slug naming for the "vite monorepo" packageRules group has not been
+# empirically confirmed yet (see design.md open questions).
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+
+permissions: {}
+
+jobs:
+  vp-migrate:
+    name: Reconcile vite-plus/vite/vitest versions
+    runs-on: ubuntu-latest
+    # Only Renovate's own branches: this workflow pushes commits back onto
+    # the PR branch, which would be surprising (and is unnecessary) on a
+    # human-authored PR.
+    if: github.event.pull_request.user.login == 'renovate[bot]'
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Run vp migrate
+        run: pnpm exec vp migrate --no-interactive
+
+      - name: Commit and push reconciliation, if any
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          if git diff --quiet; then
+            echo "vp migrate produced no changes; nothing to commit."
+            exit 0
+          fi
+          git add -A
+          git commit -m "chore(deps): reconcile vite-plus/vite/vitest versions via vp migrate"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"

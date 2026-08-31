@@ -9,6 +9,15 @@ allowBuilds:
   unrs-resolver: true
 catalog:
   electron: '43.2.0'
+  # Pin the vitest family to the version vite-plus bundles internally.
+  # Renovate groups vite-plus/vite/vitest/@vitest/** so they only ever move
+  # together; vp migrate keeps this catalog entry aligned to whatever
+  # version vite-plus bundles. See openspec/changes/fix-vite-plus-dependency-drift.
+  vitest: 4.1.11
+  '@vitest/browser-playwright': 4.1.11
+  '@vitest/coverage-v8': 4.1.11
+  vite: npm:@voidzero-dev/vite-plus-core@0.3.0
+  vite-plus: 0.3.0
 minimumReleaseAgeExclude:
   - electron-menubar
 overrides:
@@ -19,4 +28,14 @@ overrides:
   cross-spawn: '7.0.6'
   got: '11.8.6'
   electron: 'catalog:'
+  '@vitest/coverage-v8': 'catalog:'
+  vite@*: 'catalog:'
+  vitest@*: 'catalog:'
 savePrefix: ''
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: '*'
+    vitest: '*'
