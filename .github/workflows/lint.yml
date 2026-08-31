@@ -53,7 +53,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
 
       # Fails if vite-plus, vite, vitest, or the @vitest/* family have drifted
       # out of the alignment vp migrate expects (e.g. a raw version pin

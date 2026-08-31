@@ -39,7 +39,7 @@ jobs:
           persist-credentials: true
 
       - name: Setup Node.js
-        uses: ./.github/actions/setup-node
+        uses: $/.github/actions/setup-node
 
       - name: Run vp migrate
         run: pnpm exec vp migrate --no-interactive
@@ -50,6 +50,11 @@ jobs:
           GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
           GIT_COMMITTER_NAME: github-actions[bot]
           GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          # Routed through env rather than interpolated directly into the
+          # script, per actionlint/zizmor: github.event.pull_request.head.ref
+          # is attacker-influenceable (a PR author controls their own branch
+          # name) and must not be expanded directly inside a run: block.
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           if git diff --quiet; then
             echo "vp migrate produced no changes; nothing to commit."
@@ -57,4 +62,4 @@ jobs:
           fi
           git add -A
           git commit -m "chore(deps): reconcile vite-plus/vite/vitest versions via vp migrate"
-          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+          git push origin "HEAD:${HEAD_REF}"
