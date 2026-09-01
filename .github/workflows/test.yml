@@ -21,8 +21,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Node.js
-        uses: ./.github/actions/setup-node
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@1b32467adbe183473499fd9d5d372c3ed9641754 # v1.18.0
+        with:
+          cache: true
 
       - name: Check TypeScript
         run: pnpm tsc --noEmit
@@ -59,8 +61,10 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Node.js
-        uses: ./.github/actions/setup-node
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@1b32467adbe183473499fd9d5d372c3ed9641754 # v1.18.0
+        with:
+          cache: true
 
       - name: Run visual regression tests
         # The job already runs in the pinned image, so the script runs vitest
@@ -95,8 +99,10 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
           persist-credentials: false
 
-      - name: Setup Node.js
-        uses: ./.github/actions/setup-node
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@1b32467adbe183473499fd9d5d372c3ed9641754 # v1.18.0
+        with:
+          cache: true
 
       - name: Download a single artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
