@@ -24,7 +24,7 @@ jobs:
           cache: true
 
       - name: Run lint and format checks
-        run: pnpm check
+        run: vp run check
 
   lint-actions:
     name: Lint GitHub Actions [actionlint]

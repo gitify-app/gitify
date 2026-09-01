@@ -27,10 +27,10 @@ jobs:
           cache: true
 
       - name: Check TypeScript
-        run: pnpm tsc --noEmit
+        run: vp exec tsc --noEmit
 
       - name: Run tests with coverage
-        run: pnpm test
+        run: vp run test
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -71,7 +71,7 @@ jobs:
         # directly instead of starting another container.
         env:
           GITIFY_VISUAL_IN_CONTAINER: '1'
-        run: pnpm test:visual
+        run: vp run test:visual
 
       # Vitest writes the actual and diff images here; the reference stays in
       # __screenshots__. Download this to see what changed.

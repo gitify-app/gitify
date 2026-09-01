@@ -45,17 +45,17 @@ jobs:
         include:
           - os: macos-latest
             platform: macOS
-            package-cmd: pnpm package:macos --publish onTagOrDraft
+            package-cmd: vp run package:macos -- --publish onTagOrDraft
             artifact-name: Gitify-release-mac
             use-apple-notarization: true
           - os: windows-latest
             platform: Windows
-            package-cmd: pnpm package:win --publish onTagOrDraft
+            package-cmd: vp run package:win -- --publish onTagOrDraft
             artifact-name: Gitify-release-win
             use-apple-notarization: false
           - os: ubuntu-latest
             platform: Linux
-            package-cmd: pnpm package:linux --publish onTagOrDraft
+            package-cmd: vp run package:linux -- --publish onTagOrDraft
             artifact-name: Gitify-release-linux
             use-apple-notarization: false
     runs-on: ${{ matrix.os }}
@@ -72,7 +72,7 @@ jobs:
           cache: true
 
       - name: Build application
-        run: pnpm build
+        run: vp run build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
 
