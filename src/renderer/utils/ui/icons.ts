@@ -80,7 +80,7 @@ export function getPlatformIcon(platform: PlatformType): FC<OcticonProps> | null
   }
 }
 
-export function getDefaultUserIcon(userType: UserType) {
+export function getDefaultUserIcon(userType: UserType): FC<OcticonProps> {
   switch (userType) {
     case 'Bot':
     case 'Mannequin':

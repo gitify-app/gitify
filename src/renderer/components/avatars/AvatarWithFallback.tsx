@@ -32,6 +32,7 @@ export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
   return (
     <Stack align="center" data-testid="avatar" direction="horizontal" gap="condensed">
       {!src || hasBrokenAvatarSource ? (
+        // oxlint-disable-next-line react/static-components -- getDefaultUserIcon returns a stable, pre-existing icon component for a given userType
         <DefaultUserIcon size={size} />
       ) : (
         <Avatar
