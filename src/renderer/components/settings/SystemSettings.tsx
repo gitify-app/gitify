@@ -68,6 +68,7 @@ export const SystemSettings: FC = () => {
       if (shortcutRowRef.current?.contains(event.target as Node)) {
         return;
       }
+      setLiveModifierAccelerator('');
       setRecordingShortcut(false);
     };
 
@@ -79,7 +80,6 @@ export const SystemSettings: FC = () => {
 
   useEffect(() => {
     if (!recordingShortcut) {
-      setLiveModifierAccelerator('');
       return;
     }
 
@@ -223,6 +223,7 @@ export const SystemSettings: FC = () => {
               icon={PencilIcon}
               onClick={() => {
                 clearShortcutRegistrationError();
+                setLiveModifierAccelerator('');
                 setRecordingShortcut(true);
               }}
               size="small"

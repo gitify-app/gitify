@@ -40,6 +40,11 @@
       "groupName": "playwright"
     },
     {
+      "description": "Keep Vite+ and its direct Vitest providers on matching releases so browser tests and coverage can resolve the versions bundled by Vite+.",
+      "matchPackageNames": ["vite-plus", "@vitest/browser-playwright", "@vitest/coverage-v8"],
+      "groupName": "vite-plus"
+    },
+    {
       "description": "Give updates to core runtime dependencies (Electron shell, tray integration, UI primitives, GitHub API client) a distinct commit scope so release-please can surface them in the changelog instead of hiding them with routine dependency bumps",
       "matchPackageNames": [
         "electron",
