@@ -93,7 +93,7 @@
     "@octokit/plugin-rest-endpoint-methods": "18.0.0",
     "@octokit/request": "10.0.15",
     "@octokit/request-error": "7.1.1",
-    "@octokit/types": "17.0.0",
+    "@octokit/types": "18.0.0",
     "@parcel/watcher": "2.6.0",
     "@primer/css": "22.3.0",
     "@primer/octicons-react": "19.33.0",
