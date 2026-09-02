@@ -76,8 +76,8 @@ importers:
         specifier: 7.1.1
         version: 7.1.1
       '@octokit/types':
-        specifier: 17.0.0
-        version: 17.0.0
+        specifier: 18.0.0
+        version: 18.0.0
       '@parcel/watcher':
         specifier: 2.6.0
         version: 2.6.0
