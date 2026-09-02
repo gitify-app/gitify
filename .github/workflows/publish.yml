@@ -45,17 +45,17 @@ jobs:
         include:
           - os: macos-latest
             platform: macOS
-            package-cmd: pnpm package:macos --publish onTagOrDraft
+            package-cmd: vp run package:macos -- --publish onTagOrDraft
             artifact-name: Gitify-release-mac
             use-apple-notarization: true
           - os: windows-latest
             platform: Windows
-            package-cmd: pnpm package:win --publish onTagOrDraft
+            package-cmd: vp run package:win -- --publish onTagOrDraft
             artifact-name: Gitify-release-win
             use-apple-notarization: false
           - os: ubuntu-latest
             platform: Linux
-            package-cmd: pnpm package:linux --publish onTagOrDraft
+            package-cmd: vp run package:linux -- --publish onTagOrDraft
             artifact-name: Gitify-release-linux
             use-apple-notarization: false
     runs-on: ${{ matrix.os }}
@@ -66,11 +66,13 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Setup Node.js
-        uses: ./.github/actions/setup-node
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@1b32467adbe183473499fd9d5d372c3ed9641754 # v1.18.0
+        with:
+          cache: true
 
       - name: Build application
-        run: pnpm build
+        run: vp run build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
 

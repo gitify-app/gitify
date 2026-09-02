@@ -23,14 +23,14 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             renovate.json
+            package.json
+            pnpm-lock.yaml
             .github
 
-      - uses: ./.github/actions/setup-node
+      - uses: voidzero-dev/setup-vp@1b32467adbe183473499fd9d5d372c3ed9641754 # v1.18.0
         with:
+          cache: true
           run-install: 'false'
 
-      - name: Install Renovate
-        run: pnpm install --global renovate
-
       - name: Validate Renovate config
-        run: renovate-config-validator
+        run: vp dlx --package renovate renovate-config-validator
