@@ -243,14 +243,23 @@ exports[`renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx > renders corre
             >
               api
             </span>
-             scope, or a fine-grained token with the 
+             scope, or a fine-grained token with
+             
             <span
               class="font-semibold prc-Text-Text-9mHv3"
               data-component="Text"
             >
               Todo
             </span>
-             resource. GitLab shows your To-Do items, so you will see fewer notifications than on GitHub.
+             (read, update) and
+             
+            <span
+              class="font-semibold prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              User
+            </span>
+             (read) permissions. GitLab shows your To-Do items, so you will see fewer notifications than on GitHub.
           </span>
         </div>
         <div

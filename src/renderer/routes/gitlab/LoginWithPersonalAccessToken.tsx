@@ -16,9 +16,10 @@ export const GitLabLoginWithPersonalAccessTokenRoute: FC = () => (
     tokenSettingsLabel="Open token settings"
   >
     <Text className="text-xs">
-      Requires the <Text className="font-semibold">api</Text> scope, or a fine-grained token with
-      the <Text className="font-semibold">Todo</Text> resource. GitLab shows your To-Do items, so
-      you will see fewer notifications than on GitHub.
+      Requires the <Text className="font-semibold">api</Text> scope, or a fine-grained token with{' '}
+      <Text className="font-semibold">Todo</Text> (read, update) and{' '}
+      <Text className="font-semibold">User</Text> (read) permissions. GitLab shows your To-Do items,
+      so you will see fewer notifications than on GitHub.
     </Text>
   </LoginWithPersonalAccessTokenForm>
 );
