@@ -54,20 +54,20 @@ export const Sidebar: FC = () => {
           variant="invisible"
         />
 
-        <IconButton
-          aria-label="Notifications"
-          data-testid="sidebar-notifications"
-          description={`${notificationCount} ${fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
-          icon={BellIcon}
-          keybindingHint={shortcuts.myNotifications.key}
-          onClick={() => shortcuts.myNotifications.action()}
-          size="small"
-          tooltipDirection="e"
-          variant={hasUnreadNotifications ? 'primary' : 'invisible'}
-        />
-
         {isLoggedIn && (
           <>
+            <IconButton
+              aria-label="Notifications"
+              data-testid="sidebar-notifications"
+              description={`${notificationCount} ${fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
+              icon={BellIcon}
+              keybindingHint={shortcuts.myNotifications.key}
+              onClick={() => shortcuts.myNotifications.action()}
+              size="small"
+              tooltipDirection="e"
+              variant={hasUnreadNotifications ? 'primary' : 'invisible'}
+            />
+
             <IconButton
               aria-label="Toggle focused mode"
               data-testid="sidebar-focused-mode"
@@ -93,30 +93,30 @@ export const Sidebar: FC = () => {
               tooltipDirection="e"
               variant={hasFilters ? 'primary' : 'invisible'}
             />
+
+            <IconButton
+              aria-label="My issues ↗"
+              data-testid="sidebar-my-issues"
+              icon={IssueOpenedIcon}
+              keybindingHint={shortcuts.myIssues.key}
+              onClick={() => shortcuts.myIssues.action()}
+              size="small"
+              tooltipDirection="e"
+              variant="invisible"
+            />
+
+            <IconButton
+              aria-label="My pull requests ↗"
+              data-testid="sidebar-my-pull-requests"
+              icon={GitPullRequestIcon}
+              keybindingHint={shortcuts.myPullRequests.key}
+              onClick={() => shortcuts.myPullRequests.action()}
+              size="small"
+              tooltipDirection="e"
+              variant="invisible"
+            />
           </>
         )}
-
-        <IconButton
-          aria-label="My issues ↗"
-          data-testid="sidebar-my-issues"
-          icon={IssueOpenedIcon}
-          keybindingHint={shortcuts.myIssues.key}
-          onClick={() => shortcuts.myIssues.action()}
-          size="small"
-          tooltipDirection="e"
-          variant="invisible"
-        />
-
-        <IconButton
-          aria-label="My pull requests ↗"
-          data-testid="sidebar-my-pull-requests"
-          icon={GitPullRequestIcon}
-          keybindingHint={shortcuts.myPullRequests.key}
-          onClick={() => shortcuts.myPullRequests.action()}
-          size="small"
-          tooltipDirection="e"
-          variant="invisible"
-        />
       </Stack>
 
       <Stack align="center" direction="vertical" gap="condensed" padding="normal">

@@ -38,6 +38,17 @@ describe('renderer/components/Sidebar.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
+  it('should hide host shortcuts when logged out', () => {
+    renderWithProviders(<Sidebar />, {
+      initialEntries: ['/landing'],
+      accounts: [],
+    });
+
+    expect(screen.queryByTestId('sidebar-notifications')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('sidebar-my-issues')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('sidebar-my-pull-requests')).not.toBeInTheDocument();
+  });
+
   it('should navigate home when clicking logo', async () => {
     renderWithProviders(<Sidebar />);
 
@@ -61,6 +72,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     it('renders correct icon when there are no notifications', () => {
       renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
         notifications: [],
       });
 
@@ -69,6 +81,7 @@ describe('renderer/components/Sidebar.tsx', () => {
 
     it('renders correct icon when there are notifications', () => {
       renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
         notificationCount: 2,
         hasNotifications: true,
         hasUnreadNotifications: false,

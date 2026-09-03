@@ -2,7 +2,7 @@
 
 exports[`renderer/components/Sidebar.tsx > Filter notifications > highlight filters sidebar if any are saved 1`] = `
 <button
-  aria-describedby="_r_4u_"
+  aria-describedby="_r_52_"
   aria-label="Filters"
   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
   data-component="IconButton"
@@ -35,7 +35,7 @@ exports[`renderer/components/Sidebar.tsx > Filter notifications > highlight filt
 
 exports[`renderer/components/Sidebar.tsx > notifications icon > renders correct icon when there are no notifications 1`] = `
 <button
-  aria-describedby="_r_1m_"
+  aria-describedby="_r_1e_"
   aria-label="Notifications"
   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
   data-component="IconButton"
@@ -68,7 +68,7 @@ exports[`renderer/components/Sidebar.tsx > notifications icon > renders correct 
 
 exports[`renderer/components/Sidebar.tsx > notifications icon > renders correct icon when there are notifications 1`] = `
 <button
-  aria-describedby="_r_20_"
+  aria-describedby="_r_1u_"
   aria-label="Notifications"
   class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
   data-component="IconButton"
@@ -930,245 +930,6 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
           </kbd>
         </span>
       </span>
-      <button
-        aria-describedby="_r_i_"
-        aria-label="Notifications"
-        class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-        data-component="IconButton"
-        data-loading="false"
-        data-no-visuals="true"
-        data-size="small"
-        data-testid="sidebar-notifications"
-        data-variant="invisible"
-        type="button"
-      >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-bell"
-          data-component="Octicon"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z"
-          />
-        </svg>
-      </button>
-      <span
-        aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-tLeuB"
-        data-component="Tooltip"
-        data-direction="e"
-        popover="auto"
-        role="tooltip"
-      >
-        <span
-          id="_r_i_"
-        >
-          0 unread notifications ↗
-          <span
-            class="prc-src-InternalVisuallyHidden-2YaI6"
-          >
-            (
-            n
-            )
-          </span>
-        </span>
-        <span
-          aria-hidden="true"
-          class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
-          data-component="Tooltip.KeybindingHintContainer"
-        >
-          <kbd
-            class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
-            data-component="KeybindingHint"
-            data-testid="keybinding-hint"
-          >
-            <span
-              class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
-              data-component="Text"
-              data-kbd-chord="true"
-            >
-               
-              <span
-                class="prc-src-InternalVisuallyHidden-2YaI6"
-              >
-                n
-              </span>
-              <span
-                aria-hidden="true"
-              >
-                N
-              </span>
-            </span>
-          </kbd>
-        </span>
-      </span>
-      <button
-        aria-labelledby="_r_k_"
-        class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-        data-component="IconButton"
-        data-loading="false"
-        data-no-visuals="true"
-        data-size="small"
-        data-testid="sidebar-my-issues"
-        data-variant="invisible"
-        type="button"
-      >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-issue-opened"
-          data-component="Octicon"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-          />
-          <path
-            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-          />
-        </svg>
-      </button>
-      <span
-        aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-tLeuB"
-        data-component="Tooltip"
-        data-direction="e"
-        popover="auto"
-      >
-        <span
-          id="_r_k_"
-        >
-          My issues ↗
-          <span
-            class="prc-src-InternalVisuallyHidden-2YaI6"
-          >
-            (
-            i
-            )
-          </span>
-        </span>
-        <span
-          aria-hidden="true"
-          class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
-          data-component="Tooltip.KeybindingHintContainer"
-        >
-          <kbd
-            class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
-            data-component="KeybindingHint"
-            data-testid="keybinding-hint"
-          >
-            <span
-              class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
-              data-component="Text"
-              data-kbd-chord="true"
-            >
-               
-              <span
-                class="prc-src-InternalVisuallyHidden-2YaI6"
-              >
-                i
-              </span>
-              <span
-                aria-hidden="true"
-              >
-                I
-              </span>
-            </span>
-          </kbd>
-        </span>
-      </span>
-      <button
-        aria-labelledby="_r_m_"
-        class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
-        data-component="IconButton"
-        data-loading="false"
-        data-no-visuals="true"
-        data-size="small"
-        data-testid="sidebar-my-pull-requests"
-        data-variant="invisible"
-        type="button"
-      >
-        <svg
-          aria-hidden="true"
-          class="octicon octicon-git-pull-request"
-          data-component="Octicon"
-          display="inline-block"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
-          viewBox="0 0 16 16"
-          width="16"
-        >
-          <path
-            d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-          />
-        </svg>
-      </button>
-      <span
-        aria-hidden="true"
-        class="prc-TooltipV2-Tooltip-tLeuB"
-        data-component="Tooltip"
-        data-direction="e"
-        popover="auto"
-      >
-        <span
-          id="_r_m_"
-        >
-          My pull requests ↗
-          <span
-            class="prc-src-InternalVisuallyHidden-2YaI6"
-          >
-            (
-            p
-            )
-          </span>
-        </span>
-        <span
-          aria-hidden="true"
-          class="prc-TooltipV2-KeybindingHintContainer-Ymj-3 prc-TooltipV2-HasTextBefore-fdOXj"
-          data-component="Tooltip.KeybindingHintContainer"
-        >
-          <kbd
-            class="prc-KeybindingHint-KeybindingHint-qpYIs prc-Text-Text-9mHv3"
-            data-component="KeybindingHint"
-            data-testid="keybinding-hint"
-          >
-            <span
-              class="prc-components-Chord-DdhWN prc-components-ChordOnEmphasis-O-4BS prc-components-ChordSmall-c-P-x prc-Text-Text-9mHv3"
-              data-component="Text"
-              data-kbd-chord="true"
-            >
-               
-              <span
-                class="prc-src-InternalVisuallyHidden-2YaI6"
-              >
-                p
-              </span>
-              <span
-                aria-hidden="true"
-              >
-                P
-              </span>
-            </span>
-          </kbd>
-        </span>
-      </span>
     </div>
     <div
       class="prc-Stack-Stack-UQ9k6"
@@ -1181,7 +942,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
       data-wrap="nowrap"
     >
       <button
-        aria-labelledby="_r_o_"
+        aria-labelledby="_r_i_"
         class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
         data-component="IconButton"
         data-loading="false"
@@ -1217,7 +978,7 @@ exports[`renderer/components/Sidebar.tsx > should render itself & its children (
         popover="auto"
       >
         <span
-          id="_r_o_"
+          id="_r_i_"
         >
           Quit Gitify
           <span
