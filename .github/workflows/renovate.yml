@@ -31,6 +31,7 @@ jobs:
         with:
           cache: true
           run-install: 'false'
+          node-version-file: '.nvmrc'
 
       - name: Validate Renovate config
         run: vp dlx --package renovate renovate-config-validator
