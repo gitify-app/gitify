@@ -6,7 +6,6 @@
     ":semanticCommitTypeAll(chore)",
     ":separateMultipleMajorReleases",
     "schedule:weekly",
-    "group:playwrightMonorepo",
     "group:vitePlus"
   ],
   "labels": ["dependency"],
@@ -35,6 +34,11 @@
       "description": "Hold electron below 43.3.0. The Chromium StatusNotifierItem multiplexer that arrived in 43.3.0 (electron#52416) collapses every tray icon onto a single /StatusNotifierItem object path, so desktops that address the item by its unique D-Bus name instead of its well-known name can no longer resolve the icon and render nothing. Gitify is a tray-first app, so this makes it unusable on those desktops. electron-menubar's visual tray matrix reproduces it on Budgie, Sway/Waybar and LXQt while KDE Plasma stays unaffected. 43.4.1 does NOT fix it despite its release note claiming a Linux tray fix; that change (electron#52952) is described upstream as a bad fix and coincided with LXQt breaking too. Remove this hold only once electron#52674 is closed AND electron-menubar's visual matrix is green on the candidate version.",
       "matchPackageNames": ["electron"],
       "allowedVersions": "<43.3.0"
+    },
+    {
+      "description": "Group the playwright package with the Playwright container image that the visual regression job runs in. The image ships the browser build that exact release expects, so a mismatch fails to launch Chromium and would strand the committed screenshot baselines.",
+      "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"],
+      "groupName": "playwright"
     },
     {
       "description": "Give updates to core runtime dependencies (Electron shell, tray integration, UI primitives, GitHub API client) a distinct commit scope so release-please can surface them in the changelog instead of hiding them with routine dependency bumps",
