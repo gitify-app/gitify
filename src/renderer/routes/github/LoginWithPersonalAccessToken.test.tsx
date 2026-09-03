@@ -135,6 +135,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
       expect(screen.getByTestId('login-errors')).toHaveTextContent(
         'Failed to validate provided token against github.com',
       );
+      expect(screen.getByTestId('login-errors')).not.toHaveTextContent('null');
     });
   });
 

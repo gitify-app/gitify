@@ -97,7 +97,9 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should login using a token - failure', async () => {
-    loginWithPersonalAccessTokenMock.mockRejectedValueOnce(new Error('invalid token'));
+    loginWithPersonalAccessTokenMock.mockRejectedValueOnce(
+      new Error('GitLab API 403 Forbidden\nPRIVATE-TOKEN: leaked-pat'),
+    );
 
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
@@ -110,6 +112,8 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
       expect(screen.getByTestId('login-errors')).toHaveTextContent(
         'Failed to validate provided token against gitlab.com',
       );
+      expect(screen.getByTestId('login-errors')).toHaveTextContent('GitLab API 403 Forbidden');
+      expect(screen.getByTestId('login-errors')).not.toHaveTextContent('leaked-pat');
       expect(navigateMock).not.toHaveBeenCalled();
     });
   });
