@@ -5,7 +5,8 @@
     ":enableVulnerabilityAlerts",
     ":semanticCommitTypeAll(chore)",
     ":separateMultipleMajorReleases",
-    "schedule:weekly"
+    "schedule:weekly",
+    "group:vitePlus"
   ],
   "labels": ["dependency"],
   "rangeStrategy": "pin",
@@ -38,11 +39,6 @@
       "description": "Group the playwright package with the Playwright container image that the visual regression job runs in. The image ships the browser build that exact release expects, so a mismatch fails to launch Chromium and would strand the committed screenshot baselines.",
       "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"],
       "groupName": "playwright"
-    },
-    {
-      "description": "Keep Vite+ and its direct Vitest providers on matching releases so browser tests and coverage can resolve the versions bundled by Vite+.",
-      "matchPackageNames": ["vite-plus", "@vitest/browser-playwright", "@vitest/coverage-v8"],
-      "groupName": "vite-plus"
     },
     {
       "description": "Give updates to core runtime dependencies (Electron shell, tray integration, UI primitives, GitHub API client) a distinct commit scope so release-please can surface them in the changelog instead of hiding them with routine dependency bumps",
