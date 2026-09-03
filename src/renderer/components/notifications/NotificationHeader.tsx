@@ -2,13 +2,14 @@ import type { FC, MouseEvent } from 'react';
 
 import { Stack } from '@primer/react';
 
+import { cn } from 'cn';
+
 import { useSettingsStore } from '../../stores';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
 import { isGroupByDate } from '../../utils/notifications/group';
 import { openRepository } from '../../utils/system/links';
-import { cn } from '../../utils/ui/cn';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 export interface NotificationHeaderProps {

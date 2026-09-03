@@ -2,9 +2,10 @@ import type { FC } from 'react';
 
 import { Text } from '@primer/react';
 
+import { cn } from 'cn';
+
 import { useSettingsStore } from '../../stores';
 
-import { cn } from '../../utils/ui/cn';
 import { parseInlineCode } from '../../utils/ui/display';
 
 interface NotificationTitleProps {

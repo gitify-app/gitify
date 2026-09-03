@@ -2,11 +2,12 @@ import type { FC, MouseEvent } from 'react';
 
 import { RelativeTime, Stack, Text } from '@primer/react';
 
+import { cn } from 'cn';
+
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
 import { getAdapter } from '../../utils/forges/registry';
 import { openUserProfile } from '../../utils/system/links';
-import { cn } from '../../utils/ui/cn';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
 
