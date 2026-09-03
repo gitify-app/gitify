@@ -529,7 +529,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
   describe('markNotificationsAsRead', () => {
     it('marks notifications as read via the forge adapter and removes them', async () => {
       const markThreadAsReadSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsRead')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsRead')
         .mockResolvedValue(undefined);
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
@@ -549,7 +549,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('logs an error when marking as read fails', async () => {
-      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
       const { result } = renderNotificationsHook();
@@ -563,7 +563,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('rolls back the cache for a failed notification while a failed request does not affect it', async () => {
-      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
       const { result } = renderNotificationsHook();
@@ -593,11 +593,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
         },
       ]);
 
-      vi.spyOn(githubAdapter, 'markThreadAsRead').mockImplementation(async (_account, id) => {
-        if (id === failsNotification.id) {
-          throw new Error('boom');
-        }
-      });
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockImplementation(
+        async (_account, id) => {
+          if (id === failsNotification.id) {
+            throw new Error('boom');
+          }
+        },
+      );
 
       const { result } = renderNotificationsHook();
       await waitFor(() => expect(result.current.notificationCount).toBe(2));
@@ -627,7 +629,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
   describe('markNotificationsAsDone', () => {
     it('marks notifications as done via the forge adapter', async () => {
       const markThreadAsDoneSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsDone')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsDone')
         .mockResolvedValue(undefined);
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
@@ -648,13 +650,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('falls back to mark as read when the forge does not support done', async () => {
       const markAsDoneCapabilitySpy = vi
-        .spyOn(githubAdapter.capabilities, 'markAsDone')
+        .spyOn(githubAdapter.accountOps.capabilities, 'markAsDone')
         .mockReturnValue(false);
       const markThreadAsDoneSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsDone')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsDone')
         .mockResolvedValue(undefined);
       const markThreadAsReadSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsRead')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsRead')
         .mockResolvedValue(undefined);
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
@@ -674,9 +676,9 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('reconciles a failed mark-as-read fallback only once', async () => {
       const markAsDoneCapabilitySpy = vi
-        .spyOn(githubAdapter.capabilities, 'markAsDone')
+        .spyOn(githubAdapter.accountOps.capabilities, 'markAsDone')
         .mockReturnValue(false);
-      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
       const { result } = renderNotificationsHook();
@@ -702,13 +704,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
   describe('unsubscribeNotification', () => {
     it('unsubscribes and marks as read by default', async () => {
       const unsubscribeThreadSpy = vi
-        .spyOn(githubAdapter, 'unsubscribeThread')
+        .spyOn(githubAdapter.accountOps, 'unsubscribeThread')
         .mockResolvedValue(undefined);
       const markThreadAsReadSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsRead')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsRead')
         .mockResolvedValue(undefined);
       const markThreadAsDoneSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsDone')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsDone')
         .mockResolvedValue(undefined);
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
@@ -731,13 +733,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
       useSettingsStore.setState({ markAsDoneOnUnsubscribe: true });
 
       const unsubscribeThreadSpy = vi
-        .spyOn(githubAdapter, 'unsubscribeThread')
+        .spyOn(githubAdapter.accountOps, 'unsubscribeThread')
         .mockResolvedValue(undefined);
       const markThreadAsReadSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsRead')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsRead')
         .mockResolvedValue(undefined);
       const markThreadAsDoneSpy = vi
-        .spyOn(githubAdapter, 'markThreadAsDone')
+        .spyOn(githubAdapter.accountOps, 'markThreadAsDone')
         .mockResolvedValue(undefined);
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
@@ -754,8 +756,8 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
 
     it('keeps a failed follow-up action recorded after unsubscribe succeeds', async () => {
-      vi.spyOn(githubAdapter, 'unsubscribeThread').mockResolvedValue(undefined);
-      vi.spyOn(githubAdapter, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
+      vi.spyOn(githubAdapter.accountOps, 'unsubscribeThread').mockResolvedValue(undefined);
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
       const { result } = renderNotificationsHook();

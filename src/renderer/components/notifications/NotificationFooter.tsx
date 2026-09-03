@@ -6,7 +6,7 @@ import { cn } from 'cn';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
-import { getAdapter } from '../../utils/forges/registry';
+import { forAccount } from '../../utils/forges/registry';
 import { openUserProfile } from '../../utils/system/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
@@ -20,7 +20,7 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
 }: NotificationFooterProps) => {
   const user = notification.subject.user;
   const userLabel = user
-    ? getAdapter(notification.account).formatNotificationUser(notification.account, user)
+    ? forAccount(notification.account).formatNotificationUser(user)
     : undefined;
 
   return (

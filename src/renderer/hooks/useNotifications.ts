@@ -32,7 +32,7 @@ import { notificationsKeys } from '../utils/api/queryKeys';
 import { getAccountUUID } from '../utils/auth/utils';
 import { areAllAccountErrorsSame, doesAllAccountsHaveErrors, Errors } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
-import { getAdapter } from '../utils/forges/registry';
+import { forAccount } from '../utils/forges/registry';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -472,7 +472,7 @@ export const useNotifications = ({
   const markNotificationsAsReadMutation = useMutation({
     mutationFn: async ({ readNotifications }: { readNotifications: GitifyNotification[] }) => {
       return await settleNotificationActions(readNotifications, (notification) =>
-        getAdapter(notification.account).markThreadAsRead(notification.account, notification.id),
+        forAccount(notification.account).markThreadAsRead(notification.id),
       );
     },
 
@@ -524,7 +524,7 @@ export const useNotifications = ({
       }
 
       return await settleNotificationActions(doneNotifications, (notification) =>
-        getAdapter(notification.account).markThreadAsDone(notification.account, notification.id),
+        forAccount(notification.account).markThreadAsDone(notification.id),
       );
     },
 
@@ -572,7 +572,7 @@ export const useNotifications = ({
       }
 
       const result = await settleNotificationActions([notification], (n) =>
-        getAdapter(n.account).unsubscribeThread(n.account, n.id),
+        forAccount(n.account).unsubscribeThread(n.id),
       );
 
       if (result.failed.length > 0) {

@@ -1,7 +1,7 @@
 import type { GitifyNotification, Link } from '../../types';
 
 import { rendererLogError, toError } from '../core/logger';
-import { getAdapter } from '../forges/registry';
+import { forAccount, getAdapter } from '../forges/registry';
 
 export function generateNotificationReferrerId(notification: GitifyNotification): string {
   const raw = `018:NotificationThread${notification.id}:${notification.account.user?.id}`;
@@ -9,8 +9,7 @@ export function generateNotificationReferrerId(notification: GitifyNotification)
 }
 
 export async function generateNotificationWebUrl(notification: GitifyNotification): Promise<Link> {
-  const adapter = getAdapter(notification.account);
-  const url = new URL(adapter.getDisplayHelpers(notification).defaultUrl);
+  const url = new URL(getAdapter(notification.account).getDisplayHelpers(notification).defaultUrl);
 
   if (notification.subject.htmlUrl) {
     url.href = notification.subject.htmlUrl;
@@ -19,8 +18,7 @@ export async function generateNotificationWebUrl(notification: GitifyNotificatio
       const followTarget =
         notification.subject.latestCommentUrl ?? notification.subject.url ?? null;
       if (followTarget) {
-        const response = await adapter.followUrl<{ html_url: string }>(
-          notification.account,
+        const response = await forAccount(notification.account).followUrl<{ html_url: string }>(
           followTarget,
         );
         url.href = response.html_url;

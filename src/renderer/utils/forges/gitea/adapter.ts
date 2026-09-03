@@ -61,44 +61,16 @@ export const giteaAdapter: ForgeAdapter = {
   displayName: 'Gitea',
   tagline: 'Gitea, Forgejo & Codeberg',
   icon: ServerIcon,
-  capabilities,
 
   getPlatform: () => 'Gitea',
   formatUserLogin: (login) => login,
-  formatNotificationUser: (_account, user) => user.login,
 
-  fetchAuthenticatedUser,
-  listNotifications,
-
-  markThreadAsRead: (account, threadId) => patchGiteaNotificationThread(account, threadId, 'read'),
-  // Gitea has no "done" state — capability `markAsDone(account)` returns
-  // false so the UI gates this off. Throwing rather than silently aliasing to
-  // markThreadAsRead surfaces any caller that bypasses the capability check.
-  markThreadAsDone: () => {
-    throw new Error(
-      'Mark-as-done is not supported for Gitea accounts; check capabilities.markAsDone before calling.',
-    );
-  },
-  unsubscribeThread: () => {
-    throw new Error(
-      'Ignoring thread subscriptions is not supported for Gitea accounts; check capabilities.unsubscribeThread before calling.',
-    );
-  },
-
-  followUrl<T>(account: Account, url: Link): Promise<T> {
-    return giteaGetJson<T>(account, url);
-  },
   getDisplayHelpers,
 
   // Gitea PATs from /user/settings/applications are 40-char lowercase hex.
   validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
     `https://${hostname}/user/settings/applications` as Link,
-  getAccountSettingsUrl: (account: Account) =>
-    `https://${account.hostname}/user/settings/applications` as Link,
-  getIssuesUrl: (account) => `https://${account.hostname}/issues` as Link,
-  getPullRequestsUrl: (account) => `https://${account.hostname}/pulls` as Link,
-  getNotificationsUrl: (account) => `https://${account.hostname}/notifications` as Link,
   documentationUrl: GITEA_DOCS_URL,
   // Gitea only supports PAT today, so every method falls through to the key
   // icon. Adding device-flow/OAuth support later means returning their icons
@@ -115,6 +87,35 @@ export const giteaAdapter: ForgeAdapter = {
     },
   ],
 
-  // Gitea has no GitHub-style OAuth scope concept, so `oauthScopes` is
-  // omitted. Callers skip scopes UI when this is undefined.
+  accountOps: {
+    capabilities,
+    formatNotificationUser: (_account, user) => user.login,
+    fetchAuthenticatedUser,
+    listNotifications,
+    markThreadAsRead: (account, threadId) =>
+      patchGiteaNotificationThread(account, threadId, 'read'),
+    // Gitea has no "done" state — capability `markAsDone(account)` returns
+    // false so the UI gates this off. Throwing rather than silently aliasing to
+    // markThreadAsRead surfaces any caller that bypasses the capability check.
+    markThreadAsDone: () => {
+      throw new Error(
+        'Mark-as-done is not supported for Gitea accounts; check capabilities.markAsDone before calling.',
+      );
+    },
+    unsubscribeThread: () => {
+      throw new Error(
+        'Ignoring thread subscriptions is not supported for Gitea accounts; check capabilities.unsubscribeThread before calling.',
+      );
+    },
+    followUrl<T>(account: Account, url: Link): Promise<T> {
+      return giteaGetJson<T>(account, url);
+    },
+    getAccountSettingsUrl: (account: Account) =>
+      `https://${account.hostname}/user/settings/applications` as Link,
+    getIssuesUrl: (account) => `https://${account.hostname}/issues` as Link,
+    getPullRequestsUrl: (account) => `https://${account.hostname}/pulls` as Link,
+    getNotificationsUrl: (account) => `https://${account.hostname}/notifications` as Link,
+    // Gitea has no GitHub-style OAuth scope concept, so `oauthScopes` is
+    // omitted. Callers skip scopes UI when this is undefined.
+  },
 };

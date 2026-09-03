@@ -1,5 +1,5 @@
 import type { Account, Forge } from '../../types';
-import type { ForgeAdapter } from './types';
+import type { ForgeAccountAdapter, ForgeAdapter, WithAccount } from './types';
 
 import { bitbucketAdapter } from './bitbucket/adapter';
 import { giteaAdapter } from './gitea/adapter';
@@ -10,7 +10,9 @@ import { gitlabAdapter } from './gitlab/adapter';
  * Central forge adapter registry.
  *
  * Adding a new forge is one entry in this map. Shared code routes through
- * `getAdapter(account)` and never imports forge-specific modules directly.
+ * `getAdapter(forge)` for forge-wide members and `forAccount(account)` for
+ * account-scoped operations, and never imports forge-specific modules
+ * directly.
  */
 const ADAPTERS: Record<Forge, ForgeAdapter> = {
   github: githubAdapter,
@@ -41,6 +43,36 @@ export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
     throw new Error(`No forge adapter registered for "${id}"`);
   }
   return adapter;
+}
+
+/**
+ * Resolve the account-bound view of an account's forge adapter.
+ *
+ * Every function under the adapter's `accountOps` is wrapped to receive the
+ * account as its first argument, and nested bundles (capabilities, OAuth
+ * scopes) are wrapped the same way. Members are looked up on the adapter at
+ * call time, so replacing one on the adapter (e.g. a test spy) is honoured by
+ * views created earlier.
+ */
+export function forAccount(account: Account): ForgeAccountAdapter {
+  return bindAccount(getAdapter(account).accountOps, account);
+}
+
+function bindAccount<T extends object>(operations: WithAccount<T>, account: Account): T {
+  const source = operations as Record<string, unknown>;
+  const bound: Record<string, unknown> = {};
+  for (const key of Object.keys(source)) {
+    const member = source[key];
+    if (typeof member === 'function') {
+      bound[key] = (...args: unknown[]) =>
+        (source[key] as (account: Account, ...rest: unknown[]) => unknown)(account, ...args);
+    } else if (member !== null && typeof member === 'object') {
+      bound[key] = bindAccount(member as WithAccount<object>, account);
+    } else {
+      bound[key] = member;
+    }
+  }
+  return bound as T;
 }
 
 export function listAdapters(): ForgeAdapter[] {
