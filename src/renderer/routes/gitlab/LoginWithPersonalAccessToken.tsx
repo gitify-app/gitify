@@ -12,7 +12,6 @@ export const GitLabLoginWithPersonalAccessTokenRoute: FC = () => (
     hostnamePlaceholder="gitlab.com"
     title="Login to GitLab with Personal Access Token"
     tokenPlaceholder="Your GitLab personal access token"
-    tokenSettingsCaption="on your GitLab instance to create a token, then paste it below."
     tokenSettingsLabel="Open token settings"
   >
     <Text className="text-xs">

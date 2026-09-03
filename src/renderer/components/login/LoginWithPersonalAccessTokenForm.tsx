@@ -92,7 +92,7 @@ export interface LoginWithPersonalAccessTokenFormProps {
   /** Label for the button that opens the forge's token settings page. */
   tokenSettingsLabel: string;
   /** Text rendered beside the token settings button. */
-  tokenSettingsCaption: string;
+  tokenSettingsCaption?: string;
   tokenPlaceholder: string;
   /** Tooltip for the documentation button. */
   docsTooltip: string;
@@ -267,7 +267,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
               >
                 {tokenSettingsLabel}
               </Button>
-              <Text className="text-xs">{tokenSettingsCaption}</Text>
+              {tokenSettingsCaption && <Text className="text-xs">{tokenSettingsCaption}</Text>}
             </Stack>
 
             {children}

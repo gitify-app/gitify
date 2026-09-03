@@ -225,12 +225,6 @@ exports[`renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx > renders corre
                 </span>
               </span>
             </button>
-            <span
-              class="text-xs prc-Text-Text-9mHv3"
-              data-component="Text"
-            >
-              on your GitLab instance to create a token, then paste it below.
-            </span>
           </div>
           <span
             class="text-xs prc-Text-Text-9mHv3"
