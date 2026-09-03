@@ -49,7 +49,9 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('notifications icon', () => {
     it('opens notifications home when clicked', async () => {
-      renderWithProviders(<Sidebar />);
+      renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+      });
 
       await userEvent.click(screen.getByTestId('sidebar-notifications'));
 
@@ -146,7 +148,9 @@ describe('renderer/components/Sidebar.tsx', () => {
 
   describe('quick links', () => {
     it('opens my github issues page', async () => {
-      renderWithProviders(<Sidebar />);
+      renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+      });
 
       await userEvent.click(screen.getByTestId('sidebar-my-issues'));
 
@@ -155,7 +159,9 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     it('opens my github pull requests page', async () => {
-      renderWithProviders(<Sidebar />);
+      renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+      });
 
       await userEvent.click(screen.getByTestId('sidebar-my-pull-requests'));
 
