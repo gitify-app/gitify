@@ -45,17 +45,17 @@ jobs:
         include:
           - os: macos-latest
             platform: macOS
-            package-cmd: vp run package:macos -- --publish onTagOrDraft
+            package-cmd: vp run package:macos --publish onTagOrDraft
             artifact-name: Gitify-release-mac
             use-apple-notarization: true
           - os: windows-latest
             platform: Windows
-            package-cmd: vp run package:win -- --publish onTagOrDraft
+            package-cmd: vp run package:win --publish onTagOrDraft
             artifact-name: Gitify-release-win
             use-apple-notarization: false
           - os: ubuntu-latest
             platform: Linux
-            package-cmd: vp run package:linux -- --publish onTagOrDraft
+            package-cmd: vp run package:linux --publish onTagOrDraft
             artifact-name: Gitify-release-linux
             use-apple-notarization: false
     runs-on: ${{ matrix.os }}
