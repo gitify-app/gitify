@@ -1,7 +1,7 @@
 import type { GitifyNotification, Link } from '../../types';
 
 import { rendererLogError, toError } from '../core/logger';
-import { forAccount, getAdapter } from '../forges/registry';
+import { getAccountAdapter, getAdapter } from '../forges/registry';
 
 export function generateNotificationReferrerId(notification: GitifyNotification): string {
   const raw = `018:NotificationThread${notification.id}:${notification.account.user?.id}`;
@@ -18,9 +18,9 @@ export async function generateNotificationWebUrl(notification: GitifyNotificatio
       const followTarget =
         notification.subject.latestCommentUrl ?? notification.subject.url ?? null;
       if (followTarget) {
-        const response = await forAccount(notification.account).followUrl<{ html_url: string }>(
-          followTarget,
-        );
+        const response = await getAccountAdapter(notification.account).followUrl<{
+          html_url: string;
+        }>(followTarget);
         url.href = response.html_url;
       }
     } catch (err) {

@@ -1,6 +1,6 @@
 import type { Account } from '../../types';
 
-import { forAccount } from '../forges/registry';
+import { getAccountAdapter } from '../forges/registry';
 
 /**
  * Whether the account's forge supports a distinct "mark as done" action.
@@ -10,12 +10,12 @@ import { forAccount } from '../forges/registry';
  * equivalent and always reports false.
  */
 export function isMarkAsDoneFeatureSupported(account: Account): boolean {
-  return forAccount(account).capabilities.markAsDone();
+  return getAccountAdapter(account).capabilities.markAsDone();
 }
 
 /**
  * Whether the account's forge supports ignoring a thread subscription.
  */
 export function isUnsubscribeThreadSupported(account: Account): boolean {
-  return forAccount(account).capabilities.unsubscribeThread();
+  return getAccountAdapter(account).capabilities.unsubscribeThread();
 }

@@ -10,7 +10,7 @@ import { gitlabAdapter } from './gitlab/adapter';
  * Central forge adapter registry.
  *
  * Adding a new forge is one entry in this map. Shared code routes through
- * `getAdapter(forge)` for forge-wide members and `forAccount(account)` for
+ * `getAdapter(forge)` for forge-wide members and `getAccountAdapter(account)` for
  * account-scoped operations, and never imports forge-specific modules
  * directly.
  */
@@ -54,7 +54,7 @@ export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
  * call time, so replacing one on the adapter (e.g. a test spy) is honoured by
  * views created earlier.
  */
-export function forAccount(account: Account): ForgeAccountAdapter {
+export function getAccountAdapter(account: Account): ForgeAccountAdapter {
   return bindAccount(getAdapter(account).accountOps, account);
 }
 

@@ -7,7 +7,13 @@ import {
 
 import type { Account, Forge, Link } from '../../types';
 
-import { forAccount, getAdapter, isKnownForge, KNOWN_FORGES, listAdapters } from './registry';
+import {
+  getAccountAdapter,
+  getAdapter,
+  isKnownForge,
+  KNOWN_FORGES,
+  listAdapters,
+} from './registry';
 
 describe('renderer/utils/forges/registry.ts', () => {
   describe('getAdapter', () => {
@@ -47,7 +53,7 @@ describe('renderer/utils/forges/registry.ts', () => {
     });
   });
 
-  describe('forAccount', () => {
+  describe('getAccountAdapter', () => {
     afterEach(() => {
       vi.restoreAllMocks();
     });
@@ -57,7 +63,7 @@ describe('renderer/utils/forges/registry.ts', () => {
         .spyOn(getAdapter('github').accountOps, 'listNotifications')
         .mockResolvedValue([]);
 
-      await forAccount(mockGitHubCloudAccount).listNotifications();
+      await getAccountAdapter(mockGitHubCloudAccount).listNotifications();
 
       expect(listSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
     });
@@ -67,7 +73,7 @@ describe('renderer/utils/forges/registry.ts', () => {
         .spyOn(getAdapter('github').accountOps, 'markThreadAsRead')
         .mockResolvedValue(undefined);
 
-      await forAccount(mockGitHubCloudAccount).markThreadAsRead('thread-1');
+      await getAccountAdapter(mockGitHubCloudAccount).markThreadAsRead('thread-1');
 
       expect(markSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'thread-1');
     });
@@ -77,18 +83,18 @@ describe('renderer/utils/forges/registry.ts', () => {
         .spyOn(getAdapter('github').accountOps.capabilities, 'markAsDone')
         .mockReturnValue(true);
 
-      expect(forAccount(mockGitHubCloudAccount).capabilities.markAsDone()).toBe(true);
+      expect(getAccountAdapter(mockGitHubCloudAccount).capabilities.markAsDone()).toBe(true);
       expect(capabilitySpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
     });
 
     it('omits optional bundles the forge does not provide', () => {
-      expect(forAccount(mockGiteaAccount).oauthScopes).toBeUndefined();
-      expect(forAccount(mockGiteaAccount).onAccountTokenChange).toBeUndefined();
-      expect(forAccount(mockGitHubCloudAccount).oauthScopes).toBeDefined();
+      expect(getAccountAdapter(mockGiteaAccount).oauthScopes).toBeUndefined();
+      expect(getAccountAdapter(mockGiteaAccount).onAccountTokenChange).toBeUndefined();
+      expect(getAccountAdapter(mockGitHubCloudAccount).oauthScopes).toBeDefined();
     });
 
     it('resolves members at call time so later replacements are honoured', () => {
-      const view = forAccount(mockGitHubCloudAccount);
+      const view = getAccountAdapter(mockGitHubCloudAccount);
       const urlSpy = vi
         .spyOn(getAdapter('github').accountOps, 'getIssuesUrl')
         .mockReturnValue('https://example.test/issues' as Link);
@@ -99,7 +105,7 @@ describe('renderer/utils/forges/registry.ts', () => {
 
     it('throws for an unknown forge', () => {
       const unknown = { ...mockGitHubCloudAccount, forge: 'mystery' as Forge } as Account;
-      expect(() => forAccount(unknown)).toThrow(/No forge adapter registered/);
+      expect(() => getAccountAdapter(unknown)).toThrow(/No forge adapter registered/);
     });
   });
 

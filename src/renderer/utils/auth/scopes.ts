@@ -2,7 +2,7 @@ import { Constants } from '../../constants';
 
 import type { Account } from '../../types';
 
-import { forAccount } from '../forges/registry';
+import { getAccountAdapter } from '../forges/registry';
 
 /**
  * Return true if the account has all required OAuth scopes.
@@ -13,7 +13,7 @@ import { forAccount } from '../forges/registry';
  * @param account - The account whose scopes to check.
  */
 export function hasRequiredScopes(account: Account): boolean {
-  return forAccount(account).oauthScopes?.hasRequired() ?? true;
+  return getAccountAdapter(account).oauthScopes?.hasRequired() ?? true;
 }
 
 /**
@@ -22,7 +22,7 @@ export function hasRequiredScopes(account: Account): boolean {
  * @param account - The account whose scopes to check.
  */
 export function hasRecommendedScopes(account: Account): boolean {
-  return forAccount(account).oauthScopes?.hasRecommended() ?? true;
+  return getAccountAdapter(account).oauthScopes?.hasRecommended() ?? true;
 }
 
 /**
@@ -31,7 +31,7 @@ export function hasRecommendedScopes(account: Account): boolean {
  * @param account - The account whose scopes to check.
  */
 export function hasAlternateScopes(account: Account): boolean {
-  return forAccount(account).oauthScopes?.hasAlternate() ?? true;
+  return getAccountAdapter(account).oauthScopes?.hasAlternate() ?? true;
 }
 
 /**

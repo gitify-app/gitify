@@ -1,7 +1,7 @@
 import type { Account, AccountUUID, Hostname, Link } from '../../types';
 
 import { rendererLogError, rendererLogWarn, toError } from '../core/logger';
-import { forAccount } from '../forges/registry';
+import { getAccountAdapter } from '../forges/registry';
 import { hasRequiredScopes } from './scopes';
 
 /**
@@ -16,7 +16,7 @@ import { hasRequiredScopes } from './scopes';
  */
 export async function refreshAccount(account: Account): Promise<Account> {
   try {
-    const refreshed = await forAccount(account).fetchAuthenticatedUser();
+    const refreshed = await getAccountAdapter(account).fetchAuthenticatedUser();
 
     account.user = {
       id: refreshed.user.id,

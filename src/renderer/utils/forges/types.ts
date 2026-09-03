@@ -83,7 +83,7 @@ export interface LoginMethodDescriptor {
  * The contract every forge adapter must implement.
  *
  * Goal: shared code (notifications orchestrator, hooks, UI) routes through
- * `getAdapter(forge)` for forge-wide members and `forAccount(account)` for
+ * `getAdapter(forge)` for forge-wide members and `getAccountAdapter(account)` for
  * account-scoped operations, and never imports forge-specific modules
  * directly.
  *
@@ -103,7 +103,7 @@ export interface ForgeAdapter {
 
   /**
    * Operations that act on behalf of one account. Shared code never calls
-   * these directly: it obtains an account-bound view via `forAccount(account)`
+   * these directly: it obtains an account-bound view via `getAccountAdapter(account)`
    * from the registry, which supplies the account to every call.
    */
   readonly accountOps: ForgeAccountOperations;
@@ -182,7 +182,7 @@ export interface ForgeAdapter {
 }
 
 /**
- * The account-bound view of a forge adapter, obtained via `forAccount(account)`.
+ * The account-bound view of a forge adapter, obtained via `getAccountAdapter(account)`.
  *
  * Every member acts on the account the view was created for, so none of them
  * take an account parameter. A view holds the account it was bound to, and the
@@ -272,7 +272,7 @@ export type WithAccount<T> = { [K in keyof T]: WithAccountMember<T[K]> };
 /**
  * Implementation-side shape of {@link ForgeAccountAdapter}: the same members
  * with the account passed explicitly. Adapters implement this under
- * `accountOps`; `forAccount(account)` binds it into a `ForgeAccountAdapter`.
+ * `accountOps`; `getAccountAdapter(account)` binds it into a `ForgeAccountAdapter`.
  */
 export type ForgeAccountOperations = WithAccount<ForgeAccountAdapter>;
 

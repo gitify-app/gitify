@@ -12,7 +12,7 @@ import type {
 } from '../utils/auth/types';
 
 import { notificationsKeys } from '../utils/api/queryKeys';
-import { forAccount, getAdapter } from '../utils/forges/registry';
+import { getAccountAdapter, getAdapter } from '../utils/forges/registry';
 import { encryptValue } from '../utils/system/comms';
 import { useNotifications } from './useNotifications';
 
@@ -136,7 +136,7 @@ export const useLogins = (): LoginsState => {
     async ({ token, hostname, forge, username }: LoginPersonalAccessTokenOptions) => {
       const resolvedForge: Forge = forge ?? 'github';
       const encryptedToken = (await encryptValue(token)) as Token;
-      await forAccount({
+      await getAccountAdapter({
         forge: resolvedForge,
         hostname,
         token: encryptedToken,
