@@ -3,6 +3,8 @@ import { type FC, type MouseEvent, useMemo, useState } from 'react';
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
+import { cn } from 'cn';
+
 import { useAccountsStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
@@ -16,7 +18,6 @@ import {
   isGroupByRepository,
 } from '../../utils/notifications/group';
 import { openAccountProfile, openHostIssues, openHostPulls } from '../../utils/system/links';
-import { cn } from '../../utils/ui/cn';
 import { getChevronDetails } from '../../utils/ui/display';
 import { AllRead } from '../AllRead';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';

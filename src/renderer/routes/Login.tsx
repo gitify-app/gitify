@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
 
+import { cn } from 'cn';
+
 import { useAccountsStore } from '../stores';
 
 import { LogoIcon } from '../components/icons/LogoIcon';
@@ -13,7 +15,6 @@ import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types'
 
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
-import { cn } from '../utils/ui/cn';
 
 /**
  * Pick the method that should drive the dominant CTA for a forge.

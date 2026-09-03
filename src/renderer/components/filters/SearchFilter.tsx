@@ -10,6 +10,8 @@ import {
 } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
+import { cn } from 'cn';
+
 import { useFiltersStore, useSettingsStore } from '../../stores';
 
 import { Title } from '../primitives/Title';
@@ -20,7 +22,6 @@ import {
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
 } from '../../utils/notifications/filters/search';
-import { cn } from '../../utils/ui/cn';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 

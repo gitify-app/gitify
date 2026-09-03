@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 
-import { cn } from '../../utils/ui/cn';
+import { cn } from 'cn';
 
 interface IContents {
   children: ReactNode;

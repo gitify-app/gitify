@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 
+import { cn } from 'cn';
+
 import { APPLICATION } from '../../../shared/constants';
 
 import { Size } from '../../types';
-
-import { cn } from '../../utils/ui/cn';
 
 interface LogoIconProps {
   isDark?: boolean;

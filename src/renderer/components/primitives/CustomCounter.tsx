@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Text } from '@primer/react';
 
-import { cn } from '../../utils/ui/cn';
+import { cn } from 'cn';
 
 type CounterScheme = 'primary' | 'secondary' | 'empty';
 

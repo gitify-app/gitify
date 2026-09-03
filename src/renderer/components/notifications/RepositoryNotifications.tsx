@@ -3,6 +3,8 @@ import { type FC, type MouseEvent, useState } from 'react';
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
+import { cn } from 'cn';
+
 import { useNotifications } from '../../hooks/useNotifications';
 import { getNotificationFailureKey, useNotificationActionFailuresStore } from '../../stores';
 
@@ -14,7 +16,6 @@ import { type GitifyNotification, Opacity, Size } from '../../types';
 import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openRepository } from '../../utils/system/links';
-import { cn } from '../../utils/ui/cn';
 import { getChevronDetails } from '../../utils/ui/display';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { NotificationRow } from './NotificationRow';
