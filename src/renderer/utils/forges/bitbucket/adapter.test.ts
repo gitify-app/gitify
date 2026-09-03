@@ -99,6 +99,16 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
       );
     });
 
+    it('links pull requests to the Your work dashboard and the rest to the host root', () => {
+      expect(bitbucketAdapter.getIssuesUrl(mockBitbucketAccount)).toBe('https://bitbucket.org');
+      expect(bitbucketAdapter.getPullRequestsUrl(mockBitbucketAccount)).toBe(
+        'https://bitbucket.org/dashboard/overview',
+      );
+      expect(bitbucketAdapter.getNotificationsUrl(mockBitbucketAccount)).toBe(
+        'https://bitbucket.org',
+      );
+    });
+
     it('returns the Atlassian docs URL', () => {
       expect(bitbucketAdapter.documentationUrl).toContain('atlassian.com');
     });

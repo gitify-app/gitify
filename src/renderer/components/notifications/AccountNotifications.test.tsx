@@ -168,7 +168,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     await userEvent.click(screen.getByTestId('account-issues'));
 
     expect(openHostIssuesSpy).toHaveBeenCalledTimes(1);
-    expect(openHostIssuesSpy).toHaveBeenCalledWith(mockGitHubCloudAccount.hostname);
+    expect(openHostIssuesSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
   it('should open my pull requests when clicked', async () => {
@@ -186,7 +186,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
     await userEvent.click(screen.getByTestId('account-pull-requests'));
 
     expect(openHostPullsSpy).toHaveBeenCalledTimes(1);
-    expect(openHostPullsSpy).toHaveBeenCalledWith(mockGitHubCloudAccount.hostname);
+    expect(openHostPullsSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
   it('should toggle account notifications visibility', async () => {

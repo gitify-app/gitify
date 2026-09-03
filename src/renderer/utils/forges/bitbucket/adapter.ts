@@ -123,6 +123,14 @@ export const bitbucketAdapter: ForgeAdapter = {
 
   getAccountSettingsUrl: (_account: Account) => ATLASSIAN_TOKEN_SETTINGS_URL,
 
+  // Bitbucket does not capture a workspace slug, so shortcut links cannot use
+  // workspace-scoped ("/workspace/{slug}/...") URLs. Pull requests go to the
+  // account-wide "Your work" dashboard; issues and notifications have no
+  // account-wide page and fall back to the host root.
+  getIssuesUrl: (account) => `https://${account.hostname}` as Link,
+  getPullRequestsUrl: (account) => `https://${account.hostname}/dashboard/overview` as Link,
+  getNotificationsUrl: (account) => `https://${account.hostname}` as Link,
+
   documentationUrl: BITBUCKET_DOCS_URL,
 
   getAuthMethodIcon: () => KeyIcon,

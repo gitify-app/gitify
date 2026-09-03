@@ -41,7 +41,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const { refetchNotifications: fetchNotifications, status } = useNotifications();
 
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
-  const primaryAccountHostname = useAccountsStore((s) => s.primaryAccountHostname());
+  const primaryAccount = useAccountsStore((s) => s.primaryAccount());
 
   const participating = useSettingsStore((s) => s.participating);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
@@ -60,7 +60,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       myNotifications: {
         key: 'n',
         isAllowed: isLoggedIn,
-        action: () => openHostNotifications(primaryAccountHostname),
+        action: () => primaryAccount && openHostNotifications(primaryAccount),
       },
       focusedMode: {
         key: 'w',
@@ -81,12 +81,12 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       myIssues: {
         key: 'i',
         isAllowed: isLoggedIn,
-        action: () => openHostIssues(primaryAccountHostname),
+        action: () => primaryAccount && openHostIssues(primaryAccount),
       },
       myPullRequests: {
         key: 'p',
         isAllowed: isLoggedIn,
-        action: () => openHostPulls(primaryAccountHostname),
+        action: () => primaryAccount && openHostPulls(primaryAccount),
       },
       refresh: {
         key: 'r',
@@ -131,7 +131,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
     isOnSettingsRoute,
     fetchNotifications,
     updateSetting,
-    primaryAccountHostname,
+    primaryAccount,
   ]);
 
   return { shortcuts };

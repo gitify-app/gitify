@@ -1,4 +1,9 @@
 import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import {
+  mockBitbucketAccount,
+  mockGiteaAccount,
+  mockGitLabAccount,
+} from '../../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockGitifyNotificationUser } from '../../__mocks__/user-mocks';
 
@@ -35,21 +40,60 @@ describe('renderer/utils/links.ts', () => {
   });
 
   it('openHostNotifications', () => {
-    openHostNotifications(mockGitHubCloudAccount.hostname);
+    openHostNotifications(mockGitHubCloudAccount);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/notifications');
   });
 
   it('openHostIssues', () => {
-    openHostIssues(mockGitHubCloudAccount.hostname);
+    openHostIssues(mockGitHubCloudAccount);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/issues');
   });
 
   it('openHostPulls', () => {
-    openHostPulls(mockGitHubCloudAccount.hostname);
+    openHostPulls(mockGitHubCloudAccount);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/pulls');
+  });
+
+  it('openHostIssues/openHostPulls/openHostNotifications use GitLab paths', () => {
+    openHostIssues(mockGitLabAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://gitlab.com/dashboard/issues?assignee_username=octocat',
+    );
+
+    openHostPulls(mockGitLabAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://gitlab.com/dashboard/merge_requests',
+    );
+
+    openHostNotifications(mockGitLabAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitlab.com/dashboard/todos');
+  });
+
+  it('openHostIssues/openHostPulls/openHostNotifications use Gitea paths', () => {
+    openHostIssues(mockGiteaAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com/issues');
+
+    openHostPulls(mockGiteaAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com/pulls');
+
+    openHostNotifications(mockGiteaAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com/notifications');
+  });
+
+  it('openHostIssues/openHostPulls/openHostNotifications use Bitbucket paths', () => {
+    openHostIssues(mockBitbucketAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://bitbucket.org');
+
+    openHostPulls(mockBitbucketAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://bitbucket.org/dashboard/overview',
+    );
+
+    openHostNotifications(mockBitbucketAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://bitbucket.org');
   });
 
   it('openAccountProfile', () => {

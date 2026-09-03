@@ -183,6 +183,12 @@ export interface ForgeAdapter {
    * account's auth method.
    */
   getAccountSettingsUrl(account: Account): Link;
+  /** URL to the forge's "my issues" list for the account's host. */
+  getIssuesUrl(account: Account): Link;
+  /** URL to the forge's "my pull requests" list for the account's host. */
+  getPullRequestsUrl(account: Account): Link;
+  /** URL to the forge's notification centre for the account's host. */
+  getNotificationsUrl(account: Account): Link;
   /** Login entries rendered in the Login route. */
   loginMethods: ReadonlyArray<LoginMethodDescriptor>;
   /** External documentation link shown in the PAT login route. */

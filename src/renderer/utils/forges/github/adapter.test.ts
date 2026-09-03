@@ -40,6 +40,16 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       );
     });
 
+    it('builds the issues, pull requests and notifications shortcut URLs', () => {
+      expect(githubAdapter.getIssuesUrl(mockGitHubCloudAccount)).toBe('https://github.com/issues');
+      expect(githubAdapter.getPullRequestsUrl(mockGitHubCloudAccount)).toBe(
+        'https://github.com/pulls',
+      );
+      expect(githubAdapter.getNotificationsUrl(mockGitHubCloudAccount)).toBe(
+        'https://github.com/notifications',
+      );
+    });
+
     it('maps each auth method to its icon', () => {
       expect(githubAdapter.getAuthMethodIcon('GitHub App')).toBe(AppsIcon);
       expect(githubAdapter.getAuthMethodIcon('OAuth App')).toBe(PersonIcon);
