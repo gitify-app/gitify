@@ -75,6 +75,11 @@ export interface AccountsActions {
   primaryAccountHostname: () => Hostname;
 
   /**
+   * Gets the primary account (first account), or undefined if none.
+   */
+  primaryAccount: () => Account | undefined;
+
+  /**
    * Resets accounts to default state.
    */
   reset: () => void;

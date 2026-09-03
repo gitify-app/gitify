@@ -99,6 +99,16 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
       );
     });
 
+    it('links all shortcut URLs to the host root (no workspace slug is captured)', () => {
+      expect(bitbucketAdapter.getIssuesUrl(mockBitbucketAccount)).toBe('https://bitbucket.org');
+      expect(bitbucketAdapter.getPullRequestsUrl(mockBitbucketAccount)).toBe(
+        'https://bitbucket.org',
+      );
+      expect(bitbucketAdapter.getNotificationsUrl(mockBitbucketAccount)).toBe(
+        'https://bitbucket.org',
+      );
+    });
+
     it('returns the Atlassian docs URL', () => {
       expect(bitbucketAdapter.documentationUrl).toContain('atlassian.com');
     });

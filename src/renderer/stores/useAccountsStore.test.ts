@@ -250,6 +250,32 @@ describe('renderer/stores/useAccountsStore.ts', () => {
     });
   });
 
+  describe('primaryAccount', () => {
+    test('should return the first (primary) account when multiple', () => {
+      useAccountsStore.setState({
+        accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+      });
+
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccount()).toBe(mockGitHubCloudAccount);
+    });
+
+    test('should return the account when one is present', () => {
+      useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccount()).toBe(mockGitHubCloudAccount);
+    });
+
+    test('should return undefined when no accounts are present', () => {
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccount()).toBeUndefined();
+    });
+  });
+
   describe('reset', () => {
     test('should reset accounts to default', () => {
       useAccountsStore.setState({

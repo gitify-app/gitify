@@ -164,6 +164,10 @@ const useAccountsStore = create<AccountsStore>()(
         return get().accounts[0]?.hostname ?? Constants.GITHUB_HOSTNAME;
       },
 
+      primaryAccount: () => {
+        return get().accounts[0];
+      },
+
       reset: () => {
         // Drop forge-specific HTTP client state (e.g. cached authenticated
         // Octokit clients) for every account being wiped.

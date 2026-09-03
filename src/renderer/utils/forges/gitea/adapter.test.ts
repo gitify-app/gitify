@@ -60,6 +60,14 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       );
     });
 
+    it('builds issues, pull requests and notifications shortcut URLs', () => {
+      expect(giteaAdapter.getIssuesUrl(mockGiteaAccount)).toBe('https://gitea.example.com/issues');
+      expect(giteaAdapter.getPullRequestsUrl(mockGiteaAccount)).toBe(
+        'https://gitea.example.com/pull',
+      );
+      expect(giteaAdapter.getNotificationsUrl(mockGiteaAccount)).toBe('https://gitea.example.com');
+    });
+
     it('returns the key icon for every auth method (PAT-only forge today)', () => {
       expect(giteaAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
       expect(giteaAdapter.getAuthMethodIcon('GitHub App')).toBe(KeyIcon);
