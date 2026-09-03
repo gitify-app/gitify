@@ -160,10 +160,6 @@ const useAccountsStore = create<AccountsStore>()(
         return get().accounts.length > 1;
       },
 
-      primaryAccountHostname: () => {
-        return get().accounts[0]?.hostname ?? Constants.GITHUB_HOSTNAME;
-      },
-
       primaryAccount: () => {
         return get().accounts[0];
       },
