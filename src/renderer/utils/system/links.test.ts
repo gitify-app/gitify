@@ -75,10 +75,10 @@ describe('renderer/utils/links.ts', () => {
     expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com/issues');
 
     openHostPulls(mockGiteaAccount);
-    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com/pull');
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com/pulls');
 
     openHostNotifications(mockGiteaAccount);
-    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com');
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitea.example.com/notifications');
   });
 
   it('openHostIssues/openHostPulls/openHostNotifications use Bitbucket host root', () => {
