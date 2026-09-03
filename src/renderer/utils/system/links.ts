@@ -21,22 +21,16 @@ export function openGitifyReleaseNotes(version: string) {
   );
 }
 
-export function openHostNotifications(hostname: Hostname) {
-  const url = new URL(`https://${hostname}`);
-  url.pathname = 'notifications';
-  openExternalLink(url.toString() as Link);
+export function openHostNotifications(account: Account) {
+  openExternalLink(getAdapter(account).getNotificationsUrl(account));
 }
 
-export function openHostIssues(hostname: Hostname) {
-  const url = new URL(`https://${hostname}`);
-  url.pathname = 'issues';
-  openExternalLink(url.toString() as Link);
+export function openHostIssues(account: Account) {
+  openExternalLink(getAdapter(account).getIssuesUrl(account));
 }
 
-export function openHostPulls(hostname: Hostname) {
-  const url = new URL(`https://${hostname}`);
-  url.pathname = 'pulls';
-  openExternalLink(url.toString() as Link);
+export function openHostPulls(account: Account) {
+  openExternalLink(getAdapter(account).getPullRequestsUrl(account));
 }
 
 export function openAccountProfile(account: Account) {

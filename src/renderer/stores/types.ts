@@ -70,9 +70,9 @@ export interface AccountsActions {
   hasMultipleAccounts: () => boolean;
 
   /**
-   * Gets the primary account's hostname (first account).
+   * Gets the primary account (first account), or undefined if none.
    */
-  primaryAccountHostname: () => Hostname;
+  primaryAccount: () => Account | undefined;
 
   /**
    * Resets accounts to default state.

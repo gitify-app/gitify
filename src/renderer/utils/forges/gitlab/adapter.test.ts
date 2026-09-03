@@ -68,6 +68,18 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
       );
     });
 
+    it('builds issues, merge requests and notifications shortcut URLs using GitLab paths', () => {
+      expect(gitlabAdapter.getIssuesUrl(mockGitLabAccount)).toBe(
+        'https://gitlab.com/dashboard/issues?assignee_username=octocat',
+      );
+      expect(gitlabAdapter.getPullRequestsUrl(mockGitLabAccount)).toBe(
+        'https://gitlab.com/dashboard/merge_requests',
+      );
+      expect(gitlabAdapter.getNotificationsUrl(mockGitLabAccount)).toBe(
+        'https://gitlab.com/dashboard/todos',
+      );
+    });
+
     it('returns the key icon for every auth method (PAT-only forge today)', () => {
       expect(gitlabAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
       expect(gitlabAdapter.getAuthMethodIcon('OAuth App')).toBe(KeyIcon);

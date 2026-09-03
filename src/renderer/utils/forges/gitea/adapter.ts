@@ -96,6 +96,9 @@ export const giteaAdapter: ForgeAdapter = {
     `https://${hostname}/user/settings/applications` as Link,
   getAccountSettingsUrl: (account: Account) =>
     `https://${account.hostname}/user/settings/applications` as Link,
+  getIssuesUrl: (account) => `https://${account.hostname}/issues` as Link,
+  getPullRequestsUrl: (account) => `https://${account.hostname}/pulls` as Link,
+  getNotificationsUrl: (account) => `https://${account.hostname}/notifications` as Link,
   documentationUrl: GITEA_DOCS_URL,
   // Gitea only supports PAT today, so every method falls through to the key
   // icon. Adding device-flow/OAuth support later means returning their icons

@@ -109,6 +109,9 @@ export const githubAdapter: ForgeAdapter = {
   validateToken: isValidToken,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   getAccountSettingsUrl: getDeveloperSettingsURL,
+  getIssuesUrl: (account) => `https://${account.hostname}/issues` as Link,
+  getPullRequestsUrl: (account) => `https://${account.hostname}/pulls` as Link,
+  getNotificationsUrl: (account) => `https://${account.hostname}/notifications` as Link,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
   getAuthMethodIcon: githubAuthMethodIcon,
 

@@ -6,8 +6,6 @@ import {
 } from '../__mocks__/account-mocks';
 import { mockRawUser } from '../utils/forges/github/__mocks__/response-mocks';
 
-import { Constants } from '../constants';
-
 import type { Account, Hostname, Link, Token } from '../types';
 import type { GetAuthenticatedUserResponse } from '../utils/forges/github/types';
 
@@ -232,21 +230,29 @@ describe('renderer/stores/useAccountsStore.ts', () => {
     });
   });
 
-  describe('primaryAccountHostname', () => {
-    test('should return first (primary) account hostname when multiple', () => {
+  describe('primaryAccount', () => {
+    test('should return the first (primary) account when multiple', () => {
       useAccountsStore.setState({
         accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
       });
 
       const { result } = renderHook(() => useAccountsStore());
 
-      expect(result.current.primaryAccountHostname()).toBe(mockGitHubCloudAccount.hostname);
+      expect(result.current.primaryAccount()).toBe(mockGitHubCloudAccount);
     });
 
-    test('should use default hostname if no accounts', () => {
+    test('should return the account when one is present', () => {
+      useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+
       const { result } = renderHook(() => useAccountsStore());
 
-      expect(result.current.primaryAccountHostname()).toBe(Constants.GITHUB_HOSTNAME);
+      expect(result.current.primaryAccount()).toBe(mockGitHubCloudAccount);
+    });
+
+    test('should return undefined when no accounts are present', () => {
+      const { result } = renderHook(() => useAccountsStore());
+
+      expect(result.current.primaryAccount()).toBeUndefined();
     });
   });
 

@@ -99,14 +99,14 @@ export const AccountNotifications: FC<AccountNotificationsProps> = (
             }
           >
             <HoverButton
-              action={() => openHostIssues(account.hostname)}
+              action={() => openHostIssues(account)}
               icon={IssueOpenedIcon}
               label="My issues ↗"
               testid="account-issues"
             />
 
             <HoverButton
-              action={() => openHostPulls(account.hostname)}
+              action={() => openHostPulls(account)}
               icon={GitPullRequestIcon}
               label="My pull requests ↗"
               testid="account-pull-requests"
