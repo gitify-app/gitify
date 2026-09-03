@@ -59,7 +59,9 @@ describe('renderer/utils/links.ts', () => {
 
   it('openHostIssues/openHostPulls/openHostNotifications use GitLab paths', () => {
     openHostIssues(mockGitLabAccount);
-    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gitlab.com/dashboard/work_items');
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://gitlab.com/dashboard/issues?assignee_username=octocat',
+    );
 
     openHostPulls(mockGitLabAccount);
     expect(openExternalLinkSpy).toHaveBeenLastCalledWith(

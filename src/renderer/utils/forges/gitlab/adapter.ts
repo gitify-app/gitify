@@ -168,7 +168,13 @@ export const gitlabAdapter: ForgeAdapter = {
     `https://${hostname}/-/user_settings/personal_access_tokens` as Link,
   getAccountSettingsUrl: (account: Account) =>
     `https://${account.hostname}/-/user_settings/personal_access_tokens` as Link,
-  getIssuesUrl: (account) => `https://${account.hostname}/dashboard/work_items` as Link,
+  getIssuesUrl: (account) => {
+    const url = new URL(`https://${account.hostname}/dashboard/issues`);
+    if (account.user) {
+      url.searchParams.set('assignee_username', account.user.login);
+    }
+    return url.toString() as Link;
+  },
   getPullRequestsUrl: (account) => `https://${account.hostname}/dashboard/merge_requests` as Link,
   // GitLab's "notification feed" for the current user is the To-Do List
   // (bell icon). Gitify reads to-dos for GitLab, so link there.

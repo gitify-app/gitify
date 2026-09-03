@@ -70,7 +70,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
 
     it('builds issues, merge requests and notifications shortcut URLs using GitLab paths', () => {
       expect(gitlabAdapter.getIssuesUrl(mockGitLabAccount)).toBe(
-        'https://gitlab.com/dashboard/work_items',
+        'https://gitlab.com/dashboard/issues?assignee_username=octocat',
       );
       expect(gitlabAdapter.getPullRequestsUrl(mockGitLabAccount)).toBe(
         'https://gitlab.com/dashboard/merge_requests',
