@@ -27,17 +27,17 @@ jobs:
         include:
           - os: macos-latest
             platform: macOS
-            package-cmd: vp run package:macos -- --publish=never -c.mac.identity=null
+            package-cmd: vp run package:macos --publish=never -c.mac.identity=null
             cleanup-path: dist/mac-universal
             artifact-name: Gitify-dist-mac
           - os: windows-latest
             platform: Windows
-            package-cmd: vp run package:win -- --publish=never
+            package-cmd: vp run package:win --publish=never
             cleanup-path: dist/win-unpacked
             artifact-name: Gitify-dist-win
           - os: ubuntu-latest
             platform: Linux
-            package-cmd: vp run package:linux -- --publish=never
+            package-cmd: vp run package:linux --publish=never
             cleanup-path: dist/linux-unpacked
             artifact-name: Gitify-dist-linux
     runs-on: ${{ matrix.os }}
