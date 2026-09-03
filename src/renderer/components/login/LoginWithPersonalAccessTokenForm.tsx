@@ -33,6 +33,24 @@ interface IFormErrors {
   hostname?: string;
   username?: string;
   invalidCredentialsForHost?: string;
+  invalidCredentialsDetail?: string;
+}
+
+/**
+ * Reduce a login failure to a single capped line for the error banner. Only
+ * real errors carry a message worth showing, and the first line is enough: a
+ * misbehaving server can echo the request or its response body back, and
+ * that must not flood the banner.
+ */
+const ERROR_DETAIL_MAX_LENGTH = 150;
+
+export function summarizeLoginError(err: unknown): string | undefined {
+  if (!(err instanceof Error)) {
+    return undefined;
+  }
+
+  const firstLine = err.message.split('\n')[0].replace(/\s+/g, ' ').trim();
+  return firstLine ? firstLine.slice(0, ERROR_DETAIL_MAX_LENGTH) : undefined;
 }
 
 export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
@@ -74,7 +92,7 @@ export interface LoginWithPersonalAccessTokenFormProps {
   /** Label for the button that opens the forge's token settings page. */
   tokenSettingsLabel: string;
   /** Text rendered beside the token settings button. */
-  tokenSettingsCaption: string;
+  tokenSettingsCaption?: string;
   tokenPlaceholder: string;
   /** Tooltip for the documentation button. */
   docsTooltip: string;
@@ -160,6 +178,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
         rendererLogError('loginWithPersonalAccessToken', 'Failed to login with PAT', toError(err));
         setErrors({
           invalidCredentialsForHost: `Failed to validate provided token against ${data.hostname}`,
+          invalidCredentialsDetail: summarizeLoginError(err),
         });
       }
     },
@@ -178,6 +197,9 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
               <Text color="danger.fg">
                 <Stack direction="vertical" gap="condensed">
                   <Text>{errors.invalidCredentialsForHost}</Text>
+                  {errors.invalidCredentialsDetail && (
+                    <Text>{errors.invalidCredentialsDetail}</Text>
+                  )}
                 </Stack>
               </Text>
             }
@@ -245,7 +267,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
               >
                 {tokenSettingsLabel}
               </Button>
-              <Text className="text-xs">{tokenSettingsCaption}</Text>
+              {tokenSettingsCaption && <Text className="text-xs">{tokenSettingsCaption}</Text>}
             </Stack>
 
             {children}
