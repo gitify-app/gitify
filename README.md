@@ -1,6 +1,6 @@
 # Gitify
 
-[![CI Workflow][ci-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coverage][coverage-badge]][coverage] [![Quality Gate Status][quality-badge]][quality] [![Renovate enabled][renovate-badge]][renovate] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
+[![CI Workflow][ci-workflow-badge]][ci-actions] [![Release Workflow][release-workflow-badge]][release-actions] [![Coverage][coverage-badge]][coverage] [![Quality Gate Status][quality-badge]][quality] [![Renovate enabled][renovate-badge]][renovate] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
 
 > Git Notifications on your menu bar. Available on macOS, Windows and Linux.
 
@@ -95,7 +95,6 @@ For more information, see [LICENSE](LICENSE).
 [faqs]: https://gitify.io/faq
 [gitify-social]: https://raw.githubusercontent.com/gitify-app/website/master/public/images/social.png
 [github]: https://github.com/gitify-app/gitify
-[github-actions]: https://github.com/gitify-app/gitify/actions
 [github-issues]: https://github.com/gitify-app/gitify/issues
 [github-releases]: https://github.com/gitify-app/gitify/releases/latest
 [github-website]: https://github.com/gitify-app/website
@@ -107,7 +106,9 @@ For more information, see [LICENSE](LICENSE).
 [quality-badge]: https://img.shields.io/sonar/quality_gate/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarqubecloud
 [quality]: https://sonarcloud.io/summary/new_code?id=gitify-app_gitify
 [ci-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/ci.yml?logo=github&label=CI
+[ci-actions]: https://github.com/gitify-app/gitify/actions/workflows/ci.yml
 [release-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/release.yml?logo=github&label=Release
+[release-actions]: https://github.com/gitify-app/gitify/actions/workflows/release.yml
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all&logo=github
 [downloads-latest-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total?logo=github
 [contributors-badge]: https://img.shields.io/github/contributors/gitify-app/gitify?logo=github
