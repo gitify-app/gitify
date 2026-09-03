@@ -40,10 +40,11 @@ async function authHeaders(account: Account): Promise<HeadersInit> {
 /**
  * Drop the response body from error messages — a misbehaving server can echo
  * the request (including the PRIVATE-TOKEN header) back, and that error
- * propagates to logs.
+ * propagates to logs. HTTP/2 responses carry no reason phrase, so the status
+ * text is only appended when the server sent one.
  */
 function apiError(status: number, statusText: string): Error {
-  return new Error(`GitLab API ${status} ${statusText}`);
+  return new Error(statusText ? `GitLab API ${status} ${statusText}` : `GitLab API ${status}`);
 }
 
 async function gitlabRequest<T>(

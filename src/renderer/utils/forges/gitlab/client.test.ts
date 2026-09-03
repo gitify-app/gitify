@@ -139,6 +139,14 @@ describe('renderer/utils/forges/gitlab/client.ts', () => {
         /^GitLab API 403 Forbidden$/,
       );
     });
+
+    it('omits the reason phrase when the response carries none (HTTP/2)', async () => {
+      fetchMock().mockResolvedValue(new Response('', { status: 403, statusText: '' }));
+
+      useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
+
+      await expect(listGitLabTodos(mockGitLabAccount)).rejects.toThrow(/^GitLab API 403$/);
+    });
   });
 
   describe('fetchGitLabAuthenticatedUser', () => {
