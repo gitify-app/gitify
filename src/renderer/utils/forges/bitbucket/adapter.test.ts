@@ -99,10 +99,10 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
       );
     });
 
-    it('links all shortcut URLs to the host root (no workspace slug is captured)', () => {
+    it('links pull requests to the Your work dashboard and the rest to the host root', () => {
       expect(bitbucketAdapter.getIssuesUrl(mockBitbucketAccount)).toBe('https://bitbucket.org');
       expect(bitbucketAdapter.getPullRequestsUrl(mockBitbucketAccount)).toBe(
-        'https://bitbucket.org',
+        'https://bitbucket.org/dashboard/overview',
       );
       expect(bitbucketAdapter.getNotificationsUrl(mockBitbucketAccount)).toBe(
         'https://bitbucket.org',
