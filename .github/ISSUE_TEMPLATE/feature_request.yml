@@ -10,6 +10,21 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: relevant-forges
+    attributes:
+      label: Relevant Forge(s)
+      description: Which forge(s) does this feature relate to? Select all that apply.
+      multiple: true
+      options:
+        - GitHub
+        - GitLab
+        - Gitea / Forgejo / Codeberg
+        - Bitbucket
+        - All / Not applicable
+    validations:
+      required: false
+
   - type: textarea
     id: additional-information
     attributes:

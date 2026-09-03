@@ -2,15 +2,14 @@ name: 🐛 Bug Report
 description: Report errors or unexpected behavior
 labels: [bug]
 body:
-  - type: checkboxes
+  - type: markdown
     attributes:
-      label: 🔍 Is there already an issue for your problem?
-      description: |
-        Thanks for taking the time to fill out this bug report 🤗
-        Make sure there aren't any open/closed issues for this topic 😃
-      options:
-        - label: I have checked older issues, open and closed
-          required: true
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        Before submitting, please check existing [issues](https://github.com/gitify-app/gitify/issues) to avoid duplicates.
+
+        For general questions or troubleshooting, please visit our [FAQ & Documentation](https://gitify.io/faq).
 
   - type: textarea
     id: description
@@ -37,7 +36,9 @@ body:
     id: logs
     attributes:
       label: 🪵 Log Excerpts
-      description: Share any relevant log excerpts where available - see https://gitify.io/faq
+      description: |
+        Share any relevant log excerpts where available.
+        See [FAQ](https://gitify.io/faq) for more details.
     validations:
       required: false
 
@@ -46,7 +47,7 @@ body:
     attributes:
       label: Gitify Version
       description: What version of Gitify are you using?
-      placeholder: 6.x.x
+      placeholder: 7.x.x
     validations:
       required: true
 
@@ -63,20 +64,32 @@ body:
       required: true
 
   - type: dropdown
-    id: environment-github
+    id: forge
     attributes:
-      label: GitHub Account
-      description: What GitHub account type are you using?
+      label: Forge
+      description: Which Git forge are you using with Gitify?
       options:
-        - GitHub Cloud
-        - GitHub Enterprise Server
-        - Combination
+        - GitHub
+        - GitLab
+        - Gitea / Forgejo / Codeberg
+        - Bitbucket
     validations:
       required: true
+
+  - type: input
+    id: forge-variant
+    attributes:
+      label: Forge Variant
+      description: |
+        Optional. Specify the hosting variant if applicable.
+        Examples: "GitHub Cloud", "GitHub Enterprise Server 3.13", "GitLab Self-Managed", "Gitea 1.22", "Codeberg", "Bitbucket Cloud"
+      placeholder: e.g. GitHub Cloud, GitLab Self-Managed, Gitea 1.22
+    validations:
+      required: false
 
   - type: textarea
     attributes:
       label: 📸 Screenshots
-      description: Place any screenshots of the issue here if needed
+      description: Place any screenshots of the issue here if needed.
     validations:
       required: false
