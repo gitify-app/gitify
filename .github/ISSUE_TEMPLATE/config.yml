@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 FAQ & Documentation
+    url: https://gitify.io/faq
+    about: Check the FAQ for common questions and troubleshooting tips before opening an issue.
