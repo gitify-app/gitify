@@ -274,7 +274,7 @@ describe('renderer/stores/useAccountsStore.ts', () => {
 
     test('should drop forge client state for every account', () => {
       const onAccountTokenChangeSpy = vi
-        .spyOn(getAdapter(mockGitHubCloudAccount), 'onAccountTokenChange')
+        .spyOn(getAdapter(mockGitHubCloudAccount).accountOps, 'onAccountTokenChange')
         .mockImplementation(vi.fn());
 
       useAccountsStore.setState({

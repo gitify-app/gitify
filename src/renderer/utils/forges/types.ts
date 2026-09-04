@@ -28,12 +28,7 @@ import type {
  * Each capability is a function over the account because for some forges (e.g.
  * GitHub Enterprise Server) capabilities depend on the hostname and version.
  */
-export interface ForgeCapabilities {
-  /** Whether the forge supports a "mark as done" action distinct from "mark as read". */
-  markAsDone(account: Account): boolean;
-  /** Whether the forge supports ignoring a thread's subscription (unsubscribe). */
-  unsubscribeThread(account: Account): boolean;
-}
+export type ForgeCapabilities = ForgeAccountOperations['capabilities'];
 
 /**
  * Normalised account data returned by `fetchAuthenticatedUser`.
@@ -88,7 +83,9 @@ export interface LoginMethodDescriptor {
  * The contract every forge adapter must implement.
  *
  * Goal: shared code (notifications orchestrator, hooks, UI) routes through
- * `getAdapter(account)` and never imports forge-specific modules directly.
+ * `getAdapter(forge)` for forge-wide members and `getAccountAdapter(account)` for
+ * account-scoped operations, and never imports forge-specific modules
+ * directly.
  *
  * @see ./github/adapter.ts — full reference implementation (REST + GraphQL,
  *      enrichment, Octokit cache lifecycle).
@@ -103,8 +100,13 @@ export interface ForgeAdapter {
   readonly tagline?: string;
   /** Icon used for the platform in the UI. */
   readonly icon: FC<OcticonProps>;
-  /** Static or computed capability matrix for this forge. */
-  readonly capabilities: ForgeCapabilities;
+
+  /**
+   * Operations that act on behalf of one account. Shared code never calls
+   * these directly: it obtains an account-bound view via `getAccountAdapter(account)`
+   * from the registry, which supplies the account to every call.
+   */
+  readonly accountOps: ForgeAccountOperations;
 
   /**
    * Resolve the platform label (e.g. "GitHub Cloud") for a given hostname.
@@ -116,29 +118,6 @@ export interface ForgeAdapter {
    * Format an authenticated user login according to the forge's display convention.
    */
   formatUserLogin(login: string): string;
-
-  /** Format a notification actor for display (e.g. bots, managed users) according to forge identity conventions. */
-  formatNotificationUser(account: Account, user: GitifyNotificationUser): string;
-
-  /** Fetch the authenticated user (used during login & on refresh). */
-  fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData>;
-
-  /**
-   * Optional lifecycle hook called when an account's token rotates. Forges
-   * with HTTP client caches (e.g. GitHub Octokit) drop their cache here.
-   */
-  onAccountTokenChange?(account: Account): void;
-
-  /**
-   * List notifications already transformed to the shared shape.
-   * Returns `RawGitifyNotification[]` — `display` is populated later by the
-   * orchestrator's `formatNotification` step.
-   */
-  listNotifications(account: Account): Promise<RawGitifyNotification[]>;
-
-  markThreadAsRead(account: Account, threadId: string): Promise<void>;
-  markThreadAsDone(account: Account, threadId: string): Promise<void>;
-  unsubscribeThread(account: Account, threadId: string): Promise<void>;
 
   /**
    * Enrich notifications with forge-specific subject details (state, user,
@@ -157,12 +136,6 @@ export interface ForgeAdapter {
   enrichNotifications?(notifications: RawGitifyNotification[]): Promise<RawGitifyNotification[]>;
 
   /**
-   * GET an arbitrary forge URL and return JSON. Used by notification
-   * handlers to follow subject/comment URLs.
-   */
-  followUrl<T>(account: Account, url: Link): Promise<T>;
-
-  /**
    * Return the display-surface values (icon, color, default url, default user
    * type) for a notification. Adapter-internal dispatch keeps shared
    * formatting code (`formatters.ts`, `url.ts`) forge-agnostic.
@@ -177,18 +150,6 @@ export interface ForgeAdapter {
   validateToken(token: Token): boolean;
   /** URL to manage/create a personal access token on the forge. */
   getPersonalAccessTokenSettingsUrl(hostname: Hostname): Link;
-  /**
-   * URL to the forge page where the user manages this account's auth method
-   * (e.g. tokens, OAuth apps, GitHub Apps). Forges may key this off the
-   * account's auth method.
-   */
-  getAccountSettingsUrl(account: Account): Link;
-  /** URL to the forge's "my issues" list for the account's host. */
-  getIssuesUrl(account: Account): Link;
-  /** URL to the forge's "my pull requests" list for the account's host. */
-  getPullRequestsUrl(account: Account): Link;
-  /** URL to the forge's notification centre for the account's host. */
-  getNotificationsUrl(account: Account): Link;
   /** Login entries rendered in the Login route. */
   loginMethods: ReadonlyArray<LoginMethodDescriptor>;
   /** External documentation link shown in the PAT login route. */
@@ -218,28 +179,108 @@ export interface ForgeAdapter {
    * omit this bundle entirely — callers gate the OAuth-app UI on its presence.
    */
   oauthWebApp?: OAuthWebAppSupport;
+}
+
+/**
+ * The account-bound view of a forge adapter, obtained via `getAccountAdapter(account)`.
+ *
+ * Every member acts on the account the view was created for, so none of them
+ * take an account parameter. A view holds the account it was bound to, and the
+ * store replaces account objects when their token rotates, so create a view at
+ * the call site rather than keeping one around.
+ */
+export interface ForgeAccountAdapter {
+  /** Capability matrix for the account's forge and host. */
+  readonly capabilities: {
+    /** Whether the forge supports a "mark as done" action distinct from "mark as read". */
+    markAsDone(): boolean;
+    /** Whether the forge supports ignoring a thread's subscription (unsubscribe). */
+    unsubscribeThread(): boolean;
+  };
+
+  /** Format a notification actor for display (e.g. bots, managed users) according to forge identity conventions. */
+  formatNotificationUser(user: GitifyNotificationUser): string;
+
+  /** Fetch the authenticated user (used during login & on refresh). */
+  fetchAuthenticatedUser(): Promise<RefreshAccountData>;
+
+  /**
+   * Optional lifecycle hook called when the account's token rotates. Forges
+   * with HTTP client caches (e.g. GitHub Octokit) drop their cache here.
+   */
+  onAccountTokenChange?(): void;
+
+  /**
+   * List notifications already transformed to the shared shape. Returns
+   * `RawGitifyNotification[]`; `display` is populated later by the
+   * orchestrator's `formatNotification` step.
+   */
+  listNotifications(): Promise<RawGitifyNotification[]>;
+
+  markThreadAsRead(threadId: string): Promise<void>;
+  markThreadAsDone(threadId: string): Promise<void>;
+  unsubscribeThread(threadId: string): Promise<void>;
+
+  /**
+   * GET an arbitrary forge URL and return JSON. Used by notification
+   * handlers to follow subject/comment URLs.
+   */
+  followUrl<T>(url: Link): Promise<T>;
+
+  /**
+   * URL to the forge page where the user manages this account's auth method
+   * (e.g. tokens, OAuth apps, GitHub Apps). Forges may key this off the
+   * account's auth method.
+   */
+  getAccountSettingsUrl(): Link;
+  /** URL to the forge's "my issues" list for the account's host. */
+  getIssuesUrl(): Link;
+  /** URL to the forge's "my pull requests" list for the account's host. */
+  getPullRequestsUrl(): Link;
+  /** URL to the forge's notification centre for the account's host. */
+  getNotificationsUrl(): Link;
 
   /**
    * OAuth scope checks. Forges with no scope concept (e.g. Gitea) omit this
-   * bundle entirely — callers should treat `oauthScopes === undefined` as
+   * bundle entirely; callers should treat `oauthScopes === undefined` as
    * "nothing to verify" and skip any scopes UI rather than render a
    * meaningless "all granted" state.
    */
-  oauthScopes?: OAuthScopesSupport;
+  readonly oauthScopes?: {
+    /** Whether the account holds the minimum scopes Gitify needs to function. */
+    hasRequired(): boolean;
+    /** Whether the account holds the full recommended scope set. */
+    hasRecommended(): boolean;
+    /** Whether the account holds the alternate (legacy) scope set. */
+    hasAlternate(): boolean;
+  };
 }
+
+/**
+ * Maps one member of {@link ForgeAccountAdapter} to its implementation shape:
+ * functions gain `account` as their first parameter, nested bundles are mapped
+ * recursively, and anything else is left as is.
+ */
+type WithAccountMember<M> = M extends (...args: infer A) => infer R
+  ? (account: Account, ...args: A) => R
+  : M extends object
+    ? WithAccount<M>
+    : M;
+
+export type WithAccount<T> = { [K in keyof T]: WithAccountMember<T[K]> };
+
+/**
+ * Implementation-side shape of {@link ForgeAccountAdapter}: the same members
+ * with the account passed explicitly. Adapters implement this under
+ * `accountOps`; `getAccountAdapter(account)` binds it into a `ForgeAccountAdapter`.
+ */
+export type ForgeAccountOperations = WithAccount<ForgeAccountAdapter>;
 
 /**
  * OAuth scope-checking capability bundle. Present only on forges with an
  * OAuth scope concept (GitHub today).
  */
-export interface OAuthScopesSupport {
-  /** Whether the account holds the minimum scopes Gitify needs to function. */
-  hasRequired(account: Account): boolean;
-  /** Whether the account holds the full recommended scope set. */
-  hasRecommended(account: Account): boolean;
-  /** Whether the account holds the alternate (legacy) scope set. */
-  hasAlternate(account: Account): boolean;
-}
+export type OAuthScopesSupport = NonNullable<ForgeAccountOperations['oauthScopes']>;
 
 /**
  * Custom-OAuth-app web flow capability bundle. Present only on forges that

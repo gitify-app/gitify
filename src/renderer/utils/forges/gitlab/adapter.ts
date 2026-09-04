@@ -128,33 +128,10 @@ export const gitlabAdapter: ForgeAdapter = {
   displayName: 'GitLab',
   tagline: 'GitLab.com & Self-Managed',
   icon: GitLabIcon,
-  capabilities,
 
   getPlatform,
   formatUserLogin: (login) => login,
-  formatNotificationUser: (_account, user) => user.login,
 
-  fetchAuthenticatedUser,
-  listNotifications,
-
-  markThreadAsRead: (account, threadId) => markGitLabTodoAsDone(account, threadId),
-  // Capability `markAsDone(account)` returns false, so the orchestrator falls
-  // back to mark-as-read before reaching here. Throwing surfaces any caller
-  // that bypasses the capability check.
-  markThreadAsDone: () => {
-    throw new Error(
-      'Mark-as-done is not supported for GitLab accounts; check capabilities.markAsDone before calling.',
-    );
-  },
-  unsubscribeThread: () => {
-    throw new Error(
-      'Ignoring thread subscriptions is not supported for GitLab accounts; check capabilities.unsubscribeThread before calling.',
-    );
-  },
-
-  followUrl<T>(account: Account, url: Link): Promise<T> {
-    return gitlabGetJson<T>(account, url);
-  },
   getDisplayHelpers,
 
   defaultHostname: GITLAB_CLOUD_HOSTNAME,
@@ -166,19 +143,6 @@ export const gitlabAdapter: ForgeAdapter = {
 
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
     `https://${hostname}/-/user_settings/personal_access_tokens` as Link,
-  getAccountSettingsUrl: (account: Account) =>
-    `https://${account.hostname}/-/user_settings/personal_access_tokens` as Link,
-  getIssuesUrl: (account) => {
-    const url = new URL(`https://${account.hostname}/dashboard/issues`);
-    if (account.user) {
-      url.searchParams.set('assignee_username', account.user.login);
-    }
-    return url.toString() as Link;
-  },
-  getPullRequestsUrl: (account) => `https://${account.hostname}/dashboard/merge_requests` as Link,
-  // GitLab's "notification feed" for the current user is the To-Do List
-  // (bell icon). Gitify reads to-dos for GitLab, so link there.
-  getNotificationsUrl: (account) => `https://${account.hostname}/dashboard/todos` as Link,
 
   documentationUrl: GITLAB_DOCS_URL,
 
@@ -195,4 +159,41 @@ export const gitlabAdapter: ForgeAdapter = {
       authMethod: 'Personal Access Token',
     },
   ],
+
+  accountOps: {
+    capabilities,
+    formatNotificationUser: (_account, user) => user.login,
+    fetchAuthenticatedUser,
+    listNotifications,
+    markThreadAsRead: (account, threadId) => markGitLabTodoAsDone(account, threadId),
+    // Capability `markAsDone(account)` returns false, so the orchestrator falls
+    // back to mark-as-read before reaching here. Throwing surfaces any caller
+    // that bypasses the capability check.
+    markThreadAsDone: () => {
+      throw new Error(
+        'Mark-as-done is not supported for GitLab accounts; check capabilities.markAsDone before calling.',
+      );
+    },
+    unsubscribeThread: () => {
+      throw new Error(
+        'Ignoring thread subscriptions is not supported for GitLab accounts; check capabilities.unsubscribeThread before calling.',
+      );
+    },
+    followUrl<T>(account: Account, url: Link): Promise<T> {
+      return gitlabGetJson<T>(account, url);
+    },
+    getAccountSettingsUrl: (account: Account) =>
+      `https://${account.hostname}/-/user_settings/personal_access_tokens` as Link,
+    getIssuesUrl: (account) => {
+      const url = new URL(`https://${account.hostname}/dashboard/issues`);
+      if (account.user) {
+        url.searchParams.set('assignee_username', account.user.login);
+      }
+      return url.toString() as Link;
+    },
+    getPullRequestsUrl: (account) => `https://${account.hostname}/dashboard/merge_requests` as Link,
+    // GitLab's "notification feed" for the current user is the To-Do List
+    // (bell icon). Gitify reads to-dos for GitLab, so link there.
+    getNotificationsUrl: (account) => `https://${account.hostname}/dashboard/todos` as Link,
+  },
 };

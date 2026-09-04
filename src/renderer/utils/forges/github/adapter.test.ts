@@ -35,17 +35,19 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
 
     it('routes getAccountSettingsUrl through the auth-method helper', () => {
-      expect(githubAdapter.getAccountSettingsUrl(mockGitHubCloudAccount)).toBe(
+      expect(githubAdapter.accountOps.getAccountSettingsUrl(mockGitHubCloudAccount)).toBe(
         'https://github.com/settings/tokens',
       );
     });
 
     it('builds the issues, pull requests and notifications shortcut URLs', () => {
-      expect(githubAdapter.getIssuesUrl(mockGitHubCloudAccount)).toBe('https://github.com/issues');
-      expect(githubAdapter.getPullRequestsUrl(mockGitHubCloudAccount)).toBe(
+      expect(githubAdapter.accountOps.getIssuesUrl(mockGitHubCloudAccount)).toBe(
+        'https://github.com/issues',
+      );
+      expect(githubAdapter.accountOps.getPullRequestsUrl(mockGitHubCloudAccount)).toBe(
         'https://github.com/pulls',
       );
-      expect(githubAdapter.getNotificationsUrl(mockGitHubCloudAccount)).toBe(
+      expect(githubAdapter.accountOps.getNotificationsUrl(mockGitHubCloudAccount)).toBe(
         'https://github.com/notifications',
       );
     });
@@ -79,7 +81,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
 
     it('uses a trimmed profile name for an enterprise managed user', () => {
       expect(
-        githubAdapter.formatNotificationUser(mockGitHubCloudAccount, {
+        githubAdapter.accountOps.formatNotificationUser(mockGitHubCloudAccount, {
           ...user,
           name: '  Notification Author  ',
         }),
@@ -90,14 +92,17 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       'falls back to the formatted login when the EMU name is %s',
       (name) => {
         expect(
-          githubAdapter.formatNotificationUser(mockGitHubCloudAccount, { ...user, name }),
+          githubAdapter.accountOps.formatNotificationUser(mockGitHubCloudAccount, {
+            ...user,
+            name,
+          }),
         ).toBe('notification-author_gitify');
       },
     );
 
     it('keeps the formatted login for a regular user with a profile name', () => {
       expect(
-        githubAdapter.formatNotificationUser(mockGitHubCloudAccount, {
+        githubAdapter.accountOps.formatNotificationUser(mockGitHubCloudAccount, {
           ...user,
           login: 'notification-author',
           type: 'User',
@@ -111,9 +116,9 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         user: { ...mockGitHubCloudAccount.user!, login: 'octocat_gitify' },
       };
 
-      expect(githubAdapter.formatNotificationUser(managedAccount, { ...user, type: 'User' })).toBe(
-        'Notification Author (notification-author_gitify)',
-      );
+      expect(
+        githubAdapter.accountOps.formatNotificationUser(managedAccount, { ...user, type: 'User' }),
+      ).toBe('Notification Author (notification-author_gitify)');
     });
   });
 
@@ -132,7 +137,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         },
       } as unknown as Awaited<ReturnType<typeof client.fetchAuthenticatedUserDetails>>);
 
-      const result = await githubAdapter.fetchAuthenticatedUser(mockGitHubCloudAccount);
+      const result = await githubAdapter.accountOps.fetchAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(result).toEqual({
         user: {
@@ -152,7 +157,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         headers: {},
       } as unknown as Awaited<ReturnType<typeof client.fetchAuthenticatedUserDetails>>);
 
-      const result = await githubAdapter.fetchAuthenticatedUser(mockGitHubCloudAccount);
+      const result = await githubAdapter.accountOps.fetchAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(result.version).toBe('latest');
       expect(result.scopes).toBeUndefined();
@@ -186,7 +191,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         },
       ] as unknown as Awaited<ReturnType<typeof client.listNotificationsForAuthenticatedUser>>);
 
-      const result = await githubAdapter.listNotifications(mockGitHubCloudAccount);
+      const result = await githubAdapter.accountOps.listNotifications(mockGitHubCloudAccount);
 
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('1');
@@ -199,7 +204,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     it('markThreadAsRead delegates to the GitHub client', async () => {
       const spy = vi.spyOn(client, 'markNotificationThreadAsRead').mockResolvedValue(undefined);
 
-      await githubAdapter.markThreadAsRead(mockGitHubCloudAccount, '7');
+      await githubAdapter.accountOps.markThreadAsRead(mockGitHubCloudAccount, '7');
 
       expect(spy).toHaveBeenCalledWith(mockGitHubCloudAccount, '7');
     });
@@ -207,7 +212,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     it('markThreadAsDone delegates to the GitHub client', async () => {
       const spy = vi.spyOn(client, 'markNotificationThreadAsDone').mockResolvedValue(undefined);
 
-      await githubAdapter.markThreadAsDone(mockGitHubCloudAccount, '8');
+      await githubAdapter.accountOps.markThreadAsDone(mockGitHubCloudAccount, '8');
 
       expect(spy).toHaveBeenCalledWith(mockGitHubCloudAccount, '8');
     });
@@ -221,7 +226,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
           >,
         );
 
-      await githubAdapter.unsubscribeThread(mockGitHubCloudAccount, '9');
+      await githubAdapter.accountOps.unsubscribeThread(mockGitHubCloudAccount, '9');
 
       expect(spy).toHaveBeenCalledWith(mockGitHubCloudAccount, '9');
     });
@@ -233,33 +238,39 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     }
 
     it('exposes the bundle (GitHub has an OAuth scope concept)', () => {
-      expect(githubAdapter.oauthScopes).toBeDefined();
+      expect(githubAdapter.accountOps.oauthScopes).toBeDefined();
     });
 
     it('hasRequired is true when notifications + read:user are present', () => {
       expect(
-        githubAdapter.oauthScopes!.hasRequired(withScopes(['notifications', 'read:user'])),
+        githubAdapter.accountOps.oauthScopes!.hasRequired(
+          withScopes(['notifications', 'read:user']),
+        ),
       ).toBe(true);
     });
 
     it('hasRequired is false when a required scope is missing', () => {
-      expect(githubAdapter.oauthScopes!.hasRequired(withScopes(['notifications']))).toBe(false);
+      expect(githubAdapter.accountOps.oauthScopes!.hasRequired(withScopes(['notifications']))).toBe(
+        false,
+      );
     });
 
     it('hasRecommended requires the full repo scope set', () => {
       expect(
-        githubAdapter.oauthScopes!.hasRecommended(
+        githubAdapter.accountOps.oauthScopes!.hasRecommended(
           withScopes(['notifications', 'read:user', 'repo']),
         ),
       ).toBe(true);
       expect(
-        githubAdapter.oauthScopes!.hasRecommended(withScopes(['notifications', 'read:user'])),
+        githubAdapter.accountOps.oauthScopes!.hasRecommended(
+          withScopes(['notifications', 'read:user']),
+        ),
       ).toBe(false);
     });
 
     it('hasAlternate accepts public_repo as the legacy substitute', () => {
       expect(
-        githubAdapter.oauthScopes!.hasAlternate(
+        githubAdapter.accountOps.oauthScopes!.hasAlternate(
           withScopes(['notifications', 'read:user', 'public_repo']),
         ),
       ).toBe(true);
@@ -275,7 +286,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         request: requestMock,
       } as unknown as Awaited<ReturnType<typeof octokit.createOctokitClient>>);
 
-      const result = await githubAdapter.followUrl<{ html_url: string }>(
+      const result = await githubAdapter.accountOps.followUrl(
         mockGitHubCloudAccount,
         'https://api.github.com/repos/o/r/issues/1' as Link,
       );
