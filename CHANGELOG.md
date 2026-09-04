@@ -1,5 +1,44 @@
 # Changelog
 
+## [7.7.1](https://github.com/gitify-app/gitify/compare/v7.7.0...v7.7.1) (2026-09-04)
+
+
+### 🐛 Bug Fixes
+
+* ci vp run args ([7a41c8d](https://github.com/gitify-app/gitify/commit/7a41c8dd39d150cf28b96e6080e41d25e78fda66))
+* ci vp run args ([#3250](https://github.com/gitify-app/gitify/issues/3250)) ([9154444](https://github.com/gitify-app/gitify/commit/91544449fea7f329a1977bdae6a49bbae5537b20))
+* **gitlab:** list required fine-grained permissions and surface login errors ([#3264](https://github.com/gitify-app/gitify/issues/3264)) ([4cee724](https://github.com/gitify-app/gitify/commit/4cee72491a40a6e8f28d872a6355e7fea1826a16))
+
+
+### 🧼 Code Refactoring
+
+* replace `cn` util with dep ([#3256](https://github.com/gitify-app/gitify/issues/3256)) ([14eb005](https://github.com/gitify-app/gitify/commit/14eb0051bfb0ece5d1076359d3352157dfeff5e8))
+* **shortcuts:** forge specific issue and pull request urls ([#3255](https://github.com/gitify-app/gitify/issues/3255)) ([730f517](https://github.com/gitify-app/gitify/commit/730f517203a4ade3914be59642430817b81e5a66))
+
+
+### 📚 Documentation
+
+* specific workflow badges ([904b0a9](https://github.com/gitify-app/gitify/commit/904b0a9bb0519997e2afc164dcb1cd73d4f58a4a))
+* update gh templates ([#3254](https://github.com/gitify-app/gitify/issues/3254)) ([7ee14d0](https://github.com/gitify-app/gitify/commit/7ee14d005286b270edbfbe9345379b23cd11e318))
+
+
+### 🤖 Continuous Integration
+
+* explicit `.nvmrc` ([986b681](https://github.com/gitify-app/gitify/commit/986b681c065d4d3f26258a82f915cb52b9f3eff8))
+* explicit `.nvmrc` ([#3251](https://github.com/gitify-app/gitify/issues/3251)) ([12d4fca](https://github.com/gitify-app/gitify/commit/12d4fca463cd1e0b9dd8e9eea8a7b36f34da0d45))
+* use setup-vp for JavaScript tooling ([#3245](https://github.com/gitify-app/gitify/issues/3245)) ([3c9e6dc](https://github.com/gitify-app/gitify/commit/3c9e6dc507b2035da9457aeb4d30d185eed8546c))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @octokit/openapi-types to v29 ([#3241](https://github.com/gitify-app/gitify/issues/3241)) ([fc08ce2](https://github.com/gitify-app/gitify/commit/fc08ce28c5c43cb34be395817d5e0d5072c3cb1d))
+* **deps-core:** update @octokit/openapi-types to v29.0.1 ([#3246](https://github.com/gitify-app/gitify/issues/3246)) ([2054df0](https://github.com/gitify-app/gitify/commit/2054df0afc7c403208b52f6780924c7ad827b19e))
+* **deps-core:** update @octokit/types to v18 ([#3248](https://github.com/gitify-app/gitify/issues/3248)) ([1d185fb](https://github.com/gitify-app/gitify/commit/1d185fb962755c2fbef1e8e0f6b0309000c97f63))
+* **deps-core:** update @primer/react to v38.37.0 ([#3269](https://github.com/gitify-app/gitify/issues/3269)) ([05eb43e](https://github.com/gitify-app/gitify/commit/05eb43e4e8f10cd80ecb3fbf482e563cc3d546ca))
+* **deps-core:** update electron to v43.5.1 ([#3265](https://github.com/gitify-app/gitify/issues/3265)) ([af9c3df](https://github.com/gitify-app/gitify/commit/af9c3df49057f1c6483486e09af6149e235be5d6))
+* **deps-core:** update electron to v44.1.0 ([#3267](https://github.com/gitify-app/gitify/issues/3267)) ([70f3bd2](https://github.com/gitify-app/gitify/commit/70f3bd22206387d77d972fe246eccb6361ff77a7))
+* **deps-core:** update octokit ([#3258](https://github.com/gitify-app/gitify/issues/3258)) ([3600bf4](https://github.com/gitify-app/gitify/commit/3600bf4e48762ff701011db16b41d31b8339a32e))
+
 ## [7.7.0](https://github.com/gitify-app/gitify/compare/v7.6.0...v7.7.0) (2026-08-26)
 
 
