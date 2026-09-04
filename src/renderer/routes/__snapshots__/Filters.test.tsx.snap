@@ -2603,7 +2603,7 @@ exports[`renderer/routes/Filters.tsx > General > should render itself & its chil
           data-component="buttonContent"
         >
           <span
-            class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+            class="prc-Button-Visual-YNt2F prc-Button-LeadingVisual-UySKu prc-Button-VisualWrap-E4cnq"
             data-component="leadingVisual"
           >
             <svg

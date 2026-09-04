@@ -238,7 +238,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               data-component="buttonContent"
             >
               <span
-                class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+                class="prc-Button-Visual-YNt2F prc-Button-LeadingVisual-UySKu prc-Button-VisualWrap-E4cnq"
                 data-component="leadingVisual"
               >
                 <svg
@@ -284,7 +284,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               data-component="buttonContent"
             >
               <span
-                class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+                class="prc-Button-Visual-YNt2F prc-Button-LeadingVisual-UySKu prc-Button-VisualWrap-E4cnq"
                 data-component="leadingVisual"
               >
                 <svg
@@ -329,7 +329,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
               data-component="buttonContent"
             >
               <span
-                class="prc-Button-Visual-YNt2F prc-Button-VisualWrap-E4cnq"
+                class="prc-Button-Visual-YNt2F prc-Button-LeadingVisual-UySKu prc-Button-VisualWrap-E4cnq"
                 data-component="leadingVisual"
               >
                 <svg
