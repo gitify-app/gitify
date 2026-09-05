@@ -70,4 +70,44 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
 
     expect(tree.getByText('2/3')).toBeInTheDocument();
   });
+
+  it('should render issue field pills immediately before label pills', async () => {
+    const props: MetricGroupProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: {
+          ...mockGitifyNotification.subject,
+          issueFields: [{ name: 'Priority', value: 'High', color: 'cf222e' }],
+          labels: [{ name: 'enhancement', color: '0e8a16' }],
+        },
+      },
+    };
+
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
+      settings: { ...mockSettings, showPills: true },
+    });
+
+    const textContent = tree.container.textContent;
+    expect(textContent).toContain('Priority: High');
+    expect(textContent).toContain('enhancement');
+    expect(textContent.indexOf('Priority: High')).toBeLessThan(textContent.indexOf('enhancement'));
+  });
+
+  it('should not render field pills when showPills is disabled', async () => {
+    const props: MetricGroupProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: {
+          ...mockGitifyNotification.subject,
+          issueFields: [{ name: 'Priority', value: 'High', color: 'cf222e' }],
+        },
+      },
+    };
+
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
+      settings: { ...mockSettings, showPills: false },
+    });
+
+    expect(tree.queryByText('Priority: High')).not.toBeInTheDocument();
+  });
 });

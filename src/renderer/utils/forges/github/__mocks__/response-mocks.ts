@@ -102,6 +102,7 @@ export function mockIssueResponseNode(mocks: {
     comments: { totalCount: 0, nodes: [] },
     milestone: null,
     issueType: null,
+    issueFieldValues: null,
     reactions: {
       totalCount: 0,
     },

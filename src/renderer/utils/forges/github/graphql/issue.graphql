@@ -6,6 +6,7 @@ query FetchIssueByNumber(
   $number: Int!
   $lastComments: Int
   $firstLabels: Int
+  $firstIssueFieldValues: Int
 ) {
   repository(owner: $owner, name: $name) {
     issue(number: $number) {
@@ -50,6 +51,55 @@ fragment IssueDetails on Issue {
   issueType {
     name
     color
+  }
+  issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
+    nodes {
+      __typename
+      ... on IssueFieldSingleSelectValue {
+        name
+        color
+        field {
+          ... on IssueFieldSingleSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldMultiSelectValue {
+        options {
+          name
+          color
+        }
+        field {
+          ... on IssueFieldMultiSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldTextValue {
+        textValue: value
+        field {
+          ... on IssueFieldText {
+            name
+          }
+        }
+      }
+      ... on IssueFieldNumberValue {
+        numberValue: value
+        field {
+          ... on IssueFieldNumber {
+            name
+          }
+        }
+      }
+      ... on IssueFieldDateValue {
+        dateValue: value
+        field {
+          ... on IssueFieldDate {
+            name
+          }
+        }
+      }
+    }
   }
   reactions {
     totalCount

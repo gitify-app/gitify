@@ -1,7 +1,11 @@
 import type { GitifyNotificationUser, Link } from '../../../../types';
 import { IconColor } from '../../../../types';
 
-import type { AuthorFieldsFragment, IssueTypeColor } from '../graphql/generated/graphql';
+import type {
+  AuthorFieldsFragment,
+  IssueFieldSingleSelectOptionColor,
+  IssueTypeColor,
+} from '../graphql/generated/graphql';
 
 // Author type from GraphQL or manually constructed
 type AuthorInput = AuthorFieldsFragment | GitifyNotificationUser | null | undefined;
@@ -56,6 +60,39 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
  * this collapses to the closest available token.
  */
 export function mapIssueTypeColor(color: IssueTypeColor): IconColor {
+  return mapGitHubColorToIconColor(color);
+}
+
+/**
+ * Map a GitHub issue field option color to the hex fill color used when
+ * rendering the field as a label token. Field options use a fixed 8-color
+ * palette (`IssueFieldSingleSelectOptionColor`); each enum value maps to the
+ * GitHub Primer color it represents so the token preserves the distinct color
+ * shown in the GitHub UI. Unknown colors fall back to a neutral gray.
+ */
+export function mapIssueFieldColorToHex(color: IssueFieldSingleSelectOptionColor): string {
+  switch (color) {
+    case 'RED':
+      return 'cf222e';
+    case 'GREEN':
+      return '1a7f37';
+    case 'YELLOW':
+      return 'bf8700';
+    case 'ORANGE':
+      return 'bc4c00';
+    case 'BLUE':
+      return '0969da';
+    case 'PURPLE':
+      return '8250df';
+    case 'PINK':
+      return 'bf3989';
+    case 'GRAY':
+    default:
+      return '6e7781';
+  }
+}
+
+function mapGitHubColorToIconColor(color: string): IconColor {
   switch (color) {
     case 'RED':
       return IconColor.RED;
