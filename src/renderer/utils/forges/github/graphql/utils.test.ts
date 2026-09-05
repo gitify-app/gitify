@@ -1,4 +1,5 @@
 import {
+  FetchIssueByNumberDocument,
   FetchMergedDetailsTemplateDocument,
   FetchPullRequestByNumberDocument,
   IssueDetailsFragmentDoc,
@@ -126,6 +127,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
     const allCapabilities = {
       stackedPullRequests: true,
       answeredDiscussion: true,
+      subIssues: true,
     };
 
     it('strips @gated directives but keeps gated fields when supported', () => {
@@ -152,6 +154,28 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       expect(result).toContain('repository');
     });
 
+    it('strips @gated directives and keeps sub-issue fields on FetchIssueByNumberDocument when supported', () => {
+      const result = stripGatedSelections(FetchIssueByNumberDocument.toString(), allCapabilities);
+
+      expect(result).not.toContain('@gated');
+      expect(result).toContain('parent');
+      expect(result).toContain('subIssuesSummary');
+      expect(result).toContain('query FetchIssueByNumber');
+    });
+
+    it('removes sub-issue fields from FetchIssueByNumberDocument when unsupported', () => {
+      const result = stripGatedSelections(FetchIssueByNumberDocument.toString(), {
+        ...allCapabilities,
+        subIssues: false,
+      });
+
+      expect(result).not.toContain('parent');
+      expect(result).not.toContain('subIssuesSummary');
+      expect(result).not.toContain('@gated');
+      expect(result).toContain('query FetchIssueByNumber');
+      expect(result).toContain('IssueDetails');
+    });
+
     it('strips @gated directives from the merged template when supported', () => {
       const result = stripGatedSelections(
         FetchMergedDetailsTemplateDocument.toString(),
@@ -161,6 +185,8 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       expect(result).not.toContain('@gated');
       expect(result).toContain('stackEntry');
       expect(result).toContain('isAnswered');
+      expect(result).toContain('parent');
+      expect(result).toContain('subIssuesSummary');
       expect(result).toContain('query FetchMergedDetailsTemplate');
     });
 
@@ -168,10 +194,13 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       const result = stripGatedSelections(FetchMergedDetailsTemplateDocument.toString(), {
         stackedPullRequests: false,
         answeredDiscussion: false,
+        subIssues: false,
       });
 
       expect(result).not.toContain('stackEntry');
       expect(result).not.toContain('isAnswered');
+      expect(result).not.toContain('parent');
+      expect(result).not.toContain('subIssuesSummary');
       expect(result).not.toContain('@gated');
       expect(result).toContain('query FetchMergedDetailsTemplate');
       expect(result).toContain('PullRequestDetails');

@@ -51,15 +51,17 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('Bug')).toBeInTheDocument();
   });
 
-  it('should render the stacked PR pill when the subject is part of a stack', async () => {
+  it('should render the parent pill when the subject has a parent issue', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
         subject: {
           ...mockGitifyNotification.subject,
-          isStacked: true,
-          stackPosition: 2,
-          stackDepth: 3,
+          parentIssue: {
+            number: 456,
+            title: 'Parent Epic',
+            url: 'https://github.com/gitify-app/gitify/issues/456' as any,
+          },
         },
       },
     };
@@ -68,6 +70,28 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       settings: { ...mockSettings, showPills: true },
     });
 
-    expect(tree.getByText('2/3')).toBeInTheDocument();
+    expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
+  });
+
+  it('should render the sub-issue progress pill when the subject has sub-issue progress', async () => {
+    const props: MetricGroupProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: {
+          ...mockGitifyNotification.subject,
+          subIssueProgress: {
+            total: 5,
+            completed: 2,
+            percentCompleted: 40,
+          },
+        },
+      },
+    };
+
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
+      settings: { ...mockSettings, showPills: true },
+    });
+
+    expect(tree.getByText('2/5')).toBeInTheDocument();
   });
 });
