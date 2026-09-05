@@ -21,8 +21,8 @@ importers:
         specifier: 5.4.4
         version: 5.4.4
       electron-menubar:
-        specifier: 10.2.1
-        version: 10.2.1(electron@44.1.1(supports-color@10.2.2))
+        specifier: 10.3.0
+        version: 10.3.0(electron@44.1.1(supports-color@10.2.2))
       electron-updater:
         specifier: 6.8.9
         version: 6.8.9(supports-color@10.2.2)
@@ -1531,12 +1531,6 @@ packages:
       '@types/react-dom':
         optional: true
 
-  '@testing-library/user-event@14.6.6':
-    resolution: {integrity: sha512-Jbs9FpkkIDw8FgSc6kOVsOv8JuuqGAL7J4X1oot77JxAoDlkNn2GRkd0aYRVuQ+pVQAiHWVkE4rX/dkF5fBiCw==}
-    engines: {node: '>=12', npm: '>=6'}
-    peerDependencies:
-      '@testing-library/dom': '>=7.21.4'
-
   '@testing-library/user-event@14.6.7':
     resolution: {integrity: sha512-MPCpX8bxe8zS+JmmTwLp8jd0dy1rAm60Te/SL8JrQM3qvQJcBOs1d7IefJMyZzqM3EWBrDn/LWDt1BCGu4ASfg==}
     engines: {node: '>=12', npm: '>=6'}
@@ -2566,8 +2560,8 @@ packages:
     resolution: {integrity: sha512-istWgaXjBfURBSS8LWVW9C3jsc6+ac+tY1lXrQEOTp0lVj+a4OlO1Tmqb36GgnEUDv92DGC9VI1HNXwJinWpgA==}
     engines: {node: '>= 14'}
 
-  electron-menubar@10.2.1:
-    resolution: {integrity: sha512-JIpqGjVYUSloNJn/8hqotzFIRNmJ0jpGQJjXGs4GB/viy8cXIBlWj2G30w+SqJR7TKa+EBhXrMLSA73HdP/VgA==}
+  electron-menubar@10.3.0:
+    resolution: {integrity: sha512-t99wvadyY27DgJlwGWH1gInkV/Md5nDFfMuGS+7K6g6NhSQpIlpt59DWS1/ZeR2J+PArHbFer/nYgKCK5jd1cA==}
     peerDependencies:
       electron: 44.1.1
 
@@ -5955,10 +5949,6 @@ snapshots:
       '@types/react': 19.2.18
       '@types/react-dom': 19.2.5(@types/react@19.2.18)
 
-  '@testing-library/user-event@14.6.6(@testing-library/dom@10.4.1)':
-    dependencies:
-      '@testing-library/dom': 10.4.1
-
   '@testing-library/user-event@14.6.7(@testing-library/dom@10.4.1)':
     dependencies:
       '@testing-library/dom': 10.4.1
@@ -6117,7 +6107,7 @@ snapshots:
   '@vitest/browser-preview@4.1.11(vite@8.2.2(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))(vitest@4.1.11)':
     dependencies:
       '@testing-library/dom': 10.4.1
-      '@testing-library/user-event': 14.6.6(@testing-library/dom@10.4.1)
+      '@testing-library/user-event': 14.6.7(@testing-library/dom@10.4.1)
       '@vitest/browser': 4.1.11(vite@8.2.2(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))(vitest@4.1.11)
       vitest: 4.1.11(@types/node@24.13.3)(@vitest/browser-playwright@4.1.11)(@vitest/browser-preview@4.1.11)(@vitest/coverage-v8@4.1.11)(happy-dom@20.13.0)(vite@8.2.2(@types/node@24.13.3)(jiti@2.7.0)(yaml@2.9.0))
     transitivePeerDependencies:
@@ -6868,7 +6858,7 @@ snapshots:
 
   electron-log@5.4.4: {}
 
-  electron-menubar@10.2.1(electron@44.1.1(supports-color@10.2.2)):
+  electron-menubar@10.3.0(electron@44.1.1(supports-color@10.2.2)):
     dependencies:
       electron: 44.1.1(supports-color@10.2.2)
 
