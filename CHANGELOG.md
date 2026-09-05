@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.7.2](https://github.com/gitify-app/gitify/compare/v7.7.1...v7.7.2) (2026-09-05)
+
+
+### 🧼 Code Refactoring
+
+* **api:** orderby reviews no longer supported ([#3278](https://github.com/gitify-app/gitify/issues/3278)) ([f8ca915](https://github.com/gitify-app/gitify/commit/f8ca9151c0ed540434e0bcdfcead57b6de5c736c))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update electron to v44.1.1 ([#3270](https://github.com/gitify-app/gitify/issues/3270)) ([23afa70](https://github.com/gitify-app/gitify/commit/23afa704e595f4f409aa9148141dfb1163dbd834))
+
 ## [7.7.1](https://github.com/gitify-app/gitify/compare/v7.7.0...v7.7.1) (2026-09-04)
 
 
