@@ -1,13 +1,12 @@
 import { app } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
-import { isMacOS, isWindows } from '../../shared/platform';
+import { isMacOS } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
 import type MenuBuilder from '../menu';
 
 let isQuitting = false;
-let keepWindowOnBlur = false;
 let windowVibrancyEnabled = false;
 
 /**
@@ -19,7 +18,6 @@ let windowVibrancyEnabled = false;
  */
 export function __resetWindowLifecycleForTests(): void {
   isQuitting = false;
-  keepWindowOnBlur = false;
   windowVibrancyEnabled = false;
 }
 
@@ -42,31 +40,8 @@ export function applyWindowVibrancy(mb: Menubar, enabled: boolean): void {
   mb.window.setBackgroundColor(enabled ? '#00000000' : '#ffffff');
 }
 
-/**
- * Apply the user's "keep window open when it loses focus" preference.
- *
- * Click-away dismissal is independent of stacking: Windows popups must
- * stay above the tray overflow even when they should hide on blur.
- */
 export function applyKeepWindowOnBlur(mb: Menubar, value: boolean): void {
-  keepWindowOnBlur = value;
-  applyWindowFocusBehavior(mb, value);
-}
-
-function applyWindowFocusBehavior(mb: Menubar, keepOpen: boolean): void {
-  const win = mb.window;
-  if (!win || win.isDestroyed()) {
-    return;
-  }
-
-  const shouldKeepOpen = keepOpen || win.webContents.isDevToolsOpened();
-  mb.setOption('hideOnBlur', !shouldKeepOpen);
-  if (isWindows()) {
-    // The default floating level sits below the Windows tray overflow (#1048).
-    win.setAlwaysOnTop(true, 'pop-up-menu');
-  } else {
-    win.setAlwaysOnTop(shouldKeepOpen);
-  }
+  mb.setOption('hideOnBlur', !value);
 }
 
 /**
@@ -85,8 +60,6 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
   if (!win) {
     return;
   }
-
-  applyWindowFocusBehavior(mb, keepWindowOnBlur);
 
   win.on('show', () => {
     menuBuilder.setWindowVisibility(true);
@@ -128,14 +101,12 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
     mb.window.setSize(800, 600);
     mb.window.center();
     mb.window.resizable = true;
-    applyWindowFocusBehavior(mb, true);
   });
 
   /**
    * When DevTools is closed, restore the window to its original size and position it centered on the tray icon.
    *
-   * Restore click-away dismissal to the user's preference while retaining
-   * the Windows stacking level required to appear above the tray overflow.
+   * Menubar restores focus behavior; Gitify restores its preferred layout.
    */
   mb.window.webContents.on('devtools-closed', () => {
     if (!mb.window) {
@@ -145,6 +116,5 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
     mb.window.setSize(WindowConfig.width!, WindowConfig.height!);
     mb.recenterOnTray();
     mb.window.resizable = false;
-    applyWindowFocusBehavior(mb, keepWindowOnBlur);
   });
 }

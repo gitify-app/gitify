@@ -154,79 +154,15 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   describe('applyKeepWindowOnBlur', () => {
-    it.each([false, true])('keeps Windows above the tray with keep-open set to %s', (keepOpen) => {
-      setPlatform('win32');
-
+    it.each([false, true])('forwards the keep-open preference %s to menubar', (keepOpen) => {
       applyKeepWindowOnBlur(menubar, keepOpen);
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true, 'pop-up-menu');
       expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', !keepOpen);
     });
 
-    it('raises the Windows popup before its first tray click', () => {
-      setPlatform('win32');
-
-      configureWindowEvents(menubar, menuBuilder);
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true, 'pop-up-menu');
-      expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', true);
-    });
-
-    it('preserves Windows stacking and restores click-away after DevTools closes', () => {
-      setPlatform('win32');
-      configureWindowEvents(menubar, menuBuilder);
-
-      findWebContentsHandler(menubar, 'devtools-opened')?.();
-      expect(menubar.setOption).toHaveBeenLastCalledWith('hideOnBlur', false);
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenLastCalledWith(true, 'pop-up-menu');
-
-      findWebContentsHandler(menubar, 'devtools-closed')?.();
-      expect(menubar.setOption).toHaveBeenLastCalledWith('hideOnBlur', true);
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenLastCalledWith(true, 'pop-up-menu');
-    });
-
-    it('keeps DevTools open when the keep-open setting changes', () => {
-      const webContents = menubar.window!.webContents;
-      vi.mocked(webContents.isDevToolsOpened).mockReturnValue(true);
-
-      applyKeepWindowOnBlur(menubar, false);
-
+    it('remembers the preference through menubar before a window exists', () => {
+      Object.defineProperty(menubar, 'window', { value: undefined });
+      applyKeepWindowOnBlur(menubar, true);
       expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', false);
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
-    });
-
-    it('forwards the value to the underlying window', () => {
-      applyKeepWindowOnBlur(menubar, true);
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
-    });
-
-    it('skips the call when the window is destroyed', () => {
-      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
-      (menubar.window?.isDestroyed as ReturnType<typeof vi.fn>).mockReturnValue(true);
-
-      applyKeepWindowOnBlur(menubar, true);
-
-      expect(menubar.window?.setAlwaysOnTop).not.toHaveBeenCalled();
-    });
-
-    it('is restored after DevTools closes', () => {
-      configureWindowEvents(menubar, menuBuilder);
-      applyKeepWindowOnBlur(menubar, true);
-      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
-      (menubar.window?.setAlwaysOnTop as ReturnType<typeof vi.fn>).mockClear();
-
-      findWebContentsHandler(menubar, 'devtools-closed')?.();
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
-    });
-
-    it('is cleared after DevTools closes when the user did not opt in', () => {
-      configureWindowEvents(menubar, menuBuilder);
-
-      findWebContentsHandler(menubar, 'devtools-closed')?.();
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(false);
     });
   });
 
