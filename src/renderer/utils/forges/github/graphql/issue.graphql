@@ -51,6 +51,16 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  parent @gated(requires: "subIssues") {
+    number
+    title
+    url
+  }
+  subIssuesSummary @gated(requires: "subIssues") {
+    total
+    completed
+    percentCompleted
+  }
   reactions {
     totalCount
   }
