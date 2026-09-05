@@ -1,5 +1,5 @@
-import type { Account, Forge } from '../../types';
-import type { ForgeAccountAdapter, ForgeAdapter, WithAccount } from './types';
+import type { Account, Forge, Link } from '../../types';
+import type { ForgeAccountAdapter, ForgeAdapter } from './types';
 
 import { bitbucketAdapter } from './bitbucket/adapter';
 import { giteaAdapter } from './gitea/adapter';
@@ -45,34 +45,50 @@ export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
   return adapter;
 }
 
-/**
- * Resolve the account-bound view of an account's forge adapter.
- *
- * Every function under the adapter's `accountOps` is wrapped to receive the
- * account as its first argument, and nested bundles (capabilities, OAuth
- * scopes) are wrapped the same way. Members are looked up on the adapter at
- * call time, so replacing one on the adapter (e.g. a test spy) is honoured by
- * views created earlier.
- */
+/** Create a view for this account snapshot; resolve a new view when the account changes. */
 export function getAccountAdapter(account: Account): ForgeAccountAdapter {
-  return bindAccount(getAdapter(account).accountOps, account);
-}
+  const {
+    capabilities,
+    formatNotificationUser,
+    fetchAuthenticatedUser,
+    onAccountTokenChange,
+    listNotifications,
+    markThreadAsRead,
+    markThreadAsDone,
+    unsubscribeThread,
+    followUrl,
+    getAccountSettingsUrl,
+    getIssuesUrl,
+    getPullRequestsUrl,
+    getNotificationsUrl,
+    oauthScopes,
+  } = getAdapter(account).accountOps;
 
-function bindAccount<T extends object>(operations: WithAccount<T>, account: Account): T {
-  const source = operations as Record<string, unknown>;
-  const bound: Record<string, unknown> = {};
-  for (const key of Object.keys(source)) {
-    const member = source[key];
-    if (typeof member === 'function') {
-      bound[key] = (...args: unknown[]) =>
-        (source[key] as (account: Account, ...rest: unknown[]) => unknown)(account, ...args);
-    } else if (member !== null && typeof member === 'object') {
-      bound[key] = bindAccount(member as WithAccount<object>, account);
-    } else {
-      bound[key] = member;
-    }
-  }
-  return bound as T;
+  return {
+    capabilities: {
+      markAsDone: () => capabilities.markAsDone(account),
+      unsubscribeThread: () => capabilities.unsubscribeThread(account),
+    },
+    formatNotificationUser: (user) => formatNotificationUser(account, user),
+    fetchAuthenticatedUser: () => fetchAuthenticatedUser(account),
+    onAccountTokenChange: onAccountTokenChange ? () => onAccountTokenChange(account) : undefined,
+    listNotifications: () => listNotifications(account),
+    markThreadAsRead: (threadId) => markThreadAsRead(account, threadId),
+    markThreadAsDone: (threadId) => markThreadAsDone(account, threadId),
+    unsubscribeThread: (threadId) => unsubscribeThread(account, threadId),
+    followUrl: <T>(url: Link) => followUrl<T>(account, url),
+    getAccountSettingsUrl: () => getAccountSettingsUrl(account),
+    getIssuesUrl: () => getIssuesUrl(account),
+    getPullRequestsUrl: () => getPullRequestsUrl(account),
+    getNotificationsUrl: () => getNotificationsUrl(account),
+    oauthScopes: oauthScopes
+      ? {
+          hasRequired: () => oauthScopes.hasRequired(account),
+          hasRecommended: () => oauthScopes.hasRecommended(account),
+          hasAlternate: () => oauthScopes.hasAlternate(account),
+        }
+      : undefined,
+  };
 }
 
 export function listAdapters(): ForgeAdapter[] {

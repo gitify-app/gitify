@@ -257,24 +257,33 @@ export interface ForgeAccountAdapter {
 }
 
 /**
- * Maps one member of {@link ForgeAccountAdapter} to its implementation shape:
- * functions gain `account` as their first parameter, nested bundles are mapped
- * recursively, and anything else is left as is.
- */
-type WithAccountMember<M> = M extends (...args: infer A) => infer R
-  ? (account: Account, ...args: A) => R
-  : M extends object
-    ? WithAccount<M>
-    : M;
-
-export type WithAccount<T> = { [K in keyof T]: WithAccountMember<T[K]> };
-
-/**
  * Implementation-side shape of {@link ForgeAccountAdapter}: the same members
  * with the account passed explicitly. Adapters implement this under
  * `accountOps`; `getAccountAdapter(account)` binds it into a `ForgeAccountAdapter`.
  */
-export type ForgeAccountOperations = WithAccount<ForgeAccountAdapter>;
+export interface ForgeAccountOperations {
+  readonly capabilities: {
+    markAsDone(account: Account): boolean;
+    unsubscribeThread(account: Account): boolean;
+  };
+  formatNotificationUser(account: Account, user: GitifyNotificationUser): string;
+  fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData>;
+  onAccountTokenChange?(account: Account): void;
+  listNotifications(account: Account): Promise<RawGitifyNotification[]>;
+  markThreadAsRead(account: Account, threadId: string): Promise<void>;
+  markThreadAsDone(account: Account, threadId: string): Promise<void>;
+  unsubscribeThread(account: Account, threadId: string): Promise<void>;
+  followUrl<T>(account: Account, url: Link): Promise<T>;
+  getAccountSettingsUrl(account: Account): Link;
+  getIssuesUrl(account: Account): Link;
+  getPullRequestsUrl(account: Account): Link;
+  getNotificationsUrl(account: Account): Link;
+  readonly oauthScopes?: {
+    hasRequired(account: Account): boolean;
+    hasRecommended(account: Account): boolean;
+    hasAlternate(account: Account): boolean;
+  };
+}
 
 /**
  * OAuth scope-checking capability bundle. Present only on forges with an
