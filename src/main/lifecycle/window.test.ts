@@ -65,6 +65,7 @@ describe('main/lifecycle/window.ts', () => {
     setPlatform('linux');
 
     menubar = {
+      setOption: vi.fn(),
       hideWindow: vi.fn(),
       recenterOnTray: vi.fn(),
       tray: {
@@ -81,6 +82,7 @@ describe('main/lifecycle/window.ts', () => {
         on: vi.fn(),
         webContents: {
           on: vi.fn(),
+          isDevToolsOpened: vi.fn().mockReturnValue(false),
         },
       },
     } as unknown as Menubar;
@@ -152,6 +154,47 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   describe('applyKeepWindowOnBlur', () => {
+    it.each([false, true])('keeps Windows above the tray with keep-open set to %s', (keepOpen) => {
+      setPlatform('win32');
+
+      applyKeepWindowOnBlur(menubar, keepOpen);
+
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true, 'pop-up-menu');
+      expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', !keepOpen);
+    });
+
+    it('raises the Windows popup before its first tray click', () => {
+      setPlatform('win32');
+
+      configureWindowEvents(menubar, menuBuilder);
+
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true, 'pop-up-menu');
+      expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', true);
+    });
+
+    it('preserves Windows stacking and restores click-away after DevTools closes', () => {
+      setPlatform('win32');
+      configureWindowEvents(menubar, menuBuilder);
+
+      findWebContentsHandler(menubar, 'devtools-opened')?.();
+      expect(menubar.setOption).toHaveBeenLastCalledWith('hideOnBlur', false);
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenLastCalledWith(true, 'pop-up-menu');
+
+      findWebContentsHandler(menubar, 'devtools-closed')?.();
+      expect(menubar.setOption).toHaveBeenLastCalledWith('hideOnBlur', true);
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenLastCalledWith(true, 'pop-up-menu');
+    });
+
+    it('keeps DevTools open when the keep-open setting changes', () => {
+      const webContents = menubar.window!.webContents;
+      vi.mocked(webContents.isDevToolsOpened).mockReturnValue(true);
+
+      applyKeepWindowOnBlur(menubar, false);
+
+      expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', false);
+      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
+    });
+
     it('forwards the value to the underlying window', () => {
       applyKeepWindowOnBlur(menubar, true);
 

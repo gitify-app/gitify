@@ -1,7 +1,7 @@
 import { app } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
-import { isMacOS } from '../../shared/platform';
+import { isMacOS, isWindows } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
 import type MenuBuilder from '../menu';
@@ -45,15 +45,27 @@ export function applyWindowVibrancy(mb: Menubar, enabled: boolean): void {
 /**
  * Apply the user's "keep window open when it loses focus" preference.
  *
- * Implemented by toggling the window's `alwaysOnTop` flag, which the
- * `menubar` library checks to short-circuit its blur-driven hide. The
- * value is also remembered so the `devtools-closed` handler can restore
- * it after DevTools temporarily forces it on.
+ * Click-away dismissal is independent of stacking: Windows popups must
+ * stay above the tray overflow even when they should hide on blur.
  */
 export function applyKeepWindowOnBlur(mb: Menubar, value: boolean): void {
   keepWindowOnBlur = value;
-  if (mb.window && !mb.window.isDestroyed()) {
-    mb.window.setAlwaysOnTop(value);
+  applyWindowFocusBehavior(mb, value);
+}
+
+function applyWindowFocusBehavior(mb: Menubar, keepOpen: boolean): void {
+  const win = mb.window;
+  if (!win || win.isDestroyed()) {
+    return;
+  }
+
+  const shouldKeepOpen = keepOpen || win.webContents.isDevToolsOpened();
+  mb.setOption('hideOnBlur', !shouldKeepOpen);
+  if (isWindows()) {
+    // The default floating level sits below the Windows tray overflow (#1048).
+    win.setAlwaysOnTop(true, 'pop-up-menu');
+  } else {
+    win.setAlwaysOnTop(shouldKeepOpen);
   }
 }
 
@@ -73,6 +85,8 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
   if (!win) {
     return;
   }
+
+  applyWindowFocusBehavior(mb, keepWindowOnBlur);
 
   win.on('show', () => {
     menuBuilder.setWindowVisibility(true);
@@ -114,15 +128,14 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
     mb.window.setSize(800, 600);
     mb.window.center();
     mb.window.resizable = true;
-    mb.window.setAlwaysOnTop(true);
+    applyWindowFocusBehavior(mb, true);
   });
 
   /**
    * When DevTools is closed, restore the window to its original size and position it centered on the tray icon.
    *
-   * `devtools-opened` forces `alwaysOnTop` true for usability while
-   * debugging; restore it to the user's preference here so DevTools
-   * doesn't leave the flag stuck on.
+   * Restore click-away dismissal to the user's preference while retaining
+   * the Windows stacking level required to appear above the tray overflow.
    */
   mb.window.webContents.on('devtools-closed', () => {
     if (!mb.window) {
@@ -132,6 +145,6 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
     mb.window.setSize(WindowConfig.width!, WindowConfig.height!);
     mb.recenterOnTray();
     mb.window.resizable = false;
-    mb.window.setAlwaysOnTop(keepWindowOnBlur);
+    applyWindowFocusBehavior(mb, keepWindowOnBlur);
   });
 }
