@@ -65,6 +65,7 @@ describe('main/lifecycle/window.ts', () => {
     setPlatform('linux');
 
     menubar = {
+      setOption: vi.fn(),
       hideWindow: vi.fn(),
       recenterOnTray: vi.fn(),
       tray: {
@@ -81,6 +82,7 @@ describe('main/lifecycle/window.ts', () => {
         on: vi.fn(),
         webContents: {
           on: vi.fn(),
+          isDevToolsOpened: vi.fn().mockReturnValue(false),
         },
       },
     } as unknown as Menubar;
@@ -152,38 +154,15 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   describe('applyKeepWindowOnBlur', () => {
-    it('forwards the value to the underlying window', () => {
-      applyKeepWindowOnBlur(menubar, true);
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
+    it.each([false, true])('forwards the keep-open preference %s to menubar', (keepOpen) => {
+      applyKeepWindowOnBlur(menubar, keepOpen);
+      expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', !keepOpen);
     });
 
-    it('skips the call when the window is destroyed', () => {
-      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
-      (menubar.window?.isDestroyed as ReturnType<typeof vi.fn>).mockReturnValue(true);
-
+    it('remembers the preference through menubar before a window exists', () => {
+      Object.defineProperty(menubar, 'window', { value: undefined });
       applyKeepWindowOnBlur(menubar, true);
-
-      expect(menubar.window?.setAlwaysOnTop).not.toHaveBeenCalled();
-    });
-
-    it('is restored after DevTools closes', () => {
-      configureWindowEvents(menubar, menuBuilder);
-      applyKeepWindowOnBlur(menubar, true);
-      // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
-      (menubar.window?.setAlwaysOnTop as ReturnType<typeof vi.fn>).mockClear();
-
-      findWebContentsHandler(menubar, 'devtools-closed')?.();
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(true);
-    });
-
-    it('is cleared after DevTools closes when the user did not opt in', () => {
-      configureWindowEvents(menubar, menuBuilder);
-
-      findWebContentsHandler(menubar, 'devtools-closed')?.();
-
-      expect(menubar.window?.setAlwaysOnTop).toHaveBeenCalledWith(false);
+      expect(menubar.setOption).toHaveBeenCalledWith('hideOnBlur', false);
     });
   });
 
