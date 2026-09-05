@@ -3,22 +3,32 @@ import type { FC } from 'react';
 import { TagIcon } from '@primer/octicons-react';
 import { IssueLabelToken, LabelGroup } from '@primer/react';
 
-import { type GitifyLabels, IconColor } from '../../types';
+import { type GitifyIssueField, type GitifyLabels, IconColor } from '../../types';
 
 import { MetricPill } from './MetricPill';
 
 export interface LabelsPillProps {
   labels: GitifyLabels[];
+  issueFields?: GitifyIssueField[];
 }
 
-export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
-  if (!labels?.length) {
+export const LabelsPill: FC<LabelsPillProps> = ({ labels, issueFields }) => {
+  const fieldLabels: GitifyLabels[] = (issueFields ?? []).map((field) => {
+    return {
+      name: `${field.name}: ${field.value}`,
+      color: field.color ?? '',
+    };
+  });
+
+  const allLabels = [...fieldLabels, ...(labels ?? [])];
+
+  if (!allLabels.length) {
     return null;
   }
 
   const labelsContent = (
     <LabelGroup>
-      {labels.map((label) => {
+      {allLabels.map((label) => {
         return (
           <IssueLabelToken
             fillColor={label.color ? `#${label.color}` : undefined}
@@ -36,7 +46,7 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels }) => {
       color={IconColor.GRAY}
       contents={labelsContent}
       icon={TagIcon}
-      metric={labels.length}
+      metric={allLabels.length}
     />
   );
 };

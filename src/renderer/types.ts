@@ -406,6 +406,8 @@ export interface GitifySubject {
   stackDepth?: number;
   /** GitHub-native issue type (e.g. Bug, Feature, Task) */
   issueType?: GitifyIssueType;
+  /** GitHub issue fields (e.g. Priority, Effort) with values set */
+  issueFields?: GitifyIssueField[];
   /** Milestone state/title */
   milestone?: GitifyMilestone;
   /** Deep link to notification thread */
@@ -481,6 +483,16 @@ export interface GitifyNotificationDisplay {
 export interface GitifyIssueType {
   name: string;
   color: IconColor;
+}
+
+/** GitHub issue field value, normalized for display */
+export interface GitifyIssueField {
+  /** Field name, e.g. "Priority" */
+  name: string;
+  /** Display value, e.g. "High", "5", "2026-09-01" */
+  value: string;
+  /** Option color when available, as a hex string without the leading '#' */
+  color?: string;
 }
 
 export type GitifyMilestone = MilestoneFieldsFragment;

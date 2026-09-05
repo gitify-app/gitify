@@ -2,8 +2,11 @@ import { mockAuthor } from '../__mocks__/response-mocks';
 
 import { IconColor } from '../../../../types';
 
-import type { IssueTypeColor } from '../graphql/generated/graphql';
-import { getNotificationAuthor, mapIssueTypeColor } from './utils';
+import type {
+  IssueFieldSingleSelectOptionColor,
+  IssueTypeColor,
+} from '../graphql/generated/graphql';
+import { getNotificationAuthor, mapIssueFieldColorToHex, mapIssueTypeColor } from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
@@ -63,6 +66,30 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
     it('falls back to gray for a colour Gitify does not know about', () => {
       expect(mapIssueTypeColor('CHARTREUSE' as IssueTypeColor)).toBe(IconColor.GRAY);
+    });
+  });
+
+  describe('mapIssueFieldColorToHex', () => {
+    it.each([
+      ['RED', 'cf222e'],
+      ['GREEN', '1a7f37'],
+      ['YELLOW', 'bf8700'],
+      ['ORANGE', 'bc4c00'],
+      ['BLUE', '0969da'],
+      ['PURPLE', '8250df'],
+      ['PINK', 'bf3989'],
+      ['GRAY', '6e7781'],
+    ] as const satisfies readonly (readonly [IssueFieldSingleSelectOptionColor, string])[])(
+      'maps %s to its hex color',
+      (color, expected) => {
+        expect(mapIssueFieldColorToHex(color)).toBe(expected);
+      },
+    );
+
+    it('falls back to gray for a colour Gitify does not know about', () => {
+      expect(mapIssueFieldColorToHex('CHARTREUSE' as IssueFieldSingleSelectOptionColor)).toBe(
+        '6e7781',
+      );
     });
   });
 });

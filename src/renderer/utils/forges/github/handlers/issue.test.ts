@@ -70,6 +70,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
+        issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
@@ -108,6 +109,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
+        issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
@@ -165,6 +167,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
         labels: [],
+        issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
@@ -205,6 +208,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [{ name: 'enhancement', color: '0e8a16' }],
+        issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
@@ -246,6 +250,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
+        issueFields: [],
         milestone: {
           state: 'OPEN',
           title: 'Open Milestone',
@@ -291,10 +296,93 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
         issueType: { name: 'Bug', color: IconColor.RED },
+        issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+
+    it('with issue fields', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.issueFieldValues = {
+        nodes: [
+          {
+            __typename: 'IssueFieldSingleSelectValue',
+            name: 'High',
+            color: 'RED',
+            field: { name: 'Priority' },
+          },
+          {
+            __typename: 'IssueFieldMultiSelectValue',
+            options: [
+              { name: 'Mobile', color: 'BLUE' },
+              { name: 'Web', color: 'GREEN' },
+            ],
+            field: { name: 'Platform' },
+          },
+          {
+            __typename: 'IssueFieldTextValue',
+            textValue: 'Customer-facing',
+            field: { name: 'Impact' },
+          },
+          {
+            __typename: 'IssueFieldNumberValue',
+            numberValue: 5,
+            field: { name: 'Effort' },
+          },
+          {
+            __typename: 'IssueFieldDateValue',
+            dateValue: '2026-09-01',
+            field: { name: 'Target date' },
+          },
+          {
+            __typename: 'IssueFieldSingleSelectValue',
+            name: '',
+            color: 'GRAY',
+            field: { name: 'Empty field' },
+          },
+          null,
+        ],
+      };
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.issueFields).toEqual([
+        { name: 'Priority', value: 'High', color: 'cf222e' },
+        {
+          name: 'Platform',
+          value: 'Mobile, Web',
+          color: '0969da',
+        },
+        { name: 'Impact', value: 'Customer-facing' },
+        { name: 'Effort', value: '5' },
+        { name: 'Target date', value: '2026-09-01' },
+      ]);
+    });
+
+    it('omits fields when issueFieldValues is absent or empty', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.issueFields).toEqual([]);
     });
   });
 
