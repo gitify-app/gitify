@@ -7,7 +7,6 @@ import { WindowConfig } from '../config';
 import type MenuBuilder from '../menu';
 
 let isQuitting = false;
-let keepWindowOnBlur = false;
 let windowVibrancyEnabled = false;
 
 /**
@@ -19,7 +18,6 @@ let windowVibrancyEnabled = false;
  */
 export function __resetWindowLifecycleForTests(): void {
   isQuitting = false;
-  keepWindowOnBlur = false;
   windowVibrancyEnabled = false;
 }
 
@@ -42,19 +40,8 @@ export function applyWindowVibrancy(mb: Menubar, enabled: boolean): void {
   mb.window.setBackgroundColor(enabled ? '#00000000' : '#ffffff');
 }
 
-/**
- * Apply the user's "keep window open when it loses focus" preference.
- *
- * Implemented by toggling the window's `alwaysOnTop` flag, which the
- * `menubar` library checks to short-circuit its blur-driven hide. The
- * value is also remembered so the `devtools-closed` handler can restore
- * it after DevTools temporarily forces it on.
- */
 export function applyKeepWindowOnBlur(mb: Menubar, value: boolean): void {
-  keepWindowOnBlur = value;
-  if (mb.window && !mb.window.isDestroyed()) {
-    mb.window.setAlwaysOnTop(value);
-  }
+  mb.setOption('hideOnBlur', !value);
 }
 
 /**
@@ -114,15 +101,12 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
     mb.window.setSize(800, 600);
     mb.window.center();
     mb.window.resizable = true;
-    mb.window.setAlwaysOnTop(true);
   });
 
   /**
    * When DevTools is closed, restore the window to its original size and position it centered on the tray icon.
    *
-   * `devtools-opened` forces `alwaysOnTop` true for usability while
-   * debugging; restore it to the user's preference here so DevTools
-   * doesn't leave the flag stuck on.
+   * Menubar restores focus behavior; Gitify restores its preferred layout.
    */
   mb.window.webContents.on('devtools-closed', () => {
     if (!mb.window) {
@@ -132,6 +116,5 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
     mb.window.setSize(WindowConfig.width!, WindowConfig.height!);
     mb.recenterOnTray();
     mb.window.resizable = false;
-    mb.window.setAlwaysOnTop(keepWindowOnBlur);
   });
 }

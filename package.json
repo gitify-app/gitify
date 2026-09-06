@@ -77,7 +77,7 @@
   "dependencies": {
     "cn": "0.2.4",
     "electron-log": "5.4.4",
-    "electron-menubar": "10.2.1",
+    "electron-menubar": "11.0.0",
     "electron-updater": "6.8.9",
     "react": "19.2.8",
     "react-dom": "19.2.8",
