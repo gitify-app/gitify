@@ -9,7 +9,7 @@ import type { AccountsState, AccountsStore } from './types';
 
 import { getAccountUUID, isValidHostname, refreshAccount } from '../utils/auth/utils';
 import { rendererLogInfo, rendererLogWarn } from '../utils/core/logger';
-import { getAdapter, isKnownForge } from '../utils/forges/registry';
+import { getAccountAdapter, getAdapter, isKnownForge } from '../utils/forges/registry';
 import { decryptValue, encryptValue } from '../utils/system/comms';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 
@@ -79,7 +79,7 @@ const useAccountsStore = create<AccountsStore>()(
 
         if (existingAccount) {
           // Drop any forge-specific HTTP client cache so the new token is used.
-          getAdapter(existingAccount).onAccountTokenChange?.(existingAccount);
+          getAccountAdapter(existingAccount).onAccountTokenChange?.();
 
           // Replace the existing account (e.g. re-authentication with a new token)
           rendererLogInfo(
@@ -113,7 +113,7 @@ const useAccountsStore = create<AccountsStore>()(
 
       removeAccount: (account) => {
         // Drop any forge-specific HTTP client state for the removed account.
-        getAdapter(account).onAccountTokenChange?.(account);
+        getAccountAdapter(account).onAccountTokenChange?.();
 
         set((state) => ({
           accounts: state.accounts.filter((a) => a.token !== account.token),
@@ -168,7 +168,7 @@ const useAccountsStore = create<AccountsStore>()(
         // Drop forge-specific HTTP client state (e.g. cached authenticated
         // Octokit clients) for every account being wiped.
         for (const account of get().accounts) {
-          getAdapter(account).onAccountTokenChange?.(account);
+          getAccountAdapter(account).onAccountTokenChange?.();
         }
 
         set({ ...DEFAULT_ACCOUNTS_STATE });

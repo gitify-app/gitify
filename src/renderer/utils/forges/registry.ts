@@ -1,5 +1,5 @@
-import type { Account, Forge } from '../../types';
-import type { ForgeAdapter } from './types';
+import type { Account, Forge, Link } from '../../types';
+import type { ForgeAccountAdapter, ForgeAdapter } from './types';
 
 import { bitbucketAdapter } from './bitbucket/adapter';
 import { giteaAdapter } from './gitea/adapter';
@@ -10,7 +10,9 @@ import { gitlabAdapter } from './gitlab/adapter';
  * Central forge adapter registry.
  *
  * Adding a new forge is one entry in this map. Shared code routes through
- * `getAdapter(account)` and never imports forge-specific modules directly.
+ * `getAdapter(forge)` for forge-wide members and `getAccountAdapter(account)` for
+ * account-scoped operations, and never imports forge-specific modules
+ * directly.
  */
 const ADAPTERS: Record<Forge, ForgeAdapter> = {
   github: githubAdapter,
@@ -41,6 +43,52 @@ export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
     throw new Error(`No forge adapter registered for "${id}"`);
   }
   return adapter;
+}
+
+/** Create a view for this account snapshot; resolve a new view when the account changes. */
+export function getAccountAdapter(account: Account): ForgeAccountAdapter {
+  const {
+    capabilities,
+    formatNotificationUser,
+    fetchAuthenticatedUser,
+    onAccountTokenChange,
+    listNotifications,
+    markThreadAsRead,
+    markThreadAsDone,
+    unsubscribeThread,
+    followUrl,
+    getAccountSettingsUrl,
+    getIssuesUrl,
+    getPullRequestsUrl,
+    getNotificationsUrl,
+    oauthScopes,
+  } = getAdapter(account).accountOps;
+
+  return {
+    capabilities: {
+      markAsDone: () => capabilities.markAsDone(account),
+      unsubscribeThread: () => capabilities.unsubscribeThread(account),
+    },
+    formatNotificationUser: (user) => formatNotificationUser(account, user),
+    fetchAuthenticatedUser: () => fetchAuthenticatedUser(account),
+    onAccountTokenChange: onAccountTokenChange ? () => onAccountTokenChange(account) : undefined,
+    listNotifications: () => listNotifications(account),
+    markThreadAsRead: (threadId) => markThreadAsRead(account, threadId),
+    markThreadAsDone: (threadId) => markThreadAsDone(account, threadId),
+    unsubscribeThread: (threadId) => unsubscribeThread(account, threadId),
+    followUrl: <T>(url: Link) => followUrl<T>(account, url),
+    getAccountSettingsUrl: () => getAccountSettingsUrl(account),
+    getIssuesUrl: () => getIssuesUrl(account),
+    getPullRequestsUrl: () => getPullRequestsUrl(account),
+    getNotificationsUrl: () => getNotificationsUrl(account),
+    oauthScopes: oauthScopes
+      ? {
+          hasRequired: () => oauthScopes.hasRequired(account),
+          hasRecommended: () => oauthScopes.hasRecommended(account),
+          hasAlternate: () => oauthScopes.hasAlternate(account),
+        }
+      : undefined,
+  };
 }
 
 export function listAdapters(): ForgeAdapter[] {

@@ -19,7 +19,7 @@ describe('renderer/utils/notifications/url.ts', () => {
     const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
-    const followUrlSpy = vi.spyOn(githubAdapter, 'followUrl');
+    const followUrlSpy = vi.spyOn(githubAdapter.accountOps, 'followUrl');
 
     it('Subject HTML URL: prefer if available from enrichment stage', async () => {
       const mockSubjectHtmlUrl = 'https://gitify.io/' as Link;

@@ -89,30 +89,10 @@ export const bitbucketAdapter: ForgeAdapter = {
   displayName: 'Bitbucket',
   tagline: 'Bitbucket Cloud',
   icon: BitbucketIcon,
-  capabilities,
 
   getPlatform: () => 'Bitbucket Cloud',
   formatUserLogin: (login) => login,
-  formatNotificationUser: (_account, user) => user.login,
 
-  fetchAuthenticatedUser,
-  listNotifications,
-
-  markThreadAsRead: async (account, threadId) => {
-    await markBitbucketNotificationsAsRead(account, [threadId]);
-  },
-  markThreadAsDone: () => {
-    throw new Error(
-      'Mark-as-done is not supported for Bitbucket; check capabilities.markAsDone before calling.',
-    );
-  },
-  unsubscribeThread: () => {
-    throw new Error(
-      'Unsubscribing threads is not supported for Bitbucket; check capabilities.unsubscribeThread before calling.',
-    );
-  },
-
-  followUrl,
   getDisplayHelpers,
 
   defaultHostname: 'bitbucket.org' as Hostname,
@@ -120,16 +100,6 @@ export const bitbucketAdapter: ForgeAdapter = {
   validateToken: (token) => token.length > 0,
 
   getPersonalAccessTokenSettingsUrl: (_hostname: Hostname) => ATLASSIAN_TOKEN_SETTINGS_URL,
-
-  getAccountSettingsUrl: (_account: Account) => ATLASSIAN_TOKEN_SETTINGS_URL,
-
-  // Bitbucket does not capture a workspace slug, so shortcut links cannot use
-  // workspace-scoped ("/workspace/{slug}/...") URLs. Pull requests go to the
-  // account-wide "Your work" dashboard; issues and notifications have no
-  // account-wide page and fall back to the host root.
-  getIssuesUrl: (account) => `https://${account.hostname}` as Link,
-  getPullRequestsUrl: (account) => `https://${account.hostname}/dashboard/overview` as Link,
-  getNotificationsUrl: (account) => `https://${account.hostname}` as Link,
 
   documentationUrl: BITBUCKET_DOCS_URL,
 
@@ -144,4 +114,33 @@ export const bitbucketAdapter: ForgeAdapter = {
       authMethod: 'Personal Access Token',
     },
   ],
+
+  accountOps: {
+    capabilities,
+    formatNotificationUser: (_account, user) => user.login,
+    fetchAuthenticatedUser,
+    listNotifications,
+    markThreadAsRead: async (account, threadId) => {
+      await markBitbucketNotificationsAsRead(account, [threadId]);
+    },
+    markThreadAsDone: () => {
+      throw new Error(
+        'Mark-as-done is not supported for Bitbucket; check capabilities.markAsDone before calling.',
+      );
+    },
+    unsubscribeThread: () => {
+      throw new Error(
+        'Unsubscribing threads is not supported for Bitbucket; check capabilities.unsubscribeThread before calling.',
+      );
+    },
+    followUrl,
+    getAccountSettingsUrl: (_account: Account) => ATLASSIAN_TOKEN_SETTINGS_URL,
+    // Bitbucket does not capture a workspace slug, so shortcut links cannot use
+    // workspace-scoped ("/workspace/{slug}/...") URLs. Pull requests go to the
+    // account-wide "Your work" dashboard; issues and notifications have no
+    // account-wide page and fall back to the host root.
+    getIssuesUrl: (account) => `https://${account.hostname}` as Link,
+    getPullRequestsUrl: (account) => `https://${account.hostname}/dashboard/overview` as Link,
+    getNotificationsUrl: (account) => `https://${account.hostname}` as Link,
+  },
 };

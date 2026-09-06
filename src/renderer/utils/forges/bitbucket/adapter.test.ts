@@ -59,8 +59,10 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
     });
 
     it('reports unsupported capabilities', () => {
-      expect(bitbucketAdapter.capabilities.markAsDone(mockBitbucketAccount)).toBe(false);
-      expect(bitbucketAdapter.capabilities.unsubscribeThread(mockBitbucketAccount)).toBe(false);
+      expect(bitbucketAdapter.accountOps.capabilities.markAsDone(mockBitbucketAccount)).toBe(false);
+      expect(bitbucketAdapter.accountOps.capabilities.unsubscribeThread(mockBitbucketAccount)).toBe(
+        false,
+      );
     });
 
     it('exposes a single PAT login method', () => {
@@ -78,7 +80,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
 
     it('uses the native login as a notification actor label', () => {
       expect(
-        bitbucketAdapter.formatNotificationUser(mockBitbucketAccount, {
+        bitbucketAdapter.accountOps.formatNotificationUser(mockBitbucketAccount, {
           login: 'user@example.com',
           avatarUrl: '' as Link,
           htmlUrl: '' as Link,
@@ -94,17 +96,19 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
     });
 
     it('returns the Atlassian token settings URL for account settings', () => {
-      expect(bitbucketAdapter.getAccountSettingsUrl(mockBitbucketAccount)).toBe(
+      expect(bitbucketAdapter.accountOps.getAccountSettingsUrl(mockBitbucketAccount)).toBe(
         'https://id.atlassian.com/manage-profile/security/api-tokens',
       );
     });
 
     it('links pull requests to the Your work dashboard and the rest to the host root', () => {
-      expect(bitbucketAdapter.getIssuesUrl(mockBitbucketAccount)).toBe('https://bitbucket.org');
-      expect(bitbucketAdapter.getPullRequestsUrl(mockBitbucketAccount)).toBe(
+      expect(bitbucketAdapter.accountOps.getIssuesUrl(mockBitbucketAccount)).toBe(
+        'https://bitbucket.org',
+      );
+      expect(bitbucketAdapter.accountOps.getPullRequestsUrl(mockBitbucketAccount)).toBe(
         'https://bitbucket.org/dashboard/overview',
       );
-      expect(bitbucketAdapter.getNotificationsUrl(mockBitbucketAccount)).toBe(
+      expect(bitbucketAdapter.accountOps.getNotificationsUrl(mockBitbucketAccount)).toBe(
         'https://bitbucket.org',
       );
     });
@@ -142,7 +146,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
         },
       });
 
-      const result = await bitbucketAdapter.fetchAuthenticatedUser(mockBitbucketAccount);
+      const result = await bitbucketAdapter.accountOps.fetchAuthenticatedUser(mockBitbucketAccount);
 
       expect(result).toEqual({
         user: {
@@ -166,7 +170,8 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
       });
 
       const accountWithoutUsername = { ...mockBitbucketAccount, username: undefined };
-      const result = await bitbucketAdapter.fetchAuthenticatedUser(accountWithoutUsername);
+      const result =
+        await bitbucketAdapter.accountOps.fetchAuthenticatedUser(accountWithoutUsername);
 
       expect(result.user.login).toBe('atlas-456');
     });
@@ -182,7 +187,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
         },
       });
 
-      const result = await bitbucketAdapter.fetchAuthenticatedUser(mockBitbucketAccount);
+      const result = await bitbucketAdapter.accountOps.fetchAuthenticatedUser(mockBitbucketAccount);
 
       expect(result.user.name).toBeNull();
       expect(result.user.avatar).toBe('');
@@ -193,9 +198,9 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
         me: { user: null },
       });
 
-      await expect(bitbucketAdapter.fetchAuthenticatedUser(mockBitbucketAccount)).rejects.toThrow(
-        'Failed to retrieve Bitbucket authenticated user.',
-      );
+      await expect(
+        bitbucketAdapter.accountOps.fetchAuthenticatedUser(mockBitbucketAccount),
+      ).rejects.toThrow('Failed to retrieve Bitbucket authenticated user.');
     });
   });
 
@@ -207,7 +212,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
 
       useSettingsStore.setState({ fetchReadNotifications: false });
 
-      const result = await bitbucketAdapter.listNotifications(mockBitbucketAccount);
+      const result = await bitbucketAdapter.accountOps.listNotifications(mockBitbucketAccount);
 
       expect(listSpy).toHaveBeenCalledWith(mockBitbucketAccount, true);
       expect(result).toHaveLength(1);
@@ -219,7 +224,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
 
       useSettingsStore.setState({ fetchReadNotifications: true });
 
-      await bitbucketAdapter.listNotifications(mockBitbucketAccount);
+      await bitbucketAdapter.accountOps.listNotifications(mockBitbucketAccount);
 
       expect(listSpy).toHaveBeenCalledWith(mockBitbucketAccount, false);
     });
@@ -231,21 +236,21 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
         .spyOn(client, 'markBitbucketNotificationsAsRead')
         .mockResolvedValue(undefined);
 
-      await bitbucketAdapter.markThreadAsRead(mockBitbucketAccount, 'notif-abc');
+      await bitbucketAdapter.accountOps.markThreadAsRead(mockBitbucketAccount, 'notif-abc');
 
       expect(markSpy).toHaveBeenCalledWith(mockBitbucketAccount, ['notif-abc']);
     });
 
     it('markThreadAsDone throws — check capabilities before calling', () => {
-      expect(() => bitbucketAdapter.markThreadAsDone(mockBitbucketAccount, 'notif-abc')).toThrow(
-        /check capabilities.markAsDone/,
-      );
+      expect(() =>
+        bitbucketAdapter.accountOps.markThreadAsDone(mockBitbucketAccount, 'notif-abc'),
+      ).toThrow(/check capabilities.markAsDone/);
     });
 
     it('unsubscribeThread throws — check capabilities before calling', () => {
-      expect(() => bitbucketAdapter.unsubscribeThread(mockBitbucketAccount, 'notif-abc')).toThrow(
-        /not supported for Bitbucket/,
-      );
+      expect(() =>
+        bitbucketAdapter.accountOps.unsubscribeThread(mockBitbucketAccount, 'notif-abc'),
+      ).toThrow(/not supported for Bitbucket/);
     });
   });
 
@@ -261,7 +266,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
         json: async () => payload,
       } as Response);
 
-      const result = await bitbucketAdapter.followUrl<{ key: string }>(
+      const result = await bitbucketAdapter.accountOps.followUrl(
         mockBitbucketAccount,
         'https://bitbucket.org/api/resource' as Link,
       );
@@ -280,7 +285,10 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
       } as Response);
 
       await expect(
-        bitbucketAdapter.followUrl(mockBitbucketAccount, 'https://bitbucket.org/missing' as Link),
+        bitbucketAdapter.accountOps.followUrl(
+          mockBitbucketAccount,
+          'https://bitbucket.org/missing' as Link,
+        ),
       ).rejects.toThrow('Bitbucket fetch error: 404');
     });
   });

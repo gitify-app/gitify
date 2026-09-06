@@ -80,38 +80,16 @@ export const githubAdapter: ForgeAdapter = {
   displayName: 'GitHub',
   tagline: 'GitHub Cloud & GitHub Enterprise Server',
   icon: MarkGithubIcon,
-  capabilities: githubCapabilities,
 
   getPlatform: getGitHubPlatform,
   formatUserLogin: (login) => login,
-  formatNotificationUser: formatGitHubNotificationUser,
-
-  fetchAuthenticatedUser,
-  listNotifications,
-
-  markThreadAsRead: async (account, threadId) => {
-    await markNotificationThreadAsRead(account, threadId);
-  },
-  markThreadAsDone: async (account, threadId) => {
-    await markNotificationThreadAsDone(account, threadId);
-  },
-  unsubscribeThread: async (account, threadId) => {
-    await ignoreNotificationThreadSubscription(account, threadId);
-  },
 
   enrichNotifications: enrichGitHubNotifications,
-  onAccountTokenChange: clearOctokitClientCacheForAccount,
-
-  followUrl,
   getDisplayHelpers,
 
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
-  getAccountSettingsUrl: getDeveloperSettingsURL,
-  getIssuesUrl: (account) => `https://${account.hostname}/issues` as Link,
-  getPullRequestsUrl: (account) => `https://${account.hostname}/pulls` as Link,
-  getNotificationsUrl: (account) => `https://${account.hostname}/notifications` as Link,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
   getAuthMethodIcon: githubAuthMethodIcon,
 
@@ -155,10 +133,31 @@ export const githubAdapter: ForgeAdapter = {
     getNewOAuthAppUrl: getNewOAuthAppURL,
   },
 
-  oauthScopes: {
-    hasRequired: (account) => accountHasScopes(account, 'REQUIRED'),
-    hasRecommended: (account) => accountHasScopes(account, 'RECOMMENDED'),
-    hasAlternate: (account) => accountHasScopes(account, 'ALTERNATE'),
+  accountOps: {
+    capabilities: githubCapabilities,
+    formatNotificationUser: formatGitHubNotificationUser,
+    fetchAuthenticatedUser,
+    onAccountTokenChange: clearOctokitClientCacheForAccount,
+    listNotifications,
+    markThreadAsRead: async (account, threadId) => {
+      await markNotificationThreadAsRead(account, threadId);
+    },
+    markThreadAsDone: async (account, threadId) => {
+      await markNotificationThreadAsDone(account, threadId);
+    },
+    unsubscribeThread: async (account, threadId) => {
+      await ignoreNotificationThreadSubscription(account, threadId);
+    },
+    followUrl,
+    getAccountSettingsUrl: getDeveloperSettingsURL,
+    getIssuesUrl: (account) => `https://${account.hostname}/issues` as Link,
+    getPullRequestsUrl: (account) => `https://${account.hostname}/pulls` as Link,
+    getNotificationsUrl: (account) => `https://${account.hostname}/notifications` as Link,
+    oauthScopes: {
+      hasRequired: (account) => accountHasScopes(account, 'REQUIRED'),
+      hasRecommended: (account) => accountHasScopes(account, 'RECOMMENDED'),
+      hasAlternate: (account) => accountHasScopes(account, 'ALTERNATE'),
+    },
   },
 };
 
