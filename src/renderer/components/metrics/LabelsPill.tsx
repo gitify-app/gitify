@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { CSSProperties, FC } from 'react';
 
 import { TagIcon } from '@primer/octicons-react';
 import { IssueLabelToken, LabelGroup } from '@primer/react';
@@ -12,41 +12,62 @@ export interface LabelsPillProps {
   issueFields?: GitifyIssueField[];
 }
 
+/**
+ * Resolve an {@link IconColor} token (a `text-gitify-icon-*` Tailwind class) to
+ * the Primer-backed CSS variable it maps to. Primer's label token styles set
+ * their own computed `color`, which would beat the utility class in the
+ * cascade, so the field colour is applied inline instead.
+ */
+export const iconColorCssVar = (color: IconColor): string =>
+  `var(--${color.replace('text-gitify-icon-', 'gitify-icon-')})`;
+
 export const LabelsPill: FC<LabelsPillProps> = ({ labels, issueFields }) => {
-  const fieldLabels: GitifyLabels[] = (issueFields ?? []).map((field) => {
-    return {
-      name: `${field.name}: ${field.value}`,
-      color: field.color ?? '',
-    };
-  });
+  const fieldTokens = (issueFields ?? []).map((field) => ({
+    text: `${field.name}: ${field.value}`,
+    color: field.color,
+  }));
 
-  const allLabels = [...fieldLabels, ...(labels ?? [])];
+  const labelsContent =
+    labels?.length || fieldTokens.length ? (
+      <LabelGroup>
+        {fieldTokens.map((field) => {
+          const style: CSSProperties | undefined = field.color
+            ? { color: iconColorCssVar(field.color) }
+            : undefined;
 
-  if (!allLabels.length) {
+          return (
+            <IssueLabelToken
+              className={field.color}
+              key={field.text}
+              size="small"
+              style={style}
+              text={field.text}
+            />
+          );
+        })}
+        {(labels ?? []).map((label) => {
+          return (
+            <IssueLabelToken
+              fillColor={label.color ? `#${label.color}` : undefined}
+              key={label.name}
+              size="small"
+              text={label.name}
+            />
+          );
+        })}
+      </LabelGroup>
+    ) : null;
+
+  if (!labelsContent) {
     return null;
   }
-
-  const labelsContent = (
-    <LabelGroup>
-      {allLabels.map((label) => {
-        return (
-          <IssueLabelToken
-            fillColor={label.color ? `#${label.color}` : undefined}
-            key={label.name}
-            size="small"
-            text={label.name}
-          />
-        );
-      })}
-    </LabelGroup>
-  );
 
   return (
     <MetricPill
       color={IconColor.GRAY}
       contents={labelsContent}
       icon={TagIcon}
-      metric={allLabels.length}
+      metric={fieldTokens.length + (labels?.length ?? 0)}
     />
   );
 };

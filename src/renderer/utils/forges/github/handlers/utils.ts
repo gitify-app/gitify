@@ -55,56 +55,41 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
 }
 
 /**
+ * GitHub color enum shared between native issue types and issue field single-select options.
+ */
+export type GitHubColor = IssueTypeColor | IssueFieldSingleSelectOptionColor;
+
+/**
  * Map GitHub's native issue type color to a Gitify icon color token.
- * GitHub supports more colors than Gitify's fixed design token set, so
- * this collapses to the closest available token.
  */
 export function mapIssueTypeColor(color: IssueTypeColor): IconColor {
   return mapGitHubColorToIconColor(color);
 }
 
 /**
- * Map a GitHub issue field option color to the hex fill color used when
- * rendering the field as a label token. Field options use a fixed 8-color
- * palette (`IssueFieldSingleSelectOptionColor`); each enum value maps to the
- * GitHub Primer color it represents so the token preserves the distinct color
- * shown in the GitHub UI. Unknown colors fall back to a neutral gray.
+ * Map a GitHub issue field option color to a Gitify icon color token.
  */
-export function mapIssueFieldColorToHex(color: IssueFieldSingleSelectOptionColor): string {
-  switch (color) {
-    case 'RED':
-      return 'cf222e';
-    case 'GREEN':
-      return '1a7f37';
-    case 'YELLOW':
-      return 'bf8700';
-    case 'ORANGE':
-      return 'bc4c00';
-    case 'BLUE':
-      return '0969da';
-    case 'PURPLE':
-      return '8250df';
-    case 'PINK':
-      return 'bf3989';
-    case 'GRAY':
-    default:
-      return '6e7781';
-  }
+export function mapIssueFieldColor(color: IssueFieldSingleSelectOptionColor): IconColor {
+  return mapGitHubColorToIconColor(color);
 }
 
-function mapGitHubColorToIconColor(color: string): IconColor {
+export function mapGitHubColorToIconColor(color: GitHubColor): IconColor {
   switch (color) {
     case 'RED':
       return IconColor.RED;
+    case 'ORANGE':
+      return IconColor.ORANGE;
+    case 'YELLOW':
+      return IconColor.YELLOW;
     case 'GREEN':
       return IconColor.GREEN;
-    case 'YELLOW':
-    case 'ORANGE':
-      return IconColor.YELLOW;
     case 'BLUE':
+      return IconColor.BLUE;
     case 'PURPLE':
-    case 'PINK':
       return IconColor.PURPLE;
+    case 'PINK':
+      return IconColor.PINK;
+    case 'GRAY':
     default:
       return IconColor.GRAY;
   }

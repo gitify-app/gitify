@@ -357,11 +357,11 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       const result = await issueHandler.enrich(mockNotification);
 
       expect(result.issueFields).toEqual([
-        { name: 'Priority', value: 'High', color: 'cf222e' },
+        { name: 'Priority', value: 'High', color: IconColor.RED },
         {
           name: 'Platform',
           value: 'Mobile, Web',
-          color: '0969da',
+          color: IconColor.BLUE,
         },
         { name: 'Impact', value: 'Customer-facing' },
         { name: 'Effort', value: '5' },

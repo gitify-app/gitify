@@ -263,6 +263,9 @@ export enum IconColor {
   PURPLE = 'text-gitify-icon-done',
   RED = 'text-gitify-icon-closed',
   YELLOW = 'text-gitify-icon-attention',
+  ORANGE = 'text-gitify-icon-severe',
+  BLUE = 'text-gitify-icon-accent',
+  PINK = 'text-gitify-icon-sponsors',
 }
 
 export enum Opacity {
@@ -491,8 +494,8 @@ export interface GitifyIssueField {
   name: string;
   /** Display value, e.g. "High", "5", "2026-09-01" */
   value: string;
-  /** Option color when available, as a hex string without the leading '#' */
-  color?: string;
+  /** Option color token when available */
+  color?: IconColor;
 }
 
 export type GitifyMilestone = MilestoneFieldsFragment;

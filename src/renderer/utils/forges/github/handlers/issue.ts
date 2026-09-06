@@ -20,7 +20,7 @@ import { IconColor } from '../../../../types';
 import { fetchIssueByNumber } from '../client';
 import type { IssueDetailsFragment } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor, mapIssueFieldColorToHex, mapIssueTypeColor } from './utils';
+import { getNotificationAuthor, mapIssueFieldColor, mapIssueTypeColor } from './utils';
 
 /**
  * A single node in the `issueFieldValues` GraphQL connection.
@@ -49,7 +49,7 @@ function mapIssueFieldValue(node: IssueFieldValueNode): GitifyIssueField | undef
       return {
         name: fieldName,
         value: node.name,
-        color: mapIssueFieldColorToHex(node.color),
+        color: mapIssueFieldColor(node.color),
       };
     }
     case 'IssueFieldMultiSelectValue': {
@@ -62,7 +62,7 @@ function mapIssueFieldValue(node: IssueFieldValueNode): GitifyIssueField | undef
       return {
         name: fieldName,
         value: optionNames.join(', '),
-        ...(coloredOption ? { color: mapIssueFieldColorToHex(coloredOption.color) } : {}),
+        ...(coloredOption ? { color: mapIssueFieldColor(coloredOption.color) } : {}),
       };
     }
     case 'IssueFieldTextValue': {

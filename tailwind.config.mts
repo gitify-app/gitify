@@ -56,6 +56,9 @@ const config: Config = {
             done: 'var(--gitify-icon-done)',
             muted: 'var(--fgColor-muted)',
             open: 'var(--gitify-icon-open)',
+            severe: 'var(--gitify-icon-severe)',
+            accent: 'var(--gitify-icon-accent)',
+            sponsors: 'var(--gitify-icon-sponsors)',
           },
 
           counter: {

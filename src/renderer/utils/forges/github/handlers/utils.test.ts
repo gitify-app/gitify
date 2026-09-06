@@ -6,7 +6,12 @@ import type {
   IssueFieldSingleSelectOptionColor,
   IssueTypeColor,
 } from '../graphql/generated/graphql';
-import { getNotificationAuthor, mapIssueFieldColorToHex, mapIssueTypeColor } from './utils';
+import {
+  getNotificationAuthor,
+  mapGitHubColorToIconColor,
+  mapIssueFieldColor,
+  mapIssueTypeColor,
+} from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
@@ -47,48 +52,30 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
     });
   });
 
-  describe('mapIssueTypeColor', () => {
+  describe('mapGitHubColorToIconColor', () => {
     it.each([
       ['RED', IconColor.RED],
-      ['GREEN', IconColor.GREEN],
+      ['ORANGE', IconColor.ORANGE],
       ['YELLOW', IconColor.YELLOW],
-      ['ORANGE', IconColor.YELLOW],
-      ['BLUE', IconColor.PURPLE],
+      ['GREEN', IconColor.GREEN],
+      ['BLUE', IconColor.BLUE],
       ['PURPLE', IconColor.PURPLE],
-      ['PINK', IconColor.PURPLE],
+      ['PINK', IconColor.PINK],
       ['GRAY', IconColor.GRAY],
-    ] satisfies [IssueTypeColor, IconColor][])(
-      'maps %s to the expected token',
+    ] as const satisfies readonly (readonly [IssueTypeColor, IconColor])[])(
+      'maps %s to the expected token via every entry point',
       (color, expected) => {
+        expect(mapGitHubColorToIconColor(color)).toBe(expected);
         expect(mapIssueTypeColor(color)).toBe(expected);
+        expect(mapIssueFieldColor(color as IssueFieldSingleSelectOptionColor)).toBe(expected);
       },
     );
 
     it('falls back to gray for a colour Gitify does not know about', () => {
+      expect(mapGitHubColorToIconColor('CHARTREUSE' as IssueTypeColor)).toBe(IconColor.GRAY);
       expect(mapIssueTypeColor('CHARTREUSE' as IssueTypeColor)).toBe(IconColor.GRAY);
-    });
-  });
-
-  describe('mapIssueFieldColorToHex', () => {
-    it.each([
-      ['RED', 'cf222e'],
-      ['GREEN', '1a7f37'],
-      ['YELLOW', 'bf8700'],
-      ['ORANGE', 'bc4c00'],
-      ['BLUE', '0969da'],
-      ['PURPLE', '8250df'],
-      ['PINK', 'bf3989'],
-      ['GRAY', '6e7781'],
-    ] as const satisfies readonly (readonly [IssueFieldSingleSelectOptionColor, string])[])(
-      'maps %s to its hex color',
-      (color, expected) => {
-        expect(mapIssueFieldColorToHex(color)).toBe(expected);
-      },
-    );
-
-    it('falls back to gray for a colour Gitify does not know about', () => {
-      expect(mapIssueFieldColorToHex('CHARTREUSE' as IssueFieldSingleSelectOptionColor)).toBe(
-        '6e7781',
+      expect(mapIssueFieldColor('CHARTREUSE' as IssueFieldSingleSelectOptionColor)).toBe(
+        IconColor.GRAY,
       );
     });
   });

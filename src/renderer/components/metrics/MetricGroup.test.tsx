@@ -77,7 +77,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         ...mockGitifyNotification,
         subject: {
           ...mockGitifyNotification.subject,
-          issueFields: [{ name: 'Priority', value: 'High', color: 'cf222e' }],
+          issueFields: [{ name: 'Priority', value: 'High', color: IconColor.RED }],
           labels: [{ name: 'enhancement', color: '0e8a16' }],
         },
       },
@@ -99,7 +99,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         ...mockGitifyNotification,
         subject: {
           ...mockGitifyNotification.subject,
-          issueFields: [{ name: 'Priority', value: 'High', color: 'cf222e' }],
+          issueFields: [{ name: 'Priority', value: 'High', color: IconColor.RED }],
         },
       },
     };
