@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { ComponentProps, FC } from 'react';
 
 import {
   BellIcon,
@@ -20,6 +20,10 @@ import { useShortcutActions } from '../hooks/useShortcutActions';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { LogoIcon } from './icons/LogoIcon';
+
+const SpinningSyncIcon: FC<ComponentProps<typeof SyncIcon>> = (props) => (
+  <SyncIcon {...props} className="animate-spin" />
+);
 
 export const Sidebar: FC = () => {
   const { status, notificationCount, hasUnreadNotifications, isFetching } = useNotifications();
@@ -124,11 +128,10 @@ export const Sidebar: FC = () => {
           <>
             <IconButton
               aria-label="Refresh"
-              className={status === 'loading' || isFetching ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
               disabled={isLoading}
-              icon={SyncIcon}
+              icon={status === 'loading' || isFetching ? SpinningSyncIcon : SyncIcon}
               keybindingHint={shortcuts.refresh.key}
               // loading={status === 'loading'}
               onClick={() => shortcuts.refresh.action()}

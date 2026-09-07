@@ -215,7 +215,9 @@ describe('renderer/components/Sidebar.tsx', () => {
         isFetching: true,
       });
 
-      expect(screen.getByTestId('sidebar-refresh')).toHaveClass('animate-spin');
+      const refreshButton = screen.getByTestId('sidebar-refresh');
+      expect(refreshButton).not.toHaveClass('animate-spin');
+      expect(refreshButton.querySelector('svg')).toHaveClass('animate-spin');
     });
 
     it('does not animate the refresh icon when settled and no fetch is in flight', () => {
@@ -225,7 +227,8 @@ describe('renderer/components/Sidebar.tsx', () => {
         isFetching: false,
       });
 
-      expect(screen.getByTestId('sidebar-refresh')).not.toHaveClass('animate-spin');
+      const refreshButton = screen.getByTestId('sidebar-refresh');
+      expect(refreshButton.querySelector('svg')).not.toHaveClass('animate-spin');
     });
   });
 
