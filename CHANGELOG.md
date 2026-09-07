@@ -1,5 +1,19 @@
 # Changelog
 
+## [7.8.1](https://github.com/gitify-app/gitify/compare/v7.8.0...v7.8.1) (2026-09-07)
+
+
+### 🐛 Bug Fixes
+
+* `[@primer](https://github.com/primer)` motion animations for refresh ([#3289](https://github.com/gitify-app/gitify/issues/3289)) ([ccb9983](https://github.com/gitify-app/gitify/commit/ccb9983a4ecb33be195b3b0516188819bb98ed0e))
+* **ci:** patch app-builder-lib keychain password for macOS signing ([#3284](https://github.com/gitify-app/gitify/issues/3284)) ([aa5f25d](https://github.com/gitify-app/gitify/commit/aa5f25d1df38f177cbcd3f7d643a857e4c26a8d8))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @primer/react to v38.38.0 ([#3286](https://github.com/gitify-app/gitify/issues/3286)) ([22ddd2b](https://github.com/gitify-app/gitify/commit/22ddd2b21ac484eae93c0f28f9856ca3dbf1722f))
+* **deps-core:** update electron to v44.2.0 ([#3291](https://github.com/gitify-app/gitify/issues/3291)) ([e005c55](https://github.com/gitify-app/gitify/commit/e005c556248eaff7c0a135c85702d063e68c6f40))
+
 ## [7.8.0](https://github.com/gitify-app/gitify/compare/v7.7.1...v7.8.0) (2026-09-06)
 
 
