@@ -1,0 +1,67 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/metrics/ParentPill.tsx > renders parent pill with issue number and title 1`] = `
+<div>
+  <button
+    aria-describedby="_r_0_"
+    type="button"
+  >
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
+      data-size="small"
+      data-variant="secondary"
+      tabindex="0"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-issue-tracked-by text-gitify-icon-muted"
+          data-component="Octicon"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="12"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="12"
+        >
+          <path
+            d="M1.5 8a6.5 6.5 0 0 1 13 0A.75.75 0 0 0 16 8a8 8 0 1 0-8 8 .75.75 0 0 0 0-1.5A6.5 6.5 0 0 1 1.5 8Z"
+          />
+          <path
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm3.573 5.823-2.896-2.896a.25.25 0 0 1 0-.354l2.896-2.896a.25.25 0 0 1 .427.177V11.5h3.25a.75.75 0 0 1 0 1.5H12v2.146a.25.25 0 0 1-.427.177Z"
+          />
+        </svg>
+        <span
+          class="text-xxs px-1 truncate max-w-[160px] prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          #123 Epic Title
+        </span>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
+    data-direction="s"
+    id="_r_0_"
+    popover="auto"
+    role="tooltip"
+  >
+    Parent issue: #123 Epic Title
+  </span>
+</div>
+`;

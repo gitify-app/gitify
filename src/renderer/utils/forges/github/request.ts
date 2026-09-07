@@ -7,6 +7,12 @@ import type { TypedDocumentString } from './graphql/generated/graphql';
 import { createOctokitClient } from './octokit';
 
 /**
+ * Request header that opts into GitHub's preview/feature-gated GraphQL schema
+ * additions. Without it the schema omits `parent` and `subIssuesSummary`.
+ */
+const GRAPHQL_FEATURES_HEADER = { 'GraphQL-Features': 'sub_issues' } as const;
+
+/**
  * Perform a GraphQL API request with typed operation document.
  *
  * @param account - The authenticated account to make the request with.
@@ -22,7 +28,10 @@ export async function performGraphQLRequest<TResult, TVariables>(
   const octokit = await createOctokitClient(account, 'graphql');
 
   try {
-    return await octokit.graphql<TResult>(query.toString(), variables || {});
+    return await octokit.graphql<TResult>(query.toString(), {
+      ...variables,
+      headers: GRAPHQL_FEATURES_HEADER,
+    });
   } catch (error) {
     if (error instanceof GraphqlResponseError) {
       handleGraphQLResponseError<TResult>('performGraphQLRequest', error);
@@ -50,7 +59,10 @@ export async function performGraphQLRequestString<TResult>(
   const octokit = await createOctokitClient(account, 'graphql');
 
   try {
-    return await octokit.graphql<TResult>(query, variables || {});
+    return await octokit.graphql<TResult>(query, {
+      ...variables,
+      headers: GRAPHQL_FEATURES_HEADER,
+    });
   } catch (error) {
     if (error instanceof GraphqlResponseError) {
       handleGraphQLResponseError<TResult>('performGraphQLRequestString', error);

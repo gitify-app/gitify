@@ -63,7 +63,12 @@ describe('renderer/utils/forges/github/request.ts', () => {
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'graphql');
     expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(
       FetchIssueByNumberDocument.toString(),
-      { owner: 'test', name: 'repo', number: 1 },
+      {
+        owner: 'test',
+        name: 'repo',
+        number: 1,
+        headers: { 'GraphQL-Features': 'sub_issues' },
+      },
     );
   });
 
@@ -74,6 +79,8 @@ describe('renderer/utils/forges/github/request.ts', () => {
     await performGraphQLRequestString(mockGitHubCloudAccount, queryString, {});
 
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'graphql');
-    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {});
+    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {
+      headers: { 'GraphQL-Features': 'sub_issues' },
+    });
   });
 });

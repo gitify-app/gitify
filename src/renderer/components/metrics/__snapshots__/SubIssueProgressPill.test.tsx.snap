@@ -1,0 +1,155 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders completed sub-issue pill with 100% progress wheel 1`] = `
+<div>
+  <button
+    aria-describedby="_r_1_"
+    type="button"
+  >
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
+      data-size="small"
+      data-variant="secondary"
+      tabindex="0"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <svg
+          aria-hidden="true"
+          class="text-gitify-icon-done"
+          data-testid="sub-issue-progress-wheel"
+          fill="none"
+          height="12"
+          viewBox="0 0 16 16"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            class="opacity-25"
+            cx="8"
+            cy="8"
+            r="6"
+            stroke="currentColor"
+            stroke-width="2.2"
+          />
+          <circle
+            class="text-gitify-icon-done"
+            cx="8"
+            cy="8"
+            r="6"
+            stroke="currentColor"
+            stroke-dasharray="37.69911184307752"
+            stroke-dashoffset="0"
+            stroke-linecap="round"
+            stroke-width="2.2"
+            transform="rotate(-90 8 8)"
+          />
+        </svg>
+        <span
+          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          5/5
+        </span>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
+    data-direction="s"
+    id="_r_1_"
+    popover="auto"
+    role="tooltip"
+  >
+    Sub-issues: 5 of 5 completed (100%)
+  </span>
+</div>
+`;
+
+exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders in-progress sub-issue pill with progress wheel 1`] = `
+<div>
+  <button
+    aria-describedby="_r_0_"
+    type="button"
+  >
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
+      data-size="small"
+      data-variant="secondary"
+      tabindex="0"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <svg
+          aria-hidden="true"
+          class="text-gitify-icon-muted"
+          data-testid="sub-issue-progress-wheel"
+          fill="none"
+          height="12"
+          viewBox="0 0 16 16"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            class="opacity-25"
+            cx="8"
+            cy="8"
+            r="6"
+            stroke="currentColor"
+            stroke-width="2.2"
+          />
+          <circle
+            class="text-gitify-icon-done"
+            cx="8"
+            cy="8"
+            r="6"
+            stroke="currentColor"
+            stroke-dasharray="37.69911184307752"
+            stroke-dashoffset="22.61946710584651"
+            stroke-linecap="round"
+            stroke-width="2.2"
+            transform="rotate(-90 8 8)"
+          />
+        </svg>
+        <span
+          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          2/5
+        </span>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
+    data-direction="s"
+    id="_r_0_"
+    popover="auto"
+    role="tooltip"
+  >
+    Sub-issues: 2 of 5 completed (40%)
+  </span>
+</div>
+`;

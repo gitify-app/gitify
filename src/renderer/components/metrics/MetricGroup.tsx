@@ -9,9 +9,11 @@ import { IssueTypesPill } from './IssueTypesPill';
 import { LabelsPill } from './LabelsPill';
 import { LinkedIssuesPill } from './LinkedIssuesPill';
 import { MilestonePill } from './MilestonePill';
+import { ParentPill } from './ParentPill';
 import { ReactionsPill } from './ReactionsPill';
 import { ReviewsPill } from './ReviewsPill';
 import { StackedPrsPill } from './StackedPrsPill';
+import { SubIssueProgressPill } from './SubIssueProgressPill';
 
 export interface MetricGroupProps {
   notification: GitifyNotification;
@@ -46,6 +48,10 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
       <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
 
       <MilestonePill milestone={notification.subject.milestone!} />
+
+      <ParentPill parent={notification.subject.parentIssue} />
+
+      <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
 
       <LabelsPill labels={notification.subject.labels ?? []} />
     </div>

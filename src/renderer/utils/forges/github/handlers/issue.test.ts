@@ -296,6 +296,77 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
     });
+
+    it('with parent issue', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.parent = {
+        number: 456,
+        title: 'Epic Title',
+        url: 'https://github.com/gitify-app/notifications-test/issues/456' as Link,
+      };
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.parentIssue).toEqual({
+        number: 456,
+        title: 'Epic Title',
+        url: 'https://github.com/gitify-app/notifications-test/issues/456',
+      });
+    });
+
+    it('with sub-issue progress', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.subIssuesSummary = {
+        total: 5,
+        completed: 2,
+        percentCompleted: 40,
+      };
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.subIssueProgress).toEqual({
+        total: 5,
+        completed: 2,
+        percentCompleted: 40,
+      });
+    });
+
+    it('with sub-issue progress having zero total', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+      mockIssue.subIssuesSummary = {
+        total: 0,
+        completed: 0,
+        percentCompleted: 0,
+      };
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.subIssueProgress).toBeUndefined();
+    });
   });
 
   describe('iconType', () => {
