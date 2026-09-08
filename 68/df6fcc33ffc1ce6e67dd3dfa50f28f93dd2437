@@ -1,0 +1,18 @@
+src/renderer/components/avatars/AvatarWithFallback.tsx
+  h_ac004aadb63da9 35
+src/renderer/components/settings/SystemSettings.tsx
+  h_ac004aadb63da9 71
+src/renderer/utils/ui/icons.ts
+  h_ac004aadb63da9 83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "68df6fcc33ffc1ce6e67dd3dfa50f28f93dd2437",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
