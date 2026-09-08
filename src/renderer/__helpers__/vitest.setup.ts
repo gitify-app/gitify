@@ -88,8 +88,14 @@ function createGitifyBridgeApi(): Window['gitify'] {
     setNativeTheme: vi.fn().mockResolvedValue(undefined),
     platform: {
       isLinux: vi.fn().mockReturnValue(false),
+      isGnome: vi.fn().mockReturnValue(false),
       isMacOS: vi.fn().mockReturnValue(true),
       isWindows: vi.fn().mockReturnValue(false),
+    },
+    gnomeExtension: {
+      getState: vi.fn().mockResolvedValue('not-installed'),
+      install: vi.fn().mockResolvedValue('pending-session-restart'),
+      enable: vi.fn().mockResolvedValue('active'),
     },
     zoom: {
       getLevel: vi.fn(),

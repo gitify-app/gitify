@@ -1,0 +1,8 @@
+{
+  "uuid": "tray-position@gitify.app",
+  "name": "Gitify Window Placement",
+  "description": "Places the Gitify window below its tray icon.",
+  "shell-version": ["50"],
+  "url": "https://github.com/gitify-app/gitify",
+  "version": 1
+}

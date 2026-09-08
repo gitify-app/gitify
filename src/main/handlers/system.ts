@@ -5,6 +5,7 @@ import { EVENTS } from '../../shared/events';
 import { logInfo } from '../../shared/logger';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
+import { enableExtension, getExtensionState, installExtension } from '../gnome';
 import { applyKeepWindowOnBlur, applyWindowVibrancy } from '../lifecycle/window';
 import { setX11Backend } from '../ozone';
 import { isDevMode } from '../utils';
@@ -100,6 +101,10 @@ export function registerSystemHandlers(mb: Menubar): void {
   onMainEvent(EVENTS.UPDATE_USE_X11_BACKEND, (_, value: boolean) => {
     setX11Backend(value);
   });
+
+  handleMainEvent(EVENTS.GNOME_EXTENSION_STATE, () => getExtensionState());
+  handleMainEvent(EVENTS.GNOME_EXTENSION_INSTALL, () => installExtension());
+  handleMainEvent(EVENTS.GNOME_EXTENSION_ENABLE, () => enableExtension());
 
   /**
    * Toggle the macOS window vibrancy material for the Glass design language.

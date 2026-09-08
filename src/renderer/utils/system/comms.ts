@@ -1,4 +1,4 @@
-import type { ISafeStorageDecryptResult } from '../../../shared/events';
+import type { GnomeExtensionState, ISafeStorageDecryptResult } from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
 
@@ -110,6 +110,18 @@ export function setShowUpdateNotifications(value: boolean): void {
  */
 export function setUseX11Backend(value: boolean): void {
   window.gitify.setUseX11Backend(value);
+}
+
+export function getGnomeExtensionState(): Promise<GnomeExtensionState> {
+  return window.gitify.gnomeExtension.getState();
+}
+
+export function installGnomeExtension(): Promise<GnomeExtensionState> {
+  return window.gitify.gnomeExtension.install();
+}
+
+export function enableGnomeExtension(): Promise<GnomeExtensionState> {
+  return window.gitify.gnomeExtension.enable();
 }
 
 /**

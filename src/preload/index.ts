@@ -2,7 +2,7 @@ import { contextBridge, webFrame } from 'electron';
 
 import type { IKeyboardShortcut, NativeThemeSource } from '../shared/events';
 import { EVENTS } from '../shared/events';
-import { isLinux, isMacOS, isWindows } from '../shared/platform';
+import { isGnome, isLinux, isMacOS, isWindows } from '../shared/platform';
 
 import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
 
@@ -82,6 +82,13 @@ export const api = {
    */
   setUseX11Backend: (value: boolean) => sendMainEvent(EVENTS.UPDATE_USE_X11_BACKEND, value),
 
+  /** GNOME Shell extension that places the window below the tray icon. */
+  gnomeExtension: {
+    getState: () => invokeMainEvent(EVENTS.GNOME_EXTENSION_STATE),
+    install: () => invokeMainEvent(EVENTS.GNOME_EXTENSION_INSTALL),
+    enable: () => invokeMainEvent(EVENTS.GNOME_EXTENSION_ENABLE),
+  },
+
   /**
    * Enable or disable the macOS window vibrancy material for Glass. Resolves once
    * the material has been applied so the renderer can order the visual switch.
@@ -158,6 +165,9 @@ export const api = {
   platform: {
     /** Returns `true` when running on Linux. */
     isLinux: () => isLinux(),
+
+    /** Returns `true` when the desktop session is GNOME Shell. */
+    isGnome: () => isGnome(),
 
     /** Returns `true` when running on macOS. */
     isMacOS: () => isMacOS(),
