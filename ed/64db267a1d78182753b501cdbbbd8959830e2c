@@ -1,0 +1,26 @@
+src/renderer/routes/__snapshots__/Filters.test.tsx.snap
+  h_ac004aadb63da9 2606
+src/renderer/routes/__snapshots__/Login.test.tsx.snap
+  h_ac004aadb63da9 241,287,332
+src/renderer/routes/bitbucket/__snapshots__/LoginWithPersonalAccessToken.test.tsx.snap
+  h_ac004aadb63da9 199,354,412
+src/renderer/routes/gitea/__snapshots__/LoginWithPersonalAccessToken.test.tsx.snap
+  h_ac004aadb63da9 200,355,413
+src/renderer/routes/github/__snapshots__/LoginWithOAuthApp.test.tsx.snap
+  h_ac004aadb63da9 189,395,453
+src/renderer/routes/github/__snapshots__/LoginWithPersonalAccessToken.test.tsx.snap
+  h_ac004aadb63da9 199,385,443
+src/renderer/routes/gitlab/__snapshots__/LoginWithPersonalAccessToken.test.tsx.snap
+  h_ac004aadb63da9 199,377,435
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ed64db267a1d78182753b501cdbbbd8959830e2c",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
