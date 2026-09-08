@@ -4,6 +4,9 @@
 /** GitHub Primer Design System */
 @import '@primer/css/dist/primer.css';
 
+/** GitHub Primer Primitives - motion tokens (required by Primer React's Spinner & Skeleton animations) */
+@import '@primer/primitives/dist/css/base/motion/motion.css';
+
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
 
