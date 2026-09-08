@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
+import { useGnomeExtensionStore } from '../hooks/useGnomeExtension';
 import { useNotifications } from '../hooks/useNotifications';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import {
@@ -46,6 +47,12 @@ export const GlobalEffects: FC = () => {
 
   // Global keyboard shortcut registration, reverting on failure
   useShortcutRegistration();
+
+  const refreshGnomeExtension = useGnomeExtensionStore((s) => s.refresh);
+
+  useEffect(() => {
+    refreshGnomeExtension();
+  }, [refreshGnomeExtension]);
 
   // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   useEffect(() => {
