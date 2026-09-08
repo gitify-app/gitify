@@ -1,0 +1,21 @@
+.github/workflows/lint.yml
+  s_725e29e24ed733::t_64e5efbb1744bf 56
+.github/workflows/renovate-vite-migrate.yml
+  s_725e29e24ed733::t_bf74783b09841f 42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "88f94747284aa92ac88a2d0441634b6f056889be",
+  "prompts": {},
+  "sessions": {
+    "s_725e29e24ed733": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fa783b1bfffe2AGGQXO4ysmRqK",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
