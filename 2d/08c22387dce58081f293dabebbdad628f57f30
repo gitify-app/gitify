@@ -1,0 +1,26 @@
+.github/workflows/renovate-vite-migrate.yml
+  s_725e29e24ed733::t_f22963da0e6633 42,53-57,65
+.github/workflows/lint.yml
+  s_725e29e24ed733::t_3b4d7c353429bc 56
+src/renderer/components/settings/SystemSettings.tsx
+  s_725e29e24ed733::t_d57ee79b96f8b8 225
+src/renderer/components/avatars/AvatarWithFallback.tsx
+  s_725e29e24ed733::t_1d74ae760b8855 4,24-29,31-39
+  s_725e29e24ed733::t_e2ec2f2f30a20c 19-23,30,40-41,57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "2d08c22387dce58081f293dabebbdad628f57f30",
+  "prompts": {},
+  "sessions": {
+    "s_725e29e24ed733": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fa783b1bfffe2AGGQXO4ysmRqK",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
