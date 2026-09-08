@@ -1,0 +1,38 @@
+.github/workflows/lint.yml
+  s_725e29e24ed733::t_109bdc85fb815a 42-72
+CONTRIBUTING.md
+  s_725e29e24ed733::t_1f5c45691e16fc 42-44
+package.json
+  s_725e29e24ed733::t_91e84e5e15bfa3 112-113
+  s_725e29e24ed733::t_f6b47f85bf8ffe 135
+  s_725e29e24ed733::t_e638f97095c5c6 131,134
+pnpm-workspace.yaml
+  s_725e29e24ed733::t_18b9e8af05ee96 12-15,31
+  s_725e29e24ed733::t_e638f97095c5c6 16-20,32-33,35-41
+renovate.json
+  s_725e29e24ed733::t_f6b47f85bf8ffe 74
+  s_725e29e24ed733::t_4783e6492fe677 66-71
+.github/workflows/renovate-vite-migrate.yml
+  s_725e29e24ed733::t_62f9a91ed1ed70 1-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "a490c97091c6415f4f983b790aa7ed79d45a60ec",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_725e29e24ed733": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_fa783b1bfffe2AGGQXO4ysmRqK",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
