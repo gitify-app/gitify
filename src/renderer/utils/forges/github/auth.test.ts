@@ -71,11 +71,11 @@ describe('renderer/utils/forges/github/auth.ts', () => {
       ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
     });
 
-    it('returns the built-in Gitify OAuth App connections URL', () => {
+    it('returns the OAuth device-flow connections URL', () => {
       expect(
         getDeveloperSettingsURL({
           hostname: 'github.com' as Hostname,
-          method: 'Gitify OAuth App',
+          method: 'OAuth Device Flow',
         } as Account),
       ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
     });

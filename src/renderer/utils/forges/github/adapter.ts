@@ -98,10 +98,10 @@ export const githubAdapter: ForgeAdapter = {
     {
       testId: 'login-github',
       icon: MarkGithubIcon,
-      label: 'GitHub OAuth',
+      label: 'GitHub',
       variant: 'primary',
       route: '/login/github/device-flow',
-      authMethod: 'Gitify OAuth App',
+      authMethod: 'OAuth Device Flow',
     },
     {
       testId: 'login-pat',
@@ -120,7 +120,7 @@ export const githubAdapter: ForgeAdapter = {
   ],
 
   deviceFlow: {
-    authMethod: 'Gitify OAuth App',
+    authMethod: 'OAuth Device Flow',
     start: startGitHubDeviceFlow,
     poll: pollGitHubDeviceFlow,
     getRevokeAccessUrl: getDeviceFlowRevokeAccessURL,
@@ -172,7 +172,7 @@ function githubAuthMethodIcon(method: AuthMethod) {
   switch (method) {
     case 'GitHub App':
       return AppsIcon;
-    case 'Gitify OAuth App':
+    case 'OAuth Device Flow':
     case 'OAuth App':
       return PersonIcon;
     default:

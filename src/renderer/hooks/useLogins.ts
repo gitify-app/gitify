@@ -98,7 +98,7 @@ export const useLogins = (): LoginsState => {
         (a) =>
           a.hostname === hostname &&
           (a.method === method ||
-            (forge === 'github' && method === 'Gitify OAuth App' && a.method === 'GitHub App')),
+            (forge === 'github' && method === 'OAuth Device Flow' && a.method === 'GitHub App')),
       );
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
@@ -106,7 +106,7 @@ export const useLogins = (): LoginsState => {
 
       await createAccount(method, token, hostname, forge);
 
-      if (existingAccount?.method === 'GitHub App' && method === 'Gitify OAuth App') {
+      if (existingAccount?.method === 'GitHub App' && method === 'OAuth Device Flow') {
         removeAccount(existingAccount);
       }
     },

@@ -1,6 +1,6 @@
 import type { AuthCode, ClientID, ClientSecret, Forge, Hostname, Token } from '../../types';
 
-export type AuthMethod = 'GitHub App' | 'Gitify OAuth App' | 'Personal Access Token' | 'OAuth App';
+export type AuthMethod = 'GitHub App' | 'OAuth Device Flow' | 'Personal Access Token' | 'OAuth App';
 
 export type PlatformType =
   | 'Bitbucket Cloud'

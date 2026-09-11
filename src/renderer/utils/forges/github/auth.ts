@@ -62,7 +62,7 @@ export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
 /**
  * Return the GitHub developer settings URL appropriate for the account's auth method.
  *
- * - GitHub App or built-in Gitify OAuth App → application connections page
+ * - GitHub App or OAuth device flow → application connections page
  * - OAuth App → developer settings page
  * - Personal Access Token → tokens settings page
  *
@@ -74,7 +74,7 @@ export function getDeveloperSettingsURL(account: Account): Link {
 
   switch (account.method) {
     case 'GitHub App':
-    case 'Gitify OAuth App':
+    case 'OAuth Device Flow':
       settingsURL.pathname = `/settings/connections/applications/${Constants.OAUTH_DEVICE_FLOW_CLIENT_ID}`;
       break;
     case 'OAuth App':
@@ -92,7 +92,7 @@ export function getDeveloperSettingsURL(account: Account): Link {
 }
 
 /**
- * Return the connected-application settings URL for Gitify's built-in OAuth App.
+ * Return the connected-application settings URL for the built-in OAuth device flow.
  *
  * This intentionally differs from the generic OAuth App settings page used for
  * user-configured apps: it lets a user revoke Gitify's existing authorization.

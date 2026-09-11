@@ -114,7 +114,7 @@ export const AccountsRoute: FC = () => {
   const handleReAuthenticate = (account: Account) => {
     const authMethod =
       account.forge === 'github' && account.method === 'GitHub App'
-        ? 'Gitify OAuth App'
+        ? 'OAuth Device Flow'
         : account.method;
     const loginMethod = getAdapter(account).loginMethods.find(
       (method) => method.authMethod === authMethod,
