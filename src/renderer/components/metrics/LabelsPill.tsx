@@ -18,7 +18,7 @@ export interface LabelsPillProps {
  * their own computed `color`, which would beat the utility class in the
  * cascade, so the field colour is applied inline instead.
  */
-export const iconColorCssVar = (color: IconColor): string =>
+const iconColorCssVar = (color: IconColor): string =>
   `var(--${color.replace('text-gitify-icon-', 'gitify-icon-')})`;
 
 export const LabelsPill: FC<LabelsPillProps> = ({ labels, issueFields }) => {
@@ -35,15 +35,7 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels, issueFields }) => {
             ? { color: iconColorCssVar(field.color) }
             : undefined;
 
-          return (
-            <IssueLabelToken
-              className={field.color}
-              key={field.text}
-              size="small"
-              style={style}
-              text={field.text}
-            />
-          );
+          return <IssueLabelToken key={field.text} size="small" style={style} text={field.text} />;
         })}
         {(labels ?? []).map((label) => {
           return (

@@ -29,6 +29,18 @@ type IssueFieldValueNode = NonNullable<
   NonNullable<IssueDetailsFragment['issueFieldValues']>['nodes']
 >[number];
 
+function createIssueField(
+  name: string,
+  value: string | null | undefined,
+  color?: IconColor,
+): GitifyIssueField | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  return { name, value, ...(color ? { color } : {}) };
+}
+
 /**
  * Map a GitHub issue field value node to a normalized {@link GitifyIssueField}.
  *
@@ -40,22 +52,18 @@ function mapIssueFieldValue(node: IssueFieldValueNode): GitifyIssueField | undef
     return undefined;
   }
 
+  const fieldName = node.field && 'name' in node.field ? node.field.name : undefined;
+  if (!fieldName) {
+    return undefined;
+  }
+
   switch (node.__typename) {
     case 'IssueFieldSingleSelectValue': {
-      const fieldName = node.field && 'name' in node.field ? node.field.name : undefined;
-      if (!fieldName || !node.name) {
-        return undefined;
-      }
-      return {
-        name: fieldName,
-        value: node.name,
-        color: mapIssueFieldColor(node.color),
-      };
+      return createIssueField(fieldName, node.name, mapIssueFieldColor(node.color));
     }
     case 'IssueFieldMultiSelectValue': {
-      const fieldName = node.field && 'name' in node.field ? node.field.name : undefined;
       const optionNames = node.options.map((option) => option.name);
-      if (!fieldName || optionNames.length === 0) {
+      if (optionNames.length === 0) {
         return undefined;
       }
       const coloredOption = node.options.find((option) => option.color);
@@ -66,22 +74,13 @@ function mapIssueFieldValue(node: IssueFieldValueNode): GitifyIssueField | undef
       };
     }
     case 'IssueFieldTextValue': {
-      const fieldName = node.field && 'name' in node.field ? node.field.name : undefined;
-      if (!fieldName || !node.textValue) {
-        return undefined;
-      }
-      return { name: fieldName, value: node.textValue };
+      return createIssueField(fieldName, node.textValue);
     }
     case 'IssueFieldDateValue': {
-      const fieldName = node.field && 'name' in node.field ? node.field.name : undefined;
-      if (!fieldName || !node.dateValue) {
-        return undefined;
-      }
-      return { name: fieldName, value: node.dateValue };
+      return createIssueField(fieldName, node.dateValue);
     }
     case 'IssueFieldNumberValue': {
-      const fieldName = node.field && 'name' in node.field ? node.field.name : undefined;
-      if (!fieldName || node.numberValue === null || node.numberValue === undefined) {
+      if (node.numberValue === null || node.numberValue === undefined) {
         return undefined;
       }
       return { name: fieldName, value: String(node.numberValue) };

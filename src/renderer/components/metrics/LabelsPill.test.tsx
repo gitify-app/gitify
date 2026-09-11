@@ -35,7 +35,6 @@ describe('renderer/components/metrics/LabelsPill.tsx', () => {
     const tree = renderWithProviders(<LabelsPill {...props} />);
 
     expect(tree.getByText('Priority: High')).toBeInTheDocument();
-    expect(tree.container.innerHTML).toContain(IconColor.RED);
     expect(tree.container.innerHTML).toContain('var(--gitify-icon-closed)');
   });
 
