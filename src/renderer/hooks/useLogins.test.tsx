@@ -92,7 +92,7 @@ describe('renderer/hooks/useLogins.ts', () => {
     });
 
     expect(createAccountSpy).toHaveBeenCalledWith(
-      'OAuth Device Flow',
+      'Gitify OAuth App',
       'token',
       'github.com',
       'github',
