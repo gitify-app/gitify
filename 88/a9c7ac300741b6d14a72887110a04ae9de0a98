@@ -1,0 +1,23 @@
+src/renderer/utils/forges/github/handlers/issue.ts
+  s_7bdf37dbc5ffae::t_b56807679e624d 55-59,66,83
+  s_7bdf37dbc5ffae::t_86a598217b8993 32-43,62,77,80
+src/renderer/components/metrics/LabelsPill.tsx
+  s_7bdf37dbc5ffae::t_b56807679e624d 21
+  s_7bdf37dbc5ffae::t_539dc5f330bde6 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "88a9c7ac300741b6d14a72887110a04ae9de0a98",
+  "prompts": {},
+  "sessions": {
+    "s_7bdf37dbc5ffae": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1a60636b-5198-4118-9bab-ea05cf4d0248",
+        "model": "copilot/gpt-5.6-sol"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
