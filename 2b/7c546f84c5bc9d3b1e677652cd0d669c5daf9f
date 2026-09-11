@@ -1,0 +1,52 @@
+src/renderer/hooks/useLogins.test.tsx
+  s_6ef1a9c9ad0b6d::t_531a795844fe72 7-11,94-115
+src/renderer/utils/auth/types.ts
+  s_6ef1a9c9ad0b6d::t_869bd8feae510c 3
+src/renderer/utils/forges/github/auth.ts
+  s_6ef1a9c9ad0b6d::t_9aa918b614d4a9 91-102
+  s_6ef1a9c9ad0b6d::t_531a795844fe72 65,77
+  s_6ef1a9c9ad0b6d::t_95f490ac21047b 90
+src/renderer/hooks/useLogins.ts
+  s_6ef1a9c9ad0b6d::t_ab3bd397beca84 113
+  s_6ef1a9c9ad0b6d::t_531a795844fe72 97-102,108-111
+src/renderer/routes/Accounts.tsx
+  s_6ef1a9c9ad0b6d::t_531a795844fe72 115-118
+  s_6ef1a9c9ad0b6d::t_869bd8feae510c 120
+src/renderer/routes/github/LoginWithPersonalAccessToken.tsx
+  s_6ef1a9c9ad0b6d::t_95f490ac21047b 15-16,21
+src/renderer/routes/github/LoginWithDeviceFlow.test.tsx
+  s_6ef1a9c9ad0b6d::t_95f490ac21047b 33
+src/renderer/utils/forges/github/auth.test.ts
+  s_6ef1a9c9ad0b6d::t_531a795844fe72 74-82,89
+  s_6ef1a9c9ad0b6d::t_95f490ac21047b 9,83-88
+  s_6ef1a9c9ad0b6d::t_b0ab51b157f8ff 90
+src/renderer/utils/forges/github/adapter.ts
+  s_6ef1a9c9ad0b6d::t_95f490ac21047b 11,101,126
+  s_6ef1a9c9ad0b6d::t_ab3bd397beca84 123
+  s_6ef1a9c9ad0b6d::t_531a795844fe72 104,175
+src/renderer/routes/github/LoginWithDeviceFlow.tsx
+  s_6ef1a9c9ad0b6d::t_95f490ac21047b 298
+src/renderer/routes/github/LoginWithPersonalAccessToken.test.tsx
+  s_6ef1a9c9ad0b6d::t_95f490ac21047b 28-30,34-35
+  s_6ef1a9c9ad0b6d::t_076faad6de2c28 31-33
+src/renderer/utils/forges/github/adapter.test.ts
+  s_6ef1a9c9ad0b6d::t_531a795844fe72 57,63
+src/renderer/routes/github/__snapshots__/LoginWithPersonalAccessToken.test.tsx.snap
+  s_6ef1a9c9ad0b6d::t_f2c7d319af715e 63,86,239,306
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2b7c546f84c5bc9d3b1e677652cd0d669c5daf9f",
+  "prompts": {},
+  "sessions": {
+    "s_6ef1a9c9ad0b6d": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "863b018d-e838-46cd-8a95-e4778e3acc56",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
