@@ -8,6 +8,7 @@ import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } fro
 
 import {
   extractHostVersion,
+  getDeviceFlowRevokeAccessURL,
   getDeveloperSettingsURL,
   getNewOAuthAppURL,
   getNewTokenURL,
@@ -97,10 +98,10 @@ export const githubAdapter: ForgeAdapter = {
     {
       testId: 'login-github',
       icon: MarkGithubIcon,
-      label: 'GitHub',
+      label: 'GitHub OAuth',
       variant: 'primary',
       route: '/login/github/device-flow',
-      authMethod: 'GitHub App',
+      authMethod: 'Gitify OAuth App',
     },
     {
       testId: 'login-pat',
@@ -119,11 +120,10 @@ export const githubAdapter: ForgeAdapter = {
   ],
 
   deviceFlow: {
-    authMethod: 'GitHub App',
+    authMethod: 'Gitify OAuth App',
     start: startGitHubDeviceFlow,
     poll: pollGitHubDeviceFlow,
-    getRevokeAccessUrl: (hostname) =>
-      getDeveloperSettingsURL({ hostname, method: 'GitHub App' } as Account),
+    getRevokeAccessUrl: getDeviceFlowRevokeAccessURL,
   },
 
   oauthWebApp: {
@@ -172,6 +172,7 @@ function githubAuthMethodIcon(method: AuthMethod) {
   switch (method) {
     case 'GitHub App':
       return AppsIcon;
+    case 'Gitify OAuth App':
     case 'OAuth App':
       return PersonIcon;
     default:

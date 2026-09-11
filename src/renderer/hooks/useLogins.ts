@@ -94,14 +94,23 @@ export const useLogins = (): LoginsState => {
       }
       const method = deviceFlow.authMethod;
 
-      const existingAccount = accounts.find((a) => a.hostname === hostname && a.method === method);
+      const existingAccount = accounts.find(
+        (a) =>
+          a.hostname === hostname &&
+          (a.method === method ||
+            (forge === 'github' && method === 'Gitify OAuth App' && a.method === 'GitHub App')),
+      );
       if (existingAccount) {
         await removeAccountNotifications(existingAccount);
       }
 
       await createAccount(method, token, hostname, forge);
+
+      if (existingAccount?.method === 'GitHub App' && method === 'Gitify OAuth App') {
+        removeAccount(existingAccount);
+      }
     },
-    [accounts, createAccount, removeAccountNotifications],
+    [accounts, createAccount, removeAccount, removeAccountNotifications],
   );
 
   /**
