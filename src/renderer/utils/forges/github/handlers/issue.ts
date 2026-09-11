@@ -32,13 +32,13 @@ type IssueFieldValueNode = NonNullable<
 function createIssueField(
   name: string,
   value: string | null | undefined,
-  color?: IconColor,
+  fillColor?: string,
 ): GitifyIssueField | undefined {
   if (!value) {
     return undefined;
   }
 
-  return { name, value, ...(color ? { color } : {}) };
+  return { name, value, ...(fillColor ? { fillColor } : {}) };
 }
 
 /**
@@ -70,7 +70,7 @@ function mapIssueFieldValue(node: IssueFieldValueNode): GitifyIssueField | undef
       return {
         name: fieldName,
         value: optionNames.join(', '),
-        ...(coloredOption ? { color: mapIssueFieldColor(coloredOption.color) } : {}),
+        ...(coloredOption ? { fillColor: mapIssueFieldColor(coloredOption.color) } : {}),
       };
     }
     case 'IssueFieldTextValue': {

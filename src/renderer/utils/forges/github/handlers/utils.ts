@@ -54,43 +54,41 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
   return url.toString().replaceAll('%2B', '+') as Link;
 }
 
-/**
- * GitHub color enum shared between native issue types and issue field single-select options.
- */
-export type GitHubColor = IssueTypeColor | IssueFieldSingleSelectOptionColor;
+const ISSUE_FIELD_FILL_COLORS = {
+  RED: '#cf222e',
+  ORANGE: '#bc4c00',
+  YELLOW: '#9a6700',
+  GREEN: '#1a7f37',
+  BLUE: '#0969da',
+  PURPLE: '#8250df',
+  PINK: '#bf3989',
+  GRAY: '#59636e',
+} as const satisfies Record<IssueFieldSingleSelectOptionColor, string>;
 
 /**
  * Map GitHub's native issue type color to a Gitify icon color token.
  */
 export function mapIssueTypeColor(color: IssueTypeColor): IconColor {
-  return mapGitHubColorToIconColor(color);
-}
-
-/**
- * Map a GitHub issue field option color to a Gitify icon color token.
- */
-export function mapIssueFieldColor(color: IssueFieldSingleSelectOptionColor): IconColor {
-  return mapGitHubColorToIconColor(color);
-}
-
-export function mapGitHubColorToIconColor(color: GitHubColor): IconColor {
   switch (color) {
     case 'RED':
       return IconColor.RED;
-    case 'ORANGE':
-      return IconColor.ORANGE;
-    case 'YELLOW':
-      return IconColor.YELLOW;
     case 'GREEN':
       return IconColor.GREEN;
+    case 'YELLOW':
+    case 'ORANGE':
+      return IconColor.YELLOW;
     case 'BLUE':
-      return IconColor.BLUE;
     case 'PURPLE':
-      return IconColor.PURPLE;
     case 'PINK':
-      return IconColor.PINK;
-    case 'GRAY':
+      return IconColor.PURPLE;
     default:
       return IconColor.GRAY;
   }
+}
+
+/**
+ * Map a GitHub issue field option color to a Primer-compatible fill color.
+ */
+export function mapIssueFieldColor(color: IssueFieldSingleSelectOptionColor): string {
+  return ISSUE_FIELD_FILL_COLORS[color] ?? ISSUE_FIELD_FILL_COLORS.GRAY;
 }

@@ -35,9 +35,6 @@
   --gitify-icon-closed: var(--fgColor-closed);
   --gitify-icon-done: var(--fgColor-done);
   --gitify-icon-attention: var(--fgColor-attention);
-  --gitify-icon-severe: var(--fgColor-severe);
-  --gitify-icon-accent: var(--fgColor-accent);
-  --gitify-icon-sponsors: var(--fgColor-sponsors);
   --gitify-link: var(--fgColor-link);
 }
 
@@ -85,9 +82,6 @@
   --gitify-icon-closed: currentColor;
   --gitify-icon-done: currentColor;
   --gitify-icon-attention: currentColor;
-  --gitify-icon-severe: currentColor;
-  --gitify-icon-accent: currentColor;
-  --gitify-icon-sponsors: currentColor;
   --gitify-link: color-mix(in oklab, var(--fgColor-link), var(--fgColor-muted) 30%);
 }
 
@@ -99,9 +93,6 @@
   --gitify-icon-closed: color-mix(in oklab, var(--fgColor-closed), var(--fgColor-muted) 45%);
   --gitify-icon-done: color-mix(in oklab, var(--fgColor-done), var(--fgColor-muted) 45%);
   --gitify-icon-attention: color-mix(in oklab, var(--fgColor-attention), var(--fgColor-muted) 45%);
-  --gitify-icon-severe: color-mix(in oklab, var(--fgColor-severe), var(--fgColor-muted) 45%);
-  --gitify-icon-accent: color-mix(in oklab, var(--fgColor-accent), var(--fgColor-muted) 45%);
-  --gitify-icon-sponsors: color-mix(in oklab, var(--fgColor-sponsors), var(--fgColor-muted) 45%);
 }
 
 [data-theme='glass'] {
@@ -483,9 +474,6 @@
     --gitify-icon-closed: var(--fgColor-closed);
     --gitify-icon-done: var(--fgColor-done);
     --gitify-icon-attention: var(--fgColor-attention);
-    --gitify-icon-severe: var(--fgColor-severe);
-    --gitify-icon-accent: var(--fgColor-accent);
-    --gitify-icon-sponsors: var(--fgColor-sponsors);
     --gitify-link: var(--fgColor-link);
   }
 

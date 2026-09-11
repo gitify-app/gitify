@@ -1,7 +1,5 @@
 import { renderWithProviders } from '../../__helpers__/test-utils';
 
-import { IconColor } from '../../types';
-
 import { LabelsPill, type LabelsPillProps } from './LabelsPill';
 
 describe('renderer/components/metrics/LabelsPill.tsx', () => {
@@ -29,20 +27,20 @@ describe('renderer/components/metrics/LabelsPill.tsx', () => {
   it('renders field tokens when there are no labels', () => {
     const props: LabelsPillProps = {
       labels: [],
-      issueFields: [{ name: 'Priority', value: 'High', color: IconColor.RED }],
+      issueFields: [{ name: 'Priority', value: 'High', fillColor: '#cf222e' }],
     };
 
     const tree = renderWithProviders(<LabelsPill {...props} />);
 
     expect(tree.getByText('Priority: High')).toBeInTheDocument();
-    expect(tree.container.innerHTML).toContain('var(--gitify-icon-closed)');
+    expect(tree.container.innerHTML).toContain('--label-r: 207');
   });
 
   it('renders field tokens prepended before labels', () => {
     const props: LabelsPillProps = {
       labels: [{ name: 'enhancement', color: 'a2eeef' }],
       issueFields: [
-        { name: 'Priority', value: 'High', color: IconColor.RED },
+        { name: 'Priority', value: 'High', fillColor: '#cf222e' },
         { name: 'Effort', value: '5' },
       ],
     };
