@@ -1,7 +1,11 @@
 import type { GitifyNotificationUser, Link } from '../../../../types';
 import { IconColor } from '../../../../types';
 
-import type { AuthorFieldsFragment, IssueTypeColor } from '../graphql/generated/graphql';
+import type {
+  AuthorFieldsFragment,
+  IssueFieldSingleSelectOptionColor,
+  IssueTypeColor,
+} from '../graphql/generated/graphql';
 
 // Author type from GraphQL or manually constructed
 type AuthorInput = AuthorFieldsFragment | GitifyNotificationUser | null | undefined;
@@ -50,10 +54,19 @@ export function actionsURL(repositoryURL: string, filters: string[]): Link {
   return url.toString().replaceAll('%2B', '+') as Link;
 }
 
+const ISSUE_FIELD_FILL_COLORS = {
+  RED: '#cf222e',
+  ORANGE: '#bc4c00',
+  YELLOW: '#9a6700',
+  GREEN: '#1a7f37',
+  BLUE: '#0969da',
+  PURPLE: '#8250df',
+  PINK: '#bf3989',
+  GRAY: '#59636e',
+} as const satisfies Record<IssueFieldSingleSelectOptionColor, string>;
+
 /**
  * Map GitHub's native issue type color to a Gitify icon color token.
- * GitHub supports more colors than Gitify's fixed design token set, so
- * this collapses to the closest available token.
  */
 export function mapIssueTypeColor(color: IssueTypeColor): IconColor {
   switch (color) {
@@ -71,4 +84,11 @@ export function mapIssueTypeColor(color: IssueTypeColor): IconColor {
     default:
       return IconColor.GRAY;
   }
+}
+
+/**
+ * Map a GitHub issue field option color to a Primer-compatible fill color.
+ */
+export function mapIssueFieldColor(color: IssueFieldSingleSelectOptionColor): string {
+  return ISSUE_FIELD_FILL_COLORS[color] ?? ISSUE_FIELD_FILL_COLORS.GRAY;
 }

@@ -15,6 +15,25 @@ export type DiscussionStateReason =
   /** The discussion has been resolved */
   | 'RESOLVED';
 
+/** The display color of a single-select field option. */
+export type IssueFieldSingleSelectOptionColor =
+  /** blue */
+  | 'BLUE'
+  /** gray */
+  | 'GRAY'
+  /** green */
+  | 'GREEN'
+  /** orange */
+  | 'ORANGE'
+  /** pink */
+  | 'PINK'
+  /** purple */
+  | 'PURPLE'
+  /** red */
+  | 'RED'
+  /** yellow */
+  | 'YELLOW';
+
 /** The possible states of an issue. */
 export type IssueState =
   /** An issue that has been closed */
@@ -202,6 +221,7 @@ export type FetchIssueByNumberQueryVariables = Exact<{
   number: number;
   lastComments?: number | null | undefined;
   firstLabels?: number | null | undefined;
+  firstIssueFieldValues?: number | null | undefined;
 }>;
 
 
@@ -217,7 +237,28 @@ export type FetchIssueByNumberQuery = { repository: { issue: { __typename: 'Issu
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+          | { __typename: 'IssueFieldDateValue', dateValue: string, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldMultiSelectValue', options: Array<{ name: string, color: IssueFieldSingleSelectOptionColor }>, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldNumberValue', numberValue: number, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldSingleSelectValue', name: string, color: IssueFieldSingleSelectOptionColor, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldTextValue', textValue: string, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type IssueDetailsFragment = { __typename: 'Issue', number: number, title: string, url: Link, state: IssueState, stateReason: IssueStateReason | null, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -231,7 +272,28 @@ export type IssueDetailsFragment = { __typename: 'Issue', number: number, title:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
+       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+      | { __typename: 'IssueFieldDateValue', dateValue: string, field:
+          | { name: string }
+          | Record<PropertyKey, never>
+         | null }
+      | { __typename: 'IssueFieldMultiSelectValue', options: Array<{ name: string, color: IssueFieldSingleSelectOptionColor }>, field:
+          | { name: string }
+          | Record<PropertyKey, never>
+         | null }
+      | { __typename: 'IssueFieldNumberValue', numberValue: number, field:
+          | { name: string }
+          | Record<PropertyKey, never>
+         | null }
+      | { __typename: 'IssueFieldSingleSelectValue', name: string, color: IssueFieldSingleSelectOptionColor, field:
+          | { name: string }
+          | Record<PropertyKey, never>
+         | null }
+      | { __typename: 'IssueFieldTextValue', textValue: string, field:
+          | { name: string }
+          | Record<PropertyKey, never>
+         | null }
+     | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type FetchMergedDetailsTemplateQueryVariables = Exact<{
   ownerINDEX: string;
@@ -247,6 +309,7 @@ export type FetchMergedDetailsTemplateQueryVariables = Exact<{
   firstReviewThreads?: number | null | undefined;
   firstLabels?: number | null | undefined;
   firstClosingIssues?: number | null | undefined;
+  firstIssueFieldValues?: number | null | undefined;
 }>;
 
 
@@ -280,7 +343,28 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+          | { __typename: 'IssueFieldDateValue', dateValue: string, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldMultiSelectValue', options: Array<{ name: string, color: IssueFieldSingleSelectOptionColor }>, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldNumberValue', numberValue: number, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldSingleSelectValue', name: string, color: IssueFieldSingleSelectOptionColor, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldTextValue', textValue: string, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -342,7 +426,28 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+          | { __typename: 'IssueFieldDateValue', dateValue: string, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldMultiSelectValue', options: Array<{ name: string, color: IssueFieldSingleSelectOptionColor }>, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldNumberValue', numberValue: number, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldSingleSelectValue', name: string, color: IssueFieldSingleSelectOptionColor, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+          | { __typename: 'IssueFieldTextValue', textValue: string, field:
+              | { name: string }
+              | Record<PropertyKey, never>
+             | null }
+         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -702,6 +807,55 @@ export const IssueDetailsFragmentDoc = new TypedDocumentString(`
     name
     color
   }
+  issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
+    nodes {
+      __typename
+      ... on IssueFieldSingleSelectValue {
+        name
+        color
+        field {
+          ... on IssueFieldSingleSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldMultiSelectValue {
+        options {
+          name
+          color
+        }
+        field {
+          ... on IssueFieldMultiSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldTextValue {
+        textValue: value
+        field {
+          ... on IssueFieldText {
+            name
+          }
+        }
+      }
+      ... on IssueFieldNumberValue {
+        numberValue: value
+        field {
+          ... on IssueFieldNumber {
+            name
+          }
+        }
+      }
+      ... on IssueFieldDateValue {
+        dateValue: value
+        field {
+          ... on IssueFieldDate {
+            name
+          }
+        }
+      }
+    }
+  }
   reactions {
     totalCount
   }
@@ -1020,6 +1174,55 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
+    nodes {
+      __typename
+      ... on IssueFieldSingleSelectValue {
+        name
+        color
+        field {
+          ... on IssueFieldSingleSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldMultiSelectValue {
+        options {
+          name
+          color
+        }
+        field {
+          ... on IssueFieldMultiSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldTextValue {
+        textValue: value
+        field {
+          ... on IssueFieldText {
+            name
+          }
+        }
+      }
+      ... on IssueFieldNumberValue {
+        numberValue: value
+        field {
+          ... on IssueFieldNumber {
+            name
+          }
+        }
+      }
+      ... on IssueFieldDateValue {
+        dateValue: value
+        field {
+          ... on IssueFieldDate {
+            name
+          }
+        }
+      }
+    }
+  }
   reactions {
     totalCount
   }
@@ -1204,7 +1407,7 @@ fragment DiscussionCommentFields on DiscussionComment {
   }
 }`) as unknown as TypedDocumentString<FetchDiscussionByNumberQuery, FetchDiscussionByNumberQueryVariables>;
 export const FetchIssueByNumberDocument = new TypedDocumentString(`
-    query FetchIssueByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $firstLabels: Int) {
+    query FetchIssueByNumber($owner: String!, $name: String!, $number: Int!, $lastComments: Int, $firstLabels: Int, $firstIssueFieldValues: Int) {
   repository(owner: $owner, name: $name) {
     issue(number: $number) {
       ...IssueDetails
@@ -1274,6 +1477,55 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
+    nodes {
+      __typename
+      ... on IssueFieldSingleSelectValue {
+        name
+        color
+        field {
+          ... on IssueFieldSingleSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldMultiSelectValue {
+        options {
+          name
+          color
+        }
+        field {
+          ... on IssueFieldMultiSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldTextValue {
+        textValue: value
+        field {
+          ... on IssueFieldText {
+            name
+          }
+        }
+      }
+      ... on IssueFieldNumberValue {
+        numberValue: value
+        field {
+          ... on IssueFieldNumber {
+            name
+          }
+        }
+      }
+      ... on IssueFieldDateValue {
+        dateValue: value
+        field {
+          ... on IssueFieldDate {
+            name
+          }
+        }
+      }
+    }
+  }
   reactions {
     totalCount
   }
@@ -1282,7 +1534,7 @@ fragment IssueDetails on Issue {
   }
 }`) as unknown as TypedDocumentString<FetchIssueByNumberQuery, FetchIssueByNumberQueryVariables>;
 export const FetchMergedDetailsTemplateDocument = new TypedDocumentString(`
-    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstReviewThreads: Int, $firstLabels: Int, $firstClosingIssues: Int) {
+    query FetchMergedDetailsTemplate($ownerINDEX: String!, $nameINDEX: String!, $numberINDEX: Int!, $isDiscussionNotificationINDEX: Boolean!, $isIssueNotificationINDEX: Boolean!, $isPullRequestNotificationINDEX: Boolean!, $lastComments: Int, $lastThreadedComments: Int, $lastReplies: Int, $lastReviews: Int, $firstReviewThreads: Int, $firstLabels: Int, $firstClosingIssues: Int, $firstIssueFieldValues: Int) {
   ...MergedDetailsQueryTemplate
 }
     fragment AuthorFields on Actor {
@@ -1397,6 +1649,55 @@ fragment IssueDetails on Issue {
   issueType {
     name
     color
+  }
+  issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
+    nodes {
+      __typename
+      ... on IssueFieldSingleSelectValue {
+        name
+        color
+        field {
+          ... on IssueFieldSingleSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldMultiSelectValue {
+        options {
+          name
+          color
+        }
+        field {
+          ... on IssueFieldMultiSelect {
+            name
+          }
+        }
+      }
+      ... on IssueFieldTextValue {
+        textValue: value
+        field {
+          ... on IssueFieldText {
+            name
+          }
+        }
+      }
+      ... on IssueFieldNumberValue {
+        numberValue: value
+        field {
+          ... on IssueFieldNumber {
+            name
+          }
+        }
+      }
+      ... on IssueFieldDateValue {
+        dateValue: value
+        field {
+          ... on IssueFieldDate {
+            name
+          }
+        }
+      }
+    }
   }
   reactions {
     totalCount

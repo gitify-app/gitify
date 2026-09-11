@@ -235,6 +235,7 @@ export async function fetchIssueByNumber(
     name: notification.repository.name,
     number: number,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    firstIssueFieldValues: Constants.GRAPHQL_ARGS.FIRST_ISSUE_FIELD_VALUES,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
   });
 }
@@ -311,6 +312,7 @@ export async function fetchNotificationDetailsForList(
   builder.setSharedVariables({
     firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
     firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+    firstIssueFieldValues: Constants.GRAPHQL_ARGS.FIRST_ISSUE_FIELD_VALUES,
     lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
     lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
     lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,

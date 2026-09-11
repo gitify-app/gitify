@@ -386,6 +386,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         name: mockNotification.repository.name,
         number: 123,
         firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
+        firstIssueFieldValues: Constants.GRAPHQL_ARGS.FIRST_ISSUE_FIELD_VALUES,
         lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
       },
     );
@@ -488,6 +489,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         expect.stringMatching(/node0|node1/),
         {
           firstClosingIssues: 100,
+          firstIssueFieldValues: 100,
           firstLabels: 100,
           firstReviewThreads: 100,
           isDiscussionNotification0: false,
@@ -512,6 +514,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       const query = performGraphQLRequestStringSpy.mock.calls[0][1];
       expect(query).toContain('stackEntry');
       expect(query).toContain('isAnswered');
+      expect(query).toContain('issueFieldValues');
       expect(query).not.toContain('@gated');
     });
 
@@ -534,6 +537,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(account).toBe(mockGitHubEnterpriseServerAccount);
       expect(query).not.toContain('stackEntry');
       expect(query).not.toContain('isAnswered');
+      expect(query).not.toContain('issueFieldValues');
       expect(query).not.toContain('@gated');
       expect(query).toContain('FetchMergedNotifications');
       expect(variables).not.toHaveProperty('includeStackEntry');
