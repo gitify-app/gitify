@@ -1,0 +1,38 @@
+src/renderer/utils/forges/github/handlers/issue.test.ts
+  s_7bdf37dbc5ffae::t_ff3f4fb1df0b37 360,364
+src/renderer/components/metrics/LabelsPill.test.tsx
+  s_7bdf37dbc5ffae::t_ff3f4fb1df0b37 30,36,43
+src/renderer/utils/forges/github/handlers/issue.ts
+  s_7bdf37dbc5ffae::t_ff3f4fb1df0b37 35,41,73
+src/renderer/components/metrics/LabelsPill.tsx
+  s_7bdf37dbc5ffae::t_ff3f4fb1df0b37 1,18,24-31
+src/renderer/utils/forges/github/handlers/utils.test.ts
+  s_7bdf37dbc5ffae::t_ff3f4fb1df0b37 69-89
+  s_7bdf37dbc5ffae::t_a52644c1023377 9
+  s_7bdf37dbc5ffae::t_f0bc1d75c2f421 50,53,56,58,61
+  s_7bdf37dbc5ffae::t_d32061b74a84d5 90
+src/renderer/components/metrics/MetricGroup.test.tsx
+  s_7bdf37dbc5ffae::t_038748c8ec812a 80,102
+src/renderer/types.ts
+  s_7bdf37dbc5ffae::t_ff3f4fb1df0b37 494-495
+src/renderer/utils/forges/github/handlers/utils.ts
+  s_7bdf37dbc5ffae::t_ff3f4fb1df0b37 57-66
+  s_7bdf37dbc5ffae::t_f0bc1d75c2f421 77-79,83,88-93
+  s_7bdf37dbc5ffae::t_751da07e58349d 94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "efa54236e9b225ada15f4a9fe3034297d7f2f3af",
+  "prompts": {},
+  "sessions": {
+    "s_7bdf37dbc5ffae": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "1a60636b-5198-4118-9bab-ea05cf4d0248",
+        "model": "copilot/gpt-5.6-sol"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
