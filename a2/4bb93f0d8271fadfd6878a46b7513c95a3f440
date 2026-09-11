@@ -1,0 +1,33 @@
+src/renderer/utils/forges/github/auth.test.ts
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 74,78
+src/renderer/hooks/useLogins.ts
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 101,109
+src/renderer/utils/auth/types.ts
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 3
+src/renderer/routes/Accounts.tsx
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 117
+src/renderer/utils/forges/github/adapter.test.ts
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 57,63
+src/renderer/hooks/useLogins.test.tsx
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 95
+src/renderer/utils/forges/github/adapter.ts
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 104,123,175
+src/renderer/utils/forges/github/auth.ts
+  s_6ef1a9c9ad0b6d::t_af53de24db5616 65,77,95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a24bb93f0d8271fadfd6878a46b7513c95a3f440",
+  "prompts": {},
+  "sessions": {
+    "s_6ef1a9c9ad0b6d": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "863b018d-e838-46cd-8a95-e4778e3acc56",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
