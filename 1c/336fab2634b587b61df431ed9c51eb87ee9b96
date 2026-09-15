@@ -1,0 +1,29 @@
+package.json
+  s_b0edfdd709f8f5::t_eb9ebe3769129f 129
+renovate.json
+  s_b0edfdd709f8f5::t_2c45a03695790e 34,37-38
+  h_ac004aadb63da9 36
+pnpm-lock.yaml
+  s_b0edfdd709f8f5::t_511170583f722a 238,270-271,3843-3844,3848-3849,6196,6200,8100,8102,8104,8708,8785
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "1c336fab2634b587b61df431ed9c51eb87ee9b96",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_b0edfdd709f8f5": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "6d4c14d0-1a13-4799-96ec-a1aca4b6dd8e",
+        "model": "copilot/grok-4.6"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
