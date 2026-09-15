@@ -34,4 +34,10 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Validate Renovate config
+        env:
+          # renovate-config-validator only parses renovate.json. pnpm 10+
+          # fails dlx with ERR_PNPM_IGNORED_BUILDS when renovate's optional
+          # native addons (re2, protobufjs, core-js-pure, dtrace-provider)
+          # are not in allowBuilds. Those scripts are not needed to validate.
+          npm_config_strict_dep_builds: 'false'
         run: vp dlx --package renovate renovate-config-validator
