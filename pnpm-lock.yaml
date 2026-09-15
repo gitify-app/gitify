@@ -189,8 +189,8 @@ importers:
         specifier: 2.6.0
         version: 2.6.0
       '@primer/css':
-        specifier: 22.3.0
-        version: 22.3.0(@primer/primitives@11.10.0)
+        specifier: 22.3.1
+        version: 22.3.1(@primer/primitives@11.10.0)
       '@primer/octicons-react':
         specifier: 19.33.0
         version: 19.33.0(react@19.2.8)
@@ -1349,8 +1349,8 @@ packages:
   '@primer/behaviors@1.10.3':
     resolution: {integrity: sha512-cxxWDeR5IE7vdL0Ca0RAAAuPVrU+Bo8CSP1WfawGo4rEP1sZTi7hwl5i7TT0jCTCR0C9IfnQBfSPAkz0oznxUw==}
 
-  '@primer/css@22.3.0':
-    resolution: {integrity: sha512-JARQl6Ar2g+jGjxRfA85zKkM+lJV5GQz2Zn4wk4CXzQ2NYwFpOMVmhht2IPDAuTfv/lmocnEPYjW6cTmJbYGAQ==}
+  '@primer/css@22.3.1':
+    resolution: {integrity: sha512-On83J/iardLZWnvHyRFteVu8tXItYqu0o/u1DXNnpVmxX24eOhnWzeqaryBmf2q0CIJQECP9fh5PQymdWZ+tjQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@primer/primitives': 10.x || 11.x
@@ -5836,7 +5836,7 @@ snapshots:
 
   '@primer/behaviors@1.10.3': {}
 
-  '@primer/css@22.3.0(@primer/primitives@11.10.0)':
+  '@primer/css@22.3.1(@primer/primitives@11.10.0)':
     dependencies:
       '@primer/primitives': 11.10.0
 

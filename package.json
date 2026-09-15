@@ -100,7 +100,7 @@
     "@octokit/request-error": "7.1.2",
     "@octokit/types": "18.0.0",
     "@parcel/watcher": "2.6.0",
-    "@primer/css": "22.3.0",
+    "@primer/css": "22.3.1",
     "@primer/octicons-react": "19.33.0",
     "@primer/primitives": "11.10.0",
     "@primer/react": "38.38.0",
