@@ -1,0 +1,19 @@
+src/preload/index.ts
+  s_b0edfdd709f8f5::t_474681bb4ba0ae 59-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2de39f669a529444381fe78a6f9480fdd2ed2c3d",
+  "prompts": {},
+  "sessions": {
+    "s_b0edfdd709f8f5": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "6d4c14d0-1a13-4799-96ec-a1aca4b6dd8e",
+        "model": "copilot/grok-4.6"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
