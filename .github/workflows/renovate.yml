@@ -23,7 +23,6 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             renovate.json
-            pnpm-workspace.yaml
             .nvmrc
 
       - uses: voidzero-dev/setup-vp@49c3e4e92c52e7f8392712a9267bbe71c5ab30e5 # v1.19.0
@@ -33,4 +32,6 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Validate Renovate config
-        run: vp dlx --package renovate renovate-config-validator
+        # pnpm 12 dlx ignores workspace allowBuilds (installs under ~/.cache/pnpm/dlx)
+        # and fails with ERR_PNPM_IGNORED_BUILDS for renovate's optional addons.
+        run: npx --yes --ignore-scripts --package renovate -- renovate-config-validator

@@ -3,14 +3,9 @@ allowBuilds:
   '@primer/primitives': false
   '@swc/core': true
   '@tailwindcss/oxide': true
-  # renovate-config-validator (vp dlx renovate) native/optional addons
-  core-js-pure: true
-  dtrace-provider: true
   electron: true
   electron-winstaller: true
   esbuild: true
-  protobufjs: true
-  re2: true
   unrs-resolver: true
 catalog:
   electron: '44.2.0'
