@@ -1,0 +1,27 @@
+.github/workflows/renovate.yml
+  s_b0edfdd709f8f5::t_94693528201061 27
+  s_b0edfdd709f8f5::t_3c0f0418db4621 26
+pnpm-workspace.yaml
+  s_b0edfdd709f8f5::t_3c0f0418db4621 6-8,12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c42e8848c62acd6ae6af30327b5f6173e7e9161c",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_b0edfdd709f8f5": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "6d4c14d0-1a13-4799-96ec-a1aca4b6dd8e",
+        "model": "copilot/grok-4.6"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
