@@ -179,6 +179,13 @@ export interface ForgeAdapter {
    * omit this bundle entirely — callers gate the OAuth-app UI on its presence.
    */
   oauthWebApp?: OAuthWebAppSupport;
+
+  /**
+   * Reuse of a locally installed forge CLI's credential. Forges whose CLI
+   * Gitify cannot read a token from omit this bundle entirely — callers gate
+   * the CLI login UI on its presence.
+   */
+  cliAuth?: CliAuthSupport;
 }
 
 /**
@@ -253,6 +260,12 @@ export interface ForgeAccountAdapter {
     hasRecommended(): boolean;
     /** Whether the account holds the alternate (legacy) scope set. */
     hasAlternate(): boolean;
+    /**
+     * Set when another tool owns the credential and Gitify cannot widen its
+     * scopes, so a scopes UI should explain that instead of listing rows the
+     * user cannot act on.
+     */
+    externallyManaged(): ExternallyManagedScopes | undefined;
   };
 }
 
@@ -282,6 +295,7 @@ export interface ForgeAccountOperations {
     hasRequired(account: Account): boolean;
     hasRecommended(account: Account): boolean;
     hasAlternate(account: Account): boolean;
+    externallyManaged(account: Account): ExternallyManagedScopes | undefined;
   };
 }
 
@@ -290,6 +304,16 @@ export interface ForgeAccountOperations {
  * OAuth scope concept (GitHub today).
  */
 export type OAuthScopesSupport = NonNullable<ForgeAccountOperations['oauthScopes']>;
+
+/** How to explain a scope set Gitify cannot change. */
+export interface ExternallyManagedScopes {
+  /** Who owns the scopes, e.g. `Managed by the GitHub CLI`. */
+  label: string;
+  /** Why the account still works, in one sentence. */
+  detail: string;
+  /** Command that widens the scopes outside Gitify. */
+  command: string;
+}
 
 /**
  * Custom-OAuth-app web flow capability bundle. Present only on forges that
@@ -320,4 +344,24 @@ export interface DeviceFlowSupport {
   poll(session: DeviceFlowSession): Promise<Token | null>;
   /** URL the user visits to revoke Gitify's access on this forge. */
   getRevokeAccessUrl(hostname: Hostname): Link;
+}
+
+/**
+ * Local-CLI credential capability bundle. Present only on forges whose
+ * official CLI stores a token Gitify can reuse (GitHub's `gh` today).
+ *
+ * The CLI owns the credential: `resolveToken` is called for every API client
+ * instead of reading a stored copy, so a token the CLI rotates does not strand
+ * the account.
+ */
+export interface CliAuthSupport {
+  /** Auth method recorded on accounts created from the CLI's credential. */
+  authMethod: AuthMethod;
+  /**
+   * Read the token the CLI holds for `hostname`.
+   *
+   * @throws With a user-facing message when the CLI is absent, is not logged
+   *         in to the host, or failed.
+   */
+  resolveToken(hostname: Hostname): Promise<Token>;
 }

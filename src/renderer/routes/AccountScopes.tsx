@@ -15,6 +15,7 @@ import { Header } from '../components/primitives/Header';
 import type { Account } from '../types';
 
 import {
+  externallyManagedScopes,
   getAlternateScopeNames,
   getRecommendedScopeNames,
   getRequiredScopeNames,
@@ -37,6 +38,8 @@ export const AccountScopesRoute: FC = () => {
   const repoGranted = scopes.includes(OAUTH_SCOPE.REPO.name);
   const publicRepoGranted = scopes.includes(OAUTH_SCOPE.PUBLIC_REPO.name);
   const hasDetailedNotifications = scopesLoaded && (repoGranted || publicRepoGranted);
+
+  const managedElsewhere = externallyManagedScopes(account);
 
   // Scopes that don't belong to any known tier
   const allKnownNames = new Set<string>([
@@ -77,26 +80,42 @@ export const AccountScopesRoute: FC = () => {
                   <Text>Required</Text>
                 </Stack>
 
-                {Constants.OAUTH_SCOPES.REQUIRED.map(({ name, description }) => {
-                  const granted = scopes.includes(name);
-                  return (
-                    <Stack
-                      align="center"
-                      className="gitify-scope-row"
-                      data-testid="account-scopes-required-scope"
-                      direction="horizontal"
-                      justify="space-between"
-                      key={name}
-                      padding="condensed"
-                    >
-                      <Stack direction="vertical" gap="none">
-                        <Text className="text-xs font-mono">{name}</Text>
-                        <Text className="text-xs opacity-60">{description}</Text>
+                {managedElsewhere ? (
+                  <Stack
+                    className="gitify-scope-row"
+                    data-testid="account-scopes-managed-elsewhere"
+                    direction="vertical"
+                    gap="none"
+                    padding="condensed"
+                  >
+                    <Text className="text-xs">{managedElsewhere.label}</Text>
+                    <Text className="text-xs opacity-60">
+                      {managedElsewhere.detail} Run{' '}
+                      <Text className="font-mono">{managedElsewhere.command}</Text> to widen them.
+                    </Text>
+                  </Stack>
+                ) : (
+                  Constants.OAUTH_SCOPES.REQUIRED.map(({ name, description }) => {
+                    const granted = scopes.includes(name);
+                    return (
+                      <Stack
+                        align="center"
+                        className="gitify-scope-row"
+                        data-testid="account-scopes-required-scope"
+                        direction="horizontal"
+                        justify="space-between"
+                        key={name}
+                        padding="condensed"
+                      >
+                        <Stack direction="vertical" gap="none">
+                          <Text className="text-xs font-mono">{name}</Text>
+                          <Text className="text-xs opacity-60">{description}</Text>
+                        </Stack>
+                        <ScopeStatusIcon granted={granted} withTestId />
                       </Stack>
-                      <ScopeStatusIcon granted={granted} withTestId />
-                    </Stack>
-                  );
-                })}
+                    );
+                  })
+                )}
               </Stack>
 
               <Stack direction="vertical" gap="condensed">

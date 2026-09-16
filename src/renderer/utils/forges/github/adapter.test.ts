@@ -1,6 +1,6 @@
 import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
 
-import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
+import { mockGitHubCliAccount, mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 
 import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 
@@ -15,9 +15,9 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(githubAdapter.displayName).toBe('GitHub');
     });
 
-    it('exposes the device-flow / PAT / OAuth login methods', () => {
+    it('exposes the device-flow / PAT / CLI / OAuth login methods', () => {
       const ids = githubAdapter.loginMethods.map((m) => m.testId);
-      expect(ids).toEqual(['login-github', 'login-pat', 'login-oauth-app']);
+      expect(ids).toEqual(['login-github', 'login-pat', 'login-github-cli', 'login-oauth-app']);
     });
 
     it('defaults the PAT hostname to github.com', () => {
@@ -274,6 +274,33 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
           withScopes(['notifications', 'read:user', 'public_repo']),
         ),
       ).toBe(true);
+    });
+
+    it('judges GitHub CLI accounts on notification access, not PAT scope names', () => {
+      const oauthScopes = githubAdapter.accountOps.oauthScopes!;
+      const withCliScopes = (scopes: string[]) => ({ ...mockGitHubCliAccount, scopes });
+
+      // The scope set `gh` actually carries: no notifications, no read:user.
+      expect(oauthScopes.hasRequired(mockGitHubCliAccount)).toBe(true);
+      expect(oauthScopes.hasRecommended(mockGitHubCliAccount)).toBe(true);
+
+      expect(oauthScopes.hasRequired(withCliScopes(['notifications']))).toBe(true);
+      expect(oauthScopes.hasRequired(withCliScopes(['gist', 'public_repo']))).toBe(false);
+
+      expect(oauthScopes.hasRecommended(withCliScopes(['notifications', 'public_repo']))).toBe(
+        false,
+      );
+    });
+
+    it('reports CLI scopes as owned by the CLI, and PAT scopes as Gitify-owned', () => {
+      const oauthScopes = githubAdapter.accountOps.oauthScopes!;
+
+      expect(oauthScopes.externallyManaged(mockGitHubCliAccount)).toEqual({
+        label: 'Managed by the GitHub CLI',
+        detail: 'The repo scope grants notification access.',
+        command: 'gh auth refresh -s notifications',
+      });
+      expect(oauthScopes.externallyManaged(mockGitHubCloudAccount)).toBeUndefined();
     });
   });
 

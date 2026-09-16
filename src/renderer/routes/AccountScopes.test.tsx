@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../__helpers__/test-utils';
 import {
   mockGitHubAppAccount,
+  mockGitHubCliAccount,
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
@@ -67,6 +68,19 @@ describe('renderer/routes/AccountScopes.tsx', () => {
     expect(rows).toHaveLength(2);
     expect(rows[0]).toHaveTextContent('notifications');
     expect(rows[1]).toHaveTextContent('read:user');
+  });
+
+  it('explains scopes another tool owns instead of listing rows the user cannot grant', async () => {
+    mockLocationAccount = mockGitHubCliAccount;
+
+    await act(async () => {
+      renderWithProviders(<AccountScopesRoute />);
+    });
+
+    expect(screen.getByTestId('account-scopes-managed-elsewhere')).toHaveTextContent(
+      'gh auth refresh -s notifications',
+    );
+    expect(screen.queryAllByTestId('account-scopes-required-scope')).toHaveLength(0);
   });
 
   it('should show Detailed Notifications section with repo and public_repo rows', async () => {

@@ -43,6 +43,14 @@ export const api = {
   decryptValue: (value: string) => invokeMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, value),
 
   /**
+   * Read the token the locally installed GitHub CLI holds for a host.
+   *
+   * @param hostname - Host to read the token for (e.g. `github.com`).
+   * @returns The token, or the reason the CLI could not supply one.
+   */
+  githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
+
+  /**
    * Enable or disable launching the application at system login.
    *
    * @param value - `true` to enable auto-launch, `false` to disable.

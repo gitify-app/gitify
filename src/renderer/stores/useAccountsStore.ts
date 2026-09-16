@@ -115,8 +115,10 @@ const useAccountsStore = create<AccountsStore>()(
         // Drop any forge-specific HTTP client state for the removed account.
         getAccountAdapter(account).onAccountTokenChange?.();
 
+        const removedUUID = getAccountUUID(account);
+
         set((state) => ({
-          accounts: state.accounts.filter((a) => a.token !== account.token),
+          accounts: state.accounts.filter((a) => getAccountUUID(a) !== removedUUID),
         }));
       },
 

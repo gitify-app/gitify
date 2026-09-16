@@ -1,0 +1,279 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] = `
+<div>
+  <div
+    class="flex flex-col h-screen"
+    data-testid="Login With GitHub CLI"
+  >
+    <div
+      class="pl-4 pr-5 pt-3 pb-1"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="stretch"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-justify="space-between"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <button
+          aria-labelledby="Go Back"
+          class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="medium"
+          data-testid="header-nav-back"
+          data-variant="invisible"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-arrow-left"
+            data-component="Octicon"
+            display="inline-block"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+            />
+          </svg>
+        </button>
+        <legend>
+          <div
+            class="mb-2"
+          >
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+              id="title-login-with-github-cli"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-terminal"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25Zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25ZM7.25 8a.749.749 0 0 1-.22.53l-2.25 2.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L5.44 8 3.72 6.28a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l2.25 2.25c.141.14.22.331.22.53Zm1.5 1.5h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1 0-1.5Z"
+                />
+              </svg>
+              <h4
+                class="prc-Heading-Heading-MtWFE"
+                data-component="Heading"
+              >
+                Login with GitHub CLI
+              </h4>
+            </div>
+          </div>
+        </legend>
+      </div>
+    </div>
+    <div
+      class="grow overflow-x-hidden overflow-y-auto px-5 gitify-scroll-fade"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="stretch"
+        data-component="Stack"
+        data-direction="vertical"
+        data-gap="normal"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <span
+          class="text-xs prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          Uses the token your local 
+          <i
+            class="prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            gh
+          </i>
+           install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means
+           
+          <i
+            class="prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            gh auth login
+          </i>
+           and 
+          <i
+            class="prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            gh auth refresh
+          </i>
+           keep working without re-authenticating here.
+        </span>
+        <span
+          class="text-xs prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          The scopes come from the GitHub CLI and cannot be changed from Gitify. Its
+           
+          <i
+            class="prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            repo
+          </i>
+           scope covers notification access; run
+           
+          <i
+            class="prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            gh auth refresh -s notifications
+          </i>
+           to grant that scope explicitly.
+        </span>
+        <div
+          class="prc-FormControl-ControlVerticalLayout-8YotI"
+          data-component="FormControl"
+          data-has-label=""
+        >
+          <label
+            class="prc-components-Label-2mrqP"
+            data-component="FormControl.Label"
+            for="_r_1_"
+            id="_r_1_-label"
+          >
+            <span
+              class="prc-components-RequiredText-7UsHS"
+            >
+              <span>
+                Hostname
+              </span>
+              <span>
+                *
+              </span>
+            </span>
+          </label>
+          <span
+            aria-busy="false"
+            class="TextInput-wrapper prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
+            data-block="true"
+            data-component="TextInput"
+            data-no-leading-visual="true"
+            data-no-trailing-action="true"
+            data-no-trailing-visual="true"
+          >
+            <input
+              aria-describedby="_r_1_-caption"
+              aria-invalid="false"
+              aria-required="true"
+              class="prc-components-Input-IwWrt"
+              data-component="input"
+              data-testid="login-hostname"
+              id="_r_1_"
+              name="hostname"
+              type="text"
+              value="github.com"
+            />
+          </span>
+          <span
+            class="prc-FormControl-Caption-GNJPU prc-Text-Text-9mHv3"
+            data-component="FormControl.Caption"
+            id="_r_1_-caption"
+          >
+            <i
+              class="prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              Change only if you are using GitHub Enterprise Server
+            </i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="left-sidebar bg-gitify-footer"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="stretch"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-justify="end"
+        data-padding="condensed"
+        data-wrap="nowrap"
+      >
+        <div
+          data-loading-wrapper="true"
+        >
+          <button
+            class="prc-Button-ButtonBase-9n-Xk"
+            data-component="Button"
+            data-loading="false"
+            data-size="medium"
+            data-testid="login-submit"
+            data-variant="primary"
+            type="button"
+          >
+            <span
+              class="prc-Button-ButtonContent-Iohp5"
+              data-align="center"
+              data-component="buttonContent"
+            >
+              <span
+                class="prc-Button-Visual-YNt2F prc-Button-LeadingVisual-UySKu prc-Button-VisualWrap-E4cnq"
+                data-component="leadingVisual"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-sign-in"
+                  data-component="Octicon"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="prc-Button-Label-FWkx3"
+                data-component="text"
+              >
+                Login
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

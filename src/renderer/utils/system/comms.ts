@@ -1,4 +1,4 @@
-import type { ISafeStorageDecryptResult } from '../../../shared/events';
+import type { IGitHubCliTokenResult, ISafeStorageDecryptResult } from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
 
@@ -50,6 +50,16 @@ export async function encryptValue(value: string): Promise<string> {
  */
 export async function decryptValue(value: string): Promise<ISafeStorageDecryptResult> {
   return await window.gitify.decryptValue(value);
+}
+
+/**
+ * Asks the locally installed GitHub CLI for the token it holds for a host.
+ *
+ * @param hostname The host to read the token for.
+ * @returns The token, or the reason the CLI could not supply one.
+ */
+export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTokenResult> {
+  return await window.gitify.githubCliToken(hostname);
 }
 
 /**
