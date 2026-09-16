@@ -1561,24 +1561,94 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-padding="none"
             data-wrap="nowrap"
           >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-useAlternateIdleIcon"
-              id="useAlternateIdleIcon"
-              type="checkbox"
-            />
             <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="useAlternateIdleIcon"
+              class="mr-1 font-medium cursor-pointer"
+              for="trayIconAppearance"
             >
-              Use alternate idle icon
+              Idle icon
             </label>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                data-testid="radio-trayIconAppearance-auto"
+                id="radio-trayIconAppearance-auto"
+                name="trayIconAppearance"
+                type="radio"
+                value="auto"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-trayIconAppearance-auto"
+              >
+                Automatic
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-trayIconAppearance-light"
+                id="radio-trayIconAppearance-light"
+                name="trayIconAppearance"
+                type="radio"
+                value="light"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-trayIconAppearance-light"
+              >
+                Light
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-trayIconAppearance-dark"
+                id="radio-trayIconAppearance-dark"
+                name="trayIconAppearance"
+                type="radio"
+                value="dark"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-trayIconAppearance-dark"
+              >
+                Dark
+              </label>
+            </div>
             <button
               aria-expanded="false"
               aria-haspopup="true"
-              aria-label="tooltip-useAlternateIdleIcon"
-              data-testid="tooltip-icon-tooltip-useAlternateIdleIcon"
-              id="tooltip-useAlternateIdleIcon"
+              aria-label="tooltip-trayIconAppearance"
+              data-testid="tooltip-icon-tooltip-trayIconAppearance"
+              id="tooltip-trayIconAppearance"
               tabindex="0"
               type="button"
             >

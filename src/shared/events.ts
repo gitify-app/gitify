@@ -12,7 +12,7 @@ export const EVENTS = {
   VERSION: `${P}version`,
   UPDATE_ICON_COLOR: `${P}update-icon-color`,
   UPDATE_ICON_TITLE: `${P}update-icon-title`,
-  USE_ALTERNATE_IDLE_ICON: `${P}use-alternate-idle-icon`,
+  SET_TRAY_ICON_APPEARANCE: `${P}set-tray-icon-appearance`,
   USE_UNREAD_ACTIVE_ICON: `${P}use-unread-active-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
@@ -35,6 +35,12 @@ export type EventType = (typeof EVENTS)[keyof typeof EVENTS];
 
 /** Native appearance source, mirrors Electron's `nativeTheme.themeSource`. */
 export type NativeThemeSource = 'system' | 'light' | 'dark';
+
+export type TrayIconAppearance = 'auto' | 'light' | 'dark';
+
+export function isTrayIconAppearance(value: unknown): value is TrayIconAppearance {
+  return value === 'auto' || value === 'light' || value === 'dark';
+}
 
 /** Payload for the `UPDATE_AUTO_LAUNCH` event. */
 export interface IAutoLaunch {
@@ -102,7 +108,7 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.VERSION]: { request: undefined; response: string };
   [EVENTS.UPDATE_ICON_COLOR]: { request: ITrayColorUpdate; response: undefined };
   [EVENTS.UPDATE_ICON_TITLE]: { request: string; response: undefined };
-  [EVENTS.USE_ALTERNATE_IDLE_ICON]: { request: boolean; response: undefined };
+  [EVENTS.SET_TRAY_ICON_APPEARANCE]: { request: TrayIconAppearance; response: undefined };
   [EVENTS.USE_UNREAD_ACTIVE_ICON]: { request: boolean; response: undefined };
   [EVENTS.UPDATE_KEYBOARD_SHORTCUT]: {
     request: IKeyboardShortcut;

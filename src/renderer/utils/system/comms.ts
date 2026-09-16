@@ -1,4 +1,4 @@
-import type { ISafeStorageDecryptResult } from '../../../shared/events';
+import type { ISafeStorageDecryptResult, TrayIconAppearance } from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
 
@@ -113,12 +113,10 @@ export function setUseX11Backend(value: boolean): void {
 }
 
 /**
- * Switch the tray icon to an alternate idle icon variant.
- *
- * @param value - `true` to use the alternate idle icon, `false` for the default.
+ * Set the idle tray icon appearance independently of the app theme.
  */
-export function setUseAlternateIdleIcon(value: boolean): void {
-  window.gitify.tray.useAlternateIdleIcon(value);
+export function setTrayIconAppearance(value: TrayIconAppearance): void {
+  window.gitify.tray.setAppearance(value);
 }
 
 /**

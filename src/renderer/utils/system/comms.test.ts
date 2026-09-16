@@ -14,7 +14,7 @@ import {
   setAutoLaunch,
   setKeepWindowOnBlur,
   setShowUpdateNotifications,
-  setUseAlternateIdleIcon,
+  setTrayIconAppearance,
   setUseX11Backend,
   showWindow,
   updateTrayColor,
@@ -108,11 +108,11 @@ describe('renderer/utils/comms.ts', () => {
       expect(window.gitify.setAutoLaunch).toHaveBeenCalledWith(true);
     });
 
-    it('sets alternate idle icon', () => {
-      setUseAlternateIdleIcon(false);
+    it('sets idle icon appearance', () => {
+      setTrayIconAppearance('light');
 
-      expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledTimes(1);
-      expect(window.gitify.tray.useAlternateIdleIcon).toHaveBeenCalledWith(false);
+      expect(window.gitify.tray.setAppearance).toHaveBeenCalledTimes(1);
+      expect(window.gitify.tray.setAppearance).toHaveBeenCalledWith('light');
     });
 
     it('sets keep window on blur', () => {

@@ -1,87 +1,56 @@
+import { app, nativeTheme } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
-import { EVENTS, type ITrayColorUpdate } from '../../shared/events';
+import {
+  EVENTS,
+  isTrayIconAppearance,
+  type ITrayColorUpdate,
+  type TrayIconAppearance,
+} from '../../shared/events';
 
 import { onMainEvent } from '../events';
-import { TrayIcons } from '../icons';
+import { getIdleTrayIcon, TrayIcons } from '../icons';
 
-let shouldUseAlternateIdleIcon = false;
-let shouldUseUnreadActiveIcon = true;
-
-function setIdleIcon(mb: Menubar): void {
-  if (shouldUseAlternateIdleIcon) {
-    mb.tray.setImage(TrayIcons.idleAlternate);
-  } else {
-    mb.tray.setImage(TrayIcons.idle);
-  }
-}
-
-function setActiveIcon(mb: Menubar): void {
-  if (shouldUseUnreadActiveIcon) {
-    mb.tray.setImage(TrayIcons.active);
-  } else {
-    setIdleIcon(mb);
-  }
-}
-
-function setErrorIcon(mb: Menubar): void {
-  mb.tray.setImage(TrayIcons.error);
-}
-
-function setOfflineIcon(mb: Menubar): void {
-  mb.tray.setImage(TrayIcons.offline);
-}
-
-/**
- * Register IPC handlers for tray icon visual state.
- *
- * @param mb - The menubar instance whose tray is controlled.
- */
 export function registerTrayHandlers(mb: Menubar): void {
-  /**
-   * Toggle the alternate idle tray icon variant.
-   */
-  onMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, (_, useAlternateIdleIcon: boolean) => {
-    shouldUseAlternateIdleIcon = useAlternateIdleIcon;
-  });
+  let appearance: TrayIconAppearance = 'auto';
+  let highlightUnread = true;
+  let status: ITrayColorUpdate = { notificationsCount: 0, isOnline: true };
 
-  /**
-   * Toggle whether unread notifications show an active (coloured) tray icon.
-   */
-  onMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, (_, useUnreadActiveIcon: boolean) => {
-    shouldUseUnreadActiveIcon = useUnreadActiveIcon;
-  });
+  const refresh = () => {
+    if (mb.tray.isDestroyed()) {
+      return;
+    }
+    const { notificationsCount, isOnline } = status;
+    const icon = !isOnline
+      ? TrayIcons.offline
+      : notificationsCount < 0
+        ? TrayIcons.error
+        : notificationsCount > 0 && highlightUnread
+          ? TrayIcons.active
+          : getIdleTrayIcon(appearance);
+    mb.tray.setImage(icon);
+  };
 
-  /**
-   * Update the tray icon based on the current notification count.
-   */
-  onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, { notificationsCount, isOnline }: ITrayColorUpdate) => {
-    if (!mb.tray.isDestroyed()) {
-      if (!isOnline) {
-        setOfflineIcon(mb);
-        return;
-      }
-
-      if (notificationsCount < 0) {
-        setErrorIcon(mb);
-        return;
-      }
-
-      if (notificationsCount > 0) {
-        setActiveIcon(mb);
-        return;
-      }
-
-      setIdleIcon(mb);
+  onMainEvent(EVENTS.SET_TRAY_ICON_APPEARANCE, (_, value) => {
+    if (isTrayIconAppearance(value)) {
+      appearance = value;
+      refresh();
     }
   });
-
-  /**
-   * Update the tray icon title (notification count label on macOS).
-   */
-  onMainEvent(EVENTS.UPDATE_ICON_TITLE, (_, title: string) => {
+  onMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, (_, value) => {
+    highlightUnread = value;
+    refresh();
+  });
+  onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, value) => {
+    status = value;
+    refresh();
+  });
+  onMainEvent(EVENTS.UPDATE_ICON_TITLE, (_, title) => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setTitle(title);
     }
   });
+
+  nativeTheme.on('updated', refresh);
+  app.once('will-quit', () => nativeTheme.removeListener('updated', refresh));
 }
