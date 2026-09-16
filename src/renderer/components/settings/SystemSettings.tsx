@@ -1,31 +1,20 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 
 import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
-import {
-  Banner,
-  Button,
-  ButtonGroup,
-  IconButton,
-  Label,
-  type LabelProps,
-  Stack,
-  Text,
-} from '@primer/react';
+import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
-import type { GnomeExtensionState } from '../../../shared/events';
 
-import { useGnomeExtensionStore } from '../../hooks/useGnomeExtension';
 import { useShortcutRegistrationStore } from '../../hooks/useShortcutRegistration';
 import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Tooltip } from '../fields/Tooltip';
 import { Title } from '../primitives/Title';
 
-import { type KeyboardAcceleratorShortcut, OpenPreference } from '../../types';
+import { type KeyboardAcceleratorShortcut, OpenPreference, toLink } from '../../types';
 
+import { openExternalLink } from '../../utils/system/comms';
 import {
   formatAcceleratorForDisplay,
   keyboardEventToAccelerator,
@@ -65,13 +54,11 @@ export const SystemSettings: FC = () => {
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
   const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
   const useX11Backend = useSettingsStore((s) => s.useX11Backend);
-  const gnomeExtensionState = useGnomeExtensionStore((s) => s.state);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
   const shortcutRowRef = useRef<HTMLDivElement>(null);
   const isMac = window.gitify.platform.isMacOS();
-  const isGnome = window.gitify.platform.isGnome();
 
   useEffect(() => {
     if (!recordingShortcut) {
@@ -381,79 +368,31 @@ export const SystemSettings: FC = () => {
           onChange={() => toggleSetting('useX11Backend')}
           tooltip={
             <Text>
-              Run under X11/XWayland so the window opens next to the tray icon. On Wayland the
-              compositor decides where windows appear, so {APPLICATION.NAME} opens in the middle of
-              the screen. Enabling this also disables Vulkan, which crashes under X11 on some
-              drivers, and may soften text on displays using fractional scaling. Takes effect after
-              restarting {APPLICATION.NAME}.
+              Run under X11/XWayland so the window opens next to the tray icon. On Wayland, window
+              placement depends on your compositor and its extensions. Enabling this also disables
+              Vulkan, which crashes under X11 on some drivers, and may soften text on displays using
+              fractional scaling. Takes effect after restarting {APPLICATION.NAME}.
             </Text>
           }
           visible={window.gitify.platform.isLinux()}
         />
-
-        {isGnome && gnomeExtensionState && <GnomeExtensionRow state={gnomeExtensionState} />}
+        {window.gitify.platform.isLinux() && (
+          <Stack gap="condensed">
+            <Text className="text-sm text-gitify-font">
+              On GNOME Wayland, install the Gitify extension to open the window next to its tray
+              icon. Install and manage it through GNOME's extension tools.
+            </Text>
+            <Button
+              onClick={() =>
+                openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))
+              }
+              size="small"
+            >
+              GNOME extension installation
+            </Button>
+          </Stack>
+        )}
       </Stack>
     </fieldset>
-  );
-};
-
-const GNOME_EXTENSION_STATUS: Record<
-  GnomeExtensionState,
-  { text: string; variant: LabelProps['variant'] }
-> = {
-  'not-installed': { text: 'Not installed', variant: 'secondary' },
-  'pending-session-restart': {
-    text: 'Restart session to activate',
-    variant: 'attention',
-  },
-  inactive: { text: 'Disabled', variant: 'attention' },
-  active: { text: 'Active', variant: 'success' },
-  error: { text: 'Failed', variant: 'danger' },
-};
-
-const GNOME_EXTENSION_ACTIONS: Partial<
-  Record<GnomeExtensionState, { text: string; action: 'install' | 'enable' }>
-> = {
-  'not-installed': { text: 'Install', action: 'install' },
-  error: { text: 'Retry', action: 'install' },
-  inactive: { text: 'Enable', action: 'enable' },
-};
-
-const GnomeExtensionRow: FC<{ state: GnomeExtensionState }> = ({ state }) => {
-  const { busy, install, enable } = useGnomeExtensionStore();
-  const action = GNOME_EXTENSION_ACTIONS[state];
-
-  return (
-    <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-      <Text className="font-medium text-gitify-font">GNOME extension</Text>
-
-      <Tooltip
-        name="tooltip-gnomeExtension"
-        tooltip={
-          <Text>
-            Wayland only lets the compositor position windows - GNOME extension anchors the{' '}
-            {APPLICATION.NAME} window to the tray icon.
-          </Text>
-        }
-      />
-
-      <Label
-        data-testid="gnome-extension-state"
-        size="small"
-        variant={GNOME_EXTENSION_STATUS[state].variant}
-      >
-        {GNOME_EXTENSION_STATUS[state].text}
-      </Label>
-      {action && (
-        <Button
-          data-testid="gnome-extension-action"
-          loading={busy}
-          onClick={action.action === 'install' ? install : enable}
-          size="small"
-        >
-          {action.text}
-        </Button>
-      )}
-    </Stack>
   );
 };

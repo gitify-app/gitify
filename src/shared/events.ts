@@ -28,9 +28,6 @@ export const EVENTS = {
   RESET_APP: `${P}reset-app`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
   SYSTEM_WAKE: `${P}system-wake`,
-  GNOME_EXTENSION_STATE: `${P}gnome-extension-state`,
-  GNOME_EXTENSION_INSTALL: `${P}gnome-extension-install`,
-  GNOME_EXTENSION_ENABLE: `${P}gnome-extension-enable`,
 } as const;
 
 /** Union type of all valid IPC event name strings. */
@@ -80,14 +77,6 @@ export interface ISafeStorageDecryptResult {
   token: string;
   reEncryptedToken?: string;
 }
-
-/** State of the GNOME Shell extension that places the window below the tray icon. */
-export type GnomeExtensionState =
-  | 'not-installed'
-  | 'pending-session-restart'
-  | 'inactive'
-  | 'active'
-  | 'error';
 
 /** Shape of a single event contract: a request payload and a response payload. */
 type Contract = { request: unknown; response: unknown };
@@ -144,9 +133,6 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
   [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
-  [EVENTS.GNOME_EXTENSION_STATE]: { request: undefined; response: GnomeExtensionState };
-  [EVENTS.GNOME_EXTENSION_INSTALL]: { request: undefined; response: GnomeExtensionState };
-  [EVENTS.GNOME_EXTENSION_ENABLE]: { request: undefined; response: GnomeExtensionState };
 }>;
 
 /** Request payload type for a given event. */

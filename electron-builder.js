@@ -60,7 +60,6 @@ const config = {
     target: ['AppImage', 'deb', 'rpm'],
     category: 'Development',
     maintainer: 'Gitify Team',
-    extraResources: ['gnome-extension/**/*'],
   },
   publish: {
     provider: 'github',
