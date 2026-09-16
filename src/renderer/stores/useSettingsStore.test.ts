@@ -155,4 +155,46 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(result.current.designLanguage).toBe(DesignLanguage.GLASS);
     });
   });
+  describe('tray appearance migration', () => {
+    afterEach(() => {
+      localStorage.removeItem(Constants.STORAGE.SETTINGS);
+      vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(false);
+    });
+
+    it.each([
+      [true, true, 'light'],
+      [false, true, 'auto'],
+      [true, false, 'light'],
+      [false, false, 'dark'],
+    ])('preserves alternate=%s on macOS=%s as %s', async (alternate, macOS, expected) => {
+      vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(macOS);
+      localStorage.setItem(
+        Constants.STORAGE.SETTINGS,
+        JSON.stringify({
+          state: { useAlternateIdleIcon: alternate, theme: Theme.DARK_DIMMED },
+          version: 0,
+        }),
+      );
+      await act(async () => {
+        await useSettingsStore.persist.rehydrate();
+      });
+      expect(useSettingsStore.getState().trayIconAppearance).toBe(expected);
+      expect(useSettingsStore.getState().theme).toBe(Theme.DARK_DIMMED);
+      expect(useSettingsStore.getState()).not.toHaveProperty('useAlternateIdleIcon');
+    });
+
+    it('retains the new preference after rehydration', async () => {
+      localStorage.setItem(
+        Constants.STORAGE.SETTINGS,
+        JSON.stringify({
+          state: { trayIconAppearance: 'dark' },
+          version: 1,
+        }),
+      );
+      await act(async () => {
+        await useSettingsStore.persist.rehydrate();
+      });
+      expect(useSettingsStore.getState().trayIconAppearance).toBe('dark');
+    });
+  });
 });

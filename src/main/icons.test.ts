@@ -1,47 +1,50 @@
-import { isLinux } from '../shared/platform';
+import { nativeTheme } from 'electron';
 
-vi.mock('../shared/platform', () => ({ isLinux: vi.fn() }));
+import { isMacOS, isWindows } from '../shared/platform';
 
-describe('main/icons.ts', () => {
+import { getIdleTrayIcon, TrayIcons } from './icons';
+
+vi.mock('electron', () => ({
+  nativeTheme: { shouldUseDarkColorsForSystemIntegratedUI: false, shouldUseDarkColors: false },
+}));
+vi.mock('../shared/platform', () => ({ isMacOS: vi.fn(), isWindows: vi.fn() }));
+
+describe('tray icon appearance', () => {
   beforeEach(() => {
-    vi.resetModules();
-    vi.mocked(isLinux).mockReturnValue(false);
-    vi.stubEnv('XDG_CURRENT_DESKTOP', '');
+    vi.mocked(isMacOS).mockReturnValue(false);
+    vi.mocked(isWindows).mockReturnValue(false);
   });
 
-  afterEach(() => {
-    vi.unstubAllEnvs();
+  it('uses a template only for automatic macOS appearance', () => {
+    vi.mocked(isMacOS).mockReturnValue(true);
+    expect(getIdleTrayIcon('auto')).toBe(TrayIcons.idle);
+    expect(getIdleTrayIcon('light')).toBe(TrayIcons.light);
+    expect(getIdleTrayIcon('dark')).toBe(TrayIcons.dark);
+    expect(TrayIcons.dark).not.toContain('Template');
   });
 
-  it('should return icon images', async () => {
-    const { TrayIcons } = await import('./icons');
-    expect(TrayIcons.active).toContain('assets/images/tray-active.png');
+  it.each([true, false])(
+    'follows Windows taskbar theme, regardless of app dark mode %s',
+    (appDark) => {
+      vi.mocked(isWindows).mockReturnValue(true);
+      Object.assign(nativeTheme, {
+        shouldUseDarkColors: appDark,
+        shouldUseDarkColorsForSystemIntegratedUI: true,
+      });
+      expect(getIdleTrayIcon('auto')).toBe(TrayIcons.light);
+      Object.assign(nativeTheme, { shouldUseDarkColorsForSystemIntegratedUI: false });
+      expect(getIdleTrayIcon('auto')).toBe(TrayIcons.dark);
+      expect(getIdleTrayIcon('light')).toBe(TrayIcons.light);
+    },
+  );
 
-    expect(TrayIcons.idle).toContain('assets/images/tray-idleTemplate.png');
-
-    expect(TrayIcons.idleAlternate).toContain('assets/images/tray-idle-white.png');
-
-    expect(TrayIcons.error).toContain('assets/images/tray-error.png');
-
-    expect(TrayIcons.offline).toContain('assets/images/tray-offline.png');
-  });
-
-  it.each([
-    [true, 'GNOME', 'tray-idle-white.png'],
-    [true, 'ubuntu:GNOME', 'tray-idle-white.png'],
-    [true, 'GNOME-Classic:GNOME', 'tray-idle-white.png'],
-    [true, 'gnome', 'tray-idle-white.png'],
-    [true, 'KDE', 'tray-idleTemplate.png'],
-    [true, '', 'tray-idleTemplate.png'],
-    [true, 'NOT-GNOME', 'tray-idleTemplate.png'],
-    [false, 'GNOME', 'tray-idleTemplate.png'],
-  ])('selects the idle icon for Linux=%s and desktop=%s', async (linux, desktop, file) => {
-    vi.mocked(isLinux).mockReturnValue(linux);
-    vi.stubEnv('XDG_CURRENT_DESKTOP', desktop);
-
-    const { TrayIcons } = await import('./icons');
-
-    expect(TrayIcons.idle).toContain(`assets/images/${file}`);
-    expect(TrayIcons.idleAlternate).toContain('assets/images/tray-idle-white.png');
-  });
+  it.each(['GNOME', 'KDE', ''])(
+    'uses the Linux fallback and respects overrides on %s',
+    (desktop) => {
+      vi.stubEnv('XDG_CURRENT_DESKTOP', desktop);
+      expect(getIdleTrayIcon('auto')).toBe(TrayIcons.light);
+      expect(getIdleTrayIcon('dark')).toBe(TrayIcons.dark);
+      vi.unstubAllEnvs();
+    },
+  );
 });

@@ -98,7 +98,7 @@ function createGitifyBridgeApi(): Window['gitify'] {
     tray: {
       updateColor: vi.fn(),
       updateTitle: vi.fn(),
-      useAlternateIdleIcon: vi.fn(),
+      setAppearance: vi.fn(),
       useUnreadActiveIcon: vi.fn(),
     },
     notificationSoundPath: vi.fn(),
