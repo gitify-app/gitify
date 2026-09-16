@@ -6,6 +6,7 @@ import type { AuthMethod } from '../../auth/types';
 import {
   extractHostVersion,
   getDeveloperSettingsURL,
+  getDeviceFlowRevokeAccessURL,
   getGitHubAuthBaseUrl,
   getNewOAuthAppURL,
   getNewTokenURL,
@@ -68,6 +69,23 @@ describe('renderer/utils/forges/github/auth.ts', () => {
           method: 'GitHub App',
         } as Account),
       ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
+    });
+
+    it('returns the preconfigured Gitify OAuth App connections URL', () => {
+      expect(
+        getDeveloperSettingsURL({
+          hostname: 'github.com' as Hostname,
+          method: 'Gitify OAuth App',
+        } as Account),
+      ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
+    });
+
+    describe('getDeviceFlowRevokeAccessURL', () => {
+      it('returns the built-in OAuth App connection URL', () => {
+        expect(getDeviceFlowRevokeAccessURL('github.com' as Hostname)).toBe(
+          'https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123',
+        );
+      });
     });
 
     it('returns the OAuth App developer URL', () => {

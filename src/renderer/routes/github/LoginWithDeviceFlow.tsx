@@ -295,7 +295,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
 
   return (
     <Page testId="Login With Device Flow">
-      <Header icon={SignInIcon}>Authorize with GitHub</Header>
+      <Header icon={SignInIcon}>Authorize Gitify's OAuth App</Header>
 
       <Contents scrollFade>
         {error && (

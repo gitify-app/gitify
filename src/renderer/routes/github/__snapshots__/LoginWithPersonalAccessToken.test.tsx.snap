@@ -60,7 +60,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
               data-justify="start"
               data-padding="none"
               data-wrap="nowrap"
-              id="title-login-with-personal-access-token"
+              id="title-login-with-classic-personal-access-token"
             >
               <svg
                 aria-hidden="true"
@@ -83,7 +83,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
                 class="prc-Heading-Heading-MtWFE"
                 data-component="Heading"
               >
-                Login with Personal Access Token
+                Login with Classic Personal Access Token
               </h4>
             </div>
           </div>
@@ -236,7 +236,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
             class="text-xs prc-Text-Text-9mHv3"
             data-component="Text"
           >
-            The
+            Fine-grained personal access tokens are not supported. The
              
             <button
               aria-describedby="_r_8_"
@@ -303,7 +303,7 @@ exports[`renderer/routes/github/LoginWithPersonalAccessToken.tsx > renders corre
               data-testid="login-token"
               id="_r_9_"
               name="token"
-              placeholder="Your generated token (40 characters)"
+              placeholder="Your classic token (40 characters)"
               type="password"
               value=""
             />

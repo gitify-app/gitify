@@ -112,8 +112,12 @@ export const AccountsRoute: FC = () => {
   };
 
   const handleReAuthenticate = (account: Account) => {
+    const authMethod =
+      account.forge === 'github' && account.method === 'GitHub App'
+        ? 'Gitify OAuth App'
+        : account.method;
     const loginMethod = getAdapter(account).loginMethods.find(
-      (method) => method.authMethod === account.method,
+      (method) => method.authMethod === authMethod,
     );
 
     if (!loginMethod) {
