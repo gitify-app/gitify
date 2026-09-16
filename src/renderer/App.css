@@ -394,6 +394,16 @@
     background-color: transparent;
   }
 
+  /* Native popups need an opaque surface; transparent options can render white
+   * behind the inherited dark-theme text on Linux. */
+  .gitify-linux.gitify-translucent
+    [data-color-mode]
+    [data-component='Select']
+    :where(option, optgroup) {
+    background-color: var(--bgColor-default);
+    color: var(--fgColor-default);
+  }
+
   /* Checkboxes and radios trade the stark opaque white face for a glass one;
    * checked state fills with the vibrant accent (per materials guidance,
    * vibrant foregrounds carry legibility on translucent surfaces). */
