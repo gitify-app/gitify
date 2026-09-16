@@ -58,8 +58,8 @@ export const TraySettings: FC = () => {
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
-                Use a white {APPLICATION.NAME} logo (instead of the default black logo) when all
-                notifications are read.
+                Use a white {APPLICATION.NAME} logo when all notifications are read. GNOME uses this
+                icon by default.
               </Text>
               <Text>
                 This is particularly useful for devices which have a dark-themed menubar or taskbar.
