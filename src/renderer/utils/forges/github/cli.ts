@@ -36,10 +36,6 @@ export function resolveGitHubCliToken(hostname: Hostname): Promise<Token> {
   });
 }
 
-/**
- * Drop the token held for `hostname`, so the next resolution re-reads the
- * GitHub CLI.
- */
 export function forgetGitHubCliToken(hostname: Hostname): void {
   cliTokens.delete(hostname);
 }

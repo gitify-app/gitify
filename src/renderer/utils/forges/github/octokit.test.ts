@@ -187,6 +187,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       vi.spyOn(cli, 'resolveGitHubCliToken').mockImplementation(
         async () => tokens.shift() as Token,
       );
+      const forgetSpy = vi.spyOn(cli, 'forgetGitHubCliToken');
       const { authorizations } = stubFetch([401, 200]);
 
       const octokit = await createOctokitClientUncached(mockGitHubCliAccount, 'rest');
@@ -194,6 +195,8 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
 
       expect(response.status).toBe(200);
       expect(authorizations).toEqual(['token gho_stale', 'token gho_rotated']);
+      // Without this the memo would keep serving the stale token.
+      expect(forgetSpy).toHaveBeenCalledWith(mockGitHubCliAccount.hostname);
     });
 
     it('gives up when the re-read credential is rejected too', async () => {

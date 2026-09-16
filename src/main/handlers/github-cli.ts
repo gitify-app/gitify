@@ -29,23 +29,11 @@ const EXTRA_PATH_ENTRIES = isWindows()
 const HOSTNAME_PATTERN = /^[a-z0-9][a-z0-9.-]*$/i;
 
 /**
- * `gh auth token` prefers these over the keyring, and the enterprise pair
- * applies to every non-github.com host, so a Gitify started from a shell that
- * exports one would hand back a token issued for a different host.
- */
-const TOKEN_ENV_VARS = [
-  'GH_TOKEN',
-  'GITHUB_TOKEN',
-  'GH_ENTERPRISE_TOKEN',
-  'GITHUB_ENTERPRISE_TOKEN',
-];
-
-/**
  * Ask the locally installed GitHub CLI for the token it holds for `hostname`.
  *
- * The CLI owns the credential: it is read on every call rather than cached
- * here, so a `gh auth login`/`gh auth refresh` that rotates the token is picked
- * up without the user re-authenticating in Gitify.
+ * Whatever the CLI resolves is what Gitify uses, including a token it takes
+ * from `GH_TOKEN`/`GH_ENTERPRISE_TOKEN`: for some users that environment token
+ * is the only credential `gh` has.
  *
  * @param hostname - Host to read the token for (e.g. `github.com`).
  * @returns The token, or the reason the CLI could not supply one.
@@ -56,9 +44,6 @@ export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTo
   }
 
   const env: NodeJS.ProcessEnv = { ...process.env, PATH: buildPath() };
-  for (const name of TOKEN_ENV_VARS) {
-    delete env[name];
-  }
 
   try {
     const { stdout } = await execFileAsync('gh', ['auth', 'token', '--hostname', hostname], {

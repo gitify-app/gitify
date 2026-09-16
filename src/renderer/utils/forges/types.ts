@@ -349,10 +349,6 @@ export interface DeviceFlowSupport {
 /**
  * Local-CLI credential capability bundle. Present only on forges whose
  * official CLI stores a token Gitify can reuse (GitHub's `gh` today).
- *
- * The CLI owns the credential: `resolveToken` is called for every API client
- * instead of reading a stored copy, so a token the CLI rotates does not strand
- * the account.
  */
 export interface CliAuthSupport {
   /** Auth method recorded on accounts created from the CLI's credential. */

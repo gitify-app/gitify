@@ -54,19 +54,12 @@ describe('main/handlers/github-cli.ts', () => {
     expect(spawnedEnv().PATH?.split(delimiter)).not.toContain('');
   });
 
-  it('ignores ambient tokens so the CLI answers from its own keyring', async () => {
+  it("passes an ambient token through, since it can be the CLI's only credential", async () => {
     process.env.GH_TOKEN = 'gho_from_shell';
-    process.env.GITHUB_TOKEN = 'gho_from_shell';
-    process.env.GH_ENTERPRISE_TOKEN = 'gho_from_shell';
-    process.env.GITHUB_ENTERPRISE_TOKEN = 'gho_from_shell';
 
     await readGitHubCliToken('github.com');
 
-    const env = spawnedEnv();
-    expect(env.GH_TOKEN).toBeUndefined();
-    expect(env.GITHUB_TOKEN).toBeUndefined();
-    expect(env.GH_ENTERPRISE_TOKEN).toBeUndefined();
-    expect(env.GITHUB_ENTERPRISE_TOKEN).toBeUndefined();
+    expect(spawnedEnv().GH_TOKEN).toBe('gho_from_shell');
   });
 
   it('reports a missing CLI', async () => {

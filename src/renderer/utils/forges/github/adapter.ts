@@ -204,17 +204,23 @@ function accountHasScopes(
   const scopes = account.scopes ?? [];
 
   if (account.method === 'GitHub CLI') {
-    // The GitHub CLI's own OAuth app issues a fixed scope set that Gitify
-    // cannot widen, and its `repo` scope already grants the notifications API.
-    // So judge these accounts on notification access and enrichment reach
-    // rather than on the scope names a PAT would be asked for.
+    // `gh` issues a fixed scope set Gitify cannot widen, and its `repo` scope
+    // already grants the notifications API, so judge these accounts on
+    // notification access rather than the scope names a PAT would be asked
+    // for. `gh auth token` can also return a `GH_TOKEN` the user exported,
+    // which may be any PAT, so the narrower tiers stay meaningful.
+    const canReadNotifications =
+      scopes.includes(OAUTH_SCOPE.NOTIFICATIONS.name) || scopes.includes(OAUTH_SCOPE.REPO.name);
+
     if (group === 'RECOMMENDED') {
       return scopes.includes(OAUTH_SCOPE.REPO.name);
     }
 
-    return (
-      scopes.includes(OAUTH_SCOPE.NOTIFICATIONS.name) || scopes.includes(OAUTH_SCOPE.REPO.name)
-    );
+    if (group === 'ALTERNATE') {
+      return canReadNotifications && scopes.includes(OAUTH_SCOPE.PUBLIC_REPO.name);
+    }
+
+    return canReadNotifications;
   }
 
   return Constants.OAUTH_SCOPES[group].every(({ name }) => scopes.includes(name));

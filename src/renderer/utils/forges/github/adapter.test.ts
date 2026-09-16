@@ -287,9 +287,12 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(oauthScopes.hasRequired(withCliScopes(['notifications']))).toBe(true);
       expect(oauthScopes.hasRequired(withCliScopes(['gist', 'public_repo']))).toBe(false);
 
+      // `gh auth token` can return an exported GH_TOKEN, which may be any PAT.
       expect(oauthScopes.hasRecommended(withCliScopes(['notifications', 'public_repo']))).toBe(
         false,
       );
+      expect(oauthScopes.hasAlternate(withCliScopes(['notifications', 'public_repo']))).toBe(true);
+      expect(oauthScopes.hasAlternate(withCliScopes(['notifications']))).toBe(false);
     });
 
     it('reports CLI scopes as owned by the CLI, and PAT scopes as Gitify-owned', () => {
