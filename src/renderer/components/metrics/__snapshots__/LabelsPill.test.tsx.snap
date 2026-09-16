@@ -101,4 +101,4 @@ exports[`renderer/components/metrics/LabelsPill.tsx > renders with labels 1`] = 
 </div>
 `;
 
-exports[`renderer/components/metrics/LabelsPill.tsx > renders without labels 1`] = `<div />`;
+exports[`renderer/components/metrics/LabelsPill.tsx > renders without labels or issue fields 1`] = `<div />`;

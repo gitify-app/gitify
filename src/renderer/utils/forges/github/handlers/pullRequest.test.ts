@@ -776,6 +776,30 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       ]);
     });
 
+    it('selects the latest reviewer state regardless of connection order', () => {
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, [
+        {
+          author: mockAuthorResponseNode('reviewer-1'),
+          state: 'APPROVED' as PullRequestReviewState,
+          submittedAt: '2026-01-01T12:00:00Z',
+        },
+        {
+          author: mockAuthorResponseNode('reviewer-1'),
+          state: 'COMMENTED' as PullRequestReviewState,
+          submittedAt: '2026-01-01T13:00:00Z',
+        },
+        {
+          author: mockAuthorResponseNode('reviewer-1'),
+          state: 'CHANGES_REQUESTED' as PullRequestReviewState,
+          submittedAt: '2026-01-01T11:00:00Z',
+        },
+      ]);
+
+      expect(result).toEqual([
+        { user: 'reviewer-1', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
+      ]);
+    });
+
     it('handles no reviews or threads', () => {
       const result = getPullRequestReviewers(mockGitHubCloudAccount, []);
 
