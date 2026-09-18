@@ -24,6 +24,7 @@ interface LoginsState {
   ) => Promise<DeviceFlowSession>;
   loginWithDeviceFlowPoll: (forge: Forge, session: DeviceFlowSession) => Promise<Token | null>;
   loginWithDeviceFlowComplete: (forge: Forge, token: Token, hostname: Hostname) => Promise<void>;
+  loginWithCli: (forge: Forge, hostname: Hostname) => Promise<void>;
   loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
   logoutFromAccount: (account: Account) => Promise<void>;
@@ -105,6 +106,34 @@ export const useLogins = (): LoginsState => {
   );
 
   /**
+   * Login with the token held by a locally installed forge CLI.
+   *
+   * The token is resolved here only to fail fast while the login screen is
+   * still up. Nothing persists it: the CLI is re-read for every API client, so
+   * the account carries no credential of its own.
+   */
+  const loginWithCli = useCallback(
+    async (forge: Forge, hostname: Hostname) => {
+      const { cliAuth } = getAdapter(forge);
+      if (!cliAuth) {
+        throw new Error(`CLI login is not supported for forge "${forge}".`);
+      }
+
+      await cliAuth.resolveToken(hostname);
+
+      const existingAccount = accounts.find(
+        (a) => a.hostname === hostname && a.method === cliAuth.authMethod,
+      );
+      if (existingAccount) {
+        await removeAccountNotifications(existingAccount);
+      }
+
+      await createAccount(cliAuth.authMethod, '' as Token, hostname, forge);
+    },
+    [accounts, createAccount, removeAccountNotifications],
+  );
+
+  /**
    * Login with a custom OAuth app on the given forge.
    */
   const loginWithOAuthApp = useCallback(
@@ -171,6 +200,7 @@ export const useLogins = (): LoginsState => {
     loginWithDeviceFlowStart,
     loginWithDeviceFlowPoll,
     loginWithDeviceFlowComplete,
+    loginWithCli,
     loginWithOAuthApp,
     loginWithPersonalAccessToken,
     logoutFromAccount,

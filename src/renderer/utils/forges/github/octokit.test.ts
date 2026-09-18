@@ -1,10 +1,14 @@
 import {
   mockGitHubAppAccount,
+  mockGitHubCliAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
 
+import type { Token } from '../../../types';
+
 import * as comms from '../../system/comms';
+import * as cli from './cli';
 import {
   clearOctokitClientCache,
   createOctokitClient,
@@ -133,6 +137,76 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
 
       // Should decrypt both tokens
       expect(mockDecryptValue).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('GitHub CLI accounts', () => {
+    function stubFetch(statuses: number[]) {
+      const authorizations: string[] = [];
+
+      const fetchMock = vi.fn(
+        async (_url: string, options: { headers: Record<string, string> }) => {
+          authorizations.push(options.headers.authorization);
+          const status = statuses.shift() ?? 200;
+
+          return new Response(
+            status === 200 ? '{"login":"octocat"}' : '{"message":"Bad credentials"}',
+            {
+              status,
+              headers: { 'content-type': 'application/json' },
+            },
+          );
+        },
+      );
+
+      vi.stubGlobal('fetch', fetchMock);
+
+      return { authorizations, fetchMock };
+    }
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+    });
+
+    it('authenticates each request from the CLI rather than the stored token', async () => {
+      const resolveSpy = vi
+        .spyOn(cli, 'resolveGitHubCliToken')
+        .mockResolvedValue('gho_live' as Token);
+      const { authorizations } = stubFetch([200]);
+
+      const octokit = await createOctokitClientUncached(mockGitHubCliAccount, 'rest');
+      await octokit.request('GET /user');
+
+      expect(authorizations).toEqual(['token gho_live']);
+      expect(resolveSpy).toHaveBeenCalledWith(mockGitHubCliAccount.hostname);
+      expect(mockDecryptValue).not.toHaveBeenCalled();
+    });
+
+    it('retries a rejected request against a re-read CLI credential', async () => {
+      const tokens = ['gho_stale', 'gho_rotated'];
+      vi.spyOn(cli, 'resolveGitHubCliToken').mockImplementation(
+        async () => tokens.shift() as Token,
+      );
+      const forgetSpy = vi.spyOn(cli, 'forgetGitHubCliToken');
+      const { authorizations } = stubFetch([401, 200]);
+
+      const octokit = await createOctokitClientUncached(mockGitHubCliAccount, 'rest');
+      const response = await octokit.request('GET /user');
+
+      expect(response.status).toBe(200);
+      expect(authorizations).toEqual(['token gho_stale', 'token gho_rotated']);
+      // Without this the memo would keep serving the stale token.
+      expect(forgetSpy).toHaveBeenCalledWith(mockGitHubCliAccount.hostname);
+    });
+
+    it('gives up when the re-read credential is rejected too', async () => {
+      vi.spyOn(cli, 'resolveGitHubCliToken').mockResolvedValue('gho_stale' as Token);
+      const { fetchMock } = stubFetch([401, 401]);
+
+      const octokit = await createOctokitClientUncached(mockGitHubCliAccount, 'rest');
+
+      await expect(octokit.request('GET /user')).rejects.toThrow('Bad credentials');
+      expect(fetchMock).toHaveBeenCalledTimes(2);
     });
   });
 });

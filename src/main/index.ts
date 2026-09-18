@@ -5,6 +5,7 @@ import { menubar } from 'electron-menubar';
 import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
+  registerGitHubCliHandlers,
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
@@ -63,6 +64,7 @@ app.whenReady().then(async () => {
   registerTrayHandlers(mb);
   registerSystemHandlers(mb);
   registerStorageHandlers();
+  registerGitHubCliHandlers();
   registerAppHandlers(mb);
   registerUpdaterHandlers(appUpdater);
 });

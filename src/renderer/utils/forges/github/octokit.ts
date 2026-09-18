@@ -4,11 +4,12 @@ import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
 
 import { APPLICATION } from '../../../../shared/constants';
 
-import type { Account } from '../../../types';
+import type { Account, Hostname } from '../../../types';
 import type { APIClientType } from './types';
 
 import { getAccountUUID } from '../../auth/utils';
 import { decryptValue, getAppVersion } from '../../system/comms';
+import { forgetGitHubCliToken, resolveGitHubCliToken } from './cli';
 import { getGitHubAPIBaseUrl } from './utils';
 
 // Create the Octokit type with plugins
@@ -75,21 +76,61 @@ export async function createOctokitClientUncached(
   account: Account,
   type: APIClientType,
 ): Promise<OctokitClient> {
-  const { token: decryptedToken } = await decryptValue(account.token);
+  const isCliAccount = account.method === 'GitHub CLI';
 
   const version = await getAppVersion();
   const userAgent = `${APPLICATION.NAME}/${version}`;
 
   const baseUrl = getGitHubAPIBaseUrl(account.hostname, type).toString().replace(/\/$/, '');
 
-  return new OctokitWithPlugins({
-    auth: decryptedToken,
+  const client = new OctokitWithPlugins({
+    auth: isCliAccount ? undefined : (await decryptValue(account.token)).token,
     baseUrl: baseUrl,
     userAgent: userAgent,
     retry: {
       retries: 1,
     },
   });
+
+  if (isCliAccount) {
+    authenticateFromCli(client, account.hostname);
+  }
+
+  return client;
+}
+
+/**
+ * Authenticate every request from the GitHub CLI rather than from a token
+ * baked in at construction, so a token the CLI rotates (`gh auth login`,
+ * `gh auth refresh`) is picked up on the next request instead of stranding
+ * this client until the account is refreshed.
+ */
+function authenticateFromCli(client: OctokitClient, hostname: Hostname): void {
+  client.hook.wrap('request', async (request, options) => {
+    const authorize = async () => ({
+      ...options,
+      headers: {
+        ...options.headers,
+        authorization: `token ${await resolveGitHubCliToken(hostname)}`,
+      },
+    });
+
+    try {
+      return await request(await authorize());
+    } catch (err) {
+      if (!isUnauthorized(err)) {
+        throw err;
+      }
+
+      forgetGitHubCliToken(hostname);
+
+      return await request(await authorize());
+    }
+  });
+}
+
+function isUnauthorized(err: unknown): boolean {
+  return typeof err === 'object' && err !== null && 'status' in err && err.status === 401;
 }
 
 /**
