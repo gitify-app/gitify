@@ -37,4 +37,8 @@ describe('main/config.ts', () => {
     expect(WindowConfig.webPreferences?.nodeIntegration).toBe(false);
     expect(WindowConfig.webPreferences?.backgroundThrottling).toBe(false);
   });
+
+  it('floats the window on macOS so it can draw over a fullscreen Space', () => {
+    expect(WindowConfig.alwaysOnTop).toBe(process.platform === 'darwin' ? true : undefined);
+  });
 });

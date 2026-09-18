@@ -55,6 +55,8 @@ export const WindowConfig: BrowserWindowConstructorOptions = {
     ? {
         vibrancy: 'popover' as const,
         visualEffectState: 'active' as const,
+        /** Float the popup so it can draw over a fullscreen Space */
+        alwaysOnTop: true,
       }
     : {}),
   /** Hide the app from the Windows taskbar */
