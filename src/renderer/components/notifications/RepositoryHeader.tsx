@@ -40,11 +40,7 @@ export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
-  // Starts the group's exit animation immediately, then reverts it if any
-  // notification in this bulk action failed, checked directly against the
-  // failure store once it settles (see `NotificationRow`'s `runAction` for
-  // why not a stale-state effect). There is no group-level rollup indicator;
-  // only the specific failed row(s) recolor their own hover actions.
+  // Successful actions clear when their rows disappear; failures must clear here.
   const runGroupAction = async (action: () => Promise<void>) => {
     onAnimateExit(shouldAnimateExit);
 

@@ -1,4 +1,4 @@
-import { type FC, useCallback, useMemo, useState } from 'react';
+import { type FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useVirtualizer } from '@tanstack/react-virtual';
 
@@ -57,9 +57,9 @@ export const NotificationList: FC<NotificationListProps> = ({
   const [collapsedRepositories, setCollapsedRepositories] = useState<ReadonlySet<string>>(
     new Set(),
   );
-  const [animatingRepositories, setAnimatingRepositories] = useState<ReadonlySet<string>>(
-    new Set(),
-  );
+  const [animatingRepositories, setAnimatingRepositories] = useState<
+    ReadonlyMap<string, ReadonlySet<string>>
+  >(new Map());
 
   const toggleCollapsedAccount = useCallback((accountUUID: string) => {
     setCollapsedAccounts((current) => {
@@ -85,19 +85,53 @@ export const NotificationList: FC<NotificationListProps> = ({
     });
   }, []);
 
-  const setRepositoryAnimatingExit = useCallback((repoKey: string, animate: boolean) => {
+  const setRepositoryAnimatingExit = useCallback(
+    (repoKey: string, notifications: GitifyNotification[], animate: boolean) => {
+      setAnimatingRepositories((current) => {
+        const next = new Map(current);
+
+        if (animate) {
+          next.set(
+            repoKey,
+            new Set(
+              notifications.map(
+                (notification) => `${getAccountUUID(notification.account)}:${notification.id}`,
+              ),
+            ),
+          );
+        } else {
+          next.delete(repoKey);
+        }
+
+        return next;
+      });
+    },
+    [],
+  );
+
+  const notificationKeys = useMemo(
+    () =>
+      new Set(
+        accountNotifications.flatMap(({ notifications }) =>
+          notifications.map(
+            (notification) => `${getAccountUUID(notification.account)}:${notification.id}`,
+          ),
+        ),
+      ),
+    [accountNotifications],
+  );
+
+  useEffect(() => {
     setAnimatingRepositories((current) => {
-      const next = new Set(current);
+      const next = new Map(
+        [...current].filter(([, actedNotifications]) =>
+          [...actedNotifications].some((notificationKey) => notificationKeys.has(notificationKey)),
+        ),
+      );
 
-      if (animate) {
-        next.add(repoKey);
-      } else {
-        next.delete(repoKey);
-      }
-
-      return next;
+      return next.size === current.size ? current : next;
     });
-  }, []);
+  }, [notificationKeys]);
 
   const items = useMemo(() => {
     const list: ListItem[] = [];
@@ -226,7 +260,9 @@ export const NotificationList: FC<NotificationListProps> = ({
                 <RepositoryHeader
                   isAnimatingExit={animatingRepositories.has(item.repoKey)}
                   isCollapsed={collapsedRepositories.has(item.repoKey)}
-                  onAnimateExit={(animate) => setRepositoryAnimatingExit(item.repoKey, animate)}
+                  onAnimateExit={(animate) =>
+                    setRepositoryAnimatingExit(item.repoKey, item.notifications, animate)
+                  }
                   onToggle={() => toggleCollapsedRepository(item.repoKey)}
                   repoName={item.repoName}
                   repoNotifications={item.notifications}

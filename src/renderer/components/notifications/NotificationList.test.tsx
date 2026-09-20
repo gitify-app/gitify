@@ -107,6 +107,61 @@ describe('renderer/components/notifications/NotificationList.tsx', () => {
     expect(screen.getByTestId('open-repository')).toBeInTheDocument();
   });
 
+  it('shows a repository again after its notifications are reloaded', async () => {
+    const markNotificationsAsRead = vi.fn();
+    const tree = renderWithProviders(
+      <NotificationList accountNotifications={singleAccount} showAccountHeader={false} />,
+      {
+        settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
+        markNotificationsAsRead,
+      },
+    );
+
+    await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+
+    tree.rerender(
+      <NotificationList
+        accountNotifications={[{ account: mockGitHubCloudAccount, notifications: [], error: null }]}
+        showAccountHeader={false}
+      />,
+    );
+    tree.rerender(
+      <NotificationList accountNotifications={singleAccount} showAccountHeader={false} />,
+    );
+
+    expect(tree.container.querySelector(`[id="${mockGitifyNotification.id}"]`)).not.toHaveClass(
+      'opacity-0',
+    );
+  });
+
+  it('shows a new notification when repository remains after group action', async () => {
+    const newNotification = { ...mockGitifyNotification, id: 'new-notification' };
+    const tree = renderWithProviders(
+      <NotificationList accountNotifications={singleAccount} showAccountHeader={false} />,
+      {
+        settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
+        markNotificationsAsRead: vi.fn(),
+      },
+    );
+
+    await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+
+    tree.rerender(
+      <NotificationList
+        accountNotifications={[
+          {
+            account: mockGitHubCloudAccount,
+            notifications: [newNotification],
+            error: null,
+          },
+        ]}
+        showAccountHeader={false}
+      />,
+    );
+
+    expect(tree.container.querySelector('[id="new-notification"]')).not.toHaveClass('opacity-0');
+  });
+
   it('renders an account error instead of its notifications', () => {
     renderWithProviders(
       <NotificationList
