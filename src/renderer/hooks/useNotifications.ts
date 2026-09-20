@@ -71,9 +71,9 @@ interface NotificationsState {
   refetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
-  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<void>;
-  markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
-  unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
+  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<boolean>;
+  markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<boolean>;
+  unsubscribeNotification: (notification: GitifyNotification) => Promise<boolean>;
 }
 
 interface UseNotificationsOptions {
@@ -617,21 +617,36 @@ export const useNotifications = ({
 
   const markNotificationsAsRead = useCallback(
     async (readNotifications: GitifyNotification[]) => {
-      await markNotificationsAsReadMutation.mutateAsync({ readNotifications }).catch(() => {});
+      try {
+        await markNotificationsAsReadMutation.mutateAsync({ readNotifications });
+        return true;
+      } catch {
+        return false;
+      }
     },
     [markNotificationsAsReadMutation],
   );
 
   const markNotificationsAsDone = useCallback(
     async (doneNotifications: GitifyNotification[]) => {
-      await markNotificationsAsDoneMutation.mutateAsync({ doneNotifications }).catch(() => {});
+      try {
+        await markNotificationsAsDoneMutation.mutateAsync({ doneNotifications });
+        return true;
+      } catch {
+        return false;
+      }
     },
     [markNotificationsAsDoneMutation],
   );
 
   const unsubscribeNotification = useCallback(
     async (notification: GitifyNotification) => {
-      await unsubscribeNotificationMutation.mutateAsync({ notification }).catch(() => {});
+      try {
+        await unsubscribeNotificationMutation.mutateAsync({ notification });
+        return true;
+      } catch {
+        return false;
+      }
     },
     [unsubscribeNotificationMutation],
   );

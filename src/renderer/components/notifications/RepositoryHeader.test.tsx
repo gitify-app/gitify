@@ -157,5 +157,18 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
 
       expect(onAnimateExit.mock.calls).toEqual([[true], [false]]);
     });
+
+    it('reverts the group exit animation when the mutation fails directly', async () => {
+      const onAnimateExit = vi.fn();
+
+      renderWithProviders(<RepositoryHeader {...props} onAnimateExit={onAnimateExit} />, {
+        settings: { ...mockSettings },
+        markNotificationsAsRead: vi.fn().mockResolvedValue(false),
+      });
+
+      await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+
+      expect(onAnimateExit.mock.calls).toEqual([[true], [false]]);
+    });
   });
 });

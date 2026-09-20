@@ -562,6 +562,35 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(rendererLogErrorSpy).toHaveBeenCalled();
     });
 
+    it('reports a direct mutation failure while retaining the restored notification', async () => {
+      const invalidNotification = {
+        ...mockGitifyNotification,
+        account: {
+          ...mockGitifyNotification.account,
+          forge: 'unsupported' as typeof mockGitifyNotification.account.forge,
+        },
+      };
+      const accountNotifications: AccountNotifications[] = [
+        {
+          account: invalidNotification.account,
+          notifications: [invalidNotification],
+          error: null,
+        },
+      ];
+      getAllNotificationsMock.mockResolvedValue(accountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      let actionSucceeded: unknown;
+      await act(async () => {
+        actionSucceeded = await result.current.markNotificationsAsRead([invalidNotification]);
+      });
+
+      expect(actionSucceeded).toBe(false);
+      expect(result.current.notificationCount).toBe(1);
+    });
+
     it('rolls back the cache for a failed notification while a failed request does not affect it', async () => {
       vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockRejectedValue(new Error('boom'));
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
