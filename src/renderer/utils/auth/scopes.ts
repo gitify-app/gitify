@@ -1,6 +1,7 @@
 import { Constants } from '../../constants';
 
 import type { Account } from '../../types';
+import type { ExternallyManagedScopes } from '../forges/types';
 
 import { getAccountAdapter } from '../forges/registry';
 
@@ -32,6 +33,16 @@ export function hasRecommendedScopes(account: Account): boolean {
  */
 export function hasAlternateScopes(account: Account): boolean {
   return getAccountAdapter(account).oauthScopes?.hasAlternate() ?? true;
+}
+
+/**
+ * Return how to explain the account's scopes when another tool owns the
+ * credential, or `undefined` when Gitify can change them itself.
+ *
+ * @param account - The account whose scopes to describe.
+ */
+export function externallyManagedScopes(account: Account): ExternallyManagedScopes | undefined {
+  return getAccountAdapter(account).oauthScopes?.externallyManaged();
 }
 
 /**

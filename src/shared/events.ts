@@ -23,6 +23,7 @@ export const EVENTS = {
   SET_NATIVE_THEME: `${P}set-native-theme`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
+  GITHUB_CLI_TOKEN: `${P}github-cli-token`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
@@ -78,6 +79,21 @@ export interface ISafeStorageDecryptResult {
   reEncryptedToken?: string;
 }
 
+/** Why the GitHub CLI could not provide a token. */
+export type GitHubCliTokenError =
+  | 'GH_NOT_FOUND'
+  | 'GH_NOT_AUTHENTICATED'
+  | 'GH_TIMED_OUT'
+  | 'GH_FAILED';
+
+/**
+ * Result of asking the locally installed GitHub CLI for the token it holds for
+ * a host. `detail` carries the CLI's own first line of stderr, when it has one.
+ */
+export type IGitHubCliTokenResult =
+  | { token: string; error?: never; detail?: never }
+  | { token?: never; error: GitHubCliTokenError; detail?: string };
+
 /** Shape of a single event contract: a request payload and a response payload. */
 type Contract = { request: unknown; response: unknown };
 
@@ -127,6 +143,10 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.SAFE_STORAGE_DECRYPT]: {
     request: string;
     response: ISafeStorageDecryptResult;
+  };
+  [EVENTS.GITHUB_CLI_TOKEN]: {
+    request: string;
+    response: IGitHubCliTokenResult;
   };
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };
