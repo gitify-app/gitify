@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { FC, ReactNode, Ref } from 'react';
 
 import { cn } from 'cn';
 
@@ -7,6 +7,7 @@ interface IContents {
   paddingHorizontal?: boolean;
   paddingBottom?: boolean;
   scrollFade?: boolean;
+  ref?: Ref<HTMLDivElement>;
 }
 
 /**
@@ -18,6 +19,7 @@ export const Contents: FC<IContents> = ({
   paddingHorizontal = true,
   paddingBottom = false,
   scrollFade = false,
+  ref,
 }) => {
   return (
     <div
@@ -27,6 +29,7 @@ export const Contents: FC<IContents> = ({
         paddingBottom && 'pb-2',
         scrollFade && 'gitify-scroll-fade',
       )}
+      ref={ref}
     >
       {children}
     </div>

@@ -50,16 +50,26 @@ exports[`renderer/routes/Notifications.tsx > should render itself & its children
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (show account header) 1`] = `
 <div>
-  <p>
-    AllRead
-  </p>
+  <div
+    class="flex flex-col h-screen"
+    data-testid="notifications"
+  >
+    <p>
+      NotificationList
+    </p>
+  </div>
 </div>
 `;
 
 exports[`renderer/routes/Notifications.tsx > should render itself & its children (with notifications) 1`] = `
 <div>
-  <p>
-    AllRead
-  </p>
+  <div
+    class="flex flex-col h-screen"
+    data-testid="notifications"
+  >
+    <p>
+      NotificationList
+    </p>
+  </div>
 </div>
 `;

@@ -281,6 +281,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('shows hover actions in their normal (non-danger) state when there is no recorded failure', () => {
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
+
         isRepositoryAnimatingExit: false,
       };
 
@@ -290,6 +291,21 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         'title',
         'Mark as read',
       );
+    });
+    it('restores its actions when the mutation fails directly', async () => {
+      const props: NotificationRowProps = {
+        notification: mockGitifyNotification,
+        isRepositoryAnimatingExit: false,
+      };
+
+      renderWithProviders(<NotificationRow {...props} />, {
+        settings: { ...mockSettings, delayNotificationState: false, fetchReadNotifications: false },
+        markNotificationsAsRead: vi.fn().mockResolvedValue(false),
+      });
+
+      await userEvent.click(screen.getByTestId('notification-mark-as-read'));
+
+      expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
     });
 
     it('styles and explains only the action that failed', () => {

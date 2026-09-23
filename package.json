@@ -106,6 +106,7 @@
     "@primer/react": "38.39.0",
     "@tailwindcss/vite": "4.3.3",
     "@tanstack/react-query": "5.102.8",
+    "@tanstack/react-virtual": "3.14.13",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "16.3.3",
     "@testing-library/user-event": "14.6.7",

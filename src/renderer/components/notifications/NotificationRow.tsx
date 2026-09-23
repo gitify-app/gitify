@@ -67,12 +67,14 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   // settles. Checking a stale value (e.g. via an effect watching the failure
   // map) would wrongly revert a retry's animation using the previous
   // attempt's still-present entry.
-  const runAction = async (action: () => Promise<void>) => {
+  const runAction = async (action: () => Promise<boolean>) => {
     setShouldAnimateNotificationExit(shouldAnimateExit);
 
-    await action();
-
-    if (useNotificationActionFailuresStore.getState().failures[notificationFailureKey]) {
+    const succeeded = await action();
+    if (
+      succeeded === false ||
+      useNotificationActionFailuresStore.getState().failures[notificationFailureKey]
+    ) {
       setShouldAnimateNotificationExit(false);
     }
   };
