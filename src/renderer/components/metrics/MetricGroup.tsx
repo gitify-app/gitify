@@ -47,7 +47,10 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
       <MilestonePill milestone={notification.subject.milestone!} />
 
-      <LabelsPill labels={notification.subject.labels ?? []} />
+      <LabelsPill
+        labels={notification.subject.labels ?? []}
+        issueFields={notification.subject.issueFields ?? []}
+      />
     </div>
   );
 };
