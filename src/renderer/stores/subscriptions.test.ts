@@ -14,8 +14,8 @@ describe('renderer/stores/subscriptions.ts', () => {
   const setUseUnreadActiveIconSpy = vi
     .spyOn(comms, 'setUseUnreadActiveIcon')
     .mockImplementation(vi.fn());
-  const setUseAlternateIdleIconSpy = vi
-    .spyOn(comms, 'setUseAlternateIdleIcon')
+  const setTrayIconAppearanceSpy = vi
+    .spyOn(comms, 'setTrayIconAppearance')
     .mockImplementation(vi.fn());
   const setUseX11BackendSpy = vi.spyOn(comms, 'setUseX11Backend').mockImplementation(vi.fn());
 
@@ -39,8 +39,8 @@ describe('renderer/stores/subscriptions.ts', () => {
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().useUnreadActiveIcon,
     );
-    expect(setUseAlternateIdleIconSpy).toHaveBeenCalledWith(
-      useSettingsStore.getState().useAlternateIdleIcon,
+    expect(setTrayIconAppearanceSpy).toHaveBeenCalledWith(
+      useSettingsStore.getState().trayIconAppearance,
     );
     expect(window.gitify.zoom.setLevel).toHaveBeenCalled();
   });
@@ -61,8 +61,8 @@ describe('renderer/stores/subscriptions.ts', () => {
     useSettingsStore.getState().updateSetting('useUnreadActiveIcon', false);
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(false);
 
-    useSettingsStore.getState().updateSetting('useAlternateIdleIcon', true);
-    expect(setUseAlternateIdleIconSpy).toHaveBeenCalledWith(true);
+    useSettingsStore.getState().updateSetting('trayIconAppearance', 'light');
+    expect(setTrayIconAppearanceSpy).toHaveBeenCalledWith('light');
 
     useSettingsStore.getState().updateSetting('useX11Backend', true);
     expect(setUseX11BackendSpy).toHaveBeenCalledWith(true);

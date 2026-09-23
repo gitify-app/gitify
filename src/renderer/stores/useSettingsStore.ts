@@ -40,6 +40,26 @@ const useSettingsStore = create<SettingsStore>()(
       }),
       {
         name: Constants.STORAGE.SETTINGS,
+        version: 1,
+        migrate: (persisted) => {
+          if (!persisted || typeof persisted !== 'object') {
+            return DEFAULT_SETTINGS_STATE;
+          }
+          const { useAlternateIdleIcon, ...settings } = {
+            useAlternateIdleIcon: undefined,
+            ...persisted,
+          };
+          return {
+            ...DEFAULT_SETTINGS_STATE,
+            ...settings,
+            trayIconAppearance:
+              useAlternateIdleIcon === true
+                ? 'light'
+                : useAlternateIdleIcon === false && !window.gitify.platform.isMacOS()
+                  ? 'dark'
+                  : 'auto',
+          };
+        },
       },
     ),
   ),

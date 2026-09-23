@@ -31,7 +31,7 @@ export const GlobalEffects: FC = () => {
   // Subscribe to tray-related settings for useEffect dependencies
   const showNotificationsCountInTray = useSettingsStore((s) => s.showNotificationsCountInTray);
   const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
-  const useAlternateIdleIcon = useSettingsStore((s) => s.useAlternateIdleIcon);
+  const trayIconAppearance = useSettingsStore((s) => s.trayIconAppearance);
 
   const isOnline = useOnlineStatus();
 
@@ -54,7 +54,7 @@ export const GlobalEffects: FC = () => {
   }, [
     showNotificationsCountInTray,
     useUnreadActiveIcon,
-    useAlternateIdleIcon,
+    trayIconAppearance,
     status,
     notificationCount,
     isOnline,

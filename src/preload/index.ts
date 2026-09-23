@@ -1,6 +1,6 @@
 import { contextBridge, webFrame } from 'electron';
 
-import type { IKeyboardShortcut, NativeThemeSource } from '../shared/events';
+import type { IKeyboardShortcut, NativeThemeSource, TrayIconAppearance } from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
@@ -126,11 +126,11 @@ export const api = {
     updateTitle: (title = '') => sendMainEvent(EVENTS.UPDATE_ICON_TITLE, title),
 
     /**
-     * Switch the tray icon to an alternate idle icon variant.
+     * Set the idle tray icon appearance independently of the app theme.
      *
-     * @param value - `true` to use the alternate idle icon, `false` for the default.
      */
-    useAlternateIdleIcon: (value: boolean) => sendMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, value),
+    setAppearance: (value: TrayIconAppearance) =>
+      sendMainEvent(EVENTS.SET_TRAY_ICON_APPEARANCE, value),
 
     /**
      * Switch the tray icon to an "active" variant when there are unread notifications.

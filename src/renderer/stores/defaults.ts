@@ -72,7 +72,7 @@ const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettingsState = {
 const DEFAULT_TRAY_SETTINGS: TraySettingsState = {
   showNotificationsCountInTray: true,
   useUnreadActiveIcon: true,
-  useAlternateIdleIcon: false,
+  trayIconAppearance: 'auto',
 };
 
 /**

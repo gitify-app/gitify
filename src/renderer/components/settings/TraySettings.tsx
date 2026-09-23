@@ -4,20 +4,24 @@ import { DevicesIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
+import { isTrayIconAppearance } from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
+import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
 export const TraySettings: FC = () => {
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+
   // Setting store actions
   const toggleSetting = useSettingsStore((s) => s.toggleSetting);
 
   // Setting store values
   const showNotificationsCountInTray = useSettingsStore((s) => s.showNotificationsCountInTray);
   const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
-  const useAlternateIdleIcon = useSettingsStore((s) => s.useAlternateIdleIcon);
+  const trayIconAppearance = useSettingsStore((s) => s.trayIconAppearance);
 
   return (
     <fieldset>
@@ -50,20 +54,29 @@ export const TraySettings: FC = () => {
           }
         />
 
-        <Checkbox
-          checked={useAlternateIdleIcon}
-          label="Use alternate idle icon"
-          name="useAlternateIdleIcon"
-          onChange={() => toggleSetting('useAlternateIdleIcon')}
+        <RadioGroup
+          label="Idle icon"
+          name="trayIconAppearance"
+          value={trayIconAppearance}
+          options={[
+            { label: 'Automatic', value: 'auto' },
+            { label: 'Light', value: 'light' },
+            { label: 'Dark', value: 'dark' },
+          ]}
+          onChange={(event) => {
+            const value = event.target.value;
+            if (isTrayIconAppearance(value)) {
+              updateSetting('trayIconAppearance', value);
+            }
+          }}
           tooltip={
             <Stack direction="vertical" gap="condensed">
+              <Text>Choose a light icon for a dark panel, or a dark icon for a light panel.</Text>
               <Text>
-                Use a white {APPLICATION.NAME} logo (instead of the default black logo) when all
-                notifications are read.
+                Automatic follows the system tray appearance on macOS and Windows. On Linux, it uses
+                a light icon because panel appearance cannot be detected reliably.
               </Text>
-              <Text>
-                This is particularly useful for devices which have a dark-themed menubar or taskbar.
-              </Text>
+              <Text>This setting is independent of Gitify’s app theme.</Text>
             </Stack>
           }
         />
