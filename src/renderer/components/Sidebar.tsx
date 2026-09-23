@@ -124,13 +124,12 @@ export const Sidebar: FC = () => {
           <>
             <IconButton
               aria-label="Refresh"
-              className={status === 'loading' || isFetching ? 'animate-spin' : ''}
               data-testid="sidebar-refresh"
               description="Refresh notifications"
-              disabled={isLoading}
+              loading={isLoading || isFetching}
+              disabled={isLoading || isFetching}
               icon={SyncIcon}
               keybindingHint={shortcuts.refresh.key}
-              // loading={status === 'loading'}
               onClick={() => shortcuts.refresh.action()}
               size="small"
               tooltipDirection="e"

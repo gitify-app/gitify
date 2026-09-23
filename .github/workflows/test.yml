@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@49c3e4e92c52e7f8392712a9267bbe71c5ab30e5 # v1.19.0
+        uses: voidzero-dev/setup-vp@9fd26ff49f9b5e6276c2b493da4454ad4527f7f4 # v1.20.0
         with:
           cache: true
           node-version-file: '.nvmrc'
@@ -54,7 +54,7 @@ jobs:
     # This tag must match the `playwright` devDependency, which ships the
     # matching browser build. Renovate groups the two so they always move
     # together; `scripts/visual.sh` reads the version straight from package.json.
-    container: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+    container: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
 
     steps:
       - name: Checkout
@@ -63,7 +63,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@49c3e4e92c52e7f8392712a9267bbe71c5ab30e5 # v1.19.0
+        uses: voidzero-dev/setup-vp@9fd26ff49f9b5e6276c2b493da4454ad4527f7f4 # v1.20.0
         with:
           cache: true
           node-version-file: '.nvmrc'
@@ -102,7 +102,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@49c3e4e92c52e7f8392712a9267bbe71c5ab30e5 # v1.19.0
+        uses: voidzero-dev/setup-vp@9fd26ff49f9b5e6276c2b493da4454ad4527f7f4 # v1.20.0
         with:
           cache: true
           node-version-file: '.nvmrc'

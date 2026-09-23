@@ -11,7 +11,7 @@ import type {
   Link,
 } from '../../types';
 
-import { getAdapter } from '../forges/registry';
+import { getAccountAdapter } from '../forges/registry';
 import { generateNotificationWebUrl } from '../notifications/url';
 import { openExternalLink } from './comms';
 
@@ -22,15 +22,15 @@ export function openGitifyReleaseNotes(version: string) {
 }
 
 export function openHostNotifications(account: Account) {
-  openExternalLink(getAdapter(account).getNotificationsUrl(account));
+  openExternalLink(getAccountAdapter(account).getNotificationsUrl());
 }
 
 export function openHostIssues(account: Account) {
-  openExternalLink(getAdapter(account).getIssuesUrl(account));
+  openExternalLink(getAccountAdapter(account).getIssuesUrl());
 }
 
 export function openHostPulls(account: Account) {
-  openExternalLink(getAdapter(account).getPullRequestsUrl(account));
+  openExternalLink(getAccountAdapter(account).getPullRequestsUrl());
 }
 
 export function openAccountProfile(account: Account) {
@@ -48,7 +48,7 @@ export function openHost(hostname: Hostname) {
 }
 
 export function openAccountSettings(account: Account) {
-  const url = getAdapter(account).getAccountSettingsUrl(account);
+  const url = getAccountAdapter(account).getAccountSettingsUrl();
   openExternalLink(url);
 }
 

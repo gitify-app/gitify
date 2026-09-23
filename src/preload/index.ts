@@ -56,8 +56,8 @@ export const api = {
   /**
    * Enable or disable keeping the window open when it loses focus.
    *
-   * Implemented by toggling the window's `alwaysOnTop` flag, which the
-   * `menubar` library uses to short-circuit its blur-driven hide.
+   * Implemented by setting the menubar `hideOnBlur` option to the inverse of
+   * `value` (`mb.setOption('hideOnBlur', !value)`).
    *
    * @param value - `true` to keep the window open on blur, `false` to hide.
    */

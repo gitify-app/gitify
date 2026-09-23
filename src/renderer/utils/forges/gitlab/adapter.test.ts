@@ -25,8 +25,10 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
     });
 
     it('reports no distinct done state — GitLab has one transition', () => {
-      expect(gitlabAdapter.capabilities.markAsDone(mockGitLabAccount)).toBe(false);
-      expect(gitlabAdapter.capabilities.unsubscribeThread(mockGitLabAccount)).toBe(false);
+      expect(gitlabAdapter.accountOps.capabilities.markAsDone(mockGitLabAccount)).toBe(false);
+      expect(gitlabAdapter.accountOps.capabilities.unsubscribeThread(mockGitLabAccount)).toBe(
+        false,
+      );
     });
 
     it('does not implement detailed enrichment', () => {
@@ -37,7 +39,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
     it('uses plain logins for account identity surfaces', () => {
       expect(gitlabAdapter.formatUserLogin('octocat')).toBe('octocat');
       expect(
-        gitlabAdapter.formatNotificationUser(mockGitLabAccount, {
+        gitlabAdapter.accountOps.formatNotificationUser(mockGitLabAccount, {
           login: 'octocat',
           avatarUrl: '' as Link,
           htmlUrl: '' as Link,
@@ -63,19 +65,19 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
       expect(gitlabAdapter.getPersonalAccessTokenSettingsUrl('gitlab.com' as Hostname)).toBe(
         'https://gitlab.com/-/user_settings/personal_access_tokens',
       );
-      expect(gitlabAdapter.getAccountSettingsUrl(mockGitLabAccount)).toBe(
+      expect(gitlabAdapter.accountOps.getAccountSettingsUrl(mockGitLabAccount)).toBe(
         'https://gitlab.com/-/user_settings/personal_access_tokens',
       );
     });
 
     it('builds issues, merge requests and notifications shortcut URLs using GitLab paths', () => {
-      expect(gitlabAdapter.getIssuesUrl(mockGitLabAccount)).toBe(
+      expect(gitlabAdapter.accountOps.getIssuesUrl(mockGitLabAccount)).toBe(
         'https://gitlab.com/dashboard/issues?assignee_username=octocat',
       );
-      expect(gitlabAdapter.getPullRequestsUrl(mockGitLabAccount)).toBe(
+      expect(gitlabAdapter.accountOps.getPullRequestsUrl(mockGitLabAccount)).toBe(
         'https://gitlab.com/dashboard/merge_requests',
       );
-      expect(gitlabAdapter.getNotificationsUrl(mockGitLabAccount)).toBe(
+      expect(gitlabAdapter.accountOps.getNotificationsUrl(mockGitLabAccount)).toBe(
         'https://gitlab.com/dashboard/todos',
       );
     });
@@ -86,7 +88,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
     });
 
     it('omits the oauthScopes bundle', () => {
-      expect(gitlabAdapter.oauthScopes).toBeUndefined();
+      expect(gitlabAdapter.accountOps.oauthScopes).toBeUndefined();
     });
   });
 
@@ -148,7 +150,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
         expires_at: null,
       });
 
-      const result = await gitlabAdapter.fetchAuthenticatedUser(mockGitLabAccount);
+      const result = await gitlabAdapter.accountOps.fetchAuthenticatedUser(mockGitLabAccount);
 
       expect(result).toEqual({
         user: {
@@ -173,7 +175,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
       });
       vi.spyOn(client, 'fetchGitLabTokenMetadata').mockRejectedValue(new Error('nope'));
 
-      const result = await gitlabAdapter.fetchAuthenticatedUser(mockGitLabAccount);
+      const result = await gitlabAdapter.accountOps.fetchAuthenticatedUser(mockGitLabAccount);
 
       expect(result.user.name).toBeNull();
       expect(result.user.avatar).toBe('');
@@ -188,7 +190,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
       vi.spyOn(client, 'fetchGitLabVersion').mockRejectedValue(new Error('403'));
       vi.spyOn(client, 'fetchGitLabTokenMetadata').mockRejectedValue(new Error('403'));
 
-      const result = await gitlabAdapter.fetchAuthenticatedUser(mockGitLabAccount);
+      const result = await gitlabAdapter.accountOps.fetchAuthenticatedUser(mockGitLabAccount);
 
       expect(result.user.login).toBe('octocat');
       expect(result.version).toBeUndefined();
@@ -200,9 +202,9 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
         new Error('GitLab API 401 Unauthorized'),
       );
 
-      await expect(gitlabAdapter.fetchAuthenticatedUser(mockGitLabAccount)).rejects.toThrow(
-        /401 Unauthorized/,
-      );
+      await expect(
+        gitlabAdapter.accountOps.fetchAuthenticatedUser(mockGitLabAccount),
+      ).rejects.toThrow(/401 Unauthorized/);
     });
   });
 
@@ -224,7 +226,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
 
       useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
 
-      const result = await gitlabAdapter.listNotifications(mockGitLabAccount);
+      const result = await gitlabAdapter.accountOps.listNotifications(mockGitLabAccount);
 
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('99');
@@ -236,7 +238,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
     it('markThreadAsRead marks the to-do item done', async () => {
       const spy = vi.spyOn(client, 'markGitLabTodoAsDone').mockResolvedValue(undefined);
 
-      await gitlabAdapter.markThreadAsRead(mockGitLabAccount, '12');
+      await gitlabAdapter.accountOps.markThreadAsRead(mockGitLabAccount, '12');
 
       expect(spy).toHaveBeenCalledWith(mockGitLabAccount, '12');
     });
@@ -244,13 +246,13 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
     it('markThreadAsDone throws — the capability gate is the contract', () => {
       // The orchestrator falls back to mark-as-read for forges reporting
       // markAsDone: false, which lands on the same GitLab endpoint anyway.
-      expect(() => gitlabAdapter.markThreadAsDone(mockGitLabAccount, '13')).toThrow(
+      expect(() => gitlabAdapter.accountOps.markThreadAsDone(mockGitLabAccount, '13')).toThrow(
         /check capabilities.markAsDone/,
       );
     });
 
     it('unsubscribeThread throws because the capability is off', () => {
-      expect(() => gitlabAdapter.unsubscribeThread(mockGitLabAccount, '14')).toThrow(
+      expect(() => gitlabAdapter.accountOps.unsubscribeThread(mockGitLabAccount, '14')).toThrow(
         /not supported for GitLab/,
       );
     });
@@ -260,7 +262,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
     it('delegates to gitlabGetJson', async () => {
       const spy = vi.spyOn(client, 'gitlabGetJson').mockResolvedValue({ web_url: 'x' });
 
-      const result = await gitlabAdapter.followUrl<{ web_url: string }>(
+      const result = await gitlabAdapter.accountOps.followUrl(
         mockGitLabAccount,
         'https://gitlab.com/api/v4/x' as Link,
       );
@@ -316,7 +318,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
 
   describe('onAccountTokenChange', () => {
     it('is omitted because the client holds no cache', () => {
-      expect(gitlabAdapter.onAccountTokenChange).toBeUndefined();
+      expect(gitlabAdapter.accountOps.onAccountTokenChange).toBeUndefined();
     });
   });
 
@@ -327,7 +329,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
         hostname: 'gitlab.example.com' as Hostname,
       } satisfies Account;
 
-      expect(gitlabAdapter.getAccountSettingsUrl(selfManaged)).toBe(
+      expect(gitlabAdapter.accountOps.getAccountSettingsUrl(selfManaged)).toBe(
         'https://gitlab.example.com/-/user_settings/personal_access_tokens',
       );
     });

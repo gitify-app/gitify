@@ -161,7 +161,7 @@ describe('renderer/hooks/useLogins.ts', () => {
   });
 
   it('loginWithPersonalAccessToken forwards username for Bitbucket accounts', async () => {
-    vi.spyOn(getAdapter('bitbucket'), 'fetchAuthenticatedUser').mockResolvedValue({
+    vi.spyOn(getAdapter('bitbucket').accountOps, 'fetchAuthenticatedUser').mockResolvedValue({
       user: {
         id: mockBitbucketAccount.user!.id,
         login: mockBitbucketAccount.user!.login,

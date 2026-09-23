@@ -1,5 +1,24 @@
 # Changelog
 
+## [7.8.0](https://github.com/gitify-app/gitify/compare/v7.7.1...v7.8.0) (2026-09-06)
+
+
+### 🚀 Features
+
+* **metrics:** use new Issue Relates To Icon for linked issues pill ([#3277](https://github.com/gitify-app/gitify/issues/3277)) ([ed2dc66](https://github.com/gitify-app/gitify/commit/ed2dc665ecf4ed5c6c745f3bf2d8dd5282dbcbee))
+* use menubar-managed popup behavior ([#3280](https://github.com/gitify-app/gitify/issues/3280)) ([168c541](https://github.com/gitify-app/gitify/commit/168c54194b7d4bedbd072953885944ec25da842e))
+
+
+### 🧼 Code Refactoring
+
+* **api:** orderby reviews no longer supported ([#3278](https://github.com/gitify-app/gitify/issues/3278)) ([f8ca915](https://github.com/gitify-app/gitify/commit/f8ca9151c0ed540434e0bcdfcead57b6de5c736c))
+* **forges:** bind account-scoped adapter operations via getAccountAdapter ([#3266](https://github.com/gitify-app/gitify/issues/3266)) ([525386e](https://github.com/gitify-app/gitify/commit/525386e43339a4c82263979f987742ea0cf534ed))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update electron to v44.1.1 ([#3270](https://github.com/gitify-app/gitify/issues/3270)) ([23afa70](https://github.com/gitify-app/gitify/commit/23afa704e595f4f409aa9148141dfb1163dbd834))
+
 ## [7.7.1](https://github.com/gitify-app/gitify/compare/v7.7.0...v7.7.1) (2026-09-04)
 
 

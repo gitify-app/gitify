@@ -1,13 +1,24 @@
+import { expectTypeOf } from 'vite-plus/test';
+
 import {
   mockBitbucketAccount,
   mockGiteaAccount,
   mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
   mockGitLabAccount,
 } from '../../__mocks__/account-mocks';
 
-import type { Account, Forge } from '../../types';
+import type { Account, Forge, Link } from '../../types';
+import type { ForgeAccountAdapter, ForgeAccountOperations } from './types';
 
-import { getAdapter, isKnownForge, KNOWN_FORGES, listAdapters } from './registry';
+import * as giteaClient from './gitea/client';
+import {
+  getAccountAdapter,
+  getAdapter,
+  isKnownForge,
+  KNOWN_FORGES,
+  listAdapters,
+} from './registry';
 
 describe('renderer/utils/forges/registry.ts', () => {
   describe('getAdapter', () => {
@@ -44,6 +55,111 @@ describe('renderer/utils/forges/registry.ts', () => {
 
     it('throws for an unknown forge id', () => {
       expect(() => getAdapter('mystery' as Forge)).toThrow(/No forge adapter registered/);
+    });
+  });
+
+  describe('getAccountAdapter', () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it('supplies the account to account-scoped operations', async () => {
+      const listSpy = vi
+        .spyOn(getAdapter('github').accountOps, 'listNotifications')
+        .mockResolvedValue([]);
+
+      await getAccountAdapter(mockGitHubCloudAccount).listNotifications();
+
+      expect(listSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
+    });
+
+    it('passes remaining arguments after the account', async () => {
+      const markSpy = vi
+        .spyOn(getAdapter('github').accountOps, 'markThreadAsRead')
+        .mockResolvedValue(undefined);
+
+      await getAccountAdapter(mockGitHubCloudAccount).markThreadAsRead('thread-1');
+
+      expect(markSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'thread-1');
+    });
+
+    it('binds nested bundles such as capabilities', () => {
+      const capabilitySpy = vi
+        .spyOn(getAdapter('github').accountOps.capabilities, 'markAsDone')
+        .mockReturnValue(true);
+
+      expect(getAccountAdapter(mockGitHubCloudAccount).capabilities.markAsDone()).toBe(true);
+      expect(capabilitySpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
+    });
+
+    it('omits optional bundles the forge does not provide', () => {
+      expect(getAccountAdapter(mockGiteaAccount).oauthScopes).toBeUndefined();
+      expect(getAccountAdapter(mockGiteaAccount).onAccountTokenChange).toBeUndefined();
+      expect(getAccountAdapter(mockGitHubCloudAccount).oauthScopes).toBeDefined();
+    });
+
+    it('keeps interleaved operations isolated between accounts on the same forge', async () => {
+      const markSpy = vi
+        .spyOn(getAdapter('github').accountOps, 'markThreadAsRead')
+        .mockResolvedValue(undefined);
+      const cloud = getAccountAdapter(mockGitHubCloudAccount);
+      const enterprise = getAccountAdapter(mockGitHubEnterpriseServerAccount);
+
+      await cloud.markThreadAsRead('cloud-1');
+      await enterprise.markThreadAsRead('enterprise-1');
+      await cloud.markThreadAsRead('cloud-2');
+
+      expect(markSpy.mock.calls).toEqual([
+        [mockGitHubCloudAccount, 'cloud-1'],
+        [mockGitHubEnterpriseServerAccount, 'enterprise-1'],
+        [mockGitHubCloudAccount, 'cloud-2'],
+      ]);
+      expect(cloud.getIssuesUrl()).toBe('https://github.com/issues');
+      expect(enterprise.getIssuesUrl()).toBe('https://github.gitify.io/issues');
+    });
+
+    it('routes bound Gitea requests through its provider and preserves the response', async () => {
+      const url = 'https://gitea.example.com/api/v1/repos/owner/repo/issues/1' as Link;
+      const response = { html_url: 'https://gitea.example.com/owner/repo/issues/1' };
+      const getJsonSpy = vi.spyOn(giteaClient, 'giteaGetJson').mockResolvedValue(response);
+      const markSpy = vi
+        .spyOn(giteaClient, 'patchGiteaNotificationThread')
+        .mockResolvedValue(undefined);
+      const view = getAccountAdapter(mockGiteaAccount);
+
+      const result = await view.followUrl<{ html_url: string }>(url);
+      await view.markThreadAsRead('gitea-1');
+
+      expect(result).toBe(response);
+      expect(getJsonSpy).toHaveBeenCalledWith(mockGiteaAccount, url);
+      expect(markSpy).toHaveBeenCalledWith(mockGiteaAccount, 'gitea-1', 'read');
+      expect(view.capabilities.markAsDone()).toBe(false);
+      expect(view.getNotificationsUrl()).toBe('https://gitea.example.com/notifications');
+    });
+
+    it('propagates a bound provider request failure', async () => {
+      const error = new Error('Gitea request failed');
+      vi.spyOn(giteaClient, 'giteaGetJson').mockRejectedValue(error);
+
+      await expect(
+        getAccountAdapter(mockGiteaAccount).followUrl(
+          'https://gitea.example.com/api/v1/user' as Link,
+        ),
+      ).rejects.toBe(error);
+    });
+
+    it('preserves generic response types on both operation contracts', () => {
+      expectTypeOf<ForgeAccountOperations['followUrl']>().toEqualTypeOf<
+        <T>(account: Account, url: Link) => Promise<T>
+      >();
+      expectTypeOf<ForgeAccountAdapter['followUrl']>().toEqualTypeOf<
+        <T>(url: Link) => Promise<T>
+      >();
+    });
+
+    it('throws for an unknown forge', () => {
+      const unknown = { ...mockGitHubCloudAccount, forge: 'mystery' as Forge } as Account;
+      expect(() => getAccountAdapter(unknown)).toThrow(/No forge adapter registered/);
     });
   });
 

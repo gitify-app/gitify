@@ -8,15 +8,33 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 catalog:
-  electron: '44.1.1'
+  electron: '44.3.0'
+  vite: npm:@voidzero-dev/vite-plus-core@0.3.1
+  vitest: 4.1.11
+  vite-plus: 0.3.1
+  '@vitest/browser-playwright': 4.1.11
+  '@vitest/coverage-v8': 4.1.11
 minimumReleaseAgeExclude:
   - electron-menubar
 overrides:
-  react-is: '19.2.8'
+  react-is: '19.3.0'
   # Force patched versions of transitive dev-tooling deps pulled in by
   # react-devtools (old electron/got/cross-spawn) so they don't trip security
   # scanners. None of these ship in the packaged app.
   cross-spawn: '7.0.6'
   got: '11.8.6'
   electron: 'catalog:'
+  vite@*: 'catalog:'
+  vitest@*: 'catalog:'
+# Temporary: electron-builder passes the .p12 import password to `security set-key-partition-list -k`,
+# which macOS 26.6+ rejects. Drop once electron-userland/electron-builder#10101 ships in a 26.x release.
+patchedDependencies:
+  app-builder-lib@26.15.3: patches/app-builder-lib@26.15.3.patch
 savePrefix: ''
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: '*'
+    vitest: '*'

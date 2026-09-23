@@ -10,7 +10,7 @@ import type {
 import { determineFailureType } from '../api/errors';
 import { getAccountUUID } from '../auth/utils';
 import { rendererLogError, toError } from '../core/logger';
-import { getAdapter } from '../forges/registry';
+import { getAccountAdapter, getAdapter } from '../forges/registry';
 import { filterBaseNotifications } from './filters/filter';
 import { formatNotification } from './formatters';
 import { getFlattenedNotificationsByRepo } from './group';
@@ -42,7 +42,7 @@ function getNotifications(accounts: Account[]) {
   return accounts.map((account) => {
     return {
       account,
-      notifications: getAdapter(account).listNotifications(account),
+      notifications: getAccountAdapter(account).listNotifications(),
     };
   });
 }

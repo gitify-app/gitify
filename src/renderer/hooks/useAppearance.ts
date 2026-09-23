@@ -91,6 +91,7 @@ export function useAppearance(): void {
   }, [designLanguage]);
 
   useEffect(() => {
+    document.documentElement.classList.toggle('gitify-linux', window.gitify.platform.isLinux());
     document.documentElement.dataset.glassMaterial = window.gitify.platform.isMacOS()
       ? 'vibrancy'
       : 'backdrop-filter';

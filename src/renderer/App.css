@@ -4,6 +4,9 @@
 /** GitHub Primer Design System */
 @import '@primer/css/dist/primer.css';
 
+/** GitHub Primer Primitives - motion tokens (required by Primer React's Spinner & Skeleton animations) */
+@import '@primer/primitives/dist/css/base/motion/motion.css';
+
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
 
@@ -389,6 +392,16 @@
    * Only the wrapper paints. */
   .gitify-translucent [data-color-mode] [data-component='Select'] {
     background-color: transparent;
+  }
+
+  /* Native popups need an opaque surface; transparent options can render white
+   * behind the inherited dark-theme text on Linux. */
+  .gitify-linux.gitify-translucent
+    [data-color-mode]
+    [data-component='Select']
+    :where(option, optgroup) {
+    background-color: var(--bgColor-default);
+    color: var(--fgColor-default);
   }
 
   /* Checkboxes and radios trade the stark opaque white face for a glass one;
