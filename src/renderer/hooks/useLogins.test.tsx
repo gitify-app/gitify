@@ -4,7 +4,11 @@ import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { setNotificationsOverrides } from '../__helpers__/hook-mocks';
-import { mockBitbucketAccount, mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+import {
+  mockBitbucketAccount,
+  mockGitHubAppAccount,
+  mockGitHubCloudAccount,
+} from '../__mocks__/account-mocks';
 
 import { Constants } from '../constants';
 
@@ -87,7 +91,28 @@ describe('renderer/hooks/useLogins.ts', () => {
       );
     });
 
-    expect(createAccountSpy).toHaveBeenCalledWith('GitHub App', 'token', 'github.com', 'github');
+    expect(createAccountSpy).toHaveBeenCalledWith(
+      'Gitify OAuth App',
+      'token',
+      'github.com',
+      'github',
+    );
+  });
+
+  it('migrates a legacy GitHub App device-flow account after re-authentication', async () => {
+    useAccountsStore.setState({ accounts: [mockGitHubAppAccount] });
+    const { result } = renderLoginsHook();
+
+    await act(async () => {
+      await result.current.loginWithDeviceFlowComplete(
+        'github',
+        'token' as Token,
+        Constants.GITHUB_HOSTNAME,
+      );
+    });
+
+    expect(removeAccountNotificationsMock).toHaveBeenCalledWith(mockGitHubAppAccount);
+    expect(removeAccountSpy).toHaveBeenCalledWith(mockGitHubAppAccount);
   });
 
   it('loginWithOAuthApp delegates to the forge adapter', async () => {

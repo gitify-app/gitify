@@ -25,6 +25,14 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
+  it('explains that fine-grained tokens are unsupported', () => {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
+
+    expect(
+      screen.getByText(/Fine-grained personal access tokens are not supported/),
+    ).toBeInTheDocument();
+  });
+
   it('let us go back', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
