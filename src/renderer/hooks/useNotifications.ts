@@ -183,6 +183,9 @@ export const useNotifications = ({
 
     placeholderData: keepPreviousData,
 
+    // Deep-walks every cached notification per write; dominates cost on large inboxes.
+    structuralSharing: false,
+
     // Fresh for at least one poll cycle at the fastest possible interval, so
     // data isn't treated as stale before a refetch could realistically have
     // occurred. Uses the static floor rather than the live interval because
