@@ -10,10 +10,10 @@ allowBuilds:
 catalog:
   electron: '44.3.0'
   vite: npm:@voidzero-dev/vite-plus-core@0.3.1
-  vitest: 4.1.11
+  vitest: 5.0.0
   vite-plus: 0.3.1
-  '@vitest/browser-playwright': 4.1.11
-  '@vitest/coverage-v8': 4.1.11
+  '@vitest/browser-playwright': 5.0.0
+  '@vitest/coverage-v8': 5.0.0
 minimumReleaseAgeExclude:
   - electron-menubar
 overrides:
