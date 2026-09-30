@@ -81,7 +81,7 @@
     "electron-updater": "6.8.9",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-router-dom": "7.18.3"
+    "react-router-dom": "7.18.4"
   },
   "devDependencies": {
     "@discordapp/twemoji": "16.0.1",
