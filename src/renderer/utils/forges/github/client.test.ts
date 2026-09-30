@@ -423,6 +423,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query.includes('subIssuesSummary')).toBe(subIssues);
       expect(query.includes('parent')).toBe(subIssues);
       expect(query.includes('issueFieldValues')).toBe(issueFields);
+      expect(query.includes('$firstIssueFieldValues')).toBe(issueFields);
       expect(query).not.toContain('@gated');
     },
   );
@@ -575,6 +576,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query).not.toContain('stackEntry');
       expect(query).not.toContain('isAnswered');
       expect(query).not.toContain('issueFieldValues');
+      expect(query).not.toContain('$firstIssueFieldValues');
       expect(query).not.toContain('parent');
       expect(query).not.toContain('subIssuesSummary');
       expect(query).not.toContain('@gated');

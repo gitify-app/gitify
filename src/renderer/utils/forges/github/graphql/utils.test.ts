@@ -169,10 +169,13 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       const result = stripGatedSelections(FetchIssueByNumberDocument.toString(), {
         ...allCapabilities,
         subIssues: false,
+        issueFields: false,
       });
 
       expect(result).not.toContain('parent');
       expect(result).not.toContain('subIssuesSummary');
+      expect(result).not.toContain('issueFieldValues');
+      expect(result).not.toContain('$firstIssueFieldValues');
       expect(result).not.toContain('@gated');
       expect(result).toContain('query FetchIssueByNumber');
       expect(result).toContain('IssueDetails');
@@ -206,6 +209,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       expect(result).not.toContain('parent');
       expect(result).not.toContain('subIssuesSummary');
       expect(result).not.toContain('issueFieldValues');
+      expect(result).not.toContain('$firstIssueFieldValues');
       expect(result).not.toContain('@gated');
       expect(result).toContain('query FetchMergedDetailsTemplate');
       expect(result).toContain('PullRequestDetails');
