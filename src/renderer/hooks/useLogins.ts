@@ -121,16 +121,20 @@ export const useLogins = (): LoginsState => {
 
       await cliAuth.resolveToken(hostname);
 
-      const existingAccount = accounts.find(
-        (a) => a.hostname === hostname && a.method === cliAuth.authMethod,
-      );
-      if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
+      const existingAccounts = useAccountsStore
+        .getState()
+        .accounts.filter(
+          (a) => a.forge === forge && a.hostname === hostname && a.method === cliAuth.authMethod,
+        );
+      await createAccountInStore(cliAuth.authMethod, '' as Token, hostname, forge);
+
+      for (const account of existingAccounts) {
+        await removeAccountNotifications(account);
       }
 
-      await createAccount(cliAuth.authMethod, '' as Token, hostname, forge);
+      await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
     },
-    [accounts, createAccount, removeAccountNotifications],
+    [createAccountInStore, queryClient, removeAccountNotifications],
   );
 
   /**

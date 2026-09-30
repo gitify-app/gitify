@@ -1,10 +1,12 @@
 import { Octokit } from '@octokit/core';
 import { paginateRest } from '@octokit/plugin-paginate-rest';
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
+import { request as requestGitHub } from '@octokit/request';
+import { RequestError } from '@octokit/request-error';
 
 import { APPLICATION } from '../../../../shared/constants';
 
-import type { Account, Hostname } from '../../../types';
+import type { Account, Token } from '../../../types';
 import type { APIClientType } from './types';
 
 import { getAccountUUID } from '../../auth/utils';
@@ -93,7 +95,7 @@ export async function createOctokitClientUncached(
   });
 
   if (isCliAccount) {
-    authenticateFromCli(client, account.hostname);
+    authenticateFromCli(client, account);
   }
 
   return client;
@@ -105,18 +107,45 @@ export async function createOctokitClientUncached(
  * `gh auth refresh`) is picked up on the next request instead of stranding
  * this client until the account is refreshed.
  */
-function authenticateFromCli(client: OctokitClient, hostname: Hostname): void {
+function authenticateFromCli(client: OctokitClient, account: Account): void {
+  const { hostname } = account;
+  const expectedUserId = account.user?.id;
+  let verifiedToken: Token | undefined;
+
   client.hook.wrap('request', async (request, options) => {
-    const authorize = async () => ({
-      ...options,
-      headers: {
-        ...options.headers,
-        authorization: `token ${await resolveGitHubCliToken(hostname)}`,
-      },
-    });
+    const authenticatedRequest = async () => {
+      const token = await resolveGitHubCliToken(hostname);
+      const headers = { ...options.headers, authorization: `token ${token}` };
+
+      if (expectedUserId && token !== verifiedToken) {
+        const { hook: _hook, ...requestOptions } = options.request;
+        const userRequest = requestGitHub.endpoint('GET /user', {
+          baseUrl: getGitHubAPIBaseUrl(hostname, 'rest').toString().replace(/\/$/, ''),
+          headers: { ...headers, 'cache-control': 'no-cache' },
+          request: requestOptions,
+        });
+        const userResponse = await requestGitHub(userRequest);
+        if (String(userResponse.data.id) !== expectedUserId) {
+          throw new RequestError(
+            'GitHub CLI is signed in as a different user. Sign in again.',
+            401,
+            {
+              request: userRequest,
+            },
+          );
+        }
+        verifiedToken = token;
+
+        if (options.method === 'GET' && client.request.endpoint(options).url === userRequest.url) {
+          return userResponse;
+        }
+      }
+
+      return request({ ...options, headers });
+    };
 
     try {
-      return await request(await authorize());
+      return await authenticatedRequest();
     } catch (err) {
       if (!isUnauthorized(err)) {
         throw err;
@@ -124,7 +153,7 @@ function authenticateFromCli(client: OctokitClient, hostname: Hostname): void {
 
       forgetGitHubCliToken(hostname);
 
-      return await request(await authorize());
+      return await authenticatedRequest();
     }
   });
 }

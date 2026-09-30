@@ -150,7 +150,9 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
           const status = statuses.shift() ?? 200;
 
           return new Response(
-            status === 200 ? '{"login":"octocat"}' : '{"message":"Bad credentials"}',
+            status === 200
+              ? JSON.stringify({ id: mockGitHubCliAccount.user?.id, login: 'octocat' })
+              : '{"message":"Bad credentials"}',
             {
               status,
               headers: { 'content-type': 'application/json' },
@@ -167,6 +169,29 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
     afterEach(() => {
       vi.unstubAllGlobals();
     });
+
+    it.each(['rest', 'graphql'] as const)(
+      'blocks %s actions when the CLI switches users',
+      async (type) => {
+        vi.spyOn(cli, 'resolveGitHubCliToken').mockResolvedValue('gho_bob' as Token);
+        const fetchMock = vi.fn().mockResolvedValue(
+          new Response(JSON.stringify({ id: 'different-user', login: 'bob' }), {
+            status: 200,
+            headers: { 'content-type': 'application/json' },
+          }),
+        );
+        vi.stubGlobal('fetch', fetchMock);
+        const octokit = await createOctokitClientUncached(mockGitHubCliAccount, type);
+
+        await expect(
+          octokit.request(type === 'rest' ? 'PATCH /notifications/threads/123' : 'POST /graphql'),
+        ).rejects.toThrow('GitHub CLI is signed in as a different user');
+
+        expect(fetchMock.mock.calls.every(([url]) => url === 'https://api.github.com/user')).toBe(
+          true,
+        );
+      },
+    );
 
     it('authenticates each request from the CLI rather than the stored token', async () => {
       const resolveSpy = vi
