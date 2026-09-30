@@ -12,6 +12,7 @@ import type { Account, Forge, Hostname, Link, Token } from '../types';
 import type { GetAuthenticatedUserResponse } from '../utils/forges/github/types';
 
 import { getRecommendedScopeNames } from '../utils/auth/scopes';
+import { getAccountUUID } from '../utils/auth/utils';
 import * as logger from '../utils/core/logger';
 import * as apiClient from '../utils/forges/github/client';
 import { getAdapter } from '../utils/forges/registry';
@@ -61,6 +62,98 @@ describe('renderer/stores/useAccountsStore.ts', () => {
         ).toEqual([]);
       },
     );
+
+    it.each(['gitea.example.com', 'http://git.internal:3000', 'gitea.example.com:3000'])(
+      'retains the Gitea account at %s on reload',
+      (hostname) => {
+        const account = { ...mockGiteaAccount, hostname: hostname as Hostname };
+        expect(sanitizeAccounts([account])).toEqual([account]);
+      },
+    );
+
+    it.each<Forge>(['github', 'gitlab', 'bitbucket'])(
+      'rejects HTTP origins for persisted %s accounts',
+      (forge) => {
+        expect(
+          sanitizeAccounts([
+            { ...mockGitHubCloudAccount, forge, hostname: 'http://git.internal:3000' as Hostname },
+          ]),
+        ).toEqual([]);
+      },
+    );
+
+    it.each(['http://git.internal/path', 'http://user:pass@git.internal', 'javascript:alert(1)'])(
+      'drops invalid Gitea origin %s',
+      (hostname) => {
+        expect(sanitizeAccounts([{ ...mockGiteaAccount, hostname: hostname as Hostname }])).toEqual(
+          [],
+        );
+      },
+    );
+  });
+
+  it.each([
+    ['http://git.internal:3000', 'http://git.internal:3000/'],
+    ['Gitea.Example.com', 'https://gitea.example.com:443/'],
+  ])(
+    'replaces the token for equivalent origins %s and %s without changing the account UUID',
+    async (hostname, alias) => {
+      vi.mocked(fetch).mockImplementation(
+        async () => new Response(JSON.stringify({ id: 7, login: 'lan-user' })),
+      );
+      vi.mocked(window.gitify.encryptValue)
+        .mockResolvedValueOnce('first-encrypted')
+        .mockResolvedValueOnce('replacement-encrypted');
+      await useAccountsStore
+        .getState()
+        .createAccount(
+          'Personal Access Token',
+          'a'.repeat(40) as Token,
+          hostname as Hostname,
+          'gitea',
+        );
+      const originalUUID = getAccountUUID(useAccountsStore.getState().accounts[0]);
+      await useAccountsStore
+        .getState()
+        .createAccount(
+          'Personal Access Token',
+          'b'.repeat(40) as Token,
+          alias as Hostname,
+          'gitea',
+        );
+      const accounts = useAccountsStore.getState().accounts;
+      expect(accounts).toHaveLength(1);
+      expect(accounts[0].hostname).toBe(hostname);
+      expect(accounts[0].token).toBe('replacement-encrypted');
+      expect(getAccountUUID(accounts[0])).toBe(originalUUID);
+    },
+  );
+
+  it.each([
+    ['https://git.internal:3000', 7],
+    ['http://git.internal:3001', 7],
+    ['http://git.internal:3000', 8],
+  ])('keeps a separate Gitea account for %s with user %s', async (hostname, userId) => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(new Response(JSON.stringify({ id: 7, login: 'first-user' })))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ id: userId, login: 'second-user' })));
+    await useAccountsStore
+      .getState()
+      .createAccount(
+        'Personal Access Token',
+        'a'.repeat(40) as Token,
+        'http://git.internal:3000' as Hostname,
+        'gitea',
+      );
+    await useAccountsStore
+      .getState()
+      .createAccount(
+        'Personal Access Token',
+        'b'.repeat(40) as Token,
+        hostname as Hostname,
+        'gitea',
+      );
+    expect(useAccountsStore.getState().accounts).toHaveLength(2);
   });
 
   describe('createAccount', () => {

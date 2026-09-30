@@ -1,11 +1,35 @@
-import { isValidHostname } from '../../auth/utils';
+import type { Hostname } from '../../../types';
 
-export function isValidGiteaHostname(hostname: string): boolean {
-  const match = /^([^:\s]+)(?::([0-9]{1,5}))?$/.exec(hostname);
-  if (!match || match[0] !== hostname || !isValidHostname(match[1])) {
-    return false;
+export function parseGiteaOrigin(hostname: Hostname): URL | null {
+  if (
+    typeof hostname !== 'string' ||
+    hostname.trim() !== hostname ||
+    !/^(?:https?:\/\/)?(?:[a-z0-9.-]+|\[[a-f0-9:.]+\])(?::[0-9]{1,5})?\/?$/i.test(hostname)
+  ) {
+    return null;
   }
 
-  const port = match[2];
-  return port === undefined || (Number(port) >= 1 && Number(port) <= 65535);
+  try {
+    const url = new URL(/^https?:\/\//i.test(hostname) ? hostname : `https://${hostname}`);
+    const validHost =
+      url.hostname.startsWith('[') ||
+      url.hostname
+        .split('.')
+        .every((label) => /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/i.test(label));
+    return validHost && url.port !== '0' ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+export function getGiteaOrigin(hostname: Hostname): string {
+  const url = parseGiteaOrigin(hostname);
+  if (!url) {
+    throw new Error('Refusing to build a Gitea URL for invalid hostname.');
+  }
+  return url.origin;
+}
+
+export function isValidGiteaHostname(hostname: Hostname): boolean {
+  return parseGiteaOrigin(hostname) !== null;
 }

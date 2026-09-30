@@ -6,7 +6,7 @@ export const GiteaLoginWithPersonalAccessTokenRoute: FC = () => (
   <LoginWithPersonalAccessTokenForm
     docsTooltip="Gitea API documentation"
     forge="gitea"
-    hostnameCaption="Your Gitea instance hostname (for example gitea.example.com)"
+    hostnameCaption="Your instance hostname or origin, e.g. gitea.example.com or http://git.internal:3000. Defaults to HTTPS."
     hostnamePlaceholder="gitea.example.com"
     title="Login to Gitea with Personal Access Token"
     tokenPlaceholder="Your Gitea personal access token"

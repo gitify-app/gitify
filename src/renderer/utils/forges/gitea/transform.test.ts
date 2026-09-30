@@ -66,4 +66,19 @@ describe('renderer/utils/forges/gitea/transform.ts', () => {
     expect(n.subject.title).toBe('');
     expect(n.subject.type).toBe('Issue');
   });
+  it('uses the HTTP origin when a notification has no repository', () => {
+    const account = { ...giteaAccount, hostname: 'http://git.internal:3000' as Hostname };
+    const [notification] = transformGiteaNotifications(
+      [
+        {
+          id: 7,
+          unread: true,
+          updated_at: '2024-01-15T12:00:00Z',
+          url: 'http://git.internal:3000/api/v1/notifications/threads/7',
+        },
+      ],
+      account,
+    );
+    expect(notification.repository.htmlUrl).toBe('http://git.internal:3000');
+  });
 });

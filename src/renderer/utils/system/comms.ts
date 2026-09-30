@@ -11,7 +11,7 @@ import { type Link, OpenPreference } from '../../types';
 /**
  * Open a URL in the user's default browser.
  *
- * Only opens `https://` URLs. The `openLinks` setting controls whether
+ * Only opens `http://` and `https://` URLs. The `openLinks` setting controls whether
  * the link opens in the foreground or background.
  *
  * @param url - The URL to open.
@@ -19,7 +19,7 @@ import { type Link, OpenPreference } from '../../types';
 export function openExternalLink(url: Link): void {
   const openPreference = useSettingsStore.getState().openLinks;
 
-  if (url.toLowerCase().startsWith('https://')) {
+  if (/^https?:\/\//i.test(url)) {
     window.gitify.openExternalLink(url, openPreference === OpenPreference.FOREGROUND);
   }
 }

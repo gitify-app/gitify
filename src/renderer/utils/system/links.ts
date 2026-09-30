@@ -7,11 +7,10 @@ import type {
   GitifyNotification,
   GitifyNotificationUser,
   GitifyRepository,
-  Hostname,
   Link,
 } from '../../types';
 
-import { getAccountAdapter } from '../forges/registry';
+import { getAccountAdapter, getAdapter } from '../forges/registry';
 import { generateNotificationWebUrl } from '../notifications/url';
 import { openExternalLink } from './comms';
 
@@ -34,7 +33,7 @@ export function openHostPulls(account: Account) {
 }
 
 export function openAccountProfile(account: Account) {
-  const url = new URL(`https://${account.hostname}`);
+  const url = new URL(getAccountOrigin(account));
   url.pathname = account.user!.login;
   openExternalLink(url.toString() as Link);
 }
@@ -43,8 +42,12 @@ export function openUserProfile(user: GitifyNotificationUser) {
   openExternalLink(user.htmlUrl);
 }
 
-export function openHost(hostname: Hostname) {
-  openExternalLink(`https://${hostname}` as Link);
+function getAccountOrigin(account: Account): string {
+  return getAdapter(account).getOrigin?.(account.hostname) ?? `https://${account.hostname}`;
+}
+
+export function openHost(account: Account) {
+  openExternalLink(getAccountOrigin(account) as Link);
 }
 
 export function openAccountSettings(account: Account) {

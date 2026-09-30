@@ -257,7 +257,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
             <Stack align="center" direction="horizontal" gap="condensed">
               <Button
                 data-testid="login-create-token"
-                disabled={!formData.hostname}
+                disabled={!adapter.validateHostname(formData.hostname)}
                 leadingVisual={KeyIcon}
                 onClick={() =>
                   openExternalLink(adapter.getPersonalAccessTokenSettingsUrl(formData.hostname))
