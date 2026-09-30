@@ -1,0 +1,30 @@
+src/renderer/utils/forges/github/request.ts
+  s_8b76bbafb20ff7::t_77a3af945950e8 6,11-12,14-22,42-45,76
+src/renderer/components/metrics/ParentPill.test.tsx
+  s_8b76bbafb20ff7::t_a2e845615bdee3 2,31-33,53-70
+  s_8b76bbafb20ff7::t_74bb29405a28bd 71
+src/renderer/utils/forges/github/client.test.ts
+  s_8b76bbafb20ff7::t_db5bf2ff253c9c 367-368,376-378,382,384,394-399,402-429,553-554,578-579
+src/renderer/utils/forges/github/request.test.ts
+  s_8b76bbafb20ff7::t_77a3af945950e8 1-4,86-118
+src/renderer/components/metrics/__snapshots__/ParentPill.test.tsx.snap
+  s_8b76bbafb20ff7::t_ed67566f32aff3 7
+src/renderer/components/metrics/__snapshots__/SubIssueProgressPill.test.tsx.snap
+  s_8b76bbafb20ff7::t_f43df0f00ad63a 7,85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "87c256f39dcd7aad5374f881e242ab558c46bb71",
+  "prompts": {},
+  "sessions": {
+    "s_8b76bbafb20ff7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f0b4e2ef3ffe5UPB4Q1kBVYh9D",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
