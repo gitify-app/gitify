@@ -111,7 +111,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     expect(screen.queryByTestId('repository-toggle')).not.toBeInTheDocument();
   });
 
-  it('starts the group exit animation when marking the repository', async () => {
+  it('clears the group exit animation when the action settles', async () => {
     const onAnimateExit = vi.fn();
 
     renderWithProviders(<RepositoryHeader {...props} onAnimateExit={onAnimateExit} />, {
@@ -121,7 +121,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
 
     await userEvent.click(screen.getByTestId('repository-mark-as-read'));
 
-    expect(onAnimateExit.mock.calls).toEqual([[true]]);
+    expect(onAnimateExit.mock.calls).toEqual([[true], [false]]);
   });
 
   describe('partial bulk failure', () => {
@@ -133,10 +133,6 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
       const [, secondNotification] = mockGitHubCloudGitifyNotifications;
       const onAnimateExit = vi.fn();
 
-      // Simulate the mutation reconciliation that records a failure in the
-      // real (non-mocked) failure store, since `runGroupAction` reads
-      // directly from it rather than through the mocked `useNotifications`
-      // hook.
       const markNotificationsAsReadWithFailure = vi.fn().mockImplementation(async () => {
         const failureKey = getNotificationFailureKey(
           secondNotification.account,

@@ -1,10 +1,8 @@
-import { type FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { type FC, useCallback, useMemo, useState } from 'react';
 
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { LegendList } from '@legendapp/list/react';
 
 import { useAccountsStore, useSettingsStore } from '../../stores';
-
-import { Contents } from '../layout/Contents';
 
 import type { Account, AccountNotifications, GitifyError, GitifyNotification } from '../../types';
 
@@ -31,10 +29,11 @@ type ListItem =
       key: string;
       kind: 'notification';
       notification: GitifyNotification;
-      isRepositoryAnimatingExit: boolean;
+      isAnimatingExit: boolean;
     };
 
-const ESTIMATED_HEIGHT = { notification: 58, header: 36 };
+const getItemKey = (item: ListItem) => item.key;
+const getItemType = (item: ListItem) => item.kind;
 
 export interface NotificationListProps {
   accountNotifications: AccountNotifications[];
@@ -52,7 +51,9 @@ export const NotificationList: FC<NotificationListProps> = ({
   const groupBy = useSettingsStore((s) => s.groupBy);
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 
-  const [scrollElement, setScrollElement] = useState<HTMLDivElement | null>(null);
+  const [animatingNotifications, setAnimatingNotifications] = useState<ReadonlySet<string>>(
+    new Set(),
+  );
   const [collapsedAccounts, setCollapsedAccounts] = useState<ReadonlySet<string>>(new Set());
   const [collapsedRepositories, setCollapsedRepositories] = useState<ReadonlySet<string>>(
     new Set(),
@@ -109,29 +110,17 @@ export const NotificationList: FC<NotificationListProps> = ({
     [],
   );
 
-  const notificationKeys = useMemo(
-    () =>
-      new Set(
-        accountNotifications.flatMap(({ notifications }) =>
-          notifications.map(
-            (notification) => `${getAccountUUID(notification.account)}:${notification.id}`,
-          ),
-        ),
-      ),
-    [accountNotifications],
-  );
-
-  useEffect(() => {
-    setAnimatingRepositories((current) => {
-      const next = new Map(
-        [...current].filter(([, actedNotifications]) =>
-          [...actedNotifications].some((notificationKey) => notificationKeys.has(notificationKey)),
-        ),
-      );
-
-      return next.size === current.size ? current : next;
+  const setNotificationAnimatingExit = useCallback((key: string, animate: boolean) => {
+    setAnimatingNotifications((current) => {
+      const next = new Set(current);
+      if (animate) {
+        next.add(key);
+      } else {
+        next.delete(key);
+      }
+      return next;
     });
-  }, [notificationKeys]);
+  }, []);
 
   const items = useMemo(() => {
     const list: ListItem[] = [];
@@ -169,10 +158,10 @@ export const NotificationList: FC<NotificationListProps> = ({
       if (groupBy !== 'REPOSITORY') {
         for (const notification of sorted) {
           list.push({
-            key: `notification-${notification.id}`,
+            key: `notification-${accountUUID}:${notification.id}`,
             kind: 'notification',
             notification,
-            isRepositoryAnimatingExit: false,
+            isAnimatingExit: animatingNotifications.has(`${accountUUID}:${notification.id}`),
           });
         }
 
@@ -196,10 +185,13 @@ export const NotificationList: FC<NotificationListProps> = ({
 
         for (const notification of repoNotifications) {
           list.push({
-            key: `notification-${notification.id}`,
+            key: `notification-${accountUUID}:${notification.id}`,
             kind: 'notification',
             notification,
-            isRepositoryAnimatingExit: animatingRepositories.has(repoKey),
+            isAnimatingExit:
+              animatingNotifications.has(`${accountUUID}:${notification.id}`) ||
+              (animatingRepositories.get(repoKey)?.has(`${accountUUID}:${notification.id}`) ??
+                false),
           });
         }
       }
@@ -208,6 +200,7 @@ export const NotificationList: FC<NotificationListProps> = ({
     return list;
   }, [
     accountNotifications,
+    animatingNotifications,
     animatingRepositories,
     collapsedAccounts,
     collapsedRepositories,
@@ -216,69 +209,59 @@ export const NotificationList: FC<NotificationListProps> = ({
     showAccountHeader,
   ]);
 
-  // oxlint-disable-next-line react/incompatible-library -- Its values are only read in this component's own JSX, never passed to a memoized child
-  const virtualizer = useVirtualizer({
-    count: items.length,
-    getScrollElement: () => scrollElement,
-    estimateSize: (index) =>
-      items[index].kind === 'notification'
-        ? ESTIMATED_HEIGHT.notification
-        : ESTIMATED_HEIGHT.header,
-    getItemKey: (index) => items[index].key,
-    overscan: 8,
-  });
-
   return (
-    <Contents paddingHorizontal={false} ref={setScrollElement}>
-      <div className="relative w-full" style={{ height: `${virtualizer.getTotalSize()}px` }}>
-        {virtualizer.getVirtualItems().map((virtualItem) => {
-          const item = items[virtualItem.index];
+    <div className="grow min-h-0 overflow-hidden">
+      <LegendList
+        className="overflow-y-auto"
+        data={items}
+        estimatedItemSize={58}
+        getItemType={getItemType}
+        keyExtractor={getItemKey}
+        renderItem={({ item }) => (
+          <>
+            {item.kind === 'account' && (
+              <AccountHeader
+                account={item.account}
+                error={item.error}
+                isCollapsed={collapsedAccounts.has(getAccountUUID(item.account))}
+                notificationCount={item.count}
+                onToggle={() => toggleCollapsedAccount(getAccountUUID(item.account))}
+              />
+            )}
 
-          return (
-            <div
-              className="absolute inset-x-0 top-0"
-              data-index={virtualItem.index}
-              key={virtualItem.key}
-              ref={virtualizer.measureElement}
-              style={{ transform: `translateY(${virtualItem.start}px)` }}
-            >
-              {item.kind === 'account' && (
-                <AccountHeader
-                  account={item.account}
-                  error={item.error}
-                  isCollapsed={collapsedAccounts.has(getAccountUUID(item.account))}
-                  notificationCount={item.count}
-                  onToggle={() => toggleCollapsedAccount(getAccountUUID(item.account))}
-                />
-              )}
+            {item.kind === 'error' && <Oops error={item.error} fullHeight={item.fullHeight} />}
 
-              {item.kind === 'error' && <Oops error={item.error} fullHeight={item.fullHeight} />}
+            {item.kind === 'all-read' && <AllRead fullHeight={false} />}
 
-              {item.kind === 'all-read' && <AllRead fullHeight={false} />}
+            {item.kind === 'repository' && (
+              <RepositoryHeader
+                isAnimatingExit={animatingRepositories.has(item.repoKey)}
+                isCollapsed={collapsedRepositories.has(item.repoKey)}
+                onAnimateExit={(animate) =>
+                  setRepositoryAnimatingExit(item.repoKey, item.notifications, animate)
+                }
+                onToggle={() => toggleCollapsedRepository(item.repoKey)}
+                repoName={item.repoName}
+                repoNotifications={item.notifications}
+              />
+            )}
 
-              {item.kind === 'repository' && (
-                <RepositoryHeader
-                  isAnimatingExit={animatingRepositories.has(item.repoKey)}
-                  isCollapsed={collapsedRepositories.has(item.repoKey)}
-                  onAnimateExit={(animate) =>
-                    setRepositoryAnimatingExit(item.repoKey, item.notifications, animate)
-                  }
-                  onToggle={() => toggleCollapsedRepository(item.repoKey)}
-                  repoName={item.repoName}
-                  repoNotifications={item.notifications}
-                />
-              )}
-
-              {item.kind === 'notification' && (
-                <NotificationRow
-                  isRepositoryAnimatingExit={item.isRepositoryAnimatingExit}
-                  notification={item.notification}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </Contents>
+            {item.kind === 'notification' && (
+              <NotificationRow
+                isAnimatingExit={item.isAnimatingExit}
+                onAnimateExit={(animate) =>
+                  setNotificationAnimatingExit(
+                    `${getAccountUUID(item.notification.account)}:${item.notification.id}`,
+                    animate,
+                  )
+                }
+                notification={item.notification}
+              />
+            )}
+          </>
+        )}
+        style={{ height: '100%', overflowX: 'hidden' }}
+      />
+    </div>
   );
 };

@@ -6,7 +6,6 @@ import { Button, Stack } from '@primer/react';
 import { cn } from 'cn';
 
 import { useNotifications } from '../../hooks/useNotifications';
-import { getNotificationFailureKey, useNotificationActionFailuresStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -40,20 +39,11 @@ export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
-  // Successful actions clear when rows disappear; failures must clear here.
   const runGroupAction = async (action: () => Promise<boolean>) => {
     onAnimateExit(shouldAnimateExit);
-
-    const succeeded = await action();
-    const { failures } = useNotificationActionFailuresStore.getState();
-    const hasFailure =
-      succeeded === false ||
-      repoNotifications.some(
-        (notification) =>
-          failures[getNotificationFailureKey(notification.account, notification.id)],
-      );
-
-    if (hasFailure) {
+    try {
+      await action();
+    } finally {
       onAnimateExit(false);
     }
   };
