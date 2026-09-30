@@ -12,6 +12,7 @@ import type { Account, Link, RawGitifyNotification } from '../../../types';
 import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
+import { isValidHostname } from '../../auth/utils';
 import {
   extractHostVersion,
   getDeveloperSettingsURL,
@@ -102,6 +103,7 @@ export const githubAdapter: ForgeAdapter = {
 
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,
+  validateHostname: isValidHostname,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
   getAuthMethodIcon: githubAuthMethodIcon,

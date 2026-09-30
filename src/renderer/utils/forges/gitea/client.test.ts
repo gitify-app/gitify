@@ -33,6 +33,41 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       const url = getGiteaApiBaseUrl('gitea.example.com' as Hostname);
       expect(url.toString()).toBe('https://gitea.example.com/api/v1/');
     });
+
+    it.each([
+      ['gitea.example.com:3000', 'https://gitea.example.com:3000/api/v1/'],
+      ['gitea.example.com:443', 'https://gitea.example.com/api/v1/'],
+      ['GITEA.example.com:03000', 'https://gitea.example.com:3000/api/v1/'],
+      ['gitea.example.com:1', 'https://gitea.example.com:1/api/v1/'],
+      ['gitea.example.com:65535', 'https://gitea.example.com:65535/api/v1/'],
+    ])('builds the HTTPS API base for %s', (hostname, expected) => {
+      expect(getGiteaApiBaseUrl(hostname as Hostname).toString()).toBe(expected);
+    });
+
+    it.each([
+      'gitea.example.com:',
+      'gitea.example.com:0',
+      'gitea.example.com:65536',
+      'gitea.example.com:-1',
+      'gitea.example.com:3.5',
+      'gitea.example.com:https',
+      'gitea.example.com:3000:4000',
+      'https://gitea.example.com:3000',
+      'http://gitea.example.com:3000',
+      'user@gitea.example.com:3000',
+      'gitea.example.com:3000/path',
+      'gitea.example.com:3000?query',
+      'gitea.example.com:3000#fragment',
+      'gitea.example.com:3000\n',
+      'gitea.example.com\n',
+      ' gitea.example.com:3000',
+      'gitea.example.com: 3000',
+      'localhost:3000',
+      '127.0.0.1:3000',
+      '[::1]:3000',
+    ])('rejects invalid hostname %j', (hostname) => {
+      expect(() => getGiteaApiBaseUrl(hostname as Hostname)).toThrow(/invalid hostname/);
+    });
   });
 
   describe('listGiteaNotifications', () => {
@@ -98,6 +133,19 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
   });
 
   describe('fetchGiteaAuthenticatedUser', () => {
+    it('sends the token to the configured HTTPS port', async () => {
+      fetchMock().mockResolvedValueOnce(jsonResponse({ id: 7, login: 'octocat' }));
+
+      await fetchGiteaAuthenticatedUser({
+        ...mockGiteaAccount,
+        hostname: 'gitea.example.com:3000' as Hostname,
+      });
+
+      expect(fetchMock()).toHaveBeenCalledWith('https://gitea.example.com:3000/api/v1/user', {
+        headers: { Accept: 'application/json', Authorization: 'token decrypted' },
+      });
+    });
+
     it('returns the user payload', async () => {
       fetchMock().mockResolvedValueOnce(jsonResponse({ id: 7, login: 'octocat' }));
 
@@ -121,6 +169,33 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
   });
 
   describe('giteaGetJson', () => {
+    it.each([
+      ['gitea.example.com:3000', 'https://gitea.example.com:3000/api/v1/x'],
+      ['gitea.example.com:443', 'https://gitea.example.com/api/v1/x'],
+    ])('follows URLs on the configured origin for %s', async (hostname, url) => {
+      fetchMock().mockResolvedValueOnce(jsonResponse({ id: 1 }));
+
+      await expect(
+        giteaGetJson({ ...mockGiteaAccount, hostname: hostname as Hostname }, url),
+      ).resolves.toEqual({ id: 1 });
+      expect(fetchMock()).toHaveBeenCalledWith(url, {
+        headers: { Accept: 'application/json', Authorization: 'token decrypted' },
+      });
+    });
+
+    it.each([
+      ['gitea.example.com:3000', 'https://gitea.example.com:4000/api/v1/x'],
+      ['gitea.example.com:3000', 'https://gitea.example.com/api/v1/x'],
+      ['gitea.example.com', 'https://gitea.example.com:3000/api/v1/x'],
+      ['gitea.example.com:3000', 'http://gitea.example.com:3000/api/v1/x'],
+    ])('refuses to send the token from %s to %s', async (hostname, url) => {
+      await expect(
+        giteaGetJson({ ...mockGiteaAccount, hostname: hostname as Hostname }, url),
+      ).rejects.toThrow(/cross-origin Gitea URL/);
+      expect(fetchMock()).not.toHaveBeenCalled();
+      expect(comms.decryptValue).not.toHaveBeenCalled();
+    });
+
     it('GETs the supplied URL with auth headers and parses JSON', async () => {
       fetchMock().mockResolvedValueOnce(jsonResponse({ html_url: 'x' }));
 

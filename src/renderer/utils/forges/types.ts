@@ -146,6 +146,7 @@ export interface ForgeAdapter {
 
   /** Default hostname pre-filled in the PAT login form. */
   defaultHostname?: Hostname;
+  validateHostname(hostname: Hostname): boolean;
   /** Whether the supplied token matches the forge's PAT format. */
   validateToken(token: Token): boolean;
   /** URL to manage/create a personal access token on the forge. */
