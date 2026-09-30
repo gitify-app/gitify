@@ -1,4 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 
@@ -27,6 +28,9 @@ describe('renderer/components/metrics/ParentPill.tsx', () => {
     const tree = renderWithProviders(<ParentPill {...props} />);
 
     expect(screen.getByText('#123 Epic Title')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Parent issue: #123 Epic Title' }),
+    ).toBeInTheDocument();
     expect(tree.container).toMatchSnapshot();
   });
 
@@ -45,5 +49,24 @@ describe('renderer/components/metrics/ParentPill.tsx', () => {
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith(mockParent.url);
     expect(onParentClick).not.toHaveBeenCalled();
+  });
+
+  it('opens the parent with the keyboard without activating the notification row', async () => {
+    const user = userEvent.setup();
+    const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
+    const onRowClick = vi.fn();
+
+    renderWithProviders(
+      <div onClick={onRowClick}>
+        <ParentPill parent={mockParent} />
+      </div>,
+    );
+
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Parent issue: #123 Epic Title' })).toHaveFocus();
+    await user.keyboard('{Enter}');
+
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(mockParent.url);
+    expect(onRowClick).not.toHaveBeenCalled();
   });
 });

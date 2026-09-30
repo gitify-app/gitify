@@ -4,6 +4,7 @@ exports[`renderer/components/metrics/ParentPill.tsx > renders parent pill with i
 <div>
   <button
     aria-describedby="_r_0_"
+    aria-label="Parent issue: #123 Epic Title"
     type="button"
   >
     <span
@@ -11,7 +12,6 @@ exports[`renderer/components/metrics/ParentPill.tsx > renders parent pill with i
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"

@@ -2,7 +2,7 @@ import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
-import { IconColor } from '../../types';
+import { IconColor, type Link } from '../../types';
 
 import { MetricGroup, type MetricGroupProps } from './MetricGroup';
 
@@ -60,7 +60,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
           parentIssue: {
             number: 456,
             title: 'Parent Epic',
-            url: 'https://github.com/gitify-app/gitify/issues/456' as any,
+            url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
           },
         },
       },
@@ -93,6 +93,34 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     });
 
     expect(tree.getByText('2/5')).toBeInTheDocument();
+  });
+
+  it('keeps hierarchy and existing metrics together and hides them when pills are disabled', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        issueType: { name: 'Bug', color: IconColor.RED },
+        parentIssue: {
+          number: 456,
+          title: 'Parent Epic',
+          url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
+        },
+        subIssueProgress: { total: 5, completed: 2, percentCompleted: 40 },
+      },
+    };
+    const tree = renderWithProviders(<MetricGroup notification={notification} />, {
+      settings: { ...mockSettings, showPills: true },
+    });
+
+    expect(tree.getByText('Bug')).toBeInTheDocument();
+    expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
+    expect(tree.getByText('2/5')).toBeInTheDocument();
+
+    const hidden = renderWithProviders(<MetricGroup notification={notification} />, {
+      settings: { ...mockSettings, showPills: false },
+    });
+    expect(hidden.container).toBeEmptyDOMElement();
   });
 
   it('should render issue field pills immediately before label pills', async () => {

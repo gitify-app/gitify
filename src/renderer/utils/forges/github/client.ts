@@ -28,7 +28,7 @@ import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { stripGatedSelections } from './graphql/utils';
 import { createNotificationHandler } from './handlers';
 import { createOctokitClient, createOctokitClientUncached } from './octokit';
-import { performGraphQLRequest, performGraphQLRequestString } from './request';
+import { performGraphQLRequestString } from './request';
 import { getNumberFromUrl } from './utils';
 
 /**
@@ -230,7 +230,12 @@ export async function fetchIssueByNumber(
 ): Promise<FetchIssueByNumberQuery> {
   const number = getNumberFromUrl(notification.subject.url!);
 
-  return performGraphQLRequest(notification.account, FetchIssueByNumberDocument, {
+  const query = stripGatedSelections(
+    FetchIssueByNumberDocument.toString(),
+    getGitHubCapabilities(notification.account),
+  );
+
+  return performGraphQLRequestString<FetchIssueByNumberQuery>(notification.account, query, {
     owner: notification.repository.owner.login,
     name: notification.repository.name,
     number: number,

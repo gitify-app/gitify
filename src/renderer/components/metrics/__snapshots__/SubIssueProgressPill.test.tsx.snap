@@ -4,6 +4,7 @@ exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders complete
 <div>
   <button
     aria-describedby="_r_1_"
+    aria-label="Sub-issues: 5 of 5 completed (100%)"
     type="button"
   >
     <span
@@ -81,6 +82,7 @@ exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders in-progr
 <div>
   <button
     aria-describedby="_r_0_"
+    aria-label="Sub-issues: 2 of 5 completed (40%)"
     type="button"
   >
     <span

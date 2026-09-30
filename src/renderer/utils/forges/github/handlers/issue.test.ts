@@ -422,6 +422,20 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
       expect(result.parentIssue).toBeUndefined();
       expect(result.subIssueProgress).toBeUndefined();
     });
+
+    it('omits hierarchy when gated fields are absent from an older GHES response', async () => {
+      const mockIssue = mockIssueResponseNode({ state: 'OPEN' });
+      delete (mockIssue as Partial<typeof mockIssue>).parent;
+      delete (mockIssue as Partial<typeof mockIssue>).subIssuesSummary;
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: { issue: mockIssue },
+      } as FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+      expect(result.parentIssue).toBeUndefined();
+      expect(result.subIssueProgress).toBeUndefined();
+    });
   });
 
   describe('iconType', () => {

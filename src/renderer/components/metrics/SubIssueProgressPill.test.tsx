@@ -34,6 +34,9 @@ describe('renderer/components/metrics/SubIssueProgressPill.tsx', () => {
     const tree = renderWithProviders(<SubIssueProgressPill {...props} />);
 
     expect(screen.getByText('2/5')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Sub-issues: 2 of 5 completed (40%)' }),
+    ).toBeInTheDocument();
     expect(screen.getByTestId('sub-issue-progress-wheel')).toBeInTheDocument();
     expect(tree.container).toMatchSnapshot();
   });

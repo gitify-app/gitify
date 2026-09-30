@@ -69,15 +69,17 @@ export const SubIssueProgressPill: FC<SubIssueProgressPillProps> = ({ progress }
   const isCompleted = progress.completed === progress.total;
   const description = `Sub-issues: ${progress.completed} of ${progress.total} completed (${progress.percentCompleted}%)`;
 
-  const WheelIcon: FC<{ className?: string; size?: number }> = ({ className, size }) => (
-    <SubIssueProgressWheel className={className} percent={progress.percentCompleted} size={size} />
-  );
-
   return (
     <MetricPill
+      ariaLabel={description}
       color={isCompleted ? IconColor.PURPLE : IconColor.GRAY}
       contents={description}
-      icon={WheelIcon}
+      iconElement={
+        <SubIssueProgressWheel
+          className={isCompleted ? IconColor.PURPLE : IconColor.GRAY}
+          percent={progress.percentCompleted}
+        />
+      }
       metric={`${progress.completed}/${progress.total}`}
     />
   );

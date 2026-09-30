@@ -34,7 +34,6 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import {
-  FetchIssueByNumberDocument,
   type FetchDiscussionByNumberQuery,
   type FetchIssueByNumberQuery,
   type FetchPullRequestByNumberQuery,
@@ -365,8 +364,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
     expect(query).not.toContain('@gated');
   });
 
-  it('fetchIssueByNumber calls performGraphQLRequest with correct args', async () => {
-    const performGraphQLRequestSpy = vi.mocked(apiRequests.performGraphQLRequest);
+  it('fetchIssueByNumber sends a sanitized query with correct args', async () => {
+    const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
 
     const mockNotification = mockPartialGitifyNotification({
       title: 'Some issue',
@@ -374,13 +373,15 @@ describe('renderer/utils/forges/github/client.ts', () => {
       type: 'Issue',
     });
 
-    performGraphQLRequestSpy.mockResolvedValue({} as ExecutionResult<FetchIssueByNumberQuery>);
+    performGraphQLRequestStringSpy.mockResolvedValue(
+      {} as ExecutionResult<FetchIssueByNumberQuery>,
+    );
 
     await fetchIssueByNumber(mockNotification);
 
-    expect(performGraphQLRequestSpy).toHaveBeenCalledWith(
+    expect(performGraphQLRequestStringSpy).toHaveBeenCalledWith(
       mockNotification.account,
-      FetchIssueByNumberDocument,
+      expect.stringContaining('query FetchIssueByNumber'),
       {
         owner: mockNotification.repository.owner.login,
         name: mockNotification.repository.name,
@@ -390,7 +391,41 @@ describe('renderer/utils/forges/github/client.ts', () => {
         lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
       },
     );
+
+    const query = performGraphQLRequestStringSpy.mock.calls[0][1];
+    expect(query).toContain('parent');
+    expect(query).toContain('subIssuesSummary');
+    expect(query).toContain('issueFieldValues');
+    expect(query).not.toContain('@gated');
   });
+
+  it.each([
+    ['3.16.5', false, false],
+    ['3.17.0', true, false],
+    ['3.23.0', true, true],
+  ])(
+    'fetchIssueByNumber gates issue fields on GHES %s',
+    async (version, subIssues, issueFields) => {
+      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+      const mockNotification = mockPartialGitifyNotification({
+        title: 'Some issue',
+        url: 'https://github.gitify.io/api/v3/repos/gitify-app/gitify/issues/123' as Link,
+        type: 'Issue',
+      });
+      mockNotification.account = { ...mockGitHubEnterpriseServerAccount, version };
+
+      performGraphQLRequestStringSpy.mockResolvedValue(
+        {} as ExecutionResult<FetchIssueByNumberQuery>,
+      );
+      await fetchIssueByNumber(mockNotification);
+
+      const query = performGraphQLRequestStringSpy.mock.calls[0][1];
+      expect(query.includes('subIssuesSummary')).toBe(subIssues);
+      expect(query.includes('parent')).toBe(subIssues);
+      expect(query.includes('issueFieldValues')).toBe(issueFields);
+      expect(query).not.toContain('@gated');
+    },
+  );
 
   it('fetchPullByNumber calls performGraphQLRequestString with sanitized query', async () => {
     const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
@@ -515,6 +550,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query).toContain('stackEntry');
       expect(query).toContain('isAnswered');
       expect(query).toContain('issueFieldValues');
+      expect(query).toContain('parent');
+      expect(query).toContain('subIssuesSummary');
       expect(query).not.toContain('@gated');
     });
 
@@ -538,6 +575,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query).not.toContain('stackEntry');
       expect(query).not.toContain('isAnswered');
       expect(query).not.toContain('issueFieldValues');
+      expect(query).not.toContain('parent');
+      expect(query).not.toContain('subIssuesSummary');
       expect(query).not.toContain('@gated');
       expect(query).toContain('FetchMergedNotifications');
       expect(variables).not.toHaveProperty('includeStackEntry');

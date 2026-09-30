@@ -23,6 +23,7 @@ export const ParentPill: FC<ParentPillProps> = ({ parent }) => {
 
   return (
     <MetricPill
+      ariaLabel={`Parent issue: #${parent.number} ${parent.title}`}
       color={IconColor.GRAY}
       contents={`Parent issue: #${parent.number} ${parent.title}`}
       icon={IssueTrackedByIcon}

@@ -1,4 +1,7 @@
-import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../../__mocks__/account-mocks';
 
 import { FetchIssueByNumberDocument } from './graphql/generated/graphql';
 import type { OctokitClient } from './octokit';
@@ -78,6 +81,39 @@ describe('renderer/utils/forges/github/request.ts', () => {
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'graphql');
     expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {
       headers: GRAPHQL_FEATURES_HEADER,
+    });
+  });
+
+  it('preserves custom headers and feature flags', async () => {
+    mockOctokitInstance.graphql.mockResolvedValue({});
+
+    await performGraphQLRequestString(mockGitHubCloudAccount, 'query Test { viewer { login } }', {
+      headers: { 'X-Request-Id': 'test', 'GraphQL-Features': 'other_feature' },
+    });
+
+    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith('query Test { viewer { login } }', {
+      headers: {
+        'X-Request-Id': 'test',
+        'GraphQL-Features': 'other_feature,sub_issues,issue_fields',
+      },
+    });
+  });
+
+  it.each([
+    ['3.16.5', undefined],
+    ['3.17.0', 'sub_issues'],
+    ['3.23.0', 'sub_issues,issue_fields'],
+  ])('only sends supported feature flags for GHES %s', async (version, features) => {
+    mockOctokitInstance.graphql.mockResolvedValue({});
+
+    await performGraphQLRequestString(
+      { ...mockGitHubEnterpriseServerAccount, version },
+      'query Test { viewer { login } }',
+      {},
+    );
+
+    expect(mockOctokitInstance.graphql).toHaveBeenCalledWith('query Test { viewer { login } }', {
+      headers: features ? { 'GraphQL-Features': features } : {},
     });
   });
 });
