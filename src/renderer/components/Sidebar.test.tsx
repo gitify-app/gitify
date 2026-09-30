@@ -208,24 +208,37 @@ describe('renderer/components/Sidebar.tsx', () => {
       expect(fetchNotificationsMock).not.toHaveBeenCalled();
     });
 
-    it('animates the refresh icon while a background fetch is in flight, regardless of settled status', () => {
+    it('shows a loading spinner on the refresh icon while the initial fetch is loading', () => {
       renderWithProviders(<Sidebar />, {
+        accounts: [mockGitHubCloudAccount],
+        status: 'loading',
+      });
+
+      expect(screen.getByTestId('sidebar-refresh')).toHaveAttribute('data-loading', 'true');
+      expect(screen.getByTestId('sidebar-refresh')).toBeDisabled();
+    });
+
+    it('shows a loading spinner on the refresh icon while a background fetch is in flight, regardless of settled status', () => {
+      const tree = renderWithProviders(<Sidebar />, {
         accounts: [mockGitHubCloudAccount],
         status: 'error',
         isFetching: true,
       });
 
-      expect(screen.getByTestId('sidebar-refresh')).toHaveClass('animate-spin');
+      expect(screen.getByTestId('sidebar-refresh')).toHaveAttribute('data-loading', 'true');
+      expect(tree.container.querySelector('[data-component="Spinner"]')).toBeInTheDocument();
+      expect(screen.getByTestId('sidebar-refresh')).toBeDisabled();
     });
 
-    it('does not animate the refresh icon when settled and no fetch is in flight', () => {
+    it('does not show a loading spinner on the refresh icon when settled and no fetch is in flight', () => {
       renderWithProviders(<Sidebar />, {
         accounts: [mockGitHubCloudAccount],
         status: 'error',
         isFetching: false,
       });
 
-      expect(screen.getByTestId('sidebar-refresh')).not.toHaveClass('animate-spin');
+      expect(screen.getByTestId('sidebar-refresh')).toHaveAttribute('data-loading', 'false');
+      expect(screen.getByTestId('sidebar-refresh')).toBeEnabled();
     });
   });
 

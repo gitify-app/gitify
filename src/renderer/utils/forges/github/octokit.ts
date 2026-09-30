@@ -1,14 +1,17 @@
 import { Octokit } from '@octokit/core';
 import { paginateRest } from '@octokit/plugin-paginate-rest';
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
+import { request as requestGitHub } from '@octokit/request';
+import { RequestError } from '@octokit/request-error';
 
 import { APPLICATION } from '../../../../shared/constants';
 
-import type { Account } from '../../../types';
+import type { Account, Token } from '../../../types';
 import type { APIClientType } from './types';
 
 import { getAccountUUID } from '../../auth/utils';
 import { decryptValue, getAppVersion } from '../../system/comms';
+import { forgetGitHubCliToken, resolveGitHubCliToken } from './cli';
 import { getGitHubAPIBaseUrl } from './utils';
 
 // Create the Octokit type with plugins
@@ -75,21 +78,88 @@ export async function createOctokitClientUncached(
   account: Account,
   type: APIClientType,
 ): Promise<OctokitClient> {
-  const { token: decryptedToken } = await decryptValue(account.token);
+  const isCliAccount = account.method === 'GitHub CLI';
 
   const version = await getAppVersion();
   const userAgent = `${APPLICATION.NAME}/${version}`;
 
   const baseUrl = getGitHubAPIBaseUrl(account.hostname, type).toString().replace(/\/$/, '');
 
-  return new OctokitWithPlugins({
-    auth: decryptedToken,
+  const client = new OctokitWithPlugins({
+    auth: isCliAccount ? undefined : (await decryptValue(account.token)).token,
     baseUrl: baseUrl,
     userAgent: userAgent,
     retry: {
       retries: 1,
     },
   });
+
+  if (isCliAccount) {
+    authenticateFromCli(client, account);
+  }
+
+  return client;
+}
+
+/**
+ * Authenticate every request from the GitHub CLI rather than from a token
+ * baked in at construction, so a token the CLI rotates (`gh auth login`,
+ * `gh auth refresh`) is picked up on the next request instead of stranding
+ * this client until the account is refreshed.
+ */
+function authenticateFromCli(client: OctokitClient, account: Account): void {
+  const { hostname } = account;
+  const expectedUserId = account.user?.id;
+  let verifiedToken: Token | undefined;
+
+  client.hook.wrap('request', async (request, options) => {
+    const authenticatedRequest = async () => {
+      const token = await resolveGitHubCliToken(hostname);
+      const headers = { ...options.headers, authorization: `token ${token}` };
+
+      if (expectedUserId && token !== verifiedToken) {
+        const { hook: _hook, ...requestOptions } = options.request;
+        const userRequest = requestGitHub.endpoint('GET /user', {
+          baseUrl: getGitHubAPIBaseUrl(hostname, 'rest').toString().replace(/\/$/, ''),
+          headers: { ...headers, 'cache-control': 'no-cache' },
+          request: requestOptions,
+        });
+        const userResponse = await requestGitHub(userRequest);
+        if (String(userResponse.data.id) !== expectedUserId) {
+          throw new RequestError(
+            'GitHub CLI is signed in as a different user. Sign in again.',
+            401,
+            {
+              request: userRequest,
+            },
+          );
+        }
+        verifiedToken = token;
+
+        if (options.method === 'GET' && client.request.endpoint(options).url === userRequest.url) {
+          return userResponse;
+        }
+      }
+
+      return request({ ...options, headers });
+    };
+
+    try {
+      return await authenticatedRequest();
+    } catch (err) {
+      if (!isUnauthorized(err)) {
+        throw err;
+      }
+
+      forgetGitHubCliToken(hostname);
+
+      return await authenticatedRequest();
+    }
+  });
+}
+
+function isUnauthorized(err: unknown): boolean {
+  return typeof err === 'object' && err !== null && 'status' in err && err.status === 401;
 }
 
 /**

@@ -108,6 +108,7 @@ export function mockIssueResponseNode(mocks: {
       completed: 0,
       percentCompleted: 0,
     },
+    issueFieldValues: null,
     reactions: {
       totalCount: 0,
     },

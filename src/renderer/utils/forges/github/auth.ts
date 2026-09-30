@@ -63,6 +63,7 @@ export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
  * Return the GitHub developer settings URL appropriate for the account's auth method.
  *
  * - GitHub App → application connections page
+ * - GitHub CLI → authorized applications page
  * - OAuth App → developer settings page
  * - Personal Access Token → tokens settings page
  *
@@ -75,6 +76,9 @@ export function getDeveloperSettingsURL(account: Account): Link {
   switch (account.method) {
     case 'GitHub App':
       settingsURL.pathname = `/settings/connections/applications/${Constants.OAUTH_DEVICE_FLOW_CLIENT_ID}`;
+      break;
+    case 'GitHub CLI':
+      settingsURL.pathname = '/settings/applications';
       break;
     case 'OAuth App':
       settingsURL.pathname = '/settings/developers';

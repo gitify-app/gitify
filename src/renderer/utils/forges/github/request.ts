@@ -8,9 +8,9 @@ import { createOctokitClient } from './octokit';
 
 /**
  * Request header that opts into GitHub's preview/feature-gated GraphQL schema
- * additions. Without it the schema omits `parent` and `subIssuesSummary`.
+ * additions. Without it the schema omits hierarchy fields and issue fields.
  */
-const GRAPHQL_FEATURES_HEADER = { 'GraphQL-Features': 'sub_issues' } as const;
+const GRAPHQL_FEATURES_HEADER = { 'GraphQL-Features': 'sub_issues,issue_fields' } as const;
 
 /**
  * Perform a GraphQL API request with typed operation document.

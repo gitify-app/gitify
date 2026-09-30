@@ -1,6 +1,6 @@
 import { contextBridge, webFrame } from 'electron';
 
-import type { IKeyboardShortcut, NativeThemeSource } from '../shared/events';
+import type { IKeyboardShortcut, NativeThemeSource, TrayIconAppearance } from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
@@ -43,6 +43,14 @@ export const api = {
   decryptValue: (value: string) => invokeMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, value),
 
   /**
+   * Read the token the locally installed GitHub CLI holds for a host.
+   *
+   * @param hostname - Host to read the token for (e.g. `github.com`).
+   * @returns The token, or the reason the CLI could not supply one.
+   */
+  githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
+
+  /**
    * Enable or disable launching the application at system login.
    *
    * @param value - `true` to enable auto-launch, `false` to disable.
@@ -56,8 +64,8 @@ export const api = {
   /**
    * Enable or disable keeping the window open when it loses focus.
    *
-   * Implemented by toggling the window's `alwaysOnTop` flag, which the
-   * `menubar` library uses to short-circuit its blur-driven hide.
+   * Implemented by setting the menubar `hideOnBlur` option to the inverse of
+   * `value` (`mb.setOption('hideOnBlur', !value)`).
    *
    * @param value - `true` to keep the window open on blur, `false` to hide.
    */
@@ -126,11 +134,11 @@ export const api = {
     updateTitle: (title = '') => sendMainEvent(EVENTS.UPDATE_ICON_TITLE, title),
 
     /**
-     * Switch the tray icon to an alternate idle icon variant.
+     * Set the idle tray icon appearance independently of the app theme.
      *
-     * @param value - `true` to use the alternate idle icon, `false` for the default.
      */
-    useAlternateIdleIcon: (value: boolean) => sendMainEvent(EVENTS.USE_ALTERNATE_IDLE_ICON, value),
+    setAppearance: (value: TrayIconAppearance) =>
+      sendMainEvent(EVENTS.SET_TRAY_ICON_APPEARANCE, value),
 
     /**
      * Switch the tray icon to an "active" variant when there are unread notifications.

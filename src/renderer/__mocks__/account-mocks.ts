@@ -25,6 +25,18 @@ export const mockPersonalAccessTokenAccount: Account = {
   scopes: getRecommendedScopeNames(),
 };
 
+export const mockGitHubCliAccount: Account = {
+  forge: 'github',
+  platform: 'GitHub Cloud',
+  method: 'GitHub CLI',
+  // CLI accounts carry no credential of their own; the CLI is read per request.
+  token: '' as Token,
+  hostname: Constants.GITHUB_HOSTNAME,
+  user: mockGitifyUser,
+  // The scope set the GitHub CLI's own OAuth app is granted.
+  scopes: ['gist', 'read:org', 'repo', 'workflow'],
+};
+
 export const mockOAuthAccount: Account = {
   forge: 'github',
   platform: 'GitHub Enterprise Server',

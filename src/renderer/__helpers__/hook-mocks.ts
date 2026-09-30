@@ -40,9 +40,9 @@ function buildNotificationsDefaults(): NotificationsState {
     refetchNotifications: vi.fn(),
     removeAccountNotifications: vi.fn(),
 
-    markNotificationsAsRead: vi.fn(),
-    markNotificationsAsDone: vi.fn(),
-    unsubscribeNotification: vi.fn(),
+    markNotificationsAsRead: vi.fn().mockResolvedValue(true),
+    markNotificationsAsDone: vi.fn().mockResolvedValue(true),
+    unsubscribeNotification: vi.fn().mockResolvedValue(true),
   };
 }
 
@@ -51,6 +51,7 @@ function buildLoginsDefaults(): LoginsState {
     loginWithDeviceFlowStart: vi.fn(),
     loginWithDeviceFlowPoll: vi.fn(),
     loginWithDeviceFlowComplete: vi.fn(),
+    loginWithCli: vi.fn(),
     loginWithOAuthApp: vi.fn(),
     loginWithPersonalAccessToken: vi.fn(),
     logoutFromAccount: vi.fn(),

@@ -1,4 +1,8 @@
-import type { ISafeStorageDecryptResult } from '../../../shared/events';
+import type {
+  IGitHubCliTokenResult,
+  ISafeStorageDecryptResult,
+  TrayIconAppearance,
+} from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
 
@@ -50,6 +54,16 @@ export async function encryptValue(value: string): Promise<string> {
  */
 export async function decryptValue(value: string): Promise<ISafeStorageDecryptResult> {
   return await window.gitify.decryptValue(value);
+}
+
+/**
+ * Asks the locally installed GitHub CLI for the token it holds for a host.
+ *
+ * @param hostname The host to read the token for.
+ * @returns The token, or the reason the CLI could not supply one.
+ */
+export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTokenResult> {
+  return await window.gitify.githubCliToken(hostname);
 }
 
 /**
@@ -113,12 +127,10 @@ export function setUseX11Backend(value: boolean): void {
 }
 
 /**
- * Switch the tray icon to an alternate idle icon variant.
- *
- * @param value - `true` to use the alternate idle icon, `false` for the default.
+ * Set the idle tray icon appearance independently of the app theme.
  */
-export function setUseAlternateIdleIcon(value: boolean): void {
-  window.gitify.tray.useAlternateIdleIcon(value);
+export function setTrayIconAppearance(value: TrayIconAppearance): void {
+  window.gitify.tray.setAppearance(value);
 }
 
 /**

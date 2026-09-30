@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { IssueOpenedIcon } from '@primer/octicons-react';
+import { IssueRelatesToIcon } from '@primer/octicons-react';
 
 import { IconColor } from '../../types';
 
@@ -26,7 +26,7 @@ export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) =>
     <MetricPill
       color={IconColor.GRAY}
       contents={description}
-      icon={IssueOpenedIcon}
+      icon={IssueRelatesToIcon}
       metric={linkedIssues.length}
     />
   );

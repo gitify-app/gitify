@@ -5,6 +5,8 @@ import type { OctokitClient } from './octokit';
 import * as octokitModule from './octokit';
 import { performGraphQLRequest, performGraphQLRequestString } from './request';
 
+const GRAPHQL_FEATURES_HEADER = { 'GraphQL-Features': 'sub_issues,issue_fields' };
+
 // Manually mock Octokit for these tests
 vi.mock('@octokit/core', () => {
   const mockOctokit = {
@@ -63,12 +65,7 @@ describe('renderer/utils/forges/github/request.ts', () => {
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'graphql');
     expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(
       FetchIssueByNumberDocument.toString(),
-      {
-        owner: 'test',
-        name: 'repo',
-        number: 1,
-        headers: { 'GraphQL-Features': 'sub_issues' },
-      },
+      { owner: 'test', name: 'repo', number: 1, headers: GRAPHQL_FEATURES_HEADER },
     );
   });
 
@@ -80,7 +77,7 @@ describe('renderer/utils/forges/github/request.ts', () => {
 
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'graphql');
     expect(mockOctokitInstance.graphql).toHaveBeenCalledWith(queryString, {
-      headers: { 'GraphQL-Features': 'sub_issues' },
+      headers: GRAPHQL_FEATURES_HEADER,
     });
   });
 });

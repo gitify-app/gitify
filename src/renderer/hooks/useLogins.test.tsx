@@ -4,7 +4,11 @@ import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { setNotificationsOverrides } from '../__helpers__/hook-mocks';
-import { mockBitbucketAccount, mockGitHubCloudAccount } from '../__mocks__/account-mocks';
+import {
+  mockBitbucketAccount,
+  mockGitHubCliAccount,
+  mockGitHubCloudAccount,
+} from '../__mocks__/account-mocks';
 
 import { Constants } from '../constants';
 
@@ -61,6 +65,36 @@ describe('renderer/hooks/useLogins.ts', () => {
     });
 
     expect(startSpy).toHaveBeenCalled();
+  });
+
+  it('clears old CLI notifications only after the replacement account is created', async () => {
+    useAccountsStore.setState({ accounts: [mockGitHubCliAccount] });
+    vi.spyOn(getAdapter('github').cliAuth!, 'resolveToken').mockResolvedValue('cli-token' as Token);
+    createAccountSpy.mockImplementation(async () => {
+      expect(removeAccountNotificationsMock).not.toHaveBeenCalled();
+    });
+    const { result } = renderLoginsHook();
+
+    await act(async () => {
+      await result.current.loginWithCli('github', Constants.GITHUB_HOSTNAME);
+    });
+
+    expect(createAccountSpy).toHaveBeenCalledWith('GitHub CLI', '', 'github.com', 'github');
+    expect(removeAccountNotificationsMock).toHaveBeenCalledWith(mockGitHubCliAccount);
+  });
+
+  it('keeps old CLI notifications when replacement login fails', async () => {
+    useAccountsStore.setState({ accounts: [mockGitHubCliAccount] });
+    vi.spyOn(getAdapter('github').cliAuth!, 'resolveToken').mockResolvedValue('cli-token' as Token);
+    createAccountSpy.mockRejectedValueOnce(new Error('CLI login failed'));
+    const { result } = renderLoginsHook();
+
+    await expect(result.current.loginWithCli('github', Constants.GITHUB_HOSTNAME)).rejects.toThrow(
+      'CLI login failed',
+    );
+
+    expect(removeAccountNotificationsMock).not.toHaveBeenCalled();
+    expect(useAccountsStore.getState().accounts).toEqual([mockGitHubCliAccount]);
   });
 
   it('loginWithDeviceFlowPoll delegates to the forge adapter', async () => {
@@ -161,7 +195,7 @@ describe('renderer/hooks/useLogins.ts', () => {
   });
 
   it('loginWithPersonalAccessToken forwards username for Bitbucket accounts', async () => {
-    vi.spyOn(getAdapter('bitbucket'), 'fetchAuthenticatedUser').mockResolvedValue({
+    vi.spyOn(getAdapter('bitbucket').accountOps, 'fetchAuthenticatedUser').mockResolvedValue({
       user: {
         id: mockBitbucketAccount.user!.id,
         login: mockBitbucketAccount.user!.login,

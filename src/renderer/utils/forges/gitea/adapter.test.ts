@@ -18,8 +18,8 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     });
 
     it('reports unsupported capabilities', () => {
-      expect(giteaAdapter.capabilities.markAsDone(mockGiteaAccount)).toBe(false);
-      expect(giteaAdapter.capabilities.unsubscribeThread(mockGiteaAccount)).toBe(false);
+      expect(giteaAdapter.accountOps.capabilities.markAsDone(mockGiteaAccount)).toBe(false);
+      expect(giteaAdapter.accountOps.capabilities.unsubscribeThread(mockGiteaAccount)).toBe(false);
     });
 
     it('does not implement detailed enrichment', () => {
@@ -28,7 +28,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
 
     it('uses the formatted login as a notification actor label', () => {
       expect(
-        giteaAdapter.formatNotificationUser(mockGiteaAccount, {
+        giteaAdapter.accountOps.formatNotificationUser(mockGiteaAccount, {
           login: 'octocat',
           avatarUrl: '' as Link,
           htmlUrl: '' as Link,
@@ -55,17 +55,19 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         'https://gitea.example.com/user/settings/applications',
       );
 
-      expect(giteaAdapter.getAccountSettingsUrl(mockGiteaAccount)).toBe(
+      expect(giteaAdapter.accountOps.getAccountSettingsUrl(mockGiteaAccount)).toBe(
         'https://gitea.example.com/user/settings/applications',
       );
     });
 
     it('builds issues, pull requests and notifications shortcut URLs', () => {
-      expect(giteaAdapter.getIssuesUrl(mockGiteaAccount)).toBe('https://gitea.example.com/issues');
-      expect(giteaAdapter.getPullRequestsUrl(mockGiteaAccount)).toBe(
+      expect(giteaAdapter.accountOps.getIssuesUrl(mockGiteaAccount)).toBe(
+        'https://gitea.example.com/issues',
+      );
+      expect(giteaAdapter.accountOps.getPullRequestsUrl(mockGiteaAccount)).toBe(
         'https://gitea.example.com/pulls',
       );
-      expect(giteaAdapter.getNotificationsUrl(mockGiteaAccount)).toBe(
+      expect(giteaAdapter.accountOps.getNotificationsUrl(mockGiteaAccount)).toBe(
         'https://gitea.example.com/notifications',
       );
     });
@@ -114,7 +116,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         avatar_url: 'https://example.com/a.png',
       });
 
-      const result = await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
+      const result = await giteaAdapter.accountOps.fetchAuthenticatedUser(mockGiteaAccount);
 
       expect(result).toEqual({
         user: {
@@ -132,7 +134,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         login: 'octocat',
       });
 
-      const result = await giteaAdapter.fetchAuthenticatedUser(mockGiteaAccount);
+      const result = await giteaAdapter.accountOps.fetchAuthenticatedUser(mockGiteaAccount);
 
       expect(result.user.name).toBeNull();
       expect(result.user.avatar).toBe('');
@@ -158,7 +160,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
 
       useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
 
-      const result = await giteaAdapter.listNotifications(mockGiteaAccount);
+      const result = await giteaAdapter.accountOps.listNotifications(mockGiteaAccount);
 
       expect(result).toHaveLength(1);
       expect(result[0].id).toBe('99');
@@ -172,7 +174,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
         .spyOn(client, 'patchGiteaNotificationThread')
         .mockResolvedValue(undefined);
 
-      await giteaAdapter.markThreadAsRead(mockGiteaAccount, '12');
+      await giteaAdapter.accountOps.markThreadAsRead(mockGiteaAccount, '12');
 
       expect(patchSpy).toHaveBeenCalledWith(mockGiteaAccount, '12', 'read');
     });
@@ -182,13 +184,13 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
       // back to mark-as-read before reaching here. Throwing surfaces any
       // caller that bypasses the capability check rather than silently
       // doing the wrong thing.
-      expect(() => giteaAdapter.markThreadAsDone(mockGiteaAccount, '13')).toThrow(
+      expect(() => giteaAdapter.accountOps.markThreadAsDone(mockGiteaAccount, '13')).toThrow(
         /check capabilities.markAsDone/,
       );
     });
 
     it('unsubscribeThread throws because Gitea has no equivalent', () => {
-      expect(() => giteaAdapter.unsubscribeThread(mockGiteaAccount, '14')).toThrow(
+      expect(() => giteaAdapter.accountOps.unsubscribeThread(mockGiteaAccount, '14')).toThrow(
         /not supported for Gitea/,
       );
     });
@@ -196,7 +198,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
 
   describe('oauthScopes capability bundle', () => {
     it('is omitted because Gitea has no OAuth scope concept', () => {
-      expect(giteaAdapter.oauthScopes).toBeUndefined();
+      expect(giteaAdapter.accountOps.oauthScopes).toBeUndefined();
     });
   });
 
@@ -204,7 +206,7 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
     it('delegates to giteaGetJson', async () => {
       const getJsonSpy = vi.spyOn(client, 'giteaGetJson').mockResolvedValue({ html_url: 'x' });
 
-      const result = await giteaAdapter.followUrl<{ html_url: string }>(
+      const result = await giteaAdapter.accountOps.followUrl(
         mockGiteaAccount,
         'https://gitea.example.com/api/v1/x' as Link,
       );

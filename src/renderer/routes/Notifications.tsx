@@ -5,9 +5,8 @@ import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { AllRead } from '../components/AllRead';
-import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
-import { AccountNotifications } from '../components/notifications/AccountNotifications';
+import { NotificationList } from '../components/notifications/NotificationList';
 import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
@@ -48,19 +47,10 @@ export const NotificationsRoute: FC = () => {
 
   return (
     <Page testId="notifications">
-      <Contents paddingHorizontal={false}>
-        {visibleNotifications.map((accountNotification) => {
-          return (
-            <AccountNotifications
-              account={accountNotification.account}
-              error={accountNotification.error}
-              key={getAccountUUID(accountNotification.account)}
-              notifications={accountNotification.notifications}
-              showAccountHeader={hasMultipleAccounts || showAccountHeader}
-            />
-          );
-        })}
-      </Contents>
+      <NotificationList
+        accountNotifications={visibleNotifications}
+        showAccountHeader={hasMultipleAccounts || showAccountHeader}
+      />
     </Page>
   );
 };

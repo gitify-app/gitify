@@ -32,7 +32,7 @@ import { notificationsKeys } from '../utils/api/queryKeys';
 import { getAccountUUID } from '../utils/auth/utils';
 import { areAllAccountErrorsSame, doesAllAccountsHaveErrors, Errors } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
-import { getAdapter } from '../utils/forges/registry';
+import { getAccountAdapter } from '../utils/forges/registry';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -71,9 +71,9 @@ interface NotificationsState {
   refetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => Promise<void>;
 
-  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<void>;
-  markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<void>;
-  unsubscribeNotification: (notification: GitifyNotification) => Promise<void>;
+  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<boolean>;
+  markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<boolean>;
+  unsubscribeNotification: (notification: GitifyNotification) => Promise<boolean>;
 }
 
 interface UseNotificationsOptions {
@@ -472,7 +472,7 @@ export const useNotifications = ({
   const markNotificationsAsReadMutation = useMutation({
     mutationFn: async ({ readNotifications }: { readNotifications: GitifyNotification[] }) => {
       return await settleNotificationActions(readNotifications, (notification) =>
-        getAdapter(notification.account).markThreadAsRead(notification.account, notification.id),
+        getAccountAdapter(notification.account).markThreadAsRead(notification.id),
       );
     },
 
@@ -524,7 +524,7 @@ export const useNotifications = ({
       }
 
       return await settleNotificationActions(doneNotifications, (notification) =>
-        getAdapter(notification.account).markThreadAsDone(notification.account, notification.id),
+        getAccountAdapter(notification.account).markThreadAsDone(notification.id),
       );
     },
 
@@ -572,7 +572,7 @@ export const useNotifications = ({
       }
 
       const result = await settleNotificationActions([notification], (n) =>
-        getAdapter(n.account).unsubscribeThread(n.account, n.id),
+        getAccountAdapter(n.account).unsubscribeThread(n.id),
       );
 
       if (result.failed.length > 0) {
@@ -617,21 +617,40 @@ export const useNotifications = ({
 
   const markNotificationsAsRead = useCallback(
     async (readNotifications: GitifyNotification[]) => {
-      await markNotificationsAsReadMutation.mutateAsync({ readNotifications }).catch(() => {});
+      try {
+        const { failed } = await markNotificationsAsReadMutation.mutateAsync({
+          readNotifications,
+        });
+        return failed.length === 0;
+      } catch {
+        return false;
+      }
     },
     [markNotificationsAsReadMutation],
   );
 
   const markNotificationsAsDone = useCallback(
     async (doneNotifications: GitifyNotification[]) => {
-      await markNotificationsAsDoneMutation.mutateAsync({ doneNotifications }).catch(() => {});
+      try {
+        const { failed } = await markNotificationsAsDoneMutation.mutateAsync({
+          doneNotifications,
+        });
+        return failed.length === 0;
+      } catch {
+        return false;
+      }
     },
     [markNotificationsAsDoneMutation],
   );
 
   const unsubscribeNotification = useCallback(
     async (notification: GitifyNotification) => {
-      await unsubscribeNotificationMutation.mutateAsync({ notification }).catch(() => {});
+      try {
+        const { failed } = await unsubscribeNotificationMutation.mutateAsync({ notification });
+        return failed.length === 0;
+      } catch {
+        return false;
+      }
     },
     [unsubscribeNotificationMutation],
   );

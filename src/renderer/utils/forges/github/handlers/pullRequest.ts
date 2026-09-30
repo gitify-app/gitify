@@ -240,7 +240,16 @@ export function getPullRequestReviewers(
     { reviewer: GitifyPullRequestReviewer; submittedAt?: string | null }
   >();
 
-  for (const review of reviews) {
+  // GitHub no longer guarantees the reviews connection is returned in creation
+  // order, so sort by submission time (oldest first) to make the "newest wins"
+  // selection below deterministic regardless of the connection ordering.
+  const sortedReviews = [...reviews].sort((a, b) => {
+    const at = a.submittedAt ?? '';
+    const bt = b.submittedAt ?? '';
+    return at < bt ? -1 : at > bt ? 1 : 0;
+  });
+
+  for (const review of sortedReviews) {
     const user = review.author?.login;
     if (!user) {
       continue;

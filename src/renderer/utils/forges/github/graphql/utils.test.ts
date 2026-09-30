@@ -91,7 +91,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       );
 
       expect(varDefs).not.toBeNull();
-      expect(varDefs.length).toBe(7);
+      expect(varDefs.length).toBe(8);
       expect(varDefs.flatMap((v) => v.name)).toEqual([
         'lastComments',
         'lastThreadedComments',
@@ -100,6 +100,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
         'firstReviewThreads',
         'firstLabels',
         'firstClosingIssues',
+        'firstIssueFieldValues',
       ]);
     });
   });
@@ -128,6 +129,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       stackedPullRequests: true,
       answeredDiscussion: true,
       subIssues: true,
+      issueFields: true,
     };
 
     it('strips @gated directives but keeps gated fields when supported', () => {
@@ -187,6 +189,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       expect(result).toContain('isAnswered');
       expect(result).toContain('parent');
       expect(result).toContain('subIssuesSummary');
+      expect(result).toContain('issueFieldValues');
       expect(result).toContain('query FetchMergedDetailsTemplate');
     });
 
@@ -195,12 +198,14 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
         stackedPullRequests: false,
         answeredDiscussion: false,
         subIssues: false,
+        issueFields: false,
       });
 
       expect(result).not.toContain('stackEntry');
       expect(result).not.toContain('isAnswered');
       expect(result).not.toContain('parent');
       expect(result).not.toContain('subIssuesSummary');
+      expect(result).not.toContain('issueFieldValues');
       expect(result).not.toContain('@gated');
       expect(result).toContain('query FetchMergedDetailsTemplate');
       expect(result).toContain('PullRequestDetails');

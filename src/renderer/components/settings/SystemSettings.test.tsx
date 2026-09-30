@@ -60,6 +60,9 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       });
 
       expect(screen.queryByTestId('checkbox-useX11Backend')).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'GNOME extension installation' }),
+      ).not.toBeInTheDocument();
     });
 
     it('is shown and toggles on Linux', async () => {
@@ -72,6 +75,18 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       await userEvent.click(screen.getByTestId('checkbox-useX11Backend'));
 
       expect(toggleSettingSpy).toHaveBeenCalledWith('useX11Backend');
+    });
+
+    it('opens standalone GNOME installation instructions on Linux', async () => {
+      isLinuxMock().mockReturnValue(true);
+      renderWithProviders(<SystemSettings />);
+
+      await userEvent.click(screen.getByRole('button', { name: 'GNOME extension installation' }));
+
+      expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
+        'https://github.com/gitify-app/gnome#install',
+        expect.any(Boolean),
+      );
     });
   });
 

@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { Button } from '@primer/react';
 
+import type { TrayIconAppearance } from '../shared/events';
+
 // Derived from public @primer/react component props rather than internal types
 export type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
 
@@ -124,7 +126,7 @@ export interface NotificationSettingsState {
 export interface TraySettingsState {
   showNotificationsCountInTray: boolean;
   useUnreadActiveIcon: boolean;
-  useAlternateIdleIcon: boolean;
+  trayIconAppearance: TrayIconAppearance;
 }
 
 /**
@@ -406,6 +408,8 @@ export interface GitifySubject {
   stackDepth?: number;
   /** GitHub-native issue type (e.g. Bug, Feature, Task) */
   issueType?: GitifyIssueType;
+  /** GitHub issue fields (e.g. Priority, Effort) with values set */
+  issueFields?: GitifyIssueField[];
   /** Milestone state/title */
   milestone?: GitifyMilestone;
   /** Parent issue context when the issue is a sub-issue */
@@ -499,6 +503,16 @@ export interface GitifySubIssueProgress {
   total: number;
   completed: number;
   percentCompleted: number;
+}
+
+/** GitHub issue field value, normalized for display */
+export interface GitifyIssueField {
+  /** Field name, e.g. "Priority" */
+  name: string;
+  /** Display value, e.g. "High", "5", "2026-09-01" */
+  value: string;
+  /** Option fill color when available */
+  fillColor?: string;
 }
 
 export type GitifyMilestone = MilestoneFieldsFragment;

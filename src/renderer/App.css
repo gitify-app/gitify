@@ -4,6 +4,9 @@
 /** GitHub Primer Design System */
 @import '@primer/css/dist/primer.css';
 
+/** GitHub Primer Primitives - motion tokens (required by Primer React's Spinner & Skeleton animations) */
+@import '@primer/primitives/dist/css/base/motion/motion.css';
+
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
 
@@ -264,7 +267,7 @@
    * vars; re-render them as tinted glass (same hue, mostly translucent, hue
    * hairline) instead of solid chips. Text keeps Primer's contrast-chosen
    * colour, which still reads on the softened fill. */
-  .gitify-translucent [data-color-mode] [style*='--label-r'] {
+  .gitify-translucent:not(.gitify-linux) [data-color-mode] [style*='--label-r'] {
     background-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.78);
     border-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.4);
   }
@@ -296,6 +299,11 @@
     /* The light tint needs the default dark text; dark glass keeps the
      * on-emphasis white that Tooltip already defaults to. */
     color: light-dark(var(--fgColor-default), var(--fgColor-onEmphasis));
+  }
+
+  .gitify-translucent.gitify-linux [data-color-mode] [data-component='Tooltip'] {
+    background-color: color-mix(in oklab, var(--bgColor-default), transparent 8%);
+    color: var(--fgColor-default);
   }
 
   /* Primer's AnchoredOverlay wrapper (what the `?` popouts render inside)
@@ -389,6 +397,16 @@
    * Only the wrapper paints. */
   .gitify-translucent [data-color-mode] [data-component='Select'] {
     background-color: transparent;
+  }
+
+  /* Native popups need an opaque surface; transparent options can render white
+   * behind the inherited dark-theme text on Linux. */
+  .gitify-linux.gitify-translucent
+    [data-color-mode]
+    [data-component='Select']
+    :where(option, optgroup) {
+    background-color: var(--bgColor-default);
+    color: var(--fgColor-default);
   }
 
   /* Checkboxes and radios trade the stark opaque white face for a glass one;

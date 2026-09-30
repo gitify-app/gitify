@@ -53,7 +53,10 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
       <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
 
-      <LabelsPill labels={notification.subject.labels ?? []} />
+      <LabelsPill
+        labels={notification.subject.labels ?? []}
+        issueFields={notification.subject.issueFields ?? []}
+      />
     </div>
   );
 };

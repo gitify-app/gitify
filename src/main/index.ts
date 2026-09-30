@@ -5,12 +5,13 @@ import { menubar } from 'electron-menubar';
 import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
+  registerGitHubCliHandlers,
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
   registerUpdaterHandlers,
 } from './handlers';
-import { TrayIcons } from './icons';
+import { getIdleTrayIcon } from './icons';
 import {
   configureWindowEvents,
   handleProtocolURL,
@@ -33,7 +34,7 @@ if (!app.isPackaged) {
 }
 
 const mb = menubar({
-  icon: TrayIcons.idle,
+  icon: getIdleTrayIcon('auto'),
   index: Paths.indexHtml,
   browserWindow: WindowConfig,
   preloadWindow: true,
@@ -63,6 +64,7 @@ app.whenReady().then(async () => {
   registerTrayHandlers(mb);
   registerSystemHandlers(mb);
   registerStorageHandlers();
+  registerGitHubCliHandlers();
   registerAppHandlers(mb);
   registerUpdaterHandlers(appUpdater);
 });

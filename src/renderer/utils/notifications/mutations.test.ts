@@ -40,6 +40,26 @@ describe('renderer/utils/notifications/mutations.ts', () => {
       expect(result.failed[0].rawError).toBe(forbiddenError);
     });
 
+    it('isolates a synchronous failure and continues later actions', async () => {
+      const [first, second] = mockGitHubCloudGitifyNotifications;
+      const forbiddenError = new RequestError('Forbidden', 403, {
+        request: { method: 'GET', url: 'https://api.github.com', headers: {} },
+      });
+      const action = vi
+        .fn()
+        .mockImplementationOnce(() => {
+          throw forbiddenError;
+        })
+        .mockResolvedValueOnce(undefined);
+
+      const result = await settleNotificationActions([first, second], action);
+
+      expect(result.succeeded).toEqual([second]);
+      expect(result.failed[0].notification).toEqual(first);
+      expect(result.failed[0].error).toBe(Errors.ACTION_FORBIDDEN);
+      expect(action).toHaveBeenCalledTimes(2);
+    });
+
     it('classifies each failure independently using determineFailureType', async () => {
       const [first, second] = mockGitHubCloudGitifyNotifications;
 
