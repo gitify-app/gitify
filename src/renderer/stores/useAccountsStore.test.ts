@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 
 import {
+  mockGitHubCliAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
@@ -100,6 +101,44 @@ describe('renderer/stores/useAccountsStore.ts', () => {
           .createAccount('Personal Access Token', '789-000' as Token, 'github.com' as Hostname);
 
         expect(useAccountsStore.getState().accounts).toHaveLength(1);
+      });
+
+      test('replaces all CLI accounts for the host after validating the new user', async () => {
+        const previous = structuredClone(mockGitHubCliAccount);
+        const otherHost = { ...previous, hostname: mockGitHubEnterpriseServerAccount.hostname };
+        useAccountsStore.setState({
+          accounts: [
+            previous,
+            previous,
+            structuredClone(previous),
+            otherHost,
+            mockGitHubCloudAccount,
+          ],
+        });
+        const invalidate = vi.spyOn(getAdapter('github').accountOps, 'onAccountTokenChange');
+
+        await useAccountsStore
+          .getState()
+          .createAccount('GitHub CLI', '' as Token, previous.hostname);
+
+        expect(useAccountsStore.getState().accounts).toEqual([
+          expect.objectContaining({ method: 'GitHub CLI', user: expectedUser() }),
+          otherHost,
+          mockGitHubCloudAccount,
+        ]);
+        expect(invalidate).toHaveBeenCalledWith(previous);
+      });
+
+      test('keeps the previous CLI account when the new login fails', async () => {
+        const previous = structuredClone(mockGitHubCliAccount);
+        useAccountsStore.setState({ accounts: [previous] });
+        fetchAuthenticatedUserDetailsSpy.mockRejectedValueOnce(new Error('CLI login failed'));
+
+        await expect(
+          useAccountsStore.getState().createAccount('GitHub CLI', '' as Token, previous.hostname),
+        ).rejects.toThrow('CLI login failed');
+
+        expect(useAccountsStore.getState().accounts).toEqual([previous]);
       });
     });
 

@@ -86,6 +86,7 @@ export function getAccountAdapter(account: Account): ForgeAccountAdapter {
           hasRequired: () => oauthScopes.hasRequired(account),
           hasRecommended: () => oauthScopes.hasRecommended(account),
           hasAlternate: () => oauthScopes.hasAlternate(account),
+          externallyManaged: () => oauthScopes.externallyManaged(account),
         }
       : undefined,
   };

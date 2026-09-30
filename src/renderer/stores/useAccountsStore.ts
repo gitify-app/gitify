@@ -73,13 +73,19 @@ const useAccountsStore = create<AccountsStore>()(
         const newAccountUUID = getAccountUUID(newAccount);
 
         const accounts = get().accounts;
-        const existingAccount = accounts.find(
-          (account) => getAccountUUID(account) === newAccountUUID,
-        );
+        const isCliAccount = method === getAdapter(forge).cliAuth?.authMethod;
+        const replacesAccount = (account: Account) =>
+          isCliAccount
+            ? account.forge === forge && account.hostname === hostname && account.method === method
+            : getAccountUUID(account) === newAccountUUID;
+        const existingAccountIndex = accounts.findIndex(replacesAccount);
+        const existingAccount = accounts[existingAccountIndex];
 
         if (existingAccount) {
           // Drop any forge-specific HTTP client cache so the new token is used.
-          getAccountAdapter(existingAccount).onAccountTokenChange?.();
+          for (const account of accounts.filter(replacesAccount)) {
+            getAccountAdapter(account).onAccountTokenChange?.();
+          }
 
           // Replace the existing account (e.g. re-authentication with a new token)
           rendererLogInfo(
@@ -88,8 +94,12 @@ const useAccountsStore = create<AccountsStore>()(
           );
 
           set({
-            accounts: accounts.map((account) =>
-              getAccountUUID(account) === newAccountUUID ? newAccount : account,
+            accounts: accounts.flatMap((account, index) =>
+              replacesAccount(account)
+                ? index === existingAccountIndex
+                  ? [newAccount]
+                  : []
+                : [account],
             ),
           });
         } else {
@@ -115,8 +125,10 @@ const useAccountsStore = create<AccountsStore>()(
         // Drop any forge-specific HTTP client state for the removed account.
         getAccountAdapter(account).onAccountTokenChange?.();
 
+        const removedUUID = getAccountUUID(account);
+
         set((state) => ({
-          accounts: state.accounts.filter((a) => a.token !== account.token),
+          accounts: state.accounts.filter((a) => getAccountUUID(a) !== removedUUID),
         }));
       },
 
