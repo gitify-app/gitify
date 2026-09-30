@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
@@ -16,7 +17,25 @@ import { GroupBy } from '../../types';
 import { Errors } from '../../utils/core/errors';
 import * as comms from '../../utils/system/comms';
 import * as links from '../../utils/system/links';
-import { NotificationRow, type NotificationRowProps } from './NotificationRow';
+import {
+  NotificationRow as ControlledNotificationRow,
+  type NotificationRowProps as ControlledNotificationRowProps,
+} from './NotificationRow';
+
+type NotificationRowProps = Pick<ControlledNotificationRowProps, 'notification'> & {
+  isRepositoryAnimatingExit: boolean;
+};
+
+function NotificationRow({ notification, isRepositoryAnimatingExit }: NotificationRowProps) {
+  const [isAnimatingExit, setAnimatingExit] = useState(false);
+  return (
+    <ControlledNotificationRow
+      notification={notification}
+      isAnimatingExit={isAnimatingExit || isRepositoryAnimatingExit}
+      onAnimateExit={setAnimatingExit}
+    />
+  );
+}
 
 describe('renderer/components/notifications/NotificationRow.tsx', () => {
   vi.spyOn(links, 'openNotification').mockImplementation(vi.fn());
@@ -281,6 +300,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     it('shows hover actions in their normal (non-danger) state when there is no recorded failure', () => {
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
+
         isRepositoryAnimatingExit: false,
       };
 
@@ -290,6 +310,21 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         'title',
         'Mark as read',
       );
+    });
+    it('restores its actions when the mutation fails directly', async () => {
+      const props: NotificationRowProps = {
+        notification: mockGitifyNotification,
+        isRepositoryAnimatingExit: false,
+      };
+
+      renderWithProviders(<NotificationRow {...props} />, {
+        settings: { ...mockSettings, delayNotificationState: false, fetchReadNotifications: false },
+        markNotificationsAsRead: vi.fn().mockResolvedValue(false),
+      });
+
+      await userEvent.click(screen.getByTestId('notification-mark-as-read'));
+
+      expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
     });
 
     it('styles and explains only the action that failed', () => {

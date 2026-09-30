@@ -46,7 +46,7 @@ export async function settleNotificationActions(
   action: (notification: GitifyNotification) => Promise<unknown>,
 ): Promise<SettledNotificationActions> {
   const results = await Promise.allSettled(
-    notifications.map((notification) => action(notification)),
+    notifications.map((notification) => Promise.resolve().then(() => action(notification))),
   );
 
   const succeeded: GitifyNotification[] = [];

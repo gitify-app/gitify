@@ -555,10 +555,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
       const { result } = renderNotificationsHook();
       await waitFor(() => expect(result.current.hasNotifications).toBe(true));
 
+      let actionSucceeded: unknown;
       await act(async () => {
-        await result.current.markNotificationsAsRead([mockGitifyNotification]).catch(() => {});
+        actionSucceeded = await result.current.markNotificationsAsRead([mockGitifyNotification]);
       });
 
+      expect(actionSucceeded).toBe(false);
       expect(rendererLogErrorSpy).toHaveBeenCalled();
     });
 

@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC, useState } from 'react';
+import { type CSSProperties, type FC } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
@@ -30,12 +30,14 @@ import { NotificationTitle } from './NotificationTitle';
 
 export interface NotificationRowProps {
   notification: GitifyNotification;
-  isRepositoryAnimatingExit: boolean;
+  isAnimatingExit: boolean;
+  onAnimateExit: (animate: boolean) => void;
 }
 
 export const NotificationRow: FC<NotificationRowProps> = ({
   notification,
-  isRepositoryAnimatingExit,
+  isAnimatingExit,
+  onAnimateExit,
 }: NotificationRowProps) => {
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
     useNotifications();
@@ -43,8 +45,6 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
   const showNumber = useSettingsStore((s) => s.showNumber);
-
-  const [shouldAnimateNotificationExit, setShouldAnimateNotificationExit] = useState(false);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
@@ -62,18 +62,12 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in the browser.`
     : undefined;
 
-  // Starts the exit animation immediately, then reverts it if this specific
-  // action failed, checked directly against the failure store once it
-  // settles. Checking a stale value (e.g. via an effect watching the failure
-  // map) would wrongly revert a retry's animation using the previous
-  // attempt's still-present entry.
-  const runAction = async (action: () => Promise<void>) => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-
-    await action();
-
-    if (useNotificationActionFailuresStore.getState().failures[notificationFailureKey]) {
-      setShouldAnimateNotificationExit(false);
+  const runAction = async (action: () => Promise<boolean>) => {
+    onAnimateExit(shouldAnimateExit);
+    try {
+      await action();
+    } finally {
+      onAnimateExit(false);
     }
   };
 
@@ -110,8 +104,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         'group relative border-b',
         'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
-        (isRepositoryAnimatingExit || shouldAnimateNotificationExit) &&
-          'translate-x-full opacity-0 transition duration-350 ease-in-out',
+        isAnimatingExit && 'translate-x-full opacity-0 transition duration-350 ease-in-out',
         isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
@@ -161,7 +154,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Stack>
       </Stack>
 
-      {!shouldAnimateNotificationExit && (
+      {!isAnimatingExit && (
         <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
           <HoverButton
             action={actionMarkAsRead}
