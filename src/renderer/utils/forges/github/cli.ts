@@ -5,12 +5,8 @@ import type { Hostname, Token } from '../../../types';
 import { readGitHubCliToken } from '../../system/comms';
 
 /**
- * In-flight and resolved CLI reads, per host.
- *
- * The CLI keychain is the source of truth for `GitHub CLI` accounts — nothing
- * here is persisted. Reading it spawns a process and touches the OS keychain,
- * so the promise is shared: concurrent requests collapse onto one read, and a
- * resolved token is reused until it is forgotten.
+ * Concurrent CLI reads share one promise per host. Settled reads are removed
+ * so the next request observes credential changes in the CLI.
  */
 const cliTokens = new Map<Hostname, Promise<Token>>();
 
@@ -27,13 +23,14 @@ export function resolveGitHubCliToken(hostname: Hostname): Promise<Token> {
     return inFlight;
   }
 
-  const read = readCliToken(hostname);
+  const read = readCliToken(hostname).finally(() => {
+    if (cliTokens.get(hostname) === read) {
+      cliTokens.delete(hostname);
+    }
+  });
   cliTokens.set(hostname, read);
 
-  return read.catch((err) => {
-    cliTokens.delete(hostname);
-    throw err;
-  });
+  return read;
 }
 
 export function forgetGitHubCliToken(hostname: Hostname): void {

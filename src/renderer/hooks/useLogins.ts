@@ -109,7 +109,7 @@ export const useLogins = (): LoginsState => {
    * Login with the token held by a locally installed forge CLI.
    *
    * The token is resolved here only to fail fast while the login screen is
-   * still up. Nothing persists it: the CLI is re-read for every API client, so
+   * still up. Nothing persists it: the CLI is re-read for every API request, so
    * the account carries no credential of its own.
    */
   const loginWithCli = useCallback(

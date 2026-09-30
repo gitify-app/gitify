@@ -37,6 +37,23 @@ describe('renderer/utils/forges/github/cli.ts', () => {
     await expect(resolveGitHubCliToken(GITHUB)).resolves.toBe('gho_rotated');
   });
 
+  it('reads a replacement credential after a successful read', async () => {
+    readToken.mockResolvedValueOnce({ token: 'gho_original' });
+    readToken.mockResolvedValueOnce({ token: 'gho_replacement' });
+
+    await expect(resolveGitHubCliToken(GITHUB)).resolves.toBe('gho_original');
+    await expect(resolveGitHubCliToken(GITHUB)).resolves.toBe('gho_replacement');
+    expect(readToken).toHaveBeenCalledTimes(2);
+  });
+
+  it('observes CLI logout after a successful read', async () => {
+    readToken.mockResolvedValueOnce({ token: 'gho_original' });
+    readToken.mockResolvedValueOnce({ error: 'GH_NOT_AUTHENTICATED' });
+
+    await expect(resolveGitHubCliToken(GITHUB)).resolves.toBe('gho_original');
+    await expect(resolveGitHubCliToken(GITHUB)).rejects.toThrow('GitHub CLI has no token');
+  });
+
   it('resolves each host against its own CLI entry', async () => {
     readToken.mockImplementation(async (hostname) =>
       hostname === GITHUB ? { token: 'gho_cloud' } : { token: 'gho_enterprise' },
@@ -52,6 +69,23 @@ describe('renderer/utils/forges/github/cli.ts', () => {
 
     await expect(resolveGitHubCliToken(GITHUB)).rejects.toThrow();
     await expect(resolveGitHubCliToken(GITHUB)).resolves.toBe('gho_token');
+  });
+
+  it('does not evict a newer pending read when an invalidated read settles', async () => {
+    const original = Promise.withResolvers<{ token: string }>();
+    const replacement = Promise.withResolvers<{ token: string }>();
+    readToken.mockReturnValueOnce(original.promise).mockReturnValueOnce(replacement.promise);
+
+    const first = resolveGitHubCliToken(GITHUB);
+    forgetGitHubCliToken(GITHUB);
+    const second = resolveGitHubCliToken(GITHUB);
+    original.resolve({ token: 'gho_original' });
+    await first;
+
+    expect(resolveGitHubCliToken(GITHUB)).toBe(second);
+    expect(readToken).toHaveBeenCalledTimes(2);
+    replacement.resolve({ token: 'gho_replacement' });
+    await expect(second).resolves.toBe('gho_replacement');
   });
 
   it('tells the user how to install a CLI it could not find', async () => {
