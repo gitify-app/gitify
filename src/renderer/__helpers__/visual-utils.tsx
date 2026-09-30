@@ -121,19 +121,21 @@ export async function renderRoute(
   container.style.cssText = 'position:fixed;inset:0;overflow:hidden';
   document.body.appendChild(container);
 
-  render(
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <BaseStyles>
-          <Appearance />
-          {/* Routes reading `location.state` (AccountScopes) get their
+  return render(ui, {
+    container,
+    wrapper: ({ children }) => (
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <BaseStyles>
+            <Appearance />
+            {/* Routes reading `location.state` (AccountScopes) get their
               account through here, so it needs stubbing too. */}
-          <MemoryRouter initialEntries={withStubbedAvatars(initialEntries)}>
-            <AppLayout>{ui}</AppLayout>
-          </MemoryRouter>
-        </BaseStyles>
-      </ThemeProvider>
-    </QueryClientProvider>,
-    { container },
-  );
+            <MemoryRouter initialEntries={withStubbedAvatars(initialEntries)}>
+              <AppLayout>{children}</AppLayout>
+            </MemoryRouter>
+          </BaseStyles>
+        </ThemeProvider>
+      </QueryClientProvider>
+    ),
+  });
 }

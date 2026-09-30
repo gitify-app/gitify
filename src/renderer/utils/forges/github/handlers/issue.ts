@@ -8,13 +8,87 @@ import {
   SkipIcon,
 } from '@primer/octicons-react';
 
-import type { GitifyIssueState, GitifyNotification, GitifySubject, Link } from '../../../../types';
+import type {
+  GitifyIssueField,
+  GitifyIssueState,
+  GitifyNotification,
+  GitifySubject,
+  Link,
+} from '../../../../types';
 import { IconColor } from '../../../../types';
 
 import { fetchIssueByNumber } from '../client';
 import type { IssueDetailsFragment } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor, mapIssueTypeColor } from './utils';
+import { getNotificationAuthor, mapIssueFieldColor, mapIssueTypeColor } from './utils';
+
+/**
+ * A single node in the `issueFieldValues` GraphQL connection.
+ */
+type IssueFieldValueNode = NonNullable<
+  NonNullable<IssueDetailsFragment['issueFieldValues']>['nodes']
+>[number];
+
+function createIssueField(
+  name: string,
+  value: string | null | undefined,
+  fillColor?: string,
+): GitifyIssueField | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  return { name, value, ...(fillColor ? { fillColor } : {}) };
+}
+
+/**
+ * Map a GitHub issue field value node to a normalized {@link GitifyIssueField}.
+ *
+ * Only nodes that carry a value and a resolvable field name are returned;
+ * otherwise `undefined` so callers can filter out unset fields.
+ */
+function mapIssueFieldValue(node: IssueFieldValueNode): GitifyIssueField | undefined {
+  if (!node) {
+    return undefined;
+  }
+
+  const fieldName = node.field && 'name' in node.field ? node.field.name : undefined;
+  if (!fieldName) {
+    return undefined;
+  }
+
+  switch (node.__typename) {
+    case 'IssueFieldSingleSelectValue': {
+      return createIssueField(fieldName, node.name, mapIssueFieldColor(node.color));
+    }
+    case 'IssueFieldMultiSelectValue': {
+      const optionNames = node.options.map((option) => option.name);
+      if (optionNames.length === 0) {
+        return undefined;
+      }
+      const coloredOption = node.options.find((option) => option.color);
+      return {
+        name: fieldName,
+        value: optionNames.join(', '),
+        ...(coloredOption ? { fillColor: mapIssueFieldColor(coloredOption.color) } : {}),
+      };
+    }
+    case 'IssueFieldTextValue': {
+      return createIssueField(fieldName, node.textValue);
+    }
+    case 'IssueFieldDateValue': {
+      return createIssueField(fieldName, node.dateValue);
+    }
+    case 'IssueFieldNumberValue': {
+      if (node.numberValue === null || node.numberValue === undefined) {
+        return undefined;
+      }
+      return { name: fieldName, value: String(node.numberValue) };
+    }
+    default:
+      return undefined;
+  }
+}
 
 class IssueHandler extends DefaultHandler {
   override readonly supportsMergedQueryEnrichment = true;
@@ -55,6 +129,10 @@ class IssueHandler extends DefaultHandler {
       issueType: issue.issueType
         ? { name: issue.issueType.name, color: mapIssueTypeColor(issue.issueType.color) }
         : undefined,
+      issueFields:
+        (issue.issueFieldValues?.nodes ?? [])
+          .map((node) => mapIssueFieldValue(node))
+          .filter((field): field is GitifyIssueField => field !== undefined) ?? [],
       milestone: issue.milestone ?? undefined,
       htmlUrl: issueComment?.url ?? issue.url,
       reactionsCount: issueReactionCount,

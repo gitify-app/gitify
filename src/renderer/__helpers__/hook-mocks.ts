@@ -40,9 +40,9 @@ function buildNotificationsDefaults(): NotificationsState {
     refetchNotifications: vi.fn(),
     removeAccountNotifications: vi.fn(),
 
-    markNotificationsAsRead: vi.fn(),
-    markNotificationsAsDone: vi.fn(),
-    unsubscribeNotification: vi.fn(),
+    markNotificationsAsRead: vi.fn().mockResolvedValue(true),
+    markNotificationsAsDone: vi.fn().mockResolvedValue(true),
+    unsubscribeNotification: vi.fn().mockResolvedValue(true),
   };
 }
 

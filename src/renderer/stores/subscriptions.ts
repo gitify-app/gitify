@@ -9,7 +9,7 @@ import {
   setAutoLaunch,
   setKeepWindowOnBlur,
   setShowUpdateNotifications,
-  setUseAlternateIdleIcon,
+  setTrayIconAppearance,
   setUseUnreadActiveIcon,
   setUseX11Backend,
 } from '../utils/system/comms';
@@ -35,7 +35,7 @@ export function initializeStoreSubscriptions(): () => void {
   setKeepWindowOnBlur(useSettingsStore.getState().keepWindowOnBlur);
   setShowUpdateNotifications(useSettingsStore.getState().showUpdateNotifications);
   setUseUnreadActiveIcon(useSettingsStore.getState().useUnreadActiveIcon);
-  setUseAlternateIdleIcon(useSettingsStore.getState().useAlternateIdleIcon);
+  setTrayIconAppearance(useSettingsStore.getState().trayIconAppearance);
 
   // ========================================================================
   // Settings Store Side Effects
@@ -88,14 +88,14 @@ export function initializeStoreSubscriptions(): () => void {
   );
   unsubscribers.push(unsubUnreadActive);
 
-  // Tray icon settings (alternate idle icon)
-  const unsubAlternateIdle = useSettingsStore.subscribe(
-    (state) => state.useAlternateIdleIcon,
-    (useAlternateIdleIcon) => {
-      setUseAlternateIdleIcon(useAlternateIdleIcon);
+  // Idle tray icon appearance
+  const unsubAppearance = useSettingsStore.subscribe(
+    (state) => state.trayIconAppearance,
+    (trayIconAppearance) => {
+      setTrayIconAppearance(trayIconAppearance);
     },
   );
-  unsubscribers.push(unsubAlternateIdle);
+  unsubscribers.push(unsubAppearance);
 
   // Initialize zoom level from saved settings on startup
   const initialZoomPercentage = useSettingsStore.getState().zoomPercentage;
