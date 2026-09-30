@@ -1,0 +1,19 @@
+src/renderer/utils/forges/github/client.test.ts
+  s_8b76bbafb20ff7::t_2180f47223fea3 426,579
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d9c4b2aa9002e5443d614877d9db4091f7cdcd47",
+  "prompts": {},
+  "sessions": {
+    "s_8b76bbafb20ff7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f0b4e2ef3ffe5UPB4Q1kBVYh9D",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
