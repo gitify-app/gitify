@@ -10,7 +10,7 @@ import {
   registerTrayHandlers,
   registerUpdaterHandlers,
 } from './handlers';
-import { TrayIcons } from './icons';
+import { getIdleTrayIcon } from './icons';
 import {
   configureWindowEvents,
   handleProtocolURL,
@@ -33,7 +33,7 @@ if (!app.isPackaged) {
 }
 
 const mb = menubar({
-  icon: TrayIcons.idle,
+  icon: getIdleTrayIcon('auto'),
   index: Paths.indexHtml,
   browserWindow: WindowConfig,
   preloadWindow: true,
