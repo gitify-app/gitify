@@ -267,7 +267,7 @@
    * vars; re-render them as tinted glass (same hue, mostly translucent, hue
    * hairline) instead of solid chips. Text keeps Primer's contrast-chosen
    * colour, which still reads on the softened fill. */
-  .gitify-translucent [data-color-mode] [style*='--label-r'] {
+  .gitify-translucent:not(.gitify-linux) [data-color-mode] [style*='--label-r'] {
     background-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.78);
     border-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.4);
   }
@@ -299,6 +299,11 @@
     /* The light tint needs the default dark text; dark glass keeps the
      * on-emphasis white that Tooltip already defaults to. */
     color: light-dark(var(--fgColor-default), var(--fgColor-onEmphasis));
+  }
+
+  .gitify-translucent.gitify-linux [data-color-mode] [data-component='Tooltip'] {
+    background-color: color-mix(in oklab, var(--bgColor-default), transparent 8%);
+    color: var(--fgColor-default);
   }
 
   /* Primer's AnchoredOverlay wrapper (what the `?` popouts render inside)
