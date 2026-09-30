@@ -199,8 +199,8 @@ importers:
         specifier: 5.4.4
         version: 5.4.4
       electron-menubar:
-        specifier: 11.0.0
-        version: 11.0.0(electron@44.4.5(supports-color@10.2.2))
+        specifier: 11.1.0
+        version: 11.1.0(electron@44.4.5(supports-color@10.2.2))
       electron-updater:
         specifier: 6.8.9
         version: 6.8.9(supports-color@10.2.2)
@@ -2753,8 +2753,8 @@ packages:
     resolution: {integrity: sha512-istWgaXjBfURBSS8LWVW9C3jsc6+ac+tY1lXrQEOTp0lVj+a4OlO1Tmqb36GgnEUDv92DGC9VI1HNXwJinWpgA==}
     engines: {node: '>= 14'}
 
-  electron-menubar@11.0.0:
-    resolution: {integrity: sha512-KepfKfvbP5FKVTAno3IqBmNJwFxjSToYaZYjB3Cu3J3eae+L2Hc3JBlNIaeYJyzeO5KL73s+zYveuxF8AJ87Yw==}
+  electron-menubar@11.1.0:
+    resolution: {integrity: sha512-ehRz0emXrI4Irmra/Aod9SfDnGOfVNyFn2Wv20Lt7MFv3QeWCuF/w94/kKKuvkb2TGTMtEbhsXivD0cQ0Y0EjQ==}
     peerDependencies:
       electron: 44.4.5
 
@@ -6965,7 +6965,7 @@ snapshots:
 
   electron-log@5.4.4: {}
 
-  electron-menubar@11.0.0(electron@44.4.5(supports-color@10.2.2)):
+  electron-menubar@11.1.0(electron@44.4.5(supports-color@10.2.2)):
     dependencies:
       electron: 44.4.5(supports-color@10.2.2)
 
