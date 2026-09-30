@@ -54,12 +54,13 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
 
     it('maps each auth method to its icon', () => {
       expect(githubAdapter.getAuthMethodIcon('GitHub App')).toBe(AppsIcon);
+      expect(githubAdapter.getAuthMethodIcon('Gitify OAuth App')).toBe(PersonIcon);
       expect(githubAdapter.getAuthMethodIcon('OAuth App')).toBe(PersonIcon);
       expect(githubAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
     });
 
     it('wires the device-flow and OAuth-app methods so the context can dispatch via the adapter', () => {
-      expect(githubAdapter.deviceFlow?.authMethod).toBe('GitHub App');
+      expect(githubAdapter.deviceFlow?.authMethod).toBe('Gitify OAuth App');
       expect(githubAdapter.deviceFlow?.start).toBeDefined();
       expect(githubAdapter.deviceFlow?.poll).toBeDefined();
       expect(githubAdapter.deviceFlow?.getRevokeAccessUrl).toBeDefined();

@@ -12,13 +12,13 @@ export const GitHubLoginWithPersonalAccessTokenRoute: FC = () => (
     forge="github"
     hostnameCaption="Change only if you are using GitHub Enterprise Server"
     hostnamePlaceholder="github.com"
-    title="Login with Personal Access Token"
-    tokenPlaceholder="Your generated token (40 characters)"
+    title="Login with Classic Personal Access Token"
+    tokenPlaceholder="Your classic token (40 characters)"
     tokenSettingsCaption="on GitHub to paste the token below."
     tokenSettingsLabel="Generate a PAT"
   >
     <Text as="i" className="text-xs">
-      The{' '}
+      Fine-grained personal access tokens are not supported. The{' '}
       <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
         <button type="button">
           <Text as="u">recommended scopes</Text>

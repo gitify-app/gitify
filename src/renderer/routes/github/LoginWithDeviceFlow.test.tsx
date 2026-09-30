@@ -30,6 +30,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
 
     expect(screen.getByText('Receive notifications for:')).toBeInTheDocument();
+    expect(screen.getByText("Authorize Gitify's OAuth App")).toBeInTheDocument();
     expect(screen.getByTestId('device-scope-public')).toBeInTheDocument();
     expect(screen.getByTestId('device-scope-full')).toBeInTheDocument();
 
