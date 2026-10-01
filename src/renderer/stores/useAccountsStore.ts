@@ -7,7 +7,7 @@ import type { Account, Forge, Hostname, Token } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 import type { AccountsState, AccountsStore } from './types';
 
-import { getAccountUUID, isValidHostname, refreshAccount } from '../utils/auth/utils';
+import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { rendererLogInfo, rendererLogWarn } from '../utils/core/logger';
 import { getAccountAdapter, getAdapter, isKnownForge } from '../utils/forges/registry';
 import { decryptValue, encryptValue } from '../utils/system/comms';
@@ -21,11 +21,12 @@ import { DEFAULT_ACCOUNTS_STATE } from './defaults';
  */
 export function sanitizeAccounts(accounts: Account[]): Account[] {
   return accounts.flatMap((a) => {
-    if (!a.hostname || !isValidHostname(a.hostname)) {
+    const forge = isKnownForge(a.forge) ? a.forge : 'github';
+    if (!a.hostname || !getAdapter(forge).validateHostname(a.hostname)) {
       return [];
     }
     const sanitised: Account = {
-      forge: isKnownForge(a.forge) ? a.forge : 'github',
+      forge,
       method: a.method,
       platform: a.platform,
       version: a.version,

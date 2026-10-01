@@ -13,7 +13,6 @@ import { Header } from '../primitives/Header';
 
 import type { Account, Forge, Hostname, Token } from '../../types';
 
-import { isValidHostname } from '../../utils/auth/utils';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
@@ -59,7 +58,7 @@ export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormE
 
   if (!values.hostname) {
     errors.hostname = 'Hostname is required';
-  } else if (!isValidHostname(values.hostname)) {
+  } else if (!adapter.validateHostname(values.hostname)) {
     errors.hostname = 'Hostname format is invalid';
   }
 

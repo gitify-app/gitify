@@ -13,6 +13,7 @@ import type {
   RefreshAccountData,
 } from '../types';
 
+import { isValidHostname } from '../../auth/utils';
 import { decryptValue } from '../../system/comms';
 import {
   fetchBitbucketAuthenticatedUser,
@@ -98,6 +99,7 @@ export const bitbucketAdapter: ForgeAdapter = {
   defaultHostname: 'bitbucket.org' as Hostname,
 
   validateToken: (token) => token.length > 0,
+  validateHostname: isValidHostname,
 
   getPersonalAccessTokenSettingsUrl: (_hostname: Hostname) => ATLASSIAN_TOKEN_SETTINGS_URL,
 

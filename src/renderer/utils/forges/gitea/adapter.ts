@@ -9,6 +9,7 @@ import type {
 } from '../types';
 
 import { createNotificationHandler } from '../github/handlers';
+import { isValidGiteaHostname } from './auth';
 import {
   fetchGiteaAuthenticatedUser,
   giteaGetJson,
@@ -69,6 +70,7 @@ export const giteaAdapter: ForgeAdapter = {
 
   // Gitea PATs from /user/settings/applications are 40-char lowercase hex.
   validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),
+  validateHostname: isValidGiteaHostname,
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
     `https://${hostname}/user/settings/applications` as Link,
   documentationUrl: GITEA_DOCS_URL,

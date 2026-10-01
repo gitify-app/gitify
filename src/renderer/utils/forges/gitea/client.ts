@@ -3,13 +3,13 @@ import useSettingsStore from '../../../stores/useSettingsStore';
 import type { Account, Hostname } from '../../../types';
 import type { GiteaNotificationThread, GiteaUser } from './types';
 
-import { isValidHostname } from '../../auth/utils';
 import { decryptValue } from '../../system/comms';
+import { isValidGiteaHostname } from './auth';
 
 const PAGE_SIZE = 100;
 
 export function getGiteaApiBaseUrl(hostname: Hostname): URL {
-  if (!isValidHostname(hostname)) {
+  if (!isValidGiteaHostname(hostname)) {
     throw new Error('Refusing to build a Gitea API URL for invalid hostname.');
   }
   return new URL(`https://${hostname}/api/v1/`);

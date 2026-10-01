@@ -1,13 +1,14 @@
 import { act, renderHook } from '@testing-library/react';
 
 import {
+  mockGiteaAccount,
   mockGitHubCliAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
 import { mockRawUser } from '../utils/forges/github/__mocks__/response-mocks';
 
-import type { Account, Hostname, Link, Token } from '../types';
+import type { Account, Forge, Hostname, Link, Token } from '../types';
 import type { GetAuthenticatedUserResponse } from '../utils/forges/github/types';
 
 import { getRecommendedScopeNames } from '../utils/auth/scopes';
@@ -15,7 +16,7 @@ import * as logger from '../utils/core/logger';
 import * as apiClient from '../utils/forges/github/client';
 import { getAdapter } from '../utils/forges/registry';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
-import useAccountsStore from './useAccountsStore';
+import useAccountsStore, { sanitizeAccounts } from './useAccountsStore';
 
 describe('renderer/stores/useAccountsStore.ts', () => {
   beforeEach(() => {
@@ -26,6 +27,40 @@ describe('renderer/stores/useAccountsStore.ts', () => {
     const { result } = renderHook(() => useAccountsStore());
 
     expect(result.current).toMatchObject(DEFAULT_ACCOUNTS_STATE);
+  });
+
+  describe('sanitizeAccounts', () => {
+    it('preserves Gitea accounts with an optional port after rehydration', async () => {
+      const accounts = [
+        mockGiteaAccount,
+        { ...mockGiteaAccount, hostname: 'gitea.example.com:3000' as Hostname },
+      ];
+      useAccountsStore.setState({ accounts });
+
+      await useAccountsStore.persist.rehydrate();
+
+      expect(useAccountsStore.getState().accounts).toEqual(accounts);
+    });
+
+    it.each(['gitea.example.com:0', 'gitea.example.com:65536', 'gitea.example.com:3000/path'])(
+      'drops Gitea accounts with invalid hostname %s',
+      (hostname) => {
+        expect(sanitizeAccounts([{ ...mockGiteaAccount, hostname: hostname as Hostname }])).toEqual(
+          [],
+        );
+      },
+    );
+
+    it.each<Forge>(['github', 'gitlab', 'bitbucket'])(
+      'continues to reject ports for persisted %s accounts',
+      (forge) => {
+        expect(
+          sanitizeAccounts([
+            { ...mockGiteaAccount, forge, hostname: 'git.example.com:3000' as Hostname },
+          ]),
+        ).toEqual([]);
+      },
+    );
   });
 
   describe('createAccount', () => {
