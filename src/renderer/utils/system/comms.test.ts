@@ -53,10 +53,18 @@ describe('renderer/utils/comms.ts', () => {
       expect(window.gitify.openExternalLink).not.toHaveBeenCalled();
     });
 
-    it('should ignore non-https links (http)', () => {
-      openExternalLink('http://example.com' as Link);
-      expect(window.gitify.openExternalLink).not.toHaveBeenCalled();
+    it('opens HTTP links for instances without TLS', () => {
+      openExternalLink('http://git.internal:3000' as Link);
+      expect(window.gitify.openExternalLink).toHaveBeenCalledWith('http://git.internal:3000', true);
     });
+
+    it.each(['javascript:alert(1)', 'ftp://git.internal', 'file:///tmp/test', '//git.internal'])(
+      'rejects non-web links %s',
+      (url) => {
+        openExternalLink(url as Link);
+        expect(window.gitify.openExternalLink).not.toHaveBeenCalled();
+      },
+    );
   });
 
   describe('app/version & crypto helpers', () => {

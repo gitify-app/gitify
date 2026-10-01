@@ -181,7 +181,7 @@ export const AccountsRoute: FC = () => {
                         data-testid="account-host"
                         direction="horizontal"
                         gap="condensed"
-                        onClick={() => openHost(account.hostname)}
+                        onClick={() => openHost(account)}
                         title="Open host ↗"
                       >
                         {PlatformIcon && <PlatformIcon />}

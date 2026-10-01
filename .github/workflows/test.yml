@@ -83,6 +83,7 @@ jobs:
         with:
           name: visual-regression-diffs
           path: .vitest-attachments/
+          include-hidden-files: true
           if-no-files-found: ignore
 
   sonarqube:

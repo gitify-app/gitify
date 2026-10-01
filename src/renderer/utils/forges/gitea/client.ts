@@ -4,15 +4,12 @@ import type { Account, Hostname } from '../../../types';
 import type { GiteaNotificationThread, GiteaUser } from './types';
 
 import { decryptValue } from '../../system/comms';
-import { isValidGiteaHostname } from './auth';
+import { getGiteaOrigin } from './auth';
 
 const PAGE_SIZE = 100;
 
 export function getGiteaApiBaseUrl(hostname: Hostname): URL {
-  if (!isValidGiteaHostname(hostname)) {
-    throw new Error('Refusing to build a Gitea API URL for invalid hostname.');
-  }
-  return new URL(`https://${hostname}/api/v1/`);
+  return new URL('/api/v1/', getGiteaOrigin(hostname));
 }
 
 async function authHeaders(account: Account): Promise<HeadersInit> {
@@ -126,7 +123,7 @@ export async function giteaGetJson<T>(account: Account, url: string): Promise<T>
   } catch {
     throw new Error('Refusing to follow malformed Gitea URL.');
   }
-  if (parsed.protocol !== 'https:' || parsed.host !== expected.host) {
+  if (parsed.origin !== expected.origin) {
     throw new Error(
       `Refusing to follow cross-origin Gitea URL for account on ${account.hostname}.`,
     );

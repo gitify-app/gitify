@@ -74,15 +74,29 @@ const useAccountsStore = create<AccountsStore>()(
         const newAccountUUID = getAccountUUID(newAccount);
 
         const accounts = get().accounts;
-        const isCliAccount = method === getAdapter(forge).cliAuth?.authMethod;
-        const replacesAccount = (account: Account) =>
-          isCliAccount
-            ? account.forge === forge && account.hostname === hostname && account.method === method
-            : getAccountUUID(account) === newAccountUUID;
+        const adapter = getAdapter(forge);
+        const isCliAccount = method === adapter.cliAuth?.authMethod;
+        const replacesAccount = (account: Account) => {
+          if (isCliAccount) {
+            return (
+              account.forge === forge && account.hostname === hostname && account.method === method
+            );
+          }
+          if (adapter.getOrigin) {
+            return (
+              account.forge === forge &&
+              adapter.getOrigin(account.hostname) === adapter.getOrigin(hostname) &&
+              account.user?.id === newAccount.user?.id &&
+              account.method === method
+            );
+          }
+          return getAccountUUID(account) === newAccountUUID;
+        };
         const existingAccountIndex = accounts.findIndex(replacesAccount);
         const existingAccount = accounts[existingAccountIndex];
 
         if (existingAccount) {
+          newAccount.hostname = existingAccount.hostname;
           // Drop any forge-specific HTTP client cache so the new token is used.
           for (const account of accounts.filter(replacesAccount)) {
             getAccountAdapter(account).onAccountTokenChange?.();

@@ -29,6 +29,18 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
   });
 
   describe('getGiteaApiBaseUrl', () => {
+    it.each([
+      ['http://git.internal', 'http://git.internal/api/v1/'],
+      ['http://git.internal:3000/', 'http://git.internal:3000/api/v1/'],
+      ['gitea.example.com:3000', 'https://gitea.example.com:3000/api/v1/'],
+      ['https://gitea.example.com:3000', 'https://gitea.example.com:3000/api/v1/'],
+      ['localhost:3000', 'https://localhost:3000/api/v1/'],
+      ['127.0.0.1:3000', 'https://127.0.0.1:3000/api/v1/'],
+      ['[::1]:3000', 'https://[::1]:3000/api/v1/'],
+    ])('builds an API base for %s', (hostname, expected) => {
+      expect(getGiteaApiBaseUrl(hostname as Hostname).toString()).toBe(expected);
+    });
+
     it('builds https api v1 base', () => {
       const url = getGiteaApiBaseUrl('gitea.example.com' as Hostname);
       expect(url.toString()).toBe('https://gitea.example.com/api/v1/');
@@ -52,8 +64,6 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       'gitea.example.com:3.5',
       'gitea.example.com:https',
       'gitea.example.com:3000:4000',
-      'https://gitea.example.com:3000',
-      'http://gitea.example.com:3000',
       'user@gitea.example.com:3000',
       'gitea.example.com:3000/path',
       'gitea.example.com:3000?query',
@@ -62,9 +72,6 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       'gitea.example.com\n',
       ' gitea.example.com:3000',
       'gitea.example.com: 3000',
-      'localhost:3000',
-      '127.0.0.1:3000',
-      '[::1]:3000',
     ])('rejects invalid hostname %j', (hostname) => {
       expect(() => getGiteaApiBaseUrl(hostname as Hostname)).toThrow(/invalid hostname/);
     });
@@ -194,6 +201,47 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       ).rejects.toThrow(/cross-origin Gitea URL/);
       expect(fetchMock()).not.toHaveBeenCalled();
       expect(comms.decryptValue).not.toHaveBeenCalled();
+    });
+
+    const httpAccount = { ...mockGiteaAccount, hostname: 'http://git.internal:3000' as Hostname };
+
+    it('authenticates, fetches notifications, and marks them read over the configured HTTP origin', async () => {
+      fetchMock()
+        .mockResolvedValueOnce(jsonResponse({ id: 7, login: 'octocat' }))
+        .mockResolvedValueOnce(jsonResponse([]))
+        .mockResolvedValueOnce(new Response(null, { status: 204 }));
+      useSettingsStore.setState({ fetchAllNotifications: false });
+      await fetchGiteaAuthenticatedUser(httpAccount);
+      await listGiteaNotifications(httpAccount);
+      await patchGiteaNotificationThread(httpAccount, '42');
+      expect(fetchMock()).toHaveBeenCalledTimes(3);
+      for (const [url, init] of fetchMock().mock.calls) {
+        expect(String(url)).toMatch(/^http:\/\/git\.internal:3000\/api\/v1\//);
+        expect(init?.headers).toMatchObject({ Authorization: 'token decrypted' });
+      }
+    });
+
+    it('follows a URL with the configured HTTP scheme, host and port', async () => {
+      fetchMock().mockResolvedValueOnce(jsonResponse({ id: 1 }));
+      const url = 'http://git.internal:3000/api/v1/repos/o/r/issues/1';
+      expect(await giteaGetJson(httpAccount, url)).toEqual({ id: 1 });
+      expect(fetchMock()).toHaveBeenCalledWith(
+        url,
+        expect.objectContaining({
+          headers: expect.objectContaining({ Authorization: 'token decrypted' }),
+        }),
+      );
+    });
+
+    it.each([
+      'https://git.internal:3000/api/v1/x',
+      'http://git.internal:3001/api/v1/x',
+      'http://git.internal/api/v1/x',
+      'http://attacker.example:3000/api/v1/x',
+    ])('rejects a different origin %s before decrypting or sending the token', async (url) => {
+      await expect(giteaGetJson(httpAccount, url)).rejects.toThrow(/cross-origin/);
+      expect(comms.decryptValue).not.toHaveBeenCalled();
+      expect(fetchMock()).not.toHaveBeenCalled();
     });
 
     it('GETs the supplied URL with auth headers and parses JSON', async () => {

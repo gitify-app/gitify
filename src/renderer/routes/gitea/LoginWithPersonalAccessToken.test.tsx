@@ -24,22 +24,18 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  describe('form validation', () => {
-    it.each(['gitea.example.com', 'gitea.example.com:3000', 'forgejo.example.com:443'])(
-      'accepts %s',
-      (hostname) => {
-        expect(
-          validateForm(
-            {
-              hostname: hostname as Hostname,
-              token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
-            },
-            'gitea',
-          ),
-        ).toEqual({});
-      },
+  it('disables token settings and rejects credentials or paths in the origin', async () => {
+    renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />);
+    await userEvent.type(
+      screen.getByTestId('login-hostname'),
+      'http://user:secret@git.internal/path',
     );
+    expect(screen.getByTestId('login-create-token')).toBeDisabled();
+    await userEvent.click(screen.getByTestId('login-submit'));
+    expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
+  });
 
+  describe('form validation', () => {
     it.each(['gitea.example.com:0', 'gitea.example.com:65536', 'gitea.example.com:https'])(
       'rejects invalid port in %s',
       (hostname) => {
@@ -67,6 +63,24 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
       ).toBe('Hostname format is invalid');
     });
 
+    it.each(['http://git.internal', 'http://git.internal:3000', 'gitea.example.com:3000'])(
+      'accepts Gitea origin %s',
+      (hostname) => {
+        expect(
+          validateForm({ hostname: hostname as Hostname, token: 'a'.repeat(40) as Token }, 'gitea'),
+        ).toEqual({});
+      },
+    );
+
+    it.each<Forge>(['github', 'gitlab', 'bitbucket'])('keeps %s hostnames HTTPS-only', (forge) => {
+      expect(
+        validateForm(
+          { hostname: 'http://git.internal:3000' as Hostname, token: '' as Token },
+          forge,
+        ).hostname,
+      ).toBe('Hostname format is invalid');
+    });
+
     it('should validate the token matches the Gitea format', () => {
       const values: IFormData = {
         hostname: 'gitea.example.com' as Hostname,
@@ -86,26 +100,25 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it.each(['gitea.example.com', 'gitea.example.com:3000'])(
-    'should open the token settings for %s',
-    async (hostname) => {
-      renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />, {
-        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
-      });
+  it.each([
+    ['gitea.example.com', 'https://gitea.example.com'],
+    ['gitea.example.com:3000', 'https://gitea.example.com:3000'],
+    ['http://git.internal:3000', 'http://git.internal:3000'],
+  ])('opens token settings for %s', async (hostname, origin) => {
+    renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />, {
+      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
+    });
 
-      await userEvent.type(screen.getByTestId('login-hostname'), hostname);
+    await userEvent.type(screen.getByTestId('login-hostname'), hostname);
 
-      await userEvent.click(screen.getByTestId('login-create-token'));
+    await userEvent.click(screen.getByTestId('login-create-token'));
 
-      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        `https://${hostname}/user/settings/applications`,
-      );
-    },
-  );
+    expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(`${origin}/user/settings/applications`);
+  });
 
-  it.each(['gitea.example.com', 'gitea.example.com:3000'])(
-    'should login using a token on %s',
+  it.each(['gitea.example.com', 'gitea.example.com:3000', 'http://git.internal:3000'])(
+    'logs in with %s',
     async (hostname) => {
       loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 

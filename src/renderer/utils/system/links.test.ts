@@ -9,7 +9,7 @@ import { mockGitifyNotificationUser } from '../../__mocks__/user-mocks';
 
 import { Constants } from '../../constants';
 
-import type { GitifyRepository, Link } from '../../types';
+import type { GitifyRepository, Hostname, Link } from '../../types';
 
 import * as githubAuth from '../forges/github/auth';
 import * as url from '../notifications/url';
@@ -110,8 +110,28 @@ describe('renderer/utils/links.ts', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/mock-user');
   });
 
+  it('preserves the HTTP origin in Gitea account links', () => {
+    const account = { ...mockGiteaAccount, hostname: 'http://git.internal:3000' as Hostname };
+    openHost(account);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('http://git.internal:3000');
+    openAccountProfile(account);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      `http://git.internal:3000/${account.user!.login}`,
+    );
+    openAccountSettings(account);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'http://git.internal:3000/user/settings/applications',
+    );
+    openHostIssues(account);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('http://git.internal:3000/issues');
+    openHostPulls(account);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('http://git.internal:3000/pulls');
+    openHostNotifications(account);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('http://git.internal:3000/notifications');
+  });
+
   it('openHost', () => {
-    openHost(Constants.GITHUB_HOSTNAME);
+    openHost(mockGitHubCloudAccount);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com');
   });
