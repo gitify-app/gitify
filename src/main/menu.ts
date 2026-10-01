@@ -1,8 +1,8 @@
 import { Menu, MenuItem, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
-import { autoUpdater } from 'electron-updater';
 
 import { APPLICATION } from '../shared/constants';
+import { logError, toError } from '../shared/logger';
 import { isMacOS } from '../shared/platform';
 
 import { resetApp } from './lifecycle/reset';
@@ -21,6 +21,9 @@ export default class MenuBuilder {
 
   private readonly menubar: Menubar;
   private menu?: Menu;
+  private automaticUpdatesEnabled = false;
+  private checkForUpdates = async (): Promise<void> => {};
+  private installUpdate = (): void => {};
 
   /**
    * @param menubar - The menubar instance used for window and app interactions within menu actions.
@@ -29,10 +32,15 @@ export default class MenuBuilder {
     this.menubar = menubar;
 
     this.checkForUpdatesMenuItem = new MenuItem({
-      label: 'Check for updates',
+      label: 'View releases',
       enabled: true,
       click: () => {
-        autoUpdater.checkForUpdatesAndNotify();
+        const check = this.automaticUpdatesEnabled
+          ? this.checkForUpdates()
+          : shell.openExternal('https://github.com/gitify-app/gitify/releases/latest');
+        void check?.catch((error: unknown) => {
+          logError('app updater', 'Unable to open or check updates', toError(error));
+        });
       },
     });
 
@@ -53,7 +61,9 @@ export default class MenuBuilder {
       enabled: true,
       visible: false,
       click: () => {
-        autoUpdater.quitAndInstall();
+        if (this.automaticUpdatesEnabled) {
+          this.installUpdate();
+        }
       },
     });
 
@@ -162,6 +172,17 @@ export default class MenuBuilder {
    */
   private refreshMenu() {
     this.menubar.refreshContextMenu();
+  }
+
+  setUpdateActions(actions: { check: () => Promise<void>; install: () => void }) {
+    this.checkForUpdates = actions.check;
+    this.installUpdate = actions.install;
+  }
+
+  setAutomaticUpdatesEnabled(enabled: boolean) {
+    this.automaticUpdatesEnabled = enabled;
+    this.checkForUpdatesMenuItem.label = enabled ? 'Check for updates' : 'View releases';
+    this.refreshMenu();
   }
 
   /**

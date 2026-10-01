@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { Button } from '@primer/react';
 
-import type { TrayIconAppearance } from '../shared/events';
+import type { AutomaticUpdates, TrayIconAppearance } from '../shared/events';
 
 // Derived from public @primer/react component props rather than internal types
 export type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
@@ -142,6 +142,7 @@ export interface SystemSettingsState {
   notificationVolume: Percentage;
   openAtStartup: boolean;
   keepWindowOnBlur: boolean;
+  automaticUpdates: AutomaticUpdates;
   showUpdateNotifications: boolean;
   /** Linux only. Runs under X11/XWayland so the popup can be anchored to the tray icon. */
   useX11Backend: boolean;

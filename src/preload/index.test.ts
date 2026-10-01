@@ -63,7 +63,10 @@ class MockNotification {
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
-  setShowUpdateNotifications: (value: boolean) => void;
+  setUpdatePreferences: (value: {
+    automaticUpdates: 'default';
+    showUpdateNotifications: boolean;
+  }) => void;
   setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
@@ -120,12 +123,15 @@ describe('preload/index', () => {
     });
   });
 
-  it('setShowUpdateNotifications sends the preference to main', () => {
+  it('setUpdatePreferences sends the preference to main', () => {
     const api = getExposedApi();
 
-    api.setShowUpdateNotifications(false);
+    api.setUpdatePreferences({ automaticUpdates: 'default', showUpdateNotifications: false });
 
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS, false);
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_PREFERENCES, {
+      automaticUpdates: 'default',
+      showUpdateNotifications: false,
+    });
   });
 
   it('app.version returns dev in development', async () => {

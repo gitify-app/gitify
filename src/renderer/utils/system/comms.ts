@@ -2,6 +2,7 @@ import type {
   IGitHubCliTokenResult,
   ISafeStorageDecryptResult,
   TrayIconAppearance,
+  UpdatePreferences,
 } from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
@@ -105,13 +106,8 @@ export function setKeepWindowOnBlur(value: boolean): void {
   window.gitify.setKeepWindowOnBlur(value);
 }
 
-/**
- * Enables or suppresses automatic update notifications.
- *
- * @param value - `true` to show update notifications, `false` to suppress them.
- */
-export function setShowUpdateNotifications(value: boolean): void {
-  window.gitify.setShowUpdateNotifications(value);
+export function setUpdatePreferences(value: UpdatePreferences): void {
+  window.gitify.setUpdatePreferences(value);
 }
 
 /**
