@@ -61,9 +61,8 @@ export function initializeStoreSubscriptions(): () => void {
       setKeepWindowOnBlur(keepWindowOnBlur);
     },
   );
-  unsubscribers.push(unsubKeepWindowOnBlur);
-
   unsubscribers.push(
+    unsubKeepWindowOnBlur,
     useSettingsStore.subscribe((state) => state.automaticUpdates, applyUpdatePreferences),
     useSettingsStore.subscribe((state) => state.showUpdateNotifications, applyUpdatePreferences),
   );

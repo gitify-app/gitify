@@ -47,8 +47,58 @@ function ownsFile(command: string, args: string[]): Promise<boolean> {
   });
 }
 
+async function detectLinuxUpdateManager({
+  appPath,
+  env,
+}: Pick<Installation, 'appPath' | 'env'>): Promise<string | null> {
+  if (env.FLATPAK_ID || (await exists('/.flatpak-info'))) {
+    return 'Flatpak';
+  }
+  if (env.SNAP && env.SNAP_NAME) {
+    return 'Snap';
+  }
+
+  // System Electron can run an independently installed app, so query the app's files.
+  const file = appPath.endsWith('.asar') ? appPath : path.join(appPath, 'package.json');
+  for (const [command, args, manager] of [
+    ['pacman', ['-Qqo', '--', file], 'pacman'],
+    ['dpkg-query', ['-S', file], 'dpkg'],
+    ['rpm', ['-qf', '--', file], 'RPM'],
+  ] satisfies Array<[string, string[], string]>) {
+    if (await ownsFile(command, args)) {
+      return manager;
+    }
+  }
+
+  return null;
+}
+
+async function detectWindowsUpdateManager({
+  executablePath,
+}: Pick<Installation, 'executablePath'>): Promise<string | null> {
+  const directory = path.dirname(await realpath(executablePath));
+  for (const prefix of ['scoop-', '']) {
+    const install = await readMetadata(path.join(directory, `${prefix}install.json`));
+    const manifest = await readMetadata(path.join(directory, `${prefix}manifest.json`));
+    if (
+      install &&
+      typeof install === 'object' &&
+      'architecture' in install &&
+      typeof install.architecture === 'string' &&
+      manifest &&
+      typeof manifest === 'object' &&
+      'version' in manifest &&
+      typeof manifest.version === 'string'
+    ) {
+      return 'Scoop';
+    }
+  }
+
+  return null;
+}
+
 export async function detectUpdateManager(installation: Installation): Promise<string | null> {
-  const { platform, appPath, executablePath, resourcesPath, env } = installation;
+  const { platform, resourcesPath, env } = installation;
 
   if (
     env.GITIFY_DISABLE_AUTO_UPDATE === '1' ||
@@ -58,44 +108,11 @@ export async function detectUpdateManager(installation: Installation): Promise<s
   }
 
   if (platform === 'linux') {
-    if (env.FLATPAK_ID || (await exists('/.flatpak-info'))) {
-      return 'Flatpak';
-    }
-    if (env.SNAP && env.SNAP_NAME) {
-      return 'Snap';
-    }
-
-    // System Electron can run an independently installed app, so query the app's files.
-    const file = appPath.endsWith('.asar') ? appPath : path.join(appPath, 'package.json');
-    for (const [command, args, manager] of [
-      ['pacman', ['-Qqo', '--', file], 'pacman'],
-      ['dpkg-query', ['-S', file], 'dpkg'],
-      ['rpm', ['-qf', '--', file], 'RPM'],
-    ] satisfies Array<[string, string[], string]>) {
-      if (await ownsFile(command, args)) {
-        return manager;
-      }
-    }
+    return detectLinuxUpdateManager(installation);
   }
 
   if (platform === 'win32') {
-    const directory = path.dirname(await realpath(executablePath));
-    for (const prefix of ['scoop-', '']) {
-      const install = await readMetadata(path.join(directory, `${prefix}install.json`));
-      const manifest = await readMetadata(path.join(directory, `${prefix}manifest.json`));
-      if (
-        install &&
-        typeof install === 'object' &&
-        'architecture' in install &&
-        typeof install.architecture === 'string' &&
-        manifest &&
-        typeof manifest === 'object' &&
-        'version' in manifest &&
-        typeof manifest.version === 'string'
-      ) {
-        return 'Scoop';
-      }
-    }
+    return detectWindowsUpdateManager(installation);
   }
 
   return null;

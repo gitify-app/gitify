@@ -4,7 +4,7 @@ import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react'
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
-import { isAutomaticUpdates } from '../../../shared/events';
+import { type AutomaticUpdates, isAutomaticUpdates } from '../../../shared/events';
 import { logError, toError } from '../../../shared/logger';
 
 import { useShortcutRegistrationStore } from '../../hooks/useShortcutRegistration';
@@ -32,6 +32,35 @@ import { VolumeDownIcon } from '../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
+
+function getAutomaticUpdatesDescription({
+  automaticUpdates,
+  updateManager,
+  updateManagerError,
+  updateManagerLoading,
+}: {
+  automaticUpdates: AutomaticUpdates;
+  updateManager: string | null;
+  updateManagerError: boolean;
+  updateManagerLoading: boolean;
+}): string {
+  if (updateManagerLoading) {
+    return 'Detecting how Gitify was installed…';
+  }
+  if (updateManagerError) {
+    return 'Unable to detect the installation method. Select On or Off to choose how to update.';
+  }
+  if (automaticUpdates === 'enabled') {
+    return 'Gitify downloads updates automatically and installs them when you quit.';
+  }
+  if (automaticUpdates === 'disabled') {
+    return 'Automatic updates are off. View releases from the tray menu.';
+  }
+  if (updateManager) {
+    return `Automatic updates are off by default. Update Gitify using ${updateManager}.`;
+  }
+  return 'Automatic updates are on by default.';
+}
 
 export const SystemSettings: FC = () => {
   const shortcutRegistrationError = useShortcutRegistrationStore(
@@ -392,17 +421,12 @@ export const SystemSettings: FC = () => {
           }}
         />
         <Text className="text-sm text-gitify-font" aria-live="polite">
-          {updateManagerLoading
-            ? 'Detecting how Gitify was installed…'
-            : updateManagerError
-              ? 'Unable to detect the installation method. Select On or Off to choose how to update.'
-              : automaticUpdates === 'enabled'
-                ? 'Gitify downloads updates automatically and installs them when you quit.'
-                : automaticUpdates === 'disabled'
-                  ? 'Automatic updates are off. View releases from the tray menu.'
-                  : updateManager
-                    ? `Automatic updates are off by default. Update Gitify using ${updateManager}.`
-                    : 'Automatic updates are on by default.'}
+          {getAutomaticUpdatesDescription({
+            automaticUpdates,
+            updateManager,
+            updateManagerError,
+            updateManagerLoading,
+          })}
         </Text>
 
         <Checkbox
