@@ -1,0 +1,26 @@
+src/renderer/hooks/useLogins.test.tsx
+  h_ac004aadb63da9 51,115-151
+src/renderer/hooks/useLogins.ts
+  h_ac004aadb63da9 97-109,111,113
+src/renderer/stores/types.ts
+  h_ac004aadb63da9 42
+src/renderer/stores/useAccountsStore.test.ts
+  h_ac004aadb63da9 4,105-146
+src/renderer/stores/useAccountsStore.ts
+  h_ac004aadb63da9 76-93,99,101-110,115-116
+src/renderer/utils/forges/github/auth.test.ts
+  h_ac004aadb63da9 111-118
+src/renderer/utils/forges/github/auth.ts
+  h_ac004aadb63da9 78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d4f68ccace015bb103018e0701c8216cf5037f9e",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
