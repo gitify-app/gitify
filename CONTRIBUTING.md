@@ -155,3 +155,21 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 [github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
 [vitest-website]: https://vitest.dev/
+
+## Updates for packaged installations
+
+Gitify detects pacman, dpkg, and RPM ownership of its application files, Scoop
+installation metadata, and Flatpak and Snap runtimes. Automatic updates default
+to off for these installations. Other installations, including Homebrew, keep
+automatic updates on by default.
+
+Package maintainers can also place an empty `disable-auto-updates` file in the
+application's resources directory, or set `GITIFY_DISABLE_AUTO_UPDATE=1` in the
+application's launcher. These select the managed default without patching the app.
+The resources directory is the one reported by Electron's `process.resourcesPath`;
+for packages using system Electron, use the launcher environment variable.
+
+Users can override the default under Settings > System > Automatic updates.
+The choice persists across restarts. Turning updates off stops scheduled checks,
+cancels active downloads, and prevents installation on quit. The tray menu then
+provides a **View releases** link instead of running the built-in updater.

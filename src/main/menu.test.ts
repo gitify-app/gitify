@@ -1,6 +1,5 @@
 import { Menu, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
-import { autoUpdater } from 'electron-updater';
 
 import type { Mock } from 'vite-plus/test';
 
@@ -21,9 +20,10 @@ const menuItemInstances: Array<{
 
 vi.mock('electron', () => {
   class MockMenuItem {
+    label?: string;
     constructor(opts: Record<string, unknown>) {
       Object.assign(this, opts);
-      menuItemInstances.push(opts as (typeof menuItemInstances)[number]);
+      menuItemInstances.push(this);
     }
   }
   return {
@@ -36,13 +36,6 @@ vi.mock('electron', () => {
     } satisfies Pick<Electron.Shell, 'openExternal'>,
   };
 });
-
-vi.mock('electron-updater', () => ({
-  autoUpdater: {
-    checkForUpdatesAndNotify: vi.fn(),
-    quitAndInstall: vi.fn(),
-  },
-}));
 
 vi.mock('./utils', () => ({
   takeScreenshot: vi.fn(),
@@ -60,6 +53,7 @@ vi.mock('../shared/platform', () => ({
 describe('main/menu.ts', () => {
   let menubar: Menubar;
   let menuBuilder: MenuBuilder;
+  const install = vi.fn();
 
   /** Helper: find MenuItem config captured via our tracking array by label */
   const getMenuItemConfigByLabel = (label: string) =>
@@ -105,10 +99,10 @@ describe('main/menu.ts', () => {
 
   describe('checkForUpdatesMenuItem', () => {
     it('default menu configuration', () => {
-      const config = getMenuItemConfigByLabel('Check for updates');
+      const config = getMenuItemConfigByLabel('View releases');
 
       expect(config).toBeDefined();
-      expect(config?.label).toBe('Check for updates');
+      expect(config?.label).toBe('View releases');
       expect(config?.enabled).toBe(true);
       expect(config?.click).toEqual(expect.any(Function));
     });
@@ -248,21 +242,38 @@ describe('main/menu.ts', () => {
 
   describe('click handlers', () => {
     it('invokes autoUpdater.checkForUpdatesAndNotify when clicking "Check for updates"', () => {
+      const check = vi.fn().mockResolvedValue(undefined);
+      menuBuilder.setUpdateActions({ check, install });
+      menuBuilder.setAutomaticUpdatesEnabled(true);
       const cfg = getMenuItemConfigByLabel('Check for updates');
       expect(cfg).toBeDefined();
 
       cfg?.click?.();
 
-      expect(autoUpdater.checkForUpdatesAndNotify).toHaveBeenCalled();
+      expect(check).toHaveBeenCalled();
     });
 
-    it('invokes autoUpdater.quitAndInstall when clicking "Restart to install update"', () => {
+    it('requests installation when clicking "Restart to install update"', () => {
+      menuBuilder.setUpdateActions({ check: vi.fn().mockResolvedValue(undefined), install });
+      menuBuilder.setAutomaticUpdatesEnabled(true);
       const cfg = getMenuItemConfigByLabel('Restart to install update');
       expect(cfg).toBeDefined();
 
       cfg?.click?.();
 
-      expect(autoUpdater.quitAndInstall).toHaveBeenCalled();
+      expect(install).toHaveBeenCalled();
+    });
+
+    it('opens releases and blocks installation while automatic updates are off', () => {
+      const check = vi.fn().mockResolvedValue(undefined);
+      menuBuilder.setUpdateActions({ check, install });
+      getMenuItemConfigByLabel('View releases')?.click?.();
+      getMenuItemConfigByLabel('Restart to install update')?.click?.();
+      expect(shell.openExternal).toHaveBeenCalledWith(
+        'https://github.com/gitify-app/gitify/releases/latest',
+      );
+      expect(check).not.toHaveBeenCalled();
+      expect(install).not.toHaveBeenCalled();
     });
 
     it('developer submenu click actions execute expected functions', () => {

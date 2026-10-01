@@ -4,6 +4,8 @@ import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react'
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
+import { isAutomaticUpdates } from '../../../shared/events';
+import { logError, toError } from '../../../shared/logger';
 
 import { useShortcutRegistrationStore } from '../../hooks/useShortcutRegistration';
 import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
@@ -52,6 +54,10 @@ export const SystemSettings: FC = () => {
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
+  const automaticUpdates = useSettingsStore((s) => s.automaticUpdates);
+  const [updateManager, setUpdateManager] = useState<string | null>(null);
+  const [updateManagerError, setUpdateManagerError] = useState(false);
+  const [updateManagerLoading, setUpdateManagerLoading] = useState(true);
   const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
   const useX11Backend = useSettingsStore((s) => s.useX11Backend);
 
@@ -59,6 +65,28 @@ export const SystemSettings: FC = () => {
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
   const shortcutRowRef = useRef<HTMLDivElement>(null);
   const isMac = window.gitify.platform.isMacOS();
+
+  useEffect(() => {
+    let active = true;
+    window.gitify
+      .getUpdateManager()
+      .then((manager) => {
+        if (active) {
+          setUpdateManager(manager);
+          setUpdateManagerLoading(false);
+        }
+      })
+      .catch((error: unknown) => {
+        logError('settings', 'Unable to detect update manager', toError(error));
+        if (active) {
+          setUpdateManagerError(true);
+          setUpdateManagerLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (!recordingShortcut) {
@@ -348,17 +376,41 @@ export const SystemSettings: FC = () => {
           visible={!window.gitify.platform.isLinux()}
         />
 
+        <RadioGroup
+          label="Automatic updates:"
+          name="automaticUpdates"
+          value={automaticUpdates}
+          options={[
+            { label: 'Default', value: 'default' },
+            { label: 'On', value: 'enabled' },
+            { label: 'Off', value: 'disabled' },
+          ]}
+          onChange={(event) => {
+            if (isAutomaticUpdates(event.target.value)) {
+              updateSetting('automaticUpdates', event.target.value);
+            }
+          }}
+        />
+        <Text className="text-sm text-gitify-font" aria-live="polite">
+          {updateManagerLoading
+            ? 'Detecting how Gitify was installed…'
+            : updateManagerError
+              ? 'Unable to detect the installation method. Select On or Off to choose how to update.'
+              : automaticUpdates === 'enabled'
+                ? 'Gitify downloads updates automatically and installs them when you quit.'
+                : automaticUpdates === 'disabled'
+                  ? 'Automatic updates are off. View releases from the tray menu.'
+                  : updateManager
+                    ? `Automatic updates are off by default. Update Gitify using ${updateManager}.`
+                    : 'Automatic updates are on by default.'}
+        </Text>
+
         <Checkbox
           checked={showUpdateNotifications}
           label="Show update notifications"
           name="showUpdateNotifications"
           onChange={() => toggleSetting('showUpdateNotifications')}
-          tooltip={
-            <Text>
-              Show a notification when a {APPLICATION.NAME} update is ready. Updates will still be
-              checked and shown in the menu bar.
-            </Text>
-          }
+          tooltip={<Text>Show a notification when an automatic update is ready to install.</Text>}
         />
 
         <Checkbox

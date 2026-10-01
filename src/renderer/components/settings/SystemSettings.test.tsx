@@ -47,6 +47,35 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
+  it('explains the managed default and persists explicit update choices', async () => {
+    vi.mocked(window.gitify.getUpdateManager).mockResolvedValue('pacman');
+    await act(async () => {
+      renderWithProviders(<SystemSettings />);
+    });
+    expect(
+      screen.getByText('Automatic updates are off by default. Update Gitify using pacman.'),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('radio-automaticUpdates-enabled'));
+    expect(useSettingsStore.getState().automaticUpdates).toBe('enabled');
+    expect(
+      screen.getByText('Gitify downloads updates automatically and installs them when you quit.'),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('radio-automaticUpdates-disabled'));
+    expect(useSettingsStore.getState().automaticUpdates).toBe('disabled');
+    expect(
+      screen.getByText('Automatic updates are off. View releases from the tray menu.'),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('radio-automaticUpdates-default'));
+    expect(useSettingsStore.getState().automaticUpdates).toBe('default');
+  });
+
+  it('explains the default for a direct installation', async () => {
+    await act(async () => {
+      renderWithProviders(<SystemSettings />);
+    });
+    expect(screen.getByText('Automatic updates are on by default.')).toBeInTheDocument();
+  });
+
   describe('X11 backend checkbox', () => {
     // `window.gitify` is rebuilt in a global `beforeEach`, so the mock has to
     // be read inside each test rather than captured at describe scope.
