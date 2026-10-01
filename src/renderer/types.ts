@@ -412,6 +412,10 @@ export interface GitifySubject {
   issueFields?: GitifyIssueField[];
   /** Milestone state/title */
   milestone?: GitifyMilestone;
+  /** Parent issue context when the issue is a sub-issue */
+  parentIssue?: GitifyParentIssue;
+  /** Sub-issue progress summary when the issue has sub-issues */
+  subIssueProgress?: GitifySubIssueProgress;
   /** Deep link to notification thread */
   htmlUrl?: Link;
   /** Reaction counts */
@@ -485,6 +489,20 @@ export interface GitifyNotificationDisplay {
 export interface GitifyIssueType {
   name: string;
   color: IconColor;
+}
+
+/** GitHub sub-issue parent context */
+export interface GitifyParentIssue {
+  number: number;
+  title: string;
+  url: Link;
+}
+
+/** GitHub sub-issue progress summary */
+export interface GitifySubIssueProgress {
+  total: number;
+  completed: number;
+  percentCompleted: number;
 }
 
 /** GitHub issue field value, normalized for display */

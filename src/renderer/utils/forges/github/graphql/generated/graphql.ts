@@ -237,7 +237,7 @@ export type FetchIssueByNumberQuery = { repository: { issue: { __typename: 'Issu
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
           | { __typename: 'IssueFieldDateValue', dateValue: string, field:
               | { name: string }
               | Record<PropertyKey, never>
@@ -272,7 +272,7 @@ export type IssueDetailsFragment = { __typename: 'Issue', number: number, title:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
       | { __typename: 'IssueFieldDateValue', dateValue: string, field:
           | { name: string }
           | Record<PropertyKey, never>
@@ -343,7 +343,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
           | { __typename: 'IssueFieldDateValue', dateValue: string, field:
               | { name: string }
               | Record<PropertyKey, never>
@@ -426,7 +426,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, issueFieldValues: { nodes: Array<
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
           | { __typename: 'IssueFieldDateValue', dateValue: string, field:
               | { name: string }
               | Record<PropertyKey, never>
@@ -807,6 +807,16 @@ export const IssueDetailsFragmentDoc = new TypedDocumentString(`
     name
     color
   }
+  parent @gated(requires: "subIssues") {
+    number
+    title
+    url
+  }
+  subIssuesSummary @gated(requires: "subIssues") {
+    total
+    completed
+    percentCompleted
+  }
   issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
     nodes {
       __typename
@@ -1174,6 +1184,16 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  parent @gated(requires: "subIssues") {
+    number
+    title
+    url
+  }
+  subIssuesSummary @gated(requires: "subIssues") {
+    total
+    completed
+    percentCompleted
+  }
   issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
     nodes {
       __typename
@@ -1477,6 +1497,16 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  parent @gated(requires: "subIssues") {
+    number
+    title
+    url
+  }
+  subIssuesSummary @gated(requires: "subIssues") {
+    total
+    completed
+    percentCompleted
+  }
   issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
     nodes {
       __typename
@@ -1649,6 +1679,16 @@ fragment IssueDetails on Issue {
   issueType {
     name
     color
+  }
+  parent @gated(requires: "subIssues") {
+    number
+    title
+    url
+  }
+  subIssuesSummary @gated(requires: "subIssues") {
+    total
+    completed
+    percentCompleted
   }
   issueFieldValues(first: $firstIssueFieldValues) @gated(requires: "issueFields") {
     nodes {

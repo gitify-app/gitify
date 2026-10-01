@@ -19,9 +19,8 @@ const config: CodegenConfig = {
     'https://api.github.com/graphql': {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        // Issue fields are exposed behind this feature flag header; without it
-        // the schema omits `issueFieldValues` and its union types.
-        'GraphQL-Features': 'issue_fields',
+        // Hierarchy and issue fields each require their GraphQL schema feature.
+        'GraphQL-Features': 'sub_issues,issue_fields',
       },
       // GitHub's live schema currently fails graphql-js's stricter
       // interface-deprecation-consistency validation (added in graphql v17).

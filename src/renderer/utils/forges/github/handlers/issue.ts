@@ -134,6 +134,21 @@ class IssueHandler extends DefaultHandler {
           .map((node) => mapIssueFieldValue(node))
           .filter((field): field is GitifyIssueField => field !== undefined) ?? [],
       milestone: issue.milestone ?? undefined,
+      parentIssue: issue.parent
+        ? {
+            number: issue.parent.number,
+            title: issue.parent.title,
+            url: issue.parent.url,
+          }
+        : undefined,
+      subIssueProgress:
+        issue.subIssuesSummary && issue.subIssuesSummary.total > 0
+          ? {
+              total: issue.subIssuesSummary.total,
+              completed: issue.subIssuesSummary.completed,
+              percentCompleted: issue.subIssuesSummary.percentCompleted,
+            }
+          : undefined,
       htmlUrl: issueComment?.url ?? issue.url,
       reactionsCount: issueReactionCount,
       reactionGroups: issueReactionGroup ?? undefined,

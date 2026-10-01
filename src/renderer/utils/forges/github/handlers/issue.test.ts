@@ -384,6 +384,58 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
 
       expect(result.issueFields).toEqual([]);
     });
+
+    it('with parent issue', async () => {
+      const mockIssue = mockIssueResponseNode({ state: 'OPEN' });
+      mockIssue.parent = {
+        number: 456,
+        title: 'Epic Title',
+        url: 'https://github.com/gitify-app/notifications-test/issues/456' as Link,
+      };
+
+      fetchIssueByNumberSpy.mockResolvedValue({ repository: { issue: mockIssue } });
+
+      const result = await issueHandler.enrich(mockNotification);
+      expect(result.parentIssue).toEqual({
+        number: 456,
+        title: 'Epic Title',
+        url: 'https://github.com/gitify-app/notifications-test/issues/456',
+      });
+    });
+
+    it('with sub-issue progress', async () => {
+      const mockIssue = mockIssueResponseNode({ state: 'OPEN' });
+      mockIssue.subIssuesSummary = { total: 5, completed: 2, percentCompleted: 40 };
+
+      fetchIssueByNumberSpy.mockResolvedValue({ repository: { issue: mockIssue } });
+
+      const result = await issueHandler.enrich(mockNotification);
+      expect(result.subIssueProgress).toEqual({ total: 5, completed: 2, percentCompleted: 40 });
+    });
+
+    it('omits progress when there are no sub-issues', async () => {
+      const mockIssue = mockIssueResponseNode({ state: 'OPEN' });
+
+      fetchIssueByNumberSpy.mockResolvedValue({ repository: { issue: mockIssue } });
+
+      const result = await issueHandler.enrich(mockNotification);
+      expect(result.parentIssue).toBeUndefined();
+      expect(result.subIssueProgress).toBeUndefined();
+    });
+
+    it('omits hierarchy when gated fields are absent from an older GHES response', async () => {
+      const mockIssue = mockIssueResponseNode({ state: 'OPEN' });
+      delete (mockIssue as Partial<typeof mockIssue>).parent;
+      delete (mockIssue as Partial<typeof mockIssue>).subIssuesSummary;
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: { issue: mockIssue },
+      } as FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+      expect(result.parentIssue).toBeUndefined();
+      expect(result.subIssueProgress).toBeUndefined();
+    });
   });
 
   describe('iconType', () => {
