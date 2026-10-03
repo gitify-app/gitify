@@ -105,9 +105,9 @@ For more information, see [LICENSE](LICENSE).
 [coverage]: https://sonarcloud.io/summary/new_code?id=gitify-app_gitify
 [quality-badge]: https://img.shields.io/sonar/quality_gate/gitify-app_gitify?server=https%3A%2F%2Fsonarcloud.io&logo=sonarqubecloud
 [quality]: https://sonarcloud.io/summary/new_code?id=gitify-app_gitify
-[ci-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/ci.yml?logo=github&label=CI
+[ci-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/ci.yml?logo=github&label=ci
 [ci-actions]: https://github.com/gitify-app/gitify/actions/workflows/ci.yml
-[release-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/release.yml?logo=github&label=Release
+[release-workflow-badge]: https://img.shields.io/github/actions/workflow/status/gitify-app/gitify/release.yml?logo=github&label=release
 [release-actions]: https://github.com/gitify-app/gitify/actions/workflows/release.yml
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all&logo=github
 [downloads-latest-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total?logo=github
