@@ -23,14 +23,3 @@ export type GetReleaseResponse =
 export type RawGitHubNotification = Endpoints['GET /notifications']['response']['data'][number];
 
 export type RawUser = components['schemas']['simple-user'];
-
-/**
- * These API endpoints don't return a response body:
- *  - Endpoints['PATCH /notifications/threads/{thread_id}']['response']['data']
- *  - Endpoints['DELETE /notifications/threads/{thread_id}']['response']['data']
- */
-// oxlint-disable-next-line typescript/no-invalid-void-type -- This endpoint has no response body
-export type MarkNotificationThreadAsReadResponse = void;
-
-// oxlint-disable-next-line typescript/no-invalid-void-type -- This endpoint has no response body
-export type MarkNotificationThreadAsDoneResponse = void;

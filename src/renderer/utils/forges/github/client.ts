@@ -9,8 +9,6 @@ import type {
   GetReleaseResponse,
   IgnoreNotificationThreadSubscriptionResponse,
   ListNotificationsForAuthenticatedUserResponse,
-  MarkNotificationThreadAsDoneResponse,
-  MarkNotificationThreadAsReadResponse,
 } from './types';
 
 import { reportServerPollInterval } from '../../notifications/pollInterval';
@@ -105,7 +103,7 @@ export async function listNotificationsForAuthenticatedUser(
 export async function markNotificationThreadAsRead(
   account: Account,
   threadId: string,
-): Promise<MarkNotificationThreadAsReadResponse> {
+): Promise<void> {
   const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.markThreadAsRead({
@@ -126,7 +124,7 @@ export async function markNotificationThreadAsRead(
 export async function markNotificationThreadAsDone(
   account: Account,
   threadId: string,
-): Promise<MarkNotificationThreadAsDoneResponse> {
+): Promise<void> {
   const octokit = await createOctokitClient(account, 'rest');
 
   const response = await octokit.rest.activity.markThreadAsDone({
