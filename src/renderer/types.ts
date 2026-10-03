@@ -265,7 +265,6 @@ export enum IconColor {
   PURPLE = 'text-gitify-icon-done',
   RED = 'text-gitify-icon-closed',
   YELLOW = 'text-gitify-icon-attention',
-  WARNING = 'text-gitify-warning',
 }
 
 export enum Opacity {

@@ -43,7 +43,7 @@ function getScopeIconClassName(account: Account): string {
     return IconColor.GREEN;
   }
   if (hasAlternateScopes(account)) {
-    return IconColor.WARNING;
+    return 'text-gitify-warning';
   }
   return '';
 }
