@@ -5,13 +5,13 @@ import type {
   Forge,
   GitifyError,
   Hostname,
-  Reason,
-  ReviewRequestType,
+  ReasonFilterValue,
+  ReviewRequestTypeFilterValue,
   SearchToken,
   SettingsState,
-  SubjectType,
+  SubjectTypeFilterValue,
   Token,
-  UserType,
+  UserTypeFilterValue,
 } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 
@@ -112,12 +112,12 @@ export interface FiltersState {
   /**
    * The user types to filter notifications by.
    */
-  userTypes: UserType[];
+  userTypes: UserTypeFilterValue[];
 
   /**
    * The subject types to filter notifications by.
    */
-  subjectTypes: SubjectType[];
+  subjectTypes: SubjectTypeFilterValue[];
 
   /**
    * The states to filter notifications by.
@@ -127,12 +127,12 @@ export interface FiltersState {
   /**
    * The reasons to filter notifications by.
    */
-  reasons: Reason[];
+  reasons: ReasonFilterValue[];
 
   /**
    * The review request types to filter notifications by.
    */
-  reviewRequestTypes: ReviewRequestType[];
+  reviewRequestTypes: ReviewRequestTypeFilterValue[];
 }
 
 /**
