@@ -33,3 +33,6 @@ src/renderer/**/__screenshots__/**/*.png
 
 # Mac Files
 .DS_Store
+
+# OpenSpec
+openspec/
