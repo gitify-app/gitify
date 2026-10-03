@@ -2,7 +2,9 @@ import type { FC } from 'react';
 
 import {
   CheckCircleFillIcon,
+  CommentIcon,
   NoEntryFillIcon,
+  NoteIcon,
   OrganizationIcon,
   PersonIcon,
   RepoIcon,
@@ -82,6 +84,14 @@ export const SearchFilter: FC = () => {
                   </Text>
                 </Stack>
                 <Stack direction="horizontal" gap="condensed">
+                  <CommentIcon size={Size.SMALL} />
+                  <Text
+                    className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
+                  >
+                    Commenter (commenter:handle)
+                  </Text>
+                </Stack>
+                <Stack direction="horizontal" gap="condensed">
                   <OrganizationIcon size={Size.SMALL} />
                   <Text>Organization (org:name)</Text>
                 </Stack>
@@ -89,8 +99,13 @@ export const SearchFilter: FC = () => {
                   <RepoIcon size={Size.SMALL} />
                   <Text>Repository (repo:fullname)</Text>
                 </Stack>
+                <Stack direction="horizontal" gap="condensed">
+                  <NoteIcon size={Size.SMALL} />
+                  <Text>Title (title:text)</Text>
+                </Stack>
               </Stack>
             </div>
+            <Text className="text-gitify-fg-muted">All qualifiers match case-insensitively.</Text>
             <RequiresDetailedNotificationWarning />
           </Stack>
         }
