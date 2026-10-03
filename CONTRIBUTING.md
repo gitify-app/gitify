@@ -107,10 +107,20 @@ Releases are automated with [release-please][release-please]. There is no releas
 - attaches the assets to the release that release-please drafted, and
 - publishes the release (creating the `vX.Y.Z` tag), which redeploys the website and triggers the automatic [Homebrew cask bump][homebrew-cask-autobump-workflow] (workflow runs ~3 hours).
 
-4. **(Optional) Update milestones:**
+4. **Milestones and notifications are automated.**
 
-- Edit the current [Milestone][github-milestones]: add a link to the release notes, set the due date to the release date, and close it.
-- Create a [New Milestone][github-new-milestone] for the next release cycle.
+- An open [Milestone][github-milestones] titled `Release X.Y.Z` is kept in step with the release-please version, and merged pull requests are attached to it as they land.
+- When the release is published, the milestone is finalized: its description becomes the release URL, its due date is set to the release date, and it is closed.
+- A separate job comments once on every pull request included in the release, linking contributors to the release page. Re-runs are idempotent and never post duplicate comments.
+
+No manual milestone creation, renaming, or closing is required.
+
+#### Release automation permissions
+
+- Packaging and publication use `contents: write`.
+- The milestone automation uses `issues: write`.
+- Pull request notification uses `issues: write`, `pull-requests: write`, and `contents: read`.
+- The validation jobs (`lint`, `tests`) remain read-only.
 
 ### Design Guidelines
 
@@ -150,7 +160,6 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
 [github-issues]: https://github.com/setchy/gitify/issues
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
-[github-new-milestone]: https://github.com/gitify-app/gitify/milestones/new
 [github-new-release]: https://github.com/gitify-app/gitify/releases/new
 [github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
