@@ -60,7 +60,7 @@ export const LoginRoute: FC = () => {
         width: btnRect.width,
       };
       // Avoid setState->layout->setState loops when nothing changed.
-      if (prev && prev.left === next.left && prev.width === next.width) {
+      if (prev?.left === next.left && prev?.width === next.width) {
         return prev;
       }
       return next;
