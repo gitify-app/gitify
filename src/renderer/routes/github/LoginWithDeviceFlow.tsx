@@ -262,7 +262,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
                 >
                   {label}
                 </button>
-                , then re-authorize above.
+                {', then re-authorize above.'}
               </Text>
             </Stack>
           );
