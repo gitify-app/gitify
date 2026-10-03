@@ -1,5 +1,51 @@
 # Changelog
 
+## [7.9.0](https://github.com/gitify-app/gitify/compare/v7.8.0...v7.9.0) (2026-10-03)
+
+
+### 🚀 Features
+
+* **filters:** add catch-all `other` filter value to all sections ([#3354](https://github.com/gitify-app/gitify/issues/3354)) ([dd1eb7a](https://github.com/gitify-app/gitify/commit/dd1eb7a105156d8ea891dd995832406224c73fa9))
+* **filters:** search by title keyword ([#3355](https://github.com/gitify-app/gitify/issues/3355)) ([3cbc13d](https://github.com/gitify-app/gitify/commit/3cbc13d3431897750ac38a01dd0c679abfcbc65a))
+* **gitea:** accept optional ports in instance hostnames ([#3344](https://github.com/gitify-app/gitify/issues/3344)) ([73f9479](https://github.com/gitify-app/gitify/commit/73f94798aa7b4238d9a28116a694d1f9254ee8b8))
+* **gitea:** allow explicit HTTP instance origins ([#3345](https://github.com/gitify-app/gitify/issues/3345)) ([32d6d7b](https://github.com/gitify-app/gitify/commit/32d6d7b79574f4e9c7b2353bbfa94cf2e545365a))
+* **github:** add support for parent and sub issues ([#3279](https://github.com/gitify-app/gitify/issues/3279)) ([f7763e7](https://github.com/gitify-app/gitify/commit/f7763e73c989a458f6ed912f9c69078d836775c0))
+* **metrics:** prepend issue fields as formatted labels ([#3276](https://github.com/gitify-app/gitify/issues/3276)) ([3e8a4c4](https://github.com/gitify-app/gitify/commit/3e8a4c466d703e9141ebc64de230cf5a46c00436))
+* sign in with an existing GitHub CLI login ([#3316](https://github.com/gitify-app/gitify/issues/3316)) ([9b4eb34](https://github.com/gitify-app/gitify/commit/9b4eb343acc6668d0aaa27f4a153f02382318f35))
+
+
+### 🐛 Bug Fixes
+
+* `[@primer](https://github.com/primer)` motion animations for refresh ([#3289](https://github.com/gitify-app/gitify/issues/3289)) ([ccb9983](https://github.com/gitify-app/gitify/commit/ccb9983a4ecb33be195b3b0516188819bb98ed0e))
+* align playwright versions ([#3299](https://github.com/gitify-app/gitify/issues/3299)) ([5544abe](https://github.com/gitify-app/gitify/commit/5544abeecfd962d6f7a3e51bdaafe1a45aa4bb75))
+* **ci:** patch app-builder-lib keychain password for macOS signing ([#3284](https://github.com/gitify-app/gitify/issues/3284)) ([aa5f25d](https://github.com/gitify-app/gitify/commit/aa5f25d1df38f177cbcd3f7d643a857e4c26a8d8))
+* **filter:** add missing commenter option in search tooltip ([#3356](https://github.com/gitify-app/gitify/issues/3356)) ([c33ff36](https://github.com/gitify-app/gitify/commit/c33ff36bf5ef6117947af5e82ea3c9e2662b054b))
+* keep glass dropdown options readable in dark mode ([#3317](https://github.com/gitify-app/gitify/issues/3317)) ([aa79c60](https://github.com/gitify-app/gitify/commit/aa79c609ed7707ddc7587de5cd1b39e45a7e6994))
+* restore Linux glass label tooltip contrast ([#3343](https://github.com/gitify-app/gitify/issues/3343)) ([c378ba6](https://github.com/gitify-app/gitify/commit/c378ba6b7c859d63e38234b0cdaa96b0a4819667))
+* support standalone GNOME tray integration ([#3297](https://github.com/gitify-app/gitify/issues/3297)) ([72ccf73](https://github.com/gitify-app/gitify/commit/72ccf7351ab159b335fac550faeb880a7c5302b2))
+
+
+### ⚡️ Performance
+
+* virtualize the notification list ([#3319](https://github.com/gitify-app/gitify/issues/3319)) ([e2fea1a](https://github.com/gitify-app/gitify/commit/e2fea1ae2c0303e70d5196584aa4aad3b3a2f8c9))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @octokit/plugin-paginate-rest to v16 ([#3351](https://github.com/gitify-app/gitify/issues/3351)) ([f09f7a6](https://github.com/gitify-app/gitify/commit/f09f7a6b57de38a727c766eea63fa96cdb31eeb3))
+* **deps-core:** update @primer/css to v22.3.1 ([#3300](https://github.com/gitify-app/gitify/issues/3300)) ([1cb38d2](https://github.com/gitify-app/gitify/commit/1cb38d2c83b946726f7b7f4bb7b7469652200556))
+* **deps-core:** update @primer/css to v22.3.2 ([#3328](https://github.com/gitify-app/gitify/issues/3328)) ([43d3532](https://github.com/gitify-app/gitify/commit/43d353243c3018fd14bfb6e1184a278a49907d5b))
+* **deps-core:** update @primer/octicons-react to v19.35.0 ([#3305](https://github.com/gitify-app/gitify/issues/3305)) ([cf300ed](https://github.com/gitify-app/gitify/commit/cf300ed9e1f5ef2180f1283d1650adb698a3e8f8))
+* **deps-core:** update @primer/octicons-react to v19.38.0 ([#3331](https://github.com/gitify-app/gitify/issues/3331)) ([8ea939f](https://github.com/gitify-app/gitify/commit/8ea939f745f794e9e631281aee3b5efcc35571cb))
+* **deps-core:** update @primer/react to v38.38.0 ([#3286](https://github.com/gitify-app/gitify/issues/3286)) ([22ddd2b](https://github.com/gitify-app/gitify/commit/22ddd2b21ac484eae93c0f28f9856ca3dbf1722f))
+* **deps-core:** update @primer/react to v38.39.0 ([#3306](https://github.com/gitify-app/gitify/issues/3306)) ([9c2ac87](https://github.com/gitify-app/gitify/commit/9c2ac87f9670a7da8c6102dd2e5a2e1faa1c1e24))
+* **deps-core:** update @primer/react to v38.40.0 ([#3332](https://github.com/gitify-app/gitify/issues/3332)) ([4e814ab](https://github.com/gitify-app/gitify/commit/4e814abd0b3032c6c6320a8d14ffdf1a4aa079ff))
+* **deps-core:** update electron to v44.2.0 ([#3291](https://github.com/gitify-app/gitify/issues/3291)) ([e005c55](https://github.com/gitify-app/gitify/commit/e005c556248eaff7c0a135c85702d063e68c6f40))
+* **deps-core:** update electron to v44.3.0 ([#3307](https://github.com/gitify-app/gitify/issues/3307)) ([9f0ca90](https://github.com/gitify-app/gitify/commit/9f0ca905b78da0977f2953c72ba50fc0c026ef2c))
+* **deps-core:** update electron to v44.4.5 ([#3333](https://github.com/gitify-app/gitify/issues/3333)) ([302c90f](https://github.com/gitify-app/gitify/commit/302c90f2c83a4bed68e0150b6045e57185e796fa))
+* **deps-core:** update electron to v44.5.1 ([#3349](https://github.com/gitify-app/gitify/issues/3349)) ([5623244](https://github.com/gitify-app/gitify/commit/56232440f213d581b17c93621d52392bb05c3068))
+* **deps-core:** update electron-menubar to v11.1.0 ([#3341](https://github.com/gitify-app/gitify/issues/3341)) ([7ee353a](https://github.com/gitify-app/gitify/commit/7ee353aaf7be13bbfdfeddb4886a00478b294dbd))
+
 ## [7.8.0](https://github.com/gitify-app/gitify/compare/v7.7.1...v7.8.0) (2026-09-06)
 
 
