@@ -8,7 +8,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 catalog:
-  electron: '44.4.5'
+  electron: '44.5.1'
   vite: npm:@voidzero-dev/vite-plus-core@0.3.3
   vitest: 4.1.11
   vite-plus: 0.3.3
