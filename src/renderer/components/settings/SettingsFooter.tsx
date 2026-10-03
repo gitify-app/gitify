@@ -17,7 +17,7 @@ export const SettingsFooter: FC = () => {
   const { shortcuts } = useShortcutActions();
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const result = await getAppVersion();
       setAppVersion(result);
     })();

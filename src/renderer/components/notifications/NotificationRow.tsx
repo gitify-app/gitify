@@ -72,9 +72,9 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   };
 
   const actionNotificationInteraction = () => {
-    openNotification(notification);
+    void openNotification(notification);
 
-    runAction(() =>
+    void runAction(() =>
       markAsDoneOnOpen
         ? markNotificationsAsDone([notification])
         : markNotificationsAsRead([notification]),

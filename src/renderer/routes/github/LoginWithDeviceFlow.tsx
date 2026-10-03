@@ -71,7 +71,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
     };
 
     if (scopeChoice) {
-      initializeDeviceFlow();
+      void initializeDeviceFlow();
     }
   }, [loginWithDeviceFlowStart, reAuthAccount, scopeChoice, forge]);
 
@@ -118,7 +118,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
       }
     };
 
-    startPolling();
+    void startPolling();
 
     return () => {
       isActive = false;
