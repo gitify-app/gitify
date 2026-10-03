@@ -137,6 +137,51 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[0]]);
       });
+
+      it('should filter notifications that match include title (substring)', () => {
+        useFiltersStore.setState({
+          includeSearchTokens: ['title:User' as SearchToken],
+        });
+
+        const result = filterBaseNotifications(mockNotifications);
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('should filter notifications that match exclude title (substring)', () => {
+        useFiltersStore.setState({
+          excludeSearchTokens: ['title:bot' as SearchToken],
+        });
+
+        const result = filterBaseNotifications(mockNotifications);
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('should filter by title without detailed notifications enabled', () => {
+        useSettingsStore.setState({ detailedNotifications: false });
+        useFiltersStore.setState({
+          includeSearchTokens: ['title:bot' as SearchToken],
+        });
+
+        const result = filterBaseNotifications(mockNotifications);
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[1]]);
+      });
+
+      it('should filter by title case-insensitively', () => {
+        useFiltersStore.setState({
+          excludeSearchTokens: ['title:BOT' as SearchToken],
+        });
+
+        const result = filterBaseNotifications(mockNotifications);
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
     });
 
     describe('filterDetailedNotifications', () => {
