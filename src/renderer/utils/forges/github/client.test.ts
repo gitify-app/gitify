@@ -510,7 +510,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(performGraphQLRequestStringSpy).not.toHaveBeenCalled();
     });
 
-    it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
+    it('fetchNotificationDetailsForList builds query for supported notifications', async () => {
       const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
 
       performGraphQLRequestStringSpy.mockResolvedValue({
