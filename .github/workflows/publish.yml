@@ -163,3 +163,65 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ inputs.tag_name }}
           REPO: ${{ github.repository }}
+
+  notify-pull-requests:
+    name: Notify included pull requests
+    needs: publish-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Close milestone for released version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          TAG_NAME: ${{ inputs.tag_name }}
+        run: |
+          # The release is published, so the tag URL is definitively live. Finalize
+          # the milestone before notifying: description becomes the release URL, the
+          # due date becomes today, and the milestone is closed. The notification
+          # step queries milestones across all states, so a closed milestone still
+          # finds the pull requests it contains on re-runs.
+          version="${TAG_NAME#v}"
+          title="Release ${version}"
+          url="https://github.com/${REPO}/releases/tag/${TAG_NAME}"
+
+          number=$(gh api --method GET "repos/${REPO}/milestones?state=open&per_page=100" \
+            --jq ".[] | select(.title == \"${title}\") | .number" | head -1)
+          if [ -z "${number}" ]; then
+            echo "::warning::No open milestone titled '${title}' found; skipping finalize"
+            exit 0
+          fi
+
+          now=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          gh api --method PATCH "repos/${REPO}/milestones/${number}" \
+            -f "description=${url}" -f "due_on=${now}" -f state=closed
+          echo "Finalized milestone '${title}': ${url}"
+
+      - name: Checkout trusted release automation
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+
+      - name: Notify pull requests included in the release
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { pathToFileURL } = await import('node:url');
+            const scriptUrl = pathToFileURL(
+              `${process.env.GITHUB_WORKSPACE}/.github/scripts/notify-release-pull-requests.mjs`,
+            );
+            const { notifyReleasedPullRequests } = await import(scriptUrl);
+            const result = await notifyReleasedPullRequests(github, {
+              ...context.repo,
+              tag: process.env.TAG_NAME,
+            });
+            core.info(
+              `Release ${process.env.TAG_NAME}: notified ${result.notified} pull request(s), skipped ${result.skipped}`,
+            );
+        env:
+          TAG_NAME: ${{ inputs.tag_name }}
