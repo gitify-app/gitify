@@ -27,7 +27,7 @@ const useSettingsStore = create<SettingsStore>()(
             const current = state[name];
 
             if (typeof current !== 'boolean') {
-              throw new Error(`toggleSetting: '${String(name)}' is not a boolean setting`);
+              throw new TypeError(`toggleSetting: '${String(name)}' is not a boolean setting`);
             }
 
             return { [name]: !current };
