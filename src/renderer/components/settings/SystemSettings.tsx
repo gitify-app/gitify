@@ -121,6 +121,11 @@ export const SystemSettings: FC = () => {
   const hasLiveModifiers = liveModifierAccelerator.length > 0;
   const liveModifierDisplay = formatAcceleratorForDisplay(liveModifierAccelerator, isMac);
 
+  let shortcutButtonLabel = shortcutDisplay;
+  if (recordingShortcut) {
+    shortcutButtonLabel = hasLiveModifiers ? `${liveModifierDisplay}…` : 'Press keys…';
+  }
+
   return (
     <fieldset>
       <Title icon={DeviceDesktopIcon}>System</Title>
@@ -237,11 +242,7 @@ export const SystemSettings: FC = () => {
               tabIndex={-1}
             >
               <Text as="strong" className="text-gitify-caution">
-                {recordingShortcut
-                  ? hasLiveModifiers
-                    ? `${liveModifierDisplay}…`
-                    : 'Press keys…'
-                  : shortcutDisplay}
+                {shortcutButtonLabel}
               </Text>
             </Button>
             <IconButton

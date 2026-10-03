@@ -109,13 +109,12 @@ const useAccountsStore = create<AccountsStore>()(
           );
 
           set({
-            accounts: accounts.flatMap((account, index) =>
-              replacesAccount(account)
-                ? index === existingAccountIndex
-                  ? [newAccount]
-                  : []
-                : [account],
-            ),
+            accounts: accounts.flatMap((account, index) => {
+              if (!replacesAccount(account)) {
+                return [account];
+              }
+              return index === existingAccountIndex ? [newAccount] : [];
+            }),
           });
         } else {
           set({ accounts: [...accounts, newAccount] });

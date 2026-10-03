@@ -91,7 +91,10 @@ export function formatAcceleratorForDisplay(accelerator: string, isMac: boolean)
     .split('+')
     .map((segment) => {
       const entry = MODIFIER_SEGMENTS.find((m) => m.accelerator === segment);
-      return entry ? (isMac ? entry.mac : entry.other) : segment;
+      if (!entry) {
+        return segment;
+      }
+      return isMac ? entry.mac : entry.other;
     })
     .join(isMac ? '·' : '+');
 }

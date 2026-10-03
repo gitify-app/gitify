@@ -21,13 +21,14 @@ export function registerTrayHandlers(mb: Menubar): void {
       return;
     }
     const { notificationsCount, isOnline } = status;
-    const icon = !isOnline
-      ? TrayIcons.offline
-      : notificationsCount < 0
-        ? TrayIcons.error
-        : notificationsCount > 0 && highlightUnread
-          ? TrayIcons.active
-          : getIdleTrayIcon(appearance);
+    let icon = getIdleTrayIcon(appearance);
+    if (!isOnline) {
+      icon = TrayIcons.offline;
+    } else if (notificationsCount < 0) {
+      icon = TrayIcons.error;
+    } else if (notificationsCount > 0 && highlightUnread) {
+      icon = TrayIcons.active;
+    }
     mb.tray.setImage(icon);
   };
 
