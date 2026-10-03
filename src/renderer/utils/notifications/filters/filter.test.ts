@@ -245,6 +245,30 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);
       });
+
+      it('should filter notifications that are not review requests when only direct is selected', async () => {
+        useFiltersStore.setState({ reviewRequestTypes: ['direct'] });
+
+        mockNotifications[0].subject.reviewRequested = undefined;
+        mockNotifications[1].subject.reviewRequested = ['direct'];
+
+        const result = filterDetailedNotifications(mockNotifications);
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[1]]);
+      });
+
+      it('should keep non-review-request notifications when direct and other are selected', async () => {
+        useFiltersStore.setState({ reviewRequestTypes: ['direct', 'other'] });
+
+        mockNotifications[0].subject.reviewRequested = undefined;
+        mockNotifications[1].subject.reviewRequested = ['direct'];
+
+        const result = filterDetailedNotifications(mockNotifications);
+
+        expect(result.length).toBe(2);
+        expect(result).toEqual(mockNotifications);
+      });
     });
   });
 });

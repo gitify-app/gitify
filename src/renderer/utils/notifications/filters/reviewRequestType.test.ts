@@ -51,6 +51,11 @@ describe('renderer/utils/notifications/filters/reviewRequestType.ts', () => {
       expect(details.title).toBe('Team');
       expect(details.description).toBe('A team you are a member of was requested to review.');
     });
+
+    it('should return details for other', () => {
+      const details = reviewRequestTypeFilter.getTypeDetails('other');
+      expect(details.title).toBe('Other');
+    });
   });
 
   describe('filterNotification', () => {
@@ -70,18 +75,55 @@ describe('renderer/utils/notifications/filters/reviewRequestType.ts', () => {
       expect(reviewRequestTypeFilter.filterNotification(notification, 'direct')).toBe(false);
     });
 
-    it('should return false when notification has no reviewRequested data', () => {
+    it('should return true when notification has no reviewRequested data and filtering other', () => {
       const notification = {} satisfies DeepPartial<GitifyNotification> as GitifyNotification;
 
-      expect(reviewRequestTypeFilter.filterNotification(notification, 'direct')).toBe(false);
+      expect(reviewRequestTypeFilter.filterNotification(notification, 'other')).toBe(true);
     });
 
-    it('should return false when reviewRequested is empty', () => {
+    it('should return true when reviewRequested is empty and filtering other', () => {
       const notification = {
         subject: { reviewRequested: [] as ReviewRequestType[] },
       } satisfies DeepPartial<GitifyNotification> as GitifyNotification;
 
-      expect(reviewRequestTypeFilter.filterNotification(notification, 'direct')).toBe(false);
+      expect(reviewRequestTypeFilter.filterNotification(notification, 'other')).toBe(true);
+    });
+
+    it('should return false for other when review data is present', () => {
+      const notification = {
+        subject: { reviewRequested: ['team'] },
+      } satisfies DeepPartial<GitifyNotification> as GitifyNotification;
+
+      expect(reviewRequestTypeFilter.filterNotification(notification, 'other')).toBe(false);
+    });
+  });
+
+  describe('classify', () => {
+    const buildClassifyNotification = (reviewRequested: ReviewRequestType[]): GitifyNotification =>
+      ({ subject: { reviewRequested } }) as GitifyNotification;
+
+    it('should classify direct as direct', () => {
+      expect(reviewRequestTypeFilter.classify(buildClassifyNotification(['direct']))).toBe(
+        'direct',
+      );
+    });
+
+    it('should classify team as team', () => {
+      expect(reviewRequestTypeFilter.classify(buildClassifyNotification(['team']))).toBe('team');
+    });
+
+    it('should classify direct and team under direct (precedence)', () => {
+      expect(reviewRequestTypeFilter.classify(buildClassifyNotification(['direct', 'team']))).toBe(
+        'direct',
+      );
+    });
+
+    it('should classify empty review request data as other', () => {
+      expect(reviewRequestTypeFilter.classify(buildClassifyNotification([]))).toBe('other');
+    });
+
+    it('should classify notification without review data as other', () => {
+      expect(reviewRequestTypeFilter.classify({} as GitifyNotification)).toBe('other');
     });
   });
 
@@ -96,15 +138,18 @@ describe('renderer/utils/notifications/filters/reviewRequestType.ts', () => {
       error: null,
     });
 
-    it('should count notifications matching the type', () => {
+    it('should count notifications matching the type using canonical buckets', () => {
       const accountNotifications = [
         buildNotification(['direct']),
         buildNotification(['team']),
         buildNotification(['direct', 'team']),
+        buildNotification([]),
       ];
 
-      const count = reviewRequestTypeFilter.getFilterCount(accountNotifications, 'direct');
-      expect(count).toBe(2);
+      // Both-requested PR counts only under direct; no-review-request counts under other.
+      expect(reviewRequestTypeFilter.getFilterCount(accountNotifications, 'direct')).toBe(2);
+      expect(reviewRequestTypeFilter.getFilterCount(accountNotifications, 'team')).toBe(1);
+      expect(reviewRequestTypeFilter.getFilterCount(accountNotifications, 'other')).toBe(1);
     });
 
     it('should return 0 when no notifications match', () => {

@@ -20,7 +20,6 @@ export const UserTypeFilter: FC = () => {
       filterSetting="userTypes"
       icon={FeedPersonIcon}
       id="filter-user-types"
-      layout="horizontal"
       title="User Type"
       tooltip={
         <Stack direction="vertical" gap="condensed">
@@ -39,8 +38,15 @@ export const UserTypeFilter: FC = () => {
                 <OrganizationIcon size={Size.SMALL} />
                 {userTypeFilter.FILTER_TYPES.Organization.title}
               </Stack>
+              <Stack direction="horizontal" gap="condensed">
+                <PersonIcon size={Size.SMALL} />
+                {userTypeFilter.FILTER_TYPES.other.title}
+              </Stack>
             </Stack>
           </div>
+          <Text>
+            Other covers notifications with no author or a non-human, non-organization author.
+          </Text>
         </Stack>
       }
     />
