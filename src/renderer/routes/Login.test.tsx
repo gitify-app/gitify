@@ -28,31 +28,17 @@ describe('renderer/routes/Login.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
   });
 
-  it('should login with github', async () => {
+  it.each([
+    ['login-github', '/login/github/device-flow'],
+    ['login-pat', '/login/github/personal-access-token'],
+    ['login-oauth-app', '/login/github/oauth-app'],
+  ])('navigates %s', async (testId, route) => {
     renderWithProviders(<LoginRoute />);
 
-    await userEvent.click(screen.getByTestId('login-github'));
+    await userEvent.click(screen.getByTestId(testId));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow');
-  });
-
-  it('should navigate to login with personal access token', async () => {
-    renderWithProviders(<LoginRoute />);
-
-    await userEvent.click(screen.getByTestId('login-pat'));
-
-    expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token');
-  });
-
-  it('should navigate to login with oauth app', async () => {
-    renderWithProviders(<LoginRoute />);
-
-    await userEvent.click(screen.getByTestId('login-oauth-app'));
-
-    expect(navigateMock).toHaveBeenCalledTimes(1);
-    expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app');
+    expect(navigateMock).toHaveBeenCalledWith(route);
   });
 
   it('should navigate to login with Gitea personal access token', async () => {

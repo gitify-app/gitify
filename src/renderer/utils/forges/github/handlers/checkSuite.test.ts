@@ -23,41 +23,19 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       });
     });
 
-    it('failed check suite state', async () => {
+    it.each([
+      ['failed check suite state', 'Demo workflow run failed for main branch'],
+      [
+        'failed at startup check suite state',
+        'Demo workflow run failed at startup for main branch',
+      ],
+      [
+        'multiple attempts failed check suite state',
+        'Demo workflow run, Attempt #3 failed for main branch',
+      ],
+    ])('%s', async (_name, title) => {
       const mockNotification = mockPartialGitifyNotification({
-        title: 'Demo workflow run failed for main branch',
-        type: 'CheckSuite',
-      });
-
-      const result = await checkSuiteHandler.enrich(mockNotification);
-
-      expect(result).toEqual({
-        state: 'FAILURE',
-        user: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain',
-      });
-    });
-
-    it('failed at startup check suite state', async () => {
-      const mockNotification = mockPartialGitifyNotification({
-        title: 'Demo workflow run failed at startup for main branch',
-        type: 'CheckSuite',
-      });
-
-      const result = await checkSuiteHandler.enrich(mockNotification);
-
-      expect(result).toEqual({
-        state: 'FAILURE',
-        user: undefined,
-        htmlUrl:
-          'https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain',
-      });
-    });
-
-    it('multiple attempts failed check suite state', async () => {
-      const mockNotification = mockPartialGitifyNotification({
-        title: 'Demo workflow run, Attempt #3 failed for main branch',
+        title,
         type: 'CheckSuite',
       });
 
