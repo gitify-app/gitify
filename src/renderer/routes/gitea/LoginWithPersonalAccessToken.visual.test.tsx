@@ -76,7 +76,7 @@ describe('Gitea HTTP login', () => {
     await page.getByTestId('login-submit').click();
     await expect
       .element(page.getByTestId('login-errors'))
-      .toHaveTextContent('Gitea API 401 Unauthorized');
+      .toMatchTextContent('Gitea API 401 Unauthorized');
     expect(useAccountsStore.getState().accounts).toHaveLength(0);
   });
 });
