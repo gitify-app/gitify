@@ -4,11 +4,12 @@ import type {
   AccountNotifications,
   RawGitifyNotification,
   SubjectType,
+  SubjectTypeFilterValue,
   TypeDetails,
 } from '../../../types';
 import type { Filter } from './types';
 
-const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
+const SUBJECT_TYPE_DETAILS: Record<SubjectTypeFilterValue, TypeDetails> = {
   BitbucketNotification: {
     title: 'Bitbucket',
   },
@@ -48,14 +49,18 @@ const SUBJECT_TYPE_DETAILS: Record<SubjectType, TypeDetails> = {
   WorkflowRun: {
     title: 'Workflow Run',
   },
+  other: {
+    title: 'Other',
+    description: 'Notifications of a type that is not listed above.',
+  },
 };
 
-export const subjectTypeFilter: Filter<SubjectType> = {
+export const subjectTypeFilter: Filter<SubjectTypeFilterValue> = {
   FILTER_TYPES: SUBJECT_TYPE_DETAILS,
 
   requiresDetailsNotifications: false,
 
-  getTypeDetails(subjectType: SubjectType): TypeDetails {
+  getTypeDetails(subjectType: SubjectTypeFilterValue): TypeDetails {
     return this.FILTER_TYPES[subjectType];
   },
 
@@ -64,20 +69,35 @@ export const subjectTypeFilter: Filter<SubjectType> = {
     return filters.subjectTypes.length > 0;
   },
 
-  isFilterSet(subjectType: SubjectType): boolean {
+  isFilterSet(subjectType: SubjectTypeFilterValue): boolean {
     const filters = useFiltersStore.getState();
     return filters.subjectTypes.includes(subjectType);
   },
 
-  getFilterCount(accountNotifications: AccountNotifications[], subjectType: SubjectType): number {
+  getFilterCount(
+    accountNotifications: AccountNotifications[],
+    subjectType: SubjectTypeFilterValue,
+  ): number {
     return accountNotifications.reduce(
       (sum, account) =>
-        sum + account.notifications.filter((n) => this.filterNotification(n, subjectType)).length,
+        sum + account.notifications.filter((n) => this.classify(n) === subjectType).length,
       0,
     );
   },
 
-  filterNotification(notification: RawGitifyNotification, subjectType: SubjectType): boolean {
+  filterNotification(
+    notification: RawGitifyNotification,
+    subjectType: SubjectTypeFilterValue,
+  ): boolean {
+    if (subjectType === 'other') {
+      return !(notification.subject.type in SUBJECT_TYPE_DETAILS);
+    }
     return notification.subject.type === subjectType;
+  },
+
+  classify(notification: RawGitifyNotification): SubjectTypeFilterValue {
+    return notification.subject.type in SUBJECT_TYPE_DETAILS
+      ? (notification.subject.type as SubjectType)
+      : 'other';
   },
 };

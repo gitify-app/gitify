@@ -52,7 +52,7 @@ export const stateFilter: Filter<FilterStateType> = {
   getFilterCount(accountNotifications: AccountNotifications[], stateType: FilterStateType): number {
     return accountNotifications.reduce(
       (sum, account) =>
-        sum + account.notifications.filter((n) => this.filterNotification(n, stateType)).length,
+        sum + account.notifications.filter((n) => this.classify(n) === stateType).length,
       0,
     );
   },
@@ -60,6 +60,10 @@ export const stateFilter: Filter<FilterStateType> = {
   filterNotification(notification: RawGitifyNotification, stateType: FilterStateType): boolean {
     const mapped = mapStateToFilter(notification.subject?.state);
     return stateType === mapped;
+  },
+
+  classify(notification: RawGitifyNotification): FilterStateType {
+    return mapStateToFilter(notification.subject?.state);
   },
 };
 

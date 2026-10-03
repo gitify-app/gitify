@@ -66,12 +66,19 @@ const FilterSectionComponent = <K extends keyof FiltersState>({
 
       <Stack direction={layout} gap={layout === 'horizontal' ? 'normal' : 'condensed'}>
         {(Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][])
-          .sort((a, b) =>
-            filter
+          .sort((a, b) => {
+            // Always pin the catch-all 'other' option to the end of the list.
+            if ((a as string) === 'other') {
+              return 1;
+            }
+            if ((b as string) === 'other') {
+              return -1;
+            }
+            return filter
               .getTypeDetails(a)
               .title.toLowerCase()
-              .localeCompare(filter.getTypeDetails(b).title.toLowerCase(), 'en'),
-          )
+              .localeCompare(filter.getTypeDetails(b).title.toLowerCase(), 'en');
+          })
           .map((type) => {
             const typeDetails = filter.getTypeDetails(type);
             const typeTitle = typeDetails.title;

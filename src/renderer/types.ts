@@ -584,6 +584,13 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
+/**
+ * Subject type filter option values. `'other'` is a catch-all bucket matching
+ * subject types that are not otherwise enumerated (e.g. future forge types
+ * that pass through the transform layer unmodelled).
+ */
+export type SubjectTypeFilterValue = SubjectType | 'other';
+
 export type SubjectType =
   | 'BitbucketNotification'
   | 'CheckSuite'
@@ -601,4 +608,23 @@ export type SubjectType =
 
 export type UserType = 'Bot' | 'EnterpriseUserAccount' | 'Mannequin' | 'Organization' | 'User';
 
+/**
+ * User type filter option values. `'other'` is a catch-all bucket matching
+ * authors that are not a User, Bot, or Organization (e.g. Mannequin) or that
+ * have no author information.
+ */
+export type UserTypeFilterValue = Extract<UserType, 'User' | 'Bot' | 'Organization'> | 'other';
+
 export type ReviewRequestType = 'direct' | 'team';
+
+/**
+ * Review request type filter option values. `'other'` is a catch-all bucket
+ * matching notifications that are not a direct or team review request.
+ */
+export type ReviewRequestTypeFilterValue = ReviewRequestType | 'other';
+
+/**
+ * Reason filter option values. `'other'` is a catch-all bucket matching
+ * notification reason codes that are not otherwise enumerated by the filter.
+ */
+export type ReasonFilterValue = Reason | 'other';
