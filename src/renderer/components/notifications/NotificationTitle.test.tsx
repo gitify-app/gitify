@@ -4,36 +4,17 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 import { NotificationTitle } from './NotificationTitle';
 
 describe('renderer/components/notifications/NotificationTitle.tsx', () => {
-  it('should render plain text without code blocks', () => {
-    const tree = renderWithProviders(<NotificationTitle title="Simple notification title" />);
-
-    expect(tree.container).toMatchSnapshot();
-  });
-
-  it('should render text with single inline code block', () => {
-    const tree = renderWithProviders(
-      <NotificationTitle title="refactor: migrate deprecated atlaskit `xcss`" />,
-    );
-
-    expect(tree.container).toMatchSnapshot();
-  });
-
-  it('should render text with multiple inline code blocks', () => {
-    const tree = renderWithProviders(
-      <NotificationTitle title="Replace `foo` with `bar` in config" />,
-    );
-
-    expect(tree.container).toMatchSnapshot();
-  });
-
-  it('should render text with code block at the start', () => {
-    const tree = renderWithProviders(<NotificationTitle title="`useState` hook implementation" />);
-
-    expect(tree.container).toMatchSnapshot();
-  });
-
-  it('should render text with code block at the end', () => {
-    const tree = renderWithProviders(<NotificationTitle title="Fix issue with `render`" />);
+  it.each([
+    ['should render plain text without code blocks', 'Simple notification title'],
+    [
+      'should render text with single inline code block',
+      'refactor: migrate deprecated atlaskit `xcss`',
+    ],
+    ['should render text with multiple inline code blocks', 'Replace `foo` with `bar` in config'],
+    ['should render text with code block at the start', '`useState` hook implementation'],
+    ['should render text with code block at the end', 'Fix issue with `render`'],
+  ])('%s', (_name, title) => {
+    const tree = renderWithProviders(<NotificationTitle title={title} />);
 
     expect(tree.container).toMatchSnapshot();
   });
