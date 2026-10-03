@@ -66,7 +66,7 @@ describe('renderer/utils/notifications/formatters.ts', () => {
     });
 
     it('keeps the brand name intact for GitLab to-do items', () => {
-      // Camel-splitting would render this as "Git Lab Todo".
+      // Camel-splitting would render this as "Git Lab To-Do".
       const notification = mockPartialGitifyNotification({
         title: 'Sample',
         type: 'GitLabTodo',

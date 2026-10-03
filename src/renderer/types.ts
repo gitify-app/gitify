@@ -295,7 +295,7 @@ export interface Chevron {
   /**
    * The chevron icon.
    */
-  // TODO - improve the type here to be more specific about which icons are allowed, if possible
+  // Note: consider narrowing this type to the specific icons that are allowed.
   icon: FC<OcticonProps>;
 
   /**

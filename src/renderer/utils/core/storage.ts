@@ -10,7 +10,7 @@ import { rendererLogError, rendererLogInfo, toError } from './logger';
  * This function reads the old unified storage format and splits it into separate stores.
  * Should be called once on app startup.
  *
- * TODO: Remove this migration function in a future major release
+ * Note: remove this migration function in a future major release
  * once all users have migrated from the old Context-based storage format.
  */
 export function migrateLegacyStoreToZustand() {

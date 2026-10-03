@@ -72,7 +72,7 @@ export function formatProperCase(text: string) {
 
 /**
  * Labels for subject types whose camel-case split reads wrong. `GitLabTodo`
- * would otherwise render as "Git Lab Todo", because the split fires inside the
+ * would otherwise render as "Git Lab To-Do", because the split fires inside the
  * brand name.
  */
 const SUBJECT_TYPE_LABELS: Partial<Record<SubjectType, string>> = {
