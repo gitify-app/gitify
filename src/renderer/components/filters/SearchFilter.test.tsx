@@ -26,6 +26,16 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       expect(screen.getByText('Organization (org:name)')).toBeInTheDocument();
       expect(screen.getByText('Repository (repo:fullname)')).toBeInTheDocument();
     });
+
+    it('strikes through qualifiers that require detailed notifications when disabled', async () => {
+      renderWithProviders(<SearchFilter />, { settings: { detailedNotifications: false } });
+
+      const tooltipIconElement = screen.getByTestId('tooltip-icon-tooltip-search');
+      await userEvent.click(tooltipIconElement);
+
+      expect(screen.getByText('Author (author:handle)')).toHaveClass('line-through');
+      expect(screen.getByText('Commenter (commenter:handle)')).toHaveClass('line-through');
+    });
   });
 
   describe('Include Search Tokens', () => {
