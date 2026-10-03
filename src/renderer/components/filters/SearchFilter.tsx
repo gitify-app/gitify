@@ -4,6 +4,7 @@ import {
   CheckCircleFillIcon,
   CommentIcon,
   NoEntryFillIcon,
+  NoteIcon,
   OrganizationIcon,
   PersonIcon,
   RepoIcon,
@@ -98,8 +99,13 @@ export const SearchFilter: FC = () => {
                   <RepoIcon size={Size.SMALL} />
                   <Text>Repository (repo:fullname)</Text>
                 </Stack>
+                <Stack direction="horizontal" gap="condensed">
+                  <NoteIcon size={Size.SMALL} />
+                  <Text>Title (title:text)</Text>
+                </Stack>
               </Stack>
             </div>
+            <Text className="text-gitify-fg-muted">All qualifiers match case-insensitively.</Text>
             <RequiresDetailedNotificationWarning />
           </Stack>
         }
