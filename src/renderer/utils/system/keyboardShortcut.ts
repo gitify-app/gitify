@@ -76,7 +76,7 @@ function normalizePhysicalKeyToAccelerator(event: KeyboardEvent): string | null 
   if (code.startsWith('Digit')) {
     return code.slice(5);
   }
-  if (/^F([1-9]|1[0-9]|2[0-4])$/.test(code)) {
+  if (/^F([1-9]|1\d|2[0-4])$/.test(code)) {
     return code;
   }
 

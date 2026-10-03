@@ -4,7 +4,7 @@ export function parseGiteaOrigin(hostname: Hostname): URL | null {
   if (
     typeof hostname !== 'string' ||
     hostname.trim() !== hostname ||
-    !/^(?:https?:\/\/)?(?:[a-z0-9.-]+|\[[a-f0-9:.]+\])(?::[0-9]{1,5})?\/?$/i.test(hostname)
+    !/^(?:https?:\/\/)?(?:[a-z0-9.-]+|\[[a-f0-9:.]+\])(?::\d{1,5})?\/?$/i.test(hostname)
   ) {
     return null;
   }
