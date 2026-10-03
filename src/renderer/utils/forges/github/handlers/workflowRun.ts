@@ -20,7 +20,7 @@ export interface WorkflowRunAttributes {
 }
 
 class WorkflowRunHandler extends DefaultHandler {
-  override async enrich(notification: GitifyNotification): Promise<Partial<GitifySubject>> {
+  override enrich(notification: GitifyNotification): Partial<GitifySubject> {
     const state = getWorkflowRunAttributes(notification)?.status;
 
     if (state) {

@@ -15,7 +15,9 @@ import type { NotificationTypeHandler } from './types';
 export class DefaultHandler implements NotificationTypeHandler {
   supportsMergedQueryEnrichment = false;
 
-  async enrich(_notification: GitifyNotification): Promise<Partial<GitifySubject>> {
+  enrich(
+    _notification: GitifyNotification,
+  ): Partial<GitifySubject> | Promise<Partial<GitifySubject>> {
     return {};
   }
 

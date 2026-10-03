@@ -89,7 +89,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
     setErrors(newErrors);
 
     if (!newErrors.hostname && !newErrors.clientId && !newErrors.clientSecret) {
-      verifyLoginCredentials(formData);
+      await verifyLoginCredentials(formData);
     }
     setIsVerifyingCredentials(false);
   };
