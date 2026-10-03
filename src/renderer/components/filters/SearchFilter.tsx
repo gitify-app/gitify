@@ -2,6 +2,7 @@ import type { FC } from 'react';
 
 import {
   CheckCircleFillIcon,
+  CommentIcon,
   NoEntryFillIcon,
   OrganizationIcon,
   PersonIcon,
@@ -79,6 +80,14 @@ export const SearchFilter: FC = () => {
                     className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
                     Author (author:handle)
+                  </Text>
+                </Stack>
+                <Stack direction="horizontal" gap="condensed">
+                  <CommentIcon size={Size.SMALL} />
+                  <Text
+                    className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
+                  >
+                    Commenter (commenter:handle)
                   </Text>
                 </Stack>
                 <Stack direction="horizontal" gap="condensed">
