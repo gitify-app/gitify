@@ -1,9 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>gitify-app/.github",
-    "group:vitePlus"
-  ],
+  "extends": ["github>gitify-app/.github", "group:vitePlus"],
   "packageRules": [
     {
       "matchDepTypes": ["engines"],
@@ -21,10 +18,7 @@
     },
     {
       "description": "Group Playwright with the browser container image used by visual regression tests, and wait for both updates to pass the release-age check.",
-      "matchPackageNames": [
-        "playwright",
-        "mcr.microsoft.com/playwright"
-      ],
+      "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"],
       "groupName": "playwright",
       "minimumReleaseAge": "3 days",
       "internalChecksFilter": "strict"
@@ -57,9 +51,7 @@
       "depNameTemplate": "gitify-app/gitify",
       "versioningTemplate": "loose",
       "managerFilePatterns": ["/sonar-project.properties/"],
-      "matchStrings": [
-        "\\s?sonar.projectVersion=(?<currentValue>.+?)\\s"
-      ]
+      "matchStrings": ["\\s?sonar.projectVersion=(?<currentValue>.+?)\\s"]
     }
   ]
 }
