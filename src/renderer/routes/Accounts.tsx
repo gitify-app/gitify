@@ -38,6 +38,16 @@ import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
+function getScopeIconClassName(account: Account): string {
+  if (hasRecommendedScopes(account)) {
+    return IconColor.GREEN;
+  }
+  if (hasAlternateScopes(account)) {
+    return 'text-gitify-warning';
+  }
+  return '';
+}
+
 export const AccountsRoute: FC = () => {
   const navigate = useNavigate();
 
@@ -232,17 +242,7 @@ export const AccountsRoute: FC = () => {
                       <IconButton
                         aria-label={`View scopes for ${account.user?.login}`}
                         data-testid="account-view-scopes"
-                        icon={() => (
-                          <ShieldCheckIcon
-                            className={
-                              hasRecommendedScopes(account)
-                                ? IconColor.GREEN
-                                : hasAlternateScopes(account)
-                                  ? 'text-gitify-warning'
-                                  : ''
-                            }
-                          />
-                        )}
+                        icon={() => <ShieldCheckIcon className={getScopeIconClassName(account)} />}
                         onClick={() =>
                           navigate('/account-scopes', {
                             state: { account },
