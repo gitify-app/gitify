@@ -8,7 +8,7 @@
 import {
   setAutoLaunch,
   setKeepWindowOnBlur,
-  setShowUpdateNotifications,
+  setUpdatePreferences,
   setTrayIconAppearance,
   setUseUnreadActiveIcon,
   setUseX11Backend,
@@ -33,7 +33,11 @@ export function initializeStoreSubscriptions(): () => void {
   // ========================================================================
   setAutoLaunch(useSettingsStore.getState().openAtStartup);
   setKeepWindowOnBlur(useSettingsStore.getState().keepWindowOnBlur);
-  setShowUpdateNotifications(useSettingsStore.getState().showUpdateNotifications);
+  const applyUpdatePreferences = () => {
+    const { automaticUpdates, showUpdateNotifications } = useSettingsStore.getState();
+    setUpdatePreferences({ automaticUpdates, showUpdateNotifications });
+  };
+  applyUpdatePreferences();
   setUseUnreadActiveIcon(useSettingsStore.getState().useUnreadActiveIcon);
   setTrayIconAppearance(useSettingsStore.getState().trayIconAppearance);
 
@@ -57,16 +61,11 @@ export function initializeStoreSubscriptions(): () => void {
       setKeepWindowOnBlur(keepWindowOnBlur);
     },
   );
-  unsubscribers.push(unsubKeepWindowOnBlur);
-
-  // Automatic update notifications
-  const unsubShowUpdateNotifications = useSettingsStore.subscribe(
-    (state) => state.showUpdateNotifications,
-    (showUpdateNotifications) => {
-      setShowUpdateNotifications(showUpdateNotifications);
-    },
+  unsubscribers.push(
+    unsubKeepWindowOnBlur,
+    useSettingsStore.subscribe((state) => state.automaticUpdates, applyUpdatePreferences),
+    useSettingsStore.subscribe((state) => state.showUpdateNotifications, applyUpdatePreferences),
   );
-  unsubscribers.push(unsubShowUpdateNotifications);
 
   // Linux X11 backend. Not applied on startup: the main process reads its own
   // marker file before the renderer exists, so mirroring it here would be

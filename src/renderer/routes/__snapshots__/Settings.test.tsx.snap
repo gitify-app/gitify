@@ -2322,6 +2322,106 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-padding="none"
             data-wrap="nowrap"
           >
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="automaticUpdates"
+            >
+              Automatic updates:
+            </label>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                data-testid="radio-automaticUpdates-default"
+                id="radio-automaticUpdates-default"
+                name="automaticUpdates"
+                type="radio"
+                value="default"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-automaticUpdates-default"
+              >
+                Default
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-automaticUpdates-enabled"
+                id="radio-automaticUpdates-enabled"
+                name="automaticUpdates"
+                type="radio"
+                value="enabled"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-automaticUpdates-enabled"
+              >
+                On
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-automaticUpdates-disabled"
+                id="radio-automaticUpdates-disabled"
+                name="automaticUpdates"
+                type="radio"
+                value="disabled"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-automaticUpdates-disabled"
+              >
+                Off
+              </label>
+            </div>
+          </div>
+          <span
+            aria-live="polite"
+            class="text-sm text-gitify-font prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            Automatic updates are on by default.
+          </span>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
             <input
               checked=""
               class="size-4 rounded-sm cursor-pointer"

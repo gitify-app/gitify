@@ -1,9 +1,10 @@
-import { dialog, type MessageBoxOptions } from 'electron';
+import { dialog, Notification, type MessageBoxOptions } from 'electron';
 import type { Menubar } from 'electron-menubar';
-import { autoUpdater } from 'electron-updater';
+import { autoUpdater, type UpdateCheckResult } from 'electron-updater';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo, toError } from '../shared/logger';
+import { isMacOS } from '../shared/platform';
 
 import type MenuBuilder from './menu';
 
@@ -21,6 +22,16 @@ export default class AppUpdater {
   private readonly menuBuilder: MenuBuilder;
   private notificationsEnabled = true;
   private started = false;
+  private enabled = false;
+  private revision = 0;
+  private downloaded = false;
+  private installing = false;
+  private periodicCheck?: NodeJS.Timeout;
+  private checking = false;
+  private download?: {
+    promise: Promise<string[]>;
+    token: UpdateCheckResult['cancellationToken'];
+  };
   private noUpdateMessageTimeout?: NodeJS.Timeout;
 
   /**
@@ -30,9 +41,19 @@ export default class AppUpdater {
   constructor(menubar: Menubar, menuBuilder: MenuBuilder) {
     this.menubar = menubar;
     this.menuBuilder = menuBuilder;
-    // Disable electron-updater's own logging to avoid duplicate log messages
-    // We'll handle all logging through our event listeners
+    this.menuBuilder.setUpdateActions({
+      check: () => this.performInitialCheck(),
+      install: () => this.installUpdate(),
+    });
+    this.menubar.app.on('before-quit', (event) => {
+      if (isMacOS() && this.enabled && this.downloaded && !this.installing) {
+        event.preventDefault();
+        this.installUpdate();
+      }
+    });
     autoUpdater.logger = null;
+    autoUpdater.autoDownload = false;
+    autoUpdater.autoInstallOnAppQuit = false;
   }
 
   /**
@@ -43,26 +64,35 @@ export default class AppUpdater {
     this.notificationsEnabled = enabled;
   }
 
-  /**
-   * Start the updater: register event listeners, perform the initial update check,
-   * and schedule periodic checks. Idempotent — safe to call multiple times.
-   */
-  async start(): Promise<void> {
-    if (this.started) {
-      return; // idempotent
+  async setAutomaticUpdatesEnabled(enabled: boolean): Promise<void> {
+    if (this.enabled === enabled) {
+      return;
+    }
+    this.enabled = enabled;
+    this.revision++;
+    autoUpdater.autoDownload = enabled;
+    // Squirrel's native handoff cannot be revoked, so macOS waits until an allowed quit.
+    autoUpdater.autoInstallOnAppQuit = enabled && !isMacOS();
+    this.menuBuilder.setAutomaticUpdatesEnabled(enabled);
+
+    if (!enabled) {
+      clearInterval(this.periodicCheck);
+      this.periodicCheck = undefined;
+      this.download?.token?.cancel();
+      this.resetState();
+      return;
     }
 
     if (!this.menubar.app.isPackaged) {
       logInfo('app updater', 'Skipping updater since app is in development mode');
       return;
     }
-
-    logInfo('app updater', 'Starting updater');
-
-    this.started = true;
-    this.registerListeners();
-    await this.performInitialCheck();
+    if (!this.started) {
+      this.started = true;
+      this.registerListeners();
+    }
     this.schedulePeriodicChecks();
+    await this.performInitialCheck();
   }
 
   /**
@@ -70,6 +100,9 @@ export default class AppUpdater {
    */
   private registerListeners() {
     autoUpdater.on('checking-for-update', () => {
+      if (!this.enabled) {
+        return;
+      }
       logInfo('auto updater', 'Checking for update');
       this.menuBuilder.setCheckForUpdatesMenuEnabled(false);
       this.menuBuilder.setNoUpdateAvailableMenuVisibility(false);
@@ -79,26 +112,43 @@ export default class AppUpdater {
     });
 
     autoUpdater.on('update-available', () => {
+      if (!this.enabled) {
+        return;
+      }
       logInfo('auto updater', 'Update available');
       this.setTooltipWithStatus('A new update is available');
       this.menuBuilder.setUpdateAvailableMenuVisibility(true);
     });
 
     autoUpdater.on('download-progress', (progressObj) => {
+      if (!this.enabled) {
+        return;
+      }
       this.setTooltipWithStatus(`Downloading update: ${progressObj.percent.toFixed(2)}%`);
     });
 
     autoUpdater.on('update-downloaded', (event) => {
+      if (!this.enabled) {
+        return;
+      }
+      this.downloaded = true;
       logInfo('auto updater', 'Update downloaded');
       this.setTooltipWithStatus('A new update is ready to install');
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
       if (this.notificationsEnabled) {
+        new Notification({
+          title: 'A new update is ready to install',
+          body: `${APPLICATION.NAME} ${event.version} has been downloaded and will be installed on exit.`,
+        }).show();
         this.showUpdateReadyDialog(event.releaseName ?? event.version);
       }
     });
 
     autoUpdater.on('update-not-available', () => {
+      if (!this.enabled) {
+        return;
+      }
       logInfo('auto updater', 'Update not available');
       this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
       this.menuBuilder.setNoUpdateAvailableMenuVisibility(true);
@@ -113,11 +163,16 @@ export default class AppUpdater {
     });
 
     autoUpdater.on('update-cancelled', () => {
+      if (!this.enabled) {
+        return;
+      }
       logInfo('auto updater', 'Update cancelled');
       this.resetState();
     });
 
     autoUpdater.on('error', (err) => {
+      this.installing = false;
+      this.downloaded = false;
       logError('auto updater', 'Error checking for update', err);
       this.resetState();
     });
@@ -148,24 +203,41 @@ export default class AppUpdater {
       }
     };
 
-    // Defer the first periodic check until after the interval elapses.
-    // This avoids an immediate duplicate check on startup.
-    setTimeout(async () => {
-      await runScheduledCheck();
-      setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
-    }, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+    this.periodicCheck = setInterval(runScheduledCheck, APPLICATION.UPDATE_CHECK_INTERVAL_MS);
   }
 
   /**
-   * Check and download updates, using electron-updater's native notification
-   * only when the user has opted in.
+   * Track downloads so disabling updates can cancel a check that finishes later.
    */
   private async checkForUpdates() {
-    if (this.notificationsEnabled) {
-      return await autoUpdater.checkForUpdatesAndNotify();
+    if (!this.enabled || this.checking || this.download) {
+      return;
     }
-
-    return await autoUpdater.checkForUpdates();
+    this.checking = true;
+    try {
+      const result = await autoUpdater.checkForUpdates();
+      if (result?.downloadPromise) {
+        const download = { promise: result.downloadPromise, token: result.cancellationToken };
+        this.download = download;
+        void download.promise
+          .catch((error: unknown) => {
+            if (!download.token?.cancelled) {
+              logError('app updater', 'Update download failed', toError(error));
+            }
+          })
+          .finally(() => {
+            this.download = undefined;
+            if (this.enabled && download.token?.cancelled) {
+              void this.performInitialCheck();
+            }
+          });
+      }
+      if (!this.enabled) {
+        result?.cancellationToken?.cancel();
+      }
+    } finally {
+      this.checking = false;
+    }
   }
 
   /**
@@ -203,6 +275,13 @@ export default class AppUpdater {
     this.clearNoUpdateTimeout();
   }
 
+  private installUpdate() {
+    if (this.enabled && this.downloaded && !this.installing) {
+      this.installing = true;
+      autoUpdater.quitAndInstall();
+    }
+  }
+
   /**
    * Show a dialog informing the user that an update is ready to install.
    * If the user chooses to restart, quitAndInstall is called immediately.
@@ -218,9 +297,10 @@ export default class AppUpdater {
       detail: 'Restart to apply the update. You can also restart later from the tray menu.',
     };
 
+    const revision = this.revision;
     dialog.showMessageBox(dialogOpts).then((returnValue) => {
-      if (returnValue.response === 0) {
-        autoUpdater.quitAndInstall();
+      if (returnValue.response === 0 && this.enabled && revision === this.revision) {
+        this.installUpdate();
       }
     });
   }
