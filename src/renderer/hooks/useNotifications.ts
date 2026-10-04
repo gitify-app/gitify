@@ -346,11 +346,11 @@ export const useNotifications = ({
 
       if (filteredDiffNotifications.length > 0) {
         if (playSoundNewNotifications) {
-          raiseSoundNotification(notificationVolume);
+          void raiseSoundNotification(notificationVolume);
         }
 
         if (showSystemNotifications) {
-          raiseNativeNotification(filteredDiffNotifications);
+          void raiseNativeNotification(filteredDiffNotifications);
         }
       }
     }

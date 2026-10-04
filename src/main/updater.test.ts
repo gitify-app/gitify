@@ -185,6 +185,22 @@ describe('main/updater.ts', () => {
 
       expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
     });
+
+    it('logs an error when the dialog fails to open', async () => {
+      vi.mocked(dialog.showMessageBox).mockRejectedValueOnce(new Error('dialog failed'));
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v9.9.9' });
+
+      await vi.waitFor(() =>
+        expect(logError).toHaveBeenCalledWith(
+          'app updater',
+          'Failed to show update ready dialog',
+          expect.any(Error),
+        ),
+      );
+    });
   });
 
   describe('update event handlers & scheduling', () => {

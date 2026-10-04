@@ -52,7 +52,7 @@ app.setAsDefaultProtocolClient(protocol);
 
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
-app.whenReady().then(async () => {
+void app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
   initializeAppLifecycle(mb, contextMenu, protocol);

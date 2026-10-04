@@ -7,7 +7,7 @@ import log from 'electron-log';
 import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../shared/constants';
-import { logError, logInfo } from '../shared/logger';
+import { logError, logInfo, toError } from '../shared/logger';
 
 /**
  * Returns true when the app is running in development mode (i.e. not packaged).
@@ -34,11 +34,16 @@ export function takeScreenshot(mb: Menubar) {
     return;
   }
 
-  mb.window.capturePage().then((img) => {
-    fs.writeFile(capturedPicFilePath, img.toPNG(), () =>
-      logInfo('takeScreenshot', `Screenshot saved ${capturedPicFilePath}`),
-    );
-  });
+  mb.window
+    .capturePage()
+    .then((img) => {
+      fs.writeFile(capturedPicFilePath, img.toPNG(), () =>
+        logInfo('takeScreenshot', `Screenshot saved ${capturedPicFilePath}`),
+      );
+    })
+    .catch((err) => {
+      logError('takeScreenshot', 'Failed to capture window', toError(err));
+    });
 }
 
 /**
@@ -58,5 +63,7 @@ export function openLogsDirectory() {
   }
 
   const logDirectory = path.dirname(logFilePath);
-  shell.openPath(logDirectory);
+  shell.openPath(logDirectory).catch((err) => {
+    logError('openLogsDirectory', 'Failed to open logs directory', toError(err));
+  });
 }

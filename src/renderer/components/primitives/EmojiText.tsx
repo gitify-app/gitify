@@ -25,7 +25,7 @@ export const EmojiText: FC<IEmojiText> = ({ text }) => {
       }
     };
 
-    updateEmojiText();
+    void updateEmojiText();
 
     return () => {
       mountedRef.current = false;
