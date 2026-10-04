@@ -87,25 +87,31 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
     const startPolling = async () => {
       setIsPolling(true);
 
-      try {
-        while (isActive && Date.now() < session.expiresAt) {
-          const token = await loginWithDeviceFlowPoll(forge, session);
-
-          if (token && isActive) {
-            await loginWithDeviceFlowComplete(forge, token, session.hostname);
-            navigate('/');
-            return;
+      const poll = async (): Promise<void> => {
+        if (!isActive || Date.now() >= session.expiresAt) {
+          if (isActive) {
+            setError('Device code expired. Please start again.');
           }
-
-          const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
-          await new Promise((resolve) => {
-            timeoutId = setTimeout(resolve, intervalMs);
-          });
+          return;
         }
 
-        if (isActive) {
-          setError('Device code expired. Please start again.');
+        const token = await loginWithDeviceFlowPoll(forge, session);
+
+        if (token && isActive) {
+          await loginWithDeviceFlowComplete(forge, token, session.hostname);
+          navigate('/');
+          return;
         }
+
+        const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
+        await new Promise((resolve) => {
+          timeoutId = setTimeout(resolve, intervalMs);
+        });
+        await poll();
+      };
+
+      try {
+        await poll();
       } catch (err) {
         if (isActive) {
           rendererLogError('LoginWithDeviceFlow', 'Failed to poll device flow', toError(err));
