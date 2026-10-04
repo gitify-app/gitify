@@ -275,8 +275,8 @@ importers:
         specifier: 11.10.0
         version: 11.10.0
       '@primer/react':
-        specifier: 38.40.0
-        version: 38.40.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react-is@19.3.0)(react@19.3.0)
+        specifier: 38.40.1
+        version: 38.40.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react-is@19.3.0)(react@19.3.0)
       '@tailwindcss/vite':
         specifier: 4.3.3
         version: 4.3.3(@voidzero-dev/vite-plus-core@1.0.0(@types/node@24.19.0)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.1))
@@ -323,8 +323,8 @@ importers:
         specifier: 4.4.0
         version: 4.4.0
       dotenv:
-        specifier: 18.0.4
-        version: 18.0.4
+        specifier: 18.0.5
+        version: 18.0.5
       electron:
         specifier: 44.5.1
         version: 44.5.1(supports-color@10.2.2)
@@ -1445,8 +1445,8 @@ packages:
   '@primer/primitives@11.10.0':
     resolution: {integrity: sha512-ihZxIst4Izry284StKFjpbYvX6R/IBFTLu+qiuAmR93PsKF2hdjoabhSYwKI8iCxOUx94jVP55bI3NoY7STjYQ==}
 
-  '@primer/react@38.40.0':
-    resolution: {integrity: sha512-tBCUkD+OwlRZDiV4I4Ft2WxW9g3jrYKi2LkGaHi6BJat8RPTo/47rW4G7GNvkiDSSpe6jGFnU2cP4NIzd52kzA==}
+  '@primer/react@38.40.1':
+    resolution: {integrity: sha512-yTd+QTtWXdqJbWQLCnLibwh280j2TKw1+tREEXtJR6lRYiqrE1dnu5ifCsKhsqIYvxqaKZBNWg4KRqiFG6opZA==}
     engines: {node: '>=12', npm: '>=7'}
     peerDependencies:
       '@types/react': 18.x || 19.x
@@ -2657,8 +2657,8 @@ packages:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
-  dotenv@18.0.4:
-    resolution: {integrity: sha512-jGt9uI5BIxpVO15kvy+iEFqNAwxYClKWnkptLjSNPnFLC003Imd0ofr3aEVsbpHdSBdSsbcApNIlz4nbyGMwdA==}
+  dotenv@18.0.5:
+    resolution: {integrity: sha512-aBrGvt6KhjxbEnatqMWOMidftwsrCiCvqh1yNIGB9QyF0J+VcWkKDMsvYOEm7ZS82oiV+BT1sTOtIlAmUlTpwQ==}
     engines: {node: '>=12'}
     hasBin: true
 
@@ -5776,7 +5776,7 @@ snapshots:
 
   '@primer/primitives@11.10.0': {}
 
-  '@primer/react@38.40.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react-is@19.3.0)(react@19.3.0)':
+  '@primer/react@38.40.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react-is@19.3.0)(react@19.3.0)':
     dependencies:
       '@github/mini-throttle': 2.1.1
       '@github/relative-time-element': 5.3.1
@@ -6807,7 +6807,7 @@ snapshots:
 
   dotenv@16.6.1: {}
 
-  dotenv@18.0.4: {}
+  dotenv@18.0.5: {}
 
   dunder-proto@1.0.1:
     dependencies:
