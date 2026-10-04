@@ -1,4 +1,5 @@
 import { type FC, type ReactNode, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
@@ -13,6 +14,7 @@ import { Header } from '../primitives/Header';
 
 import type { Account, Forge, Hostname, Token } from '../../types';
 
+import i18n from '../../i18n';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
@@ -57,19 +59,19 @@ export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormE
   const adapter = getAdapter(forge);
 
   if (!values.hostname) {
-    errors.hostname = 'Hostname is required';
+    errors.hostname = i18n.t('login.pat.hostname_required', 'Hostname is required');
   } else if (!adapter.validateHostname(values.hostname)) {
-    errors.hostname = 'Hostname format is invalid';
+    errors.hostname = i18n.t('login.pat.hostname_invalid', 'Hostname format is invalid');
   }
 
   if (forge === 'bitbucket' && !values.username) {
-    errors.username = 'Atlassian email is required';
+    errors.username = i18n.t('login.pat.atlassian_email_required', 'Atlassian email is required');
   }
 
   if (!values.token) {
-    errors.token = 'Token is required';
+    errors.token = i18n.t('login.pat.token_required', 'Token is required');
   } else if (!adapter.validateToken(values.token)) {
-    errors.token = 'Token format is invalid';
+    errors.token = i18n.t('login.pat.token_invalid', 'Token format is invalid');
   }
 
   return errors;
@@ -124,6 +126,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
   usernameCaption = '',
   children,
 }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -176,7 +179,11 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
       } catch (err) {
         rendererLogError('loginWithPersonalAccessToken', 'Failed to login with PAT', toError(err));
         setErrors({
-          invalidCredentialsForHost: `Failed to validate provided token against ${data.hostname}`,
+          invalidCredentialsForHost: i18n.t(
+            'login.pat.invalid_token',
+            'Failed to validate provided token against {{hostname}}',
+            { hostname: data.hostname },
+          ),
           invalidCredentialsDetail: summarizeLoginError(err),
         });
       }
@@ -203,14 +210,16 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
               </Text>
             }
             hideTitle
-            title="Form errors"
+            title={t('login.pat.form_errors', 'Form errors')}
             variant="critical"
           />
         )}
         <Stack direction="vertical" gap="normal">
           {showUsernameField && (
             <FormControl required>
-              <FormControl.Label>Atlassian Email</FormControl.Label>
+              <FormControl.Label>
+                {t('login.pat.atlassian_email', 'Atlassian Email')}
+              </FormControl.Label>
               {usernameCaption && (
                 <FormControl.Caption>
                   <Text as="i">{usernameCaption}</Text>
@@ -234,7 +243,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
 
           {showHostnameField && (
             <FormControl required>
-              <FormControl.Label>Hostname</FormControl.Label>
+              <FormControl.Label>{t('login.pat.hostname', 'Hostname')}</FormControl.Label>
               <FormControl.Caption>
                 <Text as="i">{hostnameCaption}</Text>
               </FormControl.Caption>
@@ -273,7 +282,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
           </Stack>
 
           <FormControl required>
-            <FormControl.Label>Token</FormControl.Label>
+            <FormControl.Label>{t('login.pat.token', 'Token')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.token ? 'true' : 'false'}
               block
@@ -284,7 +293,11 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
               placeholder={tokenPlaceholder}
               trailingAction={
                 <TextInput.Action
-                  aria-label={shouldMaskPersonalAccessToken ? 'Show token' : 'Hide token'}
+                  aria-label={
+                    shouldMaskPersonalAccessToken
+                      ? t('login.show_token', 'Show token')
+                      : t('login.hide_token', 'Hide token')
+                  }
                   icon={shouldMaskPersonalAccessToken ? EyeIcon : EyeClosedIcon}
                   onClick={() => setShouldMaskPersonalAccessToken(!shouldMaskPersonalAccessToken)}
                 />
@@ -307,7 +320,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
             onClick={() => openExternalLink(adapter.documentationUrl)}
             size="small"
           >
-            Docs
+            {t('common.docs', 'Docs')}
           </Button>
         </Tooltip>
 
@@ -318,7 +331,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
           onClick={handleSubmit}
           variant="primary"
         >
-          Login
+          {t('common.login', 'Login')}
         </Button>
       </Footer>
     </Page>

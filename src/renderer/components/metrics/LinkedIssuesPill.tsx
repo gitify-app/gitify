@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { IssueRelatesToIcon } from '@primer/octicons-react';
 
@@ -12,14 +13,20 @@ export interface LinkedIssuesPillProps {
 }
 
 export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) => {
+  const { t } = useTranslation();
+
   if (!linkedIssues?.length) {
     return null;
   }
 
   const description = formatMetricDescription(
     linkedIssues.length,
-    'issue',
-    (_, noun) => `Linked to ${noun}: ${linkedIssues.join(', ')}`,
+    t('metrics.issue', 'issue'),
+    (_, noun) =>
+      t('metrics.linked_to', 'Linked to {{noun}}: {{issues}}', {
+        noun,
+        issues: linkedIssues.join(', '),
+      }),
   );
 
   return (

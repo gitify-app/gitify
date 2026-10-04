@@ -1,4 +1,5 @@
 import { type FC, type ReactNode, useCallback, useEffect, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -23,6 +24,7 @@ import { Header } from '../../components/primitives/Header';
 import type { Account, Forge, Hostname, Link } from '../../types';
 import type { DeviceFlowSession } from '../../utils/auth/types';
 
+import i18n from '../../i18n';
 import { getAlternateScopeNames, getRecommendedScopeNames } from '../../utils/auth/scopes';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
@@ -35,6 +37,7 @@ interface LocationState {
 type ScopeChoice = 'public' | 'full';
 
 export const GitHubLoginWithDeviceFlowRoute: FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -66,7 +69,9 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
         openExternalLink(newSession.verificationUri as Link);
       } catch (err) {
         rendererLogError('LoginWithDeviceFlow', 'Failed to start device flow', toError(err));
-        setError('Failed to start authentication. Please try again.');
+        setError(
+          i18n.t('login.device.start_failed', 'Failed to start authentication. Please try again.'),
+        );
       }
     };
 
@@ -90,7 +95,9 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
       const poll = async (): Promise<void> => {
         if (!isActive || Date.now() >= session.expiresAt) {
           if (isActive) {
-            setError('Device code expired. Please start again.');
+            setError(
+              i18n.t('login.device.code_expired', 'Device code expired. Please start again.'),
+            );
           }
           return;
         }
@@ -115,7 +122,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
       } catch (err) {
         if (isActive) {
           rendererLogError('LoginWithDeviceFlow', 'Failed to poll device flow', toError(err));
-          setError('Authentication failed. Please try again.');
+          setError(i18n.t('login.device.auth_failed', 'Authentication failed. Please try again.'));
         }
       } finally {
         if (isActive) {
@@ -162,7 +169,11 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
     return (
       <Stack direction="vertical" gap="normal">
         <Heading as="h3">
-          Authorize the app <Text as="span">using this code.</Text>
+          <Trans
+            i18nKey="login.device.authorize"
+            components={[<Text as="span" key={0} />]}
+            defaults="Authorize the app <0>using this code.</0>"
+          />
         </Heading>
 
         <Stack align="center" direction="horizontal" gap="condensed">
@@ -179,7 +190,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
             {session.userCode}
           </Text>
           <IconButton
-            aria-label="Copy device code"
+            aria-label={t('login.device.copy_code', 'Copy device code')}
             data-testid="copy-device-code"
             icon={CopyIcon}
             onClick={handleCopyUserCode}
@@ -191,20 +202,22 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
         <Stack direction="vertical" gap="condensed">
           <Stack align="center" direction="horizontal" gap="condensed">
             <CheckCircleFillIcon size={16} />
-            <Text size="small">Code copied to clipboard</Text>
+            <Text size="small">{t('login.device.code_copied', 'Code copied to clipboard')}</Text>
           </Stack>
 
           <Stack align="center" direction="horizontal" gap="condensed">
             <GlobeIcon size={16} />
             <Text size="small">
-              Opened{' '}
-              {session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname}
+              {t('login.device.opened', 'Opened {{hostname}}', {
+                hostname:
+                  session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname,
+              })}
             </Text>
           </Stack>
 
           <Stack align="center" direction="horizontal" gap="condensed">
             <SyncIcon className={isPolling ? 'animate-spin' : 'opacity-30'} size={16} />
-            <Text size="small">Waiting for authorization...</Text>
+            <Text size="small">{t('login.device.waiting', 'Waiting for authorization...')}</Text>
           </Stack>
         </Stack>
       </Stack>
@@ -213,7 +226,9 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
 
   const renderScopeChoiceUI = () => (
     <Stack direction="vertical" gap="normal">
-      <Text as="p">Receive notifications for:</Text>
+      <Text as="p">
+        {t('login.device.receive_notifications_for', 'Receive notifications for:')}
+      </Text>
 
       <Stack align="center" direction="vertical">
         <Button
@@ -224,10 +239,17 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
           variant="primary"
         >
           <Stack gap="none">
-            <Text as="strong">Public and Private</Text>
-            <Text size="small">Best experience, but requires broader permissions.</Text>
+            <Text as="strong">{t('login.device.scope_full_title', 'Public and Private')}</Text>
+            <Text size="small">
+              {t(
+                'login.device.scope_full_description',
+                'Best experience, but requires broader permissions.',
+              )}
+            </Text>
             <Text as="em" size="small">
-              Scopes: {getRecommendedScopeNames().join(', ')}
+              {t('login.device.scopes', 'Scopes: {{scopes}}', {
+                scopes: getRecommendedScopeNames().join(', '),
+              })}
             </Text>
           </Stack>
         </Button>
@@ -239,10 +261,17 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
           onClick={() => setScopeChoice('public')}
         >
           <Stack gap="none">
-            <Text>Public</Text>
-            <Text size="small">Limited experience with least privilege permissions.</Text>
+            <Text>{t('login.device.scope_public_title', 'Public')}</Text>
+            <Text size="small">
+              {t(
+                'login.device.scope_public_description',
+                'Limited experience with least privilege permissions.',
+              )}
+            </Text>
             <Text as="em" size="small">
-              Scopes: {getAlternateScopeNames().join(', ')}
+              {t('login.device.scopes', 'Scopes: {{scopes}}', {
+                scopes: getAlternateScopeNames().join(', '),
+              })}
             </Text>
           </Stack>
         </Button>
@@ -259,16 +288,20 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
           return (
             <Stack gap="none">
               <Text as="em" size="small">
-                Note: to change previously granted permissions, revoke Gitify's access at{' '}
-                <button
-                  className="text-gitify-link cursor-pointer"
-                  onClick={() => openExternalLink(revokeUrl)}
-                  title={label}
-                  type="button"
-                >
-                  {label}
-                </button>
-                {', then re-authorize above.'}
+                <Trans
+                  i18nKey="login.device.revoke_note"
+                  components={[
+                    <button
+                      className="text-gitify-link cursor-pointer"
+                      key={0}
+                      onClick={() => openExternalLink(revokeUrl)}
+                      title={label}
+                      type="button"
+                    />,
+                  ]}
+                  defaults="Note: to change previously granted permissions, revoke Gitify's access at <0>{{label}}</0>, then re-authorize above."
+                  values={{ label }}
+                />
               </Text>
             </Stack>
           );
@@ -280,13 +313,13 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
   const renderInitializingUI = () => (
     <Stack align="center" direction="vertical" gap="normal">
       <IconButton
-        aria-label="Initializing"
+        aria-label={t('login.device.initializing', 'Initializing')}
         className={'animate-spin'}
         icon={SyncIcon}
         size="large"
         variant="invisible"
       />
-      <Text>Initializing authentication...</Text>
+      <Text>{t('login.device.initializing_authentication', 'Initializing authentication...')}</Text>
     </Stack>
   );
 
@@ -301,7 +334,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
 
   return (
     <Page testId="Login With Device Flow">
-      <Header icon={SignInIcon}>Authorize with GitHub</Header>
+      <Header icon={SignInIcon}>{t('login.device.title', 'Authorize with GitHub')}</Header>
 
       <Contents scrollFade>
         {error && (
@@ -315,7 +348,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
               </Text>
             }
             hideTitle
-            title="Login errors"
+            title={t('login.device.login_errors', 'Login errors')}
             variant="critical"
           />
         )}
@@ -330,7 +363,10 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
             onClick={handleOpenBrowser}
             variant="primary"
           >
-            Open {session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname}
+            {t('login.device.open', 'Open {{hostname}}', {
+              hostname:
+                session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname,
+            })}
           </Button>
           <Stack direction="horizontal" gap="condensed">
             <Button
@@ -339,17 +375,17 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
               onClick={handleCopyVerificationLink}
               variant="default"
             >
-              Copy link
+              {t('login.device.copy_link', 'Copy link')}
             </Button>
             <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </Button>
           </Stack>
         </Footer>
       ) : (
         <Footer justify="end">
           <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
-            Cancel
+            {t('common.cancel', 'Cancel')}
           </Button>
         </Footer>
       )}

@@ -4,7 +4,7 @@ import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import { NotificationsRoute } from './Notifications';
 
 vi.mock('../components/notifications/NotificationList', () => ({
@@ -55,7 +55,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     it('bad credentials', () => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
-        globalError: Errors.BAD_CREDENTIALS,
+        globalError: getErrorDetails('BAD_CREDENTIALS'),
       });
 
       expect(tree.container).toMatchSnapshot();
@@ -64,7 +64,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     it('missing scopes', () => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
-        globalError: Errors.MISSING_SCOPES,
+        globalError: getErrorDetails('MISSING_SCOPES'),
       });
 
       expect(tree.container).toMatchSnapshot();
@@ -73,7 +73,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     it('rate limited', () => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
-        globalError: Errors.RATE_LIMITED,
+        globalError: getErrorDetails('RATE_LIMITED'),
       });
 
       expect(tree.container).toMatchSnapshot();
@@ -82,7 +82,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     it('unknown error', () => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
-        globalError: Errors.UNKNOWN,
+        globalError: getErrorDetails('UNKNOWN'),
       });
 
       expect(tree.container).toMatchSnapshot();

@@ -27,6 +27,9 @@ jobs:
       - name: Run lint and format checks
         run: vp run check
 
+      - name: Run i18n key sync check
+        run: pnpm i18n:check
+
   lint-actions:
     name: Lint GitHub Actions [actionlint]
     runs-on: ubuntu-latest

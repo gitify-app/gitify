@@ -1,13 +1,16 @@
-import { act, screen } from '@testing-library/react';
+import { act, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
 
+import { Constants } from '../../constants';
+
 import { useSettingsStore } from '../../stores';
 
 import { DesignLanguage } from '../../types';
 
+import i18n from '../../i18n';
 import * as zoom from '../../utils/ui/zoom';
 import { AppearanceSettings } from './AppearanceSettings';
 
@@ -40,6 +43,36 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
+  });
+
+  it('should render English as the only available language', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    expect(screen.getByTestId('settings-language')).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'English' })).toBeInTheDocument();
+
+    const languageSelect = screen.getByTestId('settings-language');
+    const options = within(languageSelect).getAllByRole('option');
+    expect(options).toHaveLength(1);
+    expect(options[0]).toHaveValue('en');
+  });
+
+  it('should change the interface language and persist it to localStorage', async () => {
+    const changeLanguageSpy = vi.spyOn(i18n, 'changeLanguage');
+
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    await userEvent.selectOptions(screen.getByTestId('settings-language'), 'en');
+
+    expect(changeLanguageSpy).toHaveBeenCalledWith('en');
+
+    await waitFor(() => {
+      expect(localStorage.getItem(Constants.STORAGE.LANGUAGE)).toBe('en');
+    });
   });
 
   it('hides accessibility color modes when Glass is the active design language', async () => {

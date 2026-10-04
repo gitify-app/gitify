@@ -1,4 +1,5 @@
 import { type FC, useEffect, useRef, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
@@ -32,6 +33,7 @@ import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
 export const SystemSettings: FC = () => {
+  const { t } = useTranslation();
   const shortcutRegistrationError = useShortcutRegistrationStore(
     (s) => s.shortcutRegistrationError,
   );
@@ -123,35 +125,50 @@ export const SystemSettings: FC = () => {
 
   let shortcutButtonLabel = shortcutDisplay;
   if (recordingShortcut) {
-    shortcutButtonLabel = hasLiveModifiers ? `${liveModifierDisplay}…` : 'Press keys…';
+    shortcutButtonLabel = hasLiveModifiers
+      ? `${liveModifierDisplay}…`
+      : t('settings.system.press_keys', 'Press keys…');
   }
 
   return (
     <fieldset>
-      <Title icon={DeviceDesktopIcon}>System</Title>
+      <Title icon={DeviceDesktopIcon}>{t('settings.system.title', 'System')}</Title>
 
       <Stack direction="vertical" gap="condensed">
         <RadioGroup
-          label="Open Links:"
+          label={t('settings.system.open_links', 'Open Links:')}
           name="openLinks"
           onChange={(evt) => {
             updateSetting('openLinks', evt.target.value as OpenPreference);
           }}
           options={[
-            { label: 'Foreground', value: OpenPreference.FOREGROUND },
-            { label: 'Background', value: OpenPreference.BACKGROUND },
+            {
+              label: t('settings.system.open_links_foreground', 'Foreground'),
+              value: OpenPreference.FOREGROUND,
+            },
+            {
+              label: t('settings.system.open_links_background', 'Background'),
+              value: OpenPreference.BACKGROUND,
+            },
           ]}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Controls the behavior of how external links should opened.</Text>
               <Text>
-                <Text as="strong">Foreground</Text> will open the link and bring the opened window
-                or browser to the front.
+                {t(
+                  'settings.system.open_links_help',
+                  'Controls the behavior of how external links should opened.',
+                )}
               </Text>
-              <Text>
-                <Text as="strong">Background</Text> opens the link without stealing focus from the
-                current window.
-              </Text>
+              <Trans
+                i18nKey="settings.system.open_links_foreground_help"
+                components={[<Text as="strong" key={0} />]}
+                defaults="<0>Foreground</0> will open the link and bring the opened window or browser to the front."
+              />
+              <Trans
+                i18nKey="settings.system.open_links_background_help"
+                components={[<Text as="strong" key={0} />]}
+                defaults="<0>Background</0> opens the link without stealing focus from the current window."
+              />
             </Stack>
           }
           value={openLinks}
@@ -164,12 +181,12 @@ export const SystemSettings: FC = () => {
               <Stack direction="vertical" gap="condensed">
                 <Text>{shortcutRegistrationError}</Text>
                 <Button onClick={clearShortcutRegistrationError} size="small" variant="invisible">
-                  Dismiss
+                  {t('settings.system.shortcut_error_dismiss', 'Dismiss')}
                 </Button>
               </Stack>
             }
             hideTitle
-            title="Shortcut error"
+            title={t('settings.system.shortcut_error_title', 'Shortcut error')}
             variant="critical"
           />
         )}
@@ -177,40 +194,57 @@ export const SystemSettings: FC = () => {
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <Checkbox
             checked={keyboardShortcut}
-            label="Global shortcut"
+            label={t('settings.system.keyboard_shortcut', 'Global shortcut')}
             name="keyboardShortcut"
             onChange={() => toggleSetting('keyboardShortcut')}
             tooltip={
               <Stack direction="vertical" gap="condensed">
-                <Text>Global keyboard shortcut to show or hide {APPLICATION.NAME}.</Text>
-                <Text>Shortcuts must include:</Text>
+                <Text>
+                  {t(
+                    'settings.system.keyboard_shortcut_help',
+                    'Global keyboard shortcut to show or hide {{appName}}.',
+                    { appName: APPLICATION.NAME },
+                  )}
+                </Text>
+                <Text>
+                  {t('settings.system.keyboard_shortcut_help_modifiers', 'Shortcuts must include:')}
+                </Text>
                 <div className="pl-2">
                   <Stack direction="vertical" gap="none">
                     <Stack direction="horizontal" gap="condensed">
                       <Text>•</Text>
-                      <Text>
-                        Primary modifier:{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('CommandOrControl', isMac)}
-                        </Text>
-                      </Text>
+                      <Trans
+                        i18nKey="settings.system.keyboard_shortcut_primary_modifier"
+                        components={[<Text as="strong" className="text-gitify-caution" key={0} />]}
+                        defaults="Primary modifier: <0>{{accelerator}}</0>"
+                        values={{
+                          accelerator: formatAcceleratorForDisplay('CommandOrControl', isMac),
+                        }}
+                      />
+                    </Stack>
+                    <Stack direction="horizontal" gap="condensed">
+                      <Text>•</Text>
+                      <Trans
+                        i18nKey="settings.system.keyboard_shortcut_optional_modifiers"
+                        components={[
+                          <Text as="strong" className="text-gitify-caution" key={0} />,
+                          <Text as="strong" className="text-gitify-caution" key={1} />,
+                        ]}
+                        defaults="Optional modifiers: <0>{{modifier1}}</0>, <1>{{modifier2}}</1>"
+                        values={{
+                          modifier1: formatAcceleratorForDisplay('Shift', isMac),
+                          modifier2: formatAcceleratorForDisplay('Alt', isMac),
+                        }}
+                      />
                     </Stack>
                     <Stack direction="horizontal" gap="condensed">
                       <Text>•</Text>
                       <Text>
-                        Optional modifiers:{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('Shift', isMac)}
-                        </Text>
-                        ,{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('Alt', isMac)}
-                        </Text>
+                        {t(
+                          'settings.system.keyboard_shortcut_non_modifier',
+                          'A non-modifier key (letter, number, etc.)',
+                        )}
                       </Text>
-                    </Stack>
-                    <Stack direction="horizontal" gap="condensed">
-                      <Text>•</Text>
-                      <Text>A non-modifier key (letter, number, etc.)</Text>
                     </Stack>
                   </Stack>
                 </div>
@@ -224,7 +258,7 @@ export const SystemSettings: FC = () => {
             hidden={!keyboardShortcut}
           >
             <IconButton
-              aria-label="Edit global shortcut"
+              aria-label={t('settings.system.edit_shortcut', 'Edit global shortcut')}
               data-testid="settings-shortcut-edit"
               icon={PencilIcon}
               onClick={() => {
@@ -236,7 +270,7 @@ export const SystemSettings: FC = () => {
               unsafeDisableTooltip={true}
             />
             <Button
-              aria-label="Global shortcut"
+              aria-label={t('settings.system.shortcut_display', 'Global shortcut')}
               className="pointer-events-none"
               size="small"
               tabIndex={-1}
@@ -246,7 +280,7 @@ export const SystemSettings: FC = () => {
               </Text>
             </Button>
             <IconButton
-              aria-label="Reset global shortcut to default"
+              aria-label={t('settings.system.reset_shortcut', 'Reset global shortcut to default')}
               data-testid="settings-shortcut-reset"
               disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
               icon={SyncIcon}
@@ -263,25 +297,30 @@ export const SystemSettings: FC = () => {
 
         <Checkbox
           checked={showNotifications}
-          label="Show system notifications"
+          label={t('settings.system.show_notifications', 'Show system notifications')}
           name="showNotifications"
           onChange={() => toggleSetting('showNotifications')}
           tooltip={
-            <Text>Display native operating system notifications for new unread notifications.</Text>
+            <Text>
+              {t(
+                'settings.system.show_notifications_help',
+                'Display native operating system notifications for new unread notifications.',
+              )}
+            </Text>
           }
         />
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <Checkbox
             checked={playSound}
-            label="Play sound"
+            label={t('settings.system.play_sound', 'Play sound')}
             name="playSound"
             onChange={() => toggleSetting('playSound')}
           />
 
           <ButtonGroup className="ml-2" data-testid="settings-volume-group" hidden={!playSound}>
             <IconButton
-              aria-label="Volume down"
+              aria-label={t('settings.system.volume_down', 'Volume down')}
               data-testid="settings-volume-down"
               disabled={!canDecreaseVolume(notificationVolume)}
               icon={VolumeDownIcon}
@@ -293,7 +332,7 @@ export const SystemSettings: FC = () => {
             />
 
             <Button
-              aria-label="Volume percentage"
+              aria-label={t('settings.system.volume_percentage', 'Volume percentage')}
               className="pointer-events-none"
               size="small"
               tabIndex={-1}
@@ -302,7 +341,7 @@ export const SystemSettings: FC = () => {
             </Button>
 
             <IconButton
-              aria-label="Volume up"
+              aria-label={t('settings.system.volume_up', 'Volume up')}
               data-testid="settings-volume-up"
               disabled={!canIncreaseVolume(notificationVolume)}
               icon={VolumeUpIcon}
@@ -314,7 +353,7 @@ export const SystemSettings: FC = () => {
             />
 
             <IconButton
-              aria-label="Reset volume"
+              aria-label={t('settings.system.volume_reset', 'Reset volume')}
               data-testid="settings-volume-reset"
               icon={SyncIcon}
               onClick={() => {
@@ -329,50 +368,67 @@ export const SystemSettings: FC = () => {
 
         <Checkbox
           checked={keepWindowOnBlur}
-          label="Keep window open when it loses focus"
+          label={t('settings.system.keep_window_on_blur', 'Keep window open when it loses focus')}
           name="keepWindowOnBlur"
           onChange={() => toggleSetting('keepWindowOnBlur')}
           tooltip={
             <Text>
-              Prevent the {APPLICATION.NAME} window from automatically hiding when you click outside
-              it.
+              {t(
+                'settings.system.keep_window_on_blur_help',
+                'Prevent the {{appName}} window from automatically hiding when you click outside it.',
+                { appName: APPLICATION.NAME },
+              )}
             </Text>
           }
         />
 
         <Checkbox
           checked={openAtStartup}
-          label="Open at startup"
+          label={t('settings.system.open_at_startup', 'Open at startup')}
           name="openAtStartup"
           onChange={() => toggleSetting('openAtStartup')}
-          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
+          tooltip={
+            <Text>
+              {t(
+                'settings.system.open_at_startup_help',
+                'Launch {{appName}} automatically at startup.',
+                {
+                  appName: APPLICATION.NAME,
+                },
+              )}
+            </Text>
+          }
           visible={!window.gitify.platform.isLinux()}
         />
 
         <Checkbox
           checked={showUpdateNotifications}
-          label="Show update notifications"
+          label={t('settings.system.show_update_notifications', 'Show update notifications')}
           name="showUpdateNotifications"
           onChange={() => toggleSetting('showUpdateNotifications')}
           tooltip={
             <Text>
-              Show a notification when a {APPLICATION.NAME} update is ready. Updates will still be
-              checked and shown in the menu bar.
+              {t(
+                'settings.system.show_update_notifications_help',
+                'Show a notification when a {{appName}} update is ready. Updates will still be checked and shown in the menu bar.',
+                { appName: APPLICATION.NAME },
+              )}
             </Text>
           }
         />
 
         <Checkbox
           checked={useX11Backend}
-          label="Use X11 backend (restart required)"
+          label={t('settings.system.use_x11_backend', 'Use X11 backend (restart required)')}
           name="useX11Backend"
           onChange={() => toggleSetting('useX11Backend')}
           tooltip={
             <Text>
-              Run under X11/XWayland so the window opens next to the tray icon. On Wayland, window
-              placement depends on your compositor and its extensions. Enabling this also disables
-              Vulkan, which crashes under X11 on some drivers, and may soften text on displays using
-              fractional scaling. Takes effect after restarting {APPLICATION.NAME}.
+              {t(
+                'settings.system.use_x11_backend_help',
+                'Run under X11/XWayland so the window opens next to the tray icon. On Wayland, window placement depends on your compositor and its extensions. Enabling this also disables Vulkan, which crashes under X11 on some drivers, and may soften text on displays using fractional scaling. Takes effect after restarting {{appName}}.',
+                { appName: APPLICATION.NAME },
+              )}
             </Text>
           }
           visible={window.gitify.platform.isLinux()}
@@ -380,8 +436,10 @@ export const SystemSettings: FC = () => {
         {window.gitify.platform.isLinux() && (
           <Stack gap="condensed">
             <Text className="text-sm text-gitify-font">
-              On GNOME Wayland, install the Gitify extension to open the window next to its tray
-              icon. Install and manage it through GNOME's extension tools.
+              {t(
+                'settings.system.gnome_extension_help',
+                "On GNOME Wayland, install the Gitify extension to open the window next to its tray icon. Install and manage it through GNOME's extension tools.",
+              )}
             </Text>
             <Button
               onClick={() =>
@@ -389,7 +447,7 @@ export const SystemSettings: FC = () => {
               }
               size="small"
             >
-              GNOME extension installation
+              {t('settings.system.gnome_extension_button', 'GNOME extension installation')}
             </Button>
           </Stack>
         )}

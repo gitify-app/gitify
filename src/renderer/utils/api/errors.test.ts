@@ -3,7 +3,7 @@ import { RequestError } from '@octokit/request-error';
 
 import { EVENTS } from '../../../shared/events';
 
-import { Errors } from '../core/errors';
+import { getErrorDetails } from '../core/errors';
 import * as rendererLogger from '../core/logger';
 import { determineFailureType, handleGraphQLResponseError } from './errors';
 
@@ -15,13 +15,13 @@ describe('renderer/utils/api/errors.ts', () => {
           `Error invoking remote method '${EVENTS.SAFE_STORAGE_DECRYPT}': Error: Error while decrypting the ciphertext provided to safeStorage.decryptString. Ciphertext does not appear to be encrypted.`,
         );
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.BAD_CREDENTIALS);
+        expect(result).toEqual(getErrorDetails('BAD_CREDENTIALS'));
       });
 
       it('unknown error - generic error', () => {
         const mockError = new Error('Something went wrong');
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.UNKNOWN);
+        expect(result).toEqual(getErrorDetails('UNKNOWN'));
       });
     });
 
@@ -35,7 +35,7 @@ describe('renderer/utils/api/errors.ts', () => {
           },
         });
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.BAD_CREDENTIALS);
+        expect(result).toEqual(getErrorDetails('BAD_CREDENTIALS'));
       });
 
       it('missing scopes - 403 with scope message', () => {
@@ -47,7 +47,7 @@ describe('renderer/utils/api/errors.ts', () => {
           },
         });
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.MISSING_SCOPES);
+        expect(result).toEqual(getErrorDetails('MISSING_SCOPES'));
       });
 
       it('rate limited - primary rate limit', () => {
@@ -59,7 +59,7 @@ describe('renderer/utils/api/errors.ts', () => {
           },
         });
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.RATE_LIMITED);
+        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
       });
 
       it('rate limited - secondary rate limit', () => {
@@ -71,7 +71,7 @@ describe('renderer/utils/api/errors.ts', () => {
           },
         });
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.RATE_LIMITED);
+        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
       });
 
       it('action forbidden - unmatched 403', () => {
@@ -87,7 +87,7 @@ describe('renderer/utils/api/errors.ts', () => {
           },
         );
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.ACTION_FORBIDDEN);
+        expect(result).toEqual(getErrorDetails('ACTION_FORBIDDEN'));
       });
 
       it('network error - no status', () => {
@@ -99,7 +99,7 @@ describe('renderer/utils/api/errors.ts', () => {
           },
         });
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.NETWORK);
+        expect(result).toEqual(getErrorDetails('NETWORK'));
       });
 
       it('unknown error - unhandled 418', () => {
@@ -111,7 +111,7 @@ describe('renderer/utils/api/errors.ts', () => {
           },
         });
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.UNKNOWN);
+        expect(result).toEqual(getErrorDetails('UNKNOWN'));
       });
     });
 
@@ -119,25 +119,25 @@ describe('renderer/utils/api/errors.ts', () => {
       it('bad credentials', () => {
         const mockError = createGraphQLResponseError('Bad credentials');
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.BAD_CREDENTIALS);
+        expect(result).toEqual(getErrorDetails('BAD_CREDENTIALS'));
       });
 
       it('rate limited - primary rate limit', () => {
         const mockError = createGraphQLResponseError('API rate limit exceeded');
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.RATE_LIMITED);
+        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
       });
 
       it('rate limited - secondary rate limit', () => {
         const mockError = createGraphQLResponseError('You have exceeded a secondary rate limit');
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.RATE_LIMITED);
+        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
       });
 
       it('unknown error', () => {
         const mockError = createGraphQLResponseError('Something went wrong');
         const result = determineFailureType(mockError);
-        expect(result).toBe(Errors.UNKNOWN);
+        expect(result).toEqual(getErrorDetails('UNKNOWN'));
       });
     });
   });

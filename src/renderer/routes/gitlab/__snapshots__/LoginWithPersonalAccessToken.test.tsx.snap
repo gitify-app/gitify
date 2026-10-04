@@ -237,16 +237,14 @@ exports[`renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx > renders corre
             >
               api
             </span>
-             scope, or a fine-grained token with
-             
+             scope, or a fine-grained token with 
             <span
               class="font-semibold prc-Text-Text-9mHv3"
               data-component="Text"
             >
               Todo
             </span>
-             (read, update) and
-             
+             (read, update) and 
             <span
               class="font-semibold prc-Text-Text-9mHv3"
               data-component="Text"

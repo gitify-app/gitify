@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
@@ -18,6 +19,7 @@ import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
 export const FiltersRoute: FC = () => {
+  const { t } = useTranslation();
   const clearFilters = useFiltersStore((s) => s.reset);
 
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
@@ -25,7 +27,7 @@ export const FiltersRoute: FC = () => {
   return (
     <Page testId="filters">
       <Header fetchOnBack icon={FilterIcon}>
-        Filters
+        {t('filters.title', 'Filters')}
       </Header>
 
       <Contents paddingBottom scrollFade>
@@ -41,13 +43,13 @@ export const FiltersRoute: FC = () => {
       </Contents>
 
       <Footer justify="end">
-        <Tooltip direction="n" text="Clear all filters">
+        <Tooltip direction="n" text={t('filters.clear_all_tooltip', 'Clear all filters')}>
           <Button
             data-testid="filters-clear"
             leadingVisual={FilterRemoveIcon}
             onClick={clearFilters}
           >
-            Clear filters
+            {t('filters.clear_filters', 'Clear filters')}
           </Button>
         </Tooltip>
       </Footer>

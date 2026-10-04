@@ -2,6 +2,8 @@ import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@primer/octi
 
 import type { Chevron } from '../../types';
 
+import i18n from '../../i18n';
+
 export interface ParsedCodePart {
   id: string;
   type: 'text' | 'code';
@@ -21,23 +23,28 @@ export function getChevronDetails(
   isVisible: boolean,
   type: 'account' | 'repository',
 ): Chevron {
+  const typeLabel =
+    type === 'account'
+      ? i18n.t('chevron.account', 'account')
+      : i18n.t('chevron.repository', 'repository');
+
   if (!hasNotifications) {
     return {
       icon: ChevronLeftIcon,
-      label: `No notifications for ${type}`,
+      label: i18n.t('chevron.none', 'No notifications for {{type}}', { type: typeLabel }),
     };
   }
 
   if (isVisible) {
     return {
       icon: ChevronDownIcon,
-      label: `Hide ${type} notifications`,
+      label: i18n.t('chevron.hide', 'Hide {{type}} notifications', { type: typeLabel }),
     };
   }
 
   return {
     icon: ChevronRightIcon,
-    label: `Show ${type} notifications`,
+    label: i18n.t('chevron.show', 'Show {{type}} notifications', { type: typeLabel }),
   };
 }
 

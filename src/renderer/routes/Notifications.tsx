@@ -10,7 +10,7 @@ import { NotificationList } from '../components/notifications/NotificationList';
 import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 
 export const NotificationsRoute: FC = () => {
   const { notifications, status, globalError, hasNotifications } = useNotifications();
@@ -34,11 +34,11 @@ export const NotificationsRoute: FC = () => {
   );
 
   if (!isOnline) {
-    return <Oops error={Errors.OFFLINE} />;
+    return <Oops error={getErrorDetails('OFFLINE')} />;
   }
 
   if (status === 'error') {
-    return <Oops error={globalError ?? Errors.UNKNOWN} />;
+    return <Oops error={globalError ?? getErrorDetails('UNKNOWN')} />;
   }
 
   if (!hasNotifications && hasNoAccountErrors) {

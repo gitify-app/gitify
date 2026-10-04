@@ -1,4 +1,5 @@
 import { type CSSProperties, type FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
@@ -39,6 +40,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   isAnimatingExit,
   onAnimateExit,
 }: NotificationRowProps) => {
+  const { t } = useTranslation();
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
     useNotifications();
 
@@ -59,7 +61,14 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   // "...instead", since some descriptions already suggest waiting/retrying
   // (e.g. `RATE_LIMITED`), which "instead" would read as contradicting.
   const failureTooltip = failure
-    ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in the browser.`
+    ? t(
+        'notifications.failure_tooltip',
+        '{{title}}: {{description}} You can also try opening this notification in the browser.',
+        {
+          title: failure.error.title,
+          description: failure.error.descriptions.join(' '),
+        },
+      )
     : undefined;
 
   const runAction = async (action: () => Promise<boolean>) => {
@@ -161,7 +170,9 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             enabled={!isNotificationRead}
             icon={ReadIcon}
             label={
-              failure?.action === 'markAsRead' ? (failureTooltip ?? 'Mark as read') : 'Mark as read'
+              failure?.action === 'markAsRead'
+                ? (failureTooltip ?? t('notifications.mark_as_read', 'Mark as read'))
+                : t('notifications.mark_as_read', 'Mark as read')
             }
             testid="notification-mark-as-read"
             variant={failure?.action === 'markAsRead' ? 'danger' : 'invisible'}
@@ -172,7 +183,9 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             enabled={isMarkAsDoneFeatureSupported(notification.account) && notification.unread}
             icon={CheckIcon}
             label={
-              failure?.action === 'markAsDone' ? (failureTooltip ?? 'Mark as done') : 'Mark as done'
+              failure?.action === 'markAsDone'
+                ? (failureTooltip ?? t('notifications.mark_as_done', 'Mark as done'))
+                : t('notifications.mark_as_done', 'Mark as done')
             }
             testid="notification-mark-as-done"
             variant={failure?.action === 'markAsDone' ? 'danger' : 'invisible'}
@@ -184,8 +197,8 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             icon={BellSlashIcon}
             label={
               failure?.action === 'unsubscribe'
-                ? (failureTooltip ?? 'Unsubscribe from thread')
-                : 'Unsubscribe from thread'
+                ? (failureTooltip ?? t('notifications.unsubscribe', 'Unsubscribe from thread'))
+                : t('notifications.unsubscribe', 'Unsubscribe from thread')
             }
             testid="notification-unsubscribe-from-thread"
             variant={failure?.action === 'unsubscribe' ? 'danger' : 'invisible'}

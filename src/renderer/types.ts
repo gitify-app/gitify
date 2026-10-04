@@ -197,6 +197,11 @@ export interface GitifyUser {
  */
 export interface GitifyError {
   /**
+   * The type of error, used for comparison (see `isErrorType`).
+   */
+  type?: ErrorType;
+
+  /**
    * The title of the error.
    */
   title: string;

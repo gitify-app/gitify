@@ -14,7 +14,7 @@ import { getNotificationFailureKey, useNotificationActionFailuresStore } from '.
 
 import { GroupBy } from '../../types';
 
-import { Errors } from '../../utils/core/errors';
+import { getErrorDetails } from '../../utils/core/errors';
 import * as comms from '../../utils/system/comms';
 import * as links from '../../utils/system/links';
 import {
@@ -335,7 +335,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsRead',
-        error: Errors.ACTION_FORBIDDEN,
+        error: getErrorDetails('ACTION_FORBIDDEN'),
       });
       renderWithProviders(<NotificationRow {...props} />);
 
@@ -345,7 +345,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markAsReadButton).toBeInTheDocument();
       expect(markAsReadButton).toHaveAttribute(
         'title',
-        expect.stringContaining(Errors.ACTION_FORBIDDEN.title),
+        expect.stringContaining(getErrorDetails('ACTION_FORBIDDEN').title),
       );
       expect(markAsReadButton).toHaveAttribute(
         'title',
@@ -368,7 +368,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       };
       useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsRead',
-        error: Errors.ACTION_FORBIDDEN,
+        error: getErrorDetails('ACTION_FORBIDDEN'),
       });
 
       renderWithProviders(
@@ -384,7 +384,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const [failedButton, unaffectedButton] = screen.getAllByTestId('notification-mark-as-read');
       expect(failedButton).toHaveAttribute(
         'title',
-        expect.stringContaining(Errors.ACTION_FORBIDDEN.title),
+        expect.stringContaining(getErrorDetails('ACTION_FORBIDDEN').title),
       );
       expect(unaffectedButton).toHaveAttribute('title', 'Mark as read');
     });
@@ -399,7 +399,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsDone',
-        error: Errors.ACTION_FORBIDDEN,
+        error: getErrorDetails('ACTION_FORBIDDEN'),
       });
       renderWithProviders(<NotificationRow {...props} />, {
         markNotificationsAsDone: markNotificationsAsDoneMock,
@@ -421,7 +421,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsRead',
-        error: Errors.ACTION_FORBIDDEN,
+        error: getErrorDetails('ACTION_FORBIDDEN'),
       });
       renderWithProviders(<NotificationRow {...props} />, {
         markNotificationsAsRead: markNotificationsAsReadMock,
@@ -443,7 +443,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       // animate back in, instead of being short-circuited immediately.
       useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsRead',
-        error: Errors.ACTION_FORBIDDEN,
+        error: getErrorDetails('ACTION_FORBIDDEN'),
       });
 
       let resolveRetry: () => void = () => {};
@@ -474,7 +474,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       // this notification once the mutation resolves.
       useNotificationActionFailuresStore.getState().setFailure(failureKey, {
         action: 'markAsRead',
-        error: Errors.ACTION_FORBIDDEN,
+        error: getErrorDetails('ACTION_FORBIDDEN'),
       });
       resolveRetry();
 

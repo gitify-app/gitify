@@ -1,4 +1,5 @@
 import type { FC, MouseEvent } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -37,6 +38,7 @@ import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scope
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
 
 export const NotificationSettings: FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   // Account store values
@@ -61,40 +63,46 @@ export const NotificationSettings: FC = () => {
 
   return (
     <fieldset>
-      <Title icon={BellIcon}>Notifications</Title>
+      <Title icon={BellIcon}>{t('settings.notifications.title', 'Notifications')}</Title>
 
       <Stack direction="vertical" gap="condensed">
         <RadioGroup
-          label="Group by:"
+          label={t('settings.notifications.group_by', 'Group by:')}
           name="groupBy"
           onChange={(evt) => {
             updateSetting('groupBy', evt.target.value as GroupBy);
           }}
           options={[
-            { label: 'Repository', value: GroupBy.REPOSITORY },
-            { label: 'Date', value: GroupBy.DATE },
+            {
+              label: t('settings.notifications.group_by_repository', 'Repository'),
+              value: GroupBy.REPOSITORY,
+            },
+            { label: t('settings.notifications.group_by_date', 'Date'), value: GroupBy.DATE },
           ]}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Choose how notifications are displayed in the list.</Text>
-              <Text>
-                <Text as="strong">Repository</Text> groups notifications by their repository full
-                name.
-              </Text>
-              <Text>
-                <Text as="strong">Date</Text> shows notifications in chronological order.
-              </Text>
+              <Trans
+                i18nKey="settings.notifications.group_by_help"
+                components={[<Text as="strong" key={0} />, <Text as="strong" key={1} />]}
+                defaults="Choose how notifications are displayed in the list. <0>Repository</0> groups notifications by their repository full name. <1>Date</1> shows notifications in chronological order."
+              />
             </Stack>
           }
           value={groupBy}
         />
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <FieldLabel label="Fetch interval:" name="fetchInterval" />
+          <FieldLabel
+            label={t('settings.notifications.fetch_interval', 'Fetch interval:')}
+            name="fetchInterval"
+          />
 
           <ButtonGroup className="ml-2">
             <IconButton
-              aria-label="Decrease fetch interval"
+              aria-label={t(
+                'settings.notifications.fetch_interval_decrease',
+                'Decrease fetch interval',
+              )}
               data-testid="settings-fetch-interval-decrease"
               icon={DashIcon}
               onClick={() => {
@@ -112,7 +120,7 @@ export const NotificationSettings: FC = () => {
             />
 
             <Button
-              aria-label="Fetch interval"
+              aria-label={t('settings.notifications.fetch_interval_display', 'Fetch interval')}
               className="pointer-events-none"
               size="small"
               tabIndex={-1}
@@ -123,7 +131,10 @@ export const NotificationSettings: FC = () => {
             </Button>
 
             <IconButton
-              aria-label="Increase fetch interval"
+              aria-label={t(
+                'settings.notifications.fetch_interval_increase',
+                'Increase fetch interval',
+              )}
               data-testid="settings-fetch-interval-increase"
               icon={PlusIcon}
               onClick={() => {
@@ -141,7 +152,7 @@ export const NotificationSettings: FC = () => {
             />
 
             <IconButton
-              aria-label="Reset fetch interval"
+              aria-label={t('settings.notifications.fetch_interval_reset', 'Reset fetch interval')}
               data-testid="settings-fetch-interval-reset"
               icon={SyncIcon}
               onClick={() => {
@@ -156,45 +167,48 @@ export const NotificationSettings: FC = () => {
 
         <Checkbox
           checked={fetchAllNotifications}
-          label="Fetch all notifications"
+          label={t('settings.notifications.fetch_all', 'Fetch all notifications')}
           name="fetchAllNotifications"
           onChange={() => toggleSetting('fetchAllNotifications')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>
-                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch{' '}
-                <Text as="strong">all</Text> notifications from your inbox.
-              </Text>
-              <Text>
-                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will fetch the first page of
-                notifications (max 50 records per GitHub account)
-              </Text>
+              <Trans
+                i18nKey="settings.notifications.fetch_all_help"
+                components={[
+                  <Text as="u" key={0} />,
+                  <Text as="strong" key={1} />,
+                  <Text as="u" key={2} />,
+                ]}
+                defaults="When <0>checked</0>, {{appName}} will fetch <1>all</1> notifications from your inbox. When <2>unchecked</2>, {{appName}} will fetch the first page of notifications (max 50 records per GitHub account)"
+                values={{ appName: APPLICATION.NAME }}
+              />
             </Stack>
           }
         />
 
         <Checkbox
           checked={detailedNotifications}
-          label="Fetch detailed notifications"
+          label={t('settings.notifications.fetch_detailed', 'Fetch detailed notifications')}
           name="detailedNotifications"
           onChange={() => toggleSetting('detailedNotifications')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>
-                When <Text as="u">checked</Text>, {APPLICATION.NAME} will enrich notifications with
-                detailed user and state information. You may also choose to display{' '}
-                <Text as="strong">notification metric pills</Text> or{' '}
-                <Text as="strong">notification reference numbers</Text>.
-              </Text>
-              <Text>
-                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will only fetch basic
-                notification details.
-              </Text>
-              <Text className="text-gitify-caution">
-                ⚠️ Users with a large number of unread notifications <i>may</i> experience rate
-                limiting under certain circumstances. Please disable this setting if you experience
-                this.
-              </Text>
+              <Trans
+                i18nKey="settings.notifications.fetch_detailed_help"
+                components={[
+                  <Text as="u" key={0} />,
+                  <Text as="strong" key={1} />,
+                  <Text as="strong" key={2} />,
+                  <Text as="u" key={3} />,
+                ]}
+                defaults="When <0>checked</0>, {{appName}} will enrich notifications with detailed user and state information. You may also choose to display <1>notification metric pills</1> or <2>notification reference numbers</2>. When <3>unchecked</3>, {{appName}} will only fetch basic notification details."
+                values={{ appName: APPLICATION.NAME }}
+              />
+              <Trans
+                i18nKey="settings.notifications.fetch_detailed_caution"
+                components={[<i key={0} />]}
+                defaults="⚠️ Users with a large number of unread notifications <i>may</i> experience rate limiting under certain circumstances. Please disable this setting if you experience this."
+              />
             </Stack>
           }
         />
@@ -211,23 +225,18 @@ export const NotificationSettings: FC = () => {
               gap="condensed"
             >
               <AlertFillIcon className="text-gitify-warning" size={14} />
-              <Stack direction="vertical" gap="condensed">
-                <Text>
-                  One or more accounts are missing scopes required for notification enrichment.
-                  Notification details may be incomplete.
-                </Text>
-                <Text>
-                  Visit{' '}
+              <Trans
+                i18nKey="settings.notifications.scope_warning"
+                components={[
                   <button
                     className="text-gitify-link cursor-pointer"
+                    key={0}
                     onClick={() => navigate('/accounts')}
                     type="button"
-                  >
-                    Accounts → Scopes
-                  </button>{' '}
-                  to review.
-                </Text>
-              </Stack>
+                  />,
+                ]}
+                defaults="One or more accounts are missing scopes required for notification enrichment. Notification details may be incomplete. Visit <0>Accounts → Scopes</0> to review."
+              />
             </Stack>
           )}
 
@@ -235,37 +244,42 @@ export const NotificationSettings: FC = () => {
           <Stack direction="vertical" gap="condensed">
             <Checkbox
               checked={showPills}
-              label="Show notification metric pills"
+              label={t('settings.notifications.show_pills', 'Show notification metric pills')}
               name="showPills"
               onChange={() => toggleSetting('showPills')}
               tooltip={
                 <Stack direction="vertical" gap="condensed">
-                  <Text>Show notification metric pills for:</Text>
+                  <Text>
+                    {t(
+                      'settings.notifications.show_pills_help',
+                      'Show notification metric pills for:',
+                    )}
+                  </Text>
                   <div className="pl-2">
                     <Stack direction="vertical" gap="none">
                       <Stack direction="horizontal" gap="condensed">
                         <IssueOpenedIcon size={Size.SMALL} />
-                        linked issues
+                        {t('settings.notifications.pill_linked_issues', 'linked issues')}
                       </Stack>
                       <Stack direction="horizontal" gap="condensed">
                         <SmileyIcon size={Size.SMALL} />
-                        reactions
+                        {t('settings.notifications.pill_reactions', 'reactions')}
                       </Stack>
                       <Stack direction="horizontal" gap="condensed">
                         <CheckIcon size={Size.SMALL} />
-                        pr reviews
+                        {t('settings.notifications.pill_pr_reviews', 'pr reviews')}
                       </Stack>
                       <Stack direction="horizontal" gap="condensed">
                         <CommentIcon size={Size.SMALL} />
-                        comments
+                        {t('settings.notifications.pill_comments', 'comments')}
                       </Stack>
                       <Stack direction="horizontal" gap="condensed">
                         <TagIcon size={Size.SMALL} />
-                        labels
+                        {t('settings.notifications.pill_labels', 'labels')}
                       </Stack>
                       <Stack direction="horizontal" gap="condensed">
                         <MilestoneIcon size={Size.SMALL} />
-                        milestones
+                        {t('settings.notifications.pill_milestones', 'milestones')}
                       </Stack>
                     </Stack>
                   </div>
@@ -275,27 +289,29 @@ export const NotificationSettings: FC = () => {
 
             <Checkbox
               checked={showNumber}
-              label="Show GitHub number"
+              label={t('settings.notifications.show_number', 'Show GitHub number')}
               name="showNumber"
               onChange={() => toggleSetting('showNumber')}
               tooltip={
                 <Stack direction="vertical" gap="condensed">
-                  <Text>Show GitHub number for:</Text>
+                  <Text>
+                    {t('settings.notifications.show_number_help', 'Show GitHub number for:')}
+                  </Text>
                   <div className="pl-2">
                     <Stack direction="vertical" gap="none">
                       <Stack direction="horizontal" gap="condensed">
                         <CommentIcon size={Size.SMALL} />
-                        Discussion
+                        {t('settings.notifications.number_discussion', 'Discussion')}
                       </Stack>
 
                       <Stack direction="horizontal" gap="condensed">
                         <IssueOpenedIcon size={Size.SMALL} />
-                        Issue
+                        {t('settings.notifications.number_issue', 'Issue')}
                       </Stack>
 
                       <Stack direction="horizontal" gap="condensed">
                         <GitPullRequestIcon size={Size.SMALL} />
-                        Pull Request
+                        {t('settings.notifications.number_pull_request', 'Pull Request')}
                       </Stack>
                     </Stack>
                   </div>
@@ -307,54 +323,62 @@ export const NotificationSettings: FC = () => {
 
         <Checkbox
           checked={participating}
-          label="Fetch only participating"
+          label={t('settings.notifications.participating', 'Fetch only participating')}
           name="showOnlyParticipating"
           onChange={() => toggleSetting('participating')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>
-                When <Text as="u">checked</Text>, {APPLICATION.NAME} will fetch only participating
-                notifications.
-              </Text>
-              <Text>
-                When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will fetch participating and
-                watching notifications.
-              </Text>
-              <Text>
-                See{' '}
-                <button
-                  className="text-gitify-link cursor-pointer"
-                  onClick={(event: MouseEvent<HTMLElement>) => {
-                    // Don't trigger onClick of parent element.
-                    event.stopPropagation();
-                    openGitHubParticipatingDocs();
-                  }}
-                  title="Open GitHub documentation for participating and watching notifications"
-                  type="button"
-                >
-                  official docs
-                </button>{' '}
-                for more details.
-              </Text>
+              <Trans
+                i18nKey="settings.notifications.participating_help"
+                components={[
+                  <Text as="u" key={0} />,
+                  <Text as="u" key={1} />,
+                  <button
+                    className="text-gitify-link cursor-pointer"
+                    key={2}
+                    onClick={(event: MouseEvent<HTMLElement>) => {
+                      // Don't trigger onClick of parent element.
+                      event.stopPropagation();
+                      openGitHubParticipatingDocs();
+                    }}
+                    title={t(
+                      'settings.notifications.participating_docs_title',
+                      'Open GitHub documentation for participating and watching notifications',
+                    )}
+                    type="button"
+                  />,
+                ]}
+                defaults="When <0>checked</0>, {{appName}} will fetch only participating notifications. When <1>unchecked</1>, {{appName}} will fetch participating and watching notifications. See <2>official docs</2> for more details."
+                values={{ appName: APPLICATION.NAME }}
+              />
             </Stack>
           }
         />
 
         <Checkbox
           checked={fetchReadNotifications}
-          label="Fetch read & done notifications"
+          label={t('settings.notifications.fetch_read', 'Fetch read & done notifications')}
           name="fetchReadNotifications"
           onChange={() => toggleSetting('fetchReadNotifications')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Fetch all notifications including read and done.</Text>
-              <Text className="text-gitify-caution">
-                ⚠️ GitHub's API does not distinguish between read and done states, so 'Mark as done'
-                actions will be unavailable when this setting is enabled.
+              <Text>
+                {t(
+                  'settings.notifications.fetch_read_help',
+                  'Fetch all notifications including read and done.',
+                )}
               </Text>
               <Text className="text-gitify-caution">
-                ⚠️ Enabling this setting will increase API usage and may cause rate limiting for
-                users with many notifications.
+                {t(
+                  'settings.notifications.fetch_read_done_caution',
+                  "⚠️ GitHub's API does not distinguish between read and done states, so 'Mark as done' actions will be unavailable when this setting is enabled.",
+                )}
+              </Text>
+              <Text className="text-gitify-caution">
+                {t(
+                  'settings.notifications.fetch_read_rate_caution',
+                  '⚠️ Enabling this setting will increase API usage and may cause rate limiting for users with many notifications.',
+                )}
               </Text>
             </Stack>
           }
@@ -362,40 +386,44 @@ export const NotificationSettings: FC = () => {
 
         <Checkbox
           checked={markAsDoneOnOpen}
-          label="Mark as done on open"
+          label={t('settings.notifications.mark_done_open', 'Mark as done on open')}
           name="markAsDoneOnOpen"
           onChange={() => toggleSetting('markAsDoneOnOpen')}
           tooltip={
-            <Text>
-              <Text as="strong">Mark as done</Text> feature is supported in GitHub Cloud and GitHub
-              Enterprise Server 3.13 or later.
-            </Text>
+            <Trans
+              i18nKey="settings.notifications.mark_done_help"
+              components={[<Text as="strong" key={0} />]}
+              defaults="<0>Mark as done</0> feature is supported in GitHub Cloud and GitHub Enterprise Server 3.13 or later."
+            />
           }
         />
 
         <Checkbox
           checked={markAsDoneOnUnsubscribe}
-          label="Mark as done on unsubscribe"
+          label={t('settings.notifications.mark_done_unsubscribe', 'Mark as done on unsubscribe')}
           name="markAsDoneOnUnsubscribe"
           onChange={() => toggleSetting('markAsDoneOnUnsubscribe')}
           tooltip={
-            <Text>
-              <Text as="strong">Mark as done</Text> feature is supported in GitHub Cloud and GitHub
-              Enterprise Server 3.13 or later.
-            </Text>
+            <Trans
+              i18nKey="settings.notifications.mark_done_help"
+              components={[<Text as="strong" key={0} />]}
+              defaults="<0>Mark as done</0> feature is supported in GitHub Cloud and GitHub Enterprise Server 3.13 or later."
+            />
           }
         />
 
         <Checkbox
           checked={delayNotificationState}
-          label="Delay notification state"
+          label={t('settings.notifications.delay_state', 'Delay notification state')}
           name="delayNotificationState"
           onChange={() => toggleSetting('delayNotificationState')}
           tooltip={
             <Text>
-              Keep the notification within {APPLICATION.NAME} upon interaction (ie: open
-              notification, mark as read, mark as done) until the next refresh window (scheduled or
-              user initiated).
+              {t(
+                'settings.notifications.delay_state_help',
+                'Keep the notification within {{appName}} upon interaction (ie: open notification, mark as read, mark as done) until the next refresh window (scheduled or user initiated).',
+                { appName: APPLICATION.NAME },
+              )}
             </Text>
           }
         />

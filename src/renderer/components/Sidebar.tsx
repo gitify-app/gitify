@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   BellIcon,
@@ -22,6 +23,7 @@ import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
+  const { t } = useTranslation();
   const { status, notificationCount, hasUnreadNotifications, isFetching } = useNotifications();
 
   const { shortcuts } = useShortcutActions();
@@ -45,7 +47,7 @@ export const Sidebar: FC = () => {
         <IconButton
           aria-label={APPLICATION.NAME}
           data-testid="sidebar-home"
-          description="Home"
+          description={t('sidebar.home', 'Home')}
           icon={LogoIcon}
           keybindingHint={shortcuts.home.key}
           onClick={() => shortcuts.home.action()}
@@ -57,9 +59,17 @@ export const Sidebar: FC = () => {
         {isLoggedIn && (
           <>
             <IconButton
-              aria-label="Notifications"
+              aria-label={t('sidebar.notifications', 'Notifications')}
               data-testid="sidebar-notifications"
-              description={`${notificationCount} ${fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
+              description={
+                fetchReadNotifications
+                  ? t('sidebar.notifications_count', '{{count}} notifications ↗', {
+                      count: notificationCount,
+                    })
+                  : t('sidebar.unread_notifications_count', '{{count}} unread notifications ↗', {
+                      count: notificationCount,
+                    })
+              }
               icon={BellIcon}
               keybindingHint={shortcuts.myNotifications.key}
               onClick={() => shortcuts.myNotifications.action()}
@@ -69,10 +79,12 @@ export const Sidebar: FC = () => {
             />
 
             <IconButton
-              aria-label="Toggle focused mode"
+              aria-label={t('sidebar.focused_mode', 'Toggle focused mode')}
               data-testid="sidebar-focused-mode"
               description={
-                participating ? 'Focused (participating only)' : 'Participating and watching'
+                participating
+                  ? t('sidebar.focused', 'Focused (participating only)')
+                  : t('sidebar.participating_watching', 'Participating and watching')
               }
               icon={participating ? CrosshairsIcon : EyeIcon}
               keybindingHint={shortcuts.focusedMode.key}
@@ -83,9 +95,9 @@ export const Sidebar: FC = () => {
             />
 
             <IconButton
-              aria-label="Filters"
+              aria-label={t('sidebar.filters', 'Filters')}
               data-testid="sidebar-filter-notifications"
-              description="Filter notifications"
+              description={t('sidebar.filter_notifications', 'Filter notifications')}
               icon={FilterIcon}
               keybindingHint={shortcuts.filters.key}
               onClick={() => shortcuts.filters.action()}
@@ -95,7 +107,7 @@ export const Sidebar: FC = () => {
             />
 
             <IconButton
-              aria-label="My issues ↗"
+              aria-label={t('sidebar.my_issues', 'My issues ↗')}
               data-testid="sidebar-my-issues"
               icon={IssueOpenedIcon}
               keybindingHint={shortcuts.myIssues.key}
@@ -106,7 +118,7 @@ export const Sidebar: FC = () => {
             />
 
             <IconButton
-              aria-label="My pull requests ↗"
+              aria-label={t('sidebar.my_pull_requests', 'My pull requests ↗')}
               data-testid="sidebar-my-pull-requests"
               icon={GitPullRequestIcon}
               keybindingHint={shortcuts.myPullRequests.key}
@@ -123,9 +135,9 @@ export const Sidebar: FC = () => {
         {isLoggedIn && (
           <>
             <IconButton
-              aria-label="Refresh"
+              aria-label={t('sidebar.refresh', 'Refresh')}
               data-testid="sidebar-refresh"
-              description="Refresh notifications"
+              description={t('sidebar.refresh_notifications', 'Refresh notifications')}
               loading={isLoading || isFetching}
               disabled={isLoading || isFetching}
               icon={SyncIcon}
@@ -137,9 +149,9 @@ export const Sidebar: FC = () => {
             />
 
             <IconButton
-              aria-label="Settings"
+              aria-label={t('sidebar.settings', 'Settings')}
               data-testid="sidebar-settings"
-              description="Settings"
+              description={t('settings.title', 'Settings')}
               icon={GearIcon}
               keybindingHint={shortcuts.settings.key}
               onClick={() => shortcuts.settings.action()}
@@ -152,7 +164,9 @@ export const Sidebar: FC = () => {
 
         {!isLoggedIn && (
           <IconButton
-            aria-label={`Quit ${APPLICATION.NAME}`}
+            aria-label={t('settings.footer.quit', 'Quit {{appName}}', {
+              appName: APPLICATION.NAME,
+            })}
             data-testid="sidebar-quit"
             icon={XCircleIcon}
             keybindingHint={shortcuts.quit.key}

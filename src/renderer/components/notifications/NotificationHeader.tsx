@@ -1,4 +1,5 @@
 import type { FC, MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Stack } from '@primer/react';
 
@@ -19,6 +20,7 @@ export interface NotificationHeaderProps {
 export const NotificationHeader: FC<NotificationHeaderProps> = ({
   notification,
 }: NotificationHeaderProps) => {
+  const { t } = useTranslation();
   const showNumber = useSettingsStore((s) => s.showNumber);
 
   return (
@@ -33,7 +35,7 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
               event.stopPropagation();
               openRepository(notification.repository);
             }}
-            title="Open repository ↗"
+            title={t('repository.open', 'Open repository ↗')}
             type="button"
           >
             <AvatarWithFallback

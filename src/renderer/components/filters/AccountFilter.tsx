@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { PersonIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
@@ -12,6 +13,7 @@ import { Title } from '../primitives/Title';
 import { getAccountUUID } from '../../utils/auth/utils';
 
 export const AccountFilter: FC = () => {
+  const { t } = useTranslation();
   const { notifications } = useNotifications();
   const accounts = useAccountsStore((s) => s.accounts);
   const filteredAccounts = useFiltersStore((s) => s.accounts);
@@ -19,8 +21,11 @@ export const AccountFilter: FC = () => {
 
   return (
     <fieldset id="filter-accounts">
-      <Title icon={PersonIcon} tooltip={<Text>Filter notifications by account.</Text>}>
-        Account
+      <Title
+        icon={PersonIcon}
+        tooltip={<Text>{t('filters.account.help', 'Filter notifications by account.')}</Text>}
+      >
+        {t('filters.account.title', 'Account')}
       </Title>
 
       <Stack direction="vertical" gap="condensed">

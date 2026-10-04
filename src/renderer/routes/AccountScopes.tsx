@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { AlertFillIcon, LinkExternalIcon, ShieldCheckIcon } from '@primer/octicons-react';
@@ -28,6 +29,7 @@ interface LocationState {
 }
 
 export const AccountScopesRoute: FC = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const { account } = location.state as LocationState;
 
@@ -51,7 +53,7 @@ export const AccountScopesRoute: FC = () => {
 
   return (
     <Page testId="account-scopes">
-      <Header icon={ShieldCheckIcon}>Scopes</Header>
+      <Header icon={ShieldCheckIcon}>{t('account_scopes.title', 'Scopes')}</Header>
       <Contents scrollFade>
         <Stack direction="vertical" gap="none">
           {!scopesLoaded && (
@@ -63,7 +65,9 @@ export const AccountScopesRoute: FC = () => {
               gap="condensed"
             >
               <AlertFillIcon className="text-gitify-warning" size={14} />
-              <Text>Scopes not loaded — try refreshing the account.</Text>
+              <Text>
+                {t('account_scopes.not_loaded', 'Scopes not loaded — try refreshing the account.')}
+              </Text>
             </Stack>
           )}
 
@@ -77,7 +81,7 @@ export const AccountScopesRoute: FC = () => {
                   gap="condensed"
                 >
                   <ScopeStatusIcon granted={hasRequired} size={12} />
-                  <Text>Required</Text>
+                  <Text>{t('account_scopes.required', 'Required')}</Text>
                 </Stack>
 
                 {managedElsewhere ? (
@@ -126,7 +130,9 @@ export const AccountScopesRoute: FC = () => {
                   gap="condensed"
                 >
                   <ScopeStatusIcon granted={hasDetailedNotifications} size={12} />
-                  <Text>Detailed Notifications</Text>
+                  <Text>
+                    {t('account_scopes.detailed_notifications', 'Detailed Notifications')}
+                  </Text>
                 </Stack>
 
                 {/* repo row */}
@@ -178,7 +184,7 @@ export const AccountScopesRoute: FC = () => {
                     gap="condensed"
                   >
                     <ShieldCheckIcon size={12} />
-                    <Text>Additional scopes</Text>
+                    <Text>{t('account_scopes.additional_scopes', 'Additional scopes')}</Text>
                   </Stack>
 
                   <Stack
@@ -207,7 +213,7 @@ export const AccountScopesRoute: FC = () => {
           leadingVisual={LinkExternalIcon}
           onClick={() => openAccountSettings(account)}
         >
-          Developer settings
+          {t('account_scopes.developer_settings', 'Developer settings')}
         </Button>
       </Footer>
     </Page>

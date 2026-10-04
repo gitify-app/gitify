@@ -1,4 +1,5 @@
 import { type FC, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
@@ -13,6 +14,7 @@ import { Centered } from '../components/layout/Centered';
 import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
 
+import { translateForgeTagline, translateLoginMethodLabel } from '../utils/forges/labels';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 
@@ -25,6 +27,7 @@ function pickPrimaryMethod(adapter: ForgeAdapter): LoginMethodDescriptor | undef
 }
 
 export const LoginRoute: FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const adapters = listAdapters();
 
@@ -94,13 +97,13 @@ export const LoginRoute: FC = () => {
           gap="none"
           style={{ animationDelay: '60ms' }}
         >
-          <Heading as="h2">Git Notifications</Heading>
-          <Heading as="h3">on your menu bar</Heading>
+          <Heading as="h2">{t('login.title', 'Git Notifications')}</Heading>
+          <Heading as="h3">{t('login.subtitle', 'on your menu bar')}</Heading>
         </Stack>
 
         {adapters.length > 1 && (
           <div
-            aria-label="Choose a forge"
+            aria-label={t('login.choose_forge', 'Choose a forge')}
             className={cn(
               'motion-reduce:animate-none animate-login-fade-up',
               'relative inline-flex items-center rounded-full',
@@ -177,7 +180,9 @@ export const LoginRoute: FC = () => {
                 onClick={() => navigate(primary.route)}
                 variant="primary"
               >
-                Continue with {activeAdapter.displayName}
+                {t('login.continue_with', 'Continue with {{name}}', {
+                  name: activeAdapter.displayName,
+                })}
               </Button>
             )}
 
@@ -190,7 +195,7 @@ export const LoginRoute: FC = () => {
                 onClick={() => navigate(method.route)}
                 variant={method.variant ?? 'invisible'}
               >
-                {method.label}
+                {translateLoginMethodLabel(method.label)}
               </Button>
             ))}
 
@@ -200,7 +205,7 @@ export const LoginRoute: FC = () => {
                 className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
                 size="small"
               >
-                {activeAdapter.tagline}
+                {translateForgeTagline(activeAdapter.tagline)}
               </Text>
             )}
           </Stack>

@@ -263,8 +263,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
                 class="prc-Button-Label-FWkx3"
                 data-component="text"
               >
-                Continue with 
-                GitHub
+                Continue with GitHub
               </span>
             </span>
           </button>

@@ -30,7 +30,11 @@ import type {
 import { isMarkAsDoneFeatureSupported, isUnsubscribeThreadSupported } from '../utils/api/features';
 import { notificationsKeys } from '../utils/api/queryKeys';
 import { getAccountUUID } from '../utils/auth/utils';
-import { areAllAccountErrorsSame, doesAllAccountsHaveErrors, Errors } from '../utils/core/errors';
+import {
+  areAllAccountErrorsSame,
+  doesAllAccountsHaveErrors,
+  getErrorDetails,
+} from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
 import { getAccountAdapter } from '../utils/forges/registry';
 import {
@@ -244,7 +248,7 @@ export const useNotifications = ({
   const globalError: GitifyError | undefined = useMemo(() => {
     // If paused due to offline, show network error
     if (isPaused) {
-      return Errors.OFFLINE;
+      return getErrorDetails('OFFLINE');
     }
 
     if (notifications.length === 0) {

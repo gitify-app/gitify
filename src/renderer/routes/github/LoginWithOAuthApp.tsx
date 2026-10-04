@@ -1,4 +1,6 @@
 import { type FC, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
@@ -16,6 +18,7 @@ import { Header } from '../../components/primitives/Header';
 import type { Account, ClientID, ClientSecret, Forge, Token } from '../../types';
 import type { LoginOAuthWebOptions } from '../../utils/auth/types';
 
+import i18n from '../../i18n';
 import { isValidHostname } from '../../utils/auth/utils';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
@@ -41,27 +44,31 @@ export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormE
   const adapter = getAdapter(forge);
 
   if (!values.hostname) {
-    errors.hostname = 'Hostname is required';
+    errors.hostname = i18n.t('login.oauth.hostname_required', 'Hostname is required');
   } else if (!isValidHostname(values.hostname)) {
-    errors.hostname = 'Hostname format is invalid';
+    errors.hostname = i18n.t('login.oauth.hostname_invalid', 'Hostname format is invalid');
   }
 
   if (!values.clientId) {
-    errors.clientId = 'Client ID is required';
+    errors.clientId = i18n.t('login.oauth.client_id_required', 'Client ID is required');
   } else if (!adapter.oauthWebApp?.validateClientId(values.clientId)) {
-    errors.clientId = 'Client ID format is invalid';
+    errors.clientId = i18n.t('login.oauth.client_id_invalid', 'Client ID format is invalid');
   }
 
   if (!values.clientSecret) {
-    errors.clientSecret = 'Client Secret is required';
+    errors.clientSecret = i18n.t('login.oauth.client_secret_required', 'Client Secret is required');
   } else if (!adapter.validateToken(values.clientSecret as unknown as Token)) {
-    errors.clientSecret = 'Client Secret format is invalid';
+    errors.clientSecret = i18n.t(
+      'login.oauth.client_secret_invalid',
+      'Client Secret format is invalid',
+    );
   }
 
   return errors;
 };
 
 export const GitHubLoginWithOAuthAppRoute: FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -110,7 +117,11 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
       } catch (err) {
         rendererLogError('loginWithOAuthApp', 'Failed to login with OAuth App', toError(err));
         setErrors({
-          invalidCredentialsForHost: `Failed to validate provided Client ID and Secret against ${data.hostname}`,
+          invalidCredentialsForHost: i18n.t(
+            'login.oauth.invalid_credentials',
+            'Failed to validate provided Client ID and Secret against {{hostname}}',
+            { hostname: data.hostname },
+          ),
         });
       }
     },
@@ -120,7 +131,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
 
   return (
     <Page testId="Login With OAuth App">
-      <Header icon={PersonIcon}>Login with OAuth App</Header>
+      <Header icon={PersonIcon}>{t('login.oauth.title', 'Login with OAuth App')}</Header>
 
       <Contents scrollFade>
         {errors.invalidCredentialsForHost && (
@@ -134,15 +145,20 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
               </Text>
             }
             hideTitle
-            title="Validation errors"
+            title={t('login.oauth.validation_errors', 'Validation errors')}
             variant="critical"
           />
         )}
         <Stack direction="vertical" gap="normal">
           <FormControl required>
-            <FormControl.Label>Hostname</FormControl.Label>
+            <FormControl.Label>{t('login.oauth.hostname', 'Hostname')}</FormControl.Label>
             <FormControl.Caption>
-              <Text as="i">Change only if you are using GitHub Enterprise Server</Text>
+              <Text as="i">
+                {t(
+                  'login.oauth.hostname_caption',
+                  'Change only if you are using GitHub Enterprise Server',
+                )}
+              </Text>
             </FormControl.Caption>
             <TextInput
               aria-invalid={errors.hostname ? 'true' : 'false'}
@@ -175,21 +191,28 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
               }}
               size="small"
             >
-              Create new OAuth App
+              {t('login.oauth.create_oauth_app', 'Create new OAuth App')}
             </Button>
             <Text className="text-xs">
-              and use your <Text as="i">client id & secret</Text> below.
+              <Trans
+                i18nKey="login.oauth.create_oauth_app_hint"
+                components={[<Text as="i" key={0} />]}
+                defaults="and use your <0>client id & secret</0> below."
+              />
             </Text>
           </Stack>
           <FormControl required>
-            <FormControl.Label>Client ID</FormControl.Label>
+            <FormControl.Label>{t('login.oauth.client_id', 'Client ID')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.clientId ? 'true' : 'false'}
               block
               data-testid="login-clientId"
               name="clientId"
               onChange={handleInputChange}
-              placeholder="Your generated client id (20 characters)"
+              placeholder={t(
+                'login.oauth.client_id_placeholder',
+                'Your generated client id (20 characters)',
+              )}
               value={formData.clientId}
             />
             {errors.clientId && (
@@ -197,17 +220,24 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
             )}
           </FormControl>
           <FormControl required>
-            <FormControl.Label>Client Secret</FormControl.Label>
+            <FormControl.Label>{t('login.oauth.client_secret', 'Client Secret')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.clientSecret ? 'true' : 'false'}
               block
               data-testid="login-clientSecret"
               name="clientSecret"
               onChange={handleInputChange}
-              placeholder="Your generated client secret (40 characters)"
+              placeholder={t(
+                'login.oauth.client_secret_placeholder',
+                'Your generated client secret (40 characters)',
+              )}
               trailingAction={
                 <TextInput.Action
-                  aria-label={shouldMaskClientSecret ? 'Show token' : 'Hide token'}
+                  aria-label={
+                    shouldMaskClientSecret
+                      ? t('login.show_token', 'Show token')
+                      : t('login.hide_token', 'Hide token')
+                  }
                   icon={shouldMaskClientSecret ? EyeIcon : EyeClosedIcon}
                   onClick={() => setShouldMaskClientSecret(!shouldMaskClientSecret)}
                 />
@@ -223,14 +253,14 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
       </Contents>
 
       <Footer justify="space-between">
-        <Tooltip text="GitHub documentation">
+        <Tooltip text={t('login.oauth.docs_tooltip', 'GitHub documentation')}>
           <Button
             data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(Constants.GITHUB_DOCS.OAUTH_URL)}
             size="small"
           >
-            Docs
+            {t('common.docs', 'Docs')}
           </Button>
         </Tooltip>
 
@@ -241,7 +271,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
           onClick={handleSubmit}
           variant="primary"
         >
-          Login
+          {t('common.login', 'Login')}
         </Button>
       </Footer>
     </Page>

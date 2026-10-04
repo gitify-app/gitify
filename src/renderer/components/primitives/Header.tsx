@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
@@ -15,6 +16,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = (props: HeaderProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { refetchNotifications: fetchNotifications } = useNotifications();
@@ -23,7 +25,7 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
     <div className="pl-4 pr-5 pt-3 pb-1">
       <Stack direction="horizontal" justify="space-between">
         <IconButton
-          aria-labelledby="Go Back"
+          aria-labelledby={t('header.go_back', 'Go Back')}
           data-testid="header-nav-back"
           icon={ArrowLeftIcon}
           onClick={() => {

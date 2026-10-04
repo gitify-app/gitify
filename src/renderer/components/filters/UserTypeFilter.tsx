@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   DependabotIcon,
@@ -14,16 +15,18 @@ import { userTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 export const UserTypeFilter: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <FilterSection
       filter={userTypeFilter}
       filterSetting="userTypes"
       icon={FeedPersonIcon}
       id="filter-user-types"
-      title="User Type"
+      title={t('filters.user_type.title', 'User Type')}
       tooltip={
         <Stack direction="vertical" gap="condensed">
-          <Text>Filter notifications by user type:</Text>
+          <Text>{t('filters.user_type.help', 'Filter notifications by user type:')}</Text>
           <div className="pl-4">
             <Stack direction="vertical" gap="condensed">
               <Stack direction="horizontal" gap="condensed">
@@ -45,7 +48,10 @@ export const UserTypeFilter: FC = () => {
             </Stack>
           </div>
           <Text>
-            Other covers notifications with no author or a non-human, non-organization author.
+            {t(
+              'filters.user_type.other_help',
+              'Other covers notifications with no author or a non-human, non-organization author.',
+            )}
           </Text>
         </Stack>
       }

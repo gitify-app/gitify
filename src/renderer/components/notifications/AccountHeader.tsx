@@ -1,4 +1,5 @@
 import { type FC, type MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
@@ -30,6 +31,7 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
   isCollapsed,
   onToggle,
 }) => {
+  const { t } = useTranslation();
   const Chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
 
   return (
@@ -50,7 +52,7 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
           event.stopPropagation();
           openAccountProfile(account);
         }}
-        title="Open account profile"
+        title={t('accounts.open_profile', 'Open account profile')}
         variant="invisible"
       >
         <AvatarWithFallback
@@ -69,14 +71,14 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
         <HoverButton
           action={() => openHostIssues(account)}
           icon={IssueOpenedIcon}
-          label="My issues ↗"
+          label={t('accounts.my_issues', 'My issues ↗')}
           testid="account-issues"
         />
 
         <HoverButton
           action={() => openHostPulls(account)}
           icon={GitPullRequestIcon}
-          label="My pull requests ↗"
+          label={t('accounts.my_pull_requests', 'My pull requests ↗')}
           testid="account-pull-requests"
         />
 

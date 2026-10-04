@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { IssueOpenedIcon } from '@primer/octicons-react';
 import { Text } from '@primer/react';
@@ -7,14 +8,16 @@ import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 export const StateFilter: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <FilterSection
       filter={stateFilter}
       filterSetting="states"
       icon={IssueOpenedIcon}
       id="filter-state"
-      title="State"
-      tooltip={<Text>Filter notifications by state.</Text>}
+      title={t('filters.state.title', 'State')}
+      tooltip={<Text>{t('filters.state.help', 'Filter notifications by state.')}</Text>}
     />
   );
 };

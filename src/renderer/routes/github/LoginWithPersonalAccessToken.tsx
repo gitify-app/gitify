@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Text, Tooltip } from '@primer/react';
 
@@ -6,25 +7,38 @@ import { LoginWithPersonalAccessTokenForm } from '../../components/login/LoginWi
 
 import { formatRecommendedOAuthScopes } from '../../utils/auth/scopes';
 
-export const GitHubLoginWithPersonalAccessTokenRoute: FC = () => (
-  <LoginWithPersonalAccessTokenForm
-    docsTooltip="GitHub documentation"
-    forge="github"
-    hostnameCaption="Change only if you are using GitHub Enterprise Server"
-    hostnamePlaceholder="github.com"
-    title="Login with Personal Access Token"
-    tokenPlaceholder="Your generated token (40 characters)"
-    tokenSettingsCaption="on GitHub to paste the token below."
-    tokenSettingsLabel="Generate a PAT"
-  >
-    <Text as="i" className="text-xs">
-      The{' '}
-      <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
-        <button type="button">
-          <Text as="u">recommended scopes</Text>
-        </button>
-      </Tooltip>{' '}
-      will be automatically selected for you.
-    </Text>
-  </LoginWithPersonalAccessTokenForm>
-);
+export const GitHubLoginWithPersonalAccessTokenRoute: FC = () => {
+  const { t } = useTranslation();
+
+  return (
+    <LoginWithPersonalAccessTokenForm
+      docsTooltip={t('login.pat.docs_tooltip_github', 'GitHub documentation')}
+      forge="github"
+      hostnameCaption={t(
+        'login.pat.hostname_caption_enterprise',
+        'Change only if you are using GitHub Enterprise Server',
+      )}
+      hostnamePlaceholder="github.com"
+      title={t('login.pat.title_github', 'Login with Personal Access Token')}
+      tokenPlaceholder={t(
+        'login.pat.token_placeholder_github',
+        'Your generated token (40 characters)',
+      )}
+      tokenSettingsCaption={t(
+        'login.pat.token_settings_caption_github',
+        'on GitHub to paste the token below.',
+      )}
+      tokenSettingsLabel={t('login.pat.token_settings_label_github', 'Generate a PAT')}
+    >
+      <Text as="i" className="text-xs">
+        {t('login.pat.scopes_note_prefix', 'The')}{' '}
+        <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
+          <button type="button">
+            <Text as="u">{t('login.pat.scopes_note_link', 'recommended scopes')}</Text>
+          </button>
+        </Tooltip>{' '}
+        {t('login.pat.scopes_note_suffix', 'will be automatically selected for you.')}
+      </Text>
+    </LoginWithPersonalAccessTokenForm>
+  );
+};
