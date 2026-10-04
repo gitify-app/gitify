@@ -68,7 +68,7 @@ function buildNotificationItem(
   };
 }
 
-function buildRepositoryItems(
+export function buildRepositoryItems(
   accountUUID: string,
   sorted: GitifyNotification[],
   context: BuildItemsContext,
@@ -106,7 +106,7 @@ function buildRepositoryItems(
   return items;
 }
 
-function buildAccountItems(
+export function buildAccountItems(
   { account, error, notifications }: AccountNotifications,
   context: BuildItemsContext,
 ): ListItem[] {
