@@ -246,7 +246,13 @@ export function getPullRequestReviewers(
   const sortedReviews = [...reviews].sort((a, b) => {
     const at = a.submittedAt ?? '';
     const bt = b.submittedAt ?? '';
-    return at < bt ? -1 : at > bt ? 1 : 0;
+    if (at < bt) {
+      return -1;
+    }
+    if (at > bt) {
+      return 1;
+    }
+    return 0;
   });
 
   for (const review of sortedReviews) {
