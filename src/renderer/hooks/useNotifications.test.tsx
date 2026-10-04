@@ -790,8 +790,8 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       const enterpriseCount = mockMultipleAccountNotifications[1].notifications.length;
 
-      await act(async () => {
-        await result.current.removeAccountNotifications(mockGitHubCloudAccount);
+      await act(() => {
+        result.current.removeAccountNotifications(mockGitHubCloudAccount);
       });
 
       await waitFor(() => expect(result.current.notificationCount).toBe(enterpriseCount));

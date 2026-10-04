@@ -27,7 +27,7 @@ interface LoginsState {
   loginWithCli: (forge: Forge, hostname: Hostname) => Promise<void>;
   loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
-  logoutFromAccount: (account: Account) => Promise<void>;
+  logoutFromAccount: (account: Account) => void;
 }
 
 /**
@@ -97,7 +97,7 @@ export const useLogins = (): LoginsState => {
 
       const existingAccount = accounts.find((a) => a.hostname === hostname && a.method === method);
       if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
+        removeAccountNotifications(existingAccount);
       }
 
       await createAccount(method, token, hostname, forge);
@@ -128,9 +128,7 @@ export const useLogins = (): LoginsState => {
         );
       await createAccountInStore(cliAuth.authMethod, '' as Token, hostname, forge);
 
-      for (const account of existingAccounts) {
-        await removeAccountNotifications(account);
-      }
+      existingAccounts.forEach((account) => removeAccountNotifications(account));
 
       await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
     },
@@ -154,7 +152,7 @@ export const useLogins = (): LoginsState => {
         (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
       );
       if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
+        removeAccountNotifications(existingAccount);
       }
 
       await createAccount('OAuth App', token, authOptions.hostname, forge);
@@ -183,7 +181,7 @@ export const useLogins = (): LoginsState => {
           a.forge === resolvedForge,
       );
       if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
+        removeAccountNotifications(existingAccount);
       }
 
       await createAccount('Personal Access Token', token, hostname, resolvedForge, username);
@@ -192,8 +190,8 @@ export const useLogins = (): LoginsState => {
   );
 
   const logoutFromAccount = useCallback(
-    async (account: Account) => {
-      await removeAccountNotifications(account);
+    (account: Account) => {
+      removeAccountNotifications(account);
 
       removeAccount(account);
     },

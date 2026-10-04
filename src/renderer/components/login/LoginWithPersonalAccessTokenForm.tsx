@@ -150,7 +150,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
     setErrors(newErrors);
 
     if (!newErrors.hostname && !newErrors.token && !newErrors.username) {
-      verifyLoginCredentials(formData);
+      await verifyLoginCredentials(formData);
     }
     setIsVerifyingCredentials(false);
   };

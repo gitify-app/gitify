@@ -25,7 +25,7 @@ export interface NotificationTypeHandler {
   enrich(
     notification: RawGitifyNotification,
     fetchedData?: unknown,
-  ): Promise<Partial<GitifySubject>>;
+  ): Partial<GitifySubject> | Promise<Partial<GitifySubject>>;
 
   /**
    * Return the icon component for this notification type.

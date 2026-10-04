@@ -69,7 +69,7 @@ interface NotificationsState {
   hasUnreadNotifications: boolean;
 
   refetchNotifications: () => Promise<void>;
-  removeAccountNotifications: (account: Account) => Promise<void>;
+  removeAccountNotifications: (account: Account) => void;
 
   markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<boolean>;
   markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<boolean>;
@@ -305,7 +305,7 @@ export const useNotifications = ({
   }, [withSideEffects, fetchIntervalMs, refetch]);
 
   const removeAccountNotifications = useCallback(
-    async (account: Account) => {
+    (account: Account) => {
       const accountUUID = getAccountUUID(account);
 
       queryClient.setQueryData<AccountNotifications[]>(
