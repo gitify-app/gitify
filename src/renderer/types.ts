@@ -483,6 +483,8 @@ export interface GitifyNotificationDisplay {
   };
   /** Notification default user type for fallback scenarios */
   defaultUserType: UserType;
+  /** Optional actor icon for notifications without an enriched actor (e.g. Copilot). */
+  defaultUserIcon?: FC<OcticonProps>;
 }
 
 /** GitHub-native issue type, normalized to a Gitify icon color token */
@@ -568,6 +570,7 @@ export type GitifyCheckSuiteStatus =
 
 // Stronger typings for string literal attributes
 export type Reason =
+  | 'agent_session_finished'
   | 'approval_requested'
   | 'assign'
   | 'author'
@@ -592,6 +595,7 @@ export type Reason =
 export type SubjectTypeFilterValue = SubjectType | 'other';
 
 export type SubjectType =
+  | 'AgentSessionThread'
   | 'BitbucketNotification'
   | 'CheckSuite'
   | 'Commit'

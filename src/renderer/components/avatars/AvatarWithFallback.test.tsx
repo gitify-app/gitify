@@ -1,5 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 
+import { CopilotIcon } from '@primer/octicons-react';
+
 import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { type Link, Size } from '../../types';
@@ -34,6 +36,14 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
   it('renders the fallback icon when no src url - non human user', () => {
     const tree = renderWithProviders(
       <AvatarWithFallback {...props} src={undefined} userType="Bot" />,
+    );
+
+    expect(tree.container).toMatchSnapshot();
+  });
+
+  it('renders a provided fallback icon override', () => {
+    const tree = renderWithProviders(
+      <AvatarWithFallback {...props} icon={CopilotIcon} src={undefined} />,
     );
 
     expect(tree.container).toMatchSnapshot();

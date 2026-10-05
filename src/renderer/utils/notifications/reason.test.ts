@@ -20,5 +20,14 @@ describe('renderer/utils/notifications/reason.ts', () => {
     expect(getReasonDetails('subscribed')).toMatchSnapshot();
     expect(getReasonDetails('team_mention')).toMatchSnapshot();
     expect(getReasonDetails('something_else_unknown' as Reason)).toMatchSnapshot();
+    expect(getReasonDetails('agent_session_finished')).toMatchSnapshot();
+  });
+
+  it('getReasonDetails - resolves agent session finished instead of the unknown fallback', () => {
+    const details = getReasonDetails('agent_session_finished');
+
+    expect(details.title).toBe('Agent Session Finished');
+    expect(details.title).not.toBe('Unknown');
+    expect(details.description).toBeTruthy();
   });
 });
