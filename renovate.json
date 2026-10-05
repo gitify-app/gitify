@@ -1,24 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    ":enableVulnerabilityAlerts",
-    ":semanticCommitTypeAll(chore)",
-    ":separateMultipleMajorReleases",
-    "schedule:weekly",
-    "group:vitePlus"
-  ],
-  "labels": ["dependency"],
-  "rangeStrategy": "pin",
+  "extends": ["github>gitify-app/.github", "group:vitePlus"],
   "packageRules": [
     {
       "matchDepTypes": ["engines"],
       "rangeStrategy": "auto"
-    },
-    {
-      "description": "Remove word `dependency` from commit messages and PR titles",
-      "matchDatasources": ["npm"],
-      "commitMessageTopic": "{{depName}}"
     },
     {
       "description": "Fetch changelog details for twemoji packages",
@@ -26,19 +12,19 @@
       "changelogUrl": "https://github.com/jdjdecked/twemoji"
     },
     {
-      "description": "Hold got on the v11 line. The override only exists to satisfy security scanners for dev tooling (@electron/get via electron-builder, react-devtools), which was built against the non-ESM v11 API. v11.8.5+ already includes the security fix, and v12+ is ESM-only.",
+      "description": "Hold got on the v11 line. This override satisfies security scanners for dev tooling built against the non-ESM v11 API; v11.8.5+ includes the security fix.",
       "matchPackageNames": ["got"],
       "allowedVersions": "<12"
     },
     {
-      "description": "Group the playwright package with the Playwright container image that the visual regression job runs in. The image ships the browser build that exact release expects, so a mismatch fails to launch Chromium and would strand the committed screenshot baselines. config:best-practices only ages npm (3 days); apply the same wait to this group so the Docker tag cannot become eligible first and open an image-only PR.",
+      "description": "Group Playwright with the browser container image used by visual regression tests, and wait for both updates to pass the release-age check.",
       "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"],
       "groupName": "playwright",
       "minimumReleaseAge": "3 days",
       "internalChecksFilter": "strict"
     },
     {
-      "description": "Give updates to core runtime dependencies (Electron shell, tray integration, UI primitives, GitHub API client) a distinct commit scope so release-please can surface them in the changelog instead of hiding them with routine dependency bumps",
+      "description": "Give core runtime dependency updates a distinct scope so release-please can include them in the changelog.",
       "matchPackageNames": [
         "electron",
         "electron-menubar",
@@ -51,7 +37,7 @@
       "semanticCommitScope": "deps-core"
     },
     {
-      "description": "electron-menubar is a first-party dependency, so skip the minimum release age gate and weekly schedule applied to other packages",
+      "description": "Skip the release-age gate and weekly schedule for the first-party electron-menubar dependency.",
       "matchPackageNames": ["electron-menubar"],
       "minimumReleaseAge": "0 days",
       "schedule": ["at any time"]
@@ -59,7 +45,7 @@
   ],
   "customManagers": [
     {
-      "description": "Keep sonar.projectVersion variables in sonar-project.properties in-sync",
+      "description": "Keep sonar.projectVersion in sonar-project.properties in sync.",
       "customType": "regex",
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "gitify-app/gitify",
