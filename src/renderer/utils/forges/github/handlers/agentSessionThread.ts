@@ -70,5 +70,8 @@ export function getAgentSessionUrl(notification: GitifyNotification): Link {
     return repositoryUrl as Link;
   }
 
-  return `${repositoryUrl.replace(/\/+$/, '')}/agents` as Link;
+  const url = new URL(repositoryUrl);
+  url.pathname += '/agents';
+
+  return url.href as Link;
 }
