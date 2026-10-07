@@ -24,6 +24,7 @@ export function formatNotification(notification: RawGitifyNotification): GitifyN
         color: helpers.iconColor,
       },
       defaultUserType: helpers.defaultUserType,
+      defaultUserIcon: helpers.defaultUserIcon,
     },
   };
 }

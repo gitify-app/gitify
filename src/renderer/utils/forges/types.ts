@@ -60,6 +60,8 @@ export interface NotificationDisplayHelpers {
   iconColor: IconColor;
   defaultUrl: Link;
   defaultUserType: UserType;
+  /** Optional actor icon to use when no enriched actor is available. */
+  defaultUserIcon?: FC<OcticonProps>;
 }
 
 /**

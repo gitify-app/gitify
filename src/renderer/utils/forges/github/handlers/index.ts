@@ -1,6 +1,7 @@
 import type { RawGitifyNotification } from '../../../../types';
 import type { NotificationTypeHandler } from './types';
 
+import { agentSessionThreadHandler } from './agentSessionThread';
 import { checkSuiteHandler } from './checkSuite';
 import { commitHandler } from './commit';
 import { defaultHandler } from './default';
@@ -18,6 +19,8 @@ export function createNotificationHandler(
   notification: RawGitifyNotification,
 ): NotificationTypeHandler {
   switch (notification.subject.type) {
+    case 'AgentSessionThread':
+      return agentSessionThreadHandler;
     case 'CheckSuite':
       return checkSuiteHandler;
     case 'Commit':

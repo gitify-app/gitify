@@ -2,7 +2,10 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
+import {
+  mockAgentSessionGitifyNotification,
+  mockGitifyNotification,
+} from '../../__mocks__/notifications-mocks';
 
 import type { GitifyNotificationUser, Link } from '../../types';
 
@@ -61,6 +64,17 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     const tree = renderWithProviders(<NotificationFooter {...props} />);
 
     expect(tree.container).toMatchSnapshot();
+  });
+
+  it('presents the Copilot actor for an agent session notification', () => {
+    const tree = renderWithProviders(
+      <NotificationFooter notification={mockAgentSessionGitifyNotification} />,
+    );
+
+    expect(tree.container).toMatchSnapshot();
+    // Agent sessions have no enriched actor, so no profile button is rendered.
+    expect(screen.queryByTestId('view-profile')).not.toBeInTheDocument();
+    expect(screen.getByText('Agent Session Finished')).toBeInTheDocument();
   });
 
   it('should open notification user profile', async () => {

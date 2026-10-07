@@ -1,4 +1,10 @@
-import { GitPullRequestIcon, IssueOpenedIcon, TagIcon } from '@primer/octicons-react';
+import {
+  AgentIcon,
+  CopilotIcon,
+  GitPullRequestIcon,
+  IssueOpenedIcon,
+  TagIcon,
+} from '@primer/octicons-react';
 
 import {
   type AccountNotifications,
@@ -216,6 +222,43 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
 ];
 
 export const mockGitifyNotification: GitifyNotification = mockGitHubCloudGitifyNotifications[0];
+
+/**
+ * Mock Gitify Notification for a GitHub Copilot cloud agent session.
+ *
+ * Subject type `AgentSessionThread`, reason `agent_session_finished`. The actor
+ * is Copilot, surfaced through the handler's actor icon and `Bot` user type.
+ */
+export const mockAgentSessionGitifyNotification: GitifyNotification = {
+  account: mockGitHubCloudAccount,
+  order: 0,
+  id: '26096167998',
+  unread: true,
+  reason: {
+    code: 'agent_session_finished',
+    title: 'Agent Session Finished',
+    description: 'A GitHub Copilot cloud agent session finished running.',
+  },
+  updatedAt: '2026-10-05T02:34:59Z',
+  subject: {
+    title: 'Analyzing and fixing GitHub Actions job failure',
+    url: null,
+    latestCommentUrl: null,
+    type: 'AgentSessionThread',
+  },
+  repository: mockGitHubRepository,
+  display: {
+    number: '',
+    title: 'Analyzing and fixing GitHub Actions job failure',
+    type: 'Agent Session Thread',
+    icon: {
+      type: AgentIcon,
+      color: IconColor.GRAY,
+    },
+    defaultUserType: 'Bot',
+    defaultUserIcon: CopilotIcon,
+  },
+};
 
 /** Same shape as cloud notification, but bound to a Gitea account. */
 export const mockGiteaGitifyNotification: GitifyNotification = {

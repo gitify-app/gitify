@@ -1,6 +1,8 @@
 import type React from 'react';
+import type { FC } from 'react';
 import { createElement, useState } from 'react';
 
+import type { OcticonProps } from '@primer/octicons-react';
 import { Avatar, Stack, Truncate } from '@primer/react';
 
 import { type Link, Size, type UserType } from '../../types';
@@ -14,6 +16,8 @@ export interface AvatarWithFallbackProps {
   name?: string;
   size?: number;
   userType?: UserType;
+  /** Optional fallback icon overriding the user-type default. */
+  icon?: FC<OcticonProps>;
 }
 
 export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
@@ -22,11 +26,12 @@ export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
   name,
   size = Size.MEDIUM,
   userType = 'User',
+  icon,
 }) => {
   const [hasBrokenAvatarSource, setHasBrokenAvatarSource] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);
-  const defaultUserIcon = getDefaultUserIcon(userType);
+  const defaultUserIcon = icon ?? getDefaultUserIcon(userType);
 
   // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
   return (

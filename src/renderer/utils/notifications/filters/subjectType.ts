@@ -10,6 +10,9 @@ import type {
 import type { Filter } from './types';
 
 const SUBJECT_TYPE_DETAILS: Record<SubjectTypeFilterValue, TypeDetails> = {
+  AgentSessionThread: {
+    title: 'Agent Session Thread',
+  },
   BitbucketNotification: {
     title: 'Bitbucket',
   },

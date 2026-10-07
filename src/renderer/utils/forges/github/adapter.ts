@@ -86,6 +86,7 @@ function getDisplayHelpers(notification: RawGitifyNotification): NotificationDis
     iconColor: handler.iconColor(notification),
     defaultUrl: handler.defaultUrl(notification),
     defaultUserType: handler.defaultUserType(),
+    defaultUserIcon: handler.defaultUserIcon?.(),
   };
 }
 

@@ -1,6 +1,10 @@
 import type { Reason, TypeDetails } from '../../types';
 
 export const REASON_TYPE_DETAILS: Record<Reason, TypeDetails> = {
+  agent_session_finished: {
+    title: 'Agent Session Finished',
+    description: 'A GitHub Copilot cloud agent session finished running.',
+  },
   approval_requested: {
     title: 'Approval Requested',
     description: 'You were requested to review and approve a deployment.',
