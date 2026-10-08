@@ -13,8 +13,8 @@ const primerTheme = vi.hoisted(() => ({
   setNightScheme: vi.fn(),
 }));
 
-vi.mock('@primer/react', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@primer/react')>()),
+vi.mock('@primer/react/next', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@primer/react/next')>()),
   useTheme: () => primerTheme,
 }));
 
