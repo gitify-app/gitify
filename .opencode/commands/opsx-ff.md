@@ -1,22 +1,12 @@
 ---
-description: Propose a new change - create it and generate all artifacts in one step
+description: Create a change and generate all artifacts needed for implementation in one go
 ---
 
-Propose a new change - create the change and generate all artifacts in one step.
-
-I'll create a change with artifacts:
-
-- proposal.md (what & why)
-- design.md (how)
-- tasks.md (implementation steps)
-
-When ready to implement, run /opsx-apply
-
----
+Fast-forward through artifact creation - generate everything needed to start implementation.
 
 **Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
 
-**Input**: The argument after `/opsx-propose` is the change name (kebab-case), OR a description of what the user wants to build.
+**Input**: The argument after `/opsx-ff` is the change name (kebab-case), OR a description of what the user wants to build.
 
 **Steps**
 
@@ -36,7 +26,7 @@ When ready to implement, run /opsx-apply
    openspec new change "<name>"
    ```
 
-   This creates a scaffolded change in the planning home resolved by the CLI with `.openspec.yaml`.
+   This creates a scaffolded change in the planning home resolved by the CLI.
 
 3. **Get the artifact build order**
 
@@ -70,7 +60,7 @@ When ready to implement, run /opsx-apply
    - Read any completed dependency files for context
    - Create the artifact file using `template` as the structure and write it to `resolvedOutputPath`
    - Apply `context` and `rules` as constraints - but do NOT copy them into the file
-   - Show brief progress: "Created <artifact-id>"
+   - Show brief progress: "✓ Created <artifact-id>"
 
    b. **Continue until all `applyRequires` artifacts are complete**
    - After creating each artifact, re-run `openspec status --change "<name>" --json`
