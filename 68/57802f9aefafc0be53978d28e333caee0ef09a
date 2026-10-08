@@ -1,0 +1,20 @@
+src/renderer/utils/forges/github/cli-auth.test.ts
+  s_2b7374a76688da::t_aad2946599fa6b 39-42
+  s_2b7374a76688da::t_234ae5e3ad7ea9 28-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6857802f9aefafc0be53978d28e333caee0ef09a",
+  "prompts": {},
+  "sessions": {
+    "s_2b7374a76688da": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_ee27662f9ffed7uhlXm0lVKWqB",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
