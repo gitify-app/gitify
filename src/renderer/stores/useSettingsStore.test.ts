@@ -34,7 +34,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
         act(() => {
           result.current.toggleSetting('openLinks');
         });
-      }).toThrowError("toggleSetting: 'openLinks' is not a boolean setting");
+      }).toThrow("toggleSetting: 'openLinks' is not a boolean setting");
     });
   });
 
