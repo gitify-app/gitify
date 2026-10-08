@@ -1,0 +1,14 @@
+src/renderer/stores/useSettingsStore.test.ts
+  h_ac004aadb63da9 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "db4633f5625827f902fb976d9abb38694479c6f6",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
