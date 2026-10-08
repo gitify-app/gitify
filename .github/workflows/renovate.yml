@@ -10,6 +10,9 @@ on:
     paths:
       - renovate.json
 
+permissions:
+  contents: read
+
 jobs:
   validate:
-    uses: gitify-app/.github/.github/workflows/renovate-config-validator.yml@main
+    uses: gitify-app/.github/.github/workflows/renovate-config-validator.yml@000f921e8c370889fa00093ce9ce910fcefcc470 # main
