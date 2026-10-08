@@ -1,0 +1,14 @@
+src/renderer/__helpers__/visual-utils.tsx
+  h_ac004aadb63da9 80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e348056b36dd312eaf18d1359669660050f7d3da",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
