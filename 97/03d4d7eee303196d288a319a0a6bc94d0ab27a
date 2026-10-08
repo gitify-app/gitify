@@ -1,0 +1,25 @@
+src/renderer/hooks/useAppearance.test.ts
+  s_2b7374a76688da::t_8c0c54a254bfb3 227-228
+  s_2b7374a76688da::t_f78811f49079d2 1-5,22,37-40,222-226,229-330
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9703d4d7eee303196d288a319a0a6bc94d0ab27a",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  },
+  "sessions": {
+    "s_2b7374a76688da": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_ee27662f9ffed7uhlXm0lVKWqB",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
