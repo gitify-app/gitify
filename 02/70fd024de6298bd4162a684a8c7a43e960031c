@@ -1,0 +1,27 @@
+src/renderer/routes/Accounts.test.tsx
+  s_2b7374a76688da::t_7305f58d200cc8 155-189,461
+  s_2b7374a76688da::t_50259b72f2ecd9 100-106,108-124,126-154
+  s_2b7374a76688da::t_7f79ebae24aa4d 14-20,72-99,107,125
+  s_2b7374a76688da::t_63782846e355fb 21
+  s_2b7374a76688da::t_b7ace2af412ed9 462
+src/renderer/routes/Accounts.tsx
+  s_2b7374a76688da::t_d98dcbcb9c15e8 9,20-21,44-50
+  s_2b7374a76688da::t_8db950f8f014f0 52,54,57,59,256
+  s_2b7374a76688da::t_7ff5bfb598677d 51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0270fd024de6298bd4162a684a8c7a43e960031c",
+  "prompts": {},
+  "sessions": {
+    "s_2b7374a76688da": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_ee27662f9ffed7uhlXm0lVKWqB",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
