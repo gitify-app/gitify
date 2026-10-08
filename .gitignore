@@ -36,3 +36,6 @@ src/renderer/**/__screenshots__/**/*.png
 
 # OpenSpec
 openspec/
+
+# Local Git worktrees
+/.worktrees/
