@@ -2,7 +2,8 @@ import { render } from '@testing-library/react';
 import type { ReactElement } from 'react';
 import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
+import { BaseStyles } from '@primer/react';
+import { ThemeProvider } from '@primer/react/next';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 

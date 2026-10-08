@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
+import { BaseStyles } from '@primer/react';
+import { ThemeProvider } from '@primer/react/next';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 

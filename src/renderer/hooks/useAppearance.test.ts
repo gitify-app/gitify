@@ -1,4 +1,8 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, cleanup, renderHook, screen, waitFor } from '@testing-library/react';
+import { createElement, type PropsWithChildren } from 'react';
+
+import { BaseStyles } from '@primer/react';
+import { ThemeProvider, useTheme } from '@primer/react/next';
 
 import { useSettingsStore } from '../stores';
 
@@ -13,9 +17,9 @@ const primerTheme = vi.hoisted(() => ({
   setNightScheme: vi.fn(),
 }));
 
-vi.mock('@primer/react', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('@primer/react')>()),
-  useTheme: () => primerTheme,
+vi.mock('@primer/react/next', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@primer/react/next')>()),
+  useTheme: vi.fn(() => primerTheme),
 }));
 
 function mockPrefersContrast(matches: boolean) {
@@ -30,6 +34,10 @@ function mockPrefersContrast(matches: boolean) {
 }
 
 describe('renderer/hooks/useAppearance.ts', () => {
+  beforeEach(() => {
+    vi.mocked(useTheme).mockImplementation(() => primerTheme);
+  });
+
   afterEach(() => {
     document.documentElement.removeAttribute('data-theme');
     document.documentElement.removeAttribute('data-glass-material');
@@ -210,5 +218,114 @@ describe('renderer/hooks/useAppearance.ts', () => {
     renderHook(() => useAppearance());
 
     expect(document.documentElement.classList.contains('gitify-colored-icons')).toBe(false);
+  });
+
+  describe('with ThemeProvider', () => {
+    let darkMedia: EventTarget & { matches: boolean };
+
+    beforeEach(async () => {
+      const actual =
+        await vi.importActual<typeof import('@primer/react/next')>('@primer/react/next');
+      vi.mocked(useTheme).mockImplementation(actual.useTheme);
+
+      darkMedia = Object.assign(new EventTarget(), { matches: false });
+      const otherMedia = Object.assign(new EventTarget(), { matches: false });
+      vi.spyOn(window, 'matchMedia').mockImplementation(
+        (query) =>
+          (query === '(prefers-color-scheme: dark)' ? darkMedia : otherMedia) as MediaQueryList,
+      );
+    });
+
+    afterEach(() => {
+      cleanup();
+      vi.restoreAllMocks();
+      vi.mocked(useTheme).mockImplementation(() => primerTheme);
+    });
+
+    function renderWithTheme(theme: Theme) {
+      useSettingsStore.setState({ theme });
+
+      return renderHook(
+        () => {
+          useAppearance();
+          return useTheme();
+        },
+        {
+          wrapper: ({ children }: PropsWithChildren) =>
+            createElement(
+              ThemeProvider,
+              null,
+              createElement(
+                BaseStyles,
+                null,
+                createElement('div', { 'data-testid': 'theme-content' }, children),
+              ),
+            ),
+        },
+      );
+    }
+
+    function getThemeWrapper() {
+      const wrapper = screen.getByTestId('theme-content').closest('[data-color-mode]');
+      expect(wrapper).toBeInTheDocument();
+      return wrapper!;
+    }
+
+    it('applies appearance to the real provider and preserves its descendant wrapper', () => {
+      const { result } = renderWithTheme(Theme.LIGHT);
+
+      expect(result.current.colorMode).toBe('day');
+      expect(result.current.colorScheme).toBe('light');
+      const wrapper = getThemeWrapper();
+      expect(wrapper).not.toBe(document.documentElement);
+      expect(wrapper).toHaveAttribute('data-color-mode', 'light');
+      expect(wrapper).toHaveAttribute('data-light-theme', 'light');
+      expect(wrapper).toHaveAttribute('data-dark-theme', 'light');
+      expect(wrapper.querySelector('[data-component="BaseStyles"]')).toContainElement(
+        screen.getByTestId('theme-content'),
+      );
+    });
+
+    it('updates the real provider when settings change from light to dark', async () => {
+      const { result } = renderWithTheme(Theme.LIGHT);
+
+      await act(async () => {
+        useSettingsStore.setState({ theme: Theme.DARK });
+      });
+
+      expect(result.current.colorMode).toBe('night');
+      expect(result.current.colorScheme).toBe('dark');
+      expect(getThemeWrapper()).toHaveAttribute('data-color-mode', 'dark');
+      expect(window.gitify.setNativeTheme).toHaveBeenLastCalledWith('dark');
+    });
+
+    it('follows OS changes in System mode without changing the saved preference', async () => {
+      const { result } = renderWithTheme(Theme.SYSTEM);
+      expect(result.current.resolvedColorMode).toBe('day');
+
+      await act(async () => {
+        darkMedia.matches = true;
+        darkMedia.dispatchEvent(new Event('change'));
+      });
+
+      expect(result.current.colorMode).toBe('auto');
+      expect(result.current.resolvedColorMode).toBe('night');
+      expect(result.current.colorScheme).toBe('dark');
+      expect(getThemeWrapper()).toHaveAttribute('data-color-mode', 'auto');
+      expect(getThemeWrapper()).toHaveAttribute('data-light-theme', 'light');
+      expect(getThemeWrapper()).toHaveAttribute('data-dark-theme', 'dark');
+      expect(useSettingsStore.getState().theme).toBe(Theme.SYSTEM);
+      expect(window.gitify.setNativeTheme).toHaveBeenLastCalledWith('system');
+      expect(window.gitify.setNativeTheme).not.toHaveBeenCalledWith('dark');
+    });
+
+    it('applies an accessibility scheme through the real provider', () => {
+      const { result } = renderWithTheme(Theme.DARK_COLORBLIND);
+
+      expect(result.current.colorMode).toBe('night');
+      expect(result.current.colorScheme).toBe('dark_colorblind');
+      expect(getThemeWrapper()).toHaveAttribute('data-color-mode', 'dark');
+      expect(getThemeWrapper()).toHaveAttribute('data-dark-theme', 'dark_colorblind');
+    });
   });
 });
