@@ -6,6 +6,7 @@ import {
   ArrowLeftIcon,
   ChevronRightIcon,
   KeyIcon,
+  type OcticonProps,
   PersonAddIcon,
   PersonIcon,
   ShieldCheckIcon,
@@ -15,6 +16,8 @@ import {
   SyncIcon,
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
+
+import { cn } from 'cn';
 
 import { useLogins } from '../hooks/useLogins';
 import { useNotifications } from '../hooks/useNotifications';
@@ -38,14 +41,22 @@ import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
-function getScopeIconClassName(account: Account): string {
+const RecommendedScopesIcon: FC<OcticonProps> = ({ className, ...props }) => (
+  <ShieldCheckIcon {...props} className={cn(IconColor.GREEN, className)} />
+);
+
+const AlternateScopesIcon: FC<OcticonProps> = ({ className, ...props }) => (
+  <ShieldCheckIcon {...props} className={cn('text-gitify-warning', className)} />
+);
+
+function getScopeIcon(account: Account): FC<OcticonProps> {
   if (hasRecommendedScopes(account)) {
-    return IconColor.GREEN;
+    return RecommendedScopesIcon;
   }
   if (hasAlternateScopes(account)) {
-    return 'text-gitify-warning';
+    return AlternateScopesIcon;
   }
-  return '';
+  return ShieldCheckIcon;
 }
 
 export const AccountsRoute: FC = () => {
@@ -242,7 +253,7 @@ export const AccountsRoute: FC = () => {
                       <IconButton
                         aria-label={`View scopes for ${account.user?.login}`}
                         data-testid="account-view-scopes"
-                        icon={() => <ShieldCheckIcon className={getScopeIconClassName(account)} />}
+                        icon={getScopeIcon(account)}
                         onClick={() =>
                           navigate('/account-scopes', {
                             state: { account },
