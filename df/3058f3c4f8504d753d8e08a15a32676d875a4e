@@ -1,0 +1,35 @@
+src/renderer/hooks/useAppearance.test.ts
+  s_2b7374a76688da::t_e4c9c035906966 16-17
+src/renderer/App.tsx
+  s_2b7374a76688da::t_d86b4b5d9b7f6a 4-5
+src/renderer/hooks/useAppearance.ts
+  s_2b7374a76688da::t_d86b4b5d9b7f6a 3
+src/renderer/utils/ui/theme.ts
+  s_2b7374a76688da::t_d86b4b5d9b7f6a 1
+src/renderer/__helpers__/visual-utils.tsx
+  s_2b7374a76688da::t_e4c9c035906966 5-6
+src/renderer/hooks/useAppearance.integration.test.tsx
+  s_2b7374a76688da::t_35a8d36675b1cd 385,388,397,412
+  s_2b7374a76688da::t_a8d9b254dd4559 184-196,201-237,426
+  s_2b7374a76688da::t_f1ed5d3a46f020 1-5,8-132,427
+  s_2b7374a76688da::t_606eb38a34ac32 197-200,245-264,272-301,307-327,346-349
+  s_2b7374a76688da::t_dc26b0dcd7cad0 383-384,386-387,389-396,398-411,413-425
+  s_2b7374a76688da::t_2035b87489f25f 6-7,238-244,265-271,302-306,328-345,350-382
+  s_2b7374a76688da::t_6a5a2d352ab5ea 133-183
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "df3058f3c4f8504d753d8e08a15a32676d875a4e",
+  "prompts": {},
+  "sessions": {
+    "s_2b7374a76688da": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_ee27662f9ffed7uhlXm0lVKWqB",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
