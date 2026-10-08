@@ -1,0 +1,29 @@
+.worktrees/pr-3279-integration
+  s_8b76bbafb20ff7::t_d7397d6b123286 1
+.worktrees/pr-3298-review
+  s_a6b9fd36bf2634::t_07b27a842fef2e 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e4e1b3adc063aecdd2c133732c08f67c198b86b7",
+  "prompts": {},
+  "sessions": {
+    "s_8b76bbafb20ff7": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f0b4e2ef3ffe5UPB4Q1kBVYh9D",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    },
+    "s_a6b9fd36bf2634": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f0a1d8cb0ffexXzz267ZJrE9bs",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
