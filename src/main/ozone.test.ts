@@ -1,16 +1,18 @@
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 import { applyOzonePlatform, isX11BackendEnabled, setX11Backend } from './ozone';
 
-const USER_DATA = '/tmp/gitify-test-userdata';
-const MARKER = path.join(USER_DATA, 'UseX11Backend');
+let userData: string;
+let marker: string;
 
+const getPathMock = vi.hoisted(() => vi.fn<(name: string) => string>());
 const appendSwitchMock = vi.fn();
 
 vi.mock('electron', () => ({
   app: {
-    getPath: (name: string) => (name === 'userData' ? '/tmp/gitify-test-userdata' : ''),
+    getPath: getPathMock,
     commandLine: {
       appendSwitch: (...a: unknown[]) => appendSwitchMock(...a),
     },
@@ -34,14 +36,15 @@ describe('main/ozone.ts', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    // Electron creates userData for a real app; the stubbed path needs it too.
-    fs.mkdirSync(USER_DATA, { recursive: true });
-    fs.rmSync(MARKER, { force: true });
+    userData = fs.mkdtempSync(path.join(os.tmpdir(), 'gitify-ozone-'));
+    marker = path.join(userData, 'UseX11Backend');
+    getPathMock.mockImplementation((name) => (name === 'userData' ? userData : ''));
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     setPlatform(realPlatform);
-    fs.rmSync(MARKER, { force: true });
+    fs.rmSync(userData, { recursive: true, force: true });
   });
 
   describe('setX11Backend / isX11BackendEnabled', () => {
@@ -51,11 +54,11 @@ describe('main/ozone.ts', () => {
 
     it('round-trips the preference through the marker file', () => {
       setX11Backend(true);
-      expect(fs.existsSync(MARKER)).toBe(true);
+      expect(fs.existsSync(marker)).toBe(true);
       expect(isX11BackendEnabled()).toBe(true);
 
       setX11Backend(false);
-      expect(fs.existsSync(MARKER)).toBe(false);
+      expect(fs.existsSync(marker)).toBe(false);
       expect(isX11BackendEnabled()).toBe(false);
     });
 
