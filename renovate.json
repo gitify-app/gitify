@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>gitify-app/renovate-config", "helpers:disableTypesNodeMajor"],
+  "extends": ["local>gitify-app/renovate-config", "helpers:disableTypesNodeMajor"],
   "packageRules": [
     {
       "description": "Fetch changelog details for twemoji packages",
