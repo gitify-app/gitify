@@ -323,8 +323,8 @@ importers:
         specifier: 4.4.0
         version: 4.4.0
       dotenv:
-        specifier: 18.0.5
-        version: 18.0.5
+        specifier: 18.0.6
+        version: 18.0.6
       electron:
         specifier: 44.7.0
         version: 44.7.0(supports-color@10.2.2)
@@ -2669,8 +2669,8 @@ packages:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
-  dotenv@18.0.5:
-    resolution: {integrity: sha512-aBrGvt6KhjxbEnatqMWOMidftwsrCiCvqh1yNIGB9QyF0J+VcWkKDMsvYOEm7ZS82oiV+BT1sTOtIlAmUlTpwQ==}
+  dotenv@18.0.6:
+    resolution: {integrity: sha512-ZMVmohV6CvAJtj++pZNyggluUt6hbRdQAxc2+Z635RL6/AG/ruXv5lHnybUFoxMPL/yrTL/tsF4paZu2l7RA6Q==}
     engines: {node: '>=12'}
     hasBin: true
 
@@ -6816,7 +6816,7 @@ snapshots:
 
   dotenv@16.6.1: {}
 
-  dotenv@18.0.5: {}
+  dotenv@18.0.6: {}
 
   dunder-proto@1.0.1:
     dependencies:
