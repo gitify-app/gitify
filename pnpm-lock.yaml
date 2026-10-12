@@ -317,8 +317,8 @@ importers:
         specifier: 'catalog:'
         version: 5.0.3(@vitest/browser@5.0.3)(vitest@5.0.3)
       concurrently:
-        specifier: 10.0.5
-        version: 10.0.5
+        specifier: 10.0.6
+        version: 10.0.6
       date-fns:
         specifier: 4.4.0
         version: 4.4.0
@@ -2499,8 +2499,8 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  concurrently@10.0.5:
-    resolution: {integrity: sha512-JaP/CoftUrCcAFW/g//RbgEGwlelnEae6cfBLgH6ZdO6s8jPkn6p9SB9u6pdVxYXoiSnFqseOlHfrEfF82TVOg==}
+  concurrently@10.0.6:
+    resolution: {integrity: sha512-qgICXXFp2/3nAebRLmxcINKEXM1mLK3ij/y31P02VTs/KIkddIeC05n73DxOXsXMB9LFSqNU1/na3lDlOhcbIw==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -4112,8 +4112,8 @@ packages:
     resolution: {integrity: sha512-JdxDPD0DBTyu08pq0kPC0xSNet/qsU07qT6IsX1AS8oO2ICNRY4ldNa8OAI6PuwAH8tG3lxEhbqmyp4Dw4036g==}
     engines: {node: '>= 0.4'}
 
-  shell-quote@1.9.0:
-    resolution: {integrity: sha512-Iov+JwFv/2HcTpcwNMKd8+IWNb8tboQJNQTkAY/LLVK7gGH9jy+LGkVqPxfekHl+yMmiqXszdGWXgkfml7hjqA==}
+  shell-quote@1.12.0:
+    resolution: {integrity: sha512-PcByqNyT/38F2kDNi006HAMRJaULuBzq/FOsw3qdZvX/GA9W/jamDaRskgHjubHiftXK5sIFxLNkvrXUwcof6Q==}
     engines: {node: '>= 0.4'}
 
   signal-exit@3.0.7:
@@ -6661,11 +6661,11 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  concurrently@10.0.5:
+  concurrently@10.0.6:
     dependencies:
       chalk: 5.6.2
       rxjs: 7.8.2
-      shell-quote: 1.9.0
+      shell-quote: 1.12.0
       supports-color: 10.2.2
       tree-kill: 1.2.2
       yargs: 18.0.0
@@ -8222,7 +8222,7 @@ snapshots:
 
   shell-quote@1.11.0: {}
 
-  shell-quote@1.9.0: {}
+  shell-quote@1.12.0: {}
 
   signal-exit@3.0.7: {}
 
