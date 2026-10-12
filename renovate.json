@@ -3,6 +3,13 @@
   "extends": ["github>gitify-app/.github", "helpers:disableTypesNodeMajor"],
   "packageRules": [
     {
+      "description": "Auto-merge digest updates for setchy/renovate-config workflows to avoid merging across two sweeps.",
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": ["setchy/renovate-config"],
+      "matchUpdateTypes": ["digest"],
+      "automerge": true
+    },
+    {
       "description": "Fetch changelog details for twemoji packages",
       "matchPackageNames": ["@discordapp/twemoji"],
       "changelogUrl": "https://github.com/jdjdecked/twemoji"
