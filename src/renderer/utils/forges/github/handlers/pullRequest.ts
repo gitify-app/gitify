@@ -279,6 +279,11 @@ export function getPullRequestReviewers(
       reviewers.set(user, {
         reviewer: {
           user: author ? formatGitHubNotificationUser(account, author) : user,
+          login: author?.login ?? user,
+          name: author?.name,
+          avatarUrl: author?.avatarUrl,
+          htmlUrl: author?.htmlUrl,
+          type: author?.type,
           state: review.state,
           threads: existingEntry?.reviewer.threads ?? { resolved: 0, total: 0 },
         },
@@ -294,7 +299,7 @@ export function getPullRequestReviewers(
 
     const user = thread.comments.nodes?.[0]?.author?.login ?? 'Unknown reviewer';
     const entry = reviewers.get(user) ?? {
-      reviewer: { user, threads: { resolved: 0, total: 0 } },
+      reviewer: { user, login: user, threads: { resolved: 0, total: 0 } },
     };
     entry.reviewer.threads.total += 1;
     entry.reviewer.threads.resolved += Number(thread.isResolved);

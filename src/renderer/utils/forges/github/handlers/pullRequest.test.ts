@@ -115,7 +115,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
 
       const result = await pullRequestHandler.enrich(mockNotification);
 
-      expect(result.reviewers).toEqual([
+      expect(result.reviewers).toMatchObject([
         { user: 'reviewer-1', threads: { resolved: 0, total: 1 } },
         { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
       ]);
@@ -781,7 +781,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         ],
       });
 
-      expect(result).toEqual([
+      expect(result).toMatchObject([
         { user: 'reviewer-1', state: 'APPROVED', threads: { resolved: 0, total: 1 } },
         { user: 'reviewer-2', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
         { user: 'reviewer-3', state: 'APPROVED', threads: { resolved: 0, total: 0 } },
@@ -804,7 +804,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ]);
 
-      expect(result).toEqual([
+      expect(result).toMatchObject([
         { user: 'reviewer-1', state: 'APPROVED', threads: { resolved: 0, total: 0 } },
       ]);
     });
@@ -828,7 +828,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ]);
 
-      expect(result).toEqual([
+      expect(result).toMatchObject([
         { user: 'reviewer-1', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
       ]);
     });
@@ -861,7 +861,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         ],
       });
 
-      expect(result).toEqual([
+      expect(result).toMatchObject([
         { user: 'alice', threads: { resolved: 1, total: 2 } },
         { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
         { user: 'zoe', threads: { resolved: 0, total: 1 } },
@@ -890,7 +890,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ]);
 
-      expect(result).toEqual([
+      expect(result).toMatchObject([
         {
           user: 'Notification Author (notification-author_gitify)',
           state: 'APPROVED',
@@ -912,9 +912,25 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         },
       ]);
 
-      expect(result).toEqual([
+      expect(result).toMatchObject([
         { user: 'copilot[ai]', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
       ]);
+    });
+
+    it('retains reviewer avatars and identity for the reviewer card', () => {
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, [
+        {
+          author: mockAuthorResponseNode('reviewer-1'),
+          state: 'APPROVED' as PullRequestReviewState,
+        },
+      ]);
+
+      expect(result[0]).toMatchObject({
+        login: 'reviewer-1',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+        htmlUrl: 'https://github.com/reviewer-1',
+        type: 'User',
+      });
     });
   });
 

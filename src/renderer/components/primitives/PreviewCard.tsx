@@ -22,6 +22,8 @@ export interface PreviewCardProps {
   openDelayMs?: number;
   /** Override the close delay (milliseconds). */
   closeDelayMs?: number;
+  /** Class applied to the anchor wrapper (defaults to `inline-flex`). */
+  anchorClassName?: string;
 }
 
 /**
@@ -61,6 +63,7 @@ export const PreviewCard: FC<PreviewCardProps> = ({
   testId = 'preview-card',
   openDelayMs = PREVIEW_OPEN_DELAY_MS,
   closeDelayMs = PREVIEW_CLOSE_DELAY_MS,
+  anchorClassName = 'inline-flex',
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -135,7 +138,7 @@ export const PreviewCard: FC<PreviewCardProps> = ({
     <>
       <span
         aria-label={ariaLabel}
-        className="inline-flex"
+        className={anchorClassName}
         onBlur={scheduleClose}
         onFocus={scheduleOpen}
         onMouseEnter={scheduleOpen}
@@ -149,7 +152,7 @@ export const PreviewCard: FC<PreviewCardProps> = ({
         <Portal>
           <div
             className={cn(
-              'absolute z-10 w-72 p-2',
+              'absolute z-10 w-64 p-2',
               'rounded-sm border border-gray-300 shadow-sm bg-gitify-tooltip-popout',
             )}
             data-testid={testId}
@@ -159,7 +162,7 @@ export const PreviewCard: FC<PreviewCardProps> = ({
             style={{ top: position?.top ?? 0, left: position?.left ?? 0 }}
           >
             <div
-              className="max-h-[320px] overflow-y-auto"
+              className="max-h-[240px] overflow-y-auto"
               data-testid={`${testId}-scroll`}
               // A preview is informational only: it must never take focus.
               tabIndex={-1}

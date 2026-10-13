@@ -10,8 +10,8 @@ import { type GitifyNotificationUser, type Link, Opacity, Size, type UserType } 
 import { openExternalLink } from '../../utils/system/comms';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
-/** Avatar size for the card, larger than list avatars to match GitHub's hovercard. */
-const PROFILE_CARD_AVATAR_SIZE = 40;
+/** Avatar size for the card, one step above list avatars but kept compact. */
+const PROFILE_CARD_AVATAR_SIZE = 32;
 
 export interface ProfileCardProps {
   /** Login handle shown as the primary identity. */
@@ -90,7 +90,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({
   return (
     <button
       aria-label={`Open profile: ${login}`}
-      className="flex w-full flex-col gap-2 text-left"
+      className="flex w-full flex-col gap-1.5 text-left"
       data-testid="profile-card"
       onClick={handleOpen}
       type="button"
@@ -103,8 +103,8 @@ export const ProfileCard: FC<ProfileCardProps> = ({
           userType={type}
         />
         <Stack direction="vertical" gap="none">
-          <Text className="text-sm font-semibold">{name ?? login}</Text>
-          <Text className={cn('text-xs', Opacity.MEDIUM)}>
+          <Text className="text-xs font-semibold">{name ?? login}</Text>
+          <Text className={cn('text-xxs', Opacity.MEDIUM)}>
             @{login}
             {type !== 'User' ? ` · ${type}` : ''}
           </Text>

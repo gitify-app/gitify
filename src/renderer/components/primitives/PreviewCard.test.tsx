@@ -65,7 +65,7 @@ describe('renderer/components/primitives/PreviewCard.tsx', () => {
 
     const scrollRegion = await screen.findByTestId('preview-card-scroll');
     expect(scrollRegion).toHaveClass('overflow-y-auto');
-    expect(scrollRegion).toHaveClass('max-h-[320px]');
+    expect(scrollRegion).toHaveClass('max-h-[240px]');
 
     // The preview must not trap or move focus away from the trigger.
     expect(anchor).toHaveFocus();
