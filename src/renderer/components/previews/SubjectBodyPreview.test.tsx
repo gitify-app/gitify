@@ -1,10 +1,31 @@
 import { screen } from '@testing-library/react';
 
+import { IssueOpenedIcon } from '@primer/octicons-react';
+
 import { renderWithProviders } from '../../__helpers__/test-utils';
+
+import { IconColor } from '../../types';
 
 import { SubjectBodyPreview } from './SubjectBodyPreview';
 
 describe('renderer/components/previews/SubjectBodyPreview.tsx', () => {
+  it('renders a GitHub-style header with the type, number, and title', () => {
+    renderWithProviders(
+      <SubjectBodyPreview
+        bodyHtml="<p>Body</p>"
+        icon={IssueOpenedIcon}
+        iconColor={IconColor.GREEN}
+        number="#123"
+        title="An issue"
+        typeLabel="Open Issue"
+      />,
+    );
+
+    expect(screen.getByText('Open Issue')).toBeInTheDocument();
+    expect(screen.getByText('#123')).toBeInTheDocument();
+    expect(screen.getByText('An issue')).toBeInTheDocument();
+  });
+
   it('renders the body with formatting preserved', () => {
     const tree = renderWithProviders(
       <SubjectBodyPreview bodyHtml="<h3>Title</h3><p>Hello <strong>world</strong></p><ul><li>One</li></ul>" />,

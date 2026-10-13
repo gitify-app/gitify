@@ -14,7 +14,7 @@ import {
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
-import { PreviewCard } from '../primitives/PreviewCard';
+import { PreviewCard, closeActivePreview } from '../primitives/PreviewCard';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
@@ -111,6 +111,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
+      onMouseEnter={closeActivePreview}
       style={{ '--gitify-actions': enabledActionCount } as CSSProperties}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
@@ -145,7 +146,16 @@ export const NotificationRow: FC<NotificationRowProps> = ({
               <PreviewCard
                 anchorClassName="contents"
                 ariaLabel={`Preview body: ${notification.display.title}`}
-                card={<SubjectBodyPreview bodyHtml={notification.subject.bodyHtml} />}
+                card={
+                  <SubjectBodyPreview
+                    bodyHtml={notification.subject.bodyHtml}
+                    icon={notification.display.icon.type}
+                    iconColor={notification.display.icon.color}
+                    number={notification.display.number}
+                    title={notification.subject.title}
+                    typeLabel={notification.display.type}
+                  />
+                }
                 testId="notification-body-preview"
               >
                 <NotificationTitle title={notification.subject.title} />

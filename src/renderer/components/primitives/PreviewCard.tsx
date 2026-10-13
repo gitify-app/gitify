@@ -7,7 +7,18 @@ import { cn } from 'cn';
 /** Delay before a preview opens, so a cursor merely crossing the anchor does not flash a card. */
 export const PREVIEW_OPEN_DELAY_MS = 400;
 /** Delay before a preview closes, so moving the pointer onto the card does not dismiss it. */
-export const PREVIEW_CLOSE_DELAY_MS = 150;
+export const PREVIEW_CLOSE_DELAY_MS = 100;
+
+/**
+ * Closes whichever preview is currently open. Used by notification rows so
+ * that moving the pointer onto a different row dismisses a lingering card
+ * instead of leaving it stuck over the list.
+ */
+let activePreviewClose: (() => void) | null = null;
+
+export function closeActivePreview(): void {
+  activePreviewClose?.();
+}
 
 export interface PreviewCardProps {
   /** The anchor element that reveals the preview on hover/focus. */
@@ -128,6 +139,19 @@ export const PreviewCard: FC<PreviewCardProps> = ({
     scrollContainer.addEventListener('scroll', handleScroll);
 
     return () => scrollContainer.removeEventListener('scroll', handleScroll);
+  }, [open]);
+
+  // Register as the active preview so another row's hover can dismiss it.
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    activePreviewClose = () => setOpen(false);
+
+    return () => {
+      activePreviewClose = null;
+    };
   }, [open]);
 
   // Clear any pending timers when the anchor unmounts (e.g. a virtualized row
