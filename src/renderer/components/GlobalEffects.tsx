@@ -38,7 +38,8 @@ export const GlobalEffects: FC = () => {
   // Appearance side effects: color mode/scheme + design-language/material attributes
   useAppearance();
 
-  // Notification fetching side effects (sound / native alerts, inactivity refetch)
+  // Notification fetching side effects (sound / native alerts, interval/focus/reconnect
+  // polling, and the system-wake refetch)
   const { status, notificationCount } = useNotifications({ withSideEffects: true });
 
   // Periodic account refreshes (startup + hourly interval)
