@@ -114,27 +114,15 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       style={{ '--gitify-actions': enabledActionCount } as CSSProperties}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
-        {detailedNotifications && notification.subject.bodyHtml ? (
-          <PreviewCard
-            ariaLabel={`Preview body: ${notification.display.title}`}
-            card={<SubjectBodyPreview bodyHtml={notification.subject.bodyHtml} />}
-            testId="notification-body-preview"
-          >
-            <button aria-label={notification.display.type} type="button">
-              <NotificationIcon className={notification.display.icon.color} size={Size.LARGE} />
-            </button>
-          </PreviewCard>
-        ) : (
-          <Tooltip direction="e" text={notification.display.type}>
-            <button type="button">
-              <NotificationIcon
-                aria-label={notification.display.type}
-                className={notification.display.icon.color}
-                size={Size.LARGE}
-              />
-            </button>
-          </Tooltip>
-        )}
+        <Tooltip direction="e" text={notification.display.type}>
+          <button type="button">
+            <NotificationIcon
+              aria-label={notification.display.type}
+              className={notification.display.icon.color}
+              size={Size.LARGE}
+            />
+          </button>
+        </Tooltip>
 
         <Stack
           className={cn('cursor-pointer text-sm w-full', !wrapNotificationTitle && 'truncate')}
@@ -153,7 +141,18 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             justify="space-between"
             title={notification.display.title}
           >
-            <NotificationTitle title={notification.subject.title} />
+            {detailedNotifications && notification.subject.bodyHtml ? (
+              <PreviewCard
+                anchorClassName="contents"
+                ariaLabel={`Preview body: ${notification.display.title}`}
+                card={<SubjectBodyPreview bodyHtml={notification.subject.bodyHtml} />}
+                testId="notification-body-preview"
+              >
+                <NotificationTitle title={notification.subject.title} />
+              </PreviewCard>
+            ) : (
+              <NotificationTitle title={notification.subject.title} />
+            )}
             <Text
               className={cn(
                 'text-xxs ml-auto mr-2',

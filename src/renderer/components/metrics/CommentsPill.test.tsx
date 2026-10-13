@@ -57,6 +57,6 @@ describe('renderer/components/metrics/CommentsPill.tsx', () => {
 
     expect(await screen.findByTestId('comments-preview-card')).toBeInTheDocument();
     expect(screen.getByText('Latest reply')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /View comment/ })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Open comment by octocat' })).toBeInTheDocument();
   });
 });

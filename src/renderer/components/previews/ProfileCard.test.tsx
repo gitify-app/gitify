@@ -29,6 +29,7 @@ describe('renderer/components/previews/ProfileCard.tsx', () => {
     expect(screen.getByText('@github')).toBeInTheDocument();
     expect(screen.getByText('San Francisco')).toBeInTheDocument();
     expect(screen.getByText('3000 followers')).toBeInTheDocument();
+    expect(screen.getByAltText('octocat')).toHaveAttribute('width', '32');
     expect(tree.container).toMatchSnapshot();
   });
 

@@ -102,6 +102,7 @@ export function mockDiscussionResponseNode(mocks: {
     number: 123,
     title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+    bodyHTML: '',
     stateReason: mocks.stateReason ?? null,
     isAnswered: mocks.isAnswered,
     author: mockAuthor,

@@ -45,7 +45,7 @@ describe('renderer/components/previews/CommentsPreview.tsx', () => {
     expect(bodies).toEqual(['Comment 3', 'Comment 2', 'Comment 1']);
   });
 
-  it('opens a comment on activation and stops propagation', () => {
+  it('opens a comment via its timestamp link and stops propagation', () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
     const onRowClick = vi.fn();
 
@@ -55,7 +55,7 @@ describe('renderer/components/previews/CommentsPreview.tsx', () => {
       </div>,
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /View comment/ }));
+    fireEvent.click(screen.getByRole('link', { name: 'Open comment by user-1' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith(comment(1).url);
     expect(onRowClick).not.toHaveBeenCalled();

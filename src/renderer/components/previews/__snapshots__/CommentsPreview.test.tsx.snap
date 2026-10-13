@@ -7,21 +7,14 @@ exports[`renderer/components/previews/CommentsPreview.tsx > renders a single com
     data-align="stretch"
     data-component="Stack"
     data-direction="vertical"
-    data-gap="normal"
+    data-gap="none"
     data-justify="start"
     data-padding="none"
     data-testid="comments-preview"
     data-wrap="nowrap"
   >
     <div
-      class="prc-Stack-Stack-UQ9k6"
-      data-align="stretch"
-      data-component="Stack"
-      data-direction="vertical"
-      data-gap="condensed"
-      data-justify="start"
-      data-padding="none"
-      data-wrap="nowrap"
+      class="flex flex-col gap-1 py-1.5"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -60,9 +53,10 @@ exports[`renderer/components/previews/CommentsPreview.tsx > renders a single com
         >
           user-1
         </span>
-        <span
-          class="ml-auto text-xxs opacity-80 prc-Text-Text-9mHv3"
-          data-component="Text"
+        <a
+          aria-label="Open comment by user-1"
+          class="ml-auto text-xxs hover:underline opacity-80"
+          href="https://github.com/gitify-app/notifications-test/issues/1#issuecomment-1"
         >
           <relative-time
             data-component="RelativeTime"
@@ -70,7 +64,7 @@ exports[`renderer/components/previews/CommentsPreview.tsx > renders a single com
           >
             Jan 1, 2024
           </relative-time>
-        </span>
+        </a>
       </div>
       <div
         class="gitify-markdown-preview markdown-body text-xs break-words"
@@ -80,12 +74,6 @@ exports[`renderer/components/previews/CommentsPreview.tsx > renders a single com
           Comment 1
         </p>
       </div>
-      <button
-        class="text-xxs self-start text-gitify-link hover:underline"
-        type="button"
-      >
-        View comment ↗
-      </button>
     </div>
   </div>
 </div>
