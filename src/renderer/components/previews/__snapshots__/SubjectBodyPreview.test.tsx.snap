@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/previews/SubjectBodyPreview.tsx > renders the body with formatting preserved 1`] = `
+<div>
+  <div
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="stretch"
+    data-component="Stack"
+    data-direction="vertical"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-testid="subject-preview"
+    data-wrap="nowrap"
+  >
+    <div
+      class="gitify-markdown-preview markdown-body text-xs break-words"
+      data-testid="subject-body-preview"
+    >
+      <h3>
+        Title
+      </h3>
+      <p>
+        Hello 
+        <strong>
+          world
+        </strong>
+      </p>
+      <ul>
+        <li>
+          One
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

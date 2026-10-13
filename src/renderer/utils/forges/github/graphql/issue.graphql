@@ -20,6 +20,7 @@ fragment IssueDetails on Issue {
   number
   title
   url
+  bodyHTML
   state
   stateReason
   milestone {
@@ -31,7 +32,9 @@ fragment IssueDetails on Issue {
   comments(last: $lastComments) {
     totalCount
     nodes {
+      createdAt
       url
+      bodyHTML
       author {
         ...AuthorFields
       }

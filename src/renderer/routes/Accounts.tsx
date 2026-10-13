@@ -21,13 +21,15 @@ import { cn } from 'cn';
 
 import { useLogins } from '../hooks/useLogins';
 import { useNotifications } from '../hooks/useNotifications';
-import { useAccountsStore } from '../stores';
+import { useAccountsStore, useSettingsStore } from '../stores';
 
 import { AvatarWithFallback } from '../components/avatars/AvatarWithFallback';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
+import { ProfileCard } from '../components/previews/ProfileCard';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
+import { PreviewCard } from '../components/primitives/PreviewCard';
 
 import { type Account, type GitifyError, IconColor, Size } from '../types';
 import type { ForgeAdapter } from '../utils/forges/types';
@@ -38,7 +40,12 @@ import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
 import { getAdapter, listAdapters } from '../utils/forges/registry';
-import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
+import {
+  getAccountProfileUrl,
+  openAccountProfile,
+  openAccountSettings,
+  openHost,
+} from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
 const RecommendedScopesIcon: FC<OcticonProps> = ({ className, ...props }) => (
@@ -66,6 +73,7 @@ export const AccountsRoute: FC = () => {
   const { notifications } = useNotifications();
 
   const accounts = useAccountsStore((s) => s.accounts);
+  const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
   const refreshAccount = useAccountsStore((s) => s.refreshAccount);
 
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
@@ -169,18 +177,47 @@ export const AccountsRoute: FC = () => {
             <div className="rounded-md p-2 mb-4 bg-gitify-accounts" key={accountUUID}>
               <Stack align="stretch" direction="vertical">
                 <Stack align="start" direction="horizontal">
-                  <Button
-                    data-testid="account-profile"
-                    onClick={() => openAccountProfile(account)}
-                    title="Open account profile ↗"
-                  >
-                    <AvatarWithFallback
-                      alt={adapter.formatUserLogin(account.user?.login ?? '')}
-                      name={adapter.formatUserLogin(account.user?.login ?? '')}
-                      size={Size.XLARGE}
-                      src={account.user?.avatar ?? undefined}
-                    />
-                  </Button>
+                  {detailedNotifications && account.user ? (
+                    <PreviewCard
+                      ariaLabel={`Preview account: ${account.user.login}`}
+                      card={
+                        <ProfileCard
+                          avatarUrl={account.user.avatar ?? undefined}
+                          login={account.user.login}
+                          name={account.user.name}
+                          profileUrl={getAccountProfileUrl(account)}
+                          type="User"
+                        />
+                      }
+                      testId="account-preview"
+                    >
+                      <Button
+                        data-testid="account-profile"
+                        onClick={() => openAccountProfile(account)}
+                        title="Open account profile ↗"
+                      >
+                        <AvatarWithFallback
+                          alt={adapter.formatUserLogin(account.user?.login ?? '')}
+                          name={adapter.formatUserLogin(account.user?.login ?? '')}
+                          size={Size.XLARGE}
+                          src={account.user?.avatar ?? undefined}
+                        />
+                      </Button>
+                    </PreviewCard>
+                  ) : (
+                    <Button
+                      data-testid="account-profile"
+                      onClick={() => openAccountProfile(account)}
+                      title="Open account profile ↗"
+                    >
+                      <AvatarWithFallback
+                        alt={adapter.formatUserLogin(account.user?.login ?? '')}
+                        name={adapter.formatUserLogin(account.user?.login ?? '')}
+                        size={Size.XLARGE}
+                        src={account.user?.avatar ?? undefined}
+                      />
+                    </Button>
+                  )}
                 </Stack>
 
                 <Stack align="start" direction="horizontal" justify="space-between">

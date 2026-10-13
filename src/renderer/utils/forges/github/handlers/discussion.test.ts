@@ -194,6 +194,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
 
     it('discussion with comments', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });
+      mockDiscussion.bodyHTML = '<p>Discussion body</p>';
       mockDiscussion.comments = {
         totalCount: 1,
         nodes: [
@@ -201,6 +202,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
             author: mockCommenter,
             createdAt: '2024-02-01T00:00:00Z',
             url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
+            bodyHTML: '<p>Comment</p>',
             replies: {
               totalCount: 0,
               nodes: [],
@@ -244,8 +246,22 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         commentCount: 1,
         labels: [],
+        bodyHtml: '<p>Discussion body</p>',
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
+        comments: [
+          {
+            author: {
+              login: mockCommenter.login,
+              avatarUrl: mockCommenter.avatarUrl,
+              htmlUrl: mockCommenter.htmlUrl,
+              type: mockCommenter.type,
+            },
+            bodyHtml: '<p>Comment</p>',
+            url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
+            createdAt: '2024-02-01T00:00:00Z',
+          },
+        ],
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
@@ -260,6 +276,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
             author: mockCommenter,
             createdAt: '2024-01-01T00:00:00Z',
             url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
+            bodyHTML: '<p>Comment</p>',
             replies: {
               totalCount: 1,
               nodes: [
@@ -267,6 +284,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
                   author: mockReplier,
                   createdAt: '2024-01-01T00:00:00Z',
                   url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789' as Link,
+                  bodyHTML: '<p>Comment</p>',
                   reactions: {
                     totalCount: 0,
                   },
@@ -315,6 +333,19 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         labels: [],
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-6789' as Link,
+        comments: [
+          {
+            author: {
+              login: mockCommenter.login,
+              avatarUrl: mockCommenter.avatarUrl,
+              htmlUrl: mockCommenter.htmlUrl,
+              type: mockCommenter.type,
+            },
+            bodyHtml: '<p>Comment</p>',
+            url: 'https://github.com/gitify-app/notifications-test/discussions/123#discussioncomment-1234' as Link,
+            createdAt: '2024-01-01T00:00:00Z',
+          },
+        ],
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);

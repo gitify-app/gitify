@@ -15,42 +15,47 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
       data-padding="none"
       data-wrap="nowrap"
     >
-      <button
-        class="text-xs font-medium"
-        data-testid="view-repository"
-        title="Open repository ↗"
-        type="button"
+      <span
+        aria-label="Preview owner: gitify-app"
+        class="inline-flex"
       >
-        <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-component="Stack"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
+        <button
+          class="text-xs font-medium"
+          data-testid="view-repository"
+          title="Open repository ↗"
+          type="button"
         >
-          <img
-            alt="gitify-app/notifications-test"
-            class="prc-Avatar-Avatar-0xaUi"
-            data-component="Avatar"
-            height="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            style="--avatarSize-regular: 14px;"
-            width="14"
-          />
           <div
-            class="prc-Truncate-Truncate-2G1eo"
-            data-inline="true"
-            style="--truncate-max-width: 280px;"
-            title="gitify-app/notifications-test"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
           >
-            gitify-app/notifications-test
+            <img
+              alt="gitify-app/notifications-test"
+              class="prc-Avatar-Avatar-0xaUi"
+              data-component="Avatar"
+              height="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              style="--avatarSize-regular: 14px;"
+              width="14"
+            />
+            <div
+              class="prc-Truncate-Truncate-2G1eo"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </span>
       <div
         class="text-xxs opacity-50"
       >
@@ -76,42 +81,47 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
       data-padding="none"
       data-wrap="nowrap"
     >
-      <button
-        class="text-xs font-medium"
-        data-testid="view-repository"
-        title="Open repository ↗"
-        type="button"
+      <span
+        aria-label="Preview owner: gitify-app"
+        class="inline-flex"
       >
-        <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-component="Stack"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
+        <button
+          class="text-xs font-medium"
+          data-testid="view-repository"
+          title="Open repository ↗"
+          type="button"
         >
-          <img
-            alt="gitify-app/notifications-test"
-            class="prc-Avatar-Avatar-0xaUi"
-            data-component="Avatar"
-            height="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            style="--avatarSize-regular: 14px;"
-            width="14"
-          />
           <div
-            class="prc-Truncate-Truncate-2G1eo"
-            data-inline="true"
-            style="--truncate-max-width: 280px;"
-            title="gitify-app/notifications-test"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
           >
-            gitify-app/notifications-test
+            <img
+              alt="gitify-app/notifications-test"
+              class="prc-Avatar-Avatar-0xaUi"
+              data-component="Avatar"
+              height="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              style="--avatarSize-regular: 14px;"
+              width="14"
+            />
+            <div
+              class="prc-Truncate-Truncate-2G1eo"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </span>
       <div
         class="text-xxs opacity-50 hidden"
       >
@@ -137,42 +147,47 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
       data-padding="none"
       data-wrap="nowrap"
     >
-      <button
-        class="text-xs font-medium"
-        data-testid="view-repository"
-        title="Open repository ↗"
-        type="button"
+      <span
+        aria-label="Preview owner: gitify-app"
+        class="inline-flex"
       >
-        <div
-          class="prc-Stack-Stack-UQ9k6"
-          data-align="center"
-          data-component="Stack"
-          data-direction="horizontal"
-          data-gap="condensed"
-          data-justify="start"
-          data-padding="none"
-          data-testid="avatar"
-          data-wrap="nowrap"
+        <button
+          class="text-xs font-medium"
+          data-testid="view-repository"
+          title="Open repository ↗"
+          type="button"
         >
-          <img
-            alt="gitify-app/notifications-test"
-            class="prc-Avatar-Avatar-0xaUi"
-            data-component="Avatar"
-            height="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            style="--avatarSize-regular: 14px;"
-            width="14"
-          />
           <div
-            class="prc-Truncate-Truncate-2G1eo"
-            data-inline="true"
-            style="--truncate-max-width: 280px;"
-            title="gitify-app/notifications-test"
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="avatar"
+            data-wrap="nowrap"
           >
-            gitify-app/notifications-test
+            <img
+              alt="gitify-app/notifications-test"
+              class="prc-Avatar-Avatar-0xaUi"
+              data-component="Avatar"
+              height="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              style="--avatarSize-regular: 14px;"
+              width="14"
+            />
+            <div
+              class="prc-Truncate-Truncate-2G1eo"
+              data-inline="true"
+              style="--truncate-max-width: 280px;"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </div>
           </div>
-        </div>
-      </button>
+        </button>
+      </span>
       <div
         class="text-xxs opacity-50"
       >

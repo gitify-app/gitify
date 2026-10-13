@@ -1,3 +1,6 @@
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
@@ -38,7 +41,9 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
     );
 
     expect(tree.getByText('2/4')).toBeInTheDocument();
-    expect(tree.getByText('alice: 1/3 resolved · zoe: 1/1 resolved')).toBeInTheDocument();
+    expect(
+      tree.getByRole('button', { name: 'alice: 1/3 resolved · zoe: 1/1 resolved' }),
+    ).toBeInTheDocument();
     expect(tree.queryByText('zoe left review comments')).not.toBeInTheDocument();
   });
 
@@ -48,7 +53,7 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
     );
 
     expect(tree.getByText('1/1')).toBeInTheDocument();
-    expect(tree.getByText('reviewer: 1/1 resolved')).toBeInTheDocument();
+    expect(tree.getByRole('button', { name: 'reviewer: 1/1 resolved' })).toBeInTheDocument();
   });
 
   it('renders nothing for commented reviews without threads', () => {
@@ -59,5 +64,17 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
     );
 
     expect(tree.container).toBeEmptyDOMElement();
+  });
+
+  it('shows the reviewer card on hover', async () => {
+    renderWithProviders(
+      <ReviewsPill
+        reviewers={[{ user: 'reviewer', state: 'APPROVED', threads: { resolved: 0, total: 0 } }]}
+      />,
+    );
+
+    await userEvent.hover(screen.getByRole('button'));
+
+    expect(await screen.findByTestId('reviews-preview')).toBeInTheDocument();
   });
 });

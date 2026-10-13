@@ -11,79 +11,84 @@ exports[`renderer/components/notifications/AccountHeader.tsx > should render an 
     data-padding="none"
     data-wrap="nowrap"
   >
-    <button
-      class="prc-Button-ButtonBase-9n-Xk"
-      data-component="Button"
-      data-has-count="true"
-      data-loading="false"
-      data-no-visuals="true"
-      data-size="medium"
-      data-testid="account-profile"
-      data-variant="invisible"
-      title="Open account profile"
-      type="button"
+    <span
+      aria-label="Preview account: octocat"
+      class="inline-flex"
     >
-      <span
-        class="prc-Button-ButtonContent-Iohp5"
-        data-align="center"
-        data-component="buttonContent"
+      <button
+        class="prc-Button-ButtonBase-9n-Xk"
+        data-component="Button"
+        data-has-count="true"
+        data-loading="false"
+        data-no-visuals="true"
+        data-size="medium"
+        data-testid="account-profile"
+        data-variant="invisible"
+        title="Open account profile"
+        type="button"
       >
         <span
-          class="prc-Button-Label-FWkx3"
-          data-component="text"
+          class="prc-Button-ButtonContent-Iohp5"
+          data-align="center"
+          data-component="buttonContent"
         >
-          <div
-            class="prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-component="Stack"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-testid="avatar"
-            data-wrap="nowrap"
+          <span
+            class="prc-Button-Label-FWkx3"
+            data-component="text"
           >
-            <img
-              alt="octocat"
-              class="prc-Avatar-Avatar-0xaUi"
-              data-component="Avatar"
-              height="16"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-              style="--avatarSize-regular: 16px;"
-              width="16"
-            />
             <div
-              class="prc-Truncate-Truncate-2G1eo"
-              data-inline="true"
-              style="--truncate-max-width: 280px;"
-              title="octocat"
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-testid="avatar"
+              data-wrap="nowrap"
             >
-              octocat
+              <img
+                alt="octocat"
+                class="prc-Avatar-Avatar-0xaUi"
+                data-component="Avatar"
+                height="16"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+                style="--avatarSize-regular: 16px;"
+                width="16"
+              />
+              <div
+                class="prc-Truncate-Truncate-2G1eo"
+                data-inline="true"
+                style="--truncate-max-width: 280px;"
+                title="octocat"
+              >
+                octocat
+              </div>
             </div>
-          </div>
-        </span>
-        <span
-          class="prc-Button-VisualWrap-E4cnq"
-          data-component="trailingVisual"
-        >
-          <span
-            aria-hidden="true"
-            class="prc-Button-CounterLabel-5hAs4 prc-CounterLabel-CounterLabel-X-kRU"
-            data-component="ButtonCounter"
-            data-variant="secondary"
-          >
-            0
           </span>
           <span
-            class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+            class="prc-Button-VisualWrap-E4cnq"
+            data-component="trailingVisual"
           >
-             (
-            0
-            )
+            <span
+              aria-hidden="true"
+              class="prc-Button-CounterLabel-5hAs4 prc-CounterLabel-CounterLabel-X-kRU"
+              data-component="ButtonCounter"
+              data-variant="secondary"
+            >
+              0
+            </span>
+            <span
+              class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+            >
+               (
+              0
+              )
+            </span>
           </span>
         </span>
-      </span>
-    </button>
+      </button>
+    </span>
     <div
       class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
       data-align="center"

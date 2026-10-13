@@ -1,0 +1,307 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/previews/LinkedIssuesCard.tsx > caps a long list with a summary 1`] = `
+<div>
+  <div
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="stretch"
+    data-component="Stack"
+    data-direction="vertical"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-testid="linked-issues-card"
+    data-wrap="nowrap"
+  >
+    <button
+      aria-label="Open issue #1 Issue 1"
+      class="flex items-center gap-1 text-left text-xs hover:underline"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-issue-opened text-gitify-icon-open"
+        data-component="Octicon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="12"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="12"
+      >
+        <path
+          d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+        />
+        <path
+          d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+        />
+      </svg>
+      <span
+        class="font-semibold opacity-80 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        #1
+      </span>
+      <span
+        class="truncate opacity-90 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        Issue 1
+      </span>
+    </button>
+    <button
+      aria-label="Open issue #2 Issue 2"
+      class="flex items-center gap-1 text-left text-xs hover:underline"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-issue-opened text-gitify-icon-open"
+        data-component="Octicon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="12"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="12"
+      >
+        <path
+          d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+        />
+        <path
+          d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+        />
+      </svg>
+      <span
+        class="font-semibold opacity-80 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        #2
+      </span>
+      <span
+        class="truncate opacity-90 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        Issue 2
+      </span>
+    </button>
+    <button
+      aria-label="Open issue #3 Issue 3"
+      class="flex items-center gap-1 text-left text-xs hover:underline"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-issue-opened text-gitify-icon-open"
+        data-component="Octicon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="12"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="12"
+      >
+        <path
+          d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+        />
+        <path
+          d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+        />
+      </svg>
+      <span
+        class="font-semibold opacity-80 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        #3
+      </span>
+      <span
+        class="truncate opacity-90 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        Issue 3
+      </span>
+    </button>
+    <button
+      aria-label="Open issue #4 Issue 4"
+      class="flex items-center gap-1 text-left text-xs hover:underline"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-issue-opened text-gitify-icon-open"
+        data-component="Octicon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="12"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="12"
+      >
+        <path
+          d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+        />
+        <path
+          d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+        />
+      </svg>
+      <span
+        class="font-semibold opacity-80 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        #4
+      </span>
+      <span
+        class="truncate opacity-90 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        Issue 4
+      </span>
+    </button>
+    <button
+      aria-label="Open issue #5 Issue 5"
+      class="flex items-center gap-1 text-left text-xs hover:underline"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-issue-opened text-gitify-icon-open"
+        data-component="Octicon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="12"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="12"
+      >
+        <path
+          d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+        />
+        <path
+          d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+        />
+      </svg>
+      <span
+        class="font-semibold opacity-80 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        #5
+      </span>
+      <span
+        class="truncate opacity-90 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        Issue 5
+      </span>
+    </button>
+    <span
+      class="text-xxs opacity-80 prc-Text-Text-9mHv3"
+      data-component="Text"
+    >
+      +2 more
+    </span>
+  </div>
+</div>
+`;
+
+exports[`renderer/components/previews/LinkedIssuesCard.tsx > renders a short list of linked issues 1`] = `
+<div>
+  <div
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="stretch"
+    data-component="Stack"
+    data-direction="vertical"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-testid="linked-issues-card"
+    data-wrap="nowrap"
+  >
+    <button
+      aria-label="Open issue #1 Issue 1"
+      class="flex items-center gap-1 text-left text-xs hover:underline"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-issue-opened text-gitify-icon-open"
+        data-component="Octicon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="12"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="12"
+      >
+        <path
+          d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+        />
+        <path
+          d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+        />
+      </svg>
+      <span
+        class="font-semibold opacity-80 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        #1
+      </span>
+      <span
+        class="truncate opacity-90 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        Issue 1
+      </span>
+    </button>
+    <button
+      aria-label="Open issue #2 Issue 2"
+      class="flex items-center gap-1 text-left text-xs hover:underline"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="octicon octicon-issue-closed text-gitify-icon-closed"
+        data-component="Octicon"
+        display="inline-block"
+        fill="currentColor"
+        focusable="false"
+        height="12"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
+        viewBox="0 0 16 16"
+        width="12"
+      >
+        <path
+          d="M11.28 6.78a.75.75 0 0 0-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l3.5-3.5Z"
+        />
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Zm-1.5 0a6.5 6.5 0 1 0-13 0 6.5 6.5 0 0 0 13 0Z"
+        />
+      </svg>
+      <span
+        class="font-semibold opacity-80 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        #2
+      </span>
+      <span
+        class="truncate opacity-90 prc-Text-Text-9mHv3"
+        data-component="Text"
+      >
+        Issue 2
+      </span>
+    </button>
+  </div>
+</div>
+`;

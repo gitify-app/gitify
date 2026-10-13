@@ -534,7 +534,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
           isIssueNotification1: true,
           isPullRequestNotification0: false,
           isPullRequestNotification1: false,
-          lastComments: 1,
+          lastComments: 10,
           lastReplies: 10,
           lastReviews: 100,
           lastThreadedComments: 10,
@@ -554,6 +554,24 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query).toContain('parent');
       expect(query).toContain('subIssuesSummary');
       expect(query).not.toContain('@gated');
+    });
+
+    it('selects the subject node rather than the repository owner', async () => {
+      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+      const notification = mockGitHubCloudGitifyNotifications[0];
+
+      performGraphQLRequestStringSpy.mockResolvedValue({
+        node0: {
+          owner: { login: 'gitify-app', type: 'Organization' },
+          issue: { number: 1, title: 'An issue' },
+        },
+      } as never);
+
+      const results = await fetchNotificationDetailsForList([notification]);
+      const details = results.get(notification);
+
+      expect(details?.node).toEqual({ number: 1, title: 'An issue' });
+      expect(details?.owner).toEqual({ login: 'gitify-app', type: 'Organization' });
     });
 
     it('fetchNotificationDetailsForList strips gated fields for GitHub Enterprise Server accounts', async () => {

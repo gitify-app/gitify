@@ -6,17 +6,20 @@ import { Button, Stack } from '@primer/react';
 import { cn } from 'cn';
 
 import { useNotifications } from '../../hooks/useNotifications';
+import { useSettingsStore } from '../../stores';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
+import { PreviewCard } from '../primitives/PreviewCard';
 
-import { type GitifyNotification, Opacity, Size } from '../../types';
+import { type GitifyNotification, type Link, Opacity, Size } from '../../types';
 
 import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openRepository } from '../../utils/system/links';
 import { getChevronDetails } from '../../utils/ui/display';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
+import { ProfileCard } from '../previews/ProfileCard';
 
 export interface RepositoryHeaderProps {
   repoNotifications: GitifyNotification[];
@@ -53,6 +56,34 @@ export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
   );
 
   const Chevron = getChevronDetails(true, !isCollapsed, 'repository');
+  const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
+
+  const repository = repoNotifications[0].repository;
+  const owner = repository.owner;
+  const ownerProfileUrl = `${new URL(repository.htmlUrl).origin}/${owner.login}` as Link;
+
+  const repositoryButton = (
+    <Button
+      alignContent="center"
+      count={repoNotifications.length}
+      data-testid="open-repository"
+      onClick={(event: MouseEvent<HTMLElement>) => {
+        // Don't trigger onClick of parent element.
+        event.stopPropagation();
+        openRepository(repository);
+      }}
+      title="Open repository ↗"
+      variant="invisible"
+    >
+      <AvatarWithFallback
+        alt={repoName}
+        name={repoName}
+        size={Size.LARGE}
+        src={owner.avatarUrl}
+        userType={owner.type}
+      />
+    </Button>
+  );
 
   return (
     <Stack
@@ -65,26 +96,30 @@ export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
       direction="horizontal"
       onClick={onToggle}
     >
-      <Button
-        alignContent="center"
-        count={repoNotifications.length}
-        data-testid="open-repository"
-        onClick={(event: MouseEvent<HTMLElement>) => {
-          // Don't trigger onClick of parent element.
-          event.stopPropagation();
-          openRepository(repoNotifications[0].repository);
-        }}
-        title="Open repository ↗"
-        variant="invisible"
-      >
-        <AvatarWithFallback
-          alt={repoName}
-          name={repoName}
-          size={Size.LARGE}
-          src={repoNotifications[0].repository.owner.avatarUrl}
-          userType={repoNotifications[0].repository.owner.type}
-        />
-      </Button>
+      {detailedNotifications ? (
+        <PreviewCard
+          ariaLabel={`Preview owner: ${owner.login}`}
+          card={
+            <ProfileCard
+              avatarUrl={owner.avatarUrl}
+              bio={owner.bio}
+              company={owner.company}
+              description={owner.description}
+              followersCount={owner.followersCount}
+              location={owner.location}
+              login={owner.login}
+              profileUrl={ownerProfileUrl}
+              type={owner.type}
+              websiteUrl={owner.websiteUrl}
+            />
+          }
+          testId="repository-owner-preview"
+        >
+          {repositoryButton}
+        </PreviewCard>
+      ) : (
+        repositoryButton
+      )}
 
       {!isAnimatingExit && (
         <HoverGroup bgColor="group-hover:bg-gitify-repository">

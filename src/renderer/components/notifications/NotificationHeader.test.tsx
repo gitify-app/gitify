@@ -84,4 +84,18 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(props.notification.repository.htmlUrl);
   });
+
+  it('shows the owner profile preview on hovering the repository avatar - group by date', async () => {
+    const props: NotificationHeaderProps = {
+      notification: mockGitifyNotification,
+    };
+
+    renderWithProviders(<NotificationHeader {...props} />, {
+      settings: { ...mockSettings, groupBy: GroupBy.DATE },
+    });
+
+    await userEvent.hover(screen.getByTestId('view-repository'));
+
+    expect(await screen.findByTestId('owner-preview')).toBeInTheDocument();
+  });
 });

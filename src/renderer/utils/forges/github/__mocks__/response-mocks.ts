@@ -46,13 +46,47 @@ export const mockAuthor = mockAuthorResponseNode('notification-author');
 export const mockCommenter = mockAuthorResponseNode('notification-commenter');
 export const mockReplier = mockAuthorResponseNode('notification-replier');
 
-export function mockAuthorResponseNode(login: string): AuthorFieldsFragment {
+export function mockAuthorResponseNode(
+  login: string,
+  profile: {
+    bio?: string;
+    company?: string;
+    location?: string;
+    followers?: number;
+  } = {},
+): AuthorFieldsFragment {
   return {
     login: login,
     name: null,
     htmlUrl: `https://github.com/${login}` as Link,
     avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
     type: 'User',
+    bio: profile.bio ?? null,
+    company: profile.company ?? null,
+    location: profile.location ?? null,
+    followers: { totalCount: profile.followers ?? 0 },
+  } satisfies AuthorFieldsFragment;
+}
+
+/**
+ * Creates a mock organization author fragment [GraphQL API]
+ */
+export function mockOrganizationResponseNode(
+  login: string,
+  profile: {
+    description?: string;
+    location?: string;
+    websiteUrl?: string;
+  } = {},
+): AuthorFieldsFragment {
+  return {
+    login,
+    htmlUrl: `https://github.com/${login}` as Link,
+    avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+    type: 'Organization',
+    description: profile.description ?? null,
+    location: profile.location ?? null,
+    websiteUrl: (profile.websiteUrl as Link | undefined) ?? null,
   } satisfies AuthorFieldsFragment;
 }
 
@@ -68,6 +102,7 @@ export function mockDiscussionResponseNode(mocks: {
     number: 123,
     title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
+    bodyHTML: '',
     stateReason: mocks.stateReason ?? null,
     isAnswered: mocks.isAnswered,
     author: mockAuthor,
@@ -89,6 +124,7 @@ export function mockDiscussionResponseNode(mocks: {
 export function mockIssueResponseNode(mocks: {
   state: IssueState;
   stateReason?: IssueStateReason;
+  bodyHtml?: string;
 }): IssueDetailsFragment {
   return {
     __typename: 'Issue',
@@ -97,6 +133,7 @@ export function mockIssueResponseNode(mocks: {
     state: mocks.state,
     stateReason: mocks.stateReason ?? null,
     url: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
+    bodyHTML: mocks.bodyHtml ?? '',
     author: mockAuthor,
     labels: { nodes: [] },
     comments: { totalCount: 0, nodes: [] },
@@ -124,6 +161,7 @@ export function mockPullRequestResponseNode(mocks: {
   isDraft?: boolean;
   merged?: boolean;
   isInMergeQueue?: boolean;
+  bodyHtml?: string;
 }): PullRequestDetailsFragment {
   return {
     __typename: 'PullRequest',
@@ -134,6 +172,7 @@ export function mockPullRequestResponseNode(mocks: {
     merged: mocks.merged ?? false,
     isInMergeQueue: mocks.isInMergeQueue ?? false,
     url: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
+    bodyHTML: mocks.bodyHtml ?? '',
     author: mockAuthor,
     labels: { nodes: [] },
     comments: {

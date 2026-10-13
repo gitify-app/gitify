@@ -45,7 +45,10 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
       <ReviewsPill reviewers={notification.subject.reviewers ?? []} />
 
-      <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
+      <CommentsPill
+        commentCount={notification.subject.commentCount ?? 0}
+        comments={notification.subject.comments}
+      />
 
       <MilestonePill milestone={notification.subject.milestone!} />
 

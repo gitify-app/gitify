@@ -37,6 +37,7 @@ const config: CodegenConfig = {
         // enumType: 'native',
         scalars: {
           DateTime: 'string',
+          HTML: 'string',
           URI: '../../../../../types#Link',
         },
         useTypeImports: true,

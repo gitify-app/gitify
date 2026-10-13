@@ -599,3 +599,33 @@ img.emoji {
   margin: 0 0.05em 0 0.1em;
   vertical-align: -0.1em;
 }
+
+/**
+ * Compact GitHub-rendered markdown inside preview cards. Primer's
+ * `.markdown-body` styles are tuned for full-page bodies; shrink them to the
+ * menu bar's scale and trim the outer margins so the card reads tightly.
+ */
+.gitify-markdown-preview.markdown-body {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  background-color: transparent;
+}
+
+.gitify-markdown-preview.markdown-body > :first-child {
+  margin-top: 0;
+}
+
+.gitify-markdown-preview.markdown-body > :last-child {
+  margin-bottom: 0;
+}
+
+.gitify-markdown-preview.markdown-body pre,
+.gitify-markdown-preview.markdown-body code {
+  font-size: 0.6875rem;
+}
+
+.gitify-markdown-preview.markdown-body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}

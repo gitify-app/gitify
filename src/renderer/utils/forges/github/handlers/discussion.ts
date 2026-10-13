@@ -25,7 +25,7 @@ import type {
   DiscussionDetailsFragment,
 } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor } from './utils';
+import { getNotificationAuthor, mapGitifyComments } from './utils';
 
 class DiscussionHandler extends DefaultHandler {
   override readonly supportsMergedQueryEnrichment = true;
@@ -63,6 +63,7 @@ class DiscussionHandler extends DefaultHandler {
 
     const author = getNotificationAuthor([discussion.author]);
     const commenter = getNotificationAuthor([latestDiscussionComment?.author]);
+    const comments = mapGitifyComments(discussion.comments.nodes ?? []);
 
     return {
       number: discussion.number,
@@ -71,6 +72,8 @@ class DiscussionHandler extends DefaultHandler {
       author: author,
       commenter: commenter,
       commentCount: discussion.comments.totalCount,
+      bodyHtml: discussion.bodyHTML || undefined,
+      comments: comments.length ? comments : undefined,
       labels:
         discussion.labels?.nodes?.filter(Boolean).map((label) => ({
           name: label!.name,

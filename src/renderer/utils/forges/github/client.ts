@@ -16,13 +16,16 @@ import type {
 import { reportServerPollInterval } from '../../notifications/pollInterval';
 import { getGitHubCapabilities } from './capabilities';
 import {
+  type AuthorFieldsFragment,
+  type DiscussionDetailsFragment,
   FetchDiscussionByNumberDocument,
   type FetchDiscussionByNumberQuery,
   FetchIssueByNumberDocument,
   type FetchIssueByNumberQuery,
-  type FetchMergedDetailsTemplateQuery,
   FetchPullRequestByNumberDocument,
   type FetchPullRequestByNumberQuery,
+  type IssueDetailsFragment,
+  type PullRequestDetailsFragment,
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { stripGatedSelections } from './graphql/utils';
@@ -276,10 +279,26 @@ export async function fetchPullByNumber(
  * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
  * making the most efficient use of the available GitHub API quota limits.
  */
+export type MergedSubjectNode =
+  | IssueDetailsFragment
+  | PullRequestDetailsFragment
+  | DiscussionDetailsFragment;
+
+/**
+ * The subject node (issue, pull request, or discussion) plus its repository
+ * owner, as returned by the merged enrichment query. The owner is carried
+ * alongside the node so enrichment can attach owner profile detail without
+ * relying on field ordering.
+ */
+export interface MergedNotificationDetails {
+  node: MergedSubjectNode;
+  owner: AuthorFieldsFragment;
+}
+
 export async function fetchNotificationDetailsForList(
   notifications: RawGitifyNotification[],
-): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
-  const results = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
+): Promise<Map<RawGitifyNotification, MergedNotificationDetails>> {
+  const results = new Map<RawGitifyNotification, MergedNotificationDetails>();
 
   if (!notifications.length) {
     return results;
@@ -340,8 +359,20 @@ export async function fetchNotificationDetailsForList(
     if (!repoData) {
       continue; // Skip if no data for this alias
     }
-    const fragment = Object.values(repoData)[0] as FetchMergedDetailsTemplateQuery['repository'];
-    results.set(notification, fragment);
+
+    // The repository selection contains `owner` plus exactly one subject node
+    // (issue/pullRequest/discussion, gated by @include). Pick the node
+    // explicitly rather than by field order.
+    const owner = repoData.owner as AuthorFieldsFragment;
+    const node = (repoData.discussion ?? repoData.issue ?? repoData.pullRequest) as
+      | MergedSubjectNode
+      | undefined;
+
+    if (!node) {
+      continue; // Skip if no subject node was returned for this alias
+    }
+
+    results.set(notification, { node, owner });
   }
 
   return results;

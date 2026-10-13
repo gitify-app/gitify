@@ -68,6 +68,26 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
+  it('shows the subject body preview on hovering the type icon', async () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        bodyHtml: '<p>This is the issue body</p>',
+      },
+    };
+
+    renderWithProviders(
+      <NotificationRow notification={notification} isRepositoryAnimatingExit={false} />,
+      { settings: { ...mockSettings, detailedNotifications: true } },
+    );
+
+    await userEvent.hover(screen.getByLabelText(`Preview body: ${notification.display.title}`));
+
+    expect(await screen.findByTestId('notification-body-preview')).toBeInTheDocument();
+    expect(screen.getByText('This is the issue body')).toBeInTheDocument();
+  });
+
   it('should render itself & its children - hide numbers', async () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,

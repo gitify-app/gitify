@@ -55,6 +55,19 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     );
   });
 
+  it('shows the repository owner avatar card on hover', async () => {
+    renderWithProviders(<RepositoryHeader {...props} />);
+
+    await userEvent.hover(screen.getByTestId('open-repository'));
+
+    expect(await screen.findByTestId('repository-owner-preview')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', {
+        name: `Open profile: ${props.repoNotifications[0].repository.owner.login}`,
+      }),
+    ).toBeInTheDocument();
+  });
+
   it('should mark a repo as read', async () => {
     const markNotificationsAsReadMock = vi.fn();
 

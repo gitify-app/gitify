@@ -20,7 +20,12 @@ import { IconColor } from '../../../../types';
 import { fetchIssueByNumber } from '../client';
 import type { IssueDetailsFragment } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor, mapIssueFieldColor, mapIssueTypeColor } from './utils';
+import {
+  getNotificationAuthor,
+  mapGitifyComments,
+  mapIssueFieldColor,
+  mapIssueTypeColor,
+} from './utils';
 
 /**
  * A single node in the `issueFieldValues` GraphQL connection.
@@ -105,10 +110,12 @@ class IssueHandler extends DefaultHandler {
 
     const issueState = issue.stateReason ?? issue.state;
 
-    const issueComment = issue.comments?.nodes?.[0];
+    const comments = mapGitifyComments(issue.comments?.nodes);
+    const latestComment = comments.at(-1);
+    const issueComment = issue.comments?.nodes?.at(-1);
 
     const author = getNotificationAuthor([issue.author]);
-    const commenter = getNotificationAuthor([issueComment?.author]);
+    const commenter = latestComment?.author;
     const issueUser = commenter ?? author;
 
     const issueReactionCount = issueComment?.reactions.totalCount ?? issue.reactions.totalCount;
@@ -121,6 +128,8 @@ class IssueHandler extends DefaultHandler {
       author: author,
       commenter: commenter,
       commentCount: issue.comments.totalCount,
+      bodyHtml: issue.bodyHTML || undefined,
+      comments: comments.length ? comments : undefined,
       labels:
         issue.labels?.nodes?.filter(Boolean).map((label) => ({
           name: label!.name,

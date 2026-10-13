@@ -21,6 +21,10 @@ query FetchMergedDetailsTemplate(
 
 fragment MergedDetailsQueryTemplate on Query {
   repository(owner: $ownerINDEX, name: $nameINDEX) {
+    owner {
+      ...AuthorFields
+    }
+
     discussion(number: $numberINDEX) @include(if: $isDiscussionNotificationINDEX) {
       ...DiscussionDetails
     }

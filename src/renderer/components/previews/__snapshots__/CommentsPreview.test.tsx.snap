@@ -1,0 +1,80 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/previews/CommentsPreview.tsx > renders a single comment 1`] = `
+<div>
+  <div
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="stretch"
+    data-component="Stack"
+    data-direction="vertical"
+    data-gap="none"
+    data-justify="start"
+    data-padding="none"
+    data-testid="comments-preview"
+    data-wrap="nowrap"
+  >
+    <div
+      class="flex flex-col gap-1 py-1.5"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-gap="condensed"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <div
+          class="prc-Stack-Stack-UQ9k6"
+          data-align="center"
+          data-component="Stack"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-testid="avatar"
+          data-wrap="nowrap"
+        >
+          <img
+            alt="user-1"
+            class="prc-Avatar-Avatar-0xaUi"
+            data-component="Avatar"
+            height="14"
+            src="https://avatars.githubusercontent.com/u/583231?v=4"
+            style="--avatarSize-regular: 14px;"
+            width="14"
+          />
+        </div>
+        <span
+          class="text-xs font-semibold prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          user-1
+        </span>
+        <a
+          aria-label="Open comment by user-1"
+          class="ml-auto text-xxs hover:underline opacity-80"
+          href="https://github.com/gitify-app/notifications-test/issues/1#issuecomment-1"
+        >
+          <relative-time
+            data-component="RelativeTime"
+            datetime="2024-01-01T00:00:00.000Z"
+          >
+            Jan 1, 2024
+          </relative-time>
+        </a>
+      </div>
+      <div
+        class="gitify-markdown-preview markdown-body text-xs break-words"
+        data-testid="comment-body"
+      >
+        <p>
+          Comment 1
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

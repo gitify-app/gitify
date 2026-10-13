@@ -14,6 +14,7 @@ import {
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
+import { PreviewCard, closeActivePreview } from '../primitives/PreviewCard';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
@@ -24,6 +25,7 @@ import {
 import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openNotification } from '../../utils/system/links';
+import { SubjectBodyPreview } from '../previews/SubjectBodyPreview';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
 import { NotificationTitle } from './NotificationTitle';
@@ -45,6 +47,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
   const showNumber = useSettingsStore((s) => s.showNumber);
+  const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
@@ -108,6 +111,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
+      onMouseEnter={closeActivePreview}
       style={{ '--gitify-actions': enabledActionCount } as CSSProperties}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
@@ -138,7 +142,27 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             justify="space-between"
             title={notification.display.title}
           >
-            <NotificationTitle title={notification.subject.title} />
+            {detailedNotifications && notification.subject.bodyHtml ? (
+              <PreviewCard
+                anchorClassName="contents"
+                ariaLabel={`Preview body: ${notification.display.title}`}
+                card={
+                  <SubjectBodyPreview
+                    bodyHtml={notification.subject.bodyHtml}
+                    icon={notification.display.icon.type}
+                    iconColor={notification.display.icon.color}
+                    number={notification.display.number}
+                    title={notification.subject.title}
+                    typeLabel={notification.display.type}
+                  />
+                }
+                testId="notification-body-preview"
+              >
+                <NotificationTitle title={notification.subject.title} />
+              </PreviewCard>
+            ) : (
+              <NotificationTitle title={notification.subject.title} />
+            )}
             <Text
               className={cn(
                 'text-xxs ml-auto mr-2',

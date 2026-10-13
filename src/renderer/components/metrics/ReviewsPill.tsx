@@ -5,6 +5,7 @@ import { CommentIcon } from '@primer/octicons-react';
 import { type GitifyPullRequestReviewer, IconColor } from '../../types';
 
 import { getPullRequestReviewIcon, type PullRequestReviewGroup } from '../../utils/ui/icons';
+import { ReviewsCard } from '../previews/ReviewsCard';
 import { MetricPill } from './MetricPill';
 
 export interface ReviewsPillProps {
@@ -48,16 +49,21 @@ export const ReviewsPill: FC<ReviewsPillProps> = ({ reviewers }) => {
             icon={icon.type}
             key={review.state}
             metric={review.users.length}
+            preview={<ReviewsCard reviewers={reviewers} />}
+            previewTestId="reviews-preview"
           />
         );
       })}
 
       {threadTotal ? (
         <MetricPill
+          ariaLabel={formatReviewThreadDescription(reviewersWithThreads)}
           color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
           contents={formatReviewThreadDescription(reviewersWithThreads)}
           icon={CommentIcon}
           metric={`${resolvedThreadTotal}/${threadTotal}`}
+          preview={<ReviewsCard reviewers={reviewers} />}
+          previewTestId="reviews-preview"
         />
       ) : null}
     </>

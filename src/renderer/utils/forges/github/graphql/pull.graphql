@@ -22,6 +22,7 @@ fragment PullRequestDetails on PullRequest {
   number
   title
   url
+  bodyHTML
   state
   merged
   isDraft
@@ -36,7 +37,9 @@ fragment PullRequestDetails on PullRequest {
     totalCount
     nodes {
       updatedAt
+      createdAt
       url
+      bodyHTML
       author {
         ...AuthorFields
       }
@@ -78,6 +81,9 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      title
+      state
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {

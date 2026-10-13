@@ -77,42 +77,47 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             data-padding="none"
             data-wrap="nowrap"
           >
-            <button
-              class="text-xs font-medium"
-              data-testid="view-repository"
-              title="Open repository ↗"
-              type="button"
+            <span
+              aria-label="Preview owner: gitify-app"
+              class="inline-flex"
             >
-              <div
-                class="prc-Stack-Stack-UQ9k6"
-                data-align="center"
-                data-component="Stack"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-testid="avatar"
-                data-wrap="nowrap"
+              <button
+                class="text-xs font-medium"
+                data-testid="view-repository"
+                title="Open repository ↗"
+                type="button"
               >
-                <img
-                  alt="gitify-app/notifications-test"
-                  class="prc-Avatar-Avatar-0xaUi"
-                  data-component="Avatar"
-                  height="14"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  style="--avatarSize-regular: 14px;"
-                  width="14"
-                />
                 <div
-                  class="prc-Truncate-Truncate-2G1eo"
-                  data-inline="true"
-                  style="--truncate-max-width: 280px;"
-                  title="gitify-app/notifications-test"
+                  class="prc-Stack-Stack-UQ9k6"
+                  data-align="center"
+                  data-component="Stack"
+                  data-direction="horizontal"
+                  data-gap="condensed"
+                  data-justify="start"
+                  data-padding="none"
+                  data-testid="avatar"
+                  data-wrap="nowrap"
                 >
-                  gitify-app/notifications-test
+                  <img
+                    alt="gitify-app/notifications-test"
+                    class="prc-Avatar-Avatar-0xaUi"
+                    data-component="Avatar"
+                    height="14"
+                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                    style="--avatarSize-regular: 14px;"
+                    width="14"
+                  />
+                  <div
+                    class="prc-Truncate-Truncate-2G1eo"
+                    data-inline="true"
+                    style="--truncate-max-width: 280px;"
+                    title="gitify-app/notifications-test"
+                  >
+                    gitify-app/notifications-test
+                  </div>
                 </div>
-              </div>
-            </button>
+              </button>
+            </span>
             <div
               class="text-xxs opacity-50"
             >
@@ -160,33 +165,38 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           data-padding="none"
           data-wrap="wrap"
         >
-          <button
-            data-testid="view-profile"
-            title="gitify-app"
-            type="button"
+          <span
+            aria-label="Preview profile: gitify-app"
+            class="inline-flex"
           >
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-component="Stack"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-testid="avatar"
-              data-wrap="nowrap"
+            <button
+              data-testid="view-profile"
+              title="gitify-app"
+              type="button"
             >
-              <img
-                alt="gitify-app"
-                class="prc-Avatar-Avatar-0xaUi"
-                data-component="Avatar"
-                height="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                style="--avatarSize-regular: 14px;"
-                width="14"
-              />
-            </div>
-          </button>
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-component="Stack"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+              </div>
+            </button>
+          </span>
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
@@ -214,121 +224,105 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="flex gap-1"
           >
-            <button
-              aria-describedby="_r_1_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-check text-gitify-icon-open"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_1_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              octocat approved these changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
-            <button
-              aria-describedby="_r_2_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-file-diff text-gitify-icon-closed"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_2_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              gitify-app requested changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
           </div>
         </div>
@@ -457,7 +451,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_6_"
+        aria-describedby="_r_4_"
         type="button"
       >
         <svg
@@ -487,7 +481,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-component="Tooltip"
         data-direction="e"
-        id="_r_6_"
+        id="_r_4_"
         popover="auto"
         role="tooltip"
       >
@@ -543,33 +537,38 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           data-padding="none"
           data-wrap="wrap"
         >
-          <button
-            data-testid="view-profile"
-            title="gitify-app"
-            type="button"
+          <span
+            aria-label="Preview profile: gitify-app"
+            class="inline-flex"
           >
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-component="Stack"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-testid="avatar"
-              data-wrap="nowrap"
+            <button
+              data-testid="view-profile"
+              title="gitify-app"
+              type="button"
             >
-              <img
-                alt="gitify-app"
-                class="prc-Avatar-Avatar-0xaUi"
-                data-component="Avatar"
-                height="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                style="--avatarSize-regular: 14px;"
-                width="14"
-              />
-            </div>
-          </button>
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-component="Stack"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+              </div>
+            </button>
+          </span>
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
@@ -597,121 +596,105 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="flex gap-1"
           >
-            <button
-              aria-describedby="_r_7_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-check text-gitify-icon-open"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_7_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              octocat approved these changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
-            <button
-              aria-describedby="_r_8_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-file-diff text-gitify-icon-closed"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_8_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              gitify-app requested changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
           </div>
         </div>
@@ -926,33 +909,38 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           data-padding="none"
           data-wrap="wrap"
         >
-          <button
-            data-testid="view-profile"
-            title="gitify-app"
-            type="button"
+          <span
+            aria-label="Preview profile: gitify-app"
+            class="inline-flex"
           >
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-component="Stack"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-testid="avatar"
-              data-wrap="nowrap"
+            <button
+              data-testid="view-profile"
+              title="gitify-app"
+              type="button"
             >
-              <img
-                alt="gitify-app"
-                class="prc-Avatar-Avatar-0xaUi"
-                data-component="Avatar"
-                height="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                style="--avatarSize-regular: 14px;"
-                width="14"
-              />
-            </div>
-          </button>
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-component="Stack"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+              </div>
+            </button>
+          </span>
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
@@ -980,121 +968,105 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="flex gap-1"
           >
-            <button
-              aria-describedby="_r_d_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-check text-gitify-icon-open"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_d_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              octocat approved these changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
-            <button
-              aria-describedby="_r_e_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-file-diff text-gitify-icon-closed"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_e_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              gitify-app requested changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
           </div>
         </div>
@@ -1223,7 +1195,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_i_"
+        aria-describedby="_r_g_"
         type="button"
       >
         <svg
@@ -1253,7 +1225,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-component="Tooltip"
         data-direction="e"
-        id="_r_i_"
+        id="_r_g_"
         popover="auto"
         role="tooltip"
       >
@@ -1309,33 +1281,38 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           data-padding="none"
           data-wrap="wrap"
         >
-          <button
-            data-testid="view-profile"
-            title="gitify-app"
-            type="button"
+          <span
+            aria-label="Preview profile: gitify-app"
+            class="inline-flex"
           >
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-component="Stack"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-testid="avatar"
-              data-wrap="nowrap"
+            <button
+              data-testid="view-profile"
+              title="gitify-app"
+              type="button"
             >
-              <img
-                alt="gitify-app"
-                class="prc-Avatar-Avatar-0xaUi"
-                data-component="Avatar"
-                height="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                style="--avatarSize-regular: 14px;"
-                width="14"
-              />
-            </div>
-          </button>
+              <div
+                class="prc-Stack-Stack-UQ9k6"
+                data-align="center"
+                data-component="Stack"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-testid="avatar"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt="gitify-app"
+                  class="prc-Avatar-Avatar-0xaUi"
+                  data-component="Avatar"
+                  height="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  style="--avatarSize-regular: 14px;"
+                  width="14"
+                />
+              </div>
+            </button>
+          </span>
           <div
             class="prc-Stack-Stack-UQ9k6"
             data-align="stretch"
@@ -1363,121 +1340,105 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
           <div
             class="flex gap-1"
           >
-            <button
-              aria-describedby="_r_j_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-check text-gitify-icon-open"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_j_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              octocat approved these changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-check text-gitify-icon-open"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
-            <button
-              aria-describedby="_r_k_"
-              type="button"
-            >
-              <span
-                class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
-                data-component="Label"
-                data-size="small"
-                data-variant="secondary"
-                tabindex="0"
-              >
-                <div
-                  class="prc-Stack-Stack-UQ9k6"
-                  data-align="center"
-                  data-component="Stack"
-                  data-direction="horizontal"
-                  data-gap="none"
-                  data-justify="start"
-                  data-padding="none"
-                  data-wrap="nowrap"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-file-diff text-gitify-icon-closed"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="12"
-                  >
-                    <path
-                      d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
-                    />
-                  </svg>
-                  <span
-                    class="text-xxs px-1 prc-Text-Text-9mHv3"
-                    data-component="Text"
-                  >
-                    1
-                  </span>
-                </div>
-              </span>
-            </button>
             <span
-              aria-hidden="true"
-              class="prc-TooltipV2-Tooltip-tLeuB"
-              data-component="Tooltip"
-              data-direction="s"
-              id="_r_k_"
-              popover="auto"
-              role="tooltip"
+              class="inline-flex"
             >
-              gitify-app requested changes
+              <button
+                type="button"
+              >
+                <span
+                  class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+                  data-component="Label"
+                  data-size="small"
+                  data-variant="secondary"
+                  tabindex="0"
+                >
+                  <div
+                    class="prc-Stack-Stack-UQ9k6"
+                    data-align="center"
+                    data-component="Stack"
+                    data-direction="horizontal"
+                    data-gap="none"
+                    data-justify="start"
+                    data-padding="none"
+                    data-wrap="nowrap"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="octicon octicon-file-diff text-gitify-icon-closed"
+                      data-component="Octicon"
+                      display="inline-block"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      overflow="visible"
+                      style="vertical-align: text-bottom;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16H2.75A1.75 1.75 0 0 1 1 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25V4.664a.25.25 0 0 0-.073-.177l-2.914-2.914a.25.25 0 0 0-.177-.073ZM8 3.25a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0V7h-1.5a.75.75 0 0 1 0-1.5h1.5V4A.75.75 0 0 1 8 3.25Zm-3 8a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+                      />
+                    </svg>
+                    <span
+                      class="text-xxs px-1 prc-Text-Text-9mHv3"
+                      data-component="Text"
+                    >
+                      1
+                    </span>
+                  </div>
+                </span>
+              </button>
             </span>
           </div>
         </div>

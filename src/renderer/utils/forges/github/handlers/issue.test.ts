@@ -125,7 +125,9 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         nodes: [
           {
             author: mockCommenter,
+            createdAt: '2026-01-01T17:00:00Z',
             url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
+            bodyHTML: '<p>This is a comment</p>',
             reactions: {
               totalCount: 0,
             },
@@ -163,6 +165,19 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
           htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
+        comments: [
+          {
+            author: {
+              login: mockCommenter.login,
+              avatarUrl: mockCommenter.avatarUrl,
+              htmlUrl: mockCommenter.htmlUrl,
+              type: mockCommenter.type,
+            },
+            bodyHtml: '<p>This is a comment</p>',
+            url: 'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
+            createdAt: '2026-01-01T17:00:00Z',
+          },
+        ],
         commentCount: 1,
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,

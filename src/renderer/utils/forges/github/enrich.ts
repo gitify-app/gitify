@@ -1,9 +1,9 @@
 import type { GitifySubject, RawGitifyNotification } from '../../../types';
 
 import { rendererLogError, rendererLogWarn, toError } from '../../core/logger';
-import { fetchNotificationDetailsForList } from './client';
-import type { FetchMergedDetailsTemplateQuery } from './graphql/generated/graphql';
+import { fetchNotificationDetailsForList, type MergedNotificationDetails } from './client';
 import { createNotificationHandler } from './handlers';
+import { getNotificationAuthor } from './handlers/utils';
 
 /**
  * Maximum number of notifications batched into a single merged GraphQL query
@@ -37,7 +37,7 @@ export async function enrichGitHubNotifications(
 
 async function fetchInBatches(
   notifications: RawGitifyNotification[],
-): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
+): Promise<Map<RawGitifyNotification, MergedNotificationDetails>> {
   const supportedNotifications = notifications.filter(
     (notification) => createNotificationHandler(notification).supportsMergedQueryEnrichment,
   );
@@ -58,15 +58,15 @@ async function fetchInBatches(
           `Failed to fetch merged notification details for batch ${index + 1}`,
           toError(err),
         );
-        return new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
+        return new Map<RawGitifyNotification, MergedNotificationDetails>();
       }
     }),
   );
 
-  const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
+  const merged = new Map<RawGitifyNotification, MergedNotificationDetails>();
   for (const results of batchResults) {
-    for (const [notification, repository] of results) {
-      merged.set(notification, repository);
+    for (const [notification, details] of results) {
+      merged.set(notification, details);
     }
   }
 
@@ -75,13 +75,13 @@ async function fetchInBatches(
 
 async function enrichSingle(
   notification: RawGitifyNotification,
-  fetchedData: FetchMergedDetailsTemplateQuery['repository'] | undefined,
+  details: MergedNotificationDetails | undefined,
 ): Promise<RawGitifyNotification> {
   let additionalSubjectDetails: Partial<GitifySubject> = {};
 
   try {
     const handler = createNotificationHandler(notification);
-    additionalSubjectDetails = await handler.enrich(notification, fetchedData);
+    additionalSubjectDetails = await handler.enrich(notification, details?.node);
   } catch (err) {
     rendererLogError(
       'enrichGitHubNotifications',
@@ -97,8 +97,25 @@ async function enrichSingle(
     return notification;
   }
 
+  const owner = details?.owner;
+  const ownerDetails = owner ? getNotificationAuthor([owner]) : undefined;
+
   return {
     ...notification,
+    repository: ownerDetails
+      ? {
+          ...notification.repository,
+          owner: {
+            ...notification.repository.owner,
+            bio: ownerDetails.bio,
+            company: ownerDetails.company,
+            location: ownerDetails.location,
+            followersCount: ownerDetails.followersCount,
+            description: ownerDetails.description,
+            websiteUrl: ownerDetails.websiteUrl,
+          },
+        }
+      : notification.repository,
     subject: {
       ...notification.subject,
       ...additionalSubjectDetails,

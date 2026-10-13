@@ -1,4 +1,5 @@
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
+import { mockIssueResponseNode } from './__mocks__/response-mocks';
 
 import type { GitifyRepository, Link } from '../../../types';
 
@@ -57,6 +58,51 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
       'enrichGitHubNotifications',
       'Continuing with base notification details',
     );
+  });
+
+  it('attaches repository owner profile detail from the merged query', async () => {
+    const notification = mockPartialGitifyNotification({
+      title: 'Enrichable issue',
+      type: 'Issue',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+    });
+    notification.repository = {
+      name: 'notifications-test',
+      fullName: 'gitify-app/notifications-test',
+      htmlUrl: 'https://github.com/gitify-app/notifications-test' as Link,
+      owner: {
+        login: 'gitify-app',
+        avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+        type: 'Organization',
+      },
+    };
+
+    vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue(
+      new Map([
+        [
+          notification,
+          {
+            node: mockIssueResponseNode({ state: 'OPEN' }),
+            owner: {
+              login: 'gitify-app',
+              htmlUrl: 'https://github.com/gitify-app' as Link,
+              avatarUrl: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
+              type: 'Organization',
+              description: 'A test organization',
+              location: 'Remote',
+              websiteUrl: 'https://gitify.io' as Link,
+            },
+          },
+        ],
+      ]) as never,
+    );
+
+    const [result] = await enrichGitHubNotifications([notification]);
+
+    expect(result.subject.state).toBe('OPEN');
+    expect(result.repository.owner.description).toBe('A test organization');
+    expect(result.repository.owner.location).toBe('Remote');
+    expect(result.repository.owner.websiteUrl).toBe('https://gitify.io');
   });
 
   it('preserves the original subject reference only when enrichment fails', async () => {

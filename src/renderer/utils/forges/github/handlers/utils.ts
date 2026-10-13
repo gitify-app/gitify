@@ -1,4 +1,4 @@
-import type { GitifyNotificationUser, Link } from '../../../../types';
+import type { GitifyComment, GitifyNotificationUser, Link } from '../../../../types';
 import { IconColor } from '../../../../types';
 
 import type {
@@ -24,11 +24,70 @@ export function getNotificationAuthor(users: AuthorInput[]): GitifyNotificationU
         avatarUrl: user.avatarUrl,
         htmlUrl: user.htmlUrl,
         type: user.type,
+        ...getActorProfile(user),
       };
     }
   }
 
   return undefined;
+}
+
+/**
+ * Extract the optional profile detail (user bio/company/location/followers or
+ * organization description/location/website) an actor may carry, for the
+ * hover profile card. Only present, non-empty values are returned so actors
+ * without detail keep a minimal shape.
+ */
+function getActorProfile(
+  user: AuthorFieldsFragment | GitifyNotificationUser,
+): Partial<GitifyNotificationUser> {
+  const profile: Partial<GitifyNotificationUser> = {};
+
+  if ('bio' in user && user.bio) {
+    profile.bio = user.bio;
+  }
+  if ('company' in user && user.company) {
+    profile.company = user.company;
+  }
+  if ('location' in user && user.location) {
+    profile.location = user.location;
+  }
+  if ('followers' in user && user.followers && user.followers.totalCount > 0) {
+    profile.followersCount = user.followers.totalCount;
+  }
+  if ('description' in user && user.description) {
+    profile.description = user.description;
+  }
+  if ('websiteUrl' in user && user.websiteUrl) {
+    profile.websiteUrl = user.websiteUrl;
+  }
+
+  return profile;
+}
+
+/**
+ * Map fetched comment nodes to Gitify comments for preview, preserving their
+ * fetched order (oldest first, since the query uses `last: N`).
+ */
+export function mapGitifyComments(
+  nodes:
+    | ReadonlyArray<{
+        author: AuthorFieldsFragment | null;
+        bodyHTML: string;
+        url: Link;
+        createdAt: string;
+      } | null>
+    | null
+    | undefined,
+): GitifyComment[] {
+  return (nodes ?? [])
+    .filter((node): node is NonNullable<typeof node> => node !== null)
+    .map((node) => ({
+      author: getNotificationAuthor([node.author]),
+      bodyHtml: node.bodyHTML,
+      url: node.url,
+      createdAt: node.createdAt,
+    }));
 }
 
 /**
