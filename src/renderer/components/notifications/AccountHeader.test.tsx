@@ -48,6 +48,17 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     expect(onToggle).not.toHaveBeenCalled();
   });
 
+  it('shows the account avatar card on hover', async () => {
+    renderWithProviders(<AccountHeader {...props} />);
+
+    await userEvent.hover(screen.getByTestId('account-profile'));
+
+    expect(await screen.findByTestId('account-preview')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: `Open profile: ${props.account.user!.login}` }),
+    ).toBeInTheDocument();
+  });
+
   it('should open my issues when clicked', async () => {
     const openHostIssuesSpy = vi.spyOn(links, 'openHostIssues').mockImplementation(vi.fn());
 

@@ -14,6 +14,17 @@ fragment AuthorFields on Actor {
   }
   ... on User {
     name
+    bio
+    company
+    location
+    followers {
+      totalCount
+    }
+  }
+  ... on Organization {
+    description
+    location
+    websiteUrl
   }
 }
 

@@ -33,7 +33,9 @@ export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
   const isNonHuman = isNonHumanUser(userType);
   const defaultUserIcon = icon ?? getDefaultUserIcon(userType);
 
-  // TODO explore using AnchoredOverlay component (https://primer.style/components/anchored-overlay/react/alpha) to render Avatar Card on hover
+  // Avatar hover cards are composed at the call sites with `PreviewCard` +
+  // `ProfileCard`; this component stays a pure avatar primitive with no hover
+  // behaviour of its own.
   return (
     <Stack align="center" data-testid="avatar" direction="horizontal" gap="condensed">
       {!src || hasBrokenAvatarSource ? (

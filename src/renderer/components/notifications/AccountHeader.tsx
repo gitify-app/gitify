@@ -5,15 +5,24 @@ import { Button, Stack } from '@primer/react';
 
 import { cn } from 'cn';
 
+import { useSettingsStore } from '../../stores';
+
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
+import { PreviewCard } from '../primitives/PreviewCard';
 
 import { type Account, type GitifyError, Size } from '../../types';
 
 import { getAdapter } from '../../utils/forges/registry';
-import { openAccountProfile, openHostIssues, openHostPulls } from '../../utils/system/links';
+import {
+  getAccountProfileUrl,
+  openAccountProfile,
+  openHostIssues,
+  openHostPulls,
+} from '../../utils/system/links';
 import { getChevronDetails } from '../../utils/ui/display';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
+import { ProfileCard } from '../previews/ProfileCard';
 
 export interface AccountHeaderProps {
   account: Account;
@@ -31,6 +40,29 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
   onToggle,
 }) => {
   const Chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
+  const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
+
+  const profileButton = (
+    <Button
+      alignContent="center"
+      count={notificationCount}
+      data-testid="account-profile"
+      onClick={(event: MouseEvent<HTMLElement>) => {
+        // Don't trigger onClick of parent element.
+        event.stopPropagation();
+        openAccountProfile(account);
+      }}
+      title="Open account profile"
+      variant="invisible"
+    >
+      <AvatarWithFallback
+        alt={getAdapter(account).formatUserLogin(account.user!.login)}
+        name={getAdapter(account).formatUserLogin(account.user!.login)}
+        size={Size.MEDIUM}
+        src={account.user!.avatar ?? undefined}
+      />
+    </Button>
+  );
 
   return (
     <Stack
@@ -41,25 +73,25 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
       direction="horizontal"
       onClick={onToggle}
     >
-      <Button
-        alignContent="center"
-        count={notificationCount}
-        data-testid="account-profile"
-        onClick={(event: MouseEvent<HTMLElement>) => {
-          // Don't trigger onClick of parent element.
-          event.stopPropagation();
-          openAccountProfile(account);
-        }}
-        title="Open account profile"
-        variant="invisible"
-      >
-        <AvatarWithFallback
-          alt={getAdapter(account).formatUserLogin(account.user!.login)}
-          name={getAdapter(account).formatUserLogin(account.user!.login)}
-          size={Size.MEDIUM}
-          src={account.user!.avatar ?? undefined}
-        />
-      </Button>
+      {detailedNotifications && account.user ? (
+        <PreviewCard
+          ariaLabel={`Preview account: ${account.user.login}`}
+          card={
+            <ProfileCard
+              avatarUrl={account.user.avatar ?? undefined}
+              login={account.user.login}
+              name={account.user.name}
+              profileUrl={getAccountProfileUrl(account)}
+              type="User"
+            />
+          }
+          testId="account-preview"
+        >
+          {profileButton}
+        </PreviewCard>
+      ) : (
+        profileButton
+      )}
 
       <HoverGroup
         bgColor={

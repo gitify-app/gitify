@@ -32,10 +32,14 @@ export function openHostPulls(account: Account) {
   openExternalLink(getAccountAdapter(account).getPullRequestsUrl());
 }
 
-export function openAccountProfile(account: Account) {
+export function getAccountProfileUrl(account: Account): Link {
   const url = new URL(getAccountOrigin(account));
   url.pathname = account.user!.login;
-  openExternalLink(url.toString() as Link);
+  return url.toString() as Link;
+}
+
+export function openAccountProfile(account: Account) {
+  openExternalLink(getAccountProfileUrl(account));
 }
 
 export function openUserProfile(user: GitifyNotificationUser) {

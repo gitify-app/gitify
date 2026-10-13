@@ -62,3 +62,19 @@ export function parseInlineCode(text: string): ParsedCodePart[] {
     content: match.groups?.code ?? match.groups?.text ?? '',
   }));
 }
+
+/** Maximum characters of preview body text rendered before truncation. */
+export const PREVIEW_BODY_MAX_LENGTH = 600;
+
+/**
+ * Truncate preview body text to a maximum length, appending an ellipsis when
+ * the text is cut. Keeps the preview card readable without rendering an
+ * unbounded issue or pull request body.
+ */
+export function truncateText(text: string, maxLength = PREVIEW_BODY_MAX_LENGTH): string {
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  return `${text.slice(0, maxLength).trimEnd()}…`;
+}

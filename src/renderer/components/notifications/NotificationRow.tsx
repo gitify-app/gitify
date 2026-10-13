@@ -14,6 +14,7 @@ import {
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
+import { PreviewCard } from '../primitives/PreviewCard';
 
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
@@ -24,6 +25,7 @@ import {
 import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openNotification } from '../../utils/system/links';
+import { SubjectBodyPreview } from '../previews/SubjectBodyPreview';
 import { NotificationFooter } from './NotificationFooter';
 import { NotificationHeader } from './NotificationHeader';
 import { NotificationTitle } from './NotificationTitle';
@@ -45,6 +47,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
   const showNumber = useSettingsStore((s) => s.showNumber);
+  const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
@@ -111,15 +114,27 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       style={{ '--gitify-actions': enabledActionCount } as CSSProperties}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
-        <Tooltip direction="e" text={notification.display.type}>
-          <button type="button">
-            <NotificationIcon
-              aria-label={notification.display.type}
-              className={notification.display.icon.color}
-              size={Size.LARGE}
-            />
-          </button>
-        </Tooltip>
+        {detailedNotifications && notification.subject.bodyHtml ? (
+          <PreviewCard
+            ariaLabel={`Preview body: ${notification.display.title}`}
+            card={<SubjectBodyPreview bodyHtml={notification.subject.bodyHtml} />}
+            testId="notification-body-preview"
+          >
+            <button aria-label={notification.display.type} type="button">
+              <NotificationIcon className={notification.display.icon.color} size={Size.LARGE} />
+            </button>
+          </PreviewCard>
+        ) : (
+          <Tooltip direction="e" text={notification.display.type}>
+            <button type="button">
+              <NotificationIcon
+                aria-label={notification.display.type}
+                className={notification.display.icon.color}
+                size={Size.LARGE}
+              />
+            </button>
+          </Tooltip>
+        )}
 
         <Stack
           className={cn('cursor-pointer text-sm w-full', !wrapNotificationTitle && 'truncate')}

@@ -380,6 +380,10 @@ export interface GitifySubject {
   number?: number;
   /** Parsed state */
   state?: GitifyNotificationState;
+  /** Rendered HTML body of the issue or pull request, for preview */
+  bodyHtml?: string;
+  /** Recent comments on the subject, oldest first, for preview */
+  comments?: GitifyComment[];
   /**
    * Identity shown for this notification in the UI (avatar, user-type filter).
    * Resolves to the most recent actor: the latest commenter, falling back to
@@ -395,7 +399,7 @@ export interface GitifySubject {
   /** PR reviewer states and review thread resolution counts */
   reviewers?: GitifyPullRequestReviewer[];
   /** PRs closing issues */
-  linkedIssues?: string[];
+  linkedIssues?: GitifyLinkedIssue[];
   /** Total comment count */
   commentCount?: number;
   /** Labels names and colors */
@@ -448,6 +452,18 @@ export interface GitifyOwner {
   avatarUrl: Link;
   /** Owner type (User, Organization, Bot, etc.) */
   type: UserType;
+  /** Owner biography, when the owner is a user */
+  bio?: string | null;
+  /** Owner company, when the owner is a user */
+  company?: string | null;
+  /** Owner location */
+  location?: string | null;
+  /** Owner follower count, when the owner is a user */
+  followersCount?: number;
+  /** Owner description, when the owner is an organization */
+  description?: string | null;
+  /** Owner website, when the owner is an organization */
+  websiteUrl?: Link | null;
 }
 
 /**
@@ -464,6 +480,18 @@ export interface GitifyNotificationUser {
   htmlUrl: Link;
   /** Notification user type (User, Organization, Bot, etc.) */
   type: UserType;
+  /** User biography, when the actor is a user */
+  bio?: string | null;
+  /** User company, when the actor is a user */
+  company?: string | null;
+  /** User or organization location */
+  location?: string | null;
+  /** Follower count, when the actor is a user */
+  followersCount?: number;
+  /** Organization description, when the actor is an organization */
+  description?: string | null;
+  /** Organization website, when the actor is an organization */
+  websiteUrl?: Link | null;
 }
 
 /**
@@ -507,6 +535,26 @@ export interface GitifySubIssueProgress {
   percentCompleted: number;
 }
 
+/** An issue linked to (closed by) a pull request, for preview display */
+export interface GitifyLinkedIssue {
+  number: number;
+  title: string;
+  state: GitifyIssueState;
+  url: Link;
+}
+
+/** A comment on a notification subject, for preview display */
+export interface GitifyComment {
+  /** Author of the comment, when known */
+  author?: GitifyNotificationUser;
+  /** Rendered HTML body of the comment */
+  bodyHtml: string;
+  /** Web URL of the comment */
+  url: Link;
+  /** When the comment was created */
+  createdAt: string;
+}
+
 /** GitHub issue field value, normalized for display */
 export interface GitifyIssueField {
   /** Field name, e.g. "Priority" */
@@ -524,7 +572,18 @@ export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 export type GitifyLabels = LabelFieldsFragment;
 
 export interface GitifyPullRequestReviewer {
+  /** Display identity for the reviewer (formatted login). */
   user: string;
+  /** Reviewer login, when known. */
+  login?: string;
+  /** Reviewer display name, when known. */
+  name?: string | null;
+  /** Reviewer avatar URL, when known. */
+  avatarUrl?: Link;
+  /** Reviewer profile URL, when known. */
+  htmlUrl?: Link;
+  /** Reviewer actor type, when known. */
+  type?: UserType;
   state?: PullRequestReviewState;
   threads: {
     resolved: number;

@@ -22,7 +22,6 @@ import {
   type ReviewRequestType,
 } from '../../../../types';
 
-import { formatGitHubNumber } from '../../../notifications/formatters';
 import { fetchPullByNumber } from '../client';
 import type {
   AuthorFieldsFragment,
@@ -32,7 +31,7 @@ import type {
 } from '../graphql/generated/graphql';
 import { formatGitHubNotificationUser } from '../users';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor } from './utils';
+import { getNotificationAuthor, mapGitifyComments } from './utils';
 
 type PullRequestActivity = {
   author: AuthorFieldsFragment;
@@ -61,11 +60,12 @@ class PullRequestHandler extends DefaultHandler {
       prState = 'MERGE_QUEUE';
     }
 
-    const prComment = pr.comments?.nodes?.[0];
+    const comments = mapGitifyComments(pr.comments?.nodes);
+    const latestComment = comments.at(-1);
     const activity = getClosestPullRequestActivity(notification.updatedAt, pr);
 
     const author = getNotificationAuthor([pr.author]);
-    const commenter = getNotificationAuthor([prComment?.author]);
+    const commenter = latestComment?.author;
     const prUser = getNotificationAuthor([activity?.author]) ?? author;
 
     const reviewers = getPullRequestReviewers(
@@ -91,6 +91,8 @@ class PullRequestHandler extends DefaultHandler {
       reviewRequested,
       reviewers,
       commentCount: pr.comments.totalCount,
+      bodyHtml: pr.bodyHTML || undefined,
+      comments: comments.length ? comments : undefined,
       labels:
         pr.labels?.nodes?.filter(Boolean).map((label) => ({
           name: label!.name,
@@ -99,9 +101,12 @@ class PullRequestHandler extends DefaultHandler {
       isStacked: pr.stackEntry ? true : undefined,
       stackPosition: pr.stackEntry?.position,
       stackDepth: pr.stackEntry?.stack?.size,
-      linkedIssues: pr.closingIssuesReferences?.nodes
-        ?.filter(Boolean)
-        .map((issue) => formatGitHubNumber(issue!.number)),
+      linkedIssues: pr.closingIssuesReferences?.nodes?.filter(Boolean).map((issue) => ({
+        number: issue!.number,
+        title: issue!.title,
+        state: issue!.state,
+        url: issue!.url,
+      })),
       milestone: pr.milestone ?? undefined,
       htmlUrl: activity?.url ?? pr.url,
       reactionsCount: prReactionCount,

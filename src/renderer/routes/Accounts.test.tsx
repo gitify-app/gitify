@@ -38,6 +38,16 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.getAllByTestId('account-profile')).toHaveLength(3);
     });
 
+    it('shows an account avatar card on hover', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, { accounts: [mockPersonalAccessTokenAccount] });
+      });
+
+      await userEvent.hover(screen.getByTestId('account-profile'));
+
+      expect(await screen.findByTestId('account-preview')).toBeInTheDocument();
+    });
+
     it('should go back by pressing the icon', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />);

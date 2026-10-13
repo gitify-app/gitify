@@ -2,13 +2,14 @@ import type { FC } from 'react';
 
 import { IssueRelatesToIcon } from '@primer/octicons-react';
 
-import { IconColor } from '../../types';
+import { type GitifyLinkedIssue, IconColor } from '../../types';
 
-import { formatMetricDescription } from '../../utils/notifications/formatters';
+import { formatGitHubNumber, formatMetricDescription } from '../../utils/notifications/formatters';
+import { LinkedIssuesCard } from '../previews/LinkedIssuesCard';
 import { MetricPill } from './MetricPill';
 
 export interface LinkedIssuesPillProps {
-  linkedIssues: string[];
+  linkedIssues: GitifyLinkedIssue[];
 }
 
 export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) => {
@@ -16,10 +17,11 @@ export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) =>
     return null;
   }
 
+  const numbers = linkedIssues.map((issue) => formatGitHubNumber(issue.number));
   const description = formatMetricDescription(
     linkedIssues.length,
     'issue',
-    (_, noun) => `Linked to ${noun}: ${linkedIssues.join(', ')}`,
+    (_, noun) => `Linked to ${noun}: ${numbers.join(', ')}`,
   );
 
   return (
@@ -28,6 +30,8 @@ export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) =>
       contents={description}
       icon={IssueRelatesToIcon}
       metric={linkedIssues.length}
+      preview={<LinkedIssuesCard linkedIssues={linkedIssues} />}
+      previewTestId="linked-issues-preview"
     />
   );
 };

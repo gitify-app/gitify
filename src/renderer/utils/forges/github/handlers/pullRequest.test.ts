@@ -301,7 +301,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           {
             author: mockCommenter,
             updatedAt: mockNotification.updatedAt,
+            createdAt: mockNotification.updatedAt,
             url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234' as Link,
+            bodyHTML: '<p>This is a comment</p>',
             reactions: {
               totalCount: 0,
             },
@@ -339,6 +341,19 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           htmlUrl: mockCommenter.htmlUrl,
           type: mockCommenter.type,
         },
+        comments: [
+          {
+            author: {
+              login: mockCommenter.login,
+              avatarUrl: mockCommenter.avatarUrl,
+              htmlUrl: mockCommenter.htmlUrl,
+              type: mockCommenter.type,
+            },
+            bodyHtml: '<p>This is a comment</p>',
+            url: 'https://github.com/gitify-app/notifications-test/pulls/123#issuecomment-1234' as Link,
+            createdAt: mockNotification.updatedAt,
+          },
+        ],
         reviewRequested: [],
         reviewers: [],
         labels: [],
@@ -370,7 +385,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
           {
             author: actionsAuthor,
             updatedAt: '2026-01-01T16:55:00Z',
+            createdAt: '2026-01-01T16:55:00Z',
             url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+            bodyHTML: '<p>Actions comment</p>',
             reactions: { totalCount: 2 },
             reactionGroups: noReactionGroups,
           },
@@ -459,6 +476,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         nodes: [
           {
             number: 789,
+            title: 'A linked issue',
+            state: 'OPEN',
+            url: 'https://github.com/gitify-app/notifications-test/issues/789' as Link,
           },
         ],
       };
@@ -489,7 +509,14 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
-        linkedIssues: ['#789'],
+        linkedIssues: [
+          {
+            number: 789,
+            title: 'A linked issue',
+            state: 'OPEN',
+            url: 'https://github.com/gitify-app/notifications-test/issues/789' as Link,
+          },
+        ],
         commentCount: 0,
         milestone: undefined,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
@@ -553,7 +580,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         {
           author: mockCommenter,
           updatedAt: '2026-01-01T17:00:01Z',
+          createdAt: '2026-01-01T17:00:01Z',
           url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+          bodyHTML: '<p>Closest comment</p>',
           reactions: { totalCount: 3 },
           reactionGroups: noReactionGroups,
         },
@@ -601,7 +630,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         {
           author: null,
           updatedAt: '2026-01-01T17:00:00Z',
+          createdAt: '2026-01-01T17:00:00Z',
           url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+          bodyHTML: '<p>Authorless comment</p>',
           reactions: { totalCount: 0 },
           reactionGroups: noReactionGroups,
         },
@@ -626,7 +657,9 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         {
           author: mockCommenter,
           updatedAt: '2026-01-01T16:59:59Z',
+          createdAt: '2026-01-01T16:59:59Z',
           url: 'https://github.com/example/repo/pull/123#issuecomment-1' as Link,
+          bodyHTML: '<p>Tie comment</p>',
           reactions: { totalCount: 0 },
           reactionGroups: noReactionGroups,
         },
@@ -848,6 +881,10 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
             htmlUrl: mockAuthor.htmlUrl,
             avatarUrl: mockAuthor.avatarUrl,
             type: 'User',
+            bio: null,
+            company: null,
+            location: null,
+            followers: { totalCount: 0 },
           },
           state: 'APPROVED',
         },

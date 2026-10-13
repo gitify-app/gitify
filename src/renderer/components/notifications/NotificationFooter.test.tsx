@@ -6,8 +6,9 @@ import {
   mockAgentSessionGitifyNotification,
   mockGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
 
-import type { GitifyNotificationUser, Link } from '../../types';
+import type { GitifyNotification, GitifyNotificationUser, Link } from '../../types';
 
 import * as comms from '../../utils/system/comms';
 import { NotificationFooter, type NotificationFooterProps } from './NotificationFooter';
@@ -102,6 +103,53 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(props.notification.subject.user!.htmlUrl);
+  });
+
+  it('shows the profile preview on hovering the actor avatar', async () => {
+    const notification: GitifyNotification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          login: 'some-user',
+          htmlUrl: 'https://github.com/some-user' as Link,
+          avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+          type: 'User',
+          bio: 'There once was...',
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />);
+
+    await userEvent.hover(screen.getByTestId('view-profile'));
+
+    expect(await screen.findByTestId('profile-preview')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Open profile: some-user' })).toBeInTheDocument();
+    expect(screen.getByText('There once was...')).toBeInTheDocument();
+  });
+
+  it('does not attach a profile preview when detailed notifications are disabled', async () => {
+    const notification: GitifyNotification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        user: {
+          login: 'some-user',
+          htmlUrl: 'https://github.com/some-user' as Link,
+          avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+          type: 'User',
+        },
+      },
+    };
+
+    renderWithProviders(<NotificationFooter notification={notification} />, {
+      settings: { ...mockSettings, detailedNotifications: false },
+    });
+
+    await userEvent.hover(screen.getByTestId('view-profile'));
+
+    expect(screen.queryByTestId('profile-preview')).not.toBeInTheDocument();
   });
 
   it.each([
