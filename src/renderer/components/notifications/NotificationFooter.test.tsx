@@ -25,6 +25,17 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
+  it('reserves the action rail width on the footer', async () => {
+    const props: NotificationFooterProps = {
+      notification: mockGitifyNotification,
+    };
+
+    const tree = renderWithProviders(<NotificationFooter {...props} />);
+
+    // The footer is inset so its pills wrap clear of the row's action rail.
+    expect(tree.container.querySelector('.pr-\\[5\\.5rem\\]')).toBeInTheDocument();
+  });
+
   describe('security alerts should use github icon for avatar', () => {
     it('Repository Dependabot Alerts Thread', async () => {
       const mockNotification = mockGitifyNotification;

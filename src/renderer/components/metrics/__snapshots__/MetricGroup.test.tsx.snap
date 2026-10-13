@@ -5,7 +5,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx > should not render any pil
 exports[`renderer/components/metrics/MetricGroup.tsx > should render pills when showPills is enabled 1`] = `
 <div>
   <div
-    class="flex gap-1"
+    class="flex min-w-0 flex-wrap gap-1"
   >
     <button
       aria-describedby="_r_0_"

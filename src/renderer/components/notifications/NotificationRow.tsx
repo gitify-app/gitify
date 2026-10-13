@@ -1,4 +1,4 @@
-import { type CSSProperties, type FC } from 'react';
+import { type FC } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
@@ -90,14 +90,6 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const NotificationIcon = notification.display.icon.type;
   const isNotificationRead = !notification.unread;
 
-  // How many action buttons the HoverGroup below actually renders. Exposed as a
-  // CSS var so the Glass hover-fade (App.css) sizes to the buttons instead of a
-  // fixed width, which would over-fade rows that show fewer than three.
-  const enabledActionCount =
-    Number(!isNotificationRead) +
-    Number(isMarkAsDoneFeatureSupported(notification.account) && notification.unread) +
-    Number(isUnsubscribeThreadSupported(notification.account));
-
   return (
     <div
       className={cn(
@@ -108,7 +100,6 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
-      style={{ '--gitify-actions': enabledActionCount } as CSSProperties}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
         <Tooltip direction="e" text={notification.display.type}>
@@ -139,9 +130,12 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             title={notification.display.title}
           >
             <NotificationTitle title={notification.subject.title} />
+            {/* Hidden (keeping its space) while the row is hovered, so the
+                full-height action rail can never leave the number partially
+                rendered. */}
             <Text
               className={cn(
-                'text-xxs ml-auto mr-2',
+                'text-xxs ml-auto mr-2 group-hover:invisible',
                 Opacity.READ,
                 (isGroupByDate() || !showNumber) && 'hidden',
               )}
@@ -155,7 +149,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       </Stack>
 
       {!isAnimatingExit && (
-        <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
+        <HoverGroup bgColor="group-hover:bg-gitify-notification-hover" fullHeight>
           <HoverButton
             action={actionMarkAsRead}
             enabled={!isNotificationRead}
