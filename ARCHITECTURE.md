@@ -17,10 +17,10 @@ The renderer never reaches into the main process directly: it goes through `wind
 
 ## Renderer layers
 
-The renderer is layered. **Imports flow in one direction only** — a module may import from its own layer or any layer below it, never above:
+The renderer is layered. **Runtime imports flow in one direction only** — a module may import from its own layer or any layer below it, never above.
 
 ```
-  types / constants / icons       (leaf: shapes, values, presentational icons)
+  constants / icons               (leaf: values, presentational icons)
         |
    +----+----+
    |         |
@@ -40,6 +40,7 @@ The renderer is layered. **Imports flow in one direction only** — a module may
 ```
 
 - `utils/` is split by concern: `api`, `auth`, `core`, `forges`, `notifications`, `system`, `ui`.
+- `types.ts` contains shared renderer types. Its type-only imports from `utils/auth/types` and generated GitHub GraphQL types are an intentional exception to the layer direction; the module has no runtime dependency on those layers.
 - `stores/` holds client state (Zustand): persisted `accounts` and `settings`, session `filters` and notification action failures.
 - `icons/` holds presentational icon components (brand marks and UI glyphs). It is a **leaf**, below `utils`, so both `utils` and `components` may import it — e.g. a forge adapter declares its brand mark from here.
 - `utils` and `stores` are **peers** — they may reference each other. Neither may import `hooks`, `components`, or `routes`.
