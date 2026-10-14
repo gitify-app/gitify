@@ -4,13 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockBitbucketAccount } from '../../__mocks__/account-mocks';
 
-import {
-  type IFormData,
-  validateForm,
-} from '../../components/login/LoginWithPersonalAccessTokenForm';
-
 import type { Hostname, Token } from '../../types';
 
+import {
+  type PersonalAccessTokenFormData,
+  validatePersonalAccessTokenForm,
+} from '../../utils/auth/loginValidation';
 import * as comms from '../../utils/system/comms';
 import { BitbucketLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
 
@@ -26,23 +25,25 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
 
   describe('form validation', () => {
     it('requires username (Atlassian email) for bitbucket', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'bitbucket.org' as Hostname,
         token: 'my-api-token' as Token,
         username: '',
       };
 
-      expect(validateForm(values, 'bitbucket').username).toBe('Atlassian email is required');
+      expect(validatePersonalAccessTokenForm(values, 'bitbucket').username).toBe(
+        'Atlassian email is required',
+      );
     });
 
     it('passes validation with username and token', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'bitbucket.org' as Hostname,
         token: 'my-api-token' as Token,
         username: 'user@example.com',
       };
 
-      expect(validateForm(values, 'bitbucket')).toEqual({});
+      expect(validatePersonalAccessTokenForm(values, 'bitbucket')).toEqual({});
     });
   });
 

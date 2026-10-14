@@ -10,12 +10,12 @@ import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../../components/layout/Contents';
 import { Page } from '../../components/layout/Page';
-import { summarizeLoginError } from '../../components/login/LoginWithPersonalAccessTokenForm';
 import { Footer } from '../../components/primitives/Footer';
 import { Header } from '../../components/primitives/Header';
 
 import type { Account, Hostname } from '../../types';
 
+import { summarizeLoginError } from '../../utils/auth/loginValidation';
 import { isValidHostname } from '../../utils/auth/utils';
 import { rendererLogError, toError } from '../../utils/core/logger';
 

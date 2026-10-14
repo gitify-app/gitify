@@ -1,4 +1,4 @@
-import { summarizeLoginError } from './LoginWithPersonalAccessTokenForm';
+import { summarizeLoginError } from '../../utils/auth/loginValidation';
 
 describe('renderer/components/login/LoginWithPersonalAccessTokenForm.tsx', () => {
   describe('summarizeLoginError', () => {

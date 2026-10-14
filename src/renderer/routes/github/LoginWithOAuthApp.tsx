@@ -13,10 +13,13 @@ import { Page } from '../../components/layout/Page';
 import { Footer } from '../../components/primitives/Footer';
 import { Header } from '../../components/primitives/Header';
 
-import type { Account, ClientID, ClientSecret, Forge, Token } from '../../types';
-import type { LoginOAuthWebOptions } from '../../utils/auth/types';
+import type { Account, ClientID, ClientSecret, Forge } from '../../types';
 
-import { isValidHostname } from '../../utils/auth/utils';
+import {
+  type OAuthAppFormData,
+  type OAuthAppFormErrors,
+  validateOAuthAppForm,
+} from '../../utils/auth/loginValidation';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
@@ -24,42 +27,6 @@ import { openExternalLink } from '../../utils/system/comms';
 interface LocationState {
   account?: Account;
 }
-
-// IFormData mirrors LoginOAuthWebOptions exactly — keep them aliased so the
-// form can be passed straight into the context callback without casting.
-export type IFormData = LoginOAuthWebOptions;
-
-interface IFormErrors {
-  hostname?: string;
-  clientId?: string;
-  clientSecret?: string;
-  invalidCredentialsForHost?: string;
-}
-
-export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
-  const errors: IFormErrors = {};
-  const adapter = getAdapter(forge);
-
-  if (!values.hostname) {
-    errors.hostname = 'Hostname is required';
-  } else if (!isValidHostname(values.hostname)) {
-    errors.hostname = 'Hostname format is invalid';
-  }
-
-  if (!values.clientId) {
-    errors.clientId = 'Client ID is required';
-  } else if (!adapter.oauthWebApp?.validateClientId(values.clientId)) {
-    errors.clientId = 'Client ID format is invalid';
-  }
-
-  if (!values.clientSecret) {
-    errors.clientSecret = 'Client Secret is required';
-  } else if (!adapter.validateToken(values.clientSecret as unknown as Token)) {
-    errors.clientSecret = 'Client Secret format is invalid';
-  }
-
-  return errors;
-};
 
 export const GitHubLoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
@@ -77,14 +44,14 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
     hostname: reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME,
     clientId: '' as ClientID,
     clientSecret: '' as ClientSecret,
-  } as IFormData);
+  } as OAuthAppFormData);
 
-  const [errors, setErrors] = useState({} as IFormErrors);
+  const [errors, setErrors] = useState({} as OAuthAppFormErrors);
 
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
 
-    const newErrors = validateForm(formData, forge);
+    const newErrors = validateOAuthAppForm(formData, forge);
 
     setErrors(newErrors);
 
@@ -103,7 +70,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
   };
 
   const verifyLoginCredentials = useCallback(
-    async (data: IFormData) => {
+    async (data: OAuthAppFormData) => {
       try {
         await loginWithOAuthApp(forge, data);
         navigate('/');

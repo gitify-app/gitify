@@ -4,13 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockPersonalAccessTokenAccount } from '../../__mocks__/account-mocks';
 
-import {
-  type IFormData,
-  validateForm,
-} from '../../components/login/LoginWithPersonalAccessTokenForm';
-
 import type { Hostname, Token } from '../../types';
 
+import {
+  type PersonalAccessTokenFormData,
+  validatePersonalAccessTokenForm,
+} from '../../utils/auth/loginValidation';
 import * as logger from '../../utils/core/logger';
 import * as comms from '../../utils/system/comms';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
@@ -36,22 +35,22 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
 
   describe('form validation', () => {
     it('should validate the form values are not empty', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: null as unknown as Hostname,
         token: null as unknown as Token,
       };
-      expect(validateForm(values).hostname).toBe('Hostname is required');
-      expect(validateForm(values).token).toBe('Token is required');
+      expect(validatePersonalAccessTokenForm(values).hostname).toBe('Hostname is required');
+      expect(validatePersonalAccessTokenForm(values).token).toBe('Token is required');
     });
 
     it('should validate the form values are correct format', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'hello' as Hostname,
         token: '!@£INVALID-.1' as Token,
       };
 
-      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-      expect(validateForm(values).token).toBe('Token format is invalid');
+      expect(validatePersonalAccessTokenForm(values).hostname).toBe('Hostname format is invalid');
+      expect(validatePersonalAccessTokenForm(values).token).toBe('Token format is invalid');
     });
   });
 

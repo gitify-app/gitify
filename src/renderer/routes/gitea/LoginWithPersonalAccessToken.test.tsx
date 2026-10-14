@@ -4,13 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGiteaAccount } from '../../__mocks__/account-mocks';
 
-import {
-  type IFormData,
-  validateForm,
-} from '../../components/login/LoginWithPersonalAccessTokenForm';
-
 import type { Forge, Hostname, Token } from '../../types';
 
+import {
+  type PersonalAccessTokenFormData,
+  validatePersonalAccessTokenForm,
+} from '../../utils/auth/loginValidation';
 import * as comms from '../../utils/system/comms';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
 
@@ -40,7 +39,7 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
       'rejects invalid port in %s',
       (hostname) => {
         expect(
-          validateForm(
+          validatePersonalAccessTokenForm(
             {
               hostname: hostname as Hostname,
               token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
@@ -53,7 +52,7 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
 
     it.each<Forge>(['github', 'gitlab', 'bitbucket'])('keeps ports invalid for %s', (forge) => {
       expect(
-        validateForm(
+        validatePersonalAccessTokenForm(
           {
             hostname: 'git.example.com:3000' as Hostname,
             token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
@@ -67,14 +66,17 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
       'accepts Gitea origin %s',
       (hostname) => {
         expect(
-          validateForm({ hostname: hostname as Hostname, token: 'a'.repeat(40) as Token }, 'gitea'),
+          validatePersonalAccessTokenForm(
+            { hostname: hostname as Hostname, token: 'a'.repeat(40) as Token },
+            'gitea',
+          ),
         ).toEqual({});
       },
     );
 
     it.each<Forge>(['github', 'gitlab', 'bitbucket'])('keeps %s hostnames HTTPS-only', (forge) => {
       expect(
-        validateForm(
+        validatePersonalAccessTokenForm(
           { hostname: 'http://git.internal:3000' as Hostname, token: '' as Token },
           forge,
         ).hostname,
@@ -82,21 +84,23 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     });
 
     it('should validate the token matches the Gitea format', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'gitea.example.com' as Hostname,
         token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
       };
 
-      expect(validateForm(values, 'gitea')).toEqual({});
+      expect(validatePersonalAccessTokenForm(values, 'gitea')).toEqual({});
     });
 
     it('should reject tokens that are not 40-character lowercase hex', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'gitea.example.com' as Hostname,
         token: 'GHT_INVALID_TOKEN' as Token,
       };
 
-      expect(validateForm(values, 'gitea').token).toBe('Token format is invalid');
+      expect(validatePersonalAccessTokenForm(values, 'gitea').token).toBe(
+        'Token format is invalid',
+      );
     });
   });
 

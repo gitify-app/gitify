@@ -4,13 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitLabAccount } from '../../__mocks__/account-mocks';
 
-import {
-  type IFormData,
-  validateForm,
-} from '../../components/login/LoginWithPersonalAccessTokenForm';
-
 import type { Hostname, Token } from '../../types';
 
+import {
+  type PersonalAccessTokenFormData,
+  validatePersonalAccessTokenForm,
+} from '../../utils/auth/loginValidation';
 import * as comms from '../../utils/system/comms';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
 
@@ -34,30 +33,32 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
 
   describe('form validation', () => {
     it('accepts the modern routing-prefixed token format', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'gitlab.com' as Hostname,
         token: MODERN_TOKEN,
       };
 
-      expect(validateForm(values, 'gitlab')).toEqual({});
+      expect(validatePersonalAccessTokenForm(values, 'gitlab')).toEqual({});
     });
 
     it('rejects an empty token', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'gitlab.com' as Hostname,
         token: '' as Token,
       };
 
-      expect(validateForm(values, 'gitlab').token).toBe('Token is required');
+      expect(validatePersonalAccessTokenForm(values, 'gitlab').token).toBe('Token is required');
     });
 
     it('rejects an invalid hostname', () => {
-      const values: IFormData = {
+      const values: PersonalAccessTokenFormData = {
         hostname: 'not a hostname' as Hostname,
         token: MODERN_TOKEN,
       };
 
-      expect(validateForm(values, 'gitlab').hostname).toBe('Hostname format is invalid');
+      expect(validatePersonalAccessTokenForm(values, 'gitlab').hostname).toBe(
+        'Hostname format is invalid',
+      );
     });
   });
 
