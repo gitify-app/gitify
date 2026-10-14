@@ -35,7 +35,10 @@ src/renderer/**/__screenshots__/**/*.png
 .DS_Store
 
 # OpenSpec
-openspec/
+# Specs and changes live in the shared gitify-app/gitify-specs store. Keep this
+# repo's config.yaml (which declares that store) tracked, ignore everything else.
+openspec/*
+!openspec/config.yaml
 
 # Local Git worktrees
 /.worktrees/
