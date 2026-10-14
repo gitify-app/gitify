@@ -45,7 +45,7 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
             />
           </button>
           <div className={cn('text-xxs', Opacity.READ, !showNumber && 'hidden')}>
-            {notification.display.number}
+            {notification.display.identifier}
           </div>
         </Stack>
       </div>

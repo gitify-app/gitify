@@ -378,6 +378,10 @@ export interface GitifySubject {
   // Enriched fields (from additional GraphQL or REST API calls)
   /** Issue/PR/Discussion number */
   number?: number;
+  /** Release tag (e.g. `v1.2.3`), when the subject is a release */
+  tagName?: string;
+  /** Commit SHA, when the subject is a commit */
+  commitSha?: string;
   /** Parsed state */
   state?: GitifyNotificationState;
   /**
@@ -474,8 +478,8 @@ export interface GitifyNotificationDisplay {
   title: string;
   /** Formatted notification type */
   type: string;
-  /** Formatted notification number */
-  number: string;
+  /** Formatted notification identifier (a `#number`, a release tag, or a short SHA) */
+  identifier: string;
   /** Notification icon and color to display */
   icon: {
     type: Icon;

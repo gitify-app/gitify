@@ -1,6 +1,7 @@
 import {
   AgentIcon,
   CopilotIcon,
+  GitCommitIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
   TagIcon,
@@ -93,7 +94,7 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
     },
     repository: mockGitHubRepository,
     display: {
-      number: '123',
+      identifier: '123',
       title: 'I am a robot and this is a test! [#123]',
       type: 'Open Issue',
       icon: {
@@ -124,7 +125,7 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
     },
     repository: mockGitHubRepository,
     display: {
-      number: '456',
+      identifier: '456',
       title: 'Improve the UI [#456]',
       type: 'Issue',
       icon: {
@@ -175,10 +176,11 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
       type: 'Release',
       reviewers: undefined,
+      tagName: '0.0.1',
     },
     repository: mockEnterpriseRepository,
     display: {
-      number: '',
+      identifier: '0.0.1',
       title: 'Release 0.0.1',
       type: 'Release',
       icon: {
@@ -209,7 +211,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
     },
     repository: mockEnterpriseRepository,
     display: {
-      number: '123',
+      identifier: '123',
       title: 'Bump Version [#123]',
       type: 'Pull Request',
       icon: {
@@ -222,6 +224,44 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
 ];
 
 export const mockGitifyNotification: GitifyNotification = mockGitHubCloudGitifyNotifications[0];
+
+/**
+ * Mock Gitify Notification for a GitHub commit.
+ *
+ * Subject type `Commit`, which identifies by its SHA rather than a number.
+ */
+export const mockCommitGitifyNotification: GitifyNotification = {
+  account: mockGitHubCloudAccount,
+  order: 0,
+  id: '1349837581',
+  unread: true,
+  reason: {
+    code: 'subscribed',
+    title: 'Updated',
+    description: "You're watching the repository.",
+  },
+  updatedAt: '2024-03-12T10:00:00Z',
+  subject: {
+    title: 'Fix the thing',
+    url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
+    latestCommentUrl: null,
+    type: 'Commit',
+    commitSha: 'd2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+    user: mockSubjectUser,
+    author: mockSubjectUser,
+  },
+  repository: mockGitHubRepository,
+  display: {
+    identifier: 'd2a86d8',
+    title: 'Fix the thing',
+    type: 'Commit',
+    icon: {
+      type: GitCommitIcon,
+      color: IconColor.GRAY,
+    },
+    defaultUserType: 'User',
+  },
+};
 
 /**
  * Mock Gitify Notification for a GitHub Copilot cloud agent session.
@@ -248,7 +288,7 @@ export const mockAgentSessionGitifyNotification: GitifyNotification = {
   },
   repository: mockGitHubRepository,
   display: {
-    number: '',
+    identifier: '',
     title: 'Analyzing and fixing GitHub Actions job failure',
     type: 'Agent Session Thread',
     icon: {

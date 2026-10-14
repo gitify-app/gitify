@@ -7,6 +7,7 @@ import {
   CheckIcon,
   CommentIcon,
   DashIcon,
+  GitCommitIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
   MilestoneIcon,
@@ -275,27 +276,42 @@ export const NotificationSettings: FC = () => {
 
             <Checkbox
               checked={showNumber}
-              label="Show GitHub number"
+              label="Show identifier"
               name="showNumber"
               onChange={() => toggleSetting('showNumber')}
               tooltip={
                 <Stack direction="vertical" gap="condensed">
-                  <Text>Show GitHub number for:</Text>
+                  <Text>Show identifier for:</Text>
                   <div className="pl-2">
                     <Stack direction="vertical" gap="none">
-                      <Stack direction="horizontal" gap="condensed">
+                      <Stack align="center" direction="horizontal" gap="condensed">
                         <CommentIcon size={Size.SMALL} />
-                        Discussion
+                        <Text>Discussion</Text>
+                        <Text className="text-gitify-icon-muted">#123</Text>
                       </Stack>
 
-                      <Stack direction="horizontal" gap="condensed">
+                      <Stack align="center" direction="horizontal" gap="condensed">
                         <IssueOpenedIcon size={Size.SMALL} />
-                        Issue
+                        <Text>Issue</Text>
+                        <Text className="text-gitify-icon-muted">#123</Text>
                       </Stack>
 
-                      <Stack direction="horizontal" gap="condensed">
+                      <Stack align="center" direction="horizontal" gap="condensed">
                         <GitPullRequestIcon size={Size.SMALL} />
-                        Pull Request
+                        <Text>Pull Request</Text>
+                        <Text className="text-gitify-icon-muted">#123</Text>
+                      </Stack>
+
+                      <Stack align="center" direction="horizontal" gap="condensed">
+                        <GitCommitIcon size={Size.SMALL} />
+                        <Text>Commit</Text>
+                        <Text className="text-gitify-icon-muted">a1b2c3d</Text>
+                      </Stack>
+
+                      <Stack align="center" direction="horizontal" gap="condensed">
+                        <TagIcon size={Size.SMALL} />
+                        <Text>Release</Text>
+                        <Text className="text-gitify-icon-muted">v1.2.3</Text>
                       </Stack>
                     </Stack>
                   </div>

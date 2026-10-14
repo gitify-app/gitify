@@ -1110,7 +1110,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   class="font-medium text-gitify-font cursor-pointer"
                   for="showNumber"
                 >
-                  Show GitHub number
+                  Show identifier
                 </label>
                 <button
                   aria-expanded="false"
