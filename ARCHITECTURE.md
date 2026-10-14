@@ -17,10 +17,10 @@ The renderer never reaches into the main process directly: it goes through `wind
 
 ## Renderer layers
 
-The renderer is layered. **Runtime imports flow in one direction only** — a module may import from its own layer or any layer below it, never above.
+The renderer is layered. **Runtime imports flow in one direction only** — a module may import from its own layer or any layer below it, never above. Type-only imports are exempt: importing types never creates a runtime dependency, so it need not follow the direction.
 
 ```
-  constants / icons               (leaf: values, presentational icons)
+  types / constants / icons       (leaf: shared types, values, presentational icons)
         |
    +----+----+
    |         |
@@ -40,9 +40,8 @@ The renderer is layered. **Runtime imports flow in one direction only** — a mo
 ```
 
 - `utils/` is split by concern: `api`, `auth`, `core`, `forges`, `notifications`, `system`, `ui`.
-- `types.ts` contains shared renderer types. Its type-only imports from `utils/auth/types` and generated GitHub GraphQL types are an intentional exception to the layer direction; the module has no runtime dependency on those layers.
+- `types.ts`, `constants.ts`, and `icons/` are the leaf modules: shared types, shared values, and presentational icons. `types.ts` imports types from `utils/auth/types` and generated GitHub GraphQL types — those imports are type-only, so the direction rule does not apply. `icons/` sits below `utils`, so both `utils` and `components` may import it (a forge adapter declares its brand mark from here).
 - `stores/` holds client state (Zustand): persisted `accounts` and `settings`, session `filters` and notification action failures.
-- `icons/` holds presentational icon components (brand marks and UI glyphs). It is a **leaf**, below `utils`, so both `utils` and `components` may import it — e.g. a forge adapter declares its brand mark from here.
 - `utils` and `stores` are **peers** — they may reference each other. Neither may import `hooks`, `components`, or `routes`.
 - `components/` is grouped by feature (`notifications`, `filters`, `settings`, `login`, `fields`, `avatars`, `layout`, `metrics`, `primitives`).
 - The composition root (`App.tsx`, `index.tsx`) is the only place allowed to wire every layer together.
