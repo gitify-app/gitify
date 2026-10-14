@@ -27,7 +27,9 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
   }
 
   return (
-    <div className="flex gap-1">
+    // `flex-wrap` + `min-w-0` let the pills wrap within the row instead of
+    // overflowing the row and being clipped.
+    <div className="flex min-w-0 flex-wrap gap-1">
       <IssueTypesPill issueType={notification.subject.issueType} />
 
       <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />

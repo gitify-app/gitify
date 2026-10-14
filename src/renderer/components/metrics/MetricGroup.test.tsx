@@ -162,4 +162,21 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
 
     expect(tree.queryByText('Priority: High')).not.toBeInTheDocument();
   });
+
+  it('wraps its pills and can shrink within the row', async () => {
+    const props: MetricGroupProps = {
+      notification: mockGitifyNotification,
+    };
+
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
+      settings: { ...mockSettings, showPills: true },
+    });
+
+    const group = tree.container.firstElementChild;
+
+    // Wrapping + shrinkable so pills wrap clear of the action rail instead of
+    // overflowing the row and being clipped.
+    expect(group).toHaveClass('flex-wrap');
+    expect(group).toHaveClass('min-w-0');
+  });
 });

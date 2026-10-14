@@ -9,4 +9,38 @@ describe('renderer/components/primitives/HoverGroup.tsx', () => {
     );
     expect(tree.container).toMatchSnapshot();
   });
+
+  it('should span the host height', () => {
+    const tree = renderWithProviders(
+      <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">Hover Group</HoverGroup>,
+    );
+
+    const cluster = tree.container.querySelector('.gitify-hover-actions');
+
+    expect(cluster).toBeInTheDocument();
+    // Full-height rail so the buttons form a consistent hit zone.
+    expect(cluster).toHaveClass('inset-y-0');
+  });
+
+  it('should stretch its buttons only when fullHeight is set', () => {
+    const tree = renderWithProviders(
+      <HoverGroup bgColor="group-hover:bg-gitify-notification-hover" fullHeight>
+        Hover Group
+      </HoverGroup>,
+    );
+
+    const cluster = tree.container.querySelector('.gitify-hover-actions');
+
+    expect(cluster).toHaveClass('gitify-hover-actions-full');
+  });
+
+  it('should not stretch its buttons by default', () => {
+    const tree = renderWithProviders(
+      <HoverGroup bgColor="group-hover:bg-gitify-repository">Hover Group</HoverGroup>,
+    );
+
+    const cluster = tree.container.querySelector('.gitify-hover-actions');
+
+    expect(cluster).not.toHaveClass('gitify-hover-actions-full');
+  });
 });

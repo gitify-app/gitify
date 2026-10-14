@@ -26,7 +26,10 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
   return (
     <Stack
       align="center"
-      className={cn('text-xs', Opacity.MEDIUM)}
+      // Reserve the action rail's width so the footer's pills wrap clear of the
+      // buttons instead of sitting under them. The title line and number stay
+      // full width; only the footer/pill strip yields.
+      className={cn('pr-[5.5rem] text-xs', Opacity.MEDIUM)}
       direction="horizontal"
       gap="condensed"
       wrap="wrap"

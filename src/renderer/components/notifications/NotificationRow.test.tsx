@@ -82,6 +82,19 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
+  it('hides the issue number while hovered so it is never partially rendered', () => {
+    const props: NotificationRowProps = {
+      notification: mockGitifyNotification,
+      isRepositoryAnimatingExit: false,
+    };
+
+    renderWithProviders(<NotificationRow {...props} />);
+
+    // `group-hover:invisible` (not `hidden`) keeps the number's space but hides
+    // it on hover, so the full-height rail can never leave it half-covered.
+    expect(screen.getByText('123')).toHaveClass('group-hover:invisible');
+  });
+
   it('shows the release tag as the identifier', () => {
     const props: NotificationRowProps = {
       notification: {
