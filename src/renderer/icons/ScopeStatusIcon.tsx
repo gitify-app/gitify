@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { CheckCircleFillIcon, DashIcon, XCircleFillIcon } from '@primer/octicons-react';
 
 export interface ScopeStatusIconProps {
@@ -9,12 +7,12 @@ export interface ScopeStatusIconProps {
   withTestId?: boolean;
 }
 
-export const ScopeStatusIcon: FC<ScopeStatusIconProps> = ({
+export function ScopeStatusIcon({
   granted,
   notApplicable = false,
   size = 14,
   withTestId = false,
-}) => {
+}: ScopeStatusIconProps) {
   if (notApplicable) {
     return (
       <DashIcon
@@ -38,4 +36,4 @@ export const ScopeStatusIcon: FC<ScopeStatusIconProps> = ({
       size={size}
     />
   );
-};
+}

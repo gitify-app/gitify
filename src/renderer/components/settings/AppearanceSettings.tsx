@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, Select, Stack, Text } from '@primer/react';
 
@@ -20,7 +18,7 @@ import {
   resetZoomLevel,
 } from '../../utils/ui/zoom';
 
-export const AppearanceSettings: FC = () => {
+export function AppearanceSettings() {
   // Account store values
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 
@@ -193,4 +191,4 @@ export const AppearanceSettings: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

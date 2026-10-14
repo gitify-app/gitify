@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import {
   DependabotIcon,
   FeedPersonIcon,
@@ -13,7 +11,7 @@ import { Size } from '../../types';
 import { userTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
-export const UserTypeFilter: FC = () => {
+export function UserTypeFilter() {
   return (
     <FilterSection
       filter={userTypeFilter}
@@ -51,4 +49,4 @@ export const UserTypeFilter: FC = () => {
       }
     />
   );
-};
+}

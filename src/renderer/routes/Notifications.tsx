@@ -1,4 +1,4 @@
-import { type FC, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { useNotifications } from '../hooks/useNotifications';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
@@ -13,7 +13,7 @@ import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 import { hasNoAccountErrors } from '../utils/notifications/status';
 
-export const NotificationsRoute: FC = () => {
+export function NotificationsRoute() {
   const { notifications, status, globalError, hasNotifications } = useNotifications();
   const isOnline = useOnlineStatus();
 
@@ -54,4 +54,4 @@ export const NotificationsRoute: FC = () => {
       />
     </Page>
   );
-};
+}

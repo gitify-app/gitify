@@ -185,6 +185,13 @@ export default defineConfig({
       'default-param-last': 'error',
       'default-case': 'error',
       curly: 'error',
+      'react/function-component-definition': [
+        'error',
+        {
+          namedComponents: 'function-declaration',
+          unnamedComponents: 'arrow-function',
+        },
+      ],
       'react/exhaustive-deps': 'warn',
       'react/rules-of-hooks': 'error',
       'react/self-closing-comp': 'error',

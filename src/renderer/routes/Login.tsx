@@ -1,4 +1,4 @@
-import { type FC, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
@@ -24,7 +24,7 @@ function pickPrimaryMethod(adapter: ForgeAdapter): LoginMethodDescriptor | undef
   return adapter.loginMethods.find((m) => m.variant === 'primary') ?? adapter.loginMethods[0];
 }
 
-export const LoginRoute: FC = () => {
+export function LoginRoute() {
   const navigate = useNavigate();
   const adapters = listAdapters();
 
@@ -208,4 +208,4 @@ export const LoginRoute: FC = () => {
       </Stack>
     </Centered>
   );
-};
+}

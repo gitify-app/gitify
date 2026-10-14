@@ -1,5 +1,3 @@
-import { type FC } from 'react';
-
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
@@ -34,11 +32,11 @@ export interface NotificationRowProps {
   onAnimateExit: (animate: boolean) => void;
 }
 
-export const NotificationRow: FC<NotificationRowProps> = ({
+export function NotificationRow({
   notification,
   isAnimatingExit,
   onAnimateExit,
-}: NotificationRowProps) => {
+}: NotificationRowProps) {
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
     useNotifications();
 
@@ -188,4 +186,4 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       )}
     </div>
   );
-};
+}

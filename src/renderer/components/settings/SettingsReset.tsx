@@ -1,12 +1,10 @@
-import type { FC } from 'react';
-
 import { Button, Stack, useConfirm } from '@primer/react';
 
 import { useSettingsStore } from '../../stores';
 
 import { rendererLogInfo } from '../../utils/core/logger';
 
-export const SettingsReset: FC = () => {
+export function SettingsReset() {
   const resetSettings = useSettingsStore((s) => s.reset);
 
   const confirm = useConfirm();
@@ -39,4 +37,4 @@ export const SettingsReset: FC = () => {
       </Button>
     </Stack>
   );
-};
+}

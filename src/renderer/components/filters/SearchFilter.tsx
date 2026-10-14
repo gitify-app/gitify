@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import {
   CheckCircleFillIcon,
   CommentIcon,
@@ -27,7 +25,7 @@ import {
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 
-export const SearchFilter: FC = () => {
+export function SearchFilter() {
   const updateFilter = useFiltersStore((s) => s.updateFilter);
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
   const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
@@ -136,4 +134,4 @@ export const SearchFilter: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

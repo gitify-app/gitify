@@ -1,12 +1,10 @@
-import type { FC } from 'react';
-
 import { GitPullRequestIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
 import { reviewRequestTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
-export const ReviewRequestTypeFilter: FC = () => {
+export function ReviewRequestTypeFilter() {
   return (
     <FilterSection
       filter={reviewRequestTypeFilter}
@@ -28,4 +26,4 @@ export const ReviewRequestTypeFilter: FC = () => {
       }
     />
   );
-};
+}

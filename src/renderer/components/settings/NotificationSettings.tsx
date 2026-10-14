@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -37,7 +37,7 @@ import { GroupBy, Size } from '../../types';
 import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scopes';
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
 
-export const NotificationSettings: FC = () => {
+export function NotificationSettings() {
   const navigate = useNavigate();
 
   // Account store values
@@ -418,4 +418,4 @@ export const NotificationSettings: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

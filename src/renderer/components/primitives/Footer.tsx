@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -11,7 +11,7 @@ interface FooterProps {
  * Footer component displays actions at the bottom of the page.
  * It is fixed to the viewport bottom.
  */
-export const Footer: FC<FooterProps> = ({ children, justify }) => {
+export function Footer({ children, justify }: FooterProps) {
   return (
     <div className="left-sidebar bg-gitify-footer">
       <Stack direction="horizontal" justify={justify} padding="condensed">
@@ -19,4 +19,4 @@ export const Footer: FC<FooterProps> = ({ children, justify }) => {
       </Stack>
     </div>
   );
-};
+}

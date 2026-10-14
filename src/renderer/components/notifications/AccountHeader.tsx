@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
@@ -23,13 +23,13 @@ export interface AccountHeaderProps {
   onToggle: () => void;
 }
 
-export const AccountHeader: FC<AccountHeaderProps> = ({
+export function AccountHeader({
   account,
   error,
   notificationCount,
   isCollapsed,
   onToggle,
-}) => {
+}: AccountHeaderProps) {
   const Chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
 
   return (
@@ -89,4 +89,4 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
       </HoverGroup>
     </Stack>
   );
-};
+}

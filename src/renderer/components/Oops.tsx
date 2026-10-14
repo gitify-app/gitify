@@ -1,4 +1,4 @@
-import { type FC, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@primer/react';
@@ -15,7 +15,7 @@ interface OopsProps {
   fullHeight?: boolean;
 }
 
-export const Oops: FC<OopsProps> = ({ error, fullHeight = true }: OopsProps) => {
+export function Oops({ error, fullHeight = true }: OopsProps) {
   const navigate = useNavigate();
 
   const err = error ?? Errors.UNKNOWN;
@@ -44,4 +44,4 @@ export const Oops: FC<OopsProps> = ({ error, fullHeight = true }: OopsProps) => 
       subHeadings={err.descriptions}
     />
   );
-};
+}

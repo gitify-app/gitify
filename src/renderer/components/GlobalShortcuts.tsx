@@ -1,4 +1,4 @@
-import { type FC, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useShortcutActions } from '../hooks/useShortcutActions';
 
@@ -8,7 +8,7 @@ import { getNormalizedKey, shouldIgnoreKeyboardEvent } from '../utils/ui/keyboar
  * Component that registers global keyboard shortcuts for the renderer app.
  * Mount once inside App, within Router + AppProvider.
  */
-export const GlobalShortcuts: FC = () => {
+export function GlobalShortcuts() {
   const { shortcuts } = useShortcutActions();
 
   useEffect(() => {
@@ -41,4 +41,4 @@ export const GlobalShortcuts: FC = () => {
   }, [shortcuts]);
 
   return null;
-};
+}

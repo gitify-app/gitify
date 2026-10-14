@@ -41,13 +41,13 @@ import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
-const RecommendedScopesIcon: FC<OcticonProps> = ({ className, ...props }) => (
-  <ShieldCheckIcon {...props} className={cn(IconColor.GREEN, className)} />
-);
+function RecommendedScopesIcon({ className, ...props }: OcticonProps) {
+  return <ShieldCheckIcon {...props} className={cn(IconColor.GREEN, className)} />;
+}
 
-const AlternateScopesIcon: FC<OcticonProps> = ({ className, ...props }) => (
-  <ShieldCheckIcon {...props} className={cn('text-gitify-warning', className)} />
-);
+function AlternateScopesIcon({ className, ...props }: OcticonProps) {
+  return <ShieldCheckIcon {...props} className={cn('text-gitify-warning', className)} />;
+}
 
 function getScopeIcon(account: Account): FC<OcticonProps> {
   if (hasRecommendedScopes(account)) {
@@ -59,7 +59,7 @@ function getScopeIcon(account: Account): FC<OcticonProps> {
   return ShieldCheckIcon;
 }
 
-export const AccountsRoute: FC = () => {
+export function AccountsRoute() {
   const navigate = useNavigate();
 
   const { logoutFromAccount } = useLogins();
@@ -407,4 +407,4 @@ export const AccountsRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

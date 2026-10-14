@@ -88,6 +88,7 @@ the macOS native vibrancy material, which Chromium cannot render.
 ### 🎨 Code Style & Conventions
 
 - Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
+- Renderer React components are defined as function declarations. `React.FC` is reserved for typing a component value (a prop or return type), never a component definition; `react/function-component-definition` enforces this.
 - Follow existing file and folder naming conventions.
 - See [ARCHITECTURE.md](./ARCHITECTURE.md) for the renderer's module layering, state ownership, and side-effect conventions.
 - Keep commit messages clear and descriptive.

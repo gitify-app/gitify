@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
@@ -27,14 +27,14 @@ export interface RepositoryHeaderProps {
   onAnimateExit: (animate: boolean) => void;
 }
 
-export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
+export function RepositoryHeader({
   repoName,
   repoNotifications,
   isCollapsed,
   isAnimatingExit,
   onToggle,
   onAnimateExit,
-}) => {
+}: RepositoryHeaderProps) {
   const { markNotificationsAsRead, markNotificationsAsDone } = useNotifications();
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
@@ -117,4 +117,4 @@ export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
       )}
     </Stack>
   );
-};
+}

@@ -42,7 +42,7 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   return isLoggedIn ? children : <Navigate replace state={{ from: location }} to="/login" />;
 }
 
-export const App = () => {
+export function App() {
   // Initialize store subscriptions with proper cleanup
   useEffect(() => {
     const cleanup = initializeStoreSubscriptions();
@@ -128,4 +128,4 @@ export const App = () => {
       </ThemeProvider>
     </QueryClientProvider>
   );
-};
+}

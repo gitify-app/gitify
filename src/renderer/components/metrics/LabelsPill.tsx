@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { TagIcon } from '@primer/octicons-react';
 import { IssueLabelToken, LabelGroup } from '@primer/react';
 
@@ -12,7 +10,7 @@ export interface LabelsPillProps {
   issueFields?: GitifyIssueField[];
 }
 
-export const LabelsPill: FC<LabelsPillProps> = ({ labels, issueFields }) => {
+export function LabelsPill({ labels, issueFields }: LabelsPillProps) {
   const fieldTokens = (issueFields ?? []).map((field) => ({
     text: `${field.name}: ${field.value}`,
     fillColor: field.fillColor,
@@ -54,4 +52,4 @@ export const LabelsPill: FC<LabelsPillProps> = ({ labels, issueFields }) => {
       metric={fieldTokens.length + (labels?.length ?? 0)}
     />
   );
-};
+}

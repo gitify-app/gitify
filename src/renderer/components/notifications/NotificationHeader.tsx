@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -16,9 +16,7 @@ export interface NotificationHeaderProps {
   notification: GitifyNotification;
 }
 
-export const NotificationHeader: FC<NotificationHeaderProps> = ({
-  notification,
-}: NotificationHeaderProps) => {
+export function NotificationHeader({ notification }: NotificationHeaderProps) {
   const showNumber = useSettingsStore((s) => s.showNumber);
 
   return (
@@ -51,4 +49,4 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
       </div>
     )
   );
-};
+}
