@@ -6,7 +6,7 @@ Before submitting your contribution, please read through the following guide.
 
 We also suggest you read the [Project Philosophy](#project-philosophy) in our documentation.
 
-### Getting Started
+### 🚀 Getting Started
 
 > [!TIP]
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
@@ -35,7 +35,7 @@ Start development mode (includes GraphQL codegen and hot module reload):
 pnpm dev
 ```
 
-### Tests
+### 🛠️ Tests
 
 Tooling is unified through [Vite+][vite-plus-website], which bundles the linter (oxlint), formatter (oxfmt), test runner (Vitest), and dev/build pipeline (Vite).
 
@@ -53,7 +53,7 @@ pnpm test
 pnpm test -u
 ```
 
-#### Visual regression tests
+#### 🧪 Visual regression tests
 
 `pnpm test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
 spacing, theme changes) are covered separately by a browser-mode project that
@@ -85,18 +85,18 @@ guard fails the run outside Linux rather than letting that happen.
 Note that these baselines capture the `backdrop-filter` fallback for Glass, not
 the macOS native vibrancy material, which Chromium cannot render.
 
-### Code Style & Conventions
+### 🎨 Code Style & Conventions
 
 - Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
 - Follow existing file and folder naming conventions.
 - See [ARCHITECTURE.md](./ARCHITECTURE.md) for the renderer's module layering, state ownership, and side-effect conventions.
 - Keep commit messages clear and descriptive.
 
-### How to Report Bugs or Request Features
+### 🐛 How to Report Bugs or Request Features
 
 If you encounter a bug or have a feature request, please [open an issue][github-issues] with clear steps to reproduce or a detailed description of your idea. Check for existing issues before creating a new one.
 
-### Releases
+### 🚢 Releases
 
 Releases are automated with [release-please][release-please]. There is no release branch and no manual version bump.
 
@@ -116,23 +116,23 @@ Releases are automated with [release-please][release-please]. There is no releas
 
 No manual milestone creation, renaming, or closing is required.
 
-#### Release automation permissions
+#### 🔐 Release automation permissions
 
 - Packaging and publication use `contents: write`.
 - The milestone automation uses `issues: write`.
 - Pull request notification uses `issues: write`, `pull-requests: write`, and `contents: read`.
 - The validation jobs (`lint`, `tests`) remain read-only.
 
-### Design Guidelines
+### 🖌️ Design Guidelines
 
 1. Use sentence case where possible
 2. Use GitHub's [Octicons][github-octicons] for iconography
 
-### Project Philosophy
+### 🧭 Project Philosophy
 
 This project is a tool for monitoring new notifications from supported Git forges. It's not meant to be a full-featured forge client. We want to keep it simple and focused on that core functionality. We're happy to accept contributions that help us achieve that goal, but we're also happy to say no to things that don't. We're not trying to be everything to everyone.
 
-#### Multi-forge support
+#### 🔌 Multi-forge support
 
 Gitify supports notifications from multiple Git forges. New forges may be added under the following conditions:
 
@@ -143,7 +143,7 @@ Gitify supports notifications from multiple Git forges. New forges may be added 
 
 Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Cloud with Data Residency), **Gitea** (incl. Forgejo, Codeberg), **Bitbucket Cloud** and **GitLab** (Cloud and Self-Managed).
 
-#### Things we won't do
+#### 🚫 Things we won't do
 
 - Operating-system level features
   - Do not disturb, including on schedules. https://github.com/gitify-app/gitify/issues/416#issuecomment-1746480130
