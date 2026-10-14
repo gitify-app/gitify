@@ -17,7 +17,7 @@ export function formatNotification(notification: RawGitifyNotification): GitifyN
     ...notification,
     display: {
       type: formatNotificationType(notification),
-      number: formatNotificationNumber(notification),
+      identifier: formatNotificationIdentifier(notification),
       title: formatNotificationTitle(notification),
       icon: {
         type: helpers.iconType,
@@ -108,31 +108,66 @@ export function formatGitHubNumber(num: number): string {
   return `#${num}`;
 }
 
+/** Length of an abbreviated commit SHA, matching GitHub's short form. */
+export const COMMIT_SHA_SHORT_LENGTH = 7;
+
 /**
- * Return the formatted notification number for this notification.
+ * Abbreviate a commit SHA to GitHub's short form.
  *
- * @param notification - The notification whose subject number to format.
- * @returns A `"#N"` string when a subject number is present, otherwise `""`.
+ * @param sha - The full commit SHA.
+ * @returns The first seven characters of the SHA.
  */
-export function formatNotificationNumber(notification: RawGitifyNotification): string {
-  return notification.subject?.number ? formatGitHubNumber(notification.subject.number) : '';
+export function formatCommitSha(sha: string): string {
+  return sha.slice(0, COMMIT_SHA_SHORT_LENGTH);
+}
+
+/**
+ * Return the identifier for this notification.
+ *
+ * Resolves the subject's identifier in priority order: an issue/PR/discussion
+ * `#number`, a release tag, or an abbreviated commit SHA.
+ *
+ * @param notification - The notification whose subject identifier to format.
+ * @returns The identifier string, or `""` when the subject has none.
+ */
+export function formatNotificationIdentifier(notification: RawGitifyNotification): string {
+  const number = notification.subject?.number;
+
+  if (number) {
+    return formatGitHubNumber(number);
+  }
+
+  const tagName = notification.subject?.tagName;
+
+  if (tagName) {
+    return tagName;
+  }
+
+  const commitSha = notification.subject?.commitSha;
+
+  if (commitSha) {
+    return formatCommitSha(commitSha);
+  }
+
+  return '';
 }
 
 /**
  * Return the formatted notification title for this notification.
  *
- * Appends the subject number in brackets when present
- * (e.g. `"Fix bug [#42]"`).
+ * Appends the subject number in brackets when present (e.g. `"Fix bug [#42]"`).
+ * Release tags and commit SHAs are not appended - those subjects surface their
+ * identifier in the row's identifier slot only.
  *
  * @param notification - The notification whose title to format.
  * @returns The display title string.
  */
 export function formatNotificationTitle(notification: RawGitifyNotification): string {
   let title = notification.subject.title;
-  const number = formatNotificationNumber(notification);
+  const number = notification.subject?.number;
 
-  if (number.length > 0) {
-    title = `${title} [${number}]`;
+  if (number) {
+    title = `${title} [${formatGitHubNumber(number)}]`;
   }
 
   return title;

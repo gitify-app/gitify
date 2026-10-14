@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
 import {
+  mockCommitGitifyNotification,
   mockGiteaGitifyNotification,
   mockGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
@@ -92,6 +93,32 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     // `group-hover:invisible` (not `hidden`) keeps the number's space but hides
     // it on hover, so the full-height rail can never leave it half-covered.
     expect(screen.getByText('123')).toHaveClass('group-hover:invisible');
+  });
+
+  it('shows the release tag as the identifier', () => {
+    const props: NotificationRowProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: { ...mockGitifyNotification.subject, type: 'Release', tagName: '0.0.1' },
+        display: { ...mockGitifyNotification.display, identifier: '0.0.1' },
+      },
+      isRepositoryAnimatingExit: false,
+    };
+
+    const tree = renderWithProviders(<NotificationRow {...props} />);
+
+    expect(tree.getByText('0.0.1')).toBeInTheDocument();
+  });
+
+  it('shows the commit short SHA as the identifier', () => {
+    const props: NotificationRowProps = {
+      notification: mockCommitGitifyNotification,
+      isRepositoryAnimatingExit: false,
+    };
+
+    const tree = renderWithProviders(<NotificationRow {...props} />);
+
+    expect(tree.getByText('d2a86d8')).toBeInTheDocument();
   });
 
   it('should render itself & its children - notification is read', async () => {

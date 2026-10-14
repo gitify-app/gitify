@@ -1219,7 +1219,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
       data-wrap="nowrap"
     >
       <button
-        aria-describedby="_r_o_"
+        aria-describedby="_r_12_"
         type="button"
       >
         <svg
@@ -1249,7 +1249,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
         class="prc-TooltipV2-Tooltip-tLeuB"
         data-component="Tooltip"
         data-direction="e"
-        id="_r_o_"
+        id="_r_12_"
         popover="auto"
         role="tooltip"
       >
@@ -1360,7 +1360,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
             class="flex min-w-0 flex-wrap gap-1"
           >
             <button
-              aria-describedby="_r_p_"
+              aria-describedby="_r_13_"
               type="button"
             >
               <span
@@ -1411,14 +1411,14 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-component="Tooltip"
               data-direction="s"
-              id="_r_p_"
+              id="_r_13_"
               popover="auto"
               role="tooltip"
             >
               octocat approved these changes
             </span>
             <button
-              aria-describedby="_r_q_"
+              aria-describedby="_r_14_"
               type="button"
             >
               <span
@@ -1469,7 +1469,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx > should render i
               class="prc-TooltipV2-Tooltip-tLeuB"
               data-component="Tooltip"
               data-direction="s"
-              id="_r_q_"
+              id="_r_14_"
               popover="auto"
               role="tooltip"
             >

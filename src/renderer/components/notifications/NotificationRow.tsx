@@ -140,7 +140,7 @@ export const NotificationRow: FC<NotificationRowProps> = ({
                 (isGroupByDate() || !showNumber) && 'hidden',
               )}
             >
-              {notification.display.number}
+              {notification.display.identifier}
             </Text>
           </Stack>
 
