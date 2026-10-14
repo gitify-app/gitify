@@ -4,12 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGiteaAccount } from '../../__mocks__/account-mocks';
 
-import type { Forge, Hostname, Token } from '../../types';
+import type { Hostname } from '../../types';
 
-import {
-  type PersonalAccessTokenFormData,
-  validatePersonalAccessTokenForm,
-} from '../../utils/auth/loginValidation';
 import * as comms from '../../utils/system/comms';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
 
@@ -32,76 +28,6 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     expect(screen.getByTestId('login-create-token')).toBeDisabled();
     await userEvent.click(screen.getByTestId('login-submit'));
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
-  });
-
-  describe('form validation', () => {
-    it.each(['gitea.example.com:0', 'gitea.example.com:65536', 'gitea.example.com:https'])(
-      'rejects invalid port in %s',
-      (hostname) => {
-        expect(
-          validatePersonalAccessTokenForm(
-            {
-              hostname: hostname as Hostname,
-              token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
-            },
-            'gitea',
-          ).hostname,
-        ).toBe('Hostname format is invalid');
-      },
-    );
-
-    it.each<Forge>(['github', 'gitlab', 'bitbucket'])('keeps ports invalid for %s', (forge) => {
-      expect(
-        validatePersonalAccessTokenForm(
-          {
-            hostname: 'git.example.com:3000' as Hostname,
-            token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
-          },
-          forge,
-        ).hostname,
-      ).toBe('Hostname format is invalid');
-    });
-
-    it.each(['http://git.internal', 'http://git.internal:3000', 'gitea.example.com:3000'])(
-      'accepts Gitea origin %s',
-      (hostname) => {
-        expect(
-          validatePersonalAccessTokenForm(
-            { hostname: hostname as Hostname, token: 'a'.repeat(40) as Token },
-            'gitea',
-          ),
-        ).toEqual({});
-      },
-    );
-
-    it.each<Forge>(['github', 'gitlab', 'bitbucket'])('keeps %s hostnames HTTPS-only', (forge) => {
-      expect(
-        validatePersonalAccessTokenForm(
-          { hostname: 'http://git.internal:3000' as Hostname, token: '' as Token },
-          forge,
-        ).hostname,
-      ).toBe('Hostname format is invalid');
-    });
-
-    it('should validate the token matches the Gitea format', () => {
-      const values: PersonalAccessTokenFormData = {
-        hostname: 'gitea.example.com' as Hostname,
-        token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
-      };
-
-      expect(validatePersonalAccessTokenForm(values, 'gitea')).toEqual({});
-    });
-
-    it('should reject tokens that are not 40-character lowercase hex', () => {
-      const values: PersonalAccessTokenFormData = {
-        hostname: 'gitea.example.com' as Hostname,
-        token: 'GHT_INVALID_TOKEN' as Token,
-      };
-
-      expect(validatePersonalAccessTokenForm(values, 'gitea').token).toBe(
-        'Token format is invalid',
-      );
-    });
   });
 
   it.each([

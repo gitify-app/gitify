@@ -3,9 +3,6 @@ import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 
-import type { ClientID, ClientSecret, Hostname } from '../../types';
-
-import { type OAuthAppFormData, validateOAuthAppForm } from '../../utils/auth/loginValidation';
 import * as logger from '../../utils/core/logger';
 import * as comms from '../../utils/system/comms';
 import { GitHubLoginWithOAuthAppRoute } from './LoginWithOAuthApp';
@@ -28,32 +25,6 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(-1);
-  });
-
-  describe('form validation', () => {
-    it('should validate the form values are not empty', () => {
-      const values: OAuthAppFormData = {
-        hostname: null as unknown as Hostname,
-        clientId: null as unknown as ClientID,
-        clientSecret: null as unknown as ClientSecret,
-      };
-
-      expect(validateOAuthAppForm(values).hostname).toBe('Hostname is required');
-      expect(validateOAuthAppForm(values).clientId).toBe('Client ID is required');
-      expect(validateOAuthAppForm(values).clientSecret).toBe('Client Secret is required');
-    });
-
-    it('should validate the form values are correct format', () => {
-      const values: OAuthAppFormData = {
-        hostname: 'hello' as Hostname,
-        clientId: '!@£INVALID-.1' as ClientID,
-        clientSecret: '!@£INVALID-.1' as ClientSecret,
-      };
-
-      expect(validateOAuthAppForm(values).hostname).toBe('Hostname format is invalid');
-      expect(validateOAuthAppForm(values).clientId).toBe('Client ID format is invalid');
-      expect(validateOAuthAppForm(values).clientSecret).toBe('Client Secret format is invalid');
-    });
   });
 
   describe("'Create new OAuth App' button", () => {

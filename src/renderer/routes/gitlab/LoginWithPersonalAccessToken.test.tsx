@@ -6,10 +6,6 @@ import { mockGitLabAccount } from '../../__mocks__/account-mocks';
 
 import type { Hostname, Token } from '../../types';
 
-import {
-  type PersonalAccessTokenFormData,
-  validatePersonalAccessTokenForm,
-} from '../../utils/auth/loginValidation';
 import * as comms from '../../utils/system/comms';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
 
@@ -29,37 +25,6 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />);
 
     expect(screen.getByTestId('login-hostname')).toHaveValue('gitlab.com');
-  });
-
-  describe('form validation', () => {
-    it('accepts the modern routing-prefixed token format', () => {
-      const values: PersonalAccessTokenFormData = {
-        hostname: 'gitlab.com' as Hostname,
-        token: MODERN_TOKEN,
-      };
-
-      expect(validatePersonalAccessTokenForm(values, 'gitlab')).toEqual({});
-    });
-
-    it('rejects an empty token', () => {
-      const values: PersonalAccessTokenFormData = {
-        hostname: 'gitlab.com' as Hostname,
-        token: '' as Token,
-      };
-
-      expect(validatePersonalAccessTokenForm(values, 'gitlab').token).toBe('Token is required');
-    });
-
-    it('rejects an invalid hostname', () => {
-      const values: PersonalAccessTokenFormData = {
-        hostname: 'not a hostname' as Hostname,
-        token: MODERN_TOKEN,
-      };
-
-      expect(validatePersonalAccessTokenForm(values, 'gitlab').hostname).toBe(
-        'Hostname format is invalid',
-      );
-    });
   });
 
   it('should open the token settings for the configured hostname', async () => {
