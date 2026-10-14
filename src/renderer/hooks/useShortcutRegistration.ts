@@ -1,48 +1,8 @@
 import { useEffect } from 'react';
 
-import { create } from 'zustand';
-
-import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../stores';
-
-import type { KeyboardAcceleratorShortcut } from '../types';
+import { useSettingsStore, useShortcutRegistrationStore } from '../stores';
 
 import { applyKeyboardShortcut } from '../utils/system/comms';
-
-interface ShortcutRegistrationStore {
-  /**
-   * User-facing error when the configured global shortcut could not be
-   * registered (e.g. already in use by another application).
-   */
-  shortcutRegistrationError: string | null;
-
-  /**
-   * The last accelerator that registered successfully; used to revert the
-   * setting when a newly chosen accelerator fails to register.
-   */
-  lastAppliedShortcut: KeyboardAcceleratorShortcut;
-
-  setShortcutRegistrationError: (error: string | null) => void;
-  setLastAppliedShortcut: (accelerator: KeyboardAcceleratorShortcut) => void;
-  clearShortcutRegistrationError: () => void;
-  reset: () => void;
-}
-
-/**
- * Transient (non-persisted) state for global keyboard shortcut registration.
- */
-export const useShortcutRegistrationStore = create<ShortcutRegistrationStore>()((set) => ({
-  shortcutRegistrationError: null,
-  lastAppliedShortcut: DEFAULT_SETTINGS_STATE.openGitifyShortcut,
-
-  setShortcutRegistrationError: (error) => set({ shortcutRegistrationError: error }),
-  setLastAppliedShortcut: (accelerator) => set({ lastAppliedShortcut: accelerator }),
-  clearShortcutRegistrationError: () => set({ shortcutRegistrationError: null }),
-  reset: () =>
-    set({
-      shortcutRegistrationError: null,
-      lastAppliedShortcut: DEFAULT_SETTINGS_STATE.openGitifyShortcut,
-    }),
-}));
 
 /**
  * Registers the global open/close shortcut whenever the setting changes,

@@ -1,10 +1,10 @@
 import { renderHook, waitFor } from '@testing-library/react';
 
-import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../stores';
+import { DEFAULT_SETTINGS_STATE, useSettingsStore, useShortcutRegistrationStore } from '../stores';
 
 import type { KeyboardAcceleratorShortcut } from '../types';
 
-import { useShortcutRegistration, useShortcutRegistrationStore } from './useShortcutRegistration';
+import { useShortcutRegistration } from './useShortcutRegistration';
 
 describe('renderer/hooks/useShortcutRegistration.ts', () => {
   it('registers the configured shortcut and records it as last applied', async () => {

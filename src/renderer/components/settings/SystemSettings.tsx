@@ -5,8 +5,11 @@ import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/re
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useShortcutRegistrationStore } from '../../hooks/useShortcutRegistration';
-import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
+import {
+  DEFAULT_SETTINGS_STATE,
+  useSettingsStore,
+  useShortcutRegistrationStore,
+} from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
