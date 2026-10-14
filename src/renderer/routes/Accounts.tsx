@@ -87,7 +87,7 @@ export const AccountsRoute: FC = () => {
     useAccountsStore.setState({
       accounts: [account, ...accounts.filter((a) => a !== account)],
     });
-    navigate('/accounts', { replace: true });
+    void navigate('/accounts', { replace: true });
   };
 
   const handleRefresh = async (account: Account) => {
@@ -109,7 +109,7 @@ export const AccountsRoute: FC = () => {
       }));
     }
 
-    navigate('/accounts', { replace: true });
+    void navigate('/accounts', { replace: true });
 
     /**
      * Typically the above refresh API call completes very quickly,
@@ -146,7 +146,7 @@ export const AccountsRoute: FC = () => {
       return;
     }
 
-    navigate(loginMethod.route, {
+    void navigate(loginMethod.route, {
       replace: true,
       state: { account },
     });
@@ -381,7 +381,7 @@ export const AccountsRoute: FC = () => {
                           keepMenuOpenRef.current = true;
                           setSelectedForge(adapter);
                         } else {
-                          navigate(adapter.loginMethods[0].route, { replace: true });
+                          void navigate(adapter.loginMethods[0].route, { replace: true });
                         }
                       }}
                     >

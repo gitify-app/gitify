@@ -212,14 +212,14 @@ describe('renderer/hooks/useNotifications.ts', () => {
       await waitFor(() => expect(result.current.status).toBe('success'));
 
       act(() => {
-        result.current.refetchNotifications();
+        void result.current.refetchNotifications();
       });
       await waitFor(() => expect(result.current.status).toBe('error'));
       expect(result.current.isFetching).toBe(false);
 
       // Trigger a retry that stays unsettled.
       act(() => {
-        result.current.refetchNotifications();
+        void result.current.refetchNotifications();
       });
 
       await waitFor(() => expect(result.current.isFetching).toBe(true));
@@ -251,7 +251,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       // Trigger a background refetch that stays unsettled.
       act(() => {
-        result.current.refetchNotifications();
+        void result.current.refetchNotifications();
       });
 
       await waitFor(() => expect(result.current.isFetching).toBe(true));
@@ -792,7 +792,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       const enterpriseCount = mockMultipleAccountNotifications[1].notifications.length;
 
-      await act(() => {
+      act(() => {
         result.current.removeAccountNotifications(mockGitHubCloudAccount);
       });
 

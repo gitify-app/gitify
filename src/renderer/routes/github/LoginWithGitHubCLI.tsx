@@ -47,7 +47,7 @@ export const GitHubLoginWithCLIRoute: FC = () => {
 
     try {
       await loginWithCli('github', hostname);
-      navigate('/');
+      void navigate('/');
     } catch (err) {
       rendererLogError('loginWithCli', 'Failed to login with GitHub CLI', toError(err));
       setError(summarizeLoginError(err) ?? `Failed to login with GitHub CLI against ${hostname}`);

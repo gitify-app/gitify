@@ -124,7 +124,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
           ...(data.username ? { username: data.username } : {}),
           forge,
         });
-        navigate('/');
+        void navigate('/');
       } catch (err) {
         rendererLogError('loginWithPersonalAccessToken', 'Failed to login with PAT', toError(err));
         setErrors({

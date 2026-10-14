@@ -99,7 +99,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
 
         if (token && isActive) {
           await loginWithDeviceFlowComplete(forge, token, session.hostname);
-          navigate('/');
+          void navigate('/');
           return;
         }
 

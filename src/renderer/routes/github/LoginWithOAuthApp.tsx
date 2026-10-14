@@ -73,7 +73,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
     async (data: OAuthAppFormData) => {
       try {
         await loginWithOAuthApp(forge, data);
-        navigate('/');
+        void navigate('/');
       } catch (err) {
         rendererLogError('loginWithOAuthApp', 'Failed to login with OAuth App', toError(err));
         setErrors({

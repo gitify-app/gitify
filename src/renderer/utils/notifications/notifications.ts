@@ -140,7 +140,8 @@ export async function enrichNotifications(
 
   // Adapters that do not implement enrichment (e.g. Gitea) leave
   // notifications unchanged.
-  const enrich = getAdapter(notifications[0].account).enrichNotifications;
+  const adapter = getAdapter(notifications[0].account);
+  const enrich = adapter.enrichNotifications?.bind(adapter);
   if (!enrich) {
     return notifications;
   }

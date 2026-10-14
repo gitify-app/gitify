@@ -27,9 +27,6 @@ jobs:
           cache: true
           node-version-file: '.nvmrc'
 
-      - name: Check TypeScript
-        run: vp exec tsc --noEmit
-
       - name: Run tests with coverage
         run: vp run test
 

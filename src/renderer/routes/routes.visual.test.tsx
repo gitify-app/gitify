@@ -128,7 +128,7 @@ const ACCESSIBILITY_THEMES = [
 ];
 
 async function captureRoute(route: RouteCase, theme: Theme, designLanguage: DesignLanguage) {
-  await renderRoute(route.element, { ...route.state, theme, designLanguage });
+  renderRoute(route.element, { ...route.state, theme, designLanguage });
 
   await expect(page.getByTestId('visual-root')).toMatchScreenshot(
     `${route.name}-${theme.toLowerCase()}-${designLanguage}`,

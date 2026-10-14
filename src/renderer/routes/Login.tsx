@@ -70,7 +70,7 @@ export const LoginRoute: FC = () => {
   useEffect(() => {
     if (isLoggedIn) {
       showWindow();
-      navigate('/', { replace: true });
+      void navigate('/', { replace: true });
     }
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [isLoggedIn]);

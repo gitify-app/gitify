@@ -166,6 +166,13 @@ export default defineConfig({
       },
   lint: {
     plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import'],
+    // Enable the type-aware path so `vp check` runs TypeScript type checks
+    // natively (via the TS Go toolchain / tsgolint). `typeCheck` requires
+    // `typeAware`; enabling both also turns on the type-aware lint rules.
+    options: {
+      typeAware: true,
+      typeCheck: true,
+    },
     categories: {
       correctness: 'error',
     },
@@ -326,6 +333,11 @@ export default defineConfig({
         rules: {
           'typescript/no-explicit-any': 'off',
           'no-console': 'off',
+          // Mocks are typed as the real Electron/interface classes, so
+          // `expect(dialog.showMessageBox)` reads as an unbound class method
+          // even though the runtime value is a `vi.fn()`. The rule is a false
+          // positive for test doubles, so scope it to non-test code.
+          'typescript/unbound-method': 'off',
         },
       },
       {

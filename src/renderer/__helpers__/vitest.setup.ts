@@ -80,7 +80,7 @@ function getRequestTarget(input: RequestInfo | URL): string {
     return input.url;
   }
 
-  return String(input);
+  return (input as Request).url;
 }
 
 function createGitifyBridgeApi(): Window['gitify'] {

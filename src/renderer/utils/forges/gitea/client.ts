@@ -4,6 +4,7 @@ import type { Account, Hostname } from '../../../types';
 import type { GiteaNotificationThread, GiteaUser } from './types';
 
 import { decryptValue } from '../../system/comms';
+import { mergeHeaders } from '../headers';
 import { getGiteaOrigin } from './auth';
 
 const PAGE_SIZE = 100;
@@ -12,7 +13,7 @@ export function getGiteaApiBaseUrl(hostname: Hostname): URL {
   return new URL('/api/v1/', getGiteaOrigin(hostname));
 }
 
-async function authHeaders(account: Account): Promise<HeadersInit> {
+async function authHeaders(account: Account): Promise<Record<string, string>> {
   const { token } = await decryptValue(account.token);
   return {
     Accept: 'application/json',
@@ -35,10 +36,7 @@ async function giteaRequest<T>(account: Account, pathname: string, init?: Reques
 
   const response = await fetch(url.toString(), {
     ...init,
-    headers: {
-      ...(await authHeaders(account)),
-      ...init?.headers,
-    },
+    headers: mergeHeaders(await authHeaders(account), init?.headers),
   });
 
   if (!response.ok) {

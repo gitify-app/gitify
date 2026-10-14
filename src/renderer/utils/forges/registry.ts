@@ -47,40 +47,29 @@ export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
 
 /** Create a view for this account snapshot; resolve a new view when the account changes. */
 export function getAccountAdapter(account: Account): ForgeAccountAdapter {
-  const {
-    capabilities,
-    formatNotificationUser,
-    fetchAuthenticatedUser,
-    onAccountTokenChange,
-    listNotifications,
-    markThreadAsRead,
-    markThreadAsDone,
-    unsubscribeThread,
-    followUrl,
-    getAccountSettingsUrl,
-    getIssuesUrl,
-    getPullRequestsUrl,
-    getNotificationsUrl,
-    oauthScopes,
-  } = getAdapter(account).accountOps;
+  const { accountOps } = getAdapter(account);
+  const { capabilities, oauthScopes } = accountOps;
+  // Optional method, so bind it to keep a single reference and avoid an unbound
+  // method reference (the adapter ops are otherwise called as `accountOps.x(...)`).
+  const onAccountTokenChange = accountOps.onAccountTokenChange?.bind(accountOps);
 
   return {
     capabilities: {
       markAsDone: () => capabilities.markAsDone(account),
       unsubscribeThread: () => capabilities.unsubscribeThread(account),
     },
-    formatNotificationUser: (user) => formatNotificationUser(account, user),
-    fetchAuthenticatedUser: () => fetchAuthenticatedUser(account),
+    formatNotificationUser: (user) => accountOps.formatNotificationUser(account, user),
+    fetchAuthenticatedUser: () => accountOps.fetchAuthenticatedUser(account),
     onAccountTokenChange: onAccountTokenChange ? () => onAccountTokenChange(account) : undefined,
-    listNotifications: () => listNotifications(account),
-    markThreadAsRead: (threadId) => markThreadAsRead(account, threadId),
-    markThreadAsDone: (threadId) => markThreadAsDone(account, threadId),
-    unsubscribeThread: (threadId) => unsubscribeThread(account, threadId),
-    followUrl: <T>(url: Link) => followUrl<T>(account, url),
-    getAccountSettingsUrl: () => getAccountSettingsUrl(account),
-    getIssuesUrl: () => getIssuesUrl(account),
-    getPullRequestsUrl: () => getPullRequestsUrl(account),
-    getNotificationsUrl: () => getNotificationsUrl(account),
+    listNotifications: () => accountOps.listNotifications(account),
+    markThreadAsRead: (threadId) => accountOps.markThreadAsRead(account, threadId),
+    markThreadAsDone: (threadId) => accountOps.markThreadAsDone(account, threadId),
+    unsubscribeThread: (threadId) => accountOps.unsubscribeThread(account, threadId),
+    followUrl: <T>(url: Link) => accountOps.followUrl<T>(account, url),
+    getAccountSettingsUrl: () => accountOps.getAccountSettingsUrl(account),
+    getIssuesUrl: () => accountOps.getIssuesUrl(account),
+    getPullRequestsUrl: () => accountOps.getPullRequestsUrl(account),
+    getNotificationsUrl: () => accountOps.getNotificationsUrl(account),
     oauthScopes: oauthScopes
       ? {
           hasRequired: () => oauthScopes.hasRequired(account),

@@ -6,13 +6,13 @@ import { getWorkflowRunAttributes, workflowRunHandler } from './workflowRun';
 
 describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
   describe('enrich', () => {
-    it('deploy review workflow run state', async () => {
+    it('deploy review workflow run state', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'some-user requested your review to deploy to an environment',
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(mockNotification);
+      const result = workflowRunHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'WAITING',
@@ -21,25 +21,25 @@ describe('renderer/utils/notifications/handlers/workflowRun.ts', () => {
       });
     });
 
-    it('unknown workflow run state', async () => {
+    it('unknown workflow run state', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'some-user requested your unknown-state to deploy to an environment',
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(mockNotification);
+      const result = workflowRunHandler.enrich(mockNotification);
 
       // Returns empty object when state cannot be determined
       expect(result).toEqual({});
     });
 
-    it('unhandled workflow run title', async () => {
+    it('unhandled workflow run title', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'unhandled workflow run structure',
         type: 'WorkflowRun',
       });
 
-      const result = await workflowRunHandler.enrich(mockNotification);
+      const result = workflowRunHandler.enrich(mockNotification);
 
       // Returns empty object when title cannot be parsed
       expect(result).toEqual({});
