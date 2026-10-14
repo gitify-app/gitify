@@ -11,6 +11,7 @@ import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
+import { hasNoAccountErrors } from '../utils/notifications/status';
 
 export const NotificationsRoute: FC = () => {
   const { notifications, status, globalError, hasNotifications } = useNotifications();
@@ -28,8 +29,8 @@ export const NotificationsRoute: FC = () => {
     [notifications, filteredAccounts],
   );
 
-  const hasNoAccountErrors = useMemo(
-    () => visibleNotifications.every((account) => account.error === null),
+  const noAccountErrors = useMemo(
+    () => hasNoAccountErrors(visibleNotifications),
     [visibleNotifications],
   );
 
@@ -41,7 +42,7 @@ export const NotificationsRoute: FC = () => {
     return <Oops error={globalError ?? Errors.UNKNOWN} />;
   }
 
-  if (!hasNotifications && hasNoAccountErrors) {
+  if (!hasNotifications && noAccountErrors) {
     return <AllRead />;
   }
 

@@ -1,13 +1,13 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithProviders } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../__helpers__/test-utils';
 
-import { Size } from '../../types';
+import { Size } from '../types';
 
 import { LogoIcon } from './LogoIcon';
 
-describe('renderer/components/icons/LogoIcon.tsx', () => {
+describe('renderer/icons/LogoIcon.tsx', () => {
   it('renders correctly (light)', () => {
     const tree = renderWithProviders(<LogoIcon size={Size.SMALL} />);
 

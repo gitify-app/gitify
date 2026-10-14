@@ -14,6 +14,8 @@ import { Title } from '../primitives/Title';
 
 import { type KeyboardAcceleratorShortcut, OpenPreference, toLink } from '../../types';
 
+import { VolumeDownIcon } from '../../icons/VolumeDownIcon';
+import { VolumeUpIcon } from '../../icons/VolumeUpIcon';
 import { openExternalLink } from '../../utils/system/comms';
 import {
   formatAcceleratorForDisplay,
@@ -26,8 +28,6 @@ import {
   decreaseVolume,
   increaseVolume,
 } from '../../utils/ui/volume';
-import { VolumeDownIcon } from '../icons/VolumeDownIcon';
-import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 

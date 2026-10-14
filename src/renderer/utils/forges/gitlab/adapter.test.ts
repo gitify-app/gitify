@@ -5,10 +5,9 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 
 import { useSettingsStore } from '../../../stores';
 
-import { GitLabIcon } from '../../../components/icons/GitLabIcon';
-
 import type { Account, GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 
+import { GitLabIcon } from '../../../icons/GitLabIcon';
 import { gitlabAdapter } from './adapter';
 import * as client from './client';
 

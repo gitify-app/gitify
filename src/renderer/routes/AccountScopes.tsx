@@ -6,7 +6,6 @@ import { Button, Label, Stack, Text } from '@primer/react';
 
 import { Constants, OAUTH_SCOPE } from '../constants';
 
-import { ScopeStatusIcon } from '../components/icons/ScopeStatusIcon';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -14,6 +13,7 @@ import { Header } from '../components/primitives/Header';
 
 import type { Account } from '../types';
 
+import { ScopeStatusIcon } from '../icons/ScopeStatusIcon';
 import {
   externallyManagedScopes,
   getAlternateScopeNames,

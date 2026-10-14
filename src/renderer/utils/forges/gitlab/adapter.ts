@@ -1,7 +1,5 @@
 import { KeyIcon } from '@primer/octicons-react';
 
-import { GitLabIcon } from '../../../components/icons/GitLabIcon';
-
 import type { Account, Hostname, Link, RawGitifyNotification, Token } from '../../../types';
 import { IconColor } from '../../../types';
 import type { PlatformType } from '../../auth/types';
@@ -12,6 +10,7 @@ import type {
   RefreshAccountData,
 } from '../types';
 
+import { GitLabIcon } from '../../../icons/GitLabIcon';
 import { isValidHostname } from '../../auth/utils';
 import { rendererLogWarn, toError } from '../../core/logger';
 import { createNotificationHandler } from '../github/handlers';
