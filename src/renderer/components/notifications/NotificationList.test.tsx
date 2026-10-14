@@ -16,7 +16,8 @@ import {
 import { GroupBy } from '../../types';
 
 import { getAccountUUID } from '../../utils/auth/utils';
-import { buildAccountItems, buildRepositoryItems, NotificationList } from './NotificationList';
+import { buildAccountItems, buildRepositoryItems } from '../../utils/notifications/listItems';
+import { NotificationList } from './NotificationList';
 
 // LegendList virtualizes based on real scroll metrics, which happy-dom cannot
 // provide. Renders every flattened item through the real renderItem callback so
