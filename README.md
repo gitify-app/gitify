@@ -1,4 +1,4 @@
-# 🐙 Gitify
+# Gitify
 
 [![CI Workflow][ci-workflow-badge]][ci-actions] [![Release Workflow][release-workflow-badge]][release-actions] [![Coverage][coverage-badge]][coverage] [![Quality Gate Status][quality-badge]][quality] [![Renovate enabled][renovate-badge]][renovate] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
 
