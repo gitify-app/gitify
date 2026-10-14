@@ -3,8 +3,7 @@ import { act } from '@testing-library/react';
 import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
-import { useShortcutRegistrationStore } from '../hooks/useShortcutRegistration';
-import { useAccountsStore, useSettingsStore } from '../stores';
+import { useAccountsStore, useSettingsStore, useShortcutRegistrationStore } from '../stores';
 
 import { Theme } from '../types';
 

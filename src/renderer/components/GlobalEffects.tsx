@@ -6,11 +6,13 @@ import { useNotificationsHost } from '../hooks/notifications/useNotificationsHos
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
+import { useShortcutRegistration } from '../hooks/useShortcutRegistration';
 import {
-  useShortcutRegistration,
+  useAccountsStore,
+  useFiltersStore,
+  useSettingsStore,
   useShortcutRegistrationStore,
-} from '../hooks/useShortcutRegistration';
-import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+} from '../stores';
 
 import { setTrayIconColorAndTitle } from '../utils/system/tray';
 

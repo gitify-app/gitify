@@ -8,3 +8,4 @@ export {
   getNotificationFailureKey,
 } from './useNotificationActionFailuresStore';
 export { default as useSettingsStore } from './useSettingsStore';
+export { default as useShortcutRegistrationStore } from './useShortcutRegistrationStore';
