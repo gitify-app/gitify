@@ -269,6 +269,59 @@ export default defineConfig({
         },
       },
       {
+        // Renderer boundary: `icons` is a presentational leaf. It may not
+        // depend on any implementation layer. See ARCHITECTURE.md.
+        files: ['src/renderer/icons/**/*.ts', 'src/renderer/icons/**/*.tsx'],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: [
+                    '**/utils/**',
+                    '**/stores/**',
+                    '**/hooks/**',
+                    '**/components/**',
+                    '**/routes/**',
+                  ],
+                  message:
+                    'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        // Renderer boundary: `types`/`constants` are leaf modules. They may
+        // reference types (hence allowTypeImports) but not implementation
+        // layers. See ARCHITECTURE.md.
+        files: ['src/renderer/types.ts', 'src/renderer/constants.ts'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: [
+                    '**/utils/**',
+                    '**/stores/**',
+                    '**/hooks/**',
+                    '**/components/**',
+                    '**/routes/**',
+                  ],
+                  allowTypeImports: true,
+                  message:
+                    'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
         files: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
         rules: {
           'typescript/no-explicit-any': 'off',
@@ -313,13 +366,7 @@ export default defineConfig({
         { groupName: 'constants', elementNamePattern: ['**/constants', '**/constants/**'] },
         {
           groupName: 'state',
-          elementNamePattern: [
-            '**/context/**',
-            '**/hooks/**',
-            '**/routes/**',
-            '**/stores',
-            '**/stores/**',
-          ],
+          elementNamePattern: ['**/hooks/**', '**/routes/**', '**/stores', '**/stores/**'],
         },
         {
           groupName: 'ui',
