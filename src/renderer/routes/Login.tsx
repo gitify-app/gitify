@@ -7,12 +7,12 @@ import { cn } from 'cn';
 
 import { useAccountsStore } from '../stores';
 
-import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
 
 import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
 
+import { LogoIcon } from '../icons/LogoIcon';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 

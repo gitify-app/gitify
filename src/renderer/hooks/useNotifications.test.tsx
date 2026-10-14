@@ -34,10 +34,12 @@ import {
 } from '../utils/notifications/pollInterval';
 import * as audio from '../utils/system/audio';
 import * as native from '../utils/system/native';
+import { useNotificationsHost } from './notifications/useNotificationsHost';
 import { useNotifications } from './useNotifications';
 
 // Exercise the real hook implementation (globally mocked in vitest.setup)
 vi.unmock('./useNotifications');
+vi.unmock('./notifications/useNotificationsHost');
 
 vi.mock('../utils/notifications/notifications', async () => {
   const actual = await vi.importActual<typeof import('../utils/notifications/notifications')>(
@@ -70,7 +72,7 @@ const createWrapper = () => {
 };
 
 const renderNotificationsHook = () =>
-  renderHook(() => useNotifications({ withSideEffects: true }), { wrapper: createWrapper() });
+  renderHook(() => useNotificationsHost(), { wrapper: createWrapper() });
 
 describe('renderer/hooks/useNotifications.ts', () => {
   const githubAdapter = getAdapter('github');
@@ -278,7 +280,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         const wrapper = createWrapper();
 
         // Singleton side-effects host (GlobalEffects)
-        renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+        renderHook(() => useNotificationsHost(), { wrapper });
 
         // Plain consumers (notification rows, repo groups, sidebar, etc.)
         // mount staggered over time, like real components rendering across
@@ -340,7 +342,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
           fetchInterval: 1000,
         });
 
-        renderHook(() => useNotifications({ withSideEffects: true }), {
+        renderHook(() => useNotificationsHost(), {
           wrapper: createWrapper(),
         });
 
@@ -385,12 +387,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       );
 
-      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+      renderHook(() => useNotificationsHost(), { wrapper });
       await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
 
       // `refetchOnMount` is stale-gated, so a second host mounting inside the
       // staleTime window shares the cached data rather than refetching.
-      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+      renderHook(() => useNotificationsHost(), { wrapper });
 
       await act(async () => {
         await Promise.resolve();
@@ -450,7 +452,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       );
 
-      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+      renderHook(() => useNotificationsHost(), { wrapper });
       await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
 
       try {
@@ -832,7 +834,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
       // listener per mounted row and multiply wake-triggered refetches.
       expect(vi.mocked(window.gitify.onSystemWake)).not.toHaveBeenCalled();
 
-      renderHook(() => useNotifications({ withSideEffects: true }), { wrapper });
+      renderHook(() => useNotificationsHost(), { wrapper });
 
       expect(vi.mocked(window.gitify.onSystemWake)).toHaveBeenCalledTimes(1);
     });

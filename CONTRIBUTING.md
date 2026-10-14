@@ -89,6 +89,7 @@ the macOS native vibrancy material, which Chromium cannot render.
 
 - Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
 - Follow existing file and folder naming conventions.
+- See [ARCHITECTURE.md](./ARCHITECTURE.md) for the renderer's module layering, state ownership, and side-effect conventions.
 - Keep commit messages clear and descriptive.
 
 ### How to Report Bugs or Request Features

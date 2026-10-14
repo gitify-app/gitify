@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react';
 
-import { renderWithProviders } from '../../__helpers__/test-utils';
+import { renderWithProviders } from '../__helpers__/test-utils';
 
 import { ScopeStatusIcon } from './ScopeStatusIcon';
 
-describe('renderer/components/icons/ScopeStatusIcon.tsx', () => {
+describe('renderer/icons/ScopeStatusIcon.tsx', () => {
   describe('granted state', () => {
     it('renders a success icon when granted', () => {
       const tree = renderWithProviders(<ScopeStatusIcon granted={true} />);

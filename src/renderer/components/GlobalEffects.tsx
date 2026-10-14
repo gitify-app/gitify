@@ -2,9 +2,9 @@ import { type FC, useEffect } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+import { useNotificationsHost } from '../hooks/notifications/useNotificationsHost';
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
-import { useNotifications } from '../hooks/useNotifications';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import {
   useShortcutRegistration,
@@ -40,7 +40,7 @@ export const GlobalEffects: FC = () => {
 
   // Notification fetching side effects (sound / native alerts, interval/focus/reconnect
   // polling, and the system-wake refetch)
-  const { status, notificationCount } = useNotifications({ withSideEffects: true });
+  const { status, notificationCount } = useNotificationsHost();
 
   // Periodic account refreshes (startup + hourly interval)
   useAccounts();

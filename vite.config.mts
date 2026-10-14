@@ -195,6 +195,80 @@ export default defineConfig({
     },
     overrides: [
       {
+        // Renderer boundary: `utils` and `stores` are peer domain layers; neither
+        // may import hooks, components, or routes. See ARCHITECTURE.md.
+        files: ['src/renderer/utils/**/*.ts', 'src/renderer/utils/**/*.tsx'],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: ['**/hooks/**', '**/components/**', '**/routes/**'],
+                  message:
+                    'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        files: ['src/renderer/stores/**/*.ts', 'src/renderer/stores/**/*.tsx'],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: ['**/hooks/**', '**/components/**', '**/routes/**'],
+                  message:
+                    'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        files: ['src/renderer/hooks/**/*.ts', 'src/renderer/hooks/**/*.tsx'],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: ['**/components/**', '**/routes/**'],
+                  message:
+                    'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        files: ['src/renderer/components/**/*.ts', 'src/renderer/components/**/*.tsx'],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: ['**/routes/**'],
+                  message:
+                    'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
         files: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
         rules: {
           'typescript/no-explicit-any': 'off',

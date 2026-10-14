@@ -36,6 +36,17 @@ vi.mock('../hooks/useNotifications', async () => {
   };
 });
 
+vi.mock('../hooks/notifications/useNotificationsHost', async () => {
+  const actual = await vi.importActual<
+    typeof import('../hooks/notifications/useNotificationsHost')
+  >('../hooks/notifications/useNotificationsHost');
+  const { getMockedNotificationsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useNotificationsHost: () => getMockedNotificationsState(),
+  };
+});
+
 vi.mock('../hooks/useLogins', async () => {
   const actual = await vi.importActual<typeof import('../hooks/useLogins')>('../hooks/useLogins');
   const { getMockedLoginsState } = await import('./hook-mocks');

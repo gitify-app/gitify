@@ -22,7 +22,7 @@ import {
 
 export const AppearanceSettings: FC = () => {
   // Account store values
-  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts);
+  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 
   // Setting store actions
   const toggleSetting = useSettingsStore((s) => s.toggleSetting);
@@ -174,7 +174,7 @@ export const AppearanceSettings: FC = () => {
               notifications list.
             </Text>
           }
-          visible={!hasMultipleAccounts()}
+          visible={!hasMultipleAccounts}
         />
 
         <Checkbox

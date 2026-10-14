@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/icons/ScopeStatusIcon.tsx > granted state > renders a success icon when granted 1`] = `
+exports[`renderer/icons/ScopeStatusIcon.tsx > granted state > renders a success icon when granted 1`] = `
 <div>
   <svg
     aria-hidden="true"
@@ -22,7 +22,7 @@ exports[`renderer/components/icons/ScopeStatusIcon.tsx > granted state > renders
 </div>
 `;
 
-exports[`renderer/components/icons/ScopeStatusIcon.tsx > missing state > renders a danger icon when not granted 1`] = `
+exports[`renderer/icons/ScopeStatusIcon.tsx > missing state > renders a danger icon when not granted 1`] = `
 <div>
   <svg
     aria-hidden="true"
@@ -44,7 +44,7 @@ exports[`renderer/components/icons/ScopeStatusIcon.tsx > missing state > renders
 </div>
 `;
 
-exports[`renderer/components/icons/ScopeStatusIcon.tsx > notApplicable state > renders a dash icon when notApplicable 1`] = `
+exports[`renderer/icons/ScopeStatusIcon.tsx > notApplicable state > renders a dash icon when notApplicable 1`] = `
 <div>
   <svg
     aria-hidden="true"
@@ -66,7 +66,7 @@ exports[`renderer/components/icons/ScopeStatusIcon.tsx > notApplicable state > r
 </div>
 `;
 
-exports[`renderer/components/icons/ScopeStatusIcon.tsx > size prop > renders correctly with a custom size 1`] = `
+exports[`renderer/icons/ScopeStatusIcon.tsx > size prop > renders correctly with a custom size 1`] = `
 <div>
   <svg
     aria-hidden="true"

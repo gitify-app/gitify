@@ -12,12 +12,11 @@ import {
   ShieldCheckIcon,
 } from '@primer/octicons-react';
 
-import { BitbucketIcon } from '../../components/icons/BitbucketIcon';
-import { GitLabIcon } from '../../components/icons/GitLabIcon';
-
 import { IconColor, type PullRequestApprovalIcon, type UserType } from '../../types';
 import type { PlatformType } from '../auth/types';
 
+import { BitbucketIcon } from '../../icons/BitbucketIcon';
+import { GitLabIcon } from '../../icons/GitLabIcon';
 import type { PullRequestReviewState } from '../forges/github/graphql/generated/graphql';
 
 export interface PullRequestReviewGroup {
