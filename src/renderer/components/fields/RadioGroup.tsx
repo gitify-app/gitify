@@ -1,4 +1,4 @@
-import type { ChangeEvent, FC, ReactNode } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -16,7 +16,7 @@ export interface RadioGroupProps {
   tooltip?: ReactNode | string;
 }
 
-export const RadioGroup: FC<RadioGroupProps> = (props: RadioGroupProps) => {
+export function RadioGroup(props: RadioGroupProps) {
   return (
     <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
       <FieldLabel label={props.label} name={props.name} />
@@ -44,4 +44,4 @@ export const RadioGroup: FC<RadioGroupProps> = (props: RadioGroupProps) => {
       {props.tooltip && <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />}
     </Stack>
   );
-};
+}

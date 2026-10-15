@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useCallback, useEffect, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -34,7 +34,7 @@ interface LocationState {
 
 type ScopeChoice = 'public' | 'full';
 
-export const GitHubLoginWithDeviceFlowRoute: FC = () => {
+export function GitHubLoginWithDeviceFlowRoute() {
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -355,4 +355,4 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
       )}
     </Page>
   );
-};
+}

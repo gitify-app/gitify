@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Sidebar } from '../Sidebar';
 
@@ -10,7 +10,7 @@ interface AppLayoutProps {
  * AppLayout is the main container for the application.
  * It handles the basic layout with sidebar and content area.
  */
-export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+export function AppLayout({ children }: AppLayoutProps) {
   const setFocusRef = (el: HTMLButtonElement | null) => {
     if (el) {
       el.focus();
@@ -33,4 +33,4 @@ export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
       <div className="flex-1 pl-sidebar">{children}</div>
     </div>
   );
-};
+}

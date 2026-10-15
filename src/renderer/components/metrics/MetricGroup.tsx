@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { useSettingsStore } from '../../stores';
 
 import type { GitifyNotification } from '../../types';
@@ -19,7 +17,7 @@ export interface MetricGroupProps {
   notification: GitifyNotification;
 }
 
-export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
+export function MetricGroup({ notification }: MetricGroupProps) {
   const showPills = useSettingsStore((s) => s.showPills);
 
   if (!showPills) {
@@ -61,4 +59,4 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
       />
     </div>
   );
-};
+}

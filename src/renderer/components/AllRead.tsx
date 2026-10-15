@@ -1,4 +1,4 @@
-import { type FC, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { Constants } from '../constants';
 
@@ -12,7 +12,7 @@ interface AllReadProps {
   fullHeight?: boolean;
 }
 
-export const AllRead: FC<AllReadProps> = ({ fullHeight = true }: AllReadProps) => {
+export function AllRead({ fullHeight = true }: AllReadProps) {
   const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
   const emoji = useMemo(() => randomElement(Constants.EMOJIS.ALL_READ), []);
@@ -20,4 +20,4 @@ export const AllRead: FC<AllReadProps> = ({ fullHeight = true }: AllReadProps) =
   const heading = `No new ${hasFilters ? 'filtered ' : ''} notifications`;
 
   return <EmojiSplash emoji={emoji} fullHeight={fullHeight} heading={heading} />;
-};
+}

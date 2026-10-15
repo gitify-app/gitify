@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
 import { Button, Stack, Tooltip } from '@primer/react';
 
@@ -17,7 +15,7 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-export const FiltersRoute: FC = () => {
+export function FiltersRoute() {
   const clearFilters = useFiltersStore((s) => s.reset);
 
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
@@ -53,4 +51,4 @@ export const FiltersRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

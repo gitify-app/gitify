@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -28,11 +28,7 @@ interface HoverGroupProps {
  * title line or the issue number, and the footer reserves its width so the
  * pills wrap clear of the buttons.
  */
-export const HoverGroup: FC<HoverGroupProps> = ({
-  bgColor,
-  children,
-  fullHeight = false,
-}: HoverGroupProps) => {
+export function HoverGroup({ bgColor, children, fullHeight = false }: HoverGroupProps) {
   return (
     <Stack
       align={fullHeight ? 'stretch' : 'center'}
@@ -49,4 +45,4 @@ export const HoverGroup: FC<HoverGroupProps> = ({
       {children}
     </Stack>
   );
-};
+}

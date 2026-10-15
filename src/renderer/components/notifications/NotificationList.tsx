@@ -1,4 +1,4 @@
-import { type FC, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { LegendList } from '@legendapp/list/react';
 
@@ -28,10 +28,10 @@ export interface NotificationListProps {
  * Flattened so one virtualizer windows across group boundaries, and so collapse
  * and exit-animation state survives rows unmounting on scroll.
  */
-export const NotificationList: FC<NotificationListProps> = ({
+export function NotificationList({
   accountNotifications,
   showAccountHeader,
-}) => {
+}: NotificationListProps) {
   const groupBy = useSettingsStore((s) => s.groupBy);
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 
@@ -184,4 +184,4 @@ export const NotificationList: FC<NotificationListProps> = ({
       />
     </div>
   );
-};
+}

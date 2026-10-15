@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { DevicesIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
@@ -12,7 +10,7 @@ import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
-export const TraySettings: FC = () => {
+export function TraySettings() {
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
   // Setting store actions
@@ -83,4 +81,4 @@ export const TraySettings: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

@@ -1,4 +1,3 @@
-import type React from 'react';
 import type { FC } from 'react';
 import { createElement, useState } from 'react';
 
@@ -20,14 +19,14 @@ export interface AvatarWithFallbackProps {
   icon?: FC<OcticonProps>;
 }
 
-export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
+export function AvatarWithFallback({
   src,
   alt,
   name,
   size = Size.MEDIUM,
   userType = 'User',
   icon,
-}) => {
+}: AvatarWithFallbackProps) {
   const [hasBrokenAvatarSource, setHasBrokenAvatarSource] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);
@@ -54,4 +53,4 @@ export const AvatarWithFallback: React.FC<AvatarWithFallbackProps> = ({
       )}
     </Stack>
   );
-};
+}

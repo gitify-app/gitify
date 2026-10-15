@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AlertFillIcon, LinkExternalIcon, ShieldCheckIcon } from '@primer/octicons-react';
@@ -27,7 +26,7 @@ interface LocationState {
   account: Account;
 }
 
-export const AccountScopesRoute: FC = () => {
+export function AccountScopesRoute() {
   const location = useLocation();
   const { account } = location.state as LocationState;
 
@@ -212,4 +211,4 @@ export const AccountScopesRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 
 import { RelativeTime, Stack, Text } from '@primer/react';
 
@@ -15,9 +15,7 @@ export interface NotificationFooterProps {
   notification: GitifyNotification;
 }
 
-export const NotificationFooter: FC<NotificationFooterProps> = ({
-  notification,
-}: NotificationFooterProps) => {
+export function NotificationFooter({ notification }: NotificationFooterProps) {
   const user = notification.subject.user;
   const userLabel = user
     ? getAccountAdapter(notification.account).formatNotificationUser(user)
@@ -70,4 +68,4 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
       <MetricGroup notification={notification} />
     </Stack>
   );
-};
+}

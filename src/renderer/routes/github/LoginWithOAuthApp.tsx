@@ -1,4 +1,4 @@
-import { type FC, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
@@ -28,7 +28,7 @@ interface LocationState {
   account?: Account;
 }
 
-export const GitHubLoginWithOAuthAppRoute: FC = () => {
+export function GitHubLoginWithOAuthAppRoute() {
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -213,4 +213,4 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

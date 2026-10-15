@@ -1,4 +1,4 @@
-import { type FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
@@ -34,7 +34,7 @@ import {
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
-export const SystemSettings: FC = () => {
+export function SystemSettings() {
   const shortcutRegistrationError = useShortcutRegistrationStore(
     (s) => s.shortcutRegistrationError,
   );
@@ -399,4 +399,4 @@ export const SystemSettings: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

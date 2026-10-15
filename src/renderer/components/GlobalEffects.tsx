@@ -1,4 +1,4 @@
-import { type FC, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -23,7 +23,7 @@ import { setTrayIconColorAndTitle } from '../utils/system/tray';
  * Owns: theme application, tray icon updates, global shortcut registration,
  * app reset handling, periodic account refreshes, and notification alerts.
  */
-export const GlobalEffects: FC = () => {
+export function GlobalEffects() {
   const queryClient = useQueryClient();
 
   const resetAccounts = useAccountsStore((s) => s.reset);
@@ -74,4 +74,4 @@ export const GlobalEffects: FC = () => {
   }, [resetAccounts, resetSettings, resetFilters, queryClient]);
 
   return null;
-};
+}

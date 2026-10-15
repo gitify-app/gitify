@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { CommentIcon } from '@primer/octicons-react';
 
 import { IconColor } from '../../types';
@@ -11,7 +9,7 @@ export interface CommentsPillProps {
   commentCount: number;
 }
 
-export const CommentsPill: FC<CommentsPillProps> = ({ commentCount }) => {
+export function CommentsPill({ commentCount }: CommentsPillProps) {
   if (!commentCount) {
     return null;
   }
@@ -26,4 +24,4 @@ export const CommentsPill: FC<CommentsPillProps> = ({ commentCount }) => {
       metric={commentCount}
     />
   );
-};
+}
