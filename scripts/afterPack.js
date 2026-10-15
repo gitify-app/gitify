@@ -1,10 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs');
-const {
-  flipFuses,
-  FuseVersion,
-  FuseV1Options,
-} = require('@electron/fuses');
+const { flipFuses, FuseVersion, FuseV1Options } = require('@electron/fuses');
 
 const builderConfig = require('../electron-builder');
 const electronLanguages = builderConfig.electronLanguages;
@@ -74,9 +70,7 @@ const flipElectronFuses = (appOutDir, appName, platform) => {
   const executablePath = getExecutablePath(appOutDir, appName, platform);
 
   if (!fs.existsSync(executablePath)) {
-    logAfterPackProgress(
-      `skipping fuses, executable not found: ${executablePath}`,
-    );
+    logAfterPackProgress(`skipping fuses, executable not found: ${executablePath}`);
     return;
   }
 
