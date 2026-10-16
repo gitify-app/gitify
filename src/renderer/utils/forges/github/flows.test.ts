@@ -150,11 +150,12 @@ describe('renderer/utils/forges/github/flows.ts', () => {
     };
 
     it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
+      let deliverCallback: (callbackUrl: string) => void = () => {};
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        callback('gitify://oauth?code=123-456');
+        deliverCallback = callback;
       });
 
-      const res = await flows.performGitHubWebOAuth({
+      const resultPromise = flows.performGitHubWebOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
         clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
         hostname: 'my.git.com' as Hostname,
@@ -167,11 +168,53 @@ describe('renderer/utils/forges/github/flows.ts', () => {
         ),
       );
 
+      // The callback must echo back the same `state` this attempt generated;
+      // read it from the authorization URL just asserted above.
+      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
+      const state = authorizeUrl.searchParams.get('state');
+      deliverCallback(`gitify://oauth?code=123-456&state=${state}`);
+
+      const res = await resultPromise;
+
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
       expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
 
       expect(res.authMethod).toBe('OAuth App');
       expect(res.authCode).toBe('123-456');
+    });
+
+    it('does not resolve when the callback state does not match the generated state', async () => {
+      let deliverCallback: (callbackUrl: string) => void = () => {};
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        deliverCallback = callback;
+      });
+
+      let resolved = false;
+      const resultPromise = flows
+        .performGitHubWebOAuth(webAuthOptions)
+        .then((res) => {
+          resolved = true;
+          return res;
+        });
+
+      deliverCallback('gitify://oauth?code=attacker-code&state=not-the-real-state');
+      deliverCallback('gitify://oauth?code=attacker-code-no-state');
+
+      // Give any pending microtasks a chance to run, then confirm nothing
+      // resolved the promise from either mismatched callback.
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(resolved).toBe(false);
+
+      // Deliver the real callback so the promise settles and the test
+      // doesn't leave a dangling unhandled rejection.
+      const authorizeUrl = new URL(
+        openExternalLinkSpy.mock.calls[openExternalLinkSpy.mock.calls.length - 1][0] as string,
+      );
+      const state = authorizeUrl.searchParams.get('state');
+      deliverCallback(`gitify://oauth?code=the-real-code&state=${state}`);
+      const res = await resultPromise;
+      expect(res.authCode).toBe('the-real-code');
     });
 
     it('should call performGitHubWebOAuth - failure', async () => {

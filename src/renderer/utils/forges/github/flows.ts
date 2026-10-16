@@ -24,6 +24,17 @@ type DeviceFlowErrorResponse = {
 };
 
 /**
+ * Generates a cryptographically random OAuth `state` value for one web-flow
+ * login attempt, using `crypto.getRandomValues` per this codebase's
+ * secure-coding convention (see `utils/core/random.ts`).
+ */
+function generateOAuthState(): string {
+  const buf = new Uint8Array(16);
+  crypto.getRandomValues(buf);
+  return Array.from(buf, (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/**
  * Initiate a GitHub OAuth Web Flow (OAuth App) authentication.
  *
  * Opens the GitHub authorization URL in the user's browser, then waits for the
@@ -34,11 +45,19 @@ type DeviceFlowErrorResponse = {
  */
 export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
+    // A per-attempt, unguessable value this app itself tracks and checks on
+    // callback, so a `gitify://oauth` callback carrying an authorization code
+    // this specific login attempt never requested (e.g. one an attacker
+    // obtained for their own GitHub account) is rejected instead of silently
+    // accepted and exchanged for a token.
+    const expectedState = generateOAuthState();
+
     const { url } = getWebFlowAuthorizationUrl({
       clientType: 'oauth-app',
       clientId: authOptions.clientId,
       scopes: getRecommendedScopeNames(),
       allowSignup: false,
+      state: expectedState,
       request: request.defaults({
         baseUrl: `https://${authOptions.hostname}`,
       }),
@@ -63,17 +82,28 @@ export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promis
 
       const type = url.hostname;
       const code = url.searchParams.get('code');
+      const state = url.searchParams.get('state');
       const error = url.searchParams.get('error');
       const errorDescription = url.searchParams.get('error_description');
       const errorUri = url.searchParams.get('error_uri');
 
-      if (code && type === 'oauth') {
+      if (code && type === 'oauth' && state === expectedState) {
         unsubscribeAuthCallback?.();
         resolve({
           authMethod: 'OAuth App',
           authCode: code as AuthCode,
           authOptions: authOptions,
         });
+      } else if (code && type === 'oauth') {
+        // A code arrived but its state doesn't match this login attempt's
+        // own value (or carries none) - do not treat it as this login
+        // completing, since accepting it would let a code obtained outside
+        // this flow (e.g. for a different GitHub account) be exchanged for
+        // a token as if it belonged to this session.
+        rendererLogError(
+          'renderer:auth-callback',
+          'Rejected an authentication callback with a missing or mismatched state parameter',
+        );
       } else if (error) {
         unsubscribeAuthCallback?.();
         reject(
