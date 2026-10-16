@@ -1,6 +1,6 @@
 import { buildNotificationsState, type NotificationsState } from '../useNotifications';
+import { useNotificationActions } from './useNotificationActions';
 import { useNotificationEffects } from './useNotificationEffects';
-import { useNotificationMutations } from './useNotificationMutations';
 import { useNotificationsQuery } from './useNotificationsQuery';
 
 /**
@@ -15,7 +15,7 @@ import { useNotificationsQuery } from './useNotificationsQuery';
  */
 export const useNotificationsHost = (): NotificationsState => {
   const query = useNotificationsQuery({ poll: true });
-  const mutations = useNotificationMutations(query.notificationsQueryKey);
+  const actions = useNotificationActions();
 
   useNotificationEffects({
     enabled: true,
@@ -27,5 +27,5 @@ export const useNotificationsHost = (): NotificationsState => {
     fetchIntervalMs: query.fetchIntervalMs,
   });
 
-  return buildNotificationsState(query, mutations);
+  return buildNotificationsState(query, actions);
 };

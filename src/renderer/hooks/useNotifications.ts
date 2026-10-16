@@ -7,9 +7,9 @@ import type {
 } from '../types';
 
 import {
-  type NotificationMutations,
-  useNotificationMutations,
-} from './notifications/useNotificationMutations';
+  type NotificationActions,
+  useNotificationActions,
+} from './notifications/useNotificationActions';
 import {
   type NotificationsQueryResult,
   useNotificationsQuery,
@@ -38,12 +38,12 @@ export interface NotificationsState {
 
 /**
  * Assemble the public notification reader/actions surface from the query and
- * mutation halves. Shared by the reader hook and the host hook so both expose
+ * actions halves. Shared by the reader hook and the host hook so both expose
  * an identical API.
  */
 export const buildNotificationsState = (
   query: NotificationsQueryResult,
-  mutations: NotificationMutations,
+  actions: NotificationActions,
 ): NotificationsState => ({
   status: query.status,
   globalError: query.globalError,
@@ -56,12 +56,12 @@ export const buildNotificationsState = (
   hasNotifications: query.hasNotifications,
   hasUnreadNotifications: query.hasUnreadNotifications,
 
-  refetchNotifications: query.refetchNotifications,
-  removeAccountNotifications: query.removeAccountNotifications,
+  refetchNotifications: actions.refetchNotifications,
+  removeAccountNotifications: actions.removeAccountNotifications,
 
-  markNotificationsAsRead: mutations.markNotificationsAsRead,
-  markNotificationsAsDone: mutations.markNotificationsAsDone,
-  unsubscribeNotification: mutations.unsubscribeNotification,
+  markNotificationsAsRead: actions.markNotificationsAsRead,
+  markNotificationsAsDone: actions.markNotificationsAsDone,
+  unsubscribeNotification: actions.unsubscribeNotification,
 });
 
 /**
@@ -71,11 +71,14 @@ export const buildNotificationsState = (
  * listeners, and shares the query cache with every other consumer. The
  * app-level host (`useNotificationsHost`) owns those side effects.
  *
+ * A consumer that only needs the actions should use `useNotificationActions`
+ * directly so it does not subscribe to notification data.
+ *
  * @returns The current notifications state and action callbacks.
  */
 export const useNotifications = (): NotificationsState => {
   const query = useNotificationsQuery({ poll: false });
-  const mutations = useNotificationMutations(query.notificationsQueryKey);
+  const actions = useNotificationActions();
 
-  return buildNotificationsState(query, mutations);
+  return buildNotificationsState(query, actions);
 };

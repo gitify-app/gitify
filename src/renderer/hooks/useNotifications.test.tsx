@@ -39,6 +39,7 @@ import { useNotifications } from './useNotifications';
 
 // Exercise the real hook implementation (globally mocked in vitest.setup)
 vi.unmock('./useNotifications');
+vi.unmock('./notifications/useNotificationActions');
 vi.unmock('./notifications/useNotificationsHost');
 
 vi.mock('../utils/notifications/notifications', async () => {

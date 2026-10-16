@@ -70,6 +70,8 @@ App-level side effects are owned by a single host. `GlobalEffects` mounts exactl
 
 Consumers read the shared query cache and stores, and **do not register their own** polling, alerts, wake, or focus listeners. This keeps background work (for example, firing one poll per interval) from multiplying with the number of mounted components. When you add a new background effect, add it to the host, not to a leaf component.
 
+Subscription is separate from side effects, but it multiplies the same way: every TanStack Query observer re-runs the query's `select` and structural-sharing walk whenever the cached data changes. A component that renders once per notification — the notification row, the repository header — must therefore not subscribe. It obtains notification actions (mark as read/done, unsubscribe, remove an account, refetch) with `useNotificationActions`, which never calls `useQuery`. Components that read notification data use `useNotifications` and stay subscribed by design.
+
 ## Forge adapters
 
 Multi-forge support is adapter-based. Each forge implements the `ForgeAdapter` interface in `src/renderer/utils/forges/`, and shared code routes through `getAdapter(forge)` (forge-wide members) or `getAccountAdapter(account)` (account-scoped operations). Shared code never imports forge-specific modules directly, and there is no forge-specific branching outside an adapter module. See `CONTRIBUTING.md` for the conditions for adding a forge.
