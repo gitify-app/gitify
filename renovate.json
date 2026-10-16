@@ -13,13 +13,6 @@
       "allowedVersions": "<12"
     },
     {
-      "description": "Group Playwright with the browser container image used by visual regression tests, and wait for both updates to pass the release-age check.",
-      "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"],
-      "groupName": "playwright",
-      "minimumReleaseAge": "3 days",
-      "internalChecksFilter": "strict"
-    },
-    {
       "description": "Give core runtime dependency updates a distinct scope so release-please can include them in the changelog.",
       "matchPackageNames": [
         "electron",
