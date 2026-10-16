@@ -86,7 +86,7 @@
   "devDependencies": {
     "@discordapp/twemoji": "16.0.1",
     "@electron/notarize": "3.1.2",
-    "@graphql-codegen/cli": "7.4.5",
+    "@graphql-codegen/cli": "7.4.6",
     "@graphql-codegen/schema-ast": "6.1.1",
     "@graphql-codegen/typescript-operations": "6.1.10",
     "@graphql-typed-document-node/core": "3.2.0",
