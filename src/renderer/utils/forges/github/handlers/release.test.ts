@@ -70,7 +70,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   it('iconType', () => {
-    expect(releaseHandler.iconType(mockNotification).displayName).toBe('TagIcon');
+    expect(releaseHandler.iconType(mockNotification).displayName).toBe('ReleaseIcon');
   });
 
   it('defaultUrl', () => {

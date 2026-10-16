@@ -12,6 +12,7 @@ import {
   IssueOpenedIcon,
   MilestoneIcon,
   PlusIcon,
+  ReleaseIcon,
   SmileyIcon,
   SyncIcon,
   TagIcon,
@@ -309,7 +310,7 @@ export function NotificationSettings() {
                       </Stack>
 
                       <Stack align="center" direction="horizontal" gap="condensed">
-                        <TagIcon size={Size.SMALL} />
+                        <ReleaseIcon size={Size.SMALL} />
                         <Text>Release</Text>
                         <Text className="text-gitify-icon-muted">v1.2.3</Text>
                       </Stack>
