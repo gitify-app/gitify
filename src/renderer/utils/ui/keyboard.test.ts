@@ -9,13 +9,13 @@ describe('renderer/utils/keyboard.ts', () => {
       metaKey: false,
       ctrlKey: false,
       altKey: false,
-    } as KeyboardEvent;
+    };
 
     it('returns true for HTMLInputElement target', () => {
       const event = {
         ...baseEvent,
         target: document.createElement('input'),
-      } as KeyboardEvent;
+      } as unknown as KeyboardEvent;
 
       expect(shouldIgnoreKeyboardEvent(event)).toBe(true);
     });
@@ -24,7 +24,7 @@ describe('renderer/utils/keyboard.ts', () => {
       const event = {
         ...baseEvent,
         target: document.createElement('textarea'),
-      } as KeyboardEvent;
+      } as unknown as KeyboardEvent;
 
       expect(shouldIgnoreKeyboardEvent(event)).toBe(true);
     });
@@ -50,7 +50,7 @@ describe('renderer/utils/keyboard.ts', () => {
       const event = {
         ...baseEvent,
         target: document.createElement('div'),
-      } as KeyboardEvent;
+      } as unknown as KeyboardEvent;
 
       expect(shouldIgnoreKeyboardEvent(event)).toBe(false);
     });

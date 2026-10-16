@@ -175,7 +175,7 @@ describe('renderer/utils/comms.ts', () => {
   });
 
   it('copy to clipboard', async () => {
-    copyToClipboard('some-value');
+    void copyToClipboard('some-value');
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith('some-value');

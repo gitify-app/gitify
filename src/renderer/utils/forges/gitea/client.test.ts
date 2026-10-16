@@ -216,7 +216,7 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       await patchGiteaNotificationThread(httpAccount, '42');
       expect(fetchMock()).toHaveBeenCalledTimes(3);
       for (const [url, init] of fetchMock().mock.calls) {
-        expect(String(url)).toMatch(/^http:\/\/git\.internal:3000\/api\/v1\//);
+        expect(url as string).toMatch(/^http:\/\/git\.internal:3000\/api\/v1\//);
         expect(init?.headers).toMatchObject({ Authorization: 'token decrypted' });
       }
     });

@@ -5,7 +5,7 @@ import { EVENTS } from '../../shared/events';
 
 import { registerStorageHandlers } from './storage';
 
-type IpcHandler = (event: unknown, ...args: unknown[]) => unknown | Promise<unknown>;
+type IpcHandler = (event: unknown, ...args: unknown[]) => unknown;
 
 const handleMock = vi.fn();
 

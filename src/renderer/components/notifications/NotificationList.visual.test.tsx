@@ -41,7 +41,7 @@ async function renderList(
   settings: Partial<SettingsState> = {},
   accounts: AccountNotifications[] = [{ account, notifications, error: null }],
 ) {
-  const tree = await renderRoute(<NotificationsRoute />, {
+  const tree = renderRoute(<NotificationsRoute />, {
     theme: Theme.LIGHT,
     designLanguage: DesignLanguage.CLASSIC,
     accounts: accounts.map((entry) => entry.account),
@@ -225,6 +225,7 @@ describe('notification list in a browser', () => {
         error: { title: 'Account failed', descriptions: ['Try again'], emojis: ['🔥'] },
       },
     ]);
+    // oxlint-disable-next-line typescript/await-thenable -- Vitest types omit `expect.element`'s poll promise
     await expect.element(page.getByText('Account failed')).toBeVisible();
   });
 
@@ -312,6 +313,7 @@ describe('notification list in a browser', () => {
       finish(true);
       await pending;
     });
+    // oxlint-disable-next-line typescript/await-thenable -- Vitest types omit `expect.element`'s poll promise
     await expect.element(page.getByTestId('repository-mark-as-read')).toBeVisible();
     expect(scrollContainer()).toBe(scroller);
     expect(document.getElementById('new-notification')?.classList.contains('opacity-0')).toBe(

@@ -61,7 +61,7 @@ describe('renderer/hooks/useLogins.ts', () => {
     const { result } = renderLoginsHook();
 
     await act(async () => {
-      result.current.loginWithDeviceFlowStart('github');
+      void result.current.loginWithDeviceFlowStart('github');
     });
 
     expect(startSpy).toHaveBeenCalled();
@@ -104,7 +104,10 @@ describe('renderer/hooks/useLogins.ts', () => {
     const { result } = renderLoginsHook();
 
     await act(async () => {
-      result.current.loginWithDeviceFlowPoll('github', 'session' as unknown as DeviceFlowSession);
+      void result.current.loginWithDeviceFlowPoll(
+        'github',
+        'session' as unknown as DeviceFlowSession,
+      );
     });
 
     expect(pollSpy).toHaveBeenCalledWith('session');
@@ -131,7 +134,7 @@ describe('renderer/hooks/useLogins.ts', () => {
     const { result } = renderLoginsHook();
 
     await act(async () => {
-      result.current.loginWithOAuthApp('github', {
+      void result.current.loginWithOAuthApp('github', {
         clientId: 'id' as ClientID,
         clientSecret: 'secret' as ClientSecret,
         hostname: Constants.GITHUB_HOSTNAME,

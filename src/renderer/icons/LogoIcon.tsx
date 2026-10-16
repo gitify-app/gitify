@@ -7,7 +7,7 @@ import { Size } from '../types';
 interface LogoIconProps {
   isDark?: boolean;
   onClick?: () => void;
-  size: Size.SMALL | Size.MEDIUM | Size.LARGE;
+  size?: Size.SMALL | Size.MEDIUM | Size.LARGE;
 }
 
 const LIGHT_GRADIENT_START = '#CCCCCC';

@@ -145,8 +145,10 @@ beforeEach(async () => {
   vi.stubGlobal(
     'fetch',
     vi.fn(async (input: RequestInfo | URL) => {
+      const target =
+        input instanceof URL ? input.href : typeof input === 'string' ? input : input.url;
       throw new Error(
-        `Unexpected network request in visual test: ${String(input)}. Mock the network boundary explicitly.`,
+        `Unexpected network request in visual test: ${target}. Mock the network boundary explicitly.`,
       );
     }),
   );

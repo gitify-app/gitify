@@ -94,13 +94,13 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(({ addBase, addComponents }) => {
-      addComponents({
+    plugin((api) => {
+      api.addComponents({
         '.gitify-scope-row': {
           '@apply rounded-md bg-gitify-accounts': {},
         },
       });
-      addBase({
+      api.addBase({
         '[data-color-mode]': {
           '--gitify-background': 'light-dark(var(--bgColor-default), var(--bgColor-muted))',
           '--gitify-account-error-bg':

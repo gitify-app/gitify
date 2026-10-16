@@ -72,9 +72,9 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
         isAllowed: isLoggedIn,
         action: () => {
           if (isOnFiltersRoute) {
-            navigate('/', { replace: true });
+            void navigate('/', { replace: true });
           } else {
-            navigate('/filters');
+            void navigate('/filters');
           }
         },
       },
@@ -95,7 +95,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
           if (isLoading) {
             return;
           }
-          navigate('/', { replace: true });
+          void navigate('/', { replace: true });
           void fetchNotifications();
         },
       },
@@ -104,10 +104,10 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
         isAllowed: isLoggedIn,
         action: () => {
           if (isOnSettingsRoute) {
-            navigate('/', { replace: true });
+            void navigate('/', { replace: true });
             void fetchNotifications();
           } else {
-            navigate('/settings');
+            void navigate('/settings');
           }
         },
       },

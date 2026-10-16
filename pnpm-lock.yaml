@@ -337,6 +337,9 @@ importers:
       graphql:
         specifier: 17.0.2
         version: 17.0.2
+      graphql-config:
+        specifier: 5.1.8
+        version: 5.1.8(@types/node@24.19.1)(graphql@17.0.2)(typescript@7.0.2)
       happy-dom:
         specifier: 20.14.6
         version: 20.14.6

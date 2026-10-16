@@ -59,7 +59,7 @@ export const useAccounts = (): AccountsState => {
   // unlocks their screen, without waiting for the next scheduled interval.
   useEffect(() => {
     return window.gitify.onSystemWake(() => {
-      refetch();
+      void refetch();
     });
   }, [refetch]);
 

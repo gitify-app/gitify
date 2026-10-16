@@ -26,7 +26,7 @@ export function Header(props: HeaderProps) {
           data-testid="header-nav-back"
           icon={ArrowLeftIcon}
           onClick={() => {
-            navigate(-1);
+            void navigate(-1);
             if (props.fetchOnBack) {
               void fetchNotifications();
             }

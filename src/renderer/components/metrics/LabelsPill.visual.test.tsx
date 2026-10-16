@@ -49,7 +49,7 @@ it.each([
   [DesignLanguage.CLASSIC, Theme.DARK],
   [DesignLanguage.CLASSIC, Theme.LIGHT],
 ])('keeps label text readable in %s %s tooltips', async (designLanguage, theme) => {
-  const tree = await renderRoute(
+  const tree = renderRoute(
     <div data-testid="label-metric" style={{ padding: 60 }}>
       <LabelsPill labels={[{ name: 'enhancement', color: '0e8a16' }]} />
     </div>,

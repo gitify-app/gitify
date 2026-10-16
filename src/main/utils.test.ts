@@ -74,8 +74,9 @@ describe('main/utils', () => {
   describe('takeScreenshot', () => {
     it('writes file and logs info', async () => {
       const mb = createMb();
-      await takeScreenshot(mb as unknown as Menubar);
-      expect(writeFile).toHaveBeenCalled();
+      takeScreenshot(mb as unknown as Menubar);
+
+      await vi.waitFor(() => expect(writeFile).toHaveBeenCalled());
       const writtenPath = (writeFile.mock.calls[0] as unknown[])[0] as string;
       expect(writtenPath.startsWith(path.join('/home/test'))).toBe(true);
       expect(logInfoMock).toHaveBeenCalledWith(
@@ -89,7 +90,7 @@ describe('main/utils', () => {
         window: { capturePage: () => Promise.reject(new Error('capture failed')) },
       };
 
-      await takeScreenshot(mb as unknown as Menubar);
+      takeScreenshot(mb as unknown as Menubar);
 
       await vi.waitFor(() =>
         expect(logErrorMock).toHaveBeenCalledWith(
