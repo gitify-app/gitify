@@ -7,7 +7,9 @@ import {
   githubCapabilities,
   getGitHubCapabilities,
   supportsAnsweredDiscussion,
+  supportsIssueFields,
   supportsStackedPullRequests,
+  supportsSubIssues,
 } from './capabilities';
 
 describe('renderer/utils/forges/github/capabilities.ts', () => {
@@ -96,11 +98,79 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
     });
   });
 
+  describe('supportsSubIssues', () => {
+    it('returns true for GitHub Cloud', () => {
+      expect(supportsSubIssues(mockGitHubCloudAccount)).toBe(true);
+    });
+
+    it('returns false for GitHub Enterprise Server < v3.17', () => {
+      expect(
+        supportsSubIssues({
+          ...mockGitHubEnterpriseServerAccount,
+          version: '3.16.5',
+        }),
+      ).toBe(false);
+    });
+
+    it('returns true for GitHub Enterprise Server >= v3.17', () => {
+      expect(
+        supportsSubIssues({
+          ...mockGitHubEnterpriseServerAccount,
+          version: '3.17.0',
+        }),
+      ).toBe(true);
+    });
+
+    it('returns false when the GHES version is unknown', () => {
+      expect(
+        supportsSubIssues({
+          ...mockGitHubEnterpriseServerAccount,
+          version: undefined,
+        }),
+      ).toBe(false);
+    });
+  });
+
+  describe('supportsIssueFields', () => {
+    it('returns true for GitHub Cloud', () => {
+      expect(supportsIssueFields(mockGitHubCloudAccount)).toBe(true);
+    });
+
+    it('returns false for GitHub Enterprise Server < v3.23', () => {
+      expect(
+        supportsIssueFields({
+          ...mockGitHubEnterpriseServerAccount,
+          version: '3.22.0',
+        }),
+      ).toBe(false);
+    });
+
+    it('returns true for GitHub Enterprise Server >= v3.23', () => {
+      expect(
+        supportsIssueFields({
+          ...mockGitHubEnterpriseServerAccount,
+          version: '3.23.0',
+        }),
+      ).toBe(true);
+    });
+
+    it('returns false when the GHES version is unknown', () => {
+      expect(
+        supportsIssueFields({
+          ...mockGitHubEnterpriseServerAccount,
+          version: undefined,
+        }),
+      ).toBe(false);
+    });
+  });
+
   describe('getGitHubCapabilities', () => {
     it('enables all gated capabilities for GitHub Cloud', () => {
       expect(getGitHubCapabilities(mockGitHubCloudAccount)).toEqual({
         stackedPullRequests: true,
         answeredDiscussion: true,
+        subIssues: true,
+        issueFields: true,
       });
     });
 
@@ -108,6 +178,36 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
       expect(getGitHubCapabilities(mockGitHubEnterpriseServerAccount)).toEqual({
         stackedPullRequests: false,
         answeredDiscussion: false,
+        subIssues: false,
+        issueFields: false,
+      });
+    });
+
+    it('enables subIssues for GitHub Enterprise Server >= v3.17', () => {
+      expect(
+        getGitHubCapabilities({
+          ...mockGitHubEnterpriseServerAccount,
+          version: '3.17.0',
+        }),
+      ).toEqual({
+        stackedPullRequests: false,
+        answeredDiscussion: true,
+        subIssues: true,
+        issueFields: false,
+      });
+    });
+
+    it('enables issueFields for GitHub Enterprise Server >= v3.23', () => {
+      expect(
+        getGitHubCapabilities({
+          ...mockGitHubEnterpriseServerAccount,
+          version: '3.23.0',
+        }),
+      ).toEqual({
+        stackedPullRequests: false,
+        answeredDiscussion: true,
+        subIssues: true,
+        issueFields: true,
       });
     });
   });

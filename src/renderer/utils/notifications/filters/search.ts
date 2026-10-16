@@ -10,24 +10,43 @@ const SEARCH_QUALIFIERS = {
     description: 'filter by thread author',
     requiresDetailsNotifications: true,
     extract: (n: RawGitifyNotification) => n.subject?.author?.login,
+    normalizeValue: (value: string) => value,
+    match: (field: string | undefined, valueLower: string) => field?.toLowerCase() === valueLower,
   },
   commenter: {
     prefix: 'commenter:',
     description: 'filter by latest comment author',
     requiresDetailsNotifications: true,
     extract: (n: RawGitifyNotification) => n.subject?.commenter?.login,
+    normalizeValue: (value: string) => value,
+    match: (field: string | undefined, valueLower: string) => field?.toLowerCase() === valueLower,
   },
   org: {
     prefix: 'org:',
     description: 'filter by organization owner',
     requiresDetailsNotifications: false,
     extract: (n: RawGitifyNotification) => n.repository?.owner?.login,
+    normalizeValue: (value: string) => value,
+    match: (field: string | undefined, valueLower: string) => field?.toLowerCase() === valueLower,
   },
   repo: {
     prefix: 'repo:',
     description: 'filter by repository full name',
     requiresDetailsNotifications: false,
     extract: (n: RawGitifyNotification) => n.repository?.fullName,
+    normalizeValue: (value: string) => value,
+    match: (field: string | undefined, valueLower: string) => field?.toLowerCase() === valueLower,
+  },
+  title: {
+    prefix: 'title:',
+    description: 'filter by subject title',
+    requiresDetailsNotifications: false,
+    extract: (n: RawGitifyNotification) => n.subject?.title,
+    // Multi-word values are out of scope: keep only the first whitespace-delimited token,
+    // so pasted input such as `title:deploy failed` matches on `deploy`.
+    normalizeValue: (value: string) => value.split(/\s+/)[0] ?? '',
+    match: (field: string | undefined, valueLower: string) =>
+      field?.toLowerCase().includes(valueLower) ?? false,
   },
 } as const;
 
@@ -58,7 +77,7 @@ export function hasExcludeSearchFilters() {
 
 export interface ParsedSearchToken {
   qualifier: SearchQualifier; // matched qualifier
-  value: string; // original-case value after prefix
+  value: string; // original-case value after prefix (normalized)
   valueLower: string; // lowercase cached
   token: string; // canonical stored token (prefix + value)
 }
@@ -74,15 +93,16 @@ export function parseSearchInput(raw: string): ParsedSearchToken | null {
   for (const qualifier of ALL_SEARCH_QUALIFIERS) {
     if (lower.startsWith(qualifier.prefix)) {
       const valuePart = trimmed.slice(qualifier.prefix.length).trim();
-      if (!valuePart) {
+      const value = qualifier.normalizeValue(valuePart);
+      if (!value) {
         return null;
       }
 
-      const token = qualifier.prefix + valuePart;
+      const token = qualifier.prefix + value;
       return {
         qualifier,
-        value: valuePart,
-        valueLower: valuePart.toLowerCase(),
+        value,
+        valueLower: value.toLowerCase(),
         token,
       };
     }
@@ -101,5 +121,5 @@ export function filterNotificationBySearchTerm(
   }
 
   const fieldValue = parsed.qualifier.extract(notification);
-  return fieldValue?.toLowerCase() === parsed.valueLower;
+  return parsed.qualifier.match(fieldValue, parsed.valueLower);
 }

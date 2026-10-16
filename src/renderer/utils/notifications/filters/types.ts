@@ -37,4 +37,15 @@ export interface Filter<T extends string> {
    * @param type filter value to use
    */
   filterNotification(notification: RawGitifyNotification, type: T): boolean;
+
+  /**
+   * Classify a notification into exactly one filter bucket so that the
+   * per-option counts of a section partition the inbox. Differs from
+   * `filterNotification` in that notifications with missing or overlapping
+   * subject data still map to a single canonical bucket (e.g. a pull request
+   * requested by both a user and a team counts only under `direct`).
+   *
+   * @param notification The notification to classify.
+   */
+  classify(notification: RawGitifyNotification): T;
 }

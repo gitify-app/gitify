@@ -1,16 +1,18 @@
-import { type FC, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+import { useNotificationsHost } from '../hooks/notifications/useNotificationsHost';
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
-import { useNotifications } from '../hooks/useNotifications';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
+import { useShortcutRegistration } from '../hooks/useShortcutRegistration';
 import {
-  useShortcutRegistration,
+  useAccountsStore,
+  useFiltersStore,
+  useSettingsStore,
   useShortcutRegistrationStore,
-} from '../hooks/useShortcutRegistration';
-import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+} from '../stores';
 
 import { setTrayIconColorAndTitle } from '../utils/system/tray';
 
@@ -21,7 +23,7 @@ import { setTrayIconColorAndTitle } from '../utils/system/tray';
  * Owns: theme application, tray icon updates, global shortcut registration,
  * app reset handling, periodic account refreshes, and notification alerts.
  */
-export const GlobalEffects: FC = () => {
+export function GlobalEffects() {
   const queryClient = useQueryClient();
 
   const resetAccounts = useAccountsStore((s) => s.reset);
@@ -31,15 +33,16 @@ export const GlobalEffects: FC = () => {
   // Subscribe to tray-related settings for useEffect dependencies
   const showNotificationsCountInTray = useSettingsStore((s) => s.showNotificationsCountInTray);
   const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
-  const useAlternateIdleIcon = useSettingsStore((s) => s.useAlternateIdleIcon);
+  const trayIconAppearance = useSettingsStore((s) => s.trayIconAppearance);
 
   const isOnline = useOnlineStatus();
 
   // Appearance side effects: color mode/scheme + design-language/material attributes
   useAppearance();
 
-  // Notification fetching side effects (sound / native alerts, inactivity refetch)
-  const { status, notificationCount } = useNotifications({ withSideEffects: true });
+  // Notification fetching side effects (sound / native alerts, interval/focus/reconnect
+  // polling, and the system-wake refetch)
+  const { status, notificationCount } = useNotificationsHost();
 
   // Periodic account refreshes (startup + hourly interval)
   useAccounts();
@@ -54,7 +57,7 @@ export const GlobalEffects: FC = () => {
   }, [
     showNotificationsCountInTray,
     useUnreadActiveIcon,
-    useAlternateIdleIcon,
+    trayIconAppearance,
     status,
     notificationCount,
     isOnline,
@@ -71,4 +74,4 @@ export const GlobalEffects: FC = () => {
   }, [resetAccounts, resetSettings, resetFilters, queryClient]);
 
   return null;
-};
+}

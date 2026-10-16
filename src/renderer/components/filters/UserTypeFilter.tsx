@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import {
   DependabotIcon,
   FeedPersonIcon,
@@ -13,14 +11,13 @@ import { Size } from '../../types';
 import { userTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
-export const UserTypeFilter: FC = () => {
+export function UserTypeFilter() {
   return (
     <FilterSection
       filter={userTypeFilter}
       filterSetting="userTypes"
       icon={FeedPersonIcon}
       id="filter-user-types"
-      layout="horizontal"
       title="User Type"
       tooltip={
         <Stack direction="vertical" gap="condensed">
@@ -39,10 +36,17 @@ export const UserTypeFilter: FC = () => {
                 <OrganizationIcon size={Size.SMALL} />
                 {userTypeFilter.FILTER_TYPES.Organization.title}
               </Stack>
+              <Stack direction="horizontal" gap="condensed">
+                <PersonIcon size={Size.SMALL} />
+                {userTypeFilter.FILTER_TYPES.other.title}
+              </Stack>
             </Stack>
           </div>
+          <Text>
+            Other covers notifications with no author or a non-human, non-organization author.
+          </Text>
         </Stack>
       }
     />
   );
-};
+}

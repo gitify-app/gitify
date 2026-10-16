@@ -1,4 +1,4 @@
-import { type FC, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { convertTextToEmojiImgHtml } from '../../utils/ui/emojis';
 
@@ -6,7 +6,7 @@ export interface IEmojiText {
   text: string;
 }
 
-export const EmojiText: FC<IEmojiText> = ({ text }) => {
+export function EmojiText({ text }: IEmojiText) {
   const ref = useRef<HTMLDivElement | null>(null);
   const mountedRef = useRef(true);
 
@@ -25,7 +25,7 @@ export const EmojiText: FC<IEmojiText> = ({ text }) => {
       }
     };
 
-    updateEmojiText();
+    void updateEmojiText();
 
     return () => {
       mountedRef.current = false;
@@ -33,4 +33,4 @@ export const EmojiText: FC<IEmojiText> = ({ text }) => {
   }, [text]);
 
   return <div className="text-7xl" ref={ref} />;
-};
+}

@@ -21,6 +21,7 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+      release_pr_title: ${{ steps.pr.outputs.prs_created == 'true' && fromJSON(steps.pr.outputs.pr).title || '' }}
     steps:
       - name: Run release-please (releases)
         id: release
@@ -38,10 +39,93 @@ jobs:
           echo "count=${count}" >> "$GITHUB_OUTPUT"
 
       - name: Run release-please (release PR)
+        id: pr
         if: ${{ steps.release.outputs.release_created != 'true' && steps.drafts.outputs.count == '0' }}
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
           skip-github-release: true
+
+  milestones:
+    name: Milestones
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_pr_title != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Ensure open milestone for upcoming release
+        id: ensure
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          TITLE: ${{ needs.release-please.outputs.release_pr_title }}
+        run: |
+          # The release-please release PR title is `chore(main): release X.Y.Z`.
+          # Parse the version so the open milestone always tracks the next release.
+          version=$(printf '%s' "${TITLE}" | sed -n -E 's/.*release[[:space:]]+([0-9]+\.[0-9]+\.[0-9]+).*/\1/p')
+          if [ -z "${version}" ]; then
+            echo "::warning::Could not parse a version from the release-please PR title '${TITLE}'"
+            exit 0
+          fi
+
+          target="Release ${version}"
+          open=$(gh api --method GET "repos/${REPO}/milestones?state=open&per_page=100" \
+            --jq '[.[] | {number, title}]')
+          count=$(printf '%s' "${open}" | jq 'length')
+
+          if [ "${count}" -eq 0 ]; then
+            gh api --method POST "repos/${REPO}/milestones" \
+              -f "title=${target}" \
+              -f "description=Upcoming release; merged pull requests ship in v${version}."
+            echo "Created open milestone '${target}'"
+          elif [ "${count}" -eq 1 ]; then
+            current=$(printf '%s' "${open}" | jq -r '.[0].title')
+            if [ "${current}" != "${target}" ]; then
+              number=$(printf '%s' "${open}" | jq -r '.[0].number')
+              # Rename (not recreate): pull requests already attached stay attached
+              # and still ship in the bumped version.
+              gh api --method PATCH "repos/${REPO}/milestones/${number}" -f "title=${target}"
+              echo "Renamed open milestone '${current}' to '${target}'"
+            else
+              echo "Open milestone '${target}' already exists"
+            fi
+          else
+            echo "::warning::Expected at most one open milestone, found ${count}; leaving them untouched"
+            exit 0
+          fi
+
+          echo "target=${target}" >> "$GITHUB_OUTPUT"
+
+      - name: Attach triggering pull request(s)
+        if: steps.ensure.outputs.target != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          TARGET: ${{ steps.ensure.outputs.target }}
+        run: |
+          # milestone.yml can lose a race with this job: it evaluates the open
+          # milestone on `pull_request: closed`, before release-please has opened
+          # the next release PR and this job has created the milestone. Resolve the
+          # pull request(s) for the push tip and attach any that shipped without one,
+          # so they are neither missing from the cycle's milestone nor the notify job.
+          prs=$(gh api "repos/${REPO}/commits/${SHA}/pulls" \
+            --jq '.[] | select(.merged_at != null) | [.number, (.milestone.title // "")] | @tsv')
+          if [ -z "${prs}" ]; then
+            echo "No merged pull request associated with ${SHA}; nothing to attach"
+            exit 0
+          fi
+
+          while IFS=$'\t' read -r number current; do
+            if [ -z "${number}" ]; then continue; fi
+            if [ "${current}" = "${TARGET}" ]; then
+              echo "Pull request #${number} already on '${TARGET}'; skipping"
+              continue
+            fi
+            gh pr edit "${number}" --repo "${REPO}" --milestone "${TARGET}"
+            echo "Attached pull request #${number} to '${TARGET}'"
+          done <<< "${prs}"
 
   lint:
     name: Lint App
@@ -66,6 +150,8 @@ jobs:
     needs: [release-please, tests]
     permissions:
       contents: write
+      issues: write
+      pull-requests: write
     with:
       tag_name: ${{ needs.release-please.outputs.tag_name }}
     secrets:

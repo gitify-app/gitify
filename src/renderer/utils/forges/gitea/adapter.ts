@@ -9,6 +9,7 @@ import type {
 } from '../types';
 
 import { createNotificationHandler } from '../github/handlers';
+import { getGiteaOrigin, isValidGiteaHostname } from './auth';
 import {
   fetchGiteaAuthenticatedUser,
   giteaGetJson,
@@ -63,14 +64,16 @@ export const giteaAdapter: ForgeAdapter = {
   icon: ServerIcon,
 
   getPlatform: () => 'Gitea',
+  getOrigin: getGiteaOrigin,
   formatUserLogin: (login) => login,
 
   getDisplayHelpers,
 
   // Gitea PATs from /user/settings/applications are 40-char lowercase hex.
   validateToken: (token: Token) => /^[a-f0-9]{40}$/.test(token),
+  validateHostname: isValidGiteaHostname,
   getPersonalAccessTokenSettingsUrl: (hostname: Hostname) =>
-    `https://${hostname}/user/settings/applications` as Link,
+    `${getGiteaOrigin(hostname)}/user/settings/applications` as Link,
   documentationUrl: GITEA_DOCS_URL,
   // Gitea only supports PAT today, so every method falls through to the key
   // icon. Adding device-flow/OAuth support later means returning their icons
@@ -111,10 +114,10 @@ export const giteaAdapter: ForgeAdapter = {
       return giteaGetJson<T>(account, url);
     },
     getAccountSettingsUrl: (account: Account) =>
-      `https://${account.hostname}/user/settings/applications` as Link,
-    getIssuesUrl: (account) => `https://${account.hostname}/issues` as Link,
-    getPullRequestsUrl: (account) => `https://${account.hostname}/pulls` as Link,
-    getNotificationsUrl: (account) => `https://${account.hostname}/notifications` as Link,
+      `${getGiteaOrigin(account.hostname)}/user/settings/applications` as Link,
+    getIssuesUrl: (account) => `${getGiteaOrigin(account.hostname)}/issues` as Link,
+    getPullRequestsUrl: (account) => `${getGiteaOrigin(account.hostname)}/pulls` as Link,
+    getNotificationsUrl: (account) => `${getGiteaOrigin(account.hostname)}/notifications` as Link,
     // Gitea has no GitHub-style OAuth scope concept, so `oauthScopes` is
     // omitted. Callers skip scopes UI when this is undefined.
   },

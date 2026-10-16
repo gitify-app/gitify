@@ -76,7 +76,7 @@ function normalizePhysicalKeyToAccelerator(event: KeyboardEvent): string | null 
   if (code.startsWith('Digit')) {
     return code.slice(5);
   }
-  if (/^F([1-9]|1[0-9]|2[0-4])$/.test(code)) {
+  if (/^F([1-9]|1\d|2[0-4])$/.test(code)) {
     return code;
   }
 
@@ -91,7 +91,10 @@ export function formatAcceleratorForDisplay(accelerator: string, isMac: boolean)
     .split('+')
     .map((segment) => {
       const entry = MODIFIER_SEGMENTS.find((m) => m.accelerator === segment);
-      return entry ? (isMac ? entry.mac : entry.other) : segment;
+      if (!entry) {
+        return segment;
+      }
+      return isMac ? entry.mac : entry.other;
     })
     .join(isMac ? '·' : '+');
 }

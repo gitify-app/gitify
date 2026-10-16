@@ -24,9 +24,10 @@ interface LoginsState {
   ) => Promise<DeviceFlowSession>;
   loginWithDeviceFlowPoll: (forge: Forge, session: DeviceFlowSession) => Promise<Token | null>;
   loginWithDeviceFlowComplete: (forge: Forge, token: Token, hostname: Hostname) => Promise<void>;
+  loginWithCli: (forge: Forge, hostname: Hostname) => Promise<void>;
   loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
-  logoutFromAccount: (account: Account) => Promise<void>;
+  logoutFromAccount: (account: Account) => void;
 }
 
 /**
@@ -96,12 +97,42 @@ export const useLogins = (): LoginsState => {
 
       const existingAccount = accounts.find((a) => a.hostname === hostname && a.method === method);
       if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
+        removeAccountNotifications(existingAccount);
       }
 
       await createAccount(method, token, hostname, forge);
     },
     [accounts, createAccount, removeAccountNotifications],
+  );
+
+  /**
+   * Login with the token held by a locally installed forge CLI.
+   *
+   * The token is resolved here only to fail fast while the login screen is
+   * still up. Nothing persists it: the CLI is re-read for every API request, so
+   * the account carries no credential of its own.
+   */
+  const loginWithCli = useCallback(
+    async (forge: Forge, hostname: Hostname) => {
+      const { cliAuth } = getAdapter(forge);
+      if (!cliAuth) {
+        throw new Error(`CLI login is not supported for forge "${forge}".`);
+      }
+
+      await cliAuth.resolveToken(hostname);
+
+      const existingAccounts = useAccountsStore
+        .getState()
+        .accounts.filter(
+          (a) => a.forge === forge && a.hostname === hostname && a.method === cliAuth.authMethod,
+        );
+      await createAccountInStore(cliAuth.authMethod, '' as Token, hostname, forge);
+
+      existingAccounts.forEach((account) => removeAccountNotifications(account));
+
+      await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+    },
+    [createAccountInStore, queryClient, removeAccountNotifications],
   );
 
   /**
@@ -121,7 +152,7 @@ export const useLogins = (): LoginsState => {
         (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
       );
       if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
+        removeAccountNotifications(existingAccount);
       }
 
       await createAccount('OAuth App', token, authOptions.hostname, forge);
@@ -150,7 +181,7 @@ export const useLogins = (): LoginsState => {
           a.forge === resolvedForge,
       );
       if (existingAccount) {
-        await removeAccountNotifications(existingAccount);
+        removeAccountNotifications(existingAccount);
       }
 
       await createAccount('Personal Access Token', token, hostname, resolvedForge, username);
@@ -159,8 +190,8 @@ export const useLogins = (): LoginsState => {
   );
 
   const logoutFromAccount = useCallback(
-    async (account: Account) => {
-      await removeAccountNotifications(account);
+    (account: Account) => {
+      removeAccountNotifications(account);
 
       removeAccount(account);
     },
@@ -171,6 +202,7 @@ export const useLogins = (): LoginsState => {
     loginWithDeviceFlowStart,
     loginWithDeviceFlowPoll,
     loginWithDeviceFlowComplete,
+    loginWithCli,
     loginWithOAuthApp,
     loginWithPersonalAccessToken,
     logoutFromAccount,

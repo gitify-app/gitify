@@ -267,18 +267,25 @@
    * vars; re-render them as tinted glass (same hue, mostly translucent, hue
    * hairline) instead of solid chips. Text keeps Primer's contrast-chosen
    * colour, which still reads on the softened fill. */
-  .gitify-translucent [data-color-mode] [style*='--label-r'] {
+  .gitify-translucent:not(.gitify-linux) [data-color-mode] [style*='--label-r'] {
     background-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.78);
     border-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.4);
   }
 
-  /* Row action buttons (mark-as-read / done / chevron) float as bare icons under
-   * Glass: drop the hover band behind the group and the invisible-button fills.
-   * The `:hover` variant guards against the `group-hover:` utility winning on
-   * specificity when the row is hovered. */
+  /* Row/header action cluster: a frosted, hairlined surface (the macOS tooltip
+   * material) so the row content never shows through the controls. This replaces
+   * the old bare-icon treatment, which relied on fading the row content out from
+   * beneath the buttons. The `:hover` variant guards against the layered
+   * `group-hover:bg-*` utility winning on specificity when the row is hovered. */
   .gitify-translucent .gitify-hover-actions,
   .gitify-translucent .group:hover .gitify-hover-actions {
-    background: transparent;
+    background-color: light-dark(
+      color-mix(in oklab, var(--bgColor-default), transparent 8%),
+      color-mix(in oklab, var(--bgColor-neutral-emphasis), transparent 30%)
+    );
+    -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    backdrop-filter: blur(14px) saturate(1.5);
+    box-shadow: inset 0 0 0 1px var(--gitify-glass-border);
   }
 
   /* Hover tooltips float as frosted glass with a hairline (the macOS tooltip
@@ -299,6 +306,11 @@
     /* The light tint needs the default dark text; dark glass keeps the
      * on-emphasis white that Tooltip already defaults to. */
     color: light-dark(var(--fgColor-default), var(--fgColor-onEmphasis));
+  }
+
+  .gitify-translucent.gitify-linux [data-color-mode] [data-component='Tooltip'] {
+    background-color: color-mix(in oklab, var(--bgColor-default), transparent 8%);
+    color: var(--fgColor-default);
   }
 
   /* Primer's AnchoredOverlay wrapper (what the `?` popouts render inside)
@@ -353,25 +365,8 @@
     background-color: color-mix(in oklab, var(--fgColor-muted), transparent 35%);
   }
 
-  /* With bare (background-less) action buttons there's no band to hide the row
-   * text behind them, so on hover fade the row content out under the buttons
-   * instead — the title/number dissolve into the glass rather than colliding.
-   * `--gitify-actions` (rendered button count, set on the row) sizes the fade so
-   * rows with fewer buttons don't over-fade: each small IconButton is ~1.75rem
-   * plus the group's right padding, with a 2rem soft leading edge. */
-  .gitify-translucent .group:hover .gitify-row-content {
-    --gitify-actions-width: calc(var(--gitify-actions, 3) * 1.75rem + 0.25rem);
-    -webkit-mask-image: linear-gradient(
-      to right,
-      #000 calc(100% - var(--gitify-actions-width) - 2rem),
-      transparent calc(100% - var(--gitify-actions-width))
-    );
-    mask-image: linear-gradient(
-      to right,
-      #000 calc(100% - var(--gitify-actions-width) - 2rem),
-      transparent calc(100% - var(--gitify-actions-width))
-    );
-  }
+  /* The hover action cluster now carries its own frosted backdrop (above), so
+   * the row content is no longer faded out from beneath the buttons. */
 
   /* Form controls (Select / TextInput) read as glass instead of Primer's solid
    * field: a faint translucent fill, borderless at rest (macOS controls carry
@@ -574,6 +569,13 @@ body,
   animation-range:
     0px var(--gitify-scroll-fade-size),
     calc(100% - var(--gitify-scroll-fade-size)) 100%;
+}
+
+/* The notification row's action rail spans the row's full height so its buttons
+ * form a consistent, generous hit zone; each button fills that height. */
+.gitify-hover-actions-full :where(button) {
+  height: 100%;
+  border-radius: 0;
 }
 
 body {

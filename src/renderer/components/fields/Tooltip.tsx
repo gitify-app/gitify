@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
 
 import { QuestionIcon } from '@primer/octicons-react';
 import { AnchoredOverlay } from '@primer/react';
@@ -10,7 +10,7 @@ export interface TooltipProps {
   tooltip: ReactNode | string;
 }
 
-export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
+export function Tooltip(props: TooltipProps) {
   const [shouldShowTooltipContents, setShouldShowTooltipContents] = useState(false);
 
   const scrollContainerRef = useRef<HTMLElement | null>(null);
@@ -100,4 +100,4 @@ export const Tooltip: FC<TooltipProps> = (props: TooltipProps) => {
       </div>
     </AnchoredOverlay>
   );
-};
+}

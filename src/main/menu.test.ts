@@ -32,16 +32,22 @@ vi.mock('electron', () => {
     } satisfies Pick<typeof Electron.Menu, 'buildFromTemplate'>,
     MenuItem: MockMenuItem,
     shell: {
-      openExternal: vi.fn(),
+      openExternal: vi.fn(async () => undefined),
     } satisfies Pick<Electron.Shell, 'openExternal'>,
   };
 });
 
 vi.mock('electron-updater', () => ({
   autoUpdater: {
-    checkForUpdatesAndNotify: vi.fn(),
+    checkForUpdatesAndNotify: vi.fn(async () => undefined),
     quitAndInstall: vi.fn(),
   },
+}));
+
+const logErrorMock = vi.fn();
+vi.mock('../shared/logger', () => ({
+  logError: (...args: unknown[]) => logErrorMock(...args),
+  toError: (err: unknown) => (err instanceof Error ? err : new Error(String(err))),
 }));
 
 vi.mock('./utils', () => ({
@@ -92,7 +98,7 @@ describe('main/menu.ts', () => {
     menuItemInstances.length = 0; // Clear tracked instances
     menubar = {
       app: { quit: vi.fn() },
-      showWindow: vi.fn(),
+      showWindow: vi.fn(async () => undefined),
       hideWindow: vi.fn(),
       refreshContextMenu: vi.fn(),
       tray: {
@@ -301,6 +307,71 @@ describe('main/menu.ts', () => {
       item?.click?.();
 
       expect(menubar.app.quit).toHaveBeenCalled();
+    });
+
+    it('logs an error when checking for updates fails', async () => {
+      const cfg = getMenuItemConfigByLabel('Check for updates');
+      vi.mocked(autoUpdater.checkForUpdatesAndNotify).mockRejectedValueOnce(
+        new Error('update failed'),
+      );
+
+      cfg?.click?.();
+
+      await vi.waitFor(() =>
+        expect(logErrorMock).toHaveBeenCalledWith(
+          'menu',
+          'Failed to check for updates',
+          expect.any(Error),
+        ),
+      );
+    });
+
+    it('logs an error when showing the window fails', async () => {
+      const cfg = getMenuItemConfigByLabel(`Show ${APPLICATION.NAME}`);
+      vi.mocked(menubar.showWindow).mockRejectedValueOnce(new Error('show failed'));
+
+      cfg?.click?.();
+
+      await vi.waitFor(() =>
+        expect(logErrorMock).toHaveBeenCalledWith(
+          'menu',
+          'Failed to show window',
+          expect.any(Error),
+        ),
+      );
+    });
+
+    it('logs an error when opening the repository fails', async () => {
+      const template = buildAndGetTemplate();
+      const devEntry = template.find((item) => item?.label === 'Developer') as TemplateItem;
+      const item = devEntry.submenu?.find((i) => i.label === 'Visit Repository');
+      vi.mocked(shell.openExternal).mockRejectedValueOnce(new Error('open failed'));
+
+      item?.click?.();
+
+      await vi.waitFor(() =>
+        expect(logErrorMock).toHaveBeenCalledWith(
+          'menu',
+          'Failed to open repository in browser',
+          expect.any(Error),
+        ),
+      );
+    });
+
+    it('logs an error when opening the website fails', async () => {
+      const template = buildAndGetTemplate();
+      const item = template.find((i) => i.label === 'Visit Website');
+      vi.mocked(shell.openExternal).mockRejectedValueOnce(new Error('open failed'));
+
+      item?.click?.();
+
+      await vi.waitFor(() =>
+        expect(logErrorMock).toHaveBeenCalledWith(
+          'menu',
+          'Failed to open website in browser',
+          expect.any(Error),
+        ),
+      );
     });
 
     it('show window menu item calls showWindow', () => {

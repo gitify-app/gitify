@@ -5,13 +5,14 @@ import type {
   Forge,
   GitifyError,
   Hostname,
-  Reason,
-  ReviewRequestType,
+  KeyboardAcceleratorShortcut,
+  ReasonFilterValue,
+  ReviewRequestTypeFilterValue,
   SearchToken,
   SettingsState,
-  SubjectType,
+  SubjectTypeFilterValue,
   Token,
-  UserType,
+  UserTypeFilterValue,
 } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 
@@ -112,12 +113,12 @@ export interface FiltersState {
   /**
    * The user types to filter notifications by.
    */
-  userTypes: UserType[];
+  userTypes: UserTypeFilterValue[];
 
   /**
    * The subject types to filter notifications by.
    */
-  subjectTypes: SubjectType[];
+  subjectTypes: SubjectTypeFilterValue[];
 
   /**
    * The states to filter notifications by.
@@ -127,12 +128,12 @@ export interface FiltersState {
   /**
    * The reasons to filter notifications by.
    */
-  reasons: Reason[];
+  reasons: ReasonFilterValue[];
 
   /**
    * The review request types to filter notifications by.
    */
-  reviewRequestTypes: ReviewRequestType[];
+  reviewRequestTypes: ReviewRequestTypeFilterValue[];
 }
 
 /**
@@ -273,3 +274,29 @@ export interface NotificationActionFailuresActions {
  */
 export type NotificationActionFailuresStore = NotificationActionFailuresState &
   NotificationActionFailuresActions;
+
+// ============================================================================
+// Shortcut Registration Store Types
+// ============================================================================
+
+/**
+ * Transient (non-persisted) state for global keyboard shortcut registration.
+ */
+export interface ShortcutRegistrationStore {
+  /**
+   * User-facing error when the configured global shortcut could not be
+   * registered (e.g. already in use by another application).
+   */
+  shortcutRegistrationError: string | null;
+
+  /**
+   * The last accelerator that registered successfully; used to revert the
+   * setting when a newly chosen accelerator fails to register.
+   */
+  lastAppliedShortcut: KeyboardAcceleratorShortcut;
+
+  setShortcutRegistrationError: (error: string | null) => void;
+  setLastAppliedShortcut: (accelerator: KeyboardAcceleratorShortcut) => void;
+  clearShortcutRegistrationError: () => void;
+  reset: () => void;
+}

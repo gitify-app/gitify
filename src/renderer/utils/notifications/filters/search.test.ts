@@ -28,6 +28,12 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
       expect(parseSearchInput('xauthor:foo')).toBeNull();
       expect(parseSearchInput('xxorg:bar')).toBeNull();
     });
+
+    it('normalizes the title qualifier value to the first space-free token', () => {
+      const parsed = parseSearchInput('title:deploy failed');
+      expect(parsed?.value).toBe('deploy');
+      expect(parsed?.token).toBe('title:deploy');
+    });
   });
 
   describe('filterNotificationBySearchTerm', () => {
@@ -91,6 +97,32 @@ describe('renderer/utils/notifications/filters/search.ts', () => {
       expect(filterNotificationBySearchTerm(mockNotification, 'repo:Gitify-App/Gitify')).toBe(true);
 
       expect(filterNotificationBySearchTerm(mockNotification, 'repo:github/other')).toBe(false);
+    });
+
+    it('matches title qualifier as a case-insensitive substring', () => {
+      expect(filterNotificationBySearchTerm(mockNotification, 'title:user')).toBe(true);
+
+      expect(filterNotificationBySearchTerm(mockNotification, 'title:USER')).toBe(true);
+
+      expect(filterNotificationBySearchTerm(mockNotification, 'title:UsEr')).toBe(true);
+
+      expect(filterNotificationBySearchTerm(mockNotification, 'title:authored')).toBe(true);
+    });
+
+    it('does not match title qualifier for non-matching titles', () => {
+      expect(filterNotificationBySearchTerm(mockNotification, 'title:deploy')).toBe(false);
+
+      expect(filterNotificationBySearchTerm(mockNotification, 'title:free')).toBe(false);
+    });
+
+    it('never matches the title qualifier when the subject has no title', () => {
+      const titlelessNotification = mockPartialGitifyNotification({});
+
+      expect(filterNotificationBySearchTerm(titlelessNotification, 'title:user')).toBe(false);
+    });
+
+    it('matches title qualifier against the first space-free token only', () => {
+      expect(filterNotificationBySearchTerm(mockNotification, 'title:User authored')).toBe(true);
     });
 
     it('returns false for unknown qualifier', () => {

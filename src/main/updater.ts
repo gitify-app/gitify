@@ -218,10 +218,15 @@ export default class AppUpdater {
       detail: 'Restart to apply the update. You can also restart later from the tray menu.',
     };
 
-    dialog.showMessageBox(dialogOpts).then((returnValue) => {
-      if (returnValue.response === 0) {
-        autoUpdater.quitAndInstall();
-      }
-    });
+    dialog
+      .showMessageBox(dialogOpts)
+      .then((returnValue) => {
+        if (returnValue.response === 0) {
+          autoUpdater.quitAndInstall();
+        }
+      })
+      .catch((err) => {
+        logError('app updater', 'Failed to show update ready dialog', toError(err));
+      });
   }
 }

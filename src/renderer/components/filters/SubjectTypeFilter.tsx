@@ -1,12 +1,10 @@
-import type { FC } from 'react';
-
 import { BellIcon } from '@primer/octicons-react';
 import { Text } from '@primer/react';
 
 import { subjectTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
-export const SubjectTypeFilter: FC = () => {
+export function SubjectTypeFilter() {
   return (
     <FilterSection
       filter={subjectTypeFilter}
@@ -17,4 +15,4 @@ export const SubjectTypeFilter: FC = () => {
       tooltip={<Text>Filter notifications by type.</Text>}
     />
   );
-};
+}

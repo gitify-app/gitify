@@ -157,7 +157,7 @@ exports[`renderer/routes/gitea/LoginWithPersonalAccessToken.tsx > renders correc
               class="prc-Text-Text-9mHv3"
               data-component="Text"
             >
-              Your Gitea instance hostname (for example gitea.example.com)
+              Your instance hostname or origin, e.g. gitea.example.com or http://git.internal:3000. Defaults to HTTPS.
             </i>
           </span>
         </div>

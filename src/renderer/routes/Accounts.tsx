@@ -6,6 +6,7 @@ import {
   ArrowLeftIcon,
   ChevronRightIcon,
   KeyIcon,
+  type OcticonProps,
   PersonAddIcon,
   PersonIcon,
   ShieldCheckIcon,
@@ -15,6 +16,8 @@ import {
   SyncIcon,
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
+
+import { cn } from 'cn';
 
 import { useLogins } from '../hooks/useLogins';
 import { useNotifications } from '../hooks/useNotifications';
@@ -38,7 +41,25 @@ import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
-export const AccountsRoute: FC = () => {
+function RecommendedScopesIcon({ className, ...props }: OcticonProps) {
+  return <ShieldCheckIcon {...props} className={cn(IconColor.GREEN, className)} />;
+}
+
+function AlternateScopesIcon({ className, ...props }: OcticonProps) {
+  return <ShieldCheckIcon {...props} className={cn('text-gitify-warning', className)} />;
+}
+
+function getScopeIcon(account: Account): FC<OcticonProps> {
+  if (hasRecommendedScopes(account)) {
+    return RecommendedScopesIcon;
+  }
+  if (hasAlternateScopes(account)) {
+    return AlternateScopesIcon;
+  }
+  return ShieldCheckIcon;
+}
+
+export function AccountsRoute() {
   const navigate = useNavigate();
 
   const { logoutFromAccount } = useLogins();
@@ -181,7 +202,7 @@ export const AccountsRoute: FC = () => {
                         data-testid="account-host"
                         direction="horizontal"
                         gap="condensed"
-                        onClick={() => openHost(account.hostname)}
+                        onClick={() => openHost(account)}
                         title="Open host ↗"
                       >
                         {PlatformIcon && <PlatformIcon />}
@@ -232,17 +253,7 @@ export const AccountsRoute: FC = () => {
                       <IconButton
                         aria-label={`View scopes for ${account.user?.login}`}
                         data-testid="account-view-scopes"
-                        icon={() => (
-                          <ShieldCheckIcon
-                            className={
-                              hasRecommendedScopes(account)
-                                ? IconColor.GREEN
-                                : hasAlternateScopes(account)
-                                  ? 'text-gitify-warning'
-                                  : ''
-                            }
-                          />
-                        )}
+                        icon={getScopeIcon(account)}
                         onClick={() =>
                           navigate('/account-scopes', {
                             state: { account },
@@ -396,4 +407,4 @@ export const AccountsRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

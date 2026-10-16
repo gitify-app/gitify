@@ -34,6 +34,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     ['checkbox-keyboardShortcut', 'keyboardShortcut'],
     ['checkbox-showNotifications', 'showNotifications'],
     ['checkbox-showUpdateNotifications', 'showUpdateNotifications'],
+    ['checkbox-playSound', 'playSound'],
     ['checkbox-openAtStartup', 'openAtStartup'],
     ['checkbox-keepWindowOnBlur', 'keepWindowOnBlur'],
   ] as const)('should toggle %s checkbox', async (testId, setting) => {
@@ -60,6 +61,9 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       });
 
       expect(screen.queryByTestId('checkbox-useX11Backend')).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'GNOME extension installation' }),
+      ).not.toBeInTheDocument();
     });
 
     it('is shown and toggles on Linux', async () => {
@@ -72,6 +76,18 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       await userEvent.click(screen.getByTestId('checkbox-useX11Backend'));
 
       expect(toggleSettingSpy).toHaveBeenCalledWith('useX11Backend');
+    });
+
+    it('opens standalone GNOME installation instructions on Linux', async () => {
+      isLinuxMock().mockReturnValue(true);
+      renderWithProviders(<SystemSettings />);
+
+      await userEvent.click(screen.getByRole('button', { name: 'GNOME extension installation' }));
+
+      expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
+        'https://github.com/gitify-app/gnome#install',
+        expect.any(Boolean),
+      );
     });
   });
 
@@ -196,27 +212,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     });
   });
 
-  it('should toggle the showNotifications checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<SystemSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-showNotifications'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('showNotifications');
-  });
-
   describe('playSound', () => {
-    it('should toggle the playSound checkbox', async () => {
-      renderWithProviders(<SystemSettings />);
-
-      await userEvent.click(screen.getByTestId('checkbox-playSound'));
-
-      expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-      expect(toggleSettingSpy).toHaveBeenCalledWith('playSound');
-    });
-
     it('volume controls should not be shown if playSound checkbox is false', async () => {
       renderWithProviders(<SystemSettings />, {
         settings: { ...mockSettings, playSound: false },
@@ -261,27 +257,5 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(updateSettingSpy).toHaveBeenCalledTimes(1);
       expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 20);
     });
-  });
-
-  it('should toggle the openAtStartup checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<SystemSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-openAtStartup'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('openAtStartup');
-  });
-
-  it('should toggle the keepWindowOnBlur checkbox', async () => {
-    await act(async () => {
-      renderWithProviders(<SystemSettings />);
-    });
-
-    await userEvent.click(screen.getByTestId('checkbox-keepWindowOnBlur'));
-
-    expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith('keepWindowOnBlur');
   });
 });

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useTheme } from '@primer/react';
+import { useTheme } from '@primer/react/next';
 
 import type { NativeThemeSource } from '../../shared/events';
 

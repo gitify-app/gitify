@@ -1,6 +1,7 @@
-import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
+import { AgentIcon, AppsIcon, CopilotIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
 
-import { mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
+import { mockGitHubCliAccount, mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 
 import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 
@@ -15,9 +16,9 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(githubAdapter.displayName).toBe('GitHub');
     });
 
-    it('exposes the device-flow / PAT / OAuth login methods', () => {
+    it('exposes the device-flow / PAT / CLI / OAuth login methods', () => {
       const ids = githubAdapter.loginMethods.map((m) => m.testId);
-      expect(ids).toEqual(['login-github', 'login-pat', 'login-oauth-app']);
+      expect(ids).toEqual(['login-github', 'login-pat', 'login-github-cli', 'login-oauth-app']);
     });
 
     it('defaults the PAT hostname to github.com', () => {
@@ -275,6 +276,36 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
         ),
       ).toBe(true);
     });
+
+    it('judges GitHub CLI accounts on notification access, not PAT scope names', () => {
+      const oauthScopes = githubAdapter.accountOps.oauthScopes!;
+      const withCliScopes = (scopes: string[]) => ({ ...mockGitHubCliAccount, scopes });
+
+      // The scope set `gh` actually carries: no notifications, no read:user.
+      expect(oauthScopes.hasRequired(mockGitHubCliAccount)).toBe(true);
+      expect(oauthScopes.hasRecommended(mockGitHubCliAccount)).toBe(true);
+
+      expect(oauthScopes.hasRequired(withCliScopes(['notifications']))).toBe(true);
+      expect(oauthScopes.hasRequired(withCliScopes(['gist', 'public_repo']))).toBe(false);
+
+      // `gh auth token` can return an exported GH_TOKEN, which may be any PAT.
+      expect(oauthScopes.hasRecommended(withCliScopes(['notifications', 'public_repo']))).toBe(
+        false,
+      );
+      expect(oauthScopes.hasAlternate(withCliScopes(['notifications', 'public_repo']))).toBe(true);
+      expect(oauthScopes.hasAlternate(withCliScopes(['notifications']))).toBe(false);
+    });
+
+    it('reports CLI scopes as owned by the CLI, and PAT scopes as Gitify-owned', () => {
+      const oauthScopes = githubAdapter.accountOps.oauthScopes!;
+
+      expect(oauthScopes.externallyManaged(mockGitHubCliAccount)).toEqual({
+        label: 'Managed by the GitHub CLI',
+        detail: 'The repo scope grants notification access.',
+        command: 'gh auth refresh -s notifications',
+      });
+      expect(oauthScopes.externallyManaged(mockGitHubCloudAccount)).toBeUndefined();
+    });
   });
 
   describe('followUrl', () => {
@@ -295,6 +326,19 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(requestMock).toHaveBeenCalledWith('GET {+url}', {
         url: 'https://api.github.com/repos/o/r/issues/1',
       });
+    });
+  });
+
+  describe('getDisplayHelpers', () => {
+    it('surfaces the agent-session handler icon, actor, and agents URL', () => {
+      const notification = mockPartialGitifyNotification({ type: 'AgentSessionThread' });
+
+      const helpers = githubAdapter.getDisplayHelpers(notification);
+
+      expect(helpers.iconType).toBe(AgentIcon);
+      expect(helpers.defaultUserType).toBe('Bot');
+      expect(helpers.defaultUserIcon).toBe(CopilotIcon);
+      expect(helpers.defaultUrl).toBe('https://github.com/gitify-app/notifications-test/agents');
     });
   });
 });

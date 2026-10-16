@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
+import { BaseStyles } from '@primer/react';
+import { ThemeProvider } from '@primer/react/next';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 
@@ -11,6 +12,7 @@ import { BitbucketLoginWithPersonalAccessTokenRoute } from './routes/bitbucket/L
 import { FiltersRoute } from './routes/Filters';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './routes/gitea/LoginWithPersonalAccessToken';
 import { GitHubLoginWithDeviceFlowRoute } from './routes/github/LoginWithDeviceFlow';
+import { GitHubLoginWithCLIRoute } from './routes/github/LoginWithGitHubCLI';
 import { GitHubLoginWithOAuthAppRoute } from './routes/github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './routes/github/LoginWithPersonalAccessToken';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './routes/gitlab/LoginWithPersonalAccessToken';
@@ -40,7 +42,7 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   return isLoggedIn ? children : <Navigate replace state={{ from: location }} to="/login" />;
 }
 
-export const App = () => {
+export function App() {
   // Initialize store subscriptions with proper cleanup
   useEffect(() => {
     const cleanup = initializeStoreSubscriptions();
@@ -101,6 +103,7 @@ export const App = () => {
                   element={<GitHubLoginWithDeviceFlowRoute />}
                   path="/login/github/device-flow"
                 />
+                <Route element={<GitHubLoginWithCLIRoute />} path="/login/github/cli" />
                 <Route
                   element={<GitHubLoginWithPersonalAccessTokenRoute />}
                   path="/login/github/personal-access-token"
@@ -125,4 +128,4 @@ export const App = () => {
       </ThemeProvider>
     </QueryClientProvider>
   );
-};
+}

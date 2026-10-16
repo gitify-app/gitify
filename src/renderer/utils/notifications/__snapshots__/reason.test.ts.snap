@@ -111,3 +111,10 @@ exports[`renderer/utils/notifications/reason.ts > getReasonDetails - should get 
   "title": "Unknown",
 }
 `;
+
+exports[`renderer/utils/notifications/reason.ts > getReasonDetails - should get details for notification reason 17`] = `
+{
+  "description": "A GitHub Copilot cloud agent session finished running.",
+  "title": "Agent Session Finished",
+}
+`;

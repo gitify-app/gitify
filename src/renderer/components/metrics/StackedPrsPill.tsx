@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { GitMergeIcon } from '@primer/octicons-react';
 
 import { IconColor } from '../../types';
@@ -12,11 +10,7 @@ export interface StackedPrsPillProps {
   stackDepth?: number;
 }
 
-export const StackedPrsPill: FC<StackedPrsPillProps> = ({
-  isStacked,
-  stackPosition,
-  stackDepth,
-}) => {
+export function StackedPrsPill({ isStacked, stackPosition, stackDepth }: StackedPrsPillProps) {
   if (!isStacked) {
     return null;
   }
@@ -32,4 +26,4 @@ export const StackedPrsPill: FC<StackedPrsPillProps> = ({
       metric={metric}
     />
   );
-};
+}

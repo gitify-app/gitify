@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -7,7 +7,7 @@ interface CenteredProps {
   fullHeight: boolean;
 }
 
-export const Centered: FC<CenteredProps> = (props: CenteredProps) => {
+export function Centered(props: CenteredProps) {
   return (
     <Stack
       align="center"
@@ -19,4 +19,4 @@ export const Centered: FC<CenteredProps> = (props: CenteredProps) => {
       {props.children}
     </Stack>
   );
-};
+}

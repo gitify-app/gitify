@@ -1,19 +1,25 @@
-import { type FC, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
-import { useShortcutRegistrationStore } from '../../hooks/useShortcutRegistration';
-import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
+import {
+  DEFAULT_SETTINGS_STATE,
+  useSettingsStore,
+  useShortcutRegistrationStore,
+} from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Title } from '../primitives/Title';
 
-import { type KeyboardAcceleratorShortcut, OpenPreference } from '../../types';
+import { type KeyboardAcceleratorShortcut, OpenPreference, toLink } from '../../types';
 
+import { VolumeDownIcon } from '../../icons/VolumeDownIcon';
+import { VolumeUpIcon } from '../../icons/VolumeUpIcon';
+import { openExternalLink } from '../../utils/system/comms';
 import {
   formatAcceleratorForDisplay,
   keyboardEventToAccelerator,
@@ -25,12 +31,10 @@ import {
   decreaseVolume,
   increaseVolume,
 } from '../../utils/ui/volume';
-import { VolumeDownIcon } from '../icons/VolumeDownIcon';
-import { VolumeUpIcon } from '../icons/VolumeUpIcon';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
-export const SystemSettings: FC = () => {
+export function SystemSettings() {
   const shortcutRegistrationError = useShortcutRegistrationStore(
     (s) => s.shortcutRegistrationError,
   );
@@ -119,6 +123,11 @@ export const SystemSettings: FC = () => {
 
   const hasLiveModifiers = liveModifierAccelerator.length > 0;
   const liveModifierDisplay = formatAcceleratorForDisplay(liveModifierAccelerator, isMac);
+
+  let shortcutButtonLabel = shortcutDisplay;
+  if (recordingShortcut) {
+    shortcutButtonLabel = hasLiveModifiers ? `${liveModifierDisplay}…` : 'Press keys…';
+  }
 
   return (
     <fieldset>
@@ -236,11 +245,7 @@ export const SystemSettings: FC = () => {
               tabIndex={-1}
             >
               <Text as="strong" className="text-gitify-caution">
-                {recordingShortcut
-                  ? hasLiveModifiers
-                    ? `${liveModifierDisplay}…`
-                    : 'Press keys…'
-                  : shortcutDisplay}
+                {shortcutButtonLabel}
               </Text>
             </Button>
             <IconButton
@@ -367,16 +372,31 @@ export const SystemSettings: FC = () => {
           onChange={() => toggleSetting('useX11Backend')}
           tooltip={
             <Text>
-              Run under X11/XWayland so the window opens next to the tray icon. On Wayland the
-              compositor decides where windows appear, so {APPLICATION.NAME} opens in the middle of
-              the screen. Enabling this also disables Vulkan, which crashes under X11 on some
-              drivers, and may soften text on displays using fractional scaling. Takes effect after
-              restarting {APPLICATION.NAME}.
+              Run under X11/XWayland so the window opens next to the tray icon. On Wayland, window
+              placement depends on your compositor and its extensions. Enabling this also disables
+              Vulkan, which crashes under X11 on some drivers, and may soften text on displays using
+              fractional scaling. Takes effect after restarting {APPLICATION.NAME}.
             </Text>
           }
           visible={window.gitify.platform.isLinux()}
         />
+        {window.gitify.platform.isLinux() && (
+          <Stack gap="condensed">
+            <Text className="text-sm text-gitify-font">
+              On GNOME Wayland, install the Gitify extension to open the window next to its tray
+              icon. Install and manage it through GNOME's extension tools.
+            </Text>
+            <Button
+              onClick={() =>
+                openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))
+              }
+              size="small"
+            >
+              GNOME extension installation
+            </Button>
+          </Stack>
+        )}
       </Stack>
     </fieldset>
   );
-};
+}

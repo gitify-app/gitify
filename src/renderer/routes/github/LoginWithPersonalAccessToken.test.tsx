@@ -4,12 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockPersonalAccessTokenAccount } from '../../__mocks__/account-mocks';
 
-import {
-  type IFormData,
-  validateForm,
-} from '../../components/login/LoginWithPersonalAccessTokenForm';
-
-import type { Hostname, Token } from '../../types';
+import type { Hostname } from '../../types';
 
 import * as logger from '../../utils/core/logger';
 import * as comms from '../../utils/system/comms';
@@ -32,27 +27,6 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(-1);
-  });
-
-  describe('form validation', () => {
-    it('should validate the form values are not empty', () => {
-      const values: IFormData = {
-        hostname: null as unknown as Hostname,
-        token: null as unknown as Token,
-      };
-      expect(validateForm(values).hostname).toBe('Hostname is required');
-      expect(validateForm(values).token).toBe('Token is required');
-    });
-
-    it('should validate the form values are correct format', () => {
-      const values: IFormData = {
-        hostname: 'hello' as Hostname,
-        token: '!@£INVALID-.1' as Token,
-      };
-
-      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-      expect(validateForm(values).token).toBe('Token format is invalid');
-    });
   });
 
   describe("'Generate a PAT' button", () => {

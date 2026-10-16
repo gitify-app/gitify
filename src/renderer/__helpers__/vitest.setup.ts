@@ -36,6 +36,17 @@ vi.mock('../hooks/useNotifications', async () => {
   };
 });
 
+vi.mock('../hooks/notifications/useNotificationsHost', async () => {
+  const actual = await vi.importActual<
+    typeof import('../hooks/notifications/useNotificationsHost')
+  >('../hooks/notifications/useNotificationsHost');
+  const { getMockedNotificationsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useNotificationsHost: () => getMockedNotificationsState(),
+  };
+});
+
 vi.mock('../hooks/useLogins', async () => {
   const actual = await vi.importActual<typeof import('../hooks/useLogins')>('../hooks/useLogins');
   const { getMockedLoginsState } = await import('./hook-mocks');
@@ -84,6 +95,7 @@ function createGitifyBridgeApi(): Window['gitify'] {
     openExternalLink: vi.fn(),
     decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
     encryptValue: vi.fn().mockResolvedValue('encrypted'),
+    githubCliToken: vi.fn().mockResolvedValue({ token: 'gh-cli-token' }),
     setWindowVibrancy: vi.fn().mockResolvedValue(undefined),
     setNativeTheme: vi.fn().mockResolvedValue(undefined),
     platform: {
@@ -98,7 +110,7 @@ function createGitifyBridgeApi(): Window['gitify'] {
     tray: {
       updateColor: vi.fn(),
       updateTitle: vi.fn(),
-      useAlternateIdleIcon: vi.fn(),
+      setAppearance: vi.fn(),
       useUnreadActiveIcon: vi.fn(),
     },
     notificationSoundPath: vi.fn(),
@@ -141,7 +153,7 @@ beforeEach(async () => {
   const { resetHookMocks } = await import('./hook-mocks');
   resetHookMocks();
 
-  const { useShortcutRegistrationStore } = await import('../hooks/useShortcutRegistration');
+  const { useShortcutRegistrationStore } = await import('../stores');
   useShortcutRegistrationStore.getState().reset();
 });
 

@@ -40,6 +40,7 @@ class ReleaseHandler extends DefaultHandler {
       state: releaseState,
       user: author,
       author: author,
+      tagName: release.tag_name,
     };
   }
 

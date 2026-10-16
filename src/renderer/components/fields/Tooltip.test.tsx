@@ -25,7 +25,7 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
 
     // Open tooltip
     await userEvent.click(tooltipIconElement);
-    expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
+    expect(screen.getByText(props.tooltip as string)).toBeInTheDocument();
 
     // Close tooltip
     await userEvent.click(tooltipIconElement);
@@ -39,7 +39,7 @@ describe('renderer/components/fields/Tooltip.tsx', () => {
 
     // Open tooltip
     await userEvent.click(tooltipIconElement);
-    expect(screen.queryByText(props.tooltip as string)).toBeInTheDocument();
+    expect(screen.getByText(props.tooltip as string)).toBeInTheDocument();
 
     // Click outside to close
     await userEvent.click(document.body);

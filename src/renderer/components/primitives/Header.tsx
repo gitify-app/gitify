@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
@@ -14,7 +13,7 @@ interface HeaderProps {
   fetchOnBack?: boolean;
 }
 
-export const Header: FC<HeaderProps> = (props: HeaderProps) => {
+export function Header(props: HeaderProps) {
   const navigate = useNavigate();
 
   const { refetchNotifications: fetchNotifications } = useNotifications();
@@ -29,7 +28,7 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
           onClick={() => {
             navigate(-1);
             if (props.fetchOnBack) {
-              fetchNotifications();
+              void fetchNotifications();
             }
           }}
           tooltipDirection="e"
@@ -42,4 +41,4 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
       </Stack>
     </div>
   );
-};
+}

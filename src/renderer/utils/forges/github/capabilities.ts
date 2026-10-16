@@ -59,6 +59,45 @@ export function supportsStackedPullRequests(account: Account): boolean {
 }
 
 /**
+ * GitHub-only capability: whether the GraphQL `Issue` schema exposes the
+ * `parent` and `subIssuesSummary` fields used for sub-issue context. Lives
+ * outside the shared `ForgeCapabilities` because no other forge has this
+ * concept and the only consumer is the GitHub GraphQL query construction.
+ *
+ * GitHub Cloud always supports sub-issues; GitHub Enterprise Server supports
+ * them from version 3.17.0 onwards.
+ */
+export function supportsSubIssues(account: Account): boolean {
+  if (!isGitHubEnterpriseServerHost(account.hostname)) {
+    return true;
+  }
+  if (account.version) {
+    return semver.gte(account.version, '3.17.0');
+  }
+  return false;
+}
+
+/**
+ * GitHub-only capability: whether the GraphQL `Issue` schema exposes the
+ * native `issueFieldValues` field used for issue field metrics. Lives outside
+ * the shared `ForgeCapabilities` because no other forge supports issue fields
+ * and the only consumer is the GitHub GraphQL query construction in
+ * `client.ts`.
+ *
+ * Issue fields are a GitHub Cloud feature and ship in GitHub Enterprise
+ * Server from version 3.23 onwards.
+ */
+export function supportsIssueFields(account: Account): boolean {
+  if (!isGitHubEnterpriseServerHost(account.hostname)) {
+    return true;
+  }
+  if (account.version) {
+    return semver.gte(account.version, '3.23.0');
+  }
+  return false;
+}
+
+/**
  * The set of capabilities that gate GraphQL field selections via the custom
  * `@gated(requires: ...)` directive. The keys must match the `requires`
  * argument used in the GraphQL documents.
@@ -66,6 +105,8 @@ export function supportsStackedPullRequests(account: Account): boolean {
 export type GitHubGatedCapabilities = {
   stackedPullRequests: boolean;
   answeredDiscussion: boolean;
+  subIssues: boolean;
+  issueFields: boolean;
 };
 
 /**
@@ -77,5 +118,7 @@ export function getGitHubCapabilities(account: Account): GitHubGatedCapabilities
   return {
     stackedPullRequests: supportsStackedPullRequests(account),
     answeredDiscussion: supportsAnsweredDiscussion(account),
+    subIssues: supportsSubIssues(account),
+    issueFields: supportsIssueFields(account),
   };
 }

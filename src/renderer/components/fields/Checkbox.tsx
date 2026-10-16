@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -19,7 +19,7 @@ export interface CheckboxProps {
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Checkbox: FC<CheckboxProps> = ({ visible = true, ...props }: CheckboxProps) => {
+export function Checkbox({ visible = true, ...props }: CheckboxProps) {
   const counter = props?.counter === 0 ? '0' : props.counter;
 
   return (
@@ -53,4 +53,4 @@ export const Checkbox: FC<CheckboxProps> = ({ visible = true, ...props }: Checkb
       </Stack>
     )
   );
-};
+}

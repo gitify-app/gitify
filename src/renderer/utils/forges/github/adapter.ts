@@ -1,11 +1,18 @@
-import { AppsIcon, KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import {
+  AppsIcon,
+  KeyIcon,
+  MarkGithubIcon,
+  PersonIcon,
+  TerminalIcon,
+} from '@primer/octicons-react';
 
-import { Constants } from '../../../constants';
+import { Constants, OAUTH_SCOPE } from '../../../constants';
 
 import type { Account, Link, RawGitifyNotification } from '../../../types';
 import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
+import { isValidHostname } from '../../auth/utils';
 import {
   extractHostVersion,
   getDeveloperSettingsURL,
@@ -15,6 +22,7 @@ import {
   isValidToken,
 } from './auth';
 import { githubCapabilities } from './capabilities';
+import { forgetGitHubCliToken, resolveGitHubCliToken } from './cli';
 import {
   fetchAuthenticatedUserDetails,
   ignoreNotificationThreadSubscription,
@@ -36,6 +44,12 @@ import { transformNotifications } from './transform';
 import { formatGitHubNotificationUser } from './users';
 
 async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
+  if (account.method === 'GitHub CLI') {
+    // Re-read the CLI so a `gh auth refresh` that widened the token's scopes is
+    // reflected here; a merely rotated token is handled per request.
+    forgetGitHubCliToken(account.hostname);
+  }
+
   const response = await fetchAuthenticatedUserDetails(account);
   const user = response.data;
   const headers = response.headers as Record<string, string | undefined>;
@@ -72,6 +86,7 @@ function getDisplayHelpers(notification: RawGitifyNotification): NotificationDis
     iconColor: handler.iconColor(notification),
     defaultUrl: handler.defaultUrl(notification),
     defaultUserType: handler.defaultUserType(),
+    defaultUserIcon: handler.defaultUserIcon?.(),
   };
 }
 
@@ -89,6 +104,7 @@ export const githubAdapter: ForgeAdapter = {
 
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,
+  validateHostname: isValidHostname,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
   getAuthMethodIcon: githubAuthMethodIcon,
@@ -108,6 +124,13 @@ export const githubAdapter: ForgeAdapter = {
       label: 'Personal Access Token',
       route: '/login/github/personal-access-token',
       authMethod: 'Personal Access Token',
+    },
+    {
+      testId: 'login-github-cli',
+      icon: TerminalIcon,
+      label: 'GitHub CLI',
+      route: '/login/github/cli',
+      authMethod: 'GitHub CLI',
     },
     {
       testId: 'login-oauth-app',
@@ -133,11 +156,19 @@ export const githubAdapter: ForgeAdapter = {
     getNewOAuthAppUrl: getNewOAuthAppURL,
   },
 
+  cliAuth: {
+    authMethod: 'GitHub CLI',
+    resolveToken: resolveGitHubCliToken,
+  },
+
   accountOps: {
     capabilities: githubCapabilities,
     formatNotificationUser: formatGitHubNotificationUser,
     fetchAuthenticatedUser,
-    onAccountTokenChange: clearOctokitClientCacheForAccount,
+    onAccountTokenChange: (account) => {
+      clearOctokitClientCacheForAccount(account);
+      forgetGitHubCliToken(account.hostname);
+    },
     listNotifications,
     markThreadAsRead: async (account, threadId) => {
       await markNotificationThreadAsRead(account, threadId);
@@ -157,6 +188,14 @@ export const githubAdapter: ForgeAdapter = {
       hasRequired: (account) => accountHasScopes(account, 'REQUIRED'),
       hasRecommended: (account) => accountHasScopes(account, 'RECOMMENDED'),
       hasAlternate: (account) => accountHasScopes(account, 'ALTERNATE'),
+      externallyManaged: (account) =>
+        account.method === 'GitHub CLI'
+          ? {
+              label: 'Managed by the GitHub CLI',
+              detail: 'The repo scope grants notification access.',
+              command: 'gh auth refresh -s notifications',
+            }
+          : undefined,
     },
   },
 };
@@ -165,13 +204,37 @@ function accountHasScopes(
   account: Account,
   group: 'REQUIRED' | 'RECOMMENDED' | 'ALTERNATE',
 ): boolean {
-  return Constants.OAUTH_SCOPES[group].every(({ name }) => (account.scopes ?? []).includes(name));
+  const scopes = account.scopes ?? [];
+
+  if (account.method === 'GitHub CLI') {
+    // `gh` issues a fixed scope set Gitify cannot widen, and its `repo` scope
+    // already grants the notifications API, so judge these accounts on
+    // notification access rather than the scope names a PAT would be asked
+    // for. `gh auth token` can also return a `GH_TOKEN` the user exported,
+    // which may be any PAT, so the narrower tiers stay meaningful.
+    const canReadNotifications =
+      scopes.includes(OAUTH_SCOPE.NOTIFICATIONS.name) || scopes.includes(OAUTH_SCOPE.REPO.name);
+
+    if (group === 'RECOMMENDED') {
+      return scopes.includes(OAUTH_SCOPE.REPO.name);
+    }
+
+    if (group === 'ALTERNATE') {
+      return canReadNotifications && scopes.includes(OAUTH_SCOPE.PUBLIC_REPO.name);
+    }
+
+    return canReadNotifications;
+  }
+
+  return Constants.OAUTH_SCOPES[group].every(({ name }) => scopes.includes(name));
 }
 
 function githubAuthMethodIcon(method: AuthMethod) {
   switch (method) {
     case 'GitHub App':
       return AppsIcon;
+    case 'GitHub CLI':
+      return TerminalIcon;
     case 'OAuth App':
       return PersonIcon;
     default:

@@ -2,8 +2,6 @@ import { KeyIcon } from '@primer/octicons-react';
 
 import useSettingsStore from '../../../stores/useSettingsStore';
 
-import { BitbucketIcon } from '../../../components/icons/BitbucketIcon';
-
 import type { Account, Hostname, Link, RawGitifyNotification } from '../../../types';
 import { IconColor } from '../../../types';
 import type {
@@ -13,6 +11,8 @@ import type {
   RefreshAccountData,
 } from '../types';
 
+import { BitbucketIcon } from '../../../icons/BitbucketIcon';
+import { isValidHostname } from '../../auth/utils';
 import { decryptValue } from '../../system/comms';
 import {
   fetchBitbucketAuthenticatedUser,
@@ -98,6 +98,7 @@ export const bitbucketAdapter: ForgeAdapter = {
   defaultHostname: 'bitbucket.org' as Hostname,
 
   validateToken: (token) => token.length > 0,
+  validateHostname: isValidHostname,
 
   getPersonalAccessTokenSettingsUrl: (_hostname: Hostname) => ATLASSIAN_TOKEN_SETTINGS_URL,
 

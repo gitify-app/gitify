@@ -38,28 +38,35 @@ export async function enrichGitHubNotifications(
 async function fetchInBatches(
   notifications: RawGitifyNotification[],
 ): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
-  const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
   const supportedNotifications = notifications.filter(
     (notification) => createNotificationHandler(notification).supportsMergedQueryEnrichment,
   );
 
   const batchSize = GITHUB_API_MERGE_BATCH_SIZE;
-
+  const batches: RawGitifyNotification[][] = [];
   for (let start = 0; start < supportedNotifications.length; start += batchSize) {
-    const batchIndex = Math.floor(start / batchSize) + 1;
-    const slice = supportedNotifications.slice(start, start + batchSize);
+    batches.push(supportedNotifications.slice(start, start + batchSize));
+  }
 
-    try {
-      const batchResults = await fetchNotificationDetailsForList(slice);
-      for (const [notification, repository] of batchResults) {
-        merged.set(notification, repository);
+  const batchResults = await Promise.all(
+    batches.map(async (slice, index) => {
+      try {
+        return await fetchNotificationDetailsForList(slice);
+      } catch (err) {
+        rendererLogError(
+          'enrichGitHubNotifications',
+          `Failed to fetch merged notification details for batch ${index + 1}`,
+          toError(err),
+        );
+        return new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
       }
-    } catch (err) {
-      rendererLogError(
-        'enrichGitHubNotifications',
-        `Failed to fetch merged notification details for batch ${batchIndex}`,
-        toError(err),
-      );
+    }),
+  );
+
+  const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
+  for (const results of batchResults) {
+    for (const [notification, repository] of results) {
+      merged.set(notification, repository);
     }
   }
 

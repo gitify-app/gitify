@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { persist, subscribeWithSelector } from 'zustand/middleware';
 
+import type { TrayIconAppearance } from '../../shared/events';
+
 import { Constants } from '../constants';
 
 import type { SettingsStore } from './types';
@@ -27,7 +29,7 @@ const useSettingsStore = create<SettingsStore>()(
             const current = state[name];
 
             if (typeof current !== 'boolean') {
-              throw new Error(`toggleSetting: '${String(name)}' is not a boolean setting`);
+              throw new TypeError(`toggleSetting: '${String(name)}' is not a boolean setting`);
             }
 
             return { [name]: !current };
@@ -40,6 +42,27 @@ const useSettingsStore = create<SettingsStore>()(
       }),
       {
         name: Constants.STORAGE.SETTINGS,
+        version: 1,
+        migrate: (persisted) => {
+          if (!persisted || typeof persisted !== 'object') {
+            return DEFAULT_SETTINGS_STATE;
+          }
+          const { useAlternateIdleIcon, ...settings } = {
+            useAlternateIdleIcon: undefined,
+            ...persisted,
+          };
+          let trayIconAppearance: TrayIconAppearance = 'auto';
+          if (useAlternateIdleIcon === true) {
+            trayIconAppearance = 'light';
+          } else if (useAlternateIdleIcon === false && !window.gitify.platform.isMacOS()) {
+            trayIconAppearance = 'dark';
+          }
+          return {
+            ...DEFAULT_SETTINGS_STATE,
+            ...settings,
+            trayIconAppearance,
+          };
+        },
       },
     ),
   ),

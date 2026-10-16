@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { useSettingsStore } from '../../stores';
 
 import type { GitifyNotification } from '../../types';
@@ -9,15 +7,17 @@ import { IssueTypesPill } from './IssueTypesPill';
 import { LabelsPill } from './LabelsPill';
 import { LinkedIssuesPill } from './LinkedIssuesPill';
 import { MilestonePill } from './MilestonePill';
+import { ParentPill } from './ParentPill';
 import { ReactionsPill } from './ReactionsPill';
 import { ReviewsPill } from './ReviewsPill';
 import { StackedPrsPill } from './StackedPrsPill';
+import { SubIssueProgressPill } from './SubIssueProgressPill';
 
 export interface MetricGroupProps {
   notification: GitifyNotification;
 }
 
-export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
+export function MetricGroup({ notification }: MetricGroupProps) {
   const showPills = useSettingsStore((s) => s.showPills);
 
   if (!showPills) {
@@ -25,7 +25,9 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
   }
 
   return (
-    <div className="flex gap-1">
+    // `flex-wrap` + `min-w-0` let the pills wrap within the row instead of
+    // overflowing the row and being clipped.
+    <div className="flex min-w-0 flex-wrap gap-1">
       <IssueTypesPill issueType={notification.subject.issueType} />
 
       <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
@@ -47,7 +49,14 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
 
       <MilestonePill milestone={notification.subject.milestone!} />
 
-      <LabelsPill labels={notification.subject.labels ?? []} />
+      <ParentPill parent={notification.subject.parentIssue} />
+
+      <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
+
+      <LabelsPill
+        labels={notification.subject.labels ?? []}
+        issueFields={notification.subject.issueFields ?? []}
+      />
     </div>
   );
-};
+}

@@ -44,7 +44,29 @@ export function stripGatedSelections(doc: string, capabilities: Record<string, b
     },
   });
 
-  return print(sanitized);
+  // Dropping a gated field can leave an operation variable unused (for example
+  // $firstIssueFieldValues on older GHES). GitHub rejects such queries even
+  // though the now-unused value in the request variables is harmless.
+  const usedVariables = new Set<string>();
+  visit(sanitized, {
+    VariableDefinition: () => false,
+    Variable: (node) => {
+      usedVariables.add(node.name.value);
+    },
+  });
+
+  return print(
+    visit(sanitized, {
+      OperationDefinition(node) {
+        return {
+          ...node,
+          variableDefinitions: node.variableDefinitions?.filter((definition) =>
+            usedVariables.has(definition.variable.name.value),
+          ),
+        };
+      },
+    }),
+  );
 }
 
 // AST-based helpers for robust fragment parsing and deduping

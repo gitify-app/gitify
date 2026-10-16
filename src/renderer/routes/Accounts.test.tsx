@@ -11,6 +11,14 @@ import {
 
 import { useAccountsStore } from '../stores';
 
+import { IconColor } from '../types';
+
+import {
+  getAlternateScopeNames,
+  getRecommendedScopeNames,
+  getRequiredScopeNames,
+} from '../utils/auth/scopes';
+import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
 import * as comms from '../utils/system/comms';
@@ -58,6 +66,124 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.getByText('octocat_gitify')).toBeInTheDocument();
       expect(screen.getByAltText('octocat_gitify')).toBeInTheDocument();
       expect(screen.getByText('Mona Lisa Octocat')).toBeInTheDocument();
+    });
+  });
+
+  describe('Scopes icon', () => {
+    const scopeCases = [
+      {
+        name: 'recommended scopes',
+        scopes: getRecommendedScopeNames(),
+        color: IconColor.GREEN,
+        variant: 'default',
+      },
+      {
+        name: 'alternate scopes only',
+        scopes: getAlternateScopeNames(),
+        color: 'text-gitify-warning',
+        variant: 'default',
+      },
+      {
+        name: 'neither scope set',
+        scopes: getRequiredScopeNames(),
+        color: null,
+        variant: 'danger',
+      },
+      {
+        name: 'both scope sets',
+        scopes: [...new Set([...getRecommendedScopeNames(), ...getAlternateScopeNames()])],
+        color: IconColor.GREEN,
+        variant: 'default',
+      },
+    ];
+
+    it.each(scopeCases)(
+      'preserves the icon color and button variant for $name',
+      async ({ scopes, color, variant }) => {
+        await act(async () => {
+          renderWithProviders(<AccountsRoute />, {
+            accounts: [{ ...mockPersonalAccessTokenAccount, scopes }],
+          });
+        });
+
+        const button = screen.getByTestId('account-view-scopes');
+        const icon = button.querySelector('svg');
+
+        expect(icon).toHaveClass('octicon-shield-check');
+        expect(button).toHaveAttribute('data-variant', variant);
+        expect(button).toHaveAttribute('data-size', 'small');
+        expect(button).toHaveAccessibleName(
+          `View scopes for ${mockPersonalAccessTokenAccount.user?.login}`,
+        );
+        if (color) {
+          expect(icon).toHaveClass(color);
+        }
+        for (const scopeColor of [IconColor.GREEN, 'text-gitify-warning']) {
+          if (scopeColor !== color) {
+            expect(icon).not.toHaveClass(scopeColor);
+          }
+        }
+      },
+    );
+
+    it.each(scopeCases)(
+      'retains the icon across an unrelated account update for $name',
+      async ({ scopes }) => {
+        const account = { ...mockPersonalAccessTokenAccount, scopes };
+
+        await act(async () => {
+          renderWithProviders(<AccountsRoute />, { accounts: [account] });
+        });
+
+        const icon = screen.getByTestId('account-view-scopes').querySelector('svg');
+        expect(icon).toBeInTheDocument();
+
+        const updatedAccount = {
+          ...account,
+          user: { ...account.user!, name: 'Updated account name' },
+        };
+        expect(getAccountUUID(updatedAccount)).toBe(getAccountUUID(account));
+
+        await act(async () => {
+          useAccountsStore.setState({ accounts: [updatedAccount] });
+        });
+
+        expect(screen.getByText('Updated account name')).toBeInTheDocument();
+        expect(screen.getByTestId('account-view-scopes').querySelector('svg')).toBe(icon);
+      },
+    );
+
+    it('updates the icon, variant, and navigation account when scopes change', async () => {
+      const account = {
+        ...mockPersonalAccessTokenAccount,
+        scopes: getRequiredScopeNames(),
+      };
+
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, { accounts: [account] });
+      });
+
+      const button = screen.getByTestId('account-view-scopes');
+      expect(button).toHaveAttribute('data-variant', 'danger');
+      expect(button.querySelector('svg')).not.toHaveClass(IconColor.GREEN, 'text-gitify-warning');
+
+      const updatedAccount = { ...account, scopes: getRecommendedScopeNames() };
+      expect(getAccountUUID(updatedAccount)).toBe(getAccountUUID(account));
+
+      await act(async () => {
+        useAccountsStore.setState({ accounts: [updatedAccount] });
+      });
+
+      const updatedButton = screen.getByTestId('account-view-scopes');
+      expect(updatedButton.querySelector('svg')).toHaveClass(IconColor.GREEN);
+      expect(updatedButton.querySelector('svg')).not.toHaveClass('text-gitify-warning');
+      expect(updatedButton).toHaveAttribute('data-variant', 'default');
+
+      await userEvent.click(updatedButton);
+
+      expect(navigateMock).toHaveBeenCalledWith('/account-scopes', {
+        state: { account: updatedAccount },
+      });
     });
   });
 
@@ -331,6 +457,8 @@ describe('renderer/routes/Accounts.tsx', () => {
           ],
         });
       });
+
+      expect(screen.queryByTestId('account-view-scopes')).not.toBeInTheDocument();
 
       await userEvent.click(screen.getByTestId('account-reauthenticate'));
 

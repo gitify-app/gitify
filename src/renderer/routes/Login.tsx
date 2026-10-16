@@ -1,4 +1,4 @@
-import { type FC, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
@@ -7,12 +7,12 @@ import { cn } from 'cn';
 
 import { useAccountsStore } from '../stores';
 
-import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
 
 import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
 
+import { LogoIcon } from '../icons/LogoIcon';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 
@@ -24,7 +24,7 @@ function pickPrimaryMethod(adapter: ForgeAdapter): LoginMethodDescriptor | undef
   return adapter.loginMethods.find((m) => m.variant === 'primary') ?? adapter.loginMethods[0];
 }
 
-export const LoginRoute: FC = () => {
+export function LoginRoute() {
   const navigate = useNavigate();
   const adapters = listAdapters();
 
@@ -60,7 +60,7 @@ export const LoginRoute: FC = () => {
         width: btnRect.width,
       };
       // Avoid setState->layout->setState loops when nothing changed.
-      if (prev && prev.left === next.left && prev.width === next.width) {
+      if (prev?.left === next.left && prev?.width === next.width) {
         return prev;
       }
       return next;
@@ -208,4 +208,4 @@ export const LoginRoute: FC = () => {
       </Stack>
     </Centered>
   );
-};
+}

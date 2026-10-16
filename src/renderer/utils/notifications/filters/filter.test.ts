@@ -94,9 +94,13 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications that match include organization', () => {
+      it.each([
+        { name: 'organization', token: 'org:gitify-app' as SearchToken },
+        { name: 'repository', token: 'repo:gitify-app/gitify' as SearchToken },
+        { name: 'title (substring)', token: 'title:User' as SearchToken },
+      ])('should filter notifications that match include $name', ({ token }) => {
         useFiltersStore.setState({
-          includeSearchTokens: ['org:gitify-app' as SearchToken],
+          includeSearchTokens: [token],
         });
 
         const result = filterBaseNotifications(mockNotifications);
@@ -105,9 +109,14 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude organization', () => {
+      it.each([
+        { name: 'organization', token: 'org:github' as SearchToken },
+        { name: 'repository', token: 'repo:github/github' as SearchToken },
+        { name: 'title (substring)', token: 'title:bot' as SearchToken },
+        { name: 'title case-insensitively', token: 'title:BOT' as SearchToken },
+      ])('should filter notifications that match exclude $name', ({ token }) => {
         useFiltersStore.setState({
-          excludeSearchTokens: ['org:github' as SearchToken],
+          excludeSearchTokens: [token],
         });
 
         const result = filterBaseNotifications(mockNotifications);
@@ -116,26 +125,16 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match include repository', () => {
+      it('should filter by title without detailed notifications enabled', () => {
+        useSettingsStore.setState({ detailedNotifications: false });
         useFiltersStore.setState({
-          includeSearchTokens: ['repo:gitify-app/gitify' as SearchToken],
+          includeSearchTokens: ['title:bot' as SearchToken],
         });
 
         const result = filterBaseNotifications(mockNotifications);
 
         expect(result.length).toBe(1);
-        expect(result).toEqual([mockNotifications[0]]);
-      });
-
-      it('should filter notifications that match exclude repository', () => {
-        useFiltersStore.setState({
-          excludeSearchTokens: ['repo:github/github' as SearchToken],
-        });
-
-        const result = filterBaseNotifications(mockNotifications);
-
-        expect(result.length).toBe(1);
-        expect(result).toEqual([mockNotifications[0]]);
+        expect(result).toEqual([mockNotifications[1]]);
       });
     });
 
@@ -245,6 +244,30 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);
+      });
+
+      it('should filter notifications that are not review requests when only direct is selected', async () => {
+        useFiltersStore.setState({ reviewRequestTypes: ['direct'] });
+
+        mockNotifications[0].subject.reviewRequested = undefined;
+        mockNotifications[1].subject.reviewRequested = ['direct'];
+
+        const result = filterDetailedNotifications(mockNotifications);
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[1]]);
+      });
+
+      it('should keep non-review-request notifications when direct and other are selected', async () => {
+        useFiltersStore.setState({ reviewRequestTypes: ['direct', 'other'] });
+
+        mockNotifications[0].subject.reviewRequested = undefined;
+        mockNotifications[1].subject.reviewRequested = ['direct'];
+
+        const result = filterDetailedNotifications(mockNotifications);
+
+        expect(result.length).toBe(2);
+        expect(result).toEqual(mockNotifications);
       });
     });
   });

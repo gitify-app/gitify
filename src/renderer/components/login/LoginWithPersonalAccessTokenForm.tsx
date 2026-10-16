@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useCallback, useState } from 'react';
+import { type ReactNode, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
@@ -13,7 +13,12 @@ import { Header } from '../primitives/Header';
 
 import type { Account, Forge, Hostname, Token } from '../../types';
 
-import { isValidHostname } from '../../utils/auth/utils';
+import {
+  type PersonalAccessTokenFormData,
+  type PersonalAccessTokenFormErrors,
+  summarizeLoginError,
+  validatePersonalAccessTokenForm,
+} from '../../utils/auth/loginValidation';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
@@ -21,60 +26,6 @@ import { openExternalLink } from '../../utils/system/comms';
 interface LocationState {
   account?: Account;
 }
-
-export interface IFormData {
-  token: Token;
-  hostname: Hostname;
-  username?: string;
-}
-
-interface IFormErrors {
-  token?: string;
-  hostname?: string;
-  username?: string;
-  invalidCredentialsForHost?: string;
-  invalidCredentialsDetail?: string;
-}
-
-/**
- * Reduce a login failure to a single capped line for the error banner. Only
- * real errors carry a message worth showing, and the first line is enough: a
- * misbehaving server can echo the request or its response body back, and
- * that must not flood the banner.
- */
-const ERROR_DETAIL_MAX_LENGTH = 150;
-
-export function summarizeLoginError(err: unknown): string | undefined {
-  if (!(err instanceof Error)) {
-    return undefined;
-  }
-
-  const firstLine = err.message.split('\n')[0].replace(/\s+/g, ' ').trim();
-  return firstLine ? firstLine.slice(0, ERROR_DETAIL_MAX_LENGTH) : undefined;
-}
-
-export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
-  const errors: IFormErrors = {};
-  const adapter = getAdapter(forge);
-
-  if (!values.hostname) {
-    errors.hostname = 'Hostname is required';
-  } else if (!isValidHostname(values.hostname)) {
-    errors.hostname = 'Hostname format is invalid';
-  }
-
-  if (forge === 'bitbucket' && !values.username) {
-    errors.username = 'Atlassian email is required';
-  }
-
-  if (!values.token) {
-    errors.token = 'Token is required';
-  } else if (!adapter.validateToken(values.token)) {
-    errors.token = 'Token format is invalid';
-  }
-
-  return errors;
-};
 
 export interface LoginWithPersonalAccessTokenFormProps {
   forge: Forge;
@@ -110,7 +61,7 @@ export interface LoginWithPersonalAccessTokenFormProps {
  * Forge-specific route components (`routes/github`, `routes/gitea`) supply
  * their own copy via props so this form stays free of forge conditionals.
  */
-export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFormProps> = ({
+export function LoginWithPersonalAccessTokenForm({
   forge,
   title,
   hostnameCaption = '',
@@ -124,7 +75,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
   usernamePlaceholder = '',
   usernameCaption = '',
   children,
-}) => {
+}: LoginWithPersonalAccessTokenFormProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -140,18 +91,18 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
     hostname: reAuthAccount?.hostname ?? adapter.defaultHostname ?? ('' as Hostname),
     token: '' as Token,
     username: reAuthAccount?.username ?? '',
-  } as IFormData);
+  } as PersonalAccessTokenFormData);
 
-  const [errors, setErrors] = useState({} as IFormErrors);
+  const [errors, setErrors] = useState({} as PersonalAccessTokenFormErrors);
 
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
-    const newErrors = validateForm(formData, forge);
+    const newErrors = validatePersonalAccessTokenForm(formData, forge);
 
     setErrors(newErrors);
 
     if (!newErrors.hostname && !newErrors.token && !newErrors.username) {
-      verifyLoginCredentials(formData);
+      await verifyLoginCredentials(formData);
     }
     setIsVerifyingCredentials(false);
   };
@@ -165,7 +116,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
   };
 
   const verifyLoginCredentials = useCallback(
-    async (data: IFormData) => {
+    async (data: PersonalAccessTokenFormData) => {
       try {
         await loginWithPersonalAccessToken({
           hostname: data.hostname,
@@ -258,7 +209,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
             <Stack align="center" direction="horizontal" gap="condensed">
               <Button
                 data-testid="login-create-token"
-                disabled={!formData.hostname}
+                disabled={!adapter.validateHostname(formData.hostname)}
                 leadingVisual={KeyIcon}
                 onClick={() =>
                   openExternalLink(adapter.getPersonalAccessTokenSettingsUrl(formData.hostname))
@@ -324,4 +275,4 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
       </Footer>
     </Page>
   );
-};
+}

@@ -1,0 +1,13 @@
+# WORKAROUND: actionlint does not recognize the `ubuntu-26.04-arm` GitHub-hosted
+# runner label yet. Upstream support is pending (rhysd/actionlint#683, duplicate #723),
+# so the pinned actionlint version used in .github/workflows/lint.yml would fail the
+# lint check with `label "ubuntu-26.04-arm" is unknown`.
+#
+# Declaring the label under `self-hosted-runner.labels` is actionlint's documented
+# mechanism for accepting runner labels it does not know about. Remove this entry
+# once the pinned actionlint version in .github/workflows/lint.yml ships built-in
+# support for `ubuntu-26.04-arm`; the label is a GitHub-hosted runner, not
+# self-hosted.
+self-hosted-runner:
+  labels:
+    - ubuntu-26.04-arm

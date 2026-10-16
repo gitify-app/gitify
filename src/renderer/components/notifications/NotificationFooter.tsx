@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 
 import { RelativeTime, Stack, Text } from '@primer/react';
 
@@ -15,9 +15,7 @@ export interface NotificationFooterProps {
   notification: GitifyNotification;
 }
 
-export const NotificationFooter: FC<NotificationFooterProps> = ({
-  notification,
-}: NotificationFooterProps) => {
+export function NotificationFooter({ notification }: NotificationFooterProps) {
   const user = notification.subject.user;
   const userLabel = user
     ? getAccountAdapter(notification.account).formatNotificationUser(user)
@@ -26,7 +24,10 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
   return (
     <Stack
       align="center"
-      className={cn('text-xs', Opacity.MEDIUM)}
+      // Reserve the action rail's width so the footer's pills wrap clear of the
+      // buttons instead of sitting under them. The title line and number stay
+      // full width; only the footer/pill strip yields.
+      className={cn('pr-[5.5rem] text-xs', Opacity.MEDIUM)}
       direction="horizontal"
       gap="condensed"
       wrap="wrap"
@@ -50,7 +51,11 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
           />
         </button>
       ) : (
-        <AvatarWithFallback size={Size.SMALL} userType={notification.display.defaultUserType} />
+        <AvatarWithFallback
+          icon={notification.display.defaultUserIcon}
+          size={Size.SMALL}
+          userType={notification.display.defaultUserType}
+        />
       )}
 
       <Stack direction="horizontal" gap="none">
@@ -63,4 +68,4 @@ export const NotificationFooter: FC<NotificationFooterProps> = ({
       <MetricGroup notification={notification} />
     </Stack>
   );
-};
+}

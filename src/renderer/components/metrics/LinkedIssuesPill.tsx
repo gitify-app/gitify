@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { IssueRelatesToIcon } from '@primer/octicons-react';
 
 import { IconColor } from '../../types';
@@ -11,7 +9,7 @@ export interface LinkedIssuesPillProps {
   linkedIssues: string[];
 }
 
-export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) => {
+export function LinkedIssuesPill({ linkedIssues }: LinkedIssuesPillProps) {
   if (!linkedIssues?.length) {
     return null;
   }
@@ -30,4 +28,4 @@ export const LinkedIssuesPill: FC<LinkedIssuesPillProps> = ({ linkedIssues }) =>
       metric={linkedIssues.length}
     />
   );
-};
+}

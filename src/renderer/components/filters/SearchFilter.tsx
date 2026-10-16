@@ -1,8 +1,8 @@
-import type { FC } from 'react';
-
 import {
   CheckCircleFillIcon,
+  CommentIcon,
   NoEntryFillIcon,
+  NoteIcon,
   OrganizationIcon,
   PersonIcon,
   RepoIcon,
@@ -25,7 +25,7 @@ import {
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 
-export const SearchFilter: FC = () => {
+export function SearchFilter() {
   const updateFilter = useFiltersStore((s) => s.updateFilter);
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
   const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
@@ -82,6 +82,14 @@ export const SearchFilter: FC = () => {
                   </Text>
                 </Stack>
                 <Stack direction="horizontal" gap="condensed">
+                  <CommentIcon size={Size.SMALL} />
+                  <Text
+                    className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
+                  >
+                    Commenter (commenter:handle)
+                  </Text>
+                </Stack>
+                <Stack direction="horizontal" gap="condensed">
                   <OrganizationIcon size={Size.SMALL} />
                   <Text>Organization (org:name)</Text>
                 </Stack>
@@ -89,8 +97,13 @@ export const SearchFilter: FC = () => {
                   <RepoIcon size={Size.SMALL} />
                   <Text>Repository (repo:fullname)</Text>
                 </Stack>
+                <Stack direction="horizontal" gap="condensed">
+                  <NoteIcon size={Size.SMALL} />
+                  <Text>Title (title:text)</Text>
+                </Stack>
               </Stack>
             </div>
+            <Text className="text-gitify-fg-muted">All qualifiers match case-insensitively.</Text>
             <RequiresDetailedNotificationWarning />
           </Stack>
         }
@@ -121,4 +134,4 @@ export const SearchFilter: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

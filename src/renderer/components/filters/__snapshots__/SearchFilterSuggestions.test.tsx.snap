@@ -32,7 +32,7 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
             data-component="Text"
           >
             Please use one of the supported filters [
-            org, repo
+            org, repo, title
             ]
           </span>
         </div>
@@ -221,6 +221,31 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
             </span>
           </div>
         </div>
+        <div>
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-component="Stack"
+            data-direction="vertical"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <span
+              class="text-xs font-semibold prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              title:
+            </span>
+            <span
+              class="text-xs opacity-90 prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              filter by subject title
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -298,6 +323,31 @@ exports[`renderer/components/filters/SearchFilterSuggestions.tsx > should render
               data-component="Text"
             >
               filter by repository full name
+            </span>
+          </div>
+        </div>
+        <div>
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="stretch"
+            data-component="Stack"
+            data-direction="vertical"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <span
+              class="text-xs font-semibold prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              title:
+            </span>
+            <span
+              class="text-xs opacity-90 prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              filter by subject title
             </span>
           </div>
         </div>

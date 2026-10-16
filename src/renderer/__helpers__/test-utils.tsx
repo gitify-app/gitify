@@ -4,8 +4,13 @@ import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { useShortcutRegistrationStore } from '../hooks/useShortcutRegistration';
-import { type FiltersStore, useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
+import {
+  type FiltersStore,
+  useAccountsStore,
+  useFiltersStore,
+  useSettingsStore,
+  useShortcutRegistrationStore,
+} from '../stores';
 
 import type { Account, SettingsState } from '../types';
 
@@ -41,6 +46,7 @@ const LOGIN_KEYS = [
   'loginWithDeviceFlowStart',
   'loginWithDeviceFlowPoll',
   'loginWithDeviceFlowComplete',
+  'loginWithCli',
   'loginWithOAuthApp',
   'loginWithPersonalAccessToken',
   'logoutFromAccount',

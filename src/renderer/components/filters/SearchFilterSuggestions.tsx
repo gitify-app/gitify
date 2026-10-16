@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { Popover, Stack, Text } from '@primer/react';
 
 import { cn } from 'cn';
@@ -19,7 +17,7 @@ interface SearchFilterSuggestionsProps {
   inputValue: string;
 }
 
-export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({ open, inputValue }) => {
+export function SearchFilterSuggestions({ open, inputValue }: SearchFilterSuggestionsProps) {
   const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
 
   if (!open) {
@@ -56,4 +54,4 @@ export const SearchFilterSuggestions: FC<SearchFilterSuggestionsProps> = ({ open
       </Popover.Content>
     </Popover>
   );
-};
+}

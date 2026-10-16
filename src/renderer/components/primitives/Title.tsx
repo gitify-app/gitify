@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import type { Icon } from '@primer/octicons-react';
 import { Heading, Stack } from '@primer/react';
@@ -12,7 +12,7 @@ interface TitleProps {
   tooltip?: ReactNode;
 }
 
-export const Title: FC<TitleProps> = ({ size: _size = 2, ...props }) => {
+export function Title({ size: _size = 2, ...props }: TitleProps) {
   const name = props.children.toLowerCase().replaceAll(' ', '-');
 
   return (
@@ -35,4 +35,4 @@ export const Title: FC<TitleProps> = ({ size: _size = 2, ...props }) => {
       </div>
     </legend>
   );
-};
+}

@@ -1,4 +1,5 @@
 import { fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 
@@ -11,6 +12,30 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
 
   beforeEach(() => {
     updateFilterSpy = vi.spyOn(useFiltersStore.getState(), 'updateFilter');
+  });
+
+  describe('Search tooltip', () => {
+    it('lists the supported search qualifiers including commenter', async () => {
+      renderWithProviders(<SearchFilter />);
+
+      const tooltipIconElement = screen.getByTestId('tooltip-icon-tooltip-search');
+      await userEvent.click(tooltipIconElement);
+
+      expect(screen.getByText('Author (author:handle)')).toBeInTheDocument();
+      expect(screen.getByText('Commenter (commenter:handle)')).toBeInTheDocument();
+      expect(screen.getByText('Organization (org:name)')).toBeInTheDocument();
+      expect(screen.getByText('Repository (repo:fullname)')).toBeInTheDocument();
+    });
+
+    it('strikes through qualifiers that require detailed notifications when disabled', async () => {
+      renderWithProviders(<SearchFilter />, { settings: { detailedNotifications: false } });
+
+      const tooltipIconElement = screen.getByTestId('tooltip-icon-tooltip-search');
+      await userEvent.click(tooltipIconElement);
+
+      expect(screen.getByText('Author (author:handle)')).toHaveClass('line-through');
+      expect(screen.getByText('Commenter (commenter:handle)')).toHaveClass('line-through');
+    });
   });
 
   describe('Include Search Tokens', () => {

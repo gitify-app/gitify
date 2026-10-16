@@ -11,6 +11,7 @@ import {
 import type { GiteaNotificationThread, GiteaNotifySubjectType } from './types';
 
 import { getReasonDetails } from '../../notifications/reason';
+import { getGiteaOrigin } from './auth';
 
 const FALLBACK_REASON: Reason = 'subscribed';
 
@@ -66,7 +67,7 @@ function transformRepository(raw: GiteaNotificationThread, account: Account): Gi
     return {
       name: 'unknown',
       fullName: 'unknown',
-      htmlUrl: toLink(`https://${account.hostname}`),
+      htmlUrl: toLink(getGiteaOrigin(account.hostname)),
       owner: {
         login: 'unknown',
         avatarUrl: toLink(''),

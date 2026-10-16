@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { SmileyIcon } from '@primer/octicons-react';
 import { IssueLabelToken, LabelGroup } from '@primer/react';
 
@@ -23,7 +21,7 @@ const reactionEmojiMap: Record<string, string> = {
   HEART: '❤️',
 };
 
-export const ReactionsPill: FC<ReactionsPillProps> = ({ reactionsCount, reactionGroups }) => {
+export function ReactionsPill({ reactionsCount, reactionGroups }: ReactionsPillProps) {
   if (!reactionsCount) {
     return null;
   }
@@ -58,4 +56,4 @@ export const ReactionsPill: FC<ReactionsPillProps> = ({ reactionsCount, reaction
       metric={reactionsCount}
     />
   );
-};
+}

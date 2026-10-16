@@ -1,5 +1,3 @@
-import { type CSSProperties, type FC, useState } from 'react';
-
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Stack, Text, Tooltip } from '@primer/react';
 
@@ -30,21 +28,21 @@ import { NotificationTitle } from './NotificationTitle';
 
 export interface NotificationRowProps {
   notification: GitifyNotification;
-  isRepositoryAnimatingExit: boolean;
+  isAnimatingExit: boolean;
+  onAnimateExit: (animate: boolean) => void;
 }
 
-export const NotificationRow: FC<NotificationRowProps> = ({
+export function NotificationRow({
   notification,
-  isRepositoryAnimatingExit,
-}: NotificationRowProps) => {
+  isAnimatingExit,
+  onAnimateExit,
+}: NotificationRowProps) {
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
     useNotifications();
 
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
   const showNumber = useSettingsStore((s) => s.showNumber);
-
-  const [shouldAnimateNotificationExit, setShouldAnimateNotificationExit] = useState(false);
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
@@ -62,25 +60,19 @@ export const NotificationRow: FC<NotificationRowProps> = ({
     ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in the browser.`
     : undefined;
 
-  // Starts the exit animation immediately, then reverts it if this specific
-  // action failed, checked directly against the failure store once it
-  // settles. Checking a stale value (e.g. via an effect watching the failure
-  // map) would wrongly revert a retry's animation using the previous
-  // attempt's still-present entry.
-  const runAction = async (action: () => Promise<void>) => {
-    setShouldAnimateNotificationExit(shouldAnimateExit);
-
-    await action();
-
-    if (useNotificationActionFailuresStore.getState().failures[notificationFailureKey]) {
-      setShouldAnimateNotificationExit(false);
+  const runAction = async (action: () => Promise<boolean>) => {
+    onAnimateExit(shouldAnimateExit);
+    try {
+      await action();
+    } finally {
+      onAnimateExit(false);
     }
   };
 
   const actionNotificationInteraction = () => {
-    openNotification(notification);
+    void openNotification(notification);
 
-    runAction(() =>
+    void runAction(() =>
       markAsDoneOnOpen
         ? markNotificationsAsDone([notification])
         : markNotificationsAsRead([notification]),
@@ -96,26 +88,16 @@ export const NotificationRow: FC<NotificationRowProps> = ({
   const NotificationIcon = notification.display.icon.type;
   const isNotificationRead = !notification.unread;
 
-  // How many action buttons the HoverGroup below actually renders. Exposed as a
-  // CSS var so the Glass hover-fade (App.css) sizes to the buttons instead of a
-  // fixed width, which would over-fade rows that show fewer than three.
-  const enabledActionCount =
-    Number(!isNotificationRead) +
-    Number(isMarkAsDoneFeatureSupported(notification.account) && notification.unread) +
-    Number(isUnsubscribeThreadSupported(notification.account));
-
   return (
     <div
       className={cn(
         'group relative border-b',
         'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
-        (isRepositoryAnimatingExit || shouldAnimateNotificationExit) &&
-          'translate-x-full opacity-0 transition duration-350 ease-in-out',
+        isAnimatingExit && 'translate-x-full opacity-0 transition duration-350 ease-in-out',
         isNotificationRead && Opacity.READ,
       )}
       id={notification.id}
-      style={{ '--gitify-actions': enabledActionCount } as CSSProperties}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
         <Tooltip direction="e" text={notification.display.type}>
@@ -146,14 +128,17 @@ export const NotificationRow: FC<NotificationRowProps> = ({
             title={notification.display.title}
           >
             <NotificationTitle title={notification.subject.title} />
+            {/* Hidden (keeping its space) while the row is hovered, so the
+                full-height action rail can never leave the number partially
+                rendered. */}
             <Text
               className={cn(
-                'text-xxs ml-auto mr-2',
+                'text-xxs ml-auto mr-2 group-hover:invisible',
                 Opacity.READ,
                 (isGroupByDate() || !showNumber) && 'hidden',
               )}
             >
-              {notification.display.number}
+              {notification.display.identifier}
             </Text>
           </Stack>
 
@@ -161,8 +146,8 @@ export const NotificationRow: FC<NotificationRowProps> = ({
         </Stack>
       </Stack>
 
-      {!shouldAnimateNotificationExit && (
-        <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">
+      {!isAnimatingExit && (
+        <HoverGroup bgColor="group-hover:bg-gitify-notification-hover" fullHeight>
           <HoverButton
             action={actionMarkAsRead}
             enabled={!isNotificationRead}
@@ -201,4 +186,4 @@ export const NotificationRow: FC<NotificationRowProps> = ({
       )}
     </div>
   );
-};
+}

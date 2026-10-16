@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { PersonIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
@@ -11,7 +9,7 @@ import { Title } from '../primitives/Title';
 
 import { getAccountUUID } from '../../utils/auth/utils';
 
-export const AccountFilter: FC = () => {
+export function AccountFilter() {
   const { notifications } = useNotifications();
   const accounts = useAccountsStore((s) => s.accounts);
   const filteredAccounts = useFiltersStore((s) => s.accounts);
@@ -46,4 +44,4 @@ export const AccountFilter: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

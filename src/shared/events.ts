@@ -12,7 +12,7 @@ export const EVENTS = {
   VERSION: `${P}version`,
   UPDATE_ICON_COLOR: `${P}update-icon-color`,
   UPDATE_ICON_TITLE: `${P}update-icon-title`,
-  USE_ALTERNATE_IDLE_ICON: `${P}use-alternate-idle-icon`,
+  SET_TRAY_ICON_APPEARANCE: `${P}set-tray-icon-appearance`,
   USE_UNREAD_ACTIVE_ICON: `${P}use-unread-active-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
@@ -23,6 +23,7 @@ export const EVENTS = {
   SET_NATIVE_THEME: `${P}set-native-theme`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
+  GITHUB_CLI_TOKEN: `${P}github-cli-token`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
@@ -35,6 +36,12 @@ export type EventType = (typeof EVENTS)[keyof typeof EVENTS];
 
 /** Native appearance source, mirrors Electron's `nativeTheme.themeSource`. */
 export type NativeThemeSource = 'system' | 'light' | 'dark';
+
+export type TrayIconAppearance = 'auto' | 'light' | 'dark';
+
+export function isTrayIconAppearance(value: unknown): value is TrayIconAppearance {
+  return value === 'auto' || value === 'light' || value === 'dark';
+}
 
 /** Payload for the `UPDATE_AUTO_LAUNCH` event. */
 export interface IAutoLaunch {
@@ -78,6 +85,21 @@ export interface ISafeStorageDecryptResult {
   reEncryptedToken?: string;
 }
 
+/** Why the GitHub CLI could not provide a token. */
+export type GitHubCliTokenError =
+  | 'GH_NOT_FOUND'
+  | 'GH_NOT_AUTHENTICATED'
+  | 'GH_TIMED_OUT'
+  | 'GH_FAILED';
+
+/**
+ * Result of asking the locally installed GitHub CLI for the token it holds for
+ * a host. `detail` carries the CLI's own first line of stderr, when it has one.
+ */
+export type IGitHubCliTokenResult =
+  | { token: string; error?: never; detail?: never }
+  | { token?: never; error: GitHubCliTokenError; detail?: string };
+
 /** Shape of a single event contract: a request payload and a response payload. */
 type Contract = { request: unknown; response: unknown };
 
@@ -102,7 +124,7 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.VERSION]: { request: undefined; response: string };
   [EVENTS.UPDATE_ICON_COLOR]: { request: ITrayColorUpdate; response: undefined };
   [EVENTS.UPDATE_ICON_TITLE]: { request: string; response: undefined };
-  [EVENTS.USE_ALTERNATE_IDLE_ICON]: { request: boolean; response: undefined };
+  [EVENTS.SET_TRAY_ICON_APPEARANCE]: { request: TrayIconAppearance; response: undefined };
   [EVENTS.USE_UNREAD_ACTIVE_ICON]: { request: boolean; response: undefined };
   [EVENTS.UPDATE_KEYBOARD_SHORTCUT]: {
     request: IKeyboardShortcut;
@@ -127,6 +149,10 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.SAFE_STORAGE_DECRYPT]: {
     request: string;
     response: ISafeStorageDecryptResult;
+  };
+  [EVENTS.GITHUB_CLI_TOKEN]: {
+    request: string;
+    response: IGitHubCliTokenResult;
   };
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };

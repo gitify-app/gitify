@@ -8,12 +8,12 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 catalog:
-  electron: '44.3.0'
-  vite: npm:@voidzero-dev/vite-plus-core@0.3.1
-  vitest: 4.1.11
-  vite-plus: 0.3.1
-  '@vitest/browser-playwright': 4.1.11
-  '@vitest/coverage-v8': 4.1.11
+  electron: '44.7.0'
+  vite: npm:@voidzero-dev/vite-plus-core@1.1.0
+  vitest: 5.0.3
+  vite-plus: 1.1.0
+  '@vitest/browser-playwright': 5.0.3
+  '@vitest/coverage-v8': 5.0.3
 minimumReleaseAgeExclude:
   - electron-menubar
 overrides:
@@ -26,10 +26,6 @@ overrides:
   electron: 'catalog:'
   vite@*: 'catalog:'
   vitest@*: 'catalog:'
-# Temporary: electron-builder passes the .p12 import password to `security set-key-partition-list -k`,
-# which macOS 26.6+ rejects. Drop once electron-userland/electron-builder#10101 ships in a 26.x release.
-patchedDependencies:
-  app-builder-lib@26.15.3: patches/app-builder-lib@26.15.3.patch
 savePrefix: ''
 peerDependencyRules:
   allowAny:

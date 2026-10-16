@@ -2,15 +2,18 @@ import { app } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'electron-menubar';
 
+import { logError, toError } from '../shared/logger';
+
 import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
+  registerGitHubCliHandlers,
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
   registerUpdaterHandlers,
 } from './handlers';
-import { TrayIcons } from './icons';
+import { getIdleTrayIcon } from './icons';
 import {
   configureWindowEvents,
   handleProtocolURL,
@@ -33,7 +36,7 @@ if (!app.isPackaged) {
 }
 
 const mb = menubar({
-  icon: TrayIcons.idle,
+  icon: getIdleTrayIcon('auto'),
   index: Paths.indexHtml,
   browserWindow: WindowConfig,
   preloadWindow: true,
@@ -51,21 +54,27 @@ app.setAsDefaultProtocolClient(protocol);
 
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
-app.whenReady().then(async () => {
-  await onFirstRunMaybe();
+app
+  .whenReady()
+  .then(async () => {
+    await onFirstRunMaybe();
 
-  initializeAppLifecycle(mb, contextMenu, protocol);
+    initializeAppLifecycle(mb, contextMenu, protocol);
 
-  // Configure window event handlers (Escape key, DevTools resize)
-  configureWindowEvents(mb, menuBuilder);
+    // Configure window event handlers (Escape key, DevTools resize)
+    configureWindowEvents(mb, menuBuilder);
 
-  // Register IPC handlers for various channels
-  registerTrayHandlers(mb);
-  registerSystemHandlers(mb);
-  registerStorageHandlers();
-  registerAppHandlers(mb);
-  registerUpdaterHandlers(appUpdater);
-});
+    // Register IPC handlers for various channels
+    registerTrayHandlers(mb);
+    registerSystemHandlers(mb);
+    registerStorageHandlers();
+    registerGitHubCliHandlers();
+    registerAppHandlers(mb);
+    registerUpdaterHandlers(appUpdater);
+  })
+  .catch((err) => {
+    logError('main', 'Failed to initialize application', toError(err));
+  });
 
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback
 app.on('open-url', (event, url) => {

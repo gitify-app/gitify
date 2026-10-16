@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { Button, IconButton, Stack, Tooltip } from '@primer/react';
@@ -12,12 +12,12 @@ import { Footer } from '../primitives/Footer';
 import { getAppVersion } from '../../utils/system/comms';
 import { openGitifyReleaseNotes } from '../../utils/system/links';
 
-export const SettingsFooter: FC = () => {
+export function SettingsFooter() {
   const [appVersion, setAppVersion] = useState<string | null>(null);
   const { shortcuts } = useShortcutActions();
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const result = await getAppVersion();
       setAppVersion(result);
     })();
@@ -63,4 +63,4 @@ export const SettingsFooter: FC = () => {
       </Stack>
     </Footer>
   );
-};
+}

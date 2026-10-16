@@ -4,12 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGiteaAccount } from '../../__mocks__/account-mocks';
 
-import {
-  type IFormData,
-  validateForm,
-} from '../../components/login/LoginWithPersonalAccessTokenForm';
-
-import type { Hostname, Token } from '../../types';
+import type { Hostname } from '../../types';
 
 import * as comms from '../../utils/system/comms';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './LoginWithPersonalAccessToken';
@@ -24,68 +19,64 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  describe('form validation', () => {
-    it('should validate the token matches the Gitea format', () => {
-      const values: IFormData = {
-        hostname: 'gitea.example.com' as Hostname,
-        token: 'abcdef1234567890abcdef1234567890abcdef12' as Token,
-      };
-
-      expect(validateForm(values, 'gitea')).toEqual({});
-    });
-
-    it('should reject tokens that are not 40-character lowercase hex', () => {
-      const values: IFormData = {
-        hostname: 'gitea.example.com' as Hostname,
-        token: 'GHT_INVALID_TOKEN' as Token,
-      };
-
-      expect(validateForm(values, 'gitea').token).toBe('Token format is invalid');
-    });
+  it('disables token settings and rejects credentials or paths in the origin', async () => {
+    renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />);
+    await userEvent.type(
+      screen.getByTestId('login-hostname'),
+      'http://user:secret@git.internal/path',
+    );
+    expect(screen.getByTestId('login-create-token')).toBeDisabled();
+    await userEvent.click(screen.getByTestId('login-submit'));
+    expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
   });
 
-  it('should open the token settings for the configured hostname', async () => {
+  it.each([
+    ['gitea.example.com', 'https://gitea.example.com'],
+    ['gitea.example.com:3000', 'https://gitea.example.com:3000'],
+    ['http://git.internal:3000', 'http://git.internal:3000'],
+  ])('opens token settings for %s', async (hostname, origin) => {
     renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.type(screen.getByTestId('login-hostname'), 'gitea.example.com');
+    await userEvent.type(screen.getByTestId('login-hostname'), hostname);
 
     await userEvent.click(screen.getByTestId('login-create-token'));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkSpy).toHaveBeenCalledWith(
-      'https://gitea.example.com/user/settings/applications',
-    );
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(`${origin}/user/settings/applications`);
   });
 
-  it('should login using a token - success', async () => {
-    loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
+  it.each(['gitea.example.com', 'gitea.example.com:3000', 'http://git.internal:3000'])(
+    'logs in with %s',
+    async (hostname) => {
+      loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
-    renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />, {
-      loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
-    });
-
-    await userEvent.type(screen.getByTestId('login-hostname'), 'gitea.example.com');
-
-    await userEvent.type(
-      screen.getByTestId('login-token'),
-      'abcdef1234567890abcdef1234567890abcdef12',
-    );
-
-    await userEvent.click(screen.getByTestId('login-submit'));
-
-    await waitFor(() => {
-      expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
-      expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledWith({
-        hostname: 'gitea.example.com',
-        token: 'abcdef1234567890abcdef1234567890abcdef12',
-        forge: 'gitea',
+      renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />, {
+        loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
-      expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/');
-    });
-  });
+
+      await userEvent.type(screen.getByTestId('login-hostname'), hostname);
+
+      await userEvent.type(
+        screen.getByTestId('login-token'),
+        'abcdef1234567890abcdef1234567890abcdef12',
+      );
+
+      await userEvent.click(screen.getByTestId('login-submit'));
+
+      await waitFor(() => {
+        expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
+        expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledWith({
+          hostname,
+          token: 'abcdef1234567890abcdef1234567890abcdef12',
+          forge: 'gitea',
+        });
+        expect(navigateMock).toHaveBeenCalledTimes(1);
+        expect(navigateMock).toHaveBeenCalledWith('/');
+      });
+    },
+  );
 
   it('should login using a token - failure', async () => {
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(new Error('invalid token'));

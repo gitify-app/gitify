@@ -7,7 +7,7 @@ import type { Account, Forge, Hostname, Token } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 import type { AccountsState, AccountsStore } from './types';
 
-import { getAccountUUID, isValidHostname, refreshAccount } from '../utils/auth/utils';
+import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { rendererLogInfo, rendererLogWarn } from '../utils/core/logger';
 import { getAccountAdapter, getAdapter, isKnownForge } from '../utils/forges/registry';
 import { decryptValue, encryptValue } from '../utils/system/comms';
@@ -21,11 +21,12 @@ import { DEFAULT_ACCOUNTS_STATE } from './defaults';
  */
 export function sanitizeAccounts(accounts: Account[]): Account[] {
   return accounts.flatMap((a) => {
-    if (!a.hostname || !isValidHostname(a.hostname)) {
+    const forge = isKnownForge(a.forge) ? a.forge : 'github';
+    if (!a.hostname || !getAdapter(forge).validateHostname(a.hostname)) {
       return [];
     }
     const sanitised: Account = {
-      forge: isKnownForge(a.forge) ? a.forge : 'github',
+      forge,
       method: a.method,
       platform: a.platform,
       version: a.version,
@@ -73,13 +74,33 @@ const useAccountsStore = create<AccountsStore>()(
         const newAccountUUID = getAccountUUID(newAccount);
 
         const accounts = get().accounts;
-        const existingAccount = accounts.find(
-          (account) => getAccountUUID(account) === newAccountUUID,
-        );
+        const adapter = getAdapter(forge);
+        const isCliAccount = method === adapter.cliAuth?.authMethod;
+        const replacesAccount = (account: Account) => {
+          if (isCliAccount) {
+            return (
+              account.forge === forge && account.hostname === hostname && account.method === method
+            );
+          }
+          if (adapter.getOrigin) {
+            return (
+              account.forge === forge &&
+              adapter.getOrigin(account.hostname) === adapter.getOrigin(hostname) &&
+              account.user?.id === newAccount.user?.id &&
+              account.method === method
+            );
+          }
+          return getAccountUUID(account) === newAccountUUID;
+        };
+        const existingAccountIndex = accounts.findIndex(replacesAccount);
+        const existingAccount = accounts[existingAccountIndex];
 
         if (existingAccount) {
+          newAccount.hostname = existingAccount.hostname;
           // Drop any forge-specific HTTP client cache so the new token is used.
-          getAccountAdapter(existingAccount).onAccountTokenChange?.();
+          for (const account of accounts.filter(replacesAccount)) {
+            getAccountAdapter(account).onAccountTokenChange?.();
+          }
 
           // Replace the existing account (e.g. re-authentication with a new token)
           rendererLogInfo(
@@ -88,9 +109,12 @@ const useAccountsStore = create<AccountsStore>()(
           );
 
           set({
-            accounts: accounts.map((account) =>
-              getAccountUUID(account) === newAccountUUID ? newAccount : account,
-            ),
+            accounts: accounts.flatMap((account, index) => {
+              if (!replacesAccount(account)) {
+                return [account];
+              }
+              return index === existingAccountIndex ? [newAccount] : [];
+            }),
           });
         } else {
           set({ accounts: [...accounts, newAccount] });
@@ -115,8 +139,10 @@ const useAccountsStore = create<AccountsStore>()(
         // Drop any forge-specific HTTP client state for the removed account.
         getAccountAdapter(account).onAccountTokenChange?.();
 
+        const removedUUID = getAccountUUID(account);
+
         set((state) => ({
-          accounts: state.accounts.filter((a) => a.token !== account.token),
+          accounts: state.accounts.filter((a) => getAccountUUID(a) !== removedUUID),
         }));
       },
 

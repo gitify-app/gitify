@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import {
   BellIcon,
   CrosshairsIcon,
@@ -19,9 +17,9 @@ import { useNotifications } from '../hooks/useNotifications';
 import { useShortcutActions } from '../hooks/useShortcutActions';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
-import { LogoIcon } from './icons/LogoIcon';
+import { LogoIcon } from '../icons/LogoIcon';
 
-export const Sidebar: FC = () => {
+export function Sidebar() {
   const { status, notificationCount, hasUnreadNotifications, isFetching } = useNotifications();
 
   const { shortcuts } = useShortcutActions();
@@ -165,4 +163,4 @@ export const Sidebar: FC = () => {
       </Stack>
     </Stack>
   );
-};
+}

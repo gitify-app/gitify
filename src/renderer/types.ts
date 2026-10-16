@@ -3,6 +3,8 @@ import type { FC } from 'react';
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { Button } from '@primer/react';
 
+import type { TrayIconAppearance } from '../shared/events';
+
 // Derived from public @primer/react component props rather than internal types
 export type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
 
@@ -124,7 +126,7 @@ export interface NotificationSettingsState {
 export interface TraySettingsState {
   showNotificationsCountInTray: boolean;
   useUnreadActiveIcon: boolean;
-  useAlternateIdleIcon: boolean;
+  trayIconAppearance: TrayIconAppearance;
 }
 
 /**
@@ -376,6 +378,10 @@ export interface GitifySubject {
   // Enriched fields (from additional GraphQL or REST API calls)
   /** Issue/PR/Discussion number */
   number?: number;
+  /** Release tag (e.g. `v1.2.3`), when the subject is a release */
+  tagName?: string;
+  /** Commit SHA, when the subject is a commit */
+  commitSha?: string;
   /** Parsed state */
   state?: GitifyNotificationState;
   /**
@@ -406,8 +412,14 @@ export interface GitifySubject {
   stackDepth?: number;
   /** GitHub-native issue type (e.g. Bug, Feature, Task) */
   issueType?: GitifyIssueType;
+  /** GitHub issue fields (e.g. Priority, Effort) with values set */
+  issueFields?: GitifyIssueField[];
   /** Milestone state/title */
   milestone?: GitifyMilestone;
+  /** Parent issue context when the issue is a sub-issue */
+  parentIssue?: GitifyParentIssue;
+  /** Sub-issue progress summary when the issue has sub-issues */
+  subIssueProgress?: GitifySubIssueProgress;
   /** Deep link to notification thread */
   htmlUrl?: Link;
   /** Reaction counts */
@@ -466,8 +478,8 @@ export interface GitifyNotificationDisplay {
   title: string;
   /** Formatted notification type */
   type: string;
-  /** Formatted notification number */
-  number: string;
+  /** Formatted notification identifier (a `#number`, a release tag, or a short SHA) */
+  identifier: string;
   /** Notification icon and color to display */
   icon: {
     type: Icon;
@@ -475,12 +487,38 @@ export interface GitifyNotificationDisplay {
   };
   /** Notification default user type for fallback scenarios */
   defaultUserType: UserType;
+  /** Optional actor icon for notifications without an enriched actor (e.g. Copilot). */
+  defaultUserIcon?: FC<OcticonProps>;
 }
 
 /** GitHub-native issue type, normalized to a Gitify icon color token */
 export interface GitifyIssueType {
   name: string;
   color: IconColor;
+}
+
+/** GitHub sub-issue parent context */
+export interface GitifyParentIssue {
+  number: number;
+  title: string;
+  url: Link;
+}
+
+/** GitHub sub-issue progress summary */
+export interface GitifySubIssueProgress {
+  total: number;
+  completed: number;
+  percentCompleted: number;
+}
+
+/** GitHub issue field value, normalized for display */
+export interface GitifyIssueField {
+  /** Field name, e.g. "Priority" */
+  name: string;
+  /** Display value, e.g. "High", "5", "2026-09-01" */
+  value: string;
+  /** Option fill color when available */
+  fillColor?: string;
 }
 
 export type GitifyMilestone = MilestoneFieldsFragment;
@@ -536,6 +574,7 @@ export type GitifyCheckSuiteStatus =
 
 // Stronger typings for string literal attributes
 export type Reason =
+  | 'agent_session_finished'
   | 'approval_requested'
   | 'assign'
   | 'author'
@@ -552,7 +591,15 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
+/**
+ * Subject type filter option values. `'other'` is a catch-all bucket matching
+ * subject types that are not otherwise enumerated (e.g. future forge types
+ * that pass through the transform layer unmodelled).
+ */
+export type SubjectTypeFilterValue = SubjectType | 'other';
+
 export type SubjectType =
+  | 'AgentSessionThread'
   | 'BitbucketNotification'
   | 'CheckSuite'
   | 'Commit'
@@ -569,4 +616,23 @@ export type SubjectType =
 
 export type UserType = 'Bot' | 'EnterpriseUserAccount' | 'Mannequin' | 'Organization' | 'User';
 
+/**
+ * User type filter option values. `'other'` is a catch-all bucket matching
+ * authors that are not a User, Bot, or Organization (e.g. Mannequin) or that
+ * have no author information.
+ */
+export type UserTypeFilterValue = Extract<UserType, 'User' | 'Bot' | 'Organization'> | 'other';
+
 export type ReviewRequestType = 'direct' | 'team';
+
+/**
+ * Review request type filter option values. `'other'` is a catch-all bucket
+ * matching notifications that are not a direct or team review request.
+ */
+export type ReviewRequestTypeFilterValue = ReviewRequestType | 'other';
+
+/**
+ * Reason filter option values. `'other'` is a catch-all bucket matching
+ * notification reason codes that are not otherwise enumerated by the filter.
+ */
+export type ReasonFilterValue = Reason | 'other';

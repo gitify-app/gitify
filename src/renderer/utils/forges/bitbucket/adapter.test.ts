@@ -5,12 +5,11 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 
 import { useSettingsStore } from '../../../stores';
 
-import { BitbucketIcon } from '../../../components/icons/BitbucketIcon';
-
 import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 import { IconColor } from '../../../types';
 import type { AtlassianNotificationFragment } from './types';
 
+import { BitbucketIcon } from '../../../icons/BitbucketIcon';
 import { bitbucketAdapter } from './adapter';
 import * as client from './client';
 import {

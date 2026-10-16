@@ -50,5 +50,18 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
         expect(stateFilter.filterNotification(mockNotification, expectedFilter)).toBe(true);
       },
     );
+
+    it.each(Object.entries(cases) as Array<[GitifyNotificationState, FilterStateType]>)(
+      'classify notification with state %s as %s',
+      (notificationState, expectedFilter) => {
+        mockNotification.subject.state = notificationState;
+        expect(stateFilter.classify(mockNotification)).toBe(expectedFilter);
+      },
+    );
+
+    it('should classify a notification with no state as other', () => {
+      mockNotification.subject.state = undefined;
+      expect(stateFilter.classify(mockNotification)).toBe('other');
+    });
   });
 });

@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useCallback, useEffect, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -34,7 +34,7 @@ interface LocationState {
 
 type ScopeChoice = 'public' | 'full';
 
-export const GitHubLoginWithDeviceFlowRoute: FC = () => {
+export function GitHubLoginWithDeviceFlowRoute() {
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -71,7 +71,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
     };
 
     if (scopeChoice) {
-      initializeDeviceFlow();
+      void initializeDeviceFlow();
     }
   }, [loginWithDeviceFlowStart, reAuthAccount, scopeChoice, forge]);
 
@@ -87,25 +87,31 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
     const startPolling = async () => {
       setIsPolling(true);
 
-      try {
-        while (isActive && Date.now() < session.expiresAt) {
-          const token = await loginWithDeviceFlowPoll(forge, session);
-
-          if (token && isActive) {
-            await loginWithDeviceFlowComplete(forge, token, session.hostname);
-            navigate('/');
-            return;
+      const poll = async (): Promise<void> => {
+        if (!isActive || Date.now() >= session.expiresAt) {
+          if (isActive) {
+            setError('Device code expired. Please start again.');
           }
-
-          const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
-          await new Promise((resolve) => {
-            timeoutId = setTimeout(resolve, intervalMs);
-          });
+          return;
         }
 
-        if (isActive) {
-          setError('Device code expired. Please start again.');
+        const token = await loginWithDeviceFlowPoll(forge, session);
+
+        if (token && isActive) {
+          await loginWithDeviceFlowComplete(forge, token, session.hostname);
+          navigate('/');
+          return;
         }
+
+        const intervalMs = Math.max(5000, session.intervalSeconds * 1000);
+        await new Promise((resolve) => {
+          timeoutId = setTimeout(resolve, intervalMs);
+        });
+        await poll();
+      };
+
+      try {
+        await poll();
       } catch (err) {
         if (isActive) {
           rendererLogError('LoginWithDeviceFlow', 'Failed to poll device flow', toError(err));
@@ -118,7 +124,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
       }
     };
 
-    startPolling();
+    void startPolling();
 
     return () => {
       isActive = false;
@@ -262,7 +268,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
                 >
                   {label}
                 </button>
-                , then re-authorize above.
+                {', then re-authorize above.'}
               </Text>
             </Stack>
           );
@@ -349,4 +355,4 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
       )}
     </Page>
   );
-};
+}

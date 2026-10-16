@@ -14,6 +14,7 @@ query FetchMergedDetailsTemplate(
   $firstReviewThreads: Int
   $firstLabels: Int
   $firstClosingIssues: Int
+  $firstIssueFieldValues: Int
 ) {
   ...MergedDetailsQueryTemplate
 }

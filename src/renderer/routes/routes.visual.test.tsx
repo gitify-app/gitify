@@ -18,6 +18,7 @@ import { BitbucketLoginWithPersonalAccessTokenRoute } from './bitbucket/LoginWit
 import { FiltersRoute } from './Filters';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './gitea/LoginWithPersonalAccessToken';
 import { GitHubLoginWithDeviceFlowRoute } from './github/LoginWithDeviceFlow';
+import { GitHubLoginWithCLIRoute } from './github/LoginWithGitHubCLI';
 import { GitHubLoginWithOAuthAppRoute } from './github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './github/LoginWithPersonalAccessToken';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './gitlab/LoginWithPersonalAccessToken';
@@ -76,6 +77,11 @@ const ROUTES: RouteCase[] = [
     name: 'login-github-device-flow',
     element: <GitHubLoginWithDeviceFlowRoute />,
     state: { initialEntries: ['/login/github/device-flow'] },
+  },
+  {
+    name: 'login-github-cli',
+    element: <GitHubLoginWithCLIRoute />,
+    state: { initialEntries: ['/login/github/cli'] },
   },
   {
     name: 'login-github-personal-access-token',
