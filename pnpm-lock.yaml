@@ -218,8 +218,8 @@ importers:
         specifier: 16.0.1
         version: 16.0.1
       '@electron/notarize':
-        specifier: 3.1.1
-        version: 3.1.1(supports-color@10.2.2)
+        specifier: 3.1.2
+        version: 3.1.2(supports-color@10.2.2)
       '@graphql-codegen/cli':
         specifier: 7.4.5
         version: 7.4.5(@parcel/watcher@2.6.0)(@types/node@24.19.1)(graphql@17.0.2)(supports-color@10.2.2)(typescript@7.0.2)
@@ -506,8 +506,8 @@ packages:
     resolution: {integrity: sha512-jNT8nwH1f9X5GEITXaQ8IF/KdskvIkOFfB2CvwumsveVidzpSc+mvhhTMdAGSYF3O+Nq49lJ7y+ssODRXu06+A==}
     engines: {node: '>= 10.0.0'}
 
-  '@electron/notarize@3.1.1':
-    resolution: {integrity: sha512-uQQSlOiJnqRkTL1wlEBAxe90nVN/Fc/hEmk0bqpKk8nKjV1if/tXLHKUPePtv9Xsx90PtZU8aidx5lAiOpjkQQ==}
+  '@electron/notarize@3.1.2':
+    resolution: {integrity: sha512-S/EH6W/GTe3XiD4oYHW+6xuUWZWjc9F5gayMrNdmRLv7qG9KRYmYE26+RDgC1hYUZVY3qLpa1VftxuL+sL5VQg==}
     engines: {node: '>= 22.12.0'}
 
   '@electron/osx-sign@1.3.3':
@@ -4849,7 +4849,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/notarize@3.1.1(supports-color@10.2.2)':
+  '@electron/notarize@3.1.2(supports-color@10.2.2)':
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       promise-retry: 2.0.1
