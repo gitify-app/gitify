@@ -13,7 +13,7 @@
       "allowedVersions": "<12"
     },
     {
-      "description": "Leave the visual-regression Playwright container image to a deliberate bump rather than Renovate. It must match the playwright devDependency exactly (both ship the same browser build), but the npm package and the MCR image are separate datasources and MCR exposes no release timestamp for minimumReleaseAge to compare, so grouping them still drifts the versions and opens image-only PRs that strand the screenshot baselines. package.json is the source of truth; src/main/visualRegressionImage.test.ts enforces the match and scripts/visual.sh derives the same image locally. The digest stays pinned for zizmor.",
+      "description": "Leave the visual-regression Playwright container image to a deliberate bump rather than Renovate. It must match the playwright devDependency exactly (both ship the same browser build), but the npm package and the MCR image are separate datasources and MCR exposes no release timestamp for minimumReleaseAge to compare, so grouping them still drifts the versions and opens image-only PRs that strand the screenshot baselines. package.json is the source of truth; src/main/ciDependencyCompatibility.test.ts enforces the match and scripts/visual.sh derives the same image locally. The digest stays pinned for zizmor.",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["mcr.microsoft.com/playwright"],
       "enabled": false
