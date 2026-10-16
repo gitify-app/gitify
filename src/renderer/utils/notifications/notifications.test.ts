@@ -1,4 +1,5 @@
 import {
+  mockGiteaAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../__mocks__/account-mocks';
@@ -138,6 +139,20 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       const result = await enrichNotifications([]);
 
       expect(result).toEqual([]);
+      expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
+    });
+
+    it('should return notifications unchanged when the adapter has no enrichment', async () => {
+      // Gitea has no `enrichNotifications` implementation.
+      const notification = {
+        ...mockPartialGitifyNotification({ title: 'Issue #1', type: 'Issue' }),
+        account: mockGiteaAccount,
+      } as GitifyNotification;
+      useSettingsStore.setState({ detailedNotifications: true });
+
+      const result = await enrichNotifications([notification]);
+
+      expect(result).toEqual([notification]);
       expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
     });
 
