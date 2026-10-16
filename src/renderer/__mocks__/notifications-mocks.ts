@@ -4,7 +4,7 @@ import {
   GitCommitIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
-  TagIcon,
+  ReleaseIcon,
 } from '@primer/octicons-react';
 
 import {
@@ -184,7 +184,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
       title: 'Release 0.0.1',
       type: 'Release',
       icon: {
-        type: TagIcon,
+        type: ReleaseIcon,
         color: IconColor.GREEN,
       },
       defaultUserType: 'User',

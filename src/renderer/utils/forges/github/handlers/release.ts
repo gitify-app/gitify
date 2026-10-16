@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
-import { TagIcon } from '@primer/octicons-react';
+import { ReleaseIcon } from '@primer/octicons-react';
 
 import type {
   GitifyNotification,
@@ -45,7 +45,7 @@ class ReleaseHandler extends DefaultHandler {
   }
 
   override iconType(_notification: GitifyNotification): FC<OcticonProps> {
-    return TagIcon;
+    return ReleaseIcon;
   }
 
   override defaultUrl(notification: GitifyNotification): Link {
