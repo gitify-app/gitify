@@ -364,7 +364,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
             data-component="Button"
             data-loading="false"
             data-size="medium"
-            data-testid="login-oauth-app"
+            data-testid="login-custom-oauth-app"
             data-variant="invisible"
             type="button"
           >
@@ -399,7 +399,7 @@ exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
                 class="prc-Button-Label-FWkx3"
                 data-component="text"
               >
-                OAuth App
+                Custom OAuth App
               </span>
             </span>
           </button>

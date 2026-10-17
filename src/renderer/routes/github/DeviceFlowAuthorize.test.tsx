@@ -2,15 +2,15 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
+import { mockGitifyOAuthAppAccount } from '../../__mocks__/account-mocks';
 
-import type { Hostname } from '../../types';
+import type { ClientID, Hostname } from '../../types';
 
 import * as logger from '../../utils/core/logger';
 import * as comms from '../../utils/system/comms';
-import { GitHubLoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
+import { GitHubDeviceFlowAuthorize } from './DeviceFlowAuthorize';
 
-describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
+describe('renderer/routes/github/DeviceFlowAuthorize.tsx', () => {
   const copyToClipboardSpy = vi.spyOn(comms, 'copyToClipboard').mockResolvedValue();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
@@ -25,7 +25,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -48,17 +48,18 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
     await userEvent.click(screen.getByTestId('device-scope-public'));
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
-      'notifications',
-      'read:user',
-      'public_repo',
-    ]);
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(
+      'github',
+      'github.com',
+      ['notifications', 'read:user', 'public_repo'],
+      undefined,
+    );
 
     await screen.findByTestId('device-user-code');
     expect(screen.getByTestId('open-browser-button')).toBeInTheDocument();
@@ -79,17 +80,18 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
     await userEvent.click(screen.getByTestId('device-scope-full'));
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
-      'notifications',
-      'read:user',
-      'repo',
-    ]);
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(
+      'github',
+      'github.com',
+      ['notifications', 'read:user', 'repo'],
+      undefined,
+    );
 
     await screen.findByTestId('device-user-code');
   });
@@ -105,7 +107,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -128,7 +130,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -157,7 +159,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -176,7 +178,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     const loginWithDeviceFlowStartMock = vi.fn().mockRejectedValueOnce(new Error('Network error'));
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -197,7 +199,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -219,7 +221,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     const loginWithDeviceFlowPollMock = vi.fn().mockResolvedValueOnce('access-token');
     const loginWithDeviceFlowCompleteMock = vi.fn().mockResolvedValueOnce(undefined);
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
       loginWithDeviceFlowComplete: loginWithDeviceFlowCompleteMock,
@@ -234,6 +236,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
         'github',
         'access-token',
         'github.com',
+        undefined,
       );
       expect(navigateMock).toHaveBeenCalledWith('/');
     });
@@ -254,7 +257,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       .fn()
       .mockRejectedValueOnce(new Error('authorization denied'));
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
     });
@@ -281,7 +284,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
     const loginWithDeviceFlowPollMock = vi.fn();
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
     });
@@ -306,7 +309,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: vi.fn().mockResolvedValueOnce(null),
       initialEntries: [
@@ -314,7 +317,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
           pathname: '/login/github/device-flow',
           state: {
             account: {
-              ...mockGitHubAppAccount,
+              ...mockGitifyOAuthAppAccount,
               hostname: 'github.enterprise.example' as Hostname,
             },
           },
@@ -328,11 +331,41 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       'github',
       'github.enterprise.example',
       ['notifications', 'read:user', 'repo'],
+      undefined,
+    );
+  });
+
+  it('threads a custom client ID and hostname through the device flow', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.example.com',
+      clientId: 'CUSTOM_CLIENT_ID_123',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.example.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithProviders(
+      <GitHubDeviceFlowAuthorize
+        clientId={'CUSTOM_CLIENT_ID_123' as ClientID}
+        hostname={'github.example.com' as Hostname}
+      />,
+      { loginWithDeviceFlowStart: loginWithDeviceFlowStartMock },
+    );
+
+    await userEvent.click(screen.getByTestId('device-scope-full'));
+
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(
+      'github',
+      'github.example.com',
+      ['notifications', 'read:user', 'repo'],
+      'CUSTOM_CLIENT_ID_123',
     );
   });
 
   it('should open the revoke-access developer settings link', async () => {
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />);
+    renderWithProviders(<GitHubDeviceFlowAuthorize />);
 
     await userEvent.click(screen.getByTitle('GitHub → Developer Settings'));
 
