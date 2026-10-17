@@ -55,9 +55,9 @@ export class TypedDocumentString<TResult, TVariables>
 {
   __apiType?: NonNullable<DocumentTypeDecoration<TResult, TVariables>['__apiType']>;
   private value: string;
-  public __meta__?: Record<string, unknown> | undefined;
+  public __meta__?: Record<string, any> | undefined;
 
-  constructor(value: string, __meta__?: Record<string, unknown> | undefined) {
+  constructor(value: string, __meta__?: Record<string, any> | undefined) {
     super(value);
     this.value = value;
     this.__meta__ = __meta__;
@@ -157,7 +157,7 @@ export const MyNotificationsDocument = new TypedDocumentString(`
     notificationFeed(
       flat: $flat
       first: $first
-      filter: {readStateFilter: $readState}
+      filter: { readStateFilter: $readState }
     ) {
       pageInfo {
         hasNextPage
