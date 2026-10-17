@@ -14,7 +14,7 @@ import type {
 import { notificationsKeys } from '../utils/api/queryKeys';
 import { getAccountAdapter, getAdapter } from '../utils/forges/registry';
 import { encryptValue } from '../utils/system/comms';
-import { useNotifications } from './useNotifications';
+import { useNotificationActions } from './notifications/useNotificationActions';
 
 interface LoginsState {
   loginWithDeviceFlowStart: (
@@ -43,7 +43,7 @@ export const useLogins = (): LoginsState => {
   const createAccountInStore = useAccountsStore((s) => s.createAccount);
   const removeAccount = useAccountsStore((s) => s.removeAccount);
 
-  const { removeAccountNotifications } = useNotifications();
+  const { removeAccountNotifications } = useNotificationActions();
 
   /**
    * Create (or update) an account, then refetch notifications. Re-authenticating
