@@ -90,7 +90,7 @@ export const validateCustomOAuthAppForm = (
 
   if (!values.clientId) {
     errors.clientId = 'Client ID is required';
-  } else if (!adapter.validateClientId?.(values.clientId)) {
+  } else if (!adapter.customOAuthApp?.validateClientId(values.clientId)) {
     errors.clientId = 'Client ID format is invalid';
   }
 

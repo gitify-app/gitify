@@ -8,9 +8,9 @@ import type { ClientID, Hostname } from '../../types';
 
 import * as logger from '../../utils/core/logger';
 import * as comms from '../../utils/system/comms';
-import { GitHubLoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
+import { GitHubDeviceFlowAuthorize } from './DeviceFlowAuthorize';
 
-describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
+describe('renderer/routes/github/DeviceFlowAuthorize.tsx', () => {
   const copyToClipboardSpy = vi.spyOn(comms, 'copyToClipboard').mockResolvedValue();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
@@ -25,7 +25,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -48,7 +48,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -80,7 +80,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -107,7 +107,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -130,7 +130,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -159,7 +159,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -178,7 +178,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     const loginWithDeviceFlowStartMock = vi.fn().mockRejectedValueOnce(new Error('Network error'));
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -199,7 +199,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
@@ -221,7 +221,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     const loginWithDeviceFlowPollMock = vi.fn().mockResolvedValueOnce('access-token');
     const loginWithDeviceFlowCompleteMock = vi.fn().mockResolvedValueOnce(undefined);
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
       loginWithDeviceFlowComplete: loginWithDeviceFlowCompleteMock,
@@ -257,7 +257,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       .fn()
       .mockRejectedValueOnce(new Error('authorization denied'));
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
     });
@@ -284,7 +284,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
     const loginWithDeviceFlowPollMock = vi.fn();
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
     });
@@ -309,7 +309,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       expiresAt: Date.now() + 900000,
     });
 
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />, {
+    renderWithProviders(<GitHubDeviceFlowAuthorize />, {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
       loginWithDeviceFlowPoll: vi.fn().mockResolvedValueOnce(null),
       initialEntries: [
@@ -347,7 +347,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
 
     renderWithProviders(
-      <GitHubLoginWithDeviceFlowRoute
+      <GitHubDeviceFlowAuthorize
         clientId={'CUSTOM_CLIENT_ID_123' as ClientID}
         hostname={'github.example.com' as Hostname}
       />,
@@ -365,7 +365,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
   });
 
   it('should open the revoke-access developer settings link', async () => {
-    renderWithProviders(<GitHubLoginWithDeviceFlowRoute />);
+    renderWithProviders(<GitHubDeviceFlowAuthorize />);
 
     await userEvent.click(screen.getByTitle('GitHub → Developer Settings'));
 

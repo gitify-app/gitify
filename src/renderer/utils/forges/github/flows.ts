@@ -67,7 +67,7 @@ export async function startGitHubDeviceFlow(
  * @param clientId - The client ID supplied for a custom app, when any.
  * @returns A user-facing message, or `undefined` for an unrecognised failure.
  */
-export function describeDeviceFlowError(
+export function describeDeviceFlowStartError(
   err: unknown,
   hostname: Hostname,
   clientId?: ClientID,

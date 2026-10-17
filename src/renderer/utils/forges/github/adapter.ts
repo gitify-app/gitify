@@ -93,7 +93,6 @@ export const githubAdapter: ForgeAdapter = {
 
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,
-  validateClientId: isValidClientId,
   validateHostname: isValidHostname,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
@@ -137,6 +136,11 @@ export const githubAdapter: ForgeAdapter = {
     poll: pollGitHubDeviceFlow,
     getRevokeAccessUrl: (hostname, clientId) =>
       getDeveloperSettingsURL({ hostname, method: 'Custom OAuth App', clientId } as Account),
+  },
+
+  customOAuthApp: {
+    authMethod: 'Custom OAuth App',
+    validateClientId: isValidClientId,
     getNewOAuthAppUrl: getNewOAuthAppURL,
   },
 

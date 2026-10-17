@@ -20,7 +20,7 @@ import { DEFAULT_ACCOUNTS_STATE } from './defaults';
  * carry the retired `GitHub App` / `OAuth App` labels; relabel them so their
  * existing tokens keep working without forcing a re-login.
  */
-function migrateAuthMethod(method: string): AuthMethod {
+function migrateLegacyAuthMethod(method: string): AuthMethod {
   switch (method) {
     case 'GitHub App':
       return 'Gitify OAuth App';
@@ -46,7 +46,7 @@ export function sanitizeAccounts(accounts: Account[]): Account[] {
     }
     const sanitised: Account = {
       forge,
-      method: migrateAuthMethod(a.method as string),
+      method: migrateLegacyAuthMethod(a.method as string),
       platform: a.platform,
       version: a.version,
       hostname: a.hostname,

@@ -94,13 +94,14 @@ export const useLogins = (): LoginsState => {
    */
   const loginWithDeviceFlowComplete = useCallback(
     async (forge: Forge, token: Token, hostname: Hostname, clientId?: ClientID) => {
-      const { deviceFlow } = getAdapter(forge);
+      const { deviceFlow, customOAuthApp } = getAdapter(forge);
       if (!deviceFlow) {
         throw new Error(`Forge "${forge}" does not support device flow.`);
       }
       // A supplied client ID means the user authorized their own app; without
       // one the flow used Gitify's preconfigured app.
-      const method: AuthMethod = clientId ? 'Custom OAuth App' : deviceFlow.authMethod;
+      const method: AuthMethod =
+        clientId && customOAuthApp ? customOAuthApp.authMethod : deviceFlow.authMethod;
 
       const existingAccount = accounts.find((a) => a.hostname === hostname && a.method === method);
       if (existingAccount) {

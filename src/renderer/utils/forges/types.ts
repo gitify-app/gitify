@@ -147,11 +147,6 @@ export interface ForgeAdapter {
   getOrigin?(hostname: Hostname): string;
   /** Whether the supplied token matches the forge's PAT format. */
   validateToken(token: Token): boolean;
-  /**
-   * Whether the supplied OAuth client ID matches the forge's expected format.
-   * Omitted by forges with no user-supplied OAuth app flow.
-   */
-  validateClientId?(clientId: string): boolean;
   /** URL to manage/create a personal access token on the forge. */
   getPersonalAccessTokenSettingsUrl(hostname: Hostname): Link;
   /** Login entries rendered in the Login route. */
@@ -167,9 +162,9 @@ export interface ForgeAdapter {
 
   // --- Auth flows ---
   // Optional because not every forge supports every flow. Gitea today is
-  // PAT-only and omits both bundles. The orchestrator gates UI on the
+  // PAT-only and omits every bundle. The orchestrator gates UI on the
   // presence of these bundles (and on `loginMethods` entries pointing at
-  // the forge's device-flow or OAuth-app routes).
+  // the forge's device-flow or custom-OAuth-app routes).
 
   /**
    * OAuth device-flow capability. Forges without device-flow support (e.g.
@@ -177,6 +172,13 @@ export interface ForgeAdapter {
    * its presence.
    */
   deviceFlow?: DeviceFlowSupport;
+
+  /**
+   * Custom-OAuth-app capability. Forges where a user cannot authorize their
+   * own OAuth app (e.g. Gitea) omit this bundle entirely — callers gate the
+   * custom-app UI on its presence.
+   */
+  customOAuthApp?: CustomOAuthAppSupport;
 
   /**
    * Reuse of a locally installed forge CLI's credential. Forges whose CLI
@@ -331,7 +333,18 @@ export interface DeviceFlowSupport {
   poll(session: DeviceFlowSession): Promise<Token | null>;
   /** URL the user visits to revoke the authorized OAuth app's access on this forge. */
   getRevokeAccessUrl(hostname: Hostname, clientId?: ClientID): Link;
-  /** URL the user visits to register an OAuth app that can authorize via the device flow. */
+}
+
+/**
+ * Custom-OAuth-app capability bundle. Present only on forges where a user can
+ * authorize their own OAuth app (GitHub today).
+ */
+export interface CustomOAuthAppSupport {
+  /** `AuthMethod` recorded on accounts created from a user-supplied OAuth app. */
+  authMethod: AuthMethod;
+  /** Whether the supplied OAuth client ID matches the forge's expected format. */
+  validateClientId(clientId: string): boolean;
+  /** URL the user visits to register a new OAuth app on the forge. */
   getNewOAuthAppUrl(hostname: Hostname): Link;
 }
 

@@ -108,13 +108,14 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(session.clientId).toBe('CUSTOM_CLIENT_ID_123');
     });
 
-    it('wires the device-flow methods so the context can dispatch via the adapter', () => {
+    it('wires the device-flow and custom-OAuth-app methods so the context can dispatch via the adapter', () => {
       expect(githubAdapter.deviceFlow?.authMethod).toBe('Gitify OAuth App');
       expect(githubAdapter.deviceFlow?.start).toBeDefined();
       expect(githubAdapter.deviceFlow?.poll).toBeDefined();
       expect(githubAdapter.deviceFlow?.getRevokeAccessUrl).toBeDefined();
-      expect(githubAdapter.deviceFlow?.getNewOAuthAppUrl).toBeDefined();
-      expect(githubAdapter.validateClientId).toBeDefined();
+      expect(githubAdapter.customOAuthApp?.authMethod).toBe('Custom OAuth App');
+      expect(githubAdapter.customOAuthApp?.validateClientId).toBeDefined();
+      expect(githubAdapter.customOAuthApp?.getNewOAuthAppUrl).toBeDefined();
     });
   });
 

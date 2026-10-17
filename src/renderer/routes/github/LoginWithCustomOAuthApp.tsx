@@ -20,7 +20,7 @@ import {
 } from '../../utils/auth/loginValidation';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
-import { GitHubLoginWithDeviceFlowRoute } from './LoginWithDeviceFlow';
+import { GitHubDeviceFlowAuthorize } from './DeviceFlowAuthorize';
 
 interface LocationState {
   account?: Account;
@@ -62,7 +62,7 @@ export function GitHubLoginWithCustomOAuthAppRoute() {
 
   if (credentials) {
     return (
-      <GitHubLoginWithDeviceFlowRoute
+      <GitHubDeviceFlowAuthorize
         clientId={credentials.clientId}
         hostname={credentials.hostname}
         title="Authorize with your OAuth app"
@@ -111,7 +111,7 @@ export function GitHubLoginWithCustomOAuthAppRoute() {
               disabled={!formData.hostname}
               leadingVisual={PersonIcon}
               onClick={() => {
-                const url = getAdapter(forge).deviceFlow?.getNewOAuthAppUrl(formData.hostname);
+                const url = getAdapter(forge).customOAuthApp?.getNewOAuthAppUrl(formData.hostname);
                 if (url) {
                   openExternalLink(url);
                 }

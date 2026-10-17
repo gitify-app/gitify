@@ -178,12 +178,12 @@ describe('renderer/utils/forges/github/flows.ts', () => {
     });
   });
 
-  describe('describeDeviceFlowError', () => {
+  describe('describeDeviceFlowStartError', () => {
     it('explains how to enable device flow for a custom app', () => {
       const err = Object.create(RequestError.prototype);
       err.response = { data: { error: 'device_flow_disabled' } };
 
-      const message = flows.describeDeviceFlowError(
+      const message = flows.describeDeviceFlowStartError(
         err,
         'github.example.com' as Hostname,
         'CUSTOM_CLIENT_ID_123' as ClientID,
@@ -200,7 +200,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
       err.response = { data: { error: 'incorrect_client_credentials' } };
 
       expect(
-        flows.describeDeviceFlowError(
+        flows.describeDeviceFlowStartError(
           err,
           'github.example.com' as Hostname,
           'CUSTOM_CLIENT_ID_123' as ClientID,
@@ -210,7 +210,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
 
     it('returns undefined for a non-RequestError', () => {
       expect(
-        flows.describeDeviceFlowError(new Error('boom'), 'github.com' as Hostname),
+        flows.describeDeviceFlowStartError(new Error('boom'), 'github.com' as Hostname),
       ).toBeUndefined();
     });
   });
