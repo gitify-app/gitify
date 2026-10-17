@@ -29,7 +29,7 @@ export function AccountHeader({
   notificationCount,
   isCollapsed,
   onToggle,
-}: AccountHeaderProps) {
+}: Readonly<AccountHeaderProps>) {
   const Chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
 
   return (

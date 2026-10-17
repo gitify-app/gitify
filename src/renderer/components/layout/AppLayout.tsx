@@ -10,7 +10,7 @@ interface AppLayoutProps {
  * AppLayout is the main container for the application.
  * It handles the basic layout with sidebar and content area.
  */
-export function AppLayout({ children }: AppLayoutProps) {
+export function AppLayout({ children }: Readonly<AppLayoutProps>) {
   const setFocusRef = (el: HTMLButtonElement | null) => {
     if (el) {
       el.focus();

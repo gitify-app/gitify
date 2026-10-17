@@ -28,7 +28,7 @@ interface HoverGroupProps {
  * title line or the issue number, and the footer reserves its width so the
  * pills wrap clear of the buttons.
  */
-export function HoverGroup({ bgColor, children, fullHeight = false }: HoverGroupProps) {
+export function HoverGroup({ bgColor, children, fullHeight = false }: Readonly<HoverGroupProps>) {
   return (
     <Stack
       align={fullHeight ? 'stretch' : 'center'}

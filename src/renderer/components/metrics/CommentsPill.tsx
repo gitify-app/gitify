@@ -9,7 +9,7 @@ export interface CommentsPillProps {
   commentCount: number;
 }
 
-export function CommentsPill({ commentCount }: CommentsPillProps) {
+export function CommentsPill({ commentCount }: Readonly<CommentsPillProps>) {
   if (!commentCount) {
     return null;
   }

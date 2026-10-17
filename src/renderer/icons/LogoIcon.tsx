@@ -16,7 +16,12 @@ const LIGHT_GRADIENT_END = '#FFFFFF';
 const DARK_GRADIENT_START = '#22283B';
 const DARK_GRADIENT_END = '#555B6E';
 
-export function LogoIcon({ isDark, onClick, size = Size.SMALL, ...props }: LogoIconProps) {
+export function LogoIcon({
+  isDark,
+  onClick,
+  size = Size.SMALL,
+  ...props
+}: Readonly<LogoIconProps>) {
   return (
     // oxlint-disable-next-line jsx-a11y/click-events-have-key-events -- Logo is purely decorative
     <svg

@@ -16,7 +16,7 @@ export function SubIssueProgressWheel({
   percent = 0,
   className,
   size = 12,
-}: SubIssueProgressWheelProps) {
+}: Readonly<SubIssueProgressWheelProps>) {
   const radius = 6;
   const circumference = 2 * Math.PI * radius;
   const clampedPercent = Math.min(100, Math.max(0, percent));
@@ -59,7 +59,7 @@ export function SubIssueProgressWheel({
   );
 }
 
-export function SubIssueProgressPill({ progress }: SubIssueProgressPillProps) {
+export function SubIssueProgressPill({ progress }: Readonly<SubIssueProgressPillProps>) {
   if (!progress || progress.total === 0) {
     return null;
   }

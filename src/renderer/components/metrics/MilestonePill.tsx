@@ -8,7 +8,7 @@ export interface MilestonePillProps {
   milestone: GitifyMilestone;
 }
 
-export function MilestonePill({ milestone }: MilestonePillProps) {
+export function MilestonePill({ milestone }: Readonly<MilestonePillProps>) {
   if (!milestone) {
     return null;
   }

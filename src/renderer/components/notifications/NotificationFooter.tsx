@@ -15,7 +15,7 @@ export interface NotificationFooterProps {
   notification: GitifyNotification;
 }
 
-export function NotificationFooter({ notification }: NotificationFooterProps) {
+export function NotificationFooter({ notification }: Readonly<NotificationFooterProps>) {
   const user = notification.subject.user;
   const userLabel = user
     ? getAccountAdapter(notification.account).formatNotificationUser(user)

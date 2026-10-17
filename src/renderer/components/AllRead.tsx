@@ -12,7 +12,7 @@ interface AllReadProps {
   fullHeight?: boolean;
 }
 
-export function AllRead({ fullHeight = true }: AllReadProps) {
+export function AllRead({ fullHeight = true }: Readonly<AllReadProps>) {
   const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
   const emoji = useMemo(() => randomElement(Constants.EMOJIS.ALL_READ), []);

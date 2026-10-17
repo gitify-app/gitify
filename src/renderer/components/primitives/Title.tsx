@@ -12,7 +12,7 @@ interface TitleProps {
   tooltip?: ReactNode;
 }
 
-export function Title({ size: _size = 2, ...props }: TitleProps) {
+export function Title({ size: _size = 2, ...props }: Readonly<TitleProps>) {
   const name = props.children.toLowerCase().replaceAll(' ', '-');
 
   return (

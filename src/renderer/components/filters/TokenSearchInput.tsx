@@ -27,7 +27,7 @@ export function TokenSearchInput({
   showSuggestionsOnFocusIfEmpty,
   onAdd,
   onRemove,
-}: TokenSearchInputProps) {
+}: Readonly<TokenSearchInputProps>) {
   const [inputValue, setInputValue] = useState('');
   const [shouldShowFilterSuggestions, setShouldShowFilterSuggestions] = useState(false);
 

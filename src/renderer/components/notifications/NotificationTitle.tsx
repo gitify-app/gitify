@@ -10,7 +10,7 @@ interface NotificationTitleProps {
   title: string;
 }
 
-export function NotificationTitle({ title }: NotificationTitleProps) {
+export function NotificationTitle({ title }: Readonly<NotificationTitleProps>) {
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
 
   const parts = parseInlineCode(title);

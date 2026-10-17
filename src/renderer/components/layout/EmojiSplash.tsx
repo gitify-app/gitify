@@ -14,7 +14,7 @@ interface EmojiSplashProps {
   actions?: ReactNode;
 }
 
-export function EmojiSplash(props: EmojiSplashProps) {
+export function EmojiSplash(props: Readonly<EmojiSplashProps>) {
   return (
     <Centered fullHeight={props.fullHeight ?? false}>
       <Stack align="center" direction="vertical" gap="condensed" justify={'center'}>

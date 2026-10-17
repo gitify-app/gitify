@@ -75,7 +75,7 @@ export function LoginWithPersonalAccessTokenForm({
   usernamePlaceholder = '',
   usernameCaption = '',
   children,
-}: LoginWithPersonalAccessTokenFormProps) {
+}: Readonly<LoginWithPersonalAccessTokenFormProps>) {
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;

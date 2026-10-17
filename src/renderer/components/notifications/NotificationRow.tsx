@@ -36,7 +36,7 @@ export function NotificationRow({
   notification,
   isAnimatingExit,
   onAnimateExit,
-}: NotificationRowProps) {
+}: Readonly<NotificationRowProps>) {
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
     useNotifications();
 

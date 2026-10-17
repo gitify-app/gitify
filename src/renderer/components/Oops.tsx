@@ -15,7 +15,7 @@ interface OopsProps {
   fullHeight?: boolean;
 }
 
-export function Oops({ error, fullHeight = true }: OopsProps) {
+export function Oops({ error, fullHeight = true }: Readonly<OopsProps>) {
   const navigate = useNavigate();
 
   const err = error ?? Errors.UNKNOWN;

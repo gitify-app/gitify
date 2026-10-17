@@ -10,7 +10,7 @@ export interface TooltipProps {
   tooltip: ReactNode | string;
 }
 
-export function Tooltip(props: TooltipProps) {
+export function Tooltip(props: Readonly<TooltipProps>) {
   const [shouldShowTooltipContents, setShouldShowTooltipContents] = useState(false);
 
   const scrollContainerRef = useRef<HTMLElement | null>(null);

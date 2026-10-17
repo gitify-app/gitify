@@ -41,11 +41,11 @@ import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
-function RecommendedScopesIcon({ className, ...props }: OcticonProps) {
+function RecommendedScopesIcon({ className, ...props }: Readonly<OcticonProps>) {
   return <ShieldCheckIcon {...props} className={cn(IconColor.GREEN, className)} />;
 }
 
-function AlternateScopesIcon({ className, ...props }: OcticonProps) {
+function AlternateScopesIcon({ className, ...props }: Readonly<OcticonProps>) {
   return <ShieldCheckIcon {...props} className={cn('text-gitify-warning', className)} />;
 }
 

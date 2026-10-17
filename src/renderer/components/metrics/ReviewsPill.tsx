@@ -9,7 +9,7 @@ export interface ReviewsPillProps {
   reviewers: GitifyPullRequestReviewer[];
 }
 
-export function ReviewsPill({ reviewers }: ReviewsPillProps) {
+export function ReviewsPill({ reviewers }: Readonly<ReviewsPillProps>) {
   if (!reviewers.length) {
     return null;
   }

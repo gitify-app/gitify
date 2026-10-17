@@ -18,7 +18,7 @@ export function Contents({
   paddingHorizontal = true,
   paddingBottom = false,
   scrollFade = false,
-}: IContents) {
+}: Readonly<IContents>) {
   return (
     <div
       className={cn(
