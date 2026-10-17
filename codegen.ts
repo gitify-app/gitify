@@ -42,6 +42,9 @@ const config: CodegenConfig = {
         useTypeImports: true,
       },
     },
+    'src/renderer/utils/forges/github/graphql/generated/schema.graphql': {
+      plugins: ['schema-ast'],
+    },
   },
 };
 
