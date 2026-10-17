@@ -10,7 +10,11 @@ export interface StackedPrsPillProps {
   stackDepth?: number;
 }
 
-export function StackedPrsPill({ isStacked, stackPosition, stackDepth }: StackedPrsPillProps) {
+export function StackedPrsPill({
+  isStacked,
+  stackPosition,
+  stackDepth,
+}: Readonly<StackedPrsPillProps>) {
   if (!isStacked) {
     return null;
   }

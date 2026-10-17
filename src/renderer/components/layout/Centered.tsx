@@ -7,7 +7,7 @@ interface CenteredProps {
   fullHeight: boolean;
 }
 
-export function Centered(props: CenteredProps) {
+export function Centered(props: Readonly<CenteredProps>) {
   return (
     <Stack
       align="center"

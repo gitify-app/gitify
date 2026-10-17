@@ -6,7 +6,7 @@ export interface IEmojiText {
   text: string;
 }
 
-export function EmojiText({ text }: IEmojiText) {
+export function EmojiText({ text }: Readonly<IEmojiText>) {
   const ref = useRef<HTMLDivElement | null>(null);
   const mountedRef = useRef(true);
 

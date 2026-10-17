@@ -17,7 +17,10 @@ interface SearchFilterSuggestionsProps {
   inputValue: string;
 }
 
-export function SearchFilterSuggestions({ open, inputValue }: SearchFilterSuggestionsProps) {
+export function SearchFilterSuggestions({
+  open,
+  inputValue,
+}: Readonly<SearchFilterSuggestionsProps>) {
   const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
 
   if (!open) {

@@ -8,7 +8,7 @@ export interface IssueTypesPillProps {
   issueType?: GitifyIssueType;
 }
 
-export function IssueTypesPill({ issueType }: IssueTypesPillProps) {
+export function IssueTypesPill({ issueType }: Readonly<IssueTypesPillProps>) {
   if (!issueType) {
     return null;
   }

@@ -30,7 +30,7 @@ function FilterSectionComponent<K extends keyof FiltersState>({
   filterSetting,
   tooltip,
   layout = 'vertical',
-}: FilterSectionProps<K>) {
+}: Readonly<FilterSectionProps<K>>) {
   const { notifications } = useNotifications();
   const updateFilter = useFiltersStore((s) => s.updateFilter);
 

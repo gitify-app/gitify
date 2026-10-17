@@ -31,7 +31,7 @@ export interface NotificationListProps {
 export function NotificationList({
   accountNotifications,
   showAccountHeader,
-}: NotificationListProps) {
+}: Readonly<NotificationListProps>) {
   const groupBy = useSettingsStore((s) => s.groupBy);
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
 

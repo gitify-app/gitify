@@ -18,7 +18,7 @@ export interface MetricPillProps {
   ariaLabel?: string;
 }
 
-export function MetricPill(props: MetricPillProps) {
+export function MetricPill(props: Readonly<MetricPillProps>) {
   const Icon = props.icon;
 
   return (

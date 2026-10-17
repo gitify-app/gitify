@@ -12,7 +12,7 @@ export function ScopeStatusIcon({
   notApplicable = false,
   size = 14,
   withTestId = false,
-}: ScopeStatusIconProps) {
+}: Readonly<ScopeStatusIconProps>) {
   if (notApplicable) {
     return (
       <DashIcon

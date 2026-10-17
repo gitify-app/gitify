@@ -13,7 +13,7 @@ interface HeaderProps {
   fetchOnBack?: boolean;
 }
 
-export function Header(props: HeaderProps) {
+export function Header(props: Readonly<HeaderProps>) {
   const navigate = useNavigate();
 
   const { refetchNotifications: fetchNotifications } = useNotifications();

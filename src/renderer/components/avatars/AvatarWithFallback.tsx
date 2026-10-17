@@ -26,7 +26,7 @@ export function AvatarWithFallback({
   size = Size.MEDIUM,
   userType = 'User',
   icon,
-}: AvatarWithFallbackProps) {
+}: Readonly<AvatarWithFallbackProps>) {
   const [hasBrokenAvatarSource, setHasBrokenAvatarSource] = useState(false);
 
   const isNonHuman = isNonHumanUser(userType);

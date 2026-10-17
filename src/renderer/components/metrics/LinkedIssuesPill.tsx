@@ -9,7 +9,7 @@ export interface LinkedIssuesPillProps {
   linkedIssues: string[];
 }
 
-export function LinkedIssuesPill({ linkedIssues }: LinkedIssuesPillProps) {
+export function LinkedIssuesPill({ linkedIssues }: Readonly<LinkedIssuesPillProps>) {
   if (!linkedIssues?.length) {
     return null;
   }

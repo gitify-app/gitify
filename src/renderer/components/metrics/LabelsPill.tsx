@@ -10,7 +10,7 @@ export interface LabelsPillProps {
   issueFields?: GitifyIssueField[];
 }
 
-export function LabelsPill({ labels, issueFields }: LabelsPillProps) {
+export function LabelsPill({ labels, issueFields }: Readonly<LabelsPillProps>) {
   const fieldTokens = (issueFields ?? []).map((field) => ({
     text: `${field.name}: ${field.value}`,
     fillColor: field.fillColor,

@@ -3,7 +3,7 @@ export interface FieldLabelProps {
   label: string;
 }
 
-export function FieldLabel(props: FieldLabelProps) {
+export function FieldLabel(props: Readonly<FieldLabelProps>) {
   return (
     <label className={'mr-1 font-medium cursor-pointer'} htmlFor={props.name}>
       {props.label}

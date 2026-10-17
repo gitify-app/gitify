@@ -34,7 +34,7 @@ export function RepositoryHeader({
   isAnimatingExit,
   onToggle,
   onAnimateExit,
-}: RepositoryHeaderProps) {
+}: Readonly<RepositoryHeaderProps>) {
   const { markNotificationsAsRead, markNotificationsAsDone } = useNotifications();
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();

@@ -11,7 +11,7 @@ export interface ParentPillProps {
   parent?: GitifyParentIssue | null;
 }
 
-export function ParentPill({ parent }: ParentPillProps) {
+export function ParentPill({ parent }: Readonly<ParentPillProps>) {
   if (!parent) {
     return null;
   }

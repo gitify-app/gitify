@@ -17,7 +17,7 @@ export interface MetricGroupProps {
   notification: GitifyNotification;
 }
 
-export function MetricGroup({ notification }: MetricGroupProps) {
+export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
   const showPills = useSettingsStore((s) => s.showPills);
 
   if (!showPills) {

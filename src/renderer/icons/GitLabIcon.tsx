@@ -10,7 +10,7 @@ export function GitLabIcon({
   fill = 'currentColor',
   className,
   ...props
-}: OcticonProps) {
+}: Readonly<OcticonProps>) {
   return (
     <svg
       aria-hidden="true"

@@ -16,7 +16,7 @@ export interface RadioGroupProps {
   tooltip?: ReactNode | string;
 }
 
-export function RadioGroup(props: RadioGroupProps) {
+export function RadioGroup(props: Readonly<RadioGroupProps>) {
   return (
     <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
       <FieldLabel label={props.label} name={props.name} />
