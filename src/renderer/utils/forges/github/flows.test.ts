@@ -38,6 +38,7 @@ const exchangeWebFlowCodeMock = exchangeWebFlowCode as unknown as MockedFunction
 describe('renderer/utils/forges/github/flows.ts', () => {
   vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
   const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
+  const rendererLogWarnSpy = vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   beforeEach(() => {
@@ -150,11 +151,12 @@ describe('renderer/utils/forges/github/flows.ts', () => {
     };
 
     it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
+      let deliverCallback: (callbackUrl: string) => void = () => {};
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        callback('gitify://oauth?code=123-456');
+        deliverCallback = callback;
       });
 
-      const res = await flows.performGitHubWebOAuth({
+      const resultPromise = flows.performGitHubWebOAuth({
         clientId: 'BYO_CLIENT_ID' as ClientID,
         clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
         hostname: 'my.git.com' as Hostname,
@@ -167,6 +169,16 @@ describe('renderer/utils/forges/github/flows.ts', () => {
         ),
       );
 
+      // The authorization URL must carry a per-attempt state, and the login
+      // only completes when the callback echoes that same value back.
+      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
+      const state = authorizeUrl.searchParams.get('state');
+      expect(state).toBeTruthy();
+
+      deliverCallback(`gitify://oauth?code=123-456&state=${state}`);
+
+      const res = await resultPromise;
+
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
       expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
 
@@ -174,14 +186,89 @@ describe('renderer/utils/forges/github/flows.ts', () => {
       expect(res.authCode).toBe('123-456');
     });
 
-    it('should call performGitHubWebOAuth - failure', async () => {
+    it('does not resolve when the callback state does not match the generated state', async () => {
+      let deliverCallback: (callbackUrl: string) => void = () => {};
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        callback(
-          'gitify://auth?error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors',
-        );
+        deliverCallback = callback;
       });
 
-      await expect(async () => await flows.performGitHubWebOAuth(webAuthOptions)).rejects.toEqual(
+      let resolved = false;
+      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions).then((res) => {
+        resolved = true;
+        return res;
+      });
+
+      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
+      const state = authorizeUrl.searchParams.get('state');
+
+      deliverCallback('gitify://oauth?code=attacker-code&state=not-the-real-state');
+      deliverCallback('gitify://oauth?code=attacker-code-no-state');
+
+      // Give any pending microtasks a chance to run, then confirm neither
+      // injected callback settled the login.
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(resolved).toBe(false);
+      expect(rendererLogWarnSpy).toHaveBeenCalledTimes(2);
+
+      // The still-pending attempt completes once the matching state arrives.
+      deliverCallback(`gitify://oauth?code=the-real-code&state=${state}`);
+      const res = await resultPromise;
+      expect(res.authCode).toBe('the-real-code');
+    });
+
+    it('ignores an unparseable callback URL instead of tearing down the pending login', async () => {
+      let deliverCallback: (callbackUrl: string) => void = () => {};
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        deliverCallback = callback;
+      });
+
+      let settled = false;
+      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions).then(
+        (res) => {
+          settled = true;
+          return res;
+        },
+        (err: unknown) => {
+          settled = true;
+          throw err;
+        },
+      );
+
+      // `gitify://[` passes the protocol handler's `gitify://` prefix check but
+      // is not a parseable URL, so it must be ignored rather than rejecting the
+      // login before the state is ever compared.
+      deliverCallback('gitify://[');
+
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(settled).toBe(false);
+      expect(rendererLogWarnSpy).toHaveBeenCalledTimes(1);
+
+      // Settle the still-pending attempt so no listener is left dangling.
+      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
+      const state = authorizeUrl.searchParams.get('state');
+      deliverCallback(`gitify://oauth?code=real-code&state=${state}`);
+
+      await expect(resultPromise).resolves.toMatchObject({ authCode: 'real-code' });
+    });
+
+    it('should call performGitHubWebOAuth - failure', async () => {
+      let deliverCallback: (callbackUrl: string) => void = () => {};
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        deliverCallback = callback;
+      });
+
+      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions);
+
+      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
+      const state = authorizeUrl.searchParams.get('state');
+
+      deliverCallback(
+        `gitify://oauth?state=${state}&error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors`,
+      );
+
+      await expect(resultPromise).rejects.toEqual(
         new Error(
           "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
         ),
@@ -196,6 +283,40 @@ describe('renderer/utils/forges/github/flows.ts', () => {
 
       expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
       expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
+    });
+
+    it('ignores a callback error whose state does not match the attempt', async () => {
+      let deliverCallback: (callbackUrl: string) => void = () => {};
+      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
+        deliverCallback = callback;
+      });
+
+      let settled = false;
+      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions).then(
+        (res) => {
+          settled = true;
+          return res;
+        },
+        (err: unknown) => {
+          settled = true;
+          throw err;
+        },
+      );
+
+      deliverCallback('gitify://oauth?error=access_denied');
+      deliverCallback('gitify://oauth?error=access_denied&state=not-the-real-state');
+
+      await Promise.resolve();
+      await Promise.resolve();
+      expect(settled).toBe(false);
+      expect(rendererLogWarnSpy).toHaveBeenCalledTimes(2);
+
+      // Settle the still-pending attempt so no listener is left dangling.
+      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
+      const state = authorizeUrl.searchParams.get('state');
+      deliverCallback(`gitify://oauth?code=real-code&state=${state}`);
+
+      await expect(resultPromise).resolves.toMatchObject({ authCode: 'real-code' });
     });
 
     describe('exchangeAuthCodeForAccessToken', () => {
