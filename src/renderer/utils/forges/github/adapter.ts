@@ -9,6 +9,7 @@ import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } fro
 import { isValidHostname } from '../../auth/utils';
 import {
   extractHostVersion,
+  getAuthorizedOAuthAppURL,
   getDeveloperSettingsURL,
   getNewOAuthAppURL,
   getNewTokenURL,
@@ -134,8 +135,7 @@ export const githubAdapter: ForgeAdapter = {
     authMethod: 'Gitify OAuth App',
     start: startGitHubDeviceFlow,
     poll: pollGitHubDeviceFlow,
-    getRevokeAccessUrl: (hostname, clientId) =>
-      getDeveloperSettingsURL({ hostname, method: 'Custom OAuth App', clientId } as Account),
+    getRevokeAccessUrl: getAuthorizedOAuthAppURL,
   },
 
   customOAuthApp: {

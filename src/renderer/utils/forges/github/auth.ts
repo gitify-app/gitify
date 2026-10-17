@@ -60,10 +60,26 @@ export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
 }
 
 /**
+ * Build the URL where a user reviews and revokes an authorized OAuth app's access.
+ *
+ * Omit `clientId` for Gitify's preconfigured app; pass one for a user-supplied app.
+ *
+ * @param hostname - The GitHub hostname the app is authorized on.
+ * @param clientId - The OAuth app's client ID, when the account supplied one.
+ * @returns The authorized-applications URL for that client ID.
+ */
+export function getAuthorizedOAuthAppURL(hostname: Hostname, clientId?: ClientID): Link {
+  const url = new URL(`https://${hostname}`);
+  url.pathname = `/settings/connections/applications/${
+    clientId ?? Constants.OAUTH_DEVICE_FLOW_CLIENT_ID
+  }`;
+  return url.toString() as Link;
+}
+
+/**
  * Return the GitHub developer settings URL appropriate for the account's auth method.
  *
- * - Gitify OAuth App / Custom OAuth App → the OAuth app's connection page for the
- *   account's own client ID (falling back to Gitify's preconfigured app)
+ * - Gitify OAuth App / Custom OAuth App → the OAuth app's authorized-applications page
  * - GitHub CLI → authorized applications page
  * - Personal Access Token → tokens settings page
  *
@@ -71,26 +87,17 @@ export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
  * @returns The URL to the relevant GitHub developer settings page.
  */
 export function getDeveloperSettingsURL(account: Account): Link {
-  const settingsURL = new URL(`https://${account.hostname}`);
-
   switch (account.method) {
     case 'Gitify OAuth App':
     case 'Custom OAuth App':
-      settingsURL.pathname = `/settings/connections/applications/${
-        account.clientId ?? Constants.OAUTH_DEVICE_FLOW_CLIENT_ID
-      }`;
-      break;
+      return getAuthorizedOAuthAppURL(account.hostname, account.clientId);
     case 'GitHub CLI':
-      settingsURL.pathname = '/settings/applications';
-      break;
+      return `https://${account.hostname}/settings/applications` as Link;
     case 'Personal Access Token':
-      settingsURL.pathname = '/settings/tokens';
-      break;
+      return `https://${account.hostname}/settings/tokens` as Link;
     default:
-      settingsURL.pathname = '/settings';
-      break;
+      return `https://${account.hostname}/settings` as Link;
   }
-  return settingsURL.toString() as Link;
 }
 
 /**

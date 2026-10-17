@@ -5,6 +5,7 @@ import type { AuthMethod } from '../../auth/types';
 
 import {
   extractHostVersion,
+  getAuthorizedOAuthAppURL,
   getDeveloperSettingsURL,
   getGitHubAuthBaseUrl,
   getNewOAuthAppURL,
@@ -56,6 +57,23 @@ describe('renderer/utils/forges/github/auth.ts', () => {
     it('returns the data-residency URL for ghe.com hosts', () => {
       expect(getGitHubAuthBaseUrl('gitify.ghe.com' as Hostname).toString()).toBe(
         'https://api.gitify.ghe.com/',
+      );
+    });
+  });
+
+  describe('getAuthorizedOAuthAppURL', () => {
+    it("builds the connections URL for a custom app's own client ID", () => {
+      expect(
+        getAuthorizedOAuthAppURL(
+          'github.example.com' as Hostname,
+          'CUSTOM_CLIENT_ID_123' as ClientID,
+        ),
+      ).toBe('https://github.example.com/settings/connections/applications/CUSTOM_CLIENT_ID_123');
+    });
+
+    it("falls back to Gitify's preconfigured client ID when none is supplied", () => {
+      expect(getAuthorizedOAuthAppURL('github.com' as Hostname)).toBe(
+        'https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123',
       );
     });
   });
