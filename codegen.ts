@@ -29,20 +29,22 @@ const generates: CodegenConfig['generates'] = {
 };
 
 if (process.env.GITHUB_TOKEN) {
-  generates['src/renderer/utils/forges/github/graphql/generated/graphql.ts'] = {
-    schema: {
-      'https://api.github.com/graphql': {
-        headers: {
-          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-          // Hierarchy and issue fields each require their GraphQL schema feature.
-          'GraphQL-Features': 'sub_issues,issue_fields',
-        },
-        // GitHub's live schema currently fails graphql-js's stricter
-        // interface-deprecation-consistency validation (added in graphql v17).
-        // Skip validation so introspection can still succeed.
-        assumeValid: true,
+  const githubSchema: CodegenConfig['schema'] = {
+    'https://api.github.com/graphql': {
+      headers: {
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        // Hierarchy and issue fields each require their GraphQL schema feature.
+        'GraphQL-Features': 'sub_issues,issue_fields',
       },
+      // GitHub's live schema currently fails graphql-js's stricter
+      // interface-deprecation-consistency validation (added in graphql v17).
+      // Skip validation so introspection can still succeed.
+      assumeValid: true,
     },
+  };
+
+  generates['src/renderer/utils/forges/github/graphql/generated/graphql.ts'] = {
+    schema: githubSchema,
     documents: ['src/renderer/utils/forges/github/**/*.graphql'],
     plugins: ['typescript-operations', 'typed-document-node'],
     config: {
@@ -54,6 +56,12 @@ if (process.env.GITHUB_TOKEN) {
       },
       useTypeImports: true,
     },
+  };
+
+  // Schema snapshot the GraphQL editor loads offline (see graphql.config.ts).
+  generates['src/renderer/utils/forges/github/graphql/generated/schema.graphql'] = {
+    schema: githubSchema,
+    plugins: ['schema-ast'],
   };
 } else {
   // oxlint-disable-next-line no-console -- CLI script output
