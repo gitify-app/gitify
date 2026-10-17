@@ -12,7 +12,7 @@ import { groupNotificationsByRepository } from './group';
 export type ListItem =
   | { key: string; kind: 'account'; account: Account; error: GitifyError | null; count: number }
   | { key: string; kind: 'error'; error: GitifyError; fullHeight: boolean }
-  | { key: string; kind: 'all-read' }
+  | { key: string; kind: 'all-read'; mayBeWithheld: boolean }
   | {
       key: string;
       kind: 'repository';
@@ -37,6 +37,11 @@ export interface BuildItemsContext {
   collapsedRepositories: ReadonlySet<string>;
   animatingNotifications: ReadonlySet<string>;
   animatingRepositories: ReadonlyMap<string, ReadonlySet<string>>;
+  /**
+   * Account UUIDs whose organizations are known to be withholding
+   * notifications, so their all-read placeholder can say so.
+   */
+  withheldOrganizationAccountUUIDs: ReadonlySet<string>;
   groupBy: GroupBy;
 }
 
@@ -124,7 +129,11 @@ export function buildAccountItems(
       fullHeight: !context.hasMultipleAccounts,
     });
   } else if (notifications.length === 0) {
-    items.push({ key: `all-read-${accountUUID}`, kind: 'all-read' });
+    items.push({
+      key: `all-read-${accountUUID}`,
+      kind: 'all-read',
+      mayBeWithheld: context.withheldOrganizationAccountUUIDs.has(accountUUID),
+    });
   }
 
   const sorted = [...notifications].sort((a, b) => a.order - b.order);

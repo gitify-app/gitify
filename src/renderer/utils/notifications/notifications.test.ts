@@ -42,7 +42,10 @@ vi.mock('../forges/github/client', async () => {
 describe('renderer/utils/notifications/notifications.ts', () => {
   beforeEach(() => {
     vi.mocked(apiClient.fetchNotificationDetailsForList).mockReset();
-    vi.mocked(apiClient.fetchNotificationDetailsForList).mockResolvedValue(new Map());
+    vi.mocked(apiClient.fetchNotificationDetailsForList).mockResolvedValue({
+      details: new Map(),
+      failures: { blocks: new Map(), hasUnattributedBlock: false },
+    });
     vi.mocked(apiClient.fetchIssueByNumber).mockReset();
     clearEnrichmentCache();
   });
@@ -161,7 +164,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         apiClient.fetchNotificationDetailsForList,
       );
       vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
-      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+      fetchNotificationDetailsForListSpy.mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map(), hasUnattributedBlock: false },
+      });
 
       const notificationCount = GITHUB_API_MERGE_BATCH_SIZE * 2.5;
       const notifications = Array.from({ length: notificationCount }, (_, i) =>
@@ -194,7 +200,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         apiClient.fetchNotificationDetailsForList,
       );
       vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
-      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+      fetchNotificationDetailsForListSpy.mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map(), hasUnattributedBlock: false },
+      });
 
       const notifications = Array.from({ length: 50 }, (_, i) =>
         mockPartialGitifyNotification({
@@ -218,7 +227,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         apiClient.fetchNotificationDetailsForList,
       );
       vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
-      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+      fetchNotificationDetailsForListSpy.mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map(), hasUnattributedBlock: false },
+      });
 
       useSettingsStore.setState({ detailedNotifications: true });
 
@@ -245,7 +257,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         apiClient.fetchNotificationDetailsForList,
       );
       vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
-      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+      fetchNotificationDetailsForListSpy.mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map(), hasUnattributedBlock: false },
+      });
 
       useSettingsStore.setState({ detailedNotifications: true });
 
@@ -267,7 +282,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
         apiClient.fetchNotificationDetailsForList,
       );
       vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
-      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+      fetchNotificationDetailsForListSpy.mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map(), hasUnattributedBlock: false },
+      });
 
       useSettingsStore.setState({ detailedNotifications: true });
 
@@ -304,7 +322,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       const fetchNotificationDetailsForListSpy = vi.mocked(
         apiClient.fetchNotificationDetailsForList,
       );
-      fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+      fetchNotificationDetailsForListSpy.mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map(), hasUnattributedBlock: false },
+      });
       // First poll: the per-notification fallback fetch fails, so the
       // notification is returned with base details only.
       vi.mocked(apiClient.fetchIssueByNumber).mockRejectedValueOnce(new Error('transient outage'));
@@ -338,7 +359,10 @@ describe('renderer/utils/notifications/notifications.ts', () => {
           apiClient.fetchNotificationDetailsForList,
         );
         vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
-        fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
+        fetchNotificationDetailsForListSpy.mockResolvedValue({
+          details: new Map(),
+          failures: { blocks: new Map(), hasUnattributedBlock: false },
+        });
 
         useSettingsStore.setState({ detailedNotifications: true });
 

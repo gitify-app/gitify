@@ -624,4 +624,48 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.queryByTestId('account-view-scopes')).not.toBeInTheDocument();
     });
   });
+
+  describe('Organizations affordance', () => {
+    it('should navigate to the organizations view with that account', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          accounts: [mockPersonalAccessTokenAccount],
+        });
+      });
+
+      await userEvent.click(screen.getByTestId('account-view-orgs'));
+
+      expect(navigateMock).toHaveBeenCalledWith('/account-orgs', {
+        state: { account: mockPersonalAccessTokenAccount },
+      });
+    });
+
+    it('should hide the organizations affordance for forges without the capability', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          accounts: [mockGiteaAccount],
+        });
+      });
+
+      expect(screen.queryByTestId('account-view-orgs')).not.toBeInTheDocument();
+    });
+
+    it('should hide the organizations affordance when credentials are bad', async () => {
+      await act(async () => {
+        renderWithProviders(<AccountsRoute />, {
+          accounts: [mockPersonalAccessTokenAccount],
+          notifications: [
+            {
+              account: mockPersonalAccessTokenAccount,
+              notifications: [],
+              error: Errors.BAD_CREDENTIALS,
+            },
+          ],
+        });
+      });
+
+      expect(screen.queryByTestId('account-view-orgs')).not.toBeInTheDocument();
+      expect(screen.getByTestId('account-reauthenticate')).toBeInTheDocument();
+    });
+  });
 });

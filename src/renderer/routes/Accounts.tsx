@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
   KeyIcon,
   type OcticonProps,
+  OrganizationIcon,
   PersonAddIcon,
   PersonIcon,
   ShieldCheckIcon,
@@ -265,6 +266,20 @@ export function AccountsRoute() {
                             ? 'danger'
                             : 'default'
                         }
+                      />
+                    )}
+
+                    {!hasBadCredentials && adapter.accountOps.orgAuthorization && (
+                      <IconButton
+                        aria-label={`View organizations for ${account.user?.login}`}
+                        data-testid="account-view-orgs"
+                        icon={OrganizationIcon}
+                        onClick={() =>
+                          navigate('/account-orgs', {
+                            state: { account },
+                          })
+                        }
+                        size="small"
                       />
                     )}
 

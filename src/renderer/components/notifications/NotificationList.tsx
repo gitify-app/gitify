@@ -13,6 +13,7 @@ import {
   getItemKey,
   getItemType,
 } from '../../utils/notifications/listItems';
+import { hasWithheldOrganizationAccess } from '../../utils/notifications/orgAuthorization';
 import { AllRead } from '../AllRead';
 import { Oops } from '../Oops';
 import { AccountHeader } from './AccountHeader';
@@ -106,6 +107,16 @@ export function NotificationList({
     });
   }, []);
 
+  const withheldOrganizationAccountUUIDs = useMemo(
+    () =>
+      new Set(
+        accountNotifications
+          .filter(({ account }) => hasWithheldOrganizationAccess(account))
+          .map(({ account }) => getAccountUUID(account)),
+      ),
+    [accountNotifications],
+  );
+
   const items = useMemo(() => {
     const context: BuildItemsContext = {
       showAccountHeader,
@@ -114,6 +125,7 @@ export function NotificationList({
       collapsedRepositories,
       animatingNotifications,
       animatingRepositories,
+      withheldOrganizationAccountUUIDs,
       groupBy,
     };
 
@@ -127,6 +139,7 @@ export function NotificationList({
     groupBy,
     hasMultipleAccounts,
     showAccountHeader,
+    withheldOrganizationAccountUUIDs,
   ]);
 
   return (
@@ -151,7 +164,9 @@ export function NotificationList({
 
             {item.kind === 'error' && <Oops error={item.error} fullHeight={item.fullHeight} />}
 
-            {item.kind === 'all-read' && <AllRead fullHeight={false} />}
+            {item.kind === 'all-read' && (
+              <AllRead fullHeight={false} mayBeWithheld={item.mayBeWithheld} />
+            )}
 
             {item.kind === 'repository' && (
               <RepositoryHeader

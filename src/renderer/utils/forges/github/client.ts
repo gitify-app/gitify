@@ -13,6 +13,11 @@ import type {
   MarkNotificationThreadAsReadResponse,
 } from './types';
 
+import {
+  type OrganizationAuthorizationCondition,
+  type OrganizationBlockReason,
+  reportOrganizationAuthorization,
+} from '../../notifications/orgAuthorization';
 import { reportServerPollInterval } from '../../notifications/pollInterval';
 import { getGitHubCapabilities } from './capabilities';
 import {
@@ -28,7 +33,12 @@ import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { stripGatedSelections } from './graphql/utils';
 import { createNotificationHandler } from './handlers';
 import { createOctokitClient, createOctokitClientUncached } from './octokit';
-import { performGraphQLRequestString } from './request';
+import {
+  type PartialGraphQLFailure,
+  performGraphQLRequestString,
+  performGraphQLRequestStringTolerant,
+} from './request';
+import { parseSsoHeader } from './sso';
 import { getNumberFromUrl } from './utils';
 
 /**
@@ -62,8 +72,12 @@ export async function listNotificationsForAuthenticatedUser(
   const octokit = await createOctokitClient(account, 'rest');
 
   if (settings.fetchAllNotifications) {
-    // Fetch all pages using Octokit's pagination
-    return await octokit.paginate(
+    // Fetch all pages using Octokit's pagination. The SSO header rides on each
+    // response, so every page is inspected and the first page carrying one
+    // describes the whole listing.
+    let condition: OrganizationAuthorizationCondition | null = null;
+
+    const notifications = await octokit.paginate(
       octokit.rest.activity.listNotificationsForAuthenticatedUser,
       {
         participating: settings.participating,
@@ -76,9 +90,16 @@ export async function listNotificationsForAuthenticatedUser(
       (response) => {
         reportServerPollInterval(account, Number(response.headers['x-poll-interval']));
 
+        const headers = response.headers as Record<string, string | undefined>;
+        condition ??= parseSsoHeader(headers['x-github-sso']);
+
         return response.data;
       },
     );
+
+    reportOrganizationAuthorization(account, condition);
+
+    return notifications;
   }
 
   // Single page request
@@ -93,7 +114,129 @@ export async function listNotificationsForAuthenticatedUser(
 
   reportServerPollInterval(account, Number(response.headers['x-poll-interval']));
 
+  const headers = response.headers as Record<string, string | undefined>;
+  reportOrganizationAuthorization(account, parseSsoHeader(headers['x-github-sso']));
+
   return response.data;
+}
+
+export interface ReachableOrganizations {
+  /** Logins of organizations the token can reach. */
+  logins: string[];
+  /** Identifiers GitHub withheld from the listing because the token is unauthorized. */
+  withheldOrganizationIds: string[];
+}
+
+/** One of the user's organization memberships, with the state GitHub reports. */
+export interface OrganizationMembershipRecord {
+  login: string;
+  state: 'active' | 'pending';
+}
+
+/**
+ * List the organizations the account's token can reach, plus any organization
+ * identifiers GitHub withheld from the listing.
+ *
+ * When this listing observes a condition it is reported to the signal registry,
+ * so the organizations view has a current authorizing link. A clean listing
+ * does not clear a condition observed by another fetch, because the two
+ * endpoints can legitimately disagree.
+ */
+export async function listReachableOrganizations(
+  account: Account,
+): Promise<ReachableOrganizations> {
+  const octokit = await createOctokitClient(account, 'rest');
+
+  // A holder rather than a bare `let`: the condition is assigned inside the
+  // pagination callback, and control-flow narrowing would otherwise treat it as
+  // still-null afterwards.
+  const observed: {
+    condition: OrganizationAuthorizationCondition | null;
+    withheldOrganizationIds: string[];
+  } = { condition: null, withheldOrganizationIds: [] };
+
+  const organizations = await octokit.paginate(
+    octokit.rest.orgs.listForAuthenticatedUser,
+    {
+      per_page: 100,
+      headers: {
+        'Cache-Control': 'no-cache', // Prevent caching
+      },
+    },
+    (response) => {
+      const headers = response.headers as Record<string, string | undefined>;
+      const condition = parseSsoHeader(headers['x-github-sso']);
+
+      if (condition && !observed.condition) {
+        observed.condition = condition;
+
+        if (condition.kind === 'partial-results') {
+          observed.withheldOrganizationIds = condition.organizationIds;
+        }
+      }
+
+      return response.data;
+    },
+  );
+
+  if (observed.condition) {
+    reportOrganizationAuthorization(account, observed.condition);
+  }
+
+  return {
+    logins: organizations.map((organization) => organization.login),
+    withheldOrganizationIds: observed.withheldOrganizationIds,
+  };
+}
+
+/**
+ * List the user's organization memberships, including memberships that are not
+ * yet active.
+ *
+ * Endpoint documentation: https://docs.github.com/en/rest/orgs/members#list-organization-memberships-for-the-authenticated-user
+ */
+export async function listOrganizationMemberships(
+  account: Account,
+): Promise<OrganizationMembershipRecord[]> {
+  const octokit = await createOctokitClient(account, 'rest');
+
+  const memberships = await octokit.paginate(
+    octokit.rest.orgs.listMembershipsForAuthenticatedUser,
+    {
+      per_page: 100,
+      headers: {
+        'Cache-Control': 'no-cache', // Prevent caching
+      },
+    },
+  );
+
+  return memberships.map((membership) => ({
+    login: membership.organization.login,
+    state: membership.state === 'pending' ? 'pending' : 'active',
+  }));
+}
+
+/**
+ * Resolve an organization identifier to its login.
+ *
+ * Best-effort: the token that could not list the organization may not be able
+ * to read it either, in which case the caller reports the identifier without a
+ * name rather than dropping it.
+ *
+ * Endpoint documentation: https://docs.github.com/en/rest/orgs/orgs#get-an-organization
+ */
+export async function getOrganizationLoginById(
+  account: Account,
+  organizationId: string,
+): Promise<string | null> {
+  try {
+    const octokit = await createOctokitClient(account, 'rest');
+    const response = await octokit.rest.orgs.get({ org: organizationId });
+
+    return response.data.login;
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -271,18 +414,45 @@ export async function fetchPullByNumber(
 }
 
 /**
+ * Per-organization failures observed while fetching notification details.
+ *
+ * These are the blocks GitHub reports per field (SAML enforcement, OAuth app
+ * access restrictions) once the partial response is read instead of discarded.
+ */
+export interface NotificationDetailFailures {
+  /** Organizations observed blocking a request, keyed by login with the reason. */
+  blocks: Map<string, OrganizationBlockReason>;
+  /** Whether a failure arrived that could not be attributed to an organization. */
+  hasUnattributedBlock: boolean;
+}
+
+/** The resolved details plus whatever blocks the response reported. */
+export interface NotificationDetailResults {
+  details: Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>;
+  failures: NotificationDetailFailures;
+}
+
+function noDetailFailures(): NotificationDetailFailures {
+  return { blocks: new Map(), hasUnattributedBlock: false };
+}
+
+/**
  * Fetch notification details for supported types (ie: Discussions, Issues and Pull Requests).
 
  * This significantly reduces the amount of API calls by performing a building a merged GraphQL query,
  * making the most efficient use of the available GitHub API quota limits.
+ *
+ * The request tolerates a partial response: when an organization blocks access,
+ * the returned data is still used and each failure is attributed back to the
+ * notification (and therefore the organization) through the query alias.
  */
 export async function fetchNotificationDetailsForList(
   notifications: RawGitifyNotification[],
-): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
+): Promise<NotificationDetailResults> {
   const results = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
 
   if (!notifications.length) {
-    return results;
+    return { details: results, failures: noDetailFailures() };
   }
 
   // Build merged query using the builder
@@ -311,7 +481,7 @@ export async function fetchNotificationDetailsForList(
   }
 
   if (!hasSupportedNotification) {
-    return results;
+    return { details: results, failures: noDetailFailures() };
   }
 
   builder.setSharedVariables({
@@ -331,12 +501,14 @@ export async function fetchNotificationDetailsForList(
   );
   const variables = builder.getGraphQLVariables();
 
-  const response = await performGraphQLRequestString(notifications[0].account, query, variables);
+  const { data, failures } = await performGraphQLRequestStringTolerant<Record<string, unknown>>(
+    notifications[0].account,
+    query,
+    variables,
+  );
 
   for (const [alias, notification] of aliasToNotification) {
-    const repoData = (response as Record<string, unknown>)[alias] as
-      | Record<string, unknown>
-      | undefined;
+    const repoData = data?.[alias] as Record<string, unknown> | undefined;
     if (!repoData) {
       continue; // Skip if no data for this alias
     }
@@ -344,5 +516,53 @@ export async function fetchNotificationDetailsForList(
     results.set(notification, fragment);
   }
 
-  return results;
+  return { details: results, failures: attributeFailures(failures, aliasToNotification) };
+}
+
+/**
+ * Map each reported failure back to the notification it belongs to through the
+ * query alias, and so to the organization that owns the repository. A failure
+ * that cannot be tied to a notification is recorded without naming an
+ * organization rather than being dropped.
+ */
+function attributeFailures(
+  failures: PartialGraphQLFailure[],
+  aliasToNotification: Map<string, RawGitifyNotification>,
+): NotificationDetailFailures {
+  const blocks = new Map<string, OrganizationBlockReason>();
+  let hasUnattributedBlock = false;
+
+  for (const failure of failures) {
+    const reason = blockReason(failure);
+    const alias = typeof failure.path?.[0] === 'string' ? failure.path[0] : undefined;
+    const organizationLogin = alias
+      ? aliasToNotification.get(alias)?.repository.owner.login
+      : undefined;
+
+    if (organizationLogin) {
+      blocks.set(organizationLogin, reason);
+    } else {
+      hasUnattributedBlock = true;
+    }
+  }
+
+  return { blocks, hasUnattributedBlock };
+}
+
+/**
+ * Read why GitHub blocked a request from the error it returned. SAML
+ * enforcement and OAuth app access restrictions are different problems with
+ * different remedies, so they are kept apart; anything unrecognised is reported
+ * without guessing.
+ */
+function blockReason(failure: PartialGraphQLFailure): OrganizationBlockReason {
+  if (failure.extensions?.saml_failure === true || failure.message.includes('SAML enforcement')) {
+    return 'saml';
+  }
+
+  if (failure.message.includes('OAuth App access restrictions')) {
+    return 'app-restriction';
+  }
+
+  return 'unknown';
 }

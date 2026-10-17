@@ -5,6 +5,10 @@ import { mockMultipleAccountNotifications } from '../__mocks__/notifications-moc
 import { mockSettings } from '../__mocks__/state-mocks';
 
 import { Errors } from '../utils/core/errors';
+import {
+  clearOrganizationAuthorization,
+  reportOrganizationAuthorization,
+} from '../utils/notifications/orgAuthorization';
 import { NotificationsRoute } from './Notifications';
 
 vi.mock('../components/notifications/NotificationList', () => ({
@@ -12,7 +16,9 @@ vi.mock('../components/notifications/NotificationList', () => ({
 }));
 
 vi.mock('../components/AllRead', () => ({
-  AllRead: () => <p>AllRead</p>,
+  AllRead: ({ mayBeWithheld }: { mayBeWithheld?: boolean }) => (
+    <p>{mayBeWithheld ? 'AllRead withheld' : 'AllRead'}</p>
+  ),
 }));
 
 vi.mock('../components/Oops', () => ({
@@ -20,6 +26,9 @@ vi.mock('../components/Oops', () => ({
 }));
 
 describe('renderer/routes/Notifications.tsx', () => {
+  beforeEach(() => {
+    clearOrganizationAuthorization();
+  });
   it('should render itself & its children (with notifications)', () => {
     const tree = renderWithProviders(<NotificationsRoute />, {
       notifications: mockMultipleAccountNotifications,
@@ -32,6 +41,25 @@ describe('renderer/routes/Notifications.tsx', () => {
   it('should render itself & its children (all read notifications)', () => {
     const tree = renderWithProviders(<NotificationsRoute />);
     expect(tree.container).toMatchSnapshot();
+  });
+
+  it('should explain withheld organization access on an empty inbox', () => {
+    reportOrganizationAuthorization(mockMultipleAccountNotifications[0].account, {
+      kind: 'partial-results',
+      organizationIds: ['1'],
+    });
+
+    renderWithProviders(<NotificationsRoute />, {
+      notifications: mockMultipleAccountNotifications,
+    });
+
+    expect(screen.getByText('AllRead withheld')).toBeInTheDocument();
+  });
+
+  it('should keep the plain empty state when nothing is withholding access', () => {
+    renderWithProviders(<NotificationsRoute />);
+
+    expect(screen.getByText('AllRead')).toBeInTheDocument();
   });
 
   it('should render itself & its children (show account header)', () => {

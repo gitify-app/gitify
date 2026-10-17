@@ -272,6 +272,17 @@ export interface ForgeAccountAdapter {
      */
     externallyManaged(): ExternallyManagedScopes | undefined;
   };
+
+  /**
+   * Organization-level authorization state. Forges with no such concept omit
+   * this bundle entirely; callers should treat `orgAuthorization === undefined`
+   * as "nothing to show" and render no organizations surface rather than an
+   * empty one.
+   */
+  readonly orgAuthorization?: {
+    /** Resolve the account's organizations and the access state of each. */
+    fetchOrganizationAccess(): Promise<OrganizationAccessReport>;
+  };
 }
 
 /**
@@ -302,6 +313,9 @@ export interface ForgeAccountOperations {
     hasAlternate(account: Account): boolean;
     externallyManaged(account: Account): ExternallyManagedScopes | undefined;
   };
+  readonly orgAuthorization?: {
+    fetchOrganizationAccess(account: Account): Promise<OrganizationAccessReport>;
+  };
 }
 
 /**
@@ -309,6 +323,39 @@ export interface ForgeAccountOperations {
  * OAuth scope concept (GitHub today).
  */
 export type OAuthScopesSupport = NonNullable<ForgeAccountOperations['oauthScopes']>;
+
+/**
+ * Organization-authorization capability bundle. Present only on forges whose
+ * host reports organization-level authorization state (GitHub today).
+ */
+export type OrgAuthorizationSupport = NonNullable<ForgeAccountOperations['orgAuthorization']>;
+
+/** The access state Gitify determined for a single organization. */
+export type OrganizationAccessState =
+  | 'granted'
+  | 'authorization-required'
+  | 'membership-pending'
+  | 'app-access-blocked'
+  | 'unknown';
+
+/** One organization and the access state Gitify determined for it. */
+export interface OrganizationAccessEntry {
+  /**
+   * The organization's login, or `null` when Gitify knows an organization is
+   * withholding access but could not resolve its name.
+   */
+  login: string | null;
+  state: OrganizationAccessState;
+}
+
+/** The outcome of asking a forge for an account's organization access. */
+export type OrganizationAccessReport =
+  | {
+      outcome: 'determined';
+      /** Organizations, named then unnamed, in the order the view should show them. */
+      organizations: OrganizationAccessEntry[];
+    }
+  | { outcome: 'undetermined' };
 
 /** How to explain a scope set Gitify cannot change. */
 export interface ExternallyManagedScopes {

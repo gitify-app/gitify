@@ -6,6 +6,7 @@ import { ThemeProvider } from '@primer/react/next';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 
+import { AccountOrgsRoute } from './routes/AccountOrgs';
 import { AccountsRoute } from './routes/Accounts';
 import { AccountScopesRoute } from './routes/AccountScopes';
 import { BitbucketLoginWithPersonalAccessTokenRoute } from './routes/bitbucket/LoginWithPersonalAccessToken';
@@ -97,6 +98,14 @@ export function App() {
                     </RequireAuth>
                   }
                   path="/account-scopes"
+                />
+                <Route
+                  element={
+                    <RequireAuth>
+                      <AccountOrgsRoute />
+                    </RequireAuth>
+                  }
+                  path="/account-orgs"
                 />
                 <Route element={<LoginRoute />} path="/login" />
                 <Route

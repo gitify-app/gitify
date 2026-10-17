@@ -8,6 +8,7 @@ import {
   mockGitHubCloudGitifyNotifications,
   mockPartialGitifyNotification,
 } from '../../../__mocks__/notifications-mocks';
+import { mockSsoPartialResultsHeader, mockSsoRequiredHeader } from './__mocks__/sso-mocks';
 
 import { Constants } from '../../../constants';
 
@@ -15,6 +16,11 @@ import { useSettingsStore } from '../../../stores';
 
 import type { Link } from '../../../types';
 
+import {
+  clearOrganizationAuthorization,
+  getOrganizationAuthorization,
+  reportOrganizationAuthorization,
+} from '../../notifications/orgAuthorization';
 import {
   clearServerPollIntervals,
   computeRefetchIntervalMs,
@@ -27,9 +33,12 @@ import {
   fetchPullByNumber,
   getCommit,
   getCommitComment,
+  getOrganizationLoginById,
   getRelease,
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
+  listOrganizationMemberships,
+  listReachableOrganizations,
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from './client';
@@ -48,6 +57,7 @@ vi.mock('./request', async () => {
     ...actual,
     performGraphQLRequest: vi.fn(),
     performGraphQLRequestString: vi.fn(),
+    performGraphQLRequestStringTolerant: vi.fn(),
   };
 });
 
@@ -65,6 +75,11 @@ describe('renderer/utils/forges/github/client.ts', () => {
       users: {
         getAuthenticated: vi.fn(),
       },
+      orgs: {
+        get: vi.fn(),
+        listForAuthenticatedUser: vi.fn(),
+        listMembershipsForAuthenticatedUser: vi.fn(),
+      },
     },
     paginate: vi.fn(),
     request: vi.fn(),
@@ -75,9 +90,11 @@ describe('renderer/utils/forges/github/client.ts', () => {
 
   beforeEach(() => {
     clearServerPollIntervals();
+    clearOrganizationAuthorization();
 
     vi.mocked(apiRequests.performGraphQLRequest).mockReset();
     vi.mocked(apiRequests.performGraphQLRequestString).mockReset();
+    vi.mocked(apiRequests.performGraphQLRequestStringTolerant).mockReset();
 
     // Mock createOctokitClient to return our mock
     createOctokitClientSpy.mockResolvedValue(mockOctokit as unknown as OctokitClient);
@@ -248,6 +265,145 @@ describe('renderer/utils/forges/github/client.ts', () => {
       await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
 
       expect(computeRefetchIntervalMs(0, [mockGitHubCloudAccount])).toBe(120000);
+    });
+
+    it('should capture the SSO condition from a single-page response', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: false,
+      });
+
+      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue({
+        data: [],
+        status: 200,
+        headers: { 'x-github-sso': mockSsoRequiredHeader },
+      });
+
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(getOrganizationAuthorization(mockGitHubCloudAccount).condition).toEqual({
+        kind: 'required',
+        url: 'https://github.com/orgs/mock-org/sso?authorization_request=abc123',
+      });
+    });
+
+    it('should capture the SSO condition from a later page of a paginated listing', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: true,
+      });
+
+      mockOctokit.paginate.mockImplementation(async (_endpoint, _parameters, mapFn) => {
+        mapFn({ data: [], headers: {} });
+        return mapFn({ data: [], headers: { 'x-github-sso': mockSsoPartialResultsHeader } });
+      });
+
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(getOrganizationAuthorization(mockGitHubCloudAccount).condition).toEqual({
+        kind: 'partial-results',
+        organizationIds: ['21955855', '20582480'],
+      });
+    });
+
+    it('should clear the SSO condition when no page of a paginated listing carries one', async () => {
+      useSettingsStore.setState({
+        participating: false,
+        fetchReadNotifications: false,
+        fetchAllNotifications: false,
+      });
+
+      mockOctokit.rest.activity.listNotificationsForAuthenticatedUser.mockResolvedValue({
+        data: [],
+        status: 200,
+        headers: { 'x-github-sso': mockSsoRequiredHeader },
+      });
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+      expect(getOrganizationAuthorization(mockGitHubCloudAccount).condition).not.toBeNull();
+
+      useSettingsStore.setState({ fetchAllNotifications: true });
+
+      mockOctokit.paginate.mockImplementation(async (_endpoint, _parameters, mapFn) => {
+        mapFn({ data: [], headers: {} });
+        return mapFn({ data: [], headers: {} });
+      });
+
+      await listNotificationsForAuthenticatedUser(mockGitHubCloudAccount);
+
+      expect(getOrganizationAuthorization(mockGitHubCloudAccount).condition).toBeNull();
+    });
+  });
+
+  describe('listReachableOrganizations', () => {
+    it('returns the reachable logins and reports a condition it observes', async () => {
+      mockOctokit.paginate.mockImplementation(async (_endpoint, _parameters, mapFn) =>
+        mapFn({
+          data: [{ login: 'acme' }, { login: 'beta' }],
+          headers: { 'x-github-sso': mockSsoPartialResultsHeader },
+        }),
+      );
+
+      const result = await listReachableOrganizations(mockGitHubCloudAccount);
+
+      expect(result.logins).toEqual(['acme', 'beta']);
+      expect(result.withheldOrganizationIds).toEqual(['21955855', '20582480']);
+      expect(getOrganizationAuthorization(mockGitHubCloudAccount).condition).toEqual({
+        kind: 'partial-results',
+        organizationIds: ['21955855', '20582480'],
+      });
+    });
+
+    it('does not clear a condition another fetch observed', async () => {
+      reportOrganizationAuthorization(mockGitHubCloudAccount, {
+        kind: 'required',
+        url: 'https://github.com/orgs/acme/sso',
+      });
+
+      mockOctokit.paginate.mockImplementation(async (_endpoint, _parameters, mapFn) =>
+        mapFn({ data: [], headers: {} }),
+      );
+
+      const result = await listReachableOrganizations(mockGitHubCloudAccount);
+
+      expect(result.withheldOrganizationIds).toEqual([]);
+      expect(getOrganizationAuthorization(mockGitHubCloudAccount).condition).toEqual({
+        kind: 'required',
+        url: 'https://github.com/orgs/acme/sso',
+      });
+    });
+  });
+
+  describe('listOrganizationMemberships', () => {
+    it('reports each membership with its state', async () => {
+      mockOctokit.paginate.mockResolvedValue([
+        { organization: { login: 'acme' }, state: 'active' },
+        { organization: { login: 'beta' }, state: 'pending' },
+      ]);
+
+      await expect(listOrganizationMemberships(mockGitHubCloudAccount)).resolves.toEqual([
+        { login: 'acme', state: 'active' },
+        { login: 'beta', state: 'pending' },
+      ]);
+    });
+  });
+
+  describe('getOrganizationLoginById', () => {
+    it('resolves an identifier to its login', async () => {
+      mockOctokit.rest.orgs.get.mockResolvedValue({
+        data: { login: 'acme' },
+        status: 200,
+        headers: {},
+      });
+
+      await expect(getOrganizationLoginById(mockGitHubCloudAccount, '1')).resolves.toBe('acme');
+    });
+
+    it('returns null when the organization cannot be read', async () => {
+      mockOctokit.rest.orgs.get.mockRejectedValue(new Error('Not Found'));
+
+      await expect(getOrganizationLoginById(mockGitHubCloudAccount, '1')).resolves.toBeNull();
     });
   });
 
@@ -485,7 +641,9 @@ describe('renderer/utils/forges/github/client.ts', () => {
 
   describe('fetchNotificationDetailsForList', () => {
     it('fetchNotificationDetailsForList returns empty map if no notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+      const performGraphQLRequestStringSpy = vi.mocked(
+        apiRequests.performGraphQLRequestStringTolerant,
+      );
 
       const mockNotification = mockPartialGitifyNotification({
         title: 'Some commit',
@@ -493,7 +651,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         type: 'Commit',
       });
 
-      performGraphQLRequestStringSpy.mockResolvedValue({} as ExecutionResult<unknown>);
+      performGraphQLRequestStringSpy.mockResolvedValue({ data: undefined, failures: [] });
 
       await fetchNotificationDetailsForList([mockNotification]);
 
@@ -501,9 +659,11 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList returns empty map if no supported notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+      const performGraphQLRequestStringSpy = vi.mocked(
+        apiRequests.performGraphQLRequestStringTolerant,
+      );
 
-      performGraphQLRequestStringSpy.mockResolvedValue({} as ExecutionResult<unknown>);
+      performGraphQLRequestStringSpy.mockResolvedValue({ data: undefined, failures: [] });
 
       await fetchNotificationDetailsForList([]);
 
@@ -511,12 +671,14 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList builds query for supported notifications', async () => {
-      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+      const performGraphQLRequestStringSpy = vi.mocked(
+        apiRequests.performGraphQLRequestStringTolerant,
+      );
 
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
-        headers: {},
-      } as ExecutionResult<unknown>);
+        failures: [],
+      });
 
       await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
 
@@ -557,7 +719,9 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
 
     it('fetchNotificationDetailsForList strips gated fields for GitHub Enterprise Server accounts', async () => {
-      const performGraphQLRequestStringSpy = vi.mocked(apiRequests.performGraphQLRequestString);
+      const performGraphQLRequestStringSpy = vi.mocked(
+        apiRequests.performGraphQLRequestStringTolerant,
+      );
 
       const notifications = mockGitHubCloudGitifyNotifications.map((notification) => ({
         ...notification,
@@ -566,8 +730,8 @@ describe('renderer/utils/forges/github/client.ts', () => {
 
       performGraphQLRequestStringSpy.mockResolvedValue({
         data: {},
-        headers: {},
-      } as ExecutionResult<unknown>);
+        failures: [],
+      });
 
       await fetchNotificationDetailsForList(notifications);
 
@@ -583,6 +747,68 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query).toContain('FetchMergedNotifications');
       expect(variables).not.toHaveProperty('includeStackEntry');
       expect(variables).not.toHaveProperty('includeIsAnswered');
+    });
+
+    it('uses the partial data and attributes each failure to its organization', async () => {
+      const spy = vi.mocked(apiRequests.performGraphQLRequestStringTolerant);
+
+      const notifications = mockGitHubCloudGitifyNotifications.map((notification) => ({
+        ...notification,
+        repository: {
+          ...notification.repository,
+          owner: { ...notification.repository.owner, login: 'acme' },
+        },
+      }));
+
+      spy.mockResolvedValue({
+        data: {
+          node0: { issue: { number: 1 } },
+        },
+        failures: [
+          {
+            message:
+              'Resource protected by organization SAML enforcement. You must grant your Personal Access token access to this organization.',
+            path: ['node1'],
+          },
+        ],
+      });
+
+      const result = await fetchNotificationDetailsForList(notifications);
+
+      expect([...result.details.keys()]).toHaveLength(1);
+      expect(result.failures).toEqual({
+        blocks: new Map([['acme', 'saml']]),
+        hasUnattributedBlock: false,
+      });
+    });
+
+    it('records a failure that cannot be attributed without naming an organization', async () => {
+      const spy = vi.mocked(apiRequests.performGraphQLRequestStringTolerant);
+
+      spy.mockResolvedValue({
+        data: {},
+        failures: [{ message: 'Something failed', path: ['node999'] }],
+      });
+
+      const result = await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
+
+      expect(result.failures).toEqual({
+        blocks: new Map(),
+        hasUnattributedBlock: true,
+      });
+    });
+
+    it('reports no failures when the response carries none', async () => {
+      const spy = vi.mocked(apiRequests.performGraphQLRequestStringTolerant);
+
+      spy.mockResolvedValue({ data: {}, failures: [] });
+
+      const result = await fetchNotificationDetailsForList(mockGitHubCloudGitifyNotifications);
+
+      expect(result.failures).toEqual({
+        blocks: new Map(),
+        hasUnattributedBlock: false,
+      });
     });
   });
 });

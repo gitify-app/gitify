@@ -1,7 +1,9 @@
 import type { GitifySubject, RawGitifyNotification } from '../../../types';
 
 import { rendererLogError, rendererLogWarn, toError } from '../../core/logger';
-import { fetchNotificationDetailsForList } from './client';
+import { reportBlockedOrganizations } from '../../notifications/orgAuthorization';
+import type { OrganizationBlockReason } from '../../notifications/orgAuthorization';
+import { type NotificationDetailFailures, fetchNotificationDetailsForList } from './client';
 import type { FetchMergedDetailsTemplateQuery } from './graphql/generated/graphql';
 import { createNotificationHandler } from './handlers';
 
@@ -28,16 +30,26 @@ export const GITHUB_API_MERGE_BATCH_SIZE = 100;
 export async function enrichGitHubNotifications(
   notifications: RawGitifyNotification[],
 ): Promise<RawGitifyNotification[]> {
-  const fragments = await fetchInBatches(notifications);
+  const { merged, failures } = await fetchInBatches(notifications);
+
+  if (notifications.length) {
+    // Replace the account's observed blocks with this pass's, so an
+    // organization that stops blocking drops out on the next pass.
+    reportBlockedOrganizations(notifications[0].account, {
+      organizations: failures.blocks,
+      hasUnattributed: failures.hasUnattributedBlock,
+    });
+  }
 
   return Promise.all(
-    notifications.map((notification) => enrichSingle(notification, fragments.get(notification))),
+    notifications.map((notification) => enrichSingle(notification, merged.get(notification))),
   );
 }
 
-async function fetchInBatches(
-  notifications: RawGitifyNotification[],
-): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
+async function fetchInBatches(notifications: RawGitifyNotification[]): Promise<{
+  merged: Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>;
+  failures: NotificationDetailFailures;
+}> {
   const supportedNotifications = notifications.filter(
     (notification) => createNotificationHandler(notification).supportsMergedQueryEnrichment,
   );
@@ -58,19 +70,43 @@ async function fetchInBatches(
           `Failed to fetch merged notification details for batch ${index + 1}`,
           toError(err),
         );
-        return new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
+
+        // A thrown batch cannot be attributed to any notification, so it is
+        // recorded as an unattributed block rather than dropped.
+        return {
+          details: new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>(),
+          failures: {
+            blocks: new Map<string, OrganizationBlockReason>(),
+            hasUnattributedBlock: true,
+          },
+        };
       }
     }),
   );
 
   const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
-  for (const results of batchResults) {
-    for (const [notification, repository] of results) {
+  const blocks = new Map<string, OrganizationBlockReason>();
+  let hasUnattributedBlock = false;
+
+  for (const result of batchResults) {
+    for (const [notification, repository] of result.details) {
       merged.set(notification, repository);
     }
+
+    for (const [login, reason] of result.failures.blocks) {
+      blocks.set(login, reason);
+    }
+
+    hasUnattributedBlock ||= result.failures.hasUnattributedBlock;
   }
 
-  return merged;
+  return {
+    merged,
+    failures: {
+      blocks,
+      hasUnattributedBlock,
+    },
+  };
 }
 
 async function enrichSingle(

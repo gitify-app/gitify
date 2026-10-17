@@ -39,6 +39,7 @@ import {
 } from './flows';
 import { createNotificationHandler } from './handlers';
 import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
+import { fetchOrganizationAccess } from './orgs';
 import { getGitHubPlatform } from './platform';
 import { transformNotifications } from './transform';
 import { formatGitHubNotificationUser } from './users';
@@ -196,6 +197,9 @@ export const githubAdapter: ForgeAdapter = {
               command: 'gh auth refresh -s notifications',
             }
           : undefined,
+    },
+    orgAuthorization: {
+      fetchOrganizationAccess,
     },
   },
 };

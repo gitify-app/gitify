@@ -3,6 +3,10 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 import type { GitifyRepository, Link } from '../../../types';
 
 import * as logger from '../../core/logger';
+import {
+  clearOrganizationAuthorization,
+  getOrganizationAuthorization,
+} from '../../notifications/orgAuthorization';
 import * as client from './client';
 import { enrichGitHubNotifications } from './enrich';
 
@@ -22,7 +26,10 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
 
     // No batched fragments — each handler will fall back to its single-fetch
     // path, which we make fail.
-    vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue(new Map());
+    vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue({
+      details: new Map(),
+      failures: { blocks: new Map(), hasUnattributedBlock: false },
+    });
 
     const mockError = new Error('Test error');
     const mockNotification = mockPartialGitifyNotification({
@@ -63,7 +70,10 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
     vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
 
-    vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue(new Map());
+    vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue({
+      details: new Map(),
+      failures: { blocks: new Map(), hasUnattributedBlock: false },
+    });
 
     const failingNotification = mockPartialGitifyNotification({
       title: 'This issue will fail to enrich',
@@ -89,5 +99,65 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
     // reference so callers can detect it; a completed one returns a new one.
     expect(failed.subject).toBe(failingNotification.subject);
     expect(succeeded.subject).not.toBe(succeedingNotification.subject);
+  });
+
+  describe('organization block reporting', () => {
+    beforeEach(() => {
+      clearOrganizationAuthorization();
+    });
+
+    it('records an attributed block against the organization', async () => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map([['acme', 'saml']]), hasUnattributedBlock: false },
+      });
+
+      const notification = mockPartialGitifyNotification({
+        title: 'Blocked by an organization',
+        type: 'Issue',
+        url: 'https://api.github.com/repos/acme/notifications-test/issues/1' as Link,
+      });
+
+      await enrichGitHubNotifications([notification]);
+
+      expect(getOrganizationAuthorization(notification.account).blockedOrganizations).toEqual(
+        new Map([['acme', 'saml']]),
+      );
+    });
+
+    it('records an unattributed block without naming an organization', async () => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue({
+        details: new Map(),
+        failures: { blocks: new Map(), hasUnattributedBlock: true },
+      });
+
+      const notification = mockPartialGitifyNotification({
+        title: 'Blocked by an unknown organization',
+        type: 'Issue',
+        url: 'https://api.github.com/repos/acme/notifications-test/issues/1' as Link,
+      });
+
+      await enrichGitHubNotifications([notification]);
+
+      const signals = getOrganizationAuthorization(notification.account);
+      expect(signals.blockedOrganizations.size).toBe(0);
+      expect(signals.hasUnattributedBlock).toBe(true);
+    });
+
+    it('records an unattributed block when a whole batch throws and keeps base details', async () => {
+      vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
+      vi.mocked(client.fetchNotificationDetailsForList).mockRejectedValue(new Error('boom'));
+
+      const notification = mockPartialGitifyNotification({
+        title: 'Batch failed',
+        type: 'Issue',
+        url: 'https://api.github.com/repos/acme/notifications-test/issues/1' as Link,
+      });
+
+      const [result] = await enrichGitHubNotifications([notification]);
+
+      expect(getOrganizationAuthorization(notification.account).hasUnattributedBlock).toBe(true);
+      expect(result.subject).toBe(notification.subject);
+    });
   });
 });

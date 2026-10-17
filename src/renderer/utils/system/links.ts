@@ -55,6 +55,16 @@ export function openAccountSettings(account: Account) {
   openExternalLink(url);
 }
 
+/**
+ * Open an authorizing link GitHub provided for an organization condition.
+ *
+ * These links are short-lived, so callers must only pass the link from the
+ * account's current condition rather than a link seen earlier.
+ */
+export function openOrganizationAuthorization(url: string) {
+  openExternalLink(url as Link);
+}
+
 export function openRepository(repository: GitifyRepository) {
   openExternalLink(repository.htmlUrl);
 }

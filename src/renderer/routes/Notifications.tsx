@@ -11,6 +11,7 @@ import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/core/errors';
+import { hasWithheldOrganizationAccess } from '../utils/notifications/orgAuthorization';
 import { hasNoAccountErrors } from '../utils/notifications/status';
 
 export function NotificationsRoute() {
@@ -43,7 +44,11 @@ export function NotificationsRoute() {
   }
 
   if (!hasNotifications && noAccountErrors) {
-    return <AllRead />;
+    const mayBeWithheld = notifications.some(({ account }) =>
+      hasWithheldOrganizationAccess(account),
+    );
+
+    return <AllRead mayBeWithheld={mayBeWithheld} />;
   }
 
   return (

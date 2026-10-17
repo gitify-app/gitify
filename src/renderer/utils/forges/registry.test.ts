@@ -98,6 +98,13 @@ describe('renderer/utils/forges/registry.ts', () => {
       expect(getAccountAdapter(mockGitHubCloudAccount).oauthScopes).toBeDefined();
     });
 
+    it('exposes organization authorization for GitHub and omits it for other forges', () => {
+      expect(getAccountAdapter(mockGitHubCloudAccount).orgAuthorization).toBeDefined();
+      expect(getAccountAdapter(mockGiteaAccount).orgAuthorization).toBeUndefined();
+      expect(getAccountAdapter(mockGitLabAccount).orgAuthorization).toBeUndefined();
+      expect(getAccountAdapter(mockBitbucketAccount).orgAuthorization).toBeUndefined();
+    });
+
     it('keeps interleaved operations isolated between accounts on the same forge', async () => {
       const markSpy = vi
         .spyOn(getAdapter('github').accountOps, 'markThreadAsRead')

@@ -16,6 +16,7 @@ function makeContext(overrides: Partial<BuildItemsContext> = {}): BuildItemsCont
     collapsedRepositories: new Set<string>(),
     animatingNotifications: new Set<string>(),
     animatingRepositories: new Map<string, ReadonlySet<string>>(),
+    withheldOrganizationAccountUUIDs: new Set<string>(),
     groupBy: GroupBy.REPOSITORY,
     ...overrides,
   };
@@ -197,7 +198,9 @@ describe('renderer/utils/notifications/listItems.ts', () => {
         makeContext({ groupBy: GroupBy.DATE }),
       );
 
-      expect(items).toEqual([{ key: `all-read-${accountUUID}`, kind: 'all-read' }]);
+      expect(items).toEqual([
+        { key: `all-read-${accountUUID}`, kind: 'all-read', mayBeWithheld: false },
+      ]);
     });
 
     it('delegates to repository grouping when groupBy is REPOSITORY', () => {
@@ -260,6 +263,51 @@ describe('renderer/utils/notifications/listItems.ts', () => {
         makeContext({ groupBy: GroupBy.DATE }),
       );
       expect(allReadItems.map(getItemType)).toEqual(['all-read']);
+    });
+
+    it('marks an account all-read item when organizations are withholding access', () => {
+      const items = buildAccountItems(
+        { account, notifications: [], error: null },
+        makeContext({
+          groupBy: GroupBy.DATE,
+          withheldOrganizationAccountUUIDs: new Set([getAccountUUID(account)]),
+        }),
+      );
+
+      expect(items).toEqual([
+        { key: `all-read-${getAccountUUID(account)}`, kind: 'all-read', mayBeWithheld: true },
+      ]);
+    });
+
+    it('does not mark an all-read item for a different account', () => {
+      const items = buildAccountItems(
+        { account, notifications: [], error: null },
+        makeContext({
+          groupBy: GroupBy.DATE,
+          withheldOrganizationAccountUUIDs: new Set(['another-account']),
+        }),
+      );
+
+      expect(items).toEqual([
+        { key: `all-read-${getAccountUUID(account)}`, kind: 'all-read', mayBeWithheld: false },
+      ]);
+    });
+
+    it('keeps the error item ahead of a withholding condition', () => {
+      const items = buildAccountItems(
+        {
+          account,
+          notifications: [],
+          error: { title: 'Account failed', descriptions: ['Try again'], emojis: ['🔥'] },
+        },
+        makeContext({
+          groupBy: GroupBy.DATE,
+          withheldOrganizationAccountUUIDs: new Set([getAccountUUID(account)]),
+        }),
+      );
+
+      expect(items).toHaveLength(1);
+      expect(items[0].kind).toBe('error');
     });
   });
 });

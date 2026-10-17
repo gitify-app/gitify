@@ -48,7 +48,7 @@ export function getAdapter(forgeOrAccount: Forge | Account): ForgeAdapter {
 /** Create a view for this account snapshot; resolve a new view when the account changes. */
 export function getAccountAdapter(account: Account): ForgeAccountAdapter {
   const { accountOps } = getAdapter(account);
-  const { capabilities, oauthScopes } = accountOps;
+  const { capabilities, oauthScopes, orgAuthorization } = accountOps;
   // Optional method, so bind it to keep a single reference and avoid an unbound
   // method reference (the adapter ops are otherwise called as `accountOps.x(...)`).
   const onAccountTokenChange = accountOps.onAccountTokenChange?.bind(accountOps);
@@ -76,6 +76,11 @@ export function getAccountAdapter(account: Account): ForgeAccountAdapter {
           hasRecommended: () => oauthScopes.hasRecommended(account),
           hasAlternate: () => oauthScopes.hasAlternate(account),
           externallyManaged: () => oauthScopes.externallyManaged(account),
+        }
+      : undefined,
+    orgAuthorization: orgAuthorization
+      ? {
+          fetchOrganizationAccess: () => orgAuthorization.fetchOrganizationAccess(account),
         }
       : undefined,
   };
