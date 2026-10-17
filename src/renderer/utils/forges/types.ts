@@ -4,7 +4,7 @@ import type { OcticonProps } from '@primer/octicons-react';
 
 import type {
   Account,
-  AuthCode,
+  ClientID,
   Forge,
   Hostname,
   IconColor,
@@ -14,13 +14,7 @@ import type {
   Token,
   UserType,
 } from '../../types';
-import type {
-  AuthMethod,
-  AuthResponse,
-  DeviceFlowSession,
-  LoginOAuthWebOptions,
-  PlatformType,
-} from '../auth/types';
+import type { AuthMethod, DeviceFlowSession, PlatformType } from '../auth/types';
 
 /**
  * Capability flags exposed by a forge adapter.
@@ -153,6 +147,11 @@ export interface ForgeAdapter {
   getOrigin?(hostname: Hostname): string;
   /** Whether the supplied token matches the forge's PAT format. */
   validateToken(token: Token): boolean;
+  /**
+   * Whether the supplied OAuth client ID matches the forge's expected format.
+   * Omitted by forges with no user-supplied OAuth app flow.
+   */
+  validateClientId?(clientId: string): boolean;
   /** URL to manage/create a personal access token on the forge. */
   getPersonalAccessTokenSettingsUrl(hostname: Hostname): Link;
   /** Login entries rendered in the Login route. */
@@ -178,12 +177,6 @@ export interface ForgeAdapter {
    * its presence.
    */
   deviceFlow?: DeviceFlowSupport;
-
-  /**
-   * Custom-OAuth-app web flow. Forges without OAuth-app support (e.g. Gitea)
-   * omit this bundle entirely — callers gate the OAuth-app UI on its presence.
-   */
-  oauthWebApp?: OAuthWebAppSupport;
 
   /**
    * Reuse of a locally installed forge CLI's credential. Forges whose CLI
@@ -321,34 +314,25 @@ export interface ExternallyManagedScopes {
 }
 
 /**
- * Custom-OAuth-app web flow capability bundle. Present only on forges that
- * support browser-redirect OAuth with user-supplied client credentials
- * (GitHub today).
- */
-export interface OAuthWebAppSupport {
-  /** Start the OAuth web flow and return the auth code once the user consents. */
-  performWebOAuth(options: LoginOAuthWebOptions): Promise<AuthResponse>;
-  /** Exchange an OAuth web-flow authorization code for an access token. */
-  exchangeAuthCodeForToken(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
-  /** Whether the supplied OAuth client ID matches the forge's expected format. */
-  validateClientId(clientId: string): boolean;
-  /** URL the user visits to create a new OAuth app on the forge. */
-  getNewOAuthAppUrl(hostname: Hostname): Link;
-}
-
-/**
  * OAuth device-flow capability bundle. Present only on forges that support
  * browser-side device authorisation (GitHub today).
  */
 export interface DeviceFlowSupport {
   /** `AuthMethod` recorded on the account when a successful login completes. */
   authMethod: AuthMethod;
-  /** Start a device-flow authorization session. */
-  start(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
+  /**
+   * Start a device-flow authorization session.
+   *
+   * `clientId` authorizes the user's own OAuth app instead of Gitify's
+   * preconfigured one; when omitted the forge's built-in app is used.
+   */
+  start(hostname?: Hostname, scopes?: string[], clientId?: ClientID): Promise<DeviceFlowSession>;
   /** Poll for completion; resolves to a token when granted. */
   poll(session: DeviceFlowSession): Promise<Token | null>;
-  /** URL the user visits to revoke Gitify's access on this forge. */
-  getRevokeAccessUrl(hostname: Hostname): Link;
+  /** URL the user visits to revoke the authorized OAuth app's access on this forge. */
+  getRevokeAccessUrl(hostname: Hostname, clientId?: ClientID): Link;
+  /** URL the user visits to register an OAuth app that can authorize via the device flow. */
+  getNewOAuthAppUrl(hostname: Hostname): Link;
 }
 
 /**

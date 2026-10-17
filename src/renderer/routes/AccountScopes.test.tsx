@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../__helpers__/test-utils';
 import {
-  mockGitHubAppAccount,
+  mockGitifyOAuthAppAccount,
   mockGitHubCliAccount,
-  mockOAuthAccount,
+  mockCustomOAuthAppAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
 
@@ -19,7 +19,7 @@ const navigateMock = vi.fn();
 // Mutable variable — individual tests reassign this before rendering to simulate
 // different account states without needing vi.doMock.
 let mockLocationAccount: Account = {
-  ...mockGitHubAppAccount,
+  ...mockGitifyOAuthAppAccount,
   scopes: ['read:user', 'notifications', 'repo'],
 };
 
@@ -35,7 +35,7 @@ vi.mock('react-router-dom', async (importActual) => {
 describe('renderer/routes/AccountScopes.tsx', () => {
   beforeEach(() => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications', 'repo'],
     };
   });
@@ -97,7 +97,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should show all-granted status when account has public_repo instead of repo', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications', 'public_repo'],
     };
 
@@ -112,7 +112,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should show missing indicator when neither repo nor public_repo is granted', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications'],
     };
 
@@ -128,7 +128,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should show missing indicator when notifications scope is absent', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'repo'],
     };
 
@@ -142,7 +142,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('should show extra scopes when token has additional permissions', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications', 'repo', 'write:packages', 'read:org'],
     };
 
@@ -156,7 +156,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
   });
 
   it('should show no-scopes message when scopes are not loaded', async () => {
-    mockLocationAccount = { ...mockGitHubAppAccount, scopes: undefined };
+    mockLocationAccount = { ...mockGitifyOAuthAppAccount, scopes: undefined };
 
     await act(async () => {
       renderWithProviders(<AccountScopesRoute />);
@@ -191,8 +191,8 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   describe('all auth methods show permissions button', () => {
     it.each([
-      ['GitHub App', mockGitHubAppAccount],
-      ['OAuth App', mockOAuthAccount],
+      ['Gitify OAuth App', mockGitifyOAuthAppAccount],
+      ['Custom OAuth App', mockCustomOAuthAppAccount],
       ['Personal Access Token', mockPersonalAccessTokenAccount],
     ])('%s account has a permissions button', async (_method, account) => {
       mockLocationAccount = {

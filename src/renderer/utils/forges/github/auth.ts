@@ -62,9 +62,9 @@ export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
 /**
  * Return the GitHub developer settings URL appropriate for the account's auth method.
  *
- * - GitHub App → application connections page
+ * - Gitify OAuth App / Custom OAuth App → the OAuth app's connection page for the
+ *   account's own client ID (falling back to Gitify's preconfigured app)
  * - GitHub CLI → authorized applications page
- * - OAuth App → developer settings page
  * - Personal Access Token → tokens settings page
  *
  * @param account - The account whose settings URL to build.
@@ -74,14 +74,14 @@ export function getDeveloperSettingsURL(account: Account): Link {
   const settingsURL = new URL(`https://${account.hostname}`);
 
   switch (account.method) {
-    case 'GitHub App':
-      settingsURL.pathname = `/settings/connections/applications/${Constants.OAUTH_DEVICE_FLOW_CLIENT_ID}`;
+    case 'Gitify OAuth App':
+    case 'Custom OAuth App':
+      settingsURL.pathname = `/settings/connections/applications/${
+        account.clientId ?? Constants.OAUTH_DEVICE_FLOW_CLIENT_ID
+      }`;
       break;
     case 'GitHub CLI':
       settingsURL.pathname = '/settings/applications';
-      break;
-    case 'OAuth App':
-      settingsURL.pathname = '/settings/developers';
       break;
     case 'Personal Access Token':
       settingsURL.pathname = '/settings/tokens';
@@ -115,8 +115,10 @@ export function getNewTokenURL(hostname: Hostname): Link {
 /**
  * Build a pre-filled URL for registering a new OAuth App.
  *
- * Pre-populates the app name (with creation date), homepage URL, and
- * the `gitify://oauth` callback URL.
+ * Pre-populates the app name (with creation date) and homepage URL. No callback
+ * URL is set: the custom OAuth app authorizes through the device flow, which
+ * needs no browser redirect. The user must still enable the device flow in the
+ * app's settings after registering it.
  *
  * @param hostname - The GitHub hostname to register the app on.
  * @returns The URL with pre-filled query parameters.
@@ -129,7 +131,6 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
     `${APPLICATION.NAME} (Created on ${date})`,
   );
   newOAuthAppURL.searchParams.append('oauth_application[url]', 'https://gitify.io');
-  newOAuthAppURL.searchParams.append('oauth_application[callback_url]', 'gitify://oauth');
 
   return newOAuthAppURL.toString() as Link;
 }

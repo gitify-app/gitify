@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import {
-  mockGitHubAppAccount,
+  mockGitifyOAuthAppAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../__mocks__/account-mocks';
 
@@ -91,7 +91,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
+        accounts: [mockGitifyOAuthAppAccount],
       });
     });
 
@@ -135,7 +135,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
   it('reactively hides the account header checkbox when a second account is added', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
+        accounts: [mockGitifyOAuthAppAccount],
       });
     });
 
@@ -143,7 +143,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     await act(async () => {
       useAccountsStore.setState({
-        accounts: [mockGitHubAppAccount, mockGitHubEnterpriseServerAccount],
+        accounts: [mockGitifyOAuthAppAccount, mockGitHubEnterpriseServerAccount],
       });
     });
 

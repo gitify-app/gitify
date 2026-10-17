@@ -2,9 +2,9 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitHubAppAccount } from '../../__mocks__/account-mocks';
+import { mockGitifyOAuthAppAccount } from '../../__mocks__/account-mocks';
 
-import type { Hostname } from '../../types';
+import type { ClientID, Hostname } from '../../types';
 
 import * as logger from '../../utils/core/logger';
 import * as comms from '../../utils/system/comms';
@@ -54,11 +54,12 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
 
     await userEvent.click(screen.getByTestId('device-scope-public'));
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
-      'notifications',
-      'read:user',
-      'public_repo',
-    ]);
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(
+      'github',
+      'github.com',
+      ['notifications', 'read:user', 'public_repo'],
+      undefined,
+    );
 
     await screen.findByTestId('device-user-code');
     expect(screen.getByTestId('open-browser-button')).toBeInTheDocument();
@@ -85,11 +86,12 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
 
     await userEvent.click(screen.getByTestId('device-scope-full'));
 
-    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
-      'notifications',
-      'read:user',
-      'repo',
-    ]);
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(
+      'github',
+      'github.com',
+      ['notifications', 'read:user', 'repo'],
+      undefined,
+    );
 
     await screen.findByTestId('device-user-code');
   });
@@ -234,6 +236,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
         'github',
         'access-token',
         'github.com',
+        undefined,
       );
       expect(navigateMock).toHaveBeenCalledWith('/');
     });
@@ -314,7 +317,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
           pathname: '/login/github/device-flow',
           state: {
             account: {
-              ...mockGitHubAppAccount,
+              ...mockGitifyOAuthAppAccount,
               hostname: 'github.enterprise.example' as Hostname,
             },
           },
@@ -328,6 +331,36 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       'github',
       'github.enterprise.example',
       ['notifications', 'read:user', 'repo'],
+      undefined,
+    );
+  });
+
+  it('threads a custom client ID and hostname through the device flow', async () => {
+    const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
+      hostname: 'github.example.com',
+      clientId: 'CUSTOM_CLIENT_ID_123',
+      deviceCode: 'device-code',
+      userCode: 'USER-1234',
+      verificationUri: 'https://github.example.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 900000,
+    });
+
+    renderWithProviders(
+      <GitHubLoginWithDeviceFlowRoute
+        clientId={'CUSTOM_CLIENT_ID_123' as ClientID}
+        hostname={'github.example.com' as Hostname}
+      />,
+      { loginWithDeviceFlowStart: loginWithDeviceFlowStartMock },
+    );
+
+    await userEvent.click(screen.getByTestId('device-scope-full'));
+
+    expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(
+      'github',
+      'github.example.com',
+      ['notifications', 'read:user', 'repo'],
+      'CUSTOM_CLIENT_ID_123',
     );
   });
 

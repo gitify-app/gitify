@@ -105,7 +105,6 @@ function createGitifyBridgeApi(): Window['gitify'] {
       useUnreadActiveIcon: vi.fn(),
     },
     notificationSoundPath: vi.fn(),
-    onAuthCallback: vi.fn(() => vi.fn()),
     onResetApp: vi.fn(() => vi.fn()),
     onSystemWake: vi.fn(() => vi.fn()),
     setAutoLaunch: vi.fn(),

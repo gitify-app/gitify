@@ -1,10 +1,4 @@
-import {
-  AppsIcon,
-  KeyIcon,
-  MarkGithubIcon,
-  PersonIcon,
-  TerminalIcon,
-} from '@primer/octicons-react';
+import { KeyIcon, MarkGithubIcon, PersonIcon, TerminalIcon } from '@primer/octicons-react';
 
 import { Constants, OAUTH_SCOPE } from '../../../constants';
 
@@ -31,12 +25,7 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
-import {
-  exchangeAuthCodeForAccessToken,
-  performGitHubWebOAuth,
-  pollGitHubDeviceFlow,
-  startGitHubDeviceFlow,
-} from './flows';
+import { pollGitHubDeviceFlow, startGitHubDeviceFlow } from './flows';
 import { createNotificationHandler } from './handlers';
 import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
 import { getGitHubPlatform } from './platform';
@@ -104,6 +93,7 @@ export const githubAdapter: ForgeAdapter = {
 
   defaultHostname: Constants.GITHUB_HOSTNAME,
   validateToken: isValidToken,
+  validateClientId: isValidClientId,
   validateHostname: isValidHostname,
   getPersonalAccessTokenSettingsUrl: getNewTokenURL,
   documentationUrl: Constants.GITHUB_DOCS.PAT_URL as Link,
@@ -116,7 +106,7 @@ export const githubAdapter: ForgeAdapter = {
       label: 'GitHub',
       variant: 'primary',
       route: '/login/github/device-flow',
-      authMethod: 'GitHub App',
+      authMethod: 'Gitify OAuth App',
     },
     {
       testId: 'login-pat',
@@ -133,26 +123,20 @@ export const githubAdapter: ForgeAdapter = {
       authMethod: 'GitHub CLI',
     },
     {
-      testId: 'login-oauth-app',
+      testId: 'login-custom-oauth-app',
       icon: PersonIcon,
-      label: 'OAuth App',
-      route: '/login/github/oauth-app',
-      authMethod: 'OAuth App',
+      label: 'Custom OAuth App',
+      route: '/login/github/custom-oauth-app',
+      authMethod: 'Custom OAuth App',
     },
   ],
 
   deviceFlow: {
-    authMethod: 'GitHub App',
+    authMethod: 'Gitify OAuth App',
     start: startGitHubDeviceFlow,
     poll: pollGitHubDeviceFlow,
-    getRevokeAccessUrl: (hostname) =>
-      getDeveloperSettingsURL({ hostname, method: 'GitHub App' } as Account),
-  },
-
-  oauthWebApp: {
-    performWebOAuth: performGitHubWebOAuth,
-    exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
-    validateClientId: isValidClientId,
+    getRevokeAccessUrl: (hostname, clientId) =>
+      getDeveloperSettingsURL({ hostname, method: 'Custom OAuth App', clientId } as Account),
     getNewOAuthAppUrl: getNewOAuthAppURL,
   },
 
@@ -231,12 +215,11 @@ function accountHasScopes(
 
 function githubAuthMethodIcon(method: AuthMethod) {
   switch (method) {
-    case 'GitHub App':
-      return AppsIcon;
+    case 'Gitify OAuth App':
+    case 'Custom OAuth App':
+      return PersonIcon;
     case 'GitHub CLI':
       return TerminalIcon;
-    case 'OAuth App':
-      return PersonIcon;
     default:
       return KeyIcon;
   }

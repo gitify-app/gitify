@@ -20,11 +20,12 @@ import { Page } from '../../components/layout/Page';
 import { Footer } from '../../components/primitives/Footer';
 import { Header } from '../../components/primitives/Header';
 
-import type { Account, Forge, Hostname, Link } from '../../types';
+import type { Account, ClientID, Forge, Hostname, Link } from '../../types';
 import type { DeviceFlowSession } from '../../utils/auth/types';
 
 import { getAlternateScopeNames, getRecommendedScopeNames } from '../../utils/auth/scopes';
 import { rendererLogError, toError } from '../../utils/core/logger';
+import { describeDeviceFlowError } from '../../utils/forges/github/flows';
 import { getAdapter } from '../../utils/forges/registry';
 import { copyToClipboard, openExternalLink } from '../../utils/system/comms';
 
@@ -32,14 +33,31 @@ interface LocationState {
   account?: Account;
 }
 
+interface GitHubLoginWithDeviceFlowRouteProps {
+  /** OAuth app client ID to authorize; omit to use Gitify's preconfigured app. */
+  clientId?: ClientID;
+  /** Hostname to authenticate against; defaults to the re-auth account or GitHub.com. */
+  hostname?: Hostname;
+  /** Page heading; defaults to authorizing Gitify's preconfigured app. */
+  title?: string;
+}
+
 type ScopeChoice = 'public' | 'full';
 
-export function GitHubLoginWithDeviceFlowRoute() {
+export function GitHubLoginWithDeviceFlowRoute({
+  clientId,
+  hostname,
+  title,
+}: GitHubLoginWithDeviceFlowRouteProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
   const forge: Forge = 'github';
+
+  const effectiveHostname = (hostname ??
+    reAuthAccount?.hostname ??
+    Constants.GITHUB_HOSTNAME) as Hostname;
 
   const { loginWithDeviceFlowStart, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete } =
     useLogins();
@@ -56,7 +74,12 @@ export function GitHubLoginWithDeviceFlowRoute() {
         const scopes =
           scopeChoice === 'public' ? getAlternateScopeNames() : getRecommendedScopeNames();
 
-        const newSession = await loginWithDeviceFlowStart(forge, reAuthAccount?.hostname, scopes);
+        const newSession = await loginWithDeviceFlowStart(
+          forge,
+          effectiveHostname,
+          scopes,
+          clientId,
+        );
         setSession(newSession);
 
         // Auto-copy the user code to clipboard
@@ -66,14 +89,17 @@ export function GitHubLoginWithDeviceFlowRoute() {
         openExternalLink(newSession.verificationUri as Link);
       } catch (err) {
         rendererLogError('LoginWithDeviceFlow', 'Failed to start device flow', toError(err));
-        setError('Failed to start authentication. Please try again.');
+        setError(
+          describeDeviceFlowError(err, effectiveHostname, clientId) ??
+            'Failed to start authentication. Please try again.',
+        );
       }
     };
 
     if (scopeChoice) {
       void initializeDeviceFlow();
     }
-  }, [loginWithDeviceFlowStart, reAuthAccount, scopeChoice, forge]);
+  }, [loginWithDeviceFlowStart, effectiveHostname, clientId, scopeChoice, forge]);
 
   // Poll for device flow completion
   useEffect(() => {
@@ -98,7 +124,7 @@ export function GitHubLoginWithDeviceFlowRoute() {
         const token = await loginWithDeviceFlowPoll(forge, session);
 
         if (token && isActive) {
-          await loginWithDeviceFlowComplete(forge, token, session.hostname);
+          await loginWithDeviceFlowComplete(forge, token, session.hostname, clientId);
           void navigate('/');
           return;
         }
@@ -133,7 +159,7 @@ export function GitHubLoginWithDeviceFlowRoute() {
       }
     };
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
-  }, [session, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete, forge]);
+  }, [session, loginWithDeviceFlowPoll, loginWithDeviceFlowComplete, clientId, forge]);
 
   const handleCopyUserCode = useCallback(async () => {
     if (session?.userCode) {
@@ -249,9 +275,7 @@ export function GitHubLoginWithDeviceFlowRoute() {
 
         {(() => {
           const adapter = getAdapter(forge);
-          const revokeUrl = adapter.deviceFlow?.getRevokeAccessUrl(
-            (reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME) as Hostname,
-          );
+          const revokeUrl = adapter.deviceFlow?.getRevokeAccessUrl(effectiveHostname, clientId);
           if (!revokeUrl) {
             return null;
           }
@@ -259,7 +283,9 @@ export function GitHubLoginWithDeviceFlowRoute() {
           return (
             <Stack gap="none">
               <Text as="em" size="small">
-                Note: to change previously granted permissions, revoke Gitify's access at{' '}
+                {clientId
+                  ? "Note: to change previously granted permissions, revoke your app's access at"
+                  : "Note: to change previously granted permissions, revoke Gitify's access at"}{' '}
                 <button
                   className="text-gitify-link cursor-pointer"
                   onClick={() => openExternalLink(revokeUrl)}
@@ -301,7 +327,7 @@ export function GitHubLoginWithDeviceFlowRoute() {
 
   return (
     <Page testId="Login With Device Flow">
-      <Header icon={SignInIcon}>Authorize with GitHub</Header>
+      <Header icon={SignInIcon}>{title ?? 'Authorize with GitHub'}</Header>
 
       <Contents scrollFade>
         {error && (

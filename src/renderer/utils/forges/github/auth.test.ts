@@ -61,22 +61,32 @@ describe('renderer/utils/forges/github/auth.ts', () => {
   });
 
   describe('getDeveloperSettingsURL', () => {
-    it('returns the GitHub App connections URL', () => {
+    it('returns the connections URL for Gitify OAuth App accounts', () => {
       expect(
         getDeveloperSettingsURL({
           hostname: 'github.com' as Hostname,
-          method: 'GitHub App',
+          method: 'Gitify OAuth App',
         } as Account),
       ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
     });
 
-    it('returns the OAuth App developer URL', () => {
+    it("returns the connections URL for a custom app's own client ID", () => {
       expect(
         getDeveloperSettingsURL({
           hostname: 'github.com' as Hostname,
-          method: 'OAuth App',
+          method: 'Custom OAuth App',
+          clientId: 'CUSTOM_CLIENT_ID_123' as ClientID,
         } as Account),
-      ).toBe('https://github.com/settings/developers');
+      ).toBe('https://github.com/settings/connections/applications/CUSTOM_CLIENT_ID_123');
+    });
+
+    it('falls back to the preconfigured app when a custom account stores no client ID', () => {
+      expect(
+        getDeveloperSettingsURL({
+          hostname: 'github.com' as Hostname,
+          method: 'Custom OAuth App',
+        } as Account),
+      ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
     });
 
     it('returns the PAT settings URL', () => {
@@ -131,6 +141,10 @@ describe('renderer/utils/forges/github/auth.ts', () => {
           'https://github.gitify.io/settings/applications/new',
         ),
       ).toBeTruthy();
+    });
+
+    it('does not pre-fill a callback URL for a device-flow custom app', () => {
+      expect(getNewOAuthAppURL('github.com' as Hostname)).not.toContain('callback_url');
     });
   });
 
