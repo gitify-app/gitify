@@ -226,6 +226,9 @@ importers:
       '@graphql-codegen/schema-ast':
         specifier: 6.1.1
         version: 6.1.1(graphql@17.0.2)
+      '@graphql-codegen/typed-document-node':
+        specifier: 7.2.0
+        version: 7.2.0(graphql@17.0.2)
       '@graphql-codegen/typescript-operations':
         specifier: 6.1.10
         version: 6.1.10(graphql@17.0.2)
