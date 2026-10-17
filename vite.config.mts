@@ -283,6 +283,38 @@ export default defineConfig({
         },
       },
       {
+        // Renderer boundary: the notification UI renders once per notification
+        // (rows, repository headers, account headers) and receives its data via
+        // props from the route. It must not subscribe to the notifications query:
+        // every observer re-runs `select` and the structural-sharing walk on each
+        // cache write, so subscribing here multiplies that cost by the number of
+        // mounted items. Action-only consumers use `useNotificationActions`.
+        // See ARCHITECTURE.md.
+        files: [
+          'src/renderer/components/notifications/**/*.ts',
+          'src/renderer/components/notifications/**/*.tsx',
+        ],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                {
+                  group: [
+                    '**/hooks/useNotifications',
+                    '**/hooks/notifications/useNotificationsQuery',
+                    '**/hooks/notifications/useNotificationsHost',
+                  ],
+                  message:
+                    'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
         // Renderer boundary: `icons` is a presentational leaf. It may not
         // depend on any implementation layer. See ARCHITECTURE.md.
         files: ['src/renderer/icons/**/*.ts', 'src/renderer/icons/**/*.tsx'],
