@@ -6,6 +6,7 @@ import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { AllRead } from '../components/AllRead';
 import { Page } from '../components/layout/Page';
+import { Loading } from '../components/Loading';
 import { NotificationList } from '../components/notifications/NotificationList';
 import { Oops } from '../components/Oops';
 
@@ -40,6 +41,10 @@ export function NotificationsRoute() {
 
   if (status === 'error') {
     return <Oops error={globalError ?? Errors.UNKNOWN} />;
+  }
+
+  if (status === 'loading') {
+    return <Loading />;
   }
 
   if (!hasNotifications && noAccountErrors) {

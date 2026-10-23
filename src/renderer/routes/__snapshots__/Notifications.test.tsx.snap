@@ -73,3 +73,11 @@ exports[`renderer/routes/Notifications.tsx > should render itself & its children
   </div>
 </div>
 `;
+
+exports[`renderer/routes/Notifications.tsx > should render loading state instead of all-read while notifications are loading 1`] = `
+<div>
+  <p>
+    Loading
+  </p>
+</div>
+`;
