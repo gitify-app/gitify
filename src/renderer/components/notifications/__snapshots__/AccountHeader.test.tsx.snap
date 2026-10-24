@@ -20,7 +20,7 @@ exports[`renderer/components/notifications/AccountHeader.tsx > should render an 
       data-size="medium"
       data-testid="account-profile"
       data-variant="invisible"
-      title="Open account profile"
+      title="Open account profile ↗"
       type="button"
     >
       <span

@@ -15,18 +15,18 @@ const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
   },
   open: {
     title: 'Open',
-    description: 'Open or reopened',
+    description: 'Open or reopened.',
   },
   merged: {
     title: 'Merged',
   },
   closed: {
     title: 'Closed',
-    description: 'Closed, completed, duplicate, resolved or not planned',
+    description: 'Closed, completed, duplicate, resolved, or not planned.',
   },
   other: {
     title: 'Other',
-    description: 'Catch all for any other notification states',
+    description: 'Any other notification state.',
   },
 };
 

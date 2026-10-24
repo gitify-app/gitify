@@ -16,7 +16,7 @@ describe('renderer/components/metrics/StackedPrsPill.tsx', () => {
   it('renders a pill with no position/depth metric when position is missing', () => {
     const tree = renderWithProviders(<StackedPrsPill isStacked stackDepth={2} />);
     // Only the tooltip contents, with no metric text alongside it
-    expect(tree.container.textContent).toBe('Part of a stacked PR series');
+    expect(tree.container.textContent).toBe('Part of a stacked pull request series');
   });
 
   it('renders the metric for the first position in a stack', () => {

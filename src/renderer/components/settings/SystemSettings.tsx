@@ -149,8 +149,8 @@ export function SystemSettings() {
                 current window.
               </Text>
               <Text>
-                This applies to every link Gitify opens, including notification links opened in the
-                browser.
+                This applies to every link {APPLICATION.NAME} opens, including notification links
+                opened in the browser.
               </Text>
             </Stack>
           }
@@ -264,12 +264,7 @@ export function SystemSettings() {
           label="Keep window open when unfocused"
           name="keepWindowOnBlur"
           onChange={() => toggleSetting('keepWindowOnBlur')}
-          tooltip={
-            <Text>
-              Prevent the {APPLICATION.NAME} window from automatically hiding when you click outside
-              it.
-            </Text>
-          }
+          tooltip={<Text>Keep the {APPLICATION.NAME} window open when you click outside it.</Text>}
         />
 
         <Checkbox
@@ -288,10 +283,10 @@ export function SystemSettings() {
           onChange={() => toggleSetting('useX11Backend')}
           tooltip={
             <Text>
-              Run under X11/XWayland so the window opens next to the tray icon. On Wayland, window
-              placement depends on your compositor and its extensions. Enabling this also disables
-              Vulkan, which crashes under X11 on some drivers, and may soften text on displays using
-              fractional scaling. Takes effect after restarting {APPLICATION.NAME}.
+              Run {APPLICATION.NAME} under X11/XWayland so the window can open next to the tray
+              icon. Wayland placement still depends on your compositor and its extensions. This
+              disables Vulkan and may soften text on fractional-scaling displays. Takes effect after
+              restarting {APPLICATION.NAME}.
             </Text>
           }
           visible={isLinux}
@@ -300,8 +295,8 @@ export function SystemSettings() {
         {isLinux && (
           <Stack gap="condensed">
             <Text className="text-sm text-gitify-font">
-              On GNOME Wayland, install the Gitify extension to open the window next to its tray
-              icon. Install and manage it through GNOME's extension tools.
+              On GNOME Wayland, install the {APPLICATION.NAME} extension to open the window next to
+              its tray icon. Install and manage it through GNOME's extension tools.
             </Text>
             <Button
               onClick={() =>

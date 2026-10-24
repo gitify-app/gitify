@@ -50,7 +50,7 @@ export function AccountHeader({
           event.stopPropagation();
           openAccountProfile(account);
         }}
-        title="Open account profile"
+        title="Open account profile ↗"
         variant="invisible"
       >
         <AvatarWithFallback

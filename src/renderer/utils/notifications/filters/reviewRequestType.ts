@@ -11,16 +11,15 @@ import type { Filter } from './types';
 const REVIEW_REQUEST_TYPE_DETAILS: Record<ReviewRequestTypeFilterValue, TypeDetails> = {
   direct: {
     title: 'Direct',
-    description: 'You were directly requested as a reviewer.',
+    description: 'You were asked to review directly.',
   },
   team: {
     title: 'Team',
-    description: 'A team you are a member of was requested to review.',
+    description: 'A team you belong to was asked to review.',
   },
   other: {
     title: 'Other',
-    description:
-      'Notifications that are not a review request, e.g. mentions, comments, assigned issues.',
+    description: 'Not a review request, such as a mention, comment, or assigned issue.',
   },
 };
 

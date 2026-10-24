@@ -86,8 +86,8 @@ export function InboxSettings() {
             name="fetchInterval"
             tooltip={
               <Text>
-                Set how often Gitify checks for new notifications. Shorter intervals check more
-                often and use more API requests.
+                Check for new notifications at this interval. Shorter intervals keep the list
+                fresher but spend more API requests.
               </Text>
             }
           />
@@ -167,7 +167,7 @@ export function InboxSettings() {
               </Text>
               <Text>
                 When <Text as="u">unchecked</Text>, {APPLICATION.NAME} will fetch the first page of
-                notifications (max 50 records per GitHub account)
+                notifications.
               </Text>
             </Stack>
           }
@@ -226,10 +226,7 @@ export function InboxSettings() {
           name="showAccountHeader"
           onChange={() => toggleSetting('showAccountHeader')}
           tooltip={
-            <Text>
-              When enabled, displays an account header (avatar, username and quick links) above the
-              notifications list.
-            </Text>
+            <Text>Show your avatar, username, and quick links above the notifications list.</Text>
           }
           visible={!hasMultipleAccounts}
         />
@@ -241,9 +238,7 @@ export function InboxSettings() {
           onChange={() => toggleSetting('wrapNotificationTitle')}
           tooltip={
             <Text>
-              Wrap long notification titles onto multiple lines instead of truncating with an
-              ellipsis. This shows the full title but may increase the height of the notification
-              list.
+              Wrap long notification titles onto multiple lines instead of truncating them.
             </Text>
           }
         />
@@ -428,7 +423,7 @@ export function InboxSettings() {
                           </Stack>
                           <Stack direction="horizontal" gap="condensed">
                             <CheckIcon size={Size.SMALL} />
-                            pr reviews
+                            pull request reviews
                           </Stack>
                           <Stack direction="horizontal" gap="condensed">
                             <CommentIcon size={Size.SMALL} />
@@ -458,8 +453,8 @@ export function InboxSettings() {
               onChange={() => toggleSetting('markAsDoneOnOpen')}
               tooltip={
                 <Text>
-                  <Text as="strong">Mark as done</Text> is supported in GitHub Cloud and GitHub
-                  Enterprise Server 3.13 or later.
+                  <Text as="strong">Mark as done</Text> feature is supported by GitHub Cloud and
+                  GitHub Enterprise Server 3.13 or later.
                 </Text>
               }
             />
@@ -472,8 +467,8 @@ export function InboxSettings() {
               onChange={() => toggleSetting('markAsDoneOnUnsubscribe')}
               tooltip={
                 <Text>
-                  <Text as="strong">Mark as done</Text> is supported in GitHub Cloud and GitHub
-                  Enterprise Server 3.13 or later.
+                  <Text as="strong">Mark as done</Text> feature is supported by GitHub Cloud and
+                  GitHub Enterprise Server 3.13 or later.
                 </Text>
               }
             />

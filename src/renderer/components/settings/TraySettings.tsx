@@ -49,7 +49,9 @@ export function TraySettings() {
           onChange={() => toggleSetting('useUnreadActiveIcon')}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Use a green {APPLICATION.NAME} logo when there are unread notifications.</Text>
+              <Text>
+                Turn the {APPLICATION.NAME} logo green while there are unread notifications.
+              </Text>
             </Stack>
           }
         />
@@ -71,12 +73,12 @@ export function TraySettings() {
           }}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Choose a light icon for a dark panel, or a dark icon for a light panel.</Text>
+              <Text>Pick a light icon for dark panels or a dark icon for light panels.</Text>
               <Text>
-                Automatic follows the system tray appearance on macOS and Windows. On Linux, it uses
-                a light icon because panel appearance cannot be detected reliably.
+                Choose Automatic to follow the tray appearance on macOS and Windows; Linux uses
+                light because panel detection is unreliable.
               </Text>
-              <Text>This setting is independent of Gitify’s app theme.</Text>
+              <Text>This setting is independent of the {APPLICATION.NAME} app theme.</Text>
             </Stack>
           }
         />
