@@ -397,47 +397,49 @@ export function InboxSettings() {
                 </Stack>
               )}
 
-            <div className="pl-6" hidden={!detailedNotifications}>
-              <Checkbox
-                checked={showPills}
-                label="Show notification metrics"
-                name="showPills"
-                onChange={() => toggleSetting('showPills')}
-                tooltip={
-                  <Stack direction="vertical" gap="condensed">
-                    <Text>Show notification metrics for:</Text>
-                    <div className="pl-2">
-                      <Stack direction="vertical" gap="none">
-                        <Stack direction="horizontal" gap="condensed">
-                          <IssueOpenedIcon size={Size.SMALL} />
-                          linked issues
+            {detailedNotifications && (
+              <div className="pl-6">
+                <Checkbox
+                  checked={showPills}
+                  label="Show notification metrics"
+                  name="showPills"
+                  onChange={() => toggleSetting('showPills')}
+                  tooltip={
+                    <Stack direction="vertical" gap="condensed">
+                      <Text>Show notification metrics for:</Text>
+                      <div className="pl-2">
+                        <Stack direction="vertical" gap="none">
+                          <Stack direction="horizontal" gap="condensed">
+                            <IssueOpenedIcon size={Size.SMALL} />
+                            linked issues
+                          </Stack>
+                          <Stack direction="horizontal" gap="condensed">
+                            <SmileyIcon size={Size.SMALL} />
+                            reactions
+                          </Stack>
+                          <Stack direction="horizontal" gap="condensed">
+                            <CheckIcon size={Size.SMALL} />
+                            pr reviews
+                          </Stack>
+                          <Stack direction="horizontal" gap="condensed">
+                            <CommentIcon size={Size.SMALL} />
+                            comments
+                          </Stack>
+                          <Stack direction="horizontal" gap="condensed">
+                            <TagIcon size={Size.SMALL} />
+                            labels
+                          </Stack>
+                          <Stack direction="horizontal" gap="condensed">
+                            <MilestoneIcon size={Size.SMALL} />
+                            milestones
+                          </Stack>
                         </Stack>
-                        <Stack direction="horizontal" gap="condensed">
-                          <SmileyIcon size={Size.SMALL} />
-                          reactions
-                        </Stack>
-                        <Stack direction="horizontal" gap="condensed">
-                          <CheckIcon size={Size.SMALL} />
-                          pr reviews
-                        </Stack>
-                        <Stack direction="horizontal" gap="condensed">
-                          <CommentIcon size={Size.SMALL} />
-                          comments
-                        </Stack>
-                        <Stack direction="horizontal" gap="condensed">
-                          <TagIcon size={Size.SMALL} />
-                          labels
-                        </Stack>
-                        <Stack direction="horizontal" gap="condensed">
-                          <MilestoneIcon size={Size.SMALL} />
-                          milestones
-                        </Stack>
-                      </Stack>
-                    </div>
-                  </Stack>
-                }
-              />
-            </div>
+                      </div>
+                    </Stack>
+                  }
+                />
+              </div>
+            )}
 
             <Checkbox
               checked={markAsDoneOnOpen}

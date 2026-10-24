@@ -75,6 +75,16 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(toggleSettingSpy).toHaveBeenCalledWith('useX11Backend');
     });
 
+    it('evaluates the Linux platform predicate once per render', async () => {
+      isLinuxMock().mockReturnValue(true);
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />);
+      });
+
+      expect(isLinuxMock()).toHaveBeenCalledTimes(1);
+    });
+
     it('opens standalone GNOME installation instructions on Linux', async () => {
       isLinuxMock().mockReturnValue(true);
       renderWithProviders(<SystemSettings />);
@@ -102,6 +112,14 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       'openGitifyShortcut',
       useSettingsStore.getInitialState().openGitifyShortcut,
     );
+  });
+
+  it('should not render the shortcut group when the shortcut is disabled', () => {
+    renderWithProviders(<SystemSettings />, {
+      settings: { ...mockSettings, keyboardShortcut: false },
+    });
+
+    expect(screen.queryByTestId('settings-shortcut-group')).not.toBeInTheDocument();
   });
 
   describe('recording global shortcut', () => {
