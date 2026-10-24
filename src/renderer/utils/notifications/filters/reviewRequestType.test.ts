@@ -43,13 +43,13 @@ describe('renderer/utils/notifications/filters/reviewRequestType.ts', () => {
     it('should return details for direct', () => {
       const details = reviewRequestTypeFilter.getTypeDetails('direct');
       expect(details.title).toBe('Direct');
-      expect(details.description).toBe('You were directly requested as a reviewer.');
+      expect(details.description).toBe('You were asked to review directly.');
     });
 
     it('should return details for team', () => {
       const details = reviewRequestTypeFilter.getTypeDetails('team');
       expect(details.title).toBe('Team');
-      expect(details.description).toBe('A team you are a member of was requested to review.');
+      expect(details.description).toBe('A team you belong to was asked to review.');
     });
 
     it('should return details for other', () => {

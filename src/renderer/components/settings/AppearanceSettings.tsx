@@ -1,6 +1,8 @@
 import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, Select, Stack, Text } from '@primer/react';
 
+import { APPLICATION } from '../../../shared/constants';
+
 import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
@@ -45,8 +47,8 @@ export function AppearanceSettings() {
             name="design-language"
             tooltip={
               <Text>
-                Choose Classic for the original Gitify layout, or Glass for the translucent, layered
-                design language.
+                Choose Classic for the original {APPLICATION.NAME} layout, or Glass for the
+                translucent, layered design language.
               </Text>
             }
           />

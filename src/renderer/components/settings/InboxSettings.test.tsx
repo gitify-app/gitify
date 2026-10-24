@@ -256,7 +256,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
 
     expect(
       screen.getByText(
-        'Set how often Gitify checks for new notifications. Shorter intervals check more often and use more API requests.',
+        'Check for new notifications at this interval. Shorter intervals keep the list fresher but spend more API requests.',
       ),
     ).toBeInTheDocument();
   });

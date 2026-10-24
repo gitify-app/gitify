@@ -389,7 +389,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       );
       expect(markAsReadButton).toHaveAttribute(
         'title',
-        expect.stringContaining('You can also try opening this notification in the browser.'),
+        expect.stringContaining('You can also try opening this notification in your browser.'),
       );
       expect(screen.getByTestId('notification-mark-as-done')).toHaveAttribute(
         'title',

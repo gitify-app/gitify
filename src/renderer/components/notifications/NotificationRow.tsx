@@ -57,7 +57,7 @@ export function NotificationRow({
   // "...instead", since some descriptions already suggest waiting/retrying
   // (e.g. `RATE_LIMITED`), which "instead" would read as contradicting.
   const failureTooltip = failure
-    ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in the browser.`
+    ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in your browser.`
     : undefined;
 
   const runAction = async (action: () => Promise<boolean>) => {
