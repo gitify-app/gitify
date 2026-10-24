@@ -35,6 +35,21 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   });
 
   describe('playSound', () => {
+    it('should explain when the sound plays and what the volume controls do', async () => {
+      renderWithProviders(<AlertSettings />);
+
+      const soundHelp =
+        'Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level.';
+
+      const tooltipTrigger = screen.getByRole('button', { name: 'tooltip-playSound' });
+
+      expect(screen.queryByText(soundHelp)).not.toBeInTheDocument();
+
+      await userEvent.click(tooltipTrigger);
+
+      expect(screen.getByText(soundHelp)).toBeInTheDocument();
+    });
+
     it('volume controls should not be shown if playSound checkbox is false', async () => {
       renderWithProviders(<AlertSettings />, {
         settings: { ...mockSettings, playSound: false },

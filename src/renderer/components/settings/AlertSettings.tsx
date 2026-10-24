@@ -51,6 +51,12 @@ export function AlertSettings() {
             label="Play notification sound"
             name="playSound"
             onChange={() => toggleSetting('playSound')}
+            tooltip={
+              <Text>
+                Play a sound when new unread notifications arrive after filtering. Use the adjacent
+                volume controls to adjust the sound level.
+              </Text>
+            }
           />
 
           <ButtonGroup className="ml-2" data-testid="settings-volume-group" hidden={!playSound}>

@@ -40,7 +40,16 @@ export function AppearanceSettings() {
 
       <Stack direction="vertical" gap="condensed">
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <FieldLabel label="Design:" name="design-language" />
+          <FieldLabel
+            label="Design:"
+            name="design-language"
+            tooltip={
+              <Text>
+                Choose Classic for the original Gitify layout, or Glass for the translucent, layered
+                design language.
+              </Text>
+            }
+          />
           <Select
             data-testid="settings-design-language"
             onChange={(evt) => updateSetting('designLanguage', evt.target.value as DesignLanguage)}
@@ -52,7 +61,16 @@ export function AppearanceSettings() {
         </Stack>
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <FieldLabel label="Theme:" name="theme" />
+          <FieldLabel
+            label="Theme:"
+            name="theme"
+            tooltip={
+              <Text>
+                Choose a light, dark, or system color mode. Available options depend on the selected
+                design language.
+              </Text>
+            }
+          />
           <Select
             data-testid="settings-theme"
             onChange={(evt) => updateSetting('theme', evt.target.value as Theme)}
@@ -114,7 +132,16 @@ export function AppearanceSettings() {
         />
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <FieldLabel label="Zoom:" name="zoom" />
+          <FieldLabel
+            label="Zoom:"
+            name="zoom"
+            tooltip={
+              <Text>
+                Change the size of the Gitify interface. The setting applies immediately and is
+                remembered for the next launch.
+              </Text>
+            }
+          />
 
           <ButtonGroup className="ml-2">
             <IconButton

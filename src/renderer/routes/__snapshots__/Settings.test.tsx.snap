@@ -166,11 +166,38 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <label
-              class="mr-1 font-medium cursor-pointer"
+              class="font-medium cursor-pointer"
               for="design-language"
             >
               Design:
             </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-design-language"
+              data-testid="tooltip-icon-tooltip-design-language"
+              id="tooltip-design-language"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
             <span
               class="prc-Select-TextInputWrapper-5NYFF prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
               data-component="TextInput"
@@ -223,11 +250,38 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <label
-              class="mr-1 font-medium cursor-pointer"
+              class="font-medium cursor-pointer"
               for="theme"
             >
               Theme:
             </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-theme"
+              data-testid="tooltip-icon-tooltip-theme"
+              id="tooltip-theme"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
             <span
               class="prc-Select-TextInputWrapper-5NYFF prc-components-TextInputWrapper-Hpdqi prc-components-TextInputBaseWrapper-wY-n0"
               data-component="TextInput"
@@ -381,11 +435,38 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <label
-              class="mr-1 font-medium cursor-pointer"
+              class="font-medium cursor-pointer"
               for="zoom"
             >
               Zoom:
             </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-zoom"
+              data-testid="tooltip-icon-tooltip-zoom"
+              id="tooltip-zoom"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
             <div
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
               data-component="ButtonGroup"
@@ -631,11 +712,38 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <label
-              class="mr-1 font-medium cursor-pointer"
+              class="font-medium cursor-pointer"
               for="fetchInterval"
             >
               Fetch interval:
             </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-fetchInterval"
+              data-testid="tooltip-icon-tooltip-fetchInterval"
+              id="tooltip-fetchInterval"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
             <div
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
               data-component="ButtonGroup"
@@ -915,7 +1023,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <label
-              class="mr-1 font-medium cursor-pointer"
+              class="font-medium cursor-pointer mr-1"
               for="radio-groupBy-repository"
             >
               Group by:
@@ -940,7 +1048,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 value="REPOSITORY"
               />
               <label
-                class="mr-1 font-medium cursor-pointer"
+                class="font-medium cursor-pointer mr-1"
                 for="radio-groupBy-repository"
               >
                 Repository
@@ -965,7 +1073,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 value="DATE"
               />
               <label
-                class="mr-1 font-medium cursor-pointer"
+                class="font-medium cursor-pointer mr-1"
                 for="radio-groupBy-date"
               >
                 Date
@@ -1692,6 +1800,33 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 Play notification sound
               </label>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-playSound"
+                data-testid="tooltip-icon-tooltip-playSound"
+                id="tooltip-playSound"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
+                  data-component="Octicon"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  />
+                </svg>
+              </button>
             </div>
             <div
               class="ml-2 prc-ButtonGroup-ButtonGroup-vFUrY"
@@ -2056,7 +2191,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <label
-              class="mr-1 font-medium cursor-pointer"
+              class="font-medium cursor-pointer mr-1"
               for="radio-trayIconAppearance-auto"
             >
               Idle icon:
@@ -2081,7 +2216,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 value="auto"
               />
               <label
-                class="mr-1 font-medium cursor-pointer"
+                class="font-medium cursor-pointer mr-1"
                 for="radio-trayIconAppearance-auto"
               >
                 Automatic
@@ -2106,7 +2241,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 value="light"
               />
               <label
-                class="mr-1 font-medium cursor-pointer"
+                class="font-medium cursor-pointer mr-1"
                 for="radio-trayIconAppearance-light"
               >
                 Light
@@ -2131,7 +2266,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 value="dark"
               />
               <label
-                class="mr-1 font-medium cursor-pointer"
+                class="font-medium cursor-pointer mr-1"
                 for="radio-trayIconAppearance-dark"
               >
                 Dark
@@ -2233,7 +2368,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <label
-              class="mr-1 font-medium cursor-pointer"
+              class="font-medium cursor-pointer mr-1"
               for="radio-openLinks-foreground"
             >
               Link focus:
@@ -2258,7 +2393,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 value="FOREGROUND"
               />
               <label
-                class="mr-1 font-medium cursor-pointer"
+                class="font-medium cursor-pointer mr-1"
                 for="radio-openLinks-foreground"
               >
                 Foreground
@@ -2283,7 +2418,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 value="BACKGROUND"
               />
               <label
-                class="mr-1 font-medium cursor-pointer"
+                class="font-medium cursor-pointer mr-1"
                 for="radio-openLinks-background"
               >
                 Background
@@ -2644,7 +2779,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_1t_"
+          aria-describedby="_r_27_"
           class="prc-Button-ButtonBase-9n-Xk"
           data-component="Button"
           data-loading="false"
@@ -2674,7 +2809,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-component="Tooltip"
           data-direction="ne"
-          id="_r_1t_"
+          id="_r_27_"
           popover="auto"
           role="tooltip"
         >
@@ -2692,7 +2827,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_1v_"
+          aria-describedby="_r_29_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2730,7 +2865,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_1v_"
+            id="_r_29_"
           >
             Accounts
             <span
@@ -2772,7 +2907,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </span>
         </span>
         <button
-          aria-describedby="_r_21_"
+          aria-describedby="_r_2b_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -2810,7 +2945,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_21_"
+            id="_r_2b_"
           >
             Quit Gitify
             <span
