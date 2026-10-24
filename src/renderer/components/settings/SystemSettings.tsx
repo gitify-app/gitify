@@ -17,20 +17,12 @@ import { Title } from '../primitives/Title';
 
 import { type KeyboardAcceleratorShortcut, OpenPreference, toLink } from '../../types';
 
-import { VolumeDownIcon } from '../../icons/VolumeDownIcon';
-import { VolumeUpIcon } from '../../icons/VolumeUpIcon';
 import { openExternalLink } from '../../utils/system/comms';
 import {
   formatAcceleratorForDisplay,
   keyboardEventToAccelerator,
   MODIFIER_SEGMENTS,
 } from '../../utils/system/keyboardShortcut';
-import {
-  canDecreaseVolume,
-  canIncreaseVolume,
-  decreaseVolume,
-  increaseVolume,
-} from '../../utils/ui/volume';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
@@ -50,9 +42,6 @@ export function SystemSettings() {
   const openLinks = useSettingsStore((s) => s.openLinks);
   const keyboardShortcut = useSettingsStore((s) => s.keyboardShortcut);
   const openGitifyShortcut = useSettingsStore((s) => s.openGitifyShortcut);
-  const showNotifications = useSettingsStore((s) => s.showNotifications);
-  const playSound = useSettingsStore((s) => s.playSound);
-  const notificationVolume = useSettingsStore((s) => s.notificationVolume);
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
   const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
@@ -135,7 +124,7 @@ export function SystemSettings() {
 
       <Stack direction="vertical" gap="condensed">
         <RadioGroup
-          label="Open Links:"
+          label="Link focus:"
           name="openLinks"
           onChange={(evt) => {
             updateSetting('openLinks', evt.target.value as OpenPreference);
@@ -146,14 +135,20 @@ export function SystemSettings() {
           ]}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Controls the behavior of how external links should opened.</Text>
               <Text>
-                <Text as="strong">Foreground</Text> will open the link and bring the opened window
-                or browser to the front.
+                Controls whether opening an external link brings the destination app to the front.
+              </Text>
+              <Text>
+                <Text as="strong">Foreground</Text> brings the opened window or browser to the
+                front.
               </Text>
               <Text>
                 <Text as="strong">Background</Text> opens the link without stealing focus from the
                 current window.
+              </Text>
+              <Text>
+                This applies to every link Gitify opens, including notification links opened in the
+                browser.
               </Text>
             </Stack>
           }
@@ -265,72 +260,6 @@ export function SystemSettings() {
         </Stack>
 
         <Checkbox
-          checked={showNotifications}
-          label="Show system notifications"
-          name="showNotifications"
-          onChange={() => toggleSetting('showNotifications')}
-          tooltip={
-            <Text>Display native operating system notifications for new unread notifications.</Text>
-          }
-        />
-
-        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <Checkbox
-            checked={playSound}
-            label="Play sound"
-            name="playSound"
-            onChange={() => toggleSetting('playSound')}
-          />
-
-          <ButtonGroup className="ml-2" data-testid="settings-volume-group" hidden={!playSound}>
-            <IconButton
-              aria-label="Volume down"
-              data-testid="settings-volume-down"
-              disabled={!canDecreaseVolume(notificationVolume)}
-              icon={VolumeDownIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', decreaseVolume(notificationVolume));
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
-
-            <Button
-              aria-label="Volume percentage"
-              className="pointer-events-none"
-              size="small"
-              tabIndex={-1}
-            >
-              {notificationVolume.toFixed(0)}%
-            </Button>
-
-            <IconButton
-              aria-label="Volume up"
-              data-testid="settings-volume-up"
-              disabled={!canIncreaseVolume(notificationVolume)}
-              icon={VolumeUpIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', increaseVolume(notificationVolume));
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
-
-            <IconButton
-              aria-label="Reset volume"
-              data-testid="settings-volume-reset"
-              icon={SyncIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', defaultSettings.notificationVolume);
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-              variant="danger"
-            />
-          </ButtonGroup>
-        </Stack>
-
-        <Checkbox
           checked={keepWindowOnBlur}
           label="Keep window open when it loses focus"
           name="keepWindowOnBlur"
@@ -341,15 +270,6 @@ export function SystemSettings() {
               it.
             </Text>
           }
-        />
-
-        <Checkbox
-          checked={openAtStartup}
-          label="Open at startup"
-          name="openAtStartup"
-          onChange={() => toggleSetting('openAtStartup')}
-          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
-          visible={!window.gitify.platform.isLinux()}
         />
 
         <Checkbox
@@ -380,6 +300,7 @@ export function SystemSettings() {
           }
           visible={window.gitify.platform.isLinux()}
         />
+
         {window.gitify.platform.isLinux() && (
           <Stack gap="condensed">
             <Text className="text-sm text-gitify-font">
@@ -396,6 +317,15 @@ export function SystemSettings() {
             </Button>
           </Stack>
         )}
+
+        <Checkbox
+          checked={openAtStartup}
+          label="Open at startup"
+          name="openAtStartup"
+          onChange={() => toggleSetting('openAtStartup')}
+          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
+          visible={!window.gitify.platform.isLinux()}
+        />
       </Stack>
     </fieldset>
   );

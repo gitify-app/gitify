@@ -4,8 +4,9 @@ import { Stack } from '@primer/react';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Header } from '../components/primitives/Header';
+import { AlertSettings } from '../components/settings/AlertSettings';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
-import { NotificationSettings } from '../components/settings/NotificationSettings';
+import { InboxSettings } from '../components/settings/InboxSettings';
 import { SettingsFooter } from '../components/settings/SettingsFooter';
 import { SettingsReset } from '../components/settings/SettingsReset';
 import { SystemSettings } from '../components/settings/SystemSettings';
@@ -21,7 +22,8 @@ export function SettingsRoute() {
       <Contents paddingBottom scrollFade>
         <Stack direction="vertical" gap="spacious">
           <AppearanceSettings />
-          <NotificationSettings />
+          <InboxSettings />
+          <AlertSettings />
           <TraySettings />
           <SystemSettings />
           <SettingsReset />

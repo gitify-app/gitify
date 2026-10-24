@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   AlertFillIcon,
-  BellIcon,
   CheckIcon,
   CommentIcon,
   DashIcon,
   GitCommitIcon,
   GitPullRequestIcon,
+  InboxIcon,
   IssueOpenedIcon,
   MilestoneIcon,
   PlusIcon,
@@ -38,7 +38,7 @@ import { GroupBy, Size } from '../../types';
 import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scopes';
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
 
-export function NotificationSettings() {
+export function InboxSettings() {
   const navigate = useNavigate();
 
   // Account store values
@@ -63,7 +63,7 @@ export function NotificationSettings() {
 
   return (
     <fieldset>
-      <Title icon={BellIcon}>Notifications</Title>
+      <Title icon={InboxIcon}>Inbox</Title>
 
       <Stack direction="vertical" gap="condensed">
         <RadioGroup

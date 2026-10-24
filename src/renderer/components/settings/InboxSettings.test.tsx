@@ -9,9 +9,9 @@ import { Constants } from '../../constants';
 import { useSettingsStore } from '../../stores';
 
 import * as comms from '../../utils/system/comms';
-import { NotificationSettings } from './NotificationSettings';
+import { InboxSettings } from './InboxSettings';
 
-describe('renderer/components/settings/NotificationSettings.tsx', () => {
+describe('renderer/components/settings/InboxSettings.tsx', () => {
   let toggleSettingSpy: ReturnType<typeof vi.spyOn>;
   let updateSettingSpy: ReturnType<typeof vi.spyOn>;
 
@@ -22,7 +22,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
   it('should change the groupBy radio group', async () => {
     await act(async () => {
-      renderWithProviders(<NotificationSettings />);
+      renderWithProviders(<InboxSettings />);
     });
 
     await userEvent.click(screen.getByTestId('radio-groupBy-date'));
@@ -34,7 +34,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
   describe('fetch interval settings', () => {
     it('should update the fetch interval values when using the buttons', async () => {
       await act(async () => {
-        renderWithProviders(<NotificationSettings />);
+        renderWithProviders(<InboxSettings />);
       });
 
       // Increase fetch interval
@@ -71,7 +71,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     it('should prevent going lower than minimum interval', async () => {
       await act(async () => {
-        renderWithProviders(<NotificationSettings />, {
+        renderWithProviders(<InboxSettings />, {
           settings: {
             ...mockSettings,
             fetchInterval:
@@ -98,7 +98,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
 
     it('should prevent going above maximum interval', async () => {
       await act(async () => {
-        renderWithProviders(<NotificationSettings />, {
+        renderWithProviders(<InboxSettings />, {
           settings: {
             ...mockSettings,
             fetchInterval:
@@ -136,7 +136,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     ['checkbox-delayNotificationState', 'delayNotificationState'],
   ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
-      renderWithProviders(<NotificationSettings />);
+      renderWithProviders(<InboxSettings />);
     });
 
     await userEvent.click(screen.getByTestId(testId));
@@ -149,7 +149,7 @@ describe('renderer/components/settings/NotificationSettings.tsx', () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithProviders(<NotificationSettings />);
+      renderWithProviders(<InboxSettings />);
     });
 
     const tooltipElement = screen.getByLabelText('tooltip-showOnlyParticipating');
