@@ -12,7 +12,7 @@ import type { Account, Link, RawGitifyNotification } from '../../../types';
 import type { AuthMethod } from '../../auth/types';
 import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } from '../types';
 
-import { isValidHostname } from '../../auth/utils';
+import { isValidHostname } from '../../auth/identity';
 import {
   extractHostVersion,
   getDeveloperSettingsURL,

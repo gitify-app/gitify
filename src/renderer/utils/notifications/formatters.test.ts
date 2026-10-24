@@ -4,11 +4,11 @@ import { mockPartialGitifyNotification } from '../../__mocks__/notifications-moc
 
 import type { Link } from '../../types';
 
+import { formatNotification } from './formatNotification';
 import {
   formatForDisplay,
   formatMetricDescription,
   formatCommitSha,
-  formatNotification,
   formatNotificationIdentifier,
   formatNotificationTitle,
   formatNotificationType,

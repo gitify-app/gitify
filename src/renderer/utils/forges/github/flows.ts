@@ -12,7 +12,7 @@ import { Constants } from '../../../constants';
 import type { AuthCode, Hostname, Link, Token } from '../../../types';
 import type { AuthResponse, DeviceFlowSession, LoginOAuthWebOptions } from '../../auth/types';
 
-import { getRecommendedScopeNames } from '../../auth/scopes';
+import { getRecommendedScopeNames } from '../../auth/scopeNames';
 import { generateOAuthState } from '../../auth/state';
 import { rendererLogError, rendererLogInfo, rendererLogWarn, toError } from '../../core/logger';
 import { openExternalLink } from '../../system/comms';

@@ -26,7 +26,7 @@ import {
 } from './graphql/generated/graphql';
 import { MergeQueryBuilder } from './graphql/MergeQueryBuilder';
 import { stripGatedSelections } from './graphql/utils';
-import { createNotificationHandler } from './handlers';
+import { MERGED_QUERY_SUBJECT_TYPES } from './handlers/supported';
 import { createOctokitClient, createOctokitClientUncached } from './octokit';
 import { performGraphQLRequestString } from './request';
 import { getNumberFromUrl } from './utils';
@@ -291,8 +291,7 @@ export async function fetchNotificationDetailsForList(
   let hasSupportedNotification = false;
 
   for (const notification of notifications) {
-    const handler = createNotificationHandler(notification);
-    if (!handler.supportsMergedQueryEnrichment) {
+    if (!MERGED_QUERY_SUBJECT_TYPES.has(notification.subject.type)) {
       continue;
     }
 
