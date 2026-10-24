@@ -363,6 +363,16 @@ export default defineConfig({
         },
       },
       {
+        // Renderer boundary: the renderer is sandboxed and must reach the main
+        // process through `window.gitify`, not by importing Node builtins.
+        // See ARCHITECTURE.md.
+        files: ['src/renderer/**/*.ts', 'src/renderer/**/*.tsx'],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
+        rules: {
+          'import/no-nodejs-modules': 'error',
+        },
+      },
+      {
         files: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
         rules: {
           'typescript/no-explicit-any': 'off',
