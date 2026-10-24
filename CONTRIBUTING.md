@@ -124,6 +124,29 @@ No manual milestone creation, renaming, or closing is required.
 - Pull request notification uses `issues: write`, `pull-requests: write`, and `contents: read`.
 - The validation jobs (`lint`, `tests`) remain read-only.
 
+#### 🔒 Packaged build hardening
+
+Packaged builds pin Electron's [fuses][electron-fuses] in `electron-builder.js`, so a shipped binary refuses the framework's permissive defaults. electron-builder flips them after packing and before signing, so the code signature covers the flipped binary.
+
+| Fuse                                    | Value | Effect                                                                 |
+| --------------------------------------- | ----- | ---------------------------------------------------------------------- |
+| `runAsNode`                             | off   | refuses `ELECTRON_RUN_AS_NODE`, so the binary cannot run as plain Node |
+| `enableCookieEncryption`                | on    | encrypts the Chromium cookie store at rest                             |
+| `enableNodeOptionsEnvironmentVariable`  | off   | ignores `NODE_OPTIONS` and `NODE_EXTRA_CA_CERTS`                       |
+| `enableNodeCliInspectArguments`         | off   | refuses `--inspect` and `SIGUSR1`                                      |
+| `enableEmbeddedAsarIntegrityValidation` | on    | validates `app.asar` before loading it                                 |
+| `onlyLoadAppFromAsar`                   | on    | no fallback to an adjacent `app/` directory                            |
+
+`electronFuses` also sets `resetAdHocDarwinSignature`, which is not a fuse. Flipping the fuses invalidates the ad-hoc signature Electron ships with, and Apple Silicon refuses to launch a binary whose signature no longer validates. The build workflow packages macOS unsigned (`-c.mac.identity=null`), so without it the arm64 artifact is killed on launch. Signed builds re-sign afterwards, superseding the ad-hoc signature.
+
+Three settings are deliberate non-choices:
+
+- **`grantFileProtocolExtraPrivileges` stays at its Electron default.** The renderer loads `index.html` over `file://`, so removing those privileges breaks asset and sound loading.
+- **`asar` must stay enabled.** `onlyLoadAppFromAsar` requires it, and packaging without an archive fails rather than producing an artifact that cannot start.
+- **Asar integrity is not required on Linux.** Electron does not support it there, so the fuse is inert.
+
+`scripts/verifyFuses.js` reads the fuse wire back out of the built artifacts and fails when it does not match the expected posture. The expected set is a constant in that script rather than read from this configuration, so removing the configuration fails the build instead of passing vacuously. The build and publish workflows run it after packaging, because a missing `electronFuses` block is otherwise a silent no-op: electron-builder simply leaves the Electron defaults in place.
+
 ### 🖌️ Design Guidelines
 
 1. Use sentence case where possible
@@ -157,6 +180,7 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 <!-- LINK LABELS -->
 
 [vite-plus-website]: https://viteplus.dev/
+[electron-fuses]: https://www.electronjs.org/docs/latest/tutorial/fuses
 [conventional-commits]: https://www.conventionalcommits.org
 [release-please]: https://github.com/googleapis/release-please
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576

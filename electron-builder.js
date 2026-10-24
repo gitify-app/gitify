@@ -6,6 +6,33 @@ const config = {
   appId: 'com.electron.gitify',
   copyright: 'Copyright © 2026 Gitify Team',
   asar: true,
+  /**
+   * Hardening switches baked into the packaged Electron binary. electron-builder
+   * flips these after packing and before signing, so the code signature covers the
+   * flipped binary. Left unset, every switch keeps its permissive Electron default.
+   *
+   * `scripts/verifyFuses.js` asserts these values against the built artifacts.
+   */
+  electronFuses: {
+    runAsNode: false, // refuses ELECTRON_RUN_AS_NODE
+    enableCookieEncryption: true, // encrypts the Chromium cookie store at rest
+    enableNodeOptionsEnvironmentVariable: false, // ignores NODE_OPTIONS / NODE_EXTRA_CA_CERTS
+    enableNodeCliInspectArguments: false, // refuses --inspect and SIGUSR1
+    enableEmbeddedAsarIntegrityValidation: true, // validates app.asar before loading it
+    onlyLoadAppFromAsar: true, // no fallback to an adjacent app/ directory
+    /**
+     * Not a fuse: re-applies the ad-hoc macOS signature after flipping. Flipping
+     * invalidates the ad-hoc signature Electron ships with, and Apple Silicon
+     * refuses to launch a binary whose signature no longer validates. The build
+     * workflow packages macOS unsigned (`-c.mac.identity=null`), so without this
+     * the arm64 artifact is killed on launch. Signing builds re-sign afterwards,
+     * which supersedes the ad-hoc signature.
+     */
+    resetAdHocDarwinSignature: true,
+    // grantFileProtocolExtraPrivileges is deliberately left at its Electron default:
+    // the renderer loads index.html over file://, so removing those privileges
+    // breaks asset and sound loading.
+  },
   files: [
     'assets/images/*',
     'assets/sounds/*',
