@@ -17,9 +17,13 @@ export interface RadioGroupProps {
 }
 
 export function RadioGroup(props: Readonly<RadioGroupProps>) {
+  const firstOptionId = props.options[0]
+    ? `radio-${props.name}-${props.options[0].value.toLowerCase()}`
+    : props.name;
+
   return (
     <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-      <FieldLabel label={props.label} name={props.name} />
+      <FieldLabel label={props.label} name={firstOptionId} />
 
       {props.options.map((item) => {
         const name = `radio-${props.name}-${item.value.toLowerCase()}`;

@@ -1,11 +1,11 @@
 import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, Select, Stack, Text } from '@primer/react';
 
-import { useAccountsStore, useSettingsStore } from '../../stores';
+import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { DesignLanguage, Theme } from '../../types';
 
@@ -19,9 +19,6 @@ import {
 } from '../../utils/ui/zoom';
 
 export function AppearanceSettings() {
-  // Account store values
-  const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
-
   // Setting store actions
   const toggleSetting = useSettingsStore((s) => s.toggleSetting);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
@@ -33,13 +30,13 @@ export function AppearanceSettings() {
   const showStatusIconColors = useSettingsStore((s) => s.showStatusIconColors);
 
   const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
-  const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
-  const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
   const zoomPercentage = useSettingsStore((s) => s.zoomPercentage);
 
   return (
     <fieldset>
-      <Title icon={PaintbrushIcon}>Appearance</Title>
+      <SectionHeading as="legend" icon={PaintbrushIcon}>
+        Appearance
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
@@ -160,34 +157,6 @@ export function AppearanceSettings() {
             />
           </ButtonGroup>
         </Stack>
-
-        <Checkbox
-          checked={showAccountHeader}
-          label="Show account header"
-          name="showAccountHeader"
-          onChange={() => toggleSetting('showAccountHeader')}
-          tooltip={
-            <Text>
-              When enabled, displays an account header (avatar, username and quick links) above the
-              notifications list.
-            </Text>
-          }
-          visible={!hasMultipleAccounts}
-        />
-
-        <Checkbox
-          checked={wrapNotificationTitle}
-          label="Show full notification title"
-          name="wrapNotificationTitle"
-          onChange={() => toggleSetting('wrapNotificationTitle')}
-          tooltip={
-            <Text>
-              Wrap long notification titles onto multiple lines instead of truncating with an
-              ellipsis. This shows the full title but may increase the height of the notification
-              list.
-            </Text>
-          }
-        />
       </Stack>
     </fieldset>
   );

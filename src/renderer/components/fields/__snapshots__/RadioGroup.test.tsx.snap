@@ -14,7 +14,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render 1`] = `
   >
     <label
       class="mr-1 font-medium cursor-pointer"
-      for="appearance"
+      for="radio-appearance-one"
     >
       Appearance
     </label>
@@ -87,7 +87,7 @@ exports[`renderer/components/fields/RadioGroup.tsx > should render as disabled 1
   >
     <label
       class="mr-1 font-medium cursor-pointer"
-      for="appearance"
+      for="radio-appearance-one"
     >
       Appearance
     </label>

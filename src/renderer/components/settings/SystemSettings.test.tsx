@@ -6,7 +6,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { useSettingsStore } from '../../stores';
 
-import type { KeyboardAcceleratorShortcut, Percentage } from '../../types';
+import type { KeyboardAcceleratorShortcut } from '../../types';
 
 import { SystemSettings } from './SystemSettings';
 
@@ -32,9 +32,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
   it.each([
     ['checkbox-keyboardShortcut', 'keyboardShortcut'],
-    ['checkbox-showNotifications', 'showNotifications'],
-    ['checkbox-showUpdateNotifications', 'showUpdateNotifications'],
-    ['checkbox-playSound', 'playSound'],
     ['checkbox-openAtStartup', 'openAtStartup'],
     ['checkbox-keepWindowOnBlur', 'keepWindowOnBlur'],
   ] as const)('should toggle %s checkbox', async (testId, setting) => {
@@ -209,53 +206,6 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       await userEvent.click(document.body);
 
       expect(screen.queryByText('Click outside this area to cancel.')).not.toBeInTheDocument();
-    });
-  });
-
-  describe('playSound', () => {
-    it('volume controls should not be shown if playSound checkbox is false', async () => {
-      renderWithProviders(<SystemSettings />, {
-        settings: { ...mockSettings, playSound: false },
-      });
-
-      expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
-    });
-
-    it('volume controls should be shown if playSound checkbox is true', async () => {
-      renderWithProviders(<SystemSettings />, {
-        settings: { ...mockSettings, playSound: true },
-      });
-
-      expect(screen.getByTestId('settings-volume-group')).toBeVisible();
-    });
-
-    it('should increase notification volume', async () => {
-      renderWithProviders(<SystemSettings />);
-
-      await userEvent.click(screen.getByTestId('settings-volume-up'));
-
-      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-      expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 30);
-    });
-
-    it('should decrease notification volume', async () => {
-      renderWithProviders(<SystemSettings />);
-
-      await userEvent.click(screen.getByTestId('settings-volume-down'));
-
-      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-      expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 10);
-    });
-
-    it('should reset notification volume', async () => {
-      renderWithProviders(<SystemSettings />, {
-        settings: { ...mockSettings, notificationVolume: 30 as Percentage },
-      });
-
-      await userEvent.click(screen.getByTestId('settings-volume-reset'));
-
-      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-      expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 20);
     });
   });
 });

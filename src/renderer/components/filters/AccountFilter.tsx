@@ -5,7 +5,7 @@ import { useNotifications } from '../../hooks/useNotifications';
 import { useAccountsStore, useFiltersStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { getAccountUUID } from '../../utils/auth/utils';
 
@@ -17,9 +17,13 @@ export function AccountFilter() {
 
   return (
     <fieldset id="filter-accounts">
-      <Title icon={PersonIcon} tooltip={<Text>Filter notifications by account.</Text>}>
+      <SectionHeading
+        as="legend"
+        icon={PersonIcon}
+        tooltip={<Text>Filter notifications by account.</Text>}
+      >
         Account
-      </Title>
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         {accounts.map((account) => {

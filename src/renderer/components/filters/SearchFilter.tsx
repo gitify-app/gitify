@@ -14,7 +14,7 @@ import { cn } from 'cn';
 
 import { useFiltersStore, useSettingsStore } from '../../stores';
 
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { IconColor, type SearchToken, Size } from '../../types';
 
@@ -66,7 +66,8 @@ export function SearchFilter() {
 
   return (
     <fieldset>
-      <Title
+      <SectionHeading
+        as="legend"
         icon={SearchIcon}
         tooltip={
           <Stack direction="vertical" gap="condensed">
@@ -109,7 +110,7 @@ export function SearchFilter() {
         }
       >
         Search
-      </Title>
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <TokenSearchInput

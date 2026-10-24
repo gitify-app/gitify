@@ -5,7 +5,7 @@ import { IconButton, Stack } from '@primer/react';
 
 import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
 
-import { Title } from './Title';
+import { SectionHeading } from './SectionHeading';
 
 interface HeaderProps {
   icon: Icon;
@@ -35,9 +35,7 @@ export function Header(props: Readonly<HeaderProps>) {
           variant="invisible"
         />
 
-        <Title icon={props.icon} size={3}>
-          {props.children}
-        </Title>
+        <SectionHeading icon={props.icon}>{props.children}</SectionHeading>
       </Stack>
     </div>
   );
