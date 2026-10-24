@@ -91,6 +91,11 @@ const reactDevToolsPlugin = (): Plugin => ({
 
 const isBuild = process.argv.includes('build');
 
+// Match both a layer's directory and its contents, so a bare directory import
+// (`../hooks`) cannot bypass the boundary rules once a barrel `index.ts` exists.
+const forbiddenLayerGlobs = (layers: string[]): string[] =>
+  layers.flatMap((layer) => [`**/${layer}`, `**/${layer}/**`]);
+
 export default defineConfig({
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
@@ -219,7 +224,7 @@ export default defineConfig({
             {
               patterns: [
                 {
-                  group: ['**/hooks/**', '**/components/**', '**/routes/**'],
+                  group: forbiddenLayerGlobs(['hooks', 'components', 'routes']),
                   allowTypeImports: true,
                   message:
                     'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
@@ -238,7 +243,7 @@ export default defineConfig({
             {
               patterns: [
                 {
-                  group: ['**/hooks/**', '**/components/**', '**/routes/**'],
+                  group: forbiddenLayerGlobs(['hooks', 'components', 'routes']),
                   allowTypeImports: true,
                   message:
                     'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
@@ -257,7 +262,7 @@ export default defineConfig({
             {
               patterns: [
                 {
-                  group: ['**/components/**', '**/routes/**'],
+                  group: forbiddenLayerGlobs(['components', 'routes']),
                   allowTypeImports: true,
                   message:
                     'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
@@ -276,7 +281,7 @@ export default defineConfig({
             {
               patterns: [
                 {
-                  group: ['**/routes/**'],
+                  group: forbiddenLayerGlobs(['routes']),
                   allowTypeImports: true,
                   message:
                     'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
@@ -305,7 +310,7 @@ export default defineConfig({
             {
               patterns: [
                 {
-                  group: ['**/routes/**'],
+                  group: forbiddenLayerGlobs(['routes']),
                   allowTypeImports: true,
                   message:
                     'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
@@ -336,13 +341,7 @@ export default defineConfig({
             {
               patterns: [
                 {
-                  group: [
-                    '**/utils/**',
-                    '**/stores/**',
-                    '**/hooks/**',
-                    '**/components/**',
-                    '**/routes/**',
-                  ],
+                  group: forbiddenLayerGlobs(['utils', 'stores', 'hooks', 'components', 'routes']),
                   allowTypeImports: true,
                   message:
                     'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
@@ -363,13 +362,7 @@ export default defineConfig({
             {
               patterns: [
                 {
-                  group: [
-                    '**/utils/**',
-                    '**/stores/**',
-                    '**/hooks/**',
-                    '**/components/**',
-                    '**/routes/**',
-                  ],
+                  group: forbiddenLayerGlobs(['utils', 'stores', 'hooks', 'components', 'routes']),
                   allowTypeImports: true,
                   message:
                     'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
