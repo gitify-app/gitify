@@ -91,6 +91,16 @@ const reactDevToolsPlugin = (): Plugin => ({
 
 const isBuild = process.argv.includes('build');
 
+const TEST_FILES = ['**/*.test.ts', '**/*.test.tsx'];
+const TEST_SUPPORT_FILES = ['**/__mocks__/**', '**/__helpers__/**'];
+const TEST_EXCLUDES = [...TEST_FILES, ...TEST_SUPPORT_FILES];
+const RENDERER_SOURCE_FILES = ['src/renderer/**/*.ts', 'src/renderer/**/*.tsx'];
+
+// TypeScript source globs for one or more renderer layers, so an override
+// cannot accidentally omit `.tsx`.
+const rendererLayerFiles = (...layers: string[]): string[] =>
+  layers.flatMap((layer) => [`src/renderer/${layer}/**/*.ts`, `src/renderer/${layer}/**/*.tsx`]);
+
 // Match both a layer's directory and its contents, so a bare directory import
 // (`../hooks`) cannot bypass the boundary rules once a barrel `index.ts` exists.
 const forbiddenLayerGlobs = (layers: string[]): string[] =>
@@ -256,8 +266,8 @@ export default defineConfig({
         // code directly would bypass that contract. Layer-specific overrides
         // below compose this pattern so they cannot silently drop it.
         // See ARCHITECTURE.md.
-        files: ['src/renderer/**/*.ts', 'src/renderer/**/*.tsx'],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: RENDERER_SOURCE_FILES,
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': ['error', { patterns: [processBoundaryPattern] }],
         },
@@ -267,8 +277,8 @@ export default defineConfig({
         // may import hooks, components, or routes. Shared utils also may not
         // import a forge-specific module; they go through the forge adapter.
         // See ARCHITECTURE.md.
-        files: ['src/renderer/utils/**/*.ts', 'src/renderer/utils/**/*.tsx'],
-        excludeFiles: ['src/renderer/utils/forges/**', '**/*.test.ts', '**/*.test.tsx'],
+        files: rendererLayerFiles('utils'),
+        excludeFiles: ['src/renderer/utils/forges/**', ...TEST_FILES],
         rules: {
           'no-restricted-imports': [
             'error',
@@ -289,8 +299,8 @@ export default defineConfig({
         // Forge adapter implementations are the one place allowed to import
         // their own forge-specific modules. They remain `utils` and may not
         // import hooks, components, or routes. See ARCHITECTURE.md.
-        files: ['src/renderer/utils/forges/**/*.ts', 'src/renderer/utils/forges/**/*.tsx'],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: rendererLayerFiles('utils/forges'),
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': [
             'error',
@@ -307,8 +317,8 @@ export default defineConfig({
         },
       },
       {
-        files: ['src/renderer/stores/**/*.ts', 'src/renderer/stores/**/*.tsx'],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: rendererLayerFiles('stores'),
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': [
             'error',
@@ -326,8 +336,8 @@ export default defineConfig({
         },
       },
       {
-        files: ['src/renderer/hooks/**/*.ts', 'src/renderer/hooks/**/*.tsx'],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: rendererLayerFiles('hooks'),
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': [
             'error',
@@ -345,8 +355,8 @@ export default defineConfig({
         },
       },
       {
-        files: ['src/renderer/components/**/*.ts', 'src/renderer/components/**/*.tsx'],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: rendererLayerFiles('components'),
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': [
             'error',
@@ -368,11 +378,8 @@ export default defineConfig({
         // cache write, so subscribing here multiplies that cost by the number of
         // mounted items. Action-only consumers use `useNotificationActions`.
         // See ARCHITECTURE.md.
-        files: [
-          'src/renderer/components/notifications/**/*.ts',
-          'src/renderer/components/notifications/**/*.tsx',
-        ],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: rendererLayerFiles('components/notifications'),
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': [
             'error',
@@ -390,8 +397,8 @@ export default defineConfig({
       {
         // Renderer boundary: `icons` is a presentational leaf. It may not
         // depend on any implementation layer. See ARCHITECTURE.md.
-        files: ['src/renderer/icons/**/*.ts', 'src/renderer/icons/**/*.tsx'],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: rendererLayerFiles('icons'),
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': [
             'error',
@@ -433,8 +440,8 @@ export default defineConfig({
         // Renderer boundary: the renderer is sandboxed and must reach the main
         // process through `window.gitify`, not by importing Node builtins.
         // See ARCHITECTURE.md.
-        files: ['src/renderer/**/*.ts', 'src/renderer/**/*.tsx'],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
+        files: RENDERER_SOURCE_FILES,
+        excludeFiles: TEST_EXCLUDES,
         rules: {
           'import/no-nodejs-modules': 'error',
         },
@@ -442,19 +449,14 @@ export default defineConfig({
       {
         // Renderer boundary: shared renderer code outside the forge adapter
         // implementations must go through the adapter API. See ARCHITECTURE.md.
-        files: [
-          'src/renderer/App.tsx',
-          'src/renderer/index.tsx',
-          'src/renderer/routes/**/*.ts',
-          'src/renderer/routes/**/*.tsx',
-        ],
-        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        files: ['src/renderer/App.tsx', 'src/renderer/index.tsx', ...rendererLayerFiles('routes')],
+        excludeFiles: TEST_FILES,
         rules: {
           'no-restricted-imports': ['error', { patterns: [forgeSpecificBoundaryPattern] }],
         },
       },
       {
-        files: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
+        files: TEST_EXCLUDES,
         rules: {
           'vitest/no-focused-tests': 'error',
           // Only `no-focused-tests` is opted into. The plugin's other
