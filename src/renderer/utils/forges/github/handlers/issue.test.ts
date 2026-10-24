@@ -6,8 +6,13 @@ import {
   noReactionGroups,
 } from '../__mocks__/response-mocks';
 
-import type { GitifyNotification } from '../../../../types';
-import { type GitifyIssueState, type GitifySubject, IconColor, type Link } from '../../../../types';
+import {
+  type GitifyIssueState,
+  type GitifyNotification,
+  type GitifySubject,
+  IconColor,
+  type Link,
+} from '../../../../types';
 
 import * as apiClient from '../client';
 import type { FetchIssueByNumberQuery } from '../graphql/generated/graphql';

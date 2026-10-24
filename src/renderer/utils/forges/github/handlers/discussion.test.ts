@@ -7,9 +7,9 @@ import {
   noReactionGroups,
 } from '../__mocks__/response-mocks';
 
-import type { GitifyNotification } from '../../../../types';
 import {
   type GitifyDiscussionState,
+  type GitifyNotification,
   type GitifySubject,
   IconColor,
   type Link,

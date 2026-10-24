@@ -212,6 +212,9 @@ export default defineConfig({
     },
     ignorePatterns: ['**/generated/**', 'build/**', 'dist/**', 'coverage/**', 'node_modules/**'],
     rules: {
+      'import/no-self-import': 'error',
+      'import/no-duplicates': 'error',
+      'import/no-empty-named-blocks': 'error',
       'no-console': 'error',
       'no-unused-vars': [
         'error',
