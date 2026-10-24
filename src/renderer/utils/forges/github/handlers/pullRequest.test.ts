@@ -8,8 +8,8 @@ import {
   noReactionGroups,
 } from '../__mocks__/response-mocks';
 
-import type { GitifyNotification } from '../../../../types';
 import {
+  type GitifyNotification,
   type GitifyPullRequestState,
   type GitifySubject,
   IconColor,

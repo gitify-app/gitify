@@ -1,7 +1,11 @@
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 
-import type { GitifyNotification } from '../../../../types';
-import { type GitifyNotificationState, IconColor, type Link } from '../../../../types';
+import {
+  type GitifyNotification,
+  type GitifyNotificationState,
+  IconColor,
+  type Link,
+} from '../../../../types';
 
 import { defaultHandler } from './default';
 
