@@ -1,4 +1,4 @@
-import { useSettingsStore } from '../../stores';
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import { updateTrayColor, updateTrayTitle } from './comms';
 
