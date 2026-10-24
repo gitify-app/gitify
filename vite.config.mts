@@ -125,6 +125,11 @@ const processBoundaryPattern = rendererBoundaryPattern(
   'Renderer boundary: use `window.gitify` instead of importing the main or preload process (see ARCHITECTURE.md).',
 );
 
+const forgeSpecificBoundaryPattern = rendererBoundaryPattern(
+  ['forges/github', 'forges/gitlab', 'forges/gitea', 'forges/bitbucket'],
+  'Renderer boundary: shared code must use the forge adapter instead of importing a forge-specific module (see ARCHITECTURE.md).',
+);
+
 export default defineConfig({
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
@@ -256,8 +261,32 @@ export default defineConfig({
       },
       {
         // Renderer boundary: `utils` and `stores` are peer domain layers; neither
-        // may import hooks, components, or routes. See ARCHITECTURE.md.
+        // may import hooks, components, or routes. Shared utils also may not
+        // import a forge-specific module; they go through the forge adapter.
+        // See ARCHITECTURE.md.
         files: ['src/renderer/utils/**/*.ts', 'src/renderer/utils/**/*.tsx'],
+        excludeFiles: ['src/renderer/utils/forges/**', '**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [
+                rendererBoundaryPattern(
+                  ['hooks', 'components', 'routes'],
+                  'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
+                ),
+                processBoundaryPattern,
+                forgeSpecificBoundaryPattern,
+              ],
+            },
+          ],
+        },
+      },
+      {
+        // Forge adapter implementations are the one place allowed to import
+        // their own forge-specific modules. They remain `utils` and may not
+        // import hooks, components, or routes. See ARCHITECTURE.md.
+        files: ['src/renderer/utils/forges/**/*.ts', 'src/renderer/utils/forges/**/*.tsx'],
         excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
         rules: {
           'no-restricted-imports': [
@@ -287,6 +316,7 @@ export default defineConfig({
                   'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
                 ),
                 processBoundaryPattern,
+                forgeSpecificBoundaryPattern,
               ],
             },
           ],
@@ -305,6 +335,7 @@ export default defineConfig({
                   'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
                 ),
                 processBoundaryPattern,
+                forgeSpecificBoundaryPattern,
               ],
             },
           ],
@@ -317,7 +348,11 @@ export default defineConfig({
           'no-restricted-imports': [
             'error',
             {
-              patterns: [componentRoutesBoundaryPattern, processBoundaryPattern],
+              patterns: [
+                componentRoutesBoundaryPattern,
+                processBoundaryPattern,
+                forgeSpecificBoundaryPattern,
+              ],
             },
           ],
         },
@@ -343,6 +378,7 @@ export default defineConfig({
                 componentRoutesBoundaryPattern,
                 notificationQueryBoundaryPattern,
                 processBoundaryPattern,
+                forgeSpecificBoundaryPattern,
               ],
             },
           ],
@@ -363,6 +399,7 @@ export default defineConfig({
                   'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
                 ),
                 processBoundaryPattern,
+                forgeSpecificBoundaryPattern,
               ],
             },
           ],
@@ -383,6 +420,7 @@ export default defineConfig({
                   'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
                 ),
                 processBoundaryPattern,
+                forgeSpecificBoundaryPattern,
               ],
             },
           ],
@@ -396,6 +434,20 @@ export default defineConfig({
         excludeFiles: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
         rules: {
           'import/no-nodejs-modules': 'error',
+        },
+      },
+      {
+        // Renderer boundary: shared renderer code outside the forge adapter
+        // implementations must go through the adapter API. See ARCHITECTURE.md.
+        files: [
+          'src/renderer/App.tsx',
+          'src/renderer/index.tsx',
+          'src/renderer/routes/**/*.ts',
+          'src/renderer/routes/**/*.tsx',
+        ],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': ['error', { patterns: [forgeSpecificBoundaryPattern] }],
         },
       },
       {
