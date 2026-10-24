@@ -31,7 +31,7 @@ describe('renderer/routes/Login.tsx', () => {
   it.each([
     ['login-github', '/login/github/device-flow'],
     ['login-pat', '/login/github/personal-access-token'],
-    ['login-oauth-app', '/login/github/oauth-app'],
+    ['login-custom-oauth-app', '/login/github/custom-oauth-app'],
   ])('navigates %s', async (testId, route) => {
     renderWithProviders(<LoginRoute />);
 

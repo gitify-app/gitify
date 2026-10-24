@@ -14,7 +14,7 @@ import { Constants } from '../constants';
 
 import { useAccountsStore } from '../stores';
 
-import type { ClientID, ClientSecret, Token } from '../types';
+import type { ClientID, Token } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
 import { getAdapter } from '../utils/forges/registry';
@@ -113,7 +113,7 @@ describe('renderer/hooks/useLogins.ts', () => {
     expect(pollSpy).toHaveBeenCalledWith('session');
   });
 
-  it('loginWithDeviceFlowComplete creates the account', async () => {
+  it('loginWithDeviceFlowComplete records the built-in Gitify OAuth App account', async () => {
     const { result } = renderLoginsHook();
 
     await act(async () => {
@@ -124,24 +124,36 @@ describe('renderer/hooks/useLogins.ts', () => {
       );
     });
 
-    expect(createAccountSpy).toHaveBeenCalledWith('GitHub App', 'token', 'github.com', 'github');
+    expect(createAccountSpy).toHaveBeenCalledWith(
+      'Gitify OAuth App',
+      'token',
+      'github.com',
+      'github',
+      undefined,
+      undefined,
+    );
   });
 
-  it('loginWithOAuthApp delegates to the forge adapter', async () => {
-    const adapter = getAdapter('github');
-    const oauthSpy = vi.spyOn(adapter.oauthWebApp!, 'performWebOAuth');
-
+  it('loginWithDeviceFlowComplete records a custom app client ID', async () => {
     const { result } = renderLoginsHook();
 
     await act(async () => {
-      void result.current.loginWithOAuthApp('github', {
-        clientId: 'id' as ClientID,
-        clientSecret: 'secret' as ClientSecret,
-        hostname: Constants.GITHUB_HOSTNAME,
-      });
+      await result.current.loginWithDeviceFlowComplete(
+        'github',
+        'token' as Token,
+        Constants.GITHUB_HOSTNAME,
+        'CUSTOM_CLIENT_ID_123' as ClientID,
+      );
     });
 
-    expect(oauthSpy).toHaveBeenCalled();
+    expect(createAccountSpy).toHaveBeenCalledWith(
+      'Custom OAuth App',
+      'token',
+      'github.com',
+      'github',
+      undefined,
+      'CUSTOM_CLIENT_ID_123',
+    );
   });
 
   it('loginWithDeviceFlowStart throws when the forge does not support device flow', async () => {
@@ -170,18 +182,6 @@ describe('renderer/hooks/useLogins.ts', () => {
         Constants.GITHUB_HOSTNAME,
       ),
     ).rejects.toThrow(/does not support device flow/);
-  });
-
-  it('loginWithOAuthApp throws when the forge does not support OAuth app login', async () => {
-    const { result } = renderLoginsHook();
-
-    await expect(
-      result.current.loginWithOAuthApp('gitea', {
-        clientId: 'id' as ClientID,
-        clientSecret: 'secret' as ClientSecret,
-        hostname: Constants.GITHUB_HOSTNAME,
-      }),
-    ).rejects.toThrow(/OAuth app login is not supported for forge "gitea"/);
   });
 
   it('logoutFromAccount calls removeAccountNotifications, removeAccount', async () => {

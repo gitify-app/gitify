@@ -21,7 +21,7 @@ import {
 
 import {
   mockGiteaAccount,
-  mockGitHubAppAccount,
+  mockGitifyOAuthAppAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from './account-mocks';
@@ -332,7 +332,7 @@ export function mockPartialGitifyNotification(
   repository?: Partial<GitifyRepository>,
 ): GitifyNotification {
   const mockNotification: Partial<GitifyNotification> = {
-    account: mockGitHubAppAccount,
+    account: mockGitifyOAuthAppAccount,
     reason: {
       code: 'subscribed',
       title: 'Updated',

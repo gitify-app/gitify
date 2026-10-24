@@ -4,10 +4,10 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useAccountsStore } from '../stores';
 
-import type { Account, Forge, Hostname, Token } from '../types';
+import type { Account, ClientID, Forge, Hostname, Token } from '../types';
 import type {
+  AuthMethod,
   DeviceFlowSession,
-  LoginOAuthWebOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
@@ -21,11 +21,16 @@ interface LoginsState {
     forge: Forge,
     hostname?: Hostname,
     scopes?: string[],
+    clientId?: ClientID,
   ) => Promise<DeviceFlowSession>;
   loginWithDeviceFlowPoll: (forge: Forge, session: DeviceFlowSession) => Promise<Token | null>;
-  loginWithDeviceFlowComplete: (forge: Forge, token: Token, hostname: Hostname) => Promise<void>;
+  loginWithDeviceFlowComplete: (
+    forge: Forge,
+    token: Token,
+    hostname: Hostname,
+    clientId?: ClientID,
+  ) => Promise<void>;
   loginWithCli: (forge: Forge, hostname: Hostname) => Promise<void>;
-  loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
   logoutFromAccount: (account: Account) => void;
 }
@@ -63,12 +68,12 @@ export const useLogins = (): LoginsState => {
    * Initiate an OAuth device-flow session for the given forge.
    */
   const loginWithDeviceFlowStart = useCallback(
-    async (forge: Forge, hostname?: Hostname, scopes?: string[]) => {
+    async (forge: Forge, hostname?: Hostname, scopes?: string[], clientId?: ClientID) => {
       const { deviceFlow } = getAdapter(forge);
       if (!deviceFlow) {
         throw new Error(`Device flow is not supported for forge "${forge}".`);
       }
-      return await deviceFlow.start(hostname, scopes);
+      return await deviceFlow.start(hostname, scopes, clientId);
     },
     [],
   );
@@ -88,19 +93,22 @@ export const useLogins = (): LoginsState => {
    * Finalise an OAuth device-flow session by recording the account.
    */
   const loginWithDeviceFlowComplete = useCallback(
-    async (forge: Forge, token: Token, hostname: Hostname) => {
-      const { deviceFlow } = getAdapter(forge);
+    async (forge: Forge, token: Token, hostname: Hostname, clientId?: ClientID) => {
+      const { deviceFlow, customOAuthApp } = getAdapter(forge);
       if (!deviceFlow) {
         throw new Error(`Forge "${forge}" does not support device flow.`);
       }
-      const method = deviceFlow.authMethod;
+      // A supplied client ID means the user authorized their own app; without
+      // one the flow used Gitify's preconfigured app.
+      const method: AuthMethod =
+        clientId && customOAuthApp ? customOAuthApp.authMethod : deviceFlow.authMethod;
 
       const existingAccount = accounts.find((a) => a.hostname === hostname && a.method === method);
       if (existingAccount) {
         removeAccountNotifications(existingAccount);
       }
 
-      await createAccount(method, token, hostname, forge);
+      await createAccount(method, token, hostname, forge, undefined, clientId);
     },
     [accounts, createAccount, removeAccountNotifications],
   );
@@ -133,31 +141,6 @@ export const useLogins = (): LoginsState => {
       await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
     },
     [createAccountInStore, queryClient, removeAccountNotifications],
-  );
-
-  /**
-   * Login with a custom OAuth app on the given forge.
-   */
-  const loginWithOAuthApp = useCallback(
-    async (forge: Forge, data: LoginOAuthWebOptions) => {
-      const { oauthWebApp } = getAdapter(forge);
-      if (!oauthWebApp) {
-        throw new Error(`OAuth app login is not supported for forge "${forge}".`);
-      }
-
-      const { authOptions, authCode } = await oauthWebApp.performWebOAuth(data);
-      const token = await oauthWebApp.exchangeAuthCodeForToken(authCode, authOptions);
-
-      const existingAccount = accounts.find(
-        (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
-      );
-      if (existingAccount) {
-        removeAccountNotifications(existingAccount);
-      }
-
-      await createAccount('OAuth App', token, authOptions.hostname, forge);
-    },
-    [accounts, createAccount, removeAccountNotifications],
   );
 
   /**
@@ -203,7 +186,6 @@ export const useLogins = (): LoginsState => {
     loginWithDeviceFlowPoll,
     loginWithDeviceFlowComplete,
     loginWithCli,
-    loginWithOAuthApp,
     loginWithPersonalAccessToken,
     logoutFromAccount,
   };
