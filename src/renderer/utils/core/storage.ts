@@ -1,7 +1,8 @@
 import { Constants } from '../../constants';
 
-import { DEFAULT_SETTINGS_STATE, useAccountsStore, useSettingsStore } from '../../stores';
-import { sanitizeAccounts } from '../../stores/useAccountsStore';
+import { DEFAULT_SETTINGS_STATE } from '../../stores/defaults';
+import useAccountsStore, { sanitizeAccounts } from '../../stores/useAccountsStore';
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import { rendererLogError, rendererLogInfo, toError } from './logger';
 

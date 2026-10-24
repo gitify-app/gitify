@@ -4,7 +4,7 @@ import type {
   TrayIconAppearance,
 } from '../../../shared/events';
 
-import { useSettingsStore } from '../../stores';
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import { type Link, OpenPreference } from '../../types';
 

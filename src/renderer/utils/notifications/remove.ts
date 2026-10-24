@@ -1,4 +1,4 @@
-import { useSettingsStore } from '../../stores';
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import type { Account, AccountNotifications, GitifyNotification } from '../../types';
 
