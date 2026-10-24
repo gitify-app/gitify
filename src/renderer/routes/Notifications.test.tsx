@@ -15,6 +15,10 @@ vi.mock('../components/AllRead', () => ({
   AllRead: () => <p>AllRead</p>,
 }));
 
+vi.mock('../components/Loading', () => ({
+  Loading: () => <p>Loading</p>,
+}));
+
 vi.mock('../components/Oops', () => ({
   Oops: () => <p>Oops</p>,
 }));
@@ -31,7 +35,59 @@ describe('renderer/routes/Notifications.tsx', () => {
 
   it('should render itself & its children (all read notifications)', () => {
     const tree = renderWithProviders(<NotificationsRoute />);
+    expect(screen.getByText('AllRead')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
     expect(tree.container).toMatchSnapshot();
+  });
+
+  it('should render loading state instead of all-read while notifications are loading', () => {
+    const tree = renderWithProviders(<NotificationsRoute />, {
+      status: 'loading',
+    });
+
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+    expect(screen.queryByText('AllRead')).not.toBeInTheDocument();
+    expect(tree.container).toMatchSnapshot();
+  });
+
+  it('should keep notifications visible during a background refresh', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      notifications: mockMultipleAccountNotifications,
+      hasNotifications: true,
+      isFetching: true,
+    });
+
+    expect(screen.getByText('NotificationList')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+  });
+
+  it('should keep all-read visible during a background refresh with an empty inbox', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      isFetching: true,
+    });
+
+    expect(screen.getByText('AllRead')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+  });
+
+  it('should prefer the offline state over loading', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      isOnline: false,
+      status: 'loading',
+    });
+
+    expect(screen.getByText('Oops')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+  });
+
+  it('should prefer the error state over loading', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      globalError: Errors.UNKNOWN,
+      status: 'error',
+    });
+
+    expect(screen.getByText('Oops')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
   });
 
   it('should render itself & its children (show account header)', () => {

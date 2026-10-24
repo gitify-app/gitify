@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { keepPreviousData, type QueryKey, useQuery, useQueryClient } from '@tanstack/react-query';
+import { type QueryKey, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { Constants } from '../../constants';
 
@@ -44,6 +44,20 @@ export interface NotificationsQueryResult {
   refetch: () => void;
   refetchNotifications: () => Promise<void>;
   removeAccountNotifications: (account: Account) => void;
+}
+
+/**
+ * Keep previous notifications visible across query-key changes only when they
+ * contain actual content or account errors. An account set with empty inboxes is
+ * not content: it must not make a new account set look settled. Returning
+ * undefined lets the query report initial loading instead.
+ */
+function keepNonEmptyPreviousData(
+  previousData: AccountNotifications[] | undefined,
+): AccountNotifications[] | undefined {
+  return previousData?.some((account) => account.notifications.length > 0 || account.error !== null)
+    ? previousData
+    : undefined;
 }
 
 /**
@@ -129,7 +143,7 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     // This allows filter changes to instantly update without refetching
     select: selectFilteredNotifications,
 
-    placeholderData: keepPreviousData,
+    placeholderData: keepNonEmptyPreviousData,
 
     // Fresh for at least one poll cycle at the fastest possible interval, so
     // data isn't treated as stale before a refetch could realistically have
