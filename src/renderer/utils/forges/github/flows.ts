@@ -13,7 +13,8 @@ import type { AuthCode, Hostname, Link, Token } from '../../../types';
 import type { AuthResponse, DeviceFlowSession, LoginOAuthWebOptions } from '../../auth/types';
 
 import { getRecommendedScopeNames } from '../../auth/scopes';
-import { rendererLogError, rendererLogInfo, toError } from '../../core/logger';
+import { generateOAuthState } from '../../auth/state';
+import { rendererLogError, rendererLogInfo, rendererLogWarn, toError } from '../../core/logger';
 import { openExternalLink } from '../../system/comms';
 import { getGitHubAuthBaseUrl } from './auth';
 
@@ -29,16 +30,32 @@ type DeviceFlowErrorResponse = {
  * Opens the GitHub authorization URL in the user's browser, then waits for the
  * app's custom `gitify://oauth` callback to receive the authorization code.
  *
+ * The login is bound to a per-attempt random `state` that is sent with the
+ * authorization request and must be echoed by the callback. A callback
+ * carrying a missing or mismatched `state` is logged and ignored, so a
+ * `gitify://oauth` link delivered from outside this attempt cannot bind the
+ * client to a different GitHub account or tear down the pending login.
+ *
  * @param authOptions - The OAuth App client configuration and target hostname.
  * @returns Resolves with the authorization code and options on success.
  */
 export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
-    const { url } = getWebFlowAuthorizationUrl({
+    // A per-attempt, unguessable value this app itself tracks and checks on
+    // callback, so a `gitify://oauth` callback carrying an authorization code
+    // this specific login attempt never requested (e.g. one an attacker
+    // obtained for their own GitHub account) is rejected instead of silently
+    // accepted and exchanged for a token.
+    //
+    // Read the state back from the library's result rather than trusting the
+    // value echoed to us, so the string compared on callback is exactly the one
+    // the library embedded in the authorization URL.
+    const { url, state: expectedState } = getWebFlowAuthorizationUrl({
       clientType: 'oauth-app',
       clientId: authOptions.clientId,
       scopes: getRecommendedScopeNames(),
       allowSignup: false,
+      state: generateOAuthState(),
       request: request.defaults({
         baseUrl: `https://${authOptions.hostname}`,
       }),
@@ -56,16 +73,36 @@ export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promis
       try {
         url = new URL(callbackUrl);
       } catch {
-        unsubscribeAuthCallback?.();
-        reject(new Error(`Received an invalid authentication callback URL: ${callbackUrl}`));
+        // An unparseable callback cannot carry the state this attempt
+        // generated, so treat it like any other unmatched callback: log and
+        // ignore rather than tearing down the pending login. Otherwise a
+        // forged `gitify://` URL (e.g. `gitify://[`) would abort a legitimate
+        // login even though the state check never runs.
+        rendererLogWarn(
+          'renderer:auth-callback',
+          'Ignored an unparseable authentication callback URL',
+        );
         return;
       }
 
       const type = url.hostname;
       const code = url.searchParams.get('code');
+      const state = url.searchParams.get('state');
       const error = url.searchParams.get('error');
       const errorDescription = url.searchParams.get('error_description');
       const errorUri = url.searchParams.get('error_uri');
+
+      // A callback belongs to this login attempt only when it echoes the state
+      // this attempt generated. Anything else (missing or mismatched state) is
+      // logged and ignored, leaving the pending login intact so an injected
+      // callback can neither bind another account nor tear down the attempt.
+      if (state !== expectedState) {
+        rendererLogWarn(
+          'renderer:auth-callback',
+          'Ignored an authentication callback with a missing or mismatched state parameter',
+        );
+        return;
+      }
 
       if (code && type === 'oauth') {
         unsubscribeAuthCallback?.();

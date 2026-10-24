@@ -193,6 +193,109 @@ describe('renderer/hooks/useNotifications.ts', () => {
     });
   });
 
+  describe('account set changes', () => {
+    it('reports loading when a new account set starts from an empty settled result', async () => {
+      useAccountsStore.setState({ accounts: [] });
+      getAllNotificationsMock.mockResolvedValueOnce([]);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.status).toBe('success'));
+
+      let resolveFetch: ((data: AccountNotifications[]) => void) | undefined;
+      getAllNotificationsMock.mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            resolveFetch = resolve;
+          }),
+      );
+
+      act(() => {
+        useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+      });
+
+      await waitFor(() => expect(result.current.status).toBe('loading'));
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+
+      await act(async () => {
+        resolveFetch?.(mockSingleAccountNotifications);
+      });
+
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(result.current.notifications).toEqual(mockSingleAccountNotifications);
+    });
+
+    it('reports loading when the account set changes from an empty settled inbox', async () => {
+      getAllNotificationsMock.mockResolvedValueOnce([
+        {
+          account: mockGitHubCloudAccount,
+          notifications: [],
+          error: null,
+        },
+      ]);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(result.current.notifications).toHaveLength(1);
+      expect(result.current.notifications[0].notifications).toEqual([]);
+
+      let resolveFetch: ((data: AccountNotifications[]) => void) | undefined;
+      getAllNotificationsMock.mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            resolveFetch = resolve;
+          }),
+      );
+
+      act(() => {
+        useAccountsStore.setState({
+          accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+        });
+      });
+
+      await waitFor(() => expect(result.current.status).toBe('loading'));
+
+      await act(async () => {
+        resolveFetch?.(mockMultipleAccountNotifications);
+      });
+
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(result.current.notifications).toEqual(mockMultipleAccountNotifications);
+    });
+
+    it('keeps non-empty notifications visible while a new account set loads', async () => {
+      getAllNotificationsMock.mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(result.current.notifications).toEqual(mockSingleAccountNotifications);
+
+      let resolveFetch: ((data: AccountNotifications[]) => void) | undefined;
+      getAllNotificationsMock.mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            resolveFetch = resolve;
+          }),
+      );
+
+      act(() => {
+        useAccountsStore.setState({
+          accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+        });
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(true));
+      expect(result.current.status).toBe('success');
+      expect(result.current.notifications).toEqual(mockSingleAccountNotifications);
+
+      await act(async () => {
+        resolveFetch?.(mockMultipleAccountNotifications);
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(false));
+      expect(result.current.notifications).toEqual(mockMultipleAccountNotifications);
+    });
+  });
+
   describe('status stability during background refetches', () => {
     it('keeps status as error while a retry during an ongoing outage is in flight', async () => {
       let rejectRetry: (() => void) | undefined;
@@ -260,6 +363,36 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       await act(async () => {
         resolveRefetch?.(mockSingleAccountNotifications);
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(false));
+      expect(result.current.status).toBe('success');
+    });
+
+    it('keeps status as success while a settled empty inbox refetches', async () => {
+      let resolveRefetch: ((data: AccountNotifications[]) => void) | undefined;
+      getAllNotificationsMock.mockResolvedValueOnce([]).mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            resolveRefetch = resolve;
+          }),
+      );
+
+      const { result } = renderNotificationsHook();
+
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(result.current.notifications).toEqual([]);
+
+      act(() => {
+        void result.current.refetchNotifications();
+      });
+
+      await waitFor(() => expect(result.current.isFetching).toBe(true));
+      expect(result.current.status).toBe('success');
+      expect(result.current.notifications).toEqual([]);
+
+      await act(async () => {
+        resolveRefetch?.([]);
       });
 
       await waitFor(() => expect(result.current.isFetching).toBe(false));

@@ -1,0 +1,53 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/Loading.tsx > should render itself & its children 1`] = `
+<div>
+  <div
+    class="h-screen prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-component="Stack"
+    data-direction="vertical"
+    data-justify="center"
+    data-padding="spacious"
+    data-wrap="nowrap"
+  >
+    <div
+      class="prc-Stack-Stack-UQ9k6"
+      data-align="center"
+      data-component="Stack"
+      data-direction="vertical"
+      data-gap="condensed"
+      data-justify="center"
+      data-padding="none"
+      data-wrap="nowrap"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-component="Stack"
+        data-direction="vertical"
+        data-gap="spacious"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <div
+          class="text-7xl"
+        >
+          <img
+            alt="⏳"
+            class="emoji"
+            draggable="false"
+            src="/mock/images/assets/23f3.svg"
+          />
+        </div>
+        <div
+          class="text-xl font-semibold"
+        >
+          Loading
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
