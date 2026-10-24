@@ -220,6 +220,7 @@ export default defineConfig({
               patterns: [
                 {
                   group: ['**/hooks/**', '**/components/**', '**/routes/**'],
+                  allowTypeImports: true,
                   message:
                     'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
                 },
@@ -238,6 +239,7 @@ export default defineConfig({
               patterns: [
                 {
                   group: ['**/hooks/**', '**/components/**', '**/routes/**'],
+                  allowTypeImports: true,
                   message:
                     'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
                 },
@@ -256,6 +258,7 @@ export default defineConfig({
               patterns: [
                 {
                   group: ['**/components/**', '**/routes/**'],
+                  allowTypeImports: true,
                   message:
                     'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
                 },
@@ -274,6 +277,7 @@ export default defineConfig({
               patterns: [
                 {
                   group: ['**/routes/**'],
+                  allowTypeImports: true,
                   message:
                     'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
                 },
@@ -302,6 +306,7 @@ export default defineConfig({
               patterns: [
                 {
                   group: ['**/routes/**'],
+                  allowTypeImports: true,
                   message:
                     'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
                 },
@@ -311,6 +316,7 @@ export default defineConfig({
                     '**/hooks/notifications/useNotificationsQuery',
                     '**/hooks/notifications/useNotificationsHost',
                   ],
+                  allowTypeImports: true,
                   message:
                     'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
                 },
@@ -337,6 +343,7 @@ export default defineConfig({
                     '**/components/**',
                     '**/routes/**',
                   ],
+                  allowTypeImports: true,
                   message:
                     'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
                 },
