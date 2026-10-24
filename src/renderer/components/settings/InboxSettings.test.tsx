@@ -246,4 +246,18 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
     );
   });
+
+  it('should show help for the fetch interval', async () => {
+    await act(async () => {
+      renderWithProviders(<InboxSettings />);
+    });
+
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-fetchInterval'));
+
+    expect(
+      screen.getByText(
+        'Set how often Gitify checks for new notifications. Shorter intervals check more often and use more API requests.',
+      ),
+    ).toBeInTheDocument();
+  });
 });

@@ -81,7 +81,16 @@ export function InboxSettings() {
         <SettingsGroupHeading icon={DownloadIcon}>Fetching</SettingsGroupHeading>
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <FieldLabel label="Fetch interval:" name="fetchInterval" />
+          <FieldLabel
+            label="Fetch interval:"
+            name="fetchInterval"
+            tooltip={
+              <Text>
+                Set how often Gitify checks for new notifications. Shorter intervals check more
+                often and use more API requests.
+              </Text>
+            }
+          />
 
           <ButtonGroup className="ml-2">
             <IconButton

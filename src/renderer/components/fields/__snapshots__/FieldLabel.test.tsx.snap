@@ -3,7 +3,7 @@
 exports[`renderer/components/fields/FieldLabel.tsx > should render 1`] = `
 <div>
   <label
-    class="mr-1 font-medium cursor-pointer"
+    class="font-medium cursor-pointer mr-1"
     for="appearance"
   >
     Appearance

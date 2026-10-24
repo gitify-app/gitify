@@ -121,4 +121,27 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
 
     expect(screen.queryByTestId('checkbox-showStatusIconColors')).not.toBeInTheDocument();
   });
+
+  it.each([
+    [
+      'tooltip-icon-tooltip-design-language',
+      'Choose Classic for the original Gitify layout, or Glass for the translucent, layered design language.',
+    ],
+    [
+      'tooltip-icon-tooltip-theme',
+      'Choose a light, dark, or system color mode. Available options depend on the selected design language.',
+    ],
+    [
+      'tooltip-icon-tooltip-zoom',
+      'Change the size of the Gitify interface. The setting applies immediately and is remembered for the next launch.',
+    ],
+  ])('should show help for %s', async (testId, help) => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    await userEvent.click(screen.getByTestId(testId));
+
+    expect(screen.getByText(help)).toBeInTheDocument();
+  });
 });
