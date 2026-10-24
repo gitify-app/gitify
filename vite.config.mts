@@ -301,6 +301,11 @@ export default defineConfig({
             {
               patterns: [
                 {
+                  group: ['**/routes/**'],
+                  message:
+                    'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
+                },
+                {
                   group: [
                     '**/hooks/useNotifications',
                     '**/hooks/notifications/useNotificationsQuery',
