@@ -44,7 +44,6 @@ export function SystemSettings() {
   const openGitifyShortcut = useSettingsStore((s) => s.openGitifyShortcut);
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
-  const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
   const useX11Backend = useSettingsStore((s) => s.useX11Backend);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
@@ -273,16 +272,12 @@ export function SystemSettings() {
         />
 
         <Checkbox
-          checked={showUpdateNotifications}
-          label="Show update notifications"
-          name="showUpdateNotifications"
-          onChange={() => toggleSetting('showUpdateNotifications')}
-          tooltip={
-            <Text>
-              Show a notification when a {APPLICATION.NAME} update is ready. Updates will still be
-              checked and shown in the menu bar.
-            </Text>
-          }
+          checked={openAtStartup}
+          label="Open at startup"
+          name="openAtStartup"
+          onChange={() => toggleSetting('openAtStartup')}
+          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
+          visible={!window.gitify.platform.isLinux()}
         />
 
         <Checkbox
@@ -317,15 +312,6 @@ export function SystemSettings() {
             </Button>
           </Stack>
         )}
-
-        <Checkbox
-          checked={openAtStartup}
-          label="Open at startup"
-          name="openAtStartup"
-          onChange={() => toggleSetting('openAtStartup')}
-          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
-          visible={!window.gitify.platform.isLinux()}
-        />
       </Stack>
     </fieldset>
   );

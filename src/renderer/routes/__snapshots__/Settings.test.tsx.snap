@@ -525,106 +525,6 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </div>
             </div>
           </div>
-          <div
-            class="text-sm prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-component="Stack"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-showAccountHeader"
-              id="showAccountHeader"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="showAccountHeader"
-            >
-              Show account header
-            </label>
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="tooltip-showAccountHeader"
-              data-testid="tooltip-icon-tooltip-showAccountHeader"
-              id="tooltip-showAccountHeader"
-              tabindex="0"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                data-component="Octicon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-component="Stack"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-wrapNotificationTitle"
-              id="wrapNotificationTitle"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="wrapNotificationTitle"
-            >
-              Show full notification title
-            </label>
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="tooltip-wrapNotificationTitle"
-              data-testid="tooltip-icon-tooltip-wrapNotificationTitle"
-              id="tooltip-wrapNotificationTitle"
-              tabindex="0"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                data-component="Octicon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
       </fieldset>
       <fieldset>
@@ -679,101 +579,12 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           data-padding="none"
           data-wrap="nowrap"
         >
-          <div
-            class="text-sm prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-component="Stack"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
+          <h5
+            class="pt-2 text-xs font-semibold uppercase tracking-wide text-gitify-icon-muted prc-Text-Text-9mHv3"
+            data-component="Text"
           >
-            <label
-              class="mr-1 font-medium cursor-pointer"
-              for="radio-groupBy-repository"
-            >
-              Group by:
-            </label>
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-component="Stack"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <input
-                checked=""
-                class="size-4 cursor-pointer"
-                data-testid="radio-groupBy-repository"
-                id="radio-groupBy-repository"
-                name="groupBy"
-                type="radio"
-                value="REPOSITORY"
-              />
-              <label
-                class="mr-1 font-medium cursor-pointer"
-                for="radio-groupBy-repository"
-              >
-                Repository
-              </label>
-            </div>
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="center"
-              data-component="Stack"
-              data-direction="horizontal"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
-            >
-              <input
-                class="size-4 cursor-pointer"
-                data-testid="radio-groupBy-date"
-                id="radio-groupBy-date"
-                name="groupBy"
-                type="radio"
-                value="DATE"
-              />
-              <label
-                class="mr-1 font-medium cursor-pointer"
-                for="radio-groupBy-date"
-              >
-                Date
-              </label>
-            </div>
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="tooltip-groupBy"
-              data-testid="tooltip-icon-tooltip-groupBy"
-              id="tooltip-groupBy"
-              tabindex="0"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                data-component="Octicon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
-          </div>
+            Fetching
+          </h5>
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
@@ -985,24 +796,124 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <input
-              checked=""
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-detailedNotifications"
-              id="detailedNotifications"
+              data-testid="checkbox-fetchReadNotifications"
+              id="fetchReadNotifications"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="detailedNotifications"
+              for="fetchReadNotifications"
             >
-              Fetch detailed notifications
+              Fetch read and done notifications
             </label>
             <button
               aria-expanded="false"
               aria-haspopup="true"
-              aria-label="tooltip-detailedNotifications"
-              data-testid="tooltip-icon-tooltip-detailedNotifications"
-              id="tooltip-detailedNotifications"
+              aria-label="tooltip-fetchReadNotifications"
+              data-testid="tooltip-icon-tooltip-fetchReadNotifications"
+              id="tooltip-fetchReadNotifications"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <h5
+            class="pt-2 text-xs font-semibold uppercase tracking-wide text-gitify-icon-muted prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            List
+          </h5>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <label
+              class="mr-1 font-medium cursor-pointer"
+              for="radio-groupBy-repository"
+            >
+              Group by:
+            </label>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-4 cursor-pointer"
+                data-testid="radio-groupBy-repository"
+                id="radio-groupBy-repository"
+                name="groupBy"
+                type="radio"
+                value="REPOSITORY"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-groupBy-repository"
+              >
+                Repository
+              </label>
+            </div>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                class="size-4 cursor-pointer"
+                data-testid="radio-groupBy-date"
+                id="radio-groupBy-date"
+                name="groupBy"
+                type="radio"
+                value="DATE"
+              />
+              <label
+                class="mr-1 font-medium cursor-pointer"
+                for="radio-groupBy-date"
+              >
+                Date
+              </label>
+            </div>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-groupBy"
+              data-testid="tooltip-icon-tooltip-groupBy"
+              id="tooltip-groupBy"
               tabindex="0"
               type="button"
             >
@@ -1026,122 +937,212 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </button>
           </div>
           <div
-            class="pl-6"
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
           >
-            <div
-              class="prc-Stack-Stack-UQ9k6"
-              data-align="stretch"
-              data-component="Stack"
-              data-direction="vertical"
-              data-gap="condensed"
-              data-justify="start"
-              data-padding="none"
-              data-wrap="nowrap"
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showAccountHeader"
+              id="showAccountHeader"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="showAccountHeader"
             >
-              <div
-                class="text-sm prc-Stack-Stack-UQ9k6"
-                data-align="center"
-                data-component="Stack"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
+              Show account header
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-showAccountHeader"
+              data-testid="tooltip-icon-tooltip-showAccountHeader"
+              id="tooltip-showAccountHeader"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
               >
-                <input
-                  checked=""
-                  class="size-4 rounded-sm cursor-pointer"
-                  data-testid="checkbox-showPills"
-                  id="showPills"
-                  type="checkbox"
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                 />
-                <label
-                  class="font-medium text-gitify-font cursor-pointer"
-                  for="showPills"
-                >
-                  Show notification metric pills
-                </label>
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  aria-label="tooltip-showPills"
-                  data-testid="tooltip-icon-tooltip-showPills"
-                  id="tooltip-showPills"
-                  tabindex="0"
-                  type="button"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="text-sm prc-Stack-Stack-UQ9k6"
-                data-align="center"
-                data-component="Stack"
-                data-direction="horizontal"
-                data-gap="condensed"
-                data-justify="start"
-                data-padding="none"
-                data-wrap="nowrap"
-              >
-                <input
-                  checked=""
-                  class="size-4 rounded-sm cursor-pointer"
-                  data-testid="checkbox-showNumber"
-                  id="showNumber"
-                  type="checkbox"
-                />
-                <label
-                  class="font-medium text-gitify-font cursor-pointer"
-                  for="showNumber"
-                >
-                  Show identifier
-                </label>
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  aria-label="tooltip-showNumber"
-                  data-testid="tooltip-icon-tooltip-showNumber"
-                  id="tooltip-showNumber"
-                  tabindex="0"
-                  type="button"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
-                    data-component="Octicon"
-                    display="inline-block"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
+              </svg>
+            </button>
           </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-wrapNotificationTitle"
+              id="wrapNotificationTitle"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="wrapNotificationTitle"
+            >
+              Show full notification title
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-wrapNotificationTitle"
+              data-testid="tooltip-icon-tooltip-wrapNotificationTitle"
+              id="tooltip-wrapNotificationTitle"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showNumber"
+              id="showNumber"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="showNumber"
+            >
+              Show reference
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-showNumber"
+              data-testid="tooltip-icon-tooltip-showNumber"
+              id="tooltip-showNumber"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-delayNotificationState"
+              id="delayNotificationState"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="delayNotificationState"
+            >
+              Delay notification removal
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-delayNotificationState"
+              data-testid="tooltip-icon-tooltip-delayNotificationState"
+              id="tooltip-delayNotificationState"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
+          </div>
+          <h5
+            class="pt-2 text-xs font-semibold uppercase tracking-wide text-gitify-icon-muted prc-Text-Text-9mHv3"
+            data-component="Text"
+          >
+            GitHub
+          </h5>
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
             data-align="center"
@@ -1203,23 +1204,24 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             data-wrap="nowrap"
           >
             <input
+              checked=""
               class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-fetchReadNotifications"
-              id="fetchReadNotifications"
+              data-testid="checkbox-detailedNotifications"
+              id="detailedNotifications"
               type="checkbox"
             />
             <label
               class="font-medium text-gitify-font cursor-pointer"
-              for="fetchReadNotifications"
+              for="detailedNotifications"
             >
-              Fetch read & done notifications
+              Fetch detailed notifications
             </label>
             <button
               aria-expanded="false"
               aria-haspopup="true"
-              aria-label="tooltip-fetchReadNotifications"
-              data-testid="tooltip-icon-tooltip-fetchReadNotifications"
-              id="tooltip-fetchReadNotifications"
+              aria-label="tooltip-detailedNotifications"
+              data-testid="tooltip-icon-tooltip-detailedNotifications"
+              id="tooltip-detailedNotifications"
               tabindex="0"
               type="button"
             >
@@ -1241,6 +1243,122 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 />
               </svg>
             </button>
+          </div>
+          <div
+            class="rounded-md px-3 py-2 bg-gitify-accounts text-xs prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-testid="settings-scope-warning"
+            data-wrap="nowrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-alert-fill text-gitify-warning"
+              data-component="Octicon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="14"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 12 12"
+              width="14"
+            >
+              <path
+                d="M4.855.708c.5-.896 1.79-.896 2.29 0l4.675 8.351a1.312 1.312 0 0 1-1.146 1.954H1.33A1.313 1.313 0 0 1 .183 9.058ZM7 7V3H5v4Zm-1 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+              />
+            </svg>
+            <div
+              class="prc-Stack-Stack-UQ9k6"
+              data-align="stretch"
+              data-component="Stack"
+              data-direction="vertical"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <span
+                class="prc-Text-Text-9mHv3"
+                data-component="Text"
+              >
+                One or more accounts are missing scopes required for notification enrichment. Notification details may be incomplete.
+              </span>
+              <span
+                class="prc-Text-Text-9mHv3"
+                data-component="Text"
+              >
+                Visit
+                 
+                <button
+                  class="text-gitify-link cursor-pointer"
+                  type="button"
+                >
+                  Accounts → Scopes
+                </button>
+                 
+                to review.
+              </span>
+            </div>
+          </div>
+          <div
+            class="pl-6"
+          >
+            <div
+              class="text-sm prc-Stack-Stack-UQ9k6"
+              data-align="center"
+              data-component="Stack"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <input
+                checked=""
+                class="size-4 rounded-sm cursor-pointer"
+                data-testid="checkbox-showPills"
+                id="showPills"
+                type="checkbox"
+              />
+              <label
+                class="font-medium text-gitify-font cursor-pointer"
+                for="showPills"
+              >
+                Show notification metrics
+              </label>
+              <button
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-label="tooltip-showPills"
+                data-testid="tooltip-icon-tooltip-showPills"
+                id="tooltip-showPills"
+                tabindex="0"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="octicon octicon-question text-gitify-tooltip-icon"
+                  data-component="Octicon"
+                  display="inline-block"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
           <div
             class="text-sm prc-Stack-Stack-UQ9k6"
@@ -1342,56 +1460,6 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </svg>
             </button>
           </div>
-          <div
-            class="text-sm prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-component="Stack"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-delayNotificationState"
-              id="delayNotificationState"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="delayNotificationState"
-            >
-              Delay notification state
-            </label>
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="tooltip-delayNotificationState"
-              data-testid="tooltip-icon-tooltip-delayNotificationState"
-              id="tooltip-delayNotificationState"
-              tabindex="0"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                data-component="Octicon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
       </fieldset>
       <fieldset>
@@ -1467,7 +1535,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               class="font-medium text-gitify-font cursor-pointer"
               for="showNotifications"
             >
-              Show system notifications
+              Show desktop notifications
             </label>
             <button
               aria-expanded="false"
@@ -1528,7 +1596,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 class="font-medium text-gitify-font cursor-pointer"
                 for="playSound"
               >
-                Play sound
+                Play notification sound
               </label>
             </div>
             <div
@@ -1669,6 +1737,57 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </button>
               </div>
             </div>
+          </div>
+          <div
+            class="text-sm prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <input
+              checked=""
+              class="size-4 rounded-sm cursor-pointer"
+              data-testid="checkbox-showUpdateNotifications"
+              id="showUpdateNotifications"
+              type="checkbox"
+            />
+            <label
+              class="font-medium text-gitify-font cursor-pointer"
+              for="showUpdateNotifications"
+            >
+              Show update notifications
+            </label>
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-label="tooltip-showUpdateNotifications"
+              data-testid="tooltip-icon-tooltip-showUpdateNotifications"
+              id="tooltip-showUpdateNotifications"
+              tabindex="0"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question text-gitify-tooltip-icon"
+                data-component="Octicon"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </fieldset>
@@ -1843,7 +1962,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               class="mr-1 font-medium cursor-pointer"
               for="radio-trayIconAppearance-auto"
             >
-              Idle icon
+              Idle icon:
             </label>
             <div
               class="prc-Stack-Stack-UQ9k6"
@@ -2294,57 +2413,6 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               aria-label="tooltip-keepWindowOnBlur"
               data-testid="tooltip-icon-tooltip-keepWindowOnBlur"
               id="tooltip-keepWindowOnBlur"
-              tabindex="0"
-              type="button"
-            >
-              <svg
-                aria-hidden="true"
-                class="octicon octicon-question text-gitify-tooltip-icon"
-                data-component="Octicon"
-                display="inline-block"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                />
-              </svg>
-            </button>
-          </div>
-          <div
-            class="text-sm prc-Stack-Stack-UQ9k6"
-            data-align="center"
-            data-component="Stack"
-            data-direction="horizontal"
-            data-gap="condensed"
-            data-justify="start"
-            data-padding="none"
-            data-wrap="nowrap"
-          >
-            <input
-              checked=""
-              class="size-4 rounded-sm cursor-pointer"
-              data-testid="checkbox-showUpdateNotifications"
-              id="showUpdateNotifications"
-              type="checkbox"
-            />
-            <label
-              class="font-medium text-gitify-font cursor-pointer"
-              for="showUpdateNotifications"
-            >
-              Show update notifications
-            </label>
-            <button
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-label="tooltip-showUpdateNotifications"
-              data-testid="tooltip-icon-tooltip-showUpdateNotifications"
-              id="tooltip-showUpdateNotifications"
               tabindex="0"
               type="button"
             >

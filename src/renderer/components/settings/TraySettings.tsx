@@ -53,7 +53,7 @@ export function TraySettings() {
         />
 
         <RadioGroup
-          label="Idle icon"
+          label="Idle icon:"
           name="trayIconAppearance"
           value={trayIconAppearance}
           options={[

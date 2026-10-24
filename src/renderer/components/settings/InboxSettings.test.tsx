@@ -2,11 +2,16 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+  mockGitLabAccount,
+} from '../../__mocks__/account-mocks';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { Constants } from '../../constants';
 
-import { useSettingsStore } from '../../stores';
+import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import * as comms from '../../utils/system/comms';
 import { InboxSettings } from './InboxSettings';
@@ -133,10 +138,14 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
     ['checkbox-fetchReadNotifications', 'fetchReadNotifications'],
     ['checkbox-markAsDoneOnOpen', 'markAsDoneOnOpen'],
     ['checkbox-markAsDoneOnUnsubscribe', 'markAsDoneOnUnsubscribe'],
+    ['checkbox-showAccountHeader', 'showAccountHeader'],
+    ['checkbox-wrapNotificationTitle', 'wrapNotificationTitle'],
     ['checkbox-delayNotificationState', 'delayNotificationState'],
   ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
-      renderWithProviders(<InboxSettings />);
+      renderWithProviders(<InboxSettings />, {
+        accounts: [mockGitHubCloudAccount],
+      });
     });
 
     await userEvent.click(screen.getByTestId(testId));
@@ -145,11 +154,62 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
+  it('reactively hides the account header checkbox when a second account is added', async () => {
+    await act(async () => {
+      renderWithProviders(<InboxSettings />, {
+        accounts: [mockGitHubCloudAccount],
+      });
+    });
+
+    expect(screen.getByTestId('checkbox-showAccountHeader')).toBeInTheDocument();
+
+    await act(async () => {
+      useAccountsStore.setState({
+        accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
+      });
+    });
+
+    expect(screen.queryByTestId('checkbox-showAccountHeader')).not.toBeInTheDocument();
+  });
+
+  describe('GitHub-specific settings', () => {
+    it('hides GitHub-only settings when no GitHub account is connected', async () => {
+      await act(async () => {
+        renderWithProviders(<InboxSettings />, {
+          accounts: [mockGitLabAccount],
+        });
+      });
+
+      expect(screen.queryByTestId('checkbox-showOnlyParticipating')).not.toBeInTheDocument();
+      expect(
+        screen.getByText('GitHub-specific options require a GitHub account.'),
+      ).toBeInTheDocument();
+    });
+
+    it('disables mark as done when the GitHub account does not support it', async () => {
+      await act(async () => {
+        renderWithProviders(<InboxSettings />, {
+          accounts: [mockGitHubEnterpriseServerAccount],
+        });
+      });
+
+      expect(screen.getByTestId('checkbox-markAsDoneOnOpen')).toBeDisabled();
+      expect(screen.getByTestId('checkbox-markAsDoneOnUnsubscribe')).toBeDisabled();
+      expect(
+        screen.getByText(
+          'Mark as done requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.',
+        ),
+      ).toBeInTheDocument();
+    });
+  });
+
   it('should open official docs for showOnlyParticipating tooltip', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     await act(async () => {
-      renderWithProviders(<InboxSettings />);
+      renderWithProviders(<InboxSettings />, {
+        accounts: [mockGitHubCloudAccount],
+      });
     });
 
     const tooltipElement = screen.getByLabelText('tooltip-showOnlyParticipating');

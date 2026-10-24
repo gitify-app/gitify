@@ -22,6 +22,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   it.each([
     ['checkbox-showNotifications', 'showNotifications'],
     ['checkbox-playSound', 'playSound'],
+    ['checkbox-showUpdateNotifications', 'showUpdateNotifications'],
   ] as const)('should toggle %s checkbox', async (testId, setting) => {
     await act(async () => {
       renderWithProviders(<AlertSettings />);

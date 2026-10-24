@@ -2,6 +2,7 @@ import { act, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
 import { SettingsRoute } from './Settings';
 
@@ -11,6 +12,7 @@ describe('renderer/routes/Settings.tsx', () => {
   it('should render itself & its children', async () => {
     await act(async () => {
       renderWithProviders(<SettingsRoute />, {
+        accounts: [mockGitHubCloudAccount],
         initialEntries: ['/settings'],
       });
     });
@@ -21,6 +23,7 @@ describe('renderer/routes/Settings.tsx', () => {
   it('should separate inbox behavior from alert delivery', async () => {
     await act(async () => {
       renderWithProviders(<SettingsRoute />, {
+        accounts: [mockGitHubCloudAccount],
         initialEntries: ['/settings'],
       });
     });
@@ -35,15 +38,24 @@ describe('renderer/routes/Settings.tsx', () => {
       return fieldset;
     };
 
+    const appearance = section('Appearance');
     const inbox = section('Inbox');
     const alerts = section('Alerts');
     const system = section('System');
 
     expect(within(inbox).getByTestId('checkbox-showPills')).toBeInTheDocument();
+    expect(within(inbox).getByTestId('checkbox-wrapNotificationTitle')).toBeInTheDocument();
     expect(within(inbox).queryByTestId('checkbox-showNotifications')).not.toBeInTheDocument();
+    expect(
+      within(appearance).queryByTestId('checkbox-wrapNotificationTitle'),
+    ).not.toBeInTheDocument();
     expect(within(alerts).getByTestId('checkbox-showNotifications')).toBeInTheDocument();
+    expect(within(alerts).getByTestId('checkbox-showUpdateNotifications')).toBeInTheDocument();
     expect(within(alerts).queryByTestId('checkbox-showPills')).not.toBeInTheDocument();
     expect(within(system).queryByTestId('checkbox-showNotifications')).not.toBeInTheDocument();
+    expect(
+      within(system).queryByTestId('checkbox-showUpdateNotifications'),
+    ).not.toBeInTheDocument();
   });
 
   it('should go back by pressing the icon', async () => {

@@ -2,12 +2,8 @@ import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
-import {
-  mockGitHubAppAccount,
-  mockGitHubEnterpriseServerAccount,
-} from '../../__mocks__/account-mocks';
 
-import { useAccountsStore, useSettingsStore } from '../../stores';
+import { useSettingsStore } from '../../stores';
 
 import { DesignLanguage } from '../../types';
 
@@ -84,21 +80,15 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(zoomResetSpy).toHaveBeenCalledTimes(1);
   });
 
-  it.each([
-    ['checkbox-increaseContrast', 'increaseContrast'],
-    ['checkbox-showAccountHeader', 'showAccountHeader'],
-    ['checkbox-wrapNotificationTitle', 'wrapNotificationTitle'],
-  ] as const)('should toggle %s checkbox', async (testId, setting) => {
+  it('should toggle the increase contrast checkbox', async () => {
     await act(async () => {
-      renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
-      });
+      renderWithProviders(<AppearanceSettings />);
     });
 
-    await userEvent.click(screen.getByTestId(testId));
+    await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
-    expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
+    expect(toggleSettingSpy).toHaveBeenCalledWith('increaseContrast');
   });
 
   it('hides the increase contrast checkbox for Glass', async () => {
@@ -130,23 +120,5 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     });
 
     expect(screen.queryByTestId('checkbox-showStatusIconColors')).not.toBeInTheDocument();
-  });
-
-  it('reactively hides the account header checkbox when a second account is added', async () => {
-    await act(async () => {
-      renderWithProviders(<AppearanceSettings />, {
-        accounts: [mockGitHubAppAccount],
-      });
-    });
-
-    expect(screen.getByTestId('checkbox-showAccountHeader')).toBeInTheDocument();
-
-    await act(async () => {
-      useAccountsStore.setState({
-        accounts: [mockGitHubAppAccount, mockGitHubEnterpriseServerAccount],
-      });
-    });
-
-    expect(screen.queryByTestId('checkbox-showAccountHeader')).not.toBeInTheDocument();
   });
 });

@@ -1,6 +1,8 @@
 import { BellIcon, SyncIcon } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
+import { APPLICATION } from '../../../shared/constants';
+
 import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
@@ -22,6 +24,7 @@ export function AlertSettings() {
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
   const showNotifications = useSettingsStore((s) => s.showNotifications);
+  const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
   const playSound = useSettingsStore((s) => s.playSound);
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
 
@@ -32,7 +35,7 @@ export function AlertSettings() {
       <Stack direction="vertical" gap="condensed">
         <Checkbox
           checked={showNotifications}
-          label="Show system notifications"
+          label="Show desktop notifications"
           name="showNotifications"
           onChange={() => toggleSetting('showNotifications')}
           tooltip={
@@ -43,7 +46,7 @@ export function AlertSettings() {
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <Checkbox
             checked={playSound}
-            label="Play sound"
+            label="Play notification sound"
             name="playSound"
             onChange={() => toggleSetting('playSound')}
           />
@@ -95,6 +98,19 @@ export function AlertSettings() {
             />
           </ButtonGroup>
         </Stack>
+
+        <Checkbox
+          checked={showUpdateNotifications}
+          label="Show update notifications"
+          name="showUpdateNotifications"
+          onChange={() => toggleSetting('showUpdateNotifications')}
+          tooltip={
+            <Text>
+              Show a notification when a {APPLICATION.NAME} update is ready. Updates will still be
+              checked and shown in the menu bar.
+            </Text>
+          }
+        />
       </Stack>
     </fieldset>
   );
