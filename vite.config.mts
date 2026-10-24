@@ -194,7 +194,7 @@ export default defineConfig({
         'process.env.OAUTH_CLIENT_ID': JSON.stringify('Ov23liQIkFs5ehQLNzHF'),
       },
   lint: {
-    plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import'],
+    plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import', 'vitest'],
     // Enable the type-aware path so `vp check` runs TypeScript type checks
     // natively (via the TS Go toolchain / tsgolint). `typeCheck` requires
     // `typeAware`; enabling both also turns on the type-aware lint rules.
@@ -365,6 +365,15 @@ export default defineConfig({
       {
         files: ['**/*.test.ts', '**/*.test.tsx', '**/__mocks__/**', '**/__helpers__/**'],
         rules: {
+          'vitest/no-focused-tests': 'error',
+          // Only `no-focused-tests` is opted into. The plugin's other
+          // correctness rules would require a broad test refactor.
+          'vitest/expect-expect': 'off',
+          'vitest/no-conditional-expect': 'off',
+          'vitest/prefer-snapshot-hint': 'off',
+          'vitest/require-mock-type-parameters': 'off',
+          'vitest/require-to-throw-message': 'off',
+          'vitest/valid-expect': 'off',
           'typescript/no-explicit-any': 'off',
           'no-console': 'off',
           // Mocks are typed as the real Electron/interface classes, so
