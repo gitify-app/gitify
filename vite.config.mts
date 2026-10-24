@@ -120,6 +120,11 @@ const notificationQueryBoundaryPattern = {
     'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
 };
 
+const processBoundaryPattern = rendererBoundaryPattern(
+  ['main', 'preload'],
+  'Renderer boundary: use `window.gitify` instead of importing the main or preload process (see ARCHITECTURE.md).',
+);
+
 export default defineConfig({
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
@@ -238,6 +243,18 @@ export default defineConfig({
     },
     overrides: [
       {
+        // Renderer boundary: every renderer module reaches the main process
+        // through the preload bridge (`window.gitify`). Importing main/preload
+        // code directly would bypass that contract. Layer-specific overrides
+        // below compose this pattern so they cannot silently drop it.
+        // See ARCHITECTURE.md.
+        files: ['src/renderer/**/*.ts', 'src/renderer/**/*.tsx'],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': ['error', { patterns: [processBoundaryPattern] }],
+        },
+      },
+      {
         // Renderer boundary: `utils` and `stores` are peer domain layers; neither
         // may import hooks, components, or routes. See ARCHITECTURE.md.
         files: ['src/renderer/utils/**/*.ts', 'src/renderer/utils/**/*.tsx'],
@@ -251,6 +268,7 @@ export default defineConfig({
                   ['hooks', 'components', 'routes'],
                   'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
                 ),
+                processBoundaryPattern,
               ],
             },
           ],
@@ -268,6 +286,7 @@ export default defineConfig({
                   ['hooks', 'components', 'routes'],
                   'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
                 ),
+                processBoundaryPattern,
               ],
             },
           ],
@@ -285,6 +304,7 @@ export default defineConfig({
                   ['components', 'routes'],
                   'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
                 ),
+                processBoundaryPattern,
               ],
             },
           ],
@@ -297,7 +317,7 @@ export default defineConfig({
           'no-restricted-imports': [
             'error',
             {
-              patterns: [componentRoutesBoundaryPattern],
+              patterns: [componentRoutesBoundaryPattern, processBoundaryPattern],
             },
           ],
         },
@@ -319,7 +339,11 @@ export default defineConfig({
           'no-restricted-imports': [
             'error',
             {
-              patterns: [componentRoutesBoundaryPattern, notificationQueryBoundaryPattern],
+              patterns: [
+                componentRoutesBoundaryPattern,
+                notificationQueryBoundaryPattern,
+                processBoundaryPattern,
+              ],
             },
           ],
         },
@@ -338,6 +362,7 @@ export default defineConfig({
                   ['utils', 'stores', 'hooks', 'components', 'routes'],
                   'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
                 ),
+                processBoundaryPattern,
               ],
             },
           ],
@@ -357,6 +382,7 @@ export default defineConfig({
                   ['utils', 'stores', 'hooks', 'components', 'routes'],
                   'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
                 ),
+                processBoundaryPattern,
               ],
             },
           ],
