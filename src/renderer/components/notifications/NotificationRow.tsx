@@ -3,7 +3,7 @@ import { Stack, Text, Tooltip } from '@primer/react';
 
 import { cn } from 'cn';
 
-import { useNotifications } from '../../hooks/useNotifications';
+import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
 import {
   getNotificationFailureKey,
   useNotificationActionFailuresStore,
@@ -38,7 +38,7 @@ export function NotificationRow({
   onAnimateExit,
 }: Readonly<NotificationRowProps>) {
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
-    useNotifications();
+    useNotificationActions();
 
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);

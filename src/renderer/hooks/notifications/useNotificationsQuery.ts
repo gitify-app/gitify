@@ -1,21 +1,13 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { type QueryKey, useQuery, useQueryClient } from '@tanstack/react-query';
+import { type QueryKey, useQuery } from '@tanstack/react-query';
 
 import { Constants } from '../../constants';
 
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../../stores';
 
-import type {
-  Account,
-  AccountNotifications,
-  GitifyError,
-  GitifyNotification,
-  Status,
-} from '../../types';
+import type { AccountNotifications, GitifyError, GitifyNotification, Status } from '../../types';
 
-import { notificationsKeys } from '../../utils/api/queryKeys';
-import { getAccountUUID } from '../../utils/auth/utils';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -27,6 +19,7 @@ import {
 } from '../../utils/notifications/notifications';
 import { computeRefetchIntervalMs } from '../../utils/notifications/pollInterval';
 import { deriveGlobalError, deriveStatus } from '../../utils/notifications/status';
+import { useNotificationsQueryKey } from './useNotificationsQueryKey';
 
 export interface NotificationsQueryResult {
   notifications: AccountNotifications[];
@@ -42,8 +35,6 @@ export interface NotificationsQueryResult {
   notificationsQueryKey: QueryKey;
   fetchIntervalMs: number;
   refetch: () => void;
-  refetchNotifications: () => Promise<void>;
-  removeAccountNotifications: (account: Account) => void;
 }
 
 /**
@@ -70,8 +61,6 @@ function keepNonEmptyPreviousData(
  * entry but schedule nothing. See `useNotificationsHost`.
  */
 export const useNotificationsQuery = ({ poll }: { poll: boolean }): NotificationsQueryResult => {
-  const queryClient = useQueryClient();
-
   // Account store values
   const accounts = useAccountsStore((s) => s.accounts);
 
@@ -86,21 +75,12 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
   const reviewRequestTypes = useFiltersStore((s) => s.reviewRequestTypes);
 
   // Setting store values
-  const fetchReadNotifications = useSettingsStore((s) => s.fetchReadNotifications);
-  const fetchParticipatingNotifications = useSettingsStore((s) => s.participating);
   const fetchIntervalMs = useSettingsStore((s) => s.fetchInterval);
 
   // Query key excludes filters: the cache holds unfiltered data and filter
-  // changes re-run the select below, applying instantly without refetching
-  const notificationsQueryKey = useMemo(
-    () =>
-      notificationsKeys.list(
-        accounts.map(getAccountUUID),
-        fetchReadNotifications,
-        fetchParticipatingNotifications,
-      ),
-    [accounts, fetchReadNotifications, fetchParticipatingNotifications],
-  );
+  // changes re-run the select below, applying instantly without refetching.
+  // Shared with the action-only surface so both target the same cache entry.
+  const notificationsQueryKey = useNotificationsQueryKey();
 
   // Create select function that depends on filter state
   const selectFilteredNotifications = useMemo(
@@ -189,25 +169,6 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     [isPaused, notifications],
   );
 
-  const refetchNotifications = useCallback(async () => {
-    await refetch();
-  }, [refetch]);
-
-  const removeAccountNotifications = useCallback(
-    (account: Account) => {
-      const accountUUID = getAccountUUID(account);
-
-      queryClient.setQueryData<AccountNotifications[]>(
-        notificationsQueryKey,
-        (existing) =>
-          existing?.filter(
-            (accountNotifications) => getAccountUUID(accountNotifications.account) !== accountUUID,
-          ) ?? [],
-      );
-    },
-    [queryClient, notificationsQueryKey],
-  );
-
   return {
     notifications,
     isLoading,
@@ -222,7 +183,5 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     notificationsQueryKey,
     fetchIntervalMs,
     refetch,
-    refetchNotifications,
-    removeAccountNotifications,
   };
 };

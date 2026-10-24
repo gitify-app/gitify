@@ -91,6 +91,35 @@ const reactDevToolsPlugin = (): Plugin => ({
 
 const isBuild = process.argv.includes('build');
 
+// Match both a layer's directory and its contents, so a bare directory import
+// (`../hooks`) cannot bypass the boundary rules once a barrel `index.ts` exists.
+const forbiddenLayerGlobs = (layers: string[]): string[] =>
+  layers.flatMap((layer) => [`**/${layer}`, `**/${layer}/**`]);
+
+const rendererBoundaryPattern = (layers: string[], message: string) => ({
+  group: forbiddenLayerGlobs(layers),
+  allowTypeImports: true,
+  message,
+});
+
+// Shared so a more specific override (for example the notification UI) can
+// compose it instead of restating it and silently dropping the parent rule.
+const componentRoutesBoundaryPattern = rendererBoundaryPattern(
+  ['routes'],
+  'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
+);
+
+const notificationQueryBoundaryPattern = {
+  group: [
+    '**/hooks/useNotifications',
+    '**/hooks/notifications/useNotificationsQuery',
+    '**/hooks/notifications/useNotificationsHost',
+  ],
+  allowTypeImports: true,
+  message:
+    'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
+};
+
 export default defineConfig({
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
@@ -218,11 +247,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: ['**/hooks/**', '**/components/**', '**/routes/**'],
-                  message:
-                    'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['hooks', 'components', 'routes'],
+                  'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -236,11 +264,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: ['**/hooks/**', '**/components/**', '**/routes/**'],
-                  message:
-                    'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['hooks', 'components', 'routes'],
+                  'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -254,11 +281,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: ['**/components/**', '**/routes/**'],
-                  message:
-                    'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['components', 'routes'],
+                  'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -271,13 +297,29 @@ export default defineConfig({
           'no-restricted-imports': [
             'error',
             {
-              patterns: [
-                {
-                  group: ['**/routes/**'],
-                  message:
-                    'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
-                },
-              ],
+              patterns: [componentRoutesBoundaryPattern],
+            },
+          ],
+        },
+      },
+      {
+        // Renderer boundary: the notification UI renders once per notification
+        // (rows, repository headers, account headers) and receives its data via
+        // props from the route. It must not subscribe to the notifications query:
+        // every observer re-runs `select` and the structural-sharing walk on each
+        // cache write, so subscribing here multiplies that cost by the number of
+        // mounted items. Action-only consumers use `useNotificationActions`.
+        // See ARCHITECTURE.md.
+        files: [
+          'src/renderer/components/notifications/**/*.ts',
+          'src/renderer/components/notifications/**/*.tsx',
+        ],
+        excludeFiles: ['**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            {
+              patterns: [componentRoutesBoundaryPattern, notificationQueryBoundaryPattern],
             },
           ],
         },
@@ -292,17 +334,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: [
-                    '**/utils/**',
-                    '**/stores/**',
-                    '**/hooks/**',
-                    '**/components/**',
-                    '**/routes/**',
-                  ],
-                  message:
-                    'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['utils', 'stores', 'hooks', 'components', 'routes'],
+                  'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -318,18 +353,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: [
-                    '**/utils/**',
-                    '**/stores/**',
-                    '**/hooks/**',
-                    '**/components/**',
-                    '**/routes/**',
-                  ],
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['utils', 'stores', 'hooks', 'components', 'routes'],
+                  'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
