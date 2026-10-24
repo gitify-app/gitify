@@ -456,6 +456,17 @@ export default defineConfig({
         },
       },
       {
+        // `import/no-cycle` is enabled for the upper renderer layers only.
+        // `utils` and `stores` still contain pre-existing cycles (73 diagnostics
+        // when enabled across the whole renderer); cleaning those up is a
+        // separate change. See ARCHITECTURE.md.
+        files: rendererLayerFiles('hooks', 'components', 'routes'),
+        excludeFiles: TEST_FILES,
+        rules: {
+          'import/no-cycle': 'error',
+        },
+      },
+      {
         files: TEST_EXCLUDES,
         rules: {
           'vitest/no-focused-tests': 'error',
