@@ -3120,6 +3120,116 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </button>
             </div>
           </div>
+          <div>
+            <div
+              class="flex items-center justify-between gap-3"
+            >
+              <div
+                class="flex min-w-0 items-center gap-1"
+              >
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
+                  id="nativeNotificationStyle-_r_31_-label"
+                  tabindex="-1"
+                  type="button"
+                >
+                  Notification style
+                </button>
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-label="tooltip-nativeNotificationStyle"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="tooltip-icon-tooltip-nativeNotificationStyle"
+                  data-variant="invisible"
+                  id="tooltip-nativeNotificationStyle"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-question"
+                    data-component="Octicon"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="shrink-0"
+              >
+                <ul
+                  aria-labelledby="nativeNotificationStyle-_r_31_-label"
+                  class="prc-SegmentedControl-SegmentedControl-lqIXp"
+                  data-component="SegmentedControl"
+                  data-variant="default"
+                >
+                  <li
+                    class="prc-SegmentedControl-Item-tSCQh"
+                    data-component="SegmentedControl.Button"
+                    data-selected=""
+                  >
+                    <button
+                      aria-pressed="true"
+                      class="prc-SegmentedControl-Button-E48xz"
+                      data-testid="choice-nativeNotificationStyle-grouped"
+                      style="--separator-color: transparent;"
+                      type="button"
+                    >
+                      <span
+                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      >
+                        <div
+                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                          data-text="Individual"
+                        >
+                          Individual
+                        </div>
+                      </span>
+                    </button>
+                  </li>
+                  <li
+                    class="prc-SegmentedControl-Item-tSCQh"
+                    data-component="SegmentedControl.Button"
+                  >
+                    <button
+                      aria-pressed="false"
+                      class="prc-SegmentedControl-Button-E48xz"
+                      data-testid="choice-nativeNotificationStyle-summary"
+                      style="--separator-color: var(--borderColor-default);"
+                      type="button"
+                    >
+                      <span
+                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      >
+                        <div
+                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                          data-text="Summary"
+                        >
+                          Summary
+                        </div>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div
             class="flex items-start justify-between gap-3"
           >
@@ -3132,7 +3242,409 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="playSound-_r_31_-label"
+                  id="nativeNotificationActions-_r_35_-label"
+                  tabindex="-1"
+                  type="button"
+                >
+                  Show notification actions
+                </button>
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-label="tooltip-nativeNotificationActions"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="tooltip-icon-tooltip-nativeNotificationActions"
+                  data-variant="invisible"
+                  id="tooltip-nativeNotificationActions"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-question"
+                    data-component="Octicon"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div
+              class="prc-ToggleSwitch-ToggleSwitch-rQz-0"
+              data-status-label-position="start"
+              data-testid="switch-nativeNotificationActions"
+            >
+              <span
+                class="prc-src-InternalVisuallyHidden-2YaI6"
+              >
+                <div
+                  id="loadingLabel"
+                />
+              </span>
+              <span
+                aria-hidden="true"
+                class="prc-ToggleSwitch-StatusText-7fNOA"
+                data-disabled="false"
+                data-size="small"
+              >
+                <span
+                  class="prc-ToggleSwitch-StatusTextItem-VE86e"
+                  data-hidden="false"
+                >
+                  On
+                </span>
+                <span
+                  class="prc-ToggleSwitch-StatusTextItem-VE86e"
+                  data-hidden="true"
+                >
+                  Off
+                </span>
+              </span>
+              <button
+                aria-disabled="false"
+                aria-labelledby="nativeNotificationActions-_r_35_-label"
+                aria-pressed="true"
+                class="prc-ToggleSwitch-SwitchButton-1CtM6"
+                data-checked="true"
+                data-disabled="false"
+                data-size="small"
+                type="button"
+              >
+                <div
+                  aria-hidden="true"
+                  class="prc-ToggleSwitch-SwitchButtonContent-u57jo"
+                >
+                  <div
+                    class="prc-ToggleSwitch-IconContainer-mUpUm prc-ToggleSwitch-LineIconContainer-cn8pC"
+                    data-checked="true"
+                    data-disabled="false"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="12"
+                      viewBox="0 0 16 16"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 2a.75.75 0 0 1 .75.75v11.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 8 2Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="prc-ToggleSwitch-IconContainer-mUpUm prc-ToggleSwitch-CircleIconContainer-XiMW5"
+                    data-checked="true"
+                    data-disabled="false"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="12"
+                      viewBox="0 0 16 16"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 12.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  aria-hidden="true"
+                  class="prc-ToggleSwitch-ToggleKnob-N9ops"
+                  data-checked="true"
+                  data-disabled="false"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            class="flex items-start justify-between gap-3"
+          >
+            <div
+              class="min-w-0"
+            >
+              <div
+                class="flex items-center gap-1"
+              >
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
+                  id="nativeNotificationKeepVisible-_r_3a_-label"
+                  tabindex="-1"
+                  type="button"
+                >
+                  Keep notifications on screen
+                </button>
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-label="tooltip-nativeNotificationKeepVisible"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="tooltip-icon-tooltip-nativeNotificationKeepVisible"
+                  data-variant="invisible"
+                  id="tooltip-nativeNotificationKeepVisible"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-question"
+                    data-component="Octicon"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div
+              class="prc-ToggleSwitch-ToggleSwitch-rQz-0"
+              data-status-label-position="start"
+              data-testid="switch-nativeNotificationKeepVisible"
+            >
+              <span
+                class="prc-src-InternalVisuallyHidden-2YaI6"
+              >
+                <div
+                  id="loadingLabel"
+                />
+              </span>
+              <span
+                aria-hidden="true"
+                class="prc-ToggleSwitch-StatusText-7fNOA"
+                data-disabled="false"
+                data-size="small"
+              >
+                <span
+                  class="prc-ToggleSwitch-StatusTextItem-VE86e"
+                  data-hidden="true"
+                >
+                  On
+                </span>
+                <span
+                  class="prc-ToggleSwitch-StatusTextItem-VE86e"
+                  data-hidden="false"
+                >
+                  Off
+                </span>
+              </span>
+              <button
+                aria-disabled="false"
+                aria-labelledby="nativeNotificationKeepVisible-_r_3a_-label"
+                aria-pressed="false"
+                class="prc-ToggleSwitch-SwitchButton-1CtM6"
+                data-checked="false"
+                data-disabled="false"
+                data-size="small"
+                type="button"
+              >
+                <div
+                  aria-hidden="true"
+                  class="prc-ToggleSwitch-SwitchButtonContent-u57jo"
+                >
+                  <div
+                    class="prc-ToggleSwitch-IconContainer-mUpUm prc-ToggleSwitch-LineIconContainer-cn8pC"
+                    data-checked="false"
+                    data-disabled="false"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="12"
+                      viewBox="0 0 16 16"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 2a.75.75 0 0 1 .75.75v11.5a.75.75 0 0 1-1.5 0V2.75A.75.75 0 0 1 8 2Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    class="prc-ToggleSwitch-IconContainer-mUpUm prc-ToggleSwitch-CircleIconContainer-XiMW5"
+                    data-checked="false"
+                    data-disabled="false"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      fill="currentColor"
+                      height="12"
+                      viewBox="0 0 16 16"
+                      width="12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 12.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  aria-hidden="true"
+                  class="prc-ToggleSwitch-ToggleKnob-N9ops"
+                  data-checked="false"
+                  data-disabled="false"
+                />
+              </button>
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex items-center justify-between gap-3"
+            >
+              <div
+                class="flex min-w-0 items-center gap-1"
+              >
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
+                  id="nativeNotificationClickAction-_r_3f_-label"
+                  tabindex="-1"
+                  type="button"
+                >
+                  Notification click
+                </button>
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-label="tooltip-nativeNotificationClickAction"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
+                  data-testid="tooltip-icon-tooltip-nativeNotificationClickAction"
+                  data-variant="invisible"
+                  id="tooltip-nativeNotificationClickAction"
+                  tabindex="0"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="octicon octicon-question"
+                    data-component="Octicon"
+                    display="inline-block"
+                    fill="currentColor"
+                    focusable="false"
+                    height="16"
+                    overflow="visible"
+                    style="vertical-align: text-bottom;"
+                    viewBox="0 0 16 16"
+                    width="16"
+                  >
+                    <path
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="shrink-0"
+              >
+                <ul
+                  aria-labelledby="nativeNotificationClickAction-_r_3f_-label"
+                  class="prc-SegmentedControl-SegmentedControl-lqIXp"
+                  data-component="SegmentedControl"
+                  data-variant="default"
+                >
+                  <li
+                    class="prc-SegmentedControl-Item-tSCQh"
+                    data-component="SegmentedControl.Button"
+                  >
+                    <button
+                      aria-pressed="false"
+                      class="prc-SegmentedControl-Button-E48xz"
+                      data-testid="choice-nativeNotificationClickAction-app"
+                      style="--separator-color: transparent;"
+                      type="button"
+                    >
+                      <span
+                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      >
+                        <div
+                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                          data-text="Gitify"
+                        >
+                          Gitify
+                        </div>
+                      </span>
+                    </button>
+                  </li>
+                  <li
+                    class="prc-SegmentedControl-Item-tSCQh"
+                    data-component="SegmentedControl.Button"
+                    data-selected=""
+                  >
+                    <button
+                      aria-pressed="true"
+                      class="prc-SegmentedControl-Button-E48xz"
+                      data-testid="choice-nativeNotificationClickAction-browser"
+                      style="--separator-color: transparent;"
+                      type="button"
+                    >
+                      <span
+                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      >
+                        <div
+                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                          data-text="Browser"
+                        >
+                          Browser
+                        </div>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex items-start justify-between gap-3"
+          >
+            <div
+              class="min-w-0"
+            >
+              <div
+                class="flex items-center gap-1"
+              >
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
+                  id="playSound-_r_3j_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3206,7 +3718,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="playSound-_r_31_-label"
+                aria-labelledby="playSound-_r_3j_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3276,7 +3788,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               class="overflow-hidden"
             >
               <fieldset
-                aria-labelledby="notificationVolume-_r_36_-label"
+                aria-labelledby="notificationVolume-_r_3o_-label"
                 class="min-w-0"
               >
                 <div
@@ -3287,7 +3799,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   >
                     <span
                       class="text-sm font-medium text-gitify-font"
-                      id="notificationVolume-_r_36_-label"
+                      id="notificationVolume-_r_3o_-label"
                     >
                       Notification volume
                     </span>
@@ -3483,7 +3995,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showUpdateNotifications-_r_3e_-label"
+                  id="showUpdateNotifications-_r_40_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3557,7 +4069,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="showUpdateNotifications-_r_3e_-label"
+                aria-labelledby="showUpdateNotifications-_r_40_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3682,7 +4194,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showNotificationsCountInTray-_r_3j_-label"
+                  id="showNotificationsCountInTray-_r_45_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3756,7 +4268,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="showNotificationsCountInTray-_r_3j_-label"
+                aria-labelledby="showNotificationsCountInTray-_r_45_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3828,7 +4340,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="useUnreadActiveIcon-_r_3o_-label"
+                  id="useUnreadActiveIcon-_r_4a_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3902,7 +4414,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="useUnreadActiveIcon-_r_3o_-label"
+                aria-labelledby="useUnreadActiveIcon-_r_4a_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3972,7 +4484,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="trayIconAppearance-_r_3t_-label"
+                  id="trayIconAppearance-_r_4f_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4016,7 +4528,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 class="shrink-0"
               >
                 <ul
-                  aria-labelledby="trayIconAppearance-_r_3t_-label"
+                  aria-labelledby="trayIconAppearance-_r_4f_-label"
                   class="prc-SegmentedControl-SegmentedControl-lqIXp"
                   data-component="SegmentedControl"
                   data-variant="default"
@@ -4155,7 +4667,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="openLinks-_r_41_-label"
+                  id="openLinks-_r_4j_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4199,7 +4711,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 class="shrink-0"
               >
                 <ul
-                  aria-labelledby="openLinks-_r_41_-label"
+                  aria-labelledby="openLinks-_r_4j_-label"
                   class="prc-SegmentedControl-SegmentedControl-lqIXp"
                   data-component="SegmentedControl"
                   data-variant="default"
@@ -4267,7 +4779,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="keyboardShortcut-_r_45_-label"
+                  id="keyboardShortcut-_r_4n_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4341,7 +4853,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="keyboardShortcut-_r_45_-label"
+                aria-labelledby="keyboardShortcut-_r_4n_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -4412,7 +4924,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             >
               <div>
                 <fieldset
-                  aria-labelledby="shortcut-_r_4a_-label"
+                  aria-labelledby="shortcut-_r_4s_-label"
                   class="min-w-0"
                 >
                   <div
@@ -4423,7 +4935,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     >
                       <span
                         class="text-sm font-medium text-gitify-font"
-                        id="shortcut-_r_4a_-label"
+                        id="shortcut-_r_4s_-label"
                       >
                         Global shortcut
                       </span>
@@ -4588,7 +5100,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="keepWindowOnBlur-_r_4h_-label"
+                  id="keepWindowOnBlur-_r_53_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4662,7 +5174,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="keepWindowOnBlur-_r_4h_-label"
+                aria-labelledby="keepWindowOnBlur-_r_53_-label"
                 aria-pressed="false"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="false"
@@ -4734,7 +5246,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="openAtStartup-_r_4m_-label"
+                  id="openAtStartup-_r_58_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4808,7 +5320,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="openAtStartup-_r_4m_-label"
+                aria-labelledby="openAtStartup-_r_58_-label"
                 aria-pressed="false"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="false"
@@ -4927,7 +5439,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_4t_"
+          aria-describedby="_r_5f_"
           class="prc-Button-ButtonBase-9n-Xk"
           data-component="Button"
           data-loading="false"
@@ -4957,7 +5469,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-component="Tooltip"
           data-direction="ne"
-          id="_r_4t_"
+          id="_r_5f_"
           popover="auto"
           role="tooltip"
         >
@@ -4975,7 +5487,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_4v_"
+          aria-describedby="_r_5h_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -5013,7 +5525,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_4v_"
+            id="_r_5h_"
           >
             Accounts
             <span
@@ -5055,7 +5567,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </span>
         </span>
         <button
-          aria-describedby="_r_51_"
+          aria-describedby="_r_5j_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -5093,7 +5605,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_51_"
+            id="_r_5j_"
           >
             Quit Gitify
             <span

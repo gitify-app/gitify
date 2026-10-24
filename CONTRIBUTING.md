@@ -85,6 +85,16 @@ guard fails the run outside Linux rather than letting that happen.
 Note that these baselines capture the `backdrop-filter` fallback for Glass, not
 the macOS native vibrancy material, which Chromium cannot render.
 
+#### 🔔 Native notification checks
+
+Operating-system notifications are created in the main process and have platform-specific prerequisites:
+
+- **macOS**: native notifications require a properly signed app; the ad-hoc-signed Electron development binary is rejected by `UNUserNotificationCenter`. Run `pnpm sign:dev` once after installing dependencies (and again after changing the Electron version), then restart `pnpm dev`. Action buttons additionally require `NSUserNotificationAlertStyle: alert` in the packaged app.
+- **Windows**: action buttons use the toast action support; `app.setAppUserModelId` is set when the menubar is ready. Verify Action Center persistence and cold-start activation manually.
+- **Linux**: action buttons appear only when the desktop notification server advertises the `actions` capability. Without it, the notification still shows without buttons.
+
+Verify the notification content, click behavior, actions, and removal-on-read on a signed macOS build, Windows, and an action-capable Linux desktop before releasing a change in this area.
+
 ### 🎨 Code Style & Conventions
 
 - Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
