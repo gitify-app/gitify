@@ -96,6 +96,30 @@ const isBuild = process.argv.includes('build');
 const forbiddenLayerGlobs = (layers: string[]): string[] =>
   layers.flatMap((layer) => [`**/${layer}`, `**/${layer}/**`]);
 
+const rendererBoundaryPattern = (layers: string[], message: string) => ({
+  group: forbiddenLayerGlobs(layers),
+  allowTypeImports: true,
+  message,
+});
+
+// Shared so a more specific override (for example the notification UI) can
+// compose it instead of restating it and silently dropping the parent rule.
+const componentRoutesBoundaryPattern = rendererBoundaryPattern(
+  ['routes'],
+  'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
+);
+
+const notificationQueryBoundaryPattern = {
+  group: [
+    '**/hooks/useNotifications',
+    '**/hooks/notifications/useNotificationsQuery',
+    '**/hooks/notifications/useNotificationsHost',
+  ],
+  allowTypeImports: true,
+  message:
+    'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
+};
+
 export default defineConfig({
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
@@ -223,12 +247,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: forbiddenLayerGlobs(['hooks', 'components', 'routes']),
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['hooks', 'components', 'routes'],
+                  'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -242,12 +264,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: forbiddenLayerGlobs(['hooks', 'components', 'routes']),
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['hooks', 'components', 'routes'],
+                  'Renderer boundary: `stores` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -261,12 +281,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: forbiddenLayerGlobs(['components', 'routes']),
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['components', 'routes'],
+                  'Renderer boundary: `hooks` may not import from components or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -279,14 +297,7 @@ export default defineConfig({
           'no-restricted-imports': [
             'error',
             {
-              patterns: [
-                {
-                  group: forbiddenLayerGlobs(['routes']),
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
-                },
-              ],
+              patterns: [componentRoutesBoundaryPattern],
             },
           ],
         },
@@ -308,24 +319,7 @@ export default defineConfig({
           'no-restricted-imports': [
             'error',
             {
-              patterns: [
-                {
-                  group: forbiddenLayerGlobs(['routes']),
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: `components` may not import from routes (see ARCHITECTURE.md).',
-                },
-                {
-                  group: [
-                    '**/hooks/useNotifications',
-                    '**/hooks/notifications/useNotificationsQuery',
-                    '**/hooks/notifications/useNotificationsHost',
-                  ],
-                  allowTypeImports: true,
-                  message:
-                    'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
-                },
-              ],
+              patterns: [componentRoutesBoundaryPattern, notificationQueryBoundaryPattern],
             },
           ],
         },
@@ -340,12 +334,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: forbiddenLayerGlobs(['utils', 'stores', 'hooks', 'components', 'routes']),
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['utils', 'stores', 'hooks', 'components', 'routes'],
+                  'Renderer boundary: `icons` is a leaf and may not import utils, stores, hooks, components, or routes (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
@@ -361,12 +353,10 @@ export default defineConfig({
             'error',
             {
               patterns: [
-                {
-                  group: forbiddenLayerGlobs(['utils', 'stores', 'hooks', 'components', 'routes']),
-                  allowTypeImports: true,
-                  message:
-                    'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
-                },
+                rendererBoundaryPattern(
+                  ['utils', 'stores', 'hooks', 'components', 'routes'],
+                  'Renderer boundary: leaf modules (`types`, `constants`) may not import implementation layers (see ARCHITECTURE.md).',
+                ),
               ],
             },
           ],
