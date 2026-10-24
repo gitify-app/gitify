@@ -40,7 +40,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
         settings: { ...mockSettings, playSound: false },
       });
 
-      expect(screen.getByTestId('settings-volume-group')).not.toBeVisible();
+      expect(screen.queryByTestId('settings-volume-group')).not.toBeInTheDocument();
     });
 
     it('volume controls should be shown if playSound checkbox is true', async () => {
@@ -48,7 +48,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
         settings: { ...mockSettings, playSound: true },
       });
 
-      expect(screen.getByTestId('settings-volume-group')).toBeVisible();
+      expect(screen.getByTestId('settings-volume-group')).toBeInTheDocument();
     });
 
     it('should increase notification volume', async () => {

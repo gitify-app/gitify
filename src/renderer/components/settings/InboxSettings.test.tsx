@@ -201,6 +201,28 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         ),
       ).toBeInTheDocument();
     });
+
+    it('hides notification metrics when detailed notifications are disabled', async () => {
+      await act(async () => {
+        renderWithProviders(<InboxSettings />, {
+          accounts: [mockGitHubCloudAccount],
+          settings: { ...mockSettings, detailedNotifications: false },
+        });
+      });
+
+      expect(screen.queryByTestId('checkbox-showPills')).not.toBeInTheDocument();
+    });
+
+    it('shows notification metrics when detailed notifications are enabled', async () => {
+      await act(async () => {
+        renderWithProviders(<InboxSettings />, {
+          accounts: [mockGitHubCloudAccount],
+          settings: { ...mockSettings, detailedNotifications: true },
+        });
+      });
+
+      expect(screen.getByTestId('checkbox-showPills')).toBeInTheDocument();
+    });
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {

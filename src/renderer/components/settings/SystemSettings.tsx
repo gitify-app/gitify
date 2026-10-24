@@ -50,6 +50,7 @@ export function SystemSettings() {
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
   const shortcutRowRef = useRef<HTMLDivElement>(null);
   const isMac = window.gitify.platform.isMacOS();
+  const isLinux = window.gitify.platform.isLinux();
 
   useEffect(() => {
     if (!recordingShortcut) {
@@ -217,47 +218,45 @@ export function SystemSettings() {
             }
           />
 
-          <ButtonGroup
-            className="ml-2"
-            data-testid="settings-shortcut-group"
-            hidden={!keyboardShortcut}
-          >
-            <IconButton
-              aria-label="Edit global shortcut"
-              data-testid="settings-shortcut-edit"
-              icon={PencilIcon}
-              onClick={() => {
-                clearShortcutRegistrationError();
-                setLiveModifierAccelerator('');
-                setRecordingShortcut(true);
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
-            <Button
-              aria-label="Global shortcut"
-              className="pointer-events-none"
-              size="small"
-              tabIndex={-1}
-            >
-              <Text as="strong" className="text-gitify-caution">
-                {shortcutButtonLabel}
-              </Text>
-            </Button>
-            <IconButton
-              aria-label="Reset global shortcut to default"
-              data-testid="settings-shortcut-reset"
-              disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
-              icon={SyncIcon}
-              onClick={() => {
-                clearShortcutRegistrationError();
-                updateSetting('openGitifyShortcut', defaultSettings.openGitifyShortcut);
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-              variant="danger"
-            />
-          </ButtonGroup>
+          {keyboardShortcut && (
+            <ButtonGroup className="ml-2" data-testid="settings-shortcut-group">
+              <IconButton
+                aria-label="Edit global shortcut"
+                data-testid="settings-shortcut-edit"
+                icon={PencilIcon}
+                onClick={() => {
+                  clearShortcutRegistrationError();
+                  setLiveModifierAccelerator('');
+                  setRecordingShortcut(true);
+                }}
+                size="small"
+                unsafeDisableTooltip={true}
+              />
+              <Button
+                aria-label="Global shortcut"
+                className="pointer-events-none"
+                size="small"
+                tabIndex={-1}
+              >
+                <Text as="strong" className="text-gitify-caution">
+                  {shortcutButtonLabel}
+                </Text>
+              </Button>
+              <IconButton
+                aria-label="Reset global shortcut to default"
+                data-testid="settings-shortcut-reset"
+                disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
+                icon={SyncIcon}
+                onClick={() => {
+                  clearShortcutRegistrationError();
+                  updateSetting('openGitifyShortcut', defaultSettings.openGitifyShortcut);
+                }}
+                size="small"
+                unsafeDisableTooltip={true}
+                variant="danger"
+              />
+            </ButtonGroup>
+          )}
         </Stack>
 
         <Checkbox
@@ -279,7 +278,7 @@ export function SystemSettings() {
           name="openAtStartup"
           onChange={() => toggleSetting('openAtStartup')}
           tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
-          visible={!window.gitify.platform.isLinux()}
+          visible={!isLinux}
         />
 
         <Checkbox
@@ -295,10 +294,10 @@ export function SystemSettings() {
               fractional scaling. Takes effect after restarting {APPLICATION.NAME}.
             </Text>
           }
-          visible={window.gitify.platform.isLinux()}
+          visible={isLinux}
         />
 
-        {window.gitify.platform.isLinux() && (
+        {isLinux && (
           <Stack gap="condensed">
             <Text className="text-sm text-gitify-font">
               On GNOME Wayland, install the Gitify extension to open the window next to its tray

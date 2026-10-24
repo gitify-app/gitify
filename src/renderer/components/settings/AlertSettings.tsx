@@ -53,52 +53,54 @@ export function AlertSettings() {
             onChange={() => toggleSetting('playSound')}
           />
 
-          <ButtonGroup className="ml-2" data-testid="settings-volume-group" hidden={!playSound}>
-            <IconButton
-              aria-label="Volume down"
-              data-testid="settings-volume-down"
-              disabled={!canDecreaseVolume(notificationVolume)}
-              icon={VolumeDownIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', decreaseVolume(notificationVolume));
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
+          {playSound && (
+            <ButtonGroup className="ml-2" data-testid="settings-volume-group">
+              <IconButton
+                aria-label="Volume down"
+                data-testid="settings-volume-down"
+                disabled={!canDecreaseVolume(notificationVolume)}
+                icon={VolumeDownIcon}
+                onClick={() => {
+                  updateSetting('notificationVolume', decreaseVolume(notificationVolume));
+                }}
+                size="small"
+                unsafeDisableTooltip={true}
+              />
 
-            <Button
-              aria-label="Volume percentage"
-              className="pointer-events-none"
-              size="small"
-              tabIndex={-1}
-            >
-              {notificationVolume.toFixed(0)}%
-            </Button>
+              <Button
+                aria-label="Volume percentage"
+                className="pointer-events-none"
+                size="small"
+                tabIndex={-1}
+              >
+                {notificationVolume.toFixed(0)}%
+              </Button>
 
-            <IconButton
-              aria-label="Volume up"
-              data-testid="settings-volume-up"
-              disabled={!canIncreaseVolume(notificationVolume)}
-              icon={VolumeUpIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', increaseVolume(notificationVolume));
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
+              <IconButton
+                aria-label="Volume up"
+                data-testid="settings-volume-up"
+                disabled={!canIncreaseVolume(notificationVolume)}
+                icon={VolumeUpIcon}
+                onClick={() => {
+                  updateSetting('notificationVolume', increaseVolume(notificationVolume));
+                }}
+                size="small"
+                unsafeDisableTooltip={true}
+              />
 
-            <IconButton
-              aria-label="Reset volume"
-              data-testid="settings-volume-reset"
-              icon={SyncIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', defaultSettings.notificationVolume);
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-              variant="danger"
-            />
-          </ButtonGroup>
+              <IconButton
+                aria-label="Reset volume"
+                data-testid="settings-volume-reset"
+                icon={SyncIcon}
+                onClick={() => {
+                  updateSetting('notificationVolume', defaultSettings.notificationVolume);
+                }}
+                size="small"
+                unsafeDisableTooltip={true}
+                variant="danger"
+              />
+            </ButtonGroup>
+          )}
         </Stack>
 
         <Checkbox
