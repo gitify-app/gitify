@@ -7,7 +7,7 @@ import { useNotifications } from '../../hooks/useNotifications';
 import { type FiltersState, useFiltersStore, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import type { Filter } from '../../utils/notifications/filters';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
@@ -50,7 +50,8 @@ function FilterSectionComponent<K extends keyof FiltersState>({
 
   return (
     <fieldset id={id}>
-      <Title
+      <SectionHeading
+        as="legend"
         icon={icon}
         tooltip={
           tooltip && (
@@ -62,7 +63,7 @@ function FilterSectionComponent<K extends keyof FiltersState>({
         }
       >
         {title}
-      </Title>
+      </SectionHeading>
 
       <Stack direction={layout} gap={layout === 'horizontal' ? 'normal' : 'condensed'}>
         {(Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][])

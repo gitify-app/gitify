@@ -8,7 +8,7 @@ import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 export function TraySettings() {
   const updateSetting = useSettingsStore((s) => s.updateSetting);
@@ -23,7 +23,9 @@ export function TraySettings() {
 
   return (
     <fieldset>
-      <Title icon={DevicesIcon}>Tray</Title>
+      <SectionHeading as="legend" icon={DevicesIcon}>
+        Tray
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <Checkbox

@@ -6,7 +6,7 @@ import { APPLICATION } from '../../../shared/constants';
 import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { VolumeDownIcon } from '../../icons/VolumeDownIcon';
 import { VolumeUpIcon } from '../../icons/VolumeUpIcon';
@@ -30,7 +30,9 @@ export function AlertSettings() {
 
   return (
     <fieldset>
-      <Title icon={BellIcon}>Alerts</Title>
+      <SectionHeading as="legend" icon={BellIcon}>
+        Alerts
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <Checkbox
@@ -101,7 +103,7 @@ export function AlertSettings() {
 
         <Checkbox
           checked={showUpdateNotifications}
-          label="Show update notifications"
+          label="Show app update notifications"
           name="showUpdateNotifications"
           onChange={() => toggleSetting('showUpdateNotifications')}
           tooltip={

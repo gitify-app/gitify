@@ -13,7 +13,7 @@ import {
 
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { type KeyboardAcceleratorShortcut, OpenPreference, toLink } from '../../types';
 
@@ -119,7 +119,9 @@ export function SystemSettings() {
 
   return (
     <fieldset>
-      <Title icon={DeviceDesktopIcon}>System</Title>
+      <SectionHeading as="legend" icon={DeviceDesktopIcon}>
+        System
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <RadioGroup
@@ -260,7 +262,7 @@ export function SystemSettings() {
 
         <Checkbox
           checked={keepWindowOnBlur}
-          label="Keep window open when it loses focus"
+          label="Keep window open when unfocused"
           name="keepWindowOnBlur"
           onChange={() => toggleSetting('keepWindowOnBlur')}
           tooltip={
@@ -273,7 +275,7 @@ export function SystemSettings() {
 
         <Checkbox
           checked={openAtStartup}
-          label="Open at startup"
+          label="Launch at startup"
           name="openAtStartup"
           onChange={() => toggleSetting('openAtStartup')}
           tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}

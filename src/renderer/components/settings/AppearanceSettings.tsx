@@ -5,7 +5,7 @@ import { useSettingsStore } from '../../stores';
 
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { DesignLanguage, Theme } from '../../types';
 
@@ -34,7 +34,9 @@ export function AppearanceSettings() {
 
   return (
     <fieldset>
-      <Title icon={PaintbrushIcon}>Appearance</Title>
+      <SectionHeading as="legend" icon={PaintbrushIcon}>
+        Appearance
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">

@@ -6,10 +6,13 @@ import {
   CheckIcon,
   CommentIcon,
   DashIcon,
+  DownloadIcon,
   GitCommitIcon,
   GitPullRequestIcon,
   InboxIcon,
   IssueOpenedIcon,
+  ListUnorderedIcon,
+  MarkGithubIcon,
   MilestoneIcon,
   PlusIcon,
   ReleaseIcon,
@@ -31,24 +34,14 @@ import { useAccountsStore, useSettingsStore } from '../../stores';
 import { Checkbox } from '../fields/Checkbox';
 import { FieldLabel } from '../fields/FieldLabel';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { GroupBy, Size } from '../../types';
 
 import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { hasAlternateScopes, hasRecommendedScopes } from '../../utils/auth/scopes';
 import { openGitHubParticipatingDocs } from '../../utils/system/links';
-
-function InboxSubheading({ children }: Readonly<{ children: string }>) {
-  return (
-    <Text
-      as="h5"
-      className="pt-2 text-xs font-semibold uppercase tracking-wide text-gitify-icon-muted"
-    >
-      {children}
-    </Text>
-  );
-}
+import { SettingsGroupHeading } from './SettingsGroupHeading';
 
 export function InboxSettings() {
   const navigate = useNavigate();
@@ -80,10 +73,12 @@ export function InboxSettings() {
 
   return (
     <fieldset>
-      <Title icon={InboxIcon}>Inbox</Title>
+      <SectionHeading as="legend" icon={InboxIcon}>
+        Inbox
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
-        <InboxSubheading>Fetching</InboxSubheading>
+        <SettingsGroupHeading icon={DownloadIcon}>Fetching</SettingsGroupHeading>
 
         <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
           <FieldLabel label="Fetch interval:" name="fetchInterval" />
@@ -189,7 +184,7 @@ export function InboxSettings() {
           }
         />
 
-        <InboxSubheading>List</InboxSubheading>
+        <SettingsGroupHeading icon={ListUnorderedIcon}>List</SettingsGroupHeading>
 
         <RadioGroup
           label="Group by:"
@@ -305,7 +300,7 @@ export function InboxSettings() {
 
         {hasGitHubAccount ? (
           <>
-            <InboxSubheading>GitHub</InboxSubheading>
+            <SettingsGroupHeading icon={MarkGithubIcon}>GitHub</SettingsGroupHeading>
 
             <Checkbox
               checked={participating}
