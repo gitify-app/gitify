@@ -140,6 +140,13 @@ const forgeSpecificBoundaryPattern = rendererBoundaryPattern(
   'Renderer boundary: shared code must use the forge adapter instead of importing a forge-specific module (see ARCHITECTURE.md).',
 );
 
+const storeBarrelBoundaryPattern = {
+  group: ['**/stores', '**/stores/index', '**/stores/index.ts'],
+  allowTypeImports: true,
+  message:
+    'Renderer boundary: import the specific store module instead of the `stores` barrel (see ARCHITECTURE.md).',
+};
+
 export default defineConfig({
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
@@ -290,6 +297,7 @@ export default defineConfig({
                 ),
                 processBoundaryPattern,
                 forgeSpecificBoundaryPattern,
+                storeBarrelBoundaryPattern,
               ],
             },
           ],
@@ -311,6 +319,7 @@ export default defineConfig({
                   'Renderer boundary: `utils` may not import from hooks, components, or routes (see ARCHITECTURE.md).',
                 ),
                 processBoundaryPattern,
+                storeBarrelBoundaryPattern,
               ],
             },
           ],

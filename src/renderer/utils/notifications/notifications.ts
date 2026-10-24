@@ -1,4 +1,5 @@
-import { useAccountsStore, useSettingsStore } from '../../stores';
+import useAccountsStore from '../../stores/useAccountsStore';
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import type {
   Account,
