@@ -123,7 +123,7 @@
     "date-fns": "4.4.0",
     "dotenv": "18.0.8",
     "electron": "catalog:",
-    "electron-builder": "26.17.0",
+    "electron-builder": "26.18.0",
     "final-form": "5.0.1",
     "graphql": "17.0.2",
     "graphql-config": "5.1.8",
