@@ -12,7 +12,7 @@ import type {
 } from '../types';
 
 import { BitbucketIcon } from '../../../icons/BitbucketIcon';
-import { isValidHostname } from '../../auth/utils';
+import { isValidHostname } from '../../auth/identity';
 import { decryptValue } from '../../system/comms';
 import {
   fetchBitbucketAuthenticatedUser,

@@ -9,7 +9,7 @@ import type {
   GitLabVersion,
 } from './types';
 
-import { isValidHostname } from '../../auth/utils';
+import { isValidHostname } from '../../auth/identity';
 import { rendererLogWarn } from '../../core/logger';
 import { decryptValue } from '../../system/comms';
 import { mergeHeaders } from '../headers';
