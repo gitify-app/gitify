@@ -1,5 +1,33 @@
 # Changelog
 
+## [7.11.0](https://github.com/gitify-app/gitify/compare/v7.10.0...v7.11.0) (2026-10-24)
+
+
+### 🚀 Features
+
+* **notifications:** add loading state for initial fetch ([#3460](https://github.com/gitify-app/gitify/issues/3460)) ([51ec01a](https://github.com/gitify-app/gitify/commit/51ec01af9a4ed8f70ec6c7717a864a5afeda3625))
+* **notifications:** show loading state on initial fetch ([51ec01a](https://github.com/gitify-app/gitify/commit/51ec01af9a4ed8f70ec6c7717a864a5afeda3625))
+
+
+### ⚡️ Performance
+
+* decouple notification actions from the notifications query ([#3426](https://github.com/gitify-app/gitify/issues/3426)) ([3df1176](https://github.com/gitify-app/gitify/commit/3df1176142b975ae716847ac6b0f06fa6b56a20d))
+
+
+### 🧼 Code Refactoring
+
+* **lint:** share renderer boundary file globs ([#3488](https://github.com/gitify-app/gitify/issues/3488)) ([f821b1f](https://github.com/gitify-app/gitify/commit/f821b1fb4992e39a216b452af21fd28ab3abf288))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @primer/octicons-react to v19.41.0 ([#3471](https://github.com/gitify-app/gitify/issues/3471)) ([4a5c670](https://github.com/gitify-app/gitify/commit/4a5c670108059fc498d65cd783309d441204f355))
+* **deps-core:** update @primer/react to v38.42.0 ([#3472](https://github.com/gitify-app/gitify/issues/3472)) ([d5574cb](https://github.com/gitify-app/gitify/commit/d5574cb9786f6991a3947124e665e3d10b920ad6))
+* **deps-core:** update electron to v44.9.1 [security] ([#3462](https://github.com/gitify-app/gitify/issues/3462)) ([7867b82](https://github.com/gitify-app/gitify/commit/7867b824ef14e08513ab936df0576545129eb0c2))
+* **deps-core:** update electron to v45 ([#3478](https://github.com/gitify-app/gitify/issues/3478)) ([66425fc](https://github.com/gitify-app/gitify/commit/66425fcd5bceddd2c67ebf86020d2520c1c77358))
+* **deps-core:** update electron-menubar to v11.1.2 ([#3480](https://github.com/gitify-app/gitify/issues/3480)) ([c56b4f8](https://github.com/gitify-app/gitify/commit/c56b4f85a466566936714322e0d7e844d2f4d256))
+* **deps-core:** update electron-updater to v6.8.11 ([#3467](https://github.com/gitify-app/gitify/issues/3467)) ([fbf4d98](https://github.com/gitify-app/gitify/commit/fbf4d98c84f0ad6d8e0591bfa0999b435a80ad8d))
+
 ## [7.10.0](https://github.com/gitify-app/gitify/compare/v7.9.0...v7.10.0) (2026-10-17)
 
 
