@@ -4,10 +4,10 @@ import { Stack, Text } from '@primer/react';
 import { useNotifications } from '../../hooks/useNotifications';
 import { useAccountsStore, useFiltersStore } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
 import { SectionHeading } from '../primitives/SectionHeading';
 
 import { getAccountUUID } from '../../utils/auth/utils';
+import { FilterCheckbox } from './FilterCheckbox';
 
 export function AccountFilter() {
   const { notifications } = useNotifications();
@@ -35,7 +35,7 @@ export function AccountFilter() {
             0;
 
           return (
-            <Checkbox
+            <FilterCheckbox
               checked={isChecked}
               counter={accountNotificationCount}
               key={uuid}

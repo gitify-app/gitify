@@ -4,7 +4,7 @@ import { ToggleSwitch } from '@primer/react';
 
 import { cn } from 'cn';
 
-import { Tooltip } from '../../fields/Tooltip';
+import { HelpPopover } from '../../primitives/HelpPopover';
 
 export interface SettingsToggleProps {
   name: string;
@@ -53,7 +53,7 @@ export function SettingsToggle({
           >
             {label}
           </button>
-          {tooltip && <Tooltip name={`tooltip-${name}`} tooltip={tooltip} />}
+          {tooltip && <HelpPopover name={`tooltip-${name}`} content={tooltip} />}
         </div>
 
         {caption && (

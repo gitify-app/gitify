@@ -168,14 +168,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-designLanguage"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-designLanguage"
+                  data-variant="invisible"
                   id="tooltip-designLanguage"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -262,7 +268,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="theme-_r_4_-label"
+                  id="theme-_r_5_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -272,14 +278,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-theme"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-theme"
+                  data-variant="invisible"
                   id="tooltip-theme"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -308,12 +320,12 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <select
                     aria-invalid="false"
-                    aria-labelledby="theme-_r_4_-label"
+                    aria-labelledby="theme-_r_5_-label"
                     class="prc-Select-Select-dJWwD"
                     data-component="Select"
                     data-hasplaceholder="false"
                     data-testid="select-theme"
-                    id="theme-_r_4_-select"
+                    id="theme-_r_5_-select"
                   >
                     <optgroup
                       data-component="Select.OptGroup"
@@ -407,7 +419,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="increaseContrast-_r_7_-label"
+                  id="increaseContrast-_r_9_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -417,14 +429,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-increaseContrast"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-increaseContrast"
+                  data-variant="invisible"
                   id="tooltip-increaseContrast"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -475,7 +493,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="increaseContrast-_r_7_-label"
+                aria-labelledby="increaseContrast-_r_9_-label"
                 aria-pressed="false"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="false"
@@ -536,7 +554,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </div>
           </div>
           <fieldset
-            aria-labelledby="zoom-_r_c_-label"
+            aria-labelledby="zoom-_r_f_-label"
             class="min-w-0"
           >
             <div
@@ -547,7 +565,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <span
                   class="text-sm font-medium text-gitify-font"
-                  id="zoom-_r_c_-label"
+                  id="zoom-_r_f_-label"
                 >
                   Zoom
                 </span>
@@ -555,14 +573,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-zoom"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-zoom"
+                  data-variant="invisible"
                   id="tooltip-zoom"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -813,7 +837,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             class="settings-list"
           >
             <fieldset
-              aria-labelledby="fetchInterval-_r_j_-label"
+              aria-labelledby="fetchInterval-_r_n_-label"
               class="min-w-0"
             >
               <div
@@ -824,7 +848,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <span
                     class="text-sm font-medium text-gitify-font"
-                    id="fetchInterval-_r_j_-label"
+                    id="fetchInterval-_r_n_-label"
                   >
                     Fetch interval
                   </span>
@@ -832,14 +856,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-fetchInterval"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-fetchInterval"
+                    data-variant="invisible"
                     id="tooltip-fetchInterval"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1006,7 +1036,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="fetchAllNotifications-_r_q_-label"
+                    id="fetchAllNotifications-_r_v_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1016,14 +1046,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-fetchAllNotifications"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-fetchAllNotifications"
+                    data-variant="invisible"
                     id="tooltip-fetchAllNotifications"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1074,7 +1110,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="fetchAllNotifications-_r_q_-label"
+                  aria-labelledby="fetchAllNotifications-_r_v_-label"
                   aria-pressed="true"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="true"
@@ -1146,7 +1182,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="fetchReadNotifications-_r_u_-label"
+                    id="fetchReadNotifications-_r_14_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1156,14 +1192,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-fetchReadNotifications"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-fetchReadNotifications"
+                    data-variant="invisible"
                     id="tooltip-fetchReadNotifications"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1214,7 +1256,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="fetchReadNotifications-_r_u_-label"
+                  aria-labelledby="fetchReadNotifications-_r_14_-label"
                   aria-pressed="false"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="false"
@@ -1322,7 +1364,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="groupBy-_r_12_-label"
+                    id="groupBy-_r_19_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1332,14 +1374,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-groupBy"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-groupBy"
+                    data-variant="invisible"
                     id="tooltip-groupBy"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1360,7 +1408,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   class="shrink-0"
                 >
                   <ul
-                    aria-labelledby="groupBy-_r_12_-label"
+                    aria-labelledby="groupBy-_r_19_-label"
                     class="prc-SegmentedControl-SegmentedControl-lqIXp"
                     data-component="SegmentedControl"
                     data-variant="default"
@@ -1428,7 +1476,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="showAccountHeader-_r_15_-label"
+                    id="showAccountHeader-_r_1d_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1438,14 +1486,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-showAccountHeader"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-showAccountHeader"
+                    data-variant="invisible"
                     id="tooltip-showAccountHeader"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1496,7 +1550,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="showAccountHeader-_r_15_-label"
+                  aria-labelledby="showAccountHeader-_r_1d_-label"
                   aria-pressed="false"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="false"
@@ -1568,7 +1622,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="wrapNotificationTitle-_r_19_-label"
+                    id="wrapNotificationTitle-_r_1i_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1578,14 +1632,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-wrapNotificationTitle"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-wrapNotificationTitle"
+                    data-variant="invisible"
                     id="tooltip-wrapNotificationTitle"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1636,7 +1696,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="wrapNotificationTitle-_r_19_-label"
+                  aria-labelledby="wrapNotificationTitle-_r_1i_-label"
                   aria-pressed="false"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="false"
@@ -1708,7 +1768,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="showNumber-_r_1d_-label"
+                    id="showNumber-_r_1n_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1718,14 +1778,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-showNumber"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-showNumber"
+                    data-variant="invisible"
                     id="tooltip-showNumber"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1776,7 +1842,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="showNumber-_r_1d_-label"
+                  aria-labelledby="showNumber-_r_1n_-label"
                   aria-pressed="true"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="true"
@@ -1848,7 +1914,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="delayNotificationState-_r_1h_-label"
+                    id="delayNotificationState-_r_1s_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1858,14 +1924,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-delayNotificationState"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-delayNotificationState"
+                    data-variant="invisible"
                     id="tooltip-delayNotificationState"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -1916,7 +1988,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="delayNotificationState-_r_1h_-label"
+                  aria-labelledby="delayNotificationState-_r_1s_-label"
                   aria-pressed="false"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="false"
@@ -2026,7 +2098,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="showOnlyParticipating-_r_1l_-label"
+                    id="showOnlyParticipating-_r_21_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2036,14 +2108,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-showOnlyParticipating"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-showOnlyParticipating"
+                    data-variant="invisible"
                     id="tooltip-showOnlyParticipating"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -2094,7 +2172,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="showOnlyParticipating-_r_1l_-label"
+                  aria-labelledby="showOnlyParticipating-_r_21_-label"
                   aria-pressed="false"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="false"
@@ -2166,7 +2244,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="detailedNotifications-_r_1p_-label"
+                    id="detailedNotifications-_r_26_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2176,14 +2254,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-detailedNotifications"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-detailedNotifications"
+                    data-variant="invisible"
                     id="tooltip-detailedNotifications"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -2234,7 +2318,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="detailedNotifications-_r_1p_-label"
+                  aria-labelledby="detailedNotifications-_r_26_-label"
                   aria-pressed="true"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="true"
@@ -2295,7 +2379,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </div>
             </div>
             <section
-              aria-labelledby="_r_1t_"
+              aria-labelledby="_r_2b_"
               class="prc-Banner-Banner-IPLJ2"
               data-actions-layout="default"
               data-component="Banner"
@@ -2337,7 +2421,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     class="prc-Banner-BannerTitle-T4z0L"
                     data-banner-title=""
                     data-component="Banner.Title"
-                    id="_r_1t_"
+                    id="_r_2b_"
                   >
                     Missing notification scopes
                   </h2>
@@ -2410,7 +2494,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                         <button
                           aria-hidden="true"
                           class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                          id="showPills-_r_1v_-label"
+                          id="showPills-_r_2d_-label"
                           tabindex="-1"
                           type="button"
                         >
@@ -2420,14 +2504,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                           aria-expanded="false"
                           aria-haspopup="true"
                           aria-label="tooltip-showPills"
+                          class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                          data-component="IconButton"
+                          data-loading="false"
+                          data-no-visuals="true"
+                          data-size="small"
                           data-testid="tooltip-icon-tooltip-showPills"
+                          data-variant="invisible"
                           id="tooltip-showPills"
                           tabindex="0"
                           type="button"
                         >
                           <svg
                             aria-hidden="true"
-                            class="octicon octicon-question text-gitify-tooltip-icon"
+                            class="octicon octicon-question"
                             data-component="Octicon"
                             display="inline-block"
                             fill="currentColor"
@@ -2478,7 +2568,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                       </span>
                       <button
                         aria-disabled="false"
-                        aria-labelledby="showPills-_r_1v_-label"
+                        aria-labelledby="showPills-_r_2d_-label"
                         aria-pressed="true"
                         class="prc-ToggleSwitch-SwitchButton-1CtM6"
                         data-checked="true"
@@ -2553,7 +2643,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="markAsDoneOnOpen-_r_23_-label"
+                    id="markAsDoneOnOpen-_r_2i_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2563,14 +2653,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-markAsDoneOnOpen"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-markAsDoneOnOpen"
+                    data-variant="invisible"
                     id="tooltip-markAsDoneOnOpen"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -2621,7 +2717,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="markAsDoneOnOpen-_r_23_-label"
+                  aria-labelledby="markAsDoneOnOpen-_r_2i_-label"
                   aria-pressed="false"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="false"
@@ -2693,7 +2789,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="markAsDoneOnUnsubscribe-_r_27_-label"
+                    id="markAsDoneOnUnsubscribe-_r_2n_-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2703,14 +2799,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     aria-expanded="false"
                     aria-haspopup="true"
                     aria-label="tooltip-markAsDoneOnUnsubscribe"
+                    class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                    data-component="IconButton"
+                    data-loading="false"
+                    data-no-visuals="true"
+                    data-size="small"
                     data-testid="tooltip-icon-tooltip-markAsDoneOnUnsubscribe"
+                    data-variant="invisible"
                     id="tooltip-markAsDoneOnUnsubscribe"
                     tabindex="0"
                     type="button"
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-question text-gitify-tooltip-icon"
+                      class="octicon octicon-question"
                       data-component="Octicon"
                       display="inline-block"
                       fill="currentColor"
@@ -2761,7 +2863,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </span>
                 <button
                   aria-disabled="false"
-                  aria-labelledby="markAsDoneOnUnsubscribe-_r_27_-label"
+                  aria-labelledby="markAsDoneOnUnsubscribe-_r_2n_-label"
                   aria-pressed="false"
                   class="prc-ToggleSwitch-SwitchButton-1CtM6"
                   data-checked="false"
@@ -2884,7 +2986,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showNotifications-_r_2b_-label"
+                  id="showNotifications-_r_2s_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -2894,14 +2996,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-showNotifications"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-showNotifications"
+                  data-variant="invisible"
                   id="tooltip-showNotifications"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -2952,7 +3060,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="showNotifications-_r_2b_-label"
+                aria-labelledby="showNotifications-_r_2s_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3024,7 +3132,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="playSound-_r_2f_-label"
+                  id="playSound-_r_31_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3034,14 +3142,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-playSound"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-playSound"
+                  data-variant="invisible"
                   id="tooltip-playSound"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -3092,7 +3206,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="playSound-_r_2f_-label"
+                aria-labelledby="playSound-_r_31_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3162,7 +3276,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               class="overflow-hidden"
             >
               <fieldset
-                aria-labelledby="notificationVolume-_r_2j_-label"
+                aria-labelledby="notificationVolume-_r_36_-label"
                 class="min-w-0"
               >
                 <div
@@ -3173,7 +3287,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   >
                     <span
                       class="text-sm font-medium text-gitify-font"
-                      id="notificationVolume-_r_2j_-label"
+                      id="notificationVolume-_r_36_-label"
                     >
                       Notification volume
                     </span>
@@ -3181,14 +3295,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                       aria-expanded="false"
                       aria-haspopup="true"
                       aria-label="tooltip-notificationVolume"
+                      class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                      data-component="IconButton"
+                      data-loading="false"
+                      data-no-visuals="true"
+                      data-size="small"
                       data-testid="tooltip-icon-tooltip-notificationVolume"
+                      data-variant="invisible"
                       id="tooltip-notificationVolume"
                       tabindex="0"
                       type="button"
                     >
                       <svg
                         aria-hidden="true"
-                        class="octicon octicon-question text-gitify-tooltip-icon"
+                        class="octicon octicon-question"
                         data-component="Octicon"
                         display="inline-block"
                         fill="currentColor"
@@ -3363,7 +3483,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showUpdateNotifications-_r_2q_-label"
+                  id="showUpdateNotifications-_r_3e_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3373,14 +3493,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-showUpdateNotifications"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-showUpdateNotifications"
+                  data-variant="invisible"
                   id="tooltip-showUpdateNotifications"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -3431,7 +3557,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="showUpdateNotifications-_r_2q_-label"
+                aria-labelledby="showUpdateNotifications-_r_3e_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3556,7 +3682,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showNotificationsCountInTray-_r_2u_-label"
+                  id="showNotificationsCountInTray-_r_3j_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3566,14 +3692,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-showNotificationsCountInTray"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-showNotificationsCountInTray"
+                  data-variant="invisible"
                   id="tooltip-showNotificationsCountInTray"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -3624,7 +3756,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="showNotificationsCountInTray-_r_2u_-label"
+                aria-labelledby="showNotificationsCountInTray-_r_3j_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3696,7 +3828,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="useUnreadActiveIcon-_r_32_-label"
+                  id="useUnreadActiveIcon-_r_3o_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3706,14 +3838,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-useUnreadActiveIcon"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-useUnreadActiveIcon"
+                  data-variant="invisible"
                   id="tooltip-useUnreadActiveIcon"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -3764,7 +3902,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="useUnreadActiveIcon-_r_32_-label"
+                aria-labelledby="useUnreadActiveIcon-_r_3o_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -3834,7 +3972,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="trayIconAppearance-_r_36_-label"
+                  id="trayIconAppearance-_r_3t_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3844,14 +3982,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-trayIconAppearance"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-trayIconAppearance"
+                  data-variant="invisible"
                   id="tooltip-trayIconAppearance"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -3872,7 +4016,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 class="shrink-0"
               >
                 <ul
-                  aria-labelledby="trayIconAppearance-_r_36_-label"
+                  aria-labelledby="trayIconAppearance-_r_3t_-label"
                   class="prc-SegmentedControl-SegmentedControl-lqIXp"
                   data-component="SegmentedControl"
                   data-variant="default"
@@ -4011,7 +4155,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="openLinks-_r_39_-label"
+                  id="openLinks-_r_41_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4021,14 +4165,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-openLinks"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-openLinks"
+                  data-variant="invisible"
                   id="tooltip-openLinks"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -4049,7 +4199,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 class="shrink-0"
               >
                 <ul
-                  aria-labelledby="openLinks-_r_39_-label"
+                  aria-labelledby="openLinks-_r_41_-label"
                   class="prc-SegmentedControl-SegmentedControl-lqIXp"
                   data-component="SegmentedControl"
                   data-variant="default"
@@ -4117,7 +4267,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="keyboardShortcut-_r_3c_-label"
+                  id="keyboardShortcut-_r_45_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4127,14 +4277,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-keyboardShortcut"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-keyboardShortcut"
+                  data-variant="invisible"
                   id="tooltip-keyboardShortcut"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -4185,7 +4341,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="keyboardShortcut-_r_3c_-label"
+                aria-labelledby="keyboardShortcut-_r_45_-label"
                 aria-pressed="true"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="true"
@@ -4256,7 +4412,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             >
               <div>
                 <fieldset
-                  aria-labelledby="shortcut-_r_3g_-label"
+                  aria-labelledby="shortcut-_r_4a_-label"
                   class="min-w-0"
                 >
                   <div
@@ -4267,7 +4423,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     >
                       <span
                         class="text-sm font-medium text-gitify-font"
-                        id="shortcut-_r_3g_-label"
+                        id="shortcut-_r_4a_-label"
                       >
                         Global shortcut
                       </span>
@@ -4275,14 +4431,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                         aria-expanded="false"
                         aria-haspopup="true"
                         aria-label="tooltip-shortcut"
+                        class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                        data-component="IconButton"
+                        data-loading="false"
+                        data-no-visuals="true"
+                        data-size="small"
                         data-testid="tooltip-icon-tooltip-shortcut"
+                        data-variant="invisible"
                         id="tooltip-shortcut"
                         tabindex="0"
                         type="button"
                       >
                         <svg
                           aria-hidden="true"
-                          class="octicon octicon-question text-gitify-tooltip-icon"
+                          class="octicon octicon-question"
                           data-component="Octicon"
                           display="inline-block"
                           fill="currentColor"
@@ -4426,7 +4588,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="keepWindowOnBlur-_r_3m_-label"
+                  id="keepWindowOnBlur-_r_4h_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4436,14 +4598,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-keepWindowOnBlur"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-keepWindowOnBlur"
+                  data-variant="invisible"
                   id="tooltip-keepWindowOnBlur"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -4494,7 +4662,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="keepWindowOnBlur-_r_3m_-label"
+                aria-labelledby="keepWindowOnBlur-_r_4h_-label"
                 aria-pressed="false"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="false"
@@ -4566,7 +4734,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="openAtStartup-_r_3q_-label"
+                  id="openAtStartup-_r_4m_-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4576,14 +4744,20 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   aria-expanded="false"
                   aria-haspopup="true"
                   aria-label="tooltip-openAtStartup"
+                  class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+                  data-component="IconButton"
+                  data-loading="false"
+                  data-no-visuals="true"
+                  data-size="small"
                   data-testid="tooltip-icon-tooltip-openAtStartup"
+                  data-variant="invisible"
                   id="tooltip-openAtStartup"
                   tabindex="0"
                   type="button"
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-question text-gitify-tooltip-icon"
+                    class="octicon octicon-question"
                     data-component="Octicon"
                     display="inline-block"
                     fill="currentColor"
@@ -4634,7 +4808,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </span>
               <button
                 aria-disabled="false"
-                aria-labelledby="openAtStartup-_r_3q_-label"
+                aria-labelledby="openAtStartup-_r_4m_-label"
                 aria-pressed="false"
                 class="prc-ToggleSwitch-SwitchButton-1CtM6"
                 data-checked="false"
@@ -4753,7 +4927,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_40_"
+          aria-describedby="_r_4t_"
           class="prc-Button-ButtonBase-9n-Xk"
           data-component="Button"
           data-loading="false"
@@ -4783,7 +4957,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           class="prc-TooltipV2-Tooltip-tLeuB"
           data-component="Tooltip"
           data-direction="ne"
-          id="_r_40_"
+          id="_r_4t_"
           popover="auto"
           role="tooltip"
         >
@@ -4801,7 +4975,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         data-wrap="nowrap"
       >
         <button
-          aria-describedby="_r_42_"
+          aria-describedby="_r_4v_"
           aria-label="Accounts"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -4839,7 +5013,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_42_"
+            id="_r_4v_"
           >
             Accounts
             <span
@@ -4881,7 +5055,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </span>
         </span>
         <button
-          aria-describedby="_r_44_"
+          aria-describedby="_r_51_"
           aria-label="Quit Gitify"
           class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
@@ -4919,7 +5093,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           role="tooltip"
         >
           <span
-            id="_r_44_"
+            id="_r_51_"
           >
             Quit Gitify
             <span

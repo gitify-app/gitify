@@ -1,27 +1,26 @@
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 
 import { QuestionIcon } from '@primer/octicons-react';
-import { AnchoredOverlay } from '@primer/react';
+import { AnchoredOverlay, IconButton } from '@primer/react';
 
 import { cn } from 'cn';
 
-export interface TooltipProps {
+export interface HelpPopoverProps {
   name: string;
-  tooltip: ReactNode | string;
+  content: ReactNode | string;
 }
 
-export function Tooltip(props: Readonly<TooltipProps>) {
-  const [shouldShowTooltipContents, setShouldShowTooltipContents] = useState(false);
+export function HelpPopover(props: Readonly<HelpPopoverProps>) {
+  const [shouldShowContents, setShouldShowContents] = useState(false);
 
   const scrollContainerRef = useRef<HTMLElement | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!shouldShowTooltipContents) {
+    if (!shouldShowContents) {
       return;
     }
 
-    // Find the scrollable parent container
     const findScrollContainer = (element: HTMLElement | null): HTMLElement | null => {
       if (!element) {
         return null;
@@ -37,20 +36,20 @@ export function Tooltip(props: Readonly<TooltipProps>) {
       return findScrollContainer(element.parentElement);
     };
 
-    const tooltipButton = document.getElementById(props.name);
-    scrollContainerRef.current = findScrollContainer(tooltipButton);
+    const anchor = document.getElementById(props.name);
+    scrollContainerRef.current = findScrollContainer(anchor);
 
     const handleScroll = () => {
-      setShouldShowTooltipContents(false);
+      setShouldShowContents(false);
     };
 
     const handleClickOutside = (event: MouseEvent) => {
       if (
         overlayRef.current &&
         !overlayRef.current.contains(event.target as Node) &&
-        !tooltipButton?.contains(event.target as Node)
+        !anchor?.contains(event.target as Node)
       ) {
-        setShouldShowTooltipContents(false);
+        setShouldShowContents(false);
       }
     };
 
@@ -66,23 +65,25 @@ export function Tooltip(props: Readonly<TooltipProps>) {
       }
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [shouldShowTooltipContents, props.name]);
+  }, [shouldShowContents, props.name]);
 
   return (
     <AnchoredOverlay
-      align="center"
-      open={shouldShowTooltipContents}
+      align="start"
+      open={shouldShowContents}
       renderAnchor={(anchorProps) => (
-        <button
+        <IconButton
           {...anchorProps}
           aria-label={props.name}
+          className="text-gitify-tooltip-icon!"
           data-testid={`tooltip-icon-${props.name}`}
+          icon={QuestionIcon}
           id={props.name}
-          onClick={() => setShouldShowTooltipContents(!shouldShowTooltipContents)}
-          type="button"
-        >
-          <QuestionIcon className="text-gitify-tooltip-icon" />
-        </button>
+          onClick={() => setShouldShowContents(!shouldShowContents)}
+          size="small"
+          unsafeDisableTooltip={true}
+          variant="invisible"
+        />
       )}
       side="outside-bottom"
     >
@@ -90,13 +91,13 @@ export function Tooltip(props: Readonly<TooltipProps>) {
         className={cn(
           'z-10 w-60 p-2',
           'text-left text-xs text-gitify-font',
-          'rounded-sm border border-gray-300 shadow-sm bg-gitify-tooltip-popout',
+          'rounded-gitify-sm border border-gitify-notification-border bg-gitify-tooltip-popout shadow-gitify-sm',
         )}
         data-testid={`tooltip-content-${props.name}`}
         ref={overlayRef}
         role="tooltip"
       >
-        {props.tooltip}
+        {props.content}
       </div>
     </AnchoredOverlay>
   );
