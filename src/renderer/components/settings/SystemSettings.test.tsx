@@ -19,33 +19,33 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
-  it('should change the open links radio group', async () => {
+  it('should change the link focus choice', async () => {
     await act(async () => {
       renderWithProviders(<SystemSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('radio-openLinks-background'));
+    await userEvent.click(screen.getByTestId('choice-openLinks-background'));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('openLinks', 'BACKGROUND');
   });
 
   it.each([
-    ['checkbox-keyboardShortcut', 'keyboardShortcut'],
-    ['checkbox-openAtStartup', 'openAtStartup'],
-    ['checkbox-keepWindowOnBlur', 'keepWindowOnBlur'],
-  ] as const)('should toggle %s checkbox', async (testId, setting) => {
+    ['Enable global shortcut', 'keyboardShortcut'],
+    ['Launch at startup', 'openAtStartup'],
+    ['Keep window open when unfocused', 'keepWindowOnBlur'],
+  ] as const)('should toggle %s switch', async (label, setting) => {
     await act(async () => {
       renderWithProviders(<SystemSettings />);
     });
 
-    await userEvent.click(screen.getByTestId(testId));
+    await userEvent.click(screen.getByRole('button', { name: label }));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
-  describe('X11 backend checkbox', () => {
+  describe('X11 backend switch', () => {
     // `window.gitify` is rebuilt in a global `beforeEach`, so the mock has to
     // be read inside each test rather than captured at describe scope.
     const isLinuxMock = () => window.gitify.platform.isLinux as unknown as ReturnType<typeof vi.fn>;
@@ -57,7 +57,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
         renderWithProviders(<SystemSettings />);
       });
 
-      expect(screen.queryByTestId('checkbox-useX11Backend')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('switch-useX11Backend')).not.toBeInTheDocument();
       expect(
         screen.queryByRole('button', { name: 'GNOME extension installation' }),
       ).not.toBeInTheDocument();
@@ -70,7 +70,9 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
         renderWithProviders(<SystemSettings />);
       });
 
-      await userEvent.click(screen.getByTestId('checkbox-useX11Backend'));
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Use X11 backend (restart required)' }),
+      );
 
       expect(toggleSettingSpy).toHaveBeenCalledWith('useX11Backend');
     });
@@ -119,7 +121,19 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       settings: { ...mockSettings, keyboardShortcut: false },
     });
 
-    expect(screen.queryByTestId('settings-shortcut-group')).not.toBeInTheDocument();
+    expect(screen.getByTestId('reveal-shortcutRecorder')).toHaveAttribute('data-state', 'closed');
+  });
+
+  it('shows the shortcut rules on the recorder row', async () => {
+    renderWithProviders(<SystemSettings />, {
+      settings: { ...mockSettings, keyboardShortcut: true },
+    });
+
+    expect(screen.getByText('Global shortcut')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-shortcut'));
+
+    expect(screen.getByText('Shortcuts must include:')).toBeInTheDocument();
   });
 
   describe('recording global shortcut', () => {

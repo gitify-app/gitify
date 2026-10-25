@@ -24,7 +24,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    await userEvent.selectOptions(screen.getByTestId('settings-theme'), 'LIGHT');
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Theme' }), 'LIGHT');
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('theme', 'LIGHT');
@@ -35,7 +35,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    await userEvent.selectOptions(screen.getByTestId('settings-design-language'), 'glass');
+    await userEvent.click(screen.getByTestId('choice-designLanguage-glass'));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
@@ -85,7 +85,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-increaseContrast'));
+    await userEvent.click(screen.getByRole('button', { name: 'Increase contrast' }));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
     expect(toggleSettingSpy).toHaveBeenCalledWith('increaseContrast');
@@ -98,7 +98,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       });
     });
 
-    expect(screen.queryByTestId('checkbox-increaseContrast')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('switch-increaseContrast')).not.toBeInTheDocument();
   });
 
   it('should toggle the status icon colors checkbox for Glass', async () => {
@@ -108,7 +108,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       });
     });
 
-    await userEvent.click(screen.getByTestId('checkbox-showStatusIconColors'));
+    await userEvent.click(screen.getByRole('button', { name: 'Show status icon colors' }));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
     expect(toggleSettingSpy).toHaveBeenCalledWith('showStatusIconColors');
@@ -119,29 +119,33 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    expect(screen.queryByTestId('checkbox-showStatusIconColors')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('switch-showStatusIconColors')).not.toBeInTheDocument();
   });
 
-  it.each([
-    [
-      'tooltip-icon-tooltip-design-language',
-      'Choose Classic for the original Gitify layout, or Glass for the translucent, layered design language.',
-    ],
-    [
-      'tooltip-icon-tooltip-theme',
-      'Choose a light, dark, or system color mode. Available options depend on the selected design language.',
-    ],
-    [
-      'tooltip-icon-tooltip-zoom',
-      'Change the size of the Gitify interface. The setting applies immediately and is remembered for the next launch.',
-    ],
-  ])('should show help for %s', async (testId, help) => {
+  it('shows detailed help in the tooltips', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    await userEvent.click(screen.getByTestId(testId));
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-designLanguage'));
+    expect(
+      screen.getByText(
+        'Choose Classic for the original Gitify layout, or Glass for the translucent, layered design language.',
+      ),
+    ).toBeInTheDocument();
 
-    expect(screen.getByText(help)).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-theme'));
+    expect(
+      screen.getByText(
+        'Choose a light, dark, or system color mode. Available options depend on the selected design language.',
+      ),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-zoom'));
+    expect(
+      screen.getByText(
+        'Change the size of the Gitify interface. The setting applies immediately and is remembered for the next launch.',
+      ),
+    ).toBeInTheDocument();
   });
 });

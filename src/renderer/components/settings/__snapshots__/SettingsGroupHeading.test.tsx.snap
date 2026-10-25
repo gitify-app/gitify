@@ -3,7 +3,7 @@
 exports[`renderer/components/settings/SettingsGroupHeading.tsx > should render a group heading 1`] = `
 <div>
   <div
-    class="pt-2 prc-Stack-Stack-UQ9k6"
+    class="border-t border-gitify-notification-border pt-4 prc-Stack-Stack-UQ9k6"
     data-align="center"
     data-component="Stack"
     data-direction="horizontal"
@@ -36,7 +36,7 @@ exports[`renderer/components/settings/SettingsGroupHeading.tsx > should render a
       class="text-sm font-semibold text-gitify-font prc-Text-Text-9mHv3"
       data-component="Text"
     >
-      Fetching
+      Fetch
     </h5>
   </div>
 </div>

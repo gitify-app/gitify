@@ -1,7 +1,7 @@
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { renderWithProviders } from '../../__helpers__/test-utils';
+import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -23,14 +23,15 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
   beforeEach(() => {
     toggleSettingSpy = vi.spyOn(useSettingsStore.getState(), 'toggleSetting');
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
+    navigateMock.mockReset();
   });
 
-  it('should change the groupBy radio group', async () => {
+  it('should change the groupBy choice', async () => {
     await act(async () => {
       renderWithProviders(<InboxSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('radio-groupBy-date'));
+    await userEvent.click(screen.getByTestId('choice-groupBy-date'));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('groupBy', 'DATE');
@@ -42,7 +43,6 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         renderWithProviders(<InboxSettings />);
       });
 
-      // Increase fetch interval
       await act(async () => {
         await userEvent.click(screen.getByTestId('settings-fetch-interval-increase'));
 
@@ -57,7 +57,6 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         expect(updateSettingSpy).toHaveBeenNthCalledWith(2, 'fetchInterval', 180000);
       });
 
-      // Decrease fetch interval
       await act(async () => {
         await userEvent.click(screen.getByTestId('settings-fetch-interval-decrease'));
 
@@ -65,7 +64,6 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         expect(updateSettingSpy).toHaveBeenNthCalledWith(3, 'fetchInterval', 120000);
       });
 
-      // Fetch interval reset
       await act(async () => {
         await userEvent.click(screen.getByTestId('settings-fetch-interval-reset'));
 
@@ -93,7 +91,6 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         expect(updateSettingSpy).toHaveBeenCalledWith('fetchInterval', 60000);
       });
 
-      // Attempt to go below the minimum interval, update settings should not be called
       await act(async () => {
         await userEvent.click(screen.getByTestId('settings-fetch-interval-decrease'));
 
@@ -120,7 +117,6 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         expect(updateSettingSpy).toHaveBeenCalledWith('fetchInterval', 3600000);
       });
 
-      // Attempt to go above the maximum interval, update settings should not be called
       await act(async () => {
         await userEvent.click(screen.getByTestId('settings-fetch-interval-increase'));
 
@@ -130,38 +126,38 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
   });
 
   it.each([
-    ['checkbox-fetchAllNotifications', 'fetchAllNotifications'],
-    ['checkbox-detailedNotifications', 'detailedNotifications'],
-    ['checkbox-showPills', 'showPills'],
-    ['checkbox-showNumber', 'showNumber'],
-    ['checkbox-showOnlyParticipating', 'participating'],
-    ['checkbox-fetchReadNotifications', 'fetchReadNotifications'],
-    ['checkbox-markAsDoneOnOpen', 'markAsDoneOnOpen'],
-    ['checkbox-markAsDoneOnUnsubscribe', 'markAsDoneOnUnsubscribe'],
-    ['checkbox-showAccountHeader', 'showAccountHeader'],
-    ['checkbox-wrapNotificationTitle', 'wrapNotificationTitle'],
-    ['checkbox-delayNotificationState', 'delayNotificationState'],
-  ] as const)('should toggle %s checkbox', async (testId, setting) => {
+    ['Fetch all notifications', 'fetchAllNotifications'],
+    ['Fetch detailed notifications', 'detailedNotifications'],
+    ['Show notification metrics', 'showPills'],
+    ['Show reference', 'showNumber'],
+    ['Fetch only participating', 'participating'],
+    ['Fetch read and done notifications', 'fetchReadNotifications'],
+    ['Mark as done on open', 'markAsDoneOnOpen'],
+    ['Mark as done on unsubscribe', 'markAsDoneOnUnsubscribe'],
+    ['Show account header', 'showAccountHeader'],
+    ['Show full notification title', 'wrapNotificationTitle'],
+    ['Delay notification removal', 'delayNotificationState'],
+  ] as const)('should toggle %s switch', async (label, setting) => {
     await act(async () => {
       renderWithProviders(<InboxSettings />, {
         accounts: [mockGitHubCloudAccount],
       });
     });
 
-    await userEvent.click(screen.getByTestId(testId));
+    await userEvent.click(screen.getByRole('button', { name: label }));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
-  it('reactively hides the account header checkbox when a second account is added', async () => {
+  it('reactively hides the account header switch when a second account is added', async () => {
     await act(async () => {
       renderWithProviders(<InboxSettings />, {
         accounts: [mockGitHubCloudAccount],
       });
     });
 
-    expect(screen.getByTestId('checkbox-showAccountHeader')).toBeInTheDocument();
+    expect(screen.getByTestId('switch-showAccountHeader')).toBeInTheDocument();
 
     await act(async () => {
       useAccountsStore.setState({
@@ -169,7 +165,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
     });
 
-    expect(screen.queryByTestId('checkbox-showAccountHeader')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('switch-showAccountHeader')).not.toBeInTheDocument();
   });
 
   describe('GitHub-specific settings', () => {
@@ -180,7 +176,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         });
       });
 
-      expect(screen.queryByTestId('checkbox-showOnlyParticipating')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('switch-showOnlyParticipating')).not.toBeInTheDocument();
       expect(
         screen.getByText('GitHub-specific options require a GitHub account.'),
       ).toBeInTheDocument();
@@ -193,13 +189,17 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         });
       });
 
-      expect(screen.getByTestId('checkbox-markAsDoneOnOpen')).toBeDisabled();
-      expect(screen.getByTestId('checkbox-markAsDoneOnUnsubscribe')).toBeDisabled();
+      expect(screen.getByRole('button', { name: 'Mark as done on open' })).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
+      expect(screen.getByRole('button', { name: 'Mark as done on unsubscribe' })).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
       expect(
-        screen.getByText(
-          'Mark as done requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.',
-        ),
-      ).toBeInTheDocument();
+        screen.getAllByText('Requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.'),
+      ).toHaveLength(2);
     });
 
     it('hides notification metrics when detailed notifications are disabled', async () => {
@@ -210,7 +210,10 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         });
       });
 
-      expect(screen.queryByTestId('checkbox-showPills')).not.toBeInTheDocument();
+      expect(screen.getByTestId('reveal-notificationMetrics')).toHaveAttribute(
+        'data-state',
+        'closed',
+      );
     });
 
     it('shows notification metrics when detailed notifications are enabled', async () => {
@@ -221,11 +224,33 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
         });
       });
 
-      expect(screen.getByTestId('checkbox-showPills')).toBeInTheDocument();
+      expect(screen.getByTestId('reveal-notificationMetrics')).toHaveAttribute(
+        'data-state',
+        'open',
+      );
+    });
+
+    it('shows a banner when GitHub accounts are missing scopes', async () => {
+      await act(async () => {
+        renderWithProviders(<InboxSettings />, {
+          accounts: [mockGitHubCloudAccount],
+        });
+      });
+
+      expect(screen.getByTestId('settings-scope-warning')).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          'One or more accounts are missing scopes required for notification enrichment. Notification details may be incomplete.',
+        ),
+      ).toBeInTheDocument();
+
+      await userEvent.click(screen.getByRole('button', { name: 'Review account scopes' }));
+
+      expect(navigateMock).toHaveBeenCalledWith('/accounts');
     });
   });
 
-  it('should open official docs for showOnlyParticipating tooltip', async () => {
+  it('opens official docs from the participating help link', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     await act(async () => {
@@ -234,9 +259,8 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
     });
 
-    const tooltipElement = screen.getByLabelText('tooltip-showOnlyParticipating');
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-showOnlyParticipating'));
 
-    await userEvent.click(tooltipElement);
     await userEvent.click(
       screen.getByTitle('Open GitHub documentation for participating and watching notifications'),
     );
@@ -247,7 +271,23 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
     );
   });
 
-  it('should show help for the fetch interval', async () => {
+  it.each([
+    ['groupBy', 'tooltip-groupBy'],
+    ['showAccountHeader', 'tooltip-showAccountHeader'],
+    ['wrapNotificationTitle', 'tooltip-wrapNotificationTitle'],
+    ['showNumber', 'tooltip-showNumber'],
+    ['delayNotificationState', 'tooltip-delayNotificationState'],
+  ] as const)('renders the %s tooltip', async (_name, tooltipName) => {
+    await act(async () => {
+      renderWithProviders(<InboxSettings />, {
+        accounts: [mockGitHubCloudAccount],
+      });
+    });
+
+    expect(screen.getByTestId(`tooltip-icon-${tooltipName}`)).toBeInTheDocument();
+  });
+
+  it('shows the fetch interval details in a tooltip', async () => {
     await act(async () => {
       renderWithProviders(<InboxSettings />);
     });

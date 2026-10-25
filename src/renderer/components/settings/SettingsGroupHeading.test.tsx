@@ -7,7 +7,7 @@ import { SettingsGroupHeading } from './SettingsGroupHeading';
 describe('renderer/components/settings/SettingsGroupHeading.tsx', () => {
   it('should render a group heading', async () => {
     const { container } = renderWithProviders(
-      <SettingsGroupHeading icon={DownloadIcon}>Fetching</SettingsGroupHeading>,
+      <SettingsGroupHeading icon={DownloadIcon}>Fetch</SettingsGroupHeading>,
     );
 
     expect(container).toMatchSnapshot();

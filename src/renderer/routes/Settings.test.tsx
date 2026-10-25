@@ -43,19 +43,17 @@ describe('renderer/routes/Settings.tsx', () => {
     const alerts = section('Alerts');
     const system = section('System');
 
-    expect(within(inbox).getByTestId('checkbox-showPills')).toBeInTheDocument();
-    expect(within(inbox).getByTestId('checkbox-wrapNotificationTitle')).toBeInTheDocument();
-    expect(within(inbox).queryByTestId('checkbox-showNotifications')).not.toBeInTheDocument();
+    expect(within(inbox).getByTestId('switch-showPills')).toBeInTheDocument();
+    expect(within(inbox).getByTestId('switch-wrapNotificationTitle')).toBeInTheDocument();
+    expect(within(inbox).queryByTestId('switch-showNotifications')).not.toBeInTheDocument();
     expect(
-      within(appearance).queryByTestId('checkbox-wrapNotificationTitle'),
+      within(appearance).queryByTestId('switch-wrapNotificationTitle'),
     ).not.toBeInTheDocument();
-    expect(within(alerts).getByTestId('checkbox-showNotifications')).toBeInTheDocument();
-    expect(within(alerts).getByTestId('checkbox-showUpdateNotifications')).toBeInTheDocument();
-    expect(within(alerts).queryByTestId('checkbox-showPills')).not.toBeInTheDocument();
-    expect(within(system).queryByTestId('checkbox-showNotifications')).not.toBeInTheDocument();
-    expect(
-      within(system).queryByTestId('checkbox-showUpdateNotifications'),
-    ).not.toBeInTheDocument();
+    expect(within(alerts).getByTestId('switch-showNotifications')).toBeInTheDocument();
+    expect(within(alerts).getByTestId('switch-showUpdateNotifications')).toBeInTheDocument();
+    expect(within(alerts).queryByTestId('switch-showPills')).not.toBeInTheDocument();
+    expect(within(system).queryByTestId('switch-showNotifications')).not.toBeInTheDocument();
+    expect(within(system).queryByTestId('switch-showUpdateNotifications')).not.toBeInTheDocument();
   });
 
   it('should go back by pressing the icon', async () => {

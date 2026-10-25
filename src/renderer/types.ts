@@ -174,11 +174,6 @@ export enum GroupBy {
   DATE = 'DATE',
 }
 
-export interface RadioGroupItem {
-  label: string;
-  value: string;
-}
-
 export interface AccountNotifications {
   account: Account;
   notifications: GitifyNotification[];
