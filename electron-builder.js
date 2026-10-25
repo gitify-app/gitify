@@ -15,12 +15,6 @@ const config = {
     'package.json',
   ],
   electronLanguages: ['en'],
-  protocols: [
-    {
-      name: 'Gitify',
-      schemes: ['gitify', 'gitify-dev'],
-    },
-  ],
   mac: {
     category: 'public.app-category.developer-tools',
     icon: 'assets/images/app-icon.icns',
