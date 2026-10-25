@@ -1,6 +1,8 @@
-import { type ReactNode, useId } from 'react';
+import { type ReactNode, useId, useRef } from 'react';
 
 import { SegmentedControl, Select } from '@primer/react';
+
+import { cn } from 'cn';
 
 import { Tooltip } from '../../fields/Tooltip';
 
@@ -40,30 +42,47 @@ export function SettingsChoice({
   const labelId = `${name}-${id}-label`;
   const captionId = `${name}-${id}-caption`;
   const selectId = `${name}-${id}-select`;
+  const selectRef = useRef<HTMLSelectElement>(null);
+  const segmentedRef = useRef<HTMLDivElement>(null);
 
   if (!visible) {
     return null;
   }
 
-  const labelContent =
-    presentation === 'select' ? (
-      <label className="font-medium" htmlFor={selectId} id={labelId}>
-        {label}
-      </label>
-    ) : (
-      <span className="font-medium" id={labelId}>
-        {label}
-      </span>
-    );
+  const focusControl = () => {
+    if (presentation === 'select') {
+      const select = selectRef.current;
+
+      if (!select) {
+        return;
+      }
+
+      select.focus();
+
+      if (typeof select.showPicker === 'function') {
+        try {
+          select.showPicker();
+        } catch {
+          // Focus is the fallback when the browser cannot open the picker.
+        }
+      }
+
+      return;
+    }
+
+    segmentedRef.current?.querySelector<HTMLButtonElement>('button[aria-pressed="true"]')?.focus();
+  };
 
   const control =
     presentation === 'select' ? (
       <Select
         aria-describedby={caption ? captionId : undefined}
+        aria-labelledby={labelId}
         data-testid={`select-${name}`}
         disabled={disabled}
         id={selectId}
         onChange={(event) => onChange(event.target.value)}
+        ref={selectRef}
         value={value}
       >
         {selectChildren ??
@@ -74,33 +93,48 @@ export function SettingsChoice({
           ))}
       </Select>
     ) : (
-      <SegmentedControl
-        aria-describedby={caption ? captionId : undefined}
-        aria-labelledby={labelId}
-        onChange={(index) => {
-          const option = options[index];
-          if (option) {
-            onChange(option.value);
-          }
-        }}
-      >
-        {options.map((option) => (
-          <SegmentedControl.Button
-            data-testid={`choice-${name}-${option.value.toLowerCase()}`}
-            key={option.value}
-            selected={option.value === value}
-          >
-            {option.label}
-          </SegmentedControl.Button>
-        ))}
-      </SegmentedControl>
+      <div ref={segmentedRef}>
+        <SegmentedControl
+          aria-describedby={caption ? captionId : undefined}
+          aria-labelledby={labelId}
+          onChange={(index) => {
+            const option = options[index];
+            if (option) {
+              onChange(option.value);
+            }
+          }}
+        >
+          {options.map((option) => (
+            <SegmentedControl.Button
+              data-testid={`choice-${name}-${option.value.toLowerCase()}`}
+              key={option.value}
+              selected={option.value === value}
+            >
+              {option.label}
+            </SegmentedControl.Button>
+          ))}
+        </SegmentedControl>
+      </div>
     );
 
   return (
     <div>
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-1">
-          {labelContent}
+          <button
+            aria-hidden="true"
+            className={cn(
+              'cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font',
+              disabled && 'cursor-not-allowed opacity-60',
+            )}
+            disabled={disabled}
+            id={labelId}
+            onClick={focusControl}
+            tabIndex={-1}
+            type="button"
+          >
+            {label}
+          </button>
           {tooltip && <Tooltip name={`tooltip-${name}`} tooltip={tooltip} />}
         </div>
         <div className="shrink-0">{control}</div>

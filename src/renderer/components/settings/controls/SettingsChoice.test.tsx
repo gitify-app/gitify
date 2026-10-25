@@ -49,6 +49,25 @@ describe('renderer/components/settings/controls/SettingsChoice.tsx', () => {
     expect(onChange).toHaveBeenCalledWith('date');
   });
 
+  it('focuses the selected segment when the label is clicked', async () => {
+    renderWithProviders(
+      <SettingsChoice
+        label="Group by"
+        name="groupBy"
+        onChange={vi.fn()}
+        options={[
+          { label: 'Repository', value: 'repository' },
+          { label: 'Date', value: 'date' },
+        ]}
+        value="repository"
+      />,
+    );
+
+    await userEvent.click(screen.getByText('Group by'));
+
+    expect(screen.getByTestId('choice-groupBy-repository')).toHaveFocus();
+  });
+
   it('renders a select variant', async () => {
     const onChange = vi.fn();
 
@@ -69,6 +88,26 @@ describe('renderer/components/settings/controls/SettingsChoice.tsx', () => {
     await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Theme' }), 'dark');
 
     expect(onChange).toHaveBeenCalledWith('dark');
+  });
+
+  it('focuses the select when the label is clicked', async () => {
+    renderWithProviders(
+      <SettingsChoice
+        label="Theme"
+        name="theme"
+        onChange={vi.fn()}
+        options={[
+          { label: 'Light', value: 'light' },
+          { label: 'Dark', value: 'dark' },
+        ]}
+        presentation="select"
+        value="light"
+      />,
+    );
+
+    await userEvent.click(screen.getByText('Theme'));
+
+    expect(screen.getByRole('combobox', { name: 'Theme' })).toHaveFocus();
   });
 
   it('renders nothing when hidden', () => {

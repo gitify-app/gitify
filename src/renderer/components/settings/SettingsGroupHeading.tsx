@@ -1,6 +1,8 @@
 import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
+import { cn } from 'cn';
+
 interface SettingsGroupHeadingProps {
   icon: Icon;
   children: string;
@@ -15,7 +17,7 @@ export function SettingsGroupHeading({
   return (
     <Stack
       align="center"
-      className={divider ? 'border-t border-gitify-notification-border pt-4' : undefined}
+      className={cn('pt-4', divider && 'border-t border-gitify-notification-border')}
       direction="horizontal"
       gap="condensed"
     >

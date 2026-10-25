@@ -1,4 +1,4 @@
-import { type ReactNode, useId } from 'react';
+import { type ReactNode, useId, useRef } from 'react';
 
 import { cn } from 'cn';
 
@@ -28,26 +28,38 @@ export function SettingsRow({
   const id = useId();
   const labelId = `${name}-${id}-label`;
   const captionId = `${name}-${id}-caption`;
+  const controlsRef = useRef<HTMLDivElement>(null);
 
   if (!visible) {
     return null;
   }
 
   return (
-    <div className={cn(disabled && 'opacity-60')}>
+    <fieldset
+      aria-describedby={caption ? captionId : undefined}
+      aria-labelledby={labelId}
+      className={cn('m-0 min-w-0 border-0 p-0', disabled && 'opacity-60')}
+    >
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-1">
-          <span className="font-medium" id={labelId}>
+          <button
+            aria-hidden="true"
+            className="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
+            disabled={disabled}
+            id={labelId}
+            onClick={() => {
+              controlsRef.current
+                ?.querySelector<HTMLElement>('button, input, select, textarea')
+                ?.focus();
+            }}
+            tabIndex={-1}
+            type="button"
+          >
             {label}
-          </span>
+          </button>
           {tooltip && <Tooltip name={`tooltip-${name}`} tooltip={tooltip} />}
         </div>
-        <div
-          aria-describedby={caption ? captionId : undefined}
-          aria-labelledby={labelId}
-          className="shrink-0"
-          role="group"
-        >
+        <div className="shrink-0" ref={controlsRef}>
           {children}
         </div>
       </div>
@@ -61,6 +73,6 @@ export function SettingsRow({
       {disabled && disabledReason && (
         <div className="pt-1 text-xs text-gitify-caution">{disabledReason}</div>
       )}
-    </div>
+    </fieldset>
   );
 }

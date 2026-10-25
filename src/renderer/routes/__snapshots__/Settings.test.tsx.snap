@@ -155,12 +155,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-medium text-gitify-font"
                   id="designLanguage-_r_1_-label"
+                  tabindex="-1"
+                  type="button"
                 >
                   Design
-                </span>
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -192,60 +195,62 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="shrink-0"
               >
-                <ul
-                  aria-labelledby="designLanguage-_r_1_-label"
-                  class="prc-SegmentedControl-SegmentedControl-lqIXp"
-                  data-component="SegmentedControl"
-                  data-variant="default"
-                >
-                  <li
-                    class="prc-SegmentedControl-Item-tSCQh"
-                    data-component="SegmentedControl.Button"
-                    data-selected=""
+                <div>
+                  <ul
+                    aria-labelledby="designLanguage-_r_1_-label"
+                    class="prc-SegmentedControl-SegmentedControl-lqIXp"
+                    data-component="SegmentedControl"
+                    data-variant="default"
                   >
-                    <button
-                      aria-pressed="true"
-                      class="prc-SegmentedControl-Button-E48xz"
-                      data-testid="choice-designLanguage-classic"
-                      style="--separator-color: transparent;"
-                      type="button"
+                    <li
+                      class="prc-SegmentedControl-Item-tSCQh"
+                      data-component="SegmentedControl.Button"
+                      data-selected=""
                     >
-                      <span
-                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      <button
+                        aria-pressed="true"
+                        class="prc-SegmentedControl-Button-E48xz"
+                        data-testid="choice-designLanguage-classic"
+                        style="--separator-color: transparent;"
+                        type="button"
                       >
-                        <div
-                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                          data-text="Classic"
+                        <span
+                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                         >
-                          Classic
-                        </div>
-                      </span>
-                    </button>
-                  </li>
-                  <li
-                    class="prc-SegmentedControl-Item-tSCQh"
-                    data-component="SegmentedControl.Button"
-                  >
-                    <button
-                      aria-pressed="false"
-                      class="prc-SegmentedControl-Button-E48xz"
-                      data-testid="choice-designLanguage-glass"
-                      style="--separator-color: var(--borderColor-default);"
-                      type="button"
+                          <div
+                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                            data-text="Classic"
+                          >
+                            Classic
+                          </div>
+                        </span>
+                      </button>
+                    </li>
+                    <li
+                      class="prc-SegmentedControl-Item-tSCQh"
+                      data-component="SegmentedControl.Button"
                     >
-                      <span
-                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      <button
+                        aria-pressed="false"
+                        class="prc-SegmentedControl-Button-E48xz"
+                        data-testid="choice-designLanguage-glass"
+                        style="--separator-color: var(--borderColor-default);"
+                        type="button"
                       >
-                        <div
-                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                          data-text="Glass"
+                        <span
+                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                         >
-                          Glass
-                        </div>
-                      </span>
-                    </button>
-                  </li>
-                </ul>
+                          <div
+                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                            data-text="Glass"
+                          >
+                            Glass
+                          </div>
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -256,13 +261,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
-                <label
-                  class="font-medium"
-                  for="theme-_r_4_-select"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-medium text-gitify-font"
                   id="theme-_r_4_-label"
+                  tabindex="-1"
+                  type="button"
                 >
                   Theme
-                </label>
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -303,6 +310,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <select
                     aria-invalid="false"
+                    aria-labelledby="theme-_r_4_-label"
                     class="prc-Select-Select-dJWwD"
                     data-component="Select"
                     data-hasplaceholder="false"
@@ -398,16 +406,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="increaseContrast-_r_7_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Increase contrast
-                  </span>
-                </span>
+                  Increase contrast
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -530,8 +537,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               </button>
             </div>
           </div>
-          <div
-            class=""
+          <fieldset
+            aria-labelledby="zoom-_r_c_-label"
+            class="m-0 min-w-0 border-0 p-0"
           >
             <div
               class="flex items-center justify-between gap-3"
@@ -539,12 +547,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="zoom-_r_c_-label"
+                  tabindex="-1"
+                  type="button"
                 >
                   Zoom
-                </span>
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -574,9 +585,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </button>
               </div>
               <div
-                aria-labelledby="zoom-_r_c_-label"
                 class="shrink-0"
-                role="group"
               >
                 <div
                   class="prc-ButtonGroup-ButtonGroup-vFUrY"
@@ -719,7 +728,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 </div>
               </div>
             </div>
-          </div>
+          </fieldset>
         </div>
       </fieldset>
       <fieldset>
@@ -769,7 +778,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         </div>
         <div>
           <div
-            class="prc-Stack-Stack-UQ9k6"
+            class="pt-4 prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-component="Stack"
             data-direction="horizontal"
@@ -808,8 +817,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           <div
             class="divide-y divide-gitify-notification-border [&>*]:py-2"
           >
-            <div
-              class=""
+            <fieldset
+              aria-labelledby="fetchInterval-_r_j_-label"
+              class="m-0 min-w-0 border-0 p-0"
             >
               <div
                 class="flex items-center justify-between gap-3"
@@ -817,12 +827,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex min-w-0 items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="fetchInterval-_r_j_-label"
+                    tabindex="-1"
+                    type="button"
                   >
                     Fetch interval
-                  </span>
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -852,9 +865,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </button>
                 </div>
                 <div
-                  aria-labelledby="fetchInterval-_r_j_-label"
                   class="shrink-0"
-                  role="group"
                 >
                   <div
                     class="prc-ButtonGroup-ButtonGroup-vFUrY"
@@ -990,7 +1001,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   </div>
                 </div>
               </div>
-            </div>
+            </fieldset>
             <div
               class="flex items-start justify-between gap-3"
             >
@@ -1000,16 +1011,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="fetchAllNotifications-_r_q_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Fetch all notifications
-                    </span>
-                  </span>
+                    Fetch all notifications
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -1141,16 +1151,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="fetchReadNotifications-_r_u_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Fetch read and done notifications
-                    </span>
-                  </span>
+                    Fetch read and done notifications
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -1275,7 +1284,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </div>
           </div>
           <div
-            class="border-t border-gitify-notification-border pt-4 prc-Stack-Stack-UQ9k6"
+            class="pt-4 border-t border-gitify-notification-border prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-component="Stack"
             data-direction="horizontal"
@@ -1318,12 +1327,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex min-w-0 items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-medium text-gitify-font"
                     id="groupBy-_r_12_-label"
+                    tabindex="-1"
+                    type="button"
                   >
                     Group by
-                  </span>
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -1355,60 +1367,62 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="shrink-0"
                 >
-                  <ul
-                    aria-labelledby="groupBy-_r_12_-label"
-                    class="prc-SegmentedControl-SegmentedControl-lqIXp"
-                    data-component="SegmentedControl"
-                    data-variant="default"
-                  >
-                    <li
-                      class="prc-SegmentedControl-Item-tSCQh"
-                      data-component="SegmentedControl.Button"
-                      data-selected=""
+                  <div>
+                    <ul
+                      aria-labelledby="groupBy-_r_12_-label"
+                      class="prc-SegmentedControl-SegmentedControl-lqIXp"
+                      data-component="SegmentedControl"
+                      data-variant="default"
                     >
-                      <button
-                        aria-pressed="true"
-                        class="prc-SegmentedControl-Button-E48xz"
-                        data-testid="choice-groupBy-repository"
-                        style="--separator-color: transparent;"
-                        type="button"
+                      <li
+                        class="prc-SegmentedControl-Item-tSCQh"
+                        data-component="SegmentedControl.Button"
+                        data-selected=""
                       >
-                        <span
-                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                        <button
+                          aria-pressed="true"
+                          class="prc-SegmentedControl-Button-E48xz"
+                          data-testid="choice-groupBy-repository"
+                          style="--separator-color: transparent;"
+                          type="button"
                         >
-                          <div
-                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                            data-text="Repository"
+                          <span
+                            class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                           >
-                            Repository
-                          </div>
-                        </span>
-                      </button>
-                    </li>
-                    <li
-                      class="prc-SegmentedControl-Item-tSCQh"
-                      data-component="SegmentedControl.Button"
-                    >
-                      <button
-                        aria-pressed="false"
-                        class="prc-SegmentedControl-Button-E48xz"
-                        data-testid="choice-groupBy-date"
-                        style="--separator-color: var(--borderColor-default);"
-                        type="button"
+                            <div
+                              class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                              data-text="Repository"
+                            >
+                              Repository
+                            </div>
+                          </span>
+                        </button>
+                      </li>
+                      <li
+                        class="prc-SegmentedControl-Item-tSCQh"
+                        data-component="SegmentedControl.Button"
                       >
-                        <span
-                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                        <button
+                          aria-pressed="false"
+                          class="prc-SegmentedControl-Button-E48xz"
+                          data-testid="choice-groupBy-date"
+                          style="--separator-color: var(--borderColor-default);"
+                          type="button"
                         >
-                          <div
-                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                            data-text="Date"
+                          <span
+                            class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                           >
-                            Date
-                          </div>
-                        </span>
-                      </button>
-                    </li>
-                  </ul>
+                            <div
+                              class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                              data-text="Date"
+                            >
+                              Date
+                            </div>
+                          </span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1421,16 +1435,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="showAccountHeader-_r_15_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Show account header
-                    </span>
-                  </span>
+                    Show account header
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -1562,16 +1575,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="wrapNotificationTitle-_r_19_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Show full notification title
-                    </span>
-                  </span>
+                    Show full notification title
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -1703,16 +1715,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="showNumber-_r_1d_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Show reference
-                    </span>
-                  </span>
+                    Show reference
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -1844,16 +1855,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="delayNotificationState-_r_1h_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Delay notification removal
-                    </span>
-                  </span>
+                    Delay notification removal
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -1978,7 +1988,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </div>
           </div>
           <div
-            class="border-t border-gitify-notification-border pt-4 prc-Stack-Stack-UQ9k6"
+            class="pt-4 border-t border-gitify-notification-border prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-component="Stack"
             data-direction="horizontal"
@@ -2023,16 +2033,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="showOnlyParticipating-_r_1l_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Fetch only participating
-                    </span>
-                  </span>
+                    Fetch only participating
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -2164,16 +2173,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="detailedNotifications-_r_1p_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Fetch detailed notifications
-                    </span>
-                  </span>
+                    Fetch detailed notifications
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -2409,16 +2417,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                       <div
                         class="flex items-center gap-1"
                       >
-                        <span
-                          class="font-medium"
+                        <button
+                          aria-hidden="true"
+                          class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                           id="showPills-_r_1v_-label"
+                          tabindex="-1"
+                          type="button"
                         >
-                          <span
-                            class="cursor-pointer"
-                          >
-                            Show notification metrics
-                          </span>
-                        </span>
+                          Show notification metrics
+                        </button>
                         <button
                           aria-expanded="false"
                           aria-haspopup="true"
@@ -2553,16 +2560,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="markAsDoneOnOpen-_r_23_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Mark as done on open
-                    </span>
-                  </span>
+                    Mark as done on open
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -2694,16 +2700,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
-                  <span
-                    class="font-medium"
+                  <button
+                    aria-hidden="true"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                     id="markAsDoneOnUnsubscribe-_r_27_-label"
+                    tabindex="-1"
+                    type="button"
                   >
-                    <span
-                      class="cursor-pointer"
-                    >
-                      Mark as done on unsubscribe
-                    </span>
-                  </span>
+                    Mark as done on unsubscribe
+                  </button>
                   <button
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -2886,16 +2891,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="showNotifications-_r_2b_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Show desktop notifications
-                  </span>
-                </span>
+                  Show desktop notifications
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -3027,16 +3031,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="playSound-_r_2f_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Play notification sound
-                  </span>
-                </span>
+                  Play notification sound
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -3168,8 +3171,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             <div
               class="overflow-hidden"
             >
-              <div
-                class=""
+              <fieldset
+                aria-labelledby="notificationVolume-_r_2j_-label"
+                class="m-0 min-w-0 border-0 p-0"
               >
                 <div
                   class="flex items-center justify-between gap-3"
@@ -3177,12 +3181,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                   <div
                     class="flex min-w-0 items-center gap-1"
                   >
-                    <span
-                      class="font-medium"
+                    <button
+                      aria-hidden="true"
+                      class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                       id="notificationVolume-_r_2j_-label"
+                      tabindex="-1"
+                      type="button"
                     >
                       Notification volume
-                    </span>
+                    </button>
                     <button
                       aria-expanded="false"
                       aria-haspopup="true"
@@ -3212,9 +3219,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     </button>
                   </div>
                   <div
-                    aria-labelledby="notificationVolume-_r_2j_-label"
                     class="shrink-0"
-                    role="group"
                   >
                     <div
                       class="prc-ButtonGroup-ButtonGroup-vFUrY"
@@ -3356,7 +3361,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     </div>
                   </div>
                 </div>
-              </div>
+              </fieldset>
             </div>
           </div>
           <div
@@ -3368,16 +3373,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="showUpdateNotifications-_r_2q_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Show app update notifications
-                  </span>
-                </span>
+                  Show app update notifications
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -3562,16 +3566,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="showNotificationsCountInTray-_r_2u_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Show notification count
-                  </span>
-                </span>
+                  Show notification count
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -3703,16 +3706,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="useUnreadActiveIcon-_r_32_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Highlight unread notifications
-                  </span>
-                </span>
+                  Highlight unread notifications
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -3842,12 +3844,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-medium text-gitify-font"
                   id="trayIconAppearance-_r_36_-label"
+                  tabindex="-1"
+                  type="button"
                 >
                   Idle icon
-                </span>
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -3879,83 +3884,85 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="shrink-0"
               >
-                <ul
-                  aria-labelledby="trayIconAppearance-_r_36_-label"
-                  class="prc-SegmentedControl-SegmentedControl-lqIXp"
-                  data-component="SegmentedControl"
-                  data-variant="default"
-                >
-                  <li
-                    class="prc-SegmentedControl-Item-tSCQh"
-                    data-component="SegmentedControl.Button"
-                    data-selected=""
+                <div>
+                  <ul
+                    aria-labelledby="trayIconAppearance-_r_36_-label"
+                    class="prc-SegmentedControl-SegmentedControl-lqIXp"
+                    data-component="SegmentedControl"
+                    data-variant="default"
                   >
-                    <button
-                      aria-pressed="true"
-                      class="prc-SegmentedControl-Button-E48xz"
-                      data-testid="choice-trayIconAppearance-auto"
-                      style="--separator-color: transparent;"
-                      type="button"
+                    <li
+                      class="prc-SegmentedControl-Item-tSCQh"
+                      data-component="SegmentedControl.Button"
+                      data-selected=""
                     >
-                      <span
-                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      <button
+                        aria-pressed="true"
+                        class="prc-SegmentedControl-Button-E48xz"
+                        data-testid="choice-trayIconAppearance-auto"
+                        style="--separator-color: transparent;"
+                        type="button"
                       >
-                        <div
-                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                          data-text="Automatic"
+                        <span
+                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                         >
-                          Automatic
-                        </div>
-                      </span>
-                    </button>
-                  </li>
-                  <li
-                    class="prc-SegmentedControl-Item-tSCQh"
-                    data-component="SegmentedControl.Button"
-                  >
-                    <button
-                      aria-pressed="false"
-                      class="prc-SegmentedControl-Button-E48xz"
-                      data-testid="choice-trayIconAppearance-light"
-                      style="--separator-color: var(--borderColor-default);"
-                      type="button"
+                          <div
+                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                            data-text="Automatic"
+                          >
+                            Automatic
+                          </div>
+                        </span>
+                      </button>
+                    </li>
+                    <li
+                      class="prc-SegmentedControl-Item-tSCQh"
+                      data-component="SegmentedControl.Button"
                     >
-                      <span
-                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      <button
+                        aria-pressed="false"
+                        class="prc-SegmentedControl-Button-E48xz"
+                        data-testid="choice-trayIconAppearance-light"
+                        style="--separator-color: var(--borderColor-default);"
+                        type="button"
                       >
-                        <div
-                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                          data-text="Light"
+                        <span
+                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                         >
-                          Light
-                        </div>
-                      </span>
-                    </button>
-                  </li>
-                  <li
-                    class="prc-SegmentedControl-Item-tSCQh"
-                    data-component="SegmentedControl.Button"
-                  >
-                    <button
-                      aria-pressed="false"
-                      class="prc-SegmentedControl-Button-E48xz"
-                      data-testid="choice-trayIconAppearance-dark"
-                      style="--separator-color: var(--borderColor-default);"
-                      type="button"
+                          <div
+                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                            data-text="Light"
+                          >
+                            Light
+                          </div>
+                        </span>
+                      </button>
+                    </li>
+                    <li
+                      class="prc-SegmentedControl-Item-tSCQh"
+                      data-component="SegmentedControl.Button"
                     >
-                      <span
-                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      <button
+                        aria-pressed="false"
+                        class="prc-SegmentedControl-Button-E48xz"
+                        data-testid="choice-trayIconAppearance-dark"
+                        style="--separator-color: var(--borderColor-default);"
+                        type="button"
                       >
-                        <div
-                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                          data-text="Dark"
+                        <span
+                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                         >
-                          Dark
-                        </div>
-                      </span>
-                    </button>
-                  </li>
-                </ul>
+                          <div
+                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                            data-text="Dark"
+                          >
+                            Dark
+                          </div>
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -4016,12 +4023,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-medium text-gitify-font"
                   id="openLinks-_r_39_-label"
+                  tabindex="-1"
+                  type="button"
                 >
                   Link focus
-                </span>
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -4053,60 +4063,62 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="shrink-0"
               >
-                <ul
-                  aria-labelledby="openLinks-_r_39_-label"
-                  class="prc-SegmentedControl-SegmentedControl-lqIXp"
-                  data-component="SegmentedControl"
-                  data-variant="default"
-                >
-                  <li
-                    class="prc-SegmentedControl-Item-tSCQh"
-                    data-component="SegmentedControl.Button"
-                    data-selected=""
+                <div>
+                  <ul
+                    aria-labelledby="openLinks-_r_39_-label"
+                    class="prc-SegmentedControl-SegmentedControl-lqIXp"
+                    data-component="SegmentedControl"
+                    data-variant="default"
                   >
-                    <button
-                      aria-pressed="true"
-                      class="prc-SegmentedControl-Button-E48xz"
-                      data-testid="choice-openLinks-foreground"
-                      style="--separator-color: transparent;"
-                      type="button"
+                    <li
+                      class="prc-SegmentedControl-Item-tSCQh"
+                      data-component="SegmentedControl.Button"
+                      data-selected=""
                     >
-                      <span
-                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      <button
+                        aria-pressed="true"
+                        class="prc-SegmentedControl-Button-E48xz"
+                        data-testid="choice-openLinks-foreground"
+                        style="--separator-color: transparent;"
+                        type="button"
                       >
-                        <div
-                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                          data-text="Foreground"
+                        <span
+                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                         >
-                          Foreground
-                        </div>
-                      </span>
-                    </button>
-                  </li>
-                  <li
-                    class="prc-SegmentedControl-Item-tSCQh"
-                    data-component="SegmentedControl.Button"
-                  >
-                    <button
-                      aria-pressed="false"
-                      class="prc-SegmentedControl-Button-E48xz"
-                      data-testid="choice-openLinks-background"
-                      style="--separator-color: var(--borderColor-default);"
-                      type="button"
+                          <div
+                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                            data-text="Foreground"
+                          >
+                            Foreground
+                          </div>
+                        </span>
+                      </button>
+                    </li>
+                    <li
+                      class="prc-SegmentedControl-Item-tSCQh"
+                      data-component="SegmentedControl.Button"
                     >
-                      <span
-                        class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
+                      <button
+                        aria-pressed="false"
+                        class="prc-SegmentedControl-Button-E48xz"
+                        data-testid="choice-openLinks-background"
+                        style="--separator-color: var(--borderColor-default);"
+                        type="button"
                       >
-                        <div
-                          class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
-                          data-text="Background"
+                        <span
+                          class="prc-SegmentedControl-Content-1COlk segmentedControl-content"
                         >
-                          Background
-                        </div>
-                      </span>
-                    </button>
-                  </li>
-                </ul>
+                          <div
+                            class="prc-SegmentedControl-Text-7S2y2 segmentedControl-text"
+                            data-text="Background"
+                          >
+                            Background
+                          </div>
+                        </span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -4119,16 +4131,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="keyboardShortcut-_r_3c_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Enable global shortcut
-                  </span>
-                </span>
+                  Enable global shortcut
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -4261,8 +4272,9 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               class="overflow-hidden"
             >
               <div>
-                <div
-                  class=""
+                <fieldset
+                  aria-labelledby="shortcut-_r_3g_-label"
+                  class="m-0 min-w-0 border-0 p-0"
                 >
                   <div
                     class="flex items-center justify-between gap-3"
@@ -4270,12 +4282,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                     <div
                       class="flex min-w-0 items-center gap-1"
                     >
-                      <span
-                        class="font-medium"
+                      <button
+                        aria-hidden="true"
+                        class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                         id="shortcut-_r_3g_-label"
+                        tabindex="-1"
+                        type="button"
                       >
                         Global shortcut
-                      </span>
+                      </button>
                       <button
                         aria-expanded="false"
                         aria-haspopup="true"
@@ -4305,9 +4320,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                       </button>
                     </div>
                     <div
-                      aria-labelledby="shortcut-_r_3g_-label"
                       class="shrink-0"
-                      role="group"
                     >
                       <div
                         class="prc-ButtonGroup-ButtonGroup-vFUrY"
@@ -4417,7 +4430,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                       </div>
                     </div>
                   </div>
-                </div>
+                </fieldset>
               </div>
             </div>
           </div>
@@ -4430,16 +4443,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="keepWindowOnBlur-_r_3m_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Keep window open when unfocused
-                  </span>
-                </span>
+                  Keep window open when unfocused
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -4571,16 +4583,15 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
-                <span
-                  class="font-medium"
+                <button
+                  aria-hidden="true"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
                   id="openAtStartup-_r_3q_-label"
+                  tabindex="-1"
+                  type="button"
                 >
-                  <span
-                    class="cursor-pointer"
-                  >
-                    Launch at startup
-                  </span>
-                </span>
+                  Launch at startup
+                </button>
                 <button
                   aria-expanded="false"
                   aria-haspopup="true"

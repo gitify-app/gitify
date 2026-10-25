@@ -39,18 +39,17 @@ export function SettingsToggle({
     <div className={cn('flex items-start justify-between gap-3', disabled && 'opacity-60')}>
       <div className="min-w-0">
         <div className="flex items-center gap-1">
-          <span className="font-medium" id={labelId}>
-            <span
-              className="cursor-pointer"
-              onClick={() => {
-                if (!disabled) {
-                  onChange(!checked);
-                }
-              }}
-            >
-              {label}
-            </span>
-          </span>
+          <button
+            aria-hidden="true"
+            className="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
+            disabled={disabled}
+            id={labelId}
+            onClick={() => onChange(!checked)}
+            tabIndex={-1}
+            type="button"
+          >
+            {label}
+          </button>
           {tooltip && <Tooltip name={`tooltip-${name}`} tooltip={tooltip} />}
         </div>
 
