@@ -15,16 +15,21 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
 
   const MODERN_TOKEN = 'glpat-cEj977iancWuTGoHQbbpGWM6MQpvOjEKdToxcDBrNw8.01.1711l2dhw' as Token;
 
-  it('renders correctly', () => {
-    const tree = renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />);
+  it('renders the personal access token form', () => {
+    renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(
+      screen.getByRole('heading', { name: 'Login to GitLab with Personal Access Token' }),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Token/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Open token settings' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
   });
 
   it('prefills the hostname with gitlab.com', () => {
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />);
 
-    expect(screen.getByTestId('login-hostname')).toHaveValue('gitlab.com');
+    expect(screen.getByRole('textbox', { name: /^Hostname/ })).toHaveValue('gitlab.com');
   });
 
   it('opens the token settings for the configured hostname', async () => {
@@ -32,7 +37,7 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.click(screen.getByTestId('login-create-token'));
+    await userEvent.click(screen.getByRole('button', { name: 'Open token settings' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
@@ -47,9 +52,9 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.type(screen.getByTestId('login-token'), MODERN_TOKEN);
+    await userEvent.type(screen.getByLabelText(/^Token/), MODERN_TOKEN);
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
@@ -71,8 +76,8 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.type(screen.getByTestId('login-token'), MODERN_TOKEN);
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.type(screen.getByLabelText(/^Token/), MODERN_TOKEN);
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(screen.getByTestId('login-errors')).toHaveTextContent(
@@ -108,6 +113,6 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
       ],
     });
 
-    expect(screen.getByTestId('login-hostname')).toHaveValue('gitlab.example.com');
+    expect(screen.getByRole('textbox', { name: /^Hostname/ })).toHaveValue('gitlab.example.com');
   });
 });
