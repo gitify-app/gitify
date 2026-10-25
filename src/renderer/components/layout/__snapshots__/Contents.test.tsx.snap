@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/layout/Contents.tsx > should render itself & its children 1`] = `
+exports[`renderer/components/layout/Contents.tsx > renders itself & its children 1`] = `
 <div>
   <div
     class="grow min-h-0 overflow-x-hidden overflow-y-auto px-5"
@@ -10,7 +10,7 @@ exports[`renderer/components/layout/Contents.tsx > should render itself & its ch
 </div>
 `;
 
-exports[`renderer/components/layout/Contents.tsx > should render with scroll fade 1`] = `
+exports[`renderer/components/layout/Contents.tsx > renders with scroll fade 1`] = `
 <div>
   <div
     class="grow min-h-0 overflow-x-hidden overflow-y-auto px-5 gitify-scroll-fade"

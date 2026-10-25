@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/settings/SettingsGroupHeading.tsx > should render a group heading 1`] = `
+exports[`renderer/components/settings/SettingsGroupHeading.tsx > renders a group heading 1`] = `
 <div>
   <div
     class="pb-2 pt-[1rem]! prc-Stack-Stack-UQ9k6"

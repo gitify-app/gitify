@@ -17,7 +17,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     resetSpy.mockClear();
   });
 
-  it('should reset default settings when `OK`', async () => {
+  it('resets default settings when `OK`', async () => {
     const rendererLogInfoSpy = vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
 
     vi.stubGlobal(
@@ -36,7 +36,7 @@ describe('renderer/components/settings/SettingsReset.tsx', () => {
     expect(rendererLogInfoSpy).toHaveBeenCalled();
   });
 
-  it('should skip reset default settings when `cancelled`', async () => {
+  it('skips reset default settings when `cancelled`', async () => {
     vi.stubGlobal(
       'confirm',
       vi.fn(() => false),

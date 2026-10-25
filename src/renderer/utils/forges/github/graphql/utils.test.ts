@@ -16,7 +16,7 @@ import {
 
 describe('renderer/utils/forges/github/graphql/utils.ts', () => {
   describe('getQueryFragmentBody', () => {
-    it('should extract query fragments from operation document', () => {
+    it('extracts query fragments from operation document', () => {
       const fragments = extractQueryFragments(FetchMergedDetailsTemplateDocument as any);
 
       expect(fragments).not.toBeNull();
@@ -27,7 +27,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       expect(fragments[0].inner).toContain('$nameINDEX');
     });
 
-    it('should extract query fragments from fragment document', () => {
+    it('extracts query fragments from fragment document', () => {
       const fragments = extractQueryFragments(MergedDetailsQueryTemplateFragmentDoc as any);
 
       expect(fragments).not.toBeNull();
@@ -38,7 +38,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
       expect(fragments[0].inner).toContain('$nameINDEX');
     });
 
-    it('should return null for non-query fragments', () => {
+    it('returns null for non-query fragments', () => {
       // IssueDetailsFragmentDoc is a graphql document that does not have a query fragment
       const fragments = extractQueryFragments(IssueDetailsFragmentDoc);
       expect(fragments).toEqual([]);
@@ -46,7 +46,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
   });
 
   describe('extractNonQueryFragments', () => {
-    it('should extract non-query fragments from FetchBatchMergedTemplateDocument', () => {
+    it('extracts non-query fragments from FetchBatchMergedTemplateDocument', () => {
       const fragments = extractNonQueryFragments(FetchMergedDetailsTemplateDocument as any);
 
       expect(fragments).not.toBeNull();
@@ -68,7 +68,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
   });
 
   describe('extractIndexedVariableDefinitions', () => {
-    it('should extract indexed variable definitions from BatchMergedDetailsQueryTemplateFragmentDoc', () => {
+    it('extracts indexed variable definitions from BatchMergedDetailsQueryTemplateFragmentDoc', () => {
       const varDefs = extractIndexedVariableDefinitions(FetchMergedDetailsTemplateDocument as any);
 
       expect(varDefs).not.toBeNull();
@@ -85,7 +85,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
   });
 
   describe('extractNonIndexedVariableDefinitions', () => {
-    it('should extract non-indexed variable definitions from extractNonIndexedVariableDefinitions', () => {
+    it('extracts non-indexed variable definitions from extractNonIndexedVariableDefinitions', () => {
       const varDefs = extractNonIndexedVariableDefinitions(
         FetchMergedDetailsTemplateDocument as any,
       );
@@ -106,7 +106,7 @@ describe('renderer/utils/forges/github/graphql/utils.ts', () => {
   });
 
   describe('aliasNodeAndRenameQueryVariables', () => {
-    it('should add alias, rename indexed vars and leave non-indexed vars unchanged', () => {
+    it('adds alias, rename indexed vars and leave non-indexed vars unchanged', () => {
       const input =
         'repository(owner: $ownerINDEX, name: $name) { issue(number: $number) @include(if: $isIssueNotificationINDEX) { title } }';
 

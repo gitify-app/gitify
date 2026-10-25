@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/primitives/HoverButton.tsx > should render - disabled 1`] = `<div />`;
+exports[`renderer/components/primitives/HoverButton.tsx > renders - disabled 1`] = `<div />`;
 
-exports[`renderer/components/primitives/HoverButton.tsx > should render 1`] = `
+exports[`renderer/components/primitives/HoverButton.tsx > renders 1`] = `
 <div>
   <button
     aria-label="Hover Button"

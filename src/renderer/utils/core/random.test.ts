@@ -5,21 +5,21 @@ import { randomElement } from './random';
 const FRUITS = ['apple', 'banana', 'cherry', 'date', 'elderberry'];
 
 describe('randomElement', () => {
-  it('should return an element from the array', () => {
+  it('returns an element from the array', () => {
     for (let i = 0; i < 100; i++) {
       const result = randomElement(FRUITS);
       expect(FRUITS).toContain(result);
     }
   });
 
-  it('should use crypto.getRandomValues', () => {
+  it('uses crypto.getRandomValues', () => {
     const spy = vi.spyOn(globalThis.crypto, 'getRandomValues');
     randomElement(FRUITS);
     expect(spy).toHaveBeenCalledOnce();
     spy.mockRestore();
   });
 
-  it('should return first element when crypto returns 0', () => {
+  it('returns first element when crypto returns 0', () => {
     vi.spyOn(globalThis.crypto, 'getRandomValues').mockImplementation(
       <T extends ArrayBufferView>(array: T): T => {
         if (array instanceof Uint32Array) {
@@ -33,7 +33,7 @@ describe('randomElement', () => {
     vi.restoreAllMocks();
   });
 
-  it('should wrap large values via modulo', () => {
+  it('wraps large values via modulo', () => {
     vi.spyOn(globalThis.crypto, 'getRandomValues').mockImplementation(
       <T extends ArrayBufferView>(array: T): T => {
         if (array instanceof Uint32Array) {

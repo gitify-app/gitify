@@ -78,7 +78,7 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     },
   );
 
-  it('should login using a token - failure', async () => {
+  it('logs in using a token - failure', async () => {
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(new Error('invalid token'));
 
     renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />, {
@@ -100,7 +100,7 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
@@ -111,7 +111,7 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
     );
   });
 
-  it('should prefill hostname from the re-auth account in location state', () => {
+  it('prefills hostname from the re-auth account in location state', () => {
     renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />, {
       initialEntries: [
         {

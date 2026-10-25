@@ -5,7 +5,7 @@ import { mockAuth } from '../../__mocks__/state-mocks';
 import { AccountFilter } from './AccountFilter';
 
 describe('renderer/components/filters/AccountFilter.tsx', () => {
-  it('should count notifications from the current filtered list per account', () => {
+  it('counts notifications from the current filtered list per account', () => {
     const tree = renderWithProviders(<AccountFilter />, {
       accounts: mockAuth.accounts,
       notifications: mockMultipleAccountNotifications,

@@ -7,7 +7,7 @@ import { IconColor, type Link } from '../../types';
 import { MetricGroup, type MetricGroupProps } from './MetricGroup';
 
 describe('renderer/components/metrics/MetricGroup.tsx', () => {
-  it('should not render any pills when showPills is disabled', async () => {
+  it('does not render any pills when showPills is disabled', async () => {
     const mockNotification = mockGitifyNotification;
     const props: MetricGroupProps = {
       notification: mockNotification,
@@ -20,7 +20,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render pills when showPills is enabled', async () => {
+  it('renders pills when showPills is enabled', async () => {
     const mockNotification = mockGitifyNotification;
     const props: MetricGroupProps = {
       notification: mockNotification,
@@ -33,7 +33,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render the issue type pill when the subject has a native issue type', async () => {
+  it('renders the issue type pill when the subject has a native issue type', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -51,7 +51,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('Bug')).toBeInTheDocument();
   });
 
-  it('should render the parent pill when the subject has a parent issue', async () => {
+  it('renders the parent pill when the subject has a parent issue', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -73,7 +73,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
   });
 
-  it('should render the sub-issue progress pill when the subject has sub-issue progress', async () => {
+  it('renders the sub-issue progress pill when the subject has sub-issue progress', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -127,7 +127,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.container).toBeEmptyDOMElement();
   });
 
-  it('should render issue field pills immediately before label pills', async () => {
+  it('renders issue field pills immediately before label pills', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -149,7 +149,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(textContent.indexOf('Priority: High')).toBeLessThan(textContent.indexOf('enhancement'));
   });
 
-  it('should not render field pills when showPills is disabled', async () => {
+  it('does not render field pills when showPills is disabled', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,

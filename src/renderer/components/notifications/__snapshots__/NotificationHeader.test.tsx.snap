@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > with notification number 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx > group by date > with notification number 1`] = `
 <div>
   <div
     class="py-0.5"
@@ -61,7 +61,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > with showNumber setting disabled 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx > group by date > with showNumber setting disabled 1`] = `
 <div>
   <div
     class="py-0.5"
@@ -122,7 +122,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by date > without notification number 1`] = `
+exports[`renderer/components/notifications/NotificationHeader.tsx > group by date > without notification number 1`] = `
 <div>
   <div
     class="py-0.5"
@@ -183,4 +183,4 @@ exports[`renderer/components/notifications/NotificationHeader.tsx > should rende
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationHeader.tsx > should render itself & its children - group by repositories 1`] = `<div />`;
+exports[`renderer/components/notifications/NotificationHeader.tsx > renders itself & its children - group by repositories 1`] = `<div />`;

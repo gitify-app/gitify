@@ -35,7 +35,7 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     expect(screen.getByAltText('octocat_gitify')).toBeInTheDocument();
   });
 
-  it('should open profile when clicked', async () => {
+  it('opens profile when clicked', async () => {
     const openAccountProfileSpy = vi.spyOn(links, 'openAccountProfile').mockImplementation(vi.fn());
     const onToggle = vi.fn();
 
@@ -48,7 +48,7 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     expect(onToggle).not.toHaveBeenCalled();
   });
 
-  it('should open my issues when clicked', async () => {
+  it('opens my issues when clicked', async () => {
     const openHostIssuesSpy = vi.spyOn(links, 'openHostIssues').mockImplementation(vi.fn());
 
     renderWithProviders(<AccountHeader {...props} />);
@@ -58,7 +58,7 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     expect(openHostIssuesSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
-  it('should open my pull requests when clicked', async () => {
+  it('opens my pull requests when clicked', async () => {
     const openHostPullsSpy = vi.spyOn(links, 'openHostPulls').mockImplementation(vi.fn());
 
     renderWithProviders(<AccountHeader {...props} />);
@@ -68,7 +68,7 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     expect(openHostPullsSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
-  it('should request a collapse toggle when toggled', async () => {
+  it('requests a collapse toggle when toggled', async () => {
     const onToggle = vi.fn();
 
     renderWithProviders(<AccountHeader {...props} onToggle={onToggle} />);
@@ -96,7 +96,7 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     );
   });
 
-  it('should render an error background when the account errored', () => {
+  it('renders an error background when the account errored', () => {
     const tree = renderWithProviders(
       <AccountHeader
         {...props}

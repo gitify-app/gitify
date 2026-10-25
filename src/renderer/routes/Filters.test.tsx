@@ -104,7 +104,7 @@ describe('renderer/routes/Filters.tsx', () => {
       expect(screen.getByRole('button', { name: 'Clear filters' })).toBeInTheDocument();
     });
 
-    it('should go back by pressing the icon', async () => {
+    it('goes back by pressing the icon', async () => {
       await act(async () => {
         renderWithProviders(<FiltersRoute />, {
           fetchNotifications: fetchNotificationsMock,
@@ -120,7 +120,7 @@ describe('renderer/routes/Filters.tsx', () => {
   });
 
   describe('Footer section', () => {
-    it('should clear filters', async () => {
+    it('clears filters', async () => {
       await act(async () => {
         renderWithProviders(<FiltersRoute />);
       });

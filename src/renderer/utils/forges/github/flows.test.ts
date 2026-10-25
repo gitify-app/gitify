@@ -48,7 +48,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
 
   describe('Gitify GitHub OAuth - Device Code Flow', () => {
     describe('startGitHubDeviceFlow', () => {
-      it('should request a device code and return a session', async () => {
+      it('requests a device code and return a session', async () => {
         createDeviceCodeMock.mockResolvedValueOnce({
           data: {
             device_code: 'device-code-xyz',
@@ -150,7 +150,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
       clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
     };
 
-    it('should call performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
+    it('calls performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
       let deliverCallback: (callbackUrl: string) => void = () => {};
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
         deliverCallback = callback;
@@ -253,7 +253,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
       await expect(resultPromise).resolves.toMatchObject({ authCode: 'real-code' });
     });
 
-    it('should call performGitHubWebOAuth - failure', async () => {
+    it('calls performGitHubWebOAuth - failure', async () => {
       let deliverCallback: (callbackUrl: string) => void = () => {};
       window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
         deliverCallback = callback;
@@ -322,7 +322,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
     describe('exchangeAuthCodeForAccessToken', () => {
       const authCode = '123-456' as AuthCode;
 
-      it('should exchange auth code for access token', async () => {
+      it('exchanges auth code for access token', async () => {
         exchangeWebFlowCodeMock.mockResolvedValueOnce({
           authentication: {
             token: 'this-is-a-token',
@@ -343,7 +343,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
         expect(res).toBe('this-is-a-token');
       });
 
-      it('should throw when client secret is missing', async () => {
+      it('throws when client secret is missing', async () => {
         await expect(
           async () =>
             await flows.exchangeAuthCodeForAccessToken(authCode, {

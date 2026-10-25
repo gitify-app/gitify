@@ -8,14 +8,14 @@ import { DEFAULT_SETTINGS_STATE } from './defaults';
 import useSettingsStore from './useSettingsStore';
 
 describe('renderer/stores/useSettingsStore.ts', () => {
-  test('should start with default settings', () => {
+  test('starts with default settings', () => {
     const { result } = renderHook(() => useSettingsStore());
 
     expect(result.current).toMatchObject(DEFAULT_SETTINGS_STATE);
   });
 
   describe('Toggle Setting', () => {
-    test('should toggle a representative setting', () => {
+    test('toggles a representative setting', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       expect(result.current.openAtStartup).toBe(false);
@@ -27,7 +27,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(result.current.openAtStartup).toBe(true);
     });
 
-    test('should throw error toggling non-boolean settings', () => {
+    test('throws error toggling non-boolean settings', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       expect(() => {
@@ -39,7 +39,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
   });
 
   describe('Update Setting', () => {
-    test('should update a representative appearance setting', () => {
+    test('updates a representative appearance setting', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       act(() => {
@@ -49,7 +49,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(result.current.theme).toBe(Theme.DARK);
     });
 
-    test('should update a representative notification setting', () => {
+    test('updates a representative notification setting', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       act(() => {
@@ -59,7 +59,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(result.current.markAsDoneOnOpen).toBe(false);
     });
 
-    test('should update a representative tray setting', () => {
+    test('updates a representative tray setting', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       act(() => {
@@ -69,7 +69,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(result.current.showNotificationsCountInTray).toBe(false);
     });
 
-    test('should update a representative system setting', () => {
+    test('updates a representative system setting', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       act(() => {
@@ -79,7 +79,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(result.current.openLinks).toBe(OpenPreference.BACKGROUND);
     });
 
-    test('should update arbitrary setting key', () => {
+    test('updates arbitrary setting key', () => {
       const { result } = renderHook(() => useSettingsStore());
       act(() => {
         result.current.updateSetting('zoomPercentage', 150 as Percentage);
@@ -87,7 +87,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(result.current.zoomPercentage).toBe(150);
     });
 
-    test('should update multiple settings independently', () => {
+    test('updates multiple settings independently', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       act(() => {
@@ -103,7 +103,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
   });
 
   describe('Reset', () => {
-    test('should reset all settings to default', () => {
+    test('resets all settings to default', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       act(() => {
@@ -123,13 +123,13 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       localStorage.removeItem(Constants.STORAGE.SETTINGS);
     });
 
-    test('should default the design language to Classic', () => {
+    test('defaults the design language to Classic', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       expect(result.current.designLanguage).toBe(DesignLanguage.CLASSIC);
     });
 
-    test('should give an existing persisted blob the Classic default while preserving its theme', async () => {
+    test('gives an existing persisted blob the Classic default while preserving its theme', async () => {
       // A blob persisted before designLanguage existed (zustand writes version 0).
       localStorage.setItem(
         Constants.STORAGE.SETTINGS,
@@ -145,7 +145,7 @@ describe('renderer/stores/useSettingsStore.ts', () => {
       expect(useSettingsStore.getState().increaseContrast).toBe(true);
     });
 
-    test('should update the design language', () => {
+    test('updates the design language', () => {
       const { result } = renderHook(() => useSettingsStore());
 
       act(() => {

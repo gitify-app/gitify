@@ -19,7 +19,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
-  it('should change the link focus choice', async () => {
+  it('changes the link focus choice', async () => {
     await act(async () => {
       renderWithProviders(<SystemSettings />);
     });
@@ -34,7 +34,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     ['Enable global shortcut', 'keyboardShortcut'],
     ['Launch at startup', 'openAtStartup'],
     ['Keep window open when unfocused', 'keepWindowOnBlur'],
-  ] as const)('should toggle %s switch', async (label, setting) => {
+  ] as const)('toggles %s switch', async (label, setting) => {
     await act(async () => {
       renderWithProviders(<SystemSettings />);
     });
@@ -100,7 +100,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     });
   });
 
-  it('should reset global shortcut to default when customized', async () => {
+  it('resets global shortcut to default when customized', async () => {
     renderWithProviders(<SystemSettings />, {
       settings: {
         ...mockSettings,
@@ -116,7 +116,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     );
   });
 
-  it('should not render the shortcut group when the shortcut is disabled', () => {
+  it('does not render the shortcut group when the shortcut is disabled', () => {
     renderWithProviders(<SystemSettings />, {
       settings: { ...mockSettings, keyboardShortcut: false },
     });
@@ -137,7 +137,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   });
 
   describe('recording global shortcut', () => {
-    it('should enter recording mode and show "Press keys…" prompt', async () => {
+    it('enters recording mode and shows "Press keys…" prompt', async () => {
       renderWithProviders(<SystemSettings />, {
         settings: { ...mockSettings, keyboardShortcut: true },
       });
@@ -147,7 +147,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(screen.getByText('Press keys…')).toBeInTheDocument();
     });
 
-    it('should show live modifier keys as they are pressed', async () => {
+    it('shows live modifier keys as they are pressed', async () => {
       renderWithProviders(<SystemSettings />, {
         settings: { ...mockSettings, keyboardShortcut: true },
       });
@@ -198,7 +198,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(screen.getByText('⌘…')).toBeInTheDocument();
     });
 
-    it('should finalize shortcut when a non-modifier key is pressed', async () => {
+    it('finalizes shortcut when a non-modifier key is pressed', async () => {
       renderWithProviders(<SystemSettings />, {
         settings: { ...mockSettings, keyboardShortcut: true },
       });
@@ -226,7 +226,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       expect(screen.queryByText('Click outside this area to cancel.')).not.toBeInTheDocument();
     });
 
-    it('should cancel recording when clicking outside the shortcut area', async () => {
+    it('cancels recording when clicking outside the shortcut area', async () => {
       renderWithProviders(<SystemSettings />, {
         settings: { ...mockSettings, keyboardShortcut: true },
       });

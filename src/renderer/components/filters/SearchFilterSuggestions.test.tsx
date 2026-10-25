@@ -11,13 +11,13 @@ import {
 import { SearchFilterSuggestions } from './SearchFilterSuggestions';
 
 describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
-  it('should render itself & its children - closed', () => {
+  it('renders nothing when closed', () => {
     const tree = renderWithProviders(<SearchFilterSuggestions inputValue={''} open={false} />);
 
     expect(tree.container).toBeEmptyDOMElement();
   });
 
-  it('should render itself & its children - open without detailed notifications enabled', () => {
+  it('renders base qualifiers without detailed notifications', () => {
     renderWithProviders(<SearchFilterSuggestions inputValue={''} open={true} />, {
       settings: {
         ...mockSettings,
@@ -34,7 +34,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     }
   });
 
-  it('should render itself & its children - open with detailed notifications enabled', () => {
+  it('renders all qualifiers with detailed notifications', () => {
     renderWithProviders(<SearchFilterSuggestions inputValue={''} open={true} />, {
       settings: {
         ...mockSettings,
@@ -47,7 +47,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     }
   });
 
-  it('should render itself & its children - input token invalid', () => {
+  it('lists supported qualifiers for invalid input', () => {
     renderWithProviders(<SearchFilterSuggestions inputValue={'invalid'} open={true} />, {
       settings: {
         ...mockSettings,
@@ -58,7 +58,7 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
     expect(screen.getByText(/Please use one of the supported filters/)).toBeInTheDocument();
   });
 
-  it('should render itself & its children - input token valid', () => {
+  it('filters suggestions by token', () => {
     renderWithProviders(<SearchFilterSuggestions inputValue={'repo:'} open={true} />, {
       settings: {
         ...mockSettings,

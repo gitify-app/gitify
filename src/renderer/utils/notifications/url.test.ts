@@ -8,7 +8,7 @@ import { generateNotificationReferrerId, generateNotificationWebUrl } from './ur
 
 describe('renderer/utils/notifications/url.ts', () => {
   describe('generateNotificationReferrerId', () => {
-    it('should generate the notification_referrer_id', () => {
+    it('generates the notification_referrer_id', () => {
       const referrerId = generateNotificationReferrerId(mockGitifyNotification);
       expect(referrerId).toBe('MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=');
     });

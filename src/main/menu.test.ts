@@ -119,14 +119,14 @@ describe('main/menu.ts', () => {
       expect(config?.click).toEqual(expect.any(Function));
     });
 
-    it('should enable menu item', () => {
+    it('enables menu item', () => {
       menuBuilder.setCheckForUpdatesMenuEnabled(true);
 
       // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['checkForUpdatesMenuItem'].enabled).toBe(true);
     });
 
-    it('should disable menu item', () => {
+    it('disables menu item', () => {
       menuBuilder.setCheckForUpdatesMenuEnabled(false);
 
       // oxlint-disable-next-line dot-notation -- This is a test
@@ -144,14 +144,14 @@ describe('main/menu.ts', () => {
       expect(config?.visible).toBe(false);
     });
 
-    it('should show menu item', () => {
+    it('shows menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(true);
 
       // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['noUpdateAvailableMenuItem'].visible).toBe(true);
     });
 
-    it('should hide menu item', () => {
+    it('hides menu item', () => {
       menuBuilder.setNoUpdateAvailableMenuVisibility(false);
 
       // oxlint-disable-next-line dot-notation -- This is a test
@@ -169,14 +169,14 @@ describe('main/menu.ts', () => {
       expect(config?.visible).toBe(false);
     });
 
-    it('should show menu item', () => {
+    it('shows menu item', () => {
       menuBuilder.setUpdateAvailableMenuVisibility(true);
 
       // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(true);
     });
 
-    it('should hide menu item', () => {
+    it('hides menu item', () => {
       menuBuilder.setUpdateAvailableMenuVisibility(false);
 
       // oxlint-disable-next-line dot-notation -- This is a test
@@ -195,14 +195,14 @@ describe('main/menu.ts', () => {
       expect(config?.click).toEqual(expect.any(Function));
     });
 
-    it('should show menu item', () => {
+    it('shows menu item', () => {
       menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
 
       // oxlint-disable-next-line dot-notation -- This is a test
       expect(menuBuilder['updateReadyForInstallMenuItem'].visible).toBe(true);
     });
 
-    it('should hide menu item', () => {
+    it('hides menu item', () => {
       menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
 
       // oxlint-disable-next-line dot-notation -- This is a test

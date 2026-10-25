@@ -28,7 +28,7 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
   });
 
   describe("'Create new OAuth App' button", () => {
-    it('should be disabled if no hostname configured', async () => {
+    it('is disabled if no hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
       await userEvent.clear(screen.getByTestId('login-hostname'));
@@ -38,7 +38,7 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
-    it('should open in browser if hostname configured', async () => {
+    it('opens in browser if hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
       const hostname = screen.getByTestId('login-hostname');
@@ -51,7 +51,7 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
     });
   });
 
-  it('should login using a token - success', async () => {
+  it('logs in using a token - success', async () => {
     loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />, {
@@ -76,7 +76,7 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith('/');
   });
 
-  it('should login using a token - failure', async () => {
+  it('logs in using a token - failure', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
@@ -104,7 +104,7 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
     });
   });
 
-  it('should render the form with errors', async () => {
+  it('renders the form with errors', async () => {
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
@@ -122,7 +122,7 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
     expect(screen.getByText('Client Secret format is invalid')).toBeInTheDocument();
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
@@ -130,7 +130,7 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle client secret visibility', async () => {
+  it('toggles client secret visibility', async () => {
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     const secretInput = screen.getByTestId('login-clientSecret');

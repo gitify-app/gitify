@@ -3,7 +3,7 @@ import type { Reason } from '../../types';
 import { getReasonDetails } from './reason';
 
 describe('renderer/utils/notifications/reason.ts', () => {
-  it('getReasonDetails - should get details for notification reason', () => {
+  it('getReasonDetails - gets details for notification reason', () => {
     expect(getReasonDetails('approval_requested')).toMatchSnapshot();
     expect(getReasonDetails('assign')).toMatchSnapshot();
     expect(getReasonDetails('author')).toMatchSnapshot();

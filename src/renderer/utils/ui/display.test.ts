@@ -4,7 +4,7 @@ import { getChevronDetails, parseInlineCode } from './display';
 
 describe('renderer/utils/ui/display.ts', () => {
   describe('getChevronDetails', () => {
-    it('should return correct chevron details', () => {
+    it('returns correct chevron details', () => {
       expect(getChevronDetails(true, true, 'account')).toEqual({
         icon: ChevronDownIcon,
         label: 'Hide account notifications',
@@ -23,7 +23,7 @@ describe('renderer/utils/ui/display.ts', () => {
   });
 
   describe('parseInlineCode', () => {
-    it('should return plain text when no code blocks present', () => {
+    it('returns plain text when no code blocks present', () => {
       expect(parseInlineCode('Simple notification title')).toEqual([
         {
           id: '0',
@@ -33,7 +33,7 @@ describe('renderer/utils/ui/display.ts', () => {
       ]);
     });
 
-    it('should parse single inline code block', () => {
+    it('parses single inline code block', () => {
       expect(parseInlineCode('refactor: migrate deprecated atlaskit `xcss`')).toEqual([
         {
           id: '0',
@@ -48,7 +48,7 @@ describe('renderer/utils/ui/display.ts', () => {
       ]);
     });
 
-    it('should parse multiple inline code blocks', () => {
+    it('parses multiple inline code blocks', () => {
       expect(parseInlineCode('Replace `foo` with `bar` in config')).toEqual([
         {
           id: '0',
@@ -78,7 +78,7 @@ describe('renderer/utils/ui/display.ts', () => {
       ]);
     });
 
-    it('should parse code block at the start', () => {
+    it('parses code block at the start', () => {
       expect(parseInlineCode('`useState` hook implementation')).toEqual([
         {
           id: '0',
@@ -93,7 +93,7 @@ describe('renderer/utils/ui/display.ts', () => {
       ]);
     });
 
-    it('should parse code block at the end', () => {
+    it('parses code block at the end', () => {
       expect(parseInlineCode('Fix issue with `render`')).toEqual([
         {
           id: '0',
@@ -108,7 +108,7 @@ describe('renderer/utils/ui/display.ts', () => {
       ]);
     });
 
-    it('should handle empty string', () => {
+    it('handles empty string', () => {
       expect(parseInlineCode('')).toEqual([
         {
           id: '0',
@@ -118,7 +118,7 @@ describe('renderer/utils/ui/display.ts', () => {
       ]);
     });
 
-    it('should handle adjacent code blocks', () => {
+    it('handles adjacent code blocks', () => {
       expect(parseInlineCode('Compare `foo``bar`')).toEqual([
         {
           id: '0',

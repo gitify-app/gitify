@@ -5,7 +5,7 @@ import { renderWithProviders } from '../__helpers__/test-utils';
 import { Loading } from './Loading';
 
 describe('renderer/components/Loading.tsx', () => {
-  it('should render itself & its children', async () => {
+  it('renders itself & its children', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
@@ -17,7 +17,7 @@ describe('renderer/components/Loading.tsx', () => {
     expect(tree!.container).toMatchSnapshot();
   });
 
-  it('should keep the same emoji when re-rendering', async () => {
+  it('keeps the same emoji when re-rendering', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/primitives/EmojiText.tsx > should render 1`] = `
+exports[`renderer/components/primitives/EmojiText.tsx > renders 1`] = `
 <div>
   <div
     class="text-7xl"
