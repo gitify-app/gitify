@@ -9,7 +9,7 @@ import {
 } from './volume';
 
 describe('renderer/utils/ui/volume.ts', () => {
-  it('should convert percentage to sound level', () => {
+  it('converts percentage to sound level', () => {
     expect(volumePercentageToLevel(100 as Percentage)).toBe(1);
     expect(volumePercentageToLevel(50 as Percentage)).toBe(0.5);
     expect(volumePercentageToLevel(0 as Percentage)).toBe(0);
@@ -22,7 +22,7 @@ describe('renderer/utils/ui/volume.ts', () => {
     expect(canDecreaseVolume(100 as Percentage)).toBe(true);
   });
 
-  it('should decrease volume by step amount', () => {
+  it('decreases volume by step amount', () => {
     expect(decreaseVolume(100 as Percentage)).toBe(90);
     expect(decreaseVolume(50 as Percentage)).toBe(40);
     expect(decreaseVolume(0 as Percentage)).toBe(0);
@@ -36,7 +36,7 @@ describe('renderer/utils/ui/volume.ts', () => {
     expect(canIncreaseVolume(110 as Percentage)).toBe(false);
   });
 
-  it('should increase volume by step amount', () => {
+  it('increases volume by step amount', () => {
     expect(increaseVolume(0 as Percentage)).toBe(10);
     expect(increaseVolume(50 as Percentage)).toBe(60);
     expect(increaseVolume(100 as Percentage)).toBe(100);

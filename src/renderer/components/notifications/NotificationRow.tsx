@@ -102,6 +102,7 @@ export function NotificationRow({
         isNotificationRead && Opacity.READ,
       )}
       data-focused={isFocused ? 'true' : undefined}
+      data-animating-exit={isAnimatingExit || undefined}
       id={notification.id}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
@@ -142,6 +143,8 @@ export function NotificationRow({
                 Opacity.READ,
                 (isGroupByDate() || !showNumber) && 'hidden',
               )}
+              data-hidden={isGroupByDate() || !showNumber || undefined}
+              data-testid="notification-reference"
             >
               {notification.display.identifier}
             </Text>

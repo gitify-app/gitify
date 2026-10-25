@@ -29,7 +29,7 @@ vi.mock('../client', async () => {
 
 describe('renderer/utils/notifications/handlers/discussion.ts', () => {
   describe('supportsMergedQueryEnrichment', () => {
-    it('should support merge query', () => {
+    it('supports merge query', () => {
       expect(discussionHandler.supportsMergedQueryEnrichment).toBeTruthy();
     });
   });

@@ -1,4 +1,4 @@
-import { act, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
@@ -19,10 +19,8 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
-  it('should describe the style options as individual or summary', async () => {
-    await act(async () => {
-      renderWithProviders(<AlertSettings />);
-    });
+  it('should describe the style options as individual or summary', () => {
+    renderWithProviders(<AlertSettings />);
 
     expect(screen.getByText('Individual')).toBeInTheDocument();
     expect(screen.getByText('Summary')).toBeInTheDocument();
@@ -30,9 +28,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   });
 
   it('should change the native notification style', async () => {
-    await act(async () => {
-      renderWithProviders(<AlertSettings />);
-    });
+    renderWithProviders(<AlertSettings />);
 
     await userEvent.click(screen.getByTestId('choice-nativeNotificationStyle-summary'));
 
@@ -40,9 +36,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   });
 
   it('should change the native notification click behavior', async () => {
-    await act(async () => {
-      renderWithProviders(<AlertSettings />);
-    });
+    renderWithProviders(<AlertSettings />);
 
     await userEvent.click(screen.getByTestId('choice-nativeNotificationClickAction-app'));
 
@@ -52,9 +46,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   it('should explain when native notifications are unsupported', async () => {
     vi.mocked(window.gitify.nativeNotifications.isSupported).mockResolvedValueOnce(false);
 
-    await act(async () => {
-      renderWithProviders(<AlertSettings />);
-    });
+    renderWithProviders(<AlertSettings />);
 
     await waitFor(() =>
       expect(screen.getByTestId('native-notifications-unsupported')).toBeInTheDocument(),
@@ -67,10 +59,8 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
     ['Keep notifications on screen', 'nativeNotificationKeepVisible'],
     ['Play notification sound', 'playSound'],
     ['Show app update notifications', 'showUpdateNotifications'],
-  ] as const)('should toggle %s switch', async (label, setting) => {
-    await act(async () => {
-      renderWithProviders(<AlertSettings />);
-    });
+  ] as const)('toggles %s switch', async (label, setting) => {
+    renderWithProviders(<AlertSettings />);
 
     await userEvent.click(screen.getByRole('button', { name: label }));
 
@@ -78,72 +68,63 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
-  describe('playSound', () => {
-    it('shows the sound details in a tooltip', async () => {
-      renderWithProviders(<AlertSettings />);
+  it('shows detailed help in tooltips', async () => {
+    renderWithProviders(<AlertSettings />);
 
-      await userEvent.click(screen.getByRole('button', { name: 'tooltip-playSound' }));
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-playSound'));
 
-      expect(
-        screen.getByText(
-          'Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level.',
-        ),
-      ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level.',
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it('shows notification volume and its tooltip when sound is enabled', async () => {
+    renderWithProviders(<AlertSettings />);
+
+    expect(screen.getByText('Notification volume')).toBeInTheDocument();
+    expect(screen.getByTestId('reveal-volume')).toHaveAttribute('data-state', 'open');
+
+    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-notificationVolume'));
+
+    expect(screen.getByText('Adjust the volume of the notification sound.')).toBeInTheDocument();
+  });
+
+  it('hides volume controls when playSound is false', () => {
+    renderWithProviders(<AlertSettings />, {
+      settings: { ...mockSettings, playSound: false },
     });
 
-    it('shows the notification volume label and tooltip', async () => {
-      renderWithProviders(<AlertSettings />);
+    expect(screen.getByTestId('reveal-volume')).toHaveAttribute('data-state', 'closed');
+  });
 
-      expect(screen.getByText('Notification volume')).toBeInTheDocument();
+  it('increases notification volume', async () => {
+    renderWithProviders(<AlertSettings />);
 
-      await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-notificationVolume'));
+    await userEvent.click(screen.getByRole('button', { name: 'Volume up' }));
 
-      expect(screen.getByText('Adjust the volume of the notification sound.')).toBeInTheDocument();
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 30);
+  });
+
+  it('decreases notification volume', async () => {
+    renderWithProviders(<AlertSettings />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Volume down' }));
+
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 10);
+  });
+
+  it('resets notification volume', async () => {
+    renderWithProviders(<AlertSettings />, {
+      settings: { ...mockSettings, notificationVolume: 30 as Percentage },
     });
 
-    it('volume controls should not be shown if playSound checkbox is false', async () => {
-      renderWithProviders(<AlertSettings />, {
-        settings: { ...mockSettings, playSound: false },
-      });
+    await userEvent.click(screen.getByRole('button', { name: 'Reset volume' }));
 
-      expect(screen.getByTestId('reveal-volume')).toHaveAttribute('data-state', 'closed');
-    });
-
-    it('volume controls should be shown if playSound checkbox is true', async () => {
-      renderWithProviders(<AlertSettings />, {
-        settings: { ...mockSettings, playSound: true },
-      });
-
-      expect(screen.getByTestId('reveal-volume')).toHaveAttribute('data-state', 'open');
-    });
-
-    it('should increase notification volume', async () => {
-      renderWithProviders(<AlertSettings />);
-
-      await userEvent.click(screen.getByTestId('settings-volume-up'));
-
-      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-      expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 30);
-    });
-
-    it('should decrease notification volume', async () => {
-      renderWithProviders(<AlertSettings />);
-
-      await userEvent.click(screen.getByTestId('settings-volume-down'));
-
-      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-      expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 10);
-    });
-
-    it('should reset notification volume', async () => {
-      renderWithProviders(<AlertSettings />, {
-        settings: { ...mockSettings, notificationVolume: 30 as Percentage },
-      });
-
-      await userEvent.click(screen.getByTestId('settings-volume-reset'));
-
-      expect(updateSettingSpy).toHaveBeenCalledTimes(1);
-      expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 20);
-    });
+    expect(updateSettingSpy).toHaveBeenCalledTimes(1);
+    expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 20);
   });
 });

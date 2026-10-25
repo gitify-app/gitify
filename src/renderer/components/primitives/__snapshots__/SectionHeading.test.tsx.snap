@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/primitives/SectionHeading.tsx > should render a heading by default 1`] = `
+exports[`renderer/components/primitives/SectionHeading.tsx > renders a heading by default 1`] = `
 <div>
   <div
     class="mb-2"
@@ -44,7 +44,7 @@ exports[`renderer/components/primitives/SectionHeading.tsx > should render a hea
 </div>
 `;
 
-exports[`renderer/components/primitives/SectionHeading.tsx > should render a legend for a fieldset 1`] = `
+exports[`renderer/components/primitives/SectionHeading.tsx > renders a legend for a fieldset 1`] = `
 <div>
   <fieldset>
     <legend
@@ -95,7 +95,7 @@ exports[`renderer/components/primitives/SectionHeading.tsx > should render a leg
 </div>
 `;
 
-exports[`renderer/components/primitives/SectionHeading.tsx > should render a specific heading level 1`] = `
+exports[`renderer/components/primitives/SectionHeading.tsx > renders a specific heading level 1`] = `
 <div>
   <div
     class="mb-2"

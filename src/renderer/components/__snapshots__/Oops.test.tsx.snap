@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/Oops.tsx > should render itself & its children - fallback to unknown error 1`] = `
+exports[`renderer/components/Oops.tsx > renders itself & its children - fallback to unknown error 1`] = `
 <div>
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"
@@ -57,7 +57,7 @@ exports[`renderer/components/Oops.tsx > should render itself & its children - fa
 </div>
 `;
 
-exports[`renderer/components/Oops.tsx > should render itself & its children - specified error 1`] = `
+exports[`renderer/components/Oops.tsx > renders itself & its children - specified error 1`] = `
 <div>
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"

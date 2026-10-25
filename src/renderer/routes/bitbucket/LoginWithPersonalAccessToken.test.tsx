@@ -11,23 +11,30 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
   const loginWithPersonalAccessTokenMock = vi.fn();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
-  it('renders correctly', () => {
-    const tree = renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />);
+  it('renders the personal access token form', () => {
+    renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(
+      screen.getByRole('heading', { name: 'Login to Bitbucket Cloud with API Token' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /^Atlassian Email/ })).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Token/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Open token settings' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: /^Hostname/ })).not.toBeInTheDocument();
   });
 
   it('renders the username field', () => {
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />);
-    expect(screen.getByTestId('login-username')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /^Atlassian Email/ })).toBeInTheDocument();
   });
 
-  it('should open the token settings page', async () => {
+  it('opens the token settings page', async () => {
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.click(screen.getByTestId('login-create-token'));
+    await userEvent.click(screen.getByRole('button', { name: 'Open token settings' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
@@ -35,17 +42,20 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
     );
   });
 
-  it('should login successfully with username and token', async () => {
+  it('logs in successfully with username and token', async () => {
     loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.type(screen.getByTestId('login-username'), 'user@example.com');
-    await userEvent.type(screen.getByTestId('login-token'), 'my-api-token');
+    await userEvent.type(
+      screen.getByRole('textbox', { name: /^Atlassian Email/ }),
+      'user@example.com',
+    );
+    await userEvent.type(screen.getByLabelText(/^Token/), 'my-api-token');
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
@@ -66,9 +76,12 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.type(screen.getByTestId('login-username'), 'user@example.com');
-    await userEvent.type(screen.getByTestId('login-token'), 'my-api-token');
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.type(
+      screen.getByRole('textbox', { name: /^Atlassian Email/ }),
+      'user@example.com',
+    );
+    await userEvent.type(screen.getByLabelText(/^Token/), 'my-api-token');
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(screen.getByTestId('login-errors')).toHaveTextContent(
@@ -78,7 +91,7 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
@@ -101,7 +114,9 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
       ],
     });
 
-    expect(screen.getByTestId('login-username')).toHaveValue('user@example.com');
+    expect(screen.getByRole('textbox', { name: /^Atlassian Email/ })).toHaveValue(
+      'user@example.com',
+    );
     // hostname is always bitbucket.org and not shown as an editable field
     expect(screen.queryByTestId('login-hostname')).not.toBeInTheDocument();
   });

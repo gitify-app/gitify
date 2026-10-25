@@ -21,7 +21,7 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   it.each([
     ['Show notification count', 'showNotificationsCountInTray'],
     ['Highlight unread notifications', 'useUnreadActiveIcon'],
-  ] as const)('should toggle %s switch', async (label, setting) => {
+  ] as const)('toggles %s switch', async (label, setting) => {
     await userEvent.click(screen.getByRole('button', { name: label }));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);

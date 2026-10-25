@@ -130,10 +130,37 @@ const notificationQueryBoundaryPattern = {
     'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
 };
 
-const processBoundaryPattern = rendererBoundaryPattern(
-  ['main', 'preload'],
-  'Renderer boundary: use `window.gitify` instead of importing the main or preload process (see ARCHITECTURE.md).',
-);
+const processBoundaryPattern = {
+  group: [...forbiddenLayerGlobs(['main', 'preload']), 'electron', 'electron/**'],
+  allowTypeImports: true,
+  message:
+    'Renderer boundary: use `window.gitify` instead of importing the main process, preload, or Electron (see ARCHITECTURE.md).',
+};
+
+const rendererImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['renderer']),
+  allowTypeImports: true,
+  message: 'Process boundary: main and preload must not import the renderer (see ARCHITECTURE.md).',
+};
+
+const sharedImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['main', 'preload', 'renderer']),
+  allowTypeImports: true,
+  message:
+    'Process boundary: shared code must not import main, preload, or renderer modules (see ARCHITECTURE.md).',
+};
+
+const mainImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['main']),
+  allowTypeImports: true,
+  message: 'Process boundary: preload must not import main (see ARCHITECTURE.md).',
+};
+
+const preloadImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['preload']),
+  allowTypeImports: true,
+  message: 'Process boundary: main must not import preload (see ARCHITECTURE.md).',
+};
 
 const forgeSpecificBoundaryPattern = rendererBoundaryPattern(
   ['forges/github', 'forges/gitlab', 'forges/gitea', 'forges/bitbucket'],
@@ -258,9 +285,11 @@ export default defineConfig({
           unnamedComponents: 'arrow-function',
         },
       ],
-      'react/exhaustive-deps': 'warn',
+      'react/exhaustive-deps': 'error',
       'react/rules-of-hooks': 'error',
       'react/self-closing-comp': 'error',
+      'react/jsx-no-target-blank': 'error',
+      'react/no-danger': 'error',
       'typescript/no-inferrable-types': 'error',
       'typescript/prefer-as-const': 'error',
       'typescript/prefer-enum-initializers': 'error',
@@ -461,16 +490,66 @@ export default defineConfig({
         files: ['src/renderer/App.tsx', 'src/renderer/index.tsx', ...rendererLayerFiles('routes')],
         excludeFiles: TEST_FILES,
         rules: {
-          'no-restricted-imports': ['error', { patterns: [forgeSpecificBoundaryPattern] }],
+          'no-restricted-imports': [
+            'error',
+            { patterns: [forgeSpecificBoundaryPattern, processBoundaryPattern] },
+          ],
         },
       },
       {
-        // `import/no-cycle` is enabled for the upper renderer layers only.
-        // `utils` and `stores` still contain pre-existing cycles (73 diagnostics
-        // when enabled across the whole renderer); cleaning those up is a
-        // separate change. See ARCHITECTURE.md.
-        files: rendererLayerFiles('hooks', 'components', 'routes'),
-        excludeFiles: TEST_FILES,
+        // `import/no-cycle` is enforced across the renderer. The pre-existing
+        // cycles in `utils`, `stores`, and the forge adapters were removed so
+        // the rule can be enabled here. See ARCHITECTURE.md.
+        files: RENDERER_SOURCE_FILES,
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'import/no-cycle': 'error',
+        },
+      },
+      {
+        // Process boundary: main must not reach into preload or the renderer.
+        files: ['src/main/**/*.ts', 'src/main/**/*.tsx'],
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            { patterns: [rendererImportBoundaryPattern, preloadImportBoundaryPattern] },
+          ],
+        },
+      },
+      {
+        // Process boundary: preload must not reach into main or the renderer.
+        files: ['src/preload/**/*.ts', 'src/preload/**/*.tsx'],
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            { patterns: [rendererImportBoundaryPattern, mainImportBoundaryPattern] },
+          ],
+        },
+      },
+      {
+        // Process boundary: shared code is imported by both processes and must
+        // stay independent of main, preload, and renderer modules. It is also
+        // bundled into the renderer, so it must not import Node builtins.
+        files: ['src/shared/**/*.ts', 'src/shared/**/*.tsx'],
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'no-restricted-imports': ['error', { patterns: [sharedImportBoundaryPattern] }],
+          'import/no-nodejs-modules': 'error',
+        },
+      },
+      {
+        // Cycle detection also covers the main, preload, and shared processes.
+        files: [
+          'src/main/**/*.ts',
+          'src/main/**/*.tsx',
+          'src/preload/**/*.ts',
+          'src/preload/**/*.tsx',
+          'src/shared/**/*.ts',
+          'src/shared/**/*.tsx',
+        ],
+        excludeFiles: TEST_EXCLUDES,
         rules: {
           'import/no-cycle': 'error',
         },
@@ -479,14 +558,14 @@ export default defineConfig({
         files: TEST_EXCLUDES,
         rules: {
           'vitest/no-focused-tests': 'error',
-          // Only `no-focused-tests` is opted into. The plugin's other
-          // correctness rules would require a broad test refactor.
-          'vitest/expect-expect': 'off',
-          'vitest/no-conditional-expect': 'off',
+          'vitest/no-disabled-tests': 'error',
+          'vitest/no-standalone-expect': 'error',
+          // Vitest supports expect(actual, message); the default maxArgs is 1.
+          'vitest/valid-expect': ['error', { maxArgs: 2 }],
+          // Snapshot hints are not enforced; snapshots are being phased out.
           'vitest/prefer-snapshot-hint': 'off',
+          // Typing every `vi.fn()` mock is a separate, large test refactor.
           'vitest/require-mock-type-parameters': 'off',
-          'vitest/require-to-throw-message': 'off',
-          'vitest/valid-expect': 'off',
           'typescript/no-explicit-any': 'off',
           'no-console': 'off',
           // Mocks are typed as the real Electron/interface classes, so
@@ -494,6 +573,24 @@ export default defineConfig({
           // even though the runtime value is a `vi.fn()`. The rule is a false
           // positive for test doubles, so scope it to non-test code.
           'typescript/unbound-method': 'off',
+        },
+      },
+      {
+        files: ['**/*.visual.test.tsx'],
+        rules: {
+          // Visual assertions live in the `captureRoute` helper.
+          'vitest/expect-expect': [
+            'error',
+            {
+              assertFunctionNames: [
+                'expect',
+                'expectTypeOf',
+                'assert',
+                'assertType',
+                'captureRoute',
+              ],
+            },
+          ],
         },
       },
       {

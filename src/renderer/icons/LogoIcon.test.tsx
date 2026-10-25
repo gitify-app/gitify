@@ -20,7 +20,7 @@ describe('renderer/icons/LogoIcon.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should click on the logo', async () => {
+  it('clicks on the logo', async () => {
     const onClickMock = vi.fn();
     renderWithProviders(<LogoIcon onClick={onClickMock} size={Size.SMALL} />);
 
@@ -29,19 +29,19 @@ describe('renderer/icons/LogoIcon.tsx', () => {
     expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 
-  it('should render small size', () => {
+  it('renders small size', () => {
     const tree = renderWithProviders(<LogoIcon size={Size.SMALL} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render medium size', () => {
+  it('renders medium size', () => {
     const tree = renderWithProviders(<LogoIcon size={Size.MEDIUM} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render large size', () => {
+  it('renders large size', () => {
     const tree = renderWithProviders(<LogoIcon size={Size.LARGE} />);
 
     expect(tree.container).toMatchSnapshot();

@@ -39,7 +39,7 @@ vi.mock('../client', async () => {
 describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
   describe('mergeQueryConfig', () => {
     describe('supportsMergedQueryEnrichment', () => {
-      it('should support merge query', () => {
+      it('supports merge query', () => {
         expect(pullRequestHandler.supportsMergedQueryEnrichment).toBeTruthy();
       });
     });

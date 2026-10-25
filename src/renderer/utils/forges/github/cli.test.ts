@@ -67,7 +67,9 @@ describe('renderer/utils/forges/github/cli.ts', () => {
     readToken.mockResolvedValueOnce({ error: 'GH_FAILED' });
     readToken.mockResolvedValueOnce({ token: 'gho_token' });
 
-    await expect(resolveGitHubCliToken(GITHUB)).rejects.toThrow();
+    await expect(resolveGitHubCliToken(GITHUB)).rejects.toThrow(
+      'GitHub CLI could not provide a token for github.com.',
+    );
     await expect(resolveGitHubCliToken(GITHUB)).resolves.toBe('gho_token');
   });
 

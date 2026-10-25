@@ -141,7 +141,7 @@
     "vite-plugin-electron": "1.1.2",
     "vite-plus": "catalog:",
     "vitest": "catalog:",
-    "zustand": "5.0.15"
+    "zustand": "5.0.16"
   },
   "engines": {
     "node": ">=24"

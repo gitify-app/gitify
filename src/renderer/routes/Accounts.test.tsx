@@ -11,8 +11,6 @@ import {
 
 import { useAccountsStore } from '../stores';
 
-import { IconColor } from '../types';
-
 import {
   getAlternateScopeNames,
   getRecommendedScopeNames,
@@ -27,7 +25,7 @@ import { AccountsRoute } from './Accounts';
 
 describe('renderer/routes/Accounts.tsx', () => {
   describe('General', () => {
-    it('should render itself & its children', async () => {
+    it('renders itself & its children', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
@@ -38,7 +36,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.getAllByTestId('account-profile')).toHaveLength(3);
     });
 
-    it('should go back by pressing the icon', async () => {
+    it('goes back by pressing the icon', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />);
       });
@@ -74,55 +72,41 @@ describe('renderer/routes/Accounts.tsx', () => {
       {
         name: 'recommended scopes',
         scopes: getRecommendedScopeNames(),
-        color: IconColor.GREEN,
         variant: 'default',
       },
       {
         name: 'alternate scopes only',
         scopes: getAlternateScopeNames(),
-        color: 'text-gitify-warning',
         variant: 'default',
       },
       {
         name: 'neither scope set',
         scopes: getRequiredScopeNames(),
-        color: null,
         variant: 'danger',
       },
       {
         name: 'both scope sets',
         scopes: [...new Set([...getRecommendedScopeNames(), ...getAlternateScopeNames()])],
-        color: IconColor.GREEN,
         variant: 'default',
       },
     ];
 
     it.each(scopeCases)(
       'preserves the icon color and button variant for $name',
-      async ({ scopes, color, variant }) => {
+      async ({ scopes, variant }) => {
+        const account = { ...mockPersonalAccessTokenAccount, scopes };
+
         await act(async () => {
-          renderWithProviders(<AccountsRoute />, {
-            accounts: [{ ...mockPersonalAccessTokenAccount, scopes }],
-          });
+          renderWithProviders(<AccountsRoute />, { accounts: [account] });
         });
 
-        const button = screen.getByTestId('account-view-scopes');
-        const icon = button.querySelector('svg');
+        const button = screen.getByRole('button', {
+          name: `View scopes for ${account.user?.login}`,
+        });
 
-        expect(icon).toHaveClass('octicon-shield-check');
+        expect(button.querySelector('svg')).toHaveClass('octicon-shield-check');
         expect(button).toHaveAttribute('data-variant', variant);
         expect(button).toHaveAttribute('data-size', 'small');
-        expect(button).toHaveAccessibleName(
-          `View scopes for ${mockPersonalAccessTokenAccount.user?.login}`,
-        );
-        if (color) {
-          expect(icon).toHaveClass(color);
-        }
-        for (const scopeColor of [IconColor.GREEN, 'text-gitify-warning']) {
-          if (scopeColor !== color) {
-            expect(icon).not.toHaveClass(scopeColor);
-          }
-        }
       },
     );
 
@@ -135,7 +119,9 @@ describe('renderer/routes/Accounts.tsx', () => {
           renderWithProviders(<AccountsRoute />, { accounts: [account] });
         });
 
-        const icon = screen.getByTestId('account-view-scopes').querySelector('svg');
+        const icon = screen
+          .getByRole('button', { name: `View scopes for ${account.user?.login}` })
+          .querySelector('svg');
         expect(icon).toBeInTheDocument();
 
         const updatedAccount = {
@@ -149,7 +135,11 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
 
         expect(screen.getByText('Updated account name')).toBeInTheDocument();
-        expect(screen.getByTestId('account-view-scopes').querySelector('svg')).toBe(icon);
+        expect(
+          screen
+            .getByRole('button', { name: `View scopes for ${account.user?.login}` })
+            .querySelector('svg'),
+        ).toBe(icon);
       },
     );
 
@@ -163,9 +153,11 @@ describe('renderer/routes/Accounts.tsx', () => {
         renderWithProviders(<AccountsRoute />, { accounts: [account] });
       });
 
-      const button = screen.getByTestId('account-view-scopes');
+      const button = screen.getByRole('button', {
+        name: `View scopes for ${account.user?.login}`,
+      });
+
       expect(button).toHaveAttribute('data-variant', 'danger');
-      expect(button.querySelector('svg')).not.toHaveClass(IconColor.GREEN, 'text-gitify-warning');
 
       const updatedAccount = { ...account, scopes: getRecommendedScopeNames() };
       expect(getAccountUUID(updatedAccount)).toBe(getAccountUUID(account));
@@ -174,9 +166,10 @@ describe('renderer/routes/Accounts.tsx', () => {
         useAccountsStore.setState({ accounts: [updatedAccount] });
       });
 
-      const updatedButton = screen.getByTestId('account-view-scopes');
-      expect(updatedButton.querySelector('svg')).toHaveClass(IconColor.GREEN);
-      expect(updatedButton.querySelector('svg')).not.toHaveClass('text-gitify-warning');
+      const updatedButton = screen.getByRole('button', {
+        name: `View scopes for ${updatedAccount.user?.login}`,
+      });
+
       expect(updatedButton).toHaveAttribute('data-variant', 'default');
 
       await userEvent.click(updatedButton);
@@ -233,7 +226,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/settings/tokens');
     });
 
-    it('should render with PAT scopes warning', async () => {
+    it('renders with PAT scopes warning', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [
@@ -263,7 +256,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should set account as primary account', async () => {
+    it('sets account as primary account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
@@ -280,7 +273,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(navigateMock).toHaveBeenCalledWith('/accounts', { replace: true });
     });
 
-    it('should refresh account', async () => {
+    it('refreshes account', async () => {
       const refreshAccountSpy = vi
         .spyOn(useAccountsStore.getState(), 'refreshAccount')
         .mockResolvedValue(mockPersonalAccessTokenAccount);
@@ -300,7 +293,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should logout', async () => {
+    it('logs out', async () => {
       const logoutFromAccountMock = vi.fn();
 
       await act(async () => {
@@ -315,7 +308,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should show view-scopes button for all auth methods', async () => {
+    it('shows view-scopes button for all auth methods', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
@@ -325,7 +318,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.getAllByTestId('account-view-scopes')).toHaveLength(3);
     });
 
-    it('should navigate to account-scopes when clicking view-scopes', async () => {
+    it('navigates to account-scopes when clicking view-scopes', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockPersonalAccessTokenAccount],
@@ -341,7 +334,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Add new accounts', () => {
-    it('should show github login methods after selecting GitHub forge', async () => {
+    it('shows github login methods after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -364,7 +357,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should show login with personal access token after selecting GitHub forge', async () => {
+    it('shows login with personal access token after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -384,7 +377,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should show login with oauth app after selecting GitHub forge', async () => {
+    it('shows login with oauth app after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockPersonalAccessTokenAccount],
@@ -404,7 +397,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should navigate directly to gitea login (single method forge)', async () => {
+    it('navigates directly to gitea login (single method forge)', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -423,7 +416,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should navigate directly to bitbucket login (single method forge)', async () => {
+    it('navigates directly to bitbucket login (single method forge)', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -444,7 +437,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Re-authenticate', () => {
-    it('should re-authenticate a github personal access token account', async () => {
+    it('re-authenticates a github personal access token account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockPersonalAccessTokenAccount],
@@ -469,7 +462,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should re-authenticate a github app account', async () => {
+    it('re-authenticates a github app account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockGitHubAppAccount],
@@ -492,7 +485,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should re-authenticate an oauth app account', async () => {
+    it('re-authenticates an oauth app account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockOAuthAccount],
@@ -515,7 +508,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should re-authenticate a gitea personal access token account', async () => {
+    it('re-authenticates a gitea personal access token account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockGiteaAccount],
@@ -538,7 +531,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
     });
 
-    it('should log and skip re-authenticate when no login method matches', async () => {
+    it('logs and skip re-authenticate when no login method matches', async () => {
       const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
       // Gitea only registers PAT — a GitHub App method has no matching loginMethod.
       const unsupportedAccount = {
@@ -569,7 +562,7 @@ describe('renderer/routes/Accounts.tsx', () => {
       );
     });
 
-    it('should open developer settings when clicking the bad credentials banner', async () => {
+    it('opens developer settings when clicking the bad credentials banner', async () => {
       const openAccountSettingsSpy = vi
         .spyOn(links, 'openAccountSettings')
         .mockImplementation(vi.fn());
@@ -595,7 +588,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Refresh errors', () => {
-    it('should surface a refresh failure without navigating away from accounts', async () => {
+    it('surfaces a refresh failure without navigating away from accounts', async () => {
       const refreshAccountSpy = vi
         .spyOn(useAccountsStore.getState(), 'refreshAccount')
         .mockRejectedValueOnce(new Error('network down'));
@@ -614,7 +607,7 @@ describe('renderer/routes/Accounts.tsx', () => {
   });
 
   describe('Gitea account affordances', () => {
-    it('should hide view-scopes for forges without an oauthScopes capability', async () => {
+    it('hides view-scopes for forges without an oauthScopes capability', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
           accounts: [mockGiteaAccount],

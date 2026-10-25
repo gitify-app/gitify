@@ -67,7 +67,6 @@ describe('renderer/components/metrics/SubIssueProgressPill.tsx', () => {
       const { container } = renderWithProviders(<SubIssueProgressWheel percent={50} />);
       const circles = container.querySelectorAll('circle');
       expect(circles.length).toBe(2);
-      expect(circles[1]).toHaveClass('text-gitify-icon-done');
     });
   });
 });

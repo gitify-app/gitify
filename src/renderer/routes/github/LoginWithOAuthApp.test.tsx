@@ -12,10 +12,15 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
 
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
-  it('renders correctly', () => {
-    const tree = renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
+  it('renders the OAuth app form', () => {
+    renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByRole('heading', { name: 'Login with OAuth App' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /^Hostname/ })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /^Client ID/ })).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Client Secret/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Create new OAuth App' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
   });
 
   it('let us go back', async () => {
@@ -28,55 +33,58 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
   });
 
   describe("'Create new OAuth App' button", () => {
-    it('should be disabled if no hostname configured', async () => {
+    it('is disabled if no hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
-      await userEvent.clear(screen.getByTestId('login-hostname'));
+      await userEvent.clear(screen.getByRole('textbox', { name: /^Hostname/ }));
 
-      await userEvent.click(screen.getByTestId('login-create-oauth-app'));
+      await userEvent.click(screen.getByRole('button', { name: 'Create new OAuth App' }));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
-    it('should open in browser if hostname configured', async () => {
+    it('opens in browser if hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
-      const hostname = screen.getByTestId('login-hostname');
+      const hostname = screen.getByRole('textbox', { name: /^Hostname/ });
       await userEvent.clear(hostname);
       await userEvent.type(hostname, 'company.github.com');
 
-      await userEvent.click(screen.getByTestId('login-create-oauth-app'));
+      await userEvent.click(screen.getByRole('button', { name: 'Create new OAuth App' }));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     });
   });
 
-  it('should login using a token - success', async () => {
+  it('logs in using a token - success', async () => {
     loginWithOAuthAppMock.mockResolvedValueOnce(null);
 
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />, {
       loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /^Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.com');
 
-    await userEvent.type(screen.getByTestId('login-clientId'), '1234567890_ASDFGHJKL');
+    await userEvent.type(
+      screen.getByRole('textbox', { name: /^Client ID/ }),
+      '1234567890_ASDFGHJKL',
+    );
 
     await userEvent.type(
-      screen.getByTestId('login-clientSecret'),
+      screen.getByLabelText(/^Client Secret/),
       '1234567890_asdfghjklPOIUYTREWQ0987654321',
     );
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith('/');
   });
 
-  it('should login using a token - failure', async () => {
+  it('logs in using a token - failure', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithOAuthAppMock.mockRejectedValueOnce(null);
 
@@ -84,18 +92,21 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
       loginWithOAuthApp: loginWithOAuthAppMock,
     });
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /^Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.com');
 
-    await userEvent.type(screen.getByTestId('login-clientId'), '1234567890_ASDFGHJKL');
+    await userEvent.type(
+      screen.getByRole('textbox', { name: /^Client ID/ }),
+      '1234567890_ASDFGHJKL',
+    );
 
     await userEvent.type(
-      screen.getByTestId('login-clientSecret'),
+      screen.getByLabelText(/^Client Secret/),
       '1234567890_asdfghjklPOIUYTREWQ0987654321',
     );
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(loginWithOAuthAppMock).toHaveBeenCalledTimes(1);
@@ -104,25 +115,25 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
     });
   });
 
-  it('should render the form with errors', async () => {
+  it('renders the form with errors', async () => {
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /^Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'test');
 
-    await userEvent.type(screen.getByTestId('login-clientId'), '123');
+    await userEvent.type(screen.getByRole('textbox', { name: /^Client ID/ }), '123');
 
-    await userEvent.type(screen.getByTestId('login-clientSecret'), 'abc');
+    await userEvent.type(screen.getByLabelText(/^Client Secret/), 'abc');
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Client ID format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Client Secret format is invalid')).toBeInTheDocument();
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
@@ -130,10 +141,10 @@ describe('renderer/routes/github/LoginWithOAuthApp.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle client secret visibility', async () => {
+  it('toggles client secret visibility', async () => {
     renderWithProviders(<GitHubLoginWithOAuthAppRoute />);
 
-    const secretInput = screen.getByTestId('login-clientSecret');
+    const secretInput = screen.getByLabelText(/^Client Secret/);
     expect(secretInput).toHaveAttribute('type', 'password');
 
     await userEvent.click(screen.getByLabelText('Show token'));

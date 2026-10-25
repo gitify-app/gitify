@@ -57,7 +57,6 @@ describe('renderer/hooks/notifications/useNotificationActions.ts', () => {
   beforeEach(() => {
     getAllNotificationsMock.mockReset();
     useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
-    mockGitifyNotification.unread = true;
   });
 
   it('exposes the notification actions without fetching or creating a query', () => {

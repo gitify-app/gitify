@@ -10,7 +10,7 @@ import type { GitifyError } from '../types';
 import { Oops } from './Oops';
 
 describe('renderer/components/Oops.tsx', () => {
-  it('should render itself & its children - specified error', async () => {
+  it('renders itself & its children - specified error', async () => {
     const mockError = {
       title: 'Error title',
       descriptions: ['Error description'],
@@ -26,7 +26,7 @@ describe('renderer/components/Oops.tsx', () => {
     expect(tree!.container).toMatchSnapshot();
   });
 
-  it('should render itself & its children - fallback to unknown error', async () => {
+  it('renders itself & its children - fallback to unknown error', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
@@ -36,7 +36,7 @@ describe('renderer/components/Oops.tsx', () => {
     expect(tree!.container).toMatchSnapshot();
   });
 
-  it('should render action buttons and navigate on click', async () => {
+  it('renders action buttons and navigate on click', async () => {
     const mockError = {
       title: 'Error title',
       descriptions: ['Error description'],

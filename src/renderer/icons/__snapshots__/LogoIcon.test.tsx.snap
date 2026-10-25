@@ -98,7 +98,7 @@ exports[`renderer/icons/LogoIcon.tsx > renders correctly (light) 1`] = `
 </div>
 `;
 
-exports[`renderer/icons/LogoIcon.tsx > should render large size 1`] = `
+exports[`renderer/icons/LogoIcon.tsx > renders large size 1`] = `
 <div>
   <svg
     aria-hidden="true"
@@ -147,7 +147,7 @@ exports[`renderer/icons/LogoIcon.tsx > should render large size 1`] = `
 </div>
 `;
 
-exports[`renderer/icons/LogoIcon.tsx > should render medium size 1`] = `
+exports[`renderer/icons/LogoIcon.tsx > renders medium size 1`] = `
 <div>
   <svg
     aria-hidden="true"
@@ -196,7 +196,7 @@ exports[`renderer/icons/LogoIcon.tsx > should render medium size 1`] = `
 </div>
 `;
 
-exports[`renderer/icons/LogoIcon.tsx > should render small size 1`] = `
+exports[`renderer/icons/LogoIcon.tsx > renders small size 1`] = `
 <div>
   <svg
     aria-hidden="true"

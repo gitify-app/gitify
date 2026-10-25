@@ -106,7 +106,7 @@ export function GitHubLoginWithOAuthAppRoute() {
           />
         )}
         <Stack direction="vertical" gap="normal">
-          <FormControl required>
+          <FormControl id="login-hostname" required>
             <FormControl.Label>Hostname</FormControl.Label>
             <FormControl.Caption>
               <Text as="i">Change only if you are using GitHub Enterprise Server</Text>
@@ -148,7 +148,7 @@ export function GitHubLoginWithOAuthAppRoute() {
               and use your <Text as="i">client id & secret</Text> below.
             </Text>
           </Stack>
-          <FormControl required>
+          <FormControl id="login-clientId" required>
             <FormControl.Label>Client ID</FormControl.Label>
             <TextInput
               aria-invalid={errors.clientId ? 'true' : 'false'}
@@ -163,7 +163,7 @@ export function GitHubLoginWithOAuthAppRoute() {
               <FormControl.Validation variant="error">{errors.clientId}</FormControl.Validation>
             )}
           </FormControl>
-          <FormControl required>
+          <FormControl id="login-clientSecret" required>
             <FormControl.Label>Client Secret</FormControl.Label>
             <TextInput
               aria-invalid={errors.clientSecret ? 'true' : 'false'}

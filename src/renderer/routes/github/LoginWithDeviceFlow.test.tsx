@@ -14,7 +14,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
   const copyToClipboardSpy = vi.spyOn(comms, 'copyToClipboard').mockResolvedValue();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
-  it('should render scope choice buttons', async () => {
+  it('renders scope choice buttons', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -37,7 +37,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     expect(loginWithDeviceFlowStartMock).not.toHaveBeenCalled();
   });
 
-  it('should start device flow with public scope when clicking Public', async () => {
+  it('starts device flow with public scope when clicking Public', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -68,7 +68,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/login/device');
   });
 
-  it('should start device flow with full scope when clicking Public and Private', async () => {
+  it('starts device flow with full scope when clicking Public and Private', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -94,7 +94,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     await screen.findByTestId('device-user-code');
   });
 
-  it('should show status indicators after device flow starts', async () => {
+  it('shows status indicators after device flow starts', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -117,7 +117,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     expect(screen.getByText('Waiting for authorization...')).toBeInTheDocument();
   });
 
-  it('should open browser and copy link via footer buttons', async () => {
+  it('opens browser and copy link via footer buttons', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -146,7 +146,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     expect(copyToClipboardSpy).toHaveBeenCalledWith('https://github.com/login/device');
   });
 
-  it('should copy user code to clipboard when clicking copy button', async () => {
+  it('copies user code to clipboard when clicking copy button', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -172,7 +172,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
   });
 
-  it('should handle device flow errors during initialization', async () => {
+  it('handles device flow errors during initialization', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     const loginWithDeviceFlowStartMock = vi.fn().mockRejectedValueOnce(new Error('Network error'));
 
@@ -186,7 +186,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should navigate back on cancel from scope choice', async () => {
+  it('navigates back on cancel from scope choice', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -206,7 +206,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
-  it('should complete login when poll returns a token', async () => {
+  it('completes login when poll returns a token', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -239,7 +239,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
   });
 
-  it('should show an error when device flow poll fails', async () => {
+  it('shows an error when device flow poll fails', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
@@ -268,7 +268,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
   });
 
-  it('should show an error when the device code expires before authorization', async () => {
+  it('shows an error when the device code expires before authorization', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.com',
       clientId: 'test-id',
@@ -295,7 +295,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
   });
 
-  it('should pass the re-auth account hostname into device flow start', async () => {
+  it('passes the re-auth account hostname into device flow start', async () => {
     const loginWithDeviceFlowStartMock = vi.fn().mockResolvedValueOnce({
       hostname: 'github.enterprise.example',
       clientId: 'test-id',
@@ -331,7 +331,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     );
   });
 
-  it('should open the revoke-access developer settings link', async () => {
+  it('opens the revoke-access developer settings link', async () => {
     renderWithProviders(<GitHubLoginWithDeviceFlowRoute />);
 
     await userEvent.click(screen.getByTitle('GitHub → Developer Settings'));
