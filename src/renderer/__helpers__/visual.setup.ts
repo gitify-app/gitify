@@ -150,6 +150,8 @@ function disableAnimations(): void {
 }
 
 beforeEach(async () => {
+  // Interactions are driven by Playwright, outside React's act environment.
+  (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = false;
   disableAnimations();
   vi.useFakeTimers({ toFake: ['Date'], now: FIXED_NOW });
 
