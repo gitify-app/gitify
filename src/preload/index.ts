@@ -38,9 +38,8 @@ export const api = {
    * Decrypt an encrypted string using Electron's safe storage.
    *
    * @param value - The encrypted string to decrypt.
-   * @returns A promise resolving to `{ token, reEncryptedToken? }`. When the OS
-   * keychain rotated keys during decryption, `reEncryptedToken` carries the new
-   * ciphertext so callers can persist it.
+   * @returns The decrypted token and, when the OS keychain rotated keys, the
+   * re-encrypted ciphertext to persist.
    */
   decryptValue: (value: string) => invokeMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, value),
 
@@ -48,8 +47,7 @@ export const api = {
    * Read the token the locally installed GitHub CLI holds for a host.
    *
    * @param hostname - Host to read the token for (e.g. `github.com`).
-   * @returns A promise resolving to `{ token }` on success, or
-   * `{ error, detail? }` when the CLI cannot supply one.
+   * @returns The CLI token, or a classified failure with an optional detail line.
    */
   githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
 
