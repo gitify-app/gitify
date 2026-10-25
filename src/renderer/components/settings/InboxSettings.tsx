@@ -77,9 +77,7 @@ export function InboxSettings() {
       </SectionHeading>
 
       <div>
-        <SettingsGroupHeading divider={false} icon={DownloadIcon}>
-          Fetch
-        </SettingsGroupHeading>
+        <SettingsGroupHeading icon={DownloadIcon}>Fetch</SettingsGroupHeading>
 
         <SettingsList>
           <SettingsRow

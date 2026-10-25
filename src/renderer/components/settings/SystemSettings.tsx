@@ -294,24 +294,22 @@ export function SystemSettings() {
           tooltip="Run Gitify under X11/XWayland so the window can open next to the tray icon. Takes effect after restarting Gitify."
           visible={isLinux}
         />
-
-        {isLinux && (
-          <Stack gap="condensed">
-            <Text className="text-sm text-gitify-font">
-              On GNOME Wayland, install the Gitify extension to open the window next to its tray
-              icon. Install and manage it through GNOME's extension tools.
-            </Text>
-            <Button
-              onClick={() =>
-                openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))
-              }
-              size="small"
-            >
-              GNOME extension installation
-            </Button>
-          </Stack>
-        )}
       </SettingsList>
+
+      {isLinux && (
+        <Stack className="pt-2" gap="condensed">
+          <Text className="text-sm text-gitify-font">
+            On GNOME Wayland, install the Gitify extension to open the window next to its tray icon.
+            Install and manage it through GNOME's extension tools.
+          </Text>
+          <Button
+            onClick={() => openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))}
+            size="small"
+          >
+            GNOME extension installation
+          </Button>
+        </Stack>
+      )}
     </fieldset>
   );
 }

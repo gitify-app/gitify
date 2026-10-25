@@ -37,7 +37,7 @@ export function SettingsRow({
     <fieldset
       aria-describedby={caption ? captionId : undefined}
       aria-labelledby={labelId}
-      className={cn('m-0 min-w-0 border-0 p-0', disabled && 'opacity-60')}
+      className={cn('min-w-0', disabled && 'opacity-60')}
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-1">

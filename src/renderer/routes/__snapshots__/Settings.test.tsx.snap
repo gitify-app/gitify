@@ -146,7 +146,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </div>
         </div>
         <div
-          class="divide-y divide-gitify-notification-border [&>*]:py-2"
+          class="settings-list"
         >
           <div>
             <div
@@ -157,7 +157,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="designLanguage-_r_1_-label"
                   tabindex="-1"
                   type="button"
@@ -261,7 +261,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="theme-_r_4_-label"
                   tabindex="-1"
                   type="button"
@@ -406,7 +406,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="increaseContrast-_r_7_-label"
                   tabindex="-1"
                   type="button"
@@ -537,7 +537,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </div>
           <fieldset
             aria-labelledby="zoom-_r_c_-label"
-            class="m-0 min-w-0 border-0 p-0"
+            class="min-w-0"
           >
             <div
               class="flex items-center justify-between gap-3"
@@ -773,7 +773,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
         </div>
         <div>
           <div
-            class="pb-2 prc-Stack-Stack-UQ9k6"
+            class="pb-2 pt-[1rem]! prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-component="Stack"
             data-direction="horizontal"
@@ -810,11 +810,11 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </h5>
           </div>
           <div
-            class="divide-y divide-gitify-notification-border [&>*]:py-2"
+            class="settings-list"
           >
             <fieldset
               aria-labelledby="fetchInterval-_r_j_-label"
-              class="m-0 min-w-0 border-0 p-0"
+              class="min-w-0"
             >
               <div
                 class="flex items-center justify-between gap-3"
@@ -1005,7 +1005,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="fetchAllNotifications-_r_q_-label"
                     tabindex="-1"
                     type="button"
@@ -1145,7 +1145,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="fetchReadNotifications-_r_u_-label"
                     tabindex="-1"
                     type="button"
@@ -1276,7 +1276,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </div>
           </div>
           <div
-            class="pb-2 border-t border-gitify-notification-border pt-4 prc-Stack-Stack-UQ9k6"
+            class="pb-2 pt-[1rem]! prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-component="Stack"
             data-direction="horizontal"
@@ -1310,7 +1310,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </h5>
           </div>
           <div
-            class="divide-y divide-gitify-notification-border [&>*]:py-2"
+            class="settings-list"
           >
             <div>
               <div
@@ -1321,7 +1321,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="groupBy-_r_12_-label"
                     tabindex="-1"
                     type="button"
@@ -1427,7 +1427,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="showAccountHeader-_r_15_-label"
                     tabindex="-1"
                     type="button"
@@ -1567,7 +1567,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="wrapNotificationTitle-_r_19_-label"
                     tabindex="-1"
                     type="button"
@@ -1707,7 +1707,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="showNumber-_r_1d_-label"
                     tabindex="-1"
                     type="button"
@@ -1847,7 +1847,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="delayNotificationState-_r_1h_-label"
                     tabindex="-1"
                     type="button"
@@ -1978,7 +1978,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </div>
           </div>
           <div
-            class="pb-2 border-t border-gitify-notification-border pt-4 prc-Stack-Stack-UQ9k6"
+            class="pb-2 pt-[1rem]! prc-Stack-Stack-UQ9k6"
             data-align="center"
             data-component="Stack"
             data-direction="horizontal"
@@ -2012,7 +2012,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             </h5>
           </div>
           <div
-            class="divide-y divide-gitify-notification-border [&>*]:py-2"
+            class="settings-list"
           >
             <div
               class="flex items-start justify-between gap-3"
@@ -2025,7 +2025,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="showOnlyParticipating-_r_1l_-label"
                     tabindex="-1"
                     type="button"
@@ -2165,7 +2165,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="detailedNotifications-_r_1p_-label"
                     tabindex="-1"
                     type="button"
@@ -2409,7 +2409,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                       >
                         <button
                           aria-hidden="true"
-                          class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                          class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                           id="showPills-_r_1v_-label"
                           tabindex="-1"
                           type="button"
@@ -2552,7 +2552,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="markAsDoneOnOpen-_r_23_-label"
                     tabindex="-1"
                     type="button"
@@ -2692,7 +2692,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 >
                   <button
                     aria-hidden="true"
-                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                    class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                     id="markAsDoneOnUnsubscribe-_r_27_-label"
                     tabindex="-1"
                     type="button"
@@ -2870,7 +2870,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </div>
         </div>
         <div
-          class="divide-y divide-gitify-notification-border [&>*]:py-2"
+          class="settings-list"
         >
           <div
             class="flex items-start justify-between gap-3"
@@ -2883,7 +2883,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="showNotifications-_r_2b_-label"
                   tabindex="-1"
                   type="button"
@@ -3023,7 +3023,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="playSound-_r_2f_-label"
                   tabindex="-1"
                   type="button"
@@ -3163,7 +3163,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
             >
               <fieldset
                 aria-labelledby="notificationVolume-_r_2j_-label"
-                class="m-0 min-w-0 border-0 p-0"
+                class="min-w-0"
               >
                 <div
                   class="flex items-center justify-between gap-3"
@@ -3362,7 +3362,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="showUpdateNotifications-_r_2q_-label"
                   tabindex="-1"
                   type="button"
@@ -3542,7 +3542,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </div>
         </div>
         <div
-          class="divide-y divide-gitify-notification-border [&>*]:py-2"
+          class="settings-list"
         >
           <div
             class="flex items-start justify-between gap-3"
@@ -3555,7 +3555,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="showNotificationsCountInTray-_r_2u_-label"
                   tabindex="-1"
                   type="button"
@@ -3695,7 +3695,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="useUnreadActiveIcon-_r_32_-label"
                   tabindex="-1"
                   type="button"
@@ -3833,7 +3833,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="trayIconAppearance-_r_36_-label"
                   tabindex="-1"
                   type="button"
@@ -3999,7 +3999,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
           </div>
         </div>
         <div
-          class="divide-y divide-gitify-notification-border [&>*]:py-2"
+          class="settings-list"
         >
           <div>
             <div
@@ -4010,7 +4010,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="openLinks-_r_39_-label"
                   tabindex="-1"
                   type="button"
@@ -4116,7 +4116,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="keyboardShortcut-_r_3c_-label"
                   tabindex="-1"
                   type="button"
@@ -4257,7 +4257,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div>
                 <fieldset
                   aria-labelledby="shortcut-_r_3g_-label"
-                  class="m-0 min-w-0 border-0 p-0"
+                  class="min-w-0"
                 >
                   <div
                     class="flex items-center justify-between gap-3"
@@ -4425,7 +4425,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="keepWindowOnBlur-_r_3m_-label"
                   tabindex="-1"
                   type="button"
@@ -4565,7 +4565,7 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               >
                 <button
                   aria-hidden="true"
-                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+                  class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
                   id="openAtStartup-_r_3q_-label"
                   tabindex="-1"
                   type="button"

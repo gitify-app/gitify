@@ -123,10 +123,13 @@ export function SettingsChoice({
     <div>
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-1">
+          {/* Primer's unlayered `button { font: inherit }` outranks Tailwind's
+              utilities, so the label typography is marked important to match
+              the row labels. */}
           <button
             aria-hidden="true"
             className={cn(
-              'cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font',
+              'cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font',
               disabled && 'cursor-not-allowed opacity-60',
             )}
             disabled={disabled}

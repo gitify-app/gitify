@@ -39,9 +39,12 @@ export function SettingsToggle({
     <div className={cn('flex items-start justify-between gap-3', disabled && 'opacity-60')}>
       <div className="min-w-0">
         <div className="flex items-center gap-1">
+          {/* Primer's unlayered `button { font: inherit }` outranks Tailwind's
+              utilities, so the label typography is marked important to match
+              the other row labels. */}
           <button
             aria-hidden="true"
-            className="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
+            className="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
             disabled={disabled}
             id={labelId}
             onClick={() => onChange(!checked)}

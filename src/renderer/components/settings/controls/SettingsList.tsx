@@ -5,5 +5,5 @@ export interface SettingsListProps {
 }
 
 export function SettingsList({ children }: Readonly<SettingsListProps>) {
-  return <div className="divide-y divide-gitify-notification-border [&>*]:py-2">{children}</div>;
+  return <div className="settings-list">{children}</div>;
 }
