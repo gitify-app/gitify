@@ -284,14 +284,18 @@ export enum Size {
 }
 
 /**
+ * The direction a chevron points.
+ */
+export type ChevronDirection = 'down' | 'left' | 'right';
+
+/**
  * Details for Chevron header accordion.
  */
 export interface Chevron {
   /**
-   * The chevron icon.
+   * The direction the chevron points.
    */
-  // TODO - improve the type here to be more specific about which icons are allowed, if possible
-  icon: FC<OcticonProps>;
+  direction: ChevronDirection;
 
   /**
    * The chevron label.

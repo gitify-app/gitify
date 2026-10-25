@@ -1,22 +1,20 @@
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@primer/octicons-react';
-
 import { getChevronDetails, parseInlineCode } from './display';
 
 describe('renderer/utils/ui/display.ts', () => {
   describe('getChevronDetails', () => {
     it('returns correct chevron details', () => {
       expect(getChevronDetails(true, true, 'account')).toEqual({
-        icon: ChevronDownIcon,
+        direction: 'down',
         label: 'Hide account notifications',
       });
 
       expect(getChevronDetails(true, false, 'account')).toEqual({
-        icon: ChevronRightIcon,
+        direction: 'right',
         label: 'Show account notifications',
       });
 
       expect(getChevronDetails(false, false, 'account')).toEqual({
-        icon: ChevronLeftIcon,
+        direction: 'left',
         label: 'No notifications for account',
       });
     });
