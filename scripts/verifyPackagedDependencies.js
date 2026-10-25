@@ -111,6 +111,19 @@ function formatBytes(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
+function entryBytes(entry) {
+  if (!entry) {
+    return 0;
+  }
+  if (typeof entry.size === 'number') {
+    return entry.size;
+  }
+  if (entry.files) {
+    return Object.values(entry.files).reduce((total, child) => total + entryBytes(child), 0);
+  }
+  return 0;
+}
+
 function checkPackagedDependencies(asarPath) {
   const asar = loadAsar();
   const entries = asar.listPackage(asarPath).map(normalizeEntry);
@@ -153,13 +166,8 @@ function checkPackagedDependencies(asarPath) {
     }
   }
 
-  let nodeModulesBytes = 0;
-  for (const entry of nodeModuleEntries) {
-    const stat = asar.statFile(asarPath, entry.replace(/^\//, ''));
-    if (stat && typeof stat.size === 'number') {
-      nodeModulesBytes += stat.size;
-    }
-  }
+  const header = asar.getRawHeader(asarPath).header;
+  const nodeModulesBytes = entryBytes(header.files?.node_modules);
 
   if (nodeModulesBytes > MAX_NODE_MODULES_BYTES) {
     violations.push(
