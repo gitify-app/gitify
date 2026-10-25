@@ -19,6 +19,7 @@ export default defineConfig({
     globals: true,
     pool: 'vmThreads',
     isolate: true,
+    attachmentsDir: '.vitest-attachments',
     testTimeout: 10_000,
     clearMocks: true,
     unstubEnvs: true,
