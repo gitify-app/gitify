@@ -97,6 +97,7 @@ export function NotificationRow({
         isAnimatingExit && 'translate-x-full opacity-0 transition duration-350 ease-in-out',
         isNotificationRead && Opacity.READ,
       )}
+      data-animating-exit={isAnimatingExit || undefined}
       id={notification.id}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
