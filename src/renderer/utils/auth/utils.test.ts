@@ -13,11 +13,11 @@ vi.mock('../forges/registry', async (importOriginal) => {
   return { ...actual, getAccountAdapter: vi.fn() };
 });
 
-vi.mock('../core/logger', () => ({
-  rendererLogError: vi.fn(),
-  rendererLogWarn: vi.fn(),
-  toError: (error: unknown) => (error instanceof Error ? error : new Error(String(error))),
-}));
+vi.mock('../core/logger', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../core/logger')>();
+
+  return { ...actual, rendererLogError: vi.fn(), rendererLogWarn: vi.fn() };
+});
 
 const refreshed: RefreshAccountData = {
   user: {
