@@ -54,7 +54,7 @@ describe('renderer/components/settings/controls/SettingsToggle.tsx', () => {
       />,
     );
 
-    await userEvent.click(screen.getByText('Show notifications'));
+    await userEvent.click(screen.getByText('Show notifications', { selector: 'button' }));
 
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith(false);

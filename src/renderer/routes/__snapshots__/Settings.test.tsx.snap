@@ -155,10 +155,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="designLanguage-_r_1_-label"
+                >
+                  Design
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="designLanguage-_r_1_-label"
+                  id="designLanguage-_r_1_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -265,10 +271,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="theme-_r_5_-label"
+                >
+                  Theme
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="theme-_r_5_-label"
+                  id="theme-_r_5_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -416,10 +428,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="increaseContrast-_r_9_-label"
+                >
+                  Increase contrast
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="increaseContrast-_r_9_-label"
+                  id="increaseContrast-_r_9_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -1033,10 +1051,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="fetchAllNotifications-_r_v_-label"
+                  >
+                    Fetch all notifications
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="fetchAllNotifications-_r_v_-label"
+                    id="fetchAllNotifications-_r_v_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1179,10 +1203,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="fetchReadNotifications-_r_14_-label"
+                  >
+                    Fetch read and done notifications
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="fetchReadNotifications-_r_14_-label"
+                    id="fetchReadNotifications-_r_14_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1361,10 +1391,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex min-w-0 items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="groupBy-_r_19_-label"
+                  >
+                    Group by
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="groupBy-_r_19_-label"
+                    id="groupBy-_r_19_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1473,10 +1509,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="showAccountHeader-_r_1d_-label"
+                  >
+                    Show account header
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="showAccountHeader-_r_1d_-label"
+                    id="showAccountHeader-_r_1d_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1619,10 +1661,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="wrapNotificationTitle-_r_1i_-label"
+                  >
+                    Show full notification title
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="wrapNotificationTitle-_r_1i_-label"
+                    id="wrapNotificationTitle-_r_1i_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1765,10 +1813,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="showNumber-_r_1n_-label"
+                  >
+                    Show reference
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="showNumber-_r_1n_-label"
+                    id="showNumber-_r_1n_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -1911,10 +1965,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="delayNotificationState-_r_1s_-label"
+                  >
+                    Delay notification removal
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="delayNotificationState-_r_1s_-label"
+                    id="delayNotificationState-_r_1s_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2095,10 +2155,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="showOnlyParticipating-_r_21_-label"
+                  >
+                    Fetch only participating
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="showOnlyParticipating-_r_21_-label"
+                    id="showOnlyParticipating-_r_21_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2241,10 +2307,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="detailedNotifications-_r_26_-label"
+                  >
+                    Fetch detailed notifications
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="detailedNotifications-_r_26_-label"
+                    id="detailedNotifications-_r_26_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2491,10 +2563,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                       <div
                         class="flex items-center gap-1"
                       >
+                        <span
+                          class="sr-only"
+                          id="showPills-_r_2d_-label"
+                        >
+                          Show notification metrics
+                        </span>
                         <button
                           aria-hidden="true"
                           class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                          id="showPills-_r_2d_-label"
+                          id="showPills-_r_2d_-visible-label"
                           tabindex="-1"
                           type="button"
                         >
@@ -2640,10 +2718,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="markAsDoneOnOpen-_r_2i_-label"
+                  >
+                    Mark as done on open
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="markAsDoneOnOpen-_r_2i_-label"
+                    id="markAsDoneOnOpen-_r_2i_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2786,10 +2870,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
                 <div
                   class="flex items-center gap-1"
                 >
+                  <span
+                    class="sr-only"
+                    id="markAsDoneOnUnsubscribe-_r_2n_-label"
+                  >
+                    Mark as done on unsubscribe
+                  </span>
                   <button
                     aria-hidden="true"
                     class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                    id="markAsDoneOnUnsubscribe-_r_2n_-label"
+                    id="markAsDoneOnUnsubscribe-_r_2n_-visible-label"
                     tabindex="-1"
                     type="button"
                   >
@@ -2983,10 +3073,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="showNotifications-_r_2s_-label"
+                >
+                  Show desktop notifications
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showNotifications-_r_2s_-label"
+                  id="showNotifications-_r_2s_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3129,10 +3225,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="playSound-_r_31_-label"
+                >
+                  Play notification sound
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="playSound-_r_31_-label"
+                  id="playSound-_r_31_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3480,10 +3582,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="showUpdateNotifications-_r_3e_-label"
+                >
+                  Show app update notifications
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showUpdateNotifications-_r_3e_-label"
+                  id="showUpdateNotifications-_r_3e_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3679,10 +3787,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="showNotificationsCountInTray-_r_3j_-label"
+                >
+                  Show notification count
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="showNotificationsCountInTray-_r_3j_-label"
+                  id="showNotificationsCountInTray-_r_3j_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3825,10 +3939,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="useUnreadActiveIcon-_r_3o_-label"
+                >
+                  Highlight unread notifications
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="useUnreadActiveIcon-_r_3o_-label"
+                  id="useUnreadActiveIcon-_r_3o_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -3969,10 +4089,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="trayIconAppearance-_r_3t_-label"
+                >
+                  Idle icon
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="trayIconAppearance-_r_3t_-label"
+                  id="trayIconAppearance-_r_3t_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4152,10 +4278,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex min-w-0 items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="openLinks-_r_41_-label"
+                >
+                  Link focus
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="openLinks-_r_41_-label"
+                  id="openLinks-_r_41_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4264,10 +4396,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="keyboardShortcut-_r_45_-label"
+                >
+                  Enable global shortcut
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="keyboardShortcut-_r_45_-label"
+                  id="keyboardShortcut-_r_45_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4585,10 +4723,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="keepWindowOnBlur-_r_4h_-label"
+                >
+                  Keep window open when unfocused
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="keepWindowOnBlur-_r_4h_-label"
+                  id="keepWindowOnBlur-_r_4h_-visible-label"
                   tabindex="-1"
                   type="button"
                 >
@@ -4731,10 +4875,16 @@ exports[`renderer/routes/Settings.tsx > should render itself & its children 1`] 
               <div
                 class="flex items-center gap-1"
               >
+                <span
+                  class="sr-only"
+                  id="openAtStartup-_r_4m_-label"
+                >
+                  Launch at startup
+                </span>
                 <button
                   aria-hidden="true"
                   class="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
-                  id="openAtStartup-_r_4m_-label"
+                  id="openAtStartup-_r_4m_-visible-label"
                   tabindex="-1"
                   type="button"
                 >

@@ -31,7 +31,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       renderWithProviders(<InboxSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('choice-groupBy-date'));
+    await userEvent.click(screen.getByRole('button', { name: 'Date' }));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('groupBy', 'DATE');
@@ -44,28 +44,28 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-increase'));
+        await userEvent.click(screen.getByRole('button', { name: 'Increase fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(1);
         expect(updateSettingSpy).toHaveBeenNthCalledWith(1, 'fetchInterval', 120000);
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-increase'));
+        await userEvent.click(screen.getByRole('button', { name: 'Increase fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(2);
         expect(updateSettingSpy).toHaveBeenNthCalledWith(2, 'fetchInterval', 180000);
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-decrease'));
+        await userEvent.click(screen.getByRole('button', { name: 'Decrease fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(3);
         expect(updateSettingSpy).toHaveBeenNthCalledWith(3, 'fetchInterval', 120000);
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-reset'));
+        await userEvent.click(screen.getByRole('button', { name: 'Reset fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(4);
         expect(updateSettingSpy).toHaveBeenNthCalledWith(4, 'fetchInterval', 60000);
@@ -85,14 +85,14 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-decrease'));
+        await userEvent.click(screen.getByRole('button', { name: 'Decrease fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(1);
         expect(updateSettingSpy).toHaveBeenCalledWith('fetchInterval', 60000);
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-decrease'));
+        await userEvent.click(screen.getByRole('button', { name: 'Decrease fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(1);
       });
@@ -111,14 +111,14 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-increase'));
+        await userEvent.click(screen.getByRole('button', { name: 'Increase fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(1);
         expect(updateSettingSpy).toHaveBeenCalledWith('fetchInterval', 3600000);
       });
 
       await act(async () => {
-        await userEvent.click(screen.getByTestId('settings-fetch-interval-increase'));
+        await userEvent.click(screen.getByRole('button', { name: 'Increase fetch interval' }));
 
         expect(updateSettingSpy).toHaveBeenCalledTimes(1);
       });
@@ -157,7 +157,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
     });
 
-    expect(screen.getByTestId('switch-showAccountHeader')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Show account header' })).toBeInTheDocument();
 
     await act(async () => {
       useAccountsStore.setState({

@@ -77,6 +77,7 @@ export function SearchFilter() {
                 <Stack direction="horizontal" gap="condensed">
                   <PersonIcon size={Size.SMALL} />
                   <Text
+                    aria-disabled={!detailedNotifications}
                     className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
                     Author (author:handle)
@@ -85,6 +86,7 @@ export function SearchFilter() {
                 <Stack direction="horizontal" gap="condensed">
                   <CommentIcon size={Size.SMALL} />
                   <Text
+                    aria-disabled={!detailedNotifications}
                     className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
                     Commenter (commenter:handle)

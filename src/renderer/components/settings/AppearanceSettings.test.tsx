@@ -35,7 +35,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('choice-designLanguage-glass'));
+    await userEvent.click(screen.getByRole('button', { name: 'Glass' }));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
@@ -65,18 +65,18 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     });
 
     // Zoom Out
-    await userEvent.click(screen.getByTestId('settings-zoom-out'));
+    await userEvent.click(screen.getByRole('button', { name: 'Zoom out' }));
     expect(zoomOutSpy).toHaveBeenCalledTimes(1);
 
-    await userEvent.click(screen.getByTestId('settings-zoom-out'));
+    await userEvent.click(screen.getByRole('button', { name: 'Zoom out' }));
     expect(zoomOutSpy).toHaveBeenCalledTimes(2);
 
     // Zoom In
-    await userEvent.click(screen.getByTestId('settings-zoom-in'));
+    await userEvent.click(screen.getByRole('button', { name: 'Zoom in' }));
     expect(zoomInSpy).toHaveBeenCalledTimes(1);
 
     // Zoom Reset
-    await userEvent.click(screen.getByTestId('settings-zoom-reset'));
+    await userEvent.click(screen.getByRole('button', { name: 'Reset zoom' }));
     expect(zoomResetSpy).toHaveBeenCalledTimes(1);
   });
 

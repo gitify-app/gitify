@@ -40,6 +40,7 @@ export function SettingsChoice({
 }: Readonly<SettingsChoiceProps>) {
   const id = useId();
   const labelId = `${name}-${id}-label`;
+  const visibleLabelId = `${name}-${id}-visible-label`;
   const captionId = `${name}-${id}-caption`;
   const selectId = `${name}-${id}-select`;
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -123,6 +124,9 @@ export function SettingsChoice({
     <div>
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-1">
+          <span className="sr-only" id={labelId}>
+            {label}
+          </span>
           {/* Primer's unlayered `button { font: inherit }` outranks Tailwind's
               utilities, so the label typography is marked important to match
               the row labels. */}
@@ -133,7 +137,7 @@ export function SettingsChoice({
               disabled && 'cursor-not-allowed opacity-60',
             )}
             disabled={disabled}
-            id={labelId}
+            id={visibleLabelId}
             onClick={focusControl}
             tabIndex={-1}
             type="button"
