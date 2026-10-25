@@ -1,20 +1,23 @@
 version: v1
 
+# Title matchers accept the optional `!` breaking-change marker (e.g.
+# `feat(auth)!: ...`) so a breaking PR still earns its semantic label and
+# passes the "Semantic Pull Request" status check.
 labels:
   - label: 'bug'
     sync: true
     matcher:
-      title: '^fix(\((?!deps)[\w/]+\))?: .*'
+      title: '^fix(\((?!deps)[\w/]+\))?!?: .*'
 
   - label: 'build'
     sync: true
     matcher:
-      title: '^(ci|build)(\([\w/]+\))?: .*'
+      title: '^(ci|build)(\([\w/]+\))?!?: .*'
 
   - label: 'chore'
     sync: true
     matcher:
-      title: '^chore(\((?!deps)[\w/]+\))?: (?!release ).*'
+      title: '^chore(\((?!deps)[\w/]+\))?!?: (?!release ).*'
 
   - label: 'dependency'
     sync: true
@@ -25,32 +28,32 @@ labels:
   - label: 'forge:github'
     sync: true
     matcher:
-      title: '^\w+\((forge\/)?github\): .*'
+      title: '^\w+\((forge\/)?github\)!?: .*'
 
   - label: 'forge:bitbucket'
     sync: true
     matcher:
-      title: '^\w+\((forge\/)?bitbucket\): .*'
+      title: '^\w+\((forge\/)?bitbucket\)!?: .*'
 
   - label: 'forge:gitea'
     sync: true
     matcher:
-      title: '^\w+\((forge\/)?(gitea|codeberg|forgejo)\): .*'
+      title: '^\w+\((forge\/)?(gitea|codeberg|forgejo)\)!?: .*'
 
   - label: 'documentation'
     sync: true
     matcher:
-      title: '^docs(\([\w/]+\))?: .*'
+      title: '^docs(\([\w/]+\))?!?: .*'
 
   - label: 'enhancement'
     sync: true
     matcher:
-      title: '^feat(\([\w/]+\))?: .*'
+      title: '^feat(\([\w/]+\))?!?: .*'
 
   - label: 'refactor'
     sync: true
     matcher:
-      title: '^(refactor|perf)(\([\w/]+\))?: .*'
+      title: '^(refactor|perf)(\([\w/]+\))?!?: .*'
 
   - label: 'release'
     sync: true
@@ -60,7 +63,7 @@ labels:
   - label: 'test'
     sync: true
     matcher:
-      title: '^test(\([\w/]+\))?: .*'
+      title: '^test(\([\w/]+\))?!?: .*'
 
 checks:
   - context: 'Semantic Pull Request'
