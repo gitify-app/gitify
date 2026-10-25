@@ -150,6 +150,18 @@ const sharedImportBoundaryPattern = {
     'Process boundary: shared code must not import main, preload, or renderer modules (see ARCHITECTURE.md).',
 };
 
+const mainImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['main']),
+  allowTypeImports: true,
+  message: 'Process boundary: preload must not import main (see ARCHITECTURE.md).',
+};
+
+const preloadImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['preload']),
+  allowTypeImports: true,
+  message: 'Process boundary: main must not import preload (see ARCHITECTURE.md).',
+};
+
 const forgeSpecificBoundaryPattern = rendererBoundaryPattern(
   ['forges/github', 'forges/gitlab', 'forges/gitea', 'forges/bitbucket'],
   'Renderer boundary: shared code must use the forge adapter instead of importing a forge-specific module (see ARCHITECTURE.md).',
@@ -495,25 +507,36 @@ export default defineConfig({
         },
       },
       {
-        // Process boundary: main and preload must not reach into the renderer.
-        files: [
-          'src/main/**/*.ts',
-          'src/main/**/*.tsx',
-          'src/preload/**/*.ts',
-          'src/preload/**/*.tsx',
-        ],
+        // Process boundary: main must not reach into preload or the renderer.
+        files: ['src/main/**/*.ts', 'src/main/**/*.tsx'],
         excludeFiles: TEST_EXCLUDES,
         rules: {
-          'no-restricted-imports': ['error', { patterns: [rendererImportBoundaryPattern] }],
+          'no-restricted-imports': [
+            'error',
+            { patterns: [rendererImportBoundaryPattern, preloadImportBoundaryPattern] },
+          ],
+        },
+      },
+      {
+        // Process boundary: preload must not reach into main or the renderer.
+        files: ['src/preload/**/*.ts', 'src/preload/**/*.tsx'],
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'no-restricted-imports': [
+            'error',
+            { patterns: [rendererImportBoundaryPattern, mainImportBoundaryPattern] },
+          ],
         },
       },
       {
         // Process boundary: shared code is imported by both processes and must
-        // stay independent of main, preload, and renderer modules.
+        // stay independent of main, preload, and renderer modules. It is also
+        // bundled into the renderer, so it must not import Node builtins.
         files: ['src/shared/**/*.ts', 'src/shared/**/*.tsx'],
         excludeFiles: TEST_EXCLUDES,
         rules: {
           'no-restricted-imports': ['error', { patterns: [sharedImportBoundaryPattern] }],
+          'import/no-nodejs-modules': 'error',
         },
       },
       {
@@ -535,6 +558,8 @@ export default defineConfig({
         files: TEST_EXCLUDES,
         rules: {
           'vitest/no-focused-tests': 'error',
+          'vitest/no-disabled-tests': 'error',
+          'vitest/no-standalone-expect': 'error',
           // Vitest supports expect(actual, message); the default maxArgs is 1.
           'vitest/valid-expect': ['error', { maxArgs: 2 }],
           // Snapshot hints are not enforced; snapshots are being phased out.
