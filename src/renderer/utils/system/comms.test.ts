@@ -23,7 +23,7 @@ import {
 
 describe('renderer/utils/comms.ts', () => {
   describe('openExternalLink', () => {
-    it('should open an external link', () => {
+    it('opens an external link', () => {
       useSettingsStore.setState({ openLinks: OpenPreference.BACKGROUND });
 
       openExternalLink('https://gitify.io/' as Link);
@@ -32,7 +32,7 @@ describe('renderer/utils/comms.ts', () => {
       expect(window.gitify.openExternalLink).toHaveBeenCalledWith('https://gitify.io/', false);
     });
 
-    it('should open in foreground when preference set to FOREGROUND', () => {
+    it('opens in foreground when preference set to FOREGROUND', () => {
       useSettingsStore.setState({ openLinks: OpenPreference.FOREGROUND });
 
       openExternalLink('https://gitify.io/' as Link);
@@ -40,14 +40,14 @@ describe('renderer/utils/comms.ts', () => {
       expect(window.gitify.openExternalLink).toHaveBeenCalledWith('https://gitify.io/', true);
     });
 
-    it('should use default open preference if user settings not found', () => {
+    it('uses default open preference if user settings not found', () => {
       openExternalLink('https://gitify.io/' as Link);
 
       expect(window.gitify.openExternalLink).toHaveBeenCalledTimes(1);
       expect(window.gitify.openExternalLink).toHaveBeenCalledWith('https://gitify.io/', true);
     });
 
-    it('should ignore opening external local links file:///', () => {
+    it('ignores opening external local links file:///', () => {
       openExternalLink('file:///Applications/SomeApp.app' as Link);
 
       expect(window.gitify.openExternalLink).not.toHaveBeenCalled();

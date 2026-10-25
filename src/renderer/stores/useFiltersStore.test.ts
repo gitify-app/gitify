@@ -6,13 +6,13 @@ import { DEFAULT_FILTERS_STATE } from './defaults';
 import useFiltersStore from './useFiltersStore';
 
 describe('renderer/stores/useFiltersStore.ts', () => {
-  test('should start with default filters', () => {
+  test('starts with default filters', () => {
     const { result } = renderHook(() => useFiltersStore());
 
     expect(result.current).toMatchObject(DEFAULT_FILTERS_STATE);
   });
 
-  test('should update a filter (add value)', () => {
+  test('updates a filter (add value)', () => {
     const { result } = renderHook(() => useFiltersStore());
 
     act(() => {
@@ -22,7 +22,7 @@ describe('renderer/stores/useFiltersStore.ts', () => {
     expect(result.current.subjectTypes).toContain('Issue');
   });
 
-  test('should update a filter (remove value)', () => {
+  test('updates a filter (remove value)', () => {
     const { result } = renderHook(() => useFiltersStore());
 
     act(() => {
@@ -33,7 +33,7 @@ describe('renderer/stores/useFiltersStore.ts', () => {
     expect(result.current.subjectTypes).not.toContain('Issue');
   });
 
-  test('should reset filters to default', () => {
+  test('resets filters to default', () => {
     const { result } = renderHook(() => useFiltersStore());
 
     act(() => {

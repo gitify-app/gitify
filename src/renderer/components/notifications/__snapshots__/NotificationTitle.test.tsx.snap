@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/NotificationTitle.tsx > should apply truncate className when wrapNotificationTitle is false 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > applies truncate className when wrapNotificationTitle is false 1`] = `
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
@@ -22,7 +22,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should apply 
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx > should not apply truncate className when wrapNotificationTitle is true 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > does not apply truncate className when wrapNotificationTitle is true 1`] = `
 <div>
   <span
     class="prc-Text-Text-9mHv3"
@@ -44,7 +44,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should not ap
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx > should render plain text without code blocks 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > renders plain text without code blocks 1`] = `
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
@@ -60,7 +60,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with code block at the end 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > renders text with code block at the end 1`] = `
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
@@ -82,7 +82,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with code block at the start 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > renders text with code block at the start 1`] = `
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
@@ -104,7 +104,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with multiple inline code blocks 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > renders text with multiple inline code blocks 1`] = `
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"
@@ -144,7 +144,7 @@ exports[`renderer/components/notifications/NotificationTitle.tsx > should render
 </div>
 `;
 
-exports[`renderer/components/notifications/NotificationTitle.tsx > should render text with single inline code block 1`] = `
+exports[`renderer/components/notifications/NotificationTitle.tsx > renders text with single inline code block 1`] = `
 <div>
   <span
     class="truncate prc-Text-Text-9mHv3"

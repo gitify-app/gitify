@@ -26,7 +26,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
     navigateMock.mockReset();
   });
 
-  it('should change the groupBy choice', async () => {
+  it('changes the groupBy choice', async () => {
     await act(async () => {
       renderWithProviders(<InboxSettings />);
     });
@@ -38,7 +38,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
   });
 
   describe('fetch interval settings', () => {
-    it('should update the fetch interval values when using the buttons', async () => {
+    it('updates the fetch interval values when using the buttons', async () => {
       await act(async () => {
         renderWithProviders(<InboxSettings />);
       });
@@ -72,7 +72,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
     });
 
-    it('should prevent going lower than minimum interval', async () => {
+    it('prevents going lower than minimum interval', async () => {
       await act(async () => {
         renderWithProviders(<InboxSettings />, {
           settings: {
@@ -98,7 +98,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
     });
 
-    it('should prevent going above maximum interval', async () => {
+    it('prevents going above maximum interval', async () => {
       await act(async () => {
         renderWithProviders(<InboxSettings />, {
           settings: {
@@ -137,7 +137,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
     ['Show account header', 'showAccountHeader'],
     ['Show full notification title', 'wrapNotificationTitle'],
     ['Delay notification removal', 'delayNotificationState'],
-  ] as const)('should toggle %s switch', async (label, setting) => {
+  ] as const)('toggles %s switch', async (label, setting) => {
     await act(async () => {
       renderWithProviders(<InboxSettings />, {
         accounts: [mockGitHubCloudAccount],

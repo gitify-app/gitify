@@ -15,7 +15,7 @@ import { NotificationFooter, type NotificationFooterProps } from './Notification
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   vi.spyOn(globalThis.Date, 'now').mockImplementation(() => new Date('2024').valueOf());
 
-  it('should render itself & its children', async () => {
+  it('renders itself & its children', async () => {
     const props: NotificationFooterProps = {
       notification: mockGitifyNotification,
     };
@@ -38,7 +38,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(tree.container.querySelector('.pr-\\[5\\.5rem\\]')).toBeInTheDocument();
   });
 
-  describe('security alerts should use github icon for avatar', () => {
+  describe('security alert avatars', () => {
     it('Repository Dependabot Alerts Thread', async () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
@@ -68,7 +68,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     });
   });
 
-  it('should default to known avatar if no user found', async () => {
+  it('defaults to known avatar if no user found', async () => {
     const mockNotification = mockGitifyNotification;
     mockNotification.subject.user = undefined;
 
@@ -91,7 +91,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(screen.getByText('Agent Session Finished')).toBeInTheDocument();
   });
 
-  it('should open notification user profile', async () => {
+  it('opens notification user profile', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     const props: NotificationFooterProps = {
@@ -125,7 +125,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       'copilot-pull-request-reviewer',
       'https://github.com/apps/copilot-pull-request-reviewer',
     ],
-  ])('should format a GitHub App actor as %s in the avatar alt', (label, login, htmlUrl) => {
+  ])('formats a GitHub App actor as %s in the avatar alt', (label, login, htmlUrl) => {
     const notification = {
       ...mockGitifyNotification,
       subject: {
@@ -147,7 +147,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(screen.queryByTestId('notification-user-badge')).not.toBeInTheDocument();
   });
 
-  it('should not render a badge for an unsupported actor', () => {
+  it('does not render a badge for an unsupported actor', () => {
     const notification = {
       ...mockGitifyNotification,
       subject: {

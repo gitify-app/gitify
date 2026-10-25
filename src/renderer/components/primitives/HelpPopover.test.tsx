@@ -11,14 +11,14 @@ describe('renderer/components/primitives/HelpPopover.tsx', () => {
     content: 'This is some help text',
   };
 
-  it('should render', () => {
+  it('renders', () => {
     renderWithProviders(<HelpPopover {...props} />);
 
     expect(screen.getByTestId('tooltip-icon-test')).toBeInTheDocument();
     expect(screen.queryByText(props.content as string)).not.toBeInTheDocument();
   });
 
-  it('should toggle (show/hide) help on clicking the icon', async () => {
+  it('toggles (show/hide) help on clicking the icon', async () => {
     renderWithProviders(<HelpPopover {...props} />);
 
     const icon = screen.getByTestId('tooltip-icon-test');
@@ -30,7 +30,7 @@ describe('renderer/components/primitives/HelpPopover.tsx', () => {
     expect(screen.queryByText(props.content as string)).not.toBeInTheDocument();
   });
 
-  it('should hide help when its scroll container scrolls', async () => {
+  it('hides help when its scroll container scrolls', async () => {
     renderWithProviders(
       <div data-testid="scroll-container" style={{ overflowY: 'auto' }}>
         <div style={{ height: 400 }}>
@@ -53,7 +53,7 @@ describe('renderer/components/primitives/HelpPopover.tsx', () => {
     });
   });
 
-  it('should hide help when clicking outside', async () => {
+  it('hides help when clicking outside', async () => {
     renderWithProviders(<HelpPopover {...props} />);
 
     const icon = screen.getByTestId('tooltip-icon-test');

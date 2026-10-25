@@ -19,7 +19,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
-  it('should change the theme mode dropdown', async () => {
+  it('changes the theme mode dropdown', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />);
     });
@@ -30,7 +30,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSettingSpy).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
-  it('should change the design language dropdown', async () => {
+  it('changes the design language dropdown', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />);
     });
@@ -55,7 +55,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(screen.queryByRole('option', { name: 'Dark Tritanopia' })).not.toBeInTheDocument();
   });
 
-  it('should update the zoom values when using the zoom buttons', async () => {
+  it('updates the zoom values when using the zoom buttons', async () => {
     const zoomOutSpy = vi.spyOn(zoom, 'decreaseZoom').mockImplementation(vi.fn());
     const zoomInSpy = vi.spyOn(zoom, 'increaseZoom').mockImplementation(vi.fn());
     const zoomResetSpy = vi.spyOn(zoom, 'resetZoomLevel').mockImplementation(vi.fn());
@@ -80,7 +80,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(zoomResetSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the increase contrast checkbox', async () => {
+  it('toggles the increase contrast checkbox', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />);
     });
@@ -101,7 +101,7 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(screen.queryByTestId('switch-increaseContrast')).not.toBeInTheDocument();
   });
 
-  it('should toggle the status icon colors checkbox for Glass', async () => {
+  it('toggles the status icon colors checkbox for Glass', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
         settings: { designLanguage: DesignLanguage.GLASS },

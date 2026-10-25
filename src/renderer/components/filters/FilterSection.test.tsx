@@ -25,7 +25,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     updateFilterSpy = vi.spyOn(useFiltersStore.getState(), 'updateFilter');
   });
 
-  describe('should render itself & its children', () => {
+  describe('rendering', () => {
     it('with detailed notifications enabled', () => {
       renderWithProviders(
         <FilterSection
@@ -81,7 +81,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     });
   });
 
-  it('should be able to toggle filter value - none already set', async () => {
+  it('can toggle filter value - none already set', async () => {
     await act(async () => {
       renderWithProviders(
         <FilterSection
@@ -102,7 +102,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     expect(updateFilterSpy).toHaveBeenCalledWith(mockFilterSetting, 'open', true);
   });
 
-  it('should be able to toggle filter value - some filters already set', async () => {
+  it('can toggle filter value - some filters already set', async () => {
     await act(async () => {
       renderWithProviders(
         <FilterSection
@@ -126,7 +126,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     expect(updateFilterSpy).toHaveBeenCalledWith(mockFilterSetting, 'closed', true);
   });
 
-  it('should count notifications from the currently filtered list', () => {
+  it('counts notifications from the currently filtered list', () => {
     const filteredNotifications = [
       mockPartialGitifyNotification({ state: 'OPEN' }),
       mockPartialGitifyNotification({ state: 'CLOSED' }),
@@ -158,7 +158,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
     expect(counters.reduce((sum, value) => sum + value, 0)).toBe(3);
   });
 
-  it('should rescale counts when a filter in another section is toggled', () => {
+  it('rescales counts when a filter in another section is toggled', () => {
     renderWithProviders(
       <FilterSection
         filter={mockFilter}

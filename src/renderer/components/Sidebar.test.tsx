@@ -70,7 +70,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     }
   });
 
-  it('should hide host shortcuts when logged out', () => {
+  it('hides host shortcuts when logged out', () => {
     renderWithProviders(<Sidebar />, {
       initialEntries: ['/landing'],
       accounts: [],
@@ -81,7 +81,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     expect(screen.queryByTestId('sidebar-my-pull-requests')).not.toBeInTheDocument();
   });
 
-  it('should navigate home when clicking logo', async () => {
+  it('navigates home when clicking logo', async () => {
     renderWithProviders(<Sidebar />);
 
     await userEvent.click(screen.getByTestId('sidebar-home'));
@@ -226,7 +226,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   });
 
   describe('Refresh Notifications', () => {
-    it('should refresh the notifications when status is not loading', async () => {
+    it('refreshes the notifications when status is not loading', async () => {
       renderWithProviders(<Sidebar />, {
         accounts: [mockGitHubCloudAccount],
         fetchNotifications: fetchNotificationsMock,
@@ -238,7 +238,7 @@ describe('renderer/components/Sidebar.tsx', () => {
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should not refresh the notifications when status is loading', async () => {
+    it('does not refresh the notifications when status is loading', async () => {
       renderWithProviders(<Sidebar />, {
         accounts: [mockGitHubCloudAccount],
         fetchNotifications: fetchNotificationsMock,
@@ -311,7 +311,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
   });
 
-  it('should quit the app', async () => {
+  it('quits the app', async () => {
     const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
     renderWithProviders(<Sidebar />, {

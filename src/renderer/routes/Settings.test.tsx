@@ -107,7 +107,7 @@ describe('renderer/routes/Settings.tsx', () => {
     expect(screen.getByRole('button', { name: 'Reset Settings' })).toBeInTheDocument();
   });
 
-  it('should separate inbox behavior from alert delivery', async () => {
+  it('separates inbox behavior from alert delivery', async () => {
     await act(async () => {
       renderWithProviders(<SettingsRoute />, {
         accounts: [mockGitHubCloudAccount],
@@ -143,7 +143,7 @@ describe('renderer/routes/Settings.tsx', () => {
     expect(within(system).queryByTestId('switch-showUpdateNotifications')).not.toBeInTheDocument();
   });
 
-  it('should go back by pressing the icon', async () => {
+  it('goes back by pressing the icon', async () => {
     await act(async () => {
       renderWithProviders(<SettingsRoute />, {
         initialEntries: ['/settings'],

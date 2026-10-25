@@ -124,7 +124,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('fetchAuthenticatedUserDetails - should fetch authenticated user', async () => {
+  it('fetchAuthenticatedUserDetails - fetches authenticated user', async () => {
     await fetchAuthenticatedUserDetails(mockGitHubCloudAccount);
 
     expect(createOctokitClientUncachedSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
@@ -132,7 +132,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {
-    it('should list only participating notifications for user', async () => {
+    it('lists only participating notifications for user', async () => {
       useSettingsStore.setState({
         participating: true,
         fetchReadNotifications: false,
@@ -152,7 +152,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       });
     });
 
-    it('should list participating and watching notifications for user', async () => {
+    it('lists participating and watching notifications for user', async () => {
       useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: false,
@@ -172,7 +172,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       });
     });
 
-    it('should list read and done notifications for user', async () => {
+    it('lists read and done notifications for user', async () => {
       useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: true,
@@ -192,7 +192,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       });
     });
 
-    it('should unpaginate notifications list for user', async () => {
+    it('unpaginates notifications list for user', async () => {
       useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: false,
@@ -216,7 +216,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       );
     });
 
-    it('should capture the X-Poll-Interval header for the account', async () => {
+    it('captures the X-Poll-Interval header for the account', async () => {
       useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: false,
@@ -234,7 +234,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(computeRefetchIntervalMs(0, [mockGitHubCloudAccount])).toBe(75000);
     });
 
-    it('should capture the X-Poll-Interval header when paginating', async () => {
+    it('captures the X-Poll-Interval header when paginating', async () => {
       useSettingsStore.setState({
         participating: false,
         fetchReadNotifications: false,
@@ -251,7 +251,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('markNotificationThreadAsRead - should mark notification thread as read', async () => {
+  it('markNotificationThreadAsRead - marks notification thread as read', async () => {
     await markNotificationThreadAsRead(mockGitHubCloudAccount, mockThreadId);
 
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
@@ -260,7 +260,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('markNotificationThreadAsDone - should mark notification thread as done', async () => {
+  it('markNotificationThreadAsDone - marks notification thread as done', async () => {
     await markNotificationThreadAsDone(mockGitHubCloudAccount, mockThreadId);
 
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
@@ -269,7 +269,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('ignoreNotificationThreadSubscription - should ignore notification thread subscription', async () => {
+  it('ignoreNotificationThreadSubscription - ignores notification thread subscription', async () => {
     await ignoreNotificationThreadSubscription(mockGitHubCloudAccount, mockThreadId);
 
     expect(createOctokitClientSpy).toHaveBeenCalledWith(mockGitHubCloudAccount, 'rest');
@@ -279,7 +279,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('getCommit - should fetch commit details', async () => {
+  it('getCommit - fetches commit details', async () => {
     const commitUrl = 'https://api.github.com/repos/gitify-app/gitify/commits/abc123' as Link;
 
     await getCommit(mockGitHubCloudAccount, commitUrl);
@@ -290,7 +290,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('getCommitComment - should fetch commit comment details', async () => {
+  it('getCommitComment - fetches commit comment details', async () => {
     const commentUrl = 'https://api.github.com/repos/gitify-app/gitify/comments/456' as Link;
 
     await getCommitComment(mockGitHubCloudAccount, commentUrl);
@@ -301,7 +301,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     });
   });
 
-  it('getRelease - should fetch release details', async () => {
+  it('getRelease - fetches release details', async () => {
     const releaseUrl = 'https://api.github.com/repos/gitify-app/gitify/releases/789' as Link;
 
     await getRelease(mockGitHubCloudAccount, releaseUrl);

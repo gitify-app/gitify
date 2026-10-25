@@ -28,7 +28,7 @@ vi.mock('../client', async () => {
 
 describe('renderer/utils/notifications/handlers/issue.ts', () => {
   describe('supportsMergedQueryEnrichment', () => {
-    it('should support merge query', () => {
+    it('supports merge query', () => {
       expect(issueHandler.supportsMergedQueryEnrichment).toBeTruthy();
     });
   });

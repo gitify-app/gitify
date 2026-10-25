@@ -143,7 +143,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   });
 
   describe('notification interactions', () => {
-    it('should open a notification in the browser - click', async () => {
+    it('opens a notification in the browser - click', async () => {
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -162,7 +162,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should open a notification in the browser - delay notification setting enabled', async () => {
+    it('opens a notification in the browser - delay notification setting enabled', async () => {
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -185,7 +185,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should open a notification in browser & mark it as done', async () => {
+    it('opens a notification in browser & mark it as done', async () => {
       const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -204,7 +204,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
+    it('marks as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
       const markNotificationsAsReadMock = vi.fn();
       const markNotificationsAsDoneMock = vi.fn();
 
@@ -230,7 +230,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).not.toHaveBeenCalled();
     });
 
-    it('should mark notifications as read', async () => {
+    it('marks notifications as read', async () => {
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -248,7 +248,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should hide mark as read button when notification is already read', async () => {
+    it('hides mark as read button when notification is already read', async () => {
       const props: NotificationRowProps = {
         notification: {
           ...mockGitifyNotification,
@@ -262,7 +262,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(screen.queryByTestId('notification-mark-as-read')).not.toBeInTheDocument();
     });
 
-    it('should mark notifications as done', async () => {
+    it('marks notifications as done', async () => {
       const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -280,7 +280,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should hide mark as done button when notification is already read', async () => {
+    it('hides mark as done button when notification is already read', async () => {
       const props: NotificationRowProps = {
         notification: {
           ...mockGitifyNotification,
@@ -294,7 +294,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(screen.queryByTestId('notification-mark-as-done')).not.toBeInTheDocument();
     });
 
-    it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
+    it('shows mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
         isRepositoryAnimatingExit: false,
@@ -308,7 +308,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
     });
 
-    it('should unsubscribe from a notification thread', async () => {
+    it('unsubscribes from a notification thread', async () => {
       const unsubscribeNotificationMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -325,7 +325,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should not show unsubscribe for Gitea notifications', () => {
+    it('does not show unsubscribe for Gitea notifications', () => {
       const props: NotificationRowProps = {
         notification: mockGiteaGitifyNotification,
         isRepositoryAnimatingExit: false,

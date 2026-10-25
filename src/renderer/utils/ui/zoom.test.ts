@@ -13,7 +13,7 @@ import {
 describe('renderer/utils/zoom.ts', () => {
   window.gitify.zoom.setLevel = vi.fn();
 
-  it('should convert percentage to zoom level', () => {
+  it('converts percentage to zoom level', () => {
     expect(zoomPercentageToLevel(100 as Percentage)).toBe(0);
     expect(zoomPercentageToLevel(50 as Percentage)).toBe(-1);
     expect(zoomPercentageToLevel(0 as Percentage)).toBe(-2);
@@ -22,7 +22,7 @@ describe('renderer/utils/zoom.ts', () => {
     expect(zoomPercentageToLevel(undefined as unknown as Percentage)).toBe(0);
   });
 
-  it('should convert zoom level to percentage', () => {
+  it('converts zoom level to percentage', () => {
     expect(zoomLevelToPercentage(0)).toBe(100);
     expect(zoomLevelToPercentage(-1)).toBe(50);
     expect(zoomLevelToPercentage(-2)).toBe(0);

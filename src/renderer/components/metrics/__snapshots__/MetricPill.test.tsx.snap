@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/MetricPill.tsx > should render with metric 1`] = `
+exports[`renderer/components/metrics/MetricPill.tsx > renders with metric 1`] = `
 <div>
   <button
     aria-describedby="_r_0_"
@@ -63,7 +63,7 @@ exports[`renderer/components/metrics/MetricPill.tsx > should render with metric 
 </div>
 `;
 
-exports[`renderer/components/metrics/MetricPill.tsx > should render without metric 1`] = `
+exports[`renderer/components/metrics/MetricPill.tsx > renders without metric 1`] = `
 <div>
   <button
     aria-describedby="_r_1_"
