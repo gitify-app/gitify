@@ -258,7 +258,7 @@ export default defineConfig({
           unnamedComponents: 'arrow-function',
         },
       ],
-      'react/exhaustive-deps': 'warn',
+      'react/exhaustive-deps': 'error',
       'react/rules-of-hooks': 'error',
       'react/self-closing-comp': 'error',
       'typescript/no-inferrable-types': 'error',
