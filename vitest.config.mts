@@ -18,7 +18,7 @@ export default defineConfig({
   test: {
     globals: true,
     pool: 'vmThreads',
-    isolate: false,
+    isolate: true,
     clearMocks: true,
     unstubEnvs: true,
     unstubGlobals: true,
@@ -56,6 +56,7 @@ export default defineConfig({
           exclude: [...defaultExclude, '**/*.visual.test.tsx'],
           setupFiles: [
             './src/__helpers__/electron-log.setup.ts',
+            './src/__helpers__/restore-test-spies.setup.ts',
             './src/renderer/__helpers__/vitest.setup.ts',
           ],
         },
@@ -67,7 +68,10 @@ export default defineConfig({
           name: 'node [main, shared]',
           environment: 'node',
           include: ['src/shared/**/*.test.{ts,tsx}', 'src/main/**/*.test.{ts,tsx}'],
-          setupFiles: ['./src/__helpers__/electron-log.setup.ts'],
+          setupFiles: [
+            './src/__helpers__/electron-log.setup.ts',
+            './src/__helpers__/restore-test-spies.setup.ts',
+          ],
         },
       },
       {
