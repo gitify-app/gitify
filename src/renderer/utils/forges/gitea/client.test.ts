@@ -130,12 +130,12 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
 
       useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
 
+      // The exact match also proves the thrown error does not include the
+      // response body — a hostile server could echo back the Authorization
+      // header into logs.
       await expect(listGiteaNotifications(mockGiteaAccount)).rejects.toThrow(
         /^Gitea API 403 Forbidden$/,
       );
-      // The thrown error must not include the response body — a hostile
-      // server could echo back the Authorization header into logs.
-      await expect(listGiteaNotifications(mockGiteaAccount)).rejects.toThrow();
     });
   });
 

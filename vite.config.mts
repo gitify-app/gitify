@@ -535,14 +535,12 @@ export default defineConfig({
         files: TEST_EXCLUDES,
         rules: {
           'vitest/no-focused-tests': 'error',
-          // Only `no-focused-tests` is opted into. The plugin's other
-          // correctness rules would require a broad test refactor.
-          'vitest/expect-expect': 'off',
-          'vitest/no-conditional-expect': 'off',
+          // Vitest supports expect(actual, message); the default maxArgs is 1.
+          'vitest/valid-expect': ['error', { maxArgs: 2 }],
+          // Snapshot hints are not enforced; snapshots are being phased out.
           'vitest/prefer-snapshot-hint': 'off',
+          // Typing every `vi.fn()` mock is a separate, large test refactor.
           'vitest/require-mock-type-parameters': 'off',
-          'vitest/require-to-throw-message': 'off',
-          'vitest/valid-expect': 'off',
           'typescript/no-explicit-any': 'off',
           'no-console': 'off',
           // Mocks are typed as the real Electron/interface classes, so
@@ -550,6 +548,24 @@ export default defineConfig({
           // even though the runtime value is a `vi.fn()`. The rule is a false
           // positive for test doubles, so scope it to non-test code.
           'typescript/unbound-method': 'off',
+        },
+      },
+      {
+        files: ['**/*.visual.test.tsx'],
+        rules: {
+          // Visual assertions live in the `captureRoute` helper.
+          'vitest/expect-expect': [
+            'error',
+            {
+              assertFunctionNames: [
+                'expect',
+                'expectTypeOf',
+                'assert',
+                'assertType',
+                'captureRoute',
+              ],
+            },
+          ],
         },
       },
       {
