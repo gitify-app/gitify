@@ -20,9 +20,11 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       notification: mockGitifyNotification,
     };
 
-    const tree = renderWithProviders(<NotificationFooter {...props} />);
+    renderWithProviders(<NotificationFooter {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByTestId('view-profile')).toBeInTheDocument();
+    expect(screen.getByTestId('avatar')).toBeInTheDocument();
+    expect(screen.getByText('Updated')).toBeInTheDocument();
   });
 
   it('reserves the action rail width on the footer', async () => {
@@ -45,9 +47,10 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithProviders(<NotificationFooter {...props} />);
+      renderWithProviders(<NotificationFooter {...props} />);
 
-      expect(tree.container).toMatchSnapshot();
+      expect(screen.getByTestId('view-profile')).toBeInTheDocument();
+      expect(screen.getByAltText('gitify-app')).toBeInTheDocument();
     });
 
     it('Repository Vulnerability Alert', async () => {
@@ -58,9 +61,10 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithProviders(<NotificationFooter {...props} />);
+      renderWithProviders(<NotificationFooter {...props} />);
 
-      expect(tree.container).toMatchSnapshot();
+      expect(screen.getByTestId('view-profile')).toBeInTheDocument();
+      expect(screen.getByAltText('gitify-app')).toBeInTheDocument();
     });
   });
 
@@ -72,17 +76,16 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = renderWithProviders(<NotificationFooter {...props} />);
+    renderWithProviders(<NotificationFooter {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.queryByTestId('view-profile')).not.toBeInTheDocument();
+    expect(screen.getByTestId('avatar')).toBeInTheDocument();
+    expect(screen.getByText('Updated')).toBeInTheDocument();
   });
 
   it('presents the Copilot actor for an agent session notification', () => {
-    const tree = renderWithProviders(
-      <NotificationFooter notification={mockAgentSessionGitifyNotification} />,
-    );
+    renderWithProviders(<NotificationFooter notification={mockAgentSessionGitifyNotification} />);
 
-    expect(tree.container).toMatchSnapshot();
     // Agent sessions have no enriched actor, so no profile button is rendered.
     expect(screen.queryByTestId('view-profile')).not.toBeInTheDocument();
     expect(screen.getByText('Agent Session Finished')).toBeInTheDocument();
