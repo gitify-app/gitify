@@ -57,6 +57,7 @@ export default defineConfig({
           setupFiles: [
             './src/__helpers__/electron-log.setup.ts',
             './src/__helpers__/restore-test-spies.setup.ts',
+            './src/__helpers__/fail-on-act-warnings.setup.ts',
             './src/renderer/__helpers__/vitest.setup.ts',
           ],
         },
