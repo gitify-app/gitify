@@ -6,10 +6,10 @@ import { Stack, Text } from '@primer/react';
 import { useNotifications } from '../../hooks/useNotifications';
 import { type FiltersState, useFiltersStore, useSettingsStore } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
 import { SectionHeading } from '../primitives/SectionHeading';
 
 import type { Filter } from '../../utils/notifications/filters';
+import { FilterCheckbox } from './FilterCheckbox';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
 export interface FilterSectionProps<K extends keyof FiltersState> {
@@ -88,7 +88,7 @@ function FilterSectionComponent<K extends keyof FiltersState>({
             const count = filterCounts.get(type) ?? 0;
 
             return (
-              <Checkbox
+              <FilterCheckbox
                 checked={isChecked}
                 counter={count}
                 disabled={filter.requiresDetailsNotifications && !detailedNotifications}

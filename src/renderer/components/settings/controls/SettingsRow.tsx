@@ -2,7 +2,7 @@ import { type ReactNode, useId } from 'react';
 
 import { cn } from 'cn';
 
-import { Tooltip } from '../../fields/Tooltip';
+import { HelpPopover } from '../../primitives/HelpPopover';
 
 export interface SettingsRowProps {
   name: string;
@@ -44,7 +44,7 @@ export function SettingsRow({
           <span className="text-sm font-medium text-gitify-font" id={labelId}>
             {label}
           </span>
-          {tooltip && <Tooltip name={`tooltip-${name}`} tooltip={tooltip} />}
+          {tooltip && <HelpPopover name={`tooltip-${name}`} content={tooltip} />}
         </div>
         <div className="shrink-0">{children}</div>
       </div>

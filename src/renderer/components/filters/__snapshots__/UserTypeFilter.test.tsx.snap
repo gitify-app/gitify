@@ -51,14 +51,20 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="tooltip-user-type"
+          class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
           data-testid="tooltip-icon-tooltip-user-type"
+          data-variant="invisible"
           id="tooltip-user-type"
           tabindex="0"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-question text-gitify-tooltip-icon"
+            class="octicon octicon-question"
             data-component="Octicon"
             display="inline-block"
             fill="currentColor"
@@ -87,24 +93,22 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
       data-wrap="nowrap"
     >
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Bot"
-          id="Bot"
+          id="filter-Bot"
+          name="Bot"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Bot"
+          for="filter-Bot"
         >
           Bot
         </label>
@@ -112,14 +116,20 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="tooltip-Bot"
+          class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
           data-testid="tooltip-icon-tooltip-Bot"
+          data-variant="invisible"
           id="tooltip-Bot"
           tabindex="0"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-question text-gitify-tooltip-icon"
+            class="octicon octicon-question"
             data-component="Octicon"
             display="inline-block"
             fill="currentColor"
@@ -136,89 +146,110 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           </svg>
         </button>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Organization"
-          id="Organization"
+          id="filter-Organization"
+          name="Organization"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Organization"
+          for="filter-Organization"
         >
           Organization
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-User"
-          id="User"
+          id="filter-User"
+          name="User"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="User"
+          for="filter-User"
         >
           User
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           1
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          1
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Other"
-          id="Other"
+          id="filter-Other"
+          name="Other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Other"
+          for="filter-Other"
         >
           Other
         </label>
@@ -226,14 +257,20 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="tooltip-Other"
+          class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
           data-testid="tooltip-icon-tooltip-Other"
+          data-variant="invisible"
           id="tooltip-Other"
           tabindex="0"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-question text-gitify-tooltip-icon"
+            class="octicon octicon-question"
             data-component="Octicon"
             display="inline-block"
             fill="currentColor"
@@ -250,10 +287,19 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           </svg>
         </button>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           3
+        </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          3
+          )
         </span>
       </div>
     </div>

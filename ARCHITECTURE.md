@@ -44,7 +44,7 @@ The renderer is layered. **Runtime imports flow in one direction only** — a mo
 - `stores/` holds client state (Zustand): persisted `accounts` and `settings`, session `filters` and notification action failures.
 - `stores/index.ts` is the public store facade for `hooks`, `components`, and `routes`. Lower layers (`utils`) import the specific store module instead (for example `stores/useFiltersStore`): the barrel re-exports every store and its dependencies, which would pull the account/auth/forge graph into leaf utilities and create cycles.
 - `utils` and `stores` are **peers** — they may reference each other. Neither may import `hooks`, `components`, or `routes`.
-- `components/` is grouped by feature (`notifications`, `filters`, `settings`, `login`, `fields`, `avatars`, `layout`, `metrics`, `primitives`).
+- `components/` is grouped by feature (`notifications`, `filters`, `settings`, `login`, `avatars`, `layout`, `metrics`, `primitives`).
 - The composition root (`App.tsx`, `index.tsx`) is the only place allowed to wire every layer together.
 
 ## State ownership

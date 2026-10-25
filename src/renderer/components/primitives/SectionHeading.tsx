@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import type { Icon } from '@primer/octicons-react';
 import { Heading, Stack } from '@primer/react';
 
-import { Tooltip } from '../fields/Tooltip';
+import { HelpPopover } from './HelpPopover';
 
 type SectionHeadingTag = 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
@@ -23,13 +23,13 @@ export function SectionHeading({ as = 'h4', ...props }: Readonly<SectionHeadingP
   const headingTag = as === 'legend' ? 'h4' : as;
 
   const tooltip = props.tooltip && (
-    <Tooltip
-      name={`tooltip-${name}`}
-      tooltip={
+    <HelpPopover
+      content={
         <Stack direction="vertical" gap="condensed">
           {props.tooltip}
         </Stack>
       }
+      name={`tooltip-${name}`}
     />
   );
 

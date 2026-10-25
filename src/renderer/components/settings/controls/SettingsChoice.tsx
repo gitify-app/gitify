@@ -4,7 +4,7 @@ import { SegmentedControl, Select } from '@primer/react';
 
 import { cn } from 'cn';
 
-import { Tooltip } from '../../fields/Tooltip';
+import { HelpPopover } from '../../primitives/HelpPopover';
 
 export interface SettingsChoiceOption {
   label: string;
@@ -140,7 +140,7 @@ export function SettingsChoice({
           >
             {label}
           </button>
-          {tooltip && <Tooltip name={`tooltip-${name}`} tooltip={tooltip} />}
+          {tooltip && <HelpPopover name={`tooltip-${name}`} content={tooltip} />}
         </div>
         <div className="shrink-0">{control}</div>
       </div>

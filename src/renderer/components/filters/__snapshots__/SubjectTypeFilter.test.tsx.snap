@@ -51,14 +51,20 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="tooltip-type"
+          class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
           data-testid="tooltip-icon-tooltip-type"
+          data-variant="invisible"
           id="tooltip-type"
           tabindex="0"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-question text-gitify-tooltip-icon"
+            class="octicon octicon-question"
             data-component="Octicon"
             display="inline-block"
             fill="currentColor"
@@ -87,430 +93,526 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
       data-wrap="nowrap"
     >
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Advisory"
-          id="Advisory"
+          id="filter-Advisory"
+          name="Advisory"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Advisory"
+          for="filter-Advisory"
         >
           Advisory
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Agent Session Thread"
-          id="Agent Session Thread"
+          id="filter-Agent Session Thread"
+          name="Agent Session Thread"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Agent Session Thread"
+          for="filter-Agent Session Thread"
         >
           Agent Session Thread
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Bitbucket"
-          id="Bitbucket"
+          id="filter-Bitbucket"
+          name="Bitbucket"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Bitbucket"
+          for="filter-Bitbucket"
         >
           Bitbucket
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Check Suite"
-          id="Check Suite"
+          id="filter-Check Suite"
+          name="Check Suite"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Check Suite"
+          for="filter-Check Suite"
         >
           Check Suite
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Commit"
-          id="Commit"
+          id="filter-Commit"
+          name="Commit"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Commit"
+          for="filter-Commit"
         >
           Commit
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Dependabot Alert"
-          id="Dependabot Alert"
+          id="filter-Dependabot Alert"
+          name="Dependabot Alert"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Dependabot Alert"
+          for="filter-Dependabot Alert"
         >
           Dependabot Alert
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Discussion"
-          id="Discussion"
+          id="filter-Discussion"
+          name="Discussion"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Discussion"
+          for="filter-Discussion"
         >
           Discussion
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-GitLab To-Do"
-          id="GitLab To-Do"
+          id="filter-GitLab To-Do"
+          name="GitLab To-Do"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="GitLab To-Do"
+          for="filter-GitLab To-Do"
         >
           GitLab To-Do
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Invitation"
-          id="Invitation"
+          id="filter-Invitation"
+          name="Invitation"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Invitation"
+          for="filter-Invitation"
         >
           Invitation
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Issue"
-          id="Issue"
+          id="filter-Issue"
+          name="Issue"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Issue"
+          for="filter-Issue"
         >
           Issue
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           2
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          2
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Pull Request"
-          id="Pull Request"
+          id="filter-Pull Request"
+          name="Pull Request"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Pull Request"
+          for="filter-Pull Request"
         >
           Pull Request
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           1
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          1
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Release"
-          id="Release"
+          id="filter-Release"
+          name="Release"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Release"
+          for="filter-Release"
         >
           Release
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           1
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          1
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Vulnerability Alert"
-          id="Vulnerability Alert"
+          id="filter-Vulnerability Alert"
+          name="Vulnerability Alert"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Vulnerability Alert"
+          for="filter-Vulnerability Alert"
         >
           Vulnerability Alert
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Workflow Run"
-          id="Workflow Run"
+          id="filter-Workflow Run"
+          name="Workflow Run"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Workflow Run"
+          for="filter-Workflow Run"
         >
           Workflow Run
         </label>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
         </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
+        </span>
       </div>
       <div
-        class="text-sm prc-Stack-Stack-UQ9k6"
-        data-align="center"
-        data-component="Stack"
-        data-direction="horizontal"
-        data-gap="condensed"
-        data-justify="start"
-        data-padding="none"
-        data-wrap="nowrap"
+        class="flex items-center gap-2 text-sm"
       >
         <input
-          class="size-4 rounded-sm cursor-pointer"
+          aria-checked="false"
+          aria-invalid="false"
+          aria-required="false"
+          class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
+          data-component="Checkbox"
           data-testid="checkbox-Other"
-          id="Other"
+          id="filter-Other"
+          name="Other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="Other"
+          for="filter-Other"
         >
           Other
         </label>
@@ -518,14 +620,20 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-expanded="false"
           aria-haspopup="true"
           aria-label="tooltip-Other"
+          class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          data-size="small"
           data-testid="tooltip-icon-tooltip-Other"
+          data-variant="invisible"
           id="tooltip-Other"
           tabindex="0"
           type="button"
         >
           <svg
             aria-hidden="true"
-            class="octicon octicon-question text-gitify-tooltip-icon"
+            class="octicon octicon-question"
             data-component="Octicon"
             display="inline-block"
             fill="currentColor"
@@ -542,10 +650,19 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           </svg>
         </button>
         <span
-          class="px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text bg-gitify-counter-secondary prc-Text-Text-9mHv3"
-          data-component="Text"
+          aria-hidden="true"
+          class="text-gitify-counter-text prc-CounterLabel-CounterLabel-X-kRU"
+          data-component="CounterLabel"
+          data-variant="secondary"
         >
           0
+        </span>
+        <span
+          class="prc-VisuallyHidden-VisuallyHidden-Q0qSB"
+        >
+           (
+          0
+          )
         </span>
       </div>
     </div>
