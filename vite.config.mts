@@ -130,10 +130,25 @@ const notificationQueryBoundaryPattern = {
     'Notification UI must not subscribe to the notifications query; it receives data via props. Use `useNotificationActions` for actions (see ARCHITECTURE.md).',
 };
 
-const processBoundaryPattern = rendererBoundaryPattern(
-  ['main', 'preload'],
-  'Renderer boundary: use `window.gitify` instead of importing the main or preload process (see ARCHITECTURE.md).',
-);
+const processBoundaryPattern = {
+  group: [...forbiddenLayerGlobs(['main', 'preload']), 'electron', 'electron/**'],
+  allowTypeImports: true,
+  message:
+    'Renderer boundary: use `window.gitify` instead of importing the main process, preload, or Electron (see ARCHITECTURE.md).',
+};
+
+const rendererImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['renderer']),
+  allowTypeImports: true,
+  message: 'Process boundary: main and preload must not import the renderer (see ARCHITECTURE.md).',
+};
+
+const sharedImportBoundaryPattern = {
+  group: forbiddenLayerGlobs(['main', 'preload', 'renderer']),
+  allowTypeImports: true,
+  message:
+    'Process boundary: shared code must not import main, preload, or renderer modules (see ARCHITECTURE.md).',
+};
 
 const forgeSpecificBoundaryPattern = rendererBoundaryPattern(
   ['forges/github', 'forges/gitlab', 'forges/gitea', 'forges/bitbucket'],
@@ -461,7 +476,10 @@ export default defineConfig({
         files: ['src/renderer/App.tsx', 'src/renderer/index.tsx', ...rendererLayerFiles('routes')],
         excludeFiles: TEST_FILES,
         rules: {
-          'no-restricted-imports': ['error', { patterns: [forgeSpecificBoundaryPattern] }],
+          'no-restricted-imports': [
+            'error',
+            { patterns: [forgeSpecificBoundaryPattern, processBoundaryPattern] },
+          ],
         },
       },
       {
@@ -472,6 +490,28 @@ export default defineConfig({
         excludeFiles: TEST_EXCLUDES,
         rules: {
           'import/no-cycle': 'error',
+        },
+      },
+      {
+        // Process boundary: main and preload must not reach into the renderer.
+        files: [
+          'src/main/**/*.ts',
+          'src/main/**/*.tsx',
+          'src/preload/**/*.ts',
+          'src/preload/**/*.tsx',
+        ],
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'no-restricted-imports': ['error', { patterns: [rendererImportBoundaryPattern] }],
+        },
+      },
+      {
+        // Process boundary: shared code is imported by both processes and must
+        // stay independent of main, preload, and renderer modules.
+        files: ['src/shared/**/*.ts', 'src/shared/**/*.tsx'],
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'no-restricted-imports': ['error', { patterns: [sharedImportBoundaryPattern] }],
         },
       },
       {
