@@ -48,7 +48,7 @@ export function GitHubDeviceFlowAuthorize({
   clientId,
   hostname,
   title,
-}: GitHubDeviceFlowAuthorizeProps) {
+}: Readonly<GitHubDeviceFlowAuthorizeProps>) {
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
