@@ -79,7 +79,9 @@ export function getAuthorizedOAuthAppURL(hostname: Hostname, clientId?: ClientID
 /**
  * Return the GitHub developer settings URL appropriate for the account's auth method.
  *
- * - Gitify OAuth App / Custom OAuth App → the OAuth app's authorized-applications page
+ * - Gitify OAuth App → Gitify's authorized-applications page
+ * - Custom OAuth App → the account's own app when its client ID is known; otherwise
+ *   the host's OAuth apps list, where a migrated account can find its client ID again
  * - GitHub CLI → authorized applications page
  * - Personal Access Token → tokens settings page
  *
@@ -89,8 +91,11 @@ export function getAuthorizedOAuthAppURL(hostname: Hostname, clientId?: ClientID
 export function getDeveloperSettingsURL(account: Account): Link {
   switch (account.method) {
     case 'Gitify OAuth App':
+      return getAuthorizedOAuthAppURL(account.hostname);
     case 'Custom OAuth App':
-      return getAuthorizedOAuthAppURL(account.hostname, account.clientId);
+      return account.clientId
+        ? getAuthorizedOAuthAppURL(account.hostname, account.clientId)
+        : (`https://${account.hostname}/settings/developers` as Link);
     case 'GitHub CLI':
       return `https://${account.hostname}/settings/applications` as Link;
     case 'Personal Access Token':

@@ -111,6 +111,16 @@ describe('renderer/stores/useAccountsStore.ts', () => {
       expect(account.token).toBe(mockCustomOAuthAppAccount.token);
       expect(account.clientId).toBe('CUSTOM_CLIENT_ID_123');
     });
+
+    it('relabels a legacy OAuth App account that never stored a client ID', () => {
+      const [account] = sanitizeAccounts([
+        { ...mockCustomOAuthAppAccount, method: 'OAuth App' as AuthMethod, clientId: undefined },
+      ]);
+
+      expect(account.method).toBe('Custom OAuth App');
+      expect(account.token).toBe(mockCustomOAuthAppAccount.token);
+      expect(account.clientId).toBeUndefined();
+    });
   });
 
   it.each([

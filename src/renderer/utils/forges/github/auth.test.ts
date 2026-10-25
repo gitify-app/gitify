@@ -98,13 +98,13 @@ describe('renderer/utils/forges/github/auth.ts', () => {
       ).toBe('https://github.com/settings/connections/applications/CUSTOM_CLIENT_ID_123');
     });
 
-    it('falls back to the preconfigured app when a custom account stores no client ID', () => {
+    it('points at the developer settings when a migrated custom account stores no client ID', () => {
       expect(
         getDeveloperSettingsURL({
           hostname: 'github.com' as Hostname,
           method: 'Custom OAuth App',
         } as Account),
-      ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
+      ).toBe('https://github.com/settings/developers');
     });
 
     it('returns the PAT settings URL', () => {
