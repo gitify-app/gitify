@@ -54,7 +54,10 @@ export default defineConfig({
           // Visual tests share the `.test.tsx` suffix but need a real browser.
           // Spread the defaults; assigning `exclude` replaces them outright.
           exclude: [...defaultExclude, '**/*.visual.test.tsx'],
-          setupFiles: ['./src/renderer/__helpers__/vitest.setup.ts'],
+          setupFiles: [
+            './src/__helpers__/electron-log.setup.ts',
+            './src/renderer/__helpers__/vitest.setup.ts',
+          ],
         },
       },
       {
@@ -64,6 +67,7 @@ export default defineConfig({
           name: 'node [main, shared]',
           environment: 'node',
           include: ['src/shared/**/*.test.{ts,tsx}', 'src/main/**/*.test.{ts,tsx}'],
+          setupFiles: ['./src/__helpers__/electron-log.setup.ts'],
         },
       },
       {
