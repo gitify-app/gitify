@@ -6,7 +6,7 @@ import { mockSettings } from '../__mocks__/state-mocks';
 import { AllRead } from './AllRead';
 
 describe('renderer/components/AllRead.tsx', () => {
-  it('should render itself & its children - no filters', async () => {
+  it('renders itself & its children - no filters', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
@@ -20,7 +20,7 @@ describe('renderer/components/AllRead.tsx', () => {
     expect(tree!.container).toMatchSnapshot();
   });
 
-  it('should render itself & its children - with filters', async () => {
+  it('renders itself & its children - with filters', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {

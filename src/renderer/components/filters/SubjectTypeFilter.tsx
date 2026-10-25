@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { BellIcon } from '@primer/octicons-react';
@@ -7,7 +6,7 @@ import { Text } from '@primer/react';
 import { subjectTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
-export const SubjectTypeFilter: FC = () => {
+export function SubjectTypeFilter() {
   const { t } = useTranslation();
 
   return (
@@ -20,4 +19,4 @@ export const SubjectTypeFilter: FC = () => {
       tooltip={<Text>{t('filters.subject_type.help', 'Filter notifications by type.')}</Text>}
     />
   );
-};
+}

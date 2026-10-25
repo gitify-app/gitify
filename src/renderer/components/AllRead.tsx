@@ -1,4 +1,4 @@
-import { type FC, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Constants } from '../constants';
@@ -13,7 +13,7 @@ interface AllReadProps {
   fullHeight?: boolean;
 }
 
-export const AllRead: FC<AllReadProps> = ({ fullHeight = true }: AllReadProps) => {
+export function AllRead({ fullHeight = true }: Readonly<AllReadProps>) {
   const { t } = useTranslation();
   const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
@@ -24,4 +24,4 @@ export const AllRead: FC<AllReadProps> = ({ fullHeight = true }: AllReadProps) =
     : t('allRead.heading', 'No new notifications');
 
   return <EmojiSplash emoji={emoji} fullHeight={fullHeight} heading={heading} />;
-};
+}

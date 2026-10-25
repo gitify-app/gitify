@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -20,9 +19,9 @@ import { useNotifications } from '../hooks/useNotifications';
 import { useShortcutActions } from '../hooks/useShortcutActions';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
-import { LogoIcon } from './icons/LogoIcon';
+import { LogoIcon } from '../icons/LogoIcon';
 
-export const Sidebar: FC = () => {
+export function Sidebar() {
   const { t } = useTranslation();
   const { status, notificationCount, hasUnreadNotifications, isFetching } = useNotifications();
 
@@ -48,7 +47,7 @@ export const Sidebar: FC = () => {
           aria-label={APPLICATION.NAME}
           data-testid="sidebar-home"
           description={t('sidebar.home', 'Home')}
-          icon={LogoIcon}
+          icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
           onClick={() => shortcuts.home.action()}
           size="small"
@@ -179,4 +178,4 @@ export const Sidebar: FC = () => {
       </Stack>
     </Stack>
   );
-};
+}

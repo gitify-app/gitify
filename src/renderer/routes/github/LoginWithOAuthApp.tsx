@@ -1,6 +1,5 @@
-import { type FC, useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Trans } from 'react-i18next';
+import { useCallback, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
@@ -15,11 +14,14 @@ import { Page } from '../../components/layout/Page';
 import { Footer } from '../../components/primitives/Footer';
 import { Header } from '../../components/primitives/Header';
 
-import type { Account, ClientID, ClientSecret, Forge, Token } from '../../types';
-import type { LoginOAuthWebOptions } from '../../utils/auth/types';
+import type { Account, ClientID, ClientSecret, Forge } from '../../types';
 
 import i18n from '../../i18n';
-import { isValidHostname } from '../../utils/auth/utils';
+import {
+  type OAuthAppFormData,
+  type OAuthAppFormErrors,
+  validateOAuthAppForm,
+} from '../../utils/auth/loginValidation';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
@@ -28,46 +30,7 @@ interface LocationState {
   account?: Account;
 }
 
-// IFormData mirrors LoginOAuthWebOptions exactly — keep them aliased so the
-// form can be passed straight into the context callback without casting.
-export type IFormData = LoginOAuthWebOptions;
-
-interface IFormErrors {
-  hostname?: string;
-  clientId?: string;
-  clientSecret?: string;
-  invalidCredentialsForHost?: string;
-}
-
-export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
-  const errors: IFormErrors = {};
-  const adapter = getAdapter(forge);
-
-  if (!values.hostname) {
-    errors.hostname = i18n.t('login.oauth.hostname_required', 'Hostname is required');
-  } else if (!isValidHostname(values.hostname)) {
-    errors.hostname = i18n.t('login.oauth.hostname_invalid', 'Hostname format is invalid');
-  }
-
-  if (!values.clientId) {
-    errors.clientId = i18n.t('login.oauth.client_id_required', 'Client ID is required');
-  } else if (!adapter.oauthWebApp?.validateClientId(values.clientId)) {
-    errors.clientId = i18n.t('login.oauth.client_id_invalid', 'Client ID format is invalid');
-  }
-
-  if (!values.clientSecret) {
-    errors.clientSecret = i18n.t('login.oauth.client_secret_required', 'Client Secret is required');
-  } else if (!adapter.validateToken(values.clientSecret as unknown as Token)) {
-    errors.clientSecret = i18n.t(
-      'login.oauth.client_secret_invalid',
-      'Client Secret format is invalid',
-    );
-  }
-
-  return errors;
-};
-
-export const GitHubLoginWithOAuthAppRoute: FC = () => {
+export function GitHubLoginWithOAuthAppRoute() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -84,14 +47,14 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
     hostname: reAuthAccount?.hostname ?? Constants.GITHUB_HOSTNAME,
     clientId: '' as ClientID,
     clientSecret: '' as ClientSecret,
-  } as IFormData);
+  } as OAuthAppFormData);
 
-  const [errors, setErrors] = useState({} as IFormErrors);
+  const [errors, setErrors] = useState({} as OAuthAppFormErrors);
 
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
 
-    const newErrors = validateForm(formData, forge);
+    const newErrors = validateOAuthAppForm(formData, forge);
 
     setErrors(newErrors);
 
@@ -110,10 +73,10 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
   };
 
   const verifyLoginCredentials = useCallback(
-    async (data: IFormData) => {
+    async (data: OAuthAppFormData) => {
       try {
         await loginWithOAuthApp(forge, data);
-        navigate('/');
+        void navigate('/');
       } catch (err) {
         rendererLogError('loginWithOAuthApp', 'Failed to login with OAuth App', toError(err));
         setErrors({
@@ -150,7 +113,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
           />
         )}
         <Stack direction="vertical" gap="normal">
-          <FormControl required>
+          <FormControl id="login-hostname" required>
             <FormControl.Label>{t('login.oauth.hostname', 'Hostname')}</FormControl.Label>
             <FormControl.Caption>
               <Text as="i">
@@ -201,7 +164,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
               />
             </Text>
           </Stack>
-          <FormControl required>
+          <FormControl id="login-clientId" required>
             <FormControl.Label>{t('login.oauth.client_id', 'Client ID')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.clientId ? 'true' : 'false'}
@@ -219,7 +182,7 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
               <FormControl.Validation variant="error">{errors.clientId}</FormControl.Validation>
             )}
           </FormControl>
-          <FormControl required>
+          <FormControl id="login-clientSecret" required>
             <FormControl.Label>{t('login.oauth.client_secret', 'Client Secret')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.clientSecret ? 'true' : 'false'}
@@ -276,4 +239,4 @@ export const GitHubLoginWithOAuthAppRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

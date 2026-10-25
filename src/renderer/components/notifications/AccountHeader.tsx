@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
@@ -24,13 +24,13 @@ export interface AccountHeaderProps {
   onToggle: () => void;
 }
 
-export const AccountHeader: FC<AccountHeaderProps> = ({
+export function AccountHeader({
   account,
   error,
   notificationCount,
   isCollapsed,
   onToggle,
-}) => {
+}: Readonly<AccountHeaderProps>) {
   const { t } = useTranslation();
   const Chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
 
@@ -52,7 +52,7 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
           event.stopPropagation();
           openAccountProfile(account);
         }}
-        title={t('accounts.open_profile', 'Open account profile')}
+        title={t('accounts.open_profile', 'Open account profile ↗')}
         variant="invisible"
       >
         <AvatarWithFallback
@@ -91,4 +91,4 @@ export const AccountHeader: FC<AccountHeaderProps> = ({
       </HoverGroup>
     </Stack>
   );
-};
+}

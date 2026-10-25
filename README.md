@@ -8,7 +8,7 @@
 
 ---
 
-## Features
+## 📦 Features
 
 - 🔔 Unified notifications from your Git platforms
 - ⚒️ Multi-forge: GitHub Cloud, GitHub Enterprise, Gitea, Forgejo, Codeberg, Bitbucket Cloud, GitLab
@@ -17,7 +17,7 @@
 - 🖥️ Tray/menu bar integration
 - ⚡ Fast, native experience
 
-## Supported forges
+## 🔌 Supported forges
 
 Gitify uses a forge adapter pattern so notifications can come from any compatible Git forge, not just GitHub.
 
@@ -49,13 +49,13 @@ Gitify uses a forge adapter pattern so notifications can come from any compatibl
 > [!NOTE]
 > _A new forge needs an [adapter](src/renderer/utils/forges/) plus a designated maintainer. See [our contributing guide](CONTRIBUTING.md#multi-forge-support) for the full policy._
 
-## Quick Start
+## 🚀 Quick Start
 
 1. **Download** Gitify for free from [gitify.io][website].
 2. **Install** and launch the app for your platform.
 3. **Authenticate** with one or many supported accounts and start receiving notifications.
 
-#### Homebrew
+#### 🍺 Homebrew
 
 macOS users can also install via [Homebrew][brew]
 
@@ -63,7 +63,7 @@ macOS users can also install via [Homebrew][brew]
 brew install gitify
 ```
 
-## Build & Development
+## 🛠️ Build & Development
 
 To build and run Gitify locally:
 
@@ -75,16 +75,16 @@ pnpm dev
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for full development and contribution instructions.
 
-## FAQ
+## ❓ FAQ
 
 See our [Gitify FAQs][faqs] for answers to common questions.
 
-## Community & Support
+## 🤝 Community & Support
 
 - Open an [issue][github-issues] for bugs or feature requests
 - See [CONTRIBUTING.md](CONTRIBUTING.md) for more ways to get involved
 
-## License
+## 📄 License
 
 Gitify is licensed under the MIT Open Source license.
 For more information, see [LICENSE](LICENSE).

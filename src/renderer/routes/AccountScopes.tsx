@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
@@ -7,7 +6,6 @@ import { Button, Label, Stack, Text } from '@primer/react';
 
 import { Constants, OAUTH_SCOPE } from '../constants';
 
-import { ScopeStatusIcon } from '../components/icons/ScopeStatusIcon';
 import { Contents } from '../components/layout/Contents';
 import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
@@ -15,6 +13,7 @@ import { Header } from '../components/primitives/Header';
 
 import type { Account } from '../types';
 
+import { ScopeStatusIcon } from '../icons/ScopeStatusIcon';
 import {
   externallyManagedScopes,
   getAlternateScopeNames,
@@ -28,7 +27,7 @@ interface LocationState {
   account: Account;
 }
 
-export const AccountScopesRoute: FC = () => {
+export function AccountScopesRoute() {
   const { t } = useTranslation();
   const location = useLocation();
   const { account } = location.state as LocationState;
@@ -218,4 +217,4 @@ export const AccountScopesRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

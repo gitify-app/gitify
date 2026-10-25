@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useCallback, useEffect, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ interface LocationState {
 
 type ScopeChoice = 'public' | 'full';
 
-export const GitHubLoginWithDeviceFlowRoute: FC = () => {
+export function GitHubLoginWithDeviceFlowRoute() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -106,7 +106,7 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
 
         if (token && isActive) {
           await loginWithDeviceFlowComplete(forge, token, session.hostname);
-          navigate('/');
+          void navigate('/');
           return;
         }
 
@@ -391,4 +391,4 @@ export const GitHubLoginWithDeviceFlowRoute: FC = () => {
       )}
     </Page>
   );
-};
+}

@@ -1,4 +1,4 @@
-import type { ThemeProviderProps } from '@primer/react';
+import type { ThemeProviderProps } from '@primer/react/next';
 
 import { DesignLanguage, Theme } from '../../types';
 

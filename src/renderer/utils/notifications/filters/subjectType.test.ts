@@ -30,6 +30,14 @@ describe('renderer/utils/notifications/filters/subjectType.ts', () => {
     expect(subjectTypeFilter.classify(buildUnknownNotification())).toBe('other');
   });
 
+  it('classifies AgentSessionThread into its own option rather than other', () => {
+    const notification = buildNotification('AgentSessionThread');
+
+    expect(subjectTypeFilter.filterNotification(notification, 'AgentSessionThread')).toBe(true);
+    expect(subjectTypeFilter.filterNotification(notification, 'other')).toBe(false);
+    expect(subjectTypeFilter.classify(notification)).toBe('AgentSessionThread');
+  });
+
   it('getFilterCount counts notifications per canonical bucket', () => {
     const accountNotifications: AccountNotifications[] = [
       {
@@ -58,6 +66,19 @@ describe('renderer/utils/notifications/filters/subjectType.ts', () => {
       },
     ];
 
+    expect(subjectTypeFilter.getFilterCount(accountNotifications, 'other')).toBe(1);
+  });
+
+  it('getFilterCount counts AgentSessionThread under its own option', () => {
+    const accountNotifications: AccountNotifications[] = [
+      {
+        account: {} as AccountNotifications['account'],
+        notifications: [buildNotification('AgentSessionThread'), buildUnknownNotification()],
+        error: null,
+      },
+    ];
+
+    expect(subjectTypeFilter.getFilterCount(accountNotifications, 'AgentSessionThread')).toBe(1);
     expect(subjectTypeFilter.getFilterCount(accountNotifications, 'other')).toBe(1);
   });
 });

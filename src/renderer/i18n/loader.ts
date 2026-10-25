@@ -18,7 +18,7 @@ const resources = Object.fromEntries(
   Object.entries(locales).map(([lng, data]) => [lng, { translation: data }]),
 ) as Record<Language, { translation: typeof enTranslation }>;
 
-i18n
+void i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({

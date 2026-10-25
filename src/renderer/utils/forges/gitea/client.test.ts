@@ -130,12 +130,12 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
 
       useSettingsStore.setState({ fetchAllNotifications: false, fetchReadNotifications: false });
 
+      // The exact match also proves the thrown error does not include the
+      // response body — a hostile server could echo back the Authorization
+      // header into logs.
       await expect(listGiteaNotifications(mockGiteaAccount)).rejects.toThrow(
         /^Gitea API 403 Forbidden$/,
       );
-      // The thrown error must not include the response body — a hostile
-      // server could echo back the Authorization header into logs.
-      await expect(listGiteaNotifications(mockGiteaAccount)).rejects.toThrow();
     });
   });
 
@@ -216,7 +216,7 @@ describe('renderer/utils/forges/gitea/client.ts', () => {
       await patchGiteaNotificationThread(httpAccount, '42');
       expect(fetchMock()).toHaveBeenCalledTimes(3);
       for (const [url, init] of fetchMock().mock.calls) {
-        expect(String(url)).toMatch(/^http:\/\/git\.internal:3000\/api\/v1\//);
+        expect(url as string).toMatch(/^http:\/\/git\.internal:3000\/api\/v1\//);
         expect(init?.headers).toMatchObject({ Authorization: 'token decrypted' });
       }
     });

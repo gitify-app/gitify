@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/notifications/AccountHeader.tsx > should render an error background when the account errored 1`] = `
+exports[`renderer/components/notifications/AccountHeader.tsx > renders an error background when the account errored 1`] = `
 <div>
   <div
     class="group relative pr-1 py-0.5 bg-gitify-account-error prc-Stack-Stack-UQ9k6"

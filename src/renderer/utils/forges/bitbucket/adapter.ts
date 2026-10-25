@@ -2,8 +2,6 @@ import { KeyIcon } from '@primer/octicons-react';
 
 import useSettingsStore from '../../../stores/useSettingsStore';
 
-import { BitbucketIcon } from '../../../components/icons/BitbucketIcon';
-
 import type { Account, Hostname, Link, RawGitifyNotification } from '../../../types';
 import { IconColor } from '../../../types';
 import type {
@@ -13,7 +11,8 @@ import type {
   RefreshAccountData,
 } from '../types';
 
-import { isValidHostname } from '../../auth/utils';
+import { BitbucketIcon } from '../../../icons/BitbucketIcon';
+import { isValidHostname } from '../../auth/identity';
 import { decryptValue } from '../../system/comms';
 import {
   fetchBitbucketAuthenticatedUser,

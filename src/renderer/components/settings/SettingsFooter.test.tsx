@@ -17,7 +17,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     process.env = originalEnv;
   });
 
-  it('should show app version', async () => {
+  it('shows app version', async () => {
     await act(async () => {
       renderWithProviders(<SettingsFooter />, {
         initialEntries: ['/settings'],
@@ -27,7 +27,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     expect(screen.getByTestId('settings-release-notes')).toMatchSnapshot();
   });
 
-  it('should open release notes', async () => {
+  it('opens release notes', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     await act(async () => {
@@ -44,7 +44,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     );
   });
 
-  it('should open account management', async () => {
+  it('opens account management', async () => {
     await act(async () => {
       renderWithProviders(<SettingsFooter />, {
         initialEntries: ['/settings'],
@@ -56,7 +56,7 @@ describe('renderer/components/settings/SettingsFooter.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith('/accounts');
   });
 
-  it('should quit the app', async () => {
+  it('quits the app', async () => {
     const quitAppSpy = vi.spyOn(comms, 'quitApp').mockImplementation(vi.fn());
 
     await act(async () => {

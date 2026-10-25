@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Text, Tooltip } from '@primer/react';
@@ -7,7 +6,7 @@ import { LoginWithPersonalAccessTokenForm } from '../../components/login/LoginWi
 
 import { formatRecommendedOAuthScopes } from '../../utils/auth/scopes';
 
-export const GitHubLoginWithPersonalAccessTokenRoute: FC = () => {
+export function GitHubLoginWithPersonalAccessTokenRoute() {
   const { t } = useTranslation();
 
   return (
@@ -41,4 +40,4 @@ export const GitHubLoginWithPersonalAccessTokenRoute: FC = () => {
       </Text>
     </LoginWithPersonalAccessTokenForm>
   );
-};
+}

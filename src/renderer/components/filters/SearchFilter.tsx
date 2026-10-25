@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -17,7 +16,7 @@ import { cn } from 'cn';
 
 import { useFiltersStore, useSettingsStore } from '../../stores';
 
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { IconColor, type SearchToken, Size } from '../../types';
 
@@ -28,7 +27,7 @@ import {
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 import { TokenSearchInput } from './TokenSearchInput';
 
-export const SearchFilter: FC = () => {
+export function SearchFilter() {
   const { t } = useTranslation();
   const updateFilter = useFiltersStore((s) => s.updateFilter);
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
@@ -70,7 +69,8 @@ export const SearchFilter: FC = () => {
 
   return (
     <fieldset>
-      <Title
+      <SectionHeading
+        as="legend"
         icon={SearchIcon}
         tooltip={
           <Stack direction="vertical" gap="condensed">
@@ -80,6 +80,7 @@ export const SearchFilter: FC = () => {
                 <Stack direction="horizontal" gap="condensed">
                   <PersonIcon size={Size.SMALL} />
                   <Text
+                    aria-disabled={!detailedNotifications}
                     className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
                     {t('filters.search.author', 'Author (author:handle)')}
@@ -88,6 +89,7 @@ export const SearchFilter: FC = () => {
                 <Stack direction="horizontal" gap="condensed">
                   <CommentIcon size={Size.SMALL} />
                   <Text
+                    aria-disabled={!detailedNotifications}
                     className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
                     {t('filters.search.commenter', 'Commenter (commenter:handle)')}
@@ -115,7 +117,7 @@ export const SearchFilter: FC = () => {
         }
       >
         {t('filters.search.title_short', 'Search')}
-      </Title>
+      </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <TokenSearchInput
@@ -140,4 +142,4 @@ export const SearchFilter: FC = () => {
       </Stack>
     </fieldset>
   );
-};
+}

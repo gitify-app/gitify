@@ -7,6 +7,7 @@ import {
   ArrowLeftIcon,
   ChevronRightIcon,
   KeyIcon,
+  type OcticonProps,
   PersonAddIcon,
   PersonIcon,
   ShieldCheckIcon,
@@ -16,6 +17,8 @@ import {
   SyncIcon,
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer/react';
+
+import { cn } from 'cn';
 
 import { useLogins } from '../hooks/useLogins';
 import { useNotifications } from '../hooks/useNotifications';
@@ -44,17 +47,25 @@ import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
 
-function getScopeIconClassName(account: Account): string {
-  if (hasRecommendedScopes(account)) {
-    return IconColor.GREEN;
-  }
-  if (hasAlternateScopes(account)) {
-    return 'text-gitify-warning';
-  }
-  return '';
+function RecommendedScopesIcon({ className, ...props }: Readonly<OcticonProps>) {
+  return <ShieldCheckIcon {...props} className={cn(IconColor.GREEN, className)} />;
 }
 
-export const AccountsRoute: FC = () => {
+function AlternateScopesIcon({ className, ...props }: Readonly<OcticonProps>) {
+  return <ShieldCheckIcon {...props} className={cn('text-gitify-warning', className)} />;
+}
+
+function getScopeIcon(account: Account): FC<OcticonProps> {
+  if (hasRecommendedScopes(account)) {
+    return RecommendedScopesIcon;
+  }
+  if (hasAlternateScopes(account)) {
+    return AlternateScopesIcon;
+  }
+  return ShieldCheckIcon;
+}
+
+export function AccountsRoute() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -83,7 +94,7 @@ export const AccountsRoute: FC = () => {
     useAccountsStore.setState({
       accounts: [account, ...accounts.filter((a) => a !== account)],
     });
-    navigate('/accounts', { replace: true });
+    void navigate('/accounts', { replace: true });
   };
 
   const handleRefresh = async (account: Account) => {
@@ -105,7 +116,7 @@ export const AccountsRoute: FC = () => {
       }));
     }
 
-    navigate('/accounts', { replace: true });
+    void navigate('/accounts', { replace: true });
 
     /**
      * Typically the above refresh API call completes very quickly,
@@ -142,7 +153,7 @@ export const AccountsRoute: FC = () => {
       return;
     }
 
-    navigate(loginMethod.route, {
+    void navigate(loginMethod.route, {
       replace: true,
       state: { account },
     });
@@ -258,7 +269,7 @@ export const AccountsRoute: FC = () => {
                           login: account.user?.login,
                         })}
                         data-testid="account-view-scopes"
-                        icon={() => <ShieldCheckIcon className={getScopeIconClassName(account)} />}
+                        icon={getScopeIcon(account)}
                         onClick={() =>
                           navigate('/account-scopes', {
                             state: { account },
@@ -392,7 +403,7 @@ export const AccountsRoute: FC = () => {
                           keepMenuOpenRef.current = true;
                           setSelectedForge(adapter);
                         } else {
-                          navigate(adapter.loginMethods[0].route, { replace: true });
+                          void navigate(adapter.loginMethods[0].route, { replace: true });
                         }
                       }}
                     >
@@ -418,4 +429,4 @@ export const AccountsRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

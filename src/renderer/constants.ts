@@ -65,6 +65,7 @@ export const Constants = {
   // Emojis for different states and events
   EMOJIS: {
     ALL_READ: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
+    LOADING: ['⏳', '⌛'],
     ERRORS: {
       ACTION_FORBIDDEN: ['🚫'],
       BAD_CREDENTIALS: ['🔓'],

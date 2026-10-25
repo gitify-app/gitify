@@ -1,4 +1,4 @@
-import { useFiltersStore } from '../../../stores';
+import useFiltersStore from '../../../stores/useFiltersStore';
 
 import type {
   AccountNotifications,
@@ -17,21 +17,21 @@ export const reviewRequestTypeFilter: Filter<ReviewRequestTypeFilterValue> = {
         title: i18n.t('filters.review_request_type.direct', 'Direct'),
         description: i18n.t(
           'filters.review_request_type.direct_description',
-          'You were directly requested as a reviewer.',
+          'You were asked to review directly.',
         ),
       },
       team: {
         title: i18n.t('filters.review_request_type.team', 'Team'),
         description: i18n.t(
           'filters.review_request_type.team_description',
-          'A team you are a member of was requested to review.',
+          'A team you belong to was asked to review.',
         ),
       },
       other: {
         title: i18n.t('filters.review_request_type.other', 'Other'),
         description: i18n.t(
           'filters.review_request_type.other_description',
-          'Notifications that are not a review request, e.g. mentions, comments, assigned issues.',
+          'Not a review request, such as a mention, comment, or assigned issue.',
         ),
       },
     };

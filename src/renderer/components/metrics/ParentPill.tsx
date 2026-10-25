@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { IssueTrackedByIcon } from '@primer/octicons-react';
@@ -12,9 +12,8 @@ export interface ParentPillProps {
   parent?: GitifyParentIssue | null;
 }
 
-export const ParentPill: FC<ParentPillProps> = ({ parent }) => {
+export function ParentPill({ parent }: Readonly<ParentPillProps>) {
   const { t } = useTranslation();
-
   if (!parent) {
     return null;
   }
@@ -40,4 +39,4 @@ export const ParentPill: FC<ParentPillProps> = ({ parent }) => {
       onClick={handleClick}
     />
   );
-};
+}

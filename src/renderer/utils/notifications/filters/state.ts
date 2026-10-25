@@ -1,4 +1,4 @@
-import { useFiltersStore } from '../../../stores';
+import useFiltersStore from '../../../stores/useFiltersStore';
 
 import type {
   AccountNotifications,
@@ -19,7 +19,7 @@ export const stateFilter: Filter<FilterStateType> = {
       },
       open: {
         title: i18n.t('filters.state.open', 'Open'),
-        description: i18n.t('filters.state.open_description', 'Open or reopened'),
+        description: i18n.t('filters.state.open_description', 'Open or reopened.'),
       },
       merged: {
         title: i18n.t('filters.state.merged', 'Merged'),
@@ -28,15 +28,12 @@ export const stateFilter: Filter<FilterStateType> = {
         title: i18n.t('filters.state.closed', 'Closed'),
         description: i18n.t(
           'filters.state.closed_description',
-          'Closed, completed, duplicate, resolved or not planned',
+          'Closed, completed, duplicate, resolved, or not planned.',
         ),
       },
       other: {
         title: i18n.t('filters.state.other', 'Other'),
-        description: i18n.t(
-          'filters.state.other_description',
-          'Catch all for any other notification states',
-        ),
+        description: i18n.t('filters.state.other_description', 'Any other notification state.'),
       },
     };
   },

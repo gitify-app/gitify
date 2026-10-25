@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { type GitifySubIssueProgress, IconColor } from '../../types';
 
 import { MetricPill } from './MetricPill';
@@ -14,11 +12,11 @@ export interface SubIssueProgressWheelProps {
   size?: number;
 }
 
-export const SubIssueProgressWheel: FC<SubIssueProgressWheelProps> = ({
+export function SubIssueProgressWheel({
   percent = 0,
   className,
   size = 12,
-}) => {
+}: Readonly<SubIssueProgressWheelProps>) {
   const radius = 6;
   const circumference = 2 * Math.PI * radius;
   const clampedPercent = Math.min(100, Math.max(0, percent));
@@ -59,9 +57,9 @@ export const SubIssueProgressWheel: FC<SubIssueProgressWheelProps> = ({
       )}
     </svg>
   );
-};
+}
 
-export const SubIssueProgressPill: FC<SubIssueProgressPillProps> = ({ progress }) => {
+export function SubIssueProgressPill({ progress }: Readonly<SubIssueProgressPillProps>) {
   if (!progress || progress.total === 0) {
     return null;
   }
@@ -83,4 +81,4 @@ export const SubIssueProgressPill: FC<SubIssueProgressPillProps> = ({ progress }
       metric={`${progress.completed}/${progress.total}`}
     />
   );
-};
+}

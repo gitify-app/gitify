@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useCallback, useState } from 'react';
+import { type ReactNode, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,12 @@ import { Header } from '../primitives/Header';
 import type { Account, Forge, Hostname, Token } from '../../types';
 
 import i18n from '../../i18n';
+import {
+  type PersonalAccessTokenFormData,
+  type PersonalAccessTokenFormErrors,
+  summarizeLoginError,
+  validatePersonalAccessTokenForm,
+} from '../../utils/auth/loginValidation';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { openExternalLink } from '../../utils/system/comms';
@@ -22,60 +28,6 @@ import { openExternalLink } from '../../utils/system/comms';
 interface LocationState {
   account?: Account;
 }
-
-export interface IFormData {
-  token: Token;
-  hostname: Hostname;
-  username?: string;
-}
-
-interface IFormErrors {
-  token?: string;
-  hostname?: string;
-  username?: string;
-  invalidCredentialsForHost?: string;
-  invalidCredentialsDetail?: string;
-}
-
-/**
- * Reduce a login failure to a single capped line for the error banner. Only
- * real errors carry a message worth showing, and the first line is enough: a
- * misbehaving server can echo the request or its response body back, and
- * that must not flood the banner.
- */
-const ERROR_DETAIL_MAX_LENGTH = 150;
-
-export function summarizeLoginError(err: unknown): string | undefined {
-  if (!(err instanceof Error)) {
-    return undefined;
-  }
-
-  const firstLine = err.message.split('\n')[0].replace(/\s+/g, ' ').trim();
-  return firstLine ? firstLine.slice(0, ERROR_DETAIL_MAX_LENGTH) : undefined;
-}
-
-export const validateForm = (values: IFormData, forge: Forge = 'github'): IFormErrors => {
-  const errors: IFormErrors = {};
-  const adapter = getAdapter(forge);
-
-  if (!values.hostname) {
-    errors.hostname = i18n.t('login.pat.hostname_required', 'Hostname is required');
-  } else if (!adapter.validateHostname(values.hostname)) {
-    errors.hostname = i18n.t('login.pat.hostname_invalid', 'Hostname format is invalid');
-  }
-
-  if (forge === 'bitbucket' && !values.username) {
-    errors.username = i18n.t('login.pat.atlassian_email_required', 'Atlassian email is required');
-  }
-
-  if (!values.token) {
-    errors.token = i18n.t('login.pat.token_required', 'Token is required');
-  } else if (!adapter.validateToken(values.token)) {
-    errors.token = i18n.t('login.pat.token_invalid', 'Token format is invalid');
-  }
-
-  return errors;
-};
 
 export interface LoginWithPersonalAccessTokenFormProps {
   forge: Forge;
@@ -111,7 +63,7 @@ export interface LoginWithPersonalAccessTokenFormProps {
  * Forge-specific route components (`routes/github`, `routes/gitea`) supply
  * their own copy via props so this form stays free of forge conditionals.
  */
-export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFormProps> = ({
+export function LoginWithPersonalAccessTokenForm({
   forge,
   title,
   hostnameCaption = '',
@@ -125,7 +77,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
   usernamePlaceholder = '',
   usernameCaption = '',
   children,
-}) => {
+}: Readonly<LoginWithPersonalAccessTokenFormProps>) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -142,13 +94,13 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
     hostname: reAuthAccount?.hostname ?? adapter.defaultHostname ?? ('' as Hostname),
     token: '' as Token,
     username: reAuthAccount?.username ?? '',
-  } as IFormData);
+  } as PersonalAccessTokenFormData);
 
-  const [errors, setErrors] = useState({} as IFormErrors);
+  const [errors, setErrors] = useState({} as PersonalAccessTokenFormErrors);
 
   const handleSubmit = async () => {
     setIsVerifyingCredentials(true);
-    const newErrors = validateForm(formData, forge);
+    const newErrors = validatePersonalAccessTokenForm(formData, forge);
 
     setErrors(newErrors);
 
@@ -167,7 +119,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
   };
 
   const verifyLoginCredentials = useCallback(
-    async (data: IFormData) => {
+    async (data: PersonalAccessTokenFormData) => {
       try {
         await loginWithPersonalAccessToken({
           hostname: data.hostname,
@@ -175,7 +127,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
           ...(data.username ? { username: data.username } : {}),
           forge,
         });
-        navigate('/');
+        void navigate('/');
       } catch (err) {
         rendererLogError('loginWithPersonalAccessToken', 'Failed to login with PAT', toError(err));
         setErrors({
@@ -216,7 +168,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
         )}
         <Stack direction="vertical" gap="normal">
           {showUsernameField && (
-            <FormControl required>
+            <FormControl id="login-username" required>
               <FormControl.Label>
                 {t('login.pat.atlassian_email', 'Atlassian Email')}
               </FormControl.Label>
@@ -242,7 +194,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
           )}
 
           {showHostnameField && (
-            <FormControl required>
+            <FormControl id="login-hostname" required>
               <FormControl.Label>{t('login.pat.hostname', 'Hostname')}</FormControl.Label>
               <FormControl.Caption>
                 <Text as="i">{hostnameCaption}</Text>
@@ -281,7 +233,7 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
             {children}
           </Stack>
 
-          <FormControl required>
+          <FormControl id="login-token" required>
             <FormControl.Label>{t('login.pat.token', 'Token')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.token ? 'true' : 'false'}
@@ -336,4 +288,4 @@ export const LoginWithPersonalAccessTokenForm: FC<LoginWithPersonalAccessTokenFo
       </Footer>
     </Page>
   );
-};
+}

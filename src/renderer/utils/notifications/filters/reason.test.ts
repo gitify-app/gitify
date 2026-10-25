@@ -29,6 +29,27 @@ describe('renderer/utils/notifications/filters/reason.ts', () => {
     expect(reasonFilter.classify(buildUnknownNotification())).toBe('other');
   });
 
+  it('classifies agent_session_finished under its own option rather than other', () => {
+    const notification = buildNotification('agent_session_finished');
+
+    expect(reasonFilter.filterNotification(notification, 'agent_session_finished')).toBe(true);
+    expect(reasonFilter.filterNotification(notification, 'other')).toBe(false);
+    expect(reasonFilter.classify(notification)).toBe('agent_session_finished');
+  });
+
+  it('getFilterCount counts agent_session_finished under its own option', () => {
+    const accountNotifications: AccountNotifications[] = [
+      {
+        account: {} as AccountNotifications['account'],
+        notifications: [buildNotification('agent_session_finished'), buildUnknownNotification()],
+        error: null,
+      },
+    ];
+
+    expect(reasonFilter.getFilterCount(accountNotifications, 'agent_session_finished')).toBe(1);
+    expect(reasonFilter.getFilterCount(accountNotifications, 'other')).toBe(1);
+  });
+
   it('getFilterCount counts notifications per canonical bucket', () => {
     const accountNotifications: AccountNotifications[] = [
       {

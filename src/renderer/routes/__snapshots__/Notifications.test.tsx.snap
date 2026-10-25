@@ -1,6 +1,46 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (all read notifications) 1`] = `
+exports[`renderer/routes/Notifications.tsx > error conditions - oops > bad credentials 1`] = `
+<div>
+  <p>
+    Oops
+  </p>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > error conditions - oops > default error 1`] = `
+<div>
+  <p>
+    Oops
+  </p>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > error conditions - oops > missing scopes 1`] = `
+<div>
+  <p>
+    Oops
+  </p>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > error conditions - oops > rate limited 1`] = `
+<div>
+  <p>
+    Oops
+  </p>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > error conditions - oops > unknown error 1`] = `
+<div>
+  <p>
+    Oops
+  </p>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > renders itself & its children (all read notifications) 1`] = `
 <div>
   <p>
     AllRead
@@ -8,47 +48,7 @@ exports[`renderer/routes/Notifications.tsx > should render itself & its children
 </div>
 `;
 
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > bad credentials 1`] = `
-<div>
-  <p>
-    Oops
-  </p>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > default error 1`] = `
-<div>
-  <p>
-    Oops
-  </p>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > missing scopes 1`] = `
-<div>
-  <p>
-    Oops
-  </p>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > rate limited 1`] = `
-<div>
-  <p>
-    Oops
-  </p>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (error conditions - oops) > unknown error 1`] = `
-<div>
-  <p>
-    Oops
-  </p>
-</div>
-`;
-
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (show account header) 1`] = `
+exports[`renderer/routes/Notifications.tsx > renders itself & its children (show account header) 1`] = `
 <div>
   <div
     class="flex flex-col h-screen"
@@ -61,7 +61,7 @@ exports[`renderer/routes/Notifications.tsx > should render itself & its children
 </div>
 `;
 
-exports[`renderer/routes/Notifications.tsx > should render itself & its children (with notifications) 1`] = `
+exports[`renderer/routes/Notifications.tsx > renders itself & its children (with notifications) 1`] = `
 <div>
   <div
     class="flex flex-col h-screen"
@@ -71,5 +71,13 @@ exports[`renderer/routes/Notifications.tsx > should render itself & its children
       NotificationList
     </p>
   </div>
+</div>
+`;
+
+exports[`renderer/routes/Notifications.tsx > renders loading state instead of all-read while notifications are loading 1`] = `
+<div>
+  <p>
+    Loading
+  </p>
 </div>
 `;

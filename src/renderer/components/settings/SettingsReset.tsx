@@ -1,13 +1,14 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Stack, useConfirm } from '@primer/react';
+
+import { APPLICATION } from '../../../shared/constants';
 
 import { useSettingsStore } from '../../stores';
 
 import { rendererLogInfo } from '../../utils/core/logger';
 
-export const SettingsReset: FC = () => {
+export function SettingsReset() {
   const { t } = useTranslation();
   const resetSettings = useSettingsStore((s) => s.reset);
 
@@ -18,7 +19,8 @@ export const SettingsReset: FC = () => {
       title: t('settings.reset.confirm_title', 'Reset settings?'),
       content: t(
         'settings.reset.confirm_content',
-        'Please confirm that you want to reset all settings to the Gitify defaults',
+        'Please confirm that you want to reset all settings to the {{appName}} defaults',
+        { appName: APPLICATION.NAME },
       ),
 
       confirmButtonContent: t('settings.reset.confirm', 'Reset'),
@@ -44,4 +46,4 @@ export const SettingsReset: FC = () => {
       </Button>
     </Stack>
   );
-};
+}

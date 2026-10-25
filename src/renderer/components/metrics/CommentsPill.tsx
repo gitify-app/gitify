@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CommentIcon } from '@primer/octicons-react';
@@ -12,9 +11,8 @@ export interface CommentsPillProps {
   commentCount: number;
 }
 
-export const CommentsPill: FC<CommentsPillProps> = ({ commentCount }) => {
+export function CommentsPill({ commentCount }: Readonly<CommentsPillProps>) {
   const { t } = useTranslation();
-
   if (!commentCount) {
     return null;
   }
@@ -29,4 +27,4 @@ export const CommentsPill: FC<CommentsPillProps> = ({ commentCount }) => {
       metric={commentCount}
     />
   );
-};
+}

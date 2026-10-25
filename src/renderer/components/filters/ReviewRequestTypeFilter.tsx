@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { GitPullRequestIcon } from '@primer/octicons-react';
@@ -7,7 +6,7 @@ import { Stack, Text } from '@primer/react';
 import { reviewRequestTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
-export const ReviewRequestTypeFilter: FC = () => {
+export function ReviewRequestTypeFilter() {
   const { t } = useTranslation();
 
   return (
@@ -35,4 +34,4 @@ export const ReviewRequestTypeFilter: FC = () => {
       }
     />
   );
-};
+}

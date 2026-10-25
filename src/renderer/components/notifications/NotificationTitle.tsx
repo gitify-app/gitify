@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { Text } from '@primer/react';
 
 import { cn } from 'cn';
@@ -12,9 +10,7 @@ interface NotificationTitleProps {
   title: string;
 }
 
-export const NotificationTitle: FC<NotificationTitleProps> = ({
-  title,
-}: NotificationTitleProps) => {
+export function NotificationTitle({ title }: Readonly<NotificationTitleProps>) {
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
 
   const parts = parseInlineCode(title);
@@ -34,4 +30,4 @@ export const NotificationTitle: FC<NotificationTitleProps> = ({
       ))}
     </Text>
   );
-};
+}

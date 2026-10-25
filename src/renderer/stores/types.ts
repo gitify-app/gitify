@@ -5,6 +5,7 @@ import type {
   Forge,
   GitifyError,
   Hostname,
+  KeyboardAcceleratorShortcut,
   ReasonFilterValue,
   ReviewRequestTypeFilterValue,
   SearchToken,
@@ -273,3 +274,29 @@ export interface NotificationActionFailuresActions {
  */
 export type NotificationActionFailuresStore = NotificationActionFailuresState &
   NotificationActionFailuresActions;
+
+// ============================================================================
+// Shortcut Registration Store Types
+// ============================================================================
+
+/**
+ * Transient (non-persisted) state for global keyboard shortcut registration.
+ */
+export interface ShortcutRegistrationStore {
+  /**
+   * User-facing error when the configured global shortcut could not be
+   * registered (e.g. already in use by another application).
+   */
+  shortcutRegistrationError: string | null;
+
+  /**
+   * The last accelerator that registered successfully; used to revert the
+   * setting when a newly chosen accelerator fails to register.
+   */
+  lastAppliedShortcut: KeyboardAcceleratorShortcut;
+
+  setShortcutRegistrationError: (error: string | null) => void;
+  setLastAppliedShortcut: (accelerator: KeyboardAcceleratorShortcut) => void;
+  clearShortcutRegistrationError: () => void;
+  reset: () => void;
+}

@@ -1,4 +1,5 @@
-import { useAccountsStore, useSettingsStore } from '../../stores';
+import useAccountsStore from '../../stores/useAccountsStore';
+import useSettingsStore from '../../stores/useSettingsStore';
 
 import type {
   Account,
@@ -12,7 +13,7 @@ import { getAccountUUID } from '../auth/utils';
 import { rendererLogError, toError } from '../core/logger';
 import { getAccountAdapter, getAdapter } from '../forges/registry';
 import { filterBaseNotifications } from './filters/filter';
-import { formatNotification } from './formatters';
+import { formatNotification } from './formatNotification';
 import { getFlattenedNotificationsByRepo } from './group';
 
 /**
@@ -140,7 +141,8 @@ export async function enrichNotifications(
 
   // Adapters that do not implement enrichment (e.g. Gitea) leave
   // notifications unchanged.
-  const enrich = getAdapter(notifications[0].account).enrichNotifications;
+  const adapter = getAdapter(notifications[0].account);
+  const enrich = adapter.enrichNotifications?.bind(adapter);
   if (!enrich) {
     return notifications;
   }

@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { Text } from '@primer/react';
 
 import { cn } from 'cn';
@@ -19,7 +17,7 @@ interface CustomCounterProps {
  * - would show screen vertical scrollbar which is undesirable.
  * - would not render '0' within a counter.
  */
-export const CustomCounter: FC<CustomCounterProps> = ({ value, scheme = 'secondary' }) => {
+export function CustomCounter({ value, scheme = 'secondary' }: Readonly<CustomCounterProps>) {
   const baseStyles =
     'px-2 py-0.25 rounded-full text-[10px] font-medium leading-none min-w-[16px] text-gitify-counter-text';
 
@@ -30,4 +28,4 @@ export const CustomCounter: FC<CustomCounterProps> = ({ value, scheme = 'seconda
   };
 
   return <Text className={cn(baseStyles, schemeStyles[scheme])}>{value}</Text>;
-};
+}

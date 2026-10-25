@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent } from 'react';
+import { type MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
@@ -6,7 +6,7 @@ import { Button, Stack } from '@primer/react';
 
 import { cn } from 'cn';
 
-import { useNotifications } from '../../hooks/useNotifications';
+import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -28,16 +28,16 @@ export interface RepositoryHeaderProps {
   onAnimateExit: (animate: boolean) => void;
 }
 
-export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
+export function RepositoryHeader({
   repoName,
   repoNotifications,
   isCollapsed,
   isAnimatingExit,
   onToggle,
   onAnimateExit,
-}) => {
+}: Readonly<RepositoryHeaderProps>) {
   const { t } = useTranslation();
-  const { markNotificationsAsRead, markNotificationsAsDone } = useNotifications();
+  const { markNotificationsAsRead, markNotificationsAsDone } = useNotificationActions();
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 
@@ -69,6 +69,7 @@ export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
     >
       <Button
         alignContent="center"
+        aria-label={`Open repository ${repoName}`}
         count={repoNotifications.length}
         data-testid="open-repository"
         onClick={(event: MouseEvent<HTMLElement>) => {
@@ -119,4 +120,4 @@ export const RepositoryHeader: FC<RepositoryHeaderProps> = ({
       )}
     </Stack>
   );
-};
+}

@@ -1,4 +1,4 @@
-import { type FC, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -11,13 +11,13 @@ import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../../components/layout/Contents';
 import { Page } from '../../components/layout/Page';
-import { summarizeLoginError } from '../../components/login/LoginWithPersonalAccessTokenForm';
 import { Footer } from '../../components/primitives/Footer';
 import { Header } from '../../components/primitives/Header';
 
 import type { Account, Hostname } from '../../types';
 
 import i18n from '../../i18n';
+import { summarizeLoginError } from '../../utils/auth/loginValidation';
 import { isValidHostname } from '../../utils/auth/utils';
 import { rendererLogError, toError } from '../../utils/core/logger';
 
@@ -25,7 +25,7 @@ interface LocationState {
   account?: Account;
 }
 
-export const GitHubLoginWithCLIRoute: FC = () => {
+export function GitHubLoginWithCLIRoute() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,7 +50,7 @@ export const GitHubLoginWithCLIRoute: FC = () => {
 
     try {
       await loginWithCli('github', hostname);
-      navigate('/');
+      void navigate('/');
     } catch (err) {
       rendererLogError('loginWithCli', 'Failed to login with GitHub CLI', toError(err));
       setError(
@@ -139,4 +139,4 @@ export const GitHubLoginWithCLIRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

@@ -1,4 +1,4 @@
-import { useFiltersStore } from '../../../stores';
+import useFiltersStore from '../../../stores/useFiltersStore';
 
 import type { RawGitifyNotification } from '../../../types';
 

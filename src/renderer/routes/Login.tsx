@@ -1,4 +1,4 @@
-import { type FC, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,12 +8,12 @@ import { cn } from 'cn';
 
 import { useAccountsStore } from '../stores';
 
-import { LogoIcon } from '../components/icons/LogoIcon';
 import { Centered } from '../components/layout/Centered';
 
 import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
 
+import { LogoIcon } from '../icons/LogoIcon';
 import { translateForgeTagline, translateLoginMethodLabel } from '../utils/forges/labels';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
@@ -26,7 +26,7 @@ function pickPrimaryMethod(adapter: ForgeAdapter): LoginMethodDescriptor | undef
   return adapter.loginMethods.find((m) => m.variant === 'primary') ?? adapter.loginMethods[0];
 }
 
-export const LoginRoute: FC = () => {
+export function LoginRoute() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const adapters = listAdapters();
@@ -73,7 +73,7 @@ export const LoginRoute: FC = () => {
   useEffect(() => {
     if (isLoggedIn) {
       showWindow();
-      navigate('/', { replace: true });
+      void navigate('/', { replace: true });
     }
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [isLoggedIn]);
@@ -213,4 +213,4 @@ export const LoginRoute: FC = () => {
       </Stack>
     </Centered>
   );
-};
+}

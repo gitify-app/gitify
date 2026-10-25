@@ -3,6 +3,7 @@ import { mockPartialGitifyNotification } from '../../../../__mocks__/notificatio
 import type { SubjectType } from '../../../../types';
 import type { NotificationTypeHandler } from './types';
 
+import { agentSessionThreadHandler } from './agentSessionThread';
 import { checkSuiteHandler } from './checkSuite';
 import { commitHandler } from './commit';
 import { defaultHandler } from './default';
@@ -20,6 +21,7 @@ import { workflowRunHandler } from './workflowRun';
 describe('renderer/utils/notifications/handlers/index.ts', () => {
   describe('createNotificationHandler', () => {
     const cases = {
+      AgentSessionThread: agentSessionThreadHandler,
       BitbucketNotification: defaultHandler,
       CheckSuite: checkSuiteHandler,
       Commit: commitHandler,

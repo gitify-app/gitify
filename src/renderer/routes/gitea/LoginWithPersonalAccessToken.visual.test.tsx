@@ -26,7 +26,7 @@ describe('Gitea HTTP login', () => {
           headers: { 'content-type': 'application/json' },
         }),
     );
-    await renderRoute(<GiteaLoginWithPersonalAccessTokenRoute />, {
+    renderRoute(<GiteaLoginWithPersonalAccessTokenRoute />, {
       theme: Theme.LIGHT,
       designLanguage: DesignLanguage.CLASSIC,
     });
@@ -56,15 +56,18 @@ describe('Gitea HTTP login', () => {
   });
 
   it('shows validation and API errors', async () => {
-    await renderRoute(<GiteaLoginWithPersonalAccessTokenRoute />, {
+    renderRoute(<GiteaLoginWithPersonalAccessTokenRoute />, {
       theme: Theme.LIGHT,
       designLanguage: DesignLanguage.CLASSIC,
     });
     await page.getByTestId('login-submit').click();
+    // oxlint-disable-next-line typescript/await-thenable -- Vitest types omit `expect.element`'s poll promise
     await expect.element(page.getByText('Hostname is required')).toBeVisible();
     await page.getByTestId('login-hostname').fill('http://user:secret@git.internal/path');
+    // oxlint-disable-next-line typescript/await-thenable -- Vitest types omit `expect.element`'s poll promise
     await expect.element(page.getByTestId('login-create-token')).toBeDisabled();
     await page.getByTestId('login-submit').click();
+    // oxlint-disable-next-line typescript/await-thenable -- Vitest types omit `expect.element`'s poll promise
     await expect.element(page.getByText('Hostname format is invalid')).toBeVisible();
     expect(fetch).not.toHaveBeenCalled();
 

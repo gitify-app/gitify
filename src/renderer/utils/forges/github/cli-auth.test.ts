@@ -25,24 +25,21 @@ describe('GitHub CLI credential lifecycle', () => {
         const authorization = options.headers.authorization;
         requests.push({ url, authorization });
         const rejected = authorization === `token ${rejectedToken}`;
-        return new Response(
-          JSON.stringify(
-            rejected
-              ? { message: 'Bad credentials' }
-              : url.endsWith('/user')
-                ? {
-                    id:
-                      authorization === 'token different-user'
-                        ? 'different-user'
-                        : mockGitHubCliAccount.user?.id,
-                  }
-                : [],
-          ),
-          {
-            status: rejected ? 401 : 200,
-            headers: { 'content-type': 'application/json' },
-          },
-        );
+        let body: unknown = [];
+        if (rejected) {
+          body = { message: 'Bad credentials' };
+        } else if (url.endsWith('/user')) {
+          body = {
+            id:
+              authorization === 'token different-user'
+                ? 'different-user'
+                : mockGitHubCliAccount.user?.id,
+          };
+        }
+        return new Response(JSON.stringify(body), {
+          status: rejected ? 401 : 200,
+          headers: { 'content-type': 'application/json' },
+        });
       }),
     );
     return requests;

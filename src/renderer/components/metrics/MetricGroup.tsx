@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { useSettingsStore } from '../../stores';
 
 import type { GitifyNotification } from '../../types';
@@ -19,7 +17,7 @@ export interface MetricGroupProps {
   notification: GitifyNotification;
 }
 
-export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
+export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
   const showPills = useSettingsStore((s) => s.showPills);
 
   if (!showPills) {
@@ -27,7 +25,9 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
   }
 
   return (
-    <div className="flex gap-1">
+    // `flex-wrap` + `min-w-0` let the pills wrap within the row instead of
+    // overflowing the row and being clipped.
+    <div className="flex min-w-0 flex-wrap gap-1">
       <IssueTypesPill issueType={notification.subject.issueType} />
 
       <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
@@ -59,4 +59,4 @@ export const MetricGroup: FC<MetricGroupProps> = ({ notification }) => {
       />
     </div>
   );
-};
+}

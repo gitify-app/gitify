@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { GitMergeIcon } from '@primer/octicons-react';
@@ -13,13 +12,12 @@ export interface StackedPrsPillProps {
   stackDepth?: number;
 }
 
-export const StackedPrsPill: FC<StackedPrsPillProps> = ({
+export function StackedPrsPill({
   isStacked,
   stackPosition,
   stackDepth,
-}) => {
+}: Readonly<StackedPrsPillProps>) {
   const { t } = useTranslation();
-
   if (!isStacked) {
     return null;
   }
@@ -30,9 +28,9 @@ export const StackedPrsPill: FC<StackedPrsPillProps> = ({
   return (
     <MetricPill
       color={IconColor.YELLOW}
-      contents={t('metrics.stacked_prs', 'Part of a stacked PR series')}
+      contents={t('metrics.stacked_prs', 'Part of a stacked pull request series')}
       icon={GitMergeIcon}
       metric={metric}
     />
   );
-};
+}

@@ -2,6 +2,8 @@ import { app } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'electron-menubar';
 
+import { logError, toError } from '../shared/logger';
+
 import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
@@ -52,22 +54,27 @@ app.setAsDefaultProtocolClient(protocol);
 
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
-void app.whenReady().then(async () => {
-  await onFirstRunMaybe();
+app
+  .whenReady()
+  .then(async () => {
+    await onFirstRunMaybe();
 
-  initializeAppLifecycle(mb, contextMenu, protocol);
+    initializeAppLifecycle(mb, contextMenu, protocol);
 
-  // Configure window event handlers (Escape key, DevTools resize)
-  configureWindowEvents(mb, menuBuilder);
+    // Configure window event handlers (Escape key, DevTools resize)
+    configureWindowEvents(mb, menuBuilder);
 
-  // Register IPC handlers for various channels
-  registerTrayHandlers(mb);
-  registerSystemHandlers(mb);
-  registerStorageHandlers();
-  registerGitHubCliHandlers();
-  registerAppHandlers(mb);
-  registerUpdaterHandlers(appUpdater);
-});
+    // Register IPC handlers for various channels
+    registerTrayHandlers(mb);
+    registerSystemHandlers(mb);
+    registerStorageHandlers();
+    registerGitHubCliHandlers();
+    registerAppHandlers(mb);
+    registerUpdaterHandlers(appUpdater);
+  })
+  .catch((err) => {
+    logError('main', 'Failed to initialize application', toError(err));
+  });
 
 // Handle gitify:// custom protocol URL events for OAuth 2.0 callback
 app.on('open-url', (event, url) => {

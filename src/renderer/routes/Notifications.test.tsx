@@ -15,12 +15,16 @@ vi.mock('../components/AllRead', () => ({
   AllRead: () => <p>AllRead</p>,
 }));
 
+vi.mock('../components/Loading', () => ({
+  Loading: () => <p>Loading</p>,
+}));
+
 vi.mock('../components/Oops', () => ({
   Oops: () => <p>Oops</p>,
 }));
 
 describe('renderer/routes/Notifications.tsx', () => {
-  it('should render itself & its children (with notifications)', () => {
+  it('renders itself & its children (with notifications)', () => {
     const tree = renderWithProviders(<NotificationsRoute />, {
       notifications: mockMultipleAccountNotifications,
       hasNotifications: true,
@@ -29,12 +33,64 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render itself & its children (all read notifications)', () => {
+  it('renders itself & its children (all read notifications)', () => {
     const tree = renderWithProviders(<NotificationsRoute />);
+    expect(screen.getByText('AllRead')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render itself & its children (show account header)', () => {
+  it('renders loading state instead of all-read while notifications are loading', () => {
+    const tree = renderWithProviders(<NotificationsRoute />, {
+      status: 'loading',
+    });
+
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+    expect(screen.queryByText('AllRead')).not.toBeInTheDocument();
+    expect(tree.container).toMatchSnapshot();
+  });
+
+  it('keeps notifications visible during a background refresh', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      notifications: mockMultipleAccountNotifications,
+      hasNotifications: true,
+      isFetching: true,
+    });
+
+    expect(screen.getByText('NotificationList')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+  });
+
+  it('keeps all-read visible during a background refresh with an empty inbox', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      isFetching: true,
+    });
+
+    expect(screen.getByText('AllRead')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+  });
+
+  it('prefers the offline state over loading', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      isOnline: false,
+      status: 'loading',
+    });
+
+    expect(screen.getByText('Oops')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+  });
+
+  it('prefers the error state over loading', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      globalError: getErrorDetails('UNKNOWN'),
+      status: 'error',
+    });
+
+    expect(screen.getByText('Oops')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+  });
+
+  it('renders itself & its children (show account header)', () => {
     const tree = renderWithProviders(<NotificationsRoute />, {
       notifications: [mockMultipleAccountNotifications[0]],
       hasNotifications: true,
@@ -43,7 +99,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render offline error when not online', () => {
+  it('renders offline error when not online', () => {
     renderWithProviders(<NotificationsRoute />, {
       isOnline: false,
     });
@@ -51,7 +107,7 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(screen.getByText('Oops')).toBeInTheDocument();
   });
 
-  describe('should render itself & its children (error conditions - oops)', () => {
+  describe('error conditions - oops', () => {
     it('bad credentials', () => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',

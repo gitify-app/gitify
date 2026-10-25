@@ -2,7 +2,10 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
+import {
+  mockAgentSessionGitifyNotification,
+  mockGitifyNotification,
+} from '../../__mocks__/notifications-mocks';
 
 import type { GitifyNotificationUser, Link } from '../../types';
 
@@ -12,17 +15,30 @@ import { NotificationFooter, type NotificationFooterProps } from './Notification
 describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   vi.spyOn(globalThis.Date, 'now').mockImplementation(() => new Date('2024').valueOf());
 
-  it('should render itself & its children', async () => {
+  it('renders itself & its children', async () => {
+    const props: NotificationFooterProps = {
+      notification: mockGitifyNotification,
+    };
+
+    renderWithProviders(<NotificationFooter {...props} />);
+
+    expect(screen.getByTestId('view-profile')).toBeInTheDocument();
+    expect(screen.getByTestId('avatar')).toBeInTheDocument();
+    expect(screen.getByText('Updated')).toBeInTheDocument();
+  });
+
+  it('reserves the action rail width on the footer', async () => {
     const props: NotificationFooterProps = {
       notification: mockGitifyNotification,
     };
 
     const tree = renderWithProviders(<NotificationFooter {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    // The footer is inset so its pills wrap clear of the row's action rail.
+    expect(tree.container.querySelector('.pr-\\[5\\.5rem\\]')).toBeInTheDocument();
   });
 
-  describe('security alerts should use github icon for avatar', () => {
+  describe('security alert avatars', () => {
     it('Repository Dependabot Alerts Thread', async () => {
       const mockNotification = mockGitifyNotification;
       mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
@@ -31,9 +47,10 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithProviders(<NotificationFooter {...props} />);
+      renderWithProviders(<NotificationFooter {...props} />);
 
-      expect(tree.container).toMatchSnapshot();
+      expect(screen.getByTestId('view-profile')).toBeInTheDocument();
+      expect(screen.getByAltText('gitify-app')).toBeInTheDocument();
     });
 
     it('Repository Vulnerability Alert', async () => {
@@ -44,13 +61,14 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
         notification: mockNotification,
       };
 
-      const tree = renderWithProviders(<NotificationFooter {...props} />);
+      renderWithProviders(<NotificationFooter {...props} />);
 
-      expect(tree.container).toMatchSnapshot();
+      expect(screen.getByTestId('view-profile')).toBeInTheDocument();
+      expect(screen.getByAltText('gitify-app')).toBeInTheDocument();
     });
   });
 
-  it('should default to known avatar if no user found', async () => {
+  it('defaults to known avatar if no user found', async () => {
     const mockNotification = mockGitifyNotification;
     mockNotification.subject.user = undefined;
 
@@ -58,12 +76,22 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       notification: mockNotification,
     };
 
-    const tree = renderWithProviders(<NotificationFooter {...props} />);
+    renderWithProviders(<NotificationFooter {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.queryByTestId('view-profile')).not.toBeInTheDocument();
+    expect(screen.getByTestId('avatar')).toBeInTheDocument();
+    expect(screen.getByText('Updated')).toBeInTheDocument();
   });
 
-  it('should open notification user profile', async () => {
+  it('presents the Copilot actor for an agent session notification', () => {
+    renderWithProviders(<NotificationFooter notification={mockAgentSessionGitifyNotification} />);
+
+    // Agent sessions have no enriched actor, so no profile button is rendered.
+    expect(screen.queryByTestId('view-profile')).not.toBeInTheDocument();
+    expect(screen.getByText('Agent Session Finished')).toBeInTheDocument();
+  });
+
+  it('opens notification user profile', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     const props: NotificationFooterProps = {
@@ -97,7 +125,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       'copilot-pull-request-reviewer',
       'https://github.com/apps/copilot-pull-request-reviewer',
     ],
-  ])('should format a GitHub App actor as %s in the avatar alt', (label, login, htmlUrl) => {
+  ])('formats a GitHub App actor as %s in the avatar alt', (label, login, htmlUrl) => {
     const notification = {
       ...mockGitifyNotification,
       subject: {
@@ -119,7 +147,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(screen.queryByTestId('notification-user-badge')).not.toBeInTheDocument();
   });
 
-  it('should not render a badge for an unsupported actor', () => {
+  it('does not render a badge for an unsupported actor', () => {
     const notification = {
       ...mockGitifyNotification,
       subject: {

@@ -90,6 +90,24 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       });
     });
 
+    it('attaches the commit SHA as its identifier', async () => {
+      const mockNotification = mockPartialGitifyNotification({
+        title: 'This is a commit',
+        type: 'Commit',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
+        latestCommentUrl: null,
+      });
+
+      getCommitSpy.mockResolvedValue({
+        author: mockAuthor,
+        sha: 'd2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+      } as GetCommitResponse);
+
+      const result = await commitHandler.enrich(mockNotification);
+
+      expect(result.commitSha).toBe('d2a86d80e3d24ea9510d5de6c147e53c30f313a8');
+    });
+
     it('leaves roles undefined when the commit has no linked GitHub user', async () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'This is a commit with comments',
@@ -107,6 +125,7 @@ describe('renderer/utils/notifications/handlers/commit.ts', () => {
       expect(result.user).toBeUndefined();
       expect(result.author).toBeUndefined();
       expect(result.commenter).toBeUndefined();
+      expect(result.commitSha).toBeUndefined();
     });
 
     it('return early if commit state filtered', async () => {

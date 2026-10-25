@@ -1,4 +1,4 @@
-import { useFiltersStore } from '../../../stores';
+import useFiltersStore from '../../../stores/useFiltersStore';
 
 import type {
   AccountNotifications,
@@ -31,7 +31,7 @@ export const userTypeFilter: Filter<UserTypeFilterValue> = {
         title: i18n.t('filters.user_type.bot', 'Bot'),
         description: i18n.t(
           'filters.user_type.bot_description',
-          'Bot accounts such as @copilot, @dependabot, @renovate, @netlify, etc',
+          'Bot accounts such as @copilot, @dependabot, @renovate, @netlify, etc.',
         ),
       },
       Organization: {

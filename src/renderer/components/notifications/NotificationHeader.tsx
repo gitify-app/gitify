@@ -1,4 +1,4 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Stack } from '@primer/react';
@@ -17,9 +17,7 @@ export interface NotificationHeaderProps {
   notification: GitifyNotification;
 }
 
-export const NotificationHeader: FC<NotificationHeaderProps> = ({
-  notification,
-}: NotificationHeaderProps) => {
+export function NotificationHeader({ notification }: NotificationHeaderProps) {
   const { t } = useTranslation();
   const showNumber = useSettingsStore((s) => s.showNumber);
 
@@ -47,10 +45,10 @@ export const NotificationHeader: FC<NotificationHeaderProps> = ({
             />
           </button>
           <div className={cn('text-xxs', Opacity.READ, !showNumber && 'hidden')}>
-            {notification.display.number}
+            {notification.display.identifier}
           </div>
         </Stack>
       </div>
     )
   );
-};
+}

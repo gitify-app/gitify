@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
@@ -27,46 +27,44 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       expect(screen.getByText('Repository (repo:fullname)')).toBeInTheDocument();
     });
 
-    it('strikes through qualifiers that require detailed notifications when disabled', async () => {
+    it('marks qualifiers that require detailed notifications as disabled', async () => {
       renderWithProviders(<SearchFilter />, { settings: { detailedNotifications: false } });
 
       const tooltipIconElement = screen.getByTestId('tooltip-icon-tooltip-search');
       await userEvent.click(tooltipIconElement);
 
-      expect(screen.getByText('Author (author:handle)')).toHaveClass('line-through');
-      expect(screen.getByText('Commenter (commenter:handle)')).toHaveClass('line-through');
+      expect(screen.getByText('Author (author:handle)')).toHaveAttribute('aria-disabled', 'true');
+      expect(screen.getByText('Commenter (commenter:handle)')).toHaveAttribute(
+        'aria-disabled',
+        'true',
+      );
     });
   });
 
   describe('Include Search Tokens', () => {
-    it('adds include actor token with prefix', () => {
+    it('adds include actor token with prefix', async () => {
       renderWithProviders(<SearchFilter />);
 
       const includeInput = screen.getByTitle('Include searches');
-      fireEvent.change(includeInput, { target: { value: 'author:octocat' } });
-      fireEvent.keyDown(includeInput, { key: 'Enter' });
+      await userEvent.type(includeInput, 'author:octocat{Enter}');
 
       expect(updateFilterSpy).toHaveBeenCalledWith('includeSearchTokens', 'author:octocat', true);
     });
 
-    it('adds include org token with prefix', () => {
+    it('adds include org token with prefix', async () => {
       renderWithProviders(<SearchFilter />);
 
       const includeInput = screen.getByTitle('Include searches');
-      fireEvent.change(includeInput, { target: { value: 'org:gitify-app' } });
-      fireEvent.keyDown(includeInput, { key: 'Enter' });
+      await userEvent.type(includeInput, 'org:gitify-app{Enter}');
 
       expect(updateFilterSpy).toHaveBeenCalledWith('includeSearchTokens', 'org:gitify-app', true);
     });
 
-    it('adds include repo token with prefix', () => {
+    it('adds include repo token with prefix', async () => {
       renderWithProviders(<SearchFilter />);
 
       const includeInput = screen.getByTitle('Include searches');
-      fireEvent.change(includeInput, {
-        target: { value: 'repo:gitify-app/gitify' },
-      });
-      fireEvent.keyDown(includeInput, { key: 'Enter' });
+      await userEvent.type(includeInput, 'repo:gitify-app/gitify{Enter}');
 
       expect(updateFilterSpy).toHaveBeenCalledWith(
         'includeSearchTokens',
@@ -75,48 +73,40 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       );
     });
 
-    it('prevent unrecognized include prefixes', () => {
+    it('prevent unrecognized include prefixes', async () => {
       renderWithProviders(<SearchFilter />);
 
       const includeInput = screen.getByTitle('Include searches');
-      fireEvent.change(includeInput, {
-        target: { value: 'some:search' },
-      });
-      fireEvent.keyDown(includeInput, { key: 'Enter' });
+      await userEvent.type(includeInput, 'some:search{Enter}');
 
       expect(updateFilterSpy).not.toHaveBeenCalledWith();
     });
   });
 
   describe('Exclude Search Tokens', () => {
-    it('adds exclude actor token with prefix', () => {
+    it('adds exclude actor token with prefix', async () => {
       renderWithProviders(<SearchFilter />);
 
       const includeInput = screen.getByTitle('Exclude searches');
-      fireEvent.change(includeInput, { target: { value: 'author:octocat' } });
-      fireEvent.keyDown(includeInput, { key: 'Enter' });
+      await userEvent.type(includeInput, 'author:octocat{Enter}');
 
       expect(updateFilterSpy).toHaveBeenCalledWith('excludeSearchTokens', 'author:octocat', true);
     });
 
-    it('adds exclude org token with prefix', () => {
+    it('adds exclude org token with prefix', async () => {
       renderWithProviders(<SearchFilter />);
 
       const excludeInput = screen.getByTitle('Exclude searches');
-      fireEvent.change(excludeInput, { target: { value: 'org:gitify-app' } });
-      fireEvent.keyDown(excludeInput, { key: 'Enter' });
+      await userEvent.type(excludeInput, 'org:gitify-app{Enter}');
 
       expect(updateFilterSpy).toHaveBeenCalledWith('excludeSearchTokens', 'org:gitify-app', true);
     });
 
-    it('adds exclude repo token with prefix', () => {
+    it('adds exclude repo token with prefix', async () => {
       renderWithProviders(<SearchFilter />);
 
       const excludeInput = screen.getByTitle('Exclude searches');
-      fireEvent.change(excludeInput, {
-        target: { value: 'repo:gitify-app/gitify' },
-      });
-      fireEvent.keyDown(excludeInput, { key: 'Enter' });
+      await userEvent.type(excludeInput, 'repo:gitify-app/gitify{Enter}');
 
       expect(updateFilterSpy).toHaveBeenCalledWith(
         'excludeSearchTokens',
@@ -125,14 +115,11 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
       );
     });
 
-    it('prevent unrecognized exclude prefixes', () => {
+    it('prevent unrecognized exclude prefixes', async () => {
       renderWithProviders(<SearchFilter />);
 
       const excludeInput = screen.getByTitle('Exclude searches');
-      fireEvent.change(excludeInput, {
-        target: { value: 'some:search' },
-      });
-      fireEvent.keyDown(excludeInput, { key: 'Enter' });
+      await userEvent.type(excludeInput, 'some:search{Enter}');
 
       expect(updateFilterSpy).not.toHaveBeenCalledWith();
     });

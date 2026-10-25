@@ -12,7 +12,7 @@ import {
 } from './theme';
 
 describe('renderer/utils/theme.ts', () => {
-  it('should map theme mode to github primer color mode', () => {
+  it('maps theme mode to github primer color mode', () => {
     expect(mapThemeModeToColorMode(Theme.LIGHT)).toBe('day');
     expect(mapThemeModeToColorMode(Theme.LIGHT_COLORBLIND)).toBe('day');
     expect(mapThemeModeToColorMode(Theme.LIGHT_TRITANOPIA)).toBe('day');
@@ -23,7 +23,7 @@ describe('renderer/utils/theme.ts', () => {
     expect(mapThemeModeToColorMode(Theme.SYSTEM)).toBe('auto');
   });
 
-  it('should map theme mode to github primer color scheme', () => {
+  it('maps theme mode to github primer color scheme', () => {
     expect(mapThemeModeToColorScheme(Theme.LIGHT)).toBe('light');
     expect(mapThemeModeToColorScheme(Theme.LIGHT_COLORBLIND)).toBe('light_colorblind');
     expect(mapThemeModeToColorScheme(Theme.LIGHT_TRITANOPIA)).toBe('light_tritanopia');
@@ -44,7 +44,7 @@ describe('renderer/utils/theme.ts', () => {
     expect(mapThemeModeToColorScheme(Theme.SYSTEM, true)).toBe(null);
   });
 
-  it('should export default color scheme constants', () => {
+  it('exports default color scheme constants', () => {
     expect(DEFAULT_DAY_COLOR_SCHEME).toBe('light');
     expect(DEFAULT_NIGHT_COLOR_SCHEME).toBe('dark');
     expect(DEFAULT_DAY_HIGH_CONTRAST_COLOR_SCHEME).toBe('light_high_contrast');

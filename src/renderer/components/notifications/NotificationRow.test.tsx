@@ -1,10 +1,11 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
 import {
+  mockCommitGitifyNotification,
   mockGiteaGitifyNotification,
   mockGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
@@ -42,58 +43,107 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
   vi.spyOn(globalThis.Date, 'now').mockImplementation(() => new Date('2024').valueOf());
 
-  it('should render itself & its children - group by date', async () => {
+  it('renders the notification content and actions when grouped by date', () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithProviders(<NotificationRow {...props} />, {
+    renderWithProviders(<NotificationRow {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.DATE },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.getByText('gitify-app/notifications-test')).toBeInTheDocument();
+    expect(screen.getByTestId('notification-reference')).toHaveAttribute('data-hidden', 'true');
+    expect(screen.getByRole('button', { name: 'Mark as read' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mark as done' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Unsubscribe from thread' })).toBeInTheDocument();
   });
 
-  it('should render itself & its children - group by repositories', async () => {
+  it('renders the reference when grouped by repository', () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithProviders(<NotificationRow {...props} />, {
+    renderWithProviders(<NotificationRow {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.getByTestId('notification-reference')).not.toHaveAttribute('data-hidden');
   });
 
-  it('should render itself & its children - hide numbers', async () => {
+  it('hides the reference when showNumber is disabled', () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithProviders(<NotificationRow {...props} />, {
+    renderWithProviders(<NotificationRow {...props} />, {
       settings: { ...mockSettings, showNumber: false },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.getByTestId('notification-reference')).toHaveAttribute('data-hidden', 'true');
   });
 
-  it('should render itself & its children - notification is read', async () => {
+  it('hides the issue number while hovered so it is never partially rendered', () => {
     const props: NotificationRowProps = {
-      notification: { ...mockGitifyNotification, unread: false },
+      notification: mockGitifyNotification,
+      isRepositoryAnimatingExit: false,
+    };
+
+    renderWithProviders(<NotificationRow {...props} />);
+
+    // `group-hover:invisible` (not `hidden`) keeps the number's space but hides
+    // it on hover, so the full-height rail can never leave it half-covered.
+    expect(screen.getByText('123')).toHaveClass('group-hover:invisible');
+  });
+
+  it('shows the release tag as the identifier', () => {
+    const props: NotificationRowProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: { ...mockGitifyNotification.subject, type: 'Release', tagName: '0.0.1' },
+        display: { ...mockGitifyNotification.display, identifier: '0.0.1' },
+      },
       isRepositoryAnimatingExit: false,
     };
 
     const tree = renderWithProviders(<NotificationRow {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(tree.getByText('0.0.1')).toBeInTheDocument();
+  });
+
+  it('shows the commit short SHA as the identifier', () => {
+    const props: NotificationRowProps = {
+      notification: mockCommitGitifyNotification,
+      isRepositoryAnimatingExit: false,
+    };
+
+    const tree = renderWithProviders(<NotificationRow {...props} />);
+
+    expect(tree.getByText('d2a86d8')).toBeInTheDocument();
+  });
+
+  it('hides read/done actions for a read notification', () => {
+    const props: NotificationRowProps = {
+      notification: { ...mockGitifyNotification, unread: false },
+      isRepositoryAnimatingExit: false,
+    };
+
+    renderWithProviders(<NotificationRow {...props} />);
+
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Mark as read' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Mark as done' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Unsubscribe from thread' })).toBeInTheDocument();
   });
 
   describe('notification interactions', () => {
-    it('should open a notification in the browser - click', async () => {
+    it('opens a notification in the browser - click', async () => {
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -112,7 +162,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should open a notification in the browser - delay notification setting enabled', async () => {
+    it('opens a notification in the browser - delay notification setting enabled', async () => {
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -135,7 +185,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should open a notification in browser & mark it as done', async () => {
+    it('opens a notification in browser & mark it as done', async () => {
       const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -154,7 +204,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
+    it('marks as done when markAsDoneOnOpen is true even with fetchReadNotifications enabled', async () => {
       const markNotificationsAsReadMock = vi.fn();
       const markNotificationsAsDoneMock = vi.fn();
 
@@ -180,7 +230,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).not.toHaveBeenCalled();
     });
 
-    it('should mark notifications as read', async () => {
+    it('marks notifications as read', async () => {
       const markNotificationsAsReadMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -198,7 +248,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should hide mark as read button when notification is already read', async () => {
+    it('hides mark as read button when notification is already read', async () => {
       const props: NotificationRowProps = {
         notification: {
           ...mockGitifyNotification,
@@ -212,7 +262,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(screen.queryByTestId('notification-mark-as-read')).not.toBeInTheDocument();
     });
 
-    it('should mark notifications as done', async () => {
+    it('marks notifications as done', async () => {
       const markNotificationsAsDoneMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -230,7 +280,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should hide mark as done button when notification is already read', async () => {
+    it('hides mark as done button when notification is already read', async () => {
       const props: NotificationRowProps = {
         notification: {
           ...mockGitifyNotification,
@@ -244,7 +294,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(screen.queryByTestId('notification-mark-as-done')).not.toBeInTheDocument();
     });
 
-    it('should show mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
+    it('shows mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
       const props: NotificationRowProps = {
         notification: mockGitifyNotification,
         isRepositoryAnimatingExit: false,
@@ -258,7 +308,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
     });
 
-    it('should unsubscribe from a notification thread', async () => {
+    it('unsubscribes from a notification thread', async () => {
       const unsubscribeNotificationMock = vi.fn();
 
       const props: NotificationRowProps = {
@@ -275,7 +325,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should not show unsubscribe for Gitea notifications', () => {
+    it('does not show unsubscribe for Gitea notifications', () => {
       const props: NotificationRowProps = {
         notification: mockGiteaGitifyNotification,
         isRepositoryAnimatingExit: false,
@@ -293,8 +343,17 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       mockGitifyNotification.id,
     );
 
+    const recordFailure = (action: 'markAsRead' | 'markAsDone') => {
+      act(() => {
+        useNotificationActionFailuresStore.getState().setFailure(failureKey, {
+          action,
+          error: getErrorDetails('ACTION_FORBIDDEN'),
+        });
+      });
+    };
+
     afterEach(() => {
-      useNotificationActionFailuresStore.getState().reset();
+      act(() => useNotificationActionFailuresStore.getState().reset());
     });
 
     it('shows hover actions in their normal (non-danger) state when there is no recorded failure', () => {
@@ -333,10 +392,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
-      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
-        action: 'markAsRead',
-        error: getErrorDetails('ACTION_FORBIDDEN'),
-      });
+      recordFailure('markAsRead');
       renderWithProviders(<NotificationRow {...props} />);
 
       const markAsReadButton = screen.getByTestId('notification-mark-as-read');
@@ -349,7 +405,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       );
       expect(markAsReadButton).toHaveAttribute(
         'title',
-        expect.stringContaining('You can also try opening this notification in the browser.'),
+        expect.stringContaining('You can also try opening this notification in your browser.'),
       );
       expect(screen.getByTestId('notification-mark-as-done')).toHaveAttribute(
         'title',
@@ -366,10 +422,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         ...mockGitifyNotification,
         account: mockGitHubEnterpriseServerAccount,
       };
-      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
-        action: 'markAsRead',
-        error: getErrorDetails('ACTION_FORBIDDEN'),
-      });
+      recordFailure('markAsRead');
 
       renderWithProviders(
         <>
@@ -397,10 +450,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
-      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
-        action: 'markAsDone',
-        error: getErrorDetails('ACTION_FORBIDDEN'),
-      });
+      recordFailure('markAsDone');
       renderWithProviders(<NotificationRow {...props} />, {
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
@@ -419,10 +469,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         isRepositoryAnimatingExit: false,
       };
 
-      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
-        action: 'markAsRead',
-        error: getErrorDetails('ACTION_FORBIDDEN'),
-      });
+      recordFailure('markAsRead');
       renderWithProviders(<NotificationRow {...props} />, {
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
@@ -441,10 +488,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       // (possibly stale, still-present-from-the-previous-attempt) failure
       // map - so a retry always gets to animate out and, if it fails again,
       // animate back in, instead of being short-circuited immediately.
-      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
-        action: 'markAsRead',
-        error: getErrorDetails('ACTION_FORBIDDEN'),
-      });
+      recordFailure('markAsRead');
 
       let resolveRetry: () => void = () => {};
       const markNotificationsAsReadMock = vi.fn().mockImplementation(
@@ -472,11 +516,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       // The retry fails again; the store still has a (new) failure entry for
       // this notification once the mutation resolves.
-      useNotificationActionFailuresStore.getState().setFailure(failureKey, {
-        action: 'markAsRead',
-        error: getErrorDetails('ACTION_FORBIDDEN'),
+      recordFailure('markAsRead');
+      await act(async () => {
+        resolveRetry();
       });
-      resolveRetry();
 
       await screen.findByTestId('notification-mark-as-read');
     });

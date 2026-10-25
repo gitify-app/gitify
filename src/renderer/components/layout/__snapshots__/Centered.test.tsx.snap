@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/layout/Centered.tsx > should render itself & its children - full height false 1`] = `
+exports[`renderer/components/layout/Centered.tsx > renders itself & its children - full height false 1`] = `
 <div>
   <div
     class="prc-Stack-Stack-UQ9k6"
@@ -16,7 +16,7 @@ exports[`renderer/components/layout/Centered.tsx > should render itself & its ch
 </div>
 `;
 
-exports[`renderer/components/layout/Centered.tsx > should render itself & its children - full height true 1`] = `
+exports[`renderer/components/layout/Centered.tsx > renders itself & its children - full height true 1`] = `
 <div>
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"

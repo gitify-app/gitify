@@ -1,9 +1,8 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LoginWithPersonalAccessTokenForm } from '../../components/login/LoginWithPersonalAccessTokenForm';
 
-export const BitbucketLoginWithPersonalAccessTokenRoute: FC = () => {
+export function BitbucketLoginWithPersonalAccessTokenRoute() {
   const { t } = useTranslation();
 
   return (
@@ -26,4 +25,4 @@ export const BitbucketLoginWithPersonalAccessTokenRoute: FC = () => {
       usernamePlaceholder="you@example.com"
     />
   );
-};
+}

@@ -4,12 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockPersonalAccessTokenAccount } from '../../__mocks__/account-mocks';
 
-import {
-  type IFormData,
-  validateForm,
-} from '../../components/login/LoginWithPersonalAccessTokenForm';
-
-import type { Hostname, Token } from '../../types';
+import type { Hostname } from '../../types';
 
 import * as logger from '../../utils/core/logger';
 import * as comms from '../../utils/system/comms';
@@ -19,10 +14,15 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
   const loginWithPersonalAccessTokenMock = vi.fn();
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
-  it('renders correctly', () => {
-    const tree = renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
+  it('renders the personal access token form', () => {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(
+      screen.getByRole('heading', { name: 'Login with Personal Access Token' }),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Token/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Generate a PAT' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
   });
 
   it('let us go back', async () => {
@@ -34,68 +34,47 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
-  describe('form validation', () => {
-    it('should validate the form values are not empty', () => {
-      const values: IFormData = {
-        hostname: null as unknown as Hostname,
-        token: null as unknown as Token,
-      };
-      expect(validateForm(values).hostname).toBe('Hostname is required');
-      expect(validateForm(values).token).toBe('Token is required');
-    });
-
-    it('should validate the form values are correct format', () => {
-      const values: IFormData = {
-        hostname: 'hello' as Hostname,
-        token: '!@£INVALID-.1' as Token,
-      };
-
-      expect(validateForm(values).hostname).toBe('Hostname format is invalid');
-      expect(validateForm(values).token).toBe('Token format is invalid');
-    });
-  });
-
   describe("'Generate a PAT' button", () => {
-    it('should be disabled if no hostname configured', async () => {
+    it('is disabled if no hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
         loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
 
-      await userEvent.clear(screen.getByTestId('login-hostname'));
+      await userEvent.clear(screen.getByRole('textbox', { name: /^Hostname/ }));
 
-      await userEvent.click(screen.getByTestId('login-create-token'));
+      await userEvent.click(screen.getByRole('button', { name: 'Generate a PAT' }));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
-    it('should open in browser if hostname configured', async () => {
+    it('opens in browser if hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
         loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
 
-      await userEvent.click(screen.getByTestId('login-create-token'));
+      await userEvent.click(screen.getByRole('button', { name: 'Generate a PAT' }));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     });
   });
 
-  it('should login using a token - success', async () => {
+  it('logs in using a token - success', async () => {
     loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /^Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.com');
 
     await userEvent.type(
-      screen.getByTestId('login-token'),
+      screen.getByLabelText(/^Token/),
       '1234567890123456789012345678901234567890',
     );
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
@@ -109,7 +88,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should login using a token - failure', async () => {
+  it('logs in using a token - failure', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
@@ -117,16 +96,16 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /^Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.com');
 
     await userEvent.type(
-      screen.getByTestId('login-token'),
+      screen.getByLabelText(/^Token/),
       '1234567890123456789012345678901234567890',
     );
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(loginWithPersonalAccessTokenMock).toHaveBeenCalledTimes(1);
@@ -139,22 +118,22 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should render the form with errors', async () => {
+  it('renders the form with errors', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /^Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'test');
 
-    await userEvent.type(screen.getByTestId('login-token'), '123');
+    await userEvent.type(screen.getByLabelText(/^Token/), '123');
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     expect(screen.getByText('Hostname format is invalid')).toBeInTheDocument();
     expect(screen.getByText('Token format is invalid')).toBeInTheDocument();
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
@@ -164,10 +143,10 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle token visibility', async () => {
+  it('toggles token visibility', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
-    const tokenInput = screen.getByTestId('login-token');
+    const tokenInput = screen.getByLabelText(/^Token/);
     expect(tokenInput).toHaveAttribute('type', 'password');
 
     await userEvent.click(screen.getByLabelText('Show token'));
@@ -177,7 +156,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(tokenInput).toHaveAttribute('type', 'password');
   });
 
-  it('should prefill hostname from the re-auth account in location state', () => {
+  it('prefills hostname from the re-auth account in location state', () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       initialEntries: [
         {
@@ -192,6 +171,8 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
       ],
     });
 
-    expect(screen.getByTestId('login-hostname')).toHaveValue('github.enterprise.example');
+    expect(screen.getByRole('textbox', { name: /^Hostname/ })).toHaveValue(
+      'github.enterprise.example',
+    );
   });
 });

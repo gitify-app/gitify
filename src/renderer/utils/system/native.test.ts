@@ -13,8 +13,8 @@ describe('renderer/utils/system/native.ts', () => {
 
   vi.spyOn(url, 'generateNotificationWebUrl').mockImplementation(async () => mockHtmlUrl);
 
-  it('should raise a native notification for a single new notification', async () => {
-    native.raiseNativeNotification(mockSingleAccountNotifications[0].notifications);
+  it('raises a native notification for a single new notification', async () => {
+    void native.raiseNativeNotification(mockSingleAccountNotifications[0].notifications);
 
     await waitFor(() => expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1));
 
@@ -28,8 +28,8 @@ describe('renderer/utils/system/native.ts', () => {
     expect(url.generateNotificationWebUrl).toHaveBeenCalledTimes(1);
   });
 
-  it('should raise a native notification for multiple new notifications', async () => {
-    native.raiseNativeNotification(mockMultipleAccountNotifications[0].notifications);
+  it('raises a native notification for multiple new notifications', async () => {
+    void native.raiseNativeNotification(mockMultipleAccountNotifications[0].notifications);
 
     await waitFor(() => expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1));
 

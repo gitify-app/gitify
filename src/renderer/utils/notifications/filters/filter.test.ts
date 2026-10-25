@@ -68,7 +68,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     ];
 
     describe('filterBaseNotifications', () => {
-      it('should filter notifications by subject type when provided', () => {
+      it('filters notifications by subject type when provided', () => {
         useFiltersStore.setState({
           subjectTypes: ['Issue'],
         });
@@ -81,7 +81,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications by reasons when provided', async () => {
+      it('filters notifications by reasons when provided', async () => {
         useFiltersStore.setState({
           reasons: ['manual'],
         });
@@ -98,7 +98,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         { name: 'organization', token: 'org:gitify-app' as SearchToken },
         { name: 'repository', token: 'repo:gitify-app/gitify' as SearchToken },
         { name: 'title (substring)', token: 'title:User' as SearchToken },
-      ])('should filter notifications that match include $name', ({ token }) => {
+      ])('filters notifications that match include $name', ({ token }) => {
         useFiltersStore.setState({
           includeSearchTokens: [token],
         });
@@ -114,7 +114,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         { name: 'repository', token: 'repo:github/github' as SearchToken },
         { name: 'title (substring)', token: 'title:bot' as SearchToken },
         { name: 'title case-insensitively', token: 'title:BOT' as SearchToken },
-      ])('should filter notifications that match exclude $name', ({ token }) => {
+      ])('filters notifications that match exclude $name', ({ token }) => {
         useFiltersStore.setState({
           excludeSearchTokens: [token],
         });
@@ -125,7 +125,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter by title without detailed notifications enabled', () => {
+      it('filters by title without detailed notifications enabled', () => {
         useSettingsStore.setState({ detailedNotifications: false });
         useFiltersStore.setState({
           includeSearchTokens: ['title:bot' as SearchToken],
@@ -139,7 +139,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
     });
 
     describe('filterDetailedNotifications', () => {
-      it('should ignore user type, handle filters and state filters if detailed notifications not enabled', async () => {
+      it('ignores user type, handle filters and state filters if detailed notifications not enabled', async () => {
         useFiltersStore.setState({
           userTypes: ['Bot'],
           includeSearchTokens: ['author:github-user' as SearchToken],
@@ -155,7 +155,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual(mockNotifications);
       });
 
-      it('should filter notifications by user type provided', async () => {
+      it('filters notifications by user type provided', async () => {
         useFiltersStore.setState({
           userTypes: ['Bot'],
         });
@@ -168,7 +168,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications that match include author handle', async () => {
+      it('filters notifications that match include author handle', async () => {
         useFiltersStore.setState({
           includeSearchTokens: ['author:github-user' as SearchToken],
         });
@@ -181,7 +181,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude author handle', async () => {
+      it('filters notifications that match exclude author handle', async () => {
         useFiltersStore.setState({
           excludeSearchTokens: ['author:github-bot' as SearchToken],
         });
@@ -194,7 +194,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should not match author handle against the latest commenter', async () => {
+      it('does not match author handle against the latest commenter', async () => {
         // The bot is the latest commenter on the human-authored notification,
         // but it is not the author, so an author exclude must not hide it.
         useFiltersStore.setState({
@@ -209,7 +209,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual(mockNotifications);
       });
 
-      it('should filter notifications that match include commenter handle', async () => {
+      it('filters notifications that match include commenter handle', async () => {
         useFiltersStore.setState({
           includeSearchTokens: ['commenter:coderabbitai' as SearchToken],
         });
@@ -222,7 +222,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[0]]);
       });
 
-      it('should filter notifications that match exclude commenter handle', async () => {
+      it('filters notifications that match exclude commenter handle', async () => {
         useFiltersStore.setState({
           excludeSearchTokens: ['commenter:coderabbitai' as SearchToken],
         });
@@ -235,7 +235,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications by state when provided', async () => {
+      it('filters notifications by state when provided', async () => {
         useFiltersStore.setState({ states: ['closed'] });
 
         mockNotifications[0].subject.state = 'OPEN';
@@ -246,7 +246,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should filter notifications that are not review requests when only direct is selected', async () => {
+      it('filters notifications that are not review requests when only direct is selected', async () => {
         useFiltersStore.setState({ reviewRequestTypes: ['direct'] });
 
         mockNotifications[0].subject.reviewRequested = undefined;
@@ -258,7 +258,7 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
         expect(result).toEqual([mockNotifications[1]]);
       });
 
-      it('should keep non-review-request notifications when direct and other are selected', async () => {
+      it('keeps non-review-request notifications when direct and other are selected', async () => {
         useFiltersStore.setState({ reviewRequestTypes: ['direct', 'other'] });
 
         mockNotifications[0].subject.reviewRequested = undefined;

@@ -1,13 +1,12 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 import { IconButton, Stack } from '@primer/react';
 
-import { useNotifications } from '../../hooks/useNotifications';
+import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
 
-import { Title } from './Title';
+import { SectionHeading } from './SectionHeading';
 
 interface HeaderProps {
   icon: Icon;
@@ -15,11 +14,11 @@ interface HeaderProps {
   fetchOnBack?: boolean;
 }
 
-export const Header: FC<HeaderProps> = (props: HeaderProps) => {
+export function Header(props: Readonly<HeaderProps>) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { refetchNotifications: fetchNotifications } = useNotifications();
+  const { refetchNotifications: fetchNotifications } = useNotificationActions();
 
   return (
     <div className="pl-4 pr-5 pt-3 pb-1">
@@ -29,7 +28,7 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
           data-testid="header-nav-back"
           icon={ArrowLeftIcon}
           onClick={() => {
-            navigate(-1);
+            void navigate(-1);
             if (props.fetchOnBack) {
               void fetchNotifications();
             }
@@ -38,10 +37,8 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
           variant="invisible"
         />
 
-        <Title icon={props.icon} size={3}>
-          {props.children}
-        </Title>
+        <SectionHeading icon={props.icon}>{props.children}</SectionHeading>
       </Stack>
     </div>
   );
-};
+}

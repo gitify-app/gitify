@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx > should render itself & its children 1`] = `
+exports[`renderer/components/filters/RequiresDetailedNotificationsWarning.tsx > renders itself & its children 1`] = `
 <div>
   <span
     class="text-gitify-caution prc-Text-Text-9mHv3"

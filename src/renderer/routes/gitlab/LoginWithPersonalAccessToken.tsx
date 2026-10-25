@@ -1,11 +1,10 @@
-import type { FC } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { Text } from '@primer/react';
 
 import { LoginWithPersonalAccessTokenForm } from '../../components/login/LoginWithPersonalAccessTokenForm';
 
-export const GitLabLoginWithPersonalAccessTokenRoute: FC = () => {
+export function GitLabLoginWithPersonalAccessTokenRoute() {
   const { t } = useTranslation();
 
   return (
@@ -37,4 +36,4 @@ export const GitLabLoginWithPersonalAccessTokenRoute: FC = () => {
       </Text>
     </LoginWithPersonalAccessTokenForm>
   );
-};
+}

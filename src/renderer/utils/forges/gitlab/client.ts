@@ -9,9 +9,10 @@ import type {
   GitLabVersion,
 } from './types';
 
-import { isValidHostname } from '../../auth/utils';
+import { isValidHostname } from '../../auth/identity';
 import { rendererLogWarn } from '../../core/logger';
 import { decryptValue } from '../../system/comms';
+import { mergeHeaders } from '../headers';
 
 const PAGE_SIZE = 100;
 
@@ -29,7 +30,7 @@ export function getGitLabApiBaseUrl(hostname: Hostname): URL {
   return new URL(`https://${hostname}/api/v4/`);
 }
 
-async function authHeaders(account: Account): Promise<HeadersInit> {
+async function authHeaders(account: Account): Promise<Record<string, string>> {
   const { token } = await decryptValue(account.token);
   return {
     Accept: 'application/json',
@@ -57,10 +58,7 @@ async function gitlabRequest<T>(
 
   const response = await fetch(url.toString(), {
     ...init,
-    headers: {
-      ...(await authHeaders(account)),
-      ...init?.headers,
-    },
+    headers: mergeHeaders(await authHeaders(account), init?.headers),
   });
 
   if (!response.ok) {

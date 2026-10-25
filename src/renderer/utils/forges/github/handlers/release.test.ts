@@ -26,6 +26,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
     it('release notification', async () => {
       getReleaseSpy.mockResolvedValue({
         author: mockAuthor,
+        tag_name: 'v0.0.1',
       } as GetReleaseResponse);
 
       const result = await releaseHandler.enrich(mockNotification);
@@ -44,7 +45,18 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
           avatarUrl: mockAuthor.avatar_url,
           type: mockAuthor.type,
         },
+        tagName: 'v0.0.1',
       });
+    });
+
+    it('release without a tag', async () => {
+      getReleaseSpy.mockResolvedValue({
+        author: mockAuthor,
+      } as GetReleaseResponse);
+
+      const result = await releaseHandler.enrich(mockNotification);
+
+      expect(result.tagName).toBeUndefined();
     });
 
     it('return early if release state filtered', async () => {
@@ -58,7 +70,7 @@ describe('renderer/utils/notifications/handlers/release.ts', () => {
   });
 
   it('iconType', () => {
-    expect(releaseHandler.iconType(mockNotification).displayName).toBe('TagIcon');
+    expect(releaseHandler.iconType(mockNotification).displayName).toBe('ReleaseIcon');
   });
 
   it('defaultUrl', () => {

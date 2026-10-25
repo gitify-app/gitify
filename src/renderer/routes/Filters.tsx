@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FilterIcon, FilterRemoveIcon } from '@primer/octicons-react';
@@ -18,7 +17,7 @@ import { Page } from '../components/layout/Page';
 import { Footer } from '../components/primitives/Footer';
 import { Header } from '../components/primitives/Header';
 
-export const FiltersRoute: FC = () => {
+export function FiltersRoute() {
   const { t } = useTranslation();
   const clearFilters = useFiltersStore((s) => s.reset);
 
@@ -55,4 +54,4 @@ export const FiltersRoute: FC = () => {
       </Footer>
     </Page>
   );
-};
+}

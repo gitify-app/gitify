@@ -1,7 +1,7 @@
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 import {
   mockBitbucketAccount,
   mockGiteaAccount,
+  mockGitHubCloudAccount,
   mockGitLabAccount,
 } from '../../__mocks__/account-mocks';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';

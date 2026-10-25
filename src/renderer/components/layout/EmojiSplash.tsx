@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Stack } from '@primer/react';
 
@@ -14,7 +14,7 @@ interface EmojiSplashProps {
   actions?: ReactNode;
 }
 
-export const EmojiSplash: FC<EmojiSplashProps> = (props: EmojiSplashProps) => {
+export function EmojiSplash(props: Readonly<EmojiSplashProps>) {
   return (
     <Centered fullHeight={props.fullHeight ?? false}>
       <Stack align="center" direction="vertical" gap="condensed" justify={'center'}>
@@ -36,4 +36,4 @@ export const EmojiSplash: FC<EmojiSplashProps> = (props: EmojiSplashProps) => {
       </Stack>
     </Centered>
   );
-};
+}

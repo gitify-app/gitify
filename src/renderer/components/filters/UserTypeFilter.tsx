@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -14,7 +13,7 @@ import { Size } from '../../types';
 import { userTypeFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
-export const UserTypeFilter: FC = () => {
+export function UserTypeFilter() {
   const { t } = useTranslation();
 
   return (
@@ -57,4 +56,4 @@ export const UserTypeFilter: FC = () => {
       }
     />
   );
-};
+}

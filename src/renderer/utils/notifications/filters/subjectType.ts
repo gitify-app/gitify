@@ -14,6 +14,9 @@ import i18n from '../../../i18n';
 export const subjectTypeFilter: Filter<SubjectTypeFilterValue> = {
   get FILTER_TYPES(): Record<SubjectTypeFilterValue, TypeDetails> {
     return {
+      AgentSessionThread: {
+        title: i18n.t('filters.subject_type.agent_session_thread', 'Agent Session Thread'),
+      },
       BitbucketNotification: {
         title: i18n.t('filters.subject_type.bitbucket', 'Bitbucket'),
       },
@@ -55,10 +58,7 @@ export const subjectTypeFilter: Filter<SubjectTypeFilterValue> = {
       },
       other: {
         title: i18n.t('filters.subject_type.other', 'Other'),
-        description: i18n.t(
-          'filters.subject_type.other_description',
-          'Notifications of a type that is not listed above.',
-        ),
+        description: i18n.t('filters.subject_type.other_description', 'A type not listed above.'),
       },
     };
   },

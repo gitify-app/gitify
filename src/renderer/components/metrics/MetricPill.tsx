@@ -18,7 +18,7 @@ export interface MetricPillProps {
   ariaLabel?: string;
 }
 
-export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
+export function MetricPill(props: Readonly<MetricPillProps>) {
   const Icon = props.icon;
 
   return (
@@ -41,4 +41,4 @@ export const MetricPill: FC<MetricPillProps> = (props: MetricPillProps) => {
       </button>
     </Tooltip>
   );
-};
+}

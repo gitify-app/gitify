@@ -5,7 +5,7 @@ import { renderWithProviders } from '../../__helpers__/test-utils';
 import { HoverButton } from './HoverButton';
 
 describe('renderer/components/primitives/HoverButton.tsx', () => {
-  it('should render', () => {
+  it('renders', () => {
     const actionMock = vi.fn();
 
     const tree = renderWithProviders(
@@ -19,7 +19,7 @@ describe('renderer/components/primitives/HoverButton.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render - disabled', () => {
+  it('renders - disabled', () => {
     const actionMock = vi.fn();
 
     const tree = renderWithProviders(

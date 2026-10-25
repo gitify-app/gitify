@@ -4,6 +4,13 @@ import i18n from '../../i18n';
 
 export function getReasonTypeDetails(): Record<Reason, TypeDetails> {
   return {
+    agent_session_finished: {
+      title: i18n.t('reasons.agent_session_finished', 'Agent Session Finished'),
+      description: i18n.t(
+        'reasons.agent_session_finished_description',
+        'A GitHub Copilot cloud agent session finished running.',
+      ),
+    },
     approval_requested: {
       title: i18n.t('reasons.approval_requested', 'Approval Requested'),
       description: i18n.t(

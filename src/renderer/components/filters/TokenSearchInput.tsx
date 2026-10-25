@@ -19,7 +19,7 @@ interface TokenSearchInputProps {
 
 const INPUT_KEY_EVENTS: Set<string> = new Set(['Enter', 'Tab', ' ', ',']);
 
-export const TokenSearchInput: FC<TokenSearchInputProps> = ({
+export function TokenSearchInput({
   label,
   icon: Icon,
   iconColorClass,
@@ -27,7 +27,7 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
   showSuggestionsOnFocusIfEmpty,
   onAdd,
   onRemove,
-}) => {
+}: Readonly<TokenSearchInputProps>) {
   const [inputValue, setInputValue] = useState('');
   const [shouldShowFilterSuggestions, setShouldShowFilterSuggestions] = useState(false);
 
@@ -103,4 +103,4 @@ export const TokenSearchInput: FC<TokenSearchInputProps> = ({
       </div>
     </Stack>
   );
-};
+}

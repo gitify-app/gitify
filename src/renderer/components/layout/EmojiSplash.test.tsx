@@ -5,7 +5,7 @@ import { renderWithProviders } from '../../__helpers__/test-utils';
 import { EmojiSplash } from './EmojiSplash';
 
 describe('renderer/components/layout/EmojiSplash.tsx', () => {
-  it('should render itself & its children - heading only', async () => {
+  it('renders itself & its children - heading only', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {
@@ -17,7 +17,7 @@ describe('renderer/components/layout/EmojiSplash.tsx', () => {
     expect(tree!.container).toMatchSnapshot();
   });
 
-  it('should render itself & its children - heading and sub-heading', async () => {
+  it('renders itself & its children - heading and sub-heading', async () => {
     let tree: ReturnType<typeof renderWithProviders> | null = null;
 
     await act(async () => {

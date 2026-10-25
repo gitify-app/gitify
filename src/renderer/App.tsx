@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
+import { BaseStyles } from '@primer/react';
+import { ThemeProvider } from '@primer/react/next';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 
@@ -41,7 +42,7 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
   return isLoggedIn ? children : <Navigate replace state={{ from: location }} to="/login" />;
 }
 
-export const App = () => {
+export function App() {
   // Initialize store subscriptions with proper cleanup
   useEffect(() => {
     const cleanup = initializeStoreSubscriptions();
@@ -127,4 +128,4 @@ export const App = () => {
       </ThemeProvider>
     </QueryClientProvider>
   );
-};
+}

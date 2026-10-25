@@ -1,3 +1,4 @@
+import type { useNotificationActions } from '../hooks/notifications/useNotificationActions';
 import type { useLogins } from '../hooks/useLogins';
 import type { useNotifications } from '../hooks/useNotifications';
 
@@ -15,6 +16,7 @@ import type { useNotifications } from '../hooks/useNotifications';
 
 export type NotificationsState = ReturnType<typeof useNotifications>;
 export type LoginsState = ReturnType<typeof useLogins>;
+export type NotificationActionsState = ReturnType<typeof useNotificationActions>;
 
 let notificationsDefaults: NotificationsState | null = null;
 let notificationsOverrides: Partial<NotificationsState> = {};
@@ -62,6 +64,23 @@ function buildLoginsDefaults(): LoginsState {
 export function getMockedNotificationsState(): NotificationsState {
   notificationsDefaults ??= buildNotificationsDefaults();
   return { ...notificationsDefaults, ...notificationsOverrides };
+}
+
+/**
+ * Current mocked `useNotificationActions` return value: the action subset of
+ * the merged notifications state, so overrides passed through
+ * `renderWithProviders` reach action-only consumers too.
+ */
+export function getMockedNotificationActionsState(): NotificationActionsState {
+  const state = getMockedNotificationsState();
+
+  return {
+    refetchNotifications: state.refetchNotifications,
+    removeAccountNotifications: state.removeAccountNotifications,
+    markNotificationsAsRead: state.markNotificationsAsRead,
+    markNotificationsAsDone: state.markNotificationsAsDone,
+    unsubscribeNotification: state.unsubscribeNotification,
+  };
 }
 
 /** Current mocked `useLogins` return value. */

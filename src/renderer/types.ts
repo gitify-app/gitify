@@ -174,11 +174,6 @@ export enum GroupBy {
   DATE = 'DATE',
 }
 
-export interface RadioGroupItem {
-  label: string;
-  value: string;
-}
-
 export interface AccountNotifications {
   account: Account;
   notifications: GitifyNotification[];
@@ -383,6 +378,10 @@ export interface GitifySubject {
   // Enriched fields (from additional GraphQL or REST API calls)
   /** Issue/PR/Discussion number */
   number?: number;
+  /** Release tag (e.g. `v1.2.3`), when the subject is a release */
+  tagName?: string;
+  /** Commit SHA, when the subject is a commit */
+  commitSha?: string;
   /** Parsed state */
   state?: GitifyNotificationState;
   /**
@@ -479,8 +478,8 @@ export interface GitifyNotificationDisplay {
   title: string;
   /** Formatted notification type */
   type: string;
-  /** Formatted notification number */
-  number: string;
+  /** Formatted notification identifier (a `#number`, a release tag, or a short SHA) */
+  identifier: string;
   /** Notification icon and color to display */
   icon: {
     type: Icon;
@@ -488,6 +487,8 @@ export interface GitifyNotificationDisplay {
   };
   /** Notification default user type for fallback scenarios */
   defaultUserType: UserType;
+  /** Optional actor icon for notifications without an enriched actor (e.g. Copilot). */
+  defaultUserIcon?: FC<OcticonProps>;
 }
 
 /** GitHub-native issue type, normalized to a Gitify icon color token */
@@ -573,6 +574,7 @@ export type GitifyCheckSuiteStatus =
 
 // Stronger typings for string literal attributes
 export type Reason =
+  | 'agent_session_finished'
   | 'approval_requested'
   | 'assign'
   | 'author'
@@ -597,6 +599,7 @@ export type Reason =
 export type SubjectTypeFilterValue = SubjectType | 'other';
 
 export type SubjectType =
+  | 'AgentSessionThread'
   | 'BitbucketNotification'
   | 'CheckSuite'
   | 'Commit'

@@ -46,4 +46,11 @@ export interface NotificationTypeHandler {
    * Default user type for notification type.
    */
   defaultUserType(): UserType;
+
+  /**
+   * Optional icon for the actor fallback avatar when no enriched actor exists.
+   * Handlers representing a known actor (e.g. Copilot) override this; the
+   * default returns `undefined` so the shared fallback icon is used.
+   */
+  defaultUserIcon?(): FC<OcticonProps> | undefined;
 }

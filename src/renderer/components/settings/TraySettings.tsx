@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { DevicesIcon } from '@primer/octicons-react';
@@ -9,11 +8,13 @@ import { isTrayIconAppearance } from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
-import { RadioGroup } from '../fields/RadioGroup';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
-export const TraySettings: FC = () => {
+import { SettingsChoice } from './controls/SettingsChoice';
+import { SettingsList } from './controls/SettingsList';
+import { SettingsToggle } from './controls/SettingsToggle';
+
+export function TraySettings() {
   const { t } = useTranslation();
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
@@ -27,82 +28,74 @@ export const TraySettings: FC = () => {
 
   return (
     <fieldset>
-      <Title icon={DevicesIcon}>{t('settings.tray.title', 'Tray')}</Title>
+      <SectionHeading as="legend" icon={DevicesIcon}>
+        {t('settings.tray.title', 'Tray')}
+      </SectionHeading>
 
-      <Stack direction="vertical" gap="condensed">
-        <Checkbox
+      <SettingsList>
+        <SettingsToggle
           checked={showNotificationsCountInTray}
           label={t('settings.tray.show_notification_count', 'Show notification count')}
           name="showNotificationsCountInTray"
           onChange={() => toggleSetting('showNotificationsCountInTray')}
-          tooltip={
-            <Text>
-              {t(
-                'settings.tray.show_notification_count_help',
-                'Show the unread notification count next to the tray icon. Useful for a quick glance at unread activity.',
-              )}
-            </Text>
-          }
+          tooltip={t(
+            'settings.tray.show_notification_count_help',
+            'Show the unread notification count next to the tray icon. Useful for a quick glance at unread activity.',
+          )}
           visible={window.gitify.platform.isMacOS()}
         />
 
-        <Checkbox
+        <SettingsToggle
           checked={useUnreadActiveIcon}
           label={t('settings.tray.highlight_unread', 'Highlight unread notifications')}
           name="useUnreadActiveIcon"
           onChange={() => toggleSetting('useUnreadActiveIcon')}
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>
-                {t(
-                  'settings.tray.highlight_unread_help',
-                  'Use a green {{appName}} logo when there are unread notifications.',
-                  { appName: APPLICATION.NAME },
-                )}
-              </Text>
-            </Stack>
-          }
+          tooltip={t(
+            'settings.tray.highlight_unread_help',
+            'Turn the {{appName}} logo green while there are unread notifications.',
+            { appName: APPLICATION.NAME },
+          )}
         />
 
-        <RadioGroup
+        <SettingsChoice
           label={t('settings.tray.idle_icon', 'Idle icon')}
           name="trayIconAppearance"
-          value={trayIconAppearance}
+          onChange={(value) => {
+            if (isTrayIconAppearance(value)) {
+              updateSetting('trayIconAppearance', value);
+            }
+          }}
           options={[
             { label: t('settings.tray.idle_icon_automatic', 'Automatic'), value: 'auto' },
             { label: t('settings.tray.idle_icon_light', 'Light'), value: 'light' },
             { label: t('settings.tray.idle_icon_dark', 'Dark'), value: 'dark' },
           ]}
-          onChange={(event) => {
-            const value = event.target.value;
-            if (isTrayIconAppearance(value)) {
-              updateSetting('trayIconAppearance', value);
-            }
-          }}
           tooltip={
             <Stack direction="vertical" gap="condensed">
               <Text>
                 {t(
                   'settings.tray.idle_icon_help',
-                  'Choose a light icon for a dark panel, or a dark icon for a light panel.',
+                  'Pick a light icon for dark panels or a dark icon for light panels.',
                 )}
               </Text>
               <Text>
                 {t(
                   'settings.tray.idle_icon_help_automatic',
-                  'Automatic follows the system tray appearance on macOS and Windows. On Linux, it uses a light icon because panel appearance cannot be detected reliably.',
+                  'Automatic follows the tray appearance on macOS and Windows; Linux uses light because panel detection is unreliable.',
                 )}
               </Text>
               <Text>
                 {t(
                   'settings.tray.idle_icon_help_theme',
-                  "This setting is independent of Gitify's app theme.",
+                  'This setting is independent of the {{appName}} app theme.',
+                  { appName: APPLICATION.NAME },
                 )}
               </Text>
             </Stack>
           }
+          value={trayIconAppearance}
         />
-      </Stack>
+      </SettingsList>
     </fieldset>
   );
-};
+}

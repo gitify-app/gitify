@@ -10,13 +10,13 @@ import { Header } from './Header';
 describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotificationsMock = vi.fn();
 
-  it('should render itself & its children', () => {
+  it('renders itself & its children', () => {
     const tree = renderWithProviders(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should navigate back', async () => {
+  it('navigates back', async () => {
     renderWithProviders(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     await userEvent.click(screen.getByTestId('header-nav-back'));
@@ -25,7 +25,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
-  it('should navigate back and fetch notifications', async () => {
+  it('navigates back and fetch notifications', async () => {
     renderWithProviders(
       <Header fetchOnBack icon={MarkGithubIcon}>
         Test Header

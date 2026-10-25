@@ -1,9 +1,8 @@
-import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LoginWithPersonalAccessTokenForm } from '../../components/login/LoginWithPersonalAccessTokenForm';
 
-export const GiteaLoginWithPersonalAccessTokenRoute: FC = () => {
+export function GiteaLoginWithPersonalAccessTokenRoute() {
   const { t } = useTranslation();
 
   return (
@@ -24,4 +23,4 @@ export const GiteaLoginWithPersonalAccessTokenRoute: FC = () => {
       tokenSettingsLabel={t('login.pat.token_settings_label', 'Open token settings')}
     />
   );
-};
+}

@@ -59,7 +59,7 @@ describe('renderer/utils/notifications/filters/state.ts', () => {
       },
     );
 
-    it('should classify a notification with no state as other', () => {
+    it('classifies a notification with no state as other', () => {
       mockNotification.subject.state = undefined;
       expect(stateFilter.classify(mockNotification)).toBe('other');
     });

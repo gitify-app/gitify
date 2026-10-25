@@ -1,19 +1,23 @@
 import { mockPartialGitifyNotification } from '../../../../__mocks__/notifications-mocks';
 
-import type { GitifyNotification } from '../../../../types';
-import { type GitifyCheckSuiteStatus, IconColor, type Link } from '../../../../types';
+import {
+  type GitifyCheckSuiteStatus,
+  type GitifyNotification,
+  IconColor,
+  type Link,
+} from '../../../../types';
 
 import { checkSuiteHandler, getCheckSuiteAttributes } from './checkSuite';
 
 describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
   describe('enrich', () => {
-    it('cancelled check suite state', async () => {
+    it('cancelled check suite state', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'Demo workflow run cancelled for main branch',
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification);
+      const result = checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'CANCELLED',
@@ -33,13 +37,13 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
         'multiple attempts failed check suite state',
         'Demo workflow run, Attempt #3 failed for main branch',
       ],
-    ])('%s', async (_name, title) => {
+    ])('%s', (_name, title) => {
       const mockNotification = mockPartialGitifyNotification({
         title,
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification);
+      const result = checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'FAILURE',
@@ -49,13 +53,13 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       });
     });
 
-    it('skipped check suite state', async () => {
+    it('skipped check suite state', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'Demo workflow run skipped for main branch',
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification);
+      const result = checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'SKIPPED',
@@ -65,13 +69,13 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       });
     });
 
-    it('successful check suite state', async () => {
+    it('successful check suite state', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'Demo workflow run succeeded for main branch',
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification);
+      const result = checkSuiteHandler.enrich(mockNotification);
 
       expect(result).toEqual({
         state: 'SUCCESS',
@@ -81,25 +85,25 @@ describe('renderer/utils/notifications/handlers/checkSuite.ts', () => {
       });
     });
 
-    it('unknown check suite state', async () => {
+    it('unknown check suite state', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'Demo workflow run unknown-status for main branch',
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification);
+      const result = checkSuiteHandler.enrich(mockNotification);
 
       // Returns empty object when state cannot be determined
       expect(result).toEqual({});
     });
 
-    it('unhandled check suite title', async () => {
+    it('unhandled check suite title', () => {
       const mockNotification = mockPartialGitifyNotification({
         title: 'A title that is not in the structure we expect',
         type: 'CheckSuite',
       });
 
-      const result = await checkSuiteHandler.enrich(mockNotification);
+      const result = checkSuiteHandler.enrich(mockNotification);
 
       // Returns empty object when title cannot be parsed
       expect(result).toEqual({});

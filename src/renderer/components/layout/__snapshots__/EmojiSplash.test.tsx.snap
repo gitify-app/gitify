@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading and sub-heading 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > renders itself & its children - heading and sub-heading 1`] = `
 <div>
   <div
     class="prc-Stack-Stack-UQ9k6"
@@ -57,7 +57,7 @@ exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its
 </div>
 `;
 
-exports[`renderer/components/layout/EmojiSplash.tsx > should render itself & its children - heading only 1`] = `
+exports[`renderer/components/layout/EmojiSplash.tsx > renders itself & its children - heading only 1`] = `
 <div>
   <div
     class="prc-Stack-Stack-UQ9k6"

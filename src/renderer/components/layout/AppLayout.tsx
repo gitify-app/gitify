@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Sidebar } from '../Sidebar';
@@ -11,7 +11,7 @@ interface AppLayoutProps {
  * AppLayout is the main container for the application.
  * It handles the basic layout with sidebar and content area.
  */
-export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
+export function AppLayout({ children }: Readonly<AppLayoutProps>) {
   const { t } = useTranslation();
   const setFocusRef = (el: HTMLButtonElement | null) => {
     if (el) {
@@ -35,4 +35,4 @@ export const AppLayout: FC<AppLayoutProps> = ({ children }) => {
       <div className="flex-1 pl-sidebar">{children}</div>
     </div>
   );
-};
+}

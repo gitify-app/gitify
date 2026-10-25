@@ -1,5 +1,3 @@
-import type { FC } from 'react';
-
 import { CommentIcon } from '@primer/octicons-react';
 
 import { type GitifyPullRequestReviewer, IconColor } from '../../types';
@@ -11,7 +9,7 @@ export interface ReviewsPillProps {
   reviewers: GitifyPullRequestReviewer[];
 }
 
-export const ReviewsPill: FC<ReviewsPillProps> = ({ reviewers }) => {
+export function ReviewsPill({ reviewers }: Readonly<ReviewsPillProps>) {
   if (!reviewers.length) {
     return null;
   }
@@ -62,7 +60,7 @@ export const ReviewsPill: FC<ReviewsPillProps> = ({ reviewers }) => {
       ) : null}
     </>
   );
-};
+}
 
 function getReviewGroups(reviewers: GitifyPullRequestReviewer[]): PullRequestReviewGroup[] {
   const groups = new Map<NonNullable<GitifyPullRequestReviewer['state']>, string[]>();

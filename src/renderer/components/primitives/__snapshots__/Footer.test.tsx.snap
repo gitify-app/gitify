@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/primitives/Footer.tsx > should render itself & its children - end 1`] = `
+exports[`renderer/components/primitives/Footer.tsx > renders itself & its children - end 1`] = `
 <div>
   <div
     class="left-sidebar bg-gitify-footer"
@@ -20,7 +20,7 @@ exports[`renderer/components/primitives/Footer.tsx > should render itself & its 
 </div>
 `;
 
-exports[`renderer/components/primitives/Footer.tsx > should render itself & its children - space-between 1`] = `
+exports[`renderer/components/primitives/Footer.tsx > renders itself & its children - space-between 1`] = `
 <div>
   <div
     class="left-sidebar bg-gitify-footer"

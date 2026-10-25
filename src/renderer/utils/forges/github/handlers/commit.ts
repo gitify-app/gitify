@@ -45,6 +45,7 @@ class CommitHandler extends DefaultHandler {
     // in parallel so populating both roles costs no extra latency.
     let author: GitifyNotificationUser | undefined;
     let commenter: GitifyNotificationUser | undefined;
+    let commitSha: string | undefined;
 
     if (notification.subject.latestCommentUrl) {
       const [commit, commitComment] = await Promise.all([
@@ -52,11 +53,13 @@ class CommitHandler extends DefaultHandler {
         getCommitComment(notification.account, notification.subject.latestCommentUrl),
       ]);
 
+      commitSha = commit.sha;
       author = toNotificationUser(commit.author);
       commenter = toNotificationUser(commitComment.user);
     } else {
       const commit = await getCommit(notification.account, notification.subject.url!);
 
+      commitSha = commit.sha;
       author = toNotificationUser(commit.author);
     }
 
@@ -65,6 +68,7 @@ class CommitHandler extends DefaultHandler {
       user: commenter ?? author,
       author: author,
       commenter: commenter,
+      commitSha,
     };
   }
 

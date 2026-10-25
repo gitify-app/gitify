@@ -36,6 +36,10 @@ export class DefaultHandler implements NotificationTypeHandler {
   defaultUserType(): UserType {
     return 'User';
   }
+
+  defaultUserIcon(): FC<OcticonProps> | undefined {
+    return undefined;
+  }
 }
 
 export const defaultHandler = new DefaultHandler();

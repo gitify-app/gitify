@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
@@ -8,15 +8,31 @@ import * as comms from '../utils/system/comms';
 import { LoginRoute } from './Login';
 
 describe('renderer/routes/Login.tsx', () => {
-  it('should render itself & its children', () => {
-    const tree = renderWithProviders(<LoginRoute />);
+  it('renders the forge chooser and login methods', () => {
+    renderWithProviders(<LoginRoute />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByRole('heading', { name: 'Git Notifications' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'on your menu bar' })).toBeInTheDocument();
 
-    expect(navigateMock).toHaveBeenCalledTimes(0);
+    const tabs = screen.getByRole('tablist', { name: 'Choose a forge' });
+    expect(within(tabs).getByRole('tab', { name: 'GitHub' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
+    expect(within(tabs).getByRole('tab', { name: 'Gitea' })).toBeInTheDocument();
+    expect(within(tabs).getByRole('tab', { name: 'GitLab' })).toBeInTheDocument();
+    expect(within(tabs).getByRole('tab', { name: 'Bitbucket' })).toBeInTheDocument();
+
+    expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Personal Access Token' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'GitHub CLI' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'OAuth App' })).toBeInTheDocument();
+    expect(screen.getByText('GitHub Cloud & GitHub Enterprise Server')).toBeInTheDocument();
+
+    expect(navigateMock).not.toHaveBeenCalled();
   });
 
-  it('should redirect to notifications once logged in', () => {
+  it('redirects to notifications once logged in', () => {
     const showWindowSpy = vi.spyOn(comms, 'showWindow');
 
     renderWithProviders(<LoginRoute />, {
@@ -29,37 +45,37 @@ describe('renderer/routes/Login.tsx', () => {
   });
 
   it.each([
-    ['login-github', '/login/github/device-flow'],
-    ['login-pat', '/login/github/personal-access-token'],
-    ['login-oauth-app', '/login/github/oauth-app'],
+    ['Continue with GitHub', '/login/github/device-flow'],
+    ['Personal Access Token', '/login/github/personal-access-token'],
+    ['OAuth App', '/login/github/oauth-app'],
   ])('navigates %s', async (testId, route) => {
     renderWithProviders(<LoginRoute />);
 
-    await userEvent.click(screen.getByTestId(testId));
+    await userEvent.click(screen.getByRole('button', { name: testId }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(route);
   });
 
-  it('should navigate to login with Gitea personal access token', async () => {
+  it('navigates to login with Gitea personal access token', async () => {
     renderWithProviders(<LoginRoute />);
 
-    await userEvent.click(screen.getByTestId('forge-tab-gitea'));
-    await userEvent.click(screen.getByTestId('login-gitea-pat'));
+    await userEvent.click(screen.getByRole('tab', { name: 'Gitea' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Continue with Gitea' }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token');
   });
 
-  it('should switch the visible login methods when changing forges', async () => {
+  it('switches the visible login methods when changing forges', async () => {
     renderWithProviders(<LoginRoute />);
 
-    expect(screen.getByTestId('login-github')).toBeInTheDocument();
-    expect(screen.queryByTestId('login-gitea-pat')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Continue with Gitea' })).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByTestId('forge-tab-gitea'));
+    await userEvent.click(screen.getByRole('tab', { name: 'Gitea' }));
 
-    expect(screen.queryByTestId('login-github')).not.toBeInTheDocument();
-    expect(screen.getByTestId('login-gitea-pat')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Continue with GitHub' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Continue with Gitea' })).toBeInTheDocument();
   });
 });

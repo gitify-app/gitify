@@ -96,7 +96,7 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   it('configureWindowEvents returns early if no window', () => {
-    const mbNoWindow = { ...menubar, window: null };
+    const mbNoWindow = Object.assign({}, menubar, { window: null });
 
     expect(() =>
       configureWindowEvents(mbNoWindow as unknown as Menubar, menuBuilder),

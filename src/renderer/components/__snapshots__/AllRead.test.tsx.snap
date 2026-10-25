@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/AllRead.tsx > should render itself & its children - no filters 1`] = `
+exports[`renderer/components/AllRead.tsx > renders itself & its children - no filters 1`] = `
 <div>
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"
@@ -52,7 +52,7 @@ exports[`renderer/components/AllRead.tsx > should render itself & its children -
 </div>
 `;
 
-exports[`renderer/components/AllRead.tsx > should render itself & its children - with filters 1`] = `
+exports[`renderer/components/AllRead.tsx > renders itself & its children - with filters 1`] = `
 <div>
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"

@@ -1,4 +1,11 @@
-import { GitPullRequestIcon, IssueOpenedIcon, TagIcon } from '@primer/octicons-react';
+import {
+  AgentIcon,
+  CopilotIcon,
+  GitCommitIcon,
+  GitPullRequestIcon,
+  IssueOpenedIcon,
+  ReleaseIcon,
+} from '@primer/octicons-react';
 
 import {
   type AccountNotifications,
@@ -87,7 +94,7 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
     },
     repository: mockGitHubRepository,
     display: {
-      number: '123',
+      identifier: '123',
       title: 'I am a robot and this is a test! [#123]',
       type: 'Open Issue',
       icon: {
@@ -118,7 +125,7 @@ export const mockGitHubCloudGitifyNotifications: GitifyNotification[] = [
     },
     repository: mockGitHubRepository,
     display: {
-      number: '456',
+      identifier: '456',
       title: 'Improve the UI [#456]',
       type: 'Issue',
       icon: {
@@ -169,14 +176,15 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
       type: 'Release',
       reviewers: undefined,
+      tagName: '0.0.1',
     },
     repository: mockEnterpriseRepository,
     display: {
-      number: '',
+      identifier: '0.0.1',
       title: 'Release 0.0.1',
       type: 'Release',
       icon: {
-        type: TagIcon,
+        type: ReleaseIcon,
         color: IconColor.GREEN,
       },
       defaultUserType: 'User',
@@ -203,7 +211,7 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
     },
     repository: mockEnterpriseRepository,
     display: {
-      number: '123',
+      identifier: '123',
       title: 'Bump Version [#123]',
       type: 'Pull Request',
       icon: {
@@ -216,6 +224,81 @@ export const mockGithubEnterpriseGitifyNotifications: GitifyNotification[] = [
 ];
 
 export const mockGitifyNotification: GitifyNotification = mockGitHubCloudGitifyNotifications[0];
+
+/**
+ * Mock Gitify Notification for a GitHub commit.
+ *
+ * Subject type `Commit`, which identifies by its SHA rather than a number.
+ */
+export const mockCommitGitifyNotification: GitifyNotification = {
+  account: mockGitHubCloudAccount,
+  order: 0,
+  id: '1349837581',
+  unread: true,
+  reason: {
+    code: 'subscribed',
+    title: 'Updated',
+    description: "You're watching the repository.",
+  },
+  updatedAt: '2024-03-12T10:00:00Z',
+  subject: {
+    title: 'Fix the thing',
+    url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as Link,
+    latestCommentUrl: null,
+    type: 'Commit',
+    commitSha: 'd2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+    user: mockSubjectUser,
+    author: mockSubjectUser,
+  },
+  repository: mockGitHubRepository,
+  display: {
+    identifier: 'd2a86d8',
+    title: 'Fix the thing',
+    type: 'Commit',
+    icon: {
+      type: GitCommitIcon,
+      color: IconColor.GRAY,
+    },
+    defaultUserType: 'User',
+  },
+};
+
+/**
+ * Mock Gitify Notification for a GitHub Copilot cloud agent session.
+ *
+ * Subject type `AgentSessionThread`, reason `agent_session_finished`. The actor
+ * is Copilot, surfaced through the handler's actor icon and `Bot` user type.
+ */
+export const mockAgentSessionGitifyNotification: GitifyNotification = {
+  account: mockGitHubCloudAccount,
+  order: 0,
+  id: '26096167998',
+  unread: true,
+  reason: {
+    code: 'agent_session_finished',
+    title: 'Agent Session Finished',
+    description: 'A GitHub Copilot cloud agent session finished running.',
+  },
+  updatedAt: '2026-10-05T02:34:59Z',
+  subject: {
+    title: 'Analyzing and fixing GitHub Actions job failure',
+    url: null,
+    latestCommentUrl: null,
+    type: 'AgentSessionThread',
+  },
+  repository: mockGitHubRepository,
+  display: {
+    identifier: '',
+    title: 'Analyzing and fixing GitHub Actions job failure',
+    type: 'Agent Session Thread',
+    icon: {
+      type: AgentIcon,
+      color: IconColor.GRAY,
+    },
+    defaultUserType: 'Bot',
+    defaultUserIcon: CopilotIcon,
+  },
+};
 
 /** Same shape as cloud notification, but bound to a Gitea account. */
 export const mockGiteaGitifyNotification: GitifyNotification = {

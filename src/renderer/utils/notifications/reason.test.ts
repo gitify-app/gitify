@@ -3,7 +3,7 @@ import type { Reason } from '../../types';
 import { getReasonDetails } from './reason';
 
 describe('renderer/utils/notifications/reason.ts', () => {
-  it('getReasonDetails - should get details for notification reason', () => {
+  it('getReasonDetails - gets details for notification reason', () => {
     expect(getReasonDetails('approval_requested')).toMatchSnapshot();
     expect(getReasonDetails('assign')).toMatchSnapshot();
     expect(getReasonDetails('author')).toMatchSnapshot();
@@ -20,5 +20,14 @@ describe('renderer/utils/notifications/reason.ts', () => {
     expect(getReasonDetails('subscribed')).toMatchSnapshot();
     expect(getReasonDetails('team_mention')).toMatchSnapshot();
     expect(getReasonDetails('something_else_unknown' as Reason)).toMatchSnapshot();
+    expect(getReasonDetails('agent_session_finished')).toMatchSnapshot();
+  });
+
+  it('getReasonDetails - resolves agent session finished instead of the unknown fallback', () => {
+    const details = getReasonDetails('agent_session_finished');
+
+    expect(details.title).toBe('Agent Session Finished');
+    expect(details.title).not.toBe('Unknown');
+    expect(details.description).toBeTruthy();
   });
 });

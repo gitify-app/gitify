@@ -1,6 +1,6 @@
 import log from 'electron-log';
 
-type AllowedLogFunction = typeof log.info | typeof log.warn | typeof log.error;
+type LogLevel = 'info' | 'warn' | 'error';
 
 /**
  * Safely coerce an unknown caught value into an Error instance.
@@ -17,7 +17,7 @@ export function toError(err: unknown): Error {
  * @param contexts - Optional array of context strings appended to the log entry.
  */
 export function logInfo(type: string, message: string, contexts: string[] = []) {
-  logMessage(log.info, type, message, undefined, contexts);
+  logMessage('info', type, message, undefined, contexts);
 }
 
 /**
@@ -28,7 +28,7 @@ export function logInfo(type: string, message: string, contexts: string[] = []) 
  * @param contexts - Optional array of context strings appended to the log entry.
  */
 export function logWarn(type: string, message: string, contexts: string[] = []) {
-  logMessage(log.warn, type, message, undefined, contexts);
+  logMessage('warn', type, message, undefined, contexts);
 }
 
 /**
@@ -40,11 +40,11 @@ export function logWarn(type: string, message: string, contexts: string[] = []) 
  * @param contexts - Optional array of context strings appended to the log entry.
  */
 export function logError(type: string, message: string, err: Error, contexts: string[] = []) {
-  logMessage(log.error, type, message, err, contexts);
+  logMessage('error', type, message, err, contexts);
 }
 
 function logMessage(
-  logFunction: AllowedLogFunction,
+  level: LogLevel,
   type: string,
   message: string,
   err?: Error,
@@ -61,5 +61,5 @@ function logMessage(
     args.push(err);
   }
 
-  logFunction(...args);
+  log[level](...args);
 }

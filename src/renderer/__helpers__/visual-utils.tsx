@@ -2,7 +2,8 @@ import { render } from '@testing-library/react';
 import type { ReactElement } from 'react';
 import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
+import { BaseStyles } from '@primer/react';
+import { ThemeProvider } from '@primer/react/next';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -77,7 +78,7 @@ function Appearance() {
  * `innerHTML` from a promise). `toMatchScreenshot` retries until the page is
  * stable anyway, so it is the backstop rather than this function.
  */
-export async function renderRoute(
+export function renderRoute(
   ui: ReactElement,
   {
     theme,

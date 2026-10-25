@@ -1,6 +1,7 @@
-import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
+import { AgentIcon, AppsIcon, CopilotIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
 
 import { mockGitHubCliAccount, mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
+import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 
 import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 
@@ -325,6 +326,19 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(requestMock).toHaveBeenCalledWith('GET {+url}', {
         url: 'https://api.github.com/repos/o/r/issues/1',
       });
+    });
+  });
+
+  describe('getDisplayHelpers', () => {
+    it('surfaces the agent-session handler icon, actor, and agents URL', () => {
+      const notification = mockPartialGitifyNotification({ type: 'AgentSessionThread' });
+
+      const helpers = githubAdapter.getDisplayHelpers(notification);
+
+      expect(helpers.iconType).toBe(AgentIcon);
+      expect(helpers.defaultUserType).toBe('Bot');
+      expect(helpers.defaultUserIcon).toBe(CopilotIcon);
+      expect(helpers.defaultUrl).toBe('https://github.com/gitify-app/notifications-test/agents');
     });
   });
 });

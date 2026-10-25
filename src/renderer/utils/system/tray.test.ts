@@ -12,7 +12,7 @@ describe('renderer/utils/system/tray.ts', () => {
   });
 
   describe('setTrayIconColorAndTitle', () => {
-    it('should update tray color and title when showNotificationsCountInTray is true and has unread notifications', () => {
+    it('updates tray color and title when showNotificationsCountInTray is true and has unread notifications', () => {
       useSettingsStore.setState({
         showNotificationsCountInTray: true,
       });
@@ -25,7 +25,7 @@ describe('renderer/utils/system/tray.ts', () => {
       expect(updateTrayTitleSpy).toHaveBeenCalledWith('5');
     });
 
-    it('should update tray color and empty title when showNotificationsCountInTray is false and has unread notifications', () => {
+    it('updates tray color and empty title when showNotificationsCountInTray is false and has unread notifications', () => {
       useSettingsStore.setState({
         showNotificationsCountInTray: false,
       });
@@ -38,7 +38,7 @@ describe('renderer/utils/system/tray.ts', () => {
       expect(updateTrayTitleSpy).toHaveBeenCalledWith('');
     });
 
-    it('should update tray with empty title when no unread notifications', () => {
+    it('updates tray with empty title when no unread notifications', () => {
       useSettingsStore.setState({
         showNotificationsCountInTray: true,
       });
@@ -51,7 +51,7 @@ describe('renderer/utils/system/tray.ts', () => {
       expect(updateTrayTitleSpy).toHaveBeenCalledWith('');
     });
 
-    it('should update tray color and empty title when offline and has notifications', () => {
+    it('updates tray color and empty title when offline and has notifications', () => {
       useSettingsStore.setState({
         showNotificationsCountInTray: false,
       });
