@@ -38,7 +38,9 @@ export const api = {
    * Decrypt an encrypted string using Electron's safe storage.
    *
    * @param value - The encrypted string to decrypt.
-   * @returns A promise resolving to the plaintext string.
+   * @returns A promise resolving to `{ token, reEncryptedToken? }`. When the OS
+   * keychain rotated keys during decryption, `reEncryptedToken` carries the new
+   * ciphertext so callers can persist it.
    */
   decryptValue: (value: string) => invokeMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, value),
 
@@ -46,7 +48,8 @@ export const api = {
    * Read the token the locally installed GitHub CLI holds for a host.
    *
    * @param hostname - Host to read the token for (e.g. `github.com`).
-   * @returns The token, or the reason the CLI could not supply one.
+   * @returns A promise resolving to `{ token }` on success, or
+   * `{ error, detail? }` when the CLI cannot supply one.
    */
   githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
 
@@ -93,6 +96,8 @@ export const api = {
   /**
    * Enable or disable the macOS window vibrancy material for Glass. Resolves once
    * the material has been applied so the renderer can order the visual switch.
+   *
+   * @param enabled - `true` to enable the vibrancy material, `false` to remove it.
    */
   setWindowVibrancy: (enabled: boolean) => invokeMainEvent(EVENTS.SET_WINDOW_VIBRANCY, enabled),
 
@@ -100,6 +105,8 @@ export const api = {
    * Sync the native window appearance (`nativeTheme.themeSource`) with the app's
    * color mode, so the macOS vibrancy material renders light/dark to match —
    * otherwise dark Glass gets a light material and its light text washes out.
+   *
+   * @param source - The native appearance to apply.
    */
   setNativeTheme: (source: NativeThemeSource) => invokeMainEvent(EVENTS.SET_NATIVE_THEME, source),
 
@@ -136,6 +143,7 @@ export const api = {
     /**
      * Set the idle tray icon appearance independently of the app theme.
      *
+     * @param value - The idle icon appearance to use.
      */
     setAppearance: (value: TrayIconAppearance) =>
       sendMainEvent(EVENTS.SET_TRAY_ICON_APPEARANCE, value),

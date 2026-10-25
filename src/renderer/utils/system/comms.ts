@@ -27,7 +27,8 @@ export function openExternalLink(url: Link): void {
 /**
  * Returns the current application version string.
  *
- * @returns Promise resolving to the app version (e.g. `"6.18.0"`).
+ * @returns Promise resolving to `v<semver>` for packaged builds, or `dev` in
+ * development.
  */
 export async function getAppVersion(): Promise<string> {
   return await window.gitify.app.version();
@@ -59,8 +60,9 @@ export async function decryptValue(value: string): Promise<ISafeStorageDecryptRe
 /**
  * Asks the locally installed GitHub CLI for the token it holds for a host.
  *
- * @param hostname The host to read the token for.
- * @returns The token, or the reason the CLI could not supply one.
+ * @param hostname - The host to read the token for.
+ * @returns A promise resolving to `{ token }` on success, or
+ * `{ error, detail? }` when the CLI cannot supply one.
  */
 export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTokenResult> {
   return await window.gitify.githubCliToken(hostname);
