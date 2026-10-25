@@ -276,6 +276,8 @@ export default defineConfig({
       'react/exhaustive-deps': 'error',
       'react/rules-of-hooks': 'error',
       'react/self-closing-comp': 'error',
+      'react/jsx-no-target-blank': 'error',
+      'react/no-danger': 'error',
       'typescript/no-inferrable-types': 'error',
       'typescript/prefer-as-const': 'error',
       'typescript/prefer-enum-initializers': 'error',
