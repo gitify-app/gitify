@@ -23,6 +23,10 @@ const SUBJECT_TYPES: Record<SubjectType, true> = {
 };
 
 describe('renderer/utils/forges/github/handlers/supported.ts', () => {
+  it('pins the subject types that support merged query enrichment', () => {
+    expect([...MERGED_QUERY_SUBJECT_TYPES].sort()).toEqual(['Discussion', 'Issue', 'PullRequest']);
+  });
+
   it('matches the handlers that support merged query enrichment', () => {
     for (const type of Object.keys(SUBJECT_TYPES) as SubjectType[]) {
       const handler = createNotificationHandler(mockPartialGitifyNotification({ type }));
