@@ -91,6 +91,23 @@ guard fails the run outside Linux rather than letting that happen.
 Note that these baselines capture the `backdrop-filter` fallback for Glass, not
 the macOS native vibrancy material, which Chromium cannot render.
 
+### 📦 Dependencies and packaging
+
+The packaged app ships only the packages that are loaded from disk at runtime.
+Declare main-process runtime dependencies in `dependencies`; packages that Vite
+bundles into the renderer belong in `devDependencies`, even though the renderer
+imports them. The current runtime packages are `electron-log`,
+`electron-menubar`, and `electron-updater`; `cn`, `react`, `react-dom`, and
+`react-router-dom` are renderer-only and build-time.
+
+`electron-builder` collects the production closure from `dependencies` through
+its pnpm collector. Do not add `node_modules` to the `files` list in
+`electron-builder.js` — a hand-written glob overrides that collector and can
+re-introduce dev dependencies. After packaging, run
+`node scripts/verifyPackagedDependencies.js <app path>` to assert that the asar
+contains the runtime packages and none of the renderer-only packages or the pnpm
+virtual store.
+
 ### 🎨 Code Style & Conventions
 
 - Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.

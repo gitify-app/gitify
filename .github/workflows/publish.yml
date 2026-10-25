@@ -46,16 +46,19 @@ jobs:
           - os: macos-latest
             platform: macOS
             package-cmd: vp run package:macos --publish onTagOrDraft
+            verify-path: dist/mac-universal/Gitify.app
             artifact-name: Gitify-release-mac
             use-apple-notarization: true
           - os: windows-latest
             platform: Windows
             package-cmd: vp run package:win --publish onTagOrDraft
+            verify-path: dist/win-unpacked
             artifact-name: Gitify-release-win
             use-apple-notarization: false
           - os: ubuntu-latest
             platform: Linux
             package-cmd: vp run package:linux --publish onTagOrDraft
+            verify-path: dist/linux-unpacked
             artifact-name: Gitify-release-linux
             use-apple-notarization: false
     runs-on: ${{ matrix.os }}
@@ -90,6 +93,10 @@ jobs:
           NOTARIZE: ${{ matrix.use-apple-notarization }}
           # General
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify packaged dependencies
+        shell: bash
+        run: node scripts/verifyPackagedDependencies.js "${{ matrix.verify-path }}"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

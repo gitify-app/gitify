@@ -29,16 +29,19 @@ jobs:
             platform: macOS
             package-cmd: vp run package:macos --publish=never -c.mac.identity=null
             cleanup-path: dist/mac-universal
+            verify-path: dist/mac-universal/Gitify.app
             artifact-name: Gitify-dist-mac
           - os: windows-latest
             platform: Windows
             package-cmd: vp run package:win --publish=never
             cleanup-path: dist/win-unpacked
+            verify-path: dist/win-unpacked
             artifact-name: Gitify-dist-win
           - os: ubuntu-latest
             platform: Linux
             package-cmd: vp run package:linux --publish=never
             cleanup-path: dist/linux-unpacked
+            verify-path: dist/linux-unpacked
             artifact-name: Gitify-dist-linux
     runs-on: ${{ matrix.os }}
 
@@ -62,6 +65,10 @@ jobs:
           # Signing certificates - important to use the correct cert per platform
           CSC_LINK: ${{ matrix.platform == 'macOS' && secrets.CSC_LINK || (matrix.platform == 'windows' && secrets.WIN_CSC_LINK || '') }}
           CSC_KEY_PASSWORD: ${{ matrix.platform == 'macOS' && secrets.CSC_KEY_PASSWORD || (matrix.platform == 'windows' && secrets.WIN_CSC_KEY_PASSWORD || '') }}
+
+      - name: Verify packaged dependencies
+        shell: bash
+        run: node scripts/verifyPackagedDependencies.js "${{ matrix.verify-path }}"
 
       - name: Clean up builds
         shell: bash
