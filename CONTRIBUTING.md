@@ -60,8 +60,10 @@ spacing, theme changes) are covered separately by a browser-mode project that
 screenshots every route in Classic light, Classic dark, Glass light, and Glass
 dark, with accessibility and high-contrast variants on the densest routes. It
 also captures high-value states — open help popovers, the notification action
-rail on hover, active filter selections, choice controls, settings reveals, the
-loading splash, and the reset-settings confirmation.
+rail on hover, read and failed rows, empty/offline/error inboxes, active filter
+selections, choice controls, settings reveals, the loading splash, the
+reset-settings confirmation, the Accounts add-account menu, and representative
+login errors.
 
 Screenshots only match when the browser build and font stack are identical, so
 both commands below run the suite inside a pinned Playwright container, and CI
