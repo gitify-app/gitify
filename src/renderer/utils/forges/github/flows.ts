@@ -7,7 +7,7 @@ import { Constants } from '../../../constants';
 import type { ClientID, Hostname, Token } from '../../../types';
 import type { DeviceFlowSession } from '../../auth/types';
 
-import { getRecommendedScopeNames } from '../../auth/scopes';
+import { getRecommendedScopeNames } from '../../auth/scopeNames';
 import { rendererLogError, toError } from '../../core/logger';
 import { getGitHubAuthBaseUrl } from './auth';
 

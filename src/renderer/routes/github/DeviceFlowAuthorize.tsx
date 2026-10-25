@@ -23,7 +23,7 @@ import { Header } from '../../components/primitives/Header';
 import type { Account, ClientID, Forge, Hostname, Link } from '../../types';
 import type { DeviceFlowSession } from '../../utils/auth/types';
 
-import { getAlternateScopeNames, getRecommendedScopeNames } from '../../utils/auth/scopes';
+import { getAlternateScopeNames, getRecommendedScopeNames } from '../../utils/auth/scopeNames';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
 import { copyToClipboard, openExternalLink } from '../../utils/system/comms';

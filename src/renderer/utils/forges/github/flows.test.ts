@@ -19,7 +19,7 @@ import { Constants } from '../../../constants';
 import type { ClientID, Hostname } from '../../../types';
 import type { DeviceFlowSession } from '../../auth/types';
 
-import { getRecommendedScopeNames } from '../../auth/scopes';
+import { getRecommendedScopeNames } from '../../auth/scopeNames';
 import * as logger from '../../core/logger';
 import * as flows from './flows';
 

@@ -7,7 +7,7 @@ import { Constants } from '../../../constants';
 
 import type { Account, ClientID, Hostname, Link, Token } from '../../../types';
 
-import { getRecommendedScopeNames } from '../../auth/scopes';
+import { getRecommendedScopeNames } from '../../auth/scopeNames';
 import { getGitHubPlatform } from './platform';
 
 /**

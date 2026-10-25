@@ -13,7 +13,7 @@ import { getAccountUUID } from '../auth/utils';
 import { rendererLogError, toError } from '../core/logger';
 import { getAccountAdapter, getAdapter } from '../forges/registry';
 import { filterBaseNotifications } from './filters/filter';
-import { formatNotification } from './formatters';
+import { formatNotification } from './formatNotification';
 import { getFlattenedNotificationsByRepo } from './group';
 
 /**
