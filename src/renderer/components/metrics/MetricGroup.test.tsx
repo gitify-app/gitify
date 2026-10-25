@@ -95,32 +95,36 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('2/5')).toBeInTheDocument();
   });
 
-  it('keeps hierarchy and existing metrics together and hides them when pills are disabled', () => {
-    const notification = {
-      ...mockGitifyNotification,
-      subject: {
-        ...mockGitifyNotification.subject,
-        issueType: { name: 'Bug', color: IconColor.RED },
-        parentIssue: {
-          number: 456,
-          title: 'Parent Epic',
-          url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
-        },
-        subIssueProgress: { total: 5, completed: 2, percentCompleted: 40 },
+  const hierarchyNotification = () => ({
+    ...mockGitifyNotification,
+    subject: {
+      ...mockGitifyNotification.subject,
+      issueType: { name: 'Bug', color: IconColor.RED },
+      parentIssue: {
+        number: 456,
+        title: 'Parent Epic',
+        url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
       },
-    };
-    const tree = renderWithProviders(<MetricGroup notification={notification} />, {
+      subIssueProgress: { total: 5, completed: 2, percentCompleted: 40 },
+    },
+  });
+
+  it('keeps hierarchy and existing metrics together', () => {
+    const tree = renderWithProviders(<MetricGroup notification={hierarchyNotification()} />, {
       settings: { ...mockSettings, showPills: true },
     });
 
     expect(tree.getByText('Bug')).toBeInTheDocument();
     expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
     expect(tree.getByText('2/5')).toBeInTheDocument();
+  });
 
-    const hidden = renderWithProviders(<MetricGroup notification={notification} />, {
+  it('hides metrics when pills are disabled', () => {
+    const tree = renderWithProviders(<MetricGroup notification={hierarchyNotification()} />, {
       settings: { ...mockSettings, showPills: false },
     });
-    expect(hidden.container).toBeEmptyDOMElement();
+
+    expect(tree.container).toBeEmptyDOMElement();
   });
 
   it('should render issue field pills immediately before label pills', async () => {
