@@ -22,14 +22,20 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     onAnimateExit: vi.fn(),
   };
 
-  it('renders itself & its children', () => {
-    const tree = renderWithProviders(<RepositoryHeader {...props} />);
+  it('renders the repository and its actions', () => {
+    renderWithProviders(<RepositoryHeader {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('gitify-app/notifications-test')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Open repository/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mark repository as read' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mark repository as done' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Hide repository notifications' }),
+    ).toBeInTheDocument();
   });
 
-  it('renders itself & its children - all notifications are read', () => {
-    const tree = renderWithProviders(
+  it('hides the unread-only actions when all notifications are read', () => {
+    renderWithProviders(
       <RepositoryHeader
         {...props}
         repoNotifications={mockGitHubCloudGitifyNotifications.map((n) => ({
@@ -39,7 +45,17 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
       />,
     );
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('gitify-app/notifications-test')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Open repository/ })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Mark repository as read' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Mark repository as done' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Hide repository notifications' }),
+    ).toBeInTheDocument();
   });
 
   it('opens the browser when clicking on the repo name', async () => {
@@ -47,7 +63,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
 
     renderWithProviders(<RepositoryHeader {...props} />);
 
-    await userEvent.click(screen.getByTestId('open-repository'));
+    await userEvent.click(screen.getByRole('button', { name: /Open repository/ }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
@@ -63,7 +79,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
       markNotificationsAsRead: markNotificationsAsReadMock,
     });
 
-    await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+    await userEvent.click(screen.getByRole('button', { name: 'Mark repository as read' }));
 
     expect(markNotificationsAsReadMock).toHaveBeenCalledWith(mockGitHubCloudGitifyNotifications);
   });
@@ -76,7 +92,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
       markNotificationsAsDone: markNotificationsAsDoneMock,
     });
 
-    await userEvent.click(screen.getByTestId('repository-mark-as-done'));
+    await userEvent.click(screen.getByRole('button', { name: 'Mark repository as done' }));
 
     expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(mockGitHubCloudGitifyNotifications);
   });
@@ -87,11 +103,12 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
       repository: { ...n.repository, owner: { ...n.repository.owner, avatarUrl: '' as Link } },
     }));
 
-    const tree = renderWithProviders(
-      <RepositoryHeader {...props} repoNotifications={repoNotifications} />,
-    );
+    renderWithProviders(<RepositoryHeader {...props} repoNotifications={repoNotifications} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByTestId('avatar')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Open repository/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mark repository as read' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mark repository as done' })).toBeInTheDocument();
   });
 
   it('requests a collapse toggle when toggled', async () => {
@@ -99,7 +116,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
 
     renderWithProviders(<RepositoryHeader {...props} onToggle={onToggle} />);
 
-    await userEvent.click(screen.getByTestId('repository-toggle'));
+    await userEvent.click(screen.getByRole('button', { name: 'Hide repository notifications' }));
 
     expect(onToggle).toHaveBeenCalledTimes(1);
   });
@@ -107,8 +124,12 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
   it('hides its hover actions while animating out', () => {
     renderWithProviders(<RepositoryHeader {...props} isAnimatingExit />);
 
-    expect(screen.queryByTestId('repository-mark-as-read')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('repository-toggle')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Mark repository as read' }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /repository notifications/ }),
+    ).not.toBeInTheDocument();
   });
 
   it('clears the group exit animation when the action settles', async () => {
@@ -119,7 +140,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
       markNotificationsAsRead: vi.fn(),
     });
 
-    await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+    await userEvent.click(screen.getByRole('button', { name: 'Mark repository as read' }));
 
     expect(onAnimateExit.mock.calls).toEqual([[true], [false]]);
   });
@@ -149,7 +170,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
         markNotificationsAsRead: markNotificationsAsReadWithFailure,
       });
 
-      await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+      await userEvent.click(screen.getByRole('button', { name: 'Mark repository as read' }));
 
       expect(onAnimateExit.mock.calls).toEqual([[true], [false]]);
     });
@@ -162,7 +183,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
         markNotificationsAsRead: vi.fn().mockResolvedValue(false),
       });
 
-      await userEvent.click(screen.getByTestId('repository-mark-as-read'));
+      await userEvent.click(screen.getByRole('button', { name: 'Mark repository as read' }));
 
       expect(onAnimateExit.mock.calls).toEqual([[true], [false]]);
     });
