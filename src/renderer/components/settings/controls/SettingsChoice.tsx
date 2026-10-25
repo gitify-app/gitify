@@ -43,7 +43,6 @@ export function SettingsChoice({
   const captionId = `${name}-${id}-caption`;
   const selectId = `${name}-${id}-select`;
   const selectRef = useRef<HTMLSelectElement>(null);
-  const segmentedRef = useRef<HTMLDivElement>(null);
 
   if (!visible) {
     return null;
@@ -70,7 +69,12 @@ export function SettingsChoice({
       return;
     }
 
-    segmentedRef.current?.querySelector<HTMLButtonElement>('button[aria-pressed="true"]')?.focus();
+    const currentIndex = options.findIndex((option) => option.value === value);
+    const nextOption = options[(currentIndex + 1) % options.length];
+
+    if (nextOption) {
+      onChange(nextOption.value);
+    }
   };
 
   const control =
@@ -93,28 +97,26 @@ export function SettingsChoice({
           ))}
       </Select>
     ) : (
-      <div ref={segmentedRef}>
-        <SegmentedControl
-          aria-describedby={caption ? captionId : undefined}
-          aria-labelledby={labelId}
-          onChange={(index) => {
-            const option = options[index];
-            if (option) {
-              onChange(option.value);
-            }
-          }}
-        >
-          {options.map((option) => (
-            <SegmentedControl.Button
-              data-testid={`choice-${name}-${option.value.toLowerCase()}`}
-              key={option.value}
-              selected={option.value === value}
-            >
-              {option.label}
-            </SegmentedControl.Button>
-          ))}
-        </SegmentedControl>
-      </div>
+      <SegmentedControl
+        aria-describedby={caption ? captionId : undefined}
+        aria-labelledby={labelId}
+        onChange={(index) => {
+          const option = options[index];
+          if (option) {
+            onChange(option.value);
+          }
+        }}
+      >
+        {options.map((option) => (
+          <SegmentedControl.Button
+            data-testid={`choice-${name}-${option.value.toLowerCase()}`}
+            key={option.value}
+            selected={option.value === value}
+          >
+            {option.label}
+          </SegmentedControl.Button>
+        ))}
+      </SegmentedControl>
     );
 
   return (
@@ -124,7 +126,7 @@ export function SettingsChoice({
           <button
             aria-hidden="true"
             className={cn(
-              'cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font',
+              'cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font',
               disabled && 'cursor-not-allowed opacity-60',
             )}
             disabled={disabled}

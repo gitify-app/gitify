@@ -41,7 +41,7 @@ export function SettingsToggle({
         <div className="flex items-center gap-1">
           <button
             aria-hidden="true"
-            className="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
+            className="cursor-pointer border-0 bg-transparent p-0 text-left text-sm font-[inherit] font-medium text-gitify-font"
             disabled={disabled}
             id={labelId}
             onClick={() => onChange(!checked)}

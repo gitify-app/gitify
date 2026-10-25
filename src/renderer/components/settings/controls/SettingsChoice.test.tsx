@@ -49,12 +49,14 @@ describe('renderer/components/settings/controls/SettingsChoice.tsx', () => {
     expect(onChange).toHaveBeenCalledWith('date');
   });
 
-  it('focuses the selected segment when the label is clicked', async () => {
+  it('cycles to the next segment when the label is clicked', async () => {
+    const onChange = vi.fn();
+
     renderWithProviders(
       <SettingsChoice
         label="Group by"
         name="groupBy"
-        onChange={vi.fn()}
+        onChange={onChange}
         options={[
           { label: 'Repository', value: 'repository' },
           { label: 'Date', value: 'date' },
@@ -65,7 +67,7 @@ describe('renderer/components/settings/controls/SettingsChoice.tsx', () => {
 
     await userEvent.click(screen.getByText('Group by'));
 
-    expect(screen.getByTestId('choice-groupBy-repository')).toHaveFocus();
+    expect(onChange).toHaveBeenCalledWith('date');
   });
 
   it('renders a select variant', async () => {

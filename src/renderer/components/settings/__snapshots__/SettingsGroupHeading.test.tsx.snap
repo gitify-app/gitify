@@ -3,7 +3,7 @@
 exports[`renderer/components/settings/SettingsGroupHeading.tsx > should render a group heading 1`] = `
 <div>
   <div
-    class="pt-4 border-t border-gitify-notification-border prc-Stack-Stack-UQ9k6"
+    class="pb-2 border-t border-gitify-notification-border pt-4 prc-Stack-Stack-UQ9k6"
     data-align="center"
     data-component="Stack"
     data-direction="horizontal"

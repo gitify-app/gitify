@@ -1,4 +1,4 @@
-import { type ReactNode, useId, useRef } from 'react';
+import { type ReactNode, useId } from 'react';
 
 import { cn } from 'cn';
 
@@ -28,7 +28,6 @@ export function SettingsRow({
   const id = useId();
   const labelId = `${name}-${id}-label`;
   const captionId = `${name}-${id}-caption`;
-  const controlsRef = useRef<HTMLDivElement>(null);
 
   if (!visible) {
     return null;
@@ -42,26 +41,12 @@ export function SettingsRow({
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-1">
-          <button
-            aria-hidden="true"
-            className="cursor-pointer border-0 bg-transparent p-0 text-left font-[inherit] font-medium text-gitify-font"
-            disabled={disabled}
-            id={labelId}
-            onClick={() => {
-              controlsRef.current
-                ?.querySelector<HTMLElement>('button, input, select, textarea')
-                ?.focus();
-            }}
-            tabIndex={-1}
-            type="button"
-          >
+          <span className="text-sm font-medium text-gitify-font" id={labelId}>
             {label}
-          </button>
+          </span>
           {tooltip && <Tooltip name={`tooltip-${name}`} tooltip={tooltip} />}
         </div>
-        <div className="shrink-0" ref={controlsRef}>
-          {children}
-        </div>
+        <div className="shrink-0">{children}</div>
       </div>
 
       {caption && (

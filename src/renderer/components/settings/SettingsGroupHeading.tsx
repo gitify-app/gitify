@@ -17,7 +17,7 @@ export function SettingsGroupHeading({
   return (
     <Stack
       align="center"
-      className={cn('pt-4', divider && 'border-t border-gitify-notification-border')}
+      className={cn('pb-2', divider && 'border-t border-gitify-notification-border pt-4')}
       direction="horizontal"
       gap="condensed"
     >

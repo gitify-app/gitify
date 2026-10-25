@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../__helpers__/test-utils';
 
@@ -20,18 +19,6 @@ describe('renderer/components/settings/controls/SettingsRow.tsx', () => {
     expect(screen.getByText('Fetch interval')).toBeInTheDocument();
     expect(screen.getByText('Check for new notifications at this interval.')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Control' })).toBeInTheDocument();
-  });
-
-  it('focuses the first control when the label is clicked', async () => {
-    renderWithProviders(
-      <SettingsRow label="Fetch interval" name="fetchInterval">
-        <button type="button">Control</button>
-      </SettingsRow>,
-    );
-
-    await userEvent.click(screen.getByText('Fetch interval'));
-
-    expect(screen.getByRole('button', { name: 'Control' })).toHaveFocus();
   });
 
   it('renders a visible disabled reason', () => {
