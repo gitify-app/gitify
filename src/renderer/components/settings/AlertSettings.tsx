@@ -1,11 +1,10 @@
 import { BellIcon, SyncIcon } from '@primer/octicons-react';
-import { Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
+import { Button, ButtonGroup, IconButton } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
 
 import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
 import { SectionHeading } from '../primitives/SectionHeading';
 
 import { VolumeDownIcon } from '../../icons/VolumeDownIcon';
@@ -16,6 +15,10 @@ import {
   decreaseVolume,
   increaseVolume,
 } from '../../utils/ui/volume';
+import { SettingsList } from './controls/SettingsList';
+import { SettingsReveal } from './controls/SettingsReveal';
+import { SettingsRow } from './controls/SettingsRow';
+import { SettingsToggle } from './controls/SettingsToggle';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
@@ -34,33 +37,30 @@ export function AlertSettings() {
         Alerts
       </SectionHeading>
 
-      <Stack direction="vertical" gap="condensed">
-        <Checkbox
+      <SettingsList>
+        <SettingsToggle
           checked={showNotifications}
           label="Show desktop notifications"
           name="showNotifications"
           onChange={() => toggleSetting('showNotifications')}
-          tooltip={
-            <Text>Display native operating system notifications for new unread notifications.</Text>
-          }
+          tooltip="Display native operating system notifications for new unread notifications."
         />
 
-        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <Checkbox
-            checked={playSound}
-            label="Play notification sound"
-            name="playSound"
-            onChange={() => toggleSetting('playSound')}
-            tooltip={
-              <Text>
-                Play a sound when new unread notifications arrive after filtering. Use the adjacent
-                volume controls to adjust the sound level.
-              </Text>
-            }
-          />
+        <SettingsToggle
+          checked={playSound}
+          label="Play notification sound"
+          name="playSound"
+          onChange={() => toggleSetting('playSound')}
+          tooltip="Play a sound when new unread notifications arrive after filtering. Use the notification volume controls to adjust the sound level."
+        />
 
-          {playSound && (
-            <ButtonGroup className="ml-2" data-testid="settings-volume-group">
+        <SettingsReveal name="volume" open={playSound}>
+          <SettingsRow
+            label="Notification volume"
+            name="notificationVolume"
+            tooltip="Adjust the volume of the notification sound."
+          >
+            <ButtonGroup data-testid="settings-volume-group">
               <IconButton
                 aria-label="Volume down"
                 data-testid="settings-volume-down"
@@ -106,22 +106,17 @@ export function AlertSettings() {
                 variant="danger"
               />
             </ButtonGroup>
-          )}
-        </Stack>
+          </SettingsRow>
+        </SettingsReveal>
 
-        <Checkbox
+        <SettingsToggle
           checked={showUpdateNotifications}
           label="Show app update notifications"
           name="showUpdateNotifications"
           onChange={() => toggleSetting('showUpdateNotifications')}
-          tooltip={
-            <Text>
-              Show a notification when a {APPLICATION.NAME} update is ready. Updates will still be
-              checked and shown in the menu bar.
-            </Text>
-          }
+          tooltip={`Show a notification when a ${APPLICATION.NAME} update is ready. Updates are still checked and shown in the menu bar.`}
         />
-      </Stack>
+      </SettingsList>
     </fieldset>
   );
 }

@@ -3,16 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
-import { APPLICATION } from '../../../shared/constants';
-
 import {
   DEFAULT_SETTINGS_STATE,
   useSettingsStore,
   useShortcutRegistrationStore,
 } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
-import { RadioGroup } from '../fields/RadioGroup';
 import { SectionHeading } from '../primitives/SectionHeading';
 
 import { type KeyboardAcceleratorShortcut, OpenPreference, toLink } from '../../types';
@@ -23,6 +19,11 @@ import {
   keyboardEventToAccelerator,
   MODIFIER_SEGMENTS,
 } from '../../utils/system/keyboardShortcut';
+import { SettingsChoice } from './controls/SettingsChoice';
+import { SettingsList } from './controls/SettingsList';
+import { SettingsReveal } from './controls/SettingsReveal';
+import { SettingsRow } from './controls/SettingsRow';
+import { SettingsToggle } from './controls/SettingsToggle';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
@@ -124,13 +125,11 @@ export function SystemSettings() {
         System
       </SectionHeading>
 
-      <Stack direction="vertical" gap="condensed">
-        <RadioGroup
-          label="Link focus:"
+      <SettingsList>
+        <SettingsChoice
+          label="Link focus"
           name="openLinks"
-          onChange={(evt) => {
-            updateSetting('openLinks', evt.target.value as OpenPreference);
-          }}
+          onChange={(value) => updateSetting('openLinks', value as OpenPreference)}
           options={[
             { label: 'Foreground', value: OpenPreference.FOREGROUND },
             { label: 'Background', value: OpenPreference.BACKGROUND },
@@ -149,8 +148,8 @@ export function SystemSettings() {
                 current window.
               </Text>
               <Text>
-                This applies to every link {APPLICATION.NAME} opens, including notification links
-                opened in the browser.
+                This applies to every link Gitify opens, including notification links opened in the
+                browser.
               </Text>
             </Stack>
           }
@@ -174,141 +173,143 @@ export function SystemSettings() {
           />
         )}
 
-        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <Checkbox
-            checked={keyboardShortcut}
-            label="Global shortcut"
-            name="keyboardShortcut"
-            onChange={() => toggleSetting('keyboardShortcut')}
-            tooltip={
-              <Stack direction="vertical" gap="condensed">
-                <Text>Global keyboard shortcut to show or hide {APPLICATION.NAME}.</Text>
-                <Text>Shortcuts must include:</Text>
-                <div className="pl-2">
-                  <Stack direction="vertical" gap="none">
-                    <Stack direction="horizontal" gap="condensed">
-                      <Text>•</Text>
-                      <Text>
-                        Primary modifier:{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('CommandOrControl', isMac)}
-                        </Text>
-                      </Text>
-                    </Stack>
-                    <Stack direction="horizontal" gap="condensed">
-                      <Text>•</Text>
-                      <Text>
-                        Optional modifiers:{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('Shift', isMac)}
-                        </Text>
-                        ,{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('Alt', isMac)}
-                        </Text>
-                      </Text>
-                    </Stack>
-                    <Stack direction="horizontal" gap="condensed">
-                      <Text>•</Text>
-                      <Text>A non-modifier key (letter, number, etc.)</Text>
-                    </Stack>
-                  </Stack>
-                </div>
-              </Stack>
+        <SettingsToggle
+          checked={keyboardShortcut}
+          label="Enable global shortcut"
+          name="keyboardShortcut"
+          onChange={() => {
+            if (keyboardShortcut) {
+              setRecordingShortcut(false);
+              setLiveModifierAccelerator('');
             }
-          />
+            toggleSetting('keyboardShortcut');
+          }}
+          tooltip="Show or hide Gitify from anywhere with a keyboard shortcut."
+        />
 
-          {keyboardShortcut && (
-            <ButtonGroup className="ml-2" data-testid="settings-shortcut-group">
-              <IconButton
-                aria-label="Edit global shortcut"
-                data-testid="settings-shortcut-edit"
-                icon={PencilIcon}
-                onClick={() => {
-                  clearShortcutRegistrationError();
-                  setLiveModifierAccelerator('');
-                  setRecordingShortcut(true);
-                }}
-                size="small"
-                unsafeDisableTooltip={true}
-              />
-              <Button
-                aria-label="Global shortcut"
-                className="pointer-events-none"
-                size="small"
-                tabIndex={-1}
-              >
-                <Text as="strong" className="text-gitify-caution">
-                  {shortcutButtonLabel}
-                </Text>
-              </Button>
-              <IconButton
-                aria-label="Reset global shortcut to default"
-                data-testid="settings-shortcut-reset"
-                disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
-                icon={SyncIcon}
-                onClick={() => {
-                  clearShortcutRegistrationError();
-                  updateSetting('openGitifyShortcut', defaultSettings.openGitifyShortcut);
-                }}
-                size="small"
-                unsafeDisableTooltip={true}
-                variant="danger"
-              />
-            </ButtonGroup>
-          )}
-        </Stack>
+        <SettingsReveal name="shortcutRecorder" open={keyboardShortcut}>
+          <div ref={shortcutRowRef}>
+            <SettingsRow
+              label="Global shortcut"
+              name="shortcut"
+              tooltip={
+                <Stack direction="vertical" gap="condensed">
+                  <Text>Shortcuts must include:</Text>
+                  <div className="pl-2">
+                    <Stack direction="vertical" gap="none">
+                      <Stack direction="horizontal" gap="condensed">
+                        <Text>•</Text>
+                        <Text>
+                          Primary modifier:{' '}
+                          <Text as="strong" className="text-gitify-caution">
+                            {formatAcceleratorForDisplay('CommandOrControl', isMac)}
+                          </Text>
+                        </Text>
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
+                        <Text>•</Text>
+                        <Text>
+                          Optional modifiers:{' '}
+                          <Text as="strong" className="text-gitify-caution">
+                            {formatAcceleratorForDisplay('Shift', isMac)}
+                          </Text>
+                          ,{' '}
+                          <Text as="strong" className="text-gitify-caution">
+                            {formatAcceleratorForDisplay('Alt', isMac)}
+                          </Text>
+                        </Text>
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
+                        <Text>•</Text>
+                        <Text>A non-modifier key (letter, number, etc.)</Text>
+                      </Stack>
+                    </Stack>
+                  </div>
+                </Stack>
+              }
+            >
+              <ButtonGroup data-testid="settings-shortcut-group">
+                <IconButton
+                  aria-label="Edit global shortcut"
+                  data-testid="settings-shortcut-edit"
+                  icon={PencilIcon}
+                  onClick={() => {
+                    clearShortcutRegistrationError();
+                    setLiveModifierAccelerator('');
+                    setRecordingShortcut(true);
+                  }}
+                  size="small"
+                  unsafeDisableTooltip={true}
+                />
+                <Button
+                  aria-label="Current shortcut"
+                  className="pointer-events-none"
+                  size="small"
+                  tabIndex={-1}
+                >
+                  <Text as="strong" className="text-gitify-caution">
+                    {shortcutButtonLabel}
+                  </Text>
+                </Button>
+                <IconButton
+                  aria-label="Reset global shortcut to default"
+                  data-testid="settings-shortcut-reset"
+                  disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
+                  icon={SyncIcon}
+                  onClick={() => {
+                    clearShortcutRegistrationError();
+                    updateSetting('openGitifyShortcut', defaultSettings.openGitifyShortcut);
+                  }}
+                  size="small"
+                  unsafeDisableTooltip={true}
+                  variant="danger"
+                />
+              </ButtonGroup>
+            </SettingsRow>
+          </div>
+        </SettingsReveal>
 
-        <Checkbox
+        <SettingsToggle
           checked={keepWindowOnBlur}
           label="Keep window open when unfocused"
           name="keepWindowOnBlur"
           onChange={() => toggleSetting('keepWindowOnBlur')}
-          tooltip={<Text>Keep the {APPLICATION.NAME} window open when you click outside it.</Text>}
+          tooltip="Keep the Gitify window open when you click outside it."
         />
 
-        <Checkbox
+        <SettingsToggle
           checked={openAtStartup}
           label="Launch at startup"
           name="openAtStartup"
           onChange={() => toggleSetting('openAtStartup')}
-          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
+          tooltip="Launch Gitify automatically at startup."
           visible={!isLinux}
         />
 
-        <Checkbox
+        <SettingsToggle
           checked={useX11Backend}
           label="Use X11 backend (restart required)"
           name="useX11Backend"
           onChange={() => toggleSetting('useX11Backend')}
-          tooltip={
-            <Text>
-              Run {APPLICATION.NAME} under X11/XWayland so the window can open next to the tray
-              icon. Wayland placement still depends on your compositor and its extensions. This
-              disables Vulkan and may soften text on fractional-scaling displays. Takes effect after
-              restarting {APPLICATION.NAME}.
-            </Text>
-          }
+          tooltip="Run Gitify under X11/XWayland so the window can open next to the tray icon. Takes effect after restarting Gitify."
           visible={isLinux}
         />
+      </SettingsList>
 
-        {isLinux && (
-          <Stack gap="condensed">
-            <Text className="text-sm text-gitify-font">
-              On GNOME Wayland, install the {APPLICATION.NAME} extension to open the window next to
-              its tray icon. Install and manage it through GNOME's extension tools.
-            </Text>
-            <Button
-              onClick={() =>
-                openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))
-              }
-              size="small"
-            >
-              GNOME extension installation
-            </Button>
-          </Stack>
-        )}
-      </Stack>
+      {isLinux && (
+        <Stack className="pt-2" gap="condensed">
+          <Text className="text-sm text-gitify-font">
+            On GNOME Wayland, install the Gitify extension to open the window next to its tray icon.
+            Install and manage it through GNOME's extension tools.
+          </Text>
+          <Button
+            onClick={() => openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))}
+            size="small"
+          >
+            GNOME extension installation
+          </Button>
+        </Stack>
+      )}
     </fieldset>
   );
 }

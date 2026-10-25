@@ -22,7 +22,7 @@ export function Contents({
   return (
     <div
       className={cn(
-        'grow overflow-x-hidden overflow-y-auto',
+        'grow min-h-0 overflow-x-hidden overflow-y-auto',
         paddingHorizontal && 'px-5',
         paddingBottom && 'pb-2',
         scrollFade && 'gitify-scroll-fade',
