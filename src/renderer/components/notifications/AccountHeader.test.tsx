@@ -78,15 +78,16 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     expect(onToggle).toHaveBeenCalledTimes(1);
   });
 
-  it('should label the toggle by collapsed state', () => {
-    const { unmount } = renderWithProviders(<AccountHeader {...props} />)!;
+  it('labels the toggle to hide notifications when expanded', () => {
+    renderWithProviders(<AccountHeader {...props} />);
 
     expect(screen.getByTestId('account-toggle')).toHaveAttribute(
       'title',
       'Hide account notifications',
     );
+  });
 
-    unmount();
+  it('labels the toggle to show notifications when collapsed', () => {
     renderWithProviders(<AccountHeader {...props} isCollapsed />);
 
     expect(screen.getByTestId('account-toggle')).toHaveAttribute(
