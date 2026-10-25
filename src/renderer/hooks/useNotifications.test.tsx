@@ -93,14 +93,13 @@ describe('renderer/hooks/useNotifications.ts', () => {
     raiseSoundNotificationSpy.mockClear();
     raiseNativeNotificationSpy.mockClear();
     getAllNotificationsMock.mockReset();
+    getAllNotificationsMock.mockResolvedValue([]);
     refreshEnrichmentCacheMock.mockReset();
+    refreshEnrichmentCacheMock.mockReturnValue(false);
     clearServerPollIntervals();
 
     useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
     useNotificationActionFailuresStore.getState().reset();
-
-    // Reset mock notification state between tests since it's mutated
-    mockGitifyNotification.unread = true;
   });
 
   describe('fetching notifications', () => {
