@@ -5,7 +5,11 @@ import type { SubjectType } from '../../../../types';
 import { createNotificationHandler } from './index';
 import { MERGED_QUERY_SUBJECT_TYPES } from './supported';
 
-/** Every possible subject type; only Discussion, Issue, and PullRequest are batchable. */
+/**
+ * Exhaustive key list of every SubjectType. The `true` values are placeholders:
+ * only the keys are used, and the Record type makes a missing member a compile
+ * error. Support is determined solely by MERGED_QUERY_SUBJECT_TYPES below.
+ */
 const ALL_SUBJECT_TYPES: Record<SubjectType, true> = {
   AgentSessionThread: true,
   BitbucketNotification: true,
