@@ -517,6 +517,21 @@ export default defineConfig({
         },
       },
       {
+        // Cycle detection also covers the main, preload, and shared processes.
+        files: [
+          'src/main/**/*.ts',
+          'src/main/**/*.tsx',
+          'src/preload/**/*.ts',
+          'src/preload/**/*.tsx',
+          'src/shared/**/*.ts',
+          'src/shared/**/*.tsx',
+        ],
+        excludeFiles: TEST_EXCLUDES,
+        rules: {
+          'import/no-cycle': 'error',
+        },
+      },
+      {
         files: TEST_EXCLUDES,
         rules: {
           'vitest/no-focused-tests': 'error',
