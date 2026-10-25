@@ -17,6 +17,8 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
+    // happy-dom tests import CSS from @primer/react. The threads and forks pools
+    // cannot load those .css files (ERR_UNKNOWN_FILE_EXTENSION), so keep vmThreads.
     pool: 'vmThreads',
     isolate: true,
     attachmentsDir: '.vitest-attachments',
@@ -43,8 +45,10 @@ export default defineConfig({
       reportOnFailure: true,
       reporter: ['html', 'lcovonly'],
       include: ['src/**/*'],
-      exclude: ['**/*.html', '**/*.graphql', '**/graphql/generated/**', '**/.DS_Store'],
+      exclude: ['**/*.html', '**/*.md', '**/*.graphql', '**/graphql/generated/**', '**/.DS_Store'],
     },
+    // Projects mirror the runtime boundary: Node for main/shared, happy-dom for
+    // preload/renderer, and a real browser for pixel tests.
     projects: [
       {
         extends: true,
@@ -65,7 +69,10 @@ export default defineConfig({
         },
       },
       {
-        // TODO - Opportunity in future to move some of the renderer util tests to node environment
+        // Renderer tests stay in happy-dom even when they look like pure utils:
+        // many touch window.gitify, localStorage, navigator, document, or Audio,
+        // and the environment is only ~2% of suite runtime. A third node project
+        // would still need a renderer setup and would not remove that coupling.
         extends: true,
         test: {
           name: 'node [main, shared]',
