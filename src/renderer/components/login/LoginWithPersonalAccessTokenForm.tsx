@@ -161,7 +161,7 @@ export function LoginWithPersonalAccessTokenForm({
         )}
         <Stack direction="vertical" gap="normal">
           {showUsernameField && (
-            <FormControl required>
+            <FormControl id="login-username" required>
               <FormControl.Label>Atlassian Email</FormControl.Label>
               {usernameCaption && (
                 <FormControl.Caption>
@@ -185,7 +185,7 @@ export function LoginWithPersonalAccessTokenForm({
           )}
 
           {showHostnameField && (
-            <FormControl required>
+            <FormControl id="login-hostname" required>
               <FormControl.Label>Hostname</FormControl.Label>
               <FormControl.Caption>
                 <Text as="i">{hostnameCaption}</Text>
@@ -224,7 +224,7 @@ export function LoginWithPersonalAccessTokenForm({
             {children}
           </Stack>
 
-          <FormControl required>
+          <FormControl id="login-token" required>
             <FormControl.Label>Token</FormControl.Label>
             <TextInput
               aria-invalid={errors.token ? 'true' : 'false'}
