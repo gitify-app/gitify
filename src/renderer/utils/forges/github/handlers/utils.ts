@@ -11,9 +11,10 @@ import type {
 type AuthorInput = AuthorFieldsFragment | GitifyNotificationUser | null | undefined;
 
 /**
- * Construct the notification subject user based on an order prioritized list of users
- * @param users array of users in order or priority
- * @returns the subject user
+ * Construct the notification subject user from users in priority order.
+ *
+ * @param users - Users in priority order.
+ * @returns The first user with a value, or `undefined` when none is present.
  */
 export function getNotificationAuthor(users: AuthorInput[]): GitifyNotificationUser | undefined {
   for (const user of users) {
@@ -32,15 +33,16 @@ export function getNotificationAuthor(users: AuthorInput[]): GitifyNotificationU
 }
 
 /**
- * Construct a GitHub Actions URL for a repository with optional workflow filters.
+ * Construct a GitHub Actions URL for a repository with workflow filters.
  *
  * Appends the provided filter strings as a `+`-joined `query` search parameter.
  * Note: `%2B` in the URL is un-encoded back to `+` because the GitHub Actions
  * UI does not handle encoded plus signs correctly.
  *
  * @param repositoryURL - The base HTML URL of the repository.
- * @param filters - Optional workflow filter strings to append as a query.
- * @returns The GitHub Actions URL, with filters applied if provided.
+ * @param filters - Workflow filter strings to append as a query; pass an empty
+ * array for none.
+ * @returns The GitHub Actions URL, with filters applied.
  */
 export function actionsURL(repositoryURL: string, filters: string[]): Link {
   const url = new URL(repositoryURL);

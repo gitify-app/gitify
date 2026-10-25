@@ -35,8 +35,8 @@ export function initializeAppLifecycle(
 }
 
 /**
- * Handle a gitify:// protocol URL by forwarding it to the renderer process
- * as an AUTH_CALLBACK event.
+ * Handle a custom-protocol URL by forwarding it to the renderer process as an
+ * AUTH_CALLBACK event.
  *
  * @param mb - The menubar instance to forward the event through.
  * @param url - The protocol URL to handle.
@@ -53,7 +53,7 @@ export function handleProtocolURL(mb: Menubar, url: string, protocol: string): v
  * Enforce a single application instance. If a second instance is launched,
  * any protocol URL in the command line is forwarded to the existing instance.
  *
- * @param mb - The menubar instance to show when a second instance is detected.
+ * @param mb - The menubar instance used to forward a detected protocol URL.
  * @param protocol - The custom protocol string to extract from command line args.
  */
 function preventSecondInstance(mb: Menubar, protocol: string): void {

@@ -26,7 +26,8 @@ export function formatForDisplay(text: string[]): string {
 }
 
 /**
- * Formats a string to proper case (capitalize the first letter of each word).
+ * Formats a string to proper case: capitalize the first letter of each word and
+ * lower-case the remaining characters.
  *
  * @param text - The string to format.
  * @returns The proper-cased string.

@@ -52,9 +52,10 @@ const getConfigPath = () => {
 };
 
 /**
- * Determine if this is the first run of the application by checking for the existence of a specific file.
+ * Determine whether this is the first run by checking for the marker file. When
+ * it is the first run, create the marker so later launches skip this check.
  *
- * @returns true if this is the first run, false otherwise
+ * @returns `true` if this is the first run, `false` otherwise.
  */
 function checkAndMarkFirstRun(): boolean {
   const configPath = getConfigPath();
