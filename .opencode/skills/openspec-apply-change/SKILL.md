@@ -7,7 +7,7 @@ compatibility: Requires openspec CLI.
 metadata:
   author: openspec
   version: '1.0'
-  generatedBy: '1.14.1'
+  generatedBy: '1.15.0'
 ---
 
 Implement tasks from an OpenSpec change.
