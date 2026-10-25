@@ -32,7 +32,9 @@ describe('renderer/utils/forges/github/handlers/supported.ts', () => {
     expect([...MERGED_QUERY_SUBJECT_TYPES].sort()).toEqual(['Discussion', 'Issue', 'PullRequest']);
   });
 
-  it('marks only the handlers that support merged query enrichment', () => {
+  it('keeps the batching gate aligned with handler support for every subject type', () => {
+    // client.ts batches by MERGED_QUERY_SUBJECT_TYPES, while enrich.ts filters
+    // by the handler flag. They must agree for batching and enrichment to match.
     for (const type of Object.keys(ALL_SUBJECT_TYPES) as SubjectType[]) {
       const handler = createNotificationHandler(mockPartialGitifyNotification({ type }));
 
