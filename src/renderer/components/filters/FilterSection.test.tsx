@@ -27,7 +27,7 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
   describe('should render itself & its children', () => {
     it('with detailed notifications enabled', () => {
-      const tree = renderWithProviders(
+      renderWithProviders(
         <FilterSection
           filter={{
             ...mockFilter,
@@ -47,15 +47,18 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         },
       );
 
-      expect(tree.container).toMatchSnapshot();
+      expect(screen.getByRole('heading', { name: 'FilterSectionTitle' })).toBeInTheDocument();
+      for (const checkbox of screen.getAllByRole('checkbox')) {
+        expect(checkbox).toBeEnabled();
+      }
     });
 
     it('with detailed notifications disabled', () => {
-      const tree = renderWithProviders(
+      renderWithProviders(
         <FilterSection
           filter={{
             ...mockFilter,
-            requiresDetailsNotifications: false,
+            requiresDetailsNotifications: true,
           }}
           filterSetting={mockFilterSetting}
           icon={MarkGithubIcon}
@@ -71,7 +74,10 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
         },
       );
 
-      expect(tree.container).toMatchSnapshot();
+      expect(screen.getByRole('heading', { name: 'FilterSectionTitle' })).toBeInTheDocument();
+      for (const checkbox of screen.getAllByRole('checkbox')) {
+        expect(checkbox).toBeDisabled();
+      }
     });
   });
 

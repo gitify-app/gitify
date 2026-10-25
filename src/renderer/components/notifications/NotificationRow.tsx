@@ -138,6 +138,8 @@ export function NotificationRow({
                 Opacity.READ,
                 (isGroupByDate() || !showNumber) && 'hidden',
               )}
+              data-hidden={isGroupByDate() || !showNumber || undefined}
+              data-testid="notification-reference"
             >
               {notification.display.identifier}
             </Text>

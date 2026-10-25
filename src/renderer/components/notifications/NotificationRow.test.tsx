@@ -43,43 +43,50 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
   vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
   vi.spyOn(globalThis.Date, 'now').mockImplementation(() => new Date('2024').valueOf());
 
-  it('should render itself & its children - group by date', async () => {
+  it('renders the notification content and actions when grouped by date', () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithProviders(<NotificationRow {...props} />, {
+    renderWithProviders(<NotificationRow {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.DATE },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.getByText('gitify-app/notifications-test')).toBeInTheDocument();
+    expect(screen.getByTestId('notification-reference')).toHaveAttribute('data-hidden', 'true');
+    expect(screen.getByRole('button', { name: 'Mark as read' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Mark as done' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Unsubscribe from thread' })).toBeInTheDocument();
   });
 
-  it('should render itself & its children - group by repositories', async () => {
+  it('renders the reference when grouped by repository', () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithProviders(<NotificationRow {...props} />, {
+    renderWithProviders(<NotificationRow {...props} />, {
       settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.getByTestId('notification-reference')).not.toHaveAttribute('data-hidden');
   });
 
-  it('should render itself & its children - hide numbers', async () => {
+  it('hides the reference when showNumber is disabled', () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithProviders(<NotificationRow {...props} />, {
+    renderWithProviders(<NotificationRow {...props} />, {
       settings: { ...mockSettings, showNumber: false },
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.getByTestId('notification-reference')).toHaveAttribute('data-hidden', 'true');
   });
 
   it('hides the issue number while hovered so it is never partially rendered', () => {
@@ -121,15 +128,18 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     expect(tree.getByText('d2a86d8')).toBeInTheDocument();
   });
 
-  it('should render itself & its children - notification is read', async () => {
+  it('hides read/done actions for a read notification', () => {
     const props: NotificationRowProps = {
       notification: { ...mockGitifyNotification, unread: false },
       isRepositoryAnimatingExit: false,
     };
 
-    const tree = renderWithProviders(<NotificationRow {...props} />);
+    renderWithProviders(<NotificationRow {...props} />);
 
-    expect(tree.container).toMatchSnapshot();
+    expect(screen.getByText('I am a robot and this is a test!')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Mark as read' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Mark as done' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Unsubscribe from thread' })).toBeInTheDocument();
   });
 
   describe('notification interactions', () => {

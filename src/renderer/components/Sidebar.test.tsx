@@ -5,6 +5,8 @@ import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
+import { APPLICATION } from '../../shared/constants';
+
 import { useSettingsStore } from '../stores';
 
 import * as comms from '../utils/system/comms';
@@ -20,22 +22,52 @@ describe('renderer/components/Sidebar.tsx', () => {
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
-  it('should render itself & its children (logged in)', () => {
-    const tree = renderWithProviders(<Sidebar />, {
+  it('renders the logged-in controls', () => {
+    renderWithProviders(<Sidebar />, {
       initialEntries: ['/'],
       accounts: [mockGitHubCloudAccount],
     });
 
-    expect(tree.container).toMatchSnapshot();
+    for (const name of [
+      new RegExp(`^${APPLICATION.NAME}`),
+      /^Notifications/,
+      /^Toggle focused mode/,
+      /^Filters/,
+      /^My issues/,
+      /^My pull requests/,
+      /^Refresh/,
+      /^Settings/,
+    ]) {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    }
+
+    expect(
+      screen.queryByRole('button', { name: new RegExp(`^Quit ${APPLICATION.NAME}`) }),
+    ).not.toBeInTheDocument();
   });
 
-  it('should render itself & its children (logged out)', () => {
-    const tree = renderWithProviders(<Sidebar />, {
+  it('renders the logged-out controls', () => {
+    renderWithProviders(<Sidebar />, {
       initialEntries: ['/landing'],
       accounts: [],
     });
 
-    expect(tree.container).toMatchSnapshot();
+    expect(
+      screen.getByRole('button', { name: new RegExp(`^${APPLICATION.NAME}`) }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: new RegExp(`^Quit ${APPLICATION.NAME}`) }),
+    ).toBeInTheDocument();
+
+    for (const name of [
+      /^Notifications/,
+      /^Toggle focused mode/,
+      /^Filters/,
+      /^Refresh/,
+      /^Settings/,
+    ]) {
+      expect(screen.queryByRole('button', { name })).not.toBeInTheDocument();
+    }
   });
 
   it('should hide host shortcuts when logged out', () => {
@@ -70,24 +102,28 @@ describe('renderer/components/Sidebar.tsx', () => {
       expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/notifications');
     });
 
-    it('renders correct icon when there are no notifications', () => {
+    it('highlights the notifications button when there are unread notifications', () => {
       renderWithProviders(<Sidebar />, {
         accounts: [mockGitHubCloudAccount],
-        notifications: [],
+        hasUnreadNotifications: true,
       });
 
-      expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
+      expect(screen.getByRole('button', { name: /^Notifications/ })).toHaveAttribute(
+        'data-variant',
+        'primary',
+      );
     });
 
-    it('renders correct icon when there are notifications', () => {
+    it('does not highlight the notifications button when all notifications are read', () => {
       renderWithProviders(<Sidebar />, {
         accounts: [mockGitHubCloudAccount],
-        notificationCount: 2,
-        hasNotifications: true,
         hasUnreadNotifications: false,
       });
 
-      expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
+      expect(screen.getByRole('button', { name: /^Notifications/ })).toHaveAttribute(
+        'data-variant',
+        'invisible',
+      );
     });
   });
 
@@ -98,7 +134,10 @@ describe('renderer/components/Sidebar.tsx', () => {
         settings: { ...mockSettings, participating: false },
       });
 
-      expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
+      expect(screen.getByTestId('sidebar-focused-mode')).toHaveAttribute(
+        'data-variant',
+        'invisible',
+      );
     });
 
     it('renders the focused mode is on', () => {
@@ -107,7 +146,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         settings: { ...mockSettings, participating: true },
       });
 
-      expect(screen.getByTestId('sidebar-focused-mode')).toBeInTheDocument();
+      expect(screen.getByTestId('sidebar-focused-mode')).toHaveAttribute('data-variant', 'primary');
     });
 
     it('toggles participating when clicked', async () => {
@@ -155,7 +194,10 @@ describe('renderer/components/Sidebar.tsx', () => {
         filters: { reasons: ['assign'] },
       });
 
-      expect(screen.getByTestId('sidebar-filter-notifications')).toMatchSnapshot();
+      expect(screen.getByTestId('sidebar-filter-notifications')).toHaveAttribute(
+        'data-variant',
+        'primary',
+      );
     });
   });
 
