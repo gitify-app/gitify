@@ -57,7 +57,11 @@ pnpm test -u
 
 `pnpm test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
 spacing, theme changes) are covered separately by a browser-mode project that
-screenshots every route across the light, dark, accessibility, and Glass themes.
+screenshots every route in Classic light, Classic dark, Glass light, and Glass
+dark, with accessibility and high-contrast variants on the densest routes. It
+also captures high-value states — open help popovers, the notification action
+rail on hover, active filter selections, choice controls, settings reveals, the
+loading splash, and the reset-settings confirmation.
 
 Screenshots only match when the browser build and font stack are identical, so
 both commands below run the suite inside a pinned Playwright container, and CI
