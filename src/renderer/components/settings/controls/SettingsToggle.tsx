@@ -29,6 +29,7 @@ export function SettingsToggle({
 }: Readonly<SettingsToggleProps>) {
   const id = useId();
   const labelId = `${name}-${id}-label`;
+  const visibleLabelId = `${name}-${id}-visible-label`;
   const captionId = `${name}-${id}-caption`;
 
   if (!visible) {
@@ -39,6 +40,9 @@ export function SettingsToggle({
     <div className={cn('flex items-start justify-between gap-3', disabled && 'opacity-60')}>
       <div className="min-w-0">
         <div className="flex items-center gap-1">
+          <span className="sr-only" id={labelId}>
+            {label}
+          </span>
           {/* Primer's unlayered `button { font: inherit }` outranks Tailwind's
               utilities, so the label typography is marked important to match
               the other row labels. */}
@@ -46,7 +50,7 @@ export function SettingsToggle({
             aria-hidden="true"
             className="cursor-pointer border-0 bg-transparent p-0 text-left text-sm! font-[inherit] font-medium! text-gitify-font"
             disabled={disabled}
-            id={labelId}
+            id={visibleLabelId}
             onClick={() => onChange(!checked)}
             tabIndex={-1}
             type="button"

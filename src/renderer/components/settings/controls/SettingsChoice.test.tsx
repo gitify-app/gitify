@@ -21,7 +21,7 @@ describe('renderer/components/settings/controls/SettingsChoice.tsx', () => {
       />,
     );
 
-    expect(screen.getByText('Group by')).toBeInTheDocument();
+    expect(screen.getByText('Group by', { selector: 'button' })).toBeInTheDocument();
     expect(screen.getByText('Choose how notifications are grouped.')).toBeInTheDocument();
     expect(screen.getByTestId('choice-groupBy-repository')).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByTestId('choice-groupBy-date')).toHaveAttribute('aria-pressed', 'false');
@@ -65,7 +65,7 @@ describe('renderer/components/settings/controls/SettingsChoice.tsx', () => {
       />,
     );
 
-    await userEvent.click(screen.getByText('Group by'));
+    await userEvent.click(screen.getByText('Group by', { selector: 'button' }));
 
     expect(onChange).toHaveBeenCalledWith('date');
   });
@@ -107,7 +107,7 @@ describe('renderer/components/settings/controls/SettingsChoice.tsx', () => {
       />,
     );
 
-    await userEvent.click(screen.getByText('Theme'));
+    await userEvent.click(screen.getByText('Theme', { selector: 'button' }));
 
     expect(screen.getByRole('combobox', { name: 'Theme' })).toHaveFocus();
   });

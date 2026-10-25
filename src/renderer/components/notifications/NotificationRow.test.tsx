@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 
@@ -371,9 +371,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         markNotificationsAsRead: vi.fn().mockResolvedValue(false),
       });
 
-      await act(async () => {
-        fireEvent.click(screen.getByTestId('notification-mark-as-read'));
-      });
+      await userEvent.click(screen.getByTestId('notification-mark-as-read'));
 
       expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
     });
@@ -447,9 +445,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
 
-      await act(async () => {
-        fireEvent.click(screen.getByTestId('notification-mark-as-done'));
-      });
+      await userEvent.click(screen.getByTestId('notification-mark-as-done'));
 
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsDoneMock).toHaveBeenCalledWith([mockGitifyNotification]);
@@ -471,9 +467,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       const markAsReadButton = screen.getByTestId('notification-mark-as-read');
       expect(markAsReadButton).toBeEnabled();
 
-      await act(async () => {
-        fireEvent.click(markAsReadButton);
-      });
+      await userEvent.click(markAsReadButton);
 
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
@@ -504,9 +498,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
-      await act(async () => {
-        fireEvent.click(screen.getByTestId('notification-mark-as-read'));
-      });
+      await userEvent.click(screen.getByTestId('notification-mark-as-read'));
 
       // While the retry is still in flight, the row is animating out again -
       // its hover actions are hidden, exactly like the very first attempt.

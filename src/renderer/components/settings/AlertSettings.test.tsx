@@ -66,7 +66,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   it('should increase notification volume', async () => {
     renderWithProviders(<AlertSettings />);
 
-    await userEvent.click(screen.getByTestId('settings-volume-up'));
+    await userEvent.click(screen.getByRole('button', { name: 'Volume up' }));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 30);
@@ -75,7 +75,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   it('should decrease notification volume', async () => {
     renderWithProviders(<AlertSettings />);
 
-    await userEvent.click(screen.getByTestId('settings-volume-down'));
+    await userEvent.click(screen.getByRole('button', { name: 'Volume down' }));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 10);
@@ -86,7 +86,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
       settings: { ...mockSettings, notificationVolume: 30 as Percentage },
     });
 
-    await userEvent.click(screen.getByTestId('settings-volume-reset'));
+    await userEvent.click(screen.getByRole('button', { name: 'Reset volume' }));
 
     expect(updateSettingSpy).toHaveBeenCalledTimes(1);
     expect(updateSettingSpy).toHaveBeenCalledWith('notificationVolume', 20);
