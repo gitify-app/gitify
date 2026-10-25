@@ -11,7 +11,7 @@ import type {
 } from '../types';
 
 import { GitLabIcon } from '../../../icons/GitLabIcon';
-import { isValidHostname } from '../../auth/utils';
+import { isValidHostname } from '../../auth/identity';
 import { rendererLogWarn, toError } from '../../core/logger';
 import { createNotificationHandler } from '../github/handlers';
 import {

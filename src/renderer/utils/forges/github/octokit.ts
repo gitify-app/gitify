@@ -9,7 +9,7 @@ import { APPLICATION } from '../../../../shared/constants';
 import type { Account, Token } from '../../../types';
 import type { APIClientType } from './types';
 
-import { getAccountUUID } from '../../auth/utils';
+import { getAccountUUID } from '../../auth/identity';
 import { decryptValue, getAppVersion } from '../../system/comms';
 import { forgetGitHubCliToken, resolveGitHubCliToken } from './cli';
 import { getGitHubAPIBaseUrl } from './utils';
