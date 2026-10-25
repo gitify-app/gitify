@@ -101,29 +101,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Agent Session Finished"
-          id="filter-Agent Session Finished"
-          name="Agent Session Finished"
+          data-testid="checkbox-reasons-agent_session_finished"
+          id="filter-reasons-agent_session_finished"
+          name="reasons-agent_session_finished"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Agent Session Finished"
+          for="filter-reasons-agent_session_finished"
         >
           Agent Session Finished
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Agent Session Finished"
+          aria-label="tooltip-reasons-agent_session_finished"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Agent Session Finished"
+          data-testid="tooltip-icon-tooltip-reasons-agent_session_finished"
           data-variant="invisible"
-          id="tooltip-Agent Session Finished"
+          id="tooltip-reasons-agent_session_finished"
           tabindex="0"
           type="button"
         >
@@ -170,29 +170,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Approval Requested"
-          id="filter-Approval Requested"
-          name="Approval Requested"
+          data-testid="checkbox-reasons-approval_requested"
+          id="filter-reasons-approval_requested"
+          name="reasons-approval_requested"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Approval Requested"
+          for="filter-reasons-approval_requested"
         >
           Approval Requested
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Approval Requested"
+          aria-label="tooltip-reasons-approval_requested"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Approval Requested"
+          data-testid="tooltip-icon-tooltip-reasons-approval_requested"
           data-variant="invisible"
-          id="tooltip-Approval Requested"
+          id="tooltip-reasons-approval_requested"
           tabindex="0"
           type="button"
         >
@@ -239,29 +239,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Assigned"
-          id="filter-Assigned"
-          name="Assigned"
+          data-testid="checkbox-reasons-assign"
+          id="filter-reasons-assign"
+          name="reasons-assign"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Assigned"
+          for="filter-reasons-assign"
         >
           Assigned
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Assigned"
+          aria-label="tooltip-reasons-assign"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Assigned"
+          data-testid="tooltip-icon-tooltip-reasons-assign"
           data-variant="invisible"
-          id="tooltip-Assigned"
+          id="tooltip-reasons-assign"
           tabindex="0"
           type="button"
         >
@@ -308,29 +308,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Authored"
-          id="filter-Authored"
-          name="Authored"
+          data-testid="checkbox-reasons-author"
+          id="filter-reasons-author"
+          name="reasons-author"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Authored"
+          for="filter-reasons-author"
         >
           Authored
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Authored"
+          aria-label="tooltip-reasons-author"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Authored"
+          data-testid="tooltip-icon-tooltip-reasons-author"
           data-variant="invisible"
-          id="tooltip-Authored"
+          id="tooltip-reasons-author"
           tabindex="0"
           type="button"
         >
@@ -377,29 +377,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Commented"
-          id="filter-Commented"
-          name="Commented"
+          data-testid="checkbox-reasons-comment"
+          id="filter-reasons-comment"
+          name="reasons-comment"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Commented"
+          for="filter-reasons-comment"
         >
           Commented
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Commented"
+          aria-label="tooltip-reasons-comment"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Commented"
+          data-testid="tooltip-icon-tooltip-reasons-comment"
           data-variant="invisible"
-          id="tooltip-Commented"
+          id="tooltip-reasons-comment"
           tabindex="0"
           type="button"
         >
@@ -446,29 +446,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Invitation Received"
-          id="filter-Invitation Received"
-          name="Invitation Received"
+          data-testid="checkbox-reasons-invitation"
+          id="filter-reasons-invitation"
+          name="reasons-invitation"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Invitation Received"
+          for="filter-reasons-invitation"
         >
           Invitation Received
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Invitation Received"
+          aria-label="tooltip-reasons-invitation"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Invitation Received"
+          data-testid="tooltip-icon-tooltip-reasons-invitation"
           data-variant="invisible"
-          id="tooltip-Invitation Received"
+          id="tooltip-reasons-invitation"
           tabindex="0"
           type="button"
         >
@@ -515,29 +515,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Member Feature Requested"
-          id="filter-Member Feature Requested"
-          name="Member Feature Requested"
+          data-testid="checkbox-reasons-member_feature_requested"
+          id="filter-reasons-member_feature_requested"
+          name="reasons-member_feature_requested"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Member Feature Requested"
+          for="filter-reasons-member_feature_requested"
         >
           Member Feature Requested
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Member Feature Requested"
+          aria-label="tooltip-reasons-member_feature_requested"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Member Feature Requested"
+          data-testid="tooltip-icon-tooltip-reasons-member_feature_requested"
           data-variant="invisible"
-          id="tooltip-Member Feature Requested"
+          id="tooltip-reasons-member_feature_requested"
           tabindex="0"
           type="button"
         >
@@ -584,29 +584,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Mentioned"
-          id="filter-Mentioned"
-          name="Mentioned"
+          data-testid="checkbox-reasons-mention"
+          id="filter-reasons-mention"
+          name="reasons-mention"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Mentioned"
+          for="filter-reasons-mention"
         >
           Mentioned
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Mentioned"
+          aria-label="tooltip-reasons-mention"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Mentioned"
+          data-testid="tooltip-icon-tooltip-reasons-mention"
           data-variant="invisible"
-          id="tooltip-Mentioned"
+          id="tooltip-reasons-mention"
           tabindex="0"
           type="button"
         >
@@ -653,29 +653,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Review Requested"
-          id="filter-Review Requested"
-          name="Review Requested"
+          data-testid="checkbox-reasons-review_requested"
+          id="filter-reasons-review_requested"
+          name="reasons-review_requested"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Review Requested"
+          for="filter-reasons-review_requested"
         >
           Review Requested
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Review Requested"
+          aria-label="tooltip-reasons-review_requested"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Review Requested"
+          data-testid="tooltip-icon-tooltip-reasons-review_requested"
           data-variant="invisible"
-          id="tooltip-Review Requested"
+          id="tooltip-reasons-review_requested"
           tabindex="0"
           type="button"
         >
@@ -722,29 +722,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Security Advisory Credit Received"
-          id="filter-Security Advisory Credit Received"
-          name="Security Advisory Credit Received"
+          data-testid="checkbox-reasons-security_advisory_credit"
+          id="filter-reasons-security_advisory_credit"
+          name="reasons-security_advisory_credit"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Security Advisory Credit Received"
+          for="filter-reasons-security_advisory_credit"
         >
           Security Advisory Credit Received
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Security Advisory Credit Received"
+          aria-label="tooltip-reasons-security_advisory_credit"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Security Advisory Credit Received"
+          data-testid="tooltip-icon-tooltip-reasons-security_advisory_credit"
           data-variant="invisible"
-          id="tooltip-Security Advisory Credit Received"
+          id="tooltip-reasons-security_advisory_credit"
           tabindex="0"
           type="button"
         >
@@ -791,29 +791,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Security Alert Received"
-          id="filter-Security Alert Received"
-          name="Security Alert Received"
+          data-testid="checkbox-reasons-security_alert"
+          id="filter-reasons-security_alert"
+          name="reasons-security_alert"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Security Alert Received"
+          for="filter-reasons-security_alert"
         >
           Security Alert Received
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Security Alert Received"
+          aria-label="tooltip-reasons-security_alert"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Security Alert Received"
+          data-testid="tooltip-icon-tooltip-reasons-security_alert"
           data-variant="invisible"
-          id="tooltip-Security Alert Received"
+          id="tooltip-reasons-security_alert"
           tabindex="0"
           type="button"
         >
@@ -860,29 +860,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-State Changed"
-          id="filter-State Changed"
-          name="State Changed"
+          data-testid="checkbox-reasons-state_change"
+          id="filter-reasons-state_change"
+          name="reasons-state_change"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-State Changed"
+          for="filter-reasons-state_change"
         >
           State Changed
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-State Changed"
+          aria-label="tooltip-reasons-state_change"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-State Changed"
+          data-testid="tooltip-icon-tooltip-reasons-state_change"
           data-variant="invisible"
-          id="tooltip-State Changed"
+          id="tooltip-reasons-state_change"
           tabindex="0"
           type="button"
         >
@@ -929,29 +929,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Team Mentioned"
-          id="filter-Team Mentioned"
-          name="Team Mentioned"
+          data-testid="checkbox-reasons-team_mention"
+          id="filter-reasons-team_mention"
+          name="reasons-team_mention"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Team Mentioned"
+          for="filter-reasons-team_mention"
         >
           Team Mentioned
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Team Mentioned"
+          aria-label="tooltip-reasons-team_mention"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Team Mentioned"
+          data-testid="tooltip-icon-tooltip-reasons-team_mention"
           data-variant="invisible"
-          id="tooltip-Team Mentioned"
+          id="tooltip-reasons-team_mention"
           tabindex="0"
           type="button"
         >
@@ -998,29 +998,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Updated"
-          id="filter-Updated"
-          name="Updated"
+          data-testid="checkbox-reasons-manual"
+          id="filter-reasons-manual"
+          name="reasons-manual"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Updated"
+          for="filter-reasons-manual"
         >
           Updated
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Updated"
+          aria-label="tooltip-reasons-manual"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Updated"
+          data-testid="tooltip-icon-tooltip-reasons-manual"
           data-variant="invisible"
-          id="tooltip-Updated"
+          id="tooltip-reasons-manual"
           tabindex="0"
           type="button"
         >
@@ -1067,29 +1067,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Updated"
-          id="filter-Updated"
-          name="Updated"
+          data-testid="checkbox-reasons-subscribed"
+          id="filter-reasons-subscribed"
+          name="reasons-subscribed"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Updated"
+          for="filter-reasons-subscribed"
         >
           Updated
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Updated"
+          aria-label="tooltip-reasons-subscribed"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Updated"
+          data-testid="tooltip-icon-tooltip-reasons-subscribed"
           data-variant="invisible"
-          id="tooltip-Updated"
+          id="tooltip-reasons-subscribed"
           tabindex="0"
           type="button"
         >
@@ -1136,29 +1136,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Workflow Run Completed"
-          id="filter-Workflow Run Completed"
-          name="Workflow Run Completed"
+          data-testid="checkbox-reasons-ci_activity"
+          id="filter-reasons-ci_activity"
+          name="reasons-ci_activity"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Workflow Run Completed"
+          for="filter-reasons-ci_activity"
         >
           Workflow Run Completed
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Workflow Run Completed"
+          aria-label="tooltip-reasons-ci_activity"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Workflow Run Completed"
+          data-testid="tooltip-icon-tooltip-reasons-ci_activity"
           data-variant="invisible"
-          id="tooltip-Workflow Run Completed"
+          id="tooltip-reasons-ci_activity"
           tabindex="0"
           type="button"
         >
@@ -1205,29 +1205,29 @@ exports[`renderer/components/filters/ReasonFilter.tsx > should render itself & i
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Other"
-          id="filter-Other"
-          name="Other"
+          data-testid="checkbox-reasons-other"
+          id="filter-reasons-other"
+          name="reasons-other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Other"
+          for="filter-reasons-other"
         >
           Other
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Other"
+          aria-label="tooltip-reasons-other"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Other"
+          data-testid="tooltip-icon-tooltip-reasons-other"
           data-variant="invisible"
-          id="tooltip-Other"
+          id="tooltip-reasons-other"
           tabindex="0"
           type="button"
         >

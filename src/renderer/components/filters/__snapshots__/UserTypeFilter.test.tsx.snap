@@ -101,29 +101,29 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Bot"
-          id="filter-Bot"
-          name="Bot"
+          data-testid="checkbox-userTypes-Bot"
+          id="filter-userTypes-Bot"
+          name="userTypes-Bot"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Bot"
+          for="filter-userTypes-Bot"
         >
           Bot
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Bot"
+          aria-label="tooltip-userTypes-Bot"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Bot"
+          data-testid="tooltip-icon-tooltip-userTypes-Bot"
           data-variant="invisible"
-          id="tooltip-Bot"
+          id="tooltip-userTypes-Bot"
           tabindex="0"
           type="button"
         >
@@ -170,14 +170,14 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Organization"
-          id="filter-Organization"
-          name="Organization"
+          data-testid="checkbox-userTypes-Organization"
+          id="filter-userTypes-Organization"
+          name="userTypes-Organization"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Organization"
+          for="filter-userTypes-Organization"
         >
           Organization
         </label>
@@ -206,14 +206,14 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-User"
-          id="filter-User"
-          name="User"
+          data-testid="checkbox-userTypes-User"
+          id="filter-userTypes-User"
+          name="userTypes-User"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-User"
+          for="filter-userTypes-User"
         >
           User
         </label>
@@ -242,29 +242,29 @@ exports[`renderer/components/filters/UserTypeFilter.tsx > should render itself &
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Other"
-          id="filter-Other"
-          name="Other"
+          data-testid="checkbox-userTypes-other"
+          id="filter-userTypes-other"
+          name="userTypes-other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Other"
+          for="filter-userTypes-other"
         >
           Other
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Other"
+          aria-label="tooltip-userTypes-other"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Other"
+          data-testid="tooltip-icon-tooltip-userTypes-other"
           data-variant="invisible"
-          id="tooltip-Other"
+          id="tooltip-userTypes-other"
           tabindex="0"
           type="button"
         >
