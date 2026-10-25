@@ -68,29 +68,29 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Closed"
-          id="filter-Closed"
-          name="Closed"
+          data-testid="checkbox-states-closed"
+          id="filter-states-closed"
+          name="states-closed"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Closed"
+          for="filter-states-closed"
         >
           Closed
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Closed"
+          aria-label="tooltip-states-closed"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Closed"
+          data-testid="tooltip-icon-tooltip-states-closed"
           data-variant="invisible"
-          id="tooltip-Closed"
+          id="tooltip-states-closed"
           tabindex="0"
           type="button"
         >
@@ -137,14 +137,14 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Draft"
-          id="filter-Draft"
-          name="Draft"
+          data-testid="checkbox-states-draft"
+          id="filter-states-draft"
+          name="states-draft"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Draft"
+          for="filter-states-draft"
         >
           Draft
         </label>
@@ -173,14 +173,14 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Merged"
-          id="filter-Merged"
-          name="Merged"
+          data-testid="checkbox-states-merged"
+          id="filter-states-merged"
+          name="states-merged"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Merged"
+          for="filter-states-merged"
         >
           Merged
         </label>
@@ -209,29 +209,29 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Open"
-          id="filter-Open"
-          name="Open"
+          data-testid="checkbox-states-open"
+          id="filter-states-open"
+          name="states-open"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Open"
+          for="filter-states-open"
         >
           Open
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Open"
+          aria-label="tooltip-states-open"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Open"
+          data-testid="tooltip-icon-tooltip-states-open"
           data-variant="invisible"
-          id="tooltip-Open"
+          id="tooltip-states-open"
           tabindex="0"
           type="button"
         >
@@ -278,29 +278,29 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Other"
-          id="filter-Other"
-          name="Other"
+          data-testid="checkbox-states-other"
+          id="filter-states-other"
+          name="states-other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Other"
+          for="filter-states-other"
         >
           Other
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Other"
+          aria-label="tooltip-states-other"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Other"
+          data-testid="tooltip-icon-tooltip-states-other"
           data-variant="invisible"
-          id="tooltip-Other"
+          id="tooltip-states-other"
           tabindex="0"
           type="button"
         >
@@ -411,29 +411,29 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Closed"
-          id="filter-Closed"
-          name="Closed"
+          data-testid="checkbox-states-closed"
+          id="filter-states-closed"
+          name="states-closed"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Closed"
+          for="filter-states-closed"
         >
           Closed
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Closed"
+          aria-label="tooltip-states-closed"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Closed"
+          data-testid="tooltip-icon-tooltip-states-closed"
           data-variant="invisible"
-          id="tooltip-Closed"
+          id="tooltip-states-closed"
           tabindex="0"
           type="button"
         >
@@ -480,14 +480,14 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Draft"
-          id="filter-Draft"
-          name="Draft"
+          data-testid="checkbox-states-draft"
+          id="filter-states-draft"
+          name="states-draft"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Draft"
+          for="filter-states-draft"
         >
           Draft
         </label>
@@ -516,14 +516,14 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Merged"
-          id="filter-Merged"
-          name="Merged"
+          data-testid="checkbox-states-merged"
+          id="filter-states-merged"
+          name="states-merged"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Merged"
+          for="filter-states-merged"
         >
           Merged
         </label>
@@ -552,29 +552,29 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Open"
-          id="filter-Open"
-          name="Open"
+          data-testid="checkbox-states-open"
+          id="filter-states-open"
+          name="states-open"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Open"
+          for="filter-states-open"
         >
           Open
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Open"
+          aria-label="tooltip-states-open"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Open"
+          data-testid="tooltip-icon-tooltip-states-open"
           data-variant="invisible"
-          id="tooltip-Open"
+          id="tooltip-states-open"
           tabindex="0"
           type="button"
         >
@@ -621,29 +621,29 @@ exports[`renderer/components/filters/FilterSection.tsx > should render itself & 
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Other"
-          id="filter-Other"
-          name="Other"
+          data-testid="checkbox-states-other"
+          id="filter-states-other"
+          name="states-other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Other"
+          for="filter-states-other"
         >
           Other
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Other"
+          aria-label="tooltip-states-other"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Other"
+          data-testid="tooltip-icon-tooltip-states-other"
           data-variant="invisible"
-          id="tooltip-Other"
+          id="tooltip-states-other"
           tabindex="0"
           type="button"
         >

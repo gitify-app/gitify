@@ -94,7 +94,7 @@ function FilterSectionComponent<K extends keyof FiltersState>({
                 disabled={filter.requiresDetailsNotifications && !detailedNotifications}
                 key={type as string}
                 label={typeTitle}
-                name={typeTitle}
+                name={`${filterSetting}-${String(type)}`}
                 onChange={() => updateFilter(filterSetting, type, !isChecked)}
                 tooltip={typeDescription ? <Text>{typeDescription}</Text> : null}
               />

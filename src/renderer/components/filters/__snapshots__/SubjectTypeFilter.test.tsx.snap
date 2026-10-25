@@ -101,14 +101,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Advisory"
-          id="filter-Advisory"
-          name="Advisory"
+          data-testid="checkbox-subjectTypes-RepositoryAdvisory"
+          id="filter-subjectTypes-RepositoryAdvisory"
+          name="subjectTypes-RepositoryAdvisory"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Advisory"
+          for="filter-subjectTypes-RepositoryAdvisory"
         >
           Advisory
         </label>
@@ -137,14 +137,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Agent Session Thread"
-          id="filter-Agent Session Thread"
-          name="Agent Session Thread"
+          data-testid="checkbox-subjectTypes-AgentSessionThread"
+          id="filter-subjectTypes-AgentSessionThread"
+          name="subjectTypes-AgentSessionThread"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Agent Session Thread"
+          for="filter-subjectTypes-AgentSessionThread"
         >
           Agent Session Thread
         </label>
@@ -173,14 +173,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Bitbucket"
-          id="filter-Bitbucket"
-          name="Bitbucket"
+          data-testid="checkbox-subjectTypes-BitbucketNotification"
+          id="filter-subjectTypes-BitbucketNotification"
+          name="subjectTypes-BitbucketNotification"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Bitbucket"
+          for="filter-subjectTypes-BitbucketNotification"
         >
           Bitbucket
         </label>
@@ -209,14 +209,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Check Suite"
-          id="filter-Check Suite"
-          name="Check Suite"
+          data-testid="checkbox-subjectTypes-CheckSuite"
+          id="filter-subjectTypes-CheckSuite"
+          name="subjectTypes-CheckSuite"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Check Suite"
+          for="filter-subjectTypes-CheckSuite"
         >
           Check Suite
         </label>
@@ -245,14 +245,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Commit"
-          id="filter-Commit"
-          name="Commit"
+          data-testid="checkbox-subjectTypes-Commit"
+          id="filter-subjectTypes-Commit"
+          name="subjectTypes-Commit"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Commit"
+          for="filter-subjectTypes-Commit"
         >
           Commit
         </label>
@@ -281,14 +281,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Dependabot Alert"
-          id="filter-Dependabot Alert"
-          name="Dependabot Alert"
+          data-testid="checkbox-subjectTypes-RepositoryDependabotAlertsThread"
+          id="filter-subjectTypes-RepositoryDependabotAlertsThread"
+          name="subjectTypes-RepositoryDependabotAlertsThread"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Dependabot Alert"
+          for="filter-subjectTypes-RepositoryDependabotAlertsThread"
         >
           Dependabot Alert
         </label>
@@ -317,14 +317,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Discussion"
-          id="filter-Discussion"
-          name="Discussion"
+          data-testid="checkbox-subjectTypes-Discussion"
+          id="filter-subjectTypes-Discussion"
+          name="subjectTypes-Discussion"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Discussion"
+          for="filter-subjectTypes-Discussion"
         >
           Discussion
         </label>
@@ -353,14 +353,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-GitLab To-Do"
-          id="filter-GitLab To-Do"
-          name="GitLab To-Do"
+          data-testid="checkbox-subjectTypes-GitLabTodo"
+          id="filter-subjectTypes-GitLabTodo"
+          name="subjectTypes-GitLabTodo"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-GitLab To-Do"
+          for="filter-subjectTypes-GitLabTodo"
         >
           GitLab To-Do
         </label>
@@ -389,14 +389,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Invitation"
-          id="filter-Invitation"
-          name="Invitation"
+          data-testid="checkbox-subjectTypes-RepositoryInvitation"
+          id="filter-subjectTypes-RepositoryInvitation"
+          name="subjectTypes-RepositoryInvitation"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Invitation"
+          for="filter-subjectTypes-RepositoryInvitation"
         >
           Invitation
         </label>
@@ -425,14 +425,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Issue"
-          id="filter-Issue"
-          name="Issue"
+          data-testid="checkbox-subjectTypes-Issue"
+          id="filter-subjectTypes-Issue"
+          name="subjectTypes-Issue"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Issue"
+          for="filter-subjectTypes-Issue"
         >
           Issue
         </label>
@@ -461,14 +461,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Pull Request"
-          id="filter-Pull Request"
-          name="Pull Request"
+          data-testid="checkbox-subjectTypes-PullRequest"
+          id="filter-subjectTypes-PullRequest"
+          name="subjectTypes-PullRequest"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Pull Request"
+          for="filter-subjectTypes-PullRequest"
         >
           Pull Request
         </label>
@@ -497,14 +497,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Release"
-          id="filter-Release"
-          name="Release"
+          data-testid="checkbox-subjectTypes-Release"
+          id="filter-subjectTypes-Release"
+          name="subjectTypes-Release"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Release"
+          for="filter-subjectTypes-Release"
         >
           Release
         </label>
@@ -533,14 +533,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Vulnerability Alert"
-          id="filter-Vulnerability Alert"
-          name="Vulnerability Alert"
+          data-testid="checkbox-subjectTypes-RepositoryVulnerabilityAlert"
+          id="filter-subjectTypes-RepositoryVulnerabilityAlert"
+          name="subjectTypes-RepositoryVulnerabilityAlert"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Vulnerability Alert"
+          for="filter-subjectTypes-RepositoryVulnerabilityAlert"
         >
           Vulnerability Alert
         </label>
@@ -569,14 +569,14 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Workflow Run"
-          id="filter-Workflow Run"
-          name="Workflow Run"
+          data-testid="checkbox-subjectTypes-WorkflowRun"
+          id="filter-subjectTypes-WorkflowRun"
+          name="subjectTypes-WorkflowRun"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Workflow Run"
+          for="filter-subjectTypes-WorkflowRun"
         >
           Workflow Run
         </label>
@@ -605,29 +605,29 @@ exports[`renderer/components/filters/SubjectTypeFilter.tsx > should render itsel
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Other"
-          id="filter-Other"
-          name="Other"
+          data-testid="checkbox-subjectTypes-other"
+          id="filter-subjectTypes-other"
+          name="subjectTypes-other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Other"
+          for="filter-subjectTypes-other"
         >
           Other
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Other"
+          aria-label="tooltip-subjectTypes-other"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Other"
+          data-testid="tooltip-icon-tooltip-subjectTypes-other"
           data-variant="invisible"
-          id="tooltip-Other"
+          id="tooltip-subjectTypes-other"
           tabindex="0"
           type="button"
         >

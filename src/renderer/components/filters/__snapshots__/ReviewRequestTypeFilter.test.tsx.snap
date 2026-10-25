@@ -101,29 +101,29 @@ exports[`renderer/components/filters/ReviewRequestTypeFilter.tsx > should render
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Direct"
-          id="filter-Direct"
-          name="Direct"
+          data-testid="checkbox-reviewRequestTypes-direct"
+          id="filter-reviewRequestTypes-direct"
+          name="reviewRequestTypes-direct"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Direct"
+          for="filter-reviewRequestTypes-direct"
         >
           Direct
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Direct"
+          aria-label="tooltip-reviewRequestTypes-direct"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Direct"
+          data-testid="tooltip-icon-tooltip-reviewRequestTypes-direct"
           data-variant="invisible"
-          id="tooltip-Direct"
+          id="tooltip-reviewRequestTypes-direct"
           tabindex="0"
           type="button"
         >
@@ -170,29 +170,29 @@ exports[`renderer/components/filters/ReviewRequestTypeFilter.tsx > should render
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Team"
-          id="filter-Team"
-          name="Team"
+          data-testid="checkbox-reviewRequestTypes-team"
+          id="filter-reviewRequestTypes-team"
+          name="reviewRequestTypes-team"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Team"
+          for="filter-reviewRequestTypes-team"
         >
           Team
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Team"
+          aria-label="tooltip-reviewRequestTypes-team"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Team"
+          data-testid="tooltip-icon-tooltip-reviewRequestTypes-team"
           data-variant="invisible"
-          id="tooltip-Team"
+          id="tooltip-reviewRequestTypes-team"
           tabindex="0"
           type="button"
         >
@@ -239,29 +239,29 @@ exports[`renderer/components/filters/ReviewRequestTypeFilter.tsx > should render
           aria-required="false"
           class="prc-Checkbox-Input-lWIkv prc-Checkbox-Checkbox-jjOgT"
           data-component="Checkbox"
-          data-testid="checkbox-Other"
-          id="filter-Other"
-          name="Other"
+          data-testid="checkbox-reviewRequestTypes-other"
+          id="filter-reviewRequestTypes-other"
+          name="reviewRequestTypes-other"
           type="checkbox"
         />
         <label
           class="font-medium text-gitify-font cursor-pointer"
-          for="filter-Other"
+          for="filter-reviewRequestTypes-other"
         >
           Other
         </label>
         <button
           aria-expanded="false"
           aria-haspopup="true"
-          aria-label="tooltip-Other"
+          aria-label="tooltip-reviewRequestTypes-other"
           class="prc-Button-ButtonBase-9n-Xk text-gitify-tooltip-icon! prc-Button-IconButton-fyge7"
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="tooltip-icon-tooltip-Other"
+          data-testid="tooltip-icon-tooltip-reviewRequestTypes-other"
           data-variant="invisible"
-          id="tooltip-Other"
+          id="tooltip-reviewRequestTypes-other"
           tabindex="0"
           type="button"
         >
