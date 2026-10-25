@@ -77,7 +77,7 @@ describe('renderer/routes/github/LoginWithCustomOAuthApp.tsx', () => {
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
   });
 
-  it('opens the OAuth app registration page without a callback URL', async () => {
+  it('opens the OAuth app registration page with an inert callback URL', async () => {
     renderWithProviders(<GitHubLoginWithCustomOAuthAppRoute />);
 
     await userEvent.click(screen.getByTestId('login-create-oauth-app'));
@@ -85,7 +85,9 @@ describe('renderer/routes/github/LoginWithCustomOAuthApp.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
       expect.stringContaining('https://github.com/settings/applications/new'),
     );
-    expect(openExternalLinkSpy).not.toHaveBeenCalledWith(expect.stringContaining('callback_url'));
+    expect(openExternalLinkSpy).toHaveBeenCalledWith(
+      expect.stringContaining('oauth_application%5Bcallback_url%5D=https%3A%2F%2Fgitify.io'),
+    );
   });
 
   it('prefills the hostname and client ID from the re-auth account', () => {

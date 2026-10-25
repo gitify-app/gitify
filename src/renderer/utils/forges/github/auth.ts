@@ -122,9 +122,11 @@ export function getNewTokenURL(hostname: Hostname): Link {
 /**
  * Build a pre-filled URL for registering a new OAuth App.
  *
- * Pre-populates the app name (with creation date) and homepage URL. No callback
- * URL is set: the custom OAuth app authorizes through the device flow, which
- * needs no browser redirect. The user must still enable the device flow in the
+ * Pre-populates the app name (with creation date), homepage URL, and an inert
+ * callback URL. GitHub's registration form asks for a callback URL even though
+ * the custom OAuth app authorizes through the device flow, which never
+ * redirects; the project site is used so the form can be submitted without the
+ * user inventing a value. The user must still enable the device flow in the
  * app's settings after registering it.
  *
  * @param hostname - The GitHub hostname to register the app on.
@@ -138,6 +140,7 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
     `${APPLICATION.NAME} (Created on ${date})`,
   );
   newOAuthAppURL.searchParams.append('oauth_application[url]', 'https://gitify.io');
+  newOAuthAppURL.searchParams.append('oauth_application[callback_url]', 'https://gitify.io');
 
   return newOAuthAppURL.toString() as Link;
 }

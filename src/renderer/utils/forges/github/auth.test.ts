@@ -161,8 +161,10 @@ describe('renderer/utils/forges/github/auth.ts', () => {
       ).toBeTruthy();
     });
 
-    it('does not pre-fill a callback URL for a device-flow custom app', () => {
-      expect(getNewOAuthAppURL('github.com' as Hostname)).not.toContain('callback_url');
+    it('pre-fills the project site as an inert callback URL', () => {
+      const url = new URL(getNewOAuthAppURL('github.com' as Hostname));
+
+      expect(url.searchParams.get('oauth_application[callback_url]')).toBe('https://gitify.io');
     });
   });
 
