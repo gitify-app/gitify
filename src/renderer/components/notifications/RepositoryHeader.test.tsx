@@ -22,13 +22,13 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     onAnimateExit: vi.fn(),
   };
 
-  it('should render itself & its children', () => {
+  it('renders itself & its children', () => {
     const tree = renderWithProviders(<RepositoryHeader {...props} />);
 
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render itself & its children - all notifications are read', () => {
+  it('renders itself & its children - all notifications are read', () => {
     const tree = renderWithProviders(
       <RepositoryHeader
         {...props}
@@ -42,7 +42,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should open the browser when clicking on the repo name', async () => {
+  it('opens the browser when clicking on the repo name', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     renderWithProviders(<RepositoryHeader {...props} />);
@@ -55,7 +55,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     );
   });
 
-  it('should mark a repo as read', async () => {
+  it('marks a repo as read', async () => {
     const markNotificationsAsReadMock = vi.fn();
 
     renderWithProviders(<RepositoryHeader {...props} />, {
@@ -68,7 +68,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     expect(markNotificationsAsReadMock).toHaveBeenCalledWith(mockGitHubCloudGitifyNotifications);
   });
 
-  it('should mark a repo as done', async () => {
+  it('marks a repo as done', async () => {
     const markNotificationsAsDoneMock = vi.fn();
 
     renderWithProviders(<RepositoryHeader {...props} />, {
@@ -81,7 +81,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     expect(markNotificationsAsDoneMock).toHaveBeenCalledWith(mockGitHubCloudGitifyNotifications);
   });
 
-  it('should use default repository icon when avatar is not available', () => {
+  it('uses default repository icon when avatar is not available', () => {
     const repoNotifications = mockGitHubCloudGitifyNotifications.map((n) => ({
       ...n,
       repository: { ...n.repository, owner: { ...n.repository.owner, avatarUrl: '' as Link } },
@@ -94,7 +94,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should request a collapse toggle when toggled', async () => {
+  it('requests a collapse toggle when toggled', async () => {
     const onToggle = vi.fn();
 
     renderWithProviders(<RepositoryHeader {...props} onToggle={onToggle} />);
@@ -104,7 +104,7 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     expect(onToggle).toHaveBeenCalledTimes(1);
   });
 
-  it('should hide its hover actions while animating out', () => {
+  it('hides its hover actions while animating out', () => {
     renderWithProviders(<RepositoryHeader {...props} isAnimatingExit />);
 
     expect(screen.queryByTestId('repository-mark-as-read')).not.toBeInTheDocument();

@@ -3,14 +3,14 @@ import { renderWithProviders } from '../../__helpers__/test-utils';
 import { HoverGroup } from './HoverGroup';
 
 describe('renderer/components/primitives/HoverGroup.tsx', () => {
-  it('should render', () => {
+  it('renders', () => {
     const tree = renderWithProviders(
       <HoverGroup bgColor="group-hover:bg-gitify-repository">Hover Group</HoverGroup>,
     );
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should span the host height', () => {
+  it('spans the host height', () => {
     const tree = renderWithProviders(
       <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">Hover Group</HoverGroup>,
     );
@@ -22,7 +22,7 @@ describe('renderer/components/primitives/HoverGroup.tsx', () => {
     expect(cluster).toHaveClass('inset-y-0');
   });
 
-  it('should stretch its buttons only when fullHeight is set', () => {
+  it('stretches its buttons only when fullHeight is set', () => {
     const tree = renderWithProviders(
       <HoverGroup bgColor="group-hover:bg-gitify-notification-hover" fullHeight>
         Hover Group
@@ -34,7 +34,7 @@ describe('renderer/components/primitives/HoverGroup.tsx', () => {
     expect(cluster).toHaveClass('gitify-hover-actions-full');
   });
 
-  it('should not stretch its buttons by default', () => {
+  it('does not stretch its buttons by default', () => {
     const tree = renderWithProviders(
       <HoverGroup bgColor="group-hover:bg-gitify-repository">Hover Group</HoverGroup>,
     );

@@ -30,6 +30,12 @@
       "matchPackageNames": ["electron-menubar"],
       "minimumReleaseAge": "0 days",
       "schedule": ["at any time"]
+    },
+    {
+      "description": "Keep the Playwright npm package and the pinned visual-regression container image in one PR. src/main/ciDependencyCompatibility.test.ts asserts the versions align at all times.",
+      "groupName": "playwright",
+      "matchDatasources": ["npm", "docker"],
+      "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"]
     }
   ],
   "customManagers": [

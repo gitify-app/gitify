@@ -11,7 +11,7 @@ import * as comms from '../../utils/system/comms';
 import { NotificationHeader, type NotificationHeaderProps } from './NotificationHeader';
 
 describe('renderer/components/notifications/NotificationHeader.tsx', () => {
-  it('should render itself & its children - group by repositories', async () => {
+  it('renders itself & its children - group by repositories', async () => {
     const props: NotificationHeaderProps = {
       notification: mockGitifyNotification,
     };
@@ -23,7 +23,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  describe('should render itself & its children - group by date', () => {
+  describe('group by date', () => {
     it('with notification number', async () => {
       const props: NotificationHeaderProps = {
         notification: mockGitifyNotification,
@@ -68,7 +68,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
     });
   });
 
-  it('should open notification user profile - group by date', async () => {
+  it('opens notification user profile - group by date', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
     const props: NotificationHeaderProps = {

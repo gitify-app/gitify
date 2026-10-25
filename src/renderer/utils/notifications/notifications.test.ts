@@ -104,7 +104,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
   });
 
   describe('enrichNotifications', () => {
-    it('should skip enrichment when detailedNotifications is false', async () => {
+    it('skips enrichment when detailedNotifications is false', async () => {
       const notification = mockPartialGitifyNotification({
         title: 'Issue #1',
         type: 'Issue',
@@ -117,7 +117,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(result).toEqual([notification]);
     });
 
-    it('should return notifications when all types do not support merge query', async () => {
+    it('returns notifications when all types do not support merge query', async () => {
       // CheckSuite types don't support merge query and have no URL
       const notification = mockPartialGitifyNotification({
         title: 'CI workflow run',
@@ -133,7 +133,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
     });
 
-    it('should handle empty notifications array', async () => {
+    it('handles empty notifications array', async () => {
       useSettingsStore.setState({ detailedNotifications: true });
 
       const result = await enrichNotifications([]);
@@ -142,7 +142,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
     });
 
-    it('should return notifications unchanged when the adapter has no enrichment', async () => {
+    it('returns notifications unchanged when the adapter has no enrichment', async () => {
       // Gitea has no `enrichNotifications` implementation.
       const notification = {
         ...mockPartialGitifyNotification({ title: 'Issue #1', type: 'Issue' }),
@@ -156,7 +156,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(apiClient.fetchNotificationDetailsForList).not.toHaveBeenCalled();
     });
 
-    it('should batch notifications by GITHUB_API_MERGE_BATCH_SIZE', async () => {
+    it('batches notifications by GITHUB_API_MERGE_BATCH_SIZE', async () => {
       const fetchNotificationDetailsForListSpy = vi.mocked(
         apiClient.fetchNotificationDetailsForList,
       );
@@ -189,7 +189,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(50);
     });
 
-    it('should handle single batch of notifications', async () => {
+    it('handles single batch of notifications', async () => {
       const fetchNotificationDetailsForListSpy = vi.mocked(
         apiClient.fetchNotificationDetailsForList,
       );
@@ -213,7 +213,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(50);
     });
 
-    it('should skip re-fetch when a notification updatedAt is unchanged', async () => {
+    it('skips re-fetch when a notification updatedAt is unchanged', async () => {
       const fetchNotificationDetailsForListSpy = vi.mocked(
         apiClient.fetchNotificationDetailsForList,
       );
@@ -240,7 +240,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should re-fetch when a notification updatedAt changes', async () => {
+    it('re-fetches when a notification updatedAt changes', async () => {
       const fetchNotificationDetailsForListSpy = vi.mocked(
         apiClient.fetchNotificationDetailsForList,
       );
@@ -262,7 +262,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('should keep cache entries for other accounts when pruning', async () => {
+    it('keeps cache entries for other accounts when pruning', async () => {
       const fetchNotificationDetailsForListSpy = vi.mocked(
         apiClient.fetchNotificationDetailsForList,
       );
@@ -300,7 +300,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('should re-fetch on the next poll when enrichment failed', async () => {
+    it('re-fetches on the next poll when enrichment failed', async () => {
       const fetchNotificationDetailsForListSpy = vi.mocked(
         apiClient.fetchNotificationDetailsForList,
       );
@@ -331,7 +331,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
   });
 
   describe('refreshEnrichmentCache', () => {
-    it('should clear cached subjects and throttle repeated refreshes', async () => {
+    it('clears cached subjects and throttle repeated refreshes', async () => {
       vi.useFakeTimers();
       try {
         const fetchNotificationDetailsForListSpy = vi.mocked(

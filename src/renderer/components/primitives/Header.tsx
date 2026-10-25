@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 import { IconButton, Stack } from '@primer/react';
 
-import { useNotifications } from '../../hooks/useNotifications';
+import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
 
-import { Title } from './Title';
+import { SectionHeading } from './SectionHeading';
 
 interface HeaderProps {
   icon: Icon;
@@ -16,7 +16,7 @@ interface HeaderProps {
 export function Header(props: Readonly<HeaderProps>) {
   const navigate = useNavigate();
 
-  const { refetchNotifications: fetchNotifications } = useNotifications();
+  const { refetchNotifications: fetchNotifications } = useNotificationActions();
 
   return (
     <div className="pl-4 pr-5 pt-3 pb-1">
@@ -35,9 +35,7 @@ export function Header(props: Readonly<HeaderProps>) {
           variant="invisible"
         />
 
-        <Title icon={props.icon} size={3}>
-          {props.children}
-        </Title>
+        <SectionHeading icon={props.icon}>{props.children}</SectionHeading>
       </Stack>
     </div>
   );

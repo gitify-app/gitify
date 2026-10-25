@@ -29,7 +29,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
   });
 
   describe('createOctokitClient', () => {
-    it('should create octokit rest client for GitHub Cloud', async () => {
+    it('creates octokit rest client for GitHub Cloud', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://api.github.com/'));
 
@@ -40,7 +40,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(mockDecryptValue).toHaveBeenCalledWith(mockGitHubCloudAccount.token);
     });
 
-    it('should create octokit graphql client for GitHub Cloud', async () => {
+    it('creates octokit graphql client for GitHub Cloud', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://api.github.com/'));
 
@@ -51,7 +51,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(mockDecryptValue).toHaveBeenCalledWith(mockGitHubCloudAccount.token);
     });
 
-    it('should create octokit rest client for GitHub Enterprise Server', async () => {
+    it('creates octokit rest client for GitHub Enterprise Server', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://github.gitify.io/api/v3/'));
 
@@ -62,7 +62,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(mockDecryptValue).toHaveBeenCalledWith(mockGitHubEnterpriseServerAccount.token);
     });
 
-    it('should create octokit graphql client for GitHub Enterprise Server', async () => {
+    it('creates octokit graphql client for GitHub Enterprise Server', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://github.gitify.io/api/graphql/'));
 
@@ -73,7 +73,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(mockDecryptValue).toHaveBeenCalledWith(mockGitHubEnterpriseServerAccount.token);
     });
 
-    it('should cache and reuse octokit clients for the same account and api type', async () => {
+    it('caches and reuse octokit clients for the same account and api type', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://api.github.com/'));
 
@@ -91,7 +91,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledTimes(1);
     });
 
-    it('should create separate uncached clients each time', async () => {
+    it('creates separate uncached clients each time', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://api.github.com/'));
 
@@ -109,7 +109,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(getGitHubAPIBaseUrlSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('should create different clients for different accounts with same api type', async () => {
+    it('creates different clients for different accounts with same api type', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://api.github.com/'));
 
@@ -124,7 +124,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(mockDecryptValue).toHaveBeenCalledTimes(2);
     });
 
-    it('should create different clients for same accounts with different api type', async () => {
+    it('creates different clients for same accounts with different api type', async () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://api.github.com/'));
 

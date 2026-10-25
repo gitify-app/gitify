@@ -25,7 +25,6 @@ import type { DeviceFlowSession } from '../../utils/auth/types';
 
 import { getAlternateScopeNames, getRecommendedScopeNames } from '../../utils/auth/scopes';
 import { rendererLogError, toError } from '../../utils/core/logger';
-import { describeDeviceFlowStartError } from '../../utils/forges/github/flows';
 import { getAdapter } from '../../utils/forges/registry';
 import { copyToClipboard, openExternalLink } from '../../utils/system/comms';
 
@@ -90,7 +89,7 @@ export function GitHubDeviceFlowAuthorize({
       } catch (err) {
         rendererLogError('LoginWithDeviceFlow', 'Failed to start device flow', toError(err));
         setError(
-          describeDeviceFlowStartError(err, resolvedHostname, clientId) ??
+          getAdapter(forge).deviceFlow?.describeStartError?.(err, resolvedHostname, clientId) ??
             'Failed to start authentication. Please try again.',
         );
       }

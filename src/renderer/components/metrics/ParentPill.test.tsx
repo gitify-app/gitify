@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
@@ -34,7 +34,7 @@ describe('renderer/components/metrics/ParentPill.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('opens parent issue url on click and stops propagation', () => {
+  it('opens parent issue url on click and stops propagation', async () => {
     const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
     const onParentClick = vi.fn();
 
@@ -45,7 +45,7 @@ describe('renderer/components/metrics/ParentPill.tsx', () => {
     );
 
     const button = screen.getByRole('button');
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     expect(openExternalLinkSpy).toHaveBeenCalledWith(mockParent.url);
     expect(onParentClick).not.toHaveBeenCalled();

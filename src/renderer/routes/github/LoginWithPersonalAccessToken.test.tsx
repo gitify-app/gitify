@@ -30,7 +30,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   describe("'Generate a PAT' button", () => {
-    it('should be disabled if no hostname configured', async () => {
+    it('is disabled if no hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
         loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
@@ -42,7 +42,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(0);
     });
 
-    it('should open in browser if hostname configured', async () => {
+    it('opens in browser if hostname configured', async () => {
       renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
         loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
       });
@@ -53,7 +53,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should login using a token - success', async () => {
+  it('logs in using a token - success', async () => {
     loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
@@ -83,7 +83,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should login using a token - failure', async () => {
+  it('logs in using a token - failure', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(null);
 
@@ -113,7 +113,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should render the form with errors', async () => {
+  it('renders the form with errors', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
     const hostname = screen.getByTestId('login-hostname');
@@ -128,7 +128,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(screen.getByText('Token format is invalid')).toBeInTheDocument();
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
@@ -138,7 +138,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle token visibility', async () => {
+  it('toggles token visibility', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
     const tokenInput = screen.getByTestId('login-token');
@@ -151,7 +151,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(tokenInput).toHaveAttribute('type', 'password');
   });
 
-  it('should prefill hostname from the re-auth account in location state', () => {
+  it('prefills hostname from the re-auth account in location state', () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />, {
       initialEntries: [
         {

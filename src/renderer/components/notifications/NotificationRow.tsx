@@ -3,7 +3,7 @@ import { Stack, Text, Tooltip } from '@primer/react';
 
 import { cn } from 'cn';
 
-import { useNotifications } from '../../hooks/useNotifications';
+import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
 import {
   getNotificationFailureKey,
   useNotificationActionFailuresStore,
@@ -38,7 +38,7 @@ export function NotificationRow({
   onAnimateExit,
 }: Readonly<NotificationRowProps>) {
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
-    useNotifications();
+    useNotificationActions();
 
   const markAsDoneOnOpen = useSettingsStore((s) => s.markAsDoneOnOpen);
   const wrapNotificationTitle = useSettingsStore((s) => s.wrapNotificationTitle);
@@ -57,7 +57,7 @@ export function NotificationRow({
   // "...instead", since some descriptions already suggest waiting/retrying
   // (e.g. `RATE_LIMITED`), which "instead" would read as contradicting.
   const failureTooltip = failure
-    ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in the browser.`
+    ? `${failure.error.title}: ${failure.error.descriptions.join(' ')} You can also try opening this notification in your browser.`
     : undefined;
 
   const runAction = async (action: () => Promise<boolean>) => {
@@ -97,6 +97,7 @@ export function NotificationRow({
         isAnimatingExit && 'translate-x-full opacity-0 transition duration-350 ease-in-out',
         isNotificationRead && Opacity.READ,
       )}
+      data-animating-exit={isAnimatingExit || undefined}
       id={notification.id}
     >
       <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
@@ -137,6 +138,8 @@ export function NotificationRow({
                 Opacity.READ,
                 (isGroupByDate() || !showNumber) && 'hidden',
               )}
+              data-hidden={isGroupByDate() || !showNumber || undefined}
+              data-testid="notification-reference"
             >
               {notification.display.identifier}
             </Text>

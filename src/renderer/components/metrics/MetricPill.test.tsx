@@ -7,7 +7,7 @@ import { IconColor } from '../../types';
 import { MetricPill, type MetricPillProps } from './MetricPill';
 
 describe('renderer/components/metrics/MetricPill.tsx', () => {
-  it('should render with metric', () => {
+  it('renders with metric', () => {
     const props: MetricPillProps = {
       contents: 'Mock Pill',
       metric: 1,
@@ -20,7 +20,7 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render without metric', () => {
+  it('renders without metric', () => {
     const props: MetricPillProps = {
       contents: 'Mock Pill',
       icon: MarkGithubIcon,

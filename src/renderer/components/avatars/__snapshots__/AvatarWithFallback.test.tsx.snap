@@ -45,6 +45,75 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders a provided
 </div>
 `;
 
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders avatar - human user 1`] = `
+<div>
+  <div
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-component="Stack"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-testid="avatar"
+    data-wrap="nowrap"
+  >
+    <img
+      alt="gitify-app"
+      class="prc-Avatar-Avatar-0xaUi"
+      data-component="Avatar"
+      height="16"
+      src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+      style="--avatarSize-regular: 16px;"
+      width="16"
+    />
+    <div
+      class="prc-Truncate-Truncate-2G1eo"
+      data-inline="true"
+      style="--truncate-max-width: 280px;"
+      title="@gitify-app"
+    >
+      @gitify-app
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders avatar - non-human user 1`] = `
+<div>
+  <div
+    class="prc-Stack-Stack-UQ9k6"
+    data-align="center"
+    data-component="Stack"
+    data-direction="horizontal"
+    data-gap="condensed"
+    data-justify="start"
+    data-padding="none"
+    data-testid="avatar"
+    data-wrap="nowrap"
+  >
+    <img
+      alt="gitify-app"
+      class="prc-Avatar-Avatar-0xaUi"
+      data-component="Avatar"
+      data-square=""
+      height="16"
+      src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+      style="--avatarSize-regular: 16px;"
+      width="16"
+    />
+    <div
+      class="prc-Truncate-Truncate-2G1eo"
+      data-inline="true"
+      style="--truncate-max-width: 280px;"
+      title="@gitify-app"
+    >
+      @gitify-app
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallback icon when no src url - human user 1`] = `
 <div>
   <div
@@ -205,75 +274,6 @@ exports[`renderer/components/avatars/AvatarWithFallback.tsx > renders the fallba
     title="@gitify-app"
   >
     @gitify-app
-  </div>
-</div>
-`;
-
-exports[`renderer/components/avatars/AvatarWithFallback.tsx > should render avatar - human user 1`] = `
-<div>
-  <div
-    class="prc-Stack-Stack-UQ9k6"
-    data-align="center"
-    data-component="Stack"
-    data-direction="horizontal"
-    data-gap="condensed"
-    data-justify="start"
-    data-padding="none"
-    data-testid="avatar"
-    data-wrap="nowrap"
-  >
-    <img
-      alt="gitify-app"
-      class="prc-Avatar-Avatar-0xaUi"
-      data-component="Avatar"
-      height="16"
-      src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-      style="--avatarSize-regular: 16px;"
-      width="16"
-    />
-    <div
-      class="prc-Truncate-Truncate-2G1eo"
-      data-inline="true"
-      style="--truncate-max-width: 280px;"
-      title="@gitify-app"
-    >
-      @gitify-app
-    </div>
-  </div>
-</div>
-`;
-
-exports[`renderer/components/avatars/AvatarWithFallback.tsx > should render avatar - non-human user 1`] = `
-<div>
-  <div
-    class="prc-Stack-Stack-UQ9k6"
-    data-align="center"
-    data-component="Stack"
-    data-direction="horizontal"
-    data-gap="condensed"
-    data-justify="start"
-    data-padding="none"
-    data-testid="avatar"
-    data-wrap="nowrap"
-  >
-    <img
-      alt="gitify-app"
-      class="prc-Avatar-Avatar-0xaUi"
-      data-component="Avatar"
-      data-square=""
-      height="16"
-      src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-      style="--avatarSize-regular: 16px;"
-      width="16"
-    />
-    <div
-      class="prc-Truncate-Truncate-2G1eo"
-      data-inline="true"
-      style="--truncate-max-width: 280px;"
-      title="@gitify-app"
-    >
-      @gitify-app
-    </div>
   </div>
 </div>
 `;

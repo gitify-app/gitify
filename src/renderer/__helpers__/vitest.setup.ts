@@ -1,4 +1,6 @@
 import '@testing-library/jest-dom/vitest';
+import { createGitifyBridgeApi } from '../../__helpers__/gitify-bridge';
+
 // Import store modules directly (not the stores barrel) to keep this setup
 // file's import graph light. The accounts store pulls in the forge adapter
 // graph, so it is loaded lazily in beforeEach (after each test file's
@@ -33,6 +35,17 @@ vi.mock('../hooks/useNotifications', async () => {
   return {
     ...actual,
     useNotifications: () => getMockedNotificationsState(),
+  };
+});
+
+vi.mock('../hooks/notifications/useNotificationActions', async () => {
+  const actual = await vi.importActual<
+    typeof import('../hooks/notifications/useNotificationActions')
+  >('../hooks/notifications/useNotificationActions');
+  const { getMockedNotificationActionsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useNotificationActions: () => getMockedNotificationActionsState(),
   };
 });
 
@@ -81,48 +94,6 @@ function getRequestTarget(input: RequestInfo | URL): string {
   }
 
   return (input as Request).url;
-}
-
-function createGitifyBridgeApi(): Window['gitify'] {
-  return {
-    app: {
-      version: vi.fn().mockResolvedValue('v0.0.1'),
-      hide: vi.fn(),
-      quit: vi.fn(),
-      show: vi.fn(),
-    },
-    twemojiDirectory: vi.fn().mockResolvedValue('/mock/images/assets'),
-    openExternalLink: vi.fn(),
-    decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
-    encryptValue: vi.fn().mockResolvedValue('encrypted'),
-    githubCliToken: vi.fn().mockResolvedValue({ token: 'gh-cli-token' }),
-    setWindowVibrancy: vi.fn().mockResolvedValue(undefined),
-    setNativeTheme: vi.fn().mockResolvedValue(undefined),
-    platform: {
-      isLinux: vi.fn().mockReturnValue(false),
-      isMacOS: vi.fn().mockReturnValue(true),
-      isWindows: vi.fn().mockReturnValue(false),
-    },
-    zoom: {
-      getLevel: vi.fn(),
-      setLevel: vi.fn(),
-    },
-    tray: {
-      updateColor: vi.fn(),
-      updateTitle: vi.fn(),
-      setAppearance: vi.fn(),
-      useUnreadActiveIcon: vi.fn(),
-    },
-    notificationSoundPath: vi.fn(),
-    onResetApp: vi.fn(() => vi.fn()),
-    onSystemWake: vi.fn(() => vi.fn()),
-    setAutoLaunch: vi.fn(),
-    setKeepWindowOnBlur: vi.fn(),
-    setShowUpdateNotifications: vi.fn(),
-    setUseX11Backend: vi.fn(),
-    applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
-    raiseNativeNotification: vi.fn(),
-  };
 }
 
 window.gitify = createGitifyBridgeApi();

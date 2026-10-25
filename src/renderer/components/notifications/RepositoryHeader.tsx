@@ -5,7 +5,7 @@ import { Button, Stack } from '@primer/react';
 
 import { cn } from 'cn';
 
-import { useNotifications } from '../../hooks/useNotifications';
+import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
 
 import { HoverButton } from '../primitives/HoverButton';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -35,7 +35,7 @@ export function RepositoryHeader({
   onToggle,
   onAnimateExit,
 }: Readonly<RepositoryHeaderProps>) {
-  const { markNotificationsAsRead, markNotificationsAsDone } = useNotifications();
+  const { markNotificationsAsRead, markNotificationsAsDone } = useNotificationActions();
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
 

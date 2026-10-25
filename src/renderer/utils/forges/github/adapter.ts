@@ -26,7 +26,7 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
-import { pollGitHubDeviceFlow, startGitHubDeviceFlow } from './flows';
+import { describeDeviceFlowStartError, pollGitHubDeviceFlow, startGitHubDeviceFlow } from './flows';
 import { createNotificationHandler } from './handlers';
 import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
 import { getGitHubPlatform } from './platform';
@@ -135,6 +135,7 @@ export const githubAdapter: ForgeAdapter = {
     authMethod: 'Gitify OAuth App',
     start: startGitHubDeviceFlow,
     poll: pollGitHubDeviceFlow,
+    describeStartError: describeDeviceFlowStartError,
     getRevokeAccessUrl: getAuthorizedOAuthAppURL,
   },
 

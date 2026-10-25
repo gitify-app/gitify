@@ -331,6 +331,11 @@ export interface DeviceFlowSupport {
   start(hostname?: Hostname, scopes?: string[], clientId?: ClientID): Promise<DeviceFlowSession>;
   /** Poll for completion; resolves to a token when granted. */
   poll(session: DeviceFlowSession): Promise<Token | null>;
+  /**
+   * Describe a start failure in user-facing terms, or return `undefined` when
+   * the caller should report a generic failure instead.
+   */
+  describeStartError?(err: unknown, hostname: Hostname, clientId?: ClientID): string | undefined;
   /** URL the user visits to revoke the authorized OAuth app's access on this forge. */
   getRevokeAccessUrl(hostname: Hostname, clientId?: ClientID): Link;
 }

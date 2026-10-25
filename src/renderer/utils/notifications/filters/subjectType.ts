@@ -54,7 +54,7 @@ const SUBJECT_TYPE_DETAILS: Record<SubjectTypeFilterValue, TypeDetails> = {
   },
   other: {
     title: 'Other',
-    description: 'Notifications of a type that is not listed above.',
+    description: 'A type not listed above.',
   },
 };
 

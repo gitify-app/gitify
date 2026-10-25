@@ -22,7 +22,7 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
     expect(screen.getByTestId('login-username')).toBeInTheDocument();
   });
 
-  it('should open the token settings page', async () => {
+  it('opens the token settings page', async () => {
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
@@ -35,7 +35,7 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
     );
   });
 
-  it('should login successfully with username and token', async () => {
+  it('logs in successfully with username and token', async () => {
     loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />, {
@@ -78,7 +78,7 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));

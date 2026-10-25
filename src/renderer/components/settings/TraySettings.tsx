@@ -6,9 +6,11 @@ import { isTrayIconAppearance } from '../../../shared/events';
 
 import { useSettingsStore } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
-import { RadioGroup } from '../fields/RadioGroup';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
+
+import { SettingsChoice } from './controls/SettingsChoice';
+import { SettingsList } from './controls/SettingsList';
+import { SettingsToggle } from './controls/SettingsToggle';
 
 export function TraySettings() {
   const updateSetting = useSettingsStore((s) => s.updateSetting);
@@ -23,62 +25,54 @@ export function TraySettings() {
 
   return (
     <fieldset>
-      <Title icon={DevicesIcon}>Tray</Title>
+      <SectionHeading as="legend" icon={DevicesIcon}>
+        Tray
+      </SectionHeading>
 
-      <Stack direction="vertical" gap="condensed">
-        <Checkbox
+      <SettingsList>
+        <SettingsToggle
           checked={showNotificationsCountInTray}
           label="Show notification count"
           name="showNotificationsCountInTray"
           onChange={() => toggleSetting('showNotificationsCountInTray')}
-          tooltip={
-            <Text>
-              Show the unread notification count next to the tray icon. Useful for a quick glance at
-              unread activity.
-            </Text>
-          }
+          tooltip="Show the unread notification count next to the tray icon. Useful for a quick glance at unread activity."
           visible={window.gitify.platform.isMacOS()}
         />
 
-        <Checkbox
+        <SettingsToggle
           checked={useUnreadActiveIcon}
           label="Highlight unread notifications"
           name="useUnreadActiveIcon"
           onChange={() => toggleSetting('useUnreadActiveIcon')}
-          tooltip={
-            <Stack direction="vertical" gap="condensed">
-              <Text>Use a green {APPLICATION.NAME} logo when there are unread notifications.</Text>
-            </Stack>
-          }
+          tooltip={`Turn the ${APPLICATION.NAME} logo green while there are unread notifications.`}
         />
 
-        <RadioGroup
+        <SettingsChoice
           label="Idle icon"
           name="trayIconAppearance"
-          value={trayIconAppearance}
+          onChange={(value) => {
+            if (isTrayIconAppearance(value)) {
+              updateSetting('trayIconAppearance', value);
+            }
+          }}
           options={[
             { label: 'Automatic', value: 'auto' },
             { label: 'Light', value: 'light' },
             { label: 'Dark', value: 'dark' },
           ]}
-          onChange={(event) => {
-            const value = event.target.value;
-            if (isTrayIconAppearance(value)) {
-              updateSetting('trayIconAppearance', value);
-            }
-          }}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Choose a light icon for a dark panel, or a dark icon for a light panel.</Text>
+              <Text>Pick a light icon for dark panels or a dark icon for light panels.</Text>
               <Text>
-                Automatic follows the system tray appearance on macOS and Windows. On Linux, it uses
-                a light icon because panel appearance cannot be detected reliably.
+                Automatic follows the tray appearance on macOS and Windows; Linux uses light because
+                panel detection is unreliable.
               </Text>
-              <Text>This setting is independent of Gitify’s app theme.</Text>
+              <Text>This setting is independent of the {APPLICATION.NAME} app theme.</Text>
             </Stack>
           }
+          value={trayIconAppearance}
         />
-      </Stack>
+      </SettingsList>
     </fieldset>
   );
 }

@@ -44,7 +44,7 @@ export function Sidebar() {
           aria-label={APPLICATION.NAME}
           data-testid="sidebar-home"
           description="Home"
-          icon={LogoIcon}
+          icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
           onClick={() => shortcuts.home.action()}
           size="small"

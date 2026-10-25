@@ -25,7 +25,7 @@ export function StackedPrsPill({
   return (
     <MetricPill
       color={IconColor.YELLOW}
-      contents="Part of a stacked PR series"
+      contents="Part of a stacked pull request series"
       icon={GitMergeIcon}
       metric={metric}
     />

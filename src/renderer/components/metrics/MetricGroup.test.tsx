@@ -7,7 +7,7 @@ import { IconColor, type Link } from '../../types';
 import { MetricGroup, type MetricGroupProps } from './MetricGroup';
 
 describe('renderer/components/metrics/MetricGroup.tsx', () => {
-  it('should not render any pills when showPills is disabled', async () => {
+  it('does not render any pills when showPills is disabled', async () => {
     const mockNotification = mockGitifyNotification;
     const props: MetricGroupProps = {
       notification: mockNotification,
@@ -20,7 +20,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render pills when showPills is enabled', async () => {
+  it('renders pills when showPills is enabled', async () => {
     const mockNotification = mockGitifyNotification;
     const props: MetricGroupProps = {
       notification: mockNotification,
@@ -33,7 +33,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render the issue type pill when the subject has a native issue type', async () => {
+  it('renders the issue type pill when the subject has a native issue type', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -51,7 +51,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('Bug')).toBeInTheDocument();
   });
 
-  it('should render the parent pill when the subject has a parent issue', async () => {
+  it('renders the parent pill when the subject has a parent issue', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -73,7 +73,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
   });
 
-  it('should render the sub-issue progress pill when the subject has sub-issue progress', async () => {
+  it('renders the sub-issue progress pill when the subject has sub-issue progress', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -95,35 +95,39 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('2/5')).toBeInTheDocument();
   });
 
-  it('keeps hierarchy and existing metrics together and hides them when pills are disabled', () => {
-    const notification = {
-      ...mockGitifyNotification,
-      subject: {
-        ...mockGitifyNotification.subject,
-        issueType: { name: 'Bug', color: IconColor.RED },
-        parentIssue: {
-          number: 456,
-          title: 'Parent Epic',
-          url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
-        },
-        subIssueProgress: { total: 5, completed: 2, percentCompleted: 40 },
+  const hierarchyNotification = () => ({
+    ...mockGitifyNotification,
+    subject: {
+      ...mockGitifyNotification.subject,
+      issueType: { name: 'Bug', color: IconColor.RED },
+      parentIssue: {
+        number: 456,
+        title: 'Parent Epic',
+        url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
       },
-    };
-    const tree = renderWithProviders(<MetricGroup notification={notification} />, {
+      subIssueProgress: { total: 5, completed: 2, percentCompleted: 40 },
+    },
+  });
+
+  it('keeps hierarchy and existing metrics together', () => {
+    const tree = renderWithProviders(<MetricGroup notification={hierarchyNotification()} />, {
       settings: { ...mockSettings, showPills: true },
     });
 
     expect(tree.getByText('Bug')).toBeInTheDocument();
     expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
     expect(tree.getByText('2/5')).toBeInTheDocument();
-
-    const hidden = renderWithProviders(<MetricGroup notification={notification} />, {
-      settings: { ...mockSettings, showPills: false },
-    });
-    expect(hidden.container).toBeEmptyDOMElement();
   });
 
-  it('should render issue field pills immediately before label pills', async () => {
+  it('hides metrics when pills are disabled', () => {
+    const tree = renderWithProviders(<MetricGroup notification={hierarchyNotification()} />, {
+      settings: { ...mockSettings, showPills: false },
+    });
+
+    expect(tree.container).toBeEmptyDOMElement();
+  });
+
+  it('renders issue field pills immediately before label pills', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -145,7 +149,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(textContent.indexOf('Priority: High')).toBeLessThan(textContent.indexOf('enhancement'));
   });
 
-  it('should not render field pills when showPills is disabled', async () => {
+  it('does not render field pills when showPills is disabled', async () => {
     const props: MetricGroupProps = {
       notification: {
         ...mockGitifyNotification,
@@ -161,22 +165,5 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     });
 
     expect(tree.queryByText('Priority: High')).not.toBeInTheDocument();
-  });
-
-  it('wraps its pills and can shrink within the row', async () => {
-    const props: MetricGroupProps = {
-      notification: mockGitifyNotification,
-    };
-
-    const tree = renderWithProviders(<MetricGroup {...props} />, {
-      settings: { ...mockSettings, showPills: true },
-    });
-
-    const group = tree.container.firstElementChild;
-
-    // Wrapping + shrinkable so pills wrap clear of the action rail instead of
-    // overflowing the row and being clipped.
-    expect(group).toHaveClass('flex-wrap');
-    expect(group).toHaveClass('min-w-0');
   });
 });

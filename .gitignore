@@ -29,6 +29,7 @@ src/renderer/**/__screenshots__/**/*.png
 !src/renderer/**/__screenshots__/**/*-chromium-linux.png
 
 # Actual/diff images written by a failing visual regression run
+.vitest/
 .vitest-attachments/
 
 # Mac Files

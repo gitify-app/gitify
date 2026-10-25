@@ -1,3 +1,5 @@
+import { createGitifyBridgeApi } from '../../__helpers__/gitify-bridge';
+
 import useFiltersStore from '../stores/useFiltersStore';
 import useSettingsStore from '../stores/useSettingsStore';
 
@@ -49,6 +51,17 @@ vi.mock('../hooks/useNotifications', async () => {
   };
 });
 
+vi.mock('../hooks/notifications/useNotificationActions', async () => {
+  const actual = await vi.importActual<
+    typeof import('../hooks/notifications/useNotificationActions')
+  >('../hooks/notifications/useNotificationActions');
+  const { getMockedNotificationActionsState } = await import('./hook-mocks');
+  return {
+    ...actual,
+    useNotificationActions: () => getMockedNotificationActionsState(),
+  };
+});
+
 vi.mock('../hooks/useLogins', async () => {
   const actual = await vi.importActual<typeof import('../hooks/useLogins')>('../hooks/useLogins');
   const { getMockedLoginsState } = await import('./hook-mocks');
@@ -74,47 +87,6 @@ vi.mock('../hooks/useOnlineStatus', async () => {
  * baselines are generated on. Glass therefore resolves to its `backdrop-filter`
  * material; the macOS native vibrancy material cannot be captured by Chromium.
  */
-function createGitifyBridgeApi(): Window['gitify'] {
-  return {
-    app: {
-      version: vi.fn().mockResolvedValue('v0.0.1'),
-      hide: vi.fn(),
-      quit: vi.fn(),
-      show: vi.fn(),
-    },
-    twemojiDirectory: vi.fn().mockResolvedValue('/mock/images/assets'),
-    openExternalLink: vi.fn(),
-    decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
-    encryptValue: vi.fn().mockResolvedValue('encrypted'),
-    githubCliToken: vi.fn().mockResolvedValue({ token: 'gh-cli-token' }),
-    setWindowVibrancy: vi.fn().mockResolvedValue(undefined),
-    setNativeTheme: vi.fn().mockResolvedValue(undefined),
-    platform: {
-      isLinux: vi.fn().mockReturnValue(true),
-      isMacOS: vi.fn().mockReturnValue(false),
-      isWindows: vi.fn().mockReturnValue(false),
-    },
-    zoom: {
-      getLevel: vi.fn(),
-      setLevel: vi.fn(),
-    },
-    tray: {
-      updateColor: vi.fn(),
-      updateTitle: vi.fn(),
-      setAppearance: vi.fn(),
-      useUnreadActiveIcon: vi.fn(),
-    },
-    notificationSoundPath: vi.fn(),
-    onResetApp: vi.fn(() => vi.fn()),
-    onSystemWake: vi.fn(() => vi.fn()),
-    setAutoLaunch: vi.fn(),
-    setKeepWindowOnBlur: vi.fn(),
-    setShowUpdateNotifications: vi.fn(),
-    setUseX11Backend: vi.fn(),
-    applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
-    raiseNativeNotification: vi.fn(),
-  };
-}
 
 /**
  * Settles animations to their end state before anything renders.
@@ -138,6 +110,8 @@ function disableAnimations(): void {
 }
 
 beforeEach(async () => {
+  // Interactions are driven by Playwright, outside React's act environment.
+  (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = false;
   disableAnimations();
   vi.useFakeTimers({ toFake: ['Date'], now: FIXED_NOW });
 
@@ -152,7 +126,7 @@ beforeEach(async () => {
     }),
   );
 
-  window.gitify = createGitifyBridgeApi();
+  window.gitify = createGitifyBridgeApi('linux');
 
   useFiltersStore.getState().reset();
   useSettingsStore.getState().reset();

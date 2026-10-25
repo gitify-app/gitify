@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/routes/Login.tsx > should render itself & its children 1`] = `
+exports[`renderer/routes/Login.tsx > renders itself & its children 1`] = `
 <div>
   <div
     class="h-screen prc-Stack-Stack-UQ9k6"

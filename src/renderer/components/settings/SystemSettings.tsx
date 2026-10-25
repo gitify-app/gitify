@@ -3,34 +3,27 @@ import { useEffect, useRef, useState } from 'react';
 import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react';
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
-import { APPLICATION } from '../../../shared/constants';
-
 import {
   DEFAULT_SETTINGS_STATE,
   useSettingsStore,
   useShortcutRegistrationStore,
 } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
-import { RadioGroup } from '../fields/RadioGroup';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import { type KeyboardAcceleratorShortcut, OpenPreference, toLink } from '../../types';
 
-import { VolumeDownIcon } from '../../icons/VolumeDownIcon';
-import { VolumeUpIcon } from '../../icons/VolumeUpIcon';
 import { openExternalLink } from '../../utils/system/comms';
 import {
   formatAcceleratorForDisplay,
   keyboardEventToAccelerator,
   MODIFIER_SEGMENTS,
 } from '../../utils/system/keyboardShortcut';
-import {
-  canDecreaseVolume,
-  canIncreaseVolume,
-  decreaseVolume,
-  increaseVolume,
-} from '../../utils/ui/volume';
+import { SettingsChoice } from './controls/SettingsChoice';
+import { SettingsList } from './controls/SettingsList';
+import { SettingsReveal } from './controls/SettingsReveal';
+import { SettingsRow } from './controls/SettingsRow';
+import { SettingsToggle } from './controls/SettingsToggle';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
@@ -50,18 +43,15 @@ export function SystemSettings() {
   const openLinks = useSettingsStore((s) => s.openLinks);
   const keyboardShortcut = useSettingsStore((s) => s.keyboardShortcut);
   const openGitifyShortcut = useSettingsStore((s) => s.openGitifyShortcut);
-  const showNotifications = useSettingsStore((s) => s.showNotifications);
-  const playSound = useSettingsStore((s) => s.playSound);
-  const notificationVolume = useSettingsStore((s) => s.notificationVolume);
   const keepWindowOnBlur = useSettingsStore((s) => s.keepWindowOnBlur);
   const openAtStartup = useSettingsStore((s) => s.openAtStartup);
-  const showUpdateNotifications = useSettingsStore((s) => s.showUpdateNotifications);
   const useX11Backend = useSettingsStore((s) => s.useX11Backend);
 
   const [recordingShortcut, setRecordingShortcut] = useState(false);
   const [liveModifierAccelerator, setLiveModifierAccelerator] = useState('');
   const shortcutRowRef = useRef<HTMLDivElement>(null);
   const isMac = window.gitify.platform.isMacOS();
+  const isLinux = window.gitify.platform.isLinux();
 
   useEffect(() => {
     if (!recordingShortcut) {
@@ -131,29 +121,35 @@ export function SystemSettings() {
 
   return (
     <fieldset>
-      <Title icon={DeviceDesktopIcon}>System</Title>
+      <SectionHeading as="legend" icon={DeviceDesktopIcon}>
+        System
+      </SectionHeading>
 
-      <Stack direction="vertical" gap="condensed">
-        <RadioGroup
-          label="Open Links:"
+      <SettingsList>
+        <SettingsChoice
+          label="Link focus"
           name="openLinks"
-          onChange={(evt) => {
-            updateSetting('openLinks', evt.target.value as OpenPreference);
-          }}
+          onChange={(value) => updateSetting('openLinks', value as OpenPreference)}
           options={[
             { label: 'Foreground', value: OpenPreference.FOREGROUND },
             { label: 'Background', value: OpenPreference.BACKGROUND },
           ]}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Controls the behavior of how external links should opened.</Text>
               <Text>
-                <Text as="strong">Foreground</Text> will open the link and bring the opened window
-                or browser to the front.
+                Controls whether opening an external link brings the destination app to the front.
+              </Text>
+              <Text>
+                <Text as="strong">Foreground</Text> brings the opened window or browser to the
+                front.
               </Text>
               <Text>
                 <Text as="strong">Background</Text> opens the link without stealing focus from the
                 current window.
+              </Text>
+              <Text>
+                This applies to every link Gitify opens, including notification links opened in the
+                browser.
               </Text>
             </Stack>
           }
@@ -177,226 +173,143 @@ export function SystemSettings() {
           />
         )}
 
-        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <Checkbox
-            checked={keyboardShortcut}
-            label="Global shortcut"
-            name="keyboardShortcut"
-            onChange={() => toggleSetting('keyboardShortcut')}
-            tooltip={
-              <Stack direction="vertical" gap="condensed">
-                <Text>Global keyboard shortcut to show or hide {APPLICATION.NAME}.</Text>
-                <Text>Shortcuts must include:</Text>
-                <div className="pl-2">
-                  <Stack direction="vertical" gap="none">
-                    <Stack direction="horizontal" gap="condensed">
-                      <Text>•</Text>
-                      <Text>
-                        Primary modifier:{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('CommandOrControl', isMac)}
-                        </Text>
-                      </Text>
-                    </Stack>
-                    <Stack direction="horizontal" gap="condensed">
-                      <Text>•</Text>
-                      <Text>
-                        Optional modifiers:{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('Shift', isMac)}
-                        </Text>
-                        ,{' '}
-                        <Text as="strong" className="text-gitify-caution">
-                          {formatAcceleratorForDisplay('Alt', isMac)}
-                        </Text>
-                      </Text>
-                    </Stack>
-                    <Stack direction="horizontal" gap="condensed">
-                      <Text>•</Text>
-                      <Text>A non-modifier key (letter, number, etc.)</Text>
-                    </Stack>
-                  </Stack>
-                </div>
-              </Stack>
+        <SettingsToggle
+          checked={keyboardShortcut}
+          label="Enable global shortcut"
+          name="keyboardShortcut"
+          onChange={() => {
+            if (keyboardShortcut) {
+              setRecordingShortcut(false);
+              setLiveModifierAccelerator('');
             }
-          />
-
-          <ButtonGroup
-            className="ml-2"
-            data-testid="settings-shortcut-group"
-            hidden={!keyboardShortcut}
-          >
-            <IconButton
-              aria-label="Edit global shortcut"
-              data-testid="settings-shortcut-edit"
-              icon={PencilIcon}
-              onClick={() => {
-                clearShortcutRegistrationError();
-                setLiveModifierAccelerator('');
-                setRecordingShortcut(true);
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
-            <Button
-              aria-label="Global shortcut"
-              className="pointer-events-none"
-              size="small"
-              tabIndex={-1}
-            >
-              <Text as="strong" className="text-gitify-caution">
-                {shortcutButtonLabel}
-              </Text>
-            </Button>
-            <IconButton
-              aria-label="Reset global shortcut to default"
-              data-testid="settings-shortcut-reset"
-              disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
-              icon={SyncIcon}
-              onClick={() => {
-                clearShortcutRegistrationError();
-                updateSetting('openGitifyShortcut', defaultSettings.openGitifyShortcut);
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-              variant="danger"
-            />
-          </ButtonGroup>
-        </Stack>
-
-        <Checkbox
-          checked={showNotifications}
-          label="Show system notifications"
-          name="showNotifications"
-          onChange={() => toggleSetting('showNotifications')}
-          tooltip={
-            <Text>Display native operating system notifications for new unread notifications.</Text>
-          }
+            toggleSetting('keyboardShortcut');
+          }}
+          tooltip="Show or hide Gitify from anywhere with a keyboard shortcut."
         />
 
-        <Stack align="center" className="text-sm" direction="horizontal" gap="condensed">
-          <Checkbox
-            checked={playSound}
-            label="Play sound"
-            name="playSound"
-            onChange={() => toggleSetting('playSound')}
-          />
-
-          <ButtonGroup className="ml-2" data-testid="settings-volume-group" hidden={!playSound}>
-            <IconButton
-              aria-label="Volume down"
-              data-testid="settings-volume-down"
-              disabled={!canDecreaseVolume(notificationVolume)}
-              icon={VolumeDownIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', decreaseVolume(notificationVolume));
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
-
-            <Button
-              aria-label="Volume percentage"
-              className="pointer-events-none"
-              size="small"
-              tabIndex={-1}
+        <SettingsReveal name="shortcutRecorder" open={keyboardShortcut}>
+          <div ref={shortcutRowRef}>
+            <SettingsRow
+              label="Global shortcut"
+              name="shortcut"
+              tooltip={
+                <Stack direction="vertical" gap="condensed">
+                  <Text>Shortcuts must include:</Text>
+                  <div className="pl-2">
+                    <Stack direction="vertical" gap="none">
+                      <Stack direction="horizontal" gap="condensed">
+                        <Text>•</Text>
+                        <Text>
+                          Primary modifier:{' '}
+                          <Text as="strong" className="text-gitify-caution">
+                            {formatAcceleratorForDisplay('CommandOrControl', isMac)}
+                          </Text>
+                        </Text>
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
+                        <Text>•</Text>
+                        <Text>
+                          Optional modifiers:{' '}
+                          <Text as="strong" className="text-gitify-caution">
+                            {formatAcceleratorForDisplay('Shift', isMac)}
+                          </Text>
+                          ,{' '}
+                          <Text as="strong" className="text-gitify-caution">
+                            {formatAcceleratorForDisplay('Alt', isMac)}
+                          </Text>
+                        </Text>
+                      </Stack>
+                      <Stack direction="horizontal" gap="condensed">
+                        <Text>•</Text>
+                        <Text>A non-modifier key (letter, number, etc.)</Text>
+                      </Stack>
+                    </Stack>
+                  </div>
+                </Stack>
+              }
             >
-              {notificationVolume.toFixed(0)}%
-            </Button>
+              <ButtonGroup data-testid="settings-shortcut-group">
+                <IconButton
+                  aria-label="Edit global shortcut"
+                  data-testid="settings-shortcut-edit"
+                  icon={PencilIcon}
+                  onClick={() => {
+                    clearShortcutRegistrationError();
+                    setLiveModifierAccelerator('');
+                    setRecordingShortcut(true);
+                  }}
+                  size="small"
+                  unsafeDisableTooltip={true}
+                />
+                <Button
+                  aria-label="Current shortcut"
+                  className="pointer-events-none"
+                  size="small"
+                  tabIndex={-1}
+                >
+                  <Text as="strong" className="text-gitify-caution">
+                    {shortcutButtonLabel}
+                  </Text>
+                </Button>
+                <IconButton
+                  aria-label="Reset global shortcut to default"
+                  data-testid="settings-shortcut-reset"
+                  disabled={openGitifyShortcut === defaultSettings.openGitifyShortcut}
+                  icon={SyncIcon}
+                  onClick={() => {
+                    clearShortcutRegistrationError();
+                    updateSetting('openGitifyShortcut', defaultSettings.openGitifyShortcut);
+                  }}
+                  size="small"
+                  unsafeDisableTooltip={true}
+                  variant="danger"
+                />
+              </ButtonGroup>
+            </SettingsRow>
+          </div>
+        </SettingsReveal>
 
-            <IconButton
-              aria-label="Volume up"
-              data-testid="settings-volume-up"
-              disabled={!canIncreaseVolume(notificationVolume)}
-              icon={VolumeUpIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', increaseVolume(notificationVolume));
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-            />
-
-            <IconButton
-              aria-label="Reset volume"
-              data-testid="settings-volume-reset"
-              icon={SyncIcon}
-              onClick={() => {
-                updateSetting('notificationVolume', defaultSettings.notificationVolume);
-              }}
-              size="small"
-              unsafeDisableTooltip={true}
-              variant="danger"
-            />
-          </ButtonGroup>
-        </Stack>
-
-        <Checkbox
+        <SettingsToggle
           checked={keepWindowOnBlur}
-          label="Keep window open when it loses focus"
+          label="Keep window open when unfocused"
           name="keepWindowOnBlur"
           onChange={() => toggleSetting('keepWindowOnBlur')}
-          tooltip={
-            <Text>
-              Prevent the {APPLICATION.NAME} window from automatically hiding when you click outside
-              it.
-            </Text>
-          }
+          tooltip="Keep the Gitify window open when you click outside it."
         />
 
-        <Checkbox
+        <SettingsToggle
           checked={openAtStartup}
-          label="Open at startup"
+          label="Launch at startup"
           name="openAtStartup"
           onChange={() => toggleSetting('openAtStartup')}
-          tooltip={<Text>Launch {APPLICATION.NAME} automatically at startup.</Text>}
-          visible={!window.gitify.platform.isLinux()}
+          tooltip="Launch Gitify automatically at startup."
+          visible={!isLinux}
         />
 
-        <Checkbox
-          checked={showUpdateNotifications}
-          label="Show update notifications"
-          name="showUpdateNotifications"
-          onChange={() => toggleSetting('showUpdateNotifications')}
-          tooltip={
-            <Text>
-              Show a notification when a {APPLICATION.NAME} update is ready. Updates will still be
-              checked and shown in the menu bar.
-            </Text>
-          }
-        />
-
-        <Checkbox
+        <SettingsToggle
           checked={useX11Backend}
           label="Use X11 backend (restart required)"
           name="useX11Backend"
           onChange={() => toggleSetting('useX11Backend')}
-          tooltip={
-            <Text>
-              Run under X11/XWayland so the window opens next to the tray icon. On Wayland, window
-              placement depends on your compositor and its extensions. Enabling this also disables
-              Vulkan, which crashes under X11 on some drivers, and may soften text on displays using
-              fractional scaling. Takes effect after restarting {APPLICATION.NAME}.
-            </Text>
-          }
-          visible={window.gitify.platform.isLinux()}
+          tooltip="Run Gitify under X11/XWayland so the window can open next to the tray icon. Takes effect after restarting Gitify."
+          visible={isLinux}
         />
-        {window.gitify.platform.isLinux() && (
-          <Stack gap="condensed">
-            <Text className="text-sm text-gitify-font">
-              On GNOME Wayland, install the Gitify extension to open the window next to its tray
-              icon. Install and manage it through GNOME's extension tools.
-            </Text>
-            <Button
-              onClick={() =>
-                openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))
-              }
-              size="small"
-            >
-              GNOME extension installation
-            </Button>
-          </Stack>
-        )}
-      </Stack>
+      </SettingsList>
+
+      {isLinux && (
+        <Stack className="pt-2" gap="condensed">
+          <Text className="text-sm text-gitify-font">
+            On GNOME Wayland, install the Gitify extension to open the window next to its tray icon.
+            Install and manage it through GNOME's extension tools.
+          </Text>
+          <Button
+            onClick={() => openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))}
+            size="small"
+          >
+            GNOME extension installation
+          </Button>
+        </Stack>
+      )}
     </fieldset>
   );
 }

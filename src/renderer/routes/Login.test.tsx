@@ -8,7 +8,7 @@ import * as comms from '../utils/system/comms';
 import { LoginRoute } from './Login';
 
 describe('renderer/routes/Login.tsx', () => {
-  it('should render itself & its children', () => {
+  it('renders itself & its children', () => {
     const tree = renderWithProviders(<LoginRoute />);
 
     expect(tree.container).toMatchSnapshot();
@@ -16,7 +16,7 @@ describe('renderer/routes/Login.tsx', () => {
     expect(navigateMock).toHaveBeenCalledTimes(0);
   });
 
-  it('should redirect to notifications once logged in', () => {
+  it('redirects to notifications once logged in', () => {
     const showWindowSpy = vi.spyOn(comms, 'showWindow');
 
     renderWithProviders(<LoginRoute />, {
@@ -41,7 +41,7 @@ describe('renderer/routes/Login.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith(route);
   });
 
-  it('should navigate to login with Gitea personal access token', async () => {
+  it('navigates to login with Gitea personal access token', async () => {
     renderWithProviders(<LoginRoute />);
 
     await userEvent.click(screen.getByTestId('forge-tab-gitea'));
@@ -51,7 +51,7 @@ describe('renderer/routes/Login.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token');
   });
 
-  it('should switch the visible login methods when changing forges', async () => {
+  it('switches the visible login methods when changing forges', async () => {
     renderWithProviders(<LoginRoute />);
 
     expect(screen.getByTestId('login-github')).toBeInTheDocument();

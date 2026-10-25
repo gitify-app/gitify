@@ -495,6 +495,7 @@ html,
 body,
 #root {
   height: 100%;
+  overflow: hidden;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -576,6 +577,19 @@ body,
 .gitify-hover-actions-full :where(button) {
   height: 100%;
   border-radius: 0;
+}
+
+/* Settings rows are `<fieldset>`s so their controls stay semantically grouped,
+ * but Primer's global stylesheet resets `fieldset { padding: 0; border: 0 }`
+ * outside Tailwind's cascade layers. Unlayered rules win over the layered
+ * utilities, which stripped each row's vertical padding and divider. Keep the
+ * row rhythm here, unlayered, so it survives that reset. */
+.settings-list > * {
+  padding-block: var(--base-size-8, 8px);
+}
+
+.settings-list > :not(:last-child) {
+  border-bottom: 1px solid var(--borderColor-disabled);
 }
 
 body {

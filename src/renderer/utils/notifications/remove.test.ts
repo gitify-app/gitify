@@ -36,7 +36,7 @@ describe('renderer/utils/remove.ts', () => {
         description: 'both delayNotificationState and fetchReadNotifications are true',
       },
     ])(
-      'should return $expected when $description',
+      'returns $expected when $description',
       ({ delayNotificationState, fetchReadNotifications, expected }) => {
         useSettingsStore.setState({
           delayNotificationState,
@@ -49,7 +49,7 @@ describe('renderer/utils/remove.ts', () => {
   });
 
   describe('removeNotificationsForAccount', () => {
-    it('should remove a notification if it exists', () => {
+    it('removes a notification if it exists', () => {
       useSettingsStore.setState({
         delayNotificationState: false,
       });
@@ -65,7 +65,7 @@ describe('renderer/utils/remove.ts', () => {
       expect(result[0].notifications.length).toBe(0);
     });
 
-    it('should mark as read and skip notification removal if delay state enabled', () => {
+    it('marks as read and skip notification removal if delay state enabled', () => {
       useSettingsStore.setState({
         delayNotificationState: true,
       });
@@ -82,7 +82,7 @@ describe('renderer/utils/remove.ts', () => {
       expect(result[0].notifications[0].unread).toBe(false);
     });
 
-    it('should skip notification removal if delay state enabled and nothing to remove', () => {
+    it('skips notification removal if delay state enabled and nothing to remove', () => {
       useSettingsStore.setState({
         delayNotificationState: true,
       });
@@ -104,7 +104,7 @@ describe('renderer/utils/remove.ts', () => {
       expect(result[0].notifications[0].unread).toBe(true);
     });
 
-    it('should skip notification removal if nothing to remove', () => {
+    it('skips notification removal if nothing to remove', () => {
       expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
       const result = removeNotificationsForAccount(
@@ -117,7 +117,7 @@ describe('renderer/utils/remove.ts', () => {
       expect(result[0].notifications[0]).toBe(mockSingleAccountNotifications[0].notifications[0]);
     });
 
-    it('should not modify notifications when account UUID does not match', () => {
+    it('does not modify notifications when account UUID does not match', () => {
       const result = removeNotificationsForAccount(
         mockGitHubEnterpriseServerAccount, // Different account
         [mockGitifyNotification],
@@ -128,7 +128,7 @@ describe('renderer/utils/remove.ts', () => {
       expect(result[0].notifications[0]).toBe(mockSingleAccountNotifications[0].notifications[0]);
     });
 
-    it('should mark as read and skip removal when fetchReadNotifications is enabled', () => {
+    it('marks as read and skip removal when fetchReadNotifications is enabled', () => {
       useSettingsStore.setState({
         fetchReadNotifications: true,
       });
@@ -145,7 +145,7 @@ describe('renderer/utils/remove.ts', () => {
       expect(result[0].notifications[0].unread).toBe(false);
     });
 
-    it('should remove notifications when fetchReadNotifications is disabled', () => {
+    it('removes notifications when fetchReadNotifications is disabled', () => {
       useSettingsStore.setState({
         fetchReadNotifications: false,
       });

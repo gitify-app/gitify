@@ -42,8 +42,9 @@ The renderer is layered. **Runtime imports flow in one direction only** — a mo
 - `utils/` is split by concern: `api`, `auth`, `core`, `forges`, `notifications`, `system`, `ui`.
 - `types.ts`, `constants.ts`, and `icons/` are the leaf modules: shared types, shared values, and presentational icons. `types.ts` imports types from `utils/auth/types` and generated GitHub GraphQL types — those imports are type-only, so the direction rule does not apply. `icons/` sits below `utils`, so both `utils` and `components` may import it (a forge adapter declares its brand mark from here).
 - `stores/` holds client state (Zustand): persisted `accounts` and `settings`, session `filters` and notification action failures.
+- `stores/index.ts` is the public store facade for `hooks`, `components`, and `routes`. Lower layers (`utils`) import the specific store module instead (for example `stores/useFiltersStore`): the barrel re-exports every store and its dependencies, which would pull the account/auth/forge graph into leaf utilities and create cycles.
 - `utils` and `stores` are **peers** — they may reference each other. Neither may import `hooks`, `components`, or `routes`.
-- `components/` is grouped by feature (`notifications`, `filters`, `settings`, `login`, `fields`, `avatars`, `layout`, `metrics`, `primitives`).
+- `components/` is grouped by feature (`notifications`, `filters`, `settings`, `login`, `avatars`, `layout`, `metrics`, `primitives`).
 - The composition root (`App.tsx`, `index.tsx`) is the only place allowed to wire every layer together.
 
 ## State ownership
@@ -70,10 +71,12 @@ App-level side effects are owned by a single host. `GlobalEffects` mounts exactl
 
 Consumers read the shared query cache and stores, and **do not register their own** polling, alerts, wake, or focus listeners. This keeps background work (for example, firing one poll per interval) from multiplying with the number of mounted components. When you add a new background effect, add it to the host, not to a leaf component.
 
+Subscription is separate from side effects, but it multiplies the same way: every TanStack Query observer re-runs the query's `select` and structural-sharing walk whenever the cached data changes. A component that renders once per notification — the notification row, the repository header — must therefore not subscribe. It obtains notification actions (mark as read/done, unsubscribe, remove an account, refetch) with `useNotificationActions`, which never calls `useQuery`. Components that read notification data use `useNotifications` and stay subscribed by design.
+
 ## Forge adapters
 
 Multi-forge support is adapter-based. Each forge implements the `ForgeAdapter` interface in `src/renderer/utils/forges/`, and shared code routes through `getAdapter(forge)` (forge-wide members) or `getAccountAdapter(account)` (account-scoped operations). Shared code never imports forge-specific modules directly, and there is no forge-specific branching outside an adapter module. See `CONTRIBUTING.md` for the conditions for adding a forge.
 
 ## Enforcement
 
-The one-way module dependency direction is checked automatically: `vite.config.mts` defines per-layer `no-restricted-imports` overrides for the renderer, and `pnpm check` fails on a violation. The enforced rules are: `utils` and `stores` must not import `hooks`, `components`, or `routes`; `hooks` must not import `components` or `routes`; `components` must not import `routes`; and the leaf layers stay leaves — `icons` must not import any implementation layer, and the leaf modules `types`/`constants` must not import implementation layers either (their type-only imports are permitted). Any future exception must be argued and documented here rather than silently allow-listed.
+The one-way module dependency direction is checked automatically: `vite.config.mts` defines per-layer `no-restricted-imports` overrides for the renderer, and `pnpm check` fails on a violation. The enforced rules are: `utils` and `stores` must not import `hooks`, `components`, or `routes`; `utils` must not import the `stores` barrel (it imports the specific store module); `hooks` must not import `components` or `routes`; `components` must not import `routes`; and the leaf layers stay leaves — `icons` must not import any implementation layer, and the leaf modules `types`/`constants` must not import implementation layers either (their type-only imports are permitted). Any future exception must be argued and documented here rather than silently allow-listed.

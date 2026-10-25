@@ -17,12 +17,12 @@ describe('renderer/components/avatars/AvatarWithFallback.tsx', () => {
     userType: 'User',
   };
 
-  it('should render avatar - human user', () => {
+  it('renders avatar - human user', () => {
     const tree = renderWithProviders(<AvatarWithFallback {...props} />);
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('should render avatar - non-human user', () => {
+  it('renders avatar - non-human user', () => {
     const tree = renderWithProviders(<AvatarWithFallback {...props} userType={'Organization'} />);
     expect(tree.container).toMatchSnapshot();
   });

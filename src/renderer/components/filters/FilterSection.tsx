@@ -6,10 +6,10 @@ import { Stack, Text } from '@primer/react';
 import { useNotifications } from '../../hooks/useNotifications';
 import { type FiltersState, useFiltersStore, useSettingsStore } from '../../stores';
 
-import { Checkbox } from '../fields/Checkbox';
-import { Title } from '../primitives/Title';
+import { SectionHeading } from '../primitives/SectionHeading';
 
 import type { Filter } from '../../utils/notifications/filters';
+import { FilterCheckbox } from './FilterCheckbox';
 import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificationsWarning';
 
 export interface FilterSectionProps<K extends keyof FiltersState> {
@@ -50,7 +50,8 @@ function FilterSectionComponent<K extends keyof FiltersState>({
 
   return (
     <fieldset id={id}>
-      <Title
+      <SectionHeading
+        as="legend"
         icon={icon}
         tooltip={
           tooltip && (
@@ -62,7 +63,7 @@ function FilterSectionComponent<K extends keyof FiltersState>({
         }
       >
         {title}
-      </Title>
+      </SectionHeading>
 
       <Stack direction={layout} gap={layout === 'horizontal' ? 'normal' : 'condensed'}>
         {(Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][])
@@ -87,13 +88,13 @@ function FilterSectionComponent<K extends keyof FiltersState>({
             const count = filterCounts.get(type) ?? 0;
 
             return (
-              <Checkbox
+              <FilterCheckbox
                 checked={isChecked}
                 counter={count}
                 disabled={filter.requiresDetailsNotifications && !detailedNotifications}
                 key={type as string}
                 label={typeTitle}
-                name={typeTitle}
+                name={`${filterSetting}-${String(type)}`}
                 onChange={() => updateFilter(filterSetting, type, !isChecked)}
                 tooltip={typeDescription ? <Text>{typeDescription}</Text> : null}
               />

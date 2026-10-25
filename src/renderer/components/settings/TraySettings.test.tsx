@@ -19,10 +19,10 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   });
 
   it.each([
-    ['checkbox-showNotificationsCountInTray', 'showNotificationsCountInTray'],
-    ['checkbox-useUnreadActiveIcon', 'useUnreadActiveIcon'],
-  ] as const)('should toggle %s checkbox', async (testId, setting) => {
-    await userEvent.click(screen.getByTestId(testId));
+    ['Show notification count', 'showNotificationsCountInTray'],
+    ['Highlight unread notifications', 'useUnreadActiveIcon'],
+  ] as const)('toggles %s switch', async (label, setting) => {
+    await userEvent.click(screen.getByRole('button', { name: label }));
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
@@ -30,7 +30,7 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
   it.each(['auto', 'light', 'dark'] as const)(
     'selects the %s icon appearance',
     async (appearance) => {
-      await userEvent.click(screen.getByTestId(`radio-trayIconAppearance-${appearance}`));
+      await userEvent.click(screen.getByTestId(`choice-trayIconAppearance-${appearance}`));
       expect(useSettingsStore.getState().trayIconAppearance).toBe(appearance);
     },
   );

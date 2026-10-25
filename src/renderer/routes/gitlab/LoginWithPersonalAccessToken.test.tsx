@@ -27,7 +27,7 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
     expect(screen.getByTestId('login-hostname')).toHaveValue('gitlab.com');
   });
 
-  it('should open the token settings for the configured hostname', async () => {
+  it('opens the token settings for the configured hostname', async () => {
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />, {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
@@ -40,7 +40,7 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
     );
   });
 
-  it('should login using a token - success', async () => {
+  it('logs in using a token - success', async () => {
     loginWithPersonalAccessTokenMock.mockResolvedValueOnce(null);
 
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />, {
@@ -62,7 +62,7 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should login using a token - failure', async () => {
+  it('logs in using a token - failure', async () => {
     loginWithPersonalAccessTokenMock.mockRejectedValueOnce(
       new Error('GitLab API 403 Forbidden\nPRIVATE-TOKEN: leaked-pat'),
     );
@@ -84,7 +84,7 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
     });
   });
 
-  it('should open help docs in the browser', async () => {
+  it('opens help docs in the browser', async () => {
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />);
 
     await userEvent.click(screen.getByTestId('login-docs'));
@@ -93,7 +93,7 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://docs.gitlab.com/api/todos/');
   });
 
-  it('should prefill hostname from the re-auth account in location state', () => {
+  it('prefills hostname from the re-auth account in location state', () => {
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />, {
       initialEntries: [
         {

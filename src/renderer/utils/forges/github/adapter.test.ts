@@ -112,6 +112,7 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(githubAdapter.deviceFlow?.authMethod).toBe('Gitify OAuth App');
       expect(githubAdapter.deviceFlow?.start).toBeDefined();
       expect(githubAdapter.deviceFlow?.poll).toBeDefined();
+      expect(githubAdapter.deviceFlow?.describeStartError).toBeDefined();
       expect(githubAdapter.deviceFlow?.getRevokeAccessUrl).toBeDefined();
       expect(githubAdapter.customOAuthApp?.authMethod).toBe('Custom OAuth App');
       expect(githubAdapter.customOAuthApp?.validateClientId).toBeDefined();
