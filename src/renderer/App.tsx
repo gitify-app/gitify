@@ -29,10 +29,6 @@ import './App.css';
 import { AppLayout } from './components/layout/AppLayout';
 
 import { queryClient } from './utils/api/queryClient';
-import { migrateLegacyStoreToZustand } from './utils/core/storage';
-
-// Run migration from legacy local storage to Zustand stores
-migrateLegacyStoreToZustand();
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation();
