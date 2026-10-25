@@ -42,7 +42,8 @@ export function handleMainEvent<E extends EventType>(
  *
  * @param mb - The menubar instance whose window receives the event.
  * @param event - The IPC channel/event name to emit.
- * @param data - Optional payload sent with the event.
+ * @param args - Payload arguments for the event; omitted for events with no
+ * request payload.
  */
 export function sendRendererEvent<E extends EventType>(
   mb: Menubar,

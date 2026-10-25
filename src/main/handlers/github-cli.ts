@@ -36,7 +36,7 @@ const HOSTNAME_PATTERN = /^[a-z0-9][a-z0-9.-]*$/i;
  * is the only credential `gh` has.
  *
  * @param hostname - Host to read the token for (e.g. `github.com`).
- * @returns The token, or the reason the CLI could not supply one.
+ * @returns The CLI token, or a classified failure with an optional detail line.
  */
 export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTokenResult> {
   if (typeof hostname !== 'string' || !HOSTNAME_PATTERN.test(hostname)) {
