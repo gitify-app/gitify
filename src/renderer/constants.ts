@@ -34,8 +34,6 @@ export const OAUTH_SCOPE: Record<OAuthScope, OAuthScopeDetails> = {
 export const Constants = {
   // Local storage keys
   STORAGE: {
-    // Legacy storage key (deprecated - used for migration only)
-    LEGACY: 'gitify-storage',
     ACCOUNTS: 'gitify-accounts',
     FILTERS: 'gitify-filters',
     SETTINGS: 'gitify-settings',
