@@ -13,6 +13,7 @@ import { differenceInMilliseconds } from 'date-fns/differenceInMilliseconds';
 
 import {
   type Account,
+  type GitifyCheckSummary,
   type GitifyNotification,
   type GitifyPullRequestReviewer,
   type GitifyPullRequestState,
@@ -25,9 +26,11 @@ import {
 import { fetchPullByNumber } from '../client';
 import type {
   AuthorFieldsFragment,
+  CheckRunState,
   PullRequestDetailsFragment,
   PullRequestReviewFieldsFragment,
   PullRequestReviewThreadConnectionFieldsFragment,
+  StatusState,
 } from '../graphql/generated/graphql';
 import { formatGitHubNotificationUser } from '../users';
 import { DefaultHandler, defaultHandler } from './default';
@@ -106,6 +109,7 @@ class PullRequestHandler extends DefaultHandler {
       htmlUrl: activity?.url ?? pr.url,
       reactionsCount: prReactionCount,
       reactionGroups: prReactionGroup ?? undefined,
+      checks: getCheckSummary(pr.statusCheckRollup),
     };
   }
 
@@ -198,6 +202,77 @@ export function getClosestPullRequestActivity(
     );
     return distance < closestDistance ? activity : closest;
   }, undefined);
+}
+
+type CheckOutcome = 'passed' | 'failed' | 'pending';
+
+const checkRunOutcomes: Record<CheckRunState, CheckOutcome> = {
+  SUCCESS: 'passed',
+  NEUTRAL: 'passed',
+  SKIPPED: 'passed',
+  COMPLETED: 'passed',
+  FAILURE: 'failed',
+  CANCELLED: 'failed',
+  TIMED_OUT: 'failed',
+  ACTION_REQUIRED: 'failed',
+  STARTUP_FAILURE: 'failed',
+  STALE: 'failed',
+  QUEUED: 'pending',
+  IN_PROGRESS: 'pending',
+  PENDING: 'pending',
+  WAITING: 'pending',
+};
+
+const statusContextOutcomes: Record<StatusState, CheckOutcome> = {
+  SUCCESS: 'passed',
+  FAILURE: 'failed',
+  ERROR: 'failed',
+  PENDING: 'pending',
+  EXPECTED: 'pending',
+};
+
+export function getCheckSummary(
+  rollup: PullRequestDetailsFragment['statusCheckRollup'],
+): GitifyCheckSummary | undefined {
+  if (!rollup) {
+    return undefined;
+  }
+
+  const summary: GitifyCheckSummary = {
+    state: 'PENDING',
+    passed: 0,
+    failed: 0,
+    pending: 0,
+    total: 0,
+  };
+
+  const counts = [
+    ...(rollup.contexts.checkRunCountsByState ?? []).map(({ state, count }) => ({
+      outcome: checkRunOutcomes[state] ?? 'pending',
+      count,
+    })),
+    ...(rollup.contexts.statusContextCountsByState ?? []).map(({ state, count }) => ({
+      outcome: statusContextOutcomes[state] ?? 'pending',
+      count,
+    })),
+  ];
+
+  for (const { outcome, count } of counts) {
+    summary[outcome] += count;
+    summary.total += count;
+  }
+
+  if (!summary.total) {
+    return undefined;
+  }
+
+  if (summary.failed) {
+    summary.state = 'FAILURE';
+  } else if (!summary.pending) {
+    summary.state = 'SUCCESS';
+  }
+
+  return summary;
 }
 
 export function getReviewRequestTypes(

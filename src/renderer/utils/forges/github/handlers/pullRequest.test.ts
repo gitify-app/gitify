@@ -22,6 +22,7 @@ import type {
   PullRequestReviewState,
 } from '../graphql/generated/graphql';
 import {
+  getCheckSummary,
   getClosestPullRequestActivity,
   getReviewRequestTypes,
   getPullRequestReviewers,
@@ -910,6 +911,71 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       expect(result).toEqual([
         { user: 'copilot[ai]', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
       ]);
+    });
+  });
+
+  describe('getCheckSummary', () => {
+    it('returns undefined when there is no rollup', () => {
+      expect(getCheckSummary(null)).toBeUndefined();
+    });
+
+    it('returns undefined when there are no checks', () => {
+      expect(
+        getCheckSummary({
+          state: 'SUCCESS',
+          contexts: {
+            checkRunCountsByState: [{ state: 'SUCCESS', count: 0 }],
+            statusContextCountsByState: [],
+          },
+        }),
+      ).toBeUndefined();
+    });
+
+    it('combines check runs and status contexts', () => {
+      expect(
+        getCheckSummary({
+          state: 'SUCCESS',
+          contexts: {
+            checkRunCountsByState: [
+              { state: 'SUCCESS', count: 45 },
+              { state: 'SKIPPED', count: 3 },
+              { state: 'NEUTRAL', count: 1 },
+            ],
+            statusContextCountsByState: [{ state: 'SUCCESS', count: 1 }],
+          },
+        }),
+      ).toEqual({ state: 'SUCCESS', passed: 50, failed: 0, pending: 0, total: 50 });
+    });
+
+    it('reports pending while checks are still running', () => {
+      expect(
+        getCheckSummary({
+          state: 'PENDING',
+          contexts: {
+            checkRunCountsByState: [
+              { state: 'SUCCESS', count: 13 },
+              { state: 'IN_PROGRESS', count: 1 },
+            ],
+            statusContextCountsByState: [{ state: 'EXPECTED', count: 1 }],
+          },
+        }),
+      ).toEqual({ state: 'PENDING', passed: 13, failed: 0, pending: 2, total: 15 });
+    });
+
+    it('reports failure when any check fails, even if others are pending', () => {
+      expect(
+        getCheckSummary({
+          state: 'FAILURE',
+          contexts: {
+            checkRunCountsByState: [
+              { state: 'SUCCESS', count: 10 },
+              { state: 'TIMED_OUT', count: 1 },
+              { state: 'QUEUED', count: 1 },
+            ],
+            statusContextCountsByState: [{ state: 'ERROR', count: 1 }],
+          },
+        }),
+      ).toEqual({ state: 'FAILURE', passed: 10, failed: 2, pending: 1, total: 13 });
     });
   });
 

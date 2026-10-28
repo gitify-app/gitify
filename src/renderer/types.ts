@@ -402,6 +402,8 @@ export interface GitifySubject {
   reviewDecision?: GitifyReviewDecision;
   /** PRs closing issues */
   linkedIssues?: GitifyLinkedIssue[];
+  /** CI check summary for the PR's head commit */
+  checks?: GitifyCheckSummary;
   /** Total comment count */
   commentCount?: number;
   /** Labels names and colors */
@@ -535,6 +537,14 @@ export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 export type GitifyLabels = LabelFieldsFragment;
 
 export type GitifyReviewDecision = PullRequestReviewDecision;
+
+export interface GitifyCheckSummary {
+  state: 'SUCCESS' | 'FAILURE' | 'PENDING';
+  passed: number;
+  failed: number;
+  pending: number;
+  total: number;
+}
 
 export interface GitifyPullRequestReviewer {
   user: string;

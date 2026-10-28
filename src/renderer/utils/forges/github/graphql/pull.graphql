@@ -94,6 +94,19 @@ fragment PullRequestDetails on PullRequest {
   reactionGroups {
     ...ReactionGroupFields
   }
+  statusCheckRollup {
+    state
+    contexts {
+      checkRunCountsByState {
+        state
+        count
+      }
+      statusContextCountsByState {
+        state
+        count
+      }
+    }
+  }
 }
 
 fragment PullRequestReviewFields on PullRequestReview {

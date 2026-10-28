@@ -160,6 +160,7 @@ export function mockPullRequestResponseNode(mocks: {
       totalCount: 0,
     },
     reactionGroups: noReactionGroups,
+    statusCheckRollup: null,
   } satisfies PullRequestDetailsFragment;
 }
 
