@@ -159,6 +159,7 @@ export type UpdateFilter = <K extends FilterKey>(
 export interface FiltersActions {
   hasActiveFilters: () => boolean;
   updateFilter: UpdateFilter;
+  pruneAccounts: (validAccounts: AccountUUID[]) => void;
   reset: () => void;
 }
 
