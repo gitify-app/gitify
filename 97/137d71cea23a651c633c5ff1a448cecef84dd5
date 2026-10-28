@@ -1,0 +1,20 @@
+src/renderer/routes/github/DeviceFlowAuthorize.test.tsx
+  h_ac004aadb63da9 33
+src/renderer/routes/github/DeviceFlowAuthorize.tsx
+  h_ac004aadb63da9 323
+src/renderer/routes/github/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 21,28-35
+src/renderer/routes/github/LoginWithPersonalAccessToken.tsx
+  h_ac004aadb63da9 14-15,20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "97137d71cea23a651c633c5ff1a448cecef84dd5",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
