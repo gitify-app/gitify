@@ -1,0 +1,20 @@
+src/renderer/components/metrics/LinkedIssuesPill.tsx
+  h_ac004aadb63da9 24
+src/renderer/components/metrics/StackedPrsPill.test.tsx
+  h_ac004aadb63da9 14,20
+src/renderer/components/metrics/StackedPrsPill.tsx
+  h_ac004aadb63da9 25-27,31
+src/renderer/components/metrics/__snapshots__/LinkedIssuesPill.test.tsx.snap
+  h_ac004aadb63da9 7,64,73,130
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1ab8e9512916608cee4926c4870dd2b440dc946e",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
