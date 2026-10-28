@@ -124,7 +124,11 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       <MetricGroup
         notification={{
           ...hierarchyNotification(),
-          subject: { ...hierarchyNotification().subject, commentCount: 3 },
+          subject: {
+            ...hierarchyNotification().subject,
+            checks: { state: 'FAILURE', passed: 9, failed: 1, pending: 0, total: 10 },
+            commentCount: 3,
+          },
         }}
       />,
       { settings: { ...mockSettings, showPills: true } },
@@ -134,6 +138,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       tree.getByText('Bug'),
       tree.getByText('#456'),
       tree.getByText('2/5'),
+      tree.getByText('9/10'),
       tree.getByText('3'),
     ];
 
