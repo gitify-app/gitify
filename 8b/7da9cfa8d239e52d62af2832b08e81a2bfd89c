@@ -1,0 +1,46 @@
+src/renderer/components/metrics/CommentsPill.tsx
+  h_ac004aadb63da9 21
+src/renderer/components/metrics/IssueTypesPill.test.tsx
+  h_ac004aadb63da9 17
+src/renderer/components/metrics/IssueTypesPill.tsx
+  h_ac004aadb63da9 16-23
+src/renderer/components/metrics/LabelsPill.tsx
+  h_ac004aadb63da9 6,48-52,55
+src/renderer/components/metrics/LinkedIssuesPill.tsx
+  h_ac004aadb63da9 25
+src/renderer/components/metrics/MilestonePill.tsx
+  h_ac004aadb63da9 18
+src/renderer/components/metrics/ReactionsPill.tsx
+  h_ac004aadb63da9 6,52-55,58
+src/renderer/components/metrics/ReviewsPill.tsx
+  h_ac004aadb63da9 44,56
+src/renderer/components/metrics/StackedPrsPill.test.tsx
+  h_ac004aadb63da9 14-16
+src/renderer/components/metrics/StackedPrsPill.tsx
+  h_ac004aadb63da9 25-26,29,31
+src/renderer/components/metrics/__snapshots__/CommentsPill.test.tsx.snap
+  h_ac004aadb63da9 7,71
+src/renderer/components/metrics/__snapshots__/LabelsPill.test.tsx.snap
+  h_ac004aadb63da9 7
+src/renderer/components/metrics/__snapshots__/LinkedIssuesPill.test.tsx.snap
+  h_ac004aadb63da9 7,74
+src/renderer/components/metrics/__snapshots__/MetricGroup.test.tsx.snap
+  h_ac004aadb63da9 12,71
+src/renderer/components/metrics/__snapshots__/MilestonePill.test.tsx.snap
+  h_ac004aadb63da9 7,65
+src/renderer/components/metrics/__snapshots__/ReactionsPill.test.tsx.snap
+  h_ac004aadb63da9 7,205
+src/renderer/components/metrics/__snapshots__/ReviewsPill.test.tsx.snap
+  h_ac004aadb63da9 9,68,127
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8b7da9cfa8d239e52d62af2832b08e81a2bfd89c",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
