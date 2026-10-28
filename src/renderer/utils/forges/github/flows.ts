@@ -81,7 +81,7 @@ export function describeDeviceFlowStartError(
   switch (errorCode) {
     case 'device_flow_disabled':
       return clientId
-        ? `Device flow is not enabled for this OAuth app. Enable it in that app's settings at https://${hostname}/settings/applications/${clientId}, then try again.`
+        ? `Device flow is not enabled for this OAuth app. Enable it in that app's settings under https://${hostname}/settings/developers, then try again.`
         : `Device flow is not enabled for this OAuth app. Enable it in the app's settings on ${hostname}, then try again.`;
     case 'incorrect_client_credentials':
       return `The client ID is not valid for ${hostname}. Check it and try again.`;

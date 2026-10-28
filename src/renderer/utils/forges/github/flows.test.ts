@@ -190,9 +190,7 @@ describe('renderer/utils/forges/github/flows.ts', () => {
       );
 
       expect(message).toContain('Device flow is not enabled');
-      expect(message).toContain(
-        'https://github.example.com/settings/applications/CUSTOM_CLIENT_ID_123',
-      );
+      expect(message).toContain('https://github.example.com/settings/developers');
     });
 
     it('names an unrecognized client ID as invalid for the host', () => {
