@@ -51,7 +51,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
     popover="auto"
     role="tooltip"
   >
-    Milestone 1
+    Milestone: Milestone 1 (closed)
   </span>
 </div>
 `;
@@ -107,7 +107,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
     popover="auto"
     role="tooltip"
   >
-    Milestone 1
+    Milestone: Milestone 1 (open)
   </span>
 </div>
 `;
