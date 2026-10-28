@@ -147,10 +147,14 @@
       "name": "node",
       "version": "24.22.1",
       "onFail": "warn"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.15.0",
+      "onFail": "download"
     }
   },
   "engines": {
     "node": ">=24"
-  },
-  "packageManager": "pnpm@12.15.0"
+  }
 }
