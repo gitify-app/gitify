@@ -119,6 +119,36 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('2/5')).toBeInTheDocument();
   });
 
+  it('orders pills from classification to hierarchy to activity', () => {
+    const tree = renderWithProviders(
+      <MetricGroup
+        notification={{
+          ...hierarchyNotification(),
+          subject: {
+            ...hierarchyNotification().subject,
+            checks: { state: 'FAILURE', passed: 9, failed: 1, pending: 0, total: 10 },
+            commentCount: 3,
+          },
+        }}
+      />,
+      { settings: { ...mockSettings, showPills: true } },
+    );
+
+    const ordered = [
+      tree.getByText('Bug'),
+      tree.getByText('#456'),
+      tree.getByText('2/5'),
+      tree.getByText('9/10'),
+      tree.getByText('3'),
+    ];
+
+    for (let i = 1; i < ordered.length; i++) {
+      expect(
+        ordered[i - 1].compareDocumentPosition(ordered[i]) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    }
+  });
+
   it('hides metrics when pills are disabled', () => {
     const tree = renderWithProviders(<MetricGroup notification={hierarchyNotification()} />, {
       settings: { ...mockSettings, showPills: false },

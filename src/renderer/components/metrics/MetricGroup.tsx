@@ -31,7 +31,9 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
     <div className="flex min-w-0 flex-wrap gap-1">
       <IssueTypesPill issueType={notification.subject.issueType} />
 
-      <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
+      <ParentPill parent={notification.subject.parentIssue} />
+
+      <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
 
       <StackedPrsPill
         isStacked={notification.subject.isStacked}
@@ -39,10 +41,9 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
         stackDepth={notification.subject.stackDepth}
       />
 
-      <ReactionsPill
-        reactionGroups={notification.subject.reactionGroups ?? []}
-        reactionsCount={notification.subject.reactionsCount ?? 0}
-      />
+      <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
+
+      <MilestonePill milestone={notification.subject.milestone} />
 
       <ChecksPill checks={notification.subject.checks} />
 
@@ -53,11 +54,10 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
 
       <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
 
-      <MilestonePill milestone={notification.subject.milestone} />
-
-      <ParentPill parent={notification.subject.parentIssue} />
-
-      <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
+      <ReactionsPill
+        reactionGroups={notification.subject.reactionGroups ?? []}
+        reactionsCount={notification.subject.reactionsCount ?? 0}
+      />
 
       <LabelsPill
         labels={notification.subject.labels ?? []}
