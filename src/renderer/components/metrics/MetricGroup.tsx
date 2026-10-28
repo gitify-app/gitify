@@ -2,6 +2,7 @@ import { useSettingsStore } from '../../stores';
 
 import type { GitifyNotification } from '../../types';
 
+import { ChecksPill } from './ChecksPill';
 import { CommentsPill } from './CommentsPill';
 import { IssueTypesPill } from './IssueTypesPill';
 import { LabelsPill } from './LabelsPill';
@@ -42,6 +43,8 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
         reactionGroups={notification.subject.reactionGroups ?? []}
         reactionsCount={notification.subject.reactionsCount ?? 0}
       />
+
+      <ChecksPill checks={notification.subject.checks} />
 
       <ReviewsPill
         reviewDecision={notification.subject.reviewDecision}
