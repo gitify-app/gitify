@@ -1,0 +1,18 @@
+src/renderer/components/metrics/MilestonePill.test.tsx
+  h_ac004aadb63da9 1-2,26,40
+src/renderer/components/metrics/MilestonePill.tsx
+  h_ac004aadb63da9 16-18,21-22
+src/renderer/components/metrics/__snapshots__/MilestonePill.test.tsx.snap
+  h_ac004aadb63da9 55,112
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "acb837459071ab089b768c91a9125a864149c510",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
