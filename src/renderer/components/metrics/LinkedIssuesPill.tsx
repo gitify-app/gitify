@@ -21,7 +21,7 @@ export function LinkedIssuesPill({ linkedIssues }: Readonly<LinkedIssuesPillProp
     linkedIssues.length,
     'issue',
     (_, noun) =>
-      `Linked to ${noun}: ${linkedIssues.map((issue) => formatGitHubNumber(issue.number)).join(', ')}`,
+      `Linked ${noun}: ${linkedIssues.map((issue) => formatGitHubNumber(issue.number)).join(', ')}`,
   );
 
   const handleClick =

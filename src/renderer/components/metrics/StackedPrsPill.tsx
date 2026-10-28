@@ -22,11 +22,13 @@ export function StackedPrsPill({
   const metric =
     stackPosition != null && stackDepth != null ? `${stackPosition}/${stackDepth}` : undefined;
 
-  const description = 'Part of a stacked pull request series';
+  const description = metric
+    ? `Stacked pull request: ${stackPosition} of ${stackDepth}`
+    : 'Stacked pull request';
 
   return (
     <MetricPill
-      ariaLabel={metric ? `${description} (${stackPosition} of ${stackDepth})` : description}
+      ariaLabel={description}
       color={IconColor.GRAY}
       contents={description}
       icon={StackIcon}
