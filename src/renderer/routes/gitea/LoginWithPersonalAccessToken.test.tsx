@@ -108,7 +108,7 @@ describe('renderer/routes/gitea/LoginWithPersonalAccessToken.tsx', () => {
   it('opens help docs in the browser', async () => {
     renderWithProviders(<GiteaLoginWithPersonalAccessTokenRoute />);
 
-    await userEvent.click(screen.getByTestId('login-docs'));
+    await userEvent.click(screen.getByRole('button', { name: 'Docs' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(

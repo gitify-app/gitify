@@ -89,7 +89,7 @@
     "@graphql-codegen/cli": "7.4.6",
     "@graphql-codegen/schema-ast": "6.1.1",
     "@graphql-codegen/typed-document-node": "7.2.0",
-    "@graphql-codegen/typescript-operations": "6.1.10",
+    "@graphql-codegen/typescript-operations": "6.2.0",
     "@graphql-typed-document-node/core": "3.2.0",
     "@legendapp/list": "3.6.0",
     "@octokit/core": "7.0.8",
@@ -103,9 +103,9 @@
     "@octokit/types": "18.0.0",
     "@parcel/watcher": "2.6.0",
     "@primer/css": "22.3.2",
-    "@primer/octicons-react": "19.41.0",
+    "@primer/octicons-react": "19.42.0",
     "@primer/primitives": "11.10.0",
-    "@primer/react": "38.42.0",
+    "@primer/react": "38.43.0",
     "@tailwindcss/vite": "4.3.3",
     "@tanstack/react-query": "5.104.5",
     "@testing-library/jest-dom": "7.0.1",
@@ -126,7 +126,7 @@
     "electron-builder": "26.18.0",
     "final-form": "5.0.1",
     "graphql": "17.0.2",
-    "graphql-config": "5.1.8",
+    "graphql-config": "6.0.0",
     "happy-dom": "21.0.4",
     "husky": "9.1.7",
     "playwright": "1.64.1",
@@ -142,8 +142,19 @@
     "vitest": "catalog:",
     "zustand": "5.0.16"
   },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.15.0",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "26.13.0",
+      "onFail": "warn"
+    }
+  },
   "engines": {
     "node": ">=24"
-  },
-  "packageManager": "pnpm@12.15.0"
+  }
 }

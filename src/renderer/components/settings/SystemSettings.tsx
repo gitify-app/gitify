@@ -158,7 +158,6 @@ export function SystemSettings() {
 
         {shortcutRegistrationError && (
           <Banner
-            data-testid="banner-shortcut-registration-error"
             description={
               <Stack direction="vertical" gap="condensed">
                 <Text>{shortcutRegistrationError}</Text>

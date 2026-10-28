@@ -130,17 +130,33 @@ describe('renderer/routes/Settings.tsx', () => {
     const alerts = section('Alerts');
     const system = section('System');
 
-    expect(within(inbox).getByTestId('switch-showPills')).toBeInTheDocument();
-    expect(within(inbox).getByTestId('switch-wrapNotificationTitle')).toBeInTheDocument();
-    expect(within(inbox).queryByTestId('switch-showNotifications')).not.toBeInTheDocument();
     expect(
-      within(appearance).queryByTestId('switch-wrapNotificationTitle'),
+      within(inbox).getByRole('button', { name: 'Show notification metrics', hidden: true }),
+    ).toBeInTheDocument();
+    expect(
+      within(inbox).getByRole('button', { name: 'Show full notification title' }),
+    ).toBeInTheDocument();
+    expect(
+      within(inbox).queryByRole('button', { name: 'Show desktop notifications' }),
     ).not.toBeInTheDocument();
-    expect(within(alerts).getByTestId('switch-showNotifications')).toBeInTheDocument();
-    expect(within(alerts).getByTestId('switch-showUpdateNotifications')).toBeInTheDocument();
-    expect(within(alerts).queryByTestId('switch-showPills')).not.toBeInTheDocument();
-    expect(within(system).queryByTestId('switch-showNotifications')).not.toBeInTheDocument();
-    expect(within(system).queryByTestId('switch-showUpdateNotifications')).not.toBeInTheDocument();
+    expect(
+      within(appearance).queryByRole('button', { name: 'Show full notification title' }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(alerts).getByRole('button', { name: 'Show desktop notifications' }),
+    ).toBeInTheDocument();
+    expect(
+      within(alerts).getByRole('button', { name: 'Show app update notifications' }),
+    ).toBeInTheDocument();
+    expect(
+      within(alerts).queryByRole('button', { name: 'Show notification metrics', hidden: true }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(system).queryByRole('button', { name: 'Show desktop notifications' }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(system).queryByRole('button', { name: 'Show app update notifications' }),
+    ).not.toBeInTheDocument();
   });
 
   it('goes back by pressing the icon', async () => {
@@ -151,7 +167,7 @@ describe('renderer/routes/Settings.tsx', () => {
       });
     });
 
-    await userEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
     expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledTimes(1);

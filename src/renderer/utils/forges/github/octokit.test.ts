@@ -1,5 +1,5 @@
 import {
-  mockGitHubAppAccount,
+  mockGitifyOAuthAppAccount,
   mockGitHubCliAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -113,7 +113,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       const getGitHubAPIBaseUrlSpy = vi.spyOn(utils, 'getGitHubAPIBaseUrl');
       getGitHubAPIBaseUrlSpy.mockReturnValue(new URL('https://api.github.com/'));
 
-      const octokit1 = await createOctokitClient(mockGitHubAppAccount, 'rest');
+      const octokit1 = await createOctokitClient(mockGitifyOAuthAppAccount, 'rest');
 
       const octokit2 = await createOctokitClient(mockGitHubCloudAccount, 'rest');
 

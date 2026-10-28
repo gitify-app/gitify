@@ -3,6 +3,7 @@ import { IssueLabelToken, LabelGroup } from '@primer/react';
 
 import { type GitifyReactionGroup, IconColor } from '../../types';
 
+import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
 export interface ReactionsPillProps {
@@ -48,8 +49,13 @@ export function ReactionsPill({ reactionsCount, reactionGroups }: Readonly<React
     </LabelGroup>
   );
 
+  const reactionsDescription = `${formatMetricDescription(reactionsCount, 'reaction')}: ${visibleReactionGroups
+    .map((rg) => `${reactionEmojiMap[rg.content]} ${rg.reactors.totalCount}`)
+    .join(', ')}`;
+
   return (
     <MetricPill
+      ariaLabel={reactionsDescription}
       color={IconColor.GRAY}
       contents={reactionsContent}
       icon={SmileyIcon}

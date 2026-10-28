@@ -28,7 +28,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
   it('let us go back', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
-    await userEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(-1);
@@ -138,7 +138,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.click(screen.getByTestId('login-docs'));
+    await userEvent.click(screen.getByRole('button', { name: 'Docs' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });

@@ -144,7 +144,7 @@ export function SettingsChoice({
           >
             {label}
           </button>
-          {tooltip && <HelpPopover name={`tooltip-${name}`} content={tooltip} />}
+          {tooltip && <HelpPopover content={tooltip} label={label} name={`tooltip-${name}`} />}
         </div>
         <div className="shrink-0">{control}</div>
       </div>

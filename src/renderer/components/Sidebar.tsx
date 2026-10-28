@@ -42,7 +42,6 @@ export function Sidebar() {
       <Stack align="center" direction="vertical" gap="condensed" padding="normal">
         <IconButton
           aria-label={APPLICATION.NAME}
-          data-testid="sidebar-home"
           description="Home"
           icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
@@ -56,7 +55,6 @@ export function Sidebar() {
           <>
             <IconButton
               aria-label="Notifications"
-              data-testid="sidebar-notifications"
               description={`${notificationCount} ${fetchReadNotifications ? 'notifications' : 'unread notifications'} ↗`}
               icon={BellIcon}
               keybindingHint={shortcuts.myNotifications.key}
@@ -68,7 +66,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label="Toggle focused mode"
-              data-testid="sidebar-focused-mode"
               description={
                 participating ? 'Focused (participating only)' : 'Participating and watching'
               }
@@ -82,7 +79,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label="Filters"
-              data-testid="sidebar-filter-notifications"
               description="Filter notifications"
               icon={FilterIcon}
               keybindingHint={shortcuts.filters.key}
@@ -94,7 +90,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label="My issues ↗"
-              data-testid="sidebar-my-issues"
               icon={IssueOpenedIcon}
               keybindingHint={shortcuts.myIssues.key}
               onClick={() => shortcuts.myIssues.action()}
@@ -105,7 +100,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label="My pull requests ↗"
-              data-testid="sidebar-my-pull-requests"
               icon={GitPullRequestIcon}
               keybindingHint={shortcuts.myPullRequests.key}
               onClick={() => shortcuts.myPullRequests.action()}
@@ -122,7 +116,6 @@ export function Sidebar() {
           <>
             <IconButton
               aria-label="Refresh"
-              data-testid="sidebar-refresh"
               description="Refresh notifications"
               loading={isLoading || isFetching}
               disabled={isLoading || isFetching}
@@ -136,7 +129,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label="Settings"
-              data-testid="sidebar-settings"
               description="Settings"
               icon={GearIcon}
               keybindingHint={shortcuts.settings.key}
@@ -151,7 +143,6 @@ export function Sidebar() {
         {!isLoggedIn && (
           <IconButton
             aria-label={`Quit ${APPLICATION.NAME}`}
-            data-testid="sidebar-quit"
             icon={XCircleIcon}
             keybindingHint={shortcuts.quit.key}
             onClick={() => shortcuts.quit.action()}

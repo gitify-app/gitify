@@ -47,7 +47,6 @@ const LOGIN_KEYS = [
   'loginWithDeviceFlowPoll',
   'loginWithDeviceFlowComplete',
   'loginWithCli',
-  'loginWithOAuthApp',
   'loginWithPersonalAccessToken',
   'logoutFromAccount',
 ] as const;

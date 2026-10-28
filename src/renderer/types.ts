@@ -16,6 +16,7 @@ import type {
   IssueStateReason,
   LabelFieldsFragment,
   MilestoneFieldsFragment,
+  PullRequestReviewDecision,
   PullRequestReviewState,
   PullRequestState,
   ReactionGroupFieldsFragment,
@@ -27,13 +28,9 @@ type Brand<B> = { [__brand]: B };
 
 export type Branded<T, B> = T & Brand<B>;
 
-export type AuthCode = Branded<string, 'AuthCode'>;
-
 export type Token = Branded<string, 'Token'>;
 
 export type ClientID = Branded<string, 'ClientID'>;
-
-export type ClientSecret = Branded<string, 'ClientSecret'>;
 
 export type Hostname = Branded<string, 'Hostname'>;
 
@@ -73,6 +70,11 @@ export interface Account {
   version?: string;
   hostname: Hostname;
   token: Token;
+  /**
+   * OAuth app client ID for an account authorized through a user-supplied
+   * custom OAuth app; absent for Gitify's own preconfigured app.
+   */
+  clientId?: ClientID;
   /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
   username?: string;
   user: GitifyUser | null;
@@ -396,8 +398,12 @@ export interface GitifySubject {
   reviewRequested?: ReviewRequestType[];
   /** PR reviewer states and review thread resolution counts */
   reviewers?: GitifyPullRequestReviewer[];
+  /** Overall PR review status, only set while the PR is open */
+  reviewDecision?: GitifyReviewDecision;
   /** PRs closing issues */
-  linkedIssues?: string[];
+  linkedIssues?: GitifyLinkedIssue[];
+  /** CI check summary for the PR's head commit */
+  checks?: GitifyCheckSummary;
   /** Total comment count */
   commentCount?: number;
   /** Labels names and colors */
@@ -496,6 +502,11 @@ export interface GitifyIssueType {
 }
 
 /** GitHub sub-issue parent context */
+export interface GitifyLinkedIssue {
+  number: number;
+  url: Link;
+}
+
 export interface GitifyParentIssue {
   number: number;
   title: string;
@@ -524,6 +535,16 @@ export type GitifyMilestone = MilestoneFieldsFragment;
 export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 
 export type GitifyLabels = LabelFieldsFragment;
+
+export type GitifyReviewDecision = PullRequestReviewDecision;
+
+export interface GitifyCheckSummary {
+  state: 'SUCCESS' | 'FAILURE' | 'PENDING';
+  passed: number;
+  failed: number;
+  pending: number;
+  total: number;
+}
 
 export interface GitifyPullRequestReviewer {
   user: string;

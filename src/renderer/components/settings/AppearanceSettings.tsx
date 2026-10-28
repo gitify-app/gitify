@@ -118,7 +118,6 @@ export function AppearanceSettings() {
           <ButtonGroup>
             <IconButton
               aria-label="Zoom out"
-              data-testid="settings-zoom-out"
               disabled={!canDecreaseZoom(zoomPercentage)}
               icon={ZoomOutIcon}
               onClick={() => decreaseZoom(zoomPercentage)}
@@ -137,7 +136,6 @@ export function AppearanceSettings() {
 
             <IconButton
               aria-label="Zoom in"
-              data-testid="settings-zoom-in"
               disabled={!canIncreaseZoom(zoomPercentage)}
               icon={ZoomInIcon}
               onClick={() => increaseZoom(zoomPercentage)}
@@ -147,7 +145,6 @@ export function AppearanceSettings() {
 
             <IconButton
               aria-label="Reset zoom"
-              data-testid="settings-zoom-reset"
               icon={SyncIcon}
               onClick={() => resetZoomLevel()}
               size="small"

@@ -4,6 +4,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
 <div>
   <button
     aria-describedby="_r_1_"
+    aria-label="Milestone: Milestone 1 (closed)"
     type="button"
   >
     <span
@@ -11,7 +12,6 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -52,7 +52,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
     popover="auto"
     role="tooltip"
   >
-    Milestone 1
+    Milestone: Milestone 1 (closed)
   </span>
 </div>
 `;
@@ -61,6 +61,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
 <div>
   <button
     aria-describedby="_r_0_"
+    aria-label="Milestone: Milestone 1 (open)"
     type="button"
   >
     <span
@@ -68,7 +69,6 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -109,7 +109,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
     popover="auto"
     role="tooltip"
   >
-    Milestone 1
+    Milestone: Milestone 1 (open)
   </span>
 </div>
 `;

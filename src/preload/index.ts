@@ -252,16 +252,6 @@ export const api = {
   },
 
   /**
-   * Register a callback invoked when the main process delivers an OAuth callback URL.
-   *
-   * @param callback - Called with the full callback URL (e.g. `gitify://oauth?code=...`).
-   * @returns A function that removes the listener.
-   */
-  onAuthCallback: (callback: (url: string) => void) => {
-    return onRendererEvent(EVENTS.AUTH_CALLBACK, (_, url) => callback(url));
-  },
-
-  /**
    * Display a native OS notification.
    *
    * Clicking the notification opens `url` in the browser (hiding the app window),

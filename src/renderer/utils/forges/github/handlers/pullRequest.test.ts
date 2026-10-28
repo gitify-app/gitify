@@ -22,6 +22,7 @@ import type {
   PullRequestReviewState,
 } from '../graphql/generated/graphql';
 import {
+  getCheckSummary,
   getClosestPullRequestActivity,
   getReviewRequestTypes,
   getPullRequestReviewers,
@@ -119,6 +120,32 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         { user: 'reviewer-1', threads: { resolved: 0, total: 1 } },
         { user: 'Unknown reviewer', threads: { resolved: 1, total: 1 } },
       ]);
+    });
+
+    it('sets the review decision for open pull requests', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.reviewDecision = 'REVIEW_REQUIRED';
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.reviewDecision).toBe('REVIEW_REQUIRED');
+    });
+
+    it('omits the review decision for draft pull requests', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN', isDraft: true });
+      mockPullRequest.reviewDecision = 'REVIEW_REQUIRED';
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.reviewDecision).toBeUndefined();
     });
 
     it('draft pull request state', async () => {
@@ -459,6 +486,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         nodes: [
           {
             number: 789,
+            url: 'https://github.com/gitify-app/notifications-test/issues/789' as Link,
           },
         ],
       };
@@ -489,7 +517,12 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
-        linkedIssues: ['#789'],
+        linkedIssues: [
+          {
+            number: 789,
+            url: 'https://github.com/gitify-app/notifications-test/issues/789' as Link,
+          },
+        ],
         commentCount: 0,
         milestone: undefined,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
@@ -878,6 +911,71 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       expect(result).toEqual([
         { user: 'copilot[ai]', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
       ]);
+    });
+  });
+
+  describe('getCheckSummary', () => {
+    it('returns undefined when there is no rollup', () => {
+      expect(getCheckSummary(null)).toBeUndefined();
+    });
+
+    it('returns undefined when there are no checks', () => {
+      expect(
+        getCheckSummary({
+          state: 'SUCCESS',
+          contexts: {
+            checkRunCountsByState: [{ state: 'SUCCESS', count: 0 }],
+            statusContextCountsByState: [],
+          },
+        }),
+      ).toBeUndefined();
+    });
+
+    it('combines check runs and status contexts', () => {
+      expect(
+        getCheckSummary({
+          state: 'SUCCESS',
+          contexts: {
+            checkRunCountsByState: [
+              { state: 'SUCCESS', count: 45 },
+              { state: 'SKIPPED', count: 3 },
+              { state: 'NEUTRAL', count: 1 },
+            ],
+            statusContextCountsByState: [{ state: 'SUCCESS', count: 1 }],
+          },
+        }),
+      ).toEqual({ state: 'SUCCESS', passed: 50, failed: 0, pending: 0, total: 50 });
+    });
+
+    it('reports pending while checks are still running', () => {
+      expect(
+        getCheckSummary({
+          state: 'PENDING',
+          contexts: {
+            checkRunCountsByState: [
+              { state: 'SUCCESS', count: 13 },
+              { state: 'IN_PROGRESS', count: 1 },
+            ],
+            statusContextCountsByState: [{ state: 'EXPECTED', count: 1 }],
+          },
+        }),
+      ).toEqual({ state: 'PENDING', passed: 13, failed: 0, pending: 2, total: 15 });
+    });
+
+    it('reports failure when any check fails, even if others are pending', () => {
+      expect(
+        getCheckSummary({
+          state: 'FAILURE',
+          contexts: {
+            checkRunCountsByState: [
+              { state: 'SUCCESS', count: 10 },
+              { state: 'TIMED_OUT', count: 1 },
+              { state: 'QUEUED', count: 1 },
+            ],
+            statusContextCountsByState: [{ state: 'ERROR', count: 1 }],
+          },
+        }),
+      ).toEqual({ state: 'FAILURE', passed: 10, failed: 2, pending: 1, total: 13 });
     });
   });
 

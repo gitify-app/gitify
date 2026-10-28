@@ -1,0 +1,64 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/metrics/ChecksPill.tsx > renders passing checks 1`] = `
+<div>
+  <button
+    aria-describedby="_r_0_"
+    aria-label="Checks: 50 passed"
+    type="button"
+  >
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
+      data-size="small"
+      data-variant="secondary"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-check text-gitify-icon-open"
+          data-component="Octicon"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="12"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="12"
+        >
+          <path
+            d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+          />
+        </svg>
+        <span
+          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          50/50
+        </span>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
+    data-direction="s"
+    id="_r_0_"
+    popover="auto"
+    role="tooltip"
+  >
+    Checks: 50 passed
+  </span>
+</div>
+`;

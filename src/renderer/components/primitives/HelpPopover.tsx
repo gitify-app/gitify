@@ -7,6 +7,8 @@ import { cn } from 'cn';
 
 export interface HelpPopoverProps {
   name: string;
+  /** Accessible name for the help button, e.g. the label of the control it explains. */
+  label: string;
   content: ReactNode | string;
 }
 
@@ -74,7 +76,7 @@ export function HelpPopover(props: Readonly<HelpPopoverProps>) {
       renderAnchor={(anchorProps) => (
         <IconButton
           {...anchorProps}
-          aria-label={props.name}
+          aria-label={`Help: ${props.label}`}
           className="text-gitify-tooltip-icon!"
           data-testid={`tooltip-icon-${props.name}`}
           icon={QuestionIcon}

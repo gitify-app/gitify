@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../__helpers__/test-utils';
 import {
-  mockGitHubAppAccount,
+  mockGitifyOAuthAppAccount,
   mockGitHubCliAccount,
-  mockOAuthAccount,
+  mockCustomOAuthAppAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
 
@@ -19,7 +19,7 @@ const navigateMock = vi.fn();
 // Mutable variable — individual tests reassign this before rendering to simulate
 // different account states without needing vi.doMock.
 let mockLocationAccount: Account = {
-  ...mockGitHubAppAccount,
+  ...mockGitifyOAuthAppAccount,
   scopes: ['read:user', 'notifications', 'repo'],
 };
 
@@ -35,7 +35,7 @@ vi.mock('react-router-dom', async (importActual) => {
 describe('renderer/routes/AccountScopes.tsx', () => {
   beforeEach(() => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications', 'repo'],
     };
   });
@@ -53,10 +53,12 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // notifications + read:user (required) + repo (detailed) = 3 granted; public_repo = N/A (covered by repo)
-    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(3);
-    expect(screen.queryAllByTestId('account-scopes-scope-missing')).toHaveLength(0);
-    expect(screen.getAllByTestId('account-scopes-scope-na')).toHaveLength(1);
+    expect(screen.getByRole('img', { name: 'notifications granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'read:user granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'repo granted' })).toBeInTheDocument();
+    // public_repo is covered by repo
+    expect(screen.getByRole('img', { name: 'public_repo not applicable' })).toBeInTheDocument();
+    expect(screen.queryAllByRole('img', { name: /missing$/ })).toHaveLength(0);
   });
 
   it('shows required-scope row with granted/missing indicators', async () => {
@@ -97,7 +99,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
 
   it('shows all-granted status when account has public_repo instead of repo', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications', 'public_repo'],
     };
 
@@ -105,14 +107,15 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // notifications + read:user (required) + public_repo (detailed) = 3 granted; repo = 1 missing
-    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(3);
-    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(1);
+    expect(screen.getByRole('img', { name: 'notifications granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'read:user granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'public_repo granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'repo missing' })).toBeInTheDocument();
   });
 
   it('shows missing indicator when neither repo nor public_repo is granted', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications'],
     };
 
@@ -120,15 +123,16 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // Both repo rows show missing
-    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(2);
-    expect(screen.getByTestId('account-scopes-repo-scope')).toBeInTheDocument();
-    expect(screen.getByTestId('account-scopes-public-repo-scope')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'repo missing' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'public_repo missing' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'Detailed notifications scopes missing' }),
+    ).toBeInTheDocument();
   });
 
   it('shows missing indicator when notifications scope is absent', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'repo'],
     };
 
@@ -136,13 +140,13 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // Required scope (notifications) is missing
-    expect(screen.queryAllByTestId('account-scopes-scope-missing').length).toBeGreaterThan(0);
+    expect(screen.getByRole('img', { name: 'notifications missing' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Required scopes missing' })).toBeInTheDocument();
   });
 
   it('shows extra scopes when token has additional permissions', async () => {
     mockLocationAccount = {
-      ...mockGitHubAppAccount,
+      ...mockGitifyOAuthAppAccount,
       scopes: ['read:user', 'notifications', 'repo', 'write:packages', 'read:org'],
     };
 
@@ -156,7 +160,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
   });
 
   it('shows no-scopes message when scopes are not loaded', async () => {
-    mockLocationAccount = { ...mockGitHubAppAccount, scopes: undefined };
+    mockLocationAccount = { ...mockGitifyOAuthAppAccount, scopes: undefined };
 
     await act(async () => {
       renderWithProviders(<AccountScopesRoute />);
@@ -174,7 +178,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    await userEvent.click(screen.getByTestId('account-scopes-manage-link'));
+    await userEvent.click(screen.getByRole('button', { name: 'Developer settings' }));
 
     expect(openAccountSettingsSpy).toHaveBeenCalledTimes(1);
   });
@@ -184,15 +188,15 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    await userEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });
 
   describe('all auth methods show permissions button', () => {
     it.each([
-      ['GitHub App', mockGitHubAppAccount],
-      ['OAuth App', mockOAuthAccount],
+      ['Gitify OAuth App', mockGitifyOAuthAppAccount],
+      ['Custom OAuth App', mockCustomOAuthAppAccount],
       ['Personal Access Token', mockPersonalAccessTokenAccount],
     ])('%s account has a permissions button', async (_method, account) => {
       mockLocationAccount = {

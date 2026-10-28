@@ -11,7 +11,7 @@ describe('renderer/components/filters/FilterCheckbox.tsx', () => {
       <FilterCheckbox checked={true} counter={3} label="Issues" name="issues" onChange={vi.fn()} />,
     );
 
-    expect(screen.getByTestId('checkbox-issues')).toBeChecked();
+    expect(screen.getByRole('checkbox', { name: 'Issues' })).toBeChecked();
     expect(screen.getByText('Issues')).toBeInTheDocument();
     expect(screen.getByText('3')).toBeInTheDocument();
   });
@@ -28,9 +28,9 @@ describe('renderer/components/filters/FilterCheckbox.tsx', () => {
       />,
     );
 
-    expect(screen.getByTestId('checkbox-issues')).toBeDisabled();
+    expect(screen.getByRole('checkbox', { name: 'Issues' })).toBeDisabled();
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-issues'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Issues' }));
 
     expect(screen.getByText('Only issues assigned to you.')).toBeInTheDocument();
   });

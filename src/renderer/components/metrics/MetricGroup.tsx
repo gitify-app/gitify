@@ -2,6 +2,7 @@ import { useSettingsStore } from '../../stores';
 
 import type { GitifyNotification } from '../../types';
 
+import { ChecksPill } from './ChecksPill';
 import { CommentsPill } from './CommentsPill';
 import { IssueTypesPill } from './IssueTypesPill';
 import { LabelsPill } from './LabelsPill';
@@ -30,7 +31,9 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
     <div className="flex min-w-0 flex-wrap gap-1">
       <IssueTypesPill issueType={notification.subject.issueType} />
 
-      <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
+      <ParentPill parent={notification.subject.parentIssue} />
+
+      <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
 
       <StackedPrsPill
         isStacked={notification.subject.isStacked}
@@ -38,20 +41,23 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
         stackDepth={notification.subject.stackDepth}
       />
 
+      <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
+
+      <MilestonePill milestone={notification.subject.milestone} />
+
+      <ChecksPill checks={notification.subject.checks} />
+
+      <ReviewsPill
+        reviewDecision={notification.subject.reviewDecision}
+        reviewers={notification.subject.reviewers ?? []}
+      />
+
+      <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
+
       <ReactionsPill
         reactionGroups={notification.subject.reactionGroups ?? []}
         reactionsCount={notification.subject.reactionsCount ?? 0}
       />
-
-      <ReviewsPill reviewers={notification.subject.reviewers ?? []} />
-
-      <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
-
-      <MilestonePill milestone={notification.subject.milestone!} />
-
-      <ParentPill parent={notification.subject.parentIssue} />
-
-      <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
 
       <LabelsPill
         labels={notification.subject.labels ?? []}

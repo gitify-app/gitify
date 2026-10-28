@@ -1,16 +1,19 @@
-import { CommentIcon } from '@primer/octicons-react';
+import { CommentIcon, EyeIcon } from '@primer/octicons-react';
 
-import { type GitifyPullRequestReviewer, IconColor } from '../../types';
+import { type GitifyPullRequestReviewer, type GitifyReviewDecision, IconColor } from '../../types';
 
 import { getPullRequestReviewIcon, type PullRequestReviewGroup } from '../../utils/ui/icons';
 import { MetricPill } from './MetricPill';
 
 export interface ReviewsPillProps {
   reviewers: GitifyPullRequestReviewer[];
+  reviewDecision?: GitifyReviewDecision;
 }
 
-export function ReviewsPill({ reviewers }: Readonly<ReviewsPillProps>) {
-  if (!reviewers.length) {
+export function ReviewsPill({ reviewers, reviewDecision }: Readonly<ReviewsPillProps>) {
+  const isReviewRequired = reviewDecision === 'REVIEW_REQUIRED';
+
+  if (!reviewers.length && !isReviewRequired) {
     return null;
   }
 
@@ -28,6 +31,15 @@ export function ReviewsPill({ reviewers }: Readonly<ReviewsPillProps>) {
 
   return (
     <>
+      {isReviewRequired ? (
+        <MetricPill
+          ariaLabel="Review required"
+          color={IconColor.YELLOW}
+          contents="Review required"
+          icon={EyeIcon}
+        />
+      ) : null}
+
       {reviewGroups.map((review) => {
         if (review.state === 'COMMENTED') {
           return null;
@@ -41,6 +53,7 @@ export function ReviewsPill({ reviewers }: Readonly<ReviewsPillProps>) {
 
         return (
           <MetricPill
+            ariaLabel={icon.description}
             color={icon.color}
             contents={icon.description}
             icon={icon.type}
@@ -52,6 +65,7 @@ export function ReviewsPill({ reviewers }: Readonly<ReviewsPillProps>) {
 
       {threadTotal ? (
         <MetricPill
+          ariaLabel={`Review threads: ${resolvedThreadTotal} of ${threadTotal} resolved`}
           color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
           contents={formatReviewThreadDescription(reviewersWithThreads)}
           icon={CommentIcon}

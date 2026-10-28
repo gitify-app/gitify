@@ -171,7 +171,6 @@ export function LoginWithPersonalAccessTokenForm({
               <TextInput
                 aria-invalid={errors.username ? 'true' : 'false'}
                 block
-                data-testid="login-username"
                 name="username"
                 onChange={handleInputChange}
                 placeholder={usernamePlaceholder}
@@ -254,7 +253,6 @@ export function LoginWithPersonalAccessTokenForm({
       <Footer justify="space-between">
         <Tooltip direction="ne" text={docsTooltip}>
           <Button
-            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(adapter.documentationUrl)}
             size="small"

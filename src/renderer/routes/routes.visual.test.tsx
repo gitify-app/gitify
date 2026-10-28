@@ -17,9 +17,9 @@ import { AccountScopesRoute } from './AccountScopes';
 import { BitbucketLoginWithPersonalAccessTokenRoute } from './bitbucket/LoginWithPersonalAccessToken';
 import { FiltersRoute } from './Filters';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './gitea/LoginWithPersonalAccessToken';
+import { GitHubLoginWithCustomOAuthAppRoute } from './github/LoginWithCustomOAuthApp';
 import { GitHubLoginWithDeviceFlowRoute } from './github/LoginWithDeviceFlow';
 import { GitHubLoginWithCLIRoute } from './github/LoginWithGitHubCLI';
-import { GitHubLoginWithOAuthAppRoute } from './github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './github/LoginWithPersonalAccessToken';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './gitlab/LoginWithPersonalAccessToken';
 import { LoginRoute } from './Login';
@@ -89,9 +89,9 @@ const ROUTES: RouteCase[] = [
     state: { initialEntries: ['/login/github/personal-access-token'] },
   },
   {
-    name: 'login-github-oauth-app',
-    element: <GitHubLoginWithOAuthAppRoute />,
-    state: { initialEntries: ['/login/github/oauth-app'] },
+    name: 'login-github-custom-oauth-app',
+    element: <GitHubLoginWithCustomOAuthAppRoute />,
+    state: { initialEntries: ['/login/github/custom-oauth-app'] },
   },
   {
     name: 'login-gitea-personal-access-token',

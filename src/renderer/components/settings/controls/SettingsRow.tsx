@@ -44,7 +44,7 @@ export function SettingsRow({
           <span className="text-sm font-medium text-gitify-font" id={labelId}>
             {label}
           </span>
-          {tooltip && <HelpPopover name={`tooltip-${name}`} content={tooltip} />}
+          {tooltip && <HelpPopover content={tooltip} label={label} name={`tooltip-${name}`} />}
         </div>
         <div className="shrink-0">{children}</div>
       </div>
