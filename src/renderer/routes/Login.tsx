@@ -107,7 +107,6 @@ export function LoginRoute() {
               'border border-[var(--borderColor-default)]',
               'bg-[var(--bgColor-muted)] p-1',
             )}
-            data-testid="forge-tablist"
             ref={tablistRef}
             role="tablist"
             style={{ animationDelay: '120ms' }}
@@ -121,7 +120,6 @@ export function LoginRoute() {
                   'transition-[left,width] duration-300 ease-login-out',
                   'motion-reduce:transition-none',
                 )}
-                data-testid="forge-tab-indicator"
                 style={{ left: pillRect.left, width: pillRect.width }}
               />
             )}

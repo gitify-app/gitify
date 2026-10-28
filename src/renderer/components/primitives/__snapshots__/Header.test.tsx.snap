@@ -21,7 +21,6 @@ exports[`renderer/components/primitives/Header.tsx > renders itself & its childr
         data-loading="false"
         data-no-visuals="true"
         data-size="medium"
-        data-testid="header-nav-back"
         data-variant="invisible"
         type="button"
       >

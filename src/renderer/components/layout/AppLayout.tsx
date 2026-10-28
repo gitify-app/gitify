@@ -20,13 +20,7 @@ export function AppLayout({ children }: Readonly<AppLayoutProps>) {
   return (
     <div className="flex flex-col min-h-screen bg-gitify-background">
       {/* Hidden focus sentinel; grabs initial focus via callback ref */}
-      <button
-        aria-label="initial focus"
-        className="sr-only"
-        data-testid="initial-focus-sentinel"
-        ref={setFocusRef}
-        type="button"
-      />
+      <button aria-label="initial focus" className="sr-only" ref={setFocusRef} type="button" />
 
       <Sidebar />
 

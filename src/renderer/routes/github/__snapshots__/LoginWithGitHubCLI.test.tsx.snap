@@ -25,7 +25,6 @@ exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] =
           data-loading="false"
           data-no-visuals="true"
           data-size="medium"
-          data-testid="header-nav-back"
           data-variant="invisible"
           type="button"
         >

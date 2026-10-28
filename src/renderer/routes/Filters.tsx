@@ -40,11 +40,7 @@ export function FiltersRoute() {
 
       <Footer justify="end">
         <Tooltip direction="n" text="Clear all filters">
-          <Button
-            data-testid="filters-clear"
-            leadingVisual={FilterRemoveIcon}
-            onClick={clearFilters}
-          >
+          <Button leadingVisual={FilterRemoveIcon} onClick={clearFilters}>
             Clear filters
           </Button>
         </Tooltip>

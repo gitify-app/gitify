@@ -23,7 +23,6 @@ export function Header(props: Readonly<HeaderProps>) {
       <Stack direction="horizontal" justify="space-between">
         <IconButton
           aria-label="Go back"
-          data-testid="header-nav-back"
           icon={ArrowLeftIcon}
           onClick={() => {
             void navigate(-1);
