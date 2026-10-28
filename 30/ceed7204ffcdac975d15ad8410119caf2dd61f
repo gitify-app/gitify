@@ -1,0 +1,86 @@
+src/renderer/components/Sidebar.test.tsx
+  h_ac004aadb63da9 79-81,87,99,137,149-152,162,175,187,200,213,224,239,251,262-266,276-279,281,291-295,305,318,333-335
+src/renderer/components/filters/FilterCheckbox.test.tsx
+  h_ac004aadb63da9 14,31,33
+src/renderer/components/notifications/NotificationRow.test.tsx
+  h_ac004aadb63da9 246,262,278,294,307-308,323,336-338,370,386,388,412,416
+src/renderer/components/primitives/Header.test.tsx
+  h_ac004aadb63da9 22,36
+src/renderer/components/primitives/Header.tsx
+  h_ac004aadb63da9 25
+src/renderer/components/primitives/__snapshots__/Header.test.tsx.snap
+  h_ac004aadb63da9 18,45-54
+src/renderer/routes/AccountScopes.test.tsx
+  h_ac004aadb63da9 56-61,110-113,126-130,143-144,181,191
+src/renderer/routes/Accounts.test.tsx
+  h_ac004aadb63da9 44,247,268,270,287,306,318,328,344,346,348,350,352,367-368,370-372,374,389-390,392,394,409,411,413,428,430,432,456,458,481,504,527,557,604,619
+src/renderer/routes/Filters.test.tsx
+  h_ac004aadb63da9 114,128
+src/renderer/routes/Settings.test.tsx
+  h_ac004aadb63da9 134-158,170
+src/renderer/routes/bitbucket/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 97,121
+src/renderer/routes/gitea/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 111
+src/renderer/routes/github/LoginWithDeviceFlow.test.tsx
+  h_ac004aadb63da9 33-34,55,64,86,112,135,142,145,164,170,183,204,228,262,289,325
+src/renderer/routes/github/LoginWithGitHubCLI.test.tsx
+  h_ac004aadb63da9 26,39,42,59,67,70,84
+src/renderer/routes/github/LoginWithOAuthApp.test.tsx
+  h_ac004aadb63da9 29,139
+src/renderer/routes/github/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 31,141
+src/renderer/routes/github/__snapshots__/LoginWithGitHubCLI.test.tsx.snap
+  h_ac004aadb63da9 22,49-58,171-172,195,201,210
+src/renderer/routes/gitlab/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 95
+src/renderer/components/layout/AppLayout.tsx
+  h_ac004aadb63da9 23
+src/renderer/routes/AccountScopes.tsx
+  h_ac004aadb63da9 78,113,127-131,148,169,208
+src/renderer/routes/Filters.tsx
+  h_ac004aadb63da9 43
+src/renderer/routes/github/LoginWithDeviceFlow.tsx
+  h_ac004aadb63da9 234,321,325,328,335
+src/renderer/components/filters/FilterCheckbox.tsx
+  h_ac004aadb63da9 48
+src/renderer/components/filters/SearchFilter.test.tsx
+  h_ac004aadb63da9 21,33
+src/renderer/components/primitives/HelpPopover.test.tsx
+  h_ac004aadb63da9 11,18,25,47,60
+src/renderer/components/primitives/HelpPopover.tsx
+  h_ac004aadb63da9 10-11,79
+src/renderer/components/primitives/SectionHeading.tsx
+  h_ac004aadb63da9 32
+src/renderer/components/settings/AlertSettings.test.tsx
+  h_ac004aadb63da9 38,53
+src/renderer/components/settings/AppearanceSettings.test.tsx
+  h_ac004aadb63da9 130,137,144
+src/renderer/components/settings/InboxSettings.test.tsx
+  h_ac004aadb63da9 262,275-280,287,295
+src/renderer/components/settings/SystemSettings.test.tsx
+  h_ac004aadb63da9 134
+src/renderer/components/settings/controls/SettingsChoice.tsx
+  h_ac004aadb63da9 147
+src/renderer/components/settings/controls/SettingsRow.tsx
+  h_ac004aadb63da9 47
+src/renderer/components/settings/controls/SettingsToggle.tsx
+  h_ac004aadb63da9 60
+src/renderer/icons/ScopeStatusIcon.test.tsx
+  h_ac004aadb63da9 14,16,26,28,38-41,43,45-48
+src/renderer/icons/ScopeStatusIcon.tsx
+  h_ac004aadb63da9 7-8,15,17,19-24,28,30
+src/renderer/icons/__snapshots__/ScopeStatusIcon.test.tsx.snap
+  h_ac004aadb63da9 6,14,29,37,52,60,75,83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "30ceed7204ffcdac975d15ad8410119caf2dd61f",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
