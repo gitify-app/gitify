@@ -394,7 +394,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -477,7 +477,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: string;
@@ -521,7 +521,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
 
 export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -553,7 +553,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
+           | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
 
 export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, submittedAt: string | null, url: Link, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -996,6 +996,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -1311,6 +1312,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -1820,6 +1822,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -1950,6 +1953,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {

@@ -459,6 +459,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         nodes: [
           {
             number: 789,
+            url: 'https://github.com/gitify-app/notifications-test/issues/789' as Link,
           },
         ],
       };
@@ -489,7 +490,12 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
-        linkedIssues: ['#789'],
+        linkedIssues: [
+          {
+            number: 789,
+            url: 'https://github.com/gitify-app/notifications-test/issues/789' as Link,
+          },
+        ],
         commentCount: 0,
         milestone: undefined,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,

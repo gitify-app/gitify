@@ -22,7 +22,6 @@ import {
   type ReviewRequestType,
 } from '../../../../types';
 
-import { formatGitHubNumber } from '../../../notifications/formatters';
 import { fetchPullByNumber } from '../client';
 import type {
   AuthorFieldsFragment,
@@ -101,7 +100,7 @@ class PullRequestHandler extends DefaultHandler {
       stackDepth: pr.stackEntry?.stack?.size,
       linkedIssues: pr.closingIssuesReferences?.nodes
         ?.filter(Boolean)
-        .map((issue) => formatGitHubNumber(issue!.number)),
+        .map((issue) => ({ number: issue!.number, url: issue!.url })),
       milestone: pr.milestone ?? undefined,
       htmlUrl: activity?.url ?? pr.url,
       reactionsCount: prReactionCount,
