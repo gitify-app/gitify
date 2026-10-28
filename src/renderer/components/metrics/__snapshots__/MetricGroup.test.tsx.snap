@@ -9,6 +9,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx > renders pills when showPi
   >
     <button
       aria-describedby="_r_0_"
+      aria-label="octocat approved these changes"
       type="button"
     >
       <span
@@ -66,6 +67,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx > renders pills when showPi
     </span>
     <button
       aria-describedby="_r_1_"
+      aria-label="gitify-app requested changes"
       type="button"
     >
       <span

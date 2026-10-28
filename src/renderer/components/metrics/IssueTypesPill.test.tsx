@@ -14,6 +14,6 @@ describe('renderer/components/metrics/IssueTypesPill.tsx', () => {
 
   it('renders a pill for the native issue type', () => {
     renderWithProviders(<IssueTypesPill issueType={{ name: 'Bug', color: IconColor.RED }} />);
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Issue type: Bug' })).toBeInTheDocument();
   });
 });

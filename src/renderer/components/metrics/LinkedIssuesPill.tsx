@@ -34,6 +34,7 @@ export function LinkedIssuesPill({ linkedIssues }: Readonly<LinkedIssuesPillProp
 
   return (
     <MetricPill
+      ariaLabel={description}
       color={IconColor.GRAY}
       contents={description}
       icon={IssueRelatesToIcon}

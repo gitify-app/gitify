@@ -53,6 +53,7 @@ export function ReviewsPill({ reviewers, reviewDecision }: Readonly<ReviewsPillP
 
         return (
           <MetricPill
+            ariaLabel={icon.description}
             color={icon.color}
             contents={icon.description}
             icon={icon.type}
@@ -64,6 +65,7 @@ export function ReviewsPill({ reviewers, reviewDecision }: Readonly<ReviewsPillP
 
       {threadTotal ? (
         <MetricPill
+          ariaLabel={`Review threads: ${resolvedThreadTotal} of ${threadTotal} resolved`}
           color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
           contents={formatReviewThreadDescription(reviewersWithThreads)}
           icon={CommentIcon}

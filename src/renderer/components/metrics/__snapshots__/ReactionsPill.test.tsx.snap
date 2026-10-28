@@ -4,6 +4,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when multiple r
 <div>
   <button
     aria-describedby="_r_1_"
+    aria-label="54 reactions: 👍 1, 👎 1, 😆 2, 🎉 3, 😕 5, 🚀 8, 👀 13, ❤️ 21"
     type="button"
   >
     <span
@@ -200,6 +201,7 @@ exports[`renderer/components/metrics/ReactionsPill.tsx > renders when one reacti
 <div>
   <button
     aria-describedby="_r_0_"
+    aria-label="1 reaction: 🚀 1"
     type="button"
   >
     <span
