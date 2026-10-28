@@ -1,0 +1,14 @@
+.github/workflows/release.yml
+  h_ac004aadb63da9 73,75,81,85-86,90-93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5e11e9945066f8dd21789f1ca65d91b9a0034a92",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
