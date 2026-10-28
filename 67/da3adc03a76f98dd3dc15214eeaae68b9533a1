@@ -1,0 +1,16 @@
+src/renderer/components/metrics/MetricGroup.test.tsx
+  h_ac004aadb63da9 122-146
+src/renderer/components/metrics/MetricGroup.tsx
+  h_ac004aadb63da9 33-35,43-45,51-54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "67da3adc03a76f98dd3dc15214eeaae68b9533a1",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
