@@ -1,0 +1,14 @@
+src/renderer/components/metrics/StackedPrsPill.tsx
+  h_ac004aadb63da9 1,29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "43df6dafdda877c6afaf0255dfd938a1ef93d8d5",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
