@@ -1,0 +1,32 @@
+src/renderer/components/metrics/ChecksPill.test.tsx
+  h_ac004aadb63da9 1-46
+src/renderer/components/metrics/ChecksPill.tsx
+  h_ac004aadb63da9 1-40
+src/renderer/components/metrics/MetricGroup.tsx
+  h_ac004aadb63da9 5,47-48
+src/renderer/components/metrics/__snapshots__/ChecksPill.test.tsx.snap
+  h_ac004aadb63da9 1-65
+src/renderer/types.ts
+  h_ac004aadb63da9 402-403,531-538
+src/renderer/utils/forges/github/__mocks__/response-mocks.ts
+  h_ac004aadb63da9 162
+src/renderer/utils/forges/github/graphql/generated/graphql.ts
+  h_ac004aadb63da9 7-37,153-165,441,524,568,600,1057-1069,1385-1397,1907-1919,2050-2062
+src/renderer/utils/forges/github/graphql/pull.graphql
+  h_ac004aadb63da9 95-107
+src/renderer/utils/forges/github/handlers/pullRequest.test.ts
+  h_ac004aadb63da9 25,885-949
+src/renderer/utils/forges/github/handlers/pullRequest.ts
+  h_ac004aadb63da9 16,30,34,112,207-277
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a153f36150cb7f78426182ddd927ab0ea3784ea6",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
