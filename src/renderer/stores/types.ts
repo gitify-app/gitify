@@ -1,6 +1,7 @@
 import type {
   Account,
   AccountUUID,
+  ClientID,
   FilterStateType,
   Forge,
   GitifyError,
@@ -40,6 +41,7 @@ export interface AccountsActions {
     hostname: Hostname,
     forge?: Forge,
     username?: string,
+    clientId?: ClientID,
   ) => Promise<void>;
 
   /**
@@ -157,6 +159,7 @@ export type UpdateFilter = <K extends FilterKey>(
 export interface FiltersActions {
   hasActiveFilters: () => boolean;
   updateFilter: UpdateFilter;
+  pruneAccounts: (validAccounts: AccountUUID[]) => void;
   reset: () => void;
 }
 

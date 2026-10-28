@@ -28,13 +28,9 @@ type Brand<B> = { [__brand]: B };
 
 export type Branded<T, B> = T & Brand<B>;
 
-export type AuthCode = Branded<string, 'AuthCode'>;
-
 export type Token = Branded<string, 'Token'>;
 
 export type ClientID = Branded<string, 'ClientID'>;
-
-export type ClientSecret = Branded<string, 'ClientSecret'>;
 
 export type Hostname = Branded<string, 'Hostname'>;
 
@@ -74,6 +70,11 @@ export interface Account {
   version?: string;
   hostname: Hostname;
   token: Token;
+  /**
+   * OAuth app client ID for an account authorized through a user-supplied
+   * custom OAuth app; absent for Gitify's own preconfigured app.
+   */
+  clientId?: ClientID;
   /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
   username?: string;
   user: GitifyUser | null;

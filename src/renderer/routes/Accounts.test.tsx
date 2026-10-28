@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 import {
   mockGiteaAccount,
-  mockGitHubAppAccount,
-  mockOAuthAccount,
+  mockGitifyOAuthAppAccount,
+  mockCustomOAuthAppAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
 
@@ -28,7 +28,11 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('renders itself & its children', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
+          accounts: [
+            mockPersonalAccessTokenAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
+          ],
         });
       });
 
@@ -234,8 +238,8 @@ describe('renderer/routes/Accounts.tsx', () => {
               ...mockPersonalAccessTokenAccount,
               scopes: ['read:user', 'notifications'],
             },
-            mockOAuthAccount,
-            mockGitHubAppAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
           ],
         });
       });
@@ -259,7 +263,11 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('sets account as primary account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
+          accounts: [
+            mockPersonalAccessTokenAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
+          ],
         });
       });
 
@@ -269,7 +277,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await userEvent.click(screen.getAllByRole('button', { name: /^Set as primary account/ })[1]);
 
-      expect(useAccountsStore.getState().accounts[0]).toBe(mockOAuthAccount);
+      expect(useAccountsStore.getState().accounts[0]).toBe(mockCustomOAuthAppAccount);
       expect(navigateMock).toHaveBeenCalledWith('/accounts', { replace: true });
     });
 
@@ -311,7 +319,11 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('shows view-scopes button for all auth methods', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
+          accounts: [
+            mockPersonalAccessTokenAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
+          ],
         });
       });
 
@@ -337,7 +349,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('shows github login methods after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
@@ -360,7 +372,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('shows login with personal access token after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
@@ -389,12 +401,14 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
       await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub/ }));
 
-      expect(screen.getByRole('menuitem', { name: /^OAuth App/ })).toHaveTextContent('OAuth App');
+      expect(screen.getByRole('menuitem', { name: /^Custom OAuth App/ })).toHaveTextContent(
+        'Custom OAuth App',
+      );
 
-      await userEvent.click(screen.getByRole('menuitem', { name: /^OAuth App/ }));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Custom OAuth App/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/custom-oauth-app', {
         replace: true,
       });
     });
@@ -402,7 +416,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('navigates directly to gitea login (single method forge)', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
@@ -421,7 +435,7 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('navigates directly to bitbucket login (single method forge)', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
@@ -467,10 +481,10 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('re-authenticates a github app account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockGitHubAppAccount],
+          accounts: [mockGitifyOAuthAppAccount],
           notifications: [
             {
-              account: mockGitHubAppAccount,
+              account: mockGitifyOAuthAppAccount,
               notifications: [],
               error: Errors.BAD_CREDENTIALS,
             },
@@ -483,17 +497,17 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow', {
         replace: true,
-        state: { account: mockGitHubAppAccount },
+        state: { account: mockGitifyOAuthAppAccount },
       });
     });
 
     it('re-authenticates an oauth app account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
           notifications: [
             {
-              account: mockOAuthAccount,
+              account: mockCustomOAuthAppAccount,
               notifications: [],
               error: Errors.BAD_CREDENTIALS,
             },
@@ -504,9 +518,9 @@ describe('renderer/routes/Accounts.tsx', () => {
       await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/custom-oauth-app', {
         replace: true,
-        state: { account: mockOAuthAccount },
+        state: { account: mockCustomOAuthAppAccount },
       });
     });
 
@@ -535,10 +549,10 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('logs and skip re-authenticate when no login method matches', async () => {
       const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
-      // Gitea only registers PAT — a GitHub App method has no matching loginMethod.
+      // Gitea only registers PAT — a GitHub method has no matching loginMethod.
       const unsupportedAccount = {
         ...mockGiteaAccount,
-        method: 'GitHub App' as const,
+        method: 'Gitify OAuth App' as const,
       };
 
       await act(async () => {

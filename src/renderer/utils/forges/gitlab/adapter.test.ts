@@ -83,7 +83,7 @@ describe('renderer/utils/forges/gitlab/adapter.ts', () => {
 
     it('returns the key icon for every auth method (PAT-only forge today)', () => {
       expect(gitlabAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
-      expect(gitlabAdapter.getAuthMethodIcon('OAuth App')).toBe(KeyIcon);
+      expect(gitlabAdapter.getAuthMethodIcon('Custom OAuth App')).toBe(KeyIcon);
     });
 
     it('omits the oauthScopes bundle', () => {

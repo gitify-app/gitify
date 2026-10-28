@@ -1,30 +1,19 @@
 import type { Menubar } from 'electron-menubar';
 
-import { EVENTS } from '../../shared/events';
-
-import { handleProtocolURL, initializeAppLifecycle } from './startup';
+import { initializeAppLifecycle } from './startup';
 
 const requestSingleInstanceLockMock = vi.fn(() => true);
-const appOnMock = vi.fn();
 const appQuitMock = vi.fn();
 
 vi.mock('electron', () => ({
   app: {
     requestSingleInstanceLock: () => requestSingleInstanceLockMock(),
-    on: (...a: unknown[]) => appOnMock(...a),
     quit: () => appQuitMock(),
-  } satisfies Pick<Electron.App, 'requestSingleInstanceLock' | 'on' | 'quit'>,
+  } satisfies Pick<Electron.App, 'requestSingleInstanceLock' | 'quit'>,
 }));
 
-const sendRendererEventMock = vi.fn();
-vi.mock('../events', () => ({
-  sendRendererEvent: (...a: unknown[]) => sendRendererEventMock(...a),
-}));
-
-const logInfoMock = vi.fn();
 const logWarnMock = vi.fn();
 vi.mock('../../shared/logger', () => ({
-  logInfo: (...a: unknown[]) => logInfoMock(...a),
   logWarn: (...a: unknown[]) => logWarnMock(...a),
 }));
 
@@ -46,7 +35,7 @@ describe('main/lifecycle/startup.ts', () => {
       const mb = createMb();
       const contextMenu = {} as Electron.Menu;
 
-      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
+      initializeAppLifecycle(mb as unknown as Menubar, contextMenu);
 
       expect(mb.on).toHaveBeenCalledWith('ready', expect.any(Function));
     });
@@ -56,7 +45,7 @@ describe('main/lifecycle/startup.ts', () => {
       const mb = createMb();
       const contextMenu = {} as Electron.Menu;
 
-      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
+      initializeAppLifecycle(mb as unknown as Menubar, contextMenu);
 
       expect(appQuitMock).toHaveBeenCalled();
       expect(logWarnMock).toHaveBeenCalled();
@@ -66,28 +55,13 @@ describe('main/lifecycle/startup.ts', () => {
       const mb = createMb();
       const contextMenu = {} as Electron.Menu;
 
-      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
+      initializeAppLifecycle(mb as unknown as Menubar, contextMenu);
 
       const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1];
       expect(readyHandler).toBeDefined();
       readyHandler?.();
 
       expect(mb.setContextMenu).toHaveBeenCalledWith(contextMenu);
-    });
-  });
-
-  describe('handleProtocolURL', () => {
-    it('forwards matching protocol URL to renderer as AUTH_CALLBACK', () => {
-      const mb = createMb();
-      const url = 'gitify://callback?code=abc123';
-      handleProtocolURL(mb as unknown as Menubar, url, 'gitify');
-      expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.AUTH_CALLBACK, url);
-    });
-
-    it('ignores URLs that do not match the protocol', () => {
-      const mb = createMb();
-      handleProtocolURL(mb as unknown as Menubar, 'https://github.com', 'gitify');
-      expect(sendRendererEventMock).not.toHaveBeenCalled();
     });
   });
 });

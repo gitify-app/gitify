@@ -118,7 +118,7 @@ describe('renderer/utils/forges/bitbucket/adapter.ts', () => {
 
     it('returns KeyIcon for every auth method', () => {
       expect(bitbucketAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
-      expect(bitbucketAdapter.getAuthMethodIcon('OAuth App')).toBe(KeyIcon);
+      expect(bitbucketAdapter.getAuthMethodIcon('Custom OAuth App')).toBe(KeyIcon);
     });
   });
 

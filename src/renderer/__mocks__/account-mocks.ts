@@ -1,14 +1,21 @@
 import { Constants } from '../constants';
 
-import type { Account, AccountNotifications, GitifyError, Hostname, Token } from '../types';
+import type {
+  Account,
+  AccountNotifications,
+  ClientID,
+  GitifyError,
+  Hostname,
+  Token,
+} from '../types';
 
 import { getRecommendedScopeNames } from '../utils/auth/scopes';
 import { mockGitifyUser } from './user-mocks';
 
-export const mockGitHubAppAccount: Account = {
+export const mockGitifyOAuthAppAccount: Account = {
   forge: 'github',
   platform: 'GitHub Cloud',
-  method: 'GitHub App',
+  method: 'Gitify OAuth App',
   token: 'token-987654321' as Token,
   hostname: Constants.GITHUB_HOSTNAME,
   user: mockGitifyUser,
@@ -37,12 +44,13 @@ export const mockGitHubCliAccount: Account = {
   scopes: ['gist', 'read:org', 'repo', 'workflow'],
 };
 
-export const mockOAuthAccount: Account = {
+export const mockCustomOAuthAppAccount: Account = {
   forge: 'github',
   platform: 'GitHub Enterprise Server',
-  method: 'OAuth App',
+  method: 'Custom OAuth App',
   token: 'token-1234568790' as Token,
   hostname: 'github.gitify.io' as Hostname,
+  clientId: 'CUSTOM_CLIENT_ID_123' as ClientID,
   user: mockGitifyUser,
   scopes: getRecommendedScopeNames(),
 };

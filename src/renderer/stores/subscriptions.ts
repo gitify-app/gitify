@@ -5,6 +5,7 @@
  * to ensure proper lifecycle management and cleanup on unmount.
  */
 
+import { getAccountUUID } from '../utils/auth/utils';
 import {
   setAutoLaunch,
   setKeepWindowOnBlur,
@@ -14,7 +15,7 @@ import {
   setUseX11Backend,
 } from '../utils/system/comms';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
-import { useSettingsStore } from './';
+import { useAccountsStore, useFiltersStore, useSettingsStore } from './';
 
 /**
  * Initialize all store side-effect subscriptions and startup values for main.
@@ -131,6 +132,28 @@ export function initializeStoreSubscriptions(): () => void {
     window.removeEventListener('resize', handleResize);
     clearTimeout(timeout);
   });
+
+  // ========================================================================
+  // Accounts Store Side Effects
+  // ========================================================================
+
+  // Account filters are keyed by account UUID, which embeds the hostname, user
+  // and auth method. Drop any that no longer match an account (logout, or a
+  // UUID change such as an auth-method relabel) so they cannot silently hide
+  // notifications.
+  const pruneAccountFilters = () => {
+    useFiltersStore
+      .getState()
+      .pruneAccounts(useAccountsStore.getState().accounts.map(getAccountUUID));
+  };
+  pruneAccountFilters();
+
+  const unsubAccounts = useAccountsStore.subscribe((state, prevState) => {
+    if (state.accounts !== prevState.accounts) {
+      pruneAccountFilters();
+    }
+  });
+  unsubscribers.push(unsubAccounts);
 
   // Filter changes need no subscription here: the notifications query caches
   // unfiltered data and useNotifications recreates its `select` whenever the
