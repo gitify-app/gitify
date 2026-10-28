@@ -1,0 +1,30 @@
+src/renderer/components/metrics/MetricGroup.tsx
+  h_ac004aadb63da9 46-49
+src/renderer/components/metrics/ReviewsPill.test.tsx
+  h_ac004aadb63da9 1-2,32-60
+src/renderer/components/metrics/ReviewsPill.tsx
+  h_ac004aadb63da9 1,3,10,13-16,34-42
+src/renderer/types.ts
+  h_ac004aadb63da9 19,401-402,532-533
+src/renderer/utils/forges/github/__mocks__/response-mocks.ts
+  h_ac004aadb63da9 136
+src/renderer/utils/forges/github/graphql/generated/graphql.ts
+  h_ac004aadb63da9 81-89,376,459,503,535,956,1272,1782,1913
+src/renderer/utils/forges/github/graphql/pull.graphql
+  h_ac004aadb63da9 29
+src/renderer/utils/forges/github/handlers/pullRequest.test.ts
+  h_ac004aadb63da9 124-149
+src/renderer/utils/forges/github/handlers/pullRequest.ts
+  h_ac004aadb63da9 93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "38d444429a708ae4f91291a946bf5ca8732e67df",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
