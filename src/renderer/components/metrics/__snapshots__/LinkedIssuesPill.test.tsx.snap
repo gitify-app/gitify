@@ -4,7 +4,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
 <div>
   <button
     aria-describedby="_r_1_"
-    aria-label="Linked to issues: #1, #2"
+    aria-label="Linked issues: #1, #2"
     type="button"
   >
     <span
@@ -61,7 +61,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
     popover="auto"
     role="tooltip"
   >
-    Linked to issues: #1, #2
+    Linked issues: #1, #2
   </span>
 </div>
 `;
@@ -70,7 +70,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
 <div>
   <button
     aria-describedby="_r_0_"
-    aria-label="Linked to issue: #1"
+    aria-label="Linked issue: #1"
     type="button"
   >
     <span
@@ -127,7 +127,7 @@ exports[`renderer/components/metrics/LinkedIssuesPill.tsx > renders when linked 
     popover="auto"
     role="tooltip"
   >
-    Linked to issue: #1
+    Linked issue: #1
   </span>
 </div>
 `;
