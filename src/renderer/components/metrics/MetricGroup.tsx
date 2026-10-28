@@ -47,7 +47,7 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
 
       <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
 
-      <MilestonePill milestone={notification.subject.milestone!} />
+      <MilestonePill milestone={notification.subject.milestone} />
 
       <ParentPill parent={notification.subject.parentIssue} />
 
