@@ -6,14 +6,7 @@ const config = {
   appId: 'com.electron.gitify',
   copyright: 'Copyright © 2026 Gitify Team',
   asar: true,
-  files: [
-    'assets/images/*',
-    'assets/sounds/*',
-    'build/**/*',
-    'LICENSE',
-    'node_modules/**/*', // Ideally we would have !node_modules and let electron-builder prune deps
-    'package.json',
-  ],
+  files: ['assets/images/*', 'assets/sounds/*', 'build/**/*', 'LICENSE', 'package.json'],
   electronLanguages: ['en'],
   mac: {
     category: 'public.app-category.developer-tools',
