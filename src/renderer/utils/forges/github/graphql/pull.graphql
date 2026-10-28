@@ -26,6 +26,7 @@ fragment PullRequestDetails on PullRequest {
   merged
   isDraft
   isInMergeQueue
+  reviewDecision
   milestone {
     ...MilestoneFields
   }

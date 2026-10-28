@@ -16,6 +16,7 @@ import type {
   IssueStateReason,
   LabelFieldsFragment,
   MilestoneFieldsFragment,
+  PullRequestReviewDecision,
   PullRequestReviewState,
   PullRequestState,
   ReactionGroupFieldsFragment,
@@ -397,6 +398,8 @@ export interface GitifySubject {
   reviewRequested?: ReviewRequestType[];
   /** PR reviewer states and review thread resolution counts */
   reviewers?: GitifyPullRequestReviewer[];
+  /** Overall PR review status, only set while the PR is open */
+  reviewDecision?: GitifyReviewDecision;
   /** PRs closing issues */
   linkedIssues?: string[];
   /** Total comment count */
@@ -525,6 +528,8 @@ export type GitifyMilestone = MilestoneFieldsFragment;
 export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 
 export type GitifyLabels = LabelFieldsFragment;
+
+export type GitifyReviewDecision = PullRequestReviewDecision;
 
 export interface GitifyPullRequestReviewer {
   user: string;

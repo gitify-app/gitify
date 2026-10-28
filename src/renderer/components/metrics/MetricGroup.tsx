@@ -43,7 +43,10 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
         reactionsCount={notification.subject.reactionsCount ?? 0}
       />
 
-      <ReviewsPill reviewers={notification.subject.reviewers ?? []} />
+      <ReviewsPill
+        reviewDecision={notification.subject.reviewDecision}
+        reviewers={notification.subject.reviewers ?? []}
+      />
 
       <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
 
