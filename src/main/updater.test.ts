@@ -370,6 +370,7 @@ describe('main/updater.ts', () => {
     });
 
     it('performs initial check and schedules periodic checks', async () => {
+      vi.useFakeTimers();
       const originalSetInterval = globalThis.setInterval;
       const setIntervalSpy = vi.spyOn(globalThis, 'setInterval').mockImplementation(((
         fn: () => void,
@@ -384,16 +385,16 @@ describe('main/updater.ts', () => {
         const callCount = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
         expect(callCount).toBeGreaterThanOrEqual(1);
 
-        // If the periodic interval was scheduled during this test run, assert its arguments
-        if (setIntervalSpy.mock.calls.length) {
-          expect(setIntervalSpy).toHaveBeenCalledWith(
-            expect.any(Function),
-            APPLICATION.UPDATE_CHECK_INTERVAL_MS,
-          );
-        }
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+
+        expect(setIntervalSpy).toHaveBeenCalledWith(
+          expect.any(Function),
+          APPLICATION.UPDATE_CHECK_INTERVAL_MS,
+        );
       } finally {
         setIntervalSpy.mockRestore();
         globalThis.setInterval = originalSetInterval;
+        vi.useRealTimers();
       }
     });
   });

@@ -13,5 +13,12 @@ export function IssueTypesPill({ issueType }: Readonly<IssueTypesPillProps>) {
     return null;
   }
 
-  return <MetricPill color={issueType.color} contents={issueType.name} icon={IssueOpenedIcon} />;
+  return (
+    <MetricPill
+      ariaLabel={`Issue type: ${issueType.name}`}
+      color={issueType.color}
+      contents={issueType.name}
+      icon={IssueOpenedIcon}
+    />
+  );
 }

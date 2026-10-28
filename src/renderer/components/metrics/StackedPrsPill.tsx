@@ -1,4 +1,4 @@
-import { GitMergeIcon } from '@primer/octicons-react';
+import { StackIcon } from '@primer/octicons-react';
 
 import { IconColor } from '../../types';
 
@@ -22,11 +22,16 @@ export function StackedPrsPill({
   const metric =
     stackPosition != null && stackDepth != null ? `${stackPosition}/${stackDepth}` : undefined;
 
+  const description = metric
+    ? `Stacked pull request: ${stackPosition} of ${stackDepth}`
+    : 'Stacked pull request';
+
   return (
     <MetricPill
-      color={IconColor.YELLOW}
-      contents="Part of a stacked pull request series"
-      icon={GitMergeIcon}
+      ariaLabel={description}
+      color={IconColor.GRAY}
+      contents={description}
+      icon={StackIcon}
       metric={metric}
     />
   );

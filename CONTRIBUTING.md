@@ -57,7 +57,13 @@ pnpm test -u
 
 `pnpm test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
 spacing, theme changes) are covered separately by a browser-mode project that
-screenshots every route across the light, dark, accessibility, and Glass themes.
+screenshots every route in Classic light, Classic dark, Glass light, and Glass
+dark, with accessibility and high-contrast variants on the densest routes. It
+also captures high-value states — open help popovers, the notification action
+rail on hover, read and failed rows, empty/offline/error inboxes, active filter
+selections, choice controls, settings reveals, the loading splash, the
+reset-settings confirmation, the Accounts add-account menu, and representative
+login errors.
 
 Screenshots only match when the browser build and font stack are identical, so
 both commands below run the suite inside a pinned Playwright container, and CI
@@ -92,6 +98,42 @@ the macOS native vibrancy material, which Chromium cannot render.
 - Follow existing file and folder naming conventions.
 - See [ARCHITECTURE.md](./ARCHITECTURE.md) for the renderer's module layering, state ownership, and side-effect conventions.
 - Keep commit messages clear and descriptive.
+
+#### 📝 TSDoc
+
+Every TSDoc block follows the [TSDoc][tsdoc-website] standard. Add TSDoc to
+exported APIs whose contract is not obvious from the signature; trivial
+presentational components may omit it. Existing files are not the standard:
+proposals and new changes follow this section.
+
+- Start with a one-sentence summary.
+- Document every parameter with `@param name - description`. Put optional or
+  default behaviour in the description; never add JSDoc type annotations.
+- Use `@returns` (not `@return`) for every non-void return. Describe the
+  resolved value, its format, or its success and failure branches. Do not
+  repeat the TypeScript type or write "Promise resolving to".
+- Let named result types own object shapes. Document fields on the type, then
+  name or link the type from `@returns` instead of restating the shape.
+- Use `@throws` for each thrown error condition, `@remarks` for extended
+  context, `@example` for non-obvious usage, and `@typeParam` for generic
+  parameters.
+- Use `{@link Symbol}` for internal references and backticks for identifiers
+  and literals.
+- Omit `@returns` for `void` and `Promise<void>`.
+- Update TSDoc in the same pull request as the behaviour change. Do not
+  suppress a TSDoc lint finding; fix it or change this convention in a separate
+  proposal.
+
+```ts
+/**
+ * Read the token the locally installed GitHub CLI holds for a host.
+ *
+ * @param hostname - Host to read the token for (e.g. `github.com`).
+ * @returns The CLI token, or a classified failure with an optional detail line.
+ */
+```
+
+TSDoc syntax is validated by the shared lint configuration through `pnpm check`.
 
 ### 🐛 How to Report Bugs or Request Features
 
@@ -157,6 +199,7 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 <!-- LINK LABELS -->
 
 [vite-plus-website]: https://viteplus.dev/
+[tsdoc-website]: https://tsdoc.org/
 [conventional-commits]: https://www.conventionalcommits.org
 [release-please]: https://github.com/googleapis/release-please
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576

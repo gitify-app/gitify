@@ -16,6 +16,7 @@ import type {
   IssueStateReason,
   LabelFieldsFragment,
   MilestoneFieldsFragment,
+  PullRequestReviewDecision,
   PullRequestReviewState,
   PullRequestState,
   ReactionGroupFieldsFragment,
@@ -285,14 +286,18 @@ export enum Size {
 }
 
 /**
+ * The direction a chevron points.
+ */
+export type ChevronDirection = 'down' | 'left' | 'right';
+
+/**
  * Details for Chevron header accordion.
  */
 export interface Chevron {
   /**
-   * The chevron icon.
+   * The direction the chevron points.
    */
-  // TODO - improve the type here to be more specific about which icons are allowed, if possible
-  icon: FC<OcticonProps>;
+  direction: ChevronDirection;
 
   /**
    * The chevron label.
@@ -394,8 +399,12 @@ export interface GitifySubject {
   reviewRequested?: ReviewRequestType[];
   /** PR reviewer states and review thread resolution counts */
   reviewers?: GitifyPullRequestReviewer[];
+  /** Overall PR review status, only set while the PR is open */
+  reviewDecision?: GitifyReviewDecision;
   /** PRs closing issues */
-  linkedIssues?: string[];
+  linkedIssues?: GitifyLinkedIssue[];
+  /** CI check summary for the PR's head commit */
+  checks?: GitifyCheckSummary;
   /** Total comment count */
   commentCount?: number;
   /** Labels names and colors */
@@ -494,6 +503,11 @@ export interface GitifyIssueType {
 }
 
 /** GitHub sub-issue parent context */
+export interface GitifyLinkedIssue {
+  number: number;
+  url: Link;
+}
+
 export interface GitifyParentIssue {
   number: number;
   title: string;
@@ -522,6 +536,16 @@ export type GitifyMilestone = MilestoneFieldsFragment;
 export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 
 export type GitifyLabels = LabelFieldsFragment;
+
+export type GitifyReviewDecision = PullRequestReviewDecision;
+
+export interface GitifyCheckSummary {
+  state: 'SUCCESS' | 'FAILURE' | 'PENDING';
+  passed: number;
+  failed: number;
+  pending: number;
+  total: number;
+}
 
 export interface GitifyPullRequestReviewer {
   user: string;

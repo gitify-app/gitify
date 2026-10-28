@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import type { ReactElement } from 'react';
 import { type InitialEntry, MemoryRouter } from 'react-router-dom';
 
@@ -117,8 +117,13 @@ export function renderRoute(
 
   // Pinned to the viewport so the captured element is exactly the menubar
   // window, independent of how much content the route happens to render.
+  //
+  // `data-portal-root` makes this the container Primer mounts its portals in
+  // (help popovers, overlays). Without it they land on `document.body`, outside
+  // the element screenshotted below.
   const container = document.createElement('div');
   container.dataset.testid = 'visual-root';
+  container.dataset.portalRoot = '';
   container.style.cssText = 'position:fixed;inset:0;overflow:hidden';
   document.body.appendChild(container);
 
@@ -138,5 +143,29 @@ export function renderRoute(
         </ThemeProvider>
       </QueryClientProvider>
     ),
+  });
+}
+
+/**
+ * Scrolls the element with the given test id into the centre of its scroll
+ * container and waits until it is fully inside the viewport.
+ *
+ * Settings sections are taller than the menubar window, so states near the
+ * bottom need this before they can be captured. `scrollIntoView` uses the
+ * nearest scrollable ancestor, which is the route's `Contents` container.
+ */
+export async function scrollToTestId(testId: string): Promise<void> {
+  const element = document.querySelector<HTMLElement>(`[data-testid="${testId}"]`);
+  if (!element) {
+    throw new Error(`Cannot scroll to missing test id "${testId}"`);
+  }
+
+  element.scrollIntoView({ behavior: 'auto', block: 'center' });
+
+  await waitFor(() => {
+    const { top, bottom } = element.getBoundingClientRect();
+    if (top < 0 || bottom > window.innerHeight) {
+      throw new Error(`"${testId}" is not fully inside the viewport`);
+    }
   });
 }

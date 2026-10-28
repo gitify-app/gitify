@@ -242,7 +242,6 @@ export function AccountsRoute() {
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
                       aria-label={`Set as primary account (${i === 0 ? 'current primary' : 'click to set'})`}
-                      data-testid="account-set-primary"
                       icon={i === 0 ? StarFillIcon : StarIcon}
                       onClick={() => setAsPrimaryAccount(account)}
                       size="small"
@@ -252,7 +251,6 @@ export function AccountsRoute() {
                     {!hasBadCredentials && adapter.accountOps.oauthScopes && (
                       <IconButton
                         aria-label={`View scopes for ${account.user?.login}`}
-                        data-testid="account-view-scopes"
                         icon={getScopeIcon(account)}
                         onClick={() =>
                           navigate('/account-scopes', {
@@ -271,7 +269,6 @@ export function AccountsRoute() {
                     {hasBadCredentials && (
                       <IconButton
                         aria-label={`Re-authenticate ${account.user?.login}`}
-                        data-testid="account-reauthenticate"
                         icon={KeyIcon}
                         onClick={() => handleReAuthenticate(account)}
                         size="small"
@@ -281,7 +278,6 @@ export function AccountsRoute() {
 
                     <IconButton
                       aria-label={`Refresh ${account.user?.login}`}
-                      data-testid="account-refresh"
                       icon={SyncIcon}
                       loading={loadingStates[accountUUID] || false}
                       onClick={() => handleRefresh(account)}
@@ -290,7 +286,6 @@ export function AccountsRoute() {
 
                     <IconButton
                       aria-label={`Logout ${account.user?.login}`}
-                      data-testid="account-logout"
                       icon={SignOutIcon}
                       onClick={() => logoutAccount(account)}
                       size="small"

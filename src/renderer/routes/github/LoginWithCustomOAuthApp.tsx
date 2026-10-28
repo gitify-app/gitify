@@ -146,7 +146,6 @@ export function GitHubLoginWithCustomOAuthAppRoute() {
       <Footer justify="space-between">
         <Tooltip text="GitHub documentation">
           <Button
-            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(Constants.GITHUB_DOCS.OAUTH_URL)}
             size="small"
