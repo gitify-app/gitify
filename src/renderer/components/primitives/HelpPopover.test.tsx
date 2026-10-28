@@ -8,20 +8,21 @@ import { HelpPopover, type HelpPopoverProps } from './HelpPopover';
 describe('renderer/components/primitives/HelpPopover.tsx', () => {
   const props: HelpPopoverProps = {
     name: 'test',
+    label: 'Test setting',
     content: 'This is some help text',
   };
 
   it('renders', () => {
     renderWithProviders(<HelpPopover {...props} />);
 
-    expect(screen.getByTestId('tooltip-icon-test')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Help: Test setting' })).toBeInTheDocument();
     expect(screen.queryByText(props.content as string)).not.toBeInTheDocument();
   });
 
   it('toggles (show/hide) help on clicking the icon', async () => {
     renderWithProviders(<HelpPopover {...props} />);
 
-    const icon = screen.getByTestId('tooltip-icon-test');
+    const icon = screen.getByRole('button', { name: 'Help: Test setting' });
 
     await userEvent.click(icon);
     expect(screen.getByText(props.content as string)).toBeInTheDocument();
@@ -43,7 +44,7 @@ describe('renderer/components/primitives/HelpPopover.tsx', () => {
     Object.defineProperty(scrollContainer, 'clientHeight', { configurable: true, value: 100 });
     Object.defineProperty(scrollContainer, 'scrollHeight', { configurable: true, value: 400 });
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-test'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Test setting' }));
     expect(screen.getByText(props.content as string)).toBeInTheDocument();
 
     fireEvent.scroll(scrollContainer);
@@ -56,7 +57,7 @@ describe('renderer/components/primitives/HelpPopover.tsx', () => {
   it('hides help when clicking outside', async () => {
     renderWithProviders(<HelpPopover {...props} />);
 
-    const icon = screen.getByTestId('tooltip-icon-test');
+    const icon = screen.getByRole('button', { name: 'Help: Test setting' });
 
     await userEvent.click(icon);
     expect(screen.getByText(props.content as string)).toBeInTheDocument();

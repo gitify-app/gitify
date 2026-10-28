@@ -45,7 +45,7 @@ export function FilterCheckbox({
         {label}
       </label>
 
-      {tooltip && <HelpPopover name={`tooltip-${name}`} content={tooltip} />}
+      {tooltip && <HelpPopover content={tooltip} label={label} name={`tooltip-${name}`} />}
 
       {counter !== undefined && (
         <CounterLabel

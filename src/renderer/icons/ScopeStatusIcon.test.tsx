@@ -11,14 +11,9 @@ describe('renderer/icons/ScopeStatusIcon.tsx', () => {
       expect(tree.container).toMatchSnapshot();
     });
 
-    it('renders a success icon with test id when withTestId is true', () => {
-      renderWithProviders(<ScopeStatusIcon granted={true} withTestId={true} />);
-      expect(screen.getByTestId('account-scopes-scope-granted')).toBeInTheDocument();
-    });
-
-    it('does not render a test id by default', () => {
+    it('announces the granted status', () => {
       renderWithProviders(<ScopeStatusIcon granted={true} />);
-      expect(screen.queryByTestId('account-scopes-scope-granted')).not.toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'granted' })).toBeInTheDocument();
     });
   });
 
@@ -28,14 +23,9 @@ describe('renderer/icons/ScopeStatusIcon.tsx', () => {
       expect(tree.container).toMatchSnapshot();
     });
 
-    it('renders a danger icon with test id when withTestId is true', () => {
-      renderWithProviders(<ScopeStatusIcon granted={false} withTestId={true} />);
-      expect(screen.getByTestId('account-scopes-scope-missing')).toBeInTheDocument();
-    });
-
-    it('does not render a test id by default', () => {
+    it('announces the missing status', () => {
       renderWithProviders(<ScopeStatusIcon granted={false} />);
-      expect(screen.queryByTestId('account-scopes-scope-missing')).not.toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'missing' })).toBeInTheDocument();
     });
   });
 
@@ -45,24 +35,17 @@ describe('renderer/icons/ScopeStatusIcon.tsx', () => {
       expect(tree.container).toMatchSnapshot();
     });
 
-    it('renders a dash icon with test id when withTestId is true', () => {
-      renderWithProviders(
-        <ScopeStatusIcon granted={false} notApplicable={true} withTestId={true} />,
-      );
-      expect(screen.getByTestId('account-scopes-scope-na')).toBeInTheDocument();
-    });
-
-    it('does not render a test id by default', () => {
-      renderWithProviders(<ScopeStatusIcon granted={false} notApplicable={true} />);
-      expect(screen.queryByTestId('account-scopes-scope-na')).not.toBeInTheDocument();
-    });
-
     it('ignores granted=true when notApplicable is true', () => {
-      renderWithProviders(
-        <ScopeStatusIcon granted={true} notApplicable={true} withTestId={true} />,
-      );
-      expect(screen.getByTestId('account-scopes-scope-na')).toBeInTheDocument();
-      expect(screen.queryByTestId('account-scopes-scope-granted')).not.toBeInTheDocument();
+      renderWithProviders(<ScopeStatusIcon granted={true} notApplicable={true} />);
+      expect(screen.getByRole('img', { name: 'not applicable' })).toBeInTheDocument();
+      expect(screen.queryByRole('img', { name: 'granted' })).not.toBeInTheDocument();
+    });
+  });
+
+  describe('subject prop', () => {
+    it('prefixes the subject to the accessible name', () => {
+      renderWithProviders(<ScopeStatusIcon granted={false} subject="repo" />);
+      expect(screen.getByRole('img', { name: 'repo missing' })).toBeInTheDocument();
     });
   });
 

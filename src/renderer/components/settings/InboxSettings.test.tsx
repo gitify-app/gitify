@@ -259,7 +259,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       });
     });
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-showOnlyParticipating'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Fetch only participating' }));
 
     await userEvent.click(
       screen.getByTitle('Open GitHub documentation for participating and watching notifications'),
@@ -272,19 +272,19 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
   });
 
   it.each([
-    ['groupBy', 'tooltip-groupBy'],
-    ['showAccountHeader', 'tooltip-showAccountHeader'],
-    ['wrapNotificationTitle', 'tooltip-wrapNotificationTitle'],
-    ['showNumber', 'tooltip-showNumber'],
-    ['delayNotificationState', 'tooltip-delayNotificationState'],
-  ] as const)('renders the %s tooltip', async (_name, tooltipName) => {
+    ['groupBy', 'Group by'],
+    ['showAccountHeader', 'Show account header'],
+    ['wrapNotificationTitle', 'Show full notification title'],
+    ['showNumber', 'Show reference'],
+    ['delayNotificationState', 'Delay notification removal'],
+  ] as const)('renders the %s tooltip', async (_name, label) => {
     await act(async () => {
       renderWithProviders(<InboxSettings />, {
         accounts: [mockGitHubCloudAccount],
       });
     });
 
-    expect(screen.getByTestId(`tooltip-icon-${tooltipName}`)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: `Help: ${label}` })).toBeInTheDocument();
   });
 
   it('shows the fetch interval details in a tooltip', async () => {
@@ -292,7 +292,7 @@ describe('renderer/components/settings/InboxSettings.tsx', () => {
       renderWithProviders(<InboxSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-fetchInterval'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Fetch interval' }));
 
     expect(
       screen.getByText(

@@ -53,10 +53,12 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // notifications + read:user (required) + repo (detailed) = 3 granted; public_repo = N/A (covered by repo)
-    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(3);
-    expect(screen.queryAllByTestId('account-scopes-scope-missing')).toHaveLength(0);
-    expect(screen.getAllByTestId('account-scopes-scope-na')).toHaveLength(1);
+    expect(screen.getByRole('img', { name: 'notifications granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'read:user granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'repo granted' })).toBeInTheDocument();
+    // public_repo is covered by repo
+    expect(screen.getByRole('img', { name: 'public_repo not applicable' })).toBeInTheDocument();
+    expect(screen.queryAllByRole('img', { name: /missing$/ })).toHaveLength(0);
   });
 
   it('shows required-scope row with granted/missing indicators', async () => {
@@ -105,9 +107,10 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // notifications + read:user (required) + public_repo (detailed) = 3 granted; repo = 1 missing
-    expect(screen.getAllByTestId('account-scopes-scope-granted')).toHaveLength(3);
-    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(1);
+    expect(screen.getByRole('img', { name: 'notifications granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'read:user granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'public_repo granted' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'repo missing' })).toBeInTheDocument();
   });
 
   it('shows missing indicator when neither repo nor public_repo is granted', async () => {
@@ -120,10 +123,11 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // Both repo rows show missing
-    expect(screen.getAllByTestId('account-scopes-scope-missing')).toHaveLength(2);
-    expect(screen.getByTestId('account-scopes-repo-scope')).toBeInTheDocument();
-    expect(screen.getByTestId('account-scopes-public-repo-scope')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'repo missing' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'public_repo missing' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: 'Detailed notifications scopes missing' }),
+    ).toBeInTheDocument();
   });
 
   it('shows missing indicator when notifications scope is absent', async () => {
@@ -136,8 +140,8 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    // Required scope (notifications) is missing
-    expect(screen.queryAllByTestId('account-scopes-scope-missing').length).toBeGreaterThan(0);
+    expect(screen.getByRole('img', { name: 'notifications missing' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Required scopes missing' })).toBeInTheDocument();
   });
 
   it('shows extra scopes when token has additional permissions', async () => {

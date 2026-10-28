@@ -131,7 +131,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
     expect(screen.getByText('Global shortcut')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-shortcut'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Global shortcut' }));
 
     expect(screen.getByText('Shortcuts must include:')).toBeInTheDocument();
   });
