@@ -5,7 +5,7 @@ import { type GitifyMilestone, IconColor } from '../../types';
 import { MetricPill } from './MetricPill';
 
 export interface MilestonePillProps {
-  milestone: GitifyMilestone;
+  milestone?: GitifyMilestone;
 }
 
 export function MilestonePill({ milestone }: Readonly<MilestonePillProps>) {
