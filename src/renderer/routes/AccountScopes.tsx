@@ -201,11 +201,7 @@ export function AccountScopesRoute() {
       </Contents>
 
       <Footer justify="end">
-        <Button
-          data-testid="account-scopes-manage-link"
-          leadingVisual={LinkExternalIcon}
-          onClick={() => openAccountSettings(account)}
-        >
+        <Button leadingVisual={LinkExternalIcon} onClick={() => openAccountSettings(account)}>
           Developer settings
         </Button>
       </Footer>

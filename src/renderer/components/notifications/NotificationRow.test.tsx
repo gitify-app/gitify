@@ -243,7 +243,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         markNotificationsAsRead: markNotificationsAsReadMock,
       });
 
-      await userEvent.click(screen.getByTestId('notification-mark-as-read'));
+      await userEvent.click(screen.getByRole('button', { name: 'Mark as read' }));
 
       expect(markNotificationsAsReadMock).toHaveBeenCalledTimes(1);
     });
@@ -259,7 +259,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       renderWithProviders(<NotificationRow {...props} />);
 
-      expect(screen.queryByTestId('notification-mark-as-read')).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Mark as read' })).not.toBeInTheDocument();
     });
 
     it('marks notifications as done', async () => {
@@ -275,7 +275,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         markNotificationsAsDone: markNotificationsAsDoneMock,
       });
 
-      await userEvent.click(screen.getByTestId('notification-mark-as-done'));
+      await userEvent.click(screen.getByRole('button', { name: 'Mark as done' }));
 
       expect(markNotificationsAsDoneMock).toHaveBeenCalledTimes(1);
     });
@@ -291,7 +291,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       renderWithProviders(<NotificationRow {...props} />);
 
-      expect(screen.queryByTestId('notification-mark-as-done')).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Mark as done' })).not.toBeInTheDocument();
     });
 
     it('shows mark as done button when fetchReadNotifications is enabled and notification is unread', async () => {
@@ -304,8 +304,8 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         settings: { ...mockSettings, fetchReadNotifications: true },
       });
 
-      expect(screen.getByTestId('notification-mark-as-done')).toBeInTheDocument();
-      expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Mark as done' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Mark as read' })).toBeInTheDocument();
     });
 
     it('unsubscribes from a notification thread', async () => {
@@ -320,7 +320,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         unsubscribeNotification: unsubscribeNotificationMock,
       });
 
-      await userEvent.click(screen.getByTestId('notification-unsubscribe-from-thread'));
+      await userEvent.click(screen.getByRole('button', { name: 'Unsubscribe from thread' }));
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
     });
@@ -333,7 +333,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       renderWithProviders(<NotificationRow {...props} />);
 
-      expect(screen.queryByTestId('notification-unsubscribe-from-thread')).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'Unsubscribe from thread' }),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -365,7 +367,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
 
       renderWithProviders(<NotificationRow {...props} />);
 
-      expect(screen.getByTestId('notification-mark-as-read')).toHaveAttribute(
+      expect(screen.getByRole('button', { name: 'Mark as read' })).toHaveAttribute(
         'title',
         'Mark as read',
       );
@@ -381,9 +383,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         markNotificationsAsRead: vi.fn().mockResolvedValue(false),
       });
 
-      await userEvent.click(screen.getByTestId('notification-mark-as-read'));
+      await userEvent.click(screen.getByRole('button', { name: 'Mark as read' }));
 
-      expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Mark as read' })).toBeInTheDocument();
     });
 
     it('styles and explains only the action that failed', () => {
@@ -407,11 +409,11 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         'title',
         expect.stringContaining('You can also try opening this notification in your browser.'),
       );
-      expect(screen.getByTestId('notification-mark-as-done')).toHaveAttribute(
+      expect(screen.getByRole('button', { name: 'Mark as done' })).toHaveAttribute(
         'title',
         'Mark as done',
       );
-      expect(screen.getByTestId('notification-unsubscribe-from-thread')).toHaveAttribute(
+      expect(screen.getByRole('button', { name: 'Unsubscribe from thread' })).toHaveAttribute(
         'title',
         'Unsubscribe from thread',
       );

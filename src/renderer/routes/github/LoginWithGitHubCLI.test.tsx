@@ -23,7 +23,7 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
 
     expect(screen.queryByTestId('login-token')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
       expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.com');
@@ -36,10 +36,10 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
 
     renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.gitify.io');
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() =>
       expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.gitify.io'),
@@ -56,7 +56,7 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
       ],
     });
 
-    expect(screen.getByTestId('login-hostname')).toHaveValue(
+    expect(screen.getByRole('textbox', { name: /Hostname/ })).toHaveValue(
       mockGitHubEnterpriseServerAccount.hostname,
     );
   });
@@ -64,10 +64,10 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
   it('rejects a malformed hostname before reaching the CLI', async () => {
     renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
 
-    const hostname = screen.getByTestId('login-hostname');
+    const hostname = screen.getByRole('textbox', { name: /Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'hello');
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     expect(screen.getByTestId('login-errors')).toHaveTextContent('Hostname format is invalid');
     expect(loginWithCliMock).not.toHaveBeenCalled();
@@ -81,7 +81,7 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
 
     renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
 
-    await userEvent.click(screen.getByTestId('login-submit'));
+    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() =>
       expect(screen.getByTestId('login-errors')).toHaveTextContent(

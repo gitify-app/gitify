@@ -131,7 +131,6 @@ export function GitHubLoginWithOAuthAppRoute() {
           </FormControl>
           <Stack align="center" direction="horizontal" gap="condensed">
             <Button
-              data-testid="login-create-oauth-app"
               disabled={!formData.hostname}
               leadingVisual={PersonIcon}
               onClick={() => {
@@ -153,7 +152,6 @@ export function GitHubLoginWithOAuthAppRoute() {
             <TextInput
               aria-invalid={errors.clientId ? 'true' : 'false'}
               block
-              data-testid="login-clientId"
               name="clientId"
               onChange={handleInputChange}
               placeholder="Your generated client id (20 characters)"
@@ -168,7 +166,6 @@ export function GitHubLoginWithOAuthAppRoute() {
             <TextInput
               aria-invalid={errors.clientSecret ? 'true' : 'false'}
               block
-              data-testid="login-clientSecret"
               name="clientSecret"
               onChange={handleInputChange}
               placeholder="Your generated client secret (40 characters)"
@@ -192,7 +189,6 @@ export function GitHubLoginWithOAuthAppRoute() {
       <Footer justify="space-between">
         <Tooltip text="GitHub documentation">
           <Button
-            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(Constants.GITHUB_DOCS.OAUTH_URL)}
             size="small"

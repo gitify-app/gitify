@@ -30,8 +30,8 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     });
 
     expect(screen.getByText('Receive notifications for:')).toBeInTheDocument();
-    expect(screen.getByTestId('device-scope-public')).toBeInTheDocument();
-    expect(screen.getByTestId('device-scope-full')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^Public Limited/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Public and Private/ })).toBeInTheDocument();
 
     // Device flow should not start until user makes a choice
     expect(loginWithDeviceFlowStartMock).not.toHaveBeenCalled();
@@ -52,7 +52,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await userEvent.click(screen.getByRole('button', { name: /^Public Limited/ }));
 
     expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
       'notifications',
@@ -61,7 +61,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
     ]);
 
     await screen.findByTestId('device-user-code');
-    expect(screen.getByTestId('open-browser-button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^Open / })).toBeInTheDocument();
 
     // Verify auto-copy and auto-open were called
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
@@ -83,7 +83,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-full'));
+    await userEvent.click(screen.getByRole('button', { name: /Public and Private/ }));
 
     expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith('github', undefined, [
       'notifications',
@@ -109,7 +109,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await userEvent.click(screen.getByRole('button', { name: /^Public Limited/ }));
     await screen.findByTestId('device-user-code');
 
     expect(screen.getByText('Code copied to clipboard')).toBeInTheDocument();
@@ -132,17 +132,17 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await userEvent.click(screen.getByRole('button', { name: /^Public Limited/ }));
     await screen.findByTestId('device-user-code');
 
     // Reset spies to isolate button interactions
     openExternalLinkSpy.mockClear();
     copyToClipboardSpy.mockClear();
 
-    await userEvent.click(screen.getByTestId('open-browser-button'));
+    await userEvent.click(screen.getByRole('button', { name: /^Open / }));
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/login/device');
 
-    await userEvent.click(screen.getByTestId('copy-link-button'));
+    await userEvent.click(screen.getByRole('button', { name: 'Copy link' }));
     expect(copyToClipboardSpy).toHaveBeenCalledWith('https://github.com/login/device');
   });
 
@@ -161,13 +161,13 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await userEvent.click(screen.getByRole('button', { name: /^Public Limited/ }));
     await screen.findByTestId('device-user-code');
 
     // Clear the auto-copy call from initialization
     copyToClipboardSpy.mockClear();
 
-    await userEvent.click(screen.getByTestId('copy-device-code'));
+    await userEvent.click(screen.getByRole('button', { name: 'Copy device code' }));
 
     expect(copyToClipboardSpy).toHaveBeenCalledWith('USER-1234');
   });
@@ -180,7 +180,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-full'));
+    await userEvent.click(screen.getByRole('button', { name: /Public and Private/ }));
 
     await screen.findByText(/Failed to start authentication/);
     expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
@@ -201,7 +201,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowStart: loginWithDeviceFlowStartMock,
     });
 
-    await userEvent.click(screen.getByTestId('cancel-button'));
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
 
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });
@@ -225,7 +225,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowComplete: loginWithDeviceFlowCompleteMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await userEvent.click(screen.getByRole('button', { name: /^Public Limited/ }));
     await screen.findByTestId('device-user-code');
 
     await waitFor(() => {
@@ -259,7 +259,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await userEvent.click(screen.getByRole('button', { name: /^Public Limited/ }));
     await screen.findByTestId('device-user-code');
 
     await waitFor(() => {
@@ -286,7 +286,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       loginWithDeviceFlowPoll: loginWithDeviceFlowPollMock,
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-public'));
+    await userEvent.click(screen.getByRole('button', { name: /^Public Limited/ }));
     await screen.findByTestId('device-user-code');
 
     await waitFor(() => {
@@ -322,7 +322,7 @@ describe('renderer/routes/github/LoginWithDeviceFlow.tsx', () => {
       ],
     });
 
-    await userEvent.click(screen.getByTestId('device-scope-full'));
+    await userEvent.click(screen.getByRole('button', { name: /Public and Private/ }));
 
     expect(loginWithDeviceFlowStartMock).toHaveBeenCalledWith(
       'github',

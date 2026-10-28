@@ -180,7 +180,6 @@ export function GitHubLoginWithDeviceFlowRoute() {
           </Text>
           <IconButton
             aria-label="Copy device code"
-            data-testid="copy-device-code"
             icon={CopyIcon}
             onClick={handleCopyUserCode}
             size="small"
@@ -232,12 +231,7 @@ export function GitHubLoginWithDeviceFlowRoute() {
           </Stack>
         </Button>
 
-        <Button
-          block
-          data-testid="device-scope-public"
-          labelWrap
-          onClick={() => setScopeChoice('public')}
-        >
+        <Button block labelWrap onClick={() => setScopeChoice('public')}>
           <Stack gap="none">
             <Text>Public</Text>
             <Text size="small">Limited experience with least privilege permissions.</Text>
@@ -324,31 +318,21 @@ export function GitHubLoginWithDeviceFlowRoute() {
 
       {session ? (
         <Footer justify="space-between">
-          <Button
-            data-testid="open-browser-button"
-            leadingVisual={GlobeIcon}
-            onClick={handleOpenBrowser}
-            variant="primary"
-          >
+          <Button leadingVisual={GlobeIcon} onClick={handleOpenBrowser} variant="primary">
             Open {session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname}
           </Button>
           <Stack direction="horizontal" gap="condensed">
-            <Button
-              data-testid="copy-link-button"
-              leadingVisual={LinkIcon}
-              onClick={handleCopyVerificationLink}
-              variant="default"
-            >
+            <Button leadingVisual={LinkIcon} onClick={handleCopyVerificationLink} variant="default">
               Copy link
             </Button>
-            <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
+            <Button onClick={() => navigate(-1)} variant="default">
               Cancel
             </Button>
           </Stack>
         </Footer>
       ) : (
         <Footer justify="end">
-          <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
+          <Button onClick={() => navigate(-1)} variant="default">
             Cancel
           </Button>
         </Footer>

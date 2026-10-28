@@ -92,7 +92,7 @@ describe('renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx', () => {
   it('opens help docs in the browser', async () => {
     renderWithProviders(<GitLabLoginWithPersonalAccessTokenRoute />);
 
-    await userEvent.click(screen.getByTestId('login-docs'));
+    await userEvent.click(screen.getByRole('button', { name: 'Docs' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith('https://docs.gitlab.com/api/todos/');

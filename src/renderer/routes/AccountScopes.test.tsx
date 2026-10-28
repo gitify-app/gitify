@@ -174,7 +174,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    await userEvent.click(screen.getByTestId('account-scopes-manage-link'));
+    await userEvent.click(screen.getByRole('button', { name: 'Developer settings' }));
 
     expect(openAccountSettingsSpy).toHaveBeenCalledTimes(1);
   });
@@ -184,7 +184,7 @@ describe('renderer/routes/AccountScopes.tsx', () => {
       renderWithProviders(<AccountScopesRoute />);
     });
 
-    await userEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
     expect(navigateMock).toHaveBeenCalledWith(-1);
   });

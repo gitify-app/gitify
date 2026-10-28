@@ -63,7 +63,6 @@ export function AlertSettings() {
             <ButtonGroup data-testid="settings-volume-group">
               <IconButton
                 aria-label="Volume down"
-                data-testid="settings-volume-down"
                 disabled={!canDecreaseVolume(notificationVolume)}
                 icon={VolumeDownIcon}
                 onClick={() => {
@@ -84,7 +83,6 @@ export function AlertSettings() {
 
               <IconButton
                 aria-label="Volume up"
-                data-testid="settings-volume-up"
                 disabled={!canIncreaseVolume(notificationVolume)}
                 icon={VolumeUpIcon}
                 onClick={() => {
@@ -96,7 +94,6 @@ export function AlertSettings() {
 
               <IconButton
                 aria-label="Reset volume"
-                data-testid="settings-volume-reset"
                 icon={SyncIcon}
                 onClick={() => {
                   updateSetting('notificationVolume', defaultSettings.notificationVolume);
