@@ -16,7 +16,6 @@ exports[`renderer/components/metrics/MetricGroup.tsx > renders pills when showPi
         data-component="Label"
         data-size="small"
         data-variant="secondary"
-        tabindex="0"
       >
         <div
           class="prc-Stack-Stack-UQ9k6"
@@ -74,7 +73,6 @@ exports[`renderer/components/metrics/MetricGroup.tsx > renders pills when showPi
         data-component="Label"
         data-size="small"
         data-variant="secondary"
-        tabindex="0"
       >
         <div
           class="prc-Stack-Stack-UQ9k6"

@@ -11,7 +11,6 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with 1 comment 1
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -74,7 +73,6 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with multiple co
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
