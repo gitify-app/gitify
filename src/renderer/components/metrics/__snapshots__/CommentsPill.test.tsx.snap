@@ -4,6 +4,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with 1 comment 1
 <div>
   <button
     aria-describedby="_r_0_"
+    aria-label="1 comment"
     type="button"
   >
     <span
@@ -66,6 +67,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with multiple co
 <div>
   <button
     aria-describedby="_r_1_"
+    aria-label="2 comments"
     type="button"
   >
     <span

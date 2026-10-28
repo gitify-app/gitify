@@ -18,6 +18,7 @@ export function MilestonePill({ milestone }: Readonly<MilestonePillProps>) {
 
   return (
     <MetricPill
+      ariaLabel={description}
       color={isOpen ? IconColor.GREEN : IconColor.PURPLE}
       contents={description}
       icon={MilestoneIcon}

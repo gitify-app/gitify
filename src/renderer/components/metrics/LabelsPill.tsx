@@ -3,6 +3,7 @@ import { IssueLabelToken, LabelGroup } from '@primer/react';
 
 import { type GitifyIssueField, type GitifyLabels, IconColor } from '../../types';
 
+import { formatMetricDescription } from '../../utils/notifications/formatters';
 import { MetricPill } from './MetricPill';
 
 export interface LabelsPillProps {
@@ -44,8 +45,14 @@ export function LabelsPill({ labels, issueFields }: Readonly<LabelsPillProps>) {
     return null;
   }
 
+  const labelNames = [
+    ...fieldTokens.map((field) => field.text),
+    ...(labels ?? []).map((label) => label.name),
+  ];
+
   return (
     <MetricPill
+      ariaLabel={`${formatMetricDescription(labelNames.length, 'label')}: ${labelNames.join(', ')}`}
       color={IconColor.GRAY}
       contents={labelsContent}
       icon={TagIcon}

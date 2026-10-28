@@ -4,6 +4,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders closed mileston
 <div>
   <button
     aria-describedby="_r_1_"
+    aria-label="Milestone: Milestone 1 (closed)"
     type="button"
   >
     <span
@@ -60,6 +61,7 @@ exports[`renderer/components/metrics/MilestonePill.tsx > renders open milestone 
 <div>
   <button
     aria-describedby="_r_0_"
+    aria-label="Milestone: Milestone 1 (open)"
     type="button"
   >
     <span
