@@ -417,7 +417,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
               | { name: string }
               | Record<PropertyKey, never>
              | null }
-         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
+         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, body: string, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -500,7 +500,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
               | { name: string }
               | Record<PropertyKey, never>
              | null }
-         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
+         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, body: string, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -544,7 +544,7 @@ export type FetchPullRequestByNumberQueryVariables = Exact<{
 }>;
 
 
-export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
+export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typename: 'PullRequest', number: number, title: string, url: Link, body: string, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -576,7 +576,7 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
                 | { login: string }
                | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null, statusCheckRollup: { state: StatusState, contexts: { checkRunCountsByState: Array<{ state: CheckRunState, count: number }> | null, statusContextCountsByState: Array<{ state: StatusState, count: number }> | null } } | null } | null } | null };
 
-export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
+export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, body: string, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
     | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -993,6 +993,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   number
   title
   url
+  body
   state
   merged
   isDraft
@@ -1323,6 +1324,7 @@ fragment PullRequestDetails on PullRequest {
   number
   title
   url
+  body
   state
   merged
   isDraft
@@ -1847,6 +1849,7 @@ fragment PullRequestDetails on PullRequest {
   number
   title
   url
+  body
   state
   merged
   isDraft
@@ -1992,6 +1995,7 @@ fragment PullRequestDetails on PullRequest {
   number
   title
   url
+  body
   state
   merged
   isDraft

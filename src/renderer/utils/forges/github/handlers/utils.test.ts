@@ -6,7 +6,12 @@ import type {
   IssueFieldSingleSelectOptionColor,
   IssueTypeColor,
 } from '../graphql/generated/graphql';
-import { getNotificationAuthor, mapIssueFieldColor, mapIssueTypeColor } from './utils';
+import {
+  getNotificationAuthor,
+  getTaskProgress,
+  mapIssueFieldColor,
+  mapIssueTypeColor,
+} from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
@@ -88,6 +93,50 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
     it('falls back to gray for an unknown color', () => {
       expect(mapIssueFieldColor('CHARTREUSE' as IssueFieldSingleSelectOptionColor)).toBe('#59636e');
+    });
+  });
+
+  describe('getTaskProgress', () => {
+    it('returns undefined for an empty body', () => {
+      expect(getTaskProgress(null)).toBeUndefined();
+      expect(getTaskProgress('')).toBeUndefined();
+    });
+
+    it('returns undefined when there are no tasks', () => {
+      expect(getTaskProgress('Just a description\n- a bullet')).toBeUndefined();
+    });
+
+    it('counts completed and open tasks', () => {
+      const body = [
+        '## Checklist',
+        '- [x] done',
+        '- [X] also done',
+        '* [ ] not done',
+        '+ [ ] another',
+        '1. [x] numbered',
+        '  - [ ] nested',
+        '> - [x] quoted',
+      ].join('\n');
+
+      expect(getTaskProgress(body)).toEqual({ total: 7, completed: 4 });
+    });
+
+    it('ignores tasks inside fenced code blocks and empty checkboxes', () => {
+      const body = [
+        '- [x] real',
+        '```md',
+        '- [ ] example',
+        '~~~',
+        '- [ ] still in the code block',
+        '```',
+        '~~~',
+        '- [ ] tilde example',
+        '~~~',
+        '- [ ]',
+        '- [ ] real too',
+      ].join('\r\n');
+
+      expect(getTaskProgress(body)).toEqual({ total: 2, completed: 1 });
     });
   });
 });

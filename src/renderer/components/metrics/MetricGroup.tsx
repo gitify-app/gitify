@@ -13,6 +13,7 @@ import { ReactionsPill } from './ReactionsPill';
 import { ReviewsPill } from './ReviewsPill';
 import { StackedPrsPill } from './StackedPrsPill';
 import { SubIssueProgressPill } from './SubIssueProgressPill';
+import { TaskProgressPill } from './TaskProgressPill';
 
 export interface MetricGroupProps {
   notification: GitifyNotification;
@@ -58,6 +59,8 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
         reactionGroups={notification.subject.reactionGroups ?? []}
         reactionsCount={notification.subject.reactionsCount ?? 0}
       />
+
+      <TaskProgressPill progress={notification.subject.taskProgress} />
 
       <LabelsPill
         labels={notification.subject.labels ?? []}

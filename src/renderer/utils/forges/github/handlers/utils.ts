@@ -1,4 +1,4 @@
-import type { GitifyNotificationUser, Link } from '../../../../types';
+import type { GitifyNotificationUser, GitifyTaskProgress, Link } from '../../../../types';
 import { IconColor } from '../../../../types';
 
 import type {
@@ -91,4 +91,44 @@ export function mapIssueTypeColor(color: IssueTypeColor): IconColor {
  */
 export function mapIssueFieldColor(color: IssueFieldSingleSelectOptionColor): string {
   return ISSUE_FIELD_FILL_COLORS[color] ?? ISSUE_FIELD_FILL_COLORS.GRAY;
+}
+
+const FENCE_PATTERN = /^\s*(```|~~~)/;
+const TASK_PATTERN = /^\s*(?:>\s*)*(?:[-*+]|\d+[.)])\s+\[([ xX])\]\s+\S/;
+
+/**
+ * Count markdown task list items (`- [ ]` / `- [x]`) in a body, ignoring fenced code blocks.
+ */
+export function getTaskProgress(body: string | null | undefined): GitifyTaskProgress | undefined {
+  if (!body) {
+    return undefined;
+  }
+
+  let total = 0;
+  let completed = 0;
+  let fence: string | null = null;
+
+  for (const line of body.split(/\r?\n/)) {
+    const fenceMatch = FENCE_PATTERN.exec(line);
+    if (fenceMatch) {
+      if (!fence) {
+        fence = fenceMatch[1];
+      } else if (fence === fenceMatch[1]) {
+        fence = null;
+      }
+      continue;
+    }
+
+    if (fence) {
+      continue;
+    }
+
+    const taskMatch = TASK_PATTERN.exec(line);
+    if (taskMatch) {
+      total += 1;
+      completed += Number(taskMatch[1] !== ' ');
+    }
+  }
+
+  return total ? { total, completed } : undefined;
 }

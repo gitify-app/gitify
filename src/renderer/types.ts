@@ -404,6 +404,8 @@ export interface GitifySubject {
   linkedIssues?: GitifyLinkedIssue[];
   /** CI check summary for the PR's head commit */
   checks?: GitifyCheckSummary;
+  /** Markdown task list progress from the PR description */
+  taskProgress?: GitifyTaskProgress;
   /** Total comment count */
   commentCount?: number;
   /** Labels names and colors */
@@ -514,6 +516,11 @@ export interface GitifyParentIssue {
 }
 
 /** GitHub sub-issue progress summary */
+export interface GitifyTaskProgress {
+  total: number;
+  completed: number;
+}
+
 export interface GitifySubIssueProgress {
   total: number;
   completed: number;
