@@ -1,0 +1,48 @@
+src/renderer/components/Sidebar.test.tsx
+  h_ac004aadb63da9 79-81,87,99,137,149-152,162,175,187,200,213,224,239,251,262-266,276-279,281,291-295,305,318,333-335
+src/renderer/components/filters/FilterCheckbox.test.tsx
+  h_ac004aadb63da9 14,31
+src/renderer/components/notifications/NotificationRow.test.tsx
+  h_ac004aadb63da9 246,262,278,294,307-308,323,336-338,370,386,388,412,416
+src/renderer/components/primitives/Header.test.tsx
+  h_ac004aadb63da9 22,36
+src/renderer/components/primitives/Header.tsx
+  h_ac004aadb63da9 25
+src/renderer/components/primitives/__snapshots__/Header.test.tsx.snap
+  h_ac004aadb63da9 18,46-55
+src/renderer/routes/AccountScopes.test.tsx
+  h_ac004aadb63da9 177,187
+src/renderer/routes/Accounts.test.tsx
+  h_ac004aadb63da9 44,247,268,270,287,306,318,328,344,346,348,350,352,367-368,370-372,374,389-390,392,394,409,411,413,428,430,432,456,458,481,504,527,557,604,619
+src/renderer/routes/Filters.test.tsx
+  h_ac004aadb63da9 114,128
+src/renderer/routes/Settings.test.tsx
+  h_ac004aadb63da9 134-158,170
+src/renderer/routes/bitbucket/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 97,121
+src/renderer/routes/gitea/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 111
+src/renderer/routes/github/LoginWithDeviceFlow.test.tsx
+  h_ac004aadb63da9 33-34,55,64,86,112,135,142,145,164,170,183,204,228,262,289,325
+src/renderer/routes/github/LoginWithGitHubCLI.test.tsx
+  h_ac004aadb63da9 26,39,42,59,67,70,84
+src/renderer/routes/github/LoginWithOAuthApp.test.tsx
+  h_ac004aadb63da9 29,139
+src/renderer/routes/github/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 31,141
+src/renderer/routes/github/__snapshots__/LoginWithGitHubCLI.test.tsx.snap
+  h_ac004aadb63da9 22,50-59,172-173,196,202,211
+src/renderer/routes/gitlab/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 95
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7b3a1ff699614fd008390ab824ca8e142d13ec67",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
