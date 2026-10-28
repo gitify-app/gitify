@@ -1,3 +1,5 @@
+import { screen } from '@testing-library/react';
+
 import { renderWithProviders } from '../../__helpers__/test-utils';
 
 import { MilestonePill, type MilestonePillProps } from './MilestonePill';
@@ -21,6 +23,7 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
 
     const tree = renderWithProviders(<MilestonePill {...props} />);
 
+    expect(screen.getByText('Milestone: Milestone 1 (open)')).toBeInTheDocument();
     expect(tree.container).toMatchSnapshot();
   });
 
@@ -34,6 +37,7 @@ describe('renderer/components/metrics/MilestonePill.tsx', () => {
 
     const tree = renderWithProviders(<MilestonePill {...props} />);
 
+    expect(screen.getByText('Milestone: Milestone 1 (closed)')).toBeInTheDocument();
     expect(tree.container).toMatchSnapshot();
   });
 });
