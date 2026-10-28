@@ -78,6 +78,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {

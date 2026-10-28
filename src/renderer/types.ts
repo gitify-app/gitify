@@ -398,7 +398,7 @@ export interface GitifySubject {
   /** PR reviewer states and review thread resolution counts */
   reviewers?: GitifyPullRequestReviewer[];
   /** PRs closing issues */
-  linkedIssues?: string[];
+  linkedIssues?: GitifyLinkedIssue[];
   /** Total comment count */
   commentCount?: number;
   /** Labels names and colors */
@@ -497,6 +497,11 @@ export interface GitifyIssueType {
 }
 
 /** GitHub sub-issue parent context */
+export interface GitifyLinkedIssue {
+  number: number;
+  url: Link;
+}
+
 export interface GitifyParentIssue {
   number: number;
   title: string;
