@@ -1,0 +1,34 @@
+src/renderer/components/metrics/MetricGroup.tsx
+  h_ac004aadb63da9 15,60-61
+src/renderer/components/metrics/TaskProgressPill.test.tsx
+  h_ac004aadb63da9 1-34
+src/renderer/components/metrics/TaskProgressPill.tsx
+  h_ac004aadb63da9 1-34
+src/renderer/components/metrics/__snapshots__/TaskProgressPill.test.tsx.snap
+  h_ac004aadb63da9 1-14,15-78
+src/renderer/types.ts
+  h_ac004aadb63da9 405-406,517-521
+src/renderer/utils/forges/github/__mocks__/response-mocks.ts
+  h_ac004aadb63da9 132
+src/renderer/utils/forges/github/graphql/generated/graphql.ts
+  h_ac004aadb63da9 952,1270,1782,1915
+src/renderer/utils/forges/github/graphql/pull.graphql
+  h_ac004aadb63da9 25
+src/renderer/utils/forges/github/handlers/pullRequest.ts
+  h_ac004aadb63da9 34,109
+src/renderer/utils/forges/github/handlers/utils.test.ts
+  h_ac004aadb63da9 9-14,98-141
+src/renderer/utils/forges/github/handlers/utils.ts
+  h_ac004aadb63da9 1,95-134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e9858a68e7037ae4939aed36fc25775f23274327",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
