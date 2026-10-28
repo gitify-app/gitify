@@ -22,7 +22,7 @@ export function Header(props: Readonly<HeaderProps>) {
     <div className="pl-4 pr-5 pt-3 pb-1">
       <Stack direction="horizontal" justify="space-between">
         <IconButton
-          aria-labelledby="Go Back"
+          aria-label="Go back"
           data-testid="header-nav-back"
           icon={ArrowLeftIcon}
           onClick={() => {

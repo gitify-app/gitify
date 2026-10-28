@@ -76,15 +76,15 @@ describe('renderer/components/Sidebar.tsx', () => {
       accounts: [],
     });
 
-    expect(screen.queryByTestId('sidebar-notifications')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('sidebar-my-issues')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('sidebar-my-pull-requests')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^Notifications/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^My issues/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /^My pull requests/ })).not.toBeInTheDocument();
   });
 
   it('navigates home when clicking logo', async () => {
     renderWithProviders(<Sidebar />);
 
-    await userEvent.click(screen.getByTestId('sidebar-home'));
+    await userEvent.click(screen.getByRole('button', { name: new RegExp(`^${APPLICATION.NAME}`) }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
@@ -96,7 +96,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-notifications'));
+      await userEvent.click(screen.getByRole('button', { name: /^Notifications/ }));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/notifications');
@@ -134,7 +134,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         settings: { ...mockSettings, participating: false },
       });
 
-      expect(screen.getByTestId('sidebar-focused-mode')).toHaveAttribute(
+      expect(screen.getByRole('button', { name: /^Toggle focused mode/ })).toHaveAttribute(
         'data-variant',
         'invisible',
       );
@@ -146,7 +146,10 @@ describe('renderer/components/Sidebar.tsx', () => {
         settings: { ...mockSettings, participating: true },
       });
 
-      expect(screen.getByTestId('sidebar-focused-mode')).toHaveAttribute('data-variant', 'primary');
+      expect(screen.getByRole('button', { name: /^Toggle focused mode/ })).toHaveAttribute(
+        'data-variant',
+        'primary',
+      );
     });
 
     it('toggles participating when clicked', async () => {
@@ -156,7 +159,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         fetchNotifications: fetchNotificationsMock,
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-focused-mode'));
+      await userEvent.click(screen.getByRole('button', { name: /^Toggle focused mode/ }));
 
       expect(updateSettingSpy).toHaveBeenCalledTimes(1);
       expect(updateSettingSpy).toHaveBeenCalledWith('participating', true);
@@ -169,7 +172,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
+      await userEvent.click(screen.getByRole('button', { name: /^Filters/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/filters');
@@ -181,7 +184,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-filter-notifications'));
+      await userEvent.click(screen.getByRole('button', { name: /^Filters/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
@@ -194,7 +197,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         filters: { reasons: ['assign'] },
       });
 
-      expect(screen.getByTestId('sidebar-filter-notifications')).toHaveAttribute(
+      expect(screen.getByRole('button', { name: /^Filters/ })).toHaveAttribute(
         'data-variant',
         'primary',
       );
@@ -207,7 +210,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-my-issues'));
+      await userEvent.click(screen.getByRole('button', { name: /^My issues/ }));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/issues');
@@ -218,7 +221,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-my-pull-requests'));
+      await userEvent.click(screen.getByRole('button', { name: /^My pull requests/ }));
 
       expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
       expect(openExternalLinkSpy).toHaveBeenCalledWith('https://github.com/pulls');
@@ -233,7 +236,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         status: 'success',
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-refresh'));
+      await userEvent.click(screen.getByRole('button', { name: /^Refresh/ }));
 
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     });
@@ -245,7 +248,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         status: 'loading',
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-refresh'));
+      await userEvent.click(screen.getByRole('button', { name: /^Refresh/ }));
 
       expect(fetchNotificationsMock).not.toHaveBeenCalled();
     });
@@ -256,8 +259,11 @@ describe('renderer/components/Sidebar.tsx', () => {
         status: 'loading',
       });
 
-      expect(screen.getByTestId('sidebar-refresh')).toHaveAttribute('data-loading', 'true');
-      expect(screen.getByTestId('sidebar-refresh')).toBeDisabled();
+      expect(screen.getByRole('button', { name: /^Refresh/ })).toHaveAttribute(
+        'data-loading',
+        'true',
+      );
+      expect(screen.getByRole('button', { name: /^Refresh/ })).toBeDisabled();
     });
 
     it('shows a loading spinner on the refresh icon while a background fetch is in flight, regardless of settled status', () => {
@@ -267,9 +273,12 @@ describe('renderer/components/Sidebar.tsx', () => {
         isFetching: true,
       });
 
-      expect(screen.getByTestId('sidebar-refresh')).toHaveAttribute('data-loading', 'true');
+      expect(screen.getByRole('button', { name: /^Refresh/ })).toHaveAttribute(
+        'data-loading',
+        'true',
+      );
       expect(tree.container.querySelector('[data-component="Spinner"]')).toBeInTheDocument();
-      expect(screen.getByTestId('sidebar-refresh')).toBeDisabled();
+      expect(screen.getByRole('button', { name: /^Refresh/ })).toBeDisabled();
     });
 
     it('does not show a loading spinner on the refresh icon when settled and no fetch is in flight', () => {
@@ -279,8 +288,11 @@ describe('renderer/components/Sidebar.tsx', () => {
         isFetching: false,
       });
 
-      expect(screen.getByTestId('sidebar-refresh')).toHaveAttribute('data-loading', 'false');
-      expect(screen.getByTestId('sidebar-refresh')).toBeEnabled();
+      expect(screen.getByRole('button', { name: /^Refresh/ })).toHaveAttribute(
+        'data-loading',
+        'false',
+      );
+      expect(screen.getByRole('button', { name: /^Refresh/ })).toBeEnabled();
     });
   });
 
@@ -290,7 +302,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-settings'));
+      await userEvent.click(screen.getByRole('button', { name: /^Settings/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/settings');
@@ -303,7 +315,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         fetchNotifications: fetchNotificationsMock,
       });
 
-      await userEvent.click(screen.getByTestId('sidebar-settings'));
+      await userEvent.click(screen.getByRole('button', { name: /^Settings/ }));
 
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(1);
@@ -318,7 +330,9 @@ describe('renderer/components/Sidebar.tsx', () => {
       accounts: [],
     });
 
-    await userEvent.click(screen.getByTestId('sidebar-quit'));
+    await userEvent.click(
+      screen.getByRole('button', { name: new RegExp(`^Quit ${APPLICATION.NAME}`) }),
+    );
 
     expect(quitAppSpy).toHaveBeenCalledTimes(1);
   });

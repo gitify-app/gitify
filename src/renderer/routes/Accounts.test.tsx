@@ -41,7 +41,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         renderWithProviders(<AccountsRoute />);
       });
 
-      await userEvent.click(screen.getByTestId('header-nav-back'));
+      await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith(-1);
@@ -244,7 +244,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       // Clicking the scopes button for the account with missing scopes
       // navigates to the scopes route where the user can investigate.
-      await userEvent.click(screen.getAllByTestId('account-view-scopes')[0]);
+      await userEvent.click(screen.getAllByRole('button', { name: /^View scopes for / })[0]);
 
       expect(navigateMock).toHaveBeenCalledWith('/account-scopes', {
         state: {
@@ -265,9 +265,9 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
       // All 3 accounts render the primary/set-primary button
-      expect(screen.getAllByTestId('account-set-primary')).toHaveLength(3);
+      expect(screen.getAllByRole('button', { name: /^Set as primary account/ })).toHaveLength(3);
 
-      await userEvent.click(screen.getAllByTestId('account-set-primary')[1]);
+      await userEvent.click(screen.getAllByRole('button', { name: /^Set as primary account/ })[1]);
 
       expect(useAccountsStore.getState().accounts[0]).toBe(mockOAuthAccount);
       expect(navigateMock).toHaveBeenCalledWith('/accounts', { replace: true });
@@ -284,7 +284,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-refresh'));
+      await userEvent.click(screen.getByRole('button', { name: /^Refresh / }));
 
       expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(1);
@@ -303,7 +303,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-logout'));
+      await userEvent.click(screen.getByRole('button', { name: /^Logout / }));
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
     });
@@ -315,7 +315,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      expect(screen.getAllByTestId('account-view-scopes')).toHaveLength(3);
+      expect(screen.getAllByRole('button', { name: /^View scopes for / })).toHaveLength(3);
     });
 
     it('navigates to account-scopes when clicking view-scopes', async () => {
@@ -325,7 +325,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-view-scopes'));
+      await userEvent.click(screen.getByRole('button', { name: /^View scopes for / }));
 
       expect(navigateMock).toHaveBeenCalledWith('/account-scopes', {
         state: { account: mockPersonalAccessTokenAccount },
@@ -341,15 +341,15 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
 
-      expect(screen.getByTestId('account-add-forge-github')).toHaveTextContent('GitHub');
+      expect(screen.getByRole('menuitem', { name: /^GitHub/ })).toHaveTextContent('GitHub');
 
-      await userEvent.click(screen.getByTestId('account-add-forge-github'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub/ }));
 
-      expect(screen.getByTestId('account-add-github')).toHaveTextContent('GitHub');
+      expect(screen.getByRole('menuitem', { name: /^GitHub$/ })).toHaveTextContent('GitHub');
 
-      await userEvent.click(screen.getByTestId('account-add-github'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub$/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow', {
@@ -364,12 +364,14 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
-      await userEvent.click(screen.getByTestId('account-add-forge-github'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub/ }));
 
-      expect(screen.getByTestId('account-add-pat')).toHaveTextContent('Personal Access Token');
+      expect(screen.getByRole('menuitem', { name: /^Personal Access Token/ })).toHaveTextContent(
+        'Personal Access Token',
+      );
 
-      await userEvent.click(screen.getByTestId('account-add-pat'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Personal Access Token/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token', {
@@ -384,12 +386,12 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
-      await userEvent.click(screen.getByTestId('account-add-forge-github'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub/ }));
 
-      expect(screen.getByTestId('account-add-oauth-app')).toHaveTextContent('OAuth App');
+      expect(screen.getByRole('menuitem', { name: /^OAuth App/ })).toHaveTextContent('OAuth App');
 
-      await userEvent.click(screen.getByTestId('account-add-oauth-app'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^OAuth App/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
@@ -404,11 +406,11 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
 
-      expect(screen.getByTestId('account-add-forge-gitea')).toHaveTextContent('Gitea');
+      expect(screen.getByRole('menuitem', { name: /^Gitea/ })).toHaveTextContent('Gitea');
 
-      await userEvent.click(screen.getByTestId('account-add-forge-gitea'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Gitea/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token', {
@@ -423,11 +425,11 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
 
-      expect(screen.getByTestId('account-add-forge-bitbucket')).toHaveTextContent('Bitbucket');
+      expect(screen.getByRole('menuitem', { name: /^Bitbucket/ })).toHaveTextContent('Bitbucket');
 
-      await userEvent.click(screen.getByTestId('account-add-forge-bitbucket'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Bitbucket/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/bitbucket/personal-access-token', {
@@ -451,9 +453,9 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      expect(screen.queryByTestId('account-view-scopes')).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /^View scopes for / })).not.toBeInTheDocument();
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token', {
@@ -476,7 +478,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow', {
@@ -499,7 +501,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
@@ -522,7 +524,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token', {
@@ -552,7 +554,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).not.toHaveBeenCalled();
       expect(rendererLogErrorSpy).toHaveBeenCalledWith(
@@ -599,7 +601,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-refresh'));
+      await userEvent.click(screen.getByRole('button', { name: /^Refresh / }));
 
       expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/accounts', { replace: true });
@@ -614,7 +616,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      expect(screen.queryByTestId('account-view-scopes')).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /^View scopes for / })).not.toBeInTheDocument();
     });
   });
 });
