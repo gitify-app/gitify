@@ -11,7 +11,6 @@ exports[`renderer/components/metrics/LabelsPill.tsx > renders with labels 1`] = 
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"

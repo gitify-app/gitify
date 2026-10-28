@@ -11,7 +11,6 @@ exports[`renderer/components/metrics/MetricPill.tsx > renders with metric 1`] = 
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -74,7 +73,6 @@ exports[`renderer/components/metrics/MetricPill.tsx > renders without metric 1`]
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"

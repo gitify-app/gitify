@@ -25,12 +25,7 @@ export function MetricPill(props: Readonly<MetricPillProps>) {
     // @ts-expect-error: We overload text with a ReactNode
     <Tooltip direction="s" text={props.contents}>
       <button aria-label={props.ariaLabel} type="button" onClick={props.onClick}>
-        <Label
-          className="hover:bg-gitify-notification-pill-hover"
-          size="small"
-          tabIndex={props.onClick ? undefined : 0}
-          variant="secondary"
-        >
+        <Label className="hover:bg-gitify-notification-pill-hover" size="small" variant="secondary">
           <Stack align="center" direction="horizontal" gap="none">
             {Icon ? <Icon className={props.color} size={Size.XSMALL} /> : props.iconElement}
             {props.metric ? (

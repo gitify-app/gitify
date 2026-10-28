@@ -1,3 +1,6 @@
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { MarkGithubIcon } from '@primer/octicons-react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
@@ -30,5 +33,20 @@ describe('renderer/components/metrics/MetricPill.tsx', () => {
     const tree = renderWithProviders(<MetricPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
+  });
+
+  it('has a single tab stop when the pill is not clickable', async () => {
+    renderWithProviders(
+      <>
+        <MetricPill color={IconColor.GREEN} contents="Mock Pill" icon={MarkGithubIcon} metric={1} />
+        <button type="button">Next</button>
+      </>,
+    );
+
+    await userEvent.tab();
+    expect(screen.getByRole('button', { name: /Mock Pill|1/ })).toHaveFocus();
+
+    await userEvent.tab();
+    expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus();
   });
 });
