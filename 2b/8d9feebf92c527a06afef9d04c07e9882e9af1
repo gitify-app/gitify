@@ -1,0 +1,20 @@
+src/renderer/components/metrics/MetricGroup.test.tsx
+  h_ac004aadb63da9 73,118
+src/renderer/components/metrics/ParentPill.test.tsx
+  h_ac004aadb63da9 23,30-31
+src/renderer/components/metrics/ParentPill.tsx
+  h_ac004aadb63da9 30
+src/renderer/components/metrics/__snapshots__/ParentPill.test.tsx.snap
+  h_ac004aadb63da9 3,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2b8d9feebf92c527a06afef9d04c07e9882e9af1",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
