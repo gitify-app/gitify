@@ -89,6 +89,7 @@ class PullRequestHandler extends DefaultHandler {
       commenter: commenter,
       reviewRequested,
       reviewers,
+      reviewDecision: prState === 'OPEN' ? (pr.reviewDecision ?? undefined) : undefined,
       commentCount: pr.comments.totalCount,
       labels:
         pr.labels?.nodes?.filter(Boolean).map((label) => ({

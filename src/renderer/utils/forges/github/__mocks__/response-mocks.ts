@@ -133,6 +133,7 @@ export function mockPullRequestResponseNode(mocks: {
     isDraft: mocks.isDraft ?? false,
     merged: mocks.merged ?? false,
     isInMergeQueue: mocks.isInMergeQueue ?? false,
+    reviewDecision: null,
     url: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
     author: mockAuthor,
     labels: { nodes: [] },

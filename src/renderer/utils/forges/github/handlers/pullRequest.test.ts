@@ -121,6 +121,32 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       ]);
     });
 
+    it('sets the review decision for open pull requests', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.reviewDecision = 'REVIEW_REQUIRED';
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.reviewDecision).toBe('REVIEW_REQUIRED');
+    });
+
+    it('omits the review decision for draft pull requests', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN', isDraft: true });
+      mockPullRequest.reviewDecision = 'REVIEW_REQUIRED';
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.reviewDecision).toBeUndefined();
+    });
+
     it('draft pull request state', async () => {
       const mockPullRequest = mockPullRequestResponseNode({
         state: 'OPEN',
