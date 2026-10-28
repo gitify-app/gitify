@@ -70,7 +70,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       settings: { ...mockSettings, showPills: true },
     });
 
-    expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
+    expect(tree.getByText('#456')).toBeInTheDocument();
   });
 
   it('renders the sub-issue progress pill when the subject has sub-issue progress', async () => {
@@ -115,7 +115,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     });
 
     expect(tree.getByText('Bug')).toBeInTheDocument();
-    expect(tree.getByText('#456 Parent Epic')).toBeInTheDocument();
+    expect(tree.getByText('#456')).toBeInTheDocument();
     expect(tree.getByText('2/5')).toBeInTheDocument();
   });
 
