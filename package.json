@@ -143,15 +143,15 @@
     "zustand": "5.0.16"
   },
   "devEngines": {
-    "runtime": {
-      "name": "node",
-      "version": "24.22.1",
-      "onFail": "warn"
-    },
     "packageManager": {
       "name": "pnpm",
       "version": "12.15.0",
       "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "24.22.1",
+      "onFail": "warn"
     }
   },
   "engines": {
