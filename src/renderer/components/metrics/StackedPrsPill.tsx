@@ -24,7 +24,7 @@ export function StackedPrsPill({
 
   return (
     <MetricPill
-      color={IconColor.YELLOW}
+      color={IconColor.GRAY}
       contents="Part of a stacked pull request series"
       icon={StackIcon}
       metric={metric}
