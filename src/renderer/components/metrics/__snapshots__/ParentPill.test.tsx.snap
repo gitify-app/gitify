@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderer/components/metrics/ParentPill.tsx > renders parent pill with issue number and title 1`] = `
+exports[`renderer/components/metrics/ParentPill.tsx > renders parent pill with issue number, keeping the title for the tooltip 1`] = `
 <div>
   <button
     aria-describedby="_r_0_"
@@ -47,7 +47,7 @@ exports[`renderer/components/metrics/ParentPill.tsx > renders parent pill with i
           class="text-xxs px-1 truncate max-w-[160px] prc-Text-Text-9mHv3"
           data-component="Text"
         >
-          #123 Epic Title
+          #123
         </span>
       </div>
     </span>

@@ -20,14 +20,15 @@ describe('renderer/components/metrics/ParentPill.tsx', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('renders parent pill with issue number and title', () => {
+  it('renders parent pill with issue number, keeping the title for the tooltip', () => {
     const props: ParentPillProps = {
       parent: mockParent,
     };
 
     const tree = renderWithProviders(<ParentPill {...props} />);
 
-    expect(screen.getByText('#123 Epic Title')).toBeInTheDocument();
+    expect(screen.getByText('#123')).toBeInTheDocument();
+    expect(screen.queryByText('#123 Epic Title')).not.toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: 'Parent issue: #123 Epic Title' }),
     ).toBeInTheDocument();
