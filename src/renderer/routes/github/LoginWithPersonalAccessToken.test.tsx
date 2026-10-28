@@ -18,11 +18,19 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
     expect(
-      screen.getByRole('heading', { name: 'Login with Personal Access Token' }),
+      screen.getByRole('heading', { name: 'Login with Classic Personal Access Token' }),
     ).toBeInTheDocument();
     expect(screen.getByLabelText(/^Token/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Generate a PAT' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
+  });
+
+  it('explains that fine-grained tokens are unsupported', () => {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
+
+    expect(
+      screen.getByText(/Fine-grained personal access tokens are not supported/),
+    ).toBeInTheDocument();
   });
 
   it('let us go back', async () => {

@@ -30,6 +30,7 @@ describe('renderer/routes/github/DeviceFlowAuthorize.tsx', () => {
     });
 
     expect(screen.getByText('Receive notifications for:')).toBeInTheDocument();
+    expect(screen.getByText("Authorize Gitify's OAuth App")).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /^Public Limited/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Public and Private/ })).toBeInTheDocument();
 

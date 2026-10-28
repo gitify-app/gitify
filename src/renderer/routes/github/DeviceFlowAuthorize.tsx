@@ -320,7 +320,7 @@ export function GitHubDeviceFlowAuthorize({
 
   return (
     <Page testId="Login With Device Flow">
-      <Header icon={SignInIcon}>{title ?? 'Authorize with GitHub'}</Header>
+      <Header icon={SignInIcon}>{title ?? "Authorize Gitify's OAuth App"}</Header>
 
       <Contents scrollFade>
         {error && (
