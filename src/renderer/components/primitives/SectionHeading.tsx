@@ -29,6 +29,7 @@ export function SectionHeading({ as = 'h4', ...props }: Readonly<SectionHeadingP
           {props.tooltip}
         </Stack>
       }
+      label={props.children}
       name={`tooltip-${name}`}
     />
   );

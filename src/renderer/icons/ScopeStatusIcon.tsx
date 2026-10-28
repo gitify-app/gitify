@@ -4,36 +4,29 @@ export interface ScopeStatusIconProps {
   granted: boolean;
   notApplicable?: boolean;
   size?: number;
-  withTestId?: boolean;
+  /** What the status describes (e.g. a scope name), prefixed to the accessible name. */
+  subject?: string;
 }
 
 export function ScopeStatusIcon({
   granted,
   notApplicable = false,
   size = 14,
-  withTestId = false,
+  subject,
 }: Readonly<ScopeStatusIconProps>) {
+  let status = granted ? 'granted' : 'missing';
   if (notApplicable) {
-    return (
-      <DashIcon
-        className="opacity-30"
-        data-testid={withTestId ? 'account-scopes-scope-na' : undefined}
-        size={size}
-      />
-    );
+    status = 'not applicable';
+  }
+  const ariaLabel = subject ? `${subject} ${status}` : status;
+
+  if (notApplicable) {
+    return <DashIcon aria-label={ariaLabel} className="opacity-30" size={size} />;
   }
 
   return granted ? (
-    <CheckCircleFillIcon
-      className="text-gitify-success"
-      data-testid={withTestId ? 'account-scopes-scope-granted' : undefined}
-      size={size}
-    />
+    <CheckCircleFillIcon aria-label={ariaLabel} className="text-gitify-success" size={size} />
   ) : (
-    <XCircleFillIcon
-      className="text-gitify-danger"
-      data-testid={withTestId ? 'account-scopes-scope-missing' : undefined}
-      size={size}
-    />
+    <XCircleFillIcon aria-label={ariaLabel} className="text-gitify-danger" size={size} />
   );
 }
