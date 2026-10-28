@@ -1,0 +1,20 @@
+src/renderer/components/layout/AppLayout.tsx
+  h_ac004aadb63da9 23
+src/renderer/routes/AccountScopes.tsx
+  h_ac004aadb63da9 204
+src/renderer/routes/Filters.tsx
+  h_ac004aadb63da9 43
+src/renderer/routes/github/LoginWithDeviceFlow.tsx
+  h_ac004aadb63da9 234,321,325,328,335
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "301595497151e12ec6aaa566b8e1f54db0330150",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
