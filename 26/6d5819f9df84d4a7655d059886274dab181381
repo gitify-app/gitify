@@ -1,0 +1,30 @@
+.github/workflows/lint.yml
+  h_ac004aadb63da9 33-35
+i18next.config.ts
+  h_ac004aadb63da9 21
+src/renderer/__helpers__/vitest.setup.ts
+  h_ac004aadb63da9 2-3
+src/renderer/components/settings/AppearanceSettings.test.tsx
+  h_ac004aadb63da9 1,44,49
+src/renderer/components/settings/AppearanceSettings.tsx
+  h_ac004aadb63da9 14,44-47,56-64,66-81
+src/renderer/components/settings/InboxSettings.tsx
+  h_ac004aadb63da9 242-255
+src/renderer/components/settings/SystemSettings.tsx
+  h_ac004aadb63da9 157-170
+src/renderer/i18n/loader.test.ts
+  h_ac004aadb63da9 5,31-61
+src/renderer/i18n/loader.ts
+  h_ac004aadb63da9 8,27-29,39-41,45-52,54-60,62-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "266d5819f9df84d4a7655d059886274dab181381",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
