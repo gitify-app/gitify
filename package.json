@@ -139,7 +139,7 @@
     "graphql-config": "6.0.0",
     "happy-dom": "21.0.4",
     "husky": "9.1.7",
-    "i18next-cli": "1.74.1",
+    "i18next-cli": "1.80.4",
     "playwright": "1.64.1",
     "react-devtools": "8.0.0",
     "rimraf": "6.1.3",
