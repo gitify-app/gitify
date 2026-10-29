@@ -108,37 +108,15 @@ describe('renderer/routes/Notifications.tsx', () => {
   });
 
   describe('error conditions - oops', () => {
-    it('bad credentials', () => {
+    it.each([
+      ['bad credentials', 'BAD_CREDENTIALS'],
+      ['missing scopes', 'MISSING_SCOPES'],
+      ['rate limited', 'RATE_LIMITED'],
+      ['unknown error', 'UNKNOWN'],
+    ] as const)('%s', (_name, errorType) => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
-        globalError: getErrorDetails('BAD_CREDENTIALS'),
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('missing scopes', () => {
-      const tree = renderWithProviders(<NotificationsRoute />, {
-        status: 'error',
-        globalError: getErrorDetails('MISSING_SCOPES'),
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('rate limited', () => {
-      const tree = renderWithProviders(<NotificationsRoute />, {
-        status: 'error',
-        globalError: getErrorDetails('RATE_LIMITED'),
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('unknown error', () => {
-      const tree = renderWithProviders(<NotificationsRoute />, {
-        status: 'error',
-        globalError: getErrorDetails('UNKNOWN'),
+        globalError: getErrorDetails(errorType),
       });
 
       expect(tree.container).toMatchSnapshot();

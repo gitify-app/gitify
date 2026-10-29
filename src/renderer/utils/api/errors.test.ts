@@ -26,118 +26,56 @@ describe('renderer/utils/api/errors.ts', () => {
     });
 
     describe('REST API errors (RequestError)', () => {
-      it('bad credentials - 401 status', () => {
-        const mockError = new RequestError('Bad credentials', 401, {
-          request: {
-            method: 'GET',
-            url: 'https://api.github.com',
-            headers: {},
-          },
-        });
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('BAD_CREDENTIALS'));
-      });
-
-      it('missing scopes - 403 with scope message', () => {
-        const mockError = new RequestError("Missing the 'notifications' scope", 403, {
-          request: {
-            method: 'GET',
-            url: 'https://api.github.com',
-            headers: {},
-          },
-        });
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('MISSING_SCOPES'));
-      });
-
-      it('rate limited - primary rate limit', () => {
-        const mockError = new RequestError('API rate limit exceeded', 403, {
-          request: {
-            method: 'GET',
-            url: 'https://api.github.com',
-            headers: {},
-          },
-        });
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
-      });
-
-      it('rate limited - secondary rate limit', () => {
-        const mockError = new RequestError('You have exceeded a secondary rate limit', 403, {
-          request: {
-            method: 'GET',
-            url: 'https://api.github.com',
-            headers: {},
-          },
-        });
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
-      });
-
-      it('action forbidden - unmatched 403', () => {
-        const mockError = new RequestError(
+      it.each([
+        ['bad credentials - 401 status', 'Bad credentials', 401, 'BAD_CREDENTIALS'],
+        [
+          'missing scopes - 403 with scope message',
+          "Missing the 'notifications' scope",
+          403,
+          'MISSING_SCOPES',
+        ],
+        ['rate limited - primary rate limit', 'API rate limit exceeded', 403, 'RATE_LIMITED'],
+        [
+          'rate limited - secondary rate limit',
+          'You have exceeded a secondary rate limit',
+          403,
+          'RATE_LIMITED',
+        ],
+        [
+          'action forbidden - unmatched 403',
           'As an Enterprise Managed User, you cannot access this content',
           403,
-          {
-            request: {
-              method: 'GET',
-              url: 'https://api.github.com',
-              headers: {},
-            },
-          },
-        );
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('ACTION_FORBIDDEN'));
-      });
-
-      it('network error - no status', () => {
-        const mockError = new RequestError('Network error', 500, {
+          'ACTION_FORBIDDEN',
+        ],
+        ['network error - no status', 'Network error', 500, 'NETWORK'],
+        ['unknown error - unhandled 418', 'Forbidden', 418, 'UNKNOWN'],
+      ] as const)('%s', (_name, message, status, errorType) => {
+        const mockError = new RequestError(message, status, {
           request: {
             method: 'GET',
             url: 'https://api.github.com',
             headers: {},
           },
         });
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('NETWORK'));
-      });
 
-      it('unknown error - unhandled 418', () => {
-        const mockError = new RequestError('Forbidden', 418, {
-          request: {
-            method: 'GET',
-            url: 'https://api.github.com',
-            headers: {},
-          },
-        });
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('UNKNOWN'));
+        expect(determineFailureType(mockError)).toEqual(getErrorDetails(errorType));
       });
     });
 
     describe('GraphQL API errors (GraphqlResponseError)', () => {
-      it('bad credentials', () => {
-        const mockError = createGraphQLResponseError('Bad credentials');
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('BAD_CREDENTIALS'));
-      });
-
-      it('rate limited - primary rate limit', () => {
-        const mockError = createGraphQLResponseError('API rate limit exceeded');
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
-      });
-
-      it('rate limited - secondary rate limit', () => {
-        const mockError = createGraphQLResponseError('You have exceeded a secondary rate limit');
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('RATE_LIMITED'));
-      });
-
-      it('unknown error', () => {
-        const mockError = createGraphQLResponseError('Something went wrong');
-        const result = determineFailureType(mockError);
-        expect(result).toEqual(getErrorDetails('UNKNOWN'));
+      it.each([
+        ['bad credentials', 'Bad credentials', 'BAD_CREDENTIALS'],
+        ['rate limited - primary rate limit', 'API rate limit exceeded', 'RATE_LIMITED'],
+        [
+          'rate limited - secondary rate limit',
+          'You have exceeded a secondary rate limit',
+          'RATE_LIMITED',
+        ],
+        ['unknown error', 'Something went wrong', 'UNKNOWN'],
+      ] as const)('%s', (_name, message, errorType) => {
+        expect(determineFailureType(createGraphQLResponseError(message))).toEqual(
+          getErrorDetails(errorType),
+        );
       });
     });
   });
