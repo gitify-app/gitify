@@ -1,0 +1,21 @@
+.github/workflows/renovate.yml
+  s_27895deb875739::t_2230aa564703d8 18
+zizmor.yml
+  s_27895deb875739::t_0c64057bd8d51d 2-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2cdd87aaf36e4b272dbe0464afaeb8111a3852bb",
+  "prompts": {},
+  "sessions": {
+    "s_27895deb875739": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "2cf78c69-ff5d-4a76-99a7-fca8a87a75b2",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
