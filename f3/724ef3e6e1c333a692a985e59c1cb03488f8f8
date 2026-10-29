@@ -1,0 +1,16 @@
+src/renderer/routes/github/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 21,28,32-34
+src/renderer/routes/github/LoginWithPersonalAccessToken.tsx
+  h_ac004aadb63da9 14,20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f3724ef3e6e1c333a692a985e59c1cb03488f8f8",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
