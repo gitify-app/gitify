@@ -1,0 +1,16 @@
+src/renderer/routes/Notifications.test.tsx
+  h_ac004aadb63da9 111-116,119
+src/renderer/utils/api/errors.test.ts
+  h_ac004aadb63da9 29-45,48-53,61,66-78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "73aa4bfad4ce92c8de06d2d262d0ed2b1050f1c5",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
