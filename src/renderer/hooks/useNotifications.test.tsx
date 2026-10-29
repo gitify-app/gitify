@@ -15,7 +15,7 @@ import {
 } from '../__mocks__/notifications-mocks';
 
 import type { INativeNotificationPayload } from '../../shared/events';
-import { encodeNativeNotificationIdentity } from '../../shared/nativeNotifications';
+import { getNativeNotificationId } from '../../shared/nativeNotifications';
 
 import {
   getNotificationFailureKey,
@@ -682,7 +682,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
   describe('OS notification interactions', () => {
     const notification = mockSingleAccountNotifications[0].notifications[0];
-    const notificationId = encodeNativeNotificationIdentity(
+    const notificationId = getNativeNotificationId(
       getAccountUUID(notification.account),
       notification.id,
     );
@@ -771,7 +771,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
     it('removes a published notification when it leaves the unfiltered cache', async () => {
       raiseNativeNotificationSpy.mockResolvedValueOnce([
-        { id: notificationId } as INativeNotificationPayload,
+        { payload: { id: notificationId } as INativeNotificationPayload },
       ]);
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
@@ -816,9 +816,48 @@ describe('renderer/hooks/useNotifications.ts', () => {
       await waitFor(() => expect(actionSpy).toHaveBeenCalledTimes(1));
     });
 
+    it('keeps the summary notification while unread notifications remain', async () => {
+      raiseNativeNotificationSpy.mockResolvedValueOnce([
+        { payload: { id: 'summary' } as INativeNotificationPayload },
+      ]);
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      await waitFor(() => expect(raiseNativeNotificationSpy).toHaveBeenCalled());
+
+      // A later fetch that changes the data but still has unread notifications
+      // must not remove it.
+      getAllNotificationsMock.mockResolvedValue([
+        {
+          ...mockSingleAccountNotifications[0],
+          notifications: [
+            ...mockSingleAccountNotifications[0].notifications,
+            { ...notification, id: 'another-unread-notification' },
+          ],
+        },
+      ]);
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+      await waitFor(() => expect(result.current.notificationCount).toBe(2));
+      expect(window.gitify.nativeNotifications.remove).not.toHaveBeenCalled();
+
+      getAllNotificationsMock.mockResolvedValue([]);
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+
+      await waitFor(() =>
+        expect(window.gitify.nativeNotifications.remove).toHaveBeenCalledWith({
+          ids: ['summary'],
+        }),
+      );
+    });
+
     it('does not remove a published notification merely because a filter hides it', async () => {
       raiseNativeNotificationSpy.mockResolvedValueOnce([
-        { id: notificationId } as INativeNotificationPayload,
+        { payload: { id: notificationId } as INativeNotificationPayload },
       ]);
       getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 

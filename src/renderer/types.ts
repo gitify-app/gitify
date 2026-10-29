@@ -183,7 +183,7 @@ export enum GroupBy {
 /** How new notifications are presented by the operating system. */
 export enum NativeNotificationStyle {
   /** One notification per item, up to the batch cap. */
-  INDIVIDUAL = 'grouped',
+  INDIVIDUAL = 'individual',
   SUMMARY = 'summary',
 }
 

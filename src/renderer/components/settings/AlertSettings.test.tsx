@@ -56,7 +56,6 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   it.each([
     ['Show desktop notifications', 'showNotifications'],
     ['Show notification actions', 'nativeNotificationActions'],
-    ['Keep notifications on screen', 'nativeNotificationKeepVisible'],
     ['Play notification sound', 'playSound'],
     ['Show app update notifications', 'showUpdateNotifications'],
   ] as const)('toggles %s switch', async (label, setting) => {
@@ -66,6 +65,27 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
 
     expect(toggleSettingSpy).toHaveBeenCalledTimes(1);
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
+  });
+
+  describe('Keep notifications on screen', () => {
+    it('is hidden on macOS, where the system controls how long notifications stay', () => {
+      vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(true);
+
+      renderWithProviders(<AlertSettings />);
+
+      expect(
+        screen.queryByRole('button', { name: 'Keep notifications on screen' }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('toggles on Windows and Linux', async () => {
+      vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(false);
+
+      renderWithProviders(<AlertSettings />);
+      await userEvent.click(screen.getByRole('button', { name: 'Keep notifications on screen' }));
+
+      expect(toggleSettingSpy).toHaveBeenCalledWith('nativeNotificationKeepVisible');
+    });
   });
 
   it('shows detailed help in tooltips', async () => {

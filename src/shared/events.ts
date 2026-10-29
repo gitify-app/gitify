@@ -109,20 +109,25 @@ export type IGitHubCliTokenResult =
 /** An action button offered by an operating-system notification. */
 export type NativeNotificationActionId = 'show' | 'read' | 'done' | 'unsubscribe';
 
+/** An action button and its translated label. */
+export interface INativeNotificationAction {
+  id: NativeNotificationActionId;
+  /** Button text, translated by the renderer. */
+  label: string;
+}
+
 /** A structured request to publish an operating-system notification. */
 export interface INativeNotificationPayload {
-  /** Stable, encoded identity for this notification. */
+  /** Short, opaque identity for this notification (see `getNativeNotificationId`). */
   id: string;
-  /** Encoded account + repository identity used for visual grouping. */
+  /** Short, opaque account + repository identity used for visual grouping. */
   groupId?: string;
   /** Repository name shown as a group title on Windows. */
   groupTitle?: string;
   title: string;
   subtitle?: string;
   body: string;
-  /** Only `http` and `https` targets are accepted. */
-  url?: string;
-  actions: NativeNotificationActionId[];
+  actions: INativeNotificationAction[];
   /** Keep the notification on screen until the user dismisses it. */
   keepVisible?: boolean;
 }

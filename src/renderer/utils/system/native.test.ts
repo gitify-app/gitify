@@ -3,6 +3,11 @@ import {
   mockGitifyNotification,
 } from '../../__mocks__/notifications-mocks';
 
+import {
+  getNativeNotificationGroupId,
+  getNativeNotificationId,
+} from '../../../shared/nativeNotifications';
+
 import { NativeNotificationStyle } from '../../types';
 
 import * as features from '../api/features';
@@ -33,35 +38,39 @@ describe('renderer/utils/system/native.ts', () => {
 
   describe('buildNativeNotificationPayload', () => {
     it('builds an account-scoped identity, group, content, target, and actions', async () => {
-      const payload = await buildNativeNotificationPayload(notification, options);
-
-      expect(payload.id).toBe(
-        `${encodeURIComponent(accountUUID)}:${encodeURIComponent(notification.id)}`,
+      const { payload, url: targetUrl } = await buildNativeNotificationPayload(
+        notification,
+        options,
       );
+
+      expect(payload.id).toBe(getNativeNotificationId(accountUUID, notification.id));
       expect(payload.groupId).toBe(
-        `${encodeURIComponent(accountUUID)}:${encodeURIComponent(
-          notification.repository.fullName,
-        )}`,
+        getNativeNotificationGroupId(accountUUID, notification.repository.fullName),
       );
       expect(payload.groupTitle).toBe(notification.repository.fullName);
       expect(payload.title).toBe(notification.repository.fullName);
       expect(payload.subtitle).toContain(notification.reason.title);
       expect(payload.body).toContain(notification.subject.title);
-      expect(payload.url).toBe(notification.repository.htmlUrl);
-      expect(payload.actions).toEqual(['read', 'done', 'unsubscribe']);
+      expect(payload).not.toHaveProperty('url');
+      expect(targetUrl).toBe(notification.repository.htmlUrl);
+      expect(payload.actions).toEqual([
+        { id: 'read', label: 'Mark as read' },
+        { id: 'done', label: 'Mark as done' },
+        { id: 'unsubscribe', label: 'Unsubscribe' },
+      ]);
     });
 
     it('omits unsupported actions', async () => {
       vi.mocked(features.isMarkAsDoneFeatureSupported).mockReturnValue(false);
       vi.mocked(features.isUnsubscribeThreadSupported).mockReturnValue(false);
 
-      const payload = await buildNativeNotificationPayload(notification, options);
+      const { payload } = await buildNativeNotificationPayload(notification, options);
 
-      expect(payload.actions).toEqual(['read']);
+      expect(payload.actions.map((action) => action.id)).toEqual(['read']);
     });
 
     it('omits all actions when action buttons are disabled', async () => {
-      const payload = await buildNativeNotificationPayload(notification, {
+      const { payload } = await buildNativeNotificationPayload(notification, {
         ...options,
         actions: false,
       });
@@ -70,7 +79,7 @@ describe('renderer/utils/system/native.ts', () => {
     });
 
     it('handles a notification without an actor', async () => {
-      const payload = await buildNativeNotificationPayload(
+      const { payload } = await buildNativeNotificationPayload(
         {
           ...notification,
           subject: {
@@ -87,7 +96,7 @@ describe('renderer/utils/system/native.ts', () => {
     });
 
     it('includes the identifier when the title does not contain it', async () => {
-      const payload = await buildNativeNotificationPayload(
+      const { payload } = await buildNativeNotificationPayload(
         {
           ...notification,
           subject: { ...notification.subject, title: 'A title without a number' },
@@ -123,8 +132,11 @@ describe('renderer/utils/system/native.ts', () => {
       });
 
       expect(published).toHaveLength(1);
-      expect(published[0]).toMatchObject({ id: 'summary', actions: ['show'] });
-      expect(published[0].body).toContain('notifications');
+      expect(published[0].payload).toMatchObject({
+        id: 'summary',
+        actions: [{ id: 'show', label: 'Show notifications' }],
+        body: `You have ${mockGitHubCloudGitifyNotifications.length} notifications`,
+      });
       expect(showMock).toHaveBeenCalledTimes(1);
     });
 
@@ -142,8 +154,17 @@ describe('renderer/utils/system/native.ts', () => {
       const published = await raiseNativeNotification(notifications, options);
 
       expect(published).toHaveLength(1);
-      expect(published[0].id).toBe('summary');
+      expect(published[0].payload.id).toBe('summary');
       expect(showMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('uses the singular summary text for one notification', async () => {
+      const published = await raiseNativeNotification([notification], {
+        ...options,
+        style: NativeNotificationStyle.SUMMARY,
+      });
+
+      expect(published[0].payload.body).toBe('You have 1 notification');
     });
 
     it('does nothing for an empty batch', async () => {

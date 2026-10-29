@@ -42,6 +42,7 @@ export function AlertSettings() {
   const playSound = useSettingsStore((s) => s.playSound);
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
 
+  const isMacOS = window.gitify.platform.isMacOS();
   const [nativeNotificationsSupported, setNativeNotificationsSupported] = useState(true);
 
   useEffect(() => {
@@ -149,16 +150,20 @@ export function AlertSettings() {
           )}
         />
 
-        <SettingsToggle
-          checked={nativeNotificationKeepVisible}
-          label={t('settings.alerts.keep_visible', 'Keep notifications on screen')}
-          name="nativeNotificationKeepVisible"
-          onChange={() => toggleSetting('nativeNotificationKeepVisible')}
-          tooltip={t(
-            'settings.alerts.keep_visible_help',
-            'Keep notifications visible until dismissed, where the operating system supports it.',
-          )}
-        />
+        {/* macOS decides how long notifications stay on screen (System Settings →
+            Notifications), so the toggle only applies on Windows and Linux. */}
+        {!isMacOS && (
+          <SettingsToggle
+            checked={nativeNotificationKeepVisible}
+            label={t('settings.alerts.keep_visible', 'Keep notifications on screen')}
+            name="nativeNotificationKeepVisible"
+            onChange={() => toggleSetting('nativeNotificationKeepVisible')}
+            tooltip={t(
+              'settings.alerts.keep_visible_help',
+              'Keep notifications visible until you dismiss them.',
+            )}
+          />
+        )}
 
         <SettingsChoice
           label={t('settings.alerts.click', 'Notification click')}

@@ -1,11 +1,13 @@
 import { APPLICATION } from '../../../shared/constants';
 import type {
+  INativeNotificationAction,
   INativeNotificationPayload,
   NativeNotificationActionId,
 } from '../../../shared/events';
 import {
-  encodeNativeNotificationGroupIdentity,
-  encodeNativeNotificationIdentity,
+  getNativeNotificationGroupId,
+  getNativeNotificationId,
+  NATIVE_NOTIFICATION_SUMMARY_ID,
 } from '../../../shared/nativeNotifications';
 
 import type { GitifyNotification } from '../../types';
@@ -26,13 +28,49 @@ export interface NativeNotificationOptions {
 }
 
 /**
- * Build the structured payload for one notification. The main process treats
- * the identity as opaque; the renderer decodes it when routing interactions.
+ * A notification handed to the operating system, plus the web URL the
+ * renderer keeps locally as a click fallback (it never crosses IPC).
+ */
+export interface PublishedNativeNotification {
+  payload: INativeNotificationPayload;
+  url?: string;
+}
+
+/**
+ * Translated label for an action button.
+ *
+ * @param id - The action.
+ * @returns The button text in the current language.
+ */
+function getActionLabel(id: NativeNotificationActionId): string {
+  switch (id) {
+    case 'show':
+      return i18n.t('native.action.show', 'Show notifications');
+    case 'read':
+      return i18n.t('native.action.read', 'Mark as read');
+    case 'done':
+      return i18n.t('native.action.done', 'Mark as done');
+    case 'unsubscribe':
+    default:
+      return i18n.t('native.action.unsubscribe', 'Unsubscribe');
+  }
+}
+
+function toAction(id: NativeNotificationActionId): INativeNotificationAction {
+  return { id, label: getActionLabel(id) };
+}
+
+/**
+ * Build the structured payload for one notification.
+ *
+ * @param notification - The notification to publish.
+ * @param options - The user's native notification preferences.
+ * @returns The payload for the main process and the local click-fallback URL.
  */
 export async function buildNativeNotificationPayload(
   notification: GitifyNotification,
   options: NativeNotificationOptions,
-): Promise<INativeNotificationPayload> {
+): Promise<PublishedNativeNotification> {
   const accountUUID = getAccountUUID(notification.account);
   const actor = notification.subject.user?.login ?? notification.subject.author?.login;
   const subtitle = [notification.reason.title, actor ? `@${actor}` : '']
@@ -69,28 +107,43 @@ export async function buildNativeNotificationPayload(
   }
 
   return {
-    id: encodeNativeNotificationIdentity(accountUUID, notification.id),
-    groupId: encodeNativeNotificationGroupIdentity(accountUUID, notification.repository.fullName),
-    groupTitle: notification.repository.fullName,
-    title: notification.repository.fullName,
-    subtitle: subtitle || undefined,
-    body,
+    payload: {
+      id: getNativeNotificationId(accountUUID, notification.id),
+      groupId: getNativeNotificationGroupId(accountUUID, notification.repository.fullName),
+      groupTitle: notification.repository.fullName,
+      title: notification.repository.fullName,
+      subtitle: subtitle || undefined,
+      body,
+      actions: actions.map(toAction),
+      keepVisible: options.keepVisible,
+    },
     url,
-    actions,
-    keepVisible: options.keepVisible,
   };
+}
+
+/**
+ * Summary text for a batch of notifications.
+ *
+ * @param count - The number of new notifications.
+ * @returns The translated summary body.
+ */
+function getSummaryBody(count: number): string {
+  return count === 1
+    ? i18n.t('native.summary_body_one', 'You have 1 notification')
+    : i18n.t('native.summary_body_other', 'You have {{count}} notifications', { count });
 }
 
 /**
  * Publish new notifications according to the user's style and the batch cap.
  *
- * Returns the payloads that were published so the host can track their
- * identities for later removal.
+ * @param notifications - The new notifications to publish.
+ * @param options - The user's native notification preferences.
+ * @returns The published notifications, so the host can track them for removal.
  */
 export async function raiseNativeNotification(
   notifications: GitifyNotification[],
   options: NativeNotificationOptions,
-): Promise<INativeNotificationPayload[]> {
+): Promise<PublishedNativeNotification[]> {
   if (notifications.length === 0) {
     return [];
   }
@@ -100,27 +153,25 @@ export async function raiseNativeNotification(
     notifications.length > NATIVE_NOTIFICATION_BATCH_CAP
   ) {
     const summary: INativeNotificationPayload = {
-      id: 'summary',
+      id: NATIVE_NOTIFICATION_SUMMARY_ID,
       title: APPLICATION.NAME,
-      body: i18n.t('native.summary_body', 'You have {{count}} notifications', {
-        count: notifications.length,
-      }),
-      actions: options.actions ? ['show'] : [],
+      body: getSummaryBody(notifications.length),
+      actions: options.actions ? [toAction('show')] : [],
       keepVisible: options.keepVisible,
     };
 
     await window.gitify.nativeNotifications.show(summary);
 
-    return [summary];
+    return [{ payload: summary }];
   }
 
-  const published: INativeNotificationPayload[] = [];
+  const published: PublishedNativeNotification[] = [];
 
   for (const notification of notifications) {
     // Notifications must be published in order, so await each one.
-    const payload = await buildNativeNotificationPayload(notification, options); // NOSONAR
-    await window.gitify.nativeNotifications.show(payload); // NOSONAR
-    published.push(payload);
+    const built = await buildNativeNotificationPayload(notification, options); // NOSONAR
+    await window.gitify.nativeNotifications.show(built.payload); // NOSONAR
+    published.push(built);
   }
 
   return published;

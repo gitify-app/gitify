@@ -1,58 +1,54 @@
 /**
- * Encode a stable operating-system notification identity from an account and
- * notification ID. The main process treats this value as opaque; the renderer
- * decodes it when routing an action or click back to the cached notification.
+ * Identity of the summary notification published for a large batch.
+ */
+export const NATIVE_NOTIFICATION_SUMMARY_ID = 'summary';
+
+/**
+ * Build the operating-system notification identity for a notification.
+ *
+ * Windows caps a toast's tag and group at 64 characters, and account UUIDs
+ * plus repository names easily exceed that. The identity is therefore a short,
+ * deterministic hash: the main process treats it as opaque, and the renderer
+ * resolves an interaction by hashing its cached notifications and matching.
  *
  * @param accountUUID - The account that owns the notification.
  * @param notificationId - The notification's thread ID.
- * @returns The encoded identity.
+ * @returns A stable identity of at most 12 characters.
  */
-export function encodeNativeNotificationIdentity(
-  accountUUID: string,
-  notificationId: string,
-): string {
-  return encodeKey(accountUUID, notificationId);
+export function getNativeNotificationId(accountUUID: string, notificationId: string): string {
+  return `n${hash(`${accountUUID}\u0000${notificationId}`)}`;
 }
 
 /**
- * Encode a group identity from an account and repository/thread key.
+ * Build the operating-system group identity for an account's repository.
  *
  * @param accountUUID - The account that owns the group.
  * @param groupKey - The repository or thread key to group by.
- * @returns The encoded group identity.
+ * @returns A stable group identity of at most 12 characters.
  */
-export function encodeNativeNotificationGroupIdentity(
-  accountUUID: string,
-  groupKey: string,
-): string {
-  return encodeKey(accountUUID, groupKey);
+export function getNativeNotificationGroupId(accountUUID: string, groupKey: string): string {
+  return `g${hash(`${accountUUID}\u0000${groupKey}`)}`;
 }
 
 /**
- * Decode an identity produced by {@link encodeNativeNotificationIdentity}.
+ * 53-bit string hash (cyrb53), rendered in base 36. Not cryptographic: it only
+ * needs to be stable and collision-resistant across one user's notifications.
  *
- * @param id - The encoded identity.
- * @returns The account UUID and notification ID, or `null` for malformed input.
+ * @param value - The string to hash.
+ * @returns The hash as a base-36 string of at most 11 characters.
  */
-export function decodeNativeNotificationIdentity(
-  id: string,
-): { accountUUID: string; notificationId: string } | null {
-  const separator = id.indexOf(':');
+function hash(value: string): string {
+  let h1 = 0xdeadbeef;
+  let h2 = 0x41c6ce57;
 
-  if (separator <= 0 || separator === id.length - 1) {
-    return null;
+  for (let i = 0; i < value.length; i++) {
+    const code = value.charCodeAt(i);
+    h1 = Math.imul(h1 ^ code, 2654435761);
+    h2 = Math.imul(h2 ^ code, 1597334677);
   }
 
-  try {
-    return {
-      accountUUID: decodeURIComponent(id.slice(0, separator)),
-      notificationId: decodeURIComponent(id.slice(separator + 1)),
-    };
-  } catch {
-    return null;
-  }
-}
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
 
-function encodeKey(first: string, second: string): string {
-  return `${encodeURIComponent(first)}:${encodeURIComponent(second)}`;
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
 }

@@ -3,6 +3,7 @@ import type { Menubar } from 'electron-menubar';
 
 import {
   EVENTS,
+  type INativeNotificationAction,
   type INativeNotificationActionEvent,
   type INativeNotificationClickEvent,
   type INativeNotificationPayload,
@@ -21,14 +22,9 @@ const ALLOWED_ACTIONS: ReadonlySet<NativeNotificationActionId> = new Set([
   'unsubscribe',
 ]);
 
-const ACTION_LABELS: Record<NativeNotificationActionId, string> = {
-  show: 'Show notifications',
-  read: 'Mark as read',
-  done: 'Mark as done',
-  unsubscribe: 'Unsubscribe',
-};
-
-const MAX_IDENTIFIER_LENGTH = 512;
+// Windows caps a toast's tag and group at 64 characters.
+const MAX_IDENTIFIER_LENGTH = 64;
+const MAX_ACTION_LABEL_LENGTH = 64;
 const MAX_QUEUED_INTERACTIONS = 20;
 
 type QueuedInteraction =
@@ -52,6 +48,7 @@ export class NativeNotificationService {
   private readonly queue: QueuedInteraction[] = [];
   private history: Notification[] = [];
   private rendererReady = false;
+  private readonly watchedWindows = new WeakSet<Electron.BrowserWindow>();
   private started = false;
 
   constructor(
@@ -91,6 +88,7 @@ export class NativeNotificationService {
         ? `${payload.subtitle}\n${payload.body}`
         : payload.body;
 
+    const actionIds = payload.actions.map((action) => action.id);
     const notification = new Notification({
       id: payload.id,
       groupId: payload.groupId,
@@ -102,21 +100,26 @@ export class NativeNotificationService {
       timeoutType: payload.keepVisible ? 'never' : 'default',
       actions: payload.actions.map((action) => ({
         type: 'button',
-        text: ACTION_LABELS[action],
+        text: action.label,
       })),
     });
 
-    notification.on('click', () => {
-      this.deliver('click', { id: payload.id });
-    });
+    // On Windows, `Notification.handleActivation` already receives every click
+    // and action, in addition to these instance events, so listening to both
+    // would deliver each interaction twice.
+    if (this.platform !== 'win32') {
+      notification.on('click', () => {
+        this.deliver('click', { id: payload.id });
+      });
 
-    notification.on('action', (_event, actionIndex) => {
-      const action = payload.actions[actionIndex];
+      notification.on('action', (details) => {
+        const action = actionIds[details.actionIndex];
 
-      if (action) {
-        this.deliver('action', { id: payload.id, action });
-      }
-    });
+        if (action) {
+          this.deliver('action', { id: payload.id, action });
+        }
+      });
+    }
 
     notification.on('failed', (_event, error) => {
       logError('native-notifications', 'Failed to show a native notification', new Error(error), [
@@ -127,7 +130,7 @@ export class NativeNotificationService {
     this.live.set(payload.id, {
       notification,
       groupId: payload.groupId,
-      actions: payload.actions,
+      actions: actionIds,
     });
     notification.show();
 
@@ -161,14 +164,15 @@ export class NativeNotificationService {
     this.flushQueue();
   }
 
+  /**
+   * Release the service's references without dismissing anything, so delivered
+   * notifications stay in Notification Center / Action Center across a quit or
+   * an update restart.
+   */
   destroy(): void {
-    this.removeAll();
-
-    // Release the retained history references so their listeners can be
-    // collected with the service.
-    if (this.history.length > 0) {
-      this.history = [];
-    }
+    this.live.clear();
+    this.queue.length = 0;
+    this.history.length = 0;
   }
 
   private closeOne(id: string): void {
@@ -216,6 +220,10 @@ export class NativeNotificationService {
   private canSendToRenderer(): boolean {
     const window = this.mb.window;
 
+    if (window) {
+      this.watchRendererReloads(window);
+    }
+
     if (!this.rendererReady || !window) {
       return false;
     }
@@ -242,6 +250,21 @@ export class NativeNotificationService {
     }
   }
 
+  /**
+   * A reloading renderer drops its listeners, so queue interactions again until
+   * it reports ready.
+   */
+  private watchRendererReloads(window: Electron.BrowserWindow): void {
+    if (this.watchedWindows.has(window)) {
+      return;
+    }
+
+    this.watchedWindows.add(window);
+    window.webContents?.on('did-start-loading', () => {
+      this.rendererReady = false;
+    });
+  }
+
   private flushQueue(): void {
     while (this.queue.length > 0 && this.canSendToRenderer()) {
       const interaction = this.queue.shift()!;
@@ -262,6 +285,12 @@ export class NativeNotificationService {
 
         for (const notification of history) {
           notification.on('click', () => {
+            this.deliver('click', { id: notification.id });
+          });
+
+          // A delivered notification's actions are not restored, so an action
+          // cannot be mapped back to its ID; open the notification instead.
+          notification.on('action', () => {
             this.deliver('click', { id: notification.id });
           });
         }
@@ -331,15 +360,22 @@ export function validateNativeNotificationPayload(payload: INativeNotificationPa
     return false;
   }
 
-  if (payload.url !== undefined && !isHttpUrl(payload.url)) {
-    return false;
-  }
-
   if (!Array.isArray(payload.actions)) {
     return false;
   }
 
-  return payload.actions.every((action) => ALLOWED_ACTIONS.has(action));
+  return payload.actions.every(isValidAction);
+}
+
+function isValidAction(action: INativeNotificationAction): boolean {
+  return (
+    !!action &&
+    typeof action === 'object' &&
+    ALLOWED_ACTIONS.has(action.id) &&
+    typeof action.label === 'string' &&
+    action.label.trim().length > 0 &&
+    action.label.length <= MAX_ACTION_LABEL_LENGTH
+  );
 }
 
 function isValidIdentifier(value: unknown): value is string {
@@ -352,15 +388,6 @@ function isValidIdentifier(value: unknown): value is string {
       return code < 32 || code === 127;
     })
   );
-}
-
-function isHttpUrl(value: string): boolean {
-  try {
-    const url = new URL(value);
-    return url.protocol === 'http:' || url.protocol === 'https:';
-  } catch {
-    return false;
-  }
 }
 
 function parseActivationId(argumentsValue: string): string {
@@ -385,5 +412,5 @@ function parseActivationId(argumentsValue: string): string {
     // Windows may pass the identity as a raw string rather than JSON.
   }
 
-  return value.includes(':') ? value : '';
+  return isValidIdentifier(value) ? value : '';
 }

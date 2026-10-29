@@ -75,25 +75,32 @@ const NotificationMock = Notification as unknown as {
 
 function makeMenubar() {
   const send = vi.fn();
+  const webContentsListeners = new Map<string, () => void>();
   const mb = {
     window: {
-      webContents: { send },
+      webContents: {
+        send,
+        on: (event: string, listener: () => void) => webContentsListeners.set(event, listener),
+      },
       isDestroyed: () => false,
     },
   } as unknown as Menubar;
 
-  return { mb, send };
+  return { mb, send, emitWebContents: (event: string) => webContentsListeners.get(event)?.() };
 }
 
 const basePayload: INativeNotificationPayload = {
-  id: 'account:notification',
-  groupId: 'account:repo',
+  id: 'n1a2b3c4d5e6',
+  groupId: 'g1a2b3c4d5e6',
   groupTitle: 'owner/repo',
   title: 'owner/repo',
   subtitle: 'Updated · @octocat',
   body: 'A title',
-  url: 'https://example.com/1',
-  actions: ['show', 'read', 'unsubscribe'],
+  actions: [
+    { id: 'show', label: 'Afficher' },
+    { id: 'read', label: 'Marquer comme lu' },
+    { id: 'unsubscribe', label: 'Se désabonner' },
+  ],
   keepVisible: false,
 };
 
@@ -132,10 +139,11 @@ describe('main/notifications.ts', () => {
       body: `${basePayload.subtitle}\n${basePayload.body}`,
       silent: true,
       timeoutType: 'default',
+      // Labels come from the renderer so they follow the interface language.
       actions: [
-        { type: 'button', text: 'Show notifications' },
-        { type: 'button', text: 'Mark as read' },
-        { type: 'button', text: 'Unsubscribe' },
+        { type: 'button', text: 'Afficher' },
+        { type: 'button', text: 'Marquer comme lu' },
+        { type: 'button', text: 'Se désabonner' },
       ],
     });
     expect(instance.show).toHaveBeenCalledTimes(1);
@@ -173,25 +181,49 @@ describe('main/notifications.ts', () => {
     expect(
       service.show({
         ...basePayload,
-        actions: ['unknown'] as unknown as INativeNotificationPayload['actions'],
+        actions: [
+          { id: 'unknown', label: 'x' },
+        ] as unknown as INativeNotificationPayload['actions'],
       }),
     ).toEqual({ supported: true });
-    expect(service.show({ ...basePayload, url: 'javascript:alert(1)' })).toEqual({
-      supported: true,
-    });
     expect(NotificationMock.instances).toHaveLength(0);
   });
 
-  it('validates identifiers, actions, and URLs', () => {
+  it('validates identifiers and actions', () => {
     expect(validateNativeNotificationPayload(basePayload)).toBe(true);
     expect(validateNativeNotificationPayload({ ...basePayload, groupId: '' })).toBe(false);
     expect(
       validateNativeNotificationPayload({
         ...basePayload,
-        actions: ['show', 'bad'] as unknown as INativeNotificationPayload['actions'],
+        actions: [
+          { id: 'show', label: 'Show' },
+          { id: 'bad', label: 'Bad' },
+        ] as unknown as INativeNotificationPayload['actions'],
       }),
     ).toBe(false);
-    expect(validateNativeNotificationPayload({ ...basePayload, url: 'file:///tmp/x' })).toBe(false);
+    expect(
+      validateNativeNotificationPayload({
+        ...basePayload,
+        actions: ['show'] as unknown as INativeNotificationPayload['actions'],
+      }),
+    ).toBe(false);
+    expect(
+      validateNativeNotificationPayload({ ...basePayload, actions: [{ id: 'read', label: ' ' }] }),
+    ).toBe(false);
+    expect(
+      validateNativeNotificationPayload({
+        ...basePayload,
+        actions: [{ id: 'read', label: 'x'.repeat(65) }],
+      }),
+    ).toBe(false);
+  });
+
+  it('rejects identities longer than the Windows toast limit', () => {
+    expect(validateNativeNotificationPayload({ ...basePayload, id: 'n'.repeat(64) })).toBe(true);
+    expect(validateNativeNotificationPayload({ ...basePayload, id: 'n'.repeat(65) })).toBe(false);
+    expect(validateNativeNotificationPayload({ ...basePayload, groupId: 'g'.repeat(65) })).toBe(
+      false,
+    );
   });
 
   it('delivers click and action events after the renderer is ready', () => {
@@ -202,7 +234,7 @@ describe('main/notifications.ts', () => {
 
     const instance = NotificationMock.instances[0];
     instance.emit('click');
-    instance.emit('action', {}, 1);
+    instance.emit('action', { actionIndex: 1 });
 
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
       id: basePayload.id,
@@ -225,6 +257,34 @@ describe('main/notifications.ts', () => {
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
       id: basePayload.id,
     });
+  });
+
+  it('queues interactions again while the renderer reloads', () => {
+    const { mb, emitWebContents } = makeMenubar();
+    const service = new NativeNotificationService(mb, 'linux');
+    service.show(basePayload);
+    service.markRendererReady();
+
+    NotificationMock.instances[0].emit('click');
+    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
+
+    emitWebContents('did-start-loading');
+    NotificationMock.instances[0].emit('click');
+    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
+
+    service.markRendererReady();
+    expect(sendRendererEventMock).toHaveBeenCalledTimes(2);
+  });
+
+  it('keeps delivered notifications when the service is destroyed', () => {
+    const { mb } = makeMenubar();
+    const service = new NativeNotificationService(mb, 'darwin');
+    service.show(basePayload);
+
+    service.destroy();
+
+    expect(NotificationMock.instances[0].close).not.toHaveBeenCalled();
+    expect(NotificationMock.removeAll).not.toHaveBeenCalled();
   });
 
   it('removes by identity, group, and all', () => {
@@ -268,9 +328,17 @@ describe('main/notifications.ts', () => {
 
     await Promise.resolve();
 
-    const clickHandler = history[0].on.mock.calls[0][1] as () => void;
-    clickHandler();
+    const handler = (event: string) =>
+      history[0].on.mock.calls.find(([name]) => name === event)?.[1] as () => void;
 
+    handler('click')();
+    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
+      id: 'history-id',
+    });
+
+    // Restored notifications lose their actions, so an action opens the notification.
+    sendRendererEventMock.mockClear();
+    handler('action')();
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
       id: 'history-id',
     });
@@ -295,9 +363,34 @@ describe('main/notifications.ts', () => {
       action: 'read',
     });
 
-    activation({ type: 'click', arguments: 'unknown' });
+    activation({ type: 'click', arguments: '' });
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
       id: '',
+    });
+  });
+
+  it('delivers each Windows interaction once, through activation only', () => {
+    const { mb } = makeMenubar();
+    const service = new NativeNotificationService(mb, 'win32');
+    service.start();
+    service.markRendererReady();
+    service.show(basePayload);
+
+    // handleActivation also fires for live notifications, so instance events
+    // must not be delivered as well.
+    NotificationMock.instances[0].emit('click');
+    NotificationMock.instances[0].emit('action', { actionIndex: 1 });
+    expect(sendRendererEventMock).not.toHaveBeenCalled();
+
+    const activation = NotificationMock.handleActivation.mock.calls[0][0] as (details: {
+      type: string;
+      arguments: string;
+    }) => void;
+    activation({ type: 'click', arguments: basePayload.id });
+
+    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
+    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
+      id: basePayload.id,
     });
   });
 });

@@ -297,7 +297,14 @@
     "stacked_pr_position": "Stacked pull request: {{position}} of {{depth}}"
   },
   "native": {
-    "summary_body": "You have {{count}} notifications"
+    "action": {
+      "done": "Mark as done",
+      "read": "Mark as read",
+      "show": "Show notifications",
+      "unsubscribe": "Unsubscribe"
+    },
+    "summary_body_one": "You have 1 notification",
+    "summary_body_other": "You have {{count}} notifications"
   },
   "notifications": {
     "failure_tooltip": "{{title}}: {{description}} You can also try opening this notification in your browser.",
@@ -374,7 +381,7 @@
       "click_focus_help": "Browser focus is controlled by <0>Link focus</0> in the System section.",
       "click_help": "Choose what clicking a notification body opens.",
       "keep_visible": "Keep notifications on screen",
-      "keep_visible_help": "Keep notifications visible until dismissed, where the operating system supports it.",
+      "keep_visible_help": "Keep notifications visible until you dismiss them.",
       "play_sound": "Play notification sound",
       "play_sound_help": "Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level.",
       "show_desktop": "Show desktop notifications",

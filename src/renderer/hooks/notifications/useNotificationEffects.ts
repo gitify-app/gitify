@@ -8,8 +8,8 @@ import type {
   NativeNotificationActionId,
 } from '../../../shared/events';
 import {
-  decodeNativeNotificationIdentity,
-  encodeNativeNotificationIdentity,
+  getNativeNotificationId,
+  NATIVE_NOTIFICATION_SUMMARY_ID,
 } from '../../../shared/nativeNotifications';
 
 import {
@@ -29,7 +29,6 @@ import {
   filterBaseNotifications,
   filterDetailedNotifications,
 } from '../../utils/notifications/filters/filter';
-import { findNotificationFocusTarget } from '../../utils/notifications/listPositioning';
 import { refreshEnrichmentCache } from '../../utils/notifications/notifications';
 import { getNewNotifications } from '../../utils/notifications/utils';
 import { raiseSoundNotification } from '../../utils/system/audio';
@@ -107,21 +106,25 @@ export const useNotificationEffects = ({
     [queryClient, notificationsQueryKey],
   );
 
+  // Identities are one-way hashes, so resolve one by hashing the cached
+  // notifications and matching.
   const resolveNotification = useCallback(
-    (id: string) => {
-      const decoded = decodeNativeNotificationIdentity(id);
-
-      if (!decoded) {
+    (id: string): GitifyNotification | null => {
+      if (!id || id === NATIVE_NOTIFICATION_SUMMARY_ID) {
         return null;
       }
 
-      const notification = findNotificationFocusTarget(
-        readUnfilteredNotifications(),
-        decoded.accountUUID,
-        decoded.notificationId,
-      );
+      for (const accountNotifications of readUnfilteredNotifications()) {
+        const accountUUID = getAccountUUID(accountNotifications.account);
 
-      return { decoded, notification };
+        for (const notification of accountNotifications.notifications) {
+          if (getNativeNotificationId(accountUUID, notification.id) === id) {
+            return notification;
+          }
+        }
+      }
+
+      return null;
     },
     [readUnfilteredNotifications],
   );
@@ -149,20 +152,14 @@ export const useNotificationEffects = ({
 
   const handleNativeClick = useCallback(
     (payload: INativeNotificationClickEvent) => {
-      const resolved = payload.id ? resolveNotification(payload.id) : null;
-
-      if (!resolved) {
-        window.gitify.app.show();
-        onRevealRef.current();
-        return;
-      }
+      const notification = resolveNotification(payload.id);
 
       if (
         useSettingsStore.getState().nativeNotificationClickAction ===
         NativeNotificationClickAction.BROWSER
       ) {
-        if (resolved.notification) {
-          void openNotification(resolved.notification);
+        if (notification) {
+          void openNotification(notification);
           return;
         }
 
@@ -180,9 +177,12 @@ export const useNotificationEffects = ({
 
       window.gitify.app.show();
       onRevealRef.current();
-      useNotificationFocusStore
-        .getState()
-        .requestFocus(resolved.decoded.accountUUID, resolved.decoded.notificationId);
+
+      if (notification) {
+        useNotificationFocusStore
+          .getState()
+          .requestFocus(getAccountUUID(notification.account), notification.id);
+      }
     },
     [resolveNotification],
   );
@@ -194,9 +194,9 @@ export const useNotificationEffects = ({
         return;
       }
 
-      const resolved = resolveNotification(payload.id);
+      const notification = resolveNotification(payload.id);
 
-      if (!resolved?.notification) {
+      if (!notification) {
         pendingInteractionsRef.current.push({
           payload,
           expiresAt: Date.now() + PENDING_INTERACTION_TTL_MS,
@@ -209,7 +209,7 @@ export const useNotificationEffects = ({
         return;
       }
 
-      executeAction(payload.action, resolved.notification);
+      executeAction(payload.action, notification);
     },
     [executeAction, handleNativeClick, resolveNotification],
   );
@@ -227,14 +227,14 @@ export const useNotificationEffects = ({
         continue;
       }
 
-      const resolved = resolveNotification(pending.payload.id);
+      const notification = resolveNotification(pending.payload.id);
 
-      if (!resolved?.notification) {
+      if (!notification) {
         remaining.push(pending);
         continue;
       }
 
-      executeAction(pending.payload.action, resolved.notification);
+      executeAction(pending.payload.action, notification);
     }
 
     pendingInteractionsRef.current = remaining;
@@ -340,11 +340,11 @@ export const useNotificationEffects = ({
             }),
           )
             .then((published) => {
-              for (const payload of published ?? []) {
+              for (const { payload, url } of published ?? []) {
                 publishedIdsRef.current.add(payload.id);
 
-                if (payload.url) {
-                  publishedUrlsRef.current.set(payload.id, payload.url);
+                if (url) {
+                  publishedUrlsRef.current.set(payload.id, url);
                 }
               }
             })
@@ -381,15 +381,24 @@ export const useNotificationEffects = ({
       return;
     }
 
+    const unfilteredNotifications = readUnfilteredNotifications();
     const currentIds = new Set(
-      readUnfilteredNotifications().flatMap((accountNotifications) =>
-        accountNotifications.notifications.map((notification) =>
-          encodeNativeNotificationIdentity(getAccountUUID(notification.account), notification.id),
-        ),
-      ),
+      unfilteredNotifications.flatMap((accountNotifications) => {
+        const accountUUID = getAccountUUID(accountNotifications.account);
+        return accountNotifications.notifications.map((notification) =>
+          getNativeNotificationId(accountUUID, notification.id),
+        );
+      }),
+    );
+    // The summary stands for the whole batch, so keep it until nothing unread
+    // remains rather than removing it because it matches no single notification.
+    const hasUnread = unfilteredNotifications.some((accountNotifications) =>
+      accountNotifications.notifications.some((notification) => notification.unread),
     );
 
-    const removed = [...publishedIdsRef.current].filter((id) => !currentIds.has(id));
+    const removed = [...publishedIdsRef.current].filter((id) =>
+      id === NATIVE_NOTIFICATION_SUMMARY_ID ? !hasUnread : !currentIds.has(id),
+    );
 
     if (removed.length === 0) {
       return;
