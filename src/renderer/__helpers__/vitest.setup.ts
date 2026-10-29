@@ -1,4 +1,6 @@
 import '@testing-library/jest-dom/vitest';
+// Initialize the real i18n instance so tests render the English defaults.
+import '../i18n';
 import { createGitifyBridgeApi } from '../../__helpers__/gitify-bridge';
 
 import { Constants } from '../constants';
@@ -8,10 +10,6 @@ import { Constants } from '../constants';
 // graph, so it is loaded lazily in beforeEach (after each test file's
 // vi.mock registrations) to avoid pre-caching unmocked forge modules.
 import useFiltersStore from '../stores/useFiltersStore';
-
-// Initialize the real i18n instance so every test renders resolved English
-// text (see design.md - Test strategy).
-import '../i18n';
 import useSettingsStore from '../stores/useSettingsStore';
 
 /**

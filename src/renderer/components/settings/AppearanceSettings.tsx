@@ -11,13 +11,7 @@ import { SectionHeading } from '../primitives/SectionHeading';
 
 import { DesignLanguage, Theme } from '../../types';
 
-import i18n, {
-  DEFAULT_LANGUAGE,
-  LANGUAGES,
-  SUPPORTED_LANGUAGES,
-  loadLanguageLocale,
-  type Language,
-} from '../../i18n';
+import { LANGUAGES, type Language, loadLanguageLocale, setLanguage } from '../../i18n';
 import { resolveColorMode, supportedColorModes } from '../../utils/ui/theme';
 import {
   canDecreaseZoom,
@@ -47,11 +41,10 @@ export function AppearanceSettings() {
   const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
   const zoomPercentage = useSettingsStore((s) => s.zoomPercentage);
 
-  // Language (stored independently of the settings store, see i18n/loader)
-  const locale = loadLanguageLocale();
-  const language = SUPPORTED_LANGUAGES.includes(locale as Language)
-    ? (locale as Language)
-    : DEFAULT_LANGUAGE;
+  // Language is stored independently of the settings store (see i18n/loader).
+  const language = loadLanguageLocale();
+  // A selector with a single option is noise; show it once a second locale ships.
+  const showLanguageSelector = LANGUAGES.length > 1;
 
   return (
     <fieldset>
@@ -60,30 +53,32 @@ export function AppearanceSettings() {
       </SectionHeading>
 
       <SettingsList>
-        <SettingsRow
-          label={t('settings.appearance.language', 'Language')}
-          name="language"
-          tooltip={t(
-            'settings.appearance.language_help',
-            'Choose the language for the {{appName}} interface.',
-            { appName: APPLICATION.NAME },
-          )}
-        >
-          <Select
-            aria-label={t('settings.appearance.language', 'Language')}
-            data-testid="settings-language"
-            onChange={(evt) => {
-              void i18n.changeLanguage(evt.target.value as Language);
-            }}
-            value={language}
+        {showLanguageSelector && (
+          <SettingsRow
+            label={t('settings.appearance.language', 'Language')}
+            name="language"
+            tooltip={t(
+              'settings.appearance.language_help',
+              'Choose the language for the {{appName}} interface.',
+              { appName: APPLICATION.NAME },
+            )}
           >
-            {LANGUAGES.map((option) => (
-              <Select.Option key={option.value} value={option.value}>
-                {option.label}
-              </Select.Option>
-            ))}
-          </Select>
-        </SettingsRow>
+            <Select
+              aria-label={t('settings.appearance.language', 'Language')}
+              data-testid="settings-language"
+              onChange={(evt) => {
+                void setLanguage(evt.target.value as Language);
+              }}
+              value={language}
+            >
+              {LANGUAGES.map((option) => (
+                <Select.Option key={option.value} value={option.value}>
+                  {option.label}
+                </Select.Option>
+              ))}
+            </Select>
+          </SettingsRow>
+        )}
 
         <SettingsChoice
           label={t('settings.appearance.design', 'Design')}

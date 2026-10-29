@@ -154,16 +154,20 @@ export function SystemSettings() {
                   'Controls whether opening an external link brings the destination app to the front.',
                 )}
               </Text>
-              <Trans
-                i18nKey="settings.system.open_links_foreground_help"
-                components={[<Text as="strong" key={0} />]}
-                defaults="<0>Foreground</0> brings the opened window or browser to the front."
-              />
-              <Trans
-                i18nKey="settings.system.open_links_background_help"
-                components={[<Text as="strong" key={0} />]}
-                defaults="<0>Background</0> opens the link without stealing focus from the current window."
-              />
+              <Text>
+                <Trans
+                  i18nKey="settings.system.open_links_foreground_help"
+                  components={[<Text as="strong" key={0} />]}
+                  defaults="<0>Foreground</0> brings the opened window or browser to the front."
+                />
+              </Text>
+              <Text>
+                <Trans
+                  i18nKey="settings.system.open_links_background_help"
+                  components={[<Text as="strong" key={0} />]}
+                  defaults="<0>Background</0> opens the link without stealing focus from the current window."
+                />
+              </Text>
               <Text>
                 {t(
                   'settings.system.open_links_help_scope',

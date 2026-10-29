@@ -18,5 +18,6 @@ export default defineConfig({
   },
   lint: {
     ignore: ['**/*.test.{ts,tsx}'],
+    checkConcatenation: 'error',
   },
 });

@@ -239,16 +239,20 @@ export function InboxSettings() {
                     'Choose how notifications are displayed in the list.',
                   )}
                 </Text>
-                <Trans
-                  i18nKey="settings.inbox.group_by_repository_help"
-                  components={[<Text as="strong" key={0} />]}
-                  defaults="<0>Repository</0> groups notifications by repository name."
-                />
-                <Trans
-                  i18nKey="settings.inbox.group_by_date_help"
-                  components={[<Text as="strong" key={0} />]}
-                  defaults="<0>Date</0> shows notifications in chronological order."
-                />
+                <Text>
+                  <Trans
+                    i18nKey="settings.inbox.group_by_repository_help"
+                    components={[<Text as="strong" key={0} />]}
+                    defaults="<0>Repository</0> groups notifications by repository name."
+                  />
+                </Text>
+                <Text>
+                  <Trans
+                    i18nKey="settings.inbox.group_by_date_help"
+                    components={[<Text as="strong" key={0} />]}
+                    defaults="<0>Date</0> shows notifications in chronological order."
+                  />
+                </Text>
               </Stack>
             }
             value={groupBy}
