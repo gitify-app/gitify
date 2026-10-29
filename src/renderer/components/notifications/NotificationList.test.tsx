@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import type { ReactElement } from 'react';
+import { Fragment, type ReactElement } from 'react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import {
@@ -22,11 +22,19 @@ import { NotificationList } from './NotificationList';
 vi.mock('@legendapp/list/react', () => ({
   LegendList: ({
     data,
+    keyExtractor,
     renderItem,
   }: {
     data: unknown[];
+    keyExtractor: (item: unknown) => string;
     renderItem: (info: { item: unknown }) => ReactElement;
-  }) => <div>{data.map((item) => renderItem({ item }))}</div>,
+  }) => (
+    <div>
+      {data.map((item) => (
+        <Fragment key={keyExtractor(item)}>{renderItem({ item })}</Fragment>
+      ))}
+    </div>
+  ),
 }));
 
 describe('renderer/components/notifications/NotificationList.tsx', () => {
