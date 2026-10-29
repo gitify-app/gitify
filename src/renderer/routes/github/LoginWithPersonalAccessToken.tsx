@@ -12,12 +12,12 @@ export function GitHubLoginWithPersonalAccessTokenRoute() {
       hostnameCaption="Change only if you are using GitHub Enterprise Server"
       hostnamePlaceholder="github.com"
       title="Login with Personal Access Token"
-      tokenPlaceholder="Your generated token (40 characters)"
+      tokenPlaceholder="Your classic token (40 characters)"
       tokenSettingsCaption="on GitHub to paste the token below."
       tokenSettingsLabel="Generate a PAT"
     >
       <Text as="i" className="text-xs">
-        The{' '}
+        Use a classic personal access token; fine-grained tokens are not supported. The{' '}
         <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
           <button type="button">
             <Text as="u">recommended scopes</Text>

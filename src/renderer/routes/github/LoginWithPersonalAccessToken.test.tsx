@@ -25,6 +25,16 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
   });
 
+  it('explains that only classic tokens are supported', () => {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
+
+    expect(
+      screen.getByText(
+        /Use a classic personal access token; fine-grained tokens are not supported/,
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('let us go back', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
