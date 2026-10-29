@@ -1,0 +1,19 @@
+.github/zizmor.yml
+  s_3809e5d3e241d9::t_288682551c791a 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "92e92af2a0e90d3c2c59fb91087570e5027053bd",
+  "prompts": {},
+  "sessions": {
+    "s_3809e5d3e241d9": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "0474c909-be73-42ec-9bbc-936fcbd977bf",
+        "model": "unknown"
+      },
+      "human_author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
