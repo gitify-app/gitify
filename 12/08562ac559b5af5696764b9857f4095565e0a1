@@ -1,0 +1,20 @@
+CONTRIBUTING.md
+  h_ac004aadb63da9 99-111,113,116,124
+package.json
+  h_ac004aadb63da9 68-71
+scripts/check-en-locales.mjs
+  h_ac004aadb63da9 1-50
+scripts/check-t-defaults.mjs
+  h_ac004aadb63da9 1-158
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1208562ac559b5af5696764b9857f4095565e0a1",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
