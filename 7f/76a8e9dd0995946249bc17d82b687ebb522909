@@ -1,0 +1,16 @@
+src/renderer/i18n/locales/en.json
+  h_ac004aadb63da9 268
+src/renderer/routes/github/LoginWithPersonalAccessToken.tsx
+  h_ac004aadb63da9 1-2,10-19,48-52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f76a8e9dd0995946249bc17d82b687ebb522909",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
