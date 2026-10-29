@@ -26,7 +26,7 @@ describe('renderer/routes/Login.tsx', () => {
     expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Personal Access Token' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'GitHub CLI' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'OAuth App' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Custom OAuth App' })).toBeInTheDocument();
     expect(screen.getByText('GitHub Cloud & GitHub Enterprise Server')).toBeInTheDocument();
 
     expect(navigateMock).not.toHaveBeenCalled();
@@ -47,7 +47,7 @@ describe('renderer/routes/Login.tsx', () => {
   it.each([
     ['Continue with GitHub', '/login/github/device-flow'],
     ['Personal Access Token', '/login/github/personal-access-token'],
-    ['OAuth App', '/login/github/oauth-app'],
+    ['Custom OAuth App', '/login/github/custom-oauth-app'],
   ])('navigates %s', async (testId, route) => {
     renderWithProviders(<LoginRoute />);
 

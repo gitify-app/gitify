@@ -25,10 +25,20 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
     expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
   });
 
+  it('explains that only classic tokens are supported', () => {
+    renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
+
+    expect(
+      screen.getByText(
+        /Use a classic personal access token; fine-grained tokens are not supported/,
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('let us go back', async () => {
     renderWithProviders(<GitHubLoginWithPersonalAccessTokenRoute />);
 
-    await userEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(-1);
@@ -138,7 +148,7 @@ describe('renderer/routes/github/LoginWithPersonalAccessToken.tsx', () => {
       loginWithPersonalAccessToken: loginWithPersonalAccessTokenMock,
     });
 
-    await userEvent.click(screen.getByTestId('login-docs'));
+    await userEvent.click(screen.getByRole('button', { name: 'Docs' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
   });

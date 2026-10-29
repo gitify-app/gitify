@@ -101,6 +101,38 @@ Operating-system notifications are created in the main process and have platform
 
 Verify the notification content, click behavior, actions, and removal-on-read on a signed macOS build, Windows, and an action-capable Linux desktop before releasing a change in this area.
 
+### Translations
+
+Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
+
+- Translation files live in `src/renderer/i18n/locales/` (e.g. `en.json`).
+- `en.json` is generated from the code, never hand-edited. Write the English text as the second argument of `t()`, and as `defaults` on `<Trans>`:
+
+  ```tsx
+  t('common.save', 'Save');
+  t('login.device.opened', 'Opened {{hostname}}', { hostname });
+  <Trans
+    i18nKey="filters.requires_detailed"
+    components={[<strong key={0} />]}
+    defaults="Requires <0>Detailed Notifications</0>."
+  />;
+  ```
+
+- After changing a string, sync the locale files:
+  - `pnpm i18n:extract` — regenerate/update locale files from the `t()` calls in the source
+  - `pnpm i18n:check` — verify the keys are in sync with the code, every `t()`/`<Trans>` has an English default, and `en.json` has no empty or key-path values (also runs in CI)
+  - `pnpm i18n:lint` — flag hardcoded or untranslated UI strings
+  - `pnpm i18n:status` — locale health summary
+- Don't run `i18next-cli extract --trust-derived`: it replaces real English text with key names.
+- To add a language:
+  1. Create `src/renderer/i18n/locales/<lang>.json`, copying `en.json` as a starting point.
+  2. Register it in `SUPPORTED_LANGUAGES` in `src/renderer/i18n/types.ts` (this also surfaces it in the Appearance → Language selector).
+  3. Import it in the `locales` map in `src/renderer/i18n/loader.ts`.
+  4. Translate the keys. The [i18n Ally][i18n-ally-website] VSCode extension is handy for working through JSON keys.
+  5. Run `pnpm i18n:check` and `pnpm test`.
+- Translation keys use `snake_case`, grouped by feature (e.g. `settings.appearance.language`). Prefer whole-sentence keys with `{{placeholder}}` interpolation over string concatenation, and leave brand names (GitHub, GitLab, …) untranslated.
+- When a sentence contains markup (bold, links, tooltips), keep it as one `<Trans>` string instead of splitting it into several `t()` fragments, so translators can reorder the words. A component that requires a single child (e.g. Primer's `Tooltip`) needs a small wrapper that accepts `children`.
+
 ### 🎨 Code Style & Conventions
 
 - Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
@@ -108,6 +140,42 @@ Verify the notification content, click behavior, actions, and removal-on-read on
 - Follow existing file and folder naming conventions.
 - See [ARCHITECTURE.md](./ARCHITECTURE.md) for the renderer's module layering, state ownership, and side-effect conventions.
 - Keep commit messages clear and descriptive.
+
+#### 📝 TSDoc
+
+Every TSDoc block follows the [TSDoc][tsdoc-website] standard. Add TSDoc to
+exported APIs whose contract is not obvious from the signature; trivial
+presentational components may omit it. Existing files are not the standard:
+proposals and new changes follow this section.
+
+- Start with a one-sentence summary.
+- Document every parameter with `@param name - description`. Put optional or
+  default behaviour in the description; never add JSDoc type annotations.
+- Use `@returns` (not `@return`) for every non-void return. Describe the
+  resolved value, its format, or its success and failure branches. Do not
+  repeat the TypeScript type or write "Promise resolving to".
+- Let named result types own object shapes. Document fields on the type, then
+  name or link the type from `@returns` instead of restating the shape.
+- Use `@throws` for each thrown error condition, `@remarks` for extended
+  context, `@example` for non-obvious usage, and `@typeParam` for generic
+  parameters.
+- Use `{@link Symbol}` for internal references and backticks for identifiers
+  and literals.
+- Omit `@returns` for `void` and `Promise<void>`.
+- Update TSDoc in the same pull request as the behaviour change. Do not
+  suppress a TSDoc lint finding; fix it or change this convention in a separate
+  proposal.
+
+```ts
+/**
+ * Read the token the locally installed GitHub CLI holds for a host.
+ *
+ * @param hostname - Host to read the token for (e.g. `github.com`).
+ * @returns The CLI token, or a classified failure with an optional detail line.
+ */
+```
+
+TSDoc syntax is validated by the shared lint configuration through `pnpm check`.
 
 ### 🐛 How to Report Bugs or Request Features
 
@@ -173,6 +241,7 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 <!-- LINK LABELS -->
 
 [vite-plus-website]: https://viteplus.dev/
+[tsdoc-website]: https://tsdoc.org/
 [conventional-commits]: https://www.conventionalcommits.org
 [release-please]: https://github.com/googleapis/release-please
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
@@ -182,3 +251,5 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 [github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
 [vitest-website]: https://vitest.dev/
+[i18next-website]: https://www.i18next.com/
+[i18n-ally-website]: https://i18n-docs.intlify.org/

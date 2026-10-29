@@ -11,6 +11,7 @@ import {
 import type { GitifyNotification } from '../../types';
 import { NativeNotificationStyle } from '../../types';
 
+import i18n from '../../i18n';
 import { isMarkAsDoneFeatureSupported, isUnsubscribeThreadSupported } from '../api/features';
 import { getAccountUUID } from '../auth/utils';
 import { generateNotificationWebUrl } from '../notifications/url';
@@ -101,7 +102,9 @@ export async function raiseNativeNotification(
     const summary: INativeNotificationPayload = {
       id: 'summary',
       title: APPLICATION.NAME,
-      body: `You have ${notifications.length} notifications`,
+      body: i18n.t('native.summary_body', 'You have {{count}} notifications', {
+        count: notifications.length,
+      }),
       actions: options.actions ? ['show'] : [],
       keepVisible: options.keepVisible,
     };

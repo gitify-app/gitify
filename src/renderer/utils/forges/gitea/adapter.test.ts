@@ -74,8 +74,8 @@ describe('renderer/utils/forges/gitea/adapter.ts', () => {
 
     it('returns the key icon for every auth method (PAT-only forge today)', () => {
       expect(giteaAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
-      expect(giteaAdapter.getAuthMethodIcon('GitHub App')).toBe(KeyIcon);
-      expect(giteaAdapter.getAuthMethodIcon('OAuth App')).toBe(KeyIcon);
+      expect(giteaAdapter.getAuthMethodIcon('Gitify OAuth App')).toBe(KeyIcon);
+      expect(giteaAdapter.getAuthMethodIcon('Custom OAuth App')).toBe(KeyIcon);
     });
   });
 

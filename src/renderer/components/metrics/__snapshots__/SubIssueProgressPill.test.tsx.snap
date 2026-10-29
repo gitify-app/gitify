@@ -12,7 +12,6 @@ exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders complete
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -90,7 +89,6 @@ exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders in-progr
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"

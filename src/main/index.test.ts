@@ -16,7 +16,6 @@ vi.mock('electron', () => ({
       calls.push('whenReady');
       return Promise.resolve();
     }),
-    setAsDefaultProtocolClient: vi.fn(),
     on: vi.fn(),
   },
 }));
@@ -101,7 +100,6 @@ describe('main/index.ts', () => {
       app: {
         isPackaged: true,
         whenReady: vi.fn(() => Promise.reject(new Error('ready-failed'))),
-        setAsDefaultProtocolClient: vi.fn(),
         on: vi.fn(),
       },
     }));

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { CommentIcon } from '@primer/octicons-react';
 
 import { IconColor } from '../../types';
@@ -10,14 +12,16 @@ export interface CommentsPillProps {
 }
 
 export function CommentsPill({ commentCount }: Readonly<CommentsPillProps>) {
+  const { t } = useTranslation();
   if (!commentCount) {
     return null;
   }
 
-  const description = formatMetricDescription(commentCount, 'comment');
+  const description = formatMetricDescription(commentCount, t('metrics.comment', 'comment'));
 
   return (
     <MetricPill
+      ariaLabel={description}
       color={IconColor.GRAY}
       contents={description}
       icon={CommentIcon}

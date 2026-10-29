@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Heading, Stack, Text } from '@primer/react';
@@ -13,6 +14,7 @@ import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
 
 import { LogoIcon } from '../icons/LogoIcon';
+import { translateForgeTagline, translateLoginMethodLabel } from '../utils/forges/labels';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 
@@ -25,6 +27,7 @@ function pickPrimaryMethod(adapter: ForgeAdapter): LoginMethodDescriptor | undef
 }
 
 export function LoginRoute() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const adapters = listAdapters();
 
@@ -94,20 +97,19 @@ export function LoginRoute() {
           gap="none"
           style={{ animationDelay: '60ms' }}
         >
-          <Heading as="h2">Git Notifications</Heading>
-          <Heading as="h3">on your menu bar</Heading>
+          <Heading as="h2">{t('login.title', 'Git Notifications')}</Heading>
+          <Heading as="h3">{t('login.subtitle', 'on your menu bar')}</Heading>
         </Stack>
 
         {adapters.length > 1 && (
           <div
-            aria-label="Choose a forge"
+            aria-label={t('login.choose_forge', 'Choose a forge')}
             className={cn(
               'motion-reduce:animate-none animate-login-fade-up',
               'relative inline-flex items-center rounded-full',
               'border border-[var(--borderColor-default)]',
               'bg-[var(--bgColor-muted)] p-1',
             )}
-            data-testid="forge-tablist"
             ref={tablistRef}
             role="tablist"
             style={{ animationDelay: '120ms' }}
@@ -121,7 +123,6 @@ export function LoginRoute() {
                   'transition-[left,width] duration-300 ease-login-out',
                   'motion-reduce:transition-none',
                 )}
-                data-testid="forge-tab-indicator"
                 style={{ left: pillRect.left, width: pillRect.width }}
               />
             )}
@@ -177,7 +178,9 @@ export function LoginRoute() {
                 onClick={() => navigate(primary.route)}
                 variant="primary"
               >
-                Continue with {activeAdapter.displayName}
+                {t('login.continue_with', 'Continue with {{name}}', {
+                  name: activeAdapter.displayName,
+                })}
               </Button>
             )}
 
@@ -190,7 +193,7 @@ export function LoginRoute() {
                 onClick={() => navigate(method.route)}
                 variant={method.variant ?? 'invisible'}
               >
-                {method.label}
+                {translateLoginMethodLabel(method.label)}
               </Button>
             ))}
 
@@ -200,7 +203,7 @@ export function LoginRoute() {
                 className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
                 size="small"
               >
-                {activeAdapter.tagline}
+                {translateForgeTagline(activeAdapter.tagline)}
               </Text>
             )}
           </Stack>

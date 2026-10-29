@@ -1,5 +1,9 @@
 import '@testing-library/jest-dom/vitest';
+// Initialize the real i18n instance so tests render the English defaults.
+import '../i18n';
 import { createGitifyBridgeApi } from '../../__helpers__/gitify-bridge';
+
+import { Constants } from '../constants';
 
 // Import store modules directly (not the stores barrel) to keep this setup
 // file's import graph light. The accounts store pulls in the forge adapter
@@ -99,9 +103,21 @@ function getRequestTarget(input: RequestInfo | URL): string {
 window.gitify = createGitifyBridgeApi();
 
 /**
+ * Pin the browser language so i18n detection is deterministic in tests
+ * regardless of the machine/CI locale.
+ */
+Object.defineProperty(navigator, 'language', {
+  value: 'en',
+  configurable: true,
+});
+
+/**
  * Reset stores
  */
 beforeEach(() => {
+  // Clear any language preference so each test detects/serves English
+  localStorage.removeItem(Constants.STORAGE.LANGUAGE);
+
   vi.stubGlobal(
     'fetch',
     vi.fn(async (input: RequestInfo | URL) => {

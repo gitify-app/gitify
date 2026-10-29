@@ -15,16 +15,10 @@ import {
   registerUpdaterHandlers,
 } from './handlers';
 import { getIdleTrayIcon } from './icons';
-import {
-  configureWindowEvents,
-  handleProtocolURL,
-  initializeAppLifecycle,
-  onFirstRunMaybe,
-} from './lifecycle';
+import { configureWindowEvents, initializeAppLifecycle, onFirstRunMaybe } from './lifecycle';
 import MenuBuilder from './menu';
 import { applyOzonePlatform } from './ozone';
 import AppUpdater from './updater';
-import { isDevMode } from './utils';
 
 // Runs at module load: the Ozone platform is read during app startup, so this
 // has to happen before `app.whenReady()` below.
@@ -49,10 +43,6 @@ const mb = menubar({
 const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
-// Register your app as the handler for a custom protocol
-const protocol = isDevMode() ? 'gitify-dev' : 'gitify';
-app.setAsDefaultProtocolClient(protocol);
-
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
 app
@@ -60,7 +50,7 @@ app
   .then(async () => {
     await onFirstRunMaybe();
 
-    initializeAppLifecycle(mb, contextMenu, protocol);
+    initializeAppLifecycle(mb, contextMenu);
 
     // Configure window event handlers (Escape key, DevTools resize)
     configureWindowEvents(mb, menuBuilder);
@@ -77,9 +67,3 @@ app
   .catch((err) => {
     logError('main', 'Failed to initialize application', toError(err));
   });
-
-// Handle gitify:// custom protocol URL events for OAuth 2.0 callback
-app.on('open-url', (event, url) => {
-  event.preventDefault();
-  handleProtocolURL(mb, url, protocol);
-});

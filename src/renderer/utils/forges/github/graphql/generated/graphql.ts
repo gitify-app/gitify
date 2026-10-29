@@ -4,6 +4,37 @@ type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 import type { Link } from '../../../../../types';
 import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
+/** The possible states of a check run in a status rollup. */
+export type CheckRunState =
+  /** The check run requires action. */
+  | 'ACTION_REQUIRED'
+  /** The check run has been cancelled. */
+  | 'CANCELLED'
+  /** The check run has been completed. */
+  | 'COMPLETED'
+  /** The check run has failed. */
+  | 'FAILURE'
+  /** The check run is in progress. */
+  | 'IN_PROGRESS'
+  /** The check run was neutral. */
+  | 'NEUTRAL'
+  /** The check run is in pending state. */
+  | 'PENDING'
+  /** The check run has been queued. */
+  | 'QUEUED'
+  /** The check run was skipped. */
+  | 'SKIPPED'
+  /** The check run was marked stale by GitHub. Only GitHub can use this conclusion. */
+  | 'STALE'
+  /** The check run has failed at startup. */
+  | 'STARTUP_FAILURE'
+  /** The check run has succeeded. */
+  | 'SUCCESS'
+  /** The check run has timed out. */
+  | 'TIMED_OUT'
+  /** The check run is in waiting state. */
+  | 'WAITING';
+
 /** The possible state reasons of a discussion. */
 export type DiscussionStateReason =
   /** The discussion is a duplicate of another */
@@ -78,6 +109,15 @@ export type MilestoneState =
   /** A milestone that is still open. */
   | 'OPEN';
 
+/** The review status of a pull request. */
+export type PullRequestReviewDecision =
+  /** The pull request has received an approving review. */
+  | 'APPROVED'
+  /** Changes have been requested on the pull request. */
+  | 'CHANGES_REQUESTED'
+  /** A review is required before the pull request can be merged. */
+  | 'REVIEW_REQUIRED';
+
 /** The possible states of a pull request review. */
 export type PullRequestReviewState =
   /** A review allowing the pull request to merge. */
@@ -118,6 +158,19 @@ export type ReactionContent =
   | 'THUMBS_DOWN'
   /** Represents the `:+1:` emoji. */
   | 'THUMBS_UP';
+
+/** The possible commit status states. */
+export type StatusState =
+  /** Status is errored. */
+  | 'ERROR'
+  /** Status is expected. */
+  | 'EXPECTED'
+  /** Status is failing. */
+  | 'FAILURE'
+  /** Status is pending. */
+  | 'PENDING'
+  /** Status is successful. */
+  | 'SUCCESS';
 
 type AuthorFields_Bot_Fragment = { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' };
 
@@ -364,7 +417,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
               | { name: string }
               | Record<PropertyKey, never>
              | null }
-         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
+         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -394,7 +447,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null, statusCheckRollup: { state: StatusState, contexts: { checkRunCountsByState: Array<{ state: CheckRunState, count: number }> | null, statusContextCountsByState: Array<{ state: StatusState, count: number }> | null } } | null } | null } | null };
 
 export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { __typename: 'Discussion', number: number, title: string, stateReason: DiscussionStateReason | null, isAnswered: boolean | null, url: Link, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -447,7 +500,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
               | { name: string }
               | Record<PropertyKey, never>
              | null }
-         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
+         | null> | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null, pullRequest?: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -477,7 +530,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null, statusCheckRollup: { state: StatusState, contexts: { checkRunCountsByState: Array<{ state: CheckRunState, count: number }> | null, statusContextCountsByState: Array<{ state: StatusState, count: number }> | null } } | null } | null } | null };
 
 export type FetchPullRequestByNumberQueryVariables = Exact<{
   owner: string;
@@ -491,7 +544,7 @@ export type FetchPullRequestByNumberQueryVariables = Exact<{
 }>;
 
 
-export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
+export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -521,9 +574,9 @@ export type FetchPullRequestByNumberQuery = { repository: { pullRequest: { __typ
                 | { login: string }
                 | { login: string }
                 | { login: string }
-               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null } | null };
+               | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null, statusCheckRollup: { state: StatusState, contexts: { checkRunCountsByState: Array<{ state: CheckRunState, count: number }> | null, statusContextCountsByState: Array<{ state: StatusState, count: number }> | null } } | null } | null } | null };
 
-export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, milestone: { state: MilestoneState, title: string } | null, author:
+export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: number, title: string, url: Link, state: PullRequestState, merged: boolean, isDraft: boolean, isInMergeQueue: boolean, reviewDecision: PullRequestReviewDecision | null, milestone: { state: MilestoneState, title: string } | null, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
     | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'EnterpriseUserAccount' }
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
@@ -553,7 +606,7 @@ export type PullRequestDetailsFragment = { __typename: 'PullRequest', number: nu
             | { login: string }
             | { login: string }
             | { login: string }
-           | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null };
+           | null } | null> | null } } | null> | null }, labels: { nodes: Array<{ name: string, color: string } | null> | null } | null, closingIssuesReferences: { nodes: Array<{ number: number, url: Link } | null> | null } | null, stackEntry: { position: number, stack: { size: number } | null } | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null, statusCheckRollup: { state: StatusState, contexts: { checkRunCountsByState: Array<{ state: CheckRunState, count: number }> | null, statusContextCountsByState: Array<{ state: StatusState, count: number }> | null } } | null };
 
 export type PullRequestReviewFieldsFragment = { state: PullRequestReviewState, submittedAt: string | null, url: Link, author:
     | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Bot' }
@@ -944,6 +997,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   merged
   isDraft
   isInMergeQueue
+  reviewDecision
   milestone {
     ...MilestoneFields
   }
@@ -996,6 +1050,7 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -1009,6 +1064,19 @@ export const PullRequestDetailsFragmentDoc = new TypedDocumentString(`
   }
   reactionGroups {
     ...ReactionGroupFields
+  }
+  statusCheckRollup {
+    state
+    contexts {
+      checkRunCountsByState {
+        state
+        count
+      }
+      statusContextCountsByState {
+        state
+        count
+      }
+    }
   }
 }
     fragment AuthorFields on Actor {
@@ -1259,6 +1327,7 @@ fragment PullRequestDetails on PullRequest {
   merged
   isDraft
   isInMergeQueue
+  reviewDecision
   milestone {
     ...MilestoneFields
   }
@@ -1311,6 +1380,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -1324,6 +1394,19 @@ fragment PullRequestDetails on PullRequest {
   }
   reactionGroups {
     ...ReactionGroupFields
+  }
+  statusCheckRollup {
+    state
+    contexts {
+      checkRunCountsByState {
+        state
+        count
+      }
+      statusContextCountsByState {
+        state
+        count
+      }
+    }
   }
 }
 fragment PullRequestReviewFields on PullRequestReview {
@@ -1768,6 +1851,7 @@ fragment PullRequestDetails on PullRequest {
   merged
   isDraft
   isInMergeQueue
+  reviewDecision
   milestone {
     ...MilestoneFields
   }
@@ -1820,6 +1904,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -1833,6 +1918,19 @@ fragment PullRequestDetails on PullRequest {
   }
   reactionGroups {
     ...ReactionGroupFields
+  }
+  statusCheckRollup {
+    state
+    contexts {
+      checkRunCountsByState {
+        state
+        count
+      }
+      statusContextCountsByState {
+        state
+        count
+      }
+    }
   }
 }
 fragment PullRequestReviewFields on PullRequestReview {
@@ -1898,6 +1996,7 @@ fragment PullRequestDetails on PullRequest {
   merged
   isDraft
   isInMergeQueue
+  reviewDecision
   milestone {
     ...MilestoneFields
   }
@@ -1950,6 +2049,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -1963,6 +2063,19 @@ fragment PullRequestDetails on PullRequest {
   }
   reactionGroups {
     ...ReactionGroupFields
+  }
+  statusCheckRollup {
+    state
+    contexts {
+      checkRunCountsByState {
+        state
+        count
+      }
+      statusContextCountsByState {
+        state
+        count
+      }
+    }
   }
 }
 fragment PullRequestReviewFields on PullRequestReview {

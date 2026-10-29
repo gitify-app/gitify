@@ -1,4 +1,5 @@
 import { type ReactNode, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
@@ -13,6 +14,7 @@ import { Header } from '../primitives/Header';
 
 import type { Account, Forge, Hostname, Token } from '../../types';
 
+import i18n from '../../i18n';
 import {
   type PersonalAccessTokenFormData,
   type PersonalAccessTokenFormErrors,
@@ -58,8 +60,8 @@ export interface LoginWithPersonalAccessTokenFormProps {
 /**
  * Shared personal-access-token login form.
  *
- * Forge-specific route components (`routes/github`, `routes/gitea`) supply
- * their own copy via props so this form stays free of forge conditionals.
+ * Forge-specific route components under `routes/` supply their own copy via
+ * props so this form stays free of forge conditionals.
  */
 export function LoginWithPersonalAccessTokenForm({
   forge,
@@ -76,6 +78,7 @@ export function LoginWithPersonalAccessTokenForm({
   usernameCaption = '',
   children,
 }: Readonly<LoginWithPersonalAccessTokenFormProps>) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -128,7 +131,11 @@ export function LoginWithPersonalAccessTokenForm({
       } catch (err) {
         rendererLogError('loginWithPersonalAccessToken', 'Failed to login with PAT', toError(err));
         setErrors({
-          invalidCredentialsForHost: `Failed to validate provided token against ${data.hostname}`,
+          invalidCredentialsForHost: i18n.t(
+            'login.pat.invalid_token',
+            'Failed to validate provided token against {{hostname}}',
+            { hostname: data.hostname },
+          ),
           invalidCredentialsDetail: summarizeLoginError(err),
         });
       }
@@ -155,14 +162,16 @@ export function LoginWithPersonalAccessTokenForm({
               </Text>
             }
             hideTitle
-            title="Form errors"
+            title={t('login.pat.form_errors', 'Form errors')}
             variant="critical"
           />
         )}
         <Stack direction="vertical" gap="normal">
           {showUsernameField && (
             <FormControl id="login-username" required>
-              <FormControl.Label>Atlassian Email</FormControl.Label>
+              <FormControl.Label>
+                {t('login.pat.atlassian_email', 'Atlassian Email')}
+              </FormControl.Label>
               {usernameCaption && (
                 <FormControl.Caption>
                   <Text as="i">{usernameCaption}</Text>
@@ -171,7 +180,6 @@ export function LoginWithPersonalAccessTokenForm({
               <TextInput
                 aria-invalid={errors.username ? 'true' : 'false'}
                 block
-                data-testid="login-username"
                 name="username"
                 onChange={handleInputChange}
                 placeholder={usernamePlaceholder}
@@ -186,7 +194,7 @@ export function LoginWithPersonalAccessTokenForm({
 
           {showHostnameField && (
             <FormControl id="login-hostname" required>
-              <FormControl.Label>Hostname</FormControl.Label>
+              <FormControl.Label>{t('login.pat.hostname', 'Hostname')}</FormControl.Label>
               <FormControl.Caption>
                 <Text as="i">{hostnameCaption}</Text>
               </FormControl.Caption>
@@ -225,7 +233,7 @@ export function LoginWithPersonalAccessTokenForm({
           </Stack>
 
           <FormControl id="login-token" required>
-            <FormControl.Label>Token</FormControl.Label>
+            <FormControl.Label>{t('login.pat.token', 'Token')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.token ? 'true' : 'false'}
               block
@@ -236,7 +244,11 @@ export function LoginWithPersonalAccessTokenForm({
               placeholder={tokenPlaceholder}
               trailingAction={
                 <TextInput.Action
-                  aria-label={shouldMaskPersonalAccessToken ? 'Show token' : 'Hide token'}
+                  aria-label={
+                    shouldMaskPersonalAccessToken
+                      ? t('login.show_token', 'Show token')
+                      : t('login.hide_token', 'Hide token')
+                  }
                   icon={shouldMaskPersonalAccessToken ? EyeIcon : EyeClosedIcon}
                   onClick={() => setShouldMaskPersonalAccessToken(!shouldMaskPersonalAccessToken)}
                 />
@@ -254,12 +266,11 @@ export function LoginWithPersonalAccessTokenForm({
       <Footer justify="space-between">
         <Tooltip direction="ne" text={docsTooltip}>
           <Button
-            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(adapter.documentationUrl)}
             size="small"
           >
-            Docs
+            {t('common.docs', 'Docs')}
           </Button>
         </Tooltip>
 
@@ -270,7 +281,7 @@ export function LoginWithPersonalAccessTokenForm({
           onClick={handleSubmit}
           variant="primary"
         >
-          Login
+          {t('common.login', 'Login')}
         </Button>
       </Footer>
     </Page>

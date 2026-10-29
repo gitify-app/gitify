@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { BellIcon, SyncIcon } from '@primer/octicons-react';
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
+
+import { APPLICATION } from '../../../shared/constants';
 
 import { DEFAULT_SETTINGS_STATE, useSettingsStore } from '../../stores';
 
@@ -26,6 +29,7 @@ import { SettingsToggle } from './controls/SettingsToggle';
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
 export function AlertSettings() {
+  const { t } = useTranslation();
   const toggleSetting = useSettingsStore((s) => s.toggleSetting);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
@@ -64,46 +68,70 @@ export function AlertSettings() {
   return (
     <fieldset>
       <SectionHeading as="legend" icon={BellIcon}>
-        Alerts
+        {t('settings.alerts.title', 'Alerts')}
       </SectionHeading>
 
       <SettingsList>
         <SettingsToggle
           checked={showNotifications}
-          label="Show desktop notifications"
+          label={t('settings.alerts.show_desktop', 'Show desktop notifications')}
           name="showNotifications"
           onChange={() => toggleSetting('showNotifications')}
-          tooltip="Display native operating system notifications for new unread notifications."
+          tooltip={t(
+            'settings.alerts.show_desktop_help',
+            'Display native operating system notifications for new unread notifications.',
+          )}
         />
 
         {!nativeNotificationsSupported && (
           <Banner
             data-testid="native-notifications-unsupported"
-            description="This system does not support native desktop notifications."
-            title="Desktop notifications unavailable"
+            description={t(
+              'settings.alerts.unsupported_description',
+              'This system does not support native desktop notifications.',
+            )}
+            title={t('settings.alerts.unsupported_title', 'Desktop notifications unavailable')}
             variant="warning"
           />
         )}
 
         <SettingsChoice
-          label="Notification style"
+          label={t('settings.alerts.style', 'Notification style')}
           name="nativeNotificationStyle"
           onChange={(value) =>
             updateSetting('nativeNotificationStyle', value as NativeNotificationStyle)
           }
           options={[
-            { label: 'Individual', value: NativeNotificationStyle.INDIVIDUAL },
-            { label: 'Summary', value: NativeNotificationStyle.SUMMARY },
+            {
+              label: t('settings.alerts.style_individual', 'Individual'),
+              value: NativeNotificationStyle.INDIVIDUAL,
+            },
+            {
+              label: t('settings.alerts.style_summary', 'Summary'),
+              value: NativeNotificationStyle.SUMMARY,
+            },
           ]}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Choose how notifications from a new batch are delivered.</Text>
               <Text>
-                <Text as="strong">Individual</Text> shows up to five separate notifications, grouped
-                by repository where the platform supports it. A larger batch becomes one summary.
+                {t(
+                  'settings.alerts.style_help',
+                  'Choose how notifications from a new batch are delivered.',
+                )}
               </Text>
               <Text>
-                <Text as="strong">Summary</Text> always shows one notification with the total count.
+                <Trans
+                  components={[<Text as="strong" key={0} />]}
+                  defaults="<0>Individual</0> shows up to five separate notifications, grouped by repository where the platform supports it. A larger batch becomes one summary."
+                  i18nKey="settings.alerts.style_individual_help"
+                />
+              </Text>
+              <Text>
+                <Trans
+                  components={[<Text as="strong" key={0} />]}
+                  defaults="<0>Summary</0> always shows one notification with the total count."
+                  i18nKey="settings.alerts.style_summary_help"
+                />
               </Text>
             </Stack>
           }
@@ -112,43 +140,65 @@ export function AlertSettings() {
 
         <SettingsToggle
           checked={nativeNotificationActions}
-          label="Show notification actions"
+          label={t('settings.alerts.actions', 'Show notification actions')}
           name="nativeNotificationActions"
           onChange={() => toggleSetting('nativeNotificationActions')}
-          tooltip="Offer Mark as read, Mark as done, and Unsubscribe actions where the platform and account support them. Clicking a notification opens it."
+          tooltip={t(
+            'settings.alerts.actions_help',
+            'Offer Mark as read, Mark as done, and Unsubscribe actions where the platform and account support them. Clicking a notification opens it.',
+          )}
         />
 
         <SettingsToggle
           checked={nativeNotificationKeepVisible}
-          label="Keep notifications on screen"
+          label={t('settings.alerts.keep_visible', 'Keep notifications on screen')}
           name="nativeNotificationKeepVisible"
           onChange={() => toggleSetting('nativeNotificationKeepVisible')}
-          tooltip="Keep notifications visible until dismissed, where the operating system supports it."
+          tooltip={t(
+            'settings.alerts.keep_visible_help',
+            'Keep notifications visible until dismissed, where the operating system supports it.',
+          )}
         />
 
         <SettingsChoice
-          label="Notification click"
+          label={t('settings.alerts.click', 'Notification click')}
           name="nativeNotificationClickAction"
           onChange={(value) =>
             updateSetting('nativeNotificationClickAction', value as NativeNotificationClickAction)
           }
           options={[
-            { label: 'Gitify', value: NativeNotificationClickAction.APP },
-            { label: 'Browser', value: NativeNotificationClickAction.BROWSER },
+            { label: APPLICATION.NAME, value: NativeNotificationClickAction.APP },
+            {
+              label: t('settings.alerts.click_browser', 'Browser'),
+              value: NativeNotificationClickAction.BROWSER,
+            },
           ]}
           tooltip={
             <Stack direction="vertical" gap="condensed">
-              <Text>Choose what clicking a notification body opens.</Text>
               <Text>
-                <Text as="strong">Gitify</Text> reveals the matching notification in the app.
+                {t('settings.alerts.click_help', 'Choose what clicking a notification body opens.')}
               </Text>
               <Text>
-                <Text as="strong">Browser</Text> opens the notification target in your default
-                browser.
+                <Trans
+                  components={[<Text as="strong" key={0} />]}
+                  defaults="<0>{{appName}}</0> reveals the matching notification in the app."
+                  i18nKey="settings.alerts.click_app_help"
+                  values={{ appName: APPLICATION.NAME }}
+                />
               </Text>
               <Text>
-                Browser focus is controlled by <Text as="strong">Link focus</Text> in the System
-                section.
+                <Trans
+                  components={[<Text as="strong" key={0} />]}
+                  defaults="<0>Browser</0> opens the notification target in your default browser."
+                  i18nKey="settings.alerts.click_browser_help"
+                />
+              </Text>
+              <Text>
+                <Trans
+                  components={[<Text as="strong" key={0} />]}
+                  defaults="Browser focus is controlled by <0>Link focus</0> in the System section."
+                  i18nKey="settings.alerts.click_focus_help"
+                />
               </Text>
             </Stack>
           }
@@ -157,22 +207,27 @@ export function AlertSettings() {
 
         <SettingsToggle
           checked={playSound}
-          label="Play notification sound"
+          label={t('settings.alerts.play_sound', 'Play notification sound')}
           name="playSound"
           onChange={() => toggleSetting('playSound')}
-          tooltip="Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level."
+          tooltip={t(
+            'settings.alerts.play_sound_help',
+            'Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level.',
+          )}
         />
 
         <SettingsReveal name="volume" open={playSound}>
           <SettingsRow
-            label="Notification volume"
+            label={t('settings.alerts.volume', 'Notification volume')}
             name="notificationVolume"
-            tooltip="Adjust the volume of the notification sound."
+            tooltip={t(
+              'settings.alerts.volume_help',
+              'Adjust the volume of the notification sound.',
+            )}
           >
             <ButtonGroup data-testid="settings-volume-group">
               <IconButton
-                aria-label="Volume down"
-                data-testid="settings-volume-down"
+                aria-label={t('settings.alerts.volume_down', 'Volume down')}
                 disabled={!canDecreaseVolume(notificationVolume)}
                 icon={VolumeDownIcon}
                 onClick={() => {
@@ -183,7 +238,7 @@ export function AlertSettings() {
               />
 
               <Button
-                aria-label="Volume percentage"
+                aria-label={t('settings.alerts.volume_percentage', 'Volume percentage')}
                 className="pointer-events-none"
                 size="small"
                 tabIndex={-1}
@@ -192,8 +247,7 @@ export function AlertSettings() {
               </Button>
 
               <IconButton
-                aria-label="Volume up"
-                data-testid="settings-volume-up"
+                aria-label={t('settings.alerts.volume_up', 'Volume up')}
                 disabled={!canIncreaseVolume(notificationVolume)}
                 icon={VolumeUpIcon}
                 onClick={() => {
@@ -204,8 +258,7 @@ export function AlertSettings() {
               />
 
               <IconButton
-                aria-label="Reset volume"
-                data-testid="settings-volume-reset"
+                aria-label={t('settings.alerts.volume_reset', 'Reset volume')}
                 icon={SyncIcon}
                 onClick={() => {
                   updateSetting('notificationVolume', defaultSettings.notificationVolume);
@@ -220,10 +273,14 @@ export function AlertSettings() {
 
         <SettingsToggle
           checked={showUpdateNotifications}
-          label="Show app update notifications"
+          label={t('settings.alerts.show_updates', 'Show app update notifications')}
           name="showUpdateNotifications"
           onChange={() => toggleSetting('showUpdateNotifications')}
-          tooltip="Show a notification when a Gitify update is ready. Updates are still checked and shown in the menu bar."
+          tooltip={t(
+            'settings.alerts.show_updates_help',
+            'Show a notification when a {{appName}} update is ready. Updates are still checked and shown in the menu bar.',
+            { appName: APPLICATION.NAME },
+          )}
         />
       </SettingsList>
     </fieldset>

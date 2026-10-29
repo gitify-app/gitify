@@ -111,7 +111,7 @@ describe('renderer/routes/Filters.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('header-nav-back'));
+      await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(1);
@@ -125,7 +125,7 @@ describe('renderer/routes/Filters.tsx', () => {
         renderWithProviders(<FiltersRoute />);
       });
 
-      await userEvent.click(screen.getByTestId('filters-clear'));
+      await userEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
 
       expect(resetSpy).toHaveBeenCalled();
     });

@@ -1,10 +1,10 @@
-import type { ClientID, ClientSecret, Forge, Hostname, Token } from '../../types';
+import type { ClientID, Forge, Hostname, Token } from '../../types';
 
 import {
-  type OAuthAppFormData,
+  type CustomOAuthAppFormData,
   type PersonalAccessTokenFormData,
   summarizeLoginError,
-  validateOAuthAppForm,
+  validateCustomOAuthAppForm,
   validatePersonalAccessTokenForm,
 } from './loginValidation';
 
@@ -153,29 +153,34 @@ describe('renderer/utils/auth/loginValidation.ts', () => {
     });
   });
 
-  describe('validateOAuthAppForm', () => {
-    it('reports missing hostname, client ID, and client secret', () => {
-      const values: OAuthAppFormData = {
+  describe('validateCustomOAuthAppForm', () => {
+    it('reports missing hostname and client ID', () => {
+      const values: CustomOAuthAppFormData = {
         hostname: null as unknown as Hostname,
         clientId: null as unknown as ClientID,
-        clientSecret: null as unknown as ClientSecret,
       };
 
-      expect(validateOAuthAppForm(values).hostname).toBe('Hostname is required');
-      expect(validateOAuthAppForm(values).clientId).toBe('Client ID is required');
-      expect(validateOAuthAppForm(values).clientSecret).toBe('Client Secret is required');
+      expect(validateCustomOAuthAppForm(values).hostname).toBe('Hostname is required');
+      expect(validateCustomOAuthAppForm(values).clientId).toBe('Client ID is required');
     });
 
-    it('reports invalid hostname, client ID, and client secret formats', () => {
-      const values: OAuthAppFormData = {
+    it('reports invalid hostname and client ID formats', () => {
+      const values: CustomOAuthAppFormData = {
         hostname: 'hello' as Hostname,
         clientId: '!@£INVALID-.1' as ClientID,
-        clientSecret: '!@£INVALID-.1' as ClientSecret,
       };
 
-      expect(validateOAuthAppForm(values).hostname).toBe('Hostname format is invalid');
-      expect(validateOAuthAppForm(values).clientId).toBe('Client ID format is invalid');
-      expect(validateOAuthAppForm(values).clientSecret).toBe('Client Secret format is invalid');
+      expect(validateCustomOAuthAppForm(values).hostname).toBe('Hostname format is invalid');
+      expect(validateCustomOAuthAppForm(values).clientId).toBe('Client ID format is invalid');
+    });
+
+    it('passes with a valid hostname and client ID and no client secret', () => {
+      const values: CustomOAuthAppFormData = {
+        hostname: 'github.com' as Hostname,
+        clientId: '1234567890_ASDFGHJKL' as ClientID,
+      };
+
+      expect(validateCustomOAuthAppForm(values)).toEqual({});
     });
   });
 

@@ -1,4 +1,5 @@
 import { type MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
@@ -13,6 +14,7 @@ import { type Account, type GitifyError, Size } from '../../types';
 import { getAdapter } from '../../utils/forges/registry';
 import { openAccountProfile, openHostIssues, openHostPulls } from '../../utils/system/links';
 import { getChevronDetails } from '../../utils/ui/display';
+import { getChevronIcon } from '../../utils/ui/icons';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 export interface AccountHeaderProps {
@@ -30,7 +32,8 @@ export function AccountHeader({
   isCollapsed,
   onToggle,
 }: Readonly<AccountHeaderProps>) {
-  const Chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
+  const { t } = useTranslation();
+  const chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
 
   return (
     <Stack
@@ -50,7 +53,7 @@ export function AccountHeader({
           event.stopPropagation();
           openAccountProfile(account);
         }}
-        title="Open account profile ↗"
+        title={t('accounts.open_profile', 'Open account profile ↗')}
         variant="invisible"
       >
         <AvatarWithFallback
@@ -69,21 +72,21 @@ export function AccountHeader({
         <HoverButton
           action={() => openHostIssues(account)}
           icon={IssueOpenedIcon}
-          label="My issues ↗"
+          label={t('accounts.my_issues', 'My issues ↗')}
           testid="account-issues"
         />
 
         <HoverButton
           action={() => openHostPulls(account)}
           icon={GitPullRequestIcon}
-          label="My pull requests ↗"
+          label={t('accounts.my_pull_requests', 'My pull requests ↗')}
           testid="account-pull-requests"
         />
 
         <HoverButton
           action={onToggle}
-          icon={Chevron.icon}
-          label={Chevron.label}
+          icon={getChevronIcon(chevron.direction)}
+          label={chevron.label}
           testid="account-toggle"
         />
       </HoverGroup>

@@ -94,7 +94,7 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
   it('opens help docs in the browser', async () => {
     renderWithProviders(<BitbucketLoginWithPersonalAccessTokenRoute />);
 
-    await userEvent.click(screen.getByTestId('login-docs'));
+    await userEvent.click(screen.getByRole('button', { name: 'Docs' }));
 
     expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
     expect(openExternalLinkSpy).toHaveBeenCalledWith(
@@ -118,6 +118,6 @@ describe('renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx', () => {
       'user@example.com',
     );
     // hostname is always bitbucket.org and not shown as an editable field
-    expect(screen.queryByTestId('login-hostname')).not.toBeInTheDocument();
+    expect(screen.queryByRole('textbox', { name: /hostname/i })).not.toBeInTheDocument();
   });
 });

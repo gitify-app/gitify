@@ -5,6 +5,7 @@ import type { AuthMethod } from '../../auth/types';
 
 import {
   extractHostVersion,
+  getAuthorizedOAuthAppURL,
   getDeveloperSettingsURL,
   getGitHubAuthBaseUrl,
   getNewOAuthAppURL,
@@ -60,21 +61,48 @@ describe('renderer/utils/forges/github/auth.ts', () => {
     });
   });
 
+  describe('getAuthorizedOAuthAppURL', () => {
+    it("builds the connections URL for a custom app's own client ID", () => {
+      expect(
+        getAuthorizedOAuthAppURL(
+          'github.example.com' as Hostname,
+          'CUSTOM_CLIENT_ID_123' as ClientID,
+        ),
+      ).toBe('https://github.example.com/settings/connections/applications/CUSTOM_CLIENT_ID_123');
+    });
+
+    it("falls back to Gitify's preconfigured client ID when none is supplied", () => {
+      expect(getAuthorizedOAuthAppURL('github.com' as Hostname)).toBe(
+        'https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123',
+      );
+    });
+  });
+
   describe('getDeveloperSettingsURL', () => {
-    it('returns the GitHub App connections URL', () => {
+    it('returns the connections URL for Gitify OAuth App accounts', () => {
       expect(
         getDeveloperSettingsURL({
           hostname: 'github.com' as Hostname,
-          method: 'GitHub App',
+          method: 'Gitify OAuth App',
         } as Account),
       ).toBe('https://github.com/settings/connections/applications/FAKE_CLIENT_ID_123');
     });
 
-    it('returns the OAuth App developer URL', () => {
+    it("returns the connections URL for a custom app's own client ID", () => {
       expect(
         getDeveloperSettingsURL({
           hostname: 'github.com' as Hostname,
-          method: 'OAuth App',
+          method: 'Custom OAuth App',
+          clientId: 'CUSTOM_CLIENT_ID_123' as ClientID,
+        } as Account),
+      ).toBe('https://github.com/settings/connections/applications/CUSTOM_CLIENT_ID_123');
+    });
+
+    it('points at the developer settings when a migrated custom account stores no client ID', () => {
+      expect(
+        getDeveloperSettingsURL({
+          hostname: 'github.com' as Hostname,
+          method: 'Custom OAuth App',
         } as Account),
       ).toBe('https://github.com/settings/developers');
     });
@@ -131,6 +159,12 @@ describe('renderer/utils/forges/github/auth.ts', () => {
           'https://github.gitify.io/settings/applications/new',
         ),
       ).toBeTruthy();
+    });
+
+    it('pre-fills the project site as an inert callback URL', () => {
+      const url = new URL(getNewOAuthAppURL('github.com' as Hostname));
+
+      expect(url.searchParams.get('oauth_application[callback_url]')).toBe('https://gitify.io');
     });
   });
 

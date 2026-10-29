@@ -7,7 +7,7 @@ import { EmojiSplash } from './layout/EmojiSplash';
 
 import type { GitifyError } from '../types';
 
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import { randomElement } from '../utils/core/random';
 
 interface OopsProps {
@@ -18,7 +18,7 @@ interface OopsProps {
 export function Oops({ error, fullHeight = true }: Readonly<OopsProps>) {
   const navigate = useNavigate();
 
-  const err = error ?? Errors.UNKNOWN;
+  const err = error ?? getErrorDetails('UNKNOWN');
 
   const emoji = useMemo(() => randomElement(err.emojis), [err]);
 

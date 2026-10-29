@@ -27,7 +27,7 @@ export function openExternalLink(url: Link): void {
 /**
  * Returns the current application version string.
  *
- * @returns Promise resolving to the app version (e.g. `"6.18.0"`).
+ * @returns The version prefixed with `v`, or `dev` in development.
  */
 export async function getAppVersion(): Promise<string> {
   return await window.gitify.app.version();
@@ -46,11 +46,9 @@ export async function encryptValue(value: string): Promise<string> {
 /**
  * Decrypts a previously encrypted string using the native Electron decryption bridge.
  *
- * Resolves to the decrypted token. When the OS keychain rotated keys during
- * decryption, `reEncryptedToken` is also set so callers can persist the new
- * ciphertext alongside or in place of the original.
- *
  * @param value - The encrypted string to decrypt.
+ * @returns The decrypted token and, when the OS keychain rotated keys, the
+ * re-encrypted ciphertext to persist.
  */
 export async function decryptValue(value: string): Promise<ISafeStorageDecryptResult> {
   return await window.gitify.decryptValue(value);
@@ -59,8 +57,8 @@ export async function decryptValue(value: string): Promise<ISafeStorageDecryptRe
 /**
  * Asks the locally installed GitHub CLI for the token it holds for a host.
  *
- * @param hostname The host to read the token for.
- * @returns The token, or the reason the CLI could not supply one.
+ * @param hostname - The host to read the token for.
+ * @returns The CLI token, or a classified failure with an optional detail line.
  */
 export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTokenResult> {
   return await window.gitify.githubCliToken(hostname);

@@ -41,6 +41,14 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
   });
 
+  it('hides the language selector while English is the only language', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    expect(screen.queryByRole('combobox', { name: 'Language' })).not.toBeInTheDocument();
+  });
+
   it('hides accessibility color modes when Glass is the active design language', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {
@@ -127,21 +135,21 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-designLanguage'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Design' }));
     expect(
       screen.getByText(
         'Choose Classic for the original Gitify layout, or Glass for the translucent, layered design language.',
       ),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-theme'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Theme' }));
     expect(
       screen.getByText(
         'Choose a light, dark, or system color mode. Available options depend on the selected design language.',
       ),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-zoom'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Zoom' }));
     expect(
       screen.getByText(
         'Change the size of the Gitify interface. The setting applies immediately and is remembered for the next launch.',

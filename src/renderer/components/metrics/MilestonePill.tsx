@@ -5,7 +5,7 @@ import { type GitifyMilestone, IconColor } from '../../types';
 import { MetricPill } from './MetricPill';
 
 export interface MilestonePillProps {
-  milestone: GitifyMilestone;
+  milestone?: GitifyMilestone;
 }
 
 export function MilestonePill({ milestone }: Readonly<MilestonePillProps>) {
@@ -13,10 +13,14 @@ export function MilestonePill({ milestone }: Readonly<MilestonePillProps>) {
     return null;
   }
 
+  const isOpen = milestone.state === 'OPEN';
+  const description = `Milestone: ${milestone.title} (${isOpen ? 'open' : 'closed'})`;
+
   return (
     <MetricPill
-      color={milestone.state === 'OPEN' ? IconColor.GREEN : IconColor.PURPLE}
-      contents={milestone.title}
+      ariaLabel={description}
+      color={isOpen ? IconColor.GREEN : IconColor.PURPLE}
+      contents={description}
       icon={MilestoneIcon}
     />
   );

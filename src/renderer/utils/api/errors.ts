@@ -5,7 +5,7 @@ import { EVENTS } from '../../../shared/events';
 
 import type { GitifyError } from '../../types';
 
-import { Errors } from '../core/errors';
+import { getErrorDetails } from '../core/errors';
 import { rendererLogError } from '../core/logger';
 
 /**
@@ -22,7 +22,7 @@ export function determineFailureType(
 
   // Check for safe storage decryption failures first (happens before API call)
   if (message.includes(EVENTS.SAFE_STORAGE_DECRYPT)) {
-    return Errors.BAD_CREDENTIALS;
+    return getErrorDetails('BAD_CREDENTIALS');
   }
 
   // Handle Octokit REST RequestError
@@ -31,22 +31,22 @@ export function determineFailureType(
 
     switch (status) {
       case 401:
-        return Errors.BAD_CREDENTIALS;
+        return getErrorDetails('BAD_CREDENTIALS');
       case 403:
         if (message.includes("Missing the 'notifications' scope")) {
-          return Errors.MISSING_SCOPES;
+          return getErrorDetails('MISSING_SCOPES');
         }
 
         if (
           message.includes('API rate limit exceeded') ||
           message.includes('You have exceeded a secondary rate limit')
         ) {
-          return Errors.RATE_LIMITED;
+          return getErrorDetails('RATE_LIMITED');
         }
 
-        return Errors.ACTION_FORBIDDEN;
+        return getErrorDetails('ACTION_FORBIDDEN');
       case 500:
-        return Errors.NETWORK;
+        return getErrorDetails('NETWORK');
       default:
         break;
     }
@@ -57,26 +57,29 @@ export function determineFailureType(
     const errorMessages = err.errors?.map((e) => e.message).join('; ') || message;
 
     if (errorMessages.includes('Bad credentials')) {
-      return Errors.BAD_CREDENTIALS;
+      return getErrorDetails('BAD_CREDENTIALS');
     }
 
     if (
       errorMessages.includes('API rate limit exceeded') ||
       errorMessages.includes('You have exceeded a secondary rate limit')
     ) {
-      return Errors.RATE_LIMITED;
+      return getErrorDetails('RATE_LIMITED');
     }
   }
 
-  return Errors.UNKNOWN;
+  return getErrorDetails('UNKNOWN');
 }
 
 /**
- * Handle GraphQL response errors.
- * Logs and throws if `errors` array is present and non-empty.
+ * Log a GraphQL response error and throw.
  *
- * @param context The context of the GraphQL request
- * @param payload The GraphQL response payload
+ * The caller must pass a GraphQL error payload with a non-empty `errors` array;
+ * this function does not guard against a missing array.
+ *
+ * @param context - The context of the GraphQL request.
+ * @param payload - The GraphQL error response.
+ * @throws An `Error` containing the joined GraphQL error messages.
  */
 export function handleGraphQLResponseError<TResult>(
   context: string,

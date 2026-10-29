@@ -26,6 +26,7 @@ fragment PullRequestDetails on PullRequest {
   merged
   isDraft
   isInMergeQueue
+  reviewDecision
   milestone {
     ...MilestoneFields
   }
@@ -78,6 +79,7 @@ fragment PullRequestDetails on PullRequest {
   closingIssuesReferences(first: $firstClosingIssues) {
     nodes {
       number
+      url
     }
   }
   stackEntry @gated(requires: "stackedPullRequests") {
@@ -91,6 +93,19 @@ fragment PullRequestDetails on PullRequest {
   }
   reactionGroups {
     ...ReactionGroupFields
+  }
+  statusCheckRollup {
+    state
+    contexts {
+      checkRunCountsByState {
+        state
+        count
+      }
+      statusContextCountsByState {
+        state
+        count
+      }
+    }
   }
 }
 

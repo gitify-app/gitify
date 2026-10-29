@@ -1,4 +1,5 @@
 import { type FC, useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -35,8 +36,13 @@ import type { ForgeAdapter } from '../utils/forges/types';
 import { determineFailureType } from '../utils/api/errors';
 import { hasAlternateScopes, hasRecommendedScopes } from '../utils/auth/scopes';
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/core/errors';
+import { isErrorType } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
+import {
+  translateAuthMethod,
+  translateForgeTagline,
+  translateLoginMethodLabel,
+} from '../utils/forges/labels';
 import { getAdapter, listAdapters } from '../utils/forges/registry';
 import { openAccountProfile, openAccountSettings, openHost } from '../utils/system/links';
 import { getPlatformIcon } from '../utils/ui/icons';
@@ -60,6 +66,7 @@ function getScopeIcon(account: Account): FC<OcticonProps> {
 }
 
 export function AccountsRoute() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { logoutFromAccount } = useLogins();
@@ -154,7 +161,7 @@ export function AccountsRoute() {
 
   return (
     <Page testId="accounts">
-      <Header icon={PersonIcon}>Accounts</Header>
+      <Header icon={PersonIcon}>{t('accounts.title', 'Accounts')}</Header>
 
       <Contents scrollFade>
         {accounts.map((account, i) => {
@@ -163,7 +170,7 @@ export function AccountsRoute() {
           const PlatformIcon = getPlatformIcon(account.platform);
           const accountUUID = getAccountUUID(account);
           const accountError = getAccountError(account);
-          const hasBadCredentials = accountError === Errors.BAD_CREDENTIALS;
+          const hasBadCredentials = isErrorType(accountError, 'BAD_CREDENTIALS');
 
           return (
             <div className="rounded-md p-2 mb-4 bg-gitify-accounts" key={accountUUID}>
@@ -172,7 +179,7 @@ export function AccountsRoute() {
                   <Button
                     data-testid="account-profile"
                     onClick={() => openAccountProfile(account)}
-                    title="Open account profile ↗"
+                    title={t('accounts.open_profile', 'Open account profile ↗')}
                   >
                     <AvatarWithFallback
                       alt={adapter.formatUserLogin(account.user?.login ?? '')}
@@ -203,7 +210,7 @@ export function AccountsRoute() {
                         direction="horizontal"
                         gap="condensed"
                         onClick={() => openHost(account)}
-                        title="Open host ↗"
+                        title={t('accounts.open_host', 'Open host ↗')}
                       >
                         {PlatformIcon && <PlatformIcon />}
                         <Text>{account.hostname}</Text>
@@ -216,10 +223,10 @@ export function AccountsRoute() {
                         direction="horizontal"
                         gap="condensed"
                         onClick={() => openAccountSettings(account)}
-                        title="Open developer settings ↗"
+                        title={t('accounts.open_developer_settings', 'Open developer settings ↗')}
                       >
                         {AuthMethodIcon && <AuthMethodIcon />}
-                        <Text>{account.method}</Text>
+                        <Text>{translateAuthMethod(account.method)}</Text>
                       </Stack>
 
                       {hasBadCredentials && (
@@ -230,10 +237,12 @@ export function AccountsRoute() {
                           direction="horizontal"
                           gap="condensed"
                           onClick={() => openAccountSettings(account)}
-                          title="Open developer settings ↗"
+                          title={t('accounts.open_developer_settings', 'Open developer settings ↗')}
                         >
                           <AlertFillIcon />
-                          <Text>Invalid or expired credentials</Text>
+                          <Text>
+                            {t('accounts.bad_credentials', 'Invalid or expired credentials')}
+                          </Text>
                         </Stack>
                       )}
                     </Stack>
@@ -241,8 +250,12 @@ export function AccountsRoute() {
 
                   <Stack direction="horizontal" gap="condensed">
                     <IconButton
-                      aria-label={`Set as primary account (${i === 0 ? 'current primary' : 'click to set'})`}
-                      data-testid="account-set-primary"
+                      aria-label={t('accounts.set_primary', 'Set as primary account ({{status}})', {
+                        status:
+                          i === 0
+                            ? t('accounts.current_primary', 'current primary')
+                            : t('accounts.click_to_set', 'click to set'),
+                      })}
                       icon={i === 0 ? StarFillIcon : StarIcon}
                       onClick={() => setAsPrimaryAccount(account)}
                       size="small"
@@ -251,8 +264,9 @@ export function AccountsRoute() {
 
                     {!hasBadCredentials && adapter.accountOps.oauthScopes && (
                       <IconButton
-                        aria-label={`View scopes for ${account.user?.login}`}
-                        data-testid="account-view-scopes"
+                        aria-label={t('accounts.view_scopes', 'View scopes for {{login}}', {
+                          login: account.user?.login,
+                        })}
                         icon={getScopeIcon(account)}
                         onClick={() =>
                           navigate('/account-scopes', {
@@ -270,8 +284,9 @@ export function AccountsRoute() {
 
                     {hasBadCredentials && (
                       <IconButton
-                        aria-label={`Re-authenticate ${account.user?.login}`}
-                        data-testid="account-reauthenticate"
+                        aria-label={t('accounts.reauthenticate', 'Re-authenticate {{login}}', {
+                          login: account.user?.login,
+                        })}
                         icon={KeyIcon}
                         onClick={() => handleReAuthenticate(account)}
                         size="small"
@@ -280,8 +295,9 @@ export function AccountsRoute() {
                     )}
 
                     <IconButton
-                      aria-label={`Refresh ${account.user?.login}`}
-                      data-testid="account-refresh"
+                      aria-label={t('accounts.refresh', 'Refresh {{login}}', {
+                        login: account.user?.login,
+                      })}
                       icon={SyncIcon}
                       loading={loadingStates[accountUUID] || false}
                       onClick={() => handleRefresh(account)}
@@ -289,8 +305,9 @@ export function AccountsRoute() {
                     />
 
                     <IconButton
-                      aria-label={`Logout ${account.user?.login}`}
-                      data-testid="account-logout"
+                      aria-label={t('accounts.logout', 'Logout {{login}}', {
+                        login: account.user?.login,
+                      })}
                       icon={SignOutIcon}
                       onClick={() => logoutAccount(account)}
                       size="small"
@@ -320,7 +337,7 @@ export function AccountsRoute() {
         >
           <ActionMenu.Anchor>
             <Button data-testid="account-add-new" leadingVisual={PersonAddIcon}>
-              Add new account
+              {t('accounts.add_new', 'Add new account')}
             </Button>
           </ActionMenu.Anchor>
 
@@ -336,7 +353,7 @@ export function AccountsRoute() {
                   <ActionList.LeadingVisual>
                     <ArrowLeftIcon />
                   </ActionList.LeadingVisual>
-                  Back
+                  {t('accounts.back', 'Back')}
                 </ActionList.Item>
 
                 <ActionList.Divider />
@@ -360,7 +377,7 @@ export function AccountsRoute() {
                         <ActionList.LeadingVisual>
                           <MethodIcon />
                         </ActionList.LeadingVisual>
-                        {method.label}
+                        {translateLoginMethodLabel(method.label)}
                       </ActionList.Item>
                     );
                   })}
@@ -390,7 +407,7 @@ export function AccountsRoute() {
                       </ActionList.LeadingVisual>
                       <Stack direction="vertical" gap="none">
                         <span>{adapter.displayName}</span>
-                        <Text className="text-xs">{adapter.tagline}</Text>
+                        <Text className="text-xs">{translateForgeTagline(adapter.tagline)}</Text>
                       </Stack>
                       {hasMultipleMethods && (
                         <ActionList.TrailingVisual>

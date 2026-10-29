@@ -47,6 +47,16 @@ const useFiltersStore = create<FiltersStore>()(
         });
       },
 
+      /** Drops account filters that no longer match any of the given account UUIDs. */
+      pruneAccounts: (validAccounts) => {
+        const current = get().accounts;
+        const pruned = current.filter((uuid) => validAccounts.includes(uuid));
+
+        if (pruned.length !== current.length) {
+          set({ accounts: pruned });
+        }
+      },
+
       /** Resets the store to its default state, clearing all active filters. */
       reset: () => {
         set({ ...DEFAULT_FILTERS_STATE });

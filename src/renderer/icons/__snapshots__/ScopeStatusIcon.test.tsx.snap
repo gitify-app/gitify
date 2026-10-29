@@ -3,7 +3,7 @@
 exports[`renderer/icons/ScopeStatusIcon.tsx > granted state > renders a success icon when granted 1`] = `
 <div>
   <svg
-    aria-hidden="true"
+    aria-label="granted"
     class="octicon octicon-check-circle-fill text-gitify-success"
     data-component="Octicon"
     display="inline-block"
@@ -11,6 +11,7 @@ exports[`renderer/icons/ScopeStatusIcon.tsx > granted state > renders a success 
     focusable="false"
     height="14"
     overflow="visible"
+    role="img"
     style="vertical-align: text-bottom;"
     viewBox="0 0 12 12"
     width="14"
@@ -25,7 +26,7 @@ exports[`renderer/icons/ScopeStatusIcon.tsx > granted state > renders a success 
 exports[`renderer/icons/ScopeStatusIcon.tsx > missing state > renders a danger icon when not granted 1`] = `
 <div>
   <svg
-    aria-hidden="true"
+    aria-label="missing"
     class="octicon octicon-x-circle-fill text-gitify-danger"
     data-component="Octicon"
     display="inline-block"
@@ -33,6 +34,7 @@ exports[`renderer/icons/ScopeStatusIcon.tsx > missing state > renders a danger i
     focusable="false"
     height="14"
     overflow="visible"
+    role="img"
     style="vertical-align: text-bottom;"
     viewBox="0 0 12 12"
     width="14"
@@ -47,7 +49,7 @@ exports[`renderer/icons/ScopeStatusIcon.tsx > missing state > renders a danger i
 exports[`renderer/icons/ScopeStatusIcon.tsx > notApplicable state > renders a dash icon when notApplicable 1`] = `
 <div>
   <svg
-    aria-hidden="true"
+    aria-label="not applicable"
     class="octicon octicon-dash opacity-30"
     data-component="Octicon"
     display="inline-block"
@@ -55,6 +57,7 @@ exports[`renderer/icons/ScopeStatusIcon.tsx > notApplicable state > renders a da
     focusable="false"
     height="14"
     overflow="visible"
+    role="img"
     style="vertical-align: text-bottom;"
     viewBox="0 0 16 16"
     width="14"
@@ -69,7 +72,7 @@ exports[`renderer/icons/ScopeStatusIcon.tsx > notApplicable state > renders a da
 exports[`renderer/icons/ScopeStatusIcon.tsx > size prop > renders correctly with a custom size 1`] = `
 <div>
   <svg
-    aria-hidden="true"
+    aria-label="granted"
     class="octicon octicon-check-circle-fill text-gitify-success"
     data-component="Octicon"
     display="inline-block"
@@ -77,6 +80,7 @@ exports[`renderer/icons/ScopeStatusIcon.tsx > size prop > renders correctly with
     focusable="false"
     height="20"
     overflow="visible"
+    role="img"
     style="vertical-align: text-bottom;"
     viewBox="0 0 16 16"
     width="20"

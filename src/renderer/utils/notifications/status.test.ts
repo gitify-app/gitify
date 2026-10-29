@@ -5,7 +5,7 @@ import {
 
 import type { AccountNotifications, GitifyError } from '../../types';
 
-import { Errors } from '../core/errors';
+import { getErrorDetails } from '../core/errors';
 import { deriveGlobalError, deriveStatus, hasNoAccountErrors } from './status';
 
 function group(account = mockGitHubCloudAccount, error: GitifyError | null = null) {
@@ -14,9 +14,9 @@ function group(account = mockGitHubCloudAccount, error: GitifyError | null = nul
 
 const clean = group();
 const cleanSecond = group(mockGitHubEnterpriseServerAccount);
-const networkError = group(mockGitHubCloudAccount, Errors.NETWORK);
-const networkErrorSecond = group(mockGitHubEnterpriseServerAccount, Errors.NETWORK);
-const rateLimitedError = group(mockGitHubEnterpriseServerAccount, Errors.RATE_LIMITED);
+const networkError = group(mockGitHubCloudAccount, getErrorDetails('NETWORK'));
+const networkErrorSecond = group(mockGitHubEnterpriseServerAccount, getErrorDetails('NETWORK'));
+const rateLimitedError = group(mockGitHubEnterpriseServerAccount, getErrorDetails('RATE_LIMITED'));
 
 const baseInput = { isLoading: false, isPaused: false, isError: false };
 
@@ -47,7 +47,9 @@ describe('renderer/utils/notifications/status.ts', () => {
 
   describe('deriveGlobalError', () => {
     it('returns the offline error when paused', () => {
-      expect(deriveGlobalError({ isPaused: true, notifications: [clean] })).toBe(Errors.OFFLINE);
+      expect(deriveGlobalError({ isPaused: true, notifications: [clean] })).toEqual(
+        getErrorDetails('OFFLINE'),
+      );
     });
 
     it('returns undefined when there are no accounts', () => {
@@ -57,7 +59,7 @@ describe('renderer/utils/notifications/status.ts', () => {
     it('returns the shared error when all accounts have the same error', () => {
       expect(
         deriveGlobalError({ isPaused: false, notifications: [networkError, networkErrorSecond] }),
-      ).toBe(Errors.NETWORK);
+      ).toEqual(getErrorDetails('NETWORK'));
     });
 
     it('returns undefined when accounts have differing errors', () => {

@@ -46,7 +46,8 @@ export const api = {
    * Decrypt an encrypted string using Electron's safe storage.
    *
    * @param value - The encrypted string to decrypt.
-   * @returns A promise resolving to the plaintext string.
+   * @returns The decrypted token and, when the OS keychain rotated keys, the
+   * re-encrypted ciphertext to persist.
    */
   decryptValue: (value: string) => invokeMainEvent(EVENTS.SAFE_STORAGE_DECRYPT, value),
 
@@ -54,7 +55,7 @@ export const api = {
    * Read the token the locally installed GitHub CLI holds for a host.
    *
    * @param hostname - Host to read the token for (e.g. `github.com`).
-   * @returns The token, or the reason the CLI could not supply one.
+   * @returns The CLI token, or a classified failure with an optional detail line.
    */
   githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
 
@@ -101,6 +102,8 @@ export const api = {
   /**
    * Enable or disable the macOS window vibrancy material for Glass. Resolves once
    * the material has been applied so the renderer can order the visual switch.
+   *
+   * @param enabled - `true` to enable the vibrancy material, `false` to remove it.
    */
   setWindowVibrancy: (enabled: boolean) => invokeMainEvent(EVENTS.SET_WINDOW_VIBRANCY, enabled),
 
@@ -108,6 +111,8 @@ export const api = {
    * Sync the native window appearance (`nativeTheme.themeSource`) with the app's
    * color mode, so the macOS vibrancy material renders light/dark to match —
    * otherwise dark Glass gets a light material and its light text washes out.
+   *
+   * @param source - The native appearance to apply.
    */
   setNativeTheme: (source: NativeThemeSource) => invokeMainEvent(EVENTS.SET_NATIVE_THEME, source),
 
@@ -144,6 +149,7 @@ export const api = {
     /**
      * Set the idle tray icon appearance independently of the app theme.
      *
+     * @param value - The idle icon appearance to use.
      */
     setAppearance: (value: TrayIconAppearance) =>
       sendMainEvent(EVENTS.SET_TRAY_ICON_APPEARANCE, value),
@@ -253,16 +259,6 @@ export const api = {
     return onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
   },
 
-  /**
-   * Register a callback invoked when the main process delivers an OAuth callback URL.
-   *
-   * @param callback - Called with the full callback URL (e.g. `gitify://oauth?code=...`).
-   * @returns A function that removes the listener.
-   */
-  onAuthCallback: (callback: (url: string) => void) => {
-    return onRendererEvent(EVENTS.AUTH_CALLBACK, (_, url) => callback(url));
-  },
-
   /** Operating-system notification controls. */
   nativeNotifications: {
     /**
@@ -270,11 +266,18 @@ export const api = {
      *
      * The payload carries display data and whitelisted action IDs only; the
      * main process owns validation and construction.
+     *
+     * @param payload - The notification to publish.
+     * @returns Resolves once the main process has handled the request.
      */
     show: (payload: INativeNotificationPayload) =>
       invokeMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, payload),
 
-    /** Remove published notifications by identity or group. */
+    /**
+     * Remove published notifications by identity or group.
+     *
+     * @param payload - The identities or group to remove.
+     */
     remove: (payload: INativeNotificationRemovePayload) =>
       sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE, payload),
 
@@ -290,6 +293,7 @@ export const api = {
     /**
      * Register a callback for an activated notification action.
      *
+     * @param callback - Called with the activated action.
      * @returns A function that removes the listener.
      */
     onAction: (callback: (payload: INativeNotificationActionEvent) => void) => {
@@ -299,6 +303,7 @@ export const api = {
     /**
      * Register a callback for a notification body click.
      *
+     * @param callback - Called with the clicked notification.
      * @returns A function that removes the listener.
      */
     onClick: (callback: (payload: INativeNotificationClickEvent) => void) => {

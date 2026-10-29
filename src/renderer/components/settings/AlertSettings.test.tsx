@@ -71,7 +71,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
   it('shows detailed help in tooltips', async () => {
     renderWithProviders(<AlertSettings />);
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-playSound'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Play notification sound' }));
 
     expect(
       screen.getByText(
@@ -86,7 +86,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
     expect(screen.getByText('Notification volume')).toBeInTheDocument();
     expect(screen.getByTestId('reveal-volume')).toHaveAttribute('data-state', 'open');
 
-    await userEvent.click(screen.getByTestId('tooltip-icon-tooltip-notificationVolume'));
+    await userEvent.click(screen.getByRole('button', { name: 'Help: Notification volume' }));
 
     expect(screen.getByText('Adjust the volume of the notification sound.')).toBeInTheDocument();
   });

@@ -1,6 +1,7 @@
 import type {
   Account,
   AccountUUID,
+  ClientID,
   FilterStateType,
   Forge,
   GitifyError,
@@ -40,6 +41,7 @@ export interface AccountsActions {
     hostname: Hostname,
     forge?: Forge,
     username?: string,
+    clientId?: ClientID,
   ) => Promise<void>;
 
   /**
@@ -157,6 +159,7 @@ export type UpdateFilter = <K extends FilterKey>(
 export interface FiltersActions {
   hasActiveFilters: () => boolean;
   updateFilter: UpdateFilter;
+  pruneAccounts: (validAccounts: AccountUUID[]) => void;
   reset: () => void;
 }
 
@@ -233,7 +236,8 @@ export interface NotificationActionFailure {
  */
 export interface NotificationActionFailuresState {
   /**
-   * Map of notification ID to the details of its most recent failed action attempt.
+   * Map of notification failure key (`<accountUUID>:<notificationId>`) to the
+   * details of its most recent failed action attempt.
    */
   failures: Record<string, NotificationActionFailure>;
 }
@@ -258,8 +262,9 @@ export interface NotificationActionFailuresActions {
   clearFailures: (notificationKeys: string[]) => void;
 
   /**
-   * Clears any recorded failures for notification IDs not present in `notificationIds`
-   * (e.g. once a notification no longer appears in the notifications list).
+   * Clears any recorded failures for notification keys not present in
+   * `notificationKeys` (e.g. once a notification no longer appears in the
+   * notifications list).
    */
   pruneFailures: (notificationKeys: string[]) => void;
 

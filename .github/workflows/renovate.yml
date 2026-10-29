@@ -15,4 +15,4 @@ permissions:
 
 jobs:
   validate:
-    uses: gitify-app/renovate-config/.github/workflows/renovate-config-validator.yml@369dd4f138d95ba73a8529864209e984c5ef099f # main
+    uses: gitify-app/renovate-config/.github/workflows/renovate-config-validator.yml@9c4075a1057c2853a339517fde4063ceccfce861 # main

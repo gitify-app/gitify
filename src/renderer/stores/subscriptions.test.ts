@@ -1,8 +1,13 @@
-import type { Percentage } from '../types';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
+import type { AccountUUID, Percentage } from '../types';
+
+import { getAccountUUID } from '../utils/auth/utils';
 import * as comms from '../utils/system/comms';
 import * as zoom from '../utils/ui/zoom';
 import { initializeStoreSubscriptions } from './subscriptions';
+import useAccountsStore from './useAccountsStore';
+import useFiltersStore from './useFiltersStore';
 import useSettingsStore from './useSettingsStore';
 
 describe('renderer/stores/subscriptions.ts', () => {
@@ -66,6 +71,19 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     useSettingsStore.getState().updateSetting('useX11Backend', true);
     expect(setUseX11BackendSpy).toHaveBeenCalledWith(true);
+  });
+
+  it('prunes account filters that no longer match an account', () => {
+    useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+    useFiltersStore.setState({
+      accounts: [getAccountUUID(mockGitHubCloudAccount), 'stale' as AccountUUID],
+    });
+
+    cleanup = initializeStoreSubscriptions();
+    expect(useFiltersStore.getState().accounts).toEqual([getAccountUUID(mockGitHubCloudAccount)]);
+
+    useAccountsStore.setState({ accounts: [] });
+    expect(useFiltersStore.getState().accounts).toEqual([]);
   });
 
   it('applies zoom level when zoom percentage changes', () => {
