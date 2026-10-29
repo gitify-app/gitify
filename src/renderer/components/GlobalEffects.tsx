@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -10,6 +11,7 @@ import { useShortcutRegistration } from '../hooks/useShortcutRegistration';
 import {
   useAccountsStore,
   useFiltersStore,
+  useNotificationFocusStore,
   useSettingsStore,
   useShortcutRegistrationStore,
 } from '../stores';
@@ -25,6 +27,7 @@ import { setTrayIconColorAndTitle } from '../utils/system/tray';
  */
 export function GlobalEffects() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const resetAccounts = useAccountsStore((s) => s.reset);
   const resetFilters = useFiltersStore((s) => s.reset);
@@ -42,7 +45,9 @@ export function GlobalEffects() {
 
   // Notification fetching side effects (sound / native alerts, interval/focus/reconnect
   // polling, and the system-wake refetch)
-  const { status, notificationCount } = useNotificationsHost();
+  const { status, notificationCount } = useNotificationsHost({
+    onReveal: () => navigate('/'),
+  });
 
   // Periodic account refreshes (startup + hourly interval)
   useAccounts();
@@ -70,6 +75,8 @@ export function GlobalEffects() {
       resetFilters();
       queryClient.clear();
       useShortcutRegistrationStore.getState().reset();
+      useNotificationFocusStore.getState().reset();
+      window.gitify.nativeNotifications.removeAll();
     });
   }, [resetAccounts, resetSettings, resetFilters, queryClient]);
 

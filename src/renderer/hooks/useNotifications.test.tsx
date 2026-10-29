@@ -14,16 +14,22 @@ import {
   mockSingleAccountNotifications,
 } from '../__mocks__/notifications-mocks';
 
+import type { INativeNotificationPayload } from '../../shared/events';
+import { getNativeNotificationId } from '../../shared/nativeNotifications';
+
 import {
   getNotificationFailureKey,
   useAccountsStore,
   useFiltersStore,
   useNotificationActionFailuresStore,
+  useNotificationFocusStore,
   useSettingsStore,
 } from '../stores';
 
 import type { AccountNotifications, Percentage } from '../types';
+import { NativeNotificationClickAction } from '../types';
 
+import { getAccountUUID } from '../utils/auth/utils';
 import { getErrorDetails } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
 import { getAdapter } from '../utils/forges/registry';
@@ -33,6 +39,7 @@ import {
   reportServerPollInterval,
 } from '../utils/notifications/pollInterval';
 import * as audio from '../utils/system/audio';
+import * as links from '../utils/system/links';
 import * as native from '../utils/system/native';
 import { useNotificationsHost } from './notifications/useNotificationsHost';
 import { useNotifications } from './useNotifications';
@@ -645,6 +652,18 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(raiseNativeNotificationSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('does not publish an OS notification for a filtered-out new notification', async () => {
+      useFiltersStore.setState({ reasons: ['mention'] });
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+
+      await waitFor(() => expect(result.current.status).toBe('success'));
+
+      expect(raiseSoundNotificationSpy).not.toHaveBeenCalled();
+      expect(raiseNativeNotificationSpy).not.toHaveBeenCalled();
+    });
+
     it('does not raise sound or native notifications when disabled', async () => {
       useSettingsStore.setState({
         playSound: false,
@@ -658,6 +677,209 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       expect(raiseSoundNotificationSpy).not.toHaveBeenCalled();
       expect(raiseNativeNotificationSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('OS notification interactions', () => {
+    const notification = mockSingleAccountNotifications[0].notifications[0];
+    const notificationId = getNativeNotificationId(
+      getAccountUUID(notification.account),
+      notification.id,
+    );
+
+    const actionHandler = () =>
+      vi.mocked(window.gitify.nativeNotifications.onAction).mock.calls.at(-1)?.[0] as (payload: {
+        id: string;
+        action: 'show' | 'read' | 'done' | 'unsubscribe';
+      }) => void;
+
+    const clickHandler = () =>
+      vi.mocked(window.gitify.nativeNotifications.onClick).mock.calls.at(-1)?.[0] as (payload: {
+        id: string;
+      }) => void;
+
+    it.each([
+      ['read', 'markThreadAsRead'],
+      ['done', 'markThreadAsDone'],
+      ['unsubscribe', 'unsubscribeThread'],
+    ] as const)(
+      'routes a %s action through the existing mutation pipeline',
+      async (action, method) => {
+        const actionSpy = vi.spyOn(githubAdapter.accountOps, method).mockResolvedValue(undefined);
+        getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+        const { result } = renderNotificationsHook();
+        await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+        await act(async () => {
+          actionHandler()({ id: notificationId, action });
+        });
+
+        await waitFor(() => expect(actionSpy).toHaveBeenCalledTimes(1));
+      },
+    );
+
+    it('opens the target in the browser when the click setting is browser', async () => {
+      useSettingsStore.setState({
+        nativeNotificationClickAction: NativeNotificationClickAction.BROWSER,
+      });
+      const openNotificationSpy = vi.spyOn(links, 'openNotification').mockResolvedValue();
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      act(() => clickHandler()({ id: notificationId }));
+
+      await waitFor(() => expect(openNotificationSpy).toHaveBeenCalledTimes(1));
+    });
+
+    it('reveals the notification in the app when the click setting is app', async () => {
+      useSettingsStore.setState({
+        nativeNotificationClickAction: NativeNotificationClickAction.APP,
+      });
+      const onReveal = vi.fn();
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderHook(() => useNotificationsHost({ onReveal }), {
+        wrapper: createWrapper(),
+      });
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      act(() => clickHandler()({ id: notificationId }));
+
+      expect(window.gitify.app.show).toHaveBeenCalled();
+      expect(onReveal).toHaveBeenCalledTimes(1);
+      expect(useNotificationFocusStore.getState().intent).toMatchObject({
+        accountUUID: getAccountUUID(notification.account),
+        notificationId: notification.id,
+      });
+    });
+
+    it('reveals the notifications list when the summary action is activated', async () => {
+      const onReveal = vi.fn();
+
+      renderHook(() => useNotificationsHost({ onReveal }), {
+        wrapper: createWrapper(),
+      });
+
+      act(() => actionHandler()({ id: 'summary', action: 'show' }));
+
+      expect(window.gitify.app.show).toHaveBeenCalled();
+      expect(onReveal).toHaveBeenCalledTimes(1);
+    });
+
+    it('removes a published notification when it leaves the unfiltered cache', async () => {
+      raiseNativeNotificationSpy.mockResolvedValueOnce([
+        { payload: { id: notificationId } as INativeNotificationPayload },
+      ]);
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      await waitFor(() => expect(raiseNativeNotificationSpy).toHaveBeenCalled());
+
+      getAllNotificationsMock.mockResolvedValue([]);
+
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+
+      await waitFor(() =>
+        expect(window.gitify.nativeNotifications.remove).toHaveBeenCalledWith({
+          ids: [notificationId],
+        }),
+      );
+    });
+
+    it('retries an action that arrives before the cache settles', async () => {
+      let resolveFetch: (value: AccountNotifications[]) => void = () => {};
+      getAllNotificationsMock.mockReturnValue(
+        new Promise<AccountNotifications[]>((resolve) => {
+          resolveFetch = resolve;
+        }),
+      );
+      const actionSpy = vi
+        .spyOn(githubAdapter.accountOps, 'markThreadAsRead')
+        .mockResolvedValue(undefined);
+
+      renderNotificationsHook();
+      await waitFor(() => expect(actionHandler()).toBeTypeOf('function'));
+
+      act(() => actionHandler()({ id: notificationId, action: 'read' }));
+      expect(actionSpy).not.toHaveBeenCalled();
+
+      await act(async () => {
+        resolveFetch(mockSingleAccountNotifications);
+      });
+
+      await waitFor(() => expect(actionSpy).toHaveBeenCalledTimes(1));
+    });
+
+    it('keeps the summary notification while unread notifications remain', async () => {
+      raiseNativeNotificationSpy.mockResolvedValueOnce([
+        { payload: { id: 'summary' } as INativeNotificationPayload },
+      ]);
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      await waitFor(() => expect(raiseNativeNotificationSpy).toHaveBeenCalled());
+
+      // A later fetch that changes the data but still has unread notifications
+      // must not remove it.
+      getAllNotificationsMock.mockResolvedValue([
+        {
+          ...mockSingleAccountNotifications[0],
+          notifications: [
+            ...mockSingleAccountNotifications[0].notifications,
+            { ...notification, id: 'another-unread-notification' },
+          ],
+        },
+      ]);
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+      await waitFor(() => expect(result.current.notificationCount).toBe(2));
+      expect(window.gitify.nativeNotifications.remove).not.toHaveBeenCalled();
+
+      getAllNotificationsMock.mockResolvedValue([]);
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+
+      await waitFor(() =>
+        expect(window.gitify.nativeNotifications.remove).toHaveBeenCalledWith({
+          ids: ['summary'],
+        }),
+      );
+    });
+
+    it('does not remove a published notification merely because a filter hides it', async () => {
+      raiseNativeNotificationSpy.mockResolvedValueOnce([
+        { payload: { id: notificationId } as INativeNotificationPayload },
+      ]);
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      await waitFor(() => expect(raiseNativeNotificationSpy).toHaveBeenCalled());
+
+      act(() => {
+        useFiltersStore.setState({ reasons: ['mention'] });
+      });
+
+      await waitFor(() => expect(result.current.hasNotifications).toBe(false));
+      expect(window.gitify.nativeNotifications.remove).not.toHaveBeenCalled();
+    });
+
+    it('tells the main process the interaction listeners are ready', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      renderNotificationsHook();
+      await waitFor(() =>
+        expect(window.gitify.nativeNotifications.notifyReady).toHaveBeenCalledTimes(1),
+      );
     });
   });
 

@@ -305,3 +305,25 @@ export interface ShortcutRegistrationStore {
   clearShortcutRegistrationError: () => void;
   reset: () => void;
 }
+
+// ============================================================================
+// Notification Focus Store Types
+// ============================================================================
+
+/** A request to reveal one notification in the virtualized list. */
+export interface NotificationFocusIntent {
+  accountUUID: string;
+  notificationId: string;
+  requestId: number;
+}
+
+/**
+ * Transient (non-persisted) state for a requested notification focus. The
+ * native-notification click path writes it; the list consumes and clears it.
+ */
+export interface NotificationFocusStore {
+  intent: NotificationFocusIntent | null;
+  requestFocus: (accountUUID: string, notificationId: string) => void;
+  clearFocus: (requestId: number) => void;
+  reset: () => void;
+}

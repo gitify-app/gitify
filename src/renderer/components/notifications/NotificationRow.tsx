@@ -31,12 +31,14 @@ import { NotificationTitle } from './NotificationTitle';
 export interface NotificationRowProps {
   notification: GitifyNotification;
   isAnimatingExit: boolean;
+  isFocused?: boolean;
   onAnimateExit: (animate: boolean) => void;
 }
 
 export function NotificationRow({
   notification,
   isAnimatingExit,
+  isFocused = false,
   onAnimateExit,
 }: Readonly<NotificationRowProps>) {
   const { t } = useTranslation();
@@ -100,13 +102,16 @@ export function NotificationRow({
 
   return (
     <div
+      aria-current={isFocused ? 'true' : undefined}
       className={cn(
         'group relative border-b',
         'pl-2.75 pr-1 py-0.75',
         'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
         isAnimatingExit && 'translate-x-full opacity-0 transition duration-350 ease-in-out',
+        isFocused && 'ring-2 ring-inset ring-gitify-link',
         isNotificationRead && Opacity.READ,
       )}
+      data-focused={isFocused ? 'true' : undefined}
       data-animating-exit={isAnimatingExit || undefined}
       id={notification.id}
     >

@@ -14,6 +14,7 @@ import {
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
 import { NotificationsRoute } from '../../routes/Notifications';
+import { useNotificationFocusStore, useSettingsStore } from '../../stores';
 
 import {
   type AccountNotifications,
@@ -22,6 +23,8 @@ import {
   type SettingsState,
   Theme,
 } from '../../types';
+
+import { getAccountUUID } from '../../utils/auth/utils';
 
 const account = mockGitHubCloudAccount;
 const fixture = (count: number) =>
@@ -78,7 +81,45 @@ async function scrollToStart() {
   });
 }
 
+async function waitForRowBelowHeader(scroller: HTMLElement, excludeId?: string) {
+  return waitFor(() => {
+    const target = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-testid="notification-row"]'),
+    )
+      .map((row) => row.closest<HTMLElement>('[id]'))
+      .find(
+        (row): row is HTMLElement =>
+          row !== null &&
+          row.id !== excludeId &&
+          row.getBoundingClientRect().top > scroller.getBoundingClientRect().top + 60,
+      );
+
+    expect(target).not.toBeUndefined();
+
+    return target!;
+  });
+}
+
+function headersPinnedToTop(testId: string) {
+  const containerTop = scrollContainer().getBoundingClientRect().top;
+
+  return Array.from(document.querySelectorAll<HTMLElement>(`[data-testid="${testId}"]`)).filter(
+    (button) => {
+      const header = button.parentElement;
+      if (!header) {
+        return false;
+      }
+
+      return Math.abs(header.getBoundingClientRect().top - containerTop) <= 2;
+    },
+  );
+}
+
 describe('notification list in a browser', () => {
+  beforeEach(() => {
+    useNotificationFocusStore.getState().reset();
+  });
+
   it.each([GroupBy.DATE, GroupBy.REPOSITORY])(
     'renders grouping %s and reaches every row in a 2000-notification inbox',
     async (groupBy) => {
@@ -105,14 +146,30 @@ describe('notification list in a browser', () => {
     await renderList(fixture(300));
     await page.getByTestId('repository-toggle').first().click();
     await waitFor(() => expect(document.getElementById('notification-0')).toBeNull());
-    await scrollToEnd();
-    await waitFor(() => expect(document.getElementById('notification-299')).not.toBeNull());
-    await scrollToStart();
-    await waitFor(() =>
-      expect(document.querySelector('[data-testid="repository-toggle"]')).not.toBeNull(),
+    await waitFor(
+      async () => {
+        await scrollToEnd();
+        expect(document.getElementById('notification-299')).not.toBeNull();
+      },
+      { timeout: 5000 },
     );
+    await scrollToStart();
+
+    const repositoryToggle = await waitFor(() => {
+      const toggle = document
+        .querySelector('img[alt="owner/repo-0"]')
+        ?.closest('.group')
+        ?.querySelector<HTMLElement>('[data-testid="repository-toggle"]');
+
+      expect(toggle).not.toBeUndefined();
+
+      return toggle!;
+    });
+
     expect(document.getElementById('notification-0')).toBeNull();
-    await page.getByTestId('repository-toggle').first().click();
+    await act(async () => {
+      repositoryToggle.click();
+    });
     await waitFor(() => expect(document.getElementById('notification-0')).not.toBeNull());
   });
 
@@ -322,6 +379,196 @@ describe('notification list in a browser', () => {
     expect(scrollContainer()).toBe(scroller);
     expect(document.getElementById('new-notification')?.hasAttribute('data-animating-exit')).toBe(
       false,
+    );
+  });
+
+  it('keeps the visible row anchored when a notification is prepended', async () => {
+    const tree = await renderList(fixture(300));
+    const scroller = scrollContainer();
+
+    await act(async () => {
+      scroller.scrollTop = 1500;
+    });
+
+    const target = await waitForRowBelowHeader(scroller);
+
+    const id = target.id;
+    const top = target.getBoundingClientRect().top;
+    const original = getMockedNotificationsState().notifications;
+    const added = { ...original[0].notifications[0], id: 'new-anchor', order: -1 };
+
+    await act(async () => {
+      setNotificationsOverrides({
+        notifications: [{ ...original[0], notifications: [added, ...original[0].notifications] }],
+      });
+      tree.rerender(<NotificationsRoute />);
+    });
+
+    await waitFor(() => expect(document.getElementById(id)).not.toBeNull());
+    expect(Math.abs(document.getElementById(id)!.getBoundingClientRect().top - top)).toBeLessThan(
+      2,
+    );
+  });
+
+  it('keeps the visible row anchored when a notification above it is removed', async () => {
+    const tree = await renderList(fixture(300));
+    const scroller = scrollContainer();
+
+    await act(async () => {
+      scroller.scrollTop = 1500;
+    });
+
+    const target = await waitForRowBelowHeader(scroller, 'notification-0');
+
+    const id = target.id;
+    const top = target.getBoundingClientRect().top;
+    const original = getMockedNotificationsState().notifications;
+
+    await act(async () => {
+      setNotificationsOverrides({
+        notifications: original.map((entry) => ({
+          ...entry,
+          notifications: entry.notifications.filter(
+            (notification) => notification.id !== 'notification-0',
+          ),
+        })),
+      });
+      tree.rerender(<NotificationsRoute />);
+    });
+
+    await waitFor(() => expect(document.getElementById(id)).not.toBeNull());
+    expect(Math.abs(document.getElementById(id)!.getBoundingClientRect().top - top)).toBeLessThan(
+      2,
+    );
+  });
+
+  it('resets to the top when the grouping dataset changes', async () => {
+    await renderList(fixture(300));
+
+    await act(async () => {
+      scrollContainer().scrollTop = 1500;
+    });
+
+    await waitFor(() => expect(scrollContainer().scrollTop).toBeGreaterThan(0));
+
+    act(() => useSettingsStore.getState().updateSetting('groupBy', GroupBy.DATE));
+
+    await waitFor(() => expect(scrollContainer().scrollTop).toBe(0));
+  });
+
+  it('keeps exactly one repository header pinned while scrolling', async () => {
+    await renderList(fixture(300));
+
+    await scrollToEnd();
+    await waitFor(() => expect(headersPinnedToTop('open-repository')).toHaveLength(1));
+
+    await scrollToStart();
+    await waitFor(() => expect(headersPinnedToTop('open-repository')).toHaveLength(1));
+  });
+
+  it('keeps an account header pinned when repository grouping is off', async () => {
+    const second = fixture(300).map((notification) => ({
+      ...notification,
+      id: `second-${notification.id}`,
+      account: mockGitHubEnterpriseServerAccount,
+    }));
+
+    await renderList([], { groupBy: GroupBy.DATE, showAccountHeader: true }, [
+      { account, notifications: fixture(2), error: null },
+      { account: mockGitHubEnterpriseServerAccount, notifications: second, error: null },
+    ]);
+
+    await scrollToEnd();
+    await waitFor(() => expect(headersPinnedToTop('account-profile')).toHaveLength(1));
+  });
+
+  it('keeps an error or all-read account header pinned', async () => {
+    const accounts = Array.from({ length: 20 }, (_, index) => ({
+      ...mockGitHubCloudAccount,
+      user: {
+        ...mockGitHubCloudAccount.user!,
+        id: `${1000 + index}`,
+        login: `user-${index}`,
+      },
+    }));
+    const entries: AccountNotifications[] = accounts.map((entry, index) => ({
+      account: entry,
+      notifications: [],
+      error:
+        index % 2 === 0
+          ? {
+              title: `Account failed ${index}`,
+              descriptions: ['Try again'],
+              emojis: ['🔥'],
+            }
+          : null,
+    }));
+
+    await renderList([], { groupBy: GroupBy.DATE, showAccountHeader: true }, entries);
+
+    await scrollToEnd();
+    await waitFor(() => expect(headersPinnedToTop('account-profile')).toHaveLength(1));
+  });
+
+  it('focuses a notification below the sticky header', async () => {
+    await renderList(fixture(300));
+
+    act(() =>
+      useNotificationFocusStore
+        .getState()
+        .requestFocus(getAccountUUID(account), 'notification-150'),
+    );
+
+    await waitFor(() => expect(document.querySelector('[aria-current="true"]')).not.toBeNull());
+
+    const focused = document.querySelector<HTMLElement>('[aria-current="true"]')!;
+
+    await waitFor(
+      () => {
+        const containerTop = scrollContainer().getBoundingClientRect().top;
+        const top = focused.getBoundingClientRect().top;
+
+        expect(top).toBeGreaterThan(containerTop + 30);
+        expect(top).toBeLessThan(containerTop + 100);
+      },
+      { timeout: 5000 },
+    );
+  });
+
+  it('aligns the start of a focused row taller than the viewport', async () => {
+    const tall = fixture(300).map((notification, index) =>
+      index === 150
+        ? {
+            ...notification,
+            subject: {
+              ...notification.subject,
+              title: 'A very long notification title '.repeat(120),
+            },
+          }
+        : notification,
+    );
+
+    await renderList(tall, { wrapNotificationTitle: true });
+
+    act(() =>
+      useNotificationFocusStore
+        .getState()
+        .requestFocus(getAccountUUID(account), 'notification-150'),
+    );
+
+    await waitFor(() => expect(document.querySelector('[aria-current="true"]')).not.toBeNull());
+
+    const focused = document.querySelector<HTMLElement>('[aria-current="true"]')!;
+
+    await waitFor(
+      () => {
+        const containerTop = scrollContainer().getBoundingClientRect().top;
+        const top = focused.getBoundingClientRect().top;
+
+        expect(top).toBeGreaterThan(containerTop + 30);
+        expect(top).toBeLessThan(containerTop + 120);
+      },
+      { timeout: 5000 },
     );
   });
 });

@@ -1,6 +1,14 @@
 import { contextBridge, webFrame } from 'electron';
 
-import type { IKeyboardShortcut, NativeThemeSource, TrayIconAppearance } from '../shared/events';
+import type {
+  IKeyboardShortcut,
+  INativeNotificationActionEvent,
+  INativeNotificationClickEvent,
+  INativeNotificationPayload,
+  INativeNotificationRemovePayload,
+  NativeThemeSource,
+  TrayIconAppearance,
+} from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
@@ -251,29 +259,56 @@ export const api = {
     return onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
   },
 
-  /**
-   * Display a native OS notification.
-   *
-   * Clicking the notification opens `url` in the browser (hiding the app window),
-   * or shows the app window if no URL is provided.
-   *
-   * @param title - The notification title.
-   * @param body - The notification body text.
-   * @param url - Optional URL to open when the notification is clicked.
-   * @returns The created `Notification` instance.
-   */
-  raiseNativeNotification: (title: string, body: string, url?: string) => {
-    const notification = new Notification(title, { body: body, silent: true });
-    notification.onclick = () => {
-      if (url) {
-        api.app.hide();
-        api.openExternalLink(url, true);
-      } else {
-        api.app.show();
-      }
-    };
+  /** Operating-system notification controls. */
+  nativeNotifications: {
+    /**
+     * Publish one structured notification through the main process.
+     *
+     * The payload carries display data and whitelisted action IDs only; the
+     * main process owns validation and construction.
+     *
+     * @param payload - The notification to publish.
+     * @returns Resolves once the main process has handled the request.
+     */
+    show: (payload: INativeNotificationPayload) =>
+      invokeMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, payload),
 
-    return notification;
+    /**
+     * Remove published notifications by identity or group.
+     *
+     * @param payload - The identities or group to remove.
+     */
+    remove: (payload: INativeNotificationRemovePayload) =>
+      sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE, payload),
+
+    /** Remove every notification published by this app. */
+    removeAll: () => sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL),
+
+    /** Tell the main process the renderer action/click listeners are mounted. */
+    notifyReady: () => sendMainEvent(EVENTS.NATIVE_NOTIFICATION_READY),
+
+    /** Whether the operating system supports desktop notifications. */
+    isSupported: () => invokeMainEvent(EVENTS.NATIVE_NOTIFICATION_SUPPORTED),
+
+    /**
+     * Register a callback for an activated notification action.
+     *
+     * @param callback - Called with the activated action.
+     * @returns A function that removes the listener.
+     */
+    onAction: (callback: (payload: INativeNotificationActionEvent) => void) => {
+      return onRendererEvent(EVENTS.NATIVE_NOTIFICATION_ACTION, (_, payload) => callback(payload));
+    },
+
+    /**
+     * Register a callback for a notification body click.
+     *
+     * @param callback - Called with the clicked notification.
+     * @returns A function that removes the listener.
+     */
+    onClick: (callback: (payload: INativeNotificationClickEvent) => void) => {
+      return onRendererEvent(EVENTS.NATIVE_NOTIFICATION_CLICK, (_, payload) => callback(payload));
+    },
   },
 };
 

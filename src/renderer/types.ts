@@ -140,6 +140,10 @@ export interface SystemSettingsState {
   /** Electron accelerator string for toggling the app window (e.g. CommandOrControl+Shift+G). */
   openGitifyShortcut: KeyboardAcceleratorShortcut;
   showNotifications: boolean;
+  nativeNotificationStyle: NativeNotificationStyle;
+  nativeNotificationActions: boolean;
+  nativeNotificationKeepVisible: boolean;
+  nativeNotificationClickAction: NativeNotificationClickAction;
   playSound: boolean;
   notificationVolume: Percentage;
   openAtStartup: boolean;
@@ -174,6 +178,19 @@ export enum OpenPreference {
 export enum GroupBy {
   REPOSITORY = 'REPOSITORY',
   DATE = 'DATE',
+}
+
+/** How new notifications are presented by the operating system. */
+export enum NativeNotificationStyle {
+  /** One notification per item, up to the batch cap. */
+  INDIVIDUAL = 'individual',
+  SUMMARY = 'summary',
+}
+
+/** What a notification body click does. */
+export enum NativeNotificationClickAction {
+  APP = 'app',
+  BROWSER = 'browser',
 }
 
 export interface AccountNotifications {

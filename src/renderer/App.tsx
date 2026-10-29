@@ -49,8 +49,8 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <BaseStyles>
-          <GlobalEffects />
           <Router>
+            <GlobalEffects />
             <GlobalShortcuts />
             <AppLayout>
               <Routes>

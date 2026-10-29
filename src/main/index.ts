@@ -8,6 +8,7 @@ import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
   registerGitHubCliHandlers,
+  registerNativeNotificationHandlers,
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
@@ -57,6 +58,7 @@ app
     // Register IPC handlers for various channels
     registerTrayHandlers(mb);
     registerSystemHandlers(mb);
+    registerNativeNotificationHandlers(mb);
     registerStorageHandlers();
     registerGitHubCliHandlers();
     registerAppHandlers(mb);

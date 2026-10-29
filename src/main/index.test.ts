@@ -37,6 +37,7 @@ vi.mock('./config', () => ({
 vi.mock('./handlers', () => ({
   registerAppHandlers: vi.fn(),
   registerGitHubCliHandlers: vi.fn(),
+  registerNativeNotificationHandlers: vi.fn(() => calls.push('native-notifications')),
   registerStorageHandlers: vi.fn(),
   registerSystemHandlers: vi.fn(),
   registerTrayHandlers: vi.fn(),
@@ -86,7 +87,11 @@ describe('main/index.ts', () => {
   });
 
   it('applies the Ozone backend before Electron becomes ready', () => {
-    expect(calls).toEqual(['ozone', 'whenReady']);
+    expect(calls.slice(0, 2)).toEqual(['ozone', 'whenReady']);
+  });
+
+  it('registers native notification handlers during startup', async () => {
+    await vi.waitFor(() => expect(calls).toContain('native-notifications'));
   });
 
   it('logs an error when Electron fails to become ready', async () => {

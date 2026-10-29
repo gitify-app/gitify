@@ -42,36 +42,25 @@ vi.mock('electron', () => ({
   } satisfies Pick<Electron.WebFrame, 'getZoomLevel' | 'setZoomLevel'>,
 }));
 
-// Simple Notification stub
-class MockNotification {
-  static instances: MockNotification[] = [];
-  public onclick: (() => void) | null = null;
-  constructor(
-    public title: string,
-    public options: { body: string; silent: boolean },
-  ) {
-    MockNotification.instances.push(this);
-  }
-  triggerClick() {
-    this.onclick?.();
-  }
-}
-
-// Attach to global before importing preload
-(global as unknown as { Notification: unknown }).Notification = MockNotification;
-
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
   setShowUpdateNotifications: (value: boolean) => void;
   setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
-  raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
+  nativeNotifications: {
+    show: (payload: unknown) => Promise<unknown>;
+    remove: (payload: unknown) => void;
+    removeAll: () => void;
+    notifyReady: () => void;
+    isSupported: () => Promise<boolean>;
+    onAction: (callback: (payload: unknown) => void) => () => void;
+    onClick: (callback: (payload: unknown) => void) => () => void;
+  };
 }
 
 describe('preload/index', () => {
   beforeEach(() => {
-    MockNotification.instances = [];
     exposeInMainWorldMock('gitify', api);
   });
 
@@ -143,31 +132,99 @@ describe('preload/index', () => {
     await expect(api.app.version()).resolves.toBe('v1.2.3');
   });
 
-  it('raiseNativeNotification without url calls app.show', async () => {
+  it('nativeNotifications.show invokes the main process with the payload', async () => {
     const api = getExposedApi();
+    const payload = {
+      id: 'account:notification',
+      title: 'Title',
+      body: 'Body',
+      actions: ['open'],
+    };
 
-    const notification = api.raiseNativeNotification('Title', 'Body') as MockNotification;
+    invokeMainEventMock.mockResolvedValueOnce({ supported: true });
 
-    notification.triggerClick();
-
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.WINDOW_SHOW);
+    await expect(api.nativeNotifications.show(payload)).resolves.toEqual({ supported: true });
+    expect(invokeMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_SHOW, payload);
   });
 
-  it('raiseNativeNotification with url hides app then opens link', async () => {
+  it('nativeNotifications.remove sends the removal payload', () => {
     const api = getExposedApi();
 
-    const notification = api.raiseNativeNotification(
-      'Title',
-      'Body',
-      'https://x',
-    ) as MockNotification;
+    api.nativeNotifications.remove({ ids: ['one', 'two'] });
 
-    notification.triggerClick();
-
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.WINDOW_HIDE);
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.OPEN_EXTERNAL, {
-      url: 'https://x',
-      activate: true,
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_REMOVE, {
+      ids: ['one', 'two'],
     });
+  });
+
+  it('nativeNotifications.removeAll sends the clear event', () => {
+    const api = getExposedApi();
+
+    api.nativeNotifications.removeAll();
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL);
+  });
+
+  it('nativeNotifications.notifyReady sends the ready event', () => {
+    const api = getExposedApi();
+
+    api.nativeNotifications.notifyReady();
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_READY);
+  });
+
+  it('nativeNotifications.isSupported invokes the support query', async () => {
+    const api = getExposedApi();
+
+    invokeMainEventMock.mockResolvedValueOnce(false);
+
+    await expect(api.nativeNotifications.isSupported()).resolves.toBe(false);
+    expect(invokeMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_SUPPORTED);
+  });
+
+  it('nativeNotifications.onAction forwards actions and returns the unsubscribe function', () => {
+    const api = getExposedApi();
+    const unsubscribe = vi.fn();
+    const callback = vi.fn();
+    onRendererEventMock.mockReturnValueOnce(unsubscribe);
+
+    const cleanup = api.nativeNotifications.onAction(callback);
+    const listener = onRendererEventMock.mock.calls[0][1] as (
+      event: unknown,
+      payload: unknown,
+    ) => void;
+    const payload = { id: 'account:notification', action: 'read' };
+
+    listener({}, payload);
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(
+      EVENTS.NATIVE_NOTIFICATION_ACTION,
+      expect.any(Function),
+    );
+    expect(callback).toHaveBeenCalledWith(payload);
+    expect(cleanup).toBe(unsubscribe);
+  });
+
+  it('nativeNotifications.onClick forwards clicks and returns the unsubscribe function', () => {
+    const api = getExposedApi();
+    const unsubscribe = vi.fn();
+    const callback = vi.fn();
+    onRendererEventMock.mockReturnValueOnce(unsubscribe);
+
+    const cleanup = api.nativeNotifications.onClick(callback);
+    const listener = onRendererEventMock.mock.calls[0][1] as (
+      event: unknown,
+      payload: unknown,
+    ) => void;
+    const payload = { id: 'account:notification' };
+
+    listener({}, payload);
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(
+      EVENTS.NATIVE_NOTIFICATION_CLICK,
+      expect.any(Function),
+    );
+    expect(callback).toHaveBeenCalledWith(payload);
+    expect(cleanup).toBe(unsubscribe);
   });
 });

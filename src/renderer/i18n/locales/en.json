@@ -296,6 +296,16 @@
     "stacked_pr": "Stacked pull request",
     "stacked_pr_position": "Stacked pull request: {{position}} of {{depth}}"
   },
+  "native": {
+    "action": {
+      "done": "Mark as done",
+      "read": "Mark as read",
+      "show": "Show notifications",
+      "unsubscribe": "Unsubscribe"
+    },
+    "summary_body_one": "You have 1 notification",
+    "summary_body_other": "You have {{count}} notifications"
+  },
   "notifications": {
     "failure_tooltip": "{{title}}: {{description}} You can also try opening this notification in your browser.",
     "mark_as_done": "Mark as done",
@@ -362,13 +372,31 @@
   },
   "settings": {
     "alerts": {
+      "actions": "Show notification actions",
+      "actions_help": "Offer Mark as read, Mark as done, and Unsubscribe actions where the platform and account support them. Clicking a notification opens it.",
+      "click": "Notification click",
+      "click_app_help": "<0>{{appName}}</0> reveals the matching notification in the app.",
+      "click_browser": "Browser",
+      "click_browser_help": "<0>Browser</0> opens the notification target in your default browser.",
+      "click_focus_help": "Browser focus is controlled by <0>Link focus</0> in the System section.",
+      "click_help": "Choose what clicking a notification body opens.",
+      "keep_visible": "Keep notifications on screen",
+      "keep_visible_help": "Keep notifications visible until you dismiss them.",
       "play_sound": "Play notification sound",
-      "play_sound_help": "Play a sound when new unread notifications arrive after filtering. Use the notification volume controls to adjust the sound level.",
+      "play_sound_help": "Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level.",
       "show_desktop": "Show desktop notifications",
       "show_desktop_help": "Display native operating system notifications for new unread notifications.",
       "show_updates": "Show app update notifications",
       "show_updates_help": "Show a notification when a {{appName}} update is ready. Updates are still checked and shown in the menu bar.",
+      "style": "Notification style",
+      "style_help": "Choose how notifications from a new batch are delivered.",
+      "style_individual": "Individual",
+      "style_individual_help": "<0>Individual</0> shows up to five separate notifications, grouped by repository where the platform supports it. A larger batch becomes one summary.",
+      "style_summary": "Summary",
+      "style_summary_help": "<0>Summary</0> always shows one notification with the total count.",
       "title": "Alerts",
+      "unsupported_description": "This system does not support native desktop notifications.",
+      "unsupported_title": "Desktop notifications unavailable",
       "volume": "Notification volume",
       "volume_down": "Volume down",
       "volume_help": "Adjust the volume of the notification sound.",

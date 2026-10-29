@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
@@ -19,8 +19,43 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
   });
 
+  it('should describe the style options as individual or summary', () => {
+    renderWithProviders(<AlertSettings />);
+
+    expect(screen.getByText('Individual')).toBeInTheDocument();
+    expect(screen.getByText('Summary')).toBeInTheDocument();
+    expect(screen.queryByText('Grouped')).not.toBeInTheDocument();
+  });
+
+  it('should change the native notification style', async () => {
+    renderWithProviders(<AlertSettings />);
+
+    await userEvent.click(screen.getByTestId('choice-nativeNotificationStyle-summary'));
+
+    expect(updateSettingSpy).toHaveBeenCalledWith('nativeNotificationStyle', 'summary');
+  });
+
+  it('should change the native notification click behavior', async () => {
+    renderWithProviders(<AlertSettings />);
+
+    await userEvent.click(screen.getByTestId('choice-nativeNotificationClickAction-app'));
+
+    expect(updateSettingSpy).toHaveBeenCalledWith('nativeNotificationClickAction', 'app');
+  });
+
+  it('should explain when native notifications are unsupported', async () => {
+    vi.mocked(window.gitify.nativeNotifications.isSupported).mockResolvedValueOnce(false);
+
+    renderWithProviders(<AlertSettings />);
+
+    await waitFor(() =>
+      expect(screen.getByTestId('native-notifications-unsupported')).toBeInTheDocument(),
+    );
+  });
+
   it.each([
     ['Show desktop notifications', 'showNotifications'],
+    ['Show notification actions', 'nativeNotificationActions'],
     ['Play notification sound', 'playSound'],
     ['Show app update notifications', 'showUpdateNotifications'],
   ] as const)('toggles %s switch', async (label, setting) => {
@@ -32,6 +67,27 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
+  describe('Keep notifications on screen', () => {
+    it('is hidden on macOS, where the system controls how long notifications stay', () => {
+      vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(true);
+
+      renderWithProviders(<AlertSettings />);
+
+      expect(
+        screen.queryByRole('button', { name: 'Keep notifications on screen' }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('toggles on Windows and Linux', async () => {
+      vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(false);
+
+      renderWithProviders(<AlertSettings />);
+      await userEvent.click(screen.getByRole('button', { name: 'Keep notifications on screen' }));
+
+      expect(toggleSettingSpy).toHaveBeenCalledWith('nativeNotificationKeepVisible');
+    });
+  });
+
   it('shows detailed help in tooltips', async () => {
     renderWithProviders(<AlertSettings />);
 
@@ -39,7 +95,7 @@ describe('renderer/components/settings/AlertSettings.tsx', () => {
 
     expect(
       screen.getByText(
-        'Play a sound when new unread notifications arrive after filtering. Use the notification volume controls to adjust the sound level.',
+        'Play a sound when new unread notifications arrive after filtering. Use the adjacent volume controls to adjust the sound level.',
       ),
     ).toBeInTheDocument();
   });

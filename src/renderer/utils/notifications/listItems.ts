@@ -44,13 +44,18 @@ function getNotificationExitKey(accountUUID: string, notification: GitifyNotific
   return `${accountUUID}:${notification.id}`;
 }
 
+/** Stable key for a notification row across accounts and list rebuilds. */
+export function getNotificationItemKey(accountUUID: string, notificationId: string): string {
+  return `notification-${accountUUID}:${notificationId}`;
+}
+
 function buildNotificationItem(
   accountUUID: string,
   notification: GitifyNotification,
   isAnimatingExit: boolean,
 ): ListItem {
   return {
-    key: `notification-${accountUUID}:${notification.id}`,
+    key: getNotificationItemKey(accountUUID, notification.id),
     kind: 'notification',
     notification,
     isAnimatingExit,
