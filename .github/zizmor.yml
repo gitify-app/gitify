@@ -2,7 +2,7 @@ rules:
   unpinned-uses:
     config:
       policies:
-        "*": hash-pin
+        '*': hash-pin
         gitify-app/renovate-config/.github/workflows/renovate-config-validator.yml: ref-pin
   secrets-outside-env:
     disable: true
