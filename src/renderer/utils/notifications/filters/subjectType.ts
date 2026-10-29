@@ -9,57 +9,59 @@ import type {
 } from '../../../types';
 import type { Filter } from './types';
 
-const SUBJECT_TYPE_DETAILS: Record<SubjectTypeFilterValue, TypeDetails> = {
-  AgentSessionThread: {
-    title: 'Agent Session Thread',
-  },
-  BitbucketNotification: {
-    title: 'Bitbucket',
-  },
-  CheckSuite: {
-    title: 'Check Suite',
-  },
-  Commit: {
-    title: 'Commit',
-  },
-  Discussion: {
-    title: 'Discussion',
-  },
-  GitLabTodo: {
-    title: 'GitLab To-Do',
-  },
-  Issue: {
-    title: 'Issue',
-  },
-  PullRequest: {
-    title: 'Pull Request',
-  },
-  Release: {
-    title: 'Release',
-  },
-  RepositoryAdvisory: {
-    title: 'Advisory',
-  },
-  RepositoryDependabotAlertsThread: {
-    title: 'Dependabot Alert',
-  },
-  RepositoryInvitation: {
-    title: 'Invitation',
-  },
-  RepositoryVulnerabilityAlert: {
-    title: 'Vulnerability Alert',
-  },
-  WorkflowRun: {
-    title: 'Workflow Run',
-  },
-  other: {
-    title: 'Other',
-    description: 'A type not listed above.',
-  },
-};
+import i18n from '../../../i18n';
 
 export const subjectTypeFilter: Filter<SubjectTypeFilterValue> = {
-  FILTER_TYPES: SUBJECT_TYPE_DETAILS,
+  get FILTER_TYPES(): Record<SubjectTypeFilterValue, TypeDetails> {
+    return {
+      AgentSessionThread: {
+        title: i18n.t('filters.subject_type.agent_session_thread', 'Agent Session Thread'),
+      },
+      BitbucketNotification: {
+        title: i18n.t('filters.subject_type.bitbucket', 'Bitbucket'),
+      },
+      CheckSuite: {
+        title: i18n.t('filters.subject_type.check_suite', 'Check Suite'),
+      },
+      Commit: {
+        title: i18n.t('filters.subject_type.commit', 'Commit'),
+      },
+      Discussion: {
+        title: i18n.t('filters.subject_type.discussion', 'Discussion'),
+      },
+      GitLabTodo: {
+        title: i18n.t('filters.subject_type.gitlab_todo', 'GitLab To-Do'),
+      },
+      Issue: {
+        title: i18n.t('filters.subject_type.issue', 'Issue'),
+      },
+      PullRequest: {
+        title: i18n.t('filters.subject_type.pull_request', 'Pull Request'),
+      },
+      Release: {
+        title: i18n.t('filters.subject_type.release', 'Release'),
+      },
+      RepositoryAdvisory: {
+        title: i18n.t('filters.subject_type.advisory', 'Advisory'),
+      },
+      RepositoryDependabotAlertsThread: {
+        title: i18n.t('filters.subject_type.dependabot_alert', 'Dependabot Alert'),
+      },
+      RepositoryInvitation: {
+        title: i18n.t('filters.subject_type.invitation', 'Invitation'),
+      },
+      RepositoryVulnerabilityAlert: {
+        title: i18n.t('filters.subject_type.vulnerability_alert', 'Vulnerability Alert'),
+      },
+      WorkflowRun: {
+        title: i18n.t('filters.subject_type.workflow_run', 'Workflow Run'),
+      },
+      other: {
+        title: i18n.t('filters.subject_type.other', 'Other'),
+        description: i18n.t('filters.subject_type.other_description', 'A type not listed above.'),
+      },
+    };
+  },
 
   requiresDetailsNotifications: false,
 
@@ -93,13 +95,13 @@ export const subjectTypeFilter: Filter<SubjectTypeFilterValue> = {
     subjectType: SubjectTypeFilterValue,
   ): boolean {
     if (subjectType === 'other') {
-      return !(notification.subject.type in SUBJECT_TYPE_DETAILS);
+      return !(notification.subject.type in this.FILTER_TYPES);
     }
     return notification.subject.type === subjectType;
   },
 
   classify(notification: RawGitifyNotification): SubjectTypeFilterValue {
-    return notification.subject.type in SUBJECT_TYPE_DETAILS
+    return notification.subject.type in this.FILTER_TYPES
       ? (notification.subject.type as SubjectType)
       : 'other';
   },

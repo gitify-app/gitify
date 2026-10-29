@@ -11,7 +11,7 @@ import { getNotificationFailureKey, useNotificationActionFailuresStore } from '.
 
 import { type AccountNotifications, DesignLanguage, Theme } from '../../types';
 
-import { Errors } from '../../utils/core/errors';
+import { getErrorDetails } from '../../utils/core/errors';
 
 const notifications: AccountNotifications[] = [
   {
@@ -128,7 +128,7 @@ describe('renderer/components/notifications/NotificationRow visual regression', 
             mockGitHubCloudAccount,
             mockGitHubCloudGitifyNotifications[0].id,
           ),
-          { action: 'markAsRead', error: Errors.ACTION_FORBIDDEN },
+          { action: 'markAsRead', error: getErrorDetails('ACTION_FORBIDDEN') },
         );
 
       await renderNotifications(theme, designLanguage);

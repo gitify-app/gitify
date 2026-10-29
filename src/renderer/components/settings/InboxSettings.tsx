@@ -1,4 +1,5 @@
 import type { MouseEvent } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -24,6 +25,8 @@ import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/re
 import { formatDuration } from 'date-fns/formatDuration';
 import { millisecondsToMinutes } from 'date-fns/millisecondsToMinutes';
 
+import { APPLICATION } from '../../../shared/constants';
+
 import { Constants } from '../../constants';
 
 import { useAccountsStore, useSettingsStore } from '../../stores';
@@ -43,6 +46,7 @@ import { SettingsToggle } from './controls/SettingsToggle';
 import { SettingsGroupHeading } from './SettingsGroupHeading';
 
 export function InboxSettings() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   // Account store values
@@ -73,21 +77,29 @@ export function InboxSettings() {
   return (
     <fieldset>
       <SectionHeading as="legend" icon={InboxIcon}>
-        Inbox
+        {t('settings.inbox.title', 'Inbox')}
       </SectionHeading>
 
       <div>
-        <SettingsGroupHeading icon={DownloadIcon}>Fetch</SettingsGroupHeading>
+        <SettingsGroupHeading icon={DownloadIcon}>
+          {t('settings.inbox.group_fetch', 'Fetch')}
+        </SettingsGroupHeading>
 
         <SettingsList>
           <SettingsRow
-            label="Fetch interval"
+            label={t('settings.inbox.fetch_interval', 'Fetch interval')}
             name="fetchInterval"
-            tooltip="Check for new notifications at this interval. Shorter intervals keep the list fresher but spend more API requests."
+            tooltip={t(
+              'settings.inbox.fetch_interval_help',
+              'Check for new notifications at this interval. Shorter intervals keep the list fresher but spend more API requests.',
+            )}
           >
             <ButtonGroup>
               <IconButton
-                aria-label="Decrease fetch interval"
+                aria-label={t(
+                  'settings.notifications.fetch_interval_decrease',
+                  'Decrease fetch interval',
+                )}
                 icon={DashIcon}
                 onClick={() => {
                   const newInterval = Math.max(
@@ -104,7 +116,7 @@ export function InboxSettings() {
               />
 
               <Button
-                aria-label="Fetch interval"
+                aria-label={t('settings.notifications.fetch_interval_display', 'Fetch interval')}
                 className="pointer-events-none"
                 size="small"
                 tabIndex={-1}
@@ -115,7 +127,10 @@ export function InboxSettings() {
               </Button>
 
               <IconButton
-                aria-label="Increase fetch interval"
+                aria-label={t(
+                  'settings.notifications.fetch_interval_increase',
+                  'Increase fetch interval',
+                )}
                 icon={PlusIcon}
                 onClick={() => {
                   const newInterval = Math.min(
@@ -132,7 +147,10 @@ export function InboxSettings() {
               />
 
               <IconButton
-                aria-label="Reset fetch interval"
+                aria-label={t(
+                  'settings.notifications.fetch_interval_reset',
+                  'Reset fetch interval',
+                )}
                 icon={SyncIcon}
                 onClick={() => {
                   updateSetting('fetchInterval', Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
@@ -146,57 +164,94 @@ export function InboxSettings() {
 
           <SettingsToggle
             checked={fetchAllNotifications}
-            label="Fetch all notifications"
+            label={t('settings.inbox.fetch_all', 'Fetch all notifications')}
             name="fetchAllNotifications"
             onChange={() => toggleSetting('fetchAllNotifications')}
             tooltip={
               <Stack direction="vertical" gap="condensed">
-                <Text>When checked, fetch all notifications from your inbox.</Text>
-                <Text>When unchecked, fetch only the first page of notifications.</Text>
+                <Text>
+                  {t(
+                    'settings.inbox.fetch_all_help',
+                    'When checked, fetch all notifications from your inbox.',
+                  )}
+                </Text>
+                <Text>
+                  {t(
+                    'settings.inbox.fetch_all_help_unchecked',
+                    'When unchecked, fetch only the first page of notifications.',
+                  )}
+                </Text>
               </Stack>
             }
           />
 
           <SettingsToggle
             checked={fetchReadNotifications}
-            label="Fetch read and done notifications"
+            label={t('settings.inbox.fetch_read', 'Fetch read and done notifications')}
             name="fetchReadNotifications"
             onChange={() => toggleSetting('fetchReadNotifications')}
             tooltip={
               <Stack direction="vertical" gap="condensed">
-                <Text>Fetch all notifications including read and done.</Text>
-                <Text className="text-gitify-caution">
-                  GitHub's API does not distinguish between read and done states, so Mark as done
-                  actions are unavailable while this is enabled.
+                <Text>
+                  {t(
+                    'settings.inbox.fetch_read_help',
+                    'Fetch all notifications including read and done.',
+                  )}
                 </Text>
                 <Text className="text-gitify-caution">
-                  This increases API usage and may cause rate limiting for users with many
-                  notifications.
+                  {t(
+                    'settings.inbox.fetch_read_done_caution',
+                    "GitHub's API does not distinguish between read and done states, so Mark as done actions are unavailable while this is enabled.",
+                  )}
+                </Text>
+                <Text className="text-gitify-caution">
+                  {t(
+                    'settings.inbox.fetch_read_rate_caution',
+                    'This increases API usage and may cause rate limiting for users with many notifications.',
+                  )}
                 </Text>
               </Stack>
             }
           />
         </SettingsList>
 
-        <SettingsGroupHeading icon={ListUnorderedIcon}>List</SettingsGroupHeading>
+        <SettingsGroupHeading icon={ListUnorderedIcon}>
+          {t('settings.inbox.group_list', 'List')}
+        </SettingsGroupHeading>
 
         <SettingsList>
           <SettingsChoice
-            label="Group by"
+            label={t('settings.inbox.group_by', 'Group by')}
             name="groupBy"
             onChange={(value) => updateSetting('groupBy', value as GroupBy)}
             options={[
-              { label: 'Repository', value: GroupBy.REPOSITORY },
-              { label: 'Date', value: GroupBy.DATE },
+              {
+                label: t('settings.inbox.group_by_repository', 'Repository'),
+                value: GroupBy.REPOSITORY,
+              },
+              { label: t('settings.inbox.group_by_date', 'Date'), value: GroupBy.DATE },
             ]}
             tooltip={
               <Stack direction="vertical" gap="condensed">
-                <Text>Choose how notifications are displayed in the list.</Text>
                 <Text>
-                  <Text as="strong">Repository</Text> groups notifications by repository name.
+                  {t(
+                    'settings.inbox.group_by_help',
+                    'Choose how notifications are displayed in the list.',
+                  )}
                 </Text>
                 <Text>
-                  <Text as="strong">Date</Text> shows notifications in chronological order.
+                  <Trans
+                    i18nKey="settings.inbox.group_by_repository_help"
+                    components={[<Text as="strong" key={0} />]}
+                    defaults="<0>Repository</0> groups notifications by repository name."
+                  />
+                </Text>
+                <Text>
+                  <Trans
+                    i18nKey="settings.inbox.group_by_date_help"
+                    components={[<Text as="strong" key={0} />]}
+                    defaults="<0>Date</0> shows notifications in chronological order."
+                  />
                 </Text>
               </Stack>
             }
@@ -205,54 +260,62 @@ export function InboxSettings() {
 
           <SettingsToggle
             checked={showAccountHeader}
-            label="Show account header"
+            label={t('settings.inbox.show_account_header', 'Show account header')}
             name="showAccountHeader"
             onChange={() => toggleSetting('showAccountHeader')}
-            tooltip="Show your avatar, username, and quick links above the notifications list."
+            tooltip={t(
+              'settings.inbox.show_account_header_help',
+              'Show your avatar, username, and quick links above the notifications list.',
+            )}
             visible={!hasMultipleAccounts}
           />
 
           <SettingsToggle
             checked={wrapNotificationTitle}
-            label="Show full notification title"
+            label={t('settings.inbox.wrap_notification_title', 'Show full notification title')}
             name="wrapNotificationTitle"
             onChange={() => toggleSetting('wrapNotificationTitle')}
-            tooltip="Wrap long notification titles onto multiple lines instead of truncating them."
+            tooltip={t(
+              'settings.inbox.wrap_notification_title_help',
+              'Wrap long notification titles onto multiple lines instead of truncating them.',
+            )}
           />
 
           <SettingsToggle
             checked={showNumber}
-            label="Show reference"
+            label={t('settings.inbox.show_reference', 'Show reference')}
             name="showNumber"
             onChange={() => toggleSetting('showNumber')}
             tooltip={
               <Stack direction="vertical" gap="condensed">
-                <Text>Show the reference where available:</Text>
+                <Text>
+                  {t('settings.inbox.show_reference_help', 'Show the reference where available:')}
+                </Text>
                 <div className="pl-2">
                   <Stack direction="vertical" gap="none">
                     <Stack align="center" direction="horizontal" gap="condensed">
                       <CommentIcon size={Size.SMALL} />
-                      <Text>Discussion</Text>
+                      <Text>{t('settings.inbox.reference_discussion', 'Discussion')}</Text>
                       <Text className="text-gitify-icon-muted">#123</Text>
                     </Stack>
                     <Stack align="center" direction="horizontal" gap="condensed">
                       <IssueOpenedIcon size={Size.SMALL} />
-                      <Text>Issue</Text>
+                      <Text>{t('settings.inbox.reference_issue', 'Issue')}</Text>
                       <Text className="text-gitify-icon-muted">#123</Text>
                     </Stack>
                     <Stack align="center" direction="horizontal" gap="condensed">
                       <GitPullRequestIcon size={Size.SMALL} />
-                      <Text>Pull request</Text>
+                      <Text>{t('settings.inbox.reference_pull_request', 'Pull request')}</Text>
                       <Text className="text-gitify-icon-muted">#123</Text>
                     </Stack>
                     <Stack align="center" direction="horizontal" gap="condensed">
                       <GitCommitIcon size={Size.SMALL} />
-                      <Text>Commit</Text>
+                      <Text>{t('settings.inbox.reference_commit', 'Commit')}</Text>
                       <Text className="text-gitify-icon-muted">a1b2c3d</Text>
                     </Stack>
                     <Stack align="center" direction="horizontal" gap="condensed">
                       <ReleaseIcon size={Size.SMALL} />
-                      <Text>Release</Text>
+                      <Text>{t('settings.inbox.reference_release', 'Release')}</Text>
                       <Text className="text-gitify-icon-muted">v1.2.3</Text>
                     </Stack>
                   </Stack>
@@ -263,37 +326,56 @@ export function InboxSettings() {
 
           <SettingsToggle
             checked={delayNotificationState}
-            label="Delay notification removal"
+            label={t('settings.inbox.delay_state', 'Delay notification removal')}
             name="delayNotificationState"
             onChange={() => toggleSetting('delayNotificationState')}
-            tooltip="Keep the notification in Gitify after interacting with it until the next refresh window."
+            tooltip={t(
+              'settings.inbox.delay_state_help',
+              'Keep the notification in {{appName}} after interacting with it until the next refresh window.',
+              { appName: APPLICATION.NAME },
+            )}
           />
         </SettingsList>
 
         {hasGitHubAccount ? (
           <>
-            <SettingsGroupHeading icon={MarkGithubIcon}>GitHub</SettingsGroupHeading>
+            <SettingsGroupHeading icon={MarkGithubIcon}>
+              {t('settings.inbox.group_github', 'GitHub')}
+            </SettingsGroupHeading>
 
             <SettingsList>
               <SettingsToggle
                 checked={participating}
-                label="Fetch only participating"
+                label={t('settings.inbox.participating', 'Fetch only participating')}
                 name="showOnlyParticipating"
                 onChange={() => toggleSetting('participating')}
                 tooltip={
                   <Stack direction="vertical" gap="condensed">
-                    <Text>When checked, fetch only participating notifications.</Text>
-                    <Text>When unchecked, fetch participating and watching notifications.</Text>
+                    <Text>
+                      {t(
+                        'settings.inbox.participating_help',
+                        'When checked, fetch only participating notifications.',
+                      )}
+                    </Text>
+                    <Text>
+                      {t(
+                        'settings.inbox.participating_help_unchecked',
+                        'When unchecked, fetch participating and watching notifications.',
+                      )}
+                    </Text>
                     <button
                       className="text-gitify-link cursor-pointer"
                       onClick={(event: MouseEvent<HTMLElement>) => {
                         event.stopPropagation();
                         openGitHubParticipatingDocs();
                       }}
-                      title="Open GitHub documentation for participating and watching notifications"
+                      title={t(
+                        'settings.notifications.participating_docs_title',
+                        'Open GitHub documentation for participating and watching notifications',
+                      )}
                       type="button"
                     >
-                      Learn more
+                      {t('settings.inbox.learn_more', 'Learn more')}
                     </button>
                   </Stack>
                 }
@@ -301,18 +383,22 @@ export function InboxSettings() {
 
               <SettingsToggle
                 checked={detailedNotifications}
-                label="Fetch detailed notifications"
+                label={t('settings.inbox.fetch_detailed', 'Fetch detailed notifications')}
                 name="detailedNotifications"
                 onChange={() => toggleSetting('detailedNotifications')}
                 tooltip={
                   <Stack direction="vertical" gap="condensed">
                     <Text>
-                      Enrich notifications with detailed user and state information. You may also
-                      choose to display notification metrics.
+                      {t(
+                        'settings.inbox.fetch_detailed_help',
+                        'Enrich notifications with detailed user and state information. You may also choose to display notification metrics.',
+                      )}
                     </Text>
                     <Text className="text-gitify-caution">
-                      Users with a large number of unread notifications may experience rate
-                      limiting.
+                      {t(
+                        'settings.inbox.fetch_detailed_caution',
+                        'Users with a large number of unread notifications may experience rate limiting.',
+                      )}
                     </Text>
                   </Stack>
                 }
@@ -330,15 +416,17 @@ export function InboxSettings() {
                     description={
                       <Stack direction="vertical" gap="condensed">
                         <Text>
-                          One or more accounts are missing scopes required for notification
-                          enrichment. Notification details may be incomplete.
+                          {t(
+                            'settings.inbox.scope_warning',
+                            'One or more accounts are missing scopes required for notification enrichment. Notification details may be incomplete.',
+                          )}
                         </Text>
                         <Button onClick={() => navigate('/accounts')} size="small">
-                          Review account scopes
+                          {t('settings.inbox.review_account_scopes', 'Review account scopes')}
                         </Button>
                       </Stack>
                     }
-                    title="Missing notification scopes"
+                    title={t('settings.inbox.scope_warning_title', 'Missing notification scopes')}
                     variant="warning"
                   />
                 )}
@@ -347,37 +435,39 @@ export function InboxSettings() {
                 <div>
                   <SettingsToggle
                     checked={showPills}
-                    label="Show notification metrics"
+                    label={t('settings.inbox.show_metrics', 'Show notification metrics')}
                     name="showPills"
                     onChange={() => toggleSetting('showPills')}
                     tooltip={
                       <Stack direction="vertical" gap="condensed">
-                        <Text>Show notification metrics for:</Text>
+                        <Text>
+                          {t('settings.inbox.show_metrics_help', 'Show notification metrics for:')}
+                        </Text>
                         <div className="pl-2">
                           <Stack direction="vertical" gap="none">
                             <Stack direction="horizontal" gap="condensed">
                               <IssueOpenedIcon size={Size.SMALL} />
-                              linked issues
+                              {t('settings.notifications.pill_linked_issues', 'linked issues')}
                             </Stack>
                             <Stack direction="horizontal" gap="condensed">
                               <SmileyIcon size={Size.SMALL} />
-                              reactions
+                              {t('settings.notifications.pill_reactions', 'reactions')}
                             </Stack>
                             <Stack direction="horizontal" gap="condensed">
                               <CheckIcon size={Size.SMALL} />
-                              pull request reviews
+                              {t('settings.notifications.pill_pr_reviews', 'pull request reviews')}
                             </Stack>
                             <Stack direction="horizontal" gap="condensed">
                               <CommentIcon size={Size.SMALL} />
-                              comments
+                              {t('settings.notifications.pill_comments', 'comments')}
                             </Stack>
                             <Stack direction="horizontal" gap="condensed">
                               <TagIcon size={Size.SMALL} />
-                              labels
+                              {t('settings.notifications.pill_labels', 'labels')}
                             </Stack>
                             <Stack direction="horizontal" gap="condensed">
                               <MilestoneIcon size={Size.SMALL} />
-                              milestones
+                              {t('settings.notifications.pill_milestones', 'milestones')}
                             </Stack>
                           </Stack>
                         </div>
@@ -390,35 +480,50 @@ export function InboxSettings() {
               <SettingsToggle
                 caption={
                   !hasMarkAsDoneAccount
-                    ? 'Requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.'
+                    ? t(
+                        'settings.inbox.mark_done_caption',
+                        'Requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.',
+                      )
                     : undefined
                 }
                 checked={markAsDoneOnOpen}
                 disabled={!hasMarkAsDoneAccount}
-                label="Mark as done on open"
+                label={t('settings.inbox.mark_done_open', 'Mark as done on open')}
                 name="markAsDoneOnOpen"
                 onChange={() => toggleSetting('markAsDoneOnOpen')}
-                tooltip="Mark as done is supported by GitHub Cloud and GitHub Enterprise Server 3.13 or later."
+                tooltip={t(
+                  'settings.inbox.mark_done_help',
+                  'Mark as done is supported by GitHub Cloud and GitHub Enterprise Server 3.13 or later.',
+                )}
               />
 
               <SettingsToggle
                 caption={
                   !hasMarkAsDoneAccount
-                    ? 'Requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.'
+                    ? t(
+                        'settings.inbox.mark_done_caption',
+                        'Requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.',
+                      )
                     : undefined
                 }
                 checked={markAsDoneOnUnsubscribe}
                 disabled={!hasMarkAsDoneAccount}
-                label="Mark as done on unsubscribe"
+                label={t('settings.inbox.mark_done_unsubscribe', 'Mark as done on unsubscribe')}
                 name="markAsDoneOnUnsubscribe"
                 onChange={() => toggleSetting('markAsDoneOnUnsubscribe')}
-                tooltip="Mark as done is supported by GitHub Cloud and GitHub Enterprise Server 3.13 or later."
+                tooltip={t(
+                  'settings.inbox.mark_done_help',
+                  'Mark as done is supported by GitHub Cloud and GitHub Enterprise Server 3.13 or later.',
+                )}
               />
             </SettingsList>
           </>
         ) : (
           <Text className="text-xs text-gitify-icon-muted">
-            GitHub-specific options require a GitHub account.
+            {t(
+              'settings.inbox.github_requires_account',
+              'GitHub-specific options require a GitHub account.',
+            )}
           </Text>
         )}
       </div>

@@ -1,4 +1,5 @@
 import type { MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { IssueRelatesToIcon } from '@primer/octicons-react';
 
@@ -13,15 +14,19 @@ export interface LinkedIssuesPillProps {
 }
 
 export function LinkedIssuesPill({ linkedIssues }: Readonly<LinkedIssuesPillProps>) {
+  const { t } = useTranslation();
   if (!linkedIssues?.length) {
     return null;
   }
 
   const description = formatMetricDescription(
     linkedIssues.length,
-    'issue',
+    t('metrics.issue', 'issue'),
     (_, noun) =>
-      `Linked ${noun}: ${linkedIssues.map((issue) => formatGitHubNumber(issue.number)).join(', ')}`,
+      t('metrics.linked_to', 'Linked {{noun}}: {{issues}}', {
+        noun,
+        issues: linkedIssues.map((issue) => formatGitHubNumber(issue.number)).join(', '),
+      }),
   );
 
   const handleClick =

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { AlertFillIcon, LinkExternalIcon, ShieldCheckIcon } from '@primer/octicons-react';
@@ -27,6 +28,7 @@ interface LocationState {
 }
 
 export function AccountScopesRoute() {
+  const { t } = useTranslation();
   const location = useLocation();
   const { account } = location.state as LocationState;
 
@@ -50,7 +52,7 @@ export function AccountScopesRoute() {
 
   return (
     <Page testId="account-scopes">
-      <Header icon={ShieldCheckIcon}>Scopes</Header>
+      <Header icon={ShieldCheckIcon}>{t('account_scopes.title', 'Scopes')}</Header>
       <Contents scrollFade>
         <Stack direction="vertical" gap="none">
           {!scopesLoaded && (
@@ -62,7 +64,9 @@ export function AccountScopesRoute() {
               gap="condensed"
             >
               <AlertFillIcon className="text-gitify-warning" size={14} />
-              <Text>Scopes not loaded — try refreshing the account.</Text>
+              <Text>
+                {t('account_scopes.not_loaded', 'Scopes not loaded — try refreshing the account.')}
+              </Text>
             </Stack>
           )}
 
@@ -75,8 +79,12 @@ export function AccountScopesRoute() {
                   direction="horizontal"
                   gap="condensed"
                 >
-                  <ScopeStatusIcon granted={hasRequired} size={12} subject="Required scopes" />
-                  <Text>Required</Text>
+                  <ScopeStatusIcon
+                    granted={hasRequired}
+                    size={12}
+                    subject={t('account_scopes.required_scopes', 'Required scopes')}
+                  />
+                  <Text>{t('account_scopes.required', 'Required')}</Text>
                 </Stack>
 
                 {managedElsewhere ? (
@@ -127,9 +135,14 @@ export function AccountScopesRoute() {
                   <ScopeStatusIcon
                     granted={hasDetailedNotifications}
                     size={12}
-                    subject="Detailed notifications scopes"
+                    subject={t(
+                      'account_scopes.detailed_notifications_scopes',
+                      'Detailed notifications scopes',
+                    )}
                   />
-                  <Text>Detailed Notifications</Text>
+                  <Text>
+                    {t('account_scopes.detailed_notifications', 'Detailed Notifications')}
+                  </Text>
                 </Stack>
 
                 {/* repo row */}
@@ -181,7 +194,7 @@ export function AccountScopesRoute() {
                     gap="condensed"
                   >
                     <ShieldCheckIcon size={12} />
-                    <Text>Additional scopes</Text>
+                    <Text>{t('account_scopes.additional_scopes', 'Additional scopes')}</Text>
                   </Stack>
 
                   <Stack
@@ -206,7 +219,7 @@ export function AccountScopesRoute() {
 
       <Footer justify="end">
         <Button leadingVisual={LinkExternalIcon} onClick={() => openAccountSettings(account)}>
-          Developer settings
+          {t('account_scopes.developer_settings', 'Developer settings')}
         </Button>
       </Footer>
     </Page>

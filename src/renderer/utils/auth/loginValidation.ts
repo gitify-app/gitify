@@ -1,5 +1,6 @@
 import type { ClientID, Forge, Hostname, Token } from '../../types';
 
+import i18n from '../../i18n';
 import { getAdapter } from '../forges/registry';
 import { isValidHostname } from './utils';
 
@@ -57,19 +58,19 @@ export const validatePersonalAccessTokenForm = (
   const adapter = getAdapter(forge);
 
   if (!values.hostname) {
-    errors.hostname = 'Hostname is required';
+    errors.hostname = i18n.t('login.pat.hostname_required', 'Hostname is required');
   } else if (!adapter.validateHostname(values.hostname)) {
-    errors.hostname = 'Hostname format is invalid';
+    errors.hostname = i18n.t('login.pat.hostname_invalid', 'Hostname format is invalid');
   }
 
   if (forge === 'bitbucket' && !values.username) {
-    errors.username = 'Atlassian email is required';
+    errors.username = i18n.t('login.pat.atlassian_email_required', 'Atlassian email is required');
   }
 
   if (!values.token) {
-    errors.token = 'Token is required';
+    errors.token = i18n.t('login.pat.token_required', 'Token is required');
   } else if (!adapter.validateToken(values.token)) {
-    errors.token = 'Token format is invalid';
+    errors.token = i18n.t('login.pat.token_invalid', 'Token format is invalid');
   }
 
   return errors;
@@ -83,15 +84,15 @@ export const validateCustomOAuthAppForm = (
   const adapter = getAdapter(forge);
 
   if (!values.hostname) {
-    errors.hostname = 'Hostname is required';
+    errors.hostname = i18n.t('login.pat.hostname_required', 'Hostname is required');
   } else if (!isValidHostname(values.hostname)) {
-    errors.hostname = 'Hostname format is invalid';
+    errors.hostname = i18n.t('login.pat.hostname_invalid', 'Hostname format is invalid');
   }
 
   if (!values.clientId) {
-    errors.clientId = 'Client ID is required';
+    errors.clientId = i18n.t('login.oauth.client_id_required', 'Client ID is required');
   } else if (!adapter.customOAuthApp?.validateClientId(values.clientId)) {
-    errors.clientId = 'Client ID format is invalid';
+    errors.clientId = i18n.t('login.oauth.client_id_invalid', 'Client ID format is invalid');
   }
 
   return errors;

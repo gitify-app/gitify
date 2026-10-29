@@ -11,7 +11,7 @@ import { NotificationList } from '../components/notifications/NotificationList';
 import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import { hasNoAccountErrors } from '../utils/notifications/status';
 
 export function NotificationsRoute() {
@@ -36,11 +36,11 @@ export function NotificationsRoute() {
   );
 
   if (!isOnline) {
-    return <Oops error={Errors.OFFLINE} />;
+    return <Oops error={getErrorDetails('OFFLINE')} />;
   }
 
   if (status === 'error') {
-    return <Oops error={globalError ?? Errors.UNKNOWN} />;
+    return <Oops error={globalError ?? getErrorDetails('UNKNOWN')} />;
   }
 
   if (status === 'loading') {

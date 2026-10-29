@@ -1,6 +1,10 @@
 import type { AccountNotifications, GitifyError, Status } from '../../types';
 
-import { areAllAccountErrorsSame, doesAllAccountsHaveErrors, Errors } from '../core/errors';
+import {
+  areAllAccountErrorsSame,
+  doesAllAccountsHaveErrors,
+  getErrorDetails,
+} from '../core/errors';
 
 /**
  * Inputs that determine the notification status and global error.
@@ -61,7 +65,7 @@ export function deriveGlobalError({
   notifications,
 }: Pick<NotificationStatusInput, 'isPaused' | 'notifications'>): GitifyError | undefined {
   if (isPaused) {
-    return Errors.OFFLINE;
+    return getErrorDetails('OFFLINE');
   }
 
   if (notifications.length === 0) {

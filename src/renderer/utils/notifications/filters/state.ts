@@ -9,29 +9,34 @@ import type {
 } from '../../../types';
 import type { Filter } from './types';
 
-const STATE_TYPE_DETAILS: Record<FilterStateType, TypeDetails> = {
-  draft: {
-    title: 'Draft',
-  },
-  open: {
-    title: 'Open',
-    description: 'Open or reopened.',
-  },
-  merged: {
-    title: 'Merged',
-  },
-  closed: {
-    title: 'Closed',
-    description: 'Closed, completed, duplicate, resolved, or not planned.',
-  },
-  other: {
-    title: 'Other',
-    description: 'Any other notification state.',
-  },
-};
+import i18n from '../../../i18n';
 
 export const stateFilter: Filter<FilterStateType> = {
-  FILTER_TYPES: STATE_TYPE_DETAILS,
+  get FILTER_TYPES(): Record<FilterStateType, TypeDetails> {
+    return {
+      draft: {
+        title: i18n.t('filters.state.draft', 'Draft'),
+      },
+      open: {
+        title: i18n.t('filters.state.open', 'Open'),
+        description: i18n.t('filters.state.open_description', 'Open or reopened.'),
+      },
+      merged: {
+        title: i18n.t('filters.state.merged', 'Merged'),
+      },
+      closed: {
+        title: i18n.t('filters.state.closed', 'Closed'),
+        description: i18n.t(
+          'filters.state.closed_description',
+          'Closed, completed, duplicate, resolved, or not planned.',
+        ),
+      },
+      other: {
+        title: i18n.t('filters.state.other', 'Other'),
+        description: i18n.t('filters.state.other_description', 'Any other notification state.'),
+      },
+    };
+  },
 
   requiresDetailsNotifications: true,
 

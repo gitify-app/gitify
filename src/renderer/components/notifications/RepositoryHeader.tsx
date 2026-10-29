@@ -1,4 +1,5 @@
 import { type MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
@@ -36,6 +37,7 @@ export function RepositoryHeader({
   onToggle,
   onAnimateExit,
 }: Readonly<RepositoryHeaderProps>) {
+  const { t } = useTranslation();
   const { markNotificationsAsRead, markNotificationsAsDone } = useNotificationActions();
 
   const shouldAnimateExit = shouldRemoveNotificationsFromState();
@@ -76,7 +78,7 @@ export function RepositoryHeader({
           event.stopPropagation();
           openRepository(repoNotifications[0].repository);
         }}
-        title="Open repository ↗"
+        title={t('repository.open', 'Open repository ↗')}
         variant="invisible"
       >
         <AvatarWithFallback
@@ -94,7 +96,7 @@ export function RepositoryHeader({
             action={() => runGroupAction(() => markNotificationsAsRead(repoNotifications))}
             enabled={!areAllRepoNotificationsRead}
             icon={ReadIcon}
-            label="Mark repository as read"
+            label={t('repository.mark_as_read', 'Mark repository as read')}
             testid="repository-mark-as-read"
           />
 
@@ -105,7 +107,7 @@ export function RepositoryHeader({
               !areAllRepoNotificationsRead
             }
             icon={CheckIcon}
-            label="Mark repository as done"
+            label={t('repository.mark_as_done', 'Mark repository as done')}
             testid="repository-mark-as-done"
           />
 

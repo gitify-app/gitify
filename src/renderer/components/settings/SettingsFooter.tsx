@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { Button, IconButton, Stack, Tooltip } from '@primer/react';
@@ -13,6 +14,7 @@ import { getAppVersion } from '../../utils/system/comms';
 import { openGitifyReleaseNotes } from '../../utils/system/links';
 
 export function SettingsFooter() {
+  const { t } = useTranslation();
   const [appVersion, setAppVersion] = useState<string | null>(null);
   const { shortcuts } = useShortcutActions();
 
@@ -26,7 +28,7 @@ export function SettingsFooter() {
   return (
     <Footer justify="space-between">
       <Stack direction="horizontal">
-        <Tooltip direction="ne" text="View release notes">
+        <Tooltip direction="ne" text={t('settings.footer.release_notes', 'View release notes')}>
           <Button
             data-testid="settings-release-notes"
             onClick={() => openGitifyReleaseNotes(appVersion!)}
@@ -37,9 +39,9 @@ export function SettingsFooter() {
       </Stack>
       <Stack direction="horizontal" gap="normal">
         <IconButton
-          aria-label="Accounts"
+          aria-label={t('settings.footer.accounts', 'Accounts')}
           data-testid="settings-accounts"
-          description="Accounts"
+          description={t('settings.footer.accounts', 'Accounts')}
           icon={PersonIcon}
           keybindingHint={shortcuts.accounts.key}
           onClick={() => {
@@ -49,9 +51,9 @@ export function SettingsFooter() {
         />
 
         <IconButton
-          aria-label={`Quit ${APPLICATION.NAME}`}
+          aria-label={t('settings.footer.quit', 'Quit {{appName}}', { appName: APPLICATION.NAME })}
           data-testid="settings-quit"
-          description={`Quit ${APPLICATION.NAME}`}
+          description={t('settings.footer.quit', 'Quit {{appName}}', { appName: APPLICATION.NAME })}
           icon={XCircleIcon}
           keybindingHint={shortcuts.quit.key}
           onClick={() => {

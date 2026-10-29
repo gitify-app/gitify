@@ -1,4 +1,5 @@
 import { type ReactNode, useCallback, useEffect, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -23,6 +24,7 @@ import { Header } from '../../components/primitives/Header';
 import type { Account, ClientID, Forge, Hostname, Link } from '../../types';
 import type { DeviceFlowSession } from '../../utils/auth/types';
 
+import i18n from '../../i18n';
 import { getAlternateScopeNames, getRecommendedScopeNames } from '../../utils/auth/scopeNames';
 import { rendererLogError, toError } from '../../utils/core/logger';
 import { getAdapter } from '../../utils/forges/registry';
@@ -48,6 +50,7 @@ export function GitHubDeviceFlowAuthorize({
   hostname,
   title,
 }: Readonly<GitHubDeviceFlowAuthorizeProps>) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -90,7 +93,10 @@ export function GitHubDeviceFlowAuthorize({
         rendererLogError('LoginWithDeviceFlow', 'Failed to start device flow', toError(err));
         setError(
           getAdapter(forge).deviceFlow?.describeStartError?.(err, resolvedHostname, clientId) ??
-            'Failed to start authentication. Please try again.',
+            i18n.t(
+              'login.device.start_failed',
+              'Failed to start authentication. Please try again.',
+            ),
         );
       }
     };
@@ -115,7 +121,9 @@ export function GitHubDeviceFlowAuthorize({
       const poll = async (): Promise<void> => {
         if (!isActive || Date.now() >= session.expiresAt) {
           if (isActive) {
-            setError('Device code expired. Please start again.');
+            setError(
+              i18n.t('login.device.code_expired', 'Device code expired. Please start again.'),
+            );
           }
           return;
         }
@@ -140,7 +148,7 @@ export function GitHubDeviceFlowAuthorize({
       } catch (err) {
         if (isActive) {
           rendererLogError('LoginWithDeviceFlow', 'Failed to poll device flow', toError(err));
-          setError('Authentication failed. Please try again.');
+          setError(i18n.t('login.device.auth_failed', 'Authentication failed. Please try again.'));
         }
       } finally {
         if (isActive) {
@@ -187,7 +195,11 @@ export function GitHubDeviceFlowAuthorize({
     return (
       <Stack direction="vertical" gap="normal">
         <Heading as="h3">
-          Authorize the app <Text as="span">using this code.</Text>
+          <Trans
+            i18nKey="login.device.authorize"
+            components={[<Text as="span" key={0} />]}
+            defaults="Authorize the app <0>using this code.</0>"
+          />
         </Heading>
 
         <Stack align="center" direction="horizontal" gap="condensed">
@@ -204,7 +216,7 @@ export function GitHubDeviceFlowAuthorize({
             {session.userCode}
           </Text>
           <IconButton
-            aria-label="Copy device code"
+            aria-label={t('login.device.copy_code', 'Copy device code')}
             icon={CopyIcon}
             onClick={handleCopyUserCode}
             size="small"
@@ -215,20 +227,22 @@ export function GitHubDeviceFlowAuthorize({
         <Stack direction="vertical" gap="condensed">
           <Stack align="center" direction="horizontal" gap="condensed">
             <CheckCircleFillIcon size={16} />
-            <Text size="small">Code copied to clipboard</Text>
+            <Text size="small">{t('login.device.code_copied', 'Code copied to clipboard')}</Text>
           </Stack>
 
           <Stack align="center" direction="horizontal" gap="condensed">
             <GlobeIcon size={16} />
             <Text size="small">
-              Opened{' '}
-              {session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname}
+              {t('login.device.opened', 'Opened {{hostname}}', {
+                hostname:
+                  session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname,
+              })}
             </Text>
           </Stack>
 
           <Stack align="center" direction="horizontal" gap="condensed">
             <SyncIcon className={isPolling ? 'animate-spin' : 'opacity-30'} size={16} />
-            <Text size="small">Waiting for authorization...</Text>
+            <Text size="small">{t('login.device.waiting', 'Waiting for authorization...')}</Text>
           </Stack>
         </Stack>
       </Stack>
@@ -237,7 +251,9 @@ export function GitHubDeviceFlowAuthorize({
 
   const renderScopeChoiceUI = () => (
     <Stack direction="vertical" gap="normal">
-      <Text as="p">Receive notifications for:</Text>
+      <Text as="p">
+        {t('login.device.receive_notifications_for', 'Receive notifications for:')}
+      </Text>
 
       <Stack align="center" direction="vertical">
         <Button
@@ -248,20 +264,34 @@ export function GitHubDeviceFlowAuthorize({
           variant="primary"
         >
           <Stack gap="none">
-            <Text as="strong">Public and Private</Text>
-            <Text size="small">Best experience, but requires broader permissions.</Text>
+            <Text as="strong">{t('login.device.scope_full_title', 'Public and Private')}</Text>
+            <Text size="small">
+              {t(
+                'login.device.scope_full_description',
+                'Best experience, but requires broader permissions.',
+              )}
+            </Text>
             <Text as="em" size="small">
-              Scopes: {getRecommendedScopeNames().join(', ')}
+              {t('login.device.scopes', 'Scopes: {{scopes}}', {
+                scopes: getRecommendedScopeNames().join(', '),
+              })}
             </Text>
           </Stack>
         </Button>
 
         <Button block labelWrap onClick={() => setScopeChoice('public')}>
           <Stack gap="none">
-            <Text>Public</Text>
-            <Text size="small">Limited experience with least privilege permissions.</Text>
+            <Text>{t('login.device.scope_public_title', 'Public')}</Text>
+            <Text size="small">
+              {t(
+                'login.device.scope_public_description',
+                'Limited experience with least privilege permissions.',
+              )}
+            </Text>
             <Text as="em" size="small">
-              Scopes: {getAlternateScopeNames().join(', ')}
+              {t('login.device.scopes', 'Scopes: {{scopes}}', {
+                scopes: getAlternateScopeNames().join(', '),
+              })}
             </Text>
           </Stack>
         </Button>
@@ -272,22 +302,40 @@ export function GitHubDeviceFlowAuthorize({
           if (!revokeUrl) {
             return null;
           }
-          const label = `${adapter.displayName} → Developer Settings`;
+          const label = t(
+            'login.device.developer_settings_link',
+            '{{forge}} → Developer Settings',
+            {
+              forge: adapter.displayName,
+            },
+          );
+          const revokeLink = (
+            <button
+              className="text-gitify-link cursor-pointer"
+              key={0}
+              onClick={() => openExternalLink(revokeUrl)}
+              title={label}
+              type="button"
+            />
+          );
           return (
             <Stack gap="none">
               <Text as="em" size="small">
-                {clientId
-                  ? "Note: to change previously granted permissions, revoke your app's access at"
-                  : "Note: to change previously granted permissions, revoke Gitify's access at"}{' '}
-                <button
-                  className="text-gitify-link cursor-pointer"
-                  onClick={() => openExternalLink(revokeUrl)}
-                  title={label}
-                  type="button"
-                >
-                  {label}
-                </button>
-                {', then re-authorize above.'}
+                {clientId ? (
+                  <Trans
+                    components={[revokeLink]}
+                    defaults="Note: to change previously granted permissions, revoke your app's access at <0>{{label}}</0>, then re-authorize above."
+                    i18nKey="login.device.revoke_note_custom"
+                    values={{ label }}
+                  />
+                ) : (
+                  <Trans
+                    components={[revokeLink]}
+                    defaults="Note: to change previously granted permissions, revoke Gitify's access at <0>{{label}}</0>, then re-authorize above."
+                    i18nKey="login.device.revoke_note"
+                    values={{ label }}
+                  />
+                )}
               </Text>
             </Stack>
           );
@@ -299,13 +347,13 @@ export function GitHubDeviceFlowAuthorize({
   const renderInitializingUI = () => (
     <Stack align="center" direction="vertical" gap="normal">
       <IconButton
-        aria-label="Initializing"
+        aria-label={t('login.device.initializing', 'Initializing')}
         className={'animate-spin'}
         icon={SyncIcon}
         size="large"
         variant="invisible"
       />
-      <Text>Initializing authentication...</Text>
+      <Text>{t('login.device.initializing_authentication', 'Initializing authentication...')}</Text>
     </Stack>
   );
 
@@ -320,7 +368,9 @@ export function GitHubDeviceFlowAuthorize({
 
   return (
     <Page testId="Login With Device Flow">
-      <Header icon={SignInIcon}>{title ?? "Authorize Gitify's OAuth App"}</Header>
+      <Header icon={SignInIcon}>
+        {title ?? t('login.device.title', "Authorize Gitify's OAuth App")}
+      </Header>
 
       <Contents scrollFade>
         {error && (
@@ -334,7 +384,7 @@ export function GitHubDeviceFlowAuthorize({
               </Text>
             }
             hideTitle
-            title="Login errors"
+            title={t('login.device.login_errors', 'Login errors')}
             variant="critical"
           />
         )}
@@ -344,21 +394,24 @@ export function GitHubDeviceFlowAuthorize({
       {session ? (
         <Footer justify="space-between">
           <Button leadingVisual={GlobeIcon} onClick={handleOpenBrowser} variant="primary">
-            Open {session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname}
+            {t('login.device.open', 'Open {{hostname}}', {
+              hostname:
+                session.hostname === Constants.GITHUB_HOSTNAME ? 'GitHub.com' : session.hostname,
+            })}
           </Button>
           <Stack direction="horizontal" gap="condensed">
             <Button leadingVisual={LinkIcon} onClick={handleCopyVerificationLink} variant="default">
-              Copy link
+              {t('login.device.copy_link', 'Copy link')}
             </Button>
             <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
-              Cancel
+              {t('common.cancel', 'Cancel')}
             </Button>
           </Stack>
         </Footer>
       ) : (
         <Footer justify="end">
           <Button data-testid="cancel-button" onClick={() => navigate(-1)} variant="default">
-            Cancel
+            {t('common.cancel', 'Cancel')}
           </Button>
         </Footer>
       )}

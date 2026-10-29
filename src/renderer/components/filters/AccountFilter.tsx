@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { PersonIcon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
 
@@ -10,6 +12,7 @@ import { getAccountUUID } from '../../utils/auth/utils';
 import { FilterCheckbox } from './FilterCheckbox';
 
 export function AccountFilter() {
+  const { t } = useTranslation();
   const { notifications } = useNotifications();
   const accounts = useAccountsStore((s) => s.accounts);
   const filteredAccounts = useFiltersStore((s) => s.accounts);
@@ -20,9 +23,9 @@ export function AccountFilter() {
       <SectionHeading
         as="legend"
         icon={PersonIcon}
-        tooltip={<Text>Filter notifications by account.</Text>}
+        tooltip={<Text>{t('filters.account.help', 'Filter notifications by account.')}</Text>}
       >
-        Account
+        {t('filters.account.title', 'Account')}
       </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">

@@ -17,7 +17,7 @@ import {
   getRequiredScopeNames,
 } from '../utils/auth/scopes';
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
 import * as comms from '../utils/system/comms';
 import * as links from '../utils/system/links';
@@ -461,7 +461,7 @@ describe('renderer/routes/Accounts.tsx', () => {
             {
               account: mockPersonalAccessTokenAccount,
               notifications: [],
-              error: Errors.BAD_CREDENTIALS,
+              error: getErrorDetails('BAD_CREDENTIALS'),
             },
           ],
         });
@@ -486,7 +486,7 @@ describe('renderer/routes/Accounts.tsx', () => {
             {
               account: mockGitifyOAuthAppAccount,
               notifications: [],
-              error: Errors.BAD_CREDENTIALS,
+              error: getErrorDetails('BAD_CREDENTIALS'),
             },
           ],
         });
@@ -509,7 +509,7 @@ describe('renderer/routes/Accounts.tsx', () => {
             {
               account: mockCustomOAuthAppAccount,
               notifications: [],
-              error: Errors.BAD_CREDENTIALS,
+              error: getErrorDetails('BAD_CREDENTIALS'),
             },
           ],
         });
@@ -532,7 +532,7 @@ describe('renderer/routes/Accounts.tsx', () => {
             {
               account: mockGiteaAccount,
               notifications: [],
-              error: Errors.BAD_CREDENTIALS,
+              error: getErrorDetails('BAD_CREDENTIALS'),
             },
           ],
         });
@@ -562,7 +562,7 @@ describe('renderer/routes/Accounts.tsx', () => {
             {
               account: unsupportedAccount,
               notifications: [],
-              error: Errors.BAD_CREDENTIALS,
+              error: getErrorDetails('BAD_CREDENTIALS'),
             },
           ],
         });
@@ -590,7 +590,7 @@ describe('renderer/routes/Accounts.tsx', () => {
             {
               account: mockPersonalAccessTokenAccount,
               notifications: [],
-              error: Errors.BAD_CREDENTIALS,
+              error: getErrorDetails('BAD_CREDENTIALS'),
             },
           ],
         });

@@ -1,5 +1,7 @@
 import type { Chevron } from '../../types';
 
+import i18n from '../../i18n';
+
 export interface ParsedCodePart {
   id: string;
   type: 'text' | 'code';
@@ -19,23 +21,28 @@ export function getChevronDetails(
   isVisible: boolean,
   type: 'account' | 'repository',
 ): Chevron {
+  const typeLabel =
+    type === 'account'
+      ? i18n.t('chevron.account', 'account')
+      : i18n.t('chevron.repository', 'repository');
+
   if (!hasNotifications) {
     return {
       direction: 'left',
-      label: `No notifications for ${type}`,
+      label: i18n.t('chevron.none', 'No notifications for {{type}}', { type: typeLabel }),
     };
   }
 
   if (isVisible) {
     return {
       direction: 'down',
-      label: `Hide ${type} notifications`,
+      label: i18n.t('chevron.hide', 'Hide {{type}} notifications', { type: typeLabel }),
     };
   }
 
   return {
     direction: 'right',
-    label: `Show ${type} notifications`,
+    label: i18n.t('chevron.show', 'Show {{type}} notifications', { type: typeLabel }),
   };
 }
 

@@ -8,7 +8,7 @@ import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
 import { DesignLanguage, Theme } from '../types';
 
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import { NotificationsRoute } from './Notifications';
 
 const THEME_VARIANTS = [
@@ -39,7 +39,8 @@ const STATES = [
   {
     name: 'error',
     heading: 'Network Error',
-    prepare: () => setNotificationsOverrides({ globalError: Errors.NETWORK, status: 'error' }),
+    prepare: () =>
+      setNotificationsOverrides({ globalError: getErrorDetails('NETWORK'), status: 'error' }),
   },
 ] as const;
 

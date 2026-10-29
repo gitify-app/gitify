@@ -1,5 +1,7 @@
 import { CheckCircleFillIcon, DashIcon, XCircleFillIcon } from '@primer/octicons-react';
 
+import i18n from '../i18n';
+
 export interface ScopeStatusIconProps {
   granted: boolean;
   notApplicable?: boolean;
@@ -14,11 +16,7 @@ export function ScopeStatusIcon({
   size = 14,
   subject,
 }: Readonly<ScopeStatusIconProps>) {
-  let status = granted ? 'granted' : 'missing';
-  if (notApplicable) {
-    status = 'not applicable';
-  }
-  const ariaLabel = subject ? `${subject} ${status}` : status;
+  const ariaLabel = getScopeStatusLabel(granted, notApplicable, subject);
 
   if (notApplicable) {
     return <DashIcon aria-label={ariaLabel} className="opacity-30" size={size} />;
@@ -29,4 +27,20 @@ export function ScopeStatusIcon({
   ) : (
     <XCircleFillIcon aria-label={ariaLabel} className="text-gitify-danger" size={size} />
   );
+}
+
+function getScopeStatusLabel(granted: boolean, notApplicable: boolean, subject?: string): string {
+  if (notApplicable) {
+    return subject
+      ? i18n.t('scopes.status.not_applicable_subject', '{{subject}} not applicable', { subject })
+      : i18n.t('scopes.status.not_applicable', 'not applicable');
+  }
+  if (granted) {
+    return subject
+      ? i18n.t('scopes.status.granted_subject', '{{subject}} granted', { subject })
+      : i18n.t('scopes.status.granted', 'granted');
+  }
+  return subject
+    ? i18n.t('scopes.status.missing_subject', '{{subject}} missing', { subject })
+    : i18n.t('scopes.status.missing', 'missing');
 }

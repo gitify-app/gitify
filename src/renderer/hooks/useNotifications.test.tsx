@@ -24,7 +24,7 @@ import {
 
 import type { AccountNotifications, Percentage } from '../types';
 
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
 import { getAdapter } from '../utils/forges/registry';
 import * as notificationsUtils from '../utils/notifications/notifications';
@@ -146,12 +146,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [],
-          error: Errors.BAD_CREDENTIALS,
+          error: getErrorDetails('BAD_CREDENTIALS'),
         },
         {
           account: mockGitHubEnterpriseServerAccount,
           notifications: [],
-          error: Errors.BAD_CREDENTIALS,
+          error: getErrorDetails('BAD_CREDENTIALS'),
         },
       ];
       useAccountsStore.setState({
@@ -163,7 +163,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       await waitFor(() => expect(result.current.status).toBe('error'));
 
-      expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
+      expect(result.current.globalError?.type).toBe('BAD_CREDENTIALS');
     });
 
     it('sets error status without global error when account errors differ', async () => {
@@ -171,12 +171,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [],
-          error: Errors.BAD_CREDENTIALS,
+          error: getErrorDetails('BAD_CREDENTIALS'),
         },
         {
           account: mockGitHubEnterpriseServerAccount,
           notifications: [],
-          error: Errors.RATE_LIMITED,
+          error: getErrorDetails('RATE_LIMITED'),
         },
       ];
       useAccountsStore.setState({

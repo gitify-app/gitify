@@ -91,6 +91,38 @@ guard fails the run outside Linux rather than letting that happen.
 Note that these baselines capture the `backdrop-filter` fallback for Glass, not
 the macOS native vibrancy material, which Chromium cannot render.
 
+### Translations
+
+Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
+
+- Translation files live in `src/renderer/i18n/locales/` (e.g. `en.json`).
+- `en.json` is generated from the code, never hand-edited. Write the English text as the second argument of `t()`, and as `defaults` on `<Trans>`:
+
+  ```tsx
+  t('common.save', 'Save');
+  t('login.device.opened', 'Opened {{hostname}}', { hostname });
+  <Trans
+    i18nKey="filters.requires_detailed"
+    components={[<strong key={0} />]}
+    defaults="Requires <0>Detailed Notifications</0>."
+  />;
+  ```
+
+- After changing a string, sync the locale files:
+  - `pnpm i18n:extract` — regenerate/update locale files from the `t()` calls in the source
+  - `pnpm i18n:check` — verify the keys are in sync with the code, every `t()`/`<Trans>` has an English default, and `en.json` has no empty or key-path values (also runs in CI)
+  - `pnpm i18n:lint` — flag hardcoded or untranslated UI strings
+  - `pnpm i18n:status` — locale health summary
+- Don't run `i18next-cli extract --trust-derived`: it replaces real English text with key names.
+- To add a language:
+  1. Create `src/renderer/i18n/locales/<lang>.json`, copying `en.json` as a starting point.
+  2. Register it in `SUPPORTED_LANGUAGES` in `src/renderer/i18n/types.ts` (this also surfaces it in the Appearance → Language selector).
+  3. Import it in the `locales` map in `src/renderer/i18n/loader.ts`.
+  4. Translate the keys. The [i18n Ally][i18n-ally-website] VSCode extension is handy for working through JSON keys.
+  5. Run `pnpm i18n:check` and `pnpm test`.
+- Translation keys use `snake_case`, grouped by feature (e.g. `settings.appearance.language`). Prefer whole-sentence keys with `{{placeholder}}` interpolation over string concatenation, and leave brand names (GitHub, GitLab, …) untranslated.
+- When a sentence contains markup (bold, links, tooltips), keep it as one `<Trans>` string instead of splitting it into several `t()` fragments, so translators can reorder the words. A component that requires a single child (e.g. Primer's `Tooltip`) needs a small wrapper that accepts `children`.
+
 ### 🎨 Code Style & Conventions
 
 - Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
@@ -209,3 +241,5 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 [github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
 [vitest-website]: https://vitest.dev/
+[i18next-website]: https://www.i18next.com/
+[i18n-ally-website]: https://i18n-docs.intlify.org/

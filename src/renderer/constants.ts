@@ -37,6 +37,7 @@ export const Constants = {
     ACCOUNTS: 'gitify-accounts',
     FILTERS: 'gitify-filters',
     SETTINGS: 'gitify-settings',
+    LANGUAGE: 'gitify-language',
   },
 
   // GitHub OAuth Scopes — each tier is an ordered array of OAUTH_SCOPE objects.

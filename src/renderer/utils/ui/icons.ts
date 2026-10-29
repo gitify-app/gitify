@@ -24,6 +24,7 @@ import {
 } from '../../types';
 import type { PlatformType } from '../auth/types';
 
+import i18n from '../../i18n';
 import { BitbucketIcon } from '../../icons/BitbucketIcon';
 import { GitLabIcon } from '../../icons/GitLabIcon';
 import type { PullRequestReviewState } from '../forges/github/graphql/generated/graphql';
@@ -43,27 +44,38 @@ export function getPullRequestReviewIcon(
       return {
         type: CheckIcon,
         color: IconColor.GREEN,
-        description: `${descriptionPrefix} approved these changes`,
+        description: i18n.t('review.approved', '{{users}} approved these changes', {
+          users: descriptionPrefix,
+        }),
       };
     case 'CHANGES_REQUESTED':
       return {
         type: FileDiffIcon,
         color: IconColor.RED,
-        description: `${descriptionPrefix} requested changes`,
+        description: i18n.t('review.changes_requested', '{{users}} requested changes', {
+          users: descriptionPrefix,
+        }),
       };
     case 'COMMENTED':
       return {
         type: CommentIcon,
         color: IconColor.YELLOW,
-        description: `${descriptionPrefix} left review comments`,
+        description: i18n.t('review.commented', '{{users}} left review comments', {
+          users: descriptionPrefix,
+        }),
       };
     case 'DISMISSED':
       return {
         type: CommentIcon,
         color: IconColor.GRAY,
-        description: `${descriptionPrefix} ${
-          review.users.length > 1 ? 'reviews have' : 'review has'
-        } been dismissed`,
+        description:
+          review.users.length > 1
+            ? i18n.t('review.dismissed_plural', '{{users}} reviews have been dismissed', {
+                users: descriptionPrefix,
+              })
+            : i18n.t('review.dismissed_singular', '{{user}} review has been dismissed', {
+                user: descriptionPrefix,
+              }),
       };
     default:
       return null;

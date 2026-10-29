@@ -7,6 +7,7 @@ import { Constants } from '../../../constants';
 import type { ClientID, Hostname, Token } from '../../../types';
 import type { DeviceFlowSession } from '../../auth/types';
 
+import i18n from '../../../i18n';
 import { getRecommendedScopeNames } from '../../auth/scopeNames';
 import { rendererLogError, toError } from '../../core/logger';
 import { getGitHubAuthBaseUrl } from './auth';
@@ -81,10 +82,22 @@ export function describeDeviceFlowStartError(
   switch (errorCode) {
     case 'device_flow_disabled':
       return clientId
-        ? `Device flow is not enabled for this OAuth app. Enable it in that app's settings under https://${hostname}/settings/developers, then try again.`
-        : `Device flow is not enabled for this OAuth app. Enable it in the app's settings on ${hostname}, then try again.`;
+        ? i18n.t(
+            'login.device.error_disabled_custom',
+            "Device flow is not enabled for this OAuth app. Enable it in that app's settings under {{url}}, then try again.",
+            { url: `https://${hostname}/settings/developers` },
+          )
+        : i18n.t(
+            'login.device.error_disabled',
+            "Device flow is not enabled for this OAuth app. Enable it in the app's settings on {{hostname}}, then try again.",
+            { hostname },
+          );
     case 'incorrect_client_credentials':
-      return `The client ID is not valid for ${hostname}. Check it and try again.`;
+      return i18n.t(
+        'login.device.error_invalid_client_id',
+        'The client ID is not valid for {{hostname}}. Check it and try again.',
+        { hostname },
+      );
     default:
       return undefined;
   }

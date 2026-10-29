@@ -41,6 +41,14 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
   });
 
+  it('hides the language selector while English is the only language', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    expect(screen.queryByRole('combobox', { name: 'Language' })).not.toBeInTheDocument();
+  });
+
   it('hides accessibility color modes when Glass is the active design language', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />, {

@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { StackIcon } from '@primer/octicons-react';
 
 import { IconColor } from '../../types';
@@ -15,6 +17,7 @@ export function StackedPrsPill({
   stackPosition,
   stackDepth,
 }: Readonly<StackedPrsPillProps>) {
+  const { t } = useTranslation();
   if (!isStacked) {
     return null;
   }
@@ -23,8 +26,11 @@ export function StackedPrsPill({
     stackPosition != null && stackDepth != null ? `${stackPosition}/${stackDepth}` : undefined;
 
   const description = metric
-    ? `Stacked pull request: ${stackPosition} of ${stackDepth}`
-    : 'Stacked pull request';
+    ? t('metrics.stacked_pr_position', 'Stacked pull request: {{position}} of {{depth}}', {
+        position: stackPosition,
+        depth: stackDepth,
+      })
+    : t('metrics.stacked_pr', 'Stacked pull request');
 
   return (
     <MetricPill

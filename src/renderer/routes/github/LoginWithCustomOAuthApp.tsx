@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { BookIcon, PersonIcon } from '@primer/octicons-react';
@@ -33,6 +34,7 @@ interface LocationState {
  * secret), then hands off to the shared device-flow authorization UI.
  */
 export function GitHubLoginWithCustomOAuthAppRoute() {
+  const { t } = useTranslation();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
@@ -65,26 +67,35 @@ export function GitHubLoginWithCustomOAuthAppRoute() {
       <GitHubDeviceFlowAuthorize
         clientId={credentials.clientId}
         hostname={credentials.hostname}
-        title="Authorize with your OAuth app"
+        title={t('login.custom_oauth.authorize_title', 'Authorize with your OAuth app')}
       />
     );
   }
 
   return (
     <Page testId="Login With Custom OAuth App">
-      <Header icon={PersonIcon}>Login with Custom OAuth App</Header>
+      <Header icon={PersonIcon}>
+        {t('login.custom_oauth.title', 'Login with Custom OAuth App')}
+      </Header>
 
       <Contents scrollFade>
         <Stack direction="vertical" gap="normal">
           <Text as="p" size="small">
-            Authorize Gitify with your own GitHub OAuth app. Create an app, enable its device flow,
-            then paste its client ID below.
+            {t(
+              'login.custom_oauth.intro',
+              'Authorize Gitify with your own GitHub OAuth app. Create an app, enable its device flow, then paste its client ID below.',
+            )}
           </Text>
 
           <FormControl required>
-            <FormControl.Label>Hostname</FormControl.Label>
+            <FormControl.Label>{t('login.oauth.hostname', 'Hostname')}</FormControl.Label>
             <FormControl.Caption>
-              <Text as="i">Change only if you are using GitHub Enterprise Server</Text>
+              <Text as="i">
+                {t(
+                  'login.custom_oauth.hostname_caption',
+                  'Change only if you are using GitHub Enterprise Server',
+                )}
+              </Text>
             </FormControl.Caption>
             <TextInput
               aria-invalid={errors.hostname ? 'true' : 'false'}
@@ -118,22 +129,29 @@ export function GitHubLoginWithCustomOAuthAppRoute() {
               }}
               size="small"
             >
-              Create new OAuth app
+              {t('login.custom_oauth.create_app', 'Create new OAuth app')}
             </Button>
             <Text className="text-xs">
-              and enable its <Text as="i">device flow</Text>, then use its client ID below.
+              <Trans
+                components={[<Text as="i" key={0} />]}
+                defaults="and enable its <0>device flow</0>, then use its client ID below."
+                i18nKey="login.custom_oauth.enable_device_flow"
+              />
             </Text>
           </Stack>
 
           <FormControl required>
-            <FormControl.Label>Client ID</FormControl.Label>
+            <FormControl.Label>{t('login.oauth.client_id', 'Client ID')}</FormControl.Label>
             <TextInput
               aria-invalid={errors.clientId ? 'true' : 'false'}
               block
               data-testid="login-clientId"
               name="clientId"
               onChange={handleInputChange}
-              placeholder="Your generated client ID (20 characters)"
+              placeholder={t(
+                'login.custom_oauth.client_id_placeholder',
+                'Your generated client ID (20 characters)',
+              )}
               value={formData.clientId}
             />
             {errors.clientId && (
@@ -144,18 +162,18 @@ export function GitHubLoginWithCustomOAuthAppRoute() {
       </Contents>
 
       <Footer justify="space-between">
-        <Tooltip text="GitHub documentation">
+        <Tooltip text={t('login.oauth.docs_tooltip', 'GitHub documentation')}>
           <Button
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(Constants.GITHUB_DOCS.OAUTH_URL)}
             size="small"
           >
-            Docs
+            {t('common.docs', 'Docs')}
           </Button>
         </Tooltip>
 
         <Button data-testid="login-submit" onClick={handleSubmit} variant="primary">
-          Continue
+          {t('common.continue', 'Continue')}
         </Button>
       </Footer>
     </Page>

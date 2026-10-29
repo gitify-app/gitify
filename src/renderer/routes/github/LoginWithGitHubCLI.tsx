@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { SignInIcon, TerminalIcon } from '@primer/octicons-react';
@@ -15,6 +16,7 @@ import { Header } from '../../components/primitives/Header';
 
 import type { Account, Hostname } from '../../types';
 
+import i18n from '../../i18n';
 import { summarizeLoginError } from '../../utils/auth/loginValidation';
 import { isValidHostname } from '../../utils/auth/utils';
 import { rendererLogError, toError } from '../../utils/core/logger';
@@ -24,6 +26,7 @@ interface LocationState {
 }
 
 export function GitHubLoginWithCLIRoute() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
@@ -38,7 +41,7 @@ export function GitHubLoginWithCLIRoute() {
 
   const handleSubmit = useCallback(async () => {
     if (!hostname || !isValidHostname(hostname)) {
-      setError('Hostname format is invalid');
+      setError(i18n.t('login.cli.hostname_invalid', 'Hostname format is invalid'));
       return;
     }
 
@@ -50,7 +53,12 @@ export function GitHubLoginWithCLIRoute() {
       void navigate('/');
     } catch (err) {
       rendererLogError('loginWithCli', 'Failed to login with GitHub CLI', toError(err));
-      setError(summarizeLoginError(err) ?? `Failed to login with GitHub CLI against ${hostname}`);
+      setError(
+        summarizeLoginError(err) ??
+          i18n.t('login.cli.login_failed', 'Failed to login with GitHub CLI against {{hostname}}', {
+            hostname,
+          }),
+      );
     } finally {
       setIsLoggingIn(false);
     }
@@ -58,7 +66,7 @@ export function GitHubLoginWithCLIRoute() {
 
   return (
     <Page testId="Login With GitHub CLI">
-      <Header icon={TerminalIcon}>Login with GitHub CLI</Header>
+      <Header icon={TerminalIcon}>{t('login.cli.title', 'Login with GitHub CLI')}</Header>
 
       <Contents scrollFade>
         {error && (
@@ -66,29 +74,45 @@ export function GitHubLoginWithCLIRoute() {
             data-testid="login-errors"
             description={<Text color="danger.fg">{error}</Text>}
             hideTitle
-            title="Form errors"
+            title={t('login.cli.form_errors', 'Form errors')}
             variant="critical"
           />
         )}
 
         <Stack direction="vertical" gap="normal">
           <Text className="text-xs">
-            Uses the token your local <Text as="i">gh</Text> install already holds, so no token has
-            to be created or pasted. Gitify reads it from the CLI on every refresh, which means{' '}
-            <Text as="i">gh auth login</Text> and <Text as="i">gh auth refresh</Text> keep working
-            without re-authenticating here.
+            <Trans
+              i18nKey="login.cli.intro_token"
+              components={[
+                <Text as="i" key={0} />,
+                <Text as="i" key={1} />,
+                <Text as="i" key={2} />,
+              ]}
+              defaults="Uses the token your local <0>gh</0> install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means <1>gh auth login</1> and <2>gh auth refresh</2> keep working without re-authenticating here."
+            />
           </Text>
 
           <Text className="text-xs">
-            The scopes come from the GitHub CLI and cannot be changed from Gitify. Its{' '}
-            <Text as="i">repo</Text> scope covers notification access; run{' '}
-            <Text as="i">gh auth refresh -s notifications</Text> to grant that scope explicitly.
+            <Trans
+              i18nKey="login.cli.intro_scopes"
+              components={[
+                <Text as="i" key={0} />,
+                <Text as="i" key={1} />,
+                <Text as="i" key={2} />,
+              ]}
+              defaults="The scopes come from the GitHub CLI and cannot be changed from Gitify. Its <0>repo</0> scope covers notification access; run <1>gh auth refresh -s notifications</1> to grant that scope explicitly."
+            />
           </Text>
 
           <FormControl required>
-            <FormControl.Label>Hostname</FormControl.Label>
+            <FormControl.Label>{t('login.cli.hostname', 'Hostname')}</FormControl.Label>
             <FormControl.Caption>
-              <Text as="i">Change only if you are using GitHub Enterprise Server</Text>
+              <Text as="i">
+                {t(
+                  'login.cli.hostname_caption',
+                  'Change only if you are using GitHub Enterprise Server',
+                )}
+              </Text>
             </FormControl.Caption>
             <TextInput
               aria-invalid={error ? 'true' : 'false'}
@@ -110,7 +134,7 @@ export function GitHubLoginWithCLIRoute() {
           onClick={handleSubmit}
           variant="primary"
         >
-          Login
+          {t('common.login', 'Login')}
         </Button>
       </Footer>
     </Page>

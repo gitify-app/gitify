@@ -121,8 +121,7 @@ exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] =
           >
             gh
           </i>
-           install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means
-           
+           install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means 
           <i
             class="prc-Text-Text-9mHv3"
             data-component="Text"
@@ -142,16 +141,14 @@ exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] =
           class="text-xs prc-Text-Text-9mHv3"
           data-component="Text"
         >
-          The scopes come from the GitHub CLI and cannot be changed from Gitify. Its
-           
+          The scopes come from the GitHub CLI and cannot be changed from Gitify. Its 
           <i
             class="prc-Text-Text-9mHv3"
             data-component="Text"
           >
             repo
           </i>
-           scope covers notification access; run
-           
+           scope covers notification access; run 
           <i
             class="prc-Text-Text-9mHv3"
             data-component="Text"

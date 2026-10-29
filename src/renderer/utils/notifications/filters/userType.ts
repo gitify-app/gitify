@@ -9,23 +9,7 @@ import type {
 } from '../../../types';
 import type { Filter } from './types';
 
-const USER_TYPE_DETAILS: Record<UserTypeFilterValue, TypeDetails> = {
-  User: {
-    title: 'User',
-  },
-  Bot: {
-    title: 'Bot',
-    description: 'Bot accounts such as @copilot, @dependabot, @renovate, @netlify, etc.',
-  },
-  Organization: {
-    title: 'Organization',
-  },
-  other: {
-    title: 'Other',
-    description:
-      'Notifications with no author, or an author that is not a User, Bot, or Organization.',
-  },
-};
+import i18n from '../../../i18n';
 
 // Author types that map to the "User" filter option.
 const USER_MATCHING_TYPES: readonly string[] = ['User', 'EnterpriseUserAccount'] as const;
@@ -38,7 +22,30 @@ const ENUMERATED_USER_TYPES: readonly string[] = [
 ] as const;
 
 export const userTypeFilter: Filter<UserTypeFilterValue> = {
-  FILTER_TYPES: USER_TYPE_DETAILS,
+  get FILTER_TYPES(): Record<UserTypeFilterValue, TypeDetails> {
+    return {
+      User: {
+        title: i18n.t('filters.user_type.user', 'User'),
+      },
+      Bot: {
+        title: i18n.t('filters.user_type.bot', 'Bot'),
+        description: i18n.t(
+          'filters.user_type.bot_description',
+          'Bot accounts such as @copilot, @dependabot, @renovate, @netlify, etc.',
+        ),
+      },
+      Organization: {
+        title: i18n.t('filters.user_type.organization', 'Organization'),
+      },
+      other: {
+        title: i18n.t('filters.user_type.other', 'Other'),
+        description: i18n.t(
+          'filters.user_type.other_description',
+          'Notifications with no author, or an author that is not a User, Bot, or Organization.',
+        ),
+      },
+    };
+  },
 
   requiresDetailsNotifications: true,
 

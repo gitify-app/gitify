@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Sidebar } from '../Sidebar';
 
@@ -11,6 +12,7 @@ interface AppLayoutProps {
  * It handles the basic layout with sidebar and content area.
  */
 export function AppLayout({ children }: Readonly<AppLayoutProps>) {
+  const { t } = useTranslation();
   const setFocusRef = (el: HTMLButtonElement | null) => {
     if (el) {
       el.focus();
@@ -20,7 +22,12 @@ export function AppLayout({ children }: Readonly<AppLayoutProps>) {
   return (
     <div className="flex flex-col min-h-screen bg-gitify-background">
       {/* Hidden focus sentinel; grabs initial focus via callback ref */}
-      <button aria-label="initial focus" className="sr-only" ref={setFocusRef} type="button" />
+      <button
+        aria-label={t('layout.initial_focus', 'initial focus')}
+        className="sr-only"
+        ref={setFocusRef}
+        type="button"
+      />
 
       <Sidebar />
 
