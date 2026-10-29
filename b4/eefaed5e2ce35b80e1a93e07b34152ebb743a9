@@ -1,0 +1,40 @@
+src/main/notifications.test.ts
+  h_ac004aadb63da9 78,81-84,89,93-94,99-103,142,144-146,184-186,192,198-216,219-226,237,262-289,331-332,334-341,366,371-395
+src/main/notifications.ts
+  h_ac004aadb63da9 6,25-27,51,91,103,107-113,115-116,118-122,133,167-171,173-175,223-226,253-267,290-295,367-378,415
+src/renderer/components/settings/AlertSettings.test.tsx
+  h_ac004aadb63da9 70-90
+src/renderer/components/settings/AlertSettings.tsx
+  h_ac004aadb63da9 45,153-166
+src/renderer/hooks/notifications/useNotificationEffects.ts
+  h_ac004aadb63da9 11-12,109-110,112-113,117-125,127,155,161-162,180-185,197,199,212,230,232,237,343,346-347,384,386-396,399-401
+src/renderer/hooks/useNotifications.test.tsx
+  h_ac004aadb63da9 18,685,774,819-857,860
+src/renderer/i18n/locales/en.json
+  h_ac004aadb63da9 300-307,384
+src/renderer/types.ts
+  h_ac004aadb63da9 186
+src/renderer/utils/forges/github/enrich.ts
+  h_ac004aadb63da9 14
+src/renderer/utils/system/native.test.ts
+  h_ac004aadb63da9 6-10,41-43,45-46,48,54-60,67,69,73,82,99,135-139,157,161-169
+src/renderer/utils/system/native.ts
+  h_ac004aadb63da9 3,8-10,31-68,73,110-119,124-135,139-141,146,156,158-159,165,168,172-174
+src/shared/events.ts
+  h_ac004aadb63da9 112-118,121,123,130
+src/shared/nativeNotifications.test.ts
+  h_ac004aadb63da9 1-62
+src/shared/nativeNotifications.ts
+  h_ac004aadb63da9 2-12,16,18-19,23,27,29-30,34-35,37-38,40-42,44-47,50-51,53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b4eefaed5e2ce35b80e1a93e07b34152ebb743a9",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
