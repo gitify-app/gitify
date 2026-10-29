@@ -41,13 +41,9 @@ export function GitHubLoginWithPersonalAccessTokenRoute() {
       tokenSettingsLabel={t('login.pat.token_settings_label_github', 'Generate a PAT')}
     >
       <Text as="i" className="text-xs">
-        {t(
-          'login.pat.classic_only_note',
-          'Use a classic personal access token; fine-grained tokens are not supported.',
-        )}{' '}
         <Trans
           components={[<RecommendedScopesLink key={0} />]}
-          defaults="The <0>recommended scopes</0> will be automatically selected for you."
+          defaults="Use a classic personal access token; fine-grained tokens are not supported. The <0>recommended scopes</0> will be automatically selected for you."
           i18nKey="login.pat.scopes_note"
         />
       </Text>

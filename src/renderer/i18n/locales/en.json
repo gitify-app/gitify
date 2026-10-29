@@ -252,7 +252,6 @@
     "pat": {
       "atlassian_email": "Atlassian Email",
       "atlassian_email_required": "Atlassian email is required",
-      "classic_only_note": "Use a classic personal access token; fine-grained tokens are not supported.",
       "docs_tooltip_bitbucket": "Atlassian API token documentation",
       "docs_tooltip_gitea": "Gitea API documentation",
       "docs_tooltip_github": "GitHub documentation",
@@ -265,7 +264,7 @@
       "hostname_invalid": "Hostname format is invalid",
       "hostname_required": "Hostname is required",
       "invalid_token": "Failed to validate provided token against {{hostname}}",
-      "scopes_note": "The <0>recommended scopes</0> will be automatically selected for you.",
+      "scopes_note": "Use a classic personal access token; fine-grained tokens are not supported. The <0>recommended scopes</0> will be automatically selected for you.",
       "scopes_note_gitlab": "Requires the <0>api</0> scope, or a fine-grained token with <1>Todo</1> (read, update) and <2>User</2> (read) permissions. GitLab shows your To-Do items, so you will see fewer notifications than on GitHub.",
       "title_bitbucket": "Login to Bitbucket Cloud with API Token",
       "title_gitea": "Login to Gitea with Personal Access Token",
