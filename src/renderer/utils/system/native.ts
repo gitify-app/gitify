@@ -7,9 +7,10 @@ import { generateNotificationWebUrl } from '../notifications/url';
 /**
  * Raises a native OS notification.
  *
- * For a single notification, the message is used as the title (non-Windows) and the
- * formatted footer text is used as the body. For multiple notifications, a generic count
- * summary is shown instead.
+ * For a single notification, the repository full name is the title, the subject
+ * title is the body, and the generated web URL is the click target. For
+ * multiple notifications, the app name is the title and the body summarizes the
+ * notification count.
  *
  * @param notifications - The notifications to surface as a native OS notification.
  */

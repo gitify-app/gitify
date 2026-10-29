@@ -307,23 +307,20 @@ export interface Chevron {
 
 export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
 
-/**
- *
- * Gitify Notification Types
- *
- * These types represent the clean, UI-focused notification structure
- * used throughout the application.
- *
- * Raw GitHub API responses are transformed into these types at the API boundary.
- *
- **/
+// ---------------------------------------------------------------------------
+// Gitify notification types
+//
+// These types represent the clean, UI-focused notification structure used
+// throughout the application. Raw forge responses are transformed into these
+// types at the API boundary.
+// ---------------------------------------------------------------------------
 
 /**
  * Complete notification type for UI consumption.
  * Contains only fields actually used by components.
  */
 export interface GitifyNotification {
-  /** Unique notification ID from GitHub */
+  /** Unique notification ID from the account's forge */
   id: string;
   /** Whether the notification is unread */
   unread: boolean;
@@ -345,9 +342,11 @@ export interface GitifyNotification {
 
 /**
  * A notification that has been transformed from a forge response but not yet
- * formatted for display. The orchestrator pipeline (transform → filter →
- * enrich → filter) operates on this type; `formatNotification` is the only
- * place that widens it to `GitifyNotification` by populating `display`.
+ * formatted for display. The orchestrator pipeline (transform → base filter →
+ * enrich → format → order) operates on this type; `formatNotification` is the
+ * only place that widens it to `GitifyNotification` by populating `display`.
+ * Detailed filtering runs later on the formatted notification in the query
+ * selection layer.
  */
 export type RawGitifyNotification = Omit<GitifyNotification, 'display'>;
 
@@ -583,16 +582,14 @@ export type GitifyCheckSuiteStatus =
   | 'TIMED_OUT'
   | 'WAITING';
 
-/**
- * Gitify Type Enhancements
- *
- * These types represent the clean, UI-focused notification structure
- * used throughout the application.
- *
- * Raw GitHub API responses are transformed into these types at the API boundary.
- **/
+// ---------------------------------------------------------------------------
+// Gitify type enhancements
+//
+// Stronger typings for the string literal attributes used by the notification
+// types above, so filters, display logic, and reason labels share one set of
+// named values.
+// ---------------------------------------------------------------------------
 
-// Stronger typings for string literal attributes
 export type Reason =
   | 'agent_session_finished'
   | 'approval_requested'

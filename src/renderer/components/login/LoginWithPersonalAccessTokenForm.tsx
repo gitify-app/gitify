@@ -58,8 +58,8 @@ export interface LoginWithPersonalAccessTokenFormProps {
 /**
  * Shared personal-access-token login form.
  *
- * Forge-specific route components (`routes/github`, `routes/gitea`) supply
- * their own copy via props so this form stays free of forge conditionals.
+ * Forge-specific route components under `routes/` supply their own copy via
+ * props so this form stays free of forge conditionals.
  */
 export function LoginWithPersonalAccessTokenForm({
   forge,
