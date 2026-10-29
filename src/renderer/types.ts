@@ -16,6 +16,7 @@ import type {
   IssueStateReason,
   LabelFieldsFragment,
   MilestoneFieldsFragment,
+  PullRequestReviewDecision,
   PullRequestReviewState,
   PullRequestState,
   ReactionGroupFieldsFragment,
@@ -27,13 +28,9 @@ type Brand<B> = { [__brand]: B };
 
 export type Branded<T, B> = T & Brand<B>;
 
-export type AuthCode = Branded<string, 'AuthCode'>;
-
 export type Token = Branded<string, 'Token'>;
 
 export type ClientID = Branded<string, 'ClientID'>;
-
-export type ClientSecret = Branded<string, 'ClientSecret'>;
 
 export type Hostname = Branded<string, 'Hostname'>;
 
@@ -73,6 +70,11 @@ export interface Account {
   version?: string;
   hostname: Hostname;
   token: Token;
+  /**
+   * OAuth app client ID for an account authorized through a user-supplied
+   * custom OAuth app; absent for Gitify's own preconfigured app.
+   */
+  clientId?: ClientID;
   /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
   username?: string;
   user: GitifyUser | null;
@@ -289,14 +291,18 @@ export enum Size {
 }
 
 /**
+ * The direction a chevron points.
+ */
+export type ChevronDirection = 'down' | 'left' | 'right';
+
+/**
  * Details for Chevron header accordion.
  */
 export interface Chevron {
   /**
-   * The chevron icon.
+   * The direction the chevron points.
    */
-  // TODO - improve the type here to be more specific about which icons are allowed, if possible
-  icon: FC<OcticonProps>;
+  direction: ChevronDirection;
 
   /**
    * The chevron label.
@@ -306,23 +312,20 @@ export interface Chevron {
 
 export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
 
-/**
- *
- * Gitify Notification Types
- *
- * These types represent the clean, UI-focused notification structure
- * used throughout the application.
- *
- * Raw GitHub API responses are transformed into these types at the API boundary.
- *
- **/
+// ---------------------------------------------------------------------------
+// Gitify notification types
+//
+// These types represent the clean, UI-focused notification structure used
+// throughout the application. Raw forge responses are transformed into these
+// types at the API boundary.
+// ---------------------------------------------------------------------------
 
 /**
  * Complete notification type for UI consumption.
  * Contains only fields actually used by components.
  */
 export interface GitifyNotification {
-  /** Unique notification ID from GitHub */
+  /** Unique notification ID from the account's forge */
   id: string;
   /** Whether the notification is unread */
   unread: boolean;
@@ -344,9 +347,11 @@ export interface GitifyNotification {
 
 /**
  * A notification that has been transformed from a forge response but not yet
- * formatted for display. The orchestrator pipeline (transform → filter →
- * enrich → filter) operates on this type; `formatNotification` is the only
- * place that widens it to `GitifyNotification` by populating `display`.
+ * formatted for display. The orchestrator pipeline (transform → base filter →
+ * enrich → format → order) operates on this type; `formatNotification` is the
+ * only place that widens it to `GitifyNotification` by populating `display`.
+ * Detailed filtering runs later on the formatted notification in the query
+ * selection layer.
  */
 export type RawGitifyNotification = Omit<GitifyNotification, 'display'>;
 
@@ -398,8 +403,12 @@ export interface GitifySubject {
   reviewRequested?: ReviewRequestType[];
   /** PR reviewer states and review thread resolution counts */
   reviewers?: GitifyPullRequestReviewer[];
+  /** Overall PR review status, only set while the PR is open */
+  reviewDecision?: GitifyReviewDecision;
   /** PRs closing issues */
-  linkedIssues?: string[];
+  linkedIssues?: GitifyLinkedIssue[];
+  /** CI check summary for the PR's head commit */
+  checks?: GitifyCheckSummary;
   /** Total comment count */
   commentCount?: number;
   /** Labels names and colors */
@@ -498,6 +507,11 @@ export interface GitifyIssueType {
 }
 
 /** GitHub sub-issue parent context */
+export interface GitifyLinkedIssue {
+  number: number;
+  url: Link;
+}
+
 export interface GitifyParentIssue {
   number: number;
   title: string;
@@ -526,6 +540,16 @@ export type GitifyMilestone = MilestoneFieldsFragment;
 export type GitifyReactionGroup = ReactionGroupFieldsFragment;
 
 export type GitifyLabels = LabelFieldsFragment;
+
+export type GitifyReviewDecision = PullRequestReviewDecision;
+
+export interface GitifyCheckSummary {
+  state: 'SUCCESS' | 'FAILURE' | 'PENDING';
+  passed: number;
+  failed: number;
+  pending: number;
+  total: number;
+}
 
 export interface GitifyPullRequestReviewer {
   user: string;
@@ -563,16 +587,14 @@ export type GitifyCheckSuiteStatus =
   | 'TIMED_OUT'
   | 'WAITING';
 
-/**
- * Gitify Type Enhancements
- *
- * These types represent the clean, UI-focused notification structure
- * used throughout the application.
- *
- * Raw GitHub API responses are transformed into these types at the API boundary.
- **/
+// ---------------------------------------------------------------------------
+// Gitify type enhancements
+//
+// Stronger typings for the string literal attributes used by the notification
+// types above, so filters, display logic, and reason labels share one set of
+// named values.
+// ---------------------------------------------------------------------------
 
-// Stronger typings for string literal attributes
 export type Reason =
   | 'agent_session_finished'
   | 'approval_requested'

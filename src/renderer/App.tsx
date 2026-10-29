@@ -11,9 +11,9 @@ import { AccountScopesRoute } from './routes/AccountScopes';
 import { BitbucketLoginWithPersonalAccessTokenRoute } from './routes/bitbucket/LoginWithPersonalAccessToken';
 import { FiltersRoute } from './routes/Filters';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './routes/gitea/LoginWithPersonalAccessToken';
+import { GitHubLoginWithCustomOAuthAppRoute } from './routes/github/LoginWithCustomOAuthApp';
 import { GitHubLoginWithDeviceFlowRoute } from './routes/github/LoginWithDeviceFlow';
 import { GitHubLoginWithCLIRoute } from './routes/github/LoginWithGitHubCLI';
-import { GitHubLoginWithOAuthAppRoute } from './routes/github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './routes/github/LoginWithPersonalAccessToken';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './routes/gitlab/LoginWithPersonalAccessToken';
 import { LoginRoute } from './routes/Login';
@@ -29,10 +29,6 @@ import './App.css';
 import { AppLayout } from './components/layout/AppLayout';
 
 import { queryClient } from './utils/api/queryClient';
-import { migrateLegacyStoreToZustand } from './utils/core/storage';
-
-// Run migration from legacy local storage to Zustand stores
-migrateLegacyStoreToZustand();
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -108,7 +104,10 @@ export function App() {
                   element={<GitHubLoginWithPersonalAccessTokenRoute />}
                   path="/login/github/personal-access-token"
                 />
-                <Route element={<GitHubLoginWithOAuthAppRoute />} path="/login/github/oauth-app" />
+                <Route
+                  element={<GitHubLoginWithCustomOAuthAppRoute />}
+                  path="/login/github/custom-oauth-app"
+                />
                 <Route
                   element={<GiteaLoginWithPersonalAccessTokenRoute />}
                   path="/login/gitea/personal-access-token"

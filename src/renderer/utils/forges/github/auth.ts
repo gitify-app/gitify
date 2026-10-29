@@ -60,37 +60,49 @@ export function getGitHubAuthBaseUrl(hostname: Hostname): URL {
 }
 
 /**
+ * Build the URL where a user reviews and revokes an authorized OAuth app's access.
+ *
+ * Omit `clientId` for Gitify's preconfigured app; pass one for a user-supplied app.
+ *
+ * @param hostname - The GitHub hostname the app is authorized on.
+ * @param clientId - The OAuth app's client ID, when the account supplied one.
+ * @returns The authorized-applications URL for that client ID.
+ */
+export function getAuthorizedOAuthAppURL(hostname: Hostname, clientId?: ClientID): Link {
+  const url = new URL(`https://${hostname}`);
+  url.pathname = `/settings/connections/applications/${
+    clientId ?? Constants.OAUTH_DEVICE_FLOW_CLIENT_ID
+  }`;
+  return url.toString() as Link;
+}
+
+/**
  * Return the GitHub developer settings URL appropriate for the account's auth method.
  *
- * - GitHub App → application connections page
+ * - Gitify OAuth App → Gitify's authorized-applications page
+ * - Custom OAuth App → the account's own app when its client ID is known; otherwise
+ *   the host's OAuth apps list, where a migrated account can find its client ID again
  * - GitHub CLI → authorized applications page
- * - OAuth App → developer settings page
  * - Personal Access Token → tokens settings page
  *
  * @param account - The account whose settings URL to build.
  * @returns The URL to the relevant GitHub developer settings page.
  */
 export function getDeveloperSettingsURL(account: Account): Link {
-  const settingsURL = new URL(`https://${account.hostname}`);
-
   switch (account.method) {
-    case 'GitHub App':
-      settingsURL.pathname = `/settings/connections/applications/${Constants.OAUTH_DEVICE_FLOW_CLIENT_ID}`;
-      break;
+    case 'Gitify OAuth App':
+      return getAuthorizedOAuthAppURL(account.hostname);
+    case 'Custom OAuth App':
+      return account.clientId
+        ? getAuthorizedOAuthAppURL(account.hostname, account.clientId)
+        : (`https://${account.hostname}/settings/developers` as Link);
     case 'GitHub CLI':
-      settingsURL.pathname = '/settings/applications';
-      break;
-    case 'OAuth App':
-      settingsURL.pathname = '/settings/developers';
-      break;
+      return `https://${account.hostname}/settings/applications` as Link;
     case 'Personal Access Token':
-      settingsURL.pathname = '/settings/tokens';
-      break;
+      return `https://${account.hostname}/settings/tokens` as Link;
     default:
-      settingsURL.pathname = '/settings';
-      break;
+      return `https://${account.hostname}/settings` as Link;
   }
-  return settingsURL.toString() as Link;
 }
 
 /**
@@ -115,8 +127,12 @@ export function getNewTokenURL(hostname: Hostname): Link {
 /**
  * Build a pre-filled URL for registering a new OAuth App.
  *
- * Pre-populates the app name (with creation date), homepage URL, and
- * the `gitify://oauth` callback URL.
+ * Pre-populates the app name (with creation date), homepage URL, and an inert
+ * callback URL. GitHub's registration form asks for a callback URL even though
+ * the custom OAuth app authorizes through the device flow, which never
+ * redirects; the project site is used so the form can be submitted without the
+ * user inventing a value. The user must still enable the device flow in the
+ * app's settings after registering it.
  *
  * @param hostname - The GitHub hostname to register the app on.
  * @returns The URL with pre-filled query parameters.
@@ -129,7 +145,7 @@ export function getNewOAuthAppURL(hostname: Hostname): Link {
     `${APPLICATION.NAME} (Created on ${date})`,
   );
   newOAuthAppURL.searchParams.append('oauth_application[url]', 'https://gitify.io');
-  newOAuthAppURL.searchParams.append('oauth_application[callback_url]', 'gitify://oauth');
+  newOAuthAppURL.searchParams.append('oauth_application[callback_url]', 'https://gitify.io');
 
   return newOAuthAppURL.toString() as Link;
 }

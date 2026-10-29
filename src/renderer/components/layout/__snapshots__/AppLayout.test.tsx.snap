@@ -9,7 +9,6 @@ exports[`renderer/components/layout/AppLayout.tsx > renders itself & its childre
       aria-label="initial focus"
       class="sr-only focus-visible"
       data-focus-visible-added=""
-      data-testid="initial-focus-sentinel"
       type="button"
     />
     <div
@@ -39,7 +38,6 @@ exports[`renderer/components/layout/AppLayout.tsx > renders itself & its childre
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="sidebar-home"
           data-variant="invisible"
           type="button"
         >
@@ -156,7 +154,6 @@ exports[`renderer/components/layout/AppLayout.tsx > renders itself & its childre
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
-          data-testid="sidebar-quit"
           data-variant="invisible"
           type="button"
         >

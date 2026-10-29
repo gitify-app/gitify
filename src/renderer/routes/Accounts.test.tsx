@@ -4,8 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { navigateMock, renderWithProviders } from '../__helpers__/test-utils';
 import {
   mockGiteaAccount,
-  mockGitHubAppAccount,
-  mockOAuthAccount,
+  mockGitifyOAuthAppAccount,
+  mockCustomOAuthAppAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/account-mocks';
 
@@ -28,7 +28,11 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('renders itself & its children', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
+          accounts: [
+            mockPersonalAccessTokenAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
+          ],
         });
       });
 
@@ -41,7 +45,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         renderWithProviders(<AccountsRoute />);
       });
 
-      await userEvent.click(screen.getByTestId('header-nav-back'));
+      await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith(-1);
@@ -234,8 +238,8 @@ describe('renderer/routes/Accounts.tsx', () => {
               ...mockPersonalAccessTokenAccount,
               scopes: ['read:user', 'notifications'],
             },
-            mockOAuthAccount,
-            mockGitHubAppAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
           ],
         });
       });
@@ -244,7 +248,7 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       // Clicking the scopes button for the account with missing scopes
       // navigates to the scopes route where the user can investigate.
-      await userEvent.click(screen.getAllByTestId('account-view-scopes')[0]);
+      await userEvent.click(screen.getAllByRole('button', { name: /^View scopes for / })[0]);
 
       expect(navigateMock).toHaveBeenCalledWith('/account-scopes', {
         state: {
@@ -259,17 +263,21 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('sets account as primary account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
+          accounts: [
+            mockPersonalAccessTokenAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
+          ],
         });
       });
 
       expect(screen.getByTestId('accounts')).toBeInTheDocument();
       // All 3 accounts render the primary/set-primary button
-      expect(screen.getAllByTestId('account-set-primary')).toHaveLength(3);
+      expect(screen.getAllByRole('button', { name: /^Set as primary account/ })).toHaveLength(3);
 
-      await userEvent.click(screen.getAllByTestId('account-set-primary')[1]);
+      await userEvent.click(screen.getAllByRole('button', { name: /^Set as primary account/ })[1]);
 
-      expect(useAccountsStore.getState().accounts[0]).toBe(mockOAuthAccount);
+      expect(useAccountsStore.getState().accounts[0]).toBe(mockCustomOAuthAppAccount);
       expect(navigateMock).toHaveBeenCalledWith('/accounts', { replace: true });
     });
 
@@ -284,7 +292,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-refresh'));
+      await userEvent.click(screen.getByRole('button', { name: /^Refresh / }));
 
       expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(1);
@@ -303,7 +311,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-logout'));
+      await userEvent.click(screen.getByRole('button', { name: /^Logout / }));
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
     });
@@ -311,11 +319,15 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('shows view-scopes button for all auth methods', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount, mockGitHubAppAccount],
+          accounts: [
+            mockPersonalAccessTokenAccount,
+            mockCustomOAuthAppAccount,
+            mockGitifyOAuthAppAccount,
+          ],
         });
       });
 
-      expect(screen.getAllByTestId('account-view-scopes')).toHaveLength(3);
+      expect(screen.getAllByRole('button', { name: /^View scopes for / })).toHaveLength(3);
     });
 
     it('navigates to account-scopes when clicking view-scopes', async () => {
@@ -325,7 +337,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-view-scopes'));
+      await userEvent.click(screen.getByRole('button', { name: /^View scopes for / }));
 
       expect(navigateMock).toHaveBeenCalledWith('/account-scopes', {
         state: { account: mockPersonalAccessTokenAccount },
@@ -337,19 +349,19 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('shows github login methods after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
 
-      expect(screen.getByTestId('account-add-forge-github')).toHaveTextContent('GitHub');
+      expect(screen.getByRole('menuitem', { name: /^GitHub/ })).toHaveTextContent('GitHub');
 
-      await userEvent.click(screen.getByTestId('account-add-forge-github'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub/ }));
 
-      expect(screen.getByTestId('account-add-github')).toHaveTextContent('GitHub');
+      expect(screen.getByRole('menuitem', { name: /^GitHub$/ })).toHaveTextContent('GitHub');
 
-      await userEvent.click(screen.getByTestId('account-add-github'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub$/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow', {
@@ -360,16 +372,18 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('shows login with personal access token after selecting GitHub forge', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
-      await userEvent.click(screen.getByTestId('account-add-forge-github'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub/ }));
 
-      expect(screen.getByTestId('account-add-pat')).toHaveTextContent('Personal Access Token');
+      expect(screen.getByRole('menuitem', { name: /^Personal Access Token/ })).toHaveTextContent(
+        'Personal Access Token',
+      );
 
-      await userEvent.click(screen.getByTestId('account-add-pat'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Personal Access Token/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token', {
@@ -384,15 +398,17 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
-      await userEvent.click(screen.getByTestId('account-add-forge-github'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^GitHub/ }));
 
-      expect(screen.getByTestId('account-add-oauth-app')).toHaveTextContent('OAuth App');
+      expect(screen.getByRole('menuitem', { name: /^Custom OAuth App/ })).toHaveTextContent(
+        'Custom OAuth App',
+      );
 
-      await userEvent.click(screen.getByTestId('account-add-oauth-app'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Custom OAuth App/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/custom-oauth-app', {
         replace: true,
       });
     });
@@ -400,15 +416,15 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('navigates directly to gitea login (single method forge)', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
 
-      expect(screen.getByTestId('account-add-forge-gitea')).toHaveTextContent('Gitea');
+      expect(screen.getByRole('menuitem', { name: /^Gitea/ })).toHaveTextContent('Gitea');
 
-      await userEvent.click(screen.getByTestId('account-add-forge-gitea'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Gitea/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token', {
@@ -419,15 +435,15 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('navigates directly to bitbucket login (single method forge)', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-add-new'));
+      await userEvent.click(screen.getByRole('button', { name: 'Add new account' }));
 
-      expect(screen.getByTestId('account-add-forge-bitbucket')).toHaveTextContent('Bitbucket');
+      expect(screen.getByRole('menuitem', { name: /^Bitbucket/ })).toHaveTextContent('Bitbucket');
 
-      await userEvent.click(screen.getByTestId('account-add-forge-bitbucket'));
+      await userEvent.click(screen.getByRole('menuitem', { name: /^Bitbucket/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/bitbucket/personal-access-token', {
@@ -451,9 +467,9 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      expect(screen.queryByTestId('account-view-scopes')).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /^View scopes for / })).not.toBeInTheDocument();
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/personal-access-token', {
@@ -465,10 +481,10 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('re-authenticates a github app account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockGitHubAppAccount],
+          accounts: [mockGitifyOAuthAppAccount],
           notifications: [
             {
-              account: mockGitHubAppAccount,
+              account: mockGitifyOAuthAppAccount,
               notifications: [],
               error: getErrorDetails('BAD_CREDENTIALS'),
             },
@@ -476,22 +492,22 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow', {
         replace: true,
-        state: { account: mockGitHubAppAccount },
+        state: { account: mockGitifyOAuthAppAccount },
       });
     });
 
     it('re-authenticates an oauth app account', async () => {
       await act(async () => {
         renderWithProviders(<AccountsRoute />, {
-          accounts: [mockOAuthAccount],
+          accounts: [mockCustomOAuthAppAccount],
           notifications: [
             {
-              account: mockOAuthAccount,
+              account: mockCustomOAuthAppAccount,
               notifications: [],
               error: getErrorDetails('BAD_CREDENTIALS'),
             },
@@ -499,12 +515,12 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
-      expect(navigateMock).toHaveBeenCalledWith('/login/github/oauth-app', {
+      expect(navigateMock).toHaveBeenCalledWith('/login/github/custom-oauth-app', {
         replace: true,
-        state: { account: mockOAuthAccount },
+        state: { account: mockCustomOAuthAppAccount },
       });
     });
 
@@ -522,7 +538,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token', {
@@ -533,10 +549,10 @@ describe('renderer/routes/Accounts.tsx', () => {
 
     it('logs and skip re-authenticate when no login method matches', async () => {
       const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
-      // Gitea only registers PAT — a GitHub App method has no matching loginMethod.
+      // Gitea only registers PAT — a GitHub method has no matching loginMethod.
       const unsupportedAccount = {
         ...mockGiteaAccount,
-        method: 'GitHub App' as const,
+        method: 'Gitify OAuth App' as const,
       };
 
       await act(async () => {
@@ -552,7 +568,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-reauthenticate'));
+      await userEvent.click(screen.getByRole('button', { name: /^Re-authenticate / }));
 
       expect(navigateMock).not.toHaveBeenCalled();
       expect(rendererLogErrorSpy).toHaveBeenCalledWith(
@@ -599,7 +615,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      await userEvent.click(screen.getByTestId('account-refresh'));
+      await userEvent.click(screen.getByRole('button', { name: /^Refresh / }));
 
       expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/accounts', { replace: true });
@@ -614,7 +630,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         });
       });
 
-      expect(screen.queryByTestId('account-view-scopes')).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /^View scopes for / })).not.toBeInTheDocument();
     });
   });
 });

@@ -25,7 +25,6 @@ export function AppLayout({ children }: Readonly<AppLayoutProps>) {
       <button
         aria-label={t('layout.initial_focus', 'initial focus')}
         className="sr-only"
-        data-testid="initial-focus-sentinel"
         ref={setFocusRef}
         type="button"
       />

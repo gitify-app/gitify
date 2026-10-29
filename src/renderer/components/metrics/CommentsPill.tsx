@@ -21,6 +21,7 @@ export function CommentsPill({ commentCount }: Readonly<CommentsPillProps>) {
 
   return (
     <MetricPill
+      ariaLabel={description}
       color={IconColor.GRAY}
       contents={description}
       icon={CommentIcon}

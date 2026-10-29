@@ -1,3 +1,5 @@
+import { screen } from '@testing-library/react';
+
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
@@ -25,6 +27,35 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
     const tree = renderWithProviders(<ReviewsPill {...props} />);
 
     expect(tree.container).toMatchSnapshot();
+  });
+
+  it('renders a review required pill before any reviews', () => {
+    renderWithProviders(<ReviewsPill reviewDecision="REVIEW_REQUIRED" reviewers={[]} />);
+
+    expect(screen.getByRole('button', { name: 'Review required' })).toBeInTheDocument();
+  });
+
+  it('renders review required alongside existing reviews', () => {
+    renderWithProviders(
+      <ReviewsPill
+        reviewDecision="REVIEW_REQUIRED"
+        reviewers={[{ user: 'alice', state: 'APPROVED', threads: { resolved: 0, total: 0 } }]}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Review required' })).toBeInTheDocument();
+    expect(screen.getAllByRole('button')).toHaveLength(2);
+  });
+
+  it('does not render review required once approved', () => {
+    renderWithProviders(
+      <ReviewsPill
+        reviewDecision="APPROVED"
+        reviewers={[{ user: 'alice', state: 'APPROVED', threads: { resolved: 0, total: 0 } }]}
+      />,
+    );
+
+    expect(screen.queryByRole('button', { name: 'Review required' })).not.toBeInTheDocument();
   });
 
   it('renders unresolved thread status and activity in deterministic order', () => {

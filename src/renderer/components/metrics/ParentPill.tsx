@@ -34,7 +34,7 @@ export function ParentPill({ parent }: Readonly<ParentPillProps>) {
       color={IconColor.GRAY}
       contents={label}
       icon={IssueTrackedByIcon}
-      metric={`#${parent.number} ${parent.title}`}
+      metric={`#${parent.number}`}
       metricClassName="truncate max-w-[160px]"
       onClick={handleClick}
     />

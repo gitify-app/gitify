@@ -6,6 +6,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
 <div>
   <button
     aria-describedby="_r_0_"
+    aria-label="octocat approved these changes"
     type="button"
   >
     <span
@@ -13,7 +14,6 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -64,6 +64,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
   </span>
   <button
     aria-describedby="_r_1_"
+    aria-label="gitify-app requested changes"
     type="button"
   >
     <span
@@ -71,7 +72,6 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"
@@ -122,6 +122,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
   </span>
   <button
     aria-describedby="_r_2_"
+    aria-label="Review threads: 0 of 2 resolved"
     type="button"
   >
     <span
@@ -129,7 +130,6 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
       data-component="Label"
       data-size="small"
       data-variant="secondary"
-      tabindex="0"
     >
       <div
         class="prc-Stack-Stack-UQ9k6"

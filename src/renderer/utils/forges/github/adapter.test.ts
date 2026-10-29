@@ -1,15 +1,33 @@
-import { AgentIcon, AppsIcon, CopilotIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
+vi.mock('@octokit/oauth-methods', async () => {
+  const actual =
+    await vi.importActual<typeof import('@octokit/oauth-methods')>('@octokit/oauth-methods');
+  return {
+    ...actual,
+    createDeviceCode: vi.fn(),
+    exchangeDeviceCode: vi.fn(),
+  };
+});
+
+import { AgentIcon, CopilotIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
+
+import { createDeviceCode } from '@octokit/oauth-methods';
+
+import type { MockedFunction } from 'vite-plus/test';
 
 import { mockGitHubCliAccount, mockGitHubCloudAccount } from '../../../__mocks__/account-mocks';
 import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-mocks';
 
-import type { GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
+import type { ClientID, GitifyNotificationUser, Hostname, Link, Token } from '../../../types';
 
 import { githubAdapter } from './adapter';
 import * as client from './client';
 import * as octokit from './octokit';
 
 describe('renderer/utils/forges/github/adapter.ts', () => {
+  const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<
+    typeof createDeviceCode
+  >;
+
   describe('static fields', () => {
     it('identifies as github', () => {
       expect(githubAdapter.id).toBe('github');
@@ -18,7 +36,12 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
 
     it('exposes the device-flow / PAT / CLI / OAuth login methods', () => {
       const ids = githubAdapter.loginMethods.map((m) => m.testId);
-      expect(ids).toEqual(['login-github', 'login-pat', 'login-github-cli', 'login-oauth-app']);
+      expect(ids).toEqual([
+        'login-github',
+        'login-pat',
+        'login-github-cli',
+        'login-custom-oauth-app',
+      ]);
     });
 
     it('defaults the PAT hostname to github.com', () => {
@@ -54,20 +77,46 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
     });
 
     it('maps each auth method to its icon', () => {
-      expect(githubAdapter.getAuthMethodIcon('GitHub App')).toBe(AppsIcon);
-      expect(githubAdapter.getAuthMethodIcon('OAuth App')).toBe(PersonIcon);
+      expect(githubAdapter.getAuthMethodIcon('Gitify OAuth App')).toBe(PersonIcon);
+      expect(githubAdapter.getAuthMethodIcon('Custom OAuth App')).toBe(PersonIcon);
       expect(githubAdapter.getAuthMethodIcon('Personal Access Token')).toBe(KeyIcon);
     });
 
-    it('wires the device-flow and OAuth-app methods so the context can dispatch via the adapter', () => {
-      expect(githubAdapter.deviceFlow?.authMethod).toBe('GitHub App');
+    it('forwards a custom client ID through the device-flow start', async () => {
+      createDeviceCodeMock.mockResolvedValueOnce({
+        data: {
+          device_code: 'device-code',
+          user_code: 'user-code',
+          verification_uri: 'https://github.example.com/login/device',
+          expires_in: 600,
+          interval: 5,
+        },
+      } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
+
+      const session = await githubAdapter.deviceFlow!.start(
+        'github.example.com' as Hostname,
+        undefined,
+        'CUSTOM_CLIENT_ID_123' as ClientID,
+      );
+
+      expect(createDeviceCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'CUSTOM_CLIENT_ID_123',
+        scopes: expect.anything(),
+        request: expect.any(Function),
+      });
+      expect(session.clientId).toBe('CUSTOM_CLIENT_ID_123');
+    });
+
+    it('wires the device-flow and custom-OAuth-app methods so the context can dispatch via the adapter', () => {
+      expect(githubAdapter.deviceFlow?.authMethod).toBe('Gitify OAuth App');
       expect(githubAdapter.deviceFlow?.start).toBeDefined();
       expect(githubAdapter.deviceFlow?.poll).toBeDefined();
+      expect(githubAdapter.deviceFlow?.describeStartError).toBeDefined();
       expect(githubAdapter.deviceFlow?.getRevokeAccessUrl).toBeDefined();
-      expect(githubAdapter.oauthWebApp?.performWebOAuth).toBeDefined();
-      expect(githubAdapter.oauthWebApp?.exchangeAuthCodeForToken).toBeDefined();
-      expect(githubAdapter.oauthWebApp?.validateClientId).toBeDefined();
-      expect(githubAdapter.oauthWebApp?.getNewOAuthAppUrl).toBeDefined();
+      expect(githubAdapter.customOAuthApp?.authMethod).toBe('Custom OAuth App');
+      expect(githubAdapter.customOAuthApp?.validateClientId).toBeDefined();
+      expect(githubAdapter.customOAuthApp?.getNewOAuthAppUrl).toBeDefined();
     });
   });
 

@@ -1,14 +1,16 @@
+import type { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { IssueRelatesToIcon } from '@primer/octicons-react';
 
-import { IconColor } from '../../types';
+import { type GitifyLinkedIssue, IconColor } from '../../types';
 
-import { formatMetricDescription } from '../../utils/notifications/formatters';
+import { formatGitHubNumber, formatMetricDescription } from '../../utils/notifications/formatters';
+import { openExternalLink } from '../../utils/system/comms';
 import { MetricPill } from './MetricPill';
 
 export interface LinkedIssuesPillProps {
-  linkedIssues: string[];
+  linkedIssues: GitifyLinkedIssue[];
 }
 
 export function LinkedIssuesPill({ linkedIssues }: Readonly<LinkedIssuesPillProps>) {
@@ -21,18 +23,28 @@ export function LinkedIssuesPill({ linkedIssues }: Readonly<LinkedIssuesPillProp
     linkedIssues.length,
     t('metrics.issue', 'issue'),
     (_, noun) =>
-      t('metrics.linked_to', 'Linked to {{noun}}: {{issues}}', {
+      t('metrics.linked_to', 'Linked {{noun}}: {{issues}}', {
         noun,
-        issues: linkedIssues.join(', '),
+        issues: linkedIssues.map((issue) => formatGitHubNumber(issue.number)).join(', '),
       }),
   );
 
+  const handleClick =
+    linkedIssues.length === 1
+      ? (event: MouseEvent<HTMLButtonElement>) => {
+          event.stopPropagation();
+          openExternalLink(linkedIssues[0].url);
+        }
+      : undefined;
+
   return (
     <MetricPill
+      ariaLabel={description}
       color={IconColor.GRAY}
       contents={description}
       icon={IssueRelatesToIcon}
       metric={linkedIssues.length}
+      onClick={handleClick}
     />
   );
 }

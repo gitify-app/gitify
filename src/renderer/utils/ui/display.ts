@@ -1,5 +1,3 @@
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@primer/octicons-react';
-
 import type { Chevron } from '../../types';
 
 import i18n from '../../i18n';
@@ -11,12 +9,12 @@ export interface ParsedCodePart {
 }
 
 /**
- * Returns the appropriate chevron icon and accessible label for a collapsible section.
+ * Returns the appropriate chevron direction and accessible label for a collapsible section.
  *
  * @param hasNotifications - Whether the section has any notifications to display.
  * @param isVisible - Whether the section is currently expanded/visible.
  * @param type - The type of section (`'account'` or `'repository'`).
- * @returns A `Chevron` object containing the icon component and its accessible label.
+ * @returns A `Chevron` object containing the direction and its accessible label.
  */
 export function getChevronDetails(
   hasNotifications: boolean,
@@ -30,20 +28,20 @@ export function getChevronDetails(
 
   if (!hasNotifications) {
     return {
-      icon: ChevronLeftIcon,
+      direction: 'left',
       label: i18n.t('chevron.none', 'No notifications for {{type}}', { type: typeLabel }),
     };
   }
 
   if (isVisible) {
     return {
-      icon: ChevronDownIcon,
+      direction: 'down',
       label: i18n.t('chevron.hide', 'Hide {{type}} notifications', { type: typeLabel }),
     };
   }
 
   return {
-    icon: ChevronRightIcon,
+    direction: 'right',
     label: i18n.t('chevron.show', 'Show {{type}} notifications', { type: typeLabel }),
   };
 }

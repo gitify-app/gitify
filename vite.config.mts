@@ -248,7 +248,7 @@ export default defineConfig({
         'process.env.OAUTH_CLIENT_ID': JSON.stringify('Ov23liQIkFs5ehQLNzHF'),
       },
   lint: {
-    plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import', 'vitest'],
+    plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import', 'vitest', 'jsdoc'],
     // Enable the type-aware path so `vp check` runs TypeScript type checks
     // natively (via the TS Go toolchain / tsgolint). `typeCheck` requires
     // `typeAware`; enabling both also turns on the type-aware lint rules.
@@ -296,6 +296,45 @@ export default defineConfig({
       'unicorn/prefer-number-properties': 'error',
     },
     overrides: [
+      {
+        // TSDoc conventions apply to the TypeScript sources. The JavaScript
+        // build scripts use JSDoc for type hints and are intentionally out of
+        // scope for the TypeScript-specific rules.
+        files: ['src/**/*.ts', 'src/**/*.tsx'],
+        rules: {
+          'jsdoc/check-tag-names': ['error', { typed: true }],
+          'jsdoc/no-blank-blocks': 'error',
+          'jsdoc/require-param-name': 'error',
+          'jsdoc/require-param-description': 'error',
+          'jsdoc/require-returns-description': 'error',
+        },
+      },
+      {
+        // Contract-heavy scopes: every documented function parameter must have
+        // a matching @param tag.
+        files: ['src/preload/**/*.ts', 'src/shared/**/*.ts'],
+        excludeFiles: TEST_FILES,
+        rules: {
+          'jsdoc/require-param': 'error',
+        },
+      },
+      {
+        // Shared utilities have block-bodied functions, so the return rule does
+        // not produce false positives on void concise arrows here.
+        files: ['src/shared/**/*.ts'],
+        excludeFiles: TEST_FILES,
+        rules: {
+          'jsdoc/require-returns': 'error',
+        },
+      },
+      {
+        // Next clean scope after preload/shared.
+        files: ['src/renderer/utils/auth/**/*.ts'],
+        excludeFiles: TEST_FILES,
+        rules: {
+          'jsdoc/require-param': 'error',
+        },
+      },
       {
         // Renderer boundary: every renderer module reaches the main process
         // through the preload bridge (`window.gitify`). Importing main/preload

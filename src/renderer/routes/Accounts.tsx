@@ -256,7 +256,6 @@ export function AccountsRoute() {
                             ? t('accounts.current_primary', 'current primary')
                             : t('accounts.click_to_set', 'click to set'),
                       })}
-                      data-testid="account-set-primary"
                       icon={i === 0 ? StarFillIcon : StarIcon}
                       onClick={() => setAsPrimaryAccount(account)}
                       size="small"
@@ -268,7 +267,6 @@ export function AccountsRoute() {
                         aria-label={t('accounts.view_scopes', 'View scopes for {{login}}', {
                           login: account.user?.login,
                         })}
-                        data-testid="account-view-scopes"
                         icon={getScopeIcon(account)}
                         onClick={() =>
                           navigate('/account-scopes', {
@@ -289,7 +287,6 @@ export function AccountsRoute() {
                         aria-label={t('accounts.reauthenticate', 'Re-authenticate {{login}}', {
                           login: account.user?.login,
                         })}
-                        data-testid="account-reauthenticate"
                         icon={KeyIcon}
                         onClick={() => handleReAuthenticate(account)}
                         size="small"
@@ -301,7 +298,6 @@ export function AccountsRoute() {
                       aria-label={t('accounts.refresh', 'Refresh {{login}}', {
                         login: account.user?.login,
                       })}
-                      data-testid="account-refresh"
                       icon={SyncIcon}
                       loading={loadingStates[accountUUID] || false}
                       onClick={() => handleRefresh(account)}
@@ -312,7 +308,6 @@ export function AccountsRoute() {
                       aria-label={t('accounts.logout', 'Logout {{login}}', {
                         login: account.user?.login,
                       })}
-                      data-testid="account-logout"
                       icon={SignOutIcon}
                       onClick={() => logoutAccount(account)}
                       size="small"

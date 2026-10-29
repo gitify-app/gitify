@@ -57,7 +57,7 @@ export function SettingsToggle({
           >
             {label}
           </button>
-          {tooltip && <HelpPopover name={`tooltip-${name}`} content={tooltip} />}
+          {tooltip && <HelpPopover content={tooltip} label={label} name={`tooltip-${name}`} />}
         </div>
 
         {caption && (

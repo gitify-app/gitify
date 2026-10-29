@@ -45,7 +45,6 @@ export function Sidebar() {
       <Stack align="center" direction="vertical" gap="condensed" padding="normal">
         <IconButton
           aria-label={APPLICATION.NAME}
-          data-testid="sidebar-home"
           description={t('sidebar.home', 'Home')}
           icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
@@ -59,7 +58,6 @@ export function Sidebar() {
           <>
             <IconButton
               aria-label={t('sidebar.notifications', 'Notifications')}
-              data-testid="sidebar-notifications"
               description={
                 fetchReadNotifications
                   ? t('sidebar.notifications_count', '{{count}} notifications ↗', {
@@ -79,7 +77,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label={t('sidebar.focused_mode', 'Toggle focused mode')}
-              data-testid="sidebar-focused-mode"
               description={
                 participating
                   ? t('sidebar.focused', 'Focused (participating only)')
@@ -95,7 +92,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label={t('sidebar.filters', 'Filters')}
-              data-testid="sidebar-filter-notifications"
               description={t('sidebar.filter_notifications', 'Filter notifications')}
               icon={FilterIcon}
               keybindingHint={shortcuts.filters.key}
@@ -107,7 +103,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label={t('sidebar.my_issues', 'My issues ↗')}
-              data-testid="sidebar-my-issues"
               icon={IssueOpenedIcon}
               keybindingHint={shortcuts.myIssues.key}
               onClick={() => shortcuts.myIssues.action()}
@@ -118,7 +113,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label={t('sidebar.my_pull_requests', 'My pull requests ↗')}
-              data-testid="sidebar-my-pull-requests"
               icon={GitPullRequestIcon}
               keybindingHint={shortcuts.myPullRequests.key}
               onClick={() => shortcuts.myPullRequests.action()}
@@ -135,7 +129,6 @@ export function Sidebar() {
           <>
             <IconButton
               aria-label={t('sidebar.refresh', 'Refresh')}
-              data-testid="sidebar-refresh"
               description={t('sidebar.refresh_notifications', 'Refresh notifications')}
               loading={isLoading || isFetching}
               disabled={isLoading || isFetching}
@@ -149,7 +142,6 @@ export function Sidebar() {
 
             <IconButton
               aria-label={t('sidebar.settings', 'Settings')}
-              data-testid="sidebar-settings"
               description={t('settings.title', 'Settings')}
               icon={GearIcon}
               keybindingHint={shortcuts.settings.key}
@@ -166,7 +158,6 @@ export function Sidebar() {
             aria-label={t('settings.footer.quit', 'Quit {{appName}}', {
               appName: APPLICATION.NAME,
             })}
-            data-testid="sidebar-quit"
             icon={XCircleIcon}
             keybindingHint={shortcuts.quit.key}
             onClick={() => shortcuts.quit.action()}

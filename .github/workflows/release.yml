@@ -70,23 +70,27 @@ jobs:
           fi
 
           target="Release ${version}"
+          description="Upcoming release; merged pull requests ship in v${version}."
           open=$(gh api --method GET "repos/${REPO}/milestones?state=open&per_page=100" \
-            --jq '[.[] | {number, title}]')
+            --jq '[.[] | {number, title, description: (.description // "")}]')
           count=$(printf '%s' "${open}" | jq 'length')
 
           if [ "${count}" -eq 0 ]; then
             gh api --method POST "repos/${REPO}/milestones" \
               -f "title=${target}" \
-              -f "description=Upcoming release; merged pull requests ship in v${version}."
+              -f "description=${description}"
             echo "Created open milestone '${target}'"
           elif [ "${count}" -eq 1 ]; then
             current=$(printf '%s' "${open}" | jq -r '.[0].title')
-            if [ "${current}" != "${target}" ]; then
+            current_description=$(printf '%s' "${open}" | jq -r '.[0].description')
+            if [ "${current}" != "${target}" ] || [ "${current_description}" != "${description}" ]; then
               number=$(printf '%s' "${open}" | jq -r '.[0].number')
               # Rename (not recreate): pull requests already attached stay attached
               # and still ship in the bumped version.
-              gh api --method PATCH "repos/${REPO}/milestones/${number}" -f "title=${target}"
-              echo "Renamed open milestone '${current}' to '${target}'"
+              gh api --method PATCH "repos/${REPO}/milestones/${number}" \
+                -f "title=${target}" \
+                -f "description=${description}"
+              echo "Updated open milestone '${current}' to '${target}'"
             else
               echo "Open milestone '${target}' already exists"
             fi

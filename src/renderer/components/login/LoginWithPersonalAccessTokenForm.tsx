@@ -60,8 +60,8 @@ export interface LoginWithPersonalAccessTokenFormProps {
 /**
  * Shared personal-access-token login form.
  *
- * Forge-specific route components (`routes/github`, `routes/gitea`) supply
- * their own copy via props so this form stays free of forge conditionals.
+ * Forge-specific route components under `routes/` supply their own copy via
+ * props so this form stays free of forge conditionals.
  */
 export function LoginWithPersonalAccessTokenForm({
   forge,
@@ -180,7 +180,6 @@ export function LoginWithPersonalAccessTokenForm({
               <TextInput
                 aria-invalid={errors.username ? 'true' : 'false'}
                 block
-                data-testid="login-username"
                 name="username"
                 onChange={handleInputChange}
                 placeholder={usernamePlaceholder}
@@ -267,7 +266,6 @@ export function LoginWithPersonalAccessTokenForm({
       <Footer justify="space-between">
         <Tooltip direction="ne" text={docsTooltip}>
           <Button
-            data-testid="login-docs"
             leadingVisual={BookIcon}
             onClick={() => openExternalLink(adapter.documentationUrl)}
             size="small"

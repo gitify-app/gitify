@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 
 import {
+  mockCustomOAuthAppAccount,
   mockGiteaAccount,
   mockGitHubCliAccount,
   mockGitHubCloudAccount,
@@ -8,7 +9,8 @@ import {
 } from '../__mocks__/account-mocks';
 import { mockRawUser } from '../utils/forges/github/__mocks__/response-mocks';
 
-import type { Account, Forge, Hostname, Link, Token } from '../types';
+import type { Account, ClientID, Forge, Hostname, Link, Token } from '../types';
+import type { AuthMethod } from '../utils/auth/types';
 import type { GetAuthenticatedUserResponse } from '../utils/forges/github/types';
 
 import { getRecommendedScopeNames } from '../utils/auth/scopes';
@@ -90,6 +92,35 @@ describe('renderer/stores/useAccountsStore.ts', () => {
         );
       },
     );
+
+    it('relabels a legacy GitHub App account as Gitify OAuth App without losing its token', () => {
+      const [account] = sanitizeAccounts([
+        { ...mockGitHubCloudAccount, method: 'GitHub App' as AuthMethod },
+      ]);
+
+      expect(account.method).toBe('Gitify OAuth App');
+      expect(account.token).toBe(mockGitHubCloudAccount.token);
+    });
+
+    it('relabels a legacy OAuth App account as Custom OAuth App and keeps its client ID', () => {
+      const [account] = sanitizeAccounts([
+        { ...mockCustomOAuthAppAccount, method: 'OAuth App' as AuthMethod },
+      ]);
+
+      expect(account.method).toBe('Custom OAuth App');
+      expect(account.token).toBe(mockCustomOAuthAppAccount.token);
+      expect(account.clientId).toBe('CUSTOM_CLIENT_ID_123');
+    });
+
+    it('relabels a legacy OAuth App account that never stored a client ID', () => {
+      const [account] = sanitizeAccounts([
+        { ...mockCustomOAuthAppAccount, method: 'OAuth App' as AuthMethod, clientId: undefined },
+      ]);
+
+      expect(account.method).toBe('Custom OAuth App');
+      expect(account.token).toBe(mockCustomOAuthAppAccount.token);
+      expect(account.clientId).toBeUndefined();
+    });
   });
 
   it.each([
@@ -201,16 +232,24 @@ describe('renderer/stores/useAccountsStore.ts', () => {
         ]);
       });
 
-      test('adds oauth app account', async () => {
+      test('adds a custom OAuth app account with its client ID', async () => {
         await useAccountsStore
           .getState()
-          .createAccount('OAuth App', '123-456' as Token, 'github.com' as Hostname);
+          .createAccount(
+            'Custom OAuth App',
+            '123-456' as Token,
+            'github.com' as Hostname,
+            'github',
+            undefined,
+            'CUSTOM_CLIENT_ID_123' as ClientID,
+          );
 
         expect(useAccountsStore.getState().accounts).toEqual([
           {
             forge: 'github',
             hostname: 'github.com' as Hostname,
-            method: 'OAuth App',
+            method: 'Custom OAuth App',
+            clientId: 'CUSTOM_CLIENT_ID_123' as ClientID,
             platform: 'GitHub Cloud',
             scopes: getRecommendedScopeNames(),
             token: 'encrypted' as Token,
@@ -306,16 +345,24 @@ describe('renderer/stores/useAccountsStore.ts', () => {
         ]);
       });
 
-      test('adds oauth app account', async () => {
+      test('adds a custom OAuth app account', async () => {
         await useAccountsStore
           .getState()
-          .createAccount('OAuth App', '123-456' as Token, 'github.gitify.io' as Hostname);
+          .createAccount(
+            'Custom OAuth App',
+            '123-456' as Token,
+            'github.gitify.io' as Hostname,
+            'github',
+            undefined,
+            'CUSTOM_CLIENT_ID_123' as ClientID,
+          );
 
         expect(useAccountsStore.getState().accounts).toEqual([
           {
             forge: 'github',
             hostname: 'github.gitify.io' as Hostname,
-            method: 'OAuth App',
+            method: 'Custom OAuth App',
+            clientId: 'CUSTOM_CLIENT_ID_123' as ClientID,
             platform: 'GitHub Enterprise Server',
             scopes: getRecommendedScopeNames(),
             token: 'encrypted' as Token,

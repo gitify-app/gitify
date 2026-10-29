@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 import { Constants } from '../constants';
 
-import type { Account, Forge, Hostname, Token } from '../types';
+import type { Account, ClientID, Forge, Hostname, Token } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 import type { AccountsState, AccountsStore } from './types';
 
@@ -14,10 +14,29 @@ import { decryptValue, encryptValue } from '../utils/system/comms';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 
 /**
+ * Map a persisted auth-method label onto the current vocabulary.
+ *
+ * Accounts stored before the custom OAuth app flow moved to the device flow
+ * carry the retired `GitHub App` / `OAuth App` labels; relabel them so their
+ * existing tokens keep working without forcing a re-login.
+ */
+function migrateLegacyAuthMethod(method: string): AuthMethod {
+  switch (method) {
+    case 'GitHub App':
+      return 'Gitify OAuth App';
+    case 'OAuth App':
+      return 'Custom OAuth App';
+    default:
+      return method as AuthMethod;
+  }
+}
+
+/**
  * Sanitise persisted accounts state. Persisted JSON is untrusted (XSS, malicious
  * extension, file-system tampering), so we project only the known fields,
- * coerce `forge` to a registered value, and drop accounts with a
- * structurally invalid hostname before the renderer ever touches them.
+ * coerce `forge` to a registered value, migrate retired auth-method labels, and
+ * drop accounts with a structurally invalid hostname before the renderer ever
+ * touches them.
  */
 export function sanitizeAccounts(accounts: Account[]): Account[] {
   return accounts.flatMap((a) => {
@@ -27,11 +46,12 @@ export function sanitizeAccounts(accounts: Account[]): Account[] {
     }
     const sanitised: Account = {
       forge,
-      method: a.method,
+      method: migrateLegacyAuthMethod(a.method as string),
       platform: a.platform,
       version: a.version,
       hostname: a.hostname,
       token: a.token,
+      clientId: a.clientId,
       username: a.username,
       user: a.user,
       scopes: a.scopes,
@@ -57,6 +77,7 @@ const useAccountsStore = create<AccountsStore>()(
         hostname: Hostname,
         forge: Forge = 'github',
         username?: string,
+        clientId?: ClientID,
       ) => {
         const encryptedToken = (await encryptValue(token)) as Token;
 
@@ -66,6 +87,7 @@ const useAccountsStore = create<AccountsStore>()(
           method: method,
           platform: getAdapter(forge).getPlatform(hostname),
           token: encryptedToken,
+          clientId,
           username,
           user: null, // Will be updated during the refresh call below
         };

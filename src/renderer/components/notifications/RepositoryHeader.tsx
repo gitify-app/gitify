@@ -17,6 +17,7 @@ import { isMarkAsDoneFeatureSupported } from '../../utils/api/features';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openRepository } from '../../utils/system/links';
 import { getChevronDetails } from '../../utils/ui/display';
+import { getChevronIcon } from '../../utils/ui/icons';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 export interface RepositoryHeaderProps {
@@ -54,7 +55,7 @@ export function RepositoryHeader({
     (notification) => !notification.unread,
   );
 
-  const Chevron = getChevronDetails(true, !isCollapsed, 'repository');
+  const chevron = getChevronDetails(true, !isCollapsed, 'repository');
 
   return (
     <Stack
@@ -112,8 +113,8 @@ export function RepositoryHeader({
 
           <HoverButton
             action={onToggle}
-            icon={Chevron.icon}
-            label={Chevron.label}
+            icon={getChevronIcon(chevron.direction)}
+            label={chevron.label}
             testid="repository-toggle"
           />
         </HoverGroup>

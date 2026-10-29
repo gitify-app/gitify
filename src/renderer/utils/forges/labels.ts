@@ -15,8 +15,8 @@ export function translateLoginMethodLabel(label: string): string {
       return i18n.t('forge.method.github_cli', 'GitHub CLI');
     case 'Managed by the GitHub CLI':
       return i18n.t('forge.method.managed_by_cli', 'Managed by the GitHub CLI');
-    case 'OAuth App':
-      return i18n.t('forge.method.oauth_app', 'OAuth App');
+    case 'Custom OAuth App':
+      return i18n.t('forge.method.custom_oauth_app', 'Custom OAuth App');
     case 'Personal Access Token':
       return i18n.t('forge.method.personal_access_token', 'Personal Access Token');
     default:
@@ -50,14 +50,14 @@ export function translateForgeTagline(tagline: string | undefined): string | und
  */
 export function translateAuthMethod(method: AuthMethod): string {
   switch (method) {
-    case 'GitHub App':
-      return i18n.t('auth.method.github_app', 'GitHub App');
+    case 'Gitify OAuth App':
+      return i18n.t('auth.method.gitify_oauth_app', 'Gitify OAuth App');
+    case 'Custom OAuth App':
+      return i18n.t('auth.method.custom_oauth_app', 'Custom OAuth App');
     case 'GitHub CLI':
       return i18n.t('auth.method.github_cli', 'GitHub CLI');
     case 'Personal Access Token':
       return i18n.t('auth.method.personal_access_token', 'Personal Access Token');
-    case 'OAuth App':
-      return i18n.t('auth.method.oauth_app', 'OAuth App');
     default:
       return method;
   }

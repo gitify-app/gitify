@@ -19,7 +19,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
   it('navigates back', async () => {
     renderWithProviders(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
-    await userEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(-1);
@@ -33,7 +33,7 @@ describe('renderer/components/primitives/Header.tsx', () => {
       { fetchNotifications: fetchNotificationsMock },
     );
 
-    await userEvent.click(screen.getByTestId('header-nav-back'));
+    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
 
     expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledTimes(1);

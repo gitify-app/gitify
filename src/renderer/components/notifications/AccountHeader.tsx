@@ -14,6 +14,7 @@ import { type Account, type GitifyError, Size } from '../../types';
 import { getAdapter } from '../../utils/forges/registry';
 import { openAccountProfile, openHostIssues, openHostPulls } from '../../utils/system/links';
 import { getChevronDetails } from '../../utils/ui/display';
+import { getChevronIcon } from '../../utils/ui/icons';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 
 export interface AccountHeaderProps {
@@ -32,7 +33,7 @@ export function AccountHeader({
   onToggle,
 }: Readonly<AccountHeaderProps>) {
   const { t } = useTranslation();
-  const Chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
+  const chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
 
   return (
     <Stack
@@ -84,8 +85,8 @@ export function AccountHeader({
 
         <HoverButton
           action={onToggle}
-          icon={Chevron.icon}
-          label={Chevron.label}
+          icon={getChevronIcon(chevron.direction)}
+          label={chevron.label}
           testid="account-toggle"
         />
       </HoverGroup>

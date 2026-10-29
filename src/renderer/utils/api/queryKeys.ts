@@ -25,8 +25,10 @@ export const notificationsKeys = {
    * accounts always resolves to a distinct cache entry.
    *
    * @param accountUUIDs - The UUIDs of all accounts being fetched
-   * @param fetchReadNotifications - Whether to fetch only unread notifications
-   * @param participating - Whether to fetch only participating notifications
+   * @param fetchReadNotifications - Whether to also fetch read notifications
+   * (maps to GitHub's `all` parameter)
+   * @param participating - Whether to restrict results to participating
+   * notifications (maps to GitHub's `participating` parameter)
    */
   list: (accountUUIDs: AccountUUID[], fetchReadNotifications: boolean, participating: boolean) =>
     [...notificationsKeys.all, accountUUIDs, fetchReadNotifications, participating] as const,

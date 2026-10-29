@@ -79,7 +79,11 @@ export function AccountScopesRoute() {
                   direction="horizontal"
                   gap="condensed"
                 >
-                  <ScopeStatusIcon granted={hasRequired} size={12} />
+                  <ScopeStatusIcon
+                    granted={hasRequired}
+                    size={12}
+                    subject={t('account_scopes.required_scopes', 'Required scopes')}
+                  />
                   <Text>{t('account_scopes.required', 'Required')}</Text>
                 </Stack>
 
@@ -114,7 +118,7 @@ export function AccountScopesRoute() {
                           <Text className="text-xs font-mono">{name}</Text>
                           <Text className="text-xs opacity-60">{description}</Text>
                         </Stack>
-                        <ScopeStatusIcon granted={granted} withTestId />
+                        <ScopeStatusIcon granted={granted} subject={name} />
                       </Stack>
                     );
                   })
@@ -128,7 +132,14 @@ export function AccountScopesRoute() {
                   direction="horizontal"
                   gap="condensed"
                 >
-                  <ScopeStatusIcon granted={hasDetailedNotifications} size={12} />
+                  <ScopeStatusIcon
+                    granted={hasDetailedNotifications}
+                    size={12}
+                    subject={t(
+                      'account_scopes.detailed_notifications_scopes',
+                      'Detailed notifications scopes',
+                    )}
+                  />
                   <Text>
                     {t('account_scopes.detailed_notifications', 'Detailed Notifications')}
                   </Text>
@@ -147,7 +158,7 @@ export function AccountScopesRoute() {
                     <Text className="text-xs font-mono">{OAUTH_SCOPE.REPO.name}</Text>
                     <Text className="text-xs opacity-60">{OAUTH_SCOPE.REPO.description}</Text>
                   </Stack>
-                  <ScopeStatusIcon granted={repoGranted} withTestId />
+                  <ScopeStatusIcon granted={repoGranted} subject={OAUTH_SCOPE.REPO.name} />
                 </Stack>
 
                 {/* public_repo row */}
@@ -168,7 +179,7 @@ export function AccountScopesRoute() {
                   <ScopeStatusIcon
                     granted={publicRepoGranted}
                     notApplicable={repoGranted}
-                    withTestId
+                    subject={OAUTH_SCOPE.PUBLIC_REPO.name}
                   />
                 </Stack>
               </Stack>
@@ -207,11 +218,7 @@ export function AccountScopesRoute() {
       </Contents>
 
       <Footer justify="end">
-        <Button
-          data-testid="account-scopes-manage-link"
-          leadingVisual={LinkExternalIcon}
-          onClick={() => openAccountSettings(account)}
-        >
+        <Button leadingVisual={LinkExternalIcon} onClick={() => openAccountSettings(account)}>
           {t('account_scopes.developer_settings', 'Developer settings')}
         </Button>
       </Footer>

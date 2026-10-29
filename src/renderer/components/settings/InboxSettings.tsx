@@ -100,7 +100,6 @@ export function InboxSettings() {
                   'settings.notifications.fetch_interval_decrease',
                   'Decrease fetch interval',
                 )}
-                data-testid="settings-fetch-interval-decrease"
                 icon={DashIcon}
                 onClick={() => {
                   const newInterval = Math.max(
@@ -132,7 +131,6 @@ export function InboxSettings() {
                   'settings.notifications.fetch_interval_increase',
                   'Increase fetch interval',
                 )}
-                data-testid="settings-fetch-interval-increase"
                 icon={PlusIcon}
                 onClick={() => {
                   const newInterval = Math.min(
@@ -153,7 +151,6 @@ export function InboxSettings() {
                   'settings.notifications.fetch_interval_reset',
                   'Reset fetch interval',
                 )}
-                data-testid="settings-fetch-interval-reset"
                 icon={SyncIcon}
                 onClick={() => {
                   updateSetting('fetchInterval', Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);

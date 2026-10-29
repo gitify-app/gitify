@@ -2,9 +2,11 @@
   "account_scopes": {
     "additional_scopes": "Additional scopes",
     "detailed_notifications": "Detailed Notifications",
+    "detailed_notifications_scopes": "Detailed notifications scopes",
     "developer_settings": "Developer settings",
     "not_loaded": "Scopes not loaded — try refreshing the account.",
     "required": "Required",
+    "required_scopes": "Required scopes",
     "title": "Scopes"
   },
   "accounts": {
@@ -31,9 +33,9 @@
   },
   "auth": {
     "method": {
-      "github_app": "GitHub App",
+      "custom_oauth_app": "Custom OAuth App",
       "github_cli": "GitHub CLI",
-      "oauth_app": "OAuth App",
+      "gitify_oauth_app": "Gitify OAuth App",
       "personal_access_token": "Personal Access Token"
     }
   },
@@ -46,6 +48,7 @@
   },
   "common": {
     "cancel": "Cancel",
+    "continue": "Continue",
     "docs": "Docs",
     "login": "Login"
   },
@@ -167,9 +170,9 @@
   "forge": {
     "method": {
       "atlassian_api_token": "Atlassian API Token",
+      "custom_oauth_app": "Custom OAuth App",
       "github_cli": "GitHub CLI",
       "managed_by_cli": "Managed by the GitHub CLI",
-      "oauth_app": "OAuth App",
       "personal_access_token": "Personal Access Token"
     },
     "tagline": {
@@ -180,7 +183,10 @@
     }
   },
   "header": {
-    "go_back": "Go Back"
+    "go_back": "Go back"
+  },
+  "help": {
+    "button_label": "Help: {{label}}"
   },
   "layout": {
     "initial_focus": "initial focus"
@@ -198,6 +204,15 @@
       "title": "Login with GitHub CLI"
     },
     "continue_with": "Continue with {{name}}",
+    "custom_oauth": {
+      "authorize_title": "Authorize with your OAuth app",
+      "client_id_placeholder": "Your generated client ID (20 characters)",
+      "create_app": "Create new OAuth app",
+      "enable_device_flow": "and enable its <0>device flow</0>, then use its client ID below.",
+      "hostname_caption": "Change only if you are using GitHub Enterprise Server",
+      "intro": "Authorize Gitify with your own GitHub OAuth app. Create an app, enable its device flow, then paste its client ID below.",
+      "title": "Login with Custom OAuth App"
+    },
     "device": {
       "auth_failed": "Authentication failed. Please try again.",
       "authorize": "Authorize the app <0>using this code.</0>",
@@ -205,6 +220,10 @@
       "code_expired": "Device code expired. Please start again.",
       "copy_code": "Copy device code",
       "copy_link": "Copy link",
+      "developer_settings_link": "{{forge}} → Developer Settings",
+      "error_disabled": "Device flow is not enabled for this OAuth app. Enable it in the app's settings on {{hostname}}, then try again.",
+      "error_disabled_custom": "Device flow is not enabled for this OAuth app. Enable it in that app's settings under {{url}}, then try again.",
+      "error_invalid_client_id": "The client ID is not valid for {{hostname}}. Check it and try again.",
       "initializing": "Initializing",
       "initializing_authentication": "Initializing authentication...",
       "login_errors": "Login errors",
@@ -212,37 +231,28 @@
       "opened": "Opened {{hostname}}",
       "receive_notifications_for": "Receive notifications for:",
       "revoke_note": "Note: to change previously granted permissions, revoke Gitify's access at <0>{{label}}</0>, then re-authorize above.",
+      "revoke_note_custom": "Note: to change previously granted permissions, revoke your app's access at <0>{{label}}</0>, then re-authorize above.",
       "scope_full_description": "Best experience, but requires broader permissions.",
       "scope_full_title": "Public and Private",
       "scope_public_description": "Limited experience with least privilege permissions.",
       "scope_public_title": "Public",
       "scopes": "Scopes: {{scopes}}",
       "start_failed": "Failed to start authentication. Please try again.",
-      "title": "Authorize with GitHub",
+      "title": "Authorize Gitify's OAuth App",
       "waiting": "Waiting for authorization..."
     },
     "hide_token": "Hide token",
     "oauth": {
       "client_id": "Client ID",
       "client_id_invalid": "Client ID format is invalid",
-      "client_id_placeholder": "Your generated client id (20 characters)",
       "client_id_required": "Client ID is required",
-      "client_secret": "Client Secret",
-      "client_secret_invalid": "Client Secret format is invalid",
-      "client_secret_placeholder": "Your generated client secret (40 characters)",
-      "client_secret_required": "Client Secret is required",
-      "create_oauth_app": "Create new OAuth App",
-      "create_oauth_app_hint": "and use your <0>client id & secret</0> below.",
       "docs_tooltip": "GitHub documentation",
-      "hostname": "Hostname",
-      "hostname_caption": "Change only if you are using GitHub Enterprise Server",
-      "invalid_credentials": "Failed to validate provided Client ID and Secret against {{hostname}}",
-      "title": "Login with OAuth App",
-      "validation_errors": "Validation errors"
+      "hostname": "Hostname"
     },
     "pat": {
       "atlassian_email": "Atlassian Email",
       "atlassian_email_required": "Atlassian email is required",
+      "classic_only_note": "Use a classic personal access token; fine-grained tokens are not supported.",
       "docs_tooltip_bitbucket": "Atlassian API token documentation",
       "docs_tooltip_gitea": "Gitea API documentation",
       "docs_tooltip_github": "GitHub documentation",
@@ -267,7 +277,7 @@
       "token_invalid": "Token format is invalid",
       "token_placeholder_bitbucket": "Your Atlassian API token",
       "token_placeholder_gitea": "Your Gitea personal access token",
-      "token_placeholder_github": "Your generated token (40 characters)",
+      "token_placeholder_github": "Your classic token (40 characters)",
       "token_placeholder_gitlab": "Your GitLab personal access token",
       "token_required": "Token is required",
       "token_settings_caption_bitbucket": "on your Atlassian account to create an API token, then paste it below.",
@@ -284,9 +294,10 @@
   "metrics": {
     "comment": "comment",
     "issue": "issue",
-    "linked_to": "Linked to {{noun}}: {{issues}}",
+    "linked_to": "Linked {{noun}}: {{issues}}",
     "parent_issue": "Parent issue: #{{number}} {{title}}",
-    "stacked_prs": "Part of a stacked pull request series"
+    "stacked_pr": "Stacked pull request",
+    "stacked_pr_position": "Stacked pull request: {{position}} of {{depth}}"
   },
   "notifications": {
     "failure_tooltip": "{{title}}: {{description}} You can also try opening this notification in your browser.",
@@ -341,6 +352,16 @@
     "commented": "{{users}} left review comments",
     "dismissed_plural": "{{users}} reviews have been dismissed",
     "dismissed_singular": "{{user}} review has been dismissed"
+  },
+  "scopes": {
+    "status": {
+      "granted": "granted",
+      "granted_subject": "{{subject}} granted",
+      "missing": "missing",
+      "missing_subject": "{{subject}} missing",
+      "not_applicable": "not applicable",
+      "not_applicable_subject": "{{subject}} not applicable"
+    }
   },
   "settings": {
     "alerts": {

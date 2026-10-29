@@ -21,7 +21,7 @@ export function GitHubLoginWithPersonalAccessTokenRoute() {
       title={t('login.pat.title_github', 'Login with Personal Access Token')}
       tokenPlaceholder={t(
         'login.pat.token_placeholder_github',
-        'Your generated token (40 characters)',
+        'Your classic token (40 characters)',
       )}
       tokenSettingsCaption={t(
         'login.pat.token_settings_caption_github',
@@ -30,6 +30,10 @@ export function GitHubLoginWithPersonalAccessTokenRoute() {
       tokenSettingsLabel={t('login.pat.token_settings_label_github', 'Generate a PAT')}
     >
       <Text as="i" className="text-xs">
+        {t(
+          'login.pat.classic_only_note',
+          'Use a classic personal access token; fine-grained tokens are not supported.',
+        )}{' '}
         {t('login.pat.scopes_note_prefix', 'The')}{' '}
         <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
           <button type="button">

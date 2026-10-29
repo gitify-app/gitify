@@ -1,5 +1,4 @@
-import type { Forge, Hostname, Token } from '../../types';
-import type { LoginOAuthWebOptions } from './types';
+import type { ClientID, Forge, Hostname, Token } from '../../types';
 
 import i18n from '../../i18n';
 import { getAdapter } from '../forges/registry';
@@ -21,14 +20,16 @@ export interface PersonalAccessTokenFormErrors {
   invalidCredentialsDetail?: string;
 }
 
-/** OAuth app login form values — mirrors LoginOAuthWebOptions so it passes straight through. */
-export type OAuthAppFormData = LoginOAuthWebOptions;
+/** Custom OAuth app login form values. */
+export interface CustomOAuthAppFormData {
+  hostname: Hostname;
+  clientId: ClientID;
+}
 
-/** OAuth app login form errors. */
-export interface OAuthAppFormErrors {
+/** Custom OAuth app login form errors. */
+export interface CustomOAuthAppFormErrors {
   hostname?: string;
   clientId?: string;
-  clientSecret?: string;
   invalidCredentialsForHost?: string;
 }
 
@@ -75,11 +76,11 @@ export const validatePersonalAccessTokenForm = (
   return errors;
 };
 
-export const validateOAuthAppForm = (
-  values: OAuthAppFormData,
+export const validateCustomOAuthAppForm = (
+  values: CustomOAuthAppFormData,
   forge: Forge = 'github',
-): OAuthAppFormErrors => {
-  const errors: OAuthAppFormErrors = {};
+): CustomOAuthAppFormErrors => {
+  const errors: CustomOAuthAppFormErrors = {};
   const adapter = getAdapter(forge);
 
   if (!values.hostname) {
@@ -90,17 +91,8 @@ export const validateOAuthAppForm = (
 
   if (!values.clientId) {
     errors.clientId = i18n.t('login.oauth.client_id_required', 'Client ID is required');
-  } else if (!adapter.oauthWebApp?.validateClientId(values.clientId)) {
+  } else if (!adapter.customOAuthApp?.validateClientId(values.clientId)) {
     errors.clientId = i18n.t('login.oauth.client_id_invalid', 'Client ID format is invalid');
-  }
-
-  if (!values.clientSecret) {
-    errors.clientSecret = i18n.t('login.oauth.client_secret_required', 'Client Secret is required');
-  } else if (!adapter.validateToken(values.clientSecret as unknown as Token)) {
-    errors.clientSecret = i18n.t(
-      'login.oauth.client_secret_invalid',
-      'Client Secret format is invalid',
-    );
   }
 
   return errors;

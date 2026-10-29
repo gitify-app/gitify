@@ -1,5 +1,8 @@
 import {
   CheckIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   CommentIcon,
   FeedPersonIcon,
   FileDiffIcon,
@@ -10,6 +13,7 @@ import {
 import { IconColor } from '../../types';
 
 import {
+  getChevronIcon,
   getDefaultUserIcon,
   getPlatformIcon,
   getPullRequestReviewIcon,
@@ -124,5 +128,11 @@ describe('renderer/utils/icons.ts', () => {
     expect(getDefaultUserIcon('Mannequin')).toBe(MarkGithubIcon);
     expect(getDefaultUserIcon('Organization')).toBe(OrganizationIcon);
     expect(getDefaultUserIcon('User')).toBe(FeedPersonIcon);
+  });
+
+  it('getChevronIcon', () => {
+    expect(getChevronIcon('down')).toBe(ChevronDownIcon);
+    expect(getChevronIcon('left')).toBe(ChevronLeftIcon);
+    expect(getChevronIcon('right')).toBe(ChevronRightIcon);
   });
 });

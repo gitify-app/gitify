@@ -2,9 +2,13 @@ import type { FC } from 'react';
 
 import {
   CheckIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   CommentIcon,
   FeedPersonIcon,
   FileDiffIcon,
+  type Icon,
   MarkGithubIcon,
   type OcticonProps,
   OrganizationIcon,
@@ -12,7 +16,12 @@ import {
   ShieldCheckIcon,
 } from '@primer/octicons-react';
 
-import { IconColor, type PullRequestApprovalIcon, type UserType } from '../../types';
+import {
+  type ChevronDirection,
+  IconColor,
+  type PullRequestApprovalIcon,
+  type UserType,
+} from '../../types';
 import type { PlatformType } from '../auth/types';
 
 import i18n from '../../i18n';
@@ -101,4 +110,14 @@ export function getDefaultUserIcon(userType: UserType) {
     default:
       return FeedPersonIcon;
   }
+}
+
+const CHEVRON_ICONS: Record<ChevronDirection, Icon> = {
+  down: ChevronDownIcon,
+  left: ChevronLeftIcon,
+  right: ChevronRightIcon,
+};
+
+export function getChevronIcon(direction: ChevronDirection): Icon {
+  return CHEVRON_ICONS[direction];
 }

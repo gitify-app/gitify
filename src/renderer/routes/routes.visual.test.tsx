@@ -10,16 +10,16 @@ import {
 } from '../__mocks__/account-mocks';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 
-import { DesignLanguage, Theme } from '../types';
+import { DesignLanguage, type SettingsState, Theme } from '../types';
 
 import { AccountsRoute } from './Accounts';
 import { AccountScopesRoute } from './AccountScopes';
 import { BitbucketLoginWithPersonalAccessTokenRoute } from './bitbucket/LoginWithPersonalAccessToken';
 import { FiltersRoute } from './Filters';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './gitea/LoginWithPersonalAccessToken';
+import { GitHubLoginWithCustomOAuthAppRoute } from './github/LoginWithCustomOAuthApp';
 import { GitHubLoginWithDeviceFlowRoute } from './github/LoginWithDeviceFlow';
 import { GitHubLoginWithCLIRoute } from './github/LoginWithGitHubCLI';
-import { GitHubLoginWithOAuthAppRoute } from './github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './github/LoginWithPersonalAccessToken';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './gitlab/LoginWithPersonalAccessToken';
 import { LoginRoute } from './Login';
@@ -89,9 +89,9 @@ const ROUTES: RouteCase[] = [
     state: { initialEntries: ['/login/github/personal-access-token'] },
   },
   {
-    name: 'login-github-oauth-app',
-    element: <GitHubLoginWithOAuthAppRoute />,
-    state: { initialEntries: ['/login/github/oauth-app'] },
+    name: 'login-github-custom-oauth-app',
+    element: <GitHubLoginWithCustomOAuthAppRoute />,
+    state: { initialEntries: ['/login/github/custom-oauth-app'] },
   },
   {
     name: 'login-gitea-personal-access-token',
@@ -111,13 +111,19 @@ const ROUTES: RouteCase[] = [
 ];
 
 /**
- * The two densest routes carry the accessibility and Glass variants. Running
- * every theme against every route would multiply the committed baselines
- * without covering token combinations these two do not already exercise.
+ * The densest routes additionally carry the accessibility and high-contrast
+ * variants. Every route still runs through the four base theme combinations.
  */
 const DENSE_ROUTES = ROUTES.filter(
   (route) => route.name === 'notifications' || route.name === 'settings',
 );
+
+const THEME_VARIANTS = [
+  { designLanguage: DesignLanguage.CLASSIC, label: 'classic light', theme: Theme.LIGHT },
+  { designLanguage: DesignLanguage.CLASSIC, label: 'classic dark', theme: Theme.DARK },
+  { designLanguage: DesignLanguage.GLASS, label: 'glass light', theme: Theme.LIGHT },
+  { designLanguage: DesignLanguage.GLASS, label: 'glass dark', theme: Theme.DARK },
+] as const;
 
 const ACCESSIBILITY_THEMES = [
   Theme.LIGHT_COLORBLIND,
@@ -127,18 +133,37 @@ const ACCESSIBILITY_THEMES = [
   Theme.DARK_DIMMED,
 ];
 
-async function captureRoute(route: RouteCase, theme: Theme, designLanguage: DesignLanguage) {
-  renderRoute(route.element, { ...route.state, theme, designLanguage });
+const HIGH_CONTRAST_THEMES = [Theme.LIGHT, Theme.DARK];
+
+interface CaptureOptions {
+  /** Overrides the screenshot filename prefix. */
+  name?: string;
+  /** Merged over the route's own settings. */
+  settings?: Partial<SettingsState>;
+}
+
+async function captureRoute(
+  route: RouteCase,
+  theme: Theme,
+  designLanguage: DesignLanguage,
+  { name = route.name, settings }: CaptureOptions = {},
+) {
+  renderRoute(route.element, {
+    ...route.state,
+    theme,
+    designLanguage,
+    settings: { ...route.state?.settings, ...settings },
+  });
 
   await expect(page.getByTestId('visual-root')).toMatchScreenshot(
-    `${route.name}-${theme.toLowerCase()}-${designLanguage}`,
+    `${name}-${theme.toLowerCase()}-${designLanguage}`,
   );
 }
 
 describe('renderer/routes visual regression', () => {
-  describe.each([Theme.LIGHT, Theme.DARK])('classic %s', (theme) => {
+  describe.each(THEME_VARIANTS)('$label', ({ designLanguage, theme }) => {
     it.each(ROUTES)('$name', async (route) => {
-      await captureRoute(route, theme, DesignLanguage.CLASSIC);
+      await captureRoute(route, theme, designLanguage);
     });
   });
 
@@ -148,12 +173,14 @@ describe('renderer/routes visual regression', () => {
     });
   });
 
-  // Captures the Glass content layer only. On macOS the window background is a
-  // native vibrancy material that Chromium cannot render, so these baselines
-  // exercise the `backdrop-filter` fallback that Linux and Windows receive.
-  describe.each([Theme.LIGHT, Theme.DARK])('glass %s', (theme) => {
+  // High contrast is a Classic-only setting rather than a `Theme` value, so it
+  // gets its own matrix instead of another entry in ACCESSIBILITY_THEMES.
+  describe.each(HIGH_CONTRAST_THEMES)('classic %s high contrast', (theme) => {
     it.each(DENSE_ROUTES)('$name', async (route) => {
-      await captureRoute(route, theme, DesignLanguage.GLASS);
+      await captureRoute(route, theme, DesignLanguage.CLASSIC, {
+        name: `${route.name}-high-contrast`,
+        settings: { increaseContrast: true },
+      });
     });
   });
 });

@@ -18,7 +18,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
     it('lists the supported search qualifiers including commenter', async () => {
       renderWithProviders(<SearchFilter />);
 
-      const tooltipIconElement = screen.getByTestId('tooltip-icon-tooltip-search');
+      const tooltipIconElement = screen.getByRole('button', { name: 'Help: Search' });
       await userEvent.click(tooltipIconElement);
 
       expect(screen.getByText('Author (author:handle)')).toBeInTheDocument();
@@ -30,7 +30,7 @@ describe('renderer/components/filters/SearchFilter.tsx', () => {
     it('marks qualifiers that require detailed notifications as disabled', async () => {
       renderWithProviders(<SearchFilter />, { settings: { detailedNotifications: false } });
 
-      const tooltipIconElement = screen.getByTestId('tooltip-icon-tooltip-search');
+      const tooltipIconElement = screen.getByRole('button', { name: 'Help: Search' });
       await userEvent.click(tooltipIconElement);
 
       expect(screen.getByText('Author (author:handle)')).toHaveAttribute('aria-disabled', 'true');

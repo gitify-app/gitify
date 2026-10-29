@@ -72,11 +72,14 @@ export function determineFailureType(
 }
 
 /**
- * Handle GraphQL response errors.
- * Logs and throws if `errors` array is present and non-empty.
+ * Log a GraphQL response error and throw.
  *
- * @param context The context of the GraphQL request
- * @param payload The GraphQL response payload
+ * The caller must pass a GraphQL error payload with a non-empty `errors` array;
+ * this function does not guard against a missing array.
+ *
+ * @param context - The context of the GraphQL request.
+ * @param payload - The GraphQL error response.
+ * @throws An `Error` containing the joined GraphQL error messages.
  */
 export function handleGraphQLResponseError<TResult>(
   context: string,
