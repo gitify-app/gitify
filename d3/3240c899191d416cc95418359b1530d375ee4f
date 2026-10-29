@@ -1,0 +1,14 @@
+src/renderer/utils/forges/github/enrich.ts
+  h_ac004aadb63da9 10-13,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d33240c899191d416cc95418359b1530d375ee4f",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
