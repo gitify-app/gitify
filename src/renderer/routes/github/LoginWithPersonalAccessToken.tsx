@@ -1,10 +1,21 @@
-import { useTranslation } from 'react-i18next';
+import type { ReactNode } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { Text, Tooltip } from '@primer/react';
 
 import { LoginWithPersonalAccessTokenForm } from '../../components/login/LoginWithPersonalAccessTokenForm';
 
 import { formatRecommendedOAuthScopes } from '../../utils/auth/scopes';
+
+function RecommendedScopesLink({ children }: Readonly<{ children?: ReactNode }>) {
+  return (
+    <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
+      <button type="button">
+        <Text as="u">{children}</Text>
+      </button>
+    </Tooltip>
+  );
+}
 
 export function GitHubLoginWithPersonalAccessTokenRoute() {
   const { t } = useTranslation();
@@ -34,13 +45,11 @@ export function GitHubLoginWithPersonalAccessTokenRoute() {
           'login.pat.classic_only_note',
           'Use a classic personal access token; fine-grained tokens are not supported.',
         )}{' '}
-        {t('login.pat.scopes_note_prefix', 'The')}{' '}
-        <Tooltip direction="se" text={formatRecommendedOAuthScopes()}>
-          <button type="button">
-            <Text as="u">{t('login.pat.scopes_note_link', 'recommended scopes')}</Text>
-          </button>
-        </Tooltip>{' '}
-        {t('login.pat.scopes_note_suffix', 'will be automatically selected for you.')}
+        <Trans
+          components={[<RecommendedScopesLink key={0} />]}
+          defaults="The <0>recommended scopes</0> will be automatically selected for you."
+          i18nKey="login.pat.scopes_note"
+        />
       </Text>
     </LoginWithPersonalAccessTokenForm>
   );
