@@ -90,7 +90,7 @@
     "i18next-browser-languagedetector": "8.2.1",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "react-i18next": "17.0.15",
+    "react-i18next": "17.1.9",
     "react-router-dom": "7.18.4"
   },
   "devDependencies": {
