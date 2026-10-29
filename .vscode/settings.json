@@ -25,5 +25,6 @@
     "connectionId": "gitify-app",
     "projectKey": "gitify-app_gitify"
   },
-  "cSpell.words": ["codegen", "Gitify", "oxfmt", "oxlint"]
+  "cSpell.words": ["codegen", "Gitify", "oxfmt", "oxlint"],
+  "i18n-ally.localesPaths": ["src/renderer/i18n", "src/renderer/i18n/locales"]
 }
