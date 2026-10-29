@@ -87,7 +87,7 @@
     "electron-menubar": "11.1.2",
     "electron-updater": "6.8.11",
     "i18next": "26.5.11",
-    "i18next-browser-languagedetector": "8.2.1",
+    "i18next-browser-languagedetector": "8.2.3",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-i18next": "17.1.9",
