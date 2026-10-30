@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Validate semantic PR title
         if: ${{ github.event_name == 'pull_request_target' || startsWith(github.head_ref, 'release-please--') }}
-        uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
+        uses: amannn/action-semantic-pull-request@v6.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -62,4 +62,4 @@ jobs:
     steps:
       - name: Auto-label PR
         if: ${{ github.event_name == 'pull_request_target' || startsWith(github.head_ref, 'release-please--') }}
-        uses: fuxingloh/multi-labeler@bcd50af464202999e57f556b4aefcf05a34abf85 # v5.0.0
+        uses: fuxingloh/multi-labeler@v5.0.0
