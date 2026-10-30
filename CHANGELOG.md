@@ -1,5 +1,89 @@
 # Changelog
 
+## [8.0.0](https://github.com/gitify-app/gitify/compare/v7.10.0...v8.0.0) (2026-10-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **auth:** migrate custom OAuth app login to the device flow ([#3449](https://github.com/gitify-app/gitify/issues/3449))
+* **renderer:** remove legacy context storage migration ([#3515](https://github.com/gitify-app/gitify/issues/3515))
+
+### 🚀 Features
+
+* add CI checks pill for pull requests ([#3548](https://github.com/gitify-app/gitify/issues/3548)) ([89c63d6](https://github.com/gitify-app/gitify/commit/89c63d61df14a36ca04c1a1c835409a2f8c3bba7))
+* add screen reader labels to metric pills ([#3542](https://github.com/gitify-app/gitify/issues/3542)) ([98af9f0](https://github.com/gitify-app/gitify/commit/98af9f09ed576e3f2e19a9e1eacffeb6f666d803))
+* align stacked and linked issue pill labels to Type: value format ([4e4ae21](https://github.com/gitify-app/gitify/commit/4e4ae213e5606544f613bc8947024420595d9bcc))
+* align stacked PR and linked issue pill labels to Type: value format ([#3551](https://github.com/gitify-app/gitify/issues/3551)) ([4e4ae21](https://github.com/gitify-app/gitify/commit/4e4ae213e5606544f613bc8947024420595d9bcc))
+* **auth:** migrate custom OAuth app login to the device flow ([#3449](https://github.com/gitify-app/gitify/issues/3449)) ([358206c](https://github.com/gitify-app/gitify/commit/358206c8f94baa94a6a3311ed8f95997271b4b40))
+* **i18n:** add internationalization support ([#3523](https://github.com/gitify-app/gitify/issues/3523)) ([f5b1698](https://github.com/gitify-app/gitify/commit/f5b16987636afe3a70a63d3249fec26051fdf30e))
+* **notifications:** add loading state for initial fetch ([#3460](https://github.com/gitify-app/gitify/issues/3460)) ([51ec01a](https://github.com/gitify-app/gitify/commit/51ec01af9a4ed8f70ec6c7717a864a5afeda3625))
+* **notifications:** show loading state on initial fetch ([51ec01a](https://github.com/gitify-app/gitify/commit/51ec01af9a4ed8f70ec6c7717a864a5afeda3625))
+* open linked issue when clicking the linked issues pill ([#3546](https://github.com/gitify-app/gitify/issues/3546)) ([dff5e3e](https://github.com/gitify-app/gitify/commit/dff5e3ed9100837192429ef168c560a2eb2dcfcb))
+* **settings:** add help tooltips to remaining controls ([#3494](https://github.com/gitify-app/gitify/issues/3494)) ([3bf9e9b](https://github.com/gitify-app/gitify/commit/3bf9e9b271f1a2d583caa22b144a7d1bf79bc070))
+* show milestone state in milestone pill tooltip ([#3544](https://github.com/gitify-app/gitify/issues/3544)) ([db167ef](https://github.com/gitify-app/gitify/commit/db167ef019f02db0a8e63154f3a7508e70100e05))
+* show only issue number in parent issue pill ([#3540](https://github.com/gitify-app/gitify/issues/3540)) ([7b6e3bc](https://github.com/gitify-app/gitify/commit/7b6e3bc808b57a4bcee163ef21cb8d35cf3b1186))
+* show review required indicator in reviews pill ([#3549](https://github.com/gitify-app/gitify/issues/3549)) ([4d47efd](https://github.com/gitify-app/gitify/commit/4d47efd88cfe55cff12da9b6a9ecec781828e845))
+
+
+### 🐛 Bug Fixes
+
+* **a11y:** accessible names for help buttons and scope status icons ([#3558](https://github.com/gitify-app/gitify/issues/3558)) ([3866936](https://github.com/gitify-app/gitify/commit/3866936cf557c1ecb5daf0877d7cfcc5a9386120))
+* **a11y:** give help buttons and scope status icons accessible names ([3866936](https://github.com/gitify-app/gitify/commit/3866936cf557c1ecb5daf0877d7cfcc5a9386120))
+* clarify GitHub device-flow and classic PAT login copy ([#3298](https://github.com/gitify-app/gitify/issues/3298)) ([9687027](https://github.com/gitify-app/gitify/commit/9687027ee1db747d02b4de5e5401e1d268ac564c))
+* **github:** reduce merged GraphQL batch size to avoid resource limits ([#3559](https://github.com/gitify-app/gitify/issues/3559)) ([ea7d72f](https://github.com/gitify-app/gitify/commit/ea7d72fa6344386c9443b3c54044d5fc7a0b4bec))
+* remove duplicate tab stop on non-clickable metric pills ([#3545](https://github.com/gitify-app/gitify/issues/3545)) ([c4ffed3](https://github.com/gitify-app/gitify/commit/c4ffed30d37d515667ebb109d6010f98fb0b04c3))
+* test unique keys ([0ee38fb](https://github.com/gitify-app/gitify/commit/0ee38fbcc2417f18f6d30a80a5bf936792da7dfe))
+* tests ([727b191](https://github.com/gitify-app/gitify/commit/727b19131a624d9dc25d59dbdb9b1ec665995996))
+* use stack icon and gray color for stacked pull request pill ([#3543](https://github.com/gitify-app/gitify/issues/3543)) ([dce51bc](https://github.com/gitify-app/gitify/commit/dce51bc5beab592456e0b2abe1e977249469c0ee))
+
+
+### ⚡️ Performance
+
+* decouple notification actions from the notifications query ([#3426](https://github.com/gitify-app/gitify/issues/3426)) ([3df1176](https://github.com/gitify-app/gitify/commit/3df1176142b975ae716847ac6b0f06fa6b56a20d))
+
+
+### 🧼 Code Refactoring
+
+* **filters:** adopt Primer checkbox and help popover ([#3497](https://github.com/gitify-app/gitify/issues/3497)) ([9035425](https://github.com/gitify-app/gitify/commit/90354257649cda31037600bbc6385f2256d61ae5))
+* **lint:** share renderer boundary file globs ([#3488](https://github.com/gitify-app/gitify/issues/3488)) ([f821b1f](https://github.com/gitify-app/gitify/commit/f821b1fb4992e39a216b452af21fd28ab3abf288))
+* make milestone pill prop optional ([#3547](https://github.com/gitify-app/gitify/issues/3547)) ([1a01ca2](https://github.com/gitify-app/gitify/commit/1a01ca2868939c2e46dcef354fa195dbd6f879a5))
+* **renderer:** break import cycles and enable no-cycle globally ([#3489](https://github.com/gitify-app/gitify/issues/3489)) ([d9d166e](https://github.com/gitify-app/gitify/commit/d9d166e3da0db2a92a61f412ed9ad8c45c834ff4))
+* **renderer:** import store modules directly in utils ([#3490](https://github.com/gitify-app/gitify/issues/3490)) ([0676c29](https://github.com/gitify-app/gitify/commit/0676c29e14ebdabb04e8b5a5f592232bcd561059))
+* **renderer:** model chevron icon choice as a direction ([#3527](https://github.com/gitify-app/gitify/issues/3527)) ([215bb5c](https://github.com/gitify-app/gitify/commit/215bb5ce3b11582f43ffd8e1f8160f7e6eca9cff))
+* **renderer:** polish tooltip copy ([#3495](https://github.com/gitify-app/gitify/issues/3495)) ([8ed45cf](https://github.com/gitify-app/gitify/commit/8ed45cf71c067bec01c5dedc5e604f853d613503))
+* **renderer:** remove legacy Context storage migration ([2a15119](https://github.com/gitify-app/gitify/commit/2a15119f70518b1d1726fc6c5ee63c695d4a9fd0))
+* **renderer:** remove legacy context storage migration ([#3515](https://github.com/gitify-app/gitify/issues/3515)) ([2a15119](https://github.com/gitify-app/gitify/commit/2a15119f70518b1d1726fc6c5ee63c695d4a9fd0))
+* reorder metric pills into a logical flow ([#3541](https://github.com/gitify-app/gitify/issues/3541)) ([73207d5](https://github.com/gitify-app/gitify/commit/73207d548cdf45de6282b63a8832356d3ebaa681))
+* **settings:** align control visibility gating ([#3493](https://github.com/gitify-app/gitify/issues/3493)) ([095a2b9](https://github.com/gitify-app/gitify/commit/095a2b95e1fb2bc5f1218cb0cd3daf804ab0052b))
+* **settings:** refresh controls with Primer ([#3496](https://github.com/gitify-app/gitify/issues/3496)) ([6797023](https://github.com/gitify-app/gitify/commit/679702375a08f020639092d0d1b451e7e8febdb7))
+* **settings:** split inbox and alert sections ([#3492](https://github.com/gitify-app/gitify/issues/3492)) ([f9510fe](https://github.com/gitify-app/gitify/commit/f9510fe50ac8dbf9f97b5a98068d5d05356df281))
+* tooltips copy ([8ed45cf](https://github.com/gitify-app/gitify/commit/8ed45cf71c067bec01c5dedc5e604f853d613503))
+
+
+### 📚 Documentation
+
+* complete TSDoc accuracy and add guardrails ([#3530](https://github.com/gitify-app/gitify/issues/3530)) ([ada11aa](https://github.com/gitify-app/gitify/commit/ada11aa89f9fb2693ba66ec5116dd713f0615d43))
+* complete TSDoc accuracy and guardrails ([ada11aa](https://github.com/gitify-app/gitify/commit/ada11aa89f9fb2693ba66ec5116dd713f0615d43))
+* define TSDoc convention and align IPC docs ([#3528](https://github.com/gitify-app/gitify/issues/3528)) ([635e09d](https://github.com/gitify-app/gitify/commit/635e09df8a2d7cb5e2f9dddfd939d9d2698b1f75))
+
+
+### 🤖 Continuous Integration
+
+* keep milestone description in sync with release version ([#3552](https://github.com/gitify-app/gitify/issues/3552)) ([5b97ade](https://github.com/gitify-app/gitify/commit/5b97adebf6a937774474a41ed1d61bab86f7bad9))
+* **labeler:** accept breaking-change markers in PR titles ([#3513](https://github.com/gitify-app/gitify/issues/3513)) ([b37c1f3](https://github.com/gitify-app/gitify/commit/b37c1f32a7e39b5dd19e7c8a6068413e944e57e5))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @primer/octicons-react to v19.41.0 ([#3471](https://github.com/gitify-app/gitify/issues/3471)) ([4a5c670](https://github.com/gitify-app/gitify/commit/4a5c670108059fc498d65cd783309d441204f355))
+* **deps-core:** update @primer/octicons-react to v19.42.0 ([#3532](https://github.com/gitify-app/gitify/issues/3532)) ([505c71c](https://github.com/gitify-app/gitify/commit/505c71cd8b985c5846f4ff6a73634a6f40d19d4e))
+* **deps-core:** update @primer/react to v38.42.0 ([#3472](https://github.com/gitify-app/gitify/issues/3472)) ([d5574cb](https://github.com/gitify-app/gitify/commit/d5574cb9786f6991a3947124e665e3d10b920ad6))
+* **deps-core:** update @primer/react to v38.43.0 ([#3533](https://github.com/gitify-app/gitify/issues/3533)) ([f64ab57](https://github.com/gitify-app/gitify/commit/f64ab57795e8444de04c89f360cfdc8a7bd66209))
+* **deps-core:** update electron to v44.9.1 [security] ([#3462](https://github.com/gitify-app/gitify/issues/3462)) ([7867b82](https://github.com/gitify-app/gitify/commit/7867b824ef14e08513ab936df0576545129eb0c2))
+* **deps-core:** update electron to v45 ([#3478](https://github.com/gitify-app/gitify/issues/3478)) ([66425fc](https://github.com/gitify-app/gitify/commit/66425fcd5bceddd2c67ebf86020d2520c1c77358))
+* **deps-core:** update electron-menubar to v11.1.2 ([#3480](https://github.com/gitify-app/gitify/issues/3480)) ([c56b4f8](https://github.com/gitify-app/gitify/commit/c56b4f85a466566936714322e0d7e844d2f4d256))
+* **deps-core:** update electron-updater to v6.8.11 ([#3467](https://github.com/gitify-app/gitify/issues/3467)) ([fbf4d98](https://github.com/gitify-app/gitify/commit/fbf4d98c84f0ad6d8e0591bfa0999b435a80ad8d))
+
 ## [7.10.0](https://github.com/gitify-app/gitify/compare/v7.9.0...v7.10.0) (2026-10-17)
 
 
