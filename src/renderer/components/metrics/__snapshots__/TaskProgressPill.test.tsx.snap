@@ -1,0 +1,78 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderer/components/metrics/TaskProgressPill.tsx > renders task progress 1`] = `
+<div>
+  <button
+    aria-describedby="_r_0_"
+    aria-label="Tasks: 5 of 16 completed"
+    type="button"
+  >
+    <span
+      class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+      data-component="Label"
+      data-size="small"
+      data-variant="secondary"
+    >
+      <div
+        class="prc-Stack-Stack-UQ9k6"
+        data-align="center"
+        data-component="Stack"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        <svg
+          aria-hidden="true"
+          class="text-gitify-icon-muted"
+          data-testid="sub-issue-progress-wheel"
+          fill="none"
+          height="12"
+          viewBox="0 0 16 16"
+          width="12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            class="opacity-25"
+            cx="8"
+            cy="8"
+            r="6"
+            stroke="currentColor"
+            stroke-width="2.2"
+          />
+          <circle
+            class="text-gitify-icon-done"
+            cx="8"
+            cy="8"
+            r="6"
+            stroke="currentColor"
+            stroke-dasharray="37.69911184307752"
+            stroke-dashoffset="26.012387171723486"
+            stroke-linecap="round"
+            stroke-width="2.2"
+            transform="rotate(-90 8 8)"
+          />
+        </svg>
+        <span
+          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          data-component="Text"
+        >
+          5/16
+        </span>
+      </div>
+    </span>
+  </button>
+  <span
+    aria-hidden="true"
+    class="prc-TooltipV2-Tooltip-tLeuB"
+    data-component="Tooltip"
+    data-direction="s"
+    id="_r_0_"
+    popover="auto"
+    role="tooltip"
+  >
+    Tasks: 5 of 16 completed
+  </span>
+</div>
+`;

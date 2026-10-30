@@ -129,6 +129,7 @@ export function mockPullRequestResponseNode(mocks: {
     __typename: 'PullRequest',
     number: 123,
     title: 'Test PR',
+    body: '',
     state: mocks.state,
     isDraft: mocks.isDraft ?? false,
     merged: mocks.merged ?? false,

@@ -34,7 +34,7 @@ import type {
 } from '../graphql/generated/graphql';
 import { formatGitHubNotificationUser } from '../users';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor } from './utils';
+import { getNotificationAuthor, getTaskProgress } from './utils';
 
 type PullRequestActivity = {
   author: AuthorFieldsFragment;
@@ -110,6 +110,7 @@ class PullRequestHandler extends DefaultHandler {
       reactionsCount: prReactionCount,
       reactionGroups: prReactionGroup ?? undefined,
       checks: getCheckSummary(pr.statusCheckRollup),
+      taskProgress: getTaskProgress(pr.body),
     };
   }
 

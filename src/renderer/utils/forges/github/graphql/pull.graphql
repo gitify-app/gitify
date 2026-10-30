@@ -22,6 +22,7 @@ fragment PullRequestDetails on PullRequest {
   number
   title
   url
+  body
   state
   merged
   isDraft
