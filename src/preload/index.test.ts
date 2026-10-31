@@ -67,6 +67,7 @@ interface TestApi {
   setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
+  onZoom: (callback: (action: 'in' | 'out' | 'reset') => void) => () => void;
 }
 
 describe('preload/index', () => {
@@ -141,6 +142,24 @@ describe('preload/index', () => {
     const api = getExposedApi();
 
     await expect(api.app.version()).resolves.toBe('v1.2.3');
+  });
+
+  it('onZoom forwards the requested zoom action', () => {
+    const api = getExposedApi();
+    const callback = vi.fn();
+
+    api.onZoom(callback);
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(EVENTS.ZOOM, expect.any(Function));
+
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (
+      event: unknown,
+      action: 'in' | 'out' | 'reset',
+    ) => void;
+
+    listener({}, 'out');
+
+    expect(callback).toHaveBeenCalledWith('out');
   });
 
   it('raiseNativeNotification without url calls app.show', async () => {

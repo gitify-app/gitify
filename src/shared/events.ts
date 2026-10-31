@@ -28,6 +28,7 @@ export const EVENTS = {
   RESET_APP: `${P}reset-app`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
   SYSTEM_WAKE: `${P}system-wake`,
+  ZOOM: `${P}zoom`,
 } as const;
 
 /** Union type of all valid IPC event name strings. */
@@ -37,6 +38,9 @@ export type EventType = (typeof EVENTS)[keyof typeof EVENTS];
 export type NativeThemeSource = 'system' | 'light' | 'dark';
 
 export type TrayIconAppearance = 'auto' | 'light' | 'dark';
+
+/** Zoom direction triggered by an application keyboard shortcut. */
+export type ZoomAction = 'in' | 'out' | 'reset';
 
 export function isTrayIconAppearance(value: unknown): value is TrayIconAppearance {
   return value === 'auto' || value === 'light' || value === 'dark';
@@ -157,6 +161,7 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
   [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
+  [EVENTS.ZOOM]: { request: ZoomAction; response: undefined };
 }>;
 
 /** Request payload type for a given event. */
