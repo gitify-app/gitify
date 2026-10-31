@@ -14,10 +14,20 @@ import {
   registerUpdaterHandlers,
 } from './handlers';
 import { getIdleTrayIcon } from './icons';
-import { configureWindowEvents, initializeAppLifecycle, onFirstRunMaybe } from './lifecycle';
+import {
+  configureUserDataPath,
+  configureWindowEvents,
+  initializeAppLifecycle,
+  onFirstRunMaybe,
+} from './lifecycle';
 import MenuBuilder from './menu';
 import { applyOzonePlatform } from './ozone';
 import AppUpdater from './updater';
+
+// Runs at module load, before anything reads `userData`: development builds
+// must be isolated from installed ones before the Ozone platform and logger
+// resolve their paths.
+configureUserDataPath();
 
 // Runs at module load: the Ozone platform is read during app startup, so this
 // has to happen before `app.whenReady()` below.
