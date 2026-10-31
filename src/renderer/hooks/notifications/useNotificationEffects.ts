@@ -132,17 +132,10 @@ export const useNotificationEffects = ({
   const executeAction = useCallback(
     (action: NativeNotificationActionId, notification: GitifyNotification) => {
       switch (action) {
-        case 'show':
-          return;
         case 'read':
           void actionsRef.current.markNotificationsAsRead([notification]);
           return;
-        case 'done':
-          void actionsRef.current.markNotificationsAsDone([notification]);
-          return;
-        case 'unsubscribe':
-          void actionsRef.current.unsubscribeNotification(notification);
-          return;
+        case 'show':
         default:
           return;
       }

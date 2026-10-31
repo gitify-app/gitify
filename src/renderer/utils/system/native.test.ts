@@ -10,7 +10,6 @@ import {
 
 import { NativeNotificationStyle } from '../../types';
 
-import * as features from '../api/features';
 import { getAccountUUID } from '../auth/utils';
 import * as url from '../notifications/url';
 import {
@@ -32,8 +31,6 @@ describe('renderer/utils/system/native.ts', () => {
   beforeEach(() => {
     vi.mocked(window.gitify.nativeNotifications.show).mockClear();
     vi.spyOn(url, 'generateNotificationWebUrl').mockResolvedValue(notification.repository.htmlUrl);
-    vi.spyOn(features, 'isMarkAsDoneFeatureSupported').mockReturnValue(true);
-    vi.spyOn(features, 'isUnsubscribeThreadSupported').mockReturnValue(true);
   });
 
   describe('buildNativeNotificationPayload', () => {
@@ -53,20 +50,7 @@ describe('renderer/utils/system/native.ts', () => {
       expect(payload.body).toContain(notification.subject.title);
       expect(payload).not.toHaveProperty('url');
       expect(targetUrl).toBe(notification.repository.htmlUrl);
-      expect(payload.actions).toEqual([
-        { id: 'read', label: 'Mark as read' },
-        { id: 'done', label: 'Mark as done' },
-        { id: 'unsubscribe', label: 'Unsubscribe' },
-      ]);
-    });
-
-    it('omits unsupported actions', async () => {
-      vi.mocked(features.isMarkAsDoneFeatureSupported).mockReturnValue(false);
-      vi.mocked(features.isUnsubscribeThreadSupported).mockReturnValue(false);
-
-      const { payload } = await buildNativeNotificationPayload(notification, options);
-
-      expect(payload.actions.map((action) => action.id)).toEqual(['read']);
+      expect(payload.actions).toEqual([{ id: 'read', label: 'Mark as read' }]);
     });
 
     it('omits all actions when action buttons are disabled', async () => {

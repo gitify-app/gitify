@@ -14,7 +14,6 @@ import type { GitifyNotification } from '../../types';
 import { NativeNotificationStyle } from '../../types';
 
 import i18n from '../../i18n';
-import { isMarkAsDoneFeatureSupported, isUnsubscribeThreadSupported } from '../api/features';
 import { getAccountUUID } from '../auth/utils';
 import { generateNotificationWebUrl } from '../notifications/url';
 
@@ -47,12 +46,8 @@ function getActionLabel(id: NativeNotificationActionId): string {
     case 'show':
       return i18n.t('native.action.show', 'Show notifications');
     case 'read':
-      return i18n.t('native.action.read', 'Mark as read');
-    case 'done':
-      return i18n.t('native.action.done', 'Mark as done');
-    case 'unsubscribe':
     default:
-      return i18n.t('native.action.unsubscribe', 'Unsubscribe');
+      return i18n.t('native.action.read', 'Mark as read');
   }
 }
 
@@ -92,18 +87,8 @@ export async function buildNativeNotificationPayload(
 
   const actions: NativeNotificationActionId[] = [];
 
-  if (options.actions) {
-    if (notification.unread) {
-      actions.push('read');
-    }
-
-    if (notification.unread && isMarkAsDoneFeatureSupported(notification.account)) {
-      actions.push('done');
-    }
-
-    if (isUnsubscribeThreadSupported(notification.account)) {
-      actions.push('unsubscribe');
-    }
+  if (options.actions && notification.unread) {
+    actions.push('read');
   }
 
   return {

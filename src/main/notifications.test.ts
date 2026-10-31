@@ -99,7 +99,6 @@ const basePayload: INativeNotificationPayload = {
   actions: [
     { id: 'show', label: 'Afficher' },
     { id: 'read', label: 'Marquer comme lu' },
-    { id: 'unsubscribe', label: 'Se désabonner' },
   ],
   keepVisible: false,
 };
@@ -143,7 +142,6 @@ describe('main/notifications.ts', () => {
       actions: [
         { type: 'button', text: 'Afficher' },
         { type: 'button', text: 'Marquer comme lu' },
-        { type: 'button', text: 'Se désabonner' },
       ],
     });
     expect(instance.show).toHaveBeenCalledTimes(1);

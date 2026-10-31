@@ -146,7 +146,7 @@ export function AlertSettings() {
           onChange={() => toggleSetting('nativeNotificationActions')}
           tooltip={t(
             'settings.alerts.actions_help',
-            'Offer Mark as read, Mark as done, and Unsubscribe actions where the platform and account support them. Clicking a notification opens it.',
+            'Offer a Mark as read action where the platform supports it. Clicking a notification opens it.',
           )}
         />
 

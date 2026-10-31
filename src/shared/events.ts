@@ -107,7 +107,7 @@ export type IGitHubCliTokenResult =
   | { token?: never; error: GitHubCliTokenError; detail?: string };
 
 /** An action button offered by an operating-system notification. */
-export type NativeNotificationActionId = 'show' | 'read' | 'done' | 'unsubscribe';
+export type NativeNotificationActionId = 'show' | 'read';
 
 /** An action button and its translated label. */
 export interface INativeNotificationAction {

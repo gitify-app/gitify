@@ -298,10 +298,8 @@
   },
   "native": {
     "action": {
-      "done": "Mark as done",
       "read": "Mark as read",
-      "show": "Show notifications",
-      "unsubscribe": "Unsubscribe"
+      "show": "Show notifications"
     },
     "summary_body_one": "You have 1 notification",
     "summary_body_other": "You have {{count}} notifications"
@@ -373,7 +371,7 @@
   "settings": {
     "alerts": {
       "actions": "Show notification actions",
-      "actions_help": "Offer Mark as read, Mark as done, and Unsubscribe actions where the platform and account support them. Clicking a notification opens it.",
+      "actions_help": "Offer a Mark as read action where the platform supports it. Clicking a notification opens it.",
       "click": "Notification click",
       "click_app_help": "<0>{{appName}}</0> reveals the matching notification in the app.",
       "click_browser": "Browser",

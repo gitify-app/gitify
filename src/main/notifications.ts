@@ -15,12 +15,7 @@ import { logError, toError } from '../shared/logger';
 
 import { sendRendererEvent } from './events';
 
-const ALLOWED_ACTIONS: ReadonlySet<NativeNotificationActionId> = new Set([
-  'show',
-  'read',
-  'done',
-  'unsubscribe',
-]);
+const ALLOWED_ACTIONS: ReadonlySet<NativeNotificationActionId> = new Set(['show', 'read']);
 
 // Windows caps a toast's tag and group at 64 characters.
 const MAX_IDENTIFIER_LENGTH = 64;

@@ -690,7 +690,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
     const actionHandler = () =>
       vi.mocked(window.gitify.nativeNotifications.onAction).mock.calls.at(-1)?.[0] as (payload: {
         id: string;
-        action: 'show' | 'read' | 'done' | 'unsubscribe';
+        action: 'show' | 'read';
       }) => void;
 
     const clickHandler = () =>
@@ -698,26 +698,21 @@ describe('renderer/hooks/useNotifications.ts', () => {
         id: string;
       }) => void;
 
-    it.each([
-      ['read', 'markThreadAsRead'],
-      ['done', 'markThreadAsDone'],
-      ['unsubscribe', 'unsubscribeThread'],
-    ] as const)(
-      'routes a %s action through the existing mutation pipeline',
-      async (action, method) => {
-        const actionSpy = vi.spyOn(githubAdapter.accountOps, method).mockResolvedValue(undefined);
-        getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+    it('routes a read action through the existing mutation pipeline', async () => {
+      const actionSpy = vi
+        .spyOn(githubAdapter.accountOps, 'markThreadAsRead')
+        .mockResolvedValue(undefined);
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
 
-        const { result } = renderNotificationsHook();
-        await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
 
-        await act(async () => {
-          actionHandler()({ id: notificationId, action });
-        });
+      await act(async () => {
+        actionHandler()({ id: notificationId, action: 'read' });
+      });
 
-        await waitFor(() => expect(actionSpy).toHaveBeenCalledTimes(1));
-      },
-    );
+      await waitFor(() => expect(actionSpy).toHaveBeenCalledTimes(1));
+    });
 
     it('opens the target in the browser when the click setting is browser', async () => {
       useSettingsStore.setState({
