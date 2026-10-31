@@ -20,11 +20,19 @@ export function buildNativeNotificationPayload(
   notification: GitifyNotification,
 ): INativeNotificationPayload {
   const accountUUID = getAccountUUID(notification.account);
+  const actor = notification.subject.user?.login ?? notification.subject.author?.login;
+  const context = [notification.reason.title, actor ? `@${actor}` : ''].filter(Boolean).join(' - ');
+  const identifier = notification.display.identifier;
+  const body =
+    identifier && !notification.display.title.includes(identifier)
+      ? `${notification.display.title} (${identifier})`
+      : notification.display.title;
 
   return {
     id: getNativeNotificationId(accountUUID, notification.id),
     title: notification.repository.fullName,
-    body: notification.subject.title,
+    subtitle: context || undefined,
+    body,
     actionLabel: notification.unread
       ? i18n.t('notifications.mark_as_read', 'Mark as read')
       : undefined,
