@@ -1,10 +1,6 @@
-import {
-  getNativeNotificationGroupId,
-  getNativeNotificationId,
-  NATIVE_NOTIFICATION_SUMMARY_ID,
-} from './nativeNotifications';
+import { getNativeNotificationId, NATIVE_NOTIFICATION_SUMMARY_ID } from './nativeNotifications';
 
-// Windows caps a toast's tag and group at 64 characters.
+// Windows caps a toast's tag at 64 characters.
 const WINDOWS_TOAST_ID_LIMIT = 64;
 
 const LONG_ACCOUNT_UUID = btoa(
@@ -39,24 +35,6 @@ describe('shared/nativeNotifications.ts', () => {
 
     it('never equals the summary identity', () => {
       expect(getNativeNotificationId('account', '1')).not.toBe(NATIVE_NOTIFICATION_SUMMARY_ID);
-    });
-  });
-
-  describe('getNativeNotificationGroupId', () => {
-    it('stays within the Windows toast group limit for long repository names', () => {
-      const groupId = getNativeNotificationGroupId(
-        LONG_ACCOUNT_UUID,
-        'some-organization-with-a-long-name/a-repository-with-an-even-longer-name',
-      );
-
-      expect(groupId.length).toBeLessThanOrEqual(WINDOWS_TOAST_ID_LIMIT);
-      expect(groupId).toMatch(/^g[0-9a-z]+$/);
-    });
-
-    it('differs from the notification identity for the same inputs', () => {
-      expect(getNativeNotificationGroupId('account', 'x')).not.toBe(
-        getNativeNotificationId('account', 'x'),
-      );
     });
   });
 });

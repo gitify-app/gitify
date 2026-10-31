@@ -4,15 +4,12 @@ import { EVENTS } from '../../shared/events';
 
 const mocks = vi.hoisted(() => ({
   service: {
-    start: vi.fn(),
     show: vi.fn(),
-    isSupported: vi.fn(),
     remove: vi.fn(),
     removeAll: vi.fn(),
     markRendererReady: vi.fn(),
     destroy: vi.fn(),
   },
-  handleMainEvent: vi.fn(),
   onMainEvent: vi.fn(),
   appOnce: vi.fn(),
 }));
@@ -24,7 +21,6 @@ vi.mock('../notifications', () => ({
 }));
 
 vi.mock('../events', () => ({
-  handleMainEvent: (...args: unknown[]) => mocks.handleMainEvent(...args),
   onMainEvent: (...args: unknown[]) => mocks.onMainEvent(...args),
 }));
 
@@ -44,23 +40,16 @@ describe('main/handlers/native-notifications.ts', () => {
 
   beforeEach(() => {
     __resetNativeNotificationServiceForTests();
-    mocks.handleMainEvent.mockClear();
     mocks.onMainEvent.mockClear();
     mocks.appOnce.mockClear();
-    mocks.service.start.mockClear();
     mocks.service.destroy.mockClear();
   });
 
-  it('registers the show and support handlers plus the interaction listeners', () => {
+  it('registers the notification commands and interaction listener', () => {
     registerNativeNotificationHandlers(mb);
 
-    expect(mocks.service.start).toHaveBeenCalledTimes(1);
-    expect(mocks.handleMainEvent).toHaveBeenCalledWith(
+    expect(mocks.onMainEvent).toHaveBeenCalledWith(
       EVENTS.NATIVE_NOTIFICATION_SHOW,
-      expect.any(Function),
-    );
-    expect(mocks.handleMainEvent).toHaveBeenCalledWith(
-      EVENTS.NATIVE_NOTIFICATION_SUPPORTED,
       expect.any(Function),
     );
     expect(mocks.onMainEvent).toHaveBeenCalledWith(
@@ -78,14 +67,31 @@ describe('main/handlers/native-notifications.ts', () => {
     expect(mocks.appOnce).toHaveBeenCalledWith('will-quit', expect.any(Function));
   });
 
+  it('forwards commands to the service', () => {
+    registerNativeNotificationHandlers(mb);
+
+    const handlers = Object.fromEntries(
+      mocks.onMainEvent.mock.calls.map(([event, handler]) => [event, handler]),
+    ) as Record<string, (_event: unknown, payload: unknown) => void>;
+
+    const payload = { id: 'n1a2b3c4d5e6', title: 'Title', body: 'Body' };
+    handlers[EVENTS.NATIVE_NOTIFICATION_SHOW]({}, payload);
+    handlers[EVENTS.NATIVE_NOTIFICATION_REMOVE]({}, { ids: [payload.id] });
+    handlers[EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL]({}, undefined);
+    handlers[EVENTS.NATIVE_NOTIFICATION_READY]({}, undefined);
+
+    expect(mocks.service.show).toHaveBeenCalledWith(payload);
+    expect(mocks.service.remove).toHaveBeenCalledWith({ ids: [payload.id] });
+    expect(mocks.service.removeAll).toHaveBeenCalledTimes(1);
+    expect(mocks.service.markRendererReady).toHaveBeenCalledTimes(1);
+  });
+
   it('is idempotent', () => {
     const first = registerNativeNotificationHandlers(mb);
     const second = registerNativeNotificationHandlers(mb);
 
     expect(first).toBe(second);
-    expect(mocks.service.start).toHaveBeenCalledTimes(1);
-    expect(mocks.handleMainEvent).toHaveBeenCalledTimes(2);
-    expect(mocks.onMainEvent).toHaveBeenCalledTimes(3);
+    expect(mocks.onMainEvent).toHaveBeenCalledTimes(4);
   });
 
   it('destroys the service on will-quit', () => {

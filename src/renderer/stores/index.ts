@@ -7,6 +7,5 @@ export {
   default as useNotificationActionFailuresStore,
   getNotificationFailureKey,
 } from './useNotificationActionFailuresStore';
-export { default as useNotificationFocusStore } from './useNotificationFocusStore';
 export { default as useSettingsStore } from './useSettingsStore';
 export { default as useShortcutRegistrationStore } from './useShortcutRegistrationStore';

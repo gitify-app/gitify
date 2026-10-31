@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-import { LegendList, type LegendListRef } from '@legendapp/list/react';
+import { LegendList } from '@legendapp/list/react';
 
-import { useNotificationListDataKey } from '../../hooks/notifications/useNotificationListDataKey';
-import { useAccountsStore, useNotificationFocusStore, useSettingsStore } from '../../stores';
+import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import { type AccountNotifications, type GitifyNotification } from '../../types';
 
@@ -13,14 +12,7 @@ import {
   type BuildItemsContext,
   getItemKey,
   getItemType,
-  getNotificationItemKey,
 } from '../../utils/notifications/listItems';
-import {
-  FOCUS_HIGHLIGHT_MS,
-  FOCUS_VIEW_OFFSET,
-  getStickyHeaderIndices,
-  resolveNotificationFocus,
-} from '../../utils/notifications/listPositioning';
 import { AllRead } from '../AllRead';
 import { Oops } from '../Oops';
 import { AccountHeader } from './AccountHeader';
@@ -41,29 +33,7 @@ export function NotificationList({
   showAccountHeader,
 }: Readonly<NotificationListProps>) {
   const groupBy = useSettingsStore((s) => s.groupBy);
-  const accounts = useAccountsStore((s) => s.accounts);
   const hasMultipleAccounts = useAccountsStore((s) => s.hasMultipleAccounts());
-  const dataKey = useNotificationListDataKey({ groupBy, accounts });
-
-  const focusIntent = useNotificationFocusStore((s) => s.intent);
-  const clearFocus = useNotificationFocusStore((s) => s.clearFocus);
-
-  const listRef = useRef<LegendListRef>(null);
-  const highlightTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const [isReady, setIsReady] = useState(false);
-  const [focusedKey, setFocusedKey] = useState<string | null>(null);
-
-  // Adjust state during render so the list receives the new dataset identity
-  // and the readiness gate in the same commit, before its first placement.
-  const [previousDataKey, setPreviousDataKey] = useState(dataKey);
-  const [pendingDatasetReset, setPendingDatasetReset] = useState(false);
-
-  if (previousDataKey !== dataKey) {
-    setPreviousDataKey(dataKey);
-    setPendingDatasetReset(true);
-    setIsReady(false);
-  }
 
   const [animatingNotifications, setAnimatingNotifications] = useState<ReadonlySet<string>>(
     new Set(),
@@ -159,123 +129,14 @@ export function NotificationList({
     showAccountHeader,
   ]);
 
-  const stickyHeaderIndices = useMemo(() => getStickyHeaderIndices(items), [items]);
-  const stickyHeaderConfig = useMemo(() => ({ offset: 0 }), []);
-  const maintainVisibleContentPosition = useMemo(
-    () => ({
-      data: true,
-      shouldRestorePosition: () => !pendingDatasetReset,
-    }),
-    [pendingDatasetReset],
-  );
-
-  const clearHighlight = useCallback(() => {
-    if (highlightTimeoutRef.current) {
-      clearTimeout(highlightTimeoutRef.current);
-      highlightTimeoutRef.current = null;
-    }
-
-    setFocusedKey(null);
-  }, []);
-
-  const handleReady = useCallback(() => {
-    if (pendingDatasetReset) {
-      setPendingDatasetReset(false);
-      void listRef.current?.scrollToOffset({ offset: 0, animated: false });
-    }
-
-    setIsReady(true);
-  }, [pendingDatasetReset]);
-
-  useEffect(() => {
-    return () => {
-      if (highlightTimeoutRef.current) {
-        clearTimeout(highlightTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!focusIntent || !isReady) {
-      return;
-    }
-
-    const resolution = resolveNotificationFocus({
-      accountNotifications,
-      items,
-      accountUUID: focusIntent.accountUUID,
-      notificationId: focusIntent.notificationId,
-      collapsedAccounts,
-      collapsedRepositories,
-    });
-
-    if (resolution.status === 'filtered-out' || resolution.status === 'missing') {
-      clearFocus(focusIntent.requestId);
-      return;
-    }
-
-    if (resolution.status === 'collapsed-account') {
-      // oxlint-disable-next-line react/set-state-in-effect -- A focus request is an external event; expanding its group is the response.
-      toggleCollapsedAccount(focusIntent.accountUUID);
-      return;
-    }
-
-    if (resolution.status === 'collapsed-repository') {
-      // oxlint-disable-next-line react/set-state-in-effect -- A focus request is an external event; expanding its group is the response.
-      toggleCollapsedRepository(resolution.repoKey);
-      return;
-    }
-
-    const key = getNotificationItemKey(focusIntent.accountUUID, focusIntent.notificationId);
-
-    void listRef.current
-      ?.scrollToIndex({
-        index: resolution.index,
-        viewPosition: 0,
-        viewOffset: FOCUS_VIEW_OFFSET,
-        viewPositionFallback: 'start',
-        animated: true,
-      })
-      .catch(() => {
-        // The list may unmount while the scroll is in flight; the intent is
-        // still consumed so a later data update does not replay it.
-      });
-
-    if (highlightTimeoutRef.current) {
-      clearTimeout(highlightTimeoutRef.current);
-    }
-
-    setFocusedKey(key);
-    highlightTimeoutRef.current = setTimeout(() => setFocusedKey(null), FOCUS_HIGHLIGHT_MS);
-    clearFocus(focusIntent.requestId);
-  }, [
-    accountNotifications,
-    clearFocus,
-    collapsedAccounts,
-    collapsedRepositories,
-    focusIntent,
-    isReady,
-    items,
-    toggleCollapsedAccount,
-    toggleCollapsedRepository,
-  ]);
-
   return (
-    <div
-      className="grow min-h-0 overflow-hidden"
-      onKeyDownCapture={clearHighlight}
-      onPointerDownCapture={clearHighlight}
-    >
+    <div className="grow min-h-0 overflow-hidden">
       <LegendList
         className="overflow-y-auto"
         data={items}
-        dataKey={dataKey}
         estimatedItemSize={58}
         getItemType={getItemType}
         keyExtractor={getItemKey}
-        maintainVisibleContentPosition={maintainVisibleContentPosition}
-        onReady={handleReady}
-        ref={listRef}
         renderItem={({ item }) => (
           <>
             {item.kind === 'account' && (
@@ -308,7 +169,6 @@ export function NotificationList({
             {item.kind === 'notification' && (
               <NotificationRow
                 isAnimatingExit={item.isAnimatingExit}
-                isFocused={item.key === focusedKey}
                 onAnimateExit={(animate) =>
                   setNotificationAnimatingExit(
                     `${getAccountUUID(item.notification.account)}:${item.notification.id}`,
@@ -320,8 +180,6 @@ export function NotificationList({
             )}
           </>
         )}
-        stickyHeaderConfig={stickyHeaderConfig}
-        stickyHeaderIndices={stickyHeaderIndices}
         style={{ height: '100%', overflowX: 'hidden' }}
       />
     </div>

@@ -3,7 +3,7 @@ import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
 
-import { handleMainEvent, onMainEvent } from '../events';
+import { onMainEvent } from '../events';
 import { NativeNotificationService } from '../notifications';
 
 let service: NativeNotificationService | null = null;
@@ -20,10 +20,8 @@ export function registerNativeNotificationHandlers(mb: Menubar): NativeNotificat
 
   const instance = new NativeNotificationService(mb);
   service = instance;
-  instance.start();
 
-  handleMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, (_, payload) => instance.show(payload));
-  handleMainEvent(EVENTS.NATIVE_NOTIFICATION_SUPPORTED, () => instance.isSupported());
+  onMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, (_, payload) => instance.show(payload));
   onMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE, (_, payload) => instance.remove(payload));
   onMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL, () => instance.removeAll());
   onMainEvent(EVENTS.NATIVE_NOTIFICATION_READY, () => instance.markRendererReady());

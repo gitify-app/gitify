@@ -10,7 +10,6 @@ vi.mock('./events', () => ({
 
 vi.mock('../shared/logger', () => ({
   logError: vi.fn(),
-  toError: (error: unknown) => (error instanceof Error ? error : new Error(String(error))),
 }));
 
 vi.mock('electron', () => {
@@ -19,20 +18,15 @@ vi.mock('electron', () => {
     static isSupported = vi.fn(() => true);
     static remove = vi.fn();
     static removeAll = vi.fn();
-    static removeGroup = vi.fn();
-    static getHistory = vi.fn(async () => []);
-    static handleActivation = vi.fn();
 
     id: string;
-    groupId?: string;
     options: unknown;
     show = vi.fn();
     close = vi.fn();
     private listeners = new Map<string, (...args: unknown[]) => void>();
 
-    constructor(options: { id: string; groupId?: string }) {
+    constructor(options: { id: string }) {
       this.id = options.id;
-      this.groupId = options.groupId;
       this.options = options;
       MockNotification.instances.push(this);
     }
@@ -56,7 +50,6 @@ import { NativeNotificationService, validateNativeNotificationPayload } from './
 
 interface NotificationMock {
   id: string;
-  groupId?: string;
   options: Record<string, unknown>;
   show: ReturnType<typeof vi.fn>;
   close: ReturnType<typeof vi.fn>;
@@ -68,9 +61,6 @@ const NotificationMock = Notification as unknown as {
   isSupported: ReturnType<typeof vi.fn>;
   remove: ReturnType<typeof vi.fn>;
   removeAll: ReturnType<typeof vi.fn>;
-  removeGroup: ReturnType<typeof vi.fn>;
-  getHistory: ReturnType<typeof vi.fn>;
-  handleActivation: ReturnType<typeof vi.fn>;
 };
 
 function makeMenubar() {
@@ -86,21 +76,15 @@ function makeMenubar() {
     },
   } as unknown as Menubar;
 
-  return { mb, send, emitWebContents: (event: string) => webContentsListeners.get(event)?.() };
+  return { mb, emitWebContents: (event: string) => webContentsListeners.get(event)?.() };
 }
 
 const basePayload: INativeNotificationPayload = {
   id: 'n1a2b3c4d5e6',
-  groupId: 'g1a2b3c4d5e6',
-  groupTitle: 'owner/repo',
   title: 'owner/repo',
   subtitle: 'Updated · @octocat',
   body: 'A title',
-  actions: [
-    { id: 'show', label: 'Afficher' },
-    { id: 'read', label: 'Marquer comme lu' },
-  ],
-  keepVisible: false,
+  actionLabel: 'Mark as read',
 };
 
 describe('main/notifications.ts', () => {
@@ -109,122 +93,53 @@ describe('main/notifications.ts', () => {
     NotificationMock.isSupported.mockReturnValue(true);
     NotificationMock.remove.mockClear();
     NotificationMock.removeAll.mockClear();
-    NotificationMock.removeGroup.mockClear();
-    NotificationMock.getHistory.mockResolvedValue([]);
-    NotificationMock.handleActivation.mockClear();
     sendRendererEventMock.mockClear();
   });
 
-  it('returns unsupported without constructing a notification', () => {
+  it('does not construct a notification when the platform does not support them', () => {
     NotificationMock.isSupported.mockReturnValue(false);
     const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'darwin');
 
-    expect(service.show(basePayload)).toEqual({ supported: false });
+    new NativeNotificationService(mb, 'darwin').show(basePayload);
+
     expect(NotificationMock.instances).toHaveLength(0);
   });
 
-  it('constructs and shows a notification with the requested options', () => {
+  it('constructs a macOS notification with a subtitle and one action', () => {
     const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'linux');
 
-    expect(service.show(basePayload)).toEqual({ supported: true });
-    const instance = NotificationMock.instances[0];
+    new NativeNotificationService(mb, 'darwin').show(basePayload);
 
-    expect(instance.options).toMatchObject({
+    expect(NotificationMock.instances[0].options).toMatchObject({
       id: basePayload.id,
-      groupId: basePayload.groupId,
       title: basePayload.title,
-      body: `${basePayload.subtitle}\n${basePayload.body}`,
+      subtitle: basePayload.subtitle,
+      body: basePayload.body,
       silent: true,
-      timeoutType: 'default',
-      // Labels come from the renderer so they follow the interface language.
-      actions: [
-        { type: 'button', text: 'Afficher' },
-        { type: 'button', text: 'Marquer comme lu' },
-      ],
+      actions: [{ type: 'button', text: 'Mark as read' }],
     });
-    expect(instance.show).toHaveBeenCalledTimes(1);
   });
 
-  it('uses subtitle on macOS and keep-visible timeout when requested', () => {
+  it('folds the subtitle into the body on Windows and Linux', () => {
     const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'darwin');
 
-    service.show({ ...basePayload, keepVisible: true });
-    const instance = NotificationMock.instances[0];
+    new NativeNotificationService(mb, 'linux').show(basePayload);
 
-    expect(instance.options.subtitle).toBe(basePayload.subtitle);
-    expect(instance.options.body).toBe(basePayload.body);
-    expect(instance.options.timeoutType).toBe('never');
+    expect(NotificationMock.instances[0].options).toMatchObject({
+      subtitle: undefined,
+      body: `${basePayload.subtitle}\n${basePayload.body}`,
+    });
   });
 
-  it('replaces an existing notification with the same identity', () => {
+  it('publishes a notification without actions when no label is provided', () => {
     const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'linux');
 
-    service.show(basePayload);
-    const first = NotificationMock.instances[0];
-    service.show(basePayload);
+    new NativeNotificationService(mb, 'darwin').show({ ...basePayload, actionLabel: undefined });
 
-    expect(first.close).toHaveBeenCalledTimes(1);
-    expect(NotificationMock.instances).toHaveLength(2);
+    expect(NotificationMock.instances[0].options).toMatchObject({ actions: [] });
   });
 
-  it('rejects malformed payloads without constructing a notification', () => {
-    const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'linux');
-
-    expect(service.show({ ...basePayload, id: '' })).toEqual({ supported: true });
-    expect(
-      service.show({
-        ...basePayload,
-        actions: [
-          { id: 'unknown', label: 'x' },
-        ] as unknown as INativeNotificationPayload['actions'],
-      }),
-    ).toEqual({ supported: true });
-    expect(NotificationMock.instances).toHaveLength(0);
-  });
-
-  it('validates identifiers and actions', () => {
-    expect(validateNativeNotificationPayload(basePayload)).toBe(true);
-    expect(validateNativeNotificationPayload({ ...basePayload, groupId: '' })).toBe(false);
-    expect(
-      validateNativeNotificationPayload({
-        ...basePayload,
-        actions: [
-          { id: 'show', label: 'Show' },
-          { id: 'bad', label: 'Bad' },
-        ] as unknown as INativeNotificationPayload['actions'],
-      }),
-    ).toBe(false);
-    expect(
-      validateNativeNotificationPayload({
-        ...basePayload,
-        actions: ['show'] as unknown as INativeNotificationPayload['actions'],
-      }),
-    ).toBe(false);
-    expect(
-      validateNativeNotificationPayload({ ...basePayload, actions: [{ id: 'read', label: ' ' }] }),
-    ).toBe(false);
-    expect(
-      validateNativeNotificationPayload({
-        ...basePayload,
-        actions: [{ id: 'read', label: 'x'.repeat(65) }],
-      }),
-    ).toBe(false);
-  });
-
-  it('rejects identities longer than the Windows toast limit', () => {
-    expect(validateNativeNotificationPayload({ ...basePayload, id: 'n'.repeat(64) })).toBe(true);
-    expect(validateNativeNotificationPayload({ ...basePayload, id: 'n'.repeat(65) })).toBe(false);
-    expect(validateNativeNotificationPayload({ ...basePayload, groupId: 'g'.repeat(65) })).toBe(
-      false,
-    );
-  });
-
-  it('delivers click and action events after the renderer is ready', () => {
+  it('delivers clicks and the Mark as read action after the renderer is ready', () => {
     const { mb } = makeMenubar();
     const service = new NativeNotificationService(mb, 'linux');
     service.show(basePayload);
@@ -232,15 +147,25 @@ describe('main/notifications.ts', () => {
 
     const instance = NotificationMock.instances[0];
     instance.emit('click');
-    instance.emit('action', { actionIndex: 1 });
+    instance.emit('action', { actionIndex: 0 });
 
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
       id: basePayload.id,
     });
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_ACTION, {
       id: basePayload.id,
-      action: 'read',
     });
+  });
+
+  it('ignores unknown action indexes', () => {
+    const { mb } = makeMenubar();
+    const service = new NativeNotificationService(mb, 'linux');
+    service.show(basePayload);
+    service.markRendererReady();
+
+    NotificationMock.instances[0].emit('action', { actionIndex: 1 });
+
+    expect(sendRendererEventMock).not.toHaveBeenCalled();
   });
 
   it('queues interactions until the renderer is ready', () => {
@@ -263,167 +188,61 @@ describe('main/notifications.ts', () => {
     service.show(basePayload);
     service.markRendererReady();
 
-    NotificationMock.instances[0].emit('click');
-    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
-
     emitWebContents('did-start-loading');
     NotificationMock.instances[0].emit('click');
-    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
+    expect(sendRendererEventMock).not.toHaveBeenCalled();
 
     service.markRendererReady();
-    expect(sendRendererEventMock).toHaveBeenCalledTimes(2);
+    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
   });
 
-  it('keeps delivered notifications when the service is destroyed', () => {
-    const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'darwin');
-    service.show(basePayload);
-
-    service.destroy();
-
-    expect(NotificationMock.instances[0].close).not.toHaveBeenCalled();
-    expect(NotificationMock.removeAll).not.toHaveBeenCalled();
-  });
-
-  it('removes by identity, group, and all', () => {
-    const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'darwin');
-    service.show(basePayload);
-    service.show({ ...basePayload, id: 'second' });
-
-    service.remove({ ids: [basePayload.id] });
-    expect(NotificationMock.instances[0].close).toHaveBeenCalledTimes(1);
-    expect(NotificationMock.remove).toHaveBeenCalledWith(basePayload.id);
-
-    service.remove({ groupId: basePayload.groupId });
-    expect(NotificationMock.instances[1].close).toHaveBeenCalledTimes(1);
-    expect(NotificationMock.removeGroup).toHaveBeenCalledWith(basePayload.groupId);
-
-    service.removeAll();
-    expect(NotificationMock.removeAll).toHaveBeenCalledTimes(1);
-  });
-
-  it('treats unknown identities as a no-op', () => {
+  it('replaces an existing notification with the same identity', () => {
     const { mb } = makeMenubar();
     const service = new NativeNotificationService(mb, 'linux');
 
-    expect(() => service.remove({ ids: ['missing'] })).not.toThrow();
+    service.show(basePayload);
+    service.show({ ...basePayload, body: 'Updated body' });
+
+    expect(NotificationMock.instances[0].close).toHaveBeenCalledTimes(1);
+    expect(NotificationMock.instances).toHaveLength(2);
   });
 
-  it('restores delivered macOS notifications', async () => {
-    const history = [
-      {
-        id: 'history-id',
-        on: vi.fn(),
-        close: vi.fn(),
-      },
-    ];
-    NotificationMock.getHistory.mockResolvedValue(history);
+  it('removes notifications by identity', () => {
     const { mb } = makeMenubar();
     const service = new NativeNotificationService(mb, 'darwin');
-    service.start();
-    service.markRendererReady();
-
-    await Promise.resolve();
-
-    const handler = (event: string) =>
-      history[0].on.mock.calls.find(([name]) => name === event)?.[1] as () => void;
-
-    handler('click')();
-    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
-      id: 'history-id',
-    });
-
-    // Restored notifications lose their actions, so an action opens the notification.
-    sendRendererEventMock.mockClear();
-    handler('action')();
-    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
-      id: 'history-id',
-    });
-  });
-
-  it('delivers a live Windows interaction once through the instance events', () => {
-    const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'win32');
-    service.start();
-    service.markRendererReady();
     service.show(basePayload);
 
-    NotificationMock.instances[0].emit('action', { actionIndex: 1 });
-    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
-    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_ACTION, {
-      id: basePayload.id,
-      action: 'read',
-    });
+    service.remove({ ids: [basePayload.id] });
 
-    // Windows also invokes the global activation callback for the same
-    // interaction; it must not deliver a second event.
-    const activation = NotificationMock.handleActivation.mock.calls[0][0] as (details: {
-      type: string;
-      arguments: string;
-      actionIndex?: number;
-    }) => void;
-    activation({
-      type: 'action',
-      arguments: `type=action&action=1&tag=${basePayload.id}`,
-      actionIndex: 1,
-    });
-    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
+    expect(NotificationMock.instances[0].close).toHaveBeenCalledTimes(1);
+    expect(NotificationMock.remove).toHaveBeenCalledWith(basePayload.id);
   });
 
-  it('delivers a live Windows body click through the instance event', () => {
+  it('removes every published notification', () => {
     const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'win32');
-    service.start();
-    service.markRendererReady();
+    const service = new NativeNotificationService(mb, 'darwin');
     service.show(basePayload);
+    service.show({ ...basePayload, id: 'n2b3c4d5e6f7' });
 
-    NotificationMock.instances[0].emit('click');
+    service.removeAll();
 
-    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
-      id: basePayload.id,
-    });
+    expect(
+      NotificationMock.instances.every((instance) => instance.close.mock.calls.length === 1),
+    ).toBe(true);
+    expect(NotificationMock.removeAll).toHaveBeenCalled();
   });
 
-  it('routes a cold-start Windows activation by its toast tag', () => {
-    const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'win32');
-    service.start();
-    service.markRendererReady();
-
-    const activation = NotificationMock.handleActivation.mock.calls[0][0] as (details: {
-      type: string;
-      arguments: string;
-      actionIndex?: number;
-    }) => void;
-
-    activation({
-      type: 'action',
-      arguments: `type=action&action=0&tag=${basePayload.id}`,
-      actionIndex: 0,
-    });
-
-    // No live notification exists after a cold start, so the interaction falls
-    // back to a click the renderer can resolve after its first fetch.
-    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
-      id: basePayload.id,
-    });
-  });
-
-  it('treats an empty Windows click activation as a generic activation', () => {
-    const { mb } = makeMenubar();
-    const service = new NativeNotificationService(mb, 'win32');
-    service.start();
-    service.markRendererReady();
-
-    const activation = NotificationMock.handleActivation.mock.calls[0][0] as (details: {
-      type: string;
-      arguments: string;
-    }) => void;
-    activation({ type: 'click', arguments: '' });
-
-    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
-      id: '',
-    });
+  it('validates identifiers and action labels', () => {
+    expect(validateNativeNotificationPayload(basePayload)).toBe(true);
+    expect(validateNativeNotificationPayload({ ...basePayload, id: '' })).toBe(false);
+    expect(validateNativeNotificationPayload({ ...basePayload, id: 'n'.repeat(65) })).toBe(false);
+    expect(validateNativeNotificationPayload({ ...basePayload, title: ' ' })).toBe(false);
+    expect(validateNativeNotificationPayload({ ...basePayload, actionLabel: ' ' })).toBe(false);
+    expect(validateNativeNotificationPayload({ ...basePayload, actionLabel: 'x'.repeat(65) })).toBe(
+      false,
+    );
+    expect(
+      validateNativeNotificationPayload({ ...basePayload, actionLabel: 1 as unknown as string }),
+    ).toBe(false);
   });
 });

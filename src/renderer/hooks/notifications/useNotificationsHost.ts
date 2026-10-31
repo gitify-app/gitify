@@ -13,18 +13,7 @@ import { useNotificationsQuery } from './useNotificationsQuery';
  *
  * @returns The same reader/actions surface as `useNotifications`.
  */
-export interface NotificationsHostOptions {
-  /**
-   * Navigate to the notifications route when an OS notification click reveals
-   * a notification in-app. Defaults to a no-op for consumers that only need the
-   * host's data/actions (for example tests).
-   */
-  onReveal?: () => void;
-}
-
-export const useNotificationsHost = ({
-  onReveal = () => undefined,
-}: NotificationsHostOptions = {}): NotificationsState => {
+export const useNotificationsHost = (): NotificationsState => {
   const query = useNotificationsQuery({ poll: true });
   const actions = useNotificationActions();
 
@@ -37,7 +26,6 @@ export const useNotificationsHost = ({
     refetch: query.refetch,
     fetchIntervalMs: query.fetchIntervalMs,
     actions,
-    onReveal,
   });
 
   return buildNotificationsState(query, actions);

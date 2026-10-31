@@ -49,11 +49,10 @@ interface TestApi {
   setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   nativeNotifications: {
-    show: (payload: unknown) => Promise<unknown>;
+    show: (payload: unknown) => void;
     remove: (payload: unknown) => void;
     removeAll: () => void;
     notifyReady: () => void;
-    isSupported: () => Promise<boolean>;
     onAction: (callback: (payload: unknown) => void) => () => void;
     onClick: (callback: (payload: unknown) => void) => () => void;
   };
@@ -151,19 +150,18 @@ describe('preload/index', () => {
     expect(callback).toHaveBeenCalledWith('out');
   });
 
-  it('nativeNotifications.show invokes the main process with the payload', async () => {
+  it('nativeNotifications.show sends the payload to the main process', () => {
     const api = getExposedApi();
     const payload = {
       id: 'account:notification',
       title: 'Title',
       body: 'Body',
-      actions: ['open'],
+      actionLabel: 'Mark as read',
     };
 
-    invokeMainEventMock.mockResolvedValueOnce({ supported: true });
+    api.nativeNotifications.show(payload);
 
-    await expect(api.nativeNotifications.show(payload)).resolves.toEqual({ supported: true });
-    expect(invokeMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_SHOW, payload);
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_SHOW, payload);
   });
 
   it('nativeNotifications.remove sends the removal payload', () => {
@@ -190,15 +188,6 @@ describe('preload/index', () => {
     api.nativeNotifications.notifyReady();
 
     expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_READY);
-  });
-
-  it('nativeNotifications.isSupported invokes the support query', async () => {
-    const api = getExposedApi();
-
-    invokeMainEventMock.mockResolvedValueOnce(false);
-
-    await expect(api.nativeNotifications.isSupported()).resolves.toBe(false);
-    expect(invokeMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_SUPPORTED);
   });
 
   it('nativeNotifications.onAction forwards actions and returns the unsubscribe function', () => {

@@ -6,10 +6,10 @@ export const NATIVE_NOTIFICATION_SUMMARY_ID = 'summary';
 /**
  * Build the operating-system notification identity for a notification.
  *
- * Windows caps a toast's tag and group at 64 characters, and account UUIDs
- * plus repository names easily exceed that. The identity is therefore a short,
- * deterministic hash: the main process treats it as opaque, and the renderer
- * resolves an interaction by hashing its cached notifications and matching.
+ * Windows caps a toast's tag at 64 characters, and account UUIDs plus thread
+ * IDs easily exceed that. The identity is therefore a short, deterministic
+ * hash: the main process treats it as opaque, and the renderer resolves an
+ * interaction by hashing its cached notifications and matching.
  *
  * @param accountUUID - The account that owns the notification.
  * @param notificationId - The notification's thread ID.
@@ -17,17 +17,6 @@ export const NATIVE_NOTIFICATION_SUMMARY_ID = 'summary';
  */
 export function getNativeNotificationId(accountUUID: string, notificationId: string): string {
   return `n${hash(`${accountUUID}\u0000${notificationId}`)}`;
-}
-
-/**
- * Build the operating-system group identity for an account's repository.
- *
- * @param accountUUID - The account that owns the group.
- * @param groupKey - The repository or thread key to group by.
- * @returns A stable group identity of at most 12 characters.
- */
-export function getNativeNotificationGroupId(accountUUID: string, groupKey: string): string {
-  return `g${hash(`${accountUUID}\u0000${groupKey}`)}`;
 }
 
 /**

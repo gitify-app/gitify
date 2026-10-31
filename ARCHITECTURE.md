@@ -51,13 +51,13 @@ The renderer is layered. **Runtime imports flow in one direction only** — a mo
 
 Every kind of renderer state has exactly one owner. Put new state with the mechanism that owns its kind:
 
-| Kind of state          | Owner                                                | Examples                                                           |
-| ---------------------- | ---------------------------------------------------- | ------------------------------------------------------------------ |
-| Server / async data    | TanStack Query                                       | the notification list, periodic account refreshes                  |
-| Persisted client state | Zustand with `persist`                               | `accounts`, `settings`                                             |
-| Session client state   | Zustand without `persist`                            | `filters`, notification action failures, notification focus intent |
-| Derived values         | A store selector/action, or a pure `utils/` function | `isLoggedIn`, `hasMultipleAccounts`, notification status           |
-| Ephemeral view state   | React `useState` / `useMemo`                         | row expand/collapse, exit animations                               |
+| Kind of state          | Owner                                                | Examples                                                 |
+| ---------------------- | ---------------------------------------------------- | -------------------------------------------------------- |
+| Server / async data    | TanStack Query                                       | the notification list, periodic account refreshes        |
+| Persisted client state | Zustand with `persist`                               | `accounts`, `settings`                                   |
+| Session client state   | Zustand without `persist`                            | `filters`, notification action failures                  |
+| Derived values         | A store selector/action, or a pure `utils/` function | `isLoggedIn`, `hasMultipleAccounts`, notification status |
+| Ephemeral view state   | React `useState` / `useMemo`                         | row expand/collapse, exit animations                     |
 
 Rules:
 
@@ -69,7 +69,7 @@ Rules:
 
 App-level side effects are owned by a single host. `GlobalEffects` mounts exactly once (inside the query and theme providers) and owns theme application, tray updates, global shortcut registration, periodic account refreshes, and notification polling and alerts.
 
-Operating-system notifications are created by the main process behind the typed `window.gitify.nativeNotifications` bridge. The single notification host publishes the filtered new-notification set, routes OS actions and clicks back into the existing mutation/recovery pipeline, and removes published notifications when they leave the unfiltered cache. The sandboxed preload only forwards requests and listeners; it never constructs an OS notification.
+Operating-system notifications are created by the main process behind the typed `window.gitify.nativeNotifications` bridge. The single notification host publishes the filtered new-notification set, marks a notification read when its OS action is used, opens the target when its body is clicked, and removes published notifications when they leave the unfiltered cache. The sandboxed preload only forwards requests and listeners; it never constructs an OS notification.
 
 Consumers read the shared query cache and stores, and **do not register their own** polling, alerts, wake, or focus listeners. This keeps background work (for example, firing one poll per interval) from multiplying with the number of mounted components. When you add a new background effect, add it to the host, not to a leaf component.
 

@@ -278,19 +278,15 @@ export const api = {
     /**
      * Publish one structured notification through the main process.
      *
-     * The payload carries display data and whitelisted action IDs only; the
-     * main process owns validation and construction.
-     *
      * @param payload - The notification to publish.
-     * @returns Resolves once the main process has handled the request.
      */
     show: (payload: INativeNotificationPayload) =>
-      invokeMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, payload),
+      sendMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, payload),
 
     /**
-     * Remove published notifications by identity or group.
+     * Remove published notifications by identity.
      *
-     * @param payload - The identities or group to remove.
+     * @param payload - The identities to remove.
      */
     remove: (payload: INativeNotificationRemovePayload) =>
       sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE, payload),
@@ -300,9 +296,6 @@ export const api = {
 
     /** Tell the main process the renderer action/click listeners are mounted. */
     notifyReady: () => sendMainEvent(EVENTS.NATIVE_NOTIFICATION_READY),
-
-    /** Whether the operating system supports desktop notifications. */
-    isSupported: () => invokeMainEvent(EVENTS.NATIVE_NOTIFICATION_SUPPORTED),
 
     /**
      * Register a callback for an activated notification action.

@@ -29,7 +29,6 @@ export const EVENTS = {
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
   SYSTEM_WAKE: `${P}system-wake`,
   NATIVE_NOTIFICATION_SHOW: `${P}native-notification-show`,
-  NATIVE_NOTIFICATION_SUPPORTED: `${P}native-notification-supported`,
   NATIVE_NOTIFICATION_REMOVE: `${P}native-notification-remove`,
   NATIVE_NOTIFICATION_REMOVE_ALL: `${P}native-notification-remove-all`,
   NATIVE_NOTIFICATION_READY: `${P}native-notification-ready`,
@@ -110,47 +109,26 @@ export type IGitHubCliTokenResult =
   | { token: string; error?: never; detail?: never }
   | { token?: never; error: GitHubCliTokenError; detail?: string };
 
-/** An action button offered by an operating-system notification. */
-export type NativeNotificationActionId = 'show' | 'read';
-
-/** An action button and its translated label. */
-export interface INativeNotificationAction {
-  id: NativeNotificationActionId;
-  /** Button text, translated by the renderer. */
-  label: string;
-}
-
 /** A structured request to publish an operating-system notification. */
 export interface INativeNotificationPayload {
   /** Short, opaque identity for this notification (see `getNativeNotificationId`). */
   id: string;
-  /** Short, opaque account + repository identity used for visual grouping. */
-  groupId?: string;
-  /** Repository name shown as a group title on Windows. */
-  groupTitle?: string;
   title: string;
+  /** macOS subtitle. Other platforms append it to the body. */
   subtitle?: string;
   body: string;
-  actions: INativeNotificationAction[];
-  /** Keep the notification on screen until the user dismisses it. */
-  keepVisible?: boolean;
+  /** Translated label for the single Mark as read action, when one is offered. */
+  actionLabel?: string;
 }
 
-/** Result of asking the main process to publish a notification. */
-export interface INativeNotificationShowResult {
-  supported: boolean;
-}
-
-/** Payload for removing one or more published notifications. */
+/** Payload for removing published notifications. */
 export interface INativeNotificationRemovePayload {
-  ids?: string[];
-  groupId?: string;
+  ids: string[];
 }
 
-/** An action button activated on an operating-system notification. */
+/** An action was activated on an operating-system notification. */
 export interface INativeNotificationActionEvent {
   id: string;
-  action: NativeNotificationActionId;
 }
 
 /** A notification body click. An empty identity is a generic app activation. */
@@ -218,9 +196,8 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
   [EVENTS.NATIVE_NOTIFICATION_SHOW]: {
     request: INativeNotificationPayload;
-    response: INativeNotificationShowResult;
+    response: undefined;
   };
-  [EVENTS.NATIVE_NOTIFICATION_SUPPORTED]: { request: undefined; response: boolean };
   [EVENTS.NATIVE_NOTIFICATION_REMOVE]: {
     request: INativeNotificationRemovePayload;
     response: undefined;

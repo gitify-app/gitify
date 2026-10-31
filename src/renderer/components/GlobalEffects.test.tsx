@@ -51,7 +51,6 @@ describe('renderer/components/GlobalEffects.tsx', () => {
     expect(useAccountsStore.getState().accounts).toEqual([]);
     expect(useSettingsStore.getState().theme).toBe(Theme.SYSTEM);
     expect(useShortcutRegistrationStore.getState().shortcutRegistrationError).toBeNull();
-    expect(window.gitify.nativeNotifications.removeAll).toHaveBeenCalled();
   });
 
   describe('persistRotatedAccountTokens (startup)', () => {

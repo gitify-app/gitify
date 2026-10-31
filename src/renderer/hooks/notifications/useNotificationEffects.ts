@@ -5,7 +5,6 @@ import { focusManager, type QueryKey, useQueryClient } from '@tanstack/react-que
 import type {
   INativeNotificationActionEvent,
   INativeNotificationClickEvent,
-  NativeNotificationActionId,
 } from '../../../shared/events';
 import {
   getNativeNotificationId,
@@ -15,12 +14,10 @@ import {
 import {
   getNotificationFailureKey,
   useNotificationActionFailuresStore,
-  useNotificationFocusStore,
   useSettingsStore,
 } from '../../stores';
 
-import type { AccountNotifications, GitifyNotification, Link } from '../../types';
-import { NativeNotificationClickAction } from '../../types';
+import type { AccountNotifications, GitifyNotification } from '../../types';
 
 import { getAccountUUID } from '../../utils/auth/utils';
 import { doesAllAccountsHaveErrors } from '../../utils/core/errors';
@@ -32,18 +29,9 @@ import {
 import { refreshEnrichmentCache } from '../../utils/notifications/notifications';
 import { getNewNotifications } from '../../utils/notifications/utils';
 import { raiseSoundNotification } from '../../utils/system/audio';
-import { openExternalLink } from '../../utils/system/comms';
 import { openNotification } from '../../utils/system/links';
 import { raiseNativeNotification } from '../../utils/system/native';
 import type { NotificationActions } from './useNotificationActions';
-
-const PENDING_INTERACTION_TTL_MS = 30_000;
-const MAX_PENDING_INTERACTIONS = 20;
-
-interface PendingInteraction {
-  payload: INativeNotificationActionEvent;
-  expiresAt: number;
-}
 
 export interface NotificationEffectsInput {
   /**
@@ -58,8 +46,6 @@ export interface NotificationEffectsInput {
   refetch: () => void;
   fetchIntervalMs: number;
   actions: NotificationActions;
-  /** Navigate to the notifications route when a notification is revealed. */
-  onReveal: () => void;
 }
 
 /**
@@ -79,27 +65,19 @@ export const useNotificationEffects = ({
   refetch,
   fetchIntervalMs,
   actions,
-  onReveal,
 }: NotificationEffectsInput): void => {
   const queryClient = useQueryClient();
   const previousNotificationsRef = useRef<AccountNotifications[]>([]);
   const actionsRef = useRef(actions);
-  const onRevealRef = useRef(onReveal);
   const publishedIdsRef = useRef<Set<string>>(new Set());
-  const publishedUrlsRef = useRef<Map<string, string>>(new Map());
-  const pendingInteractionsRef = useRef<PendingInteraction[]>([]);
 
   useEffect(() => {
     actionsRef.current = actions;
-    onRevealRef.current = onReveal;
-  }, [actions, onReveal]);
+  }, [actions]);
 
   const playSoundNewNotifications = useSettingsStore((s) => s.playSound);
   const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
-  const nativeNotificationStyle = useSettingsStore((s) => s.nativeNotificationStyle);
-  const nativeNotificationActions = useSettingsStore((s) => s.nativeNotificationActions);
-  const nativeNotificationKeepVisible = useSettingsStore((s) => s.nativeNotificationKeepVisible);
 
   const readUnfilteredNotifications = useCallback(
     () => queryClient.getQueryData<AccountNotifications[]>(notificationsQueryKey) ?? [],
@@ -129,109 +107,30 @@ export const useNotificationEffects = ({
     [readUnfilteredNotifications],
   );
 
-  const executeAction = useCallback(
-    (action: NativeNotificationActionId, notification: GitifyNotification) => {
-      switch (action) {
-        case 'read':
-          void actionsRef.current.markNotificationsAsRead([notification]);
-          return;
-        case 'show':
-        default:
-          return;
+  const handleNativeAction = useCallback(
+    (payload: INativeNotificationActionEvent) => {
+      const notification = resolveNotification(payload.id);
+
+      if (notification) {
+        void actionsRef.current.markNotificationsAsRead([notification]);
       }
     },
-    [],
+    [resolveNotification],
   );
 
   const handleNativeClick = useCallback(
     (payload: INativeNotificationClickEvent) => {
       const notification = resolveNotification(payload.id);
 
-      if (
-        useSettingsStore.getState().nativeNotificationClickAction ===
-        NativeNotificationClickAction.BROWSER
-      ) {
-        if (notification) {
-          void openNotification(notification);
-          return;
-        }
-
-        const fallbackUrl = publishedUrlsRef.current.get(payload.id);
-
-        if (fallbackUrl) {
-          openExternalLink(fallbackUrl as Link);
-          return;
-        }
-
-        window.gitify.app.show();
-        onRevealRef.current();
+      if (notification) {
+        void openNotification(notification);
         return;
       }
 
       window.gitify.app.show();
-      onRevealRef.current();
-
-      if (notification) {
-        useNotificationFocusStore
-          .getState()
-          .requestFocus(getAccountUUID(notification.account), notification.id);
-      }
     },
     [resolveNotification],
   );
-
-  const handleNativeAction = useCallback(
-    (payload: INativeNotificationActionEvent) => {
-      if (payload.action === 'show') {
-        handleNativeClick({ id: payload.id });
-        return;
-      }
-
-      const notification = resolveNotification(payload.id);
-
-      if (!notification) {
-        pendingInteractionsRef.current.push({
-          payload,
-          expiresAt: Date.now() + PENDING_INTERACTION_TTL_MS,
-        });
-
-        if (pendingInteractionsRef.current.length > MAX_PENDING_INTERACTIONS) {
-          pendingInteractionsRef.current.shift();
-        }
-
-        return;
-      }
-
-      executeAction(payload.action, notification);
-    },
-    [executeAction, handleNativeClick, resolveNotification],
-  );
-
-  const processPendingInteractions = useCallback(() => {
-    if (pendingInteractionsRef.current.length === 0) {
-      return;
-    }
-
-    const now = Date.now();
-    const remaining: PendingInteraction[] = [];
-
-    for (const pending of pendingInteractionsRef.current) {
-      if (pending.expiresAt <= now) {
-        continue;
-      }
-
-      const notification = resolveNotification(pending.payload.id);
-
-      if (!notification) {
-        remaining.push(pending);
-        continue;
-      }
-
-      executeAction(pending.payload.action, notification);
-    }
-
-    pendingInteractionsRef.current = remaining;
-  }, [executeAction, resolveNotification]);
 
   // Refetch notifications immediately when the system wakes from sleep or the
   // user unlocks their screen, without waiting for the next poll interval.
@@ -288,13 +187,6 @@ export const useNotificationEffects = ({
     };
   }, [enabled, handleNativeAction, handleNativeClick]);
 
-  // Retry interactions that arrived before the notification cache settled.
-  useEffect(() => {
-    if (enabled) {
-      processPendingInteractions();
-    }
-  }, [enabled, notifications, processPendingInteractions]);
-
   // Handle sound and native notifications when new notifications arrive.
   useEffect(() => {
     if (!enabled || isLoading || isError || notifications.length === 0) {
@@ -325,20 +217,10 @@ export const useNotificationEffects = ({
         }
 
         if (showSystemNotifications) {
-          void Promise.resolve(
-            raiseNativeNotification(filteredDiffNotifications, {
-              style: nativeNotificationStyle,
-              actions: nativeNotificationActions,
-              keepVisible: nativeNotificationKeepVisible,
-            }),
-          )
+          void Promise.resolve(raiseNativeNotification(filteredDiffNotifications))
             .then((published) => {
-              for (const { payload, url } of published ?? []) {
+              for (const payload of published ?? []) {
                 publishedIdsRef.current.add(payload.id);
-
-                if (url) {
-                  publishedUrlsRef.current.set(payload.id, url);
-                }
               }
             })
             .catch((error) => {
@@ -361,14 +243,11 @@ export const useNotificationEffects = ({
     playSoundNewNotifications,
     showSystemNotifications,
     notificationVolume,
-    nativeNotificationStyle,
-    nativeNotificationActions,
-    nativeNotificationKeepVisible,
     readUnfilteredNotifications,
   ]);
 
-  // Remove published notifications when they leave the unfiltered cache,
-  // including read/done/unsubscribe, account removal, and reset.
+  // Remove published notifications when they leave the unfiltered cache, or
+  // keep the batch summary until nothing unread remains.
   useEffect(() => {
     if (!enabled || publishedIdsRef.current.size === 0) {
       return;
@@ -383,8 +262,6 @@ export const useNotificationEffects = ({
         );
       }),
     );
-    // The summary stands for the whole batch, so keep it until nothing unread
-    // remains rather than removing it because it matches no single notification.
     const hasUnread = unfilteredNotifications.some((accountNotifications) =>
       accountNotifications.notifications.some((notification) => notification.unread),
     );
@@ -401,7 +278,6 @@ export const useNotificationEffects = ({
 
     for (const id of removed) {
       publishedIdsRef.current.delete(id);
-      publishedUrlsRef.current.delete(id);
     }
   }, [enabled, notifications, readUnfilteredNotifications]);
 
