@@ -95,7 +95,7 @@ export function LoginRoute() {
   const alternates = activeAdapter.loginMethods.filter((m) => m !== primary);
 
   return (
-    <div className="flex h-screen w-full overflow-y-auto pt-5">
+    <div className="flex h-screen w-full overflow-y-auto">
       <Stack align="center" className="m-auto w-full px-4" direction="vertical" gap="condensed">
         <div
           className="motion-reduce:animate-none animate-login-fade-up"
@@ -179,12 +179,12 @@ export function LoginRoute() {
 
         <div
           aria-labelledby={`forge-tab-${activeAdapter.id}`}
-          className="motion-reduce:animate-none animate-login-panel-fade min-h-[11rem] w-full max-w-sm"
+          className="motion-reduce:animate-none animate-login-panel-fade flex min-h-[9rem] w-full max-w-sm flex-col"
           id={`forge-panel-${activeAdapter.id}`}
           key={activeAdapter.id}
           role="tabpanel"
         >
-          <Stack align="stretch" direction="vertical" gap="condensed">
+          <Stack align="stretch" className="flex-1" direction="vertical" gap="condensed">
             {primary && (
               <Button
                 block
@@ -231,7 +231,7 @@ export function LoginRoute() {
             {activeAdapter.tagline && (
               <Text
                 as="p"
-                className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
+                className="mt-auto pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
                 size="small"
               >
                 {translateForgeTagline(activeAdapter.tagline)}
