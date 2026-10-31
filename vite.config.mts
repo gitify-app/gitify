@@ -212,7 +212,9 @@ export default defineConfig({
               output: { entryFileNames: 'main.js' },
               external: [
                 'electron',
-                // TODO - how many of these are truly needed?
+                // Main-process runtime dependencies. Kept external so
+                // electron-builder packages them from `dependencies`; the
+                // renderer and preload are bundled. See CONTRIBUTING.md.
                 'electron-log',
                 'electron-menubar',
                 'electron-updater',

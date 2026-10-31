@@ -93,6 +93,15 @@ guard fails the run outside Linux rather than letting that happen.
 Note that these baselines capture the `backdrop-filter` fallback for Glass, not
 the macOS native vibrancy material, which Chromium cannot render.
 
+### 📦 Dependencies and packaging
+
+The packaged app ships only the packages that are loaded from disk at runtime.
+Declare main-process runtime dependencies in `dependencies`; packages that Vite
+bundles into the renderer belong in `devDependencies`, even though the renderer
+imports them. The current runtime packages are `electron-log`,
+`electron-menubar`, and `electron-updater`; React, the i18n packages, and `cn`
+are renderer-only and build-time.
+
 ### Translations
 
 Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
