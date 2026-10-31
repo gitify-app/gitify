@@ -28,6 +28,12 @@ export const EVENTS = {
   RESET_APP: `${P}reset-app`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
   SYSTEM_WAKE: `${P}system-wake`,
+  NATIVE_NOTIFICATION_SHOW: `${P}native-notification-show`,
+  NATIVE_NOTIFICATION_REMOVE: `${P}native-notification-remove`,
+  NATIVE_NOTIFICATION_REMOVE_ALL: `${P}native-notification-remove-all`,
+  NATIVE_NOTIFICATION_READY: `${P}native-notification-ready`,
+  NATIVE_NOTIFICATION_ACTION: `${P}native-notification-action`,
+  NATIVE_NOTIFICATION_CLICK: `${P}native-notification-click`,
   ZOOM: `${P}zoom`,
 } as const;
 
@@ -103,6 +109,33 @@ export type IGitHubCliTokenResult =
   | { token: string; error?: never; detail?: never }
   | { token?: never; error: GitHubCliTokenError; detail?: string };
 
+/** A structured request to publish an operating-system notification. */
+export interface INativeNotificationPayload {
+  /** Short, opaque identity for this notification. */
+  id: string;
+  title: string;
+  /** macOS subtitle. Other platforms append it to the body. */
+  subtitle?: string;
+  body: string;
+  /** Translated label for the single Mark as read action, when offered. */
+  actionLabel?: string;
+}
+
+/** Payload for removing published notifications. */
+export interface INativeNotificationRemovePayload {
+  ids: string[];
+}
+
+/** An action was activated on an operating-system notification. */
+export interface INativeNotificationActionEvent {
+  id: string;
+}
+
+/** A notification body click. An empty identity is a generic app activation. */
+export interface INativeNotificationClickEvent {
+  id: string;
+}
+
 /** Shape of a single event contract: a request payload and a response payload. */
 type Contract = { request: unknown; response: unknown };
 
@@ -161,6 +194,24 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
   [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
+  [EVENTS.NATIVE_NOTIFICATION_SHOW]: {
+    request: INativeNotificationPayload;
+    response: undefined;
+  };
+  [EVENTS.NATIVE_NOTIFICATION_REMOVE]: {
+    request: INativeNotificationRemovePayload;
+    response: undefined;
+  };
+  [EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL]: { request: undefined; response: undefined };
+  [EVENTS.NATIVE_NOTIFICATION_READY]: { request: undefined; response: undefined };
+  [EVENTS.NATIVE_NOTIFICATION_ACTION]: {
+    request: INativeNotificationActionEvent;
+    response: undefined;
+  };
+  [EVENTS.NATIVE_NOTIFICATION_CLICK]: {
+    request: INativeNotificationClickEvent;
+    response: undefined;
+  };
   [EVENTS.ZOOM]: { request: ZoomAction; response: undefined };
 }>;
 

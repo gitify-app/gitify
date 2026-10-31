@@ -15,6 +15,11 @@ import {
 } from '../__mocks__/notifications-mocks';
 
 import {
+  getNativeNotificationId,
+  NATIVE_NOTIFICATION_SUMMARY_ID,
+} from '../../shared/nativeNotifications';
+
+import {
   getNotificationFailureKey,
   useAccountsStore,
   useFiltersStore,
@@ -24,6 +29,7 @@ import {
 
 import type { AccountNotifications, Percentage } from '../types';
 
+import { getAccountUUID } from '../utils/auth/utils';
 import { getErrorDetails } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
 import { getAdapter } from '../utils/forges/registry';
@@ -33,6 +39,7 @@ import {
   reportServerPollInterval,
 } from '../utils/notifications/pollInterval';
 import * as audio from '../utils/system/audio';
+import * as links from '../utils/system/links';
 import * as native from '../utils/system/native';
 import { useNotificationsHost } from './notifications/useNotificationsHost';
 import { useNotifications } from './useNotifications';
@@ -96,6 +103,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
     getAllNotificationsMock.mockResolvedValue([]);
     refreshEnrichmentCacheMock.mockReset();
     refreshEnrichmentCacheMock.mockReturnValue(false);
+    vi.mocked(window.gitify.nativeNotifications.show).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.remove).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.removeAll).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.notifyReady).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.onAction).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.onClick).mockClear();
     clearServerPollIntervals();
 
     useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
@@ -658,6 +671,106 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       expect(raiseSoundNotificationSpy).not.toHaveBeenCalled();
       expect(raiseNativeNotificationSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('native notification interactions', () => {
+    const notification = mockSingleAccountNotifications[0].notifications[0];
+    const notificationId = getNativeNotificationId(
+      getAccountUUID(notification.account),
+      notification.id,
+    );
+
+    const actionHandler = () =>
+      vi.mocked(window.gitify.nativeNotifications.onAction).mock.calls.at(-1)?.[0] as (payload: {
+        id: string;
+      }) => void;
+
+    const clickHandler = () =>
+      vi.mocked(window.gitify.nativeNotifications.onClick).mock.calls.at(-1)?.[0] as (payload: {
+        id: string;
+      }) => void;
+
+    it('registers listeners and reports readiness', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      renderNotificationsHook();
+
+      await waitFor(() => expect(window.gitify.nativeNotifications.notifyReady).toHaveBeenCalled());
+      expect(window.gitify.nativeNotifications.onAction).toHaveBeenCalled();
+      expect(window.gitify.nativeNotifications.onClick).toHaveBeenCalled();
+    });
+
+    it('updates the inbox immediately for an OS action', async () => {
+      let resolveRead: () => void = () => {};
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockReturnValue(
+        new Promise<void>((resolve) => {
+          resolveRead = resolve;
+        }),
+      );
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.unreadNotificationCount).toBe(1));
+
+      act(() => {
+        actionHandler()({ id: notificationId });
+      });
+
+      await waitFor(() => expect(result.current.unreadNotificationCount).toBe(0));
+
+      await act(async () => {
+        resolveRead();
+      });
+    });
+
+    it('opens the target for an individual body click', async () => {
+      const openSpy = vi.spyOn(links, 'openNotification').mockResolvedValue();
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      act(() => {
+        clickHandler()({ id: notificationId });
+      });
+
+      expect(openSpy).toHaveBeenCalledWith(expect.objectContaining({ id: notification.id }));
+    });
+
+    it('shows the app for a summary click', async () => {
+      const showSpy = vi.spyOn(window.gitify.app, 'show');
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      act(() => {
+        clickHandler()({ id: NATIVE_NOTIFICATION_SUMMARY_ID });
+      });
+
+      expect(showSpy).toHaveBeenCalled();
+    });
+
+    it('removes the native notification when read in the app', async () => {
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockResolvedValue(undefined);
+      raiseNativeNotificationSpy.mockResolvedValueOnce([
+        { id: notificationId, title: 'owner/repo', body: 'Title', actionLabel: 'Mark as read' },
+      ]);
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(raiseNativeNotificationSpy).toHaveBeenCalled());
+
+      await act(async () => {
+        await result.current.markNotificationsAsRead([notification]);
+      });
+
+      await waitFor(() =>
+        expect(window.gitify.nativeNotifications.remove).toHaveBeenCalledWith({
+          ids: [notificationId],
+        }),
+      );
     });
   });
 

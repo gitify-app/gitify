@@ -71,6 +71,8 @@ App-level side effects are owned by a single host. `GlobalEffects` mounts exactl
 
 Consumers read the shared query cache and stores, and **do not register their own** polling, alerts, wake, or focus listeners. This keeps background work (for example, firing one poll per interval) from multiplying with the number of mounted components. When you add a new background effect, add it to the host, not to a leaf component.
 
+Operating-system notifications are created by the main process behind the typed `window.gitify.nativeNotifications` bridge. The single notification host publishes the filtered new-notification set, marks a notification read when its OS action is used, opens the target when a body is clicked, and removes published notifications when they become read or leave the unfiltered cache. The sandboxed preload only forwards requests and listeners; it never constructs an OS notification.
+
 Subscription is separate from side effects, but it multiplies the same way: every TanStack Query observer re-runs the query's `select` and structural-sharing walk whenever the cached data changes. A component that renders once per notification — the notification row, the repository header — must therefore not subscribe. It obtains notification actions (mark as read/done, unsubscribe, remove an account, refetch) with `useNotificationActions`, which never calls `useQuery`. Components that read notification data use `useNotifications` and stay subscribed by design.
 
 ## Forge adapters

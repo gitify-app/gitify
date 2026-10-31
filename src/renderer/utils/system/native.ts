@@ -1,33 +1,67 @@
 import { APPLICATION } from '../../../shared/constants';
+import type { INativeNotificationPayload } from '../../../shared/events';
+import {
+  getNativeNotificationId,
+  NATIVE_NOTIFICATION_SUMMARY_ID,
+} from '../../../shared/nativeNotifications';
 
 import type { GitifyNotification } from '../../types';
 
-import { generateNotificationWebUrl } from '../notifications/url';
+import i18n from '../../i18n';
+import { getAccountUUID } from '../auth/utils';
 
 /**
- * Raises a native OS notification.
+ * Build the structured payload for one notification.
  *
- * For a single notification, the repository full name is the title, the subject
- * title is the body, and the generated web URL is the click target. For
- * multiple notifications, the app name is the title and the body summarizes the
- * notification count.
- *
- * @param notifications - The notifications to surface as a native OS notification.
+ * @param notification - The notification to publish.
+ * @returns The main-process payload.
  */
-export async function raiseNativeNotification(notifications: GitifyNotification[]) {
-  let title: string;
-  let body: string;
-  let url: string | null = null;
+export function buildNativeNotificationPayload(
+  notification: GitifyNotification,
+): INativeNotificationPayload {
+  const accountUUID = getAccountUUID(notification.account);
 
-  if (notifications.length === 1) {
-    const notification = notifications[0];
-    title = notification.repository.fullName;
-    body = notification.subject.title;
-    url = await generateNotificationWebUrl(notification);
-  } else {
-    title = APPLICATION.NAME;
-    body = `You have ${notifications.length} notifications`;
+  return {
+    id: getNativeNotificationId(accountUUID, notification.id),
+    title: notification.repository.fullName,
+    body: notification.subject.title,
+    actionLabel: notification.unread
+      ? i18n.t('notifications.mark_as_read', 'Mark as read')
+      : undefined,
+  };
+}
+
+/**
+ * Publish new notifications, preserving the existing single-versus-summary
+ * alert policy.
+ *
+ * @param notifications - The new notifications to publish.
+ * @returns The published payloads, so the host can track them for removal.
+ */
+export async function raiseNativeNotification(
+  notifications: GitifyNotification[],
+): Promise<INativeNotificationPayload[]> {
+  if (notifications.length === 0) {
+    return [];
   }
 
-  return window.gitify.raiseNativeNotification(title, body, url ?? undefined);
+  if (notifications.length > 1) {
+    const summary: INativeNotificationPayload = {
+      id: NATIVE_NOTIFICATION_SUMMARY_ID,
+      title: APPLICATION.NAME,
+      body: i18n.t('native.summary_body_other', 'You have {{count}} notifications', {
+        count: notifications.length,
+      }),
+    };
+
+    window.gitify.nativeNotifications.show(summary);
+
+    return [summary];
+  }
+
+  const payload = buildNativeNotificationPayload(notifications[0]);
+
+  window.gitify.nativeNotifications.show(payload);
+
+  return [payload];
 }

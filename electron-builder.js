@@ -13,6 +13,8 @@ const config = {
     icon: 'assets/images/app-icon.icns',
     extendInfo: {
       LSUIElement: true,
+      // Required for extra action buttons on macOS notifications.
+      NSUserNotificationAlertStyle: 'alert',
     },
     identity: 'Adam Setch (5KD23H9729)',
     type: 'distribution',

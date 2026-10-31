@@ -297,6 +297,9 @@
     "stacked_pr": "Stacked pull request",
     "stacked_pr_position": "Stacked pull request: {{position}} of {{depth}}"
   },
+  "native": {
+    "summary_body_other": "You have {{count}} notifications"
+  },
   "notifications": {
     "failure_tooltip": "{{title}}: {{description}} You can also try opening this notification in your browser.",
     "mark_as_done": "Mark as done",

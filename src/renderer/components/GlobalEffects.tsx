@@ -70,6 +70,7 @@ export function GlobalEffects() {
       resetFilters();
       queryClient.clear();
       useShortcutRegistrationStore.getState().reset();
+      window.gitify.nativeNotifications.removeAll();
     });
   }, [resetAccounts, resetSettings, resetFilters, queryClient]);
 

@@ -1,43 +1,75 @@
-import { waitFor } from '@testing-library/react';
-
 import {
-  mockMultipleAccountNotifications,
+  mockGitHubCloudGitifyNotifications,
   mockSingleAccountNotifications,
 } from '../../__mocks__/notifications-mocks';
 
-import * as url from '../notifications/url';
-import * as native from './native';
+import {
+  getNativeNotificationId,
+  NATIVE_NOTIFICATION_SUMMARY_ID,
+} from '../../../shared/nativeNotifications';
+
+import { getAccountUUID } from '../auth/utils';
+import { buildNativeNotificationPayload, raiseNativeNotification } from './native';
 
 describe('renderer/utils/system/native.ts', () => {
-  const mockHtmlUrl = mockSingleAccountNotifications[0].notifications[0].repository.htmlUrl;
+  const notification = mockGitHubCloudGitifyNotifications[0];
+  const accountUUID = getAccountUUID(notification.account);
 
-  vi.spyOn(url, 'generateNotificationWebUrl').mockImplementation(async () => mockHtmlUrl);
-
-  it('raises a native notification for a single new notification', async () => {
-    void native.raiseNativeNotification(mockSingleAccountNotifications[0].notifications);
-
-    await waitFor(() => expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1));
-
-    expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
-      expect.stringContaining(
-        mockSingleAccountNotifications[0].notifications[0].repository.fullName,
-      ),
-      mockSingleAccountNotifications[0].notifications[0].subject.title,
-      expect.stringContaining(mockHtmlUrl),
-    );
-    expect(url.generateNotificationWebUrl).toHaveBeenCalledTimes(1);
+  beforeEach(() => {
+    vi.mocked(window.gitify.nativeNotifications.show).mockClear();
   });
 
-  it('raises a native notification for multiple new notifications', async () => {
-    void native.raiseNativeNotification(mockMultipleAccountNotifications[0].notifications);
+  describe('buildNativeNotificationPayload', () => {
+    it('builds the identity, existing single-notification copy, and action', () => {
+      const payload = buildNativeNotificationPayload(notification);
 
-    await waitFor(() => expect(window.gitify.raiseNativeNotification).toHaveBeenCalledTimes(1));
+      expect(payload.id).toBe(getNativeNotificationId(accountUUID, notification.id));
+      expect(payload.title).toBe(notification.repository.fullName);
+      expect(payload.body).toBe(notification.subject.title);
+      expect(payload.subtitle).toBeUndefined();
+      expect(payload.actionLabel).toBe('Mark as read');
+    });
 
-    expect(window.gitify.raiseNativeNotification).toHaveBeenCalledWith(
-      'Gitify',
-      'You have 2 notifications',
-      undefined,
-    );
-    expect(url.generateNotificationWebUrl).toHaveBeenCalledTimes(0);
+    it('omits the action for a notification that is already read', () => {
+      const payload = buildNativeNotificationPayload({ ...notification, unread: false });
+
+      expect(payload.actionLabel).toBeUndefined();
+    });
+  });
+
+  describe('raiseNativeNotification', () => {
+    it('publishes one individual notification for one item', async () => {
+      const published = await raiseNativeNotification([notification]);
+
+      expect(published).toHaveLength(1);
+      expect(window.gitify.nativeNotifications.show).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: getNativeNotificationId(accountUUID, notification.id),
+          actionLabel: 'Mark as read',
+        }),
+      );
+    });
+
+    it('publishes one count-only summary for multiple items', async () => {
+      const notifications = mockSingleAccountNotifications[0].notifications.slice(0, 1);
+      const second = { ...notification, id: 'second', order: 1 };
+
+      const published = await raiseNativeNotification([...notifications, second]);
+
+      expect(published).toHaveLength(1);
+      expect(window.gitify.nativeNotifications.show).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: NATIVE_NOTIFICATION_SUMMARY_ID,
+          title: 'Gitify',
+          body: 'You have 2 notifications',
+        }),
+      );
+      expect(published[0]).not.toHaveProperty('actionLabel');
+    });
+
+    it('does nothing for an empty batch', async () => {
+      await expect(raiseNativeNotification([])).resolves.toEqual([]);
+      expect(window.gitify.nativeNotifications.show).not.toHaveBeenCalled();
+    });
   });
 });

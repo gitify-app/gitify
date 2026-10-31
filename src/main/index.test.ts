@@ -23,6 +23,12 @@ vi.mock('electron', () => ({
 vi.mock('electron-log', () => ({
   default: {
     initialize: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn(),
+    debug: vi.fn(),
+    verbose: vi.fn(),
+    silly: vi.fn(),
     transports: { file: {} },
   },
 }));
@@ -37,6 +43,7 @@ vi.mock('./config', () => ({
 vi.mock('./handlers', () => ({
   registerAppHandlers: vi.fn(),
   registerGitHubCliHandlers: vi.fn(),
+  registerNativeNotificationHandlers: vi.fn(),
   registerStorageHandlers: vi.fn(),
   registerSystemHandlers: vi.fn(),
   registerTrayHandlers: vi.fn(),
