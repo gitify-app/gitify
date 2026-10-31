@@ -38,8 +38,8 @@ const config: Config = {
         'login-fade-up': 'login-fade-up 360ms cubic-bezier(0.22, 1, 0.36, 1) both',
         'login-panel-in-right': 'login-panel-in-right 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
         'login-panel-in-left': 'login-panel-in-left 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
-        'login-panel-out-left': 'login-panel-out-left 180ms cubic-bezier(0.22, 1, 0.36, 1) both',
-        'login-panel-out-right': 'login-panel-out-right 180ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'login-panel-out-left': 'login-panel-out-left 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'login-panel-out-right': 'login-panel-out-right 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
       },
       transitionTimingFunction: {
         'login-out': 'cubic-bezier(0.22, 1, 0.36, 1)',

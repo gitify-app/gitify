@@ -8,7 +8,7 @@ import { cn } from 'cn';
 
 import { useAccountsStore } from '../stores';
 
-import { LoginForgePanel } from '../components/login/LoginForgePanel';
+import { LoginPrimaryAction, LoginSecondaryMethods } from '../components/login/LoginMethods';
 
 import { type Forge, Size } from '../types';
 import type { ForgeAdapter } from '../utils/forges/types';
@@ -17,7 +17,7 @@ import { LogoIcon } from '../icons/LogoIcon';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 
-/** Keep the outgoing panel mounted for exactly as long as its exit animation. */
+/** Keep the outgoing secondary content mounted for exactly as long as its exit animation. */
 const PANEL_TRANSITION_MS = 280;
 
 export function LoginRoute() {
@@ -50,8 +50,8 @@ export function LoginRoute() {
     setActiveForge(forge);
   };
 
-  // Drop the outgoing panel once its exit animation finishes so the two
-  // layers do not remain stacked (and focusable) afterwards.
+  // Drop the outgoing secondary content once its exit animation finishes so the
+  // two layers do not remain stacked (and focusable) afterwards.
   useEffect(() => {
     if (!previousAdapter) {
       return;
@@ -137,108 +137,119 @@ export function LoginRoute() {
           <Heading as="h3">{t('login.subtitle', 'on your menu bar')}</Heading>
         </Stack>
 
-        {adapters.length > 1 && (
-          <div
-            aria-label={t('login.choose_forge', 'Choose a forge')}
-            className={cn(
-              'motion-reduce:animate-none animate-login-fade-up',
-              'relative inline-flex max-w-full items-center rounded-full',
-              'border border-[var(--borderColor-default)]',
-              'bg-[var(--bgColor-muted)] p-1',
-            )}
-            ref={tablistRef}
-            role="tablist"
-            style={{ animationDelay: '120ms' }}
-          >
-            {pillRect && (
-              <span
-                aria-hidden="true"
-                className={cn(
-                  'pointer-events-none absolute top-1 bottom-1 rounded-full',
-                  'bg-[var(--bgColor-default)] shadow-sm',
-                  'transition-[left,width] duration-[280ms] ease-login-out',
-                  'motion-reduce:transition-none',
-                )}
-                style={{ left: pillRect.left, width: pillRect.width }}
-              />
-            )}
-            {adapters.map((adapter) => {
-              const Icon = adapter.icon;
-              const isActive = adapter.id === activeForge;
-              return (
-                <button
-                  aria-controls={`forge-panel-${adapter.id}`}
-                  aria-selected={isActive}
-                  className={cn(
-                    'relative z-10 inline-flex cursor-pointer items-center gap-2',
-                    'px-2.5 py-1.5 text-sm font-medium',
-                    'transition-[color] duration-[280ms] ease-login-out',
-                    'max-[30rem]:px-2 max-[30rem]:text-xs',
-                    'outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
-                    isActive
-                      ? 'text-[var(--fgColor-default)]'
-                      : 'text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]',
-                  )}
-                  data-testid={`forge-tab-${adapter.id}`}
-                  key={adapter.id}
-                  onClick={() => selectForge(adapter.id)}
-                  ref={(el) => {
-                    if (el) {
-                      tabRefs.current.set(adapter.id, el);
-                    } else {
-                      tabRefs.current.delete(adapter.id);
-                    }
-                  }}
-                  role="tab"
-                  type="button"
-                >
-                  <Icon size={14} />
-                  {adapter.displayName}
-                </button>
-              );
-            })}
-          </div>
-        )}
-
-        <div className="relative min-h-[9rem] w-full max-w-sm">
-          {previousAdapter && (
+        <div className="flex w-full max-w-[23rem] flex-col gap-2">
+          {adapters.length > 1 && (
             <div
-              aria-hidden="true"
+              aria-label={t('login.choose_forge', 'Choose a forge')}
               className={cn(
-                'pointer-events-none absolute inset-0 motion-reduce:hidden',
-                'will-change-[opacity,transform]',
-                panelDirection === 'right'
-                  ? 'animate-login-panel-out-left'
-                  : 'animate-login-panel-out-right',
+                'motion-reduce:animate-none animate-login-fade-up',
+                'relative flex w-full items-center rounded-full',
+                'border border-[var(--borderColor-default)]',
+                'bg-[var(--bgColor-muted)] p-1',
               )}
-              inert
-              key={`previous-${previousAdapter.id}`}
-              data-testid="previous-forge-panel"
+              ref={tablistRef}
+              role="tablist"
+              style={{ animationDelay: '120ms' }}
             >
-              <LoginForgePanel
-                adapter={previousAdapter}
-                isActive={false}
-                onNavigate={(route) => navigate(route)}
-              />
+              {pillRect && (
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'pointer-events-none absolute top-1 bottom-1 rounded-full',
+                    'bg-[var(--bgColor-default)] shadow-sm',
+                    'transition-[left,width] duration-[280ms] ease-login-out',
+                    'motion-reduce:transition-none',
+                  )}
+                  style={{ left: pillRect.left, width: pillRect.width }}
+                />
+              )}
+              {adapters.map((adapter) => {
+                const Icon = adapter.icon;
+                const isActive = adapter.id === activeForge;
+                return (
+                  <button
+                    aria-controls={`forge-panel-${adapter.id}`}
+                    aria-selected={isActive}
+                    className={cn(
+                      'relative z-10 inline-flex flex-1 cursor-pointer items-center justify-center gap-2',
+                      'px-2.5 py-1.5 text-sm font-medium',
+                      'transition-[color] duration-[280ms] ease-login-out',
+                      'max-[30rem]:px-2 max-[30rem]:text-xs',
+                      'outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
+                      isActive
+                        ? 'text-[var(--fgColor-default)]'
+                        : 'text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]',
+                    )}
+                    data-testid={`forge-tab-${adapter.id}`}
+                    key={adapter.id}
+                    onClick={() => selectForge(adapter.id)}
+                    ref={(el) => {
+                      if (el) {
+                        tabRefs.current.set(adapter.id, el);
+                      } else {
+                        tabRefs.current.delete(adapter.id);
+                      }
+                    }}
+                    role="tab"
+                    type="button"
+                  >
+                    <Icon size={14} />
+                    {adapter.displayName}
+                  </button>
+                );
+              })}
             </div>
           )}
 
           <div
-            className={cn(
-              'motion-reduce:animate-none will-change-[opacity,transform]',
-              panelDirection === 'right'
-                ? 'animate-login-panel-in-right'
-                : 'animate-login-panel-in-left',
-              'w-full',
-            )}
-            data-testid="active-forge-panel"
-            key={activeAdapter.id}
+            aria-labelledby={`forge-tab-${activeAdapter.id}`}
+            className="w-full"
+            id={`forge-panel-${activeAdapter.id}`}
+            role="tabpanel"
           >
-            <LoginForgePanel
-              adapter={activeAdapter}
-              isActive={true}
-              onNavigate={(route) => navigate(route)}
-            />
+            <Stack align="stretch" direction="vertical" gap="condensed">
+              <LoginPrimaryAction adapter={activeAdapter} onNavigate={(route) => navigate(route)} />
+
+              <div className="relative min-h-[7.5rem] w-full">
+                {previousAdapter && (
+                  <div
+                    aria-hidden="true"
+                    className={cn(
+                      'pointer-events-none absolute inset-0 motion-reduce:hidden',
+                      'will-change-[opacity,transform]',
+                      panelDirection === 'right'
+                        ? 'animate-login-panel-out-left'
+                        : 'animate-login-panel-out-right',
+                    )}
+                    data-testid="previous-forge-panel"
+                    inert
+                    key={`previous-${previousAdapter.id}`}
+                  >
+                    <LoginSecondaryMethods
+                      adapter={previousAdapter}
+                      onNavigate={(route) => navigate(route)}
+                    />
+                  </div>
+                )}
+
+                <div
+                  className={cn(
+                    'motion-reduce:animate-none will-change-[opacity,transform]',
+                    panelDirection === 'right'
+                      ? 'animate-login-panel-in-right'
+                      : 'animate-login-panel-in-left',
+                    'w-full',
+                  )}
+                  data-testid="active-forge-panel"
+                  key={activeAdapter.id}
+                >
+                  <LoginSecondaryMethods
+                    adapter={activeAdapter}
+                    onNavigate={(route) => navigate(route)}
+                  />
+                </div>
+              </div>
+            </Stack>
           </div>
         </div>
       </Stack>

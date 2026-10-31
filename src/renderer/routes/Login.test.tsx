@@ -101,10 +101,8 @@ describe('renderer/routes/Login.tsx', () => {
 
       await userEvent.click(screen.getByRole('tab', { name: forge }));
 
-      const panel = screen.getByRole('tabpanel');
-      expect(
-        within(panel).getByRole('button', { name: `Continue with ${forge}` }),
-      ).toBeInTheDocument();
+      const panel = screen.getByTestId('active-forge-panel');
+      expect(screen.getByRole('button', { name: `Continue with ${forge}` })).toBeInTheDocument();
       expect(within(panel).queryByText('or')).not.toBeInTheDocument();
       expect(
         within(panel).queryByRole('button', { name: 'Personal Access Token' }),
