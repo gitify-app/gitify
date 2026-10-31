@@ -25,9 +25,13 @@ describe('renderer/routes/Login.tsx', () => {
 
     expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument();
     expect(screen.getByText('or')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Personal Access Token' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'GitHub CLI' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Custom OAuth App' })).toBeInTheDocument();
+    const personalAccessToken = screen.getByRole('button', { name: 'Personal Access Token' });
+    expect(within(personalAccessToken).getByText('PAT')).toBeInTheDocument();
+    const gitHubCli = screen.getByRole('button', { name: 'GitHub CLI' });
+    expect(within(gitHubCli).getByText('CLI')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Custom OAuth App' })).toHaveTextContent(
+      'Custom OAuth App',
+    );
     expect(screen.getByText('GitHub Cloud & GitHub Enterprise Server')).toBeInTheDocument();
 
     expect(navigateMock).not.toHaveBeenCalled();

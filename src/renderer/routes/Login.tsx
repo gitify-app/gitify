@@ -12,7 +12,11 @@ import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
 
 import { LogoIcon } from '../icons/LogoIcon';
-import { translateForgeTagline, translateLoginMethodLabel } from '../utils/forges/labels';
+import {
+  compactLoginMethodLabel,
+  translateForgeTagline,
+  translateLoginMethodLabel,
+} from '../utils/forges/labels';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 
@@ -208,14 +212,16 @@ export function LoginRoute() {
                 <div className="flex flex-wrap items-center justify-center gap-2">
                   {alternates.map((method) => (
                     <Button
+                      aria-label={translateLoginMethodLabel(method.label)}
                       data-testid={method.testId}
                       key={method.testId}
                       leadingVisual={method.icon}
                       onClick={() => navigate(method.route)}
                       size="small"
+                      title={translateLoginMethodLabel(method.label)}
                       variant="default"
                     >
-                      {translateLoginMethodLabel(method.label)}
+                      {compactLoginMethodLabel(method.label)}
                     </Button>
                   ))}
                 </div>
