@@ -3,7 +3,9 @@ import type { Percentage } from '../../types';
 import {
   canDecreaseZoom,
   canIncreaseZoom,
+  clampZoomPercentage,
   decreaseZoom,
+  getNextZoomPercentage,
   increaseZoom,
   resetZoomLevel,
   zoomLevelToPercentage,
@@ -29,6 +31,23 @@ describe('renderer/utils/zoom.ts', () => {
     expect(zoomLevelToPercentage(1)).toBe(150);
 
     expect(zoomLevelToPercentage(undefined as unknown as number)).toBe(100);
+  });
+
+  it('clamps zoom percentages to the supported range', () => {
+    expect(clampZoomPercentage(-10 as Percentage)).toBe(0);
+    expect(clampZoomPercentage(50 as Percentage)).toBe(50);
+    expect(clampZoomPercentage(150 as Percentage)).toBe(120);
+  });
+
+  it('computes the next zoom percentage for shortcut actions', () => {
+    expect(getNextZoomPercentage(100 as Percentage, 'in')).toBe(110);
+    expect(getNextZoomPercentage(100 as Percentage, 'out')).toBe(90);
+    expect(getNextZoomPercentage(100 as Percentage, 'reset')).toBe(100);
+
+    expect(getNextZoomPercentage(120 as Percentage, 'in')).toBe(120);
+    expect(getNextZoomPercentage(0 as Percentage, 'out')).toBe(0);
+    expect(getNextZoomPercentage(150 as Percentage, 'in')).toBe(120);
+    expect(getNextZoomPercentage(-10 as Percentage, 'out')).toBe(0);
   });
 
   it('can decrease zoom percentage', () => {

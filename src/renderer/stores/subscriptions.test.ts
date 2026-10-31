@@ -112,6 +112,61 @@ describe('renderer/stores/subscriptions.ts', () => {
     vi.useRealTimers();
   });
 
+  it('clamps an out-of-range saved zoom percentage on startup', () => {
+    useSettingsStore.getState().updateSetting('zoomPercentage', 150 as Percentage);
+
+    cleanup = initializeStoreSubscriptions();
+
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+    expect(window.gitify.zoom.setLevel).toHaveBeenCalledWith(
+      zoom.zoomPercentageToLevel(120 as Percentage),
+    );
+  });
+
+  it('snaps a native zoom outside the supported range back within bounds', () => {
+    vi.useFakeTimers();
+    useSettingsStore.getState().updateSetting('zoomPercentage', 100 as Percentage);
+    cleanup = initializeStoreSubscriptions();
+    vi.clearAllMocks();
+
+    vi.mocked(window.gitify.zoom.getLevel).mockReturnValue(
+      zoom.zoomPercentageToLevel(125 as Percentage),
+    );
+
+    window.dispatchEvent(new Event('resize'));
+    vi.advanceTimersByTime(250);
+
+    expect(window.gitify.zoom.setLevel).toHaveBeenCalledWith(
+      zoom.zoomPercentageToLevel(120 as Percentage),
+    );
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+    vi.useRealTimers();
+  });
+
+  it('applies zoom shortcuts using the configured step and bounds', () => {
+    useSettingsStore.getState().updateSetting('zoomPercentage', 100 as Percentage);
+    cleanup = initializeStoreSubscriptions();
+
+    const onZoom = vi.mocked(window.gitify.onZoom).mock.calls.at(-1)?.[0] as (
+      action: 'in' | 'out' | 'reset',
+    ) => void;
+
+    onZoom('in');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(110);
+
+    onZoom('in');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+
+    onZoom('in');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+
+    onZoom('out');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(110);
+
+    onZoom('reset');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(100);
+  });
+
   it('stops reacting to changes after cleanup', () => {
     cleanup = initializeStoreSubscriptions();
     cleanup();

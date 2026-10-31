@@ -116,11 +116,11 @@ describe('main/lifecycle/window.ts', () => {
     );
   });
 
-  it('does not register a close, before-input-event, or its own escape handler (library owns those)', () => {
+  it('registers zoom keyboard handling but leaves close and escape to the library', () => {
     configureWindowEvents(menubar, menuBuilder);
 
     expect(menubar.window?.on).not.toHaveBeenCalledWith('close', expect.any(Function));
-    expect(menubar.window?.webContents.on).not.toHaveBeenCalledWith(
+    expect(menubar.window?.webContents.on).toHaveBeenCalledWith(
       'before-input-event',
       expect.any(Function),
     );

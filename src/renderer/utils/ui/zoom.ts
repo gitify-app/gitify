@@ -1,3 +1,5 @@
+import type { ZoomAction } from '../../../shared/events';
+
 import { DEFAULT_SETTINGS_STATE } from '../../stores/defaults';
 
 import type { Percentage } from '../../types';
@@ -7,6 +9,40 @@ const MAXIMUM_ZOOM_PERCENTAGE = 120 as Percentage;
 const RECOMMENDED_ZOOM_PERCENTAGE = DEFAULT_SETTINGS_STATE.zoomPercentage;
 const MULTIPLIER = 2;
 const ZOOM_STEP = 10 as Percentage;
+
+/**
+ * Clamp a zoom percentage to the supported minimum and maximum.
+ *
+ * @param zoomPercentage - The zoom percentage to clamp.
+ * @returns The percentage within the supported range.
+ */
+export function clampZoomPercentage(zoomPercentage: Percentage): Percentage {
+  return Math.min(
+    Math.max(zoomPercentage, MINIMUM_ZOOM_PERCENTAGE),
+    MAXIMUM_ZOOM_PERCENTAGE,
+  ) as Percentage;
+}
+
+/**
+ * Compute the zoom percentage for a keyboard shortcut action.
+ *
+ * @param zoomPercentage - The current zoom percentage.
+ * @param action - The requested zoom direction.
+ * @returns The next zoom percentage, clamped to the supported range.
+ */
+export function getNextZoomPercentage(zoomPercentage: Percentage, action: ZoomAction): Percentage {
+  const current = clampZoomPercentage(zoomPercentage);
+
+  if (action === 'in') {
+    return Math.min(current + ZOOM_STEP, MAXIMUM_ZOOM_PERCENTAGE) as Percentage;
+  }
+
+  if (action === 'out') {
+    return Math.max(current - ZOOM_STEP, MINIMUM_ZOOM_PERCENTAGE) as Percentage;
+  }
+
+  return RECOMMENDED_ZOOM_PERCENTAGE;
+}
 
 /**
  * Zoom percentage to level. 100% is the recommended zoom level (0).
