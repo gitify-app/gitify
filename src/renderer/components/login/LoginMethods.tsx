@@ -97,8 +97,15 @@ export function LoginSecondaryMethods({
         </div>
       )}
 
+      {/* Primer's base `p` margin adds a 10px tail below the last line, which
+          makes the footer look off-centre. Keep the box flush with its text. */}
       {adapter.tagline && (
-        <Text as="p" className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs" size="small">
+        <Text
+          as="p"
+          className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
+          size="small"
+          style={{ marginBottom: 0 }}
+        >
           {translateForgeTagline(adapter.tagline)}
         </Text>
       )}

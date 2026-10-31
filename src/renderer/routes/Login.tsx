@@ -117,7 +117,10 @@ export function LoginRoute() {
   }, [isLoggedIn]);
 
   return (
-    <div className="flex h-screen w-full overflow-y-auto pt-6">
+    <div
+      className="gitify-login-scroll flex h-screen w-full overflow-y-auto pt-6"
+      data-testid="login-scroll-container"
+    >
       <Stack align="center" className="m-auto w-full px-4" direction="vertical" gap="condensed">
         <div
           className="motion-reduce:animate-none animate-login-fade-up"

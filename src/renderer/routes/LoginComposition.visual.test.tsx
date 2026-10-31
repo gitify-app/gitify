@@ -107,6 +107,26 @@ describe('renderer/routes/Login composition visual regression', () => {
     expect(taglineRect.y + taglineRect.height).toBeLessThanOrEqual(400);
   });
 
+  it('hides the login scrollbar at any supported zoom level', async () => {
+    renderLogin(Theme.LIGHT, DesignLanguage.CLASSIC);
+
+    try {
+      // 500x400 at 100%, 110% and 120% page zoom.
+      for (const { width, height } of [
+        { width: 500, height: 400 },
+        { width: 482, height: 386 },
+        { width: 465, height: 372 },
+      ]) {
+        await page.viewport(width, height);
+
+        const container = page.getByTestId('login-scroll-container').element();
+        expect(getComputedStyle(container).scrollbarWidth).toBe('none');
+      }
+    } finally {
+      await page.viewport(500, 400);
+    }
+  });
+
   it('fits the login screen at the maximum supported zoom', async () => {
     // 120% of the 500x400 window: the CSS viewport the renderer sees.
     await page.viewport(465, 372);
