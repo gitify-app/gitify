@@ -110,6 +110,10 @@ re-introduce dev dependencies. After packaging, run
 contains the runtime packages and none of the renderer-only packages or the pnpm
 virtual store.
 
+`pnpm build` also enforces this: the main-process external list is derived from
+`dependencies`, and the build fails when a runtime dependency is never imported
+by the main or preload process.
+
 ### Translations
 
 Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
