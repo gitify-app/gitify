@@ -25,6 +25,22 @@ export function translateLoginMethodLabel(label: string): string {
 }
 
 /**
+ * Short visible label for a login method in compact layouts. The full name
+ * remains the accessible name, so abbreviations never replace it for screen
+ * readers or tooltips.
+ */
+export function compactLoginMethodLabel(label: string): string {
+  switch (label) {
+    case 'Personal Access Token':
+      return 'PAT';
+    case 'GitHub CLI':
+      return 'CLI';
+    default:
+      return translateLoginMethodLabel(label);
+  }
+}
+
+/**
  * Translates a forge tagline for display. Unknown/undefined taglines pass
  * through unchanged.
  */

@@ -249,6 +249,7 @@
       "docs_tooltip": "GitHub documentation",
       "hostname": "Hostname"
     },
+    "or": "or",
     "pat": {
       "atlassian_email": "Atlassian Email",
       "atlassian_email_required": "Atlassian email is required",

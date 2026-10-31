@@ -8,7 +8,7 @@ import * as comms from '../utils/system/comms';
 import { LoginRoute } from './Login';
 
 describe('renderer/routes/Login.tsx', () => {
-  it('renders the forge chooser and login methods', () => {
+  it('renders the forge chooser, primary action, and secondary methods at rest', () => {
     renderWithProviders(<LoginRoute />);
 
     expect(screen.getByRole('heading', { name: 'Git Notifications' })).toBeInTheDocument();
@@ -24,9 +24,14 @@ describe('renderer/routes/Login.tsx', () => {
     expect(within(tabs).getByRole('tab', { name: 'Bitbucket' })).toBeInTheDocument();
 
     expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Personal Access Token' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'GitHub CLI' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Custom OAuth App' })).toBeInTheDocument();
+    expect(screen.getByText('or')).toBeInTheDocument();
+    const personalAccessToken = screen.getByRole('button', { name: 'Personal Access Token' });
+    expect(within(personalAccessToken).getByText('PAT')).toBeInTheDocument();
+    const gitHubCli = screen.getByRole('button', { name: 'GitHub CLI' });
+    expect(within(gitHubCli).getByText('CLI')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Custom OAuth App' })).toHaveTextContent(
+      'Custom OAuth App',
+    );
     expect(screen.getByText('GitHub Cloud & GitHub Enterprise Server')).toBeInTheDocument();
 
     expect(navigateMock).not.toHaveBeenCalled();
@@ -44,17 +49,39 @@ describe('renderer/routes/Login.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
   });
 
-  it.each([
-    ['Continue with GitHub', '/login/github/device-flow'],
-    ['Personal Access Token', '/login/github/personal-access-token'],
-    ['Custom OAuth App', '/login/github/custom-oauth-app'],
-  ])('navigates %s', async (testId, route) => {
+  it('navigates from the primary GitHub action', async () => {
     renderWithProviders(<LoginRoute />);
 
-    await userEvent.click(screen.getByRole('button', { name: testId }));
+    await userEvent.click(screen.getByRole('button', { name: 'Continue with GitHub' }));
+
+    expect(navigateMock).toHaveBeenCalledTimes(1);
+    expect(navigateMock).toHaveBeenCalledWith('/login/github/device-flow');
+  });
+
+  it.each([
+    ['Personal Access Token', '/login/github/personal-access-token'],
+    ['GitHub CLI', '/login/github/cli'],
+    ['Custom OAuth App', '/login/github/custom-oauth-app'],
+  ])('navigates to %s from the GitHub secondary methods', async (name, route) => {
+    renderWithProviders(<LoginRoute />);
+
+    await userEvent.click(screen.getByRole('button', { name }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(route);
+  });
+
+  it('moves from the primary action through the secondary buttons with Tab', async () => {
+    renderWithProviders(<LoginRoute />);
+
+    screen.getByRole('button', { name: 'Continue with GitHub' }).focus();
+
+    await userEvent.tab();
+    expect(screen.getByRole('button', { name: 'Personal Access Token' })).toHaveFocus();
+    await userEvent.tab();
+    expect(screen.getByRole('button', { name: 'GitHub CLI' })).toHaveFocus();
+    await userEvent.tab();
+    expect(screen.getByRole('button', { name: 'Custom OAuth App' })).toHaveFocus();
   });
 
   it('navigates to login with Gitea personal access token', async () => {
@@ -67,7 +94,39 @@ describe('renderer/routes/Login.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith('/login/gitea/personal-access-token');
   });
 
-  it('switches the visible login methods when changing forges', async () => {
+  it.each(['Gitea', 'GitLab', 'Bitbucket'])(
+    'renders no secondary methods for the single-method %s forge',
+    async (forge) => {
+      renderWithProviders(<LoginRoute />);
+
+      await userEvent.click(screen.getByRole('tab', { name: forge }));
+
+      const panel = screen.getByTestId('active-forge-panel');
+      expect(screen.getByRole('button', { name: `Continue with ${forge}` })).toBeInTheDocument();
+      expect(within(panel).queryByText('or')).not.toBeInTheDocument();
+      expect(
+        within(panel).queryByRole('button', { name: 'Personal Access Token' }),
+      ).not.toBeInTheDocument();
+      expect(within(panel).queryByRole('button', { name: 'GitHub CLI' })).not.toBeInTheDocument();
+      expect(
+        within(panel).queryByRole('button', { name: 'Custom OAuth App' }),
+      ).not.toBeInTheDocument();
+    },
+  );
+
+  it('animates the panel in the direction of the selected forge', async () => {
+    renderWithProviders(<LoginRoute />);
+
+    expect(screen.getByTestId('active-forge-panel')).toHaveClass('animate-login-panel-in-right');
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Gitea' }));
+    expect(screen.getByTestId('active-forge-panel')).toHaveClass('animate-login-panel-in-right');
+
+    await userEvent.click(screen.getByRole('tab', { name: 'GitHub' }));
+    expect(screen.getByTestId('active-forge-panel')).toHaveClass('animate-login-panel-in-left');
+  });
+
+  it('switches the visible primary action when changing forges', async () => {
     renderWithProviders(<LoginRoute />);
 
     expect(screen.getByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument();
