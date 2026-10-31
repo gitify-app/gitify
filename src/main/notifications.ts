@@ -29,7 +29,6 @@ type QueuedInteraction =
 interface LiveNotification {
   notification: Notification;
   groupId?: string;
-  actions: NativeNotificationActionId[];
 }
 
 /**
@@ -99,22 +98,21 @@ export class NativeNotificationService {
       })),
     });
 
-    // On Windows, `Notification.handleActivation` already receives every click
-    // and action, in addition to these instance events, so listening to both
-    // would deliver each interaction twice.
-    if (this.platform !== 'win32') {
-      notification.on('click', () => {
-        this.deliver('click', { id: payload.id });
-      });
+    // Live notifications resolve through the instance events on every platform.
+    // Electron's Windows activator also invokes `handleActivation` for the same
+    // interaction, so that callback only covers cold starts (see
+    // `registerWindowsActivation`).
+    notification.on('click', () => {
+      this.deliver('click', { id: payload.id });
+    });
 
-      notification.on('action', (details) => {
-        const action = actionIds[details.actionIndex];
+    notification.on('action', (details) => {
+      const action = actionIds[details.actionIndex];
 
-        if (action) {
-          this.deliver('action', { id: payload.id, action });
-        }
-      });
-    }
+      if (action) {
+        this.deliver('action', { id: payload.id, action });
+      }
+    });
 
     notification.on('failed', (_event, error) => {
       logError('native-notifications', 'Failed to show a native notification', new Error(error), [
@@ -125,7 +123,6 @@ export class NativeNotificationService {
     this.live.set(payload.id, {
       notification,
       groupId: payload.groupId,
-      actions: actionIds,
     });
     notification.show();
 
@@ -306,20 +303,18 @@ export class NativeNotificationService {
 
     Notification.handleActivation((details) => {
       const id = parseActivationId(details.arguments);
-      const entry = id ? this.live.get(id) : undefined;
 
-      if (details.type === 'action' && entry && typeof details.actionIndex === 'number') {
-        const action = entry.actions[details.actionIndex];
-
-        if (action) {
-          this.deliver('action', { id, action });
-          return;
-        }
+      // A live notification already delivered this interaction through its
+      // instance events; only unresolved activations (cold start, or a
+      // notification restored after restart) reach the renderer from here.
+      if (id && this.live.has(id)) {
+        return;
       }
 
-      // A cold start has no live entry. Treat the activation as a click so the
-      // renderer can resolve the identity after its first fetch, or fall back
-      // to a generic app activation.
+      // Treat the activation as a click so the renderer can resolve the
+      // identity after its first fetch, or fall back to a generic app
+      // activation. Delivered notifications do not restore their actions, so
+      // the action itself is not replayed.
       this.deliver('click', { id });
     });
   }
@@ -392,19 +387,27 @@ function parseActivationId(argumentsValue: string): string {
     return '';
   }
 
+  // Windows toast actions carry `type=action&action=<index>&tag=<identity>`;
+  // clicks reuse the same shape with `type=click`.
+  const tag = new URLSearchParams(value).get('tag');
+
+  if (tag && isValidIdentifier(tag)) {
+    return tag;
+  }
+
   try {
     const parsed: unknown = JSON.parse(value);
 
     if (typeof parsed === 'string') {
-      return parsed;
+      return isValidIdentifier(parsed) ? parsed : '';
     }
 
     if (parsed && typeof parsed === 'object' && 'id' in parsed) {
       const id = (parsed as { id?: unknown }).id;
-      return typeof id === 'string' ? id : '';
+      return typeof id === 'string' && isValidIdentifier(id) ? id : '';
     }
   } catch {
-    // Windows may pass the identity as a raw string rather than JSON.
+    // Not JSON; fall through to a bare identity.
   }
 
   return isValidIdentifier(value) ? value : '';

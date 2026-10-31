@@ -342,12 +342,54 @@ describe('main/notifications.ts', () => {
     });
   });
 
-  it('handles Windows activation through the registered callback', () => {
+  it('delivers a live Windows interaction once through the instance events', () => {
     const { mb } = makeMenubar();
     const service = new NativeNotificationService(mb, 'win32');
     service.start();
     service.markRendererReady();
     service.show(basePayload);
+
+    NotificationMock.instances[0].emit('action', { actionIndex: 1 });
+    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
+    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_ACTION, {
+      id: basePayload.id,
+      action: 'read',
+    });
+
+    // Windows also invokes the global activation callback for the same
+    // interaction; it must not deliver a second event.
+    const activation = NotificationMock.handleActivation.mock.calls[0][0] as (details: {
+      type: string;
+      arguments: string;
+      actionIndex?: number;
+    }) => void;
+    activation({
+      type: 'action',
+      arguments: `type=action&action=1&tag=${basePayload.id}`,
+      actionIndex: 1,
+    });
+    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('delivers a live Windows body click through the instance event', () => {
+    const { mb } = makeMenubar();
+    const service = new NativeNotificationService(mb, 'win32');
+    service.start();
+    service.markRendererReady();
+    service.show(basePayload);
+
+    NotificationMock.instances[0].emit('click');
+
+    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
+      id: basePayload.id,
+    });
+  });
+
+  it('routes a cold-start Windows activation by its toast tag', () => {
+    const { mb } = makeMenubar();
+    const service = new NativeNotificationService(mb, 'win32');
+    service.start();
+    service.markRendererReady();
 
     const activation = NotificationMock.handleActivation.mock.calls[0][0] as (details: {
       type: string;
@@ -355,40 +397,33 @@ describe('main/notifications.ts', () => {
       actionIndex?: number;
     }) => void;
 
-    activation({ type: 'action', arguments: basePayload.id, actionIndex: 1 });
-    expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_ACTION, {
-      id: basePayload.id,
-      action: 'read',
+    activation({
+      type: 'action',
+      arguments: `type=action&action=0&tag=${basePayload.id}`,
+      actionIndex: 0,
     });
 
-    activation({ type: 'click', arguments: '' });
+    // No live notification exists after a cold start, so the interaction falls
+    // back to a click the renderer can resolve after its first fetch.
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
-      id: '',
+      id: basePayload.id,
     });
   });
 
-  it('delivers each Windows interaction once, through activation only', () => {
+  it('treats an empty Windows click activation as a generic activation', () => {
     const { mb } = makeMenubar();
     const service = new NativeNotificationService(mb, 'win32');
     service.start();
     service.markRendererReady();
-    service.show(basePayload);
-
-    // handleActivation also fires for live notifications, so instance events
-    // must not be delivered as well.
-    NotificationMock.instances[0].emit('click');
-    NotificationMock.instances[0].emit('action', { actionIndex: 1 });
-    expect(sendRendererEventMock).not.toHaveBeenCalled();
 
     const activation = NotificationMock.handleActivation.mock.calls[0][0] as (details: {
       type: string;
       arguments: string;
     }) => void;
-    activation({ type: 'click', arguments: basePayload.id });
+    activation({ type: 'click', arguments: '' });
 
-    expect(sendRendererEventMock).toHaveBeenCalledTimes(1);
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
-      id: basePayload.id,
+      id: '',
     });
   });
 });
