@@ -37,6 +37,8 @@ pnpm dev
 
 Development builds keep their settings, cache, and logs in a separate user data directory, so you can run `pnpm dev` while an installed Gitify is running. Sign-in and settings are therefore separate from the installed app.
 
+On macOS, `pnpm dev` runs from a Gitify-branded copy of the Electron bundle in `node_modules/.cache/gitify-dev`. This keeps native notification activation inside the running development app instead of launching the generic `Electron.app`. The bundle is recreated when the Electron version changes and is signed with a Developer ID or Apple Development identity when available, falling back to ad-hoc signing. Set `GITIFY_DEV_SIGN_IDENTITY` to choose a specific identity.
+
 ### 🛠️ Tests
 
 Tooling is unified through [Vite+][vite-plus-website], which bundles the linter (oxlint), formatter (oxfmt), test runner (Vitest), and dev/build pipeline (Vite).
