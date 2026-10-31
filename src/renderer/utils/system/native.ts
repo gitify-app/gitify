@@ -21,7 +21,7 @@ export function buildNativeNotificationPayload(
 ): INativeNotificationPayload {
   const accountUUID = getAccountUUID(notification.account);
   const actor = notification.subject.user?.login ?? notification.subject.author?.login;
-  const context = [notification.reason.title, actor ? `@${actor}` : ''].filter(Boolean).join(' - ');
+  const context = [notification.reason.title, actor ? `@${actor}` : ''].filter(Boolean).join(' · ');
   const identifier = notification.display.identifier;
   const body =
     identifier && !notification.display.title.includes(identifier)

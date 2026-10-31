@@ -25,7 +25,7 @@ describe('renderer/utils/system/native.ts', () => {
 
       expect(payload.id).toBe(getNativeNotificationId(accountUUID, notification.id));
       expect(payload.title).toBe(notification.repository.fullName);
-      expect(payload.subtitle).toBe(`Updated - @${notification.subject.user?.login}`);
+      expect(payload.subtitle).toBe(`Updated · @${notification.subject.user?.login}`);
       expect(payload.body).toBe(notification.display.title);
       expect(payload.actionLabel).toBe('Mark as read');
     });

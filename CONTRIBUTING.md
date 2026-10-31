@@ -99,7 +99,7 @@ the macOS native vibrancy material, which Chromium cannot render.
 
 Operating-system notifications are created in the main process. A single unread notification offers a **Mark as read** action; multiple new notifications publish one count-only summary with no action.
 
-A single notification uses the repository as its title, `Reason - @actor` as context, and the formatted display title as its body. macOS shows the context as the subtitle; Windows and Linux fold it into the body above the subject.
+A single notification uses the repository as its title, `Reason · @actor` as context, and the formatted display title as its body. macOS shows the context as the subtitle; Windows and Linux fold it into the body above the subject.
 
 - **macOS**: native notifications require a code-signed app. Electron ships ad-hoc linker-signed, which macOS rejects for `UNUserNotificationCenter`, so `pnpm dev` re-signs the development Electron bundle automatically. Ad-hoc signing needs no certificate; set `GITIFY_DEV_SIGN_IDENTITY` to use a Developer ID or Apple Development identity. The same step sets `NSUserNotificationAlertStyle: alert`; the packaged app declares it in its `Info.plist`.
 - **Windows**: live interactions use the notification instance events.
