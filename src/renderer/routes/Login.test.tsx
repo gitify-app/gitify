@@ -101,26 +101,31 @@ describe('renderer/routes/Login.tsx', () => {
 
       await userEvent.click(screen.getByRole('tab', { name: forge }));
 
-      expect(screen.getByRole('button', { name: `Continue with ${forge}` })).toBeInTheDocument();
-      expect(screen.queryByText('or')).not.toBeInTheDocument();
+      const panel = screen.getByRole('tabpanel');
       expect(
-        screen.queryByRole('button', { name: 'Personal Access Token' }),
+        within(panel).getByRole('button', { name: `Continue with ${forge}` }),
+      ).toBeInTheDocument();
+      expect(within(panel).queryByText('or')).not.toBeInTheDocument();
+      expect(
+        within(panel).queryByRole('button', { name: 'Personal Access Token' }),
       ).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: 'GitHub CLI' })).not.toBeInTheDocument();
-      expect(screen.queryByRole('button', { name: 'Custom OAuth App' })).not.toBeInTheDocument();
+      expect(within(panel).queryByRole('button', { name: 'GitHub CLI' })).not.toBeInTheDocument();
+      expect(
+        within(panel).queryByRole('button', { name: 'Custom OAuth App' }),
+      ).not.toBeInTheDocument();
     },
   );
 
   it('animates the panel in the direction of the selected forge', async () => {
     renderWithProviders(<LoginRoute />);
 
-    expect(screen.getByRole('tabpanel')).toHaveClass('animate-login-panel-in-right');
+    expect(screen.getByTestId('active-forge-panel')).toHaveClass('animate-login-panel-in-right');
 
     await userEvent.click(screen.getByRole('tab', { name: 'Gitea' }));
-    expect(screen.getByRole('tabpanel')).toHaveClass('animate-login-panel-in-right');
+    expect(screen.getByTestId('active-forge-panel')).toHaveClass('animate-login-panel-in-right');
 
     await userEvent.click(screen.getByRole('tab', { name: 'GitHub' }));
-    expect(screen.getByRole('tabpanel')).toHaveClass('animate-login-panel-in-left');
+    expect(screen.getByTestId('active-forge-panel')).toHaveClass('animate-login-panel-in-left');
   });
 
   it('switches the visible primary action when changing forges', async () => {

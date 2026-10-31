@@ -2,31 +2,23 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Heading, Stack, Text } from '@primer/react';
+import { Heading, Stack } from '@primer/react';
 
 import { cn } from 'cn';
 
 import { useAccountsStore } from '../stores';
 
+import { LoginForgePanel } from '../components/login/LoginForgePanel';
+
 import { type Forge, Size } from '../types';
-import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
+import type { ForgeAdapter } from '../utils/forges/types';
 
 import { LogoIcon } from '../icons/LogoIcon';
-import {
-  compactLoginMethodLabel,
-  translateForgeTagline,
-  translateLoginMethodLabel,
-} from '../utils/forges/labels';
 import { listAdapters } from '../utils/forges/registry';
 import { showWindow } from '../utils/system/comms';
 
-/**
- * Pick the method that should drive the dominant CTA for a forge.
- * Falls back to the first registered method when no `primary` variant exists.
- */
-function pickPrimaryMethod(adapter: ForgeAdapter): LoginMethodDescriptor | undefined {
-  return adapter.loginMethods.find((m) => m.variant === 'primary') ?? adapter.loginMethods[0];
-}
+/** Keep the outgoing panel mounted for exactly as long as its exit animation. */
+const PANEL_TRANSITION_MS = 280;
 
 export function LoginRoute() {
   const { t } = useTranslation();
@@ -37,17 +29,42 @@ export function LoginRoute() {
 
   const [activeForge, setActiveForge] = useState<Forge>(adapters[0].id);
   const [panelDirection, setPanelDirection] = useState<'left' | 'right'>('right');
+  const [previousAdapter, setPreviousAdapter] = useState<ForgeAdapter | null>(null);
+  const previousTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const activeAdapter = useMemo(
     () => adapters.find((a) => a.id === activeForge) ?? adapters[0],
     [activeForge, adapters],
   );
 
   const selectForge = (forge: Forge) => {
+    if (forge === activeForge) {
+      return;
+    }
+
     const currentIndex = adapters.findIndex((adapter) => adapter.id === activeForge);
     const nextIndex = adapters.findIndex((adapter) => adapter.id === forge);
+
     setPanelDirection(nextIndex < currentIndex ? 'left' : 'right');
+    setPreviousAdapter(activeAdapter);
     setActiveForge(forge);
   };
+
+  // Drop the outgoing panel once its exit animation finishes so the two
+  // layers do not remain stacked (and focusable) afterwards.
+  useEffect(() => {
+    if (!previousAdapter) {
+      return;
+    }
+
+    previousTimer.current = setTimeout(() => setPreviousAdapter(null), PANEL_TRANSITION_MS);
+
+    return () => {
+      if (previousTimer.current) {
+        clearTimeout(previousTimer.current);
+      }
+    };
+  }, [previousAdapter]);
 
   const tablistRef = useRef<HTMLDivElement | null>(null);
   const tabRefs = useRef(new Map<Forge, HTMLButtonElement>());
@@ -99,9 +116,6 @@ export function LoginRoute() {
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [isLoggedIn]);
 
-  const primary = pickPrimaryMethod(activeAdapter);
-  const alternates = activeAdapter.loginMethods.filter((m) => m !== primary);
-
   return (
     <div className="flex h-screen w-full overflow-y-auto pt-6">
       <Stack align="center" className="m-auto w-full px-4" direction="vertical" gap="condensed">
@@ -142,7 +156,7 @@ export function LoginRoute() {
                 className={cn(
                   'pointer-events-none absolute top-1 bottom-1 rounded-full',
                   'bg-[var(--bgColor-default)] shadow-sm',
-                  'transition-[left,width] duration-300 ease-login-out',
+                  'transition-[left,width] duration-[280ms] ease-login-out',
                   'motion-reduce:transition-none',
                 )}
                 style={{ left: pillRect.left, width: pillRect.width }}
@@ -157,7 +171,8 @@ export function LoginRoute() {
                   aria-selected={isActive}
                   className={cn(
                     'relative z-10 inline-flex cursor-pointer items-center gap-2',
-                    'px-2.5 py-1.5 text-sm font-medium transition-colors',
+                    'px-2.5 py-1.5 text-sm font-medium',
+                    'transition-[color] duration-[280ms] ease-login-out',
                     'max-[30rem]:px-2 max-[30rem]:text-xs',
                     'outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
                     isActive
@@ -185,73 +200,45 @@ export function LoginRoute() {
           </div>
         )}
 
-        <div
-          aria-labelledby={`forge-tab-${activeAdapter.id}`}
-          className={cn(
-            'motion-reduce:animate-none',
-            panelDirection === 'right'
-              ? 'animate-login-panel-in-right'
-              : 'animate-login-panel-in-left',
-            'min-h-[9rem] w-full max-w-sm',
+        <div className="relative min-h-[9rem] w-full max-w-sm">
+          {previousAdapter && (
+            <div
+              aria-hidden="true"
+              className={cn(
+                'pointer-events-none absolute inset-0 motion-reduce:hidden',
+                'will-change-[opacity,transform]',
+                panelDirection === 'right'
+                  ? 'animate-login-panel-out-left'
+                  : 'animate-login-panel-out-right',
+              )}
+              inert
+              key={`previous-${previousAdapter.id}`}
+            >
+              <LoginForgePanel
+                adapter={previousAdapter}
+                isActive={false}
+                onNavigate={(route) => navigate(route)}
+              />
+            </div>
           )}
-          id={`forge-panel-${activeAdapter.id}`}
-          key={activeAdapter.id}
-          role="tabpanel"
-        >
-          <Stack align="stretch" direction="vertical" gap="condensed">
-            {primary && (
-              <Button
-                block
-                data-testid={primary.testId}
-                leadingVisual={primary.icon}
-                onClick={() => navigate(primary.route)}
-                variant="primary"
-              >
-                {t('login.continue_with', 'Continue with {{name}}', {
-                  name: activeAdapter.displayName,
-                })}
-              </Button>
-            )}
 
-            {alternates.length > 0 && (
-              <div className="flex flex-col gap-2">
-                <div aria-hidden="true" className="flex items-center gap-2">
-                  <span className="h-px flex-1 bg-[var(--borderColor-default)]" />
-                  <span className="text-[var(--fgColor-muted)] text-xxs">
-                    {t('login.or', 'or')}
-                  </span>
-                  <span className="h-px flex-1 bg-[var(--borderColor-default)]" />
-                </div>
-
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  {alternates.map((method) => (
-                    <Button
-                      aria-label={translateLoginMethodLabel(method.label)}
-                      data-testid={method.testId}
-                      key={method.testId}
-                      leadingVisual={method.icon}
-                      onClick={() => navigate(method.route)}
-                      size="small"
-                      title={translateLoginMethodLabel(method.label)}
-                      variant="default"
-                    >
-                      {compactLoginMethodLabel(method.label)}
-                    </Button>
-                  ))}
-                </div>
-              </div>
+          <div
+            className={cn(
+              'motion-reduce:animate-none will-change-[opacity,transform]',
+              panelDirection === 'right'
+                ? 'animate-login-panel-in-right'
+                : 'animate-login-panel-in-left',
+              'w-full',
             )}
-
-            {activeAdapter.tagline && (
-              <Text
-                as="p"
-                className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
-                size="small"
-              >
-                {translateForgeTagline(activeAdapter.tagline)}
-              </Text>
-            )}
-          </Stack>
+            data-testid="active-forge-panel"
+            key={activeAdapter.id}
+          >
+            <LoginForgePanel
+              adapter={activeAdapter}
+              isActive={true}
+              onNavigate={(route) => navigate(route)}
+            />
+          </div>
         </div>
       </Stack>
     </div>
