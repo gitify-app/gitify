@@ -213,6 +213,7 @@ export function LoginRoute() {
               )}
               inert
               key={`previous-${previousAdapter.id}`}
+              data-testid="previous-forge-panel"
             >
               <LoginForgePanel
                 adapter={previousAdapter}

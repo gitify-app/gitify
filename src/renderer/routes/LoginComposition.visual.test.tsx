@@ -1,3 +1,5 @@
+import { waitFor } from '@testing-library/react';
+
 import { page } from 'vite-plus/test/browser';
 
 import { renderRoute } from '../__helpers__/visual-utils';
@@ -21,6 +23,11 @@ function renderLogin(theme: Theme, designLanguage: DesignLanguage) {
   });
 }
 
+/** Waits for the outgoing forge panel to unmount before capturing a screenshot. */
+async function waitForPanelTransition() {
+  await waitFor(() => expect(page.getByTestId('previous-forge-panel').query()).toBeNull());
+}
+
 function topOf(locator: ReturnType<typeof page.getByTestId>): number {
   return locator.element().getBoundingClientRect().y;
 }
@@ -30,6 +37,7 @@ describe('renderer/routes/Login composition visual regression', () => {
     it('captures a single-method forge', async () => {
       renderLogin(theme, designLanguage);
       await page.getByRole('tab', { name: 'Gitea' }).click();
+      await waitForPanelTransition();
 
       await expect(page.getByTestId('visual-root')).toMatchScreenshot(
         `login-gitea-selected-${theme.toLowerCase()}-${designLanguage}`,
