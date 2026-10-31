@@ -95,7 +95,7 @@ export function LoginRoute() {
   const alternates = activeAdapter.loginMethods.filter((m) => m !== primary);
 
   return (
-    <div className="flex h-screen w-full overflow-y-auto">
+    <div className="flex h-screen w-full overflow-y-auto pt-6">
       <Stack align="center" className="m-auto w-full px-4" direction="vertical" gap="condensed">
         <div
           className="motion-reduce:animate-none animate-login-fade-up"
