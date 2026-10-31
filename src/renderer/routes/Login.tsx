@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,8 +7,6 @@ import { Button, Heading, Stack, Text } from '@primer/react';
 import { cn } from 'cn';
 
 import { useAccountsStore } from '../stores';
-
-import { Centered } from '../components/layout/Centered';
 
 import { type Forge, Size } from '../types';
 import type { ForgeAdapter, LoginMethodDescriptor } from '../utils/forges/types';
@@ -48,8 +46,9 @@ export function LoginRoute() {
 
   // Measure the active tab so the indicator pill can slide between tabs
   // instead of snapping bg colors. Runs synchronously after layout so the
-  // pill is positioned before paint.
-  useLayoutEffect(() => {
+  // pill is positioned before paint, and again on resize so zoom changes
+  // re-measure the tabs.
+  const measurePill = useCallback(() => {
     const tablist = tablistRef.current;
     const active = tabRefs.current.get(activeForge);
     if (!tablist || !active) {
@@ -70,6 +69,16 @@ export function LoginRoute() {
     });
   }, [activeForge]);
 
+  useLayoutEffect(() => {
+    measurePill();
+  }, [measurePill]);
+
+  useEffect(() => {
+    window.addEventListener('resize', measurePill);
+
+    return () => window.removeEventListener('resize', measurePill);
+  }, [measurePill]);
+
   useEffect(() => {
     if (isLoggedIn) {
       showWindow();
@@ -82,10 +91,11 @@ export function LoginRoute() {
   const alternates = activeAdapter.loginMethods.filter((m) => m !== primary);
 
   return (
-    <Centered fullHeight={true}>
-      <Stack align="center" direction="vertical" gap="condensed">
+    <div className="flex h-screen w-full overflow-y-auto pt-5">
+      <Stack align="center" className="m-auto w-full px-4" direction="vertical" gap="condensed">
         <div
           className="motion-reduce:animate-none animate-login-fade-up"
+          data-testid="login-logo"
           style={{ animationDelay: '0ms' }}
         >
           <LogoIcon isDark size={Size.LARGE} />
@@ -106,7 +116,7 @@ export function LoginRoute() {
             aria-label={t('login.choose_forge', 'Choose a forge')}
             className={cn(
               'motion-reduce:animate-none animate-login-fade-up',
-              'relative inline-flex items-center rounded-full',
+              'relative inline-flex max-w-full items-center rounded-full',
               'border border-[var(--borderColor-default)]',
               'bg-[var(--bgColor-muted)] p-1',
             )}
@@ -135,7 +145,8 @@ export function LoginRoute() {
                   aria-selected={isActive}
                   className={cn(
                     'relative z-10 inline-flex cursor-pointer items-center gap-2',
-                    'px-3 py-1.5 text-sm font-medium transition-colors',
+                    'px-2.5 py-1.5 text-sm font-medium transition-colors',
+                    'max-[30rem]:px-2 max-[30rem]:text-xs',
                     'outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
                     isActive
                       ? 'text-[var(--fgColor-default)]'
@@ -164,7 +175,7 @@ export function LoginRoute() {
 
         <div
           aria-labelledby={`forge-tab-${activeAdapter.id}`}
-          className="motion-reduce:animate-none animate-login-panel-fade w-full max-w-xs"
+          className="motion-reduce:animate-none animate-login-panel-fade min-h-[11rem] w-full max-w-sm"
           id={`forge-panel-${activeAdapter.id}`}
           key={activeAdapter.id}
           role="tabpanel"
@@ -184,18 +195,32 @@ export function LoginRoute() {
               </Button>
             )}
 
-            {alternates.map((method) => (
-              <Button
-                block
-                data-testid={method.testId}
-                key={method.testId}
-                leadingVisual={method.icon}
-                onClick={() => navigate(method.route)}
-                variant={method.variant ?? 'invisible'}
-              >
-                {translateLoginMethodLabel(method.label)}
-              </Button>
-            ))}
+            {alternates.length > 0 && (
+              <div className="flex flex-col gap-2">
+                <div aria-hidden="true" className="flex items-center gap-2">
+                  <span className="h-px flex-1 bg-[var(--borderColor-default)]" />
+                  <span className="text-[var(--fgColor-muted)] text-xxs">
+                    {t('login.or', 'or')}
+                  </span>
+                  <span className="h-px flex-1 bg-[var(--borderColor-default)]" />
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  {alternates.map((method) => (
+                    <Button
+                      data-testid={method.testId}
+                      key={method.testId}
+                      leadingVisual={method.icon}
+                      onClick={() => navigate(method.route)}
+                      size="small"
+                      variant="default"
+                    >
+                      {translateLoginMethodLabel(method.label)}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {activeAdapter.tagline && (
               <Text
@@ -209,6 +234,6 @@ export function LoginRoute() {
           </Stack>
         </div>
       </Stack>
-    </Centered>
+    </div>
   );
 }
