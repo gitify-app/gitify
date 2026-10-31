@@ -97,7 +97,7 @@ the macOS native vibrancy material, which Chromium cannot render.
 
 Operating-system notifications are created in the main process and have platform-specific prerequisites:
 
-- **macOS**: native notifications require a properly signed app; the ad-hoc-signed Electron development binary is rejected by `UNUserNotificationCenter`. Run `pnpm sign:dev` once after installing dependencies (and again after changing the Electron version), then restart `pnpm dev`. Action buttons additionally require `NSUserNotificationAlertStyle: alert` in the packaged app.
+- **macOS**: native notifications require a code-signed app. Electron ships ad-hoc _linker_-signed, which macOS rejects for `UNUserNotificationCenter`, so `pnpm dev` re-signs the development Electron bundle automatically before starting. Ad-hoc signing is the default and needs no certificate; set `GITIFY_DEV_SIGN_IDENTITY` to use a Developer ID or Apple Development identity. Run `pnpm dev` again after `pnpm install` or an Electron upgrade. The same step sets `NSUserNotificationAlertStyle: alert` for development, and the packaged app declares it in its `Info.plist`.
 - **Windows**: action buttons use the toast action support; `app.setAppUserModelId` is set when the menubar is ready. Verify Action Center persistence and cold-start activation manually.
 - **Linux**: action buttons appear only when the desktop notification server advertises the `actions` capability. Without it, the notification still shows without buttons.
 
