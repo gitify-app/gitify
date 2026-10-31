@@ -102,6 +102,14 @@ imports them. The current runtime packages are `electron-log`,
 `electron-menubar`, and `electron-updater`; React, the i18n packages, and `cn`
 are renderer-only and build-time.
 
+`electron-builder` collects the production closure from `dependencies` through
+its pnpm collector. Do not add `node_modules` to the `files` list in
+`electron-builder.js` — a hand-written glob overrides that collector and can
+re-introduce dev dependencies. After packaging, run
+`node scripts/verifyPackagedDependencies.js <app path>` to assert that the asar
+contains the runtime packages and none of the renderer-only packages or the pnpm
+virtual store.
+
 ### Translations
 
 Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
