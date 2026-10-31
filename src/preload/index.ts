@@ -8,6 +8,7 @@ import type {
   INativeNotificationRemovePayload,
   NativeThemeSource,
   TrayIconAppearance,
+  ZoomAction,
 } from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
@@ -257,6 +258,19 @@ export const api = {
    */
   onSystemWake: (callback: () => void) => {
     return onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
+  },
+
+  /**
+   * Register a callback invoked when a native zoom shortcut is pressed.
+   *
+   * The main process intercepts `Cmd/Ctrl` + `+`, `-` and `0` so the renderer
+   * can apply the configured zoom step and minimum / maximum bounds.
+   *
+   * @param callback - Called with the requested zoom action.
+   * @returns A function that removes the listener.
+   */
+  onZoom: (callback: (action: ZoomAction) => void) => {
+    return onRendererEvent(EVENTS.ZOOM, (_event, action) => callback(action));
   },
 
   /** Operating-system notification controls. */

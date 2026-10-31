@@ -35,6 +35,8 @@ Start development mode (includes GraphQL codegen and hot module reload):
 pnpm dev
 ```
 
+Development builds keep their settings, cache, and logs in a separate user data directory, so you can run `pnpm dev` while an installed Gitify is running. Sign-in and settings are therefore separate from the installed app.
+
 ### 🛠️ Tests
 
 Tooling is unified through [Vite+][vite-plus-website], which bundles the linter (oxlint), formatter (oxfmt), test runner (Vitest), and dev/build pipeline (Vite).

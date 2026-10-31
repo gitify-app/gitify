@@ -7,11 +7,12 @@ import { createNotificationHandler } from './handlers';
 
 /**
  * Maximum number of notifications batched into a single merged GraphQL query
- * by `enrichGitHubNotifications`. GitHub's GraphQL alias cap is well above
- * 100; this is a conservative ceiling that keeps individual responses small
- * and parseable.
+ * by `enrichGitHubNotifications`. Each aliased fragment pulls nested
+ * connections (labels, comments, replies), so larger batches (50+) trip
+ * GitHub's "Resource limits for this query exceeded" error and fail the
+ * whole batch.
  */
-export const GITHUB_API_MERGE_BATCH_SIZE = 100;
+export const GITHUB_API_MERGE_BATCH_SIZE = 25;
 
 /**
  * Enrich GitHub notifications with additional subject details (state, user,

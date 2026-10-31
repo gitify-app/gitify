@@ -49,6 +49,7 @@ vi.mock('./icons', () => ({
 }));
 
 vi.mock('./lifecycle', () => ({
+  configureUserDataPath: vi.fn(() => calls.push('userData')),
   configureWindowEvents: vi.fn(),
   handleProtocolURL: vi.fn(),
   initializeAppLifecycle: vi.fn(),
@@ -86,8 +87,8 @@ describe('main/index.ts', () => {
     ]);
   });
 
-  it('applies the Ozone backend before Electron becomes ready', () => {
-    expect(calls.slice(0, 2)).toEqual(['ozone', 'whenReady']);
+  it('configures user data and the Ozone backend before Electron becomes ready', () => {
+    expect(calls.slice(0, 3)).toEqual(['userData', 'ozone', 'whenReady']);
   });
 
   it('registers native notification handlers during startup', async () => {

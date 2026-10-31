@@ -517,6 +517,17 @@ body,
   background-color: var(--gitify-scrollbar-thumb-hover);
 }
 
+/* The login screen is fixed to the window height. At high zoom its content
+ * can exceed the viewport; keep it scrollable but hide the scrollbar so it
+ * does not intrude on the centred composition. */
+.gitify-login-scroll {
+  scrollbar-width: none;
+}
+
+.gitify-login-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 /**
  * Softens the top and bottom edges of a scroll container, revealing each edge
  * only while there is more content to scroll in that direction.

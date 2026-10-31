@@ -1,6 +1,6 @@
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import type { ForwardedRef, ReactElement } from 'react';
+import { Fragment, type ForwardedRef, type ReactElement } from 'react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import {
@@ -33,20 +33,19 @@ const legendListMock = vi.hoisted(() => ({
 
 // LegendList virtualizes based on real scroll metrics, which happy-dom cannot
 // provide. Renders every flattened item through the real renderItem callback so
-// the component's useMemo flattening still runs and can be asserted on. The
-// ref spies let tests assert programmatic positioning without a real scroller.
 vi.mock('@legendapp/list/react', async () => {
   const React = await import('react');
 
   interface MockLegendListProps {
     data: unknown[];
     dataKey?: unknown;
+    keyExtractor?: (item: unknown) => string;
     renderItem: (info: { item: unknown }) => ReactElement;
     onReady?: () => void;
   }
 
   const LegendList = React.forwardRef<unknown, MockLegendListProps>(
-    ({ data, dataKey, renderItem, onReady }, ref: ForwardedRef<unknown>) => {
+    ({ data, dataKey, keyExtractor, renderItem, onReady }, ref: ForwardedRef<unknown>) => {
       legendListMock.props.push({ dataKey });
 
       React.useImperativeHandle(ref, () => ({
@@ -65,7 +64,9 @@ vi.mock('@legendapp/list/react', async () => {
       return (
         <div>
           {data.map((item, index) => (
-            <div key={index}>{renderItem({ item })}</div>
+            <Fragment key={keyExtractor ? keyExtractor(item) : index}>
+              {renderItem({ item })}
+            </Fragment>
           ))}
         </div>
       );

@@ -1,3 +1,4 @@
+/// <reference types="vite-plugin-electron/electron-env" />
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,6 +12,11 @@ import type { Plugin } from 'vite-plus';
 import { defineConfig } from 'vite-plus';
 
 import { Constants } from './src/renderer/constants.ts';
+
+const projectRoot = fileURLToPath(new URL('.', import.meta.url));
+
+/** Whether `vite-plugin-electron` has an Electron child process running. */
+const isElectronRunning = (): boolean => Boolean(process.electronApp);
 
 /**
  * Vite plugin that copies static assets to disk on startup.
@@ -194,14 +200,12 @@ export default defineConfig({
           // vite-plugin-electron v1 starts Electron with `cwd: server.config.root`.
           // Our Vite root is `src/renderer`, so we must override `cwd` back to the
           // repository root or Electron will try to boot from `src/renderer`.
-          await startup(undefined, {
-            cwd: fileURLToPath(new URL('.', import.meta.url)),
-          });
+          await startup(undefined, { cwd: projectRoot });
         },
         vite: {
           // The outer Vite config sets root:'src/renderer', so we must
           // explicitly tell the main-process sub-build where to find .env files.
-          envDir: fileURLToPath(new URL('.', import.meta.url)),
+          envDir: projectRoot,
           build: {
             outDir: fileURLToPath(new URL('build', import.meta.url)),
             rolldownOptions: {
@@ -219,6 +223,21 @@ export default defineConfig({
       },
       preload: {
         input: fileURLToPath(new URL('src/preload/index.ts', import.meta.url)),
+        onstart: async ({ startup, reload }) => {
+          // vite-plugin-electron runs the *preload* entry's `onstart` for the
+          // first startup round, because its build finishes last and trips the
+          // shared entry counter. The default handler (`reload`) then starts
+          // Electron from `server.config.root` (`src/renderer`), which has no
+          // package.json, so the app fails with "Unable to find Electron app".
+          // Start from the repository root instead; once Electron is running,
+          // hot-reload renderer state as the default handler would.
+          if (isElectronRunning()) {
+            reload();
+            return;
+          }
+
+          await startup(undefined, { cwd: projectRoot });
+        },
         vite: {
           build: {
             outDir: fileURLToPath(new URL('build', import.meta.url)),

@@ -35,6 +35,7 @@ export const EVENTS = {
   NATIVE_NOTIFICATION_READY: `${P}native-notification-ready`,
   NATIVE_NOTIFICATION_ACTION: `${P}native-notification-action`,
   NATIVE_NOTIFICATION_CLICK: `${P}native-notification-click`,
+  ZOOM: `${P}zoom`,
 } as const;
 
 /** Union type of all valid IPC event name strings. */
@@ -44,6 +45,9 @@ export type EventType = (typeof EVENTS)[keyof typeof EVENTS];
 export type NativeThemeSource = 'system' | 'light' | 'dark';
 
 export type TrayIconAppearance = 'auto' | 'light' | 'dark';
+
+/** Zoom direction triggered by an application keyboard shortcut. */
+export type ZoomAction = 'in' | 'out' | 'reset';
 
 export function isTrayIconAppearance(value: unknown): value is TrayIconAppearance {
   return value === 'auto' || value === 'light' || value === 'dark';
@@ -231,6 +235,7 @@ export type EventContracts = AssertEventCoverage<{
     request: INativeNotificationClickEvent;
     response: undefined;
   };
+  [EVENTS.ZOOM]: { request: ZoomAction; response: undefined };
 }>;
 
 /** Request payload type for a given event. */

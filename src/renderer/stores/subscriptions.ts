@@ -14,7 +14,12 @@ import {
   setUseUnreadActiveIcon,
   setUseX11Backend,
 } from '../utils/system/comms';
-import { zoomLevelToPercentage, zoomPercentageToLevel } from '../utils/ui/zoom';
+import {
+  clampZoomPercentage,
+  getNextZoomPercentage,
+  zoomLevelToPercentage,
+  zoomPercentageToLevel,
+} from '../utils/ui/zoom';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from './';
 
 /**
@@ -98,18 +103,36 @@ export function initializeStoreSubscriptions(): () => void {
   );
   unsubscribers.push(unsubAppearance);
 
-  // Initialize zoom level from saved settings on startup
-  const initialZoomPercentage = useSettingsStore.getState().zoomPercentage;
+  // Initialize zoom level from saved settings on startup. Persisted settings
+  // from older versions may be outside the supported range.
+  const storedZoomPercentage = useSettingsStore.getState().zoomPercentage;
+  const initialZoomPercentage = clampZoomPercentage(storedZoomPercentage);
   window.gitify.zoom.setLevel(zoomPercentageToLevel(initialZoomPercentage));
+
+  if (initialZoomPercentage !== storedZoomPercentage) {
+    useSettingsStore.getState().updateSetting('zoomPercentage', initialZoomPercentage);
+  }
 
   // Zoom percentage changes
   const unsubZoom = useSettingsStore.subscribe(
     (state) => state.zoomPercentage,
     (zoomPercentage) => {
-      window.gitify.zoom.setLevel(zoomPercentageToLevel(zoomPercentage));
+      window.gitify.zoom.setLevel(zoomPercentageToLevel(clampZoomPercentage(zoomPercentage)));
     },
   );
   unsubscribers.push(unsubZoom);
+
+  // Native Cmd/Ctrl +/-/0 shortcuts, routed from the main process so they use
+  // the same step and bounds as the Settings controls.
+  const unsubZoomShortcut = window.gitify.onZoom((action) => {
+    const currentZoomPercentage = useSettingsStore.getState().zoomPercentage;
+    const nextZoomPercentage = getNextZoomPercentage(currentZoomPercentage, action);
+
+    if (nextZoomPercentage !== currentZoomPercentage) {
+      useSettingsStore.getState().updateSetting('zoomPercentage', nextZoomPercentage);
+    }
+  });
+  unsubscribers.push(unsubZoomShortcut);
 
   // Set up zoom level sync from window resize
   let timeout: NodeJS.Timeout;
@@ -118,7 +141,15 @@ export function initializeStoreSubscriptions(): () => void {
   const handleResize = () => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      const zoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
+      const nativeZoomPercentage = zoomLevelToPercentage(window.gitify.zoom.getLevel());
+      const zoomPercentage = clampZoomPercentage(nativeZoomPercentage);
+
+      // Something other than Gitify changed the native zoom (e.g. a menu item
+      // or pinch zoom). Snap it back within the supported range.
+      if (zoomPercentage !== nativeZoomPercentage) {
+        window.gitify.zoom.setLevel(zoomPercentageToLevel(zoomPercentage));
+      }
+
       const currentZoomPercentage = useSettingsStore.getState().zoomPercentage;
 
       if (zoomPercentage !== currentZoomPercentage) {

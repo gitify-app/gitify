@@ -57,6 +57,7 @@ interface TestApi {
     onAction: (callback: (payload: unknown) => void) => () => void;
     onClick: (callback: (payload: unknown) => void) => () => void;
   };
+  onZoom: (callback: (action: 'in' | 'out' | 'reset') => void) => () => void;
 }
 
 describe('preload/index', () => {
@@ -130,6 +131,24 @@ describe('preload/index', () => {
     const api = getExposedApi();
 
     await expect(api.app.version()).resolves.toBe('v1.2.3');
+  });
+
+  it('onZoom forwards the requested zoom action', () => {
+    const api = getExposedApi();
+    const callback = vi.fn();
+
+    api.onZoom(callback);
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(EVENTS.ZOOM, expect.any(Function));
+
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (
+      event: unknown,
+      action: 'in' | 'out' | 'reset',
+    ) => void;
+
+    listener({}, 'out');
+
+    expect(callback).toHaveBeenCalledWith('out');
   });
 
   it('nativeNotifications.show invokes the main process with the payload', async () => {

@@ -163,7 +163,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
       fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
 
-      const notificationCount = GITHUB_API_MERGE_BATCH_SIZE * 2.5;
+      // Two full batches plus a partial final batch.
+      const partialBatchSize = Math.floor(GITHUB_API_MERGE_BATCH_SIZE / 2);
+      const notificationCount = GITHUB_API_MERGE_BATCH_SIZE * 2 + partialBatchSize;
       const notifications = Array.from({ length: notificationCount }, (_, i) =>
         mockPartialGitifyNotification({
           title: `Notification ${i}`,
@@ -176,7 +178,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       await enrichNotifications(notifications);
 
-      // Should be called 3 times: batches of 100, 100, 50
+      // Should be called 3 times: two full batches and one partial batch
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(3);
 
       // Verify batch sizes
@@ -186,7 +188,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       expect(fetchNotificationDetailsForListSpy.mock.calls[1][0]).toHaveLength(
         GITHUB_API_MERGE_BATCH_SIZE,
       );
-      expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(50);
+      expect(fetchNotificationDetailsForListSpy.mock.calls[2][0]).toHaveLength(partialBatchSize);
     });
 
     it('handles single batch of notifications', async () => {
@@ -196,7 +198,7 @@ describe('renderer/utils/notifications/notifications.ts', () => {
       vi.mocked(apiClient.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
       fetchNotificationDetailsForListSpy.mockResolvedValue(new Map());
 
-      const notifications = Array.from({ length: 50 }, (_, i) =>
+      const notifications = Array.from({ length: GITHUB_API_MERGE_BATCH_SIZE }, (_, i) =>
         mockPartialGitifyNotification({
           title: `Notification ${i}`,
           type: 'Issue',
@@ -210,7 +212,9 @@ describe('renderer/utils/notifications/notifications.ts', () => {
 
       // Should be called once for single batch
       expect(fetchNotificationDetailsForListSpy).toHaveBeenCalledTimes(1);
-      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(50);
+      expect(fetchNotificationDetailsForListSpy.mock.calls[0][0]).toHaveLength(
+        GITHUB_API_MERGE_BATCH_SIZE,
+      );
     });
 
     it('skips re-fetch when a notification updatedAt is unchanged', async () => {
