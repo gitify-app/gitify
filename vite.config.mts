@@ -1,4 +1,5 @@
 /// <reference types="vite-plugin-electron/electron-env" />
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -14,6 +15,34 @@ import { defineConfig } from 'vite-plus';
 import { Constants } from './src/renderer/constants.ts';
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url));
+
+const packageJson = JSON.parse(
+  fs.readFileSync(fileURLToPath(new URL('package.json', import.meta.url)), 'utf8'),
+) as { dependencies?: Record<string, string> };
+
+/**
+ * Main-process runtime dependencies, derived from `package.json` so the list
+ * cannot drift. Kept external so electron-builder packages them from
+ * `dependencies`; the renderer and preload are bundled.
+ *
+ * `electron` is provided by the Electron runtime, not installed from
+ * `dependencies`, so it is the one external that must be listed explicitly.
+ */
+const mainProcessExternals = [
+  ...new Set(['electron', ...Object.keys(packageJson.dependencies ?? {})]),
+];
+
+/** Fail the main-process build when a runtime dependency is renderer-only. */
+const validateRuntimeDependenciesPlugin = (): Plugin => ({
+  name: 'validate-runtime-dependencies',
+  buildStart() {
+    execFileSync(
+      process.execPath,
+      [fileURLToPath(new URL('scripts/validate-runtime-dependencies.mjs', import.meta.url))],
+      { stdio: 'inherit' },
+    );
+  },
+});
 
 /** Whether `vite-plugin-electron` has an Electron child process running. */
 const isElectronRunning = (): boolean => Boolean(process.electronApp);
@@ -206,19 +235,12 @@ export default defineConfig({
           // The outer Vite config sets root:'src/renderer', so we must
           // explicitly tell the main-process sub-build where to find .env files.
           envDir: projectRoot,
+          plugins: [validateRuntimeDependenciesPlugin()],
           build: {
             outDir: fileURLToPath(new URL('build', import.meta.url)),
             rolldownOptions: {
               output: { entryFileNames: 'main.js' },
-              external: [
-                'electron',
-                // Main-process runtime dependencies. Kept external so
-                // electron-builder packages them from `dependencies`; the
-                // renderer and preload are bundled. See CONTRIBUTING.md.
-                'electron-log',
-                'electron-menubar',
-                'electron-updater',
-              ],
+              external: mainProcessExternals,
             },
           },
         },
