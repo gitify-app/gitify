@@ -17,14 +17,19 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(6px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'login-panel-fade': {
-          '0%': { opacity: '0', transform: 'translateY(4px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        'login-panel-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(10px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'login-panel-in-left': {
+          '0%': { opacity: '0', transform: 'translateX(-10px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
         },
       },
       animation: {
         'login-fade-up': 'login-fade-up 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
-        'login-panel-fade': 'login-panel-fade 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+        'login-panel-in-right': 'login-panel-in-right 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+        'login-panel-in-left': 'login-panel-in-left 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
       },
       transitionTimingFunction: {
         'login-out': 'cubic-bezier(0.2, 0.7, 0.2, 1)',

@@ -36,10 +36,18 @@ export function LoginRoute() {
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
 
   const [activeForge, setActiveForge] = useState<Forge>(adapters[0].id);
+  const [panelDirection, setPanelDirection] = useState<'left' | 'right'>('right');
   const activeAdapter = useMemo(
     () => adapters.find((a) => a.id === activeForge) ?? adapters[0],
     [activeForge, adapters],
   );
+
+  const selectForge = (forge: Forge) => {
+    const currentIndex = adapters.findIndex((adapter) => adapter.id === activeForge);
+    const nextIndex = adapters.findIndex((adapter) => adapter.id === forge);
+    setPanelDirection(nextIndex < currentIndex ? 'left' : 'right');
+    setActiveForge(forge);
+  };
 
   const tablistRef = useRef<HTMLDivElement | null>(null);
   const tabRefs = useRef(new Map<Forge, HTMLButtonElement>());
@@ -158,7 +166,7 @@ export function LoginRoute() {
                   )}
                   data-testid={`forge-tab-${adapter.id}`}
                   key={adapter.id}
-                  onClick={() => setActiveForge(adapter.id)}
+                  onClick={() => selectForge(adapter.id)}
                   ref={(el) => {
                     if (el) {
                       tabRefs.current.set(adapter.id, el);
@@ -179,12 +187,18 @@ export function LoginRoute() {
 
         <div
           aria-labelledby={`forge-tab-${activeAdapter.id}`}
-          className="motion-reduce:animate-none animate-login-panel-fade flex min-h-[9rem] w-full max-w-sm flex-col"
+          className={cn(
+            'motion-reduce:animate-none',
+            panelDirection === 'right'
+              ? 'animate-login-panel-in-right'
+              : 'animate-login-panel-in-left',
+            'min-h-[9rem] w-full max-w-sm',
+          )}
           id={`forge-panel-${activeAdapter.id}`}
           key={activeAdapter.id}
           role="tabpanel"
         >
-          <Stack align="stretch" className="flex-1" direction="vertical" gap="condensed">
+          <Stack align="stretch" direction="vertical" gap="condensed">
             {primary && (
               <Button
                 block
@@ -231,7 +245,7 @@ export function LoginRoute() {
             {activeAdapter.tagline && (
               <Text
                 as="p"
-                className="mt-auto pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
+                className="pt-1 text-center text-[var(--fgColor-muted)] text-xxs"
                 size="small"
               >
                 {translateForgeTagline(activeAdapter.tagline)}

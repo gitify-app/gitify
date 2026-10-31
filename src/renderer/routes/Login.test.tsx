@@ -111,6 +111,18 @@ describe('renderer/routes/Login.tsx', () => {
     },
   );
 
+  it('animates the panel in the direction of the selected forge', async () => {
+    renderWithProviders(<LoginRoute />);
+
+    expect(screen.getByRole('tabpanel')).toHaveClass('animate-login-panel-in-right');
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Gitea' }));
+    expect(screen.getByRole('tabpanel')).toHaveClass('animate-login-panel-in-right');
+
+    await userEvent.click(screen.getByRole('tab', { name: 'GitHub' }));
+    expect(screen.getByRole('tabpanel')).toHaveClass('animate-login-panel-in-left');
+  });
+
   it('switches the visible primary action when changing forges', async () => {
     renderWithProviders(<LoginRoute />);
 
