@@ -48,10 +48,8 @@ export function MetricPillContent(props: Readonly<MetricPillContentProps>) {
 
 export function MetricPill(props: Readonly<MetricPillProps>) {
   return (
-    // Dense, rapidly scanned rows: require a deliberate pause so sweeping the
-    // pointer across pill columns does not pop tooltips mid-action.
     // @ts-expect-error: We overload text with a ReactNode
-    <Tooltip delay="long" direction="s" text={props.contents}>
+    <Tooltip direction="s" text={props.contents}>
       <button aria-label={props.ariaLabel} type="button" onClick={props.onClick}>
         <MetricPillContent
           color={props.color}
