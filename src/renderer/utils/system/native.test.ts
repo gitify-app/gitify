@@ -20,13 +20,13 @@ describe('renderer/utils/system/native.ts', () => {
   });
 
   describe('buildNativeNotificationPayload', () => {
-    it('builds the identity, existing single-notification copy, and action', () => {
+    it('builds the identity, context, formatted body, and action', () => {
       const payload = buildNativeNotificationPayload(notification);
 
       expect(payload.id).toBe(getNativeNotificationId(accountUUID, notification.id));
       expect(payload.title).toBe(notification.repository.fullName);
-      expect(payload.body).toBe(notification.subject.title);
-      expect(payload.subtitle).toBeUndefined();
+      expect(payload.subtitle).toBe(`Updated · @${notification.subject.user?.login}`);
+      expect(payload.body).toBe(notification.display.title);
       expect(payload.actionLabel).toBe('Mark as read');
     });
 
@@ -34,6 +34,24 @@ describe('renderer/utils/system/native.ts', () => {
       const payload = buildNativeNotificationPayload({ ...notification, unread: false });
 
       expect(payload.actionLabel).toBeUndefined();
+    });
+
+    it('handles a notification without an actor', () => {
+      const payload = buildNativeNotificationPayload({
+        ...notification,
+        subject: { ...notification.subject, user: undefined, author: undefined },
+      });
+
+      expect(payload.subtitle).toBe(notification.reason.title);
+    });
+
+    it('appends an identifier not already in the display title', () => {
+      const payload = buildNativeNotificationPayload({
+        ...notification,
+        display: { ...notification.display, title: 'A title without a number', identifier: '#123' },
+      });
+
+      expect(payload.body).toContain('#123');
     });
   });
 
