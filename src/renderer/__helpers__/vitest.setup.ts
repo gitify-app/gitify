@@ -139,7 +139,8 @@ beforeEach(async () => {
   const { resetHookMocks } = await import('./hook-mocks');
   resetHookMocks();
 
-  const { useShortcutRegistrationStore } = await import('../stores');
+  const { usePowerStateStore, useShortcutRegistrationStore } = await import('../stores');
+  usePowerStateStore.setState({ isActive: true });
   useShortcutRegistrationStore.getState().reset();
 });
 

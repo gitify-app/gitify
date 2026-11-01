@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Constants } from '../constants';
 
-import { useAccountsStore } from '../stores';
+import { useAccountsStore, usePowerStateStore } from '../stores';
 
 import { accountsKeys } from '../utils/api/queryKeys';
 import { getAccountUUID } from '../utils/auth/utils';
@@ -22,6 +22,7 @@ interface AccountsState {
  */
 export const useAccounts = (): AccountsState => {
   const accounts = useAccountsStore((state) => state.accounts);
+  const isPowerActive = usePowerStateStore((state) => state.isActive);
 
   const hasPersistedRotatedTokensRef = useRef(false);
 
@@ -47,7 +48,7 @@ export const useAccounts = (): AccountsState => {
     // poll. Changing the account list does not go through this: it produces
     // a new query key with no cached data, which always fetches.
     staleTime: Constants.REFRESH_ACCOUNTS_INTERVAL_MS,
-    refetchInterval: Constants.REFRESH_ACCOUNTS_INTERVAL_MS,
+    refetchInterval: isPowerActive ? Constants.REFRESH_ACCOUNTS_INTERVAL_MS : false,
     refetchOnWindowFocus: false,
   });
 
@@ -59,7 +60,7 @@ export const useAccounts = (): AccountsState => {
   // unlocks their screen, without waiting for the next scheduled interval.
   useEffect(() => {
     return window.gitify.onSystemWake(() => {
-      void refetch();
+      void refetch({ cancelRefetch: false });
     });
   }, [refetch]);
 

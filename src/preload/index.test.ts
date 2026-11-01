@@ -57,6 +57,7 @@ interface TestApi {
     onClick: (callback: (payload: { id: string }) => void) => () => void;
   };
   onZoom: (callback: (action: 'in' | 'out' | 'reset') => void) => () => void;
+  onSystemSleep: (callback: () => void) => () => void;
 }
 
 describe('preload/index', () => {
@@ -220,6 +221,23 @@ describe('preload/index', () => {
       expect.any(Function),
     );
     expect(callback).toHaveBeenCalledWith({ id: 'summary' });
+
+    result();
+    expect(unsubscribe).toHaveBeenCalled();
+  });
+
+  it('onSystemSleep forwards sleep events and cleans up', () => {
+    const api = getExposedApi();
+    const callback = vi.fn();
+    const unsubscribe = vi.fn();
+    onRendererEventMock.mockReturnValueOnce(unsubscribe);
+
+    const result = api.onSystemSleep(callback);
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (event: unknown) => void;
+    listener({});
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(EVENTS.SYSTEM_SLEEP, expect.any(Function));
+    expect(callback).toHaveBeenCalled();
 
     result();
     expect(unsubscribe).toHaveBeenCalled();
