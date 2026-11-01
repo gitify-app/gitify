@@ -218,7 +218,7 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
   );
 }
 
-function getVisibleCount(widths: number[], available: number, chipWidth: number): number {
+export function getVisibleCount(widths: number[], available: number, chipWidth: number): number {
   const total = widths.reduce((sum, width, index) => sum + width + (index > 0 ? GAP : 0), 0);
 
   if (total <= available) {
