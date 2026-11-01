@@ -16,6 +16,95 @@ vi.mock('./client', async () => {
 });
 
 describe('renderer/utils/forges/github/enrich.ts', () => {
+  describe('batch split retry', () => {
+    const resourceLimitError = new Error(
+      'GraphQL request returned errors: Resource limits for this query exceeded',
+    );
+
+    function mockNotifications(count: number) {
+      return Array.from({ length: count }, (_, index) =>
+        mockPartialGitifyNotification({
+          title: `Issue ${index}`,
+          type: 'Issue',
+          url: `https://api.github.com/repos/gitify-app/notifications-test/issues/${index}` as Link,
+        }),
+      );
+    }
+
+    beforeEach(() => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockReset();
+      vi.mocked(client.fetchIssueByNumber).mockReset();
+      vi.mocked(client.fetchIssueByNumber).mockResolvedValue({ repository: {} } as never);
+      vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
+      vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
+    });
+
+    it('sends a single request for a 100-notification batch', async () => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue(new Map());
+
+      await enrichGitHubNotifications(mockNotifications(100));
+
+      expect(client.fetchNotificationDetailsForList).toHaveBeenCalledTimes(1);
+      expect(vi.mocked(client.fetchNotificationDetailsForList).mock.calls[0][0]).toHaveLength(100);
+    });
+
+    it('splits a failed 100-notification batch into two 50-notification requests', async () => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockImplementation(async (batch) => {
+        if (batch.length > 50) {
+          throw resourceLimitError;
+        }
+        return new Map();
+      });
+
+      await enrichGitHubNotifications(mockNotifications(100));
+
+      const sizes = vi
+        .mocked(client.fetchNotificationDetailsForList)
+        .mock.calls.map(([batch]) => batch.length)
+        .sort((a, b) => a - b);
+
+      expect(sizes).toEqual([50, 50, 100]);
+    });
+
+    it('splits a failed 50-notification batch into two 25-notification requests', async () => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockImplementation(async (batch) => {
+        if (batch.length > 25) {
+          throw resourceLimitError;
+        }
+        return new Map();
+      });
+
+      await enrichGitHubNotifications(mockNotifications(50));
+
+      const sizes = vi
+        .mocked(client.fetchNotificationDetailsForList)
+        .mock.calls.map(([batch]) => batch.length)
+        .sort((a, b) => a - b);
+
+      expect(sizes).toEqual([25, 25, 50]);
+    });
+
+    it('does not split a failed batch of 25 or fewer notifications', async () => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockRejectedValue(resourceLimitError);
+
+      await enrichGitHubNotifications(mockNotifications(25));
+
+      expect(client.fetchNotificationDetailsForList).toHaveBeenCalledTimes(1);
+      expect(vi.mocked(client.fetchNotificationDetailsForList).mock.calls[0][0]).toHaveLength(25);
+    });
+
+    it('does not split a non-resource error', async () => {
+      vi.mocked(client.fetchNotificationDetailsForList).mockRejectedValue(
+        new Error('GraphQL request returned errors: Something else'),
+      );
+
+      await enrichGitHubNotifications(mockNotifications(50));
+
+      expect(client.fetchNotificationDetailsForList).toHaveBeenCalledTimes(1);
+      expect(vi.mocked(client.fetchNotificationDetailsForList).mock.calls[0][0]).toHaveLength(50);
+    });
+  });
+
   it('logs and continues when a per-notification handler throws', async () => {
     const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
     const rendererLogWarnSpy = vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());

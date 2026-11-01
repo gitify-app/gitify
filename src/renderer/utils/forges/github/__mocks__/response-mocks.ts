@@ -98,7 +98,7 @@ export function mockIssueResponseNode(mocks: {
     stateReason: mocks.stateReason ?? null,
     url: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
     author: mockAuthor,
-    labels: { nodes: [] },
+    labels: { totalCount: 0, nodes: [] },
     comments: { totalCount: 0, nodes: [] },
     milestone: null,
     issueType: null,
@@ -136,7 +136,7 @@ export function mockPullRequestResponseNode(mocks: {
     reviewDecision: null,
     url: 'https://github.com/gitify-app/notifications-test/pulls/123' as Link,
     author: mockAuthor,
-    labels: { nodes: [] },
+    labels: { totalCount: 0, nodes: [] },
     comments: {
       totalCount: 0,
       nodes: [],

@@ -62,6 +62,7 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
       <LabelsPill
         labels={notification.subject.labels ?? []}
         issueFields={notification.subject.issueFields ?? []}
+        labelCount={notification.subject.labelCount}
       />
     </div>
   );

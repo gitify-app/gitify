@@ -75,6 +75,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
+        labelCount: 0,
         issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
@@ -114,6 +115,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
+        labelCount: 0,
         issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
@@ -172,6 +174,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         htmlUrl:
           'https://github.com/gitify-app/notifications-test/issues/123#issuecomment-1234' as Link,
         labels: [],
+        labelCount: 0,
         issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
@@ -184,6 +187,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         state: 'OPEN',
       });
       mockIssue.labels = {
+        totalCount: 1,
         nodes: [{ name: 'enhancement', color: '0e8a16' }],
       };
 
@@ -213,6 +217,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [{ name: 'enhancement', color: '0e8a16' }],
+        labelCount: 1,
         issueFields: [],
         milestone: undefined,
         reactionsCount: 0,
@@ -255,6 +260,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
+        labelCount: 0,
         issueFields: [],
         milestone: {
           state: 'OPEN',
@@ -300,6 +306,7 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         commentCount: 0,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/issues/123' as Link,
         labels: [],
+        labelCount: 0,
         issueType: { name: 'Bug', color: IconColor.RED },
         issueFields: [],
         milestone: undefined,

@@ -99,6 +99,7 @@ class PullRequestHandler extends DefaultHandler {
           name: label!.name,
           color: label!.color,
         })) ?? [],
+      labelCount: pr.labels?.totalCount,
       isStacked: pr.stackEntry ? true : undefined,
       stackPosition: pr.stackEntry?.position,
       stackDepth: pr.stackEntry?.stack?.size,
