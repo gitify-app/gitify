@@ -598,11 +598,29 @@ body,
   animation: gitify-route-in 120ms ease-out both;
 }
 
-/* Only the route layer participates in a view transition. Leaving the sidebar
- * and window chrome out of the transition tree keeps them as live DOM instead
- * of static snapshots that flicker. */
+/* Only the route layer participates in a view transition. The sidebar gets its
+ * own static snapshot so the root crossfade cannot fade it. */
 :root {
   view-transition-name: none;
+}
+
+.gitify-sidebar {
+  view-transition-name: sidebar;
+}
+
+::view-transition-group(sidebar),
+::view-transition-image-pair(sidebar) {
+  animation: none;
+}
+
+::view-transition-old(sidebar) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(sidebar) {
+  animation: none;
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
