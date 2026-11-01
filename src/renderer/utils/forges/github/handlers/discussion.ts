@@ -76,6 +76,7 @@ class DiscussionHandler extends DefaultHandler {
           name: label!.name,
           color: label!.color,
         })) ?? [],
+      labelCount: discussion.labels?.totalCount,
       htmlUrl: latestDiscussionComment?.url ?? discussion.url,
       reactionsCount: discussionReactionCount,
       reactionGroups: discussionReactionGroup ?? undefined,
