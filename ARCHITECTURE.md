@@ -68,7 +68,11 @@ Rules:
 
 ## Side-effect ownership
 
-App-level side effects are owned by a single host. `GlobalEffects` mounts exactly once (inside the query and theme providers) and owns theme application, tray updates, global shortcut registration, periodic account refreshes, and notification polling and alerts. It also subscribes to system sleep and wake events so notification and account polling pause while the machine is locked or suspended (`SYSTEM_SLEEP`) and resume with an immediate refetch on unlock or resume (`SYSTEM_WAKE`). Hidden-window polling and the online/offline pause are unchanged.
+App-level side effects are owned by a single host. `GlobalEffects` mounts exactly once (inside the query and theme providers) and owns theme application, tray updates, global shortcut registration, periodic account refreshes, and notification polling and alerts. Polling follows these rules:
+
+- **Hidden or unfocused window:** polling continues; `refetchIntervalInBackground` keeps the timers running.
+- **Offline:** notification and account queries pause (`networkMode: 'online'`), and the notifications screen shows the offline state; on reconnect they resume, and the online state is re-probed on wake.
+- **Locked or suspended:** `SYSTEM_SLEEP` disables the query intervals; `SYSTEM_WAKE` re-enables them and triggers an immediate refetch of the notification and account queries (`cancelRefetch: false`) before the normal intervals resume.
 
 Consumers read the shared query cache and stores, and **do not register their own** polling, alerts, wake, or focus listeners. This keeps background work (for example, firing one poll per interval) from multiplying with the number of mounted components. When you add a new background effect, add it to the host, not to a leaf component.
 
