@@ -43,7 +43,7 @@ export interface NotificationEffectsInput {
   isLoading: boolean;
   isError: boolean;
   notificationsQueryKey: QueryKey;
-  refetch: () => void;
+  refetch: (options?: { cancelRefetch?: boolean }) => void;
   fetchIntervalMs: number;
   actions: NotificationActions;
 }
@@ -167,7 +167,7 @@ export const useNotificationEffects = ({
     }
 
     return window.gitify.onSystemWake(() => {
-      refetch();
+      refetch({ cancelRefetch: false });
     });
   }, [enabled, refetch]);
 

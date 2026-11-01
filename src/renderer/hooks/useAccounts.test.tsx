@@ -8,7 +8,9 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../__mocks__/account-mocks';
 
-import { useAccountsStore } from '../stores';
+import { Constants } from '../constants';
+
+import { useAccountsStore, usePowerStateStore } from '../stores';
 
 import * as authUtils from '../utils/auth/utils';
 import { useAccounts } from './useAccounts';
@@ -61,6 +63,37 @@ describe('renderer/hooks/useAccounts.ts', () => {
     });
 
     await waitFor(() => expect(refreshAccountSpy).toHaveBeenCalledTimes(2));
+  });
+
+  it('does not poll while the system is inactive and resumes when active', async () => {
+    vi.useFakeTimers();
+    try {
+      usePowerStateStore.setState({ isActive: false });
+      const { wrapper } = createWrapper();
+
+      renderHook(() => useAccounts(), { wrapper });
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(0);
+      });
+      expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
+
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
+      });
+      expect(refreshAccountSpy).toHaveBeenCalledTimes(1);
+
+      act(() => {
+        usePowerStateStore.setState({ isActive: true });
+      });
+
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(Constants.REFRESH_ACCOUNTS_INTERVAL_MS);
+      });
+      expect(refreshAccountSpy).toHaveBeenCalledTimes(2);
+    } finally {
+      usePowerStateStore.setState({ isActive: true });
+      vi.useRealTimers();
+    }
   });
 
   it('serves a newly mounted observer from cache instead of refreshing again', async () => {

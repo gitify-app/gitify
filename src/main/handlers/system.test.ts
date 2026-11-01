@@ -94,7 +94,7 @@ describe('main/handlers/system.ts', () => {
   });
 
   describe('SYSTEM_WAKE', () => {
-    it('registers powerMonitor listeners for resume and unlock-screen', async () => {
+    it('registers powerMonitor listeners for resume, unlock-screen, suspend, and lock-screen', async () => {
       const { powerMonitor } = await import('electron');
       registerSystemHandlers(menubar);
 
@@ -104,6 +104,8 @@ describe('main/handlers/system.ts', () => {
 
       expect(registeredEvents).toContain('resume');
       expect(registeredEvents).toContain('unlock-screen');
+      expect(registeredEvents).toContain('suspend');
+      expect(registeredEvents).toContain('lock-screen');
     });
 
     it('both powerMonitor events send a SYSTEM_WAKE renderer event', async () => {
@@ -137,6 +139,25 @@ describe('main/handlers/system.ts', () => {
         (menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } })
           .webContents.send,
       ).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
+    });
+
+    it('suspend and lock-screen send SYSTEM_SLEEP to the renderer', async () => {
+      const { powerMonitor } = await import('electron');
+      registerSystemHandlers(menubar);
+
+      const calls = vi.mocked(powerMonitor.on).mock.calls as unknown as Array<[string, () => void]>;
+      const suspendHandler = calls.find((c) => c[0] === 'suspend')?.[1];
+      const lockHandler = calls.find((c) => c[0] === 'lock-screen')?.[1];
+      const webContentsSend = (
+        menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } }
+      ).webContents.send;
+
+      suspendHandler?.();
+      expect(webContentsSend).toHaveBeenCalledWith(EVENTS.SYSTEM_SLEEP);
+
+      webContentsSend.mockClear();
+      lockHandler?.();
+      expect(webContentsSend).toHaveBeenCalledWith(EVENTS.SYSTEM_SLEEP);
     });
   });
 

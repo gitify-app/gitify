@@ -3,7 +3,12 @@ import { act } from '@testing-library/react';
 import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
-import { useAccountsStore, useSettingsStore, useShortcutRegistrationStore } from '../stores';
+import {
+  useAccountsStore,
+  usePowerStateStore,
+  useSettingsStore,
+  useShortcutRegistrationStore,
+} from '../stores';
 
 import { Theme } from '../types';
 
@@ -127,6 +132,42 @@ describe('renderer/components/GlobalEffects.tsx', () => {
       });
 
       expect(refreshAccountSpy.mock.calls.length).toBeGreaterThan(callCountAfterMount);
+    });
+  });
+
+  describe('system sleep (usePowerState)', () => {
+    it('pauses the power state when the system sleeps', async () => {
+      usePowerStateStore.setState({ isActive: true });
+
+      await act(async () => {
+        renderWithProviders(<GlobalEffects />);
+      });
+
+      expect(window.gitify.onSystemSleep).toHaveBeenCalledTimes(1);
+
+      const sleepCallback = vi.mocked(window.gitify.onSystemSleep).mock.calls[0][0];
+      act(() => {
+        sleepCallback();
+      });
+
+      expect(usePowerStateStore.getState().isActive).toBe(false);
+    });
+
+    it('resumes the power state when the system wakes', async () => {
+      usePowerStateStore.setState({ isActive: false });
+
+      await act(async () => {
+        renderWithProviders(<GlobalEffects />);
+      });
+
+      const wakeCallbacks = vi.mocked(window.gitify.onSystemWake).mock.calls.map(([cb]) => cb);
+      act(() => {
+        for (const wakeCallback of wakeCallbacks) {
+          wakeCallback();
+        }
+      });
+
+      expect(usePowerStateStore.getState().isActive).toBe(true);
     });
   });
 });

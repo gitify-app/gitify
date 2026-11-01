@@ -4,7 +4,12 @@ import { type QueryKey, useQuery } from '@tanstack/react-query';
 
 import { Constants } from '../../constants';
 
-import { useAccountsStore, useFiltersStore, useSettingsStore } from '../../stores';
+import {
+  useAccountsStore,
+  useFiltersStore,
+  usePowerStateStore,
+  useSettingsStore,
+} from '../../stores';
 
 import type { AccountNotifications, GitifyError, GitifyNotification, Status } from '../../types';
 
@@ -63,6 +68,7 @@ function keepNonEmptyPreviousData(
 export const useNotificationsQuery = ({ poll }: { poll: boolean }): NotificationsQueryResult => {
   // Account store values
   const accounts = useAccountsStore((s) => s.accounts);
+  const isPowerActive = usePowerStateStore((s) => s.isActive);
 
   // Filter store values
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
@@ -138,7 +144,8 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     // data and would otherwise each schedule their own refetch timer. The
     // interval is re-evaluated after each fetch so it stretches to the latest
     // server-recommended minimum (`X-Poll-Interval`) when required.
-    refetchInterval: poll ? () => computeRefetchIntervalMs(fetchIntervalMs, accounts) : false,
+    refetchInterval:
+      poll && isPowerActive ? () => computeRefetchIntervalMs(fetchIntervalMs, accounts) : false,
     refetchOnMount: poll,
     refetchOnReconnect: poll,
     refetchOnWindowFocus: poll,

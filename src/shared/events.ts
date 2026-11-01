@@ -28,6 +28,7 @@ export const EVENTS = {
   RESET_APP: `${P}reset-app`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
   SYSTEM_WAKE: `${P}system-wake`,
+  SYSTEM_SLEEP: `${P}system-sleep`,
   NATIVE_NOTIFICATION_SHOW: `${P}native-notification-show`,
   NATIVE_NOTIFICATION_REMOVE: `${P}native-notification-remove`,
   NATIVE_NOTIFICATION_REMOVE_ALL: `${P}native-notification-remove-all`,
@@ -193,6 +194,7 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
   [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
+  [EVENTS.SYSTEM_SLEEP]: { request: undefined; response: undefined };
   [EVENTS.NATIVE_NOTIFICATION_SHOW]: {
     request: INativeNotificationPayload;
     response: undefined;

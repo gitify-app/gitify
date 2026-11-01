@@ -260,6 +260,19 @@ export const api = {
   },
 
   /**
+   * Register a callback invoked when the system is about to sleep or the screen
+   * locks.
+   *
+   * Use this to pause polling until the matching wake/unlock event.
+   *
+   * @param callback - Called with no arguments on every sleep event.
+   * @returns A function that removes the listener.
+   */
+  onSystemSleep: (callback: () => void) => {
+    return onRendererEvent(EVENTS.SYSTEM_SLEEP, () => callback());
+  },
+
+  /**
    * Register a callback invoked when a native zoom shortcut is pressed.
    *
    * The main process intercepts `Cmd/Ctrl` + `+`, `-` and `0` so the renderer
