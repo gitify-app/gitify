@@ -32,7 +32,7 @@ export function AppLayout({ children }: Readonly<AppLayoutProps>) {
       <Sidebar />
 
       <ViewTransition name="route">
-        <div className="flex-1 pl-sidebar" data-testid="route-content">
+        <div className="flex-1 pl-sidebar bg-gitify-background" data-testid="route-content">
           {children}
         </div>
       </ViewTransition>

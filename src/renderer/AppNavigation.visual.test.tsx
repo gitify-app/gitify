@@ -1,16 +1,12 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { cdp } from 'vite-plus/test/browser';
 
-import { getMockedNotificationsState, setNotificationsOverrides } from './__helpers__/hook-mocks';
 import { mockGitHubCloudAccount } from './__mocks__/account-mocks';
-import { mockGitifyNotification } from './__mocks__/notifications-mocks';
 import { mockSettings } from './__mocks__/state-mocks';
 
 import { useAccountsStore, useSettingsStore } from './stores';
-
-import { type AccountNotifications, type GitifyNotification, GroupBy } from './types';
 
 import { App } from './App';
 
@@ -27,10 +23,16 @@ vi.mock('./hooks/notifications/useNotificationsHost', async () => {
 
 interface TransitionRecord {
   pseudoElements: Set<string>;
+  rootAnimated: boolean;
 }
 
 function getPseudoElement(animation: Animation): string | undefined {
   return (animation.effect as KeyframeEffect | null)?.pseudoElement ?? undefined;
+}
+
+function isAnimated(animation: Animation): boolean {
+  const duration = animation.effect?.getComputedTiming().duration;
+  return typeof duration === 'number' && duration > 0;
 }
 
 function spyOnViewTransitions() {
@@ -42,16 +44,24 @@ function spyOnViewTransitions() {
     const transition = original(update);
     void transition.ready
       .then(() => {
+        const animations = document.getAnimations();
         const pseudoElements = new Set(
-          document
-            .getAnimations()
+          animations
             .map(getPseudoElement)
             .filter(
               (pseudoElement): pseudoElement is string =>
                 pseudoElement?.startsWith('::view-transition') ?? false,
             ),
         );
-        records.push({ pseudoElements });
+        records.push({
+          pseudoElements,
+          rootAnimated: animations.some(
+            (animation) =>
+              getPseudoElement(animation)?.includes('(root)') &&
+              getPseudoElement(animation)?.startsWith('::view-transition') &&
+              isAnimated(animation),
+          ),
+        });
       })
       .catch(() => {
         // A skipped transition still leaves the route change complete.
@@ -78,45 +88,12 @@ function viewTransitionAnimations() {
     .filter((animation) => getPseudoElement(animation)?.startsWith('::view-transition'));
 }
 
-const notificationFixture = (count: number) =>
-  Array.from({ length: count }, (_, index) => ({
-    ...mockGitifyNotification,
-    id: `notification-${index}`,
-    order: index,
-    subject: { ...mockGitifyNotification.subject, title: `Notification ${index}` },
-  }));
-
-function renderAtRoot(
-  notifications: GitifyNotification[] = getMockedNotificationsState().notifications.flatMap(
-    (entry) => entry.notifications,
-  ),
-) {
-  const accountNotifications: AccountNotifications[] = [
-    {
-      account: mockGitHubCloudAccount,
-      notifications,
-      error: null,
-    },
-  ];
-
+function renderAtRoot() {
   useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
-  useSettingsStore.setState({ ...mockSettings, groupBy: GroupBy.REPOSITORY });
-  setNotificationsOverrides({
-    notifications: accountNotifications,
-    notificationCount: notifications.length,
-    hasNotifications: notifications.length > 0,
-  });
+  useSettingsStore.setState(mockSettings);
   window.history.replaceState(null, '', '#/');
 
   return render(<App />);
-}
-
-function scrollContainer() {
-  const element = document.querySelector<HTMLElement>('.overflow-y-auto');
-  if (!element) {
-    throw new Error('Notification scroll container is missing');
-  }
-  return element;
 }
 
 async function setReducedMotion(value: 'reduce' | 'no-preference') {
@@ -155,6 +132,7 @@ describe('renderer/App route transitions', () => {
     const pseudoElements = new Set(records.flatMap((record) => [...record.pseudoElements]));
     expect(pseudoElements).toContain('::view-transition-old(route)');
     expect(pseudoElements).toContain('::view-transition-new(route)');
+    expect(records.every((record) => !record.rootAnimated)).toBe(true);
   });
 
   it('swaps the route without animation when reduced motion is active', async () => {
@@ -171,45 +149,6 @@ describe('renderer/App route transitions', () => {
     expect(startViewTransition).toHaveBeenCalled();
     await new Promise((resolve) => setTimeout(resolve, 50));
     expect(hasAnimatedViewTransition()).toBe(false);
-  });
-
-  it('preserves the notification scroll offset across a settings round trip', async () => {
-    renderAtRoot(notificationFixture(20));
-
-    await waitFor(() => expect(document.getElementById('notification-0')).not.toBeNull());
-    await act(async () => {
-      scrollContainer().scrollTop = 5 * 58;
-    });
-    await waitFor(() => expect(document.getElementById('notification-5')).not.toBeNull());
-    const scrollTopBefore = scrollContainer().scrollTop;
-    expect(scrollTopBefore).toBeGreaterThan(0);
-
-    await userEvent.click(screen.getByRole('button', { name: 'Settings' }));
-    expect(await screen.findByTestId('settings')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
-    await waitFor(() => expect(document.getElementById('notification-5')).not.toBeNull());
-    expect(scrollContainer().scrollTop).toBeCloseTo(scrollTopBefore, 0);
-  });
-
-  it('preserves a collapsed repository across a settings round trip', async () => {
-    renderAtRoot(notificationFixture(4));
-
-    await waitFor(() =>
-      expect(screen.getByRole('button', { name: 'Hide repository notifications' })).toBeVisible(),
-    );
-    await userEvent.click(screen.getByTestId('repository-toggle'));
-    expect(
-      await screen.findByRole('button', { name: 'Show repository notifications' }),
-    ).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button', { name: 'Settings' }));
-    expect(await screen.findByTestId('settings')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button', { name: 'Go back' }));
-    expect(
-      await screen.findByRole('button', { name: 'Show repository notifications' }),
-    ).toBeInTheDocument();
   });
 
   it('applies a runtime reduced-motion change to the next route change', async () => {

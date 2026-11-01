@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { page } from 'vite-plus/test/browser';
+import { cdp, page } from 'vite-plus/test/browser';
 
 import { renderRoute, type VisualRenderOptions } from '../__helpers__/visual-utils';
 import {
@@ -38,6 +38,20 @@ interface RouteCase {
 const AUTHENTICATED: RouteState = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
 };
+
+const cdpSession = cdp() as unknown as {
+  send: (method: string, params: unknown) => Promise<unknown>;
+};
+
+/** A leftover pointer can hover a row in the next route's screenshot. */
+async function parkPointer() {
+  await cdpSession.send('Input.dispatchMouseEvent', {
+    type: 'mouseMoved',
+    x: 0,
+    y: 0,
+    buttons: 0,
+  });
+}
 
 /** Every route reachable from `App.tsx`, in the order they are declared there. */
 const ROUTES: RouteCase[] = [
@@ -148,6 +162,7 @@ async function captureRoute(
   designLanguage: DesignLanguage,
   { name = route.name, settings }: CaptureOptions = {},
 ) {
+  await parkPointer();
   renderRoute(route.element, {
     ...route.state,
     theme,

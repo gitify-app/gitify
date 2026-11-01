@@ -104,14 +104,6 @@ describe('renderer/App.tsx routing', () => {
     expect(await screen.findByTestId('settings')).toBeInTheDocument();
   });
 
-  it('retains the notifications route in a hidden Activity on settings', async () => {
-    await renderApp('/');
-
-    await userEvent.click(screen.getByRole('button', { name: 'Settings' }));
-    expect(await screen.findByTestId('settings')).toBeInTheDocument();
-    expect(screen.getByText('No new notifications')).not.toBeVisible();
-  });
-
   it('navigates between settings and the notification list through app controls', async () => {
     await renderApp('/');
 

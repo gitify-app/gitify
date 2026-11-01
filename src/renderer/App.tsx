@@ -1,4 +1,4 @@
-import { Activity, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router';
 
 import { BaseStyles } from '@primer/react';
@@ -39,76 +39,72 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
-  const location = useLocation();
-  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
-  const isNotificationsRoute = location.pathname === '/';
-
   return (
-    <>
-      {isLoggedIn && (
-        <Activity mode={isNotificationsRoute ? 'visible' : 'hidden'}>
-          <NotificationsRoute />
-        </Activity>
-      )}
-      <Routes>
-        <Route element={<RequireAuth>{null}</RequireAuth>} path="/" />
-        <Route
-          element={
-            <RequireAuth>
-              <FiltersRoute />
-            </RequireAuth>
-          }
-          path="/filters"
-        />
-        <Route
-          element={
-            <RequireAuth>
-              <SettingsRoute />
-            </RequireAuth>
-          }
-          path="/settings"
-        />
-        <Route
-          element={
-            <RequireAuth>
-              <AccountsRoute />
-            </RequireAuth>
-          }
-          path="/accounts"
-        />
-        <Route
-          element={
-            <RequireAuth>
-              <AccountScopesRoute />
-            </RequireAuth>
-          }
-          path="/account-scopes"
-        />
-        <Route element={<LoginRoute />} path="/login" />
-        <Route element={<GitHubLoginWithDeviceFlowRoute />} path="/login/github/device-flow" />
-        <Route element={<GitHubLoginWithCLIRoute />} path="/login/github/cli" />
-        <Route
-          element={<GitHubLoginWithPersonalAccessTokenRoute />}
-          path="/login/github/personal-access-token"
-        />
-        <Route
-          element={<GitHubLoginWithCustomOAuthAppRoute />}
-          path="/login/github/custom-oauth-app"
-        />
-        <Route
-          element={<GiteaLoginWithPersonalAccessTokenRoute />}
-          path="/login/gitea/personal-access-token"
-        />
-        <Route
-          element={<BitbucketLoginWithPersonalAccessTokenRoute />}
-          path="/login/bitbucket/personal-access-token"
-        />
-        <Route
-          element={<GitLabLoginWithPersonalAccessTokenRoute />}
-          path="/login/gitlab/personal-access-token"
-        />
-      </Routes>
-    </>
+    <Routes>
+      <Route
+        element={
+          <RequireAuth>
+            <NotificationsRoute />
+          </RequireAuth>
+        }
+        path="/"
+      />
+      <Route
+        element={
+          <RequireAuth>
+            <FiltersRoute />
+          </RequireAuth>
+        }
+        path="/filters"
+      />
+      <Route
+        element={
+          <RequireAuth>
+            <SettingsRoute />
+          </RequireAuth>
+        }
+        path="/settings"
+      />
+      <Route
+        element={
+          <RequireAuth>
+            <AccountsRoute />
+          </RequireAuth>
+        }
+        path="/accounts"
+      />
+      <Route
+        element={
+          <RequireAuth>
+            <AccountScopesRoute />
+          </RequireAuth>
+        }
+        path="/account-scopes"
+      />
+      <Route element={<LoginRoute />} path="/login" />
+      <Route element={<GitHubLoginWithDeviceFlowRoute />} path="/login/github/device-flow" />
+      <Route element={<GitHubLoginWithCLIRoute />} path="/login/github/cli" />
+      <Route
+        element={<GitHubLoginWithPersonalAccessTokenRoute />}
+        path="/login/github/personal-access-token"
+      />
+      <Route
+        element={<GitHubLoginWithCustomOAuthAppRoute />}
+        path="/login/github/custom-oauth-app"
+      />
+      <Route
+        element={<GiteaLoginWithPersonalAccessTokenRoute />}
+        path="/login/gitea/personal-access-token"
+      />
+      <Route
+        element={<BitbucketLoginWithPersonalAccessTokenRoute />}
+        path="/login/bitbucket/personal-access-token"
+      />
+      <Route
+        element={<GitLabLoginWithPersonalAccessTokenRoute />}
+        path="/login/gitlab/personal-access-token"
+      />
+    </Routes>
   );
 }
 
