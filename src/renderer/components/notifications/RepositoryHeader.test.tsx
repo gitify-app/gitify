@@ -1,5 +1,6 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubCloudGitifyNotifications } from '../../__mocks__/notifications-mocks';
@@ -21,6 +22,21 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     onToggle: vi.fn(),
     onAnimateExit: vi.fn(),
   };
+
+  function ControlledRepositoryHeader() {
+    const [isAnimatingExit, setAnimatingExit] = useState(false);
+
+    return (
+      <RepositoryHeader
+        isAnimatingExit={isAnimatingExit}
+        isCollapsed={props.isCollapsed}
+        onAnimateExit={setAnimatingExit}
+        onToggle={props.onToggle}
+        repoName={props.repoName}
+        repoNotifications={props.repoNotifications}
+      />
+    );
+  }
 
   it('renders the repository and its actions', () => {
     renderWithProviders(<RepositoryHeader {...props} />);
@@ -130,6 +146,34 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
     expect(
       screen.queryByRole('button', { name: /repository notifications/ }),
     ).not.toBeInTheDocument();
+  });
+
+  it('marks the exit wrapper while a group action is pending and clears it on failure', async () => {
+    let resolveAction: () => void = () => {};
+    const markNotificationsAsReadMock = vi.fn().mockImplementation(
+      () =>
+        new Promise<boolean>((resolve) => {
+          resolveAction = () => resolve(false);
+        }),
+    );
+
+    renderWithProviders(<ControlledRepositoryHeader />, {
+      settings: { ...mockSettings },
+      markNotificationsAsRead: markNotificationsAsReadMock,
+    });
+
+    await userEvent.click(screen.getByRole('button', { name: 'Mark repository as read' }));
+
+    expect(document.querySelector('[data-exit-motion]')).toBeInTheDocument();
+    expect(document.querySelector('[data-exit-collapse]')).toBeInTheDocument();
+
+    await act(async () => {
+      resolveAction();
+    });
+
+    expect(document.querySelector('[data-exit-motion]')).toBeNull();
+    expect(document.querySelector('[data-exit-collapse]')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Mark repository as read' })).toBeInTheDocument();
   });
 
   it('clears the group exit animation when the action settles', async () => {

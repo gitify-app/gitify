@@ -28,8 +28,9 @@ vi.mock('electron', () => ({
     handle: (...args: unknown[]) => handleMock(...args),
   } satisfies Pick<Electron.IpcMain, 'on' | 'handle'>,
   app: {
+    isPackaged: true,
     setLoginItemSettings: vi.fn(),
-  } satisfies Pick<Electron.App, 'setLoginItemSettings'>,
+  } satisfies Pick<Electron.App, 'isPackaged' | 'setLoginItemSettings'>,
   shell: {
     openExternal: vi.fn(),
   } satisfies Pick<Electron.Shell, 'openExternal'>,
@@ -157,6 +158,20 @@ describe('main/handlers/system.ts', () => {
       webContentsSend.mockClear();
       lockHandler?.();
       expect(webContentsSend).toHaveBeenCalledWith(EVENTS.SYSTEM_SLEEP);
+    });
+  });
+
+  describe('UPDATE_AUTO_LAUNCH', () => {
+    it('forwards only the supported openAtLogin option to the OS', async () => {
+      const { app } = await import('electron');
+      registerSystemHandlers(menubar);
+
+      const handler = onMock.mock.calls.find(
+        (call: unknown[]) => call[0] === EVENTS.UPDATE_AUTO_LAUNCH,
+      )?.[1];
+      handler?.({}, { openAtLogin: true });
+
+      expect(app.setLoginItemSettings).toHaveBeenCalledWith({ openAtLogin: true });
     });
   });
 

@@ -661,6 +661,48 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(raiseNativeNotificationSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('uses the latest alert settings for the next alert without re-registering the effect', async () => {
+      useSettingsStore.setState({
+        notificationVolume: 20 as Percentage,
+        playSound: true,
+        showNotifications: false,
+      });
+      getAllNotificationsMock.mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      await waitFor(() => expect(raiseSoundNotificationSpy).toHaveBeenCalledWith(20));
+      expect(raiseNativeNotificationSpy).not.toHaveBeenCalled();
+
+      act(() => {
+        useSettingsStore.setState({
+          notificationVolume: 60 as Percentage,
+          showNotifications: true,
+        });
+      });
+
+      getAllNotificationsMock.mockResolvedValueOnce([
+        {
+          account: mockGitHubCloudAccount,
+          error: null,
+          notifications: [
+            mockGitifyNotification,
+            mockGitHubCloudGitifyNotifications[1],
+          ] as AccountNotifications['notifications'],
+        },
+      ]);
+
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+
+      await waitFor(() => {
+        expect(raiseSoundNotificationSpy).toHaveBeenCalledTimes(2);
+        expect(raiseSoundNotificationSpy).toHaveBeenLastCalledWith(60);
+        expect(raiseNativeNotificationSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+
     it('does not raise sound or native notifications when disabled', async () => {
       useSettingsStore.setState({
         playSound: false,

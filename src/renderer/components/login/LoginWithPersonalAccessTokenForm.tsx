@@ -1,6 +1,6 @@
 import { type ReactNode, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';

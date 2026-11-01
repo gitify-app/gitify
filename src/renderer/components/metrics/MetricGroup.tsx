@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react';
+
 import { useSettingsStore } from '../../stores';
 
 import type { GitifyNotification } from '../../types';
@@ -7,10 +9,11 @@ import { CommentsPill } from './CommentsPill';
 import { IssueTypesPill } from './IssueTypesPill';
 import { LabelsPill } from './LabelsPill';
 import { LinkedIssuesPill } from './LinkedIssuesPill';
+import { MetricPills } from './MetricPills';
 import { MilestonePill } from './MilestonePill';
 import { ParentPill } from './ParentPill';
 import { ReactionsPill } from './ReactionsPill';
-import { ReviewsPill } from './ReviewsPill';
+import { buildReviewPills } from './ReviewsPill';
 import { StackedPrsPill } from './StackedPrsPill';
 import { SubIssueProgressPill } from './SubIssueProgressPill';
 
@@ -25,45 +28,81 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
     return null;
   }
 
-  return (
-    // `flex-wrap` + `min-w-0` let the pills wrap within the row instead of
-    // overflowing the row and being clipped.
-    <div className="flex min-w-0 flex-wrap gap-1">
-      <IssueTypesPill issueType={notification.subject.issueType} />
+  const subject = notification.subject;
 
-      <ParentPill parent={notification.subject.parentIssue} />
+  // Keep the same classification → hierarchy → activity order the footer has
+  // always used. Each entry is exactly one rendered pill so the overflow catch-
+  // all can measure and count them independently.
+  const pills: ReactElement[] = [];
 
-      <SubIssueProgressPill progress={notification.subject.subIssueProgress} />
+  if (subject.issueType) {
+    pills.push(<IssueTypesPill issueType={subject.issueType} key="issue-type" />);
+  }
 
+  if (subject.parentIssue) {
+    pills.push(<ParentPill key="parent-issue" parent={subject.parentIssue} />);
+  }
+
+  if (subject.subIssueProgress?.total) {
+    pills.push(
+      <SubIssueProgressPill key="sub-issue-progress" progress={subject.subIssueProgress} />,
+    );
+  }
+
+  if (subject.isStacked) {
+    pills.push(
       <StackedPrsPill
-        isStacked={notification.subject.isStacked}
-        stackPosition={notification.subject.stackPosition}
-        stackDepth={notification.subject.stackDepth}
-      />
+        isStacked={subject.isStacked}
+        key="stacked-prs"
+        stackDepth={subject.stackDepth}
+        stackPosition={subject.stackPosition}
+      />,
+    );
+  }
 
-      <LinkedIssuesPill linkedIssues={notification.subject.linkedIssues ?? []} />
+  if (subject.linkedIssues?.length) {
+    pills.push(<LinkedIssuesPill key="linked-issues" linkedIssues={subject.linkedIssues} />);
+  }
 
-      <MilestonePill milestone={notification.subject.milestone} />
+  if (subject.milestone) {
+    pills.push(<MilestonePill key="milestone" milestone={subject.milestone} />);
+  }
 
-      <ChecksPill checks={notification.subject.checks} />
+  if (subject.checks?.total) {
+    pills.push(<ChecksPill checks={subject.checks} key="checks" />);
+  }
 
-      <ReviewsPill
-        reviewDecision={notification.subject.reviewDecision}
-        reviewers={notification.subject.reviewers ?? []}
-      />
-
-      <CommentsPill commentCount={notification.subject.commentCount ?? 0} />
-
-      <ReactionsPill
-        reactionGroups={notification.subject.reactionGroups ?? []}
-        reactionsCount={notification.subject.reactionsCount ?? 0}
-      />
-
-      <LabelsPill
-        labels={notification.subject.labels ?? []}
-        issueFields={notification.subject.issueFields ?? []}
-        labelCount={notification.subject.labelCount}
-      />
-    </div>
+  pills.push(
+    ...buildReviewPills({
+      reviewers: subject.reviewers ?? [],
+      reviewDecision: subject.reviewDecision,
+    }),
   );
+
+  if (subject.commentCount) {
+    pills.push(<CommentsPill commentCount={subject.commentCount} key="comments" />);
+  }
+
+  if (subject.reactionsCount) {
+    pills.push(
+      <ReactionsPill
+        key="reactions"
+        reactionGroups={subject.reactionGroups ?? []}
+        reactionsCount={subject.reactionsCount}
+      />,
+    );
+  }
+
+  if (subject.labels?.length || subject.issueFields?.length) {
+    pills.push(
+      <LabelsPill
+        issueFields={subject.issueFields}
+        key="labels"
+        labelCount={subject.labelCount}
+        labels={subject.labels ?? []}
+      />,
+    );
+  }
+
+  return <MetricPills pills={pills} />;
 }

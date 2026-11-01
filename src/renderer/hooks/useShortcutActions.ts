@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 
 import { useAccountsStore, useSettingsStore } from '../stores';
 
+import { getNavItem } from '../nav';
 import { quitApp } from '../utils/system/comms';
 import { openHostIssues, openHostNotifications, openHostPulls } from '../utils/system/links';
 import { useNotifications } from './useNotifications';
@@ -50,12 +51,16 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
   const isOnSettingsRoute = location.pathname.startsWith('/settings');
   const isLoading = status === 'loading';
 
+  const home = getNavItem('home');
+  const filters = getNavItem('filters');
+  const settings = getNavItem('settings');
+
   const shortcuts: ShortcutConfigs = useMemo(() => {
     return {
       home: {
-        key: 'h',
+        key: home.shortcutKey,
         isAllowed: true,
-        action: () => navigate('/', { replace: true }),
+        action: () => navigate(home.path, { replace: true }),
       },
       myNotifications: {
         key: 'n',
@@ -68,13 +73,13 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
         action: () => updateSetting('participating', !participating),
       },
       filters: {
-        key: 'f',
+        key: filters.shortcutKey,
         isAllowed: isLoggedIn,
         action: () => {
           if (isOnFiltersRoute) {
-            void navigate('/', { replace: true });
+            void navigate(home.path, { replace: true });
           } else {
-            void navigate('/filters');
+            void navigate(filters.path);
           }
         },
       },
@@ -95,19 +100,19 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
           if (isLoading) {
             return;
           }
-          void navigate('/', { replace: true });
+          void navigate(home.path, { replace: true });
           void fetchNotifications();
         },
       },
       settings: {
-        key: 's',
+        key: settings.shortcutKey,
         isAllowed: isLoggedIn,
         action: () => {
           if (isOnSettingsRoute) {
-            void navigate('/', { replace: true });
+            void navigate(home.path, { replace: true });
             void fetchNotifications();
           } else {
-            void navigate('/settings');
+            void navigate(settings.path);
           }
         },
       },

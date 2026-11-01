@@ -61,6 +61,46 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
     expect(screen.getByRole('button', { name: 'Unsubscribe from thread' })).toBeInTheDocument();
   });
 
+  it('marks the exit wrapper while animating out', () => {
+    renderWithProviders(
+      <NotificationRow notification={mockGitifyNotification} isRepositoryAnimatingExit />,
+    );
+
+    expect(document.querySelector('[data-exit-motion]')).toBeInTheDocument();
+    expect(document.querySelector('[data-exit-collapse]')).toBeInTheDocument();
+    expect(screen.queryByTestId('notification-mark-as-read')).not.toBeInTheDocument();
+  });
+
+  it('clears the exit wrapper and restores actions when the action settles', async () => {
+    let resolveAction: () => void = () => {};
+    const markNotificationsAsReadMock = vi.fn().mockImplementation(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveAction = resolve;
+        }),
+    );
+
+    renderWithProviders(
+      <NotificationRow notification={mockGitifyNotification} isRepositoryAnimatingExit={false} />,
+      {
+        settings: { ...mockSettings, delayNotificationState: false, fetchReadNotifications: false },
+        markNotificationsAsRead: markNotificationsAsReadMock,
+      },
+    );
+
+    await userEvent.click(screen.getByTestId('notification-mark-as-read'));
+
+    expect(document.querySelector('[data-exit-collapse]')).toBeInTheDocument();
+    expect(screen.queryByTestId('notification-mark-as-read')).not.toBeInTheDocument();
+
+    await act(async () => {
+      resolveAction();
+    });
+
+    expect(document.querySelector('[data-exit-collapse]')).toBeNull();
+    expect(screen.getByTestId('notification-mark-as-read')).toBeInTheDocument();
+  });
+
   it('renders the reference when grouped by repository', () => {
     const props: NotificationRowProps = {
       notification: mockGitifyNotification,
@@ -513,7 +553,9 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
       await userEvent.click(screen.getByTestId('notification-mark-as-read'));
 
       // While the retry is still in flight, the row is animating out again -
-      // its hover actions are hidden, exactly like the very first attempt.
+      // its hover actions are hidden and its exit wrapper is active, exactly
+      // like the very first attempt.
+      expect(document.querySelector('[data-exit-collapse]')).toBeInTheDocument();
       expect(screen.queryByTestId('notification-mark-as-read')).not.toBeInTheDocument();
 
       // The retry fails again; the store still has a (new) failure entry for
@@ -523,6 +565,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         resolveRetry();
       });
 
+      expect(document.querySelector('[data-exit-collapse]')).toBeNull();
       await screen.findByTestId('notification-mark-as-read');
     });
   });

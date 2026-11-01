@@ -92,11 +92,11 @@ export function registerSystemHandlers(mb: Menubar): void {
    * Skipped in development: the unsigned dev Electron binary cannot register as a
    * macOS login item, so calling this would only emit a Chromium error log.
    */
-  onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings) => {
+  onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, { openAtLogin }) => {
     if (isDevMode()) {
       return;
     }
-    app.setLoginItemSettings(settings);
+    app.setLoginItemSettings({ openAtLogin });
   });
 
   /**
