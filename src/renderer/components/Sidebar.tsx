@@ -1,4 +1,6 @@
+import type { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router';
 
 import {
   BellIcon,
@@ -20,6 +22,14 @@ import { useShortcutActions } from '../hooks/useShortcutActions';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { LogoIcon } from '../icons/LogoIcon';
+import { getNavItem } from '../nav';
+
+/**
+ * Primer styles a link-rendered button as `inline-flex`, which squeezes the
+ * icon into the button's content box. Keep the icon-button grid so icons keep
+ * their intrinsic size.
+ */
+const NAV_LINK_STYLE = { display: 'inline-grid' } as const;
 
 export function Sidebar() {
   const { t } = useTranslation();
@@ -36,6 +46,23 @@ export function Sidebar() {
 
   const isLoading = status === 'loading';
 
+  const home = getNavItem('home');
+  const filters = getNavItem('filters');
+  const settings = getNavItem('settings');
+
+  /**
+   * Keep the existing toggle behavior for a destination that is already shown,
+   * while letting modified clicks use the link's native navigation.
+   */
+  const navigateFromControl = (event: MouseEvent<HTMLElement>, action: () => void) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    event.preventDefault();
+    action();
+  };
+
   return (
     <Stack
       className="gitify-sidebar fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
@@ -45,12 +72,17 @@ export function Sidebar() {
       <Stack align="center" direction="vertical" gap="condensed" padding="normal">
         <IconButton
           aria-label={APPLICATION.NAME}
-          description={t('sidebar.home', 'Home')}
+          as={NavLink}
+          description={t(home.descriptionKey, 'Home')}
+          end={home.exact}
           icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
-          onClick={() => shortcuts.home.action()}
+          onClick={(event) => navigateFromControl(event, shortcuts.home.action)}
           size="small"
+          style={NAV_LINK_STYLE}
+          to={home.path}
           tooltipDirection="e"
+          type={undefined}
           variant="invisible"
         />
 
@@ -91,13 +123,17 @@ export function Sidebar() {
             />
 
             <IconButton
-              aria-label={t('sidebar.filters', 'Filters')}
-              description={t('sidebar.filter_notifications', 'Filter notifications')}
+              aria-label={t(filters.labelKey, 'Filters')}
+              as={NavLink}
+              description={t(filters.descriptionKey, 'Filter notifications')}
               icon={FilterIcon}
               keybindingHint={shortcuts.filters.key}
-              onClick={() => shortcuts.filters.action()}
+              onClick={(event) => navigateFromControl(event, shortcuts.filters.action)}
               size="small"
+              style={NAV_LINK_STYLE}
+              to={filters.path}
               tooltipDirection="e"
+              type={undefined}
               variant={hasFilters ? 'primary' : 'invisible'}
             />
 
@@ -141,13 +177,17 @@ export function Sidebar() {
             />
 
             <IconButton
-              aria-label={t('sidebar.settings', 'Settings')}
-              description={t('settings.title', 'Settings')}
+              aria-label={t(settings.labelKey, 'Settings')}
+              as={NavLink}
+              description={t(settings.descriptionKey, 'Settings')}
               icon={GearIcon}
               keybindingHint={shortcuts.settings.key}
-              onClick={() => shortcuts.settings.action()}
+              onClick={(event) => navigateFromControl(event, shortcuts.settings.action)}
               size="small"
+              style={NAV_LINK_STYLE}
+              to={settings.path}
               tooltipDirection="e"
+              type={undefined}
               variant="invisible"
             />
           </>

@@ -29,16 +29,17 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     for (const name of [
-      new RegExp(`^${APPLICATION.NAME}`),
       /^Notifications/,
       /^Toggle focused mode/,
-      /^Filters/,
       /^My issues/,
       /^My pull requests/,
       /^Refresh/,
-      /^Settings/,
     ]) {
       expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    }
+
+    for (const name of [new RegExp(`^${APPLICATION.NAME}`), /^Filters/, /^Settings/]) {
+      expect(screen.getByRole('link', { name })).toBeInTheDocument();
     }
 
     expect(
@@ -53,7 +54,7 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     expect(
-      screen.getByRole('button', { name: new RegExp(`^${APPLICATION.NAME}`) }),
+      screen.getByRole('link', { name: new RegExp(`^${APPLICATION.NAME}`) }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: new RegExp(`^Quit ${APPLICATION.NAME}`) }),
@@ -84,7 +85,7 @@ describe('renderer/components/Sidebar.tsx', () => {
   it('navigates home when clicking logo', async () => {
     renderWithProviders(<Sidebar />);
 
-    await userEvent.click(screen.getByRole('button', { name: new RegExp(`^${APPLICATION.NAME}`) }));
+    await userEvent.click(screen.getByRole('link', { name: new RegExp(`^${APPLICATION.NAME}`) }));
 
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
@@ -172,7 +173,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByRole('button', { name: /^Filters/ }));
+      await userEvent.click(screen.getByRole('link', { name: /^Filters/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/filters');
@@ -184,7 +185,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByRole('button', { name: /^Filters/ }));
+      await userEvent.click(screen.getByRole('link', { name: /^Filters/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/', { replace: true });
@@ -197,7 +198,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         filters: { reasons: ['assign'] },
       });
 
-      expect(screen.getByRole('button', { name: /^Filters/ })).toHaveAttribute(
+      expect(screen.getByRole('link', { name: /^Filters/ })).toHaveAttribute(
         'data-variant',
         'primary',
       );
@@ -302,7 +303,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         accounts: [mockGitHubCloudAccount],
       });
 
-      await userEvent.click(screen.getByRole('button', { name: /^Settings/ }));
+      await userEvent.click(screen.getByRole('link', { name: /^Settings/ }));
 
       expect(navigateMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledWith('/settings');
@@ -315,7 +316,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         fetchNotifications: fetchNotificationsMock,
       });
 
-      await userEvent.click(screen.getByRole('button', { name: /^Settings/ }));
+      await userEvent.click(screen.getByRole('link', { name: /^Settings/ }));
 
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
       expect(navigateMock).toHaveBeenCalledTimes(1);
