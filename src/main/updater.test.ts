@@ -1,4 +1,4 @@
-import { dialog } from 'electron';
+import { dialog, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../shared/constants';
@@ -17,7 +17,11 @@ import MenuBuilder from './menu';
 import AppUpdater from './updater';
 
 // Mock electron-updater with an EventEmitter-like interface
-type UpdateDownloadedEvent = { releaseName?: string | null; version?: string };
+type UpdateDownloadedEvent = {
+  releaseName?: string | null;
+  version?: string;
+  releaseNotes?: string | null;
+};
 type ListenerArgs = UpdateDownloadedEvent | object | undefined;
 type Listener = (arg: ListenerArgs) => void;
 type ListenerMap = Record<string, Listener[]>;
@@ -200,6 +204,135 @@ describe('main/updater.ts', () => {
           expect.any(Error),
         ),
       );
+    });
+
+    it('offers Release notes and opens the matching GitHub release page', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 2, // "Release notes" button index
+        checkboxChecked: false,
+      });
+      vi.mocked(shell.openExternal).mockResolvedValue();
+
+      await updater.start();
+
+      emit('update-downloaded', {
+        releaseName: 'v1.2.3',
+        version: '1.2.3',
+        releaseNotes: 'What changed',
+      });
+
+      expect(dialog.showMessageBox).toHaveBeenCalledWith(
+        expect.objectContaining({
+          buttons: ['Restart', 'Later', 'Release notes'],
+          cancelId: 1,
+        }),
+      );
+
+      await vi.waitFor(() =>
+        expect(shell.openExternal).toHaveBeenCalledWith(
+          'https://github.com/gitify-app/gitify/releases/tag/v1.2.3',
+        ),
+      );
+    });
+
+    it('normalizes a version that already carries a leading v', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 2,
+        checkboxChecked: false,
+      });
+      vi.mocked(shell.openExternal).mockResolvedValue();
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: 'v1.2.3' });
+
+      await vi.waitFor(() =>
+        expect(shell.openExternal).toHaveBeenCalledWith(
+          'https://github.com/gitify-app/gitify/releases/tag/v1.2.3',
+        ),
+      );
+    });
+
+    it('omits Release notes when the update carries no release information', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 1,
+        checkboxChecked: false,
+      });
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3' });
+
+      expect(dialog.showMessageBox).toHaveBeenCalledWith(
+        expect.objectContaining({
+          buttons: ['Restart', 'Later'],
+          cancelId: 1,
+        }),
+      );
+    });
+
+    it('logs a failure when the release page cannot be opened', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 2,
+        checkboxChecked: false,
+      });
+      vi.mocked(shell.openExternal).mockRejectedValueOnce(new Error('no browser'));
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+
+      await vi.waitFor(() =>
+        expect(logError).toHaveBeenCalledWith(
+          'app updater',
+          'Failed to open release notes',
+          expect.any(Error),
+        ),
+      );
+    });
+
+    it('shows at most one dialog for the same downloaded version', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 1,
+        checkboxChecked: false,
+      });
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+
+      expect(dialog.showMessageBox).toHaveBeenCalledTimes(1);
+    });
+
+    it('allows a later update to prompt again after update-available', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 1,
+        checkboxChecked: false,
+      });
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+      emit('update-available');
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+
+      expect(dialog.showMessageBox).toHaveBeenCalledTimes(2);
+    });
+
+    it('allows a later update to prompt again after update-cancelled', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 1,
+        checkboxChecked: false,
+      });
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+      emit('update-cancelled');
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+
+      expect(dialog.showMessageBox).toHaveBeenCalledTimes(2);
     });
   });
 
