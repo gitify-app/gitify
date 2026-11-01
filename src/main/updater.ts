@@ -1,6 +1,6 @@
-import { dialog, type MessageBoxOptions } from 'electron';
+import { dialog, type MessageBoxOptions, shell } from 'electron';
 import type { Menubar } from 'electron-menubar';
-import { autoUpdater } from 'electron-updater';
+import { autoUpdater, type UpdateDownloadedEvent } from 'electron-updater';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo, toError } from '../shared/logger';
@@ -22,6 +22,7 @@ export default class AppUpdater {
   private notificationsEnabled = true;
   private started = false;
   private noUpdateMessageTimeout?: NodeJS.Timeout;
+  private lastPromptedVersion: string | null = null;
 
   /**
    * @param menubar - The menubar instance whose tray and window the updater reports status through.
@@ -80,6 +81,10 @@ export default class AppUpdater {
 
     autoUpdater.on('update-available', () => {
       logInfo('auto updater', 'Update available');
+      // Keep the prompt guard for this version: a routine check for the same
+      // pending version must not re-prompt after the user chose Later. A
+      // different version will not match `lastPromptedVersion` and prompts
+      // normally. Only a cancelled download clears the guard.
       this.setTooltipWithStatus('A new update is available');
       this.menuBuilder.setUpdateAvailableMenuVisibility(true);
     });
@@ -94,7 +99,7 @@ export default class AppUpdater {
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
       if (this.notificationsEnabled) {
-        this.showUpdateReadyDialog(event.releaseName ?? event.version);
+        this.showUpdateReadyDialog(event);
       }
     });
 
@@ -114,6 +119,7 @@ export default class AppUpdater {
 
     autoUpdater.on('update-cancelled', () => {
       logInfo('auto updater', 'Update cancelled');
+      this.lastPromptedVersion = null;
       this.resetState();
     });
 
@@ -206,13 +212,26 @@ export default class AppUpdater {
   /**
    * Show a dialog informing the user that an update is ready to install.
    * If the user chooses to restart, quitAndInstall is called immediately.
+   * When the downloaded update carries release information, a Release notes
+   * action opens the matching GitHub release page.
    *
-   * @param release - The release name shown in the dialog message.
+   * @param event - The downloaded-update event with the release identity.
    */
-  private showUpdateReadyDialog(release: string) {
+  private showUpdateReadyDialog(event: UpdateDownloadedEvent) {
+    if (event.version === this.lastPromptedVersion) {
+      return;
+    }
+
+    const hasReleaseInfo = Boolean(event.releaseNotes) || Boolean(event.version);
+    const release = event.releaseName ?? event.version;
+    const buttons = ['Restart', 'Later', ...(hasReleaseInfo ? ['Release notes'] : [])];
+
+    this.lastPromptedVersion = event.version;
+
     const dialogOpts: MessageBoxOptions = {
       type: 'info',
-      buttons: ['Restart', 'Later'],
+      buttons,
+      cancelId: 1,
       title: 'Application Update',
       message: `${APPLICATION.NAME} ${release} has been downloaded`,
       detail: 'Restart to apply the update. You can also restart later from the tray menu.',
@@ -223,10 +242,26 @@ export default class AppUpdater {
       .then((returnValue) => {
         if (returnValue.response === 0) {
           autoUpdater.quitAndInstall();
+        } else if (returnValue.response === 2 && hasReleaseInfo && event.version) {
+          this.openReleaseNotes(event.version);
         }
       })
       .catch((err) => {
         logError('app updater', 'Failed to show update ready dialog', toError(err));
       });
+  }
+
+  /**
+   * Open the GitHub release page for a downloaded version.
+   *
+   * @param version - The downloaded version, with or without a leading `v`.
+   */
+  private openReleaseNotes(version: string) {
+    const normalizedVersion = version.replace(/^v/, '');
+    const url = `${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}/releases/tag/v${normalizedVersion}`;
+
+    shell.openExternal(url).catch((err) => {
+      logError('app updater', 'Failed to open release notes', toError(err));
+    });
   }
 }

@@ -80,6 +80,16 @@ Operating-system notifications are created by the main process behind the typed 
 
 Subscription is separate from side effects, but it multiplies the same way: every TanStack Query observer re-runs the query's `select` and structural-sharing walk whenever the cached data changes. A component that renders once per notification — the notification row, the repository header — must therefore not subscribe. It obtains notification actions (mark as read/done, unsubscribe, remove an account, refetch) with `useNotificationActions`, which never calls `useQuery`. Components that read notification data use `useNotifications` and stay subscribed by design.
 
+## Application updates
+
+Updates are a main-process concern (`src/main/updater.ts`), driven by `electron-updater` events and surfaced through the tray/menu and a native ready dialog.
+
+- `update-available` updates the tooltip and menu; it does not clear the dialog guard.
+- `update-downloaded` marks the menu's **Restart to install update** entry visible and, when notifications are enabled, shows the ready dialog once per downloaded version.
+- The dialog offers **Restart**, **Later**, and **Release notes** when the downloaded update has release information. Release notes opens the matching GitHub release page.
+- **Later** dismisses only the dialog. The menu entry remains the install path, and a later check for the same downloaded version does not prompt again. A different version prompts normally; `update-cancelled` clears the guard. The guard is process-local.
+- With notifications disabled, the dialog is skipped and the menu entry remains.
+
 ## Forge adapters
 
 Multi-forge support is adapter-based. Each forge implements the `ForgeAdapter` interface in `src/renderer/utils/forges/`, and shared code routes through `getAdapter(forge)` (forge-wide members) or `getAccountAdapter(account)` (account-scoped operations). Shared code never imports forge-specific modules directly, and there is no forge-specific branching outside an adapter module. See `CONTRIBUTING.md` for the conditions for adding a forge.
