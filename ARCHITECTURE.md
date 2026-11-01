@@ -36,16 +36,17 @@ The renderer is layered. **Runtime imports flow in one direction only** — a mo
         |
       routes                      screens
         |
-   App.tsx / index.tsx            composition root - may import any layer
+   App.tsx / router.tsx / index.tsx   composition root - may import any layer
 ```
 
 - `utils/` is split by concern: `api`, `auth`, `core`, `forges`, `notifications`, `system`, `ui`.
 - `types.ts`, `constants.ts`, and `icons/` are the leaf modules: shared types, shared values, and presentational icons. `types.ts` imports types from `utils/auth/types` and generated GitHub GraphQL types — those imports are type-only, so the direction rule does not apply. `icons/` sits below `utils`, so both `utils` and `components` may import it (a forge adapter declares its brand mark from here).
-- `stores/` holds client state (Zustand): persisted `accounts` and `settings`, session `filters` and notification action failures.
+- `stores/` holds client state (Zustand): persisted `accounts` and `settings`, session `filters`, notification action failures, and power state.
 - `stores/index.ts` is the public store facade for `hooks`, `components`, and `routes`. Lower layers (`utils`) import the specific store module instead (for example `stores/useFiltersStore`): the barrel re-exports every store and its dependencies, which would pull the account/auth/forge graph into leaf utilities and create cycles.
 - `utils` and `stores` are **peers** — they may reference each other. Neither may import `hooks`, `components`, or `routes`.
 - `components/` is grouped by feature (`notifications`, `filters`, `settings`, `login`, `avatars`, `layout`, `metrics`, `primitives`).
-- The composition root (`App.tsx`, `index.tsx`) is the only place allowed to wire every layer together.
+- The composition root (`App.tsx`, `router.tsx`, `index.tsx`) is the only place allowed to wire every layer together.
+- `router.tsx` owns the single route table and creates the hash data router. A root layout route renders the window chrome, global shortcuts, and sidebar around an `<Outlet />`; a nested protected layout route owns the login redirect for every authenticated screen. Destinations shared with the sidebar and shortcuts live in `nav.ts`.
 
 ## State ownership
 
@@ -55,7 +56,7 @@ Every kind of renderer state has exactly one owner. Put new state with the mecha
 | ---------------------- | ---------------------------------------------------- | -------------------------------------------------------- |
 | Server / async data    | TanStack Query                                       | the notification list, periodic account refreshes        |
 | Persisted client state | Zustand with `persist`                               | `accounts`, `settings`                                   |
-| Session client state   | Zustand without `persist`                            | `filters`, notification action failures                  |
+| Session client state   | Zustand without `persist`                            | `filters`, notification action failures, power state     |
 | Derived values         | A store selector/action, or a pure `utils/` function | `isLoggedIn`, `hasMultipleAccounts`, notification status |
 | Ephemeral view state   | React `useState` / `useMemo`                         | row expand/collapse, exit animations                     |
 
@@ -67,7 +68,11 @@ Rules:
 
 ## Side-effect ownership
 
-App-level side effects are owned by a single host. `GlobalEffects` mounts exactly once (inside the query and theme providers) and owns theme application, tray updates, global shortcut registration, periodic account refreshes, and notification polling and alerts.
+App-level side effects are owned by a single host. `GlobalEffects` mounts exactly once (inside the query and theme providers) and owns theme application, tray updates, global shortcut registration, periodic account refreshes, and notification polling and alerts. Polling follows these rules:
+
+- **Hidden or unfocused window:** polling continues; `refetchIntervalInBackground` keeps the timers running.
+- **Offline:** notification and account queries pause (`networkMode: 'online'`), and the notifications screen shows the offline state; on reconnect they resume, and the online state is re-probed on wake.
+- **Locked or suspended:** `SYSTEM_SLEEP` disables the query intervals; `SYSTEM_WAKE` re-enables them and triggers an immediate refetch of the notification and account queries (`cancelRefetch: false`) before the normal intervals resume.
 
 Consumers read the shared query cache and stores, and **do not register their own** polling, alerts, wake, or focus listeners. This keeps background work (for example, firing one poll per interval) from multiplying with the number of mounted components. When you add a new background effect, add it to the host, not to a leaf component.
 

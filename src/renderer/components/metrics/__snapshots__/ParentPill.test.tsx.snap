@@ -44,7 +44,7 @@ exports[`renderer/components/metrics/ParentPill.tsx > renders parent pill with i
           />
         </svg>
         <span
-          class="text-xxs px-1 truncate max-w-[160px] prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 truncate max-w-[160px] prc-Text-Text-9mHv3"
           data-component="Text"
         >
           #123

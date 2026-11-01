@@ -68,7 +68,6 @@ export const api = {
   setAutoLaunch: (value: boolean) =>
     sendMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, {
       openAtLogin: value,
-      openAsHidden: value,
     }),
 
   /**
@@ -258,6 +257,19 @@ export const api = {
    */
   onSystemWake: (callback: () => void) => {
     return onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
+  },
+
+  /**
+   * Register a callback invoked when the system is about to sleep or the screen
+   * locks.
+   *
+   * Use this to pause polling until the matching wake/unlock event.
+   *
+   * @param callback - Called with no arguments on every sleep event.
+   * @returns A function that removes the listener.
+   */
+  onSystemSleep: (callback: () => void) => {
+    return onRendererEvent(EVENTS.SYSTEM_SLEEP, () => callback());
   },
 
   /**

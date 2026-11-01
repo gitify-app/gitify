@@ -6,6 +6,7 @@ import { useNotificationsHost } from '../hooks/notifications/useNotificationsHos
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
+import { usePowerState } from '../hooks/usePowerState';
 import { useShortcutRegistration } from '../hooks/useShortcutRegistration';
 import {
   useAccountsStore,
@@ -49,6 +50,9 @@ export function GlobalEffects() {
 
   // Global keyboard shortcut registration, reverting on failure
   useShortcutRegistration();
+
+  // Pause polling while the system is locked or suspended
+  usePowerState();
 
   // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   useEffect(() => {

@@ -45,6 +45,7 @@ vi.mock('electron', () => ({
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
+  setAutoLaunch: (value: boolean) => void;
   setShowUpdateNotifications: (value: boolean) => void;
   setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
@@ -57,6 +58,7 @@ interface TestApi {
     onClick: (callback: (payload: { id: string }) => void) => () => void;
   };
   onZoom: (callback: (action: 'in' | 'out' | 'reset') => void) => () => void;
+  onSystemSleep: (callback: () => void) => () => void;
 }
 
 describe('preload/index', () => {
@@ -96,6 +98,16 @@ describe('preload/index', () => {
     api.setUseX11Backend(true);
 
     expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_USE_X11_BACKEND, true);
+  });
+
+  it('setAutoLaunch sends only the supported openAtLogin option', () => {
+    const api = getExposedApi();
+
+    api.setAutoLaunch(true);
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_AUTO_LAUNCH, {
+      openAtLogin: true,
+    });
   });
 
   it('openExternalLink sends event with payload', async () => {
@@ -220,6 +232,23 @@ describe('preload/index', () => {
       expect.any(Function),
     );
     expect(callback).toHaveBeenCalledWith({ id: 'summary' });
+
+    result();
+    expect(unsubscribe).toHaveBeenCalled();
+  });
+
+  it('onSystemSleep forwards sleep events and cleans up', () => {
+    const api = getExposedApi();
+    const callback = vi.fn();
+    const unsubscribe = vi.fn();
+    onRendererEventMock.mockReturnValueOnce(unsubscribe);
+
+    const result = api.onSystemSleep(callback);
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (event: unknown) => void;
+    listener({});
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(EVENTS.SYSTEM_SLEEP, expect.any(Function));
+    expect(callback).toHaveBeenCalled();
 
     result();
     expect(unsubscribe).toHaveBeenCalled();

@@ -55,7 +55,7 @@ exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders complete
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           5/5
@@ -132,7 +132,7 @@ exports[`renderer/components/metrics/SubIssueProgressPill.tsx > renders in-progr
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           2/5

@@ -16,8 +16,8 @@ import useSettingsStore from '../stores/useSettingsStore';
  * Shared navigate mock — import from test-utils in any test that needs to assert on navigation
  */
 export const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
+vi.mock('react-router', async () => ({
+  ...(await vi.importActual('react-router')),
   useNavigate: () => navigateMock,
 }));
 
@@ -139,7 +139,8 @@ beforeEach(async () => {
   const { resetHookMocks } = await import('./hook-mocks');
   resetHookMocks();
 
-  const { useShortcutRegistrationStore } = await import('../stores');
+  const { usePowerStateStore, useShortcutRegistrationStore } = await import('../stores');
+  usePowerStateStore.setState({ isActive: true });
   useShortcutRegistrationStore.getState().reset();
 });
 

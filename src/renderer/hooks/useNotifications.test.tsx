@@ -19,11 +19,14 @@ import {
   NATIVE_NOTIFICATION_SUMMARY_ID,
 } from '../../shared/nativeNotifications';
 
+import { Constants } from '../constants';
+
 import {
   getNotificationFailureKey,
   useAccountsStore,
   useFiltersStore,
   useNotificationActionFailuresStore,
+  usePowerStateStore,
   useSettingsStore,
 } from '../stores';
 
@@ -658,6 +661,48 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(raiseNativeNotificationSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('uses the latest alert settings for the next alert without re-registering the effect', async () => {
+      useSettingsStore.setState({
+        notificationVolume: 20 as Percentage,
+        playSound: true,
+        showNotifications: false,
+      });
+      getAllNotificationsMock.mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      await waitFor(() => expect(raiseSoundNotificationSpy).toHaveBeenCalledWith(20));
+      expect(raiseNativeNotificationSpy).not.toHaveBeenCalled();
+
+      act(() => {
+        useSettingsStore.setState({
+          notificationVolume: 60 as Percentage,
+          showNotifications: true,
+        });
+      });
+
+      getAllNotificationsMock.mockResolvedValueOnce([
+        {
+          account: mockGitHubCloudAccount,
+          error: null,
+          notifications: [
+            mockGitifyNotification,
+            mockGitHubCloudGitifyNotifications[1],
+          ] as AccountNotifications['notifications'],
+        },
+      ]);
+
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+
+      await waitFor(() => {
+        expect(raiseSoundNotificationSpy).toHaveBeenCalledTimes(2);
+        expect(raiseSoundNotificationSpy).toHaveBeenLastCalledWith(60);
+        expect(raiseNativeNotificationSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+
     it('does not raise sound or native notifications when disabled', async () => {
       useSettingsStore.setState({
         playSound: false,
@@ -1062,6 +1107,66 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(2));
+    });
+
+    it('does not poll while the system is inactive and resumes when active', async () => {
+      vi.useFakeTimers();
+      try {
+        usePowerStateStore.setState({ isActive: false });
+        useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+        getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+        renderNotificationsHook();
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(0);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        act(() => {
+          usePowerStateStore.setState({ isActive: true });
+        });
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+      } finally {
+        usePowerStateStore.setState({ isActive: true });
+        vi.useRealTimers();
+      }
+    });
+
+    it('deduplicates duplicate wake events while a refetch is in flight', async () => {
+      useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+      getAllNotificationsMock.mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      renderNotificationsHook();
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
+
+      let resolveRefetch: (value: AccountNotifications[]) => void = () => {};
+      getAllNotificationsMock.mockReturnValueOnce(
+        new Promise((resolve) => {
+          resolveRefetch = resolve;
+        }),
+      );
+
+      const wakeCallback = vi.mocked(window.gitify.onSystemWake).mock.calls[0][0];
+      act(() => {
+        wakeCallback();
+        wakeCallback();
+      });
+
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+
+      await act(async () => {
+        resolveRefetch(mockSingleAccountNotifications);
+        await Promise.resolve();
+      });
     });
 
     it('only the side-effects host registers a wake listener', async () => {
