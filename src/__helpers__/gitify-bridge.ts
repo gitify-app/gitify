@@ -43,6 +43,7 @@ export function createGitifyBridgeApi(platform: TestPlatform = 'macos'): Window[
     onSystemWake: vi.fn(() => vi.fn()),
     onZoom: vi.fn(() => vi.fn()),
     setAutoLaunch: vi.fn(),
+    getLoginItemSettings: vi.fn().mockResolvedValue({ openAtLogin: false }),
     setKeepWindowOnBlur: vi.fn(),
     setShowUpdateNotifications: vi.fn(),
     setUseX11Backend: vi.fn(),

@@ -4,11 +4,16 @@ import userEvent from '@testing-library/user-event';
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { useLoginItemStatus } from '../../hooks/useLoginItemStatus';
 import { useSettingsStore } from '../../stores';
 
 import type { KeyboardAcceleratorShortcut } from '../../types';
 
 import { SystemSettings } from './SystemSettings';
+
+vi.mock('../../hooks/useLoginItemStatus', () => ({
+  useLoginItemStatus: vi.fn(() => null),
+}));
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
   let toggleSettingSpy: ReturnType<typeof vi.spyOn>;
@@ -17,6 +22,7 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
   beforeEach(() => {
     toggleSettingSpy = vi.spyOn(useSettingsStore.getState(), 'toggleSetting');
     updateSettingSpy = vi.spyOn(useSettingsStore.getState(), 'updateSetting');
+    vi.mocked(useLoginItemStatus).mockReturnValue(null);
   });
 
   it('changes the link focus choice', async () => {
@@ -238,6 +244,102 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       await userEvent.click(document.body);
 
       expect(screen.queryByText('Click outside this area to cancel.')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('login item status', () => {
+    it.each([
+      ['requires-approval', /requires you to approve the login item/],
+      ['not-found', /The login item could not be found/],
+      ['not-registered', /the login item is not registered/],
+    ] as const)('warns when macOS reports %s', async (status, warning) => {
+      vi.mocked(useLoginItemStatus).mockReturnValue({
+        openAtLogin: true,
+        status,
+      });
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />, {
+          settings: { ...mockSettings, openAtStartup: true },
+        });
+      });
+
+      expect(screen.getByText(warning)).toBeInTheDocument();
+    });
+
+    it('warns when Windows has disabled the startup entry', async () => {
+      vi.mocked(window.gitify.platform.isMacOS).mockReturnValue(false);
+      vi.mocked(window.gitify.platform.isWindows).mockReturnValue(true);
+      vi.mocked(useLoginItemStatus).mockReturnValue({
+        openAtLogin: true,
+        executableWillLaunchAtLogin: false,
+      });
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />, {
+          settings: { ...mockSettings, openAtStartup: true },
+        });
+      });
+
+      expect(screen.getByText(/Windows has disabled the startup entry/)).toBeInTheDocument();
+    });
+
+    it('does not warn when the stored preference is off', async () => {
+      vi.mocked(useLoginItemStatus).mockReturnValue({
+        openAtLogin: true,
+        status: 'requires-approval',
+      });
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />, {
+          settings: { ...mockSettings, openAtStartup: false },
+        });
+      });
+
+      expect(screen.queryByText(/requires you to approve the login item/)).not.toBeInTheDocument();
+    });
+
+    it('does not warn when the login item is enabled', async () => {
+      vi.mocked(useLoginItemStatus).mockReturnValue({
+        openAtLogin: true,
+        status: 'enabled',
+      });
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />, {
+          settings: { ...mockSettings, openAtStartup: true },
+        });
+      });
+
+      expect(screen.queryByText(/login item/)).not.toBeInTheDocument();
+    });
+
+    it('does not warn when the status read fails', async () => {
+      vi.mocked(useLoginItemStatus).mockReturnValue(null);
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />, {
+          settings: { ...mockSettings, openAtStartup: true },
+        });
+      });
+
+      expect(screen.queryByText(/login item/)).not.toBeInTheDocument();
+    });
+
+    it('does not warn on Linux, where the control is hidden', async () => {
+      vi.mocked(window.gitify.platform.isLinux).mockReturnValue(true);
+      vi.mocked(useLoginItemStatus).mockReturnValue({
+        openAtLogin: true,
+        status: 'requires-approval',
+      });
+
+      await act(async () => {
+        renderWithProviders(<SystemSettings />, {
+          settings: { ...mockSettings, openAtStartup: true },
+        });
+      });
+
+      expect(screen.queryByText(/requires you to approve the login item/)).not.toBeInTheDocument();
     });
   });
 });

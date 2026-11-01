@@ -15,6 +15,7 @@ export const EVENTS = {
   USE_UNREAD_ACTIVE_ICON: `${P}use-unread-active-icon`,
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
+  GET_LOGIN_ITEM_SETTINGS: `${P}get-login-item-settings`,
   UPDATE_KEEP_WINDOW_ON_BLUR: `${P}update-keep-window-on-blur`,
   UPDATE_SHOW_UPDATE_NOTIFICATIONS: `${P}update-show-update-notifications`,
   UPDATE_USE_X11_BACKEND: `${P}update-use-x11-backend`,
@@ -56,6 +57,21 @@ export function isTrayIconAppearance(value: unknown): value is TrayIconAppearanc
 export interface IAutoLaunch {
   openAtLogin: boolean;
   openAsHidden: boolean;
+}
+
+/** macOS login-item registration status reported by Electron. */
+export type LoginItemStatus = 'not-registered' | 'enabled' | 'requires-approval' | 'not-found';
+
+/**
+ * Platform-neutral snapshot of the operating system's login-item state.
+ *
+ * `status` is populated on macOS and `executableWillLaunchAtLogin` on Windows.
+ * Both are omitted on platforms without a supported login item.
+ */
+export interface ILoginItemSettings {
+  openAtLogin: boolean;
+  status?: LoginItemStatus;
+  executableWillLaunchAtLogin?: boolean;
 }
 
 /** Payload for the `UPDATE_KEYBOARD_SHORTCUT` event. */
@@ -166,6 +182,10 @@ export type EventContracts = AssertEventCoverage<{
     response: IKeyboardShortcutResult;
   };
   [EVENTS.UPDATE_AUTO_LAUNCH]: { request: IAutoLaunch; response: undefined };
+  [EVENTS.GET_LOGIN_ITEM_SETTINGS]: {
+    request: undefined;
+    response: ILoginItemSettings;
+  };
   [EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR]: {
     request: boolean;
     response: undefined;

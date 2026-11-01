@@ -45,6 +45,11 @@ vi.mock('electron', () => ({
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
+  getLoginItemSettings: () => Promise<{
+    openAtLogin: boolean;
+    status?: 'not-registered' | 'enabled' | 'requires-approval' | 'not-found';
+    executableWillLaunchAtLogin?: boolean;
+  }>;
   setShowUpdateNotifications: (value: boolean) => void;
   setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
@@ -96,6 +101,20 @@ describe('preload/index', () => {
     api.setUseX11Backend(true);
 
     expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_USE_X11_BACKEND, true);
+  });
+
+  it('getLoginItemSettings invokes main and returns the OS snapshot', async () => {
+    const api = getExposedApi();
+    invokeMainEventMock.mockResolvedValueOnce({
+      openAtLogin: true,
+      status: 'requires-approval',
+    });
+
+    await expect(api.getLoginItemSettings()).resolves.toEqual({
+      openAtLogin: true,
+      status: 'requires-approval',
+    });
+    expect(invokeMainEventMock).toHaveBeenCalledWith(EVENTS.GET_LOGIN_ITEM_SETTINGS);
   });
 
   it('openExternalLink sends event with payload', async () => {

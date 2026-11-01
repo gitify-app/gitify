@@ -6,6 +6,7 @@ import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/re
 
 import { APPLICATION } from '../../../shared/constants';
 
+import { useLoginItemStatus } from '../../hooks/useLoginItemStatus';
 import {
   DEFAULT_SETTINGS_STATE,
   useSettingsStore,
@@ -56,6 +57,35 @@ export function SystemSettings() {
   const shortcutRowRef = useRef<HTMLDivElement>(null);
   const isMac = window.gitify.platform.isMacOS();
   const isLinux = window.gitify.platform.isLinux();
+  const isWindows = window.gitify.platform.isWindows();
+  const loginItemStatus = useLoginItemStatus();
+
+  let loginItemWarning: string | null = null;
+  if (openAtStartup && loginItemStatus) {
+    if (loginItemStatus.status === 'requires-approval') {
+      loginItemWarning = t(
+        'settings.system.login_item_requires_approval',
+        'macOS requires you to approve the login item before {{appName}} can launch at startup. Approve it in System Settings > General > Login Items.',
+        { appName: APPLICATION.NAME },
+      );
+    } else if (loginItemStatus.status === 'not-found') {
+      loginItemWarning = t(
+        'settings.system.login_item_not_found',
+        'The login item could not be found. Turn Launch at startup off and on again to re-register it.',
+      );
+    } else if (loginItemStatus.status === 'not-registered') {
+      loginItemWarning = t(
+        'settings.system.login_item_not_registered',
+        'Launch at startup is on, but the login item is not registered. Turn it off and on again to re-register it.',
+      );
+    } else if (isWindows && loginItemStatus.executableWillLaunchAtLogin === false) {
+      loginItemWarning = t(
+        'settings.system.login_item_windows_disabled',
+        'Windows has disabled the startup entry. Enable {{appName}} in Task Manager > Startup.',
+        { appName: APPLICATION.NAME },
+      );
+    }
+  }
 
   useEffect(() => {
     if (!recordingShortcut) {
@@ -339,6 +369,15 @@ export function SystemSettings() {
           )}
           visible={!isLinux}
         />
+
+        {!isLinux && openAtStartup && loginItemWarning && (
+          <Banner
+            description={<Text>{loginItemWarning}</Text>}
+            hideTitle
+            title={t('settings.system.login_item_warning_title', 'Launch at startup')}
+            variant="warning"
+          />
+        )}
 
         <SettingsToggle
           checked={useX11Backend}
