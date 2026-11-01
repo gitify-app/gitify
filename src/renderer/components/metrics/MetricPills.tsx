@@ -1,4 +1,11 @@
-import { type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import {
+  type ReactElement,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { KebabHorizontalIcon } from '@primer/octicons-react';
 import { AnchoredOverlay } from '@primer/react';
@@ -13,7 +20,7 @@ const GAP = 4;
 const OVERFLOW_CHIP_ESTIMATE = 44;
 
 interface MetricPillsProps {
-  pills: ReactNode[];
+  pills: ReactElement[];
 }
 
 /**
@@ -131,7 +138,7 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
               isHidden && 'pointer-events-none invisible absolute left-0 top-0 w-max',
             )}
             inert={isHidden || undefined}
-            key={index}
+            key={pill.key}
             ref={(element) => {
               pillRefs.current[index] = element;
             }}
@@ -205,8 +212,8 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
                 className="absolute -top-[5px] right-3 h-2.5 w-2.5 rotate-45 border-l border-t border-gitify-notification-border bg-gitify-tooltip-popout"
                 data-testid="metric-overflow-caret"
               />
-              {hiddenPills.map((pill, index) => (
-                <div className="flex shrink-0" key={index}>
+              {hiddenPills.map((pill) => (
+                <div className="flex shrink-0" key={pill.key}>
                   {pill}
                 </div>
               ))}
