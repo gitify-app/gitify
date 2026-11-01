@@ -55,7 +55,6 @@ export function isTrayIconAppearance(value: unknown): value is TrayIconAppearanc
 /** Payload for the `UPDATE_AUTO_LAUNCH` event. */
 export interface IAutoLaunch {
   openAtLogin: boolean;
-  openAsHidden: boolean;
 }
 
 /** Payload for the `UPDATE_KEYBOARD_SHORTCUT` event. */

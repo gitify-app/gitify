@@ -68,7 +68,6 @@ export const api = {
   setAutoLaunch: (value: boolean) =>
     sendMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, {
       openAtLogin: value,
-      openAsHidden: value,
     }),
 
   /**
