@@ -50,6 +50,21 @@ export function Sidebar() {
   const filters = getNavItem('filters');
   const settings = getNavItem('settings');
 
+  // Literal t() keys keep the labels discoverable by the i18n extractor.
+  const copy = {
+    filters: {
+      label: t('sidebar.filters', 'Filters'),
+      description: t('sidebar.filter_notifications', 'Filter notifications'),
+    },
+    home: {
+      description: t('sidebar.home', 'Home'),
+    },
+    settings: {
+      label: t('sidebar.settings', 'Settings'),
+      description: t('settings.title', 'Settings'),
+    },
+  };
+
   /**
    * Keep the existing toggle behavior for a destination that is already shown,
    * while letting modified clicks use the link's native navigation.
@@ -73,7 +88,7 @@ export function Sidebar() {
         <IconButton
           aria-label={APPLICATION.NAME}
           as={NavLink}
-          description={t(home.descriptionKey, 'Home')}
+          description={copy.home.description}
           end={home.exact}
           icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
@@ -123,9 +138,9 @@ export function Sidebar() {
             />
 
             <IconButton
-              aria-label={t(filters.labelKey, 'Filters')}
+              aria-label={copy.filters.label}
               as={NavLink}
-              description={t(filters.descriptionKey, 'Filter notifications')}
+              description={copy.filters.description}
               icon={FilterIcon}
               keybindingHint={shortcuts.filters.key}
               onClick={(event) => navigateFromControl(event, shortcuts.filters.action)}
@@ -177,9 +192,9 @@ export function Sidebar() {
             />
 
             <IconButton
-              aria-label={t(settings.labelKey, 'Settings')}
+              aria-label={copy.settings.label}
               as={NavLink}
-              description={t(settings.descriptionKey, 'Settings')}
+              description={copy.settings.description}
               icon={GearIcon}
               keybindingHint={shortcuts.settings.key}
               onClick={(event) => navigateFromControl(event, shortcuts.settings.action)}

@@ -5,10 +5,6 @@ export interface NavDestination {
   id: NavDestinationId;
   /** Route the destination resolves to. */
   path: '/' | '/filters' | '/settings';
-  /** Translation key for the destination's accessible name. */
-  labelKey: string;
-  /** Translation key for the tooltip description. */
-  descriptionKey: string;
   /** Keyboard key that activates the destination. */
   shortcutKey: string;
   /** Whether the destination only matches its exact path. */
@@ -23,23 +19,17 @@ export const NAV_ITEMS: readonly NavDestination[] = [
   {
     id: 'home',
     path: '/',
-    labelKey: 'sidebar.home',
-    descriptionKey: 'sidebar.home',
     shortcutKey: 'h',
     exact: true,
   },
   {
     id: 'filters',
     path: '/filters',
-    labelKey: 'sidebar.filters',
-    descriptionKey: 'sidebar.filter_notifications',
     shortcutKey: 'f',
   },
   {
     id: 'settings',
     path: '/settings',
-    labelKey: 'sidebar.settings',
-    descriptionKey: 'settings.title',
     shortcutKey: 's',
   },
 ];
