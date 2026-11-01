@@ -14,10 +14,9 @@ export interface ExitCollapseProps {
  * emits `translate-x-full` as the `translate` property, so the transition list
  * must include `translate` as well as `transform`; transitioning only
  * `transform` makes the row jump right instead of sliding. The inner grid
- * layer then collapses the content's layout space over 150ms, so a slow or
- * hanging request cannot leave an invisible row holding its height. The
- * collapse starts after the slide via the matching `delay-350`, bounding the
- * whole exit at 500ms.
+ * layer then snaps the layout closed when the slide finishes, so a slow or
+ * hanging request cannot leave an invisible row holding its height. The fixed
+ * budget is the 350ms slide.
  *
  * The transition classes stay mounted so a failed action can slide back in
  * smoothly, while the collapse transition only exists while exiting so the
@@ -37,7 +36,7 @@ export function ExitCollapse({ isExiting, children }: Readonly<ExitCollapseProps
         className={cn(
           'grid',
           isExiting
-            ? 'grid-rows-[0fr] transition-[grid-template-rows] duration-150 delay-350 ease-in-out motion-reduce:transition-none'
+            ? 'grid-rows-[0fr] transition-[grid-template-rows] duration-0 delay-350 motion-reduce:transition-none'
             : 'grid-rows-[1fr]',
         )}
         data-exit-collapse={isExiting || undefined}

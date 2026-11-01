@@ -31,7 +31,7 @@ describe('renderer/components/notifications/ExitCollapse.tsx', () => {
     );
     expect(tree.container.querySelector('[data-exit-collapse]')).toHaveClass(
       'grid-rows-[0fr]',
-      'duration-150',
+      'duration-0',
       'delay-350',
       'motion-reduce:transition-none',
     );
