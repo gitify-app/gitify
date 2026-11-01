@@ -566,18 +566,9 @@ body,
 }
 
 /**
- * Route changes use React's `<ViewTransition name="route">` boundary. Only the
- * routed content participates; the sidebar and window chrome stay put.
+ * Route changes animate only the routed content. The sidebar is outside this
+ * element, so it is never captured, re-rendered, or faded by the animation.
  */
-@keyframes gitify-route-out {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-3px);
-  }
-}
-
 @keyframes gitify-route-in {
   from {
     transform: translateY(4px);
@@ -587,47 +578,12 @@ body,
   }
 }
 
-/* Cross-fading full-page snapshots shows the outgoing and incoming content at
- * partial opacity. Keep both opaque and slide them instead, so the window
- * background and the old route never show through the new one. */
-::view-transition-old(route) {
-  animation: gitify-route-out 120ms ease-out both;
-}
-
-::view-transition-new(route) {
+.gitify-route-enter {
   animation: gitify-route-in 120ms ease-out both;
 }
 
-/* Only the route layer participates in a view transition. The sidebar gets its
- * own static snapshot so the root crossfade cannot fade it. */
-:root {
-  view-transition-name: none;
-}
-
-.gitify-sidebar {
-  view-transition-name: sidebar;
-}
-
-::view-transition-group(sidebar),
-::view-transition-image-pair(sidebar) {
-  animation: none;
-}
-
-::view-transition-old(sidebar) {
-  animation: none;
-  opacity: 0;
-}
-
-::view-transition-new(sidebar) {
-  animation: none;
-  opacity: 1;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(route),
-  ::view-transition-old(route),
-  ::view-transition-new(route),
-  ::view-transition-image-pair(route) {
+  .gitify-route-enter {
     animation: none;
   }
 }

@@ -227,7 +227,7 @@ exports[`renderer/components/layout/AppLayout.tsx > renders itself & its childre
       </div>
     </div>
     <div
-      class="flex-1 pl-sidebar bg-gitify-background"
+      class="flex-1 pl-sidebar gitify-route-enter"
       data-testid="route-content"
     >
       Test
