@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router';
 
 import { Sidebar } from '../Sidebar';
 
@@ -14,7 +13,6 @@ interface AppLayoutProps {
  */
 export function AppLayout({ children }: Readonly<AppLayoutProps>) {
   const { t } = useTranslation();
-  const location = useLocation();
   const setFocusRef = (el: HTMLButtonElement | null) => {
     if (el) {
       el.focus();
@@ -33,11 +31,7 @@ export function AppLayout({ children }: Readonly<AppLayoutProps>) {
 
       <Sidebar />
 
-      <div
-        className="flex-1 pl-sidebar gitify-route-enter"
-        data-testid="route-content"
-        key={location.pathname}
-      >
+      <div className="flex-1 pl-sidebar" data-testid="route-content">
         {children}
       </div>
     </div>

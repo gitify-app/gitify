@@ -565,29 +565,6 @@ body,
   }
 }
 
-/**
- * Route changes animate only the routed content. The sidebar is outside this
- * element, so it is never captured, re-rendered, or faded by the animation.
- */
-@keyframes gitify-route-in {
-  from {
-    transform: translateY(4px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-.gitify-route-enter {
-  animation: gitify-route-in 120ms ease-out both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gitify-route-enter {
-    animation: none;
-  }
-}
-
 .gitify-scroll-fade {
   --gitify-scroll-fade-size: 1.5rem;
 
