@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router';
 
 import {
   BellIcon,
@@ -20,9 +21,11 @@ import { useShortcutActions } from '../hooks/useShortcutActions';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { LogoIcon } from '../icons/LogoIcon';
+import { getNavItem } from '../nav';
 
 export function Sidebar() {
   const { t } = useTranslation();
+  const location = useLocation();
   const { status, notificationCount, hasUnreadNotifications, isFetching } = useNotifications();
 
   const { shortcuts } = useShortcutActions();
@@ -36,6 +39,30 @@ export function Sidebar() {
 
   const isLoading = status === 'loading';
 
+  const home = getNavItem('home');
+  const filters = getNavItem('filters');
+  const settings = getNavItem('settings');
+
+  // Literal t() keys keep the labels discoverable by the i18n extractor.
+  const copy = {
+    filters: {
+      label: t('sidebar.filters', 'Filters'),
+      description: t('sidebar.filter_notifications', 'Filter notifications'),
+    },
+    home: {
+      description: t('sidebar.home', 'Home'),
+    },
+    settings: {
+      label: t('sidebar.settings', 'Settings'),
+      description: t('settings.title', 'Settings'),
+    },
+  };
+
+  const isActive = (path: string, exact = false) =>
+    exact
+      ? location.pathname === path
+      : location.pathname === path || location.pathname.startsWith(`${path}/`);
+
   return (
     <Stack
       className="gitify-sidebar fixed w-sidebar h-full bg-gitify-sidebar [&_svg]:text-white"
@@ -44,8 +71,9 @@ export function Sidebar() {
     >
       <Stack align="center" direction="vertical" gap="condensed" padding="normal">
         <IconButton
+          aria-current={isActive(home.path, home.exact) ? 'page' : undefined}
           aria-label={APPLICATION.NAME}
-          description={t('sidebar.home', 'Home')}
+          description={copy.home.description}
           icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
           onClick={() => shortcuts.home.action()}
@@ -91,8 +119,9 @@ export function Sidebar() {
             />
 
             <IconButton
-              aria-label={t('sidebar.filters', 'Filters')}
-              description={t('sidebar.filter_notifications', 'Filter notifications')}
+              aria-current={isActive(filters.path) ? 'page' : undefined}
+              aria-label={copy.filters.label}
+              description={copy.filters.description}
               icon={FilterIcon}
               keybindingHint={shortcuts.filters.key}
               onClick={() => shortcuts.filters.action()}
@@ -141,8 +170,9 @@ export function Sidebar() {
             />
 
             <IconButton
-              aria-label={t('sidebar.settings', 'Settings')}
-              description={t('settings.title', 'Settings')}
+              aria-current={isActive(settings.path) ? 'page' : undefined}
+              aria-label={copy.settings.label}
+              description={copy.settings.description}
               icon={GearIcon}
               keybindingHint={shortcuts.settings.key}
               onClick={() => shortcuts.settings.action()}

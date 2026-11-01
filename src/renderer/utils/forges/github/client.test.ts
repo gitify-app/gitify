@@ -18,6 +18,7 @@ import {
   computeRefetchIntervalMs,
 } from '../../notifications/pollInterval';
 import {
+  GITHUB_API_PAGE_SIZE,
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
@@ -143,7 +144,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: true,
         all: false,
-        per_page: 100,
+        per_page: GITHUB_API_PAGE_SIZE,
         headers: {
           'Cache-Control': 'no-cache',
         },
@@ -163,7 +164,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: false,
         all: false,
-        per_page: 100,
+        per_page: GITHUB_API_PAGE_SIZE,
         headers: {
           'Cache-Control': 'no-cache',
         },
@@ -183,7 +184,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: false,
         all: true,
-        per_page: 100,
+        per_page: GITHUB_API_PAGE_SIZE,
         headers: {
           'Cache-Control': 'no-cache',
         },
@@ -205,7 +206,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         {
           participating: false,
           all: false,
-          per_page: 100,
+          per_page: GITHUB_API_PAGE_SIZE,
           headers: {
             'Cache-Control': 'no-cache',
           },

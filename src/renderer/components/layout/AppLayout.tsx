@@ -31,7 +31,9 @@ export function AppLayout({ children }: Readonly<AppLayoutProps>) {
 
       <Sidebar />
 
-      <div className="flex-1 pl-sidebar">{children}</div>
+      <main className="flex-1 pl-sidebar" data-testid="route-content" id="route-content">
+        {children}
+      </main>
     </div>
   );
 }

@@ -1,4 +1,7 @@
 allowBuilds:
+  # Keep this build enabled and keep @parcel/watcher as a direct devDependency:
+  # it is an optional peer of @graphql-codegen/cli that powers `pnpm codegen:watch`.
+  # The CLI imports it lazily and silently stops watching when it is missing.
   '@parcel/watcher': true
   '@primer/primitives': false
   '@swc/core': true

@@ -80,6 +80,7 @@
       "description": "Please wait a while before trying again.",
       "title": "Rate Limited"
     },
+    "reload": "Reload",
     "unknown": {
       "description": "Please try again later.",
       "title": "Oops! Something went wrong"
