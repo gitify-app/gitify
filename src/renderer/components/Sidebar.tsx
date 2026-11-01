@@ -1,6 +1,5 @@
-import type { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router';
+import { useLocation } from 'react-router';
 
 import {
   BellIcon,
@@ -24,15 +23,9 @@ import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 import { LogoIcon } from '../icons/LogoIcon';
 import { getNavItem } from '../nav';
 
-/**
- * Primer styles a link-rendered button as `inline-flex`, which squeezes the
- * icon into the button's content box. Keep the icon-button grid so icons keep
- * their intrinsic size.
- */
-const NAV_LINK_STYLE = { display: 'inline-grid' } as const;
-
 export function Sidebar() {
   const { t } = useTranslation();
+  const location = useLocation();
   const { status, notificationCount, hasUnreadNotifications, isFetching } = useNotifications();
 
   const { shortcuts } = useShortcutActions();
@@ -65,18 +58,10 @@ export function Sidebar() {
     },
   };
 
-  /**
-   * Keep the existing toggle behavior for a destination that is already shown,
-   * while letting modified clicks use the link's native navigation.
-   */
-  const navigateFromControl = (event: MouseEvent<HTMLElement>, action: () => void) => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-      return;
-    }
-
-    event.preventDefault();
-    action();
-  };
+  const isActive = (path: string, exact = false) =>
+    exact
+      ? location.pathname === path
+      : location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   return (
     <Stack
@@ -86,18 +71,14 @@ export function Sidebar() {
     >
       <Stack align="center" direction="vertical" gap="condensed" padding="normal">
         <IconButton
+          aria-current={isActive(home.path, home.exact) ? 'page' : undefined}
           aria-label={APPLICATION.NAME}
-          as={NavLink}
           description={copy.home.description}
-          end={home.exact}
           icon={<LogoIcon />}
           keybindingHint={shortcuts.home.key}
-          onClick={(event) => navigateFromControl(event, shortcuts.home.action)}
+          onClick={() => shortcuts.home.action()}
           size="small"
-          style={NAV_LINK_STYLE}
-          to={home.path}
           tooltipDirection="e"
-          type={undefined}
           variant="invisible"
         />
 
@@ -138,17 +119,14 @@ export function Sidebar() {
             />
 
             <IconButton
+              aria-current={isActive(filters.path) ? 'page' : undefined}
               aria-label={copy.filters.label}
-              as={NavLink}
               description={copy.filters.description}
               icon={FilterIcon}
               keybindingHint={shortcuts.filters.key}
-              onClick={(event) => navigateFromControl(event, shortcuts.filters.action)}
+              onClick={() => shortcuts.filters.action()}
               size="small"
-              style={NAV_LINK_STYLE}
-              to={filters.path}
               tooltipDirection="e"
-              type={undefined}
               variant={hasFilters ? 'primary' : 'invisible'}
             />
 
@@ -192,17 +170,14 @@ export function Sidebar() {
             />
 
             <IconButton
+              aria-current={isActive(settings.path) ? 'page' : undefined}
               aria-label={copy.settings.label}
-              as={NavLink}
               description={copy.settings.description}
               icon={GearIcon}
               keybindingHint={shortcuts.settings.key}
-              onClick={(event) => navigateFromControl(event, shortcuts.settings.action)}
+              onClick={() => shortcuts.settings.action()}
               size="small"
-              style={NAV_LINK_STYLE}
-              to={settings.path}
               tooltipDirection="e"
-              type={undefined}
               variant="invisible"
             />
           </>

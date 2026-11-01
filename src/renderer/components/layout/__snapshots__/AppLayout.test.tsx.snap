@@ -30,19 +30,17 @@ exports[`renderer/components/layout/AppLayout.tsx > renders itself & its childre
         data-padding="normal"
         data-wrap="nowrap"
       >
-        <a
+        <button
           aria-current="page"
           aria-describedby="_r_0_"
           aria-label="Gitify"
-          class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7 active"
+          class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
           data-component="IconButton"
-          data-discover="true"
           data-loading="false"
           data-no-visuals="true"
           data-size="small"
           data-variant="invisible"
-          href="/"
-          style="display: inline-grid;"
+          type="button"
         >
           <svg
             aria-hidden="true"
@@ -88,7 +86,7 @@ exports[`renderer/components/layout/AppLayout.tsx > renders itself & its childre
               </g>
             </g>
           </svg>
-        </a>
+        </button>
         <span
           aria-hidden="true"
           class="prc-TooltipV2-Tooltip-tLeuB"

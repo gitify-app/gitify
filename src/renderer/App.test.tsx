@@ -85,14 +85,14 @@ describe('renderer/App routing', () => {
     renderAt('/filters', { accounts: [mockGitHubCloudAccount] });
 
     expect(await screen.findByTestId('filters')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Filters' })).toHaveAttribute('aria-current', 'page');
-    expect(screen.getByRole('link', { name: 'Settings' })).not.toHaveAttribute('aria-current');
+    expect(screen.getByRole('button', { name: 'Filters' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('button', { name: 'Settings' })).not.toHaveAttribute('aria-current');
   });
 
   it('keeps back navigation working', async () => {
     const { router } = renderAt('/', { accounts: [mockGitHubCloudAccount] });
 
-    await userEvent.click(screen.getByRole('link', { name: 'Settings' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Settings' }));
     await waitFor(() => expect(router.state.location.pathname).toBe('/settings'));
 
     await act(async () => {
@@ -106,8 +106,8 @@ describe('renderer/App routing', () => {
   it('settles on the last route for rapid navigation', async () => {
     const { router } = renderAt('/', { accounts: [mockGitHubCloudAccount] });
 
-    const settings = screen.getByRole('link', { name: 'Settings' });
-    const home = screen.getByRole('link', { name: 'Gitify' });
+    const settings = screen.getByRole('button', { name: 'Settings' });
+    const home = screen.getByRole('button', { name: 'Gitify' });
 
     act(() => {
       settings.click();
@@ -116,6 +116,6 @@ describe('renderer/App routing', () => {
 
     await waitFor(() => expect(router.state.location.pathname).toBe('/'));
     expect(screen.queryByTestId('settings')).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Settings' })).not.toHaveFocus();
+    expect(screen.getByRole('button', { name: 'Settings' })).not.toHaveFocus();
   });
 });
