@@ -6,7 +6,7 @@ import { ReloadButton } from './primitives/ReloadButton';
 import { getErrorDetails } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
 
-function AppErrorFallback() {
+export function AppErrorFallback() {
   const error = getErrorDetails('UNKNOWN');
 
   return (
