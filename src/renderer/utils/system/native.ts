@@ -38,9 +38,9 @@ export function buildNativeNotificationPayload(
  * @param notifications - The new notifications to publish.
  * @returns The published payloads, so the host can track them for removal.
  */
-export async function raiseNativeNotification(
+export function raiseNativeNotification(
   notifications: GitifyNotification[],
-): Promise<INativeNotificationPayload[]> {
+): INativeNotificationPayload[] {
   if (notifications.length === 0) {
     return [];
   }

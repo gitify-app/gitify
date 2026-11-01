@@ -16,7 +16,9 @@ export const NATIVE_NOTIFICATION_SUMMARY_ID = 'summary';
  * @returns A stable identity of at most 12 characters.
  */
 export function getNativeNotificationId(accountUUID: string, notificationId: string): string {
-  return `n${hash(`${accountUUID}\u0000${notificationId}`)}`;
+  const key = `${accountUUID}\u0000${notificationId}`;
+
+  return `n${hash(key)}`;
 }
 
 /**
@@ -31,7 +33,7 @@ function hash(value: string): string {
   let h2 = 0x41c6ce57;
 
   for (let i = 0; i < value.length; i++) {
-    const code = value.charCodeAt(i);
+    const code = value.codePointAt(i) ?? 0;
     h1 = Math.imul(h1 ^ code, 2654435761);
     h2 = Math.imul(h2 ^ code, 1597334677);
   }

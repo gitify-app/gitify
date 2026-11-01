@@ -38,8 +38,8 @@ describe('renderer/utils/system/native.ts', () => {
   });
 
   describe('raiseNativeNotification', () => {
-    it('publishes one individual notification for one item', async () => {
-      const published = await raiseNativeNotification([notification]);
+    it('publishes one individual notification for one item', () => {
+      const published = raiseNativeNotification([notification]);
 
       expect(published).toHaveLength(1);
       expect(window.gitify.nativeNotifications.show).toHaveBeenCalledWith(
@@ -50,11 +50,11 @@ describe('renderer/utils/system/native.ts', () => {
       );
     });
 
-    it('publishes one count-only summary for multiple items', async () => {
+    it('publishes one count-only summary for multiple items', () => {
       const notifications = mockSingleAccountNotifications[0].notifications.slice(0, 1);
       const second = { ...notification, id: 'second', order: 1 };
 
-      const published = await raiseNativeNotification([...notifications, second]);
+      const published = raiseNativeNotification([...notifications, second]);
 
       expect(published).toHaveLength(1);
       expect(window.gitify.nativeNotifications.show).toHaveBeenCalledWith(
@@ -67,8 +67,8 @@ describe('renderer/utils/system/native.ts', () => {
       expect(published[0]).not.toHaveProperty('actionLabel');
     });
 
-    it('does nothing for an empty batch', async () => {
-      await expect(raiseNativeNotification([])).resolves.toEqual([]);
+    it('does nothing for an empty batch', () => {
+      expect(raiseNativeNotification([])).toEqual([]);
       expect(window.gitify.nativeNotifications.show).not.toHaveBeenCalled();
     });
   });
