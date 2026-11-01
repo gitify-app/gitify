@@ -43,6 +43,12 @@ export class NativeNotificationService {
       return;
     }
 
+    // Receiving a show means the renderer is loaded and its interaction
+    // listeners are mounted: the publish effect runs after the listener
+    // registration effect. Treat that as readiness so a missed one-shot ready
+    // message cannot leave every click and action queued forever.
+    this.markRendererReady();
+
     this.closeOne(payload.id);
 
     const subtitle = this.platform === 'darwin' ? payload.subtitle : undefined;

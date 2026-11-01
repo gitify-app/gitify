@@ -178,15 +178,16 @@ describe('main/notifications.ts', () => {
     expect(sendRendererEventMock).not.toHaveBeenCalled();
   });
 
-  it('queues interactions until the renderer is ready', () => {
+  it('treats a show from the renderer as proof its listeners are ready', () => {
     const { mb } = makeMenubar();
     const service = new NativeNotificationService(mb, 'linux');
+
+    // The renderer sent `show`, so its interaction listeners are mounted even
+    // if the separate ready message never arrived.
     service.show(basePayload);
 
     NotificationMock.instances[0].emit('click');
-    expect(sendRendererEventMock).not.toHaveBeenCalled();
 
-    service.markRendererReady();
     expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.NATIVE_NOTIFICATION_CLICK, {
       id: basePayload.id,
     });

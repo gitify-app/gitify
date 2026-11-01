@@ -55,6 +55,13 @@ const contextMenu = menuBuilder.buildMenu();
 
 const appUpdater = new AppUpdater(mb, menuBuilder);
 
+// Register before the renderer can load. The notification service relies on a
+// one-shot readiness message from the renderer; registering the handlers inside
+// `whenReady` (after `onFirstRunMaybe`) leaves a window where that message is
+// sent before any listener exists, which leaves every later click and action
+// queued forever.
+registerNativeNotificationHandlers(mb);
+
 app
   .whenReady()
   .then(async () => {
@@ -68,7 +75,6 @@ app
     // Register IPC handlers for various channels
     registerTrayHandlers(mb);
     registerSystemHandlers(mb);
-    registerNativeNotificationHandlers(mb);
     registerStorageHandlers();
     registerGitHubCliHandlers();
     registerAppHandlers(mb);
