@@ -29,15 +29,16 @@ describe('renderer/components/Sidebar.tsx', () => {
     });
 
     for (const name of [
-      new RegExp(`^${APPLICATION.NAME}`),
       /^Notifications/,
       /^Toggle focused mode/,
-      /^Filters/,
       /^My issues/,
       /^My pull requests/,
       /^Refresh/,
-      /^Settings/,
     ]) {
+      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    }
+
+    for (const name of [new RegExp(`^${APPLICATION.NAME}`), /^Filters/, /^Settings/]) {
       expect(screen.getByRole('button', { name })).toBeInTheDocument();
     }
 

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { type Location, useLocation, useNavigate } from 'react-router';
 
 import { Heading, Stack } from '@primer/react';
 
@@ -23,6 +23,7 @@ const PANEL_TRANSITION_MS = 280;
 export function LoginRoute() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const adapters = listAdapters();
 
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
@@ -111,9 +112,15 @@ export function LoginRoute() {
   useEffect(() => {
     if (isLoggedIn) {
       showWindow();
-      void navigate('/', { replace: true });
+
+      const from = (location.state as { from?: Location } | null)?.from;
+      const destination = from
+        ? { hash: from.hash, pathname: from.pathname, search: from.search }
+        : '/';
+
+      void navigate(destination, { replace: true });
     }
-    // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
+    // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable; read the entry location once at the login transition
   }, [isLoggedIn]);
 
   return (

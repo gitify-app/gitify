@@ -16,8 +16,8 @@ import useSettingsStore from '../stores/useSettingsStore';
  * Shared navigate mock — import from test-utils in any test that needs to assert on navigation
  */
 export const navigateMock = vi.fn();
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
+vi.mock('react-router', async () => ({
+  ...(await vi.importActual('react-router')),
   useNavigate: () => navigateMock,
 }));
 
