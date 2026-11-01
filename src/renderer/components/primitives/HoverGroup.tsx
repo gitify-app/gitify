@@ -24,9 +24,10 @@ interface HoverGroupProps {
  *
  * Spans the full height of its host (`inset-y-0`) and carries its own backdrop
  * (the `bgColor` fill plus the Glass treatment in `App.css`). In the
- * notification row it is hosted by the footer band, so it never overlaps the
- * title line or the issue number, and the footer reserves its width so the
- * pills wrap clear of the buttons.
+ * notification row it spans the full row height, and the footer reserves its
+ * width so pills wrap clear of the buttons. That reserved right-hand lane also
+ * gives the pointer a pill-free path when sweeping down between rows to hit the
+ * action buttons.
  */
 export function HoverGroup({ bgColor, children, fullHeight = false }: Readonly<HoverGroupProps>) {
   return (
