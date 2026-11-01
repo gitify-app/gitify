@@ -24,6 +24,20 @@ describe('renderer/components/metrics/LabelsPill.tsx', () => {
     expect(tree.container).toMatchSnapshot();
   });
 
+  it('reports the total label count when the fetched list is capped', () => {
+    const props: LabelsPillProps = {
+      labels: Array.from({ length: 25 }, (_, index) => ({
+        name: `label-${index}`,
+        color: 'a2eeef',
+      })),
+      labelCount: 30,
+    };
+
+    const tree = renderWithProviders(<LabelsPill {...props} />);
+
+    expect(tree.getByRole('button', { name: /30 labels/ })).toBeInTheDocument();
+  });
+
   it('renders field tokens when there are no labels', () => {
     const props: LabelsPillProps = {
       labels: [],

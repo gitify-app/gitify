@@ -413,6 +413,8 @@ export interface GitifySubject {
   commentCount?: number;
   /** Labels names and colors */
   labels?: GitifyLabels[];
+  /** Total label count, including labels beyond the fetched list */
+  labelCount?: number;
   /** Whether the PR is part of a GitHub native stacked PR series */
   isStacked?: boolean;
   /** This PR's 1-indexed position in the stack, when part of a stacked PR series */
