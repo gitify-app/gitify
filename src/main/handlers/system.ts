@@ -3,6 +3,7 @@ import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
 import { logInfo } from '../../shared/logger';
+import { isMacOS, isWindows } from '../../shared/platform';
 
 import { handleMainEvent, onMainEvent, sendRendererEvent } from '../events';
 import { applyKeepWindowOnBlur, applyWindowVibrancy } from '../lifecycle/window';
@@ -84,6 +85,30 @@ export function registerSystemHandlers(mb: Menubar): void {
       return;
     }
     app.setLoginItemSettings(settings);
+  });
+
+  /**
+   * Report the operating system's actual login-item state.
+   *
+   * Skipped in development and on platforms without a supported login item so
+   * the settings screen does not show a false warning. The stored preference
+   * remains the source of truth for the user's intent.
+   */
+  handleMainEvent(EVENTS.GET_LOGIN_ITEM_SETTINGS, () => {
+    if (isDevMode() || !(isMacOS() || isWindows())) {
+      return { openAtLogin: false };
+    }
+
+    const settings = app.getLoginItemSettings();
+
+    if (isMacOS()) {
+      return { openAtLogin: settings.openAtLogin, status: settings.status };
+    }
+
+    return {
+      openAtLogin: settings.openAtLogin,
+      executableWillLaunchAtLogin: settings.executableWillLaunchAtLogin,
+    };
   });
 
   /**

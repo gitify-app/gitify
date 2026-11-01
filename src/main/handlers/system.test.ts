@@ -1,7 +1,8 @@
-import { nativeTheme } from 'electron';
+import { app, nativeTheme } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
+import { isMacOS, isWindows } from '../../shared/platform';
 
 import { applyKeepWindowOnBlur } from '../lifecycle/window';
 import { setX11Backend } from '../ozone';
@@ -19,6 +20,12 @@ vi.mock('../../shared/logger', () => ({
   logInfo: vi.fn(),
 }));
 
+vi.mock('../../shared/platform', () => ({
+  isLinux: vi.fn(() => false),
+  isMacOS: vi.fn(() => true),
+  isWindows: vi.fn(() => false),
+}));
+
 const onMock = vi.fn();
 const handleMock = vi.fn();
 
@@ -28,8 +35,10 @@ vi.mock('electron', () => ({
     handle: (...args: unknown[]) => handleMock(...args),
   } satisfies Pick<Electron.IpcMain, 'on' | 'handle'>,
   app: {
+    isPackaged: true,
     setLoginItemSettings: vi.fn(),
-  } satisfies Pick<Electron.App, 'setLoginItemSettings'>,
+    getLoginItemSettings: vi.fn(),
+  } satisfies Pick<Electron.App, 'isPackaged' | 'setLoginItemSettings' | 'getLoginItemSettings'>,
   shell: {
     openExternal: vi.fn(),
   } satisfies Pick<Electron.Shell, 'openExternal'>,
@@ -48,6 +57,8 @@ describe('main/handlers/system.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     setGlobalShortcutMock = vi.fn().mockReturnValue(true);
+    vi.mocked(isMacOS).mockReturnValue(true);
+    vi.mocked(isWindows).mockReturnValue(false);
 
     menubar = {
       showWindow: vi.fn(),
@@ -136,6 +147,66 @@ describe('main/handlers/system.ts', () => {
         (menubar.window as unknown as { webContents: { send: ReturnType<typeof vi.fn> } })
           .webContents.send,
       ).toHaveBeenCalledWith(EVENTS.SYSTEM_WAKE);
+    });
+  });
+
+  describe('GET_LOGIN_ITEM_SETTINGS', () => {
+    function getLoginItemHandler() {
+      registerSystemHandlers(menubar);
+      return handleMock.mock.calls.find(
+        (call: unknown[]) => call[0] === EVENTS.GET_LOGIN_ITEM_SETTINGS,
+      )?.[1] as () => {
+        openAtLogin: boolean;
+        status?: string;
+        executableWillLaunchAtLogin?: boolean;
+      };
+    }
+
+    it.each(['not-registered', 'enabled', 'requires-approval', 'not-found'] as const)(
+      'reports the macOS status %s',
+      (status) => {
+        vi.mocked(app.getLoginItemSettings).mockReturnValue({
+          openAtLogin: true,
+          status,
+        } as Electron.LoginItemSettings);
+
+        expect(getLoginItemHandler()()).toEqual({ openAtLogin: true, status });
+      },
+    );
+
+    it('reports the Windows launch state', () => {
+      vi.mocked(isMacOS).mockReturnValue(false);
+      vi.mocked(isWindows).mockReturnValue(true);
+      vi.mocked(app.getLoginItemSettings).mockReturnValue({
+        openAtLogin: true,
+        executableWillLaunchAtLogin: false,
+      } as Electron.LoginItemSettings);
+
+      expect(getLoginItemHandler()()).toEqual({
+        openAtLogin: true,
+        executableWillLaunchAtLogin: false,
+      });
+    });
+
+    it('skips the read in development', () => {
+      const mutableApp = app as unknown as { isPackaged: boolean };
+      const original = mutableApp.isPackaged;
+      mutableApp.isPackaged = false;
+
+      try {
+        expect(getLoginItemHandler()()).toEqual({ openAtLogin: false });
+        expect(app.getLoginItemSettings).not.toHaveBeenCalled();
+      } finally {
+        mutableApp.isPackaged = original;
+      }
+    });
+
+    it('skips the read on platforms without a login item', () => {
+      vi.mocked(isMacOS).mockReturnValue(false);
+      vi.mocked(isWindows).mockReturnValue(false);
+
+      expect(getLoginItemHandler()()).toEqual({ openAtLogin: false });
+      expect(app.getLoginItemSettings).not.toHaveBeenCalled();
     });
   });
 

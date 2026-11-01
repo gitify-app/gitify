@@ -107,6 +107,15 @@ A single notification uses the repository as its title, `Reason · @actor` as co
 
 Verify the notification content, body click, Mark as read, removal-on-read, and summary click on the platforms you change.
 
+### 🚪 Login-item checks
+
+Launch at startup is applied through Electron's login-item API and the control is hidden on Linux. The System settings screen reads the operating system's login-item state on mount and when the window regains focus, and explains a mismatch with the stored preference:
+
+- **macOS**: `requires-approval`, `not-found`, or `not-registered` while Launch at startup is on.
+- **Windows**: the startup entry is disabled.
+
+The status read is skipped in development and on Linux, so a dev build does not show a false warning. Unsigned macOS development binaries cannot register as login items; verify the status on a signed macOS build and on Windows.
+
 ### 📦 Dependencies and packaging
 
 The packaged app ships only the packages that are loaded from disk at runtime.

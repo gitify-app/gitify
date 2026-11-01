@@ -72,6 +72,13 @@ export const api = {
     }),
 
   /**
+   * Read the operating system's actual login-item state.
+   *
+   * @returns The stored preference plus the platform-specific registration status.
+   */
+  getLoginItemSettings: () => invokeMainEvent(EVENTS.GET_LOGIN_ITEM_SETTINGS),
+
+  /**
    * Enable or disable keeping the window open when it loses focus.
    *
    * Implemented by setting the menubar `hideOnBlur` option to the inverse of
