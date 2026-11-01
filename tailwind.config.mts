@@ -5,8 +5,6 @@ import plugin from 'tailwindcss/plugin';
 const sidebarWidth = '2.5rem'; // 40px
 
 const config: Config = {
-  content: ['./src/**/*.ts', './src/**/*.tsx'],
-  darkMode: ['class', '[data-color-mode="dark"]'], // GitHub Primer Theme Provider color mode custom selector
   theme: {
     extend: {
       fontSize: {
@@ -58,12 +56,7 @@ const config: Config = {
           footer: 'var(--gitify-footer)',
 
           caution: colors.orange[600],
-          error: 'var(--fgColor-danger)',
           link: 'var(--gitify-link)',
-          input: {
-            rest: 'var(--control-bgColor-rest)',
-            focus: 'var(--control-bgColor-active)',
-          },
 
           icon: {
             attention: 'var(--gitify-icon-attention)',
