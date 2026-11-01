@@ -184,7 +184,7 @@ overrides:
   react-is: 19.3.1
   cross-spawn: 7.0.6
   got: 11.8.6
-  electron: 45.0.0
+  electron: 45.1.0
   vite@*: npm:@voidzero-dev/vite-plus-core@1.4.0
   vitest@*: 5.0.5
 
@@ -197,7 +197,7 @@ importers:
         version: 5.4.4
       electron-menubar:
         specifier: 11.1.2
-        version: 11.1.2(electron@45.0.0(supports-color@10.2.2))
+        version: 11.1.2(electron@45.1.0(supports-color@10.2.2))
       electron-updater:
         specifier: 6.8.11
         version: 6.8.11(supports-color@10.2.2)
@@ -317,8 +317,8 @@ importers:
         specifier: 18.0.9
         version: 18.0.9
       electron:
-        specifier: 45.0.0
-        version: 45.0.0(supports-color@10.2.2)
+        specifier: 45.1.0
+        version: 45.1.0(supports-color@10.2.2)
       electron-builder:
         specifier: 26.18.0
         version: 26.18.0(electron-builder-squirrel-windows@26.18.0)(supports-color@10.2.2)
@@ -2792,7 +2792,7 @@ packages:
   electron-menubar@11.1.2:
     resolution: {integrity: sha512-B64bxEneGzVZrKSgiX2H4njwtAx3+EZ77oWJJXPMAN6pMBDSt9nXmv25xKiX9Ya47/jE4hP3iGx5fe6yIBjD5g==}
     peerDependencies:
-      electron: 45.0.0
+      electron: 45.1.0
 
   electron-publish@26.18.0:
     resolution: {integrity: sha512-MagnqaZSALSWjcdKu5HEVhYUZD/2BDL3q7XzrqWwub6gf/UfD3ItMgmthVDv9w5y9E0gH1C3JWqKaXwf6f4ROg==}
@@ -2807,8 +2807,8 @@ packages:
     resolution: {integrity: sha512-bO3y10YikuUwUuDUQRM4KfwNkKhnpVO7IPdbsrejwN9/AABJzzTQ4GeHwyzNSrVO+tEH3/Np255a3sVZpZDjvg==}
     engines: {node: '>=8.0.0'}
 
-  electron@45.0.0:
-    resolution: {integrity: sha512-yjz4uhMBcO6L5X7CWgRMobf2EMJPnb9j4zuf+nu/TU/6E4Sqfx7fn/a2eACo4qngjml/0JnsoZhxYroJLxLd2w==}
+  electron@45.1.0:
+    resolution: {integrity: sha512-i7qKVAh/KR5v1pf56NhGGX2QYHcdjvLgS7koL6ui50c+zUDGLRunR95nXcTpHPURKOQ4GDBG8BmXiDgOQ8DD0A==}
     engines: {node: '>= 22.12.0'}
     hasBin: true
 
@@ -7183,9 +7183,9 @@ snapshots:
 
   electron-log@5.4.4: {}
 
-  electron-menubar@11.1.2(electron@45.0.0(supports-color@10.2.2)):
+  electron-menubar@11.1.2(electron@45.1.0(supports-color@10.2.2)):
     dependencies:
-      electron: 45.0.0(supports-color@10.2.2)
+      electron: 45.1.0(supports-color@10.2.2)
 
   electron-publish@26.18.0(supports-color@10.2.2):
     dependencies:
@@ -7228,7 +7228,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@45.0.0(supports-color@10.2.2):
+  electron@45.1.0(supports-color@10.2.2):
     dependencies:
       '@electron-internal/extract-zip': 1.0.6
       '@electron/get': 5.1.0(supports-color@10.2.2)
@@ -8501,7 +8501,7 @@ snapshots:
   react-devtools@8.0.0(supports-color@10.2.2):
     dependencies:
       cross-spawn: 7.0.6
-      electron: 45.0.0(supports-color@10.2.2)
+      electron: 45.1.0(supports-color@10.2.2)
       internal-ip: 6.2.0
       minimist: 1.2.8
       react-devtools-core: 8.0.0
