@@ -29,6 +29,9 @@ vi.mock('electron-log', () => ({
     debug: vi.fn(),
     verbose: vi.fn(),
     silly: vi.fn(),
+    errorHandler: {
+      startCatching: vi.fn(),
+    },
     transports: { file: {} },
   },
 }));
