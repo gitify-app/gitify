@@ -56,7 +56,7 @@
     "build": "vp build",
     "codegen": "graphql-codegen --config codegen.ts",
     "codegen:watch": "pnpm codegen --watch",
-    "dev": "concurrently --names \"vite,codegen\" --prefix-colors \"blue,magenta\" \"vp dev\" \"pnpm codegen:watch\"",
+    "dev": "node scripts/dev.mjs",
     "devtools": "concurrently --names \"dev,devtools\" --prefix-colors \"cyan,green\" \"pnpm dev\" \"react-devtools\"",
     "start": "pnpm build && pnpm dev",
     "package:linux": "electron-builder --linux",
