@@ -95,7 +95,12 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
 
   if (subject.labels?.length || subject.issueFields?.length) {
     pills.push(
-      <LabelsPill issueFields={subject.issueFields} key="labels" labels={subject.labels ?? []} />,
+      <LabelsPill
+        issueFields={subject.issueFields}
+        key="labels"
+        labelCount={subject.labelCount}
+        labels={subject.labels ?? []}
+      />,
     );
   }
 
