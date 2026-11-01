@@ -178,7 +178,7 @@ export function LoginRoute() {
                       'px-2.5 py-1.5 text-sm font-medium',
                       'transition-[color] duration-[280ms] ease-login-out',
                       'max-[30rem]:px-2 max-[30rem]:text-xs',
-                      'outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
+                      'outline-hidden focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
                       isActive
                         ? 'text-[var(--fgColor-default)]'
                         : 'text-[var(--fgColor-muted)] hover:text-[var(--fgColor-default)]',
