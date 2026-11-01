@@ -57,4 +57,27 @@ describe('renderer/components/Oops.tsx', () => {
 
     expect(navigateMock).toHaveBeenCalledWith('/somewhere');
   });
+
+  it('renders extra actions alongside the error actions', () => {
+    const mockError = {
+      title: 'Error title',
+      descriptions: ['Error description'],
+      emojis: ['🔥'],
+      actions: [
+        {
+          label: 'Go somewhere',
+          route: '/somewhere',
+          variant: 'danger' as const,
+          icon: PersonIcon,
+        },
+      ],
+    };
+
+    renderWithProviders(
+      <Oops error={mockError} extraActions={<button type="button">Reload</button>} />,
+    );
+
+    expect(screen.getByText('Go somewhere')).toBeInTheDocument();
+    expect(screen.getByText('Reload')).toBeInTheDocument();
+  });
 });

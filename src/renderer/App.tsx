@@ -13,6 +13,7 @@ import { GlobalEffects } from './components/GlobalEffects';
 import { router } from './router';
 import './App.css';
 import { queryClient } from './utils/api/queryClient';
+import { rendererLogError, toError } from './utils/core/logger';
 
 export function App() {
   // Initialize store subscriptions with proper cleanup
@@ -26,7 +27,10 @@ export function App() {
       <ThemeProvider>
         <BaseStyles>
           <GlobalEffects />
-          <RouterProvider router={router} />
+          <RouterProvider
+            onError={(error) => rendererLogError('router', 'Router error', toError(error))}
+            router={router}
+          />
         </BaseStyles>
       </ThemeProvider>
     </QueryClientProvider>

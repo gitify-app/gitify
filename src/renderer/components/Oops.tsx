@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { type ReactNode, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 
-import { Button } from '@primer/react';
+import { Button, Stack } from '@primer/react';
 
 import { EmojiSplash } from './layout/EmojiSplash';
 
@@ -13,16 +13,18 @@ import { randomElement } from '../utils/core/random';
 interface OopsProps {
   error: GitifyError;
   fullHeight?: boolean;
+  /** Actions rendered after the error's own route actions. */
+  extraActions?: ReactNode;
 }
 
-export function Oops({ error, fullHeight = true }: Readonly<OopsProps>) {
+export function Oops({ error, fullHeight = true, extraActions }: Readonly<OopsProps>) {
   const navigate = useNavigate();
 
   const err = error ?? getErrorDetails('UNKNOWN');
 
   const emoji = useMemo(() => randomElement(err.emojis), [err]);
 
-  const actions = err.actions?.length
+  const errorActions = err.actions?.length
     ? err.actions.map((action) => (
         <Button
           key={action.route}
@@ -34,6 +36,15 @@ export function Oops({ error, fullHeight = true }: Readonly<OopsProps>) {
         </Button>
       ))
     : null;
+
+  const actions = extraActions ? (
+    <Stack direction="horizontal" gap="condensed">
+      {errorActions}
+      {extraActions}
+    </Stack>
+  ) : (
+    errorActions
+  );
 
   return (
     <EmojiSplash

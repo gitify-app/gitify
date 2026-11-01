@@ -16,6 +16,8 @@ import { ProtectedLayout } from './routes/ProtectedLayout';
 import { RootLayout } from './routes/RootLayout';
 import { SettingsRoute } from './routes/Settings';
 
+import { RouteError } from './components/RouteError';
+
 /**
  * The renderer's route table. Exported separately from the router instance so
  * tests can build a memory router from the same routes.
@@ -23,6 +25,7 @@ import { SettingsRoute } from './routes/Settings';
 export const routes: RouteObject[] = [
   {
     element: <RootLayout />,
+    errorElement: <RouteError />,
     children: [
       { element: <LoginRoute />, path: 'login' },
       {
@@ -52,6 +55,7 @@ export const routes: RouteObject[] = [
       },
       {
         element: <ProtectedLayout />,
+        errorElement: <RouteError />,
         children: [
           { element: <NotificationsRoute />, index: true },
           { element: <FiltersRoute />, path: 'filters' },
