@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 import { IconButton, Stack } from '@primer/react';
 
 import { useNotificationActions } from '../../hooks/notifications/useNotificationActions';
+import { useAppNavigate } from '../../hooks/useAppNavigate';
 
 import { SectionHeading } from './SectionHeading';
 
@@ -16,7 +16,7 @@ interface HeaderProps {
 
 export function Header(props: Readonly<HeaderProps>) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
 
   const { refetchNotifications: fetchNotifications } = useNotificationActions();
 
@@ -27,7 +27,7 @@ export function Header(props: Readonly<HeaderProps>) {
           aria-label={t('header.go_back', 'Go back')}
           icon={ArrowLeftIcon}
           onClick={() => {
-            void navigate(-1);
+            navigate(-1);
             if (props.fetchOnBack) {
               void fetchNotifications();
             }

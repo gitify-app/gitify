@@ -228,6 +228,7 @@ exports[`renderer/components/layout/AppLayout.tsx > renders itself & its childre
     </div>
     <div
       class="flex-1 pl-sidebar"
+      data-testid="route-content"
     >
       Test
     </div>

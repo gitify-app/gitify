@@ -1,6 +1,6 @@
 import { type ReactNode, useCallback, useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import {
   CheckCircleFillIcon,
@@ -14,6 +14,7 @@ import { Banner, Button, Heading, IconButton, Stack, Text } from '@primer/react'
 
 import { Constants } from '../../constants';
 
+import { useAppNavigate } from '../../hooks/useAppNavigate';
 import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../../components/layout/Contents';
@@ -51,7 +52,7 @@ export function GitHubDeviceFlowAuthorize({
   title,
 }: Readonly<GitHubDeviceFlowAuthorizeProps>) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
@@ -132,7 +133,7 @@ export function GitHubDeviceFlowAuthorize({
 
         if (token && isActive) {
           await loginWithDeviceFlowComplete(forge, token, session.hostname, clientId);
-          void navigate('/');
+          navigate('/');
           return;
         }
 

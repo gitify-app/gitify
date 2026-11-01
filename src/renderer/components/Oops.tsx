@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@primer/react';
+
+import { useAppNavigate } from '../hooks/useAppNavigate';
 
 import { EmojiSplash } from './layout/EmojiSplash';
 
@@ -16,7 +17,7 @@ interface OopsProps {
 }
 
 export function Oops({ error, fullHeight = true }: Readonly<OopsProps>) {
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
 
   const err = error ?? getErrorDetails('UNKNOWN');
 

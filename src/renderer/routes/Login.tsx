@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import { Heading, Stack } from '@primer/react';
 
 import { cn } from 'cn';
 
+import { useAppNavigate } from '../hooks/useAppNavigate';
 import { useAccountsStore } from '../stores';
 
 import { LoginPrimaryAction, LoginSecondaryMethods } from '../components/login/LoginMethods';
@@ -22,7 +22,7 @@ const PANEL_TRANSITION_MS = 280;
 
 export function LoginRoute() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
   const adapters = listAdapters();
 
   const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
@@ -111,7 +111,7 @@ export function LoginRoute() {
   useEffect(() => {
     if (isLoggedIn) {
       showWindow();
-      void navigate('/', { replace: true });
+      navigate('/', { replace: true });
     }
     // oxlint-disable-next-line react/exhaustive-deps -- navigate is stable
   }, [isLoggedIn]);

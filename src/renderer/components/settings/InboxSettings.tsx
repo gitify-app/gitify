@@ -1,6 +1,5 @@
 import type { MouseEvent } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import {
   CheckIcon,
@@ -29,6 +28,7 @@ import { APPLICATION } from '../../../shared/constants';
 
 import { Constants } from '../../constants';
 
+import { useAppNavigate } from '../../hooks/useAppNavigate';
 import { useAccountsStore, useSettingsStore } from '../../stores';
 
 import { SectionHeading } from '../primitives/SectionHeading';
@@ -47,7 +47,7 @@ import { SettingsGroupHeading } from './SettingsGroupHeading';
 
 export function InboxSettings() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
 
   // Account store values
   const accounts = useAccountsStore((s) => s.accounts);

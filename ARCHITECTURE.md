@@ -45,7 +45,7 @@ The renderer is layered. **Runtime imports flow in one direction only** — a mo
 - `stores/index.ts` is the public store facade for `hooks`, `components`, and `routes`. Lower layers (`utils`) import the specific store module instead (for example `stores/useFiltersStore`): the barrel re-exports every store and its dependencies, which would pull the account/auth/forge graph into leaf utilities and create cycles.
 - `utils` and `stores` are **peers** — they may reference each other. Neither may import `hooks`, `components`, or `routes`.
 - `components/` is grouped by feature (`notifications`, `filters`, `settings`, `login`, `avatars`, `layout`, `metrics`, `primitives`).
-- The composition root (`App.tsx`, `index.tsx`) is the only place allowed to wire every layer together.
+- The composition root (`App.tsx`, `index.tsx`) is the only place allowed to wire every layer together. `App.tsx` owns the router tree and route composition: `AppRoutes` retains the notifications route in a hidden React `Activity` while authenticated, keeps every other screen on `<Routes>`, and preserves the logged-out redirect on `/`. `AppLayout` wraps only the routed content in the route `ViewTransition`; the sidebar and window chrome stay outside it. `GlobalEffects` remains outside the router and the retained route so it is still the single side-effect host.
 
 ## State ownership
 

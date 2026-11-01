@@ -1,10 +1,11 @@
 import { type ReactNode, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { BookIcon, EyeClosedIcon, EyeIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { Banner, Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';
 
+import { useAppNavigate } from '../../hooks/useAppNavigate';
 import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../layout/Contents';
@@ -79,7 +80,7 @@ export function LoginWithPersonalAccessTokenForm({
   children,
 }: Readonly<LoginWithPersonalAccessTokenFormProps>) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
@@ -127,7 +128,7 @@ export function LoginWithPersonalAccessTokenForm({
           ...(data.username ? { username: data.username } : {}),
           forge,
         });
-        void navigate('/');
+        navigate('/');
       } catch (err) {
         rendererLogError('loginWithPersonalAccessToken', 'Failed to login with PAT', toError(err));
         setErrors({

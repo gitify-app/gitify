@@ -33,6 +33,19 @@ describe('renderer/components/GlobalEffects.tsx', () => {
     expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(-1, true);
   });
 
+  it('refreshes the tray when a tray setting changes', async () => {
+    await act(async () => {
+      renderWithProviders(<GlobalEffects />, { status: 'success', notificationCount: 3 });
+    });
+    setTrayIconColorAndTitleSpy.mockClear();
+
+    act(() => {
+      useSettingsStore.getState().updateSetting('showNotificationsCountInTray', false);
+    });
+
+    expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(3, true);
+  });
+
   it('resets all stores when the app is reset', async () => {
     await act(async () => {
       renderWithProviders(<GlobalEffects />, {

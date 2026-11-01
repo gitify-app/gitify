@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { useAccountsStore, useSettingsStore } from '../stores';
 
 import { quitApp } from '../utils/system/comms';
 import { openHostIssues, openHostNotifications, openHostPulls } from '../utils/system/links';
+import { useAppNavigate } from './useAppNavigate';
 import { useNotifications } from './useNotifications';
 
 type ShortcutName =
@@ -35,7 +36,7 @@ type ShortcutConfigs = Record<ShortcutName, ShortcutConfig>;
  * Used by both the global shortcuts component and UI buttons to avoid duplication.
  */
 export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
   const location = useLocation();
 
   const { refetchNotifications: fetchNotifications, status } = useNotifications();
@@ -72,9 +73,9 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
         isAllowed: isLoggedIn,
         action: () => {
           if (isOnFiltersRoute) {
-            void navigate('/', { replace: true });
+            navigate('/', { replace: true });
           } else {
-            void navigate('/filters');
+            navigate('/filters');
           }
         },
       },
@@ -95,7 +96,7 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
           if (isLoading) {
             return;
           }
-          void navigate('/', { replace: true });
+          navigate('/', { replace: true });
           void fetchNotifications();
         },
       },
@@ -104,10 +105,10 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
         isAllowed: isLoggedIn,
         action: () => {
           if (isOnSettingsRoute) {
-            void navigate('/', { replace: true });
+            navigate('/', { replace: true });
             void fetchNotifications();
           } else {
-            void navigate('/settings');
+            navigate('/settings');
           }
         },
       },

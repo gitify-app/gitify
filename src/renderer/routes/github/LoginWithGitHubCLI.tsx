@@ -1,12 +1,13 @@
 import { useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { SignInIcon, TerminalIcon } from '@primer/octicons-react';
 import { Banner, Button, FormControl, Stack, Text, TextInput } from '@primer/react';
 
 import { Constants } from '../../constants';
 
+import { useAppNavigate } from '../../hooks/useAppNavigate';
 import { useLogins } from '../../hooks/useLogins';
 
 import { Contents } from '../../components/layout/Contents';
@@ -27,7 +28,7 @@ interface LocationState {
 
 export function GitHubLoginWithCLIRoute() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
   const location = useLocation();
   const { account: reAuthAccount } = (location.state ?? {}) as LocationState;
 
@@ -50,7 +51,7 @@ export function GitHubLoginWithCLIRoute() {
 
     try {
       await loginWithCli('github', hostname);
-      void navigate('/');
+      navigate('/');
     } catch (err) {
       rendererLogError('loginWithCli', 'Failed to login with GitHub CLI', toError(err));
       setError(

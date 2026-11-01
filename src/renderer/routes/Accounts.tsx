@@ -1,6 +1,5 @@
 import { type FC, useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import {
   AlertFillIcon,
@@ -20,6 +19,7 @@ import { ActionList, ActionMenu, Button, IconButton, Stack, Text } from '@primer
 
 import { cn } from 'cn';
 
+import { useAppNavigate } from '../hooks/useAppNavigate';
 import { useLogins } from '../hooks/useLogins';
 import { useNotifications } from '../hooks/useNotifications';
 import { useAccountsStore } from '../stores';
@@ -67,7 +67,7 @@ function getScopeIcon(account: Account): FC<OcticonProps> {
 
 export function AccountsRoute() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const navigate = useAppNavigate();
 
   const { logoutFromAccount } = useLogins();
   const { notifications } = useNotifications();
@@ -94,7 +94,7 @@ export function AccountsRoute() {
     useAccountsStore.setState({
       accounts: [account, ...accounts.filter((a) => a !== account)],
     });
-    void navigate('/accounts', { replace: true });
+    navigate('/accounts', { replace: true });
   };
 
   const handleRefresh = async (account: Account) => {
@@ -116,7 +116,7 @@ export function AccountsRoute() {
       }));
     }
 
-    void navigate('/accounts', { replace: true });
+    navigate('/accounts', { replace: true });
 
     /**
      * Typically the above refresh API call completes very quickly,
@@ -153,7 +153,7 @@ export function AccountsRoute() {
       return;
     }
 
-    void navigate(loginMethod.route, {
+    navigate(loginMethod.route, {
       replace: true,
       state: { account },
     });
@@ -398,7 +398,7 @@ export function AccountsRoute() {
                           keepMenuOpenRef.current = true;
                           setSelectedForge(adapter);
                         } else {
-                          void navigate(adapter.loginMethods[0].route, { replace: true });
+                          navigate(adapter.loginMethods[0].route, { replace: true });
                         }
                       }}
                     >

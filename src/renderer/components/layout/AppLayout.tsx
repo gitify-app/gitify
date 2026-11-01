@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, ViewTransition } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Sidebar } from '../Sidebar';
@@ -31,7 +31,11 @@ export function AppLayout({ children }: Readonly<AppLayoutProps>) {
 
       <Sidebar />
 
-      <div className="flex-1 pl-sidebar">{children}</div>
+      <ViewTransition name="route">
+        <div className="flex-1 pl-sidebar" data-testid="route-content">
+          {children}
+        </div>
+      </ViewTransition>
     </div>
   );
 }

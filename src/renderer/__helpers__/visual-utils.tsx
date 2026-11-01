@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 import type { ReactElement } from 'react';
-import { type InitialEntry, MemoryRouter } from 'react-router-dom';
+import { type InitialEntry, MemoryRouter } from 'react-router';
 
 import { BaseStyles } from '@primer/react';
 import { ThemeProvider } from '@primer/react/next';
