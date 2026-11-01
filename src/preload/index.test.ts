@@ -45,6 +45,7 @@ vi.mock('electron', () => ({
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
+  setAutoLaunch: (value: boolean) => void;
   setShowUpdateNotifications: (value: boolean) => void;
   setUseX11Backend: (value: boolean) => void;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
@@ -96,6 +97,16 @@ describe('preload/index', () => {
     api.setUseX11Backend(true);
 
     expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_USE_X11_BACKEND, true);
+  });
+
+  it('setAutoLaunch sends only the supported openAtLogin option', () => {
+    const api = getExposedApi();
+
+    api.setAutoLaunch(true);
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_AUTO_LAUNCH, {
+      openAtLogin: true,
+    });
   });
 
   it('openExternalLink sends event with payload', async () => {
