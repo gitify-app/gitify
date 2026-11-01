@@ -77,10 +77,8 @@ export async function settleNotificationActions(
  * original data (e.g. `unread` state, ordering). Notifications that
  * succeeded or were otherwise already absent from `current` are left as-is.
  *
- * Cache changes for these mutations are applied in `onSuccess` (not
- * optimistically), so in practice failed notifications are rarely absent
- * from `current` to begin with - this exists as a defensive guard for any
- * concurrent cache change that removed them in the meantime.
+ * Failed notifications still present in `current` are replaced with their
+ * snapshot version, so an optimistic update is fully rolled back.
  *
  * @param failedNotifications The notifications whose action failed and should be present.
  * @param snapshot The pre-mutation snapshot of `AccountNotifications[]` to restore from.
@@ -119,19 +117,31 @@ export function restoreFailedNotifications(
       return accountEntry;
     }
 
+    const snapshotById = new Map(
+      snapshotEntry.notifications.map((notification) => [notification.id, notification]),
+    );
     const currentIds = new Set(accountEntry.notifications.map((notification) => notification.id));
+    const hasPresentFailed = accountEntry.notifications.some((notification) =>
+      failedIds.has(notification.id),
+    );
+
+    const notifications = accountEntry.notifications.map((notification) =>
+      failedIds.has(notification.id)
+        ? (snapshotById.get(notification.id) ?? notification)
+        : notification,
+    );
 
     const missingNotifications = snapshotEntry.notifications.filter(
       (notification) => failedIds.has(notification.id) && !currentIds.has(notification.id),
     );
 
-    if (missingNotifications.length === 0) {
+    if (missingNotifications.length === 0 && !hasPresentFailed) {
       return accountEntry;
     }
 
     return {
       ...accountEntry,
-      notifications: [...accountEntry.notifications, ...missingNotifications],
+      notifications: [...notifications, ...missingNotifications],
     };
   });
 }

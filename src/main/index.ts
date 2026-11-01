@@ -8,6 +8,7 @@ import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
   registerGitHubCliHandlers,
+  registerNativeNotificationHandlers,
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
@@ -53,6 +54,13 @@ const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
 const appUpdater = new AppUpdater(mb, menuBuilder);
+
+// Register before the renderer can load. The notification service relies on a
+// one-shot readiness message from the renderer; registering the handlers inside
+// `whenReady` (after `onFirstRunMaybe`) leaves a window where that message is
+// sent before any listener exists, which leaves every later click and action
+// queued forever.
+registerNativeNotificationHandlers(mb);
 
 app
   .whenReady()

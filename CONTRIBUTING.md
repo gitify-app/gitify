@@ -37,7 +37,7 @@ pnpm dev
 
 Development builds keep their settings, cache, and logs in a separate user data directory, so you can run `pnpm dev` while an installed Gitify is running. Sign-in and settings are therefore separate from the installed app.
 
-On macOS, `pnpm dev` runs from a Gitify-branded copy of the Electron bundle in `node_modules/.cache/gitify-dev`. This keeps native notification activation inside the running development app instead of launching the generic `Electron.app`. The bundle is recreated when the Electron version changes and is signed with a Developer ID or Apple Development identity when available, falling back to ad-hoc signing. Set `GITIFY_DEV_SIGN_IDENTITY` to choose a specific identity.
+On macOS, `pnpm dev` runs from a Gitify-branded copy of the Electron bundle in `~/Library/Caches/gitify-dev`. This keeps native notification activation inside the running development app instead of launching the generic `Electron.app`. The copy lives outside the checkout because Launch Services ignores applications under the temporary directory, and macOS will not deliver notifications from an application the notification daemon cannot resolve. The bundle is recreated when the Electron version or signing identity changes, and it is registered with Launch Services on every launch. It is signed with a Developer ID or Apple Development identity when available, falling back to ad-hoc signing. Set `GITIFY_DEV_SIGN_IDENTITY` to choose a specific identity.
 
 ### 🛠️ Tests
 
@@ -94,6 +94,16 @@ guard fails the run outside Linux rather than letting that happen.
 
 Note that these baselines capture the `backdrop-filter` fallback for Glass, not
 the macOS native vibrancy material, which Chromium cannot render.
+
+### 🔔 Native notification checks
+
+Operating-system notifications are created in the main process. A single unread notification offers a **Mark as read** action; multiple new notifications publish one count-only summary with no action.
+
+- **macOS**: native notifications require a code-signed app. Electron ships ad-hoc linker-signed, which macOS rejects for `UNUserNotificationCenter`, so `pnpm dev` re-signs the development Electron bundle automatically. Ad-hoc signing needs no certificate; set `GITIFY_DEV_SIGN_IDENTITY` to use a Developer ID or Apple Development identity. The same step sets `NSUserNotificationAlertStyle: alert`; the packaged app declares it in its `Info.plist`.
+- **Windows**: live interactions use the notification instance events.
+- **Linux**: the action button appears only when the desktop notification server advertises the `actions` capability.
+
+Verify the notification content, body click, Mark as read, removal-on-read, and summary click on the platforms you change.
 
 ### 📦 Dependencies and packaging
 

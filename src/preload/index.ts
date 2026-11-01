@@ -2,6 +2,10 @@ import { contextBridge, webFrame } from 'electron';
 
 import type {
   IKeyboardShortcut,
+  INativeNotificationActionEvent,
+  INativeNotificationClickEvent,
+  INativeNotificationPayload,
+  INativeNotificationRemovePayload,
   NativeThemeSource,
   TrayIconAppearance,
   ZoomAction,
@@ -270,28 +274,50 @@ export const api = {
   },
 
   /**
-   * Display a native OS notification.
-   *
-   * Clicking the notification opens `url` in the browser (hiding the app window),
-   * or shows the app window if no URL is provided.
-   *
-   * @param title - The notification title.
-   * @param body - The notification body text.
-   * @param url - Optional URL to open when the notification is clicked.
-   * @returns The created `Notification` instance.
+   * Operating-system notification controls.
    */
-  raiseNativeNotification: (title: string, body: string, url?: string) => {
-    const notification = new Notification(title, { body: body, silent: true });
-    notification.onclick = () => {
-      if (url) {
-        api.app.hide();
-        api.openExternalLink(url, true);
-      } else {
-        api.app.show();
-      }
-    };
+  nativeNotifications: {
+    /**
+     * Publish one structured notification through the main process.
+     *
+     * @param payload - The notification to publish.
+     */
+    show: (payload: INativeNotificationPayload) =>
+      sendMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, payload),
 
-    return notification;
+    /**
+     * Remove published notifications by identity.
+     *
+     * @param payload - The identities to remove.
+     */
+    remove: (payload: INativeNotificationRemovePayload) =>
+      sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE, payload),
+
+    /** Remove every notification published by this app. */
+    removeAll: () => sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL),
+
+    /** Tell the main process the renderer action/click listeners are mounted. */
+    notifyReady: () => sendMainEvent(EVENTS.NATIVE_NOTIFICATION_READY),
+
+    /**
+     * Register a callback for an activated notification action.
+     *
+     * @param callback - Called with the activated action.
+     * @returns A function that removes the listener.
+     */
+    onAction: (callback: (payload: INativeNotificationActionEvent) => void) => {
+      return onRendererEvent(EVENTS.NATIVE_NOTIFICATION_ACTION, (_, payload) => callback(payload));
+    },
+
+    /**
+     * Register a callback for a notification body click.
+     *
+     * @param callback - Called with the clicked notification.
+     * @returns A function that removes the listener.
+     */
+    onClick: (callback: (payload: INativeNotificationClickEvent) => void) => {
+      return onRendererEvent(EVENTS.NATIVE_NOTIFICATION_CLICK, (_, payload) => callback(payload));
+    },
   },
 };
 

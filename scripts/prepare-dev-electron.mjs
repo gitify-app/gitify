@@ -4,20 +4,31 @@
  *
  * Development runs from Electron.app, whose generic bundle identity makes
  * macOS launch the unbranded default app when a native notification is
- * activated. Copying the runtime bundle to a cache directory with a Gitify dev
- * identifier keeps notification activation inside the running app.
+ * activated. Copying the runtime bundle to a Gitify-branded location keeps
+ * notification activation inside the running app.
+ *
+ * The copy lives in the user cache rather than the checkout: Launch Services
+ * ignores applications under the temporary directory, and the notification
+ * daemon resolves the sender through Launch Services. A cache outside the
+ * checkout also keeps one stable bundle across worktrees instead of a new
+ * identity for every path.
  *
  * Returns the directory to use with `ELECTRON_OVERRIDE_DIST_PATH`.
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, '..');
+// Bump when the prepared bundle changes (branding, signing, layout) so a cache
+// shared with other checkouts and branches is rebuilt instead of reused.
 const MARKER_VERSION = 1;
+const LSREGISTER =
+  '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister';
 
 export const DEV_BUNDLE_IDENTIFIER = 'com.electron.gitify.dev';
 export const DEV_BUNDLE_NAME = 'Gitify Dev';
@@ -37,7 +48,7 @@ export function prepareDevElectronBundle() {
   const electronPackage = path.dirname(require.resolve('electron/package.json'));
   const electronBinary = require('electron');
   const sourceApp = electronBinary?.replace(/\/Contents\/MacOS\/Electron$/, '');
-  const cacheRoot = path.join(repoRoot, 'node_modules', '.cache', 'gitify-dev');
+  const cacheRoot = path.join(os.homedir(), 'Library', 'Caches', 'gitify-dev');
   const targetApp = path.join(cacheRoot, 'Electron.app');
   const markerPath = path.join(cacheRoot, 'prepared.json');
   const electronVersion = JSON.parse(
@@ -52,23 +63,50 @@ export function prepareDevElectronBundle() {
     identity,
   };
 
-  if (isPrepared(markerPath, marker, targetApp)) {
-    return cacheRoot;
+  if (!isPrepared(markerPath, marker, targetApp)) {
+    fs.rmSync(cacheRoot, { recursive: true, force: true });
+    fs.mkdirSync(cacheRoot, { recursive: true });
+
+    // ditto preserves the framework symlinks inside Electron.app.
+    execFileSync('ditto', [sourceApp, targetApp], { stdio: 'inherit' });
+
+    brandBundle(targetApp);
+    signBundle(targetApp, identity);
+
+    fs.writeFileSync(markerPath, `${JSON.stringify(marker, null, 2)}\n`);
+    console.log(`[dev-electron] prepared ${DEV_BUNDLE_NAME} (${DEV_BUNDLE_IDENTIFIER})`);
   }
 
-  fs.rmSync(cacheRoot, { recursive: true, force: true });
-  fs.mkdirSync(cacheRoot, { recursive: true });
-
-  // ditto preserves the framework symlinks inside Electron.app.
-  execFileSync('ditto', [sourceApp, targetApp], { stdio: 'inherit' });
-
-  brandBundle(targetApp);
-  signBundle(targetApp, identity);
-
-  fs.writeFileSync(markerPath, `${JSON.stringify(marker, null, 2)}\n`);
-  console.log(`[dev-electron] prepared ${DEV_BUNDLE_NAME} (${DEV_BUNDLE_IDENTIFIER})`);
+  // `ELECTRON_OVERRIDE_DIST_PATH` executes the binary directly rather than
+  // going through `open`, so the copy never gets the Launch Services
+  // registration that `open` would perform. Register on every launch, because
+  // the record is dropped when the cache directory is removed.
+  registerBundle(targetApp);
 
   return cacheRoot;
+}
+
+/**
+ * Register the prepared bundle with Launch Services.
+ *
+ * Without this registration the notification daemon cannot identify the
+ * running process ("Failed to find or validate client"), and every
+ * notification fails with "Notifications are not allowed for this
+ * application" even though the bundle is correctly signed.
+ *
+ * @param {string} appPath - Absolute path of the prepared `.app` bundle.
+ */
+function registerBundle(appPath) {
+  try {
+    execFileSync(LSREGISTER, ['-f', appPath], { stdio: 'ignore' });
+  } catch (error) {
+    // Notifications are the only feature that depends on this registration,
+    // so keep development usable and let the main process log any failures.
+    console.warn(
+      `[dev-electron] could not register ${DEV_BUNDLE_NAME} with Launch Services:`,
+      error instanceof Error ? error.message : error,
+    );
+  }
 }
 
 function isPrepared(markerPath, expected, targetApp) {

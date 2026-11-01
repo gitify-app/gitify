@@ -26,8 +26,16 @@ import {
 } from '../../utils/notifications/mutations';
 import { removeNotificationsForAccount } from '../../utils/notifications/remove';
 
+export interface MarkNotificationsAsReadOptions {
+  /** Update the cache before the request resolves. Used by OS actions. */
+  optimistic?: boolean;
+}
+
 export interface NotificationMutations {
-  markNotificationsAsRead: (notifications: GitifyNotification[]) => Promise<boolean>;
+  markNotificationsAsRead: (
+    notifications: GitifyNotification[],
+    options?: MarkNotificationsAsReadOptions,
+  ) => Promise<boolean>;
   markNotificationsAsDone: (notifications: GitifyNotification[]) => Promise<boolean>;
   unsubscribeNotification: (notification: GitifyNotification) => Promise<boolean>;
 }
@@ -126,13 +134,38 @@ export const useNotificationMutations = (
   );
 
   const markNotificationsAsReadMutation = useMutation({
-    mutationFn: async ({ readNotifications }: { readNotifications: GitifyNotification[] }) => {
+    mutationFn: async ({
+      readNotifications,
+    }: {
+      readNotifications: GitifyNotification[];
+      optimistic?: boolean;
+    }) => {
       return await settleNotificationActions(readNotifications, (notification) =>
         getAccountAdapter(notification.account).markThreadAsRead(notification.id),
       );
     },
 
-    onMutate: snapshotNotifications,
+    onMutate: async ({
+      readNotifications,
+      optimistic,
+    }: {
+      readNotifications: GitifyNotification[];
+      optimistic?: boolean;
+    }) => {
+      const context = await snapshotNotifications();
+
+      if (optimistic && readNotifications.length > 0) {
+        queryClient.setQueryData<AccountNotifications[]>(notificationsQueryKey, (existing) =>
+          removeNotificationsForAccount(
+            readNotifications[0].account,
+            readNotifications,
+            existing ?? [],
+          ),
+        );
+      }
+
+      return context;
+    },
 
     onSuccess: ({ succeeded, failed }, _variables, context) => {
       // Cache removal happens here (once the request resolves) rather than
@@ -272,10 +305,11 @@ export const useNotificationMutations = (
   });
 
   const markNotificationsAsRead = useCallback(
-    async (readNotifications: GitifyNotification[]) => {
+    async (readNotifications: GitifyNotification[], options?: MarkNotificationsAsReadOptions) => {
       try {
         const { failed } = await markNotificationsAsReadMutation.mutateAsync({
           readNotifications,
+          optimistic: options?.optimistic,
         });
         return failed.length === 0;
       } catch {

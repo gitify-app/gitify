@@ -25,6 +25,7 @@ export const useNotificationsHost = (): NotificationsState => {
     notificationsQueryKey: query.notificationsQueryKey,
     refetch: query.refetch,
     fetchIntervalMs: query.fetchIntervalMs,
+    actions,
   });
 
   return buildNotificationsState(query, actions);
