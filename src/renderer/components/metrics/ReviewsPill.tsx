@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react';
+
 import { CommentIcon, EyeIcon } from '@primer/octicons-react';
 
 import { type GitifyPullRequestReviewer, type GitifyReviewDecision, IconColor } from '../../types';
@@ -10,11 +12,19 @@ export interface ReviewsPillProps {
   reviewDecision?: GitifyReviewDecision;
 }
 
-export function ReviewsPill({ reviewers, reviewDecision }: Readonly<ReviewsPillProps>) {
+/**
+ * Review metrics can produce several pills (review required, one per review
+ * state, and unresolved threads). Exposed separately from the component so the
+ * metric strip can treat each pill as an independent overflow unit.
+ */
+export function buildReviewPills({
+  reviewers,
+  reviewDecision,
+}: Readonly<ReviewsPillProps>): ReactElement[] {
   const isReviewRequired = reviewDecision === 'REVIEW_REQUIRED';
 
   if (!reviewers.length && !isReviewRequired) {
-    return null;
+    return [];
   }
 
   const reviewGroups = getReviewGroups(reviewers);
@@ -29,51 +39,61 @@ export function ReviewsPill({ reviewers, reviewDecision }: Readonly<ReviewsPillP
   );
   const unresolvedThreadTotal = threadTotal - resolvedThreadTotal;
 
-  return (
-    <>
-      {isReviewRequired ? (
-        <MetricPill
-          ariaLabel="Review required"
-          color={IconColor.YELLOW}
-          contents="Review required"
-          icon={EyeIcon}
-        />
-      ) : null}
+  const pills: ReactElement[] = [];
 
-      {reviewGroups.map((review) => {
-        if (review.state === 'COMMENTED') {
-          return null;
-        }
+  if (isReviewRequired) {
+    pills.push(
+      <MetricPill
+        ariaLabel="Review required"
+        color={IconColor.YELLOW}
+        contents="Review required"
+        icon={EyeIcon}
+        key="review-required"
+      />,
+    );
+  }
 
-        const icon = getPullRequestReviewIcon(review);
+  for (const review of reviewGroups) {
+    if (review.state === 'COMMENTED') {
+      continue;
+    }
 
-        if (!icon) {
-          return null;
-        }
+    const icon = getPullRequestReviewIcon(review);
 
-        return (
-          <MetricPill
-            ariaLabel={icon.description}
-            color={icon.color}
-            contents={icon.description}
-            icon={icon.type}
-            key={review.state}
-            metric={review.users.length}
-          />
-        );
-      })}
+    if (!icon) {
+      continue;
+    }
 
-      {threadTotal ? (
-        <MetricPill
-          ariaLabel={`Review threads: ${resolvedThreadTotal} of ${threadTotal} resolved`}
-          color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
-          contents={formatReviewThreadDescription(reviewersWithThreads)}
-          icon={CommentIcon}
-          metric={`${resolvedThreadTotal}/${threadTotal}`}
-        />
-      ) : null}
-    </>
-  );
+    pills.push(
+      <MetricPill
+        ariaLabel={icon.description}
+        color={icon.color}
+        contents={icon.description}
+        icon={icon.type}
+        key={`review-${review.state}`}
+        metric={review.users.length}
+      />,
+    );
+  }
+
+  if (threadTotal) {
+    pills.push(
+      <MetricPill
+        ariaLabel={`Review threads: ${resolvedThreadTotal} of ${threadTotal} resolved`}
+        color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
+        contents={formatReviewThreadDescription(reviewersWithThreads)}
+        icon={CommentIcon}
+        key="review-threads"
+        metric={`${resolvedThreadTotal}/${threadTotal}`}
+      />,
+    );
+  }
+
+  return pills;
+}
+
+export function ReviewsPill({ reviewers, reviewDecision }: Readonly<ReviewsPillProps>) {
+  return <>{buildReviewPills({ reviewers, reviewDecision })}</>;
 }
 
 function getReviewGroups(reviewers: GitifyPullRequestReviewer[]): PullRequestReviewGroup[] {
