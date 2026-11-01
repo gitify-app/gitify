@@ -58,7 +58,9 @@ describe('renderer/components/Oops.tsx', () => {
     expect(navigateMock).toHaveBeenCalledWith('/somewhere');
   });
 
-  it('renders extra actions alongside the error actions', () => {
+  it('renders a recovery action alongside the error actions', async () => {
+    const recovery = vi.fn();
+
     const mockError = {
       title: 'Error title',
       descriptions: ['Error description'],
@@ -74,10 +76,16 @@ describe('renderer/components/Oops.tsx', () => {
     };
 
     renderWithProviders(
-      <Oops error={mockError} extraActions={<button type="button">Reload</button>} />,
+      <Oops
+        error={mockError}
+        recovery={{ icon: PersonIcon, label: 'Reload', onClick: recovery }}
+      />,
     );
 
     expect(screen.getByText('Go somewhere')).toBeInTheDocument();
-    expect(screen.getByText('Reload')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Reload'));
+
+    expect(recovery).toHaveBeenCalledTimes(1);
   });
 });

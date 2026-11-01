@@ -1,25 +1,17 @@
 import { Component, type ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
-
-import { SyncIcon } from '@primer/octicons-react';
-import { Button } from '@primer/react';
 
 import { EmojiSplash } from './layout/EmojiSplash';
+import { ReloadButton } from './primitives/ReloadButton';
 
 import { getErrorDetails } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
 
 function AppErrorFallback() {
-  const { t } = useTranslation();
   const error = getErrorDetails('UNKNOWN');
 
   return (
     <EmojiSplash
-      actions={
-        <Button leadingVisual={SyncIcon} onClick={() => window.location.reload()}>
-          {t('errors.reload', 'Reload')}
-        </Button>
-      }
+      actions={<ReloadButton />}
       emoji={error.emojis[0]}
       fullHeight
       heading={error.title}

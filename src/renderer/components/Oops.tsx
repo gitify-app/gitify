@@ -1,23 +1,29 @@
-import { type ReactNode, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router';
 
 import { Button, Stack } from '@primer/react';
 
 import { EmojiSplash } from './layout/EmojiSplash';
 
-import type { GitifyError } from '../types';
+import type { GitifyError, GitifyErrorAction } from '../types';
 
 import { getErrorDetails } from '../utils/core/errors';
 import { randomElement } from '../utils/core/random';
 
+export interface RecoveryAction {
+  label: string;
+  icon: GitifyErrorAction['icon'];
+  onClick: () => void;
+}
+
 interface OopsProps {
   error: GitifyError;
   fullHeight?: boolean;
-  /** Actions rendered after the error's own route actions. */
-  extraActions?: ReactNode;
+  /** Context-specific recovery action rendered after the error's route actions. */
+  recovery?: RecoveryAction;
 }
 
-export function Oops({ error, fullHeight = true, extraActions }: Readonly<OopsProps>) {
+export function Oops({ error, fullHeight = true, recovery }: Readonly<OopsProps>) {
   const navigate = useNavigate();
 
   const err = error ?? getErrorDetails('UNKNOWN');
@@ -37,10 +43,16 @@ export function Oops({ error, fullHeight = true, extraActions }: Readonly<OopsPr
       ))
     : null;
 
-  const actions = extraActions ? (
+  const recoveryAction = recovery ? (
+    <Button key="recovery" leadingVisual={recovery.icon} onClick={recovery.onClick}>
+      {recovery.label}
+    </Button>
+  ) : null;
+
+  const actions = recoveryAction ? (
     <Stack direction="horizontal" gap="condensed">
       {errorActions}
-      {extraActions}
+      {recoveryAction}
     </Stack>
   ) : (
     errorActions
