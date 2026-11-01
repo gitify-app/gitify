@@ -64,7 +64,7 @@ export function RepositoryHeader({
         className={cn(
           'group relative pr-1 py-0.5',
           'bg-gitify-repository',
-          'min-h-0',
+          'min-h-0 min-w-0',
           areAllRepoNotificationsRead && Opacity.READ,
         )}
         direction="horizontal"

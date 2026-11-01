@@ -212,6 +212,39 @@ describe('notification list in a browser', () => {
     },
   );
 
+  it('keeps a long unwrapped title and its action rail inside the list', async () => {
+    const longTitle = `https://example.com/${'a'.repeat(300)}`;
+    await renderList([], { wrapNotificationTitle: false }, [
+      {
+        account,
+        notifications: [
+          {
+            ...mockGitifyNotification,
+            id: 'long-title',
+            subject: { ...mockGitifyNotification.subject, title: longTitle },
+          },
+        ],
+        error: null,
+      },
+    ]);
+
+    const row = document.getElementById('long-title');
+    if (!row) {
+      throw new Error('Long-title notification row is missing');
+    }
+
+    const rowBox = row.getBoundingClientRect();
+    expect(rowBox.width).toBeLessThanOrEqual(scrollContainer().getBoundingClientRect().width);
+
+    await page.getByTestId('notification-row').first().hover();
+    const rail = row.querySelector<HTMLElement>('.gitify-hover-actions');
+    if (!rail) {
+      throw new Error('Action rail is missing from the long-title row');
+    }
+    await waitFor(() => expect(getComputedStyle(rail).opacity).toBe('1'));
+    expect(rail.getBoundingClientRect().right).toBeCloseTo(rowBox.right, 0);
+  });
+
   it.each(['notification', 'repository'])(
     'retains a pending %s action across remounts and restores it on failure',
     async (kind) => {

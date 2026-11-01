@@ -106,7 +106,7 @@ export function NotificationRow({
           'group relative border-b',
           'pl-2.75 pr-1 py-0.75',
           'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
-          'min-h-0',
+          'min-h-0 min-w-0',
           isNotificationRead && Opacity.READ,
         )}
         data-animating-exit={isAnimatingExit || undefined}
@@ -124,7 +124,10 @@ export function NotificationRow({
           </Tooltip>
 
           <Stack
-            className={cn('cursor-pointer text-sm w-full', !wrapNotificationTitle && 'truncate')}
+            className={cn(
+              'cursor-pointer text-sm w-full min-w-0',
+              !wrapNotificationTitle && 'truncate',
+            )}
             direction="vertical"
             gap="none"
             onClick={actionNotificationInteraction}

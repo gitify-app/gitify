@@ -18,6 +18,12 @@ export interface ExitCollapseProps {
  * hanging request cannot leave an invisible row holding its height. The fixed
  * budget is the 350ms slide.
  *
+ * `grid-cols-1` is load-bearing: a single implicit auto column would size to
+ * the row's max-content width, so a long, unwrapped notification title would
+ * widen the row past the list viewport and drag the absolutely positioned
+ * action rail off with it. The explicit `minmax(0, 1fr)` track keeps the row at
+ * the list width so the title truncates/wraps and the rail stays put.
+ *
  * The transition classes stay mounted so a failed action can slide back in
  * smoothly, while the collapse transition only exists while exiting so the
  * layout snaps back as soon as the row is restored. Reduced-motion users skip
@@ -34,14 +40,14 @@ export function ExitCollapse({ isExiting, children }: Readonly<ExitCollapseProps
     >
       <div
         className={cn(
-          'grid',
+          'grid grid-cols-1',
           isExiting
             ? 'grid-rows-[0fr] transition-[grid-template-rows] duration-0 delay-350 motion-reduce:transition-none'
             : 'grid-rows-[1fr]',
         )}
         data-exit-collapse={isExiting || undefined}
       >
-        <div className={cn('min-h-0', isExiting && 'overflow-hidden')}>{children}</div>
+        <div className={cn('min-h-0 min-w-0', isExiting && 'overflow-hidden')}>{children}</div>
       </div>
     </div>
   );
