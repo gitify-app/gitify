@@ -216,7 +216,13 @@ export default defineConfig({
       ? []
       : [
           checker({
-            oxlint: { lintCommand: 'oxlint', dev: { logLevel: ['error'] } },
+            // Vite's root is `src/renderer`, but the checker must run from the
+            // repository root so lints cover every process and report paths
+            // relative to the project.
+            root: projectRoot,
+            // `vp lint` applies the `lint` config below. A bare `oxlint` binary
+            // is not installed, and it would ignore that config anyway.
+            oxlint: { lintCommand: 'vp lint', dev: { logLevel: ['error'] } },
           }),
         ]),
     reactDevToolsPlugin(),
