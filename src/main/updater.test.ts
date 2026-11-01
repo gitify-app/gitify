@@ -305,7 +305,7 @@ describe('main/updater.ts', () => {
       expect(dialog.showMessageBox).toHaveBeenCalledTimes(1);
     });
 
-    it('allows a later update to prompt again after update-available', async () => {
+    it('does not prompt again for the same version after update-available', async () => {
       vi.mocked(dialog.showMessageBox).mockResolvedValue({
         response: 1,
         checkboxChecked: false,
@@ -316,6 +316,21 @@ describe('main/updater.ts', () => {
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
       emit('update-available');
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+
+      expect(dialog.showMessageBox).toHaveBeenCalledTimes(1);
+    });
+
+    it('prompts again when a different version is downloaded', async () => {
+      vi.mocked(dialog.showMessageBox).mockResolvedValue({
+        response: 1,
+        checkboxChecked: false,
+      });
+
+      await updater.start();
+
+      emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
+      emit('update-available');
+      emit('update-downloaded', { releaseName: 'v1.3.0', version: '1.3.0' });
 
       expect(dialog.showMessageBox).toHaveBeenCalledTimes(2);
     });

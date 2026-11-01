@@ -81,7 +81,10 @@ export default class AppUpdater {
 
     autoUpdater.on('update-available', () => {
       logInfo('auto updater', 'Update available');
-      this.lastPromptedVersion = null;
+      // Keep the prompt guard for this version: a routine check for the same
+      // pending version must not re-prompt after the user chose Later. A
+      // different version will not match `lastPromptedVersion` and prompts
+      // normally. Only a cancelled download clears the guard.
       this.setTooltipWithStatus('A new update is available');
       this.menuBuilder.setUpdateAvailableMenuVisibility(true);
     });
