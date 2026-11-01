@@ -32,6 +32,15 @@ import { performGraphQLRequestString } from './request';
 import { getNumberFromUrl } from './utils';
 
 /**
+ * Maximum number of notifications GitHub returns per REST page for
+ * `listNotificationsForAuthenticatedUser`. The endpoint silently clamps
+ * `per_page` to this value, so requesting more has no effect. It is exported
+ * because a full page of notifications is also one merged enrichment batch
+ * (see `enrich.ts`).
+ */
+export const GITHUB_API_PAGE_SIZE = 50;
+
+/**
  * Fetch details of the currently authenticated GitHub user.
  *
  * Always fetches fresh data without caching to ensure up-to-date user info.
@@ -68,7 +77,7 @@ export async function listNotificationsForAuthenticatedUser(
       {
         participating: settings.participating,
         all: settings.fetchReadNotifications,
-        per_page: 100,
+        per_page: GITHUB_API_PAGE_SIZE,
         headers: {
           'Cache-Control': 'no-cache', // Prevent caching
         },
@@ -85,7 +94,7 @@ export async function listNotificationsForAuthenticatedUser(
   const response = await octokit.rest.activity.listNotificationsForAuthenticatedUser({
     participating: settings.participating,
     all: settings.fetchReadNotifications,
-    per_page: 100,
+    per_page: GITHUB_API_PAGE_SIZE,
     headers: {
       'Cache-Control': 'no-cache', // Prevent caching
     },
