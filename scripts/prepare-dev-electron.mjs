@@ -124,7 +124,12 @@ function signBundle(appPath, identity) {
 
 function setPlist(plist, key, value, type) {
   try {
-    execFileSync('/usr/libexec/PlistBuddy', ['-c', `Set :${key} ${value}`, plist]);
+    // The key is absent from a fresh Electron bundle, so `Set` fails and
+    // PlistBuddy prints an expected "Does Not Exist" error. Discard it and add
+    // the key below instead.
+    execFileSync('/usr/libexec/PlistBuddy', ['-c', `Set :${key} ${value}`, plist], {
+      stdio: ['ignore', 'ignore', 'ignore'],
+    });
   } catch {
     const command = type
       ? ['-c', `Add :${key} ${type} ${value}`, plist]

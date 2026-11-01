@@ -9,6 +9,7 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
+  "tailwindCSS.experimental.configFile": "src/renderer/App.css",
   "[json]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },

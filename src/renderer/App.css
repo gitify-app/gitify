@@ -10,6 +10,9 @@
 /** Tailwind CSS Configuration */
 @config "../../tailwind.config.mts";
 
+/** Tailwind CSS Sources */
+@source "../../src/**/*.{ts,tsx}";
+
 /**
  * Design-language chrome tokens: a language re-skins radius/shadow/blur by
  * re-pointing these `--gitify-*` vars under `[data-theme]`. Classic aliases

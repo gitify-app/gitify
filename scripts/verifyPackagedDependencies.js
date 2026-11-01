@@ -29,7 +29,14 @@ const FORBIDDEN_PACKAGES = [
   'react-i18next',
   'react-router-dom',
 ];
-const BUILD_ONLY_PACKAGES = ['electron', 'electron-builder', 'typescript', 'vite', 'vitest'];
+const BUILD_ONLY_PACKAGES = [
+  'electron',
+  'electron-builder',
+  'tailwindcss',
+  'typescript',
+  'vite',
+  'vitest',
+];
 const BUILD_ONLY_SCOPES = ['@electron/', '@graphql-codegen/', '@primer/', '@tailwindcss/'];
 const MAX_NODE_MODULES_BYTES = 10 * 1024 * 1024;
 
