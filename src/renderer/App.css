@@ -291,6 +291,13 @@
     box-shadow: inset 0 0 0 1px var(--gitify-glass-border);
   }
 
+  /* Without native vibrancy the window is opaque, so the dark tooltip material
+   * renders as a flat gray slab over the row. Use the app surface instead. */
+  .gitify-translucent.gitify-linux .gitify-hover-actions,
+  .gitify-translucent.gitify-linux .group:hover .gitify-hover-actions {
+    background-color: color-mix(in oklab, var(--bgColor-default), transparent 8%);
+  }
+
   /* Hover tooltips float as frosted glass with a hairline (the macOS tooltip
    * material) instead of Primer's solid slab: light frosted with dark text in
    * light mode, dark frosted with white text in dark mode. Targets
