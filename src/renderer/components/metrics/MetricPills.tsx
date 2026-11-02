@@ -186,7 +186,6 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
                   setIsOverflowOpen(true);
                 }}
                 onMouseLeave={scheduleClose}
-                title={`Show ${hiddenPills.length} more metrics`}
                 type="button"
               >
                 <MetricPillContent
