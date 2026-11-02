@@ -3,6 +3,9 @@ import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../shared/constants';
 import { logError, logInfo } from '../shared/logger';
+import { isMacOS } from '../shared/platform';
+
+vi.mock('../shared/platform', () => ({ isMacOS: vi.fn() }));
 
 vi.mock('../shared/logger', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../shared/logger')>();
@@ -26,6 +29,8 @@ type ListenerArgs = UpdateDownloadedEvent | object | undefined;
 type Listener = (arg: ListenerArgs) => void;
 type ListenerMap = Record<string, Listener[]>;
 const listeners: ListenerMap = {};
+const notify = vi.fn();
+let beforeQuit: (event: { preventDefault: () => void }) => void;
 
 vi.mock('electron-updater', () => ({
   autoUpdater: {
@@ -37,7 +42,6 @@ vi.mock('electron-updater', () => ({
       return this;
     }),
     checkForUpdates: vi.fn().mockResolvedValue(undefined),
-    checkForUpdatesAndNotify: vi.fn().mockResolvedValue(undefined),
     quitAndInstall: vi.fn(),
   },
 }));
@@ -53,6 +57,9 @@ vi.mock('electron', () => {
     dialog: {
       showMessageBox: vi.fn(),
     } satisfies Pick<Electron.Dialog, 'showMessageBox'>,
+    Notification: class {
+      show = notify;
+    },
     MenuItem,
     Menu: {
       buildFromTemplate: vi.fn(),
@@ -73,9 +80,12 @@ const emit = (event: string, arg?: ListenerArgs) => {
 // Re-import autoUpdater after mocking
 import { autoUpdater } from 'electron-updater';
 
+import { CancellationToken } from 'electron-updater/out/types';
+
 describe('main/updater.ts', () => {
   let menubar: Menubar;
   class TestMenuBuilder extends MenuBuilder {
+    public override setAutomaticUpdatesEnabled = vi.fn();
     public override setCheckForUpdatesMenuEnabled = vi.fn();
     public override setNoUpdateAvailableMenuVisibility = vi.fn();
     public override setUpdateAvailableMenuVisibility = vi.fn();
@@ -86,6 +96,7 @@ describe('main/updater.ts', () => {
   let updater: AppUpdater;
 
   beforeEach(() => {
+    vi.mocked(isMacOS).mockReturnValue(false);
     for (const k of Object.keys(listeners)) {
       delete listeners[k];
     }
@@ -93,14 +104,65 @@ describe('main/updater.ts', () => {
     menubar = {
       app: {
         isPackaged: true,
-        // updater.initialize is now only called after app is ready externally
-        on: vi.fn(),
+        on: vi.fn((_event: string, callback: typeof beforeQuit) => {
+          beforeQuit = callback;
+        }),
       },
       tray: { setToolTip: vi.fn() },
     } as unknown as Menubar;
 
     menuBuilder = new TestMenuBuilder(menubar);
     updater = new AppUpdater(menubar, menuBuilder);
+  });
+
+  afterEach(async () => {
+    await updater.setAutomaticUpdatesEnabled(false);
+  });
+
+  it('keeps updating disabled until preferences arrive', () => {
+    expect(autoUpdater.autoDownload).toBe(false);
+    expect(autoUpdater.autoInstallOnAppQuit).toBe(false);
+    expect(autoUpdater.checkForUpdates).not.toHaveBeenCalled();
+  });
+
+  it('defers macOS native installation until quitting while updates are enabled', async () => {
+    vi.mocked(isMacOS).mockReturnValue(true);
+    updater.setNotificationsEnabled(false);
+    await updater.setAutomaticUpdatesEnabled(true);
+    expect(autoUpdater.autoInstallOnAppQuit).toBe(false);
+    emit('update-downloaded', { version: '9.9.9' });
+    expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
+    const event = { preventDefault: vi.fn() };
+    beforeQuit(event);
+    expect(event.preventDefault).toHaveBeenCalledOnce();
+    expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
+    beforeQuit(event);
+    expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
+  });
+
+  it('allows quitting macOS without installing an already downloaded update when disabled', async () => {
+    vi.mocked(isMacOS).mockReturnValue(true);
+    updater.setNotificationsEnabled(false);
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('update-downloaded', { version: '9.9.9' });
+    await updater.setAutomaticUpdatesEnabled(false);
+    const event = { preventDefault: vi.fn() };
+    beforeQuit(event);
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
+  });
+
+  it('allows macOS to quit after a native installation failure', async () => {
+    vi.mocked(isMacOS).mockReturnValue(true);
+    updater.setNotificationsEnabled(false);
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('update-downloaded', { version: '9.9.9' });
+    beforeQuit({ preventDefault: vi.fn() });
+    emit('error', new Error('Native install failed'));
+    const retryQuit = { preventDefault: vi.fn() };
+    beforeQuit(retryQuit);
+    expect(retryQuit.preventDefault).not.toHaveBeenCalled();
+    expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
   });
 
   describe('update available dialog', () => {
@@ -110,7 +172,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       // Simulate update downloaded event
       const releaseName = 'v1.2.3';
@@ -135,7 +197,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: null, version: '1.2.3' });
 
@@ -149,11 +211,12 @@ describe('main/updater.ts', () => {
     it('reports a downloaded update in the menu without showing a dialog when notifications are disabled', async () => {
       updater.setNotificationsEnabled(false);
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3' });
 
       expect(dialog.showMessageBox).not.toHaveBeenCalled();
+      expect(notify).not.toHaveBeenCalled();
       expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
       expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(true);
     });
@@ -164,7 +227,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v9.9.9' });
 
@@ -180,7 +243,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v9.9.9' });
 
@@ -193,7 +256,7 @@ describe('main/updater.ts', () => {
     it('logs an error when the dialog fails to open', async () => {
       vi.mocked(dialog.showMessageBox).mockRejectedValueOnce(new Error('dialog failed'));
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v9.9.9' });
 
@@ -213,7 +276,7 @@ describe('main/updater.ts', () => {
       });
       vi.mocked(shell.openExternal).mockResolvedValue();
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', {
         releaseName: 'v1.2.3',
@@ -242,7 +305,7 @@ describe('main/updater.ts', () => {
       });
       vi.mocked(shell.openExternal).mockResolvedValue();
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: 'v1.2.3' });
 
@@ -259,7 +322,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3' });
 
@@ -278,7 +341,7 @@ describe('main/updater.ts', () => {
       });
       vi.mocked(shell.openExternal).mockRejectedValueOnce(new Error('no browser'));
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
 
@@ -297,7 +360,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
@@ -311,7 +374,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
       emit('update-available');
@@ -326,7 +389,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
       emit('update-available');
@@ -341,7 +404,7 @@ describe('main/updater.ts', () => {
         checkboxChecked: false,
       });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
       emit('update-cancelled');
@@ -355,28 +418,30 @@ describe('main/updater.ts', () => {
     it('skips when app is not packaged', async () => {
       Object.defineProperty(menubar.app, 'isPackaged', { value: false });
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       expect(logInfo).toHaveBeenCalledWith(
         'app updater',
         'Skipping updater since app is in development mode',
       );
-      expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
+      expect(autoUpdater.checkForUpdates).not.toHaveBeenCalled();
     });
 
     it('starts only once when settings updates arrive concurrently', async () => {
-      await Promise.all([updater.start(), updater.start()]);
+      await Promise.all([
+        updater.setAutomaticUpdatesEnabled(true),
+        updater.setAutomaticUpdatesEnabled(true),
+      ]);
 
-      expect(autoUpdater.checkForUpdatesAndNotify).toHaveBeenCalledTimes(1);
+      expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
     });
 
     it('checks silently when update notifications are disabled', async () => {
       updater.setNotificationsEnabled(false);
 
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
-      expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
     });
 
     it('keeps silent update checks running on schedule when notifications are disabled', async () => {
@@ -384,20 +449,19 @@ describe('main/updater.ts', () => {
       try {
         updater.setNotificationsEnabled(false);
 
-        await updater.start();
+        await updater.setAutomaticUpdatesEnabled(true);
         expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
 
         await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
 
         expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(2);
-        expect(autoUpdater.checkForUpdatesAndNotify).not.toHaveBeenCalled();
       } finally {
         vi.useRealTimers();
       }
     });
 
     it('handles checking-for-update', async () => {
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('checking-for-update');
 
@@ -406,7 +470,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles update-available', async () => {
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-available');
 
@@ -417,7 +481,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles download-progress', async () => {
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('download-progress', { percent: 12.3456 });
 
@@ -425,7 +489,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles update-not-available', async () => {
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-not-available');
 
@@ -438,7 +502,7 @@ describe('main/updater.ts', () => {
     it('auto-hides "No updates available" after configured timeout', async () => {
       vi.useFakeTimers();
       try {
-        await updater.start();
+        await updater.setAutomaticUpdatesEnabled(true);
 
         emit('update-not-available');
 
@@ -456,7 +520,7 @@ describe('main/updater.ts', () => {
     it('clears pending hide timer when a new check starts', async () => {
       vi.useFakeTimers();
       try {
-        await updater.start();
+        await updater.setAutomaticUpdatesEnabled(true);
 
         emit('update-not-available');
 
@@ -478,7 +542,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles update-cancelled (reset state)', async () => {
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-cancelled');
 
@@ -487,7 +551,7 @@ describe('main/updater.ts', () => {
     });
 
     it('handles error (reset + logError)', async () => {
-      await updater.start();
+      await updater.setAutomaticUpdatesEnabled(true);
 
       const err = new Error('failure');
       emit('error', err);
@@ -499,17 +563,17 @@ describe('main/updater.ts', () => {
     it('keeps checking on schedule after an error', async () => {
       vi.useFakeTimers();
       try {
-        await updater.start();
+        await updater.setAutomaticUpdatesEnabled(true);
 
         // Let the first scheduled check run, which registers the interval
         await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
-        const callsBeforeError = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
+        const callsBeforeError = vi.mocked(autoUpdater.checkForUpdates).mock.calls.length;
 
         emit('error', new Error('offline'));
 
         await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
 
-        expect(vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length).toBeGreaterThan(
+        expect(vi.mocked(autoUpdater.checkForUpdates).mock.calls.length).toBeGreaterThan(
           callsBeforeError,
         );
       } finally {
@@ -517,33 +581,148 @@ describe('main/updater.ts', () => {
       }
     });
 
-    it('performs initial check and schedules periodic checks', async () => {
+    it('stops scheduled checks and suppresses late downloaded events when disabled', async () => {
       vi.useFakeTimers();
-      const originalSetInterval = globalThis.setInterval;
-      const setIntervalSpy = vi.spyOn(globalThis, 'setInterval').mockImplementation(((
-        fn: () => void,
-      ) => {
-        fn();
-        return 0 as unknown as NodeJS.Timeout;
-      }) as unknown as typeof setInterval);
       try {
-        await updater.start();
-
-        // At minimum the initial check should have occurred
-        const callCount = vi.mocked(autoUpdater.checkForUpdatesAndNotify).mock.calls.length;
-        expect(callCount).toBeGreaterThanOrEqual(1);
-
+        await updater.setAutomaticUpdatesEnabled(true);
+        await updater.setAutomaticUpdatesEnabled(false);
+        expect(autoUpdater.autoDownload).toBe(false);
+        expect(autoUpdater.autoInstallOnAppQuit).toBe(false);
+        emit('update-downloaded', { version: '9.9.9' });
+        expect(dialog.showMessageBox).not.toHaveBeenCalled();
+        expect(notify).not.toHaveBeenCalled();
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS * 2);
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
+        await updater.setAutomaticUpdatesEnabled(true);
         await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
-
-        expect(setIntervalSpy).toHaveBeenCalledWith(
-          expect.any(Function),
-          APPLICATION.UPDATE_CHECK_INTERVAL_MS,
-        );
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(3);
       } finally {
-        setIntervalSpy.mockRestore();
-        globalThis.setInterval = originalSetInterval;
         vi.useRealTimers();
       }
+    });
+
+    it('cancels an active download when disabled', async () => {
+      const cancellationToken = new CancellationToken();
+      vi.spyOn(cancellationToken, 'cancel');
+      const download = Promise.withResolvers<string[]>();
+      cancellationToken.on('cancel', () => download.reject(new Error('Cancelled')));
+      vi.mocked(autoUpdater.checkForUpdates).mockResolvedValueOnce({
+        downloadPromise: download.promise,
+        cancellationToken,
+        isUpdateAvailable: true,
+        updateInfo: { version: '9.9.9', files: [], releaseDate: '', path: '', sha512: '' },
+        versionInfo: { version: '9.9.9', files: [], releaseDate: '', path: '', sha512: '' },
+      });
+      await updater.setAutomaticUpdatesEnabled(true);
+      await updater.setAutomaticUpdatesEnabled(false);
+      expect(cancellationToken.cancel).toHaveBeenCalledOnce();
+    });
+
+    it('does not reschedule or download when disabled during an initial check', async () => {
+      vi.useFakeTimers();
+      try {
+        const check =
+          Promise.withResolvers<Awaited<ReturnType<typeof autoUpdater.checkForUpdates>>>();
+        vi.mocked(autoUpdater.checkForUpdates).mockReturnValueOnce(check.promise);
+        const starting = updater.setAutomaticUpdatesEnabled(true);
+        await updater.setAutomaticUpdatesEnabled(false);
+        const cancellationToken = new CancellationToken();
+        vi.spyOn(cancellationToken, 'cancel');
+        check.resolve({
+          cancellationToken,
+          isUpdateAvailable: true,
+          updateInfo: { version: '9.9.9', files: [], releaseDate: '', path: '', sha512: '' },
+          versionInfo: { version: '9.9.9', files: [], releaseDate: '', path: '', sha512: '' },
+        });
+        await starting;
+        expect(cancellationToken.cancel).toHaveBeenCalledOnce();
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS * 2);
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('adopts a shared in-flight check after rapidly disabling and enabling updates', async () => {
+      const check =
+        Promise.withResolvers<Awaited<ReturnType<typeof autoUpdater.checkForUpdates>>>();
+      vi.mocked(autoUpdater.checkForUpdates).mockReturnValueOnce(check.promise);
+      const initial = updater.setAutomaticUpdatesEnabled(true);
+      await updater.setAutomaticUpdatesEnabled(false);
+      const resumed = updater.setAutomaticUpdatesEnabled(true);
+      const cancellationToken = new CancellationToken();
+      const download = Promise.withResolvers<string[]>();
+      cancellationToken.on('cancel', () => download.reject(new Error('Cancelled')));
+      const updateInfo = { version: '9.9.9', files: [], releaseDate: '', path: '', sha512: '' };
+      check.resolve({
+        downloadPromise: download.promise,
+        cancellationToken,
+        isUpdateAvailable: true,
+        updateInfo,
+        versionInfo: updateInfo,
+      });
+      await Promise.all([initial, resumed]);
+      expect(cancellationToken.cancelled).toBe(false);
+      expect(autoUpdater.autoDownload).toBe(true);
+      await updater.setAutomaticUpdatesEnabled(false);
+      expect(cancellationToken.cancelled).toBe(true);
+    });
+
+    it('handles rejection of a cancelled download without reporting an update failure', async () => {
+      const download = Promise.withResolvers<string[]>();
+      const cancellationToken = new CancellationToken();
+      const updateInfo = { version: '9.9.9', files: [], releaseDate: '', path: '', sha512: '' };
+      vi.mocked(autoUpdater.checkForUpdates).mockResolvedValueOnce({
+        cancellationToken,
+        isUpdateAvailable: true,
+        updateInfo,
+        versionInfo: updateInfo,
+        downloadPromise: download.promise,
+      });
+      await updater.setAutomaticUpdatesEnabled(true);
+      await updater.setAutomaticUpdatesEnabled(false);
+      download.reject(new Error('Cancelled'));
+      await Promise.resolve();
+      expect(logError).not.toHaveBeenCalled();
+    });
+
+    it('retains the active download token across scheduled checks and resumes after cancellation', async () => {
+      vi.useFakeTimers();
+      try {
+        const download = Promise.withResolvers<string[]>();
+        const cancellationToken = new CancellationToken();
+        const updateInfo = { version: '9.9.9', files: [], releaseDate: '', path: '', sha512: '' };
+        vi.mocked(autoUpdater.checkForUpdates).mockResolvedValueOnce({
+          cancellationToken,
+          isUpdateAvailable: true,
+          updateInfo,
+          versionInfo: updateInfo,
+          downloadPromise: download.promise,
+        });
+        await updater.setAutomaticUpdatesEnabled(true);
+        await vi.advanceTimersByTimeAsync(APPLICATION.UPDATE_CHECK_INTERVAL_MS);
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
+        await updater.setAutomaticUpdatesEnabled(false);
+        expect(cancellationToken.cancelled).toBe(true);
+        await updater.setAutomaticUpdatesEnabled(true);
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(1);
+        download.reject(new Error('Cancelled'));
+        await vi.advanceTimersByTimeAsync(0);
+        expect(autoUpdater.checkForUpdates).toHaveBeenCalledTimes(2);
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('ignores an open restart dialog after updates are disabled', async () => {
+      const answer = Promise.withResolvers<Electron.MessageBoxReturnValue>();
+      vi.mocked(dialog.showMessageBox).mockReturnValueOnce(answer.promise);
+      await updater.setAutomaticUpdatesEnabled(true);
+      emit('update-downloaded', { version: '9.9.9' });
+      await updater.setAutomaticUpdatesEnabled(false);
+      answer.resolve({ response: 0, checkboxChecked: false });
+      await answer.promise;
+      expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
     });
   });
 });

@@ -489,6 +489,16 @@
       "title": "Reset Settings"
     },
     "system": {
+      "automatic_updates": "Automatic updates",
+      "automatic_updates_default": "On by default.",
+      "automatic_updates_default_managed": "Off by default. Update {{appName}} with {{manager}}.",
+      "automatic_updates_default_option": "Default",
+      "automatic_updates_detecting": "Detecting how {{appName}} was installed…",
+      "automatic_updates_detection_failed": "Unable to detect how {{appName}} was installed. Choose On or Off.",
+      "automatic_updates_off": "Automatic updates are off. View releases from the tray menu.",
+      "automatic_updates_off_option": "Off",
+      "automatic_updates_on": "{{appName}} downloads updates automatically and installs them when you quit.",
+      "automatic_updates_on_option": "On",
       "current_shortcut": "Current shortcut",
       "edit_shortcut": "Edit global shortcut",
       "enable_shortcut": "Enable global shortcut",

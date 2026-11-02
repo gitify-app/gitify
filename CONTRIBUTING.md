@@ -258,6 +258,14 @@ Four settings are deliberate non-choices:
 
 `scripts/verifyFuses.js` reads the fuse wire back out of the built artifacts and fails when it does not match the expected posture. The expected set is a constant in that script rather than read from this configuration, so removing the configuration fails the build instead of passing vacuously. The build and publish workflows run it after packaging, because a missing `electronFuses` block is otherwise a silent no-op: electron-builder simply leaves the Electron defaults in place.
 
+#### 🔄 Updates for packaged installations
+
+Gitify updates itself by default. Automatic updates default to off only where a package manager owns updates: Scoop (detected from its installation metadata), Flatpak, and Snap.
+
+Package maintainers can select the same default by placing an empty `disable-auto-updates` file in the application's resources directory (Electron's `process.resourcesPath`) or by setting `GITIFY_DISABLE_AUTO_UPDATE=1` in the launcher. Packages that run on a system Electron should use the environment variable.
+
+Users can override the default under Settings > System > Automatic updates, and the choice persists across restarts. Turning updates off stops scheduled checks, cancels active downloads, and prevents installation on quit. The tray menu then offers **View releases** instead of **Check for updates**.
+
 ### 🖌️ Design Guidelines
 
 1. Use sentence case where possible

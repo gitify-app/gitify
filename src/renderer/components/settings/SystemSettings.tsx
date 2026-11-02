@@ -5,6 +5,8 @@ import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react'
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
+import { isAutomaticUpdates } from '../../../shared/events';
+import { logError, toError } from '../../../shared/logger';
 
 import {
   DEFAULT_SETTINGS_STATE,
@@ -29,6 +31,93 @@ import { SettingsRow } from './controls/SettingsRow';
 import { SettingsToggle } from './controls/SettingsToggle';
 
 const defaultSettings = DEFAULT_SETTINGS_STATE;
+
+function AutomaticUpdatesChoice() {
+  const { t } = useTranslation();
+  const updateSetting = useSettingsStore((s) => s.updateSetting);
+  const automaticUpdates = useSettingsStore((s) => s.automaticUpdates);
+  const [updateManager, setUpdateManager] = useState<string | null>(null);
+  const [updateManagerError, setUpdateManagerError] = useState(false);
+  const [updateManagerLoading, setUpdateManagerLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    window.gitify
+      .getUpdateManager()
+      .then((manager) => {
+        if (active) {
+          setUpdateManager(manager);
+          setUpdateManagerLoading(false);
+        }
+      })
+      .catch((error: unknown) => {
+        logError('settings', 'Unable to detect update manager', toError(error));
+        if (active) {
+          setUpdateManagerError(true);
+          setUpdateManagerLoading(false);
+        }
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  let automaticUpdatesCaption: string;
+  if (updateManagerLoading) {
+    automaticUpdatesCaption = t(
+      'settings.system.automatic_updates_detecting',
+      'Detecting how {{appName}} was installed…',
+      { appName: APPLICATION.NAME },
+    );
+  } else if (updateManagerError) {
+    automaticUpdatesCaption = t(
+      'settings.system.automatic_updates_detection_failed',
+      'Unable to detect how {{appName}} was installed. Choose On or Off.',
+      { appName: APPLICATION.NAME },
+    );
+  } else if (automaticUpdates === 'enabled') {
+    automaticUpdatesCaption = t(
+      'settings.system.automatic_updates_on',
+      '{{appName}} downloads updates automatically and installs them when you quit.',
+      { appName: APPLICATION.NAME },
+    );
+  } else if (automaticUpdates === 'disabled') {
+    automaticUpdatesCaption = t(
+      'settings.system.automatic_updates_off',
+      'Automatic updates are off. View releases from the tray menu.',
+    );
+  } else if (updateManager) {
+    automaticUpdatesCaption = t(
+      'settings.system.automatic_updates_default_managed',
+      'Off by default. Update {{appName}} with {{manager}}.',
+      { appName: APPLICATION.NAME, manager: updateManager },
+    );
+  } else {
+    automaticUpdatesCaption = t('settings.system.automatic_updates_default', 'On by default.');
+  }
+
+  return (
+    <SettingsChoice
+      caption={<span aria-live="polite">{automaticUpdatesCaption}</span>}
+      label={t('settings.system.automatic_updates', 'Automatic updates')}
+      name="automaticUpdates"
+      onChange={(value) => {
+        if (isAutomaticUpdates(value)) {
+          updateSetting('automaticUpdates', value);
+        }
+      }}
+      options={[
+        {
+          label: t('settings.system.automatic_updates_default_option', 'Default'),
+          value: 'default',
+        },
+        { label: t('settings.system.automatic_updates_on_option', 'On'), value: 'enabled' },
+        { label: t('settings.system.automatic_updates_off_option', 'Off'), value: 'disabled' },
+      ]}
+      value={automaticUpdates}
+    />
+  );
+}
 
 export function SystemSettings() {
   const { t } = useTranslation();
@@ -352,6 +441,8 @@ export function SystemSettings() {
           )}
           visible={isLinux}
         />
+
+        <AutomaticUpdatesChoice />
       </SettingsList>
 
       {isLinux && (

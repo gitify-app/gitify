@@ -1,44 +1,70 @@
 import { EVENTS } from '../../shared/events';
 
-import type AppUpdater from '../updater';
+import { handleMainEvent } from '../events';
+import { detectUpdateManager } from '../update-manager';
 import { registerUpdaterHandlers } from './updater';
 
-const onMock = vi.fn();
-
-vi.mock('electron', () => ({
-  ipcMain: {
-    on: (...args: unknown[]) => onMock(...args),
-  } satisfies Pick<Electron.IpcMain, 'on'>,
+let applyPreferences: (event: unknown, preferences: unknown) => Promise<void>;
+vi.mock('../events', () => ({
+  handleMainEvent: vi.fn(),
+  onMainEvent: vi.fn((_event: string, listener: typeof applyPreferences) => {
+    applyPreferences = listener;
+  }),
 }));
+vi.mock('electron', () => ({ app: { getAppPath: () => '/usr/lib/gitify/app.asar' } }));
+vi.mock('../update-manager', () => ({ detectUpdateManager: vi.fn() }));
+vi.mock('../../shared/logger', () => ({ logError: vi.fn(), toError: (error: unknown) => error }));
 
-describe('main/handlers/updater.ts', () => {
-  let appUpdater: AppUpdater;
+const appUpdater = {
+  setNotificationsEnabled: vi.fn(),
+  setAutomaticUpdatesEnabled: vi.fn().mockResolvedValue(undefined),
+};
 
+describe('updater preferences', () => {
   beforeEach(() => {
-    appUpdater = {
-      setNotificationsEnabled: vi.fn(),
-      start: vi.fn().mockResolvedValue(undefined),
-    } as unknown as AppUpdater;
+    vi.mocked(detectUpdateManager).mockResolvedValue(null);
   });
 
-  it('registers the update notification preference handler', () => {
+  it.each([
+    ['default', null, true],
+    ['default', 'pacman', false],
+    ['enabled', 'Scoop', true],
+    ['disabled', null, false],
+  ])('applies %s with manager %s as %s', async (automaticUpdates, manager, enabled) => {
+    vi.mocked(detectUpdateManager).mockResolvedValue(manager);
     registerUpdaterHandlers(appUpdater);
-
-    expect(onMock.mock.calls.map((call: unknown[]) => call[0])).toContain(
-      EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS,
-    );
+    await applyPreferences(null, { automaticUpdates, showUpdateNotifications: false });
+    expect(appUpdater.setAutomaticUpdatesEnabled).toHaveBeenCalledWith(enabled);
+    expect(appUpdater.setNotificationsEnabled).toHaveBeenCalledWith(false);
+    expect(handleMainEvent).toHaveBeenCalledWith(EVENTS.UPDATE_MANAGER, expect.any(Function));
   });
 
-  it.each([false, true])('applies the preference and starts update checks for %s', (enabled) => {
+  it('waits for detection and only applies the latest preference', async () => {
+    const detection = Promise.withResolvers<string | null>();
+    vi.mocked(detectUpdateManager).mockReturnValue(detection.promise);
     registerUpdaterHandlers(appUpdater);
+    const first = applyPreferences(null, {
+      automaticUpdates: 'default',
+      showUpdateNotifications: true,
+    });
+    const second = applyPreferences(null, {
+      automaticUpdates: 'disabled',
+      showUpdateNotifications: false,
+    });
+    expect(appUpdater.setAutomaticUpdatesEnabled).not.toHaveBeenCalled();
+    detection.resolve(null);
+    await Promise.all([first, second]);
+    expect(appUpdater.setAutomaticUpdatesEnabled).toHaveBeenCalledExactlyOnceWith(false);
+  });
 
-    const listener = onMock.mock.calls.find(
-      (call: unknown[]) => call[0] === EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS,
-    )?.[1] as (event: unknown, enabled: boolean) => void;
-
-    listener(null, enabled);
-
-    expect(appUpdater.setNotificationsEnabled).toHaveBeenCalledWith(enabled);
-    expect(appUpdater.start).toHaveBeenCalledTimes(1);
+  it.each([
+    null,
+    {},
+    { automaticUpdates: 'sometimes', showUpdateNotifications: true },
+    { automaticUpdates: 'enabled', showUpdateNotifications: 'yes' },
+  ])('rejects malformed preferences %j', async (preferences) => {
+    registerUpdaterHandlers(appUpdater);
+    await applyPreferences(null, preferences);
+    expect(appUpdater.setAutomaticUpdatesEnabled).not.toHaveBeenCalled();
   });
 });
