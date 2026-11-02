@@ -503,6 +503,10 @@ body,
   user-select: none;
 }
 
+[class*='prc-ToggleSwitch-IconContainer'] > svg {
+  display: inline-block;
+}
+
 *::-webkit-scrollbar {
   width: 10px;
 }
