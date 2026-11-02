@@ -503,7 +503,7 @@ body,
   user-select: none;
 }
 
-/* Primer centres the switch's on/off glyphs with the button's `text-align`,
+/* Primer centers the switch's on/off glyphs with the button's `text-align`,
  * which only applies to inline content. Tailwind's preflight makes every `svg`
  * a block, which pins each glyph to the start of its half of the track. */
 [class*='prc-ToggleSwitch-IconContainer'] > svg {
