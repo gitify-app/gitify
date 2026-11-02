@@ -291,6 +291,22 @@
     box-shadow: inset 0 0 0 1px var(--gitify-glass-border);
   }
 
+  /* Without native vibrancy the window is opaque and the tooltip material reads
+   * as a separate slab. Paint what the hovered row shows instead (the app
+   * background under the row's hover wash) so the rail blends into the row
+   * while still hiding the content beneath it. */
+  .gitify-translucent.gitify-linux .gitify-hover-actions,
+  .gitify-translucent.gitify-linux .group:hover .gitify-hover-actions {
+    background:
+      linear-gradient(var(--gitify-glass-control-rest), var(--gitify-glass-control-rest)),
+      var(--gitify-background);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    border-start-end-radius: inherit;
+    border-end-end-radius: inherit;
+  }
+
   /* Hover tooltips float as frosted glass with a hairline (the macOS tooltip
    * material) instead of Primer's solid slab: light frosted with dark text in
    * light mode, dark frosted with white text in dark mode. Targets
