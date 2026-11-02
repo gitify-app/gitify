@@ -47,6 +47,9 @@ Tooling is unified through [Vite+][vite-plus-website], which bundles the linter 
 # Run lint, format, and type checks
 pnpm check
 
+# CI lint with GitHub annotations
+pnpm lint:ci
+
 # Auto-fix formatting and lint issues
 pnpm check:fix
 
