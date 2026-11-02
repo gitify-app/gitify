@@ -28,7 +28,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Run tests with coverage
-        run: vp run test
+        run: vp run test:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

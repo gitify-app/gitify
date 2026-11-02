@@ -77,6 +77,7 @@
     "format": "vp fmt",
     "format:check": "vp fmt --check",
     "test": "vp test --coverage --run --project 'happy-dom [preload, renderer]' --project 'node [main, shared]'",
+    "test:ci": "vp test --coverage --run --project 'happy-dom [preload, renderer]' --project 'node [main, shared]' --reporter=default --reporter=github-actions",
     "test:watch": "vp test --watch --coverage",
     "test:ui": "vp test --ui",
     "test:visual": "scripts/visual.sh",
