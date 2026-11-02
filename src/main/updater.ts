@@ -49,7 +49,7 @@ export default class AppUpdater {
     this.menubar.app.on('before-quit', (event) => {
       if (isMacOS() && this.enabled && this.downloaded && !this.installing) {
         event.preventDefault();
-        this.installUpdate();
+        this.installUpdate(false);
       }
     });
     autoUpdater.logger = null;
@@ -178,10 +178,16 @@ export default class AppUpdater {
     });
 
     autoUpdater.on('error', (err) => {
-      this.installing = false;
-      this.downloaded = false;
+      // A failed check leaves the downloaded update installable; a failed install does not.
+      if (this.installing) {
+        this.installing = false;
+        this.downloaded = false;
+      }
       logError('auto updater', 'Error checking for update', err);
       this.resetState();
+      if (this.enabled && this.downloaded) {
+        this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
+      }
     });
   }
 
@@ -282,9 +288,15 @@ export default class AppUpdater {
     this.clearNoUpdateTimeout();
   }
 
-  private installUpdate() {
+  /**
+   * Install a downloaded update while automatic updates are on.
+   *
+   * @param relaunch - Whether to start Gitify again after installing; a plain quit does not.
+   */
+  private installUpdate(relaunch = true) {
     if (this.enabled && this.downloaded && !this.installing) {
       this.installing = true;
+      autoUpdater.autoRunAppAfterInstall = relaunch;
       autoUpdater.quitAndInstall();
     }
   }

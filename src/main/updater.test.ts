@@ -136,6 +136,7 @@ describe('main/updater.ts', () => {
     beforeQuit(event);
     expect(event.preventDefault).toHaveBeenCalledOnce();
     expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
+    expect(autoUpdater.autoRunAppAfterInstall).toBe(false);
     beforeQuit(event);
     expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
   });
@@ -162,6 +163,19 @@ describe('main/updater.ts', () => {
     const retryQuit = { preventDefault: vi.fn() };
     beforeQuit(retryQuit);
     expect(retryQuit.preventDefault).not.toHaveBeenCalled();
+    expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
+  });
+
+  it('keeps a downloaded macOS update installable after a later check fails', async () => {
+    vi.mocked(isMacOS).mockReturnValue(true);
+    updater.setNotificationsEnabled(false);
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('update-downloaded', { version: '9.9.9' });
+    emit('error', new Error('Network unavailable'));
+    expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenLastCalledWith(true);
+    const event = { preventDefault: vi.fn() };
+    beforeQuit(event);
+    expect(event.preventDefault).toHaveBeenCalledOnce();
     expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
   });
 
@@ -235,6 +249,7 @@ describe('main/updater.ts', () => {
       await Promise.resolve();
 
       expect(autoUpdater.quitAndInstall).toHaveBeenCalled();
+      expect(autoUpdater.autoRunAppAfterInstall).toBe(true);
     });
 
     it('does not install when user dismisses the dialog', async () => {
