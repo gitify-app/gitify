@@ -18,7 +18,7 @@ async function choose(value: 'default' | 'enabled' | 'disabled') {
   const choice = page.getByTestId(`choice-automaticUpdates-${value}`);
   await choice.click();
   // oxlint-disable-next-line typescript/await-thenable -- Vitest types omit `expect.element`'s poll promise
-  await expect.element(choice).toHaveAttribute('aria-current', 'true');
+  await expect.element(choice).toHaveAttribute('aria-pressed', 'true');
   expect(useSettingsStore.getState().automaticUpdates).toBe(value);
 }
 
