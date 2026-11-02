@@ -116,6 +116,9 @@ export default class AppUpdater {
       if (!this.enabled) {
         return;
       }
+      // A download replaces the cached update even if it fails. A still-valid cache
+      // re-emits update-downloaded straight away.
+      this.downloaded = false;
       logInfo('auto updater', 'Update available');
       // Keep the prompt guard for this version: a routine check for the same
       // pending version must not re-prompt after the user chose Later. A

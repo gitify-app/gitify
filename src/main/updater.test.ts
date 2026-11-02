@@ -179,6 +179,30 @@ describe('main/updater.ts', () => {
     expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
   });
 
+  it('drops the ready state when a replacement download fails', async () => {
+    vi.mocked(isMacOS).mockReturnValue(true);
+    updater.setNotificationsEnabled(false);
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('update-downloaded', { version: '9.9.9' });
+    emit('update-available', { version: '10.0.0' });
+    emit('error', new Error('Download failed'));
+    const event = { preventDefault: vi.fn() };
+    beforeQuit(event);
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
+  });
+
+  it('keeps the ready state when a check reuses the cached download', async () => {
+    vi.mocked(isMacOS).mockReturnValue(true);
+    updater.setNotificationsEnabled(false);
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('update-downloaded', { version: '9.9.9' });
+    emit('update-available', { version: '9.9.9' });
+    emit('update-downloaded', { version: '9.9.9' });
+    beforeQuit({ preventDefault: vi.fn() });
+    expect(autoUpdater.quitAndInstall).toHaveBeenCalledOnce();
+  });
+
   describe('update available dialog', () => {
     it('shows dialog with expected message and does NOT install when user chooses Later', async () => {
       vi.mocked(dialog.showMessageBox).mockResolvedValue({
@@ -392,7 +416,7 @@ describe('main/updater.ts', () => {
       await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
-      emit('update-available');
+      emit('update-available', { version: '1.2.3' });
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
 
       expect(dialog.showMessageBox).toHaveBeenCalledTimes(1);
@@ -407,7 +431,7 @@ describe('main/updater.ts', () => {
       await updater.setAutomaticUpdatesEnabled(true);
 
       emit('update-downloaded', { releaseName: 'v1.2.3', version: '1.2.3' });
-      emit('update-available');
+      emit('update-available', { version: '1.3.0' });
       emit('update-downloaded', { releaseName: 'v1.3.0', version: '1.3.0' });
 
       expect(dialog.showMessageBox).toHaveBeenCalledTimes(2);
@@ -487,7 +511,7 @@ describe('main/updater.ts', () => {
     it('handles update-available', async () => {
       await updater.setAutomaticUpdatesEnabled(true);
 
-      emit('update-available');
+      emit('update-available', { version: '1.2.3' });
 
       expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(true);
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(
