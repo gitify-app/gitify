@@ -45,6 +45,43 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     expect(toggleSettingSpy).toHaveBeenCalledWith(setting);
   });
 
+  it('explains the managed default and persists explicit update choices', async () => {
+    vi.mocked(window.gitify.getUpdateManager).mockResolvedValue('Scoop');
+    await act(async () => {
+      renderWithProviders(<SystemSettings />);
+    });
+    expect(screen.getByText('Off by default. Update Gitify with Scoop.')).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('choice-automaticUpdates-enabled'));
+    expect(useSettingsStore.getState().automaticUpdates).toBe('enabled');
+    expect(
+      screen.getByText('Gitify downloads updates automatically and installs them when you quit.'),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('choice-automaticUpdates-disabled'));
+    expect(useSettingsStore.getState().automaticUpdates).toBe('disabled');
+    expect(
+      screen.getByText('Automatic updates are off. View releases from the tray menu.'),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('choice-automaticUpdates-default'));
+    expect(useSettingsStore.getState().automaticUpdates).toBe('default');
+  });
+
+  it('points a packager opt-in to the package manager', async () => {
+    vi.mocked(window.gitify.getUpdateManager).mockResolvedValue('packager');
+    await act(async () => {
+      renderWithProviders(<SystemSettings />);
+    });
+    expect(
+      screen.getByText('Off by default. Update Gitify with your package manager.'),
+    ).toBeInTheDocument();
+  });
+
+  it('explains the default for a direct installation', async () => {
+    await act(async () => {
+      renderWithProviders(<SystemSettings />);
+    });
+    expect(screen.getByText('On by default.')).toBeInTheDocument();
+  });
+
   describe('X11 backend switch', () => {
     // `window.gitify` is rebuilt in a global `beforeEach`, so the mock has to
     // be read inside each test rather than captured at describe scope.
@@ -116,9 +153,11 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     );
   });
 
-  it('does not render the shortcut group when the shortcut is disabled', () => {
-    renderWithProviders(<SystemSettings />, {
-      settings: { ...mockSettings, keyboardShortcut: false },
+  it('does not render the shortcut group when the shortcut is disabled', async () => {
+    await act(async () => {
+      renderWithProviders(<SystemSettings />, {
+        settings: { ...mockSettings, keyboardShortcut: false },
+      });
     });
 
     expect(screen.getByTestId('reveal-shortcutRecorder')).toHaveAttribute('data-state', 'closed');

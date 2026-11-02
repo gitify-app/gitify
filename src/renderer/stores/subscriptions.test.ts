@@ -13,8 +13,8 @@ import useSettingsStore from './useSettingsStore';
 describe('renderer/stores/subscriptions.ts', () => {
   const setAutoLaunchSpy = vi.spyOn(comms, 'setAutoLaunch').mockImplementation(vi.fn());
   const setKeepWindowOnBlurSpy = vi.spyOn(comms, 'setKeepWindowOnBlur').mockImplementation(vi.fn());
-  const setShowUpdateNotificationsSpy = vi
-    .spyOn(comms, 'setShowUpdateNotifications')
+  const setUpdatePreferencesSpy = vi
+    .spyOn(comms, 'setUpdatePreferences')
     .mockImplementation(vi.fn());
   const setUseUnreadActiveIconSpy = vi
     .spyOn(comms, 'setUseUnreadActiveIcon')
@@ -38,9 +38,10 @@ describe('renderer/stores/subscriptions.ts', () => {
     expect(setKeepWindowOnBlurSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().keepWindowOnBlur,
     );
-    expect(setShowUpdateNotificationsSpy).toHaveBeenCalledWith(
-      useSettingsStore.getState().showUpdateNotifications,
-    );
+    expect(setUpdatePreferencesSpy).toHaveBeenCalledWith({
+      automaticUpdates: 'default',
+      showUpdateNotifications: useSettingsStore.getState().showUpdateNotifications,
+    });
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().useUnreadActiveIcon,
     );
@@ -61,7 +62,10 @@ describe('renderer/stores/subscriptions.ts', () => {
     expect(setKeepWindowOnBlurSpy).toHaveBeenCalledWith(true);
 
     useSettingsStore.getState().updateSetting('showUpdateNotifications', false);
-    expect(setShowUpdateNotificationsSpy).toHaveBeenCalledWith(false);
+    expect(setUpdatePreferencesSpy).toHaveBeenCalledWith({
+      automaticUpdates: 'default',
+      showUpdateNotifications: false,
+    });
 
     useSettingsStore.getState().updateSetting('useUnreadActiveIcon', false);
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(false);
@@ -84,6 +88,16 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     useAccountsStore.setState({ accounts: [] });
     expect(useFiltersStore.getState().accounts).toEqual([]);
+  });
+
+  it('forwards automatic update overrides after initialization', () => {
+    cleanup = initializeStoreSubscriptions();
+    vi.clearAllMocks();
+    useSettingsStore.getState().updateSetting('automaticUpdates', 'disabled');
+    expect(setUpdatePreferencesSpy).toHaveBeenCalledExactlyOnceWith({
+      automaticUpdates: 'disabled',
+      showUpdateNotifications: useSettingsStore.getState().showUpdateNotifications,
+    });
   });
 
   it('applies zoom level when zoom percentage changes', () => {

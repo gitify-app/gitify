@@ -8,6 +8,7 @@ import type {
   INativeNotificationRemovePayload,
   NativeThemeSource,
   TrayIconAppearance,
+  UpdatePreferences,
   ZoomAction,
 } from '../shared/events';
 import { EVENTS } from '../shared/events';
@@ -80,16 +81,9 @@ export const api = {
    */
   setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
 
-  /**
-   * Enable or suppress automatic update notifications.
-   *
-   * Update checks, downloads, and menubar status continue when notifications
-   * are suppressed.
-   *
-   * @param value - `true` to show update notifications, `false` to suppress them.
-   */
-  setShowUpdateNotifications: (value: boolean) =>
-    sendMainEvent(EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS, value),
+  setUpdatePreferences: (value: UpdatePreferences) =>
+    sendMainEvent(EVENTS.UPDATE_PREFERENCES, value),
+  getUpdateManager: () => invokeMainEvent(EVENTS.UPDATE_MANAGER),
 
   /**
    * Persist whether Linux should run under the X11 backend. Applied at startup,
