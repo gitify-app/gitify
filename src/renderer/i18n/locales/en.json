@@ -531,7 +531,7 @@
       "idle_icon_help_theme": "This setting is independent of the {{appName}} app theme.",
       "idle_icon_light": "Light",
       "show_notification_count": "Show notification count",
-      "show_notification_count_help": "Show the unread notification count next to the tray icon. Useful for a quick glance at unread activity.",
+      "show_notification_count_help": "Show the unread notification count in the tray. Useful for a quick glance at unread activity.",
       "title": "Tray"
     }
   },
