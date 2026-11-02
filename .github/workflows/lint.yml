@@ -24,6 +24,9 @@ jobs:
           cache: true
           node-version-file: '.nvmrc'
 
+      - name: Run lint with GitHub annotations
+        run: vp run lint:ci
+
       - name: Run lint and format checks
         run: vp run check
 

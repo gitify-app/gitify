@@ -73,6 +73,7 @@
     "i18n:status": "i18next-cli status",
     "lint": "vp lint --fix",
     "lint:check": "vp lint",
+    "lint:ci": "vp lint --format=github",
     "format": "vp fmt",
     "format:check": "vp fmt --check",
     "test": "vp test --coverage --run --project 'happy-dom [preload, renderer]' --project 'node [main, shared]'",
