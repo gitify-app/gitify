@@ -338,8 +338,8 @@ importers:
         specifier: 26.5.12
         version: 26.5.12(typescript@7.0.2)
       i18next-browser-languagedetector:
-        specifier: 8.2.3
-        version: 8.2.3
+        specifier: 8.2.4
+        version: 8.2.4
       i18next-cli:
         specifier: 1.80.5
         version: 1.80.5(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
@@ -3190,8 +3190,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  i18next-browser-languagedetector@8.2.3:
-    resolution: {integrity: sha512-0jSTK3ncpXj9MFdxRz+TVTKDkSvYH8ifB/OCmUdEMprvXC3vy7kEvdKpj0yYB72B0UKEHJLPMEeRVC/UXroWnw==}
+  i18next-browser-languagedetector@8.2.4:
+    resolution: {integrity: sha512-n6zWTCD8plrPN6gotXNXf0qdM2cORZqZ6ypJA4aIXZkEa45Ds2BVlrZfFItD+XQWP3yAgWxV+euldyN+2utk0Q==}
 
   i18next-cli@1.80.5:
     resolution: {integrity: sha512-WhH15VGhKmtcvEB5LWWCe5WgKcPLsKIGTcBeJtcfs4yZjZn+7ywVkRC/cAcPiq5Lnzm05cUK2UjH/dKsYNCN8g==}
@@ -7670,7 +7670,7 @@ snapshots:
 
   husky@9.1.7: {}
 
-  i18next-browser-languagedetector@8.2.3:
+  i18next-browser-languagedetector@8.2.4:
     dependencies:
       '@babel/runtime': 7.29.10
 
