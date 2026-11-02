@@ -493,6 +493,7 @@
       "automatic_updates_default": "On by default.",
       "automatic_updates_default_managed": "Off by default. Update {{appName}} with {{manager}}.",
       "automatic_updates_default_option": "Default",
+      "automatic_updates_default_packager": "Off by default. Update {{appName}} with your package manager.",
       "automatic_updates_detecting": "Detecting how {{appName}} was installed…",
       "automatic_updates_detection_failed": "Unable to detect how {{appName}} was installed. Choose On or Off.",
       "automatic_updates_off": "Automatic updates are off. View releases from the tray menu.",

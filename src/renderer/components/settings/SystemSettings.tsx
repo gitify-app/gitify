@@ -5,7 +5,7 @@ import { DeviceDesktopIcon, PencilIcon, SyncIcon } from '@primer/octicons-react'
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { APPLICATION } from '../../../shared/constants';
-import { isAutomaticUpdates } from '../../../shared/events';
+import { isAutomaticUpdates, type UpdateManager } from '../../../shared/events';
 import { logError, toError } from '../../../shared/logger';
 
 import {
@@ -36,7 +36,7 @@ function AutomaticUpdatesChoice() {
   const { t } = useTranslation();
   const updateSetting = useSettingsStore((s) => s.updateSetting);
   const automaticUpdates = useSettingsStore((s) => s.automaticUpdates);
-  const [updateManager, setUpdateManager] = useState<string | null>(null);
+  const [updateManager, setUpdateManager] = useState<UpdateManager | null>(null);
   const [updateManagerError, setUpdateManagerError] = useState(false);
   const [updateManagerLoading, setUpdateManagerLoading] = useState(true);
 
@@ -85,6 +85,12 @@ function AutomaticUpdatesChoice() {
     automaticUpdatesCaption = t(
       'settings.system.automatic_updates_off',
       'Automatic updates are off. View releases from the tray menu.',
+    );
+  } else if (updateManager === 'packager') {
+    automaticUpdatesCaption = t(
+      'settings.system.automatic_updates_default_packager',
+      'Off by default. Update {{appName}} with your package manager.',
+      { appName: APPLICATION.NAME },
     );
   } else if (updateManager) {
     automaticUpdatesCaption = t(

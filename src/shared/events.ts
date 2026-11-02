@@ -52,6 +52,12 @@ export interface UpdatePreferences {
   showUpdateNotifications: boolean;
 }
 
+/**
+ * A package manager that owns updates for an installation. `packager` means a
+ * package opted in through the resource marker or environment variable.
+ */
+export type UpdateManager = 'Scoop' | 'Flatpak' | 'Snap' | 'packager';
+
 export function isAutomaticUpdates(value: unknown): value is AutomaticUpdates {
   return value === 'default' || value === 'enabled' || value === 'disabled';
 }
@@ -182,7 +188,7 @@ export type EventContracts = AssertEventCoverage<{
     request: boolean;
     response: undefined;
   };
-  [EVENTS.UPDATE_MANAGER]: { request: undefined; response: string | null };
+  [EVENTS.UPDATE_MANAGER]: { request: undefined; response: UpdateManager | null };
   [EVENTS.UPDATE_PREFERENCES]: {
     request: UpdatePreferences;
     response: undefined;

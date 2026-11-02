@@ -1,4 +1,4 @@
-import { EVENTS } from '../../shared/events';
+import { EVENTS, type UpdateManager } from '../../shared/events';
 
 import { handleMainEvent } from '../events';
 import { detectUpdateManager } from '../update-manager';
@@ -11,7 +11,6 @@ vi.mock('../events', () => ({
     applyPreferences = listener;
   }),
 }));
-vi.mock('electron', () => ({ app: { getAppPath: () => '/usr/lib/gitify/app.asar' } }));
 vi.mock('../update-manager', () => ({ detectUpdateManager: vi.fn() }));
 vi.mock('../../shared/logger', () => ({ logError: vi.fn(), toError: (error: unknown) => error }));
 
@@ -25,9 +24,9 @@ describe('updater preferences', () => {
     vi.mocked(detectUpdateManager).mockResolvedValue(null);
   });
 
-  it.each([
+  it.each<[string, UpdateManager | null, boolean]>([
     ['default', null, true],
-    ['default', 'pacman', false],
+    ['default', 'Flatpak', false],
     ['enabled', 'Scoop', true],
     ['disabled', null, false],
   ])('applies %s with manager %s as %s', async (automaticUpdates, manager, enabled) => {
@@ -40,7 +39,7 @@ describe('updater preferences', () => {
   });
 
   it('waits for detection and only applies the latest preference', async () => {
-    const detection = Promise.withResolvers<string | null>();
+    const detection = Promise.withResolvers<UpdateManager | null>();
     vi.mocked(detectUpdateManager).mockReturnValue(detection.promise);
     registerUpdaterHandlers(appUpdater);
     const first = applyPreferences(null, {

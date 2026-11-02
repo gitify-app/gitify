@@ -65,6 +65,16 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     expect(useSettingsStore.getState().automaticUpdates).toBe('default');
   });
 
+  it('points a packager opt-in to the package manager', async () => {
+    vi.mocked(window.gitify.getUpdateManager).mockResolvedValue('packager');
+    await act(async () => {
+      renderWithProviders(<SystemSettings />);
+    });
+    expect(
+      screen.getByText('Off by default. Update Gitify with your package manager.'),
+    ).toBeInTheDocument();
+  });
+
   it('explains the default for a direct installation', async () => {
     await act(async () => {
       renderWithProviders(<SystemSettings />);
