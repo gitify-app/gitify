@@ -38,14 +38,17 @@ export function registerTrayHandlers(mb: Menubar): void {
       refresh();
     }
   });
+
   onMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, (_, value) => {
     highlightUnread = value;
     refresh();
   });
+
   onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, value) => {
     status = value;
     refresh();
   });
+
   onMainEvent(EVENTS.UPDATE_ICON_TITLE, (_, title) => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setTitle(title);
