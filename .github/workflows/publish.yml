@@ -47,18 +47,21 @@ jobs:
             platform: macOS
             package-cmd: vp run package:macos --publish onTagOrDraft
             verify-path: dist/mac-universal/Gitify.app
+            fuse-path: dist/mac-universal/Gitify.app
             artifact-name: Gitify-release-mac
             use-apple-notarization: true
           - os: windows-latest
             platform: Windows
             package-cmd: vp run package:win --publish onTagOrDraft
             verify-path: dist/win-unpacked
+            fuse-path: dist/win-unpacked/Gitify.exe
             artifact-name: Gitify-release-win
             use-apple-notarization: false
           - os: ubuntu-latest
             platform: Linux
             package-cmd: vp run package:linux --publish onTagOrDraft
             verify-path: dist/linux-unpacked
+            fuse-path: dist/linux-unpacked/gitify
             artifact-name: Gitify-release-linux
             use-apple-notarization: false
     runs-on: ${{ matrix.os }}
@@ -97,6 +100,9 @@ jobs:
       - name: Verify packaged dependencies
         shell: bash
         run: node scripts/verifyPackagedDependencies.js "${{ matrix.verify-path }}"
+
+      - name: Verify Electron fuses
+        run: node scripts/verifyFuses.js "${{ matrix.fuse-path }}"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
