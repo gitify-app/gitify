@@ -39,7 +39,6 @@ const FUSE_DISABLE = 48; // '0'
  */
 const EXPECTED_FUSES = {
   runAsNode: false,
-  enableCookieEncryption: true,
   enableNodeOptionsEnvironmentVariable: false,
   enableNodeCliInspectArguments: false,
   enableEmbeddedAsarIntegrityValidation: true,

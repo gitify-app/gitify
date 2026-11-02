@@ -242,7 +242,6 @@ Packaged builds pin Electron's [fuses][electron-fuses] in `electron-builder.js`,
 | Fuse                                    | Value | Effect                                                                 |
 | --------------------------------------- | ----- | ---------------------------------------------------------------------- |
 | `runAsNode`                             | off   | refuses `ELECTRON_RUN_AS_NODE`, so the binary cannot run as plain Node |
-| `enableCookieEncryption`                | on    | encrypts the Chromium cookie store at rest                             |
 | `enableNodeOptionsEnvironmentVariable`  | off   | ignores `NODE_OPTIONS` and `NODE_EXTRA_CA_CERTS`                       |
 | `enableNodeCliInspectArguments`         | off   | refuses `--inspect` and `SIGUSR1`                                      |
 | `enableEmbeddedAsarIntegrityValidation` | on    | validates `app.asar` before loading it                                 |
@@ -250,8 +249,9 @@ Packaged builds pin Electron's [fuses][electron-fuses] in `electron-builder.js`,
 
 `electronFuses` also sets `resetAdHocDarwinSignature`, which is not a fuse. Flipping the fuses invalidates the ad-hoc signature Electron ships with, and Apple Silicon refuses to launch a binary whose signature no longer validates. The build workflow packages macOS unsigned (`-c.mac.identity=null`), so without it the arm64 artifact is killed on launch. Signed builds re-sign afterwards, superseding the ad-hoc signature.
 
-Three settings are deliberate non-choices:
+Four settings are deliberate non-choices:
 
+- **`enableCookieEncryption` stays at its Electron default.** Tokens are already encrypted through `safeStorage`, and Gitify keeps no cookies worth protecting. Electron also documents the fuse as one-way: disabling it later loses the cookie store.
 - **`grantFileProtocolExtraPrivileges` stays at its Electron default.** The renderer loads `index.html` over `file://`, so removing those privileges breaks asset and sound loading.
 - **`asar` must stay enabled.** `onlyLoadAppFromAsar` requires it, and packaging without an archive fails rather than producing an artifact that cannot start.
 - **Asar integrity is not required on Linux.** Electron does not support it there, so the fuse is inert.

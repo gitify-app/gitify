@@ -15,7 +15,6 @@ const config = {
    */
   electronFuses: {
     runAsNode: false, // refuses ELECTRON_RUN_AS_NODE
-    enableCookieEncryption: true, // encrypts the Chromium cookie store at rest
     enableNodeOptionsEnvironmentVariable: false, // ignores NODE_OPTIONS / NODE_EXTRA_CA_CERTS
     enableNodeCliInspectArguments: false, // refuses --inspect and SIGUSR1
     enableEmbeddedAsarIntegrityValidation: true, // validates app.asar before loading it
@@ -32,6 +31,8 @@ const config = {
     // grantFileProtocolExtraPrivileges is deliberately left at its Electron default:
     // the renderer loads index.html over file://, so removing those privileges
     // breaks asset and sound loading.
+    // enableCookieEncryption is left at its default: tokens are already encrypted
+    // through safeStorage, and Gitify keeps no cookies worth protecting.
   },
   files: ['assets/images/*', 'assets/sounds/*', 'build/**/*', 'LICENSE', 'package.json'],
   electronLanguages: ['en'],
