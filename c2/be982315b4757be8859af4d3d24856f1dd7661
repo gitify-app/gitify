@@ -1,0 +1,48 @@
+.opencode/commands/opsx-apply.md
+  h_ac004aadb63da9 60
+.opencode/commands/opsx-bulk-archive.md
+  h_ac004aadb63da9 1-369
+.opencode/commands/opsx-continue.md
+  h_ac004aadb63da9 2,5,20,37,39,41,51-72,74,76-105,110-120,123-131
+.opencode/commands/opsx-ff.md
+  h_ac004aadb63da9 1-122
+.opencode/commands/opsx-new.md
+  h_ac004aadb63da9 1-80
+.opencode/commands/opsx-onboard.md
+  h_ac004aadb63da9 1-567
+.opencode/commands/opsx-verify.md
+  h_ac004aadb63da9 1-215
+.opencode/skills/openspec-apply-change/SKILL.md
+  h_ac004aadb63da9 10,67
+.opencode/skills/openspec-archive-change/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-bulk-archive-change/SKILL.md
+  h_ac004aadb63da9 1-377
+.opencode/skills/openspec-continue-change/SKILL.md
+  h_ac004aadb63da9 2-3,10,13,44,46,48,58-79,81,83-112,117-127,130-138
+.opencode/skills/openspec-explore/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-ff-change/SKILL.md
+  h_ac004aadb63da9 1-129
+.opencode/skills/openspec-new-change/SKILL.md
+  h_ac004aadb63da9 1-88
+.opencode/skills/openspec-onboard/SKILL.md
+  h_ac004aadb63da9 1-575
+.opencode/skills/openspec-propose/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-sync-specs/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-verify-change/SKILL.md
+  h_ac004aadb63da9 1-223
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c2be982315b4757be8859af4d3d24856f1dd7661",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
