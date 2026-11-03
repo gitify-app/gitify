@@ -148,7 +148,7 @@
     "typescript": "7.0.2",
     "vite": "catalog:",
     "vite-plugin-checker": "0.14.5",
-    "vite-plugin-electron": "1.1.2",
+    "vite-plugin-electron": "1.2.0",
     "vite-plus": "catalog:",
     "vitest": "catalog:",
     "zustand": "5.0.16"
