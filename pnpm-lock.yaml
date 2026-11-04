@@ -335,8 +335,8 @@ importers:
         specifier: 9.1.7
         version: 9.1.7
       i18next:
-        specifier: 26.6.0
-        version: 26.6.0(typescript@7.0.2)
+        specifier: 26.7.0
+        version: 26.7.0(typescript@7.0.2)
       i18next-browser-languagedetector:
         specifier: 8.2.4
         version: 8.2.4
@@ -357,7 +357,7 @@ importers:
         version: 19.3.1(react@19.3.1)
       react-i18next:
         specifier: 17.1.10
-        version: 17.1.10(i18next@26.6.0(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
+        version: 17.1.10(i18next@26.7.0(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
       react-router:
         specifier: 8.5.1
         version: 8.5.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -3175,8 +3175,8 @@ packages:
     resolution: {integrity: sha512-1SwWSlbgpMx/AyWYJvPrg2ns1CzXsaM0olmqfDSm2fIzwbChdkxeaiAXw0xhdNPuo/v8nuwxVTLfpf8NxrdlNw==}
     hasBin: true
 
-  i18next@26.6.0:
-    resolution: {integrity: sha512-jpb1n5386s9mbBLNF6tSNIVhbBUUNiNeDyjWte+uxHP/Wr+CEy7WBM8q29TkfQ46VbwKeJFYdQJK3pSUhLp4CQ==}
+  i18next@26.7.0:
+    resolution: {integrity: sha512-ooLIKg1z3/iTQ4fjeQKB2FkMoYhplTCB4djrlTYLg9b32sycFcqovQIXfM7NYVMtmSwQ4I67uf4/JRSeO/Cvog==}
     peerDependencies:
       typescript: ^5 || ^6 || ^7
     peerDependenciesMeta:
@@ -7585,7 +7585,7 @@ snapshots:
       chokidar: 5.0.0
       commander: 15.0.0
       glob: 13.0.6
-      i18next: 26.6.0(typescript@7.0.2)
+      i18next: 26.7.0(typescript@7.0.2)
       i18next-resources-for-ts: 2.1.2
       jiti: 2.7.0
       jsonc-parser: 3.3.1
@@ -7593,7 +7593,7 @@ snapshots:
       messageformat: 4.1.0
       minimatch: 10.2.6
       nano-spawn: 2.1.0
-      react-i18next: 17.1.10(i18next@26.6.0(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
+      react-i18next: 17.1.10(i18next@26.7.0(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
       yaml: 2.9.1
       yocto-spinner: 1.2.2
     transitivePeerDependencies:
@@ -7613,7 +7613,7 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  i18next@26.6.0(typescript@7.0.2):
+  i18next@26.7.0(typescript@7.0.2):
     optionalDependencies:
       typescript: 7.0.2
 
@@ -8389,11 +8389,11 @@ snapshots:
       react: 19.3.1
       scheduler: 0.28.0
 
-  react-i18next@17.1.10(i18next@26.6.0(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2):
+  react-i18next@17.1.10(i18next@26.7.0(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2):
     dependencies:
       '@babel/runtime': 7.29.10
       html-parse-stringify: 4.0.1
-      i18next: 26.6.0(typescript@7.0.2)
+      i18next: 26.7.0(typescript@7.0.2)
       react: 19.3.1
       use-sync-external-store: 1.7.0(react@19.3.1)
     optionalDependencies:
