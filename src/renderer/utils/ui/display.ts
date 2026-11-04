@@ -11,38 +11,25 @@ export interface ParsedCodePart {
 /**
  * Returns the appropriate chevron direction and accessible label for a collapsible section.
  *
- * @param hasNotifications - Whether the section has any notifications to display.
+ * The icon always reflects the disclosure state: right when collapsed and down
+ * when expanded. Empty sections follow the same convention because they still
+ * disclose the "all read" panel.
+ *
  * @param isVisible - Whether the section is currently expanded/visible.
  * @param type - The type of section (`'account'` or `'repository'`).
  * @returns A `Chevron` object containing the direction and its accessible label.
  */
-export function getChevronDetails(
-  hasNotifications: boolean,
-  isVisible: boolean,
-  type: 'account' | 'repository',
-): Chevron {
+export function getChevronDetails(isVisible: boolean, type: 'account' | 'repository'): Chevron {
   const typeLabel =
     type === 'account'
       ? i18n.t('chevron.account', 'account')
       : i18n.t('chevron.repository', 'repository');
 
-  if (!hasNotifications) {
-    return {
-      direction: 'left',
-      label: i18n.t('chevron.none', 'No notifications for {{type}}', { type: typeLabel }),
-    };
-  }
-
-  if (isVisible) {
-    return {
-      direction: 'down',
-      label: i18n.t('chevron.hide', 'Hide {{type}} notifications', { type: typeLabel }),
-    };
-  }
-
   return {
-    direction: 'right',
-    label: i18n.t('chevron.show', 'Show {{type}} notifications', { type: typeLabel }),
+    direction: isVisible ? 'down' : 'right',
+    label: isVisible
+      ? i18n.t('chevron.hide', 'Hide {{type}} notifications', { type: typeLabel })
+      : i18n.t('chevron.show', 'Show {{type}} notifications', { type: typeLabel }),
   };
 }
 

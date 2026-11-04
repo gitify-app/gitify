@@ -33,7 +33,7 @@ export function AccountHeader({
   onToggle,
 }: Readonly<AccountHeaderProps>) {
   const { t } = useTranslation();
-  const chevron = getChevronDetails(notificationCount > 0, !isCollapsed, 'account');
+  const chevron = getChevronDetails(!isCollapsed, 'account');
 
   return (
     <Stack
@@ -85,6 +85,7 @@ export function AccountHeader({
 
         <HoverButton
           action={onToggle}
+          expanded={!isCollapsed}
           icon={getChevronIcon(chevron.direction)}
           label={chevron.label}
           testid="account-toggle"
