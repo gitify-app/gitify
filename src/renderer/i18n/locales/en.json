@@ -42,7 +42,6 @@
   "chevron": {
     "account": "account",
     "hide": "Hide {{type}} notifications",
-    "none": "No notifications for {{type}}",
     "repository": "repository",
     "show": "Show {{type}} notifications"
   },

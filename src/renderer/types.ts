@@ -294,7 +294,7 @@ export enum Size {
 /**
  * The direction a chevron points.
  */
-export type ChevronDirection = 'down' | 'left' | 'right';
+export type ChevronDirection = 'down' | 'right';
 
 /**
  * Details for Chevron header accordion.

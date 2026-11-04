@@ -3,7 +3,6 @@ import type { FC } from 'react';
 import {
   CheckIcon,
   ChevronDownIcon,
-  ChevronLeftIcon,
   ChevronRightIcon,
   CommentIcon,
   FeedPersonIcon,
@@ -114,7 +113,6 @@ export function getDefaultUserIcon(userType: UserType) {
 
 const CHEVRON_ICONS: Record<ChevronDirection, Icon> = {
   down: ChevronDownIcon,
-  left: ChevronLeftIcon,
   right: ChevronRightIcon,
 };
 

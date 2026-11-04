@@ -85,6 +85,7 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
       'title',
       'Hide account notifications',
     );
+    expect(screen.getByTestId('account-toggle')).toHaveAttribute('aria-expanded', 'true');
   });
 
   it('labels the toggle to show notifications when collapsed', () => {
@@ -94,6 +95,7 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
       'title',
       'Show account notifications',
     );
+    expect(screen.getByTestId('account-toggle')).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('renders an error background when the account errored', () => {

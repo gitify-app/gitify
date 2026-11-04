@@ -10,12 +10,14 @@ interface HoverButtonProps {
   testid: string;
   action: () => void;
   variant?: VariantType;
+  expanded?: boolean;
 }
 
 export function HoverButton({ enabled = true, variant = 'invisible', ...props }: HoverButtonProps) {
   return (
     enabled && (
       <IconButton
+        aria-expanded={props.expanded}
         aria-label={props.label}
         data-testid={props.testid}
         icon={props.icon}

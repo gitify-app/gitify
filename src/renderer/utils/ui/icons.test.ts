@@ -1,7 +1,6 @@
 import {
   CheckIcon,
   ChevronDownIcon,
-  ChevronLeftIcon,
   ChevronRightIcon,
   CommentIcon,
   FeedPersonIcon,
@@ -132,7 +131,6 @@ describe('renderer/utils/icons.ts', () => {
 
   it('getChevronIcon', () => {
     expect(getChevronIcon('down')).toBe(ChevronDownIcon);
-    expect(getChevronIcon('left')).toBe(ChevronLeftIcon);
     expect(getChevronIcon('right')).toBe(ChevronRightIcon);
   });
 });

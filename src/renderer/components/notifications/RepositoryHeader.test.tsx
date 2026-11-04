@@ -132,9 +132,21 @@ describe('renderer/components/notifications/RepositoryHeader.tsx', () => {
 
     renderWithProviders(<RepositoryHeader {...props} onToggle={onToggle} />);
 
-    await userEvent.click(screen.getByRole('button', { name: 'Hide repository notifications' }));
+    const toggle = screen.getByRole('button', { name: 'Hide repository notifications' });
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+
+    await userEvent.click(toggle);
 
     expect(onToggle).toHaveBeenCalledTimes(1);
+  });
+
+  it('exposes the collapsed state', () => {
+    renderWithProviders(<RepositoryHeader {...props} isCollapsed />);
+
+    expect(screen.getByRole('button', { name: 'Show repository notifications' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
   });
 
   it('hides its hover actions while animating out', () => {
