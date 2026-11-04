@@ -57,7 +57,7 @@ Gitify uses a forge adapter pattern so notifications can come from any compatibl
 
 #### 🍺 Homebrew
 
-macOS users can also install via [Homebrew][brew]
+Users can also install via [Homebrew][brew]
 
 ```shell
 brew install gitify
