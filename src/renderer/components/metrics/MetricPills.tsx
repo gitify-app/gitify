@@ -17,7 +17,6 @@ import { IconColor } from '../../types';
 import { MetricPillContent } from './MetricPill';
 
 const GAP = 4;
-const OVERFLOW_CHIP_ESTIMATE = 44;
 
 interface MetricPillsProps {
   pills: ReactElement[];
@@ -41,7 +40,7 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
   const [isOverflowOpen, setIsOverflowOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const chipRef = useRef<HTMLDivElement>(null);
+  const chipMeasureRef = useRef<HTMLDivElement>(null);
   const pillRefs = useRef<Array<HTMLDivElement | null>>([]);
   const closeTimerRef = useRef<number | null>(null);
 
@@ -65,6 +64,8 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
   const count = Math.min(visibleCount, pills.length);
   const hiddenPills = pills.slice(count);
 
+  const pillCount = pills.length;
+
   const measure = useCallback(() => {
     const container = containerRef.current;
 
@@ -76,22 +77,30 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
 
     if (!available) {
       // No layout (SSR/happy-dom): keep every pill inline.
-      setVisibleCount(pills.length);
+      setVisibleCount(pillCount);
       return;
     }
 
-    const widths = pills.map((_, index) => {
-      const element = pillRefs.current[index];
-      return element?.getBoundingClientRect().width ?? 0;
-    });
-    const chipWidth = chipRef.current?.getBoundingClientRect().width ?? OVERFLOW_CHIP_ESTIMATE;
+    const widths = Array.from(
+      { length: pillCount },
+      (_, index) => pillRefs.current[index]?.getBoundingClientRect().width ?? 0,
+    );
+
+    // Measure every possible overflow count independently of the visible chip.
+    // Proportional digits can make a smaller count wider, so reserve the widest
+    // candidate. This is available before overflow first appears and can shrink
+    // when the candidates or their styling change.
+    const chipWidth = chipMeasureRef.current?.getBoundingClientRect().width ?? 0;
 
     const next = getVisibleCount(widths, available, chipWidth);
     setVisibleCount((current) => (current === next ? current : next));
-    setIsOverflowOpen((open) => (open && next === pills.length ? false : open));
-  }, [pills]);
+    setIsOverflowOpen((open) => (open && next === pillCount ? false : open));
+  }, [pillCount]);
 
-  useLayoutEffect(measure);
+  // Measure before paint whenever the pills are re-rendered (content may have
+  // changed width), but not after our own visibility updates. The result only
+  // uses measurements independent of the previous visibility state.
+  useLayoutEffect(measure, [measure, pills]);
 
   useEffect(() => {
     if (typeof ResizeObserver === 'undefined' || !containerRef.current) {
@@ -127,6 +136,26 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
       data-testid="metric-pills"
       ref={containerRef}
     >
+      {/* Overlap the candidates in one max-content grid cell: its width is the
+          widest chip, without contributing any space to the footer layout. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none invisible absolute left-0 top-0 grid w-max"
+        data-testid="metric-overflow-measure"
+        inert
+        ref={chipMeasureRef}
+      >
+        {pills.map((pill, index) => (
+          <button className="col-start-1 row-start-1 w-max shrink-0" key={pill.key} type="button">
+            <MetricPillContent
+              color={IconColor.GRAY}
+              icon={KebabHorizontalIcon}
+              metric={index + 1}
+            />
+          </button>
+        ))}
+      </div>
+
       {pills.map((pill, index) => {
         const isHidden = index >= count;
 
@@ -134,8 +163,8 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
           <div
             aria-hidden={isHidden || undefined}
             className={cn(
-              'flex shrink-0',
-              isHidden && 'pointer-events-none invisible absolute left-0 top-0 w-max',
+              'flex w-max shrink-0',
+              isHidden && 'pointer-events-none invisible absolute left-0 top-0',
             )}
             inert={isHidden || undefined}
             key={pill.key}
@@ -149,7 +178,7 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
       })}
 
       {hiddenPills.length > 0 && (
-        <div className="flex shrink-0" ref={chipRef}>
+        <div className="flex shrink-0">
           <AnchoredOverlay
             align="end"
             anchorOffset={8}
