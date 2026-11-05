@@ -1,0 +1,14 @@
+src/renderer/components/metrics/MetricPills.test.tsx
+  h_ac004aadb63da9 139-170,189-190
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fe9270bf5108171adecbaae5c6133415578763e5",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
