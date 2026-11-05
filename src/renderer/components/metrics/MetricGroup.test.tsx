@@ -139,7 +139,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       tree.getByText('#456'),
       tree.getByText('2/5'),
       tree.getByText('9/10'),
-      tree.getByText('3'),
+      tree.getByRole('button', { name: '3 comments' }),
     ];
 
     for (let i = 1; i < ordered.length; i++) {

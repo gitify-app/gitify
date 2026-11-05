@@ -17,7 +17,6 @@ import { IconColor } from '../../types';
 import { MetricPillContent } from './MetricPill';
 
 const GAP = 4;
-const OVERFLOW_CHIP_ESTIMATE = 44;
 
 interface MetricPillsProps {
   pills: ReactElement[];
@@ -41,9 +40,8 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
   const [isOverflowOpen, setIsOverflowOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const chipRef = useRef<HTMLDivElement>(null);
+  const chipMeasureRef = useRef<HTMLDivElement>(null);
   const pillRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const chipReserveRef = useRef(OVERFLOW_CHIP_ESTIMATE);
   const closeTimerRef = useRef<number | null>(null);
 
   const cancelClose = useCallback(() => {
@@ -88,20 +86,20 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
       (_, index) => pillRefs.current[index]?.getBoundingClientRect().width ?? 0,
     );
 
-    // The reserve for the overflow chip only ever grows. Using the live chip
-    // width (or an estimate while it is unmounted) would make the result depend
-    // on the previous result, which can oscillate between two counts.
-    const chipWidth = chipRef.current?.getBoundingClientRect().width ?? 0;
-    chipReserveRef.current = Math.max(chipReserveRef.current, chipWidth);
+    // Measure every possible overflow count independently of the visible chip.
+    // Proportional digits can make a smaller count wider, so reserve the widest
+    // candidate. This is available before overflow first appears and can shrink
+    // when the candidates or their styling change.
+    const chipWidth = chipMeasureRef.current?.getBoundingClientRect().width ?? 0;
 
-    const next = getVisibleCount(widths, available, chipReserveRef.current);
+    const next = getVisibleCount(widths, available, chipWidth);
     setVisibleCount((current) => (current === next ? current : next));
     setIsOverflowOpen((open) => (open && next === pillCount ? false : open));
   }, [pillCount]);
 
   // Measure before paint whenever the pills are re-rendered (content may have
   // changed width), but not after our own visibility updates. The result only
-  // depends on the container and pill widths, so repeated runs settle.
+  // uses measurements independent of the previous visibility state.
   useLayoutEffect(measure, [measure, pills]);
 
   useEffect(() => {
@@ -138,6 +136,26 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
       data-testid="metric-pills"
       ref={containerRef}
     >
+      {/* Overlap the candidates in one max-content grid cell: its width is the
+          widest chip, without contributing any space to the footer layout. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none invisible absolute left-0 top-0 grid w-max"
+        data-testid="metric-overflow-measure"
+        inert
+        ref={chipMeasureRef}
+      >
+        {pills.map((pill, index) => (
+          <button className="col-start-1 row-start-1 w-max shrink-0" key={pill.key} type="button">
+            <MetricPillContent
+              color={IconColor.GRAY}
+              icon={KebabHorizontalIcon}
+              metric={index + 1}
+            />
+          </button>
+        ))}
+      </div>
+
       {pills.map((pill, index) => {
         const isHidden = index >= count;
 
@@ -160,7 +178,7 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
       })}
 
       {hiddenPills.length > 0 && (
-        <div className="flex shrink-0" ref={chipRef}>
+        <div className="flex shrink-0">
           <AnchoredOverlay
             align="end"
             anchorOffset={8}

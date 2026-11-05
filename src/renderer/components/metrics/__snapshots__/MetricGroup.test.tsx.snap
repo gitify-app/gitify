@@ -9,6 +9,105 @@ exports[`renderer/components/metrics/MetricGroup.tsx > renders pills when showPi
     data-testid="metric-pills"
   >
     <div
+      aria-hidden="true"
+      class="pointer-events-none invisible absolute left-0 top-0 grid w-max"
+      data-testid="metric-overflow-measure"
+      inert=""
+    >
+      <button
+        class="col-start-1 row-start-1 w-max shrink-0"
+        type="button"
+      >
+        <span
+          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+          data-component="Label"
+          data-size="small"
+          data-variant="secondary"
+        >
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-kebab-horizontal text-gitify-icon-muted"
+              data-component="Octicon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="12"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="12"
+            >
+              <path
+                d="M8 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM1.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm13 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+              />
+            </svg>
+            <span
+              class="text-xxs pl-1 prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              1
+            </span>
+          </div>
+        </span>
+      </button>
+      <button
+        class="col-start-1 row-start-1 w-max shrink-0"
+        type="button"
+      >
+        <span
+          class="hover:bg-gitify-notification-pill-hover prc-Label-Label-qG-Zu"
+          data-component="Label"
+          data-size="small"
+          data-variant="secondary"
+        >
+          <div
+            class="prc-Stack-Stack-UQ9k6"
+            data-align="center"
+            data-component="Stack"
+            data-direction="horizontal"
+            data-gap="none"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-kebab-horizontal text-gitify-icon-muted"
+              data-component="Octicon"
+              display="inline-block"
+              fill="currentColor"
+              focusable="false"
+              height="12"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
+              viewBox="0 0 16 16"
+              width="12"
+            >
+              <path
+                d="M8 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM1.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm13 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+              />
+            </svg>
+            <span
+              class="text-xxs pl-1 prc-Text-Text-9mHv3"
+              data-component="Text"
+            >
+              2
+            </span>
+          </div>
+        </span>
+      </button>
+    </div>
+    <div
       class="flex w-max shrink-0"
     >
       <button
