@@ -9,7 +9,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx > renders pills when showPi
     data-testid="metric-pills"
   >
     <div
-      class="flex shrink-0"
+      class="flex w-max shrink-0"
     >
       <button
         aria-describedby="_r_0_"
@@ -71,7 +71,7 @@ exports[`renderer/components/metrics/MetricGroup.tsx > renders pills when showPi
       </span>
     </div>
     <div
-      class="flex shrink-0"
+      class="flex w-max shrink-0"
     >
       <button
         aria-describedby="_r_1_"

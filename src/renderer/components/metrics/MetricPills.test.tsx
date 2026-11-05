@@ -118,6 +118,57 @@ describe('renderer/components/metrics/MetricPills.tsx', () => {
     restoreLayout();
   });
 
+  it('does not feed overflow layout changes back into a synchronous render loop', () => {
+    mockOverflowLayout();
+    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockImplementation(function (
+      this: HTMLElement,
+    ) {
+      // Simulate the surrounding flex layout allocating different space once
+      // the overflow chip replaces the trailing pills.
+      return this.querySelector('[data-testid="metric-overflow"]') ? 250 : 200;
+    });
+
+    const tree = render(<MetricPills pills={pills} />);
+
+    expect(tree.getByTestId('metric-overflow')).toHaveTextContent('2');
+    expect(
+      tree.container.querySelectorAll('[data-testid="metric-pills"] > [aria-hidden="true"]'),
+    ).toHaveLength(2);
+  });
+
+  it('remeasures on resize and when the pills change', () => {
+    mockOverflowLayout();
+    const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(200);
+    let onResize: ResizeObserverCallback;
+    const observe = vi.fn();
+    vi.stubGlobal(
+      'ResizeObserver',
+      class {
+        constructor(callback: ResizeObserverCallback) {
+          onResize = callback;
+        }
+        observe = observe;
+        disconnect = vi.fn();
+      },
+    );
+
+    const tree = render(<MetricPills pills={pills} />);
+    expect(tree.getByTestId('metric-overflow')).toHaveTextContent('2');
+    // Both the container and the natural-width pill wrappers are observed.
+    expect(observe).toHaveBeenCalledTimes(pills.length + 1);
+
+    clientWidth.mockReturnValue(250);
+    act(() => onResize([], {} as ResizeObserver));
+    expect(tree.queryByTestId('metric-overflow')).not.toBeInTheDocument();
+
+    clientWidth.mockReturnValue(200);
+    act(() => onResize([], {} as ResizeObserver));
+    expect(tree.getByTestId('metric-overflow')).toHaveTextContent('2');
+
+    tree.rerender(<MetricPills pills={pills.slice(0, 2)} />);
+    expect(tree.queryByTestId('metric-overflow')).not.toBeInTheDocument();
+  });
+
   describe('getVisibleCount', () => {
     it('keeps every pill when the total fits', () => {
       expect(getVisibleCount([10, 10], 100, 20)).toBe(2);

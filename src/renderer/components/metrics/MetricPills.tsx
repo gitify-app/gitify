@@ -91,7 +91,10 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
     setIsOverflowOpen((open) => (open && next === pills.length ? false : open));
   }, [pills]);
 
-  useLayoutEffect(measure);
+  // Measure when the pills change, not after our own visibility updates. The
+  // overflow chip changes the layout, so measuring again on every commit can
+  // bounce between two visible counts until React hits its update-depth limit.
+  useLayoutEffect(measure, [measure]);
 
   useEffect(() => {
     if (typeof ResizeObserver === 'undefined' || !containerRef.current) {
@@ -100,6 +103,13 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
 
     const observer = new ResizeObserver(measure);
     observer.observe(containerRef.current);
+    // Pill contents can resize independently of the available space (for
+    // example, after a font loads). Keep those measurements up to date too.
+    for (const pill of pillRefs.current) {
+      if (pill) {
+        observer.observe(pill);
+      }
+    }
 
     return () => observer.disconnect();
   }, [measure]);
@@ -134,8 +144,8 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
           <div
             aria-hidden={isHidden || undefined}
             className={cn(
-              'flex shrink-0',
-              isHidden && 'pointer-events-none invisible absolute left-0 top-0 w-max',
+              'flex w-max shrink-0',
+              isHidden && 'pointer-events-none invisible absolute left-0 top-0',
             )}
             inert={isHidden || undefined}
             key={pill.key}
