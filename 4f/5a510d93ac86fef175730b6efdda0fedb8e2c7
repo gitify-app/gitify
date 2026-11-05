@@ -1,0 +1,18 @@
+src/renderer/components/notifications/NotificationList.tsx
+  h_ac004aadb63da9 158
+src/renderer/utils/notifications/listItems.test.ts
+  h_ac004aadb63da9 113-137
+src/renderer/utils/notifications/listItems.ts
+  h_ac004aadb63da9 22,70-82,90,99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4f5a510d93ac86fef175730b6efdda0fedb8e2c7",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
