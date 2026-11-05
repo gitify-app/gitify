@@ -168,6 +168,45 @@ describe('renderer/components/metrics/MetricPills.tsx', () => {
     }
   });
 
+  it('settles when parent re-renders while the chip is wider than its estimate', () => {
+    mockOverflowLayout();
+    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(200);
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (
+      this: HTMLElement,
+    ) {
+      const isChip = this.querySelector('[data-testid="metric-overflow"]') !== null;
+      const inStrip = this.closest('[data-testid="metric-pills"]') !== null;
+      const width = isChip ? 80 : inStrip ? 40 : 0;
+      return {
+        width,
+        height: 20,
+        top: 0,
+        left: 0,
+        right: width,
+        bottom: 20,
+        x: 0,
+        y: 0,
+      } as DOMRect;
+    });
+
+    const tree = render(<MetricPills pills={pills} />);
+
+    // New array identities, as MetricGroup produces on every render.
+    for (let i = 0; i < 60; i += 1) {
+      tree.rerender(<MetricPills pills={[...pills]} />);
+    }
+
+    const counts = new Set<string | null>();
+    for (let i = 0; i < 3; i += 1) {
+      tree.rerender(<MetricPills pills={[...pills]} />);
+      counts.add(tree.queryByTestId('metric-overflow')?.textContent ?? null);
+    }
+    expect(counts.size).toBe(1);
+    // 200px fits 3 x 40px pills beside the 44px estimate but only 2 beside the
+    // real 80px chip, so 3 pills overflow once the chip width is known.
+    expect(tree.getByTestId('metric-overflow')).toHaveTextContent('3');
+  });
+
   it('remeasures on resize and when the pills change', () => {
     mockOverflowLayout();
     const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(200);

@@ -43,6 +43,7 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chipRef = useRef<HTMLDivElement>(null);
   const pillRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const chipReserveRef = useRef(OVERFLOW_CHIP_ESTIMATE);
   const closeTimerRef = useRef<number | null>(null);
 
   const cancelClose = useCallback(() => {
@@ -65,6 +66,8 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
   const count = Math.min(visibleCount, pills.length);
   const hiddenPills = pills.slice(count);
 
+  const pillCount = pills.length;
+
   const measure = useCallback(() => {
     const container = containerRef.current;
 
@@ -76,25 +79,30 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
 
     if (!available) {
       // No layout (SSR/happy-dom): keep every pill inline.
-      setVisibleCount(pills.length);
+      setVisibleCount(pillCount);
       return;
     }
 
-    const widths = pills.map((_, index) => {
-      const element = pillRefs.current[index];
-      return element?.getBoundingClientRect().width ?? 0;
-    });
-    const chipWidth = chipRef.current?.getBoundingClientRect().width ?? OVERFLOW_CHIP_ESTIMATE;
+    const widths = Array.from(
+      { length: pillCount },
+      (_, index) => pillRefs.current[index]?.getBoundingClientRect().width ?? 0,
+    );
 
-    const next = getVisibleCount(widths, available, chipWidth);
+    // The reserve for the overflow chip only ever grows. Using the live chip
+    // width (or an estimate while it is unmounted) would make the result depend
+    // on the previous result, which can oscillate between two counts.
+    const chipWidth = chipRef.current?.getBoundingClientRect().width ?? 0;
+    chipReserveRef.current = Math.max(chipReserveRef.current, chipWidth);
+
+    const next = getVisibleCount(widths, available, chipReserveRef.current);
     setVisibleCount((current) => (current === next ? current : next));
-    setIsOverflowOpen((open) => (open && next === pills.length ? false : open));
-  }, [pills]);
+    setIsOverflowOpen((open) => (open && next === pillCount ? false : open));
+  }, [pillCount]);
 
-  // Measure when the pills change, not after our own visibility updates. The
-  // overflow chip changes the layout, so measuring again on every commit can
-  // bounce between two visible counts until React hits its update-depth limit.
-  useLayoutEffect(measure, [measure]);
+  // Measure before paint whenever the pills are re-rendered (content may have
+  // changed width), but not after our own visibility updates. The result only
+  // depends on the container and pill widths, so repeated runs settle.
+  useLayoutEffect(measure, [measure, pills]);
 
   useEffect(() => {
     if (typeof ResizeObserver === 'undefined' || !containerRef.current) {
