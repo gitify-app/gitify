@@ -613,6 +613,20 @@ body,
   border-radius: 0;
 }
 
+/* Primer paints expanded buttons with an active fill, which made the header
+ * collapse chevron look highlighted whenever its rail was shown — even while
+ * hovering a different action. Only highlight it when hovering the chevron
+ * itself or the header's empty space (which also toggles). */
+.group .gitify-hover-actions button[aria-expanded='true']:not(:hover) {
+  background-color: transparent;
+}
+
+.group:hover:not(:has(button:not([aria-expanded]):hover, a:hover))
+  .gitify-hover-actions
+  button[aria-expanded] {
+  background-color: var(--button-invisible-bgColor-hover);
+}
+
 /* Settings rows are `<fieldset>`s so their controls stay semantically grouped,
  * but Primer's global stylesheet resets `fieldset { padding: 0; border: 0 }`
  * outside Tailwind's cascade layers. Unlayered rules win over the layered
