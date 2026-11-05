@@ -136,6 +136,38 @@ describe('renderer/components/metrics/MetricPills.tsx', () => {
     ).toHaveLength(2);
   });
 
+  it('remeasures when footer content narrows the container and settles on repeat observations', () => {
+    mockOverflowLayout();
+    // Five 40px pills need 216px inline. Start wide enough for all of them.
+    const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(216);
+    let onResize: ResizeObserverCallback;
+    vi.stubGlobal(
+      'ResizeObserver',
+      class {
+        constructor(callback: ResizeObserverCallback) {
+          onResize = callback;
+        }
+        observe = vi.fn();
+        disconnect = vi.fn();
+      },
+    );
+
+    const tree = render(<MetricPills pills={pills} />);
+    expect(tree.queryByTestId('metric-overflow')).not.toBeInTheDocument();
+
+    // Relative time text grows (e.g. "9 minutes ago" -> "10 minutes ago")
+    // without any notification data change, leaving less room for the pills.
+    clientWidth.mockReturnValue(215);
+    act(() => onResize([], {} as ResizeObserver));
+    expect(tree.getByTestId('metric-overflow')).toHaveTextContent('2');
+
+    // Repeated observations of the same size keep the same layout.
+    for (let i = 0; i < 5; i += 1) {
+      act(() => onResize([], {} as ResizeObserver));
+      expect(tree.getByTestId('metric-overflow')).toHaveTextContent('2');
+    }
+  });
+
   it('remeasures on resize and when the pills change', () => {
     mockOverflowLayout();
     const clientWidth = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(200);
@@ -154,8 +186,8 @@ describe('renderer/components/metrics/MetricPills.tsx', () => {
 
     const tree = render(<MetricPills pills={pills} />);
     expect(tree.getByTestId('metric-overflow')).toHaveTextContent('2');
-    // Both the container and the natural-width pill wrappers are observed.
-    expect(observe).toHaveBeenCalledTimes(pills.length + 1);
+    // Only the container is observed; it reflects any footer layout change.
+    expect(observe).toHaveBeenCalledTimes(1);
 
     clientWidth.mockReturnValue(250);
     act(() => onResize([], {} as ResizeObserver));

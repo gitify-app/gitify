@@ -103,13 +103,6 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
 
     const observer = new ResizeObserver(measure);
     observer.observe(containerRef.current);
-    // Pill contents can resize independently of the available space (for
-    // example, after a font loads). Keep those measurements up to date too.
-    for (const pill of pillRefs.current) {
-      if (pill) {
-        observer.observe(pill);
-      }
-    }
 
     return () => observer.disconnect();
   }, [measure]);
