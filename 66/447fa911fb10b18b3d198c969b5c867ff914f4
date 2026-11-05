@@ -1,0 +1,18 @@
+src/renderer/components/metrics/MetricPills.test.tsx
+  h_ac004aadb63da9 121-171
+src/renderer/components/metrics/MetricPills.tsx
+  h_ac004aadb63da9 94-97,106-112,147-148
+src/renderer/components/metrics/__snapshots__/MetricGroup.test.tsx.snap
+  h_ac004aadb63da9 12,74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "66447fa911fb10b18b3d198c969b5c867ff914f4",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
