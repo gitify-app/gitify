@@ -41,10 +41,12 @@ export function createGitifyBridgeApi(platform: TestPlatform = 'macos'): Window[
     notificationSoundPath: vi.fn(),
     onResetApp: vi.fn(() => vi.fn()),
     onSystemWake: vi.fn(() => vi.fn()),
+    onSystemSleep: vi.fn(() => vi.fn()),
     onZoom: vi.fn(() => vi.fn()),
     setAutoLaunch: vi.fn(),
     setKeepWindowOnBlur: vi.fn(),
-    setShowUpdateNotifications: vi.fn(),
+    setUpdatePreferences: vi.fn(),
+    getUpdateManager: vi.fn().mockResolvedValue(null),
     setUseX11Backend: vi.fn(),
     applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
     nativeNotifications: {

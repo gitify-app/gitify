@@ -56,7 +56,7 @@ export function RepositoryHeader({
     (notification) => !notification.unread,
   );
 
-  const chevron = getChevronDetails(true, !isCollapsed, 'repository');
+  const chevron = getChevronDetails(!isCollapsed, 'repository');
 
   return (
     <ExitCollapse isExiting={isAnimatingExit}>
@@ -115,6 +115,7 @@ export function RepositoryHeader({
 
             <HoverButton
               action={onToggle}
+              expanded={!isCollapsed}
               icon={getChevronIcon(chevron.direction)}
               label={chevron.label}
               testid="repository-toggle"

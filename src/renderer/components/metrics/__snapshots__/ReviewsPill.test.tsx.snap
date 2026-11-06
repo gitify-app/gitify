@@ -43,7 +43,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           1
@@ -101,7 +101,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           1
@@ -159,7 +159,7 @@ exports[`renderer/components/metrics/ReviewsPill.tsx > renders review pills when
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           0/2

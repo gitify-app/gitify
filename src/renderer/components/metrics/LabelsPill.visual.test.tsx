@@ -63,7 +63,7 @@ it.each([
   if (!tooltip) {
     throw new Error('Label tooltip is missing');
   }
-  await waitFor(() => expect(tooltip).toBeVisible());
+  await waitFor(() => expect(tooltip).toBeVisible(), { timeout: 3000 });
   expect(textContrast(label)).toBeGreaterThanOrEqual(4.5);
   await act(async () => {
     await page.getByTestId('label-metric').hover({ position: { x: 1, y: 1 } });

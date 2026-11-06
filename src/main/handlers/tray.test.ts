@@ -20,13 +20,23 @@ vi.mock('electron', () => ({
   } satisfies Pick<Electron.IpcMain, 'on'>,
 }));
 
-vi.mock('../../shared/platform', () => ({ isMacOS: () => false, isWindows: () => true }));
+const platform = vi.hoisted(() => ({ linux: false }));
+vi.mock('../../shared/platform', () => ({
+  isLinux: () => platform.linux,
+  isMacOS: () => false,
+  isWindows: () => !platform.linux,
+}));
+
+const badgedIcon = vi.hoisted(() => ({ isEmpty: (): boolean => false }));
+const createBadgedTrayIconMock = vi.hoisted(() => vi.fn(() => badgedIcon));
+vi.mock('../badge', () => ({ createBadgedTrayIcon: createBadgedTrayIconMock }));
 
 describe('main/handlers/tray.ts', () => {
   let menubar: Menubar;
 
   beforeEach(() => {
     vi.clearAllMocks();
+    platform.linux = false;
     nativeTheme.removeAllListeners();
     app.removeAllListeners();
     Object.assign(nativeTheme, { shouldUseDarkColorsForSystemIntegratedUI: false });
@@ -166,5 +176,68 @@ describe('main/handlers/tray.ts', () => {
     expect(nativeTheme.listenerCount('updated')).toBe(1);
     app.emit('will-quit');
     expect(nativeTheme.listenerCount('updated')).toBe(0);
+  });
+  describe('on Linux', () => {
+    const handler = (event: string) =>
+      onMock.mock.calls.find((call: unknown[]) => call[0] === event)?.[1] as (
+        ...args: unknown[]
+      ) => void;
+
+    beforeEach(() => {
+      platform.linux = true;
+      registerTrayHandlers(menubar);
+    });
+
+    it('draws the unread count onto the tray icon instead of setting a title', () => {
+      handler(EVENTS.UPDATE_ICON_COLOR)({}, { notificationsCount: 7, isOnline: true });
+      handler(EVENTS.UPDATE_ICON_TITLE)({}, '7');
+
+      expect(menubar.tray.setTitle).not.toHaveBeenCalled();
+      expect(createBadgedTrayIconMock).toHaveBeenLastCalledWith(TrayIcons.active, 7);
+      expect(menubar.tray.setImage).toHaveBeenLastCalledWith(badgedIcon);
+    });
+
+    it('keeps the plain icon when the badged icon cannot be drawn', () => {
+      createBadgedTrayIconMock.mockReturnValueOnce({ isEmpty: () => true });
+      handler(EVENTS.UPDATE_ICON_COLOR)({}, { notificationsCount: 7, isOnline: true });
+      handler(EVENTS.UPDATE_ICON_TITLE)({}, '7');
+
+      expect(menubar.tray.setImage).toHaveBeenLastCalledWith(TrayIcons.active);
+    });
+
+    it('badges the idle icon when unread highlighting is off', () => {
+      handler(EVENTS.USE_UNREAD_ACTIVE_ICON)({}, false);
+      handler(EVENTS.UPDATE_ICON_COLOR)({}, { notificationsCount: 3, isOnline: true });
+      handler(EVENTS.UPDATE_ICON_TITLE)({}, '3');
+
+      expect(createBadgedTrayIconMock).toHaveBeenLastCalledWith(TrayIcons.light, 3);
+    });
+
+    it('shows the plain icon when the count setting is off', () => {
+      handler(EVENTS.UPDATE_ICON_COLOR)({}, { notificationsCount: 7, isOnline: true });
+      handler(EVENTS.UPDATE_ICON_TITLE)({}, '');
+
+      expect(createBadgedTrayIconMock).not.toHaveBeenCalled();
+      expect(menubar.tray.setImage).toHaveBeenLastCalledWith(TrayIcons.active);
+    });
+
+    it('removes the badge when the count drops to zero', () => {
+      handler(EVENTS.UPDATE_ICON_COLOR)({}, { notificationsCount: 2, isOnline: true });
+      handler(EVENTS.UPDATE_ICON_TITLE)({}, '2');
+      handler(EVENTS.UPDATE_ICON_COLOR)({}, { notificationsCount: 0, isOnline: true });
+      handler(EVENTS.UPDATE_ICON_TITLE)({}, '');
+
+      expect(menubar.tray.setImage).toHaveBeenLastCalledWith(TrayIcons.light);
+    });
+
+    it.each([
+      ['offline', { notificationsCount: 4, isOnline: false }, TrayIcons.offline],
+      ['in error', { notificationsCount: -1, isOnline: true }, TrayIcons.error],
+    ])('shows no badge while %s', (_state, status, icon) => {
+      handler(EVENTS.UPDATE_ICON_TITLE)({}, '4');
+      handler(EVENTS.UPDATE_ICON_COLOR)({}, status);
+
+      expect(menubar.tray.setImage).toHaveBeenLastCalledWith(icon);
+    });
   });
 });

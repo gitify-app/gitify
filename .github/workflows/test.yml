@@ -28,7 +28,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Run tests with coverage
-        run: vp run test
+        run: vp run test:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -52,7 +52,7 @@ jobs:
     # matching browser build. `scripts/visual.sh` derives the image from it for
     # local runs, and `src/main/ciDependencyCompatibility.test.ts` asserts the
     # two stay in sync so the version cannot drift unnoticed.
-    container: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:47b510dd9230bf0b9bfc9b20102241e577ea7a99334ab4c3ca19f19770e9b8ea
+    container: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f
 
     steps:
       - name: Checkout
@@ -113,7 +113,7 @@ jobs:
           path: coverage/
 
       - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarqube-scan-action@4d1dc0c91ee400dcf8a6dddf2f705ac36542e304 # v8.4.0
+        uses: SonarSource/sonarqube-scan-action@e805d875275f728fac1885b413934be6d7c63f65 # v8.4.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

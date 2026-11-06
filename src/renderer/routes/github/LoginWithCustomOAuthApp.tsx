@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { BookIcon, PersonIcon } from '@primer/octicons-react';
 import { Button, FormControl, Stack, Text, TextInput, Tooltip } from '@primer/react';

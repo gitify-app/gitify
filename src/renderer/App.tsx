@@ -1,42 +1,19 @@
 import { useEffect } from 'react';
-import { Navigate, Route, HashRouter as Router, Routes, useLocation } from 'react-router-dom';
 
 import { BaseStyles } from '@primer/react';
 import { ThemeProvider } from '@primer/react/next';
 
 import { QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from 'react-router/dom';
 
-import { AccountsRoute } from './routes/Accounts';
-import { AccountScopesRoute } from './routes/AccountScopes';
-import { BitbucketLoginWithPersonalAccessTokenRoute } from './routes/bitbucket/LoginWithPersonalAccessToken';
-import { FiltersRoute } from './routes/Filters';
-import { GiteaLoginWithPersonalAccessTokenRoute } from './routes/gitea/LoginWithPersonalAccessToken';
-import { GitHubLoginWithCustomOAuthAppRoute } from './routes/github/LoginWithCustomOAuthApp';
-import { GitHubLoginWithDeviceFlowRoute } from './routes/github/LoginWithDeviceFlow';
-import { GitHubLoginWithCLIRoute } from './routes/github/LoginWithGitHubCLI';
-import { GitHubLoginWithPersonalAccessTokenRoute } from './routes/github/LoginWithPersonalAccessToken';
-import { GitLabLoginWithPersonalAccessTokenRoute } from './routes/gitlab/LoginWithPersonalAccessToken';
-import { LoginRoute } from './routes/Login';
-import { NotificationsRoute } from './routes/Notifications';
-import { SettingsRoute } from './routes/Settings';
-import { useAccountsStore } from './stores';
 import { initializeStoreSubscriptions } from './stores/subscriptions';
 
 import { GlobalEffects } from './components/GlobalEffects';
-import { GlobalShortcuts } from './components/GlobalShortcuts';
 
+import { router } from './router';
 import './App.css';
-import { AppLayout } from './components/layout/AppLayout';
-
 import { queryClient } from './utils/api/queryClient';
-
-function RequireAuth({ children }: { children: React.ReactNode }) {
-  const location = useLocation();
-
-  const isLoggedIn = useAccountsStore((s) => s.isLoggedIn());
-
-  return isLoggedIn ? children : <Navigate replace state={{ from: location }} to="/login" />;
-}
+import { rendererLogError, toError } from './utils/core/logger';
 
 export function App() {
   // Initialize store subscriptions with proper cleanup
@@ -50,79 +27,10 @@ export function App() {
       <ThemeProvider>
         <BaseStyles>
           <GlobalEffects />
-          <Router>
-            <GlobalShortcuts />
-            <AppLayout>
-              <Routes>
-                <Route
-                  element={
-                    <RequireAuth>
-                      <NotificationsRoute />
-                    </RequireAuth>
-                  }
-                  path="/"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <FiltersRoute />
-                    </RequireAuth>
-                  }
-                  path="/filters"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <SettingsRoute />
-                    </RequireAuth>
-                  }
-                  path="/settings"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <AccountsRoute />
-                    </RequireAuth>
-                  }
-                  path="/accounts"
-                />
-                <Route
-                  element={
-                    <RequireAuth>
-                      <AccountScopesRoute />
-                    </RequireAuth>
-                  }
-                  path="/account-scopes"
-                />
-                <Route element={<LoginRoute />} path="/login" />
-                <Route
-                  element={<GitHubLoginWithDeviceFlowRoute />}
-                  path="/login/github/device-flow"
-                />
-                <Route element={<GitHubLoginWithCLIRoute />} path="/login/github/cli" />
-                <Route
-                  element={<GitHubLoginWithPersonalAccessTokenRoute />}
-                  path="/login/github/personal-access-token"
-                />
-                <Route
-                  element={<GitHubLoginWithCustomOAuthAppRoute />}
-                  path="/login/github/custom-oauth-app"
-                />
-                <Route
-                  element={<GiteaLoginWithPersonalAccessTokenRoute />}
-                  path="/login/gitea/personal-access-token"
-                />
-                <Route
-                  element={<BitbucketLoginWithPersonalAccessTokenRoute />}
-                  path="/login/bitbucket/personal-access-token"
-                />
-                <Route
-                  element={<GitLabLoginWithPersonalAccessTokenRoute />}
-                  path="/login/gitlab/personal-access-token"
-                />
-              </Routes>
-            </AppLayout>
-          </Router>
+          <RouterProvider
+            onError={(error) => rendererLogError('router', 'Router error', toError(error))}
+            router={router}
+          />
         </BaseStyles>
       </ThemeProvider>
     </QueryClientProvider>

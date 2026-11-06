@@ -231,8 +231,9 @@
     --button-default-borderColor-rest: transparent;
   }
 
-  /* Row hover is a light glass wash instead of the solid Classic fill. */
-  .gitify-translucent .hover\:bg-gitify-notification-hover:hover {
+  /* Row hover/focus is a light glass wash instead of the solid Classic fill. */
+  .gitify-translucent .hover\:bg-gitify-notification-hover:hover,
+  .gitify-translucent .focus-within\:bg-gitify-notification-hover:focus-within {
     background-color: var(--gitify-glass-control-rest);
   }
 
@@ -278,10 +279,10 @@
   /* Row/header action cluster: a frosted, hairlined surface (the macOS tooltip
    * material) so the row content never shows through the controls. This replaces
    * the old bare-icon treatment, which relied on fading the row content out from
-   * beneath the buttons. The `:hover` variant guards against the layered
-   * `group-hover:bg-*` utility winning on specificity when the row is hovered. */
+   * beneath the buttons. Keep the same surface during hover and keyboard focus. */
   .gitify-translucent .gitify-hover-actions,
-  .gitify-translucent .group:hover .gitify-hover-actions {
+  .gitify-translucent .group:hover .gitify-hover-actions,
+  .gitify-translucent .group:focus-within .gitify-hover-actions {
     background-color: light-dark(
       color-mix(in oklab, var(--bgColor-default), transparent 8%),
       color-mix(in oklab, var(--bgColor-neutral-emphasis), transparent 30%)
@@ -289,6 +290,23 @@
     -webkit-backdrop-filter: blur(14px) saturate(1.5);
     backdrop-filter: blur(14px) saturate(1.5);
     box-shadow: inset 0 0 0 1px var(--gitify-glass-border);
+  }
+
+  /* Without native vibrancy the window is opaque and the tooltip material reads
+   * as a separate slab. Paint what the hovered row shows instead (the app
+   * background under the row's hover wash) so the rail blends into the row
+   * while still hiding the content beneath it. */
+  .gitify-translucent.gitify-linux .gitify-hover-actions,
+  .gitify-translucent.gitify-linux .group:hover .gitify-hover-actions,
+  .gitify-translucent.gitify-linux .group:focus-within .gitify-hover-actions {
+    background:
+      linear-gradient(var(--gitify-glass-control-rest), var(--gitify-glass-control-rest)),
+      var(--gitify-background);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    border-start-end-radius: inherit;
+    border-end-end-radius: inherit;
   }
 
   /* Hover tooltips float as frosted glass with a hairline (the macOS tooltip
@@ -338,13 +356,14 @@
     --button-invisible-bgColor-hover: transparent;
     --button-invisible-bgColor-active: transparent;
 
-    /* Bare icons still need affordance: dimmed at rest, full colour on hover,
+    /* Bare icons still need affordance: dimmed at rest, full colour on hover/focus,
      * a press dip on active. */
     opacity: 0.65;
     transition: opacity 120ms ease-in-out;
   }
 
-  .gitify-translucent .gitify-hover-actions :where(button):hover {
+  .gitify-translucent .gitify-hover-actions :where(button):hover,
+  .gitify-translucent .gitify-hover-actions :where(button):focus-visible {
     opacity: 1;
   }
 
@@ -503,6 +522,10 @@ body,
   user-select: none;
 }
 
+[class*='prc-ToggleSwitch-IconContainer'] > svg {
+  display: inline-block;
+}
+
 *::-webkit-scrollbar {
   width: 10px;
 }
@@ -591,6 +614,20 @@ body,
 .gitify-hover-actions-full :where(button) {
   height: 100%;
   border-radius: 0;
+}
+
+/* Primer paints expanded buttons with an active fill, which made the header
+ * collapse chevron look highlighted whenever its rail was shown — even while
+ * hovering a different action. Only highlight it when hovering the chevron
+ * itself or the header's empty space (which also toggles). */
+.group .gitify-hover-actions button[aria-expanded='true']:not(:hover) {
+  background-color: transparent;
+}
+
+.group:hover:not(:has(button:not([aria-expanded]):hover, a:hover))
+  .gitify-hover-actions
+  button[aria-expanded] {
+  background-color: var(--button-invisible-bgColor-hover);
 }
 
 /* Settings rows are `<fieldset>`s so their controls stay semantically grouped,

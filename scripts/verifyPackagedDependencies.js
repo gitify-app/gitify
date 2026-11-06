@@ -27,7 +27,7 @@ const FORBIDDEN_PACKAGES = [
   'react',
   'react-dom',
   'react-i18next',
-  'react-router-dom',
+  'react-router',
 ];
 const BUILD_ONLY_PACKAGES = [
   'electron',

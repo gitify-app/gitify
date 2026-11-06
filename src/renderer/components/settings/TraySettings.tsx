@@ -40,9 +40,9 @@ export function TraySettings() {
           onChange={() => toggleSetting('showNotificationsCountInTray')}
           tooltip={t(
             'settings.tray.show_notification_count_help',
-            'Show the unread notification count next to the tray icon. Useful for a quick glance at unread activity.',
+            'Show the unread notification count in the tray. Useful for a quick glance at unread activity.',
           )}
-          visible={window.gitify.platform.isMacOS()}
+          visible={window.gitify.platform.isMacOS() || window.gitify.platform.isLinux()}
         />
 
         <SettingsToggle

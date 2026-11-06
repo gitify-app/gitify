@@ -8,6 +8,7 @@ import type {
   INativeNotificationRemovePayload,
   NativeThemeSource,
   TrayIconAppearance,
+  UpdatePreferences,
   ZoomAction,
 } from '../shared/events';
 import { EVENTS } from '../shared/events';
@@ -68,7 +69,6 @@ export const api = {
   setAutoLaunch: (value: boolean) =>
     sendMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, {
       openAtLogin: value,
-      openAsHidden: value,
     }),
 
   /**
@@ -81,16 +81,9 @@ export const api = {
    */
   setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
 
-  /**
-   * Enable or suppress automatic update notifications.
-   *
-   * Update checks, downloads, and menubar status continue when notifications
-   * are suppressed.
-   *
-   * @param value - `true` to show update notifications, `false` to suppress them.
-   */
-  setShowUpdateNotifications: (value: boolean) =>
-    sendMainEvent(EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS, value),
+  setUpdatePreferences: (value: UpdatePreferences) =>
+    sendMainEvent(EVENTS.UPDATE_PREFERENCES, value),
+  getUpdateManager: () => invokeMainEvent(EVENTS.UPDATE_MANAGER),
 
   /**
    * Persist whether Linux should run under the X11 backend. Applied at startup,
@@ -258,6 +251,19 @@ export const api = {
    */
   onSystemWake: (callback: () => void) => {
     return onRendererEvent(EVENTS.SYSTEM_WAKE, () => callback());
+  },
+
+  /**
+   * Register a callback invoked when the system is about to sleep or the screen
+   * locks.
+   *
+   * Use this to pause polling until the matching wake/unlock event.
+   *
+   * @param callback - Called with no arguments on every sleep event.
+   * @returns A function that removes the listener.
+   */
+  onSystemSleep: (callback: () => void) => {
+    return onRendererEvent(EVENTS.SYSTEM_SLEEP, () => callback());
   },
 
   /**

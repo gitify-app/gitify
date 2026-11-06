@@ -39,31 +39,13 @@ describe('renderer/utils/forges/github/enrich.ts', () => {
       vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
     });
 
-    it('sends a single request for a 100-notification batch', async () => {
+    it('sends a single request for a 50-notification batch', async () => {
       vi.mocked(client.fetchNotificationDetailsForList).mockResolvedValue(new Map());
 
-      await enrichGitHubNotifications(mockNotifications(100));
+      await enrichGitHubNotifications(mockNotifications(50));
 
       expect(client.fetchNotificationDetailsForList).toHaveBeenCalledTimes(1);
-      expect(vi.mocked(client.fetchNotificationDetailsForList).mock.calls[0][0]).toHaveLength(100);
-    });
-
-    it('splits a failed 100-notification batch into two 50-notification requests', async () => {
-      vi.mocked(client.fetchNotificationDetailsForList).mockImplementation(async (batch) => {
-        if (batch.length > 50) {
-          throw resourceLimitError;
-        }
-        return new Map();
-      });
-
-      await enrichGitHubNotifications(mockNotifications(100));
-
-      const sizes = vi
-        .mocked(client.fetchNotificationDetailsForList)
-        .mock.calls.map(([batch]) => batch.length)
-        .sort((a, b) => a - b);
-
-      expect(sizes).toEqual([50, 50, 100]);
+      expect(vi.mocked(client.fetchNotificationDetailsForList).mock.calls[0][0]).toHaveLength(50);
     });
 
     it('splits a failed 50-notification batch into two 25-notification requests', async () => {

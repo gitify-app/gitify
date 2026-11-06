@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useEffectEvent, useRef } from 'react';
 
 import { focusManager, type QueryKey, useQueryClient } from '@tanstack/react-query';
 
@@ -43,7 +43,7 @@ export interface NotificationEffectsInput {
   isLoading: boolean;
   isError: boolean;
   notificationsQueryKey: QueryKey;
-  refetch: () => void;
+  refetch: (options?: { cancelRefetch?: boolean }) => void;
   fetchIntervalMs: number;
   actions: NotificationActions;
 }
@@ -74,6 +74,30 @@ export const useNotificationEffects = ({
   const playSoundNewNotifications = useSettingsStore((s) => s.playSound);
   const showSystemNotifications = useSettingsStore((s) => s.showNotifications);
   const notificationVolume = useSettingsStore((s) => s.notificationVolume);
+
+  // Read the alert settings at alert time so changing them does not re-run the
+  // notification diff and does not capture stale values.
+  const announceNewNotifications = useEffectEvent((notificationsToRaise: GitifyNotification[]) => {
+    if (playSoundNewNotifications) {
+      void raiseSoundNotification(notificationVolume);
+    }
+
+    if (showSystemNotifications) {
+      void Promise.resolve(raiseNativeNotification(notificationsToRaise))
+        .then((published) => {
+          for (const payload of published ?? []) {
+            publishedIdsRef.current.add(payload.id);
+          }
+        })
+        .catch((error) => {
+          rendererLogError(
+            'useNotificationEffects',
+            'Failed to publish native notifications',
+            toError(error),
+          );
+        });
+    }
+  });
 
   useEffect(() => {
     actionsRef.current = actions;
@@ -143,7 +167,7 @@ export const useNotificationEffects = ({
     }
 
     return window.gitify.onSystemWake(() => {
-      refetch();
+      refetch({ cancelRefetch: false });
     });
   }, [enabled, refetch]);
 
@@ -213,40 +237,12 @@ export const useNotificationEffects = ({
       ) as GitifyNotification[];
 
       if (filteredDiffNotifications.length > 0) {
-        if (playSoundNewNotifications) {
-          void raiseSoundNotification(notificationVolume);
-        }
-
-        if (showSystemNotifications) {
-          void Promise.resolve(raiseNativeNotification(filteredDiffNotifications))
-            .then((published) => {
-              for (const payload of published ?? []) {
-                publishedIdsRef.current.add(payload.id);
-              }
-            })
-            .catch((error) => {
-              rendererLogError(
-                'useNotificationEffects',
-                'Failed to publish native notifications',
-                toError(error),
-              );
-            });
-        }
+        announceNewNotifications(filteredDiffNotifications);
       }
     }
 
     previousNotificationsRef.current = unfilteredNotifications;
-  }, [
-    enabled,
-    notifications,
-    isLoading,
-    isError,
-    playSoundNewNotifications,
-    showSystemNotifications,
-    notificationVolume,
-    queryClient,
-    notificationsQueryKey,
-  ]);
+  }, [enabled, notifications, isLoading, isError, queryClient, notificationsQueryKey]);
 
   // Remove published notifications when they become read, leave the cache,
   // or when no unread notifications remain for the summary.

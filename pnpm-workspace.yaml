@@ -1,4 +1,7 @@
 allowBuilds:
+  # Keep this build enabled and keep @parcel/watcher as a direct devDependency:
+  # it is an optional peer of @graphql-codegen/cli that powers `pnpm codegen:watch`.
+  # The CLI imports it lazily and silently stops watching when it is missing.
   '@parcel/watcher': true
   '@primer/primitives': false
   '@swc/core': true
@@ -8,7 +11,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 catalog:
-  electron: '45.1.0'
+  electron: '45.2.3'
   vite: npm:@voidzero-dev/vite-plus-core@1.4.0
   vitest: 5.0.5
   vite-plus: 1.4.0

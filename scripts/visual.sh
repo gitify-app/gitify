@@ -29,8 +29,9 @@ FILTER="${1:-}"
 # Already inside the pinned image (set by the CI job and by the docker run
 # below), so run the suite rather than nesting another container.
 if [ -n "${GITIFY_VISUAL_IN_CONTAINER:-}" ]; then
+  # Node.js 26, which the image now ships, no longer bundles corepack.
   # shellcheck disable=SC2086 -- word splitting is intended for the optional flags
-  exec corepack pnpm exec vp test --project 'browser [visual]' --run ${UPDATE} ${FILTER:+-t "${FILTER}"}
+  exec ./node_modules/.bin/vp test --project 'browser [visual]' --run ${UPDATE} ${FILTER:+-t "${FILTER}"}
 fi
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

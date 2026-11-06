@@ -20,6 +20,8 @@ import {
   type AccountNotifications,
   DesignLanguage,
   GroupBy,
+  IconColor,
+  type Link,
   type SettingsState,
   Theme,
 } from '../../types';
@@ -243,6 +245,214 @@ describe('notification list in a browser', () => {
     }
     await waitFor(() => expect(getComputedStyle(rail).opacity).toBe('1'));
     expect(rail.getBoundingClientRect().right).toBeCloseTo(rowBox.right, 0);
+  });
+
+  it('keeps the metric catch-all adjacent to the full-height action rail', async () => {
+    const notification = {
+      ...mockGitifyNotification,
+      id: 'pill-heavy',
+      subject: {
+        ...mockGitifyNotification.subject,
+        issueType: { name: 'Bug', color: IconColor.RED },
+        parentIssue: {
+          number: 456,
+          title: 'Parent Epic',
+          url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
+        },
+        subIssueProgress: { total: 5, completed: 2, percentCompleted: 40 },
+        labels: [
+          { name: 'needs-investigation', color: 'ff0000' },
+          { name: 'good first issue', color: '00ff00' },
+          { name: 'area/notifications', color: '0000ff' },
+          { name: 'a really long label name here', color: 'ffff00' },
+        ],
+        checks: { state: 'FAILURE' as const, passed: 9, failed: 1, pending: 0, total: 10 },
+        commentCount: 3,
+        reactionsCount: 12,
+      },
+    };
+
+    await renderList([], { showPills: true }, [
+      { account, notifications: [notification], error: null },
+    ]);
+
+    const row = document.getElementById('pill-heavy');
+    if (!row) {
+      throw new Error('Pill-heavy notification row is missing');
+    }
+
+    await page.getByTestId('notification-row').first().hover();
+    const rail = row.querySelector<HTMLElement>('.gitify-hover-actions');
+    if (!rail) {
+      throw new Error('Action rail is missing from the pill-heavy row');
+    }
+    await waitFor(() => expect(getComputedStyle(rail).opacity).toBe('1'));
+
+    const rowBox = row.getBoundingClientRect();
+    const railBox = rail.getBoundingClientRect();
+    const titleRow = row.querySelector<HTMLElement>('[data-testid="notification-row"]');
+    const footer = titleRow?.parentElement?.lastElementChild;
+    if (!footer) {
+      throw new Error('Notification footer is missing');
+    }
+
+    // The rail spans the row, giving a large hit zone and a pill-free lane down
+    // the right edge for rapid row actions.
+    expect(railBox.top).toBeLessThanOrEqual(rowBox.top + 1);
+    expect(railBox.bottom).toBeGreaterThanOrEqual(rowBox.bottom - 1);
+
+    const overflow = await waitFor(() => {
+      const element = row.querySelector<HTMLElement>('[data-testid="metric-overflow"]');
+      expect(element).not.toBeNull();
+      return element!;
+    });
+    const overflowBox = overflow.getBoundingClientRect();
+    expect(overflow.querySelector('svg')).not.toBeNull();
+    expect(footer.getBoundingClientRect().height).toBeLessThanOrEqual(21);
+
+    const inlinePills = Array.from(
+      row.querySelectorAll<HTMLElement>(
+        '[data-testid="metric-pills"] > div:not([aria-hidden]) button[aria-describedby]',
+      ),
+    );
+    expect(inlinePills.length).toBeGreaterThan(0);
+    const inlineBoxes = inlinePills.map((pill) => pill.getBoundingClientRect());
+    expect(new Set(inlineBoxes.map((box) => Math.round(box.top))).size).toBe(1);
+    for (const box of inlineBoxes) {
+      expect(box.right).toBeLessThanOrEqual(overflowBox.left);
+    }
+
+    // The catch-all follows the last visible pill directly, so the visible pills
+    // stay left-aligned with the rest of the footer text.
+    const lastPillRight = Math.max(...inlineBoxes.map((box) => box.right));
+    expect(overflowBox.left - lastPillRight).toBeGreaterThanOrEqual(0);
+    expect(overflowBox.left - lastPillRight).toBeLessThanOrEqual(5);
+
+    // Inline pills keep their tooltip (with the deliberate long delay).
+    const firstPill = inlinePills[0];
+    const tooltipId = firstPill.getAttribute('aria-describedby');
+    const label = firstPill.getAttribute('aria-label');
+    if (!tooltipId || !label) {
+      throw new Error('Pill is missing its tooltip wiring');
+    }
+    await page.getByRole('button', { name: label }).first().hover();
+    await waitFor(
+      () => {
+        expect(document.getElementById(tooltipId)?.matches(':popover-open')).toBe(true);
+      },
+      { timeout: 3000 },
+    );
+
+    const overflowCount = Number(overflow.textContent?.replace('+', ''));
+    expect(overflowCount).toBeGreaterThan(0);
+
+    // Hovering the catch-all reveals the collapsed metrics; no click required.
+    await page.getByTestId('metric-overflow').hover();
+    const popover = await waitFor(() => {
+      const element = document.querySelector<HTMLElement>(
+        '[data-testid="metric-overflow-popover"]',
+      );
+      expect(element).not.toBeNull();
+      return element!;
+    });
+    expect(popover.querySelector('[data-testid="metric-overflow-caret"]')).not.toBeNull();
+
+    // Every collapsed pill remains available (with its tooltip/action) in the
+    // portaled popover, outside the row's `contain: paint` clipping.
+    expect(row.contains(popover)).toBe(false);
+    const collapsedPills = popover.querySelectorAll('button');
+    expect(collapsedPills).toHaveLength(overflowCount);
+    for (const pill of collapsedPills) {
+      expect(pill).toHaveAttribute('aria-describedby');
+    }
+
+    // The collapsed pills are packed to the popover's right edge, nearest the
+    // pointer, rather than left-aligned across the overlay.
+    const popoverBox = popover.getBoundingClientRect();
+    const collapsedBoxes = Array.from(collapsedPills).map((pill) => pill.getBoundingClientRect());
+    expect(Math.abs(popoverBox.right - overflowBox.right)).toBeLessThanOrEqual(1);
+    const firstRowTop = Math.min(...collapsedBoxes.map((box) => Math.round(box.top)));
+    const rightmostOnFirstRow = Math.max(
+      ...collapsedBoxes
+        .filter((box) => Math.round(box.top) === firstRowTop)
+        .map((box) => box.right),
+    );
+    expect(popoverBox.right - rightmostOnFirstRow).toBeLessThanOrEqual(5);
+
+    // Hovering must not move focus into the popover or back onto the chip.
+    expect(document.activeElement).not.toBe(overflow);
+    expect(popover.contains(document.activeElement)).toBe(false);
+
+    // Re-entering the row must not produce a focus ring on the chip or the
+    // first collapsed pill.
+    await page.getByTestId('visual-root').hover({ position: { x: 480, y: 380 } });
+    await waitFor(() =>
+      expect(document.querySelector('[data-testid="metric-overflow-popover"]')).toBeNull(),
+    );
+    await page.getByTestId('metric-overflow').hover();
+    await waitFor(() =>
+      expect(document.querySelector('[data-testid="metric-overflow-popover"]')).not.toBeNull(),
+    );
+    expect(document.activeElement).not.toBe(overflow);
+    expect(
+      document
+        .querySelector('[data-testid="metric-overflow-popover"]')
+        ?.contains(document.activeElement),
+    ).toBe(false);
+  });
+
+  it('sizes the catch-all popover to the collapsed pills', async () => {
+    const notification = {
+      ...mockGitifyNotification,
+      id: 'light-pills',
+      subject: {
+        ...mockGitifyNotification.subject,
+        reviewers: undefined,
+        issueType: { name: 'Bug', color: IconColor.RED },
+        parentIssue: {
+          number: 456,
+          title: 'Parent Epic',
+          url: 'https://github.com/gitify-app/gitify/issues/456' as Link,
+        },
+        subIssueProgress: { total: 5, completed: 2, percentCompleted: 40 },
+        commentCount: 3,
+      },
+    };
+
+    await renderList([], { showPills: true }, [
+      { account, notifications: [notification], error: null },
+    ]);
+
+    const row = document.getElementById('light-pills');
+    if (!row) {
+      throw new Error('Light pill notification row is missing');
+    }
+
+    await page.getByTestId('notification-row').first().hover();
+    await waitFor(() =>
+      expect(document.querySelector('[data-testid="metric-overflow"]')).not.toBeNull(),
+    );
+    await page.getByTestId('metric-overflow').hover();
+    const popover = await waitFor(() => {
+      const element = document.querySelector<HTMLElement>(
+        '[data-testid="metric-overflow-popover"]',
+      );
+      expect(element).not.toBeNull();
+      return element!;
+    });
+
+    // The collapsed pills determine the width, with equal horizontal padding
+    // matching the pill gap and compact vertical padding like the row lines.
+    const popoverBox = popover.getBoundingClientRect();
+    const popoverStyle = getComputedStyle(popover);
+    expect(popoverBox.width).toBeGreaterThan(0);
+    expect(popoverBox.width).toBeLessThan(256);
+    expect(popoverBox.height).toBeLessThanOrEqual(30);
+    expect(popoverStyle.paddingLeft).toBe('4px');
+    expect(popoverStyle.paddingRight).toBe(popoverStyle.paddingLeft);
+    expect(popoverStyle.paddingTop).toBe(popoverStyle.paddingBottom);
+    expect(popover.scrollWidth).toBe(popover.clientWidth);
+    expect(popover.querySelector('[data-testid="metric-overflow-caret"]')).not.toBeNull();
   });
 
   it.each(['notification', 'repository'])(

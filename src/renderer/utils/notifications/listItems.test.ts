@@ -110,6 +110,31 @@ describe('renderer/utils/notifications/listItems.ts', () => {
       ]);
     });
 
+    it('animates the repository header out once every remaining row is exiting', () => {
+      const repoA1 = notification('a-1', 'owner/repo-a', 0);
+      const repoA2 = notification('a-2', 'owner/repo-a', 1);
+      const repoB1 = notification('b-1', 'owner/repo-b', 2);
+      const repoC1 = notification('c-1', 'owner/repo-c', 3);
+
+      const items = buildRepositoryItems(
+        accountUUID,
+        [repoA1, repoA2, repoB1, repoC1],
+        makeContext({
+          animatingNotifications: new Set([`${accountUUID}:a-1`, `${accountUUID}:b-1`]),
+          animatingRepositories: new Map([
+            [`${accountUUID}-owner/repo-c`, new Set([`${accountUUID}:c-1`])],
+          ]),
+        }),
+      );
+
+      const headers = items.filter((item) => item.kind === 'repository');
+      expect(headers.map((item) => [item.repoName, item.isAnimatingExit])).toEqual([
+        ['owner/repo-a', false],
+        ['owner/repo-b', true],
+        ['owner/repo-c', true],
+      ]);
+    });
+
     it('returns an empty list when there are no notifications', () => {
       expect(buildRepositoryItems(accountUUID, [], makeContext())).toEqual([]);
     });

@@ -6,13 +6,24 @@ import type { FetchMergedDetailsTemplateQuery } from './graphql/generated/graphq
 import { createNotificationHandler } from './handlers';
 
 /**
- * Maximum number of notifications batched into a single merged GraphQL query
- * by `enrichGitHubNotifications` before the batch is split. The merged query
- * pulls nested connections for every notification, so batches that exceed
- * GitHub's undocumented resource limit are retried in progressively smaller
- * halves by `fetchInBatches`.
+ * Maximum number of notifications per merged GraphQL request issued by
+ * `enrichGitHubNotifications`.
+ *
+ * Only subject types whose handlers support merged enrichment are batched
+ * here - discussions, issues, and pull requests. Every other subject type is
+ * enriched individually, and the whole enrichment input is considered
+ * together, so a batch is unrelated to REST page boundaries.
+ *
+ * The merged query pulls nested connections for each notification, so
+ * the batch size observed to stay under GitHub's undocumented resource limit
+ * where 100 did not. A batch that still exceeds the limit is split by
+ * `fetchBatch` down to `MIN_SPLIT_BATCH_SIZE` before falling back to
+ * per-notification enrichment.
+ *
+ * This is deliberately independent of `GITHUB_API_PAGE_SIZE`; the two values
+ * are both 50 today but are governed by different constraints.
  */
-export const GITHUB_API_MERGE_BATCH_SIZE = 100;
+export const GITHUB_API_MERGE_BATCH_SIZE = 50;
 
 /**
  * Enrich GitHub notifications with additional subject details (state, user,

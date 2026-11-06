@@ -9,12 +9,41 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
 import electron from 'vite-plugin-electron/simple';
-import type { Plugin } from 'vite-plus';
-import { defineConfig } from 'vite-plus';
+import type { Logger, Plugin } from 'vite-plus';
+import { createLogger, defineConfig } from 'vite-plus';
 
 import { Constants } from './src/renderer/constants.ts';
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url));
+
+/**
+ * Lint summary `vite-plugin-checker` emits after a run that found nothing.
+ *
+ * The plugin logs a summary after *every* lint run, clean or not, so each file
+ * save during `pnpm dev` prints a line that reports nothing. Its `dev.logLevel`
+ * only filters diagnostics, not this summary, so we match the message text.
+ */
+const cleanLintSummaryPattern = /\[oxlint\] Found 0 error and 0 warning/;
+
+/**
+ * Dev-server logger that drops clean lint summaries from `vite-plugin-checker`.
+ *
+ * Diagnostics and summaries for runs that found something still pass through.
+ */
+const createDevLogger = (): Logger => {
+  const base = createLogger();
+
+  return {
+    ...base,
+    info(message, options) {
+      if (cleanLintSummaryPattern.test(message)) {
+        return;
+      }
+
+      base.info(message, options);
+    },
+  };
+};
 
 const packageJson = JSON.parse(
   fs.readFileSync(fileURLToPath(new URL('package.json', import.meta.url)), 'utf8'),
@@ -210,6 +239,8 @@ const storeBarrelBoundaryPattern = {
 };
 
 export default defineConfig({
+  // Keep the dev output to real problems: see `createDevLogger` above.
+  customLogger: createDevLogger(),
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
     ...(isBuild
@@ -222,7 +253,27 @@ export default defineConfig({
             root: projectRoot,
             // `vp lint` applies the `lint` config below. A bare `oxlint` binary
             // is not installed, and it would ignore that config anyway.
-            oxlint: { lintCommand: 'vp lint', dev: { logLevel: ['error'] } },
+            oxlint: {
+              lintCommand: 'vp lint',
+              // The checker watches its root, which would include output that
+              // dev rewrites constantly: `build/` on every Electron rebuild and
+              // the GraphQL generated modules on every codegen run. Neither is
+              // linted, so those runs only burn CPU. The startup run still lints
+              // the whole project, so new root-level files only need adding here
+              // to be re-linted during a session.
+              watchPath: [
+                'src',
+                'scripts',
+                'codegen.ts',
+                'electron-builder.js',
+                'graphql.config.ts',
+                'i18next.config.ts',
+                'tailwind.config.mts',
+                'vite.config.mts',
+                'vitest.config.mts',
+              ],
+              dev: { logLevel: ['error'] },
+            },
           }),
         ]),
     reactDevToolsPlugin(),

@@ -42,7 +42,6 @@
   "chevron": {
     "account": "account",
     "hide": "Hide {{type}} notifications",
-    "none": "No notifications for {{type}}",
     "repository": "repository",
     "show": "Show {{type}} notifications"
   },
@@ -80,6 +79,7 @@
       "description": "Please wait a while before trying again.",
       "title": "Rate Limited"
     },
+    "reload": "Reload",
     "unknown": {
       "description": "Please try again later.",
       "title": "Oops! Something went wrong"
@@ -488,6 +488,17 @@
       "title": "Reset Settings"
     },
     "system": {
+      "automatic_updates": "Automatic updates",
+      "automatic_updates_default": "On by default.",
+      "automatic_updates_default_managed": "Off by default. Update {{appName}} with {{manager}}.",
+      "automatic_updates_default_option": "Default",
+      "automatic_updates_default_packager": "Off by default. Update {{appName}} with your package manager.",
+      "automatic_updates_detecting": "Detecting how {{appName}} was installed…",
+      "automatic_updates_detection_failed": "Unable to detect how {{appName}} was installed. Choose On or Off.",
+      "automatic_updates_off": "Automatic updates are off. View releases from the tray menu.",
+      "automatic_updates_off_option": "Off",
+      "automatic_updates_on": "{{appName}} downloads updates automatically and installs them when you quit.",
+      "automatic_updates_on_option": "On",
       "current_shortcut": "Current shortcut",
       "edit_shortcut": "Edit global shortcut",
       "enable_shortcut": "Enable global shortcut",
@@ -530,7 +541,7 @@
       "idle_icon_help_theme": "This setting is independent of the {{appName}} app theme.",
       "idle_icon_light": "Light",
       "show_notification_count": "Show notification count",
-      "show_notification_count_help": "Show the unread notification count next to the tray icon. Useful for a quick glance at unread activity.",
+      "show_notification_count_help": "Show the unread notification count in the tray. Useful for a quick glance at unread activity.",
       "title": "Tray"
     }
   },

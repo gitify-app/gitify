@@ -65,12 +65,13 @@ const appUpdater = new AppUpdater(mb, menuBuilder);
 // queued forever.
 registerNativeNotificationHandlers(mb);
 
+// Capture relaunches before ready; lifecycle waits for the preloaded window.
+initializeAppLifecycle(mb, contextMenu);
+
 app
   .whenReady()
   .then(async () => {
     await onFirstRunMaybe();
-
-    initializeAppLifecycle(mb, contextMenu);
 
     // Configure window event handlers (Escape key, DevTools resize)
     configureWindowEvents(mb, menuBuilder);

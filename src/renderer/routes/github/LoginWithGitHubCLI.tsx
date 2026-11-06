@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 
 import { SignInIcon, TerminalIcon } from '@primer/octicons-react';
 import { Banner, Button, FormControl, Stack, Text, TextInput } from '@primer/react';

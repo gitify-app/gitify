@@ -67,7 +67,7 @@ vi.mock('./lifecycle', () => ({
   configureUserDataPath: vi.fn(() => calls.push('userData')),
   configureWindowEvents: vi.fn(),
   handleProtocolURL: vi.fn(),
-  initializeAppLifecycle: vi.fn(),
+  initializeAppLifecycle: vi.fn(() => calls.push('lifecycle')),
   onFirstRunMaybe: vi.fn(),
 }));
 
@@ -102,8 +102,15 @@ describe('main/index.ts', () => {
     ]);
   });
 
-  it('configures user data and the Ozone backend before Electron becomes ready', () => {
-    expect(calls).toEqual(['userData', 'ozone', 'logging', 'diagnostics', 'whenReady']);
+  it('configures user data, logging, diagnostics, and lifecycle before Electron becomes ready', () => {
+    expect(calls).toEqual([
+      'userData',
+      'ozone',
+      'logging',
+      'diagnostics',
+      'lifecycle',
+      'whenReady',
+    ]);
   });
 
   it('logs an error when Electron fails to become ready', async () => {

@@ -283,7 +283,6 @@ export type NotificationActionFailuresStore = NotificationActionFailuresState &
 // ============================================================================
 // Shortcut Registration Store Types
 // ============================================================================
-
 /**
  * Transient (non-persisted) state for global keyboard shortcut registration.
  */
@@ -304,4 +303,21 @@ export interface ShortcutRegistrationStore {
   setLastAppliedShortcut: (accelerator: KeyboardAcceleratorShortcut) => void;
   clearShortcutRegistrationError: () => void;
   reset: () => void;
+}
+
+// ============================================================================
+// Power State Store Types
+// ============================================================================
+
+/**
+ * Session-local power state used to pause background polling while the
+ * operating system is locked or suspended.
+ */
+export interface PowerStateStore {
+  /**
+   * `false` while the system is locked or suspended, `true` otherwise.
+   */
+  isActive: boolean;
+
+  setActive: (active: boolean) => void;
 }

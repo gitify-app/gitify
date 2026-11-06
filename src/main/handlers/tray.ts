@@ -7,7 +7,9 @@ import {
   type ITrayColorUpdate,
   type TrayIconAppearance,
 } from '../../shared/events';
+import { isLinux } from '../../shared/platform';
 
+import { createBadgedTrayIcon } from '../badge';
 import { onMainEvent } from '../events';
 import { getIdleTrayIcon, TrayIcons } from '../icons';
 
@@ -15,6 +17,8 @@ export function registerTrayHandlers(mb: Menubar): void {
   let appearance: TrayIconAppearance = 'auto';
   let highlightUnread = true;
   let status: ITrayColorUpdate = { notificationsCount: 0, isOnline: true };
+  // The renderer sends the count as a title only when the count setting is on.
+  let title = '';
 
   const refresh = () => {
     if (mb.tray.isDestroyed()) {
@@ -29,6 +33,15 @@ export function registerTrayHandlers(mb: Menubar): void {
     } else if (notificationsCount > 0 && highlightUnread) {
       icon = TrayIcons.active;
     }
+    // Linux trays show no title text, so the count is drawn onto the icon.
+    if (isLinux() && title !== '' && isOnline && notificationsCount > 0) {
+      const badged = createBadgedTrayIcon(icon, notificationsCount);
+      // An unreadable icon yields an empty image, which would blank the tray.
+      if (!badged.isEmpty()) {
+        mb.tray.setImage(badged);
+        return;
+      }
+    }
     mb.tray.setImage(icon);
   };
 
@@ -38,17 +51,23 @@ export function registerTrayHandlers(mb: Menubar): void {
       refresh();
     }
   });
+
   onMainEvent(EVENTS.USE_UNREAD_ACTIVE_ICON, (_, value) => {
     highlightUnread = value;
     refresh();
   });
+
   onMainEvent(EVENTS.UPDATE_ICON_COLOR, (_, value) => {
     status = value;
     refresh();
   });
-  onMainEvent(EVENTS.UPDATE_ICON_TITLE, (_, title) => {
-    if (!mb.tray.isDestroyed()) {
-      mb.tray.setTitle(title);
+
+  onMainEvent(EVENTS.UPDATE_ICON_TITLE, (_, value) => {
+    title = value;
+    if (isLinux()) {
+      refresh();
+    } else if (!mb.tray.isDestroyed()) {
+      mb.tray.setTitle(value);
     }
   });
 

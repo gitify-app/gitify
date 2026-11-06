@@ -16,7 +16,8 @@ export const EVENTS = {
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
   UPDATE_KEEP_WINDOW_ON_BLUR: `${P}update-keep-window-on-blur`,
-  UPDATE_SHOW_UPDATE_NOTIFICATIONS: `${P}update-show-update-notifications`,
+  UPDATE_PREFERENCES: `${P}update-preferences`,
+  UPDATE_MANAGER: `${P}update-manager`,
   UPDATE_USE_X11_BACKEND: `${P}update-use-x11-backend`,
   SET_WINDOW_VIBRANCY: `${P}set-window-vibrancy`,
   SET_NATIVE_THEME: `${P}set-native-theme`,
@@ -28,6 +29,7 @@ export const EVENTS = {
   RESET_APP: `${P}reset-app`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
   SYSTEM_WAKE: `${P}system-wake`,
+  SYSTEM_SLEEP: `${P}system-sleep`,
   NATIVE_NOTIFICATION_SHOW: `${P}native-notification-show`,
   NATIVE_NOTIFICATION_REMOVE: `${P}native-notification-remove`,
   NATIVE_NOTIFICATION_REMOVE_ALL: `${P}native-notification-remove-all`,
@@ -43,6 +45,23 @@ export type EventType = (typeof EVENTS)[keyof typeof EVENTS];
 /** Native appearance source, mirrors Electron's `nativeTheme.themeSource`. */
 export type NativeThemeSource = 'system' | 'light' | 'dark';
 
+export type AutomaticUpdates = 'default' | 'enabled' | 'disabled';
+
+export interface UpdatePreferences {
+  automaticUpdates: AutomaticUpdates;
+  showUpdateNotifications: boolean;
+}
+
+/**
+ * A package manager that owns updates for an installation. `packager` means a
+ * package opted in through the resource marker or environment variable.
+ */
+export type UpdateManager = 'Scoop' | 'Flatpak' | 'Snap' | 'packager';
+
+export function isAutomaticUpdates(value: unknown): value is AutomaticUpdates {
+  return value === 'default' || value === 'enabled' || value === 'disabled';
+}
+
 export type TrayIconAppearance = 'auto' | 'light' | 'dark';
 
 /** Zoom direction triggered by an application keyboard shortcut. */
@@ -55,7 +74,6 @@ export function isTrayIconAppearance(value: unknown): value is TrayIconAppearanc
 /** Payload for the `UPDATE_AUTO_LAUNCH` event. */
 export interface IAutoLaunch {
   openAtLogin: boolean;
-  openAsHidden: boolean;
 }
 
 /** Payload for the `UPDATE_KEYBOARD_SHORTCUT` event. */
@@ -170,8 +188,9 @@ export type EventContracts = AssertEventCoverage<{
     request: boolean;
     response: undefined;
   };
-  [EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS]: {
-    request: boolean;
+  [EVENTS.UPDATE_MANAGER]: { request: undefined; response: UpdateManager | null };
+  [EVENTS.UPDATE_PREFERENCES]: {
+    request: UpdatePreferences;
     response: undefined;
   };
   [EVENTS.UPDATE_USE_X11_BACKEND]: {
@@ -194,6 +213,7 @@ export type EventContracts = AssertEventCoverage<{
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
   [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
+  [EVENTS.SYSTEM_SLEEP]: { request: undefined; response: undefined };
   [EVENTS.NATIVE_NOTIFICATION_SHOW]: {
     request: INativeNotificationPayload;
     response: undefined;
