@@ -1,5 +1,27 @@
 # Changelog
 
+## [8.1.0](https://github.com/gitify-app/gitify/compare/v8.0.0...v8.1.0) (2026-11-06)
+
+
+### 🚀 Features
+
+* **notifications:** animate repository header out with its last row ([#3645](https://github.com/gitify-app/gitify/issues/3645)) ([221c833](https://github.com/gitify-app/gitify/commit/221c833f4e166569781a92f0fb414883d96cf037))
+* show the existing window when Gitify is launched again ([#3646](https://github.com/gitify-app/gitify/issues/3646)) ([0ffddd2](https://github.com/gitify-app/gitify/commit/0ffddd2da5571669503e556cc732d8b4d4c0d9d0))
+
+
+### 🐛 Bug Fixes
+
+* **a11y:** reveal notification actions on keyboard focus ([#3647](https://github.com/gitify-app/gitify/issues/3647)) ([f2706e2](https://github.com/gitify-app/gitify/commit/f2706e245ec1f16b0c643b4e2a824e13812125aa))
+* prevent metric pill layout render loops ([#3632](https://github.com/gitify-app/gitify/issues/3632)) ([4df2964](https://github.com/gitify-app/gitify/commit/4df29646ebef9f304e3b19c53690b0af8c90e6e2))
+* show the existing window when Gitify is launched again ([0ffddd2](https://github.com/gitify-app/gitify/commit/0ffddd2da5571669503e556cc732d8b4d4c0d9d0))
+* **ui:** only highlight header chevron when hovering it or empty row space ([#3633](https://github.com/gitify-app/gitify/issues/3633)) ([bab52b3](https://github.com/gitify-app/gitify/commit/bab52b38a597102a679d4e5b99c3d4b19a4e4ed2))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @primer/react to v38.44.0 ([#3629](https://github.com/gitify-app/gitify/issues/3629)) ([3558998](https://github.com/gitify-app/gitify/commit/35589983f128f327c00b2add9325b483a3da367d))
+* **deps-core:** update electron to v45.2.3 ([#3627](https://github.com/gitify-app/gitify/issues/3627)) ([f0a6944](https://github.com/gitify-app/gitify/commit/f0a6944e15c90872bc88cc2b6c2debfc7abf982d))
+
 ## [8.0.0](https://github.com/gitify-app/gitify/compare/v7.10.0...v8.0.0) (2026-11-04)
 
 
