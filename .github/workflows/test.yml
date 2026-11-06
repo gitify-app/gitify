@@ -52,7 +52,7 @@ jobs:
     # matching browser build. `scripts/visual.sh` derives the image from it for
     # local runs, and `src/main/ciDependencyCompatibility.test.ts` asserts the
     # two stay in sync so the version cannot drift unnoticed.
-    container: mcr.microsoft.com/playwright:v1.64.1-noble@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f
+    container: mcr.microsoft.com/playwright:v1.65.0-noble@sha256:6e3fb709361521eb27161606e6da6d2674e5e89fa16516cb37d6fdd91372273d
 
     steps:
       - name: Checkout
