@@ -22,6 +22,8 @@ export function installRendererDiagnostics(): void {
     showDialog: false,
     onError: ({ error }) => {
       log.error('[uncaught]', sanitizeErrorForLog(error));
+      // Suppress the default console/IPC path carrying the original error.
+      return false;
     },
   });
 }

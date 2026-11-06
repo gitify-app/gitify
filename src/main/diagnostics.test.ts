@@ -56,4 +56,21 @@ describe('main/diagnostics.ts', () => {
     );
     expect(JSON.stringify(vi.mocked(log.error).mock.calls[0][1])).not.toContain('supersecret');
   });
+
+  it('prevents the real error handler from also logging the original error', async () => {
+    const { log, installMainDiagnostics } = await loadDiagnostics();
+    const { default: actualLog } =
+      await vi.importActual<typeof import('electron-log')>('electron-log');
+    const consoleTransport = vi.spyOn(actualLog.transports, 'console').mockImplementation(() => {});
+    const fileTransport = vi.spyOn(actualLog.transports, 'file').mockImplementation(() => {});
+    installMainDiagnostics();
+
+    const options = vi.mocked(log.errorHandler.startCatching).mock.calls[0][0]!;
+    actualLog.errorHandler.handle(new Error('Authorization: Bearer supersecret'), options);
+
+    expect(log.error).toHaveBeenCalledTimes(1);
+    expect(JSON.stringify(vi.mocked(log.error).mock.calls)).not.toContain('supersecret');
+    expect(consoleTransport).not.toHaveBeenCalled();
+    expect(fileTransport).not.toHaveBeenCalled();
+  });
 });

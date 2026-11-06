@@ -23,6 +23,8 @@ export function installMainDiagnostics(): void {
     showDialog: false,
     onError: ({ error }) => {
       log.error('[uncaught]', sanitizeErrorForLog(error));
+      // Suppress electron-log's default logging of the original error.
+      return false;
     },
   });
 }
