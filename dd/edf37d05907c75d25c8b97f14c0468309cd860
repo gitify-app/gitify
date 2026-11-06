@@ -1,0 +1,30 @@
+src/renderer/App.css
+  h_ac004aadb63da9 234-236,282,284-285,300-301,359,365-366
+src/renderer/components/notifications/AccountHeader.tsx
+  h_ac004aadb63da9 67
+src/renderer/components/notifications/NotificationRow.tsx
+  h_ac004aadb63da9 108,147,152,168
+src/renderer/components/notifications/NotificationRow.visual.test.tsx
+  h_ac004aadb63da9 85-139
+src/renderer/components/notifications/RepositoryHeader.tsx
+  h_ac004aadb63da9 96
+src/renderer/components/notifications/__snapshots__/AccountHeader.test.tsx.snap
+  h_ac004aadb63da9 88
+src/renderer/components/primitives/HoverGroup.test.tsx
+  h_ac004aadb63da9 8,15,27,39
+src/renderer/components/primitives/HoverGroup.tsx
+  h_ac004aadb63da9 10-13,23,40
+src/renderer/components/primitives/__snapshots__/HoverGroup.test.tsx.snap
+  h_ac004aadb63da9 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ddedf37d05907c75d25c8b97f14c0468309cd860",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
