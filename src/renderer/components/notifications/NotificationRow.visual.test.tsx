@@ -82,6 +82,61 @@ describe('renderer/components/notifications/NotificationRow visual regression', 
   });
 
   describe.each(THEME_VARIANTS)('$theme $designLanguage', ({ designLanguage, theme }) => {
+    it('reveals row and header actions on focus with a backdrop, then hides them on blur', async () => {
+      renderRoute(<NotificationsRoute />, {
+        theme,
+        designLanguage,
+        accounts: [mockGitHubCloudAccount],
+        settings: { showAccountHeader: true },
+        notifications,
+      });
+      await page.getByTestId('visual-root').hover({ position: { x: 480, y: 380 } });
+
+      for (const testId of [
+        'account-toggle',
+        'repository-mark-as-read',
+        'notification-mark-as-read',
+      ]) {
+        const button = document.querySelector<HTMLButtonElement>(`[data-testid="${testId}"]`);
+        const rail = button?.closest<HTMLElement>('.gitify-hover-actions');
+        if (!button || !rail) {
+          throw new Error(`Missing action rail for ${testId}`);
+        }
+
+        await waitFor(() => expect(getComputedStyle(rail).opacity).toBe('0'));
+        button.focus();
+        expect(button).toHaveFocus();
+        await waitFor(() => expect(getComputedStyle(rail).opacity).toBe('1'));
+
+        const { backgroundColor, backgroundImage } = getComputedStyle(rail);
+        expect(backgroundColor !== 'rgba(0, 0, 0, 0)' || backgroundImage !== 'none').toBe(true);
+
+        button.blur();
+        await waitFor(() => expect(getComputedStyle(rail).opacity).toBe('0'));
+      }
+    });
+
+    it('hides the notification number while its actions have focus', async () => {
+      await renderNotifications(theme, designLanguage);
+      await page.getByTestId('visual-root').hover({ position: { x: 480, y: 380 } });
+
+      const button = document.querySelector<HTMLButtonElement>(
+        '[data-testid="notification-mark-as-read"]',
+      );
+      const reference = document.querySelector<HTMLElement>(
+        '[data-testid="notification-reference"]',
+      );
+      if (!button || !reference) {
+        throw new Error('First notification action or reference is missing');
+      }
+
+      expect(getComputedStyle(reference).visibility).toBe('visible');
+      button.focus();
+      expect(getComputedStyle(reference).visibility).toBe('hidden');
+      button.blur();
+      expect(getComputedStyle(reference).visibility).toBe('visible');
+    });
+
     it('reveals the action rail on hover', async () => {
       await renderNotifications(theme, designLanguage);
       const { row } = await hoverFirstRow();

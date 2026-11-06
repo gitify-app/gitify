@@ -231,8 +231,9 @@
     --button-default-borderColor-rest: transparent;
   }
 
-  /* Row hover is a light glass wash instead of the solid Classic fill. */
-  .gitify-translucent .hover\:bg-gitify-notification-hover:hover {
+  /* Row hover/focus is a light glass wash instead of the solid Classic fill. */
+  .gitify-translucent .hover\:bg-gitify-notification-hover:hover,
+  .gitify-translucent .focus-within\:bg-gitify-notification-hover:focus-within {
     background-color: var(--gitify-glass-control-rest);
   }
 
@@ -278,10 +279,10 @@
   /* Row/header action cluster: a frosted, hairlined surface (the macOS tooltip
    * material) so the row content never shows through the controls. This replaces
    * the old bare-icon treatment, which relied on fading the row content out from
-   * beneath the buttons. The `:hover` variant guards against the layered
-   * `group-hover:bg-*` utility winning on specificity when the row is hovered. */
+   * beneath the buttons. Keep the same surface during hover and keyboard focus. */
   .gitify-translucent .gitify-hover-actions,
-  .gitify-translucent .group:hover .gitify-hover-actions {
+  .gitify-translucent .group:hover .gitify-hover-actions,
+  .gitify-translucent .group:focus-within .gitify-hover-actions {
     background-color: light-dark(
       color-mix(in oklab, var(--bgColor-default), transparent 8%),
       color-mix(in oklab, var(--bgColor-neutral-emphasis), transparent 30%)
@@ -296,7 +297,8 @@
    * background under the row's hover wash) so the rail blends into the row
    * while still hiding the content beneath it. */
   .gitify-translucent.gitify-linux .gitify-hover-actions,
-  .gitify-translucent.gitify-linux .group:hover .gitify-hover-actions {
+  .gitify-translucent.gitify-linux .group:hover .gitify-hover-actions,
+  .gitify-translucent.gitify-linux .group:focus-within .gitify-hover-actions {
     background:
       linear-gradient(var(--gitify-glass-control-rest), var(--gitify-glass-control-rest)),
       var(--gitify-background);
@@ -354,13 +356,14 @@
     --button-invisible-bgColor-hover: transparent;
     --button-invisible-bgColor-active: transparent;
 
-    /* Bare icons still need affordance: dimmed at rest, full colour on hover,
+    /* Bare icons still need affordance: dimmed at rest, full colour on hover/focus,
      * a press dip on active. */
     opacity: 0.65;
     transition: opacity 120ms ease-in-out;
   }
 
-  .gitify-translucent .gitify-hover-actions :where(button):hover {
+  .gitify-translucent .gitify-hover-actions :where(button):hover,
+  .gitify-translucent .gitify-hover-actions :where(button):focus-visible {
     opacity: 1;
   }
 

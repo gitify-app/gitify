@@ -155,6 +155,13 @@ async function captureRoute(
     settings: { ...route.state?.settings, ...settings },
   });
 
+  // These baselines capture idle routes. Hover/focus interactions have their
+  // own coverage; park the pointer on empty sidebar space between captures.
+  await page.getByTestId('visual-root').hover({ position: { x: 1, y: 399 } });
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
+
   await expect(page.getByTestId('visual-root')).toMatchScreenshot(
     `${name}-${theme.toLowerCase()}-${designLanguage}`,
   );
