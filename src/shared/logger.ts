@@ -56,30 +56,50 @@ export interface SanitizedError {
  * @returns A log-safe error projection.
  */
 export function sanitizeErrorForLog(err: unknown): SanitizedError {
-  const error = err instanceof Error ? err : null;
-  const record = err as { code?: unknown; cause?: unknown } | null;
+  // Never stringify an object or invoke its toString/toJSON. Rejection reasons
+  // can be request objects, including circular structures and credentials.
+  const record =
+    err !== null && (typeof err === 'object' || typeof err === 'function')
+      ? (err as {
+          name?: unknown;
+          message?: unknown;
+          stack?: unknown;
+          code?: unknown;
+          cause?: unknown;
+        })
+      : undefined;
 
-  const sanitized: SanitizedError = {
-    name: error?.name ?? 'Error',
-    message: redactSensitiveText(error?.message ?? String(err)),
-  };
+  try {
+    const { name, message, stack, code, cause } = record ?? {};
+    const sanitized: SanitizedError = {
+      name: typeof name === 'string' ? redactSensitiveText(name) : 'Error',
+      message: redactSensitiveText(
+        typeof message === 'string'
+          ? message
+          : record || typeof err === 'symbol'
+            ? 'Non-Error rejection'
+            : String(err),
+      ),
+    };
 
-  if (error?.stack) {
-    sanitized.stack = redactSensitiveText(error.stack);
+    if (typeof stack === 'string') {
+      sanitized.stack = redactSensitiveText(stack);
+    }
+
+    if (typeof code === 'string' || typeof code === 'number') {
+      sanitized.code = typeof code === 'string' ? redactSensitiveText(code) : code;
+    }
+
+    if (typeof cause === 'string' || typeof cause === 'number') {
+      sanitized.cause = typeof cause === 'string' ? redactSensitiveText(cause) : cause;
+    }
+
+    return sanitized;
+  } catch {
+    // Error reporting must not throw or fall back to printing the raw value
+    // when an unknown reason has a throwing getter or Proxy trap.
+    return { name: 'Error', message: 'Unable to read error details' };
   }
-
-  if (typeof record?.code === 'string' || typeof record?.code === 'number') {
-    sanitized.code =
-      typeof record.code === 'string' ? redactSensitiveText(record.code) : record.code;
-  }
-
-  if (typeof record?.cause === 'string') {
-    sanitized.cause = redactSensitiveText(record.cause);
-  } else if (typeof record?.cause === 'number') {
-    sanitized.cause = record.cause;
-  }
-
-  return sanitized;
 }
 
 /**

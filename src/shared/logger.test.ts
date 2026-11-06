@@ -153,5 +153,66 @@ describe('shared/logger.ts', () => {
         message: 'plain failure',
       });
     });
+
+    it('projects only allowed fields from a structured rejection', () => {
+      const result = sanitizeErrorForLog({
+        name: 'RequestFailure',
+        message: 'Request failed',
+        code: 403,
+        cause: { password: 'supersecret' },
+        headers: { authorization: 'Basic supersecret' },
+        token: 'supersecret',
+      });
+
+      expect(result).toEqual({ name: 'RequestFailure', message: 'Request failed', code: 403 });
+    });
+
+    it('does not stringify cyclic reasons or call custom serialization methods', () => {
+      const toString = vi.fn(() => 'supersecret');
+      const toJSON = vi.fn(() => 'supersecret');
+      const reason: {
+        token: string;
+        toString: typeof toString;
+        toJSON: typeof toJSON;
+        self?: unknown;
+      } = {
+        token: 'supersecret',
+        toString,
+        toJSON,
+      };
+      reason.self = reason;
+
+      expect(sanitizeErrorForLog(reason)).toEqual({
+        name: 'Error',
+        message: 'Non-Error rejection',
+      });
+      expect(toString).not.toHaveBeenCalled();
+      expect(toJSON).not.toHaveBeenCalled();
+    });
+
+    it('falls back safely when reading an error field throws', () => {
+      const reason = Object.defineProperty({}, 'message', {
+        get() {
+          throw new Error('Bearer supersecret');
+        },
+      });
+
+      expect(sanitizeErrorForLog(reason)).toEqual({
+        name: 'Error',
+        message: 'Unable to read error details',
+      });
+    });
+
+    it('redacts every retained string field, including the error name', () => {
+      const result = sanitizeErrorForLog({
+        name: 'Bearer supersecret',
+        message: 'Bearer supersecret',
+        stack: 'Bearer supersecret',
+        code: 'Bearer supersecret',
+        cause: 'Bearer supersecret',
+      });
+
+      expect(Object.values(result)).toEqual(Array(5).fill('Bearer [redacted]'));
+    });
   });
 });

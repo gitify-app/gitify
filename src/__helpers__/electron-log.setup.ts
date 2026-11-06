@@ -20,6 +20,7 @@ vi.mock('electron-log', () => {
     initialize: vi.fn(),
     errorHandler: {
       startCatching: vi.fn(),
+      setOptions: vi.fn(),
     },
     transports: {
       file: {
@@ -46,6 +47,7 @@ vi.mock('electron-log/renderer', () => {
     initialize: vi.fn(),
     errorHandler: {
       startCatching: vi.fn(),
+      setOptions: vi.fn(),
     },
     transports: {
       file: {

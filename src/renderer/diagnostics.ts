@@ -7,9 +7,9 @@ let installed = false;
 /**
  * Install the renderer-process uncaught-error handler once.
  *
- * The renderer transport forwards to the main process log. Errors are
- * projected through `sanitizeErrorForLog` before forwarding so request
- * objects, headers, and tokens are never serialized. No modal dialog is shown.
+ * Native events are projected through `sanitizeErrorForLog` before forwarding
+ * to the main log. This avoids electron-log stringifying structured rejection
+ * reasons before their credential-bearing properties can be dropped.
  */
 export function installRendererDiagnostics(): void {
   if (installed) {
@@ -18,12 +18,25 @@ export function installRendererDiagnostics(): void {
 
   installed = true;
 
-  log.errorHandler.startCatching({
+  const reportError = (error: unknown) => {
+    log.error('[uncaught]', sanitizeErrorForLog(error));
+  };
+
+  log.errorHandler.setOptions({
     showDialog: false,
     onError: ({ error }) => {
-      log.error('[uncaught]', sanitizeErrorForLog(error));
+      reportError(error);
       // Suppress the default console/IPC path carrying the original error.
       return false;
     },
+  });
+
+  window.addEventListener('error', (event) => {
+    event.preventDefault();
+    reportError(event.error ?? { message: event.message });
+  });
+  window.addEventListener('unhandledrejection', (event) => {
+    event.preventDefault();
+    reportError(event.reason);
   });
 }

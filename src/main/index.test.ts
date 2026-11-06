@@ -22,7 +22,7 @@ vi.mock('electron', () => ({
 
 vi.mock('electron-log', () => ({
   default: {
-    initialize: vi.fn(),
+    initialize: vi.fn(() => calls.push('logging')),
     info: vi.fn(),
     warn: vi.fn(),
     error: vi.fn(),
@@ -31,6 +31,7 @@ vi.mock('electron-log', () => ({
     silly: vi.fn(),
     errorHandler: {
       startCatching: vi.fn(),
+      setOptions: vi.fn(),
     },
     transports: { file: {} },
   },
@@ -41,6 +42,11 @@ vi.mock('electron-menubar', () => ({ menubar: menubarMock }));
 vi.mock('./config', () => ({
   Paths: { indexHtml: 'index.html' },
   WindowConfig: { width: 500, height: 400 },
+}));
+
+// Test entrypoint wiring without installing process-wide diagnostic listeners.
+vi.mock('./diagnostics', () => ({
+  installMainDiagnostics: vi.fn(() => calls.push('diagnostics')),
 }));
 
 vi.mock('./handlers', () => ({
@@ -97,7 +103,7 @@ describe('main/index.ts', () => {
   });
 
   it('configures user data and the Ozone backend before Electron becomes ready', () => {
-    expect(calls).toEqual(['userData', 'ozone', 'whenReady']);
+    expect(calls).toEqual(['userData', 'ozone', 'logging', 'diagnostics', 'whenReady']);
   });
 
   it('logs an error when Electron fails to become ready', async () => {

@@ -8,9 +8,8 @@ let installed = false;
  * Install the main-process uncaught-error handler once.
  *
  * Uncaught exceptions and unhandled rejections are written to the application
- * log through `electron-log`'s error handler, without a modal dialog. Errors
- * are projected through `sanitizeErrorForLog` so request objects, headers, and
- * tokens are never serialized.
+ * log without a modal dialog. Native listeners pass the original rejection
+ * value to the sanitizer before electron-log can stringify structured reasons.
  */
 export function installMainDiagnostics(): void {
   if (installed) {
@@ -19,12 +18,20 @@ export function installMainDiagnostics(): void {
 
   installed = true;
 
-  log.errorHandler.startCatching({
+  const reportError = (error: unknown) => {
+    log.error('[uncaught]', sanitizeErrorForLog(error));
+  };
+
+  // Also protect errors forwarded by electron-log's renderer IPC transport.
+  log.errorHandler.setOptions({
     showDialog: false,
     onError: ({ error }) => {
-      log.error('[uncaught]', sanitizeErrorForLog(error));
+      reportError(error);
       // Suppress electron-log's default logging of the original error.
       return false;
     },
   });
+
+  process.on('uncaughtException', reportError);
+  process.on('unhandledRejection', reportError);
 }
