@@ -1,0 +1,20 @@
+src/main/diagnostics.test.ts
+  h_ac004aadb63da9 59-75
+src/main/diagnostics.ts
+  h_ac004aadb63da9 26-27
+src/renderer/diagnostics.test.ts
+  h_ac004aadb63da9 53-70,72
+src/renderer/diagnostics.ts
+  h_ac004aadb63da9 25-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b62a6735323d3b18472616ce10c33a9b0632d869",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
