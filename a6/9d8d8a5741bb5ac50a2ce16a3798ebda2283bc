@@ -1,0 +1,336 @@
+.github/workflows/build.yml
+  h_ac004aadb63da9 33,40,47,76-78
+.github/workflows/lint.yml
+  h_ac004aadb63da9 27-29
+.github/workflows/publish.yml
+  h_ac004aadb63da9 50,57,64,104-106
+.github/workflows/test.yml
+  h_ac004aadb63da9 31,55,116
+.github/workflows/triage.yml
+  h_ac004aadb63da9 50
+.github/workflows/zizmor.yml
+  h_ac004aadb63da9 28
+.opencode/commands/opsx-apply.md
+  h_ac004aadb63da9 60
+.opencode/commands/opsx-bulk-archive.md
+  h_ac004aadb63da9 1-369
+.opencode/commands/opsx-continue.md
+  h_ac004aadb63da9 2,5,20,37,39,41,51-72,74,76-105,110-120,123-131
+.opencode/commands/opsx-ff.md
+  h_ac004aadb63da9 1-122
+.opencode/commands/opsx-new.md
+  h_ac004aadb63da9 1-80
+.opencode/commands/opsx-onboard.md
+  h_ac004aadb63da9 1-567
+.opencode/commands/opsx-verify.md
+  h_ac004aadb63da9 1-215
+.opencode/skills/openspec-apply-change/SKILL.md
+  h_ac004aadb63da9 10,67
+.opencode/skills/openspec-archive-change/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-bulk-archive-change/SKILL.md
+  h_ac004aadb63da9 1-377
+.opencode/skills/openspec-continue-change/SKILL.md
+  h_ac004aadb63da9 2-3,10,13,44,46,48,58-79,81,83-112,117-127,130-138
+.opencode/skills/openspec-explore/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-ff-change/SKILL.md
+  h_ac004aadb63da9 1-129
+.opencode/skills/openspec-new-change/SKILL.md
+  h_ac004aadb63da9 1-88
+.opencode/skills/openspec-onboard/SKILL.md
+  h_ac004aadb63da9 1-575
+.opencode/skills/openspec-propose/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-sync-specs/SKILL.md
+  h_ac004aadb63da9 10
+.opencode/skills/openspec-verify-change/SKILL.md
+  h_ac004aadb63da9 1-223
+.release-please-manifest.json
+  h_ac004aadb63da9 2
+ARCHITECTURE.md
+  h_ac004aadb63da9 39,44,48-49,59,71-75,83-92
+CHANGELOG.md
+  h_ac004aadb63da9 3-121
+CONTRIBUTING.md
+  h_ac004aadb63da9 50-52,241-271,306
+README.md
+  h_ac004aadb63da9 60
+electron-builder.js
+  h_ac004aadb63da9 9-36
+package.json
+  h_ac004aadb63da9 3,76,80,99,110,113-115,123,126,136-138,143-144,146-147,151,159
+pnpm-lock.yaml
+  h_ac004aadb63da9 10-11,15-16,20-21,25-26,30-31,35-36,40-41,46-47,52-53,58-59,64-65,70-71,76-77,82-83,87-88,92-93,99,102,105,108,111,114,117,120,123,126,129,132,135,138,141,143-156,187,200,227-228,260-261,269-270,272-273,275-276,299-300,308-309,320-321,338-339,341-342,344-345,359-363,368-369,371-372,383-384,417-418,459-460,468-469,475-476,499-500,663-664,675-676,699-700,711-712,741-742,759-760,771-772,777-778,789-790,795-796,825-826,831-832,849-850,855-856,1004-1006,1023-1024,1512-1513,1529-1530,1547-1549,1560-1561,1566-1567,1572-1573,1578-1579,1585-1586,1592-1593,1599-1600,1606-1607,1613-1614,1620-1621,1626-1627,1632-1633,1638-1639,1657-1658,1660-1661,1666-1667,1672-1673,1678-1679,1684-1685,1690-1691,1697-1698,1704-1705,1711-1712,1718-1720,1729-1730,1735-1736,1741-1742,1745-1746,1750-1751,1753-1754,1762-1763,1768-1769,1824-1825,1982-1983,1986,1988,2312-2313,2391-2392,2468-2469,2483-2484,2545-2546,2595-2596,2609-2610,2788,2793-2794,2803-2804,2817-2818,3027-3030,3172-3173,3175-3176,3184-3185,3646-3649,3690-3693,3726-3727,3866-3869,3991-3992,4019-4021,4023-4026,4028-4031,4155-4156,4159-4160,4168-4169,4297-4298,4328-4329,4380-4382,4498-4499,4633-4634,4696-4699,4736,4752,4756,4758,4765,4769,4771,4783,4789,4799,4816,4822,4827,4830,4833,4835,4864,4885,4898,4970,4975,4980,4998,5002,5035,5066,5074,5083,5088,5092,5099,5106,5108,5117,5135,5140,5150,5152,5159,5167,5172,5174,5181,5186,5200-5203,5210,5221,5230-5232,5237,5239,5242-5244,5257,5266,5273,5280,5291,5294,5296-5298,5300,5306-5307,5311,5320,5322,5324,5327,5334,5337,5339-5340,5342,5345,5347,5349,5358,5360,5362-5363,5366,5368,5370,5372,5378,5383,5390,5397,5399,5401-5402,5404,5406,5409-5412,5417,5419-5420,5431,5434,5439,5441-5442,5456,5458,5463,5465,5467,5472,5601-5602,5622,5927,5931,5935,5942,5949,5963,5973,5990-5991,5998,6001,6004,6007,6010,6013,6016,6019,6022,6025,6028,6031,6034,6039-6050,6062,6065,6067-6068,6070,6072,6075,6078,6081,6084,6087,6090,6093,6096,6099,6102,6105,6108,6110-6127,6130,6132,6134,6139,6141,6145,6206,6304,6345,6459,6464,6481,6488,6492,6496,6561,6633,6661,6700-6703,6761,6772,6828,6866,6881,6908,7053,7055,7071,7098,7100,7114,7162,7329-7334,7350,7404,7415-7420,7426,7438,7440,7444,7456,7517,7521,7525-7529,7532-7533,7540-7541,7543,7555,7561,7682,7684,7686,7688,7866,7872,7920-7924,7962-7963,7968,7974,7991,7999,8118,8154-8158,8179,8190,8251,8279,8294,8298,8313,8315-8316,8319-8320,8416,8435,8437,8439,8443,8464,8531,8561,8587,8593,8608,8632-8633,8720,8748,8827,8850,8902,8952-8955
+pnpm-workspace.yaml
+  h_ac004aadb63da9 2-4,14
+scripts/afterPack.js
+  h_ac004aadb63da9 12-32,47-48
+scripts/verifyFuses.js
+  h_ac004aadb63da9 1-214
+scripts/verifyPackagedDependencies.js
+  h_ac004aadb63da9 30
+scripts/visual.sh
+  h_ac004aadb63da9 32,34
+sonar-project.properties
+  h_ac004aadb63da9 8
+src/__helpers__/gitify-bridge.ts
+  h_ac004aadb63da9 44,48-49
+src/main/badge.test.ts
+  h_ac004aadb63da9 1-104
+src/main/badge.ts
+  h_ac004aadb63da9 1-200
+src/main/handlers/system.test.ts
+  h_ac004aadb63da9 31,33,97,107-108,143-175
+src/main/handlers/system.ts
+  h_ac004aadb63da9 69-81,95,99
+src/main/handlers/tray.test.ts
+  h_ac004aadb63da9 23-32,39,180-242
+src/main/handlers/tray.ts
+  h_ac004aadb63da9 10,12,20-21,36-44,54,59,64-70
+src/main/handlers/updater.test.ts
+  h_ac004aadb63da9 1,3-4,7-12,14-15,17-20,22,24,27-33,35-38,41-43,45-57,59-67
+src/main/handlers/updater.ts
+  h_ac004aadb63da9 1-2,4-5,13-46
+src/main/index.test.ts
+  h_ac004aadb63da9 70,105-113
+src/main/index.ts
+  h_ac004aadb63da9 68-70
+src/main/lifecycle/startup.test.ts
+  h_ac004aadb63da9 1-3,6-7,9,11-19,21-24,28-29,31-33,37-39,41-43,45-46,48-61,63-72,74-75,77-96,98-103,105-112,114-115
+src/main/lifecycle/startup.ts
+  h_ac004aadb63da9 5,9-11,22-36,41,43-47,49-56
+src/main/menu.test.ts
+  h_ac004aadb63da9 23,26,62,108,111,250-253,259,262-264,270-282,323-324,326,331
+src/main/menu.ts
+  h_ac004aadb63da9 24-26,35,38-44,66-68,187-207
+src/main/update-manager.test.ts
+  h_ac004aadb63da9 1-71
+src/main/update-manager.ts
+  h_ac004aadb63da9 1-105
+src/main/updater.test.ts
+  h_ac004aadb63da9 1,6-8,23-27,32-33,60-62,83-84,88,99,107-109,118-205,213,238,252,257,268,276,285,298,310-453,460,466,470-473,475,481,491,503,512,514,523,531,544,562,584,593,605,609,615,623,626-641,643-658,660-683,685-750,755-765
+src/main/updater.ts
+  h_ac004aadb63da9 1,3,7,25-34,36,45-54,56-57,68-84,91-94,96,104-106,116-121,123-126,132-134,139-142,147-153,158-160,175-177,179,184-188,191-193,222,226,229-255,294-306,310-311,313,315-325,328-329,335,339-342,349-362
+src/preload/index.test.ts
+  h_ac004aadb63da9 48-52,64,106-115,127,130,132-135,245-261
+src/preload/index.ts
+  h_ac004aadb63da9 11,84-86,256-268
+src/renderer/App.css
+  h_ac004aadb63da9 234-236,282,284-285,295-311,359,365-366,525-528,619-632
+src/renderer/App.test.tsx
+  h_ac004aadb63da9 1-121
+src/renderer/App.tsx
+  h_ac004aadb63da9 7,13,16,30-33
+src/renderer/__helpers__/test-utils.tsx
+  h_ac004aadb63da9 3
+src/renderer/__helpers__/visual-utils.tsx
+  h_ac004aadb63da9 3,33-34,93,143
+src/renderer/__helpers__/vitest.setup.ts
+  h_ac004aadb63da9 19-20,142-143
+src/renderer/__mocks__/state-mocks.ts
+  h_ac004aadb63da9 66
+src/renderer/components/AppErrorBoundary.test.tsx
+  h_ac004aadb63da9 1-29
+src/renderer/components/AppErrorBoundary.tsx
+  h_ac004aadb63da9 1-49
+src/renderer/components/ErrorStates.visual.test.tsx
+  h_ac004aadb63da9 1-38
+src/renderer/components/GlobalEffects.test.tsx
+  h_ac004aadb63da9 6-11,137-172
+src/renderer/components/GlobalEffects.tsx
+  h_ac004aadb63da9 9,54-56
+src/renderer/components/Oops.test.tsx
+  h_ac004aadb63da9 60-90
+src/renderer/components/Oops.tsx
+  h_ac004aadb63da9 2,4,8,13-18,22-23,26,33,46-60
+src/renderer/components/RouteError.test.tsx
+  h_ac004aadb63da9 1-27
+src/renderer/components/RouteError.tsx
+  h_ac004aadb63da9 1-14
+src/renderer/components/Sidebar.test.tsx
+  h_ac004aadb63da9 41-44
+src/renderer/components/Sidebar.tsx
+  h_ac004aadb63da9 2,24,28,42-65,74,76,122-124,173-175
+src/renderer/components/layout/AppLayout.tsx
+  h_ac004aadb63da9 34-36
+src/renderer/components/layout/__snapshots__/AppLayout.test.tsx.snap
+  h_ac004aadb63da9 34,230,232-233,236
+src/renderer/components/login/LoginWithPersonalAccessTokenForm.tsx
+  h_ac004aadb63da9 3
+src/renderer/components/metrics/LabelsPill.visual.test.tsx
+  h_ac004aadb63da9 66
+src/renderer/components/metrics/MetricGroup.test.tsx
+  h_ac004aadb63da9 142,152-178
+src/renderer/components/metrics/MetricGroup.tsx
+  h_ac004aadb63da9 1-2,12,16,31-40,42-44,46-50,52-53,55-61,63-65,67-69,71-73,75-80,82-84,86-87,89-94,96-97,99-107
+src/renderer/components/metrics/MetricPill.tsx
+  h_ac004aadb63da9 21-34,37-49,54-60
+src/renderer/components/metrics/MetricPills.test.tsx
+  h_ac004aadb63da9 1-317
+src/renderer/components/metrics/MetricPills.tsx
+  h_ac004aadb63da9 1-277
+src/renderer/components/metrics/ReviewsPill.tsx
+  h_ac004aadb63da9 1-2,15-23,27,42-96
+src/renderer/components/metrics/__snapshots__/ChecksPill.test.tsx.snap
+  h_ac004aadb63da9 44
+src/renderer/components/metrics/__snapshots__/CommentsPill.test.tsx.snap
+  h_ac004aadb63da9 44,107
+src/renderer/components/metrics/__snapshots__/LabelsPill.test.tsx.snap
+  h_ac004aadb63da9 44
+src/renderer/components/metrics/__snapshots__/LinkedIssuesPill.test.tsx.snap
+  h_ac004aadb63da9 47,113
+src/renderer/components/metrics/__snapshots__/MetricGroup.test.tsx.snap
+  h_ac004aadb63da9 8-9,11-15,17-19,21-25,27-35,37-81,83-111,113-116,118-122,124-132,134-169,171-173,175-233
+src/renderer/components/metrics/__snapshots__/MetricPill.test.tsx.snap
+  h_ac004aadb63da9 43
+src/renderer/components/metrics/__snapshots__/ParentPill.test.tsx.snap
+  h_ac004aadb63da9 47
+src/renderer/components/metrics/__snapshots__/ReactionsPill.test.tsx.snap
+  h_ac004aadb63da9 44,241
+src/renderer/components/metrics/__snapshots__/ReviewsPill.test.tsx.snap
+  h_ac004aadb63da9 46,104,162
+src/renderer/components/metrics/__snapshots__/SubIssueProgressPill.test.tsx.snap
+  h_ac004aadb63da9 58,135
+src/renderer/components/notifications/AccountHeader.test.tsx
+  h_ac004aadb63da9 88,98
+src/renderer/components/notifications/AccountHeader.tsx
+  h_ac004aadb63da9 36,88
+src/renderer/components/notifications/NotificationFooter.tsx
+  h_ac004aadb63da9 25-57,59,61,63,65-70,72-74
+src/renderer/components/notifications/NotificationList.tsx
+  h_ac004aadb63da9 158
+src/renderer/components/notifications/NotificationList.visual.test.tsx
+  h_ac004aadb63da9 23-24,250-457
+src/renderer/components/notifications/NotificationRow.tsx
+  h_ac004aadb63da9 108,147,152
+src/renderer/components/notifications/NotificationRow.visual.test.tsx
+  h_ac004aadb63da9 85-139
+src/renderer/components/notifications/RepositoryHeader.test.tsx
+  h_ac004aadb63da9 135-138,143-151
+src/renderer/components/notifications/RepositoryHeader.tsx
+  h_ac004aadb63da9 59,118
+src/renderer/components/notifications/__snapshots__/AccountHeader.test.tsx.snap
+  h_ac004aadb63da9 88,161-162,170,175,187
+src/renderer/components/primitives/Header.tsx
+  h_ac004aadb63da9 2
+src/renderer/components/primitives/HoverButton.tsx
+  h_ac004aadb63da9 13,20
+src/renderer/components/primitives/HoverGroup.tsx
+  h_ac004aadb63da9 22-30,32,36-39,49,51
+src/renderer/components/primitives/ReloadButton.tsx
+  h_ac004aadb63da9 1-30
+src/renderer/components/primitives/__snapshots__/HoverGroup.test.tsx.snap
+  h_ac004aadb63da9 6
+src/renderer/components/settings/InboxSettings.tsx
+  h_ac004aadb63da9 3
+src/renderer/components/settings/SystemSettings.test.tsx
+  h_ac004aadb63da9 48-84,156-160
+src/renderer/components/settings/SystemSettings.tsx
+  h_ac004aadb63da9 8-9,35-127,450-451
+src/renderer/components/settings/TraySettings.test.tsx
+  h_ac004aadb63da9 38-66
+src/renderer/components/settings/TraySettings.tsx
+  h_ac004aadb63da9 43,45
+src/renderer/hooks/notifications/useNotificationEffects.ts
+  h_ac004aadb63da9 1,46,78-101,170,240,245
+src/renderer/hooks/notifications/useNotificationsQuery.ts
+  h_ac004aadb63da9 7-12,71,147-148
+src/renderer/hooks/useAccounts.test.tsx
+  h_ac004aadb63da9 11-13,68-98
+src/renderer/hooks/useAccounts.ts
+  h_ac004aadb63da9 7,25,51,63
+src/renderer/hooks/useNotifications.test.tsx
+  h_ac004aadb63da9 22-23,29,664-705,1112-1171
+src/renderer/hooks/usePowerState.test.ts
+  h_ac004aadb63da9 1-41
+src/renderer/hooks/usePowerState.ts
+  h_ac004aadb63da9 1-28
+src/renderer/hooks/useShortcutActions.ts
+  h_ac004aadb63da9 2,6,54-57,61,63,76,80,82,103,108,112,115
+src/renderer/i18n/locales/en.json
+  h_ac004aadb63da9 82,491-501,544
+src/renderer/index.tsx
+  h_ac004aadb63da9 4-5,14-18
+src/renderer/nav.ts
+  h_ac004aadb63da9 1-45
+src/renderer/router.test.ts
+  h_ac004aadb63da9 1-29
+src/renderer/router.tsx
+  h_ac004aadb63da9 1-72
+src/renderer/routes/AccountScopes.test.tsx
+  h_ac004aadb63da9 26-27
+src/renderer/routes/AccountScopes.tsx
+  h_ac004aadb63da9 2
+src/renderer/routes/Accounts.tsx
+  h_ac004aadb63da9 3
+src/renderer/routes/Login.tsx
+  h_ac004aadb63da9 3,26,115-121,123
+src/renderer/routes/ProtectedLayout.tsx
+  h_ac004aadb63da9 1-19
+src/renderer/routes/RootLayout.tsx
+  h_ac004aadb63da9 1-19
+src/renderer/routes/github/DeviceFlowAuthorize.tsx
+  h_ac004aadb63da9 3
+src/renderer/routes/github/LoginWithCustomOAuthApp.tsx
+  h_ac004aadb63da9 3
+src/renderer/routes/github/LoginWithGitHubCLI.tsx
+  h_ac004aadb63da9 3
+src/renderer/routes/routes.visual.test.tsx
+  h_ac004aadb63da9 158-164
+src/renderer/routes/update-settings.visual.test.tsx
+  h_ac004aadb63da9 1-56
+src/renderer/stores/defaults.ts
+  h_ac004aadb63da9 90
+src/renderer/stores/index.ts
+  h_ac004aadb63da9 10
+src/renderer/stores/subscriptions.test.ts
+  h_ac004aadb63da9 16-17,41-44,65-68,93-102
+src/renderer/stores/subscriptions.ts
+  h_ac004aadb63da9 12,42-46,70-73
+src/renderer/stores/types.ts
+  h_ac004aadb63da9 307-323
+src/renderer/stores/usePowerStateStore.test.ts
+  h_ac004aadb63da9 1-19
+src/renderer/stores/usePowerStateStore.ts
+  h_ac004aadb63da9 1-17
+src/renderer/stores/useSettingsStore.test.ts
+  h_ac004aadb63da9 121-152
+src/renderer/types.ts
+  h_ac004aadb63da9 6,147,297
+src/renderer/utils/forges/github/client.test.ts
+  h_ac004aadb63da9 21,147,167,187,209
+src/renderer/utils/forges/github/client.ts
+  h_ac004aadb63da9 34-42,80,97
+src/renderer/utils/forges/github/enrich.test.ts
+  h_ac004aadb63da9 42,45,48
+src/renderer/utils/forges/github/enrich.ts
+  h_ac004aadb63da9 9-24,26
+src/renderer/utils/notifications/listItems.test.ts
+  h_ac004aadb63da9 113-137
+src/renderer/utils/notifications/listItems.ts
+  h_ac004aadb63da9 22,70-82,90,99
+src/renderer/utils/system/comms.test.ts
+  h_ac004aadb63da9 16,134,136-140
+src/renderer/utils/system/comms.ts
+  h_ac004aadb63da9 5,107-108
+src/renderer/utils/ui/display.test.ts
+  h_ac004aadb63da9 6,11,16-18
+src/renderer/utils/ui/display.ts
+  h_ac004aadb63da9 14-17,22,29-32
+src/shared/events.ts
+  h_ac004aadb63da9 19-20,32,48-64,191-193,216
+vite.config.mts
+  h_ac004aadb63da9 12-13,19-47,242-243,256-276
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a69d8d8a5741bb5ac50a2ce16a3798ebda2283bc",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
