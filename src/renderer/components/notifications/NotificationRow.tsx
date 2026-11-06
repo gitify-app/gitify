@@ -105,7 +105,7 @@ export function NotificationRow({
         className={cn(
           'group relative border-b',
           'pl-2.75 pr-1 py-0.75',
-          'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover',
+          'text-gitify-font border-gitify-notification-border hover:bg-gitify-notification-hover focus-within:bg-gitify-notification-hover',
           'min-h-0 min-w-0',
           isNotificationRead && Opacity.READ,
         )}
@@ -144,12 +144,12 @@ export function NotificationRow({
               title={notification.display.title}
             >
               <NotificationTitle title={notification.subject.title} />
-              {/* Hidden (keeping its space) while the row is hovered, so the
+              {/* Hidden (keeping its space) while the row is hovered or focused, so the
                 full-height action rail can never leave the number partially
                 rendered. */}
               <Text
                 className={cn(
-                  'text-xxs ml-auto mr-2 group-hover:invisible',
+                  'text-xxs ml-auto mr-2 group-hover:invisible group-focus-within:invisible',
                   Opacity.READ,
                   (isGroupByDate() || !showNumber) && 'hidden',
                 )}
@@ -165,7 +165,7 @@ export function NotificationRow({
         </Stack>
 
         {!isAnimatingExit && (
-          <HoverGroup bgColor="group-hover:bg-gitify-notification-hover" fullHeight>
+          <HoverGroup bgColor="bg-gitify-notification-hover" fullHeight>
             <HoverButton
               action={actionMarkAsRead}
               enabled={!isNotificationRead}
