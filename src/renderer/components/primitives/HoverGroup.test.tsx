@@ -5,14 +5,14 @@ import { HoverGroup } from './HoverGroup';
 describe('renderer/components/primitives/HoverGroup.tsx', () => {
   it('renders', () => {
     const tree = renderWithProviders(
-      <HoverGroup bgColor="bg-gitify-repository">Hover Group</HoverGroup>,
+      <HoverGroup bgColor="group-hover:bg-gitify-repository">Hover Group</HoverGroup>,
     );
     expect(tree.container).toMatchSnapshot();
   });
 
   it('spans the host height', () => {
     const tree = renderWithProviders(
-      <HoverGroup bgColor="bg-gitify-notification-hover">Hover Group</HoverGroup>,
+      <HoverGroup bgColor="group-hover:bg-gitify-notification-hover">Hover Group</HoverGroup>,
     );
 
     const cluster = tree.container.querySelector('.gitify-hover-actions');
@@ -24,7 +24,7 @@ describe('renderer/components/primitives/HoverGroup.tsx', () => {
 
   it('stretches its buttons only when fullHeight is set', () => {
     const tree = renderWithProviders(
-      <HoverGroup bgColor="bg-gitify-notification-hover" fullHeight>
+      <HoverGroup bgColor="group-hover:bg-gitify-notification-hover" fullHeight>
         Hover Group
       </HoverGroup>,
     );
@@ -36,7 +36,7 @@ describe('renderer/components/primitives/HoverGroup.tsx', () => {
 
   it('does not stretch its buttons by default', () => {
     const tree = renderWithProviders(
-      <HoverGroup bgColor="bg-gitify-repository">Hover Group</HoverGroup>,
+      <HoverGroup bgColor="group-hover:bg-gitify-repository">Hover Group</HoverGroup>,
     );
 
     const cluster = tree.container.querySelector('.gitify-hover-actions');

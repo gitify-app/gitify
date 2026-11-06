@@ -155,6 +155,12 @@ async function captureRoute(
     settings: { ...route.state?.settings, ...settings },
   });
 
+  // These baselines capture idle routes. Focused action rails have their own
+  // interaction coverage; discard focus restored by controls during mounting.
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
+
   await expect(page.getByTestId('visual-root')).toMatchScreenshot(
     `${name}-${theme.toLowerCase()}-${designLanguage}`,
   );

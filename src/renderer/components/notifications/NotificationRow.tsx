@@ -165,7 +165,7 @@ export function NotificationRow({
         </Stack>
 
         {!isAnimatingExit && (
-          <HoverGroup bgColor="bg-gitify-notification-hover" fullHeight>
+          <HoverGroup bgColor="group-hover:bg-gitify-notification-hover" fullHeight>
             <HoverButton
               action={actionMarkAsRead}
               enabled={!isNotificationRead}

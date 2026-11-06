@@ -64,7 +64,11 @@ export function AccountHeader({
         />
       </Button>
 
-      <HoverGroup bgColor={error ? 'bg-gitify-account-error' : 'bg-gitify-account-rest'}>
+      <HoverGroup
+        bgColor={
+          error ? 'group-hover:bg-gitify-account-error' : 'group-hover:bg-gitify-account-rest'
+        }
+      >
         <HoverButton
           action={() => openHostIssues(account)}
           icon={IssueOpenedIcon}

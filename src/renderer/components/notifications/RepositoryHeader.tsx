@@ -93,7 +93,7 @@ export function RepositoryHeader({
         </Button>
 
         {!isAnimatingExit && (
-          <HoverGroup bgColor="bg-gitify-repository">
+          <HoverGroup bgColor="group-hover:bg-gitify-repository">
             <HoverButton
               action={() => runGroupAction(() => markNotificationsAsRead(repoNotifications))}
               enabled={!areAllRepoNotificationsRead}

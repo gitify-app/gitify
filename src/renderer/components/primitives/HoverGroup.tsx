@@ -7,10 +7,10 @@ import { cn } from 'cn';
 interface HoverGroupProps {
   children: ReactNode;
   bgColor:
-    | 'bg-gitify-account-rest'
-    | 'bg-gitify-account-error'
-    | 'bg-gitify-repository'
-    | 'bg-gitify-notification-hover';
+    | 'group-hover:bg-gitify-account-rest'
+    | 'group-hover:bg-gitify-account-error'
+    | 'group-hover:bg-gitify-repository'
+    | 'group-hover:bg-gitify-notification-hover';
   /**
    * Stretch the buttons to the group's full height. Used by the notification
    * row, where the actions form a full-height rail so the hit zone is
@@ -18,6 +18,15 @@ interface HoverGroupProps {
    */
   fullHeight?: boolean;
 }
+
+// Keep state-prefixed classes: the plain background classes also identify
+// header cards in App.css and would apply their geometry to the action rail.
+const FOCUS_BACKGROUNDS = {
+  'group-hover:bg-gitify-account-rest': 'group-focus-within:bg-gitify-account-rest',
+  'group-hover:bg-gitify-account-error': 'group-focus-within:bg-gitify-account-error',
+  'group-hover:bg-gitify-repository': 'group-focus-within:bg-gitify-repository',
+  'group-hover:bg-gitify-notification-hover': 'group-focus-within:bg-gitify-notification-hover',
+} satisfies Record<HoverGroupProps['bgColor'], string>;
 
 /**
  * Action cluster revealed on row/header hover or keyboard focus.
@@ -39,6 +48,7 @@ export function HoverGroup({ bgColor, children, fullHeight = false }: Readonly<H
         'absolute inset-y-0 right-0 pr-1',
         'opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100',
         bgColor,
+        FOCUS_BACKGROUNDS[bgColor],
       )}
       direction="horizontal"
       gap="none"
