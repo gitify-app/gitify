@@ -21,6 +21,8 @@ import {
   isMarkAsDoneFeatureSupported,
   isUnsubscribeThreadSupported,
 } from '../../utils/api/features';
+import { getErrorDetails } from '../../utils/core/errors';
+import { formatNotificationType } from '../../utils/notifications/formatters';
 import { isGroupByDate } from '../../utils/notifications/group';
 import { shouldRemoveNotificationsFromState } from '../../utils/notifications/remove';
 import { openNotification } from '../../utils/system/links';
@@ -41,6 +43,7 @@ export function NotificationRow({
   onAnimateExit,
 }: Readonly<NotificationRowProps>) {
   const { t } = useTranslation();
+  const notificationType = formatNotificationType(notification);
   const { markNotificationsAsRead, markNotificationsAsDone, unsubscribeNotification } =
     useNotificationActions();
 
@@ -60,13 +63,14 @@ export function NotificationRow({
   // action again re-attempts it. Phrased as "You can also..." rather than
   // "...instead", since some descriptions already suggest waiting/retrying
   // (e.g. `RATE_LIMITED`), which "instead" would read as contradicting.
-  const failureTooltip = failure
+  const failureError = failure?.error.type ? getErrorDetails(failure.error.type) : failure?.error;
+  const failureTooltip = failureError
     ? t(
         'notifications.failure_tooltip',
         '{{title}}: {{description}} You can also try opening this notification in your browser.',
         {
-          title: failure.error.title,
-          description: failure.error.descriptions.join(' '),
+          title: failureError.title,
+          description: failureError.descriptions.join(' '),
         },
       )
     : undefined;
@@ -113,10 +117,10 @@ export function NotificationRow({
         id={notification.id}
       >
         <Stack align="center" className="gitify-row-content" direction="horizontal" gap="condensed">
-          <Tooltip direction="e" text={notification.display.type}>
+          <Tooltip direction="e" text={notificationType}>
             <button type="button">
               <NotificationIcon
-                aria-label={notification.display.type}
+                aria-label={notificationType}
                 className={notification.display.icon.color}
                 size={Size.LARGE}
               />

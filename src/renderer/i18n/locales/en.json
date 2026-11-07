@@ -1,13 +1,18 @@
 {
   "account_scopes": {
     "additional_scopes": "Additional scopes",
+    "cli_description": "The repo scope grants notification access. Run <0>{{command}}</0> to widen them.",
     "detailed_notifications": "Detailed Notifications",
     "detailed_notifications_scopes": "Detailed notifications scopes",
     "developer_settings": "Developer settings",
     "not_loaded": "Scopes not loaded — try refreshing the account.",
+    "notifications_description": "Access GitHub notification inbox",
+    "public_repo_description": "Enriched notifications for public repositories only",
+    "repo_description": "Enriched notifications for private and public repositories",
     "required": "Required",
     "required_scopes": "Required scopes",
-    "title": "Scopes"
+    "title": "Scopes",
+    "user_description": "Account details (name, avatar, profile)"
   },
   "accounts": {
     "add_new": "Add new account",
@@ -49,7 +54,10 @@
     "cancel": "Cancel",
     "continue": "Continue",
     "docs": "Docs",
-    "login": "Login"
+    "loading": "Loading",
+    "login": "Login",
+    "off": "Off",
+    "on": "On"
   },
   "errors": {
     "action_forbidden": {
@@ -119,8 +127,14 @@
       "include": "Include",
       "organization": "Organization (org:name)",
       "repository": "Repository (repo:fullname)",
+      "suggestion_author": "filter by thread author",
+      "suggestion_commenter": "filter by latest comment author",
+      "suggestion_organization": "filter by organization owner",
+      "suggestion_repository": "filter by repository full name",
+      "suggestion_title": "filter by subject title",
       "title": "Title (title:text)",
-      "title_short": "Search"
+      "title_short": "Search",
+      "unsupported": "Please use one of the supported filters [{{filters}}]"
     },
     "state": {
       "closed": "Closed",
@@ -194,6 +208,8 @@
   "login": {
     "choose_forge": "Choose a forge",
     "cli": {
+      "failed": "GitHub CLI could not provide a token for {{hostname}}.",
+      "failed_detail": "GitHub CLI could not provide a token for {{hostname}}: {{detail}}",
       "form_errors": "Form errors",
       "hostname": "Hostname",
       "hostname_caption": "Change only if you are using GitHub Enterprise Server",
@@ -201,6 +217,9 @@
       "intro_scopes": "The scopes come from the GitHub CLI and cannot be changed from Gitify. Its <0>repo</0> scope covers notification access; run <1>gh auth refresh -s notifications</1> to grant that scope explicitly.",
       "intro_token": "Uses the token your local <0>gh</0> install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means <1>gh auth login</1> and <2>gh auth refresh</2> keep working without re-authenticating here.",
       "login_failed": "Failed to login with GitHub CLI against {{hostname}}",
+      "not_authenticated": "GitHub CLI has no token for {{hostname}}. Run `gh auth login --hostname {{hostname}}` and try again.",
+      "not_found": "GitHub CLI (gh) was not found. Install it from https://cli.github.com, log in, and try again.",
+      "timed_out": "GitHub CLI did not respond within 10 seconds for {{hostname}}. It may be waiting on a keychain prompt.",
       "title": "Login with GitHub CLI"
     },
     "continue_with": "Continue with {{name}}",
@@ -290,20 +309,78 @@
     "title": "Git Notifications"
   },
   "metrics": {
+    "checks": "Checks: {{description}}",
+    "checks_failed": "{{count}} failed",
+    "checks_passed": "{{count}} passed",
+    "checks_pending": "{{count}} pending",
     "comment": "comment",
     "issue": "issue",
+    "issue_type": "Issue type: {{name}}",
+    "label": "label",
     "linked_to": "Linked {{noun}}: {{issues}}",
+    "milestone_closed": "Milestone: {{title}} (closed)",
+    "milestone_open": "Milestone: {{title}} (open)",
+    "more": "Show {{count}} more metrics",
     "parent_issue": "Parent issue: #{{number}} {{title}}",
+    "reaction": "reaction",
+    "review_required": "Review required",
+    "review_threads": "Review threads: {{resolved}} of {{total}} resolved",
     "stacked_pr": "Stacked pull request",
-    "stacked_pr_position": "Stacked pull request: {{position}} of {{depth}}"
+    "stacked_pr_position": "Stacked pull request: {{position}} of {{depth}}",
+    "sub_issues": "Sub-issues: {{completed}} of {{total}} completed ({{percent}}%)",
+    "unknown_reviewer": "Unknown reviewer",
+    "user_threads": "{{user}}: {{resolved}}/{{total}} resolved"
   },
   "native": {
     "summary_body_other": "You have {{count}} notifications"
+  },
+  "notification_state": {
+    "ACTION_REQUIRED": "Action Required",
+    "ANSWERED": "Answered",
+    "CANCELLED": "Cancelled",
+    "CLOSED": "Closed",
+    "COMPLETED": "Completed",
+    "DRAFT": "Draft",
+    "DUPLICATE": "Duplicate",
+    "FAILURE": "Failure",
+    "IN_PROGRESS": "In Progress",
+    "MERGE_QUEUE": "Merge Queue",
+    "MERGED": "Merged",
+    "NOT_PLANNED": "Not Planned",
+    "OPEN": "Open",
+    "OUTDATED": "Outdated",
+    "PENDING": "Pending",
+    "QUEUED": "Queued",
+    "REOPENED": "Reopened",
+    "REQUESTED": "Requested",
+    "RESOLVED": "Resolved",
+    "SKIPPED": "Skipped",
+    "STALE": "Stale",
+    "SUCCESS": "Success",
+    "TIMED_OUT": "Timed Out",
+    "WAITING": "Waiting"
+  },
+  "notification_type": {
+    "AgentSessionThread": "Agent Session Thread",
+    "BitbucketNotification": "Bitbucket Notification",
+    "CheckSuite": "Check Suite",
+    "Commit": "Commit",
+    "Discussion": "Discussion",
+    "GitLabTodo": "GitLab To-Do",
+    "Issue": "Issue",
+    "PullRequest": "Pull Request",
+    "Release": "Release",
+    "RepositoryAdvisory": "Repository Advisory",
+    "RepositoryDependabotAlertsThread": "Repository Dependabot Alerts Thread",
+    "RepositoryInvitation": "Repository Invitation",
+    "RepositoryVulnerabilityAlert": "Repository Vulnerability Alert",
+    "WorkflowRun": "Workflow Run"
   },
   "notifications": {
     "failure_tooltip": "{{title}}: {{description}} You can also try opening this notification in your browser.",
     "mark_as_done": "Mark as done",
     "mark_as_read": "Mark as read",
+    "type_with_state": "{{state}} {{type}}",
     "unsubscribe": "Unsubscribe from thread"
   },
   "reasons": {
@@ -345,7 +422,8 @@
   "repository": {
     "mark_as_done": "Mark repository as done",
     "mark_as_read": "Mark repository as read",
-    "open": "Open repository ↗"
+    "open": "Open repository ↗",
+    "open_name": "Open repository {{name}}"
   },
   "review": {
     "approved": "{{users}} approved these changes",
@@ -526,6 +604,7 @@
       "shortcut_error_dismiss": "Dismiss",
       "shortcut_error_title": "Shortcut error",
       "shortcut_label": "Global shortcut",
+      "shortcut_registration_failed": "This shortcut could not be registered. It may already be in use.",
       "title": "System",
       "use_x11_backend": "Use X11 backend (restart required)",
       "use_x11_backend_help": "Run {{appName}} under X11/XWayland so the window can open next to the tray icon. Takes effect after restarting {{appName}}."
@@ -561,5 +640,8 @@
     "refresh_notifications": "Refresh notifications",
     "settings": "Settings",
     "unread_notifications_count": "{{count}} unread notifications ↗"
+  },
+  "time": {
+    "on": "on"
   }
 }
