@@ -2,6 +2,7 @@ import type { GitHubCliTokenError } from '../../../../shared/events';
 
 import type { Hostname, Token } from '../../../types';
 
+import i18n from '../../../i18n';
 import { readGitHubCliToken } from '../../system/comms';
 
 /**
@@ -54,14 +55,31 @@ function describeFailure(
 ): string {
   switch (error) {
     case 'GH_NOT_FOUND':
-      return 'GitHub CLI (gh) was not found. Install it from https://cli.github.com, log in, and try again.';
+      return i18n.t(
+        'login.cli.not_found',
+        'GitHub CLI (gh) was not found. Install it from https://cli.github.com, log in, and try again.',
+      );
     case 'GH_NOT_AUTHENTICATED':
-      return `GitHub CLI has no token for ${hostname}. Run \`gh auth login --hostname ${hostname}\` and try again.`;
+      return i18n.t(
+        'login.cli.not_authenticated',
+        'GitHub CLI has no token for {{hostname}}. Run `gh auth login --hostname {{hostname}}` and try again.',
+        { hostname },
+      );
     case 'GH_TIMED_OUT':
-      return `GitHub CLI did not respond within 10 seconds for ${hostname}. It may be waiting on a keychain prompt.`;
+      return i18n.t(
+        'login.cli.timed_out',
+        'GitHub CLI did not respond within 10 seconds for {{hostname}}. It may be waiting on a keychain prompt.',
+        { hostname },
+      );
     default:
       return detail
-        ? `GitHub CLI could not provide a token for ${hostname}: ${detail}`
-        : `GitHub CLI could not provide a token for ${hostname}.`;
+        ? i18n.t(
+            'login.cli.failed_detail',
+            'GitHub CLI could not provide a token for {{hostname}}: {{detail}}',
+            { hostname, detail },
+          )
+        : i18n.t('login.cli.failed', 'GitHub CLI could not provide a token for {{hostname}}.', {
+            hostname,
+          });
   }
 }
