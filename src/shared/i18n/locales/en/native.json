@@ -1,0 +1,47 @@
+{
+  "common": {
+    "cancel": "Cancel"
+  },
+  "menu": {
+    "check_updates": "Check for updates",
+    "developer": "Developer",
+    "devtools": "Toggle Developer Tools",
+    "hide": "Hide {{appName}}",
+    "install_update": "Restart to install update",
+    "logs": "View Application Logs",
+    "no_updates": "No updates available",
+    "quit": "Quit {{appName}}",
+    "reload": "Reload",
+    "repository": "Visit Repository",
+    "reset": "Reset {{appName}}",
+    "screenshot": "Take Screenshot",
+    "show": "Show {{appName}}",
+    "update_available": "An update is available",
+    "view_releases": "View releases",
+    "website": "Visit Website"
+  },
+  "native": {
+    "do_not_move": "Do Not Move",
+    "move_applications": "Move to Applications Folder",
+    "move_applications_question": "Move to Applications Folder?",
+    "reset_message": "Are you sure you want to reset {{appName}}? You will be logged out of all accounts"
+  },
+  "settings": {
+    "reset": {
+      "confirm": "Reset"
+    }
+  },
+  "updater": {
+    "available": "A new update is available",
+    "downloaded": "{{appName}} {{release}} has been downloaded",
+    "downloading": "Downloading update: {{percent}}%",
+    "later": "Later",
+    "notification_body": "{{appName}} {{version}} has been downloaded and will be installed on exit.",
+    "notification_title": "A new update is ready to install",
+    "ready": "A new update is ready to install",
+    "release_notes": "Release notes",
+    "restart": "Restart",
+    "restart_detail": "Restart to apply the update. You can also restart later from the tray menu.",
+    "title": "Application Update"
+  }
+}
