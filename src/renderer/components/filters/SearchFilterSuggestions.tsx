@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Popover, Stack, Text } from '@primer/react';
 
 import { cn } from 'cn';
@@ -21,6 +23,7 @@ export function SearchFilterSuggestions({
   open,
   inputValue,
 }: Readonly<SearchFilterSuggestionsProps>) {
+  const { t } = useTranslation();
   const detailedNotifications = useSettingsStore((s) => s.detailedNotifications);
 
   if (!open) {
@@ -48,8 +51,11 @@ export function SearchFilterSuggestions({
           {inputValue !== '' && suggestions.length === 0 && !beginsWithKnownQualifier && (
             <div>
               <Text className={cn('text-xs', Opacity.HIGH)}>
-                Please use one of the supported filters [
-                {base.map((q) => q.prefix.replace(SEARCH_DELIMITER, '')).join(', ')}]
+                {t(
+                  'filters.search.unsupported',
+                  'Please use one of the supported filters [{{filters}}]',
+                  { filters: base.map((q) => q.prefix.replace(SEARCH_DELIMITER, '')).join(', ') },
+                )}
               </Text>
             </div>
           )}

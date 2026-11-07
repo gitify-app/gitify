@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 
 import { AlertFillIcon, LinkExternalIcon, ShieldCheckIcon } from '@primer/octicons-react';
@@ -29,6 +29,21 @@ interface LocationState {
 
 export function AccountScopesRoute() {
   const { t } = useTranslation();
+  const scopeDescriptions: Record<string, string> = {
+    notifications: t(
+      'account_scopes.notifications_description',
+      'Access GitHub notification inbox',
+    ),
+    'read:user': t('account_scopes.user_description', 'Account details (name, avatar, profile)'),
+    repo: t(
+      'account_scopes.repo_description',
+      'Enriched notifications for private and public repositories',
+    ),
+    public_repo: t(
+      'account_scopes.public_repo_description',
+      'Enriched notifications for public repositories only',
+    ),
+  };
   const location = useLocation();
   const { account } = location.state as LocationState;
 
@@ -95,10 +110,16 @@ export function AccountScopesRoute() {
                     gap="none"
                     padding="condensed"
                   >
-                    <Text className="text-xs">{managedElsewhere.label}</Text>
+                    <Text className="text-xs">
+                      {t('forge.method.managed_by_cli', 'Managed by the GitHub CLI')}
+                    </Text>
                     <Text className="text-xs opacity-60">
-                      {managedElsewhere.detail} Run{' '}
-                      <Text className="font-mono">{managedElsewhere.command}</Text> to widen them.
+                      <Trans
+                        i18nKey="account_scopes.cli_description"
+                        defaults="The repo scope grants notification access. Run <0>{{command}}</0> to widen them."
+                        values={{ command: managedElsewhere.command }}
+                        components={[<Text className="font-mono" key="command" />]}
+                      />
                     </Text>
                   </Stack>
                 ) : (
@@ -116,7 +137,9 @@ export function AccountScopesRoute() {
                       >
                         <Stack direction="vertical" gap="none">
                           <Text className="text-xs font-mono">{name}</Text>
-                          <Text className="text-xs opacity-60">{description}</Text>
+                          <Text className="text-xs opacity-60">
+                            {scopeDescriptions[name] ?? description}
+                          </Text>
                         </Stack>
                         <ScopeStatusIcon granted={granted} subject={name} />
                       </Stack>
@@ -156,7 +179,7 @@ export function AccountScopesRoute() {
                 >
                   <Stack direction="vertical" gap="none">
                     <Text className="text-xs font-mono">{OAUTH_SCOPE.REPO.name}</Text>
-                    <Text className="text-xs opacity-60">{OAUTH_SCOPE.REPO.description}</Text>
+                    <Text className="text-xs opacity-60">{scopeDescriptions.repo}</Text>
                   </Stack>
                   <ScopeStatusIcon granted={repoGranted} subject={OAUTH_SCOPE.REPO.name} />
                 </Stack>
@@ -172,9 +195,7 @@ export function AccountScopesRoute() {
                 >
                   <Stack direction="vertical" gap="none">
                     <Text className="text-xs font-mono">{OAUTH_SCOPE.PUBLIC_REPO.name}</Text>
-                    <Text className="text-xs opacity-60">
-                      {OAUTH_SCOPE.PUBLIC_REPO.description}
-                    </Text>
+                    <Text className="text-xs opacity-60">{scopeDescriptions.public_repo}</Text>
                   </Stack>
                   <ScopeStatusIcon
                     granted={publicRepoGranted}

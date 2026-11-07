@@ -1,15 +1,22 @@
 import { createRoot } from 'react-dom/client';
 
-import './i18n';
 import { AppErrorBoundary } from './components/AppErrorBoundary';
 
 import { App } from './App';
+import { initializeLanguage } from './i18n';
+import { rendererLogError, toError } from './utils/core/logger';
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
 
-root.render(
-  <AppErrorBoundary>
-    <App />
-  </AppErrorBoundary>,
-);
+void initializeLanguage()
+  .then(() =>
+    root.render(
+      <AppErrorBoundary>
+        <App />
+      </AppErrorBoundary>,
+    ),
+  )
+  .catch((error) => {
+    rendererLogError('language', 'Unable to initialize application language', toError(error));
+  });

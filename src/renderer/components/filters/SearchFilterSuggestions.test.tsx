@@ -1,8 +1,9 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import i18n from '../../i18n';
 import {
   ALL_SEARCH_QUALIFIERS,
   BASE_SEARCH_QUALIFIERS,
@@ -68,5 +69,16 @@ describe('renderer/components/filters/SearchFilterSuggestions.tsx', () => {
 
     expect(screen.getByText('repo:')).toBeInTheDocument();
     expect(screen.queryByText('author:')).not.toBeInTheDocument();
+  });
+
+  it('translates live search suggestions while keeping qualifier tokens unchanged', async () => {
+    renderWithProviders(<SearchFilterSuggestions inputValue="" open />, {
+      settings: { detailedNotifications: true },
+    });
+    await act(async () => {
+      await i18n.changeLanguage('zh-Hans');
+    });
+    expect(screen.getByText('author:')).toBeInTheDocument();
+    expect(screen.getByText('按讨论串作者筛选')).toBeInTheDocument();
   });
 });

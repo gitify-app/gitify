@@ -7,8 +7,8 @@ import { logError, logInfo, toError } from '../shared/logger';
 
 /**
  * Marker file in the user data directory whose presence selects the X11
- * backend. The renderer owns every other setting via `localStorage`, which the
- * main process cannot read, and the Ozone platform has to be chosen before the
+ * backend. The renderer settings store uses `localStorage`, which the main
+ * process cannot read, and the Ozone platform has to be chosen before the
  * app is ready — long before a renderer exists. A file on disk is the only
  * state available that early, so this setting is mirrored here rather than
  * read from the settings store.

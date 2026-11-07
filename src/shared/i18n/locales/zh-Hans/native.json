@@ -1,0 +1,47 @@
+{
+  "common": {
+    "cancel": "取消"
+  },
+  "menu": {
+    "check_updates": "检查更新",
+    "developer": "开发者",
+    "devtools": "切换开发者工具",
+    "hide": "隐藏 {{appName}}",
+    "install_update": "重启并安装更新",
+    "logs": "查看应用日志",
+    "no_updates": "暂无更新",
+    "quit": "退出 {{appName}}",
+    "reload": "重新加载",
+    "repository": "访问仓库",
+    "reset": "重置 {{appName}}",
+    "screenshot": "截图",
+    "show": "显示 {{appName}}",
+    "update_available": "有可用更新",
+    "view_releases": "查看发布版本",
+    "website": "访问网站"
+  },
+  "native": {
+    "do_not_move": "不移动",
+    "move_applications": "移至“应用程序”文件夹",
+    "move_applications_question": "移至“应用程序”文件夹？",
+    "reset_message": "确定要重置 {{appName}} 吗？您将退出所有账户"
+  },
+  "settings": {
+    "reset": {
+      "confirm": "重置"
+    }
+  },
+  "updater": {
+    "available": "有可用更新",
+    "downloaded": "{{appName}} {{release}} 已下载",
+    "downloading": "正在下载更新：{{percent}}%",
+    "later": "稍后",
+    "notification_body": "{{appName}} {{version}} 已下载，将在退出时安装。",
+    "notification_title": "更新已准备就绪",
+    "ready": "更新已准备就绪",
+    "release_notes": "发布说明",
+    "restart": "重启",
+    "restart_detail": "重启以应用更新。您也可以稍后通过托盘菜单重启。",
+    "title": "应用更新"
+  }
+}

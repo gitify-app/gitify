@@ -1,13 +1,15 @@
-import { act, screen } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockSettings } from '../../__mocks__/state-mocks';
 
+import { useShortcutRegistration } from '../../hooks/useShortcutRegistration';
 import { useSettingsStore } from '../../stores';
 
 import type { KeyboardAcceleratorShortcut } from '../../types';
 
+import i18n from '../../i18n';
 import { SystemSettings } from './SystemSettings';
 
 describe('renderer/components/settings/SystemSettings.tsx', () => {
@@ -63,6 +65,19 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
     ).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('choice-automaticUpdates-default'));
     expect(useSettingsStore.getState().automaticUpdates).toBe('default');
+  });
+
+  it('translates update choices without changing the selected preference or manager', async () => {
+    vi.mocked(window.gitify.getUpdateManager).mockResolvedValue('Scoop');
+    await act(async () => {
+      renderWithProviders(<SystemSettings />);
+    });
+    await act(async () => {
+      await i18n.changeLanguage('zh-Hans');
+    });
+    expect(screen.getByText('默认关闭。请通过 Scoop 更新 Gitify。')).toBeInTheDocument();
+    expect(useSettingsStore.getState().automaticUpdates).toBe('default');
+    expect(window.gitify.getUpdateManager).toHaveBeenCalledOnce();
   });
 
   it('points a packager opt-in to the package manager', async () => {
@@ -278,5 +293,25 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
 
       expect(screen.queryByText('Click outside this area to cancel.')).not.toBeInTheDocument();
     });
+  });
+
+  it('retranslates an existing shortcut failure without registering the shortcut again', async () => {
+    vi.mocked(window.gitify.applyKeyboardShortcut).mockResolvedValue({ success: false });
+    function Fixture() {
+      useShortcutRegistration();
+      return <SystemSettings />;
+    }
+    renderWithProviders(<Fixture />);
+    await waitFor(() =>
+      expect(
+        screen.getByText('This shortcut could not be registered. It may already be in use.'),
+      ).toBeInTheDocument(),
+    );
+    const calls = vi.mocked(window.gitify.applyKeyboardShortcut).mock.calls.length;
+    await act(async () => {
+      await i18n.changeLanguage('zh-Hans');
+    });
+    expect(screen.getByText('无法注册此快捷键，可能已被其他应用占用。')).toBeInTheDocument();
+    expect(window.gitify.applyKeyboardShortcut).toHaveBeenCalledTimes(calls);
   });
 });

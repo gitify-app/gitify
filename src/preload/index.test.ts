@@ -84,6 +84,15 @@ describe('preload/index', () => {
     expect(api).toHaveProperty('tray');
   });
 
+  it('gets and sets authoritative language state through typed IPC', async () => {
+    const state = { language: 'zh-Hans', preference: 'zh-Hans' };
+    invokeMainEventMock.mockResolvedValueOnce(state).mockResolvedValueOnce(state);
+    await expect(api.language.get()).resolves.toEqual(state);
+    expect(invokeMainEventMock).toHaveBeenNthCalledWith(1, EVENTS.LANGUAGE_GET);
+    await expect(api.language.set('zh-Hans')).resolves.toEqual(state);
+    expect(invokeMainEventMock).toHaveBeenNthCalledWith(2, EVENTS.LANGUAGE_SET, 'zh-Hans');
+  });
+
   it('tray.updateColor sends correct events', async () => {
     const api = getExposedApi();
 

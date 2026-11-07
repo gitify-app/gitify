@@ -1,4 +1,6 @@
-import type { RawGitifyNotification, SubjectType } from '../../types';
+import type { RawGitifyNotification, SubjectType, GitifyNotificationState } from '../../types';
+
+import i18n from '../../i18n';
 
 /**
  * Normalise an array of text segments into a single display-ready string.
@@ -44,15 +46,6 @@ export function formatProperCase(text: string) {
 }
 
 /**
- * Labels for subject types whose camel-case split reads wrong. `GitLabTodo`
- * would otherwise render as "Git Lab Todo", because the split fires inside the
- * brand name.
- */
-const SUBJECT_TYPE_LABELS: Partial<Record<SubjectType, string>> = {
-  GitLabTodo: 'GitLab To-Do',
-};
-
-/**
  * Return the formatted notification type for this notification.
  *
  * @param notification - The notification whose type to format.
@@ -60,14 +53,65 @@ const SUBJECT_TYPE_LABELS: Partial<Record<SubjectType, string>> = {
  */
 export function formatNotificationType(notification: RawGitifyNotification): string {
   const { state, type } = notification.subject;
-  const override = SUBJECT_TYPE_LABELS[type];
-
-  if (!override) {
-    return formatForDisplay([state ?? '', type]);
-  }
-
-  const prefix = formatForDisplay([state ?? '']);
-  return prefix ? `${prefix} ${override}` : override;
+  const types: Record<SubjectType, string> = {
+    AgentSessionThread: i18n.t('notification_type.AgentSessionThread', 'Agent Session Thread'),
+    BitbucketNotification: i18n.t(
+      'notification_type.BitbucketNotification',
+      'Bitbucket Notification',
+    ),
+    CheckSuite: i18n.t('notification_type.CheckSuite', 'Check Suite'),
+    Commit: i18n.t('notification_type.Commit', 'Commit'),
+    Discussion: i18n.t('notification_type.Discussion', 'Discussion'),
+    // Keep the GitLab brand intact; camel-case splitting would produce "Git Lab Todo".
+    GitLabTodo: i18n.t('notification_type.GitLabTodo', 'GitLab To-Do'),
+    Issue: i18n.t('notification_type.Issue', 'Issue'),
+    PullRequest: i18n.t('notification_type.PullRequest', 'Pull Request'),
+    Release: i18n.t('notification_type.Release', 'Release'),
+    RepositoryAdvisory: i18n.t('notification_type.RepositoryAdvisory', 'Repository Advisory'),
+    RepositoryDependabotAlertsThread: i18n.t(
+      'notification_type.RepositoryDependabotAlertsThread',
+      'Repository Dependabot Alerts Thread',
+    ),
+    RepositoryInvitation: i18n.t('notification_type.RepositoryInvitation', 'Repository Invitation'),
+    RepositoryVulnerabilityAlert: i18n.t(
+      'notification_type.RepositoryVulnerabilityAlert',
+      'Repository Vulnerability Alert',
+    ),
+    WorkflowRun: i18n.t('notification_type.WorkflowRun', 'Workflow Run'),
+  };
+  const states: Record<GitifyNotificationState, string> = {
+    ACTION_REQUIRED: i18n.t('notification_state.ACTION_REQUIRED', 'Action Required'),
+    CANCELLED: i18n.t('notification_state.CANCELLED', 'Cancelled'),
+    COMPLETED: i18n.t('notification_state.COMPLETED', 'Completed'),
+    FAILURE: i18n.t('notification_state.FAILURE', 'Failure'),
+    IN_PROGRESS: i18n.t('notification_state.IN_PROGRESS', 'In Progress'),
+    PENDING: i18n.t('notification_state.PENDING', 'Pending'),
+    QUEUED: i18n.t('notification_state.QUEUED', 'Queued'),
+    REQUESTED: i18n.t('notification_state.REQUESTED', 'Requested'),
+    SKIPPED: i18n.t('notification_state.SKIPPED', 'Skipped'),
+    STALE: i18n.t('notification_state.STALE', 'Stale'),
+    SUCCESS: i18n.t('notification_state.SUCCESS', 'Success'),
+    TIMED_OUT: i18n.t('notification_state.TIMED_OUT', 'Timed Out'),
+    WAITING: i18n.t('notification_state.WAITING', 'Waiting'),
+    OUTDATED: i18n.t('notification_state.OUTDATED', 'Outdated'),
+    OPEN: i18n.t('notification_state.OPEN', 'Open'),
+    CLOSED: i18n.t('notification_state.CLOSED', 'Closed'),
+    MERGED: i18n.t('notification_state.MERGED', 'Merged'),
+    DRAFT: i18n.t('notification_state.DRAFT', 'Draft'),
+    MERGE_QUEUE: i18n.t('notification_state.MERGE_QUEUE', 'Merge Queue'),
+    REOPENED: i18n.t('notification_state.REOPENED', 'Reopened'),
+    ANSWERED: i18n.t('notification_state.ANSWERED', 'Answered'),
+    DUPLICATE: i18n.t('notification_state.DUPLICATE', 'Duplicate'),
+    NOT_PLANNED: i18n.t('notification_state.NOT_PLANNED', 'Not Planned'),
+    RESOLVED: i18n.t('notification_state.RESOLVED', 'Resolved'),
+  };
+  const label = types[type] ?? formatForDisplay([type]);
+  return state
+    ? i18n.t('notifications.type_with_state', '{{state}} {{type}}', {
+        state: states[state] ?? formatForDisplay([state]),
+        type: label,
+      })
+    : label;
 }
 
 /**
@@ -163,7 +207,7 @@ export function formatMetricDescription(
     return '';
   }
 
-  const noun = count === 1 ? singular : `${singular}s`;
+  const noun = count === 1 || i18n.language === 'zh-Hans' ? singular : `${singular}s`;
 
   return formatter ? formatter(count, noun) : `${count} ${noun}`;
 }

@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../../__helpers__/test-utils';
 
+import i18n from '../../../i18n';
 import { SettingsToggle } from './SettingsToggle';
 
 describe('renderer/components/settings/controls/SettingsToggle.tsx', () => {
@@ -94,5 +95,13 @@ describe('renderer/components/settings/controls/SettingsToggle.tsx', () => {
     );
 
     expect(screen.queryByTestId('switch-showNotifications')).not.toBeInTheDocument();
+  });
+
+  it('translates the toggle status supplied to Primer', async () => {
+    await i18n.changeLanguage('zh-Hans');
+    renderWithProviders(
+      <SettingsToggle name="test" label="Test" checked={false} onChange={vi.fn()} />,
+    );
+    expect(screen.getByText('关')).toBeInTheDocument();
   });
 });

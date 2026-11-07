@@ -72,7 +72,7 @@ export function RepositoryHeader({
       >
         <Button
           alignContent="center"
-          aria-label={`Open repository ${repoName}`}
+          aria-label={t('repository.open_name', 'Open repository {{name}}', { name: repoName })}
           count={repoNotifications.length}
           data-testid="open-repository"
           onClick={(event: MouseEvent<HTMLElement>) => {

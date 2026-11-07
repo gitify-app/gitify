@@ -42,7 +42,7 @@ describe('main/lifecycle/startup.ts', () => {
     const mb = createMb();
     const contextMenu = {} as Electron.Menu;
 
-    initializeAppLifecycle(mb as unknown as Menubar, contextMenu);
+    initializeAppLifecycle()!(mb as unknown as Menubar, () => contextMenu);
     mb.emit('ready');
 
     expect(mb.app.setAppUserModelId).toHaveBeenCalledWith(APPLICATION.ID);
@@ -52,23 +52,20 @@ describe('main/lifecycle/startup.ts', () => {
     expect(app.quit).not.toHaveBeenCalled();
   });
 
-  it('quits the second process without registering a relaunch listener', () => {
+  it('quits the second process without creating a menubar or registering a relaunch listener', () => {
     vi.mocked(app.requestSingleInstanceLock).mockReturnValueOnce(false);
-    const mb = createMb();
 
-    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+    expect(initializeAppLifecycle()).toBeUndefined();
     app.emit('second-instance');
-    mb.emit('ready');
 
     expect(app.quit).toHaveBeenCalledOnce();
     expect(logWarn).toHaveBeenCalledWith('main:gotTheLock', 'Second instance detected, quitting');
     expect(app.listenerCount('second-instance')).toBe(0);
-    expect(mb.showWindow).not.toHaveBeenCalled();
   });
 
   it('shows the existing window on every relaunch instead of toggling it', () => {
     const mb = createMb();
-    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+    initializeAppLifecycle()!(mb as unknown as Menubar, () => ({}) as Electron.Menu);
     mb.emit('ready');
 
     app.emit('second-instance');
@@ -80,9 +77,26 @@ describe('main/lifecycle/startup.ts', () => {
     expect(app.listenerCount('activate')).toBe(0);
   });
 
+  it('captures relaunches before language initialization creates the menubar', () => {
+    const attach = initializeAppLifecycle()!;
+    app.emit('second-instance');
+    app.emit('second-instance');
+
+    const mb = createMb();
+    const getContextMenu = vi.fn(() => ({}) as Electron.Menu);
+    attach(mb as unknown as Menubar, getContextMenu);
+    expect(mb.showWindow).not.toHaveBeenCalled();
+    expect(getContextMenu).not.toHaveBeenCalled();
+
+    mb.emit('ready');
+    expect(getContextMenu).toHaveBeenCalledOnce();
+    expect(mb.setContextMenu).toHaveBeenCalledWith(getContextMenu.mock.results[0].value);
+    expect(mb.showWindow).toHaveBeenCalledOnce();
+  });
+
   it('coalesces early relaunches until the menubar window is ready', () => {
     const mb = createMb();
-    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+    initializeAppLifecycle()!(mb as unknown as Menubar, () => ({}) as Electron.Menu);
 
     app.emit('second-instance');
     app.emit('second-instance');
@@ -99,7 +113,7 @@ describe('main/lifecycle/startup.ts', () => {
     const mb = createMb();
     const error = new Error('Window could not be shown');
     mb.showWindow.mockRejectedValueOnce(error);
-    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+    initializeAppLifecycle()!(mb as unknown as Menubar, () => ({}) as Electron.Menu);
     mb.emit('ready');
 
     app.emit('second-instance');

@@ -1,8 +1,9 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitifyNotification } from '../../__mocks__/notifications-mocks';
 
+import i18n from '../../i18n';
 import { ReviewsPill, type ReviewsPillProps } from './ReviewsPill';
 
 describe('renderer/components/metrics/ReviewsPill.tsx', () => {
@@ -90,5 +91,15 @@ describe('renderer/components/metrics/ReviewsPill.tsx', () => {
     );
 
     expect(tree.container).toBeEmptyDOMElement();
+  });
+
+  it('translates the application unknown-reviewer sentinel at display time', async () => {
+    const reviewers = [{ user: 'Unknown reviewer', threads: { resolved: 1, total: 2 } }];
+    renderWithProviders(<ReviewsPill reviewers={reviewers} />);
+    await act(async () => {
+      await i18n.changeLanguage('zh-Hans');
+    });
+    expect(screen.getByText('未知审查者：已解决 1/2 项')).toBeInTheDocument();
+    expect(reviewers[0].user).toBe('Unknown reviewer');
   });
 });
