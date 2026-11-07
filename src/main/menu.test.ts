@@ -132,6 +132,31 @@ describe('main/menu.ts', () => {
     await i18n.changeLanguage('en');
   });
 
+  it('relabels and republishes the menu without losing window or update state in Simplified Chinese', async () => {
+    menuBuilder.setAutomaticUpdatesEnabled(true);
+    vi.mocked(Menu.buildFromTemplate).mockReturnValue({} as Electron.Menu);
+    menuBuilder.buildMenu();
+    menuBuilder.setWindowVisibility(true);
+    menuBuilder.setCheckForUpdatesMenuEnabled(false);
+    menuBuilder.setUpdateAvailableMenuVisibility(true);
+    await i18n.changeLanguage('zh-Hans');
+    const template = vi.mocked(Menu.buildFromTemplate).mock.calls.at(-1)?.[0] as (TemplateItem & {
+      visible?: boolean;
+      enabled?: boolean;
+    })[];
+    expect(template.find((item) => item.label === '显示 Gitify')?.visible).toBe(false);
+    expect(template.find((item) => item.label === '隐藏 Gitify')?.visible).toBe(true);
+    expect(template.find((item) => item.label === '检查更新')?.enabled).toBe(false);
+    expect(template.find((item) => item.label === '有可用更新')?.visible).toBe(true);
+    expect(template.find((item) => item.label === '开发者')?.submenu?.[0]).toMatchObject({
+      role: 'reload',
+      label: '重新加载',
+      accelerator: 'CommandOrControl+R',
+    });
+    expect(menubar.setContextMenu).toHaveBeenCalled();
+    await i18n.changeLanguage('en');
+  });
+
   it('preserves the update preference and action across language events', async () => {
     vi.mocked(Menu.buildFromTemplate).mockReturnValue({} as Electron.Menu);
     menuBuilder.buildMenu();
@@ -144,6 +169,24 @@ describe('main/menu.ts', () => {
     );
     menuBuilder.setAutomaticUpdatesEnabled(true);
     expect(getMenuItemConfigByLabel('Check for updates')).toBeDefined();
+    await i18n.changeLanguage('en');
+    expect(getMenuItemConfigByLabel('Check for updates')).toBeDefined();
+    menuBuilder.setAutomaticUpdatesEnabled(false);
+    expect(getMenuItemConfigByLabel('View releases')).toBeDefined();
+  });
+
+  it('preserves the update preference and action when translating the releases menu in Simplified Chinese', async () => {
+    vi.mocked(Menu.buildFromTemplate).mockReturnValue({} as Electron.Menu);
+    menuBuilder.buildMenu();
+    await i18n.changeLanguage('zh-Hans');
+    const releases = getMenuItemConfigByLabel('查看发布版本');
+    expect(releases).toBeDefined();
+    releases?.click?.();
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      `${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}/releases/latest`,
+    );
+    menuBuilder.setAutomaticUpdatesEnabled(true);
+    expect(getMenuItemConfigByLabel('检查更新')).toBeDefined();
     await i18n.changeLanguage('en');
     expect(getMenuItemConfigByLabel('Check for updates')).toBeDefined();
     menuBuilder.setAutomaticUpdatesEnabled(false);

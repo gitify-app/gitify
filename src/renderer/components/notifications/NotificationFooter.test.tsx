@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
@@ -9,6 +9,7 @@ import {
 
 import type { GitifyNotificationUser, Link } from '../../types';
 
+import i18n from '../../i18n';
 import * as comms from '../../utils/system/comms';
 import { NotificationFooter, type NotificationFooterProps } from './NotificationFooter';
 
@@ -244,5 +245,20 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
     expect(
       screen.getByAltText('Notification Author (notification-author_gitify)'),
     ).toBeInTheDocument();
+  });
+
+  it('localizes an absolute date older than the relative-time threshold', async () => {
+    const { container } = renderWithProviders(
+      <NotificationFooter
+        notification={{ ...mockGitifyNotification, updatedAt: '2020-01-01T00:00:00Z' }}
+      />,
+    );
+    await act(async () => {
+      await i18n.changeLanguage('zh-Hans');
+    });
+    const time = container.querySelector('relative-time');
+    expect(time).toHaveAttribute('prefix', '于');
+    expect(time).toHaveAttribute('lang', 'zh-Hans');
+    expect(time?.textContent).toBe('2020年1月1日');
   });
 });

@@ -6,6 +6,7 @@ import { app } from 'electron';
 import { createInstance } from 'i18next';
 
 import enNative from '../shared/i18n/locales/en/native.json';
+import zhHansNative from '../shared/i18n/locales/zh-Hans/native.json';
 import {
   DEFAULT_LANGUAGE,
   isLanguage,
@@ -19,6 +20,7 @@ export const i18n = createInstance();
 void i18n.init({
   resources: {
     en: { native: enNative },
+    'zh-Hans': { native: zhHansNative },
   },
   lng: DEFAULT_LANGUAGE,
   fallbackLng: DEFAULT_LANGUAGE,

@@ -4,6 +4,7 @@ export { DEFAULT_LANGUAGE, type Language, SUPPORTED_LANGUAGES } from '../../shar
 
 const LANGUAGE_LABELS: Record<Language, string> = {
   en: 'English',
+  'zh-Hans': '简体中文',
 };
 
 interface LanguageOption {

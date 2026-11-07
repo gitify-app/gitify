@@ -6,9 +6,11 @@ import { DEFAULT_LANGUAGE, type Language, SUPPORTED_LANGUAGES } from './types';
 
 // Locales
 import enTranslation from './locales/en.json';
+import zhHansTranslation from './locales/zh-Hans.json';
 
 const locales: Record<Language, typeof enTranslation> = {
   en: enTranslation,
+  'zh-Hans': zhHansTranslation,
 };
 
 const resources = Object.fromEntries(

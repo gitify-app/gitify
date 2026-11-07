@@ -23,6 +23,7 @@ import {
 import { Banner, Button, ButtonGroup, IconButton, Stack, Text } from '@primer/react';
 
 import { formatDuration } from 'date-fns/formatDuration';
+import { zhCN, enUS } from 'date-fns/locale';
 import { millisecondsToMinutes } from 'date-fns/millisecondsToMinutes';
 
 import { APPLICATION } from '../../../shared/constants';
@@ -46,7 +47,7 @@ import { SettingsToggle } from './controls/SettingsToggle';
 import { SettingsGroupHeading } from './SettingsGroupHeading';
 
 export function InboxSettings() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   // Account store values
@@ -121,9 +122,12 @@ export function InboxSettings() {
                 size="small"
                 tabIndex={-1}
               >
-                {formatDuration({
-                  minutes: millisecondsToMinutes(fetchInterval),
-                })}
+                {formatDuration(
+                  {
+                    minutes: millisecondsToMinutes(fetchInterval),
+                  },
+                  { locale: i18n.language === 'zh-Hans' ? zhCN : enUS },
+                )}
               </Button>
 
               <IconButton

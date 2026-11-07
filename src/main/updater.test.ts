@@ -146,11 +146,44 @@ describe('main/updater.ts', () => {
     expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
   });
 
+  it('retranslates pending progress and new dialogs without repeating an existing prompt in Simplified Chinese', async () => {
+    vi.mocked(dialog.showMessageBox).mockResolvedValue({ response: 1, checkboxChecked: false });
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('download-progress', { percent: 37.25 });
+    expect(menubar.tray.setToolTip).toHaveBeenLastCalledWith('Gitify\nDownloading update: 37.25%');
+    await i18n.changeLanguage('zh-Hans');
+    expect(menubar.tray.setToolTip).toHaveBeenLastCalledWith('Gitify\n正在下载更新：37.25%');
+    emit('update-downloaded', { version: '1.2.3' });
+    expect(notificationOptions).toHaveBeenLastCalledWith({
+      title: '更新已准备就绪',
+      body: 'Gitify 1.2.3 已下载，将在退出时安装。',
+    });
+    expect(dialog.showMessageBox).toHaveBeenLastCalledWith(
+      expect.objectContaining({ buttons: ['重启', '稍后', '发布说明'], title: '应用更新' }),
+    );
+    await i18n.changeLanguage('en');
+    emit('update-downloaded', { version: '1.2.3' });
+    expect(dialog.showMessageBox).toHaveBeenCalledTimes(1);
+    expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
+  });
+
   it('does not restore disabled update progress after changing language', async () => {
     await updater.setAutomaticUpdatesEnabled(true);
     emit('download-progress', { percent: 37.25 });
     await updater.setAutomaticUpdatesEnabled(false);
     await i18n.changeLanguage('en');
+    emit('download-progress', { percent: 50 });
+    emit('update-downloaded', { version: '1.2.3' });
+    expect(menubar.tray.setToolTip).toHaveBeenLastCalledWith('Gitify');
+    expect(notify).not.toHaveBeenCalled();
+    expect(dialog.showMessageBox).not.toHaveBeenCalled();
+  });
+
+  it('does not restore disabled update progress after changing language in Simplified Chinese', async () => {
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('download-progress', { percent: 37.25 });
+    await updater.setAutomaticUpdatesEnabled(false);
+    await i18n.changeLanguage('zh-Hans');
     emit('download-progress', { percent: 50 });
     emit('update-downloaded', { version: '1.2.3' });
     expect(menubar.tray.setToolTip).toHaveBeenLastCalledWith('Gitify');

@@ -1,6 +1,6 @@
 export const DEFAULT_LANGUAGE: Language = 'en';
 
-export const SUPPORTED_LANGUAGES = ['en'] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'zh-Hans'] as const;
 
 /** The supported application languages. */
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
@@ -27,7 +27,14 @@ export function matchLanguage(value: unknown): Language | undefined {
     if (locale.language === 'en') {
       return 'en';
     }
-    return undefined;
+    if (locale.language !== 'zh') {
+      return undefined;
+    }
+    // An explicit script takes precedence over region; Traditional Chinese does not match.
+    if (locale.script) {
+      return locale.script === 'Hans' ? 'zh-Hans' : undefined;
+    }
+    return ['TW', 'HK', 'MO'].includes(locale.region ?? '') ? undefined : 'zh-Hans';
   } catch {
     return undefined;
   }

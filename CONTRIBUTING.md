@@ -134,7 +134,7 @@ by the main or preload process.
 
 ### Translations
 
-Gitify's interface is translated through [i18next][i18next-website]. The app ships English. The main process stores the explicit language preference in `language.json` under the app’s user-data directory and resolves the system language when no preference is set. Native UI and the renderer use that same resolved language; the renderer reads it through IPC before its first render.
+Gitify's interface is translated through [i18next][i18next-website]. The app ships English and Simplified Chinese (`zh-Hans`). The main process stores the explicit language preference in `language.json` under the app’s user-data directory and resolves the system language when no preference is set. Native UI and the renderer use that same resolved language; the renderer reads it through IPC before its first render.
 
 - Renderer translations live in `src/renderer/i18n/locales/<language>.json`; native UI translations (`native:` keys) live in `src/shared/i18n/locales/<language>/native.json`. Main and renderer use separate i18next instances and load only their own resources.
 - English resources are generated from the code, never hand-edited. Write the English text as the second argument of `t()`, and as `defaults` on `<Trans>`:
@@ -151,7 +151,7 @@ Gitify's interface is translated through [i18next][i18next-website]. The app shi
 
 - After changing a string, sync the locale files:
   - `pnpm i18n:extract` — regenerate/update locale files from the `t()` calls in the source
-  - `pnpm i18n:check` — verify the keys are in sync with the code, every renderer/main `t()`/`<Trans>` has an English default, and English resources have no empty or key-path values (also runs in CI)
+  - `pnpm i18n:check` — verify the keys are in sync with the code, every renderer/main `t()`/`<Trans>` has an English default, and all locales have matching keys, interpolation parameters and component tags with no empty values (also runs in CI)
   - `pnpm i18n:lint` — flag hardcoded or untranslated UI strings
   - `pnpm i18n:status` — locale health summary
 - Don't run `i18next-cli extract --trust-derived`: it replaces real English text with key names.

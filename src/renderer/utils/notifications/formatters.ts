@@ -207,7 +207,7 @@ export function formatMetricDescription(
     return '';
   }
 
-  const noun = count === 1 ? singular : `${singular}s`;
+  const noun = count === 1 || i18n.language === 'zh-Hans' ? singular : `${singular}s`;
 
   return formatter ? formatter(count, noun) : `${count} ${noun}`;
 }

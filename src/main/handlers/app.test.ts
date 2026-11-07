@@ -61,7 +61,7 @@ describe('main/handlers/app.ts', () => {
     });
   });
 
-  it.each(['en'] as const)(
+  it.each(['en', 'zh-Hans'] as const)(
     'registers get/set immediately but waits for initialization before returning %s',
     async (language) => {
       const state = { language, preference: language };
