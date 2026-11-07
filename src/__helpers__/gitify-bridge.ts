@@ -10,6 +10,10 @@ export type TestPlatform = 'linux' | 'macos' | 'windows';
  */
 export function createGitifyBridgeApi(platform: TestPlatform = 'macos'): Window['gitify'] {
   return {
+    language: {
+      get: vi.fn(async () => ({ language: 'en' as const, preference: null })),
+      set: vi.fn(async (language) => ({ language, preference: language })),
+    },
     app: {
       version: vi.fn().mockResolvedValue('v0.0.1'),
       hide: vi.fn(),

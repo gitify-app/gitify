@@ -1,9 +1,5 @@
 import '@testing-library/jest-dom/vitest';
-// Initialize the real i18n instance so tests render the English defaults.
-import '../i18n';
 import { createGitifyBridgeApi } from '../../__helpers__/gitify-bridge';
-
-import { Constants } from '../constants';
 
 // Import store modules directly (not the stores barrel) to keep this setup
 // file's import graph light. The accounts store pulls in the forge adapter
@@ -11,6 +7,8 @@ import { Constants } from '../constants';
 // vi.mock registrations) to avoid pre-caching unmocked forge modules.
 import useFiltersStore from '../stores/useFiltersStore';
 import useSettingsStore from '../stores/useSettingsStore';
+
+import i18n from '../i18n';
 
 /**
  * Shared navigate mock — import from test-utils in any test that needs to assert on navigation
@@ -103,8 +101,7 @@ function getRequestTarget(input: RequestInfo | URL): string {
 window.gitify = createGitifyBridgeApi();
 
 /**
- * Pin the browser language so i18n detection is deterministic in tests
- * regardless of the machine/CI locale.
+ * Keep navigator.language stable for browser consumers regardless of the machine/CI locale.
  */
 Object.defineProperty(navigator, 'language', {
   value: 'en',
@@ -114,9 +111,9 @@ Object.defineProperty(navigator, 'language', {
 /**
  * Reset stores
  */
-beforeEach(() => {
-  // Clear any language preference so each test detects/serves English
-  localStorage.removeItem(Constants.STORAGE.LANGUAGE);
+beforeEach(async () => {
+  // Reset the real i18n instance so components render English defaults between tests.
+  await i18n.changeLanguage('en');
 
   vi.stubGlobal(
     'fetch',

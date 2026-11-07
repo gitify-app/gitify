@@ -2,11 +2,11 @@
 /**
  * Source-level guard: every t() / i18n.t() call must pass its English text as
  * the second argument, e.g. `t('common.save', 'Save')`, and every <Trans> must
- * set `defaults`. The extractor generates en.json from these defaults, so a
- * missing one would ship an empty string or a raw key to English users.
+ * set `defaults`. The extractor generates English renderer and native resources
+ * from these defaults; a missing one would ship an empty string or a raw key.
  *
- * Runs as part of `pnpm i18n:check`. Scans src/renderer, skipping tests, the
- * i18n bootstrap files and the locales directory.
+ * Runs as part of `pnpm i18n:check`. Scans src/renderer and src/main, skipping
+ * tests, renderer i18n bootstrap files, locales, mocks and test helpers.
  */
 import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
@@ -132,7 +132,10 @@ function findTransIssues(code) {
   return issues;
 }
 
-const files = await collectFiles(SCAN_DIR);
+const files = [
+  ...(await collectFiles(SCAN_DIR)),
+  ...(await collectFiles(join(ROOT, 'src', 'main'))),
+];
 const problemsByFile = new Map();
 
 for (const file of files) {
@@ -155,4 +158,4 @@ if (problemsByFile.size > 0) {
   process.exit(1);
 }
 
-console.log('✅ src/renderer: every t() call and <Trans> carries an English default');
+console.log('✅ src/renderer and src/main: every t() call and <Trans> carries an English default');

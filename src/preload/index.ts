@@ -12,6 +12,7 @@ import type {
   ZoomAction,
 } from '../shared/events';
 import { EVENTS } from '../shared/events';
+import type { Language } from '../shared/i18n/types';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
 import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
@@ -23,6 +24,10 @@ import { invokeMainEvent, onRendererEvent, sendMainEvent } from './utils';
  * Accessible as `window.gitify` in the renderer.
  */
 export const api = {
+  language: {
+    get: () => invokeMainEvent(EVENTS.LANGUAGE_GET),
+    set: (language: Language) => invokeMainEvent(EVENTS.LANGUAGE_SET, language),
+  },
   /**
    * Open a URL in the user's default browser.
    *

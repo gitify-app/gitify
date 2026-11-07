@@ -388,6 +388,7 @@
       "increase_contrast": "Increase contrast",
       "increase_contrast_help": "Use GitHub's high-contrast color schemes for improved legibility. Also applied automatically when your system's increase-contrast setting is enabled.",
       "language": "Language",
+      "language_error": "Unable to save the language. Please try again.",
       "language_help": "Choose the language for the {{appName}} interface.",
       "show_status_icon_colors": "Show status icon colors",
       "show_status_icon_colors_help": "Color the notification type icons by their state (open, closed, done, attention). Glass renders them monochrome by default.",
