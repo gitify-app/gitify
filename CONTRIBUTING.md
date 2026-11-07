@@ -134,7 +134,7 @@ by the main or preload process.
 
 ### Translations
 
-Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
+Gitify's interface is translated through [i18next][i18next-website]. The app ships English. The main process stores the explicit language preference in `language.json` under the app’s user-data directory and resolves the system language when no preference is set. Native UI and the renderer use that same resolved language; the renderer reads it through IPC before its first render.
 
 - Renderer translations live in `src/renderer/i18n/locales/<language>.json`; native UI translations (`native:` keys) live in `src/shared/i18n/locales/<language>/native.json`. Main and renderer use separate i18next instances and load only their own resources.
 - English resources are generated from the code, never hand-edited. Write the English text as the second argument of `t()`, and as `defaults` on `<Trans>`:

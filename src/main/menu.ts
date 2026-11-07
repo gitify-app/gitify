@@ -31,6 +31,11 @@ export default class MenuBuilder {
    */
   constructor(menubar: Menubar) {
     this.menubar = menubar;
+    i18n.on('languageChanged', () => {
+      if (this.menu) {
+        this.menubar.setContextMenu(this.buildMenu());
+      }
+    });
 
     this.checkForUpdatesMenuItem = new MenuItem({
       label: i18n.t('native:menu.view_releases', 'View releases'),
@@ -93,6 +98,24 @@ export default class MenuBuilder {
    * Build and return the tray right-click context menu.
    */
   buildMenu(): Menu {
+    this.checkForUpdatesMenuItem.label = this.automaticUpdatesEnabled
+      ? i18n.t('native:menu.check_updates', 'Check for updates')
+      : i18n.t('native:menu.view_releases', 'View releases');
+    this.noUpdateAvailableMenuItem.label = i18n.t('native:menu.no_updates', 'No updates available');
+    this.updateAvailableMenuItem.label = i18n.t(
+      'native:menu.update_available',
+      'An update is available',
+    );
+    this.updateReadyForInstallMenuItem.label = i18n.t(
+      'native:menu.install_update',
+      'Restart to install update',
+    );
+    this.showWindowMenuItem.label = i18n.t('native:menu.show', 'Show {{appName}}', {
+      appName: APPLICATION.NAME,
+    });
+    this.hideWindowMenuItem.label = i18n.t('native:menu.hide', 'Hide {{appName}}', {
+      appName: APPLICATION.NAME,
+    });
     this.menu = Menu.buildFromTemplate([
       this.showWindowMenuItem,
       this.hideWindowMenuItem,

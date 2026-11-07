@@ -3,13 +3,14 @@ import type { Menubar } from 'electron-menubar';
 
 import { APPLICATION } from '../../shared/constants';
 import { EVENTS } from '../../shared/events';
+import { logError, toError } from '../../shared/logger';
 
 import { sendRendererEvent } from '../events';
-import { i18n } from '../language';
+import { i18n, resetLanguagePreference } from '../language';
 
 /**
- * Show a confirmation dialog and, if confirmed, broadcast a reset event to the
- * renderer then quit the application.
+ * Confirm, clear the main-process preference, then reset the renderer and quit.
+ * If clearing the preference fails, leave the application running and its state intact.
  *
  * @param mb - The menubar instance used for the dialog parent window and quit.
  */
@@ -38,6 +39,12 @@ export function resetApp(mb: Menubar): void {
   });
 
   if (response === resetButtonId) {
+    try {
+      resetLanguagePreference();
+    } catch (error) {
+      logError('reset', 'Unable to clear language preference', toError(error));
+      return;
+    }
     sendRendererEvent(mb, EVENTS.RESET_APP);
     mb.app.quit();
   }
