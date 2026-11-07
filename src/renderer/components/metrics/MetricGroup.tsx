@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useSettingsStore } from '../../stores';
 
@@ -22,6 +23,7 @@ export interface MetricGroupProps {
 }
 
 export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
+  useTranslation();
   const showPills = useSettingsStore((s) => s.showPills);
 
   if (!showPills) {

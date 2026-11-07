@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { SmileyIcon } from '@primer/octicons-react';
 import { IssueLabelToken, LabelGroup } from '@primer/react';
 
@@ -23,6 +25,7 @@ const reactionEmojiMap: Record<string, string> = {
 };
 
 export function ReactionsPill({ reactionsCount, reactionGroups }: Readonly<ReactionsPillProps>) {
+  const { t } = useTranslation();
   if (!reactionsCount) {
     return null;
   }
@@ -49,7 +52,7 @@ export function ReactionsPill({ reactionsCount, reactionGroups }: Readonly<React
     </LabelGroup>
   );
 
-  const reactionsDescription = `${formatMetricDescription(reactionsCount, 'reaction')}: ${visibleReactionGroups
+  const reactionsDescription = `${formatMetricDescription(reactionsCount, t('metrics.reaction', 'reaction'))}: ${visibleReactionGroups
     .map((rg) => `${reactionEmojiMap[rg.content]} ${rg.reactors.totalCount}`)
     .join(', ')}`;
 
