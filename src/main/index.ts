@@ -64,14 +64,13 @@ registerNativeNotificationHandlers(mb);
 
 // Capture relaunches before ready; lifecycle waits for the preloaded window.
 initializeAppLifecycle(mb, contextMenu);
+// The window exists at before-load; attach DevTools and visibility hooks before rendering.
+mb.once('before-load', () => configureWindowEvents(mb, menuBuilder));
 
 app
   .whenReady()
   .then(async () => {
     await onFirstRunMaybe();
-
-    // Configure window event handlers (Escape key, DevTools resize)
-    configureWindowEvents(mb, menuBuilder);
 
     // Register IPC handlers for various channels
     registerTrayHandlers(mb);
