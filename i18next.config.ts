@@ -1,6 +1,6 @@
 import { defineConfig } from 'i18next-cli';
 
-import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from './src/renderer/i18n';
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from './src/shared/i18n/types';
 
 export default defineConfig({
   locales: [...SUPPORTED_LANGUAGES],
