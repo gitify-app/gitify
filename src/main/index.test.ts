@@ -5,7 +5,7 @@ const { calls, menubarOptions, menubarMock } = vi.hoisted(() => ({
   menubarOptions: [] as unknown[],
   menubarMock: vi.fn((options: unknown) => {
     menubarOptions.push(options);
-    return { window: {} };
+    return { window: {}, once: vi.fn() };
   }),
 }));
 
