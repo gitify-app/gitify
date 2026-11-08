@@ -136,7 +136,7 @@
     "i18next": "26.7.1",
     "i18next-browser-languagedetector": "8.3.0",
     "i18next-cli": "1.82.1",
-    "playwright": "1.64.1",
+    "playwright": "1.65.0",
     "react": "19.3.1",
     "react-devtools": "8.0.0",
     "react-dom": "19.3.1",
