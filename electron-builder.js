@@ -1,4 +1,18 @@
 /**
+ * Targets that emitted an artifact, keyed by platform and target name.
+ *
+ * electron-builder builds every configured target, but a target that packs
+ * nothing still leaves a green build. Record what actually produced an
+ * artifact and compare it with the planned targets once the build finishes, so
+ * the check follows `electron-builder.js` without a second list to maintain.
+ *
+ * @type {Set<string>}
+ */
+const emittedTargets = new Set();
+
+const targetKey = (platform, target) => `${platform.name}:${target.name}`;
+
+/**
  * @type {import('electron-builder').Configuration}
  */
 const config = {
@@ -85,6 +99,33 @@ const config = {
   },
   afterSign: 'scripts/afterSign.js',
   afterPack: 'scripts/afterPack.js',
+  artifactBuildCompleted: (event) => {
+    if (event.target != null) {
+      emittedTargets.add(targetKey(event.packager.platform, event.target));
+    }
+  },
+  afterAllArtifactBuild: async (buildResult) => {
+    const missing = [];
+
+    for (const [platform, nameToTarget] of buildResult.platformToTargets) {
+      for (const target of nameToTarget.values()) {
+        // `dir` produces the unpacked app, not a distributable to upload.
+        if (target.name === 'dir') {
+          continue;
+        }
+
+        if (!emittedTargets.has(targetKey(platform, target))) {
+          missing.push(`${platform.name}/${target.name}`);
+        }
+      }
+    }
+
+    if (missing.length > 0) {
+      throw new Error(`electron-builder produced no artifact for: ${missing.join(', ')}`);
+    }
+
+    return [];
+  },
 };
 
 module.exports = config;
