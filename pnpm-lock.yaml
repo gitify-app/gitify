@@ -341,8 +341,8 @@ importers:
         specifier: 8.3.0
         version: 8.3.0
       i18next-cli:
-        specifier: 1.82.1
-        version: 1.82.1(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
+        specifier: 1.85.1
+        version: 1.85.1(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
       playwright:
         specifier: 1.65.0
         version: 1.65.0
@@ -3172,8 +3172,8 @@ packages:
   i18next-browser-languagedetector@8.3.0:
     resolution: {integrity: sha512-t7FtF+VyQ+XSy+GI1O9TXWsMzP4U2u0m27yxJcCbG4LaAbTQa3CXFXgG3LvRivS+ZoYah8yPv5NhMl+Wg6I8Fg==}
 
-  i18next-cli@1.82.1:
-    resolution: {integrity: sha512-aX9NFlpcymarghdQNWq/6bv876BQqP/vYQlyWBITxEYdjhUoF29QRAJnlwXBMjpK7LpOph3vQYQSabKltl9i7w==}
+  i18next-cli@1.85.1:
+    resolution: {integrity: sha512-LyblXTvK7CTKKmbEVZ3t8nA863AR6oEpeipJenEc2QNuWAvDngKvFaYXf77NlDRzHjqLuPNnugd4AArskZMAdg==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -7518,7 +7518,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.29.10
 
-  i18next-cli@1.82.1(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2):
+  i18next-cli@1.85.1(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2):
     dependencies:
       '@croct/json5-parser': 0.2.2
       '@formatjs/icu-messageformat-parser': 3.5.22
@@ -7536,7 +7536,7 @@ snapshots:
       jsonc-parser: 3.3.1
       magic-string: 1.4.5
       messageformat: 4.1.0
-      minimatch: 10.2.6
+      minimatch: 11.0.4
       nano-spawn: 2.1.0
       react-i18next: 17.1.11(i18next@26.7.1(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
       yaml: 2.9.1
