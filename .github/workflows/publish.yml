@@ -112,6 +112,7 @@ jobs:
             dist/*
             !dist/*/
           overwrite: true
+          if-no-files-found: error
 
   publish-release:
     name: Publish release
@@ -138,6 +139,14 @@ jobs:
           release_id=$(printf '%s' "${release}" | jq -r '.id // empty')
           if [ -z "${release_id}" ]; then
             echo "::error::No release found for tag ${TAG_NAME}"
+            exit 1
+          fi
+
+          # Packaging verifies every target against electron-builder.js, but a
+          # draft with no assets would publish a release nobody can download.
+          asset_count=$(printf '%s' "${release}" | jq -r '.assets | length')
+          if [ "${asset_count}" -eq 0 ]; then
+            echo "::error::Release ${TAG_NAME} has no assets to publish"
             exit 1
           fi
 

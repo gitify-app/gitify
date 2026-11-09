@@ -88,3 +88,4 @@ jobs:
             dist/*
             !dist/*/
           overwrite: true
+          if-no-files-found: error
