@@ -1,11 +1,18 @@
 #!/usr/bin/env node
-
 /**
- * Verifies that a packaged Gitify app ships only its runtime dependency closure.
+ * Verifies that a packaged Gitify app ships its runtime dependency closure and
+ * nothing else.
  *
- * The packaged app must contain the main-process runtime packages and must not
- * contain the renderer-only packages that Vite bundles, the pnpm virtual store,
- * or build tooling. Run this after electron-builder has produced an unpacked app:
+ * The expected surface is derived rather than listed, so it cannot drift from
+ * the project:
+ *
+ *   - `dependencies` in package.json are the runtime closure roots
+ *   - `devDependencies` must never ship (renderer-only packages Vite bundles,
+ *     build tooling, and type packages)
+ *   - every external `require` in the built main bundle must be a runtime
+ *     dependency, and must be present in `app.asar`
+ *
+ * Run after electron-builder has produced an unpacked app:
  *
  *   node scripts/verifyPackagedDependencies.js dist/mac-universal/Gitify.app
  *   node scripts/verifyPackagedDependencies.js dist/win-unpacked
@@ -17,35 +24,35 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { createRequire } = require('node:module');
+const { builtinModules, createRequire } = require('node:module');
 
-const REQUIRED_PACKAGES = ['electron-log', 'electron-menubar', 'electron-updater'];
-const FORBIDDEN_PACKAGES = [
-  'cn',
-  'i18next',
-  'i18next-browser-languagedetector',
-  'react',
-  'react-dom',
-  'react-i18next',
-  'react-router',
-];
-const BUILD_ONLY_PACKAGES = [
-  'electron',
-  'electron-builder',
-  'tailwindcss',
-  'typescript',
-  'vite',
-  'vitest',
-];
-const BUILD_ONLY_SCOPES = ['@electron/', '@graphql-codegen/', '@primer/', '@tailwindcss/'];
+const projectRoot = path.resolve(__dirname, '..');
+const packageJson = require(path.join(projectRoot, 'package.json'));
+
+/** Runtime closure roots. electron-builder packages these and their transitive deps. */
+const REQUIRED_PACKAGES = Object.keys(packageJson.dependencies ?? {});
+
+/**
+ * Declared dev-only packages must never ship. This covers renderer-only
+ * packages, build tooling and type packages without a second list to maintain.
+ */
+const FORBIDDEN_PACKAGES = new Set(Object.keys(packageJson.devDependencies ?? {}));
+
+/** Provided by the Electron runtime, not installed into node_modules. */
+const RUNTIME_PROVIDED = new Set(['electron']);
+
+const BUILTINS = new Set(builtinModules.flatMap((name) => [name, `node:${name}`]));
+
+// The runtime closure is a couple of megabytes. Anything close to this budget
+// means the pnpm store or a devDependency tree was packaged.
 const MAX_NODE_MODULES_BYTES = 10 * 1024 * 1024;
 
 function usage() {
-  console.log(`Usage: node scripts/verifyPackagedDependencies.js [app-dir-or-asar]
+  console.log(`Usage: node scripts/verifyPackagedDependencies.js [app-dir-or-asar ...]
 
-Checks a packaged app's app.asar for the runtime dependency surface.
+Checks each packaged app's app.asar for the runtime dependency surface.
 
-Accepted paths:
+Accepted paths (one or more):
   - a packaged app directory (macOS .app, win-unpacked, linux-unpacked)
   - an app.asar file
   - omit to auto-detect the first app.asar under dist/
@@ -139,6 +146,36 @@ function entryBytes(entry) {
   return 0;
 }
 
+/**
+ * Every non-relative module the main process requires at runtime. Derived from
+ * the built bundle, so it reflects what the process actually needs rather than
+ * what package.json happens to declare.
+ *
+ * @returns {Set<string>}
+ */
+function mainProcessExternals() {
+  const bundlePath = path.join(projectRoot, 'build', 'main.js');
+
+  if (!fs.existsSync(bundlePath)) {
+    throw new Error(`No main bundle at ${bundlePath}; build before packaging`);
+  }
+
+  const bundle = fs.readFileSync(bundlePath, 'utf8');
+  const externals = new Set();
+
+  for (const match of bundle.matchAll(/require\("([^"]+)"\)/g)) {
+    const name = match[1];
+
+    if (name.startsWith('.') || BUILTINS.has(name) || RUNTIME_PROVIDED.has(name)) {
+      continue;
+    }
+
+    externals.add(name);
+  }
+
+  return externals;
+}
+
 function checkPackagedDependencies(asarPath) {
   const asar = loadAsar();
   const entries = asar.listPackage(asarPath).map(normalizeEntry);
@@ -163,21 +200,20 @@ function checkPackagedDependencies(asarPath) {
     }
   }
 
-  for (const name of FORBIDDEN_PACKAGES) {
-    if (packages.has(name)) {
-      violations.push(`Renderer-only package must not ship: ${name}`);
-    }
-  }
-
-  for (const name of BUILD_ONLY_PACKAGES) {
-    if (packages.has(name)) {
-      violations.push(`Build-only package must not ship: ${name}`);
-    }
-  }
-
   for (const name of packages) {
-    if (BUILD_ONLY_SCOPES.some((scope) => name.startsWith(scope))) {
-      violations.push(`Build-only scoped package must not ship: ${name}`);
+    if (FORBIDDEN_PACKAGES.has(name)) {
+      violations.push(`Dev-only package must not ship: ${name}`);
+    }
+  }
+
+  for (const name of mainProcessExternals()) {
+    if (!REQUIRED_PACKAGES.includes(name)) {
+      violations.push(`Main process requires ${name} but it is not a runtime dependency`);
+      continue;
+    }
+
+    if (!packages.has(name)) {
+      violations.push(`Main process requires ${name} but the package is missing`);
     }
   }
 
@@ -200,29 +236,41 @@ function main() {
     return;
   }
 
-  try {
-    const asarPath = resolveAsarPath(args[0]);
-    const { packages, nodeModulesBytes, violations } = checkPackagedDependencies(asarPath);
+  // One entry per packaged app, so every arch of a multi-arch build is checked.
+  const inputs = args.length > 0 ? args : [undefined];
+  let hasFailures = false;
 
-    console.log('Packaged dependency check');
-    console.log(`  asar: ${asarPath}`);
-    console.log(`  node_modules packages: ${packages.size}`);
-    console.log(`  node_modules size: ${formatBytes(nodeModulesBytes)}`);
-    console.log(`  runtime packages: ${REQUIRED_PACKAGES.join(', ')}`);
+  for (const input of inputs) {
+    try {
+      const asarPath = resolveAsarPath(input);
+      const { packages, nodeModulesBytes, violations } = checkPackagedDependencies(asarPath);
 
-    if (violations.length > 0) {
-      console.error('\n[FAIL] Packaged dependency surface is invalid:');
-      for (const violation of violations) {
-        console.error(`  - ${violation}`);
+      console.log('Packaged dependency check');
+      console.log(`  asar: ${asarPath}`);
+      console.log(`  node_modules packages: ${packages.size}`);
+      console.log(`  node_modules size: ${formatBytes(nodeModulesBytes)}`);
+      console.log(`  runtime packages: ${REQUIRED_PACKAGES.join(', ')}`);
+      console.log(`  main process externals: ${[...mainProcessExternals()].join(', ')}`);
+
+      if (violations.length > 0) {
+        console.error('\n[FAIL] Packaged dependency surface is invalid:');
+        for (const violation of violations) {
+          console.error(`  - ${violation}`);
+        }
+        hasFailures = true;
+        continue;
       }
-      process.exitCode = 1;
+
+      console.log('\n[PASS] Packaged dependency surface is valid.');
+    } catch (error) {
+      console.error(`[ERROR] ${error.message}`);
+      process.exitCode = 2;
       return;
     }
+  }
 
-    console.log('\n[PASS] Packaged dependency surface is valid.');
-  } catch (error) {
-    console.error(`[ERROR] ${error.message}`);
-    process.exitCode = 2;
+  if (hasFailures) {
+    process.exitCode = 1;
   }
 }
 
