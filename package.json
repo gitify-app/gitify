@@ -133,7 +133,7 @@
     "graphql-config": "6.0.0",
     "happy-dom": "21.0.4",
     "husky": "9.1.7",
-    "i18next": "26.7.1",
+    "i18next": "26.7.2",
     "i18next-browser-languagedetector": "8.3.0",
     "i18next-cli": "1.85.1",
     "playwright": "1.65.0",
