@@ -129,7 +129,7 @@
     "dotenv": "18.0.9",
     "electron": "catalog:",
     "electron-builder": "26.18.0",
-    "graphql": "17.0.2",
+    "graphql": "17.1.0",
     "graphql-config": "6.0.0",
     "happy-dom": "21.0.4",
     "husky": "9.1.7",
