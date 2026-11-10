@@ -1,13 +1,24 @@
 import './index';
 
-const { calls, menubarOptions, menubarMock } = vi.hoisted(() => ({
-  calls: [] as string[],
-  menubarOptions: [] as unknown[],
-  menubarMock: vi.fn((options: unknown) => {
-    menubarOptions.push(options);
-    return { window: {} };
-  }),
-}));
+const { calls, menubarOptions, menubarMock, attachLifecycleMock, lifecycleMock } = vi.hoisted(
+  () => {
+    const calls: string[] = [];
+    const menubarOptions: unknown[] = [];
+    const attachLifecycleMock = vi.fn(() => {
+      calls.push('attachLifecycle');
+    });
+    const lifecycleMock = vi.fn<() => typeof attachLifecycleMock | undefined>(() => {
+      calls.push('lifecycle');
+      return attachLifecycleMock;
+    });
+    const menubarMock = vi.fn((options: unknown) => {
+      calls.push('menubar');
+      menubarOptions.push(options);
+      return { window: {}, once: vi.fn() };
+    });
+    return { calls, menubarOptions, menubarMock, attachLifecycleMock, lifecycleMock };
+  },
+);
 
 vi.mock('electron', () => ({
   app: {
@@ -42,6 +53,7 @@ vi.mock('./config', () => ({
 
 vi.mock('./handlers', () => ({
   registerAppHandlers: vi.fn(),
+  registerLanguageHandlers: vi.fn(() => calls.push('languageHandlers')),
   registerGitHubCliHandlers: vi.fn(),
   registerNativeNotificationHandlers: vi.fn(),
   registerStorageHandlers: vi.fn(),
@@ -49,6 +61,8 @@ vi.mock('./handlers', () => ({
   registerTrayHandlers: vi.fn(),
   registerUpdaterHandlers: vi.fn(),
 }));
+
+vi.mock('./language', () => ({ initializeMainLanguage: vi.fn(() => calls.push('language')) }));
 
 vi.mock('./icons', () => ({
   getIdleTrayIcon: vi.fn(() => 'icon.png'),
@@ -58,7 +72,7 @@ vi.mock('./lifecycle', () => ({
   configureUserDataPath: vi.fn(() => calls.push('userData')),
   configureWindowEvents: vi.fn(),
   handleProtocolURL: vi.fn(),
-  initializeAppLifecycle: vi.fn(() => calls.push('lifecycle')),
+  initializeAppLifecycle: lifecycleMock,
   onFirstRunMaybe: vi.fn(),
 }));
 
@@ -93,8 +107,35 @@ describe('main/index.ts', () => {
     ]);
   });
 
-  it('configures user data, Ozone, and lifecycle handlers before Electron becomes ready', () => {
-    expect(calls).toEqual(['userData', 'ozone', 'lifecycle', 'whenReady']);
+  it('captures relaunches before ready and initializes language before native UI', () => {
+    expect(calls).toEqual([
+      'userData',
+      'ozone',
+      'lifecycle',
+      'whenReady',
+      'languageHandlers',
+      'language',
+      'menubar',
+      'attachLifecycle',
+    ]);
+  });
+
+  it('skips initialization and native UI when another instance holds the lock', async () => {
+    vi.resetModules();
+    lifecycleMock.mockReturnValueOnce(undefined);
+    calls.length = 0;
+
+    await import('./index');
+
+    expect(calls).toEqual(['userData', 'ozone']);
+    expect(menubarMock).not.toHaveBeenCalled();
+    expect(attachLifecycleMock).not.toHaveBeenCalled();
+    const { registerLanguageHandlers, registerNativeNotificationHandlers } =
+      await import('./handlers');
+    const { onFirstRunMaybe } = await import('./lifecycle');
+    expect(registerLanguageHandlers).not.toHaveBeenCalled();
+    expect(registerNativeNotificationHandlers).not.toHaveBeenCalled();
+    expect(onFirstRunMaybe).not.toHaveBeenCalled();
   });
 
   it('logs an error when Electron fails to become ready', async () => {

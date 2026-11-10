@@ -1,11 +1,6 @@
-export const DEFAULT_LANGUAGE: Language = 'en';
+import type { Language } from '../../shared/i18n/types';
 
-export const SUPPORTED_LANGUAGES = ['en'] as const;
-
-/**
- * The different types of allowed languages.
- */
-export type Language = (typeof SUPPORTED_LANGUAGES)[number];
+export { DEFAULT_LANGUAGE, type Language, SUPPORTED_LANGUAGES } from '../../shared/i18n/types';
 
 const LANGUAGE_LABELS: Record<Language, string> = {
   en: 'English',

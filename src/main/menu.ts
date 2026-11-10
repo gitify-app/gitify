@@ -5,6 +5,7 @@ import { APPLICATION } from '../shared/constants';
 import { logError, toError } from '../shared/logger';
 import { isMacOS } from '../shared/platform';
 
+import { i18n } from './language';
 import { resetApp } from './lifecycle/reset';
 import { openLogsDirectory, takeScreenshot } from './utils';
 
@@ -30,9 +31,14 @@ export default class MenuBuilder {
    */
   constructor(menubar: Menubar) {
     this.menubar = menubar;
+    i18n.on('languageChanged', () => {
+      if (this.menu) {
+        this.menubar.setContextMenu(this.buildMenu());
+      }
+    });
 
     this.checkForUpdatesMenuItem = new MenuItem({
-      label: 'View releases',
+      label: i18n.t('native:menu.view_releases', 'View releases'),
       enabled: true,
       click: () => {
         const check = this.automaticUpdatesEnabled
@@ -47,19 +53,19 @@ export default class MenuBuilder {
     });
 
     this.noUpdateAvailableMenuItem = new MenuItem({
-      label: 'No updates available',
+      label: i18n.t('native:menu.no_updates', 'No updates available'),
       enabled: false,
       visible: false,
     });
 
     this.updateAvailableMenuItem = new MenuItem({
-      label: 'An update is available',
+      label: i18n.t('native:menu.update_available', 'An update is available'),
       enabled: false,
       visible: false,
     });
 
     this.updateReadyForInstallMenuItem = new MenuItem({
-      label: 'Restart to install update',
+      label: i18n.t('native:menu.install_update', 'Restart to install update'),
       enabled: true,
       visible: false,
       click: () => {
@@ -70,7 +76,7 @@ export default class MenuBuilder {
     });
 
     this.showWindowMenuItem = new MenuItem({
-      label: `Show ${APPLICATION.NAME}`,
+      label: i18n.t('native:menu.show', 'Show {{appName}}', { appName: APPLICATION.NAME }),
       visible: true,
       click: () => {
         this.menubar.showWindow().catch((err) => {
@@ -80,7 +86,7 @@ export default class MenuBuilder {
     });
 
     this.hideWindowMenuItem = new MenuItem({
-      label: `Hide ${APPLICATION.NAME}`,
+      label: i18n.t('native:menu.hide', 'Hide {{appName}}', { appName: APPLICATION.NAME }),
       visible: false,
       click: () => {
         this.menubar.hideWindow();
@@ -92,6 +98,24 @@ export default class MenuBuilder {
    * Build and return the tray right-click context menu.
    */
   buildMenu(): Menu {
+    this.checkForUpdatesMenuItem.label = this.automaticUpdatesEnabled
+      ? i18n.t('native:menu.check_updates', 'Check for updates')
+      : i18n.t('native:menu.view_releases', 'View releases');
+    this.noUpdateAvailableMenuItem.label = i18n.t('native:menu.no_updates', 'No updates available');
+    this.updateAvailableMenuItem.label = i18n.t(
+      'native:menu.update_available',
+      'An update is available',
+    );
+    this.updateReadyForInstallMenuItem.label = i18n.t(
+      'native:menu.install_update',
+      'Restart to install update',
+    );
+    this.showWindowMenuItem.label = i18n.t('native:menu.show', 'Show {{appName}}', {
+      appName: APPLICATION.NAME,
+    });
+    this.hideWindowMenuItem.label = i18n.t('native:menu.hide', 'Hide {{appName}}', {
+      appName: APPLICATION.NAME,
+    });
     this.menu = Menu.buildFromTemplate([
       this.showWindowMenuItem,
       this.hideWindowMenuItem,
@@ -102,27 +126,29 @@ export default class MenuBuilder {
       this.updateReadyForInstallMenuItem,
       { type: 'separator' },
       {
-        label: 'Developer',
+        label: i18n.t('native:menu.developer', 'Developer'),
         submenu: [
           {
             role: 'reload',
+            label: i18n.t('native:menu.reload', 'Reload'),
             accelerator: 'CommandOrControl+R',
           },
           {
             role: 'toggleDevTools',
+            label: i18n.t('native:menu.devtools', 'Toggle Developer Tools'),
             accelerator: isMacOS() ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
           },
           {
-            label: 'Take Screenshot',
+            label: i18n.t('native:menu.screenshot', 'Take Screenshot'),
             accelerator: 'CommandOrControl+S',
             click: () => takeScreenshot(this.menubar),
           },
           {
-            label: 'View Application Logs',
+            label: i18n.t('native:menu.logs', 'View Application Logs'),
             click: () => openLogsDirectory(),
           },
           {
-            label: 'Visit Repository',
+            label: i18n.t('native:menu.repository', 'Visit Repository'),
             click: () => {
               shell
                 .openExternal(`${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}`)
@@ -132,7 +158,7 @@ export default class MenuBuilder {
             },
           },
           {
-            label: `Reset ${APPLICATION.NAME}`,
+            label: i18n.t('native:menu.reset', 'Reset {{appName}}', { appName: APPLICATION.NAME }),
             click: () => {
               resetApp(this.menubar);
             },
@@ -141,7 +167,7 @@ export default class MenuBuilder {
       },
       { type: 'separator' },
       {
-        label: 'Visit Website',
+        label: i18n.t('native:menu.website', 'Visit Website'),
         click: () => {
           shell.openExternal(APPLICATION.WEBSITE).catch((err) => {
             logError('menu', 'Failed to open website in browser', toError(err));
@@ -149,7 +175,7 @@ export default class MenuBuilder {
         },
       },
       {
-        label: `Quit ${APPLICATION.NAME}`,
+        label: i18n.t('native:menu.quit', 'Quit {{appName}}', { appName: APPLICATION.NAME }),
         accelerator: 'CommandOrControl+Q',
         click: () => {
           this.menubar.app.quit();
@@ -201,7 +227,9 @@ export default class MenuBuilder {
    */
   setAutomaticUpdatesEnabled(enabled: boolean) {
     this.automaticUpdatesEnabled = enabled;
-    this.checkForUpdatesMenuItem.label = enabled ? 'Check for updates' : 'View releases';
+    this.checkForUpdatesMenuItem.label = enabled
+      ? i18n.t('native:menu.check_updates', 'Check for updates')
+      : i18n.t('native:menu.view_releases', 'View releases');
     this.refreshMenu();
   }
 

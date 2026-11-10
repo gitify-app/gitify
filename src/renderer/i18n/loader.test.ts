@@ -1,63 +1,60 @@
-import { Constants } from '../constants';
+import type { LanguageState } from '../../shared/i18n/types';
 
 import { DEFAULT_LANGUAGE, LANGUAGES, SUPPORTED_LANGUAGES } from './types';
 
-import i18n, { loadLanguageLocale, setLanguage } from './loader';
+import i18n, { initializeLanguage, loadLanguageLocale, setLanguage } from './loader';
 
 describe('renderer/i18n', () => {
-  describe('types', () => {
-    it('should support English as the only language', () => {
-      expect(SUPPORTED_LANGUAGES).toEqual(['en']);
-      expect(DEFAULT_LANGUAGE).toBe('en');
-    });
-
-    it('should expose language options for the settings selector', () => {
-      expect(LANGUAGES).toEqual([{ label: 'English', value: 'en' }]);
-    });
+  it('provides English as the supported language', () => {
+    expect(SUPPORTED_LANGUAGES).toEqual(['en']);
+    expect(DEFAULT_LANGUAGE).toBe('en');
+    expect(LANGUAGES).toEqual([{ label: 'English', value: 'en' }]);
   });
 
-  describe('loadLanguageLocale', () => {
-    it('should return the default language when no preference is stored', () => {
-      localStorage.removeItem(Constants.STORAGE.LANGUAGE);
+  it.each(['en'] as const)(
+    'initializes %s from main without detecting or saving',
+    async (language) => {
+      vi.mocked(window.gitify.language.get).mockResolvedValueOnce({ language, preference: null });
+      const systemLanguages = vi.spyOn(navigator, 'languages', 'get');
+      const readStorage = vi.spyOn(localStorage, 'getItem');
+      const writeStorage = vi.spyOn(localStorage, 'setItem');
+      await initializeLanguage();
+      expect(window.gitify.language.get).toHaveBeenCalledWith();
+      expect(window.gitify.language.set).not.toHaveBeenCalled();
+      expect(systemLanguages).not.toHaveBeenCalled();
+      expect(readStorage).not.toHaveBeenCalled();
+      expect(writeStorage).not.toHaveBeenCalled();
+      expect(loadLanguageLocale()).toBe(language);
+      expect(document.documentElement.lang).toBe(language);
+    },
+  );
 
-      expect(loadLanguageLocale()).toBe(DEFAULT_LANGUAGE);
-    });
+  it.each(['en'] as const)(
+    'waits for the authoritative response before switching to %s',
+    async (language) => {
+      const previous = 'en';
+      await i18n.changeLanguage(previous);
+      let finish!: (value: LanguageState) => void;
+      vi.mocked(window.gitify.language.set).mockReturnValueOnce(
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+      );
+      const changeLanguage = vi.spyOn(i18n, 'changeLanguage');
+      const pending = setLanguage(language);
+      expect(changeLanguage).not.toHaveBeenCalled();
+      expect(i18n.language).toBe(previous);
+      finish({ language, preference: language });
+      await pending;
+      expect(changeLanguage).toHaveBeenCalledWith(language);
+      expect(loadLanguageLocale()).toBe(language);
+    },
+  );
 
-    it('should return the stored language preference', () => {
-      localStorage.setItem(Constants.STORAGE.LANGUAGE, 'en');
-
-      expect(loadLanguageLocale()).toBe('en');
-    });
-    it('should ignore a stored language that is not supported', () => {
-      localStorage.setItem(Constants.STORAGE.LANGUAGE, 'xx');
-
-      expect(loadLanguageLocale()).toBe(DEFAULT_LANGUAGE);
-    });
-  });
-
-  describe('setLanguage', () => {
-    it('persists an explicit choice and switches the active language', async () => {
-      localStorage.removeItem(Constants.STORAGE.LANGUAGE);
-
-      await setLanguage('en');
-
-      expect(localStorage.getItem(Constants.STORAGE.LANGUAGE)).toBe('en');
-      expect(i18n.language).toBe('en');
-    });
-  });
-
-  describe('detection', () => {
-    it('does not persist the detected language', () => {
-      localStorage.removeItem(Constants.STORAGE.LANGUAGE);
-
-      i18n.services.languageDetector.cacheUserLanguage?.('en');
-
-      expect(localStorage.getItem(Constants.STORAGE.LANGUAGE)).toBeNull();
-    });
-
-    it('resolves regional locales to their base language', () => {
-      expect(i18n.services.languageUtils.getLanguagePartFromCode('en-GB')).toBe('en');
-      expect(i18n.options.load).toBe('languageOnly');
-    });
+  it.each(['en'] as const)('keeps active %s when saving in main fails', async (language) => {
+    await i18n.changeLanguage(language);
+    vi.mocked(window.gitify.language.set).mockRejectedValueOnce(new Error('save failed'));
+    await expect(setLanguage(language)).rejects.toThrow('save failed');
+    expect(loadLanguageLocale()).toBe(language);
   });
 });

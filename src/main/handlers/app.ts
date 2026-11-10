@@ -5,6 +5,7 @@ import { EVENTS } from '../../shared/events';
 
 import { Paths } from '../config';
 import { handleMainEvent, onMainEvent } from '../events';
+import { getLanguageState, setNativeLanguage } from '../language';
 
 /**
  * Register IPC handlers for general application queries and window/app control.
@@ -27,5 +28,16 @@ export function registerAppHandlers(mb: Menubar): void {
 
   handleMainEvent(EVENTS.TWEMOJI_DIRECTORY, () => {
     return Paths.twemojiFolder;
+  });
+}
+
+export function registerLanguageHandlers(ready: Promise<void>): void {
+  handleMainEvent(EVENTS.LANGUAGE_GET, async () => {
+    await ready;
+    return getLanguageState();
+  });
+  handleMainEvent(EVENTS.LANGUAGE_SET, async (_event, language) => {
+    await ready;
+    return setNativeLanguage(language);
   });
 }

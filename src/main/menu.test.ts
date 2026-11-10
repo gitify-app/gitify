@@ -6,6 +6,7 @@ import type { Mock } from 'vite-plus/test';
 import { APPLICATION } from '../shared/constants';
 import { isMacOS } from '../shared/platform';
 
+import { i18n } from './language';
 import { resetApp } from './lifecycle/reset';
 import MenuBuilder from './menu';
 import { openLogsDirectory, takeScreenshot } from './utils';
@@ -87,7 +88,9 @@ describe('main/menu.ts', () => {
     return (Menu.buildFromTemplate as Mock).mock.calls.slice(-1)[0][0] as TemplateItem[];
   };
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    i18n.off('languageChanged');
+    await i18n.changeLanguage('en');
     vi.mocked(isMacOS).mockReturnValue(false);
     menuItemInstances.length = 0; // Clear tracked instances
     menubar = {
@@ -95,12 +98,56 @@ describe('main/menu.ts', () => {
       showWindow: vi.fn(async () => undefined),
       hideWindow: vi.fn(),
       refreshContextMenu: vi.fn(),
+      setContextMenu: vi.fn(),
       tray: {
         isDestroyed: vi.fn(() => false),
         setContextMenu: vi.fn(),
       },
     } as unknown as Menubar;
     menuBuilder = new MenuBuilder(menubar);
+  });
+
+  it('republishes the menu on language events without losing window or update state', async () => {
+    menuBuilder.setAutomaticUpdatesEnabled(true);
+    vi.mocked(Menu.buildFromTemplate).mockReturnValue({} as Electron.Menu);
+    menuBuilder.buildMenu();
+    menuBuilder.setWindowVisibility(true);
+    menuBuilder.setCheckForUpdatesMenuEnabled(false);
+    menuBuilder.setUpdateAvailableMenuVisibility(true);
+    await i18n.changeLanguage('en');
+    const template = vi.mocked(Menu.buildFromTemplate).mock.calls.at(-1)?.[0] as (TemplateItem & {
+      visible?: boolean;
+      enabled?: boolean;
+    })[];
+    expect(template.find((item) => item.label === 'Show Gitify')?.visible).toBe(false);
+    expect(template.find((item) => item.label === 'Hide Gitify')?.visible).toBe(true);
+    expect(template.find((item) => item.label === 'Check for updates')?.enabled).toBe(false);
+    expect(template.find((item) => item.label === 'An update is available')?.visible).toBe(true);
+    expect(template.find((item) => item.label === 'Developer')?.submenu?.[0]).toMatchObject({
+      role: 'reload',
+      label: 'Reload',
+      accelerator: 'CommandOrControl+R',
+    });
+    expect(menubar.setContextMenu).toHaveBeenCalled();
+    await i18n.changeLanguage('en');
+  });
+
+  it('preserves the update preference and action across language events', async () => {
+    vi.mocked(Menu.buildFromTemplate).mockReturnValue({} as Electron.Menu);
+    menuBuilder.buildMenu();
+    await i18n.changeLanguage('en');
+    const releases = getMenuItemConfigByLabel('View releases');
+    expect(releases).toBeDefined();
+    releases?.click?.();
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      `${APPLICATION.GITHUB_BASE_URL}/${APPLICATION.REPO_SLUG}/releases/latest`,
+    );
+    menuBuilder.setAutomaticUpdatesEnabled(true);
+    expect(getMenuItemConfigByLabel('Check for updates')).toBeDefined();
+    await i18n.changeLanguage('en');
+    expect(getMenuItemConfigByLabel('Check for updates')).toBeDefined();
+    menuBuilder.setAutomaticUpdatesEnabled(false);
+    expect(getMenuItemConfigByLabel('View releases')).toBeDefined();
   });
 
   describe('checkForUpdatesMenuItem', () => {

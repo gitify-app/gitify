@@ -8,6 +8,7 @@ import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
   registerGitHubCliHandlers,
+  registerLanguageHandlers,
   registerNativeNotificationHandlers,
   registerStorageHandlers,
   registerSystemHandlers,
@@ -15,6 +16,7 @@ import {
   registerUpdaterHandlers,
 } from './handlers';
 import { getIdleTrayIcon } from './icons';
+import { initializeMainLanguage } from './language';
 import {
   configureUserDataPath,
   configureWindowEvents,
@@ -40,47 +42,46 @@ if (!app.isPackaged) {
   log.transports.file.fileName = 'main.dev.log';
 }
 
-const mb = menubar({
-  icon: getIdleTrayIcon('auto'),
-  index: Paths.indexHtml,
-  browserWindow: WindowConfig,
-  preloadWindow: true,
-  showDockIcon: false, // Hide the app from the macOS dock
-  hideOnClose: true, // Keep renderer state across WM close; Wayland-safe.
-  escapeToHide: true, // Hide the window when Escape is pressed.
-});
+// Capture relaunches before ready; attach the window after language initialization.
+const attachAppLifecycle = initializeAppLifecycle();
 
-const menuBuilder = new MenuBuilder(mb);
-const contextMenu = menuBuilder.buildMenu();
+if (attachAppLifecycle) {
+  const languageReady = app.whenReady().then(() => initializeMainLanguage());
+  registerLanguageHandlers(languageReady);
 
-const appUpdater = new AppUpdater(mb, menuBuilder);
+  languageReady
+    .then(async () => {
+      const mb = menubar({
+        icon: getIdleTrayIcon('auto'),
+        index: Paths.indexHtml,
+        browserWindow: WindowConfig,
+        preloadWindow: true,
+        showDockIcon: false, // Hide the app from the macOS dock
+        hideOnClose: true, // Keep renderer state across WM close; Wayland-safe.
+        escapeToHide: true, // Hide the window when Escape is pressed.
+      });
 
-// Register before the renderer can load. The notification service relies on a
-// one-shot readiness message from the renderer; registering the handlers inside
-// `whenReady` (after `onFirstRunMaybe`) leaves a window where that message is
-// sent before any listener exists, which leaves every later click and action
-// queued forever.
-registerNativeNotificationHandlers(mb);
+      const menuBuilder = new MenuBuilder(mb);
+      const appUpdater = new AppUpdater(mb, menuBuilder);
 
-// Capture relaunches before ready; lifecycle waits for the preloaded window.
-initializeAppLifecycle(mb, contextMenu);
+      // Register before the renderer's initial ready message and before awaiting the first-run prompt.
+      // NativeNotificationService.show also establishes readiness as a fallback.
+      registerNativeNotificationHandlers(mb);
 
-app
-  .whenReady()
-  .then(async () => {
-    await onFirstRunMaybe();
+      attachAppLifecycle(mb, () => menuBuilder.buildMenu());
+      // The window exists at before-load; attach DevTools and visibility hooks before rendering.
+      mb.once('before-load', () => configureWindowEvents(mb, menuBuilder));
 
-    // Configure window event handlers (Escape key, DevTools resize)
-    configureWindowEvents(mb, menuBuilder);
-
-    // Register IPC handlers for various channels
-    registerTrayHandlers(mb);
-    registerSystemHandlers(mb);
-    registerStorageHandlers();
-    registerGitHubCliHandlers();
-    registerAppHandlers(mb);
-    registerUpdaterHandlers(appUpdater);
-  })
-  .catch((err) => {
-    logError('main', 'Failed to initialize application', toError(err));
-  });
+      // Application IPC handlers
+      registerTrayHandlers(mb);
+      registerSystemHandlers(mb);
+      registerStorageHandlers();
+      registerGitHubCliHandlers();
+      registerAppHandlers(mb);
+      registerUpdaterHandlers(appUpdater);
+      await onFirstRunMaybe();
+    })
+    .catch((err) => {
+      logError('main', 'Failed to initialize application', toError(err));
+    });
+}

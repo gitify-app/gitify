@@ -16,6 +16,7 @@ vi.mock('../shared/logger', async (importOriginal) => {
   };
 });
 
+import { i18n } from './language';
 import MenuBuilder from './menu';
 import AppUpdater from './updater';
 
@@ -30,6 +31,7 @@ type Listener = (arg: ListenerArgs) => void;
 type ListenerMap = Record<string, Listener[]>;
 const listeners: ListenerMap = {};
 const notify = vi.fn();
+const notificationOptions = vi.fn();
 let beforeQuit: (event: { preventDefault: () => void }) => void;
 
 vi.mock('electron-updater', () => ({
@@ -58,6 +60,9 @@ vi.mock('electron', () => {
       showMessageBox: vi.fn(),
     } satisfies Pick<Electron.Dialog, 'showMessageBox'>,
     Notification: class {
+      constructor(options: Electron.NotificationConstructorOptions) {
+        notificationOptions(options);
+      }
       show = notify;
     },
     MenuItem,
@@ -95,7 +100,9 @@ describe('main/updater.ts', () => {
   let menuBuilder: TestMenuBuilder;
   let updater: AppUpdater;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    i18n.off('languageChanged');
+    await i18n.changeLanguage('en');
     vi.mocked(isMacOS).mockReturnValue(false);
     for (const k of Object.keys(listeners)) {
       delete listeners[k];
@@ -113,6 +120,42 @@ describe('main/updater.ts', () => {
 
     menuBuilder = new TestMenuBuilder(menubar);
     updater = new AppUpdater(menubar, menuBuilder);
+  });
+
+  it('refreshes pending progress on language events without repeating an existing prompt', async () => {
+    vi.mocked(dialog.showMessageBox).mockResolvedValue({ response: 1, checkboxChecked: false });
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('download-progress', { percent: 37.25 });
+    expect(menubar.tray.setToolTip).toHaveBeenLastCalledWith('Gitify\nDownloading update: 37.25%');
+    await i18n.changeLanguage('en');
+    expect(menubar.tray.setToolTip).toHaveBeenLastCalledWith('Gitify\nDownloading update: 37.25%');
+    emit('update-downloaded', { version: '1.2.3' });
+    expect(notificationOptions).toHaveBeenLastCalledWith({
+      title: 'A new update is ready to install',
+      body: 'Gitify 1.2.3 has been downloaded and will be installed on exit.',
+    });
+    expect(dialog.showMessageBox).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        buttons: ['Restart', 'Later', 'Release notes'],
+        title: 'Application Update',
+      }),
+    );
+    await i18n.changeLanguage('en');
+    emit('update-downloaded', { version: '1.2.3' });
+    expect(dialog.showMessageBox).toHaveBeenCalledTimes(1);
+    expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
+  });
+
+  it('does not restore disabled update progress after changing language', async () => {
+    await updater.setAutomaticUpdatesEnabled(true);
+    emit('download-progress', { percent: 37.25 });
+    await updater.setAutomaticUpdatesEnabled(false);
+    await i18n.changeLanguage('en');
+    emit('download-progress', { percent: 50 });
+    emit('update-downloaded', { version: '1.2.3' });
+    expect(menubar.tray.setToolTip).toHaveBeenLastCalledWith('Gitify');
+    expect(notify).not.toHaveBeenCalled();
+    expect(dialog.showMessageBox).not.toHaveBeenCalled();
   });
 
   afterEach(async () => {
