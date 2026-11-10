@@ -7,8 +7,8 @@
  * the project:
  *
  *   - `dependencies` in package.json are the runtime closure roots
- *   - `devDependencies` must never ship (renderer-only packages Vite bundles,
- *     build tooling, and type packages)
+ *   - `devDependencies` that are not part of the production graph must never
+ *     ship (renderer-only packages Vite bundles, build tooling, type packages)
  *   - every external `require` in the built main bundle must be a runtime
  *     dependency, and must be present in `app.asar`
  *
@@ -22,6 +22,7 @@
  * With no argument it auto-detects the first app.asar under dist/.
  */
 
+const { execSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 const { builtinModules, createRequire } = require('node:module');
@@ -33,10 +34,52 @@ const packageJson = require(path.join(projectRoot, 'package.json'));
 const REQUIRED_PACKAGES = Object.keys(packageJson.dependencies ?? {});
 
 /**
- * Declared dev-only packages must never ship. This covers renderer-only
- * packages, build tooling and type packages without a second list to maintain.
+ * Every package reachable from `dependencies`, including transitives.
+ *
+ * A direct devDependency can also be a production transitive: `semver`, for
+ * example, is declared for build scripts but is also pulled in by
+ * electron-updater. Subtracting this set keeps the check focused on packages
+ * that exist only for development.
+ *
+ * @returns {Set<string>}
  */
-const FORBIDDEN_PACKAGES = new Set(Object.keys(packageJson.devDependencies ?? {}));
+function productionClosure() {
+  let output;
+
+  try {
+    output = execSync('pnpm list --prod --depth Infinity --json', {
+      cwd: projectRoot,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+  } catch (error) {
+    throw new Error(`Could not read the production dependency closure: ${error.message}`);
+  }
+
+  const [project] = JSON.parse(output);
+  const names = new Set();
+
+  const walk = (dependencies) => {
+    for (const [name, dependency] of Object.entries(dependencies ?? {})) {
+      names.add(name);
+      walk(dependency?.dependencies);
+    }
+  };
+
+  walk(project?.dependencies);
+  return names;
+}
+
+const PRODUCTION_PACKAGES = productionClosure();
+
+/**
+ * Declared dev-only packages must never ship. Packages that are also production
+ * transitives are permitted, because electron-builder packages them for real
+ * runtime code.
+ */
+const FORBIDDEN_PACKAGES = new Set(
+  Object.keys(packageJson.devDependencies ?? {}).filter((name) => !PRODUCTION_PACKAGES.has(name)),
+);
 
 /** Provided by the Electron runtime, not installed into node_modules. */
 const RUNTIME_PROVIDED = new Set(['electron']);
