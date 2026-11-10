@@ -135,7 +135,7 @@
     "husky": "9.1.7",
     "i18next": "26.7.2",
     "i18next-browser-languagedetector": "8.3.0",
-    "i18next-cli": "1.85.1",
+    "i18next-cli": "1.86.0",
     "playwright": "1.65.0",
     "react": "19.3.1",
     "react-devtools": "8.0.0",
