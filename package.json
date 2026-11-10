@@ -151,7 +151,7 @@
     "vite-plugin-electron": "1.2.0",
     "vite-plus": "catalog:",
     "vitest": "catalog:",
-    "zustand": "5.0.16"
+    "zustand": "5.1.0"
   },
   "devEngines": {
     "packageManager": {
