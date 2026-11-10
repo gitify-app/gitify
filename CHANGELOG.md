@@ -1,5 +1,36 @@
 # Changelog
 
+## [8.1.0](https://github.com/gitify-app/gitify/compare/v8.0.0...v8.1.0) (2026-11-10)
+
+
+### 🚀 Features
+
+* **notifications:** animate repository header out with its last row ([#3645](https://github.com/gitify-app/gitify/issues/3645)) ([221c833](https://github.com/gitify-app/gitify/commit/221c833f4e166569781a92f0fb414883d96cf037))
+* show the existing window when Gitify is launched again ([#3646](https://github.com/gitify-app/gitify/issues/3646)) ([0ffddd2](https://github.com/gitify-app/gitify/commit/0ffddd2da5571669503e556cc732d8b4d4c0d9d0))
+
+
+### 🐛 Bug Fixes
+
+* **a11y:** reveal notification actions on keyboard focus ([#3647](https://github.com/gitify-app/gitify/issues/3647)) ([f2706e2](https://github.com/gitify-app/gitify/commit/f2706e245ec1f16b0c643b4e2a824e13812125aa))
+* prevent metric pill layout render loops ([#3632](https://github.com/gitify-app/gitify/issues/3632)) ([4df2964](https://github.com/gitify-app/gitify/commit/4df29646ebef9f304e3b19c53690b0af8c90e6e2))
+* show the existing window when Gitify is launched again ([0ffddd2](https://github.com/gitify-app/gitify/commit/0ffddd2da5571669503e556cc732d8b4d4c0d9d0))
+* **ui:** only highlight header chevron when hovering it or empty row space ([#3633](https://github.com/gitify-app/gitify/issues/3633)) ([bab52b3](https://github.com/gitify-app/gitify/commit/bab52b38a597102a679d4e5b99c3d4b19a4e4ed2))
+
+
+### 🤖 Continuous Integration
+
+* allow devDependencies that are production transitives ([#3671](https://github.com/gitify-app/gitify/issues/3671)) ([370d19d](https://github.com/gitify-app/gitify/commit/370d19d232ae1673649ce2880a31421511549bbe))
+* derive the packaged dependency check from the project ([#3665](https://github.com/gitify-app/gitify/issues/3665)) ([cde7807](https://github.com/gitify-app/gitify/commit/cde7807c5375142df2512fd9c32553f5e0c956e8))
+* verify packaging produced every configured artifact ([#3663](https://github.com/gitify-app/gitify/issues/3663)) ([cbfb94f](https://github.com/gitify-app/gitify/commit/cbfb94fc00b35b2473826b00a49ab27542f443be))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @primer/react to v38.44.0 ([#3629](https://github.com/gitify-app/gitify/issues/3629)) ([3558998](https://github.com/gitify-app/gitify/commit/35589983f128f327c00b2add9325b483a3da367d))
+* **deps-core:** update @primer/react to v38.45.0 ([#3667](https://github.com/gitify-app/gitify/issues/3667)) ([1f56d54](https://github.com/gitify-app/gitify/commit/1f56d546138dd748635ee68ec0aa2118cc168184))
+* **deps-core:** update electron to v45.2.3 ([#3627](https://github.com/gitify-app/gitify/issues/3627)) ([f0a6944](https://github.com/gitify-app/gitify/commit/f0a6944e15c90872bc88cc2b6c2debfc7abf982d))
+* **deps-core:** update electron-menubar to v11.1.3 ([#3664](https://github.com/gitify-app/gitify/issues/3664)) ([d8ce040](https://github.com/gitify-app/gitify/commit/d8ce04096647891bcd887db4d6664a8cf854514f))
+
 ## [8.0.0](https://github.com/gitify-app/gitify/compare/v7.10.0...v8.0.0) (2026-11-04)
 
 
