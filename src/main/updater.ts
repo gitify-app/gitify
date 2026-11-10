@@ -6,6 +6,7 @@ import { APPLICATION } from '../shared/constants';
 import { logError, logInfo, toError } from '../shared/logger';
 import { isMacOS } from '../shared/platform';
 
+import { i18n } from './language';
 import type MenuBuilder from './menu';
 
 /**
@@ -124,7 +125,7 @@ export default class AppUpdater {
       // pending version must not re-prompt after the user chose Later. A
       // different version will not match `lastPromptedVersion` and prompts
       // normally. Only a cancelled download clears the guard.
-      this.setTooltipWithStatus('A new update is available');
+      this.setTooltipWithStatus(i18n.t('native:updater.available', 'A new update is available'));
       this.menuBuilder.setUpdateAvailableMenuVisibility(true);
     });
 
@@ -132,7 +133,11 @@ export default class AppUpdater {
       if (!this.enabled) {
         return;
       }
-      this.setTooltipWithStatus(`Downloading update: ${progressObj.percent.toFixed(2)}%`);
+      this.setTooltipWithStatus(
+        i18n.t('native:updater.downloading', 'Downloading update: {{percent}}%', {
+          percent: progressObj.percent.toFixed(2),
+        }),
+      );
     });
 
     autoUpdater.on('update-downloaded', (event) => {
@@ -141,14 +146,18 @@ export default class AppUpdater {
       }
       this.downloaded = true;
       logInfo('auto updater', 'Update downloaded');
-      this.setTooltipWithStatus('A new update is ready to install');
+      this.setTooltipWithStatus(i18n.t('native:updater.ready', 'A new update is ready to install'));
       this.menuBuilder.setUpdateAvailableMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
       // The guard in showUpdateReadyDialog also keeps a re-check of the same version quiet.
       if (this.notificationsEnabled && event.version !== this.lastPromptedVersion) {
         new Notification({
-          title: 'A new update is ready to install',
-          body: `${APPLICATION.NAME} ${event.version} has been downloaded and will be installed on exit.`,
+          title: i18n.t('native:updater.notification_title', 'A new update is ready to install'),
+          body: i18n.t(
+            'native:updater.notification_body',
+            '{{appName}} {{version}} has been downloaded and will be installed on exit.',
+            { appName: APPLICATION.NAME, version: event.version },
+          ),
         }).show();
         this.showUpdateReadyDialog(event);
       }
@@ -319,7 +328,11 @@ export default class AppUpdater {
 
     const hasReleaseInfo = Boolean(event.releaseNotes) || Boolean(event.version);
     const release = event.releaseName ?? event.version;
-    const buttons = ['Restart', 'Later', ...(hasReleaseInfo ? ['Release notes'] : [])];
+    const buttons = [
+      i18n.t('native:updater.restart', 'Restart'),
+      i18n.t('native:updater.later', 'Later'),
+      ...(hasReleaseInfo ? [i18n.t('native:updater.release_notes', 'Release notes')] : []),
+    ];
 
     this.lastPromptedVersion = event.version;
 
@@ -327,9 +340,15 @@ export default class AppUpdater {
       type: 'info',
       buttons,
       cancelId: 1,
-      title: 'Application Update',
-      message: `${APPLICATION.NAME} ${release} has been downloaded`,
-      detail: 'Restart to apply the update. You can also restart later from the tray menu.',
+      title: i18n.t('native:updater.title', 'Application Update'),
+      message: i18n.t('native:updater.downloaded', '{{appName}} {{release}} has been downloaded', {
+        appName: APPLICATION.NAME,
+        release,
+      }),
+      detail: i18n.t(
+        'native:updater.restart_detail',
+        'Restart to apply the update. You can also restart later from the tray menu.',
+      ),
     };
 
     const revision = this.revision;
