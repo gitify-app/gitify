@@ -7,8 +7,9 @@
  * the project:
  *
  *   - `dependencies` in package.json are the runtime closure roots
- *   - `devDependencies` must never ship (renderer-only packages Vite bundles,
- *     build tooling, and type packages)
+ *   - `devDependencies` must not ship unless a runtime package needs them
+ *     transitively (renderer-only packages Vite bundles, build tooling, and
+ *     type packages are dev-only)
  *   - every external `require` in the built main bundle must be a runtime
  *     dependency, and must be present in `app.asar`
  *
@@ -33,8 +34,9 @@ const packageJson = require(path.join(projectRoot, 'package.json'));
 const REQUIRED_PACKAGES = Object.keys(packageJson.dependencies ?? {});
 
 /**
- * Declared dev-only packages must never ship. This covers renderer-only
- * packages, build tooling and type packages without a second list to maintain.
+ * Declared devDependencies must never ship unless they are also reachable from
+ * the runtime closure. This covers renderer-only packages, build tooling and
+ * type packages without a second list to maintain.
  */
 const FORBIDDEN_PACKAGES = new Set(Object.keys(packageJson.devDependencies ?? {}));
 
@@ -176,6 +178,53 @@ function mainProcessExternals() {
   return externals;
 }
 
+/**
+ * Runtime packages reachable from the declared `dependencies` through the
+ * dependency metadata of the packages actually in the archive. A package can be
+ * declared as a devDependency for the renderer and still be a transitive runtime
+ * dependency (for example `semver`, which `electron-updater` requires), so only
+ * packages outside this closure are dev-only.
+ *
+ * @returns {Set<string>}
+ */
+function packagedRuntimeClosure(asar, asarPath, packages) {
+  const closure = new Set();
+  const pending = REQUIRED_PACKAGES.filter((name) => packages.has(name));
+
+  while (pending.length > 0) {
+    const name = pending.pop();
+
+    if (closure.has(name)) {
+      continue;
+    }
+
+    closure.add(name);
+
+    let metadata;
+
+    try {
+      // `extractFile` splits paths on the platform separator, so build the
+      // archive path with `path.join` rather than hard-coding forward slashes.
+      const metadataPath = path.join('node_modules', name, 'package.json');
+
+      metadata = JSON.parse(asar.extractFile(asarPath, metadataPath).toString('utf8'));
+    } catch {
+      continue;
+    }
+
+    for (const dependency of Object.keys({
+      ...metadata.dependencies,
+      ...metadata.optionalDependencies,
+    })) {
+      if (packages.has(dependency) && !closure.has(dependency)) {
+        pending.push(dependency);
+      }
+    }
+  }
+
+  return closure;
+}
+
 function checkPackagedDependencies(asarPath) {
   const asar = loadAsar();
   const entries = asar.listPackage(asarPath).map(normalizeEntry);
@@ -200,8 +249,10 @@ function checkPackagedDependencies(asarPath) {
     }
   }
 
+  const runtimeClosure = packagedRuntimeClosure(asar, asarPath, packages);
+
   for (const name of packages) {
-    if (FORBIDDEN_PACKAGES.has(name)) {
+    if (FORBIDDEN_PACKAGES.has(name) && !runtimeClosure.has(name)) {
       violations.push(`Dev-only package must not ship: ${name}`);
     }
   }
