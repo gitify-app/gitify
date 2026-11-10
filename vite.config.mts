@@ -12,6 +12,7 @@ import electron from 'vite-plugin-electron/simple';
 import type { Logger, Plugin } from 'vite-plus';
 import { createLogger, defineConfig } from 'vite-plus';
 
+import { applyDevElectronBundle } from './scripts/prepare-dev-electron.mjs';
 import { Constants } from './src/renderer/constants.ts';
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url));
@@ -238,6 +239,19 @@ const storeBarrelBoundaryPattern = {
     'Renderer boundary: import the specific store module instead of the `stores` barrel (see ARCHITECTURE.md).',
 };
 
+/**
+ * Prepare the branded macOS Electron bundle once per dev server, before either
+ * Electron entry's `onstart` can spawn Electron (see
+ * scripts/prepare-dev-electron.mjs).
+ */
+const devElectronBundlePlugin = (): Plugin => ({
+  name: 'dev-electron-bundle',
+  apply: 'serve',
+  configureServer() {
+    applyDevElectronBundle();
+  },
+});
+
 export default defineConfig({
   // Keep the dev output to real problems: see `createDevLogger` above.
   customLogger: createDevLogger(),
@@ -279,6 +293,7 @@ export default defineConfig({
     reactDevToolsPlugin(),
     react(),
     tailwindcss(),
+    devElectronBundlePlugin(),
     electron({
       main: {
         entry: fileURLToPath(new URL('src/main/index.ts', import.meta.url)),
@@ -347,6 +362,30 @@ export default defineConfig({
         // Development Keys - See CONTRIBUTING.md
         'process.env.OAUTH_CLIENT_ID': JSON.stringify('Ov23liQIkFs5ehQLNzHF'),
       },
+  // `vp run` accepts a single task, so each group below runs its members as
+  // independent `dependsOn` entries, which start concurrently. The group's own
+  // command is a no-op that runs only after every member succeeds.
+  run: {
+    tasks: {
+      'dev:all': {
+        command: 'node -e ""',
+        cache: false,
+        dependsOn: ['dev:renderer', 'codegen:watch'],
+      },
+      'dev:renderer': { command: 'vp dev', cache: false },
+      'devtools:all': {
+        command: 'node -e ""',
+        cache: false,
+        dependsOn: ['dev:all', 'devtools:react'],
+      },
+      'devtools:react': { command: 'react-devtools', cache: false },
+      'i18n:check:all': {
+        command: 'node -e ""',
+        cache: false,
+        dependsOn: ['i18n:check:sync', 'i18n:check:values', 'i18n:check:defaults'],
+      },
+    },
+  },
   lint: {
     plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import', 'vitest', 'jsdoc'],
     // Enable the type-aware path so `vp check` runs TypeScript type checks

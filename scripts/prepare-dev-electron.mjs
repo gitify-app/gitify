@@ -87,6 +87,36 @@ export function prepareDevElectronBundle() {
 }
 
 /**
+ * Prepare the bundle and point this process's `electron` package at it.
+ *
+ * `electron` resolves its binary path once, when first required, and
+ * preparing the bundle has already required it. Dropping that module from the
+ * require cache makes the next `require('electron')`, such as the one
+ * vite-plugin-electron makes before spawning, read
+ * `ELECTRON_OVERRIDE_DIST_PATH`.
+ *
+ * A dev server restart calls this again in the same process, so the override
+ * from the previous call is cleared first. Otherwise preparation would treat
+ * the prepared copy as its source and delete it before copying.
+ */
+export function applyDevElectronBundle() {
+  if (process.platform !== 'darwin') {
+    return;
+  }
+
+  const require = createRequire(import.meta.url);
+  const electronModule = require.resolve('electron');
+
+  delete process.env.ELECTRON_OVERRIDE_DIST_PATH;
+  delete require.cache[electronModule];
+
+  const overrideDirectory = prepareDevElectronBundle();
+
+  process.env.ELECTRON_OVERRIDE_DIST_PATH = overrideDirectory;
+  delete require.cache[electronModule];
+}
+
+/**
  * Register the prepared bundle with Launch Services.
  *
  * Without this registration the notification daemon cannot identify the
