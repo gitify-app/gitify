@@ -10,7 +10,7 @@
  * Every runtime dependency must be imported by `src/main`, `src/preload`, or
  * `src/shared`. Test files and type declarations do not count.
  *
- * Runs from the main-process Vite build (`pnpm build`, `pnpm dev`).
+ * Runs from the main-process Vite build (`vp run build`, `vp run dev`).
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';

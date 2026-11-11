@@ -12,15 +12,17 @@ We also suggest you read the [Project Philosophy](#project-philosophy) in our do
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
 >
 > ```shell
-> OAUTH_CLIENT_ID="123" pnpm build
+> OAUTH_CLIENT_ID="123" vp run build
 > ```
 
 To get started:
 
+Install the [Vite+ CLI](https://viteplus.dev/guide/global-cli) (`vp`). It runs every project command and downloads the pnpm version pinned in `package.json`.
+
 Clone the repository and install dependencies:
 
 ```shell
-pnpm install
+vp install
 ```
 
 Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token. This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
@@ -32,12 +34,12 @@ GITHUB_TOKEN=<some personal access token>
 Start development mode (includes GraphQL codegen and hot module reload):
 
 ```shell
-pnpm dev
+vp run dev
 ```
 
-Development builds keep their settings, cache, and logs in a separate user data directory, so you can run `pnpm dev` while an installed Gitify is running. Sign-in and settings are therefore separate from the installed app.
+Development builds keep their settings, cache, and logs in a separate user data directory, so you can run `vp run dev` while an installed Gitify is running. Sign-in and settings are therefore separate from the installed app.
 
-On macOS, `pnpm dev` runs from a Gitify-branded copy of the Electron bundle in `~/Library/Caches/gitify-dev`. This keeps native notification activation inside the running development app instead of launching the generic `Electron.app`. The copy lives outside the checkout because Launch Services ignores applications under the temporary directory, and macOS will not deliver notifications from an application the notification daemon cannot resolve. The bundle is recreated when the Electron version or signing identity changes, and it is registered with Launch Services on every launch. It is signed with a Developer ID or Apple Development identity when available, falling back to ad-hoc signing. Set `GITIFY_DEV_SIGN_IDENTITY` to choose a specific identity.
+On macOS, `vp run dev` runs from a Gitify-branded copy of the Electron bundle in `~/Library/Caches/gitify-dev`. This keeps native notification activation inside the running development app instead of launching the generic `Electron.app`. The copy lives outside the checkout because Launch Services ignores applications under the temporary directory, and macOS will not deliver notifications from an application the notification daemon cannot resolve. The bundle is recreated when the Electron version or signing identity changes, and it is registered with Launch Services on every launch. It is signed with a Developer ID or Apple Development identity when available, falling back to ad-hoc signing. Set `GITIFY_DEV_SIGN_IDENTITY` to choose a specific identity.
 
 ### 🛠️ Tests
 
@@ -45,24 +47,24 @@ Tooling is unified through [Vite+][vite-plus-website], which bundles the linter 
 
 ```shell
 # Run lint, format, and type checks
-pnpm check
+vp run check
 
 # CI lint with GitHub annotations
-pnpm lint:ci
+vp run lint:ci
 
 # Auto-fix formatting and lint issues
-pnpm check:fix
+vp run check:fix
 
 # Run unit tests with coverage
-pnpm test
+vp run test
 
 # Update vitest snapshots
-pnpm test -u
+vp run test -u
 ```
 
 #### 🧪 Visual regression tests
 
-`pnpm test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
+`vp run test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
 spacing, theme changes) are covered separately by a browser-mode project that
 screenshots every route in Classic light, Classic dark, Glass light, and Glass
 dark, with accessibility and high-contrast variants on the densest routes. It
@@ -79,10 +81,10 @@ browsers locally.
 
 ```shell
 # Verify against the committed baselines
-pnpm test:visual
+vp run test:visual
 
 # Regenerate them after an intentional UI change
-pnpm test:visual:update
+vp run test:visual:update
 ```
 
 Both need Docker on an arm64 or amd64 host. The container runs in the host's
@@ -107,7 +109,7 @@ Operating-system notifications are created in the main process. A single unread 
 
 A single notification uses the repository as its title, `Reason · @actor` as context, and the formatted display title as its body. macOS shows the context as the subtitle; Windows and Linux fold it into the body above the subject.
 
-- **macOS**: native notifications require a code-signed app. Electron ships ad-hoc linker-signed, which macOS rejects for `UNUserNotificationCenter`, so `pnpm dev` re-signs the development Electron bundle automatically. Ad-hoc signing needs no certificate; set `GITIFY_DEV_SIGN_IDENTITY` to use a Developer ID or Apple Development identity. The same step sets `NSUserNotificationAlertStyle: alert`; the packaged app declares it in its `Info.plist`.
+- **macOS**: native notifications require a code-signed app. Electron ships ad-hoc linker-signed, which macOS rejects for `UNUserNotificationCenter`, so `vp run dev` re-signs the development Electron bundle automatically. Ad-hoc signing needs no certificate; set `GITIFY_DEV_SIGN_IDENTITY` to use a Developer ID or Apple Development identity. The same step sets `NSUserNotificationAlertStyle: alert`; the packaged app declares it in its `Info.plist`.
 - **Windows**: live interactions use the notification instance events.
 - **Linux**: the action button appears only when the desktop notification server advertises the `actions` capability.
 
@@ -130,7 +132,7 @@ re-introduce dev dependencies. After packaging, run
 contains the runtime packages and none of the renderer-only packages or the pnpm
 virtual store.
 
-`pnpm build` also enforces this: the main-process external list is derived from
+`vp run build` also enforces this: the main-process external list is derived from
 `dependencies`, and the build fails when a runtime dependency is never imported
 by the main or preload process.
 
@@ -152,23 +154,23 @@ Gitify's interface is translated through [i18next][i18next-website]. The app shi
   ```
 
 - After changing a string, sync the locale files:
-  - `pnpm i18n:extract` — regenerate/update locale files from the `t()` calls in the source
-  - `pnpm i18n:check` — verify the keys are in sync with the code, every `t()`/`<Trans>` has an English default, and `en.json` has no empty or key-path values (also runs in CI)
-  - `pnpm i18n:lint` — flag hardcoded or untranslated UI strings
-  - `pnpm i18n:status` — locale health summary
+  - `vp run i18n:extract` — regenerate/update locale files from the `t()` calls in the source
+  - `vp run i18n:check` — verify the keys are in sync with the code, every `t()`/`<Trans>` has an English default, and `en.json` has no empty or key-path values (also runs in CI)
+  - `vp run i18n:lint` — flag hardcoded or untranslated UI strings
+  - `vp run i18n:status` — locale health summary
 - Don't run `i18next-cli extract --trust-derived`: it replaces real English text with key names.
 - To add a language:
   1. Create `src/renderer/i18n/locales/<lang>.json`, copying `en.json` as a starting point.
   2. Register it in `SUPPORTED_LANGUAGES` in `src/renderer/i18n/types.ts` (this also surfaces it in the Appearance → Language selector).
   3. Import it in the `locales` map in `src/renderer/i18n/loader.ts`.
   4. Translate the keys. The [i18n Ally][i18n-ally-website] VSCode extension is handy for working through JSON keys.
-  5. Run `pnpm i18n:check` and `pnpm test`.
+  5. Run `vp run i18n:check` and `vp run test`.
 - Translation keys use `snake_case`, grouped by feature (e.g. `settings.appearance.language`). Prefer whole-sentence keys with `{{placeholder}}` interpolation over string concatenation, and leave brand names (GitHub, GitLab, …) untranslated.
 - When a sentence contains markup (bold, links, tooltips), keep it as one `<Trans>` string instead of splitting it into several `t()` fragments, so translators can reorder the words. A component that requires a single child (e.g. Primer's `Tooltip`) needs a small wrapper that accepts `children`.
 
 ### 🎨 Code Style & Conventions
 
-- Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
+- Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `vp run check` before submitting a PR.
 - Renderer React components are defined as function declarations. `React.FC` is reserved for typing a component value (a prop or return type), never a component definition; `react/function-component-definition` enforces this.
 - Follow existing file and folder naming conventions.
 - See [ARCHITECTURE.md](./ARCHITECTURE.md) for the renderer's module layering, state ownership, and side-effect conventions.
@@ -208,7 +210,7 @@ proposals and new changes follow this section.
  */
 ```
 
-TSDoc syntax is validated by the shared lint configuration through `pnpm check`.
+TSDoc syntax is validated by the shared lint configuration through `vp run check`.
 
 ### 🐛 How to Report Bugs or Request Features
 

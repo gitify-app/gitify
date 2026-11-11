@@ -7,7 +7,7 @@
  * dotted key to English users, and a key-path value means `--trust-derived`
  * (or a missing default) baked the key in as the translation.
  *
- * Runs as part of `pnpm i18n:check`. Optionally accepts a locale path
+ * Runs as part of `vp run i18n:check`. Optionally accepts a locale path
  * (defaults to src/renderer/i18n/locales/en.json).
  */
 import { readFile } from 'node:fs/promises';

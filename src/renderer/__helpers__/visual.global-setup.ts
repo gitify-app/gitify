@@ -25,7 +25,7 @@ export default function setup(): void {
       'the current working tree and then pass against them, hiding any real',
       'regression.',
       '',
-      'Run `pnpm test:visual`, which executes the suite inside the pinned',
+      'Run `vp run test:visual`, which executes the suite inside the pinned',
       'Playwright container (requires Docker on an arm64 or amd64 host). Otherwise push',
       'the branch and let the Visual Regression CI job report the diff.',
     ].join('\n'),
