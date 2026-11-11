@@ -85,9 +85,12 @@ pnpm test:visual
 pnpm test:visual:update
 ```
 
-Both need Docker on an arm64 host, because Chromium crashes under amd64
-emulation on Apple Silicon. On any other machine, push the branch and read the
-diff from the Visual Regression job's `visual-regression-diffs` artifact.
+Both need Docker on an arm64 or amd64 host. The container runs in the host's
+own architecture, because Chromium crashes under amd64 emulation on Apple
+Silicon. CI renders on arm64; amd64 renders differ only in antialiasing, within
+the comparison's tolerance, so baselines regenerated on either pass in CI.
+Without Docker, push the branch and read the diff from the Visual Regression
+job's `visual-regression-diffs` artifact.
 
 Do not invoke the `browser [visual]` project through `vitest` directly. Vitest
 namespaces baselines per platform and creates missing ones automatically, so a

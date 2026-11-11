@@ -132,8 +132,9 @@ export default defineConfig({
                   // Per-pixel colour tolerance, to absorb antialiasing noise.
                   threshold: 0.2,
                   // But zero tolerance for the *number* of differing pixels.
-                  // Rendering is deterministic here (fixed container, arch,
-                  // fonts and clock), so any drift is a real change. A ratio of
+                  // Rendering is deterministic here (fixed container, fonts and
+                  // clock; arm64 and amd64 differ only in antialiasing, which
+                  // pixelmatch ignores), so any drift is a real change. A ratio of
                   // even 0.01 would permit ~2000 pixels on this 500x400
                   // viewport — larger than a whole icon, which is enough to
                   // hide a completely swapped glyph.

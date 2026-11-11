@@ -38,8 +38,8 @@ jobs:
 
   visual-regression:
     name: Visual Regression
-    # arm64 to match `scripts/visual.sh`, which cannot generate amd64 baselines
-    # because Chromium segfaults under emulation on Apple Silicon.
+    # arm64, where the baselines were first generated. `scripts/visual.sh` also
+    # runs on amd64 hosts, whose renders differ only within the tolerance.
     runs-on: ubuntu-26.04-arm
     permissions:
       contents: read
