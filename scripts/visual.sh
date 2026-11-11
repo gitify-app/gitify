@@ -79,9 +79,11 @@ fi
 # so the container gets its own install in a named volume per architecture. It
 # persists between runs, making everything after the first invocation fast.
 #
-# On Linux the container writes to the bind mount as root. Creating the mount
-# point here and returning new files to the caller on exit keeps the checkout
-# writable for later host commands; Docker Desktop already maps ownership.
+# Under rootful Docker on Linux the container writes to the bind mount as root.
+# Creating the mount point here, and on exit giving root-owned files to the
+# mount's owner as the container sees it, keeps the checkout writable for later
+# host commands. Rootless Docker and Podman map container root to the caller,
+# so the mount appears root-owned there and the cleanup does nothing.
 mkdir -p "${REPO_ROOT}/node_modules"
 docker run --rm "${TTY_FLAGS[@]+"${TTY_FLAGS[@]}"}" \
   --platform "linux/${ARCH}" \
@@ -91,12 +93,13 @@ docker run --rm "${TTY_FLAGS[@]+"${TTY_FLAGS[@]}"}" \
   --workdir /gitify \
   --env HUSKY=0 \
   --env GITIFY_VISUAL_IN_CONTAINER=1 \
-  --env HOST_UID="$(id -u)" \
-  --env HOST_GID="$(id -g)" \
   "${IMAGE}" \
   bash -c "
     set -euo pipefail
-    trap 'find /gitify/src /gitify/.vitest-attachments -user 0 -exec chown \"\${HOST_UID}:\${HOST_GID}\" {} + 2>/dev/null || true' EXIT
+    owner=\"\$(stat -c %u:%g /gitify)\"
+    if [ \"\${owner}\" != 0:0 ]; then
+      trap 'find /gitify/src /gitify/.vitest-attachments -user 0 -exec chown \"\${owner}\" {} + 2>/dev/null || true' EXIT
+    fi
     npm install --global --silent pnpm@${PNPM_VERSION}
     pnpm install --frozen-lockfile
     scripts/visual.sh ${UPDATE} ${FILTER}
