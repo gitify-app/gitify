@@ -460,10 +460,22 @@ export function SystemSettings() {
             )}
           </Text>
           <Button
-            onClick={() => openExternalLink(toLink('https://github.com/gitify-app/gnome#install'))}
+            onClick={() => openExternalLink(toLink('https://github.com/gitify-app/gnome#-install'))}
             size="small"
           >
             {t('settings.system.gnome_extension_button', 'GNOME extension installation')}
+          </Button>
+          <Text className="pt-2 text-sm text-gitify-font">
+            {t(
+              'settings.system.kde_script_help',
+              'On KDE Plasma Wayland, install the Gitify KWin script to open the window next to its tray icon. Get it from the KDE Store or KWin Scripts in System Settings.',
+            )}
+          </Text>
+          <Button
+            onClick={() => openExternalLink(toLink('https://github.com/gitify-app/kde#-install'))}
+            size="small"
+          >
+            {t('settings.system.kde_script_button', 'KDE Plasma script installation')}
           </Button>
         </Stack>
       )}
