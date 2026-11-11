@@ -32,7 +32,8 @@ const FOCUS_BACKGROUNDS = {
  * Action cluster revealed on row/header hover or keyboard focus.
  *
  * Spans the full height of its host (`inset-y-0`) and carries its own backdrop
- * (the `bgColor` fill plus the Glass treatment in `App.css`). In the
+ * (the `bgColor` fill). Glass drops that fill and instead clips the host's
+ * content at the rail's leading edge (see `App.css`). In the
  * notification row it spans the full row height, and the footer reserves its
  * width so pills wrap clear of the buttons. That reserved right-hand lane also
  * gives the pointer a pill-free path when sweeping down between rows to hit the

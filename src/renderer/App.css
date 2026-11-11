@@ -276,37 +276,44 @@
     border-color: rgb(var(--label-r) var(--label-g) var(--label-b) / 0.4);
   }
 
-  /* Row/header action cluster: a frosted, hairlined surface (the macOS tooltip
-   * material) so the row content never shows through the controls. This replaces
-   * the old bare-icon treatment, which relied on fading the row content out from
-   * beneath the buttons. Keep the same surface during hover and keyboard focus. */
-  .gitify-translucent .gitify-hover-actions,
-  .gitify-translucent .group:hover .gitify-hover-actions,
-  .gitify-translucent .group:focus-within .gitify-hover-actions {
-    background-color: light-dark(
-      color-mix(in oklab, var(--bgColor-default), transparent 8%),
-      color-mix(in oklab, var(--bgColor-neutral-emphasis), transparent 30%)
-    );
-    -webkit-backdrop-filter: blur(14px) saturate(1.5);
-    backdrop-filter: blur(14px) saturate(1.5);
-    box-shadow: inset 0 0 0 1px var(--gitify-glass-border);
+  /* Row/header action rail: no fill of its own, so the row's surface (its hover
+   * wash over the native material or the app background) shows through and the
+   * rail reads as part of the row. A fill cannot do this on every platform: CSS
+   * cannot paint the macOS vibrancy material, so any fill there reads as a
+   * separate slab. Instead, the row content is clipped at the rail's leading
+   * edge while the rail is shown, so nothing shows through the buttons. */
+  .gitify-translucent .gitify-hover-actions {
+    background: transparent;
   }
 
-  /* Without native vibrancy the window is opaque and the tooltip material reads
-   * as a separate slab. Paint what the hovered row shows instead (the app
-   * background under the row's hover wash) so the rail blends into the row
-   * while still hiding the content beneath it. */
-  .gitify-translucent.gitify-linux .gitify-hover-actions,
-  .gitify-translucent.gitify-linux .group:hover .gitify-hover-actions,
-  .gitify-translucent.gitify-linux .group:focus-within .gitify-hover-actions {
-    background:
-      linear-gradient(var(--gitify-glass-control-rest), var(--gitify-glass-control-rest)),
-      var(--gitify-background);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow: none;
-    border-start-end-radius: inherit;
-    border-end-end-radius: inherit;
+  /* The rail is pinned to the row's padding edge with the same `pr-1` as the
+   * row, so its leading edge sits one small IconButton (1.75rem) per rendered
+   * button in from the row's content edge. Hidden (disabled) buttons render
+   * nothing, so count the children; a rail can be empty. */
+  .gitify-translucent .group:has(> .gitify-hover-actions) {
+    container-type: inline-size;
+    --gitify-rail-inset: 0rem;
+  }
+
+  .gitify-translucent .group:has(> .gitify-hover-actions > :nth-child(1)) {
+    --gitify-rail-inset: 1.75rem;
+  }
+
+  .gitify-translucent .group:has(> .gitify-hover-actions > :nth-child(2)) {
+    --gitify-rail-inset: 3.5rem;
+  }
+
+  .gitify-translucent .group:has(> .gitify-hover-actions > :nth-child(3)) {
+    --gitify-rail-inset: 5.25rem;
+  }
+
+  /* Each sibling of the rail starts at the row's content edge, so `100cqw` (the
+   * row's content width) locates the rail in the sibling's own box. The other
+   * sides extend past the box so focus rings are not clipped. */
+  .gitify-translucent
+    .group:is(:hover, :focus-within):has(> .gitify-hover-actions)
+    > :not(.gitify-hover-actions) {
+    clip-path: inset(-0.5rem calc(100% - 100cqw + var(--gitify-rail-inset)) -0.5rem -0.5rem);
   }
 
   /* Hover tooltips float as frosted glass with a hairline (the macOS tooltip
@@ -386,9 +393,6 @@
   .gitify-translucent *::-webkit-scrollbar-thumb:hover {
     background-color: color-mix(in oklab, var(--fgColor-muted), transparent 35%);
   }
-
-  /* The hover action cluster now carries its own frosted backdrop (above), so
-   * the row content is no longer faded out from beneath the buttons. */
 
   /* Form controls (Select / TextInput) read as glass instead of Primer's solid
    * field: a faint translucent fill, borderless at rest (macOS controls carry
