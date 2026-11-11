@@ -1,116 +1,34 @@
 # Gitify Development Instructions
 
-Gitify is a multi-forge notification client — an Electron desktop app that surfaces GitHub, Gitea, and Bitbucket Cloud notifications in the system tray. Built with React, TypeScript, Vite, and pnpm.
+Gitify is an Electron menubar app that shows notifications from GitHub, Gitea, Bitbucket Cloud, and GitLab. Read [ARCHITECTURE.md](../ARCHITECTURE.md) for where code belongs and [CONTRIBUTING.md](../CONTRIBUTING.md) for the full development guide.
 
-**ALWAYS follow these instructions first and only fallback to additional search and context gathering if the information in the instructions is incomplete or found to be in error.**
+## Setup
 
-## Prerequisites and Setup
+Install the [Vite+ CLI](https://viteplus.dev/guide/global-cli) (`vp`), then run `vp install`. It downloads the pnpm version pinned in `package.json`.
 
-- **Node.js**: `>=24` (`.nvmrc` pins `24.18.0`). Use `nvm use` to activate the right version.
-- **Install the Vite+ CLI globally**: follow https://viteplus.dev/guide/global-cli. The `vp` CLI runs every project command and downloads the pnpm version pinned in `package.json`.
-- **Bootstrap the repository**: `vp install` — takes up to a minute on a clean install. NEVER CANCEL. Set timeout to 5+ minutes.
+## Commands
 
-## Key Commands
+| Command             | What it does                                             |
+| ------------------- | -------------------------------------------------------- |
+| `vp run dev`        | Dev server, GraphQL codegen watcher, and Electron        |
+| `vp run build`      | Production build into `build/`                           |
+| `vp run check`      | Format, lint, and type checks                            |
+| `vp run check:fix`  | Same checks, fixing what can be fixed automatically      |
+| `vp run test`       | Vitest suite with coverage; add `-u` to update snapshots |
+| `vp run i18n:check` | Locale keys and English defaults are in sync             |
 
-| Command                | What it does                                                                | Timing        |
-| ---------------------- | --------------------------------------------------------------------------- | ------------- |
-| `vp run dev`           | Vite dev server + GraphQL codegen watch (main development loop)             | ~10s to start |
-| `vp run build`         | Production build for all Electron targets (main, preload, renderer, shared) | ~30s clean    |
-| `vp run test`          | Run full Vitest suite with coverage                                         | ~15s          |
-| `vp run check`         | oxlint + oxfmt + type-check (unified via vite-plus)                         | <5s           |
-| `vp run check:fix`     | Same as check but auto-fixes formatting and lint                            | <5s           |
-| `vp exec tsc --noEmit` | TypeScript-only type-check                                                  | ~5s           |
+Before finishing a change, run `vp run check` and `vp run test`, and `vp run i18n:check` when you touch user-visible strings.
 
-**NEVER CANCEL long-running commands** (`vp install`, `vp run build`). Set terminal timeouts to 5+ minutes.
+## Gotchas
 
-## Development Workflow
+- Electron cannot start in headless or container environments, so `vp run dev` fails there. Validate with checks and tests instead of fixing the launch.
+- GraphQL types are generated into `src/renderer/utils/forges/*/graphql/generated/` and committed. Regenerating the GitHub schema needs a `GITHUB_TOKEN` in `.env` (see `.env.template`).
 
-- **Day-to-day development**: `vp run dev` — starts both the Vite dev server and GraphQL codegen watcher concurrently. Leave running while developing.
-- **Full build**: `vp run build` — builds all targets via `vp build`. Output goes to `build/` (subdirectories: `main/`, `preload/`, `renderer/`, `shared/`).
-- **Run the Electron app**: `vp run start` — runs `vp run build` then `vp run dev`. Will fail in headless/container environments due to Electron sandbox restrictions (this is expected and normal).
-
-## Validation
-
-After making changes, validate in this order:
-
-1. **Type-check**: `vp exec tsc --noEmit` — must complete with no errors
-2. **Lint + format**: `vp run check` — warnings are acceptable, errors are not
-3. **Tests**: `vp run test` — focus on no NEW failures; existing snapshots may differ on timezone-mismatched machines
-4. **Build**: `vp run build` — look for `✓ built in [time]` for each target (main, preload, renderer, shared)
-
-**Snapshot test failures**: Run `vp run test -u` to regenerate after legitimate UI changes.
-
-**Pre-commit**: Husky runs `vp staged` automatically on `git commit`. Manual equivalent: `vp run check && vp run test`.
-
-## File Map
-
-### Source
-
-- `src/main/` — Electron main process (Node.js)
-- `src/preload/` — Electron preload scripts
-- `src/renderer/` — React UI (the visible app)
-- `src/shared/` — Code shared across all processes
-
-### Key renderer paths
-
-- `src/renderer/utils/forges/` — Per-forge adapters (github/, gitea/, bitbucket/) and registry
-- `src/renderer/utils/auth/` — Authentication utilities
-- `src/renderer/hooks/useNotifications.ts` — Core notification polling logic
-- `src/renderer/components/` — UI components
-- `src/renderer/routes/` — Page-level route components
-- `src/renderer/stores/` — Zustand stores
-
-### Configuration
-
-- `vite.config.mts` — Primary build config; also hosts `lint`, `fmt`, and `staged` blocks used by `vp run check` and Husky
-- `vitest.config.mts` — Test configuration (Vitest projects: happy-dom for renderer/preload, node for main/shared)
-- `tsconfig.json` — TypeScript configuration
-- `tailwind.config.mts` — Tailwind CSS configuration
-- `package.json` — Scripts and dependency versions
-
-### Assets
-
-- `assets/` — Icons, sounds, and static resources
-
-## Local Packaging
-
-Requires a prior `vp run build` and platform-specific tooling:
-
-- **macOS**: `vp run package:macos --publish=never`
-- **Windows**: `vp run package:win --publish=never`
-- **Linux**: `vp run package:linux --publish=never`
-
-## Constraints and Gotchas
-
-- **Electron won't start in CI/containers**: Sandbox restrictions make `vp run start` / `vp run dev` fail headlessly. This is expected — test logic; don't try to fix the launch.
-- **Node version is strict**: `>=24` required. Check `.nvmrc` and run `nvm use` if commands behave oddly.
-- **Snapshot drift on non-UTC machines**: Some snapshot tests encode relative dates. Tests may fail locally if your timezone differs from UTC. The test setup stubs `TZ=UTC` via `vi.stubEnv`.
-- **Lint warnings are OK**: The codebase has pre-existing lint warnings. Only new errors block CI.
-- **GraphQL codegen**: Running `vp run dev` auto-watches for schema changes. If you edit `.graphql` files manually, re-run `vp run codegen` to regenerate `graphql/generated/graphql.ts`.
-
-## Development Philosophy
+## Project Philosophy
 
 This is a notification _viewer_, not a full forge client. Keep changes:
 
-- **Focused** on the notification surface — don't expand scope into full forge feature parity
-- **Forge-agnostic** at the orchestration layer — new forge behaviour belongs in the forge adapter (`src/renderer/utils/forges/<forge>/adapter.ts`), not in shared hooks or components
-- **Minimal** — avoid adding complexity for edge cases
-- **Cross-platform** (macOS, Windows, Linux)
-
-## Technology Stack
-
-- **Electron 43+** — desktop app host
-- **React 19+** — UI
-- **TypeScript 5+** — language
-- **pnpm 12** — package manager, run through `vp install`
-- **Vite + vite-plus** — unified build, dev, lint (`oxlint`), format (`oxfmt`), and test toolchain. The `vp` CLI drives all tooling.
-- **Vitest** — test runner (via `vp test`); `@testing-library/jest-dom` provides DOM matchers
-- **Tailwind CSS v4** — styling
-- **Zustand** — client state management
-- **TanStack Query** — server state / notification fetching
-- **electron-menubar** — system tray integration
-- **electron-updater** — auto-update
-- **@primer/react** — GitHub's component library (UI primitives)
-- **@primer/octicons-react** — icon library
-- **octokit** — GitHub API HTTP client (GitHub forge only)
-- **date-fns** — date utilities
+- **Focused** on the notification surface. Don't expand scope into full forge feature parity.
+- **Forge-agnostic** at the orchestration layer. New forge behaviour belongs in the forge adapter (`src/renderer/utils/forges/<forge>/adapter.ts`), not in shared hooks or components.
+- **Minimal**. Avoid adding complexity for edge cases.
+- **Cross-platform** (macOS, Windows, Linux).
