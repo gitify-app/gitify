@@ -58,7 +58,7 @@
     "codegen:watch": "graphql-codegen --config codegen.ts --watch",
     "dev": "vp run --log labeled dev:all",
     "devtools": "vp run --log labeled devtools:all",
-    "start": "pnpm build && pnpm dev",
+    "start": "vp run build && vp run --log labeled dev",
     "package:linux": "electron-builder --linux",
     "package:macos": "electron-builder --mac",
     "package:win": "electron-builder --win",
