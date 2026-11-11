@@ -5,6 +5,7 @@ import { menubar } from 'electron-menubar';
 import { logError, toError } from '../shared/logger';
 
 import { Paths, WindowConfig } from './config';
+import { installMainDiagnostics } from './diagnostics';
 import {
   registerAppHandlers,
   registerGitHubCliHandlers,
@@ -39,6 +40,8 @@ log.initialize();
 if (!app.isPackaged) {
   log.transports.file.fileName = 'main.dev.log';
 }
+
+installMainDiagnostics();
 
 const mb = menubar({
   icon: getIdleTrayIcon('auto'),
