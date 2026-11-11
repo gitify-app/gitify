@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Prepare a Gitify-branded development Electron bundle.
  *
@@ -13,7 +12,7 @@
  * checkout also keeps one stable bundle across worktrees instead of a new
  * identity for every path.
  *
- * Returns the directory to use with `ELECTRON_OVERRIDE_DIST_PATH`.
+ * The Vite dev server calls `applyDevElectronBundle()` before starting Electron.
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -30,8 +29,8 @@ const MARKER_VERSION = 1;
 const LSREGISTER =
   '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister';
 
-export const DEV_BUNDLE_IDENTIFIER = 'com.electron.gitify.dev';
-export const DEV_BUNDLE_NAME = 'Gitify Dev';
+const DEV_BUNDLE_IDENTIFIER = 'com.electron.gitify.dev';
+const DEV_BUNDLE_NAME = 'Gitify Dev';
 
 /**
  * Prepare and return the override directory, or undefined when the current
@@ -39,7 +38,7 @@ export const DEV_BUNDLE_NAME = 'Gitify Dev';
  *
  * @returns {string | undefined}
  */
-export function prepareDevElectronBundle() {
+function prepareDevElectronBundle() {
   if (process.platform !== 'darwin') {
     return undefined;
   }
@@ -84,6 +83,36 @@ export function prepareDevElectronBundle() {
   registerBundle(targetApp);
 
   return cacheRoot;
+}
+
+/**
+ * Prepare the bundle and point this process's `electron` package at it.
+ *
+ * `electron` resolves its binary path once, when first required, and
+ * preparing the bundle has already required it. Dropping that module from the
+ * require cache makes the next `require('electron')`, such as the one
+ * vite-plugin-electron makes before spawning, read
+ * `ELECTRON_OVERRIDE_DIST_PATH`.
+ *
+ * A dev server restart calls this again in the same process, so the override
+ * from the previous call is cleared first. Otherwise preparation would treat
+ * the prepared copy as its source and delete it before copying.
+ */
+export function applyDevElectronBundle() {
+  if (process.platform !== 'darwin') {
+    return;
+  }
+
+  const require = createRequire(import.meta.url);
+  const electronModule = require.resolve('electron');
+
+  delete process.env.ELECTRON_OVERRIDE_DIST_PATH;
+  delete require.cache[electronModule];
+
+  const overrideDirectory = prepareDevElectronBundle();
+
+  process.env.ELECTRON_OVERRIDE_DIST_PATH = overrideDirectory;
+  delete require.cache[electronModule];
 }
 
 /**
@@ -195,13 +224,5 @@ function resolveIdentity() {
     );
   } catch {
     return '-';
-  }
-}
-
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const overrideDirectory = prepareDevElectronBundle();
-
-  if (overrideDirectory) {
-    console.log(overrideDirectory);
   }
 }
