@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PaintbrushIcon, SyncIcon, ZoomInIcon, ZoomOutIcon } from '@primer/octicons-react';
@@ -27,6 +28,8 @@ import { SettingsToggle } from './controls/SettingsToggle';
 
 export function AppearanceSettings() {
   const { t } = useTranslation();
+  const [languageError, setLanguageError] = useState(false);
+  const [changingLanguage, setChangingLanguage] = useState(false);
 
   // Setting store actions
   const toggleSetting = useSettingsStore((s) => s.toggleSetting);
@@ -41,7 +44,7 @@ export function AppearanceSettings() {
   const colorModeSupported = (mode: Theme) => supportedColorModes(designLanguage).includes(mode);
   const zoomPercentage = useSettingsStore((s) => s.zoomPercentage);
 
-  // Language is stored independently of the settings store (see i18n/loader).
+  // The main process owns language preferences independently of the settings store.
   const language = loadLanguageLocale();
   // A selector with a single option is noise; show it once a second locale ships.
   const showLanguageSelector = LANGUAGES.length > 1;
@@ -66,8 +69,13 @@ export function AppearanceSettings() {
             <Select
               aria-label={t('settings.appearance.language', 'Language')}
               data-testid="settings-language"
+              disabled={changingLanguage}
               onChange={(evt) => {
-                void setLanguage(evt.target.value as Language);
+                setChangingLanguage(true);
+                setLanguageError(false);
+                void setLanguage(evt.target.value as Language)
+                  .catch(() => setLanguageError(true))
+                  .finally(() => setChangingLanguage(false));
               }}
               value={language}
             >
@@ -77,6 +85,14 @@ export function AppearanceSettings() {
                 </Select.Option>
               ))}
             </Select>
+            {languageError && (
+              <p role="alert">
+                {t(
+                  'settings.appearance.language_error',
+                  'Unable to save the language. Please try again.',
+                )}
+              </p>
+            )}
           </SettingsRow>
         )}
 

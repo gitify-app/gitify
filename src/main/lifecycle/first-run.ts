@@ -7,6 +7,7 @@ import { APPLICATION } from '../../shared/constants';
 import { logError, toError } from '../../shared/logger';
 import { isMacOS } from '../../shared/platform';
 
+import { i18n } from '../language';
 import { isDevMode } from '../utils';
 
 /**
@@ -33,9 +34,12 @@ async function promptMoveToApplicationsFolder() {
 
   const { response } = await dialog.showMessageBox({
     type: 'question',
-    buttons: ['Move to Applications Folder', 'Do Not Move'],
+    buttons: [
+      i18n.t('native:native.move_applications', 'Move to Applications Folder'),
+      i18n.t('native:native.do_not_move', 'Do Not Move'),
+    ],
     defaultId: 0,
-    message: 'Move to Applications Folder?',
+    message: i18n.t('native:native.move_applications_question', 'Move to Applications Folder?'),
   });
 
   if (response === 0) {

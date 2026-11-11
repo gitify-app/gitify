@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { KebabHorizontalIcon } from '@primer/octicons-react';
 import { AnchoredOverlay } from '@primer/react';
@@ -36,6 +37,7 @@ interface MetricPillsProps {
  * reappear inline as soon as there is room for them again.
  */
 export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
+  const { t } = useTranslation();
   const [visibleCount, setVisibleCount] = useState(pills.length);
   const [isOverflowOpen, setIsOverflowOpen] = useState(false);
 
@@ -202,7 +204,9 @@ export function MetricPills({ pills }: Readonly<MetricPillsProps>) {
             renderAnchor={(anchorProps) => (
               <button
                 {...anchorProps}
-                aria-label={`Show ${hiddenPills.length} more metrics`}
+                aria-label={t('metrics.more', 'Show {{count}} more metrics', {
+                  count: hiddenPills.length,
+                })}
                 className="shrink-0"
                 data-testid="metric-overflow"
                 onClick={(event) => {

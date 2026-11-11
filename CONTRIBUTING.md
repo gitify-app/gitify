@@ -116,8 +116,9 @@ The packaged app ships only the packages that are loaded from disk at runtime.
 Declare main-process runtime dependencies in `dependencies`; packages that Vite
 bundles into the renderer belong in `devDependencies`, even though the renderer
 imports them. The current runtime packages are `electron-log`,
-`electron-menubar`, and `electron-updater`; React, the i18n packages, and `cn`
-are renderer-only and build-time.
+`electron-menubar`, and `electron-updater`. React and `cn` are bundled into the
+renderer; i18next is bundled into both main and renderer, while its React adapter
+and CLI are renderer/build tooling. Bundled packages remain in `devDependencies`.
 
 `electron-builder` collects the production closure from `dependencies` through
 its pnpm collector. Do not add `node_modules` to the `files` list in
@@ -133,10 +134,10 @@ by the main or preload process.
 
 ### Translations
 
-Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
+Gitify's interface is translated through [i18next][i18next-website]. The app ships English and Simplified Chinese (`zh-Hans`). The main process stores the explicit language preference in `language.json` under the app’s user-data directory and resolves the system language when no preference is set. Native UI and the renderer use that same resolved language; the renderer reads it through IPC before its first render.
 
-- Translation files live in `src/renderer/i18n/locales/` (e.g. `en.json`).
-- `en.json` is generated from the code, never hand-edited. Write the English text as the second argument of `t()`, and as `defaults` on `<Trans>`:
+- Renderer translations live in `src/renderer/i18n/locales/<language>.json`; native UI translations (`native:` keys) live in `src/shared/i18n/locales/<language>/native.json`. Main and renderer use separate i18next instances and load only their own resources.
+- English resources are generated from the code, never hand-edited. Write the English text as the second argument of `t()`, and as `defaults` on `<Trans>`:
 
   ```tsx
   t('common.save', 'Save');
@@ -150,15 +151,15 @@ Gitify's interface is translated through [i18next][i18next-website]. The app shi
 
 - After changing a string, sync the locale files:
   - `pnpm i18n:extract` — regenerate/update locale files from the `t()` calls in the source
-  - `pnpm i18n:check` — verify the keys are in sync with the code, every `t()`/`<Trans>` has an English default, and `en.json` has no empty or key-path values (also runs in CI)
+  - `pnpm i18n:check` — verify the keys are in sync with the code, every renderer/main `t()`/`<Trans>` has an English default, and all locales have matching keys, interpolation parameters and component tags with no empty values (also runs in CI)
   - `pnpm i18n:lint` — flag hardcoded or untranslated UI strings
   - `pnpm i18n:status` — locale health summary
 - Don't run `i18next-cli extract --trust-derived`: it replaces real English text with key names.
 - To add a language:
-  1. Create `src/renderer/i18n/locales/<lang>.json`, copying `en.json` as a starting point.
-  2. Register it in `SUPPORTED_LANGUAGES` in `src/renderer/i18n/types.ts` (this also surfaces it in the Appearance → Language selector).
-  3. Import it in the `locales` map in `src/renderer/i18n/loader.ts`.
-  4. Translate the keys. The [i18n Ally][i18n-ally-website] VSCode extension is handy for working through JSON keys.
+  1. Copy the English resources to `src/renderer/i18n/locales/<lang>.json` and `src/shared/i18n/locales/<lang>/native.json`.
+  2. Add it to `SUPPORTED_LANGUAGES` in `src/shared/i18n/types.ts` and `LANGUAGE_LABELS` in `src/renderer/i18n/types.ts` (this surfaces it in the Appearance → Language selector).
+  3. Import the renderer resource in `src/renderer/i18n/loader.ts` and the native resource in `src/main/language.ts`.
+  4. Translate the keys. The [i18n Ally][i18n-ally-website] VSCode configuration covers renderer resources; edit native resources as JSON and validate them with the same checks.
   5. Run `pnpm i18n:check` and `pnpm test`.
 - Translation keys use `snake_case`, grouped by feature (e.g. `settings.appearance.language`). Prefer whole-sentence keys with `{{placeholder}}` interpolation over string concatenation, and leave brand names (GitHub, GitLab, …) untranslated.
 - When a sentence contains markup (bold, links, tooltips), keep it as one `<Trans>` string instead of splitting it into several `t()` fragments, so translators can reorder the words. A component that requires a single child (e.g. Primer's `Tooltip`) needs a small wrapper that accepts `children`.

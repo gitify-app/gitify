@@ -2,7 +2,8 @@ import type { Menubar } from 'electron-menubar';
 
 import { EVENTS } from '../../shared/events';
 
-import { registerAppHandlers } from './app';
+import { getLanguageState, setNativeLanguage } from '../language';
+import { registerAppHandlers, registerLanguageHandlers } from './app';
 
 const handleMock = vi.fn();
 const onMock = vi.fn();
@@ -22,6 +23,11 @@ vi.mock('../config', () => ({
     notificationSound: 'file:///path/to/notification.mp3',
     twemojiFolder: 'file:///path/to/twemoji',
   },
+}));
+
+vi.mock('../language', () => ({
+  getLanguageState: vi.fn(),
+  setNativeLanguage: vi.fn(),
 }));
 
 describe('main/handlers/app.ts', () => {
@@ -54,4 +60,30 @@ describe('main/handlers/app.ts', () => {
       expect(registeredEvents).toContain(EVENTS.QUIT);
     });
   });
+
+  it.each(['en', 'zh-Hans'] as const)(
+    'registers get/set immediately but waits for initialization before returning %s',
+    async (language) => {
+      const state = { language, preference: language };
+      vi.mocked(getLanguageState).mockReturnValue(state);
+      vi.mocked(setNativeLanguage).mockReturnValue(state);
+      let ready!: () => void;
+      registerLanguageHandlers(
+        new Promise<void>((resolve) => {
+          ready = resolve;
+        }),
+      );
+      const handlers = new Map(handleMock.mock.calls.map(([event, handler]) => [event, handler]));
+      const get = handlers.get(EVENTS.LANGUAGE_GET)!;
+      const set = handlers.get(EVENTS.LANGUAGE_SET)!;
+      const pendingGet = get({} as Electron.IpcMainInvokeEvent);
+      const pendingSet = set({} as Electron.IpcMainInvokeEvent, language);
+      expect(getLanguageState).not.toHaveBeenCalled();
+      expect(setNativeLanguage).not.toHaveBeenCalled();
+      ready();
+      await expect(pendingGet).resolves.toEqual(state);
+      await expect(pendingSet).resolves.toEqual(state);
+      expect(setNativeLanguage).toHaveBeenCalledWith(language);
+    },
+  );
 });

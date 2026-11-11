@@ -1,3 +1,5 @@
+import type { Language, LanguageState } from './i18n/types';
+
 const P = 'gitify:' as const;
 
 /**
@@ -5,6 +7,8 @@ const P = 'gitify:' as const;
  * Each value is prefixed with `gitify:` to prevent collisions.
  */
 export const EVENTS = {
+  LANGUAGE_GET: `${P}language-get`,
+  LANGUAGE_SET: `${P}language-set`,
   QUIT: `${P}quit`,
   WINDOW_SHOW: `${P}window-show`,
   WINDOW_HIDE: `${P}window-hide`,
@@ -171,6 +175,8 @@ type AssertEventCoverage<T extends Record<EventType, Contract>> = T;
  * - For events with no payload, `request` is `undefined`.
  */
 export type EventContracts = AssertEventCoverage<{
+  [EVENTS.LANGUAGE_GET]: { request: undefined; response: LanguageState };
+  [EVENTS.LANGUAGE_SET]: { request: Language; response: LanguageState };
   [EVENTS.QUIT]: { request: undefined; response: undefined };
   [EVENTS.WINDOW_SHOW]: { request: undefined; response: undefined };
   [EVENTS.WINDOW_HIDE]: { request: undefined; response: undefined };

@@ -62,13 +62,15 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
     return;
   }
 
-  win.on('show', () => {
+  // Use menubar lifecycle events to track its explicit visibility operations,
+  // including cases without BrowserWindow show/hide events on macOS.
+  mb.on('after-show', () => {
     menuBuilder.setWindowVisibility(true);
     // Re-apply vibrancy in case the window was rebuilt since it was last set.
     applyWindowVibrancy(mb, windowVibrancyEnabled);
   });
 
-  win.on('hide', () => {
+  mb.on('after-hide', () => {
     menuBuilder.setWindowVisibility(false);
   });
 

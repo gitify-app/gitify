@@ -2,12 +2,16 @@ import useFiltersStore from '../../../stores/useFiltersStore';
 
 import type { RawGitifyNotification } from '../../../types';
 
+import i18n from '../../../i18n';
+
 export const SEARCH_DELIMITER = ':';
 
 const SEARCH_QUALIFIERS = {
   author: {
     prefix: 'author:',
-    description: 'filter by thread author',
+    get description() {
+      return i18n.t('filters.search.suggestion_author', 'filter by thread author');
+    },
     requiresDetailsNotifications: true,
     extract: (n: RawGitifyNotification) => n.subject?.author?.login,
     normalizeValue: (value: string) => value,
@@ -15,7 +19,9 @@ const SEARCH_QUALIFIERS = {
   },
   commenter: {
     prefix: 'commenter:',
-    description: 'filter by latest comment author',
+    get description() {
+      return i18n.t('filters.search.suggestion_commenter', 'filter by latest comment author');
+    },
     requiresDetailsNotifications: true,
     extract: (n: RawGitifyNotification) => n.subject?.commenter?.login,
     normalizeValue: (value: string) => value,
@@ -23,7 +29,9 @@ const SEARCH_QUALIFIERS = {
   },
   org: {
     prefix: 'org:',
-    description: 'filter by organization owner',
+    get description() {
+      return i18n.t('filters.search.suggestion_organization', 'filter by organization owner');
+    },
     requiresDetailsNotifications: false,
     extract: (n: RawGitifyNotification) => n.repository?.owner?.login,
     normalizeValue: (value: string) => value,
@@ -31,7 +39,9 @@ const SEARCH_QUALIFIERS = {
   },
   repo: {
     prefix: 'repo:',
-    description: 'filter by repository full name',
+    get description() {
+      return i18n.t('filters.search.suggestion_repository', 'filter by repository full name');
+    },
     requiresDetailsNotifications: false,
     extract: (n: RawGitifyNotification) => n.repository?.fullName,
     normalizeValue: (value: string) => value,
@@ -39,7 +49,9 @@ const SEARCH_QUALIFIERS = {
   },
   title: {
     prefix: 'title:',
-    description: 'filter by subject title',
+    get description() {
+      return i18n.t('filters.search.suggestion_title', 'filter by subject title');
+    },
     requiresDetailsNotifications: false,
     extract: (n: RawGitifyNotification) => n.subject?.title,
     // Multi-word values are out of scope: keep only the first whitespace-delimited token,

@@ -12,6 +12,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { useFiltersStore } from '../../stores';
 
+import i18n from '../../i18n';
 import { stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
@@ -200,4 +201,36 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
       Number.parseInt(el.textContent ?? '0', 10),
     );
   }
+
+  it('keeps filter identities and sorts translated labels with other last', async () => {
+    renderWithProviders(
+      <FilterSection
+        filter={stateFilter}
+        filterSetting="states"
+        icon={MarkGithubIcon}
+        id="states"
+        title="State"
+      />,
+    );
+    const names = () =>
+      screen.getAllByRole('checkbox').map((element) => element.getAttribute('name'));
+    const englishOrder = names();
+    expect(englishOrder).toEqual([
+      'states-closed',
+      'states-draft',
+      'states-merged',
+      'states-open',
+      'states-other',
+    ]);
+    await act(async () => {
+      await i18n.changeLanguage('zh-Hans');
+    });
+    expect(names()).toEqual([
+      'states-closed',
+      'states-merged',
+      'states-open',
+      'states-draft',
+      'states-other',
+    ]);
+  });
 });

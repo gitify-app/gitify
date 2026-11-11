@@ -1,4 +1,5 @@
 import { memo, type ReactNode, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Icon } from '@primer/octicons-react';
 import { Stack, Text } from '@primer/react';
@@ -31,6 +32,7 @@ function FilterSectionComponent<K extends keyof FiltersState>({
   tooltip,
   layout = 'vertical',
 }: Readonly<FilterSectionProps<K>>) {
+  useTranslation();
   const { notifications } = useNotifications();
   const updateFilter = useFiltersStore((s) => s.updateFilter);
 

@@ -41,12 +41,54 @@ describe('renderer/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSettingSpy).toHaveBeenCalledWith('designLanguage', DesignLanguage.GLASS);
   });
 
-  it('hides the language selector while English is the only language', async () => {
+  it('shows English as the selected language by default', async () => {
     await act(async () => {
       renderWithProviders(<AppearanceSettings />);
     });
 
-    expect(screen.queryByRole('combobox', { name: 'Language' })).not.toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: 'Language' })).toHaveValue('en');
+  });
+
+  it('switches between English and Simplified Chinese', async () => {
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Language' }), 'zh-Hans');
+    expect(screen.getByRole('combobox', { name: '语言' })).toHaveValue('zh-Hans');
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: '语言' }), 'en');
+    expect(screen.getByRole('combobox', { name: 'Language' })).toHaveValue('en');
+  });
+
+  it('disables the selector until the main process saves the choice', async () => {
+    let finish!: (value: Awaited<ReturnType<typeof window.gitify.language.set>>) => void;
+    vi.mocked(window.gitify.language.set).mockReturnValueOnce(
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+    );
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+    const selector = screen.getByRole('combobox', { name: 'Language' });
+    await userEvent.selectOptions(selector, 'zh-Hans');
+    expect(selector).toBeDisabled();
+    expect(selector).toHaveValue('en');
+    await act(async () => {
+      finish({ language: 'zh-Hans', preference: 'zh-Hans' });
+    });
+    expect(screen.getByRole('combobox', { name: '语言' })).toBeEnabled();
+    expect(screen.getByRole('combobox', { name: '语言' })).toHaveValue('zh-Hans');
+  });
+
+  it('keeps the selected language and shows an error when native synchronization fails', async () => {
+    vi.mocked(window.gitify.language.set).mockRejectedValueOnce(new Error('IPC failed'));
+    await act(async () => {
+      renderWithProviders(<AppearanceSettings />);
+    });
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Language' }), 'zh-Hans');
+    expect(screen.getByRole('combobox', { name: 'Language' })).toHaveValue('en');
+    expect(screen.getByRole('alert')).toHaveTextContent('Unable to save the language');
   });
 
   it('hides accessibility color modes when Glass is the active design language', async () => {

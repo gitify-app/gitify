@@ -8,6 +8,7 @@ import {
   NATIVE_NOTIFICATION_SUMMARY_ID,
 } from '../../../shared/nativeNotifications';
 
+import i18n from '../../i18n';
 import { getAccountUUID } from '../auth/utils';
 import { buildNativeNotificationPayload, raiseNativeNotification } from './native';
 
@@ -17,6 +18,15 @@ describe('renderer/utils/system/native.ts', () => {
 
   beforeEach(() => {
     vi.mocked(window.gitify.nativeNotifications.show).mockClear();
+  });
+
+  it('translates newly built notifications without altering user content', async () => {
+    await i18n.changeLanguage('zh-Hans');
+    const payload = buildNativeNotificationPayload(notification);
+    expect(payload.title).toBe(notification.repository.fullName);
+    expect(payload.body).toBe(notification.display.title);
+    expect(payload.subtitle).toContain('有更新');
+    expect(payload.actionLabel).toBe('标记为已读');
   });
 
   describe('buildNativeNotificationPayload', () => {
