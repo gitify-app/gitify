@@ -12,6 +12,7 @@ vi.mock('../events', () => ({
   }),
 }));
 vi.mock('../update-manager', () => ({ detectUpdateManager: vi.fn() }));
+vi.mock('electron', () => ({ app: { getAppPath: () => '/opt/Gitify/resources/app.asar' } }));
 vi.mock('../../shared/logger', () => ({ logError: vi.fn(), toError: (error: unknown) => error }));
 
 const appUpdater = {
