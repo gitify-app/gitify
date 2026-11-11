@@ -7,6 +7,7 @@ import { logError, toError } from '../shared/logger';
 interface Installation {
   platform: NodeJS.Platform;
   executablePath: string;
+  appPath: string;
   resourcesPath: string;
   env: NodeJS.ProcessEnv;
 }
@@ -35,14 +36,33 @@ async function readMetadata(file: string): Promise<unknown> {
   }
 }
 
-async function detectLinuxUpdateManager({
-  env,
-}: Pick<Installation, 'env'>): Promise<UpdateManager | null> {
+/**
+ * Whether Gitify runs on an Electron installed separately from the app, such as
+ * an Arch `electron45` package. A bundled build keeps its app inside the
+ * executable's directory, so an app outside it belongs to a system package that
+ * Gitify cannot replace.
+ */
+async function runsOnSystemElectron({
+  executablePath,
+  appPath,
+}: Pick<Installation, 'executablePath' | 'appPath'>): Promise<boolean> {
+  const executableDirectory = path.dirname(await realpath(executablePath));
+  const relative = path.relative(executableDirectory, await realpath(appPath));
+  return relative.startsWith('..') || path.isAbsolute(relative);
+}
+
+async function detectLinuxUpdateManager(
+  installation: Pick<Installation, 'env' | 'executablePath' | 'appPath'>,
+): Promise<UpdateManager | null> {
+  const { env } = installation;
   if (env.FLATPAK_ID || (await exists('/.flatpak-info'))) {
     return 'Flatpak';
   }
   if (env.SNAP && env.SNAP_NAME) {
     return 'Snap';
+  }
+  if (await runsOnSystemElectron(installation)) {
+    return 'packager';
   }
   return null;
 }
@@ -74,9 +94,10 @@ async function detectWindowsUpdateManager({
 /**
  * Detect a package manager that owns updates for this installation.
  *
- * Only Scoop, Flatpak, and Snap are detected; other installations, including
- * deb, rpm, and Homebrew packages, keep Gitify's own updater. Packagers can opt
- * in with a `disable-auto-updates` resource marker or `GITIFY_DISABLE_AUTO_UPDATE=1`.
+ * Scoop, Flatpak, Snap, and Linux packages that run on a system Electron are
+ * detected; other installations, including deb, rpm, and Homebrew packages,
+ * keep Gitify's own updater. Packagers can opt in with a `disable-auto-updates`
+ * resource marker or `GITIFY_DISABLE_AUTO_UPDATE=1`.
  *
  * @param installation - The running installation's platform, paths, and environment.
  * @returns The package manager that owns updates, or `null` when Gitify updates itself.

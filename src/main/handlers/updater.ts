@@ -1,3 +1,5 @@
+import { app } from 'electron';
+
 import { EVENTS, isAutomaticUpdates } from '../../shared/events';
 import { logError, toError } from '../../shared/logger';
 
@@ -16,6 +18,7 @@ export function registerUpdaterHandlers(
   const manager = detectUpdateManager({
     platform: process.platform,
     executablePath: process.execPath,
+    appPath: app.getAppPath(),
     resourcesPath: process.resourcesPath,
     env: process.env,
   }).catch((error: unknown) => {

@@ -263,9 +263,9 @@ Four settings are deliberate non-choices:
 
 #### 🔄 Updates for packaged installations
 
-Gitify updates itself by default. Automatic updates default to off only where a package manager owns updates: Scoop (detected from its installation metadata), Flatpak, and Snap.
+Gitify updates itself by default. Automatic updates default to off only where a package manager owns updates: Scoop (detected from its installation metadata), Flatpak, Snap, and Linux packages that run on a system Electron (detected when the app lives outside the Electron executable's directory, as with Arch's `electron45`).
 
-Package maintainers can select the same default by placing an empty `disable-auto-updates` file in the application's resources directory (Electron's `process.resourcesPath`) or by setting `GITIFY_DISABLE_AUTO_UPDATE=1` in the launcher. Packages that run on a system Electron should use the environment variable.
+Package maintainers can select the same default by placing an empty `disable-auto-updates` file in the application's resources directory (Electron's `process.resourcesPath`) or by setting `GITIFY_DISABLE_AUTO_UPDATE=1` in the launcher.
 
 Users can override the default under Settings > System > Automatic updates, and the choice persists across restarts. Turning updates off stops scheduled checks, cancels active downloads, and prevents installation on quit. The tray menu then offers **View releases** instead of **Check for updates**.
 
