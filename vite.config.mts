@@ -21,7 +21,7 @@ const projectRoot = fileURLToPath(new URL('.', import.meta.url));
  * Lint summary `vite-plugin-checker` emits after a run that found nothing.
  *
  * The plugin logs a summary after *every* lint run, clean or not, so each file
- * save during `pnpm dev` prints a line that reports nothing. Its `dev.logLevel`
+ * save during `vp run dev` prints a line that reports nothing. Its `dev.logLevel`
  * only filters diagnostics, not this summary, so we match the message text.
  */
 const cleanLintSummaryPattern = /\[oxlint\] Found 0 error and 0 warning/;
@@ -80,7 +80,7 @@ const isElectronRunning = (): boolean => Boolean(process.electronApp);
 /**
  * Vite plugin that copies static assets to disk on startup.
  * Runs in both dev and build modes so the Electron main process can resolve
- * asset file URLs without requiring a prior `pnpm build`.
+ * asset file URLs without requiring a prior `vp run build`.
  */
 const copyStaticAssetsPlugin = (): Plugin => {
   const flatten = (obj: object): string[] =>

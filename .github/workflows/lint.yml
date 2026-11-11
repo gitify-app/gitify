@@ -31,10 +31,10 @@ jobs:
         run: vp run check
 
       - name: Run i18n key sync check
-        run: pnpm i18n:check
+        run: vp run i18n:check
 
       - name: Run i18n lint (hardcoded strings, split sentences)
-        run: pnpm i18n:lint
+        run: vp run i18n:lint
 
   lint-actions:
     name: Lint GitHub Actions [actionlint]

@@ -65,12 +65,12 @@ brew install gitify
 
 ## 🛠️ Build & Development
 
-To build and run Gitify locally:
+To build and run Gitify locally with the [Vite+ CLI](https://viteplus.dev/guide/global-cli) (`vp`):
 
 ```shell
-pnpm install
-pnpm build
-pnpm dev
+vp install
+vp run build
+vp run dev
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for full development and contribution instructions.

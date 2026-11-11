@@ -8,7 +8,7 @@ import { app } from 'electron';
  *
  * Packaged builds keep Electron's default (`<appData>/<package name>`) so
  * existing installs are never migrated. Development builds append `-dev`;
- * without it, an installed copy and `pnpm dev` share the same single-instance
+ * without it, an installed copy and `vp run dev` share the same single-instance
  * lock (see `./startup.ts`) and cache files, so the dev instance quits on
  * launch.
  *

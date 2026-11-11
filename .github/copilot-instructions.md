@@ -7,40 +7,40 @@ Gitify is a multi-forge notification client — an Electron desktop app that sur
 ## Prerequisites and Setup
 
 - **Node.js**: `>=24` (`.nvmrc` pins `24.18.0`). Use `nvm use` to activate the right version.
-- **Install pnpm globally**: `npm install -g pnpm`
-- **Bootstrap the repository**: `pnpm install` — takes up to a minute on a clean install. NEVER CANCEL. Set timeout to 5+ minutes.
+- **Install the Vite+ CLI globally**: follow https://viteplus.dev/guide/global-cli. The `vp` CLI runs every project command and downloads the pnpm version pinned in `package.json`.
+- **Bootstrap the repository**: `vp install` — takes up to a minute on a clean install. NEVER CANCEL. Set timeout to 5+ minutes.
 
 ## Key Commands
 
-| Command             | What it does                                                                | Timing        |
-| ------------------- | --------------------------------------------------------------------------- | ------------- |
-| `pnpm dev`          | Vite dev server + GraphQL codegen watch (main development loop)             | ~10s to start |
-| `pnpm build`        | Production build for all Electron targets (main, preload, renderer, shared) | ~30s clean    |
-| `pnpm test`         | Run full Vitest suite with coverage                                         | ~15s          |
-| `pnpm check`        | oxlint + oxfmt + type-check (unified via vite-plus)                         | <5s           |
-| `pnpm check:fix`    | Same as check but auto-fixes formatting and lint                            | <5s           |
-| `pnpm tsc --noEmit` | TypeScript-only type-check                                                  | ~5s           |
+| Command                | What it does                                                                | Timing        |
+| ---------------------- | --------------------------------------------------------------------------- | ------------- |
+| `vp run dev`           | Vite dev server + GraphQL codegen watch (main development loop)             | ~10s to start |
+| `vp run build`         | Production build for all Electron targets (main, preload, renderer, shared) | ~30s clean    |
+| `vp run test`          | Run full Vitest suite with coverage                                         | ~15s          |
+| `vp run check`         | oxlint + oxfmt + type-check (unified via vite-plus)                         | <5s           |
+| `vp run check:fix`     | Same as check but auto-fixes formatting and lint                            | <5s           |
+| `vp exec tsc --noEmit` | TypeScript-only type-check                                                  | ~5s           |
 
-**NEVER CANCEL long-running commands** (`pnpm install`, `pnpm build`). Set terminal timeouts to 5+ minutes.
+**NEVER CANCEL long-running commands** (`vp install`, `vp run build`). Set terminal timeouts to 5+ minutes.
 
 ## Development Workflow
 
-- **Day-to-day development**: `pnpm dev` — starts both the Vite dev server and GraphQL codegen watcher concurrently. Leave running while developing.
-- **Full build**: `pnpm build` — builds all targets via `vp build`. Output goes to `build/` (subdirectories: `main/`, `preload/`, `renderer/`, `shared/`).
-- **Run the Electron app**: `pnpm start` — runs `pnpm build` then `pnpm dev`. Will fail in headless/container environments due to Electron sandbox restrictions (this is expected and normal).
+- **Day-to-day development**: `vp run dev` — starts both the Vite dev server and GraphQL codegen watcher concurrently. Leave running while developing.
+- **Full build**: `vp run build` — builds all targets via `vp build`. Output goes to `build/` (subdirectories: `main/`, `preload/`, `renderer/`, `shared/`).
+- **Run the Electron app**: `vp run start` — runs `vp run build` then `vp run dev`. Will fail in headless/container environments due to Electron sandbox restrictions (this is expected and normal).
 
 ## Validation
 
 After making changes, validate in this order:
 
-1. **Type-check**: `pnpm tsc --noEmit` — must complete with no errors
-2. **Lint + format**: `pnpm check` — warnings are acceptable, errors are not
-3. **Tests**: `pnpm test` — focus on no NEW failures; existing snapshots may differ on timezone-mismatched machines
-4. **Build**: `pnpm build` — look for `✓ built in [time]` for each target (main, preload, renderer, shared)
+1. **Type-check**: `vp exec tsc --noEmit` — must complete with no errors
+2. **Lint + format**: `vp run check` — warnings are acceptable, errors are not
+3. **Tests**: `vp run test` — focus on no NEW failures; existing snapshots may differ on timezone-mismatched machines
+4. **Build**: `vp run build` — look for `✓ built in [time]` for each target (main, preload, renderer, shared)
 
-**Snapshot test failures**: Run `pnpm test -u` to regenerate after legitimate UI changes.
+**Snapshot test failures**: Run `vp run test -u` to regenerate after legitimate UI changes.
 
-**Pre-commit**: Husky runs `vp staged` automatically on `git commit`. Manual equivalent: `pnpm check && pnpm test`.
+**Pre-commit**: Husky runs `vp staged` automatically on `git commit`. Manual equivalent: `vp run check && vp run test`.
 
 ## File Map
 
@@ -62,7 +62,7 @@ After making changes, validate in this order:
 
 ### Configuration
 
-- `vite.config.mts` — Primary build config; also hosts `lint`, `fmt`, and `staged` blocks used by `pnpm check` and Husky
+- `vite.config.mts` — Primary build config; also hosts `lint`, `fmt`, and `staged` blocks used by `vp run check` and Husky
 - `vitest.config.mts` — Test configuration (Vitest projects: happy-dom for renderer/preload, node for main/shared)
 - `tsconfig.json` — TypeScript configuration
 - `tailwind.config.mts` — Tailwind CSS configuration
@@ -74,19 +74,19 @@ After making changes, validate in this order:
 
 ## Local Packaging
 
-Requires a prior `pnpm build` and platform-specific tooling:
+Requires a prior `vp run build` and platform-specific tooling:
 
-- **macOS**: `pnpm package:macos --publish=never`
-- **Windows**: `pnpm package:win --publish=never`
-- **Linux**: `pnpm package:linux --publish=never`
+- **macOS**: `vp run package:macos --publish=never`
+- **Windows**: `vp run package:win --publish=never`
+- **Linux**: `vp run package:linux --publish=never`
 
 ## Constraints and Gotchas
 
-- **Electron won't start in CI/containers**: Sandbox restrictions make `pnpm start` / `pnpm dev` fail headlessly. This is expected — test logic; don't try to fix the launch.
+- **Electron won't start in CI/containers**: Sandbox restrictions make `vp run start` / `vp run dev` fail headlessly. This is expected — test logic; don't try to fix the launch.
 - **Node version is strict**: `>=24` required. Check `.nvmrc` and run `nvm use` if commands behave oddly.
 - **Snapshot drift on non-UTC machines**: Some snapshot tests encode relative dates. Tests may fail locally if your timezone differs from UTC. The test setup stubs `TZ=UTC` via `vi.stubEnv`.
 - **Lint warnings are OK**: The codebase has pre-existing lint warnings. Only new errors block CI.
-- **GraphQL codegen**: Running `pnpm dev` auto-watches for schema changes. If you edit `.graphql` files manually, re-run `pnpm codegen` to regenerate `graphql/generated/graphql.ts`.
+- **GraphQL codegen**: Running `vp run dev` auto-watches for schema changes. If you edit `.graphql` files manually, re-run `vp run codegen` to regenerate `graphql/generated/graphql.ts`.
 
 ## Development Philosophy
 
@@ -102,7 +102,7 @@ This is a notification _viewer_, not a full forge client. Keep changes:
 - **Electron 43+** — desktop app host
 - **React 19+** — UI
 - **TypeScript 5+** — language
-- **pnpm 10+** — package manager
+- **pnpm 12** — package manager, run through `vp install`
 - **Vite + vite-plus** — unified build, dev, lint (`oxlint`), format (`oxfmt`), and test toolchain. The `vp` CLI drives all tooling.
 - **Vitest** — test runner (via `vp test`); `@testing-library/jest-dom` provides DOM matchers
 - **Tailwind CSS v4** — styling

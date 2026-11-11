@@ -5,7 +5,7 @@
  * set `defaults`. The extractor generates en.json from these defaults, so a
  * missing one would ship an empty string or a raw key to English users.
  *
- * Runs as part of `pnpm i18n:check`. Scans src/renderer, skipping tests, the
+ * Runs as part of `vp run i18n:check`. Scans src/renderer, skipping tests, the
  * i18n bootstrap files and the locales directory.
  */
 import { readdir, readFile } from 'node:fs/promises';
