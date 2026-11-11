@@ -7,10 +7,11 @@
 # on the host. This script puts it there; when it is already inside that image
 # (CI, or the nested call below) it runs vitest directly.
 #
-# arm64 rather than amd64 because Chromium segfaults under amd64 emulation on
-# Apple Silicon, which makes local runs impossible on the machines the
-# maintainers actually use. The tradeoff is that running this locally needs an
-# arm64 host; CI covers everyone else.
+# The image runs in the host's own architecture, never under emulation:
+# Chromium segfaults under amd64 emulation on Apple Silicon. CI renders on
+# arm64. amd64 renders differ from it only in antialiasing, which the
+# comparison's per-pixel threshold absorbs, so baselines from either
+# architecture pass on the other.
 #
 # Usage:
 #   scripts/visual.sh                     # verify against committed baselines
@@ -49,11 +50,19 @@ if ! docker info >/dev/null 2>&1; then
 fi
 
 HOST_ARCH="$(uname -m)"
-if [ "${HOST_ARCH}" != "arm64" ] && [ "${HOST_ARCH}" != "aarch64" ]; then
-  echo "Visual regression tests need an arm64 host to match CI; this machine is ${HOST_ARCH}." >&2
-  echo "Push the branch and let the Visual Regression CI job report the diff instead." >&2
-  exit 1
-fi
+case "${HOST_ARCH}" in
+  arm64 | aarch64) ARCH="arm64" ;;
+  x86_64 | amd64) ARCH="amd64" ;;
+  *)
+    echo "Visual regression tests need an arm64 or amd64 host; this machine is ${HOST_ARCH}." >&2
+    echo "Push the branch and let the Visual Regression CI job report the diff instead." >&2
+    exit 1
+    ;;
+esac
+
+# The image's Node.js no longer bundles corepack, so install the pnpm release
+# the project pins in `devEngines`.
+PNPM_VERSION="$(node -p "require('${REPO_ROOT}/package.json').devEngines.packageManager.version")"
 
 # HUSKY=0 skips the `prepare` hook, which cannot find .git when the repo is a
 # worktree (its .git file points outside the mount).
@@ -66,22 +75,30 @@ if [ -t 0 ] && [ -t 1 ]; then
   TTY_FLAGS=(--interactive --tty)
 fi
 
-# The host's node_modules holds darwin binaries (esbuild, @tailwindcss/oxide),
-# so the container gets its own install in a named volume. It persists between
-# runs, making everything after the first invocation fast.
+# The host's node_modules holds host binaries (esbuild, @tailwindcss/oxide),
+# so the container gets its own install in a named volume per architecture. It
+# persists between runs, making everything after the first invocation fast.
+#
+# On Linux the container writes to the bind mount as root. Creating the mount
+# point here and returning new files to the caller on exit keeps the checkout
+# writable for later host commands; Docker Desktop already maps ownership.
+mkdir -p "${REPO_ROOT}/node_modules"
 docker run --rm "${TTY_FLAGS[@]+"${TTY_FLAGS[@]}"}" \
-  --platform linux/arm64 \
+  --platform "linux/${ARCH}" \
   --volume "${REPO_ROOT}":/gitify \
-  --volume gitify-visual-node-modules:/gitify/node_modules \
-  --volume gitify-visual-pnpm-store:/root/.local/share/pnpm/store \
+  --volume "gitify-visual-node-modules-${ARCH}":/gitify/node_modules \
+  --volume "gitify-visual-pnpm-store-${ARCH}":/root/.local/share/pnpm/store \
   --workdir /gitify \
   --env HUSKY=0 \
   --env GITIFY_VISUAL_IN_CONTAINER=1 \
+  --env HOST_UID="$(id -u)" \
+  --env HOST_GID="$(id -g)" \
   "${IMAGE}" \
   bash -c "
     set -euo pipefail
-    corepack enable
-    corepack pnpm install --frozen-lockfile
+    trap 'find /gitify/src /gitify/.vitest-attachments -user 0 -exec chown \"\${HOST_UID}:\${HOST_GID}\" {} + 2>/dev/null || true' EXIT
+    npm install --global --silent pnpm@${PNPM_VERSION}
+    pnpm install --frozen-lockfile
     scripts/visual.sh ${UPDATE} ${FILTER}
   "
 
