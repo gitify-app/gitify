@@ -131,7 +131,19 @@ describe('renderer/components/settings/SystemSettings.tsx', () => {
       await userEvent.click(screen.getByRole('button', { name: 'GNOME extension installation' }));
 
       expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
-        'https://github.com/gitify-app/gnome#install',
+        'https://github.com/gitify-app/gnome#-install',
+        expect.any(Boolean),
+      );
+    });
+
+    it('opens KDE Plasma KWin script installation instructions on Linux', async () => {
+      isLinuxMock().mockReturnValue(true);
+      renderWithProviders(<SystemSettings />);
+
+      await userEvent.click(screen.getByRole('button', { name: 'KDE Plasma script installation' }));
+
+      expect(window.gitify.openExternalLink).toHaveBeenCalledWith(
+        'https://github.com/gitify-app/kde#-install',
         expect.any(Boolean),
       );
     });

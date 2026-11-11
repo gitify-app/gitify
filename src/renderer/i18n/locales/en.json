@@ -505,6 +505,8 @@
       "enable_shortcut_help": "Show or hide {{appName}} from anywhere with a keyboard shortcut.",
       "gnome_extension_button": "GNOME extension installation",
       "gnome_extension_help": "On GNOME Wayland, install the Gitify extension to open the window next to its tray icon. Install and manage it through GNOME's extension tools.",
+      "kde_script_button": "KDE Plasma script installation",
+      "kde_script_help": "On KDE Plasma Wayland, install the Gitify KWin script to open the window next to its tray icon. Get it from the KDE Store or KWin Scripts in System Settings.",
       "keep_window_on_blur": "Keep window open when unfocused",
       "keep_window_on_blur_help": "Keep the {{appName}} window open when you click outside it.",
       "keyboard_shortcut_help_modifiers": "Shortcuts must include:",
