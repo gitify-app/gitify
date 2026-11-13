@@ -36,6 +36,12 @@
       "groupName": "playwright",
       "matchDatasources": ["npm", "docker"],
       "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"]
+    },
+    {
+      "description": "Keep the graphql-code-generator monorepo in one PR, including major upgrades. Its CLI and plugin majors share a plugin API contract, so separate major PRs cannot be verified independently.",
+      "extends": ["monorepo:graphqlcodegenerator"],
+      "groupName": "graphql-codegen",
+      "separateMajorMinor": false
     }
   ],
   "customManagers": [
