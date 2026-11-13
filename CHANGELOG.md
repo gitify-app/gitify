@@ -1,5 +1,30 @@
 # Changelog
 
+## [8.2.0](https://github.com/gitify-app/gitify/compare/v8.1.0...v8.2.0) (2026-11-13)
+
+
+### 🚀 Features
+
+* link the KDE Plasma KWin script from Linux settings ([#3675](https://github.com/gitify-app/gitify/issues/3675)) ([880e754](https://github.com/gitify-app/gitify/commit/880e7544903126300a52a0c0f92dd9f8d28f0496))
+
+
+### 🐛 Bug Fixes
+
+* **glass:** blend the hover action rail into the row on every platform ([#3672](https://github.com/gitify-app/gitify/issues/3672)) ([5efe1cf](https://github.com/gitify-app/gitify/commit/5efe1cf71165d91a174cf91d605cf743ac44ef54))
+* treat Linux installs on a system Electron as package-managed ([#3674](https://github.com/gitify-app/gitify/issues/3674)) ([d62d52b](https://github.com/gitify-app/gitify/commit/d62d52b5f94a1021f604f3b501d798f5aaed7fdd))
+
+
+### 📚 Documentation
+
+* run project commands through vp ([#3679](https://github.com/gitify-app/gitify/issues/3679)) ([dd0d249](https://github.com/gitify-app/gitify/commit/dd0d24966a4434e528bdd95c0d6a2fd18460a586))
+* trim Copilot instructions to current, non-derivable guidance ([#3680](https://github.com/gitify-app/gitify/issues/3680)) ([f54c985](https://github.com/gitify-app/gitify/commit/f54c9851a525e1134ef0429232f1af0f566d31dc))
+
+
+### 🏗️ Build System
+
+* replace concurrently with vp run tasks ([#3673](https://github.com/gitify-app/gitify/issues/3673)) ([e1c32d1](https://github.com/gitify-app/gitify/commit/e1c32d1819dfcd249d4c92c3c649a0cf1707389a))
+* run start script through vp run ([#3678](https://github.com/gitify-app/gitify/issues/3678)) ([ab14442](https://github.com/gitify-app/gitify/commit/ab144424c8d5ba05c3ada99c8d0bde28363ec544))
+
 ## [8.1.0](https://github.com/gitify-app/gitify/compare/v8.0.0...v8.1.0) (2026-11-10)
 
 
