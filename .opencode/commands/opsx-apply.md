@@ -57,7 +57,7 @@ In both branches, never create the root as a side effect: do not run `openspec i
 
    **Handle states:**
    - If `state: "blocked"`: show the message and pause implementation.
-     - If `missingArtifacts` is non-empty: suggest using `/opsx-continue` to create them.
+     - If `missingArtifacts` is non-empty: suggest completing the missing artifacts. Run `openspec status --change "<name>" --json`, select the next `ready` artifact (not `skipped` or `blocked`), and use `openspec instructions "<artifact-id>" --change "<name>" --json` for its rules and template. Keep the selected `--store <id>` on both commands.
      - Otherwise, follow the CLI instruction to create or repair the schema-configured tracking file from existing planning artifacts. Do not assume another artifact is ready or start implementation while blocked.
    - If `state: "all_done"`: report that all tracked tasks are complete and suggest review or verification as appropriate before archiving
    - Otherwise: proceed to implementation
