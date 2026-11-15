@@ -5,7 +5,7 @@
     {
       "description": "Fetch changelog details for twemoji packages",
       "matchPackageNames": ["@discordapp/twemoji"],
-      "changelogUrl": "https://github.com/jdjdecked/twemoji"
+      "changelogUrl": "https://github.com/jdecked/twemoji"
     },
     {
       "description": "Hold got on the v11 line. This override satisfies security scanners for dev tooling built against the non-ESM v11 API; v11.8.5+ includes the security fix.",
