@@ -97,6 +97,50 @@ async function captureCliError(theme: Theme, designLanguage: DesignLanguage) {
   );
 }
 
+async function captureCliAccounts(theme: Theme, designLanguage: DesignLanguage) {
+  vi.mocked(window.gitify.githubCliAccounts).mockResolvedValue({
+    accounts: [
+      { identity: { kind: 'account', login: 'octocat' }, active: true },
+      { identity: { kind: 'account', login: 'octocat-work' }, active: false },
+      { identity: { kind: 'environment' }, active: false },
+    ],
+  });
+
+  renderRoute(<GitHubLoginWithCLIRoute />, {
+    theme,
+    designLanguage,
+    initialEntries: ['/login/github/cli'],
+  });
+
+  await waitFor(() =>
+    expect(document.querySelector('[data-testid="login-cli-account"]')).not.toBeNull(),
+  );
+  await movePointerAway();
+
+  await expect(page.getByTestId('visual-root')).toMatchScreenshot(
+    `login-cli-accounts-${theme.toLowerCase()}-${designLanguage}`,
+  );
+}
+
+async function captureCliNoAccounts(theme: Theme, designLanguage: DesignLanguage) {
+  vi.mocked(window.gitify.githubCliAccounts).mockResolvedValue({ accounts: [] });
+
+  renderRoute(<GitHubLoginWithCLIRoute />, {
+    theme,
+    designLanguage,
+    initialEntries: ['/login/github/cli'],
+  });
+
+  await waitFor(() =>
+    expect(document.querySelector('[data-testid="login-cli-no-accounts"]')).not.toBeNull(),
+  );
+  await movePointerAway();
+
+  await expect(page.getByTestId('visual-root')).toMatchScreenshot(
+    `login-cli-no-accounts-${theme.toLowerCase()}-${designLanguage}`,
+  );
+}
+
 describe('renderer/routes/Login error states visual regression', () => {
   describe.each(THEME_VARIANTS)('$theme $designLanguage', ({ designLanguage, theme }) => {
     it('captures the PAT credentials error', async () => {
@@ -115,6 +159,18 @@ describe('renderer/routes/Login error states visual regression', () => {
       await captureCliError(theme, designLanguage);
 
       expect(document.querySelector('[data-testid="login-errors"]')).not.toBeNull();
+    });
+
+    it('captures the CLI account picker', async () => {
+      await captureCliAccounts(theme, designLanguage);
+
+      expect(document.querySelector('[data-testid="login-cli-account"]')).not.toBeNull();
+    });
+
+    it('captures the CLI empty-account state', async () => {
+      await captureCliNoAccounts(theme, designLanguage);
+
+      expect(document.querySelector('[data-testid="login-cli-no-accounts"]')).not.toBeNull();
     });
   });
 });

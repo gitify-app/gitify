@@ -1,4 +1,40 @@
+import type { GitHubCliIdentity } from '../../../shared/events';
+
 import type { Account, AccountUUID } from '../../types';
+
+/** GitHub logins are alphanumeric plus hyphens, up to 39 characters. */
+const CLI_LOGIN_PATTERN = /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,38})$/;
+
+/**
+ * Validate a CLI identity loaded from persisted state.
+ *
+ * Persisted JSON is untrusted, and a login reaches `gh` arguments through the
+ * bridge, so unknown kinds and malformed logins are dropped rather than kept.
+ *
+ * @param value - Candidate identity from persisted account state.
+ * @returns The identity when it is well formed, otherwise `undefined`.
+ */
+export function sanitizeCliIdentity(value: unknown): GitHubCliIdentity | undefined {
+  if (typeof value !== 'object' || value === null) {
+    return undefined;
+  }
+
+  const candidate = value as { kind?: unknown; login?: unknown };
+
+  if (candidate.kind === 'environment') {
+    return { kind: 'environment' };
+  }
+
+  if (
+    candidate.kind === 'account' &&
+    typeof candidate.login === 'string' &&
+    CLI_LOGIN_PATTERN.test(candidate.login)
+  ) {
+    return { kind: 'account', login: candidate.login };
+  }
+
+  return undefined;
+}
 
 /**
  * Return true if `hostname` is a valid DNS hostname (e.g. `github.com`).

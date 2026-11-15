@@ -1,32 +1,53 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
 import { mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
 
+import type { IGitHubCliAccountsResult } from '../../../shared/events';
+
 import * as logger from '../../utils/core/logger';
 import { GitHubLoginWithCLIRoute } from './LoginWithGitHubCLI';
+
+const SINGLE_ACCOUNT: IGitHubCliAccountsResult = {
+  accounts: [{ identity: { kind: 'account', login: 'octocat' }, active: true }],
+};
+
+const ACTIVE_OCTOCAT = { kind: 'account' as const, login: 'octocat' };
+
+function stubAccounts(result: IGitHubCliAccountsResult): void {
+  vi.mocked(window.gitify.githubCliAccounts).mockResolvedValue(result);
+}
+
+async function waitForLoginReady(): Promise<HTMLElement> {
+  const button = screen.getByRole('button', { name: 'Login' });
+  await waitFor(() => expect(button).toBeEnabled());
+  return button;
+}
 
 describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
   const loginWithCliMock = vi.fn();
 
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
     const tree = renderWithProviders(<GitHubLoginWithCLIRoute />);
+
+    await waitForLoginReady();
 
     expect(tree.container).toMatchSnapshot();
   });
 
-  it('logs in against github.com without asking for a token', async () => {
+  it('logs in against github.com with the offered identity', async () => {
     loginWithCliMock.mockResolvedValueOnce(undefined);
 
     renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
 
     expect(screen.queryByTestId('login-token')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
+    const button = await waitForLoginReady();
+    await userEvent.click(button);
 
     await waitFor(() => {
-      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.com');
+      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.com', ACTIVE_OCTOCAT);
       expect(navigateMock).toHaveBeenCalledWith('/');
     });
   });
@@ -39,10 +60,11 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
     const hostname = screen.getByRole('textbox', { name: /Hostname/ });
     await userEvent.clear(hostname);
     await userEvent.type(hostname, 'github.gitify.io');
-    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
+    const button = await waitForLoginReady();
+    await userEvent.click(button);
 
     await waitFor(() =>
-      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.gitify.io'),
+      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.gitify.io', ACTIVE_OCTOCAT),
     );
   });
 
@@ -81,7 +103,8 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
 
     renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
 
-    await userEvent.click(screen.getByRole('button', { name: 'Login' }));
+    const button = await waitForLoginReady();
+    await userEvent.click(button);
 
     await waitFor(() =>
       expect(screen.getByTestId('login-errors')).toHaveTextContent(
@@ -89,5 +112,193 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
       ),
     );
     expect(navigateMock).not.toHaveBeenCalledWith('/');
+  });
+
+  it('lists every stored account and preselects the active one', async () => {
+    stubAccounts({
+      accounts: [
+        { identity: { kind: 'account', login: 'alice' }, active: true },
+        { identity: { kind: 'account', login: 'bob' }, active: false },
+      ],
+    });
+
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+
+    const select = await screen.findByTestId('login-cli-account');
+    expect(await waitForLoginReady()).toBeEnabled();
+    expect(select).toHaveValue('account:alice');
+    expect(within(select).getByRole('option', { name: 'alice (active)' })).toBeInTheDocument();
+    expect(within(select).getByRole('option', { name: 'bob' })).toBeInTheDocument();
+  });
+
+  it('logs in with the account the user picks', async () => {
+    loginWithCliMock.mockResolvedValueOnce(undefined);
+    stubAccounts({
+      accounts: [
+        { identity: { kind: 'account', login: 'alice' }, active: true },
+        { identity: { kind: 'account', login: 'bob' }, active: false },
+      ],
+    });
+
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+
+    const select = await screen.findByTestId('login-cli-account');
+    await userEvent.selectOptions(select, 'account:bob');
+    await userEvent.click(await waitForLoginReady());
+
+    await waitFor(() =>
+      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.com', {
+        kind: 'account',
+        login: 'bob',
+      }),
+    );
+  });
+
+  it('offers the environment credential as its own choice', async () => {
+    loginWithCliMock.mockResolvedValueOnce(undefined);
+    stubAccounts({
+      accounts: [
+        { identity: { kind: 'account', login: 'alice' }, active: false },
+        { identity: { kind: 'environment' }, active: true },
+      ],
+    });
+
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+
+    const select = await screen.findByTestId('login-cli-account');
+    expect(within(select).getByRole('option', { name: 'Environment token' })).toBeInTheDocument();
+    await userEvent.selectOptions(select, 'environment');
+    await userEvent.click(await waitForLoginReady());
+
+    await waitFor(() =>
+      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.com', {
+        kind: 'environment',
+      }),
+    );
+  });
+
+  it('hides the choice when only one account is offered', async () => {
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+
+    await waitForLoginReady();
+
+    expect(screen.queryByTestId('login-cli-account')).not.toBeInTheDocument();
+  });
+
+  it('explains how to add an account when the CLI has none', async () => {
+    stubAccounts({ accounts: [] });
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+
+    await waitFor(() => expect(screen.getByTestId('login-cli-no-accounts')).toBeVisible());
+
+    expect(screen.getByTestId('login-cli-no-accounts')).toHaveTextContent('gh auth login');
+    expect(screen.getByRole('button', { name: 'Login' })).toBeDisabled();
+  });
+
+  it('disables login when the CLI account list cannot be read', async () => {
+    stubAccounts({ error: 'GH_FAILED', detail: 'keyring is locked' });
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+
+    await waitFor(() =>
+      expect(screen.getByText(/Could not load GitHub CLI accounts/)).toBeVisible(),
+    );
+    expect(screen.getByRole('button', { name: 'Login' })).toBeDisabled();
+  });
+
+  it('falls back to the active account on a CLI that cannot list accounts', async () => {
+    loginWithCliMock.mockResolvedValueOnce(undefined);
+    stubAccounts({ error: 'GH_ACCOUNTS_UNSUPPORTED' });
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+
+    const button = await waitForLoginReady();
+    expect(screen.queryByTestId('login-cli-account')).not.toBeInTheDocument();
+    expect(screen.getByText(/cannot list accounts/)).toBeVisible();
+
+    await userEvent.click(button);
+
+    await waitFor(() =>
+      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.com', undefined),
+    );
+  });
+
+  it('preselects the pinned identity when re-authenticating', async () => {
+    stubAccounts({
+      accounts: [
+        { identity: { kind: 'account', login: 'alice' }, active: true },
+        { identity: { kind: 'account', login: 'bob' }, active: false },
+      ],
+    });
+
+    renderWithProviders(<GitHubLoginWithCLIRoute />, {
+      initialEntries: [
+        {
+          pathname: '/login/github/cli',
+          state: {
+            account: {
+              ...mockGitHubEnterpriseServerAccount,
+              cliIdentity: { kind: 'account', login: 'bob' },
+            },
+          },
+        },
+      ],
+    });
+
+    expect(await screen.findByTestId('login-cli-account')).toHaveValue('account:bob');
+  });
+
+  it('requires a new choice when the pinned identity is gone', async () => {
+    stubAccounts({
+      accounts: [
+        { identity: { kind: 'account', login: 'alice' }, active: true },
+        { identity: { kind: 'account', login: 'bob' }, active: false },
+      ],
+    });
+
+    renderWithProviders(<GitHubLoginWithCLIRoute />, {
+      initialEntries: [
+        {
+          pathname: '/login/github/cli',
+          state: {
+            account: {
+              ...mockGitHubEnterpriseServerAccount,
+              cliIdentity: { kind: 'account', login: 'carol' },
+            },
+          },
+        },
+      ],
+    });
+
+    expect(await screen.findByTestId('login-cli-account')).toHaveValue('');
+    expect(screen.getByRole('button', { name: 'Login' })).toBeDisabled();
+  });
+
+  it('reloads the account list when the hostname changes', async () => {
+    stubAccounts(SINGLE_ACCOUNT);
+    vi.mocked(window.gitify.githubCliAccounts)
+      .mockResolvedValueOnce(SINGLE_ACCOUNT)
+      .mockResolvedValueOnce({
+        accounts: [{ identity: { kind: 'account', login: 'enterprise' }, active: true }],
+      });
+
+    renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
+    await waitForLoginReady();
+
+    const hostname = screen.getByRole('textbox', { name: /Hostname/ });
+    await userEvent.clear(hostname);
+    await userEvent.type(hostname, 'github.gitify.io');
+    const button = await waitForLoginReady();
+
+    await waitFor(() =>
+      expect(window.gitify.githubCliAccounts).toHaveBeenLastCalledWith('github.gitify.io'),
+    );
+    expect(screen.queryByTestId('login-cli-account')).not.toBeInTheDocument();
+    await userEvent.click(button);
+
+    await waitFor(() =>
+      expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.gitify.io', {
+        kind: 'account',
+        login: 'enterprise',
+      }),
+    );
   });
 });
