@@ -209,8 +209,8 @@ importers:
         version: 6.8.11(supports-color@7.2.0)
     devDependencies:
       '@discordapp/twemoji':
-        specifier: 16.0.1
-        version: 16.0.1
+        specifier: 17.0.3
+        version: 17.0.3
       '@electron/notarize':
         specifier: 3.1.2
         version: 3.1.2(supports-color@7.2.0)
@@ -515,8 +515,8 @@ packages:
   '@croct/json@2.1.0':
     resolution: {integrity: sha512-UrWfjNQVlBxN+OVcFwHmkjARMW55MBN04E9KfGac8ac8z1QnFVuiOOFtMWXCk3UwsyRqhsNaFoYLZC+xxqsVjQ==}
 
-  '@discordapp/twemoji@16.0.1':
-    resolution: {integrity: sha512-figLiBWzjS5cyrAjLaGjM8AAaowO3qvK8rg5bA2dElB4qsaPMvBVlFDMO2d3x+nC1igt7kgWH4dvNmvvUHUF8w==}
+  '@discordapp/twemoji@17.0.3':
+    resolution: {integrity: sha512-vSfSVq5y1bsvS9Qyp71yp2lsltM6RnTuoXpJ9UndzFLiur7foa8CfkjWkwJjWIUcOcnaG10fYOnPw9D9Vt79vg==}
 
   '@electron-internal/extract-zip@1.0.8':
     resolution: {integrity: sha512-8iajeLFbzNwM0m3AsQZSZgYREWglAImyGvvFSWU34FgMW8sHlzdwj9QKvv9dgN7jMP591EFUF/sLOC3Jl9YIjQ==}
@@ -1792,8 +1792,8 @@ packages:
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
 
-  '@twemoji/parser@16.0.0':
-    resolution: {integrity: sha512-jmuIjkp3OIaEemwMy3sArBwZSuZkRqmueGwRe2Zk4cFzbUJISFBJSZLDUUBNIgq3c+nY49ideYN2OiII6JUqwA==}
+  '@twemoji/parser@17.0.2':
+    resolution: {integrity: sha512-X/P7pHsGOxnrupQYUVetIeuxBGgffFu8CLwoPMMjH9CWmQvlXiCpbTW/BXxMOCWXQojgHdmgdvm6IsCqAQ5nxA==}
 
   '@types/aria-query@5.0.4':
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==}
@@ -4803,9 +4803,9 @@ snapshots:
 
   '@croct/json@2.1.0': {}
 
-  '@discordapp/twemoji@16.0.1':
+  '@discordapp/twemoji@17.0.3':
     dependencies:
-      '@twemoji/parser': 16.0.0
+      '@twemoji/parser': 17.0.2
       fs-extra: 8.1.0
       jsonfile: 5.0.0
       universalify: 0.1.2
@@ -6061,7 +6061,7 @@ snapshots:
     dependencies:
       '@testing-library/dom': 10.4.2
 
-  '@twemoji/parser@16.0.0': {}
+  '@twemoji/parser@17.0.2': {}
 
   '@types/aria-query@5.0.4': {}
 

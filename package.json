@@ -89,7 +89,7 @@
     "electron-updater": "6.8.11"
   },
   "devDependencies": {
-    "@discordapp/twemoji": "16.0.1",
+    "@discordapp/twemoji": "17.0.3",
     "@electron/notarize": "3.1.2",
     "@graphql-codegen/cli": "8.0.0",
     "@graphql-codegen/schema-ast": "7.0.0",
