@@ -11,7 +11,7 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
 catalog:
-  electron: '45.2.3'
+  electron: '45.3.1'
   vite: npm:@voidzero-dev/vite-plus-core@1.5.0
   vitest: 5.1.0
   vite-plus: 1.5.0
