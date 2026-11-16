@@ -146,7 +146,7 @@
     "tailwindcss": "4.3.5",
     "typescript": "7.0.2",
     "vite": "catalog:",
-    "vite-plugin-checker": "0.14.5",
+    "vite-plugin-checker": "1.0.0",
     "vite-plugin-electron": "1.2.0",
     "vite-plus": "catalog:",
     "vitest": "catalog:",
