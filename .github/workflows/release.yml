@@ -23,10 +23,16 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
       release_pr_title: ${{ steps.pr.outputs.prs_created == 'true' && fromJSON(steps.pr.outputs.pr).title || '' }}
     steps:
+      # Release PRs authored by github-actions[bot] (GITHUB_TOKEN) start their
+      # pull_request runs in an action_required state, so CI and the Apple
+      # notarization readiness gate wait for a manual approval every release.
+      # A token from a write-access identity lets those runs start automatically.
+      # Falls back to GITHUB_TOKEN until the secret is configured.
       - name: Run release-please (releases)
         id: release
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
           skip-github-pull-request: true
 
       - name: Check for unpublished draft releases
@@ -43,6 +49,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created != 'true' && steps.drafts.outputs.count == '0' }}
         uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
           skip-github-release: true
 
   milestones:

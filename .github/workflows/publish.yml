@@ -36,8 +36,31 @@ on:
 permissions: {}
 
 jobs:
+  # Fail in seconds instead of after a build, sign, and notarize cycle. The
+  # release PR gate should already have caught this, but manual dispatches and
+  # expired agreements still deserve a clear, early error.
+  preflight:
+    name: Apple notarization preflight
+    runs-on: macos-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify Apple notarization access
+        env:
+          APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
+        run: ./scripts/verifyAppleNotarization.sh
+
   release:
     name: Publish ${{ matrix.platform }} [electron-builder]
+    needs: preflight
     permissions:
       contents: write
     strategy:
