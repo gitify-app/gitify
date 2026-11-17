@@ -38,6 +38,15 @@ describe('renderer/components/GlobalEffects.tsx', () => {
     expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(-1, true);
   });
 
+  it('does not report an error to the tray while the query is offline', async () => {
+    await act(async () => {
+      renderWithProviders(<GlobalEffects />, { status: 'offline', notificationCount: 3 });
+    });
+
+    expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(3, true);
+    expect(setTrayIconColorAndTitleSpy).not.toHaveBeenCalledWith(-1, true);
+  });
+
   it('resets all stores when the app is reset', async () => {
     await act(async () => {
       renderWithProviders(<GlobalEffects />, {

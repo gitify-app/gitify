@@ -52,7 +52,7 @@ export function toLinkOrNull(value: string | null | undefined): Link | null {
 
 export type SearchToken = Branded<string, 'SearchToken'>;
 
-export type Status = 'loading' | 'success' | 'error';
+export type Status = 'loading' | 'offline' | 'success' | 'error';
 
 export type Percentage = Branded<number, 'Percentage'>;
 

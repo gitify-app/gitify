@@ -35,7 +35,7 @@ export function NotificationsRoute() {
     [visibleNotifications],
   );
 
-  if (!isOnline) {
+  if (!isOnline || status === 'offline') {
     return <Oops error={getErrorDetails('OFFLINE')} />;
   }
 
