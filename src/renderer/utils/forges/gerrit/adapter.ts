@@ -12,6 +12,7 @@ import type {
 
 import { GerritIcon } from '../../../icons/GerritIcon';
 import { isValidHostname } from '../../auth/identity';
+import { rendererLogWarn } from '../../core/logger';
 import { createNotificationHandler } from '../github/handlers';
 import {
   fetchGerritAuthenticatedUser,
@@ -24,16 +25,8 @@ import { transformGerritChanges } from './transform';
 const GERRIT_DOCS_URL =
   'https://gerrit-review.googlesource.com/Documentation/rest-api.html' as Link;
 
-/**
- * Minimum supported Gerrit server version — a hard floor, not a per-capability
- * gate (unlike GHES). Chosen as the oldest version the Gerrit project itself
- * still actively supports ("the community actively supports the last 3
- * releases" — https://www.gerritcodereview.com/support.html#supported-versions),
- * not the oldest version the Attention Set feature technically works on
- * (Attention Set has existed since Gerrit 3.3, already long EOL). Revisit
- * periodically as Gerrit's support window rolls forward.
- */
-const GERRIT_MIN_VERSION = '3.12.0';
+// Support-policy recommendation, not a technical requirement for Attention Set.
+const GERRIT_RECOMMENDED_VERSION = '3.12.0';
 
 const capabilities: ForgeCapabilities = {
   // Gerrit has no "done"/archive concept distinct from "mark as read"
@@ -46,22 +39,16 @@ const capabilities: ForgeCapabilities = {
   unsubscribeThread: () => false,
 };
 
-/**
- * Throw when the server is known to be older than the minimum supported
- * version. Deliberately does *not* throw when the version can't be
- * determined at all (e.g. `/config/server/version` blocked by server
- * config) — we can't prove the server is unsupported, so a false-positive
- * lockout is worse than letting the login proceed.
- */
-function assertSupportedVersion(rawVersion: string | undefined): void {
+function warnOnOlderVersion(rawVersion: string | undefined): void {
   if (!rawVersion) {
     return;
   }
 
   const coerced = semver.coerce(rawVersion);
-  if (coerced && semver.lt(coerced, GERRIT_MIN_VERSION)) {
-    throw new Error(
-      `Gerrit server version ${rawVersion} is not supported; Gitify requires Gerrit ${GERRIT_MIN_VERSION} or later.`,
+  if (coerced && semver.lt(coerced, GERRIT_RECOMMENDED_VERSION)) {
+    rendererLogWarn(
+      'gerrit:fetchAuthenticatedUser',
+      `Gerrit server version ${rawVersion} is older than the recommended ${GERRIT_RECOMMENDED_VERSION}. Login is allowed, but compatibility is not guaranteed.`,
     );
   }
 }
@@ -69,7 +56,7 @@ function assertSupportedVersion(rawVersion: string | undefined): void {
 async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountData> {
   const { account: gerritUser, version } = await fetchGerritAuthenticatedUser(account);
 
-  assertSupportedVersion(version);
+  warnOnOlderVersion(version);
 
   return {
     user: {

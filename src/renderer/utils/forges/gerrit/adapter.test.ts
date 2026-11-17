@@ -5,6 +5,7 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 
 import type { Hostname, Link, Token } from '../../../types';
 
+import * as logger from '../../core/logger';
 import { gerritAdapter } from './adapter';
 import * as client from './client';
 
@@ -114,38 +115,37 @@ describe('renderer/utils/forges/gerrit/adapter.ts', () => {
       expect(result.version).toBeUndefined();
     });
 
-    it('throws when the server version is below the supported floor', async () => {
+    it.each(['3.9.0', '3.11.0'])('warns but allows login on Gerrit %s', async (version) => {
+      const warnSpy = vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
       vi.spyOn(client, 'fetchGerritAuthenticatedUser').mockResolvedValue({
         account: { _account_id: 1, username: 'jdoe' },
-        version: '3.9.0',
+        version,
       });
 
       await expect(
         gerritAdapter.accountOps.fetchAuthenticatedUser(mockGerritAccount),
-      ).rejects.toThrow(/requires Gerrit 3\.12\.0 or later/);
+      ).resolves.toMatchObject({ user: { id: '1', login: 'jdoe' }, version });
+      expect(warnSpy).toHaveBeenCalledExactlyOnceWith(
+        'gerrit:fetchAuthenticatedUser',
+        `Gerrit server version ${version} is older than the recommended 3.12.0. Login is allowed, but compatibility is not guaranteed.`,
+      );
     });
 
-    it('does not throw when the version could not be determined', async () => {
-      vi.spyOn(client, 'fetchGerritAuthenticatedUser').mockResolvedValue({
-        account: { _account_id: 1, username: 'jdoe' },
-        version: undefined,
-      });
+    it.each([undefined, 'unknown', '3.12.0', '3.13.2'])(
+      'allows login without a version warning for %s',
+      async (version) => {
+        const warnSpy = vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
+        vi.spyOn(client, 'fetchGerritAuthenticatedUser').mockResolvedValue({
+          account: { _account_id: 1, username: 'jdoe' },
+          version,
+        });
 
-      await expect(
-        gerritAdapter.accountOps.fetchAuthenticatedUser(mockGerritAccount),
-      ).resolves.toBeDefined();
-    });
-
-    it('accepts a version exactly on the floor', async () => {
-      vi.spyOn(client, 'fetchGerritAuthenticatedUser').mockResolvedValue({
-        account: { _account_id: 1, username: 'jdoe' },
-        version: '3.12.0',
-      });
-
-      await expect(
-        gerritAdapter.accountOps.fetchAuthenticatedUser(mockGerritAccount),
-      ).resolves.toBeDefined();
-    });
+        await expect(
+          gerritAdapter.accountOps.fetchAuthenticatedUser(mockGerritAccount),
+        ).resolves.toBeDefined();
+        expect(warnSpy).not.toHaveBeenCalled();
+      },
+    );
   });
 
   describe('listNotifications', () => {
