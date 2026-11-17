@@ -6,6 +6,7 @@ import { Constants } from '../../constants';
 
 import {
   useAccountsStore,
+  useConnectionStore,
   useFiltersStore,
   usePowerStateStore,
   useSettingsStore,
@@ -31,6 +32,8 @@ export interface NotificationsQueryResult {
   isLoading: boolean;
   isError: boolean;
   isFetching: boolean;
+  isPaused: boolean;
+  dataUpdatedAt: number;
   notificationCount: number;
   unreadNotificationCount: number;
   hasNotifications: boolean;
@@ -69,6 +72,7 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
   // Account store values
   const accounts = useAccountsStore((s) => s.accounts);
   const isPowerActive = usePowerStateStore((s) => s.isActive);
+  const connectionState = useConnectionStore((s) => s.state);
 
   // Filter store values
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
@@ -113,6 +117,7 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
   // Query for fetching notifications - TanStack Query handles polling and refetching
   const {
     data: notifications = [],
+    dataUpdatedAt,
     isLoading,
     isFetching,
     isError,
@@ -167,13 +172,13 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
   // refetches of already-settled data keep their settled status so
   // consumers like the tray icon don't flicker on every poll/retry.
   const status: Status = useMemo(
-    () => deriveStatus({ isLoading, isPaused, isError, notifications }),
-    [isLoading, isPaused, isError, notifications],
+    () => deriveStatus({ isLoading, isPaused, isError, connectionState, notifications }),
+    [isLoading, isPaused, isError, connectionState, notifications],
   );
 
   const globalError: GitifyError | undefined = useMemo(
-    () => deriveGlobalError({ isPaused, notifications }),
-    [isPaused, notifications],
+    () => deriveGlobalError({ isPaused, connectionState, notifications }),
+    [isPaused, connectionState, notifications],
   );
 
   return {
@@ -181,6 +186,8 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     isLoading,
     isError,
     isFetching,
+    isPaused,
+    dataUpdatedAt,
     notificationCount,
     unreadNotificationCount,
     hasNotifications,

@@ -18,7 +18,12 @@ const networkError = group(mockGitHubCloudAccount, getErrorDetails('NETWORK'));
 const networkErrorSecond = group(mockGitHubEnterpriseServerAccount, getErrorDetails('NETWORK'));
 const rateLimitedError = group(mockGitHubEnterpriseServerAccount, getErrorDetails('RATE_LIMITED'));
 
-const baseInput = { isLoading: false, isPaused: false, isError: false };
+const baseInput = {
+  isLoading: false,
+  isPaused: false,
+  isError: false,
+  connectionState: 'online' as const,
+};
 
 describe('renderer/utils/notifications/status.ts', () => {
   describe('deriveStatus', () => {
@@ -49,6 +54,39 @@ describe('renderer/utils/notifications/status.ts', () => {
       ).toBe('offline');
     });
 
+    it('reports offline when the connection is offline', () => {
+      expect(
+        deriveStatus({ ...baseInput, connectionState: 'offline', notifications: [clean] }),
+      ).toBe('offline');
+    });
+
+    it('reports recovering while recovery is active', () => {
+      expect(
+        deriveStatus({ ...baseInput, connectionState: 'recovering', notifications: [clean] }),
+      ).toBe('recovering');
+    });
+
+    it('reports recovering over loading and account errors', () => {
+      expect(
+        deriveStatus({
+          ...baseInput,
+          connectionState: 'recovering',
+          isLoading: true,
+          notifications: [networkError, rateLimitedError],
+        }),
+      ).toBe('recovering');
+    });
+
+    it('reports the settled error after recovery ends', () => {
+      expect(
+        deriveStatus({
+          ...baseInput,
+          connectionState: 'online',
+          notifications: [networkError, networkErrorSecond],
+        }),
+      ).toBe('error');
+    });
+
     it('reports error when the query failed', () => {
       expect(deriveStatus({ ...baseInput, isError: true, notifications: [clean] })).toBe('error');
     });
@@ -66,30 +104,58 @@ describe('renderer/utils/notifications/status.ts', () => {
 
   describe('deriveGlobalError', () => {
     it('returns the offline error when paused', () => {
-      expect(deriveGlobalError({ isPaused: true, notifications: [clean] })).toEqual(
-        getErrorDetails('OFFLINE'),
-      );
+      expect(
+        deriveGlobalError({
+          isPaused: true,
+          connectionState: 'online',
+          notifications: [clean],
+        }),
+      ).toEqual(getErrorDetails('OFFLINE'));
+    });
+
+    it('returns the offline error while recovering', () => {
+      expect(
+        deriveGlobalError({
+          isPaused: false,
+          connectionState: 'recovering',
+          notifications: [networkError],
+        }),
+      ).toEqual(getErrorDetails('OFFLINE'));
     });
 
     it('returns undefined when there are no accounts', () => {
-      expect(deriveGlobalError({ isPaused: false, notifications: [] })).toBeUndefined();
+      expect(
+        deriveGlobalError({ isPaused: false, connectionState: 'online', notifications: [] }),
+      ).toBeUndefined();
     });
 
     it('returns the shared error when all accounts have the same error', () => {
       expect(
-        deriveGlobalError({ isPaused: false, notifications: [networkError, networkErrorSecond] }),
+        deriveGlobalError({
+          isPaused: false,
+          connectionState: 'online',
+          notifications: [networkError, networkErrorSecond],
+        }),
       ).toEqual(getErrorDetails('NETWORK'));
     });
 
     it('returns undefined when accounts have differing errors', () => {
       expect(
-        deriveGlobalError({ isPaused: false, notifications: [networkError, rateLimitedError] }),
+        deriveGlobalError({
+          isPaused: false,
+          connectionState: 'online',
+          notifications: [networkError, rateLimitedError],
+        }),
       ).toBeUndefined();
     });
 
     it('returns undefined on partial failure', () => {
       expect(
-        deriveGlobalError({ isPaused: false, notifications: [clean, networkError] }),
+        deriveGlobalError({
+          isPaused: false,
+          connectionState: 'online',
+          notifications: [clean, networkError],
+        }),
       ).toBeUndefined();
     });
   });

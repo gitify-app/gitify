@@ -32,6 +32,9 @@ function buildNotificationsDefaults(): NotificationsState {
     globalError: undefined,
 
     isFetching: false,
+    isPaused: false,
+    isError: false,
+    dataUpdatedAt: 0,
 
     notifications: [],
     notificationCount: 0,

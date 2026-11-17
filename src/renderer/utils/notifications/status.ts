@@ -1,4 +1,4 @@
-import type { AccountNotifications, GitifyError, Status } from '../../types';
+import type { AccountNotifications, ConnectionState, GitifyError, Status } from '../../types';
 
 import {
   areAllAccountErrorsSame,
@@ -19,6 +19,8 @@ export interface NotificationStatusInput {
   isPaused: boolean;
   /** The query failed outright. */
   isError: boolean;
+  /** The session-local connectivity lifecycle. */
+  connectionState: ConnectionState;
   /** Per-account notification groups, each carrying its own error (or null). */
   notifications: AccountNotifications[];
 }
@@ -30,17 +32,22 @@ export interface NotificationStatusInput {
  * background refetches of already-settled data keep their settled status.
  *
  * A paused query means there is no connectivity, not that a fetch failed, so it
- * reports `offline` rather than `error`. This keeps the tray and notifications
- * view from showing a failure while the app is offline or reconnecting.
+ * reports `offline` rather than `error`. Recovery likewise holds connectivity
+ * presentation until a fetch settles, so neither state is ever `error`.
  */
 export function deriveStatus({
   isLoading,
   isPaused,
   isError,
+  connectionState,
   notifications,
 }: NotificationStatusInput): Status {
-  if (isPaused) {
+  if (connectionState === 'offline' || isPaused) {
     return 'offline';
+  }
+
+  if (connectionState === 'recovering') {
+    return 'recovering';
   }
 
   if (isLoading) {
@@ -69,9 +76,12 @@ export function deriveStatus({
  */
 export function deriveGlobalError({
   isPaused,
+  connectionState,
   notifications,
-}: Pick<NotificationStatusInput, 'isPaused' | 'notifications'>): GitifyError | undefined {
-  if (isPaused) {
+}: Pick<NotificationStatusInput, 'isPaused' | 'connectionState' | 'notifications'>):
+  | GitifyError
+  | undefined {
+  if (connectionState === 'offline' || connectionState === 'recovering' || isPaused) {
     return getErrorDetails('OFFLINE');
   }
 

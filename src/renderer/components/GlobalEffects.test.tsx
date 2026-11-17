@@ -5,6 +5,7 @@ import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
 import {
   useAccountsStore,
+  useConnectionStore,
   usePowerStateStore,
   useSettingsStore,
   useShortcutRegistrationStore,
@@ -45,6 +46,22 @@ describe('renderer/components/GlobalEffects.tsx', () => {
 
     expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(3, true);
     expect(setTrayIconColorAndTitleSpy).not.toHaveBeenCalledWith(-1, true);
+  });
+
+  it('holds the tray offline while the connection is recovering', async () => {
+    useConnectionStore.setState({
+      state: 'recovering',
+      recoveringSince: Date.now(),
+      baselineDataUpdatedAt: 0,
+    });
+
+    await act(async () => {
+      renderWithProviders(<GlobalEffects />, { status: 'recovering', notificationCount: 3 });
+    });
+
+    expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(3, false);
+    expect(setTrayIconColorAndTitleSpy).not.toHaveBeenCalledWith(3, true);
+    expect(setTrayIconColorAndTitleSpy).not.toHaveBeenCalledWith(-1, false);
   });
 
   it('resets all stores when the app is reset', async () => {
@@ -135,9 +152,13 @@ describe('renderer/components/GlobalEffects.tsx', () => {
 
       const callCountAfterMount = refreshAccountSpy.mock.calls.length;
 
-      const wakeCallback = vi.mocked(window.gitify.onSystemWake).mock.calls[0][0];
+      const wakeCallbacks = vi
+        .mocked(window.gitify.onSystemWake)
+        .mock.calls.map(([callback]) => callback);
       await act(async () => {
-        wakeCallback();
+        for (const wakeCallback of wakeCallbacks) {
+          wakeCallback();
+        }
       });
 
       expect(refreshAccountSpy.mock.calls.length).toBeGreaterThan(callCountAfterMount);

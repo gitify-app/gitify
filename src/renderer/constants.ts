@@ -82,6 +82,10 @@ export const Constants = {
 
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
 
+  // How long the app holds the offline presentation after connectivity returns
+  // or the system wakes, waiting for the first notification fetch to settle.
+  RECOVERY_WINDOW_MS: 15 * 1000, // 15 seconds
+
   // Cooldown before retrying a failed query, used by TanStack Query client
   QUERY_RETRY_DELAY_MS: 30 * 1000, // 30 seconds
 

@@ -91,6 +91,19 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(screen.queryByText('AllRead')).not.toBeInTheDocument();
   });
 
+  it('prefers the offline state while recovering', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      status: 'recovering',
+      isOnline: true,
+      notifications: mockMultipleAccountNotifications,
+      hasNotifications: true,
+    });
+
+    expect(screen.getByText('Oops')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+    expect(screen.queryByText('NotificationList')).not.toBeInTheDocument();
+  });
+
   it('prefers the error state over loading', () => {
     renderWithProviders(<NotificationsRoute />, {
       globalError: getErrorDetails('UNKNOWN'),

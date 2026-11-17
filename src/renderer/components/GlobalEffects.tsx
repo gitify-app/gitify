@@ -5,11 +5,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useNotificationsHost } from '../hooks/notifications/useNotificationsHost';
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
+import { useConnectionRecovery } from '../hooks/useConnectionRecovery';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { usePowerState } from '../hooks/usePowerState';
 import { useShortcutRegistration } from '../hooks/useShortcutRegistration';
 import {
   useAccountsStore,
+  useConnectionStore,
   useFiltersStore,
   useSettingsStore,
   useShortcutRegistrationStore,
@@ -43,7 +45,20 @@ export function GlobalEffects() {
 
   // Notification fetching side effects (sound / native alerts, interval/focus/reconnect
   // polling, and the system-wake refetch)
-  const { status, notificationCount } = useNotificationsHost();
+  const { status, notificationCount, notifications, isFetching, isPaused, isError, dataUpdatedAt } =
+    useNotificationsHost();
+
+  // Connection recovery side effects (offline/recovering/online lifecycle)
+  useConnectionRecovery({
+    isOnline,
+    isFetching,
+    isPaused,
+    isError,
+    dataUpdatedAt,
+    notifications,
+  });
+
+  const connectionState = useConnectionStore((s) => s.state);
 
   // Periodic account refreshes (startup + hourly interval)
   useAccounts();
@@ -57,7 +72,10 @@ export function GlobalEffects() {
   // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   useEffect(() => {
     const trayCount = status === 'error' ? -1 : notificationCount;
-    setTrayIconColorAndTitle(trayCount, isOnline);
+    // The tray payload's `isOnline` means "present as connected", not raw
+    // navigator state: offline and recovering both present as offline.
+    const trayOnline = isOnline && connectionState === 'online';
+    setTrayIconColorAndTitle(trayCount, trayOnline);
   }, [
     showNotificationsCountInTray,
     useUnreadActiveIcon,
@@ -65,6 +83,7 @@ export function GlobalEffects() {
     status,
     notificationCount,
     isOnline,
+    connectionState,
   ]);
 
   useEffect(() => {

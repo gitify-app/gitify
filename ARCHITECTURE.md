@@ -72,6 +72,7 @@ App-level side effects are owned by a single host. `GlobalEffects` mounts exactl
 
 - **Hidden or unfocused window:** polling continues; `refetchIntervalInBackground` keeps the timers running.
 - **Offline:** notification and account queries pause (`networkMode: 'online'`), and the notifications screen shows the offline state; on reconnect they resume, and the online state is re-probed on wake.
+- **Recovering:** after connectivity returns or the system wakes while online, a session-local connection lifecycle presents the offline state (gray tray icon and offline notifications screen) until the first notification fetch settles, a non-retryable failure is identified, or the bounded recovery window expires. The red error presentation is reserved for a settled failure while online, never for the offline-to-online transition.
 - **Locked or suspended:** `SYSTEM_SLEEP` disables the query intervals; `SYSTEM_WAKE` re-enables them and triggers an immediate refetch of the notification and account queries (`cancelRefetch: false`) before the normal intervals resume.
 
 Consumers read the shared query cache and stores, and **do not register their own** polling, alerts, wake, or focus listeners. This keeps background work (for example, firing one poll per interval) from multiplying with the number of mounted components. When you add a new background effect, add it to the host, not to a leaf component.

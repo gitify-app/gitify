@@ -52,7 +52,10 @@ export function toLinkOrNull(value: string | null | undefined): Link | null {
 
 export type SearchToken = Branded<string, 'SearchToken'>;
 
-export type Status = 'loading' | 'offline' | 'success' | 'error';
+export type Status = 'loading' | 'offline' | 'recovering' | 'success' | 'error';
+
+/** Session-local connectivity lifecycle used by status and tray presentation. */
+export type ConnectionState = 'offline' | 'recovering' | 'online';
 
 export type Percentage = Branded<number, 'Percentage'>;
 
