@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.2.1](https://github.com/gitify-app/gitify/compare/v8.2.0...v8.2.1) (2026-11-17)
+
+
+### 🐛 Bug Fixes
+
+* changelog URL for twemoji package ([b4fb29d](https://github.com/gitify-app/gitify/commit/b4fb29df9c6d7da8adab79a385ec9288b5241e92))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update electron to v45.3.1 ([#3689](https://github.com/gitify-app/gitify/issues/3689)) ([f9d0d0a](https://github.com/gitify-app/gitify/commit/f9d0d0a16309f60ba39e8ceb6577d04f0bd945e2))
+
 ## [8.2.0](https://github.com/gitify-app/gitify/compare/v8.1.0...v8.2.0) (2026-11-13)
 
 
