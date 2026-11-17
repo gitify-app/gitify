@@ -86,6 +86,10 @@ export const Constants = {
   // or the system wakes, waiting for the first notification fetch to settle.
   RECOVERY_WINDOW_MS: 15 * 1000, // 15 seconds
 
+  // Retry cadence while recovering from an all-account retryable connection
+  // failure, before falling back to the user/server poll interval.
+  RECOVERY_RETRY_INTERVAL_MS: 5 * 1000, // 5 seconds
+
   // Cooldown before retrying a failed query, used by TanStack Query client
   QUERY_RETRY_DELAY_MS: 30 * 1000, // 30 seconds
 

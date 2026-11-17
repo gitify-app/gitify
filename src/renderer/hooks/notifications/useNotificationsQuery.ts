@@ -23,7 +23,8 @@ import {
   getNotificationCount,
   getUnreadNotificationCount,
 } from '../../utils/notifications/notifications';
-import { computeRefetchIntervalMs } from '../../utils/notifications/pollInterval';
+import { computeNotificationRefetchIntervalMs } from '../../utils/notifications/pollInterval';
+import { shouldUseRecoveryRetry } from '../../utils/notifications/recovery';
 import { deriveGlobalError, deriveStatus } from '../../utils/notifications/status';
 import { useNotificationsQueryKey } from './useNotificationsQueryKey';
 
@@ -150,7 +151,18 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     // interval is re-evaluated after each fetch so it stretches to the latest
     // server-recommended minimum (`X-Poll-Interval`) when required.
     refetchInterval:
-      poll && isPowerActive ? () => computeRefetchIntervalMs(fetchIntervalMs, accounts) : false,
+      poll && isPowerActive
+        ? (query) =>
+            computeNotificationRefetchIntervalMs({
+              userIntervalMs: fetchIntervalMs,
+              accounts,
+              recoveryRetry: shouldUseRecoveryRetry(
+                useConnectionStore.getState().state,
+                query.state.data ?? [],
+              ),
+              recoveryRetryIntervalMs: Constants.RECOVERY_RETRY_INTERVAL_MS,
+            })
+        : false,
     refetchOnMount: poll,
     refetchOnReconnect: poll,
     refetchOnWindowFocus: poll,

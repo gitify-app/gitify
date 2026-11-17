@@ -1,4 +1,4 @@
-import type { AccountNotifications, ErrorType } from '../../types';
+import type { AccountNotifications, ConnectionState, ErrorType } from '../../types';
 
 import { doesAllAccountsHaveErrors } from '../core/errors';
 
@@ -40,4 +40,17 @@ export function isRetryableConnectionError(notifications: AccountNotifications[]
       return errorType !== undefined && DEFINITIVE_ERROR_TYPES.has(errorType);
     })
   );
+}
+
+/**
+ * Whether the next notification fetch should use the short recovery retry
+ * cadence: only while recovering and the latest settled fetch was a retryable
+ * connection failure. A clean, partial, or definitive outcome returns to the
+ * normal user/server interval.
+ */
+export function shouldUseRecoveryRetry(
+  connectionState: ConnectionState,
+  notifications: AccountNotifications[],
+): boolean {
+  return connectionState === 'recovering' && isRetryableConnectionError(notifications);
 }

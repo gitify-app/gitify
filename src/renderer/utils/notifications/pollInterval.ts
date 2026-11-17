@@ -52,6 +52,38 @@ export function computeRefetchIntervalMs(userIntervalMs: number, accounts: Accou
   return Math.max(userIntervalMs, ...serverIntervalsMs);
 }
 
+export interface NotificationRefetchIntervalInput {
+  /** The user-configured fetch interval in milliseconds. */
+  userIntervalMs: number;
+  /** The accounts currently being polled. */
+  accounts: Account[];
+  /** Whether the next fetch is a recovery retry after a failed attempt. */
+  recoveryRetry: boolean;
+  /** The short cadence to use for a recovery retry. */
+  recoveryRetryIntervalMs: number;
+}
+
+/**
+ * Compute the next notifications refresh interval.
+ *
+ * A recovery retry may run sooner than the user/server cadence because the
+ * previous attempt failed and received no fresh server guidance. Normal polls
+ * still use {@link computeRefetchIntervalMs}, which keeps the server-recommended
+ * interval as a floor.
+ */
+export function computeNotificationRefetchIntervalMs({
+  userIntervalMs,
+  accounts,
+  recoveryRetry,
+  recoveryRetryIntervalMs,
+}: NotificationRefetchIntervalInput): number {
+  if (recoveryRetry) {
+    return recoveryRetryIntervalMs;
+  }
+
+  return computeRefetchIntervalMs(userIntervalMs, accounts);
+}
+
 /**
  * Clear all reported poll intervals. Intended for use in tests to keep the
  * module-level state from leaking across cases.

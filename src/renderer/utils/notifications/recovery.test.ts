@@ -6,7 +6,7 @@ import {
 import type { AccountNotifications, ErrorType } from '../../types';
 
 import { getErrorDetails } from '../core/errors';
-import { hasCleanAccount, isRetryableConnectionError } from './recovery';
+import { hasCleanAccount, isRetryableConnectionError, shouldUseRecoveryRetry } from './recovery';
 
 function group(errorType: ErrorType | null = null, account = mockGitHubCloudAccount) {
   return {
@@ -65,6 +65,34 @@ describe('renderer/utils/notifications/recovery.ts', () => {
 
     it('is false with no accounts', () => {
       expect(isRetryableConnectionError([])).toBe(false);
+    });
+  });
+
+  describe('shouldUseRecoveryRetry', () => {
+    const networkFailures = [group('NETWORK'), group('UNKNOWN', mockGitHubEnterpriseServerAccount)];
+
+    it('is true while recovering with a retryable failure', () => {
+      expect(shouldUseRecoveryRetry('recovering', networkFailures)).toBe(true);
+    });
+
+    it('is false once recovery ends', () => {
+      expect(shouldUseRecoveryRetry('online', networkFailures)).toBe(false);
+    });
+
+    it('is false while offline', () => {
+      expect(shouldUseRecoveryRetry('offline', networkFailures)).toBe(false);
+    });
+
+    it('is false after a clean success', () => {
+      expect(shouldUseRecoveryRetry('recovering', [group()])).toBe(false);
+    });
+
+    it('is false after a partial success', () => {
+      expect(shouldUseRecoveryRetry('recovering', [group(), group('NETWORK')])).toBe(false);
+    });
+
+    it('is false after a definitive failure', () => {
+      expect(shouldUseRecoveryRetry('recovering', [group('BAD_CREDENTIALS')])).toBe(false);
     });
   });
 });
