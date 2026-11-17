@@ -225,6 +225,8 @@ Releases are automated with [release-please][release-please]. There is no releas
 
    Before merging, wait for the **Apple notarization readiness** check. It authenticates to Apple's notary service with the same credentials the release uses and fails when a required Apple agreement is missing or expired. Only the Account Holder can accept the [Apple Developer Program License Agreement](https://developer.apple.com/account) or a pending agreement in [App Store Connect](https://appstoreconnect.apple.com/business/agreements), so surface the failure to them instead of re-running the build.
 
+   release-please opens the PR with `GITHUB_TOKEN`, so GitHub holds its workflow runs for approval. A maintainer with write access must select **Approve workflows to run** before CI and the Apple check execute.
+
 3. **Merge the release PR when you are ready to ship.** Merging is the "go" decision. GitHub Actions then automatically:
 
 - builds, signs, and notarizes the app on macOS, Windows, and Linux,
@@ -241,7 +243,7 @@ No manual milestone creation, renaming, or closing is required.
 
 #### 🔐 Release automation permissions
 
-- release-please uses the `RELEASE_PLEASE_TOKEN` secret when it is configured (a fine-grained token or GitHub App token with contents, pull requests, and issues write). Release PRs authored by `github-actions[bot]` via `GITHUB_TOKEN` start their `pull_request` runs in an `action_required` state, so CI and the Apple notarization readiness gate would otherwise wait for a manual approval on every release. Without the secret, the workflow falls back to `GITHUB_TOKEN` and keeps working with that approval prompt.
+- release-please uses `GITHUB_TOKEN`, so its release PR workflow runs require approval from a user with write access.
 - Packaging and publication use `contents: write`.
 - The milestone automation uses `issues: write`.
 - Pull request notification uses `issues: write`, `pull-requests: write`, and `contents: read`.
