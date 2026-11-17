@@ -292,7 +292,7 @@ Gitify supports notifications from multiple Git forges. New forges may be added 
 - **Capability-honest UI:** features unsupported by a forge (e.g. mark-as-done) must hide gracefully, not silently no-op.
 - **No core-platform churn:** Octicons, Octokit, and the Primer Design System remain in place. Octokit is scoped to the GitHub adapter; other adapters use plain `fetch`.
 
-Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Cloud with Data Residency), **Gitea** (incl. Forgejo, Codeberg), **Bitbucket Cloud** and **GitLab** (Cloud and Self-Managed).
+Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Cloud with Data Residency), **Gitea** (incl. Forgejo, Codeberg), **Bitbucket Cloud**, **GitLab** (Cloud and Self-Managed), and **Gerrit** (3.12 or later recommended; older versions warn in logs but are not blocked).
 
 #### 🚫 Things we won't do
 

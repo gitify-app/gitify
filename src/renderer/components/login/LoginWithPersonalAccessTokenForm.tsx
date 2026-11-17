@@ -53,6 +53,8 @@ export interface LoginWithPersonalAccessTokenFormProps {
   showUsernameField?: boolean;
   usernamePlaceholder?: string;
   usernameCaption?: string;
+  usernameLabel?: string;
+  usernameInputType?: 'email' | 'text';
   /** Forge-specific content rendered below the token settings row (e.g. scope hints). */
   children?: ReactNode;
 }
@@ -76,6 +78,8 @@ export function LoginWithPersonalAccessTokenForm({
   showUsernameField = false,
   usernamePlaceholder = '',
   usernameCaption = '',
+  usernameLabel,
+  usernameInputType = 'text',
   children,
 }: Readonly<LoginWithPersonalAccessTokenFormProps>) {
   const { t } = useTranslation();
@@ -170,7 +174,7 @@ export function LoginWithPersonalAccessTokenForm({
           {showUsernameField && (
             <FormControl id="login-username" required>
               <FormControl.Label>
-                {t('login.pat.atlassian_email', 'Atlassian Email')}
+                {usernameLabel ?? t('login.pat.username', 'Username')}
               </FormControl.Label>
               {usernameCaption && (
                 <FormControl.Caption>
@@ -179,11 +183,12 @@ export function LoginWithPersonalAccessTokenForm({
               )}
               <TextInput
                 aria-invalid={errors.username ? 'true' : 'false'}
+                autoComplete={usernameInputType === 'email' ? 'email' : 'username'}
                 block
                 name="username"
                 onChange={handleInputChange}
                 placeholder={usernamePlaceholder}
-                type="email"
+                type={usernameInputType}
                 value={formData.username ?? ''}
               />
               {errors.username && (

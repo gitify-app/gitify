@@ -9,11 +9,13 @@ Gitify is maintained by a small team. Each forge adapter has at least one design
 
 ## Forge adapter maintainers
 
-| Forge  | Maintainer                                                                             | Source                              |
-| ------ | -------------------------------------------------------------------------------------- | ----------------------------------- |
-| GitHub | [@setchy](https://github.com/setchy), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/github/` |
-| Gitea  | [@bircni](https://github.com/bircni), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/gitea/`  |
-| GitLab | [@afonsojramos](https://github.com/afonsojramos)                                       | `src/renderer/utils/forges/gitlab/` |
+| Forge     | Maintainer                                                                             | Source                                 |
+| --------- | -------------------------------------------------------------------------------------- | -------------------------------------- |
+| GitHub    | [@setchy](https://github.com/setchy), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/github/`    |
+| Gitea     | [@bircni](https://github.com/bircni), [@afonsojramos](https://github.com/afonsojramos) | `src/renderer/utils/forges/gitea/`     |
+| GitLab    | [@afonsojramos](https://github.com/afonsojramos)                                       | `src/renderer/utils/forges/gitlab/`    |
+| Bitbucket | [@setchy](https://github.com/setchy)                                                   | `src/renderer/utils/forges/bitbucket/` |
+| Gerrit    | [@QuentinBtd](https://github.com/QuentinBtd)                                           | `src/renderer/utils/forges/gerrit/`    |
 
 ## Adding a new forge
 

@@ -8,6 +8,7 @@ export type AuthMethod =
 
 export type PlatformType =
   | 'Bitbucket Cloud'
+  | 'Gerrit'
   | 'GitHub Cloud'
   | 'GitHub Enterprise Server'
   | 'GitHub Enterprise Cloud with Data Residency'

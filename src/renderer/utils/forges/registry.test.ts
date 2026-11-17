@@ -2,6 +2,7 @@ import { expectTypeOf } from 'vite-plus/test';
 
 import {
   mockBitbucketAccount,
+  mockGerritAccount,
   mockGiteaAccount,
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -21,6 +22,19 @@ import {
 } from './registry';
 
 describe('renderer/utils/forges/registry.ts', () => {
+  it('binds Gerrit account operations and dashboard links', () => {
+    expect(getAdapter(mockGerritAccount).getPlatform(mockGerritAccount.hostname)).toBe('Gerrit');
+    const adapter = getAccountAdapter(mockGerritAccount);
+    expect(adapter.getIssuesUrl()).toBeUndefined();
+    expect(adapter.getPullRequestsUrl()).toBe(
+      'https://gerrit.example.com/q/status:open+owner:jdoe',
+    );
+    expect(adapter.getNotificationsUrl()).toBe('https://gerrit.example.com/q/attention:jdoe');
+    expect(adapter.getAccountProfileUrl?.()).toBe('https://gerrit.example.com/q/owner:jdoe');
+    expect(adapter.capabilities.markAsDone()).toBe(false);
+    expect(adapter.capabilities.unsubscribeThread()).toBe(false);
+    expect(isKnownForge('gerrit')).toBe(true);
+  });
   describe('getAdapter', () => {
     it('returns the GitHub adapter for github accounts', () => {
       expect(getAdapter(mockGitHubCloudAccount).id).toBe('github');
@@ -184,11 +198,13 @@ describe('renderer/utils/forges/registry.ts', () => {
   describe('listAdapters / KNOWN_FORGES', () => {
     it('returns every registered adapter', () => {
       const ids = listAdapters().map((a) => a.id);
-      expect(ids).toEqual(expect.arrayContaining(['github', 'gitea', 'bitbucket', 'gitlab']));
+      expect(ids).toEqual(
+        expect.arrayContaining(['github', 'gitea', 'bitbucket', 'gitlab', 'gerrit']),
+      );
     });
 
     it('every Forge value has a registered adapter (exhaustive)', () => {
-      const forges: Forge[] = ['github', 'gitea', 'bitbucket', 'gitlab'];
+      const forges: Forge[] = ['github', 'gitea', 'bitbucket', 'gitlab', 'gerrit'];
       for (const id of forges) {
         expect(KNOWN_FORGES.has(id)).toBe(true);
         expect(() => getAdapter(id)).not.toThrow();

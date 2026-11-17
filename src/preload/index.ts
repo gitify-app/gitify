@@ -1,6 +1,7 @@
 import { contextBridge, webFrame } from 'electron';
 
 import type {
+  IGerritRequest,
   IKeyboardShortcut,
   INativeNotificationActionEvent,
   INativeNotificationClickEvent,
@@ -60,6 +61,14 @@ export const api = {
    * @returns The CLI token, or a classified failure with an optional detail line.
    */
   githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
+
+  /**
+   * Run an authenticated Gerrit REST call from the main process (avoids CORS).
+   *
+   * @param request - The `/a/` API URL, method, Basic auth header and optional JSON body.
+   * @returns The response status and raw body text.
+   */
+  gerritRequest: (request: IGerritRequest) => invokeMainEvent(EVENTS.GERRIT_REQUEST, request),
 
   /**
    * Enable or disable launching the application at system login.

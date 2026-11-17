@@ -2,6 +2,7 @@ import type { Account, Forge, Link } from '../../types';
 import type { ForgeAccountAdapter, ForgeAdapter } from './types';
 
 import { bitbucketAdapter } from './bitbucket/adapter';
+import { gerritAdapter } from './gerrit/adapter';
 import { giteaAdapter } from './gitea/adapter';
 import { githubAdapter } from './github/adapter';
 import { gitlabAdapter } from './gitlab/adapter';
@@ -19,6 +20,7 @@ const ADAPTERS: Record<Forge, ForgeAdapter> = {
   gitea: giteaAdapter,
   bitbucket: bitbucketAdapter,
   gitlab: gitlabAdapter,
+  gerrit: gerritAdapter,
 };
 
 /** Single source of truth for the runtime set of registered forges. */
@@ -52,6 +54,7 @@ export function getAccountAdapter(account: Account): ForgeAccountAdapter {
   // Optional method, so bind it to keep a single reference and avoid an unbound
   // method reference (the adapter ops are otherwise called as `accountOps.x(...)`).
   const onAccountTokenChange = accountOps.onAccountTokenChange?.bind(accountOps);
+  const getAccountProfileUrl = accountOps.getAccountProfileUrl?.bind(accountOps);
 
   return {
     capabilities: {
@@ -70,6 +73,7 @@ export function getAccountAdapter(account: Account): ForgeAccountAdapter {
     getIssuesUrl: () => accountOps.getIssuesUrl(account),
     getPullRequestsUrl: () => accountOps.getPullRequestsUrl(account),
     getNotificationsUrl: () => accountOps.getNotificationsUrl(account),
+    getAccountProfileUrl: getAccountProfileUrl ? () => getAccountProfileUrl(account) : undefined,
     oauthScopes: oauthScopes
       ? {
           hasRequired: () => oauthScopes.hasRequired(account),

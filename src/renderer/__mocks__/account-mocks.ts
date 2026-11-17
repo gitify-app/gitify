@@ -102,6 +102,17 @@ export const mockBitbucketAccount: Account = {
   user: mockGitifyUser,
 };
 
+export const mockGerritAccount: Account = {
+  forge: 'gerrit',
+  platform: 'Gerrit',
+  method: 'Personal Access Token',
+  token: 'token-gerrit' as Token,
+  hostname: 'gerrit.example.com' as Hostname,
+  username: 'jdoe',
+  user: { ...mockGitifyUser, login: 'jdoe' },
+  version: '3.12.0',
+};
+
 export function mockAccountWithError(error: GitifyError): AccountNotifications {
   return {
     account: mockGitHubCloudAccount,

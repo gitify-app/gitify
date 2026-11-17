@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { useAccountsStore, useSettingsStore } from '../stores';
 
 import { getNavItem } from '../nav';
+import { getAccountAdapter } from '../utils/forges/registry';
 import { quitApp } from '../utils/system/comms';
 import { openHostIssues, openHostNotifications, openHostPulls } from '../utils/system/links';
 import { useNotifications } from './useNotifications';
@@ -85,7 +86,8 @@ export function useShortcutActions(): { shortcuts: ShortcutConfigs } {
       },
       myIssues: {
         key: 'i',
-        isAllowed: isLoggedIn,
+        isAllowed:
+          isLoggedIn && Boolean(primaryAccount && getAccountAdapter(primaryAccount).getIssuesUrl()),
         action: () => primaryAccount && openHostIssues(primaryAccount),
       },
       myPullRequests: {

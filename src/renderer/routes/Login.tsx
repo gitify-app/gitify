@@ -181,10 +181,10 @@ export function LoginRoute() {
                     aria-controls={`forge-panel-${adapter.id}`}
                     aria-selected={isActive}
                     className={cn(
-                      'relative z-10 inline-flex flex-1 cursor-pointer items-center justify-center gap-2',
-                      'px-2.5 py-1.5 text-sm font-medium',
+                      'relative z-10 inline-flex flex-1 cursor-pointer items-center justify-center gap-1',
+                      'px-1 py-1.5 text-sm font-medium',
                       'transition-[color] duration-[280ms] ease-login-out',
-                      'max-[30rem]:px-2 max-[30rem]:text-xs',
+                      'max-[30rem]:text-xs',
                       'outline-hidden focus-visible:ring-2 focus-visible:ring-[var(--focus-outlineColor)]',
                       isActive
                         ? 'text-[var(--fgColor-default)]'

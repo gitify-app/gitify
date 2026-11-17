@@ -25,7 +25,10 @@ export function openHostNotifications(account: Account) {
 }
 
 export function openHostIssues(account: Account) {
-  openExternalLink(getAccountAdapter(account).getIssuesUrl());
+  const url = getAccountAdapter(account).getIssuesUrl();
+  if (url) {
+    openExternalLink(url);
+  }
 }
 
 export function openHostPulls(account: Account) {
@@ -33,6 +36,11 @@ export function openHostPulls(account: Account) {
 }
 
 export function openAccountProfile(account: Account) {
+  const profileUrl = getAccountAdapter(account).getAccountProfileUrl?.();
+  if (profileUrl) {
+    openExternalLink(profileUrl);
+    return;
+  }
   const url = new URL(getAccountOrigin(account));
   url.pathname = account.user!.login;
   openExternalLink(url.toString() as Link);

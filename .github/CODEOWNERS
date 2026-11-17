@@ -5,3 +5,4 @@
 /src/renderer/utils/forges/github/ @afonsojramos @setchy
 /src/renderer/utils/forges/gitea/  @afonsojramos @bircni
 /src/renderer/utils/forges/gitlab/ @afonsojramos
+/src/renderer/utils/forges/gerrit/ @QuentinBtd
