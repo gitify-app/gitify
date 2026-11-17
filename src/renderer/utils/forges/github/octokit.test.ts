@@ -234,4 +234,105 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(fetchMock).toHaveBeenCalledTimes(2);
     });
   });
+
+  describe('request retry', () => {
+    function jsonResponse(body: unknown, status = 200): Response {
+      return new Response(JSON.stringify(body), {
+        status,
+        headers: { 'content-type': 'application/json' },
+      });
+    }
+
+    function stubFetchSequence(...results: Array<Response | Error>) {
+      const fetchMock = vi.fn(async () => {
+        const next = results.shift();
+        if (!next) {
+          throw new Error('Unexpected extra request');
+        }
+        if (next instanceof Error) {
+          throw next;
+        }
+        return next;
+      });
+
+      vi.stubGlobal('fetch', fetchMock);
+      return fetchMock;
+    }
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
+    });
+
+    async function createClient(type: 'rest' | 'graphql' = 'rest') {
+      return await createOctokitClientUncached(mockGitHubCloudAccount, type);
+    }
+
+    it('retries a network error once and returns the retry response', async () => {
+      const fetchMock = stubFetchSequence(
+        new Error('network down'),
+        jsonResponse({ login: 'octocat' }),
+      );
+
+      const octokit = await createClient();
+      const response = await octokit.request('GET /user');
+
+      expect(response.status).toBe(200);
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('retries a retryable server response once', async () => {
+      const fetchMock = stubFetchSequence(
+        jsonResponse({ message: 'boom' }, 500),
+        jsonResponse({ login: 'octocat' }),
+      );
+
+      const octokit = await createClient();
+      const response = await octokit.request('GET /user');
+
+      expect(response.status).toBe(200);
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
+    it.each([401, 403, 404, 422])('does not retry a %i response', async (status) => {
+      const fetchMock = stubFetchSequence(jsonResponse({ message: 'rejected' }, status));
+
+      const octokit = await createClient();
+
+      await expect(octokit.request('GET /user')).rejects.toMatchObject({ status });
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('reports one failure after the retry is exhausted', async () => {
+      const fetchMock = stubFetchSequence(
+        jsonResponse({ message: 'boom' }, 500),
+        jsonResponse({ message: 'boom' }, 500),
+      );
+
+      const octokit = await createClient();
+
+      await expect(octokit.request('GET /user')).rejects.toMatchObject({ status: 500 });
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('does not retry a GraphQL error payload returned with a success status', async () => {
+      const fetchMock = stubFetchSequence(
+        jsonResponse({ errors: [{ message: 'Cannot query field "nope"' }] }),
+      );
+
+      const octokit = await createClient('graphql');
+
+      await expect(octokit.graphql('query { nope }')).rejects.toThrow('Cannot query field');
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('retries a state-setting notification action on a network error', async () => {
+      const fetchMock = stubFetchSequence(new Error('network down'), jsonResponse({}));
+
+      const octokit = await createClient();
+      const response = await octokit.request('PATCH /notifications/threads/123');
+
+      expect(response.status).toBe(200);
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+  });
 });

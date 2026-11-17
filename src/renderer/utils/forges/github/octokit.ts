@@ -1,6 +1,7 @@
 import { Octokit } from '@octokit/core';
 import { paginateRest } from '@octokit/plugin-paginate-rest';
 import { restEndpointMethods } from '@octokit/plugin-rest-endpoint-methods';
+import { retry } from '@octokit/plugin-retry';
 import { request as requestGitHub } from '@octokit/request';
 import { RequestError } from '@octokit/request-error';
 
@@ -14,7 +15,9 @@ import { decryptValue, getAppVersion } from '../../system/comms';
 import { forgetGitHubCliToken, resolveGitHubCliToken } from './cli';
 import { getGitHubAPIBaseUrl } from './utils';
 
-// Create the Octokit type with plugins
+// Create the Octokit type with plugins. The retry plugin is registered on each
+// client after any request-rewriting hooks (see `authenticateFromCli`) so it
+// does not shadow their options.
 const OctokitWithPlugins = Octokit.plugin(paginateRest, restEndpointMethods);
 export type OctokitClient = InstanceType<typeof OctokitWithPlugins>;
 
@@ -67,8 +70,13 @@ export async function createOctokitClient(
 }
 
 /**
- * Create an authenticated Octokit client instance without caching
- * Useful when fresh data is needed (e.g., user details during account setup)
+ * Create an authenticated Octokit client instance without caching.
+ * Useful when fresh data is needed (e.g., user details during account setup).
+ *
+ * The client registers `@octokit/plugin-retry`, so the configured `retries`
+ * option actually retries transient network and retryable server failures.
+ * Non-retryable statuses (authentication, authorization, validation, rate
+ * limit) are left to the normal error classification.
  *
  * @param account The account to create the client for
  * @param type The api client type (rest | graphql)
@@ -89,14 +97,17 @@ export async function createOctokitClientUncached(
     auth: isCliAccount ? undefined : (await decryptValue(account.token)).token,
     baseUrl: baseUrl,
     userAgent: userAgent,
-    retry: {
-      retries: 1,
-    },
   });
 
   if (isCliAccount) {
     authenticateFromCli(client, account);
   }
+
+  // Register retry last so it wraps the request chain. Octokit binds each
+  // `wrap('request')` hook to the options it was invoked with, so registering
+  // retry before the CLI auth hook would make it shadow the auth headers that
+  // hook rewrites per request.
+  retry(client, { retry: { retries: 1 } });
 
   return client;
 }
