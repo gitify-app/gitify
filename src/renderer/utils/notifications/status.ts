@@ -28,6 +28,10 @@ export interface NotificationStatusInput {
  *
  * Only the initial fetch (no settled success or error yet) reports `loading` -
  * background refetches of already-settled data keep their settled status.
+ *
+ * A paused query means there is no connectivity, not that a fetch failed, so it
+ * reports `offline` rather than `error`. This keeps the tray and notifications
+ * view from showing a failure while the app is offline or reconnecting.
  */
 export function deriveStatus({
   isLoading,
@@ -35,12 +39,15 @@ export function deriveStatus({
   isError,
   notifications,
 }: NotificationStatusInput): Status {
+  if (isPaused) {
+    return 'offline';
+  }
+
   if (isLoading) {
     return 'loading';
   }
 
-  // Paused (offline) and outright query errors both surface as error status.
-  if (isPaused || isError) {
+  if (isError) {
     return 'error';
   }
 

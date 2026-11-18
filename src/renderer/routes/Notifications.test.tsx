@@ -80,6 +80,17 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(screen.queryByText('Loading')).not.toBeInTheDocument();
   });
 
+  it('prefers the offline status over loading while the device is online', () => {
+    renderWithProviders(<NotificationsRoute />, {
+      status: 'offline',
+      isOnline: true,
+    });
+
+    expect(screen.getByText('Oops')).toBeInTheDocument();
+    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+    expect(screen.queryByText('AllRead')).not.toBeInTheDocument();
+  });
+
   it('prefers the error state over loading', () => {
     renderWithProviders(<NotificationsRoute />, {
       globalError: getErrorDetails('UNKNOWN'),

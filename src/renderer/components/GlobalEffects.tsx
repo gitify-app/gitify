@@ -36,7 +36,7 @@ export function GlobalEffects() {
   const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
   const trayIconAppearance = useSettingsStore((s) => s.trayIconAppearance);
 
-  const isOnline = useOnlineStatus();
+  const isNetworkOnline = useOnlineStatus();
 
   // Appearance side effects: color mode/scheme + design-language/material attributes
   useAppearance();
@@ -57,14 +57,14 @@ export function GlobalEffects() {
   // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   useEffect(() => {
     const trayCount = status === 'error' ? -1 : notificationCount;
-    setTrayIconColorAndTitle(trayCount, isOnline);
+    setTrayIconColorAndTitle(trayCount, isNetworkOnline);
   }, [
     showNotificationsCountInTray,
     useUnreadActiveIcon,
     trayIconAppearance,
     status,
     notificationCount,
-    isOnline,
+    isNetworkOnline,
   ]);
 
   useEffect(() => {

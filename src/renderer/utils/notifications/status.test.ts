@@ -26,8 +26,27 @@ describe('renderer/utils/notifications/status.ts', () => {
       expect(deriveStatus({ ...baseInput, isLoading: true, notifications: [] })).toBe('loading');
     });
 
-    it('reports error when the query is paused (offline)', () => {
-      expect(deriveStatus({ ...baseInput, isPaused: true, notifications: [clean] })).toBe('error');
+    it('reports offline when the query is paused', () => {
+      expect(deriveStatus({ ...baseInput, isPaused: true, notifications: [clean] })).toBe(
+        'offline',
+      );
+    });
+
+    it('reports offline rather than error when paused with account errors', () => {
+      expect(
+        deriveStatus({ ...baseInput, isPaused: true, notifications: [networkError, networkError] }),
+      ).toBe('offline');
+    });
+
+    it('reports offline before the initial fetch settles when paused', () => {
+      expect(
+        deriveStatus({
+          ...baseInput,
+          isLoading: true,
+          isPaused: true,
+          notifications: [],
+        }),
+      ).toBe('offline');
     });
 
     it('reports error when the query failed', () => {
