@@ -16,7 +16,8 @@ jobs:
     name: Apple notarization readiness
     # This check must report on every pull request so it can be required on
     # `main`. Only release PRs need the macOS-only notary service check; every
-    # other PR gets a fast no-op on Ubuntu.
+    # other PR gets a fast no-op on Ubuntu. Running it everywhere would block
+    # unrelated work whenever an Apple agreement lapses.
     runs-on: ${{ startsWith(github.head_ref, 'release-please--') && github.event.pull_request.head.repo.full_name == github.repository && 'macos-latest' || 'ubuntu-latest' }}
     timeout-minutes: 10
     permissions:
@@ -24,7 +25,14 @@ jobs:
     steps:
       - name: Not a release PR
         if: ${{ !startsWith(github.head_ref, 'release-please--') || github.event.pull_request.head.repo.full_name != github.repository }}
-        run: echo "No Apple notarization check needed for this pull request."
+        run: |
+          message="Skipped: only release-please pull requests verify Apple notarization."
+          echo "${message}"
+          {
+            echo "### Apple notarization readiness"
+            echo ""
+            echo "${message}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Checkout trusted verification script
         if: ${{ startsWith(github.head_ref, 'release-please--') && github.event.pull_request.head.repo.full_name == github.repository }}
