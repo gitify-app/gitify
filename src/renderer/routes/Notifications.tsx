@@ -16,7 +16,7 @@ import { hasNoAccountErrors } from '../utils/notifications/status';
 
 export function NotificationsRoute() {
   const { notifications, status, globalError, hasNotifications } = useNotifications();
-  const isOnline = useOnlineStatus();
+  const isNetworkOnline = useOnlineStatus();
 
   const filteredAccounts = useFiltersStore((s) => s.accounts);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -35,7 +35,13 @@ export function NotificationsRoute() {
     [visibleNotifications],
   );
 
-  if (!isOnline || status === 'offline') {
+  // The two conditions cover different orderings of the same transition:
+  // `!isNetworkOnline` is the device state before the query pauses, while
+  // `isNotificationsOffline` is a paused query after the network flag has
+  // already flipped back online. Keep both so neither ordering flashes.
+  const isNotificationsOffline = status === 'offline';
+
+  if (!isNetworkOnline || isNotificationsOffline) {
     return <Oops error={getErrorDetails('OFFLINE')} />;
   }
 
