@@ -51,6 +51,11 @@ interface TestApi {
     showUpdateNotifications: boolean;
   }) => void;
   setUseX11Backend: (value: boolean) => void;
+  githubCliToken: (request: {
+    hostname: string;
+    identity?: { kind: 'environment' } | { kind: 'account'; login: string };
+  }) => Promise<unknown>;
+  githubCliAccounts: (hostname: string) => Promise<unknown>;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
   nativeNotifications: {
     show: (payload: { id: string; title: string; body: string; actionLabel?: string }) => void;
@@ -111,6 +116,29 @@ describe('preload/index', () => {
     expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_AUTO_LAUNCH, {
       openAtLogin: true,
     });
+  });
+
+  it('githubCliToken forwards the identity-aware request', () => {
+    const api = getExposedApi();
+    const request = {
+      hostname: 'github.com',
+      identity: { kind: 'account' as const, login: 'alice' },
+    };
+
+    void api.githubCliToken(request);
+
+    expect(invokeMainEventMock).toHaveBeenCalledWith(EVENTS.GITHUB_CLI_TOKEN, request);
+  });
+
+  it('githubCliAccounts forwards the hostname', () => {
+    const api = getExposedApi();
+
+    void api.githubCliAccounts('github.example.com');
+
+    expect(invokeMainEventMock).toHaveBeenCalledWith(
+      EVENTS.GITHUB_CLI_ACCOUNTS,
+      'github.example.com',
+    );
   });
 
   it('openExternalLink sends event with payload', async () => {

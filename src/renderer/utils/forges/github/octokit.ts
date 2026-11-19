@@ -108,13 +108,13 @@ export async function createOctokitClientUncached(
  * this client until the account is refreshed.
  */
 function authenticateFromCli(client: OctokitClient, account: Account): void {
-  const { hostname } = account;
+  const { hostname, cliIdentity } = account;
   const expectedUserId = account.user?.id;
   let verifiedToken: Token | undefined;
 
   client.hook.wrap('request', async (request, options) => {
     const authenticatedRequest = async () => {
-      const token = await resolveGitHubCliToken(hostname);
+      const token = await resolveGitHubCliToken(hostname, cliIdentity);
       const headers = { ...options.headers, authorization: `token ${token}` };
 
       if (expectedUserId && token !== verifiedToken) {
@@ -151,7 +151,7 @@ function authenticateFromCli(client: OctokitClient, account: Account): void {
         throw err;
       }
 
-      forgetGitHubCliToken(hostname);
+      forgetGitHubCliToken(hostname, cliIdentity);
 
       return await authenticatedRequest();
     }

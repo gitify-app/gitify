@@ -18,6 +18,7 @@ import { getAccountUUID } from '../utils/auth/utils';
 import * as logger from '../utils/core/logger';
 import * as apiClient from '../utils/forges/github/client';
 import { getAdapter } from '../utils/forges/registry';
+import * as comms from '../utils/system/comms';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
 import useAccountsStore, { sanitizeAccounts } from './useAccountsStore';
 
@@ -120,6 +121,41 @@ describe('renderer/stores/useAccountsStore.ts', () => {
       expect(account.method).toBe('Custom OAuth App');
       expect(account.token).toBe(mockCustomOAuthAppAccount.token);
       expect(account.clientId).toBeUndefined();
+    });
+
+    it('preserves a well-formed CLI identity', () => {
+      const [account] = sanitizeAccounts([
+        {
+          ...mockGitHubCliAccount,
+          cliIdentity: { kind: 'account', login: 'alice' },
+        },
+      ]);
+
+      expect(account.cliIdentity).toEqual({ kind: 'account', login: 'alice' });
+    });
+
+    it('preserves the environment CLI identity', () => {
+      const [account] = sanitizeAccounts([
+        { ...mockGitHubCliAccount, cliIdentity: { kind: 'environment' } },
+      ]);
+
+      expect(account.cliIdentity).toEqual({ kind: 'environment' });
+    });
+
+    it.each([
+      { kind: 'account', login: 'not a login' },
+      { kind: 'account', login: 'alice; rm -rf /' },
+      { kind: 'account' },
+      { kind: 'unknown' },
+      { login: 'alice' },
+      'alice',
+    ])('drops a malformed CLI identity %o', (cliIdentity) => {
+      const [account] = sanitizeAccounts([
+        { ...mockGitHubCliAccount, cliIdentity: cliIdentity as never },
+      ]);
+
+      expect(account).toBeDefined();
+      expect(account.cliIdentity).toBeUndefined();
     });
   });
 
@@ -270,8 +306,8 @@ describe('renderer/stores/useAccountsStore.ts', () => {
         expect(useAccountsStore.getState().accounts).toHaveLength(1);
       });
 
-      test('replaces all CLI accounts for the host after validating the new user', async () => {
-        const previous = structuredClone(mockGitHubCliAccount);
+      test('replaces unpinned CLI accounts for the same user after validating the new login', async () => {
+        const previous = { ...structuredClone(mockGitHubCliAccount), user: expectedUser() };
         const otherHost = { ...previous, hostname: mockGitHubEnterpriseServerAccount.hostname };
         useAccountsStore.setState({
           accounts: [
@@ -294,6 +330,96 @@ describe('renderer/stores/useAccountsStore.ts', () => {
           mockGitHubCloudAccount,
         ]);
         expect(invalidate).toHaveBeenCalledWith(previous);
+      });
+
+      test('keeps CLI accounts pinned to different identities on one host', async () => {
+        const alice = {
+          ...structuredClone(mockGitHubCliAccount),
+          user: expectedUser(),
+          cliIdentity: { kind: 'account' as const, login: 'alice' },
+        };
+        useAccountsStore.setState({ accounts: [alice] });
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValueOnce({
+          status: 200,
+          url: 'https://api.github.com/user',
+          data: { ...mockRawUser('bob'), id: 2 } as GetAuthenticatedUserResponse,
+          headers: { 'x-oauth-scopes': getRecommendedScopeNames().join(', ') },
+        });
+
+        await useAccountsStore
+          .getState()
+          .createAccount(
+            'GitHub CLI',
+            '' as Token,
+            alice.hostname,
+            'github',
+            undefined,
+            undefined,
+            {
+              kind: 'account',
+              login: 'bob',
+            },
+          );
+
+        const accounts = useAccountsStore.getState().accounts;
+        expect(accounts).toHaveLength(2);
+        expect(accounts.map((account) => account.cliIdentity)).toEqual([
+          { kind: 'account', login: 'alice' },
+          { kind: 'account', login: 'bob' },
+        ]);
+      });
+
+      test('updates the CLI account pinned to the same login', async () => {
+        const alice = {
+          ...structuredClone(mockGitHubCliAccount),
+          user: expectedUser(),
+          cliIdentity: { kind: 'account' as const, login: 'alice' },
+        };
+        useAccountsStore.setState({ accounts: [alice] });
+
+        await useAccountsStore
+          .getState()
+          .createAccount(
+            'GitHub CLI',
+            '' as Token,
+            alice.hostname,
+            'github',
+            undefined,
+            undefined,
+            {
+              kind: 'account',
+              login: 'ALICE',
+            },
+          );
+
+        expect(useAccountsStore.getState().accounts).toHaveLength(1);
+      });
+
+      test('collapses an environment login into an existing account for the same user', async () => {
+        const alice = {
+          ...structuredClone(mockGitHubCliAccount),
+          user: expectedUser(),
+          cliIdentity: { kind: 'account' as const, login: 'alice' },
+        };
+        useAccountsStore.setState({ accounts: [alice] });
+
+        await useAccountsStore
+          .getState()
+          .createAccount(
+            'GitHub CLI',
+            '' as Token,
+            alice.hostname,
+            'github',
+            undefined,
+            undefined,
+            {
+              kind: 'environment',
+            },
+          );
+
+        const accounts = useAccountsStore.getState().accounts;
+        expect(accounts).toHaveLength(1);
+        expect(accounts[0].cliIdentity).toEqual({ kind: 'environment' });
       });
 
       test('keeps the previous CLI account when the new login fails', async () => {
@@ -371,6 +497,42 @@ describe('renderer/stores/useAccountsStore.ts', () => {
           } satisfies Account,
         ]);
       });
+    });
+  });
+
+  describe('refreshAccount', () => {
+    it('pins a legacy CLI account in place without changing its UUID', async () => {
+      const legacy = {
+        ...structuredClone(mockGitHubCliAccount),
+        user: { id: '1', login: 'octocat', name: 'Mona Lisa Octocat', avatar: null },
+      };
+      useAccountsStore.setState({ accounts: [legacy] });
+      const originalUUID = getAccountUUID(legacy);
+      const listSpy = vi.spyOn(comms, 'listGitHubCliAccounts').mockResolvedValueOnce({
+        accounts: [{ identity: { kind: 'account', login: 'authenticated-user' }, active: true }],
+      });
+
+      const refreshed = await useAccountsStore.getState().refreshAccount(legacy);
+
+      expect(listSpy).toHaveBeenCalledWith(legacy.hostname);
+      expect(refreshed.cliIdentity).toEqual({ kind: 'account', login: 'authenticated-user' });
+      expect(getAccountUUID(refreshed)).toBe(originalUUID);
+      expect(useAccountsStore.getState().accounts).toHaveLength(1);
+    });
+
+    it('leaves an already pinned account alone', async () => {
+      const pinned = {
+        ...structuredClone(mockGitHubCliAccount),
+        user: { id: '1', login: 'octocat', name: 'Mona Lisa Octocat', avatar: null },
+        cliIdentity: { kind: 'account' as const, login: 'alice' },
+      };
+      useAccountsStore.setState({ accounts: [pinned] });
+      const listSpy = vi.spyOn(comms, 'listGitHubCliAccounts');
+
+      await useAccountsStore.getState().refreshAccount(pinned);
+
+      expect(listSpy).not.toHaveBeenCalled();
+      expect(pinned.cliIdentity).toEqual({ kind: 'account', login: 'alice' });
     });
   });
 

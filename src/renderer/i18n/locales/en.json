@@ -194,6 +194,15 @@
   "login": {
     "choose_forge": "Choose a forge",
     "cli": {
+      "account": "Account",
+      "account_active": "{{login}} (active)",
+      "account_caption": "Gitify reads the token this GitHub CLI account holds",
+      "account_placeholder": "Select an account",
+      "account_required": "Choose an account",
+      "accounts_failed": "Could not load GitHub CLI accounts for {{hostname}}. Check the CLI and try again.",
+      "accounts_loading": "Loading GitHub CLI accounts…",
+      "accounts_unsupported": "This GitHub CLI version cannot list accounts. Gitify will use the active account.",
+      "environment_token": "Environment token",
       "form_errors": "Form errors",
       "hostname": "Hostname",
       "hostname_caption": "Change only if you are using GitHub Enterprise Server",
@@ -201,6 +210,7 @@
       "intro_scopes": "The scopes come from the GitHub CLI and cannot be changed from Gitify. Its <0>repo</0> scope covers notification access; run <1>gh auth refresh -s notifications</1> to grant that scope explicitly.",
       "intro_token": "Uses the token your local <0>gh</0> install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means <1>gh auth login</1> and <2>gh auth refresh</2> keep working without re-authenticating here.",
       "login_failed": "Failed to login with GitHub CLI against {{hostname}}",
+      "no_accounts": "GitHub CLI has no usable accounts for {{hostname}}. Run `gh auth login` and try again.",
       "title": "Login with GitHub CLI"
     },
     "continue_with": "Continue with {{name}}",

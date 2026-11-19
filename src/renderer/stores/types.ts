@@ -1,3 +1,5 @@
+import type { GitHubCliIdentity } from '../../shared/events';
+
 import type {
   Account,
   AccountUUID,
@@ -42,6 +44,7 @@ export interface AccountsActions {
     forge?: Forge,
     username?: string,
     clientId?: ClientID,
+    cliIdentity?: GitHubCliIdentity,
   ) => Promise<void>;
 
   /**
