@@ -4,6 +4,9 @@ import './i18n';
 import { AppErrorBoundary } from './components/AppErrorBoundary';
 
 import { App } from './App';
+import { installRendererDiagnostics } from './diagnostics';
+
+installRendererDiagnostics();
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
