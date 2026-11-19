@@ -43,7 +43,7 @@ const findWindowHandler = (
   menubar: Menubar,
   eventName: string,
 ): ((event: { preventDefault: () => void }) => void) | undefined => {
-  const onMock = menubar.window?.on as ReturnType<typeof vi.fn>;
+  const onMock = menubar.on as ReturnType<typeof vi.fn>;
   const call = onMock.mock.calls.find(([name]) => name === eventName);
   return call?.[1] as ((event: { preventDefault: () => void }) => void) | undefined;
 };
@@ -65,6 +65,7 @@ describe('main/lifecycle/window.ts', () => {
     setPlatform('linux');
 
     menubar = {
+      on: vi.fn(),
       setOption: vi.fn(),
       hideWindow: vi.fn(),
       recenterOnTray: vi.fn(),
@@ -134,19 +135,19 @@ describe('main/lifecycle/window.ts', () => {
   });
 
   describe('window visibility forwarding', () => {
-    it('forwards window show events to menu builder', () => {
+    it('forwards menubar show events without relying on BrowserWindow events to menu builder', () => {
       configureWindowEvents(menubar, menuBuilder);
 
-      const showHandler = findWindowHandler(menubar, 'show');
+      const showHandler = findWindowHandler(menubar, 'after-show');
       showHandler?.({ preventDefault: vi.fn() });
 
       expect(menuBuilder.setWindowVisibility).toHaveBeenCalledWith(true);
     });
 
-    it('forwards window hide events to menu builder', () => {
+    it('forwards menubar hide events to menu builder', () => {
       configureWindowEvents(menubar, menuBuilder);
 
-      const hideHandler = findWindowHandler(menubar, 'hide');
+      const hideHandler = findWindowHandler(menubar, 'after-hide');
       hideHandler?.({ preventDefault: vi.fn() });
 
       expect(menuBuilder.setWindowVisibility).toHaveBeenCalledWith(false);
@@ -206,7 +207,7 @@ describe('main/lifecycle/window.ts', () => {
       // oxlint-disable-next-line no-unsafe-optional-chaining -- window is guaranteed defined in this test
       (menubar.window?.setVibrancy as ReturnType<typeof vi.fn>).mockClear();
 
-      findWindowHandler(menubar, 'show')?.({ preventDefault: vi.fn() });
+      findWindowHandler(menubar, 'after-show')?.({ preventDefault: vi.fn() });
 
       expect(menubar.window?.setVibrancy).toHaveBeenCalledWith('popover');
     });
