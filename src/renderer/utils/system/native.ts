@@ -9,6 +9,7 @@ import type { GitifyNotification } from '../../types';
 
 import i18n from '../../i18n';
 import { getAccountUUID } from '../auth/utils';
+import { getReasonDetails } from '../notifications/reason';
 
 /**
  * Build the structured payload for one notification.
@@ -21,7 +22,9 @@ export function buildNativeNotificationPayload(
 ): INativeNotificationPayload {
   const accountUUID = getAccountUUID(notification.account);
   const actor = notification.subject.user?.login ?? notification.subject.author?.login;
-  const context = [notification.reason.title, actor ? `@${actor}` : ''].filter(Boolean).join(' · ');
+  const context = [getReasonDetails(notification.reason.code).title, actor ? `@${actor}` : '']
+    .filter(Boolean)
+    .join(' · ');
   const identifier = notification.display.identifier;
   const body =
     identifier && !notification.display.title.includes(identifier)

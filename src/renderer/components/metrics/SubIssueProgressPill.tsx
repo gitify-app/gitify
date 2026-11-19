@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { type GitifySubIssueProgress, IconColor } from '../../types';
 
 import { MetricPill } from './MetricPill';
@@ -60,12 +62,17 @@ export function SubIssueProgressWheel({
 }
 
 export function SubIssueProgressPill({ progress }: Readonly<SubIssueProgressPillProps>) {
+  const { t } = useTranslation();
   if (!progress || progress.total === 0) {
     return null;
   }
 
   const isCompleted = progress.completed === progress.total;
-  const description = `Sub-issues: ${progress.completed} of ${progress.total} completed (${progress.percentCompleted}%)`;
+  const description = t(
+    'metrics.sub_issues',
+    'Sub-issues: {{completed}} of {{total}} completed ({{percent}}%)',
+    { completed: progress.completed, total: progress.total, percent: progress.percentCompleted },
+  );
 
   return (
     <MetricPill

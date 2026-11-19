@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { TagIcon } from '@primer/octicons-react';
 import { IssueLabelToken, LabelGroup } from '@primer/react';
 
@@ -13,6 +15,7 @@ export interface LabelsPillProps {
 }
 
 export function LabelsPill({ labels, issueFields, labelCount }: Readonly<LabelsPillProps>) {
+  const { t } = useTranslation();
   const fieldTokens = (issueFields ?? []).map((field) => ({
     text: `${field.name}: ${field.value}`,
     fillColor: field.fillColor,
@@ -55,7 +58,7 @@ export function LabelsPill({ labels, issueFields, labelCount }: Readonly<LabelsP
 
   return (
     <MetricPill
-      ariaLabel={`${formatMetricDescription(fieldTokens.length + totalLabelCount, 'label')}: ${labelNames.join(', ')}`}
+      ariaLabel={`${formatMetricDescription(fieldTokens.length + totalLabelCount, t('metrics.label', 'label'))}: ${labelNames.join(', ')}`}
       color={IconColor.GRAY}
       contents={labelsContent}
       icon={TagIcon}

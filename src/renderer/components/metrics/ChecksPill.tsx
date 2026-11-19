@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { CheckIcon, DotFillIcon, XIcon } from '@primer/octicons-react';
 
 import { type GitifyCheckSummary, IconColor } from '../../types';
@@ -15,24 +17,27 @@ const checkStateDisplay = {
 } as const;
 
 export function ChecksPill({ checks }: Readonly<ChecksPillProps>) {
+  const { t } = useTranslation();
   if (!checks?.total) {
     return null;
   }
 
   const { icon, color } = checkStateDisplay[checks.state];
   const description = [
-    `${checks.passed} passed`,
-    checks.failed ? `${checks.failed} failed` : null,
-    checks.pending ? `${checks.pending} pending` : null,
+    t('metrics.checks_passed', '{{count}} passed', { count: checks.passed }),
+    checks.failed ? t('metrics.checks_failed', '{{count}} failed', { count: checks.failed }) : null,
+    checks.pending
+      ? t('metrics.checks_pending', '{{count}} pending', { count: checks.pending })
+      : null,
   ]
     .filter(Boolean)
     .join(', ');
 
   return (
     <MetricPill
-      ariaLabel={`Checks: ${description}`}
+      ariaLabel={t('metrics.checks', 'Checks: {{description}}', { description })}
       color={color}
-      contents={`Checks: ${description}`}
+      contents={t('metrics.checks', 'Checks: {{description}}', { description })}
       icon={icon}
       metric={`${checks.passed}/${checks.total}`}
     />

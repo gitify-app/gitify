@@ -1,4 +1,5 @@
 import type { MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { RelativeTime, Stack, Text } from '@primer/react';
 
@@ -7,6 +8,7 @@ import { cn } from 'cn';
 import { type GitifyNotification, Opacity, Size } from '../../types';
 
 import { getAccountAdapter } from '../../utils/forges/registry';
+import { getReasonDetails } from '../../utils/notifications/reason';
 import { openUserProfile } from '../../utils/system/links';
 import { AvatarWithFallback } from '../avatars/AvatarWithFallback';
 import { MetricGroup } from '../metrics/MetricGroup';
@@ -16,6 +18,8 @@ export interface NotificationFooterProps {
 }
 
 export function NotificationFooter({ notification }: Readonly<NotificationFooterProps>) {
+  const { t, i18n } = useTranslation();
+  const reason = getReasonDetails(notification.reason.code);
   const user = notification.subject.user;
   const userLabel = user
     ? getAccountAdapter(notification.account).formatNotificationUser(user)
@@ -63,10 +67,22 @@ export function NotificationFooter({ notification }: Readonly<NotificationFooter
         )}
 
         <Stack direction="horizontal" gap="none">
-          <Text className="pr-1" title={notification.reason.description}>
-            {notification.reason.title}
+          <Text className="pr-1" title={reason.description}>
+            {reason.title}
           </Text>
-          <RelativeTime datetime={notification.updatedAt} />
+          <RelativeTime
+            datetime={notification.updatedAt}
+            key={i18n.language}
+            lang={i18n.language}
+            prefix={t('time.on', 'on')}
+          >
+            {new Date(notification.updatedAt).toLocaleDateString(i18n.language, {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+              timeZone: 'UTC',
+            })}
+          </RelativeTime>
         </Stack>
 
         <MetricGroup notification={notification} />

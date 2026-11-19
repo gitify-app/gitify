@@ -1,4 +1,5 @@
 import { Component, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { EmojiSplash } from './layout/EmojiSplash';
 import { ReloadButton } from './primitives/ReloadButton';
@@ -7,6 +8,7 @@ import { getErrorDetails } from '../utils/core/errors';
 import { rendererLogError, toError } from '../utils/core/logger';
 
 export function AppErrorFallback() {
+  useTranslation();
   const error = getErrorDetails('UNKNOWN');
 
   return (

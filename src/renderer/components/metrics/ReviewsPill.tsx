@@ -1,9 +1,11 @@
 import type { ReactElement } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CommentIcon, EyeIcon } from '@primer/octicons-react';
 
 import { type GitifyPullRequestReviewer, type GitifyReviewDecision, IconColor } from '../../types';
 
+import i18n from '../../i18n';
 import { getPullRequestReviewIcon, type PullRequestReviewGroup } from '../../utils/ui/icons';
 import { MetricPill } from './MetricPill';
 
@@ -44,9 +46,9 @@ export function buildReviewPills({
   if (isReviewRequired) {
     pills.push(
       <MetricPill
-        ariaLabel="Review required"
+        ariaLabel={i18n.t('metrics.review_required', 'Review required')}
         color={IconColor.YELLOW}
-        contents="Review required"
+        contents={i18n.t('metrics.review_required', 'Review required')}
         icon={EyeIcon}
         key="review-required"
       />,
@@ -79,7 +81,11 @@ export function buildReviewPills({
   if (threadTotal) {
     pills.push(
       <MetricPill
-        ariaLabel={`Review threads: ${resolvedThreadTotal} of ${threadTotal} resolved`}
+        ariaLabel={i18n.t(
+          'metrics.review_threads',
+          'Review threads: {{resolved}} of {{total}} resolved',
+          { resolved: resolvedThreadTotal, total: threadTotal },
+        )}
         color={unresolvedThreadTotal ? IconColor.YELLOW : IconColor.GREEN}
         contents={formatReviewThreadDescription(reviewersWithThreads)}
         icon={CommentIcon}
@@ -93,6 +99,7 @@ export function buildReviewPills({
 }
 
 export function ReviewsPill({ reviewers, reviewDecision }: Readonly<ReviewsPillProps>) {
+  useTranslation();
   return <>{buildReviewPills({ reviewers, reviewDecision })}</>;
 }
 
@@ -113,6 +120,15 @@ function getReviewGroups(reviewers: GitifyPullRequestReviewer[]): PullRequestRev
 function formatReviewThreadDescription(reviewers: GitifyPullRequestReviewer[]): string {
   return reviewers
     .toSorted((a, b) => a.user.localeCompare(b.user))
-    .map(({ user, threads }) => `${user}: ${threads.resolved}/${threads.total} resolved`)
+    .map(({ user, threads }) =>
+      i18n.t('metrics.user_threads', '{{user}}: {{resolved}}/{{total}} resolved', {
+        user:
+          user === 'Unknown reviewer'
+            ? i18n.t('metrics.unknown_reviewer', 'Unknown reviewer')
+            : user,
+        resolved: threads.resolved,
+        total: threads.total,
+      }),
+    )
     .join(' · ');
 }

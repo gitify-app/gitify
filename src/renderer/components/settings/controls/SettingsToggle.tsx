@@ -1,4 +1,5 @@
 import { type ReactNode, useId } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ToggleSwitch } from '@primer/react';
 
@@ -27,6 +28,7 @@ export function SettingsToggle({
   visible = true,
   onChange,
 }: Readonly<SettingsToggleProps>) {
+  const { t } = useTranslation();
   const id = useId();
   const labelId = `${name}-${id}-label`;
   const visibleLabelId = `${name}-${id}-visible-label`;
@@ -68,6 +70,8 @@ export function SettingsToggle({
       </div>
 
       <ToggleSwitch
+        buttonLabelOn={t('common.on', 'On')}
+        buttonLabelOff={t('common.off', 'Off')}
         aria-describedby={caption ? captionId : undefined}
         aria-labelledby={labelId}
         checked={checked}

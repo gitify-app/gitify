@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { MilestoneIcon } from '@primer/octicons-react';
 
 import { type GitifyMilestone, IconColor } from '../../types';
@@ -9,12 +11,15 @@ export interface MilestonePillProps {
 }
 
 export function MilestonePill({ milestone }: Readonly<MilestonePillProps>) {
+  const { t } = useTranslation();
   if (!milestone) {
     return null;
   }
 
   const isOpen = milestone.state === 'OPEN';
-  const description = `Milestone: ${milestone.title} (${isOpen ? 'open' : 'closed'})`;
+  const description = isOpen
+    ? t('metrics.milestone_open', 'Milestone: {{title}} (open)', { title: milestone.title })
+    : t('metrics.milestone_closed', 'Milestone: {{title}} (closed)', { title: milestone.title });
 
   return (
     <MetricPill

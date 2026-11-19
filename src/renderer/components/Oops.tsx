@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
 import { Button, Stack } from '@primer/react';
@@ -24,9 +25,10 @@ interface OopsProps {
 }
 
 export function Oops({ error, fullHeight = true, recovery }: Readonly<OopsProps>) {
+  useTranslation();
   const navigate = useNavigate();
 
-  const err = error ?? getErrorDetails('UNKNOWN');
+  const err = error?.type ? getErrorDetails(error.type) : (error ?? getErrorDetails('UNKNOWN'));
 
   const emoji = useMemo(() => randomElement(err.emojis), [err]);
 

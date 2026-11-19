@@ -279,7 +279,12 @@ export function SystemSettings() {
           <Banner
             description={
               <Stack direction="vertical" gap="condensed">
-                <Text>{shortcutRegistrationError}</Text>
+                <Text>
+                  {t(
+                    'settings.system.shortcut_registration_failed',
+                    'This shortcut could not be registered. It may already be in use.',
+                  )}
+                </Text>
                 <Button onClick={clearShortcutRegistrationError} size="small" variant="invisible">
                   {t('settings.system.shortcut_error_dismiss', 'Dismiss')}
                 </Button>
