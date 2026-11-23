@@ -50,18 +50,22 @@ export const useLogins = (): LoginsState => {
 
   const { removeAccountNotifications } = useNotificationActions();
 
+  const refreshNotificationsInBackground = useCallback(() => {
+    // Re-authentication can keep the same query key, so invalidate it even
+    // when the account list has not changed. The inbox handles fetching state.
+    void queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+  }, [queryClient]);
+
   /**
-   * Create (or update) an account, then refetch notifications. Re-authenticating
-   * an existing account keeps the same account identity, so the notifications
-   * query key does not change and the cache must be invalidated explicitly.
+   * Create (or update) an account before starting the notification refresh.
    */
   const createAccount = useCallback(
     async (...args: Parameters<typeof createAccountInStore>) => {
       await createAccountInStore(...args);
 
-      await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+      refreshNotificationsInBackground();
     },
-    [createAccountInStore, queryClient],
+    [createAccountInStore, refreshNotificationsInBackground],
   );
 
   /**
@@ -138,9 +142,9 @@ export const useLogins = (): LoginsState => {
 
       existingAccounts.forEach((account) => removeAccountNotifications(account));
 
-      await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+      refreshNotificationsInBackground();
     },
-    [createAccountInStore, queryClient, removeAccountNotifications],
+    [createAccountInStore, refreshNotificationsInBackground, removeAccountNotifications],
   );
 
   /**
