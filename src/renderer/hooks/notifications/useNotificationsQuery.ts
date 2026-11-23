@@ -25,7 +25,7 @@ import {
 } from '../../utils/notifications/notifications';
 import { computeRefetchIntervalMs } from '../../utils/notifications/pollInterval';
 import { deriveGlobalError, deriveStatus } from '../../utils/notifications/status';
-import { useNetworkStatus } from '../useOnlineStatus';
+import { getNetworkStatus, useNetworkStatus } from '../useOnlineStatus';
 import { useNotificationsQueryKey } from './useNotificationsQueryKey';
 
 export interface NotificationsQueryResult {
@@ -56,6 +56,29 @@ function keepNonEmptyPreviousData(
   return previousData?.some((account) => account.notifications.length > 0 || account.error !== null)
     ? previousData
     : undefined;
+}
+
+async function fetchNotificationsWithReconnect() {
+  const connectionAtStart = getNetworkStatus();
+  const hasReconnected = () => {
+    const currentConnection = getNetworkStatus();
+    return currentConnection.isOnline && currentConnection !== connectionAtStart;
+  };
+
+  try {
+    const notifications = await getAllNotifications();
+    if (!doesAllAccountsHaveErrors(notifications) || !hasReconnected()) {
+      return notifications;
+    }
+  } catch (error) {
+    if (!hasReconnected()) {
+      throw error;
+    }
+  }
+
+  // TanStack reuses the in-flight request on reconnect. If that request failed,
+  // make one fresh attempt before committing a failed result to the cache.
+  return getAllNotifications();
 }
 
 /**
@@ -128,9 +151,7 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
   } = useQuery<AccountNotifications[], Error>({
     queryKey: notificationsQueryKey,
 
-    queryFn: async () => {
-      return await getAllNotifications();
-    },
+    queryFn: fetchNotificationsWithReconnect,
 
     // Apply filters as a transformation on the cached data
     // This allows filter changes to instantly update without refetching

@@ -16,10 +16,10 @@ onlineManager.subscribe((isOnline) => {
 });
 
 const subscribe = (onChange: () => void) => onlineManager.subscribe(onChange);
-const getSnapshot = () => networkStatus;
+export const getNetworkStatus = () => networkStatus;
 
 export function useNetworkStatus() {
-  return useSyncExternalStore(subscribe, getSnapshot);
+  return useSyncExternalStore(subscribe, getNetworkStatus);
 }
 
 /**

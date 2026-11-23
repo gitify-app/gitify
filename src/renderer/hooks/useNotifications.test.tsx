@@ -295,6 +295,65 @@ describe('renderer/hooks/useNotifications.ts', () => {
         expect(result.current.globalError?.type).toBe(fails ? 'NETWORK' : undefined);
       },
     );
+
+    it.each([
+      { outcome: 'account failure', retryFails: false },
+      { outcome: 'request rejection', retryFails: true },
+      { outcome: 'success', retryFails: false },
+    ])(
+      'handles $outcome from a poll already in flight at reconnect',
+      async ({ outcome, retryFails }) => {
+        const shouldRetry = outcome !== 'success';
+        onlineManager.setOnline(true);
+        getAllNotificationsMock.mockResolvedValueOnce(cachedFailure);
+        const renders: Status[] = [];
+        const { result } = renderHook(
+          () => {
+            const state = useNotificationsHost();
+            renders.push(state.status);
+            return state;
+          },
+          { wrapper: createWrapper() },
+        );
+        await waitFor(() => expect(result.current.status).toBe('error'));
+
+        const poll = Promise.withResolvers<AccountNotifications[]>();
+        const retry = Promise.withResolvers<AccountNotifications[]>();
+        getAllNotificationsMock
+          .mockReturnValueOnce(poll.promise)
+          .mockReturnValueOnce(retry.promise);
+        act(() => void result.current.refetchNotifications());
+        await waitFor(() => expect(result.current.isFetching).toBe(true));
+
+        act(() => onlineManager.setOnline(false));
+        expect(result.current.status).toBe('offline');
+        renders.length = 0;
+        await act(async () => onlineManager.setOnline(true));
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+
+        await act(async () => {
+          if (outcome === 'request rejection') {
+            poll.reject(new Error('request dropped during outage'));
+          } else {
+            poll.resolve(outcome === 'success' ? mockSingleAccountNotifications : cachedFailure);
+          }
+        });
+
+        await waitFor(() =>
+          expect(result.current.status).toBe(shouldRetry ? 'loading' : 'success'),
+        );
+        expect(result.current.isFetching).toBe(shouldRetry);
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(shouldRetry ? 3 : 2);
+        expect(result.current.globalError).toBeUndefined();
+        expect(renders).not.toContain('error');
+
+        await act(async () =>
+          retry.resolve(retryFails ? cachedFailure : mockSingleAccountNotifications),
+        );
+        await waitFor(() => expect(result.current.status).toBe(retryFails ? 'error' : 'success'));
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(shouldRetry ? 3 : 2);
+      },
+    );
   });
 
   describe('account set changes', () => {
