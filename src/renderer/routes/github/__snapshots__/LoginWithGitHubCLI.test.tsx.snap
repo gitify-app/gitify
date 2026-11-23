@@ -114,48 +114,7 @@ exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] =
           class="text-xs prc-Text-Text-9mHv3"
           data-component="Text"
         >
-          Uses the token your local 
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            gh
-          </i>
-           install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means 
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            gh auth login
-          </i>
-           and 
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            gh auth refresh
-          </i>
-           keep working without re-authenticating here.
-        </span>
-        <span
-          class="text-xs prc-Text-Text-9mHv3"
-          data-component="Text"
-        >
-          The scopes come from the GitHub CLI and cannot be changed from Gitify. Its 
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            repo
-          </i>
-           scope covers notification access; run 
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            gh auth refresh -s notifications
-          </i>
-           to grant that scope explicitly.
+          Use an existing GitHub CLI login. Gitify checks notification access before adding the account and picks up token refreshes automatically.
         </span>
         <div
           class="prc-FormControl-ControlVerticalLayout-8YotI"
@@ -210,7 +169,7 @@ exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] =
               class="prc-Text-Text-9mHv3"
               data-component="Text"
             >
-              Change only if you are using GitHub Enterprise Server
+              Change only for GitHub Enterprise Server.
             </i>
           </span>
         </div>

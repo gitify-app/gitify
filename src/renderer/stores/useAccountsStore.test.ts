@@ -123,15 +123,15 @@ describe('renderer/stores/useAccountsStore.ts', () => {
       expect(account.clientId).toBeUndefined();
     });
 
-    it('preserves a well-formed CLI identity', () => {
+    it.each(['alice', 'mona-cat_octo'])('preserves the CLI identity for %s', (login) => {
       const [account] = sanitizeAccounts([
         {
           ...mockGitHubCliAccount,
-          cliIdentity: { kind: 'account', login: 'alice' },
+          cliIdentity: { kind: 'account', login },
         },
       ]);
 
-      expect(account.cliIdentity).toEqual({ kind: 'account', login: 'alice' });
+      expect(account.cliIdentity).toEqual({ kind: 'account', login });
     });
 
     it('preserves the environment CLI identity', () => {
@@ -432,6 +432,22 @@ describe('renderer/stores/useAccountsStore.ts', () => {
         ).rejects.toThrow('CLI login failed');
 
         expect(useAccountsStore.getState().accounts).toEqual([previous]);
+      });
+
+      test('does not enroll a CLI token without notification access', async () => {
+        fetchAuthenticatedUserDetailsSpy.mockResolvedValueOnce({
+          status: 200,
+          url: 'https://api.github.com/user',
+          data: mockAuthenticatedResponse as GetAuthenticatedUserResponse,
+          headers: { 'x-oauth-scopes': 'public_repo, read:org' },
+        });
+
+        await expect(
+          useAccountsStore
+            .getState()
+            .createAccount('GitHub CLI', '' as Token, mockGitHubCliAccount.hostname),
+        ).rejects.toThrow('gh auth refresh -s notifications');
+        expect(useAccountsStore.getState().accounts).toEqual([]);
       });
     });
 

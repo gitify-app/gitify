@@ -13,6 +13,7 @@ import type {
   IGitHubCliTokenResult,
 } from '../../shared/events';
 import { EVENTS } from '../../shared/events';
+import { isValidGitHubCliLogin } from '../../shared/githubCli';
 import { logError, toError } from '../../shared/logger';
 import { isWindows } from '../../shared/platform';
 
@@ -35,9 +36,6 @@ const EXTRA_PATH_ENTRIES = isWindows()
     ];
 
 const HOSTNAME_PATTERN = /^[a-z0-9][a-z0-9.-]*$/i;
-
-/** GitHub logins are alphanumeric plus hyphens, up to 39 characters. */
-const LOGIN_PATTERN = /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,38})$/;
 
 /**
  * Credential sources `gh` reports for a token it reads from the environment
@@ -128,7 +126,7 @@ function parseCliAccounts(stdout: string): IGitHubCliAccount[] {
       continue;
     }
 
-    if (!entry.login || !LOGIN_PATTERN.test(entry.login)) {
+    if (!isValidGitHubCliLogin(entry.login)) {
       continue;
     }
 
@@ -247,11 +245,7 @@ function isValidIdentity(identity: GitHubCliIdentity | undefined): boolean {
     return true;
   }
 
-  return (
-    identity.kind === 'account' &&
-    typeof identity.login === 'string' &&
-    LOGIN_PATTERN.test(identity.login)
-  );
+  return identity.kind === 'account' && isValidGitHubCliLogin(identity.login);
 }
 
 function hasEnvironmentToken(env: NodeJS.ProcessEnv): boolean {

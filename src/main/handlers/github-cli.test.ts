@@ -48,13 +48,13 @@ describe('main/handlers/github-cli.ts', () => {
     );
   });
 
-  it('addresses a named account with --user', async () => {
+  it.each(['alice', 'mona-cat_octo'])('addresses %s with --user', async (login) => {
     execFileMock.mockResolvedValue({ stdout: 'gho_alice\n', stderr: '' });
 
     await expect(
       readGitHubCliToken({
         hostname: 'github.com',
-        identity: { kind: 'account', login: 'alice' },
+        identity: { kind: 'account', login },
       }),
     ).resolves.toEqual({ token: 'gho_alice' });
     expect(execFileMock.mock.calls[0][1]).toEqual([
@@ -63,7 +63,7 @@ describe('main/handlers/github-cli.ts', () => {
       '--hostname',
       'github.com',
       '--user',
-      'alice',
+      login,
     ]);
   });
 
@@ -169,13 +169,13 @@ describe('main/handlers/github-cli.ts', () => {
   });
 
   describe('listing identities', () => {
-    it('lists every usable identity and marks the active one', async () => {
+    it('lists personal and enterprise managed accounts and marks the active one', async () => {
       execFileMock.mockResolvedValue({
         stdout: JSON.stringify({
           hosts: {
             'github.com': [
-              { state: 'success', active: true, login: 'alice', tokenSource: 'keyring' },
-              { state: 'success', active: false, login: 'bob', tokenSource: 'keyring' },
+              { state: 'success', active: true, login: 'mona-cat_octo', tokenSource: 'keyring' },
+              { state: 'success', active: false, login: 'alice', tokenSource: 'keyring' },
               { state: 'error', active: false, login: 'carol', tokenSource: 'keyring' },
             ],
           },
@@ -185,8 +185,8 @@ describe('main/handlers/github-cli.ts', () => {
 
       await expect(listGitHubCliAccounts('github.com')).resolves.toEqual({
         accounts: [
-          { identity: { kind: 'account', login: 'alice' }, active: true },
-          { identity: { kind: 'account', login: 'bob' }, active: false },
+          { identity: { kind: 'account', login: 'mona-cat_octo' }, active: true },
+          { identity: { kind: 'account', login: 'alice' }, active: false },
         ],
       });
       expect(execFileMock).toHaveBeenCalledWith(

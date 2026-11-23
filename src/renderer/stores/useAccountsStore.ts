@@ -9,7 +9,9 @@ import type { Account, ClientID, Forge, Hostname, Token } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 import type { AccountsState, AccountsStore } from './types';
 
+import i18n from '../i18n';
 import { sanitizeCliIdentity } from '../utils/auth/identity';
+import { externallyManagedScopes, hasRequiredScopes } from '../utils/auth/scopes';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { rendererLogError, rendererLogInfo, rendererLogWarn, toError } from '../utils/core/logger';
 import { getAccountAdapter, getAdapter, isKnownForge } from '../utils/forges/registry';
@@ -125,11 +127,21 @@ const useAccountsStore = create<AccountsStore>()(
         };
 
         newAccount = await refreshAccount(newAccount);
-        const newAccountUUID = getAccountUUID(newAccount);
-
-        const accounts = get().accounts;
         const adapter = getAdapter(forge);
         const isCliAccount = method === adapter.cliAuth?.authMethod;
+        const managedScopes = isCliAccount ? externallyManagedScopes(newAccount) : undefined;
+        if (managedScopes && !hasRequiredScopes(newAccount)) {
+          throw new Error(
+            i18n.t(
+              'login.cli.missing_notification_scope',
+              'This account needs notification access. Run `{{command}}` for this account, then retry.',
+              { command: managedScopes.command },
+            ),
+          );
+        }
+
+        const newAccountUUID = getAccountUUID(newAccount);
+        const accounts = get().accounts;
         const replacesAccount = (account: Account) => {
           if (isCliAccount) {
             return (
@@ -181,15 +193,10 @@ const useAccountsStore = create<AccountsStore>()(
       refreshAccount: async (account: Account): Promise<Account> => {
         const refreshed = await refreshAccount(account);
 
-        const adapter = getAdapter(refreshed.forge);
-        if (
-          adapter.cliAuth &&
-          refreshed.method === adapter.cliAuth.authMethod &&
-          !refreshed.cliIdentity &&
-          refreshed.user
-        ) {
+        const { cliAuth } = getAdapter(refreshed.forge);
+        if (refreshed.method === cliAuth?.authMethod && !refreshed.cliIdentity && refreshed.user) {
           try {
-            refreshed.cliIdentity = await adapter.cliAuth.identify?.(
+            refreshed.cliIdentity = await cliAuth.identify?.(
               refreshed.hostname,
               refreshed.user.login,
             );

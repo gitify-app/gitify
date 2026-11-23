@@ -160,9 +160,6 @@ export type IGitHubCliAccountsResult =
   | { accounts: IGitHubCliAccount[]; error?: never; detail?: never }
   | { accounts?: never; error: GitHubCliAccountsError; detail?: string };
 
-/** Host whose CLI identities should be listed. */
-export type IGitHubCliAccountsRequest = string;
-
 /**
  * Request for one of the GitHub CLI's credentials. Omitting `identity` asks for
  * the CLI's active account, which is how pre-pinning accounts keep working.
@@ -254,7 +251,7 @@ export type EventContracts = AssertEventCoverage<{
     response: IGitHubCliTokenResult;
   };
   [EVENTS.GITHUB_CLI_ACCOUNTS]: {
-    request: IGitHubCliAccountsRequest;
+    request: string;
     response: IGitHubCliAccountsResult;
   };
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };

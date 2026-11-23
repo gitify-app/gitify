@@ -1,9 +1,7 @@
 import type { GitHubCliIdentity } from '../../../shared/events';
+import { isValidGitHubCliLogin } from '../../../shared/githubCli';
 
 import type { Account, AccountUUID } from '../../types';
-
-/** GitHub logins are alphanumeric plus hyphens, up to 39 characters. */
-const CLI_LOGIN_PATTERN = /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,38})$/;
 
 /**
  * Validate a CLI identity loaded from persisted state.
@@ -25,11 +23,7 @@ export function sanitizeCliIdentity(value: unknown): GitHubCliIdentity | undefin
     return { kind: 'environment' };
   }
 
-  if (
-    candidate.kind === 'account' &&
-    typeof candidate.login === 'string' &&
-    CLI_LOGIN_PATTERN.test(candidate.login)
-  ) {
+  if (candidate.kind === 'account' && isValidGitHubCliLogin(candidate.login)) {
     return { kind: 'account', login: candidate.login };
   }
 

@@ -2,7 +2,11 @@ import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { navigateMock, renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitHubEnterpriseServerAccount } from '../../__mocks__/account-mocks';
+import {
+  mockGitHubCliAccount,
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../__mocks__/account-mocks';
 
 import type { IGitHubCliAccountsResult } from '../../../shared/events';
 
@@ -131,27 +135,64 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
     expect(within(select).getByRole('option', { name: 'bob' })).toBeInTheDocument();
   });
 
-  it('logs in with the account the user picks', async () => {
+  it('logs in with the enterprise managed account the user picks', async () => {
     loginWithCliMock.mockResolvedValueOnce(undefined);
     stubAccounts({
       accounts: [
         { identity: { kind: 'account', login: 'alice' }, active: true },
-        { identity: { kind: 'account', login: 'bob' }, active: false },
+        { identity: { kind: 'account', login: 'mona-cat_octo' }, active: false },
       ],
     });
 
     renderWithProviders(<GitHubLoginWithCLIRoute />, { loginWithCli: loginWithCliMock });
 
     const select = await screen.findByTestId('login-cli-account');
-    await userEvent.selectOptions(select, 'account:bob');
+    await userEvent.selectOptions(select, 'account:mona-cat_octo');
     await userEvent.click(await waitForLoginReady());
 
     await waitFor(() =>
       expect(loginWithCliMock).toHaveBeenCalledWith('github', 'github.com', {
         kind: 'account',
-        login: 'bob',
+        login: 'mona-cat_octo',
       }),
     );
+  });
+
+  it('disables already enrolled accounts and preselects the only available account', async () => {
+    stubAccounts({
+      accounts: [
+        { identity: { kind: 'account', login: 'alice' }, active: true },
+        { identity: { kind: 'account', login: 'bob' }, active: false },
+      ],
+    });
+    renderWithProviders(<GitHubLoginWithCLIRoute />, {
+      accounts: [
+        { ...mockGitHubCloudAccount, user: { ...mockGitHubCloudAccount.user!, login: 'Alice' } },
+      ],
+    });
+
+    const select = await screen.findByTestId('login-cli-account');
+    expect(
+      within(select).getByRole('option', { name: 'alice (already in Gitify)' }),
+    ).toBeDisabled();
+    expect(select).toHaveValue('account:bob');
+    expect(await waitForLoginReady()).toBeEnabled();
+  });
+
+  it('blocks login when the only CLI account is already enrolled', async () => {
+    renderWithProviders(<GitHubLoginWithCLIRoute />, {
+      accounts: [{ ...mockGitHubCliAccount, cliIdentity: ACTIVE_OCTOCAT }],
+    });
+
+    const select = await screen.findByTestId('login-cli-account');
+    expect(
+      within(select).getByRole('option', { name: 'octocat (already in Gitify)' }),
+    ).toBeDisabled();
+    expect(select).toHaveValue('');
+    expect(
+      within(select).getByRole('option', { name: 'All accounts already in Gitify' }),
+    ).toBeVisible();
+    expect(screen.getByRole('button', { name: 'Login' })).toBeDisabled();
   });
 
   it('offers the environment credential as its own choice', async () => {
@@ -212,7 +253,7 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
 
     const button = await waitForLoginReady();
     expect(screen.queryByTestId('login-cli-account')).not.toBeInTheDocument();
-    expect(screen.getByText(/cannot list accounts/)).toBeVisible();
+    expect(screen.getByText(/Using the active account/)).toBeVisible();
 
     await userEvent.click(button);
 
@@ -222,6 +263,10 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
   });
 
   it('preselects the pinned identity when re-authenticating', async () => {
+    const account = {
+      ...mockGitHubCliAccount,
+      cliIdentity: { kind: 'account' as const, login: 'bob' },
+    };
     stubAccounts({
       accounts: [
         { identity: { kind: 'account', login: 'alice' }, active: true },
@@ -230,20 +275,20 @@ describe('renderer/routes/github/LoginWithGitHubCLI.tsx', () => {
     });
 
     renderWithProviders(<GitHubLoginWithCLIRoute />, {
+      accounts: [account],
       initialEntries: [
         {
           pathname: '/login/github/cli',
           state: {
-            account: {
-              ...mockGitHubEnterpriseServerAccount,
-              cliIdentity: { kind: 'account', login: 'bob' },
-            },
+            account,
           },
         },
       ],
     });
 
-    expect(await screen.findByTestId('login-cli-account')).toHaveValue('account:bob');
+    const select = await screen.findByTestId('login-cli-account');
+    expect(select).toHaveValue('account:bob');
+    expect(within(select).getByRole('option', { name: 'bob' })).toBeEnabled();
   });
 
   it('requires a new choice when the pinned identity is gone', async () => {
