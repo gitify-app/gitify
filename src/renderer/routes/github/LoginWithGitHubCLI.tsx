@@ -243,12 +243,20 @@ export function GitHubLoginWithCLIRoute() {
         )}
 
         <Stack direction="vertical" gap="normal">
-          <Text className="text-xs">
-            {t(
-              'login.cli.intro',
-              'Use an existing GitHub CLI login. Gitify checks notification access before adding the account and picks up token refreshes automatically.',
-            )}
-          </Text>
+          <Stack direction="vertical" gap="condensed">
+            <Text as="p" className="text-xs">
+              {t(
+                'login.cli.intro',
+                'Gitify uses your existing GitHub CLI login. There’s no token to paste, and Gitify picks up token refreshes automatically.',
+              )}
+            </Text>
+            <Text as="p" className="text-xs">
+              {t(
+                'login.cli.intro_scopes',
+                'Before adding the account, Gitify checks for notification access. Either “repo” or “notifications” is enough.',
+              )}
+            </Text>
+          </Stack>
 
           <FormControl required>
             <FormControl.Label>{t('login.cli.hostname', 'Hostname')}</FormControl.Label>
