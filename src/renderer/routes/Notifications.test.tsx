@@ -70,24 +70,13 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(screen.queryByText('Loading')).not.toBeInTheDocument();
   });
 
-  it('prefers the offline state over loading', () => {
+  it('shows loading rather than an offline error for a paused online query', () => {
     renderWithProviders(<NotificationsRoute />, {
-      isOnline: false,
-      status: 'loading',
+      status: 'paused',
     });
 
-    expect(screen.getByText('Oops')).toBeInTheDocument();
-    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
-  });
-
-  it('prefers the offline status over loading while the device is online', () => {
-    renderWithProviders(<NotificationsRoute />, {
-      status: 'offline',
-      isOnline: true,
-    });
-
-    expect(screen.getByText('Oops')).toBeInTheDocument();
-    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+    expect(screen.queryByText('Oops')).not.toBeInTheDocument();
     expect(screen.queryByText('AllRead')).not.toBeInTheDocument();
   });
 
@@ -112,7 +101,7 @@ describe('renderer/routes/Notifications.tsx', () => {
 
   it('renders offline error when not online', () => {
     renderWithProviders(<NotificationsRoute />, {
-      isOnline: false,
+      status: 'offline',
     });
 
     expect(screen.getByText('Oops')).toBeInTheDocument();

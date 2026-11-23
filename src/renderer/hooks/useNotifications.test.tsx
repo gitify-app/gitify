@@ -1,7 +1,12 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
 
-import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  focusManager,
+  onlineManager,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 
 import {
   mockGitHubCloudAccount,
@@ -30,7 +35,7 @@ import {
   useSettingsStore,
 } from '../stores';
 
-import type { AccountNotifications, Percentage } from '../types';
+import type { AccountNotifications, Percentage, Status } from '../types';
 
 import { getAccountUUID } from '../utils/auth/utils';
 import { getErrorDetails } from '../utils/core/errors';
@@ -66,11 +71,12 @@ vi.mock('../utils/notifications/notifications', async () => {
 const getAllNotificationsMock = vi.mocked(notificationsUtils.getAllNotifications);
 const refreshEnrichmentCacheMock = vi.mocked(notificationsUtils.refreshEnrichmentCache);
 
-const createWrapper = () => {
+const createWrapper = (retry: number | false = false) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: false,
+        retry,
+        retryDelay: 0,
         refetchOnWindowFocus: false,
         refetchInterval: false,
       },
@@ -206,6 +212,89 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       expect(result.current.globalError).toBeUndefined();
     });
+  });
+
+  describe('notification connectivity', () => {
+    const cachedFailure: AccountNotifications[] = [
+      {
+        account: mockGitHubCloudAccount,
+        notifications: [],
+        error: getErrorDetails('NETWORK'),
+      },
+    ];
+
+    afterEach(() => {
+      onlineManager.setOnline(true);
+      focusManager.setFocused(undefined);
+    });
+
+    it('does not report offline when a retry waits for a hidden window', async () => {
+      onlineManager.setOnline(true);
+      focusManager.setFocused(false);
+      getAllNotificationsMock
+        .mockRejectedValueOnce(new Error('first attempt failed'))
+        .mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      const { result } = renderHook(() => useNotifications(), { wrapper: createWrapper(1) });
+
+      await waitFor(() => expect(result.current.status).toBe('paused'));
+      expect(result.current.globalError).toBeUndefined();
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+      act(() => focusManager.setFocused(true));
+
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+    });
+
+    it.each([
+      { pauseBeforeReconnect: true, fails: false },
+      { pauseBeforeReconnect: false, fails: true },
+    ])(
+      'hides stale failures during reconnect ($pauseBeforeReconnect paused, $fails fails)',
+      async ({ pauseBeforeReconnect, fails }) => {
+        onlineManager.setOnline(true);
+        getAllNotificationsMock.mockResolvedValueOnce(cachedFailure);
+        const renders: Status[] = [];
+        const { result } = renderHook(
+          () => {
+            const state = useNotificationsHost();
+            renders.push(state.status);
+            return state;
+          },
+          { wrapper: createWrapper() },
+        );
+
+        await waitFor(() => expect(result.current.status).toBe('error'));
+        expect(result.current.globalError?.type).toBe('NETWORK');
+
+        act(() => onlineManager.setOnline(false));
+        expect(result.current.status).toBe('offline');
+        if (pauseBeforeReconnect) {
+          act(() => void result.current.refetchNotifications());
+        }
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        const { promise, resolve } = Promise.withResolvers<AccountNotifications[]>();
+        getAllNotificationsMock.mockReturnValueOnce(promise);
+        renders.length = 0;
+        act(() => onlineManager.setOnline(true));
+
+        await waitFor(() => expect(result.current.isFetching).toBe(true));
+        expect(result.current.status).toBe('loading');
+        expect(result.current.globalError).toBeUndefined();
+        expect(renders).not.toContain('error');
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+
+        await act(async () => {
+          resolve(fails ? cachedFailure : mockSingleAccountNotifications);
+        });
+        await waitFor(() => {
+          expect(result.current.status).toBe(fails ? 'error' : 'success');
+        });
+        expect(result.current.globalError?.type).toBe(fails ? 'NETWORK' : undefined);
+      },
+    );
   });
 
   describe('account set changes', () => {

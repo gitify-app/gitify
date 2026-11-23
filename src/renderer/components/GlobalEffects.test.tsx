@@ -38,9 +38,9 @@ describe('renderer/components/GlobalEffects.tsx', () => {
     expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(-1, true);
   });
 
-  it('does not report an error to the tray while the query is offline', async () => {
+  it('does not report an error to the tray while an online query is paused', async () => {
     await act(async () => {
-      renderWithProviders(<GlobalEffects />, { status: 'offline', notificationCount: 3 });
+      renderWithProviders(<GlobalEffects />, { status: 'paused', notificationCount: 3 });
     });
 
     expect(setTrayIconColorAndTitleSpy).toHaveBeenCalledWith(3, true);
