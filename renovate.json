@@ -26,6 +26,12 @@
       "semanticCommitScope": "deps-core"
     },
     {
+      "description": "Give package.json runtime dependencies the core dependency scope, including future additions, so release-please surfaces them in the changelog.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "semanticCommitScope": "deps-core"
+    },
+    {
       "description": "Skip the release-age gate and weekly schedule for the first-party electron-menubar dependency.",
       "matchPackageNames": ["electron-menubar"],
       "minimumReleaseAge": "0 days",
