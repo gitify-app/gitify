@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import { useNotifications } from '../hooks/useNotifications';
-import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { AllRead } from '../components/AllRead';
@@ -16,7 +15,6 @@ import { hasNoAccountErrors } from '../utils/notifications/status';
 
 export function NotificationsRoute() {
   const { notifications, status, globalError, hasNotifications } = useNotifications();
-  const isOnline = useOnlineStatus();
 
   const filteredAccounts = useFiltersStore((s) => s.accounts);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -35,7 +33,7 @@ export function NotificationsRoute() {
     [visibleNotifications],
   );
 
-  if (!isOnline) {
+  if (status === 'offline') {
     return <Oops error={getErrorDetails('OFFLINE')} />;
   }
 
@@ -43,7 +41,7 @@ export function NotificationsRoute() {
     return <Oops error={globalError ?? getErrorDetails('UNKNOWN')} />;
   }
 
-  if (status === 'loading') {
+  if (status === 'loading' || status === 'paused') {
     return <Loading />;
   }
 

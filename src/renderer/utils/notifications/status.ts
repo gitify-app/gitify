@@ -13,10 +13,15 @@ import {
  * or the query layer.
  */
 export interface NotificationStatusInput {
-  /** The initial fetch has not settled yet. */
+  isNetworkOnline: boolean;
+  /** The initial fetch is in progress. */
   isLoading: boolean;
-  /** TanStack Query paused the request (e.g. offline). */
+  /** Neither success nor error has settled yet. */
+  isPending: boolean;
+  /** The query is waiting for connectivity or for the window to become visible. */
   isPaused: boolean;
+  /** The previous result predates reconnection; a fresh result is still due. */
+  isRecovering: boolean;
   /** The query failed outright. */
   isError: boolean;
   /** Per-account notification groups, each carrying its own error (or null). */
@@ -26,49 +31,53 @@ export interface NotificationStatusInput {
 /**
  * Derive the overall notifications status.
  *
- * Only the initial fetch (no settled success or error yet) reports `loading` -
- * background refetches of already-settled data keep their settled status.
+ * Keep settled status during normal background refetches. During reconnect,
+ * don't report cached failures while waiting for the new fetch to settle.
  */
 export function deriveStatus({
+  isNetworkOnline,
   isLoading,
+  isPending,
   isPaused,
+  isRecovering,
   isError,
   notifications,
 }: NotificationStatusInput): Status {
-  if (isLoading) {
+  if (!isNetworkOnline) {
+    return 'offline';
+  }
+
+  const hasError = isError || doesAllAccountsHaveErrors(notifications);
+
+  if (isPaused) {
+    return isPending || hasError ? 'paused' : 'success';
+  }
+
+  if (isLoading || (isRecovering && hasError)) {
     return 'loading';
   }
 
-  // Paused (offline) and outright query errors both surface as error status.
-  if (isPaused || isError) {
-    return 'error';
-  }
-
-  // All accounts failing is a total outage.
-  if (doesAllAccountsHaveErrors(notifications)) {
-    return 'error';
-  }
-
-  return 'success';
+  return hasError ? 'error' : 'success';
 }
 
 /**
  * Derive the single global error to show, if one applies.
  *
- * A global error is only shown when every account failed with the *same*
- * error. When accounts fail with different errors (a partial failure), status
- * is `error` but no single global error is shown - the per-account rows carry
- * their own errors.
+ * Aside from being offline, there is only a shared error when every account
+ * failed with the same error. Suppress stale errors while reconnecting.
  */
 export function deriveGlobalError({
-  isPaused,
+  status,
   notifications,
-}: Pick<NotificationStatusInput, 'isPaused' | 'notifications'>): GitifyError | undefined {
-  if (isPaused) {
+}: {
+  status: Status;
+  notifications: AccountNotifications[];
+}): GitifyError | undefined {
+  if (status === 'offline') {
     return getErrorDetails('OFFLINE');
   }
 
-  if (notifications.length === 0) {
+  if (status !== 'error' || notifications.length === 0) {
     return undefined;
   }
 
