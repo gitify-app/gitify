@@ -241,6 +241,8 @@ Releases are automated with [release-please][release-please]. There is no releas
 
 No manual milestone creation, renaming, or closing is required.
 
+When manually rebuilding a release, dispatch **Publish** from the release tag so the source matches that release. A tag-based dispatch uses the workflow at that tag: older tags that predate the Apple preflight will not run it. Verify notarization access separately before dispatching from an older tag.
+
 #### 🔐 Release automation permissions
 
 - release-please uses `GITHUB_TOKEN`, so its release PR workflow runs require approval from a user with write access.

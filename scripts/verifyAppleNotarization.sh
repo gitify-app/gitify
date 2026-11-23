@@ -17,7 +17,7 @@ if output=$(xcrun notarytool history \
   --apple-id "${APPLE_ID_USERNAME}" \
   --password "${APPLE_ID_PASSWORD}" \
   --team-id "${APPLE_ID_TEAM_ID}" 2>&1); then
-  printf '%s\n' "${output}"
+  # The response contains team-wide submission history, not just Gitify's.
   echo "Apple notarization access verified."
   exit 0
 fi
