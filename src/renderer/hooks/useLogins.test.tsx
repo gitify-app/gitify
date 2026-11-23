@@ -17,25 +17,23 @@ import { useAccountsStore } from '../stores';
 import type { ClientID, Token } from '../types';
 import type { DeviceFlowSession } from '../utils/auth/types';
 
+import { notificationsKeys } from '../utils/api/queryKeys';
 import { getAdapter } from '../utils/forges/registry';
 import { useLogins } from './useLogins';
 
 // Exercise the real hook implementation (globally mocked in vitest.setup)
 vi.unmock('./useLogins');
 
-const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: { retry: false },
-    },
+const renderLoginsHook = (
+  queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  }),
+) =>
+  renderHook(() => useLogins(), {
+    wrapper: ({ children }: { children: ReactNode }) => (
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    ),
   });
-
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
-
-const renderLoginsHook = () => renderHook(() => useLogins(), { wrapper: createWrapper() });
 
 describe('renderer/hooks/useLogins.ts', () => {
   const removeAccountNotificationsMock = vi.fn();
@@ -53,6 +51,61 @@ describe('renderer/hooks/useLogins.ts', () => {
     removeAccountSpy = vi.spyOn(useAccountsStore.getState(), 'removeAccount');
     removeAccountSpy.mockClear();
   });
+
+  it.each<{ name: string; login: (logins: ReturnType<typeof useLogins>) => Promise<void> }>([
+    {
+      name: 'GitHub CLI',
+      login: (logins) => logins.loginWithCli('github', Constants.GITHUB_HOSTNAME),
+    },
+    {
+      name: 'OAuth device flow',
+      login: (logins) =>
+        logins.loginWithDeviceFlowComplete('github', 'token' as Token, Constants.GITHUB_HOSTNAME),
+    },
+    {
+      name: 'personal access token',
+      login: (logins) =>
+        logins.loginWithPersonalAccessToken({
+          forge: 'github',
+          hostname: Constants.GITHUB_HOSTNAME,
+          token: 'token' as Token,
+        }),
+    },
+  ])(
+    'completes $name login after saving the account without waiting for notifications',
+    async ({ login }) => {
+      const saved = Promise.withResolvers<void>();
+      const refreshed = Promise.withResolvers<void>();
+      const queryClient = new QueryClient();
+      const invalidate = vi
+        .spyOn(queryClient, 'invalidateQueries')
+        .mockReturnValue(refreshed.promise);
+      createAccountSpy.mockReturnValue(saved.promise);
+      const github = getAdapter('github');
+      vi.spyOn(github.cliAuth!, 'resolveToken').mockResolvedValue('token' as Token);
+      vi.spyOn(github.accountOps, 'fetchAuthenticatedUser').mockResolvedValue({
+        user: { ...mockGitHubCloudAccount.user!, avatar: mockGitHubCloudAccount.user!.avatar! },
+      });
+
+      const { result } = renderLoginsHook(queryClient);
+      const onComplete = vi.fn();
+      const loginPromise = login(result.current).then(onComplete);
+
+      try {
+        await vi.waitFor(() => expect(createAccountSpy).toHaveBeenCalled());
+        expect(invalidate).not.toHaveBeenCalled();
+        expect(onComplete).not.toHaveBeenCalled();
+
+        saved.resolve();
+        await vi.waitFor(() => expect(onComplete).toHaveBeenCalledOnce());
+        expect(invalidate).toHaveBeenCalledWith({ queryKey: notificationsKeys.all });
+      } finally {
+        saved.resolve();
+        refreshed.resolve();
+        await loginPromise;
+      }
+    },
+  );
 
   it('loginWithDeviceFlowStart delegates to the forge adapter', async () => {
     const adapter = getAdapter('github');
