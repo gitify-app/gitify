@@ -222,6 +222,11 @@ Releases are automated with [release-please][release-please]. There is no releas
 
 1. **Merge changes into `main`.** Use [Conventional Commits][conventional-commits] for PR titles (`feat:`, `fix:`, `docs:`, `chore(deps):`, ...). The commit type decides the version bump and the changelog section it lands in.
 2. **Review the release PR.** release-please keeps an open `chore: release X.Y.Z` pull request up to date as commits land. It bumps the version in `package.json`, regenerates `CHANGELOG.md`, and updates `sonar.projectVersion` in `sonar-project.properties`. Check the [Renovate Dependency Dashboard][github-dependency-dashboard] for any dependency updates you want to include first.
+
+   Before merging, wait for the **Apple notarization readiness** check. It authenticates to Apple's notary service with the same credentials the release uses and fails when a required Apple agreement is missing or expired. Only the Account Holder can accept the [Apple Developer Program License Agreement](https://developer.apple.com/account) or a pending agreement in [App Store Connect](https://appstoreconnect.apple.com/business/agreements), so surface the failure to them instead of re-running the build.
+
+   release-please opens the PR with `GITHUB_TOKEN`, so GitHub holds its workflow runs for approval. A maintainer with write access must select **Approve workflows to run** before CI and the Apple check execute.
+
 3. **Merge the release PR when you are ready to ship.** Merging is the "go" decision. GitHub Actions then automatically:
 
 - builds, signs, and notarizes the app on macOS, Windows, and Linux,
@@ -236,8 +241,11 @@ Releases are automated with [release-please][release-please]. There is no releas
 
 No manual milestone creation, renaming, or closing is required.
 
+When manually rebuilding a release, dispatch **Publish** from the release tag so the source matches that release. A tag-based dispatch uses the workflow at that tag: older tags that predate the Apple preflight will not run it. Verify notarization access separately before dispatching from an older tag.
+
 #### 🔐 Release automation permissions
 
+- release-please uses `GITHUB_TOKEN`, so its release PR workflow runs require approval from a user with write access.
 - Packaging and publication use `contents: write`.
 - The milestone automation uses `issues: write`.
 - Pull request notification uses `issues: write`, `pull-requests: write`, and `contents: read`.
