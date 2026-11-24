@@ -230,8 +230,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0(graphql@17.1.0)
       '@legendapp/list':
-        specifier: 3.7.2
-        version: 3.7.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: 3.7.3
+        version: 3.7.3(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@octokit/core':
         specifier: 7.0.8
         version: 7.0.8
@@ -1009,8 +1009,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@legendapp/list@3.7.2':
-    resolution: {integrity: sha512-StFy5qjOHHuxHKjenwLq500S/z+zuF43hj8iqXhX9EMtzeOagPfsnMRWphvBG4CYBvMTX6VzgLjN5BzzwY1jDA==}
+  '@legendapp/list@3.7.3':
+    resolution: {integrity: sha512-trGu1i4xo1+r6gG6GI3qrrZAfYHbB25uVj32/KnxhaQ7/eW4AqzhM5cW21Oye4dpg+180Ts1aejRuI8z6Xc4eg==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -5466,7 +5466,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.3
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@legendapp/list@3.7.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
+  '@legendapp/list@3.7.3(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
     dependencies:
       react: 19.3.1
       use-sync-external-store: 1.7.0(react@19.3.1)
