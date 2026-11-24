@@ -2,6 +2,8 @@ import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
 
+import type { GitHubCliIdentity } from '../../../shared/events';
+
 import type {
   Account,
   ClientID,
@@ -354,17 +356,51 @@ export interface CustomOAuthAppSupport {
 }
 
 /**
+ * One identity a local CLI can supply a credential for. `active` mirrors the
+ * CLI's own notion of the identity it currently treats as active.
+ */
+export interface CliAccountChoice {
+  identity: GitHubCliIdentity;
+  active: boolean;
+}
+
+/** Why a local CLI could not list its identities for a host. */
+export type CliAccountsError =
+  | 'CLI_NOT_FOUND'
+  | 'CLI_NOT_AUTHENTICATED'
+  | 'CLI_UNSUPPORTED'
+  | 'CLI_TIMED_OUT'
+  | 'CLI_FAILED';
+
+/**
+ * Result of listing a local CLI's identities for a host. An empty list is a
+ * normal answer, not an error.
+ */
+export type CliAccountsResult =
+  | { accounts: CliAccountChoice[]; error?: never; detail?: never }
+  | { accounts?: never; error: CliAccountsError; detail?: string };
+
+/**
  * Local-CLI credential capability bundle. Present only on forges whose
  * official CLI stores a token Gitify can reuse (GitHub's `gh` today).
  */
 export interface CliAuthSupport {
   /** Auth method recorded on accounts created from the CLI's credential. */
   authMethod: AuthMethod;
+  /** List the identities the CLI holds for `hostname`. */
+  listAccounts(hostname: Hostname): Promise<CliAccountsResult>;
   /**
    * Read the token the CLI holds for `hostname`.
    *
+   * @param hostname - Host to read a token for.
+   * @param identity - Identity to address; omitted for the CLI's active account.
    * @throws With a user-facing message when the CLI is absent, is not logged
-   *         in to the host, or failed.
+   *         in to the host or identity, or failed.
    */
-  resolveToken(hostname: Hostname): Promise<Token>;
+  resolveToken(hostname: Hostname, identity?: GitHubCliIdentity): Promise<Token>;
+  /**
+   * Map a resolved GitHub login onto one of the host's CLI identities. Used to
+   * pin accounts created before identities were recorded.
+   */
+  identify?(hostname: Hostname, login: string): Promise<GitHubCliIdentity | undefined>;
 }

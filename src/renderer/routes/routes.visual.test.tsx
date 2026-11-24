@@ -155,6 +155,14 @@ async function captureRoute(
     settings: { ...route.state?.settings, ...settings },
   });
 
+  if (route.name === 'login-github-cli') {
+    await vi.waitFor(() => {
+      if (!document.querySelector('[data-testid="login-submit"]:enabled')) {
+        throw new Error('Waiting for GitHub CLI accounts to load');
+      }
+    });
+  }
+
   // These baselines capture idle routes. Hover/focus interactions have their
   // own coverage; park the pointer on empty sidebar space between captures.
   await page.getByTestId('visual-root').hover({ position: { x: 1, y: 399 } });

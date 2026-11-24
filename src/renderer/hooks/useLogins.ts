@@ -2,6 +2,8 @@ import { useCallback } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+import type { GitHubCliIdentity } from '../../shared/events';
+
 import { useAccountsStore } from '../stores';
 
 import type { Account, ClientID, Forge, Hostname, Token } from '../types';
@@ -15,6 +17,22 @@ import { notificationsKeys } from '../utils/api/queryKeys';
 import { getAccountAdapter, getAdapter } from '../utils/forges/registry';
 import { encryptValue } from '../utils/system/comms';
 import { useNotificationActions } from './notifications/useNotificationActions';
+
+/** Whether two CLI identities address the same account. */
+function sameCliIdentity(
+  existing: GitHubCliIdentity | undefined,
+  incoming: GitHubCliIdentity | undefined,
+): boolean {
+  if (!existing || !incoming || existing.kind !== incoming.kind) {
+    return false;
+  }
+
+  if (existing.kind === 'environment' || incoming.kind === 'environment') {
+    return true;
+  }
+
+  return existing.login.toLowerCase() === incoming.login.toLowerCase();
+}
 
 interface LoginsState {
   loginWithDeviceFlowStart: (
@@ -30,7 +48,7 @@ interface LoginsState {
     hostname: Hostname,
     clientId?: ClientID,
   ) => Promise<void>;
-  loginWithCli: (forge: Forge, hostname: Hostname) => Promise<void>;
+  loginWithCli: (forge: Forge, hostname: Hostname, identity?: GitHubCliIdentity) => Promise<void>;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
   logoutFromAccount: (account: Account) => void;
 }
@@ -122,25 +140,40 @@ export const useLogins = (): LoginsState => {
    *
    * The token is resolved here only to fail fast while the login screen is
    * still up. Nothing persists it: the CLI is re-read for every API request, so
-   * the account carries no credential of its own.
+   * the account carries no credential of its own. The chosen CLI identity is
+   * recorded so those reads address the same account each time.
    */
   const loginWithCli = useCallback(
-    async (forge: Forge, hostname: Hostname) => {
+    async (forge: Forge, hostname: Hostname, identity?: GitHubCliIdentity) => {
       const { cliAuth } = getAdapter(forge);
       if (!cliAuth) {
         throw new Error(`CLI login is not supported for forge "${forge}".`);
       }
 
-      await cliAuth.resolveToken(hostname);
+      await cliAuth.resolveToken(hostname, identity);
 
-      const existingAccounts = useAccountsStore
-        .getState()
-        .accounts.filter(
-          (a) => a.forge === forge && a.hostname === hostname && a.method === cliAuth.authMethod,
-        );
-      await createAccountInStore(cliAuth.authMethod, '' as Token, hostname, forge);
+      const beforeLogin = useAccountsStore.getState().accounts;
+      await createAccountInStore(
+        cliAuth.authMethod,
+        '' as Token,
+        hostname,
+        forge,
+        undefined,
+        undefined,
+        identity,
+      );
 
-      existingAccounts.forEach((account) => removeAccountNotifications(account));
+      beforeLogin
+        .filter(
+          (account) =>
+            account.forge === forge &&
+            account.hostname === hostname &&
+            account.method === cliAuth.authMethod &&
+            // Unpinned accounts predate identity selection; only one can exist
+            // per host, and any CLI login replaces it.
+            (account.cliIdentity === undefined || sameCliIdentity(account.cliIdentity, identity)),
+        )
+        .forEach((account) => removeAccountNotifications(account));
 
       refreshNotificationsInBackground();
     },

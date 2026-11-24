@@ -48,6 +48,13 @@ describe('renderer/utils/forges/github/adapter.ts', () => {
       expect(githubAdapter.defaultHostname).toBe('github.com');
     });
 
+    it('exposes identity-aware CLI support', () => {
+      expect(githubAdapter.cliAuth).toMatchObject({ authMethod: 'GitHub CLI' });
+      expect(githubAdapter.cliAuth?.listAccounts).toBeTypeOf('function');
+      expect(githubAdapter.cliAuth?.resolveToken).toBeTypeOf('function');
+      expect(githubAdapter.cliAuth?.identify).toBeTypeOf('function');
+    });
+
     it('validates a 40-character token', () => {
       expect(githubAdapter.validateToken('a'.repeat(40) as Token)).toBe(true);
       expect(githubAdapter.validateToken('short' as Token)).toBe(false);

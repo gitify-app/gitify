@@ -1,6 +1,7 @@
 import { contextBridge, webFrame } from 'electron';
 
 import type {
+  IGitHubCliTokenRequest,
   IKeyboardShortcut,
   INativeNotificationActionEvent,
   INativeNotificationClickEvent,
@@ -56,10 +57,19 @@ export const api = {
   /**
    * Read the token the locally installed GitHub CLI holds for a host.
    *
-   * @param hostname - Host to read the token for (e.g. `github.com`).
+   * @param request - Host to read the token for, and the identity to address.
    * @returns The CLI token, or a classified failure with an optional detail line.
    */
-  githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
+  githubCliToken: (request: IGitHubCliTokenRequest) =>
+    invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, request),
+
+  /**
+   * List the identities the locally installed GitHub CLI holds for a host.
+   *
+   * @param hostname - Host to list identities for (e.g. `github.com`).
+   * @returns The usable identities, or a classified failure.
+   */
+  githubCliAccounts: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_ACCOUNTS, hostname),
 
   /**
    * Enable or disable launching the application at system login.

@@ -203,7 +203,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       await octokit.request('GET /user');
 
       expect(authorizations).toEqual(['token gho_live']);
-      expect(resolveSpy).toHaveBeenCalledWith(mockGitHubCliAccount.hostname);
+      expect(resolveSpy).toHaveBeenCalledWith(mockGitHubCliAccount.hostname, undefined);
       expect(mockDecryptValue).not.toHaveBeenCalled();
     });
 
@@ -221,7 +221,7 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
       expect(response.status).toBe(200);
       expect(authorizations).toEqual(['token gho_stale', 'token gho_rotated']);
       // Without this the memo would keep serving the stale token.
-      expect(forgetSpy).toHaveBeenCalledWith(mockGitHubCliAccount.hostname);
+      expect(forgetSpy).toHaveBeenCalledWith(mockGitHubCliAccount.hostname, undefined);
     });
 
     it('gives up when the re-read credential is rejected too', async () => {
@@ -232,6 +232,36 @@ describe('renderer/utils/forges/github/octokit.ts', () => {
 
       await expect(octokit.request('GET /user')).rejects.toThrow('Bad credentials');
       expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('resolves each pinned account with its own identity', async () => {
+      const alice = {
+        ...mockGitHubCliAccount,
+        cliIdentity: { kind: 'account' as const, login: 'alice' },
+      };
+      const bob = {
+        ...mockGitHubCliAccount,
+        cliIdentity: { kind: 'account' as const, login: 'bob' },
+      };
+      const resolveSpy = vi
+        .spyOn(cli, 'resolveGitHubCliToken')
+        .mockImplementation(
+          async (_hostname, identity) =>
+            (identity?.kind === 'account' && identity.login === 'alice'
+              ? 'gho_alice'
+              : 'gho_bob') as Token,
+        );
+      const { authorizations } = stubFetch([200, 200]);
+
+      const aliceClient = await createOctokitClientUncached(alice, 'rest');
+      const bobClient = await createOctokitClientUncached(bob, 'rest');
+
+      await aliceClient.request('GET /user');
+      await bobClient.request('GET /user');
+
+      expect(authorizations).toEqual(['token gho_alice', 'token gho_bob']);
+      expect(resolveSpy).toHaveBeenNthCalledWith(1, alice.hostname, alice.cliIdentity);
+      expect(resolveSpy).toHaveBeenNthCalledWith(2, bob.hostname, bob.cliIdentity);
     });
   });
 });

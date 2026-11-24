@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { Button } from '@primer/react';
 
-import type { AutomaticUpdates, TrayIconAppearance } from '../shared/events';
+import type { AutomaticUpdates, GitHubCliIdentity, TrayIconAppearance } from '../shared/events';
 
 // Derived from public @primer/react component props rather than internal types
 export type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
@@ -77,6 +77,12 @@ export interface Account {
   clientId?: ClientID;
   /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
   username?: string;
+  /**
+   * Identity this GitHub CLI account is pinned to. Absent for accounts created
+   * before identities were recorded (and for non-CLI methods); those resolve
+   * whichever account the CLI currently treats as active.
+   */
+  cliIdentity?: GitHubCliIdentity;
   user: GitifyUser | null;
   scopes?: string[];
 }

@@ -17,7 +17,12 @@ import {
   isValidToken,
 } from './auth';
 import { githubCapabilities } from './capabilities';
-import { forgetGitHubCliToken, resolveGitHubCliToken } from './cli';
+import {
+  forgetGitHubCliTokens,
+  identifyGitHubCliIdentity,
+  listGitHubCliAccounts,
+  resolveGitHubCliToken,
+} from './cli';
 import {
   fetchAuthenticatedUserDetails,
   ignoreNotificationThreadSubscription,
@@ -37,7 +42,7 @@ async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountD
   if (account.method === 'GitHub CLI') {
     // Re-read the CLI so a `gh auth refresh` that widened the token's scopes is
     // reflected here; a merely rotated token is handled per request.
-    forgetGitHubCliToken(account.hostname);
+    forgetGitHubCliTokens(account.hostname);
   }
 
   const response = await fetchAuthenticatedUserDetails(account);
@@ -147,7 +152,9 @@ export const githubAdapter: ForgeAdapter = {
 
   cliAuth: {
     authMethod: 'GitHub CLI',
+    listAccounts: listGitHubCliAccounts,
     resolveToken: resolveGitHubCliToken,
+    identify: identifyGitHubCliIdentity,
   },
 
   accountOps: {
@@ -156,7 +163,7 @@ export const githubAdapter: ForgeAdapter = {
     fetchAuthenticatedUser,
     onAccountTokenChange: (account) => {
       clearOctokitClientCacheForAccount(account);
-      forgetGitHubCliToken(account.hostname);
+      forgetGitHubCliTokens(account.hostname);
     },
     listNotifications,
     markThreadAsRead: async (account, threadId) => {

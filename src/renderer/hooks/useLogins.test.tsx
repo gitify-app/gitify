@@ -132,8 +132,58 @@ describe('renderer/hooks/useLogins.ts', () => {
       await result.current.loginWithCli('github', Constants.GITHUB_HOSTNAME);
     });
 
-    expect(createAccountSpy).toHaveBeenCalledWith('GitHub CLI', '', 'github.com', 'github');
+    expect(createAccountSpy).toHaveBeenCalledWith(
+      'GitHub CLI',
+      '',
+      'github.com',
+      'github',
+      undefined,
+      undefined,
+      undefined,
+    );
     expect(removeAccountNotificationsMock).toHaveBeenCalledWith(mockGitHubCliAccount);
+  });
+
+  it('threads the chosen CLI identity through resolution and account creation', async () => {
+    const identity = { kind: 'account' as const, login: 'alice' };
+    const resolveSpy = vi
+      .spyOn(getAdapter('github').cliAuth!, 'resolveToken')
+      .mockResolvedValue('cli-token' as Token);
+    const { result } = renderLoginsHook();
+
+    await act(async () => {
+      await result.current.loginWithCli('github', Constants.GITHUB_HOSTNAME, identity);
+    });
+
+    expect(resolveSpy).toHaveBeenCalledWith(Constants.GITHUB_HOSTNAME, identity);
+    expect(createAccountSpy).toHaveBeenCalledWith(
+      'GitHub CLI',
+      '',
+      'github.com',
+      'github',
+      undefined,
+      undefined,
+      identity,
+    );
+  });
+
+  it('keeps another pinned CLI account notifications when adding a different identity', async () => {
+    const alice = {
+      ...mockGitHubCliAccount,
+      cliIdentity: { kind: 'account' as const, login: 'alice' },
+    };
+    useAccountsStore.setState({ accounts: [alice] });
+    vi.spyOn(getAdapter('github').cliAuth!, 'resolveToken').mockResolvedValue('cli-token' as Token);
+    const { result } = renderLoginsHook();
+
+    await act(async () => {
+      await result.current.loginWithCli('github', Constants.GITHUB_HOSTNAME, {
+        kind: 'account',
+        login: 'bob',
+      });
+    });
+
+    expect(removeAccountNotificationsMock).not.toHaveBeenCalledWith(alice);
   });
 
   it('keeps old CLI notifications when replacement login fails', async () => {

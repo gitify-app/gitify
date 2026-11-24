@@ -24,6 +24,7 @@ export const EVENTS = {
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
   GITHUB_CLI_TOKEN: `${P}github-cli-token`,
+  GITHUB_CLI_ACCOUNTS: `${P}github-cli-accounts`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
@@ -127,6 +128,47 @@ export type IGitHubCliTokenResult =
   | { token: string; error?: never; detail?: never }
   | { token?: never; error: GitHubCliTokenError; detail?: string };
 
+/**
+ * An identity the GitHub CLI can resolve a credential for: a stored account
+ * addressed by login, or the credential supplied through the CLI's environment.
+ */
+export type GitHubCliIdentity = { kind: 'account'; login: string } | { kind: 'environment' };
+
+/**
+ * One identity the GitHub CLI reports for a host. `active` mirrors the CLI's
+ * own notion of the account it currently treats as active.
+ */
+export interface IGitHubCliAccount {
+  identity: GitHubCliIdentity;
+  active: boolean;
+}
+
+/** Why the GitHub CLI could not list its identities for a host. */
+export type GitHubCliAccountsError =
+  | 'GH_NOT_FOUND'
+  | 'GH_NOT_AUTHENTICATED'
+  | 'GH_ACCOUNTS_UNSUPPORTED'
+  | 'GH_TIMED_OUT'
+  | 'GH_FAILED';
+
+/**
+ * Result of listing the identities the GitHub CLI holds for a host. An empty
+ * list is a normal answer, not an error; `detail` carries the CLI's own first
+ * line of stderr when it has one.
+ */
+export type IGitHubCliAccountsResult =
+  | { accounts: IGitHubCliAccount[]; error?: never; detail?: never }
+  | { accounts?: never; error: GitHubCliAccountsError; detail?: string };
+
+/**
+ * Request for one of the GitHub CLI's credentials. Omitting `identity` asks for
+ * the CLI's active account, which is how pre-pinning accounts keep working.
+ */
+export interface IGitHubCliTokenRequest {
+  hostname: string;
+  identity?: GitHubCliIdentity;
+}
+
 /** A structured request to publish an operating-system notification. */
 export interface INativeNotificationPayload {
   /** Short, opaque identity for this notification. */
@@ -205,8 +247,12 @@ export type EventContracts = AssertEventCoverage<{
     response: ISafeStorageDecryptResult;
   };
   [EVENTS.GITHUB_CLI_TOKEN]: {
-    request: string;
+    request: IGitHubCliTokenRequest;
     response: IGitHubCliTokenResult;
+  };
+  [EVENTS.GITHUB_CLI_ACCOUNTS]: {
+    request: string;
+    response: IGitHubCliAccountsResult;
   };
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };

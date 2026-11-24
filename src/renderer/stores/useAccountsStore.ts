@@ -1,14 +1,19 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import type { GitHubCliIdentity } from '../../shared/events';
+
 import { Constants } from '../constants';
 
 import type { Account, ClientID, Forge, Hostname, Token } from '../types';
 import type { AuthMethod } from '../utils/auth/types';
 import type { AccountsState, AccountsStore } from './types';
 
+import i18n from '../i18n';
+import { sanitizeCliIdentity } from '../utils/auth/identity';
+import { externallyManagedScopes, hasRequiredScopes } from '../utils/auth/scopes';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
-import { rendererLogInfo, rendererLogWarn } from '../utils/core/logger';
+import { rendererLogError, rendererLogInfo, rendererLogWarn, toError } from '../utils/core/logger';
 import { getAccountAdapter, getAdapter, isKnownForge } from '../utils/forges/registry';
 import { decryptValue, encryptValue } from '../utils/system/comms';
 import { DEFAULT_ACCOUNTS_STATE } from './defaults';
@@ -29,6 +34,32 @@ function migrateLegacyAuthMethod(method: string): AuthMethod {
     default:
       return method as AuthMethod;
   }
+}
+
+/** Case-insensitive key for a CLI identity, or `undefined` when none is pinned. */
+function cliIdentityKey(identity: GitHubCliIdentity | undefined): string | undefined {
+  if (!identity) {
+    return undefined;
+  }
+
+  return identity.kind === 'account' ? `account:${identity.login.toLowerCase()}` : 'environment';
+}
+
+/**
+ * Whether a stored CLI account and an incoming CLI login represent the same
+ * identity. Different `gh` logins are different users, but the same user can be
+ * reachable through the environment credential and a stored login, so a shared
+ * user id also counts as the same account.
+ */
+function sharesCliIdentity(existing: Account, incoming: Account): boolean {
+  const existingKey = cliIdentityKey(existing.cliIdentity);
+  const incomingKey = cliIdentityKey(incoming.cliIdentity);
+
+  if (existingKey && incomingKey && existingKey === incomingKey) {
+    return true;
+  }
+
+  return existing.user?.id !== undefined && existing.user.id === incoming.user?.id;
 }
 
 /**
@@ -53,6 +84,7 @@ export function sanitizeAccounts(accounts: Account[]): Account[] {
       token: a.token,
       clientId: a.clientId,
       username: a.username,
+      cliIdentity: sanitizeCliIdentity(a.cliIdentity),
       user: a.user,
       scopes: a.scopes,
     };
@@ -78,6 +110,7 @@ const useAccountsStore = create<AccountsStore>()(
         forge: Forge = 'github',
         username?: string,
         clientId?: ClientID,
+        cliIdentity?: GitHubCliIdentity,
       ) => {
         const encryptedToken = (await encryptValue(token)) as Token;
 
@@ -89,19 +122,33 @@ const useAccountsStore = create<AccountsStore>()(
           token: encryptedToken,
           clientId,
           username,
+          cliIdentity,
           user: null, // Will be updated during the refresh call below
         };
 
         newAccount = await refreshAccount(newAccount);
-        const newAccountUUID = getAccountUUID(newAccount);
-
-        const accounts = get().accounts;
         const adapter = getAdapter(forge);
         const isCliAccount = method === adapter.cliAuth?.authMethod;
+        const managedScopes = isCliAccount ? externallyManagedScopes(newAccount) : undefined;
+        if (managedScopes && !hasRequiredScopes(newAccount)) {
+          throw new Error(
+            i18n.t(
+              'login.cli.missing_notification_scope',
+              'This account needs notification access. Run `{{command}}` for this account, then retry.',
+              { command: managedScopes.command },
+            ),
+          );
+        }
+
+        const newAccountUUID = getAccountUUID(newAccount);
+        const accounts = get().accounts;
         const replacesAccount = (account: Account) => {
           if (isCliAccount) {
             return (
-              account.forge === forge && account.hostname === hostname && account.method === method
+              account.forge === forge &&
+              account.hostname === hostname &&
+              account.method === method &&
+              sharesCliIdentity(account, newAccount)
             );
           }
           if (adapter.getOrigin) {
@@ -145,6 +192,25 @@ const useAccountsStore = create<AccountsStore>()(
 
       refreshAccount: async (account: Account): Promise<Account> => {
         const refreshed = await refreshAccount(account);
+
+        const { cliAuth } = getAdapter(refreshed.forge);
+        if (refreshed.method === cliAuth?.authMethod && !refreshed.cliIdentity && refreshed.user) {
+          try {
+            refreshed.cliIdentity = await cliAuth.identify?.(
+              refreshed.hostname,
+              refreshed.user.login,
+            );
+          } catch (err) {
+            // Leave the account on the legacy active-account path; its normal
+            // authentication error surface still applies.
+            rendererLogError(
+              'refreshAccount',
+              `failed to pin CLI identity for ${refreshed.hostname}`,
+              toError(err),
+            );
+          }
+        }
+
         const refreshedUUID = getAccountUUID(refreshed);
 
         // Persist the refreshed account details
