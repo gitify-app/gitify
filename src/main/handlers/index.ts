@@ -1,4 +1,5 @@
 export * from './app';
+export * from './gerrit';
 export * from './github-cli';
 export * from './native-notifications';
 export * from './storage';

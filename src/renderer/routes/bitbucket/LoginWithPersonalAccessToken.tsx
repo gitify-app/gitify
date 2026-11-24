@@ -23,6 +23,8 @@ export function BitbucketLoginWithPersonalAccessTokenRoute() {
         'Your Atlassian account email address',
       )}
       usernamePlaceholder="you@example.com"
+      usernameInputType="email"
+      usernameLabel={t('login.pat.atlassian_email', 'Atlassian Email')}
     />
   );
 }

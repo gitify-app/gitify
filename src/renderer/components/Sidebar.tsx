@@ -130,15 +130,17 @@ export function Sidebar() {
               variant={hasFilters ? 'primary' : 'invisible'}
             />
 
-            <IconButton
-              aria-label={t('sidebar.my_issues', 'My issues ↗')}
-              icon={IssueOpenedIcon}
-              keybindingHint={shortcuts.myIssues.key}
-              onClick={() => shortcuts.myIssues.action()}
-              size="small"
-              tooltipDirection="e"
-              variant="invisible"
-            />
+            {shortcuts.myIssues.isAllowed && (
+              <IconButton
+                aria-label={t('sidebar.my_issues', 'My issues ↗')}
+                icon={IssueOpenedIcon}
+                keybindingHint={shortcuts.myIssues.key}
+                onClick={() => shortcuts.myIssues.action()}
+                size="small"
+                tooltipDirection="e"
+                variant="invisible"
+              />
+            )}
 
             <IconButton
               aria-label={t('sidebar.my_pull_requests', 'My pull requests ↗')}

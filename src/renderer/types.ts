@@ -61,7 +61,7 @@ export type AccountUUID = Branded<string, 'AccountUUID'>;
 export type KeyboardAcceleratorShortcut = Branded<string, 'KeyboardAcceleratorShortcut'>;
 
 /** Code hosting provider for an account. New forges register themselves here. */
-export type Forge = 'github' | 'gitea' | 'bitbucket' | 'gitlab';
+export type Forge = 'github' | 'gitea' | 'bitbucket' | 'gitlab' | 'gerrit';
 
 export interface Account {
   forge: Forge;
@@ -75,7 +75,7 @@ export interface Account {
    * custom OAuth app; absent for Gitify's own preconfigured app.
    */
   clientId?: ClientID;
-  /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
+  /** Basic Auth username: Atlassian email for Bitbucket, username for Gerrit. */
   username?: string;
   user: GitifyUser | null;
   scopes?: string[];

@@ -11,7 +11,7 @@
 ## 📦 Features
 
 - 🔔 Unified notifications from your Git platforms
-- ⚒️ Multi-forge: GitHub Cloud, GitHub Enterprise, Gitea, Forgejo, Codeberg, Bitbucket Cloud, GitLab
+- ⚒️ Multi-forge: GitHub Cloud, GitHub Enterprise, Gitea, Forgejo, Codeberg, Bitbucket Cloud, GitLab, Gerrit
 - 💻 Cross-platform: macOS, Windows, and Linux
 - 🎨 Customizable settings, filters and themes
 - 🖥️ Tray/menu bar integration
@@ -31,7 +31,7 @@ Gitify uses a forge adapter pattern so notifications can come from any compatibl
 | **Bitbucket** Cloud                             | ✅     |      ✅       |    ✅     |     —     |      —      |        —         |
 | **GitLab** Cloud & Self-Managed                 | ✅     |      ✅       |    ✅     |    ✅     |      —      |        ✅        |
 | **Azure DevOps**                                | 💭     |       —       |     —     |     —     |      —      |        —         |
-| **Gerrit**                                      | 💭     |       —       |     —     |     —     |      —      |        —         |
+| **Gerrit**                                      | ✅     |      ✅       |    ✅     |     —     |      —      |        —         |
 
 <details>
 <summary><strong>Status legend</strong></summary>
@@ -48,6 +48,8 @@ Gitify uses a forge adapter pattern so notifications can come from any compatibl
 
 > [!NOTE]
 > _A new forge needs an [adapter](src/renderer/utils/forges/) plus a designated maintainer. See [our contributing guide](CONTRIBUTING.md#multi-forge-support) for the full policy._
+
+Gerrit 3.12 or later is recommended. Older detected versions produce a log warning but can still sign in; compatibility is not guaranteed. Unknown versions are also allowed.
 
 ## 🚀 Quick Start
 

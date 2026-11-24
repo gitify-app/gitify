@@ -43,6 +43,7 @@ vi.mock('./config', () => ({
 vi.mock('./handlers', () => ({
   registerAppHandlers: vi.fn(),
   registerGitHubCliHandlers: vi.fn(),
+  registerGerritHandlers: vi.fn(),
   registerNativeNotificationHandlers: vi.fn(),
   registerStorageHandlers: vi.fn(),
   registerSystemHandlers: vi.fn(),

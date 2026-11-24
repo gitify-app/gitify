@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { renderWithProviders } from '../../__helpers__/test-utils';
-import { mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
+import { mockGerritAccount, mockGitHubCloudAccount } from '../../__mocks__/account-mocks';
 
 import * as links from '../../utils/system/links';
 import { AccountHeader, type AccountHeaderProps } from './AccountHeader';
@@ -56,6 +56,13 @@ describe('renderer/components/notifications/AccountHeader.tsx', () => {
     await userEvent.click(screen.getByTestId('account-issues'));
 
     expect(openHostIssuesSpy).toHaveBeenCalledWith(mockGitHubCloudAccount);
+  });
+
+  it('hides issues for Gerrit while retaining the account and changes links', () => {
+    renderWithProviders(<AccountHeader {...props} account={mockGerritAccount} />);
+    expect(screen.queryByTestId('account-issues')).not.toBeInTheDocument();
+    expect(screen.getByTestId('account-profile')).toBeInTheDocument();
+    expect(screen.getByTestId('account-pull-requests')).toBeInTheDocument();
   });
 
   it('opens my pull requests when clicked', async () => {

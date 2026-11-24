@@ -10,7 +10,8 @@ import { rendererLogError } from '../core/logger';
 
 /**
  * Determine the failure type based on an error.
- * Handles Octokit RequestError (REST), GraphqlResponseError (GraphQL), and generic Error.
+ * Handles Octokit RequestError (REST), GraphqlResponseError (GraphQL), and generic Error
+ * (with an optional numeric `status`).
  *
  * @param err The error (RequestError, GraphqlResponseError, or generic Error)
  * @returns The Gitify error type
@@ -25,10 +26,10 @@ export function determineFailureType(
     return getErrorDetails('BAD_CREDENTIALS');
   }
 
-  // Handle Octokit REST RequestError
-  if (err instanceof RequestError) {
-    const status = err.status;
-
+  // HTTP status from Octokit's RequestError, or from forge clients that attach
+  // a numeric `status` to a plain Error (e.g. Gerrit).
+  const status = err instanceof RequestError ? err.status : (err as { status?: unknown }).status;
+  if (typeof status === 'number') {
     switch (status) {
       case 401:
         return getErrorDetails('BAD_CREDENTIALS');

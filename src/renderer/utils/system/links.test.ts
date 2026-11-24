@@ -1,5 +1,6 @@
 import {
   mockBitbucketAccount,
+  mockGerritAccount,
   mockGiteaAccount,
   mockGitHubCloudAccount,
   mockGitLabAccount,
@@ -30,6 +31,20 @@ import {
 
 describe('renderer/utils/links.ts', () => {
   const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
+  it('uses Gerrit queries for account links and does not open an issues page', () => {
+    openHostIssues(mockGerritAccount);
+    expect(openExternalLinkSpy).not.toHaveBeenCalled();
+    openHostPulls(mockGerritAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://gerrit.example.com/q/status:open+owner:jdoe',
+    );
+    openAccountProfile(mockGerritAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith('https://gerrit.example.com/q/owner:jdoe');
+    openHostNotifications(mockGerritAccount);
+    expect(openExternalLinkSpy).toHaveBeenLastCalledWith(
+      'https://gerrit.example.com/q/attention:jdoe',
+    );
+  });
 
   it('openGitifyReleaseNotes', () => {
     openGitifyReleaseNotes('v1.0.0');

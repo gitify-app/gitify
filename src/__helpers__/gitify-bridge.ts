@@ -21,6 +21,7 @@ export function createGitifyBridgeApi(platform: TestPlatform = 'macos'): Window[
     decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
     encryptValue: vi.fn().mockResolvedValue('encrypted'),
     githubCliToken: vi.fn().mockResolvedValue({ token: 'gh-cli-token' }),
+    gerritRequest: vi.fn(),
     setWindowVibrancy: vi.fn().mockResolvedValue(undefined),
     setNativeTheme: vi.fn().mockResolvedValue(undefined),
     platform: {
