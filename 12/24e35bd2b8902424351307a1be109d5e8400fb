@@ -1,0 +1,18 @@
+.github/workflows/ci.yml
+  h_ac004aadb63da9 16,22,31
+.github/workflows/lint.yml
+  h_ac004aadb63da9 63-72
+.github/workflows/release.yml
+  h_ac004aadb63da9 136,144,153,175
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1224e35bd2b8902424351307a1be109d5e8400fb",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
