@@ -1,5 +1,33 @@
 # Changelog
 
+## [8.3.0](https://github.com/gitify-app/gitify/compare/v8.2.0...v8.3.0) (2026-11-25)
+
+
+### 🚀 Features
+
+* **auth:** let users pick among stored CLI accounts ([#3682](https://github.com/gitify-app/gitify/issues/3682)) ([b46ec23](https://github.com/gitify-app/gitify/commit/b46ec23e4d8fb4756b25916a1b28b0b07c00e1b7))
+
+
+### 🐛 Bug Fixes
+
+* **auth:** open the inbox before notifications finish loading ([#3708](https://github.com/gitify-app/gitify/issues/3708)) ([56e2529](https://github.com/gitify-app/gitify/commit/56e2529d44a4fef61509fd5949b5d3c421fb7148))
+* changelog URL for twemoji package ([b4fb29d](https://github.com/gitify-app/gitify/commit/b4fb29df9c6d7da8adab79a385ec9288b5241e92))
+* **deps:** keep Vite+ and its bundled Vite core in sync ([#3728](https://github.com/gitify-app/gitify/issues/3728)) ([b9dae41](https://github.com/gitify-app/gitify/commit/b9dae411dd289d1725afe7905ea0532700c75616))
+* **notifications:** treat offline as a connection state, not an error ([#3706](https://github.com/gitify-app/gitify/issues/3706)) ([1511c79](https://github.com/gitify-app/gitify/commit/1511c7969b4078c4311235ff3c662f136b501d19))
+
+
+### 🤖 Continuous Integration
+
+* **release:** gate release PRs on Apple notarization readiness ([#3703](https://github.com/gitify-app/gitify/issues/3703)) ([a0fa6d5](https://github.com/gitify-app/gitify/commit/a0fa6d505084d9290843dd607d4368a8500e0e1d))
+* **renovate:** scope npm runtime dependencies as deps-core ([#3707](https://github.com/gitify-app/gitify/issues/3707)) ([021f036](https://github.com/gitify-app/gitify/commit/021f03644d650f49b1ae2761209fc94a2b04496f))
+
+
+### 📦 Dependency Updates (Core)
+
+* **deps-core:** update @primer/react to v38.46.0 ([#3717](https://github.com/gitify-app/gitify/issues/3717)) ([595e880](https://github.com/gitify-app/gitify/commit/595e880ed00f411ee4c9113835fa7e3127bb3715))
+* **deps-core:** update electron to v45.3.1 ([#3689](https://github.com/gitify-app/gitify/issues/3689)) ([f9d0d0a](https://github.com/gitify-app/gitify/commit/f9d0d0a16309f60ba39e8ceb6577d04f0bd945e2))
+* **deps-core:** update electron to v45.4.1 ([#3718](https://github.com/gitify-app/gitify/issues/3718)) ([4cd2cfd](https://github.com/gitify-app/gitify/commit/4cd2cfde02e48727931d8d7a4968a392273c77b4))
+
 ## [8.2.0](https://github.com/gitify-app/gitify/compare/v8.1.0...v8.2.0) (2026-11-13)
 
 
