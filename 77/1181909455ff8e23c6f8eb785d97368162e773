@@ -1,0 +1,622 @@
+.gitattributes
+  h_ac004aadb63da9 7
+.github/copilot-instructions.md
+  h_ac004aadb63da9 3,5,7,9,11-18,20,22,24-25,27,31-34
+.github/workflows/actions.lock
+  h_ac004aadb63da9 6-7,29,32,37,59-61,69-71,79-81,89-91,95
+.github/workflows/apple-notarization-readiness.yml
+  h_ac004aadb63da9 1-52
+.github/workflows/build.yml
+  h_ac004aadb63da9 32-33,39-40,46-47,72-78,91
+.github/workflows/lint.yml
+  h_ac004aadb63da9 27-29,33-38,54-63
+.github/workflows/publish.yml
+  h_ac004aadb63da9 39-60,63,72-73,79-80,86-87,123-129,138,168-175
+.github/workflows/renovate.yml
+  h_ac004aadb63da9 18
+.github/workflows/test.yml
+  h_ac004aadb63da9 31,41-42,55,116
+.github/workflows/triage.yml
+  h_ac004aadb63da9 50
+.github/workflows/zizmor.yml
+  h_ac004aadb63da9 28
+.github/zizmor.yml
+  h_ac004aadb63da9 2-6
+.gitignore
+  h_ac004aadb63da9 27
+.husky/pre-commit
+  h_ac004aadb63da9 1
+.nvmrc
+  h_ac004aadb63da9 1
+.release-please-manifest.json
+  h_ac004aadb63da9 2
+.vscode/extensions.json
+  h_ac004aadb63da9 6
+.vscode/settings.json
+  h_ac004aadb63da9 12,29-34
+ARCHITECTURE.md
+  h_ac004aadb63da9 39,44,48-49,59,71-75,79-80,83-92,99
+CHANGELOG.md
+  h_ac004aadb63da9 3-177
+CONTRIBUTING.md
+  h_ac004aadb63da9 15,20-21,25,37,40-43,50-53,56,59,62,67,84,87,90-95,106-170,173,213,225-229,244-245,248,254-284,319,329-330
+README.md
+  h_ac004aadb63da9 60,68,71-73
+electron-builder.js
+  h_ac004aadb63da9 1-14,23-51,58-59,102-128
+i18next.config.ts
+  h_ac004aadb63da9 1-23
+package.json
+  h_ac004aadb63da9 3,58-61,67-73,76,80,88-89,92,94-97,99,110,113-116,118,123,126,128,131,135-139,141-146,149-150,153,158,163,168
+pnpm-lock.yaml
+  h_ac004aadb63da9 10-11,15-16,20-21,25-26,30-31,35-36,40-41,46-47,52-53,58-59,64-65,70-71,76-77,82-88,92-93,97-98,104-107,110,113,116,119,122,125,128,131,134,137,140,143,146,149,151-165,177-178,180-181,183-184,186-187,193-195,205-206,209,212-213,216,218-219,221-222,224-225,227-228,231,233-234,266-267,275-276,278-279,281-282,284-285,290-291,305-306,309,312-315,320-321,323-324,327,329-330,333,340-348,350-354,357-366,368-369,371-372,374-375,381,383-384,386-387,390,392-393,395-396,403-404,412-414,416-418,420-422,424-425,428-430,432-434,436-438,444-445,448-451,456-458,460-466,468-469,473-479,482-483,489-495,497-498,501-504,512-519,521-522,581-588,596-598,600,602-604,608,613-615,617,623-625,627,629-631,633,635-637,639,641-643,645,647-649,651,653-655,657,663-665,667,669-671,673,679-681,683,685-686,691-693,695,697-698,703-705,707,709-710,715-716,721-722,727-728,739-740,745-747,749,751-752,757-759,761,763-764,769-770,775-777,779,781-782,787-788,799-801,803,805-807,809,817-818,823-824,835-836,841-842,852-854,856-858,865-867,874-876,883-885,892-894,901-903,910-912,914-916,923-925,932-934,941-943,950-952,959-961,968-970,977-979,990-992,996-998,1002-1003,1012-1013,1098-1099,1101-1102,1105-1106,1108-1109,1114-1115,1120-1121,1126-1127,1132-1133,1138-1139,1144-1145,1150-1151,1157-1158,1164-1165,1171-1172,1178-1179,1185-1186,1192-1193,1199-1200,1206-1207,1212-1213,1218-1219,1224-1225,1230-1231,1236-1237,1242-1243,1248-1249,1254-1255,1260-1261,1266-1267,1272-1273,1279-1280,1286-1287,1293-1294,1300-1301,1307-1308,1314-1315,1321-1322,1328-1329,1334-1335,1340-1341,1346-1347,1352-1353,1459-1460,1476-1477,1494-1496,1500-1501,1507-1599,1604-1605,1607-1608,1613-1614,1619-1620,1625-1626,1631-1632,1637-1638,1644-1645,1651-1652,1658-1659,1665-1667,1676-1677,1682-1683,1688-1689,1692-1693,1697-1698,1700-1701,1709-1710,1715-1716,1722-1723,1727,1747-1748,1753-1806,1823-1824,1829-1830,1835-1837,1987-1988,1991,1993,2003-2004,2007,2009-2010,2012,2014-2015,2017,2019-2020,2022-2023,2028-2029,2032-2033,2036-2037,2047-2048,2050-2051,2053-2054,2056-2057,2059,2061-2062,2064-2065,2133-2134,2139-2140,2145-2146,2152-2153,2159-2160,2166-2167,2173-2174,2179-2180,2205-2206,2213-2214,2317-2318,2358-2359,2392-2393,2411-2412,2414-2415,2417-2418,2469-2470,2484-2485,2497-2500,2515-2516,2535-2538,2554-2555,2573-2576,2599-2600,2613-2614,2756-2757,2785-2786,2788,2793-2794,2803-2804,2814-2817,2821-2822,2942-2945,3020-3021,3048-3049,3067-3068,3083-3085,3124-3126,3146-3160,3163-3180,3185-3186,3200-3202,3344-3345,3397-3399,3582-3585,3627-3634,3671-3677,3711-3712,3751-3752,3756,3767-3768,3772,3835-3836,3871-3872,3876-3877,3889-3890,3957-3970,3983-3985,3987-3990,3992-3995,4077-4078,4092-4093,4109-4110,4113-4114,4122-4123,4243-4244,4246-4247,4250-4251,4271-4272,4319-4326,4357-4358,4407-4413,4421,4438-4439,4445-4446,4454-4455,4459,4470-4471,4478-4479,4481-4483,4568-4569,4580-4581,4636-4639,4647,4652,4654-4655,4676,4678-4680,4689-4694,4696,4698-4706,4708,4710,4712-4713,4715,4717-4718,4723,4725-4730,4732,4734-4738,4740,4744-4746,4750,4752-4754,4756-4761,4763,4765,4767,4769,4774-4775,4777,4779-4781,4783,4785-4795,4798-4802,4807-4813,4815,4820,4834,4836,4841-4842,4848,4850,4852,4854-4855,4857,4861,4863,4869,4871,4876,4879,4887,4890,4894,4898,4902,4910,4913,4926,4931,4936-4938,4940-4944,4950,4952-4954,4956,4958,4960-4974,4980-4981,4991,5006,5010-5034,5036-5037,5039,5041-5043,5045,5047,5049,5051-5053,5055,5057-5058,5060-5062,5064,5066-5068,5070-5071,5073,5075-5077,5079,5082,5084-5087,5089,5091-5092,5094,5098,5100,5102,5104,5106,5109,5112-5113,5115,5117-5121,5124,5126-5129,5132-5133,5135,5137-5138,5140,5143-5144,5146,5148-5149,5151-5155,5162,5165-5166,5171,5173,5177,5179,5181-5184,5189,5191-5192,5195-5197,5199,5201-5203,5206,5209,5211-5213,5215-5216,5218,5222,5224-5228,5231,5233-5239,5241,5243-5244,5246,5248,5250-5253,5256,5258-5260,5263,5265-5268,5270,5272-5274,5276,5278-5280,5282,5284-5285,5287,5289-5292,5294,5296-5299,5301,5303-5306,5308,5310-5314,5317-5319,5321-5322,5330,5332-5333,5335-5336,5338,5340-5343,5345,5347-5349,5351-5352,5354,5356,5358,5360,5362-5365,5369,5371-5372,5376,5378-5380,5383,5388,5390-5392,5396,5398-5399,5403,5410,5412,5414-5415,5419,5421-5422,5426,5428-5430,5434-5445,5449,5451-5452,5456,5458-5460,5464,5466-5469,5473,5481-5482,5488-5492,5498,5504,5507,5522,5524,5600,5602,5604,5606,5609,5612,5615,5618,5621,5624,5627,5630,5633,5636,5639,5642,5645,5648,5651,5654,5657,5660,5663,5666,5669,5672,5675,5678,5681,5684,5687,5690,5693,5696,5699,5702,5705,5708,5711,5714,5717,5720,5782,5786,5790,5797,5804,5818,5823,5828,5845-5846,5849,5853-5912,5917,5920,5922-5923,5925,5927,5930,5933,5936,5939,5942,5945,5948,5951,5954,5957,5960,5963,5965-5989,5994,5996,6000,6005,6013,6023,6027,6035,6039-6063,6085,6091,6095-6096,6187,6189-6190,6192,6194-6196,6198,6205,6208-6210,6217,6220-6222,6227-6228,6235,6238-6240,6245,6247,6249,6251,6253,6255,6258,6262,6264,6268,6270-6271,6275,6277,6279,6285,6287,6289,6293,6295-6296,6298,6302-6309,6315,6318,6321,6324,6327,6330,6333,6336,6342,6346-6347,6356,6361,6364,6366,6368,6370-6371,6375,6377,6379,6444,6454,6458-6463,6470-6471,6474-6475,6479-6480,6494,6514,6518,6542,6562,6567,6571,6581-6584,6593,6595,6600,6603,6606,6608-6609,6611,6642,6653,6668-6671,6680,6695-6696,6715,6729-6730,6744,6749,6759,6786,6808,6812,6860,6862-6863,6884,6900,6902-6904,6909,6911-6913,6915-6916,6927,6929,6931,6935-6936,6945,6947,6949,6960,6963,6968,6972,6974-6975,6984-6985,6990,6992-6993,7038,7095-7096,7113,7119,7125,7131,7137,7144,7185,7187,7189,7206,7236,7238,7240-7245,7247,7251,7260,7262-7263,7265,7267,7269,7271,7281,7307,7315-7316,7319,7322,7331,7334,7342-7393,7398,7409-7410,7511,7513,7515,7517,7555-7556,7559,7565,7571,7691-7692,7697,7714-7715,7741-7751,7755,7759,7763,7788-7790,7796,7802,7816,7819-7820,7827,7860,7864-7885,7887-7906,7931,7960,7985,7996,7998,8000,8002,8012,8042,8057,8075,8080,8083,8098,8100-8101,8104-8105,8107-8114,8116,8119,8122-8124,8126-8127,8130-8131,8136,8138,8204,8206,8223,8236,8238,8240,8244,8265,8330,8340,8342,8358,8360,8362,8384,8388,8403,8425-8437,8478,8500,8522,8536-8538,8540-8542,8544-8545,8547,8550,8553-8571,8573-8582,8603,8619,8622,8630,8633,8637-8640,8653,8703,8705,8744-8747,8772
+pnpm-workspace.yaml
+  h_ac004aadb63da9 2-4,14-20
+renovate.json
+  h_ac004aadb63da9 8,28-33,45-64
+scripts/afterPack.js
+  h_ac004aadb63da9 12-32,47-48
+scripts/check-en-locales.mjs
+  h_ac004aadb63da9 1-50
+scripts/check-t-defaults.mjs
+  h_ac004aadb63da9 1-158
+scripts/prepare-dev-electron.mjs
+  h_ac004aadb63da9 1-228
+scripts/validate-runtime-dependencies.mjs
+  h_ac004aadb63da9 1-115
+scripts/verifyAppleNotarization.sh
+  h_ac004aadb63da9 1-33
+scripts/verifyFuses.js
+  h_ac004aadb63da9 1-214
+scripts/verifyPackagedDependencies.js
+  h_ac004aadb63da9 1-324
+scripts/visual.sh
+  h_ac004aadb63da9 10-14,33,35,53-65,78-87,89,91-92,99-104
+sonar-project.properties
+  h_ac004aadb63da9 8
+src/__helpers__/gitify-bridge.ts
+  h_ac004aadb63da9 24-26,47-48,51-52,55-62
+src/main/badge.test.ts
+  h_ac004aadb63da9 1-104
+src/main/badge.ts
+  h_ac004aadb63da9 1-200
+src/main/handlers/github-cli.test.ts
+  h_ac004aadb63da9 3,41-43,51-99,103,111,119-121,132,140,148-150,158,165,170-248
+src/main/handlers/github-cli.ts
+  h_ac004aadb63da9 6-14,16,41-68,70-73,75-187,190-199,203-213,216,235-254,293-294
+src/main/handlers/index.ts
+  h_ac004aadb63da9 3
+src/main/handlers/native-notifications.test.ts
+  h_ac004aadb63da9 1-105
+src/main/handlers/native-notifications.ts
+  h_ac004aadb63da9 1-40
+src/main/handlers/system.test.ts
+  h_ac004aadb63da9 31,33,97,107-108,143-175
+src/main/handlers/system.ts
+  h_ac004aadb63da9 69-81,95,99
+src/main/handlers/tray.test.ts
+  h_ac004aadb63da9 23-32,39,180-242
+src/main/handlers/tray.ts
+  h_ac004aadb63da9 10,12,20-21,36-44,54,59,64-70
+src/main/handlers/updater.test.ts
+  h_ac004aadb63da9 1,3-4,7-12,14-16,18-21,23,25,28-34,36-39,42-44,46-58,60-68
+src/main/handlers/updater.ts
+  h_ac004aadb63da9 1,3-7,15-49
+src/main/index.test.ts
+  h_ac004aadb63da9 26-31,46,58,61,96-97
+src/main/index.ts
+  h_ac004aadb63da9 11,19,27-31,58-67
+src/main/lifecycle/first-run.ts
+  h_ac004aadb63da9 55-56,58
+src/main/lifecycle/index.ts
+  h_ac004aadb63da9 4
+src/main/lifecycle/startup.test.ts
+  h_ac004aadb63da9 1,3-4,6-7,9,11-19,21-24,28-29,31-33,37-39,41-43,45-46,48-53,55-57,59-81,83-85,87-89,91-92,94-95,98-115
+src/main/lifecycle/startup.ts
+  h_ac004aadb63da9 5,8-11,21-22,28-35,37-47,49-54
+src/main/lifecycle/user-data.test.ts
+  h_ac004aadb63da9 1-46
+src/main/lifecycle/user-data.ts
+  h_ac004aadb63da9 1-32
+src/main/lifecycle/window.test.ts
+  h_ac004aadb63da9 119,123
+src/main/lifecycle/window.ts
+  h_ac004aadb63da9 8,94-98
+src/main/menu.test.ts
+  h_ac004aadb63da9 23,26,62,108,111,250-253,259,262-264,270-282,323-324,326,331
+src/main/menu.ts
+  h_ac004aadb63da9 24-26,35,38-44,66-68,187-207
+src/main/notifications.test.ts
+  h_ac004aadb63da9 1-246
+src/main/notifications.ts
+  h_ac004aadb63da9 1-255
+src/main/update-manager.test.ts
+  h_ac004aadb63da9 1-112
+src/main/update-manager.ts
+  h_ac004aadb63da9 1-126
+src/main/updater.test.ts
+  h_ac004aadb63da9 1,6-8,23-27,32-33,60-62,83-84,88,99,107-109,118-205,213,238,252,257,268,276,285,298,310-453,460,466,470-473,475,481,491,503,512,514,523,531,544,562,584,593,605,609,615,623,626-641,643-658,660-683,685-750,755-765
+src/main/updater.ts
+  h_ac004aadb63da9 1,3,7,25-34,36,45-54,56-57,68-84,91-94,96,104-106,116-121,123-126,132-134,139-142,147-153,158-160,175-177,179,184-188,191-193,222,226,229-255,294-306,310-311,313,315-325,328-329,335,339-342,349-362
+src/main/zoom.test.ts
+  h_ac004aadb63da9 1-136
+src/main/zoom.ts
+  h_ac004aadb63da9 1-68
+src/preload/index.test.ts
+  h_ac004aadb63da9 48-52,54-58,60-69,111-143,155,158,160-163,181,183-187,189-192,194,196,199,201,203,205-206,208-214,217-289
+src/preload/index.ts
+  h_ac004aadb63da9 3-14,60,63-72,94-96,267-270,272,275-276,280,282-283,285-286,288-290,292-336
+src/preload/utils.ts
+  h_ac004aadb63da9 8-11,20-24,42-43
+src/renderer/App.css
+  h_ac004aadb63da9 13-15,234-236,279-316,366,372-373,529-532,550-560,623-636
+src/renderer/App.test.tsx
+  h_ac004aadb63da9 1-121
+src/renderer/App.tsx
+  h_ac004aadb63da9 7,13,16,30-33
+src/renderer/__helpers__/test-utils.tsx
+  h_ac004aadb63da9 3
+src/renderer/__helpers__/visual-utils.tsx
+  h_ac004aadb63da9 3,33-34,93,143
+src/renderer/__helpers__/visual.global-setup.ts
+  h_ac004aadb63da9 28-29
+src/renderer/__helpers__/vitest.setup.ts
+  h_ac004aadb63da9 2-3,6-7,19-20,105-113,118-120,142-143
+src/renderer/__mocks__/account-mocks.ts
+  h_ac004aadb63da9 3-10,15,18,47,50,53
+src/renderer/__mocks__/notifications-mocks.ts
+  h_ac004aadb63da9 24,335
+src/renderer/__mocks__/state-mocks.ts
+  h_ac004aadb63da9 66
+src/renderer/components/AllRead.tsx
+  h_ac004aadb63da9 2,17,22-24
+src/renderer/components/AppErrorBoundary.test.tsx
+  h_ac004aadb63da9 1-29
+src/renderer/components/AppErrorBoundary.tsx
+  h_ac004aadb63da9 1-49
+src/renderer/components/ErrorStates.visual.test.tsx
+  h_ac004aadb63da9 1-38
+src/renderer/components/GlobalEffects.test.tsx
+  h_ac004aadb63da9 6-11,41-49,146-181
+src/renderer/components/GlobalEffects.tsx
+  h_ac004aadb63da9 9,39,54-56,60,67,77
+src/renderer/components/Oops.test.tsx
+  h_ac004aadb63da9 60-90
+src/renderer/components/Oops.tsx
+  h_ac004aadb63da9 2,4,8,10,13-18,22-23,26,29,33,46-60
+src/renderer/components/RouteError.test.tsx
+  h_ac004aadb63da9 1-27
+src/renderer/components/RouteError.tsx
+  h_ac004aadb63da9 1-14
+src/renderer/components/Sidebar.test.tsx
+  h_ac004aadb63da9 41-44
+src/renderer/components/Sidebar.tsx
+  h_ac004aadb63da9 1-3,24,27-28,42-65,74,76,88-97,107,109-111,122-124,134,144,160-161,173-175,188-190
+src/renderer/components/__snapshots__/AllRead.test.tsx.snap
+  h_ac004aadb63da9 47,99
+src/renderer/components/filters/AccountFilter.tsx
+  h_ac004aadb63da9 1-2,15,26,28
+src/renderer/components/filters/ReasonFilter.tsx
+  h_ac004aadb63da9 1-2,10-11,18-19
+src/renderer/components/filters/RequiresDetailedNotificationsWarning.tsx
+  h_ac004aadb63da9 1-2,8-12
+src/renderer/components/filters/ReviewRequestTypeFilter.tsx
+  h_ac004aadb63da9 1-2,10-11,18,22-25,28-31
+src/renderer/components/filters/SearchFilter.tsx
+  h_ac004aadb63da9 1-2,31,77,86,95,100,104,108,112-114,119,126,136
+src/renderer/components/filters/StateFilter.tsx
+  h_ac004aadb63da9 1-2,10-11,18-19
+src/renderer/components/filters/SubjectTypeFilter.tsx
+  h_ac004aadb63da9 1-2,10-11,18-19
+src/renderer/components/filters/UserTypeFilter.tsx
+  h_ac004aadb63da9 1-2,17-18,25,28,50-53
+src/renderer/components/layout/AppLayout.tsx
+  h_ac004aadb63da9 2,15,25-30,34-36
+src/renderer/components/layout/__snapshots__/AppLayout.test.tsx.snap
+  h_ac004aadb63da9 34,230,232-233,236
+src/renderer/components/login/LoginMethods.tsx
+  h_ac004aadb63da9 1-114
+src/renderer/components/login/LoginWithPersonalAccessTokenForm.tsx
+  h_ac004aadb63da9 2-3,17,63-64,81,134-138,165,172-174,197,236,247-251,273,284
+src/renderer/components/metrics/CommentsPill.tsx
+  h_ac004aadb63da9 1-2,15,20
+src/renderer/components/metrics/LabelsPill.test.tsx
+  h_ac004aadb63da9 27-40
+src/renderer/components/metrics/LabelsPill.tsx
+  h_ac004aadb63da9 12,15,21-22,58,62
+src/renderer/components/metrics/LabelsPill.visual.test.tsx
+  h_ac004aadb63da9 66
+src/renderer/components/metrics/LinkedIssuesPill.tsx
+  h_ac004aadb63da9 2,17,24,26-29
+src/renderer/components/metrics/MetricGroup.test.tsx
+  h_ac004aadb63da9 142,152-178
+src/renderer/components/metrics/MetricGroup.tsx
+  h_ac004aadb63da9 1-2,12,16,31-40,42-44,46-50,52-53,55-61,63-65,67-69,71-73,75-80,82-84,86-87,89-94,96-97,99-107
+src/renderer/components/metrics/MetricPill.tsx
+  h_ac004aadb63da9 21-34,37-49,54-60
+src/renderer/components/metrics/MetricPills.test.tsx
+  h_ac004aadb63da9 1-317
+src/renderer/components/metrics/MetricPills.tsx
+  h_ac004aadb63da9 1-277
+src/renderer/components/metrics/ParentPill.tsx
+  h_ac004aadb63da9 2,16,26-30,33,35
+src/renderer/components/metrics/ReviewsPill.tsx
+  h_ac004aadb63da9 1-2,15-23,27,42-96
+src/renderer/components/metrics/StackedPrsPill.tsx
+  h_ac004aadb63da9 1-2,20,29-33
+src/renderer/components/metrics/__snapshots__/ChecksPill.test.tsx.snap
+  h_ac004aadb63da9 44
+src/renderer/components/metrics/__snapshots__/CommentsPill.test.tsx.snap
+  h_ac004aadb63da9 44,107
+src/renderer/components/metrics/__snapshots__/LabelsPill.test.tsx.snap
+  h_ac004aadb63da9 44
+src/renderer/components/metrics/__snapshots__/LinkedIssuesPill.test.tsx.snap
+  h_ac004aadb63da9 47,113
+src/renderer/components/metrics/__snapshots__/MetricGroup.test.tsx.snap
+  h_ac004aadb63da9 8-9,11-15,17-19,21-25,27-35,37-81,83-111,113-116,118-122,124-132,134-169,171-173,175-233
+src/renderer/components/metrics/__snapshots__/MetricPill.test.tsx.snap
+  h_ac004aadb63da9 43
+src/renderer/components/metrics/__snapshots__/ParentPill.test.tsx.snap
+  h_ac004aadb63da9 47
+src/renderer/components/metrics/__snapshots__/ReactionsPill.test.tsx.snap
+  h_ac004aadb63da9 44,241
+src/renderer/components/metrics/__snapshots__/ReviewsPill.test.tsx.snap
+  h_ac004aadb63da9 46,104,162
+src/renderer/components/metrics/__snapshots__/SubIssueProgressPill.test.tsx.snap
+  h_ac004aadb63da9 58,135
+src/renderer/components/notifications/AccountHeader.test.tsx
+  h_ac004aadb63da9 88,98
+src/renderer/components/notifications/AccountHeader.tsx
+  h_ac004aadb63da9 2,35-36,56,75,82,88
+src/renderer/components/notifications/ExitCollapse.test.tsx
+  h_ac004aadb63da9 1-53
+src/renderer/components/notifications/ExitCollapse.tsx
+  h_ac004aadb63da9 1-54
+src/renderer/components/notifications/NotificationFooter.tsx
+  h_ac004aadb63da9 25-57,59,61,63,65-70,72-74
+src/renderer/components/notifications/NotificationHeader.tsx
+  h_ac004aadb63da9 2,21,36
+src/renderer/components/notifications/NotificationList.test.tsx
+  h_ac004aadb63da9 3,25,29,31-37
+src/renderer/components/notifications/NotificationList.tsx
+  h_ac004aadb63da9 158
+src/renderer/components/notifications/NotificationList.visual.test.tsx
+  h_ac004aadb63da9 3,17,23-24,29-32,88-117,119-122,217-457,609-921
+src/renderer/components/notifications/NotificationRow.test.tsx
+  h_ac004aadb63da9 18,64-103,392,446,482,556-558,568
+src/renderer/components/notifications/NotificationRow.tsx
+  h_ac004aadb63da9 1-2,27,43,64-71,103-124,127-133,135-147,150-163,166-210
+src/renderer/components/notifications/NotificationRow.visual.test.tsx
+  h_ac004aadb63da9 6,14,35-47,85-112,126-179,182-183,227,247-269
+src/renderer/components/notifications/RepositoryHeader.test.tsx
+  h_ac004aadb63da9 1,3,26-40,135-138,143-151,163-190
+src/renderer/components/notifications/RepositoryHeader.tsx
+  h_ac004aadb63da9 2,22,41,59,62-71,73-91,93-126
+src/renderer/components/notifications/__snapshots__/AccountHeader.test.tsx.snap
+  h_ac004aadb63da9 88,161-162,170,175,187
+src/renderer/components/primitives/Header.tsx
+  h_ac004aadb63da9 1-2,18,27
+src/renderer/components/primitives/HelpPopover.tsx
+  h_ac004aadb63da9 8-9,81
+src/renderer/components/primitives/HoverButton.tsx
+  h_ac004aadb63da9 13,20
+src/renderer/components/primitives/HoverGroup.tsx
+  h_ac004aadb63da9 22-30,32,35-40,50,52
+src/renderer/components/primitives/ReloadButton.tsx
+  h_ac004aadb63da9 1-30
+src/renderer/components/primitives/__snapshots__/HoverGroup.test.tsx.snap
+  h_ac004aadb63da9 6
+src/renderer/components/settings/AlertSettings.tsx
+  h_ac004aadb63da9 1-2,28,40,46,49-52,57,60-63,68,70-73,77,88,97,108,123,126-130
+src/renderer/components/settings/AppearanceSettings.test.tsx
+  h_ac004aadb63da9 44-51
+src/renderer/components/settings/AppearanceSettings.tsx
+  h_ac004aadb63da9 1-2,14,29-30,44-48,52,56-82,84,88-95,97-101,106,112-115,117-120,122-124,127-129,132-135,137-139,142-144,147-149,154-157,163,166-169,175,178-181,186,188-192,196,205,214,223
+src/renderer/components/settings/InboxSettings.tsx
+  h_ac004aadb63da9 2-3,28-29,49,80,84-86,90,92-95,99-102,119,130-133,150-153,167,172-183,190,195-200,202-205,208-211,218-220,224,228-232,237-247,250-254,263,266-269,275,278-281,286,291-293,298,303,308,313,318,329,332-336,342-344,349,354-365,372-375,378,386,392-395,398-401,419-422,425,429,438,443-445,450,454,458,462,466,470,483-486,491,494-497,503-506,511,514-517,523-526
+src/renderer/components/settings/SettingsFooter.tsx
+  h_ac004aadb63da9 2,17,31,42,44,54,56
+src/renderer/components/settings/SettingsReset.tsx
+  h_ac004aadb63da9 1-2,12,19-27,45
+src/renderer/components/settings/SystemSettings.test.tsx
+  h_ac004aadb63da9 48-84,134-146,168-172
+src/renderer/components/settings/SystemSettings.tsx
+  h_ac004aadb63da9 2,7-10,35-127,129,218-220,226,231,235-242,247-250,253-257,260-264,267-271,284,289,296,305-309,315,319-324,329-338,342-353,357-362,371,383,393-396,415,418-422,427,430-434,440,443-447,450-451,457-472,475,478
+src/renderer/components/settings/TraySettings.test.tsx
+  h_ac004aadb63da9 38-66
+src/renderer/components/settings/TraySettings.tsx
+  h_ac004aadb63da9 1-2,18,32,38,41-45,50,53-57,61,69-71,76-92
+src/renderer/constants.ts
+  h_ac004aadb63da9 40,98-100,102-105
+src/renderer/hooks/notifications/useNotificationEffects.ts
+  h_ac004aadb63da9 1,5-13,22,24,32,34,46,48,67,71-72,78-158,170,197-213,240,245-281
+src/renderer/hooks/notifications/useNotificationMutations.ts
+  h_ac004aadb63da9 29-33,35-38,137-142,148-168,308,312
+src/renderer/hooks/notifications/useNotificationsHost.ts
+  h_ac004aadb63da9 28
+src/renderer/hooks/notifications/useNotificationsQuery.ts
+  h_ac004aadb63da9 7-12,16,28,61-83,94-95,98,143-144,148,154,167-168,175-176,178-183,198-210,213-214
+src/renderer/hooks/useAccounts.test.tsx
+  h_ac004aadb63da9 11-13,68-98
+src/renderer/hooks/useAccounts.ts
+  h_ac004aadb63da9 7,25,51,63
+src/renderer/hooks/useLogins.test.tsx
+  h_ac004aadb63da9 17,20,27-35,55-109,135-143,147-188,219,230-237,240,244-249,252-259
+src/renderer/hooks/useLogins.ts
+  h_ac004aadb63da9 5-6,9,11,21-36,42,45-51,71-76,78,84,86,93,98,118-119,123-126,133,143-144,147,153,155-163,166-178,180
+src/renderer/hooks/useNotifications.test.tsx
+  h_ac004aadb63da9 4-9,22-28,34,38,40-41,50,74,78-79,115-120,171,176,188,196,201,217-358,812-853,870-969,1260-1319
+src/renderer/hooks/useOnlineStatus.ts
+  h_ac004aadb63da9 1,5-24,31,37
+src/renderer/hooks/usePowerState.test.ts
+  h_ac004aadb63da9 1-41
+src/renderer/hooks/usePowerState.ts
+  h_ac004aadb63da9 1-28
+src/renderer/hooks/useShortcutActions.ts
+  h_ac004aadb63da9 2,6,54-57,61,63,76,80,82,103,108,112,115
+src/renderer/i18n/index.ts
+  h_ac004aadb63da9 1-4
+src/renderer/i18n/loader.test.ts
+  h_ac004aadb63da9 1-63
+src/renderer/i18n/loader.ts
+  h_ac004aadb63da9 1-70
+src/renderer/i18n/locales/en.json
+  h_ac004aadb63da9 1-578
+src/renderer/i18n/types.ts
+  h_ac004aadb63da9 1-21
+src/renderer/icons/ScopeStatusIcon.tsx
+  h_ac004aadb63da9 3-4,19,31-46
+src/renderer/index.tsx
+  h_ac004aadb63da9 3-5,11-15
+src/renderer/nav.ts
+  h_ac004aadb63da9 1-45
+src/renderer/router.test.ts
+  h_ac004aadb63da9 1-29
+src/renderer/router.tsx
+  h_ac004aadb63da9 1-72
+src/renderer/routes/AccountScopes.test.tsx
+  h_ac004aadb63da9 6,8,22,26-27,38,102,118,135,149,163,198-199
+src/renderer/routes/AccountScopes.tsx
+  h_ac004aadb63da9 1-2,31,55,67-69,82-87,138-141,143-145,197,222
+src/renderer/routes/Accounts.test.tsx
+  h_ac004aadb63da9 7-8,20,31-35,241-242,266-270,280,322-326,352,375,404-406,408,411,419,438,464,484,487,489,500,507,510,512,521,523,535,552,555,565,593
+src/renderer/routes/Accounts.tsx
+  h_ac004aadb63da9 2-3,39,41-45,69,164,173,182,213,226,229,240,243-245,253-258,267-269,287-289,298-300,308-310,340,356,380,410
+src/renderer/routes/Filters.tsx
+  h_ac004aadb63da9 1-2,21,29,45,47
+src/renderer/routes/Login.test.tsx
+  h_ac004aadb63da9 11,27-34,52-60,63-65,68,74-86,97-129
+src/renderer/routes/Login.tsx
+  h_ac004aadb63da9 1-3,5,11,14,20-21,24,26,32-35,41-69,79-81,102-111,115-121,123,127-131,134,146-147,150-213,215-218,220-242,244-245,247-251,253-254,256-262,266
+src/renderer/routes/LoginComposition.visual.test.tsx
+  h_ac004aadb63da9 1-172
+src/renderer/routes/LoginStates.visual.test.tsx
+  h_ac004aadb63da9 7,89,99-144,164-175
+src/renderer/routes/Notifications.test.tsx
+  h_ac004aadb63da9 7,73,75,78-80,85,104,111-116,119
+src/renderer/routes/Notifications.tsx
+  h_ac004aadb63da9 13,36-37,41,44
+src/renderer/routes/NotificationsStates.visual.test.tsx
+  h_ac004aadb63da9 5,11,37,42-43
+src/renderer/routes/ProtectedLayout.tsx
+  h_ac004aadb63da9 1-19
+src/renderer/routes/RootLayout.tsx
+  h_ac004aadb63da9 1-19
+src/renderer/routes/Settings.tsx
+  h_ac004aadb63da9 1-2,18-19,23
+src/renderer/routes/bitbucket/LoginWithPersonalAccessToken.tsx
+  h_ac004aadb63da9 1-2,6-7,10,14-24
+src/renderer/routes/gitea/LoginWithPersonalAccessToken.tsx
+  h_ac004aadb63da9 1-2,6-7,10,12-15,17-23
+src/renderer/routes/github/DeviceFlowAuthorize.test.tsx
+  h_ac004aadb63da9 5,7,11,13,17,28,33,41,52,58-63,73,84,90-95,100,111,123,134,152,163,178,182,192,203,212,225,240,246,261,275,288,302,313,321,335-364,368-369
+src/renderer/routes/github/DeviceFlowAuthorize.tsx
+  h_ac004aadb63da9 1-420
+src/renderer/routes/github/LoginWithCustomOAuthApp.test.tsx
+  h_ac004aadb63da9 4-5,8,10-11,14-29,32-33,35,37-38,40,42-45,48-49,51-53,56,58-59,61,63-65,68-73,76-77,80-81,83,85-90,93-101,103-104
+src/renderer/routes/github/LoginWithCustomOAuthApp.tsx
+  h_ac004aadb63da9 1-3,5-6,15,18-20,24,30-37,43-48,50-53,55-56,60-61,65-73,76-79,83-91,93-98,118,121,125,132,135-139,142-144,148,151-154,165,171,175-176
+src/renderer/routes/github/LoginWithDeviceFlow.tsx
+  h_ac004aadb63da9 1-9,11
+src/renderer/routes/github/LoginWithGitHubCLI.test.tsx
+  h_ac004aadb63da9 1,5-11,16-31,35,38-39,43,50-51,54,67-68,71,110-111,120-348
+src/renderer/routes/github/LoginWithGitHubCLI.tsx
+  h_ac004aadb63da9 1-3,6-17,22,30,32,34,36,42-101,103,109,114-121,125-200,202-207,215,219-224,228,232,240,246-259,262,264-266,277-364,371,377,383-404
+src/renderer/routes/github/LoginWithPersonalAccessToken.test.tsx
+  h_ac004aadb63da9 28-37
+src/renderer/routes/github/LoginWithPersonalAccessToken.tsx
+  h_ac004aadb63da9 1-3,10-19,21-22,25,27-30,32-41,44-48
+src/renderer/routes/github/__snapshots__/LoginWithGitHubCLI.test.tsx.snap
+  h_ac004aadb63da9 113-121,123-124,127-130,133-135,189
+src/renderer/routes/gitlab/LoginWithPersonalAccessToken.tsx
+  h_ac004aadb63da9 1-2,8-9,12,14-17,19-24,27-35
+src/renderer/routes/routes.visual.test.tsx
+  h_ac004aadb63da9 20,92-94,158-172
+src/renderer/routes/update-settings.visual.test.tsx
+  h_ac004aadb63da9 1-56
+src/renderer/stores/defaults.ts
+  h_ac004aadb63da9 90
+src/renderer/stores/index.ts
+  h_ac004aadb63da9 10
+src/renderer/stores/subscriptions.test.ts
+  h_ac004aadb63da9 1,3-5,9-10,16-17,41-44,65-68,80-102,129-183
+src/renderer/stores/subscriptions.ts
+  h_ac004aadb63da9 8,12,17-23,42-46,70-73,105-108,111-114,119,124-135,143-151,166-187
+src/renderer/stores/types.ts
+  h_ac004aadb63da9 1-2,6,46-47,165,242-243,268-270,310-326
+src/renderer/stores/useAccountsStore.test.ts
+  h_ac004aadb63da9 4,12-13,21,96-159,271,274-281,287-288,309-310,335-424,436-451,490,493-500,506-507,519-554
+src/renderer/stores/useAccountsStore.ts
+  h_ac004aadb63da9 4-5,8,12-14,16,21-64,68-70,80,85,87,112-113,123,125,132-144,148-151,195-213
+src/renderer/stores/useFiltersStore.test.ts
+  h_ac004aadb63da9 3,92-112
+src/renderer/stores/useFiltersStore.ts
+  h_ac004aadb63da9 50-59
+src/renderer/stores/usePowerStateStore.test.ts
+  h_ac004aadb63da9 1-19
+src/renderer/stores/usePowerStateStore.ts
+  h_ac004aadb63da9 1-4,6,8-10,12-17
+src/renderer/stores/useSettingsStore.test.ts
+  h_ac004aadb63da9 121-152
+src/renderer/types.ts
+  h_ac004aadb63da9 6,55,73-77,80-85,153,203-207,303,322-328,335,357-361,423-424,599-606
+src/renderer/utils/api/errors.test.ts
+  h_ac004aadb63da9 6,18,24,29-45,48-53,61,66-78
+src/renderer/utils/api/errors.ts
+  h_ac004aadb63da9 8,25,34,37,44,47,49,60,67,71,75,77-82
+src/renderer/utils/api/queryKeys.ts
+  h_ac004aadb63da9 28-31
+src/renderer/utils/auth/identity.ts
+  h_ac004aadb63da9 1-3,6-32
+src/renderer/utils/auth/loginValidation.test.ts
+  h_ac004aadb63da9 1,4,7,156-158,163-164,167-168,173-183
+src/renderer/utils/auth/loginValidation.ts
+  h_ac004aadb63da9 1,3,23-27,29-30,61,63,67,71,73,79-80,82-83,87,89,93-95
+src/renderer/utils/auth/types.ts
+  h_ac004aadb63da9 1,3-7
+src/renderer/utils/core/errors.test.ts
+  h_ac004aadb63da9 5,15,24-25,38,46-47,55
+src/renderer/utils/core/errors.ts
+  h_ac004aadb63da9 7-121,142
+src/renderer/utils/forges/bitbucket/adapter.test.ts
+  h_ac004aadb63da9 121
+src/renderer/utils/forges/gitea/adapter.test.ts
+  h_ac004aadb63da9 77-78
+src/renderer/utils/forges/github/__mocks__/response-mocks.ts
+  h_ac004aadb63da9 101,139
+src/renderer/utils/forges/github/adapter.test.ts
+  h_ac004aadb63da9 1-15,20,27-30,39-44,51-57,87-88,92-119,122,124-126
+src/renderer/utils/forges/github/adapter.ts
+  h_ac004aadb63da9 1,12,20-25,34,45,114,131,133-135,140,143-144,147-148,155,157,166,230-232
+src/renderer/utils/forges/github/auth.test.ts
+  h_ac004aadb63da9 8,64-80,82,86,91,95-105,163-168
+src/renderer/utils/forges/github/auth.ts
+  h_ac004aadb63da9 62-78,82-84,93-98,100,102,104,130-135,148
+src/renderer/utils/forges/github/cli.test.ts
+  h_ac004aadb63da9 4-10,17,20-21,23,66-67,132-231
+src/renderer/utils/forges/github/cli.ts
+  h_ac004aadb63da9 1-5,8,10,13-14,16-24,27-29,32-34,36-41,46-48,51,56-61,64-84,87-125,131-142,147,153-155
+src/renderer/utils/forges/github/client.test.ts
+  h_ac004aadb63da9 21,147,167,187,209,338-340,388-390,454-458,526-529,537-539
+src/renderer/utils/forges/github/client.ts
+  h_ac004aadb63da9 34-42,80,97
+src/renderer/utils/forges/github/enrich.test.ts
+  h_ac004aadb63da9 19-89
+src/renderer/utils/forges/github/enrich.ts
+  h_ac004aadb63da9 9-24,26,63,75-122
+src/renderer/utils/forges/github/flows.test.ts
+  h_ac004aadb63da9 12,19-20,22,40-50,52,54-58,61-66,68-77,79-83,85-89,91-92,96-118,121,124-138,140,143-145,147,149-150,152-153,156-158,160,162-163,165-167,169-170,172,174-177,179,181-184,186-189,192-194,196-198,200-206,209-212
+src/renderer/utils/forges/github/flows.ts
+  h_ac004aadb63da9 1,7-8,10,12,29-30,36,40,49,58-105
+src/renderer/utils/forges/github/graphql/discussion.graphql
+  h_ac004aadb63da9 35
+src/renderer/utils/forges/github/graphql/generated/graphql.ts
+  h_ac004aadb63da9 227,247,293,328,387,399,450,470,482,533,577,609,764,856,1048,1188,1251,1381,1485,1582,1704,1767,1910,2056
+src/renderer/utils/forges/github/graphql/issue.graphql
+  h_ac004aadb63da9 47
+src/renderer/utils/forges/github/graphql/pull.graphql
+  h_ac004aadb63da9 75
+src/renderer/utils/forges/github/handlers/discussion.test.ts
+  h_ac004aadb63da9 19-23,159,193,329-356
+src/renderer/utils/forges/github/handlers/discussion.ts
+  h_ac004aadb63da9 79
+src/renderer/utils/forges/github/handlers/issue.test.ts
+  h_ac004aadb63da9 78,118,177,190,220,263,309
+src/renderer/utils/forges/github/handlers/issue.ts
+  h_ac004aadb63da9 129
+src/renderer/utils/forges/github/handlers/pullRequest.test.ts
+  h_ac004aadb63da9 89,184,226,268,313,377,444,479,528,543-560,596,864-890
+src/renderer/utils/forges/github/handlers/pullRequest.ts
+  h_ac004aadb63da9 102
+src/renderer/utils/forges/github/handlers/utils.ts
+  h_ac004aadb63da9 14-17,36,43-45
+src/renderer/utils/forges/github/octokit.test.ts
+  h_ac004aadb63da9 2,116,206,224,236-265
+src/renderer/utils/forges/github/octokit.ts
+  h_ac004aadb63da9 111,117,154
+src/renderer/utils/forges/gitlab/adapter.test.ts
+  h_ac004aadb63da9 86
+src/renderer/utils/forges/labels.ts
+  h_ac004aadb63da9 1-80
+src/renderer/utils/forges/types.ts
+  h_ac004aadb63da9 5-6,9,19,167,169,179-181,183,327-333,336-364,367-382,390-391,395-396,398-403,405
+src/renderer/utils/notifications/filters/reason.ts
+  h_ac004aadb63da9 11-12,15-26,54,61
+src/renderer/utils/notifications/filters/reviewRequestType.ts
+  h_ac004aadb63da9 11,14-38
+src/renderer/utils/notifications/filters/state.ts
+  h_ac004aadb63da9 12,15-39
+src/renderer/utils/notifications/filters/subjectType.ts
+  h_ac004aadb63da9 12,15-64,98,104
+src/renderer/utils/notifications/filters/userType.ts
+  h_ac004aadb63da9 12,25-48
+src/renderer/utils/notifications/formatters.ts
+  h_ac004aadb63da9 29-30
+src/renderer/utils/notifications/group.ts
+  h_ac004aadb63da9 6,15,54-56,61-62
+src/renderer/utils/notifications/listItems.test.ts
+  h_ac004aadb63da9 113-137
+src/renderer/utils/notifications/listItems.ts
+  h_ac004aadb63da9 22,70-82,90,99
+src/renderer/utils/notifications/mutations.test.ts
+  h_ac004aadb63da9 10,39,59,82-83
+src/renderer/utils/notifications/mutations.ts
+  h_ac004aadb63da9 80-81,120-122,124-132,138,144
+src/renderer/utils/notifications/notifications.test.ts
+  h_ac004aadb63da9 166-168,181,191,201,215-217
+src/renderer/utils/notifications/notifications.ts
+  h_ac004aadb63da9 62-64,269-270
+src/renderer/utils/notifications/reason.ts
+  h_ac004aadb63da9 3,5-118,121
+src/renderer/utils/notifications/status.test.ts
+  h_ac004aadb63da9 8,17-28,36-62,81-90,94,99-100,105,111
+src/renderer/utils/notifications/status.ts
+  h_ac004aadb63da9 3-7,16-17,19-21,23-24,34-35,38,40,42,46-47,50-53,56-57,60,66-67,70,72-77,80
+src/renderer/utils/system/comms.test.ts
+  h_ac004aadb63da9 16,134,136-140
+src/renderer/utils/system/comms.ts
+  h_ac004aadb63da9 2-3,7,63,66-79,121-122
+src/renderer/utils/system/keyboardShortcut.ts
+  h_ac004aadb63da9 43-47
+src/renderer/utils/system/native.test.ts
+  h_ac004aadb63da9 2,6-12,15-24,26-31,33-34,36-37,39-55,58-75,77-86,88-91
+src/renderer/utils/system/native.ts
+  h_ac004aadb63da9 2-6,10-11,14,16-44,46-47,49-53,56-74
+src/renderer/utils/ui/display.test.ts
+  h_ac004aadb63da9 6,11,16-18
+src/renderer/utils/ui/display.ts
+  h_ac004aadb63da9 3-4,14-17,22-26,29-32
+src/renderer/utils/ui/icons.ts
+  h_ac004aadb63da9 26,46-48,54-56,62-64,70-77
+src/renderer/utils/ui/zoom.test.ts
+  h_ac004aadb63da9 6,8,36-52
+src/renderer/utils/ui/zoom.ts
+  h_ac004aadb63da9 1-2,13-46,51-52,66-67
+src/shared/events.ts
+  h_ac004aadb63da9 19-20,27,33-40,49-65,68-70,131-198,233-235,250,253-256,262-281
+src/shared/githubCli.ts
+  h_ac004aadb63da9 1-6
+src/shared/logger.ts
+  h_ac004aadb63da9 7-9
+src/shared/nativeNotifications.test.ts
+  h_ac004aadb63da9 1,3-8,11-16,19-23
+src/shared/nativeNotifications.ts
+  h_ac004aadb63da9 1-45
+tailwind.config.mts
+  h_ac004aadb63da9 18-32,36-40,43
+vite.config.mts
+  h_ac004aadb63da9 1-2,12-13,15,18-79,83,242-254,256-257,264-290,296,304,309-310,315,322-336,365-388,390,392,438-476,793-795
+vitest.config.mts
+  h_ac004aadb63da9 135-137
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "771181909455ff8e23c6f8eb785d97368162e773",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
