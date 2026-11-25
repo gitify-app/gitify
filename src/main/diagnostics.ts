@@ -1,37 +1,25 @@
+import { app } from 'electron';
 import log from 'electron-log';
 
-import { sanitizeErrorForLog } from '../shared/logger';
-
-let installed = false;
-
-/**
- * Install the main-process uncaught-error handler once.
- *
- * Uncaught exceptions and unhandled rejections are written to the application
- * log without a modal dialog. Native listeners pass the original rejection
- * value to the sanitizer before electron-log can stringify structured reasons.
- */
+/** Record uncaught failures without reading or logging the original error. */
 export function installMainDiagnostics(): void {
-  if (installed) {
-    return;
-  }
-
-  installed = true;
-
-  const reportError = (error: unknown) => {
-    log.error('[uncaught]', sanitizeErrorForLog(error));
+  // The preload can forward logger failures. Bypass electron-log's default
+  // handler so it never normalizes or logs the forwarded payload.
+  log.errorHandler.handle = () => {
+    log.error('[diagnostics]', { process: 'renderer', event: 'logger-error-forwarded' });
   };
 
-  // Also protect errors forwarded by electron-log's renderer IPC transport.
-  log.errorHandler.setOptions({
-    showDialog: false,
-    onError: ({ error }) => {
-      reportError(error);
-      // Suppress electron-log's default logging of the original error.
-      return false;
-    },
+  process.on('uncaughtException', () => {
+    try {
+      log.error('[diagnostics]', { process: 'main', event: 'uncaught-exception' });
+    } catch {
+      // Do not surface a second exception if logging itself fails.
+    } finally {
+      app.exit(1);
+    }
   });
 
-  process.on('uncaughtException', reportError);
-  process.on('unhandledRejection', reportError);
+  process.on('unhandledRejection', () => {
+    log.error('[diagnostics]', { process: 'main', event: 'unhandled-rejection' });
+  });
 }

@@ -1,10 +1,16 @@
 import { EventEmitter } from 'node:events';
 
+import { app } from 'electron';
+import log from 'electron-log';
+
+import { installMainDiagnostics } from './diagnostics';
+
+vi.mock('electron', () => ({ app: { exit: vi.fn() } }));
+
 describe('main/diagnostics.ts', () => {
   let events: EventEmitter;
 
   beforeEach(() => {
-    vi.resetModules();
     events = new EventEmitter();
     vi.spyOn(process, 'on').mockImplementation((event, listener) => {
       events.on(event, listener);
@@ -12,133 +18,71 @@ describe('main/diagnostics.ts', () => {
     });
   });
 
-  async function loadDiagnostics() {
-    const { default: log } = await import('electron-log');
-    const { installMainDiagnostics } = await import('./diagnostics');
-    return { log, installMainDiagnostics };
-  }
-
-  it('installs the uncaught-error handler exactly once without a dialog', async () => {
-    const { log, installMainDiagnostics } = await loadDiagnostics();
-
-    installMainDiagnostics();
+  it('logs only fixed metadata for a fatal exception, then exits nonzero', () => {
     installMainDiagnostics();
 
-    expect(log.errorHandler.setOptions).toHaveBeenCalledTimes(1);
-    expect(log.errorHandler.setOptions).toHaveBeenCalledWith(
-      expect.objectContaining({
-        showDialog: false,
-        onError: expect.any(Function),
-      }),
-    );
-    expect(log.errorHandler.startCatching).not.toHaveBeenCalled();
-    expect(events.listenerCount('uncaughtException')).toBe(1);
-    expect(events.listenerCount('unhandledRejection')).toBe(1);
+    events.emit('uncaughtException', new Error('private exception text'));
+
+    expect(log.error).toHaveBeenCalledExactlyOnceWith('[diagnostics]', {
+      process: 'main',
+      event: 'uncaught-exception',
+    });
+    expect(app.exit).toHaveBeenCalledExactlyOnceWith(1);
+    expect(log.error).toHaveBeenCalledBefore(vi.mocked(app.exit));
   });
 
-  it('logs a sanitized error without credential values', async () => {
-    const { log, installMainDiagnostics } = await loadDiagnostics();
+  it('still exits if logging the exception fails', () => {
     installMainDiagnostics();
+    vi.mocked(log.error).mockImplementationOnce(() => {
+      throw new Error('log write failed');
+    });
 
-    const error = Object.assign(
-      new Error('request failed with Authorization: Bearer supersecret'),
-      {
-        cause: 'safe context',
-        token: 'supersecret',
-        headers: { authorization: 'Bearer supersecret' },
-        config: { headers: { authorization: 'Bearer supersecret' } },
-      },
-    );
-
-    events.emit('uncaughtException', error);
-
-    expect(log.error).toHaveBeenCalledWith(
-      '[uncaught]',
-      expect.objectContaining({
-        message: expect.not.stringContaining('supersecret'),
-        cause: 'safe context',
-      }),
-    );
-    expect(JSON.stringify(vi.mocked(log.error).mock.calls[0][1])).not.toContain('supersecret');
+    expect(() => events.emit('uncaughtException', new Error('fatal'))).not.toThrow();
+    expect(app.exit).toHaveBeenCalledExactlyOnceWith(1);
   });
 
-  it('prevents the real error handler from also logging the original error', async () => {
-    const { log, installMainDiagnostics } = await loadDiagnostics();
-    const { default: actualLog } =
-      await vi.importActual<typeof import('electron-log')>('electron-log');
-    const consoleTransport = vi.spyOn(actualLog.transports, 'console').mockImplementation(() => {});
-    const fileTransport = vi.spyOn(actualLog.transports, 'file').mockImplementation(() => {});
+  it('ignores the rejection reason and keeps the app running', () => {
     installMainDiagnostics();
-
-    const options = vi.mocked(log.errorHandler.setOptions).mock.calls[0][0]!;
-    actualLog.errorHandler.handle(new Error('Authorization: Bearer supersecret'), options);
-
-    expect(log.error).toHaveBeenCalledTimes(1);
-    expect(JSON.stringify(vi.mocked(log.error).mock.calls)).not.toContain('supersecret');
-    expect(consoleTransport).not.toHaveBeenCalled();
-    expect(fileTransport).not.toHaveBeenCalled();
-  });
-
-  it('projects an object rejection before any request properties are serialized', async () => {
-    const { log, installMainDiagnostics } = await loadDiagnostics();
-    const { default: actualLog } =
-      await vi.importActual<typeof import('electron-log')>('electron-log');
-    const consoleTransport = vi.spyOn(actualLog.transports, 'console').mockImplementation(() => {});
-    const fileTransport = vi.spyOn(actualLog.transports, 'file').mockImplementation(() => {});
-    vi.mocked(log.error).mockImplementationOnce((...args) => actualLog.error(...args));
-    installMainDiagnostics();
-    const toJSON = vi.fn(() => 'supersecret');
-    const toString = vi.fn(() => 'supersecret');
-    const reason = {
-      message: 'Request failed',
-      token: 'supersecret',
-      headers: { authorization: 'Basic supersecret' },
-      config: { password: 'supersecret' },
-      toJSON,
-      toString,
-    };
+    const readProperty = vi.fn();
+    const reason = new Proxy({ token: 'test-token' }, { get: readProperty });
 
     events.emit('unhandledRejection', reason);
 
-    expect(log.error).toHaveBeenCalledExactlyOnceWith('[uncaught]', {
-      name: 'Error',
-      message: 'Request failed',
+    expect(readProperty).not.toHaveBeenCalled();
+    expect(log.error).toHaveBeenCalledExactlyOnceWith('[diagnostics]', {
+      process: 'main',
+      event: 'unhandled-rejection',
     });
-    expect(toJSON).not.toHaveBeenCalled();
-    expect(toString).not.toHaveBeenCalled();
-    expect(JSON.stringify(vi.mocked(log.error).mock.calls)).not.toContain('supersecret');
-    expect(consoleTransport).toHaveBeenCalledTimes(1);
-    expect(fileTransport).toHaveBeenCalledTimes(1);
-    expect(JSON.stringify(consoleTransport.mock.calls)).not.toContain('supersecret');
-    expect(JSON.stringify(fileTransport.mock.calls)).not.toContain('supersecret');
+    expect(app.exit).not.toHaveBeenCalled();
   });
 
-  it.each([null, undefined, false, 0, 42n])(
-    'safely logs primitive rejection %s',
-    async (reason) => {
-      const { log, installMainDiagnostics } = await loadDiagnostics();
+  it('bypasses normalization for a real electron-log forwarded error', async () => {
+    const { default: actualLog } =
+      await vi.importActual<typeof import('electron-log')>('electron-log');
+    const originalHandle = actualLog.errorHandler.handle;
+    const mockHandler = log.errorHandler;
+    const toJSON = vi.fn(() => 'private error payload');
+    log.errorHandler = actualLog.errorHandler;
+
+    try {
       installMainDiagnostics();
+      const message = {
+        cmd: 'errorHandler',
+        error: { message: '', toJSON },
+        level: 'error' as const,
+        date: new Date(),
+        data: [],
+      };
+      actualLog.processMessage(message);
 
-      events.emit('unhandledRejection', reason);
-
-      expect(log.error).toHaveBeenCalledExactlyOnceWith('[uncaught]', {
-        name: 'Error',
-        message: String(reason),
+      expect(toJSON).not.toHaveBeenCalled();
+      expect(log.error).toHaveBeenCalledExactlyOnceWith('[diagnostics]', {
+        process: 'renderer',
+        event: 'logger-error-forwarded',
       });
-    },
-  );
-
-  it('handles a circular rejection without serializing its credentials', async () => {
-    const { log, installMainDiagnostics } = await loadDiagnostics();
-    installMainDiagnostics();
-    const reason: { token: string; self?: unknown } = { token: 'supersecret' };
-    reason.self = reason;
-
-    events.emit('unhandledRejection', reason);
-
-    expect(log.error).toHaveBeenCalledExactlyOnceWith('[uncaught]', {
-      name: 'Error',
-      message: 'Non-Error rejection',
-    });
+    } finally {
+      actualLog.errorHandler.handle = originalHandle;
+      log.errorHandler = mockHandler;
+    }
   });
 });

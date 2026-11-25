@@ -19,8 +19,7 @@ vi.mock('electron-log', () => {
     silly: vi.fn(),
     initialize: vi.fn(),
     errorHandler: {
-      startCatching: vi.fn(),
-      setOptions: vi.fn(),
+      handle: vi.fn(),
     },
     transports: {
       file: {
@@ -37,28 +36,5 @@ vi.mock('electron-log', () => {
 });
 
 vi.mock('electron-log/renderer', () => {
-  const logger = {
-    info: vi.fn(),
-    warn: vi.fn(),
-    error: vi.fn(),
-    debug: vi.fn(),
-    verbose: vi.fn(),
-    silly: vi.fn(),
-    initialize: vi.fn(),
-    errorHandler: {
-      startCatching: vi.fn(),
-      setOptions: vi.fn(),
-    },
-    transports: {
-      file: {
-        fileName: 'test.log',
-        getFile: vi.fn(() => ({ path: '/tmp/gitify-test.log' })),
-      },
-      console: {
-        level: false,
-      },
-    },
-  };
-
-  return { default: logger };
+  return { default: { error: vi.fn() } };
 });
