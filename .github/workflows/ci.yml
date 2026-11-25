@@ -13,13 +13,13 @@ permissions: {}
 jobs:
   lint:
     name: Lint App
-    uses: ./.github/workflows/lint.yml
+    uses: $/.github/workflows/lint.yml
     permissions:
       contents: read
 
   tests:
     name: Tests
-    uses: ./.github/workflows/test.yml
+    uses: $/.github/workflows/test.yml
     needs: lint
     permissions:
       contents: read
@@ -28,7 +28,7 @@ jobs:
 
   build:
     name: Build
-    uses: ./.github/workflows/build.yml
+    uses: $/.github/workflows/build.yml
     needs: tests
     permissions:
       contents: read

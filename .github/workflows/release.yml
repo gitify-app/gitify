@@ -133,7 +133,7 @@ jobs:
 
   lint:
     name: Lint App
-    uses: ./.github/workflows/lint.yml
+    uses: $/.github/workflows/lint.yml
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created == 'true' }}
     permissions:
@@ -141,7 +141,7 @@ jobs:
 
   tests:
     name: Tests
-    uses: ./.github/workflows/test.yml
+    uses: $/.github/workflows/test.yml
     needs: lint
     permissions:
       contents: read
@@ -150,7 +150,7 @@ jobs:
 
   publish:
     name: Publish
-    uses: ./.github/workflows/publish.yml
+    uses: $/.github/workflows/publish.yml
     needs: [release-please, tests]
     permissions:
       contents: write
@@ -172,7 +172,7 @@ jobs:
 
   website:
     name: Website
-    uses: ./.github/workflows/website.yml
+    uses: $/.github/workflows/website.yml
     needs: publish
     permissions: {}
     secrets:

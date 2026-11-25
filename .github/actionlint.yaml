@@ -11,3 +11,14 @@
 self-hosted-runner:
   labels:
     - ubuntu-26.04-arm
+
+# WORKAROUND: actionlint 1.7.12 doesn't recognize the $/ reusable workflow
+# syntax. Ignore only its format diagnostic for the migrated calls until
+# rhysd/actionlint#732 ships in the pinned version.
+paths:
+  .github/workflows/ci.yml:
+    ignore:
+      - '^reusable workflow call "\$/\.github/workflows/(build|lint|test)\.yml" at "uses" is not following the format '
+  .github/workflows/release.yml:
+    ignore:
+      - '^reusable workflow call "\$/\.github/workflows/(lint|publish|test|website)\.yml" at "uses" is not following the format '
