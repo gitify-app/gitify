@@ -88,7 +88,7 @@ describe('main/updater.ts', () => {
     public override setAutomaticUpdatesEnabled = vi.fn();
     public override setCheckForUpdatesMenuEnabled = vi.fn();
     public override setNoUpdateAvailableMenuVisibility = vi.fn();
-    public override setUpdateAvailableMenuVisibility = vi.fn();
+    public override setDownloadingUpdateMenuVisibility = vi.fn();
     public override setUpdateReadyForInstallMenuVisibility = vi.fn();
   }
 
@@ -225,7 +225,7 @@ describe('main/updater.ts', () => {
         }),
       );
       expect(autoUpdater.quitAndInstall).not.toHaveBeenCalled();
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setDownloadingUpdateMenuVisibility).toHaveBeenCalledWith(false);
       expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(true);
     });
 
@@ -255,7 +255,7 @@ describe('main/updater.ts', () => {
 
       expect(dialog.showMessageBox).not.toHaveBeenCalled();
       expect(notify).not.toHaveBeenCalled();
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setDownloadingUpdateMenuVisibility).toHaveBeenCalledWith(false);
       expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(true);
     });
 
@@ -513,16 +513,19 @@ describe('main/updater.ts', () => {
 
       emit('update-available', { version: '1.2.3' });
 
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(true);
+      expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenLastCalledWith(false);
+      expect(menuBuilder.setDownloadingUpdateMenuVisibility).toHaveBeenLastCalledWith(true);
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(
         expect.stringContaining('A new update is available'),
       );
     });
 
-    it('handles download-progress', async () => {
+    it('shows download progress only in the tooltip', async () => {
       await updater.setAutomaticUpdatesEnabled(true);
 
       emit('download-progress', { percent: 12.3456 });
+
+      expect(menuBuilder.setDownloadingUpdateMenuVisibility).not.toHaveBeenCalled();
 
       expect(menubar.tray.setToolTip).toHaveBeenCalledWith(expect.stringContaining('12.35%'));
     });
@@ -534,7 +537,7 @@ describe('main/updater.ts', () => {
 
       expect(menuBuilder.setCheckForUpdatesMenuEnabled).toHaveBeenCalledWith(true);
       expect(menuBuilder.setNoUpdateAvailableMenuVisibility).toHaveBeenCalledWith(true);
-      expect(menuBuilder.setUpdateAvailableMenuVisibility).toHaveBeenCalledWith(false);
+      expect(menuBuilder.setDownloadingUpdateMenuVisibility).toHaveBeenCalledWith(false);
       expect(menuBuilder.setUpdateReadyForInstallMenuVisibility).toHaveBeenCalledWith(false);
     });
 
