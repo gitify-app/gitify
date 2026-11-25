@@ -1,6 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 
 import { onlineManager } from '@tanstack/react-query';
+
+// Record transitions once, even when no React observer is mounted yet.
+let networkStatus = {
+  isOnline: onlineManager.isOnline(),
+  reconnectedAt: undefined as number | undefined,
+};
+
+onlineManager.subscribe((isOnline) => {
+  networkStatus = {
+    isOnline,
+    reconnectedAt: isOnline ? Date.now() : networkStatus.reconnectedAt,
+  };
+});
+
+const subscribe = (onChange: () => void) => onlineManager.subscribe(onChange);
+export const getNetworkStatus = () => networkStatus;
+
+export function useNetworkStatus() {
+  return useSyncExternalStore(subscribe, getNetworkStatus);
+}
 
 /**
  * Hook exposing the application's online / offline status, backed by
@@ -8,28 +28,13 @@ import { onlineManager } from '@tanstack/react-query';
  * pause/resume behaviour.
  */
 export function useOnlineStatus(): boolean {
-  const [isOnline, setIsOnline] = useState(() => onlineManager.isOnline());
+  const { isOnline } = useNetworkStatus();
 
   useEffect(() => {
-    const handle = () => {
-      setIsOnline(onlineManager.isOnline());
-    };
-
-    // Subscribe and call immediately to set initial status
-    const unsubscribe = onlineManager.subscribe(handle);
-    handle();
-
     // Re-probe network state when the system wakes from sleep or the user
     // unlocks their screen. The browser's online/offline events may not have
     // fired yet by the time the renderer runs after a sleep cycle.
-    const unsubscribeWake = window.gitify.onSystemWake(() =>
-      onlineManager.setOnline(navigator.onLine),
-    );
-
-    return () => {
-      unsubscribe();
-      unsubscribeWake();
-    };
+    return window.gitify.onSystemWake(() => onlineManager.setOnline(navigator.onLine));
   }, []);
 
   return isOnline;

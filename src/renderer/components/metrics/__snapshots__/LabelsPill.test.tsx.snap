@@ -41,7 +41,7 @@ exports[`renderer/components/metrics/LabelsPill.tsx > renders with labels 1`] = 
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           2

@@ -19,6 +19,7 @@ export type ListItem =
       repoKey: string;
       repoName: string;
       notifications: GitifyNotification[];
+      isAnimatingExit: boolean;
     }
   | {
       key: string;
@@ -66,6 +67,19 @@ export function buildRepositoryItems(
 
   for (const [repoName, repoNotifications] of groupNotificationsByRepository(sorted)) {
     const repoKey = `${accountUUID}-${repoName}`;
+    const animatingRepository = context.animatingRepositories.get(repoKey);
+
+    const isNotificationExiting = (notification: GitifyNotification) => {
+      const exitKey = getNotificationExitKey(accountUUID, notification);
+      return (
+        context.animatingNotifications.has(exitKey) || (animatingRepository?.has(exitKey) ?? false)
+      );
+    };
+
+    // The header leaves with its rows once every remaining row is exiting,
+    // so a group's last row doesn't leave an orphaned heading behind.
+    const isRepositoryExiting =
+      animatingRepository !== undefined || repoNotifications.every(isNotificationExiting);
 
     items.push({
       key: `repository-${repoKey}`,
@@ -73,6 +87,7 @@ export function buildRepositoryItems(
       repoKey,
       repoName,
       notifications: repoNotifications,
+      isAnimatingExit: isRepositoryExiting,
     });
 
     if (context.collapsedRepositories.has(repoKey)) {
@@ -80,14 +95,8 @@ export function buildRepositoryItems(
     }
 
     for (const notification of repoNotifications) {
-      const exitKey = getNotificationExitKey(accountUUID, notification);
       items.push(
-        buildNotificationItem(
-          accountUUID,
-          notification,
-          context.animatingNotifications.has(exitKey) ||
-            (context.animatingRepositories.get(repoKey)?.has(exitKey) ?? false),
-        ),
+        buildNotificationItem(accountUUID, notification, isNotificationExiting(notification)),
       );
     }
   }

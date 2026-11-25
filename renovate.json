@@ -5,7 +5,7 @@
     {
       "description": "Fetch changelog details for twemoji packages",
       "matchPackageNames": ["@discordapp/twemoji"],
-      "changelogUrl": "https://github.com/jdjdecked/twemoji"
+      "changelogUrl": "https://github.com/jdecked/twemoji"
     },
     {
       "description": "Hold got on the v11 line. This override satisfies security scanners for dev tooling built against the non-ESM v11 API; v11.8.5+ includes the security fix.",
@@ -26,6 +26,12 @@
       "semanticCommitScope": "deps-core"
     },
     {
+      "description": "Give package.json runtime dependencies the core dependency scope, including future additions, so release-please surfaces them in the changelog.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "semanticCommitScope": "deps-core"
+    },
+    {
       "description": "Skip the release-age gate and weekly schedule for the first-party electron-menubar dependency.",
       "matchPackageNames": ["electron-menubar"],
       "minimumReleaseAge": "0 days",
@@ -36,6 +42,26 @@
       "groupName": "playwright",
       "matchDatasources": ["npm", "docker"],
       "matchPackageNames": ["playwright", "mcr.microsoft.com/playwright"]
+    },
+    {
+      "description": "Keep Vite+, its aliased Vite core, and Vitest together even when their version bumps have different SemVer types. src/main/ciDependencyCompatibility.test.ts verifies the exact versions bundled by Vite+.",
+      "extends": ["packages:vitePlus"],
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false
+    },
+    {
+      "description": "Name the actual package in standalone updates: the vite catalog entry is an alias for Vite+ core.",
+      "matchDatasources": ["npm"],
+      "matchDepNames": ["vite"],
+      "matchPackageNames": ["@voidzero-dev/vite-plus-core"],
+      "commitMessageTopic": "Vite+ core (vite alias)",
+      "commitMessageExtra": "to {{{newVersion}}}"
+    },
+    {
+      "description": "Keep the graphql-code-generator monorepo in one PR, including major upgrades. Its CLI and plugin majors share a plugin API contract, so separate major PRs cannot be verified independently.",
+      "extends": ["monorepo:graphqlcodegenerator"],
+      "groupName": "graphql-codegen",
+      "separateMajorMinor": false
     }
   ],
   "customManagers": [

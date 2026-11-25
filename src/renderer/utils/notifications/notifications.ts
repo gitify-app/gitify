@@ -56,9 +56,11 @@ function getNotifications(accounts: Account[]) {
  *  - Transform
  *  - Base filtering
  *  - Enrichment
- *  - Detailed filtering
  *  - Formatting
  *  - Ordering
+ *
+ * Detailed filtering runs later in the notifications query's `select` step, so
+ * the cached data stays unfiltered and filter changes apply without a refetch.
  *
  * @returns A promise that resolves to an array of account notifications.
  */
@@ -264,7 +266,8 @@ export function clearEnrichmentCache(): void {
  * Assign an order property to each notification to stabilize how they are displayed
  * during notification interaction events (mark as read, mark as done, etc.)
  *
- * @param accountNotifications
+ * @param accountNotifications - The account notifications whose notifications
+ * should be ordered.
  */
 export function stabilizeNotificationsOrder(accountNotifications: AccountNotifications[]) {
   let orderIndex = 0;

@@ -126,6 +126,7 @@ class IssueHandler extends DefaultHandler {
           name: label!.name,
           color: label!.color,
         })) ?? [],
+      labelCount: issue.labels?.totalCount,
       issueType: issue.issueType
         ? { name: issue.issueType.name, color: mapIssueTypeColor(issue.issueType.color) }
         : undefined,

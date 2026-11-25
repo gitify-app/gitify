@@ -3,19 +3,19 @@ import { getChevronDetails, parseInlineCode } from './display';
 describe('renderer/utils/ui/display.ts', () => {
   describe('getChevronDetails', () => {
     it('returns correct chevron details', () => {
-      expect(getChevronDetails(true, true, 'account')).toEqual({
+      expect(getChevronDetails(true, 'account')).toEqual({
         direction: 'down',
         label: 'Hide account notifications',
       });
 
-      expect(getChevronDetails(true, false, 'account')).toEqual({
+      expect(getChevronDetails(false, 'account')).toEqual({
         direction: 'right',
         label: 'Show account notifications',
       });
 
-      expect(getChevronDetails(false, false, 'account')).toEqual({
-        direction: 'left',
-        label: 'No notifications for account',
+      expect(getChevronDetails(false, 'repository')).toEqual({
+        direction: 'right',
+        label: 'Show repository notifications',
       });
     });
   });

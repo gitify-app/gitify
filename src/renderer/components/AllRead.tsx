@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Constants } from '../constants';
 
@@ -13,11 +14,14 @@ interface AllReadProps {
 }
 
 export function AllRead({ fullHeight = true }: Readonly<AllReadProps>) {
+  const { t } = useTranslation();
   const hasFilters = useFiltersStore((s) => s.hasActiveFilters());
 
   const emoji = useMemo(() => randomElement(Constants.EMOJIS.ALL_READ), []);
 
-  const heading = `No new ${hasFilters ? 'filtered ' : ''} notifications`;
+  const heading = hasFilters
+    ? t('allRead.heading_filtered', 'No new filtered notifications')
+    : t('allRead.heading', 'No new notifications');
 
   return <EmojiSplash emoji={emoji} fullHeight={fullHeight} heading={heading} />;
 }

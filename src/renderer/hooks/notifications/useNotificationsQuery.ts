@@ -4,10 +4,16 @@ import { type QueryKey, useQuery } from '@tanstack/react-query';
 
 import { Constants } from '../../constants';
 
-import { useAccountsStore, useFiltersStore, useSettingsStore } from '../../stores';
+import {
+  useAccountsStore,
+  useFiltersStore,
+  usePowerStateStore,
+  useSettingsStore,
+} from '../../stores';
 
 import type { AccountNotifications, GitifyError, GitifyNotification, Status } from '../../types';
 
+import { doesAllAccountsHaveErrors } from '../../utils/core/errors';
 import {
   filterBaseNotifications,
   filterDetailedNotifications,
@@ -19,6 +25,7 @@ import {
 } from '../../utils/notifications/notifications';
 import { computeRefetchIntervalMs } from '../../utils/notifications/pollInterval';
 import { deriveGlobalError, deriveStatus } from '../../utils/notifications/status';
+import { getNetworkStatus, useNetworkStatus } from '../useOnlineStatus';
 import { useNotificationsQueryKey } from './useNotificationsQueryKey';
 
 export interface NotificationsQueryResult {
@@ -51,6 +58,29 @@ function keepNonEmptyPreviousData(
     : undefined;
 }
 
+async function fetchNotificationsWithReconnect() {
+  const connectionAtStart = getNetworkStatus();
+  const hasReconnected = () => {
+    const currentConnection = getNetworkStatus();
+    return currentConnection.isOnline && currentConnection !== connectionAtStart;
+  };
+
+  try {
+    const notifications = await getAllNotifications();
+    if (!doesAllAccountsHaveErrors(notifications) || !hasReconnected()) {
+      return notifications;
+    }
+  } catch (error) {
+    if (!hasReconnected()) {
+      throw error;
+    }
+  }
+
+  // TanStack reuses the in-flight request on reconnect. If that request failed,
+  // make one fresh attempt before committing a failed result to the cache.
+  return getAllNotifications();
+}
+
 /**
  * The read side of notification state: the TanStack Query observer (optionally
  * polling), the filter projection, derived counts, and the derived status and
@@ -61,8 +91,11 @@ function keepNonEmptyPreviousData(
  * entry but schedule nothing. See `useNotificationsHost`.
  */
 export const useNotificationsQuery = ({ poll }: { poll: boolean }): NotificationsQueryResult => {
+  const { isOnline: isNetworkOnline, reconnectedAt } = useNetworkStatus();
+
   // Account store values
   const accounts = useAccountsStore((s) => s.accounts);
+  const isPowerActive = usePowerStateStore((s) => s.isActive);
 
   // Filter store values
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
@@ -107,17 +140,18 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
   // Query for fetching notifications - TanStack Query handles polling and refetching
   const {
     data: notifications = [],
+    dataUpdatedAt,
+    errorUpdatedAt,
     isLoading,
     isFetching,
     isError,
+    isPending,
     isPaused,
     refetch,
   } = useQuery<AccountNotifications[], Error>({
     queryKey: notificationsQueryKey,
 
-    queryFn: async () => {
-      return await getAllNotifications();
-    },
+    queryFn: fetchNotificationsWithReconnect,
 
     // Apply filters as a transformation on the cached data
     // This allows filter changes to instantly update without refetching
@@ -130,17 +164,23 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     // occurred. Uses the static floor rather than the live interval because
     // the latter stretches with `X-Poll-Interval`; pinning staleTime to it
     // would suppress mount/focus/reconnect refetches for as long as a forge
-    // asks Gitify to back off. Only those refetches are stale-gated - the
-    // poll itself fires on `refetchInterval` regardless.
+    // asks Gitify to back off. The poll itself fires on `refetchInterval`
+    // regardless; reconnect also bypasses this guard for failed results.
     staleTime: Constants.MIN_FETCH_NOTIFICATIONS_INTERVAL_MS,
 
     // Only the singleton host observer polls. Other consumers share the cached
     // data and would otherwise each schedule their own refetch timer. The
     // interval is re-evaluated after each fetch so it stretches to the latest
     // server-recommended minimum (`X-Poll-Interval`) when required.
-    refetchInterval: poll ? () => computeRefetchIntervalMs(fetchIntervalMs, accounts) : false,
+    refetchInterval:
+      poll && isPowerActive ? () => computeRefetchIntervalMs(fetchIntervalMs, accounts) : false,
     refetchOnMount: poll,
-    refetchOnReconnect: poll,
+    // Retry an errored result on reconnect even if it's still fresh. Successful
+    // results retain the usual stale-time guard.
+    refetchOnReconnect:
+      poll &&
+      (({ state }) =>
+        state.status === 'error' || doesAllAccountsHaveErrors(state.data ?? []) ? 'always' : true),
     refetchOnWindowFocus: poll,
   });
 
@@ -155,18 +195,23 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     [unreadNotificationCount],
   );
 
-  // Determine status and globalError from query state. Only the initial
-  // fetch (no settled success or error yet) reports 'loading' - background
-  // refetches of already-settled data keep their settled status so
-  // consumers like the tray icon don't flicker on every poll/retry.
-  const status: Status = useMemo(
-    () => deriveStatus({ isLoading, isPaused, isError, notifications }),
-    [isLoading, isPaused, isError, notifications],
-  );
+  // Query keeps the previous result during a refetch. Use the same timestamps
+  // for every observer, including one mounted halfway through the reconnect.
+  const lastResultAt = isError ? errorUpdatedAt : dataUpdatedAt;
+  const isRecovering = reconnectedAt !== undefined && lastResultAt < reconnectedAt;
+  const status = deriveStatus({
+    isNetworkOnline,
+    isLoading,
+    isPending,
+    isPaused,
+    isRecovering,
+    isError,
+    notifications,
+  });
 
   const globalError: GitifyError | undefined = useMemo(
-    () => deriveGlobalError({ isPaused, notifications }),
-    [isPaused, notifications],
+    () => deriveGlobalError({ status, notifications }),
+    [status, notifications],
   );
 
   return {

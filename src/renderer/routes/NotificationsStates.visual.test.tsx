@@ -2,13 +2,13 @@ import { waitFor } from '@testing-library/react';
 
 import { page } from 'vite-plus/test/browser';
 
-import { setIsOnlineOverride, setNotificationsOverrides } from '../__helpers__/hook-mocks';
+import { setNotificationsOverrides } from '../__helpers__/hook-mocks';
 import { renderRoute } from '../__helpers__/visual-utils';
 import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
 import { DesignLanguage, Theme } from '../types';
 
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import { NotificationsRoute } from './Notifications';
 
 const THEME_VARIANTS = [
@@ -34,12 +34,13 @@ const STATES = [
   {
     name: 'offline',
     heading: 'Network Offline',
-    prepare: () => setIsOnlineOverride(false),
+    prepare: () => setNotificationsOverrides({ status: 'offline' }),
   },
   {
     name: 'error',
     heading: 'Network Error',
-    prepare: () => setNotificationsOverrides({ globalError: Errors.NETWORK, status: 'error' }),
+    prepare: () =>
+      setNotificationsOverrides({ globalError: getErrorDetails('NETWORK'), status: 'error' }),
   },
 ] as const;
 

@@ -85,7 +85,7 @@ exports[`renderer/components/notifications/AccountHeader.tsx > renders an error 
       </span>
     </button>
     <div
-      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-hover:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
+      class="gitify-hover-actions absolute inset-y-0 right-0 pr-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 group-hover:bg-gitify-account-error group-focus-within:bg-gitify-account-error prc-Stack-Stack-UQ9k6"
       data-align="center"
       data-component="Stack"
       data-direction="horizontal"
@@ -158,7 +158,8 @@ exports[`renderer/components/notifications/AccountHeader.tsx > renders an error 
         </svg>
       </button>
       <button
-        aria-label="No notifications for account"
+        aria-expanded="true"
+        aria-label="Hide account notifications"
         class="prc-Button-ButtonBase-9n-Xk prc-Button-IconButton-fyge7"
         data-component="IconButton"
         data-loading="false"
@@ -166,12 +167,12 @@ exports[`renderer/components/notifications/AccountHeader.tsx > renders an error 
         data-size="small"
         data-testid="account-toggle"
         data-variant="invisible"
-        title="No notifications for account"
+        title="Hide account notifications"
         type="button"
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-chevron-left"
+          class="octicon octicon-chevron-down"
           data-component="Octicon"
           display="inline-block"
           fill="currentColor"
@@ -183,7 +184,7 @@ exports[`renderer/components/notifications/AccountHeader.tsx > renders an error 
           width="16"
         >
           <path
-            d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"
+            d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
           />
         </svg>
       </button>

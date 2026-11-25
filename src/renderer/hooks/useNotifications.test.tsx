@@ -1,7 +1,12 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 import type { ReactNode } from 'react';
 
-import { focusManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  focusManager,
+  onlineManager,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 
 import {
   mockGitHubCloudAccount,
@@ -15,16 +20,25 @@ import {
 } from '../__mocks__/notifications-mocks';
 
 import {
+  getNativeNotificationId,
+  NATIVE_NOTIFICATION_SUMMARY_ID,
+} from '../../shared/nativeNotifications';
+
+import { Constants } from '../constants';
+
+import {
   getNotificationFailureKey,
   useAccountsStore,
   useFiltersStore,
   useNotificationActionFailuresStore,
+  usePowerStateStore,
   useSettingsStore,
 } from '../stores';
 
-import type { AccountNotifications, Percentage } from '../types';
+import type { AccountNotifications, Percentage, Status } from '../types';
 
-import { Errors } from '../utils/core/errors';
+import { getAccountUUID } from '../utils/auth/utils';
+import { getErrorDetails } from '../utils/core/errors';
 import * as logger from '../utils/core/logger';
 import { getAdapter } from '../utils/forges/registry';
 import * as notificationsUtils from '../utils/notifications/notifications';
@@ -33,6 +47,7 @@ import {
   reportServerPollInterval,
 } from '../utils/notifications/pollInterval';
 import * as audio from '../utils/system/audio';
+import * as links from '../utils/system/links';
 import * as native from '../utils/system/native';
 import { useNotificationsHost } from './notifications/useNotificationsHost';
 import { useNotifications } from './useNotifications';
@@ -56,11 +71,12 @@ vi.mock('../utils/notifications/notifications', async () => {
 const getAllNotificationsMock = vi.mocked(notificationsUtils.getAllNotifications);
 const refreshEnrichmentCacheMock = vi.mocked(notificationsUtils.refreshEnrichmentCache);
 
-const createWrapper = () => {
+const createWrapper = (retry: number | false = false) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        retry: false,
+        retry,
+        retryDelay: 0,
         refetchOnWindowFocus: false,
         refetchInterval: false,
       },
@@ -96,6 +112,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
     getAllNotificationsMock.mockResolvedValue([]);
     refreshEnrichmentCacheMock.mockReset();
     refreshEnrichmentCacheMock.mockReturnValue(false);
+    vi.mocked(window.gitify.nativeNotifications.show).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.remove).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.removeAll).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.notifyReady).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.onAction).mockClear();
+    vi.mocked(window.gitify.nativeNotifications.onClick).mockClear();
     clearServerPollIntervals();
 
     useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
@@ -146,12 +168,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [],
-          error: Errors.BAD_CREDENTIALS,
+          error: getErrorDetails('BAD_CREDENTIALS'),
         },
         {
           account: mockGitHubEnterpriseServerAccount,
           notifications: [],
-          error: Errors.BAD_CREDENTIALS,
+          error: getErrorDetails('BAD_CREDENTIALS'),
         },
       ];
       useAccountsStore.setState({
@@ -163,7 +185,7 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       await waitFor(() => expect(result.current.status).toBe('error'));
 
-      expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
+      expect(result.current.globalError?.type).toBe('BAD_CREDENTIALS');
     });
 
     it('sets error status without global error when account errors differ', async () => {
@@ -171,12 +193,12 @@ describe('renderer/hooks/useNotifications.ts', () => {
         {
           account: mockGitHubCloudAccount,
           notifications: [],
-          error: Errors.BAD_CREDENTIALS,
+          error: getErrorDetails('BAD_CREDENTIALS'),
         },
         {
           account: mockGitHubEnterpriseServerAccount,
           notifications: [],
-          error: Errors.RATE_LIMITED,
+          error: getErrorDetails('RATE_LIMITED'),
         },
       ];
       useAccountsStore.setState({
@@ -190,6 +212,148 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       expect(result.current.globalError).toBeUndefined();
     });
+  });
+
+  describe('notification connectivity', () => {
+    const cachedFailure: AccountNotifications[] = [
+      {
+        account: mockGitHubCloudAccount,
+        notifications: [],
+        error: getErrorDetails('NETWORK'),
+      },
+    ];
+
+    afterEach(() => {
+      onlineManager.setOnline(true);
+      focusManager.setFocused(undefined);
+    });
+
+    it('does not report offline when a retry waits for a hidden window', async () => {
+      onlineManager.setOnline(true);
+      focusManager.setFocused(false);
+      getAllNotificationsMock
+        .mockRejectedValueOnce(new Error('first attempt failed'))
+        .mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      const { result } = renderHook(() => useNotifications(), { wrapper: createWrapper(1) });
+
+      await waitFor(() => expect(result.current.status).toBe('paused'));
+      expect(result.current.globalError).toBeUndefined();
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+      act(() => focusManager.setFocused(true));
+
+      await waitFor(() => expect(result.current.status).toBe('success'));
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+    });
+
+    it.each([
+      { pauseBeforeReconnect: true, fails: false },
+      { pauseBeforeReconnect: false, fails: true },
+    ])(
+      'hides stale failures during reconnect ($pauseBeforeReconnect paused, $fails fails)',
+      async ({ pauseBeforeReconnect, fails }) => {
+        onlineManager.setOnline(true);
+        getAllNotificationsMock.mockResolvedValueOnce(cachedFailure);
+        const renders: Status[] = [];
+        const { result } = renderHook(
+          () => {
+            const state = useNotificationsHost();
+            renders.push(state.status);
+            return state;
+          },
+          { wrapper: createWrapper() },
+        );
+
+        await waitFor(() => expect(result.current.status).toBe('error'));
+        expect(result.current.globalError?.type).toBe('NETWORK');
+
+        act(() => onlineManager.setOnline(false));
+        expect(result.current.status).toBe('offline');
+        if (pauseBeforeReconnect) {
+          act(() => void result.current.refetchNotifications());
+        }
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        const { promise, resolve } = Promise.withResolvers<AccountNotifications[]>();
+        getAllNotificationsMock.mockReturnValueOnce(promise);
+        renders.length = 0;
+        act(() => onlineManager.setOnline(true));
+
+        await waitFor(() => expect(result.current.isFetching).toBe(true));
+        expect(result.current.status).toBe('loading');
+        expect(result.current.globalError).toBeUndefined();
+        expect(renders).not.toContain('error');
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+
+        await act(async () => {
+          resolve(fails ? cachedFailure : mockSingleAccountNotifications);
+        });
+        await waitFor(() => {
+          expect(result.current.status).toBe(fails ? 'error' : 'success');
+        });
+        expect(result.current.globalError?.type).toBe(fails ? 'NETWORK' : undefined);
+      },
+    );
+
+    it.each([
+      { outcome: 'account failure', retryFails: false },
+      { outcome: 'request rejection', retryFails: true },
+      { outcome: 'success', retryFails: false },
+    ])(
+      'handles $outcome from a poll already in flight at reconnect',
+      async ({ outcome, retryFails }) => {
+        const shouldRetry = outcome !== 'success';
+        onlineManager.setOnline(true);
+        getAllNotificationsMock.mockResolvedValueOnce(cachedFailure);
+        const renders: Status[] = [];
+        const { result } = renderHook(
+          () => {
+            const state = useNotificationsHost();
+            renders.push(state.status);
+            return state;
+          },
+          { wrapper: createWrapper() },
+        );
+        await waitFor(() => expect(result.current.status).toBe('error'));
+
+        const poll = Promise.withResolvers<AccountNotifications[]>();
+        const retry = Promise.withResolvers<AccountNotifications[]>();
+        getAllNotificationsMock
+          .mockReturnValueOnce(poll.promise)
+          .mockReturnValueOnce(retry.promise);
+        act(() => void result.current.refetchNotifications());
+        await waitFor(() => expect(result.current.isFetching).toBe(true));
+
+        act(() => onlineManager.setOnline(false));
+        expect(result.current.status).toBe('offline');
+        renders.length = 0;
+        await act(async () => onlineManager.setOnline(true));
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+
+        await act(async () => {
+          if (outcome === 'request rejection') {
+            poll.reject(new Error('request dropped during outage'));
+          } else {
+            poll.resolve(outcome === 'success' ? mockSingleAccountNotifications : cachedFailure);
+          }
+        });
+
+        await waitFor(() =>
+          expect(result.current.status).toBe(shouldRetry ? 'loading' : 'success'),
+        );
+        expect(result.current.isFetching).toBe(shouldRetry);
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(shouldRetry ? 3 : 2);
+        expect(result.current.globalError).toBeUndefined();
+        expect(renders).not.toContain('error');
+
+        await act(async () =>
+          retry.resolve(retryFails ? cachedFailure : mockSingleAccountNotifications),
+        );
+        await waitFor(() => expect(result.current.status).toBe(retryFails ? 'error' : 'success'));
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(shouldRetry ? 3 : 2);
+      },
+    );
   });
 
   describe('account set changes', () => {
@@ -645,6 +809,48 @@ describe('renderer/hooks/useNotifications.ts', () => {
       expect(raiseNativeNotificationSpy).toHaveBeenCalledTimes(1);
     });
 
+    it('uses the latest alert settings for the next alert without re-registering the effect', async () => {
+      useSettingsStore.setState({
+        notificationVolume: 20 as Percentage,
+        playSound: true,
+        showNotifications: false,
+      });
+      getAllNotificationsMock.mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+      await waitFor(() => expect(raiseSoundNotificationSpy).toHaveBeenCalledWith(20));
+      expect(raiseNativeNotificationSpy).not.toHaveBeenCalled();
+
+      act(() => {
+        useSettingsStore.setState({
+          notificationVolume: 60 as Percentage,
+          showNotifications: true,
+        });
+      });
+
+      getAllNotificationsMock.mockResolvedValueOnce([
+        {
+          account: mockGitHubCloudAccount,
+          error: null,
+          notifications: [
+            mockGitifyNotification,
+            mockGitHubCloudGitifyNotifications[1],
+          ] as AccountNotifications['notifications'],
+        },
+      ]);
+
+      await act(async () => {
+        await result.current.refetchNotifications();
+      });
+
+      await waitFor(() => {
+        expect(raiseSoundNotificationSpy).toHaveBeenCalledTimes(2);
+        expect(raiseSoundNotificationSpy).toHaveBeenLastCalledWith(60);
+        expect(raiseNativeNotificationSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+
     it('does not raise sound or native notifications when disabled', async () => {
       useSettingsStore.setState({
         playSound: false,
@@ -658,6 +864,106 @@ describe('renderer/hooks/useNotifications.ts', () => {
 
       expect(raiseSoundNotificationSpy).not.toHaveBeenCalled();
       expect(raiseNativeNotificationSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('native notification interactions', () => {
+    const notification = mockSingleAccountNotifications[0].notifications[0];
+    const notificationId = getNativeNotificationId(
+      getAccountUUID(notification.account),
+      notification.id,
+    );
+
+    const actionHandler = () =>
+      vi.mocked(window.gitify.nativeNotifications.onAction).mock.calls.at(-1)?.[0] as (payload: {
+        id: string;
+      }) => void;
+
+    const clickHandler = () =>
+      vi.mocked(window.gitify.nativeNotifications.onClick).mock.calls.at(-1)?.[0] as (payload: {
+        id: string;
+      }) => void;
+
+    it('registers listeners and reports readiness', async () => {
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      renderNotificationsHook();
+
+      await waitFor(() => expect(window.gitify.nativeNotifications.notifyReady).toHaveBeenCalled());
+      expect(window.gitify.nativeNotifications.onAction).toHaveBeenCalled();
+      expect(window.gitify.nativeNotifications.onClick).toHaveBeenCalled();
+    });
+
+    it('updates the inbox immediately for an OS action', async () => {
+      let resolveRead: () => void = () => {};
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockReturnValue(
+        new Promise<void>((resolve) => {
+          resolveRead = resolve;
+        }),
+      );
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.unreadNotificationCount).toBe(1));
+
+      act(() => {
+        actionHandler()({ id: notificationId });
+      });
+
+      await waitFor(() => expect(result.current.unreadNotificationCount).toBe(0));
+
+      await act(async () => {
+        resolveRead();
+      });
+    });
+
+    it('opens the target for an individual body click', async () => {
+      const openSpy = vi.spyOn(links, 'openNotification').mockResolvedValue();
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      act(() => {
+        clickHandler()({ id: notificationId });
+      });
+
+      expect(openSpy).toHaveBeenCalledWith(expect.objectContaining({ id: notification.id }));
+    });
+
+    it('shows the app for a summary click', async () => {
+      const showSpy = vi.spyOn(window.gitify.app, 'show');
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(result.current.hasNotifications).toBe(true));
+
+      act(() => {
+        clickHandler()({ id: NATIVE_NOTIFICATION_SUMMARY_ID });
+      });
+
+      expect(showSpy).toHaveBeenCalled();
+    });
+
+    it('removes the native notification when read in the app', async () => {
+      vi.spyOn(githubAdapter.accountOps, 'markThreadAsRead').mockResolvedValue(undefined);
+      raiseNativeNotificationSpy.mockResolvedValueOnce([
+        { id: notificationId, title: 'owner/repo', body: 'Title', actionLabel: 'Mark as read' },
+      ]);
+      getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+      const { result } = renderNotificationsHook();
+      await waitFor(() => expect(raiseNativeNotificationSpy).toHaveBeenCalled());
+
+      await act(async () => {
+        await result.current.markNotificationsAsRead([notification]);
+      });
+
+      await waitFor(() =>
+        expect(window.gitify.nativeNotifications.remove).toHaveBeenCalledWith({
+          ids: [notificationId],
+        }),
+      );
     });
   });
 
@@ -949,6 +1255,66 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(2));
+    });
+
+    it('does not poll while the system is inactive and resumes when active', async () => {
+      vi.useFakeTimers();
+      try {
+        usePowerStateStore.setState({ isActive: false });
+        useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+        getAllNotificationsMock.mockResolvedValue(mockSingleAccountNotifications);
+
+        renderNotificationsHook();
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(0);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(1);
+
+        act(() => {
+          usePowerStateStore.setState({ isActive: true });
+        });
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(Constants.DEFAULT_FETCH_NOTIFICATIONS_INTERVAL_MS);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+      } finally {
+        usePowerStateStore.setState({ isActive: true });
+        vi.useRealTimers();
+      }
+    });
+
+    it('deduplicates duplicate wake events while a refetch is in flight', async () => {
+      useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+      getAllNotificationsMock.mockResolvedValueOnce(mockSingleAccountNotifications);
+
+      renderNotificationsHook();
+      await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(1));
+
+      let resolveRefetch: (value: AccountNotifications[]) => void = () => {};
+      getAllNotificationsMock.mockReturnValueOnce(
+        new Promise((resolve) => {
+          resolveRefetch = resolve;
+        }),
+      );
+
+      const wakeCallback = vi.mocked(window.gitify.onSystemWake).mock.calls[0][0];
+      act(() => {
+        wakeCallback();
+        wakeCallback();
+      });
+
+      expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+
+      await act(async () => {
+        resolveRefetch(mockSingleAccountNotifications);
+        await Promise.resolve();
+      });
     });
 
     it('only the side-effects host registers a wake listener', async () => {

@@ -4,6 +4,9 @@ type LogLevel = 'info' | 'warn' | 'error';
 
 /**
  * Safely coerce an unknown caught value into an Error instance.
+ *
+ * @param err - The caught value to coerce.
+ * @returns An `Error` carrying the value's message.
  */
 export function toError(err: unknown): Error {
   return err instanceof Error ? err : new Error(String(err));

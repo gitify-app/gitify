@@ -155,7 +155,7 @@ export function NotificationList({
 
             {item.kind === 'repository' && (
               <RepositoryHeader
-                isAnimatingExit={animatingRepositories.has(item.repoKey)}
+                isAnimatingExit={item.isAnimatingExit}
                 isCollapsed={collapsedRepositories.has(item.repoKey)}
                 onAnimateExit={(animate) =>
                   setRepositoryAnimatingExit(item.repoKey, item.notifications, animate)

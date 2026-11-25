@@ -3,6 +3,8 @@
 # Docs: https://gh.io/actions-lockfile
 version: 'v0.0.3'
 workflows:
+    '.github/workflows/apple-notarization-readiness.yml':
+        - 'actions/checkout@v7.0.1'
     '.github/workflows/build.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/upload-artifact@v7.0.2'
@@ -24,15 +26,15 @@ workflows:
         - 'actions/checkout@v7.0.1'
         - 'actions/download-artifact@v8.0.2'
         - 'actions/upload-artifact@v7.0.2'
-        - 'sonarsource/sonarqube-scan-action@v8.4.0'
+        - 'sonarsource/sonarqube-scan-action@v8.5.1'
         - 'voidzero-dev/setup-vp@v1.22.0'
     '.github/workflows/triage.yml':
-        - 'amannn/action-semantic-pull-request@v6.1.1'
+        - 'amannn/action-semantic-pull-request@v6.1.4'
         - 'fuxingloh/multi-labeler@v5.0.0'
     '.github/workflows/website.yml': []
     '.github/workflows/zizmor.yml':
         - 'actions/checkout@v7.0.1'
-        - 'zizmorcore/zizmor-action@v0.8.0'
+        - 'zizmorcore/zizmor-action@v0.9.2'
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'
@@ -54,9 +56,9 @@ dependencies:
         commit: 'sha1-cf430e030ddbb5b0abf93d22962f4752f3646cd9'
         owner_id: 44036562
         repo_id: 192625955
-    'amannn/action-semantic-pull-request@v6.1.1':
-        ref: 'v6.1.1'
-        commit: 'sha1-48f256284bd46cdaab1048c3721360e808335d50'
+    'amannn/action-semantic-pull-request@v6.1.4':
+        ref: 'v6.1.4'
+        commit: 'sha1-66e72920af32222769c386d81f89656ebcb6d6d5'
         owner_id: 4038316
         repo_id: 220418983
     'fuxingloh/multi-labeler@v5.0.0':
@@ -64,9 +66,9 @@ dependencies:
         commit: 'sha1-bcd50af464202999e57f556b4aefcf05a34abf85'
         owner_id: 4266087
         repo_id: 329257641
-    'github/codeql-action@24c54180a607b1449ed407dd24f251e4e9147c8d':
-        ref: 'v4.38.3'
-        commit: 'sha1-24c54180a607b1449ed407dd24f251e4e9147c8d'
+    'github/codeql-action@33d7b85da1a04171e211befe2c739303b9a4c066':
+        ref: 'v4.39.3'
+        commit: 'sha1-33d7b85da1a04171e211befe2c739303b9a4c066'
         owner_id: 9919
         repo_id: 259445878
     'googleapis/release-please-action@v5.0.0':
@@ -74,9 +76,9 @@ dependencies:
         commit: 'sha1-45996ed1f6d02564a971a2fa1b5860e934307cf7'
         owner_id: 16785467
         repo_id: 262236530
-    'sonarsource/sonarqube-scan-action@v8.4.0':
-        ref: 'v8.4.0'
-        commit: 'sha1-4d1dc0c91ee400dcf8a6dddf2f705ac36542e304'
+    'sonarsource/sonarqube-scan-action@v8.5.1':
+        ref: 'v8.5.1'
+        commit: 'sha1-70bad232163b09d998ea0707ee80c0ec80798c16'
         owner_id: 545988
         repo_id: 366408409
     'voidzero-dev/setup-vp@v1.22.0':
@@ -84,10 +86,10 @@ dependencies:
         commit: 'sha1-cab1ab9eaff52d4857875f4f2c016e36af8f2c76'
         owner_id: 149750581
         repo_id: 1133264797
-    'zizmorcore/zizmor-action@v0.8.0':
-        ref: 'v0.8.0'
-        commit: 'sha1-53290badfa369cb0bf7ad16342cb62c2fa47ac7b'
+    'zizmorcore/zizmor-action@v0.9.2':
+        ref: 'v0.9.2'
+        commit: 'sha1-1b4550e929643b8b26a62303c6bd64814271a4f1'
         owner_id: 210636713
         repo_id: 985558803
         uses:
-            - 'github/codeql-action@24c54180a607b1449ed407dd24f251e4e9147c8d'
+            - 'github/codeql-action@33d7b85da1a04171e211befe2c739303b9a4c066'

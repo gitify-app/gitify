@@ -37,6 +37,7 @@ export const Constants = {
     ACCOUNTS: 'gitify-accounts',
     FILTERS: 'gitify-filters',
     SETTINGS: 'gitify-settings',
+    LANGUAGE: 'gitify-language',
   },
 
   // GitHub OAuth Scopes — each tier is an ordered array of OAUTH_SCOPE objects.
@@ -94,14 +95,14 @@ export const Constants = {
 
   // GraphQL Argument Defaults
   GRAPHQL_ARGS: {
-    FIRST_LABELS: 100,
-    FIRST_CLOSING_ISSUES: 100,
-    FIRST_ISSUE_FIELD_VALUES: 100,
+    FIRST_LABELS: 25,
+    FIRST_CLOSING_ISSUES: 10,
+    FIRST_ISSUE_FIELD_VALUES: 25,
     LAST_COMMENTS: 1,
-    LAST_THREADED_COMMENTS: 10,
-    LAST_REPLIES: 10,
-    LAST_REVIEWS: 100,
-    FIRST_REVIEW_THREADS: 100,
+    LAST_THREADED_COMMENTS: 5,
+    LAST_REPLIES: 5,
+    LAST_REVIEWS: 25,
+    FIRST_REVIEW_THREADS: 25,
   },
 
   // GitHub Docs

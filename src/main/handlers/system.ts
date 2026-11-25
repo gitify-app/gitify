@@ -67,6 +67,19 @@ export function registerSystemHandlers(mb: Menubar): void {
   });
 
   /**
+   * Handle system suspend and screen lock: pause polling until wake/unlock.
+   */
+  powerMonitor.on('suspend', () => {
+    sendRendererEvent(mb, EVENTS.SYSTEM_SLEEP);
+    logInfo('power-monitor', 'suspend event triggered, pausing polling');
+  });
+
+  powerMonitor.on('lock-screen', () => {
+    sendRendererEvent(mb, EVENTS.SYSTEM_SLEEP);
+    logInfo('power-monitor', 'lock-screen event triggered, pausing polling');
+  });
+
+  /**
    * Open the given URL in the user's default browser, with an option to activate the app.
    */
   onMainEvent(EVENTS.OPEN_EXTERNAL, (_, { url, activate }) =>
@@ -79,11 +92,11 @@ export function registerSystemHandlers(mb: Menubar): void {
    * Skipped in development: the unsigned dev Electron binary cannot register as a
    * macOS login item, so calling this would only emit a Chromium error log.
    */
-  onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, settings) => {
+  onMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, (_, { openAtLogin }) => {
     if (isDevMode()) {
       return;
     }
-    app.setLoginItemSettings(settings);
+    app.setLoginItemSettings({ openAtLogin });
   });
 
   /**

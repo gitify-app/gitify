@@ -1,7 +1,10 @@
 import type {
+  IGitHubCliAccountsResult,
+  IGitHubCliTokenRequest,
   IGitHubCliTokenResult,
   ISafeStorageDecryptResult,
   TrayIconAppearance,
+  UpdatePreferences,
 } from '../../../shared/events';
 
 import useSettingsStore from '../../stores/useSettingsStore';
@@ -57,11 +60,23 @@ export async function decryptValue(value: string): Promise<ISafeStorageDecryptRe
 /**
  * Asks the locally installed GitHub CLI for the token it holds for a host.
  *
- * @param hostname - The host to read the token for.
+ * @param request - The host to read a token for, and the identity to address.
  * @returns The CLI token, or a classified failure with an optional detail line.
  */
-export async function readGitHubCliToken(hostname: string): Promise<IGitHubCliTokenResult> {
-  return await window.gitify.githubCliToken(hostname);
+export async function readGitHubCliToken(
+  request: IGitHubCliTokenRequest,
+): Promise<IGitHubCliTokenResult> {
+  return await window.gitify.githubCliToken(request);
+}
+
+/**
+ * Lists the identities the locally installed GitHub CLI holds for a host.
+ *
+ * @param hostname - The host to list identities for.
+ * @returns The usable identities, or a classified failure.
+ */
+export async function listGitHubCliAccounts(hostname: string): Promise<IGitHubCliAccountsResult> {
+  return await window.gitify.githubCliAccounts(hostname);
 }
 
 /**
@@ -103,13 +118,8 @@ export function setKeepWindowOnBlur(value: boolean): void {
   window.gitify.setKeepWindowOnBlur(value);
 }
 
-/**
- * Enables or suppresses automatic update notifications.
- *
- * @param value - `true` to show update notifications, `false` to suppress them.
- */
-export function setShowUpdateNotifications(value: boolean): void {
-  window.gitify.setShowUpdateNotifications(value);
+export function setUpdatePreferences(value: UpdatePreferences): void {
+  window.gitify.setUpdatePreferences(value);
 }
 
 /**

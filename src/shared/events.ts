@@ -5,7 +5,6 @@ const P = 'gitify:' as const;
  * Each value is prefixed with `gitify:` to prevent collisions.
  */
 export const EVENTS = {
-  AUTH_CALLBACK: `${P}auth-callback`,
   QUIT: `${P}quit`,
   WINDOW_SHOW: `${P}window-show`,
   WINDOW_HIDE: `${P}window-hide`,
@@ -17,18 +16,28 @@ export const EVENTS = {
   UPDATE_KEYBOARD_SHORTCUT: `${P}update-keyboard-shortcut`,
   UPDATE_AUTO_LAUNCH: `${P}update-auto-launch`,
   UPDATE_KEEP_WINDOW_ON_BLUR: `${P}update-keep-window-on-blur`,
-  UPDATE_SHOW_UPDATE_NOTIFICATIONS: `${P}update-show-update-notifications`,
+  UPDATE_PREFERENCES: `${P}update-preferences`,
+  UPDATE_MANAGER: `${P}update-manager`,
   UPDATE_USE_X11_BACKEND: `${P}update-use-x11-backend`,
   SET_WINDOW_VIBRANCY: `${P}set-window-vibrancy`,
   SET_NATIVE_THEME: `${P}set-native-theme`,
   SAFE_STORAGE_ENCRYPT: `${P}safe-storage-encrypt`,
   SAFE_STORAGE_DECRYPT: `${P}safe-storage-decrypt`,
   GITHUB_CLI_TOKEN: `${P}github-cli-token`,
+  GITHUB_CLI_ACCOUNTS: `${P}github-cli-accounts`,
   NOTIFICATION_SOUND_PATH: `${P}notification-sound-path`,
   OPEN_EXTERNAL: `${P}open-external`,
   RESET_APP: `${P}reset-app`,
   TWEMOJI_DIRECTORY: `${P}twemoji-directory`,
   SYSTEM_WAKE: `${P}system-wake`,
+  SYSTEM_SLEEP: `${P}system-sleep`,
+  NATIVE_NOTIFICATION_SHOW: `${P}native-notification-show`,
+  NATIVE_NOTIFICATION_REMOVE: `${P}native-notification-remove`,
+  NATIVE_NOTIFICATION_REMOVE_ALL: `${P}native-notification-remove-all`,
+  NATIVE_NOTIFICATION_READY: `${P}native-notification-ready`,
+  NATIVE_NOTIFICATION_ACTION: `${P}native-notification-action`,
+  NATIVE_NOTIFICATION_CLICK: `${P}native-notification-click`,
+  ZOOM: `${P}zoom`,
 } as const;
 
 /** Union type of all valid IPC event name strings. */
@@ -37,7 +46,27 @@ export type EventType = (typeof EVENTS)[keyof typeof EVENTS];
 /** Native appearance source, mirrors Electron's `nativeTheme.themeSource`. */
 export type NativeThemeSource = 'system' | 'light' | 'dark';
 
+export type AutomaticUpdates = 'default' | 'enabled' | 'disabled';
+
+export interface UpdatePreferences {
+  automaticUpdates: AutomaticUpdates;
+  showUpdateNotifications: boolean;
+}
+
+/**
+ * A package manager that owns updates for an installation. `packager` means a
+ * package opted in through the resource marker or environment variable.
+ */
+export type UpdateManager = 'Scoop' | 'Flatpak' | 'Snap' | 'packager';
+
+export function isAutomaticUpdates(value: unknown): value is AutomaticUpdates {
+  return value === 'default' || value === 'enabled' || value === 'disabled';
+}
+
 export type TrayIconAppearance = 'auto' | 'light' | 'dark';
+
+/** Zoom direction triggered by an application keyboard shortcut. */
+export type ZoomAction = 'in' | 'out' | 'reset';
 
 export function isTrayIconAppearance(value: unknown): value is TrayIconAppearance {
   return value === 'auto' || value === 'light' || value === 'dark';
@@ -46,7 +75,6 @@ export function isTrayIconAppearance(value: unknown): value is TrayIconAppearanc
 /** Payload for the `UPDATE_AUTO_LAUNCH` event. */
 export interface IAutoLaunch {
   openAtLogin: boolean;
-  openAsHidden: boolean;
 }
 
 /** Payload for the `UPDATE_KEYBOARD_SHORTCUT` event. */
@@ -100,6 +128,74 @@ export type IGitHubCliTokenResult =
   | { token: string; error?: never; detail?: never }
   | { token?: never; error: GitHubCliTokenError; detail?: string };
 
+/**
+ * An identity the GitHub CLI can resolve a credential for: a stored account
+ * addressed by login, or the credential supplied through the CLI's environment.
+ */
+export type GitHubCliIdentity = { kind: 'account'; login: string } | { kind: 'environment' };
+
+/**
+ * One identity the GitHub CLI reports for a host. `active` mirrors the CLI's
+ * own notion of the account it currently treats as active.
+ */
+export interface IGitHubCliAccount {
+  identity: GitHubCliIdentity;
+  active: boolean;
+}
+
+/** Why the GitHub CLI could not list its identities for a host. */
+export type GitHubCliAccountsError =
+  | 'GH_NOT_FOUND'
+  | 'GH_NOT_AUTHENTICATED'
+  | 'GH_ACCOUNTS_UNSUPPORTED'
+  | 'GH_TIMED_OUT'
+  | 'GH_FAILED';
+
+/**
+ * Result of listing the identities the GitHub CLI holds for a host. An empty
+ * list is a normal answer, not an error; `detail` carries the CLI's own first
+ * line of stderr when it has one.
+ */
+export type IGitHubCliAccountsResult =
+  | { accounts: IGitHubCliAccount[]; error?: never; detail?: never }
+  | { accounts?: never; error: GitHubCliAccountsError; detail?: string };
+
+/**
+ * Request for one of the GitHub CLI's credentials. Omitting `identity` asks for
+ * the CLI's active account, which is how pre-pinning accounts keep working.
+ */
+export interface IGitHubCliTokenRequest {
+  hostname: string;
+  identity?: GitHubCliIdentity;
+}
+
+/** A structured request to publish an operating-system notification. */
+export interface INativeNotificationPayload {
+  /** Short, opaque identity for this notification. */
+  id: string;
+  title: string;
+  /** macOS subtitle. Other platforms append it to the body. */
+  subtitle?: string;
+  body: string;
+  /** Translated label for the single Mark as read action, when offered. */
+  actionLabel?: string;
+}
+
+/** Payload for removing published notifications. */
+export interface INativeNotificationRemovePayload {
+  ids: string[];
+}
+
+/** An action was activated on an operating-system notification. */
+export interface INativeNotificationActionEvent {
+  id: string;
+}
+
+/** A notification body click. An empty identity is a generic app activation. */
+export interface INativeNotificationClickEvent {
+  id: string;
+}
+
 /** Shape of a single event contract: a request payload and a response payload. */
 type Contract = { request: unknown; response: unknown };
 
@@ -117,7 +213,6 @@ type AssertEventCoverage<T extends Record<EventType, Contract>> = T;
  * - For events with no payload, `request` is `undefined`.
  */
 export type EventContracts = AssertEventCoverage<{
-  [EVENTS.AUTH_CALLBACK]: { request: string; response: undefined };
   [EVENTS.QUIT]: { request: undefined; response: undefined };
   [EVENTS.WINDOW_SHOW]: { request: undefined; response: undefined };
   [EVENTS.WINDOW_HIDE]: { request: undefined; response: undefined };
@@ -135,8 +230,9 @@ export type EventContracts = AssertEventCoverage<{
     request: boolean;
     response: undefined;
   };
-  [EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS]: {
-    request: boolean;
+  [EVENTS.UPDATE_MANAGER]: { request: undefined; response: UpdateManager | null };
+  [EVENTS.UPDATE_PREFERENCES]: {
+    request: UpdatePreferences;
     response: undefined;
   };
   [EVENTS.UPDATE_USE_X11_BACKEND]: {
@@ -151,14 +247,38 @@ export type EventContracts = AssertEventCoverage<{
     response: ISafeStorageDecryptResult;
   };
   [EVENTS.GITHUB_CLI_TOKEN]: {
-    request: string;
+    request: IGitHubCliTokenRequest;
     response: IGitHubCliTokenResult;
+  };
+  [EVENTS.GITHUB_CLI_ACCOUNTS]: {
+    request: string;
+    response: IGitHubCliAccountsResult;
   };
   [EVENTS.NOTIFICATION_SOUND_PATH]: { request: undefined; response: string };
   [EVENTS.OPEN_EXTERNAL]: { request: IOpenExternal; response: undefined };
   [EVENTS.RESET_APP]: { request: undefined; response: undefined };
   [EVENTS.TWEMOJI_DIRECTORY]: { request: undefined; response: string };
   [EVENTS.SYSTEM_WAKE]: { request: undefined; response: undefined };
+  [EVENTS.SYSTEM_SLEEP]: { request: undefined; response: undefined };
+  [EVENTS.NATIVE_NOTIFICATION_SHOW]: {
+    request: INativeNotificationPayload;
+    response: undefined;
+  };
+  [EVENTS.NATIVE_NOTIFICATION_REMOVE]: {
+    request: INativeNotificationRemovePayload;
+    response: undefined;
+  };
+  [EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL]: { request: undefined; response: undefined };
+  [EVENTS.NATIVE_NOTIFICATION_READY]: { request: undefined; response: undefined };
+  [EVENTS.NATIVE_NOTIFICATION_ACTION]: {
+    request: INativeNotificationActionEvent;
+    response: undefined;
+  };
+  [EVENTS.NATIVE_NOTIFICATION_CLICK]: {
+    request: INativeNotificationClickEvent;
+    response: undefined;
+  };
+  [EVENTS.ZOOM]: { request: ZoomAction; response: undefined };
 }>;
 
 /** Request payload type for a given event. */

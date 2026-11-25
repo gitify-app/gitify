@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import type { ReactElement } from 'react';
-import { type InitialEntry, MemoryRouter } from 'react-router-dom';
+import { type InitialEntry, MemoryRouter } from 'react-router';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -47,7 +47,6 @@ const LOGIN_KEYS = [
   'loginWithDeviceFlowPoll',
   'loginWithDeviceFlowComplete',
   'loginWithCli',
-  'loginWithOAuthApp',
   'loginWithPersonalAccessToken',
   'logoutFromAccount',
 ] as const;

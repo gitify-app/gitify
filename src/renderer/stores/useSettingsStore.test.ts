@@ -118,6 +118,38 @@ describe('renderer/stores/useSettingsStore.ts', () => {
     });
   });
 
+  describe('automatic update persistence', () => {
+    it.each(['enabled', 'disabled', 'default'] as const)(
+      'restores the explicit %s preference',
+      async (automaticUpdates) => {
+        act(() => {
+          useSettingsStore.getState().updateSetting('automaticUpdates', automaticUpdates);
+        });
+        const saved = localStorage.getItem(Constants.STORAGE.SETTINGS);
+        act(() => {
+          useSettingsStore.getState().reset();
+        });
+        localStorage.setItem(Constants.STORAGE.SETTINGS, saved ?? '');
+        await act(async () => {
+          await useSettingsStore.persist.rehydrate();
+        });
+        expect(useSettingsStore.getState().automaticUpdates).toBe(automaticUpdates);
+      },
+    );
+
+    it('uses installation detection for existing settings without an update preference', async () => {
+      localStorage.setItem(
+        Constants.STORAGE.SETTINGS,
+        JSON.stringify({ state: { showUpdateNotifications: false }, version: 1 }),
+      );
+      await act(async () => {
+        await useSettingsStore.persist.rehydrate();
+      });
+      expect(useSettingsStore.getState().automaticUpdates).toBe('default');
+      expect(useSettingsStore.getState().showUpdateNotifications).toBe(false);
+    });
+  });
+
   describe('Design language (additive migration)', () => {
     afterEach(() => {
       localStorage.removeItem(Constants.STORAGE.SETTINGS);

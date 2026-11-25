@@ -16,8 +16,11 @@ import {
 } from '../../../../types';
 
 import * as apiClient from '../client';
-import type { FetchDiscussionByNumberQuery } from '../graphql/generated/graphql';
-import { discussionHandler } from './discussion';
+import type {
+  DiscussionCommentFieldsFragment,
+  FetchDiscussionByNumberQuery,
+} from '../graphql/generated/graphql';
+import { discussionHandler, getClosestDiscussionCommentOrReply } from './discussion';
 
 vi.mock('../client', async () => {
   const actual = await vi.importActual<typeof import('../client')>('../client');
@@ -153,6 +156,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
     it('discussion with labels', async () => {
       const mockDiscussion = mockDiscussionResponseNode({ isAnswered: true });
       mockDiscussion.labels = {
+        totalCount: 1,
         nodes: [
           {
             name: 'enhancement',
@@ -186,6 +190,7 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         },
         commentCount: 0,
         labels: [{ name: 'enhancement', color: '0e8a16' }],
+        labelCount: 1,
         htmlUrl: 'https://github.com/gitify-app/notifications-test/discussions/123' as Link,
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
@@ -318,6 +323,34 @@ describe('renderer/utils/notifications/handlers/discussion.ts', () => {
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+  });
+
+  describe('getClosestDiscussionCommentOrReply', () => {
+    it('selects the closest activity from a bounded five-comment list', () => {
+      const comments = Array.from({ length: 5 }, (_, commentIndex) => ({
+        createdAt: `2024-01-0${commentIndex + 1}T00:00:00Z`,
+        url: `https://github.com/gitify-app/notifications-test/discussions/123#comment-${commentIndex}` as Link,
+        replies: {
+          totalCount: 5,
+          nodes: Array.from({ length: 5 }, (_, replyIndex) => ({
+            createdAt: `2024-01-0${commentIndex + 1}T0${replyIndex}:00:00Z`,
+            url: `https://github.com/gitify-app/notifications-test/discussions/123#comment-${commentIndex}-reply-${replyIndex}` as Link,
+          })),
+        },
+      })) as unknown as DiscussionCommentFieldsFragment[];
+
+      const result = getClosestDiscussionCommentOrReply(
+        {
+          ...mockPartialGitifyNotification({}),
+          updatedAt: '2024-01-03T03:00:00Z',
+        } as GitifyNotification,
+        comments,
+      );
+
+      expect(result?.url).toBe(
+        'https://github.com/gitify-app/notifications-test/discussions/123#comment-2-reply-3',
+      );
     });
   });
 

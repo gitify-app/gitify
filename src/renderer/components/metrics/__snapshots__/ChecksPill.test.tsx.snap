@@ -41,7 +41,7 @@ exports[`renderer/components/metrics/ChecksPill.tsx > renders passing checks 1`]
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           50/50

@@ -139,7 +139,7 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
       tree.getByText('#456'),
       tree.getByText('2/5'),
       tree.getByText('9/10'),
-      tree.getByText('3'),
+      tree.getByRole('button', { name: '3 comments' }),
     ];
 
     for (let i = 1; i < ordered.length; i++) {
@@ -147,6 +147,33 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
         ordered[i - 1].compareDocumentPosition(ordered[i]) & Node.DOCUMENT_POSITION_FOLLOWING,
       ).toBeTruthy();
     }
+  });
+
+  it('renders stacked, linked, milestone and reaction metrics', () => {
+    const notification = {
+      ...mockGitifyNotification,
+      subject: {
+        ...mockGitifyNotification.subject,
+        isStacked: true,
+        stackPosition: 1,
+        stackDepth: 3,
+        linkedIssues: [
+          { number: 42, url: 'https://github.com/gitify-app/gitify/issues/42' as Link },
+        ],
+        milestone: { title: 'Milestone 1', state: 'OPEN' as const },
+        reactionsCount: 2,
+        reactionGroups: [{ content: 'THUMBS_UP' as const, reactors: { totalCount: 2 } }],
+      },
+    };
+
+    const tree = renderWithProviders(<MetricGroup notification={notification} />, {
+      settings: { ...mockSettings, showPills: true },
+    });
+
+    expect(tree.getByRole('button', { name: 'Stacked pull request: 1 of 3' })).toBeInTheDocument();
+    expect(tree.getByRole('button', { name: /Linked issue/ })).toBeInTheDocument();
+    expect(tree.getByRole('button', { name: 'Milestone: Milestone 1 (open)' })).toBeInTheDocument();
+    expect(tree.getByRole('button', { name: '2 reactions: 👍 2' })).toBeInTheDocument();
   });
 
   it('hides metrics when pills are disabled', () => {

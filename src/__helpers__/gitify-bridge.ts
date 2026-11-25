@@ -21,6 +21,9 @@ export function createGitifyBridgeApi(platform: TestPlatform = 'macos'): Window[
     decryptValue: vi.fn().mockResolvedValue({ token: 'decrypted' }),
     encryptValue: vi.fn().mockResolvedValue('encrypted'),
     githubCliToken: vi.fn().mockResolvedValue({ token: 'gh-cli-token' }),
+    githubCliAccounts: vi.fn().mockResolvedValue({
+      accounts: [{ identity: { kind: 'account', login: 'octocat' }, active: true }],
+    }),
     setWindowVibrancy: vi.fn().mockResolvedValue(undefined),
     setNativeTheme: vi.fn().mockResolvedValue(undefined),
     platform: {
@@ -39,14 +42,23 @@ export function createGitifyBridgeApi(platform: TestPlatform = 'macos'): Window[
       useUnreadActiveIcon: vi.fn(),
     },
     notificationSoundPath: vi.fn(),
-    onAuthCallback: vi.fn(() => vi.fn()),
     onResetApp: vi.fn(() => vi.fn()),
     onSystemWake: vi.fn(() => vi.fn()),
+    onSystemSleep: vi.fn(() => vi.fn()),
+    onZoom: vi.fn(() => vi.fn()),
     setAutoLaunch: vi.fn(),
     setKeepWindowOnBlur: vi.fn(),
-    setShowUpdateNotifications: vi.fn(),
+    setUpdatePreferences: vi.fn(),
+    getUpdateManager: vi.fn().mockResolvedValue(null),
     setUseX11Backend: vi.fn(),
     applyKeyboardShortcut: vi.fn().mockResolvedValue({ success: true }),
-    raiseNativeNotification: vi.fn(),
+    nativeNotifications: {
+      show: vi.fn(),
+      remove: vi.fn(),
+      removeAll: vi.fn(),
+      notifyReady: vi.fn(),
+      onAction: vi.fn(() => vi.fn()),
+      onClick: vi.fn(() => vi.fn()),
+    },
   };
 }

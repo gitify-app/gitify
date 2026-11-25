@@ -1,3 +1,5 @@
+/// <reference types="vite-plugin-electron/electron-env" />
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -7,15 +9,78 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
 import electron from 'vite-plugin-electron/simple';
-import type { Plugin } from 'vite-plus';
-import { defineConfig } from 'vite-plus';
+import type { Logger, Plugin } from 'vite-plus';
+import { createLogger, defineConfig } from 'vite-plus';
 
+import { applyDevElectronBundle } from './scripts/prepare-dev-electron.mjs';
 import { Constants } from './src/renderer/constants.ts';
+
+const projectRoot = fileURLToPath(new URL('.', import.meta.url));
+
+/**
+ * Lint summary `vite-plugin-checker` emits after a run that found nothing.
+ *
+ * The plugin logs a summary after *every* lint run, clean or not, so each file
+ * save during `vp run dev` prints a line that reports nothing. Its `dev.logLevel`
+ * only filters diagnostics, not this summary, so we match the message text.
+ */
+const cleanLintSummaryPattern = /\[oxlint\] Found 0 error and 0 warning/;
+
+/**
+ * Dev-server logger that drops clean lint summaries from `vite-plugin-checker`.
+ *
+ * Diagnostics and summaries for runs that found something still pass through.
+ */
+const createDevLogger = (): Logger => {
+  const base = createLogger();
+
+  return {
+    ...base,
+    info(message, options) {
+      if (cleanLintSummaryPattern.test(message)) {
+        return;
+      }
+
+      base.info(message, options);
+    },
+  };
+};
+
+const packageJson = JSON.parse(
+  fs.readFileSync(fileURLToPath(new URL('package.json', import.meta.url)), 'utf8'),
+) as { dependencies?: Record<string, string> };
+
+/**
+ * Main-process runtime dependencies, derived from `package.json` so the list
+ * cannot drift. Kept external so electron-builder packages them from
+ * `dependencies`; the renderer and preload are bundled.
+ *
+ * `electron` is provided by the Electron runtime, not installed from
+ * `dependencies`, so it is the one external that must be listed explicitly.
+ */
+const mainProcessExternals = [
+  ...new Set(['electron', ...Object.keys(packageJson.dependencies ?? {})]),
+];
+
+/** Fail the main-process build when a runtime dependency is renderer-only. */
+const validateRuntimeDependenciesPlugin = (): Plugin => ({
+  name: 'validate-runtime-dependencies',
+  buildStart() {
+    execFileSync(
+      process.execPath,
+      [fileURLToPath(new URL('scripts/validate-runtime-dependencies.mjs', import.meta.url))],
+      { stdio: 'inherit' },
+    );
+  },
+});
+
+/** Whether `vite-plugin-electron` has an Electron child process running. */
+const isElectronRunning = (): boolean => Boolean(process.electronApp);
 
 /**
  * Vite plugin that copies static assets to disk on startup.
  * Runs in both dev and build modes so the Electron main process can resolve
- * asset file URLs without requiring a prior `pnpm build`.
+ * asset file URLs without requiring a prior `vp run build`.
  */
 const copyStaticAssetsPlugin = (): Plugin => {
   const flatten = (obj: object): string[] =>
@@ -174,19 +239,61 @@ const storeBarrelBoundaryPattern = {
     'Renderer boundary: import the specific store module instead of the `stores` barrel (see ARCHITECTURE.md).',
 };
 
+/**
+ * Prepare the branded macOS Electron bundle once per dev server, before either
+ * Electron entry's `onstart` can spawn Electron (see
+ * scripts/prepare-dev-electron.mjs).
+ */
+const devElectronBundlePlugin = (): Plugin => ({
+  name: 'dev-electron-bundle',
+  apply: 'serve',
+  configureServer() {
+    applyDevElectronBundle();
+  },
+});
+
 export default defineConfig({
+  // Keep the dev output to real problems: see `createDevLogger` above.
+  customLogger: createDevLogger(),
   plugins: [
     // only run the checker plugin in dev (not during `vite build`)
     ...(isBuild
       ? []
       : [
           checker({
-            oxlint: { lintCommand: 'oxlint', dev: { logLevel: ['error'] } },
+            // Vite's root is `src/renderer`, but the checker must run from the
+            // repository root so lints cover every process and report paths
+            // relative to the project.
+            root: projectRoot,
+            // `vp lint` applies the `lint` config below. A bare `oxlint` binary
+            // is not installed, and it would ignore that config anyway.
+            oxlint: {
+              lintCommand: 'vp lint',
+              // The checker watches its root, which would include output that
+              // dev rewrites constantly: `build/` on every Electron rebuild and
+              // the GraphQL generated modules on every codegen run. Neither is
+              // linted, so those runs only burn CPU. The startup run still lints
+              // the whole project, so new root-level files only need adding here
+              // to be re-linted during a session.
+              watchPath: [
+                'src',
+                'scripts',
+                'codegen.ts',
+                'electron-builder.js',
+                'graphql.config.ts',
+                'i18next.config.ts',
+                'tailwind.config.mts',
+                'vite.config.mts',
+                'vitest.config.mts',
+              ],
+              dev: { logLevel: ['error'] },
+            },
           }),
         ]),
     reactDevToolsPlugin(),
     react(),
     tailwindcss(),
+    devElectronBundlePlugin(),
     electron({
       main: {
         entry: fileURLToPath(new URL('src/main/index.ts', import.meta.url)),
@@ -194,31 +301,39 @@ export default defineConfig({
           // vite-plugin-electron v1 starts Electron with `cwd: server.config.root`.
           // Our Vite root is `src/renderer`, so we must override `cwd` back to the
           // repository root or Electron will try to boot from `src/renderer`.
-          await startup(undefined, {
-            cwd: fileURLToPath(new URL('.', import.meta.url)),
-          });
+          await startup(undefined, { cwd: projectRoot });
         },
         vite: {
           // The outer Vite config sets root:'src/renderer', so we must
           // explicitly tell the main-process sub-build where to find .env files.
-          envDir: fileURLToPath(new URL('.', import.meta.url)),
+          envDir: projectRoot,
+          plugins: [validateRuntimeDependenciesPlugin()],
           build: {
             outDir: fileURLToPath(new URL('build', import.meta.url)),
             rolldownOptions: {
               output: { entryFileNames: 'main.js' },
-              external: [
-                'electron',
-                // TODO - how many of these are truly needed?
-                'electron-log',
-                'electron-menubar',
-                'electron-updater',
-              ],
+              external: mainProcessExternals,
             },
           },
         },
       },
       preload: {
         input: fileURLToPath(new URL('src/preload/index.ts', import.meta.url)),
+        onstart: async ({ startup, reload }) => {
+          // vite-plugin-electron runs the *preload* entry's `onstart` for the
+          // first startup round, because its build finishes last and trips the
+          // shared entry counter. The default handler (`reload`) then starts
+          // Electron from `server.config.root` (`src/renderer`), which has no
+          // package.json, so the app fails with "Unable to find Electron app".
+          // Start from the repository root instead; once Electron is running,
+          // hot-reload renderer state as the default handler would.
+          if (isElectronRunning()) {
+            reload();
+            return;
+          }
+
+          await startup(undefined, { cwd: projectRoot });
+        },
         vite: {
           build: {
             outDir: fileURLToPath(new URL('build', import.meta.url)),
@@ -247,10 +362,34 @@ export default defineConfig({
         // Development Keys - See CONTRIBUTING.md
         'process.env.OAUTH_CLIENT_ID': JSON.stringify('Ov23liQIkFs5ehQLNzHF'),
       },
+  // `vp run` accepts a single task, so each group below runs its members as
+  // independent `dependsOn` entries, which start concurrently. The group's own
+  // command is a no-op that runs only after every member succeeds.
+  run: {
+    tasks: {
+      'dev:all': {
+        command: 'node -e ""',
+        cache: false,
+        dependsOn: ['dev:renderer', 'codegen:watch'],
+      },
+      'dev:renderer': { command: 'vp dev', cache: false },
+      'devtools:all': {
+        command: 'node -e ""',
+        cache: false,
+        dependsOn: ['dev:all', 'devtools:react'],
+      },
+      'devtools:react': { command: 'react-devtools', cache: false },
+      'i18n:check:all': {
+        command: 'node -e ""',
+        cache: false,
+        dependsOn: ['i18n:check:sync', 'i18n:check:values', 'i18n:check:defaults'],
+      },
+    },
+  },
   lint: {
-    plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import', 'vitest'],
+    plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import', 'vitest', 'jsdoc'],
     // Enable the type-aware path so `vp check` runs TypeScript type checks
-    // natively (via the TS Go toolchain / tsgolint). `typeCheck` requires
+    // natively through Vite+'s bundled type checker. `typeCheck` requires
     // `typeAware`; enabling both also turns on the type-aware lint rules.
     options: {
       typeAware: true,
@@ -296,6 +435,45 @@ export default defineConfig({
       'unicorn/prefer-number-properties': 'error',
     },
     overrides: [
+      {
+        // TSDoc conventions apply to the TypeScript sources. The JavaScript
+        // build scripts use JSDoc for type hints and are intentionally out of
+        // scope for the TypeScript-specific rules.
+        files: ['src/**/*.ts', 'src/**/*.tsx'],
+        rules: {
+          'jsdoc/check-tag-names': ['error', { typed: true }],
+          'jsdoc/no-blank-blocks': 'error',
+          'jsdoc/require-param-name': 'error',
+          'jsdoc/require-param-description': 'error',
+          'jsdoc/require-returns-description': 'error',
+        },
+      },
+      {
+        // Contract-heavy scopes: every documented function parameter must have
+        // a matching @param tag.
+        files: ['src/preload/**/*.ts', 'src/shared/**/*.ts'],
+        excludeFiles: TEST_FILES,
+        rules: {
+          'jsdoc/require-param': 'error',
+        },
+      },
+      {
+        // Shared utilities have block-bodied functions, so the return rule does
+        // not produce false positives on void concise arrows here.
+        files: ['src/shared/**/*.ts'],
+        excludeFiles: TEST_FILES,
+        rules: {
+          'jsdoc/require-returns': 'error',
+        },
+      },
+      {
+        // Next clean scope after preload/shared.
+        files: ['src/renderer/utils/auth/**/*.ts'],
+        excludeFiles: TEST_FILES,
+        rules: {
+          'jsdoc/require-param': 'error',
+        },
+      },
       {
         // Renderer boundary: every renderer module reaches the main process
         // through the preload bridge (`window.gitify`). Importing main/preload
@@ -612,6 +790,9 @@ export default defineConfig({
       'dist/**',
       'coverage/**',
       '.context/**',
+      // Generated by `openspec update`; keep it exactly as emitted.
+      '.opencode/commands/opsx-*',
+      '.opencode/skills/openspec-*/**',
       'index.html',
       // Autogenerated by release-please; its formatting is not ours to enforce.
       'CHANGELOG.md',

@@ -9,8 +9,6 @@ import {
   mockPartialGitifyNotification,
 } from '../../../__mocks__/notifications-mocks';
 
-import { Constants } from '../../../constants';
-
 import { useSettingsStore } from '../../../stores';
 
 import type { Link } from '../../../types';
@@ -20,6 +18,7 @@ import {
   computeRefetchIntervalMs,
 } from '../../notifications/pollInterval';
 import {
+  GITHUB_API_PAGE_SIZE,
   fetchAuthenticatedUserDetails,
   fetchDiscussionByNumber,
   fetchIssueByNumber,
@@ -145,7 +144,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: true,
         all: false,
-        per_page: 100,
+        per_page: GITHUB_API_PAGE_SIZE,
         headers: {
           'Cache-Control': 'no-cache',
         },
@@ -165,7 +164,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: false,
         all: false,
-        per_page: 100,
+        per_page: GITHUB_API_PAGE_SIZE,
         headers: {
           'Cache-Control': 'no-cache',
         },
@@ -185,7 +184,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(mockOctokit.rest.activity.listNotificationsForAuthenticatedUser).toHaveBeenCalledWith({
         participating: false,
         all: true,
-        per_page: 100,
+        per_page: GITHUB_API_PAGE_SIZE,
         headers: {
           'Cache-Control': 'no-cache',
         },
@@ -207,7 +206,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
         {
           participating: false,
           all: false,
-          per_page: 100,
+          per_page: GITHUB_API_PAGE_SIZE,
           headers: {
             'Cache-Control': 'no-cache',
           },
@@ -336,9 +335,9 @@ describe('renderer/utils/forges/github/client.ts', () => {
       owner: mockNotification.repository.owner.login,
       name: mockNotification.repository.name,
       number: 123,
-      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-      lastThreadedComments: Constants.GRAPHQL_ARGS.LAST_THREADED_COMMENTS,
-      lastReplies: Constants.GRAPHQL_ARGS.LAST_REPLIES,
+      firstLabels: 25,
+      lastThreadedComments: 5,
+      lastReplies: 5,
     });
   });
 
@@ -386,9 +385,9 @@ describe('renderer/utils/forges/github/client.ts', () => {
         owner: mockNotification.repository.owner.login,
         name: mockNotification.repository.name,
         number: 123,
-        firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-        firstIssueFieldValues: Constants.GRAPHQL_ARGS.FIRST_ISSUE_FIELD_VALUES,
-        lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
+        firstLabels: 25,
+        firstIssueFieldValues: 25,
+        lastComments: 1,
       },
     );
 
@@ -452,11 +451,11 @@ describe('renderer/utils/forges/github/client.ts', () => {
       owner: mockNotification.repository.owner.login,
       name: mockNotification.repository.name,
       number: 123,
-      firstClosingIssues: Constants.GRAPHQL_ARGS.FIRST_CLOSING_ISSUES,
-      firstLabels: Constants.GRAPHQL_ARGS.FIRST_LABELS,
-      lastComments: Constants.GRAPHQL_ARGS.LAST_COMMENTS,
-      lastReviews: Constants.GRAPHQL_ARGS.LAST_REVIEWS,
-      firstReviewThreads: Constants.GRAPHQL_ARGS.FIRST_REVIEW_THREADS,
+      firstClosingIssues: 10,
+      firstLabels: 25,
+      lastComments: 1,
+      lastReviews: 25,
+      firstReviewThreads: 25,
     });
   });
 
@@ -524,10 +523,10 @@ describe('renderer/utils/forges/github/client.ts', () => {
         mockGitHubCloudGitifyNotifications[0].account,
         expect.stringMatching(/node0|node1/),
         {
-          firstClosingIssues: 100,
-          firstIssueFieldValues: 100,
-          firstLabels: 100,
-          firstReviewThreads: 100,
+          firstClosingIssues: 10,
+          firstIssueFieldValues: 25,
+          firstLabels: 25,
+          firstReviewThreads: 25,
           isDiscussionNotification0: false,
           isDiscussionNotification1: false,
           isIssueNotification0: true,
@@ -535,9 +534,9 @@ describe('renderer/utils/forges/github/client.ts', () => {
           isPullRequestNotification0: false,
           isPullRequestNotification1: false,
           lastComments: 1,
-          lastReplies: 10,
-          lastReviews: 100,
-          lastThreadedComments: 10,
+          lastReplies: 5,
+          lastReviews: 25,
+          lastThreadedComments: 5,
           name0: 'notifications-test',
           name1: 'notifications-test',
           number0: 1,

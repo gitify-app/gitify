@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 import type { ReactElement } from 'react';
-import { type InitialEntry, MemoryRouter } from 'react-router-dom';
+import { type InitialEntry, MemoryRouter } from 'react-router';
 
 import { BaseStyles } from '@primer/react';
 import { ThemeProvider } from '@primer/react/next';
@@ -30,6 +30,8 @@ export interface VisualRenderOptions {
   settings?: Partial<SettingsState>;
   filters?: Partial<FiltersStore>;
   notifications?: AccountNotifications[];
+  /** Set false for full-window states that replace the app shell (e.g. app error fallback). */
+  withChrome?: boolean;
 }
 
 /**
@@ -88,6 +90,7 @@ export function renderRoute(
     settings,
     filters,
     notifications,
+    withChrome = true,
   }: VisualRenderOptions,
 ) {
   useSettingsStore.setState({ ...settings, theme, designLanguage });
@@ -137,7 +140,7 @@ export function renderRoute(
             {/* Routes reading `location.state` (AccountScopes) get their
               account through here, so it needs stubbing too. */}
             <MemoryRouter initialEntries={withStubbedAvatars(initialEntries)}>
-              <AppLayout>{children}</AppLayout>
+              {withChrome ? <AppLayout>{children}</AppLayout> : children}
             </MemoryRouter>
           </BaseStyles>
         </ThemeProvider>

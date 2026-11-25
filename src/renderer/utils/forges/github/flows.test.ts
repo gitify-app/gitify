@@ -6,23 +6,21 @@ vi.mock('@octokit/oauth-methods', async () => {
     ...actual,
     createDeviceCode: vi.fn(),
     exchangeDeviceCode: vi.fn(),
-    exchangeWebFlowCode: vi.fn(),
   };
 });
 
-import { createDeviceCode, exchangeDeviceCode, exchangeWebFlowCode } from '@octokit/oauth-methods';
+import { createDeviceCode, exchangeDeviceCode } from '@octokit/oauth-methods';
 import { RequestError } from '@octokit/request-error';
 
 import type { MockedFunction } from 'vite-plus/test';
 
 import { Constants } from '../../../constants';
 
-import type { AuthCode, ClientID, ClientSecret, Hostname } from '../../../types';
-import type { DeviceFlowSession, LoginOAuthWebOptions } from '../../auth/types';
+import type { ClientID, Hostname } from '../../../types';
+import type { DeviceFlowSession } from '../../auth/types';
 
-import { getRecommendedScopeNames } from '../../auth/scopes';
+import { getRecommendedScopeNames } from '../../auth/scopeNames';
 import * as logger from '../../core/logger';
-import * as comms from '../../system/comms';
 import * as flows from './flows';
 
 const createDeviceCodeMock = createDeviceCode as unknown as MockedFunction<typeof createDeviceCode>;
@@ -31,327 +29,187 @@ const exchangeDeviceCodeMock = exchangeDeviceCode as unknown as MockedFunction<
   typeof exchangeDeviceCode
 >;
 
-const exchangeWebFlowCodeMock = exchangeWebFlowCode as unknown as MockedFunction<
-  typeof exchangeWebFlowCode
->;
-
 describe('renderer/utils/forges/github/flows.ts', () => {
-  vi.spyOn(logger, 'rendererLogInfo').mockImplementation(vi.fn());
   const rendererLogErrorSpy = vi.spyOn(logger, 'rendererLogError').mockImplementation(vi.fn());
-  const rendererLogWarnSpy = vi.spyOn(logger, 'rendererLogWarn').mockImplementation(vi.fn());
-  const openExternalLinkSpy = vi.spyOn(comms, 'openExternalLink').mockImplementation(vi.fn());
 
   beforeEach(() => {
     // Mock OAUTH_DEVICE_FLOW_CLIENT_ID value
     Constants.OAUTH_DEVICE_FLOW_CLIENT_ID = 'FAKE_CLIENT_ID_123' as ClientID;
   });
 
-  describe('Gitify GitHub OAuth - Device Code Flow', () => {
-    describe('startGitHubDeviceFlow', () => {
-      it('requests a device code and return a session', async () => {
-        createDeviceCodeMock.mockResolvedValueOnce({
-          data: {
-            device_code: 'device-code-xyz',
-            user_code: 'user-code-xyz',
-            verification_uri: 'https://github.com/login/device',
-            expires_in: 600,
-            interval: 5,
-          },
-        } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
+  describe('startGitHubDeviceFlow', () => {
+    it('should request a device code and return a session', async () => {
+      createDeviceCodeMock.mockResolvedValueOnce({
+        data: {
+          device_code: 'device-code-xyz',
+          user_code: 'user-code-xyz',
+          verification_uri: 'https://github.com/login/device',
+          expires_in: 600,
+          interval: 5,
+        },
+      } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
 
-        const session = await flows.startGitHubDeviceFlow();
+      const session = await flows.startGitHubDeviceFlow();
 
-        expect(createDeviceCodeMock).toHaveBeenCalledWith({
-          clientType: 'oauth-app',
-          clientId: 'FAKE_CLIENT_ID_123',
-          scopes: getRecommendedScopeNames(),
-          request: expect.any(Function),
-        });
-
-        expect(session.deviceCode).toBe('device-code-xyz');
-        expect(session.userCode).toBe('user-code-xyz');
-        expect(session.verificationUri).toBe('https://github.com/login/device');
-        expect(session.intervalSeconds).toBe(5);
-        expect(session.expiresAt).toBeGreaterThan(Date.now());
+      expect(createDeviceCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'FAKE_CLIENT_ID_123',
+        scopes: getRecommendedScopeNames(),
+        request: expect.any(Function),
       });
+
+      expect(session.deviceCode).toBe('device-code-xyz');
+      expect(session.userCode).toBe('user-code-xyz');
+      expect(session.verificationUri).toBe('https://github.com/login/device');
+      expect(session.intervalSeconds).toBe(5);
+      expect(session.expiresAt).toBeGreaterThan(Date.now());
     });
 
-    describe('pollGitHubDeviceFlow', () => {
-      const baseSession = {
-        hostname: 'github.com',
-        clientId: 'FAKE_CLIENT_ID_123',
-        deviceCode: 'device-code',
-        userCode: 'user-code',
-        verificationUri: 'https://github.com/login/device',
-        intervalSeconds: 5,
-        expiresAt: Date.now() + 10000,
-      } as const;
+    it('authorizes a supplied custom OAuth app client ID', async () => {
+      createDeviceCodeMock.mockResolvedValueOnce({
+        data: {
+          device_code: 'device-code-xyz',
+          user_code: 'user-code-xyz',
+          verification_uri: 'https://github.example.com/login/device',
+          expires_in: 600,
+          interval: 5,
+        },
+      } as unknown as Awaited<ReturnType<typeof createDeviceCode>>);
 
-      it('returns token on successful exchange', async () => {
-        exchangeDeviceCodeMock.mockResolvedValueOnce({
-          authentication: { token: 'device-token-xyz' },
-        } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
+      const session = await flows.startGitHubDeviceFlow(
+        'github.example.com' as Hostname,
+        getRecommendedScopeNames(),
+        'CUSTOM_CLIENT_ID_123' as ClientID,
+      );
 
-        const token = await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession);
-
-        expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
-          clientType: 'oauth-app',
-          clientId: 'FAKE_CLIENT_ID_123',
-          code: 'device-code',
-          request: expect.any(Function),
-        });
-
-        expect(token).toBe('device-token-xyz');
+      expect(createDeviceCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'CUSTOM_CLIENT_ID_123',
+        scopes: getRecommendedScopeNames(),
+        request: expect.any(Function),
       });
-
-      it('returns null and does not change interval when authorization is pending', async () => {
-        const pendingErr = Object.create(RequestError.prototype);
-        pendingErr.response = { data: { error: 'authorization_pending' } };
-
-        exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
-
-        const session = { ...baseSession } as DeviceFlowSession;
-        const token = await flows.pollGitHubDeviceFlow(session);
-
-        expect(token).toBeNull();
-        expect(session.intervalSeconds).toBe(5);
-      });
-
-      it('returns null and increases interval by 5 when slow_down', async () => {
-        const slowDownErr = Object.create(RequestError.prototype);
-        slowDownErr.response = { data: { error: 'slow_down' } };
-
-        exchangeDeviceCodeMock.mockRejectedValueOnce(slowDownErr);
-
-        const session = { ...baseSession } as DeviceFlowSession;
-        const token = await flows.pollGitHubDeviceFlow(session);
-
-        expect(token).toBeNull();
-        expect(session.intervalSeconds).toBe(10);
-      });
-
-      it('throws on other errors', async () => {
-        const otherErr = new Error('boom');
-
-        exchangeDeviceCodeMock.mockRejectedValueOnce(otherErr);
-
-        await expect(
-          async () => await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession),
-        ).rejects.toThrow('boom');
-        expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
-      });
+      expect(session.clientId).toBe('CUSTOM_CLIENT_ID_123');
+      expect(session.hostname).toBe('github.example.com');
     });
   });
 
-  describe('performGitHubWebOAuth', () => {
-    const webAuthOptions: LoginOAuthWebOptions = {
-      hostname: 'github.com' as Hostname,
-      clientId: 'FAKE_CLIENT_ID_123' as ClientID,
-      clientSecret: 'FAKE_CLIENT_SECRET_123' as ClientSecret,
-    };
+  describe('pollGitHubDeviceFlow', () => {
+    const baseSession = {
+      hostname: 'github.com',
+      clientId: 'FAKE_CLIENT_ID_123',
+      deviceCode: 'device-code',
+      userCode: 'user-code',
+      verificationUri: 'https://github.com/login/device',
+      intervalSeconds: 5,
+      expiresAt: Date.now() + 10000,
+    } as const;
 
-    it('calls performGitHubWebOAuth using custom oauth app - success oauth flow', async () => {
-      let deliverCallback: (callbackUrl: string) => void = () => {};
-      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        deliverCallback = callback;
+    it('returns token on successful exchange', async () => {
+      exchangeDeviceCodeMock.mockResolvedValueOnce({
+        authentication: { token: 'device-token-xyz' },
+      } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
+
+      const token = await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession);
+
+      expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'FAKE_CLIENT_ID_123',
+        code: 'device-code',
+        request: expect.any(Function),
       });
 
-      const resultPromise = flows.performGitHubWebOAuth({
-        clientId: 'BYO_CLIENT_ID' as ClientID,
-        clientSecret: 'BYO_CLIENT_SECRET' as ClientSecret,
-        hostname: 'my.git.com' as Hostname,
-      });
+      expect(token).toBe('device-token-xyz');
+    });
 
-      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'https://my.git.com/login/oauth/authorize?allow_signup=false&client_id=BYO_CLIENT_ID&scope=notifications%2Cread%3Auser%2Crepo',
+    it("uses the session's own client ID when polling a custom app", async () => {
+      exchangeDeviceCodeMock.mockResolvedValueOnce({
+        authentication: { token: 'custom-token' },
+      } as unknown as Awaited<ReturnType<typeof exchangeDeviceCode>>);
+
+      const token = await flows.pollGitHubDeviceFlow({
+        ...baseSession,
+        clientId: 'CUSTOM_CLIENT_ID_123',
+      } as DeviceFlowSession);
+
+      expect(exchangeDeviceCodeMock).toHaveBeenCalledWith({
+        clientType: 'oauth-app',
+        clientId: 'CUSTOM_CLIENT_ID_123',
+        code: 'device-code',
+        request: expect.any(Function),
+      });
+      expect(token).toBe('custom-token');
+    });
+
+    it('returns null and does not change interval when authorization is pending', async () => {
+      const pendingErr = Object.create(RequestError.prototype);
+      pendingErr.response = { data: { error: 'authorization_pending' } };
+
+      exchangeDeviceCodeMock.mockRejectedValueOnce(pendingErr);
+
+      const session = { ...baseSession } as DeviceFlowSession;
+      const token = await flows.pollGitHubDeviceFlow(session);
+
+      expect(token).toBeNull();
+      expect(session.intervalSeconds).toBe(5);
+    });
+
+    it('returns null and increases interval by 5 when slow_down', async () => {
+      const slowDownErr = Object.create(RequestError.prototype);
+      slowDownErr.response = { data: { error: 'slow_down' } };
+
+      exchangeDeviceCodeMock.mockRejectedValueOnce(slowDownErr);
+
+      const session = { ...baseSession } as DeviceFlowSession;
+      const token = await flows.pollGitHubDeviceFlow(session);
+
+      expect(token).toBeNull();
+      expect(session.intervalSeconds).toBe(10);
+    });
+
+    it('throws on other errors', async () => {
+      const otherErr = new Error('boom');
+
+      exchangeDeviceCodeMock.mockRejectedValueOnce(otherErr);
+
+      await expect(
+        async () => await flows.pollGitHubDeviceFlow(baseSession as DeviceFlowSession),
+      ).rejects.toThrow('boom');
+      expect(rendererLogErrorSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('describeDeviceFlowStartError', () => {
+    it('explains how to enable device flow for a custom app', () => {
+      const err = Object.create(RequestError.prototype);
+      err.response = { data: { error: 'device_flow_disabled' } };
+
+      const message = flows.describeDeviceFlowStartError(
+        err,
+        'github.example.com' as Hostname,
+        'CUSTOM_CLIENT_ID_123' as ClientID,
+      );
+
+      expect(message).toContain('Device flow is not enabled');
+      expect(message).toContain('https://github.example.com/settings/developers');
+    });
+
+    it('names an unrecognized client ID as invalid for the host', () => {
+      const err = Object.create(RequestError.prototype);
+      err.response = { data: { error: 'incorrect_client_credentials' } };
+
+      expect(
+        flows.describeDeviceFlowStartError(
+          err,
+          'github.example.com' as Hostname,
+          'CUSTOM_CLIENT_ID_123' as ClientID,
         ),
-      );
-
-      // The authorization URL must carry a per-attempt state, and the login
-      // only completes when the callback echoes that same value back.
-      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
-      const state = authorizeUrl.searchParams.get('state');
-      expect(state).toBeTruthy();
-
-      deliverCallback(`gitify://oauth?code=123-456&state=${state}`);
-
-      const res = await resultPromise;
-
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
-
-      expect(res.authMethod).toBe('OAuth App');
-      expect(res.authCode).toBe('123-456');
+      ).toBe('The client ID is not valid for github.example.com. Check it and try again.');
     });
 
-    it('does not resolve when the callback state does not match the generated state', async () => {
-      let deliverCallback: (callbackUrl: string) => void = () => {};
-      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        deliverCallback = callback;
-      });
-
-      let resolved = false;
-      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions).then((res) => {
-        resolved = true;
-        return res;
-      });
-
-      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
-      const state = authorizeUrl.searchParams.get('state');
-
-      deliverCallback('gitify://oauth?code=attacker-code&state=not-the-real-state');
-      deliverCallback('gitify://oauth?code=attacker-code-no-state');
-
-      // Give any pending microtasks a chance to run, then confirm neither
-      // injected callback settled the login.
-      await Promise.resolve();
-      await Promise.resolve();
-      expect(resolved).toBe(false);
-      expect(rendererLogWarnSpy).toHaveBeenCalledTimes(2);
-
-      // The still-pending attempt completes once the matching state arrives.
-      deliverCallback(`gitify://oauth?code=the-real-code&state=${state}`);
-      const res = await resultPromise;
-      expect(res.authCode).toBe('the-real-code');
-    });
-
-    it('ignores an unparseable callback URL instead of tearing down the pending login', async () => {
-      let deliverCallback: (callbackUrl: string) => void = () => {};
-      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        deliverCallback = callback;
-      });
-
-      let settled = false;
-      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions).then(
-        (res) => {
-          settled = true;
-          return res;
-        },
-        (err: unknown) => {
-          settled = true;
-          throw err;
-        },
-      );
-
-      // `gitify://[` passes the protocol handler's `gitify://` prefix check but
-      // is not a parseable URL, so it must be ignored rather than rejecting the
-      // login before the state is ever compared.
-      deliverCallback('gitify://[');
-
-      await Promise.resolve();
-      await Promise.resolve();
-      expect(settled).toBe(false);
-      expect(rendererLogWarnSpy).toHaveBeenCalledTimes(1);
-
-      // Settle the still-pending attempt so no listener is left dangling.
-      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
-      const state = authorizeUrl.searchParams.get('state');
-      deliverCallback(`gitify://oauth?code=real-code&state=${state}`);
-
-      await expect(resultPromise).resolves.toMatchObject({ authCode: 'real-code' });
-    });
-
-    it('calls performGitHubWebOAuth - failure', async () => {
-      let deliverCallback: (callbackUrl: string) => void = () => {};
-      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        deliverCallback = callback;
-      });
-
-      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions);
-
-      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
-      const state = authorizeUrl.searchParams.get('state');
-
-      deliverCallback(
-        `gitify://oauth?state=${state}&error=invalid_request&error_description=The+redirect_uri+is+missing+or+invalid.&error_uri=https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors`,
-      );
-
-      await expect(resultPromise).rejects.toEqual(
-        new Error(
-          "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: The redirect_uri is missing or invalid. Docs: https://docs.github.com/en/developers/apps/troubleshooting-oauth-errors",
-        ),
-      );
-
-      expect(openExternalLinkSpy).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkSpy).toHaveBeenCalledWith(
-        expect.stringContaining(
-          'https://github.com/login/oauth/authorize?allow_signup=false&client_id=FAKE_CLIENT_ID_123&scope=notifications%2Cread%3Auser%2Crepo',
-        ),
-      );
-
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledTimes(1);
-      expect(window.gitify.onAuthCallback).toHaveBeenCalledWith(expect.any(Function));
-    });
-
-    it('ignores a callback error whose state does not match the attempt', async () => {
-      let deliverCallback: (callbackUrl: string) => void = () => {};
-      window.gitify.onAuthCallback = vi.fn().mockImplementation((callback) => {
-        deliverCallback = callback;
-      });
-
-      let settled = false;
-      const resultPromise = flows.performGitHubWebOAuth(webAuthOptions).then(
-        (res) => {
-          settled = true;
-          return res;
-        },
-        (err: unknown) => {
-          settled = true;
-          throw err;
-        },
-      );
-
-      deliverCallback('gitify://oauth?error=access_denied');
-      deliverCallback('gitify://oauth?error=access_denied&state=not-the-real-state');
-
-      await Promise.resolve();
-      await Promise.resolve();
-      expect(settled).toBe(false);
-      expect(rendererLogWarnSpy).toHaveBeenCalledTimes(2);
-
-      // Settle the still-pending attempt so no listener is left dangling.
-      const authorizeUrl = new URL(openExternalLinkSpy.mock.calls[0][0] as string);
-      const state = authorizeUrl.searchParams.get('state');
-      deliverCallback(`gitify://oauth?code=real-code&state=${state}`);
-
-      await expect(resultPromise).resolves.toMatchObject({ authCode: 'real-code' });
-    });
-
-    describe('exchangeAuthCodeForAccessToken', () => {
-      const authCode = '123-456' as AuthCode;
-
-      it('exchanges auth code for access token', async () => {
-        exchangeWebFlowCodeMock.mockResolvedValueOnce({
-          authentication: {
-            token: 'this-is-a-token',
-          },
-        } as unknown as Awaited<ReturnType<typeof exchangeWebFlowCode>>);
-
-        const res = await flows.exchangeAuthCodeForAccessToken(authCode, {
-          ...webAuthOptions,
-        });
-
-        expect(exchangeWebFlowCodeMock).toHaveBeenCalledWith({
-          clientType: 'oauth-app',
-          clientId: 'FAKE_CLIENT_ID_123',
-          clientSecret: 'FAKE_CLIENT_SECRET_123',
-          code: '123-456',
-          request: expect.any(Function),
-        });
-        expect(res).toBe('this-is-a-token');
-      });
-
-      it('throws when client secret is missing', async () => {
-        await expect(
-          async () =>
-            await flows.exchangeAuthCodeForAccessToken(authCode, {
-              ...webAuthOptions,
-              clientSecret: undefined as unknown as ClientSecret,
-            }),
-        ).rejects.toThrow('clientSecret is required to exchange an auth code');
-      });
+    it('returns undefined for a non-RequestError', () => {
+      expect(
+        flows.describeDeviceFlowStartError(new Error('boom'), 'github.com' as Hostname),
+      ).toBeUndefined();
     });
   });
 });

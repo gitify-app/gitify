@@ -5,7 +5,7 @@ import {
 
 import type { AccountNotifications, GitifyError } from '../../types';
 
-import { Errors } from '../core/errors';
+import { getErrorDetails } from '../core/errors';
 import { deriveGlobalError, deriveStatus, hasNoAccountErrors } from './status';
 
 function group(account = mockGitHubCloudAccount, error: GitifyError | null = null) {
@@ -14,11 +14,18 @@ function group(account = mockGitHubCloudAccount, error: GitifyError | null = nul
 
 const clean = group();
 const cleanSecond = group(mockGitHubEnterpriseServerAccount);
-const networkError = group(mockGitHubCloudAccount, Errors.NETWORK);
-const networkErrorSecond = group(mockGitHubEnterpriseServerAccount, Errors.NETWORK);
-const rateLimitedError = group(mockGitHubEnterpriseServerAccount, Errors.RATE_LIMITED);
+const networkError = group(mockGitHubCloudAccount, getErrorDetails('NETWORK'));
+const networkErrorSecond = group(mockGitHubEnterpriseServerAccount, getErrorDetails('NETWORK'));
+const rateLimitedError = group(mockGitHubEnterpriseServerAccount, getErrorDetails('RATE_LIMITED'));
 
-const baseInput = { isLoading: false, isPaused: false, isError: false };
+const baseInput = {
+  isNetworkOnline: true,
+  isLoading: false,
+  isPending: false,
+  isPaused: false,
+  isRecovering: false,
+  isError: false,
+};
 
 describe('renderer/utils/notifications/status.ts', () => {
   describe('deriveStatus', () => {
@@ -26,8 +33,33 @@ describe('renderer/utils/notifications/status.ts', () => {
       expect(deriveStatus({ ...baseInput, isLoading: true, notifications: [] })).toBe('loading');
     });
 
-    it('reports error when the query is paused (offline)', () => {
-      expect(deriveStatus({ ...baseInput, isPaused: true, notifications: [clean] })).toBe('error');
+    it('reports offline even before the query pauses', () => {
+      expect(deriveStatus({ ...baseInput, isNetworkOnline: false, notifications: [clean] })).toBe(
+        'offline',
+      );
+    });
+
+    it('reports paused, not offline or error, for an online pause with account errors', () => {
+      expect(deriveStatus({ ...baseInput, isPaused: true, notifications: [networkError] })).toBe(
+        'paused',
+      );
+    });
+
+    it('keeps a successful result visible during an online pause', () => {
+      expect(deriveStatus({ ...baseInput, isPaused: true, notifications: [clean] })).toBe(
+        'success',
+      );
+    });
+
+    it('does not present a paused initial fetch as an empty inbox', () => {
+      expect(
+        deriveStatus({
+          ...baseInput,
+          isPending: true,
+          isPaused: true,
+          notifications: [],
+        }),
+      ).toBe('paused');
     });
 
     it('reports error when the query failed', () => {
@@ -46,29 +78,37 @@ describe('renderer/utils/notifications/status.ts', () => {
   });
 
   describe('deriveGlobalError', () => {
-    it('returns the offline error when paused', () => {
-      expect(deriveGlobalError({ isPaused: true, notifications: [clean] })).toBe(Errors.OFFLINE);
+    it('returns the offline error when offline', () => {
+      expect(deriveGlobalError({ status: 'offline', notifications: [clean] })).toEqual(
+        getErrorDetails('OFFLINE'),
+      );
+    });
+
+    it('does not surface cached failures during recovery', () => {
+      expect(
+        deriveGlobalError({ status: 'loading', notifications: [networkError] }),
+      ).toBeUndefined();
     });
 
     it('returns undefined when there are no accounts', () => {
-      expect(deriveGlobalError({ isPaused: false, notifications: [] })).toBeUndefined();
+      expect(deriveGlobalError({ status: 'error', notifications: [] })).toBeUndefined();
     });
 
     it('returns the shared error when all accounts have the same error', () => {
       expect(
-        deriveGlobalError({ isPaused: false, notifications: [networkError, networkErrorSecond] }),
-      ).toBe(Errors.NETWORK);
+        deriveGlobalError({ status: 'error', notifications: [networkError, networkErrorSecond] }),
+      ).toEqual(getErrorDetails('NETWORK'));
     });
 
     it('returns undefined when accounts have differing errors', () => {
       expect(
-        deriveGlobalError({ isPaused: false, notifications: [networkError, rateLimitedError] }),
+        deriveGlobalError({ status: 'error', notifications: [networkError, rateLimitedError] }),
       ).toBeUndefined();
     });
 
     it('returns undefined on partial failure', () => {
       expect(
-        deriveGlobalError({ isPaused: false, notifications: [clean, networkError] }),
+        deriveGlobalError({ status: 'success', notifications: [clean, networkError] }),
       ).toBeUndefined();
     });
   });

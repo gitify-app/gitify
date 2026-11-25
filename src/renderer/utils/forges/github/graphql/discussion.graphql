@@ -32,6 +32,7 @@ fragment DiscussionDetails on Discussion {
     }
   }
   labels(first: $firstLabels) {
+    totalCount
     nodes {
       ...LabelFields
     }

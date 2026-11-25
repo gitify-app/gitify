@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { GearIcon } from '@primer/octicons-react';
 import { Stack } from '@primer/react';
 
@@ -13,10 +15,12 @@ import { SystemSettings } from '../components/settings/SystemSettings';
 import { TraySettings } from '../components/settings/TraySettings';
 
 export function SettingsRoute() {
+  const { t } = useTranslation();
+
   return (
     <Page testId="settings">
       <Header fetchOnBack icon={GearIcon}>
-        Settings
+        {t('settings.title', 'Settings')}
       </Header>
 
       <Contents paddingBottom scrollFade>

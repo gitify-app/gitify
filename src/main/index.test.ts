@@ -16,7 +16,6 @@ vi.mock('electron', () => ({
       calls.push('whenReady');
       return Promise.resolve();
     }),
-    setAsDefaultProtocolClient: vi.fn(),
     on: vi.fn(),
   },
 }));
@@ -24,6 +23,12 @@ vi.mock('electron', () => ({
 vi.mock('electron-log', () => ({
   default: {
     initialize: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn(),
+    debug: vi.fn(),
+    verbose: vi.fn(),
+    silly: vi.fn(),
     transports: { file: {} },
   },
 }));
@@ -38,6 +43,7 @@ vi.mock('./config', () => ({
 vi.mock('./handlers', () => ({
   registerAppHandlers: vi.fn(),
   registerGitHubCliHandlers: vi.fn(),
+  registerNativeNotificationHandlers: vi.fn(),
   registerStorageHandlers: vi.fn(),
   registerSystemHandlers: vi.fn(),
   registerTrayHandlers: vi.fn(),
@@ -49,9 +55,10 @@ vi.mock('./icons', () => ({
 }));
 
 vi.mock('./lifecycle', () => ({
+  configureUserDataPath: vi.fn(() => calls.push('userData')),
   configureWindowEvents: vi.fn(),
   handleProtocolURL: vi.fn(),
-  initializeAppLifecycle: vi.fn(),
+  initializeAppLifecycle: vi.fn(() => calls.push('lifecycle')),
   onFirstRunMaybe: vi.fn(),
 }));
 
@@ -86,8 +93,8 @@ describe('main/index.ts', () => {
     ]);
   });
 
-  it('applies the Ozone backend before Electron becomes ready', () => {
-    expect(calls).toEqual(['ozone', 'whenReady']);
+  it('configures user data, Ozone, and lifecycle handlers before Electron becomes ready', () => {
+    expect(calls).toEqual(['userData', 'ozone', 'lifecycle', 'whenReady']);
   });
 
   it('logs an error when Electron fails to become ready', async () => {
@@ -96,7 +103,6 @@ describe('main/index.ts', () => {
       app: {
         isPackaged: true,
         whenReady: vi.fn(() => Promise.reject(new Error('ready-failed'))),
-        setAsDefaultProtocolClient: vi.fn(),
         on: vi.fn(),
       },
     }));

@@ -6,6 +6,7 @@ import { useNotificationsHost } from '../hooks/notifications/useNotificationsHos
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
+import { usePowerState } from '../hooks/usePowerState';
 import { useShortcutRegistration } from '../hooks/useShortcutRegistration';
 import {
   useAccountsStore,
@@ -35,7 +36,7 @@ export function GlobalEffects() {
   const useUnreadActiveIcon = useSettingsStore((s) => s.useUnreadActiveIcon);
   const trayIconAppearance = useSettingsStore((s) => s.trayIconAppearance);
 
-  const isOnline = useOnlineStatus();
+  const isNetworkOnline = useOnlineStatus();
 
   // Appearance side effects: color mode/scheme + design-language/material attributes
   useAppearance();
@@ -50,17 +51,20 @@ export function GlobalEffects() {
   // Global keyboard shortcut registration, reverting on failure
   useShortcutRegistration();
 
+  // Pause polling while the system is locked or suspended
+  usePowerState();
+
   // oxlint-disable-next-line react/exhaustive-deps -- We want to update the tray on setting or notification changes
   useEffect(() => {
     const trayCount = status === 'error' ? -1 : notificationCount;
-    setTrayIconColorAndTitle(trayCount, isOnline);
+    setTrayIconColorAndTitle(trayCount, isNetworkOnline);
   }, [
     showNotificationsCountInTray,
     useUnreadActiveIcon,
     trayIconAppearance,
     status,
     notificationCount,
-    isOnline,
+    isNetworkOnline,
   ]);
 
   useEffect(() => {
@@ -70,6 +74,7 @@ export function GlobalEffects() {
       resetFilters();
       queryClient.clear();
       useShortcutRegistrationStore.getState().reset();
+      window.gitify.nativeNotifications.removeAll();
     });
   }, [resetAccounts, resetSettings, resetFilters, queryClient]);
 

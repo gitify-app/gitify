@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import type { Icon, OcticonProps } from '@primer/octicons-react';
 import type { Button } from '@primer/react';
 
-import type { TrayIconAppearance } from '../shared/events';
+import type { AutomaticUpdates, GitHubCliIdentity, TrayIconAppearance } from '../shared/events';
 
 // Derived from public @primer/react component props rather than internal types
 export type VariantType = NonNullable<React.ComponentPropsWithoutRef<typeof Button>['variant']>;
@@ -28,13 +28,9 @@ type Brand<B> = { [__brand]: B };
 
 export type Branded<T, B> = T & Brand<B>;
 
-export type AuthCode = Branded<string, 'AuthCode'>;
-
 export type Token = Branded<string, 'Token'>;
 
 export type ClientID = Branded<string, 'ClientID'>;
-
-export type ClientSecret = Branded<string, 'ClientSecret'>;
 
 export type Hostname = Branded<string, 'Hostname'>;
 
@@ -56,7 +52,7 @@ export function toLinkOrNull(value: string | null | undefined): Link | null {
 
 export type SearchToken = Branded<string, 'SearchToken'>;
 
-export type Status = 'loading' | 'success' | 'error';
+export type Status = 'loading' | 'offline' | 'paused' | 'success' | 'error';
 
 export type Percentage = Branded<number, 'Percentage'>;
 
@@ -74,8 +70,19 @@ export interface Account {
   version?: string;
   hostname: Hostname;
   token: Token;
+  /**
+   * OAuth app client ID for an account authorized through a user-supplied
+   * custom OAuth app; absent for Gitify's own preconfigured app.
+   */
+  clientId?: ClientID;
   /** Atlassian account email — required for Bitbucket Basic Auth (email:token). */
   username?: string;
+  /**
+   * Identity this GitHub CLI account is pinned to. Absent for accounts created
+   * before identities were recorded (and for non-CLI methods); those resolve
+   * whichever account the CLI currently treats as active.
+   */
+  cliIdentity?: GitHubCliIdentity;
   user: GitifyUser | null;
   scopes?: string[];
 }
@@ -143,6 +150,7 @@ export interface SystemSettingsState {
   notificationVolume: Percentage;
   openAtStartup: boolean;
   keepWindowOnBlur: boolean;
+  automaticUpdates: AutomaticUpdates;
   showUpdateNotifications: boolean;
   /** Linux only. Runs under X11/XWayland so the popup can be anchored to the tray icon. */
   useX11Backend: boolean;
@@ -192,6 +200,11 @@ export interface GitifyUser {
  * Gitify error details.
  */
 export interface GitifyError {
+  /**
+   * The type of error, used for comparison (see `isErrorType`).
+   */
+  type?: ErrorType;
+
   /**
    * The title of the error.
    */
@@ -287,7 +300,7 @@ export enum Size {
 /**
  * The direction a chevron points.
  */
-export type ChevronDirection = 'down' | 'left' | 'right';
+export type ChevronDirection = 'down' | 'right';
 
 /**
  * Details for Chevron header accordion.
@@ -306,23 +319,20 @@ export interface Chevron {
 
 export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
 
-/**
- *
- * Gitify Notification Types
- *
- * These types represent the clean, UI-focused notification structure
- * used throughout the application.
- *
- * Raw GitHub API responses are transformed into these types at the API boundary.
- *
- **/
+// ---------------------------------------------------------------------------
+// Gitify notification types
+//
+// These types represent the clean, UI-focused notification structure used
+// throughout the application. Raw forge responses are transformed into these
+// types at the API boundary.
+// ---------------------------------------------------------------------------
 
 /**
  * Complete notification type for UI consumption.
  * Contains only fields actually used by components.
  */
 export interface GitifyNotification {
-  /** Unique notification ID from GitHub */
+  /** Unique notification ID from the account's forge */
   id: string;
   /** Whether the notification is unread */
   unread: boolean;
@@ -344,9 +354,11 @@ export interface GitifyNotification {
 
 /**
  * A notification that has been transformed from a forge response but not yet
- * formatted for display. The orchestrator pipeline (transform → filter →
- * enrich → filter) operates on this type; `formatNotification` is the only
- * place that widens it to `GitifyNotification` by populating `display`.
+ * formatted for display. The orchestrator pipeline (transform → base filter →
+ * enrich → format → order) operates on this type; `formatNotification` is the
+ * only place that widens it to `GitifyNotification` by populating `display`.
+ * Detailed filtering runs later on the formatted notification in the query
+ * selection layer.
  */
 export type RawGitifyNotification = Omit<GitifyNotification, 'display'>;
 
@@ -408,6 +420,8 @@ export interface GitifySubject {
   commentCount?: number;
   /** Labels names and colors */
   labels?: GitifyLabels[];
+  /** Total label count, including labels beyond the fetched list */
+  labelCount?: number;
   /** Whether the PR is part of a GitHub native stacked PR series */
   isStacked?: boolean;
   /** This PR's 1-indexed position in the stack, when part of a stacked PR series */
@@ -582,16 +596,14 @@ export type GitifyCheckSuiteStatus =
   | 'TIMED_OUT'
   | 'WAITING';
 
-/**
- * Gitify Type Enhancements
- *
- * These types represent the clean, UI-focused notification structure
- * used throughout the application.
- *
- * Raw GitHub API responses are transformed into these types at the API boundary.
- **/
+// ---------------------------------------------------------------------------
+// Gitify type enhancements
+//
+// Stronger typings for the string literal attributes used by the notification
+// types above, so filters, display logic, and reason labels share one set of
+// named values.
+// ---------------------------------------------------------------------------
 
-// Stronger typings for string literal attributes
 export type Reason =
   | 'agent_session_finished'
   | 'approval_requested'

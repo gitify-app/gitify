@@ -57,4 +57,35 @@ describe('renderer/components/Oops.tsx', () => {
 
     expect(navigateMock).toHaveBeenCalledWith('/somewhere');
   });
+
+  it('renders a recovery action alongside the error actions', async () => {
+    const recovery = vi.fn();
+
+    const mockError = {
+      title: 'Error title',
+      descriptions: ['Error description'],
+      emojis: ['🔥'],
+      actions: [
+        {
+          label: 'Go somewhere',
+          route: '/somewhere',
+          variant: 'danger' as const,
+          icon: PersonIcon,
+        },
+      ],
+    };
+
+    renderWithProviders(
+      <Oops
+        error={mockError}
+        recovery={{ icon: PersonIcon, label: 'Reload', onClick: recovery }}
+      />,
+    );
+
+    expect(screen.getByText('Go somewhere')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Reload'));
+
+    expect(recovery).toHaveBeenCalledTimes(1);
+  });
 });

@@ -8,6 +8,7 @@ import { Paths, WindowConfig } from './config';
 import {
   registerAppHandlers,
   registerGitHubCliHandlers,
+  registerNativeNotificationHandlers,
   registerStorageHandlers,
   registerSystemHandlers,
   registerTrayHandlers,
@@ -15,15 +16,19 @@ import {
 } from './handlers';
 import { getIdleTrayIcon } from './icons';
 import {
+  configureUserDataPath,
   configureWindowEvents,
-  handleProtocolURL,
   initializeAppLifecycle,
   onFirstRunMaybe,
 } from './lifecycle';
 import MenuBuilder from './menu';
 import { applyOzonePlatform } from './ozone';
 import AppUpdater from './updater';
-import { isDevMode } from './utils';
+
+// Runs at module load, before anything reads `userData`: development builds
+// must be isolated from installed ones before the Ozone platform and logger
+// resolve their paths.
+configureUserDataPath();
 
 // Runs at module load: the Ozone platform is read during app startup, so this
 // has to happen before `app.whenReady()` below.
@@ -48,18 +53,22 @@ const mb = menubar({
 const menuBuilder = new MenuBuilder(mb);
 const contextMenu = menuBuilder.buildMenu();
 
-// Register your app as the handler for a custom protocol
-const protocol = isDevMode() ? 'gitify-dev' : 'gitify';
-app.setAsDefaultProtocolClient(protocol);
-
 const appUpdater = new AppUpdater(mb, menuBuilder);
+
+// Register before the renderer can load. The notification service relies on a
+// one-shot readiness message from the renderer; registering the handlers inside
+// `whenReady` (after `onFirstRunMaybe`) leaves a window where that message is
+// sent before any listener exists, which leaves every later click and action
+// queued forever.
+registerNativeNotificationHandlers(mb);
+
+// Capture relaunches before ready; lifecycle waits for the preloaded window.
+initializeAppLifecycle(mb, contextMenu);
 
 app
   .whenReady()
   .then(async () => {
     await onFirstRunMaybe();
-
-    initializeAppLifecycle(mb, contextMenu, protocol);
 
     // Configure window event handlers (Escape key, DevTools resize)
     configureWindowEvents(mb, menuBuilder);
@@ -75,9 +84,3 @@ app
   .catch((err) => {
     logError('main', 'Failed to initialize application', toError(err));
   });
-
-// Handle gitify:// custom protocol URL events for OAuth 2.0 callback
-app.on('open-url', (event, url) => {
-  event.preventDefault();
-  handleProtocolURL(mb, url, protocol);
-});

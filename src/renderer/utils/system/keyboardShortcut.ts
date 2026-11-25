@@ -40,7 +40,11 @@ const MODIFIER_KEYS = new Set(['Control', 'Shift', 'Alt', 'Meta', 'Dead']);
 
 /**
  * Convert a keydown event to an Electron accelerator string, or `null` if invalid.
- * Requires Command (macOS) or Control (Windows/Linux) plus a non-modifier key.
+ * Requires a primary modifier (Command or Control) plus a non-modifier key. The
+ * result always uses the platform-neutral `CommandOrControl` accelerator.
+ *
+ * @param event - The keydown event to convert.
+ * @returns The accelerator string, or `null` when the event is not a valid shortcut.
  */
 export function keyboardEventToAccelerator(event: KeyboardEvent): string | null {
   if (event.repeat) {

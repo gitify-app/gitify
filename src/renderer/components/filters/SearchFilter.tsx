@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import {
   CheckCircleFillIcon,
   CommentIcon,
@@ -26,6 +28,7 @@ import { RequiresDetailedNotificationWarning } from './RequiresDetailedNotificat
 import { TokenSearchInput } from './TokenSearchInput';
 
 export function SearchFilter() {
+  const { t } = useTranslation();
   const updateFilter = useFiltersStore((s) => s.updateFilter);
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
   const excludeSearchTokens = useFiltersStore((s) => s.excludeSearchTokens);
@@ -71,7 +74,7 @@ export function SearchFilter() {
         icon={SearchIcon}
         tooltip={
           <Stack direction="vertical" gap="condensed">
-            <Text>Filter notifications by:</Text>
+            <Text>{t('filters.search.help', 'Filter notifications by:')}</Text>
             <div className="pl-4">
               <Stack direction="vertical" gap="condensed">
                 <Stack direction="horizontal" gap="condensed">
@@ -80,7 +83,7 @@ export function SearchFilter() {
                     aria-disabled={!detailedNotifications}
                     className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
-                    Author (author:handle)
+                    {t('filters.search.author', 'Author (author:handle)')}
                   </Text>
                 </Stack>
                 <Stack direction="horizontal" gap="condensed">
@@ -89,36 +92,38 @@ export function SearchFilter() {
                     aria-disabled={!detailedNotifications}
                     className={cn('text-gitify-caution', !detailedNotifications && 'line-through')}
                   >
-                    Commenter (commenter:handle)
+                    {t('filters.search.commenter', 'Commenter (commenter:handle)')}
                   </Text>
                 </Stack>
                 <Stack direction="horizontal" gap="condensed">
                   <OrganizationIcon size={Size.SMALL} />
-                  <Text>Organization (org:name)</Text>
+                  <Text>{t('filters.search.organization', 'Organization (org:name)')}</Text>
                 </Stack>
                 <Stack direction="horizontal" gap="condensed">
                   <RepoIcon size={Size.SMALL} />
-                  <Text>Repository (repo:fullname)</Text>
+                  <Text>{t('filters.search.repository', 'Repository (repo:fullname)')}</Text>
                 </Stack>
                 <Stack direction="horizontal" gap="condensed">
                   <NoteIcon size={Size.SMALL} />
-                  <Text>Title (title:text)</Text>
+                  <Text>{t('filters.search.title', 'Title (title:text)')}</Text>
                 </Stack>
               </Stack>
             </div>
-            <Text className="text-gitify-fg-muted">All qualifiers match case-insensitively.</Text>
+            <Text className="text-gitify-fg-muted">
+              {t('filters.search.case_insensitive', 'All qualifiers match case-insensitively.')}
+            </Text>
             <RequiresDetailedNotificationWarning />
           </Stack>
         }
       >
-        Search
+        {t('filters.search.title_short', 'Search')}
       </SectionHeading>
 
       <Stack direction="vertical" gap="condensed">
         <TokenSearchInput
           icon={CheckCircleFillIcon}
           iconColorClass={IconColor.GREEN}
-          label="Include"
+          label={t('filters.search.include', 'Include')}
           onAdd={addIncludeSearchToken}
           onRemove={removeIncludeSearchToken}
           showSuggestionsOnFocusIfEmpty={!hasIncludeSearchFilters()}
@@ -128,7 +133,7 @@ export function SearchFilter() {
         <TokenSearchInput
           icon={NoEntryFillIcon}
           iconColorClass={IconColor.RED}
-          label="Exclude"
+          label={t('filters.search.exclude', 'Exclude')}
           onAdd={addExcludeSearchToken}
           onRemove={removeExcludeSearchToken}
           showSuggestionsOnFocusIfEmpty={!hasExcludeSearchFilters()}

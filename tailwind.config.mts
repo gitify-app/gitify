@@ -5,8 +5,6 @@ import plugin from 'tailwindcss/plugin';
 const sidebarWidth = '2.5rem'; // 40px
 
 const config: Config = {
-  content: ['./src/**/*.ts', './src/**/*.tsx'],
-  darkMode: ['class', '[data-color-mode="dark"]'], // GitHub Primer Theme Provider color mode custom selector
   theme: {
     extend: {
       fontSize: {
@@ -17,17 +15,32 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(6px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'login-panel-fade': {
-          '0%': { opacity: '0', transform: 'translateY(4px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        'login-panel-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(6px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'login-panel-in-left': {
+          '0%': { opacity: '0', transform: 'translateX(-6px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'login-panel-out-left': {
+          '0%': { opacity: '1', transform: 'translateX(0)' },
+          '100%': { opacity: '0', transform: 'translateX(-6px)' },
+        },
+        'login-panel-out-right': {
+          '0%': { opacity: '1', transform: 'translateX(0)' },
+          '100%': { opacity: '0', transform: 'translateX(6px)' },
         },
       },
       animation: {
-        'login-fade-up': 'login-fade-up 360ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
-        'login-panel-fade': 'login-panel-fade 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both',
+        'login-fade-up': 'login-fade-up 360ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'login-panel-in-right': 'login-panel-in-right 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'login-panel-in-left': 'login-panel-in-left 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'login-panel-out-left': 'login-panel-out-left 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
+        'login-panel-out-right': 'login-panel-out-right 280ms cubic-bezier(0.22, 1, 0.36, 1) both',
       },
       transitionTimingFunction: {
-        'login-out': 'cubic-bezier(0.2, 0.7, 0.2, 1)',
+        'login-out': 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
       spacing: {
         sidebar: sidebarWidth,
@@ -43,12 +56,7 @@ const config: Config = {
           footer: 'var(--gitify-footer)',
 
           caution: colors.orange[600],
-          error: 'var(--fgColor-danger)',
           link: 'var(--gitify-link)',
-          input: {
-            rest: 'var(--control-bgColor-rest)',
-            focus: 'var(--control-bgColor-active)',
-          },
 
           icon: {
             attention: 'var(--gitify-icon-attention)',

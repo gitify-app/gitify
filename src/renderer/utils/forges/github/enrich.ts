@@ -6,12 +6,24 @@ import type { FetchMergedDetailsTemplateQuery } from './graphql/generated/graphq
 import { createNotificationHandler } from './handlers';
 
 /**
- * Maximum number of notifications batched into a single merged GraphQL query
- * by `enrichGitHubNotifications`. GitHub's GraphQL alias cap is well above
- * 100; this is a conservative ceiling that keeps individual responses small
- * and parseable.
+ * Maximum number of notifications per merged GraphQL request issued by
+ * `enrichGitHubNotifications`.
+ *
+ * Only subject types whose handlers support merged enrichment are batched
+ * here - discussions, issues, and pull requests. Every other subject type is
+ * enriched individually, and the whole enrichment input is considered
+ * together, so a batch is unrelated to REST page boundaries.
+ *
+ * The merged query pulls nested connections for each notification, so
+ * the batch size observed to stay under GitHub's undocumented resource limit
+ * where 100 did not. A batch that still exceeds the limit is split by
+ * `fetchBatch` down to `MIN_SPLIT_BATCH_SIZE` before falling back to
+ * per-notification enrichment.
+ *
+ * This is deliberately independent of `GITHUB_API_PAGE_SIZE`; the two values
+ * are both 50 today but are governed by different constraints.
  */
-export const GITHUB_API_MERGE_BATCH_SIZE = 100;
+export const GITHUB_API_MERGE_BATCH_SIZE = 50;
 
 /**
  * Enrich GitHub notifications with additional subject details (state, user,
@@ -48,20 +60,7 @@ async function fetchInBatches(
     batches.push(supportedNotifications.slice(start, start + batchSize));
   }
 
-  const batchResults = await Promise.all(
-    batches.map(async (slice, index) => {
-      try {
-        return await fetchNotificationDetailsForList(slice);
-      } catch (err) {
-        rendererLogError(
-          'enrichGitHubNotifications',
-          `Failed to fetch merged notification details for batch ${index + 1}`,
-          toError(err),
-        );
-        return new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
-      }
-    }),
-  );
+  const batchResults = await Promise.all(batches.map((batch) => fetchBatch(batch)));
 
   const merged = new Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>();
   for (const results of batchResults) {
@@ -71,6 +70,54 @@ async function fetchInBatches(
   }
 
   return merged;
+}
+
+/** Batches at or below this size are not split further; they fall through to per-notification fallback. */
+const MIN_SPLIT_BATCH_SIZE = 25;
+
+const RESOURCE_LIMIT_ERROR_MESSAGE = 'Resource limits for this query exceeded';
+
+function isResourceLimitError(error: unknown): boolean {
+  return error instanceof Error && error.message.includes(RESOURCE_LIMIT_ERROR_MESSAGE);
+}
+
+async function fetchBatch(
+  notifications: RawGitifyNotification[],
+): Promise<Map<RawGitifyNotification, FetchMergedDetailsTemplateQuery['repository']>> {
+  try {
+    return await fetchNotificationDetailsForList(notifications);
+  } catch (err) {
+    if (isResourceLimitError(err)) {
+      if (notifications.length <= MIN_SPLIT_BATCH_SIZE) {
+        rendererLogError(
+          'enrichGitHubNotifications',
+          `Failed to fetch merged notification details for ${notifications.length} notifications`,
+          toError(err),
+        );
+        return new Map();
+      }
+
+      const midpoint = Math.ceil(notifications.length / 2);
+      rendererLogWarn(
+        'enrichGitHubNotifications',
+        `Splitting merged notification batch of ${notifications.length} after resource limit`,
+      );
+
+      const [first, second] = await Promise.all([
+        fetchBatch(notifications.slice(0, midpoint)),
+        fetchBatch(notifications.slice(midpoint)),
+      ]);
+
+      return new Map([...first, ...second]);
+    }
+
+    rendererLogError(
+      'enrichGitHubNotifications',
+      `Failed to fetch merged notification details for ${notifications.length} notifications`,
+      toError(err),
+    );
+    return new Map();
+  }
 }
 
 async function enrichSingle(

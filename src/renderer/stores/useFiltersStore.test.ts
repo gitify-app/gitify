@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 
-import type { SearchToken } from '../types';
+import type { AccountUUID, SearchToken } from '../types';
 
 import { DEFAULT_FILTERS_STATE } from './defaults';
 import useFiltersStore from './useFiltersStore';
@@ -87,6 +87,27 @@ describe('renderer/stores/useFiltersStore.ts', () => {
       useFiltersStore.setState({ reasons: ['review_requested'] });
 
       expect(useFiltersStore.getState().hasActiveFilters()).toBe(true);
+    });
+  });
+
+  describe('pruneAccounts', () => {
+    it('keeps only account filters that match a known account', () => {
+      useFiltersStore.setState({
+        accounts: ['valid' as AccountUUID, 'stale' as AccountUUID],
+      });
+
+      useFiltersStore.getState().pruneAccounts(['valid' as AccountUUID]);
+
+      expect(useFiltersStore.getState().accounts).toEqual(['valid']);
+    });
+
+    it('leaves state untouched when every account filter is still valid', () => {
+      const accounts = ['valid' as AccountUUID];
+      useFiltersStore.setState({ accounts });
+
+      useFiltersStore.getState().pruneAccounts(['valid' as AccountUUID, 'other' as AccountUUID]);
+
+      expect(useFiltersStore.getState().accounts).toBe(accounts);
     });
   });
 });

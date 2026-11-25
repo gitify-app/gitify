@@ -54,7 +54,6 @@ function buildLoginsDefaults(): LoginsState {
     loginWithDeviceFlowPoll: vi.fn(),
     loginWithDeviceFlowComplete: vi.fn(),
     loginWithCli: vi.fn(),
-    loginWithOAuthApp: vi.fn(),
     loginWithPersonalAccessToken: vi.fn(),
     logoutFromAccount: vi.fn(),
   };

@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import { useNotifications } from '../hooks/useNotifications';
-import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { useAccountsStore, useFiltersStore, useSettingsStore } from '../stores';
 
 import { AllRead } from '../components/AllRead';
@@ -11,12 +10,11 @@ import { NotificationList } from '../components/notifications/NotificationList';
 import { Oops } from '../components/Oops';
 
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import { hasNoAccountErrors } from '../utils/notifications/status';
 
 export function NotificationsRoute() {
   const { notifications, status, globalError, hasNotifications } = useNotifications();
-  const isOnline = useOnlineStatus();
 
   const filteredAccounts = useFiltersStore((s) => s.accounts);
   const showAccountHeader = useSettingsStore((s) => s.showAccountHeader);
@@ -35,15 +33,15 @@ export function NotificationsRoute() {
     [visibleNotifications],
   );
 
-  if (!isOnline) {
-    return <Oops error={Errors.OFFLINE} />;
+  if (status === 'offline') {
+    return <Oops error={getErrorDetails('OFFLINE')} />;
   }
 
   if (status === 'error') {
-    return <Oops error={globalError ?? Errors.UNKNOWN} />;
+    return <Oops error={globalError ?? getErrorDetails('UNKNOWN')} />;
   }
 
-  if (status === 'loading') {
+  if (status === 'loading' || status === 'paused') {
     return <Loading />;
   }
 

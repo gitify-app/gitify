@@ -8,18 +8,22 @@ import type {
 } from '../../../types';
 import type { Filter } from './types';
 
-import { REASON_TYPE_DETAILS } from '../reason';
-
-const REASON_FILTER_TYPE_DETAILS: Record<ReasonFilterValue, TypeDetails> = {
-  ...REASON_TYPE_DETAILS,
-  other: {
-    title: 'Other',
-    description: 'Notifications with a reason that is not listed above.',
-  },
-};
+import i18n from '../../../i18n';
+import { getReasonTypeDetails } from '../reason';
 
 export const reasonFilter: Filter<ReasonFilterValue> = {
-  FILTER_TYPES: REASON_FILTER_TYPE_DETAILS,
+  get FILTER_TYPES(): Record<ReasonFilterValue, TypeDetails> {
+    return {
+      ...getReasonTypeDetails(),
+      other: {
+        title: i18n.t('filters.reason.other', 'Other'),
+        description: i18n.t(
+          'filters.reason.other_description',
+          'Notifications with a reason that is not listed above.',
+        ),
+      },
+    };
+  },
 
   requiresDetailsNotifications: false,
 
@@ -47,13 +51,13 @@ export const reasonFilter: Filter<ReasonFilterValue> = {
 
   filterNotification(notification: RawGitifyNotification, reason: ReasonFilterValue): boolean {
     if (reason === 'other') {
-      return !(notification.reason.code in REASON_TYPE_DETAILS);
+      return !(notification.reason.code in getReasonTypeDetails());
     }
     return notification.reason.code === reason;
   },
 
   classify(notification: RawGitifyNotification): ReasonFilterValue {
     const code = notification.reason.code;
-    return code in REASON_TYPE_DETAILS ? code : 'other';
+    return code in getReasonTypeDetails() ? code : 'other';
   },
 };

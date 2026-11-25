@@ -9,13 +9,16 @@ import { MetricPill } from './MetricPill';
 export interface LabelsPillProps {
   labels: GitifyLabels[];
   issueFields?: GitifyIssueField[];
+  labelCount?: number;
 }
 
-export function LabelsPill({ labels, issueFields }: Readonly<LabelsPillProps>) {
+export function LabelsPill({ labels, issueFields, labelCount }: Readonly<LabelsPillProps>) {
   const fieldTokens = (issueFields ?? []).map((field) => ({
     text: `${field.name}: ${field.value}`,
     fillColor: field.fillColor,
   }));
+
+  const totalLabelCount = labelCount ?? labels?.length ?? 0;
 
   const labelsContent =
     labels?.length || fieldTokens.length ? (
@@ -52,11 +55,11 @@ export function LabelsPill({ labels, issueFields }: Readonly<LabelsPillProps>) {
 
   return (
     <MetricPill
-      ariaLabel={`${formatMetricDescription(labelNames.length, 'label')}: ${labelNames.join(', ')}`}
+      ariaLabel={`${formatMetricDescription(fieldTokens.length + totalLabelCount, 'label')}: ${labelNames.join(', ')}`}
       color={IconColor.GRAY}
       contents={labelsContent}
       icon={TagIcon}
-      metric={fieldTokens.length + (labels?.length ?? 0)}
+      metric={fieldTokens.length + totalLabelCount}
     />
   );
 }

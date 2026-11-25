@@ -1,10 +1,4 @@
-import {
-  AppsIcon,
-  KeyIcon,
-  MarkGithubIcon,
-  PersonIcon,
-  TerminalIcon,
-} from '@primer/octicons-react';
+import { KeyIcon, MarkGithubIcon, PersonIcon, TerminalIcon } from '@primer/octicons-react';
 
 import { Constants, OAUTH_SCOPE } from '../../../constants';
 
@@ -15,6 +9,7 @@ import type { ForgeAdapter, NotificationDisplayHelpers, RefreshAccountData } fro
 import { isValidHostname } from '../../auth/identity';
 import {
   extractHostVersion,
+  getAuthorizedOAuthAppURL,
   getDeveloperSettingsURL,
   getNewOAuthAppURL,
   getNewTokenURL,
@@ -22,7 +17,12 @@ import {
   isValidToken,
 } from './auth';
 import { githubCapabilities } from './capabilities';
-import { forgetGitHubCliToken, resolveGitHubCliToken } from './cli';
+import {
+  forgetGitHubCliTokens,
+  identifyGitHubCliIdentity,
+  listGitHubCliAccounts,
+  resolveGitHubCliToken,
+} from './cli';
 import {
   fetchAuthenticatedUserDetails,
   ignoreNotificationThreadSubscription,
@@ -31,12 +31,7 @@ import {
   markNotificationThreadAsRead,
 } from './client';
 import { enrichGitHubNotifications } from './enrich';
-import {
-  exchangeAuthCodeForAccessToken,
-  performGitHubWebOAuth,
-  pollGitHubDeviceFlow,
-  startGitHubDeviceFlow,
-} from './flows';
+import { describeDeviceFlowStartError, pollGitHubDeviceFlow, startGitHubDeviceFlow } from './flows';
 import { createNotificationHandler } from './handlers';
 import { clearOctokitClientCacheForAccount, createOctokitClient } from './octokit';
 import { getGitHubPlatform } from './platform';
@@ -47,7 +42,7 @@ async function fetchAuthenticatedUser(account: Account): Promise<RefreshAccountD
   if (account.method === 'GitHub CLI') {
     // Re-read the CLI so a `gh auth refresh` that widened the token's scopes is
     // reflected here; a merely rotated token is handled per request.
-    forgetGitHubCliToken(account.hostname);
+    forgetGitHubCliTokens(account.hostname);
   }
 
   const response = await fetchAuthenticatedUserDetails(account);
@@ -116,7 +111,7 @@ export const githubAdapter: ForgeAdapter = {
       label: 'GitHub',
       variant: 'primary',
       route: '/login/github/device-flow',
-      authMethod: 'GitHub App',
+      authMethod: 'Gitify OAuth App',
     },
     {
       testId: 'login-pat',
@@ -133,32 +128,33 @@ export const githubAdapter: ForgeAdapter = {
       authMethod: 'GitHub CLI',
     },
     {
-      testId: 'login-oauth-app',
+      testId: 'login-custom-oauth-app',
       icon: PersonIcon,
-      label: 'OAuth App',
-      route: '/login/github/oauth-app',
-      authMethod: 'OAuth App',
+      label: 'Custom OAuth App',
+      route: '/login/github/custom-oauth-app',
+      authMethod: 'Custom OAuth App',
     },
   ],
 
   deviceFlow: {
-    authMethod: 'GitHub App',
+    authMethod: 'Gitify OAuth App',
     start: startGitHubDeviceFlow,
     poll: pollGitHubDeviceFlow,
-    getRevokeAccessUrl: (hostname) =>
-      getDeveloperSettingsURL({ hostname, method: 'GitHub App' } as Account),
+    describeStartError: describeDeviceFlowStartError,
+    getRevokeAccessUrl: getAuthorizedOAuthAppURL,
   },
 
-  oauthWebApp: {
-    performWebOAuth: performGitHubWebOAuth,
-    exchangeAuthCodeForToken: exchangeAuthCodeForAccessToken,
+  customOAuthApp: {
+    authMethod: 'Custom OAuth App',
     validateClientId: isValidClientId,
     getNewOAuthAppUrl: getNewOAuthAppURL,
   },
 
   cliAuth: {
     authMethod: 'GitHub CLI',
+    listAccounts: listGitHubCliAccounts,
     resolveToken: resolveGitHubCliToken,
+    identify: identifyGitHubCliIdentity,
   },
 
   accountOps: {
@@ -167,7 +163,7 @@ export const githubAdapter: ForgeAdapter = {
     fetchAuthenticatedUser,
     onAccountTokenChange: (account) => {
       clearOctokitClientCacheForAccount(account);
-      forgetGitHubCliToken(account.hostname);
+      forgetGitHubCliTokens(account.hostname);
     },
     listNotifications,
     markThreadAsRead: async (account, threadId) => {
@@ -231,12 +227,11 @@ function accountHasScopes(
 
 function githubAuthMethodIcon(method: AuthMethod) {
   switch (method) {
-    case 'GitHub App':
-      return AppsIcon;
+    case 'Gitify OAuth App':
+    case 'Custom OAuth App':
+      return PersonIcon;
     case 'GitHub CLI':
       return TerminalIcon;
-    case 'OAuth App':
-      return PersonIcon;
     default:
       return KeyIcon;
   }

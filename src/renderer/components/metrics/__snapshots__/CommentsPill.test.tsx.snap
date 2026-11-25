@@ -41,7 +41,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with 1 comment 1
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           1
@@ -104,7 +104,7 @@ exports[`renderer/components/metrics/CommentsPill.tsx > renders with multiple co
           />
         </svg>
         <span
-          class="text-xxs px-1 prc-Text-Text-9mHv3"
+          class="text-xxs pl-1 prc-Text-Text-9mHv3"
           data-component="Text"
         >
           2

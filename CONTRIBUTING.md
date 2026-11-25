@@ -12,15 +12,17 @@ We also suggest you read the [Project Philosophy](#project-philosophy) in our do
 > _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
 >
 > ```shell
-> OAUTH_CLIENT_ID="123" pnpm build
+> OAUTH_CLIENT_ID="123" vp run build
 > ```
 
 To get started:
 
+Install the [Vite+ CLI](https://viteplus.dev/guide/global-cli) (`vp`). It runs every project command and downloads the pnpm version pinned in `package.json`.
+
 Clone the repository and install dependencies:
 
 ```shell
-pnpm install
+vp install
 ```
 
 Copy the `.env.template` to `.env` and add update `GITHUB_TOKEN` with a GitHub Personal Access Token. This is used for fetching the latest GitHub GraphQL API schema for `graphql-codegen`.
@@ -32,8 +34,12 @@ GITHUB_TOKEN=<some personal access token>
 Start development mode (includes GraphQL codegen and hot module reload):
 
 ```shell
-pnpm dev
+vp run dev
 ```
+
+Development builds keep their settings, cache, and logs in a separate user data directory, so you can run `vp run dev` while an installed Gitify is running. Sign-in and settings are therefore separate from the installed app.
+
+On macOS, `vp run dev` runs from a Gitify-branded copy of the Electron bundle in `~/Library/Caches/gitify-dev`. This keeps native notification activation inside the running development app instead of launching the generic `Electron.app`. The copy lives outside the checkout because Launch Services ignores applications under the temporary directory, and macOS will not deliver notifications from an application the notification daemon cannot resolve. The bundle is recreated when the Electron version or signing identity changes, and it is registered with Launch Services on every launch. It is signed with a Developer ID or Apple Development identity when available, falling back to ad-hoc signing. Set `GITIFY_DEV_SIGN_IDENTITY` to choose a specific identity.
 
 ### 🛠️ Tests
 
@@ -41,21 +47,24 @@ Tooling is unified through [Vite+][vite-plus-website], which bundles the linter 
 
 ```shell
 # Run lint, format, and type checks
-pnpm check
+vp run check
+
+# CI lint with GitHub annotations
+vp run lint:ci
 
 # Auto-fix formatting and lint issues
-pnpm check:fix
+vp run check:fix
 
 # Run unit tests with coverage
-pnpm test
+vp run test
 
 # Update vitest snapshots
-pnpm test -u
+vp run test -u
 ```
 
 #### 🧪 Visual regression tests
 
-`pnpm test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
+`vp run test` covers the DOM snapshots. Pixel-level regressions (colour tokens,
 spacing, theme changes) are covered separately by a browser-mode project that
 screenshots every route in Classic light, Classic dark, Glass light, and Glass
 dark, with accessibility and high-contrast variants on the densest routes. It
@@ -72,15 +81,18 @@ browsers locally.
 
 ```shell
 # Verify against the committed baselines
-pnpm test:visual
+vp run test:visual
 
 # Regenerate them after an intentional UI change
-pnpm test:visual:update
+vp run test:visual:update
 ```
 
-Both need Docker on an arm64 host, because Chromium crashes under amd64
-emulation on Apple Silicon. On any other machine, push the branch and read the
-diff from the Visual Regression job's `visual-regression-diffs` artifact.
+Both need Docker on an arm64 or amd64 host. The container runs in the host's
+own architecture, because Chromium crashes under amd64 emulation on Apple
+Silicon. CI renders on arm64; amd64 renders differ only in antialiasing, within
+the comparison's tolerance, so baselines regenerated on either pass in CI.
+Without Docker, push the branch and read the diff from the Visual Regression
+job's `visual-regression-diffs` artifact.
 
 Do not invoke the `browser [visual]` project through `vitest` directly. Vitest
 namespaces baselines per platform and creates missing ones automatically, so a
@@ -91,9 +103,74 @@ guard fails the run outside Linux rather than letting that happen.
 Note that these baselines capture the `backdrop-filter` fallback for Glass, not
 the macOS native vibrancy material, which Chromium cannot render.
 
+### 🔔 Native notification checks
+
+Operating-system notifications are created in the main process. A single unread notification offers a **Mark as read** action; multiple new notifications publish one count-only summary with no action.
+
+A single notification uses the repository as its title, `Reason · @actor` as context, and the formatted display title as its body. macOS shows the context as the subtitle; Windows and Linux fold it into the body above the subject.
+
+- **macOS**: native notifications require a code-signed app. Electron ships ad-hoc linker-signed, which macOS rejects for `UNUserNotificationCenter`, so `vp run dev` re-signs the development Electron bundle automatically. Ad-hoc signing needs no certificate; set `GITIFY_DEV_SIGN_IDENTITY` to use a Developer ID or Apple Development identity. The same step sets `NSUserNotificationAlertStyle: alert`; the packaged app declares it in its `Info.plist`.
+- **Windows**: live interactions use the notification instance events.
+- **Linux**: the action button appears only when the desktop notification server advertises the `actions` capability.
+
+Verify the notification content, body click, Mark as read, removal-on-read, and summary click on the platforms you change.
+
+### 📦 Dependencies and packaging
+
+The packaged app ships only the packages that are loaded from disk at runtime.
+Declare main-process runtime dependencies in `dependencies`; packages that Vite
+bundles into the renderer belong in `devDependencies`, even though the renderer
+imports them. The current runtime packages are `electron-log`,
+`electron-menubar`, and `electron-updater`; React, the i18n packages, and `cn`
+are renderer-only and build-time.
+
+`electron-builder` collects the production closure from `dependencies` through
+its pnpm collector. Do not add `node_modules` to the `files` list in
+`electron-builder.js` — a hand-written glob overrides that collector and can
+re-introduce dev dependencies. After packaging, run
+`node scripts/verifyPackagedDependencies.js <app path>` to assert that the asar
+contains the runtime packages and none of the renderer-only packages or the pnpm
+virtual store.
+
+`vp run build` also enforces this: the main-process external list is derived from
+`dependencies`, and the build fails when a runtime dependency is never imported
+by the main or preload process.
+
+### Translations
+
+Gitify's interface is translated through [i18next][i18next-website]. The app ships English as the only locale today, but the infrastructure supports additional languages — adding one is a contributor-friendly change.
+
+- Translation files live in `src/renderer/i18n/locales/` (e.g. `en.json`).
+- `en.json` is generated from the code, never hand-edited. Write the English text as the second argument of `t()`, and as `defaults` on `<Trans>`:
+
+  ```tsx
+  t('common.save', 'Save');
+  t('login.device.opened', 'Opened {{hostname}}', { hostname });
+  <Trans
+    i18nKey="filters.requires_detailed"
+    components={[<strong key={0} />]}
+    defaults="Requires <0>Detailed Notifications</0>."
+  />;
+  ```
+
+- After changing a string, sync the locale files:
+  - `vp run i18n:extract` — regenerate/update locale files from the `t()` calls in the source
+  - `vp run i18n:check` — verify the keys are in sync with the code, every `t()`/`<Trans>` has an English default, and `en.json` has no empty or key-path values (also runs in CI)
+  - `vp run i18n:lint` — flag hardcoded or untranslated UI strings
+  - `vp run i18n:status` — locale health summary
+- Don't run `i18next-cli extract --trust-derived`: it replaces real English text with key names.
+- To add a language:
+  1. Create `src/renderer/i18n/locales/<lang>.json`, copying `en.json` as a starting point.
+  2. Register it in `SUPPORTED_LANGUAGES` in `src/renderer/i18n/types.ts` (this also surfaces it in the Appearance → Language selector).
+  3. Import it in the `locales` map in `src/renderer/i18n/loader.ts`.
+  4. Translate the keys. The [i18n Ally][i18n-ally-website] VSCode extension is handy for working through JSON keys.
+  5. Run `vp run i18n:check` and `vp run test`.
+- Translation keys use `snake_case`, grouped by feature (e.g. `settings.appearance.language`). Prefer whole-sentence keys with `{{placeholder}}` interpolation over string concatenation, and leave brand names (GitHub, GitLab, …) untranslated.
+- When a sentence contains markup (bold, links, tooltips), keep it as one `<Trans>` string instead of splitting it into several `t()` fragments, so translators can reorder the words. A component that requires a single child (e.g. Primer's `Tooltip`) needs a small wrapper that accepts `children`.
+
 ### 🎨 Code Style & Conventions
 
-- Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `pnpm check` before submitting a PR.
+- Linting and formatting are configured in `vite.config.mts` (the `lint` and `fmt` blocks). Please run `vp run check` before submitting a PR.
 - Renderer React components are defined as function declarations. `React.FC` is reserved for typing a component value (a prop or return type), never a component definition; `react/function-component-definition` enforces this.
 - Follow existing file and folder naming conventions.
 - See [ARCHITECTURE.md](./ARCHITECTURE.md) for the renderer's module layering, state ownership, and side-effect conventions.
@@ -133,7 +210,7 @@ proposals and new changes follow this section.
  */
 ```
 
-TSDoc syntax is validated by the shared lint configuration through `pnpm check`.
+TSDoc syntax is validated by the shared lint configuration through `vp run check`.
 
 ### 🐛 How to Report Bugs or Request Features
 
@@ -145,6 +222,11 @@ Releases are automated with [release-please][release-please]. There is no releas
 
 1. **Merge changes into `main`.** Use [Conventional Commits][conventional-commits] for PR titles (`feat:`, `fix:`, `docs:`, `chore(deps):`, ...). The commit type decides the version bump and the changelog section it lands in.
 2. **Review the release PR.** release-please keeps an open `chore: release X.Y.Z` pull request up to date as commits land. It bumps the version in `package.json`, regenerates `CHANGELOG.md`, and updates `sonar.projectVersion` in `sonar-project.properties`. Check the [Renovate Dependency Dashboard][github-dependency-dashboard] for any dependency updates you want to include first.
+
+   Before merging, wait for the **Apple notarization readiness** check. It authenticates to Apple's notary service with the same credentials the release uses and fails when a required Apple agreement is missing or expired. Only the Account Holder can accept the [Apple Developer Program License Agreement](https://developer.apple.com/account) or a pending agreement in [App Store Connect](https://appstoreconnect.apple.com/business/agreements), so surface the failure to them instead of re-running the build.
+
+   release-please opens the PR with `GITHUB_TOKEN`, so GitHub holds its workflow runs for approval. A maintainer with write access must select **Approve workflows to run** before CI and the Apple check execute.
+
 3. **Merge the release PR when you are ready to ship.** Merging is the "go" decision. GitHub Actions then automatically:
 
 - builds, signs, and notarizes the app on macOS, Windows, and Linux,
@@ -159,12 +241,46 @@ Releases are automated with [release-please][release-please]. There is no releas
 
 No manual milestone creation, renaming, or closing is required.
 
+When manually rebuilding a release, dispatch **Publish** from the release tag so the source matches that release. A tag-based dispatch uses the workflow at that tag: older tags that predate the Apple preflight will not run it. Verify notarization access separately before dispatching from an older tag.
+
 #### 🔐 Release automation permissions
 
+- release-please uses `GITHUB_TOKEN`, so its release PR workflow runs require approval from a user with write access.
 - Packaging and publication use `contents: write`.
 - The milestone automation uses `issues: write`.
 - Pull request notification uses `issues: write`, `pull-requests: write`, and `contents: read`.
 - The validation jobs (`lint`, `tests`) remain read-only.
+
+#### 🔒 Packaged build hardening
+
+Packaged builds pin Electron's [fuses][electron-fuses] in `electron-builder.js`, so a shipped binary refuses the framework's permissive defaults. electron-builder flips them after packing and before signing, so the code signature covers the flipped binary.
+
+| Fuse                                    | Value | Effect                                                                 |
+| --------------------------------------- | ----- | ---------------------------------------------------------------------- |
+| `runAsNode`                             | off   | refuses `ELECTRON_RUN_AS_NODE`, so the binary cannot run as plain Node |
+| `enableNodeOptionsEnvironmentVariable`  | off   | ignores `NODE_OPTIONS` and `NODE_EXTRA_CA_CERTS`                       |
+| `enableNodeCliInspectArguments`         | off   | refuses `--inspect` and `SIGUSR1`                                      |
+| `enableEmbeddedAsarIntegrityValidation` | on    | validates `app.asar` before loading it                                 |
+| `onlyLoadAppFromAsar`                   | on    | no fallback to an adjacent `app/` directory                            |
+
+`electronFuses` also sets `resetAdHocDarwinSignature`, which is not a fuse. Flipping the fuses invalidates the ad-hoc signature Electron ships with, and Apple Silicon refuses to launch a binary whose signature no longer validates. The build workflow packages macOS unsigned (`-c.mac.identity=null`), so without it the arm64 artifact is killed on launch. Signed builds re-sign afterwards, superseding the ad-hoc signature.
+
+Four settings are deliberate non-choices:
+
+- **`enableCookieEncryption` stays at its Electron default.** Tokens are already encrypted through `safeStorage`, and Gitify keeps no cookies worth protecting. Electron also documents the fuse as one-way: disabling it later loses the cookie store.
+- **`grantFileProtocolExtraPrivileges` stays at its Electron default.** The renderer loads `index.html` over `file://`, so removing those privileges breaks asset and sound loading.
+- **`asar` must stay enabled.** `onlyLoadAppFromAsar` requires it, and packaging without an archive fails rather than producing an artifact that cannot start.
+- **Asar integrity is not required on Linux.** Electron does not support it there, so the fuse is inert.
+
+`scripts/verifyFuses.js` reads the fuse wire back out of the built artifacts and fails when it does not match the expected posture. The expected set is a constant in that script rather than read from this configuration, so removing the configuration fails the build instead of passing vacuously. The build and publish workflows run it after packaging, because a missing `electronFuses` block is otherwise a silent no-op: electron-builder simply leaves the Electron defaults in place.
+
+#### 🔄 Updates for packaged installations
+
+Gitify updates itself by default. Automatic updates default to off only where a package manager owns updates: Scoop (detected from its installation metadata), Flatpak, Snap, and Linux packages that run on a system Electron (detected when the app lives outside the Electron executable's directory, as with Arch's `electron45`).
+
+Package maintainers can select the same default by placing an empty `disable-auto-updates` file in the application's resources directory (Electron's `process.resourcesPath`) or by setting `GITIFY_DISABLE_AUTO_UPDATE=1` in the launcher.
+
+Users can override the default under Settings > System > Automatic updates, and the choice persists across restarts. Turning updates off stops scheduled checks, cancels active downloads, and prevents installation on quit. The tray menu then offers **View releases** instead of **Check for updates**.
 
 ### 🖌️ Design Guidelines
 
@@ -200,6 +316,7 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 
 [vite-plus-website]: https://viteplus.dev/
 [tsdoc-website]: https://tsdoc.org/
+[electron-fuses]: https://www.electronjs.org/docs/latest/tutorial/fuses
 [conventional-commits]: https://www.conventionalcommits.org
 [release-please]: https://github.com/googleapis/release-please
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
@@ -209,3 +326,5 @@ Currently supported forges: **GitHub** (Cloud, Enterprise Server, Enterprise Clo
 [github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
 [vitest-website]: https://vitest.dev/
+[i18next-website]: https://www.i18next.com/
+[i18n-ally-website]: https://i18n-docs.intlify.org/

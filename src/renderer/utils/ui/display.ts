@@ -1,5 +1,7 @@
 import type { Chevron } from '../../types';
 
+import i18n from '../../i18n';
+
 export interface ParsedCodePart {
   id: string;
   type: 'text' | 'code';
@@ -9,33 +11,25 @@ export interface ParsedCodePart {
 /**
  * Returns the appropriate chevron direction and accessible label for a collapsible section.
  *
- * @param hasNotifications - Whether the section has any notifications to display.
+ * The icon always reflects the disclosure state: right when collapsed and down
+ * when expanded. Empty sections follow the same convention because they still
+ * disclose the "all read" panel.
+ *
  * @param isVisible - Whether the section is currently expanded/visible.
  * @param type - The type of section (`'account'` or `'repository'`).
  * @returns A `Chevron` object containing the direction and its accessible label.
  */
-export function getChevronDetails(
-  hasNotifications: boolean,
-  isVisible: boolean,
-  type: 'account' | 'repository',
-): Chevron {
-  if (!hasNotifications) {
-    return {
-      direction: 'left',
-      label: `No notifications for ${type}`,
-    };
-  }
-
-  if (isVisible) {
-    return {
-      direction: 'down',
-      label: `Hide ${type} notifications`,
-    };
-  }
+export function getChevronDetails(isVisible: boolean, type: 'account' | 'repository'): Chevron {
+  const typeLabel =
+    type === 'account'
+      ? i18n.t('chevron.account', 'account')
+      : i18n.t('chevron.repository', 'repository');
 
   return {
-    direction: 'right',
-    label: `Show ${type} notifications`,
+    direction: isVisible ? 'down' : 'right',
+    label: isVisible
+      ? i18n.t('chevron.hide', 'Hide {{type}} notifications', { type: typeLabel })
+      : i18n.t('chevron.show', 'Show {{type}} notifications', { type: typeLabel }),
   };
 }
 

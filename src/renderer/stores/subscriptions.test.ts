@@ -1,15 +1,20 @@
-import type { Percentage } from '../types';
+import { mockGitHubCloudAccount } from '../__mocks__/account-mocks';
 
+import type { AccountUUID, Percentage } from '../types';
+
+import { getAccountUUID } from '../utils/auth/utils';
 import * as comms from '../utils/system/comms';
 import * as zoom from '../utils/ui/zoom';
 import { initializeStoreSubscriptions } from './subscriptions';
+import useAccountsStore from './useAccountsStore';
+import useFiltersStore from './useFiltersStore';
 import useSettingsStore from './useSettingsStore';
 
 describe('renderer/stores/subscriptions.ts', () => {
   const setAutoLaunchSpy = vi.spyOn(comms, 'setAutoLaunch').mockImplementation(vi.fn());
   const setKeepWindowOnBlurSpy = vi.spyOn(comms, 'setKeepWindowOnBlur').mockImplementation(vi.fn());
-  const setShowUpdateNotificationsSpy = vi
-    .spyOn(comms, 'setShowUpdateNotifications')
+  const setUpdatePreferencesSpy = vi
+    .spyOn(comms, 'setUpdatePreferences')
     .mockImplementation(vi.fn());
   const setUseUnreadActiveIconSpy = vi
     .spyOn(comms, 'setUseUnreadActiveIcon')
@@ -33,9 +38,10 @@ describe('renderer/stores/subscriptions.ts', () => {
     expect(setKeepWindowOnBlurSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().keepWindowOnBlur,
     );
-    expect(setShowUpdateNotificationsSpy).toHaveBeenCalledWith(
-      useSettingsStore.getState().showUpdateNotifications,
-    );
+    expect(setUpdatePreferencesSpy).toHaveBeenCalledWith({
+      automaticUpdates: 'default',
+      showUpdateNotifications: useSettingsStore.getState().showUpdateNotifications,
+    });
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(
       useSettingsStore.getState().useUnreadActiveIcon,
     );
@@ -56,7 +62,10 @@ describe('renderer/stores/subscriptions.ts', () => {
     expect(setKeepWindowOnBlurSpy).toHaveBeenCalledWith(true);
 
     useSettingsStore.getState().updateSetting('showUpdateNotifications', false);
-    expect(setShowUpdateNotificationsSpy).toHaveBeenCalledWith(false);
+    expect(setUpdatePreferencesSpy).toHaveBeenCalledWith({
+      automaticUpdates: 'default',
+      showUpdateNotifications: false,
+    });
 
     useSettingsStore.getState().updateSetting('useUnreadActiveIcon', false);
     expect(setUseUnreadActiveIconSpy).toHaveBeenCalledWith(false);
@@ -66,6 +75,29 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     useSettingsStore.getState().updateSetting('useX11Backend', true);
     expect(setUseX11BackendSpy).toHaveBeenCalledWith(true);
+  });
+
+  it('prunes account filters that no longer match an account', () => {
+    useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+    useFiltersStore.setState({
+      accounts: [getAccountUUID(mockGitHubCloudAccount), 'stale' as AccountUUID],
+    });
+
+    cleanup = initializeStoreSubscriptions();
+    expect(useFiltersStore.getState().accounts).toEqual([getAccountUUID(mockGitHubCloudAccount)]);
+
+    useAccountsStore.setState({ accounts: [] });
+    expect(useFiltersStore.getState().accounts).toEqual([]);
+  });
+
+  it('forwards automatic update overrides after initialization', () => {
+    cleanup = initializeStoreSubscriptions();
+    vi.clearAllMocks();
+    useSettingsStore.getState().updateSetting('automaticUpdates', 'disabled');
+    expect(setUpdatePreferencesSpy).toHaveBeenCalledExactlyOnceWith({
+      automaticUpdates: 'disabled',
+      showUpdateNotifications: useSettingsStore.getState().showUpdateNotifications,
+    });
   });
 
   it('applies zoom level when zoom percentage changes', () => {
@@ -92,6 +124,61 @@ describe('renderer/stores/subscriptions.ts', () => {
 
     expect(useSettingsStore.getState().zoomPercentage).toBe(80);
     vi.useRealTimers();
+  });
+
+  it('clamps an out-of-range saved zoom percentage on startup', () => {
+    useSettingsStore.getState().updateSetting('zoomPercentage', 150 as Percentage);
+
+    cleanup = initializeStoreSubscriptions();
+
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+    expect(window.gitify.zoom.setLevel).toHaveBeenCalledWith(
+      zoom.zoomPercentageToLevel(120 as Percentage),
+    );
+  });
+
+  it('snaps a native zoom outside the supported range back within bounds', () => {
+    vi.useFakeTimers();
+    useSettingsStore.getState().updateSetting('zoomPercentage', 100 as Percentage);
+    cleanup = initializeStoreSubscriptions();
+    vi.clearAllMocks();
+
+    vi.mocked(window.gitify.zoom.getLevel).mockReturnValue(
+      zoom.zoomPercentageToLevel(125 as Percentage),
+    );
+
+    window.dispatchEvent(new Event('resize'));
+    vi.advanceTimersByTime(250);
+
+    expect(window.gitify.zoom.setLevel).toHaveBeenCalledWith(
+      zoom.zoomPercentageToLevel(120 as Percentage),
+    );
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+    vi.useRealTimers();
+  });
+
+  it('applies zoom shortcuts using the configured step and bounds', () => {
+    useSettingsStore.getState().updateSetting('zoomPercentage', 100 as Percentage);
+    cleanup = initializeStoreSubscriptions();
+
+    const onZoom = vi.mocked(window.gitify.onZoom).mock.calls.at(-1)?.[0] as (
+      action: 'in' | 'out' | 'reset',
+    ) => void;
+
+    onZoom('in');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(110);
+
+    onZoom('in');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+
+    onZoom('in');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(120);
+
+    onZoom('out');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(110);
+
+    onZoom('reset');
+    expect(useSettingsStore.getState().zoomPercentage).toBe(100);
   });
 
   it('stops reacting to changes after cleanup', () => {

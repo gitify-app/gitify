@@ -17,9 +17,9 @@ import { AccountScopesRoute } from './AccountScopes';
 import { BitbucketLoginWithPersonalAccessTokenRoute } from './bitbucket/LoginWithPersonalAccessToken';
 import { FiltersRoute } from './Filters';
 import { GiteaLoginWithPersonalAccessTokenRoute } from './gitea/LoginWithPersonalAccessToken';
+import { GitHubLoginWithCustomOAuthAppRoute } from './github/LoginWithCustomOAuthApp';
 import { GitHubLoginWithDeviceFlowRoute } from './github/LoginWithDeviceFlow';
 import { GitHubLoginWithCLIRoute } from './github/LoginWithGitHubCLI';
-import { GitHubLoginWithOAuthAppRoute } from './github/LoginWithOAuthApp';
 import { GitHubLoginWithPersonalAccessTokenRoute } from './github/LoginWithPersonalAccessToken';
 import { GitLabLoginWithPersonalAccessTokenRoute } from './gitlab/LoginWithPersonalAccessToken';
 import { LoginRoute } from './Login';
@@ -89,9 +89,9 @@ const ROUTES: RouteCase[] = [
     state: { initialEntries: ['/login/github/personal-access-token'] },
   },
   {
-    name: 'login-github-oauth-app',
-    element: <GitHubLoginWithOAuthAppRoute />,
-    state: { initialEntries: ['/login/github/oauth-app'] },
+    name: 'login-github-custom-oauth-app',
+    element: <GitHubLoginWithCustomOAuthAppRoute />,
+    state: { initialEntries: ['/login/github/custom-oauth-app'] },
   },
   {
     name: 'login-gitea-personal-access-token',
@@ -154,6 +154,21 @@ async function captureRoute(
     designLanguage,
     settings: { ...route.state?.settings, ...settings },
   });
+
+  if (route.name === 'login-github-cli') {
+    await vi.waitFor(() => {
+      if (!document.querySelector('[data-testid="login-submit"]:enabled')) {
+        throw new Error('Waiting for GitHub CLI accounts to load');
+      }
+    });
+  }
+
+  // These baselines capture idle routes. Hover/focus interactions have their
+  // own coverage; park the pointer on empty sidebar space between captures.
+  await page.getByTestId('visual-root').hover({ position: { x: 1, y: 399 } });
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
 
   await expect(page.getByTestId('visual-root')).toMatchScreenshot(
     `${name}-${theme.toLowerCase()}-${designLanguage}`,

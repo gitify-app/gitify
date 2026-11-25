@@ -24,8 +24,17 @@ jobs:
           cache: true
           node-version-file: '.nvmrc'
 
+      - name: Run lint with GitHub annotations
+        run: vp run lint:ci
+
       - name: Run lint and format checks
         run: vp run check
+
+      - name: Run i18n key sync check
+        run: vp run i18n:check
+
+      - name: Run i18n lint (hardcoded strings, split sentences)
+        run: vp run i18n:lint
 
   lint-actions:
     name: Lint GitHub Actions [actionlint]
@@ -42,3 +51,13 @@ jobs:
 
       - name: GitHub Actions linter
         uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+
+      - name: Install GitHub Actions lockfile verifier
+        run: gh extension install github/gh-actions-lock --pin v0.5.1
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Verify GitHub Actions lockfile
+        run: gh actions-lock --verify
+        env:
+          GH_TOKEN: ${{ github.token }}

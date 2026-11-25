@@ -35,3 +35,32 @@ describe('renderer/components/settings/TraySettings.tsx', () => {
     },
   );
 });
+
+describe('renderer/components/settings/TraySettings.tsx notification count visibility', () => {
+  // `window.gitify` is rebuilt in a global `beforeEach`, so the mocks are read
+  // inside each test.
+  const platformMocks = () =>
+    window.gitify.platform as unknown as Record<
+      'isLinux' | 'isMacOS' | 'isWindows',
+      ReturnType<typeof vi.fn>
+    >;
+
+  it.each([
+    ['macOS', 'isMacOS', true],
+    ['Linux', 'isLinux', true],
+    ['Windows', 'isWindows', false],
+  ] as const)('on %s, shows the count switch: %s', async (_name, predicate, visible) => {
+    const mocks = platformMocks();
+    for (const key of ['isLinux', 'isMacOS', 'isWindows'] as const) {
+      mocks[key].mockReturnValue(key === predicate);
+    }
+
+    await act(async () => {
+      renderWithProviders(<TraySettings />);
+    });
+
+    expect(screen.queryByRole('button', { name: 'Show notification count' }) !== null).toBe(
+      visible,
+    );
+  });
+});

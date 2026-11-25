@@ -2,9 +2,11 @@ import type { FC } from 'react';
 
 import type { OcticonProps } from '@primer/octicons-react';
 
+import type { GitHubCliIdentity } from '../../../shared/events';
+
 import type {
   Account,
-  AuthCode,
+  ClientID,
   Forge,
   Hostname,
   IconColor,
@@ -14,13 +16,7 @@ import type {
   Token,
   UserType,
 } from '../../types';
-import type {
-  AuthMethod,
-  AuthResponse,
-  DeviceFlowSession,
-  LoginOAuthWebOptions,
-  PlatformType,
-} from '../auth/types';
+import type { AuthMethod, DeviceFlowSession, PlatformType } from '../auth/types';
 
 /**
  * Capability flags exposed by a forge adapter.
@@ -168,9 +164,9 @@ export interface ForgeAdapter {
 
   // --- Auth flows ---
   // Optional because not every forge supports every flow. Gitea today is
-  // PAT-only and omits both bundles. The orchestrator gates UI on the
+  // PAT-only and omits every bundle. The orchestrator gates UI on the
   // presence of these bundles (and on `loginMethods` entries pointing at
-  // the forge's device-flow or OAuth-app routes).
+  // the forge's device-flow or custom-OAuth-app routes).
 
   /**
    * OAuth device-flow capability. Forges without device-flow support (e.g.
@@ -180,10 +176,11 @@ export interface ForgeAdapter {
   deviceFlow?: DeviceFlowSupport;
 
   /**
-   * Custom-OAuth-app web flow. Forges without OAuth-app support (e.g. Gitea)
-   * omit this bundle entirely — callers gate the OAuth-app UI on its presence.
+   * Custom-OAuth-app capability. Forges where a user cannot authorize their
+   * own OAuth app (e.g. Gitea) omit this bundle entirely — callers gate the
+   * custom-app UI on its presence.
    */
-  oauthWebApp?: OAuthWebAppSupport;
+  customOAuthApp?: CustomOAuthAppSupport;
 
   /**
    * Reuse of a locally installed forge CLI's credential. Forges whose CLI
@@ -321,35 +318,67 @@ export interface ExternallyManagedScopes {
 }
 
 /**
- * Custom-OAuth-app web flow capability bundle. Present only on forges that
- * support browser-redirect OAuth with user-supplied client credentials
- * (GitHub today).
- */
-export interface OAuthWebAppSupport {
-  /** Start the OAuth web flow and return the auth code once the user consents. */
-  performWebOAuth(options: LoginOAuthWebOptions): Promise<AuthResponse>;
-  /** Exchange an OAuth web-flow authorization code for an access token. */
-  exchangeAuthCodeForToken(authCode: AuthCode, options: LoginOAuthWebOptions): Promise<Token>;
-  /** Whether the supplied OAuth client ID matches the forge's expected format. */
-  validateClientId(clientId: string): boolean;
-  /** URL the user visits to create a new OAuth app on the forge. */
-  getNewOAuthAppUrl(hostname: Hostname): Link;
-}
-
-/**
  * OAuth device-flow capability bundle. Present only on forges that support
  * browser-side device authorisation (GitHub today).
  */
 export interface DeviceFlowSupport {
   /** `AuthMethod` recorded on the account when a successful login completes. */
   authMethod: AuthMethod;
-  /** Start a device-flow authorization session. */
-  start(hostname?: Hostname, scopes?: string[]): Promise<DeviceFlowSession>;
+  /**
+   * Start a device-flow authorization session.
+   *
+   * `clientId` authorizes the user's own OAuth app instead of Gitify's
+   * preconfigured one; when omitted the forge's built-in app is used.
+   */
+  start(hostname?: Hostname, scopes?: string[], clientId?: ClientID): Promise<DeviceFlowSession>;
   /** Poll for completion; resolves to a token when granted. */
   poll(session: DeviceFlowSession): Promise<Token | null>;
-  /** URL the user visits to revoke Gitify's access on this forge. */
-  getRevokeAccessUrl(hostname: Hostname): Link;
+  /**
+   * Describe a start failure in user-facing terms, or return `undefined` when
+   * the caller should report a generic failure instead.
+   */
+  describeStartError?(err: unknown, hostname: Hostname, clientId?: ClientID): string | undefined;
+  /** URL the user visits to revoke the authorized OAuth app's access on this forge. */
+  getRevokeAccessUrl(hostname: Hostname, clientId?: ClientID): Link;
 }
+
+/**
+ * Custom-OAuth-app capability bundle. Present only on forges where a user can
+ * authorize their own OAuth app (GitHub today).
+ */
+export interface CustomOAuthAppSupport {
+  /** `AuthMethod` recorded on accounts created from a user-supplied OAuth app. */
+  authMethod: AuthMethod;
+  /** Whether the supplied OAuth client ID matches the forge's expected format. */
+  validateClientId(clientId: string): boolean;
+  /** URL the user visits to register a new OAuth app on the forge. */
+  getNewOAuthAppUrl(hostname: Hostname): Link;
+}
+
+/**
+ * One identity a local CLI can supply a credential for. `active` mirrors the
+ * CLI's own notion of the identity it currently treats as active.
+ */
+export interface CliAccountChoice {
+  identity: GitHubCliIdentity;
+  active: boolean;
+}
+
+/** Why a local CLI could not list its identities for a host. */
+export type CliAccountsError =
+  | 'CLI_NOT_FOUND'
+  | 'CLI_NOT_AUTHENTICATED'
+  | 'CLI_UNSUPPORTED'
+  | 'CLI_TIMED_OUT'
+  | 'CLI_FAILED';
+
+/**
+ * Result of listing a local CLI's identities for a host. An empty list is a
+ * normal answer, not an error.
+ */
+export type CliAccountsResult =
+  | { accounts: CliAccountChoice[]; error?: never; detail?: never }
+  | { accounts?: never; error: CliAccountsError; detail?: string };
 
 /**
  * Local-CLI credential capability bundle. Present only on forges whose
@@ -358,11 +387,20 @@ export interface DeviceFlowSupport {
 export interface CliAuthSupport {
   /** Auth method recorded on accounts created from the CLI's credential. */
   authMethod: AuthMethod;
+  /** List the identities the CLI holds for `hostname`. */
+  listAccounts(hostname: Hostname): Promise<CliAccountsResult>;
   /**
    * Read the token the CLI holds for `hostname`.
    *
+   * @param hostname - Host to read a token for.
+   * @param identity - Identity to address; omitted for the CLI's active account.
    * @throws With a user-facing message when the CLI is absent, is not logged
-   *         in to the host, or failed.
+   *         in to the host or identity, or failed.
    */
-  resolveToken(hostname: Hostname): Promise<Token>;
+  resolveToken(hostname: Hostname, identity?: GitHubCliIdentity): Promise<Token>;
+  /**
+   * Map a resolved GitHub login onto one of the host's CLI identities. Used to
+   * pin accounts created before identities were recorded.
+   */
+  identify?(hostname: Hostname, login: string): Promise<GitHubCliIdentity | undefined>;
 }

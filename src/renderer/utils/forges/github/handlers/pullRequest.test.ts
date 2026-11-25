@@ -86,6 +86,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
@@ -180,6 +181,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
@@ -221,6 +223,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
@@ -262,6 +265,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
@@ -306,6 +310,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         isStacked: true,
         stackPosition: 2,
         stackDepth: 3,
@@ -369,6 +374,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         linkedIssues: [],
         commentCount: 1,
         milestone: undefined,
@@ -435,6 +441,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         state: 'OPEN',
       });
       mockPullRequest.labels = {
+        totalCount: 1,
         nodes: [
           {
             name: 'enhancement',
@@ -469,6 +476,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [{ name: 'enhancement', color: '0e8a16' }],
+        labelCount: 1,
         linkedIssues: [],
         commentCount: 0,
         milestone: undefined,
@@ -517,6 +525,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         linkedIssues: [
           {
             number: 789,
@@ -529,6 +538,24 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+
+    it('derives linked issues from a bounded list of 10', async () => {
+      const mockPullRequest = mockPullRequestResponseNode({ state: 'OPEN' });
+      mockPullRequest.closingIssuesReferences = {
+        nodes: Array.from({ length: 10 }, (_, index) => ({
+          number: 100 + index,
+          url: `https://github.com/gitify-app/notifications-test/issues/${100 + index}` as Link,
+        })),
+      };
+
+      fetchPullByNumberSpy.mockResolvedValue({
+        repository: { pullRequest: mockPullRequest },
+      } satisfies FetchPullRequestByNumberQuery);
+
+      const result = await pullRequestHandler.enrich(mockNotification);
+
+      expect(result.linkedIssues).toHaveLength(10);
     });
 
     it('with milestone', async () => {
@@ -566,6 +593,7 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
         reviewRequested: [],
         reviewers: [],
         labels: [],
+        labelCount: 0,
         linkedIssues: [],
         commentCount: 0,
         milestone: {
@@ -831,6 +859,33 @@ describe('renderer/utils/notifications/handlers/pullRequest.ts', () => {
       expect(result).toEqual([
         { user: 'reviewer-1', state: 'COMMENTED', threads: { resolved: 0, total: 0 } },
       ]);
+    });
+
+    it('derives reviewer and thread metrics from a bounded 25-item list', () => {
+      const reviews = Array.from({ length: 25 }, (_, index) => ({
+        author: mockAuthorResponseNode(`reviewer-${index}`),
+        state: 'APPROVED' as PullRequestReviewState,
+      }));
+      const threads = {
+        nodes: Array.from({ length: 25 }, (_, index) => ({
+          isResolved: index % 2 === 0,
+          comments: { nodes: [{ author: { login: `reviewer-${index}` } }] },
+        })),
+      };
+
+      const result = getPullRequestReviewers(mockGitHubCloudAccount, reviews, threads);
+
+      expect(result).toHaveLength(25);
+      expect(result[0]).toEqual({
+        user: 'reviewer-0',
+        state: 'APPROVED',
+        threads: { resolved: 1, total: 1 },
+      });
+      expect(result[1]).toEqual({
+        user: 'reviewer-1',
+        state: 'APPROVED',
+        threads: { resolved: 0, total: 1 },
+      });
     });
 
     it('handles no reviews or threads', () => {

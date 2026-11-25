@@ -2,12 +2,14 @@ import { useCallback } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+import type { GitHubCliIdentity } from '../../shared/events';
+
 import { useAccountsStore } from '../stores';
 
-import type { Account, Forge, Hostname, Token } from '../types';
+import type { Account, ClientID, Forge, Hostname, Token } from '../types';
 import type {
+  AuthMethod,
   DeviceFlowSession,
-  LoginOAuthWebOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 
@@ -16,16 +18,37 @@ import { getAccountAdapter, getAdapter } from '../utils/forges/registry';
 import { encryptValue } from '../utils/system/comms';
 import { useNotificationActions } from './notifications/useNotificationActions';
 
+/** Whether two CLI identities address the same account. */
+function sameCliIdentity(
+  existing: GitHubCliIdentity | undefined,
+  incoming: GitHubCliIdentity | undefined,
+): boolean {
+  if (!existing || !incoming || existing.kind !== incoming.kind) {
+    return false;
+  }
+
+  if (existing.kind === 'environment' || incoming.kind === 'environment') {
+    return true;
+  }
+
+  return existing.login.toLowerCase() === incoming.login.toLowerCase();
+}
+
 interface LoginsState {
   loginWithDeviceFlowStart: (
     forge: Forge,
     hostname?: Hostname,
     scopes?: string[],
+    clientId?: ClientID,
   ) => Promise<DeviceFlowSession>;
   loginWithDeviceFlowPoll: (forge: Forge, session: DeviceFlowSession) => Promise<Token | null>;
-  loginWithDeviceFlowComplete: (forge: Forge, token: Token, hostname: Hostname) => Promise<void>;
-  loginWithCli: (forge: Forge, hostname: Hostname) => Promise<void>;
-  loginWithOAuthApp: (forge: Forge, data: LoginOAuthWebOptions) => Promise<void>;
+  loginWithDeviceFlowComplete: (
+    forge: Forge,
+    token: Token,
+    hostname: Hostname,
+    clientId?: ClientID,
+  ) => Promise<void>;
+  loginWithCli: (forge: Forge, hostname: Hostname, identity?: GitHubCliIdentity) => Promise<void>;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => Promise<void>;
   logoutFromAccount: (account: Account) => void;
 }
@@ -45,30 +68,34 @@ export const useLogins = (): LoginsState => {
 
   const { removeAccountNotifications } = useNotificationActions();
 
+  const refreshNotificationsInBackground = useCallback(() => {
+    // Re-authentication can keep the same query key, so invalidate it even
+    // when the account list has not changed. The inbox handles fetching state.
+    void queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+  }, [queryClient]);
+
   /**
-   * Create (or update) an account, then refetch notifications. Re-authenticating
-   * an existing account keeps the same account identity, so the notifications
-   * query key does not change and the cache must be invalidated explicitly.
+   * Create (or update) an account before starting the notification refresh.
    */
   const createAccount = useCallback(
     async (...args: Parameters<typeof createAccountInStore>) => {
       await createAccountInStore(...args);
 
-      await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+      refreshNotificationsInBackground();
     },
-    [createAccountInStore, queryClient],
+    [createAccountInStore, refreshNotificationsInBackground],
   );
 
   /**
    * Initiate an OAuth device-flow session for the given forge.
    */
   const loginWithDeviceFlowStart = useCallback(
-    async (forge: Forge, hostname?: Hostname, scopes?: string[]) => {
+    async (forge: Forge, hostname?: Hostname, scopes?: string[], clientId?: ClientID) => {
       const { deviceFlow } = getAdapter(forge);
       if (!deviceFlow) {
         throw new Error(`Device flow is not supported for forge "${forge}".`);
       }
-      return await deviceFlow.start(hostname, scopes);
+      return await deviceFlow.start(hostname, scopes, clientId);
     },
     [],
   );
@@ -88,19 +115,22 @@ export const useLogins = (): LoginsState => {
    * Finalise an OAuth device-flow session by recording the account.
    */
   const loginWithDeviceFlowComplete = useCallback(
-    async (forge: Forge, token: Token, hostname: Hostname) => {
-      const { deviceFlow } = getAdapter(forge);
+    async (forge: Forge, token: Token, hostname: Hostname, clientId?: ClientID) => {
+      const { deviceFlow, customOAuthApp } = getAdapter(forge);
       if (!deviceFlow) {
         throw new Error(`Forge "${forge}" does not support device flow.`);
       }
-      const method = deviceFlow.authMethod;
+      // A supplied client ID means the user authorized their own app; without
+      // one the flow used Gitify's preconfigured app.
+      const method: AuthMethod =
+        clientId && customOAuthApp ? customOAuthApp.authMethod : deviceFlow.authMethod;
 
       const existingAccount = accounts.find((a) => a.hostname === hostname && a.method === method);
       if (existingAccount) {
         removeAccountNotifications(existingAccount);
       }
 
-      await createAccount(method, token, hostname, forge);
+      await createAccount(method, token, hostname, forge, undefined, clientId);
     },
     [accounts, createAccount, removeAccountNotifications],
   );
@@ -110,54 +140,44 @@ export const useLogins = (): LoginsState => {
    *
    * The token is resolved here only to fail fast while the login screen is
    * still up. Nothing persists it: the CLI is re-read for every API request, so
-   * the account carries no credential of its own.
+   * the account carries no credential of its own. The chosen CLI identity is
+   * recorded so those reads address the same account each time.
    */
   const loginWithCli = useCallback(
-    async (forge: Forge, hostname: Hostname) => {
+    async (forge: Forge, hostname: Hostname, identity?: GitHubCliIdentity) => {
       const { cliAuth } = getAdapter(forge);
       if (!cliAuth) {
         throw new Error(`CLI login is not supported for forge "${forge}".`);
       }
 
-      await cliAuth.resolveToken(hostname);
+      await cliAuth.resolveToken(hostname, identity);
 
-      const existingAccounts = useAccountsStore
-        .getState()
-        .accounts.filter(
-          (a) => a.forge === forge && a.hostname === hostname && a.method === cliAuth.authMethod,
-        );
-      await createAccountInStore(cliAuth.authMethod, '' as Token, hostname, forge);
-
-      existingAccounts.forEach((account) => removeAccountNotifications(account));
-
-      await queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
-    },
-    [createAccountInStore, queryClient, removeAccountNotifications],
-  );
-
-  /**
-   * Login with a custom OAuth app on the given forge.
-   */
-  const loginWithOAuthApp = useCallback(
-    async (forge: Forge, data: LoginOAuthWebOptions) => {
-      const { oauthWebApp } = getAdapter(forge);
-      if (!oauthWebApp) {
-        throw new Error(`OAuth app login is not supported for forge "${forge}".`);
-      }
-
-      const { authOptions, authCode } = await oauthWebApp.performWebOAuth(data);
-      const token = await oauthWebApp.exchangeAuthCodeForToken(authCode, authOptions);
-
-      const existingAccount = accounts.find(
-        (a) => a.hostname === authOptions.hostname && a.method === 'OAuth App',
+      const beforeLogin = useAccountsStore.getState().accounts;
+      await createAccountInStore(
+        cliAuth.authMethod,
+        '' as Token,
+        hostname,
+        forge,
+        undefined,
+        undefined,
+        identity,
       );
-      if (existingAccount) {
-        removeAccountNotifications(existingAccount);
-      }
 
-      await createAccount('OAuth App', token, authOptions.hostname, forge);
+      beforeLogin
+        .filter(
+          (account) =>
+            account.forge === forge &&
+            account.hostname === hostname &&
+            account.method === cliAuth.authMethod &&
+            // Unpinned accounts predate identity selection; only one can exist
+            // per host, and any CLI login replaces it.
+            (account.cliIdentity === undefined || sameCliIdentity(account.cliIdentity, identity)),
+        )
+        .forEach((account) => removeAccountNotifications(account));
+
+      refreshNotificationsInBackground();
     },
-    [accounts, createAccount, removeAccountNotifications],
+    [createAccountInStore, refreshNotificationsInBackground, removeAccountNotifications],
   );
 
   /**
@@ -203,7 +223,6 @@ export const useLogins = (): LoginsState => {
     loginWithDeviceFlowPoll,
     loginWithDeviceFlowComplete,
     loginWithCli,
-    loginWithOAuthApp,
     loginWithPersonalAccessToken,
     logoutFromAccount,
   };

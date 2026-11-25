@@ -1,4 +1,5 @@
 import type { MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { IssueTrackedByIcon } from '@primer/octicons-react';
 
@@ -12,6 +13,7 @@ export interface ParentPillProps {
 }
 
 export function ParentPill({ parent }: Readonly<ParentPillProps>) {
+  const { t } = useTranslation();
   if (!parent) {
     return null;
   }
@@ -21,11 +23,16 @@ export function ParentPill({ parent }: Readonly<ParentPillProps>) {
     openExternalLink(parent.url);
   };
 
+  const label = t('metrics.parent_issue', 'Parent issue: #{{number}} {{title}}', {
+    number: parent.number,
+    title: parent.title,
+  });
+
   return (
     <MetricPill
-      ariaLabel={`Parent issue: #${parent.number} ${parent.title}`}
+      ariaLabel={label}
       color={IconColor.GRAY}
-      contents={`Parent issue: #${parent.number} ${parent.title}`}
+      contents={label}
       icon={IssueTrackedByIcon}
       metric={`#${parent.number}`}
       metricClassName="truncate max-w-[160px]"

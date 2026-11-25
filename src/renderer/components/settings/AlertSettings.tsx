@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { BellIcon, SyncIcon } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton } from '@primer/react';
 
@@ -23,6 +25,7 @@ import { SettingsToggle } from './controls/SettingsToggle';
 const defaultSettings = DEFAULT_SETTINGS_STATE;
 
 export function AlertSettings() {
+  const { t } = useTranslation();
   const toggleSetting = useSettingsStore((s) => s.toggleSetting);
   const updateSetting = useSettingsStore((s) => s.updateSetting);
 
@@ -34,35 +37,44 @@ export function AlertSettings() {
   return (
     <fieldset>
       <SectionHeading as="legend" icon={BellIcon}>
-        Alerts
+        {t('settings.alerts.title', 'Alerts')}
       </SectionHeading>
 
       <SettingsList>
         <SettingsToggle
           checked={showNotifications}
-          label="Show desktop notifications"
+          label={t('settings.alerts.show_desktop', 'Show desktop notifications')}
           name="showNotifications"
           onChange={() => toggleSetting('showNotifications')}
-          tooltip="Display native operating system notifications for new unread notifications."
+          tooltip={t(
+            'settings.alerts.show_desktop_help',
+            'Display native operating system notifications for new unread notifications.',
+          )}
         />
 
         <SettingsToggle
           checked={playSound}
-          label="Play notification sound"
+          label={t('settings.alerts.play_sound', 'Play notification sound')}
           name="playSound"
           onChange={() => toggleSetting('playSound')}
-          tooltip="Play a sound when new unread notifications arrive after filtering. Use the notification volume controls to adjust the sound level."
+          tooltip={t(
+            'settings.alerts.play_sound_help',
+            'Play a sound when new unread notifications arrive after filtering. Use the notification volume controls to adjust the sound level.',
+          )}
         />
 
         <SettingsReveal name="volume" open={playSound}>
           <SettingsRow
-            label="Notification volume"
+            label={t('settings.alerts.volume', 'Notification volume')}
             name="notificationVolume"
-            tooltip="Adjust the volume of the notification sound."
+            tooltip={t(
+              'settings.alerts.volume_help',
+              'Adjust the volume of the notification sound.',
+            )}
           >
             <ButtonGroup data-testid="settings-volume-group">
               <IconButton
-                aria-label="Volume down"
+                aria-label={t('settings.alerts.volume_down', 'Volume down')}
                 disabled={!canDecreaseVolume(notificationVolume)}
                 icon={VolumeDownIcon}
                 onClick={() => {
@@ -73,7 +85,7 @@ export function AlertSettings() {
               />
 
               <Button
-                aria-label="Volume percentage"
+                aria-label={t('settings.alerts.volume_percentage', 'Volume percentage')}
                 className="pointer-events-none"
                 size="small"
                 tabIndex={-1}
@@ -82,7 +94,7 @@ export function AlertSettings() {
               </Button>
 
               <IconButton
-                aria-label="Volume up"
+                aria-label={t('settings.alerts.volume_up', 'Volume up')}
                 disabled={!canIncreaseVolume(notificationVolume)}
                 icon={VolumeUpIcon}
                 onClick={() => {
@@ -93,7 +105,7 @@ export function AlertSettings() {
               />
 
               <IconButton
-                aria-label="Reset volume"
+                aria-label={t('settings.alerts.volume_reset', 'Reset volume')}
                 icon={SyncIcon}
                 onClick={() => {
                   updateSetting('notificationVolume', defaultSettings.notificationVolume);
@@ -108,10 +120,14 @@ export function AlertSettings() {
 
         <SettingsToggle
           checked={showUpdateNotifications}
-          label="Show app update notifications"
+          label={t('settings.alerts.show_updates', 'Show app update notifications')}
           name="showUpdateNotifications"
           onChange={() => toggleSetting('showUpdateNotifications')}
-          tooltip={`Show a notification when a ${APPLICATION.NAME} update is ready. Updates are still checked and shown in the menu bar.`}
+          tooltip={t(
+            'settings.alerts.show_updates_help',
+            'Show a notification when a {{appName}} update is ready. Updates are still checked and shown in the menu bar.',
+            { appName: APPLICATION.NAME },
+          )}
         />
       </SettingsList>
     </fieldset>

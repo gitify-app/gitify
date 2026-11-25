@@ -1,93 +1,117 @@
+import { EventEmitter } from 'node:events';
+
+import { app } from 'electron';
 import type { Menubar } from 'electron-menubar';
 
-import { EVENTS } from '../../shared/events';
+import { APPLICATION } from '../../shared/constants';
+import { logError, logWarn } from '../../shared/logger';
 
-import { handleProtocolURL, initializeAppLifecycle } from './startup';
+import { initializeAppLifecycle } from './startup';
 
-const requestSingleInstanceLockMock = vi.fn(() => true);
-const appOnMock = vi.fn();
-const appQuitMock = vi.fn();
+vi.mock('electron', async () => {
+  const { EventEmitter } = await import('node:events');
+  return {
+    app: Object.assign(new EventEmitter(), {
+      requestSingleInstanceLock: vi.fn(() => true),
+      quit: vi.fn(),
+    }),
+  };
+});
 
-vi.mock('electron', () => ({
-  app: {
-    requestSingleInstanceLock: () => requestSingleInstanceLockMock(),
-    on: (...a: unknown[]) => appOnMock(...a),
-    quit: () => appQuitMock(),
-  } satisfies Pick<Electron.App, 'requestSingleInstanceLock' | 'on' | 'quit'>,
-}));
-
-const sendRendererEventMock = vi.fn();
-vi.mock('../events', () => ({
-  sendRendererEvent: (...a: unknown[]) => sendRendererEventMock(...a),
-}));
-
-const logInfoMock = vi.fn();
-const logWarnMock = vi.fn();
-vi.mock('../../shared/logger', () => ({
-  logInfo: (...a: unknown[]) => logInfoMock(...a),
-  logWarn: (...a: unknown[]) => logWarnMock(...a),
+vi.mock('../../shared/logger', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../../shared/logger')>()),
+  logWarn: vi.fn(),
+  logError: vi.fn(),
 }));
 
 function createMb() {
-  return {
-    on: vi.fn(),
-    showWindow: vi.fn(),
+  return Object.assign(new EventEmitter(), {
+    showWindow: vi.fn().mockResolvedValue(undefined),
     setContextMenu: vi.fn(),
-    app: { setAppUserModelId: vi.fn(), quit: vi.fn() },
-    tray: {
-      setToolTip: vi.fn(),
-    },
-  };
+    app: { setAppUserModelId: vi.fn() },
+    tray: { setToolTip: vi.fn() },
+  });
 }
 
 describe('main/lifecycle/startup.ts', () => {
-  describe('initializeAppLifecycle', () => {
-    it('registers menubar ready handler', () => {
-      const mb = createMb();
-      const contextMenu = {} as Electron.Menu;
-
-      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
-
-      expect(mb.on).toHaveBeenCalledWith('ready', expect.any(Function));
-    });
-
-    it('quits and warns when second instance detected', () => {
-      requestSingleInstanceLockMock.mockReturnValueOnce(false);
-      const mb = createMb();
-      const contextMenu = {} as Electron.Menu;
-
-      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
-
-      expect(appQuitMock).toHaveBeenCalled();
-      expect(logWarnMock).toHaveBeenCalled();
-    });
-
-    it('delegates context-menu wiring to mb.setContextMenu', () => {
-      const mb = createMb();
-      const contextMenu = {} as Electron.Menu;
-
-      initializeAppLifecycle(mb as unknown as Menubar, contextMenu, 'gitify');
-
-      const readyHandler = (mb.on as unknown as ReturnType<typeof vi.fn>).mock.calls[0]?.[1];
-      expect(readyHandler).toBeDefined();
-      readyHandler?.();
-
-      expect(mb.setContextMenu).toHaveBeenCalledWith(contextMenu);
-    });
+  beforeEach(() => {
+    app.removeAllListeners();
   });
 
-  describe('handleProtocolURL', () => {
-    it('forwards matching protocol URL to renderer as AUTH_CALLBACK', () => {
-      const mb = createMb();
-      const url = 'gitify://callback?code=abc123';
-      handleProtocolURL(mb as unknown as Menubar, url, 'gitify');
-      expect(sendRendererEventMock).toHaveBeenCalledWith(mb, EVENTS.AUTH_CALLBACK, url);
-    });
+  it('initializes the tray on ready without showing the window on a normal launch', () => {
+    const mb = createMb();
+    const contextMenu = {} as Electron.Menu;
 
-    it('ignores URLs that do not match the protocol', () => {
-      const mb = createMb();
-      handleProtocolURL(mb as unknown as Menubar, 'https://github.com', 'gitify');
-      expect(sendRendererEventMock).not.toHaveBeenCalled();
-    });
+    initializeAppLifecycle(mb as unknown as Menubar, contextMenu);
+    mb.emit('ready');
+
+    expect(mb.app.setAppUserModelId).toHaveBeenCalledWith(APPLICATION.ID);
+    expect(mb.tray.setToolTip).toHaveBeenCalledWith(APPLICATION.NAME);
+    expect(mb.setContextMenu).toHaveBeenCalledWith(contextMenu);
+    expect(mb.showWindow).not.toHaveBeenCalled();
+    expect(app.quit).not.toHaveBeenCalled();
+  });
+
+  it('quits the second process without registering a relaunch listener', () => {
+    vi.mocked(app.requestSingleInstanceLock).mockReturnValueOnce(false);
+    const mb = createMb();
+
+    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+    app.emit('second-instance');
+    mb.emit('ready');
+
+    expect(app.quit).toHaveBeenCalledOnce();
+    expect(logWarn).toHaveBeenCalledWith('main:gotTheLock', 'Second instance detected, quitting');
+    expect(app.listenerCount('second-instance')).toBe(0);
+    expect(mb.showWindow).not.toHaveBeenCalled();
+  });
+
+  it('shows the existing window on every relaunch instead of toggling it', () => {
+    const mb = createMb();
+    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+    mb.emit('ready');
+
+    app.emit('second-instance');
+    app.emit('second-instance');
+
+    expect(mb.showWindow).toHaveBeenCalledTimes(2);
+    expect(app.quit).not.toHaveBeenCalled();
+    // macOS activation is already owned by electron-menubar.
+    expect(app.listenerCount('activate')).toBe(0);
+  });
+
+  it('coalesces early relaunches until the menubar window is ready', () => {
+    const mb = createMb();
+    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+
+    app.emit('second-instance');
+    app.emit('second-instance');
+    expect(mb.showWindow).not.toHaveBeenCalled();
+
+    mb.emit('ready');
+    expect(mb.showWindow).toHaveBeenCalledOnce();
+
+    app.emit('second-instance');
+    expect(mb.showWindow).toHaveBeenCalledTimes(2);
+  });
+
+  it('logs a failed show and allows the next relaunch to retry', async () => {
+    const mb = createMb();
+    const error = new Error('Window could not be shown');
+    mb.showWindow.mockRejectedValueOnce(error);
+    initializeAppLifecycle(mb as unknown as Menubar, {} as Electron.Menu);
+    mb.emit('ready');
+
+    app.emit('second-instance');
+    await vi.waitFor(() =>
+      expect(logError).toHaveBeenCalledWith(
+        'main:second-instance',
+        'Failed to show the existing window',
+        error,
+      ),
+    );
+
+    app.emit('second-instance');
+    expect(mb.showWindow).toHaveBeenCalledTimes(2);
   });
 });

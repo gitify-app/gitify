@@ -4,6 +4,7 @@ import { page } from 'vite-plus/test/browser';
 
 import { setLoginsOverrides } from '../__helpers__/hook-mocks';
 import { renderRoute } from '../__helpers__/visual-utils';
+import { mockGitHubCliAccount } from '../__mocks__/account-mocks';
 
 import { DesignLanguage, Theme } from '../types';
 
@@ -85,15 +86,59 @@ async function captureCliError(theme: Theme, designLanguage: DesignLanguage) {
     initialEntries: ['/login/github/cli'],
   });
 
-  await waitFor(() =>
-    expect(document.querySelector('[data-testid="login-submit"]')).not.toBeNull(),
-  );
+  await waitFor(() => expect(document.querySelector('[data-testid="login-submit"]')).toBeEnabled());
   await page.getByTestId('login-submit').click();
   await waitForLoginError();
   await movePointerAway();
 
   await expect(page.getByTestId('visual-root')).toMatchScreenshot(
     `login-cli-error-${theme.toLowerCase()}-${designLanguage}`,
+  );
+}
+
+async function captureCliAccounts(theme: Theme, designLanguage: DesignLanguage) {
+  vi.mocked(window.gitify.githubCliAccounts).mockResolvedValue({
+    accounts: [
+      { identity: { kind: 'account', login: 'octocat' }, active: true },
+      { identity: { kind: 'account', login: 'octocat-work' }, active: false },
+    ],
+  });
+
+  renderRoute(<GitHubLoginWithCLIRoute />, {
+    accounts: [{ ...mockGitHubCliAccount, cliIdentity: { kind: 'account', login: 'octocat' } }],
+    theme,
+    designLanguage,
+    initialEntries: ['/login/github/cli'],
+  });
+
+  await waitFor(() => {
+    const picker = page.getByTestId('login-cli-account').element();
+    const contents = picker.closest('.gitify-scroll-fade')!;
+    expect(contents.scrollHeight).toBeLessThanOrEqual(contents.clientHeight);
+  });
+  await movePointerAway();
+
+  await expect(page.getByTestId('visual-root')).toMatchScreenshot(
+    `login-cli-accounts-${theme.toLowerCase()}-${designLanguage}`,
+  );
+}
+
+async function captureCliNoAccounts(theme: Theme, designLanguage: DesignLanguage) {
+  vi.mocked(window.gitify.githubCliAccounts).mockResolvedValue({ accounts: [] });
+
+  renderRoute(<GitHubLoginWithCLIRoute />, {
+    theme,
+    designLanguage,
+    initialEntries: ['/login/github/cli'],
+  });
+
+  await waitFor(() =>
+    expect(document.querySelector('[data-testid="login-cli-no-accounts"]')).not.toBeNull(),
+  );
+  await movePointerAway();
+
+  await expect(page.getByTestId('visual-root')).toMatchScreenshot(
+    `login-cli-no-accounts-${theme.toLowerCase()}-${designLanguage}`,
   );
 }
 
@@ -115,6 +160,18 @@ describe('renderer/routes/Login error states visual regression', () => {
       await captureCliError(theme, designLanguage);
 
       expect(document.querySelector('[data-testid="login-errors"]')).not.toBeNull();
+    });
+
+    it('captures the CLI account picker', async () => {
+      await captureCliAccounts(theme, designLanguage);
+
+      expect(document.querySelector('[data-testid="login-cli-account"]')).not.toBeNull();
+    });
+
+    it('captures the CLI empty-account state', async () => {
+      await captureCliNoAccounts(theme, designLanguage);
+
+      expect(document.querySelector('[data-testid="login-cli-no-accounts"]')).not.toBeNull();
     });
   });
 });

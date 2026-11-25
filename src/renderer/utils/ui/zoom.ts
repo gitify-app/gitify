@@ -1,3 +1,5 @@
+import type { ZoomAction } from '../../../shared/events';
+
 import { DEFAULT_SETTINGS_STATE } from '../../stores/defaults';
 
 import type { Percentage } from '../../types';
@@ -9,11 +11,45 @@ const MULTIPLIER = 2;
 const ZOOM_STEP = 10 as Percentage;
 
 /**
+ * Clamp a zoom percentage to the supported minimum and maximum.
+ *
+ * @param zoomPercentage - The zoom percentage to clamp.
+ * @returns The percentage within the supported range.
+ */
+export function clampZoomPercentage(zoomPercentage: Percentage): Percentage {
+  return Math.min(
+    Math.max(zoomPercentage, MINIMUM_ZOOM_PERCENTAGE),
+    MAXIMUM_ZOOM_PERCENTAGE,
+  ) as Percentage;
+}
+
+/**
+ * Compute the zoom percentage for a keyboard shortcut action.
+ *
+ * @param zoomPercentage - The current zoom percentage.
+ * @param action - The requested zoom direction.
+ * @returns The next zoom percentage, clamped to the supported range.
+ */
+export function getNextZoomPercentage(zoomPercentage: Percentage, action: ZoomAction): Percentage {
+  const current = clampZoomPercentage(zoomPercentage);
+
+  if (action === 'in') {
+    return Math.min(current + ZOOM_STEP, MAXIMUM_ZOOM_PERCENTAGE) as Percentage;
+  }
+
+  if (action === 'out') {
+    return Math.max(current - ZOOM_STEP, MINIMUM_ZOOM_PERCENTAGE) as Percentage;
+  }
+
+  return RECOMMENDED_ZOOM_PERCENTAGE;
+}
+
+/**
  * Zoom percentage to level. 100% is the recommended zoom level (0).
  * If somehow the percentage is not set, it will return 0, the default zoom level.
  *
- * @param percentage - Zoom percentage (0–150).
- * @returns Electron zoom level (-2 to 0.5).
+ * @param percentage - Zoom percentage (0–120).
+ * @returns Electron zoom level (-2 to 0.4).
  */
 export function zoomPercentageToLevel(percentage: Percentage): number {
   if (percentage === undefined) {
@@ -27,8 +63,8 @@ export function zoomPercentageToLevel(percentage: Percentage): number {
  * Zoom level to percentage. 0 is the recommended zoom level (100%).
  * If somehow the zoom level is not set, it will return 100, the default zoom percentage.
  *
- * @param zoom - Electron zoom level (-2 to 0.5).
- * @returns Zoom percentage (0–150).
+ * @param zoom - Electron zoom level (-2 to 0.4).
+ * @returns Zoom percentage (0–120).
  */
 export function zoomLevelToPercentage(zoom: number): Percentage {
   if (zoom === undefined) {

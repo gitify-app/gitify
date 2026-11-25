@@ -1,6 +1,17 @@
 import { contextBridge, webFrame } from 'electron';
 
-import type { IKeyboardShortcut, NativeThemeSource, TrayIconAppearance } from '../shared/events';
+import type {
+  IGitHubCliTokenRequest,
+  IKeyboardShortcut,
+  INativeNotificationActionEvent,
+  INativeNotificationClickEvent,
+  INativeNotificationPayload,
+  INativeNotificationRemovePayload,
+  NativeThemeSource,
+  TrayIconAppearance,
+  UpdatePreferences,
+  ZoomAction,
+} from '../shared/events';
 import { EVENTS } from '../shared/events';
 import { isLinux, isMacOS, isWindows } from '../shared/platform';
 
@@ -46,10 +57,19 @@ export const api = {
   /**
    * Read the token the locally installed GitHub CLI holds for a host.
    *
-   * @param hostname - Host to read the token for (e.g. `github.com`).
+   * @param request - Host to read the token for, and the identity to address.
    * @returns The CLI token, or a classified failure with an optional detail line.
    */
-  githubCliToken: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, hostname),
+  githubCliToken: (request: IGitHubCliTokenRequest) =>
+    invokeMainEvent(EVENTS.GITHUB_CLI_TOKEN, request),
+
+  /**
+   * List the identities the locally installed GitHub CLI holds for a host.
+   *
+   * @param hostname - Host to list identities for (e.g. `github.com`).
+   * @returns The usable identities, or a classified failure.
+   */
+  githubCliAccounts: (hostname: string) => invokeMainEvent(EVENTS.GITHUB_CLI_ACCOUNTS, hostname),
 
   /**
    * Enable or disable launching the application at system login.
@@ -59,7 +79,6 @@ export const api = {
   setAutoLaunch: (value: boolean) =>
     sendMainEvent(EVENTS.UPDATE_AUTO_LAUNCH, {
       openAtLogin: value,
-      openAsHidden: value,
     }),
 
   /**
@@ -72,16 +91,9 @@ export const api = {
    */
   setKeepWindowOnBlur: (value: boolean) => sendMainEvent(EVENTS.UPDATE_KEEP_WINDOW_ON_BLUR, value),
 
-  /**
-   * Enable or suppress automatic update notifications.
-   *
-   * Update checks, downloads, and menubar status continue when notifications
-   * are suppressed.
-   *
-   * @param value - `true` to show update notifications, `false` to suppress them.
-   */
-  setShowUpdateNotifications: (value: boolean) =>
-    sendMainEvent(EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS, value),
+  setUpdatePreferences: (value: UpdatePreferences) =>
+    sendMainEvent(EVENTS.UPDATE_PREFERENCES, value),
+  getUpdateManager: () => invokeMainEvent(EVENTS.UPDATE_MANAGER),
 
   /**
    * Persist whether Linux should run under the X11 backend. Applied at startup,
@@ -252,38 +264,76 @@ export const api = {
   },
 
   /**
-   * Register a callback invoked when the main process delivers an OAuth callback URL.
+   * Register a callback invoked when the system is about to sleep or the screen
+   * locks.
    *
-   * @param callback - Called with the full callback URL (e.g. `gitify://oauth?code=...`).
+   * Use this to pause polling until the matching wake/unlock event.
+   *
+   * @param callback - Called with no arguments on every sleep event.
    * @returns A function that removes the listener.
    */
-  onAuthCallback: (callback: (url: string) => void) => {
-    return onRendererEvent(EVENTS.AUTH_CALLBACK, (_, url) => callback(url));
+  onSystemSleep: (callback: () => void) => {
+    return onRendererEvent(EVENTS.SYSTEM_SLEEP, () => callback());
   },
 
   /**
-   * Display a native OS notification.
+   * Register a callback invoked when a native zoom shortcut is pressed.
    *
-   * Clicking the notification opens `url` in the browser (hiding the app window),
-   * or shows the app window if no URL is provided.
+   * The main process intercepts `Cmd/Ctrl` + `+`, `-` and `0` so the renderer
+   * can apply the configured zoom step and minimum / maximum bounds.
    *
-   * @param title - The notification title.
-   * @param body - The notification body text.
-   * @param url - Optional URL to open when the notification is clicked.
-   * @returns The created `Notification` instance.
+   * @param callback - Called with the requested zoom action.
+   * @returns A function that removes the listener.
    */
-  raiseNativeNotification: (title: string, body: string, url?: string) => {
-    const notification = new Notification(title, { body: body, silent: true });
-    notification.onclick = () => {
-      if (url) {
-        api.app.hide();
-        api.openExternalLink(url, true);
-      } else {
-        api.app.show();
-      }
-    };
+  onZoom: (callback: (action: ZoomAction) => void) => {
+    return onRendererEvent(EVENTS.ZOOM, (_event, action) => callback(action));
+  },
 
-    return notification;
+  /**
+   * Operating-system notification controls.
+   */
+  nativeNotifications: {
+    /**
+     * Publish one structured notification through the main process.
+     *
+     * @param payload - The notification to publish.
+     */
+    show: (payload: INativeNotificationPayload) =>
+      sendMainEvent(EVENTS.NATIVE_NOTIFICATION_SHOW, payload),
+
+    /**
+     * Remove published notifications by identity.
+     *
+     * @param payload - The identities to remove.
+     */
+    remove: (payload: INativeNotificationRemovePayload) =>
+      sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE, payload),
+
+    /** Remove every notification published by this app. */
+    removeAll: () => sendMainEvent(EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL),
+
+    /** Tell the main process the renderer action/click listeners are mounted. */
+    notifyReady: () => sendMainEvent(EVENTS.NATIVE_NOTIFICATION_READY),
+
+    /**
+     * Register a callback for an activated notification action.
+     *
+     * @param callback - Called with the activated action.
+     * @returns A function that removes the listener.
+     */
+    onAction: (callback: (payload: INativeNotificationActionEvent) => void) => {
+      return onRendererEvent(EVENTS.NATIVE_NOTIFICATION_ACTION, (_, payload) => callback(payload));
+    },
+
+    /**
+     * Register a callback for a notification body click.
+     *
+     * @param callback - Called with the clicked notification.
+     * @returns A function that removes the listener.
+     */
+    onClick: (callback: (payload: INativeNotificationClickEvent) => void) => {
+      return onRendererEvent(EVENTS.NATIVE_NOTIFICATION_CLICK, (_, payload) => callback(payload));
+    },
   },
 };
 

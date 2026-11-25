@@ -42,36 +42,35 @@ vi.mock('electron', () => ({
   } satisfies Pick<Electron.WebFrame, 'getZoomLevel' | 'setZoomLevel'>,
 }));
 
-// Simple Notification stub
-class MockNotification {
-  static instances: MockNotification[] = [];
-  public onclick: (() => void) | null = null;
-  constructor(
-    public title: string,
-    public options: { body: string; silent: boolean },
-  ) {
-    MockNotification.instances.push(this);
-  }
-  triggerClick() {
-    this.onclick?.();
-  }
-}
-
-// Attach to global before importing preload
-(global as unknown as { Notification: unknown }).Notification = MockNotification;
-
 interface TestApi {
   tray: { updateColor: (n?: number, isOnline?: boolean) => void };
   openExternalLink: (u: string, f: boolean) => void;
-  setShowUpdateNotifications: (value: boolean) => void;
+  setAutoLaunch: (value: boolean) => void;
+  setUpdatePreferences: (value: {
+    automaticUpdates: 'default';
+    showUpdateNotifications: boolean;
+  }) => void;
   setUseX11Backend: (value: boolean) => void;
+  githubCliToken: (request: {
+    hostname: string;
+    identity?: { kind: 'environment' } | { kind: 'account'; login: string };
+  }) => Promise<unknown>;
+  githubCliAccounts: (hostname: string) => Promise<unknown>;
   app: { version: () => Promise<string>; show?: () => void; hide?: () => void };
-  raiseNativeNotification: (t: string, b: string, u?: string) => unknown;
+  nativeNotifications: {
+    show: (payload: { id: string; title: string; body: string; actionLabel?: string }) => void;
+    remove: (payload: { ids: string[] }) => void;
+    removeAll: () => void;
+    notifyReady: () => void;
+    onAction: (callback: (payload: { id: string }) => void) => () => void;
+    onClick: (callback: (payload: { id: string }) => void) => () => void;
+  };
+  onZoom: (callback: (action: 'in' | 'out' | 'reset') => void) => () => void;
+  onSystemSleep: (callback: () => void) => () => void;
 }
 
 describe('preload/index', () => {
   beforeEach(() => {
-    MockNotification.instances = [];
     exposeInMainWorldMock('gitify', api);
   });
 
@@ -109,6 +108,39 @@ describe('preload/index', () => {
     expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_USE_X11_BACKEND, true);
   });
 
+  it('setAutoLaunch sends only the supported openAtLogin option', () => {
+    const api = getExposedApi();
+
+    api.setAutoLaunch(true);
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_AUTO_LAUNCH, {
+      openAtLogin: true,
+    });
+  });
+
+  it('githubCliToken forwards the identity-aware request', () => {
+    const api = getExposedApi();
+    const request = {
+      hostname: 'github.com',
+      identity: { kind: 'account' as const, login: 'alice' },
+    };
+
+    void api.githubCliToken(request);
+
+    expect(invokeMainEventMock).toHaveBeenCalledWith(EVENTS.GITHUB_CLI_TOKEN, request);
+  });
+
+  it('githubCliAccounts forwards the hostname', () => {
+    const api = getExposedApi();
+
+    void api.githubCliAccounts('github.example.com');
+
+    expect(invokeMainEventMock).toHaveBeenCalledWith(
+      EVENTS.GITHUB_CLI_ACCOUNTS,
+      'github.example.com',
+    );
+  });
+
   it('openExternalLink sends event with payload', async () => {
     const api = getExposedApi();
 
@@ -120,12 +152,15 @@ describe('preload/index', () => {
     });
   });
 
-  it('setShowUpdateNotifications sends the preference to main', () => {
+  it('setUpdatePreferences sends the preference to main', () => {
     const api = getExposedApi();
 
-    api.setShowUpdateNotifications(false);
+    api.setUpdatePreferences({ automaticUpdates: 'default', showUpdateNotifications: false });
 
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_SHOW_UPDATE_NOTIFICATIONS, false);
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.UPDATE_PREFERENCES, {
+      automaticUpdates: 'default',
+      showUpdateNotifications: false,
+    });
   });
 
   it('app.version returns dev in development', async () => {
@@ -143,31 +178,113 @@ describe('preload/index', () => {
     await expect(api.app.version()).resolves.toBe('v1.2.3');
   });
 
-  it('raiseNativeNotification without url calls app.show', async () => {
+  it('onZoom forwards the requested zoom action', () => {
     const api = getExposedApi();
+    const callback = vi.fn();
 
-    const notification = api.raiseNativeNotification('Title', 'Body') as MockNotification;
+    api.onZoom(callback);
 
-    notification.triggerClick();
+    expect(onRendererEventMock).toHaveBeenCalledWith(EVENTS.ZOOM, expect.any(Function));
 
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.WINDOW_SHOW);
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (
+      event: unknown,
+      action: 'in' | 'out' | 'reset',
+    ) => void;
+
+    listener({}, 'out');
+
+    expect(callback).toHaveBeenCalledWith('out');
   });
 
-  it('raiseNativeNotification with url hides app then opens link', async () => {
+  it('nativeNotifications.show sends a structured payload', () => {
+    const api = getExposedApi();
+    const payload = { id: 'n1', title: 'owner/repo', body: 'Title', actionLabel: 'Mark as read' };
+
+    api.nativeNotifications.show(payload);
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_SHOW, payload);
+  });
+
+  it('nativeNotifications.remove sends identities', () => {
     const api = getExposedApi();
 
-    const notification = api.raiseNativeNotification(
-      'Title',
-      'Body',
-      'https://x',
-    ) as MockNotification;
+    api.nativeNotifications.remove({ ids: ['n1'] });
 
-    notification.triggerClick();
-
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.WINDOW_HIDE);
-    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.OPEN_EXTERNAL, {
-      url: 'https://x',
-      activate: true,
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_REMOVE, {
+      ids: ['n1'],
     });
+  });
+
+  it('nativeNotifications removeAll and notifyReady send commands', () => {
+    const api = getExposedApi();
+
+    api.nativeNotifications.removeAll();
+    api.nativeNotifications.notifyReady();
+
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_REMOVE_ALL);
+    expect(sendMainEventMock).toHaveBeenCalledWith(EVENTS.NATIVE_NOTIFICATION_READY);
+  });
+
+  it('nativeNotifications.onAction forwards actions and cleans up', () => {
+    const api = getExposedApi();
+    const callback = vi.fn();
+    const unsubscribe = vi.fn();
+    onRendererEventMock.mockReturnValueOnce(unsubscribe);
+
+    const result = api.nativeNotifications.onAction(callback);
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (
+      event: unknown,
+      payload: { id: string },
+    ) => void;
+    listener({}, { id: 'n1' });
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(
+      EVENTS.NATIVE_NOTIFICATION_ACTION,
+      expect.any(Function),
+    );
+    expect(callback).toHaveBeenCalledWith({ id: 'n1' });
+
+    result();
+    expect(unsubscribe).toHaveBeenCalled();
+  });
+
+  it('nativeNotifications.onClick forwards clicks and cleans up', () => {
+    const api = getExposedApi();
+    const callback = vi.fn();
+    const unsubscribe = vi.fn();
+    onRendererEventMock.mockReturnValueOnce(unsubscribe);
+
+    const result = api.nativeNotifications.onClick(callback);
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (
+      event: unknown,
+      payload: { id: string },
+    ) => void;
+    listener({}, { id: 'summary' });
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(
+      EVENTS.NATIVE_NOTIFICATION_CLICK,
+      expect.any(Function),
+    );
+    expect(callback).toHaveBeenCalledWith({ id: 'summary' });
+
+    result();
+    expect(unsubscribe).toHaveBeenCalled();
+  });
+
+  it('onSystemSleep forwards sleep events and cleans up', () => {
+    const api = getExposedApi();
+    const callback = vi.fn();
+    const unsubscribe = vi.fn();
+    onRendererEventMock.mockReturnValueOnce(unsubscribe);
+
+    const result = api.onSystemSleep(callback);
+    const listener = onRendererEventMock.mock.calls.at(-1)?.[1] as (event: unknown) => void;
+    listener({});
+
+    expect(onRendererEventMock).toHaveBeenCalledWith(EVENTS.SYSTEM_SLEEP, expect.any(Function));
+    expect(callback).toHaveBeenCalled();
+
+    result();
+    expect(unsubscribe).toHaveBeenCalled();
   });
 });

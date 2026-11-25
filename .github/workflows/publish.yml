@@ -36,8 +36,31 @@ on:
 permissions: {}
 
 jobs:
+  # Fail in seconds instead of after a build, sign, and notarize cycle. The
+  # release PR gate should already have caught this, but manual dispatches and
+  # expired agreements still deserve a clear, early error.
+  preflight:
+    name: Apple notarization preflight
+    runs-on: macos-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify Apple notarization access
+        env:
+          APPLE_ID_USERNAME: ${{ secrets.APPLE_ID_USERNAME }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_ID_TEAM_ID: ${{ secrets.APPLE_ID_TEAM_ID }}
+        run: ./scripts/verifyAppleNotarization.sh
+
   release:
     name: Publish ${{ matrix.platform }} [electron-builder]
+    needs: preflight
     permissions:
       contents: write
     strategy:
@@ -46,16 +69,22 @@ jobs:
           - os: macos-latest
             platform: macOS
             package-cmd: vp run package:macos --publish onTagOrDraft
+            verify-path: dist/mac-universal/Gitify.app
+            fuse-path: dist/mac-universal/Gitify.app
             artifact-name: Gitify-release-mac
             use-apple-notarization: true
           - os: windows-latest
             platform: Windows
             package-cmd: vp run package:win --publish onTagOrDraft
+            verify-path: dist/win-unpacked
+            fuse-path: dist/win-unpacked/Gitify.exe
             artifact-name: Gitify-release-win
             use-apple-notarization: false
           - os: ubuntu-latest
             platform: Linux
             package-cmd: vp run package:linux --publish onTagOrDraft
+            verify-path: dist/linux-unpacked
+            fuse-path: dist/linux-unpacked/gitify
             artifact-name: Gitify-release-linux
             use-apple-notarization: false
     runs-on: ${{ matrix.os }}
@@ -91,6 +120,13 @@ jobs:
           # General
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Verify packaged dependencies
+        shell: bash
+        run: node scripts/verifyPackagedDependencies.js "${{ matrix.verify-path }}"
+
+      - name: Verify Electron fuses
+        run: node scripts/verifyFuses.js "${{ matrix.fuse-path }}"
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v7.0.2
         with:
@@ -99,6 +135,7 @@ jobs:
             dist/*
             !dist/*/
           overwrite: true
+          if-no-files-found: error
 
   publish-release:
     name: Publish release
@@ -125,6 +162,14 @@ jobs:
           release_id=$(printf '%s' "${release}" | jq -r '.id // empty')
           if [ -z "${release_id}" ]; then
             echo "::error::No release found for tag ${TAG_NAME}"
+            exit 1
+          fi
+
+          # Packaging verifies every target against electron-builder.js, but a
+          # draft with no assets would publish a release nobody can download.
+          asset_count=$(printf '%s' "${release}" | jq -r '.assets | length')
+          if [ "${asset_count}" -eq 0 ]; then
+            echo "::error::Release ${TAG_NAME} has no assets to publish"
             exit 1
           fi
 

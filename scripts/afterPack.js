@@ -10,6 +10,27 @@ function logAfterPackProgress(msg) {
 }
 
 /**
+ * Fails packaging when the application archive is missing.
+ *
+ * The `onlyLoadAppFromAsar` fuse stops Electron falling back to an adjacent
+ * `app` directory, so a build without `app.asar` cannot start. Catching it here
+ * fails the build instead of shipping an artifact that will not launch.
+ *
+ * @param {import('electron-builder').AfterPackContext} context
+ */
+const assertApplicationArchive = (context) => {
+  const archivePath = path.join(context.packager.getResourcesDir(context.appOutDir), 'app.asar');
+
+  if (!fs.existsSync(archivePath)) {
+    throw new Error(
+      `no application archive at ${archivePath}: asar must stay enabled because the onlyLoadAppFromAsar fuse requires it`,
+    );
+  }
+
+  logAfterPackProgress(`verified application archive: ${archivePath}`);
+};
+
+/**
  * @param {import('electron-builder').AfterPackContext} context
  */
 const afterPack = async (context) => {
@@ -22,6 +43,8 @@ const afterPack = async (context) => {
   if (platform === 'darwin') {
     removeUnusedLocales(appOutDir, appName);
   }
+
+  assertApplicationArchive(context);
 
   logAfterPackProgress('Completed');
 };

@@ -1,21 +1,15 @@
-import {
-  createDeviceCode,
-  exchangeDeviceCode,
-  exchangeWebFlowCode,
-  getWebFlowAuthorizationUrl,
-} from '@octokit/oauth-methods';
+import { createDeviceCode, exchangeDeviceCode } from '@octokit/oauth-methods';
 import { request } from '@octokit/request';
 import { RequestError } from '@octokit/request-error';
 
 import { Constants } from '../../../constants';
 
-import type { AuthCode, Hostname, Link, Token } from '../../../types';
-import type { AuthResponse, DeviceFlowSession, LoginOAuthWebOptions } from '../../auth/types';
+import type { ClientID, Hostname, Token } from '../../../types';
+import type { DeviceFlowSession } from '../../auth/types';
 
+import i18n from '../../../i18n';
 import { getRecommendedScopeNames } from '../../auth/scopeNames';
-import { generateOAuthState } from '../../auth/state';
-import { rendererLogError, rendererLogInfo, rendererLogWarn, toError } from '../../core/logger';
-import { openExternalLink } from '../../system/comms';
+import { rendererLogError, toError } from '../../core/logger';
 import { getGitHubAuthBaseUrl } from './auth';
 
 type DeviceFlowErrorResponse = {
@@ -25,115 +19,6 @@ type DeviceFlowErrorResponse = {
 };
 
 /**
- * Initiate a GitHub OAuth Web Flow (OAuth App) authentication.
- *
- * Opens the GitHub authorization URL in the user's browser, then waits for the
- * app's custom `gitify://oauth` callback to receive the authorization code.
- *
- * The login is bound to a per-attempt random `state` that is sent with the
- * authorization request and must be echoed by the callback. A callback
- * carrying a missing or mismatched `state` is logged and ignored, so a
- * `gitify://oauth` link delivered from outside this attempt cannot bind the
- * client to a different GitHub account or tear down the pending login.
- *
- * @param authOptions - The OAuth App client configuration and target hostname.
- * @returns Resolves with the authorization code and options on success.
- */
-export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promise<AuthResponse> {
-  return new Promise((resolve, reject) => {
-    // A per-attempt, unguessable value this app itself tracks and checks on
-    // callback, so a `gitify://oauth` callback carrying an authorization code
-    // this specific login attempt never requested (e.g. one an attacker
-    // obtained for their own GitHub account) is rejected instead of silently
-    // accepted and exchanged for a token.
-    //
-    // Read the state back from the library's result rather than trusting the
-    // value echoed to us, so the string compared on callback is exactly the one
-    // the library embedded in the authorization URL.
-    const { url, state: expectedState } = getWebFlowAuthorizationUrl({
-      clientType: 'oauth-app',
-      clientId: authOptions.clientId,
-      scopes: getRecommendedScopeNames(),
-      allowSignup: false,
-      state: generateOAuthState(),
-      request: request.defaults({
-        baseUrl: `https://${authOptions.hostname}`,
-      }),
-    });
-
-    openExternalLink(url as Link);
-
-    // Assigned once the listener is registered below; optional-chained in
-    // `handleCallback` so a synchronously-firing callback cannot hit the
-    // temporal dead zone.
-    let unsubscribeAuthCallback: (() => void) | undefined;
-
-    const handleCallback = (callbackUrl: string) => {
-      let url: URL;
-      try {
-        url = new URL(callbackUrl);
-      } catch {
-        // An unparseable callback cannot carry the state this attempt
-        // generated, so treat it like any other unmatched callback: log and
-        // ignore rather than tearing down the pending login. Otherwise a
-        // forged `gitify://` URL (e.g. `gitify://[`) would abort a legitimate
-        // login even though the state check never runs.
-        rendererLogWarn(
-          'renderer:auth-callback',
-          'Ignored an unparseable authentication callback URL',
-        );
-        return;
-      }
-
-      const type = url.hostname;
-      const code = url.searchParams.get('code');
-      const state = url.searchParams.get('state');
-      const error = url.searchParams.get('error');
-      const errorDescription = url.searchParams.get('error_description');
-      const errorUri = url.searchParams.get('error_uri');
-
-      // A callback belongs to this login attempt only when it echoes the state
-      // this attempt generated. Anything else (missing or mismatched state) is
-      // logged and ignored, leaving the pending login intact so an injected
-      // callback can neither bind another account nor tear down the attempt.
-      if (state !== expectedState) {
-        rendererLogWarn(
-          'renderer:auth-callback',
-          'Ignored an authentication callback with a missing or mismatched state parameter',
-        );
-        return;
-      }
-
-      if (code && type === 'oauth') {
-        unsubscribeAuthCallback?.();
-        resolve({
-          authMethod: 'OAuth App',
-          authCode: code as AuthCode,
-          authOptions: authOptions,
-        });
-      } else if (error) {
-        unsubscribeAuthCallback?.();
-        reject(
-          new Error(
-            `Oops! Something went wrong and we couldn't log you in using GitHub. Please try again. Reason: ${errorDescription} Docs: ${errorUri}`,
-          ),
-        );
-      }
-    };
-
-    // Unsubscribed inside `handleCallback` once the flow settles so repeated
-    // login attempts do not accumulate stale ipcRenderer listeners.
-    unsubscribeAuthCallback = window.gitify.onAuthCallback((callbackUrl: string) => {
-      rendererLogInfo(
-        'renderer:auth-callback',
-        `received authentication callback URL ${callbackUrl}`,
-      );
-      handleCallback(callbackUrl);
-    });
-  });
-}
-
-/**
  * Start a GitHub Device Flow authorization session.
  *
  * Requests a device code from GitHub and returns the session state
@@ -141,15 +26,18 @@ export function performGitHubWebOAuth(authOptions: LoginOAuthWebOptions): Promis
  *
  * @param hostname - The GitHub hostname to authenticate against. Defaults to github.com.
  * @param scopes - Array of scope names to request. Defaults to recommended (full) scopes.
+ * @param clientId - The OAuth app client ID to authorize with. Defaults to Gitify's
+ *                   own preconfigured app; a user-supplied custom app passes its own.
  * @returns The device flow session data.
  */
 export async function startGitHubDeviceFlow(
   hostname: Hostname = Constants.GITHUB_HOSTNAME,
   scopes: string[] = getRecommendedScopeNames(),
+  clientId: ClientID = Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
 ): Promise<DeviceFlowSession> {
   const deviceCode = await createDeviceCode({
     clientType: 'oauth-app' as const,
-    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
+    clientId: clientId,
     scopes: scopes,
     request: request.defaults({
       baseUrl: getGitHubAuthBaseUrl(hostname).toString(),
@@ -158,13 +46,61 @@ export async function startGitHubDeviceFlow(
 
   return {
     hostname: hostname,
-    clientId: Constants.OAUTH_DEVICE_FLOW_CLIENT_ID,
+    clientId: clientId,
     deviceCode: deviceCode.data.device_code,
     userCode: deviceCode.data.user_code,
     verificationUri: deviceCode.data.verification_uri,
     intervalSeconds: deviceCode.data.interval,
     expiresAt: Date.now() + deviceCode.data.expires_in * 1000,
   } as DeviceFlowSession;
+}
+
+/**
+ * Describe a device-flow start failure in actionable terms.
+ *
+ * A device flow can only start when the app has device flow enabled and the
+ * client ID is known to the host. Both are common setup mistakes for a
+ * user-supplied custom app, so they are surfaced with a named cause and fix
+ * instead of a raw transport error.
+ *
+ * @param err - The error thrown while starting the device flow.
+ * @param hostname - The host the session was started against.
+ * @param clientId - The client ID supplied for a custom app, when any.
+ * @returns A user-facing message, or `undefined` for an unrecognised failure.
+ */
+export function describeDeviceFlowStartError(
+  err: unknown,
+  hostname: Hostname,
+  clientId?: ClientID,
+): string | undefined {
+  if (!(err instanceof RequestError)) {
+    return undefined;
+  }
+
+  const errorCode = (err.response?.data as Partial<DeviceFlowErrorResponse> | undefined)?.error;
+
+  switch (errorCode) {
+    case 'device_flow_disabled':
+      return clientId
+        ? i18n.t(
+            'login.device.error_disabled_custom',
+            "Device flow is not enabled for this OAuth app. Enable it in that app's settings under {{url}}, then try again.",
+            { url: `https://${hostname}/settings/developers` },
+          )
+        : i18n.t(
+            'login.device.error_disabled',
+            "Device flow is not enabled for this OAuth app. Enable it in the app's settings on {{hostname}}, then try again.",
+            { hostname },
+          );
+    case 'incorrect_client_credentials':
+      return i18n.t(
+        'login.device.error_invalid_client_id',
+        'The client ID is not valid for {{hostname}}. Check it and try again.',
+        { hostname },
+      );
+    default:
+      return undefined;
+  }
 }
 
 /**
@@ -208,36 +144,4 @@ export async function pollGitHubDeviceFlow(session: DeviceFlowSession): Promise<
 
     throw err;
   }
-}
-
-/**
- * Exchange an OAuth authorization code for an access token.
- *
- * `authOptions.clientSecret` is required; this step must be performed
- * server-side or in a trusted context to keep the secret confidential.
- *
- * @param authCode - The authorization code received from the OAuth callback.
- * @param authOptions - The OAuth App options, including the client secret.
- * @returns The access token.
- * @throws If `clientSecret` is absent.
- */
-export async function exchangeAuthCodeForAccessToken(
-  authCode: AuthCode,
-  authOptions: LoginOAuthWebOptions,
-): Promise<Token> {
-  if (!authOptions.clientSecret) {
-    throw new Error('clientSecret is required to exchange an auth code');
-  }
-
-  const { authentication } = await exchangeWebFlowCode({
-    clientType: 'oauth-app',
-    clientId: authOptions.clientId,
-    clientSecret: authOptions.clientSecret,
-    code: authCode,
-    request: request.defaults({
-      baseUrl: getGitHubAuthBaseUrl(authOptions.hostname).toString().replace(/\/$/, ''),
-    }),
-  });
-
-  return authentication.token as Token;
 }

@@ -1,6 +1,10 @@
-import type { AuthCode, ClientID, ClientSecret, Forge, Hostname, Token } from '../../types';
+import type { ClientID, Forge, Hostname, Token } from '../../types';
 
-export type AuthMethod = 'GitHub App' | 'GitHub CLI' | 'Personal Access Token' | 'OAuth App';
+export type AuthMethod =
+  | 'Gitify OAuth App'
+  | 'Custom OAuth App'
+  | 'GitHub CLI'
+  | 'Personal Access Token';
 
 export type PlatformType =
   | 'Bitbucket Cloud'
@@ -10,12 +14,6 @@ export type PlatformType =
   | 'GitLab Cloud'
   | 'GitLab Self-Managed'
   | 'Gitea';
-
-export interface LoginOAuthWebOptions {
-  hostname: Hostname;
-  clientId: ClientID;
-  clientSecret: ClientSecret;
-}
 
 export interface DeviceFlowSession {
   hostname: Hostname;
@@ -34,10 +32,4 @@ export interface LoginPersonalAccessTokenOptions {
   username?: string;
   /** Defaults to GitHub when omitted. */
   forge?: Forge;
-}
-
-export interface AuthResponse {
-  authMethod: AuthMethod;
-  authCode: AuthCode;
-  authOptions: LoginOAuthWebOptions;
 }

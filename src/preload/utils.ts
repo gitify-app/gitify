@@ -5,6 +5,10 @@ import type { EventArgs, EventRequest, EventResponse, EventType } from '../share
 /**
  * Send a fire-and-forget IPC message from the renderer to the main process.
  * Variadic so events without a payload can be called as `sendMainEvent(event)`.
+ *
+ * @param event - The IPC channel/event name to send.
+ * @param args - Payload arguments for the event; omitted for events with no
+ * request payload.
  */
 export function sendMainEvent<E extends EventType>(event: E, ...args: EventArgs<E>): void {
   ipcRenderer.send(event, ...args);
@@ -13,6 +17,11 @@ export function sendMainEvent<E extends EventType>(event: E, ...args: EventArgs<
 /**
  * Send an IPC message from the renderer to the main process and await a response.
  * The resolved value type is enforced by the event's contract.
+ *
+ * @param event - The IPC channel/event name to invoke.
+ * @param args - Payload arguments for the event; omitted for events with no
+ * request payload.
+ * @returns The response value defined by the event's contract.
  */
 export async function invokeMainEvent<E extends EventType>(
   event: E,
@@ -30,6 +39,8 @@ export async function invokeMainEvent<E extends EventType>(
 /**
  * Register a listener for an IPC event sent from the main process to the renderer.
  *
+ * @param event - The IPC channel/event name to listen for.
+ * @param listener - Callback invoked with the event and its typed request payload.
  * @returns A function that removes the listener. Callers that register
  * listeners from React effects must return it as the effect cleanup,
  * otherwise every remount leaks a permanent ipcRenderer listener.

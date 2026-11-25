@@ -3,9 +3,8 @@ import useSettingsStore from '../../stores/useSettingsStore';
 import type { GitifyNotification } from '../../types';
 
 /**
- * Returns true when settings say to group by date.
+ * Returns true when the settings store says to group by date.
  *
- * @param settings - The application settings.
  * @returns `true` when `groupBy` is `"DATE"`.
  */
 export function isGroupByDate() {
@@ -13,9 +12,8 @@ export function isGroupByDate() {
 }
 
 /**
- * Returns true when settings say to group by repository.
+ * Returns true when the settings store says to group by repository.
  *
- * @param settings - The application settings.
  * @returns `true` when `groupBy` is `"REPOSITORY"`.
  */
 export function isGroupByRepository() {
@@ -53,13 +51,16 @@ export function groupNotificationsByRepository(
   }
 
   return repoGroups;
-} /**
+}
+
+/**
  * Returns a flattened, ordered notifications list according to:
  *   - repository-first-seen order (when grouped by repository)
  *   - natural notifications order otherwise
  *
+ * Uses the settings store's `groupBy` value to choose the strategy.
+ *
  * @param notifications - The notifications to flatten and order.
- * @param settings - Application settings controlling the groupBy strategy.
  * @returns A flat, ordered array of notifications.
  */
 export function getFlattenedNotificationsByRepo(

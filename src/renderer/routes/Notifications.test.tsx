@@ -4,7 +4,7 @@ import { renderWithProviders } from '../__helpers__/test-utils';
 import { mockMultipleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 
-import { Errors } from '../utils/core/errors';
+import { getErrorDetails } from '../utils/core/errors';
 import { NotificationsRoute } from './Notifications';
 
 vi.mock('../components/notifications/NotificationList', () => ({
@@ -70,19 +70,19 @@ describe('renderer/routes/Notifications.tsx', () => {
     expect(screen.queryByText('Loading')).not.toBeInTheDocument();
   });
 
-  it('prefers the offline state over loading', () => {
+  it('shows loading rather than an offline error for a paused online query', () => {
     renderWithProviders(<NotificationsRoute />, {
-      isOnline: false,
-      status: 'loading',
+      status: 'paused',
     });
 
-    expect(screen.getByText('Oops')).toBeInTheDocument();
-    expect(screen.queryByText('Loading')).not.toBeInTheDocument();
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+    expect(screen.queryByText('Oops')).not.toBeInTheDocument();
+    expect(screen.queryByText('AllRead')).not.toBeInTheDocument();
   });
 
   it('prefers the error state over loading', () => {
     renderWithProviders(<NotificationsRoute />, {
-      globalError: Errors.UNKNOWN,
+      globalError: getErrorDetails('UNKNOWN'),
       status: 'error',
     });
 
@@ -101,44 +101,22 @@ describe('renderer/routes/Notifications.tsx', () => {
 
   it('renders offline error when not online', () => {
     renderWithProviders(<NotificationsRoute />, {
-      isOnline: false,
+      status: 'offline',
     });
 
     expect(screen.getByText('Oops')).toBeInTheDocument();
   });
 
   describe('error conditions - oops', () => {
-    it('bad credentials', () => {
+    it.each([
+      ['bad credentials', 'BAD_CREDENTIALS'],
+      ['missing scopes', 'MISSING_SCOPES'],
+      ['rate limited', 'RATE_LIMITED'],
+      ['unknown error', 'UNKNOWN'],
+    ] as const)('%s', (_name, errorType) => {
       const tree = renderWithProviders(<NotificationsRoute />, {
         status: 'error',
-        globalError: Errors.BAD_CREDENTIALS,
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('missing scopes', () => {
-      const tree = renderWithProviders(<NotificationsRoute />, {
-        status: 'error',
-        globalError: Errors.MISSING_SCOPES,
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('rate limited', () => {
-      const tree = renderWithProviders(<NotificationsRoute />, {
-        status: 'error',
-        globalError: Errors.RATE_LIMITED,
-      });
-
-      expect(tree.container).toMatchSnapshot();
-    });
-
-    it('unknown error', () => {
-      const tree = renderWithProviders(<NotificationsRoute />, {
-        status: 'error',
-        globalError: Errors.UNKNOWN,
+        globalError: getErrorDetails(errorType),
       });
 
       expect(tree.container).toMatchSnapshot();

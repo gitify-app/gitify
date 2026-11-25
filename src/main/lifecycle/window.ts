@@ -5,6 +5,7 @@ import { isMacOS } from '../../shared/platform';
 
 import { WindowConfig } from '../config';
 import type MenuBuilder from '../menu';
+import { configureZoomShortcuts } from '../zoom';
 
 let isQuitting = false;
 let windowVibrancyEnabled = false;
@@ -89,6 +90,11 @@ export function configureWindowEvents(mb: Menubar, menuBuilder: MenuBuilder): vo
       app.quit();
     }
   });
+
+  /**
+   * Route the native zoom shortcuts through Gitify's own step and bounds.
+   */
+  configureZoomShortcuts(mb);
 
   /**
    * When DevTools is opened, resize and center the window for better visibility and allow resizing.

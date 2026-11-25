@@ -7,7 +7,7 @@ import {
 
 import type { AccountNotifications } from '../../types';
 
-import { Errors } from '../core/errors';
+import { getErrorDetails } from '../core/errors';
 import { restoreFailedNotifications, settleNotificationActions } from './mutations';
 
 describe('renderer/utils/notifications/mutations.ts', () => {
@@ -36,7 +36,7 @@ describe('renderer/utils/notifications/mutations.ts', () => {
       expect(result.succeeded).toEqual([first]);
       expect(result.failed).toHaveLength(1);
       expect(result.failed[0].notification).toEqual(second);
-      expect(result.failed[0].error).toBe(Errors.ACTION_FORBIDDEN);
+      expect(result.failed[0].error).toEqual(getErrorDetails('ACTION_FORBIDDEN'));
       expect(result.failed[0].rawError).toBe(forbiddenError);
     });
 
@@ -56,7 +56,7 @@ describe('renderer/utils/notifications/mutations.ts', () => {
 
       expect(result.succeeded).toEqual([second]);
       expect(result.failed[0].notification).toEqual(first);
-      expect(result.failed[0].error).toBe(Errors.ACTION_FORBIDDEN);
+      expect(result.failed[0].error).toEqual(getErrorDetails('ACTION_FORBIDDEN'));
       expect(action).toHaveBeenCalledTimes(2);
     });
 
@@ -79,8 +79,8 @@ describe('renderer/utils/notifications/mutations.ts', () => {
       const result = await settleNotificationActions([first, second], action);
 
       expect(result.succeeded).toEqual([]);
-      expect(result.failed[0].error).toBe(Errors.MISSING_SCOPES);
-      expect(result.failed[1].error).toBe(Errors.ACTION_FORBIDDEN);
+      expect(result.failed[0].error).toEqual(getErrorDetails('MISSING_SCOPES'));
+      expect(result.failed[1].error).toEqual(getErrorDetails('ACTION_FORBIDDEN'));
     });
   });
 

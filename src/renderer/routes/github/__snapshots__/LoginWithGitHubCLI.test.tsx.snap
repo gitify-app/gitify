@@ -110,56 +110,29 @@ exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] =
         data-padding="none"
         data-wrap="nowrap"
       >
-        <span
-          class="text-xs prc-Text-Text-9mHv3"
-          data-component="Text"
+        <div
+          class="prc-Stack-Stack-UQ9k6"
+          data-align="stretch"
+          data-component="Stack"
+          data-direction="vertical"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          Uses the token your local 
-          <i
-            class="prc-Text-Text-9mHv3"
+          <p
+            class="text-xs prc-Text-Text-9mHv3"
             data-component="Text"
           >
-            gh
-          </i>
-           install already holds, so no token has to be created or pasted. Gitify reads it from the CLI on every refresh, which means
-           
-          <i
-            class="prc-Text-Text-9mHv3"
+            Gitify uses your existing GitHub CLI login. There’s no token to paste, and Gitify picks up token refreshes automatically.
+          </p>
+          <p
+            class="text-xs prc-Text-Text-9mHv3"
             data-component="Text"
           >
-            gh auth login
-          </i>
-           and 
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            gh auth refresh
-          </i>
-           keep working without re-authenticating here.
-        </span>
-        <span
-          class="text-xs prc-Text-Text-9mHv3"
-          data-component="Text"
-        >
-          The scopes come from the GitHub CLI and cannot be changed from Gitify. Its
-           
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            repo
-          </i>
-           scope covers notification access; run
-           
-          <i
-            class="prc-Text-Text-9mHv3"
-            data-component="Text"
-          >
-            gh auth refresh -s notifications
-          </i>
-           to grant that scope explicitly.
-        </span>
+            Before adding the account, Gitify checks for notification access. Either “repo” or “notifications” is enough.
+          </p>
+        </div>
         <div
           class="prc-FormControl-ControlVerticalLayout-8YotI"
           data-component="FormControl"
@@ -213,7 +186,7 @@ exports[`renderer/routes/github/LoginWithGitHubCLI.tsx > renders correctly 1`] =
               class="prc-Text-Text-9mHv3"
               data-component="Text"
             >
-              Change only if you are using GitHub Enterprise Server
+              Change only for GitHub Enterprise Server.
             </i>
           </span>
         </div>

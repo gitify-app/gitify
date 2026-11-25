@@ -13,7 +13,7 @@ import {
   quitApp,
   setAutoLaunch,
   setKeepWindowOnBlur,
-  setShowUpdateNotifications,
+  setUpdatePreferences,
   setTrayIconAppearance,
   setUseX11Backend,
   showWindow,
@@ -131,10 +131,13 @@ describe('renderer/utils/comms.ts', () => {
     });
 
     it('sets whether update notifications are shown', () => {
-      setShowUpdateNotifications(false);
+      setUpdatePreferences({ automaticUpdates: 'default', showUpdateNotifications: false });
 
-      expect(window.gitify.setShowUpdateNotifications).toHaveBeenCalledTimes(1);
-      expect(window.gitify.setShowUpdateNotifications).toHaveBeenCalledWith(false);
+      expect(window.gitify.setUpdatePreferences).toHaveBeenCalledTimes(1);
+      expect(window.gitify.setUpdatePreferences).toHaveBeenCalledWith({
+        automaticUpdates: 'default',
+        showUpdateNotifications: false,
+      });
     });
 
     it('sets the X11 backend preference', () => {
