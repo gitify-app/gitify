@@ -13,17 +13,11 @@
         { "type": "perf", "section": "⚡️ Performance" },
         { "type": "refactor", "section": "🧼 Code Refactoring" },
         { "type": "docs", "section": "📚 Documentation" },
-        { "type": "build", "section": "🏗️ Build System" },
-        { "type": "ci", "section": "🤖 Continuous Integration" },
+        { "type": "build", "section": "🏗️ Build System", "hidden": true },
+        { "type": "ci", "section": "🤖 Continuous Integration", "hidden": true },
         { "type": "test", "section": "🧪 Testing", "hidden": true },
         { "type": "style", "section": "🎨 Styles", "hidden": true },
         { "type": "chore", "scope": "deps-core", "section": "📦 Dependency Updates (Core)" },
-        {
-          "type": "chore",
-          "scope": "deps",
-          "section": "📦 Dependency Updates (Other)",
-          "hidden": true
-        },
         { "type": "chore", "section": "🧹 Chore", "hidden": true }
       ]
     }
