@@ -36,7 +36,7 @@ jobs:
 
       - name: Checkout trusted verification script
         if: ${{ startsWith(github.head_ref, 'release-please--') && github.event.pull_request.head.repo.full_name == github.repository }}
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           # Never execute pull request code with the Apple release secrets.
