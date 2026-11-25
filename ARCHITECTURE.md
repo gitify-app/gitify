@@ -84,7 +84,7 @@ Subscription is separate from side effects, but it multiplies the same way: ever
 
 Updates are a main-process concern (`src/main/updater.ts`), driven by `electron-updater` events and surfaced through the tray/menu and a native ready dialog.
 
-- `update-available` updates the tooltip and menu; it does not clear the dialog guard.
+- `update-available` updates the tooltip and shows **Downloading update…** in the menu; it does not clear the dialog guard. Download percentages are shown only in the tooltip.
 - `update-downloaded` marks the menu's **Restart to install update** entry visible and, when notifications are enabled, shows the ready dialog once per downloaded version.
 - The dialog offers **Restart**, **Later**, and **Release notes** when the downloaded update has release information. Release notes opens the matching GitHub release page.
 - **Later** dismisses only the dialog. The menu entry remains the install path, and a later check for the same downloaded version does not prompt again. A different version prompts normally; `update-cancelled` clears the guard. The guard is process-local.

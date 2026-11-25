@@ -153,28 +153,28 @@ describe('main/menu.ts', () => {
     });
   });
 
-  describe('updateAvailableMenuItem', () => {
+  describe('downloadingUpdateMenuItem', () => {
     it('default menu configuration', () => {
-      const config = getMenuItemConfigByLabel('An update is available');
+      const config = getMenuItemConfigByLabel('Downloading update…');
 
       expect(config).toBeDefined();
-      expect(config?.label).toBe('An update is available');
+      expect(config?.label).toBe('Downloading update…');
       expect(config?.enabled).toBe(false);
       expect(config?.visible).toBe(false);
     });
 
     it('shows menu item', () => {
-      menuBuilder.setUpdateAvailableMenuVisibility(true);
+      menuBuilder.setDownloadingUpdateMenuVisibility(true);
 
       // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(true);
+      expect(menuBuilder['downloadingUpdateMenuItem'].visible).toBe(true);
     });
 
     it('hides menu item', () => {
-      menuBuilder.setUpdateAvailableMenuVisibility(false);
+      menuBuilder.setDownloadingUpdateMenuVisibility(false);
 
       // oxlint-disable-next-line dot-notation -- This is a test
-      expect(menuBuilder['updateAvailableMenuItem'].visible).toBe(false);
+      expect(menuBuilder['downloadingUpdateMenuItem'].visible).toBe(false);
     });
   });
 

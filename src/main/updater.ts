@@ -125,7 +125,8 @@ export default class AppUpdater {
       // different version will not match `lastPromptedVersion` and prompts
       // normally. Only a cancelled download clears the guard.
       this.setTooltipWithStatus('A new update is available');
-      this.menuBuilder.setUpdateAvailableMenuVisibility(true);
+      this.menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
+      this.menuBuilder.setDownloadingUpdateMenuVisibility(true);
     });
 
     autoUpdater.on('download-progress', (progressObj) => {
@@ -142,7 +143,7 @@ export default class AppUpdater {
       this.downloaded = true;
       logInfo('auto updater', 'Update downloaded');
       this.setTooltipWithStatus('A new update is ready to install');
-      this.menuBuilder.setUpdateAvailableMenuVisibility(false);
+      this.menuBuilder.setDownloadingUpdateMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(true);
       // The guard in showUpdateReadyDialog also keeps a re-check of the same version quiet.
       if (this.notificationsEnabled && event.version !== this.lastPromptedVersion) {
@@ -161,7 +162,7 @@ export default class AppUpdater {
       logInfo('auto updater', 'Update not available');
       this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
       this.menuBuilder.setNoUpdateAvailableMenuVisibility(true);
-      this.menuBuilder.setUpdateAvailableMenuVisibility(false);
+      this.menuBuilder.setDownloadingUpdateMenuVisibility(false);
       this.menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
 
       // Auto-hide the "no updates available" message
@@ -284,7 +285,7 @@ export default class AppUpdater {
     this.menubar.tray.setToolTip(APPLICATION.NAME);
     this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
     this.menuBuilder.setNoUpdateAvailableMenuVisibility(false);
-    this.menuBuilder.setUpdateAvailableMenuVisibility(false);
+    this.menuBuilder.setDownloadingUpdateMenuVisibility(false);
     this.menuBuilder.setUpdateReadyForInstallMenuVisibility(false);
 
     // Clear any pending timeout
