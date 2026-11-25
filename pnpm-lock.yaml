@@ -354,8 +354,8 @@ importers:
         specifier: 8.3.1
         version: 8.3.1
       i18next-cli:
-        specifier: 1.93.1
-        version: 1.93.1(@types/node@24.19.2)(@types/react@19.3.0)(react@19.3.1)(typescript@7.0.2)
+        specifier: 1.93.2
+        version: 1.93.2(@types/node@24.19.2)(@types/react@19.3.0)(react@19.3.1)(typescript@7.0.2)
       playwright:
         specifier: 1.65.1
         version: 1.65.1
@@ -3161,8 +3161,8 @@ packages:
   i18next-browser-languagedetector@8.3.1:
     resolution: {integrity: sha512-W7dfKWlmaxuy5zsKsu8vKm7SQ0R6T1Tw7XRMKCh3bt98q9m5Q73GKF1PiqtvcwzC+AZvfUCugbfcIYQkDfHeAg==}
 
-  i18next-cli@1.93.1:
-    resolution: {integrity: sha512-d7V3JO0uaXY5KzvDQJXVDX8esUhIImNc6o3CKBiLcpuijntEZCKIaGH/mQHNQmMRj83Ca2kNcWRqg1IsfUg7hg==}
+  i18next-cli@1.93.2:
+    resolution: {integrity: sha512-mfnWXWJGpDtEo37m7j3hHAYznjPjhtmGX1TzY111xZT5/hTQrS23ntaqqOy4PxN+8uzUKi82mcNmmaqjka3XKg==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -7353,7 +7353,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.29.14
 
-  i18next-cli@1.93.1(@types/node@24.19.2)(@types/react@19.3.0)(react@19.3.1)(typescript@7.0.2):
+  i18next-cli@1.93.2(@types/node@24.19.2)(@types/react@19.3.0)(react@19.3.1)(typescript@7.0.2):
     dependencies:
       '@croct/json5-parser': 0.2.2
       '@formatjs/icu-messageformat-parser': 3.5.23
