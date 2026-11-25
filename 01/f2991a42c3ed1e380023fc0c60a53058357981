@@ -1,0 +1,26 @@
+src/__helpers__/electron-log.setup.ts
+  h_ac004aadb63da9 22,39
+src/main/diagnostics.test.ts
+  h_ac004aadb63da9 3-9,21,24,26-31,34,36-38,40-41,44,46-47,51-54,56,59-65,67-81,83-86
+src/main/diagnostics.ts
+  h_ac004aadb63da9 1,4,6-9,12-19,22-24
+src/renderer/bootstrap.test.ts
+  h_ac004aadb63da9 1,3,5-8,10-14,16-20,23-24,26-32,35-50
+src/renderer/bootstrap.ts
+  h_ac004aadb63da9 3-7,9-12,14-19,21
+src/renderer/index.html
+  h_ac004aadb63da9 12
+src/shared/logger.test.ts
+  h_ac004aadb63da9 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "01f2991a42c3ed1e380023fc0c60a53058357981",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
