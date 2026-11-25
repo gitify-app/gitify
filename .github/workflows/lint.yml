@@ -49,6 +49,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: .github/
 
+      - name: GitHub Actions linter
+        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
+
       - name: Install GitHub Actions lockfile verifier
         run: gh extension install github/gh-actions-lock --pin "$GH_ACTIONS_LOCK_VERSION"
         env:
@@ -60,13 +63,3 @@ jobs:
         run: gh actions-lock --verify
         env:
           GH_TOKEN: ${{ github.token }}
-
-      # Remove this once actionlint supports $/ in reusable workflow calls
-      # (rhysd/actionlint#732). Verify the lockfile against the original files first.
-      - name: Normalize same-repository workflow calls for actionlint
-        run: |
-          sed -i -E 's|^(    uses: )\$/\.github/workflows/|\1./.github/workflows/|' \
-            .github/workflows/ci.yml .github/workflows/release.yml
-
-      - name: GitHub Actions linter
-        uses: docker://rhysd/actionlint:1.7.12@sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667
