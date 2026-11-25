@@ -389,7 +389,7 @@ export default defineConfig({
   lint: {
     plugins: ['typescript', 'react', 'unicorn', 'oxc', 'import', 'vitest', 'jsdoc'],
     // Enable the type-aware path so `vp check` runs TypeScript type checks
-    // natively (via the TS Go toolchain / tsgolint). `typeCheck` requires
+    // natively through Vite+'s bundled type checker. `typeCheck` requires
     // `typeAware`; enabling both also turns on the type-aware lint rules.
     options: {
       typeAware: true,
