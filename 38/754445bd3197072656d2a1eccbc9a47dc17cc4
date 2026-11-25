@@ -1,0 +1,22 @@
+ARCHITECTURE.md
+  h_ac004aadb63da9 87
+src/main/menu.test.ts
+  h_ac004aadb63da9 156,158,161,167,170,174,177
+src/main/menu.ts
+  h_ac004aadb63da9 17,55-56,101,230,234-235
+src/main/updater.test.ts
+  h_ac004aadb63da9 91,228,258,516-517,523,528-529,540
+src/main/updater.ts
+  h_ac004aadb63da9 128-129,146,165,288
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "38754445bd3197072656d2a1eccbc9a47dc17cc4",
+  "prompts": {},
+  "humans": {
+    "h_ac004aadb63da9": {
+      "author": "Adam Setch <adam.setch@outlook.com>"
+    }
+  }
+}
