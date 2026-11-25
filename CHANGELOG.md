@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.3.1](https://github.com/gitify-app/gitify/compare/v8.3.0...v8.3.1) (2026-11-25)
+
+
+### 🐛 Bug Fixes
+
+* show update download status in tray menu ([#3735](https://github.com/gitify-app/gitify/issues/3735)) ([b1d3b76](https://github.com/gitify-app/gitify/commit/b1d3b7629fb4e32a5e1ad65188dd795e4cf54a69))
+
+
+### 🤖 Continuous Integration
+
+* use self-repository references for reusable workflows ([#3733](https://github.com/gitify-app/gitify/issues/3733)) ([e382d54](https://github.com/gitify-app/gitify/commit/e382d54659387d579458a45daa7e97ddca115866))
+
 ## [8.3.0](https://github.com/gitify-app/gitify/compare/v8.2.0...v8.3.0) (2026-11-25)
 
 
