@@ -1,9 +1,9 @@
+import type { Link } from '../../../../../types';
+import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 /** Internal type. DO NOT USE DIRECTLY. */
 type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** Internal type. DO NOT USE DIRECTLY. */
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
-import type { Link } from '../../../../../types';
-import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 /** The possible states of a check run in a status rollup. */
 export type CheckRunState =
   /** The check run requires action. */
@@ -290,7 +290,7 @@ export type FetchIssueByNumberQuery = { repository: { issue: { __typename: 'Issu
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, status: { name: string, category: { key: string, state: IssueState, stateReason: IssueStateReason | null } } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
           | { __typename: 'IssueFieldDateValue', dateValue: string, field:
               | { name: string }
               | Record<PropertyKey, never>
@@ -325,7 +325,7 @@ export type IssueDetailsFragment = { __typename: 'Issue', number: number, title:
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
         | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
         | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
+       | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, status: { name: string, category: { key: string, state: IssueState, stateReason: IssueStateReason | null } } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
       | { __typename: 'IssueFieldDateValue', dateValue: string, field:
           | { name: string }
           | Record<PropertyKey, never>
@@ -396,7 +396,7 @@ export type FetchMergedDetailsTemplateQuery = { repository: { discussion?: { __t
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, status: { name: string, category: { key: string, state: IssueState, stateReason: IssueStateReason | null } } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
           | { __typename: 'IssueFieldDateValue', dateValue: string, field:
               | { name: string }
               | Record<PropertyKey, never>
@@ -479,7 +479,7 @@ export type MergedDetailsQueryTemplateFragment = { repository: { discussion?: { 
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Mannequin' }
             | { login: string, htmlUrl: Link, avatarUrl: Link, type: 'Organization' }
             | { name: string | null, login: string, htmlUrl: Link, avatarUrl: Link, type: 'User' }
-           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
+           | null, reactions: { totalCount: number }, reactionGroups: Array<{ content: ReactionContent, reactors: { totalCount: number } }> | null } | null> | null }, labels: { totalCount: number, nodes: Array<{ name: string, color: string } | null> | null } | null, issueType: { name: string, color: IssueTypeColor } | null, status: { name: string, category: { key: string, state: IssueState, stateReason: IssueStateReason | null } } | null, parent: { number: number, title: string, url: Link } | null, subIssuesSummary: { total: number, completed: number, percentCompleted: number }, issueFieldValues: { nodes: Array<
           | { __typename: 'IssueFieldDateValue', dateValue: string, field:
               | { name: string }
               | Record<PropertyKey, never>
@@ -861,6 +861,14 @@ export const IssueDetailsFragmentDoc = new TypedDocumentString(`
   issueType {
     name
     color
+  }
+  status @gated(requires: "issueStatuses") {
+    name
+    category {
+      key
+      state
+      stateReason
+    }
   }
   parent @gated(requires: "subIssues") {
     number
@@ -1257,6 +1265,14 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  status @gated(requires: "issueStatuses") {
+    name
+    category {
+      key
+      state
+      stateReason
+    }
+  }
   parent @gated(requires: "subIssues") {
     number
     title
@@ -1588,6 +1604,14 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  status @gated(requires: "issueStatuses") {
+    name
+    category {
+      key
+      state
+      stateReason
+    }
+  }
   parent @gated(requires: "subIssues") {
     number
     title
@@ -1772,6 +1796,14 @@ fragment IssueDetails on Issue {
   issueType {
     name
     color
+  }
+  status @gated(requires: "issueStatuses") {
+    name
+    category {
+      key
+      state
+      stateReason
+    }
   }
   parent @gated(requires: "subIssues") {
     number

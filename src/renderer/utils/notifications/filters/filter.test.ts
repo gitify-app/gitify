@@ -2,7 +2,7 @@ import { mockPartialGitifyNotification } from '../../../__mocks__/notifications-
 
 import { useFiltersStore, useSettingsStore } from '../../../stores';
 
-import type { GitifyOwner, Link, SearchToken } from '../../../types';
+import { type GitifyOwner, IconColor, type Link, type SearchToken } from '../../../types';
 
 import { filterBaseNotifications, filterDetailedNotifications } from './filter';
 
@@ -244,6 +244,64 @@ describe('renderer/utils/notifications/filters/filter.ts', () => {
 
         expect(result.length).toBe(1);
         expect(result).toEqual([mockNotifications[1]]);
+      });
+
+      it('filters notifications by issue status when provided', async () => {
+        useFiltersStore.setState({ issueStatuses: ['in_review'] });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        mockNotifications[0].subject.issueStatus = {
+          name: 'In review',
+          kind: 'in_review',
+          color: IconColor.GREEN,
+        };
+        mockNotifications[1].subject.issueStatus = {
+          name: 'Done',
+          kind: 'done',
+          color: IconColor.PURPLE,
+        };
+
+        const result = filterDetailedNotifications(mockNotifications);
+
+        expect(result.length).toBe(1);
+        expect(result).toEqual([mockNotifications[0]]);
+      });
+
+      it('keeps notifications in any selected issue status', async () => {
+        useFiltersStore.setState({ issueStatuses: ['in_progress', 'done'] });
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        mockNotifications[0].subject.issueStatus = {
+          name: 'In progress',
+          kind: 'in_progress',
+          color: IconColor.GREEN,
+        };
+        mockNotifications[1].subject.issueStatus = {
+          name: 'Done',
+          kind: 'done',
+          color: IconColor.PURPLE,
+        };
+
+        const result = filterDetailedNotifications(mockNotifications);
+
+        expect(result.length).toBe(2);
+        expect(result).toEqual(mockNotifications);
+      });
+
+      it('does not apply the issue status filter when none is selected', async () => {
+        useSettingsStore.setState({ detailedNotifications: true });
+
+        mockNotifications[0].subject.issueStatus = {
+          name: 'In review',
+          kind: 'in_review',
+          color: IconColor.GREEN,
+        };
+        mockNotifications[1].subject.issueStatus = undefined;
+
+        const result = filterDetailedNotifications(mockNotifications);
+
+        expect(result.length).toBe(2);
+        expect(result).toEqual(mockNotifications);
       });
 
       it('filters notifications that are not review requests when only direct is selected', async () => {

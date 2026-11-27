@@ -27,6 +27,7 @@ const useFiltersStore = create<FiltersStore>()(
           state.userTypes.length > 0 ||
           state.subjectTypes.length > 0 ||
           state.states.length > 0 ||
+          state.issueStatuses.length > 0 ||
           state.reasons.length > 0 ||
           state.reviewRequestTypes.length > 0
         );

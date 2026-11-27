@@ -6,6 +6,7 @@ import { Button, Stack, Tooltip } from '@primer/react';
 import { useAccountsStore, useFiltersStore } from '../stores';
 
 import { AccountFilter } from '../components/filters/AccountFilter';
+import { IssueStatusFilter } from '../components/filters/IssueStatusFilter';
 import { ReasonFilter } from '../components/filters/ReasonFilter';
 import { ReviewRequestTypeFilter } from '../components/filters/ReviewRequestTypeFilter';
 import { SearchFilter } from '../components/filters/SearchFilter';
@@ -36,6 +37,7 @@ export function FiltersRoute() {
           <UserTypeFilter />
           <SubjectTypeFilter />
           <StateFilter />
+          <IssueStatusFilter />
           <ReviewRequestTypeFilter />
           <ReasonFilter />
         </Stack>

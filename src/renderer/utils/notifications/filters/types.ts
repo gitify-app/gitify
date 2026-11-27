@@ -8,6 +8,12 @@ export interface Filter<T extends string> {
    */
   requiresDetailsNotifications: boolean;
 
+  /**
+   * Render options in their declared order instead of sorting them
+   * alphabetically. The catch-all `other` option remains last.
+   */
+  preserveFilterOrder?: boolean;
+
   getTypeDetails(type: T): TypeDetails;
 
   /**

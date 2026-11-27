@@ -98,6 +98,19 @@ export function supportsIssueFields(account: Account): boolean {
 }
 
 /**
+ * GitHub-only capability: whether the GraphQL `Issue` schema exposes the
+ * native `status` field used for issue workflow status metrics. Lives outside
+ * the shared `ForgeCapabilities` because no other forge has this concept and
+ * the only consumer is the GitHub GraphQL query construction.
+ *
+ * Issue statuses are available on GitHub Cloud and GitHub Enterprise Cloud
+ * with Data Residency, but not on GitHub Enterprise Server.
+ */
+export function supportsIssueStatuses(account: Account): boolean {
+  return !isGitHubEnterpriseServerHost(account.hostname);
+}
+
+/**
  * The set of capabilities that gate GraphQL field selections via the custom
  * `@gated(requires: ...)` directive. The keys must match the `requires`
  * argument used in the GraphQL documents.
@@ -107,6 +120,7 @@ export type GitHubGatedCapabilities = {
   answeredDiscussion: boolean;
   subIssues: boolean;
   issueFields: boolean;
+  issueStatuses: boolean;
 };
 
 /**
@@ -120,5 +134,6 @@ export function getGitHubCapabilities(account: Account): GitHubGatedCapabilities
     answeredDiscussion: supportsAnsweredDiscussion(account),
     subIssues: supportsSubIssues(account),
     issueFields: supportsIssueFields(account),
+    issueStatuses: supportsIssueStatuses(account),
   };
 }

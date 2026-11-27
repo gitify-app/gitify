@@ -25,6 +25,7 @@ const THEME_VARIANTS = [
 ] as const;
 
 const ACTIVE_FILTERS: Partial<FiltersStore> = {
+  issueStatuses: ['in_review'],
   reasons: ['subscribed'],
   states: ['open'],
   subjectTypes: ['Issue'],
@@ -94,6 +95,30 @@ describe('renderer/routes/Filters visual regression', () => {
 
       await expect(page.getByTestId('visual-root')).toMatchScreenshot(
         `filters-active-selections-${theme.toLowerCase()}-${designLanguage}`,
+      );
+    });
+
+    it('captures the issue status filter', async () => {
+      renderFilters(theme, designLanguage, { issueStatuses: ['in_review'] });
+
+      await waitFor(() =>
+        expect(
+          document.querySelector('[data-testid="checkbox-issueStatuses-in_review"]'),
+        ).not.toBeNull(),
+      );
+
+      expect(
+        (
+          document.querySelector(
+            '[data-testid="checkbox-issueStatuses-in_review"]',
+          ) as HTMLInputElement
+        ).checked,
+      ).toBe(true);
+
+      await scrollToTestId('checkbox-issueStatuses-in_review');
+
+      await expect(page.getByTestId('visual-root')).toMatchScreenshot(
+        `filters-issue-status-${theme.toLowerCase()}-${designLanguage}`,
       );
     });
   });

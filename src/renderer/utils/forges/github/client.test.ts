@@ -395,6 +395,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
     expect(query).toContain('parent');
     expect(query).toContain('subIssuesSummary');
     expect(query).toContain('issueFieldValues');
+    expect(query).toContain('category');
     expect(query).not.toContain('@gated');
   });
 
@@ -423,6 +424,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query.includes('parent')).toBe(subIssues);
       expect(query.includes('issueFieldValues')).toBe(issueFields);
       expect(query.includes('$firstIssueFieldValues')).toBe(issueFields);
+      expect(query.includes('category')).toBe(false);
       expect(query).not.toContain('@gated');
     },
   );
@@ -552,6 +554,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query).toContain('issueFieldValues');
       expect(query).toContain('parent');
       expect(query).toContain('subIssuesSummary');
+      expect(query).toContain('category');
       expect(query).not.toContain('@gated');
     });
 
@@ -578,6 +581,7 @@ describe('renderer/utils/forges/github/client.ts', () => {
       expect(query).not.toContain('$firstIssueFieldValues');
       expect(query).not.toContain('parent');
       expect(query).not.toContain('subIssuesSummary');
+      expect(query).not.toContain('category');
       expect(query).not.toContain('@gated');
       expect(query).toContain('FetchMergedNotifications');
       expect(variables).not.toHaveProperty('includeStackEntry');

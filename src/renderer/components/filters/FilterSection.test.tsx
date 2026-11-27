@@ -12,7 +12,7 @@ import { mockSettings } from '../../__mocks__/state-mocks';
 
 import { useFiltersStore } from '../../stores';
 
-import { stateFilter } from '../../utils/notifications/filters';
+import { issueStatusFilter, stateFilter } from '../../utils/notifications/filters';
 import { FilterSection } from './FilterSection';
 
 describe('renderer/components/filters/FilterSection.tsx', () => {
@@ -193,6 +193,37 @@ describe('renderer/components/filters/FilterSection.tsx', () => {
 
     const after = getCounterValues();
     expect(after).toEqual(before);
+  });
+
+  it('preserves declared order for filters that opt in', () => {
+    renderWithProviders(
+      <FilterSection
+        filter={issueStatusFilter}
+        filterSetting="issueStatuses"
+        icon={MarkGithubIcon}
+        id={'FilterSectionTest'}
+        title={'FilterSectionTitle'}
+      />,
+      {
+        settings: {
+          ...mockSettings,
+          detailedNotifications: true,
+        },
+      },
+    );
+
+    expect(
+      screen.getAllByRole('checkbox').map((checkbox) => checkbox.getAttribute('name')),
+    ).toEqual([
+      'issueStatuses-backlog',
+      'issueStatuses-todo',
+      'issueStatuses-in_progress',
+      'issueStatuses-in_review',
+      'issueStatuses-done',
+      'issueStatuses-not_planned',
+      'issueStatuses-duplicate',
+      'issueStatuses-other',
+    ]);
   });
 
   function getCounterValues(): number[] {

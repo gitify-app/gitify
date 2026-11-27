@@ -6,7 +6,14 @@ import type {
   IssueFieldSingleSelectOptionColor,
   IssueTypeColor,
 } from '../graphql/generated/graphql';
-import { getNotificationAuthor, mapIssueFieldColor, mapIssueTypeColor } from './utils';
+import {
+  getNotificationAuthor,
+  mapIssueFieldColor,
+  mapIssueStatus,
+  mapIssueStatusColor,
+  mapIssueStatusKind,
+  mapIssueTypeColor,
+} from './utils';
 
 describe('renderer/utils/notifications/handlers/utils.ts', () => {
   describe('getNotificationAuthor', () => {
@@ -88,6 +95,79 @@ describe('renderer/utils/notifications/handlers/utils.ts', () => {
 
     it('falls back to gray for an unknown color', () => {
       expect(mapIssueFieldColor('CHARTREUSE' as IssueFieldSingleSelectOptionColor)).toBe('#59636e');
+    });
+  });
+
+  describe('mapIssueStatusKind', () => {
+    it.each([
+      ['backlog', 'Backlog', 'backlog'],
+      ['planned', 'Todo', 'todo'],
+      ['started', 'In progress', 'in_progress'],
+      ['started', 'In review', 'in_review'],
+      ['completed', 'Done', 'done'],
+      ['not_planned', 'Not planned', 'not_planned'],
+      ['duplicate', 'Duplicate', 'duplicate'],
+    ] as const)('maps %s/%s to %s', (category, name, expected) => {
+      expect(mapIssueStatusKind(category, name)).toBe(expected);
+    });
+
+    it('falls back to in_progress for an unrecognized started name', () => {
+      expect(mapIssueStatusKind('started', 'Blocked')).toBe('in_progress');
+    });
+
+    it('falls back to unknown for an unrecognized category', () => {
+      expect(mapIssueStatusKind('canceled', 'Canceled')).toBe('unknown');
+    });
+  });
+
+  describe('mapIssueStatusColor', () => {
+    it.each([
+      ['backlog', IconColor.GREEN],
+      ['todo', IconColor.GREEN],
+      ['in_progress', IconColor.GREEN],
+      ['in_review', IconColor.GREEN],
+      ['done', IconColor.PURPLE],
+      ['not_planned', IconColor.GRAY],
+      ['duplicate', IconColor.GRAY],
+      ['unknown', IconColor.GRAY],
+    ] as const)('maps %s to the expected token', (kind, expected) => {
+      expect(mapIssueStatusColor(kind)).toBe(expected);
+    });
+  });
+
+  describe('mapIssueStatus', () => {
+    it('returns the normalized status', () => {
+      expect(
+        mapIssueStatus({
+          name: 'In review',
+          category: {
+            key: 'started',
+            state: 'OPEN',
+            stateReason: null,
+          },
+        }),
+      ).toEqual({
+        name: 'In review',
+        kind: 'in_review',
+        color: IconColor.GREEN,
+      });
+    });
+
+    it('preserves an unknown status name and uses a neutral color', () => {
+      expect(
+        mapIssueStatus({
+          name: 'Blocked',
+          category: {
+            key: 'canceled',
+            state: 'OPEN',
+            stateReason: null,
+          },
+        }),
+      ).toEqual({
+        name: 'Blocked',
+        kind: 'unknown',
+        color: IconColor.GRAY,
+      });
     });
   });
 });

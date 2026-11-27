@@ -6,6 +6,7 @@ import type { GitifyNotification } from '../../types';
 
 import { ChecksPill } from './ChecksPill';
 import { CommentsPill } from './CommentsPill';
+import { IssueStatusPill } from './IssueStatusPill';
 import { IssueTypesPill } from './IssueTypesPill';
 import { LabelsPill } from './LabelsPill';
 import { LinkedIssuesPill } from './LinkedIssuesPill';
@@ -34,6 +35,10 @@ export function MetricGroup({ notification }: Readonly<MetricGroupProps>) {
   // always used. Each entry is exactly one rendered pill so the overflow catch-
   // all can measure and count them independently.
   const pills: ReactElement[] = [];
+
+  if (subject.issueStatus) {
+    pills.push(<IssueStatusPill key="issue-status" status={subject.issueStatus} />);
+  }
 
   if (subject.issueType) {
     pills.push(<IssueTypesPill issueType={subject.issueType} key="issue-type" />);

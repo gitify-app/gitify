@@ -17,10 +17,16 @@ import type {
 } from '../../../../types';
 import { IconColor } from '../../../../types';
 
+import { getIssueStatusIcon } from '../../../../icons/IssueStatusIcon';
 import { fetchIssueByNumber } from '../client';
 import type { IssueDetailsFragment } from '../graphql/generated/graphql';
 import { DefaultHandler, defaultHandler } from './default';
-import { getNotificationAuthor, mapIssueFieldColor, mapIssueTypeColor } from './utils';
+import {
+  getNotificationAuthor,
+  mapIssueFieldColor,
+  mapIssueStatus,
+  mapIssueTypeColor,
+} from './utils';
 
 /**
  * A single node in the `issueFieldValues` GraphQL connection.
@@ -103,7 +109,11 @@ class IssueHandler extends DefaultHandler {
       return {};
     }
 
-    const issueState = issue.stateReason ?? issue.state;
+    const issueState =
+      issue.status?.category.stateReason ??
+      issue.status?.category.state ??
+      issue.stateReason ??
+      issue.state;
 
     const issueComment = issue.comments?.nodes?.[0];
 
@@ -130,6 +140,7 @@ class IssueHandler extends DefaultHandler {
       issueType: issue.issueType
         ? { name: issue.issueType.name, color: mapIssueTypeColor(issue.issueType.color) }
         : undefined,
+      issueStatus: issue.status ? mapIssueStatus(issue.status) : undefined,
       issueFields:
         (issue.issueFieldValues?.nodes ?? [])
           .map((node) => mapIssueFieldValue(node))
@@ -157,6 +168,11 @@ class IssueHandler extends DefaultHandler {
   }
 
   override iconType(notification: GitifyNotification): FC<OcticonProps> {
+    const issueStatus = notification.subject.issueStatus;
+    if (issueStatus && issueStatus.kind !== 'unknown') {
+      return getIssueStatusIcon(issueStatus.kind);
+    }
+
     switch (notification.subject.state as GitifyIssueState) {
       case 'CLOSED':
       case 'COMPLETED':
@@ -172,6 +188,11 @@ class IssueHandler extends DefaultHandler {
   }
 
   override iconColor(notification: GitifyNotification): IconColor {
+    const issueStatus = notification.subject.issueStatus;
+    if (issueStatus && issueStatus.kind !== 'unknown') {
+      return issueStatus.color;
+    }
+
     switch (notification.subject.state as GitifyIssueState) {
       case 'OPEN':
       case 'REOPENED':
