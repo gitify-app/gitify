@@ -135,9 +135,13 @@ describe('renderer/components/GlobalEffects.tsx', () => {
 
       const callCountAfterMount = refreshAccountSpy.mock.calls.length;
 
-      const wakeCallback = vi.mocked(window.gitify.onSystemWake).mock.calls[0][0];
+      const wakeCallbacks = vi
+        .mocked(window.gitify.onSystemWake)
+        .mock.calls.map(([callback]) => callback);
       await act(async () => {
-        wakeCallback();
+        for (const wakeCallback of wakeCallbacks) {
+          wakeCallback();
+        }
       });
 
       expect(refreshAccountSpy.mock.calls.length).toBeGreaterThan(callCountAfterMount);

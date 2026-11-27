@@ -4,6 +4,7 @@ import type {
   Account,
   AccountUUID,
   ClientID,
+  ConnectionState,
   FilterStateType,
   Forge,
   GitifyError,
@@ -323,4 +324,38 @@ export interface PowerStateStore {
   isActive: boolean;
 
   setActive: (active: boolean) => void;
+}
+
+// ============================================================================
+// Connection Store Types
+// ============================================================================
+
+/**
+ * Session-local connectivity lifecycle.
+ *
+ * `offline` while the device reports no connection, `recovering` after
+ * connectivity returns or the system wakes until the first notification fetch
+ * settles, and `online` once a settled fetch shows at least one reachable
+ * account.
+ */
+export interface ConnectionStore {
+  state: ConnectionState;
+
+  /** When recovery began, or `null` when the connection is not recovering. */
+  recoveringSince: number | null;
+
+  /** Notification `dataUpdatedAt` when recovery began, used to detect a settle. */
+  baselineDataUpdatedAt: number;
+
+  /** Mark the connection offline and clear any in-progress recovery. */
+  setOffline: () => void;
+
+  /**
+   * Begin recovery unless one is already in progress. Duplicate wake or online
+   * events must not extend the recovery window.
+   */
+  startRecovery: (baselineDataUpdatedAt: number) => void;
+
+  /** Finish recovery and mark the connection online. */
+  settle: () => void;
 }

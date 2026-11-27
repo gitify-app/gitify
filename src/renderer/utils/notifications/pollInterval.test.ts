@@ -5,6 +5,7 @@ import {
 
 import {
   clearServerPollIntervals,
+  computeNotificationRefetchIntervalMs,
   computeRefetchIntervalMs,
   reportServerPollInterval,
 } from './pollInterval';
@@ -58,5 +59,33 @@ describe('renderer/utils/notifications/pollInterval.ts', () => {
     reportServerPollInterval(mockGitHubCloudAccount, 300);
 
     expect(computeRefetchIntervalMs(60000, [])).toBe(60000);
+  });
+
+  describe('computeNotificationRefetchIntervalMs', () => {
+    it('lets a recovery retry undercut a known server interval', () => {
+      reportServerPollInterval(mockGitHubCloudAccount, 300);
+
+      expect(
+        computeNotificationRefetchIntervalMs({
+          userIntervalMs: 60000,
+          accounts: [mockGitHubCloudAccount],
+          recoveryRetry: true,
+          recoveryRetryIntervalMs: 5000,
+        }),
+      ).toBe(5000);
+    });
+
+    it('keeps the server interval as a floor for normal polls', () => {
+      reportServerPollInterval(mockGitHubCloudAccount, 300);
+
+      expect(
+        computeNotificationRefetchIntervalMs({
+          userIntervalMs: 60000,
+          accounts: [mockGitHubCloudAccount],
+          recoveryRetry: false,
+          recoveryRetryIntervalMs: 5000,
+        }),
+      ).toBe(300000);
+    });
   });
 });

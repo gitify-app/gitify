@@ -54,6 +54,9 @@ export type SearchToken = Branded<string, 'SearchToken'>;
 
 export type Status = 'loading' | 'offline' | 'paused' | 'success' | 'error';
 
+/** Session-local connectivity lifecycle used by the recovery window. */
+export type ConnectionState = 'offline' | 'recovering' | 'online';
+
 export type Percentage = Branded<number, 'Percentage'>;
 
 export type AccountUUID = Branded<string, 'AccountUUID'>;

@@ -21,6 +21,12 @@ export interface NotificationsState {
 
   /** Whether a fetch (initial, background poll, or manual refetch) is currently in flight. */
   isFetching: boolean;
+  /** Whether TanStack Query paused the fetch (offline or hidden window). */
+  isPaused: boolean;
+  /** Whether the notification query failed outright. */
+  isError: boolean;
+  /** When the cached notification data last settled. */
+  dataUpdatedAt: number;
 
   notifications: AccountNotifications[];
   notificationCount: number;
@@ -49,6 +55,9 @@ export const buildNotificationsState = (
   globalError: query.globalError,
 
   isFetching: query.isFetching,
+  isPaused: query.isPaused,
+  isError: query.isError,
+  dataUpdatedAt: query.dataUpdatedAt,
 
   notifications: query.notifications,
   notificationCount: query.notificationCount,
