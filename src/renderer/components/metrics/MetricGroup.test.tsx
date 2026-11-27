@@ -51,6 +51,66 @@ describe('renderer/components/metrics/MetricGroup.tsx', () => {
     expect(tree.getByText('Bug')).toBeInTheDocument();
   });
 
+  it('renders the issue status pill when the subject has a status', async () => {
+    const props: MetricGroupProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: {
+          ...mockGitifyNotification.subject,
+          issueStatus: { name: 'In review', kind: 'in_review', color: IconColor.GREEN },
+        },
+      },
+    };
+
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
+      settings: { ...mockSettings, showPills: true },
+    });
+
+    expect(tree.getByRole('button', { name: 'Issue status: In review' })).toBeInTheDocument();
+  });
+
+  it('renders the issue status before the issue type', async () => {
+    const props: MetricGroupProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: {
+          ...mockGitifyNotification.subject,
+          issueStatus: { name: 'In review', kind: 'in_review', color: IconColor.GREEN },
+          issueType: { name: 'Bug', color: IconColor.RED },
+        },
+      },
+    };
+
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
+      settings: { ...mockSettings, showPills: true },
+    });
+
+    const status = tree.getByRole('button', { name: 'Issue status: In review' });
+    const issueType = tree.getByRole('button', { name: 'Issue type: Bug' });
+
+    expect(
+      status.compareDocumentPosition(issueType) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it('hides the issue status pill when pills are disabled', async () => {
+    const props: MetricGroupProps = {
+      notification: {
+        ...mockGitifyNotification,
+        subject: {
+          ...mockGitifyNotification.subject,
+          issueStatus: { name: 'In review', kind: 'in_review', color: IconColor.GREEN },
+        },
+      },
+    };
+
+    const tree = renderWithProviders(<MetricGroup {...props} />, {
+      settings: { ...mockSettings, showPills: false },
+    });
+
+    expect(tree.container).toBeEmptyDOMElement();
+  });
+
   it('renders the parent pill when the subject has a parent issue', async () => {
     const props: MetricGroupProps = {
       notification: {

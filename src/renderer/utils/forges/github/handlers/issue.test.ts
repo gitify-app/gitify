@@ -8,6 +8,7 @@ import {
 
 import {
   type GitifyIssueState,
+  type GitifyIssueStatusKind,
   type GitifyNotification,
   type GitifySubject,
   IconColor,
@@ -121,6 +122,134 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         reactionsCount: 0,
         reactionGroups: noReactionGroups,
       } satisfies Partial<GitifySubject>);
+    });
+
+    it('issue with a completed status derives COMPLETED state', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'CLOSED',
+        status: {
+          name: 'Done',
+          category: {
+            key: 'completed',
+            state: 'CLOSED',
+            stateReason: 'COMPLETED',
+          },
+        },
+      });
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.state).toBe('COMPLETED');
+      expect(result.issueStatus).toEqual({
+        name: 'Done',
+        kind: 'done',
+        color: IconColor.PURPLE,
+      });
+    });
+
+    it('issue with a duplicate status derives DUPLICATE without a state reason', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'CLOSED',
+        status: {
+          name: 'Duplicate',
+          category: {
+            key: 'duplicate',
+            state: 'CLOSED',
+            stateReason: 'DUPLICATE',
+          },
+        },
+      });
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.state).toBe('DUPLICATE');
+      expect(result.issueStatus?.kind).toBe('duplicate');
+    });
+
+    it('issue with a not planned status derives NOT_PLANNED state', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'CLOSED',
+        status: {
+          name: 'Not planned',
+          category: {
+            key: 'not_planned',
+            state: 'CLOSED',
+            stateReason: 'NOT_PLANNED',
+          },
+        },
+      });
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.state).toBe('NOT_PLANNED');
+      expect(result.issueStatus).toEqual({
+        name: 'Not planned',
+        kind: 'not_planned',
+        color: IconColor.GRAY,
+      });
+    });
+
+    it('issue with an in review status stays open', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+        status: {
+          name: 'In review',
+          category: {
+            key: 'started',
+            state: 'OPEN',
+            stateReason: null,
+          },
+        },
+      });
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.state).toBe('OPEN');
+      expect(result.issueStatus).toEqual({
+        name: 'In review',
+        kind: 'in_review',
+        color: IconColor.GREEN,
+      });
+    });
+
+    it('issue without a status has no status data', async () => {
+      const mockIssue = mockIssueResponseNode({
+        state: 'OPEN',
+      });
+
+      fetchIssueByNumberSpy.mockResolvedValue({
+        repository: {
+          issue: mockIssue,
+        },
+      } satisfies FetchIssueByNumberQuery);
+
+      const result = await issueHandler.enrich(mockNotification);
+
+      expect(result.issueStatus).toBeUndefined();
     });
 
     it('issue with comments', async () => {
@@ -471,6 +600,43 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         expect(issueHandler.iconType(mockNotification).displayName).toBe(issueIconType);
       },
     );
+
+    it.each([
+      ['backlog', 'IssueOpenedIcon'],
+      ['todo', 'IssueTodoIcon'],
+      ['in_progress', 'IssueInProgressIcon'],
+      ['in_review', 'IssueInReviewIcon'],
+      ['done', 'IssueClosedIcon'],
+      ['not_planned', 'SkipIcon'],
+      ['duplicate', 'SkipIcon'],
+    ] as const)('iconType for issue with status %s', (kind, expected) => {
+      const mockNotification = mockPartialGitifyNotification({
+        type: 'Issue',
+        state: 'OPEN',
+        issueStatus: {
+          name: kind,
+          kind: kind as GitifyIssueStatusKind,
+          color: IconColor.GREEN,
+        },
+      });
+
+      const Icon = issueHandler.iconType(mockNotification);
+      expect(Icon.displayName ?? Icon.name).toBe(expected);
+    });
+
+    it('falls back to the state icon for an unknown status', () => {
+      const mockNotification = mockPartialGitifyNotification({
+        type: 'Issue',
+        state: 'CLOSED',
+        issueStatus: {
+          name: 'Blocked',
+          kind: 'unknown',
+          color: IconColor.GRAY,
+        },
+      });
+
+      expect(issueHandler.iconType(mockNotification).displayName).toBe('IssueClosedIcon');
+    });
   });
 
   describe('iconColor', () => {
@@ -494,6 +660,42 @@ describe('renderer/utils/notifications/handlers/issue.ts', () => {
         expect(issueHandler.iconColor(mockNotification)).toBe(issueIconColor);
       },
     );
+
+    it.each([
+      ['backlog', IconColor.GREEN],
+      ['todo', IconColor.GREEN],
+      ['in_progress', IconColor.GREEN],
+      ['in_review', IconColor.GREEN],
+      ['done', IconColor.PURPLE],
+      ['not_planned', IconColor.GRAY],
+      ['duplicate', IconColor.GRAY],
+    ] as const)('iconColor for issue with status %s', (kind, expected) => {
+      const mockNotification = mockPartialGitifyNotification({
+        type: 'Issue',
+        state: 'OPEN',
+        issueStatus: {
+          name: kind,
+          kind: kind as GitifyIssueStatusKind,
+          color: expected,
+        },
+      });
+
+      expect(issueHandler.iconColor(mockNotification)).toBe(expected);
+    });
+
+    it('falls back to the state color for an unknown status', () => {
+      const mockNotification = mockPartialGitifyNotification({
+        type: 'Issue',
+        state: 'CLOSED',
+        issueStatus: {
+          name: 'Blocked',
+          kind: 'unknown',
+          color: IconColor.GRAY,
+        },
+      });
+
+      expect(issueHandler.iconColor(mockNotification)).toBe(IconColor.RED);
+    });
   });
 
   it('defaultUrl', () => {

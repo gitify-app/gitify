@@ -53,6 +53,14 @@ fragment IssueDetails on Issue {
     name
     color
   }
+  status @gated(requires: "issueStatuses") {
+    name
+    category {
+      key
+      state
+      stateReason
+    }
+  }
   parent @gated(requires: "subIssues") {
     number
     title

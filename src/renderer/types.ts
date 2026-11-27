@@ -319,6 +319,9 @@ export interface Chevron {
 
 export type FilterStateType = 'open' | 'closed' | 'merged' | 'draft' | 'other';
 
+/** Issue status values available in the notification filter. */
+export type IssueStatusFilterValue = Exclude<GitifyIssueStatusKind, 'unknown'> | 'other';
+
 // ---------------------------------------------------------------------------
 // Gitify notification types
 //
@@ -430,6 +433,8 @@ export interface GitifySubject {
   stackDepth?: number;
   /** GitHub-native issue type (e.g. Bug, Feature, Task) */
   issueType?: GitifyIssueType;
+  /** GitHub issue workflow status (e.g. In review) */
+  issueStatus?: GitifyIssueStatus;
   /** GitHub issue fields (e.g. Priority, Effort) with values set */
   issueFields?: GitifyIssueField[];
   /** Milestone state/title */
@@ -512,6 +517,27 @@ export interface GitifyNotificationDisplay {
 /** GitHub-native issue type, normalized to a Gitify icon color token */
 export interface GitifyIssueType {
   name: string;
+  color: IconColor;
+}
+
+/** Normalized GitHub issue workflow status kind */
+export type GitifyIssueStatusKind =
+  | 'backlog'
+  | 'todo'
+  | 'in_progress'
+  | 'in_review'
+  | 'done'
+  | 'not_planned'
+  | 'duplicate'
+  | 'unknown';
+
+/** GitHub issue workflow status, normalized for display and filtering */
+export interface GitifyIssueStatus {
+  /** Display name from GitHub, e.g. "In review" */
+  name: string;
+  /** Normalized kind used for icons, colors, and filters */
+  kind: GitifyIssueStatusKind;
+  /** Icon color token for the status category */
   color: IconColor;
 }
 

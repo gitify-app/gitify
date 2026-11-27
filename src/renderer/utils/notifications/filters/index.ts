@@ -1,5 +1,6 @@
 export * from './types';
 
+export * from './issueStatus';
 export * from './reason';
 export * from './reviewRequestType';
 export * from './search';

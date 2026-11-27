@@ -89,6 +89,7 @@ export function mockDiscussionResponseNode(mocks: {
 export function mockIssueResponseNode(mocks: {
   state: IssueState;
   stateReason?: IssueStateReason;
+  status?: IssueDetailsFragment['status'];
 }): IssueDetailsFragment {
   return {
     __typename: 'Issue',
@@ -102,6 +103,7 @@ export function mockIssueResponseNode(mocks: {
     comments: { totalCount: 0, nodes: [] },
     milestone: null,
     issueType: null,
+    status: mocks.status ?? null,
     parent: null,
     subIssuesSummary: {
       total: 0,

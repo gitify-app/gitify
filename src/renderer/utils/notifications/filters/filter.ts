@@ -9,6 +9,7 @@ import {
   filterNotificationBySearchTerm,
   hasExcludeSearchFilters,
   hasIncludeSearchFilters,
+  issueStatusFilter,
   reasonFilter,
   reviewRequestTypeFilter,
   type SearchQualifier,
@@ -83,6 +84,8 @@ export function filterDetailedNotifications(
       passesFilters = passesFilters && passesUserFilters(notification);
 
       passesFilters = passesFilters && passesStateFilter(notification);
+
+      passesFilters = passesFilters && passesIssueStatusFilter(notification);
 
       passesFilters = passesFilters && passesReviewRequestTypeFilter(notification);
     }
@@ -166,6 +169,18 @@ function passesStateFilter(notification: RawGitifyNotification): boolean {
 
   if (stateFilter.hasFilters()) {
     return filters.states.some((state) => stateFilter.filterNotification(notification, state));
+  }
+
+  return true;
+}
+
+function passesIssueStatusFilter(notification: RawGitifyNotification): boolean {
+  const filters = useFiltersStore.getState();
+
+  if (issueStatusFilter.hasFilters()) {
+    return filters.issueStatuses.some((status) =>
+      issueStatusFilter.filterNotification(notification, status),
+    );
   }
 
   return true;

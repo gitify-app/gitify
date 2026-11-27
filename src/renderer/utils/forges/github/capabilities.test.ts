@@ -3,11 +3,14 @@ import {
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/account-mocks';
 
+import type { Hostname } from '../../../types';
+
 import {
   githubCapabilities,
   getGitHubCapabilities,
   supportsAnsweredDiscussion,
   supportsIssueFields,
+  supportsIssueStatuses,
   supportsStackedPullRequests,
   supportsSubIssues,
 } from './capabilities';
@@ -164,6 +167,35 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
     });
   });
 
+  describe('supportsIssueStatuses', () => {
+    it('returns true for GitHub Cloud', () => {
+      expect(supportsIssueStatuses(mockGitHubCloudAccount)).toBe(true);
+    });
+
+    it('returns true for GitHub Enterprise Cloud with Data Residency', () => {
+      expect(
+        supportsIssueStatuses({
+          ...mockGitHubCloudAccount,
+          platform: 'GitHub Enterprise Cloud with Data Residency',
+          hostname: 'gitify.ghe.com' as Hostname,
+        }),
+      ).toBe(true);
+    });
+
+    it('returns false for GitHub Enterprise Server', () => {
+      expect(supportsIssueStatuses(mockGitHubEnterpriseServerAccount)).toBe(false);
+    });
+
+    it('returns false for GitHub Enterprise Server with a known version', () => {
+      expect(
+        supportsIssueStatuses({
+          ...mockGitHubEnterpriseServerAccount,
+          version: '3.23.0',
+        }),
+      ).toBe(false);
+    });
+  });
+
   describe('getGitHubCapabilities', () => {
     it('enables all gated capabilities for GitHub Cloud', () => {
       expect(getGitHubCapabilities(mockGitHubCloudAccount)).toEqual({
@@ -171,6 +203,7 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
         answeredDiscussion: true,
         subIssues: true,
         issueFields: true,
+        issueStatuses: true,
       });
     });
 
@@ -180,6 +213,7 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
         answeredDiscussion: false,
         subIssues: false,
         issueFields: false,
+        issueStatuses: false,
       });
     });
 
@@ -194,6 +228,7 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
         answeredDiscussion: true,
         subIssues: true,
         issueFields: false,
+        issueStatuses: false,
       });
     });
 
@@ -208,6 +243,7 @@ describe('renderer/utils/forges/github/capabilities.ts', () => {
         answeredDiscussion: true,
         subIssues: true,
         issueFields: true,
+        issueStatuses: false,
       });
     });
   });

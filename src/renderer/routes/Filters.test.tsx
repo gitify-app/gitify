@@ -10,6 +10,7 @@ import type { TypeDetails } from '../types';
 
 import {
   type Filter,
+  issueStatusFilter,
   reasonFilter,
   reviewRequestTypeFilter,
   stateFilter,
@@ -54,6 +55,7 @@ describe('renderer/routes/Filters.tsx', () => {
         'User Type',
         'Type',
         'State',
+        'Issue status',
         'Review Request Type',
         'Reason',
       ]) {
@@ -76,6 +78,7 @@ describe('renderer/routes/Filters.tsx', () => {
       expectFilterOptions('User Type', userTypeFilter);
       expectFilterOptions('Type', subjectTypeFilter);
       expectFilterOptions('State', stateFilter);
+      expectFilterOptions('Issue status', issueStatusFilter);
       expectFilterOptions('Review Request Type', reviewRequestTypeFilter);
       expectFilterOptions('Reason', reasonFilter);
 

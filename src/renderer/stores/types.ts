@@ -8,6 +8,7 @@ import type {
   Forge,
   GitifyError,
   Hostname,
+  IssueStatusFilterValue,
   KeyboardAcceleratorShortcut,
   ReasonFilterValue,
   ReviewRequestTypeFilterValue,
@@ -129,6 +130,11 @@ export interface FiltersState {
    * The states to filter notifications by.
    */
   states: FilterStateType[];
+
+  /**
+   * The issue statuses to filter notifications by.
+   */
+  issueStatuses: IssueStatusFilterValue[];
 
   /**
    * The reasons to filter notifications by.

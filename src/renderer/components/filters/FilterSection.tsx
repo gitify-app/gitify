@@ -48,6 +48,23 @@ function FilterSectionComponent<K extends keyof FiltersState>({
     return counts;
   }, [notifications, filter]);
 
+  const filterTypes = Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][];
+  const orderedFilterTypes = filter.preserveFilterOrder
+    ? filterTypes
+    : [...filterTypes].sort((a, b) => {
+        // Always pin the catch-all 'other' option to the end of the list.
+        if ((a as string) === 'other') {
+          return 1;
+        }
+        if ((b as string) === 'other') {
+          return -1;
+        }
+        return filter
+          .getTypeDetails(a)
+          .title.toLowerCase()
+          .localeCompare(filter.getTypeDetails(b).title.toLowerCase(), 'en');
+      });
+
   return (
     <fieldset id={id}>
       <SectionHeading
@@ -66,40 +83,26 @@ function FilterSectionComponent<K extends keyof FiltersState>({
       </SectionHeading>
 
       <Stack direction={layout} gap={layout === 'horizontal' ? 'normal' : 'condensed'}>
-        {(Object.keys(filter.FILTER_TYPES) as FiltersState[K][number][])
-          .sort((a, b) => {
-            // Always pin the catch-all 'other' option to the end of the list.
-            if ((a as string) === 'other') {
-              return 1;
-            }
-            if ((b as string) === 'other') {
-              return -1;
-            }
-            return filter
-              .getTypeDetails(a)
-              .title.toLowerCase()
-              .localeCompare(filter.getTypeDetails(b).title.toLowerCase(), 'en');
-          })
-          .map((type) => {
-            const typeDetails = filter.getTypeDetails(type);
-            const typeTitle = typeDetails.title;
-            const typeDescription = typeDetails.description;
-            const isChecked = filter.isFilterSet(type);
-            const count = filterCounts.get(type) ?? 0;
+        {orderedFilterTypes.map((type) => {
+          const typeDetails = filter.getTypeDetails(type);
+          const typeTitle = typeDetails.title;
+          const typeDescription = typeDetails.description;
+          const isChecked = filter.isFilterSet(type);
+          const count = filterCounts.get(type) ?? 0;
 
-            return (
-              <FilterCheckbox
-                checked={isChecked}
-                counter={count}
-                disabled={filter.requiresDetailsNotifications && !detailedNotifications}
-                key={type as string}
-                label={typeTitle}
-                name={`${filterSetting}-${String(type)}`}
-                onChange={() => updateFilter(filterSetting, type, !isChecked)}
-                tooltip={typeDescription ? <Text>{typeDescription}</Text> : null}
-              />
-            );
-          })}
+          return (
+            <FilterCheckbox
+              checked={isChecked}
+              counter={count}
+              disabled={filter.requiresDetailsNotifications && !detailedNotifications}
+              key={type as string}
+              label={typeTitle}
+              name={`${filterSetting}-${String(type)}`}
+              onChange={() => updateFilter(filterSetting, type, !isChecked)}
+              tooltip={typeDescription ? <Text>{typeDescription}</Text> : null}
+            />
+          );
+        })}
       </Stack>
     </fieldset>
   );

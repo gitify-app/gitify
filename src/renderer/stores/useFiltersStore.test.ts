@@ -33,6 +33,16 @@ describe('renderer/stores/useFiltersStore.ts', () => {
     expect(result.current.subjectTypes).not.toContain('Issue');
   });
 
+  test('updates an issue status filter', () => {
+    const { result } = renderHook(() => useFiltersStore());
+
+    act(() => {
+      result.current.updateFilter('issueStatuses', 'in_review', true);
+    });
+
+    expect(result.current.issueStatuses).toContain('in_review');
+  });
+
   test('resets filters to default', () => {
     const { result } = renderHook(() => useFiltersStore());
 
@@ -79,6 +89,12 @@ describe('renderer/stores/useFiltersStore.ts', () => {
 
     it('non-default state filters', () => {
       useFiltersStore.setState({ states: ['draft'] });
+
+      expect(useFiltersStore.getState().hasActiveFilters()).toBe(true);
+    });
+
+    it('non-default issue status filters', () => {
+      useFiltersStore.setState({ issueStatuses: ['in_review'] });
 
       expect(useFiltersStore.getState().hasActiveFilters()).toBe(true);
     });

@@ -1,8 +1,14 @@
-import type { GitifyNotificationUser, Link } from '../../../../types';
+import type {
+  GitifyIssueStatus,
+  GitifyIssueStatusKind,
+  GitifyNotificationUser,
+  Link,
+} from '../../../../types';
 import { IconColor } from '../../../../types';
 
 import type {
   AuthorFieldsFragment,
+  IssueDetailsFragment,
   IssueFieldSingleSelectOptionColor,
   IssueTypeColor,
 } from '../graphql/generated/graphql';
@@ -93,4 +99,67 @@ export function mapIssueTypeColor(color: IssueTypeColor): IconColor {
  */
 export function mapIssueFieldColor(color: IssueFieldSingleSelectOptionColor): string {
   return ISSUE_FIELD_FILL_COLORS[color] ?? ISSUE_FIELD_FILL_COLORS.GRAY;
+}
+
+/**
+ * Normalize a GitHub planning status category and display name into a Gitify
+ * issue status kind.
+ *
+ * The `started` category covers both In progress and In review, so the display
+ * name is the only way to separate those two. An unrecognized name falls back
+ * to in_progress rather than losing the started category entirely.
+ */
+export function mapIssueStatusKind(categoryKey: string, name: string): GitifyIssueStatusKind {
+  switch (categoryKey) {
+    case 'backlog':
+      return 'backlog';
+    case 'planned':
+      return 'todo';
+    case 'started':
+      return name.toLowerCase() === 'in review' ? 'in_review' : 'in_progress';
+    case 'completed':
+      return 'done';
+    case 'not_planned':
+      return 'not_planned';
+    case 'duplicate':
+      return 'duplicate';
+    default:
+      return 'unknown';
+  }
+}
+
+/**
+ * Map a normalized issue status kind to its icon color token.
+ */
+export function mapIssueStatusColor(kind: GitifyIssueStatusKind): IconColor {
+  switch (kind) {
+    case 'done':
+      return IconColor.PURPLE;
+    case 'not_planned':
+    case 'duplicate':
+      return IconColor.GRAY;
+    case 'backlog':
+    case 'todo':
+    case 'in_progress':
+    case 'in_review':
+      return IconColor.GREEN;
+    default:
+      return IconColor.GRAY;
+  }
+}
+
+/**
+ * Map a GitHub planning status to the normalized {@link GitifyIssueStatus}
+ * attached to the notification subject.
+ */
+export function mapIssueStatus(
+  status: NonNullable<IssueDetailsFragment['status']>,
+): GitifyIssueStatus {
+  const kind = mapIssueStatusKind(status.category.key, status.name);
+
+  return {
+    name: status.name,
+    kind,
+    color: mapIssueStatusColor(kind),
+  };
 }

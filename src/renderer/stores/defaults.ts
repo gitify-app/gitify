@@ -32,6 +32,7 @@ export const DEFAULT_FILTERS_STATE: FiltersState = {
   userTypes: [],
   subjectTypes: [],
   states: [],
+  issueStatuses: [],
   reasons: [],
   reviewRequestTypes: [],
 };

@@ -59,14 +59,15 @@ const SUBJECT_TYPE_LABELS: Partial<Record<SubjectType, string>> = {
  * @returns A human-readable type string (e.g. "Open Pull Request").
  */
 export function formatNotificationType(notification: RawGitifyNotification): string {
-  const { state, type } = notification.subject;
+  const { issueStatus, state, type } = notification.subject;
+  const statusOrState = issueStatus?.name ?? state ?? '';
   const override = SUBJECT_TYPE_LABELS[type];
 
   if (!override) {
-    return formatForDisplay([state ?? '', type]);
+    return formatForDisplay([statusOrState, type]);
   }
 
-  const prefix = formatForDisplay([state ?? '']);
+  const prefix = formatForDisplay([statusOrState]);
   return prefix ? `${prefix} ${override}` : override;
 }
 

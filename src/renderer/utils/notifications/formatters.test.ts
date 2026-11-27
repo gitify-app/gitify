@@ -1,5 +1,7 @@
 import { mockPartialGitifyNotification } from '../../__mocks__/notifications-mocks';
 
+import { IconColor } from '../../types';
+
 import {
   formatForDisplay,
   formatMetricDescription,
@@ -65,6 +67,31 @@ describe('renderer/utils/notifications/formatters.ts', () => {
       });
 
       expect(formatNotificationType(notification)).toBe('Open GitLab To-Do');
+    });
+
+    it('prefixes the issue status instead of the state when present', () => {
+      const notification = mockPartialGitifyNotification({
+        title: 'Sample',
+        type: 'Issue',
+        state: 'OPEN',
+        issueStatus: {
+          name: 'In review',
+          kind: 'in_review',
+          color: IconColor.GREEN,
+        },
+      });
+
+      expect(formatNotificationType(notification)).toBe('In Review Issue');
+    });
+
+    it('keeps the state prefix when the issue has no status', () => {
+      const notification = mockPartialGitifyNotification({
+        title: 'Sample',
+        type: 'Issue',
+        state: 'OPEN',
+      });
+
+      expect(formatNotificationType(notification)).toBe('Open Issue');
     });
   });
 
