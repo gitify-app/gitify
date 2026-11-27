@@ -82,6 +82,14 @@ export const Constants = {
 
   REFRESH_ACCOUNTS_INTERVAL_MS: 60 * 60 * 1000, // 1 hour
 
+  // How long the app holds recovery after connectivity returns or the system
+  // wakes, waiting for a notification fetch to settle before presenting a
+  // failure. Long enough to cover Wi-Fi/DNS reconvergence after resume.
+  RECOVERY_WINDOW_MS: 30 * 1000, // 30 seconds
+
+  // Short cadence for a notification retry while the recovery window is open.
+  RECOVERY_RETRY_INTERVAL_MS: 5 * 1000, // 5 seconds
+
   // Cooldown before retrying a failed query, used by TanStack Query client
   QUERY_RETRY_DELAY_MS: 30 * 1000, // 30 seconds
 

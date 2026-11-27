@@ -5,11 +5,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useNotificationsHost } from '../hooks/notifications/useNotificationsHost';
 import { useAccounts } from '../hooks/useAccounts';
 import { useAppearance } from '../hooks/useAppearance';
+import { useConnectionRecovery } from '../hooks/useConnectionRecovery';
 import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { usePowerState } from '../hooks/usePowerState';
 import { useShortcutRegistration } from '../hooks/useShortcutRegistration';
 import {
   useAccountsStore,
+  useConnectionStore,
   useFiltersStore,
   useSettingsStore,
   useShortcutRegistrationStore,
@@ -43,7 +45,20 @@ export function GlobalEffects() {
 
   // Notification fetching side effects (sound / native alerts, interval/focus/reconnect
   // polling, and the system-wake refetch)
-  const { status, notificationCount } = useNotificationsHost();
+  const { status, notificationCount, notifications, isFetching, isPaused, isError, dataUpdatedAt } =
+    useNotificationsHost();
+
+  // Recovery side effects (offline/recovering/online lifecycle). This adds a
+  // wake-aware window on top of TanStack's reconnect handling: a wake can start
+  // recovery even when the device never reported offline.
+  useConnectionRecovery({
+    isOnline: isNetworkOnline,
+    isFetching,
+    isPaused,
+    isError,
+    dataUpdatedAt,
+    notifications,
+  });
 
   // Periodic account refreshes (startup + hourly interval)
   useAccounts();
@@ -73,6 +88,7 @@ export function GlobalEffects() {
       resetSettings();
       resetFilters();
       queryClient.clear();
+      useConnectionStore.getState().settle();
       useShortcutRegistrationStore.getState().reset();
       window.gitify.nativeNotifications.removeAll();
     });

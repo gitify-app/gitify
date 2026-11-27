@@ -6,6 +6,7 @@ import { Constants } from '../../constants';
 
 import {
   useAccountsStore,
+  useConnectionStore,
   useFiltersStore,
   usePowerStateStore,
   useSettingsStore,
@@ -23,7 +24,8 @@ import {
   getNotificationCount,
   getUnreadNotificationCount,
 } from '../../utils/notifications/notifications';
-import { computeRefetchIntervalMs } from '../../utils/notifications/pollInterval';
+import { computeNotificationRefetchIntervalMs } from '../../utils/notifications/pollInterval';
+import { shouldUseRecoveryRetry } from '../../utils/notifications/recovery';
 import { deriveGlobalError, deriveStatus } from '../../utils/notifications/status';
 import { getNetworkStatus, useNetworkStatus } from '../useOnlineStatus';
 import { useNotificationsQueryKey } from './useNotificationsQueryKey';
@@ -33,6 +35,8 @@ export interface NotificationsQueryResult {
   isLoading: boolean;
   isError: boolean;
   isFetching: boolean;
+  isPaused: boolean;
+  dataUpdatedAt: number;
   notificationCount: number;
   unreadNotificationCount: number;
   hasNotifications: boolean;
@@ -96,6 +100,7 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
   // Account store values
   const accounts = useAccountsStore((s) => s.accounts);
   const isPowerActive = usePowerStateStore((s) => s.isActive);
+  const connectionState = useConnectionStore((s) => s.state);
 
   // Filter store values
   const includeSearchTokens = useFiltersStore((s) => s.includeSearchTokens);
@@ -171,9 +176,22 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     // Only the singleton host observer polls. Other consumers share the cached
     // data and would otherwise each schedule their own refetch timer. The
     // interval is re-evaluated after each fetch so it stretches to the latest
-    // server-recommended minimum (`X-Poll-Interval`) when required.
+    // server-recommended minimum (`X-Poll-Interval`) when required. While the
+    // recovery window is open and the latest settled fetch is a retryable
+    // connection failure, retry on the short recovery cadence instead.
     refetchInterval:
-      poll && isPowerActive ? () => computeRefetchIntervalMs(fetchIntervalMs, accounts) : false,
+      poll && isPowerActive
+        ? (query) =>
+            computeNotificationRefetchIntervalMs({
+              userIntervalMs: fetchIntervalMs,
+              accounts,
+              recoveryRetry: shouldUseRecoveryRetry(
+                useConnectionStore.getState().state,
+                query.state.data ?? [],
+              ),
+              recoveryRetryIntervalMs: Constants.RECOVERY_RETRY_INTERVAL_MS,
+            })
+        : false,
     refetchOnMount: poll,
     // Retry an errored result on reconnect even if it's still fresh. Successful
     // results retain the usual stale-time guard.
@@ -197,8 +215,13 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
 
   // Query keeps the previous result during a refetch. Use the same timestamps
   // for every observer, including one mounted halfway through the reconnect.
+  // The connection store adds a wake-aware recovery window: a wake can start
+  // recovery even when the device never reported offline, so there is no
+  // `reconnectedAt` transition to rely on.
   const lastResultAt = isError ? errorUpdatedAt : dataUpdatedAt;
-  const isRecovering = reconnectedAt !== undefined && lastResultAt < reconnectedAt;
+  const isRecovering =
+    connectionState === 'recovering' ||
+    (reconnectedAt !== undefined && lastResultAt < reconnectedAt);
   const status = deriveStatus({
     isNetworkOnline,
     isLoading,
@@ -219,6 +242,8 @@ export const useNotificationsQuery = ({ poll }: { poll: boolean }): Notification
     isLoading,
     isError,
     isFetching,
+    isPaused,
+    dataUpdatedAt,
     notificationCount,
     unreadNotificationCount,
     hasNotifications,

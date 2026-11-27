@@ -29,6 +29,7 @@ import { Constants } from '../constants';
 import {
   getNotificationFailureKey,
   useAccountsStore,
+  useConnectionStore,
   useFiltersStore,
   useNotificationActionFailuresStore,
   usePowerStateStore,
@@ -50,6 +51,7 @@ import * as audio from '../utils/system/audio';
 import * as links from '../utils/system/links';
 import * as native from '../utils/system/native';
 import { useNotificationsHost } from './notifications/useNotificationsHost';
+import { useConnectionRecovery } from './useConnectionRecovery';
 import { useNotifications } from './useNotifications';
 
 // Exercise the real hook implementation (globally mocked in vitest.setup)
@@ -90,6 +92,35 @@ const createWrapper = (retry: number | false = false) => {
 
 const renderNotificationsHook = () =>
   renderHook(() => useNotificationsHost(), { wrapper: createWrapper() });
+
+/**
+ * Mount the singleton notification host together with the recovery hook, so
+ * wake events drive both the refetch and the session-local recovery window.
+ */
+const renderNotificationsHookWithRecovery = () =>
+  renderHook(
+    () => {
+      const state = useNotificationsHost();
+      useConnectionRecovery({
+        isOnline: true,
+        isFetching: state.isFetching,
+        isPaused: state.isPaused,
+        isError: state.isError,
+        dataUpdatedAt: state.dataUpdatedAt,
+        notifications: state.notifications,
+      });
+      return state;
+    },
+    { wrapper: createWrapper() },
+  );
+
+const networkFailure = (): AccountNotifications[] => [
+  {
+    account: mockGitHubCloudAccount,
+    notifications: [],
+    error: getErrorDetails('NETWORK'),
+  },
+];
 
 describe('renderer/hooks/useNotifications.ts', () => {
   const githubAdapter = getAdapter('github');
@@ -1255,6 +1286,95 @@ describe('renderer/hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => expect(getAllNotificationsMock).toHaveBeenCalledTimes(2));
+    });
+
+    it('holds loading and retries soon when a wake fetch fails while online', async () => {
+      vi.useFakeTimers();
+      try {
+        useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+        getAllNotificationsMock
+          .mockResolvedValueOnce(mockSingleAccountNotifications)
+          .mockResolvedValueOnce(networkFailure())
+          .mockResolvedValueOnce(mockSingleAccountNotifications);
+
+        const { result } = renderNotificationsHookWithRecovery();
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(0);
+        });
+        expect(result.current.status).toBe('success');
+
+        const wakeCallbacks = vi
+          .mocked(window.gitify.onSystemWake)
+          .mock.calls.map(([callback]) => callback);
+        act(() => {
+          for (const callback of wakeCallbacks) {
+            callback();
+          }
+        });
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(0);
+        });
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(2);
+        expect(result.current.status).toBe('loading');
+        expect(result.current.globalError).toBeUndefined();
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(Constants.RECOVERY_RETRY_INTERVAL_MS);
+        });
+        // Flush TanStack's notification timer after the retry resolves.
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(1);
+        });
+
+        expect(getAllNotificationsMock).toHaveBeenCalledTimes(3);
+        expect(useConnectionStore.getState().state).toBe('online');
+        expect(result.current.notifications).toEqual(mockSingleAccountNotifications);
+        expect(result.current.status).toBe('success');
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+
+    it('presents the failure once the recovery window expires', async () => {
+      vi.useFakeTimers();
+      try {
+        useAccountsStore.setState({ accounts: [mockGitHubCloudAccount] });
+        getAllNotificationsMock
+          .mockResolvedValueOnce(mockSingleAccountNotifications)
+          .mockResolvedValue(networkFailure());
+
+        const { result } = renderNotificationsHookWithRecovery();
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(0);
+        });
+        expect(result.current.status).toBe('success');
+
+        const wakeCallbacks = vi
+          .mocked(window.gitify.onSystemWake)
+          .mock.calls.map(([callback]) => callback);
+        act(() => {
+          for (const callback of wakeCallbacks) {
+            callback();
+          }
+        });
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(0);
+        });
+        expect(result.current.status).toBe('loading');
+
+        await act(async () => {
+          await vi.advanceTimersByTimeAsync(Constants.RECOVERY_WINDOW_MS);
+        });
+
+        expect(result.current.status).toBe('error');
+        expect(result.current.globalError?.type).toBe('NETWORK');
+      } finally {
+        vi.useRealTimers();
+      }
     });
 
     it('does not poll while the system is inactive and resumes when active', async () => {
